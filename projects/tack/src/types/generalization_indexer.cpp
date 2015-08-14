@@ -25,7 +25,6 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/tack/types/object.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/types/indexing_error.hpp"
 #include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/io/relationship_types_io.hpp"
@@ -48,19 +47,18 @@ const std::string child_with_no_original_parent(
 namespace dogen {
 namespace tack {
 
-/**
- * @brief Add comparable support for names.
- *
- * This is required as part of the current (very sub-optimal)
- * implementation of concept processing.
- */
+inline bool operator<(const location& lhs, const location& rhs) {
+    return
+        (lhs.original_model_name() < rhs.original_model_name() ||
+            (lhs.original_model_name() == rhs.original_model_name() &&
+                (lhs.external_module_path() < rhs.external_module_path())));
+}
+
 inline bool operator<(const name& lhs, const name& rhs) {
     return
-        lhs.model_name() < rhs.model_name() ||
-        (lhs.model_name() == rhs.model_name() &&
-            (lhs.external_module_path() < rhs.external_module_path() ||
-                (lhs.external_module_path() == rhs.external_module_path() &&
-                    (lhs.simple_name() < rhs.simple_name()))));
+        (lhs.location() < rhs.location() ||
+            (lhs.location() == rhs.location() &&
+                (lhs.simple() < rhs.simple())));
 }
 
 bool generalization_indexer::is_leaf(const object& o) const {
@@ -87,26 +85,26 @@ recurse_generalization(const model& m, const name& leaf,
 
     const auto i(o.relationships().find(relationship_types::parents));
     if (i == o.relationships().end() || i->second.empty()) {
-        const auto n(string_converter::convert(o.name()));
-        BOOST_LOG_SEV(lg, error) << child_with_no_parents << n;
-        BOOST_THROW_EXCEPTION(indexing_error(child_with_no_parents + n));
+        const auto qn(o.name().qualified());
+        BOOST_LOG_SEV(lg, error) << child_with_no_parents << qn;
+        BOOST_THROW_EXCEPTION(indexing_error(child_with_no_parents + qn));
     }
 
     std::list<name> original_parents;
     for (const auto& parent : i->second) {
         auto j(m.objects().find(parent));
         if (j == m.objects().end()) {
-            const auto n(string_converter::convert(parent));
-            BOOST_LOG_SEV(lg, error) << parent_not_found << n;
-            BOOST_THROW_EXCEPTION(indexing_error(parent_not_found + n));
+            const auto qn(parent.qualified());
+            BOOST_LOG_SEV(lg, error) << parent_not_found << qn;
+            BOOST_THROW_EXCEPTION(indexing_error(parent_not_found + qn));
         }
 
         const auto op(recurse_generalization(m, leaf, j->second, d));
         if (op.empty()) {
-            const auto n(string_converter::convert(parent));
-            BOOST_LOG_SEV(lg, error) << child_with_no_original_parent << n;
+            const auto qn(parent.qualified());
+            BOOST_LOG_SEV(lg, error) << child_with_no_original_parent << qn;
             BOOST_THROW_EXCEPTION(
-                indexing_error(child_with_no_original_parent + n));
+                indexing_error(child_with_no_original_parent + qn));
         }
 
         for (const auto qn : op)
@@ -114,12 +112,12 @@ recurse_generalization(const model& m, const name& leaf,
 
         d.original_parents[parent] = op;
         BOOST_LOG_SEV(lg, debug) << "Type: "
-                                 << string_converter::convert(parent)
+                                 << parent.qualified()
                                  << " has original parents: " << op;
 
         d.leaves[parent].push_back(leaf);
         BOOST_LOG_SEV(lg, debug) << "Type is a leaf of: "
-                                 << string_converter::convert(parent);
+                                 << parent.qualified();
     }
     d.original_parents[o.name()] = original_parents;
     return original_parents;
@@ -132,7 +130,7 @@ obtain_details(const model& m) const {
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
         BOOST_LOG_SEV(lg, debug) << "Processing type: "
-                                 << string_converter::convert(o.name());
+                                 << o.name().qualified();
 
         if (!is_leaf(o))
             continue;
@@ -149,40 +147,40 @@ obtain_details(const model& m) const {
 void generalization_indexer::
 populate(const generalization_details& d, model& m) const {
     for (const auto& pair : d.leaves) {
-        const auto& qn(pair.first);
-        auto i(m.objects().find(qn));
+        const auto& n(pair.first);
+        auto i(m.objects().find(n));
         if (i == m.objects().end()) {
-            const auto n(string_converter::convert(qn));
-            BOOST_LOG_SEV(lg, error) << object_not_found << n;
-            BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n));
+            const auto qn(n.qualified());
+            BOOST_LOG_SEV(lg, error) << object_not_found << qn;
+            BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
         }
 
         const auto rt(relationship_types::leaves);
         i->second.relationships()[rt] = pair.second;
         i->second.relationships()[rt].sort();
 
+        const auto omn(m.name().location().original_model_name());
         for (const auto& l : pair.second) {
-            if (l.model_name() == m.name().model_name())
+            if (l.location().original_model_name() == omn)
                 m.leaves().insert(l);
         }
     }
 
     for (const auto& pair : d.original_parents) {
-        const auto& qn(pair.first);
-        auto i(m.objects().find(qn));
+        const auto& n(pair.first);
+        auto i(m.objects().find(n));
         if (i == m.objects().end()) {
-            const auto n(string_converter::convert(qn));
-            BOOST_LOG_SEV(lg, error) << object_not_found << n;
-            BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n));
+            const auto qn(n.qualified());
+            BOOST_LOG_SEV(lg, error) << object_not_found << qn;
+            BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
         }
 
         auto& o(i->second);
         if (!o.is_child()) {
             // a bit of a hack, top-level types have themselves as the
-            // original parent of the container just to make our life easier.
-            const auto n(string_converter::convert(qn));
+            // original parent of the container just to make our life easier
             BOOST_LOG_SEV(lg, debug) << "Type has parents but is not a child: "
-                                     << n;
+                                     << n.qualified();
             continue;
         }
 
@@ -192,9 +190,9 @@ populate(const generalization_details& d, model& m) const {
         for (const auto& opn : pair.second) {
             const auto j(m.objects().find(opn));
             if (j == m.objects().end()) {
-                const auto n(string_converter::convert(opn));
-                BOOST_LOG_SEV(lg, error) << object_not_found << n;
-                BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n));
+                const auto qn(opn.qualified());
+                BOOST_LOG_SEV(lg, error) << object_not_found << qn;
+                BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
             }
             o.is_original_parent_visitable(j->second.is_visitable());
         }

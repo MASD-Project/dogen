@@ -11,51 +11,65 @@
 		</fields>
 	</extensions>
 	<name class_id="9" tracking_level="0" version="0">
-		<model_name>comments</model_name>
-		<external_module_path class_id="10" tracking_level="0" version="0">
-			<count>0</count>
-			<item_version>0</item_version>
-		</external_module_path>
-		<module_path>
-			<count>0</count>
-			<item_version>0</item_version>
-		</module_path>
-		<simple_name>comments</simple_name>
+		<simple>comments</simple>
+		<qualified></qualified>
+		<location class_id="10" tracking_level="0" version="0">
+			<original_model_name>comments</original_model_name>
+			<external_module_path class_id="11" tracking_level="0" version="0">
+				<count>0</count>
+				<item_version>0</item_version>
+			</external_module_path>
+			<model_module_path>
+				<count>0</count>
+				<item_version>0</item_version>
+			</model_module_path>
+			<internal_module_path>
+				<count>0</count>
+				<item_version>0</item_version>
+			</internal_module_path>
+		</location>
 	</name>
 	<generation_type>0</generation_type>
 	<origin_type>1</origin_type>
-	<containing_module class_id="11" tracking_level="0" version="0">
+	<containing_module class_id="12" tracking_level="0" version="0">
 		<initialized>0</initialized>
 	</containing_module>
-	<references class_id="12" tracking_level="0" version="0">
+	<references class_id="13" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</references>
-	<leaves class_id="13" tracking_level="0" version="0">
+	<leaves class_id="14" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
-	<modules class_id="14" tracking_level="0" version="0">
+	<modules class_id="15" tracking_level="0" version="0">
 		<count>3</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="15" tracking_level="0" version="0">
+		<item class_id="16" tracking_level="0" version="0">
 			<first>
-				<model_name>comments</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>package</item>
-				</module_path>
-				<simple_name>package2</simple_name>
+				<simple>package2</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>comments</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>package</item>
+					</internal_module_path>
+				</location>
 			</first>
-			<second class_id="16" tracking_level="0" version="0">
+			<second class_id="17" tracking_level="0" version="0">
 				<documentation>package2
 </documentation>
 				<extensions>
@@ -63,12 +77,12 @@
 						<count>1</count>
 						<bucket_count>11</bucket_count>
 						<item_version>0</item_version>
-						<item class_id="17" tracking_level="0" version="0">
+						<item class_id="18" tracking_level="0" version="0">
 							<first>dia.comment</first>
-							<second class_id="18" tracking_level="0" version="0">
-								<value class_id="19" tracking_level="0" version="1">
+							<second class_id="19" tracking_level="0" version="0">
+								<value class_id="20" tracking_level="0" version="1">
 									<px class_id="1" tracking_level="1" version="0" object_id="_0">
-										<value class_id="20" tracking_level="0" version="0"></value>
+										<value class_id="21" tracking_level="0" version="0"></value>
 										<content>true</content>
 									</px>
 								</value>
@@ -77,17 +91,24 @@
 					</fields>
 				</extensions>
 				<name>
-					<model_name>comments</model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>package</item>
-					</module_path>
-					<simple_name>package2</simple_name>
+					<simple>package2</simple>
+					<qualified></qualified>
+					<location>
+						<original_model_name>comments</original_model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<model_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</model_module_path>
+						<internal_module_path>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>package</item>
+						</internal_module_path>
+					</location>
 				</name>
 				<generation_type>1</generation_type>
 				<origin_type>1</origin_type>
@@ -95,19 +116,26 @@
 					<initialized>1</initialized>
 					<item_version>0</item_version>
 					<value>
-						<model_name>comments</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>package</simple_name>
+						<simple>package</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>comments</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</value>
 				</containing_module>
-				<members class_id="21" tracking_level="0" version="0">
+				<members class_id="22" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
@@ -115,16 +143,23 @@
 		</item>
 		<item>
 			<first>
-				<model_name>comments</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<simple_name>package</simple_name>
+				<simple>package</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>comments</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
 			</first>
 			<second>
 				<documentation>package
@@ -148,16 +183,23 @@
 					</fields>
 				</extensions>
 				<name>
-					<model_name>comments</model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</module_path>
-					<simple_name>package</simple_name>
+					<simple>package</simple>
+					<qualified></qualified>
+					<location>
+						<original_model_name>comments</original_model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<model_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</model_module_path>
+						<internal_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</internal_module_path>
+					</location>
 				</name>
 				<generation_type>1</generation_type>
 				<origin_type>1</origin_type>
@@ -165,49 +207,70 @@
 					<initialized>1</initialized>
 					<item_version>0</item_version>
 					<value>
-						<model_name>comments</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>comments</simple_name>
+						<simple>comments</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>comments</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</value>
 				</containing_module>
 				<members>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
-						<model_name>comments</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>package</item>
-						</module_path>
-						<simple_name>package2</simple_name>
+						<simple>package2</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>comments</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>package</item>
+							</internal_module_path>
+						</location>
 					</item>
 				</members>
 			</second>
 		</item>
 		<item>
 			<first>
-				<model_name>comments</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<simple_name>comments</simple_name>
+				<simple>comments</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>comments</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
 			</first>
 			<second>
 				<documentation>This model demonstrates the use of comments in dogen.
@@ -255,16 +318,23 @@ This comment will be applied to the model namespace itself.
 					</fields>
 				</extensions>
 				<name>
-					<model_name>comments</model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</module_path>
-					<simple_name>comments</simple_name>
+					<simple>comments</simple>
+					<qualified></qualified>
+					<location>
+						<original_model_name>comments</original_model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<model_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</model_module_path>
+						<internal_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</internal_module_path>
+					</location>
 				</name>
 				<generation_type>1</generation_type>
 				<origin_type>1</origin_type>
@@ -275,79 +345,107 @@ This comment will be applied to the model namespace itself.
 					<count>3</count>
 					<item_version>0</item_version>
 					<item>
-						<model_name>comments</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>one_line</simple_name>
+						<simple>one_line</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>comments</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</item>
 					<item>
-						<model_name>comments</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>multi_line</simple_name>
+						<simple>multi_line</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>comments</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</item>
 					<item>
-						<model_name>comments</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>package</simple_name>
+						<simple>package</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>comments</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</item>
 				</members>
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="22" tracking_level="0" version="0">
+	<concepts class_id="23" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="23" tracking_level="0" version="0">
+	<primitives class_id="24" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="24" tracking_level="0" version="0">
+	<enumerations class_id="25" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="25" tracking_level="0" version="0">
+	<objects class_id="26" tracking_level="0" version="0">
 		<count>2</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="26" tracking_level="0" version="0">
+		<item class_id="27" tracking_level="0" version="0">
 			<first>
-				<model_name>comments</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<simple_name>multi_line</simple_name>
+				<simple>multi_line</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>comments</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
 			</first>
 			<second class_id="4" tracking_level="1" version="0" object_id="_5">
-				<type class_id="27" tracking_level="0" version="0">
+				<type class_id="28" tracking_level="0" version="0">
 					<documentation>first line
 
 second line
@@ -361,16 +459,23 @@ third line with &quot;quote&quot;
 						</fields>
 					</extensions>
 					<name>
-						<model_name>comments</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>multi_line</simple_name>
+						<simple>multi_line</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>comments</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -378,20 +483,27 @@ third line with &quot;quote&quot;
 						<initialized>1</initialized>
 						<item_version>0</item_version>
 						<value>
-							<model_name>comments</model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</module_path>
-							<simple_name>comments</simple_name>
+							<simple>comments</simple>
+							<qualified></qualified>
+							<location>
+								<original_model_name>comments</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
 						</value>
 					</containing_module>
 				</type>
-				<all_properties class_id="28" tracking_level="0" version="0">
+				<all_properties class_id="29" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_properties>
@@ -399,7 +511,7 @@ third line with &quot;quote&quot;
 					<count>0</count>
 					<item_version>0</item_version>
 				</local_properties>
-				<inherited_properties class_id="29" tracking_level="0" version="0">
+				<inherited_properties class_id="30" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
@@ -410,7 +522,7 @@ third line with &quot;quote&quot;
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships class_id="30" tracking_level="0" version="0">
+				<relationships class_id="31" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
@@ -421,16 +533,23 @@ third line with &quot;quote&quot;
 		</item>
 		<item>
 			<first>
-				<model_name>comments</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<simple_name>one_line</simple_name>
+				<simple>one_line</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>comments</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
 			</first>
 			<second object_id="_6">
 				<type>
@@ -444,16 +563,23 @@ third line with &quot;quote&quot;
 						</fields>
 					</extensions>
 					<name>
-						<model_name>comments</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>one_line</simple_name>
+						<simple>one_line</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>comments</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -461,16 +587,23 @@ third line with &quot;quote&quot;
 						<initialized>1</initialized>
 						<item_version>0</item_version>
 						<value>
-							<model_name>comments</model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</module_path>
-							<simple_name>comments</simple_name>
+							<simple>comments</simple>
+							<qualified></qualified>
+							<location>
+								<original_model_name>comments</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
 						</value>
 					</containing_module>
 				</type>
@@ -481,7 +614,7 @@ third line with &quot;quote&quot;
 				<local_properties>
 					<count>3</count>
 					<item_version>0</item_version>
-					<item class_id="31" tracking_level="0" version="0">
+					<item class_id="32" tracking_level="0" version="0">
 						<documentation>another brief comment
 </documentation>
 						<extensions>
@@ -492,20 +625,27 @@ third line with &quot;quote&quot;
 							</fields>
 						</extensions>
 						<name>prop_0</name>
-						<type class_id="32" tracking_level="0" version="0">
+						<type class_id="33" tracking_level="0" version="0">
 							<type>
-								<model_name></model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>int</simple_name>
+								<simple>int</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name></original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
 							</type>
-							<children class_id="33" tracking_level="0" version="0">
+							<children class_id="34" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -529,16 +669,23 @@ a second line
 						<name>prop_1</name>
 						<type>
 							<type>
-								<model_name></model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>int</simple_name>
+								<simple>int</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name></original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
 							</type>
 							<children>
 								<count>0</count>
@@ -561,16 +708,23 @@ a second line
 						<name>prop_2</name>
 						<type>
 							<type>
-								<model_name></model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>int</simple_name>
+								<simple>int</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name></original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
 							</type>
 							<children>
 								<count>0</count>

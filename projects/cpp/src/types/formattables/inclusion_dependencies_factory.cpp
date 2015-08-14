@@ -20,7 +20,6 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_factory.hpp"
 
@@ -98,8 +97,8 @@ generate(const inclusion_dependencies_builder_factory& f,
             >
         > providers, const TackEntity& e) {
 
-    const auto n(tack::string_converter::convert(e.name()));
-    BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies for: " << n;
+    const auto qn(e.name().qualified());
+    BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies for: " << qn;
 
     std::unordered_map<std::string, std::list<std::string> > r;
     for (const auto p : providers) {
@@ -116,14 +115,14 @@ generate(const inclusion_dependencies_builder_factory& f,
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_formatter_name
                                      << p->formatter_name()
-                                     << " for type: " << n;
+                                     << " for type: " << qn;
             BOOST_THROW_EXCEPTION(building_error(duplicate_formatter_name +
                     p->formatter_name()));
         }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies for: "
-                             << n;
+                             << qn;
 
     return r;
 }

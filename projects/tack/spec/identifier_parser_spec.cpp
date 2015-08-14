@@ -46,7 +46,7 @@ bool test_primitive(const std::string& s) {
 
     dogen::tack::nested_name nn;
     dogen::tack::name e;
-    e.simple_name(s);
+    e.simple(s);
     nn.type(e);
     return asserter::assert_equals(nn, a);
 }
@@ -67,9 +67,9 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_na
 
     dogen::tack::nested_name nn;
     dogen::tack::name e;
-    e.simple_name("z");
-    e.module_path(std::list<std::string> { "b", "c"});
-    e.model_name("a");
+    e.simple("z");
+    e.location().internal_module_path(std::list<std::string> { "b", "c"});
+    e.location().original_model_name("a");
     nn.type(e);
     BOOST_CHECK(asserter::assert_equals(nn, a));
 }
@@ -84,7 +84,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_without_scope_operator_produces_expected_nam
 
     dogen::tack::nested_name nn;
     dogen::tack::name e;
-    e.simple_name("zeta");
+    e.simple("zeta");
     nn.type(e);
     BOOST_CHECK(asserter::assert_equals(nn, a));
 }
@@ -99,8 +99,8 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_one_scope_operator_produces_expected_na
 
     dogen::tack::nested_name nn;
     dogen::tack::name e;
-    e.model_name("a");
-    e.simple_name("z");
+    e.location().original_model_name("a");
+    e.simple("z");
     nn.type(e);
     BOOST_CHECK(asserter::assert_equals(nn, a));
 }
@@ -173,11 +173,11 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expec
     dogen::tack::identifier_parser ip;
     dogen::tack::nested_name nn;
     dogen::tack::name e;
-    e.simple_name("type");
+    e.simple("type");
     nn.type(e);
 
     dogen::tack::name f;
-    f.simple_name("abc");
+    f.simple("abc");
     dogen::tack::nested_name c;
     c.type(f);
     nn.children(std::list<dogen::tack::nested_name> { c });
@@ -191,16 +191,16 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected
     dogen::tack::identifier_parser ip;
     dogen::tack::nested_name nn;
     dogen::tack::name e;
-    e.simple_name("type");
+    e.simple("type");
     nn.type(e);
 
     dogen::tack::name f;
-    f.simple_name("abc");
+    f.simple("abc");
     dogen::tack::nested_name c;
     c.type(f);
 
     dogen::tack::name g;
-    g.simple_name("cde");
+    g.simple("cde");
     dogen::tack::nested_name d;
     d.type(g);
     nn.children(std::list<dogen::tack::nested_name> { c, d });
@@ -217,13 +217,13 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_nested_names) {
     dogen::tack::identifier_parser ip;
     dogen::tack::nested_name nn;
     dogen::tack::name e;
-    e.simple_name("vector");
-    e.model_name("std");
+    e.simple("vector");
+    e.location().original_model_name("std");
     nn.type(e);
 
     dogen::tack::name f;
-    f.simple_name("string");
-    f.model_name("std");
+    f.simple("string");
+    f.location().original_model_name("std");
     dogen::tack::nested_name c;
     c.type(f);
     nn.children(std::list<dogen::tack::nested_name> { c });
@@ -240,12 +240,12 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_nested_names)
     dogen::tack::identifier_parser ip;
     dogen::tack::nested_name nn;
     dogen::tack::name e;
-    e.simple_name("vector");
-    e.model_name("std");
+    e.simple("vector");
+    e.location().original_model_name("std");
     nn.type(e);
 
     dogen::tack::name f;
-    f.simple_name("unsigned int");
+    f.simple("unsigned int");
     dogen::tack::nested_name c;
     c.type(f);
     nn.children(std::list<dogen::tack::nested_name> { c });
@@ -262,18 +262,18 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_nested_names) {
     dogen::tack::identifier_parser ip;
     dogen::tack::nested_name nn;
     dogen::tack::name e;
-    e.simple_name("unordered_map");
-    e.model_name("std");
+    e.simple("unordered_map");
+    e.location().original_model_name("std");
     nn.type(e);
 
     dogen::tack::name f;
-    f.simple_name("string");
-    f.model_name("std");
+    f.simple("string");
+    f.location().original_model_name("std");
     dogen::tack::nested_name c;
     c.type(f);
     dogen::tack::name g;
-    g.simple_name("type");
-    g.model_name("my");
+    g.simple("type");
+    g.location().original_model_name("my");
     dogen::tack::nested_name d;
     d.type(g);
 
@@ -295,19 +295,19 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_nested_names
     dogen::tack::identifier_parser ip;
     dogen::tack::nested_name nn;
     dogen::tack::name e;
-    e.simple_name("vector");
-    e.model_name("std");
+    e.simple("vector");
+    e.location().original_model_name("std");
     nn.type(e);
 
     dogen::tack::name f;
-    f.simple_name("shared_ptr");
-    f.model_name("std");
+    f.simple("shared_ptr");
+    f.location().original_model_name("std");
     dogen::tack::nested_name c;
     c.type(f);
 
     dogen::tack::name g;
-    g.simple_name("string");
-    g.model_name("std");
+    g.simple("string");
+    g.location().original_model_name("std");
     dogen::tack::nested_name d;
     d.type(g);
     c.children(std::list<dogen::tack::nested_name> { d });

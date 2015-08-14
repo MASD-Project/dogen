@@ -20,7 +20,6 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/io/settings/bundle_repository_io.hpp"
 #include "dogen/cpp/types/settings/bundle_factory.hpp"
@@ -65,9 +64,9 @@ private:
         auto& deps(result_.bundles_by_name());
         const auto res(deps.insert(pair));
         if (!res.second) {
-            const auto n(tack::string_converter::convert(e.name()));
-            BOOST_LOG_SEV(lg, error) << duplicate_name << n;
-            BOOST_THROW_EXCEPTION(building_error(duplicate_name + n));
+            const auto qn(e.name().qualified());
+            BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
+            BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));
         }
     }
 
@@ -102,17 +101,18 @@ make(const dynamic::repository& rp, const dynamic::object& root_object,
 
     // FIXME: hack to handle registars.
     tack::name n;
-    n.simple_name(registrar_name);
-    n.model_name(m.name().model_name());
-    n.external_module_path(m.name().external_module_path());
+    n.simple(registrar_name);
+    n.location().original_model_name(m.name().location().original_model_name());
+    n.location().external_module_path(
+        m.name().location().external_module_path());
 
     const auto pair(std::make_pair(n, f.make()));
     auto& deps(r.bundles_by_name());
     const auto res(deps.insert(pair));
     if (!res.second) {
-        const auto sn(tack::string_converter::convert(n));
-        BOOST_LOG_SEV(lg, error) << duplicate_name << sn;
-        BOOST_THROW_EXCEPTION(building_error(duplicate_name + sn));
+        const auto qn(n.qualified());
+        BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
+        BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating settings bundle repository."

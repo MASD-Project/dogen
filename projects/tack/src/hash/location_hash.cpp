@@ -44,9 +44,9 @@ namespace tack {
 std::size_t location_hasher::hash(const location& v) {
     std::size_t seed(0);
 
-    combine(seed, v.model_name());
+    combine(seed, v.original_model_name());
     combine(seed, hash_std_list_std_string(v.external_module_path()));
-    combine(seed, hash_std_list_std_string(v.model_path()));
+    combine(seed, hash_std_list_std_string(v.model_module_path()));
     combine(seed, hash_std_list_std_string(v.internal_module_path()));
 
     return seed;

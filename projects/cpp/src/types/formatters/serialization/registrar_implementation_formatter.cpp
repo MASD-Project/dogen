@@ -57,9 +57,10 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     const tack::model& m) const {
 
     tack::name n;
-    n.simple_name(registrar_name);
-    n.model_name(m.name().model_name());
-    n.external_module_path(m.name().external_module_path());
+    n.simple(registrar_name);
+    n.location().original_model_name(m.name().location().original_model_name());
+    n.location().external_module_path(
+        m.name().location().external_module_path());
 
     auto builder(f.make());
     const auto rh_fn(traits::registrar_header_formatter_name());
@@ -96,9 +97,11 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
 
         const auto ref(pair.first);
         tack::name n;
-        n.model_name(ref.model_name());
-        n.simple_name(registrar_name);
-        n.external_module_path(ref.external_module_path());
+        n.location().original_model_name(
+            ref.location().original_model_name());
+        n.simple(registrar_name);
+        n.location().external_module_path(
+            ref.location().external_module_path());
         builder.add(n, ch_fn);
     }
     return builder.build();

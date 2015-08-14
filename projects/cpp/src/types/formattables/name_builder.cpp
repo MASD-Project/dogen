@@ -43,14 +43,14 @@ namespace formattables {
 
 std::list<std::string> name_builder::
 namespace_list(const tack::model& m, const tack::name& n) const {
-    std::list<std::string> r(n.external_module_path());
+    std::list<std::string> r(n.location().external_module_path());
 
     // if there is no model name, it won't contribute to the namespaces.
-    if (!n.model_name().empty())
-        r.push_back(n.model_name());
+    if (!n.location().original_model_name().empty())
+        r.push_back(n.location().original_model_name());
 
     // all modules in the module path contribute to namespaces.
-    const auto mp(n.module_path());
+    const auto mp(n.location().internal_module_path());
     r.insert(r.end(), mp.begin(), mp.end());
 
     // if the name belongs to the model's module, we need to remove the
@@ -65,7 +65,7 @@ namespace_list(const tack::model& m, const tack::name& n) const {
 std::string name_builder::
 qualified_name(const tack::model& m, const tack::name& n) const {
     std::list<std::string> l(namespace_list(m, n));
-    l.push_back(n.simple_name());
+    l.push_back(n.simple());
     return boost::algorithm::join(l, scope_operator);
 }
 

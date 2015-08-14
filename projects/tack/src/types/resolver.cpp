@@ -28,7 +28,6 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/tack/types/type_visitor.hpp"
 #include "dogen/tack/types/resolution_error.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/io/nested_name_io.hpp"
 #include "dogen/tack/io/property_io.hpp"
 #include "dogen/tack/io/model_io.hpp"
@@ -65,8 +64,8 @@ void resolver::validate_inheritance_graph(const object& ao) const {
         const auto j(model_.objects().find(pn));
         if (j == model_.objects().end()) {
             std::ostringstream s;
-            s << orphan_object << ": " << string_converter::convert(ao.name())
-              << ". parent: " << string_converter::convert(pn);
+            s << orphan_object << ": " << ao.name().qualified()
+              << ". parent: " << pn.qualified();
 
             BOOST_LOG_SEV(lg, error) << s.str();
             BOOST_THROW_EXCEPTION(resolution_error(s.str()));
@@ -81,8 +80,8 @@ void resolver::validate_inheritance_graph(const object& ao) const {
         const auto j(model_.objects().find(pn));
         if (j == model_.objects().end()) {
             std::ostringstream s;
-            s << orphan_object << ": " << string_converter::convert(ao.name())
-              << ". original parent: " << string_converter::convert(pn);
+            s << orphan_object << ": " << ao.name().qualified()
+              << ". original parent: " << pn.qualified();
 
             BOOST_LOG_SEV(lg, error) << s.str();
             BOOST_THROW_EXCEPTION(resolution_error(s.str()));
@@ -96,8 +95,8 @@ void resolver::validate_refinements(const concept& c) const {
         if (i == model_.concepts().end()) {
             std::ostringstream stream;
             stream << orphan_concept << ". concept: "
-                   << string_converter::convert(c.name())
-                   << ". refined concept: " << string_converter::convert(n);
+                   << c.name().qualified()
+                   << ". refined concept: " << n.qualified();
 
             BOOST_LOG_SEV(lg, error) << stream.str();
             BOOST_THROW_EXCEPTION(resolution_error(stream.str()));
@@ -106,8 +105,7 @@ void resolver::validate_refinements(const concept& c) const {
 }
 
 name resolver::resolve_partial_type(const name& n) const {
-    BOOST_LOG_SEV(lg, debug) << "Resolving type:"
-                             << string_converter::convert(n);
+    BOOST_LOG_SEV(lg, debug) << "Resolving type:" << n.qualified();
 
     name r(n);
 
@@ -118,7 +116,8 @@ name resolver::resolve_partial_type(const name& n) const {
         return r;
 
     // then try setting module path to the target one
-    r.external_module_path(model_.name().external_module_path());
+    r.location().external_module_path(
+        model_.name().location().external_module_path());
     i = objects.find(r);
     if (i != objects.end())
         return r;
@@ -126,14 +125,15 @@ name resolver::resolve_partial_type(const name& n) const {
     // now try all available module paths from references
     for (const auto& pair : model_.references()) {
         const auto n(pair.first);
-        r.external_module_path(n.external_module_path());
+        r.location().external_module_path(
+            n.location().external_module_path());
         i = objects.find(r);
         if (i != objects.end())
             return r;
     }
 
     // reset external module path
-    r.external_module_path(std::list<std::string>{});
+    r.location().external_module_path(std::list<std::string>{});
 
     // its not a object, could it be a primitive?
     const auto& primitives(model_.primitives());
@@ -148,7 +148,8 @@ name resolver::resolve_partial_type(const name& n) const {
         return r;
 
     // then try setting module path to the target one
-    r.external_module_path(model_.name().external_module_path());
+    r.location().external_module_path(
+        model_.name().location().external_module_path());
     k = enumerations.find(r);
     if (k != enumerations.end())
         return r;
@@ -156,16 +157,18 @@ name resolver::resolve_partial_type(const name& n) const {
     // now try all available module paths from references
     for (const auto& pair : model_.references()) {
         const auto n(pair.first);
-        r.external_module_path(n.external_module_path());
+        r.location().external_module_path(
+            n.location().external_module_path());
         k = enumerations.find(r);
         if (k != enumerations.end())
             return r;
     }
 
-    if (r.model_name().empty()) {
+    if (r.location().original_model_name().empty()) {
+        const auto& l(model_.name().location());
         // it could be a type defined in this model
-        r.model_name(model_.name().model_name());
-        r.external_module_path(model_.name().external_module_path());
+        r.location().original_model_name(l.original_model_name());
+        r.location().external_module_path(l.external_module_path());
         i = objects.find(r);
         if (i != objects.end())
             return r;
@@ -179,18 +182,19 @@ name resolver::resolve_partial_type(const name& n) const {
     // as a reference model. FIXME: big hack.
     {
         name n;
-        n.simple_name(r.simple_name());
-        n.model_name(r.module_path().front());
-        n.external_module_path(model_.name().external_module_path());
+        n.simple(r.simple());
+        n.location().original_model_name(
+            r.location().internal_module_path().front());
+        n.location().external_module_path(
+            model_.name().location().external_module_path());
 
         i = objects.find(n);
         if (i != objects.end())
             return n;
     }
 
-    BOOST_LOG_SEV(lg, error) << undefined_type << string_converter::convert(n);
-    BOOST_THROW_EXCEPTION(resolution_error(
-            undefined_type + string_converter::convert(n)));
+    BOOST_LOG_SEV(lg, error) << undefined_type << n.qualified();
+    BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.qualified()));
 }
 
 void resolver::resolve_partial_type(nested_name& nn) const {
@@ -198,9 +202,7 @@ void resolver::resolve_partial_type(nested_name& nn) const {
         resolve_partial_type(cnn);
 
     name n(resolve_partial_type(nn.type()));
-    BOOST_LOG_SEV(lg, debug) << "Resolved type "
-                             << string_converter::convert(n)
-                             << ". Result: " << string_converter::convert(n);
+    BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.qualified() << ".";
     nn.type(n);
 }
 
@@ -211,7 +213,7 @@ resolve_properties(const name& owner, std::list<property>& p) const {
             resolve_partial_type(prop.type());
         } catch (boost::exception& e) {
             std::ostringstream s;
-            s << "Owner type name: " << string_converter::convert(owner)
+            s << "Owner type name: " << owner.qualified()
               << " Property name: " << prop.name()
               << " Property type: " << prop.type();
             e << errmsg_info(s.str());
@@ -245,8 +247,7 @@ void resolver::resolve_objects() {
 
     for (auto& pair : model_.objects()) {
         auto& o(pair.second);
-        BOOST_LOG_SEV(lg, debug) << "Resolving type "
-                                 << string_converter::convert(o.name());
+        BOOST_LOG_SEV(lg, debug) << "Resolving type " << o.name().qualified();
 
         if (o.generation_type() == generation_types::no_generation)
             continue;

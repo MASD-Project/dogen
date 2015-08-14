@@ -23,7 +23,6 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/formattables/workflow.hpp"
 #include "dogen/cpp/types/settings/directory_names_settings_factory.hpp"
@@ -52,9 +51,9 @@ dynamic::object workflow::obtain_root_object(const tack::model& m) const {
 
     const auto i(m.modules().find(m.name()));
     if (i == m.modules().end()) {
-        const auto n(tack::string_converter::convert(m.name()));
-        BOOST_LOG_SEV(lg, error) << model_module_not_found << n;
-        BOOST_THROW_EXCEPTION(workflow_error(model_module_not_found + n));
+        const auto qn(m.name().qualified());
+        BOOST_LOG_SEV(lg, error) << model_module_not_found << qn;
+        BOOST_THROW_EXCEPTION(workflow_error(model_module_not_found + qn));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Obtained model's root object.";
@@ -123,7 +122,7 @@ workflow::managed_directories(const config::knitting_options& ko,
     const auto ro(obtain_root_object(m));
     settings::directory_names_settings_factory f(rp);
     const auto dn(f.make(ro));
-    const auto mn(m.name().simple_name());
+    const auto mn(m.name().simple());
 
     std::forward_list<boost::filesystem::path> r;
     r.push_front(ko.cpp().project_directory_path() / mn);

@@ -45,9 +45,9 @@ public:
 
 public:
     location(
-        const std::string& model_name,
+        const std::string& original_model_name,
         const std::list<std::string>& external_module_path,
-        const std::list<std::string>& model_path,
+        const std::list<std::string>& model_module_path,
         const std::list<std::string>& internal_module_path);
 
 private:
@@ -59,13 +59,13 @@ private:
 
 public:
     /**
-     * @brief Model to which the modeling element belongs to.
+     * @brief Original name of the model to which the modeling element belongs to.
      */
     /**@{*/
-    const std::string& model_name() const;
-    std::string& model_name();
-    void model_name(const std::string& v);
-    void model_name(const std::string&& v);
+    const std::string& original_model_name() const;
+    std::string& original_model_name();
+    void original_model_name(const std::string& v);
+    void original_model_name(const std::string&& v);
     /**@}*/
 
     /**
@@ -86,10 +86,10 @@ public:
      * that is, if the model name has multiple fields separated by dots, e.g. @ a.b.
      */
     /**@{*/
-    const std::list<std::string>& model_path() const;
-    std::list<std::string>& model_path();
-    void model_path(const std::list<std::string>& v);
-    void model_path(const std::list<std::string>&& v);
+    const std::list<std::string>& model_module_path() const;
+    std::list<std::string>& model_module_path();
+    void model_module_path(const std::list<std::string>& v);
+    void model_module_path(const std::list<std::string>&& v);
     /**@}*/
 
     /**
@@ -113,9 +113,9 @@ public:
     location& operator=(location other);
 
 private:
-    std::string model_name_;
+    std::string original_model_name_;
     std::list<std::string> external_module_path_;
-    std::list<std::string> model_path_;
+    std::list<std::string> model_module_path_;
     std::list<std::string> internal_module_path_;
 };
 

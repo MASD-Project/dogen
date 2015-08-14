@@ -20,7 +20,6 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_factory.hpp"
@@ -65,9 +64,9 @@ public:
         auto& deps(result_.inclusion_dependencies_by_name());
         const auto res(deps.insert(pair));
         if (!res.second) {
-            const auto sn(tack::string_converter::convert(n));
-            BOOST_LOG_SEV(lg, error) << duplicate_name << sn;
-            BOOST_THROW_EXCEPTION(building_error(duplicate_name + sn));
+            const auto qn(n.qualified());
+            BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
+            BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));
         }
     }
 
@@ -112,9 +111,10 @@ make(const inclusion_dependencies_builder_factory& bf, const container& c,
     tack::all_model_items_traversal(m, g);
 
     tack::name n;
-    n.simple_name(registrar_name);
-    n.model_name(m.name().model_name());
-    n.external_module_path(m.name().external_module_path());
+    n.simple(registrar_name);
+    n.location().original_model_name(m.name().location().original_model_name());
+    n.location().external_module_path(
+        m.name().location().external_module_path());
     g.generate(m, n);
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies:"

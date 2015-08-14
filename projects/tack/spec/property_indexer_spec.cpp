@@ -28,12 +28,9 @@
 #include "dogen/tack/io/model_io.hpp"
 #include "dogen/tack/types/object.hpp"
 #include "dogen/tack/io/object_io.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/types/indexing_error.hpp"
 #include "dogen/tack/test/mock_model_factory.hpp"
 #include "dogen/tack/types/property_indexer.hpp"
-
-using dogen::tack::string_converter;
 
 namespace {
 
@@ -67,8 +64,7 @@ bool has_duplicate_property_names(const Stateful& s,
 
     using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, debug) << "Inherited/local properties for "
-                             << string_converter::convert(s.name()) << ": "
-                             << count;
+                             << s.name().qualified() << ": " << count;
 
     for (const auto& pair : count)
         if (pair.second > 1)
@@ -79,8 +75,7 @@ bool has_duplicate_property_names(const Stateful& s,
         count[p.name()]++;
 
     BOOST_LOG_SEV(lg, debug) << "All properties for "
-                             << string_converter::convert(s.name()) << ": "
-                             << count;
+                             << s.name().qualified() << ": " << count;
 
     for (const auto& pair : count)
         if (pair.second > 1)
@@ -182,15 +177,15 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     for (const auto& pair : m.concepts()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& c(pair.second);
 
-        if (factory.is_concept_name_n(0, qn)) {
+        if (factory.is_concept_name_n(0, n)) {
             BOOST_CHECK(c.inherited_properties().empty());
             BOOST_CHECK(c.all_properties().size() == 1);
             BOOST_CHECK(c.all_properties() == c.local_properties());
             BOOST_CHECK(c.refines().empty());
-        } else if (factory.is_concept_name_n(1, qn)) {
+        } else if (factory.is_concept_name_n(1, n)) {
             BOOST_CHECK(c.refines().size() == 1);
             BOOST_REQUIRE(c.inherited_properties().size() == 1);
             const auto props(c.inherited_properties().begin()->second);
@@ -200,25 +195,25 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
             BOOST_CHECK(c.local_properties().size() == 1);
             BOOST_CHECK(!has_duplicate_property_names(c, lg));
         } else
-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected concept: " << n.qualified());
     }
 
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, n)) {
             BOOST_CHECK(o.inherited_properties().empty());
             BOOST_CHECK(o.all_properties().size() == 1);
             BOOST_CHECK(o.local_properties().size() == 1);
-        } else if (factory.is_type_name_n(1, qn)) {
+        } else if (factory.is_type_name_n(1, n)) {
             BOOST_CHECK(o.inherited_properties().empty());
             BOOST_CHECK(o.all_properties().size() == 3);
             BOOST_CHECK(o.local_properties().size() == 3);
             BOOST_CHECK(!has_duplicate_property_names(o, lg));
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << n.qualified());
     }
 }
 
@@ -234,15 +229,15 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
 
     BOOST_REQUIRE(m.concepts().size() == 3);
     for (const auto& pair : m.concepts()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& c(pair.second);
 
-        if (factory.is_concept_name_n(0, qn)) {
+        if (factory.is_concept_name_n(0, n)) {
             BOOST_CHECK(c.inherited_properties().empty());
             BOOST_CHECK(c.all_properties().size() == 1);
             BOOST_CHECK(c.all_properties() == c.local_properties());
             BOOST_CHECK(c.refines().empty());
-        } else if (factory.is_concept_name_n(1, qn)) {
+        } else if (factory.is_concept_name_n(1, n)) {
             BOOST_REQUIRE(c.inherited_properties().size() == 1);
             const auto props(c.inherited_properties().begin()->second);
             BOOST_REQUIRE(props.size() == 1);
@@ -251,7 +246,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
             BOOST_CHECK(c.all_properties().size() == 2);
             BOOST_CHECK(c.refines().size() == 1);
             BOOST_CHECK(!has_duplicate_property_names(c, lg));
-        } else if (factory.is_concept_name_n(2, qn)) {
+        } else if (factory.is_concept_name_n(2, n)) {
             BOOST_CHECK(c.inherited_properties().size() == 2);
             for (const auto& pair : c.inherited_properties())
                 BOOST_CHECK(pair.second.size() == 1);
@@ -261,30 +256,30 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
             BOOST_CHECK(c.refines().size() == 2);
             BOOST_CHECK(!has_duplicate_property_names(c, lg));
         } else
-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected concept: " << n.qualified());
     }
 
     BOOST_REQUIRE(m.objects().size() == 3);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, n)) {
             BOOST_CHECK(o.inherited_properties().empty());
             BOOST_CHECK(o.local_properties().size() == 1);
             BOOST_CHECK(o.all_properties().size() == 1);
-        } else if (factory.is_type_name_n(1, qn)) {
+        } else if (factory.is_type_name_n(1, n)) {
             BOOST_REQUIRE(o.inherited_properties().empty());
             BOOST_CHECK(o.local_properties().size() == 2);
             BOOST_CHECK(o.all_properties().size() == 2);
             BOOST_CHECK(!has_duplicate_property_names(o, lg));
-        } else if (factory.is_type_name_n(2, qn)) {
+        } else if (factory.is_type_name_n(2, n)) {
             BOOST_REQUIRE(o.inherited_properties().empty());
             BOOST_CHECK(o.local_properties().size() == 4);
             BOOST_CHECK(o.all_properties().size() == 4);
             BOOST_CHECK(!has_duplicate_property_names(o, lg));
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << n.qualified());
     }
 }
 
@@ -299,14 +294,14 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
     BOOST_CHECK(m.concepts().size() == 4);
     for (const auto& pair : m.concepts()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& c(pair.second);
 
-        if (factory.is_concept_name_n(0, qn)) {
+        if (factory.is_concept_name_n(0, n)) {
             BOOST_CHECK(c.inherited_properties().empty());
             BOOST_CHECK(c.local_properties().size() == 1);
             BOOST_CHECK(c.all_properties() == c.local_properties());
-        } else if (factory.is_concept_name_n(1, qn)) {
+        } else if (factory.is_concept_name_n(1, n)) {
             BOOST_CHECK(c.inherited_properties().size() == 1);
             for (const auto& pair : c.inherited_properties())
                 BOOST_CHECK(pair.second.size() == 1);
@@ -314,7 +309,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
             BOOST_CHECK(c.local_properties().size() == 1);
             BOOST_CHECK(c.all_properties().size() == 2);
             BOOST_CHECK(!has_duplicate_property_names(c, lg));
-        } else if (factory.is_concept_name_n(2, qn)) {
+        } else if (factory.is_concept_name_n(2, n)) {
             BOOST_CHECK(c.inherited_properties().size() == 1);
             for (const auto& pair : c.inherited_properties())
                 BOOST_CHECK(pair.second.size() == 1);
@@ -322,7 +317,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
             BOOST_CHECK(c.local_properties().size() == 1);
             BOOST_CHECK(c.all_properties().size() == 2);
             BOOST_CHECK(!has_duplicate_property_names(c, lg));
-        } else if (factory.is_concept_name_n(3, qn)) {
+        } else if (factory.is_concept_name_n(3, n)) {
             BOOST_CHECK(c.inherited_properties().size() == 3);
             for (const auto& pair : c.inherited_properties())
                 BOOST_CHECK(pair.second.size() == 1);
@@ -331,7 +326,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
             BOOST_CHECK(c.all_properties().size() == 4);
             BOOST_CHECK(!has_duplicate_property_names(c, lg));
         } else
-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected concept: " << n.qualified());
     }
 
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -391,21 +386,21 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
     BOOST_REQUIRE(m.objects().size() == 4);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
-        if (factory.is_type_name_n(3, qn)) {
+        if (factory.is_type_name_n(3, n)) {
             BOOST_CHECK(o.inherited_properties().empty());
             BOOST_CHECK(o.local_properties().size() == 1);
             BOOST_CHECK(o.all_properties() == o.local_properties());
-        } else if (factory.is_type_name_n(2, qn)) {
+        } else if (factory.is_type_name_n(2, n)) {
             BOOST_CHECK(o.inherited_properties().size() == 1);
             for (const auto& pair : o.inherited_properties())
                 BOOST_CHECK(pair.second.size() == 1);
 
             BOOST_CHECK(o.local_properties().size() == 1);
             BOOST_CHECK(o.all_properties().size() == 2);
-        } else if (factory.is_type_name_n(1, qn)) {
+        } else if (factory.is_type_name_n(1, n)) {
             BOOST_CHECK(o.inherited_properties().size() == 1);
             for (const auto& pair : o.inherited_properties())
                 BOOST_CHECK(pair.second.size() == 2);
@@ -413,7 +408,7 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
             BOOST_CHECK(o.local_properties().size() == 1);
             BOOST_CHECK(o.all_properties().size() == 3);
             BOOST_CHECK(!has_duplicate_property_names(o, lg));
-        } else if (factory.is_type_name_n(0, qn)) {
+        } else if (factory.is_type_name_n(0, n)) {
             BOOST_CHECK(o.inherited_properties().size() == 1);
             for (const auto& pair : o.inherited_properties())
                 BOOST_CHECK(pair.second.size() == 3);
@@ -422,7 +417,7 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
             BOOST_CHECK(o.all_properties().size() == 4);
             BOOST_CHECK(!has_duplicate_property_names(o, lg));
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << n.qualified());
     }
 }
 
@@ -438,27 +433,27 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
 
     BOOST_CHECK(m.concepts().size() == 1);
     for (const auto& pair : m.concepts()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& c(pair.second);
 
-        if (factory.is_concept_name_n(0, qn)) {
+        if (factory.is_concept_name_n(0, n)) {
             BOOST_CHECK(c.inherited_properties().empty());
             BOOST_CHECK(c.local_properties().size() == 1);
             BOOST_CHECK(c.all_properties() == c.local_properties());
         } else
-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected concept: " << n.qualified());
     }
 
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, n)) {
             BOOST_CHECK(o.inherited_properties().empty());
             BOOST_CHECK(o.local_properties().size() == 1);
             BOOST_CHECK(o.all_properties().size() == 1);
-        } else if (factory.is_type_name_n(1, qn)) {
+        } else if (factory.is_type_name_n(1, n)) {
             BOOST_CHECK(o.inherited_properties().size() == 1);
             for (const auto& pair : o.inherited_properties())
                 BOOST_CHECK(pair.second.size() == 1);
@@ -466,7 +461,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
             BOOST_CHECK(o.local_properties().empty());
             BOOST_CHECK(o.all_properties().size() == 1);
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << n.qualified());
     }
 }
 
@@ -482,14 +477,14 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
 
     BOOST_CHECK(m.concepts().size() == 2);
     for (const auto& pair : m.concepts()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& c(pair.second);
 
-        if (factory.is_concept_name_n(0, qn)) {
+        if (factory.is_concept_name_n(0, n)) {
             BOOST_CHECK(c.inherited_properties().empty());
             BOOST_CHECK(c.local_properties().size() == 1);
             BOOST_CHECK(c.all_properties() == c.local_properties());
-        } else if (factory.is_concept_name_n(1, qn)) {
+        } else if (factory.is_concept_name_n(1, n)) {
             BOOST_CHECK(c.inherited_properties().size() == 1);
             for (const auto& pair : c.inherited_properties())
                 BOOST_CHECK(pair.second.size() == 1);
@@ -498,20 +493,20 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_CHECK(c.all_properties().size() == 2);
             BOOST_CHECK(!has_duplicate_property_names(c, lg));
         } else
-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected concept: " << n.qualified());
     }
 
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, n)) {
             BOOST_CHECK(o.inherited_properties().empty());
             BOOST_CHECK(o.local_properties().size() == 2);
             BOOST_CHECK(o.all_properties().size() == 2);
             BOOST_CHECK(!has_duplicate_property_names(o, lg));
-        } else if (factory.is_type_name_n(1, qn)) {
+        } else if (factory.is_type_name_n(1, n)) {
             BOOST_CHECK(o.inherited_properties().size() == 1);
             for (const auto& pair : o.inherited_properties())
                 BOOST_CHECK(pair.second.size() == 2);
@@ -520,7 +515,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_CHECK(o.all_properties().size() == 2);
             BOOST_CHECK(!has_duplicate_property_names(o, lg));
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << n.qualified());
     }
 }
 

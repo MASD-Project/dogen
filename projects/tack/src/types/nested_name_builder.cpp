@@ -60,7 +60,7 @@ void nested_name_builder::add_name(const std::string& s) {
 void nested_name_builder::add_primitive(const std::string& s) {
     BOOST_LOG_SEV(lg, debug) << "pushing back primitive :" << s;
     auto n(current_->data());
-    n.simple_name(s);
+    n.simple(s);
     current_->data(n);
 }
 
@@ -73,29 +73,30 @@ void nested_name_builder::finish_current_node() {
         return;
 
     if (names_.size() == 1) {
-        n.simple_name(names_.front());
+        n.simple(names_.front());
         names_.clear();
-        BOOST_LOG_SEV(lg, debug) << "simple name: " << n.simple_name();
+        BOOST_LOG_SEV(lg, debug) << "simple name: " << n.simple();
         current_->data(n);
         return;
     }
 
     const auto i(modules_.find(names_.front()));
     if (i != modules_.end()) {
-        n.model_name(model_name_);
+        n.location().original_model_name(model_name_);
         BOOST_LOG_SEV(lg, debug) << "model name: " << model_name_;
     } else {
         BOOST_LOG_SEV(lg, debug) << "model name: " << names_.front();
-        n.model_name(names_.front());
+        n.location().original_model_name(names_.front());
         names_.pop_front();
     }
 
-    n.simple_name(names_.back());
-    BOOST_LOG_SEV(lg, debug) << "simple name: " << n.simple_name();
+    n.simple(names_.back());
+    BOOST_LOG_SEV(lg, debug) << "simple name: " << n.simple();
 
     names_.pop_back();
-    n.module_path(names_);
-    BOOST_LOG_SEV(lg, debug) << "module path: " << n.module_path();
+    n.location().internal_module_path(names_);
+    BOOST_LOG_SEV(lg, debug) << "internal module path: "
+                             << n.location().internal_module_path();
 
     names_.clear();
     current_->data(n);
@@ -137,9 +138,9 @@ void nested_name_builder::end_children() {
 void nested_name_builder::
 build_node(nested_name& n, boost::shared_ptr<node> node) {
     BOOST_LOG_SEV(lg, debug) << "bulding node: "
-                             << node->data().model_name()
+                             << node->data().location().original_model_name()
                              << " "
-                             << node->data().simple_name();
+                             << node->data().simple();
 
     n.type(node->data());
     std::list<nested_name> children;

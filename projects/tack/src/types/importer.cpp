@@ -24,7 +24,6 @@
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/tack/types/persister.hpp"
 #include "dogen/tack/io/model_io.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/io/input_descriptor_io.hpp"
 #include "dogen/tack/types/importer.hpp"
 
@@ -51,7 +50,8 @@ importer::importer(const dynamic::repository& rp)
 
     for (const auto& pair : registrar().file_importers_by_extension()) {
         BOOST_LOG_SEV(lg, debug) << "extension: '" << pair.first << "'"
-                                 << " file importer: '" << pair.second->id() << "'";
+                                 << " file importer: '" << pair.second->id()
+                                 << "'";
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished initialising importer. ";

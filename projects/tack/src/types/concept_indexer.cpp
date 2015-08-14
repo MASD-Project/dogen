@@ -27,7 +27,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/tack/types/object.hpp"
 #include "dogen/tack/types/indexing_error.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/io/relationship_types_io.hpp"
 #include "dogen/tack/types/concept_indexer.hpp"
 
@@ -53,21 +52,26 @@ namespace tack {
  * This is required as part of the current (very sub-optimal)
  * implementation of concept processing.
  */
+inline bool operator<(const location& lhs, const location& rhs) {
+    return
+        (lhs.original_model_name() < rhs.original_model_name() ||
+            (lhs.original_model_name() == rhs.original_model_name() &&
+                (lhs.external_module_path() < rhs.external_module_path())));
+}
+
 inline bool operator<(const name& lhs, const name& rhs) {
     return
-        lhs.model_name() < rhs.model_name() ||
-        (lhs.model_name() == rhs.model_name() &&
-            (lhs.external_module_path() < rhs.external_module_path() ||
-                (lhs.external_module_path() == rhs.external_module_path() &&
-                    (lhs.simple_name() < rhs.simple_name()))));
+        (lhs.location() < rhs.location() ||
+            (lhs.location() == rhs.location() &&
+                (lhs.simple() < rhs.simple())));
 }
 
 object& concept_indexer::find_object(const name& n, model& m) {
     auto i(m.objects().find(n));
     if (i == m.objects().end()) {
-        const auto sn(string_converter::convert(n));
-        BOOST_LOG_SEV(lg, error) << object_not_found << sn;
-        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + sn));
+        BOOST_LOG_SEV(lg, error) << object_not_found << n.qualified();
+        BOOST_THROW_EXCEPTION(
+            indexing_error(object_not_found +  n.qualified()));
     }
     return i->second;
 }
@@ -76,11 +80,10 @@ std::list<name>& concept_indexer::
 find_relationships(const relationship_types rt, object& o) {
     auto i(o.relationships().find(rt));
     if (i == o.relationships().end() || i->second.empty()) {
-        const auto n(string_converter::convert(o.name()));
-        BOOST_LOG_SEV(lg, error) << relationship_not_found << n
+        const auto qn(o.name().qualified());
+        BOOST_LOG_SEV(lg, error) << relationship_not_found << qn
                                  << " relationship: " << rt;
-
-        BOOST_THROW_EXCEPTION(indexing_error(relationship_not_found + n));
+        BOOST_THROW_EXCEPTION(indexing_error(relationship_not_found + qn));
     }
     return i->second;
 }
@@ -88,9 +91,9 @@ find_relationships(const relationship_types rt, object& o) {
 concept& concept_indexer::find_concept(const name& n, model& m) {
     auto i(m.concepts().find(n));
     if (i == m.concepts().end()) {
-        const auto sn(string_converter::convert(n));
-        BOOST_LOG_SEV(lg, error) << concept_not_found << sn;
-        BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + sn));
+        BOOST_LOG_SEV(lg, error) << concept_not_found << n.qualified();
+        BOOST_THROW_EXCEPTION(
+            indexing_error(concept_not_found + n.qualified()));
     }
     return i->second;
 }
@@ -101,6 +104,7 @@ void concept_indexer::remove_duplicates(std::list<name>& names) const {
     BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
                              << names.size();
 
+    // FIXME: use std algorithm
     auto i(names.begin());
     while (i != names.end()) {
         const auto n(*i);
@@ -119,8 +123,7 @@ void concept_indexer::remove_duplicates(std::list<name>& names) const {
 
 void concept_indexer::index_object(object& o, model& m,
     std::unordered_set<name>& processed_names) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing object: "
-                             << string_converter::convert(o.name());
+    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().qualified();
 
     if (processed_names.find(o.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed.";
@@ -203,8 +206,7 @@ void concept_indexer::index_objects(model& m) {
 
 void concept_indexer::index_concept(concept& c, model& m,
     std::unordered_set<name>& processed_names) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing concept: "
-                             << string_converter::convert(c.name());
+    BOOST_LOG_SEV(lg, debug) << "Indexing concept: " << c.name().qualified();
 
     if (processed_names.find(c.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Concept already processed.";

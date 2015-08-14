@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/tack/io/name_io.hpp"
+#include "dogen/tack/io/location_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -29,30 +30,15 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace tack {
 
 std::ostream& operator<<(std::ostream& s, const name& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::tack::name\"" << ", "
-      << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
-      << "\"external_module_path\": " << v.external_module_path() << ", "
-      << "\"module_path\": " << v.module_path() << ", "
-      << "\"simple_name\": " << "\"" << tidy_up_string(v.simple_name()) << "\""
+      << "\"simple\": " << "\"" << tidy_up_string(v.simple()) << "\"" << ", "
+      << "\"qualified\": " << "\"" << tidy_up_string(v.qualified()) << "\"" << ", "
+      << "\"location\": " << v.location()
       << " }";
     return(s);
 }

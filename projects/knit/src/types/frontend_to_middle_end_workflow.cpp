@@ -23,7 +23,6 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/types/persister.hpp"
 #include "dogen/tack/types/assembler.hpp"
 #include "dogen/tack/types/importer.hpp"

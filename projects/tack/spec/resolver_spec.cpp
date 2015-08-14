@@ -28,7 +28,6 @@
 #include "dogen/tack/types/resolution_error.hpp"
 #include "dogen/tack/types/merger.hpp"
 #include "dogen/tack/types/resolver.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/io/model_io.hpp"
 #include "dogen/tack/io/property_io.hpp"
 #include "dogen/utility/test/equality_tester.hpp"
@@ -86,7 +85,6 @@ dogen::tack::name get_parent_name(const dogen::tack::object& o) {
 
 }
 
-using dogen::tack::string_converter;
 using dogen::utility::test::contains_checker;
 using dogen::tack::resolution_error;
 
@@ -103,7 +101,8 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
         BOOST_CHECK(o.local_properties().size() == 1 ||
             o.local_properties().empty());
         if (o.local_properties().size() == 1)
-            o.local_properties().begin()->type().type().model_name("");
+            o.local_properties().begin()->type().
+                type().location().original_model_name("");
     }
     const auto original(m);
     BOOST_LOG_SEV(lg, debug) << "original: " << original;
@@ -120,8 +119,7 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
     for (const auto pair : m.objects()) {
         const auto& n(pair.first);
         if (factory.is_type_name_n(0, n)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(n);
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
             found = true;
 
             const auto& o(pair.second);
@@ -158,8 +156,7 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_different_model_results_in_suc
     for (const auto pair : combined.objects()) {
         const auto& n(pair.first);
         if (factory.is_type_name_n(0, n)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(n);
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
             found = true;
 
             const auto& o(pair.second);
@@ -202,15 +199,13 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
     for (const auto pair : combined.objects()) {
         const auto& n(pair.first);
         if (factory.is_type_name_n(0, n)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(n);
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
             found = true;
 
             const auto& o(pair.second);
             BOOST_REQUIRE(has_one_parent(o));
             const auto pn(get_parent_name(o));
-            BOOST_LOG_SEV(lg, debug) << "parent: "
-                                     << string_converter::convert(pn);
+            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(0, pn));
             BOOST_CHECK(o.object_type() ==
@@ -240,15 +235,13 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
     for (const auto pair : combined.objects()) {
         const auto& n(pair.first);
         if (factory.is_type_name_n(0, n)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(n);
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
             found = true;
 
             const auto& o(pair.second);
             BOOST_REQUIRE(has_one_parent(o));
             const auto pn(get_parent_name(o));
-            BOOST_LOG_SEV(lg, debug) << "parent: "
-                                     << string_converter::convert(pn);
+            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(1, pn));
             BOOST_CHECK(o.object_type() ==
@@ -278,29 +271,25 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
     for (const auto pair : combined.objects()) {
         const auto& n(pair.first);
         if (factory.is_type_name_n(0, n)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(n);
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
             found_one = true;
 
             const auto& o(pair.second);
             BOOST_REQUIRE(has_one_parent(o));
             const auto pn(get_parent_name(o));
-            BOOST_LOG_SEV(lg, debug) << "parent: "
-                                     << string_converter::convert(pn);
+            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(0, pn));
             BOOST_CHECK(o.object_type() ==
                 dogen::tack::object_types::user_defined_value_object);
         } else if (factory.is_type_name_n(1, n)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(n);
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
             found_two = true;
 
             const auto& o(pair.second);
             BOOST_REQUIRE(has_one_parent(o));
             const auto pn(get_parent_name(o));
-            BOOST_LOG_SEV(lg, debug) << "parent: "
-                                     << string_converter::convert(pn);
+            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
             BOOST_CHECK(factory.is_type_name_n(2, pn));
             BOOST_CHECK(factory.is_model_n(0, pn));
             BOOST_CHECK(o.object_type() ==
@@ -347,15 +336,13 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
     for (const auto pair : combined.objects()) {
         const auto& n(pair.first);
         if (factory.is_type_name_n(0, n)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(n);
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
             found = true;
 
             const auto& o(pair.second);
             BOOST_REQUIRE(has_one_parent(o));
             const auto pn(get_parent_name(o));
-            BOOST_LOG_SEV(lg, debug) << "parent: "
-                                     << string_converter::convert(pn);
+            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(1, pn));
             BOOST_CHECK(o.object_type() ==

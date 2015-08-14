@@ -24,27 +24,27 @@ namespace dogen {
 namespace tack {
 
 location::location(
-    const std::string& model_name,
+    const std::string& original_model_name,
     const std::list<std::string>& external_module_path,
-    const std::list<std::string>& model_path,
+    const std::list<std::string>& model_module_path,
     const std::list<std::string>& internal_module_path)
-    : model_name_(model_name),
+    : original_model_name_(original_model_name),
       external_module_path_(external_module_path),
-      model_path_(model_path),
+      model_module_path_(model_module_path),
       internal_module_path_(internal_module_path) { }
 
 void location::swap(location& other) noexcept {
     using std::swap;
-    swap(model_name_, other.model_name_);
+    swap(original_model_name_, other.original_model_name_);
     swap(external_module_path_, other.external_module_path_);
-    swap(model_path_, other.model_path_);
+    swap(model_module_path_, other.model_module_path_);
     swap(internal_module_path_, other.internal_module_path_);
 }
 
 bool location::operator==(const location& rhs) const {
-    return model_name_ == rhs.model_name_ &&
+    return original_model_name_ == rhs.original_model_name_ &&
         external_module_path_ == rhs.external_module_path_ &&
-        model_path_ == rhs.model_path_ &&
+        model_module_path_ == rhs.model_module_path_ &&
         internal_module_path_ == rhs.internal_module_path_;
 }
 
@@ -54,20 +54,20 @@ location& location::operator=(location other) {
     return *this;
 }
 
-const std::string& location::model_name() const {
-    return model_name_;
+const std::string& location::original_model_name() const {
+    return original_model_name_;
 }
 
-std::string& location::model_name() {
-    return model_name_;
+std::string& location::original_model_name() {
+    return original_model_name_;
 }
 
-void location::model_name(const std::string& v) {
-    model_name_ = v;
+void location::original_model_name(const std::string& v) {
+    original_model_name_ = v;
 }
 
-void location::model_name(const std::string&& v) {
-    model_name_ = std::move(v);
+void location::original_model_name(const std::string&& v) {
+    original_model_name_ = std::move(v);
 }
 
 const std::list<std::string>& location::external_module_path() const {
@@ -86,20 +86,20 @@ void location::external_module_path(const std::list<std::string>&& v) {
     external_module_path_ = std::move(v);
 }
 
-const std::list<std::string>& location::model_path() const {
-    return model_path_;
+const std::list<std::string>& location::model_module_path() const {
+    return model_module_path_;
 }
 
-std::list<std::string>& location::model_path() {
-    return model_path_;
+std::list<std::string>& location::model_module_path() {
+    return model_module_path_;
 }
 
-void location::model_path(const std::list<std::string>& v) {
-    model_path_ = v;
+void location::model_module_path(const std::list<std::string>& v) {
+    model_module_path_ = v;
 }
 
-void location::model_path(const std::list<std::string>&& v) {
-    model_path_ = std::move(v);
+void location::model_module_path(const std::list<std::string>&& v) {
+    model_module_path_ = std::move(v);
 }
 
 const std::list<std::string>& location::internal_module_path() const {

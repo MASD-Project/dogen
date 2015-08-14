@@ -19,7 +19,6 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/string.hpp>
@@ -30,6 +29,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/tack/serialization/name_ser.hpp"
+#include "dogen/tack/serialization/location_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -38,20 +38,18 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::tack::name& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("model_name", v.model_name_);
-    ar << make_nvp("external_module_path", v.external_module_path_);
-    ar << make_nvp("module_path", v.module_path_);
-    ar << make_nvp("simple_name", v.simple_name_);
+    ar << make_nvp("simple", v.simple_);
+    ar << make_nvp("qualified", v.qualified_);
+    ar << make_nvp("location", v.location_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::tack::name& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("model_name", v.model_name_);
-    ar >> make_nvp("external_module_path", v.external_module_path_);
-    ar >> make_nvp("module_path", v.module_path_);
-    ar >> make_nvp("simple_name", v.simple_name_);
+    ar >> make_nvp("simple", v.simple_);
+    ar >> make_nvp("qualified", v.qualified_);
+    ar >> make_nvp("location", v.location_);
 }
 
 } }

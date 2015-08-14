@@ -26,7 +26,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/tack/types/object.hpp"
 #include "dogen/tack/types/primitive.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack_json/types/hydration_error.hpp"
 #include "dogen/tack_json/types/hydrator.hpp"
 
@@ -83,21 +82,24 @@ hydrator::hydrator(const dynamic::workflow& w)
 
 boost::optional<tack::name>
 containing_module(tack::model& m, const tack::name& n) {
-    if (n.model_name().empty() || n.simple_name() == m.name().model_name()) {
+    if (n.location().original_model_name().empty() ||
+        n.simple() == m.name().location().original_model_name()) {
         BOOST_LOG_SEV(lg, debug) << "Type has no containing module: "
-                                 << tack::string_converter::convert(n);
+                                 << n.qualified();
         return boost::optional<tack::name>();
     }
 
     tack::name module_n;
-    module_n.model_name(n.model_name());
+    const auto omn(n.location().original_model_name());
+    module_n.location().original_model_name(n.location().original_model_name());
 
-    if (n.module_path().empty()) {
-        module_n.simple_name(n.model_name());
+    if (n.location().internal_module_path().empty()) {
+        module_n.simple(n.location().original_model_name());
     } else {
-        module_n.simple_name(n.module_path().back());
-        module_n.module_path(n.module_path());
-        module_n.module_path().pop_back();
+        module_n.simple(n.location().internal_module_path().back());
+        module_n.location().internal_module_path(
+            n.location().internal_module_path());
+        module_n.location().internal_module_path().pop_back();
     }
 
     const auto i(m.modules().find(module_n));
@@ -105,7 +107,7 @@ containing_module(tack::model& m, const tack::name& n) {
         return module_n;
 
     BOOST_LOG_SEV(lg, debug) << "Could not find containing module: "
-                             << tack::string_converter::convert(module_n);
+                             << module_n.qualified();
     return boost::optional<tack::name>();;
 }
 
@@ -121,23 +123,22 @@ update_containing_module(tack::model& m, AssociativeContainerOfContainable& c) {
 
         auto i(m.modules().find(*s.containing_module()));
         if (i == m.modules().end()) {
-            const auto sn(s.containing_module()->simple_name());
+            const auto sn(s.containing_module()->simple());
             BOOST_LOG_SEV(lg, error) << missing_module << sn;
             BOOST_THROW_EXCEPTION(hydration_error(missing_module + sn));
         }
 
         BOOST_LOG_SEV(lg, debug) << "Adding type to module. Type: '"
-                                 << tack::string_converter::convert(s.name())
-                                 << "' Module: '"
-                                 << tack::string_converter::convert(i->first);
+                                 << s.name().qualified()
+                                 << "' Module: '" << i->first.qualified();
         i->second.members().push_back(s.name());
     }
 }
 
 std::string hydrator::model_name(const tack::model& m) const {
-    if (m.name().model_name() == hardware_model_name)
+    if (m.name().location().original_model_name() == hardware_model_name)
         return empty;
-    return m.name().model_name();
+    return m.name().location().original_model_name();
 }
 
 tack::generation_types hydrator::generation_type(const bool is_target) const {
@@ -154,14 +155,14 @@ void hydrator::read_module_path(const boost::property_tree::ptree& pt,
 
     for (auto j(i->second.begin()); j != i->second.end(); ++j) {
         const auto module_name(j->second.get_value<std::string>());
-        n.module_path().push_back(module_name);
+        n.location().internal_module_path().push_back(module_name);
 
         tack::name module_n;
-        module_n.simple_name(module_name);
-        module_n.model_name(model_name(m));
-        auto mp(n.module_path());
+        module_n.simple(module_name);
+        module_n.location().original_model_name(model_name(m));
+        auto mp(n.location().internal_module_path());
         mp.pop_back();
-        module_n.module_path(mp);
+        module_n.location().internal_module_path(mp);
 
         const auto i(m.modules().find(module_n));
         if (i == m.modules().end()) {
@@ -194,17 +195,16 @@ create_dynamic_extensions(const boost::property_tree::ptree& pt,
 void hydrator::
 read_element(const boost::property_tree::ptree& pt, tack::model& m) const {
     tack::name n;
-    n.model_name(model_name(m));
+    n.location().original_model_name(model_name(m));
     read_module_path(pt, m, n);
 
     const auto simple_name_value(pt.get<std::string>(simple_name_key));
-    n.simple_name(simple_name_value);
+    n.simple(simple_name_value);
 
     const auto documentation(pt.get_optional<std::string>(documentation_key));
 
     const auto lambda([&](tack::type& t) {
-            BOOST_LOG_SEV(lg, debug) << "Processing type: "
-                                     << tack::string_converter::convert(n);
+            BOOST_LOG_SEV(lg, debug) << "Processing type: " << n.qualified();
             t.name(n);
             t.origin_type(m.origin_type());
             t.generation_type(m.generation_type());
@@ -244,9 +244,9 @@ tack::model hydrator::read_stream(std::istream& s, const bool is_target) const {
     ptree pt;
     read_json(s, pt);
 
-    r.name().model_name(pt.get<std::string>(model_name_key));
-    BOOST_LOG_SEV(lg, debug) << "Processing model: "
-                             << tack::string_converter::convert(r.name());
+    r.name().location().original_model_name(
+        pt.get<std::string>(model_name_key));
+    BOOST_LOG_SEV(lg, debug) << "Processing model: " << r.name().qualified();
 
     read_module_path(pt, r, r.name());
     const auto scope(dynamic::scope_types::root_module);
@@ -268,8 +268,9 @@ tack::model hydrator::read_stream(std::istream& s, const bool is_target) const {
 
     if (!model_name(r).empty()) {
         tack::module m;
-        m.name().simple_name(r.name().model_name());
-        m.name().model_name(r.name().model_name());
+        const auto omn(r.name().location().original_model_name());
+        m.name().simple(omn);
+        m.name().location().original_model_name(omn);
         m.origin_type(r.origin_type());
         m.generation_type(r.generation_type());
         r.modules().insert(std::make_pair(m.name(), m));

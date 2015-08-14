@@ -25,7 +25,6 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/cpp/types/settings/aspect_settings_factory.hpp"
 #include "dogen/cpp/io/formattables/includers_info_io.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
@@ -141,9 +140,10 @@ tack::name factory::create_name(const tack::model& m,
     const std::string& simple_name) const {
 
     tack::name r;
-    r.simple_name(simple_name);
-    r.model_name(m.name().model_name());
-    r.external_module_path(m.name().external_module_path());
+    r.simple(simple_name);
+    r.location().original_model_name(m.name().location().original_model_name());
+    r.location().external_module_path(
+        m.name().location().external_module_path());
     return r;
 }
 
@@ -170,9 +170,9 @@ bool factory::is_enabled(const formatter_properties_repository& fprp,
 
     const auto i(fprp.formatter_properties_by_name().find(n));
     if (i == fprp.formatter_properties_by_name().end()) {
-        const auto sn(tack::string_converter::convert(n));
-        BOOST_LOG_SEV(lg, error) << properties_not_found << sn;
-        BOOST_THROW_EXCEPTION(building_error(properties_not_found + sn));
+        const auto qn(n.qualified());
+        BOOST_LOG_SEV(lg, error) << properties_not_found << qn;
+        BOOST_THROW_EXCEPTION(building_error(properties_not_found + qn));
     }
 
     const auto j(i->second.find(formatter_name));
@@ -196,8 +196,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     const tack::model& m) const {
 
     const auto n(create_name(m, registrar_name));
-    BOOST_LOG_SEV(lg, debug) << "Making registrar: "
-                             << tack::string_converter::convert(n);
+    BOOST_LOG_SEV(lg, debug) << "Making registrar: " << n.qualified();
 
     name_builder b;
     auto r(std::make_shared<registrar_info>());
@@ -213,9 +212,9 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     */
     const auto i(brp.bundles_by_name().find(n));
     if (i == brp.bundles_by_name().end()) {
-        const auto sn(tack::string_converter::convert(n));
-        BOOST_LOG_SEV(lg, error) << bundle_not_found_for_name << sn;
-        BOOST_THROW_EXCEPTION(building_error(bundle_not_found_for_name + sn));
+        const auto qn(n.qualified());
+        BOOST_LOG_SEV(lg, error) << bundle_not_found_for_name << qn;
+        BOOST_THROW_EXCEPTION(building_error(bundle_not_found_for_name + qn));
     }
     r->settings(i->second);
 
@@ -254,9 +253,9 @@ std::shared_ptr<formattable> factory::make_registrar_info(
 
     const auto j(fprp.formatter_properties_by_name().find(n));
     if (j == fprp.formatter_properties_by_name().end()) {
-        const auto sn(tack::string_converter::convert(n));
-        BOOST_LOG_SEV(lg, error) << properties_not_found << sn;
-        BOOST_THROW_EXCEPTION(building_error(properties_not_found + sn));
+        const auto qn(n.qualified());
+        BOOST_LOG_SEV(lg, error) << properties_not_found << qn;
+        BOOST_THROW_EXCEPTION(building_error(properties_not_found + qn));
 
     }
 
@@ -268,30 +267,8 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     }
     fp2.inclusion_dependencies(k->second.inclusion_dependencies());
 
-    /*    using ic = formatters::inclusion_constants;
-    auto& id(fp2.inclusion_dependencies());
-
-    if (!sb.aspect_settings().disable_xml_serialization()) {
-        id.push_back(ic::boost::archive::xml_iarchive());
-        id.push_back(ic::boost::archive::xml_oarchive());
-    }
-
-    id.push_back(ic::boost::archive::text_iarchive());
-    id.push_back(ic::boost::archive::text_oarchive());
-    id.push_back(ic::boost::archive::binary_iarchive());
-    id.push_back(ic::boost::archive::binary_oarchive());
-    id.push_back(ic::boost::archive::polymorphic_iarchive());
-    id.push_back(ic::boost::archive::polymorphic_oarchive());
-
-    if (!sb.aspect_settings().disable_eos_serialization()) {
-        id.push_back(ic::eos::portable_iarchive());
-        id.push_back(ic::eos::portable_oarchive());
-        }
-    */
     r->formatter_properties().insert(std::make_pair(ri_fn, fp2));
-
-    BOOST_LOG_SEV(lg, debug) << "Made registrar: "
-                             << tack::string_converter::convert(n);
+    BOOST_LOG_SEV(lg, debug) << "Made registrar: " << n.qualified();
     return r;
 }
 
@@ -308,20 +285,20 @@ make_includers(
     const tack::model& m) const {
 
     const auto n(create_name(m, includers_name));
-    BOOST_LOG_SEV(lg, debug) << "Making includers: "
-                             << tack::string_converter::convert(n);
+    BOOST_LOG_SEV(lg, debug) << "Making includers: " << n.qualified();
 
     std::unordered_map<std::string, std::list<std::string> >
         includes_by_formatter_name;
 
+    const auto omn(m.name().location().original_model_name());
     const auto registrar_n(create_name(m, registrar_name));
     for (const auto& n_pair : pdrp.path_derivatives_by_name()) {
         const auto n(n_pair.first);
 
-        if (n.model_name() != m.name().model_name())
+        if (n.location().original_model_name() != omn)
             continue;
 
-        if (n.model_name().empty() && n.simple_name().empty())
+        if (n.location().original_model_name().empty() && n.simple().empty())
             continue;
 
         if (m.concepts().find(n) != m.concepts().end())
@@ -414,8 +391,7 @@ make_includers(
     r.push_front(inc);
     BOOST_LOG_SEV(lg, debug) << "Includer: " << *inc;
 
-    BOOST_LOG_SEV(lg, debug) << "Made includers: "
-                             << tack::string_converter::convert(n);
+    BOOST_LOG_SEV(lg, debug) << "Made includers: " << n.qualified();
 
     return r;
 }
@@ -436,14 +412,14 @@ make_cmakelists(const config::cpp_options& opts,
 
     BOOST_LOG_SEV(lg, debug) << "Generating source CMakeLists.";
     auto cm(std::make_shared<cmakelists_info>());
-    cm->model_name(m.name().model_name());
+    cm->model_name(m.name().location().original_model_name());
     cm->file_name(cmakelists_name);
 
     const auto gs(gsf.make(cmake_modeline_name, root_object));
     cm->general_settings(gs);
 
-    if (!m.name().external_module_path().empty())
-        cm->product_name(m.name().external_module_path().front());
+    if (!m.name().location().external_module_path().empty())
+        cm->product_name(m.name().location().external_module_path().front());
 
     using namespace formatters::types;
     const auto ch_fn(traits::class_header_formatter_name());
@@ -455,11 +431,12 @@ make_cmakelists(const config::cpp_options& opts,
                 settings_not_found_for_formatter + ch_fn));
     }
 
+    const auto omn(m.name().location().original_model_name());
     cm->source_file_path(opts.project_directory_path() /
-        m.name().model_name() / i->second.source_directory_name() /
+        omn / i->second.source_directory_name() /
         cmakelists_name);
     cm->include_file_path(opts.project_directory_path() /
-        m.name().model_name() / cmakelists_name);
+        omn / cmakelists_name);
 
     const auto odb_ch_fn(
         formatters::odb::traits::class_header_formatter_name());
@@ -496,7 +473,7 @@ factory::make_odb_options(const config::cpp_options& opts,
 
     auto r(std::make_shared<odb_options_info>());
     r->file_name(odb_options_name);
-    r->model_name(m.name().model_name());
+    r->model_name(m.name().location().original_model_name());
 
     const auto gs(gsf.make(odb_modeline_name, root_object));
     r->general_settings(gs);
@@ -511,13 +488,15 @@ factory::make_odb_options(const config::cpp_options& opts,
     r->odb_folder(i->second.facet_directory());
 
     boost::filesystem::path fp;
-    fp = opts.project_directory_path() / m.name().model_name();
+    fp = opts.project_directory_path() /
+        m.name().location().original_model_name();
     fp /= i->second.source_directory_name();
     fp /= odb_options_name;
     r->file_path(fp);
 
-    if (!m.name().external_module_path().empty())
-        r->product_name(m.name().external_module_path().front());
+    const auto epp(m.name().location().external_module_path());
+    if (!epp.empty())
+        r->product_name(epp.front());
 
     return r;
 }

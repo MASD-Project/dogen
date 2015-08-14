@@ -29,12 +29,10 @@
 #include "dogen/tack/types/object.hpp"
 #include "dogen/tack/io/object_io.hpp"
 #include "dogen/tack/types/injection_error.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/test/mock_model_factory.hpp"
 #include "dogen/tack/types/injector.hpp"
 
 using dogen::tack::relationship_types;
-using dogen::tack::string_converter;
 using dogen::tack::object_types;
 
 namespace {
@@ -80,9 +78,9 @@ BOOST_AUTO_TEST_CASE(single_type_model_results_in_adding_only_global_module) {
     BOOST_CHECK(a.objects().size() == 1);
     BOOST_CHECK(a.modules().size() == 1);
 
-    const auto qn(a.modules().begin()->first);
+    const auto n(a.modules().begin()->first);
     BOOST_REQUIRE(a.objects().begin()->second.containing_module());
-    BOOST_REQUIRE(*a.objects().begin()->second.containing_module() == qn);
+    BOOST_REQUIRE(*a.objects().begin()->second.containing_module() == n);
     BOOST_CHECK(a.primitives().empty());
     BOOST_CHECK(a.enumerations().empty());
     BOOST_CHECK(a.concepts().empty());
@@ -108,11 +106,10 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     auto m(factory.object_with_parent_in_the_same_model());
     BOOST_REQUIRE(m.objects().size() == 2);
     for (auto& pair : m.objects()) {
-        const auto& qn(pair.first);
-        if (factory.is_type_name_n(1, qn)) {
+        const auto& n(pair.first);
+        if (factory.is_type_name_n(1, n)) {
             auto& ao(pair.second);
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
             ao.is_visitable(true);
         }
     }
@@ -125,15 +122,13 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     BOOST_CHECK(m.objects().size() == 3);
     bool type_one(false), visitor(false);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
-        if (factory.is_type_name_n(1, qn)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
+        const auto& n(pair.first);
+        if (factory.is_type_name_n(1, n)) {
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
             type_one = true;
-        } else if (factory.is_type_name_n_visitor(1, qn)) {
+        } else if (factory.is_type_name_n_visitor(1, n)) {
             visitor = true;
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
 
             const auto& o(pair.second);
             BOOST_CHECK(o.object_type() == object_types::visitor);

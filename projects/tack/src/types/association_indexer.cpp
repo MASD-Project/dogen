@@ -23,7 +23,6 @@
 #include <boost/lexical_cast.hpp>
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/types/indexing_error.hpp"
 #include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/io/relationship_types_io.hpp"
@@ -86,9 +85,9 @@ void association_indexer::recurse_nested_names(const model& m,
 
     const auto k(m.objects().find(n));
     if (k == m.objects().end()) {
-        const auto sn(string_converter::convert(n));
-        BOOST_LOG_SEV(lg, error) << object_not_found << sn;
-        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + sn));
+        const auto qn(n.qualified());
+        BOOST_LOG_SEV(lg, error) << object_not_found << qn;
+        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
     }
 
     const auto sp(object_types::smart_pointer);
@@ -106,8 +105,7 @@ void association_indexer::recurse_nested_names(const model& m,
 }
 
 void association_indexer::index_object(const model& m, object& o) const {
-    BOOST_LOG_SEV(lg, debug) << "Indexing object: "
-                             << string_converter::convert(o.name());
+    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().qualified();
 
     for (const auto& p : o.local_properties()) {
         const auto nn(p.type());

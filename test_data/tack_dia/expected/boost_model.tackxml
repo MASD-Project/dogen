@@ -11,80 +11,108 @@
 		</fields>
 	</extensions>
 	<name class_id="9" tracking_level="0" version="0">
-		<model_name>boost_model</model_name>
-		<external_module_path class_id="10" tracking_level="0" version="0">
-			<count>0</count>
-			<item_version>0</item_version>
-		</external_module_path>
-		<module_path>
-			<count>0</count>
-			<item_version>0</item_version>
-		</module_path>
-		<simple_name>boost_model</simple_name>
+		<simple>boost_model</simple>
+		<qualified></qualified>
+		<location class_id="10" tracking_level="0" version="0">
+			<original_model_name>boost_model</original_model_name>
+			<external_module_path class_id="11" tracking_level="0" version="0">
+				<count>0</count>
+				<item_version>0</item_version>
+			</external_module_path>
+			<model_module_path>
+				<count>0</count>
+				<item_version>0</item_version>
+			</model_module_path>
+			<internal_module_path>
+				<count>0</count>
+				<item_version>0</item_version>
+			</internal_module_path>
+		</location>
 	</name>
 	<generation_type>0</generation_type>
 	<origin_type>1</origin_type>
-	<containing_module class_id="11" tracking_level="0" version="0">
+	<containing_module class_id="12" tracking_level="0" version="0">
 		<initialized>0</initialized>
 	</containing_module>
-	<references class_id="12" tracking_level="0" version="0">
+	<references class_id="13" tracking_level="0" version="0">
 		<count>2</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="13" tracking_level="0" version="0">
+		<item class_id="14" tracking_level="0" version="0">
 			<first>
-				<model_name>std</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<simple_name></simple_name>
+				<simple></simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>std</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
 			</first>
 			<second>3</second>
 		</item>
 		<item>
 			<first>
-				<model_name>boost</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<simple_name></simple_name>
+				<simple></simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>boost</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
 			</first>
 			<second>3</second>
 		</item>
 	</references>
-	<leaves class_id="14" tracking_level="0" version="0">
+	<leaves class_id="15" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
-	<modules class_id="15" tracking_level="0" version="0">
+	<modules class_id="16" tracking_level="0" version="0">
 		<count>2</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="16" tracking_level="0" version="0">
+		<item class_id="17" tracking_level="0" version="0">
 			<first>
-				<model_name>boost_model</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<simple_name>pkg1</simple_name>
+				<simple>pkg1</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>boost_model</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
 			</first>
-			<second class_id="17" tracking_level="0" version="0">
+			<second class_id="18" tracking_level="0" version="0">
 				<documentation></documentation>
 				<extensions>
 					<fields>
@@ -94,16 +122,23 @@
 					</fields>
 				</extensions>
 				<name>
-					<model_name>boost_model</model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</module_path>
-					<simple_name>pkg1</simple_name>
+					<simple>pkg1</simple>
+					<qualified></qualified>
+					<location>
+						<original_model_name>boost_model</original_model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<model_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</model_module_path>
+						<internal_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</internal_module_path>
+					</location>
 				</name>
 				<generation_type>1</generation_type>
 				<origin_type>1</origin_type>
@@ -111,49 +146,70 @@
 					<initialized>1</initialized>
 					<item_version>0</item_version>
 					<value>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>boost_model</simple_name>
+						<simple>boost_model</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</value>
 				</containing_module>
-				<members class_id="18" tracking_level="0" version="0">
+				<members class_id="19" tracking_level="0" version="0">
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>pkg1</item>
-						</module_path>
-						<simple_name>class_c</simple_name>
+						<simple>class_c</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>pkg1</item>
+							</internal_module_path>
+						</location>
 					</item>
 				</members>
 			</second>
 		</item>
 		<item>
 			<first>
-				<model_name>boost_model</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<simple_name>boost_model</simple_name>
+				<simple>boost_model</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>boost_model</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
 			</first>
 			<second>
 				<documentation></documentation>
@@ -162,12 +218,12 @@
 						<count>3</count>
 						<bucket_count>11</bucket_count>
 						<item_version>0</item_version>
-						<item class_id="19" tracking_level="0" version="0">
+						<item class_id="20" tracking_level="0" version="0">
 							<first>dia.comment</first>
-							<second class_id="20" tracking_level="0" version="0">
-								<value class_id="21" tracking_level="0" version="1">
+							<second class_id="21" tracking_level="0" version="0">
+								<value class_id="22" tracking_level="0" version="1">
 									<px class_id="1" tracking_level="1" version="0" object_id="_0">
-										<value class_id="22" tracking_level="0" version="0"></value>
+										<value class_id="23" tracking_level="0" version="0"></value>
 										<content>true</content>
 									</px>
 								</value>
@@ -198,16 +254,23 @@
 					</fields>
 				</extensions>
 				<name>
-					<model_name>boost_model</model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</module_path>
-					<simple_name>boost_model</simple_name>
+					<simple>boost_model</simple>
+					<qualified></qualified>
+					<location>
+						<original_model_name>boost_model</original_model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<model_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</model_module_path>
+						<internal_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</internal_module_path>
+					</location>
 				</name>
 				<generation_type>1</generation_type>
 				<origin_type>1</origin_type>
@@ -218,175 +281,259 @@
 					<count>11</count>
 					<item_version>0</item_version>
 					<item>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>class_b</simple_name>
+						<simple>class_b</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</item>
 					<item>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>class_a</simple_name>
+						<simple>class_a</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</item>
 					<item>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>pkg1</simple_name>
+						<simple>pkg1</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</item>
 					<item>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>class_base</simple_name>
+						<simple>class_base</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</item>
 					<item>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>class_derived</simple_name>
+						<simple>class_derived</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</item>
 					<item>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>class_d</simple_name>
+						<simple>class_d</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</item>
 					<item>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>some_service</simple_name>
+						<simple>some_service</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</item>
 					<item>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>class_e</simple_name>
+						<simple>class_e</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</item>
 					<item>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>class_f</simple_name>
+						<simple>class_f</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</item>
 					<item>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>class_g</simple_name>
+						<simple>class_g</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</item>
 					<item>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>class_h</simple_name>
+						<simple>class_h</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</item>
 				</members>
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="23" tracking_level="0" version="0">
+	<concepts class_id="24" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="24" tracking_level="0" version="0">
+	<primitives class_id="25" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="25" tracking_level="0" version="0">
+	<enumerations class_id="26" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="26" tracking_level="0" version="0">
+	<objects class_id="27" tracking_level="0" version="0">
 		<count>11</count>
 		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="27" tracking_level="0" version="0">
+		<item class_id="28" tracking_level="0" version="0">
 			<first>
-				<model_name>boost_model</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<simple_name>class_b</simple_name>
+				<simple>class_a</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>boost_model</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
 			</first>
 			<second class_id="4" tracking_level="1" version="0" object_id="_3">
-				<type class_id="28" tracking_level="0" version="0">
+				<type class_id="29" tracking_level="0" version="0">
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -396,16 +543,23 @@
 						</fields>
 					</extensions>
 					<name>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>class_b</simple_name>
+						<simple>class_a</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -413,27 +567,34 @@
 						<initialized>1</initialized>
 						<item_version>0</item_version>
 						<value>
-							<model_name>boost_model</model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</module_path>
-							<simple_name>boost_model</simple_name>
+							<simple>boost_model</simple>
+							<qualified></qualified>
+							<location>
+								<original_model_name>boost_model</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
 						</value>
 					</containing_module>
 				</type>
-				<all_properties class_id="29" tracking_level="0" version="0">
+				<all_properties class_id="30" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_properties>
 				<local_properties>
-					<count>7</count>
+					<count>1</count>
 					<item_version>0</item_version>
-					<item class_id="30" tracking_level="0" version="0">
+					<item class_id="31" tracking_level="0" version="0">
 						<documentation></documentation>
 						<extensions>
 							<fields>
@@ -443,404 +604,27 @@
 							</fields>
 						</extensions>
 						<name>prop_0</name>
-						<type class_id="31" tracking_level="0" version="0">
+						<type class_id="32" tracking_level="0" version="0">
 							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>shared_ptr</simple_name>
-							</type>
-							<children class_id="32" tracking_level="0" version="0">
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>class_a</simple_name>
-									</type>
-									<children>
+								<simple>unsigned int</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name></original_model_name>
+									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_1</name>
-						<type>
-							<type>
-								<model_name>std</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>vector</simple_name>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name>boost</model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>shared_ptr</simple_name>
-									</type>
-									<children>
-										<count>1</count>
-										<item_version>0</item_version>
-										<item>
-											<type>
-												<model_name></model_name>
-												<external_module_path>
-													<count>0</count>
-													<item_version>0</item_version>
-												</external_module_path>
-												<module_path>
-													<count>0</count>
-													<item_version>0</item_version>
-												</module_path>
-												<simple_name>class_a</simple_name>
-											</type>
-											<children>
-												<count>0</count>
-												<item_version>0</item_version>
-											</children>
-											<is_pointer>0</is_pointer>
-										</item>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_2</name>
-						<type>
-							<type>
-								<model_name>std</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>unordered_map</simple_name>
-							</type>
-							<children>
-								<count>2</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>int</simple_name>
-									</type>
-									<children>
+									</external_module_path>
+									<model_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-								<item>
-									<type>
-										<model_name>boost</model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>shared_ptr</simple_name>
-									</type>
-									<children>
-										<count>1</count>
-										<item_version>0</item_version>
-										<item>
-											<type>
-												<model_name></model_name>
-												<external_module_path>
-													<count>0</count>
-													<item_version>0</item_version>
-												</external_module_path>
-												<module_path>
-													<count>0</count>
-													<item_version>0</item_version>
-												</module_path>
-												<simple_name>class_a</simple_name>
-											</type>
-											<children>
-												<count>0</count>
-												<item_version>0</item_version>
-											</children>
-											<is_pointer>0</is_pointer>
-										</item>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_3</name>
-						<type>
-							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>shared_ptr</simple_name>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name>boost_model</model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>1</count>
-											<item_version>0</item_version>
-											<item>pkg1</item>
-										</module_path>
-										<simple_name>class_c</simple_name>
-									</type>
-									<children>
+									</model_module_path>
+									<internal_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_4</name>
-						<type>
-							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>shared_ptr</simple_name>
+									</internal_module_path>
+								</location>
 							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>class_base</simple_name>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_5</name>
-						<type>
-							<type>
-								<model_name>std</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>vector</simple_name>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name>boost</model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>shared_ptr</simple_name>
-									</type>
-									<children>
-										<count>1</count>
-										<item_version>0</item_version>
-										<item>
-											<type>
-												<model_name></model_name>
-												<external_module_path>
-													<count>0</count>
-													<item_version>0</item_version>
-												</external_module_path>
-												<module_path>
-													<count>0</count>
-													<item_version>0</item_version>
-												</module_path>
-												<simple_name>class_base</simple_name>
-											</type>
-											<children>
-												<count>0</count>
-												<item_version>0</item_version>
-											</children>
-											<is_pointer>0</is_pointer>
-										</item>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_6</name>
-						<type>
-							<type>
-								<model_name>boost_model</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>pkg1</item>
-								</module_path>
-								<simple_name>class_c</simple_name>
-							</type>
-							<children>
+							<children class_id="33" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -850,7 +634,7 @@
 						<is_fluent>0</is_fluent>
 					</item>
 				</local_properties>
-				<inherited_properties class_id="33" tracking_level="0" version="0">
+				<inherited_properties class_id="34" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
@@ -861,7 +645,7 @@
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships class_id="34" tracking_level="0" version="0">
+				<relationships class_id="35" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
@@ -872,16 +656,23 @@
 		</item>
 		<item>
 			<first>
-				<model_name>boost_model</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<simple_name>class_a</simple_name>
+				<simple>class_base</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>boost_model</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
 			</first>
 			<second object_id="_4">
 				<type>
@@ -894,16 +685,23 @@
 						</fields>
 					</extensions>
 					<name>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>class_a</simple_name>
+						<simple>class_base</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -911,16 +709,23 @@
 						<initialized>1</initialized>
 						<item_version>0</item_version>
 						<value>
-							<model_name>boost_model</model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</module_path>
-							<simple_name>boost_model</simple_name>
+							<simple>boost_model</simple>
+							<qualified></qualified>
+							<location>
+								<original_model_name>boost_model</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
 						</value>
 					</containing_module>
 				</type>
@@ -943,582 +748,23 @@
 						<name>prop_0</name>
 						<type>
 							<type>
-								<model_name></model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>unsigned int</simple_name>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>11</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>11</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>boost_model</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<simple_name>class_f</simple_name>
-			</first>
-			<second object_id="_5">
-				<type>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>11</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>class_f</simple_name>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<model_name>boost_model</model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</module_path>
-							<simple_name>boost_model</simple_name>
-						</value>
-					</containing_module>
-				</type>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>6</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_0</name>
-						<type>
-							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>gregorian</item>
-								</module_path>
-								<simple_name>date</simple_name>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_1</name>
-						<type>
-							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>posix_time</item>
-								</module_path>
-								<simple_name>ptime</simple_name>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_2</name>
-						<type>
-							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>posix_time</item>
-								</module_path>
-								<simple_name>time_duration</simple_name>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_3</name>
-						<type>
-							<type>
-								<model_name>std</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>list</simple_name>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name>boost</model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>1</count>
-											<item_version>0</item_version>
-											<item>gregorian</item>
-										</module_path>
-										<simple_name>date</simple_name>
-									</type>
-									<children>
+								<simple>int</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name></original_model_name>
+									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_4</name>
-						<type>
-							<type>
-								<model_name>std</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>list</simple_name>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name>boost</model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>1</count>
-											<item_version>0</item_version>
-											<item>posix_time</item>
-										</module_path>
-										<simple_name>ptime</simple_name>
-									</type>
-									<children>
+									</external_module_path>
+									<model_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_5</name>
-						<type>
-							<type>
-								<model_name>std</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>list</simple_name>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name>boost</model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>1</count>
-											<item_version>0</item_version>
-											<item>posix_time</item>
-										</module_path>
-										<simple_name>time_duration</simple_name>
-									</type>
-									<children>
+									</model_module_path>
+									<internal_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>11</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>11</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>boost_model</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<simple_name>class_h</simple_name>
-			</first>
-			<second object_id="_6">
-				<type>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>11</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>class_h</simple_name>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<model_name>boost_model</model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</module_path>
-							<simple_name>boost_model</simple_name>
-						</value>
-					</containing_module>
-				</type>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_0</name>
-						<type>
-							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>property_tree</item>
-								</module_path>
-								<simple_name>ptree</simple_name>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>11</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>11</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>boost_model</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<simple_name>class_base</simple_name>
-			</first>
-			<second object_id="_7">
-				<type>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>11</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>class_base</simple_name>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<model_name>boost_model</model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</module_path>
-							<simple_name>boost_model</simple_name>
-						</value>
-					</containing_module>
-				</type>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_0</name>
-						<type>
-							<type>
-								<model_name></model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>int</simple_name>
+									</internal_module_path>
+								</location>
 							</type>
 							<children>
 								<count>0</count>
@@ -1552,18 +798,25 @@
 		</item>
 		<item>
 			<first>
-				<model_name>boost_model</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<simple_name>class_derived</simple_name>
+				<simple>class_b</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>boost_model</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
 			</first>
-			<second object_id="_8">
+			<second object_id="_5">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -1574,16 +827,23 @@
 						</fields>
 					</extensions>
 					<name>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>class_derived</simple_name>
+						<simple>class_b</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -1591,16 +851,23 @@
 						<initialized>1</initialized>
 						<item_version>0</item_version>
 						<value>
-							<model_name>boost_model</model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</module_path>
-							<simple_name>boost_model</simple_name>
+							<simple>boost_model</simple>
+							<qualified></qualified>
+							<location>
+								<original_model_name>boost_model</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
 						</value>
 					</containing_module>
 				</type>
@@ -1609,140 +876,7 @@
 					<item_version>0</item_version>
 				</all_properties>
 				<local_properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_1</name>
-						<type>
-							<type>
-								<model_name></model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>int</simple_name>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>11</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>1</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>1</count>
-					<bucket_count>11</bucket_count>
-					<item_version>0</item_version>
-					<item class_id="35" tracking_level="0" version="0">
-						<first>2</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>boost_model</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>class_base</simple_name>
-							</item>
-						</second>
-					</item>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<model_name>boost_model</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<simple_name>class_d</simple_name>
-			</first>
-			<second object_id="_9">
-				<type>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>11</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>class_d</simple_name>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<model_name>boost_model</model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</module_path>
-							<simple_name>boost_model</simple_name>
-						</value>
-					</containing_module>
-				</type>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>4</count>
+					<count>7</count>
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
@@ -1756,32 +890,46 @@
 						<name>prop_0</name>
 						<type>
 							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>optional</simple_name>
+								<simple>shared_ptr</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
 							</type>
 							<children>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
 									<type>
-										<model_name></model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>int</simple_name>
+										<simple>class_a</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name></original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
 									</type>
 									<children>
 										<count>0</count>
@@ -1807,32 +955,762 @@
 						<name>prop_1</name>
 						<type>
 							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>optional</simple_name>
+								<simple>vector</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>std</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
 							</type>
 							<children>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
 									<type>
-										<model_name></model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>class_a</simple_name>
+										<simple>shared_ptr</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name>boost</original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>
+											<type>
+												<simple>class_a</simple>
+												<qualified></qualified>
+												<location>
+													<original_model_name></original_model_name>
+													<external_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</external_module_path>
+													<model_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</model_module_path>
+													<internal_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</internal_module_path>
+												</location>
+											</type>
+											<children>
+												<count>0</count>
+												<item_version>0</item_version>
+											</children>
+											<is_pointer>0</is_pointer>
+										</item>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_2</name>
+						<type>
+							<type>
+								<simple>unordered_map</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>std</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<simple>int</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name></original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+								<item>
+									<type>
+										<simple>shared_ptr</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name>boost</original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>
+											<type>
+												<simple>class_a</simple>
+												<qualified></qualified>
+												<location>
+													<original_model_name></original_model_name>
+													<external_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</external_module_path>
+													<model_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</model_module_path>
+													<internal_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</internal_module_path>
+												</location>
+											</type>
+											<children>
+												<count>0</count>
+												<item_version>0</item_version>
+											</children>
+											<is_pointer>0</is_pointer>
+										</item>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_3</name>
+						<type>
+							<type>
+								<simple>shared_ptr</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<simple>class_c</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name>boost_model</original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>1</count>
+												<item_version>0</item_version>
+												<item>pkg1</item>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_4</name>
+						<type>
+							<type>
+								<simple>shared_ptr</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<simple>class_base</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name></original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_5</name>
+						<type>
+							<type>
+								<simple>vector</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>std</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<simple>shared_ptr</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name>boost</original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>
+											<type>
+												<simple>class_base</simple>
+												<qualified></qualified>
+												<location>
+													<original_model_name></original_model_name>
+													<external_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</external_module_path>
+													<model_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</model_module_path>
+													<internal_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</internal_module_path>
+												</location>
+											</type>
+											<children>
+												<count>0</count>
+												<item_version>0</item_version>
+											</children>
+											<is_pointer>0</is_pointer>
+										</item>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_6</name>
+						<type>
+							<type>
+								<simple>class_c</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost_model</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>pkg1</item>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>11</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>11</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>class_e</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>boost_model</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_6">
+				<type>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>class_e</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<simple>boost_model</simple>
+							<qualified></qualified>
+							<location>
+								<original_model_name>boost_model</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
+						</value>
+					</containing_module>
+				</type>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>4</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_0</name>
+						<type>
+							<type>
+								<simple>variant</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<simple>int</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name></original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+								<item>
+									<type>
+										<simple>double</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name></original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_1</name>
+						<type>
+							<type>
+								<simple>variant</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>3</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<simple>int</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name></original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+								<item>
+									<type>
+										<simple>class_derived</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name></original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+								<item>
+									<type>
+										<simple>double</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name></original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
 									</type>
 									<children>
 										<count>0</count>
@@ -1858,33 +1736,892 @@
 						<name>prop_2</name>
 						<type>
 							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>optional</simple_name>
+								<simple>vector</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>std</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
 							</type>
 							<children>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
 									<type>
-										<model_name>boost_model</model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>1</count>
-											<item_version>0</item_version>
-											<item>pkg1</item>
-										</module_path>
-										<simple_name>class_c</simple_name>
+										<simple>variant</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name>boost</original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>3</count>
+										<item_version>0</item_version>
+										<item>
+											<type>
+												<simple>int</simple>
+												<qualified></qualified>
+												<location>
+													<original_model_name></original_model_name>
+													<external_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</external_module_path>
+													<model_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</model_module_path>
+													<internal_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</internal_module_path>
+												</location>
+											</type>
+											<children>
+												<count>0</count>
+												<item_version>0</item_version>
+											</children>
+											<is_pointer>0</is_pointer>
+										</item>
+										<item>
+											<type>
+												<simple>class_derived</simple>
+												<qualified></qualified>
+												<location>
+													<original_model_name></original_model_name>
+													<external_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</external_module_path>
+													<model_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</model_module_path>
+													<internal_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</internal_module_path>
+												</location>
+											</type>
+											<children>
+												<count>0</count>
+												<item_version>0</item_version>
+											</children>
+											<is_pointer>0</is_pointer>
+										</item>
+										<item>
+											<type>
+												<simple>double</simple>
+												<qualified></qualified>
+												<location>
+													<original_model_name></original_model_name>
+													<external_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</external_module_path>
+													<model_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</model_module_path>
+													<internal_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</internal_module_path>
+												</location>
+											</type>
+											<children>
+												<count>0</count>
+												<item_version>0</item_version>
+											</children>
+											<is_pointer>0</is_pointer>
+										</item>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_3</name>
+						<type>
+							<type>
+								<simple>variant</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>3</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<simple>int</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name></original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+								<item>
+									<type>
+										<simple>string</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name>std</original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+								<item>
+									<type>
+										<simple>char</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name></original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>11</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>11</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>class_c</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>boost_model</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>pkg1</item>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_7">
+				<type>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>class_c</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>pkg1</item>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<simple>pkg1</simple>
+							<qualified></qualified>
+							<location>
+								<original_model_name>boost_model</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
+						</value>
+					</containing_module>
+				</type>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>2</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_0</name>
+						<type>
+							<type>
+								<simple>int</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name></original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_1</name>
+						<type>
+							<type>
+								<simple>vector</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>std</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<simple>class_a</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name></original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>11</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>11</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>class_h</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>boost_model</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_8">
+				<type>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>class_h</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<simple>boost_model</simple>
+							<qualified></qualified>
+							<location>
+								<original_model_name>boost_model</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
+						</value>
+					</containing_module>
+				</type>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_0</name>
+						<type>
+							<type>
+								<simple>ptree</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>property_tree</item>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>11</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>11</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>class_d</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>boost_model</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_9">
+				<type>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>11</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>class_d</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<simple>boost_model</simple>
+							<qualified></qualified>
+							<location>
+								<original_model_name>boost_model</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
+						</value>
+					</containing_module>
+				</type>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>4</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_0</name>
+						<type>
+							<type>
+								<simple>optional</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<simple>int</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name></original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_1</name>
+						<type>
+							<type>
+								<simple>optional</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<simple>class_a</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name></original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_2</name>
+						<type>
+							<type>
+								<simple>optional</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<simple>class_c</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name>boost_model</original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>1</count>
+												<item_version>0</item_version>
+												<item>pkg1</item>
+											</internal_module_path>
+										</location>
 									</type>
 									<children>
 										<count>0</count>
@@ -1910,48 +2647,69 @@
 						<name>prop_3</name>
 						<type>
 							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>optional</simple_name>
+								<simple>optional</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
 							</type>
 							<children>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
 									<type>
-										<model_name>std</model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>vector</simple_name>
+										<simple>vector</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name>std</original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
 									</type>
 									<children>
 										<count>1</count>
 										<item_version>0</item_version>
 										<item>
 											<type>
-												<model_name></model_name>
-												<external_module_path>
-													<count>0</count>
-													<item_version>0</item_version>
-												</external_module_path>
-												<module_path>
-													<count>0</count>
-													<item_version>0</item_version>
-												</module_path>
-												<simple_name>class_a</simple_name>
+												<simple>class_a</simple>
+												<qualified></qualified>
+												<location>
+													<original_model_name></original_model_name>
+													<external_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</external_module_path>
+													<model_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</model_module_path>
+													<internal_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</internal_module_path>
+												</location>
 											</type>
 											<children>
 												<count>0</count>
@@ -1991,16 +2749,23 @@
 		</item>
 		<item>
 			<first>
-				<model_name>boost_model</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<simple_name>class_g</simple_name>
+				<simple>class_derived</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>boost_model</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
 			</first>
 			<second object_id="_10">
 				<type>
@@ -2013,16 +2778,23 @@
 						</fields>
 					</extensions>
 					<name>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>class_g</simple_name>
+						<simple>class_derived</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -2030,16 +2802,23 @@
 						<initialized>1</initialized>
 						<item_version>0</item_version>
 						<value>
-							<model_name>boost_model</model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</module_path>
-							<simple_name>boost_model</simple_name>
+							<simple>boost_model</simple>
+							<qualified></qualified>
+							<location>
+								<original_model_name>boost_model</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
 						</value>
 					</containing_module>
 				</type>
@@ -2048,41 +2827,8 @@
 					<item_version>0</item_version>
 				</all_properties>
 				<local_properties>
-					<count>2</count>
+					<count>1</count>
 					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_0</name>
-						<type>
-							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>filesystem</item>
-								</module_path>
-								<simple_name>path</simple_name>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
@@ -2095,40 +2841,27 @@
 						<name>prop_1</name>
 						<type>
 							<type>
-								<model_name>std</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>list</simple_name>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name>boost</model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>1</count>
-											<item_version>0</item_version>
-											<item>filesystem</item>
-										</module_path>
-										<simple_name>path</simple_name>
-									</type>
-									<children>
+								<simple>int</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name></original_model_name>
+									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
@@ -2145,12 +2878,38 @@
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
+				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>0</count>
+					<count>1</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
+					<item class_id="36" tracking_level="0" version="0">
+						<first>2</first>
+						<second>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<simple>class_base</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost_model</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</item>
+						</second>
+					</item>
 				</relationships>
 				<object_type>3</object_type>
 				<is_final>1</is_final>
@@ -2158,16 +2917,23 @@
 		</item>
 		<item>
 			<first>
-				<model_name>boost_model</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<simple_name>some_service</simple_name>
+				<simple>some_service</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>boost_model</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
 			</first>
 			<second object_id="_11">
 				<type>
@@ -2180,16 +2946,23 @@
 						</fields>
 					</extensions>
 					<name>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>some_service</simple_name>
+						<simple>some_service</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</name>
 					<generation_type>2</generation_type>
 					<origin_type>1</origin_type>
@@ -2197,16 +2970,23 @@
 						<initialized>1</initialized>
 						<item_version>0</item_version>
 						<value>
-							<model_name>boost_model</model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</module_path>
-							<simple_name>boost_model</simple_name>
+							<simple>boost_model</simple>
+							<qualified></qualified>
+							<location>
+								<original_model_name>boost_model</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
 						</value>
 					</containing_module>
 				</type>
@@ -2229,17 +3009,24 @@
 						<name>prop_0</name>
 						<type>
 							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>asio</item>
-								</module_path>
-								<simple_name>io_service</simple_name>
+								<simple>io_service</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>asio</item>
+									</internal_module_path>
+								</location>
 							</type>
 							<children>
 								<count>0</count>
@@ -2262,19 +3049,26 @@
 						<name>prop_1</name>
 						<type>
 							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>3</count>
-									<item_version>0</item_version>
-									<item>asio</item>
-									<item>ip</item>
-									<item>tcp</item>
-								</module_path>
-								<simple_name>socket</simple_name>
+								<simple>socket</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>3</count>
+										<item_version>0</item_version>
+										<item>asio</item>
+										<item>ip</item>
+										<item>tcp</item>
+									</internal_module_path>
+								</location>
 							</type>
 							<children>
 								<count>0</count>
@@ -2297,19 +3091,26 @@
 						<name>prop_2</name>
 						<type>
 							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>3</count>
-									<item_version>0</item_version>
-									<item>asio</item>
-									<item>ip</item>
-									<item>tcp</item>
-								</module_path>
-								<simple_name>acceptor</simple_name>
+								<simple>acceptor</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>3</count>
+										<item_version>0</item_version>
+										<item>asio</item>
+										<item>ip</item>
+										<item>tcp</item>
+									</internal_module_path>
+								</location>
 							</type>
 							<children>
 								<count>0</count>
@@ -2343,17 +3144,23 @@
 		</item>
 		<item>
 			<first>
-				<model_name>boost_model</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>pkg1</item>
-				</module_path>
-				<simple_name>class_c</simple_name>
+				<simple>class_f</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>boost_model</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
 			</first>
 			<second object_id="_12">
 				<type>
@@ -2366,17 +3173,23 @@
 						</fields>
 					</extensions>
 					<name>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>pkg1</item>
-						</module_path>
-						<simple_name>class_c</simple_name>
+						<simple>class_f</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -2384,16 +3197,23 @@
 						<initialized>1</initialized>
 						<item_version>0</item_version>
 						<value>
-							<model_name>boost_model</model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</module_path>
-							<simple_name>pkg1</simple_name>
+							<simple>boost_model</simple>
+							<qualified></qualified>
+							<location>
+								<original_model_name>boost_model</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
 						</value>
 					</containing_module>
 				</type>
@@ -2402,7 +3222,7 @@
 					<item_version>0</item_version>
 				</all_properties>
 				<local_properties>
-					<count>2</count>
+					<count>6</count>
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
@@ -2416,16 +3236,24 @@
 						<name>prop_0</name>
 						<type>
 							<type>
-								<model_name></model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>int</simple_name>
+								<simple>date</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>gregorian</item>
+									</internal_module_path>
+								</location>
 							</type>
 							<children>
 								<count>0</count>
@@ -2448,32 +3276,259 @@
 						<name>prop_1</name>
 						<type>
 							<type>
-								<model_name>std</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>vector</simple_name>
+								<simple>ptime</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>posix_time</item>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_2</name>
+						<type>
+							<type>
+								<simple>time_duration</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>posix_time</item>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_3</name>
+						<type>
+							<type>
+								<simple>list</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>std</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
 							</type>
 							<children>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
 									<type>
-										<model_name></model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>class_a</simple_name>
+										<simple>date</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name>boost</original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>1</count>
+												<item_version>0</item_version>
+												<item>gregorian</item>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_4</name>
+						<type>
+							<type>
+								<simple>list</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>std</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<simple>ptime</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name>boost</original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>1</count>
+												<item_version>0</item_version>
+												<item>posix_time</item>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_5</name>
+						<type>
+							<type>
+								<simple>list</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>std</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<simple>time_duration</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name>boost</original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>1</count>
+												<item_version>0</item_version>
+												<item>posix_time</item>
+											</internal_module_path>
+										</location>
 									</type>
 									<children>
 										<count>0</count>
@@ -2510,16 +3565,23 @@
 		</item>
 		<item>
 			<first>
-				<model_name>boost_model</model_name>
-				<external_module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</external_module_path>
-				<module_path>
-					<count>0</count>
-					<item_version>0</item_version>
-				</module_path>
-				<simple_name>class_e</simple_name>
+				<simple>class_g</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>boost_model</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
 			</first>
 			<second object_id="_13">
 				<type>
@@ -2532,16 +3594,23 @@
 						</fields>
 					</extensions>
 					<name>
-						<model_name>boost_model</model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</module_path>
-						<simple_name>class_e</simple_name>
+						<simple>class_g</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -2549,16 +3618,23 @@
 						<initialized>1</initialized>
 						<item_version>0</item_version>
 						<value>
-							<model_name>boost_model</model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</module_path>
-							<simple_name>boost_model</simple_name>
+							<simple>boost_model</simple>
+							<qualified></qualified>
+							<location>
+								<original_model_name>boost_model</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
 						</value>
 					</containing_module>
 				</type>
@@ -2567,7 +3643,7 @@
 					<item_version>0</item_version>
 				</all_properties>
 				<local_properties>
-					<count>4</count>
+					<count>2</count>
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
@@ -2581,58 +3657,28 @@
 						<name>prop_0</name>
 						<type>
 							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>variant</simple_name>
+								<simple>path</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>filesystem</item>
+									</internal_module_path>
+								</location>
 							</type>
 							<children>
-								<count>2</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>int</simple_name>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>double</simple_name>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
@@ -2651,267 +3697,47 @@
 						<name>prop_1</name>
 						<type>
 							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>variant</simple_name>
-							</type>
-							<children>
-								<count>3</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>int</simple_name>
-									</type>
-									<children>
+								<simple>list</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>std</original_model_name>
+									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>class_derived</simple_name>
-									</type>
-									<children>
+									</external_module_path>
+									<model_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>double</simple_name>
-									</type>
-									<children>
+									</model_module_path>
+									<internal_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_2</name>
-						<type>
-							<type>
-								<model_name>std</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>vector</simple_name>
+									</internal_module_path>
+								</location>
 							</type>
 							<children>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>
 									<type>
-										<model_name>boost</model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>variant</simple_name>
-									</type>
-									<children>
-										<count>3</count>
-										<item_version>0</item_version>
-										<item>
-											<type>
-												<model_name></model_name>
-												<external_module_path>
-													<count>0</count>
-													<item_version>0</item_version>
-												</external_module_path>
-												<module_path>
-													<count>0</count>
-													<item_version>0</item_version>
-												</module_path>
-												<simple_name>int</simple_name>
-											</type>
-											<children>
+										<simple>path</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name>boost</original_model_name>
+											<external_module_path>
 												<count>0</count>
 												<item_version>0</item_version>
-											</children>
-											<is_pointer>0</is_pointer>
-										</item>
-										<item>
-											<type>
-												<model_name></model_name>
-												<external_module_path>
-													<count>0</count>
-													<item_version>0</item_version>
-												</external_module_path>
-												<module_path>
-													<count>0</count>
-													<item_version>0</item_version>
-												</module_path>
-												<simple_name>class_derived</simple_name>
-											</type>
-											<children>
+											</external_module_path>
+											<model_module_path>
 												<count>0</count>
 												<item_version>0</item_version>
-											</children>
-											<is_pointer>0</is_pointer>
-										</item>
-										<item>
-											<type>
-												<model_name></model_name>
-												<external_module_path>
-													<count>0</count>
-													<item_version>0</item_version>
-												</external_module_path>
-												<module_path>
-													<count>0</count>
-													<item_version>0</item_version>
-												</module_path>
-												<simple_name>double</simple_name>
-											</type>
-											<children>
-												<count>0</count>
+											</model_module_path>
+											<internal_module_path>
+												<count>1</count>
 												<item_version>0</item_version>
-											</children>
-											<is_pointer>0</is_pointer>
-										</item>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_3</name>
-						<type>
-							<type>
-								<model_name>boost</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>variant</simple_name>
-							</type>
-							<children>
-								<count>3</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>int</simple_name>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-								<item>
-									<type>
-										<model_name>std</model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>string</simple_name>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>char</simple_name>
+												<item>filesystem</item>
+											</internal_module_path>
+										</location>
 									</type>
 									<children>
 										<count>0</count>

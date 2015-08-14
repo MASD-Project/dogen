@@ -21,7 +21,6 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_builder.hpp"
 
@@ -90,7 +89,7 @@ inclusion_dependencies_builder::make_special_includes(
                 return;
 
             for (const auto& n : i->second) {
-                const auto sn(n.simple_name());
+                const auto sn(n.simple());
                 if (sn == bool_type || sn == double_type || sn == float_type)
                     r.requires_stream_manipulators = true;
                 else if (sn == string_type)
@@ -123,9 +122,9 @@ bool inclusion_dependencies_builder::is_enabled(const tack::name& n,
     const auto& en(enablement_repository_.enablement_by_name());
     const auto i(en.find(n));
     if (i == en.end()) {
-        const auto sn(tack::string_converter::convert(n));
-        BOOST_LOG_SEV(lg, error) << name_not_found << sn;
-        BOOST_THROW_EXCEPTION(building_error(name_not_found + sn));
+        const auto qn(n.qualified());
+        BOOST_LOG_SEV(lg, error) << name_not_found << qn;
+        BOOST_THROW_EXCEPTION(building_error(name_not_found + qn));
     }
 
     const auto j(i->second.find(formatter_name));
@@ -139,7 +138,7 @@ bool inclusion_dependencies_builder::is_enabled(const tack::name& n,
     if (!r) {
         BOOST_LOG_SEV(lg, debug) << "Formatter disabled. Formatter: "
                                  << formatter_name << " on type: "
-                                 << tack::string_converter::convert(n) << "'";
+                                 << n.qualified() << "'";
     }
     return r;
 }
@@ -168,9 +167,9 @@ get_aspect_settings(const tack::name& n) const {
     const auto& bn(bundle_repository_.bundles_by_name());
     const auto i(bn.find(n));
     if (i == bn.end()) {
-        const auto sn(tack::string_converter::convert(n));
-        BOOST_LOG_SEV(lg, error) << name_not_found << sn;
-        BOOST_THROW_EXCEPTION(building_error(name_not_found + sn));
+        const auto qn(n.qualified());
+        BOOST_LOG_SEV(lg, error) << name_not_found << qn;
+        BOOST_THROW_EXCEPTION(building_error(name_not_found + qn));
     }
     return i->second.aspect_settings();
 }

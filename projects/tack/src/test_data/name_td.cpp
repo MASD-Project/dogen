@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include "dogen/tack/test_data/name_td.hpp"
+#include "dogen/tack/test_data/location_td.hpp"
 
 namespace {
 
@@ -29,12 +30,9 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-std::list<std::string> create_std_list_std_string(unsigned int position) {
-    std::list<std::string> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_string(position + i));
-    }
-    return r;
+dogen::tack::location
+create_dogen_tack_location(const unsigned int position) {
+    return dogen::tack::location_generator::create(position);
 }
 
 }
@@ -46,10 +44,9 @@ name_generator::name_generator() : position_(0) { }
 
 void name_generator::
 populate(const unsigned int position, result_type& v) {
-    v.model_name(create_std_string(position + 0));
-    v.external_module_path(create_std_list_std_string(position + 1));
-    v.module_path(create_std_list_std_string(position + 2));
-    v.simple_name(create_std_string(position + 3));
+    v.simple(create_std_string(position + 0));
+    v.qualified(create_std_string(position + 1));
+    v.location(create_dogen_tack_location(position + 2));
 }
 
 name_generator::result_type

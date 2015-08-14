@@ -20,7 +20,6 @@
  */
 #include <sstream>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/settings/inclusion_directives_settings_factory.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_factory.hpp"
@@ -54,9 +53,9 @@ inclusion_directives_factory::path_derivatives_for_name(
     const tack::name& n) const {
     const auto i(path_repository_.path_derivatives_by_name().find(n));
     if (i == path_repository_.path_derivatives_by_name().end()) {
-        const auto sn(tack::string_converter::convert(n));
-        BOOST_LOG_SEV(lg, error) << name_not_found << sn;
-        BOOST_THROW_EXCEPTION(building_error(name_not_found + sn));
+        const auto qn(n.qualified());
+        BOOST_LOG_SEV(lg, error) << name_not_found << qn;
+        BOOST_THROW_EXCEPTION(building_error(name_not_found + qn));
     }
     return i->second;
 }
@@ -137,10 +136,10 @@ inclusion_directives_factory::obtain_include_directive(
 boost::optional<std::unordered_map<std::string, std::string> >
 inclusion_directives_factory::
 make(const dynamic::object& o, const tack::name& n) const {
-    const auto tn(tack::string_converter::convert(n));
+    const auto qn(n.qualified());
     const auto directives_settings(create_inclusion_directives_settings(o));
     if (!directives_settings.inclusion_required()) {
-        BOOST_LOG_SEV(lg, debug) << "Inclusion directive not required: " << tn;
+        BOOST_LOG_SEV(lg, debug) << "Inclusion directive not required: " << qn;
         return boost::optional<std::unordered_map<std::string, std::string> >();
     }
 
@@ -150,7 +149,7 @@ make(const dynamic::object& o, const tack::name& n) const {
         const auto fn(p.first);
         const auto ds(p.second);
 
-        const auto id_pair(obtain_include_directive(fn, tn, pd, ds));
+        const auto id_pair(obtain_include_directive(fn, qn, pd, ds));
         if (!id_pair)
             continue;
 

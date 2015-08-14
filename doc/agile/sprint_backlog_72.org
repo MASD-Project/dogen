@@ -14,16 +14,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-08-10 Mon 16:45]
+#+CAPTION: Clock summary at [2015-08-14 Fri 20:33]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *1:57* |      |      |
+| *Total time*                                                                | *7:43* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 1:57   |      |      |
-| Active                                                                      |        | 1:57 |      |
+| Stories                                                                     | 7:43   |      |      |
+| Active                                                                      |        | 7:43 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:24 |
-| STARTED Refactor qname                                                      |        |      | 1:33 |
+| STARTED Refactor qname                                                      |        |      | 7:19 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -33,6 +33,10 @@
 Updates to sprint and product backlog.
 
 *** STARTED Refactor qname                                            :story:
+    CLOCK: [2015-08-14 Fri 19:20]--[2015-08-14 Fri 20:33] =>  1:13
+    CLOCK: [2015-08-14 Fri 14:51]--[2015-08-14 Fri 16:55] =>  2:04
+    CLOCK: [2015-08-13 Thu 08:02]--[2015-08-13 Thu 08:48] =>  0:46
+    CLOCK: [2015-08-10 Mon 16:51]--[2015-08-10 Mon 18:30] =>  1:39
     CLOCK: [2015-08-10 Mon 16:46]--[2015-08-10 Mon 16:50] =>  0:04
     CLOCK: [2015-08-10 Mon 16:43]--[2015-08-10 Mon 16:45] =>  0:02
     CLOCK: [2015-08-10 Mon 15:11]--[2015-08-10 Mon 16:42] =>  1:31
@@ -48,6 +52,12 @@ Notes:
 - fix hardware model to supply model name but to have a blank model
   path.
 - split model names with dots into multiple model paths.
+- do not populate model path and qualified until resolution is done -
+  these properties do not add any value. After resolution - perhaps
+  as a last pass of the resolver - go through every single qname and
+  compute these properties. This means that all calls to qualified
+  prior to this need to be replaced to direct calls to qualified name
+  builder.
 
 Merged stories:
 
@@ -79,6 +89,12 @@ model name such as:
 
 See comment in 'dot' story - we can have a model name and a model
 package.
+
+*** Remove primitive model handling in tack dia transformer           :story:
+
+We seem to be doing some handling for primitives which is no longer
+required. The handling of current model is also very dodgy. All in
+transformer's update model reference.
 
 *** Add =operator<= for names                                         :story:
 
@@ -367,6 +383,8 @@ a tad better.
 
 Actually this could be the first case where LAM/PIM is used: we could
 call this something like integer.
+
+This is also hacked in tack_dia's transformer.
 
 *** Add support for Language Agnostic Models (LAM)                    :story:
 

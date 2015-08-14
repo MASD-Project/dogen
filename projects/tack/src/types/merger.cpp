@@ -22,7 +22,6 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/tack/types/object.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/types/merging_error.hpp"
 #include "dogen/tack/io/property_io.hpp"
 #include "dogen/tack/io/model_io.hpp"
@@ -51,7 +50,7 @@ void merger::require_not_has_target(const std::string& name) const {
 
     std::ostringstream stream;
     stream << "Only one target expected. Last target model name: '"
-           << string_converter::convert(merged_model_.name())
+           << merged_model_.name().qualified()
            << "'. New target model name: "
            << name;
 
@@ -81,11 +80,11 @@ void merger::require_not_has_merged() const {
 void merger::check_name(const std::string& model_name, const name& key,
     const name& value) const {
 
-    if (key.model_name() != model_name) {
+    if (key.location().original_model_name() != model_name) {
         std::ostringstream s;
         s << "Type does not belong to this model. Model name: '"
           << model_name << "'. Type name: "
-          << string_converter::convert(key);
+          << key.qualified();
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(merging_error(s.str()));
     }
@@ -93,8 +92,8 @@ void merger::check_name(const std::string& model_name, const name& key,
     if (key != value) {
         std::ostringstream s;
         s << "Inconsistency between key and value names: "
-          << " key: " << string_converter::convert(key)
-          << " value: " << string_converter::convert(value);
+          << " key: " << key.qualified()
+          << " value: " << value.qualified();
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(merging_error(s.str()));
     }
@@ -106,14 +105,15 @@ void merger::update_references() {
     for (const auto& pair : models_) {
         const auto& model(pair.second);
         const auto value(std::make_pair(model.name(), model.origin_type()));
-        const auto p(std::make_pair(model.name().model_name(), value));
+        const auto mn(model.name().location().original_model_name());
+        const auto p(std::make_pair(mn, value));
         references_by_model_name.insert(p);
     }
 
     std::unordered_map<name, origin_types> updated_references;
     for (auto& pair : merged_model_.references()) {
         const auto n(pair.first);
-        const auto mn(n.model_name());
+        const auto mn(n.location().original_model_name());
         const auto i(references_by_model_name.find(mn));
         if (i == references_by_model_name.end()) {
             BOOST_LOG_SEV(lg, error) << msising_dependency << mn;
@@ -127,8 +127,8 @@ void merger::update_references() {
 }
 
 void merger::add_target(const model& target) {
-    const auto n(string_converter::convert(target.name()));
-    require_not_has_target(n);
+    const auto qn(target.name().qualified());
+    require_not_has_target(qn);
 
     has_target_ = true;
     merged_model_.name(target.name());
@@ -139,7 +139,7 @@ void merger::add_target(const model& target) {
     merged_model_.extensions(target.extensions());
     merged_model_.is_target(true);
 
-    BOOST_LOG_SEV(lg, debug) << "added target model: " << n;
+    BOOST_LOG_SEV(lg, debug) << "added target model: " << qn;
 }
 
 void merger::add(const model& m) {
@@ -149,26 +149,26 @@ void merger::add(const model& m) {
         add_target(m);
 
     BOOST_LOG_SEV(lg, debug) << "adding model: "
-                             << string_converter::convert(m.name());
+                             << m.name().qualified();
     BOOST_LOG_SEV(lg, debug) << "contents: " << m;
     models_.insert(std::make_pair(m.name(), m));
 }
 
 void merger::merge_model(const model& m) {
     BOOST_LOG_SEV(lg, info) << "Merging model: '"
-                            << string_converter::convert(m.name())
+                            << m.name().qualified()
                             << " modules: " << m.modules().size()
                             << " concepts: " << m.concepts().size()
                             << " primitives: " << m.primitives().size()
                             << " enumerations: " << m.enumerations().size()
                             << " objects: " << m.objects().size();
 
+    const auto mn(m.name().location().original_model_name());
     for (const auto& c : m.concepts()) {
-        check_name(m.name().model_name(), c.first, c.second.name());
+        check_name(mn, c.first, c.second.name());
         merged_model_.concepts().insert(c);
     }
 
-    const auto mn(m.name().model_name());
     for (const auto& pair : m.primitives()) {
         // FIXME: mega hack to handle primitive model.
         const auto pmn(mn == hardware_model_name ? empty : mn);
@@ -187,7 +187,7 @@ void merger::merge_model(const model& m) {
     }
 
     for (const auto& pair : m.modules()) {
-        if (!pair.first.simple_name().empty())
+        if (!pair.first.simple().empty())
             check_name(mn, pair.first, pair.second.name());
         merged_model_.modules().insert(pair);
     }

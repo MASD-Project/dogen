@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/tack/hash/name_hash.hpp"
+#include "dogen/tack/hash/location_hash.hpp"
 
 namespace {
 
@@ -26,14 +27,6 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
 }
 
 }
@@ -44,10 +37,9 @@ namespace tack {
 std::size_t name_hasher::hash(const name& v) {
     std::size_t seed(0);
 
-    combine(seed, v.model_name());
-    combine(seed, hash_std_list_std_string(v.external_module_path()));
-    combine(seed, hash_std_list_std_string(v.module_path()));
-    combine(seed, v.simple_name());
+    combine(seed, v.simple());
+    combine(seed, v.qualified());
+    combine(seed, v.location());
 
     return seed;
 }

@@ -68,7 +68,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     const unsigned int n(5);
     for (unsigned int i(1); i < n; ++i) {
         dogen::tack::name n;
-        n.model_name(factory.model_name(i));
+        n.location().original_model_name(factory.model_name(i));
         const auto ot(dogen::tack::origin_types::unknown);
         target.references().insert(std::make_pair(n, ot));
     }
@@ -78,7 +78,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
 
     for (unsigned int i(1); i < n; ++i) {
         auto m(factory.make_single_type_model(i));
-        m.name().external_module_path().push_back(some_path);
+        m.name().location().external_module_path().push_back(some_path);
         mg.add(m);
     }
 
@@ -93,7 +93,8 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     BOOST_CHECK(combined.references().size() == 4);
 
     for (const auto pair : combined.references()) {
-        BOOST_CHECK(pair.first.external_module_path().front() == some_path);
+        BOOST_CHECK(pair.first.location().external_module_path().front() ==
+            some_path);
         BOOST_CHECK(pair.second == dogen::tack::origin_types::user);
     }
 
@@ -101,8 +102,9 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     std::set<std::string> model_names;
     for (const auto& pair : combined.objects()) {
         const auto& n(pair.first);
-        object_names.insert(n.model_name() + "_" + n.simple_name());
-        model_names.insert(n.model_name());
+        object_names.insert(n.location().original_model_name() + "_"
+            + n.simple());
+        model_names.insert(n.location().original_model_name());
     }
 
     BOOST_REQUIRE(object_names.size() == n);
@@ -152,7 +154,7 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     SETUP_TEST_LOG("type_with_incorrect_model_name_throws");
     auto m(factory.make_single_type_model());
     m.is_target(true);
-    m.name().model_name(invalid_model_name);
+    m.name().location().original_model_name(invalid_model_name);
 
     dogen::tack::merger mg;
     mg.add(m);
@@ -166,7 +168,7 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
 
     auto m(factory.make_multi_type_model(0, 2));
     m.is_target(true);
-    m.objects().begin()->second.name().simple_name(invalid_simple_name);
+    m.objects().begin()->second.name().simple(invalid_simple_name);
 
     dogen::tack::merger mg;
     mg.add(m);

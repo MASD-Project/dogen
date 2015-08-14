@@ -21,7 +21,6 @@
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/string/splitter.hpp"
 #include "dogen/dia/types/diagram.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/types/model.hpp"
 #include "dogen/tack/io/model_io.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -51,9 +50,9 @@ workflow::create_qualified_name_for_model(const std::string& model_name,
     tack::name r;
     using utility::string::splitter;
     const auto epp(splitter::split_scoped(external_module_path));
-    r.external_module_path(epp);
-    r.model_name(model_name);
-    r.simple_name(model_name);
+    r.location().external_module_path(epp);
+    r.location().original_model_name(model_name);
+    r.simple(model_name);
 
     return r;
 }
@@ -78,8 +77,7 @@ void workflow::initialise_context_activity(const std::string& model_name,
 
     const auto& epp(external_module_path);
     m.name(create_qualified_name_for_model(model_name, epp));
-    BOOST_LOG_SEV(lg, debug) << "Target model name: "
-                             << tack::string_converter::convert(m.name());
+    BOOST_LOG_SEV(lg, debug) << "Target model name: " << m.name().simple();
 
     m.origin_type(tack::origin_types::user);
     m.is_target(is_target);

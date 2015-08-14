@@ -22,7 +22,6 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/cpp/io/formatters/file_types_io.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_factory.hpp"
@@ -57,20 +56,20 @@ boost::filesystem::path path_derivatives_factory::
 make_inclusion_path(const settings::path_settings& ps,
     const tack::name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion path for: "
-                             << tack::string_converter::convert(n);
+                             << n.qualified();
 
     boost::filesystem::path r;
 
     if (ps.file_type() == formatters::file_types::cpp_header) {
-        for(const auto& m : n.external_module_path())
+        for(const auto& m : n.location().external_module_path())
             r /= m;
-        r /= n.model_name();
+        r /= n.location().original_model_name();
     }
 
     if (!ps.facet_directory().empty() && !ps.disable_facet_directories())
         r /= ps.facet_directory();
 
-    for(const auto& m : n.module_path())
+    for(const auto& m : n.location().internal_module_path())
         r /= m;
 
     // modules other than the model module contribute their simple
@@ -78,11 +77,11 @@ make_inclusion_path(const settings::path_settings& ps,
     if (n != model_.name()) {
         const auto i(model_.modules().find(n));
         if (i != model_.modules().end())
-            r /= n.simple_name();
+            r /= n.simple();
     }
 
     std::ostringstream stream;
-    stream << n.simple_name();
+    stream << n.simple();
 
     if (!ps.formatter_postfix().empty())
         stream << underscore << ps.formatter_postfix();
@@ -105,20 +104,20 @@ boost::filesystem::path path_derivatives_factory::
 make_file_path(const settings::path_settings& ps,
     const boost::filesystem::path& inclusion_path,
     const tack::name& n) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating file path for: "
-                             << tack::string_converter::convert(n);
+    BOOST_LOG_SEV(lg, debug) << "Creating file path for: " << n.qualified();
 
     boost::filesystem::path r;
 
     const auto ft(ps.file_type());
+    const auto omn(n.location().original_model_name());
     switch (ft) {
     case formatters::file_types::cpp_header:
-        r = options_.project_directory_path() / n.model_name();
+        r = options_.project_directory_path() / omn;
         r /= ps.include_directory_name();
         break;
 
     case formatters::file_types::cpp_implementation:
-        r = options_.project_directory_path() / n.model_name();
+        r = options_.project_directory_path() / omn;
         r /= ps.source_directory_name();
         break;
 

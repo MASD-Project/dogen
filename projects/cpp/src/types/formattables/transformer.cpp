@@ -22,7 +22,6 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/io/object_types_io.hpp"
 #include "dogen/cpp/types/formattables/name_builder.hpp"
 #include "dogen/cpp/types/formattables/transformation_error.hpp"
@@ -186,7 +185,7 @@ transformer::transformer(const settings::opaque_settings_builder& osb,
 
 void transformer::
 populate_formattable_properties(const tack::name& n, formattable& f) const {
-    f.identity(tack::string_converter::convert(n));
+    f.identity(n.qualified());
 }
 
 void transformer::populate_entity_properties(const tack::name& n,
@@ -194,17 +193,17 @@ void transformer::populate_entity_properties(const tack::name& n,
 
     populate_formattable_properties(n, e);
 
-    e.name(n.simple_name());
+    e.name(n.simple());
     e.documentation(documentation);
 
     const auto& fpn(formatter_properties_repository_.
         formatter_properties_by_name());
     const auto i(fpn.find(n));
     if (i == fpn.end()) {
-        const auto sn(tack::string_converter::convert(n));
-        BOOST_LOG_SEV(lg, error) << formatter_properties_missing << sn;
+        const auto qn(n.qualified());
+        BOOST_LOG_SEV(lg, error) << formatter_properties_missing << qn;
         BOOST_THROW_EXCEPTION(
-            transformation_error(formatter_properties_missing + sn));
+            transformation_error(formatter_properties_missing + qn));
     }
     e.formatter_properties(i->second);
 
@@ -214,10 +213,10 @@ void transformer::populate_entity_properties(const tack::name& n,
     const auto& bn(bundle_repository_.bundles_by_name());
     const auto j(bn.find(n));
     if (j == bn.end()) {
-        const auto sn(tack::string_converter::convert(n));
-        BOOST_LOG_SEV(lg, error) << settings_bundle_missing << sn;
+        const auto qn(n.qualified());
+        BOOST_LOG_SEV(lg, error) << settings_bundle_missing << qn;
         BOOST_THROW_EXCEPTION(
-            transformation_error(settings_bundle_missing + sn));
+            transformation_error(settings_bundle_missing + qn));
     }
     e.settings(j->second);
 
@@ -323,7 +322,7 @@ transformer::to_property_info(const tack::property p, const bool is_immutable,
     nested_type_info nti;
     std::string complete_name;
     const auto t(p.type());
-    if (::requires_manual_move_constructor(t.type().simple_name()))
+    if (::requires_manual_move_constructor(t.type().simple()))
         requires_manual_move_constructor = true;
 
     to_nested_type_info(t, nti, complete_name, requires_stream_manipulators);
@@ -354,7 +353,7 @@ transformer::to_enumerator_info(const tack::enumerator& e) const {
 std::shared_ptr<enum_info>
 transformer::to_enum_info(const tack::enumeration& e) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: "
-                             << tack::string_converter::convert(e.name());
+                             << e.name().qualified();
 
     auto r(std::make_shared<enum_info>());
     populate_entity_properties(e.name(), e.documentation(), *r);
@@ -373,7 +372,7 @@ transformer::to_enum_info(const tack::enumeration& e) const {
 std::shared_ptr<namespace_info> transformer::
 to_namespace_info(const tack::module& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming module: "
-                             << tack::string_converter::convert(m.name());
+                             << m.name().qualified();
 
     auto r(std::make_shared<namespace_info>());
     populate_entity_properties(m.name(), m.documentation(), *r);
@@ -385,7 +384,7 @@ to_namespace_info(const tack::module& m) const {
 std::shared_ptr<exception_info>
 transformer::to_exception_info(const tack::object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exception: "
-                             << tack::string_converter::convert(o.name());
+                             << o.name().qualified();
 
     auto r(std::make_shared<exception_info>());
     populate_entity_properties(o.name(), o.documentation(), *r);
@@ -410,7 +409,7 @@ transformer::to_class_info(const tack::object& o) const {
     if (i != o.relationships().end()) {
         for (const auto& n : i->second) {
             parent_info pi;
-            pi.name(n.simple_name());
+            pi.name(n.simple());
             pi.namespaces(b.namespace_list(model_, n));
 
             std::list<std::string> ns(pi.namespaces());
@@ -434,18 +433,18 @@ transformer::to_class_info(const tack::object& o) const {
     i = o.relationships().find(tack::relationship_types::original_parents);
     if (i != o.relationships().end() && !i->second.empty()) {
         if (i->second.size() > 1) {
-            const auto n(tack::string_converter::convert(o.name()));
-            BOOST_LOG_SEV(lg, error) << too_many_parents << n;
-            BOOST_THROW_EXCEPTION(transformation_error(too_many_parents + n));
+            const auto qn(o.name().qualified());
+            BOOST_LOG_SEV(lg, error) << too_many_parents << qn;
+            BOOST_THROW_EXCEPTION(transformation_error(too_many_parents + qn));
         }
 
         const auto opn(i->second.front());
         std::list<std::string> ns(b.namespace_list(model_, opn));
-        ns.push_back(opn.simple_name());
+        ns.push_back(opn.simple());
 
         using boost::join;
         r->original_parent_name_qualified(join(ns, namespace_separator));
-        r->original_parent_name(opn.simple_name());
+        r->original_parent_name(opn.simple());
         r->is_original_parent_visitable(o.is_original_parent_visitable());
     }
 
@@ -486,23 +485,23 @@ transformer::to_class_info(const tack::object& o) const {
 std::shared_ptr<visitor_info>
 transformer::to_visitor_info(const tack::object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming visitor: "
-                             << tack::string_converter::convert(o.name());
+                             << o.name().qualified();
 
     auto r(std::make_shared<visitor_info>());
     populate_entity_properties(o.name(), o.documentation(), *r);
 
     auto i(o.relationships().find(tack::relationship_types::visits));
     if (i == o.relationships().end() || i->second.empty()) {
-        const auto& sn(o.name().simple_name());
-        BOOST_LOG_SEV(lg, error) << no_visitees << sn;
-        BOOST_THROW_EXCEPTION(transformation_error(no_visitees + sn));
+        const auto& qn(o.name().qualified());
+        BOOST_LOG_SEV(lg, error) << no_visitees << qn;
+        BOOST_THROW_EXCEPTION(transformation_error(no_visitees + qn));
     }
 
     name_builder b;
     for (const auto n : i->second) {
         cpp::formattables::visited_type_info vti;
         vti.qualified_name(b.qualified_name(model_, n));
-        vti.name(n.simple_name());
+        vti.name(n.simple());
         vti.documentation(visitor_comments + vti.qualified_name());
         r->types().push_back(vti);
     }
@@ -560,7 +559,7 @@ transformer::transform(const tack::primitive& /*p*/) const {
 std::forward_list<std::shared_ptr<formattable> > transformer::
 transform(const tack::object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming object: "
-                             << tack::string_converter::convert(o.name());
+                             << o.name().qualified();
 
     std::forward_list<std::shared_ptr<formattable> > r;
     r.push_front(to_forward_declarations_info(o));
@@ -577,9 +576,9 @@ transform(const tack::object& o) const {
         r.push_front(to_exception_info(o));
         break;
     default: {
-        const auto n(tack::string_converter::convert(o.name()));
+        const auto qn(o.name().qualified());
         BOOST_LOG_SEV(lg, error) << unsupported_object_type << o.object_type()
-                                 << " name: " << n;
+                                 << " name: " << qn;
         BOOST_THROW_EXCEPTION(transformation_error(unsupported_object_type +
                 boost::lexical_cast<std::string>(o.object_type())));
     } };

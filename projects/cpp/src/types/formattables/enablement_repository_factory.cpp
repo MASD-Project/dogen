@@ -23,7 +23,6 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/repository_selector.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/io/formattables/enablement_repository_io.hpp"
@@ -149,9 +148,10 @@ enablement_repository enablement_repository_factory::make(
     auto r(g.result());
 
     tack::name n;
-    n.simple_name(registrar_name);
-    n.model_name(m.name().model_name());
-    n.external_module_path(m.name().external_module_path());
+    n.simple(registrar_name);
+    n.location().original_model_name(m.name().location().original_model_name());
+    n.location().external_module_path(
+        m.name().location().external_module_path());
     const auto e(f.make(root_object));
     r.enablement_by_name()[n] = e;
 
@@ -162,9 +162,10 @@ enablement_repository enablement_repository_factory::make(
 
         const auto ref(pair.first);
         tack::name n;
-        n.model_name(ref.model_name());
-        n.simple_name(registrar_name);
-        n.external_module_path(ref.external_module_path());
+        n.simple(registrar_name);
+        n.location().original_model_name(ref.location().original_model_name());
+        n.location().external_module_path(
+            ref.location().external_module_path());
         r.enablement_by_name()[n] = e;
     }
 

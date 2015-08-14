@@ -24,7 +24,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include"dogen/utility/log/logger.hpp"
 #include "dogen/utility/exception/utility_exception.hpp"
 #include "dogen/dynamic/types/value_factory.hpp"
 #include "dogen/tack/types/object.hpp"
@@ -104,27 +104,27 @@ std::string module_name(const unsigned int i) {
 }
 
 dogen::tack::nested_name mock_nested_name(const dogen::tack::name& n) {
-    dogen::tack::name pn;
-    pn.simple_name(n.simple_name());
-    pn.model_name(n.model_name());
+    dogen::tack::name nn;
+    nn.simple(n.simple());
+    nn.location().original_model_name(n.location().original_model_name());
 
     dogen::tack::nested_name r;
-    r.type(pn);
+    r.type(nn);
     return r;
 }
 
 dogen::tack::name mock_model_name(unsigned int i) {
     dogen::tack::name r;
-    r.model_name(model_name(i));
-    r.simple_name(model_name(i));
+    r.location().original_model_name(model_name(i));
+    r.simple(model_name(i));
     return r;
 }
 
 dogen::tack::nested_name
 mock_nested_name_shared_ptr(const dogen::tack::name& n) {
     dogen::tack::name e;
-    e.simple_name("shared_ptr");
-    e.model_name("boost");
+    e.simple("shared_ptr");
+    e.location().original_model_name("boost");
 
     dogen::tack::nested_name r;
     r.type(e);
@@ -147,49 +147,49 @@ dogen::tack::nested_name mock_nested_name(
     typedef test::mock_model_factory::property_types property_types;
     switch(pt) {
     case property_types::unsigned_int:
-        n.simple_name(unsigned_int);
+        n.simple(unsigned_int);
         r.type(n);
         break;
     case property_types::boolean:
-        n.simple_name(boolean);
+        n.simple(boolean);
         r.type(n);
         break;
     case property_types::boost_variant: {
         name e;
-        e.simple_name("variant");
-        e.model_name("boost");
+        e.simple("variant");
+        e.location().original_model_name("boost");
         r.type(e);
 
         name f;
-        f.simple_name(boolean);
+        f.simple(boolean);
         nested_name c;
         c.type(f);
 
         name g;
-        g.simple_name(unsigned_int);
+        g.simple(unsigned_int);
         nested_name d;
         d.type(g);
         r.children(std::list<nested_name> { c, d });
         break;
     }
     case property_types::std_string:
-        n.simple_name("string");
-        n.model_name("std");
+        n.simple("string");
+        n.location().original_model_name("std");
         r.type(n);
         break;
     case property_types::std_pair: {
         name e;
-        e.simple_name("pair");
-        e.model_name("std");
+        e.simple("pair");
+        e.location().original_model_name("std");
         r.type(e);
 
         name f;
-        f.simple_name(boolean);
+        f.simple(boolean);
         nested_name c;
         c.type(f);
 
         name g;
-        g.simple_name(boolean);
+        g.simple(boolean);
         nested_name d;
         d.type(g);
         r.children(std::list<nested_name> { c, d });
@@ -206,11 +206,12 @@ void populate_object(dogen::tack::object& o, const unsigned int i,
     const dogen::tack::name& model_name, const unsigned int module_n) {
 
     dogen::tack::name n;
-    n.model_name(model_name.model_name());
-    n.simple_name(type_name(i));
+    n.location().original_model_name(
+        model_name.location().original_model_name());
+    n.simple(type_name(i));
 
     for (unsigned int i(0); i < module_n; ++i)
-        n.module_path().push_back(module_name(i));
+        n.location().internal_module_path().push_back(module_name(i));
 
     o.name(n);
     o.generation_type(dogen::tack::generation_types::full_generation);
@@ -326,9 +327,9 @@ void insert_object(dogen::tack::model& m, const dogen::tack::object& o) {
 }
 
 std::string name_for_file_name(const dogen::tack::name& n) {
-    if (n.simple_name().empty())
-        return n.model_name();
-    return n.simple_name();
+    if (n.simple().empty())
+        return n.location().original_model_name();
+    return n.simple();
 }
 
 std::string types_header_filename(const dogen::tack::name& n) {
@@ -460,7 +461,7 @@ boost_serialization_forward_declaration_filename(const name& n) const {
 
 bool mock_model_factory::
 is_model_n(const unsigned int n, const name& name) const {
-    return is_model_n(n, name.model_name());
+    return is_model_n(n, name.location().original_model_name());
 }
 
 bool mock_model_factory::
@@ -470,12 +471,12 @@ is_model_n(const unsigned int n, const std::string& name) const {
 
 bool mock_model_factory::
 is_type_name_n(const unsigned int n, const name& name) const {
-    return is_type_name_n(n, name.simple_name());
+    return is_type_name_n(n, name.simple());
 }
 
 bool mock_model_factory::
 is_concept_name_n(const unsigned int n, const name& name) const {
-    return concept_name(n) == name.simple_name();
+    return concept_name(n) == name.simple();
 }
 
 bool mock_model_factory::
@@ -491,8 +492,8 @@ is_module_n(const unsigned int n, const std::string& name) const {
 bool mock_model_factory::is_type_name_n_visitor(const unsigned int n,
     const name& name) const {
     return
-        boost::contains(name.simple_name(), type_name(n)) &&
-        boost::contains(name.simple_name(), visitor_postfix);
+        boost::contains(name.simple(), type_name(n)) &&
+        boost::contains(name.simple(), visitor_postfix);
 }
 
 void mock_model_factory::
@@ -501,8 +502,9 @@ handle_model_module(const bool add_model_module, tack::model& m) const {
         return;
 
     name n;
-    n.model_name(m.name().model_name());
-    n.simple_name(m.name().simple_name());
+    n.location().original_model_name(
+        m.name().location().original_model_name());
+    n.simple(m.name().simple());
     const auto module(make_module(n, documentation));
     insert_nameable(m.modules(), module);
 }
@@ -529,8 +531,9 @@ concept mock_model_factory::make_concept(const unsigned int i,
     const name& model_name) const {
 
     name n;
-    n.model_name(model_name.model_name());
-    n.simple_name(concept_name(i));
+    n.location().original_model_name(
+        model_name.location().original_model_name());
+    n.simple(concept_name(i));
 
     concept r;
     r.name(n);
@@ -547,11 +550,12 @@ enumeration mock_model_factory::
 make_enumeration(const unsigned int i, const name& model_name,
     const unsigned int module_n) const {
     name n;
-    n.model_name(model_name.model_name());
-    n.simple_name(type_name(i));
+    n.location().original_model_name(
+        model_name.location().original_model_name());
+    n.simple(type_name(i));
 
     for (unsigned int i(0); i < module_n; ++i)
-        n.module_path().push_back(module_name(i));
+        n.location().internal_module_path().push_back(module_name(i));
 
     enumeration r;
     r.name(n);
@@ -559,7 +563,7 @@ make_enumeration(const unsigned int i, const name& model_name,
     r.documentation(documentation);
 
     name un;
-    un.simple_name(unsigned_int);
+    un.simple(unsigned_int);
     r.underlying_type(un);
 
     const auto lambda([&](const unsigned int n) -> enumerator {
@@ -581,11 +585,12 @@ make_enumeration(const unsigned int i, const name& model_name,
 object mock_model_factory::make_exception(const unsigned int i,
     const name& model_name, const unsigned int module_n) const {
     name n;
-    n.model_name(model_name.model_name());
-    n.simple_name(type_name(i));
+    n.location().original_model_name(
+        model_name.location().original_model_name());
+    n.simple(type_name(i));
 
     for (unsigned int i(0); i < module_n; ++i)
-        n.module_path().push_back(module_name(i));
+        n.location().internal_module_path().push_back(module_name(i));
 
     object r;
     r.name(n);
@@ -609,13 +614,13 @@ module mock_model_factory::make_module(const tack::name& n,
 
 module mock_model_factory::make_module(const unsigned int module_n,
     const std::string& model_name,
-    const std::list<std::string>& module_path,
+    const std::list<std::string>& internal_module_path,
     const std::string& documentation) const {
 
     name n;
-    n.model_name(model_name);
-    n.simple_name(module_name(module_n));
-    n.module_path(module_path);
+    n.location().original_model_name(model_name);
+    n.simple(module_name(module_n));
+    n.location().internal_module_path(internal_module_path);
     return make_module(n, documentation);
 }
 
@@ -623,8 +628,8 @@ name mock_model_factory::make_name(const unsigned int model_n,
     const unsigned int simple_n) const {
 
     name r;
-    r.model_name(model_name(model_n));
-    r.simple_name(type_name(simple_n));
+    r.location().original_model_name(model_name(model_n));
+    r.simple(type_name(simple_n));
     return r;
 }
 
@@ -659,12 +664,12 @@ make_multi_type_model(const unsigned int n, const unsigned int type_n,
 
     model r(make_empty_model(n, add_model_module));
 
-    std::list<std::string> model_path;
-    const auto mn(r.name().model_name());
+    std::list<std::string> internal_module_path;
+    const auto mn(r.name().location().original_model_name());
     for (unsigned int i(0); i < mod_n; ++i) {
-        const auto m(make_module(i, mn, model_path, documentation));
+        const auto m(make_module(i, mn, internal_module_path, documentation));
         insert_nameable(r.modules(), m);
-        model_path.push_back(module_name(i));
+        internal_module_path.push_back(module_name(i));
     }
 
     switch (ot) {
@@ -700,7 +705,7 @@ make_single_concept_model(const unsigned int n,
     model r(make_empty_model(n, add_model_module));
 
     primitive ui;
-    ui.name().simple_name(unsigned_int);
+    ui.name().simple(unsigned_int);
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
     concept c(make_concept(0, r.name()));
@@ -720,7 +725,7 @@ make_first_degree_concepts_model(const unsigned int n,
     const bool add_model_module) const {
     model r(make_empty_model(n, add_model_module));
     primitive ui;
-    ui.name().simple_name(unsigned_int);
+    ui.name().simple(unsigned_int);
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
     concept c0(make_concept(0, r.name()));
@@ -753,7 +758,7 @@ make_second_degree_concepts_model(const unsigned int n,
     const bool add_model_module) const {
     model r(make_empty_model(n, add_model_module));
     primitive ui;
-    ui.name().simple_name(unsigned_int);
+    ui.name().simple(unsigned_int);
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
     concept c0(make_concept(0, r.name()));
@@ -801,7 +806,7 @@ model mock_model_factory::make_multiple_inheritance_concepts_model(
     const unsigned int n, const bool add_model_module) const {
     model r(make_empty_model(n, add_model_module));
     primitive ui;
-    ui.name().simple_name(unsigned_int);
+    ui.name().simple(unsigned_int);
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
     concept c0(make_concept(0, r.name()));
@@ -829,7 +834,7 @@ make_diamond_inheritance_concepts_model(const unsigned int n,
     const bool add_model_module) const {
     model r(make_empty_model(n, add_model_module));
     primitive ui;
-    ui.name().simple_name(unsigned_int);
+    ui.name().simple(unsigned_int);
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
     concept c0(make_concept(0, r.name()));
@@ -870,7 +875,7 @@ model mock_model_factory::make_object_with_parent_that_models_concept(
     const unsigned int n, const bool add_model_module) const {
     model r(make_empty_model(n, add_model_module));
     primitive ui;
-    ui.name().simple_name(unsigned_int);
+    ui.name().simple(unsigned_int);
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
     concept c0(make_concept(0, r.name()));
@@ -895,7 +900,7 @@ make_object_with_parent_that_models_a_refined_concept(
     const unsigned int n, const bool add_model_module) const {
     model r(make_empty_model(n, add_model_module));
     primitive ui;
-    ui.name().simple_name(unsigned_int);
+    ui.name().simple(unsigned_int);
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
     concept c0(make_concept(0, r.name()));
@@ -939,7 +944,7 @@ make_object_that_models_missing_concept(const unsigned int n,
     const bool add_model_module) const {
     model r(make_empty_model(n, add_model_module));
     primitive ui;
-    ui.name().simple_name(unsigned_int);
+    ui.name().simple(unsigned_int);
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
     concept c0(make_concept(0, r.name()));
@@ -956,7 +961,7 @@ model mock_model_factory::make_object_that_models_concept_with_missing_parent(
     const unsigned int n, const bool add_model_module) const {
     model r(make_empty_model(n, add_model_module));
     primitive ui;
-    ui.name().simple_name(unsigned_int);
+    ui.name().simple(unsigned_int);
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
     concept c0(make_concept(0, r.name()));
@@ -992,8 +997,8 @@ model mock_model_factory::object_with_both_regular_and_weak_associations(
         o0.relationships()[ra].push_back(o1.name());
 
     name n;
-    n.simple_name("shared_ptr");
-    n.model_name("boost");
+    n.simple("shared_ptr");
+    n.location().original_model_name("boost");
 
     object o2;
     o2.name(n);
@@ -1020,8 +1025,8 @@ model mock_model_factory::object_with_both_regular_and_weak_associations(
     if (flags_.associations_indexed())
         o0.relationships()[wa].push_back(o3.name());
 
-    n.simple_name("string");
-    n.model_name("std");
+    n.simple("string");
+    n.location().original_model_name("std");
 
     object o4;
     o4.name(n);
@@ -1083,8 +1088,8 @@ object_with_property(const object_types ot, const property_types pt,
 
     } else if (pt == property_types::boost_shared_ptr) {
         name n;
-        n.simple_name("shared_ptr");
-        n.model_name("boost");
+        n.simple("shared_ptr");
+        n.location().original_model_name("boost");
 
         object o2;
         o2.name(n);
@@ -1096,15 +1101,15 @@ object_with_property(const object_types ot, const property_types pt,
 
     } else if (pt == property_types::std_pair) {
         primitive b;
-        b.name().simple_name(boolean);
+        b.name().simple(boolean);
         r.primitives().insert(std::make_pair(b.name(), b));
 
         if (flags_.associations_indexed())
             o0.relationships()[ra].push_back(b.name());
 
         name n;
-        n.simple_name("pair");
-        n.model_name("std");
+        n.simple("pair");
+        n.location().original_model_name("std");
 
         object o2;
         o2.name(n);
@@ -1116,22 +1121,22 @@ object_with_property(const object_types ot, const property_types pt,
         insert_object(r, o2);
     } else if (pt == property_types::boost_variant) {
         primitive b;
-        b.name().simple_name(boolean);
+        b.name().simple(boolean);
         r.primitives().insert(std::make_pair(b.name(), b));
 
         if (flags_.associations_indexed())
             o0.relationships()[ra].push_back(b.name());
 
         primitive ui;
-        ui.name().simple_name(unsigned_int);
+        ui.name().simple(unsigned_int);
         r.primitives().insert(std::make_pair(ui.name(), ui));
 
         if (flags_.associations_indexed())
             o0.relationships()[ra].push_back(ui.name());
 
         name n;
-        n.simple_name("variant");
-        n.model_name("boost");
+        n.simple("variant");
+        n.location().original_model_name("boost");
 
         object o2;
         o2.name(n);
@@ -1143,8 +1148,8 @@ object_with_property(const object_types ot, const property_types pt,
 
     } else if (pt == property_types::std_string) {
         name n;
-        n.simple_name("string");
-        n.model_name("std");
+        n.simple("string");
+        n.location().original_model_name("std");
 
         object o2;
         o2.name(n);
@@ -1168,7 +1173,7 @@ mock_model_factory::object_with_property_type_in_different_model(
         0, property_types::value_object, o1.name());
 
     name m0_n;
-    m0_n.model_name(model_name(0));
+    m0_n.location().original_model_name(model_name(0));
 
     model m0;
     m0.name(m0_n);
@@ -1176,7 +1181,7 @@ mock_model_factory::object_with_property_type_in_different_model(
     handle_model_module(add_model_module, m0);
 
     name m1_n;
-    m1_n.model_name(model_name(1));
+    m1_n.location().original_model_name(model_name(1));
 
     model m1;
     m1.name(m1_n);
@@ -1198,9 +1203,6 @@ model mock_model_factory::object_with_missing_property_type(
     if (flags_.associations_indexed())
         o0.relationships()[ra].push_back(o1.name());
 
-    name mn_n;
-    mn_n.model_name(model_name(0));
-
     model r(make_empty_model(0, add_model_module));
     insert_object(r, o0);
 
@@ -1215,7 +1217,7 @@ object_with_parent_in_the_same_model(const bool has_property,
     model r(make_empty_model(0, add_model_module));
     if (has_property) {
         primitive ui;
-        ui.name().simple_name(unsigned_int);
+        ui.name().simple(unsigned_int);
         r.primitives().insert(std::make_pair(ui.name(), ui));
     }
 
@@ -1299,7 +1301,7 @@ object_with_third_degree_parent_in_same_model(const bool has_property,
     model r(make_empty_model(0, add_model_module));
     if (has_property) {
         primitive ui;
-        ui.name().simple_name(unsigned_int);
+        ui.name().simple(unsigned_int);
         r.primitives().insert(std::make_pair(ui.name(), ui));
     }
 
@@ -1467,8 +1469,8 @@ model mock_model_factory::object_with_group_of_properties_of_different_types(
     lambda(p2);
 
     name n;
-    n.simple_name("shared_ptr");
-    n.model_name("boost");
+    n.simple("shared_ptr");
+    n.location().original_model_name("boost");
 
     object o2;
     o2.name(n);

@@ -70,8 +70,8 @@ namespace tack_dia {
 transformer::transformer(const dynamic::workflow& w, context& c)
     : context_(c),
       identifier_parser_(new tack::identifier_parser(c.top_level_module_names(),
-              c.model().name().external_module_path(),
-              c.model().name().model_name())),
+              c.model().name().location().external_module_path(),
+              c.model().name().location().original_model_name())),
       dynamic_workflow_(w) {
 
     BOOST_LOG_SEV(lg, debug) << "Initial context: " << context_;
@@ -79,19 +79,22 @@ transformer::transformer(const dynamic::workflow& w, context& c)
 
 void transformer::
 update_model_references(const tack::nested_name& nn) {
-    const auto mn(nn.type().model_name());
-    const bool is_primitives_model(mn.empty());
-    const bool is_current_model(mn != context_.model().name().model_name());
+    const auto omn(nn.type().location().original_model_name());
+
+    // FIXME: remove is_primitives_model handling
+    const bool is_primitives_model(omn.empty());
+    const auto& l(context_.model().name().location());
+    const bool is_current_model(omn != l.original_model_name());
 
     if (!is_primitives_model && is_current_model) {
         tack::name n;
-        n.model_name(mn);
+        n.location().original_model_name(omn);
         const auto p(std::make_pair(n, tack::origin_types::unknown));
         context_.model().references().insert(p);
 
         BOOST_LOG_SEV(lg, debug) << "Adding model dependency: "
-                                 << mn << ". Current model: "
-                                 << context_.model().name().model_name();
+                                 << omn << ". Current model: "
+                                 << l.original_model_name();
     }
 
     for (const auto c : nn.children())
@@ -125,9 +128,10 @@ tack::name transformer::to_name(const std::string& n) const {
     }
 
     tack::name r;
-    r.model_name(context_.model().name().model_name());
-    r.external_module_path(context_.model().name().external_module_path());
-    r.simple_name(n);
+    const auto& l(context_.model().name().location());
+    r.location().original_model_name(l.original_model_name());
+    r.location().external_module_path(l.external_module_path());
+    r.simple(n);
 
     return r;
 }
@@ -135,16 +139,16 @@ tack::name transformer::to_name(const std::string& n) const {
 tack::name transformer::to_name(const std::string& n,
     const tack::name& module_n) const {
     auto r(to_name(n));
-    auto pp(module_n.module_path());
-    pp.push_back(module_n.simple_name());
-    r.module_path(pp);
+    auto pp(module_n.location().internal_module_path());
+    pp.push_back(module_n.simple());
+    r.location().internal_module_path(pp);
     return r;
 }
 
 tack::module& transformer::module_for_name(const tack::name& n) {
     auto i(context_.model().modules().find(n));
     if (i == context_.model().modules().end()) {
-        const auto sn(n.simple_name());
+        const auto sn(n.simple());
         BOOST_LOG_SEV(lg, error) << missing_module_for_name << sn;
         BOOST_THROW_EXCEPTION(
             transformation_error(missing_module_for_name + sn));
@@ -169,7 +173,7 @@ tack::module& transformer::module_for_id(const std::string& id) {
 
 tack::nested_name transformer::to_nested_name(const std::string& n) const {
     tack::nested_name r(identifier_parser_->parse_name(n));
-    if (r.type().simple_name().empty()) {
+    if (r.type().simple().empty()) {
         BOOST_LOG_SEV(lg, error) << invalid_type_string << n;
         BOOST_THROW_EXCEPTION(transformation_error(invalid_type_string + n));
     }
@@ -256,14 +260,14 @@ update_object(tack::object& ao, const processed_object& o, const profile& p) {
         }
 
         BOOST_LOG_SEV(lg, debug) << "Setting parent for: "
-                                 << ao.name().simple_name() << " as "
-                                 << j->second.simple_name();
+                                 << ao.name().simple() << " as "
+                                 << j->second.simple();
         ao.is_child(true);
         using tack::relationship_types;
         ao.relationships()[relationship_types::parents].push_back(j->second);
     } else {
         BOOST_LOG_SEV(lg, debug) << "Object has no parent: "
-                                 << ao.name().simple_name();
+                                 << ao.name().simple();
     }
 
     const auto j(context_.parent_ids().find(o.id()));
@@ -274,11 +278,11 @@ update_object(tack::object& ao, const processed_object& o, const profile& p) {
     ao.is_immutable(p.is_immutable());
     if ((ao.is_parent() || ao.is_child()) && p.is_immutable())  {
         BOOST_LOG_SEV(lg, error) << immutabilty_with_inheritance
-                                 << ao.name().simple_name();
+                                 << ao.name().simple();
 
         BOOST_THROW_EXCEPTION(
             transformation_error(immutabilty_with_inheritance +
-                ao.name().simple_name()));
+                ao.name().simple()));
     }
 }
 
@@ -314,8 +318,9 @@ void transformer::to_enumeration(const processed_object& o, const profile& p) {
     tack::enumeration e;
     update_element(e, o, p);
 
+    // FIXME: we should do this further down the stack.
     dogen::tack::name n;
-    n.simple_name(unsigned_int);
+    n.simple(unsigned_int);
     e.underlying_type(n);
 
     dogen::tack::enumerator invalid;

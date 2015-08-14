@@ -1734,7 +1734,7 @@ into its Tack representation.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#nqn#</dia:string>
+                <dia:string>#nn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const tack::nested_name&amp;#</dia:string>

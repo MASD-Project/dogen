@@ -20,7 +20,6 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/io/formattables/path_derivatives_repository_io.hpp"
@@ -78,9 +77,9 @@ void generator::generate(const tack::name& n) {
     const auto pair(pd.insert(std::make_pair(n, factory_.make(n))));
     const bool inserted(pair.second);
     if (!inserted) {
-        const auto sn(tack::string_converter::convert(n));
-        BOOST_LOG_SEV(lg, error) << duplicate_name << sn;
-        BOOST_THROW_EXCEPTION(building_error(duplicate_name + sn));
+        const auto qn(n.qualified());
+        BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
+        BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));
     }
 }
 
@@ -97,9 +96,10 @@ path_derivatives_repository path_derivatives_repository_factory::make(
     tack::all_model_items_traversal(m, g);
 
     tack::name n;
-    n.simple_name(registrar_name);
-    n.model_name(m.name().model_name());
-    n.external_module_path(m.name().external_module_path());
+    n.simple(registrar_name);
+    n.location().original_model_name(m.name().location().original_model_name());
+    n.location().external_module_path(
+        m.name().location().external_module_path());
     g.generate(n);
 
     for (const auto& pair : m.references()) {
@@ -109,9 +109,10 @@ path_derivatives_repository path_derivatives_repository_factory::make(
 
         const auto ref(pair.first);
         tack::name n;
-        n.model_name(ref.model_name());
-        n.simple_name(registrar_name);
-        n.external_module_path(ref.external_module_path());
+        n.simple(registrar_name);
+        n.location().original_model_name(ref.location().original_model_name());
+        n.location().external_module_path(
+            ref.location().external_module_path());
         g.generate(n);
     }
 

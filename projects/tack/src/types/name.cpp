@@ -24,28 +24,24 @@ namespace dogen {
 namespace tack {
 
 name::name(
-    const std::string& model_name,
-    const std::list<std::string>& external_module_path,
-    const std::list<std::string>& module_path,
-    const std::string& simple_name)
-    : model_name_(model_name),
-      external_module_path_(external_module_path),
-      module_path_(module_path),
-      simple_name_(simple_name) { }
+    const std::string& simple,
+    const std::string& qualified,
+    const dogen::tack::location& location)
+    : simple_(simple),
+      qualified_(qualified),
+      location_(location) { }
 
 void name::swap(name& other) noexcept {
     using std::swap;
-    swap(model_name_, other.model_name_);
-    swap(external_module_path_, other.external_module_path_);
-    swap(module_path_, other.module_path_);
-    swap(simple_name_, other.simple_name_);
+    swap(simple_, other.simple_);
+    swap(qualified_, other.qualified_);
+    swap(location_, other.location_);
 }
 
 bool name::operator==(const name& rhs) const {
-    return model_name_ == rhs.model_name_ &&
-        external_module_path_ == rhs.external_module_path_ &&
-        module_path_ == rhs.module_path_ &&
-        simple_name_ == rhs.simple_name_;
+    return simple_ == rhs.simple_ &&
+        qualified_ == rhs.qualified_ &&
+        location_ == rhs.location_;
 }
 
 name& name::operator=(name other) {
@@ -54,68 +50,52 @@ name& name::operator=(name other) {
     return *this;
 }
 
-const std::string& name::model_name() const {
-    return model_name_;
+const std::string& name::simple() const {
+    return simple_;
 }
 
-std::string& name::model_name() {
-    return model_name_;
+std::string& name::simple() {
+    return simple_;
 }
 
-void name::model_name(const std::string& v) {
-    model_name_ = v;
+void name::simple(const std::string& v) {
+    simple_ = v;
 }
 
-void name::model_name(const std::string&& v) {
-    model_name_ = std::move(v);
+void name::simple(const std::string&& v) {
+    simple_ = std::move(v);
 }
 
-const std::list<std::string>& name::external_module_path() const {
-    return external_module_path_;
+const std::string& name::qualified() const {
+    return qualified_;
 }
 
-std::list<std::string>& name::external_module_path() {
-    return external_module_path_;
+std::string& name::qualified() {
+    return qualified_;
 }
 
-void name::external_module_path(const std::list<std::string>& v) {
-    external_module_path_ = v;
+void name::qualified(const std::string& v) {
+    qualified_ = v;
 }
 
-void name::external_module_path(const std::list<std::string>&& v) {
-    external_module_path_ = std::move(v);
+void name::qualified(const std::string&& v) {
+    qualified_ = std::move(v);
 }
 
-const std::list<std::string>& name::module_path() const {
-    return module_path_;
+const dogen::tack::location& name::location() const {
+    return location_;
 }
 
-std::list<std::string>& name::module_path() {
-    return module_path_;
+dogen::tack::location& name::location() {
+    return location_;
 }
 
-void name::module_path(const std::list<std::string>& v) {
-    module_path_ = v;
+void name::location(const dogen::tack::location& v) {
+    location_ = v;
 }
 
-void name::module_path(const std::list<std::string>&& v) {
-    module_path_ = std::move(v);
-}
-
-const std::string& name::simple_name() const {
-    return simple_name_;
-}
-
-std::string& name::simple_name() {
-    return simple_name_;
-}
-
-void name::simple_name(const std::string& v) {
-    simple_name_ = v;
-}
-
-void name::simple_name(const std::string&& v) {
-    simple_name_ = std::move(v);
+void name::location(const dogen::tack::location&& v) {
+    location_ = std::move(v);
 }
 
 } }

@@ -27,7 +27,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/tack/types/object.hpp"
 #include "dogen/tack/types/indexing_error.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/io/relationship_types_io.hpp"
 #include "dogen/tack/types/property_indexer.hpp"
 
@@ -50,9 +49,9 @@ namespace tack {
 object& property_indexer::find_object(const name& n, model& m) {
     auto i(m.objects().find(n));
     if (i == m.objects().end()) {
-        const auto sn(string_converter::convert(n));
-        BOOST_LOG_SEV(lg, error) << object_not_found << sn;
-        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + sn));
+        const auto qn(n.qualified());
+        BOOST_LOG_SEV(lg, error) << object_not_found << qn;
+        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
     }
     return i->second;
 }
@@ -61,10 +60,10 @@ std::list<name>& property_indexer::
 find_relationships(const relationship_types rt, object& o) {
     auto i(o.relationships().find(rt));
     if (i == o.relationships().end() || i->second.empty()) {
-        const auto n(string_converter::convert(o.name()));
-        BOOST_LOG_SEV(lg, error) << relationship_not_found << n
+        const auto qn(o.name().qualified());
+        BOOST_LOG_SEV(lg, error) << relationship_not_found << qn
                                  << " relationship: " << rt;
-        BOOST_THROW_EXCEPTION(indexing_error(relationship_not_found + n));
+        BOOST_THROW_EXCEPTION(indexing_error(relationship_not_found + qn));
     }
     return i->second;
 }
@@ -72,21 +71,20 @@ find_relationships(const relationship_types rt, object& o) {
 concept& property_indexer::find_concept(const name& n, model& m) {
     auto i(m.concepts().find(n));
     if (i == m.concepts().end()) {
-        const auto& sn(n.simple_name());
-        BOOST_LOG_SEV(lg, error) << concept_not_found << sn;
-        BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + sn));
+        const auto& qn(n.qualified());
+        BOOST_LOG_SEV(lg, error) << concept_not_found << qn;
+        BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + qn));
     }
     return i->second;
 }
 
 void property_indexer::index_object(object& o, model& m,
     std::unordered_set<name>& processed_names) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing object: "
-                             << string_converter::convert(o.name());
+    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().qualified();
 
     if (processed_names.find(o.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed: "
-                                 << string_converter::convert(o.name());
+                                 << o.name().qualified();
         return;
     }
 
@@ -140,12 +138,11 @@ void property_indexer::index_objects(model& m) {
 
 void property_indexer::index_concept(concept& c, model& m,
     std::unordered_set<name>& processed_names) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing concept: "
-                             << string_converter::convert(c.name());
+    BOOST_LOG_SEV(lg, debug) << "Indexing concept: " << c.name().qualified();
 
     if (processed_names.find(c.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed:"
-                                 << string_converter::convert(c.name());
+                                 << c.name().qualified();
         return;
     }
 

@@ -25,16 +25,16 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
 #include <algorithm>
+#include "dogen/tack/types/location.hpp"
 #include "dogen/tack/serialization/name_fwd_ser.hpp"
 
 namespace dogen {
 namespace tack {
 
 /**
- * @brief Represents a "URL" to a type within a model.
+ * @brief Name of an element in a model, and associated properties.
  */
 class name final {
 public:
@@ -45,10 +45,9 @@ public:
 
 public:
     name(
-        const std::string& model_name,
-        const std::list<std::string>& external_module_path,
-        const std::list<std::string>& module_path,
-        const std::string& simple_name);
+        const std::string& simple,
+        const std::string& qualified,
+        const dogen::tack::location& location);
 
 private:
     template<typename Archive>
@@ -59,44 +58,33 @@ private:
 
 public:
     /**
-     * @brief Model to which the modeling element belongs to.
-     */
-    /**@{*/
-    const std::string& model_name() const;
-    std::string& model_name();
-    void model_name(const std::string& v);
-    void model_name(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Path of modules that contain the model from where the modeling element
-     * came from.
-     */
-    /**@{*/
-    const std::list<std::string>& external_module_path() const;
-    std::list<std::string>& external_module_path();
-    void external_module_path(const std::list<std::string>& v);
-    void external_module_path(const std::list<std::string>&& v);
-    /**@}*/
-
-    /**
-     * @brief Path of modules that contain this modeling element.
-     */
-    /**@{*/
-    const std::list<std::string>& module_path() const;
-    std::list<std::string>& module_path();
-    void module_path(const std::list<std::string>& v);
-    void module_path(const std::list<std::string>&& v);
-    /**@}*/
-
-    /**
      * @brief Non-qualified name of the modeling element.
      */
     /**@{*/
-    const std::string& simple_name() const;
-    std::string& simple_name();
-    void simple_name(const std::string& v);
-    void simple_name(const std::string&& v);
+    const std::string& simple() const;
+    std::string& simple();
+    void simple(const std::string& v);
+    void simple(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Qualified name of the model element, using a well-defined notation.
+     */
+    /**@{*/
+    const std::string& qualified() const;
+    std::string& qualified();
+    void qualified(const std::string& v);
+    void qualified(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Location of the element within the model.
+     */
+    /**@{*/
+    const dogen::tack::location& location() const;
+    dogen::tack::location& location();
+    void location(const dogen::tack::location& v);
+    void location(const dogen::tack::location&& v);
     /**@}*/
 
 public:
@@ -110,10 +98,9 @@ public:
     name& operator=(name other);
 
 private:
-    std::string model_name_;
-    std::list<std::string> external_module_path_;
-    std::list<std::string> module_path_;
-    std::string simple_name_;
+    std::string simple_;
+    std::string qualified_;
+    dogen::tack::location location_;
 };
 
 } }

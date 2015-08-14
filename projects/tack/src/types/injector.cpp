@@ -27,7 +27,6 @@
 #include "dogen/tack/types/object.hpp"
 #include "dogen/tack/types/type_visitor.hpp"
 #include "dogen/tack/types/injection_error.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/types/injector.hpp"
 
 using namespace dogen::utility::log;
@@ -97,13 +96,15 @@ bool injector::insert(const object& o) {
 object injector::
 create_visitor(const object& o, const std::list<name>& leaves) const {
     name n;
-    n.simple_name(o.name().simple_name() + "_" + visitor_name);
-    n.model_name(o.name().model_name());
-    n.module_path(o.name().module_path());
-    n.external_module_path(o.name().external_module_path());
+    n.simple(o.name().simple() + "_" + visitor_name);
 
-    BOOST_LOG_SEV(lg, debug) << "Creating visitor: "
-                             << string_converter::convert(n);
+    const auto& l(o.name().location());
+    n.location().original_model_name(l.original_model_name());
+    n.location().external_module_path(l.external_module_path());
+    n.location().model_module_path(l.model_module_path());
+    n.location().internal_module_path(l.internal_module_path());
+
+    BOOST_LOG_SEV(lg, debug) << "Creating visitor: " << n.qualified();
 
     object r;
     r.name(n);
@@ -111,13 +112,12 @@ create_visitor(const object& o, const std::list<name>& leaves) const {
     r.generation_type(o.generation_type());
     r.origin_type(origin_types::system);
     r.object_type(object_types::visitor);
-    r.documentation(visitor_doc + o.name().simple_name());
+    r.documentation(visitor_doc + o.name().simple());
 
     for (const auto& l : leaves)
         r.relationships()[relationship_types::visits].push_back(l);
 
-    BOOST_LOG_SEV(lg, debug) << "Created visitor: "
-                             << string_converter::convert(n);
+    BOOST_LOG_SEV(lg, debug) << "Created visitor: " << n.qualified();
     return r;
 }
 
@@ -129,9 +129,9 @@ void injector::inject_visited_by(object& root, const std::list<name>& leaves,
     for (const auto& l : leaves) {
         auto i(context_->model().objects().find(l));
         if (i == context_->model().objects().end()) {
-            const auto n(string_converter::convert(l));
-            BOOST_LOG_SEV(lg, error) << leaf_not_found << n;
-            BOOST_THROW_EXCEPTION(injection_error(leaf_not_found + n));
+            const auto qn(l.qualified());
+            BOOST_LOG_SEV(lg, error) << leaf_not_found << qn;
+            BOOST_THROW_EXCEPTION(injection_error(leaf_not_found + qn));
         }
 
         auto& leaf(i->second);
@@ -154,9 +154,9 @@ void injector::inject_visitors() {
             !i->second.empty());
 
         if (!has_leaves) {
-            const auto n(string_converter::convert(o.name()));
-            BOOST_LOG_SEV(lg, error) << zero_leaves << n;
-            BOOST_THROW_EXCEPTION(injection_error(zero_leaves + n));
+            const auto qn(o.name().qualified());
+            BOOST_LOG_SEV(lg, error) << zero_leaves << qn;
+            BOOST_THROW_EXCEPTION(injection_error(zero_leaves + qn));
         }
 
         const auto v(create_visitor(o, i->second));
@@ -166,12 +166,12 @@ void injector::inject_visitors() {
 
     for (const auto v : visitors) {
         BOOST_LOG_SEV(lg, debug) << "Adding visitor: "
-                                 << string_converter::convert(v.name());
+                                 << v.name().qualified();
 
         if (!insert(v)) {
-            const auto n(string_converter::convert(v.name()));
-            BOOST_LOG_SEV(lg, error) << duplicate_name << n;
-            BOOST_THROW_EXCEPTION(injection_error(duplicate_name + n));
+            const auto qn(v.name().qualified());
+            BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
+            BOOST_THROW_EXCEPTION(injection_error(duplicate_name + qn));
         }
     }
 
@@ -184,10 +184,10 @@ void injector::inject_global_module() {
     auto& model(context_->model());
     const auto i(model.modules().find(qn));
     if (i != model.modules().end()) {
-        const auto n(string_converter::convert(model.name()));
-        BOOST_LOG_SEV(lg, error) << model_already_has_global_module << n;
+        const auto qn(model.name().qualified());
+        BOOST_LOG_SEV(lg, error) << model_already_has_global_module << qn;
         BOOST_THROW_EXCEPTION(injection_error(
-                model_already_has_global_module + n));
+                model_already_has_global_module + qn));
     }
 
     add_containing_module_to_non_contained_entities(qn, model.modules());

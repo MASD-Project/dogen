@@ -28,7 +28,6 @@
 #include "dogen/tack/types/indexing_error.hpp"
 #include "dogen/tack/types/object.hpp"
 #include "dogen/tack/io/model_io.hpp"
-#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/io/object_io.hpp"
 #include "dogen/tack/test/mock_model_factory.hpp"
 #include "dogen/tack/types/association_indexer.hpp"
@@ -56,7 +55,6 @@ const mock_model_factory factory(flags);
 
 using dogen::utility::test::contains_checker;
 using dogen::tack::indexing_error;
-using dogen::tack::string_converter;
 using dogen::utility::test::asserter;
 using object_types = dogen::tack::test::mock_model_factory::object_types;
 using property_types = dogen::tack::test::mock_model_factory::property_types;
@@ -146,24 +144,24 @@ BOOST_AUTO_TEST_CASE(model_with_more_than_one_property_of_the_same_type_results_
 
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
         auto i(o.relationships().find(ra));
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, n)) {
             BOOST_REQUIRE(i != o.relationships().end());
             BOOST_CHECK(i->second.size() == 1);
 
             i = o.relationships().find(wa);
             BOOST_CHECK(i == o.relationships().end());
-        } else if (factory.is_type_name_n(1, qn)) {
+        } else if (factory.is_type_name_n(1, n)) {
             BOOST_REQUIRE(i != o.relationships().end());
             BOOST_CHECK(i->second.size() == 1);
 
             i = o.relationships().find(wa);
             BOOST_CHECK(i == o.relationships().end());
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << n.qualified());
     }
 }
 
@@ -184,28 +182,28 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
     bool found0(false), found1(false), found3(false);
     BOOST_REQUIRE(m.objects().size() == 5);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
         auto i(o.relationships().find(ra));
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, n)) {
             found0 = true;
             BOOST_REQUIRE(i != o.relationships().end());
             BOOST_CHECK(i->second.size() == 4);
 
             std::vector<bool> found;
             found.resize(4);
-            for (const auto& qn : i->second) {
-                if (qn.simple_name() == "shared_ptr")
+            for (const auto& n : i->second) {
+                if (n.simple() == "shared_ptr")
                     found[0] = true;
 
-                if (qn.simple_name() == "unsigned int")
+                if (n.simple() == "unsigned int")
                     found[1] = true;
 
-                if (factory.is_type_name_n(1, qn.simple_name()))
+                if (factory.is_type_name_n(1, n.simple()))
                     found[2] = true;
 
-                if (factory.is_type_name_n(4, qn.simple_name()))
+                if (factory.is_type_name_n(4, n.simple()))
                     found[3] = true;
             }
 
@@ -216,13 +214,13 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
             BOOST_CHECK(i != o.relationships().end());
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_CHECK(factory.is_type_name_n(3,
-                    i->second.front().simple_name()));
-        } else if (factory.is_type_name_n(1, qn)) {
+                    i->second.front().simple()));
+        } else if (factory.is_type_name_n(1, n)) {
             found1 = true;
             BOOST_CHECK(i == o.relationships().end());
             i = o.relationships().find(wa);
             BOOST_CHECK(i == o.relationships().end());
-        } else if (factory.is_type_name_n(3, qn)) {
+        } else if (factory.is_type_name_n(3, n)) {
             found3 = true;
             BOOST_CHECK(i == o.relationships().end());
             i = o.relationships().find(wa);
@@ -254,27 +252,27 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
     bool found0(false), found1(false), found3(false);
     BOOST_REQUIRE(m.objects().size() == 5);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
         auto i(o.relationships().find(ra));
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, n)) {
             found0 = true;
             BOOST_REQUIRE(i != o.relationships().end());
             BOOST_CHECK(i->second.size() == 4);
             std::vector<bool> found;
             found.resize(4);
-            for (const auto& qn : i->second) {
-                if (qn.simple_name() == "shared_ptr")
+            for (const auto& n : i->second) {
+                if (n.simple() == "shared_ptr")
                     found[0] = true;
 
-                if (qn.simple_name() == "unsigned int")
+                if (n.simple() == "unsigned int")
                     found[1] = true;
 
-                if (factory.is_type_name_n(1, qn.simple_name()))
+                if (factory.is_type_name_n(1, n.simple()))
                     found[2] = true;
 
-                if (factory.is_type_name_n(4, qn.simple_name()))
+                if (factory.is_type_name_n(4, n.simple()))
                     found[3] = true;
             }
 
@@ -285,14 +283,14 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
             BOOST_CHECK(i != o.relationships().end());
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_CHECK(factory.is_type_name_n(3,
-                    i->second.front().simple_name()));
+                    i->second.front().simple()));
 
-        } else if (factory.is_type_name_n(1, qn)) {
+        } else if (factory.is_type_name_n(1, n)) {
             found1 = true;
             BOOST_CHECK(i == o.relationships().end());
             i = o.relationships().find(wa);
             BOOST_CHECK(i == o.relationships().end());
-        } else if (factory.is_type_name_n(3, qn)) {
+        } else if (factory.is_type_name_n(3, n)) {
             found3 = true;
             BOOST_CHECK(i == o.relationships().end());
             i = o.relationships().find(wa);
@@ -322,7 +320,7 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_property_results_in_expected_indic
 
     BOOST_REQUIRE(m.objects().size() == 1);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
         using dogen::tack::relationship_types;
@@ -330,15 +328,15 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_property_results_in_expected_indic
         const auto wa(relationship_types::weak_associations);
 
         auto i(o.relationships().find(ra));
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, n)) {
             BOOST_REQUIRE(i != o.relationships().end());
             BOOST_CHECK(i->second.size() == 1);
-            BOOST_CHECK(i->second.begin()->simple_name() == "unsigned int");
+            BOOST_CHECK(i->second.begin()->simple() == "unsigned int");
 
             i = o.relationships().find(wa);
             BOOST_CHECK(i == o.relationships().end());
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << n.qualified());
     }
 }
 
@@ -358,7 +356,7 @@ BOOST_AUTO_TEST_CASE(object_with_bool_property_results_in_expected_indices) {
 
     BOOST_REQUIRE(m.objects().size() == 1);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
         using dogen::tack::relationship_types;
@@ -366,15 +364,15 @@ BOOST_AUTO_TEST_CASE(object_with_bool_property_results_in_expected_indices) {
         const auto wa(relationship_types::weak_associations);
 
         auto i(o.relationships().find(ra));
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, n)) {
             BOOST_REQUIRE(i != o.relationships().end());
             BOOST_CHECK(i->second.size() == 1);
-            BOOST_CHECK(i->second.begin()->simple_name() == "bool");
+            BOOST_CHECK(i->second.begin()->simple() == "bool");
 
             i = o.relationships().find(wa);
             BOOST_CHECK(i == o.relationships().end());
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << n.qualified());
     }
 }
 
@@ -391,7 +389,7 @@ BOOST_AUTO_TEST_CASE(object_with_object_property_results_in_expected_indices) {
     ind.index(m);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
         using dogen::tack::relationship_types;
@@ -399,20 +397,20 @@ BOOST_AUTO_TEST_CASE(object_with_object_property_results_in_expected_indices) {
         const auto wa(relationship_types::weak_associations);
 
         auto i(o.relationships().find(ra));
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, n)) {
             BOOST_REQUIRE(i != o.relationships().end());
             BOOST_REQUIRE(i->second.size() == 1);
-            const auto sn(i->second.begin()->simple_name());
+            const auto sn(i->second.begin()->simple());
             BOOST_CHECK(factory.is_type_name_n(1, sn));
 
             i = o.relationships().find(wa);
             BOOST_CHECK(i == o.relationships().end());
-        } else if (factory.is_type_name_n(1, qn)) {
+        } else if (factory.is_type_name_n(1, n)) {
             BOOST_CHECK(i == o.relationships().end());
             i = o.relationships().find(wa);
             BOOST_CHECK(i == o.relationships().end());
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << n.qualified());
     }
 }
 
@@ -444,7 +442,7 @@ BOOST_AUTO_TEST_CASE(object_with_std_pair_property_results_in_expected_indices) 
     bool found(false);
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
         using dogen::tack::relationship_types;
@@ -452,13 +450,13 @@ BOOST_AUTO_TEST_CASE(object_with_std_pair_property_results_in_expected_indices) 
         const auto wa(relationship_types::weak_associations);
 
         auto i(o.relationships().find(ra));
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, n)) {
             found = true;
             BOOST_REQUIRE(i != o.relationships().end());
             BOOST_CHECK(i->second.size() == 2);
-            const auto front_sn(i->second.front().simple_name());
+            const auto front_sn(i->second.front().simple());
             BOOST_CHECK(front_sn == "bool" || front_sn == "pair");
-            const auto back_sn(i->second.back().simple_name());
+            const auto back_sn(i->second.back().simple());
             BOOST_CHECK(back_sn == "bool" || back_sn == "pair");
 
             i = o.relationships().find(wa);
@@ -485,13 +483,12 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_property_results_in_expected_indi
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
         if (factory.is_type_name_n(0, pair.first)) {
             found = true;
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
 
             using dogen::tack::relationship_types;
             const auto ra(relationship_types::regular_associations);
@@ -501,8 +498,8 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_property_results_in_expected_indi
             BOOST_REQUIRE(i != o.relationships().end());
             BOOST_CHECK(i->second.size() == 3);
             bool found_uint(false), found_bool(false), found_variant(false);
-            for (const auto& qn : i->second) {
-                const auto sn(qn.simple_name());
+            for (const auto& n : i->second) {
+                const auto sn(n.simple());
                 if (sn == "unsigned int")
                     found_uint = true;
                 else if (sn == "bool")
@@ -536,7 +533,7 @@ BOOST_AUTO_TEST_CASE(object_with_std_string_property_results_in_expected_indices
     bool found(false);
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
         using dogen::tack::relationship_types;
@@ -544,11 +541,11 @@ BOOST_AUTO_TEST_CASE(object_with_std_string_property_results_in_expected_indices
         const auto wa(relationship_types::weak_associations);
 
         auto i(o.relationships().find(ra));
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, n)) {
             found = true;
             BOOST_REQUIRE(i != o.relationships().end());
             BOOST_REQUIRE(i->second.size() == 1);
-            BOOST_CHECK(i->second.front().simple_name() == "string");
+            BOOST_CHECK(i->second.front().simple() == "string");
 
             i = o.relationships().find(wa);
             BOOST_CHECK(i == o.relationships().end());
@@ -573,13 +570,12 @@ BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_property_results_in_expected_i
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
         if (factory.is_type_name_n(0, pair.first)) {
             found = true;
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
 
             using dogen::tack::relationship_types;
             const auto ra(relationship_types::regular_associations);
@@ -588,13 +584,13 @@ BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_property_results_in_expected_i
             auto i(o.relationships().find(ra));
             BOOST_REQUIRE(i != o.relationships().end());
             BOOST_REQUIRE(i->second.size() == 1);
-            BOOST_CHECK(i->second.front().simple_name() == "shared_ptr");
+            BOOST_CHECK(i->second.front().simple() == "shared_ptr");
 
             i = o.relationships().find(wa);
             BOOST_CHECK(i != o.relationships().end());
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_CHECK(factory.is_type_name_n(1,
-                    i->second.front().simple_name()));
+                    i->second.front().simple()));
         }
     }
     BOOST_CHECK(found);
@@ -613,13 +609,12 @@ BOOST_AUTO_TEST_CASE(object_with_both_regular_and_weak_associations_results_in_e
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
         if (factory.is_type_name_n(0, pair.first)) {
             found = true;
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
 
             using dogen::tack::relationship_types;
             const auto ra(relationship_types::regular_associations);
@@ -630,14 +625,14 @@ BOOST_AUTO_TEST_CASE(object_with_both_regular_and_weak_associations_results_in_e
             BOOST_REQUIRE(i->second.size() == 3);
             std::vector<bool> found;
             found.resize(3);
-            for (const auto& qn : i->second) {
-                if (qn.simple_name() == "shared_ptr")
+            for (const auto& n : i->second) {
+                if (n.simple() == "shared_ptr")
                     found[0] = true;
 
-                if (qn.simple_name() == "string")
+                if (n.simple() == "string")
                     found[1] = true;
 
-                if (factory.is_type_name_n(1, qn.simple_name()))
+                if (factory.is_type_name_n(1, n.simple()))
                     found[2] = true;
             }
 
@@ -648,7 +643,7 @@ BOOST_AUTO_TEST_CASE(object_with_both_regular_and_weak_associations_results_in_e
             BOOST_CHECK(i != o.relationships().end());
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_CHECK(factory.is_type_name_n(3,
-                    i->second.front().simple_name()));
+                    i->second.front().simple()));
         }
     }
     BOOST_CHECK(found);

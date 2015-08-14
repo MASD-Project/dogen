@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TACK_TYPES_STRING_CONVERTER_HPP
-#define DOGEN_TACK_TYPES_STRING_CONVERTER_HPP
+#ifndef DOGEN_TACK_TYPES_QUALIFIED_NAME_BUILDER_HPP
+#define DOGEN_TACK_TYPES_QUALIFIED_NAME_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,12 +32,11 @@ namespace dogen {
 namespace tack {
 
 /**
- * @brief Converts various Tack objects to a compact string
- * representation.
+ * @brief Builds a standard qualified name representation.
  */
-class string_converter {
+class qualified_name_builder {
 public:
-    static std::string convert(const name& n);
+    static std::string build(const name& n);
 };
 
 } }
