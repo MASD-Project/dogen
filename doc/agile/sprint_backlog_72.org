@@ -14,16 +14,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-08-15 Sat 12:36]
+#+CAPTION: Clock summary at [2015-08-15 Sat 14:38]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *9:04* |      |      |
+| *Total time*                                                                | *9:57* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 9:04   |      |      |
-| Active                                                                      |        | 9:04 |      |
+| Stories                                                                     | 9:57   |      |      |
+| Active                                                                      |        | 9:57 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:24 |
-| STARTED Refactor qname                                                      |        |      | 8:40 |
+| STARTED Refactor qname                                                      |        |      | 9:33 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -33,6 +33,7 @@
 Updates to sprint and product backlog.
 
 *** STARTED Refactor qname                                            :story:
+    CLOCK: [2015-08-15 Sat 13:45]--[2015-08-15 Sat 14:38] =>  0:53
     CLOCK: [2015-08-15 Sat 12:01]--[2015-08-15 Sat 12:36] =>  0:35
     CLOCK: [2015-08-14 Fri 20:34]--[2015-08-14 Fri 21:20] =>  0:46
     CLOCK: [2015-08-14 Fri 19:20]--[2015-08-14 Fri 20:33] =>  1:13

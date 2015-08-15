@@ -12,7 +12,7 @@
 	</extensions>
 	<name class_id="9" tracking_level="0" version="0">
 		<simple>all_primitives</simple>
-		<qualified></qualified>
+		<qualified>&lt;all_primitives&gt;</qualified>
 		<location class_id="10" tracking_level="0" version="0">
 			<original_model_name>all_primitives</original_model_name>
 			<external_module_path class_id="11" tracking_level="0" version="0">
@@ -20,8 +20,9 @@
 				<item_version>0</item_version>
 			</external_module_path>
 			<model_module_path>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>all_primitives</item>
 			</model_module_path>
 			<internal_module_path>
 				<count>0</count>
@@ -51,7 +52,7 @@
 		<item class_id="16" tracking_level="0" version="0">
 			<first>
 				<simple>all_primitives</simple>
-				<qualified></qualified>
+				<qualified>&lt;all_primitives&gt;</qualified>
 				<location>
 					<original_model_name>all_primitives</original_model_name>
 					<external_module_path>
@@ -59,8 +60,9 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>all_primitives</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -112,7 +114,7 @@
 				</extensions>
 				<name>
 					<simple>all_primitives</simple>
-					<qualified></qualified>
+					<qualified>&lt;all_primitives&gt;</qualified>
 					<location>
 						<original_model_name>all_primitives</original_model_name>
 						<external_module_path>
@@ -120,8 +122,9 @@
 							<item_version>0</item_version>
 						</external_module_path>
 						<model_module_path>
-							<count>0</count>
+							<count>1</count>
 							<item_version>0</item_version>
+							<item>all_primitives</item>
 						</model_module_path>
 						<internal_module_path>
 							<count>0</count>
@@ -235,7 +238,7 @@
 						<item_version>0</item_version>
 						<value>
 							<simple>all_primitives</simple>
-							<qualified></qualified>
+							<qualified>&lt;all_primitives&gt;</qualified>
 							<location>
 								<original_model_name>all_primitives</original_model_name>
 								<external_module_path>
@@ -243,8 +246,9 @@
 									<item_version>0</item_version>
 								</external_module_path>
 								<model_module_path>
-									<count>0</count>
+									<count>1</count>
 									<item_version>0</item_version>
+									<item>all_primitives</item>
 								</model_module_path>
 								<internal_module_path>
 									<count>0</count>

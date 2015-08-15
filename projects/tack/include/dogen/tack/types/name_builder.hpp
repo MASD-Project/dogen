@@ -18,17 +18,42 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TACK_TYPES_QUALIFIED_NAME_BUILDER_FWD_HPP
-#define DOGEN_TACK_TYPES_QUALIFIED_NAME_BUILDER_FWD_HPP
+#ifndef DOGEN_TACK_TYPES_NAME_BUILDER_HPP
+#define DOGEN_TACK_TYPES_NAME_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <string>
+#include "dogen/tack/types/name.hpp"
+
 namespace dogen {
 namespace tack {
 
-class qualified_name_builder;
+/**
+ * @brief Builds a standard qualified name representation.
+ */
+class name_builder {
+public:
+    explicit name_builder(const bool building_model_name);
+
+private:
+    void create_qualified_name();
+
+public:
+    void add_model_name(const std::string& mn);
+    void add_type_name(const std::string& tn);
+    void add_external_module_path(const std::string& epp);
+    void add_internal_module_path(const std::string& ipp);
+
+public:
+    name build();
+
+private:
+    const bool building_model_name_;
+    name name_;
+};
 
 } }
 

@@ -50,9 +50,9 @@ public:
 
 private:
     /**
-     * @brief Creates a qualified name for the module.
+     * @brief Creates the name for the model.
      */
-    tack::name create_qualified_name_for_model(const std::string& model_name,
+    tack::name create_name_for_model(const std::string& model_name,
         const std::string& external_module_path) const;
 
     /**

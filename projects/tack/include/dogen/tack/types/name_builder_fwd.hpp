@@ -18,27 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
-#include "dogen/tack/types/qualified_name_builder.hpp"
+#ifndef DOGEN_TACK_TYPES_NAME_BUILDER_FWD_HPP
+#define DOGEN_TACK_TYPES_NAME_BUILDER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace tack {
 
-std::string qualified_name_builder::build(const name& n) {
-    std::ostringstream s;
-    for (const auto& m : n.location().external_module_path())
-        s << "<" << m << ">";
-
-    if (!n.location().original_model_name().empty())
-        s << "<" << n.location().original_model_name() << ">";
-
-    for (const auto& m : n.location().internal_module_path())
-        s << "<" << m << ">";
-
-    if (!n.simple().empty())
-        s << "<" << n.simple() << ">";
-
-    return s.str();
-}
+class name_builder;
 
 } }
+
+#endif

@@ -12,7 +12,7 @@
 	</extensions>
 	<name class_id="9" tracking_level="0" version="0">
 		<simple>exception</simple>
-		<qualified></qualified>
+		<qualified>&lt;exception&gt;</qualified>
 		<location class_id="10" tracking_level="0" version="0">
 			<original_model_name>exception</original_model_name>
 			<external_module_path class_id="11" tracking_level="0" version="0">
@@ -20,8 +20,9 @@
 				<item_version>0</item_version>
 			</external_module_path>
 			<model_module_path>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>exception</item>
 			</model_module_path>
 			<internal_module_path>
 				<count>0</count>
@@ -103,7 +104,7 @@
 					<item_version>0</item_version>
 					<value>
 						<simple>exception</simple>
-						<qualified></qualified>
+						<qualified>&lt;exception&gt;</qualified>
 						<location>
 							<original_model_name>exception</original_model_name>
 							<external_module_path>
@@ -111,8 +112,9 @@
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>exception</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -150,7 +152,7 @@
 		<item>
 			<first>
 				<simple>exception</simple>
-				<qualified></qualified>
+				<qualified>&lt;exception&gt;</qualified>
 				<location>
 					<original_model_name>exception</original_model_name>
 					<external_module_path>
@@ -158,8 +160,9 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>exception</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -211,7 +214,7 @@
 				</extensions>
 				<name>
 					<simple>exception</simple>
-					<qualified></qualified>
+					<qualified>&lt;exception&gt;</qualified>
 					<location>
 						<original_model_name>exception</original_model_name>
 						<external_module_path>
@@ -219,8 +222,9 @@
 							<item_version>0</item_version>
 						</external_module_path>
 						<model_module_path>
-							<count>0</count>
+							<count>1</count>
 							<item_version>0</item_version>
+							<item>exception</item>
 						</model_module_path>
 						<internal_module_path>
 							<count>0</count>
@@ -372,7 +376,7 @@
 						<item_version>0</item_version>
 						<value>
 							<simple>exception</simple>
-							<qualified></qualified>
+							<qualified>&lt;exception&gt;</qualified>
 							<location>
 								<original_model_name>exception</original_model_name>
 								<external_module_path>
@@ -380,8 +384,9 @@
 									<item_version>0</item_version>
 								</external_module_path>
 								<model_module_path>
-									<count>0</count>
+									<count>1</count>
 									<item_version>0</item_version>
+									<item>exception</item>
 								</model_module_path>
 								<internal_module_path>
 									<count>0</count>
@@ -620,7 +625,7 @@
 						<item_version>0</item_version>
 						<value>
 							<simple>exception</simple>
-							<qualified></qualified>
+							<qualified>&lt;exception&gt;</qualified>
 							<location>
 								<original_model_name>exception</original_model_name>
 								<external_module_path>
@@ -628,8 +633,9 @@
 									<item_version>0</item_version>
 								</external_module_path>
 								<model_module_path>
-									<count>0</count>
+									<count>1</count>
 									<item_version>0</item_version>
+									<item>exception</item>
 								</model_module_path>
 								<internal_module_path>
 									<count>0</count>

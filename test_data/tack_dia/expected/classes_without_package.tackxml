@@ -12,7 +12,7 @@
 	</extensions>
 	<name class_id="9" tracking_level="0" version="0">
 		<simple>classes_without_package</simple>
-		<qualified></qualified>
+		<qualified>&lt;classes_without_package&gt;</qualified>
 		<location class_id="10" tracking_level="0" version="0">
 			<original_model_name>classes_without_package</original_model_name>
 			<external_module_path class_id="11" tracking_level="0" version="0">
@@ -20,8 +20,9 @@
 				<item_version>0</item_version>
 			</external_module_path>
 			<model_module_path>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>classes_without_package</item>
 			</model_module_path>
 			<internal_module_path>
 				<count>0</count>
@@ -51,7 +52,7 @@
 		<item class_id="16" tracking_level="0" version="0">
 			<first>
 				<simple>classes_without_package</simple>
-				<qualified></qualified>
+				<qualified>&lt;classes_without_package&gt;</qualified>
 				<location>
 					<original_model_name>classes_without_package</original_model_name>
 					<external_module_path>
@@ -59,8 +60,9 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>classes_without_package</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -112,7 +114,7 @@
 				</extensions>
 				<name>
 					<simple>classes_without_package</simple>
-					<qualified></qualified>
+					<qualified>&lt;classes_without_package&gt;</qualified>
 					<location>
 						<original_model_name>classes_without_package</original_model_name>
 						<external_module_path>
@@ -120,8 +122,9 @@
 							<item_version>0</item_version>
 						</external_module_path>
 						<model_module_path>
-							<count>0</count>
+							<count>1</count>
 							<item_version>0</item_version>
+							<item>classes_without_package</item>
 						</model_module_path>
 						<internal_module_path>
 							<count>0</count>
@@ -311,7 +314,7 @@
 						<item_version>0</item_version>
 						<value>
 							<simple>classes_without_package</simple>
-							<qualified></qualified>
+							<qualified>&lt;classes_without_package&gt;</qualified>
 							<location>
 								<original_model_name>classes_without_package</original_model_name>
 								<external_module_path>
@@ -319,8 +322,9 @@
 									<item_version>0</item_version>
 								</external_module_path>
 								<model_module_path>
-									<count>0</count>
+									<count>1</count>
 									<item_version>0</item_version>
+									<item>classes_without_package</item>
 								</model_module_path>
 								<internal_module_path>
 									<count>0</count>
@@ -453,7 +457,7 @@
 						<item_version>0</item_version>
 						<value>
 							<simple>classes_without_package</simple>
-							<qualified></qualified>
+							<qualified>&lt;classes_without_package&gt;</qualified>
 							<location>
 								<original_model_name>classes_without_package</original_model_name>
 								<external_module_path>
@@ -461,8 +465,9 @@
 									<item_version>0</item_version>
 								</external_module_path>
 								<model_module_path>
-									<count>0</count>
+									<count>1</count>
 									<item_version>0</item_version>
+									<item>classes_without_package</item>
 								</model_module_path>
 								<internal_module_path>
 									<count>0</count>
@@ -595,7 +600,7 @@
 						<item_version>0</item_version>
 						<value>
 							<simple>classes_without_package</simple>
-							<qualified></qualified>
+							<qualified>&lt;classes_without_package&gt;</qualified>
 							<location>
 								<original_model_name>classes_without_package</original_model_name>
 								<external_module_path>
@@ -603,8 +608,9 @@
 									<item_version>0</item_version>
 								</external_module_path>
 								<model_module_path>
-									<count>0</count>
+									<count>1</count>
 									<item_version>0</item_version>
+									<item>classes_without_package</item>
 								</model_module_path>
 								<internal_module_path>
 									<count>0</count>
@@ -737,7 +743,7 @@
 						<item_version>0</item_version>
 						<value>
 							<simple>classes_without_package</simple>
-							<qualified></qualified>
+							<qualified>&lt;classes_without_package&gt;</qualified>
 							<location>
 								<original_model_name>classes_without_package</original_model_name>
 								<external_module_path>
@@ -745,8 +751,9 @@
 									<item_version>0</item_version>
 								</external_module_path>
 								<model_module_path>
-									<count>0</count>
+									<count>1</count>
 									<item_version>0</item_version>
+									<item>classes_without_package</item>
 								</model_module_path>
 								<internal_module_path>
 									<count>0</count>
@@ -879,7 +886,7 @@
 						<item_version>0</item_version>
 						<value>
 							<simple>classes_without_package</simple>
-							<qualified></qualified>
+							<qualified>&lt;classes_without_package&gt;</qualified>
 							<location>
 								<original_model_name>classes_without_package</original_model_name>
 								<external_module_path>
@@ -887,8 +894,9 @@
 									<item_version>0</item_version>
 								</external_module_path>
 								<model_module_path>
-									<count>0</count>
+									<count>1</count>
 									<item_version>0</item_version>
+									<item>classes_without_package</item>
 								</model_module_path>
 								<internal_module_path>
 									<count>0</count>

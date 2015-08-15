@@ -19,10 +19,10 @@
  *
  */
 #include <boost/graph/depth_first_search.hpp>
-#include "dogen/utility/string/splitter.hpp"
 #include "dogen/dia/types/diagram.hpp"
 #include "dogen/tack/types/model.hpp"
 #include "dogen/tack/io/model_io.hpp"
+#include "dogen/tack/types/name_builder.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/tack_dia/types/grapher.hpp"
 #include "dogen/tack_dia/types/context.hpp"
@@ -44,17 +44,13 @@ namespace tack_dia {
 workflow::workflow(const dynamic::workflow& w) : dynamic_workflow_(w) { }
 
 tack::name
-workflow::create_qualified_name_for_model(const std::string& model_name,
+workflow::create_name_for_model(const std::string& model_name,
     const std::string& external_module_path) const {
 
-    tack::name r;
-    using utility::string::splitter;
-    const auto epp(splitter::split_scoped(external_module_path));
-    r.location().external_module_path(epp);
-    r.location().original_model_name(model_name);
-    r.simple(model_name);
-
-    return r;
+    tack::name_builder b(true/*building_model_name*/);
+    b.add_model_name(model_name);
+    b.add_external_module_path(external_module_path);
+    return b.build();
 }
 
 tack::module workflow::create_module_for_model(const tack::name& n,
@@ -76,7 +72,7 @@ void workflow::initialise_context_activity(const std::string& model_name,
     tack::model& m(context_.model());
 
     const auto& epp(external_module_path);
-    m.name(create_qualified_name_for_model(model_name, epp));
+    m.name(create_name_for_model(model_name, epp));
     BOOST_LOG_SEV(lg, debug) << "Target model name: " << m.name().simple();
 
     m.origin_type(tack::origin_types::user);
