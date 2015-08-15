@@ -183,8 +183,11 @@ name resolver::resolve_partial_type(const name& n) const {
     {
         name n;
         n.simple(r.simple());
-        n.location().original_model_name(
-            r.location().internal_module_path().front());
+
+        if (!r.location().internal_module_path().empty()) {
+            n.location().original_model_name(
+                r.location().internal_module_path().front());
+        }
         n.location().external_module_path(
             model_.name().location().external_module_path());
 
