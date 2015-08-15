@@ -5270,8 +5270,6 @@ terms in Dogen.
 | weave |         | Not used yet. Reserved for AOP support |
 |       |         |                                        |
 
-
-
 *** Overuse of =std::set=, =std::map=, etc                            :story:
 
 According to this paper by Matt Austern we should see if we really
