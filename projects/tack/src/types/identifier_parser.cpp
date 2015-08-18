@@ -167,12 +167,14 @@ struct grammar : qi::grammar<Iterator> {
 namespace dogen {
 namespace tack {
 
+identifier_parser::identifier_parser() :
+    modules_(std::unordered_set<std::string>()),
+    model_location_(location()) { }
+
 identifier_parser::
 identifier_parser(const std::unordered_set<std::string>& modules,
-    const std::list<std::string>& external_module_path,
-    const std::string model_name)
-    : modules_(modules), external_module_path_(external_module_path),
-      model_name_(model_name) { }
+    const location& model_location)
+    : modules_(modules), model_location_(model_location) { }
 
 nested_name identifier_parser::parse_name(const std::string& s) const {
     std::string::const_iterator it(s.begin());
@@ -181,8 +183,7 @@ nested_name identifier_parser::parse_name(const std::string& s) const {
     BOOST_LOG_SEV(lg, debug) << "parsing name: " << s;
 
     std::shared_ptr<nested_name_builder>
-        builder(new nested_name_builder(modules_,
-                external_module_path_, model_name_));
+        builder(new nested_name_builder(modules_, model_location_));
     grammar<std::string::const_iterator> g(builder);
     const bool ok(boost::spirit::qi::parse(it, end, g));
 

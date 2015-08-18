@@ -30,6 +30,7 @@
 #include <unordered_set>
 #include <boost/shared_ptr.hpp>
 #include "dogen/tack/types/name.hpp"
+#include "dogen/tack/types/location.hpp"
 #include "dogen/tack/types/nested_name.hpp"
 #include "dogen/tack/types/node.hpp"
 
@@ -47,8 +48,7 @@ public:
 public:
     nested_name_builder(
         const std::unordered_set<std::string>& modules,
-        const std::list<std::string>& external_module_path,
-        const std::string& model_name);
+        const location& model_location);
 
 private:
     void finish_current_node();
@@ -64,8 +64,7 @@ public:
 
 private:
     const std::unordered_set<std::string> modules_;
-    const std::list<std::string> external_module_path_;
-    const std::string model_name_;
+    const location model_location_;
     std::list<std::string> names_;
     boost::shared_ptr<node> root_;
     boost::shared_ptr<node> current_;

@@ -22,6 +22,7 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/tack/io/nested_name_io.hpp"
+#include "dogen/tack/io/location_io.hpp"
 #include "dogen/tack/types/nested_name_builder.hpp"
 
 using namespace dogen::utility::log;
@@ -37,19 +38,14 @@ namespace tack {
 
 nested_name_builder::nested_name_builder(
     const std::unordered_set<std::string>& modules,
-    const std::list<std::string>& external_module_path,
-    const std::string& model_name)
-    : modules_(modules), external_module_path_(external_module_path),
-      model_name_(model_name), root_(new node) {
+    const location& model_location)
+    : modules_(modules), model_location_(model_location), root_(new node) {
 
-    current_ = root_; // try to fix valgrind warnings
+    current_ = root_;
 
-    BOOST_LOG_SEV(lg, debug) << "Initialised with settings:"
-                             << " modules: " << modules
-                             << " external_module_path: "
-                             << external_module_path
-                             << " model_name: " << model_name;
-
+    BOOST_LOG_SEV(lg, debug) << "Initialised with settings:";
+    BOOST_LOG_SEV(lg, debug) << " modules: " << modules;
+    BOOST_LOG_SEV(lg, debug) << " location: " << model_location_;
 }
 
 void nested_name_builder::add_name(const std::string& s) {
@@ -80,10 +76,11 @@ void nested_name_builder::finish_current_node() {
         return;
     }
 
+    const auto omn(model_location_.original_model_name());
     const auto i(modules_.find(names_.front()));
     if (i != modules_.end()) {
-        n.location().original_model_name(model_name_);
-        BOOST_LOG_SEV(lg, debug) << "model name: " << model_name_;
+        n.location().original_model_name(omn);
+        BOOST_LOG_SEV(lg, debug) << "model name: " << omn;
     } else {
         BOOST_LOG_SEV(lg, debug) << "model name: " << names_.front();
         n.location().original_model_name(names_.front());

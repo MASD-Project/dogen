@@ -12,16 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-08-15 Sat 14:38]
-| <75>                                                                        |        |      |      |
-| Headline                                                                    | Time   |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *9:57* |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 9:57   |      |      |
-| Active                                                                      |        | 9:57 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:24 |
-| STARTED Refactor qname                                                      |        |      | 9:33 |
+#+CAPTION: Clock summary at [2015-08-18 Tue 17:42]
+| <75>                                                                        |         |       |      |
+| Headline                                                                    | Time    |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                                | *13:11* |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| Stories                                                                     | 13:11   |       |      |
+| Active                                                                      |         | 13:11 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:24 |
+| STARTED Refactor qname                                                      |         |       | 9:48 |
+| STARTED Refactor code around model origination                              |         |       | 0:08 |
+| STARTED Remove primitive model handling in tack dia transformer             |         |       | 0:13 |
+| STARTED Tack refactor around partial model construction                     |         |       | 2:38 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -137,6 +140,7 @@ to do with computing the correct name. We need to start using the
 builder here.
 
 *** STARTED Tack refactor around partial model construction           :story:
+    CLOCK: [2015-08-18 Tue 16:55]--[2015-08-18 Tue 17:41] =>  0:46
     CLOCK: [2015-08-18 Tue 16:32]--[2015-08-18 Tue 16:54] =>  0:22
     CLOCK: [2015-08-18 Tue 15:02]--[2015-08-18 Tue 16:32] =>  1:30
 

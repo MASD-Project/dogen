@@ -28,6 +28,7 @@
 #include <list>
 #include <string>
 #include <unordered_set>
+#include "dogen/tack/types/location.hpp"
 #include "dogen/tack/types/nested_name.hpp"
 
 namespace dogen {
@@ -35,11 +36,13 @@ namespace tack {
 
 class identifier_parser {
 public:
-    identifier_parser() = default;
     identifier_parser(const identifier_parser&) = default;
     ~identifier_parser() = default;
     identifier_parser(identifier_parser&&) = default;
     identifier_parser& operator=(const identifier_parser&) = default;
+
+public:
+    identifier_parser();
 
 public:
     /**
@@ -52,16 +55,14 @@ public:
      * @param model_name name of the current model
      */
     identifier_parser(const std::unordered_set<std::string>& modules,
-        const std::list<std::string>& external_module_path,
-        const std::string model_name);
+        const location& model_location);
 
 public:
     nested_name parse_name(const std::string& s) const;
 
 private:
     const std::unordered_set<std::string> modules_;
-    const std::list<std::string> external_module_path_;
-    const std::string model_name_;
+    const location model_location_;
 };
 
 } }

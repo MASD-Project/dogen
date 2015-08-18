@@ -70,8 +70,7 @@ namespace tack_dia {
 transformer::transformer(const dynamic::workflow& w, context& c)
     : context_(c),
       identifier_parser_(new tack::identifier_parser(c.top_level_module_names(),
-              c.model().name().location().external_module_path(),
-              c.model().name().location().original_model_name())),
+              c.model().name().location())),
       dynamic_workflow_(w) {
 
     BOOST_LOG_SEV(lg, debug) << "Initial context: " << context_;
