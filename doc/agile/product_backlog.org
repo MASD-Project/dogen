@@ -663,52 +663,6 @@ In addition, we also have huge amounts of nonsense in injector, in
 particular =add_containing_module_to_non_contained_entities=. This
 should also be handled by the module indexer.
 
-*** Improve references management                                     :story:
-
-At present, we compute model references as follows:
-
-- in dia to sml we first loop through all types and figure out the
-  distinct model names. This is done by creating a "shallow" qname
-  with just the model name and setting its origin type to unknown.
-- when we merge, we take the references of target - the only ones we
-  care about - and then we check that against the list of the models
-  we are about to merge. If there are any missing models we complain
-  (see comments below). We then loop through the list of references
-  and "resolve" the origin type of the model.
-
-Note: We could actually also complain if there are too many models, or
-more cleverly avoid merging those models which are not required. Or
-even more cleverly, we could avoid loading them in the first place, if
-only we could load target first.
-
-A slightly better way of doing this would be:
-
-- in SML create a references updater that takes a model and computes
-  its reference requirements. It could also receive a list of "other"
-  models from which to get their origin types to avoid using =unknown=
-  at all, and checks that all reference requirements have been met.
-- the current step =update_references= is just a call to the
-  references updater, prior to merging, with the target model.
-
-Note:
-
-It seems that the references are incorrect at present; on rebuild, we
-see serialisation's registrar moving for no reason:
-
-: -    dogen::config::register_types(ar);
-:      dogen::sml::register_types(ar);
-: -    dogen::dynamic::schema::register_types(ar);
-: +    dogen::config::register_types(ar);
-
-The references have not changed at all in the dogen invocation:
-
-:    --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
-:    --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
-:    --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
-:    --reference ${CMAKE_SOURCE_DIR}/diagrams/schema.dia,dogen::dynamic
-
-We need to fix this with the refactor.
-
 *** Assignment operator seems to pass types by value                  :story:
 
 The code for the operator is as follows:
@@ -1424,6 +1378,19 @@ We should only implement this story when all of the major refactoring
 has been done.
 
 *** Refactor Dia to SML transformer                                   :story:
+
+*Recent Ideas*
+
+- remove top level module names. This is required by the identifier
+  parser and should be done in SML. We need to ensure modules have a
+  way of identifying them as top-level or not top-level and the
+  identifier parser takes in a collection of modules and does the
+  appropriate pre-processing. We could add a =is_top_level= property
+  to the module as well as a name: =owner=. These could be populated
+  as part of the tack workflows.
+- references computation should be done in tack.
+
+*Previous Ideas*
 
 - remove all properties from context which are used only internally in
   the transformer.

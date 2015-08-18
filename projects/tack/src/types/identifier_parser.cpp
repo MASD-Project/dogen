@@ -191,7 +191,8 @@ nested_name identifier_parser::parse_name(const std::string& s) const {
         BOOST_THROW_EXCEPTION(parsing_error(error_msg + s));
     }
 
-    const auto r(builder->build());
+    auto r(builder->build());
+    r.unparsed_name(s);
     BOOST_LOG_SEV(lg, debug) << "result: " << r;
     return r;
 }

@@ -300,6 +300,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>bool</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -339,6 +340,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>char</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -378,6 +380,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>unsigned char</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -417,6 +420,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>int</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -456,6 +460,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>unsigned int</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -495,6 +500,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>long</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -534,6 +540,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>unsigned long</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -573,6 +580,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>long long</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -612,6 +620,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>unsigned long long</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -651,6 +660,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>short</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -690,6 +700,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>unsigned short</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -729,6 +740,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>double</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -768,6 +780,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>float</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>

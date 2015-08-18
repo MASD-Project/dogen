@@ -6,8 +6,6 @@
 * Mission Statement
 
 - Perform the main refactors to yarn and cpp;
-- Simplify templates;
-- Integrate Clang.
 
 * Stories
 
@@ -33,6 +31,7 @@
 Updates to sprint and product backlog.
 
 *** STARTED Refactor qname                                            :story:
+    CLOCK: [2015-08-18 Tue 14:24]--[2015-08-18 Tue 14:39] =>  0:15
     CLOCK: [2015-08-15 Sat 13:45]--[2015-08-15 Sat 14:38] =>  0:53
     CLOCK: [2015-08-15 Sat 12:01]--[2015-08-15 Sat 12:36] =>  0:35
     CLOCK: [2015-08-14 Fri 20:34]--[2015-08-14 Fri 21:20] =>  0:46
@@ -93,11 +92,118 @@ model name such as:
 See comment in 'dot' story - we can have a model name and a model
 package.
 
-*** Remove primitive model handling in tack dia transformer           :story:
+*** STARTED Refactor code around model origination                    :story:
+    CLOCK: [2015-08-18 Tue 14:39]--[2015-08-18 Tue 14:47] =>  0:08
+
+- remove origin types and generation types, replacing it with just a
+  boolean for is target.
+- at present we are using origin type to determine whether to create a
+  registrar, etc in cpp model. There is no other use case for
+  this. This is done in several places due to the bad handling of C++
+  specific types. Grep for =references= in =cpp= to find all
+  locations.
+
+*Previous Understanding*
+
+In the past we added a number of knobs around generation, all with
+their own problems:
+
+- =origin_types=: was the model/type created by the user or the
+  system. in reality this means did the model come from Dia or
+  JSON. this is confusing as the user can also add JSON files (their
+  own model library) and in the future the user can use JSON
+  exclusively without needed Dia at all.
+
+- =generation_types=: if the model is target, all types are to be
+  generated /unless/ they are not properly supported, in which case
+  they are to be "partially" generated (as is the case with
+  services). This is a formatter decision and SML should not know
+  anything about it.
+
+These can be replaced by a single enumeration that indicates if the
+type/model is target or not.
+
+This work should be integrated with the model types story.
+
+*** STARTED Remove primitive model handling in tack dia transformer   :story:
+    CLOCK: [2015-08-18 Tue 14:48]--[2015-08-18 Tue 15:01] =>  0:13
 
 We seem to be doing some handling for primitives which is no longer
 required. The handling of current model is also very dodgy. All in
 transformer's update model reference.
+
+Actually this is nothing at all to do with the primitive model but all
+to do with computing the correct name. We need to start using the
+builder here.
+
+*** STARTED Tack refactor around partial model construction           :story:
+    CLOCK: [2015-08-18 Tue 16:32]--[2015-08-18 Tue 16:54] =>  0:22
+    CLOCK: [2015-08-18 Tue 15:02]--[2015-08-18 Tue 16:32] =>  1:30
+
+There are a number of activities done in the file importers which
+really belong to the main meta-model. We should create a single
+workflow for "post-processing" with these activities and move them
+away from the importers.
+
+Notes:
+
+- add a module post processor that computes owner (containing
+  module?), members, is top level. Seems like we already have a
+  top-level module: containing module is null.
+- add unparsed name to nested name. Update importers to read the
+  unparsed name and not expand it. Create a "property expander" that
+  parses the unparsed name and expands it to a proper nested
+  name. Compute qualified for property types.
+- reference expander to compute references.
+- add some enumeration post-processing that assigns it a underlying
+  type. Should be done with merged model (look for a primitive type with
+  property =is_default_enumeration_type=).
+
+*** Improve references management                                     :story:
+
+At present, we compute model references as follows:
+
+- in dia to sml we first loop through all types and figure out the
+  distinct model names. This is done by creating a "shallow" qname
+  with just the model name and setting its origin type to unknown.
+- when we merge, we take the references of target - the only ones we
+  care about - and then we check that against the list of the models
+  we are about to merge. If there are any missing models we complain
+  (see comments below). We then loop through the list of references
+  and "resolve" the origin type of the model.
+
+Note: We could actually also complain if there are too many models, or
+more cleverly avoid merging those models which are not required. Or
+even more cleverly, we could avoid loading them in the first place, if
+only we could load target first.
+
+A slightly better way of doing this would be:
+
+- in SML create a references updater that takes a model and computes
+  its reference requirements. It could also receive a list of "other"
+  models from which to get their origin types to avoid using =unknown=
+  at all, and checks that all reference requirements have been met.
+- the current step =update_references= is just a call to the
+  references updater, prior to merging, with the target model.
+
+Note:
+
+It seems that the references are incorrect at present; on rebuild, we
+see serialisation's registrar moving for no reason:
+
+: -    dogen::config::register_types(ar);
+:      dogen::sml::register_types(ar);
+: -    dogen::dynamic::schema::register_types(ar);
+: +    dogen::config::register_types(ar);
+
+The references have not changed at all in the dogen invocation:
+
+:    --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
+:    --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
+:    --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
+:    --reference ${CMAKE_SOURCE_DIR}/diagrams/schema.dia,dogen::dynamic
+
+We need to fix this with the refactor.
 
 *** Add =operator<= for names                                         :story:
 
@@ -319,33 +425,6 @@ was formed, and then ownership by DDC.
 
 We still use these terms frequently. We should define them in dynamic
 to have specific meanings.
-
-*** Refactor code around model origination                            :story:
-
-- remove origin types and generation types, replacing it with just a
-  boolean for is target.
-
-*Previous Understanding*
-
-In the past we added a number of knobs around generation, all with
-their own problems:
-
-- =origin_types=: was the model/type created by the user or the
-  system. in reality this means did the model come from Dia or
-  JSON. this is confusing as the user can also add JSON files (their
-  own model library) and in the future the user can use JSON
-  exclusively without needed Dia at all.
-
-- =generation_types=: if the model is target, all types are to be
-  generated /unless/ they are not properly supported, in which case
-  they are to be "partially" generated (as is the case with
-  services). This is a formatter decision and SML should not know
-  anything about it.
-
-These can be replaced by a single enumeration that indicates if the
-type/model is target or not.
-
-This work should be integrated with the model types story.
 
 *** Models should have an associated language                          :epic:
 

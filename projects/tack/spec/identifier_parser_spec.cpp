@@ -48,6 +48,7 @@ bool test_primitive(const std::string& s) {
     dogen::tack::name e;
     e.simple(s);
     nn.type(e);
+    nn.unparsed_name(s);
     return asserter::assert_equals(nn, a);
 }
 
@@ -71,6 +72,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_na
     e.location().internal_module_path(std::list<std::string> { "b", "c"});
     e.location().original_model_name("a");
     nn.type(e);
+    nn.unparsed_name(s);
     BOOST_CHECK(asserter::assert_equals(nn, a));
 }
 
@@ -86,6 +88,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_without_scope_operator_produces_expected_nam
     dogen::tack::name e;
     e.simple("zeta");
     nn.type(e);
+    nn.unparsed_name(s);
     BOOST_CHECK(asserter::assert_equals(nn, a));
 }
 
@@ -102,6 +105,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_one_scope_operator_produces_expected_na
     e.location().original_model_name("a");
     e.simple("z");
     nn.type(e);
+    nn.unparsed_name(s);
     BOOST_CHECK(asserter::assert_equals(nn, a));
 }
 
@@ -182,7 +186,10 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expec
     c.type(f);
     nn.children(std::list<dogen::tack::nested_name> { c });
 
-    const auto a(ip.parse_name("type<abc>"));
+    const std::string s("type<abc>");
+    nn.unparsed_name(s);
+
+    const auto a(ip.parse_name(s));
     BOOST_CHECK(asserter::assert_equals(nn, a));
 }
 
@@ -207,6 +214,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected
 
     const std::string s("type<abc,cde>");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
+    nn.unparsed_name(s);
 
     const auto a(ip.parse_name(s));
     BOOST_CHECK(asserter::assert_equals(nn, a));
@@ -230,6 +238,7 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_nested_names) {
 
     const std::string s("std::vector<std::string>");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
+    nn.unparsed_name(s);
 
     const auto a(ip.parse_name(s));
     BOOST_CHECK(asserter::assert_equals(nn, a));
@@ -252,6 +261,7 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_nested_names)
 
     const std::string s("std::vector<unsigned int>");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
+    nn.unparsed_name(s);
 
     const auto a(ip.parse_name(s));
     BOOST_CHECK(asserter::assert_equals(nn, a));
@@ -281,11 +291,15 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_nested_names) {
 
     const std::string s1("std::unordered_map<std::string,my::type>");
     BOOST_LOG_SEV(lg, info) << "input: " << s1;
+    nn.unparsed_name(s1);
+
     const auto a1(ip.parse_name(s1));
     BOOST_CHECK(asserter::assert_equals(nn, a1));
 
     const std::string s2("std::unordered_map<std::string,    my::type>");
     BOOST_LOG_SEV(lg, info) << "input: " << s2;
+    nn.unparsed_name(s2);
+
     const auto a2(ip.parse_name(s2));
     BOOST_CHECK(asserter::assert_equals(nn, a2));
 }
@@ -315,6 +329,7 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_nested_names
 
     const std::string s("std::vector<std::shared_ptr<std::string>>");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
+    nn.unparsed_name(s);
 
     const auto a(ip.parse_name(s));
     BOOST_CHECK(asserter::assert_equals(nn, a));

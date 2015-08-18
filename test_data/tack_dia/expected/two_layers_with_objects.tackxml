@@ -520,6 +520,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>int</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -664,6 +665,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>int</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>

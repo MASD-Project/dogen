@@ -634,6 +634,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>unsigned int</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -777,6 +778,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>int</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -943,9 +945,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>boost::shared_ptr&lt;class_a&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1031,12 +1035,15 @@
 												<item_version>0</item_version>
 											</children>
 											<is_pointer>0</is_pointer>
+											<unparsed_name></unparsed_name>
 										</item>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::vector&lt;boost::shared_ptr&lt;class_a&gt;&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1099,6 +1106,7 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 								<item>
 									<type>
@@ -1148,12 +1156,15 @@
 												<item_version>0</item_version>
 											</children>
 											<is_pointer>0</is_pointer>
+											<unparsed_name></unparsed_name>
 										</item>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::unordered_map&lt;int,boost::shared_ptr&lt;class_a&gt;&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1217,9 +1228,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>boost::shared_ptr&lt;pkg1::class_c&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1282,9 +1295,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>boost::shared_ptr&lt;class_base&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1370,12 +1385,15 @@
 												<item_version>0</item_version>
 											</children>
 											<is_pointer>0</is_pointer>
+											<unparsed_name></unparsed_name>
 										</item>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::vector&lt;boost::shared_ptr&lt;class_base&gt;&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1416,6 +1434,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>pkg1::class_c</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1582,6 +1601,7 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 								<item>
 									<type>
@@ -1608,9 +1628,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>boost::variant&lt;int,double&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1673,6 +1695,7 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 								<item>
 									<type>
@@ -1699,6 +1722,7 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 								<item>
 									<type>
@@ -1725,9 +1749,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>boost::variant&lt;int,class_derived,double&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1813,6 +1839,7 @@
 												<item_version>0</item_version>
 											</children>
 											<is_pointer>0</is_pointer>
+											<unparsed_name></unparsed_name>
 										</item>
 										<item>
 											<type>
@@ -1839,6 +1866,7 @@
 												<item_version>0</item_version>
 											</children>
 											<is_pointer>0</is_pointer>
+											<unparsed_name></unparsed_name>
 										</item>
 										<item>
 											<type>
@@ -1865,12 +1893,15 @@
 												<item_version>0</item_version>
 											</children>
 											<is_pointer>0</is_pointer>
+											<unparsed_name></unparsed_name>
 										</item>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::vector&lt;boost::variant&lt;int,class_derived,double&gt;&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1933,6 +1964,7 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 								<item>
 									<type>
@@ -1959,6 +1991,7 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 								<item>
 									<type>
@@ -1985,9 +2018,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>boost::variant&lt;int,std::string,char&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2132,6 +2167,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>int</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2194,9 +2230,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::vector&lt;class_a&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2341,6 +2379,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>boost::property_tree::ptree</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2507,9 +2546,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>boost::optional&lt;int&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2572,9 +2613,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>boost::optional&lt;class_a&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2638,9 +2681,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>boost::optional&lt;pkg1::class_c&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2726,12 +2771,15 @@
 												<item_version>0</item_version>
 											</children>
 											<is_pointer>0</is_pointer>
+											<unparsed_name></unparsed_name>
 										</item>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>boost::optional&lt;std::vector&lt;class_a&gt;&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2875,6 +2923,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>int</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3045,6 +3094,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>boost::asio::io_service</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3087,6 +3137,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>boost::asio::ip::tcp::socket</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3129,6 +3180,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>boost::asio::ip::tcp::acceptor</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3273,6 +3325,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>boost::gregorian::date</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3313,6 +3366,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>boost::posix_time::ptime</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3353,6 +3407,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>boost::posix_time::time_duration</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3416,9 +3471,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::list&lt;boost::gregorian::date&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3482,9 +3539,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::list&lt;boost::posix_time::ptime&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3548,9 +3607,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::list&lt;boost::posix_time::time_duration&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3695,6 +3756,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>boost::filesystem::path</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3758,9 +3820,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::list&lt;boost::filesystem::path&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>

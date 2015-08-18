@@ -18,39 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/tack/hash/name_hash.hpp"
-#include "dogen/tack/hash/nested_name_hash.hpp"
+#ifndef DOGEN_TACK_TYPES_REFERENES_EXPANDER_FWD_HPP
+#define DOGEN_TACK_TYPES_REFERENES_EXPANDER_FWD_HPP
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_dogen_tack_nested_name(const std::list<dogen::tack::nested_name>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace tack {
 
-std::size_t nested_name_hasher::hash(const nested_name& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.type());
-    combine(seed, hash_std_list_dogen_tack_nested_name(v.children()));
-    combine(seed, v.is_pointer());
-    combine(seed, v.unparsed_name());
-
-    return seed;
-}
+class referenes_expander;
 
 } }
+
+#endif

@@ -673,6 +673,7 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 								<item>
 									<type>
@@ -699,9 +700,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::pair&lt;int,int&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -764,6 +767,7 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 								<item>
 									<type>
@@ -790,9 +794,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::pair&lt;std::string,std::string&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -878,6 +884,7 @@
 												<item_version>0</item_version>
 											</children>
 											<is_pointer>0</is_pointer>
+											<unparsed_name></unparsed_name>
 										</item>
 										<item>
 											<type>
@@ -904,12 +911,15 @@
 												<item_version>0</item_version>
 											</children>
 											<is_pointer>0</is_pointer>
+											<unparsed_name></unparsed_name>
 										</item>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::vector&lt;std::pair&lt;std::string,int&gt;&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1076,9 +1086,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::shared_ptr&lt;base&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1141,9 +1153,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::weak_ptr&lt;base&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1206,9 +1220,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::unique_ptr&lt;base&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1248,6 +1264,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::function</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1391,6 +1408,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::int8_t</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1430,6 +1448,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::int16_t</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1469,6 +1488,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::int32_t</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1508,6 +1528,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::int64_t</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1547,6 +1568,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::uint8_t</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1586,6 +1608,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::uint16_t</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1625,6 +1648,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::uint32_t</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1664,6 +1688,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::uint64_t</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1818,6 +1843,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::string</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1858,6 +1884,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::string</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2024,9 +2051,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::vector&lt;std::string&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2089,9 +2118,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::vector&lt;class_a&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2155,9 +2186,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::vector&lt;pkg1::class_c&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2220,9 +2253,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::vector&lt;unsigned int&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2285,9 +2320,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::vector&lt;class_a&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2373,12 +2410,15 @@
 												<item_version>0</item_version>
 											</children>
 											<is_pointer>0</is_pointer>
+											<unparsed_name></unparsed_name>
 										</item>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::vector&lt;std::vector&lt;unsigned int&gt;&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2545,9 +2585,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::list&lt;std::string&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2610,9 +2652,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::list&lt;class_a&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2676,9 +2720,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::list&lt;pkg1::class_c&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2741,9 +2787,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::list&lt;unsigned int&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2806,9 +2854,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::list&lt;class_a&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2894,12 +2944,15 @@
 												<item_version>0</item_version>
 											</children>
 											<is_pointer>0</is_pointer>
+											<unparsed_name></unparsed_name>
 										</item>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::list&lt;std::list&lt;unsigned int&gt;&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3066,9 +3119,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::deque&lt;std::string&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3131,9 +3186,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::deque&lt;class_a&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3197,9 +3254,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::deque&lt;pkg1::class_c&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3262,9 +3321,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::deque&lt;unsigned int&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3327,9 +3388,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::deque&lt;class_a&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3415,12 +3478,15 @@
 												<item_version>0</item_version>
 											</children>
 											<is_pointer>0</is_pointer>
+											<unparsed_name></unparsed_name>
 										</item>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::deque&lt;std::deque&lt;unsigned int&gt;&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3587,6 +3653,7 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 								<item>
 									<type>
@@ -3613,9 +3680,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::unordered_map&lt;std::string,std::string&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3678,6 +3747,7 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 								<item>
 									<type>
@@ -3704,9 +3774,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::unordered_map&lt;std::string,class_a&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3769,6 +3841,7 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 								<item>
 									<type>
@@ -3796,9 +3869,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::unordered_map&lt;class_a,pkg1::class_c&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3943,6 +4018,7 @@
 								<item_version>0</item_version>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>int</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -4005,9 +4081,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::vector&lt;class_a&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -4174,6 +4252,7 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 								<item>
 									<type>
@@ -4224,12 +4303,15 @@
 												<item_version>0</item_version>
 											</children>
 											<is_pointer>0</is_pointer>
+											<unparsed_name></unparsed_name>
 										</item>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::unordered_map&lt;class_a,std::vector&lt;pkg1::class_c&gt;&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -4293,6 +4375,7 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 								<item>
 									<type>
@@ -4342,12 +4425,15 @@
 												<item_version>0</item_version>
 											</children>
 											<is_pointer>0</is_pointer>
+											<unparsed_name></unparsed_name>
 										</item>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::unordered_map&lt;pkg1::class_c,std::list&lt;class_a&gt;&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -4410,6 +4496,7 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 								<item>
 									<type>
@@ -4436,9 +4523,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::unordered_map&lt;std::string, class_a&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -4605,9 +4694,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::vector&lt;std::string&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -4775,9 +4866,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::list&lt;pkg1::class_c&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -4970,9 +5063,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::unordered_set&lt;class_a&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -5036,9 +5131,11 @@
 										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
+									<unparsed_name></unparsed_name>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
+							<unparsed_name>std::unordered_set&lt;pkg1::class_c&gt;</unparsed_name>
 						</type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
