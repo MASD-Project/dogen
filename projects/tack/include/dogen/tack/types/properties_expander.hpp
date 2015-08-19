@@ -38,6 +38,8 @@ private:
 
     identifier_parser make_identifier_parser(const model& m) const;
 
+    void expand_property(const identifier_parser& ip, property& p) const;
+
 public:
     void expand(model& m) const;
 };

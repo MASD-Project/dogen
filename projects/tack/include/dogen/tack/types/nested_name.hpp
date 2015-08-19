@@ -26,7 +26,6 @@
 #endif
 
 #include <list>
-#include <string>
 #include <algorithm>
 #include "dogen/tack/types/name.hpp"
 #include "dogen/tack/types/nested_name.hpp"
@@ -51,8 +50,7 @@ public:
     nested_name(
         const dogen::tack::name& type,
         const std::list<dogen::tack::nested_name>& children,
-        const bool is_pointer,
-        const std::string& unparsed_name);
+        const bool is_pointer);
 
 private:
     template<typename Archive>
@@ -90,18 +88,6 @@ public:
     void is_pointer(const bool v);
     /**@}*/
 
-    /**
-     * @brief Original name as it appeared in the source, without any parsing.
-     *
-     * Name must be in one of the supported notations.
-     */
-    /**@{*/
-    const std::string& unparsed_name() const;
-    std::string& unparsed_name();
-    void unparsed_name(const std::string& v);
-    void unparsed_name(const std::string&& v);
-    /**@}*/
-
 public:
     bool operator==(const nested_name& rhs) const;
     bool operator!=(const nested_name& rhs) const {
@@ -116,7 +102,6 @@ private:
     dogen::tack::name type_;
     std::list<dogen::tack::nested_name> children_;
     bool is_pointer_;
-    std::string unparsed_name_;
 };
 
 } }

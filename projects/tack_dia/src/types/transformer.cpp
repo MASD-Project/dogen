@@ -188,7 +188,7 @@ tack::property transformer::to_property(const processed_property& p) const {
     tack::property r;
     r.name(p.name());
     r.type(to_nested_name(p.type()));
-
+    r.unparsed_type(p.type());
     r.documentation(p.comment().documentation());
 
     const auto& kvps(p.comment().key_value_pairs());

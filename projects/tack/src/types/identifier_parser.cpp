@@ -193,7 +193,6 @@ nested_name identifier_parser::parse_name(const std::string& s) const {
     }
 
     auto r(builder->build());
-    r.unparsed_name(s);
     BOOST_LOG_SEV(lg, debug) << "result: " << r;
     return r;
 }

@@ -29,26 +29,22 @@ nested_name::nested_name()
 nested_name::nested_name(
     const dogen::tack::name& type,
     const std::list<dogen::tack::nested_name>& children,
-    const bool is_pointer,
-    const std::string& unparsed_name)
+    const bool is_pointer)
     : type_(type),
       children_(children),
-      is_pointer_(is_pointer),
-      unparsed_name_(unparsed_name) { }
+      is_pointer_(is_pointer) { }
 
 void nested_name::swap(nested_name& other) noexcept {
     using std::swap;
     swap(type_, other.type_);
     swap(children_, other.children_);
     swap(is_pointer_, other.is_pointer_);
-    swap(unparsed_name_, other.unparsed_name_);
 }
 
 bool nested_name::operator==(const nested_name& rhs) const {
     return type_ == rhs.type_ &&
         children_ == rhs.children_ &&
-        is_pointer_ == rhs.is_pointer_ &&
-        unparsed_name_ == rhs.unparsed_name_;
+        is_pointer_ == rhs.is_pointer_;
 }
 
 nested_name& nested_name::operator=(nested_name other) {
@@ -95,22 +91,6 @@ bool nested_name::is_pointer() const {
 
 void nested_name::is_pointer(const bool v) {
     is_pointer_ = v;
-}
-
-const std::string& nested_name::unparsed_name() const {
-    return unparsed_name_;
-}
-
-std::string& nested_name::unparsed_name() {
-    return unparsed_name_;
-}
-
-void nested_name::unparsed_name(const std::string& v) {
-    unparsed_name_ = v;
-}
-
-void nested_name::unparsed_name(const std::string&& v) {
-    unparsed_name_ = std::move(v);
 }
 
 } }

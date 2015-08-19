@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
 #include "dogen/tack/test_data/name_td.hpp"
 #include "dogen/tack/test_data/nested_name_td.hpp"
 
@@ -46,12 +45,6 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
-}
-
 }
 
 namespace dogen {
@@ -64,7 +57,6 @@ populate(const unsigned int position, result_type& v) {
     v.type(create_dogen_tack_name(position + 0));
     v.children(create_std_list_dogen_tack_nested_name(position + 1));
     v.is_pointer(create_bool(position + 2));
-    v.unparsed_name(create_std_string(position + 3));
 }
 
 nested_name_generator::result_type

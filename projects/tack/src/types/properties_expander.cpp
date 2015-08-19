@@ -43,8 +43,19 @@ properties_expander::make_identifier_parser(const model& m) const {
     return r;
 }
 
+void properties_expander::
+expand_property(const identifier_parser& /*ip*/, property& /*p*/) const {
+    /*tack::nested_name nn(ip.parse_name(p.unparsed_name()));
+      p.type(nn);*/
+}
+
 void properties_expander::expand(model& m) const {
-    /*const auto ip(*/make_identifier_parser(m)/*)*/;
+    const auto ip(make_identifier_parser(m));
+    for (auto& pair : m.objects()) {
+        auto& o(pair.second);
+        for (auto& p : o.local_properties())
+            expand_property(ip, p);
+    }
 }
 
 } }

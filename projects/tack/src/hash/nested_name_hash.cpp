@@ -48,7 +48,6 @@ std::size_t nested_name_hasher::hash(const nested_name& v) {
     combine(seed, v.type());
     combine(seed, hash_std_list_dogen_tack_nested_name(v.children()));
     combine(seed, v.is_pointer());
-    combine(seed, v.unparsed_name());
 
     return seed;
 }

@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
 #include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/io/nested_name_io.hpp"
 
@@ -38,13 +37,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::tack::ne
 
 }
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
-
 namespace dogen {
 namespace tack {
 
@@ -59,8 +51,7 @@ std::ostream& operator<<(std::ostream& s, const nested_name& v) {
       << "\"__type__\": " << "\"dogen::tack::nested_name\"" << ", "
       << "\"type\": " << v.type() << ", "
       << "\"children\": " << v.children() << ", "
-      << "\"is_pointer\": " << v.is_pointer() << ", "
-      << "\"unparsed_name\": " << "\"" << tidy_up_string(v.unparsed_name()) << "\""
+      << "\"is_pointer\": " << v.is_pointer()
       << " }";
     return(s);
 }

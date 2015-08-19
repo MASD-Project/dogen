@@ -52,6 +52,7 @@ public:
         const dogen::dynamic::object& extensions,
         const std::string& name,
         const dogen::tack::nested_name& type,
+        const std::string& unparsed_type,
         const bool is_immutable,
         const bool is_fluent);
 
@@ -110,6 +111,18 @@ public:
     /**@}*/
 
     /**
+     * @brief Original type as it appeared in the source, without any parsing.
+     *
+     * Type must be in one of the supported notations.
+     */
+    /**@{*/
+    const std::string& unparsed_type() const;
+    std::string& unparsed_type();
+    void unparsed_type(const std::string& v);
+    void unparsed_type(const std::string&& v);
+    /**@}*/
+
+    /**
      * @brief If true, the property can only be read but not set.
      */
     /**@{*/
@@ -140,6 +153,7 @@ private:
     dogen::dynamic::object extensions_;
     std::string name_;
     dogen::tack::nested_name type_;
+    std::string unparsed_type_;
     bool is_immutable_;
     bool is_fluent_;
 };

@@ -68,7 +68,7 @@
         <dia:point val="-40,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-40.05,29.95;-28.67,36.05"/>
+        <dia:rectangle val="-40.05,29.95;-28.67,36.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-40,30"/>
@@ -77,7 +77,7 @@
         <dia:real val="11.279999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#property#</dia:string>
@@ -204,6 +204,31 @@ Must only contain characters that can be used for identifiers in the target back
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Qualified name for the type of the property.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#unparsed_type#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Original type as it appeared in the source, without any parsing.
+
+Type must be in one of the supported notations.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -383,7 +408,7 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:point val="-31,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-31.05,-1.05;-17.745,4.25"/>
+        <dia:rectangle val="-31.05,-1.05;-17.745,3.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-31,-1"/>
@@ -392,7 +417,7 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#nested_name#</dia:string>
@@ -551,31 +576,6 @@ Must only contain characters that can be used for identifiers in the target back
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#unparsed_name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Original name as it appeared in the source, without any parsing.
-
-Name must be in one of the supported notations.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -624,7 +624,7 @@ Name must be in one of the supported notations.#</dia:string>
         <dia:point val="-28.72,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.47,4.15;-24.1975,30.8"/>
+        <dia:rectangle val="-29.47,3.35;-24.1975,30.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -633,7 +633,7 @@ Name must be in one of the supported notations.#</dia:string>
         <dia:point val="-28.72,30"/>
         <dia:point val="-28.72,16"/>
         <dia:point val="-24.3975,16"/>
-        <dia:point val="-24.3975,4.2"/>
+        <dia:point val="-24.3975,3.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -9474,17 +9474,17 @@ etc.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O82">
       <dia:attribute name="obj_pos">
-        <dia:point val="-116.665,2.6"/>
+        <dia:point val="-116.858,2.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-117.515,2.55;-90.5825,13.05"/>
+        <dia:rectangle val="-117.708,2.55;-90.5825,13.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-116.665,2.6"/>
-        <dia:point val="-116.665,9"/>
+        <dia:point val="-116.858,2.6"/>
+        <dia:point val="-116.858,9"/>
         <dia:point val="-90.6325,9"/>
         <dia:point val="-90.6325,13"/>
       </dia:attribute>
