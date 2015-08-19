@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
+#include <string>
 #include "dogen/tack/types/identifier_parser.hpp"
+#include "dogen/tack/types/nested_name.hpp"
 #include "dogen/tack/types/model.hpp"
 
 namespace dogen {
@@ -38,7 +40,8 @@ private:
 
     identifier_parser make_identifier_parser(const model& m) const;
 
-    void expand_property(const identifier_parser& ip, property& p) const;
+    nested_name make_nested_name(const identifier_parser& ip,
+        const std::string& s) const;
 
 public:
     void expand(model& m) const;

@@ -18,27 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TACK_TYPES_EXPANDER_HPP
-#define DOGEN_TACK_TYPES_EXPANDER_HPP
+#ifndef DOGEN_TACK_TYPES_MODULES_EXPANDER_FWD_HPP
+#define DOGEN_TACK_TYPES_MODULES_EXPANDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/tack/types/model.hpp"
-
 namespace dogen {
 namespace tack {
 
-class expander {
-private:
-    void expand_properties(model& m) const;
-    void expand_modules(model& m) const;
-    void expand_references(model& m) const;
-
-public:
-    void expand(model& m) const;
-};
+class modules_expander;
 
 } }
 

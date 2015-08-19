@@ -18,49 +18,50 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/tack/types/properties_expander.hpp"
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/tack/types/references_expander.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("tack.references_expander"));
+
+}
 
 namespace dogen {
 namespace tack {
 
-std::unordered_set<std::string>
-properties_expander::obtain_top_level_module_names(const model& m) const {
-    std::unordered_set<std::string> r;
+void references_expander::
+expand_model_references(const tack::nested_name& nn, model& m) const {
+    const auto nn_omn(nn.type().location().original_model_name());
+    const auto m_omn(m.name().location().original_model_name());
+    const bool is_current_model(nn_omn == m_omn);
 
-    for (const auto& pair : m.modules()) {
-        const auto& module(pair.second);
-        if (!module.containing_module())
-            r.insert(module.name().simple());
-    }
-    return r;
+  if (!nn_omn.empty() && !is_current_model) {
+      tack::name n;
+      n.location().original_model_name(nn_omn);
+      const auto p(std::make_pair(n, tack::origin_types::unknown));
+      m.references().insert(p);
+
+      BOOST_LOG_SEV(lg, debug) << "Adding model dependency: "
+                               << nn_omn << ". Current model: " << m_omn;
+  }
+
+  for (const auto c : nn.children())
+      expand_model_references(c, m);
 }
 
-identifier_parser
-properties_expander::make_identifier_parser(const model& m) const {
-    const auto tlmn(obtain_top_level_module_names(m));
-    const auto& l(m.name().location());
-    identifier_parser r(tlmn, l);
-    return r;
-}
-
-nested_name properties_expander::make_nested_name(const identifier_parser& ip,
-    const std::string& s) const {
-    tack::nested_name r(ip.parse_name(s));
-    return r;
-}
-
-void properties_expander::expand(model& m) const {
-    const auto ip(make_identifier_parser(m));
+void references_expander::expand(model& m) const {
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
         for (auto& p : o.local_properties())
-            p.type(make_nested_name(ip, p.unparsed_type()));
+            expand_model_references(p.type(), m);
     }
 
     for (auto& pair : m.concepts()) {
         auto& c(pair.second);
         for (auto& p : c.local_properties())
-            p.type(make_nested_name(ip, p.unparsed_type()));
+            expand_model_references(p.type(), m);
     }
 }
 

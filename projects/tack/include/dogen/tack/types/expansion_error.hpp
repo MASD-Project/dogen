@@ -18,26 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TACK_TYPES_EXPANDER_HPP
-#define DOGEN_TACK_TYPES_EXPANDER_HPP
+#ifndef DOGEN_TACK_TYPES_EXPANSION_ERROR_HPP
+#define DOGEN_TACK_TYPES_EXPANSION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/tack/types/model.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
 namespace tack {
 
-class expander {
-private:
-    void expand_properties(model& m) const;
-    void expand_modules(model& m) const;
-    void expand_references(model& m) const;
+/**
+ * @brief An error occurred whilst performing a model expansion.
+ */
+class expansion_error : public virtual std::exception, public virtual boost::exception {
+public:
+    expansion_error() = default;
+    ~expansion_error() noexcept = default;
 
 public:
-    void expand(model& m) const;
+    expansion_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
 } }

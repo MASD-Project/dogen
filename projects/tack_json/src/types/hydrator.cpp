@@ -29,10 +29,9 @@
 #include "dogen/tack_json/types/hydration_error.hpp"
 #include "dogen/tack_json/types/hydrator.hpp"
 
-using namespace dogen::utility::log;
-
 namespace {
 
+using namespace dogen::utility::log;
 auto lg(logger_factory("tack_json.hydrator"));
 
 const std::string empty;
