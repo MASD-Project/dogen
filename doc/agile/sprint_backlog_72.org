@@ -34,6 +34,7 @@
 Updates to sprint and product backlog.
 
 *** STARTED Refactor qname                                            :story:
+    CLOCK: [2015-08-20 Thu 07:52]--[2015-08-20 Thu 08:36] =>  0:44
     CLOCK: [2015-08-18 Tue 14:24]--[2015-08-18 Tue 14:39] =>  0:15
     CLOCK: [2015-08-15 Sat 13:45]--[2015-08-15 Sat 14:38] =>  0:53
     CLOCK: [2015-08-15 Sat 12:01]--[2015-08-15 Sat 12:36] =>  0:35
@@ -63,6 +64,85 @@ Notes:
   compute these properties. This means that all calls to qualified
   prior to this need to be replaced to direct calls to qualified name
   builder.
+
+More notes:
+
+- within a partial model, there are two stages of processing: an
+  initial pass in which we can identify all of the names of the
+  elements declared in a model; and a second pass in which we can
+  resolve all properties that belong to that model. By "resolve" we
+  mean we can figure out if a property is referring to an element in a
+  module inside the model or if its referring to an element in a
+  different model. This can only be done when we have all the names of
+  all the modules in the model.
+- there is such a thing as a location: an object which allows one to
+  figure out where a type is located in an imaginary "element
+  space". In addition to the location, the element space has another
+  dimension, given by the element "simple" name (from now on just
+  name). The pair =(location, name)= corresponds to a unique point in
+  the element space.
+- there is such a thing as a unique element identifier: it is a string
+  representation of the pair =(location, name)= according to a
+  well-defined syntax.
+- the pair =(location, name)= is an element identifier, because it
+  uniquely identifies elements in the element space.
+- the external module path is required to allow us to represent
+  external containment; that is, cases where the model is contained in
+  one or more namespaces, but we do not want to represent these inside
+  the model.
+- the internal module path is required to allow us to represent
+  internal containment; that is, the element is contained in one or
+  more modules, represented in the model.
+- the model path represents containment inferred from the model name
+  itself; that is, a composite model name such as =a.b.c=.
+- the model name does not always contribute to the model path. For
+  models such as hardware, the model has to have a name (it cannot be
+  in a nameless file) but the types are in the global space. This
+  means that we need to switch on/off the ability to have the model
+  name contribute to the model namespace.
+- model names are only relevant initially. We could store them in
+  model class, but they will be thrown away during merging.
+- references are used for several purposes: a) to determine that we
+  have loaded all required models. b) to generate code dependencies
+  against dependent models: at present just linking and registrar in
+  serialisation. In order to figure out what to do with the reference
+  we need to know its "kind". For dogen models, we need to generate
+  registrars; for non-dogen models we do not. We always need to
+  link. At present this is done via the origin types property. A
+  better way of modeling this may be "is dogen model" or something
+  along these lines.
+- one model may have more than one set of link instructions. These are
+  more related to the types than with the model itself. For example,
+  in boost we need to link potentially against multiple
+  libraries. This could be modeled by a dynamic property at the type
+  level or model level. For dogen models it would be model level. The
+  property may be empty (hardware, std).
+- from a element identifier it is not possible to determine its model
+  name. It may or may not be reconstructible from the model
+  path. However, if one were to have a map of location to model name,
+  one could at least figure out if the type is on any of the loaded
+  models. We could keep track of all locations which are not within
+  the model. Those must match the referenced models or else there is a
+  type resolution failure.
+- there is such a thing as a element instance identifier. We call it
+  nested name at present. The element instance identifier identifies
+  instantiations of types. It models two cases: for the case where the
+  type has no type parameters, the instance identifier is equal to the
+  element identifier; for all other cases, it is a hierarchical
+  collection of element identifiers, modeling the type parameter
+  structure.
+- a model should have: an element identifier which is identical to the
+  root module (the module that represents the model). A model is
+  itself an element.
+
+ a location; a name (meaning the original,
+  possibly composite, model name); a
+
+the
+  types pace is hierarchical: its made up of the global namespace at
+  the top (where types in the hardware model live), and then followed
+  by all other namespaces "declared" at the top-level.
+- there are four distinct cases of locations in the type space
 
 Merged stories:
 
