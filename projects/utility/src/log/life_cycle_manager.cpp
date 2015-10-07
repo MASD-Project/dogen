@@ -25,7 +25,8 @@
 #include <boost/log/expressions.hpp>
 #include <boost/log/sources/logger.hpp>
 #include <boost/log/support/date_time.hpp>
-#include <boost/utility/empty_deleter.hpp>
+#include <boost/log/core.hpp>
+#include <boost/core/null_deleter.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/utility/log/life_cycle_manager.hpp"
@@ -72,14 +73,14 @@ void life_cycle_manager::create_file_backend(
         % expressions::attr<std::string>(channel_attr)
         % expressions::smessage);
 
-    core::get()->add_sink(sink);
+    boost::log::core::get()->add_sink(sink);
 }
 
 void life_cycle_manager::create_console_backend(const severity_level severity) {
     using namespace boost; // to handle empty deleter moving namespaces
     using namespace boost::log;
 
-    boost::shared_ptr<std::ostream> s(&std::clog, empty_deleter());
+    boost::shared_ptr<std::ostream> s(&std::clog, null_deleter());
     auto backend(boost::make_shared<sinks::text_ostream_backend>());
     backend->add_stream(s);
 
@@ -96,7 +97,7 @@ void life_cycle_manager::create_console_backend(const severity_level severity) {
         % expressions::attr<std::string>(channel_attr)
         % expressions::smessage);
 
-    core::get()->add_sink(sink);
+    boost::log::core::get()->add_sink(sink);
 }
 
 void life_cycle_manager::

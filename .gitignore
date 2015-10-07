@@ -14,3 +14,6 @@ Thumbs.db
 
 # CLion files
 .idea
+
+# build directory
+build/output

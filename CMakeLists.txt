@@ -18,21 +18,10 @@
 # MA 02110-1301, USA.
 #
 # avoid nonsense warning on cygwin
-set(CMAKE_LEGACY_CYGWIN_WIN32 0) # Remove when CMake >= 2.8.4 is required
-
-cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
 
 # enable ctest support
 enable_testing()
-
-# prohibit in-source builds: i.e. users are not allowed to perform
-# builds either in the source root directory or in any of its
-# sub-directories.
-string(REGEX MATCH "^${CMAKE_SOURCE_DIR}" source_build ${CMAKE_BINARY_DIR})
-if (source_build)
-    message(FATAL_ERROR "Attempting to build in the source directory."
-        "Please create a separate build directory and invoke cmake from there.")
-endif()
 
 project(dogen)
 
@@ -65,7 +54,7 @@ endif()
 # strange behaviour with boost::variant, we can't. see this email for
 # details: http://lists.boost.org/boost-users/2013/08/79650.php
 add_definitions(-DBOOST_ALL_DYN_LINK)
-find_package(Boost 1.55 REQUIRED COMPONENTS
+find_package(Boost 1.59 REQUIRED COMPONENTS
     system
     chrono
     serialization
