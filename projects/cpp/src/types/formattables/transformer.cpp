@@ -22,7 +22,10 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/forward_list_io.hpp"
+#include "dogen/utility/io/shared_ptr_io.hpp"
 #include "dogen/tack/io/object_types_io.hpp"
+#include "dogen/cpp/io/formattables/formattable_io.hpp"
 #include "dogen/cpp/types/formattables/name_builder.hpp"
 #include "dogen/cpp/types/formattables/transformation_error.hpp"
 #include "dogen/cpp/types/formattables/transformer.hpp"
@@ -583,8 +586,9 @@ transform(const tack::object& o) const {
                 boost::lexical_cast<std::string>(o.object_type())));
     } };
 
+    for (const auto& i : r)
+        BOOST_LOG_SEV(lg, debug) << "Transformed object: " << *i;
     return r;
-    BOOST_LOG_SEV(lg, debug) << "Transformed object.";
 }
 
 } } }

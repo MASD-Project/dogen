@@ -74,7 +74,7 @@ void annotation_formatter::format_preamble(
 
     bool is_top(false);
     const auto top(modeline_locations::top);
-    bool has_modeline(a.modeline() != nullptr);
+    bool has_modeline(a.modeline());
     std::list<std::string> content;
     if (has_modeline) {
         is_top = a.modeline()->location() == top;

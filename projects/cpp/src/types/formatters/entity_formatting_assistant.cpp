@@ -313,14 +313,14 @@ void entity_formatting_assistant::add_helper_methods() {
         (in_inheritance || is_io_integrated()));
 
     if (is_types_class_implementation && requires_io) {
-        BOOST_LOG_SEV(lg, debug) << "Creating io helper methods.";
+        BOOST_LOG_SEV(lg, debug) << "Creating io helper methods in types.";
         io::helper_methods_formatter f(c->properties());
         f.format(stream());
     } else
-        BOOST_LOG_SEV(lg, debug) << "Helper methods for io not required."
-                                 << " is types class implementation: ''"
+        BOOST_LOG_SEV(lg, debug) << "Helper methods for io not required in types."
+                                 << " is types class implementation: '"
                                  << is_types_class_implementation
-                                 << "' requires io: " << requires_io << "''";
+                                 << "' requires io: '" << requires_io << "'";
 
     using iot = formatters::io::traits;
     const auto& io_ci_fn(iot::class_implementation_formatter_name());
@@ -331,8 +331,8 @@ void entity_formatting_assistant::add_helper_methods() {
         f.format(stream());
     } else
         BOOST_LOG_SEV(lg, debug) << "Helper methods for io not required."
-                                 << " is io class implementation: ''"
-                                 << is_io_class_implementation;
+                                 << " is io class implementation: '"
+                                 << is_io_class_implementation << "'";
 
     if (is_types_class_implementation) {
         BOOST_LOG_SEV(lg, debug) << "Creating types helper methods.";
@@ -341,7 +341,7 @@ void entity_formatting_assistant::add_helper_methods() {
     } else {
         BOOST_LOG_SEV(lg, debug) << "Type helper methods not required."
                                  << " is types class implementation: '"
-                                 << is_types_class_implementation << "''";
+                                 << is_types_class_implementation << "'";
     }
 
     using ht = formatters::hash::traits;
@@ -356,7 +356,7 @@ void entity_formatting_assistant::add_helper_methods() {
     } else {
         BOOST_LOG_SEV(lg, debug) << "Hash helper methods not required."
                                  << " is hash class implementation: '"
-                                 << is_hash_class_implementation << "''";
+                                 << is_hash_class_implementation << "'";
     }
 
     using tdt = formatters::test_data::traits;
@@ -371,7 +371,7 @@ void entity_formatting_assistant::add_helper_methods() {
     } else {
         BOOST_LOG_SEV(lg, debug) << "Test data helper methods not required."
                                  << " is test data class implementation: '"
-                                 << is_test_data_class_implementation << "''";
+                                 << is_test_data_class_implementation << "'";
     }
 }
 
