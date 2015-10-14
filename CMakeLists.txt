@@ -17,7 +17,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-# avoid nonsense warning on cygwin
 cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
 
 # enable ctest support
@@ -224,6 +223,7 @@ set(DOGEN_VERSION "${DOGEN_MAJOR_VERSION}")
 set(DOGEN_VERSION "${DOGEN_VERSION}.${DOGEN_MINOR_VERSION}")
 set(DOGEN_VERSION "${DOGEN_VERSION}.${DOGEN_PATCH_VERSION}")
 
+# debug
 if(WITH_DEBUG)
     message(STATUS "Building WITH DEBUG symbols...")
     set(DOGEN_VERSION "${DOGEN_VERSION}d")
@@ -255,17 +255,6 @@ if (WITH_DOXYGEN)
             COMMAND ${DOXYGEN_EXECUTABLE} ${doxy_file}
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             COMMENT "Generating API documentation with Doxygen" VERBATIM)
-
-        set(target_dir "/usr/share/cdash/doxygen/dogen")
-        add_custom_target(deploy_doxy
-            COMMENT "Deploying doxygen documentation."
-            COMMAND rm -rf ${target_dir}.new
-            COMMAND mkdir ${target_dir}.new
-            COMMAND cp -r ${stage_dir}/doxygen/html ${target_dir}.new/
-            COMMAND rm -rf ${target_dir}
-            COMMAND mv ${target_dir}.new ${target_dir}
-            )
-        add_dependencies(deploy_doxy doxy)
 
         install(
             DIRECTORY ${stage_doxygen_dir}/html/
