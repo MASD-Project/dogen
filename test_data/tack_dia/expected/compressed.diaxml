@@ -1282,7 +1282,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>-33.8343,-46.4125;-5.4993,-42.2125</value>
+										<value>-33.8343,-46.4125;1.4307,-42.2125</value>
 									</value>
 								</item>
 							</values>
@@ -1328,7 +1328,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>28.235000000000003</value>
+										<value>35.164999999999999</value>
 									</value>
 								</item>
 							</values>
@@ -1409,7 +1409,7 @@
 																<value>##DOGEN dia.comment=true
 #DOGEN licence_name=gpl_v3
 #DOGEN modeline_group_name=emacs
-#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</value>
+#DOGEN copyright_notice=Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;#</value>
 															</value>
 														</item>
 													</values>

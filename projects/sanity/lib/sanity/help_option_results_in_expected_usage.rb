@@ -1,6 +1,6 @@
 # -*- mode: ruby; tab-width: 4; indent-tabs-mode: nil -*-
 #
-# Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+# Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright(C) 2012 Kitanda <info@kitanda.co.uk>
+ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -127,7 +127,7 @@ fa.stream() << "    " << sf.prefix() << p.qualified_name() << "(" << sf.postfix(
                         sf.next();
                         dogen::formatters::sequence_formatter sf2(p.properties().size());
                         sf2.element_separator("");
-                        
+
                         sf2.prefix_configuration().first("  ").not_first("  ");
                         sf2.postfix_configuration().last(")");
                         for (const auto prop : p.properties()) {

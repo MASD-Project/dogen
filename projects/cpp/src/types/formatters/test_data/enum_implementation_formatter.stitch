@@ -1,5 +1,5 @@
 <#@ licence_name=gpl_v3 #>
-<#@ copyright_notice=Copyright(C) 2012 Kitanda <info@kitanda.co.uk> #>
+<#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
 <#@ modeline_group_name=emacs #>
 <#@ stream_variable_name=fa.stream() #>
 <#@ inclusion_dependency="dogen/cpp/types/formatters/test_data/enum_header_formatter_stitch.hpp" #>

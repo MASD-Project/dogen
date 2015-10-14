@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -114,7 +114,7 @@ const std::string expression_block_in_expression_block(
 
 const std::string licence_directive("<#@ licence_name=gpl_v3 #>");
 const std::string multiple_directives(R"(<#@ licence_name=gpl_v3 #>
-<#@ copyright_notice=Copyright(C) 2012 Kitanda <info@kitanda.co.uk> #>)");
+<#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>)");
 const std::string multiple_start_directives("<#@ <#@ licence_name=gpl_v3 #>");
 const std::string multiple_end_directives("<#@ licence_name=gpl_v3 #> #>");
 const std::string namespaces_directive("<#@ containing_namespaces=a::b::c #>");
@@ -124,7 +124,7 @@ const std::string namespaces_name("containing_namespaces");
 const std::string namespaces_value("a::b::c");
 const std::string copyright_notice_name("copyright_notice");
 const std::string copyright_notice_value(
-    "Copyright(C) 2012 Kitanda <info@kitanda.co.uk>");
+    "Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>");
 
 const std::string only_text_content_second_line("other text content");
 const std::string single_line_standard_control_block_content("single line");

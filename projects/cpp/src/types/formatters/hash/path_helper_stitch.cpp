@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright(C) 2012 Kitanda <info@kitanda.co.uk>
+ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ namespace hash {
 
 void path_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& t) {    
+    const formattables::nested_type_info& t) {
 fa.stream() << std::endl;
 fa.stream() << "inline std::size_t hash_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
 fa.stream() << "    std::size_t seed(0);" << std::endl;

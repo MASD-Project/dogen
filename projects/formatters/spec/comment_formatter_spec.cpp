@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ const std::string doxygen_c_style_empty(R"(/**
 
 const std::string licence_c_style(R"(/* -*- mode: xyz; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  *
@@ -53,7 +53,7 @@ const std::string licence_c_style(R"(/* -*- mode: xyz; tab-width: 4; indent-tabs
 
 const std::string licence_shell_style(R"(# -*- mode: xyz; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
 #
-# Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+# Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify
 #
@@ -70,7 +70,7 @@ const std::string doxygen_brief("Ends the comment block.");
 
 const std::string modeline(
     "-*- mode: xyz; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-");
-const std::string licence(R"(Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+const std::string licence(R"(Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
 
 This program is free software; you can redistribute it and/or modify)");
 
