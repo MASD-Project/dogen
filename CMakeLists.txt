@@ -78,14 +78,14 @@ if(LIBXML2_FOUND)
 endif()
 
 # odb
-find_package(ODB)
-if(ODB_FOUND)
-    message(STATUS "Found odb...")
-    include_directories(SYSTEM ${ODB_INCLUDE_DIR})
-    set(LIBS ${LIBS} ${LIBXML2_LIBRARY_DIR})
-else()
+# find_package(ODB)
+# if(ODB_FOUND)
+#    message(STATUS "Found odb...")
+#    include_directories(SYSTEM ${ODB_INCLUDE_DIR})
+#    set(LIBS ${LIBS} ${LIBXML2_LIBRARY_DIR})
+# else()
     message(STATUS "odb not found.")
-endif()
+# endif()
 
 # eos
 if(WIN32)

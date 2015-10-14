@@ -33,12 +33,6 @@ foreach(candindate_spec_file ${candindate_spec_files})
         endif()
     endif()
 
-    if(NOT EOS_FOUND)
-        if (candindate_spec_file MATCHES "eos")
-            set(ignore_file true)
-        endif()
-    endif()
-
     if(NOT ignore_file)
         set(spec_files ${spec_files} ${candindate_spec_file})
     endif()
@@ -80,10 +74,6 @@ target_link_libraries(${spec_name}
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     )
-
-if(EOS_FOUND)
-    target_link_libraries(${spec_name} eos_serialization)
-endif()
 
 set(${spec_name}_cmd ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
 

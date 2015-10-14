@@ -42,4 +42,4 @@ struct exception_fixture {
 
 }
 
-BOOST_GLOBAL_FIXTURE(exception_fixture)
+BOOST_GLOBAL_FIXTURE(exception_fixture);

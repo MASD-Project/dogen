@@ -63,5 +63,5 @@ struct create_db_fixture {
 
 }
 
-BOOST_GLOBAL_FIXTURE(exception_fixture)
-BOOST_GLOBAL_FIXTURE(create_db_fixture)
+BOOST_GLOBAL_FIXTURE(exception_fixture);
+BOOST_GLOBAL_FIXTURE(create_db_fixture);

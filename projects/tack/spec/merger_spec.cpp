@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <set>
 #include <array>
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>

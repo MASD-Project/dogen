@@ -59,12 +59,6 @@ if(ODB_FOUND)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database/spec)
 endif()
 
-if(EOS_FOUND)
-    message(STATUS "Adding EOS feature test project")
-    include_directories(${CMAKE_SOURCE_DIR}/projects/test_models/eos_serialization/include)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/eos_serialization)
-endif()
-
 # global targets
 add_custom_target(rebase_test_models)
 add_custom_target(diff_test_models)
