@@ -9,7 +9,6 @@
 void date_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
-    
 #>
 
 inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {

@@ -29,7 +29,6 @@ void smart_pointer_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
 
-
     const auto containee(t.children().front());
 fa.stream() << std::endl;
 fa.stream() << "inline std::size_t hash_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;

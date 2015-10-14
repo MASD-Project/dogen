@@ -128,7 +128,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
                         sf.next();
                         dogen::formatters::sequence_formatter sf2(p.properties().size());
                         sf2.element_separator("");
-                        
+
                         sf2.prefix_configuration().first("  ").not_first("  ");
                         sf2.postfix_configuration().last(")");
                         for (const auto prop : p.properties()) {
