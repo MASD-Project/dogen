@@ -238,7 +238,7 @@ public:
 
 private:
     const formattables::entity& entity_;
-    const dynamic::ownership_hierarchy& ownership_hierarchy_;
+    const dynamic::ownership_hierarchy ownership_hierarchy_;
     const formattables::formatter_properties formatter_properties_;
     const formatters::file_types file_type_;
 };

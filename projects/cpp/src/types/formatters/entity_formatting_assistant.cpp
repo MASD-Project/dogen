@@ -305,8 +305,8 @@ void entity_formatting_assistant::add_helper_methods() {
     BOOST_LOG_SEV(lg, debug) << "Processing entity: " << c->name();
 
     using tt = formatters::types::traits;
-    const auto& cifn(tt::class_implementation_formatter_name());
-    const auto& fn(ownership_hierarchy_.formatter_name());
+    const auto cifn(tt::class_implementation_formatter_name());
+    const auto fn(ownership_hierarchy_.formatter_name());
     const bool is_types_class_implementation(fn == cifn);
     const bool in_inheritance(c->is_parent() || !c->parents().empty());
     const bool requires_io(is_io_enabled() &&
@@ -317,13 +317,13 @@ void entity_formatting_assistant::add_helper_methods() {
         io::helper_methods_formatter f(c->properties());
         f.format(stream());
     } else
-        BOOST_LOG_SEV(lg, debug) << "Helper methods for io not required in types."
+        BOOST_LOG_SEV(lg, debug) << "Helper methods for types io not required."
                                  << " is types class implementation: '"
                                  << is_types_class_implementation
                                  << "' requires io: '" << requires_io << "'";
 
     using iot = formatters::io::traits;
-    const auto& io_ci_fn(iot::class_implementation_formatter_name());
+    const auto io_ci_fn(iot::class_implementation_formatter_name());
     const bool is_io_class_implementation(fn == io_ci_fn);
     if (is_io_class_implementation && !in_inheritance && !is_io_integrated()) {
         BOOST_LOG_SEV(lg, debug) << "Creating io helper methods.";
@@ -345,7 +345,7 @@ void entity_formatting_assistant::add_helper_methods() {
     }
 
     using ht = formatters::hash::traits;
-    const auto& h_ci_fn(ht::class_implementation_formatter_name());
+    const auto h_ci_fn(ht::class_implementation_formatter_name());
     const bool is_hash_class_implementation(fn == h_ci_fn);
     const bool requires_hash(is_hash_enabled());
 
@@ -360,7 +360,7 @@ void entity_formatting_assistant::add_helper_methods() {
     }
 
     using tdt = formatters::test_data::traits;
-    const auto& td_ci_fn(tdt::class_implementation_formatter_name());
+    const auto td_ci_fn(tdt::class_implementation_formatter_name());
     const bool is_test_data_class_implementation(fn == td_ci_fn);
     const bool requires_test_data(is_test_data_enabled());
 
@@ -371,7 +371,7 @@ void entity_formatting_assistant::add_helper_methods() {
     } else {
         BOOST_LOG_SEV(lg, debug) << "Test data helper methods not required."
                                  << " is test data class implementation: '"
-                                 << is_test_data_class_implementation << "'";
+                                 << is_test_data_class_implementation << "' ";
     }
 }
 

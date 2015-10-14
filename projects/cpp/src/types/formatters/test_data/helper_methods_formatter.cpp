@@ -245,8 +245,10 @@ void helper_methods_formatter::recursive_helper_method_creator(
     if (as_pointer)
         type_name += "_ptr";
 
-    if (types_done.find(type_name) != types_done.end())
+    if (types_done.find(type_name) != types_done.end()) {
+        BOOST_LOG_SEV(lg, debug) << "Type already done: " << type_name;
         return;
+    }
 
     for (const auto c : t.children()) {
         recursive_helper_method_creator(fa, c, types_done,
