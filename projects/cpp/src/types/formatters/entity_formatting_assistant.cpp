@@ -170,10 +170,6 @@ bool entity_formatting_assistant::is_xml_serialization_disabled() const {
     return entity_.settings().aspect_settings().disable_xml_serialization();
 }
 
-bool entity_formatting_assistant::is_eos_serialization_disabled() const {
-    return entity_.settings().aspect_settings().disable_eos_serialization();
-}
-
 void entity_formatting_assistant::validate() const {
     const auto& fn(ownership_hierarchy_.formatter_name());
     const auto& fp(formatter_properties_);

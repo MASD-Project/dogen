@@ -60,14 +60,6 @@ template void register_types(boost::archive::xml_iarchive&<#= arg_name #>);
 
 <#+
             }
-
-            if (!fa.is_eos_serialization_disabled()) {
-#>
-template void register_types(eos::portable_oarchive&<#= arg_name #>);
-template void register_types(eos::portable_iarchive&<#= arg_name #>);
-
-<#+
-            }
         } // snf
     } // sbf
     return fa.make_file();

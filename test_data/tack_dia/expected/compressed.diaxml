@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
-<boost_serialization signature="serialization::archive" version="10">
+<boost_serialization signature="serialization::archive" version="13">
 <entity class_id="0" tracking_level="0" version="0">
 	<diagram_data class_id="1" tracking_level="0" version="0">
 		<attributes class_id="2" tracking_level="0" version="0">
@@ -1282,7 +1282,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>-33.8343,-46.4125;-5.4993,-41.4125</value>
+										<value>-33.8343,-46.4125;-5.4993,-42.2125</value>
 									</value>
 								</item>
 							</values>
@@ -1341,7 +1341,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>4.8999999999999995</value>
+										<value>4.0999999999999996</value>
 									</value>
 								</item>
 							</values>
@@ -1409,8 +1409,7 @@
 																<value>##DOGEN dia.comment=true
 #DOGEN licence_name=gpl_v3
 #DOGEN modeline_group_name=emacs
-#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
-#DOGEN cpp.disable_eos_serialization=true#</value>
+#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</value>
 															</value>
 														</item>
 													</values>

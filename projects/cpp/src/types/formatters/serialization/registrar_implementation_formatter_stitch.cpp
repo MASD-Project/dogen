@@ -67,12 +67,6 @@ fa.stream() << "template void register_types(boost::archive::xml_oarchive&" << a
 fa.stream() << "template void register_types(boost::archive::xml_iarchive&" << arg_name << ");" << std::endl;
 fa.stream() << std::endl;
             }
-
-            if (!fa.is_eos_serialization_disabled()) {
-fa.stream() << "template void register_types(eos::portable_oarchive&" << arg_name << ");" << std::endl;
-fa.stream() << "template void register_types(eos::portable_iarchive&" << arg_name << ");" << std::endl;
-fa.stream() << std::endl;
-            }
         } // snf
     } // sbf
     return fa.make_file();

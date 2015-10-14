@@ -36,9 +36,7 @@ std::ostream& operator<<(std::ostream& s, const aspect_settings& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::settings::aspect_settings\"" << ", "
       << "\"disable_complete_constructor\": " << v.disable_complete_constructor() << ", "
-      << "\"disable_xml_serialization\": " << v.disable_xml_serialization() << ", "
-      << "\"disable_eos_serialization\": " << v.disable_eos_serialization() << ", "
-      << "\"disable_versioning\": " << v.disable_versioning()
+      << "\"disable_xml_serialization\": " << v.disable_xml_serialization()
       << " }";
     return(s);
 }

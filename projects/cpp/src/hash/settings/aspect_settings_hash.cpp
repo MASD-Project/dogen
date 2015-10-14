@@ -39,8 +39,6 @@ std::size_t aspect_settings_hasher::hash(const aspect_settings& v) {
 
     combine(seed, v.disable_complete_constructor());
     combine(seed, v.disable_xml_serialization());
-    combine(seed, v.disable_eos_serialization());
-    combine(seed, v.disable_versioning());
 
     return seed;
 }

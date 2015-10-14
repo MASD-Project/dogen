@@ -38,8 +38,6 @@ void aspect_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.disable_complete_constructor(create_bool(position + 0));
     v.disable_xml_serialization(create_bool(position + 1));
-    v.disable_eos_serialization(create_bool(position + 2));
-    v.disable_versioning(create_bool(position + 3));
 }
 
 aspect_settings_generator::result_type

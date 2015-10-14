@@ -255,12 +255,6 @@ BOOST_AUTO_TEST_CASE(stereotypes_model_generates_expected_code) {
     BOOST_CHECK(generate_and_diff(target));
 }
 
-BOOST_AUTO_TEST_CASE(eos_serialization_model_generates_expected_code) {
-    SETUP_TEST_LOG("eos_serialisation_model_generates_expected_code");
-    const auto target(tack_dia::input_enable_eos_serialization_dia());
-    BOOST_CHECK(generate_and_diff(target));
-}
-
 BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
     SETUP_TEST_LOG("package_without_name_model_throws");
     const auto target(tack_dia::input_package_without_name_dia());

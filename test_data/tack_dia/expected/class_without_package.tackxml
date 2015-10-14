@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
-<boost_serialization signature="serialization::archive" version="10">
+<boost_serialization signature="serialization::archive" version="13">
 <entity class_id="6" tracking_level="0" version="0">
 	<documentation></documentation>
 	<extensions class_id="7" tracking_level="0" version="0">
 		<fields class_id="8" tracking_level="0" version="0">
 			<count>0</count>
-			<bucket_count>11</bucket_count>
+			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>
 		</fields>
 	</extensions>
@@ -37,17 +37,17 @@
 	</containing_module>
 	<references class_id="13" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</references>
 	<leaves class_id="14" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
 	<modules class_id="15" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>2</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="16" tracking_level="0" version="0">
 			<first>
@@ -75,7 +75,7 @@
 				<extensions>
 					<fields>
 						<count>3</count>
-						<bucket_count>11</bucket_count>
+						<bucket_count>5</bucket_count>
 						<item_version>0</item_version>
 						<item class_id="18" tracking_level="0" version="0">
 							<first>dia.comment</first>
@@ -165,22 +165,22 @@
 	</modules>
 	<concepts class_id="23" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
 	<primitives class_id="24" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<enumerations class_id="25" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
 	<objects class_id="26" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>2</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="27" tracking_level="0" version="0">
 			<first>
@@ -208,7 +208,7 @@
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -270,7 +270,7 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -308,7 +308,7 @@
 				</local_properties>
 				<inherited_properties class_id="33" tracking_level="0" version="0">
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -319,7 +319,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships class_id="34" tracking_level="0" version="0">
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>

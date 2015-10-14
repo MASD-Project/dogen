@@ -4491,8 +4491,7 @@ then make use of it.
 #DOGEN licence_name=gpl_v3
 #DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
 #DOGEN modeline_group_name=emacs
-#DOGEN cpp.odb.enabled=false
-#DOGEN cpp.disable_eos_serialization=true#</dia:string>
+#DOGEN cpp.odb.enabled=false#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

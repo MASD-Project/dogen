@@ -87,23 +87,6 @@ endif()
     message(STATUS "odb not found.")
 # endif()
 
-# eos
-if(WIN32)
-    set(EOS_FOUND "EOS_FOUND-NOTFOUND")
-    message(STATUS "eos disabled for WIN32 due to compilation errors.")
-elseif(APPLE)
-    set(EOS_FOUND "EOS_FOUND-NOTFOUND")
-    message(STATUS "eos disabled for APPLE due to linker errors.")
-elseif(UNIX)
-    find_package(EOS)
-    if(EOS_FOUND)
-        message(STATUS "Found eos...")
-        include_directories(SYSTEM ${EOS_INCLUDE_DIR})
-    else()
-        message(STATUS "eos not found.")
-    endif()
-endif()
-
 # packaging type
 if(WITH_MINIMAL_PACKAGING)
     message(STATUS "Packaging just the main application")

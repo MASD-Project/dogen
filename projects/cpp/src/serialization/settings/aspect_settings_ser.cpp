@@ -38,8 +38,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("disable_complete_constructor", v.disable_complete_constructor_);
     ar << make_nvp("disable_xml_serialization", v.disable_xml_serialization_);
-    ar << make_nvp("disable_eos_serialization", v.disable_eos_serialization_);
-    ar << make_nvp("disable_versioning", v.disable_versioning_);
 }
 
 template<typename Archive>
@@ -48,8 +46,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("disable_complete_constructor", v.disable_complete_constructor_);
     ar >> make_nvp("disable_xml_serialization", v.disable_xml_serialization_);
-    ar >> make_nvp("disable_eos_serialization", v.disable_eos_serialization_);
-    ar >> make_nvp("disable_versioning", v.disable_versioning_);
 }
 
 } }

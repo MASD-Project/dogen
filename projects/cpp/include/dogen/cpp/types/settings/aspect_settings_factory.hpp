@@ -52,8 +52,6 @@ private:
     struct field_definitions {
         dynamic::field_definition disable_complete_constructor;
         dynamic::field_definition disable_xml_serialization;
-        dynamic::field_definition disable_eos_serialization;
-        dynamic::field_definition disable_versioning;
     };
 
     /**
@@ -69,8 +67,6 @@ private:
     struct root_object_field_values {
         bool disable_complete_constructor;
         bool disable_xml_serialization;
-        bool disable_eos_serialization;
-        bool disable_versioning;
     };
 
     /**

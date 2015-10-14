@@ -56,12 +56,6 @@ make_field_definitions(const dynamic::repository& rp) const {
     const auto& xs(traits::disable_xml_serialization());
     r.disable_xml_serialization = s.select_field_by_name(xs);
 
-    const auto& es(traits::disable_eos_serialization());
-    r.disable_eos_serialization = s.select_field_by_name(es);
-
-    const auto& v(traits::disable_eos_serialization());
-    r.disable_versioning = s.select_field_by_name(v);
-
     return r;
 }
 
@@ -74,10 +68,6 @@ make_root_object_field_values(const field_definitions& fd,
         obtain_field_value(fd.disable_complete_constructor, root_object);
     r.disable_xml_serialization =
         obtain_field_value(fd.disable_xml_serialization, root_object);
-    r.disable_eos_serialization =
-        obtain_field_value(fd.disable_eos_serialization, root_object);
-    r.disable_versioning =
-        obtain_field_value(fd.disable_versioning, root_object);
     return r;
 }
 
@@ -111,14 +101,6 @@ aspect_settings aspect_settings_factory::make(const dynamic::object& o) const {
         obtain_field_value(field_definitions_.disable_xml_serialization,
             field_values_.disable_xml_serialization, o));
 
-    r.disable_eos_serialization(
-        obtain_field_value(field_definitions_.disable_eos_serialization,
-            field_values_.disable_eos_serialization, o));
-
-    r.disable_versioning(
-        obtain_field_value(field_definitions_.disable_versioning,
-            field_values_.disable_versioning, o));
-
     return r;
 }
 
@@ -126,8 +108,6 @@ aspect_settings aspect_settings_factory::make() const {
     aspect_settings r;
     r.disable_complete_constructor(field_values_.disable_complete_constructor);
     r.disable_xml_serialization(field_values_.disable_xml_serialization);
-    r.disable_eos_serialization(field_values_.disable_eos_serialization);
-    r.disable_versioning(field_values_.disable_versioning);
     return r;
 }
 

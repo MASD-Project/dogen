@@ -44,9 +44,7 @@ public:
 public:
     aspect_settings(
         const bool disable_complete_constructor,
-        const bool disable_xml_serialization,
-        const bool disable_eos_serialization,
-        const bool disable_versioning);
+        const bool disable_xml_serialization);
 
 private:
     template<typename Archive>
@@ -62,12 +60,6 @@ public:
     bool disable_xml_serialization() const;
     void disable_xml_serialization(const bool v);
 
-    bool disable_eos_serialization() const;
-    void disable_eos_serialization(const bool v);
-
-    bool disable_versioning() const;
-    void disable_versioning(const bool v);
-
 public:
     bool operator==(const aspect_settings& rhs) const;
     bool operator!=(const aspect_settings& rhs) const {
@@ -81,8 +73,6 @@ public:
 private:
     bool disable_complete_constructor_;
     bool disable_xml_serialization_;
-    bool disable_eos_serialization_;
-    bool disable_versioning_;
 };
 
 } } }

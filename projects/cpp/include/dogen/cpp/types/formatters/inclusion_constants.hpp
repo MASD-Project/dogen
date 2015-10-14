@@ -47,11 +47,6 @@ struct inclusion_constants {
         static ::std::string stdexcept();
     };
 
-    struct eos {
-        static ::std::string portable_iarchive();
-        static ::std::string portable_oarchive();
-    };
-
     struct boost {
         struct date_time {
             struct gregorian {

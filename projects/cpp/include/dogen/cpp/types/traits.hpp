@@ -96,16 +96,6 @@ struct traits {
      */
     static std::string disable_xml_serialization();
 
-    /**
-     * @brief Disables EOS support in boost serialisation.
-     */
-    static std::string disable_eos_serialization();
-
-    /**
-     * @brief Disables versioning support.
-     */
-    static std::string disable_versioning();
-
     struct cpp {
         /**
          * @brief Is inclusion required for all formatters.

@@ -26,33 +26,23 @@ namespace settings {
 
 aspect_settings::aspect_settings()
     : disable_complete_constructor_(static_cast<bool>(0)),
-      disable_xml_serialization_(static_cast<bool>(0)),
-      disable_eos_serialization_(static_cast<bool>(0)),
-      disable_versioning_(static_cast<bool>(0)) { }
+      disable_xml_serialization_(static_cast<bool>(0)) { }
 
 aspect_settings::aspect_settings(
     const bool disable_complete_constructor,
-    const bool disable_xml_serialization,
-    const bool disable_eos_serialization,
-    const bool disable_versioning)
+    const bool disable_xml_serialization)
     : disable_complete_constructor_(disable_complete_constructor),
-      disable_xml_serialization_(disable_xml_serialization),
-      disable_eos_serialization_(disable_eos_serialization),
-      disable_versioning_(disable_versioning) { }
+      disable_xml_serialization_(disable_xml_serialization) { }
 
 void aspect_settings::swap(aspect_settings& other) noexcept {
     using std::swap;
     swap(disable_complete_constructor_, other.disable_complete_constructor_);
     swap(disable_xml_serialization_, other.disable_xml_serialization_);
-    swap(disable_eos_serialization_, other.disable_eos_serialization_);
-    swap(disable_versioning_, other.disable_versioning_);
 }
 
 bool aspect_settings::operator==(const aspect_settings& rhs) const {
     return disable_complete_constructor_ == rhs.disable_complete_constructor_ &&
-        disable_xml_serialization_ == rhs.disable_xml_serialization_ &&
-        disable_eos_serialization_ == rhs.disable_eos_serialization_ &&
-        disable_versioning_ == rhs.disable_versioning_;
+        disable_xml_serialization_ == rhs.disable_xml_serialization_;
 }
 
 aspect_settings& aspect_settings::operator=(aspect_settings other) {
@@ -75,22 +65,6 @@ bool aspect_settings::disable_xml_serialization() const {
 
 void aspect_settings::disable_xml_serialization(const bool v) {
     disable_xml_serialization_ = v;
-}
-
-bool aspect_settings::disable_eos_serialization() const {
-    return disable_eos_serialization_;
-}
-
-void aspect_settings::disable_eos_serialization(const bool v) {
-    disable_eos_serialization_ = v;
-}
-
-bool aspect_settings::disable_versioning() const {
-    return disable_versioning_;
-}
-
-void aspect_settings::disable_versioning(const bool v) {
-    disable_versioning_ = v;
 }
 
 } } }

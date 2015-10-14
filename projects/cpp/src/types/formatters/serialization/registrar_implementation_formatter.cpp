@@ -81,11 +81,6 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
         builder.add(ic::boost::archive::xml_oarchive());
     }
 
-    if (!as.disable_eos_serialization()) {
-        builder.add(ic::eos::portable_iarchive());
-        builder.add(ic::eos::portable_oarchive());
-    }
-
     const auto ch_fn(traits::class_header_formatter_name());
     for (const auto& l : m.leaves())
         builder.add(l, ch_fn);

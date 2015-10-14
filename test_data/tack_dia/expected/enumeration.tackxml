@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
-<boost_serialization signature="serialization::archive" version="10">
+<boost_serialization signature="serialization::archive" version="13">
 <entity class_id="6" tracking_level="0" version="0">
 	<documentation></documentation>
 	<extensions class_id="7" tracking_level="0" version="0">
 		<fields class_id="8" tracking_level="0" version="0">
 			<count>0</count>
-			<bucket_count>11</bucket_count>
+			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>
 		</fields>
 	</extensions>
@@ -37,17 +37,17 @@
 	</containing_module>
 	<references class_id="13" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</references>
 	<leaves class_id="14" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
 	<modules class_id="15" tracking_level="0" version="0">
 		<count>2</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="16" tracking_level="0" version="0">
 			<first>
@@ -74,7 +74,7 @@
 				<extensions>
 					<fields>
 						<count>0</count>
-						<bucket_count>11</bucket_count>
+						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
 					</fields>
 				</extensions>
@@ -175,7 +175,7 @@
 				<extensions>
 					<fields>
 						<count>3</count>
-						<bucket_count>11</bucket_count>
+						<bucket_count>5</bucket_count>
 						<item_version>0</item_version>
 						<item class_id="19" tracking_level="0" version="0">
 							<first>dia.comment</first>
@@ -322,149 +322,19 @@
 	</modules>
 	<concepts class_id="23" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
 	<primitives class_id="24" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<enumerations class_id="25" tracking_level="0" version="0">
 		<count>3</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="26" tracking_level="0" version="0">
-			<first>
-				<simple>shape_types</simple>
-				<qualified></qualified>
-				<location>
-					<original_model_name>enumeration</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</model_module_path>
-					<internal_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>pkg1</item>
-					</internal_module_path>
-				</location>
-			</first>
-			<second class_id="3" tracking_level="1" version="0" object_id="_3">
-				<type class_id="27" tracking_level="0" version="0">
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>11</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>shape_types</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>enumeration</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>pkg1</item>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>pkg1</simple>
-							<qualified></qualified>
-							<location>
-								<original_model_name>enumeration</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
-					</containing_module>
-				</type>
-				<underlying_type>
-					<simple>unsigned int</simple>
-					<qualified></qualified>
-					<location>
-						<original_model_name></original_model_name>
-						<external_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</external_module_path>
-						<model_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</model_module_path>
-						<internal_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</internal_module_path>
-					</location>
-				</underlying_type>
-				<enumerators class_id="28" tracking_level="0" version="0">
-					<count>5</count>
-					<item_version>0</item_version>
-					<item class_id="29" tracking_level="0" version="0">
-						<documentation>Represents an uninitialised enum</documentation>
-						<name>invalid</name>
-						<value>0</value>
-					</item>
-					<item>
-						<documentation>some comment
-</documentation>
-						<name>triangle</name>
-						<value>1</value>
-					</item>
-					<item>
-						<documentation>other comment
-</documentation>
-						<name>square</name>
-						<value>2</value>
-					</item>
-					<item>
-						<documentation></documentation>
-						<name>rectangle</name>
-						<value>3</value>
-					</item>
-					<item>
-						<documentation>some comment
-</documentation>
-						<name>cube</name>
-						<value>4</value>
-					</item>
-				</enumerators>
-			</second>
-		</item>
-		<item>
 			<first>
 				<simple>colour_types</simple>
 				<qualified></qualified>
@@ -484,13 +354,13 @@
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_4">
-				<type>
+			<second class_id="3" tracking_level="1" version="0" object_id="_3">
+				<type class_id="27" tracking_level="0" version="0">
 					<documentation></documentation>
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -559,10 +429,10 @@
 						</internal_module_path>
 					</location>
 				</underlying_type>
-				<enumerators>
+				<enumerators class_id="28" tracking_level="0" version="0">
 					<count>5</count>
 					<item_version>0</item_version>
-					<item>
+					<item class_id="29" tracking_level="0" version="0">
 						<documentation>Represents an uninitialised enum</documentation>
 						<name>invalid</name>
 						<value>0</value>
@@ -588,6 +458,136 @@
 						<documentation>another comment
 </documentation>
 						<name>gray</name>
+						<value>4</value>
+					</item>
+				</enumerators>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>shape_types</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>enumeration</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>pkg1</item>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_4">
+				<type>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>shape_types</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>enumeration</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>pkg1</item>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<simple>pkg1</simple>
+							<qualified></qualified>
+							<location>
+								<original_model_name>enumeration</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
+						</value>
+					</containing_module>
+				</type>
+				<underlying_type>
+					<simple>unsigned int</simple>
+					<qualified></qualified>
+					<location>
+						<original_model_name></original_model_name>
+						<external_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_module_path>
+						<model_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</model_module_path>
+						<internal_module_path>
+							<count>0</count>
+							<item_version>0</item_version>
+						</internal_module_path>
+					</location>
+				</underlying_type>
+				<enumerators>
+					<count>5</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation>Represents an uninitialised enum</documentation>
+						<name>invalid</name>
+						<value>0</value>
+					</item>
+					<item>
+						<documentation>some comment
+</documentation>
+						<name>triangle</name>
+						<value>1</value>
+					</item>
+					<item>
+						<documentation>other comment
+</documentation>
+						<name>square</name>
+						<value>2</value>
+					</item>
+					<item>
+						<documentation></documentation>
+						<name>rectangle</name>
+						<value>3</value>
+					</item>
+					<item>
+						<documentation>some comment
+</documentation>
+						<name>cube</name>
 						<value>4</value>
 					</item>
 				</enumerators>
@@ -622,7 +622,7 @@ this is a long comment
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -720,7 +720,7 @@ this is a long comment
 	</enumerations>
 	<objects class_id="30" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>2</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="31" tracking_level="0" version="0">
 			<first>
@@ -748,7 +748,7 @@ this is a long comment
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -810,7 +810,7 @@ this is a long comment
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -850,7 +850,7 @@ this is a long comment
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -890,7 +890,7 @@ this is a long comment
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -929,7 +929,7 @@ this is a long comment
 				</local_properties>
 				<inherited_properties class_id="36" tracking_level="0" version="0">
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -940,7 +940,7 @@ this is a long comment
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships class_id="37" tracking_level="0" version="0">
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>

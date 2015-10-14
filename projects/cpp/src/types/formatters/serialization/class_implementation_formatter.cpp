@@ -72,11 +72,6 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
         builder.add(ic::boost::archive::xml_oarchive());
     }
 
-    if (!as.disable_eos_serialization()) {
-        builder.add(ic::eos::portable_iarchive());
-        builder.add(ic::eos::portable_oarchive());
-    }
-
     using rt = tack::relationship_types;
     builder.add(o, rt::weak_associations, ch_fn);
     builder.add(o, rt::regular_associations, ch_fn);

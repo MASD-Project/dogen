@@ -59,16 +59,6 @@ std::string inclusion_constants::std::stdexcept() {
     return r;
 }
 
-std::string inclusion_constants::eos::portable_iarchive() {
-    static ::std::string r("<eos/portable_iarchive.hpp>");
-    return r;
-}
-
-std::string inclusion_constants::eos::portable_oarchive() {
-    static ::std::string r("<eos/portable_oarchive.hpp>");
-    return r;
-}
-
 std::string inclusion_constants::boost::date_time::gregorian::identity() {
     static ::std::string r("<boost/date_time/gregorian/gregorian.hpp>");
     return r;

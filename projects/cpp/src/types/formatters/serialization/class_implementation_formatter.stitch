@@ -145,14 +145,6 @@ template void load(archive::xml_iarchive& ar, <#= c.qualified_name() #>& v, unsi
 
 <#+
         }
-
-        if (!fa.is_eos_serialization_disabled()) {
-#>
-template void save(eos::portable_oarchive& ar, const <#= c.qualified_name() #>& v, unsigned int version);
-template void load(eos::portable_iarchive& ar, <#= c.qualified_name() #>& v, unsigned int version);
-
-<#+
-        }
 #>
 } }
 <#+

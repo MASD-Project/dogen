@@ -67,7 +67,6 @@ path input_enable_facet_io_dia("tack_dia/input/enable_facet_io.dia");
 path input_enable_facet_serialization_dia(
     "tack_dia/input/enable_facet_serialization.dia"
     );
-path input_enable_eos_serialization_dia("tack_dia/input/eos_serialization.dia");
 path input_rename_facet_folder_dia("tack_dia/input/rename_facet_folder.dia");
 path input_use_integrated_io_dia("tack_dia/input/use_integrated_io.dia");
 path input_all_primitives_dia("tack_dia/input/all_primitives.dia");
@@ -380,10 +379,6 @@ path tack_dia::input_enable_facet_io_dia() {
 
 path tack_dia::input_enable_facet_serialization_dia() {
     return validating_resolver::resolve(::input_enable_facet_serialization_dia);
-}
-
-path tack_dia::input_enable_eos_serialization_dia() {
-    return validating_resolver::resolve(::input_enable_eos_serialization_dia);
 }
 
 path tack_dia::input_rename_facet_folder_dia() {

@@ -83,16 +83,6 @@ std::string traits::disable_xml_serialization() {
     return r;
 }
 
-std::string traits::disable_eos_serialization() {
-    static std::string r("cpp.disable_eos_serialization");
-    return r;
-}
-
-std::string traits::disable_versioning() {
-    static std::string r("cpp.disable_versioning");
-    return r;
-}
-
 std::string traits::cpp::inclusion_required() {
     static std::string r("cpp.inclusion_required");
     return r;
