@@ -28,8 +28,8 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/tack/types/name.hpp"
-#include "dogen/tack/hash/name_hash.hpp"
+#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives.hpp"
 #include "dogen/cpp/serialization/formattables/path_derivatives_repository_fwd_ser.hpp"
 
@@ -45,7 +45,7 @@ public:
     ~path_derivatives_repository() = default;
 
 public:
-    explicit path_derivatives_repository(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_by_name);
+    explicit path_derivatives_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_by_name);
 
 private:
     template<typename Archive>
@@ -55,10 +55,10 @@ private:
     friend void boost::serialization::load(Archive& ar, path_derivatives_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_by_name() const;
-    std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_by_name();
-    void path_derivatives_by_name(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& v);
-    void path_derivatives_by_name(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >&& v);
+    const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_by_name() const;
+    std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_by_name();
+    void path_derivatives_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& v);
+    void path_derivatives_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >&& v);
 
 public:
     bool operator==(const path_derivatives_repository& rhs) const;
@@ -71,7 +71,7 @@ public:
     path_derivatives_repository& operator=(path_derivatives_repository other);
 
 private:
-    std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> > path_derivatives_by_name_;
+    std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> > path_derivatives_by_name_;
 };
 
 } } }

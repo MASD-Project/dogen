@@ -29,8 +29,8 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/tack/types/name.hpp"
-#include "dogen/tack/hash/name_hash.hpp"
+#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/cpp/serialization/formattables/inclusion_dependencies_repository_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,7 +45,7 @@ public:
     ~inclusion_dependencies_repository() = default;
 
 public:
-    explicit inclusion_dependencies_repository(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_by_name);
+    explicit inclusion_dependencies_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_by_name);
 
 private:
     template<typename Archive>
@@ -55,10 +55,10 @@ private:
     friend void boost::serialization::load(Archive& ar, inclusion_dependencies_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_by_name() const;
-    std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_by_name();
-    void inclusion_dependencies_by_name(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::list<std::string> > >& v);
-    void inclusion_dependencies_by_name(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::list<std::string> > >&& v);
+    const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_by_name() const;
+    std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_by_name();
+    void inclusion_dependencies_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >& v);
+    void inclusion_dependencies_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >&& v);
 
 public:
     bool operator==(const inclusion_dependencies_repository& rhs) const;
@@ -71,7 +71,7 @@ public:
     inclusion_dependencies_repository& operator=(inclusion_dependencies_repository other);
 
 private:
-    std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::list<std::string> > > inclusion_dependencies_by_name_;
+    std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > > inclusion_dependencies_by_name_;
 };
 
 } } }

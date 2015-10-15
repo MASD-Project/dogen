@@ -31,8 +31,8 @@
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
-#include "dogen/tack/types/input_descriptor.hpp"
-#include "dogen/tack/types/model.hpp"
+#include "dogen/yarn/types/input_descriptor.hpp"
+#include "dogen/yarn/types/model.hpp"
 
 namespace dogen {
 namespace knit {
@@ -49,32 +49,32 @@ private:
     /**
      * @brief Create a list of all input descriptors.
      */
-    std::list<tack::input_descriptor>
+    std::list<yarn::input_descriptor>
     obtain_input_descriptors_activity() const;
 
     /**
-     * @brief Obtains all partial Tack models.
+     * @brief Obtains all partial Yarn models.
      */
-    std::list<tack::model> import_tack_models_activity(
-        const std::list<tack::input_descriptor>& descriptors) const;
+    std::list<yarn::model> import_yarn_models_activity(
+        const std::list<yarn::input_descriptor>& descriptors) const;
 
     /**
-     * @brief Execute the tack assembling workflow.
+     * @brief Execute the yarn assembling workflow.
      */
-    tack::model assemble_tack_models_activity(
-        const std::list<tack::model>& models) const;
+    yarn::model assemble_yarn_models_activity(
+        const std::list<yarn::model>& models) const;
 
     /**
      * @brief Returns the path to the target model.
      */
     boost::filesystem::path obtain_target_path_activity(
-        const std::list<tack::input_descriptor>& descriptors) const;
+        const std::list<yarn::input_descriptor>& descriptors) const;
 
 public:
     /**
      * @brief Executes the workflow.
      */
-    tack::model execute() const;
+    yarn::model execute() const;
 
 private:
     const config::knitting_options& knitting_options_;

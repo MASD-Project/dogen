@@ -27,9 +27,9 @@
 
 #include <list>
 #include <string>
-#include "dogen/tack/types/model.hpp"
-#include "dogen/tack/types/name.hpp"
-#include "dogen/tack/types/nested_name.hpp"
+#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/nested_name.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -48,22 +48,22 @@ public:
 
 public:
     /**
-     * @brief Flattens all the Tack namespace information stored in
+     * @brief Flattens all the Yarn namespace information stored in
      * name into a list of strings with C++ namespaces.
      */
     std::list<std::string>
-    namespace_list(const tack::model& m, const tack::name& n) const;
+    namespace_list(const yarn::model& m, const yarn::name& n) const;
 
     /**
      * @brief Flat representation of the qualified name.
      */
-    std::string qualified_name(const tack::model& m, const tack::name& n) const;
+    std::string qualified_name(const yarn::model& m, const yarn::name& n) const;
 
     /**
      * @brief Returns a complete name representation of the nested
      * qualified name.
      */
-    void complete_name(const tack::model& m, const tack::nested_name& nn,
+    void complete_name(const yarn::model& m, const yarn::nested_name& nn,
         std::string& complete_name) const;
 
     /**

@@ -25,7 +25,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test_data/xml_reader.hpp"
-#include "dogen/utility/test_data/tack_dia.hpp"
+#include "dogen/utility/test_data/yarn_dia.hpp"
 
 namespace {
 
@@ -40,16 +40,16 @@ const std::string xml_reader_input_dir("xml_reader/input");
 const std::string xml_reader_expected_dir("xml_reader/expected");
 const std::string xml_reader_actual_dir("xml_reader/actual");
 
-const std::string tack_dia_dir("tack_dia");
-const std::string tack_dia_input_dir("tack_dia/input");
-const std::string tack_dia_expected_dir("tack_dia/expected");
-const std::string tack_dia_actual_dir("tack_dia/actual");
+const std::string yarn_dia_dir("yarn_dia");
+const std::string yarn_dia_input_dir("yarn_dia/input");
+const std::string yarn_dia_expected_dir("yarn_dia/expected");
+const std::string yarn_dia_actual_dir("yarn_dia/actual");
 
 const std::string boolean_values_file("xml_reader/input/boolean_values.xml");
 const std::string class_namespace_file_dia(
-    "tack_dia/input/class_in_a_package.dia");
+    "yarn_dia/input/class_in_a_package.dia");
 const std::string class_namespace_file_diaxml(
-    "tack_dia/expected/class_in_a_package.diaxml");
+    "yarn_dia/expected/class_in_a_package.diaxml");
 const std::string non_existent_file_name("non_existent_file");
 
 void test_main_directory(boost::filesystem::path path, std::string data_set) {
@@ -99,18 +99,18 @@ BOOST_AUTO_TEST_CASE(xml_reader_passes_sanity_checks) {
     test_valid_file(xml_reader::input_boolean_values(), boolean_values_file);
 }
 
-BOOST_AUTO_TEST_CASE(tack_dia_passes_sanity_checks) {
-    SETUP_TEST_LOG("tack_dia_passes_sanity_checks");
-    using dogen::utility::test_data::tack_dia;
-    test_main_directory(tack_dia::data_set(), tack_dia_dir);
-    test_main_directory(tack_dia::input(), tack_dia_input_dir);
-    test_main_directory(tack_dia::expected(), tack_dia_expected_dir);
-    test_main_directory(tack_dia::actual(), tack_dia_actual_dir);
-    test_non_existent_file(tack_dia::non_existent_file(), dia_extension);
+BOOST_AUTO_TEST_CASE(yarn_dia_passes_sanity_checks) {
+    SETUP_TEST_LOG("yarn_dia_passes_sanity_checks");
+    using dogen::utility::test_data::yarn_dia;
+    test_main_directory(yarn_dia::data_set(), yarn_dia_dir);
+    test_main_directory(yarn_dia::input(), yarn_dia_input_dir);
+    test_main_directory(yarn_dia::expected(), yarn_dia_expected_dir);
+    test_main_directory(yarn_dia::actual(), yarn_dia_actual_dir);
+    test_non_existent_file(yarn_dia::non_existent_file(), dia_extension);
 
-    test_valid_file(tack_dia::input_class_in_a_package_dia(),
+    test_valid_file(yarn_dia::input_class_in_a_package_dia(),
         class_namespace_file_dia);
-    test_valid_file(tack_dia::expected_class_in_a_package_dia_xml(),
+    test_valid_file(yarn_dia::expected_class_in_a_package_dia_xml(),
         class_namespace_file_diaxml);
 }
 

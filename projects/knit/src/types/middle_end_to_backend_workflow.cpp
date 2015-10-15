@@ -89,7 +89,7 @@ void middle_end_to_backend_workflow::write_files_activity(
         writer->write(files);
 }
 
-void middle_end_to_backend_workflow::execute(const tack::model& m) const {
+void middle_end_to_backend_workflow::execute(const yarn::model& m) const {
     const auto writers(obtain_file_writers_activity());
     dogen::backend::workflow w(knitting_options_, repository_);
     const auto files(w.execute(m));

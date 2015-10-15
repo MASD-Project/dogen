@@ -24,7 +24,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/utility/io/shared_ptr_io.hpp"
-#include "dogen/tack/io/object_types_io.hpp"
+#include "dogen/yarn/io/object_types_io.hpp"
 #include "dogen/cpp/io/formattables/formattable_io.hpp"
 #include "dogen/cpp/types/formattables/name_builder.hpp"
 #include "dogen/cpp/types/formattables/transformation_error.hpp"
@@ -182,16 +182,16 @@ namespace formattables {
 
 transformer::transformer(const settings::opaque_settings_builder& osb,
     const settings::bundle_repository& brp,
-    const formatter_properties_repository& frp, const tack::model& m)
+    const formatter_properties_repository& frp, const yarn::model& m)
     : opaque_settings_builder_(osb), bundle_repository_(brp),
       formatter_properties_repository_(frp), model_(m) {}
 
 void transformer::
-populate_formattable_properties(const tack::name& n, formattable& f) const {
+populate_formattable_properties(const yarn::name& n, formattable& f) const {
     f.identity(n.qualified());
 }
 
-void transformer::populate_entity_properties(const tack::name& n,
+void transformer::populate_entity_properties(const yarn::name& n,
     const std::string& documentation, entity& e) const {
 
     populate_formattable_properties(n, e);
@@ -230,7 +230,7 @@ void transformer::populate_entity_properties(const tack::name& n,
     e.qualified_name(join(ns, namespace_separator));
 }
 
-void transformer::to_nested_type_info(const tack::nested_name& nn,
+void transformer::to_nested_type_info(const yarn::nested_name& nn,
     nested_type_info& nti, std::string& complete_name,
     bool& requires_stream_manipulators) const {
 
@@ -268,7 +268,7 @@ void transformer::to_nested_type_info(const tack::nested_name& nn,
     const auto k(model_.objects().find(n));
     if (k != model_.objects().end()) {
         const auto ot(k->second.object_type());
-        using tack::object_types;
+        using yarn::object_types;
         nti.is_sequence_container(ot == object_types::sequence_container);
         nti.is_associative_container(ot == object_types::ordered_container ||
             ot == object_types::hash_container);
@@ -309,7 +309,7 @@ void transformer::to_nested_type_info(const tack::nested_name& nn,
 }
 
 std::tuple<property_info, bool, bool, bool>
-transformer::to_property_info(const tack::property p, const bool is_immutable,
+transformer::to_property_info(const yarn::property p, const bool is_immutable,
     const bool is_fluent) const {
 
     property_info pi;
@@ -345,7 +345,7 @@ transformer::to_property_info(const tack::property p, const bool is_immutable,
 }
 
 enumerator_info
-transformer::to_enumerator_info(const tack::enumerator& e) const {
+transformer::to_enumerator_info(const yarn::enumerator& e) const {
     enumerator_info r;
     r.name(e.name());
     r.value(e.value());
@@ -354,14 +354,14 @@ transformer::to_enumerator_info(const tack::enumerator& e) const {
 }
 
 std::shared_ptr<enum_info>
-transformer::to_enum_info(const tack::enumeration& e) const {
+transformer::to_enum_info(const yarn::enumeration& e) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: "
                              << e.name().qualified();
 
     auto r(std::make_shared<enum_info>());
     populate_entity_properties(e.name(), e.documentation(), *r);
 
-    // FIXME: Tack is not setting this properly.
+    // FIXME: Yarn is not setting this properly.
     // r->type(e.underlying_type().simple_name());
     r->type("unsigned int");
 
@@ -373,7 +373,7 @@ transformer::to_enum_info(const tack::enumeration& e) const {
 }
 
 std::shared_ptr<namespace_info> transformer::
-to_namespace_info(const tack::module& m) const {
+to_namespace_info(const yarn::module& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming module: "
                              << m.name().qualified();
 
@@ -385,7 +385,7 @@ to_namespace_info(const tack::module& m) const {
 }
 
 std::shared_ptr<exception_info>
-transformer::to_exception_info(const tack::object& o) const {
+transformer::to_exception_info(const yarn::object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exception: "
                              << o.name().qualified();
 
@@ -397,7 +397,7 @@ transformer::to_exception_info(const tack::object& o) const {
 }
 
 std::shared_ptr<class_info>
-transformer::to_class_info(const tack::object& o) const {
+transformer::to_class_info(const yarn::object& o) const {
     auto r(std::make_shared<class_info>());
     populate_entity_properties(o.name(), o.documentation(), *r);
 
@@ -408,7 +408,7 @@ transformer::to_class_info(const tack::object& o) const {
     r->generation_type(o.generation_type());
 
     name_builder b;
-    auto i(o.relationships().find(tack::relationship_types::parents));
+    auto i(o.relationships().find(yarn::relationship_types::parents));
     if (i != o.relationships().end()) {
         for (const auto& n : i->second) {
             parent_info pi;
@@ -433,7 +433,7 @@ transformer::to_class_info(const tack::object& o) const {
         }
     }
 
-    i = o.relationships().find(tack::relationship_types::original_parents);
+    i = o.relationships().find(yarn::relationship_types::original_parents);
     if (i != o.relationships().end() && !i->second.empty()) {
         if (i->second.size() > 1) {
             const auto qn(o.name().qualified());
@@ -476,7 +476,7 @@ transformer::to_class_info(const tack::object& o) const {
     if (r->all_properties().empty())
         r->requires_manual_move_constructor(false);
 
-    i = o.relationships().find(tack::relationship_types::leaves);
+    i = o.relationships().find(yarn::relationship_types::leaves);
     if (i != o.relationships().end()) {
         for (const auto l : i->second)
             r->leaves().push_back(b.qualified_name(model_, l));
@@ -486,14 +486,14 @@ transformer::to_class_info(const tack::object& o) const {
 }
 
 std::shared_ptr<visitor_info>
-transformer::to_visitor_info(const tack::object& o) const {
+transformer::to_visitor_info(const yarn::object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming visitor: "
                              << o.name().qualified();
 
     auto r(std::make_shared<visitor_info>());
     populate_entity_properties(o.name(), o.documentation(), *r);
 
-    auto i(o.relationships().find(tack::relationship_types::visits));
+    auto i(o.relationships().find(yarn::relationship_types::visits));
     if (i == o.relationships().end() || i->second.empty()) {
         const auto& qn(o.name().qualified());
         BOOST_LOG_SEV(lg, error) << no_visitees << qn;
@@ -514,15 +514,15 @@ transformer::to_visitor_info(const tack::object& o) const {
 }
 
 std::shared_ptr<forward_declarations_info> transformer::
-to_forward_declarations_info(const tack::object& o) const {
+to_forward_declarations_info(const yarn::object& o) const {
     auto r(std::make_shared<forward_declarations_info>());
-    r->is_exception(o.object_type() == tack::object_types::exception);
+    r->is_exception(o.object_type() == yarn::object_types::exception);
     populate_entity_properties(o.name(), o.documentation(), *r);
     return r;
 }
 
 std::shared_ptr<forward_declarations_info> transformer::
-to_forward_declarations_info(const tack::enumeration& e) const {
+to_forward_declarations_info(const yarn::enumeration& e) const {
     auto r(std::make_shared<forward_declarations_info>());
     populate_entity_properties(e.name(), e.documentation(), *r);
     r->is_enum(true);
@@ -531,7 +531,7 @@ to_forward_declarations_info(const tack::enumeration& e) const {
 }
 
 std::forward_list<std::shared_ptr<formattable> >
-transformer::transform(const tack::enumeration& e) const {
+transformer::transform(const yarn::enumeration& e) const {
     std::forward_list<std::shared_ptr<formattable> > r;
     r.push_front(to_enum_info(e));
     r.push_front(to_forward_declarations_info(e));
@@ -539,28 +539,28 @@ transformer::transform(const tack::enumeration& e) const {
 }
 
 std::forward_list<std::shared_ptr<formattable> > transformer::
-transform(const tack::module& m) const {
+transform(const yarn::module& m) const {
     std::forward_list<std::shared_ptr<formattable> > r;
     r.push_front(to_namespace_info(m));
     return r;
 }
 
 std::forward_list<std::shared_ptr<formattable> >
-transformer::transform(const tack::concept& /*c*/) const {
+transformer::transform(const yarn::concept& /*c*/) const {
     std::forward_list<std::shared_ptr<formattable> > r;
     r.push_front(std::make_shared<concept_info>());
     return r;
 }
 
 std::forward_list<std::shared_ptr<formattable> >
-transformer::transform(const tack::primitive& /*p*/) const {
+transformer::transform(const yarn::primitive& /*p*/) const {
     std::forward_list<std::shared_ptr<formattable> > r;
     r.push_front(std::make_shared<primitive_info>());
     return r;
 }
 
 std::forward_list<std::shared_ptr<formattable> > transformer::
-transform(const tack::object& o) const {
+transform(const yarn::object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming object: "
                              << o.name().qualified();
 
@@ -568,14 +568,14 @@ transform(const tack::object& o) const {
     r.push_front(to_forward_declarations_info(o));
 
     switch(o.object_type()) {
-    case tack::object_types::user_defined_value_object:
-    case tack::object_types::user_defined_service:
+    case yarn::object_types::user_defined_value_object:
+    case yarn::object_types::user_defined_service:
         r.push_front(to_class_info(o));
         break;
-    case tack::object_types::visitor:
+    case yarn::object_types::visitor:
         r.push_front(to_visitor_info(o));
         break;
-    case tack::object_types::exception:
+    case yarn::object_types::exception:
         r.push_front(to_exception_info(o));
         break;
     default: {

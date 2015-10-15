@@ -50,7 +50,7 @@ inclusion_directives_factory::inclusion_directives_factory(
 
 std::unordered_map<std::string, formattables::path_derivatives>
 inclusion_directives_factory::path_derivatives_for_name(
-    const tack::name& n) const {
+    const yarn::name& n) const {
     const auto i(path_repository_.path_derivatives_by_name().find(n));
     if (i == path_repository_.path_derivatives_by_name().end()) {
         const auto qn(n.qualified());
@@ -135,7 +135,7 @@ inclusion_directives_factory::obtain_include_directive(
 
 boost::optional<std::unordered_map<std::string, std::string> >
 inclusion_directives_factory::
-make(const dynamic::object& o, const tack::name& n) const {
+make(const dynamic::object& o, const yarn::name& n) const {
     const auto qn(n.qualified());
     const auto directives_settings(create_inclusion_directives_settings(o));
     if (!directives_settings.inclusion_required()) {

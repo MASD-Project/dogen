@@ -31,9 +31,9 @@ target_link_libraries(knit_spec
     utility
     cpp
     dia
-    tack
-    tack_json
-    tack_dia
+    yarn
+    yarn_json
+    yarn_dia
     config
     backend
     ${LIBXML2_LIBRARIES}

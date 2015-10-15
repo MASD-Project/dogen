@@ -27,9 +27,9 @@
 
 #include <forward_list>
 #include <boost/shared_ptr.hpp>
-#include "dogen/tack/types/model.hpp"
-#include "dogen/tack/types/object.hpp"
-#include "dogen/tack/types/enumeration.hpp"
+#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
 
 namespace dogen {
@@ -40,42 +40,42 @@ class container {
 public:
     const std::forward_list<
         boost::shared_ptr<
-            inclusion_dependencies_provider_interface<tack::object>
+            inclusion_dependencies_provider_interface<yarn::object>
             >
         >&
     object_providers() const;
 
     std::forward_list<
         boost::shared_ptr<
-            inclusion_dependencies_provider_interface<tack::object>
+            inclusion_dependencies_provider_interface<yarn::object>
             >
         >&
     object_providers();
 
     const std::forward_list<
         boost::shared_ptr<
-            inclusion_dependencies_provider_interface<tack::enumeration>
+            inclusion_dependencies_provider_interface<yarn::enumeration>
             >
         >&
     enumeration_providers() const;
 
     std::forward_list<
         boost::shared_ptr<
-            inclusion_dependencies_provider_interface<tack::enumeration>
+            inclusion_dependencies_provider_interface<yarn::enumeration>
             >
         >&
     enumeration_providers();
 
     const std::forward_list<
         boost::shared_ptr<
-            inclusion_dependencies_provider_interface<tack::model>
+            inclusion_dependencies_provider_interface<yarn::model>
             >
         >&
     model_providers() const;
 
     std::forward_list<
         boost::shared_ptr<
-            inclusion_dependencies_provider_interface<tack::model>
+            inclusion_dependencies_provider_interface<yarn::model>
             >
         >&
     model_providers();
@@ -83,17 +83,17 @@ public:
 private:
     std::forward_list<
     boost::shared_ptr<
-        inclusion_dependencies_provider_interface<tack::object>
+        inclusion_dependencies_provider_interface<yarn::object>
         >
     > object_providers_;
     std::forward_list<
         boost::shared_ptr<
-            inclusion_dependencies_provider_interface<tack::enumeration>
+            inclusion_dependencies_provider_interface<yarn::enumeration>
             >
     > enumeration_providers_;
     std::forward_list<
         boost::shared_ptr<
-            inclusion_dependencies_provider_interface<tack::model>
+            inclusion_dependencies_provider_interface<yarn::model>
             >
     > model_providers_;
 };

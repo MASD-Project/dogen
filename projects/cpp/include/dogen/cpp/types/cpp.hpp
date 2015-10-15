@@ -35,9 +35,9 @@ namespace dogen {
  * CPP aims to model the types required by the formatters to generate C++ code.
  * Note that it is @e not a model of the C++ language as a compiler etc would
  * see it; it at a much higher level than an AST. In fact, one can think of CPP
- * as an Tack augmented with C++-specific information. Some of that information
- * comes from bringing Tack meta-data into the type system; the remaining is
- * directly derived by the information available in Tack.
+ * as an yarn augmented with C++-specific information. Some of that information
+ * comes from bringing yarn meta-data into the type system; the remaining is
+ * directly derived by the information available in yarn.
  *
  * @section cpp_1 Info postfix
  *
@@ -59,21 +59,21 @@ namespace dogen {
  * that to describe a simple thing like a class would require large amounts
  * of infrastructure (think of it like talking about cars at the atomic level).
  *
- * We also tried to use Tack directly to format C++ code, augmented with
+ * We also tried to use yarn directly to format C++ code, augmented with
  * high-level meta-data. Since the C++ model shares so many commonalities with
- * Tack it only seeemed logical to remove it from the picture altogether and
- * add whatever was missing directly to Tack. To avoid making Tack language
+ * yarn it only seeemed logical to remove it from the picture altogether and
+ * add whatever was missing directly to yarn. To avoid making yarn language
  * specific, we added the meta-data as a non-typed container. Whilst workable,
  * this approach resulted in a lot of boilerplate code and little type safety.
  *
- * The final aproach considered was to make CPP types inherit from Tack. This
+ * The final aproach considered was to make CPP types inherit from yarn. This
  * was also problematic: we do not support cross-model inheritance at present;
  * but much more worryingly, the model would become a complex inheritance
  * graph, with lots of double-dispatching, casting, abstract factories,
  * decorator patterns and all of the complexity that inevitable comes with
  * the heavy use of inheritance.
  *
- * This is why we settled on something which duplicates quite a bit of Tack; it
+ * This is why we settled on something which duplicates quite a bit of yarn; it
  * seems like the least bad approach.
  *
  */

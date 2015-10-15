@@ -30,7 +30,7 @@
 #include <boost/optional.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/tack/types/name.hpp"
+#include "dogen/yarn/types/name.hpp"
 #include "dogen/cpp/types/settings/inclusion_directives_settings.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_repository.hpp"
@@ -40,7 +40,7 @@ namespace cpp {
 namespace formattables {
 
 /**
- * @brief Creates the inclusion directives for a given Tack entity.
+ * @brief Creates the inclusion directives for a given Yarn entity.
  */
 class inclusion_directives_factory {
 public:
@@ -53,7 +53,7 @@ private:
      * @brief Get the path derivatives for supplied name.
      */
     std::unordered_map<std::string, formattables::path_derivatives>
-    path_derivatives_for_name(const tack::name& n) const;
+    path_derivatives_for_name(const yarn::name& n) const;
 
     /**
      * @brief Get the path derivatives for supplied formatter name.
@@ -91,10 +91,10 @@ private:
 
 public:
     /**
-     * @brief Create the inclusion directives for a given Tack entity.
+     * @brief Create the inclusion directives for a given Yarn entity.
      */
     boost::optional<std::unordered_map<std::string, std::string> >
-    make(const dynamic::object& o, const tack::name& n) const;
+    make(const dynamic::object& o, const yarn::name& n) const;
 
 private:
     const dynamic::repository& dynamic_repository_;

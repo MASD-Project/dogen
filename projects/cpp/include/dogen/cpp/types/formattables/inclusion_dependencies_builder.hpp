@@ -29,7 +29,7 @@
 #include <string>
 #include <unordered_set>
 #include <boost/optional.hpp>
-#include "dogen/tack/types/object.hpp"
+#include "dogen/yarn/types/object.hpp"
 #include "dogen/cpp/types/settings/bundle_repository.hpp"
 #include "dogen/cpp/types/formattables/enablement_repository.hpp"
 #include "dogen/cpp/types/formattables/integrated_facets_repository.hpp"
@@ -78,18 +78,18 @@ private:
      * @pre name must exist in path derivatives collection.
      */
     boost::optional<std::string> get_inclusion_directive(
-        const tack::name& n, const std::string& formatter_name) const;
+        const yarn::name& n, const std::string& formatter_name) const;
 
 public:
     /**
      * @brief Detects the presence of all the "special" includes.
      */
-    special_includes make_special_includes(const tack::object& o) const;
+    special_includes make_special_includes(const yarn::object& o) const;
 
     /**
      * @brief Returns true if the formatter is enabled.
      */
-    bool is_enabled(const tack::name& n,
+    bool is_enabled(const yarn::name& n,
         const std::string& formatter_name) const;
 
     /**
@@ -103,7 +103,7 @@ public:
      *
      * @pre name must exist in the settings bundle repository.
      */
-    settings::aspect_settings get_aspect_settings(const tack::name& n) const;
+    settings::aspect_settings get_aspect_settings(const yarn::name& n) const;
 
 public:
     /**
@@ -115,20 +115,20 @@ public:
      * @brief Adds the inclusion directive for the supplied formatter
      * name and name.
      */
-    void add(const tack::name& n, const std::string& formatter_name);
+    void add(const yarn::name& n, const std::string& formatter_name);
 
     /**
      * @brief Adds the inclusion directives for the supplied
      * formatter name, for each of the supplied names.
      */
-    void add(const std::list<tack::name>& names,
+    void add(const std::list<yarn::name>& names,
         const std::string& formatter_name);
 
     /**
      * @brief Adds the inclusion directives for all names in the
      * relationships if any exist.
      */
-    void add(const tack::object& o, const tack::relationship_types rt,
+    void add(const yarn::object& o, const yarn::relationship_types rt,
         const std::string& formatter_name);
 
 public:

@@ -26,7 +26,7 @@ add_library(backend STATIC ${all_files})
 target_link_libraries(backend
     config
     dynamic
-    tack
+    yarn
     formatters
     utility
     ${Boost_LIBRARIES})

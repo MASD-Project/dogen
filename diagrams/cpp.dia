@@ -509,7 +509,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>#generation_type#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#tack::generation_types#</dia:string>
+            <dia:string>#yarn::generation_types#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -3113,9 +3113,9 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
 CPP aims to model the types required by the formatters to generate C++ code.
 Note that it is @e not a model of the C++ language as a compiler etc would
 see it; it at a much higher level than an AST. In fact, one can think of CPP
-as an Tack augmented with C++-specific information. Some of that information
-comes from bringing Tack meta-data into the type system; the remaining is
-directly derived by the information available in Tack.
+as an yarn augmented with C++-specific information. Some of that information
+comes from bringing yarn meta-data into the type system; the remaining is
+directly derived by the information available in yarn.
 
 @section cpp_1 Info postfix
 
@@ -3137,21 +3137,21 @@ to cumbersome to work in practice. This is because the AST is so low-level
 that to describe a simple thing like a class would require large amounts
 of infrastructure (think of it like talking about cars at the atomic level).
 
-We also tried to use Tack directly to format C++ code, augmented with
+We also tried to use yarn directly to format C++ code, augmented with
 high-level meta-data. Since the C++ model shares so many commonalities with
-Tack it only seeemed logical to remove it from the picture altogether and
-add whatever was missing directly to Tack. To avoid making Tack language
+yarn it only seeemed logical to remove it from the picture altogether and
+add whatever was missing directly to yarn. To avoid making yarn language
 specific, we added the meta-data as a non-typed container. Whilst workable,
 this approach resulted in a lot of boilerplate code and little type safety.
 
-The final aproach considered was to make CPP types inherit from Tack. This
+The final aproach considered was to make CPP types inherit from yarn. This
 was also problematic: we do not support cross-model inheritance at present;
 but much more worryingly, the model would become a complex inheritance
 graph, with lots of double-dispatching, casting, abstract factories,
 decorator patterns and all of the complexity that inevitable comes with
 the heavy use of inheritance.
 
-This is why we settled on something which duplicates quite a bit of Tack; it
+This is why we settled on something which duplicates quite a bit of yarn; it
 seems like the least bad approach.
 
 #DOGEN dia.comment=true
@@ -3815,7 +3815,7 @@ seems like the least bad approach.
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::model&amp;#</dia:string>
+                <dia:string>#const yarn::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -3897,7 +3897,7 @@ seems like the least bad approach.
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::model&amp;#</dia:string>
+                <dia:string>#const yarn::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9051,7 +9051,7 @@ facet of the C++ language.
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::model&amp;#</dia:string>
+                <dia:string>#const yarn::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9068,7 +9068,7 @@ facet of the C++ language.
                 <dia:string>#qn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::name&amp;#</dia:string>
+                <dia:string>#const yarn::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9116,7 +9116,7 @@ facet of the C++ language.
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::model&amp;#</dia:string>
+                <dia:string>#const yarn::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9133,7 +9133,7 @@ facet of the C++ language.
                 <dia:string>#qn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::name&amp;#</dia:string>
+                <dia:string>#const yarn::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9181,7 +9181,7 @@ facet of the C++ language.
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::model&amp;#</dia:string>
+                <dia:string>#const yarn::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9198,7 +9198,7 @@ facet of the C++ language.
                 <dia:string>#nqn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::nested_name&amp;#</dia:string>
+                <dia:string>#const yarn::nested_name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -10705,7 +10705,7 @@ facet of the C++ language.
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::model&amp;#</dia:string>
+                <dia:string>#const yarn::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -10753,7 +10753,7 @@ facet of the C++ language.
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::enumeration&amp;#</dia:string>
+                <dia:string>#const yarn::enumeration&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -10801,7 +10801,7 @@ facet of the C++ language.
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::module&amp;#</dia:string>
+                <dia:string>#const yarn::module&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -10849,7 +10849,7 @@ facet of the C++ language.
                 <dia:string>#c#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::concept&amp;#</dia:string>
+                <dia:string>#const yarn::concept&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -10897,7 +10897,7 @@ facet of the C++ language.
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::primitive&amp;#</dia:string>
+                <dia:string>#const yarn::primitive&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -10945,7 +10945,7 @@ facet of the C++ language.
                 <dia:string>#o#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::object&amp;#</dia:string>
+                <dia:string>#const yarn::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13035,7 +13035,7 @@ for a given C++ entity.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::model&amp;#</dia:string>
+                <dia:string>#const yarn::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13956,7 +13956,7 @@ the dynamic object.
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::model&amp;#</dia:string>
+                <dia:string>#const yarn::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14851,7 +14851,7 @@ the dynamic object.
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Transorms a Tack type into a
+            <dia:string>#Transorms a Yarn type into a
 formattable type.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -16152,7 +16152,7 @@ registry of all available formatters.#</dia:string>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O137">
       <dia:attribute name="name">
-        <dia:string>#&lt; transforms tack types into formattables using#</dia:string>
+        <dia:string>#&lt; transforms yarn types into formattables using#</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
         <dia:enum val="2"/>
@@ -20051,7 +20051,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#qn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::name&amp;#</dia:string>
+                <dia:string>#const yarn::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -20245,7 +20245,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::model&amp;#</dia:string>
+                <dia:string>#const yarn::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -20452,7 +20452,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::Element&amp;#</dia:string>
+                <dia:string>#const yarn::Element&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -20473,7 +20473,7 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="templates">
         <dia:composite type="umlformalparameter">
           <dia:attribute name="name">
-            <dia:string>#tack::Element#</dia:string>
+            <dia:string>#yarn::Element#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -20621,7 +20621,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;tack::module&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::module&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -20669,7 +20669,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;tack::object&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::object&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -20717,7 +20717,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;tack::concept&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::concept&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -20765,7 +20765,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;tack::exception&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::exception&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -20813,7 +20813,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;tack::enumeration&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::enumeration&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -20861,7 +20861,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;tack::primitive&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::primitive&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -21067,7 +21067,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;tack::module&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::module&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -21097,7 +21097,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;tack::object&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::object&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -21127,7 +21127,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;tack::concept&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::concept&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -21157,7 +21157,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;tack::exception&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::exception&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -21187,7 +21187,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;tack::enumeration&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::enumeration&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -21217,7 +21217,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;tack::primitive&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::primitive&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -21705,7 +21705,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#id#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::unordered_map&lt;tack::name,std::unordered_map&lt;std::string,std::string&gt;&gt;&amp;#</dia:string>
+                <dia:string>#const std::unordered_map&lt;yarn::name,std::unordered_map&lt;std::string,std::string&gt;&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -21753,7 +21753,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::module&amp;#</dia:string>
+                <dia:string>#const yarn::module&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -21801,7 +21801,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#o#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::object&amp;#</dia:string>
+                <dia:string>#const yarn::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -21849,7 +21849,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#c#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::concept&amp;#</dia:string>
+                <dia:string>#const yarn::concept&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -21897,7 +21897,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::exception&amp;#</dia:string>
+                <dia:string>#const yarn::exception&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -21945,7 +21945,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::enumeration&amp;#</dia:string>
+                <dia:string>#const yarn::enumeration&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -21993,7 +21993,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::primitive&amp;#</dia:string>
+                <dia:string>#const yarn::primitive&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -22736,7 +22736,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::model&amp;#</dia:string>
+                <dia:string>#const yarn::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -24235,7 +24235,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#qn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::name&amp;#</dia:string>
+                <dia:string>#const yarn::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -24300,7 +24300,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#qn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::list&lt;tack::name&gt;&amp;#</dia:string>
+                <dia:string>#const std::list&lt;yarn::name&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -24607,7 +24607,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#inclusion_directives_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;tack::name, std::unordered_map&lt;std::string, std::string&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;yarn::name, std::unordered_map&lt;std::string, std::string&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -24967,7 +24967,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::model&amp;#</dia:string>
+                <dia:string>#const yarn::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -26190,7 +26190,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::model&amp;#</dia:string>
+                <dia:string>#const yarn::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -26392,7 +26392,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#path_derivatives_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;tack::name, std::unordered_map&lt;std::string, formattables::path_derivatives&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;yarn::name, std::unordered_map&lt;std::string, formattables::path_derivatives&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -26599,7 +26599,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#inclusion_dependencies_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;tack::name, std::unordered_map&lt;std::string, std::list&lt;std::string&gt;&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;yarn::name, std::unordered_map&lt;std::string, std::list&lt;std::string&gt;&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -26734,7 +26734,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#formatter_properties_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;tack::name,std::unordered_map&lt;std::string,formattables::formatter_properties&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;yarn::name,std::unordered_map&lt;std::string,formattables::formatter_properties&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -27173,7 +27173,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#enablement_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;tack::name, std::unordered_map&lt;std::string, bool&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;yarn::name, std::unordered_map&lt;std::string, bool&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -27372,7 +27372,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::model&amp;#</dia:string>
+                <dia:string>#const yarn::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -27922,7 +27922,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#qn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::name&amp;#</dia:string>
+                <dia:string>#const yarn::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -30261,7 +30261,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#bundles_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;tack::name, settings::bundle&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;yarn::name, settings::bundle&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -33721,7 +33721,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::model&amp;#</dia:string>
+                <dia:string>#const yarn::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -33834,7 +33834,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::model&amp;#</dia:string>
+                <dia:string>#const yarn::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -33899,7 +33899,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::model&amp;#</dia:string>
+                <dia:string>#const yarn::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

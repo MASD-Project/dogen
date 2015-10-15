@@ -19,7 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
-#include "dogen/tack/types/object.hpp"
+#include "dogen/yarn/types/object.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
@@ -37,13 +37,13 @@ namespace odb {
 namespace {
 
 class provider final : public formattables::
-        inclusion_dependencies_provider_interface<tack::object> {
+        inclusion_dependencies_provider_interface<yarn::object> {
 public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
         provide(const formattables::inclusion_dependencies_builder_factory& f,
-        const tack::object& o) const override;
+        const yarn::object& o) const override;
 };
 
 std::string provider::formatter_name() const {
@@ -52,12 +52,12 @@ std::string provider::formatter_name() const {
 
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
-    const tack::object& o) const {
+    const yarn::object& o) const {
 
     auto builder(f.make());
     builder.add(o.name(), types::traits::class_header_formatter_name());
 
-    using rt = tack::relationship_types;
+    using rt = yarn::relationship_types;
     const auto self_fn(class_header_formatter::static_formatter_name());
     builder.add(o, rt::weak_associations, self_fn);
     builder.add(o, rt::regular_associations, self_fn);

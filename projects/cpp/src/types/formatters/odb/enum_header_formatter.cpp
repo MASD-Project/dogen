@@ -19,7 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
-#include "dogen/tack/types/object.hpp"
+#include "dogen/yarn/types/object.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
@@ -37,13 +37,13 @@ namespace odb {
 namespace {
 
 class provider final : public formattables::
-        inclusion_dependencies_provider_interface<tack::enumeration> {
+        inclusion_dependencies_provider_interface<yarn::enumeration> {
 public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
         provide(const formattables::inclusion_dependencies_builder_factory& f,
-        const tack::enumeration& o) const override;
+        const yarn::enumeration& o) const override;
 };
 
 std::string provider::formatter_name() const {
@@ -52,7 +52,7 @@ std::string provider::formatter_name() const {
 
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
-    const tack::enumeration& e) const {
+    const yarn::enumeration& e) const {
 
     auto builder(f.make());
     builder.add(e.name(), types::traits::class_header_formatter_name());

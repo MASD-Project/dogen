@@ -30,7 +30,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/tack/types/model.hpp"
+#include "dogen/yarn/types/model.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/backend/types/backend_registrar.hpp"
 #include "dogen/backend/types/backend_interface.hpp"
@@ -57,13 +57,13 @@ public:
      * @brief Returns all directories managed by all backends.
      */
     std::forward_list<boost::filesystem::path>
-    managed_directories(const tack::model& m) const;
+    managed_directories(const yarn::model& m) const;
 
     /**
      * @brief Generates files for the supplied model using all
      * registered backends.
      */
-    std::forward_list<formatters::file> execute(const tack::model& m) const;
+    std::forward_list<formatters::file> execute(const yarn::model& m) const;
 
 private:
     static std::shared_ptr<backend::backend_registrar> registrar_;

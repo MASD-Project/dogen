@@ -28,8 +28,8 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/tack/types/name.hpp"
-#include "dogen/tack/hash/name_hash.hpp"
+#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/cpp/serialization/formattables/inclusion_directives_repository_fwd_ser.hpp"
 
 namespace dogen {
@@ -44,7 +44,7 @@ public:
     ~inclusion_directives_repository() = default;
 
 public:
-    explicit inclusion_directives_repository(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::string> >& inclusion_directives_by_name);
+    explicit inclusion_directives_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& inclusion_directives_by_name);
 
 private:
     template<typename Archive>
@@ -54,10 +54,10 @@ private:
     friend void boost::serialization::load(Archive& ar, inclusion_directives_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::string> >& inclusion_directives_by_name() const;
-    std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::string> >& inclusion_directives_by_name();
-    void inclusion_directives_by_name(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::string> >& v);
-    void inclusion_directives_by_name(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::string> >&& v);
+    const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& inclusion_directives_by_name() const;
+    std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& inclusion_directives_by_name();
+    void inclusion_directives_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& v);
+    void inclusion_directives_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >&& v);
 
 public:
     bool operator==(const inclusion_directives_repository& rhs) const;
@@ -70,7 +70,7 @@ public:
     inclusion_directives_repository& operator=(inclusion_directives_repository other);
 
 private:
-    std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::string> > inclusion_directives_by_name_;
+    std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> > inclusion_directives_by_name_;
 };
 
 } } }

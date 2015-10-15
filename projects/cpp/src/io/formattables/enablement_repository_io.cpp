@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/tack/io/name_io.hpp"
+#include "dogen/yarn/io/name_io.hpp"
 #include "dogen/cpp/io/formattables/enablement_repository_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -51,7 +51,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, bool> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

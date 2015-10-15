@@ -24,7 +24,7 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-enablement_repository::enablement_repository(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, bool> >& enablement_by_name)
+enablement_repository::enablement_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& enablement_by_name)
     : enablement_by_name_(enablement_by_name) { }
 
 void enablement_repository::swap(enablement_repository& other) noexcept {
@@ -42,19 +42,19 @@ enablement_repository& enablement_repository::operator=(enablement_repository ot
     return *this;
 }
 
-const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, bool> >& enablement_repository::enablement_by_name() const {
+const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& enablement_repository::enablement_by_name() const {
     return enablement_by_name_;
 }
 
-std::unordered_map<dogen::tack::name, std::unordered_map<std::string, bool> >& enablement_repository::enablement_by_name() {
+std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& enablement_repository::enablement_by_name() {
     return enablement_by_name_;
 }
 
-void enablement_repository::enablement_by_name(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, bool> >& v) {
+void enablement_repository::enablement_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& v) {
     enablement_by_name_ = v;
 }
 
-void enablement_repository::enablement_by_name(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, bool> >&& v) {
+void enablement_repository::enablement_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >&& v) {
     enablement_by_name_ = std::move(v);
 }
 

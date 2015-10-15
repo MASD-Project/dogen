@@ -33,6 +33,16 @@
 
 Updates to sprint and product backlog.
 
+*** COMPLETED Rename =tack= to =yarn=                                 :story:
+    CLOSED: [2015-10-15 Thu 20:28]
+    CLOCK: [2015-10-15 Thu 19:21]--[2015-10-15 Thu 20:28] =>  1:07
+    CLOCK: [2015-10-15 Thu 07:51]--[2015-10-15 Thu 08:30] =>  0:39
+
+We were a bit too trigger happy by settling on =tack= as the name for
+the "temporary" meta-model. As it turns out, we don't need two
+meta-models and as such the name =tack= is no longer suitable. The
+right thing to do is to rename the model to =yarn=.
+
 *** STARTED Refactor qname                                            :story:
     CLOCK: [2015-08-20 Thu 07:52]--[2015-08-20 Thu 08:36] =>  0:44
     CLOCK: [2015-08-18 Tue 14:24]--[2015-08-18 Tue 14:39] =>  0:15
@@ -345,12 +355,10 @@ package contributes to the namespaces. The model name is unpacked into
 multiple model packages (e.g. "a.b" => a::b). The file name uses the
 model name, not the model package.
 
-*** Rename =tack= to =yarn=                                           :story:
+*** Use dots in data files extensions                                 :story:
 
-We were a bit too trigger happy by settling on =tack= as the name for
-the "temporary" meta-model. As it turns out, we don't need two
-meta-models and as such the name =tack= is no longer suitable. The
-right thing to do is to rename the model to =yarn=.
+At the moment we use extensions such as =xmlyarn=. It should really be
+=.xml.yarn= or something of the kind.
 
 *** Refactor ownership hierarchy                                      :story:
 

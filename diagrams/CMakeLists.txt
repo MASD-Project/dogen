@@ -16,9 +16,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
-set(target tack)
+set(target yarn)
 add_custom_target(knit_${target}
-    COMMENT "Knitting Tack model" VERBATIM
+    COMMENT "Knitting Yarn model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
@@ -35,13 +35,13 @@ if(use_latest_knitter)
 endif()
 add_dependencies(knit_all knit_${target})
 
-set(target tack_json)
+set(target yarn_json)
 add_custom_target(knit_${target}
-    COMMENT "Knitting Tack JSON model" VERBATIM
+    COMMENT "Knitting Yarn JSON model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/tack.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
@@ -93,7 +93,7 @@ add_custom_target(knit_${target}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/tack.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
@@ -137,7 +137,7 @@ add_custom_target(knit_${target}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/tack.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/cpp.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-disable-cmakelists
@@ -150,14 +150,14 @@ if(use_latest_knitter)
 endif()
 add_dependencies(knit_all knit_${target})
 
-set(target tack_dia)
+set(target yarn_dia)
 add_custom_target(knit_${target}
-    COMMENT "Knitting Tack Dia model" VERBATIM
+    COMMENT "Knitting Yarn Dia model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dia.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/tack.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
@@ -203,7 +203,7 @@ add_custom_target(knit_${target}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/tack.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-disable-cmakelists

@@ -132,35 +132,35 @@ inclusion_dependencies_factory::inclusion_dependencies_factory(
     : factory_(f), provider_container_(c) {}
 
 std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const tack::object& o) const {
+inclusion_dependencies_factory::make(const yarn::object& o) const {
     return generate(factory_, provider_container_.object_providers(), o);
 }
 
 std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const tack::enumeration& e) const {
+inclusion_dependencies_factory::make(const yarn::enumeration& e) const {
     return generate(factory_, provider_container_.enumeration_providers(), e);
 }
 
 std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const tack::primitive& /*p*/) const {
+inclusion_dependencies_factory::make(const yarn::primitive& /*p*/) const {
     std::unordered_map<std::string, std::list<std::string> > r;
     return r;
 }
 
 std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const tack::module& /*m*/) const {
+inclusion_dependencies_factory::make(const yarn::module& /*m*/) const {
     std::unordered_map<std::string, std::list<std::string> > r;
     return r;
 }
 
 std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const tack::concept& /*c*/) const {
+inclusion_dependencies_factory::make(const yarn::concept& /*c*/) const {
     std::unordered_map<std::string, std::list<std::string> > r;
     return r;
 }
 
 std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const tack::model& m) const {
+inclusion_dependencies_factory::make(const yarn::model& m) const {
     return generate(factory_, provider_container_.model_providers(), m);
 }
 

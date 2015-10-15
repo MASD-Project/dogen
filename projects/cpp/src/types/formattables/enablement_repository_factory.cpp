@@ -23,7 +23,7 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/repository_selector.hpp"
-#include "dogen/tack/types/all_model_items_traversal.hpp"
+#include "dogen/yarn/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/io/formattables/enablement_repository_io.hpp"
 #include "dogen/cpp/io/formattables/global_enablement_properties_io.hpp"
@@ -56,22 +56,22 @@ public:
     explicit generator(const enablement_factory& f) : factory_(f) {}
 
 private:
-    template<typename TackEntity>
-    void generate(const TackEntity& e, const bool types_only = false) {
+    template<typename YarnEntity>
+    void generate(const YarnEntity& e, const bool types_only = false) {
         const auto o(e.extensions());
         result_.enablement_by_name()[e.name()] = factory_.make(o, types_only);
     }
 
 public:
-    void operator()(const dogen::tack::object& o) {
+    void operator()(const dogen::yarn::object& o) {
         const auto is_service(o.object_type() ==
-            tack::object_types::user_defined_service);
+            yarn::object_types::user_defined_service);
         generate(o, is_service);
     }
-    void operator()(const dogen::tack::enumeration& e) { generate(e); }
-    void operator()(const dogen::tack::primitive& p) { generate(p); }
-    void operator()(const dogen::tack::module& m) { generate(m); }
-    void operator()(const dogen::tack::concept& c) { generate(c); }
+    void operator()(const dogen::yarn::enumeration& e) { generate(e); }
+    void operator()(const dogen::yarn::primitive& p) { generate(p); }
+    void operator()(const dogen::yarn::module& m) { generate(m); }
+    void operator()(const dogen::yarn::concept& c) { generate(c); }
 
 public:
     const enablement_repository& result() const { return result_; }
@@ -136,7 +136,7 @@ enablement_repository enablement_repository_factory::make(
     const dynamic::repository& rp,
     const dynamic::object& root_object,
     const formatters::container& fc,
-    const tack::model& m) const {
+    const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started computing enablement.";
 
@@ -144,10 +144,10 @@ enablement_repository enablement_repository_factory::make(
     const auto gep(obtain_global_properties(fd, root_object));
     const enablement_factory f(rp, fc, gep);
     generator g(f);
-    tack::all_model_items_traversal(m, g);
+    yarn::all_model_items_traversal(m, g);
     auto r(g.result());
 
-    tack::name n;
+    yarn::name n;
     n.simple(registrar_name);
     n.location().original_model_name(m.name().location().original_model_name());
     n.location().external_module_path(
@@ -157,11 +157,11 @@ enablement_repository enablement_repository_factory::make(
 
     for (const auto& pair : m.references()) {
         const auto origin_type(pair.second);
-        if (origin_type == tack::origin_types::system)
+        if (origin_type == yarn::origin_types::system)
             continue;
 
         const auto ref(pair.first);
-        tack::name n;
+        yarn::name n;
         n.simple(registrar_name);
         n.location().original_model_name(ref.location().original_model_name());
         n.location().external_module_path(

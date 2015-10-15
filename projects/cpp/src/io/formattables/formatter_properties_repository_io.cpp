@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/tack/io/name_io.hpp"
+#include "dogen/yarn/io/name_io.hpp"
 #include "dogen/cpp/io/formattables/formatter_properties_io.hpp"
 #include "dogen/cpp/io/formattables/formatter_properties_repository_io.hpp"
 
@@ -51,7 +51,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

@@ -53,7 +53,7 @@ backend::backend_registrar& workflow::registrar() {
 }
 
 std::forward_list<boost::filesystem::path>
-workflow::managed_directories(const tack::model& m) const {
+workflow::managed_directories(const yarn::model& m) const {
     const auto& ko(knitting_options_);
     std::forward_list<boost::filesystem::path> r;
     for(const auto b : registrar().backends()) {
@@ -65,7 +65,7 @@ workflow::managed_directories(const tack::model& m) const {
 }
 
 std::forward_list<formatters::file>
-workflow::execute(const tack::model& m) const {
+workflow::execute(const yarn::model& m) const {
     std::forward_list<formatters::file> r;
     for(const auto b : registrar().backends()) {
         const auto n(b->name());

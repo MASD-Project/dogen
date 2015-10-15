@@ -19,16 +19,16 @@
  *
  */
 #include "dogen/cpp/types/initializer.hpp"
-#include "dogen/tack_json/types/initializer.hpp"
-#include "dogen/tack_dia/types/initializer.hpp"
+#include "dogen/yarn_json/types/initializer.hpp"
+#include "dogen/yarn_dia/types/initializer.hpp"
 #include "dogen/knit/types/initializer.hpp"
 
 namespace dogen {
 namespace knit {
 
 void initializer::initialize() {
-    dogen::tack_json::initializer::initialize();
-    dogen::tack_dia::initializer::initialize();
+    dogen::yarn_json::initializer::initialize();
+    dogen::yarn_dia::initializer::initialize();
     dogen::cpp::initializer::initialize();
 }
 

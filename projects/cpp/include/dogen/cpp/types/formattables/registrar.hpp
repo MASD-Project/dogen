@@ -26,9 +26,9 @@
 #endif
 
 #include <boost/shared_ptr.hpp>
-#include "dogen/tack/types/model.hpp"
-#include "dogen/tack/types/object.hpp"
-#include "dogen/tack/types/enumeration.hpp"
+#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/cpp/types/formattables/container.hpp"
 
@@ -42,14 +42,14 @@ public:
 
 public:
     void register_provider(boost::shared_ptr<
-        inclusion_dependencies_provider_interface<tack::object>
+        inclusion_dependencies_provider_interface<yarn::object>
         > p);
     void register_provider(boost::shared_ptr<
-        inclusion_dependencies_provider_interface<tack::enumeration>
+        inclusion_dependencies_provider_interface<yarn::enumeration>
         > p);
 
     void register_provider(boost::shared_ptr<
-        inclusion_dependencies_provider_interface<tack::model>
+        inclusion_dependencies_provider_interface<yarn::model>
         > p);
 
 private:

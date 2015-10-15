@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/tack/hash/generation_types_hash.hpp"
+#include "dogen/yarn/hash/generation_types_hash.hpp"
 #include "dogen/cpp/hash/formattables/entity_hash.hpp"
 #include "dogen/cpp/hash/formattables/class_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/parent_info_hash.hpp"

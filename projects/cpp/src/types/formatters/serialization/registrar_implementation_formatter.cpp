@@ -39,13 +39,13 @@ namespace serialization {
 namespace {
 
 class provider final : public formattables::
-        inclusion_dependencies_provider_interface<tack::model> {
+        inclusion_dependencies_provider_interface<yarn::model> {
 public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
         provide(const formattables::inclusion_dependencies_builder_factory& f,
-        const tack::model& m) const override;
+        const yarn::model& m) const override;
 };
 
 std::string provider::formatter_name() const {
@@ -54,9 +54,9 @@ std::string provider::formatter_name() const {
 
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
-    const tack::model& m) const {
+    const yarn::model& m) const {
 
-    tack::name n;
+    yarn::name n;
     n.simple(registrar_name);
     n.location().original_model_name(m.name().location().original_model_name());
     n.location().external_module_path(
@@ -87,11 +87,11 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
 
     for (const auto& pair : m.references()) {
         const auto origin_type(pair.second);
-        if (origin_type == tack::origin_types::system)
+        if (origin_type == yarn::origin_types::system)
             continue;
 
         const auto ref(pair.first);
-        tack::name n;
+        yarn::name n;
         n.location().original_model_name(
             ref.location().original_model_name());
         n.simple(registrar_name);

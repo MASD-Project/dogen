@@ -36,13 +36,13 @@ namespace serialization {
 namespace {
 
 class provider final : public formattables::
-        inclusion_dependencies_provider_interface<tack::enumeration> {
+        inclusion_dependencies_provider_interface<yarn::enumeration> {
 public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
         provide(const formattables::inclusion_dependencies_builder_factory& f,
-        const tack::enumeration& e) const override;
+        const yarn::enumeration& e) const override;
 };
 
 std::string provider::formatter_name() const {
@@ -51,7 +51,7 @@ std::string provider::formatter_name() const {
 
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
-    const tack::enumeration& e) const {
+    const yarn::enumeration& e) const {
 
     auto builder(f.make());
     builder.add(e.name(), types::traits::enum_header_formatter_name());

@@ -24,7 +24,7 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-path_derivatives_repository::path_derivatives_repository(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_by_name)
+path_derivatives_repository::path_derivatives_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_by_name)
     : path_derivatives_by_name_(path_derivatives_by_name) { }
 
 void path_derivatives_repository::swap(path_derivatives_repository& other) noexcept {
@@ -42,19 +42,19 @@ path_derivatives_repository& path_derivatives_repository::operator=(path_derivat
     return *this;
 }
 
-const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_repository::path_derivatives_by_name() const {
+const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_repository::path_derivatives_by_name() const {
     return path_derivatives_by_name_;
 }
 
-std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_repository::path_derivatives_by_name() {
+std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_repository::path_derivatives_by_name() {
     return path_derivatives_by_name_;
 }
 
-void path_derivatives_repository::path_derivatives_by_name(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& v) {
+void path_derivatives_repository::path_derivatives_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& v) {
     path_derivatives_by_name_ = v;
 }
 
-void path_derivatives_repository::path_derivatives_by_name(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >&& v) {
+void path_derivatives_repository::path_derivatives_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >&& v) {
     path_derivatives_by_name_ = std::move(v);
 }
 

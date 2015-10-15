@@ -136,10 +136,10 @@ factory::clone_path_settings(
     return r;
 }
 
-tack::name factory::create_name(const tack::model& m,
+yarn::name factory::create_name(const yarn::model& m,
     const std::string& simple_name) const {
 
-    tack::name r;
+    yarn::name r;
     r.simple(simple_name);
     r.location().original_model_name(m.name().location().original_model_name());
     r.location().external_module_path(
@@ -148,9 +148,9 @@ tack::name factory::create_name(const tack::model& m,
 }
 
 path_derivatives factory::create_path_derivatives(
-    const config::cpp_options& opts, const tack::model& m,
+    const config::cpp_options& opts, const yarn::model& m,
     const std::unordered_map<std::string, settings::path_settings>& ps,
-    const tack::name& n,
+    const yarn::name& n,
     const std::string& formatter_name) const {
 
     path_derivatives_factory pdf(opts, m, ps);
@@ -166,7 +166,7 @@ path_derivatives factory::create_path_derivatives(
 }
 
 bool factory::is_enabled(const formatter_properties_repository& fprp,
-    const tack::name& n, const std::string& formatter_name) const {
+    const yarn::name& n, const std::string& formatter_name) const {
 
     const auto i(fprp.formatter_properties_by_name().find(n));
     if (i == fprp.formatter_properties_by_name().end()) {
@@ -193,7 +193,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     const settings::bundle_repository& brp,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
-    const tack::model& m) const {
+    const yarn::model& m) const {
 
     const auto n(create_name(m, registrar_name));
     BOOST_LOG_SEV(lg, debug) << "Making registrar: " << n.qualified();
@@ -219,7 +219,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     r->settings(i->second);
 
     for (const auto& pair : m.references()) {
-        if (pair.second != tack::origin_types::system) {
+        if (pair.second != yarn::origin_types::system) {
             const auto l(b.namespace_list(m, pair.first));
             const auto s(boost::algorithm::join(l, namespace_separator));
             r->model_dependencies().push_back(s);
@@ -282,7 +282,7 @@ make_includers(
     const std::forward_list<
     std::shared_ptr<formatters::formatter_interface>>& formatters,
     const formatter_properties_repository& fprp,
-    const tack::model& m) const {
+    const yarn::model& m) const {
 
     const auto n(create_name(m, includers_name));
     BOOST_LOG_SEV(lg, debug) << "Making includers: " << n.qualified();
@@ -317,7 +317,7 @@ make_includers(
             const auto is_types(boost::starts_with(fn, "cpp.types."));
             if (!is_types) {
                 const auto j(m.objects().find(n));
-                using tack::object_types;
+                using yarn::object_types;
                 if (j  != m.objects().end()) {
                     const auto ot(j->second.object_type());
                     if (ot != object_types::user_defined_value_object)
@@ -402,7 +402,7 @@ make_cmakelists(const config::cpp_options& opts,
     const dogen::formatters::general_settings_factory& gsf,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
-    const tack::model& m) const
+    const yarn::model& m) const
 {
     std::forward_list<std::shared_ptr<formattable> > r;
     if (opts.disable_cmakelists()) {
@@ -460,7 +460,7 @@ factory::make_odb_options(const config::cpp_options& opts,
     const dogen::formatters::general_settings_factory& gsf,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
-    const tack::model& m) const {
+    const yarn::model& m) const {
 
     using namespace formatters::odb;
     const auto ch_fn(traits::class_header_formatter_name());

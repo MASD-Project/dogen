@@ -29,7 +29,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/tack/serialization/generation_types_ser.hpp"
+#include "dogen/yarn/serialization/generation_types_ser.hpp"
 #include "dogen/cpp/serialization/formattables/entity_ser.hpp"
 #include "dogen/cpp/serialization/formattables/class_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/parent_info_ser.hpp"

@@ -31,7 +31,7 @@ target_link_libraries(knitter
     backend
     cpp
     dia
-    tack
+    yarn
     config
     utility
     ${LIBXML2_LIBRARIES}

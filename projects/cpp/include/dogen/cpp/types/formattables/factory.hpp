@@ -27,7 +27,7 @@
 
 #include <memory>
 #include <forward_list>
-#include "dogen/tack/types/model.hpp"
+#include "dogen/yarn/types/model.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
@@ -52,18 +52,18 @@ private:
         const std::string& source_formatter_name,
         const std::string& destination_formatter_name) const;
 
-    tack::name create_name(const tack::model& m,
+    yarn::name create_name(const yarn::model& m,
         const std::string& simple_name) const;
 
     path_derivatives create_path_derivatives(
         const config::cpp_options& opts,
-        const tack::model& m,
+        const yarn::model& m,
         const std::unordered_map<std::string, settings::path_settings>& ps,
-        const tack::name& n,
+        const yarn::name& n,
         const std::string& formatter_name) const;
 
     bool is_enabled(const formatter_properties_repository& fprp,
-        const tack::name& n, const std::string& formatter_name) const;
+        const yarn::name& n, const std::string& formatter_name) const;
 
 public:
     std::shared_ptr<formattable> make_registrar_info(
@@ -74,7 +74,7 @@ public:
         const settings::bundle_repository& brp,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const formatter_properties_repository& fprp,
-        const tack::model& m) const;
+        const yarn::model& m) const;
 
     std::forward_list<std::shared_ptr<formattable> > make_includers(
         const config::cpp_options& opts,
@@ -85,7 +85,7 @@ public:
         const std::forward_list<
         std::shared_ptr<formatters::formatter_interface>>& formatters,
         const formatter_properties_repository& fprp,
-        const tack::model& m) const;
+        const yarn::model& m) const;
 
     std::forward_list<std::shared_ptr<formattable> > make_cmakelists(
         const config::cpp_options& opts,
@@ -93,7 +93,7 @@ public:
         const dogen::formatters::general_settings_factory& gsf,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const formatter_properties_repository& fprp,
-        const tack::model& m) const;
+        const yarn::model& m) const;
 
     std::shared_ptr<formattable> make_odb_options(
         const config::cpp_options& opts,
@@ -101,7 +101,7 @@ public:
         const dogen::formatters::general_settings_factory& gsf,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const formatter_properties_repository& fprp,
-        const tack::model& m) const;
+        const yarn::model& m) const;
 };
 
 } } }

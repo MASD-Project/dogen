@@ -30,7 +30,7 @@ target_link_libraries(cpp_spec
     cpp
     utility
     dia
-    tack
+    yarn
     config
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}

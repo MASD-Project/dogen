@@ -24,7 +24,7 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-inclusion_dependencies_repository::inclusion_dependencies_repository(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_by_name)
+inclusion_dependencies_repository::inclusion_dependencies_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_by_name)
     : inclusion_dependencies_by_name_(inclusion_dependencies_by_name) { }
 
 void inclusion_dependencies_repository::swap(inclusion_dependencies_repository& other) noexcept {
@@ -42,19 +42,19 @@ inclusion_dependencies_repository& inclusion_dependencies_repository::operator=(
     return *this;
 }
 
-const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_repository::inclusion_dependencies_by_name() const {
+const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_repository::inclusion_dependencies_by_name() const {
     return inclusion_dependencies_by_name_;
 }
 
-std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_repository::inclusion_dependencies_by_name() {
+std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_repository::inclusion_dependencies_by_name() {
     return inclusion_dependencies_by_name_;
 }
 
-void inclusion_dependencies_repository::inclusion_dependencies_by_name(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::list<std::string> > >& v) {
+void inclusion_dependencies_repository::inclusion_dependencies_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >& v) {
     inclusion_dependencies_by_name_ = v;
 }
 
-void inclusion_dependencies_repository::inclusion_dependencies_by_name(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::list<std::string> > >&& v) {
+void inclusion_dependencies_repository::inclusion_dependencies_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >&& v) {
     inclusion_dependencies_by_name_ = std::move(v);
 }
 

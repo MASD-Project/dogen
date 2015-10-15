@@ -29,12 +29,12 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/tack/types/model.hpp"
-#include "dogen/tack/types/module.hpp"
-#include "dogen/tack/types/object.hpp"
-#include "dogen/tack/types/concept.hpp"
-#include "dogen/tack/types/primitive.hpp"
-#include "dogen/tack/types/enumeration.hpp"
+#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/module.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/concept.hpp"
+#include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/cpp/types/formattables/container.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
@@ -44,7 +44,7 @@ namespace cpp {
 namespace formattables {
 
 /**
- * @brief Creates the inclusion dependencies for a given Tack entity.
+ * @brief Creates the inclusion dependencies for a given Yarn entity.
  */
 class inclusion_dependencies_factory {
 public:
@@ -55,37 +55,37 @@ public:
      * @brief Makes inclusion dependencies for an object.
      */
     std::unordered_map<std::string, std::list<std::string> >
-    make(const tack::object& o) const;
+    make(const yarn::object& o) const;
 
     /**
      * @brief Makes inclusion dependencies for an enumeration.
      */
     std::unordered_map<std::string, std::list<std::string> >
-    make(const tack::enumeration& e) const;
+    make(const yarn::enumeration& e) const;
 
     /**
      * @brief Makes inclusion dependencies for a primitive.
      */
     std::unordered_map<std::string, std::list<std::string> >
-    make(const tack::primitive& p) const;
+    make(const yarn::primitive& p) const;
 
     /**
      * @brief Makes inclusion dependencies for a module.
      */
     std::unordered_map<std::string, std::list<std::string> >
-    make(const tack::module& m) const;
+    make(const yarn::module& m) const;
 
     /**
      * @brief Makes inclusion dependencies for a concept.
      */
     std::unordered_map<std::string, std::list<std::string> >
-    make(const tack::concept& c) const;
+    make(const yarn::concept& c) const;
 
     /**
      * @brief Makes inclusion dependencies for a model.
      */
     std::unordered_map<std::string, std::list<std::string> >
-    make(const tack::model& m) const;
+    make(const yarn::model& m) const;
 
 private:
     const inclusion_dependencies_builder_factory& factory_;

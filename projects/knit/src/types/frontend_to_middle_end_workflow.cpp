@@ -23,10 +23,10 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
-#include "dogen/tack/types/persister.hpp"
-#include "dogen/tack/types/assembler.hpp"
-#include "dogen/tack/types/importer.hpp"
-#include "dogen/tack/io/model_io.hpp"
+#include "dogen/yarn/types/persister.hpp"
+#include "dogen/yarn/types/assembler.hpp"
+#include "dogen/yarn/types/importer.hpp"
+#include "dogen/yarn/io/model_io.hpp"
 #include "dogen/backend/types/workflow.hpp"
 #include "dogen/knit/types/frontend_to_middle_end_workflow.hpp"
 
@@ -55,9 +55,9 @@ frontend_to_middle_end_workflow(const config::knitting_options& o,
     const dynamic::repository& rp)
     : knitting_options_(o), repository_(rp) {}
 
-std::list<tack::input_descriptor>
+std::list<yarn::input_descriptor>
 frontend_to_middle_end_workflow::obtain_input_descriptors_activity() const {
-    std::list<tack::input_descriptor> r;
+    std::list<yarn::input_descriptor> r;
     using namespace dogen::utility::filesystem;
     const auto dir(data_files_directory() / library_dir);
 
@@ -67,7 +67,7 @@ frontend_to_middle_end_workflow::obtain_input_descriptors_activity() const {
 
     for (const auto& f : files) {
         BOOST_LOG_SEV(lg, debug) << "Library model: " << f.filename();
-        tack::input_descriptor id;
+        yarn::input_descriptor id;
         id.path(f);
         id.is_target(false);
         r.push_back(id);
@@ -81,7 +81,7 @@ frontend_to_middle_end_workflow::obtain_input_descriptors_activity() const {
     for (const auto ref : input_options.references()) {
         BOOST_LOG_SEV(lg, debug) << "Reference model: "
                                  << ref.path().filename();
-        tack::input_descriptor id;
+        yarn::input_descriptor id;
         id.path(ref.path());
         id.external_module_path(ref.external_module_path());
         id.is_target(false);
@@ -91,7 +91,7 @@ frontend_to_middle_end_workflow::obtain_input_descriptors_activity() const {
 
     BOOST_LOG_SEV(lg, debug) << "Added target model: "
                              << input_options.target().path();
-    tack::input_descriptor target;
+    yarn::input_descriptor target;
     target.path(input_options.target().path());
     target.is_target(true);
     target.external_module_path(input_options.target().external_module_path());
@@ -99,17 +99,17 @@ frontend_to_middle_end_workflow::obtain_input_descriptors_activity() const {
     return r;
 }
 
-std::list<tack::model> frontend_to_middle_end_workflow::
-import_tack_models_activity(
-    const std::list<tack::input_descriptor>& descriptors) const {
-    tack::importer imp(repository_);
+std::list<yarn::model> frontend_to_middle_end_workflow::
+import_yarn_models_activity(
+    const std::list<yarn::input_descriptor>& descriptors) const {
+    yarn::importer imp(repository_);
     return imp.import(descriptors);
 }
 
 boost::filesystem::path frontend_to_middle_end_workflow::
 obtain_target_path_activity(
-    const std::list<tack::input_descriptor>& descriptors) const {
-    tack::input_descriptor target_descriptor;
+    const std::list<yarn::input_descriptor>& descriptors) const {
+    yarn::input_descriptor target_descriptor;
     for (const auto& d : descriptors) {
         if (!d.is_target())
             continue;
@@ -119,9 +119,9 @@ obtain_target_path_activity(
     return boost::filesystem::path();
 }
 
-tack::model frontend_to_middle_end_workflow::
-assemble_tack_models_activity(const std::list<tack::model>& models) const {
-    tack::assembler a;
+yarn::model frontend_to_middle_end_workflow::
+assemble_yarn_models_activity(const std::list<yarn::model>& models) const {
+    yarn::assembler a;
     const auto r(a.assemble(models));
 
     BOOST_LOG_SEV(lg, debug) << "Assembled model: " << r;
@@ -134,12 +134,12 @@ assemble_tack_models_activity(const std::list<tack::model>& models) const {
     return r;
 }
 
-tack::model frontend_to_middle_end_workflow::execute() const {
+yarn::model frontend_to_middle_end_workflow::execute() const {
     BOOST_LOG_SEV(lg, info) << "Workflow started.";
 
     const auto d(obtain_input_descriptors_activity());
-    const auto pm(import_tack_models_activity(d));
-    const auto r(assemble_tack_models_activity(pm));
+    const auto pm(import_yarn_models_activity(d));
+    const auto r(assemble_yarn_models_activity(pm));
     const auto tp(obtain_target_path_activity(d));
 
     BOOST_LOG_SEV(lg, info) << "Workflow finished.";

@@ -24,7 +24,7 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-bundle_repository::bundle_repository(const std::unordered_map<dogen::tack::name, dogen::cpp::settings::bundle>& bundles_by_name)
+bundle_repository::bundle_repository(const std::unordered_map<dogen::yarn::name, dogen::cpp::settings::bundle>& bundles_by_name)
     : bundles_by_name_(bundles_by_name) { }
 
 void bundle_repository::swap(bundle_repository& other) noexcept {
@@ -42,19 +42,19 @@ bundle_repository& bundle_repository::operator=(bundle_repository other) {
     return *this;
 }
 
-const std::unordered_map<dogen::tack::name, dogen::cpp::settings::bundle>& bundle_repository::bundles_by_name() const {
+const std::unordered_map<dogen::yarn::name, dogen::cpp::settings::bundle>& bundle_repository::bundles_by_name() const {
     return bundles_by_name_;
 }
 
-std::unordered_map<dogen::tack::name, dogen::cpp::settings::bundle>& bundle_repository::bundles_by_name() {
+std::unordered_map<dogen::yarn::name, dogen::cpp::settings::bundle>& bundle_repository::bundles_by_name() {
     return bundles_by_name_;
 }
 
-void bundle_repository::bundles_by_name(const std::unordered_map<dogen::tack::name, dogen::cpp::settings::bundle>& v) {
+void bundle_repository::bundles_by_name(const std::unordered_map<dogen::yarn::name, dogen::cpp::settings::bundle>& v) {
     bundles_by_name_ = v;
 }
 
-void bundle_repository::bundles_by_name(const std::unordered_map<dogen::tack::name, dogen::cpp::settings::bundle>&& v) {
+void bundle_repository::bundles_by_name(const std::unordered_map<dogen::yarn::name, dogen::cpp::settings::bundle>&& v) {
     bundles_by_name_ = std::move(v);
 }
 

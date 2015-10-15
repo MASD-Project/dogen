@@ -41,7 +41,7 @@ const formattables::container& registrar::container() const {
 }
 
 void registrar::register_provider(boost::shared_ptr<
-    inclusion_dependencies_provider_interface<tack::object>
+    inclusion_dependencies_provider_interface<yarn::object>
     > p) {
 
     if (p->formatter_name().empty()) {
@@ -52,7 +52,7 @@ void registrar::register_provider(boost::shared_ptr<
 }
 
 void registrar::register_provider(boost::shared_ptr<
-    inclusion_dependencies_provider_interface<tack::enumeration>
+    inclusion_dependencies_provider_interface<yarn::enumeration>
     > p) {
 
     if (p->formatter_name().empty()) {
@@ -63,7 +63,7 @@ void registrar::register_provider(boost::shared_ptr<
 }
 
 void registrar::register_provider(boost::shared_ptr<
-    inclusion_dependencies_provider_interface<tack::model>
+    inclusion_dependencies_provider_interface<yarn::model>
     > p) {
 
     if (p->formatter_name().empty()) {

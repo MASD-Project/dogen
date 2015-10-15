@@ -48,13 +48,13 @@ namespace cpp {
 namespace formattables {
 
 path_derivatives_factory::path_derivatives_factory(
-    const config::cpp_options& opts, const tack::model& m,
+    const config::cpp_options& opts, const yarn::model& m,
     const std::unordered_map<std::string, settings::path_settings>& ps)
     : options_(opts), model_(m), path_settings_(ps) { }
 
 boost::filesystem::path path_derivatives_factory::
 make_inclusion_path(const settings::path_settings& ps,
-    const tack::name& n) const {
+    const yarn::name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion path for: "
                              << n.qualified();
 
@@ -103,7 +103,7 @@ make_inclusion_path(const settings::path_settings& ps,
 boost::filesystem::path path_derivatives_factory::
 make_file_path(const settings::path_settings& ps,
     const boost::filesystem::path& inclusion_path,
-    const tack::name& n) const {
+    const yarn::name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Creating file path for: " << n.qualified();
 
     boost::filesystem::path r;
@@ -155,7 +155,7 @@ to_header_guard_name(const boost::filesystem::path& p) const {
 }
 
 std::unordered_map<std::string, path_derivatives>
-path_derivatives_factory::make(const tack::name& n) const {
+path_derivatives_factory::make(const yarn::name& n) const {
     std::unordered_map<std::string, path_derivatives> r;
 
     for (const auto& pair : path_settings_) {

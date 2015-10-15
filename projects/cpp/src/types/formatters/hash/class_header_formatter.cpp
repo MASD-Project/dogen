@@ -34,18 +34,18 @@ namespace formatters {
 namespace hash {
 
 class provider final : public formattables::
-        inclusion_dependencies_provider_interface<tack::object> {
+        inclusion_dependencies_provider_interface<yarn::object> {
  public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
         provide(const formattables::inclusion_dependencies_builder_factory& f,
-            const tack::object& o) const override;
+            const yarn::object& o) const override;
 };
 
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
-    const tack::object& o) const {
+    const yarn::object& o) const {
 
     auto builder(f.make());
     builder.add(inclusion_constants::std::functional());

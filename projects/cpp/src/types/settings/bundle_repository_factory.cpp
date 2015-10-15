@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/tack/types/all_model_items_traversal.hpp"
+#include "dogen/yarn/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/io/settings/bundle_repository_io.hpp"
 #include "dogen/cpp/types/settings/bundle_factory.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
@@ -54,9 +54,9 @@ private:
      * @brief Generates all of the inclusion dependencies for the
      * formatters and qualified name.
      */
-    template<typename TackEntity>
-    void generate(const TackEntity& e) {
-        if (e.generation_type() == tack::generation_types::no_generation)
+    template<typename YarnEntity>
+    void generate(const YarnEntity& e) {
+        if (e.generation_type() == yarn::generation_types::no_generation)
             return;
 
         const auto b(factory_.make(e.extensions()));
@@ -71,11 +71,11 @@ private:
     }
 
 public:
-    void operator()(const dogen::tack::object& o) { generate(o); }
-    void operator()(const dogen::tack::enumeration& e) { generate(e); }
-    void operator()(const dogen::tack::primitive& p) { generate(p); }
-    void operator()(const dogen::tack::module& m) { generate(m); }
-    void operator()(const dogen::tack::concept& c) { generate(c); }
+    void operator()(const dogen::yarn::object& o) { generate(o); }
+    void operator()(const dogen::yarn::enumeration& e) { generate(e); }
+    void operator()(const dogen::yarn::primitive& p) { generate(p); }
+    void operator()(const dogen::yarn::module& m) { generate(m); }
+    void operator()(const dogen::yarn::concept& c) { generate(c); }
 
 public:
     const bundle_repository& result() const { return result_; }
@@ -90,17 +90,17 @@ private:
 bundle_repository bundle_repository_factory::
 make(const dynamic::repository& rp, const dynamic::object& root_object,
     const dogen::formatters::general_settings_factory& gsf,
-    const opaque_settings_builder& osb, const tack::model& m) const {
+    const opaque_settings_builder& osb, const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating settings bundle repository.";
 
     const bundle_factory f(rp, root_object, gsf, osb);
     generator g(f);
-    tack::all_model_items_traversal(m, g);
+    yarn::all_model_items_traversal(m, g);
     auto r(g.result());
 
     // FIXME: hack to handle registars.
-    tack::name n;
+    yarn::name n;
     n.simple(registrar_name);
     n.location().original_model_name(m.name().location().original_model_name());
     n.location().external_module_path(

@@ -23,8 +23,8 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/pair_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/tack/io/name_io.hpp"
-#include "dogen/tack/types/all_model_items_traversal.hpp"
+#include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/io/formattables/inclusion_directives_repository_io.hpp"
 #include "dogen/cpp/types/settings/inclusion_directives_settings_factory.hpp"
@@ -56,7 +56,7 @@ public:
     generator(const inclusion_directives_factory& f) : factory_(f) { }
 
 public:
-    void generate(const dynamic::object& o, const tack::name& n) {
+    void generate(const dynamic::object& o, const yarn::name& n) {
         const auto id(factory_.make(o, n));
         if (!id)
             return;
@@ -82,11 +82,11 @@ private:
     }
 
 public:
-    void operator()(const dogen::tack::object& o) { generate(o); }
-    void operator()(const dogen::tack::enumeration& e) { generate(e); }
-    void operator()(const dogen::tack::primitive& p) { generate(p); }
-    void operator()(const dogen::tack::module& m) { generate(m); }
-    void operator()(const dogen::tack::concept& c) { generate(c); }
+    void operator()(const dogen::yarn::object& o) { generate(o); }
+    void operator()(const dogen::yarn::enumeration& e) { generate(e); }
+    void operator()(const dogen::yarn::primitive& p) { generate(p); }
+    void operator()(const dogen::yarn::module& m) { generate(m); }
+    void operator()(const dogen::yarn::concept& c) { generate(c); }
 
 public:
     const inclusion_directives_repository& result() const { return result_; }
@@ -102,15 +102,15 @@ inclusion_directives_repository inclusion_directives_repository_factory::make(
     const dynamic::repository& srp,
     const formatters::container& fc,
     const path_derivatives_repository& pdrp,
-    const tack::model& m) const {
+    const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Making inclusion directives repository.";
 
     const inclusion_directives_factory f(srp, fc, pdrp);
     generator g(f);
-    tack::all_model_items_traversal(m, g);
+    yarn::all_model_items_traversal(m, g);
 
-    tack::name n;
+    yarn::name n;
     n.simple(registrar_name);
     n.location().original_model_name(m.name().location().original_model_name());
     n.location().external_module_path(
@@ -120,11 +120,11 @@ inclusion_directives_repository inclusion_directives_repository_factory::make(
 
     for (const auto& pair : m.references()) {
         const auto origin_type(pair.second);
-        if (origin_type == tack::origin_types::system)
+        if (origin_type == yarn::origin_types::system)
             continue;
 
         const auto ref(pair.first);
-        tack::name n;
+        yarn::name n;
         n.location().original_model_name(ref.location().original_model_name());
         n.simple(registrar_name);
         n.location().external_module_path(

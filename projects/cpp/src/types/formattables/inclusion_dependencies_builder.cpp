@@ -64,7 +64,7 @@ inclusion_dependencies_builder(const enablement_repository& erp,
 
 boost::optional<std::string>
 inclusion_dependencies_builder::get_inclusion_directive(
-    const tack::name& n,
+    const yarn::name& n,
     const std::string& formatter_name) const {
 
     const auto& idn(directives_repository_.inclusion_directives_by_name());
@@ -81,9 +81,9 @@ inclusion_dependencies_builder::get_inclusion_directive(
 
 inclusion_dependencies_builder::special_includes
 inclusion_dependencies_builder::make_special_includes(
-    const tack::object& o) const {
+    const yarn::object& o) const {
     special_includes r;
-    const auto lambda([&](const tack::relationship_types rt) {
+    const auto lambda([&](const yarn::relationship_types rt) {
             const auto i(o.relationships().find(rt));
             if (i == o.relationships().end())
                 return;
@@ -109,14 +109,14 @@ inclusion_dependencies_builder::make_special_includes(
             }
         });
 
-    using rt = dogen::tack::relationship_types;
+    using rt = dogen::yarn::relationship_types;
     lambda(rt::regular_associations);
     lambda(rt::weak_associations);
 
     return r;
 }
 
-bool inclusion_dependencies_builder::is_enabled(const tack::name& n,
+bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
     const std::string& formatter_name) const {
 
     const auto& en(enablement_repository_.enablement_by_name());
@@ -163,7 +163,7 @@ bool inclusion_dependencies_builder::is_integrated(
 }
 
 settings::aspect_settings inclusion_dependencies_builder::
-get_aspect_settings(const tack::name& n) const {
+get_aspect_settings(const yarn::name& n) const {
     const auto& bn(bundle_repository_.bundles_by_name());
     const auto i(bn.find(n));
     if (i == bn.end()) {
@@ -184,7 +184,7 @@ add(const std::string& inclusion_directive) {
 }
 
 void inclusion_dependencies_builder::
-add(const tack::name& n, const std::string& formatter_name) {
+add(const yarn::name& n, const std::string& formatter_name) {
     if (!is_enabled(n, formatter_name))
         return;
 
@@ -194,13 +194,13 @@ add(const tack::name& n, const std::string& formatter_name) {
 }
 
 void inclusion_dependencies_builder::
-add(const std::list<tack::name>& names, const std::string& formatter_name) {
+add(const std::list<yarn::name>& names, const std::string& formatter_name) {
     for (const auto& n : names)
         add(n, formatter_name);
 }
 
-void inclusion_dependencies_builder::add(const tack::object& o,
-    const tack::relationship_types rt,
+void inclusion_dependencies_builder::add(const yarn::object& o,
+    const yarn::relationship_types rt,
     const std::string& formatter_name) {
 
     const auto i(o.relationships().find(rt));

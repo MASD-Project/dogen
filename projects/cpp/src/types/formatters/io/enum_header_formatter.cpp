@@ -19,7 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
-#include "dogen/tack/types/enumeration.hpp"
+#include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
@@ -36,13 +36,13 @@ namespace io {
 namespace {
 
 class provider final : public formattables::
-        inclusion_dependencies_provider_interface<tack::enumeration> {
+        inclusion_dependencies_provider_interface<yarn::enumeration> {
 public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
         provide(const formattables::inclusion_dependencies_builder_factory& f,
-            const tack::enumeration& o) const override;
+            const yarn::enumeration& o) const override;
 };
 
 std::string provider::formatter_name() const {
@@ -51,7 +51,7 @@ std::string provider::formatter_name() const {
 
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
-    const tack::enumeration& o) const {
+    const yarn::enumeration& o) const {
     auto builder(f.make());
 
     builder.add(inclusion_constants::std::iosfwd());

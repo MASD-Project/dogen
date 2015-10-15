@@ -29,7 +29,7 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include "dogen/tack/types/generation_types.hpp"
+#include "dogen/yarn/types/generation_types.hpp"
 #include "dogen/cpp/types/formattables/entity.hpp"
 #include "dogen/cpp/types/formattables/parent_info.hpp"
 #include "dogen/cpp/types/formattables/property_info.hpp"
@@ -75,7 +75,7 @@ public:
         const bool is_visitable,
         const bool is_immutable,
         const bool is_original_parent_visitable,
-        const dogen::tack::generation_types generation_type,
+        const dogen::yarn::generation_types generation_type,
         const bool is_final);
 
 private:
@@ -234,8 +234,8 @@ public:
      * @brief Type of code generation to perform.
      */
     /**@{*/
-    dogen::tack::generation_types generation_type() const;
-    void generation_type(const dogen::tack::generation_types v);
+    dogen::yarn::generation_types generation_type() const;
+    void generation_type(const dogen::yarn::generation_types v);
     /**@}*/
 
     bool is_final() const;
@@ -268,7 +268,7 @@ private:
     bool is_visitable_;
     bool is_immutable_;
     bool is_original_parent_visitable_;
-    dogen::tack::generation_types generation_type_;
+    dogen::yarn::generation_types generation_type_;
     bool is_final_;
 };
 

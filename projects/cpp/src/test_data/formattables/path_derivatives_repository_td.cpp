@@ -19,15 +19,15 @@
  *
  */
 #include <sstream>
-#include "dogen/tack/test_data/name_td.hpp"
+#include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/cpp/test_data/formattables/path_derivatives_td.hpp"
 #include "dogen/cpp/test_data/formattables/path_derivatives_repository_td.hpp"
 
 namespace {
 
-dogen::tack::name
-create_dogen_tack_name(const unsigned int position) {
-    return dogen::tack::name_generator::create(position);
+dogen::yarn::name
+create_dogen_yarn_name(const unsigned int position) {
+    return dogen::yarn::name_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -49,10 +49,10 @@ std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> crea
     return r;
 }
 
-std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> > create_std_unordered_map_dogen_tack_name_std_unordered_map_std_string_dogen_cpp_formattables_path_derivatives_(unsigned int position) {
-    std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> > r;
+std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> > create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_dogen_cpp_formattables_path_derivatives_(unsigned int position) {
+    std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_tack_name(position + i), create_std_unordered_map_std_string_dogen_cpp_formattables_path_derivatives(position + i)));
+        r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_std_unordered_map_std_string_dogen_cpp_formattables_path_derivatives(position + i)));
     }
     return r;
 }
@@ -67,7 +67,7 @@ path_derivatives_repository_generator::path_derivatives_repository_generator() :
 
 void path_derivatives_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.path_derivatives_by_name(create_std_unordered_map_dogen_tack_name_std_unordered_map_std_string_dogen_cpp_formattables_path_derivatives_(position + 0));
+    v.path_derivatives_by_name(create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_dogen_cpp_formattables_path_derivatives_(position + 0));
 }
 
 path_derivatives_repository_generator::result_type

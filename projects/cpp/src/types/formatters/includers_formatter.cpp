@@ -31,7 +31,7 @@ namespace formatters {
 namespace {
 
 class provider final : public formattables::
-        inclusion_dependencies_provider_interface<tack::object> {
+        inclusion_dependencies_provider_interface<yarn::object> {
 public:
     explicit provider(const std::string& formatter_name);
 
@@ -40,7 +40,7 @@ public:
 
     boost::optional<std::list<std::string> >
         provide(const formattables::inclusion_dependencies_builder_factory& f,
-            const tack::object& o) const override;
+            const yarn::object& o) const override;
 
 private:
     const std::string formatter_name_;
@@ -51,7 +51,7 @@ provider::provider(const std::string& formatter_name)
 
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
-    const tack::object& /*o*/) const {
+    const yarn::object& /*o*/) const {
 
     auto builder(f.make());
     return builder.build();

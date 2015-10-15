@@ -30,14 +30,14 @@
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
-#include "dogen/tack/types/model.hpp"
+#include "dogen/yarn/types/model.hpp"
 #include "dogen/formatters/types/file.hpp"
 
 namespace dogen {
 namespace backend {
 
 /**
- * @brief Responsible for converting a Tack model into source code
+ * @brief Responsible for converting a Yarn model into source code
  * according to a well-defined grammar.
  */
 class backend_interface {
@@ -59,7 +59,7 @@ public:
     virtual std::forward_list<boost::filesystem::path>
     managed_directories(const config::knitting_options& ko,
         const dynamic::repository& rp,
-        const tack::model& m) const = 0;
+        const yarn::model& m) const = 0;
 
     /**
      * @brief Complete ownership hierarchy for this backend, listing
@@ -71,13 +71,13 @@ public:
     /**
      * @brief Generates the source code for the backend.
      *
-     * @param gs General settings for the Tack types.
+     * @param gs General settings for the Yarn types.
      * @param m Model to generate.
      */
     virtual std::forward_list<formatters::file> generate(
         const config::knitting_options& ko,
         const dynamic::repository& rp,
-        const tack::model& m) const = 0;
+        const yarn::model& m) const = 0;
 };
 
 } }

@@ -24,10 +24,10 @@ file(GLOB_RECURSE knit_files RELATIVE
 
 add_library(knit STATIC ${knit_files})
 target_link_libraries(knit
-    tack
+    yarn
     dia
-    tack_dia
-    tack_json
+    yarn_dia
+    yarn_json
     backend
     formatters
     cpp

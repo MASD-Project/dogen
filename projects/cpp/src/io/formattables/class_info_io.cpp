@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/tack/io/generation_types_io.hpp"
+#include "dogen/yarn/io/generation_types_io.hpp"
 #include "dogen/cpp/io/formattables/entity_io.hpp"
 #include "dogen/cpp/io/formattables/class_info_io.hpp"
 #include "dogen/cpp/io/formattables/parent_info_io.hpp"

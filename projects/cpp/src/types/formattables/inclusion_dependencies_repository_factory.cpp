@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/tack/types/all_model_items_traversal.hpp"
+#include "dogen/yarn/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_factory.hpp"
 #include "dogen/cpp/io/formattables/inclusion_dependencies_repository_io.hpp"
@@ -51,8 +51,8 @@ public:
     explicit generator(const inclusion_dependencies_factory& f) : factory_(f) {}
 
 public:
-    template<typename TackEntity>
-    void generate(const TackEntity& e, const tack::name& n) {
+    template<typename YarnEntity>
+    void generate(const YarnEntity& e, const yarn::name& n) {
         const auto id(factory_.make(e));
 
         // note: optional return may have be cleaner here, but however it
@@ -75,20 +75,20 @@ private:
      * @brief Generates all of the inclusion dependencies for the
      * formatters and qualified name.
      */
-    template<typename TackEntity>
-    void generate(const TackEntity& e) {
-        if (e.generation_type() == tack::generation_types::no_generation)
+    template<typename YarnEntity>
+    void generate(const YarnEntity& e) {
+        if (e.generation_type() == yarn::generation_types::no_generation)
             return;
 
         generate(e, e.name());
     }
 
 public:
-    void operator()(const dogen::tack::object& o) { generate(o); }
-    void operator()(const dogen::tack::enumeration& e) { generate(e); }
-    void operator()(const dogen::tack::primitive& p) { generate(p); }
-    void operator()(const dogen::tack::module& m) { generate(m); }
-    void operator()(const dogen::tack::concept& c) { generate(c); }
+    void operator()(const dogen::yarn::object& o) { generate(o); }
+    void operator()(const dogen::yarn::enumeration& e) { generate(e); }
+    void operator()(const dogen::yarn::primitive& p) { generate(p); }
+    void operator()(const dogen::yarn::module& m) { generate(m); }
+    void operator()(const dogen::yarn::concept& c) { generate(c); }
 
 public:
     const inclusion_dependencies_repository& result() const { return result_; }
@@ -102,15 +102,15 @@ private:
 
 inclusion_dependencies_repository inclusion_dependencies_repository_factory::
 make(const inclusion_dependencies_builder_factory& bf, const container& c,
-    const tack::model& m) const {
+    const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating inclusion dependencies.";
 
     const inclusion_dependencies_factory idf(bf, c);
     generator g(idf);
-    tack::all_model_items_traversal(m, g);
+    yarn::all_model_items_traversal(m, g);
 
-    tack::name n;
+    yarn::name n;
     n.simple(registrar_name);
     n.location().original_model_name(m.name().location().original_model_name());
     n.location().external_module_path(

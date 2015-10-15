@@ -26,7 +26,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/tack/serialization/registrar_ser.hpp"
+#include "dogen/yarn/serialization/registrar_ser.hpp"
 #include "dogen/dynamic/serialization/registrar_ser.hpp"
 #include "dogen/cpp/serialization/settings/odb_settings_ser.hpp"
 #include "dogen/cpp/serialization/formattables/enum_info_ser.hpp"
@@ -47,7 +47,7 @@ namespace cpp {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    dogen::tack::register_types(ar);
+    dogen::yarn::register_types(ar);
     dogen::dynamic::register_types(ar);
 
     ar.template register_type<dogen::cpp::formattables::class_info>();

@@ -31,7 +31,7 @@
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/config/types/cpp_options.hpp"
-#include "dogen/tack/types/model.hpp"
+#include "dogen/yarn/types/model.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
 #include "dogen/cpp/types/settings/bundle_repository.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
@@ -76,14 +76,14 @@ private:
         const dynamic::repository& srp,
         const formatters::container& fc,
         const path_derivatives_repository& pdrp,
-        const tack::model& m) const;
+        const yarn::model& m) const;
 
     /**
      * @brief Create the inclusion dependencies repository.
      */
     inclusion_dependencies_repository create_inclusion_dependencies_repository(
         const inclusion_dependencies_builder_factory& bf,
-        const container& pc, const tack::model& m) const;
+        const container& pc, const yarn::model& m) const;
 
     /**
      * @brief Creates the enablement repository.
@@ -91,7 +91,7 @@ private:
     enablement_repository
     create_enablement_repository(const dynamic::repository& srp,
         const dynamic::object& root_object,
-        const formatters::container& fc, const tack::model& m) const;
+        const formatters::container& fc, const yarn::model& m) const;
 
     /**
      * @brief Creates integrated facets repository
@@ -104,7 +104,7 @@ private:
     /**
      * @brief Merge all data structures.
      */
-    std::unordered_map<tack::name, merged_formatter_data>
+    std::unordered_map<yarn::name, merged_formatter_data>
     merge(const path_derivatives_repository& pdrp,
         const inclusion_dependencies_repository& idrp,
         const enablement_repository& erp) const;
@@ -114,7 +114,7 @@ private:
      */
     formatter_properties_repository
     create_formatter_properties(
-        const std::unordered_map<tack::name, merged_formatter_data>& mfd,
+        const std::unordered_map<yarn::name, merged_formatter_data>& mfd,
         const integrated_facets_repository& ifrp) const;
 
 public:
@@ -124,7 +124,7 @@ public:
         const settings::bundle_repository& brp,
         const path_derivatives_repository& pdrp,
         const formatters::container& fc,
-        const tack::model& m) const;
+        const yarn::model& m) const;
 };
 
 } } }
