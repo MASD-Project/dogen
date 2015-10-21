@@ -38,7 +38,7 @@ namespace cpp {
 namespace formattables {
 
 /**
- * @brief Provides all inclusion dependencies for a given Tack element.
+ * @brief Provides all inclusion dependencies for a given Yarn element.
  */
 template<typename Element>
 class inclusion_dependencies_provider_interface {

@@ -377,9 +377,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties class_id="33" tracking_level="0" version="0">
@@ -521,9 +521,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -665,9 +665,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -809,9 +809,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -953,9 +953,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>

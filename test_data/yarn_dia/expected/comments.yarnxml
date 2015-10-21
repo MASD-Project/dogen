@@ -657,9 +657,9 @@ third line with &quot;quote&quot;
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>int</unparsed_type>
 					</item>
 					<item>
 						<documentation>the brief comment
@@ -700,9 +700,9 @@ a second line
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>int</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -740,9 +740,9 @@ a second line
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>

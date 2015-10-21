@@ -20,32 +20,31 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/tack/types/expansion_error.hpp"
-#include "dogen/tack/types/modules_expander.hpp"
+#include "dogen/yarn/types/expansion_error.hpp"
+#include "dogen/yarn/types/modules_expander.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("tack.modules_expander"));
+auto lg(logger_factory("yarn.modules_expander"));
 
 const std::string missing_module("Could not find module: ");
 
 }
 
 namespace dogen {
-namespace tack {
+namespace yarn {
 
-boost::optional<tack::name>
-containing_module(tack::model& m, const tack::name& n) {
+boost::optional<name> containing_module(model& m, const name& n) {
     if (n.location().original_model_name().empty() ||
         n.simple() == m.name().location().original_model_name()) {
         BOOST_LOG_SEV(lg, debug) << "Type has no containing module: "
                                  << n.qualified();
-        return boost::optional<tack::name>();
+        return boost::optional<name>();
     }
 
     // FIXME: use builder.
-    tack::name module_n;
+    name module_n;
     const auto omn(n.location().original_model_name());
     module_n.location().original_model_name(n.location().original_model_name());
 
@@ -64,7 +63,7 @@ containing_module(tack::model& m, const tack::name& n) {
 
     BOOST_LOG_SEV(lg, debug) << "Could not find containing module: "
                              << module_n.qualified();
-    return boost::optional<tack::name>();;
+    return boost::optional<name>();;
 }
 
 template<typename AssociativeContainerOfContainable>

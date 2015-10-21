@@ -18,15 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-<<<<<<< 24090da86c0fe4a597dfa9c7b5e3ed377e4b57f4:projects/tack/src/types/expander.cpp
-#include "dogen/tack/types/modules_expander.hpp"
-#include "dogen/tack/types/properties_expander.hpp"
-#include "dogen/tack/types/references_expander.hpp"
-#include "dogen/tack/types/expander.hpp"
-=======
+#include "dogen/yarn/types/modules_expander.hpp"
 #include "dogen/yarn/types/properties_expander.hpp"
+#include "dogen/yarn/types/references_expander.hpp"
 #include "dogen/yarn/types/expander.hpp"
->>>>>>> rename tack to yarn:projects/yarn/src/types/expander.cpp
 
 namespace dogen {
 namespace yarn {

@@ -31,21 +31,17 @@ property::property(
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const std::string& name,
-<<<<<<< 24090da86c0fe4a597dfa9c7b5e3ed377e4b57f4:projects/tack/src/types/property.cpp
-    const dogen::tack::nested_name& type,
-    const std::string& unparsed_type,
-=======
     const dogen::yarn::nested_name& type,
->>>>>>> rename tack to yarn:projects/yarn/src/types/property.cpp
     const bool is_immutable,
-    const bool is_fluent)
+    const bool is_fluent,
+    const std::string& unparsed_type)
     : documentation_(documentation),
       extensions_(extensions),
       name_(name),
       type_(type),
-      unparsed_type_(unparsed_type),
       is_immutable_(is_immutable),
-      is_fluent_(is_fluent) { }
+      is_fluent_(is_fluent),
+      unparsed_type_(unparsed_type) { }
 
 void property::swap(property& other) noexcept {
     using std::swap;
@@ -53,9 +49,9 @@ void property::swap(property& other) noexcept {
     swap(extensions_, other.extensions_);
     swap(name_, other.name_);
     swap(type_, other.type_);
-    swap(unparsed_type_, other.unparsed_type_);
     swap(is_immutable_, other.is_immutable_);
     swap(is_fluent_, other.is_fluent_);
+    swap(unparsed_type_, other.unparsed_type_);
 }
 
 bool property::operator==(const property& rhs) const {
@@ -63,9 +59,9 @@ bool property::operator==(const property& rhs) const {
         extensions_ == rhs.extensions_ &&
         name_ == rhs.name_ &&
         type_ == rhs.type_ &&
-        unparsed_type_ == rhs.unparsed_type_ &&
         is_immutable_ == rhs.is_immutable_ &&
-        is_fluent_ == rhs.is_fluent_;
+        is_fluent_ == rhs.is_fluent_ &&
+        unparsed_type_ == rhs.unparsed_type_;
 }
 
 property& property::operator=(property other) {
@@ -138,22 +134,6 @@ void property::type(const dogen::yarn::nested_name&& v) {
     type_ = std::move(v);
 }
 
-const std::string& property::unparsed_type() const {
-    return unparsed_type_;
-}
-
-std::string& property::unparsed_type() {
-    return unparsed_type_;
-}
-
-void property::unparsed_type(const std::string& v) {
-    unparsed_type_ = v;
-}
-
-void property::unparsed_type(const std::string&& v) {
-    unparsed_type_ = std::move(v);
-}
-
 bool property::is_immutable() const {
     return is_immutable_;
 }
@@ -168,6 +148,22 @@ bool property::is_fluent() const {
 
 void property::is_fluent(const bool v) {
     is_fluent_ = v;
+}
+
+const std::string& property::unparsed_type() const {
+    return unparsed_type_;
+}
+
+std::string& property::unparsed_type() {
+    return unparsed_type_;
+}
+
+void property::unparsed_type(const std::string& v) {
+    unparsed_type_ = v;
+}
+
+void property::unparsed_type(const std::string&& v) {
+    unparsed_type_ = std::move(v);
 }
 
 } }

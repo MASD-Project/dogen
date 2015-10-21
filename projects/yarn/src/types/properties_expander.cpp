@@ -45,8 +45,14 @@ properties_expander::make_identifier_parser(const model& m) const {
 
 nested_name properties_expander::make_nested_name(const identifier_parser& ip,
     const std::string& s) const {
-    tack::nested_name r(ip.parse_name(s));
+    nested_name r(ip.parse_name(s));
     return r;
+}
+
+void properties_expander::
+expand_property(const identifier_parser& /*ip*/, property& /*p*/) const {
+    /*nested_name nn(ip.parse_name(p.unparsed_name()));
+      p.type(nn);*/
 }
 
 void properties_expander::expand(model& m) const {
@@ -55,6 +61,7 @@ void properties_expander::expand(model& m) const {
         auto& o(pair.second);
         for (auto& p : o.local_properties())
             p.type(make_nested_name(ip, p.unparsed_type()));
+        // expand_property(ip, p);
     }
 
     for (auto& pair : m.concepts()) {

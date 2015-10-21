@@ -18,14 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-<<<<<<< 24090da86c0fe4a597dfa9c7b5e3ed377e4b57f4:projects/tack/src/test_data/nested_name_td.cpp
-#include "dogen/tack/test_data/name_td.hpp"
-#include "dogen/tack/test_data/nested_name_td.hpp"
-=======
-#include <sstream>
 #include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/nested_name_td.hpp"
->>>>>>> rename tack to yarn:projects/yarn/src/test_data/nested_name_td.cpp
 
 namespace {
 

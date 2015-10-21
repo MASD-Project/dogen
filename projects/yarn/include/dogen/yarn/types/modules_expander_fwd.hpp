@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_MODULE_EXPANDER_FWD_HPP
-#define DOGEN_YARN_TYPES_MODULE_EXPANDER_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_MODULES_EXPANDER_FWD_HPP
+#define DOGEN_YARN_TYPES_MODULES_EXPANDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace yarn {
 
-class module_expander;
+class modules_expander;
 
 } }
 

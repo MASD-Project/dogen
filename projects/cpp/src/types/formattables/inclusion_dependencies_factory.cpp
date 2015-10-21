@@ -88,14 +88,14 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-template<typename TackEntity>
+template<typename YarnEntity>
 std::unordered_map<std::string, std::list<std::string> >
 generate(const inclusion_dependencies_builder_factory& f,
     std::forward_list<
         boost::shared_ptr<
-            inclusion_dependencies_provider_interface<TackEntity>
+            inclusion_dependencies_provider_interface<YarnEntity>
             >
-        > providers, const TackEntity& e) {
+        > providers, const YarnEntity& e) {
 
     const auto qn(e.name().qualified());
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies for: " << qn;

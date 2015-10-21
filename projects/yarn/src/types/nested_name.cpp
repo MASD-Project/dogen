@@ -27,16 +27,9 @@ nested_name::nested_name()
     : is_pointer_(static_cast<bool>(0)) { }
 
 nested_name::nested_name(
-<<<<<<< 24090da86c0fe4a597dfa9c7b5e3ed377e4b57f4:projects/tack/src/types/nested_name.cpp
-    const dogen::tack::name& type,
-    const std::list<dogen::tack::nested_name>& children,
-    const bool is_pointer)
-=======
     const dogen::yarn::name& type,
     const std::list<dogen::yarn::nested_name>& children,
-    const bool is_pointer,
-    const std::string& unparsed_name)
->>>>>>> rename tack to yarn:projects/yarn/src/types/nested_name.cpp
+    const bool is_pointer)
     : type_(type),
       children_(children),
       is_pointer_(is_pointer) { }

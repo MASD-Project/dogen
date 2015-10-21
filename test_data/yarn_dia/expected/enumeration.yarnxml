@@ -841,9 +841,9 @@ this is a long comment
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>colour_types</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>colour_types</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -881,9 +881,9 @@ this is a long comment
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>book_types</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>book_types</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -922,9 +922,9 @@ this is a long comment
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>pkg1::shape_types</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>pkg1::shape_types</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties class_id="36" tracking_level="0" version="0">

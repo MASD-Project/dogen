@@ -25,15 +25,10 @@
 #pragma once
 #endif
 
-<<<<<<< 24090da86c0fe4a597dfa9c7b5e3ed377e4b57f4:projects/tack/include/dogen/tack/types/properties_expander.hpp
 #include <string>
-#include "dogen/tack/types/identifier_parser.hpp"
-#include "dogen/tack/types/nested_name.hpp"
-#include "dogen/tack/types/model.hpp"
-=======
 #include "dogen/yarn/types/identifier_parser.hpp"
+#include "dogen/yarn/types/nested_name.hpp"
 #include "dogen/yarn/types/model.hpp"
->>>>>>> rename tack to yarn:projects/yarn/include/dogen/yarn/types/properties_expander.hpp
 
 namespace dogen {
 namespace yarn {
@@ -44,6 +39,8 @@ private:
     obtain_top_level_module_names(const model& m) const;
 
     identifier_parser make_identifier_parser(const model& m) const;
+
+    void expand_property(const identifier_parser& ip, property& p) const;
 
     nested_name make_nested_name(const identifier_parser& ip,
         const std::string& s) const;

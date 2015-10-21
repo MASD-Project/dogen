@@ -51,14 +51,10 @@ public:
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
         const std::string& name,
-<<<<<<< 24090da86c0fe4a597dfa9c7b5e3ed377e4b57f4:projects/tack/include/dogen/tack/types/property.hpp
-        const dogen::tack::nested_name& type,
-        const std::string& unparsed_type,
-=======
         const dogen::yarn::nested_name& type,
->>>>>>> rename tack to yarn:projects/yarn/include/dogen/yarn/types/property.hpp
         const bool is_immutable,
-        const bool is_fluent);
+        const bool is_fluent,
+        const std::string& unparsed_type);
 
 private:
     template<typename Archive>
@@ -115,18 +111,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Original type as it appeared in the source, without any parsing.
-     *
-     * Type must be in one of the supported notations.
-     */
-    /**@{*/
-    const std::string& unparsed_type() const;
-    std::string& unparsed_type();
-    void unparsed_type(const std::string& v);
-    void unparsed_type(const std::string&& v);
-    /**@}*/
-
-    /**
      * @brief If true, the property can only be read but not set.
      */
     /**@{*/
@@ -140,6 +124,18 @@ public:
     /**@{*/
     bool is_fluent() const;
     void is_fluent(const bool v);
+    /**@}*/
+
+    /**
+     * @brief Original type name as it appeared in the source, without any parsing.
+     *
+     * Name must be in one of the supported notations.
+     */
+    /**@{*/
+    const std::string& unparsed_type() const;
+    std::string& unparsed_type();
+    void unparsed_type(const std::string& v);
+    void unparsed_type(const std::string&& v);
     /**@}*/
 
 public:
@@ -156,14 +152,10 @@ private:
     std::string documentation_;
     dogen::dynamic::object extensions_;
     std::string name_;
-<<<<<<< 24090da86c0fe4a597dfa9c7b5e3ed377e4b57f4:projects/tack/include/dogen/tack/types/property.hpp
-    dogen::tack::nested_name type_;
-    std::string unparsed_type_;
-=======
     dogen::yarn::nested_name type_;
->>>>>>> rename tack to yarn:projects/yarn/include/dogen/yarn/types/property.hpp
     bool is_immutable_;
     bool is_fluent_;
+    std::string unparsed_type_;
 };
 
 } }

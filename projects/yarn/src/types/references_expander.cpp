@@ -19,28 +19,28 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/tack/types/references_expander.hpp"
+#include "dogen/yarn/types/references_expander.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("tack.references_expander"));
+auto lg(logger_factory("yarn.references_expander"));
 
 }
 
 namespace dogen {
-namespace tack {
+namespace yarn {
 
 void references_expander::
-expand_model_references(const tack::nested_name& nn, model& m) const {
+expand_model_references(const nested_name& nn, model& m) const {
     const auto nn_omn(nn.type().location().original_model_name());
     const auto m_omn(m.name().location().original_model_name());
     const bool is_current_model(nn_omn == m_omn);
 
   if (!nn_omn.empty() && !is_current_model) {
-      tack::name n;
+      name n;
       n.location().original_model_name(nn_omn);
-      const auto p(std::make_pair(n, tack::origin_types::unknown));
+      const auto p(std::make_pair(n, origin_types::unknown));
       m.references().insert(p);
 
       BOOST_LOG_SEV(lg, debug) << "Adding model dependency: "

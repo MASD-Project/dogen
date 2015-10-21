@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
-<boost_serialization signature="serialization::archive" version="10">
+<boost_serialization signature="serialization::archive" version="13">
 <entity class_id="6" tracking_level="0" version="0">
 	<documentation></documentation>
 	<extensions class_id="7" tracking_level="0" version="0">
 		<fields class_id="8" tracking_level="0" version="0">
 			<count>0</count>
-			<bucket_count>11</bucket_count>
+			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>
 		</fields>
 	</extensions>
@@ -37,7 +37,7 @@
 	</containing_module>
 	<references class_id="13" tracking_level="0" version="0">
 		<count>2</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="14" tracking_level="0" version="0">
 			<first>
@@ -86,12 +86,12 @@
 	</references>
 	<leaves class_id="15" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
 	<modules class_id="16" tracking_level="0" version="0">
 		<count>2</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="17" tracking_level="0" version="0">
 			<first>
@@ -118,7 +118,7 @@
 				<extensions>
 					<fields>
 						<count>0</count>
-						<bucket_count>11</bucket_count>
+						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
 					</fields>
 				</extensions>
@@ -219,7 +219,7 @@
 				<extensions>
 					<fields>
 						<count>3</count>
-						<bucket_count>11</bucket_count>
+						<bucket_count>5</bucket_count>
 						<item_version>0</item_version>
 						<item class_id="20" tracking_level="0" version="0">
 							<first>dia.comment</first>
@@ -499,17 +499,17 @@
 	</modules>
 	<concepts class_id="24" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
 	<primitives class_id="25" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<enumerations class_id="26" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
 	<objects class_id="27" tracking_level="0" version="0">
@@ -518,7 +518,7 @@
 		<item_version>0</item_version>
 		<item class_id="28" tracking_level="0" version="0">
 			<first>
-				<simple>class_a</simple>
+				<simple>class_base</simple>
 				<qualified></qualified>
 				<location>
 					<original_model_name>boost_model</original_model_name>
@@ -542,12 +542,12 @@
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
 					<name>
-						<simple>class_a</simple>
+						<simple>class_base</simple>
 						<qualified></qualified>
 						<location>
 							<original_model_name>boost_model</original_model_name>
@@ -604,14 +604,14 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
 						<name>prop_0</name>
 						<type class_id="32" tracking_level="0" version="0">
 							<type>
-								<simple>unsigned int</simple>
+								<simple>int</simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -635,17 +635,17 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>unsigned int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties class_id="34" tracking_level="0" version="0">
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<is_parent>0</is_parent>
+				<is_parent>1</is_parent>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
@@ -653,16 +653,16 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships class_id="35" tracking_level="0" version="0">
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
-				<is_final>1</is_final>
+				<is_final>0</is_final>
 			</second>
 		</item>
 		<item>
 			<first>
-				<simple>class_base</simple>
+				<simple>class_a</simple>
 				<qualified></qualified>
 				<location>
 					<original_model_name>boost_model</original_model_name>
@@ -686,12 +686,12 @@
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
 					<name>
-						<simple>class_base</simple>
+						<simple>class_a</simple>
 						<qualified></qualified>
 						<location>
 							<original_model_name>boost_model</original_model_name>
@@ -748,7 +748,152 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_0</name>
+						<type>
+							<type>
+								<simple>unsigned int</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name></original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>unsigned int</unparsed_type>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>class_c</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>boost_model</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>pkg1</item>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_5">
+				<type>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>class_c</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>pkg1</item>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<simple>pkg1</simple>
+							<qualified></qualified>
+							<location>
+								<original_model_name>boost_model</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
+						</value>
+					</containing_module>
+				</type>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>2</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -779,17 +924,83 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>int</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_1</name>
+						<type>
+							<type>
+								<simple>vector</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>std</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<simple>class_a</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name></original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<is_parent>1</is_parent>
+				<is_parent>0</is_parent>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
@@ -797,16 +1008,16 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
-				<is_final>0</is_final>
+				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
 			<first>
-				<simple>class_b</simple>
+				<simple>class_h</simple>
 				<qualified></qualified>
 				<location>
 					<original_model_name>boost_model</original_model_name>
@@ -824,18 +1035,18 @@
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_5">
+			<second object_id="_6">
 				<type>
 					<documentation></documentation>
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
 					<name>
-						<simple>class_b</simple>
+						<simple>class_h</simple>
 						<qualified></qualified>
 						<location>
 							<original_model_name>boost_model</original_model_name>
@@ -885,21 +1096,232 @@
 					<item_version>0</item_version>
 				</all_properties>
 				<local_properties>
-					<count>7</count>
+					<count>1</count>
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
 						<name>prop_0</name>
 						<type>
 							<type>
-								<simple>shared_ptr</simple>
+								<simple>ptree</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>property_tree</item>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::property_tree::ptree</unparsed_type>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>class_d</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>boost_model</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_7">
+				<type>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>class_d</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>boost_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<simple>boost_model</simple>
+							<qualified>&lt;boost_model&gt;</qualified>
+							<location>
+								<original_model_name>boost_model</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
+						</value>
+					</containing_module>
+				</type>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>4</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_0</name>
+						<type>
+							<type>
+								<simple>optional</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<simple>int</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name></original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::optional&lt;int&gt;</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_1</name>
+						<type>
+							<type>
+								<simple>optional</simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name>boost</original_model_name>
@@ -949,233 +1371,23 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>boost::shared_ptr&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::optional&lt;class_a&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_1</name>
-						<type>
-							<type>
-								<simple>vector</simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name>std</original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<simple>shared_ptr</simple>
-										<qualified></qualified>
-										<location>
-											<original_model_name>boost</original_model_name>
-											<external_module_path>
-												<count>0</count>
-												<item_version>0</item_version>
-											</external_module_path>
-											<model_module_path>
-												<count>0</count>
-												<item_version>0</item_version>
-											</model_module_path>
-											<internal_module_path>
-												<count>0</count>
-												<item_version>0</item_version>
-											</internal_module_path>
-										</location>
-									</type>
-									<children>
-										<count>1</count>
-										<item_version>0</item_version>
-										<item>
-											<type>
-												<simple>class_a</simple>
-												<qualified></qualified>
-												<location>
-													<original_model_name></original_model_name>
-													<external_module_path>
-														<count>0</count>
-														<item_version>0</item_version>
-													</external_module_path>
-													<model_module_path>
-														<count>0</count>
-														<item_version>0</item_version>
-													</model_module_path>
-													<internal_module_path>
-														<count>0</count>
-														<item_version>0</item_version>
-													</internal_module_path>
-												</location>
-											</type>
-											<children>
-												<count>0</count>
-												<item_version>0</item_version>
-											</children>
-											<is_pointer>0</is_pointer>
-										</item>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<unparsed_type>std::vector&lt;boost::shared_ptr&lt;class_a&gt;&gt;</unparsed_type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
 						<name>prop_2</name>
 						<type>
 							<type>
-								<simple>unordered_map</simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name>std</original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>2</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<simple>int</simple>
-										<qualified></qualified>
-										<location>
-											<original_model_name></original_model_name>
-											<external_module_path>
-												<count>0</count>
-												<item_version>0</item_version>
-											</external_module_path>
-											<model_module_path>
-												<count>0</count>
-												<item_version>0</item_version>
-											</model_module_path>
-											<internal_module_path>
-												<count>0</count>
-												<item_version>0</item_version>
-											</internal_module_path>
-										</location>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-								<item>
-									<type>
-										<simple>shared_ptr</simple>
-										<qualified></qualified>
-										<location>
-											<original_model_name>boost</original_model_name>
-											<external_module_path>
-												<count>0</count>
-												<item_version>0</item_version>
-											</external_module_path>
-											<model_module_path>
-												<count>0</count>
-												<item_version>0</item_version>
-											</model_module_path>
-											<internal_module_path>
-												<count>0</count>
-												<item_version>0</item_version>
-											</internal_module_path>
-										</location>
-									</type>
-									<children>
-										<count>1</count>
-										<item_version>0</item_version>
-										<item>
-											<type>
-												<simple>class_a</simple>
-												<qualified></qualified>
-												<location>
-													<original_model_name></original_model_name>
-													<external_module_path>
-														<count>0</count>
-														<item_version>0</item_version>
-													</external_module_path>
-													<model_module_path>
-														<count>0</count>
-														<item_version>0</item_version>
-													</model_module_path>
-													<internal_module_path>
-														<count>0</count>
-														<item_version>0</item_version>
-													</internal_module_path>
-												</location>
-											</type>
-											<children>
-												<count>0</count>
-												<item_version>0</item_version>
-											</children>
-											<is_pointer>0</is_pointer>
-										</item>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<unparsed_type>std::unordered_map&lt;int,boost::shared_ptr&lt;class_a&gt;&gt;</unparsed_type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_3</name>
-						<type>
-							<type>
-								<simple>shared_ptr</simple>
+								<simple>optional</simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name>boost</original_model_name>
@@ -1226,23 +1438,23 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>boost::shared_ptr&lt;pkg1::class_c&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::optional&lt;pkg1::class_c&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_4</name>
+						<name>prop_3</name>
 						<type>
 							<type>
-								<simple>shared_ptr</simple>
+								<simple>optional</simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name>boost</original_model_name>
@@ -1265,76 +1477,10 @@
 								<item_version>0</item_version>
 								<item>
 									<type>
-										<simple>class_base</simple>
+										<simple>vector</simple>
 										<qualified></qualified>
 										<location>
-											<original_model_name></original_model_name>
-											<external_module_path>
-												<count>0</count>
-												<item_version>0</item_version>
-											</external_module_path>
-											<model_module_path>
-												<count>0</count>
-												<item_version>0</item_version>
-											</model_module_path>
-											<internal_module_path>
-												<count>0</count>
-												<item_version>0</item_version>
-											</internal_module_path>
-										</location>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<unparsed_type>boost::shared_ptr&lt;class_base&gt;</unparsed_type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_5</name>
-						<type>
-							<type>
-								<simple>vector</simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name>std</original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<simple>shared_ptr</simple>
-										<qualified></qualified>
-										<location>
-											<original_model_name>boost</original_model_name>
+											<original_model_name>std</original_model_name>
 											<external_module_path>
 												<count>0</count>
 												<item_version>0</item_version>
@@ -1354,7 +1500,7 @@
 										<item_version>0</item_version>
 										<item>
 											<type>
-												<simple>class_base</simple>
+												<simple>class_a</simple>
 												<qualified></qualified>
 												<location>
 													<original_model_name></original_model_name>
@@ -1384,55 +1530,14 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::vector&lt;boost::shared_ptr&lt;class_base&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_6</name>
-						<type>
-							<type>
-								<simple>class_c</simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name>boost_model</original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>1</count>
-										<item_version>0</item_version>
-										<item>pkg1</item>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<unparsed_type>pkg1::class_c</unparsed_type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::optional&lt;std::vector&lt;class_a&gt;&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -1443,7 +1548,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
@@ -1470,13 +1575,13 @@
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_6">
+			<second object_id="_8">
 				<type>
 					<documentation></documentation>
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -1538,7 +1643,7 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -1621,16 +1726,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>boost::variant&lt;int,double&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::variant&lt;int,double&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -1739,16 +1844,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>boost::variant&lt;int,class_derived,double&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::variant&lt;int,class_derived,double&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -1883,16 +1988,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::vector&lt;boost::variant&lt;int,class_derived,double&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::vector&lt;boost::variant&lt;int,class_derived,double&gt;&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -2001,14 +2106,14 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>boost::variant&lt;int,std::string,char&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::variant&lt;int,std::string,char&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -2019,7 +2124,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
@@ -2028,7 +2133,7 @@
 		</item>
 		<item>
 			<first>
-				<simple>class_c</simple>
+				<simple>class_b</simple>
 				<qualified></qualified>
 				<location>
 					<original_model_name>boost_model</original_model_name>
@@ -2041,24 +2146,23 @@
 						<item_version>0</item_version>
 					</model_module_path>
 					<internal_module_path>
-						<count>1</count>
+						<count>0</count>
 						<item_version>0</item_version>
-						<item>pkg1</item>
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_7">
+			<second object_id="_9">
 				<type>
 					<documentation></documentation>
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
 					<name>
-						<simple>class_c</simple>
+						<simple>class_b</simple>
 						<qualified></qualified>
 						<location>
 							<original_model_name>boost_model</original_model_name>
@@ -2071,9 +2175,8 @@
 								<item_version>0</item_version>
 							</model_module_path>
 							<internal_module_path>
-								<count>1</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>pkg1</item>
 							</internal_module_path>
 						</location>
 					</name>
@@ -2083,8 +2186,8 @@
 						<initialized>1</initialized>
 						<item_version>0</item_version>
 						<value>
-							<simple>pkg1</simple>
-							<qualified></qualified>
+							<simple>boost_model</simple>
+							<qualified>&lt;boost_model&gt;</qualified>
 							<location>
 								<original_model_name>boost_model</original_model_name>
 								<external_module_path>
@@ -2092,8 +2195,9 @@
 									<item_version>0</item_version>
 								</external_module_path>
 								<model_module_path>
-									<count>0</count>
+									<count>1</count>
 									<item_version>0</item_version>
+									<item>boost_model</item>
 								</model_module_path>
 								<internal_module_path>
 									<count>0</count>
@@ -2108,24 +2212,24 @@
 					<item_version>0</item_version>
 				</all_properties>
 				<local_properties>
-					<count>2</count>
+					<count>7</count>
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
 						<name>prop_0</name>
 						<type>
 							<type>
-								<simple>int</simple>
+								<simple>shared_ptr</simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
+									<original_model_name>boost</original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -2141,21 +2245,47 @@
 								</location>
 							</type>
 							<children>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>
+									<type>
+										<simple>class_a</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name></original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::shared_ptr&lt;class_a&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -2185,10 +2315,10 @@
 								<item_version>0</item_version>
 								<item>
 									<type>
-										<simple>class_a</simple>
+										<simple>shared_ptr</simple>
 										<qualified></qualified>
 										<location>
-											<original_model_name></original_model_name>
+											<original_model_name>boost</original_model_name>
 											<external_module_path>
 												<count>0</count>
 												<item_version>0</item_version>
@@ -2204,283 +2334,60 @@
 										</location>
 									</type>
 									<children>
-										<count>0</count>
+										<count>1</count>
 										<item_version>0</item_version>
+										<item>
+											<type>
+												<simple>class_a</simple>
+												<qualified></qualified>
+												<location>
+													<original_model_name></original_model_name>
+													<external_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</external_module_path>
+													<model_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</model_module_path>
+													<internal_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</internal_module_path>
+												</location>
+											</type>
+											<children>
+												<count>0</count>
+												<item_version>0</item_version>
+											</children>
+											<is_pointer>0</is_pointer>
+										</item>
 									</children>
 									<is_pointer>0</is_pointer>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::vector&lt;boost::shared_ptr&lt;class_a&gt;&gt;</unparsed_type>
 					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>11</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>11</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>class_h</simple>
-				<qualified></qualified>
-				<location>
-					<original_model_name>boost_model</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_8">
-				<type>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>11</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>class_h</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>boost_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>boost_model</simple>
-							<qualified>&lt;boost_model&gt;</qualified>
-							<location>
-								<original_model_name>boost_model</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>boost_model</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
-					</containing_module>
-				</type>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>1</count>
-					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>prop_2</name>
 						<type>
 							<type>
-								<simple>ptree</simple>
+								<simple>unordered_map</simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name>boost</original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>1</count>
-										<item_version>0</item_version>
-										<item>property_tree</item>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<unparsed_type>boost::property_tree::ptree</unparsed_type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>11</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>11</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>class_d</simple>
-				<qualified></qualified>
-				<location>
-					<original_model_name>boost_model</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_9">
-				<type>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>11</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>class_d</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>boost_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>boost_model</simple>
-							<qualified>&lt;boost_model&gt;</qualified>
-							<location>
-								<original_model_name>boost_model</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>boost_model</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
-					</containing_module>
-				</type>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>4</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_0</name>
-						<type>
-							<type>
-								<simple>optional</simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name>boost</original_model_name>
+									<original_model_name>std</original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -2496,7 +2403,7 @@
 								</location>
 							</type>
 							<children>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<type>
@@ -2524,52 +2431,12 @@
 									</children>
 									<is_pointer>0</is_pointer>
 								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<unparsed_type>boost::optional&lt;int&gt;</unparsed_type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_1</name>
-						<type>
-							<type>
-								<simple>optional</simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name>boost</original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
 								<item>
 									<type>
-										<simple>class_a</simple>
+										<simple>shared_ptr</simple>
 										<qualified></qualified>
 										<location>
-											<original_model_name></original_model_name>
+											<original_model_name>boost</original_model_name>
 											<external_module_path>
 												<count>0</count>
 												<item_version>0</item_version>
@@ -2585,31 +2452,57 @@
 										</location>
 									</type>
 									<children>
-										<count>0</count>
+										<count>1</count>
 										<item_version>0</item_version>
+										<item>
+											<type>
+												<simple>class_a</simple>
+												<qualified></qualified>
+												<location>
+													<original_model_name></original_model_name>
+													<external_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</external_module_path>
+													<model_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</model_module_path>
+													<internal_module_path>
+														<count>0</count>
+														<item_version>0</item_version>
+													</internal_module_path>
+												</location>
+											</type>
+											<children>
+												<count>0</count>
+												<item_version>0</item_version>
+											</children>
+											<is_pointer>0</is_pointer>
+										</item>
 									</children>
 									<is_pointer>0</is_pointer>
 								</item>
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>boost::optional&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unordered_map&lt;int,boost::shared_ptr&lt;class_a&gt;&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_2</name>
+						<name>prop_3</name>
 						<type>
 							<type>
-								<simple>optional</simple>
+								<simple>shared_ptr</simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name>boost</original_model_name>
@@ -2660,23 +2553,23 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>boost::optional&lt;pkg1::class_c&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::shared_ptr&lt;pkg1::class_c&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_3</name>
+						<name>prop_4</name>
 						<type>
 							<type>
-								<simple>optional</simple>
+								<simple>shared_ptr</simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name>boost</original_model_name>
@@ -2699,10 +2592,76 @@
 								<item_version>0</item_version>
 								<item>
 									<type>
-										<simple>vector</simple>
+										<simple>class_base</simple>
 										<qualified></qualified>
 										<location>
-											<original_model_name>std</original_model_name>
+											<original_model_name></original_model_name>
+											<external_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</external_module_path>
+											<model_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</model_module_path>
+											<internal_module_path>
+												<count>0</count>
+												<item_version>0</item_version>
+											</internal_module_path>
+										</location>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::shared_ptr&lt;class_base&gt;</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_5</name>
+						<type>
+							<type>
+								<simple>vector</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>std</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<simple>shared_ptr</simple>
+										<qualified></qualified>
+										<location>
+											<original_model_name>boost</original_model_name>
 											<external_module_path>
 												<count>0</count>
 												<item_version>0</item_version>
@@ -2722,7 +2681,7 @@
 										<item_version>0</item_version>
 										<item>
 											<type>
-												<simple>class_a</simple>
+												<simple>class_base</simple>
 												<qualified></qualified>
 												<location>
 													<original_model_name></original_model_name>
@@ -2752,14 +2711,55 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>boost::optional&lt;std::vector&lt;class_a&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::vector&lt;boost::shared_ptr&lt;class_base&gt;&gt;</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_6</name>
+						<type>
+							<type>
+								<simple>class_c</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>boost_model</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>pkg1</item>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>pkg1::class_c</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -2770,7 +2770,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
@@ -2803,7 +2803,7 @@
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -2865,7 +2865,7 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -2896,14 +2896,14 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -2914,7 +2914,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>1</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>2</bucket_count>
 					<item_version>0</item_version>
 					<item class_id="36" tracking_level="0" version="0">
 						<first>2</first>
@@ -2973,7 +2973,7 @@
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -3035,7 +3035,7 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3067,16 +3067,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>boost::asio::io_service</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::asio::io_service</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3110,16 +3110,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>boost::asio::ip::tcp::socket</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::asio::ip::tcp::socket</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3153,14 +3153,14 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>boost::asio::ip::tcp::acceptor</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::asio::ip::tcp::acceptor</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -3171,7 +3171,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>1</object_type>
@@ -3204,7 +3204,7 @@
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -3266,7 +3266,7 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3298,16 +3298,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>boost::gregorian::date</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::gregorian::date</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3339,16 +3339,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>boost::posix_time::ptime</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::posix_time::ptime</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3380,16 +3380,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>boost::posix_time::time_duration</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::posix_time::time_duration</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3447,16 +3447,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::list&lt;boost::gregorian::date&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::list&lt;boost::gregorian::date&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3514,16 +3514,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::list&lt;boost::posix_time::ptime&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::list&lt;boost::posix_time::ptime&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3581,14 +3581,14 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::list&lt;boost::posix_time::time_duration&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::list&lt;boost::posix_time::time_duration&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -3599,7 +3599,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
@@ -3632,7 +3632,7 @@
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -3694,7 +3694,7 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3726,16 +3726,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>boost::filesystem::path</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::filesystem::path</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3793,14 +3793,14 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::list&lt;boost::filesystem::path&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::list&lt;boost::filesystem::path&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -3811,7 +3811,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>

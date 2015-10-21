@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
-<boost_serialization signature="serialization::archive" version="10">
+<boost_serialization signature="serialization::archive" version="13">
 <entity class_id="6" tracking_level="0" version="0">
 	<documentation></documentation>
 	<extensions class_id="7" tracking_level="0" version="0">
 		<fields class_id="8" tracking_level="0" version="0">
 			<count>0</count>
-			<bucket_count>11</bucket_count>
+			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>
 		</fields>
 	</extensions>
@@ -37,7 +37,7 @@
 	</containing_module>
 	<references class_id="13" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>2</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="14" tracking_level="0" version="0">
 			<first>
@@ -64,12 +64,12 @@
 	</references>
 	<leaves class_id="15" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
 	<modules class_id="16" tracking_level="0" version="0">
 		<count>2</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="17" tracking_level="0" version="0">
 			<first>
@@ -96,7 +96,7 @@
 				<extensions>
 					<fields>
 						<count>0</count>
-						<bucket_count>11</bucket_count>
+						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
 					</fields>
 				</extensions>
@@ -197,7 +197,7 @@
 				<extensions>
 					<fields>
 						<count>3</count>
-						<bucket_count>11</bucket_count>
+						<bucket_count>5</bucket_count>
 						<item_version>0</item_version>
 						<item class_id="20" tracking_level="0" version="0">
 							<first>dia.comment</first>
@@ -515,17 +515,17 @@
 	</modules>
 	<concepts class_id="24" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
 	<primitives class_id="25" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
 	<enumerations class_id="26" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>11</bucket_count>
+		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
 	<objects class_id="27" tracking_level="0" version="0">
@@ -558,7 +558,7 @@
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -620,7 +620,7 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -703,16 +703,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::pair&lt;int,int&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::pair&lt;int,int&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -795,16 +795,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::pair&lt;std::string,std::string&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::pair&lt;std::string,std::string&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -913,14 +913,14 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::vector&lt;std::pair&lt;std::string,int&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::vector&lt;std::pair&lt;std::string,int&gt;&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties class_id="34" tracking_level="0" version="0">
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -931,7 +931,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships class_id="35" tracking_level="0" version="0">
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
@@ -964,7 +964,7 @@
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -1026,7 +1026,7 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -1083,16 +1083,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::shared_ptr&lt;base&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::shared_ptr&lt;base&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -1149,16 +1149,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::weak_ptr&lt;base&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::weak_ptr&lt;base&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -1215,16 +1215,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::unique_ptr&lt;base&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unique_ptr&lt;base&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -1255,14 +1255,14 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::function</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::function</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -1273,7 +1273,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>1</object_type>
@@ -1306,7 +1306,7 @@
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -1368,7 +1368,7 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -1399,16 +1399,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::int8_t</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::int8_t</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -1439,16 +1439,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::int16_t</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::int16_t</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -1479,16 +1479,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::int32_t</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::int32_t</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -1519,16 +1519,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::int64_t</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::int64_t</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -1559,16 +1559,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::uint8_t</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::uint8_t</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -1599,16 +1599,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::uint16_t</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::uint16_t</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -1639,16 +1639,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::uint32_t</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::uint32_t</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -1679,14 +1679,14 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 						<unparsed_type>std::uint64_t</unparsed_type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -1697,203 +1697,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>class_a</simple>
-				<qualified></qualified>
-				<location>
-					<original_model_name>std_model</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_6">
-				<type>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>11</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>class_a</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>std_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>std_model</simple>
-							<qualified>&lt;std_model&gt;</qualified>
-							<location>
-								<original_model_name>std_model</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>std_model</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
-					</containing_module>
-				</type>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>2</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>1</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-								<item>
-									<first>dia.identity_attribute</first>
-									<second>
-										<value>
-											<px class_id_reference="1" object_id="_7">
-												<value></value>
-												<content>true</content>
-											</px>
-										</value>
-									</second>
-								</item>
-							</fields>
-						</extensions>
-						<name>prop0</name>
-						<type>
-							<type>
-								<simple>string</simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name>std</original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<unparsed_type>std::string</unparsed_type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation>test inclusion duplicates
-</documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop1</name>
-						<type>
-							<type>
-								<simple>string</simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name>std</original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<unparsed_type>std::string</unparsed_type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>11</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
@@ -1920,13 +1724,13 @@
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_8">
+			<second object_id="_6">
 				<type>
 					<documentation></documentation>
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -1988,7 +1792,7 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -2045,16 +1849,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -2111,16 +1915,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -2178,16 +1982,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::vector&lt;pkg1::class_c&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::vector&lt;pkg1::class_c&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -2244,16 +2048,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::vector&lt;unsigned int&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::vector&lt;unsigned int&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -2310,16 +2114,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -2402,14 +2206,14 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::vector&lt;std::vector&lt;unsigned int&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::vector&lt;std::vector&lt;unsigned int&gt;&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -2420,7 +2224,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
@@ -2447,13 +2251,13 @@
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_9">
+			<second object_id="_7">
 				<type>
 					<documentation></documentation>
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -2515,7 +2319,7 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -2572,16 +2376,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::list&lt;std::string&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::list&lt;std::string&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -2638,16 +2442,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::list&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::list&lt;class_a&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -2705,16 +2509,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::list&lt;pkg1::class_c&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::list&lt;pkg1::class_c&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -2771,16 +2575,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::list&lt;unsigned int&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::list&lt;unsigned int&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -2837,16 +2641,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::list&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::list&lt;class_a&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -2929,14 +2733,14 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::list&lt;std::list&lt;unsigned int&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::list&lt;std::list&lt;unsigned int&gt;&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -2947,7 +2751,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
@@ -2974,13 +2778,13 @@
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_10">
+			<second object_id="_8">
 				<type>
 					<documentation></documentation>
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -3042,7 +2846,7 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3099,16 +2903,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::deque&lt;std::string&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::deque&lt;std::string&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3165,16 +2969,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3232,16 +3036,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::deque&lt;pkg1::class_c&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::deque&lt;pkg1::class_c&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3298,16 +3102,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::deque&lt;unsigned int&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::deque&lt;unsigned int&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3364,16 +3168,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3456,14 +3260,14 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::deque&lt;std::deque&lt;unsigned int&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::deque&lt;std::deque&lt;unsigned int&gt;&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -3474,7 +3278,203 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>class_a</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>std_model</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_9">
+				<type>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>class_a</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>std_model</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<simple>std_model</simple>
+							<qualified>&lt;std_model&gt;</qualified>
+							<location>
+								<original_model_name>std_model</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
+						</value>
+					</containing_module>
+				</type>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>2</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>1</count>
+								<bucket_count>2</bucket_count>
+								<item_version>0</item_version>
+								<item>
+									<first>dia.identity_attribute</first>
+									<second>
+										<value>
+											<px class_id_reference="1" object_id="_10">
+												<value></value>
+												<content>true</content>
+											</px>
+										</value>
+									</second>
+								</item>
+							</fields>
+						</extensions>
+						<name>prop0</name>
+						<type>
+							<type>
+								<simple>string</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>std</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::string</unparsed_type>
+					</item>
+					<item>
+						<documentation>test inclusion duplicates
+</documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop1</name>
+						<type>
+							<type>
+								<simple>string</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>std</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::string</unparsed_type>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
@@ -3507,7 +3507,7 @@
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -3569,7 +3569,7 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3652,16 +3652,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::unordered_map&lt;std::string,std::string&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unordered_map&lt;std::string,std::string&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3744,16 +3744,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::unordered_map&lt;std::string,class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unordered_map&lt;std::string,class_a&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3837,14 +3837,14 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::unordered_map&lt;class_a,pkg1::class_c&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unordered_map&lt;class_a,pkg1::class_c&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -3855,7 +3855,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
@@ -3889,7 +3889,7 @@
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -3951,7 +3951,7 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -3982,16 +3982,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>int</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -4048,14 +4048,14 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -4066,7 +4066,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
@@ -4099,7 +4099,7 @@
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -4161,7 +4161,7 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -4271,16 +4271,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::unordered_map&lt;class_a,std::vector&lt;pkg1::class_c&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unordered_map&lt;class_a,std::vector&lt;pkg1::class_c&gt;&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -4390,16 +4390,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::unordered_map&lt;pkg1::class_c,std::list&lt;class_a&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unordered_map&lt;pkg1::class_c,std::list&lt;class_a&gt;&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -4482,14 +4482,14 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::unordered_map&lt;std::string, class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unordered_map&lt;std::string, class_a&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -4500,7 +4500,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
@@ -4533,7 +4533,7 @@
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -4595,7 +4595,7 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -4652,14 +4652,14 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>1</is_parent>
@@ -4670,7 +4670,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
@@ -4703,7 +4703,7 @@
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -4765,7 +4765,7 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -4823,14 +4823,14 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::list&lt;pkg1::class_c&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::list&lt;pkg1::class_c&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -4841,7 +4841,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>1</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>2</bucket_count>
 					<item_version>0</item_version>
 					<item class_id="36" tracking_level="0" version="0">
 						<first>2</first>
@@ -4900,7 +4900,7 @@
 					<extensions>
 						<fields>
 							<count>0</count>
-							<bucket_count>11</bucket_count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</fields>
 					</extensions>
@@ -4962,7 +4962,7 @@
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -5019,16 +5019,16 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::unordered_set&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unordered_set&lt;class_a&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
 						<extensions>
 							<fields>
 								<count>0</count>
-								<bucket_count>11</bucket_count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
@@ -5086,14 +5086,14 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<unparsed_type>std::unordered_set&lt;pkg1::class_c&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unordered_set&lt;pkg1::class_c&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
 				<is_parent>0</is_parent>
@@ -5104,7 +5104,7 @@
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
 					<count>0</count>
-					<bucket_count>11</bucket_count>
+					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>

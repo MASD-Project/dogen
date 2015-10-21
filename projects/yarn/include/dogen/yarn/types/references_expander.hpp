@@ -18,20 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TACK_TYPES_EXPANSION_ERROR_FWD_HPP
-#define DOGEN_TACK_TYPES_EXPANSION_ERROR_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_REFERENCES_EXPANDER_HPP
+#define DOGEN_YARN_TYPES_REFERENCES_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <boost/exception/info.hpp>
+#include "dogen/yarn/types/model.hpp"
 
 namespace dogen {
-namespace tack {
+namespace yarn {
 
-class expansion_error;
+class references_expander {
+private:
+    void expand_model_references(const nested_name& nn, model& m) const;
+
+public:
+    void expand(model& m) const;
+};
 
 } }
 

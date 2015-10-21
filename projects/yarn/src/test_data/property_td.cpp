@@ -57,16 +57,10 @@ populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.extensions(create_dogen_dynamic_object(position + 1));
     v.name(create_std_string(position + 2));
-<<<<<<< 24090da86c0fe4a597dfa9c7b5e3ed377e4b57f4:projects/tack/src/test_data/property_td.cpp
-    v.type(create_dogen_tack_nested_name(position + 3));
-    v.unparsed_type(create_std_string(position + 4));
-    v.is_immutable(create_bool(position + 5));
-    v.is_fluent(create_bool(position + 6));
-=======
     v.type(create_dogen_yarn_nested_name(position + 3));
     v.is_immutable(create_bool(position + 4));
     v.is_fluent(create_bool(position + 5));
->>>>>>> rename tack to yarn:projects/yarn/src/test_data/property_td.cpp
+    v.unparsed_type(create_std_string(position + 6));
 }
 
 property_generator::result_type

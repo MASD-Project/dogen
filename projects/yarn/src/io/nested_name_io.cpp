@@ -20,14 +20,8 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-<<<<<<< 24090da86c0fe4a597dfa9c7b5e3ed377e4b57f4:projects/tack/src/io/nested_name_io.cpp
-#include "dogen/tack/io/name_io.hpp"
-#include "dogen/tack/io/nested_name_io.hpp"
-=======
-#include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/nested_name_io.hpp"
->>>>>>> rename tack to yarn:projects/yarn/src/io/nested_name_io.cpp
 
 namespace std {
 
