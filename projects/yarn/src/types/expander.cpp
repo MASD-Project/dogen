@@ -26,13 +26,13 @@
 namespace dogen {
 namespace yarn {
 
-void expander::expand_properties(model& m) const {
-    properties_expander e;
+void expander::expand_modules(model& m) const {
+    modules_expander e;
     e.expand(m);
 }
 
-void expander::expand_modules(model& m) const {
-    modules_expander e;
+void expander::expand_properties(model& m) const {
+    properties_expander e;
     e.expand(m);
 }
 
@@ -42,8 +42,8 @@ void expander::expand_references(model& m) const {
 }
 
 void expander::expand(model& m) const {
-    expand_properties(m);
     expand_modules(m);
+    expand_properties(m);
     expand_references(m);
 }
 

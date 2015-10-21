@@ -32,8 +32,8 @@ namespace yarn {
 
 class expander {
 private:
-    void expand_properties(model& m) const;
     void expand_modules(model& m) const;
+    void expand_properties(model& m) const;
     void expand_references(model& m) const;
 
 public:

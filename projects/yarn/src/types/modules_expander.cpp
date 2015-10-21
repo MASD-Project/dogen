@@ -45,8 +45,9 @@ boost::optional<name> containing_module(model& m, const name& n) {
 
     // FIXME: use builder.
     name module_n;
-    const auto omn(n.location().original_model_name());
     module_n.location().original_model_name(n.location().original_model_name());
+    module_n.location().external_module_path(
+        n.location().external_module_path());
 
     if (n.location().internal_module_path().empty()) {
         module_n.simple(n.location().original_model_name());
@@ -58,8 +59,10 @@ boost::optional<name> containing_module(model& m, const name& n) {
     }
 
     const auto i(m.modules().find(module_n));
-    if (i != m.modules().end())
+    if (i != m.modules().end()) {
+        // i->second.members().push_back(n);
         return module_n;
+    }
 
     BOOST_LOG_SEV(lg, debug) << "Could not find containing module: "
                              << module_n.qualified();

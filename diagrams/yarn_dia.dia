@@ -6143,22 +6143,22 @@ On the case of a UML note, represents the text of the note.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O38">
       <dia:attribute name="obj_pos">
-        <dia:point val="-117,5"/>
+        <dia:point val="-128,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-117.05,4.95;-86.79,89.95"/>
+        <dia:rectangle val="-128.05,-15.05;-92.785,69.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-117,5"/>
+        <dia:point val="-128,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.160000000000004"/>
+        <dia:real val="35.164999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="84.899999999999991"/>
+        <dia:real val="84.099999999999994"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -6284,7 +6284,7 @@ the root of an inheritance tree.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-116.65,6.245"/>
+            <dia:point val="-127.65,-13.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>

@@ -28,6 +28,12 @@
 
 Updates to sprint and product backlog.
 
+*** STARTED Implement expander workflows                              :story:
+    CLOCK: [2015-10-21 Wed 20:50]--[2015-10-21 Wed 21:38] =>  0:48
+
+We need to move across code from the transformation models (dia, json)
+into the expander code in yarn.
+
 *** Refactor qname                                                    :story:
 
 Split qname into name and location; location is made up of model name,
