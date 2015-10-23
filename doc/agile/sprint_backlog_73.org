@@ -24,6 +24,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-10-22 Thu 08:44]--[2015-10-22 Thu 08:50] =>  0:06
     CLOCK: [2015-10-21 Wed 17:51]--[2015-10-21 Wed 17:56] =>  0:05
 
 Updates to sprint and product backlog.
@@ -33,6 +34,54 @@ Updates to sprint and product backlog.
 
 We need to move across code from the transformation models (dia, json)
 into the expander code in yarn.
+
+*** STARTED Rename nested qname to composite qname                    :story:
+    CLOCK: [2015-10-22 Thu 08:10]--[2015-10-22 Thu 08:43] =>  0:33
+
+*New understanding*:
+
+This story requires further analysis. Blindly following the composite
+pattern was tried but it resulted in a lot of inconsistencies because
+we then had to follow MEC-33 and create =abstract_qname=; however, the
+nested qname does not really behave like a composite qname; its more
+like the difference between a type in isolation and a type
+instantiated as an argument of a function. For example, whilst the
+type in isolation may have unknown template parameters, presumably, as
+an argument of a function these have been instantiated with real
+types.
+
+One way to solve this is just to make the type name a bit more
+explicit rather than try to imply the composite pattern
+(e.g. "nested"). We need a name that signifies "instantiated
+type". Look at the C++ standard for the difference between defining a
+generic type and instantiating a generic type.
+
+No good names yet (type reference, type instantiation, instantiated
+name). What are we trying to represent: an identifier which points to
+a complete definition of a name such that the name can be instantiated
+as a type in the underlying language. By "instantiated" we mean used
+to define variables of this type. In this light: instantiable name,
+definable name? If we choose instantiable name, we could then rename
+"children" to type arguments.
+
+*Previous understanding*:
+
+We should just follow the composite pattern in the naming.
+
+*** STARTED Update copyright notices                                  :story:
+
+We need to update all notices to reflect personal ownership until DDC
+was formed, and then ownership by DDC.
+
+- first update to personal ownership has been done, but we need to
+  test if multiple copyright entries is properly supported.
+
+*** Copyright holders is scalar when it should be an array            :story:
+
+At present its only possible to specify a single copyright holder. It
+should be handled the same was as odb parameters, but because that is
+done with a massive hack, we are not going to extend the hack to
+copyright holders.
 
 *** Refactor qname                                                    :story:
 
@@ -196,7 +245,7 @@ type/model is target or not.
 
 This work should be integrated with the model types story.
 
-*** Remove primitive model handling in tack dia transformer           :story:
+*** Remove primitive model handling in yarn dia transformer           :story:
 
 We seem to be doing some handling for primitives which is no longer
 required. The handling of current model is also very dodgy. All in
@@ -206,7 +255,7 @@ Actually this is nothing at all to do with the primitive model but all
 to do with computing the correct name. We need to start using the
 builder here.
 
-*** Tack refactor around partial model construction                   :story:
+*** Yarn refactor around partial model construction                   :story:
 
 There are a number of activities done in the file importers which
 really belong to the main meta-model. We should create a single
@@ -309,7 +358,7 @@ However, in order to implement this we need a bit of cleverness:
 
 - for the purposes of files, the dot represents a dot;
 - for the purposes of namespaces, we must create several namespaces
-  (e.g. tack::core).
+  (e.g. yarn::core).
 
 This is also inline with the idea that the model name does not always
 contribute to the namespaces as required by primitives. We basically
@@ -377,63 +426,13 @@ is to use an approach similar to the formatter groups in the ownership
 hierarchy. For now we simply have fields that have no meaning in
 stitching but can be supplied by users.
 
-*** Identifier parser has hard-coded primitives                       :story:
-
-Instead of using the hardware model, we have hard-coded all of the
-primitives. In addition, there are some primitives which are C++
-specific (=wchar_t=), as well as others which are only valid in
-certain cases such as =void=. This needs a bit of thinking.
-
 *** Split formatter properties and associated classes from formattables :story:
 
 We have two kinds of data: the formattables themselves (mapped from
-tack) and associated data (formatter properties). The latter is
+yarn) and associated data (formatter properties). The latter is
 totally independent. We should create a namespace for all of these
 classes and a workflow that produces the data ready for consumption. A
 tentative name is =manifest=.
-
-*** Compile dogen in Windows using Visual Studio 2015                 :story:
-
-Using our "SoC" resources, we need to setup a Dogen development
-environment on Windows using VS 2015. We need to also create a blog
-post about it.
-
-Issues:
-
-- is polymorphic in instrinsics for microsoft, remove comment. see
-  patch in github.
-- update find boost with MSVC version
-- add string to enum io
-- update exception classes: remove default in base constructor, and
-  add explicit to base and derived as well as by ref.
-
-File with instructions:
-
-0. cd c:\DEVELOPEMENT\output
-1. (only once - as admin) update version of msvc in cmake C:\Program
-  Files (x86)\CMake\share\cmake-3.3\Modules\FindBoost.cmake
-  look for msvc-140 and update it to msvc-150
-2. set CMAKE_INCLUDE_PATH=C:\boost\include;C:\DEVELOPEMENT\libxml2-2.7.8.win32\include
-   set CMAKE_LIBRARY_PATH=C:\boost\lib;C:\DEVELOPEMENT\libxml2-2.7.8.win32\lib
-3. cmake ..\dogen -G "Visual Studio 14 2015" -Wno-dev (CONFIGURATION COMMAND)
-
-if you need to re-run: delete the cache:
-
-del CMakeCache.txt
-
-4. msbuild dogen.sln /t:config
-
-5.msbuild dogen.sln /t:dia /fileLogger   => used to create log for
-  errors- called msbuild.log in output directory
-
-Links:
-
-- [[http://dominoc925.blogspot.co.uk/2013/04/how-i-build-boost-for-64-bit-windows.html][How I build Boost for 64 bit Windows]]
-- [[https://svn.boost.org/trac/boost/ticket/11449][C++11 - is_polymorphic doesn't work with final-ed class in MSVC.]]
-- [[https://github.com/boostorg/type_traits/blob/04a8a9ecc2b02b7334a4b3f0459a5f62b855cc68/include/boost/type_traits/intrinsics.hpp][type_traits/include/boost/type_traits/intrinsics.hpp]]
-- [[http://stackoverflow.com/questions/20800166/cmake-compile-with-mt-instead-of-md][CMake - compile with /MT instead of /MD]]
-- [[http://www.cmake.org/cmake/help/v3.1/manual/cmake-generators.7.html][CMake Generators]]
-- [[http://choorucode.com/2014/06/06/how-to-build-boost-for-visual-studio-2013/][How to build Boost for Visual Studio 2013]]
 
 *** Consider renaming includers                                       :story:
 
@@ -442,30 +441,30 @@ header files called "includers". There is too much overloading. We
 should consider calling them "master header files" as per Schaling
 terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
 
-*** Replace qname with id's in tack                                   :story:
+*** Replace qname with id's in yarn                                   :story:
+
+*New Understanding*
+
+This is a new spin on that old chestnut of splitting partial models
+from full models. We probably got enough to do this. The
+
+*Previous Understanding*
 
 We don't really need qname in it's current form for the purposes of
-tack. We should:
+yarn. We should:
 
 - create a base class for all types in model called element.
 - add a property called id to element. Compute id on the basis of
   hashing name and location. Change all model containers,
   relationships etc to use id instead of qname.
 
-*** Rename types in =tack= using MOF/eCore terms                      :story:
+*** Rename types in =yarn= using MOF/eCore terms                      :story:
 
-Rename the types in =tack= to make them a bit more inline with
+Rename the types in =yarn= to make them a bit more inline with
 MOF/eCore. As much as possible but without going overboard. Ensure we
 do not pick up meta-meta-model concepts by mistake. Rename nested
 qname to something more sensible from MOF/eCore. Review all concept
 names in this light.
-
-*** Create a blog post on biicode                                     :story:
-
-Investigate adding biicode support since we need to add a RapidJson
-dependency. Create a blog post about it.
-
-Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
 
 *** Add support for pulling dependencies from biicode                 :story:
 
@@ -481,11 +480,6 @@ We should push both the C++ libraries as well as the dogen binary.
 
 We should take the least intrusive possible approach to start with, by
 creating a split setup for biicode.
-
-*** Update copyright notices                                          :story:
-
-We need to update all notices to reflect personal ownership until DDC
-was formed, and then ownership by DDC.
 
 *** Create a set of definitions for tagging and meta-data             :story:
 
@@ -532,7 +526,7 @@ a tad better.
 Actually this could be the first case where LAM/PIM is used: we could
 call this something like integer.
 
-This is also hacked in tack_dia's transformer.
+This is also hacked in yarn_dia's transformer.
 
 *** Add support for Language Agnostic Models (LAM)                    :story:
 
@@ -635,7 +629,7 @@ This should be done as part of the move to =yarn=.
 
 *** Handling of managed directories is incorrect                      :story:
 
-At present we are querying the tack dia importer to figure out what
+At present we are querying the yarn dia importer to figure out what
 the managed directories are. These are basically the top-level
 directories from where we want the housekeeper to operate. In reality
 this is (or can be placed) in the meta-data. We should be able to

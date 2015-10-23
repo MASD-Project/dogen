@@ -10,6 +10,63 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Create a blog post on biicode                                     :story:
+
+Investigate adding biicode support since we need to add a RapidJson
+dependency. Create a blog post about it.
+
+Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
+
+*** Compile dogen in Windows using Visual Studio 2015                 :story:
+
+Using our "SoC" resources, we need to setup a Dogen development
+environment on Windows using VS 2015. We need to also create a blog
+post about it.
+
+Issues:
+
+- is polymorphic in instrinsics for microsoft, remove comment. see
+  patch in github.
+- update find boost with MSVC version
+- add string to enum io
+- update exception classes: remove default in base constructor, and
+  add explicit to base and derived as well as by ref.
+
+File with instructions:
+
+0. cd c:\DEVELOPEMENT\output
+1. (only once - as admin) update version of msvc in cmake C:\Program
+  Files (x86)\CMake\share\cmake-3.3\Modules\FindBoost.cmake
+  look for msvc-140 and update it to msvc-150
+2. set CMAKE_INCLUDE_PATH=C:\boost\include;C:\DEVELOPEMENT\libxml2-2.7.8.win32\include
+   set CMAKE_LIBRARY_PATH=C:\boost\lib;C:\DEVELOPEMENT\libxml2-2.7.8.win32\lib
+3. cmake ..\dogen -G "Visual Studio 14 2015" -Wno-dev (CONFIGURATION COMMAND)
+
+if you need to re-run: delete the cache:
+
+del CMakeCache.txt
+
+4. msbuild dogen.sln /t:config
+
+5.msbuild dogen.sln /t:dia /fileLogger   => used to create log for
+  errors- called msbuild.log in output directory
+
+Links:
+
+- [[http://dominoc925.blogspot.co.uk/2013/04/how-i-build-boost-for-64-bit-windows.html][How I build Boost for 64 bit Windows]]
+- [[https://svn.boost.org/trac/boost/ticket/11449][C++11 - is_polymorphic doesn't work with final-ed class in MSVC.]]
+- [[https://github.com/boostorg/type_traits/blob/04a8a9ecc2b02b7334a4b3f0459a5f62b855cc68/include/boost/type_traits/intrinsics.hpp][type_traits/include/boost/type_traits/intrinsics.hpp]]
+- [[http://stackoverflow.com/questions/20800166/cmake-compile-with-mt-instead-of-md][CMake - compile with /MT instead of /MD]]
+- [[http://www.cmake.org/cmake/help/v3.1/manual/cmake-generators.7.html][CMake Generators]]
+- [[http://choorucode.com/2014/06/06/how-to-build-boost-for-visual-studio-2013/][How to build Boost for Visual Studio 2013]]
+
+*** Identifier parser has hard-coded primitives                       :story:
+
+Instead of using the hardware model, we have hard-coded all of the
+primitives. In addition, there are some primitives which are C++
+specific (=wchar_t=), as well as others which are only valid in
+certain cases such as =void=. This needs a bit of thinking.
+
 *** Improve file importer errors                                      :story:
 
 It would be nice if one could know the file, line and column where an
@@ -1016,13 +1073,6 @@ into the initialisers. At present we are calling the static methods
 directly. This is not ideal, because just like with singletons, we are
 hiding the dependencies. We should really pass the registrars in the
 initialise function so we can see the dependencies at the top-level.
-
-*** Copyright holders is scalar when it should be an array            :story:
-
-At present its only possible to specify a single copyright holder. It
-should be handled the same was as odb parameters, but because that is
-done with a massive hack, we are not going to extend the hack to
-copyright holders.
 
 *** Integration of stitch and dogen                                   :story:
 
@@ -3170,24 +3220,6 @@ that happens we should switch off forward declarations?
 In addition, in some cases we may want to use a =struct= rather than a
 =class=. At present we are always forward declaring as =class= but
 sometimes declaring as =struct=.
-
-*** Rename nested qname to composite qname                            :story:
-
-*New understanding*:
-
-This story requires further analysis. Blindly following the composite
-pattern was tried but it resulted in a lot of inconsistencies because
-we then had to follow MEC-33 and create =abstract_qname=; however, the
-nested qname does not really behave like a composite qname; its more
-like the difference between a type in isolation and a type
-instantiated as an argument of a function. For example, whilst the
-type in isolation may have unknown template parameters, presumably, as
-an argument of a function these have been instantiated with real
-types.
-
-*Previous understanding*:
-
-We should just follow the composite pattern in the naming.
 
 *** Refactor node according to composite pattern in dia to sml        :story:
 
