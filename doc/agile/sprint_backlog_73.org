@@ -12,19 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-10-27 Tue 19:09]
+#+CAPTION: Clock summary at [2015-10-27 Tue 23:30]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *2:47* |      |      |
+| *Total time*                                                                | *4:18* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 2:47   |      |      |
-| Active                                                                      |        | 2:47 |      |
+| Stories                                                                     | 4:18   |      |      |
+| Active                                                                      |        | 4:18 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:41 |
 | STARTED Implement expander workflows                                        |        |      | 0:48 |
 | STARTED Rename nested qname to composite qname                              |        |      | 0:33 |
 | STARTED Model should not be an element                                      |        |      | 0:18 |
-| STARTED Split "full" models from "partial" models                           |        |      | 0:27 |
+| STARTED Split "full" models from "partial" models                           |        |      | 1:58 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -97,18 +97,46 @@ such that the model no longer needs to be an element (documentation,
 etc). It can remain as a nameable.
 
 - keep the concepts; they are still telling the truth.
-- remove type - we don't really seem to use it
 
 *** STARTED Split "full" models from "partial" models                 :story:
+    CLOCK: [2015-10-27 Tue 22:43]--[2015-10-27 Tue 23:30] =>  0:47
+    CLOCK: [2015-10-27 Tue 22:11]--[2015-10-27 Tue 22:42] =>  0:31
     CLOCK: [2015-10-27 Tue 19:09]--[2015-10-27 Tue 19:22] =>  0:13
     CLOCK: [2015-10-27 Tue 18:33]--[2015-10-27 Tue 19:00] =>  0:27
 
-It would be nice to have a model that is outputted from the SML
-workflow which has a distinct type from the "partial" models we get
-from the importers.
+This story is a new take on an old idea covered in [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_70.org#split-a-fully-formed-model-from-partial-models][sprint 70]]. For a
+ideas on naming etc see that story. However this time round we will
+just concern ourselves with the top-level model type rather than the
+name look-ups etc. We just want to have two distinct types:
+
+- full model: the model that is outputted from the SML workflow
+- partial model: model obtained from the importers.
+
+Tasks:
 
 - create and element base class.
 - create a model with a single hash map of element.
+- rename existing model to =partial_model=.
+- update =cpp= to use new model.
+
+Notes:
+
+- create a full yarn workflow that takes a list of resource locations
+  and produces a final model. This is the current front end to middle
+  end workflow, minus the input description generation - this stays in
+  knit - plus the assembly work.
+- input descriptor: resource location (locator? see URL).
+- file importer: frontend; produces an intermediate model.
+- importer: frontend workflow; produces a list of intermediate moddels.
+- file importer registrar: frontend registrar.
+- nested name: instantiated type? instantiated name? children:
+  parameters, type parameters. type: name. is pointer: instance type,
+  kind?  enumeration of pointer, reference, stack.
+
+*** Remove unused types                                               :story:
+
+We should have a class responsible for removing all types from a model
+which are not in use. This could be done as part of model assembly.
 
 *** Filter out unused types from final model                          :story:
 
