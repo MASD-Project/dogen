@@ -26,13 +26,10 @@
 #endif
 
 #include <list>
-#include <string>
+#include <iosfwd>
 #include <algorithm>
-#include <boost/optional.hpp>
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/yarn/types/origin_types.hpp"
-#include "dogen/yarn/types/generation_types.hpp"
+#include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/serialization/module_fwd_ser.hpp"
 
 namespace dogen {
@@ -43,16 +40,13 @@ namespace yarn {
  *
  * Aggregates a group of logically related types into a unit.
  */
-class module final {
+class module final : public dogen::yarn::element {
 public:
+    module() = default;
     module(const module&) = default;
-    ~module() = default;
+    module(module&&) = default;
 
-public:
-    module();
-
-public:
-    module(module&& rhs);
+    virtual ~module() noexcept { }
 
 public:
     module(
@@ -72,67 +66,26 @@ private:
     friend void boost::serialization::load(Archive& ar, module& v, unsigned int version);
 
 public:
-    /**
-     * @brief Code comments.
-     *
-     * These are expected to follow the grammar of the comment processing tools
-     * of the programming language in question, e.g. Doxygen for C++, JavaDoc
-     * for Java, etc.
-     */
-    /**@{*/
-    const std::string& documentation() const;
-    std::string& documentation();
-    void documentation(const std::string& v);
-    void documentation(const std::string&& v);
-    /**@}*/
+    virtual void accept(const element_visitor& v) const override {
+        v.visit(*this);
+    }
 
-    /**
-     * @brief Dynamic extensions for this element.
-     */
-    /**@{*/
-    const dogen::dynamic::object& extensions() const;
-    dogen::dynamic::object& extensions();
-    void extensions(const dogen::dynamic::object& v);
-    void extensions(const dogen::dynamic::object&& v);
-    /**@}*/
+    virtual void accept(element_visitor& v) const override {
+        v.visit(*this);
+    }
 
-    /**
-     * @brief Fully qualified name.
-     *
-     */
-    /**@{*/
-    const dogen::yarn::name& name() const;
-    dogen::yarn::name& name();
-    void name(const dogen::yarn::name& v);
-    void name(const dogen::yarn::name&& v);
-    /**@}*/
+    virtual void accept(const element_visitor& v) override {
+        v.visit(*this);
+    }
 
-    /**
-     * @brief What to do with this type in terms of code generation.
-     */
-    /**@{*/
-    dogen::yarn::generation_types generation_type() const;
-    void generation_type(const dogen::yarn::generation_types v);
-    /**@}*/
+    virtual void accept(element_visitor& v) override {
+        v.visit(*this);
+    }
 
-    /**
-     * @brief How was this model element originated.
-     */
-    /**@{*/
-    dogen::yarn::origin_types origin_type() const;
-    void origin_type(const dogen::yarn::origin_types v);
-    /**@}*/
+public:
+    void to_stream(std::ostream& s) const override;
 
-    /**
-     * @brief Name of the module in which we are contained.
-     */
-    /**@{*/
-    const boost::optional<dogen::yarn::name>& containing_module() const;
-    boost::optional<dogen::yarn::name>& containing_module();
-    void containing_module(const boost::optional<dogen::yarn::name>& v);
-    void containing_module(const boost::optional<dogen::yarn::name>&& v);
-    /**@}*/
-
+public:
     /**
      * @brief All the model elements contained in this module.
      */
@@ -150,16 +103,13 @@ public:
     }
 
 public:
+    bool equals(const dogen::yarn::element& other) const override;
+
+public:
     void swap(module& other) noexcept;
     module& operator=(module other);
 
 private:
-    std::string documentation_;
-    dogen::dynamic::object extensions_;
-    dogen::yarn::name name_;
-    dogen::yarn::generation_types generation_type_;
-    dogen::yarn::origin_types origin_type_;
-    boost::optional<dogen::yarn::name> containing_module_;
     std::list<dogen::yarn::name> members_;
 };
 

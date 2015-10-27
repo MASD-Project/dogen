@@ -18,24 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_TYPE_VISITOR_FWD_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_TYPE_VISITOR_FWD_SER_HPP
+#ifndef DOGEN_YARN_HASH_ELEMENT_HASH_HPP
+#define DOGEN_YARN_HASH_ELEMENT_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/type_visitor_fwd.hpp"
+#include <functional>
+#include "dogen/yarn/types/element.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace yarn {
 
-template<class Archive>
-void save(Archive& ar, const dogen::yarn::type_visitor& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::yarn::type_visitor& v, unsigned int version);
+struct element_hasher {
+public:
+    static std::size_t hash(const element& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::yarn::element> {
+public:
+    size_t operator()(const dogen::yarn::element& v) const {
+        return dogen::yarn::element_hasher::hash(v);
+    }
+};
+
+}
 #endif

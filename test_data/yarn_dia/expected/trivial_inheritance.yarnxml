@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="13">
-<entity class_id="6" tracking_level="0" version="0">
+<entity class_id="8" tracking_level="0" version="0">
 	<documentation></documentation>
-	<extensions class_id="7" tracking_level="0" version="0">
-		<fields class_id="8" tracking_level="0" version="0">
+	<extensions class_id="9" tracking_level="0" version="0">
+		<fields class_id="10" tracking_level="0" version="0">
 			<count>0</count>
 			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>
 		</fields>
 	</extensions>
-	<name class_id="9" tracking_level="0" version="0">
+	<name class_id="11" tracking_level="0" version="0">
 		<simple>trivial_inheritance</simple>
 		<qualified>&lt;trivial_inheritance&gt;</qualified>
-		<location class_id="10" tracking_level="0" version="0">
+		<location class_id="12" tracking_level="0" version="0">
 			<original_model_name>trivial_inheritance</original_model_name>
-			<external_module_path class_id="11" tracking_level="0" version="0">
+			<external_module_path class_id="13" tracking_level="0" version="0">
 				<count>0</count>
 				<item_version>0</item_version>
 			</external_module_path>
@@ -32,14 +32,14 @@
 	</name>
 	<generation_type>0</generation_type>
 	<origin_type>1</origin_type>
-	<containing_module class_id="12" tracking_level="0" version="0">
+	<containing_module class_id="14" tracking_level="0" version="0">
 		<initialized>0</initialized>
 	</containing_module>
-	<references class_id="13" tracking_level="0" version="0">
+	<references class_id="15" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>2</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="14" tracking_level="0" version="0">
+		<item class_id="16" tracking_level="0" version="0">
 			<first>
 				<simple></simple>
 				<qualified></qualified>
@@ -62,16 +62,16 @@
 			<second>3</second>
 		</item>
 	</references>
-	<leaves class_id="15" tracking_level="0" version="0">
+	<leaves class_id="17" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
-	<modules class_id="16" tracking_level="0" version="0">
+	<modules class_id="18" tracking_level="0" version="0">
 		<count>5</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="17" tracking_level="0" version="0">
+		<item class_id="19" tracking_level="0" version="0">
 			<first>
 				<simple>trivial_inheritance</simple>
 				<qualified>&lt;trivial_inheritance&gt;</qualified>
@@ -92,79 +92,81 @@
 					</internal_module_path>
 				</location>
 			</first>
-			<second class_id="18" tracking_level="0" version="0">
-				<documentation>This model tests all aspects related to inheritance.
+			<second class_id="5" tracking_level="1" version="0" object_id="_0">
+				<element class_id="20" tracking_level="0" version="0">
+					<documentation>This model tests all aspects related to inheritance.
 
 It includes the visitable stereotype since it only makes sense
 in the context of inheritance.
 
 </documentation>
-				<extensions>
-					<fields>
-						<count>3</count>
-						<bucket_count>5</bucket_count>
-						<item_version>0</item_version>
-						<item class_id="19" tracking_level="0" version="0">
-							<first>dia.comment</first>
-							<second class_id="20" tracking_level="0" version="0">
-								<value class_id="21" tracking_level="0" version="1">
-									<px class_id="1" tracking_level="1" version="0" object_id="_0">
-										<value class_id="22" tracking_level="0" version="0"></value>
-										<content>true</content>
-									</px>
-								</value>
-							</second>
-						</item>
-						<item>
-							<first>licence_name</first>
-							<second>
-								<value>
-									<px class_id_reference="1" object_id="_1">
-										<value></value>
-										<content>gpl_v3</content>
-									</px>
-								</value>
-							</second>
-						</item>
-						<item>
-							<first>copyright_notice</first>
-							<second>
-								<value>
-									<px class_id_reference="1" object_id="_2">
-										<value></value>
-										<content>Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;</content>
-									</px>
-								</value>
-							</second>
-						</item>
-					</fields>
-				</extensions>
-				<name>
-					<simple>trivial_inheritance</simple>
-					<qualified>&lt;trivial_inheritance&gt;</qualified>
-					<location>
-						<original_model_name>trivial_inheritance</original_model_name>
-						<external_module_path>
-							<count>0</count>
+					<extensions>
+						<fields>
+							<count>3</count>
+							<bucket_count>5</bucket_count>
 							<item_version>0</item_version>
-						</external_module_path>
-						<model_module_path>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>trivial_inheritance</item>
-						</model_module_path>
-						<internal_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</internal_module_path>
-					</location>
-				</name>
-				<generation_type>1</generation_type>
-				<origin_type>1</origin_type>
-				<containing_module>
-					<initialized>0</initialized>
-				</containing_module>
-				<members class_id="23" tracking_level="0" version="0">
+							<item class_id="21" tracking_level="0" version="0">
+								<first>dia.comment</first>
+								<second class_id="22" tracking_level="0" version="0">
+									<value class_id="23" tracking_level="0" version="1">
+										<px class_id="1" tracking_level="1" version="0" object_id="_1">
+											<value class_id="24" tracking_level="0" version="0"></value>
+											<content>true</content>
+										</px>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>licence_name</first>
+								<second>
+									<value>
+										<px class_id_reference="1" object_id="_2">
+											<value></value>
+											<content>gpl_v3</content>
+										</px>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>copyright_notice</first>
+								<second>
+									<value>
+										<px class_id_reference="1" object_id="_3">
+											<value></value>
+											<content>Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;</content>
+										</px>
+									</value>
+								</second>
+							</item>
+						</fields>
+					</extensions>
+					<name>
+						<simple>trivial_inheritance</simple>
+						<qualified>&lt;trivial_inheritance&gt;</qualified>
+						<location>
+							<original_model_name>trivial_inheritance</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<members class_id="25" tracking_level="0" version="0">
 					<count>22</count>
 					<item_version>0</item_version>
 					<item>
@@ -608,42 +610,19 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second>
-				<documentation></documentation>
-				<extensions>
-					<fields>
-						<count>0</count>
-						<bucket_count>1</bucket_count>
-						<item_version>0</item_version>
-					</fields>
-				</extensions>
-				<name>
-					<simple>pkg4</simple>
-					<qualified></qualified>
-					<location>
-						<original_model_name>trivial_inheritance</original_model_name>
-						<external_module_path>
+			<second object_id="_4">
+				<element>
+					<documentation></documentation>
+					<extensions>
+						<fields>
 							<count>0</count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</external_module_path>
-						<model_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</model_module_path>
-						<internal_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</internal_module_path>
-					</location>
-				</name>
-				<generation_type>1</generation_type>
-				<origin_type>1</origin_type>
-				<containing_module>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<simple>trivial_inheritance</simple>
-						<qualified>&lt;trivial_inheritance&gt;</qualified>
+						</fields>
+					</extensions>
+					<name>
+						<simple>pkg4</simple>
+						<qualified></qualified>
 						<location>
 							<original_model_name>trivial_inheritance</original_model_name>
 							<external_module_path>
@@ -651,17 +630,42 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>1</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_module_path>
 						</location>
-					</value>
-				</containing_module>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<simple>trivial_inheritance</simple>
+							<qualified>&lt;trivial_inheritance&gt;</qualified>
+							<location>
+								<original_model_name>trivial_inheritance</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>trivial_inheritance</item>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
+						</value>
+					</containing_module>
+				</element>
 				<members>
 					<count>1</count>
 					<item_version>0</item_version>
@@ -708,42 +712,19 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second>
-				<documentation></documentation>
-				<extensions>
-					<fields>
-						<count>0</count>
-						<bucket_count>1</bucket_count>
-						<item_version>0</item_version>
-					</fields>
-				</extensions>
-				<name>
-					<simple>pkg1</simple>
-					<qualified></qualified>
-					<location>
-						<original_model_name>trivial_inheritance</original_model_name>
-						<external_module_path>
+			<second object_id="_5">
+				<element>
+					<documentation></documentation>
+					<extensions>
+						<fields>
 							<count>0</count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</external_module_path>
-						<model_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</model_module_path>
-						<internal_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</internal_module_path>
-					</location>
-				</name>
-				<generation_type>1</generation_type>
-				<origin_type>1</origin_type>
-				<containing_module>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<simple>trivial_inheritance</simple>
-						<qualified>&lt;trivial_inheritance&gt;</qualified>
+						</fields>
+					</extensions>
+					<name>
+						<simple>pkg1</simple>
+						<qualified></qualified>
 						<location>
 							<original_model_name>trivial_inheritance</original_model_name>
 							<external_module_path>
@@ -751,17 +732,42 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>1</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_module_path>
 						</location>
-					</value>
-				</containing_module>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<simple>trivial_inheritance</simple>
+							<qualified>&lt;trivial_inheritance&gt;</qualified>
+							<location>
+								<original_model_name>trivial_inheritance</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>trivial_inheritance</item>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
+						</value>
+					</containing_module>
+				</element>
 				<members>
 					<count>2</count>
 					<item_version>0</item_version>
@@ -828,42 +834,19 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second>
-				<documentation></documentation>
-				<extensions>
-					<fields>
-						<count>0</count>
-						<bucket_count>1</bucket_count>
-						<item_version>0</item_version>
-					</fields>
-				</extensions>
-				<name>
-					<simple>pkg2</simple>
-					<qualified></qualified>
-					<location>
-						<original_model_name>trivial_inheritance</original_model_name>
-						<external_module_path>
+			<second object_id="_6">
+				<element>
+					<documentation></documentation>
+					<extensions>
+						<fields>
 							<count>0</count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</external_module_path>
-						<model_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</model_module_path>
-						<internal_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</internal_module_path>
-					</location>
-				</name>
-				<generation_type>1</generation_type>
-				<origin_type>1</origin_type>
-				<containing_module>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<simple>trivial_inheritance</simple>
-						<qualified>&lt;trivial_inheritance&gt;</qualified>
+						</fields>
+					</extensions>
+					<name>
+						<simple>pkg2</simple>
+						<qualified></qualified>
 						<location>
 							<original_model_name>trivial_inheritance</original_model_name>
 							<external_module_path>
@@ -871,17 +854,42 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>1</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_module_path>
 						</location>
-					</value>
-				</containing_module>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<simple>trivial_inheritance</simple>
+							<qualified>&lt;trivial_inheritance&gt;</qualified>
+							<location>
+								<original_model_name>trivial_inheritance</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>trivial_inheritance</item>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
+						</value>
+					</containing_module>
+				</element>
 				<members>
 					<count>1</count>
 					<item_version>0</item_version>
@@ -928,42 +936,19 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second>
-				<documentation></documentation>
-				<extensions>
-					<fields>
-						<count>0</count>
-						<bucket_count>1</bucket_count>
-						<item_version>0</item_version>
-					</fields>
-				</extensions>
-				<name>
-					<simple>pkg3</simple>
-					<qualified></qualified>
-					<location>
-						<original_model_name>trivial_inheritance</original_model_name>
-						<external_module_path>
+			<second object_id="_7">
+				<element>
+					<documentation></documentation>
+					<extensions>
+						<fields>
 							<count>0</count>
+							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
-						</external_module_path>
-						<model_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</model_module_path>
-						<internal_module_path>
-							<count>0</count>
-							<item_version>0</item_version>
-						</internal_module_path>
-					</location>
-				</name>
-				<generation_type>1</generation_type>
-				<origin_type>1</origin_type>
-				<containing_module>
-					<initialized>1</initialized>
-					<item_version>0</item_version>
-					<value>
-						<simple>trivial_inheritance</simple>
-						<qualified>&lt;trivial_inheritance&gt;</qualified>
+						</fields>
+					</extensions>
+					<name>
+						<simple>pkg3</simple>
+						<qualified></qualified>
 						<location>
 							<original_model_name>trivial_inheritance</original_model_name>
 							<external_module_path>
@@ -971,17 +956,42 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>1</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_module_path>
 						</location>
-					</value>
-				</containing_module>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>1</initialized>
+						<item_version>0</item_version>
+						<value>
+							<simple>trivial_inheritance</simple>
+							<qualified>&lt;trivial_inheritance&gt;</qualified>
+							<location>
+								<original_model_name>trivial_inheritance</original_model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<model_module_path>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>trivial_inheritance</item>
+								</model_module_path>
+								<internal_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_module_path>
+							</location>
+						</value>
+					</containing_module>
+				</element>
 				<members>
 					<count>1</count>
 					<item_version>0</item_version>
@@ -1009,26 +1019,26 @@ in the context of inheritance.
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="24" tracking_level="0" version="0">
+	<concepts class_id="26" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="25" tracking_level="0" version="0">
+	<primitives class_id="27" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="26" tracking_level="0" version="0">
+	<enumerations class_id="28" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="27" tracking_level="0" version="0">
+	<objects class_id="29" tracking_level="0" version="0">
 		<count>23</count>
 		<bucket_count>47</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="28" tracking_level="0" version="0">
+		<item class_id="30" tracking_level="0" version="0">
 			<first>
 				<simple>move_ctor_empty_descendant</simple>
 				<qualified></qualified>
@@ -1048,8 +1058,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second class_id="4" tracking_level="1" version="0" object_id="_3">
-				<type class_id="29" tracking_level="0" version="0">
+			<second class_id="6" tracking_level="1" version="0" object_id="_8">
+				<element>
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
 					<extensions>
@@ -1104,8 +1114,8 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
-				<all_properties class_id="30" tracking_level="0" version="0">
+				</element>
+				<all_properties class_id="31" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_properties>
@@ -1113,7 +1123,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</local_properties>
-				<inherited_properties class_id="31" tracking_level="0" version="0">
+				<inherited_properties class_id="32" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -1124,11 +1134,11 @@ in the context of inheritance.
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships class_id="32" tracking_level="0" version="0">
+				<relationships class_id="33" tracking_level="0" version="0">
 					<count>1</count>
 					<bucket_count>2</bucket_count>
 					<item_version>0</item_version>
-					<item class_id="33" tracking_level="0" version="0">
+					<item class_id="34" tracking_level="0" version="0">
 						<first>2</first>
 						<second>
 							<count>1</count>
@@ -1179,8 +1189,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_4">
-				<type>
+			<second object_id="_9">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1234,7 +1244,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1284,8 +1294,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_5">
-				<type>
+			<second object_id="_10">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1339,7 +1349,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1347,7 +1357,7 @@ in the context of inheritance.
 				<local_properties>
 					<count>1</count>
 					<item_version>0</item_version>
-					<item class_id="34" tracking_level="0" version="0">
+					<item class_id="35" tracking_level="0" version="0">
 						<documentation></documentation>
 						<extensions>
 							<fields>
@@ -1357,7 +1367,7 @@ in the context of inheritance.
 							</fields>
 						</extensions>
 						<name>prop_1</name>
-						<type class_id="35" tracking_level="0" version="0">
+						<type class_id="36" tracking_level="0" version="0">
 							<type>
 								<simple>int</simple>
 								<qualified></qualified>
@@ -1377,7 +1387,7 @@ in the context of inheritance.
 									</internal_module_path>
 								</location>
 							</type>
-							<children class_id="36" tracking_level="0" version="0">
+							<children class_id="37" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -1456,8 +1466,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_6">
-				<type>
+			<second object_id="_11">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1511,7 +1521,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1600,8 +1610,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_7">
-				<type>
+			<second object_id="_12">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1655,7 +1665,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1770,8 +1780,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_8">
-				<type>
+			<second object_id="_13">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1825,7 +1835,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1914,8 +1924,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_9">
-				<type>
+			<second object_id="_14">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1969,7 +1979,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2085,8 +2095,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_10">
-				<type>
+			<second object_id="_15">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2140,7 +2150,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2229,8 +2239,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_11">
-				<type>
+			<second object_id="_16">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2284,7 +2294,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2399,8 +2409,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_12">
-				<type>
+			<second object_id="_17">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2454,7 +2464,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2503,8 +2513,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_13">
-				<type>
+			<second object_id="_18">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2558,7 +2568,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2634,8 +2644,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_14">
-				<type>
+			<second object_id="_19">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2689,7 +2699,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2805,8 +2815,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_15">
-				<type>
+			<second object_id="_20">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2860,7 +2870,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2909,8 +2919,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_16">
-				<type>
+			<second object_id="_21">
+				<element>
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
 					<extensions>
@@ -2965,7 +2975,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3082,8 +3092,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_17">
-				<type>
+			<second object_id="_22">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -3137,7 +3147,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3226,8 +3236,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_18">
-				<type>
+			<second object_id="_23">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -3281,7 +3291,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3357,8 +3367,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_19">
-				<type>
+			<second object_id="_24">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -3412,7 +3422,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3527,8 +3537,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_20">
-				<type>
+			<second object_id="_25">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -3582,7 +3592,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3657,8 +3667,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_21">
-				<type>
+			<second object_id="_26">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -3712,7 +3722,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3827,8 +3837,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_22">
-				<type>
+			<second object_id="_27">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -3882,7 +3892,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3931,8 +3941,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_23">
-				<type>
+			<second object_id="_28">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -3986,7 +3996,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -4101,8 +4111,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_24">
-				<type>
+			<second object_id="_29">
+				<element>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -4156,7 +4166,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -4231,8 +4241,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_25">
-				<type>
+			<second object_id="_30">
+				<element>
 					<documentation>Base class for scenario that tests code generated move contructors.
 </documentation>
 					<extensions>
@@ -4287,7 +4297,7 @@ in the context of inheritance.
 							</location>
 						</value>
 					</containing_module>
-				</type>
+				</element>
 				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>

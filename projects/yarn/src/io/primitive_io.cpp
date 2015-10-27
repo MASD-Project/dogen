@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen/yarn/io/type_io.hpp"
+#include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/primitive_io.hpp"
 
 namespace dogen {

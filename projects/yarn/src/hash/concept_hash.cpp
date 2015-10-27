@@ -20,10 +20,8 @@
  */
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/hash/concept_hash.hpp"
+#include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/yarn/hash/property_hash.hpp"
-#include "dogen/dynamic/hash/object_hash.hpp"
-#include "dogen/yarn/hash/origin_types_hash.hpp"
-#include "dogen/yarn/hash/generation_types_hash.hpp"
 
 namespace {
 
@@ -50,16 +48,6 @@ inline std::size_t hash_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_pr
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_yarn_name(const boost::optional<dogen::yarn::name>& v) {
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
-}
-
 inline std::size_t hash_std_list_dogen_yarn_name(const std::list<dogen::yarn::name>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
@@ -76,15 +64,11 @@ namespace yarn {
 std::size_t concept_hasher::hash(const concept& v) {
     std::size_t seed(0);
 
+    combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
+
     combine(seed, hash_std_list_dogen_yarn_property(v.all_properties()));
     combine(seed, hash_std_list_dogen_yarn_property(v.local_properties()));
     combine(seed, hash_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_property_(v.inherited_properties()));
-    combine(seed, v.documentation());
-    combine(seed, v.extensions());
-    combine(seed, v.name());
-    combine(seed, v.generation_type());
-    combine(seed, v.origin_type());
-    combine(seed, hash_boost_optional_dogen_yarn_name(v.containing_module()));
     combine(seed, hash_std_list_dogen_yarn_name(v.refines()));
     combine(seed, v.is_parent());
     combine(seed, v.is_child());

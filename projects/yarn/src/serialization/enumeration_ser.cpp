@@ -29,7 +29,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
-#include "dogen/yarn/serialization/type_ser.hpp"
+#include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/enumerator_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 
@@ -44,7 +44,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::enumeration& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("type", base_object<dogen::yarn::type>(v));
+    ar << make_nvp("element", base_object<dogen::yarn::element>(v));
 
     ar << make_nvp("underlying_type", v.underlying_type_);
     ar << make_nvp("enumerators", v.enumerators_);
@@ -54,7 +54,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::enumeration& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("type", base_object<dogen::yarn::type>(v));
+    ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
 
     ar >> make_nvp("underlying_type", v.underlying_type_);
     ar >> make_nvp("enumerators", v.enumerators_);

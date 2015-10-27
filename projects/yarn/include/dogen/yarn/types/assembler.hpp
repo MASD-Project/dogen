@@ -28,6 +28,7 @@
 #include <list>
 #include <utility>
 #include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/element.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -46,10 +47,10 @@ public:
 
 private:
     /**
-     * @brief Returns true if the type is generatable, false
+     * @brief Returns true if the element is generatable, false
      * otherwise.
      */
-    bool is_generatable(const type& t) const;
+    bool is_generatable(const element& e) const;
 
 private:
     /**

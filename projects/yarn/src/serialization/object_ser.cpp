@@ -29,8 +29,8 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
-#include "dogen/yarn/serialization/type_ser.hpp"
 #include "dogen/yarn/serialization/object_ser.hpp"
+#include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/property_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/yarn/serialization/object_types_ser.hpp"
@@ -47,7 +47,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::object& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("type", base_object<dogen::yarn::type>(v));
+    ar << make_nvp("element", base_object<dogen::yarn::element>(v));
 
     ar << make_nvp("all_properties", v.all_properties_);
     ar << make_nvp("local_properties", v.local_properties_);
@@ -67,7 +67,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::object& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("type", base_object<dogen::yarn::type>(v));
+    ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
 
     ar >> make_nvp("all_properties", v.all_properties_);
     ar >> make_nvp("local_properties", v.local_properties_);

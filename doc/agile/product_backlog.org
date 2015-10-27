@@ -276,12 +276,6 @@ to stem from. For example:
 could be replaced with =has_swap=, or perhaps even =has_public_swap= /
 =has_protected_swap=.
 
-*** Consider renaming module path to internal module path             :story:
-
-Since we have got a external module path, it would make sense for the
-other to be the internal module path. This may be taking the symmetry
-too far, so we need to have a think.
-
 *** Add support for pulling dependencies from biicode                 :story:
 
 [[https://www.biicode.com/][Biicode]] is a nuget-like repo for c++. We should look into both
@@ -508,7 +502,7 @@ JSON:
 
 This implies we are not calling =tidy_up_string=.
 
-*** Helper methods should have their own includes                     :story:
+*** Improve helper methods implementation                             :story:
 
 When a formatter relies on the helper methods, we have a problem: we
 need to determine the required includes from the main formatter
@@ -520,7 +514,17 @@ delegate further or to compute the includes. This would at least
 remove the duplication of code between io and types.
 
 However, its important to bear in mind that helper methods are a hack
-anyways so we don't want to spend too much time fixing them.
+anyways so we don't want to spend too much time fixing them. Actually,
+as we failed with the needle implementation, these may be here to stay
+for quite a bit so we need to make sure the implementation is
+maintainable. This means adding new helpers should be easy, as well as
+binding existing helpers to new types.
+
+For this we need a way to allow helper methods to bind dynamically to
+types. This can be done by using meta-data.
+
+We should also find a nicer way to package helper methods, maybe
+aligned to a model and type or concept.
 
 *** Duplicate fields in JSON result in non-intuitive errors           :story:
 
@@ -726,7 +730,7 @@ we need to check for.
 - if serialisation is enabled, types forward declaration of the
   serialisation classes must be enabled
 
-*** Top-level inclusion required should be "tribool"                  :story:
+*** Top-level "inclusion required" should be "tribool"                :story:
 
 One of the most common use cases for inclusion required is to have it
 set to true for all types where we provide an override, but false for

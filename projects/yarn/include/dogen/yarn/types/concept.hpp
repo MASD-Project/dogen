@@ -26,16 +26,13 @@
 #endif
 
 #include <list>
-#include <string>
+#include <iosfwd>
 #include <algorithm>
 #include <unordered_map>
-#include <boost/optional.hpp>
 #include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/types/property.hpp"
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/yarn/types/origin_types.hpp"
-#include "dogen/yarn/types/generation_types.hpp"
 #include "dogen/yarn/serialization/concept_fwd_ser.hpp"
 
 namespace dogen {
@@ -44,28 +41,27 @@ namespace yarn {
 /**
  * @brief Represents a concept, similar to the C++ definition.
  */
-class concept final {
+class concept final : public dogen::yarn::element {
 public:
     concept(const concept&) = default;
-    ~concept() = default;
+    concept(concept&&) = default;
 
 public:
     concept();
 
-public:
-    concept(concept&& rhs);
+    virtual ~concept() noexcept { }
 
 public:
     concept(
-        const std::list<dogen::yarn::property>& all_properties,
-        const std::list<dogen::yarn::property>& local_properties,
-        const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> >& inherited_properties,
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
         const dogen::yarn::name& name,
         const dogen::yarn::generation_types generation_type,
         const dogen::yarn::origin_types origin_type,
         const boost::optional<dogen::yarn::name>& containing_module,
+        const std::list<dogen::yarn::property>& all_properties,
+        const std::list<dogen::yarn::property>& local_properties,
+        const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> >& inherited_properties,
         const std::list<dogen::yarn::name>& refines,
         const bool is_parent,
         const bool is_child);
@@ -76,6 +72,26 @@ private:
 
     template<typename Archive>
     friend void boost::serialization::load(Archive& ar, concept& v, unsigned int version);
+
+public:
+    virtual void accept(const element_visitor& v) const override {
+        v.visit(*this);
+    }
+
+    virtual void accept(element_visitor& v) const override {
+        v.visit(*this);
+    }
+
+    virtual void accept(const element_visitor& v) override {
+        v.visit(*this);
+    }
+
+    virtual void accept(element_visitor& v) override {
+        v.visit(*this);
+    }
+
+public:
+    void to_stream(std::ostream& s) const override;
 
 public:
     /**
@@ -118,67 +134,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Code comments.
-     *
-     * These are expected to follow the grammar of the comment processing tools
-     * of the programming language in question, e.g. Doxygen for C++, JavaDoc
-     * for Java, etc.
-     */
-    /**@{*/
-    const std::string& documentation() const;
-    std::string& documentation();
-    void documentation(const std::string& v);
-    void documentation(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Dynamic extensions for this element.
-     */
-    /**@{*/
-    const dogen::dynamic::object& extensions() const;
-    dogen::dynamic::object& extensions();
-    void extensions(const dogen::dynamic::object& v);
-    void extensions(const dogen::dynamic::object&& v);
-    /**@}*/
-
-    /**
-     * @brief Fully qualified name.
-     *
-     */
-    /**@{*/
-    const dogen::yarn::name& name() const;
-    dogen::yarn::name& name();
-    void name(const dogen::yarn::name& v);
-    void name(const dogen::yarn::name&& v);
-    /**@}*/
-
-    /**
-     * @brief What to do with this type in terms of code generation.
-     */
-    /**@{*/
-    dogen::yarn::generation_types generation_type() const;
-    void generation_type(const dogen::yarn::generation_types v);
-    /**@}*/
-
-    /**
-     * @brief How was this model element originated.
-     */
-    /**@{*/
-    dogen::yarn::origin_types origin_type() const;
-    void origin_type(const dogen::yarn::origin_types v);
-    /**@}*/
-
-    /**
-     * @brief Name of the module in which we are contained.
-     */
-    /**@{*/
-    const boost::optional<dogen::yarn::name>& containing_module() const;
-    boost::optional<dogen::yarn::name>& containing_module();
-    void containing_module(const boost::optional<dogen::yarn::name>& v);
-    void containing_module(const boost::optional<dogen::yarn::name>&& v);
-    /**@}*/
-
-    /**
      * @brief List of concepts that this concept is a refinement of.
      */
     /**@{*/
@@ -211,6 +166,9 @@ public:
     }
 
 public:
+    bool equals(const dogen::yarn::element& other) const override;
+
+public:
     void swap(concept& other) noexcept;
     concept& operator=(concept other);
 
@@ -218,12 +176,6 @@ private:
     std::list<dogen::yarn::property> all_properties_;
     std::list<dogen::yarn::property> local_properties_;
     std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> > inherited_properties_;
-    std::string documentation_;
-    dogen::dynamic::object extensions_;
-    dogen::yarn::name name_;
-    dogen::yarn::generation_types generation_type_;
-    dogen::yarn::origin_types origin_type_;
-    boost::optional<dogen::yarn::name> containing_module_;
     std::list<dogen::yarn::name> refines_;
     bool is_parent_;
     bool is_child_;

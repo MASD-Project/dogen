@@ -27,11 +27,11 @@
 
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/node_io.hpp"
-#include "dogen/yarn/io/type_io.hpp"
 #include "dogen/yarn/io/model_io.hpp"
 #include "dogen/yarn/io/module_io.hpp"
 #include "dogen/yarn/io/object_io.hpp"
 #include "dogen/yarn/io/concept_io.hpp"
+#include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/location_io.hpp"
 #include "dogen/yarn/io/property_io.hpp"
 #include "dogen/yarn/io/primitive_io.hpp"

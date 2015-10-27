@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TYPE_HPP
-#define DOGEN_YARN_TYPES_TYPE_HPP
+#ifndef DOGEN_YARN_TYPES_ELEMENT_HPP
+#define DOGEN_YARN_TYPES_ELEMENT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,30 +32,30 @@
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
-#include "dogen/yarn/types/type_visitor.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/yarn/types/generation_types.hpp"
-#include "dogen/yarn/serialization/type_fwd_ser.hpp"
+#include "dogen/yarn/serialization/element_fwd_ser.hpp"
 
 namespace dogen {
 namespace yarn {
 
 /**
- * @brief Represents a type within the type system.
+ * @brief Represents a generic modeling construct.
  */
-class type {
+class element {
 public:
-    type(const type&) = default;
+    element(const element&) = default;
 
 public:
-    type();
+    element();
 
-    virtual ~type() noexcept = 0;
-
-public:
-    type(type&& rhs);
+    virtual ~element() noexcept = 0;
 
 public:
-    type(
+    element(element&& rhs);
+
+public:
+    element(
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
         const dogen::yarn::name& name,
@@ -65,16 +65,16 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const type& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const element& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, type& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, element& v, unsigned int version);
 
 public:
-    virtual void accept(const type_visitor& v) const = 0;
-    virtual void accept(type_visitor& v) const = 0;
-    virtual void accept(const type_visitor& v) = 0;
-    virtual void accept(type_visitor& v) = 0;
+    virtual void accept(const element_visitor& v) const = 0;
+    virtual void accept(element_visitor& v) const = 0;
+    virtual void accept(const element_visitor& v) = 0;
+    virtual void accept(element_visitor& v) = 0;
 
 public:
     virtual void to_stream(std::ostream& s) const;
@@ -142,12 +142,12 @@ public:
     /**@}*/
 
 protected:
-    bool compare(const type& rhs) const;
+    bool compare(const element& rhs) const;
 public:
-    virtual bool equals(const type& other) const = 0;
+    virtual bool equals(const element& other) const = 0;
 
 protected:
-    void swap(type& other) noexcept;
+    void swap(element& other) noexcept;
 
 private:
     std::string documentation_;
@@ -158,9 +158,9 @@ private:
     boost::optional<dogen::yarn::name> containing_module_;
 };
 
-inline type::~type() noexcept { }
+inline element::~element() noexcept { }
 
-inline bool operator==(const type& lhs, const type& rhs) {
+inline bool operator==(const element& lhs, const element& rhs) {
     return lhs.equals(rhs);
 }
 

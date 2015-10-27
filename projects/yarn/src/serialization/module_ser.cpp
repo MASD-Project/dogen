@@ -22,19 +22,19 @@
 #include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
-#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/yarn/serialization/module_ser.hpp"
-#include "dogen/dynamic/serialization/object_ser.hpp"
-#include "dogen/yarn/serialization/origin_types_ser.hpp"
-#include "dogen/yarn/serialization/generation_types_ser.hpp"
+#include "dogen/yarn/serialization/element_ser.hpp"
+
+BOOST_CLASS_TRACKING(
+    dogen::yarn::module,
+    boost::serialization::track_selectively)
 
 namespace boost {
 namespace serialization {
@@ -43,12 +43,8 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::module& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("documentation", v.documentation_);
-    ar << make_nvp("extensions", v.extensions_);
-    ar << make_nvp("name", v.name_);
-    ar << make_nvp("generation_type", v.generation_type_);
-    ar << make_nvp("origin_type", v.origin_type_);
-    ar << make_nvp("containing_module", v.containing_module_);
+    ar << make_nvp("element", base_object<dogen::yarn::element>(v));
+
     ar << make_nvp("members", v.members_);
 }
 
@@ -56,12 +52,8 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::module& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("documentation", v.documentation_);
-    ar >> make_nvp("extensions", v.extensions_);
-    ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("generation_type", v.generation_type_);
-    ar >> make_nvp("origin_type", v.origin_type_);
-    ar >> make_nvp("containing_module", v.containing_module_);
+    ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
+
     ar >> make_nvp("members", v.members_);
 }
 

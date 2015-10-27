@@ -31,7 +31,6 @@
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/dynamic/types/scope_types.hpp"
-#include "dogen/yarn/types/type.hpp"
 #include "dogen/yarn/types/model.hpp"
 
 namespace dogen {

@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen/yarn/io/type_io.hpp"
+#include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 
 namespace dogen {
@@ -32,7 +32,7 @@ primitive::primitive(
     const dogen::yarn::generation_types generation_type,
     const dogen::yarn::origin_types origin_type,
     const boost::optional<dogen::yarn::name>& containing_module)
-    : dogen::yarn::type(
+    : dogen::yarn::element(
       documentation,
       extensions,
       name,
@@ -44,23 +44,23 @@ void primitive::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::primitive\"" << ", "
       << "\"__parent_0__\": ";
-    type::to_stream(s);
+    element::to_stream(s);
     s << " }";
 }
 
 void primitive::swap(primitive& other) noexcept {
-    type::swap(other);
+    element::swap(other);
 
 }
 
-bool primitive::equals(const dogen::yarn::type& other) const {
+bool primitive::equals(const dogen::yarn::element& other) const {
     const primitive* const p(dynamic_cast<const primitive* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool primitive::operator==(const primitive& rhs) const {
-    return type::compare(rhs);
+    return element::compare(rhs);
 }
 
 primitive& primitive::operator=(primitive other) {

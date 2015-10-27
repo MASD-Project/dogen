@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/yarn/test_data/name_td.hpp"
-#include "dogen/yarn/test_data/type_td.hpp"
 #include "dogen/yarn/test_data/object_td.hpp"
+#include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/property_td.hpp"
 #include "dogen/yarn/test_data/object_types_td.hpp"
 #include "dogen/yarn/test_data/relationship_types_td.hpp"
@@ -92,7 +92,7 @@ object_generator::object_generator() : position_(0) { }
 
 void object_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::yarn::type_generator::populate(position, v);
+    dogen::yarn::element_generator::populate(position, v);
     v.all_properties(create_std_list_dogen_yarn_property(position + 0));
     v.local_properties(create_std_list_dogen_yarn_property(position + 1));
     v.inherited_properties(create_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_property_(position + 2));

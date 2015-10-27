@@ -19,63 +19,15 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/module_io.hpp"
-#include "dogen/dynamic/io/object_io.hpp"
-#include "dogen/yarn/io/origin_types_io.hpp"
-#include "dogen/yarn/io/generation_types_io.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::name>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::name>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
+#include "dogen/yarn/io/element_io.hpp"
 
 namespace dogen {
 namespace yarn {
 
 std::ostream& operator<<(std::ostream& s, const module& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::module\"" << ", "
-      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"extensions\": " << v.extensions() << ", "
-      << "\"name\": " << v.name() << ", "
-      << "\"generation_type\": " << v.generation_type() << ", "
-      << "\"origin_type\": " << v.origin_type() << ", "
-      << "\"containing_module\": " << v.containing_module() << ", "
-      << "\"members\": " << v.members()
-      << " }";
+    v.to_stream(s);
     return(s);
 }
 

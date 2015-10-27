@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/type_hash.hpp"
+#include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/yarn/hash/primitive_hash.hpp"
 
 namespace {
@@ -37,7 +37,7 @@ namespace yarn {
 std::size_t primitive_hasher::hash(const primitive& v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::yarn::type&>(v));
+    combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
     return seed;
 }
 

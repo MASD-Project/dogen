@@ -27,11 +27,11 @@
 
 #include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/node_td.hpp"
-#include "dogen/yarn/test_data/type_td.hpp"
 #include "dogen/yarn/test_data/model_td.hpp"
 #include "dogen/yarn/test_data/module_td.hpp"
 #include "dogen/yarn/test_data/object_td.hpp"
 #include "dogen/yarn/test_data/concept_td.hpp"
+#include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/location_td.hpp"
 #include "dogen/yarn/test_data/property_td.hpp"
 #include "dogen/yarn/test_data/primitive_td.hpp"

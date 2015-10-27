@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/yarn/hash/name_hash.hpp"
-#include "dogen/yarn/hash/type_hash.hpp"
+#include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/yarn/hash/enumerator_hash.hpp"
 #include "dogen/yarn/hash/enumeration_hash.hpp"
 
@@ -47,7 +47,7 @@ namespace yarn {
 std::size_t enumeration_hasher::hash(const enumeration& v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::yarn::type&>(v));
+    combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
 
     combine(seed, v.underlying_type());
     combine(seed, hash_std_vector_dogen_yarn_enumerator(v.enumerators()));

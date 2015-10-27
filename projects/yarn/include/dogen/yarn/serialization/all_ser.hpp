@@ -27,11 +27,11 @@
 
 #include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/yarn/serialization/node_ser.hpp"
-#include "dogen/yarn/serialization/type_ser.hpp"
 #include "dogen/yarn/serialization/model_ser.hpp"
 #include "dogen/yarn/serialization/module_ser.hpp"
 #include "dogen/yarn/serialization/object_ser.hpp"
 #include "dogen/yarn/serialization/concept_ser.hpp"
+#include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/location_ser.hpp"
 #include "dogen/yarn/serialization/property_ser.hpp"
 #include "dogen/yarn/serialization/primitive_ser.hpp"

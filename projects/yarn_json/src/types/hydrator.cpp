@@ -202,17 +202,17 @@ read_element(const boost::property_tree::ptree& pt, yarn::model& m) const {
 
     const auto documentation(pt.get_optional<std::string>(documentation_key));
 
-    const auto lambda([&](yarn::type& t) {
-            BOOST_LOG_SEV(lg, debug) << "Processing type: " << n.qualified();
-            t.name(n);
-            t.origin_type(m.origin_type());
-            t.generation_type(m.generation_type());
+    const auto lambda([&](yarn::element& e) {
+            BOOST_LOG_SEV(lg, debug) << "Processing element: " << n.qualified();
+            e.name(n);
+            e.origin_type(m.origin_type());
+            e.generation_type(m.generation_type());
 
             if (documentation)
-                t.documentation(*documentation);
+                e.documentation(*documentation);
 
             const auto scope(dynamic::scope_types::entity);
-            t.extensions(create_dynamic_extensions(pt, scope));
+            e.extensions(create_dynamic_extensions(pt, scope));
         });
 
     const auto meta_type_value(pt.get<std::string>(meta_type_key));

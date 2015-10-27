@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/yarn/test_data/name_td.hpp"
-#include "dogen/yarn/test_data/type_td.hpp"
+#include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/enumerator_td.hpp"
 #include "dogen/yarn/test_data/enumeration_td.hpp"
 
@@ -52,7 +52,7 @@ enumeration_generator::enumeration_generator() : position_(0) { }
 
 void enumeration_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::yarn::type_generator::populate(position, v);
+    dogen::yarn::element_generator::populate(position, v);
     v.underlying_type(create_dogen_yarn_name(position + 0));
     v.enumerators(create_std_vector_dogen_yarn_enumerator(position + 1));
 }

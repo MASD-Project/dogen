@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/type_io.hpp"
+#include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/enumerator_io.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 
@@ -50,7 +50,7 @@ enumeration::enumeration(
     const boost::optional<dogen::yarn::name>& containing_module,
     const dogen::yarn::name& underlying_type,
     const std::vector<dogen::yarn::enumerator>& enumerators)
-    : dogen::yarn::type(
+    : dogen::yarn::element(
       documentation,
       extensions,
       name,
@@ -64,7 +64,7 @@ void enumeration::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::enumeration\"" << ", "
       << "\"__parent_0__\": ";
-    type::to_stream(s);
+    element::to_stream(s);
     s << ", "
       << "\"underlying_type\": " << underlying_type_ << ", "
       << "\"enumerators\": " << enumerators_
@@ -72,21 +72,21 @@ void enumeration::to_stream(std::ostream& s) const {
 }
 
 void enumeration::swap(enumeration& other) noexcept {
-    type::swap(other);
+    element::swap(other);
 
     using std::swap;
     swap(underlying_type_, other.underlying_type_);
     swap(enumerators_, other.enumerators_);
 }
 
-bool enumeration::equals(const dogen::yarn::type& other) const {
+bool enumeration::equals(const dogen::yarn::element& other) const {
     const enumeration* const p(dynamic_cast<const enumeration* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool enumeration::operator==(const enumeration& rhs) const {
-    return type::compare(rhs) &&
+    return element::compare(rhs) &&
         underlying_type_ == rhs.underlying_type_ &&
         enumerators_ == rhs.enumerators_;
 }

@@ -18,13 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
 #include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/concept_td.hpp"
+#include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/property_td.hpp"
-#include "dogen/dynamic/test_data/object_td.hpp"
-#include "dogen/yarn/test_data/origin_types_td.hpp"
-#include "dogen/yarn/test_data/generation_types_td.hpp"
 
 namespace {
 
@@ -54,34 +51,6 @@ std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> > create_
     return r;
 }
 
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
-}
-
-dogen::dynamic::object
-create_dogen_dynamic_object(const unsigned int position) {
-    return dogen::dynamic::object_generator::create(position);
-}
-
-dogen::yarn::generation_types
-create_dogen_yarn_generation_types(const unsigned int position) {
-    return dogen::yarn::generation_types_generator::create(position);
-}
-
-dogen::yarn::origin_types
-create_dogen_yarn_origin_types(const unsigned int position) {
-    return dogen::yarn::origin_types_generator::create(position);
-}
-
-boost::optional<dogen::yarn::name>
-create_boost_optional_dogen_yarn_name(unsigned int position) {
-    boost::optional<dogen::yarn::name> r(
-        create_dogen_yarn_name(position));
-    return r;
-}
-
 std::list<dogen::yarn::name> create_std_list_dogen_yarn_name(unsigned int position) {
     std::list<dogen::yarn::name> r;
     for (unsigned int i(0); i < 4; ++i) {
@@ -103,18 +72,13 @@ concept_generator::concept_generator() : position_(0) { }
 
 void concept_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::yarn::element_generator::populate(position, v);
     v.all_properties(create_std_list_dogen_yarn_property(position + 0));
     v.local_properties(create_std_list_dogen_yarn_property(position + 1));
     v.inherited_properties(create_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_property_(position + 2));
-    v.documentation(create_std_string(position + 3));
-    v.extensions(create_dogen_dynamic_object(position + 4));
-    v.name(create_dogen_yarn_name(position + 5));
-    v.generation_type(create_dogen_yarn_generation_types(position + 6));
-    v.origin_type(create_dogen_yarn_origin_types(position + 7));
-    v.containing_module(create_boost_optional_dogen_yarn_name(position + 8));
-    v.refines(create_std_list_dogen_yarn_name(position + 9));
-    v.is_parent(create_bool(position + 10));
-    v.is_child(create_bool(position + 11));
+    v.refines(create_std_list_dogen_yarn_name(position + 3));
+    v.is_parent(create_bool(position + 4));
+    v.is_child(create_bool(position + 5));
 }
 
 concept_generator::result_type

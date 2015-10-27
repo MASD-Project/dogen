@@ -27,7 +27,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/type_ser.hpp"
+#include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/primitive_ser.hpp"
 
 BOOST_CLASS_TRACKING(
@@ -41,14 +41,14 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::primitive& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("type", base_object<dogen::yarn::type>(v));
+    ar << make_nvp("element", base_object<dogen::yarn::element>(v));
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::primitive& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("type", base_object<dogen::yarn::type>(v));
+    ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
 }
 
 } }

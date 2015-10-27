@@ -18,22 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_IO_TYPE_IO_HPP
-#define DOGEN_YARN_IO_TYPE_IO_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_ELEMENT_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_ELEMENT_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/yarn/types/type.hpp"
+#include <boost/serialization/split_free.hpp>
+#include <boost/serialization/assume_abstract.hpp>
+#include "dogen/yarn/types/element.hpp"
 
-namespace dogen {
-namespace yarn {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::element)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(dogen::yarn::element)
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::yarn::type& v);
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::yarn::element& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::yarn::element& v, unsigned int version);
 
 } }
 

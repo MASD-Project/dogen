@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/yarn/hash/name_hash.hpp"
-#include "dogen/yarn/hash/type_hash.hpp"
 #include "dogen/yarn/hash/object_hash.hpp"
+#include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/yarn/hash/property_hash.hpp"
 #include "dogen/yarn/hash/object_types_hash.hpp"
 #include "dogen/yarn/hash/relationship_types_hash.hpp"
@@ -75,7 +75,7 @@ namespace yarn {
 std::size_t object_hasher::hash(const object& v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::yarn::type&>(v));
+    combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
 
     combine(seed, hash_std_list_dogen_yarn_property(v.all_properties()));
     combine(seed, hash_std_list_dogen_yarn_property(v.local_properties()));

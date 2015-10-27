@@ -18,83 +18,137 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
+#include <boost/io/ios_state.hpp>
+#include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/types/concept.hpp"
+#include "dogen/yarn/io/property_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::property>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::name>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace yarn {
 
 concept::concept()
-    : generation_type_(static_cast<dogen::yarn::generation_types>(0)),
-      origin_type_(static_cast<dogen::yarn::origin_types>(0)),
-      is_parent_(static_cast<bool>(0)),
+    : is_parent_(static_cast<bool>(0)),
       is_child_(static_cast<bool>(0)) { }
 
-concept::concept(concept&& rhs)
-    : all_properties_(std::move(rhs.all_properties_)),
-      local_properties_(std::move(rhs.local_properties_)),
-      inherited_properties_(std::move(rhs.inherited_properties_)),
-      documentation_(std::move(rhs.documentation_)),
-      extensions_(std::move(rhs.extensions_)),
-      name_(std::move(rhs.name_)),
-      generation_type_(std::move(rhs.generation_type_)),
-      origin_type_(std::move(rhs.origin_type_)),
-      containing_module_(std::move(rhs.containing_module_)),
-      refines_(std::move(rhs.refines_)),
-      is_parent_(std::move(rhs.is_parent_)),
-      is_child_(std::move(rhs.is_child_)) { }
-
 concept::concept(
-    const std::list<dogen::yarn::property>& all_properties,
-    const std::list<dogen::yarn::property>& local_properties,
-    const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> >& inherited_properties,
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const dogen::yarn::name& name,
     const dogen::yarn::generation_types generation_type,
     const dogen::yarn::origin_types origin_type,
     const boost::optional<dogen::yarn::name>& containing_module,
+    const std::list<dogen::yarn::property>& all_properties,
+    const std::list<dogen::yarn::property>& local_properties,
+    const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> >& inherited_properties,
     const std::list<dogen::yarn::name>& refines,
     const bool is_parent,
     const bool is_child)
-    : all_properties_(all_properties),
+    : dogen::yarn::element(
+      documentation,
+      extensions,
+      name,
+      generation_type,
+      origin_type,
+      containing_module),
+      all_properties_(all_properties),
       local_properties_(local_properties),
       inherited_properties_(inherited_properties),
-      documentation_(documentation),
-      extensions_(extensions),
-      name_(name),
-      generation_type_(generation_type),
-      origin_type_(origin_type),
-      containing_module_(containing_module),
       refines_(refines),
       is_parent_(is_parent),
       is_child_(is_child) { }
 
+void concept::to_stream(std::ostream& s) const {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::yarn::concept\"" << ", "
+      << "\"__parent_0__\": ";
+    element::to_stream(s);
+    s << ", "
+      << "\"all_properties\": " << all_properties_ << ", "
+      << "\"local_properties\": " << local_properties_ << ", "
+      << "\"inherited_properties\": " << inherited_properties_ << ", "
+      << "\"refines\": " << refines_ << ", "
+      << "\"is_parent\": " << is_parent_ << ", "
+      << "\"is_child\": " << is_child_
+      << " }";
+}
+
 void concept::swap(concept& other) noexcept {
+    element::swap(other);
+
     using std::swap;
     swap(all_properties_, other.all_properties_);
     swap(local_properties_, other.local_properties_);
     swap(inherited_properties_, other.inherited_properties_);
-    swap(documentation_, other.documentation_);
-    swap(extensions_, other.extensions_);
-    swap(name_, other.name_);
-    swap(generation_type_, other.generation_type_);
-    swap(origin_type_, other.origin_type_);
-    swap(containing_module_, other.containing_module_);
     swap(refines_, other.refines_);
     swap(is_parent_, other.is_parent_);
     swap(is_child_, other.is_child_);
 }
 
+bool concept::equals(const dogen::yarn::element& other) const {
+    const concept* const p(dynamic_cast<const concept* const>(&other));
+    if (!p) return false;
+    return *this == *p;
+}
+
 bool concept::operator==(const concept& rhs) const {
-    return all_properties_ == rhs.all_properties_ &&
+    return element::compare(rhs) &&
+        all_properties_ == rhs.all_properties_ &&
         local_properties_ == rhs.local_properties_ &&
         inherited_properties_ == rhs.inherited_properties_ &&
-        documentation_ == rhs.documentation_ &&
-        extensions_ == rhs.extensions_ &&
-        name_ == rhs.name_ &&
-        generation_type_ == rhs.generation_type_ &&
-        origin_type_ == rhs.origin_type_ &&
-        containing_module_ == rhs.containing_module_ &&
         refines_ == rhs.refines_ &&
         is_parent_ == rhs.is_parent_ &&
         is_child_ == rhs.is_child_;
@@ -152,86 +206,6 @@ void concept::inherited_properties(const std::unordered_map<dogen::yarn::name, s
 
 void concept::inherited_properties(const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> >&& v) {
     inherited_properties_ = std::move(v);
-}
-
-const std::string& concept::documentation() const {
-    return documentation_;
-}
-
-std::string& concept::documentation() {
-    return documentation_;
-}
-
-void concept::documentation(const std::string& v) {
-    documentation_ = v;
-}
-
-void concept::documentation(const std::string&& v) {
-    documentation_ = std::move(v);
-}
-
-const dogen::dynamic::object& concept::extensions() const {
-    return extensions_;
-}
-
-dogen::dynamic::object& concept::extensions() {
-    return extensions_;
-}
-
-void concept::extensions(const dogen::dynamic::object& v) {
-    extensions_ = v;
-}
-
-void concept::extensions(const dogen::dynamic::object&& v) {
-    extensions_ = std::move(v);
-}
-
-const dogen::yarn::name& concept::name() const {
-    return name_;
-}
-
-dogen::yarn::name& concept::name() {
-    return name_;
-}
-
-void concept::name(const dogen::yarn::name& v) {
-    name_ = v;
-}
-
-void concept::name(const dogen::yarn::name&& v) {
-    name_ = std::move(v);
-}
-
-dogen::yarn::generation_types concept::generation_type() const {
-    return generation_type_;
-}
-
-void concept::generation_type(const dogen::yarn::generation_types v) {
-    generation_type_ = v;
-}
-
-dogen::yarn::origin_types concept::origin_type() const {
-    return origin_type_;
-}
-
-void concept::origin_type(const dogen::yarn::origin_types v) {
-    origin_type_ = v;
-}
-
-const boost::optional<dogen::yarn::name>& concept::containing_module() const {
-    return containing_module_;
-}
-
-boost::optional<dogen::yarn::name>& concept::containing_module() {
-    return containing_module_;
-}
-
-void concept::containing_module(const boost::optional<dogen::yarn::name>& v) {
-    containing_module_ = v;
-}
-
-void concept::containing_module(const boost::optional<dogen::yarn::name>&& v) {
-    containing_module_ = std::move(v);
 }
 
 const std::list<dogen::yarn::name>& concept::refines() const {

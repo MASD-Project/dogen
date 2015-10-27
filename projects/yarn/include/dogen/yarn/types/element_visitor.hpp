@@ -18,14 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TYPE_VISITOR_HPP
-#define DOGEN_YARN_TYPES_TYPE_VISITOR_HPP
+#ifndef DOGEN_YARN_TYPES_ELEMENT_VISITOR_HPP
+#define DOGEN_YARN_TYPES_ELEMENT_VISITOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include "dogen/yarn/types/module_fwd.hpp"
 #include "dogen/yarn/types/object_fwd.hpp"
+#include "dogen/yarn/types/concept_fwd.hpp"
 #include "dogen/yarn/types/primitive_fwd.hpp"
 #include "dogen/yarn/types/enumeration_fwd.hpp"
 
@@ -33,13 +35,23 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Visitor for type
+ * @brief Visitor for element
  */
-class type_visitor {
+class element_visitor {
 public:
-    virtual ~type_visitor() noexcept = 0;
+    virtual ~element_visitor() noexcept = 0;
 
 public:
+    /**
+     * @brief Accept visits for type dogen::yarn::concept
+     */
+    /**@{*/
+    virtual void visit(const dogen::yarn::concept&) const { }
+    virtual void visit(const dogen::yarn::concept&) { }
+    virtual void visit(dogen::yarn::concept&) const { }
+    virtual void visit(dogen::yarn::concept&) { }
+    /**@}*/
+
     /**
      * @brief Accept visits for type dogen::yarn::enumeration
      */
@@ -48,6 +60,16 @@ public:
     virtual void visit(const dogen::yarn::enumeration&) { }
     virtual void visit(dogen::yarn::enumeration&) const { }
     virtual void visit(dogen::yarn::enumeration&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::yarn::module
+     */
+    /**@{*/
+    virtual void visit(const dogen::yarn::module&) const { }
+    virtual void visit(const dogen::yarn::module&) { }
+    virtual void visit(dogen::yarn::module&) const { }
+    virtual void visit(dogen::yarn::module&) { }
     /**@}*/
 
     /**
@@ -71,7 +93,7 @@ public:
     /**@}*/
 };
 
-inline type_visitor::~type_visitor() noexcept { }
+inline element_visitor::~element_visitor() noexcept { }
 
 } }
 

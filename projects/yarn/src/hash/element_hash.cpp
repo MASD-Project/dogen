@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/yarn/hash/name_hash.hpp"
-#include "dogen/yarn/hash/type_hash.hpp"
+#include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/dynamic/hash/object_hash.hpp"
 #include "dogen/yarn/hash/origin_types_hash.hpp"
 #include "dogen/yarn/hash/generation_types_hash.hpp"
@@ -47,7 +47,7 @@ inline std::size_t hash_boost_optional_dogen_yarn_name(const boost::optional<dog
 namespace dogen {
 namespace yarn {
 
-std::size_t type_hasher::hash(const type& v) {
+std::size_t element_hasher::hash(const element& v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());

@@ -29,7 +29,7 @@
 #include <vector>
 #include <algorithm>
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/type.hpp"
+#include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/enumerator.hpp"
 #include "dogen/yarn/serialization/enumeration_fwd_ser.hpp"
 
@@ -39,7 +39,7 @@ namespace yarn {
 /**
  * @brief Defines a bounded set of logically related values for a primitive type or a string.
  */
-class enumeration final : public dogen::yarn::type {
+class enumeration final : public dogen::yarn::element {
 public:
     enumeration() = default;
     enumeration(const enumeration&) = default;
@@ -66,19 +66,19 @@ private:
     friend void boost::serialization::load(Archive& ar, enumeration& v, unsigned int version);
 
 public:
-    virtual void accept(const type_visitor& v) const override {
+    virtual void accept(const element_visitor& v) const override {
         v.visit(*this);
     }
 
-    virtual void accept(type_visitor& v) const override {
+    virtual void accept(element_visitor& v) const override {
         v.visit(*this);
     }
 
-    virtual void accept(const type_visitor& v) override {
+    virtual void accept(const element_visitor& v) override {
         v.visit(*this);
     }
 
-    virtual void accept(type_visitor& v) override {
+    virtual void accept(element_visitor& v) override {
         v.visit(*this);
     }
 
@@ -113,7 +113,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::yarn::type& other) const override;
+    bool equals(const dogen::yarn::element& other) const override;
 
 public:
     void swap(enumeration& other) noexcept;

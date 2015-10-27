@@ -20,8 +20,10 @@
  */
 #include <sstream>
 #include "dogen/yarn/test_data/name_td.hpp"
-#include "dogen/yarn/test_data/type_td.hpp"
+#include "dogen/yarn/test_data/module_td.hpp"
 #include "dogen/yarn/test_data/object_td.hpp"
+#include "dogen/yarn/test_data/concept_td.hpp"
+#include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/dynamic/test_data/object_td.hpp"
 #include "dogen/yarn/test_data/primitive_td.hpp"
 #include "dogen/yarn/test_data/enumeration_td.hpp"
@@ -68,7 +70,7 @@ create_boost_optional_dogen_yarn_name(unsigned int position) {
 namespace dogen {
 namespace yarn {
 
-void type_generator::
+void element_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.extensions(create_dogen_dynamic_object(position + 1));
@@ -78,13 +80,17 @@ populate(const unsigned int position, result_type& v) {
     v.containing_module(create_boost_optional_dogen_yarn_name(position + 5));
 }
 
-type_generator::result_type*
-type_generator::create_ptr(const unsigned int position) {
-    if ((position % 2) == 0)
+element_generator::result_type*
+element_generator::create_ptr(const unsigned int position) {
+    if ((position % 4) == 0)
+        return dogen::yarn::enumeration_generator::create_ptr(position);
+    if ((position % 4) == 1)
+        return dogen::yarn::module_generator::create_ptr(position);
+    if ((position % 4) == 2)
         return dogen::yarn::object_generator::create_ptr(position);
-    if ((position % 2) == 1)
+    if ((position % 4) == 3)
         return dogen::yarn::primitive_generator::create_ptr(position);
-    return dogen::yarn::enumeration_generator::create_ptr(position);
+    return dogen::yarn::concept_generator::create_ptr(position);
 }
 
 } }

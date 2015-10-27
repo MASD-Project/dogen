@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/type_io.hpp"
 #include "dogen/yarn/io/object_io.hpp"
+#include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/property_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
 #include "dogen/yarn/io/relationship_types_io.hpp"

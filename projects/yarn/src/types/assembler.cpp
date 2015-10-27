@@ -41,8 +41,8 @@ auto lg(logger_factory("yarn.assembler"));
 namespace dogen {
 namespace yarn {
 
-bool assembler::is_generatable(const type& t) const {
-    const auto gt(t.generation_type());
+bool assembler::is_generatable(const element& e) const {
+    const auto gt(e.generation_type());
     return
         gt == generation_types::full_generation ||
         gt == generation_types::partial_generation;

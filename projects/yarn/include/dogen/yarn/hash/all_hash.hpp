@@ -27,11 +27,11 @@
 
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/hash/node_hash.hpp"
-#include "dogen/yarn/hash/type_hash.hpp"
 #include "dogen/yarn/hash/model_hash.hpp"
 #include "dogen/yarn/hash/module_hash.hpp"
 #include "dogen/yarn/hash/object_hash.hpp"
 #include "dogen/yarn/hash/concept_hash.hpp"
+#include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/yarn/hash/location_hash.hpp"
 #include "dogen/yarn/hash/property_hash.hpp"
 #include "dogen/yarn/hash/primitive_hash.hpp"

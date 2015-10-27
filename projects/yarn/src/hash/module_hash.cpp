@@ -20,9 +20,7 @@
  */
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/hash/module_hash.hpp"
-#include "dogen/dynamic/hash/object_hash.hpp"
-#include "dogen/yarn/hash/origin_types_hash.hpp"
-#include "dogen/yarn/hash/generation_types_hash.hpp"
+#include "dogen/yarn/hash/element_hash.hpp"
 
 namespace {
 
@@ -30,16 +28,6 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_boost_optional_dogen_yarn_name(const boost::optional<dogen::yarn::name>& v) {
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
 }
 
 inline std::size_t hash_std_list_dogen_yarn_name(const std::list<dogen::yarn::name>& v) {
@@ -58,14 +46,9 @@ namespace yarn {
 std::size_t module_hasher::hash(const module& v) {
     std::size_t seed(0);
 
-    combine(seed, v.documentation());
-    combine(seed, v.extensions());
-    combine(seed, v.name());
-    combine(seed, v.generation_type());
-    combine(seed, v.origin_type());
-    combine(seed, hash_boost_optional_dogen_yarn_name(v.containing_module()));
-    combine(seed, hash_std_list_dogen_yarn_name(v.members()));
+    combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
 
+    combine(seed, hash_std_list_dogen_yarn_name(v.members()));
     return seed;
 }
 

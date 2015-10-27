@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TEST_DATA_TYPE_TD_HPP
-#define DOGEN_YARN_TEST_DATA_TYPE_TD_HPP
+#ifndef DOGEN_YARN_TEST_DATA_ELEMENT_TD_HPP
+#define DOGEN_YARN_TEST_DATA_ELEMENT_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/type.hpp"
+#include "dogen/yarn/types/element.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class type_generator {
+class element_generator {
 public:
-    type_generator();
+    element_generator();
 
 public:
-    typedef dogen::yarn::type result_type;
+    typedef dogen::yarn::element result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

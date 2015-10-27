@@ -26,7 +26,9 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/yarn/serialization/module_ser.hpp"
 #include "dogen/yarn/serialization/object_ser.hpp"
+#include "dogen/yarn/serialization/concept_ser.hpp"
 #include "dogen/yarn/serialization/primitive_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/dynamic/serialization/registrar_ser.hpp"
@@ -38,7 +40,9 @@ template<typename Archive>
 void register_types(Archive& ar) {
     dogen::dynamic::register_types(ar);
 
+    ar.template register_type<dogen::yarn::concept>();
     ar.template register_type<dogen::yarn::enumeration>();
+    ar.template register_type<dogen::yarn::module>();
     ar.template register_type<dogen::yarn::object>();
     ar.template register_type<dogen::yarn::primitive>();
 }

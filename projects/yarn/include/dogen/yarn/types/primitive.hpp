@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include <algorithm>
-#include "dogen/yarn/types/type.hpp"
+#include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/serialization/primitive_fwd_ser.hpp"
 
 namespace dogen {
@@ -36,7 +36,7 @@ namespace yarn {
 /**
  * @brief Represents a value type that is built-in to the language.
  */
-class primitive final : public dogen::yarn::type {
+class primitive final : public dogen::yarn::element {
 public:
     primitive() = default;
     primitive(const primitive&) = default;
@@ -61,19 +61,19 @@ private:
     friend void boost::serialization::load(Archive& ar, primitive& v, unsigned int version);
 
 public:
-    virtual void accept(const type_visitor& v) const override {
+    virtual void accept(const element_visitor& v) const override {
         v.visit(*this);
     }
 
-    virtual void accept(type_visitor& v) const override {
+    virtual void accept(element_visitor& v) const override {
         v.visit(*this);
     }
 
-    virtual void accept(const type_visitor& v) override {
+    virtual void accept(const element_visitor& v) override {
         v.visit(*this);
     }
 
-    virtual void accept(type_visitor& v) override {
+    virtual void accept(element_visitor& v) override {
         v.visit(*this);
     }
 
@@ -87,7 +87,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::yarn::type& other) const override;
+    bool equals(const dogen::yarn::element& other) const override;
 
 public:
     void swap(primitive& other) noexcept;

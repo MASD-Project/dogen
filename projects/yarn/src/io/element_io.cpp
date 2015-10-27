@@ -18,18 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TYPE_FWD_HPP
-#define DOGEN_YARN_TYPES_TYPE_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/io/element_io.hpp"
+#include "dogen/dynamic/io/object_io.hpp"
+#include "dogen/yarn/io/origin_types_io.hpp"
+#include "dogen/yarn/io/generation_types_io.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class type;
+std::ostream& operator<<(std::ostream& s, const element& v) {
+    v.to_stream(s);
+    return(s);
+}
 
 } }
-
-#endif

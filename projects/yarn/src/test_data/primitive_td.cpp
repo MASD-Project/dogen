@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/test_data/type_td.hpp"
+#include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/primitive_td.hpp"
 
 namespace dogen {
@@ -28,7 +28,7 @@ primitive_generator::primitive_generator() : position_(0) { }
 
 void primitive_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::yarn::type_generator::populate(position, v);
+    dogen::yarn::element_generator::populate(position, v);
 }
 
 primitive_generator::result_type

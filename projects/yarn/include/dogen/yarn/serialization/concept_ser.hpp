@@ -26,7 +26,18 @@
 #endif
 
 #include <boost/serialization/split_free.hpp>
+#include <boost/type_traits/is_virtual_base_of.hpp>
 #include "dogen/yarn/types/concept.hpp"
+
+namespace boost {
+
+template<>struct
+is_virtual_base_of<
+    dogen::yarn::element,
+    dogen::yarn::concept
+> : public mpl::true_ {};
+
+}
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::concept)
 namespace boost {

@@ -25,7 +25,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/type_visitor.hpp"
 #include "dogen/yarn/types/injection_error.hpp"
 #include "dogen/yarn/types/injector.hpp"
 

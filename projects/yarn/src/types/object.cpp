@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/type_io.hpp"
 #include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/property_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
 #include "dogen/yarn/io/relationship_types_io.hpp"
@@ -123,7 +123,7 @@ object::object(
     const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& relationships,
     const dogen::yarn::object_types object_type,
     const bool is_final)
-    : dogen::yarn::type(
+    : dogen::yarn::element(
       documentation,
       extensions,
       name,
@@ -153,7 +153,7 @@ void object::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::object\"" << ", "
       << "\"__parent_0__\": ";
-    type::to_stream(s);
+    element::to_stream(s);
     s << ", "
       << "\"all_properties\": " << all_properties_ << ", "
       << "\"local_properties\": " << local_properties_ << ", "
@@ -171,7 +171,7 @@ void object::to_stream(std::ostream& s) const {
 }
 
 void object::swap(object& other) noexcept {
-    type::swap(other);
+    element::swap(other);
 
     using std::swap;
     swap(all_properties_, other.all_properties_);
@@ -188,14 +188,14 @@ void object::swap(object& other) noexcept {
     swap(is_final_, other.is_final_);
 }
 
-bool object::equals(const dogen::yarn::type& other) const {
+bool object::equals(const dogen::yarn::element& other) const {
     const object* const p(dynamic_cast<const object* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool object::operator==(const object& rhs) const {
-    return type::compare(rhs) &&
+    return element::compare(rhs) &&
         all_properties_ == rhs.all_properties_ &&
         local_properties_ == rhs.local_properties_ &&
         inherited_properties_ == rhs.inherited_properties_ &&

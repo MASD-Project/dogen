@@ -26,7 +26,6 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
-#include "dogen/yarn/types/type_visitor.hpp"
 #include "dogen/yarn/types/resolution_error.hpp"
 #include "dogen/yarn/io/nested_name_io.hpp"
 #include "dogen/yarn/io/property_io.hpp"
