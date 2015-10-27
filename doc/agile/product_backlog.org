@@ -3778,6 +3778,13 @@ provide a solution:
 
 - [[http://stackoverflow.com/questions/11796121/implementing-the-visitor-pattern-using-c-templates][Implementing the visitor pattern using C++ Templates]]
 
+One simpler but hacky way of solving this problem is perhaps to have
+"model specific" visitors in each model, and have them extend the base
+visitor. Clients can then decide which visitor to use. This does mean
+that if two models are extending the base visitor, you will need to
+visit twice, but at least for the most common case (one model
+extending another) it provides a workable solution.
+
 *** Modeling of visitors in =cpp= can be improved                     :story:
 
 In the =cpp= model we are assuming that if the original parent was
