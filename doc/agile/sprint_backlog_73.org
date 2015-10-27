@@ -100,6 +100,7 @@ etc). It can remain as a nameable.
 - remove type - we don't really seem to use it
 
 *** STARTED Split "full" models from "partial" models                 :story:
+    CLOCK: [2015-10-27 Tue 19:09]--[2015-10-27 Tue 19:22] =>  0:13
     CLOCK: [2015-10-27 Tue 18:33]--[2015-10-27 Tue 19:00] =>  0:27
 
 It would be nice to have a model that is outputted from the SML
