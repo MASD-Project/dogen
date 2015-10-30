@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_FILE_IMPORTER_INTERFACE_HPP
-#define DOGEN_YARN_TYPES_FILE_IMPORTER_INTERFACE_HPP
+#ifndef DOGEN_YARN_TYPES_FRONTEND_INTERFACE_HPP
+#define DOGEN_YARN_TYPES_FRONTEND_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,32 +35,32 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Imports a model from a file.
+ * @brief Reads a model from an input descriptor.
  */
-class file_importer_interface {
+class frontend_interface {
 public:
-    file_importer_interface() = default;
-    file_importer_interface(const file_importer_interface&) = delete;
-    file_importer_interface(file_importer_interface&&) = default;
-    virtual ~file_importer_interface() noexcept = 0;
+    frontend_interface() = default;
+    frontend_interface(const frontend_interface&) = delete;
+    frontend_interface(frontend_interface&&) = default;
+    virtual ~frontend_interface() noexcept = 0;
 
 public:
     /**
-     * @brief Unique identifier for the importer, for logging
+     * @brief Unique identifier for the frontend, used for logging
      * purposes.
      */
     virtual std::string id() const = 0;
 
     /**
-     * @brief List of extensions supported by this importer.
+     * @brief List of extensions supported by this frontend.
      */
     virtual std::list<std::string> supported_extensions() const = 0;
 
     /**
-     * @brief Reads a file pointed to by the input descriptor and
+     * @brief Reads the contents of the input descriptor and
      * transforms it into a model.
      */
-    virtual model import(const dynamic::workflow& w,
+    virtual model execute(const dynamic::workflow& w,
         const input_descriptor& d) = 0;
 };
 

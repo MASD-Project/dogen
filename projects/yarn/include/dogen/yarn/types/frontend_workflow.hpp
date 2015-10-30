@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_IMPORTER_HPP
-#define DOGEN_YARN_TYPES_IMPORTER_HPP
+#ifndef DOGEN_YARN_TYPES_FRONTEND_WORKFLOW_HPP
+#define DOGEN_YARN_TYPES_FRONTEND_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,52 +30,57 @@
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
-#include "dogen/yarn/types/file_importer_registrar.hpp"
-#include "dogen/yarn/types/file_importer_interface.hpp"
+#include "dogen/yarn/types/frontend_registrar.hpp"
+#include "dogen/yarn/types/frontend_interface.hpp"
 #include "dogen/yarn/types/input_descriptor.hpp"
 
 namespace dogen {
 namespace yarn {
 
 /**
- * @brief Manages the entire importing workflow.
+ * @brief Manages the entire frontend workflow.
  */
-class importer {
+class frontend_workflow {
 public:
-    explicit importer(const dynamic::repository& rp);
+    explicit frontend_workflow(const dynamic::repository& rp);
 
 public:
     /**
      * @brief Returns the registrar. If it has not yet been
      * initialised, initialises it.
      */
-    static file_importer_registrar& registrar();
+    static frontend_registrar& registrar();
 
 private:
     /**
-     * @brief Given an input descriptor, creates the associated model.
+     * @brief Given an input descriptor, obtains the associated model.
      */
-    model import_model(const input_descriptor& d) const;
+    model obtain_model(const input_descriptor& d) const;
 
 public:
     /**
      * @brief Process all of the inputs into models, using the
-     * appropriate file importers.
+     * appropriate frontends.
+     *
+     * @pre All supplied descriptors must be supported by the
+     * registered frontends.
      */
-    std::list<model>
-    import(const std::list<input_descriptor>& descriptors);
+    std::list<model> execute(const std::list<input_descriptor>& descriptors);
 
 private:
-    static std::shared_ptr<file_importer_registrar> registrar_;
-    const dynamic::repository& repository_;
+    static std::shared_ptr<frontend_registrar> registrar_;
     const dynamic::workflow dynamic_workflow_;
 };
 
-template<typename FileImporter>
-inline void register_file_importer() {
-    auto s(std::make_shared<FileImporter>());
-    for (const auto& se : s->supported_extensions())
-        importer::registrar().register_file_importer_for_extension(se, s);
+/*
+ * Helper method to register the frontend.
+ */
+template<typename Frontend>
+inline void register_frontend() {
+    auto s(std::make_shared<Frontend>());
+    auto& rg(frontend_workflow::registrar());
+    for (const auto& e : s->supported_extensions())
+        rg.register_frontend_against_extension(e, s);
 }
 
 } }

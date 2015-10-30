@@ -20,45 +20,37 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dia/types/hydrator.hpp"
-#include "dogen/dia/types/persister.hpp"
-#include "dogen/yarn_dia/types/workflow.hpp"
-#include "dogen/yarn_dia/types/file_importer.hpp"
+#include "dogen/yarn_json/types/hydrator.hpp"
+#include "dogen/yarn_json/types/frontend.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-const std::string id("yarn_dia.file_importer");
-const std::list<std::string> extensions({ ".dia" });
+const std::string id("yarn_json.frontend");
+const std::list<std::string> extensions({ ".json" });
 auto lg(logger_factory(id));
 const std::string empty;
 
 }
 
 namespace dogen {
-namespace yarn_dia {
+namespace yarn_json {
 
-file_importer::~file_importer() noexcept { }
+frontend::~frontend() noexcept { }
 
-std::string file_importer::id() const {
+std::string frontend::id() const {
     return ::id;
 }
 
-std::list<std::string> file_importer::supported_extensions() const {
+std::list<std::string> frontend::supported_extensions() const {
     return ::extensions;
 }
 
-yarn::model file_importer::import(const dynamic::workflow& w,
+yarn::model frontend::execute(const dynamic::workflow& w,
     const yarn::input_descriptor& d) {
-    BOOST_LOG_SEV(lg, debug) << "Importing Dia diagram. ";
-
-    dia::hydrator h(d.path());
-    dia::diagram diagram(h.hydrate());
-
-    dogen::yarn_dia::workflow wf(w);
-    const std::string name(d.path().stem().string());
-    return wf.execute(diagram, name, d.external_module_path(), d.is_target());
+    yarn_json::hydrator h(w);
+    return h.hydrate(d.path());
 }
 
 } }

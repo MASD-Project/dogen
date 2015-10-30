@@ -12,19 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-10-27 Tue 23:30]
+#+CAPTION: Clock summary at [2015-10-30 Fri 17:22]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *4:18* |      |      |
+| *Total time*                                                                | *6:17* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 4:18   |      |      |
-| Active                                                                      |        | 4:18 |      |
+| Stories                                                                     | 6:17   |      |      |
+| Active                                                                      |        | 6:17 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:41 |
 | STARTED Implement expander workflows                                        |        |      | 0:48 |
 | STARTED Rename nested qname to composite qname                              |        |      | 0:33 |
 | STARTED Model should not be an element                                      |        |      | 0:18 |
-| STARTED Split "full" models from "partial" models                           |        |      | 1:58 |
+| STARTED Split "full" models from "partial" models                           |        |      | 3:57 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -99,6 +99,7 @@ etc). It can remain as a nameable.
 - keep the concepts; they are still telling the truth.
 
 *** STARTED Split "full" models from "partial" models                 :story:
+    CLOCK: [2015-10-30 Fri 14:01]--[2015-10-30 Fri 16:00] =>  1:59
     CLOCK: [2015-10-27 Tue 22:43]--[2015-10-27 Tue 23:30] =>  0:47
     CLOCK: [2015-10-27 Tue 22:11]--[2015-10-27 Tue 22:42] =>  0:31
     CLOCK: [2015-10-27 Tue 19:09]--[2015-10-27 Tue 19:22] =>  0:13

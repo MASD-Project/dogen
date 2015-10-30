@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/importer.hpp"
-#include "dogen/yarn_dia/types/file_importer.hpp"
+#include "dogen/yarn/types/frontend_workflow.hpp"
+#include "dogen/yarn_dia/types/frontend.hpp"
 #include "dogen/yarn_dia/types/initializer.hpp"
 
 namespace dogen {
 namespace yarn_dia {
 
 void initializer::initialize() {
-    yarn::register_file_importer<file_importer>();
+    yarn::register_frontend<frontend>();
 }
 
 } }

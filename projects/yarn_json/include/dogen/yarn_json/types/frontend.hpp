@@ -18,17 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_IMPORTER_FWD_HPP
-#define DOGEN_YARN_TYPES_IMPORTER_FWD_HPP
+#ifndef DOGEN_YARN_JSON_TYPES_FRONTEND_HPP
+#define DOGEN_YARN_JSON_TYPES_FRONTEND_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace yarn {
+#include "dogen/yarn/types/frontend_interface.hpp"
 
-class importer;
+namespace dogen {
+namespace yarn_json {
+
+/**
+ * @brief Generates a yarn model from a JSON file with a yarn format.
+ */
+class frontend final : public yarn::frontend_interface {
+public:
+    virtual ~frontend() noexcept;
+
+public:
+    std::string id() const override;
+    std::list<std::string> supported_extensions() const override;
+    yarn::model execute(const dynamic::workflow& w,
+        const yarn::input_descriptor& d) override;
+};
 
 } }
 

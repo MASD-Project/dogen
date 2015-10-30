@@ -18,39 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn_json/types/hydrator.hpp"
-#include "dogen/yarn_json/types/file_importer.hpp"
+#ifndef DOGEN_YARN_DIA_TYPES_FRONTEND_HPP
+#define DOGEN_YARN_DIA_TYPES_FRONTEND_HPP
 
-using namespace dogen::utility::log;
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-namespace {
-
-const std::string id("yarn_json.file_importer");
-const std::list<std::string> extensions({ ".json" });
-auto lg(logger_factory(id));
-const std::string empty;
-
-}
+#include "dogen/yarn/types/frontend_interface.hpp"
 
 namespace dogen {
-namespace yarn_json {
+namespace yarn_dia {
 
-file_importer::~file_importer() noexcept { }
+/**
+ * @brief Frontend wrapper for the dia to yarn workflow.
+ */
+class frontend final : public yarn::frontend_interface {
+public:
+    virtual ~frontend() noexcept;
 
-std::string file_importer::id() const {
-    return ::id;
-}
-
-std::list<std::string> file_importer::supported_extensions() const {
-    return ::extensions;
-}
-
-yarn::model file_importer::import(const dynamic::workflow& w,
-    const yarn::input_descriptor& d) {
-    yarn_json::hydrator h(w);
-    return h.hydrate(d.path());
-}
+public:
+    std::string id() const override;
+    std::list<std::string> supported_extensions() const override;
+    yarn::model execute(const dynamic::workflow& w,
+        const yarn::input_descriptor& d) override;
+};
 
 } }
+
+#endif

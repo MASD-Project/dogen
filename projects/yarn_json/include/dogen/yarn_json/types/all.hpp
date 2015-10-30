@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
+#include "dogen/yarn_json/types/frontend.hpp"
 #include "dogen/yarn_json/types/hydrator.hpp"
 #include "dogen/yarn_json/types/yarn_json.hpp"
 #include "dogen/yarn_json/types/initializer.hpp"
-#include "dogen/yarn_json/types/file_importer.hpp"
 #include "dogen/yarn_json/types/hydration_error.hpp"
 
 #endif

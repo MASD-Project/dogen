@@ -25,7 +25,7 @@
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/yarn/types/persister.hpp"
 #include "dogen/yarn/types/assembler.hpp"
-#include "dogen/yarn/types/importer.hpp"
+#include "dogen/yarn/types/frontend_workflow.hpp"
 #include "dogen/yarn/io/model_io.hpp"
 #include "dogen/backend/types/workflow.hpp"
 #include "dogen/knit/types/frontend_to_middle_end_workflow.hpp"
@@ -102,8 +102,8 @@ frontend_to_middle_end_workflow::obtain_input_descriptors_activity() const {
 std::list<yarn::model> frontend_to_middle_end_workflow::
 import_yarn_models_activity(
     const std::list<yarn::input_descriptor>& descriptors) const {
-    yarn::importer imp(repository_);
-    return imp.import(descriptors);
+    yarn::frontend_workflow w(repository_);
+    return w.execute(descriptors);
 }
 
 boost::filesystem::path frontend_to_middle_end_workflow::

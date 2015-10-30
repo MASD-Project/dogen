@@ -18,11 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/file_importer_interface.hpp"
+#ifndef DOGEN_YARN_JSON_TYPES_FRONTEND_FWD_HPP
+#define DOGEN_YARN_JSON_TYPES_FRONTEND_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
-namespace yarn {
+namespace yarn_json {
 
-file_importer_interface::~file_importer_interface() noexcept { }
+class frontend;
 
 } }
+
+#endif

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_FILE_IMPORTER_REGISTRAR_HPP
-#define DOGEN_YARN_TYPES_FILE_IMPORTER_REGISTRAR_HPP
+#ifndef DOGEN_YARN_TYPES_FRONTEND_REGISTRAR_HPP
+#define DOGEN_YARN_TYPES_FRONTEND_REGISTRAR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,24 +28,23 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
-#include "dogen/yarn/types/file_importer_interface.hpp"
+#include "dogen/yarn/types/frontend_interface.hpp"
 
 namespace dogen {
 namespace yarn {
 
 /**
- * @brief Keeps track of all the available file importers.
+ * @brief Keeps track of all the available frontends.
  */
-class file_importer_registrar {
+class frontend_registrar {
 public:
     /**
-     * @brief Returns all available file importers for each extension.
+     * @brief Returns all available frontends for each extension.
      *
      * Only used for debug purposes.
      */
-    const std::unordered_map<std::string,
-                             std::shared_ptr<file_importer_interface>>&
-        file_importers_by_extension() const;
+    const std::unordered_map<std::string, std::shared_ptr<frontend_interface>>&
+    frontends_by_extension() const;
 
 public:
     /**
@@ -54,27 +53,24 @@ public:
     void validate() const;
 
     /*
-     * @brief Registers a given file importer against a file
-     * extension.
+     * @brief Registers a given frontend against a file extension.
      *
      * @pre Extension is not yet registered.
      */
-    void register_file_importer_for_extension(const std::string& extension,
-        std::shared_ptr<file_importer_interface> fi);
+    void register_frontend_against_extension(const std::string& extension,
+        std::shared_ptr<frontend_interface> fi);
 
     /**
-     * @brief Returns the file importer that handles the supplied
+     * @brief Returns the frontend that handles the supplied
      * extension.
      *
-     * @pre A file importer must have been registered for this
-     * extension.
+     * @pre A frontend must have been registered for this extension.
      */
-    file_importer_interface&
-    file_importer_for_extension(const std::string& extension);
+    frontend_interface& frontend_for_extension(const std::string& extension);
 
 private:
-    std::unordered_map<std::string, std::shared_ptr<file_importer_interface>>
-    file_importers_by_extension_;
+    std::unordered_map<std::string, std::shared_ptr<frontend_interface>>
+    frontends_by_extension_;
 };
 
 } }

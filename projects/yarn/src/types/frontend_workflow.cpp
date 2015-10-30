@@ -25,61 +25,59 @@
 #include "dogen/yarn/types/persister.hpp"
 #include "dogen/yarn/io/model_io.hpp"
 #include "dogen/yarn/io/input_descriptor_io.hpp"
-#include "dogen/yarn/types/importer.hpp"
+#include "dogen/yarn/types/frontend_workflow.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.importer"));
+static logger lg(logger_factory("yarn.frontend_workflow"));
 
 }
 
 namespace dogen {
 namespace yarn {
 
-std::shared_ptr<file_importer_registrar> importer::registrar_;
+std::shared_ptr<frontend_registrar> frontend_workflow::registrar_;
 
-importer::importer(const dynamic::repository& rp)
-    : repository_(rp), dynamic_workflow_(repository_) {
+frontend_workflow::frontend_workflow(const dynamic::repository& rp)
+    : dynamic_workflow_(rp) {
 
-    BOOST_LOG_SEV(lg, debug) << "Initialising importer. ";
+    BOOST_LOG_SEV(lg, debug) << "Initialising.";
     registrar().validate();
     BOOST_LOG_SEV(lg, debug) << "Found "
-                             << registrar().file_importers_by_extension().size()
-                             << " registered file importers: ";
+                             << registrar().frontends_by_extension().size()
+                             << " registered frontends. Details: ";
 
-    for (const auto& pair : registrar().file_importers_by_extension()) {
-        BOOST_LOG_SEV(lg, debug) << "extension: '" << pair.first << "'"
-                                 << " file importer: '" << pair.second->id()
-                                 << "'";
+    for (const auto& pair : registrar().frontends_by_extension()) {
+        BOOST_LOG_SEV(lg, debug) << "extension: '" << pair.first << "' "
+                                 << "id: '" << pair.second->id() << "'";
     }
-
-    BOOST_LOG_SEV(lg, debug) << "Finished initialising importer. ";
+    BOOST_LOG_SEV(lg, debug) << "Finished initialising. ";
 }
 
-file_importer_registrar& importer::registrar() {
+frontend_registrar& frontend_workflow::registrar() {
     if (!registrar_)
-        registrar_ = std::make_shared<file_importer_registrar>();
+        registrar_ = std::make_shared<frontend_registrar>();
 
     return *registrar_;
 }
 
-model importer::import_model(const input_descriptor& d) const {
+model frontend_workflow::obtain_model(const input_descriptor& d) const {
     const auto extension(d.path().extension().string());
-    auto& fi(registrar().file_importer_for_extension(extension));
-    return fi.import(dynamic_workflow_, d);
+    auto& f(registrar().frontend_for_extension(extension));
+    return f.execute(dynamic_workflow_, d);
 }
 
 std::list<model>
-importer::import(const std::list<input_descriptor>& descriptors) {
-    BOOST_LOG_SEV(lg, debug) << "Started executing importer. "
+frontend_workflow::execute(const std::list<input_descriptor>& descriptors) {
+    BOOST_LOG_SEV(lg, debug) << "Started executing. "
                              << "Descriptors: " << descriptors;
 
     std::list<model> r;
     for (const auto& d : descriptors)
-        r.push_back(import_model(d));
+        r.push_back(obtain_model(d));
 
-    BOOST_LOG_SEV(lg, debug) << "Finished executing importer.";
+    BOOST_LOG_SEV(lg, debug) << "Finished executing.";
     return r;
 }
 

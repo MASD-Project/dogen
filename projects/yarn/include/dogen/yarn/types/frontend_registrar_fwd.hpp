@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_FILE_IMPORTER_FWD_HPP
-#define DOGEN_YARN_DIA_TYPES_FILE_IMPORTER_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_FRONTEND_REGISTRAR_FWD_HPP
+#define DOGEN_YARN_TYPES_FRONTEND_REGISTRAR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 namespace dogen {
-namespace yarn_dia {
+namespace yarn {
 
-class file_importer;
+class frontend_registrar;
 
 } }
 

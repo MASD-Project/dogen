@@ -7487,19 +7487,19 @@ manageable format.#</dia:string>
         <dia:point val="-37,94"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-37.05,93.95;-30.695,97.05"/>
+        <dia:rectangle val="-37.05,93.95;-32.215,97.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-37,94"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.2549999999999999"/>
+        <dia:real val="4.7350000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#file_importer#</dia:string>
+        <dia:string>#frontend#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
