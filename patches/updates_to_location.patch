@@ -1,0 +1,1448 @@
+diff --git a/diagrams/tack.dia b/diagrams/tack.dia
+index e404ea0..25c7c5b 100644
+--- a/diagrams/tack.dia
++++ b/diagrams/tack.dia
+@@ -217,7 +217,7 @@ Must only contain characters that can be used for identifiers in the target back
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#unparsed_type#</dia:string>
++            <dia:string>#raw_type#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+             <dia:string>#std::string#</dia:string>
+@@ -9943,22 +9943,22 @@ etc.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O87">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-80,-15"/>
++        <dia:point val="-85,-15"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-80.05,-15.05;-63.28,-8.35"/>
++        <dia:rectangle val="-85.05,-15.05;-60.965,-10.55"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-80,-15"/>
++        <dia:point val="-85,-15"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="16.669999999999998"/>
++        <dia:real val="23.984999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="6.6000000000000005"/>
++        <dia:real val="4.4000000000000004"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+-        <dia:string>#name_builder#</dia:string>
++        <dia:string>#name_factory#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="stereotype">
+         <dia:string>#service#</dia:string>
+@@ -10044,35 +10044,11 @@ etc.#</dia:string>
+       <dia:attribute name="comment_font_height">
+         <dia:real val="0.69999999999999996"/>
+       </dia:attribute>
+-      <dia:attribute name="attributes">
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#name_#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#name#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="1"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-      </dia:attribute>
++      <dia:attribute name="attributes"/>
+       <dia:attribute name="operations">
+         <dia:composite type="umloperation">
+           <dia:attribute name="name">
+-            <dia:string>#add_model_name#</dia:string>
++            <dia:string>#make_model_name#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="stereotype">
+             <dia:string>##</dia:string>
+@@ -10101,58 +10077,10 @@ etc.#</dia:string>
+           <dia:attribute name="parameters">
+             <dia:composite type="umlparameter">
+               <dia:attribute name="name">
+-                <dia:string>#omn#</dia:string>
++                <dia:string>#raw_model_name#</dia:string>
+               </dia:attribute>
+               <dia:attribute name="type">
+-                <dia:string>#std::string#</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="value">
+-                <dia:string>##</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="comment">
+-                <dia:string>##</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="kind">
+-                <dia:enum val="0"/>
+-              </dia:attribute>
+-            </dia:composite>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umloperation">
+-          <dia:attribute name="name">
+-            <dia:string>#add_extenal_module_path#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="stereotype">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="inheritance_type">
+-            <dia:enum val="2"/>
+-          </dia:attribute>
+-          <dia:attribute name="query">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="parameters">
+-            <dia:composite type="umlparameter">
+-              <dia:attribute name="name">
+-                <dia:string>#epp#</dia:string>
+-              </dia:attribute>
+-              <dia:attribute name="type">
+-                <dia:string>#std::string#</dia:string>
++                <dia:string>#const std::string&amp;#</dia:string>
+               </dia:attribute>
+               <dia:attribute name="value">
+                 <dia:string>##</dia:string>
+@@ -10164,43 +10092,12 @@ etc.#</dia:string>
+                 <dia:enum val="0"/>
+               </dia:attribute>
+             </dia:composite>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umloperation">
+-          <dia:attribute name="name">
+-            <dia:string>#add_internal_module_path#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="stereotype">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="inheritance_type">
+-            <dia:enum val="2"/>
+-          </dia:attribute>
+-          <dia:attribute name="query">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="parameters">
+             <dia:composite type="umlparameter">
+               <dia:attribute name="name">
+-                <dia:string>#imp#</dia:string>
++                <dia:string>#raw_external_module_path#</dia:string>
+               </dia:attribute>
+               <dia:attribute name="type">
+-                <dia:string>#std::string#</dia:string>
++                <dia:string>#const std::string&amp;#</dia:string>
+               </dia:attribute>
+               <dia:attribute name="value">
+                 <dia:string>##</dia:string>
+@@ -10214,36 +10111,6 @@ etc.#</dia:string>
+             </dia:composite>
+           </dia:attribute>
+         </dia:composite>
+-        <dia:composite type="umloperation">
+-          <dia:attribute name="name">
+-            <dia:string>#build#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="stereotype">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#name#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="inheritance_type">
+-            <dia:enum val="2"/>
+-          </dia:attribute>
+-          <dia:attribute name="query">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="parameters"/>
+-        </dia:composite>
+       </dia:attribute>
+       <dia:attribute name="template">
+         <dia:boolean val="false"/>
+@@ -10288,17 +10155,17 @@ etc.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-71.665,-15.0435"/>
++        <dia:point val="-73.0075,-15.0501"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-72.415,-19.75;-52.8,-14.2"/>
++        <dia:rectangle val="-73.7575,-19.75;-52.8,-14.2"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="-71.665,-15.0435"/>
+-        <dia:point val="-71.665,-19"/>
++        <dia:point val="-73.0075,-15.0501"/>
++        <dia:point val="-73.0075,-19"/>
+         <dia:point val="-53,-19"/>
+         <dia:point val="-53,-15"/>
+       </dia:attribute>
+@@ -10317,7 +10184,7 @@ etc.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O87" connection="18"/>
++        <dia:connection handle="0" to="O87" connection="10"/>
+         <dia:connection handle="1" to="O54" connection="0"/>
+       </dia:connections>
+     </dia:object>
+@@ -14161,7 +14028,7 @@ from inputs and generates Tack types off of them.#</dia:string>
+       <dia:attribute name="attributes">
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#original_model_name#</dia:string>
++            <dia:string>#raw_model_name#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+             <dia:string>#std::string#</dia:string>
+@@ -14170,7 +14037,8 @@ from inputs and generates Tack types off of them.#</dia:string>
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="comment">
+-            <dia:string>#Original name of the model to which the modeling element belongs to.#</dia:string>
++            <dia:string>#Name of the model to which the modeling element belongs to, without any
++parsing - as it appeared originally.#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+diff --git a/diagrams/tack_dia.dia b/diagrams/tack_dia.dia
+index a56b5eb..23e5140 100644
+--- a/diagrams/tack_dia.dia
++++ b/diagrams/tack_dia.dia
+@@ -940,7 +940,7 @@ into its Tack representation.#</dia:string>
+         <dia:point val="114,-9"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="113.95,-9.05;144.965,-2.95"/>
++        <dia:rectangle val="113.95,-9.05;144.965,-3.75"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="114,-9"/>
+@@ -949,7 +949,7 @@ into its Tack representation.#</dia:string>
+         <dia:real val="30.914999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="6"/>
++        <dia:real val="5.2000000000000011"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+         <dia:string>#context#</dia:string>
+@@ -1110,29 +1110,6 @@ into its Tack representation.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#top_level_module_names#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#std::unordered_set&lt;std::string&gt;#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#All modules that sit just below the model.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+             <dia:string>#model#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+@@ -1450,7 +1427,7 @@ into its Tack representation.#</dia:string>
+         <dia:point val="109.22,8"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="108.47,-3.05;129.658,8.8"/>
++        <dia:rectangle val="108.47,-3.85;129.657,8.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -1459,7 +1436,7 @@ into its Tack representation.#</dia:string>
+         <dia:point val="109.22,8"/>
+         <dia:point val="109.22,2"/>
+         <dia:point val="129.458,2"/>
+-        <dia:point val="129.458,-3"/>
++        <dia:point val="129.458,-3.8"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -2737,7 +2714,7 @@ that make up dogen instructions.#</dia:string>
+         <dia:point val="-14.0075,8"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-14.7575,-14.75;129.658,8.8"/>
++        <dia:rectangle val="-14.7575,-14.75;129.657,8.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+diff --git a/doc/agile/sprint_backlog_72.org b/doc/agile/sprint_backlog_72.org
+index acb4c3c..11b29bd 100644
+--- a/doc/agile/sprint_backlog_72.org
++++ b/doc/agile/sprint_backlog_72.org
+@@ -140,6 +140,7 @@ to do with computing the correct name. We need to start using the
+ builder here.
+ 
+ *** STARTED Tack refactor around partial model construction           :story:
++    CLOCK: [2015-08-19 Wed 15:38]
+     CLOCK: [2015-08-19 Wed 14:51]--[2015-08-19 Wed 15:37] =>  0:46
+     CLOCK: [2015-08-19 Wed 14:23]--[2015-08-19 Wed 14:50] =>  0:27
+     CLOCK: [2015-08-18 Tue 16:55]--[2015-08-18 Tue 17:41] =>  0:46
+diff --git a/projects/tack/include/dogen/tack/types/all.hpp b/projects/tack/include/dogen/tack/types/all.hpp
+index 82a48fc..cec1a33 100644
+--- a/projects/tack/include/dogen/tack/types/all.hpp
++++ b/projects/tack/include/dogen/tack/types/all.hpp
+@@ -46,7 +46,7 @@
+ #include "dogen/tack/types/enumerator.hpp"
+ #include "dogen/tack/types/enumeration.hpp"
+ #include "dogen/tack/types/nested_name.hpp"
+-#include "dogen/tack/types/name_builder.hpp"
++#include "dogen/tack/types/name_factory.hpp"
+ #include "dogen/tack/types/object_types.hpp"
+ #include "dogen/tack/types/origin_types.hpp"
+ #include "dogen/tack/types/type_visitor.hpp"
+diff --git a/projects/tack/include/dogen/tack/types/expander.hpp b/projects/tack/include/dogen/tack/types/expander.hpp
+index 0274434..57b9b30 100644
+--- a/projects/tack/include/dogen/tack/types/expander.hpp
++++ b/projects/tack/include/dogen/tack/types/expander.hpp
+@@ -32,8 +32,8 @@ namespace tack {
+ 
+ class expander {
+ private:
+-    void expand_properties(model& m) const;
+     void expand_modules(model& m) const;
++    void expand_properties(model& m) const;
+     void expand_references(model& m) const;
+ 
+ public:
+diff --git a/projects/tack/include/dogen/tack/types/name_builder.hpp b/projects/tack/include/dogen/tack/types/name_builder.hpp
+deleted file mode 100644
+index 4699509..0000000
+--- a/projects/tack/include/dogen/tack/types/name_builder.hpp
++++ /dev/null
+@@ -1,60 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_TACK_TYPES_NAME_BUILDER_HPP
+-#define DOGEN_TACK_TYPES_NAME_BUILDER_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <string>
+-#include "dogen/tack/types/name.hpp"
+-
+-namespace dogen {
+-namespace tack {
+-
+-/**
+- * @brief Builds a standard qualified name representation.
+- */
+-class name_builder {
+-public:
+-    explicit name_builder(const bool building_model_name);
+-
+-private:
+-    void create_qualified_name();
+-
+-public:
+-    void add_model_name(const std::string& mn);
+-    void add_type_name(const std::string& tn);
+-    void add_external_module_path(const std::string& epp);
+-    void add_internal_module_path(const std::string& ipp);
+-
+-public:
+-    name build();
+-
+-private:
+-    const bool building_model_name_;
+-    name name_;
+-};
+-
+-} }
+-
+-#endif
+diff --git a/projects/tack/include/dogen/tack/types/name_builder_fwd.hpp b/projects/tack/include/dogen/tack/types/name_builder_fwd.hpp
+deleted file mode 100644
+index 136b91f..0000000
+--- a/projects/tack/include/dogen/tack/types/name_builder_fwd.hpp
++++ /dev/null
+@@ -1,35 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_TACK_TYPES_NAME_BUILDER_FWD_HPP
+-#define DOGEN_TACK_TYPES_NAME_BUILDER_FWD_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-namespace dogen {
+-namespace tack {
+-
+-class name_builder;
+-
+-} }
+-
+-#endif
+diff --git a/projects/tack/include/dogen/tack/types/name_factory.hpp b/projects/tack/include/dogen/tack/types/name_factory.hpp
+new file mode 100644
+index 0000000..703cc79
+--- /dev/null
++++ b/projects/tack/include/dogen/tack/types/name_factory.hpp
+@@ -0,0 +1,70 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_TACK_TYPES_NAME_BUILDER_HPP
++#define DOGEN_TACK_TYPES_NAME_BUILDER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <string>
++#include "dogen/tack/types/location.hpp"
++#include "dogen/tack/types/name.hpp"
++
++namespace dogen {
++namespace tack {
++
++/**
++ * @brief Builds a standard qualified name representation.
++ */
++class name_builder {
++private:
++    void populate_qualified_name(const bool add_simple_name,
++        name& destination) const;
++    void parse_model_name(const bool building_model_name,
++        const std::string& model_name, name& destination) const;
++    void add_type_name(const std::string& tn, name& n) const;
++    void add_external_module_path(const std::string& epp, name& n) const;
++    // void add_internal_module_path(const std::string& ipp);
++
++    // void add_model_location(const location& l);
++    // void add_module_name(const name& n);
++
++public:
++    /*
++     * @brief Given a string with a model name, possibly using a
++     * separator, and a string with an external module path, also
++     * possibly using a separator; parses both strings and generates a
++     * combined name.
++     */
++    name build_model_name(const std::string& model_name,
++        const std::string& external_module_path) const;
++
++    /*
++     * @brief Builds a type name, located at the top-level.
++     */
++    name build_type_name(const std::string& type_name,
++        const name& model_name) const;
++};
++
++} }
++
++#endif
+diff --git a/projects/tack/include/dogen/tack/types/name_factory_fwd.hpp b/projects/tack/include/dogen/tack/types/name_factory_fwd.hpp
+new file mode 100644
+index 0000000..37857c0
+--- /dev/null
++++ b/projects/tack/include/dogen/tack/types/name_factory_fwd.hpp
+@@ -0,0 +1,35 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_TACK_TYPES_NAME_FACTORY_FWD_HPP
++#define DOGEN_TACK_TYPES_NAME_FACTORY_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace tack {
++
++class name_factory;
++
++} }
++
++#endif
+diff --git a/projects/tack/src/types/expander.cpp b/projects/tack/src/types/expander.cpp
+index e060567..d8bbc4e 100644
+--- a/projects/tack/src/types/expander.cpp
++++ b/projects/tack/src/types/expander.cpp
+@@ -26,13 +26,13 @@
+ namespace dogen {
+ namespace tack {
+ 
+-void expander::expand_properties(model& m) const {
+-    properties_expander e;
++void expander::expand_modules(model& m) const {
++    modules_expander e;
+     e.expand(m);
+ }
+ 
+-void expander::expand_modules(model& m) const {
+-    modules_expander e;
++void expander::expand_properties(model& m) const {
++    properties_expander e;
+     e.expand(m);
+ }
+ 
+@@ -42,8 +42,8 @@ void expander::expand_references(model& m) const {
+ }
+ 
+ void expander::expand(model& m) const {
+-    expand_properties(m);
+     expand_modules(m);
++    expand_properties(m);
+     expand_references(m);
+ }
+ 
+diff --git a/projects/tack/src/types/modules_expander.cpp b/projects/tack/src/types/modules_expander.cpp
+index 82ef8e4..0049bed 100644
+--- a/projects/tack/src/types/modules_expander.cpp
++++ b/projects/tack/src/types/modules_expander.cpp
+@@ -46,11 +46,13 @@ containing_module(tack::model& m, const tack::name& n) {
+ 
+     // FIXME: use builder.
+     tack::name module_n;
+-    const auto omn(n.location().original_model_name());
+     module_n.location().original_model_name(n.location().original_model_name());
+-
++    module_n.location().external_module_path(
++        n.location().external_module_path());
+     if (n.location().internal_module_path().empty()) {
+         module_n.simple(n.location().original_model_name());
++        // FIXME hack
++        module_n.qualified()
+     } else {
+         module_n.simple(n.location().internal_module_path().back());
+         module_n.location().internal_module_path(
+@@ -59,8 +61,10 @@ containing_module(tack::model& m, const tack::name& n) {
+     }
+ 
+     const auto i(m.modules().find(module_n));
+-    if (i != m.modules().end())
++    if (i != m.modules().end()) {
++        i->second.members().push_back(n);
+         return module_n;
++    }
+ 
+     BOOST_LOG_SEV(lg, debug) << "Could not find containing module: "
+                              << module_n.qualified();
+diff --git a/projects/tack/src/types/name_builder.cpp b/projects/tack/src/types/name_builder.cpp
+deleted file mode 100644
+index 9c67f44..0000000
+--- a/projects/tack/src/types/name_builder.cpp
++++ /dev/null
+@@ -1,134 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include <sstream>
+-#include <boost/throw_exception.hpp>
+-#include "dogen/utility/log/logger.hpp"
+-#include "dogen/utility/string/splitter.hpp"
+-#include "dogen/tack/types/building_error.hpp"
+-#include "dogen/tack/types/name_builder.hpp"
+-
+-namespace {
+-
+-using namespace dogen::utility::log;
+-auto lg(logger_factory("tack.name_builder"));
+-
+-
+-const std::string dot(".");
+-const std::string start_component("<");
+-const std::string end_component(">");
+-const std::string empty_type_name("Type name is empty.");
+-const std::string empty_model_name("Model name is empty.");
+-const std::string unexpected_type_name(
+-    "Type name supplied when building model name: ");
+-const std::string empty_internal_module_path("Internal module path is empty.");
+-
+-inline void add_component_markers(std::ostream& s, const std::string& c) {
+-    if (c.empty())
+-        return;
+-
+-    s << start_component << c << end_component;
+-}
+-
+-}
+-
+-namespace dogen {
+-namespace tack {
+-
+-name_builder::name_builder(const bool building_model_name)
+-    : building_model_name_(building_model_name) { }
+-
+-void name_builder::create_qualified_name() {
+-    const auto& l(name_.location());
+-
+-    std::ostringstream s;
+-    for (const auto& m : l.external_module_path())
+-        add_component_markers(s, m);
+-
+-    for (const auto& m : l.model_module_path())
+-        add_component_markers(s, m);
+-
+-    if (!building_model_name_) {
+-        for (const auto& m : l.internal_module_path())
+-            add_component_markers(s, m);
+-
+-        add_component_markers(s, name_.simple());
+-    }
+-
+-    name_.qualified(s.str());
+-    BOOST_LOG_SEV(lg, debug) << "Created qualified name: " << name_.qualified();
+-}
+-
+-void name_builder::add_model_name(const std::string& mn) {
+-    if (mn.empty()) {
+-        BOOST_LOG_SEV(lg, error) << empty_model_name;
+-        BOOST_THROW_EXCEPTION(building_error(empty_model_name));
+-    }
+-
+-    name_.location().original_model_name(mn);
+-
+-    using utility::string::splitter;
+-    name_.location().model_module_path(splitter::split_scoped(mn, dot));
+-
+-    if (building_model_name_)
+-        name_.simple(*name_.location().model_module_path().rbegin());
+-
+-    BOOST_LOG_SEV(lg, debug) << "Added original model name: " << mn;
+-}
+-
+-void name_builder::add_type_name(const std::string& tn) {
+-    if (tn.empty()) {
+-        BOOST_LOG_SEV(lg, error) << empty_type_name;
+-        BOOST_THROW_EXCEPTION(building_error(empty_type_name));
+-    }
+-
+-    if (building_model_name_) {
+-        BOOST_LOG_SEV(lg, error) << unexpected_type_name + tn;
+-        BOOST_THROW_EXCEPTION(building_error(unexpected_type_name + tn));
+-    }
+-    name_.simple(tn);
+-
+-    BOOST_LOG_SEV(lg, debug) << "Added type name: " << tn;
+-}
+-
+-void name_builder::add_external_module_path(const std::string& epp) {
+-    if (epp.empty())
+-        return;
+-
+-    using utility::string::splitter;
+-    name_.location().external_module_path(splitter::split_scoped(epp));
+-}
+-
+-void name_builder::add_internal_module_path(const std::string& ipp) {
+-    if (ipp.empty()) {
+-        BOOST_LOG_SEV(lg, error) << empty_internal_module_path;
+-        BOOST_THROW_EXCEPTION(building_error(empty_internal_module_path));
+-    }
+-
+-    using utility::string::splitter;
+-    name_.location().external_module_path(splitter::split_scoped(ipp));
+-}
+-
+-name name_builder::build() {
+-    create_qualified_name();
+-    return name_;
+-}
+-
+-} }
+diff --git a/projects/tack/src/types/name_factory.cpp b/projects/tack/src/types/name_factory.cpp
+new file mode 100644
+index 0000000..517175b
+--- /dev/null
++++ b/projects/tack/src/types/name_factory.cpp
+@@ -0,0 +1,192 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <sstream>
++#include <boost/throw_exception.hpp>
++#include "dogen/utility/log/logger.hpp"
++#include "dogen/utility/string/splitter.hpp"
++#include "dogen/tack/types/building_error.hpp"
++#include "dogen/tack/types/name_builder.hpp"
++
++namespace {
++
++using namespace dogen::utility::log;
++auto lg(logger_factory("tack.name_builder"));
++
++
++const std::string dot(".");
++const std::string start_component("<");
++const std::string end_component(">");
++const std::string empty_type_name("Type name is empty.");
++const std::string empty_model_name("Model name is empty.");
++const std::string unexpected_type_name(
++    "Type name supplied when building model name: ");
++const std::string empty_internal_module_path("Internal module path is empty.");
++
++}
++
++namespace dogen {
++namespace tack {
++
++class name_builder {
++private:
++    void add_component_markers(std::ostream& s, const std::string& c) const;
++
++public:
++    void add_qualified_name(const bool with_simple_name_postfix = false);
++    void add_raw_model_name(const std::string& raw_model_name);
++    void add_raw_type_name(const std::string& tn);
++    void add_raw_external_module_path(const std::string& epp);
++
++public:
++    name build();
++
++private:
++    name name_;
++};
++
++void name_builder::
++add_component_markers(std::ostream& s, const std::string& c) const {
++    if (c.empty())
++        return;
++
++    s << start_component << c << end_component;
++}
++
++void name_builder::add_qualified_name(const bool with_simple_name_postfix) {
++    const auto& l(name_.location());
++
++    std::ostringstream s;
++    for (const auto& m : l.external_module_path())
++        add_component_markers(s, m);
++
++    for (const auto& m : l.model_module_path())
++        add_component_markers(s, m);
++
++    for (const auto& m : l.internal_module_path())
++        add_component_markers(s, m);
++
++    if (!with_simple_name_postfix) {
++        add_component_markers(s, name_.simple());
++    }
++
++    n.qualified(s.str());
++    BOOST_LOG_SEV(lg, debug) << "Created qualified name: " << n.qualified();
++}
++
++void name_builder::add_raw_model_name(const std::string& raw_model_name) {
++    if (raw_model_name.empty()) {
++        BOOST_LOG_SEV(lg, error) << empty_model_name;
++        BOOST_THROW_EXCEPTION(building_error(empty_model_name));
++    }
++
++    n.location().original_model_name(raw_model_name);
++
++    using utility::string::splitter;
++    n.location().model_module_path(splitter::split_scoped(mn, dot));
++
++    if (building_model_name)
++        n.simple(*n.location().model_module_path().rbegin());
++
++    BOOST_LOG_SEV(lg, debug) << "Added original model name: " << mn;
++
++}
++
++void name_builder::add_raw_type_name(const std::string& tn) {
++
++}
++
++void name_builder::add_raw_external_module_path(const std::string& epp) {
++
++}
++
++void name_builder::add_model_name(const bool building_model_name,
++    const std::string& mn, name& n) const {
++}
++
++void name_builder::add_type_name(const std::string& tn, name& n) const {
++    if (tn.empty()) {
++        BOOST_LOG_SEV(lg, error) << empty_type_name;
++        BOOST_THROW_EXCEPTION(building_error(empty_type_name));
++    }
++
++    n.simple(tn);
++    BOOST_LOG_SEV(lg, debug) << "Added type name: " << tn;
++}
++
++void name_builder::
++add_external_module_path(const std::string& epp, name& n) const {
++    if (epp.empty())
++        return;
++
++    using utility::string::splitter;
++    n.location().external_module_path(splitter::split_scoped(epp));
++}
++
++/*void name_builder::add_internal_module_path(const std::string& ipp, name& n) {
++    if (ipp.empty()) {
++        BOOST_LOG_SEV(lg, error) << empty_internal_module_path;
++        BOOST_THROW_EXCEPTION(building_error(empty_internal_module_path));
++    }
++
++    using utility::string::splitter;
++    name_.location().external_module_path(splitter::split_scoped(ipp));
++}
++
++void name_builder::add_model_location(const location& l) {
++    name_.location().original_model_name(l.original_model_name());
++    name_.location().external_module_path(l.external_module_path());
++}
++
++void name_builder::add_module_name(const name& n) {
++    const auto& l(n.location());
++    name_.location().original_model_name(l.original_model_name());
++    name_.location().external_module_path(l.external_module_path());
++
++    auto pp(l.internal_module_path());
++    pp.push_back(n.simple());
++    name_.location().internal_module_path(pp);
++}
++
++name name_builder::build() {
++    create_qualified_name();
++    return name_;
++}
++*/
++
++name name_builder::build_model_name(const std::string& model_name,
++    const std::string& external_module_path) const {
++    name r;
++    add_model_name(true/*building_model_name*/, model_name, r);
++    add_external_module_path(external_module_path, r);
++    add_qualified_name(true/*building_model_name*/, r);
++    return r;
++}
++
++name name_builder::build_type_name(const std::string& type_name,
++    const name& model_name) const {
++
++    name r;
++    add_type_name(type_name, r);
++
++    return r;
++}
++
++} }
+diff --git a/projects/tack_dia/include/dogen/tack_dia/types/context.hpp b/projects/tack_dia/include/dogen/tack_dia/types/context.hpp
+index f682827..dbfe6e3 100644
+--- a/projects/tack_dia/include/dogen/tack_dia/types/context.hpp
++++ b/projects/tack_dia/include/dogen/tack_dia/types/context.hpp
+@@ -52,7 +52,6 @@ public:
+         const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids,
+         const std::unordered_set<std::string>& parent_ids,
+         const std::unordered_map<std::string, dogen::tack::name>& id_to_name,
+-        const std::unordered_set<std::string>& top_level_module_names,
+         const dogen::tack::model& model);
+ 
+ private:
+@@ -94,16 +93,6 @@ public:
+     /**@}*/
+ 
+     /**
+-     * @brief All modules that sit just below the model.
+-     */
+-    /**@{*/
+-    const std::unordered_set<std::string>& top_level_module_names() const;
+-    std::unordered_set<std::string>& top_level_module_names();
+-    void top_level_module_names(const std::unordered_set<std::string>& v);
+-    void top_level_module_names(const std::unordered_set<std::string>&& v);
+-    /**@}*/
+-
+-    /**
+      * @brief Tack model we are currently building.
+      */
+     /**@{*/
+@@ -127,7 +116,6 @@ private:
+     std::unordered_map<std::string, std::list<std::string> > child_id_to_parent_ids_;
+     std::unordered_set<std::string> parent_ids_;
+     std::unordered_map<std::string, dogen::tack::name> id_to_name_;
+-    std::unordered_set<std::string> top_level_module_names_;
+     dogen::tack::model model_;
+ };
+ 
+diff --git a/projects/tack_dia/include/dogen/tack_dia/types/grapher.hpp b/projects/tack_dia/include/dogen/tack_dia/types/grapher.hpp
+index 3c49df6..74fd6d4 100644
+--- a/projects/tack_dia/include/dogen/tack_dia/types/grapher.hpp
++++ b/projects/tack_dia/include/dogen/tack_dia/types/grapher.hpp
+@@ -164,13 +164,6 @@ public:
+      */
+     const std::unordered_set<std::string>& parent_ids() const;
+ 
+-    /**
+-     * @brief Returns the list of top-level module names.
+-     *
+-     * @pre The graph must have already been generated.
+-     */
+-    const std::unordered_set<std::string>& top_level_module_names() const;
+-
+ private:
+     bool generated_;
+     graph_type graph_;
+diff --git a/projects/tack_dia/include/dogen/tack_dia/types/transformer.hpp b/projects/tack_dia/include/dogen/tack_dia/types/transformer.hpp
+index 285cefb..fc90e1b 100644
+--- a/projects/tack_dia/include/dogen/tack_dia/types/transformer.hpp
++++ b/projects/tack_dia/include/dogen/tack_dia/types/transformer.hpp
+@@ -32,7 +32,6 @@
+ #include "dogen/dynamic/types/scope_types.hpp"
+ #include "dogen/tack/types/nested_name.hpp"
+ #include "dogen/tack/types/object.hpp"
+-#include "dogen/tack/types/identifier_parser.hpp"
+ #include "dogen/tack_dia/types/processed_object.hpp"
+ #include "dogen/tack_dia/types/processed_property.hpp"
+ #include "dogen/tack_dia/types/context.hpp"
+@@ -61,12 +60,6 @@ public:
+ 
+ private:
+     /**
+-     * @brief Update the model references with those which are implied
+-     * by the given nested name.
+-     */
+-    void update_model_references(const tack::nested_name& nqn);
+-
+-    /**
+      * @brief Ensure that the processed object implies an TACK type
+      * which is supported by the transformer.
+      */
+@@ -99,14 +92,6 @@ private:
+         const tack::name& module_qn) const;
+ 
+     /**
+-     * @brief Creates a nested name from a string representation of a
+-     * qualified name.
+-     *
+-     * @pre n must not be empty.
+-     */
+-    tack::nested_name to_nested_name(const std::string& n) const;
+-
+-    /**
+      * @brief Converts processed property into an TACK property.
+      *
+      * @param p the Dia UML attribute in processed form.
+@@ -159,15 +144,15 @@ private:
+         if (!pkg_id.empty()) {
+             auto& module(module_for_id(pkg_id));
+             e.name(to_name(o.name(), module.name()));
+-            module.members().push_back(e.name());
+-            e.containing_module(module.name());
++            // module.members().push_back(e.name());
++            // e.containing_module(module.name());
+         } else {
+             // type belongs to the synthetic module for the model;
+             // do not add it to the name.
+             e.name(to_name(o.name()));
+-            auto& module(module_for_name(context_.model().name()));
+-            module.members().push_back(e.name());
+-            e.containing_module(module.name());
++            // auto& module(module_for_name(context_.model().name()));
++            // module.members().push_back(e.name());
++            // e.containing_module(module.name());
+         }
+ 
+         context_.id_to_name().insert(std::make_pair(o.id(), e.name()));
+@@ -275,7 +260,6 @@ public:
+ 
+ private:
+     context& context_;
+-    std::shared_ptr<tack::identifier_parser> identifier_parser_;
+     const dynamic::workflow& dynamic_workflow_;
+ };
+ 
+diff --git a/projects/tack_dia/spec/grapher_spec.cpp b/projects/tack_dia/spec/grapher_spec.cpp
+index 7e1e796..547ccef 100644
+--- a/projects/tack_dia/spec/grapher_spec.cpp
++++ b/projects/tack_dia/spec/grapher_spec.cpp
+@@ -182,7 +182,6 @@ BOOST_AUTO_TEST_CASE(querying_state_before_generating_throws) {
+     BOOST_CHECK_EXCEPTION(g.graph(), graphing_error, c);
+     BOOST_CHECK_EXCEPTION(g.child_id_to_parent_ids(), graphing_error, c);
+     BOOST_CHECK_EXCEPTION(g.parent_ids(), graphing_error, c);
+-    BOOST_CHECK_EXCEPTION(g.top_level_module_names(), graphing_error, c);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(generating_graph_with_first_degree_cycle_throws) {
+diff --git a/projects/tack_dia/src/hash/context_hash.cpp b/projects/tack_dia/src/hash/context_hash.cpp
+index 8cf8172..989cf04 100644
+--- a/projects/tack_dia/src/hash/context_hash.cpp
++++ b/projects/tack_dia/src/hash/context_hash.cpp
+@@ -75,7 +75,6 @@ std::size_t context_hasher::hash(const context& v) {
+     combine(seed, hash_std_unordered_map_std_string_std_list_std_string_(v.child_id_to_parent_ids()));
+     combine(seed, hash_std_unordered_set_std_string(v.parent_ids()));
+     combine(seed, hash_std_unordered_map_std_string_dogen_tack_name(v.id_to_name()));
+-    combine(seed, hash_std_unordered_set_std_string(v.top_level_module_names()));
+     combine(seed, v.model());
+ 
+     return seed;
+diff --git a/projects/tack_dia/src/io/context_io.cpp b/projects/tack_dia/src/io/context_io.cpp
+index 13e8377..5d54e09 100644
+--- a/projects/tack_dia/src/io/context_io.cpp
++++ b/projects/tack_dia/src/io/context_io.cpp
+@@ -104,7 +104,6 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
+       << "\"child_id_to_parent_ids\": " << v.child_id_to_parent_ids() << ", "
+       << "\"parent_ids\": " << v.parent_ids() << ", "
+       << "\"id_to_name\": " << v.id_to_name() << ", "
+-      << "\"top_level_module_names\": " << v.top_level_module_names() << ", "
+       << "\"model\": " << v.model()
+       << " }";
+     return(s);
+diff --git a/projects/tack_dia/src/serialization/context_ser.cpp b/projects/tack_dia/src/serialization/context_ser.cpp
+index 43f9da6..4d97039 100644
+--- a/projects/tack_dia/src/serialization/context_ser.cpp
++++ b/projects/tack_dia/src/serialization/context_ser.cpp
+@@ -45,7 +45,6 @@ void save(Archive& ar,
+     ar << make_nvp("child_id_to_parent_ids", v.child_id_to_parent_ids_);
+     ar << make_nvp("parent_ids", v.parent_ids_);
+     ar << make_nvp("id_to_name", v.id_to_name_);
+-    ar << make_nvp("top_level_module_names", v.top_level_module_names_);
+     ar << make_nvp("model", v.model_);
+ }
+ 
+@@ -56,7 +55,6 @@ void load(Archive& ar,
+     ar >> make_nvp("child_id_to_parent_ids", v.child_id_to_parent_ids_);
+     ar >> make_nvp("parent_ids", v.parent_ids_);
+     ar >> make_nvp("id_to_name", v.id_to_name_);
+-    ar >> make_nvp("top_level_module_names", v.top_level_module_names_);
+     ar >> make_nvp("model", v.model_);
+ }
+ 
+diff --git a/projects/tack_dia/src/test_data/context_td.cpp b/projects/tack_dia/src/test_data/context_td.cpp
+index 68482a9..fe06387 100644
+--- a/projects/tack_dia/src/test_data/context_td.cpp
++++ b/projects/tack_dia/src/test_data/context_td.cpp
+@@ -85,8 +85,7 @@ populate(const unsigned int position, result_type& v) {
+     v.child_id_to_parent_ids(create_std_unordered_map_std_string_std_list_std_string_(position + 0));
+     v.parent_ids(create_std_unordered_set_std_string(position + 1));
+     v.id_to_name(create_std_unordered_map_std_string_dogen_tack_name(position + 2));
+-    v.top_level_module_names(create_std_unordered_set_std_string(position + 3));
+-    v.model(create_dogen_tack_model(position + 4));
++    v.model(create_dogen_tack_model(position + 3));
+ }
+ 
+ context_generator::result_type
+diff --git a/projects/tack_dia/src/types/context.cpp b/projects/tack_dia/src/types/context.cpp
+index 5b84002..b5fbf2d 100644
+--- a/projects/tack_dia/src/types/context.cpp
++++ b/projects/tack_dia/src/types/context.cpp
+@@ -27,12 +27,10 @@ context::context(
+     const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids,
+     const std::unordered_set<std::string>& parent_ids,
+     const std::unordered_map<std::string, dogen::tack::name>& id_to_name,
+-    const std::unordered_set<std::string>& top_level_module_names,
+     const dogen::tack::model& model)
+     : child_id_to_parent_ids_(child_id_to_parent_ids),
+       parent_ids_(parent_ids),
+       id_to_name_(id_to_name),
+-      top_level_module_names_(top_level_module_names),
+       model_(model) { }
+ 
+ void context::swap(context& other) noexcept {
+@@ -40,7 +38,6 @@ void context::swap(context& other) noexcept {
+     swap(child_id_to_parent_ids_, other.child_id_to_parent_ids_);
+     swap(parent_ids_, other.parent_ids_);
+     swap(id_to_name_, other.id_to_name_);
+-    swap(top_level_module_names_, other.top_level_module_names_);
+     swap(model_, other.model_);
+ }
+ 
+@@ -48,7 +45,6 @@ bool context::operator==(const context& rhs) const {
+     return child_id_to_parent_ids_ == rhs.child_id_to_parent_ids_ &&
+         parent_ids_ == rhs.parent_ids_ &&
+         id_to_name_ == rhs.id_to_name_ &&
+-        top_level_module_names_ == rhs.top_level_module_names_ &&
+         model_ == rhs.model_;
+ }
+ 
+@@ -106,22 +102,6 @@ void context::id_to_name(const std::unordered_map<std::string, dogen::tack::name
+     id_to_name_ = std::move(v);
+ }
+ 
+-const std::unordered_set<std::string>& context::top_level_module_names() const {
+-    return top_level_module_names_;
+-}
+-
+-std::unordered_set<std::string>& context::top_level_module_names() {
+-    return top_level_module_names_;
+-}
+-
+-void context::top_level_module_names(const std::unordered_set<std::string>& v) {
+-    top_level_module_names_ = v;
+-}
+-
+-void context::top_level_module_names(const std::unordered_set<std::string>&& v) {
+-    top_level_module_names_ = std::move(v);
+-}
+-
+ const dogen::tack::model& context::model() const {
+     return model_;
+ }
+diff --git a/projects/tack_dia/src/types/grapher.cpp b/projects/tack_dia/src/types/grapher.cpp
+index defbfc3..6a629f5 100644
+--- a/projects/tack_dia/src/types/grapher.cpp
++++ b/projects/tack_dia/src/types/grapher.cpp
+@@ -210,10 +210,6 @@ void grapher::add(const processed_object& o) {
+         BOOST_THROW_EXCEPTION(graphing_error(irrelevant_object + o.id()));
+     }
+ 
+-    const bool is_package(o.object_type() == object_types::uml_large_package);
+-    if (is_package && o.child_node_id().empty())
+-        top_level_module_names_.insert(o.name());
+-
+     if (o.connection()) {
+         process_connections(o);
+         return;
+@@ -240,12 +236,6 @@ const std::unordered_set<std::string>& grapher::parent_ids() const {
+     return parent_ids_;
+ }
+ 
+-const std::unordered_set<std::string>& grapher::
+-top_level_module_names() const {
+-    require_generated();
+-    return top_level_module_names_;
+-}
+-
+ void grapher::generate() {
+     BOOST_LOG_SEV(lg, debug) << "Generating graph.";
+     require_not_generated();
+diff --git a/projects/tack_dia/src/types/transformer.cpp b/projects/tack_dia/src/types/transformer.cpp
+index 3bac464..5501435 100644
+--- a/projects/tack_dia/src/types/transformer.cpp
++++ b/projects/tack_dia/src/types/transformer.cpp
+@@ -28,6 +28,7 @@
+ #include "dogen/tack/types/object.hpp"
+ #include "dogen/dia/types/composite.hpp"
+ #include "dogen/dia/types/attribute.hpp"
++#include "dogen/tack/types/name_builder.hpp"
+ #include "dogen/tack_dia/types/traits.hpp"
+ #include "dogen/tack_dia/types/transformation_error.hpp"
+ #include "dogen/tack_dia/io/object_types_io.hpp"
+@@ -68,38 +69,11 @@ namespace dogen {
+ namespace tack_dia {
+ 
+ transformer::transformer(const dynamic::workflow& w, context& c)
+-    : context_(c),
+-      identifier_parser_(new tack::identifier_parser(c.top_level_module_names(),
+-              c.model().name().location())),
+-      dynamic_workflow_(w) {
++    : context_(c), dynamic_workflow_(w) {
+ 
+     BOOST_LOG_SEV(lg, debug) << "Initial context: " << context_;
+ }
+ 
+-void transformer::
+-update_model_references(const tack::nested_name& nn) {
+-    const auto omn(nn.type().location().original_model_name());
+-
+-    // FIXME: remove is_primitives_model handling
+-    const bool is_primitives_model(omn.empty());
+-    const auto& l(context_.model().name().location());
+-    const bool is_current_model(omn != l.original_model_name());
+-
+-    if (!is_primitives_model && is_current_model) {
+-        tack::name n;
+-        n.location().original_model_name(omn);
+-        const auto p(std::make_pair(n, tack::origin_types::unknown));
+-        context_.model().references().insert(p);
+-
+-        BOOST_LOG_SEV(lg, debug) << "Adding model dependency: "
+-                                 << omn << ". Current model: "
+-                                 << l.original_model_name();
+-    }
+-
+-    for (const auto c : nn.children())
+-        update_model_references(c);
+-}
+-
+ void transformer::require_is_transformable(const processed_object& po) const {
+     if (!is_transformable(po)) {
+         const auto type(boost::lexical_cast<std::string>(po.object_type()));
+@@ -170,15 +144,6 @@ tack::module& transformer::module_for_id(const std::string& id) {
+     return module_for_name(i->second);
+ }
+ 
+-tack::nested_name transformer::to_nested_name(const std::string& n) const {
+-    tack::nested_name r(identifier_parser_->parse_name(n));
+-    if (r.type().simple().empty()) {
+-        BOOST_LOG_SEV(lg, error) << invalid_type_string << n;
+-        BOOST_THROW_EXCEPTION(transformation_error(invalid_type_string + n));
+-    }
+-    return r;
+-}
+-
+ tack::property transformer::to_property(const processed_property& p) const {
+     if (p.name().empty()) {
+         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
+@@ -187,7 +152,6 @@ tack::property transformer::to_property(const processed_property& p) const {
+ 
+     tack::property r;
+     r.name(p.name());
+-    r.type(to_nested_name(p.type()));
+     r.unparsed_type(p.type());
+     r.documentation(p.comment().documentation());
+ 
+@@ -226,11 +190,8 @@ update_object(tack::object& ao, const processed_object& o, const profile& p) {
+         ao.relationships()[relationship_types::modeled_concepts].push_back(n);
+     }
+ 
+-    for (const auto& p : o.properties()) {
+-        const auto property(to_property(p));
+-        ao.local_properties().push_back(property);
+-        update_model_references(property.type());
+-    }
++    for (const auto& p : o.properties())
++        ao.local_properties().push_back(to_property(p));
+ 
+     const auto i(context_.child_id_to_parent_ids().find(o.id()));
+     if (i != context_.child_id_to_parent_ids().end()) {
+@@ -389,12 +350,8 @@ void transformer::to_concept(const processed_object& o, const profile& p) {
+     tack::concept c;
+     update_element(c, o, p);
+ 
+-    for (const auto& prop : o.properties()) {
+-        auto property(to_property(prop));
+-        property.type(to_nested_name(prop.type()));
+-        update_model_references(property.type());
+-        c.local_properties().push_back(property);
+-    }
++    for (const auto& prop : o.properties())
++        c.local_properties().push_back(to_property(prop));
+ 
+     const auto i(context_.child_id_to_parent_ids().find(o.id()));
+     c.is_child(i != context_.child_id_to_parent_ids().end());
+diff --git a/projects/tack_dia/src/types/workflow.cpp b/projects/tack_dia/src/types/workflow.cpp
+index f1cdde6..e7b5724 100644
+--- a/projects/tack_dia/src/types/workflow.cpp
++++ b/projects/tack_dia/src/types/workflow.cpp
+@@ -29,6 +29,7 @@
+ #include "dogen/tack_dia/types/visitor.hpp"
+ #include "dogen/tack_dia/types/transformer.hpp"
+ #include "dogen/tack_dia/types/object_processor.hpp"
++#include "dogen/tack/types/expander.hpp"
+ #include "dogen/tack_dia/types/workflow.hpp"
+ 
+ namespace {
+@@ -46,11 +47,8 @@ workflow::workflow(const dynamic::workflow& w) : dynamic_workflow_(w) { }
+ tack::name
+ workflow::create_name_for_model(const std::string& model_name,
+     const std::string& external_module_path) const {
+-
+-    tack::name_builder b(true/*building_model_name*/);
+-    b.add_model_name(model_name);
+-    b.add_external_module_path(external_module_path);
+-    return b.build();
++    tack::name_builder b;
++    return b.build_model_name(model_name, external_module_path);
+ }
+ 
+ tack::module workflow::create_module_for_model(const tack::name& n,
+@@ -96,7 +94,6 @@ graph_type workflow::generate_graph_activity(const dia::diagram& diagram) {
+     g.generate();
+     context_.child_id_to_parent_ids(g.child_id_to_parent_ids());
+     context_.parent_ids(g.parent_ids());
+-    context_.top_level_module_names(g.top_level_module_names());
+     return g.graph();
+ }
+ 
+@@ -127,8 +124,12 @@ tack::model workflow::execute(const dia::diagram& diagram,
+ 
+     initialise_context_activity(model_name, external_module_path, is_target);
+     graph_to_context_activity(generate_graph_activity(diagram));
++    BOOST_LOG_SEV(lg, debug) << "Model before expansion: " << context_.model();
+ 
++    tack::expander e;
++    e.expand(context_.model());
+     BOOST_LOG_SEV(lg, debug) << "Final model: " << context_.model();
++
+     return context_.model();
+ }
+ 
