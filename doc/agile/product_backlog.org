@@ -2681,6 +2681,19 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+*** Support for locations other than filesystems                      :story:
+
+It would be nice to be able to point to a yarn intermediate model
+anywhere, such as for example in github and generate it. For this we
+just need to detect the protocol in the path and if supported, read in
+the file; the frontend implementations should take in a stream rather
+than a file path. For cases such as LibXML, we may need to read up all
+of the data first and then create a stringstream for it.
+
+We should not implement this story unless we need it such as for
+example when we have a site/service. At that point it would be nice to
+allow users to just point to their models in github.
+
 *** Private and public includes                                       :story:
 
 #+begin_quote
