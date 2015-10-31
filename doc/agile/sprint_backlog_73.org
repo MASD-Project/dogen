@@ -12,19 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-10-31 Sat 17:46]
+#+CAPTION: Clock summary at [2015-10-31 Sat 18:35]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *10:09* |       |      |
+| *Total time*                                                                | *10:57* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 10:09   |       |      |
-| Active                                                                      |         | 10:09 |      |
+| Stories                                                                     | 10:57   |       |      |
+| Active                                                                      |         | 10:57 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:41 |
 | STARTED Implement expander workflows                                        |         |       | 0:48 |
 | STARTED Rename nested qname to composite qname                              |         |       | 0:33 |
 | STARTED Model should not be an element                                      |         |       | 0:18 |
-| STARTED Split "full" models from "partial" models                           |         |       | 7:49 |
+| STARTED Split "full" models from "partial" models                           |         |       | 8:37 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -99,6 +99,7 @@ etc). It can remain as a nameable.
 - keep the concepts; they are still telling the truth.
 
 *** STARTED Split "full" models from "partial" models                 :story:
+    CLOCK: [2015-10-31 Sat 17:47]--[2015-10-31 Sat 18:35] =>  0:48
     CLOCK: [2015-10-31 Sat 17:41]--[2015-10-31 Sat 17:46] =>  0:05
     CLOCK: [2015-10-31 Sat 17:15]--[2015-10-31 Sat 17:40] =>  0:25
     CLOCK: [2015-10-31 Sat 14:14]--[2015-10-31 Sat 16:15] =>  2:01

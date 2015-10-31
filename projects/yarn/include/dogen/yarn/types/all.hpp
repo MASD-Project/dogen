@@ -46,6 +46,7 @@
 #include "dogen/yarn/types/enumerator.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/nested_name.hpp"
+#include "dogen/yarn/types/transformer.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/object_types.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
@@ -74,6 +75,7 @@
 #include "dogen/yarn/types/nested_name_builder.hpp"
 #include "dogen/yarn/types/properties_expander.hpp"
 #include "dogen/yarn/types/references_expander.hpp"
+#include "dogen/yarn/types/transformation_error.hpp"
 #include "dogen/yarn/types/generalization_indexer.hpp"
 #include "dogen/yarn/types/all_model_items_traversal.hpp"
 
