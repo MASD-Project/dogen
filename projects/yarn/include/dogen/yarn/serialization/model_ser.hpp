@@ -18,31 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_IO_ALL_IO_HPP
-#define DOGEN_YARN_IO_ALL_IO_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_MODEL_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_MODEL_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/node_io.hpp"
-#include "dogen/yarn/io/model_io.hpp"
-#include "dogen/yarn/io/module_io.hpp"
-#include "dogen/yarn/io/object_io.hpp"
-#include "dogen/yarn/io/concept_io.hpp"
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/yarn/io/location_io.hpp"
-#include "dogen/yarn/io/property_io.hpp"
-#include "dogen/yarn/io/primitive_io.hpp"
-#include "dogen/yarn/io/enumerator_io.hpp"
-#include "dogen/yarn/io/enumeration_io.hpp"
-#include "dogen/yarn/io/nested_name_io.hpp"
-#include "dogen/yarn/io/object_types_io.hpp"
-#include "dogen/yarn/io/origin_types_io.hpp"
-#include "dogen/yarn/io/generation_types_io.hpp"
-#include "dogen/yarn/io/input_descriptor_io.hpp"
-#include "dogen/yarn/io/intermediate_model_io.hpp"
-#include "dogen/yarn/io/relationship_types_io.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/yarn/types/model.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::model)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::yarn::model& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::yarn::model& v, unsigned int version);
+
+} }
 
 #endif
