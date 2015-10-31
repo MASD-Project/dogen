@@ -436,7 +436,7 @@ bool transformer::is_transformable(const processed_object& o) const {
         ot == object_types::uml_note;
 }
 
-void  transformer::dispatch(const processed_object& o, const profile& p) {
+void transformer::dispatch(const processed_object& o, const profile& p) {
     if (p.is_uml_large_package())
         to_module(o, p);
     else if (p.is_uml_note())
