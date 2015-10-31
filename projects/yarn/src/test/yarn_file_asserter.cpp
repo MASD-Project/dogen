@@ -23,8 +23,8 @@
 #include "dogen/utility/serialization/xml_helper.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/exception/utility_exception.hpp"
-#include "dogen/yarn/io/model_io.hpp"
-#include "dogen/yarn/serialization/model_ser.hpp"
+#include "dogen/yarn/io/intermediate_model_io.hpp"
+#include "dogen/yarn/serialization/intermediate_model_ser.hpp"
 #include "dogen/yarn/test/yarn_file_asserter.hpp"
 
 namespace  {
@@ -46,9 +46,10 @@ bool yarn_file_asserter::is_assertable(boost::filesystem::path path) const {
     return (path.extension().string() == yarn_xml_extension);
 }
 
-yarn::model yarn_file_asserter::read_xml(boost::filesystem::path path) const {
+intermediate_model yarn_file_asserter::
+read_xml(boost::filesystem::path path) const {
     using utility::serialization::xml_deserialize;
-    return xml_deserialize<yarn::model>(path);
+    return xml_deserialize<intermediate_model>(path);
 }
 
 bool yarn_file_asserter::assert_file(boost::filesystem::path expected,

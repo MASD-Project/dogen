@@ -78,7 +78,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Location of the element within the model.
+     * @brief Location of the element within the element space.
      */
     /**@{*/
     const dogen::yarn::location& location() const;

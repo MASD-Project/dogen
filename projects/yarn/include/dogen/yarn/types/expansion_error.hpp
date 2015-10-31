@@ -32,7 +32,7 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief An error occurred whilst performing a model expansion.
+ * @brief An error occurred whilst performing an intermediate model expansion.
  */
 class expansion_error : public virtual std::exception, public virtual boost::exception {
 public:

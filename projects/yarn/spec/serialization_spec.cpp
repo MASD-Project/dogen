@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     roundtrip_type<module_generator>();
     roundtrip_type<object_generator>();
     roundtrip_type<concept_generator>();
-    roundtrip_type<model_generator>();
+    roundtrip_type<intermediate_model_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

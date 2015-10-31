@@ -182,7 +182,8 @@ namespace formattables {
 
 transformer::transformer(const settings::opaque_settings_builder& osb,
     const settings::bundle_repository& brp,
-    const formatter_properties_repository& frp, const yarn::model& m)
+    const formatter_properties_repository& frp,
+    const yarn::intermediate_model& m)
     : opaque_settings_builder_(osb), bundle_repository_(brp),
       formatter_properties_repository_(frp), model_(m) {}
 

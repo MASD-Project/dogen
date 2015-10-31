@@ -28,7 +28,7 @@ context::context(
     const std::unordered_set<std::string>& parent_ids,
     const std::unordered_map<std::string, dogen::yarn::name>& id_to_name,
     const std::unordered_set<std::string>& top_level_module_names,
-    const dogen::yarn::model& model)
+    const dogen::yarn::intermediate_model& model)
     : child_id_to_parent_ids_(child_id_to_parent_ids),
       parent_ids_(parent_ids),
       id_to_name_(id_to_name),
@@ -122,19 +122,19 @@ void context::top_level_module_names(const std::unordered_set<std::string>&& v) 
     top_level_module_names_ = std::move(v);
 }
 
-const dogen::yarn::model& context::model() const {
+const dogen::yarn::intermediate_model& context::model() const {
     return model_;
 }
 
-dogen::yarn::model& context::model() {
+dogen::yarn::intermediate_model& context::model() {
     return model_;
 }
 
-void context::model(const dogen::yarn::model& v) {
+void context::model(const dogen::yarn::intermediate_model& v) {
     model_ = v;
 }
 
-void context::model(const dogen::yarn::model&& v) {
+void context::model(const dogen::yarn::intermediate_model&& v) {
     model_ = std::move(v);
 }
 

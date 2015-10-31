@@ -24,12 +24,12 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/yarn/io/model_io.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/io/object_io.hpp"
 #include "dogen/yarn/types/indexing_error.hpp"
-#include "dogen/yarn/test/mock_model_factory.hpp"
+#include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
 #include "dogen/yarn/types/property_indexer.hpp"
 
 namespace {
@@ -40,15 +40,15 @@ const std::string test_suite("property_indexer_spec");
 const std::string concept_not_found("Concept not found");
 const std::string object_not_found("Object not found in model");
 
-using dogen::yarn::test::mock_model_factory;
+using dogen::yarn::test::mock_intermediate_model_factory;
 
 /**
  * @brief We require the concepts to have been indexed or else we
  * won't work.
  */
-const mock_model_factory::flags flags(false/*tagged*/, false/*resolved*/,
+const mock_intermediate_model_factory::flags flags(false/*tagged*/, false/*resolved*/,
     false/*merged*/, true/*concepts_indexed*/, false/*properties_indexed*/);
-const mock_model_factory factory(flags);
+const mock_intermediate_model_factory factory(flags);
 
 template<typename Stateful>
 bool has_duplicate_property_names(const Stateful& s,
@@ -89,8 +89,10 @@ bool has_duplicate_property_names(const Stateful& s,
 using dogen::utility::test::contains_checker;
 using dogen::yarn::indexing_error;
 using dogen::utility::test::asserter;
-using object_types = dogen::yarn::test::mock_model_factory::object_types;
-using property_types = dogen::yarn::test::mock_model_factory::property_types;
+using object_types = dogen::yarn::test::mock_intermediate_model_factory::
+object_types;
+using property_types = dogen::yarn::test::mock_intermediate_model_factory::
+property_types;
 
 BOOST_AUTO_TEST_SUITE(property_indexer)
 

@@ -27,7 +27,7 @@
 
 #include <list>
 #include <unordered_set>
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/relationship_types.hpp"
 
 namespace dogen {
@@ -113,7 +113,7 @@ private:
     /**
      * @brief Returns the object with the given name, or throws.
      */
-    object& find_object(const name& n, model& m);
+    object& find_object(const name& n, intermediate_model& m);
 
     /**
      * @brief Finds the relationship container, or throws.
@@ -124,36 +124,36 @@ private:
     /**
      * @brief Returns the concept with the given name, or throws.
      */
-    concept& find_concept(const name& n, model& m);
+    concept& find_concept(const name& n, intermediate_model& m);
 
 private:
     /**
      * @brief Indexes a specific object.
      */
-    void index_object(object& o, model& m,
+    void index_object(object& o, intermediate_model& m,
         std::unordered_set<name>& processed_names);
 
     /**
      * @brief Indexes all objects in the model.
      */
-    void index_objects(model& m);
+    void index_objects(intermediate_model& m);
 
     /**
      * @brief Populates index information in a concept.
      */
-    void index_concept(concept& c, model& m,
+    void index_concept(concept& c, intermediate_model& m,
         std::unordered_set<name>& processed_names);
 
     /**
      * @brief Indexes all concepts in the model.
      */
-    void index_concepts(model& m);
+    void index_concepts(intermediate_model& m);
 
 public:
     /**
      * @brief Indexes the supplied model.
      */
-    void index(model& m);
+    void index(intermediate_model& m);
 };
 
 } }

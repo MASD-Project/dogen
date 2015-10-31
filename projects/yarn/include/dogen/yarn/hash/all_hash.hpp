@@ -27,7 +27,6 @@
 
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/hash/node_hash.hpp"
-#include "dogen/yarn/hash/model_hash.hpp"
 #include "dogen/yarn/hash/module_hash.hpp"
 #include "dogen/yarn/hash/object_hash.hpp"
 #include "dogen/yarn/hash/concept_hash.hpp"
@@ -42,6 +41,7 @@
 #include "dogen/yarn/hash/origin_types_hash.hpp"
 #include "dogen/yarn/hash/generation_types_hash.hpp"
 #include "dogen/yarn/hash/input_descriptor_hash.hpp"
+#include "dogen/yarn/hash/intermediate_model_hash.hpp"
 #include "dogen/yarn/hash/relationship_types_hash.hpp"
 
 #endif

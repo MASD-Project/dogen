@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TEST_MOCK_MODEL_FACTORY_HPP
-#define DOGEN_YARN_TEST_MOCK_MODEL_FACTORY_HPP
+#ifndef DOGEN_YARN_TEST_MOCK_INTERMEDIATE_MODEL_FACTORY_HPP
+#define DOGEN_YARN_TEST_MOCK_INTERMEDIATE_MODEL_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 #include <functional>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/dynamic/types/object.hpp"
 
 namespace dogen {
@@ -37,9 +37,9 @@ namespace yarn {
 namespace test {
 
 /**
- * @brief Generates mock yarn models.
+ * @brief Generates mock intermediate models.
  */
-class mock_model_factory {
+class mock_intermediate_model_factory {
 public:
     /**
      * @brief Types of objects supported by the factory.
@@ -153,7 +153,7 @@ public:
      * @brief Initialises a new mock factory at a given stage in the
      * yarn pipeline, as given by the flags supplied.
      */
-    explicit mock_model_factory(const flags& f,
+    explicit mock_intermediate_model_factory(const flags& f,
         dynamic_extension_function_type fn = dynamic_extension_function_type());
 
 public:
@@ -248,7 +248,8 @@ public:
     /**
      * @brief If required, adds a module for the model.
      */
-    void handle_model_module(const bool add_model_module, model& m) const;
+    void handle_model_module(const bool add_model_module,
+        intermediate_model& m) const;
 
 public:
     /**
@@ -305,14 +306,14 @@ public:
     /**
      * @brief Builds a model with no types, concepts or modules.
      */
-    model make_empty_model(const unsigned int n = 0,
+    intermediate_model make_empty_model(const unsigned int n = 0,
         const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a name derived from n, containing a
      * single type with a name also deriving from n.
      */
-    model make_single_type_model(const unsigned int n = 0,
+    intermediate_model make_single_type_model(const unsigned int n = 0,
         const object_types ot = object_types::value_object,
         const bool add_model_module = false) const;
 
@@ -320,7 +321,8 @@ public:
      * @brief Builds a model with a name derived from n, containing a
      * single type with a name also deriving from n, inside mod_n modules.
      */
-    model make_single_type_model_in_module(const unsigned int n = 0,
+    intermediate_model make_single_type_model_in_module(
+        const unsigned int n = 0,
         const object_types ot = object_types::value_object,
         const unsigned int mod_n = 0,
         const bool add_model_module = false) const;
@@ -329,7 +331,7 @@ public:
      * @brief Builds a model with a name derived from n, and a number
      * of types determined by type_n, inside mod_n module.
      */
-    model make_multi_type_model(const unsigned int n,
+    intermediate_model make_multi_type_model(const unsigned int n,
         const unsigned int type_n,
         const object_types ot = object_types::value_object,
         const unsigned int mod_n = 0,
@@ -340,27 +342,27 @@ public:
      * @brief Builds a model with a concept, and a type that models
      * it.
      */
-    model make_single_concept_model(const unsigned int n = 0,
+    intermediate_model make_single_concept_model(const unsigned int n = 0,
         const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a concept that refines another
      * concept, and two types that model each concept.
      */
-    model make_first_degree_concepts_model(const unsigned int n = 0,
-        const bool add_model_module = false) const;
+    intermediate_model make_first_degree_concepts_model(
+        const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Same as first degree but with 2 levels of inheritance.
      */
-    model make_second_degree_concepts_model(const unsigned int n = 0,
-        const bool add_model_module = false) const;
+    intermediate_model make_second_degree_concepts_model(
+        const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with two base concepts and a concept that
      * refines both.
      */
-    model make_multiple_inheritance_concepts_model(
+    intermediate_model make_multiple_inheritance_concepts_model(
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
@@ -368,41 +370,41 @@ public:
      * refine it, and a concept that refines both of these. Finally a
      * type last concept.
      */
-    model make_diamond_inheritance_concepts_model(
+    intermediate_model make_diamond_inheritance_concepts_model(
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a child object with a parent that
      * models a concept.
      */
-    model make_object_with_parent_that_models_concept(
+    intermediate_model make_object_with_parent_that_models_concept(
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a child object with a parent that
      * models a concept that refines a concept.
      */
-    model make_object_with_parent_that_models_a_refined_concept(
+    intermediate_model make_object_with_parent_that_models_a_refined_concept(
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a concept that refines a
      * non-existing concept.
      */
-    model make_concept_that_refines_missing_concept(
+    intermediate_model make_concept_that_refines_missing_concept(
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a concept that refines a
      * non-existing concept.
      */
-    model make_object_that_models_missing_concept(
+    intermediate_model make_object_that_models_missing_concept(
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief object that models concept with missing parent.
      */
-    model make_object_that_models_concept_with_missing_parent(
+    intermediate_model make_object_that_models_concept_with_missing_parent(
         const unsigned int n = 0, const bool add_model_module = false) const;
 
 public:
@@ -410,14 +412,14 @@ public:
      * @brief Scenario: object that exercises both weak and regular
      * associations.
      */
-    model object_with_both_regular_and_weak_associations(
+    intermediate_model object_with_both_regular_and_weak_associations(
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with single property of a type existent in
      * current model.
      */
-    model object_with_property(
+    intermediate_model object_with_property(
         const object_types ot = object_types::value_object,
         const property_types pt = property_types::value_object,
         const bool add_model_module = false) const;
@@ -426,47 +428,47 @@ public:
      * @brief Scenario: object with single property of a type existent in
      * a second model.
      */
-    std::array<model, 2>
+    std::array<intermediate_model, 2>
     object_with_property_type_in_different_model(
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with property of missing type.
      */
-    model object_with_missing_property_type(
+    intermediate_model object_with_missing_property_type(
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with parent in current model.
      */
-    model
-    object_with_parent_in_the_same_model(const bool has_property = false,
+    intermediate_model object_with_parent_in_the_same_model(
+        const bool has_property = false,
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with missing parent in current model.
      */
-    model object_with_missing_parent_in_the_same_model(
+    intermediate_model object_with_missing_parent_in_the_same_model(
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with a parent in a second model.
      */
-    std::array<model, 2>
+    std::array<intermediate_model, 2>
     object_with_parent_in_different_models(
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with three children.
      */
-    model object_with_three_children_in_same_model(
+    intermediate_model object_with_three_children_in_same_model(
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with three levels deep in inheritance tree
      * in current model.
      */
-    model object_with_third_degree_parent_in_same_model(
+    intermediate_model object_with_third_degree_parent_in_same_model(
         const bool has_property = false,
         const bool add_model_module = false) const;
 
@@ -474,14 +476,14 @@ public:
      * @brief Scenario: object with three levels deep in inheritance tree
      * has missing parent.
      */
-    model object_with_third_degree_parent_missing(
+    intermediate_model object_with_third_degree_parent_missing(
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object three levels deep in inheritance tree,
      * with parents in different models.
      */
-    std::array<model, 4>
+    std::array<intermediate_model, 4>
     object_with_third_degree_parent_in_different_models(
         const bool add_model_module = false) const;
 
@@ -490,7 +492,7 @@ public:
      * with parents in different models and a missing top-level
      * parent.
      */
-    std::array<model, 4>
+    std::array<intermediate_model, 4>
     object_with_missing_third_degree_parent_in_different_models(
         const bool add_model_module = false) const;
 
@@ -502,7 +504,7 @@ public:
      * @param repeat_group if true, adds two instances of the group,
      * otherwise just one.
      */
-    model object_with_group_of_properties_of_different_types(
+    intermediate_model object_with_group_of_properties_of_different_types(
         const bool repeat_group = false,
         const bool add_model_module = false) const;
 

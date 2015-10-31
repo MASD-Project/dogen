@@ -26,7 +26,7 @@
 #endif
 
 #include <list>
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/concept.hpp"
 
@@ -61,7 +61,7 @@ public:
      * @pre Model must continue to live until resolution has been
      * completed.
      */
-    explicit resolver(model& m);
+    explicit resolver(intermediate_model& m);
 
 private:
     /**
@@ -124,7 +124,7 @@ public:
     void resolve();
 
 private:
-    model& model_;
+    intermediate_model& model_;
     bool has_resolved_;
 };
 

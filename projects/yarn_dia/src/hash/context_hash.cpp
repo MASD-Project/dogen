@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/yarn/hash/name_hash.hpp"
-#include "dogen/yarn/hash/model_hash.hpp"
 #include "dogen/yarn_dia/hash/context_hash.hpp"
+#include "dogen/yarn/hash/intermediate_model_hash.hpp"
 
 namespace {
 

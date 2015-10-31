@@ -48,7 +48,7 @@ namespace cpp {
 namespace formattables {
 
 path_derivatives_factory::path_derivatives_factory(
-    const config::cpp_options& opts, const yarn::model& m,
+    const config::cpp_options& opts, const yarn::intermediate_model& m,
     const std::unordered_map<std::string, settings::path_settings>& ps)
     : options_(opts), model_(m), path_settings_(ps) { }
 

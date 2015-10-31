@@ -32,7 +32,7 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief An error occurred while trying to index a model.
+ * @brief An error occurred while trying to index an intermediate model.
  */
 class indexing_error : public virtual std::exception, public virtual boost::exception {
 public:

@@ -48,7 +48,7 @@ bool assembler::is_generatable(const element& e) const {
         gt == generation_types::partial_generation;
 }
 
-bool assembler::has_generatable_types(const model& m) const {
+bool assembler::has_generatable_types(const intermediate_model& m) const {
     for (const auto pair : m.objects()) {
         if (is_generatable(pair.second))
             return true;
@@ -69,8 +69,8 @@ bool assembler::has_generatable_types(const model& m) const {
     return false;
 }
 
-model assembler::
-create_merged_model_activity(const std::list<model>& models) const {
+intermediate_model assembler::create_merged_model_activity(
+    const std::list<intermediate_model>& models) const {
     merger mg;
     for (const auto& m : models)
         mg.add(m);
@@ -78,41 +78,48 @@ create_merged_model_activity(const std::list<model>& models) const {
     return mg.merge();
 }
 
-void assembler::index_generalizations_activity(model& merged_model) const {
+void assembler::
+index_generalizations_activity(intermediate_model& merged_model) const {
     generalization_indexer idx;
     idx.index(merged_model);
 }
 
-void assembler::inject_system_types_activity(model& m) const {
+void assembler::
+inject_system_types_activity(intermediate_model& merged_model) const {
     injector i;
-    i.inject(m);
+    i.inject(merged_model);
 }
 
-void assembler::resolve_types_activity(model& merged_model) const {
+void assembler::resolve_types_activity(intermediate_model& merged_model) const {
     resolver res(merged_model);
     res.resolve();
 }
 
-void assembler::index_concepts_activity(model& merged_model) const {
+void assembler::
+index_concepts_activity(intermediate_model& merged_model) const {
     concept_indexer idx;
     idx.index(merged_model);
 }
 
-void assembler::index_properties_activity(model& merged_model) const {
+void assembler::
+index_properties_activity(intermediate_model& merged_model) const {
     property_indexer idx;
     idx.index(merged_model);
 }
 
-void assembler::index_associations_activity(model& merged_model) const {
+void assembler::
+index_associations_activity(intermediate_model& merged_model) const {
     association_indexer idx;
     idx.index(merged_model);
 }
 
-void assembler::update_model_generability_activity(model& merged_model) const {
+void assembler::
+update_model_generability_activity(intermediate_model& merged_model) const {
     merged_model.has_generatable_types(has_generatable_types(merged_model));
 }
 
-model assembler::assemble(const std::list<model>& models) const {
+intermediate_model assembler::
+assemble(const std::list<intermediate_model>& models) const {
     BOOST_LOG_SEV(lg, debug) << "Starting model assembly.";
 
     auto r(create_merged_model_activity(models));

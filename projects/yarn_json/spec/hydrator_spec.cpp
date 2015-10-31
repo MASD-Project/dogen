@@ -30,8 +30,8 @@
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/yarn/io/model_io.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn_json/types/hydration_error.hpp"
 #include "dogen/yarn_json/types/hydrator.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
@@ -212,7 +212,7 @@ dogen::dynamic::repository create_repository() {
     return rf.make(fds);
 }
 
-dogen::yarn::model hydrate(std::istream& s) {
+dogen::yarn::intermediate_model hydrate(std::istream& s) {
     const auto rp(create_repository());
 
     using dogen::dynamic::test::mock_workflow_factory;
@@ -222,12 +222,12 @@ dogen::yarn::model hydrate(std::istream& s) {
     return h.hydrate(s);
 }
 
-dogen::yarn::model hydrate(const boost::filesystem::path& p) {
+dogen::yarn::intermediate_model hydrate(const boost::filesystem::path& p) {
     boost::filesystem::ifstream s(p);
     return hydrate(s);
 }
 
-dogen::yarn::model hydrate(const std::string& content) {
+dogen::yarn::intermediate_model hydrate(const std::string& content) {
     std::istringstream s(content);
     return hydrate(s);
 }

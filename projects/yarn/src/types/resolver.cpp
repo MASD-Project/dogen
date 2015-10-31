@@ -29,7 +29,7 @@
 #include "dogen/yarn/types/resolution_error.hpp"
 #include "dogen/yarn/io/nested_name_io.hpp"
 #include "dogen/yarn/io/property_io.hpp"
-#include "dogen/yarn/io/model_io.hpp"
+#include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/resolver.hpp"
 
@@ -52,7 +52,7 @@ typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 namespace dogen {
 namespace yarn {
 
-resolver::resolver(model& m) : model_(m), has_resolved_(false) { }
+resolver::resolver(intermediate_model& m) : model_(m), has_resolved_(false) { }
 
 void resolver::validate_inheritance_graph(const object& ao) const {
     auto i(ao.relationships().find(relationship_types::parents));

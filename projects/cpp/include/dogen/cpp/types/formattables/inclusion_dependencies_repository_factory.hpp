@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/cpp/types/formattables/container.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_repository.hpp"
@@ -44,7 +44,7 @@ public:
      */
     inclusion_dependencies_repository make(
         const inclusion_dependencies_builder_factory& bf, const container& c,
-        const yarn::model& m) const;
+        const yarn::intermediate_model& m) const;
 };
 
 } } }

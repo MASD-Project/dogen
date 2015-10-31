@@ -18,22 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_IO_MODEL_IO_HPP
-#define DOGEN_YARN_IO_MODEL_IO_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_INTERMEDIATE_MODEL_FWD_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_INTERMEDIATE_MODEL_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model_fwd.hpp"
 
-namespace dogen {
-namespace yarn {
+namespace boost {
+namespace serialization {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::yarn::model& v);
+template<class Archive>
+void save(Archive& ar, const dogen::yarn::intermediate_model& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::yarn::intermediate_model& v, unsigned int version);
 
 } }
 

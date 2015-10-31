@@ -30,7 +30,7 @@
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/config/types/cpp_options.hpp"
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_repository.hpp"
@@ -49,7 +49,7 @@ public:
      */
     path_derivatives_repository make(const config::cpp_options& opts,
         const std::unordered_map<std::string, settings::path_settings>& ps,
-        const yarn::model& m) const;
+        const yarn::intermediate_model& m) const;
 };
 
 } } }

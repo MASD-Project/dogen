@@ -66,7 +66,7 @@ inline bool operator<(const name& lhs, const name& rhs) {
                 (lhs.simple() < rhs.simple())));
 }
 
-object& concept_indexer::find_object(const name& n, model& m) {
+object& concept_indexer::find_object(const name& n, intermediate_model& m) {
     auto i(m.objects().find(n));
     if (i == m.objects().end()) {
         BOOST_LOG_SEV(lg, error) << object_not_found << n.qualified();
@@ -88,7 +88,7 @@ find_relationships(const relationship_types rt, object& o) {
     return i->second;
 }
 
-concept& concept_indexer::find_concept(const name& n, model& m) {
+concept& concept_indexer::find_concept(const name& n, intermediate_model& m) {
     auto i(m.concepts().find(n));
     if (i == m.concepts().end()) {
         BOOST_LOG_SEV(lg, error) << concept_not_found << n.qualified();
@@ -121,7 +121,7 @@ void concept_indexer::remove_duplicates(std::list<name>& names) const {
                              << names.size();
 }
 
-void concept_indexer::index_object(object& o, model& m,
+void concept_indexer::index_object(object& o, intermediate_model& m,
     std::unordered_set<name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().qualified();
 
@@ -190,7 +190,7 @@ void concept_indexer::index_object(object& o, model& m,
     BOOST_LOG_SEV(lg, debug) << "Finished indexing object.";
 }
 
-void concept_indexer::index_objects(model& m) {
+void concept_indexer::index_objects(intermediate_model& m) {
     BOOST_LOG_SEV(lg, debug) << "Indexing objects: " << m.objects().size();
 
     std::unordered_set<name> processed_names;
@@ -204,7 +204,7 @@ void concept_indexer::index_objects(model& m) {
     }
 }
 
-void concept_indexer::index_concept(concept& c, model& m,
+void concept_indexer::index_concept(concept& c, intermediate_model& m,
     std::unordered_set<name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Indexing concept: " << c.name().qualified();
 
@@ -236,7 +236,7 @@ void concept_indexer::index_concept(concept& c, model& m,
     processed_names.insert(c.name());
 }
 
-void concept_indexer::index_concepts(model& m) {
+void concept_indexer::index_concepts(intermediate_model& m) {
     BOOST_LOG_SEV(lg, debug) << "Indexing concepts: " << m.concepts().size();
 
     std::unordered_set<name> processed_names;
@@ -250,7 +250,7 @@ void concept_indexer::index_concepts(model& m) {
     }
 }
 
-void concept_indexer::index(model& m) {
+void concept_indexer::index(intermediate_model& m) {
     index_concepts(m);
     index_objects(m);
 }

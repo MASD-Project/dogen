@@ -20,8 +20,8 @@
  */
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/dia/types/diagram.hpp"
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/yarn/io/model_io.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn_dia/types/grapher.hpp"
@@ -69,7 +69,7 @@ void workflow::initialise_context_activity(const std::string& model_name,
     const std::string& external_module_path, bool is_target) {
 
     context_ = context();
-    yarn::model& m(context_.model());
+    auto& m(context_.model());
 
     const auto& epp(external_module_path);
     m.name(create_name_for_model(model_name, epp));
@@ -121,7 +121,7 @@ void workflow::graph_to_context_activity(const graph_type& g) {
     boost::depth_first_search(g, boost::visitor(v));
 }
 
-yarn::model workflow::execute(const dia::diagram& diagram,
+yarn::intermediate_model workflow::execute(const dia::diagram& diagram,
     const std::string& model_name, const std::string& external_module_path,
     bool is_target) {
 

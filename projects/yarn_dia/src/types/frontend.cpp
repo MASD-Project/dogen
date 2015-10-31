@@ -49,7 +49,7 @@ std::list<std::string> frontend::supported_extensions() const {
     return ::extensions;
 }
 
-yarn::model frontend::execute(const dynamic::workflow& w,
+yarn::intermediate_model frontend::execute(const dynamic::workflow& w,
     const yarn::input_descriptor& d) {
     BOOST_LOG_SEV(lg, debug) << "Processing Dia diagram. ";
 

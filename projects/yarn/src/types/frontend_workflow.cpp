@@ -23,7 +23,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/yarn/types/persister.hpp"
-#include "dogen/yarn/io/model_io.hpp"
+#include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/io/input_descriptor_io.hpp"
 #include "dogen/yarn/types/frontend_workflow.hpp"
 
@@ -62,18 +62,19 @@ frontend_registrar& frontend_workflow::registrar() {
     return *registrar_;
 }
 
-model frontend_workflow::obtain_model(const input_descriptor& d) const {
+intermediate_model frontend_workflow::
+obtain_model(const input_descriptor& d) const {
     const auto extension(d.path().extension().string());
     auto& f(registrar().frontend_for_extension(extension));
     return f.execute(dynamic_workflow_, d);
 }
 
-std::list<model>
+std::list<intermediate_model>
 frontend_workflow::execute(const std::list<input_descriptor>& descriptors) {
     BOOST_LOG_SEV(lg, debug) << "Started executing. "
                              << "Descriptors: " << descriptors;
 
-    std::list<model> r;
+    std::list<intermediate_model> r;
     for (const auto& d : descriptors)
         r.push_back(obtain_model(d));
 

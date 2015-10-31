@@ -134,7 +134,7 @@ workflow::obtain_input_descriptors_activity() const {
     return r;
 }
 
-yarn::model workflow::obtain_yarn_model_activity(
+yarn::intermediate_model workflow::obtain_yarn_model_activity(
     const dynamic::repository& rp,
     const std::list<yarn::input_descriptor>& id) const {
     const yarn::workflow w;

@@ -20,7 +20,6 @@
  */
 #include <sstream>
 #include "dogen/yarn/test_data/name_td.hpp"
-#include "dogen/yarn/test_data/model_td.hpp"
 #include "dogen/yarn/test_data/module_td.hpp"
 #include "dogen/yarn/test_data/object_td.hpp"
 #include "dogen/yarn/test_data/concept_td.hpp"
@@ -29,6 +28,7 @@
 #include "dogen/yarn/test_data/enumeration_td.hpp"
 #include "dogen/yarn/test_data/origin_types_td.hpp"
 #include "dogen/yarn/test_data/generation_types_td.hpp"
+#include "dogen/yarn/test_data/intermediate_model_td.hpp"
 
 namespace {
 
@@ -155,9 +155,9 @@ bool create_bool(const unsigned int position) {
 namespace dogen {
 namespace yarn {
 
-model_generator::model_generator() : position_(0) { }
+intermediate_model_generator::intermediate_model_generator() : position_(0) { }
 
-void model_generator::
+void intermediate_model_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.extensions(create_dogen_dynamic_object(position + 1));
@@ -176,22 +176,22 @@ populate(const unsigned int position, result_type& v) {
     v.has_generatable_types(create_bool(position + 14));
 }
 
-model_generator::result_type
-model_generator::create(const unsigned int position) {
-    model r;
-    model_generator::populate(position, r);
+intermediate_model_generator::result_type
+intermediate_model_generator::create(const unsigned int position) {
+    intermediate_model r;
+    intermediate_model_generator::populate(position, r);
     return r;
 }
 
-model_generator::result_type*
-model_generator::create_ptr(const unsigned int position) {
-    model* p = new model();
-    model_generator::populate(position, *p);
+intermediate_model_generator::result_type*
+intermediate_model_generator::create_ptr(const unsigned int position) {
+    intermediate_model* p = new intermediate_model();
+    intermediate_model_generator::populate(position, *p);
     return p;
 }
 
-model_generator::result_type
-model_generator::operator()() {
+intermediate_model_generator::result_type
+intermediate_model_generator::operator()() {
     return create(position_++);
 }
 

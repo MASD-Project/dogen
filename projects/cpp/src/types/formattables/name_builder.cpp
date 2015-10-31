@@ -42,7 +42,7 @@ namespace cpp {
 namespace formattables {
 
 std::list<std::string> name_builder::
-namespace_list(const yarn::model& m, const yarn::name& n) const {
+namespace_list(const yarn::intermediate_model& m, const yarn::name& n) const {
     std::list<std::string> r(n.location().external_module_path());
 
     // if there is no model name, it won't contribute to the namespaces.
@@ -63,14 +63,14 @@ namespace_list(const yarn::model& m, const yarn::name& n) const {
 }
 
 std::string name_builder::
-qualified_name(const yarn::model& m, const yarn::name& n) const {
+qualified_name(const yarn::intermediate_model& m, const yarn::name& n) const {
     std::list<std::string> l(namespace_list(m, n));
     l.push_back(n.simple());
     return boost::algorithm::join(l, scope_operator);
 }
 
 void name_builder::
-complete_name(const yarn::model& m, const yarn::nested_name& nn,
+complete_name(const yarn::intermediate_model& m, const yarn::nested_name& nn,
     std::string& complete_name) const {
     const auto qualified_name(this->qualified_name(m, nn.type()));
     const auto& children(nn.children());

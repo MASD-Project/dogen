@@ -27,7 +27,7 @@
 
 #include <list>
 #include <boost/optional.hpp>
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/input_descriptor.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 
@@ -35,7 +35,7 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Reads a model from an input descriptor.
+ * @brief Reads an intermediate model from an input descriptor.
  */
 class frontend_interface {
 public:
@@ -58,9 +58,9 @@ public:
 
     /**
      * @brief Reads the contents of the input descriptor and
-     * transforms it into a model.
+     * transforms it into an intermediate model.
      */
-    virtual model execute(const dynamic::workflow& w,
+    virtual intermediate_model execute(const dynamic::workflow& w,
         const input_descriptor& d) = 0;
 };
 

@@ -367,7 +367,7 @@ void transformer::from_note(const processed_object& o) {
 
     const auto& documentation(o.comment().documentation());
     const auto& kvps(o.comment().key_value_pairs());
-    const yarn::model& model(context_.model());
+    const auto& model(context_.model());
     using dynamic::scope_types;
     if (o.child_node_id().empty()) {
         auto& module(module_for_name(model.name()));

@@ -1136,13 +1136,13 @@ into its yarn representation.#</dia:string>
             <dia:string>#model#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#yarn::model#</dia:string>
+            <dia:string>#yarn::intermediate_model#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Yarn model we are currently building.#</dia:string>
+            <dia:string>#Intermediate yarn model we are currently building.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1450,7 +1450,7 @@ into its yarn representation.#</dia:string>
         <dia:point val="109.22,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="108.47,-3.05;129.658,8.8"/>
+        <dia:rectangle val="108.47,-3.05;129.657,8.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2737,7 +2737,7 @@ that make up dogen instructions.#</dia:string>
         <dia:point val="-14.0075,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.7575,-14.75;129.658,8.8"/>
+        <dia:rectangle val="-14.7575,-14.75;129.657,8.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3348,7 +3348,7 @@ that make up dogen instructions.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#yarn::model#</dia:string>
+            <dia:string>#yarn::intermediate_model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

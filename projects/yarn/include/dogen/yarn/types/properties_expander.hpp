@@ -28,7 +28,7 @@
 #include <string>
 #include "dogen/yarn/types/identifier_parser.hpp"
 #include "dogen/yarn/types/nested_name.hpp"
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -36,9 +36,9 @@ namespace yarn {
 class properties_expander {
 private:
     std::unordered_set<std::string>
-    obtain_top_level_module_names(const model& m) const;
+    obtain_top_level_module_names(const intermediate_model& m) const;
 
-    identifier_parser make_identifier_parser(const model& m) const;
+    identifier_parser make_identifier_parser(const intermediate_model& m) const;
 
     void expand_property(const identifier_parser& ip, property& p) const;
 
@@ -46,7 +46,7 @@ private:
         const std::string& s) const;
 
 public:
-    void expand(model& m) const;
+    void expand(intermediate_model& m) const;
 };
 
 } }

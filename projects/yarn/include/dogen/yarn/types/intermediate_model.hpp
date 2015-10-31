@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_MODEL_HPP
-#define DOGEN_YARN_TYPES_MODEL_HPP
+#ifndef DOGEN_YARN_TYPES_INTERMEDIATE_MODEL_HPP
+#define DOGEN_YARN_TYPES_INTERMEDIATE_MODEL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -40,49 +40,27 @@
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
 #include "dogen/yarn/types/generation_types.hpp"
-#include "dogen/yarn/serialization/model_fwd_ser.hpp"
+#include "dogen/yarn/serialization/intermediate_model_fwd_ser.hpp"
 
 namespace dogen {
 namespace yarn {
 
 /**
- * @brief Software representation of a domain model.
- *
- * Wikipedia provides the following definition of a @e domain @e model,
- * (slightly abbreviated and modified):
- *
- * <blockquote>
- * A domain model is a conceptual model of all the topics
- * related to a specific problem. It describes the various entities,
- * their attributes, roles and relationships, plus the constraints that
- * govern the problem domain.
- *
- * The domain model is created in order to represent the vocabulary and
- * key concepts of the problem domain. An important advantage of a domain
- * model is that it describes and constrains the scope of the problem
- * domain. The domain model can be effectively used to verify and
- * validate the understanding of the problem domain among various
- * stakeholders. It defines a vocabulary and is helpful as a
- * communication tool. It can add precision and focus to discussion among
- * the business team as well as between the technical and business teams.
- * </blockquote>
- *
- * The objective of the model class is to encompass all the key members
- * of the domain model which have expression in code.
+ * @brief Intermediate representation of a yarn model.
  */
-class model final {
+class intermediate_model final {
 public:
-    model(const model&) = default;
-    ~model() = default;
+    intermediate_model(const intermediate_model&) = default;
+    ~intermediate_model() = default;
 
 public:
-    model();
+    intermediate_model();
 
 public:
-    model(model&& rhs);
+    intermediate_model(intermediate_model&& rhs);
 
 public:
-    model(
+    intermediate_model(
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
         const dogen::yarn::name& name,
@@ -101,10 +79,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const model& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const intermediate_model& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, model& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, intermediate_model& v, unsigned int version);
 
 public:
     /**
@@ -169,7 +147,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All other models that this model depends on, mapped to their origin.
+     * @brief All other intermediate models that this intermediate model depends on, mapped to their origin.
      */
     /**@{*/
     const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& references() const;
@@ -179,7 +157,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All leaf types in this model.
+     * @brief All leaf types in this intermediate model.
      *
      * Leaves are types concrete types which have a parent.
      */
@@ -191,7 +169,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Modules contained in the model.
+     * @brief Modules contained in the intermediate model.
      */
     /**@{*/
     const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& modules() const;
@@ -201,7 +179,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All the concepts available in this model.
+     * @brief All the concepts available in this intermediate model.
      */
     /**@{*/
     const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& concepts() const;
@@ -211,7 +189,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All primitives contained in this model.
+     * @brief All primitives contained in this intermediate model.
      */
     /**@{*/
     const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& primitives() const;
@@ -221,7 +199,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All enumerations contained in this model.
+     * @brief All enumerations contained in this intermediate model.
      */
     /**@{*/
     const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& enumerations() const;
@@ -231,7 +209,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All objects contained in this model.
+     * @brief All objects contained in this intermediate model.
      */
     /**@{*/
     const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& objects() const;
@@ -241,7 +219,7 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, this model is the target model.
+     * @brief If true, this intermediate model is the target model.
      */
     /**@{*/
     bool is_target() const;
@@ -249,7 +227,7 @@ public:
     /**@}*/
 
     /**
-     * @brief If true the model has at least one generable type, false otherwise.
+     * @brief If true the intermediate model has at least one generable type, false otherwise.
      */
     /**@{*/
     bool has_generatable_types() const;
@@ -257,14 +235,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const model& rhs) const;
-    bool operator!=(const model& rhs) const {
+    bool operator==(const intermediate_model& rhs) const;
+    bool operator!=(const intermediate_model& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(model& other) noexcept;
-    model& operator=(model other);
+    void swap(intermediate_model& other) noexcept;
+    intermediate_model& operator=(intermediate_model other);
 
 private:
     std::string documentation_;
@@ -290,8 +268,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::yarn::model& lhs,
-    dogen::yarn::model& rhs) {
+    dogen::yarn::intermediate_model& lhs,
+    dogen::yarn::intermediate_model& rhs) {
     lhs.swap(rhs);
 }
 

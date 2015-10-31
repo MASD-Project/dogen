@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 
-model::model()
+intermediate_model::intermediate_model()
     : generation_type_(static_cast<dogen::yarn::generation_types>(0)),
       origin_type_(static_cast<dogen::yarn::origin_types>(0)),
       is_target_(static_cast<bool>(0)),
       has_generatable_types_(static_cast<bool>(0)) { }
 
-model::model(model&& rhs)
+intermediate_model::intermediate_model(intermediate_model&& rhs)
     : documentation_(std::move(rhs.documentation_)),
       extensions_(std::move(rhs.extensions_)),
       name_(std::move(rhs.name_)),
@@ -46,7 +46,7 @@ model::model(model&& rhs)
       is_target_(std::move(rhs.is_target_)),
       has_generatable_types_(std::move(rhs.has_generatable_types_)) { }
 
-model::model(
+intermediate_model::intermediate_model(
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const dogen::yarn::name& name,
@@ -78,7 +78,7 @@ model::model(
       is_target_(is_target),
       has_generatable_types_(has_generatable_types) { }
 
-void model::swap(model& other) noexcept {
+void intermediate_model::swap(intermediate_model& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
     swap(extensions_, other.extensions_);
@@ -97,7 +97,7 @@ void model::swap(model& other) noexcept {
     swap(has_generatable_types_, other.has_generatable_types_);
 }
 
-bool model::operator==(const model& rhs) const {
+bool intermediate_model::operator==(const intermediate_model& rhs) const {
     return documentation_ == rhs.documentation_ &&
         extensions_ == rhs.extensions_ &&
         name_ == rhs.name_ &&
@@ -115,217 +115,217 @@ bool model::operator==(const model& rhs) const {
         has_generatable_types_ == rhs.has_generatable_types_;
 }
 
-model& model::operator=(model other) {
+intermediate_model& intermediate_model::operator=(intermediate_model other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& model::documentation() const {
+const std::string& intermediate_model::documentation() const {
     return documentation_;
 }
 
-std::string& model::documentation() {
+std::string& intermediate_model::documentation() {
     return documentation_;
 }
 
-void model::documentation(const std::string& v) {
+void intermediate_model::documentation(const std::string& v) {
     documentation_ = v;
 }
 
-void model::documentation(const std::string&& v) {
+void intermediate_model::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const dogen::dynamic::object& model::extensions() const {
+const dogen::dynamic::object& intermediate_model::extensions() const {
     return extensions_;
 }
 
-dogen::dynamic::object& model::extensions() {
+dogen::dynamic::object& intermediate_model::extensions() {
     return extensions_;
 }
 
-void model::extensions(const dogen::dynamic::object& v) {
+void intermediate_model::extensions(const dogen::dynamic::object& v) {
     extensions_ = v;
 }
 
-void model::extensions(const dogen::dynamic::object&& v) {
+void intermediate_model::extensions(const dogen::dynamic::object&& v) {
     extensions_ = std::move(v);
 }
 
-const dogen::yarn::name& model::name() const {
+const dogen::yarn::name& intermediate_model::name() const {
     return name_;
 }
 
-dogen::yarn::name& model::name() {
+dogen::yarn::name& intermediate_model::name() {
     return name_;
 }
 
-void model::name(const dogen::yarn::name& v) {
+void intermediate_model::name(const dogen::yarn::name& v) {
     name_ = v;
 }
 
-void model::name(const dogen::yarn::name&& v) {
+void intermediate_model::name(const dogen::yarn::name&& v) {
     name_ = std::move(v);
 }
 
-dogen::yarn::generation_types model::generation_type() const {
+dogen::yarn::generation_types intermediate_model::generation_type() const {
     return generation_type_;
 }
 
-void model::generation_type(const dogen::yarn::generation_types v) {
+void intermediate_model::generation_type(const dogen::yarn::generation_types v) {
     generation_type_ = v;
 }
 
-dogen::yarn::origin_types model::origin_type() const {
+dogen::yarn::origin_types intermediate_model::origin_type() const {
     return origin_type_;
 }
 
-void model::origin_type(const dogen::yarn::origin_types v) {
+void intermediate_model::origin_type(const dogen::yarn::origin_types v) {
     origin_type_ = v;
 }
 
-const boost::optional<dogen::yarn::name>& model::containing_module() const {
+const boost::optional<dogen::yarn::name>& intermediate_model::containing_module() const {
     return containing_module_;
 }
 
-boost::optional<dogen::yarn::name>& model::containing_module() {
+boost::optional<dogen::yarn::name>& intermediate_model::containing_module() {
     return containing_module_;
 }
 
-void model::containing_module(const boost::optional<dogen::yarn::name>& v) {
+void intermediate_model::containing_module(const boost::optional<dogen::yarn::name>& v) {
     containing_module_ = v;
 }
 
-void model::containing_module(const boost::optional<dogen::yarn::name>&& v) {
+void intermediate_model::containing_module(const boost::optional<dogen::yarn::name>&& v) {
     containing_module_ = std::move(v);
 }
 
-const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& model::references() const {
+const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& intermediate_model::references() const {
     return references_;
 }
 
-std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& model::references() {
+std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& intermediate_model::references() {
     return references_;
 }
 
-void model::references(const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& v) {
+void intermediate_model::references(const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& v) {
     references_ = v;
 }
 
-void model::references(const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>&& v) {
+void intermediate_model::references(const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>&& v) {
     references_ = std::move(v);
 }
 
-const std::unordered_set<dogen::yarn::name>& model::leaves() const {
+const std::unordered_set<dogen::yarn::name>& intermediate_model::leaves() const {
     return leaves_;
 }
 
-std::unordered_set<dogen::yarn::name>& model::leaves() {
+std::unordered_set<dogen::yarn::name>& intermediate_model::leaves() {
     return leaves_;
 }
 
-void model::leaves(const std::unordered_set<dogen::yarn::name>& v) {
+void intermediate_model::leaves(const std::unordered_set<dogen::yarn::name>& v) {
     leaves_ = v;
 }
 
-void model::leaves(const std::unordered_set<dogen::yarn::name>&& v) {
+void intermediate_model::leaves(const std::unordered_set<dogen::yarn::name>&& v) {
     leaves_ = std::move(v);
 }
 
-const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& model::modules() const {
+const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& intermediate_model::modules() const {
     return modules_;
 }
 
-std::unordered_map<dogen::yarn::name, dogen::yarn::module>& model::modules() {
+std::unordered_map<dogen::yarn::name, dogen::yarn::module>& intermediate_model::modules() {
     return modules_;
 }
 
-void model::modules(const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& v) {
+void intermediate_model::modules(const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& v) {
     modules_ = v;
 }
 
-void model::modules(const std::unordered_map<dogen::yarn::name, dogen::yarn::module>&& v) {
+void intermediate_model::modules(const std::unordered_map<dogen::yarn::name, dogen::yarn::module>&& v) {
     modules_ = std::move(v);
 }
 
-const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& model::concepts() const {
+const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& intermediate_model::concepts() const {
     return concepts_;
 }
 
-std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& model::concepts() {
+std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& intermediate_model::concepts() {
     return concepts_;
 }
 
-void model::concepts(const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& v) {
+void intermediate_model::concepts(const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& v) {
     concepts_ = v;
 }
 
-void model::concepts(const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>&& v) {
+void intermediate_model::concepts(const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>&& v) {
     concepts_ = std::move(v);
 }
 
-const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& model::primitives() const {
+const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& intermediate_model::primitives() const {
     return primitives_;
 }
 
-std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& model::primitives() {
+std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& intermediate_model::primitives() {
     return primitives_;
 }
 
-void model::primitives(const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& v) {
+void intermediate_model::primitives(const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& v) {
     primitives_ = v;
 }
 
-void model::primitives(const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>&& v) {
+void intermediate_model::primitives(const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>&& v) {
     primitives_ = std::move(v);
 }
 
-const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& model::enumerations() const {
+const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& intermediate_model::enumerations() const {
     return enumerations_;
 }
 
-std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& model::enumerations() {
+std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& intermediate_model::enumerations() {
     return enumerations_;
 }
 
-void model::enumerations(const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& v) {
+void intermediate_model::enumerations(const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& v) {
     enumerations_ = v;
 }
 
-void model::enumerations(const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>&& v) {
+void intermediate_model::enumerations(const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>&& v) {
     enumerations_ = std::move(v);
 }
 
-const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& model::objects() const {
+const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& intermediate_model::objects() const {
     return objects_;
 }
 
-std::unordered_map<dogen::yarn::name, dogen::yarn::object>& model::objects() {
+std::unordered_map<dogen::yarn::name, dogen::yarn::object>& intermediate_model::objects() {
     return objects_;
 }
 
-void model::objects(const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& v) {
+void intermediate_model::objects(const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& v) {
     objects_ = v;
 }
 
-void model::objects(const std::unordered_map<dogen::yarn::name, dogen::yarn::object>&& v) {
+void intermediate_model::objects(const std::unordered_map<dogen::yarn::name, dogen::yarn::object>&& v) {
     objects_ = std::move(v);
 }
 
-bool model::is_target() const {
+bool intermediate_model::is_target() const {
     return is_target_;
 }
 
-void model::is_target(const bool v) {
+void intermediate_model::is_target(const bool v) {
     is_target_ = v;
 }
 
-bool model::has_generatable_types() const {
+bool intermediate_model::has_generatable_types() const {
     return has_generatable_types_;
 }
 
-void model::has_generatable_types(const bool v) {
+void intermediate_model::has_generatable_types(const bool v) {
     has_generatable_types_ = v;
 }
 

@@ -30,10 +30,10 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
-#include "dogen/yarn/serialization/model_ser.hpp"
 #include "dogen/yarn_dia/serialization/context_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/utility/serialization/unordered_set.hpp"
+#include "dogen/yarn/serialization/intermediate_model_ser.hpp"
 
 namespace boost {
 namespace serialization {

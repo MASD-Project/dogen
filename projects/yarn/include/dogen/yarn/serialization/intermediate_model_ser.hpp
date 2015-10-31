@@ -18,23 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_MODEL_FWD_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_MODEL_FWD_SER_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_INTERMEDIATE_MODEL_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_INTERMEDIATE_MODEL_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/model_fwd.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/yarn/types/intermediate_model.hpp"
 
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::intermediate_model)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-void save(Archive& ar, const dogen::yarn::model& v, unsigned int version);
+template<typename Archive>
+void save(Archive& ar, const dogen::yarn::intermediate_model& v, unsigned int version);
 
-template<class Archive>
-void load(Archive& ar, dogen::yarn::model& v, unsigned int version);
+template<typename Archive>
+void load(Archive& ar, dogen::yarn::intermediate_model& v, unsigned int version);
 
 } }
 

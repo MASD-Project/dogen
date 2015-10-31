@@ -88,7 +88,7 @@ void generator::generate(const yarn::name& n) {
 path_derivatives_repository path_derivatives_repository_factory::make(
     const config::cpp_options& opts,
     const std::unordered_map<std::string, settings::path_settings>& ps,
-    const yarn::model& m) const {
+    const yarn::intermediate_model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
     const path_derivatives_factory f(opts, m, ps);

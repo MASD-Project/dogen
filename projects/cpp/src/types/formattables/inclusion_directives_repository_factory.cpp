@@ -102,7 +102,7 @@ inclusion_directives_repository inclusion_directives_repository_factory::make(
     const dynamic::repository& srp,
     const formatters::container& fc,
     const path_derivatives_repository& pdrp,
-    const yarn::model& m) const {
+    const yarn::intermediate_model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Making inclusion directives repository.";
 

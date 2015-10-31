@@ -32,7 +32,7 @@
 #include <unordered_map>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/hash/name_hash.hpp"
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/object.hpp"
@@ -65,7 +65,8 @@ class transformer {
 public:
     transformer(const settings::opaque_settings_builder& osb,
         const settings::bundle_repository& brp,
-        const formatter_properties_repository& frp, const yarn::model& m);
+        const formatter_properties_repository& frp,
+        const yarn::intermediate_model& m);
 
 private:
     /**
@@ -195,7 +196,7 @@ private:
     const settings::opaque_settings_builder& opaque_settings_builder_;
     const settings::bundle_repository& bundle_repository_;
     const formatter_properties_repository& formatter_properties_repository_;
-    const yarn::model& model_;
+    const yarn::intermediate_model& model_;
 };
 
 } } }

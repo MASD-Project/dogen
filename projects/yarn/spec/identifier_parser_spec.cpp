@@ -23,7 +23,7 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/parsing_error.hpp"
 #include "dogen/yarn/io/nested_name_io.hpp"
 #include "dogen/yarn/io/name_io.hpp"

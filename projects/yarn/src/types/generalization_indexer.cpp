@@ -77,7 +77,7 @@ bool generalization_indexer::is_leaf(const object& o) const {
 }
 
 std::list<name> generalization_indexer::
-recurse_generalization(const model& m, const name& leaf,
+recurse_generalization(const intermediate_model& m, const name& leaf,
     const object& o, generalization_details& d) const {
 
     if (!o.is_child())
@@ -124,7 +124,7 @@ recurse_generalization(const model& m, const name& leaf,
 }
 
 generalization_indexer::generalization_details generalization_indexer::
-obtain_details(const model& m) const {
+obtain_details(const intermediate_model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Obtaining leaves.";
     generalization_details r;
     for (auto& pair : m.objects()) {
@@ -145,7 +145,7 @@ obtain_details(const model& m) const {
 }
 
 void generalization_indexer::
-populate(const generalization_details& d, model& m) const {
+populate(const generalization_details& d, intermediate_model& m) const {
     for (const auto& pair : d.leaves) {
         const auto& n(pair.first);
         auto i(m.objects().find(n));
@@ -199,7 +199,7 @@ populate(const generalization_details& d, model& m) const {
     }
 }
 
-void generalization_indexer::index(model& m) const {
+void generalization_indexer::index(intermediate_model& m) const {
     const auto d(obtain_details(m));
     populate(d, m);
 }

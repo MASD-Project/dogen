@@ -24,7 +24,6 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/io/pair_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn_dia/types/processing_error.hpp"
 #include "dogen/yarn_dia/io/processed_comment_io.hpp"
 #include "dogen/yarn_dia/types/comment_processor.hpp"

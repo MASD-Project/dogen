@@ -27,7 +27,7 @@
 
 #include <memory>
 #include <boost/optional.hpp>
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"
@@ -53,19 +53,21 @@ public:
 
 private:
     /**
-     * @brief Given an input descriptor, obtains the associated model.
+     * @brief Given an input descriptor, obtains the associated
+     * intermediate model.
      */
-    model obtain_model(const input_descriptor& d) const;
+    intermediate_model obtain_model(const input_descriptor& d) const;
 
 public:
     /**
-     * @brief Process all of the inputs into models, using the
-     * appropriate frontends.
+     * @brief Process all of the inputs into intermediate models,
+     * using the appropriate frontends.
      *
      * @pre All supplied descriptors must be supported by the
      * registered frontends.
      */
-    std::list<model> execute(const std::list<input_descriptor>& descriptors);
+    std::list<intermediate_model> execute(
+        const std::list<input_descriptor>& descriptors);
 
 private:
     static std::shared_ptr<frontend_registrar> registrar_;

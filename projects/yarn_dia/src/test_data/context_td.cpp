@@ -20,8 +20,8 @@
  */
 #include <sstream>
 #include "dogen/yarn/test_data/name_td.hpp"
-#include "dogen/yarn/test_data/model_td.hpp"
 #include "dogen/yarn_dia/test_data/context_td.hpp"
+#include "dogen/yarn/test_data/intermediate_model_td.hpp"
 
 namespace {
 
@@ -68,9 +68,9 @@ std::unordered_map<std::string, dogen::yarn::name> create_std_unordered_map_std_
     return r;
 }
 
-dogen::yarn::model
-create_dogen_yarn_model(const unsigned int position) {
-    return dogen::yarn::model_generator::create(position);
+dogen::yarn::intermediate_model
+create_dogen_yarn_intermediate_model(const unsigned int position) {
+    return dogen::yarn::intermediate_model_generator::create(position);
 }
 
 }
@@ -86,7 +86,7 @@ populate(const unsigned int position, result_type& v) {
     v.parent_ids(create_std_unordered_set_std_string(position + 1));
     v.id_to_name(create_std_unordered_map_std_string_dogen_yarn_name(position + 2));
     v.top_level_module_names(create_std_unordered_set_std_string(position + 3));
-    v.model(create_dogen_yarn_model(position + 4));
+    v.model(create_dogen_yarn_intermediate_model(position + 4));
 }
 
 context_generator::result_type

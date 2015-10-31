@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/yarn/hash/name_hash.hpp"
-#include "dogen/yarn/hash/model_hash.hpp"
 #include "dogen/yarn/hash/module_hash.hpp"
 #include "dogen/yarn/hash/object_hash.hpp"
 #include "dogen/yarn/hash/concept_hash.hpp"
@@ -28,6 +27,7 @@
 #include "dogen/yarn/hash/enumeration_hash.hpp"
 #include "dogen/yarn/hash/origin_types_hash.hpp"
 #include "dogen/yarn/hash/generation_types_hash.hpp"
+#include "dogen/yarn/hash/intermediate_model_hash.hpp"
 
 namespace {
 
@@ -114,7 +114,7 @@ inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_object(cons
 namespace dogen {
 namespace yarn {
 
-std::size_t model_hasher::hash(const model& v) {
+std::size_t intermediate_model_hasher::hash(const intermediate_model& v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());

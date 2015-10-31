@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/model_io.hpp"
 #include "dogen/yarn_dia/io/context_io.hpp"
+#include "dogen/yarn/io/intermediate_model_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

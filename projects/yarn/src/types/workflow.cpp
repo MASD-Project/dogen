@@ -25,23 +25,23 @@
 namespace dogen {
 namespace yarn {
 
-std::list<model> workflow::obtain_partial_models_activity(
+std::list<intermediate_model> workflow::obtain_intermediate_models_activity(
     const dynamic::repository& rp,
     const std::list<input_descriptor>& id) const {
     frontend_workflow w(rp);
     return w.execute(id);
 }
 
-model workflow::
-assemble_partial_models_activity(const std::list<model>& m) const {
+intermediate_model workflow::assemble_intermediate_models_activity(
+    const std::list<intermediate_model>& m) const {
     assembler a;
     return a.assemble(m);
 }
 
-model workflow::execute(const dynamic::repository& rp,
+intermediate_model workflow::execute(const dynamic::repository& rp,
     const std::list<input_descriptor>& id) const {
-    const auto pm(obtain_partial_models_activity(rp, id));
-    return assemble_partial_models_activity(pm);
+    const auto pm(obtain_intermediate_models_activity(rp, id));
+    return assemble_intermediate_models_activity(pm);
 }
 
 } }

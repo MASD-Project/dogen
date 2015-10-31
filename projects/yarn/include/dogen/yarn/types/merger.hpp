@@ -30,26 +30,27 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/yarn/types/nested_name.hpp"
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 
 /**
- * @brief Combines a number of models into a single model.
+ * @brief Combines a number of intermediate models into a single
+ * intermediate model.
  *
- * The role of the merger is to aggregate a number of models into a
- * single, coherent model called the @e merged model. These initial
- * models are known as @e partial models.
+ * The role of the merger is to aggregate a number of intermediate
+ * models into a single, coherent model called the intermediate
+ * @e merged model.
  *
- * There are two kinds of partial models:
+ * There are two kinds of intermediate models:
  *
- * @li the @e target model: the model which the user is focusing on,
- * most likely with the intention of code generating it. There can
- * only be one target model for a given merge.
+ * @li the intermediate @e target model: the model which the user is
+ * focusing on, most likely with the intention of code generating
+ * it. There can only be one target model for a given merge.
  *
- * @li the @e reference models; a model is a reference model if the
- * target model refers to one or more of its types - or a
+ * @li the intermediate @e reference models; a model is a reference
+ * model if the target model refers to one or more of its types - or a
  * model referred to by the target model refers to its types and so
  * on.
  *
@@ -60,7 +61,7 @@ namespace yarn {
  */
 class merger {
 private:
-    typedef std::unordered_map<name, model> models_type;
+    typedef std::unordered_map<name, intermediate_model> models_type;
 
 public:
     merger(const merger&) = default;
@@ -105,7 +106,7 @@ private:
     /**
      * @brief Merge supplied model.
      */
-    void merge_model(const model& m);
+    void merge_model(const intermediate_model& m);
 
     /**
      * @brief Merge all models.
@@ -118,7 +119,7 @@ private:
      * @pre Must not already have a target model.
      * @pre Merge mustn't have taken place already.
      */
-    void add_target(const model& target);
+    void add_target(const intermediate_model& target);
 
 public:
     /**
@@ -138,18 +139,18 @@ public:
      *
      * @pre Merge mustn't have taken place already.
      */
-    void add(const model& m);
+    void add(const intermediate_model& m);
 
     /**
      * @brief Combines all partial models into a merged model.
      *
      * @pre Merge mustn't have taken place already.
      */
-    model merge();
+    intermediate_model merge();
 
 private:
     models_type models_;
-    model merged_model_;
+    intermediate_model merged_model_;
     bool has_target_;
     bool has_merged_;
 };

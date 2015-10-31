@@ -27,13 +27,13 @@
 
 #include <list>
 #include <memory>
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 
 /**
- * @brief Injects types into a model.
+ * @brief Injects types into an intermediate model.
  *
  * Injector is responsible for analysing all of the types defined by
  * the user and deciding:
@@ -63,7 +63,7 @@ private:
 
 private:
     /**
-     * @brief Inserts object into model's object container.
+     * @brief Inserts the object into the model's object container.
      *
      * @return True if the object did not exist in container, false
      * otherwise.
@@ -102,11 +102,11 @@ private:
 public:
 
     /**
-     * @brief Inject system defined types into the model.
+     * @brief Inject system defined types into the intermediate model.
      *
      * @param m Yarn model to operate on.
      */
-    void inject(model& m);
+    void inject(intermediate_model& m);
 
 private:
     mutable std::shared_ptr<context> context_;

@@ -82,7 +82,7 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, the input contains the target model.
+     * @brief If true, the input contains the intermediate target model.
      */
     /**@{*/
     bool is_target() const;

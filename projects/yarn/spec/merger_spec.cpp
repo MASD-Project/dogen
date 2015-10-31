@@ -26,21 +26,21 @@
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/yarn/io/model_io.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/merger.hpp"
 #include "dogen/yarn/types/merging_error.hpp"
-#include "dogen/yarn/test/mock_model_factory.hpp"
+#include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
 
 namespace {
 
 const std::string test_module("yarn");
 const std::string test_suite("merger_spec");
 
-using dogen::yarn::test::mock_model_factory;
-const mock_model_factory::flags flags;
-const mock_model_factory factory(flags);
+using dogen::yarn::test::mock_intermediate_model_factory;
+const mock_intermediate_model_factory::flags flags;
+const mock_intermediate_model_factory factory(flags);
 
 const std::string invalid_simple_name("INVALID");
 const std::string invalid_model_name("INVALID");
@@ -138,7 +138,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
 BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
     SETUP_TEST_LOG("merging_empty_model_results_in_empty_merged_model");
     dogen::yarn::merger mg;
-    dogen::yarn::model m;
+    dogen::yarn::intermediate_model m;
     m.is_target(true);
     BOOST_CHECK(!mg.has_target());
     mg.add(m);

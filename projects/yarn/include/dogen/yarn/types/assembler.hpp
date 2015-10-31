@@ -27,15 +27,15 @@
 
 #include <list>
 #include <utility>
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/element.hpp"
 
 namespace dogen {
 namespace yarn {
 
 /**
- * @brief Responsible for performing the assembly of a yarn partial
- * model.
+ * @brief Responsible for performing the assembly of an intermediate
+ * yarn model.
  */
 class assembler {
 public:
@@ -54,60 +54,60 @@ private:
 
 private:
     /**
-     * @brief Create the merged model.
+     * @brief Create the intermediate merged model.
      */
-    model create_merged_model_activity(const std::list<model>& models) const;
+    intermediate_model create_merged_model_activity(
+        const std::list<intermediate_model>& models) const;
 
     /**
      * @brief Index all generalizations.
      */
-    void index_generalizations_activity(model& merged_model) const;
+    void index_generalizations_activity(intermediate_model& merged_model) const;
 
     /**
-     * @brief Injects system types into the model.
+     * @brief Injects system types.
      */
-    void inject_system_types_activity(model& m) const;
+    void inject_system_types_activity(intermediate_model& merged_model) const;
 
     /**
      * @brief Resolve all types.
      */
-    void resolve_types_activity(model& merged_model) const;
+    void resolve_types_activity(intermediate_model& merged_model) const;
 
     /**
-     * @brief Index all concepts in model.
+     * @brief Index all concepts.
      */
-    void index_concepts_activity(model& merged_model) const;
+    void index_concepts_activity(intermediate_model& merged_model) const;
 
     /**
-     * @brief Index all properties in model.
+     * @brief Index all properties.
      */
-    void index_properties_activity(model& merged_model) const;
+    void index_properties_activity(intermediate_model& merged_model) const;
 
     /**
      * @brief Index all associations.
      */
-    void index_associations_activity(model& merged_model) const;
+    void index_associations_activity(intermediate_model& merged_model) const;
 
     /**
      * @brief Determines if the type has generatable types or not and
      * updates the flag accordingly.
      */
-    void update_model_generability_activity(model& merged_model) const;
+    void update_model_generability_activity(
+        intermediate_model& merged_model) const;
 
 private:
     /**
      * @brief Returns true if there are any types that require code
      * generation, false otherwise.
      */
-    bool has_generatable_types(const model& model) const;
+    bool has_generatable_types(const intermediate_model& m) const;
 
 public:
     /**
      * @brief Executes the assembler.
-     *
-     * @note parameter copied by design.
      */
-    model assemble(const std::list<model>& models) const;
+    intermediate_model assemble(const std::list<intermediate_model>& m) const;
 };
 
 } }

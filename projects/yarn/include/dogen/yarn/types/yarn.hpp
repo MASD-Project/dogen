@@ -32,18 +32,19 @@ namespace dogen {
  *
  * @section yarn_0 Mission
  *
- * Yarn is a meta-model that provides an intermediate representation. Its
- * objectives are:
+ * Yarn is a meta-model that provides a language neutral type representation.
+ * Its objectives are:
  *
  * - to provide a set of constructs that the frontends can map to easily,
  *   as well as the machinery for frontend management (registration,
  *   etc.).
- * - to provide the tooling required to combine multiple yarn models
- *   together into a bigger model - called the @e merged model.
- * - to ensure the consistency of the merged model via validation rules
- *   (such as verifying that all types have a definitions, etc.).
+ * - to provide the tooling required to combine multiple intermediate
+ *   yarn models together into a bigger model - called the intermediate @e merged
+ *   model.
+ *   - to ensure the consistency of the intermediate merged model via validation
+ *   rules (such as verifying that all types have a definitions, etc.).
  * - to provide all the information required to build the final
- * meta-model.
+ *   model and to build it.
  *
  */
 namespace yarn {

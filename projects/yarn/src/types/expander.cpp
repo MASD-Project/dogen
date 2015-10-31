@@ -26,22 +26,22 @@
 namespace dogen {
 namespace yarn {
 
-void expander::expand_modules(model& m) const {
+void expander::expand_modules(intermediate_model& m) const {
     modules_expander e;
     e.expand(m);
 }
 
-void expander::expand_properties(model& m) const {
+void expander::expand_properties(intermediate_model& m) const {
     properties_expander e;
     e.expand(m);
 }
 
-void expander::expand_references(model& m) const {
+void expander::expand_references(intermediate_model& m) const {
     references_expander e;
     e.expand(m);
 }
 
-void expander::expand(model& m) const {
+void expander::expand(intermediate_model& m) const {
     expand_modules(m);
     expand_properties(m);
     expand_references(m);

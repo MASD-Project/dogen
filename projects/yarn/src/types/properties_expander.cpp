@@ -23,8 +23,8 @@
 namespace dogen {
 namespace yarn {
 
-std::unordered_set<std::string>
-properties_expander::obtain_top_level_module_names(const model& m) const {
+std::unordered_set<std::string> properties_expander::
+obtain_top_level_module_names(const intermediate_model& m) const {
     std::unordered_set<std::string> r;
 
     for (const auto& pair : m.modules()) {
@@ -36,7 +36,8 @@ properties_expander::obtain_top_level_module_names(const model& m) const {
 }
 
 identifier_parser
-properties_expander::make_identifier_parser(const model& m) const {
+properties_expander::
+make_identifier_parser(const intermediate_model& m) const {
     const auto tlmn(obtain_top_level_module_names(m));
     const auto& l(m.name().location());
     identifier_parser r(tlmn, l);
@@ -55,13 +56,13 @@ expand_property(const identifier_parser& /*ip*/, property& /*p*/) const {
       p.type(nn);*/
 }
 
-void properties_expander::expand(model& m) const {
+void properties_expander::expand(intermediate_model& m) const {
     const auto ip(make_identifier_parser(m));
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
         for (auto& p : o.local_properties())
             p.type(make_nested_name(ip, p.unparsed_type()));
-        // expand_property(ip, p);
+        // FIXME: expand_property(ip, p);
     }
 
     for (auto& pair : m.concepts()) {

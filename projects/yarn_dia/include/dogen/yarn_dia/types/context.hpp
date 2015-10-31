@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn_dia/serialization/context_fwd_ser.hpp"
 
 namespace dogen {
@@ -53,7 +53,7 @@ public:
         const std::unordered_set<std::string>& parent_ids,
         const std::unordered_map<std::string, dogen::yarn::name>& id_to_name,
         const std::unordered_set<std::string>& top_level_module_names,
-        const dogen::yarn::model& model);
+        const dogen::yarn::intermediate_model& model);
 
 private:
     template<typename Archive>
@@ -104,13 +104,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Yarn model we are currently building.
+     * @brief Intermediate yarn model we are currently building.
      */
     /**@{*/
-    const dogen::yarn::model& model() const;
-    dogen::yarn::model& model();
-    void model(const dogen::yarn::model& v);
-    void model(const dogen::yarn::model&& v);
+    const dogen::yarn::intermediate_model& model() const;
+    dogen::yarn::intermediate_model& model();
+    void model(const dogen::yarn::intermediate_model& v);
+    void model(const dogen::yarn::intermediate_model&& v);
     /**@}*/
 
 public:
@@ -128,7 +128,7 @@ private:
     std::unordered_set<std::string> parent_ids_;
     std::unordered_map<std::string, dogen::yarn::name> id_to_name_;
     std::unordered_set<std::string> top_level_module_names_;
-    dogen::yarn::model model_;
+    dogen::yarn::intermediate_model model_;
 };
 
 } }

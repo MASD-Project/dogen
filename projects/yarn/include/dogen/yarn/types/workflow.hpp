@@ -28,7 +28,7 @@
 #include <list>
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/yarn/types/input_descriptor.hpp"
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -36,19 +36,20 @@ namespace yarn {
 class workflow {
 private:
     /**
-     * @brief Obtains all partial Yarn models.
+     * @brief Obtains all intermediate models.
      */
-    std::list<model> obtain_partial_models_activity(
+    std::list<intermediate_model> obtain_intermediate_models_activity(
         const dynamic::repository& rp,
         const std::list<input_descriptor>& id) const;
 
     /**
-     * @brief Execute the yarn assembling workflow.
+     * @brief Executes the assembling workflow.
      */
-    model assemble_partial_models_activity(const std::list<model>& m) const;
+    intermediate_model assemble_intermediate_models_activity(
+        const std::list<intermediate_model>& m) const;
 
 public:
-    model execute(const dynamic::repository& rp,
+    intermediate_model execute(const dynamic::repository& rp,
         const std::list<input_descriptor>& id) const;
 };
 

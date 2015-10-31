@@ -63,7 +63,7 @@ void registrar::register_provider(boost::shared_ptr<
 }
 
 void registrar::register_provider(boost::shared_ptr<
-    inclusion_dependencies_provider_interface<yarn::model>
+    inclusion_dependencies_provider_interface<yarn::intermediate_model>
     > p) {
 
     if (p->formatter_name().empty()) {

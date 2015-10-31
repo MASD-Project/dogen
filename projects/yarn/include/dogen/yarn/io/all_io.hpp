@@ -27,7 +27,6 @@
 
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/node_io.hpp"
-#include "dogen/yarn/io/model_io.hpp"
 #include "dogen/yarn/io/module_io.hpp"
 #include "dogen/yarn/io/object_io.hpp"
 #include "dogen/yarn/io/concept_io.hpp"
@@ -42,6 +41,7 @@
 #include "dogen/yarn/io/origin_types_io.hpp"
 #include "dogen/yarn/io/generation_types_io.hpp"
 #include "dogen/yarn/io/input_descriptor_io.hpp"
+#include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/io/relationship_types_io.hpp"
 
 #endif

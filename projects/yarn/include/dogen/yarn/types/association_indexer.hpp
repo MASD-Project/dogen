@@ -27,7 +27,7 @@
 
 #include <list>
 #include <unordered_set>
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/hash/name_hash.hpp"
@@ -84,20 +84,20 @@ private:
      * @brief Iterates through the nested name recursively, picking
      * up associations as it goes along.
      */
-    void recurse_nested_names(const model& m, object& o,
+    void recurse_nested_names(const intermediate_model& m, object& o,
         const nested_name& nn, bool& is_pointer) const;
 
 private:
     /**
      * @brief Indexes a specific object.
      */
-    void index_object(const model& m, object& o) const;
+    void index_object(const intermediate_model& m, object& o) const;
 
 public:
     /**
      * @brief Indexes all association relationships.
      */
-    void index(model& m) const;
+    void index(intermediate_model& m) const;
 };
 
 } }

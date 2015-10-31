@@ -25,19 +25,19 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 
 class expander {
 private:
-    void expand_modules(model& m) const;
-    void expand_properties(model& m) const;
-    void expand_references(model& m) const;
+    void expand_modules(intermediate_model& m) const;
+    void expand_properties(intermediate_model& m) const;
+    void expand_references(intermediate_model& m) const;
 
 public:
-    void expand(model& m) const;
+    void expand(intermediate_model& m) const;
 };
 
 } }

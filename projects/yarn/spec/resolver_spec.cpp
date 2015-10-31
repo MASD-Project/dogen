@@ -23,23 +23,23 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/merging_error.hpp"
 #include "dogen/yarn/types/resolution_error.hpp"
 #include "dogen/yarn/types/merger.hpp"
 #include "dogen/yarn/types/resolver.hpp"
-#include "dogen/yarn/io/model_io.hpp"
+#include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/io/property_io.hpp"
 #include "dogen/utility/test/equality_tester.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
-#include "dogen/yarn/test/mock_model_factory.hpp"
+#include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
 
 namespace {
 
 const std::string test_module("yarn");
 const std::string test_suite("resolver_spec");
 
-using dogen::yarn::test::mock_model_factory;
+using dogen::yarn::test::mock_intermediate_model_factory;
 
 /*
  * FIXME: we need to update the mock factory to generate merged
@@ -50,10 +50,11 @@ using dogen::yarn::test::mock_model_factory;
  *
  * Flag was added but does nothing yet.
  */
-const mock_model_factory::flags flags(false/*tagged*/, false/*resolved*/,
-    true/*merged*/, false/*concepts_indexed*/, false/*properties_indexed*/);
+const mock_intermediate_model_factory::flags flags(false/*tagged*/,
+    false/*resolved*/, true/*merged*/, false/*concepts_indexed*/,
+    false/*properties_indexed*/);
 
-const mock_model_factory factory(flags);
+const mock_intermediate_model_factory factory(flags);
 
 const std::string incorrect_model("Object does not belong to this model");
 const std::string inconsistent_kvp("Inconsistency between key and value");

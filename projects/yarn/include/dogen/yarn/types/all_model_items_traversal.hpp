@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/concept.hpp"
@@ -35,11 +35,12 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Performs a traversal across all types in a domain model.
+ * @brief Performs a traversal across all types in an intermediate model.
  */
 /**@{*/
 template<typename TraversalVisitor> inline
-void all_model_items_traversal(const model& m, const TraversalVisitor& v) {
+void all_model_items_traversal(const intermediate_model& m,
+    const TraversalVisitor& v) {
     for (const auto& pair : m.modules())
         v(pair.second);
 
@@ -57,7 +58,8 @@ void all_model_items_traversal(const model& m, const TraversalVisitor& v) {
 }
 
 template<typename TraversalVisitor> inline
-void all_model_items_traversal(const model& m, TraversalVisitor& v) {
+void all_model_items_traversal(const intermediate_model& m,
+    TraversalVisitor& v) {
     for (auto& pair : m.modules())
         v(pair.second);
 
@@ -75,7 +77,7 @@ void all_model_items_traversal(const model& m, TraversalVisitor& v) {
 }
 
 template<typename TraversalVisitor> inline
-void all_model_items_traversal(model& m, TraversalVisitor& v) {
+void all_model_items_traversal(intermediate_model& m, TraversalVisitor& v) {
     for (auto& pair : m.modules())
         v(pair.second);
 
@@ -91,7 +93,6 @@ void all_model_items_traversal(model& m, TraversalVisitor& v) {
     for (auto& pair : m.objects())
         v(pair.second);
 }
-
 /**@}*/
 
 } }

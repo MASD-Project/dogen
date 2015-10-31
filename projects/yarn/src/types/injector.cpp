@@ -23,7 +23,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/injection_error.hpp"
 #include "dogen/yarn/types/injector.hpp"
@@ -39,8 +39,6 @@ const std::string merged("merged_");
 const std::string xml_extension(".xml");
 const std::string text_extension(".txt");
 const std::string binary_extension(".bin");
-const std::string dia_model("dia");
-const std::string yarn_model("yarn");
 const std::string visitor_name("visitor");
 const std::string extract_name("extract");
 const std::string uint_name("unsigned int");
@@ -76,13 +74,13 @@ inline void add_containing_module_to_non_contained_entities(
 
 class injector::context {
 public:
-    context(yarn::model& m) : model_(m) { }
+    context(yarn::intermediate_model& m) : model_(m) { }
 
 public:
-    yarn::model& model() { return model_; }
+    yarn::intermediate_model& model() { return model_; }
 
 private:
-    yarn::model& model_;
+    yarn::intermediate_model& model_;
 };
 
 bool injector::insert(const object& o) {
@@ -203,7 +201,7 @@ void injector::inject_global_module() {
     model.modules().insert(std::make_pair(qn, global_module));
 }
 
-void injector::inject(model& m) {
+void injector::inject(intermediate_model& m) {
     context_ = std::unique_ptr<context>(new context(m));
     inject_visitors();
     inject_global_module();

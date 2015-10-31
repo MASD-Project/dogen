@@ -90,7 +90,8 @@ private:
 bundle_repository bundle_repository_factory::
 make(const dynamic::repository& rp, const dynamic::object& root_object,
     const dogen::formatters::general_settings_factory& gsf,
-    const opaque_settings_builder& osb, const yarn::model& m) const {
+    const opaque_settings_builder& osb,
+    const yarn::intermediate_model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating settings bundle repository.";
 

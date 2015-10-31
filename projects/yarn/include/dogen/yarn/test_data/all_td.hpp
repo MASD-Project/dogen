@@ -27,7 +27,6 @@
 
 #include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/node_td.hpp"
-#include "dogen/yarn/test_data/model_td.hpp"
 #include "dogen/yarn/test_data/module_td.hpp"
 #include "dogen/yarn/test_data/object_td.hpp"
 #include "dogen/yarn/test_data/concept_td.hpp"
@@ -42,6 +41,7 @@
 #include "dogen/yarn/test_data/origin_types_td.hpp"
 #include "dogen/yarn/test_data/generation_types_td.hpp"
 #include "dogen/yarn/test_data/input_descriptor_td.hpp"
+#include "dogen/yarn/test_data/intermediate_model_td.hpp"
 #include "dogen/yarn/test_data/relationship_types_td.hpp"
 
 #endif

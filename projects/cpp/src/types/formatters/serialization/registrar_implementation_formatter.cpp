@@ -39,13 +39,13 @@ namespace serialization {
 namespace {
 
 class provider final : public formattables::
-        inclusion_dependencies_provider_interface<yarn::model> {
+        inclusion_dependencies_provider_interface<yarn::intermediate_model> {
 public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
-        provide(const formattables::inclusion_dependencies_builder_factory& f,
-        const yarn::model& m) const override;
+    provide(const formattables::inclusion_dependencies_builder_factory& f,
+        const yarn::intermediate_model& m) const override;
 };
 
 std::string provider::formatter_name() const {
@@ -54,7 +54,7 @@ std::string provider::formatter_name() const {
 
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
-    const yarn::model& m) const {
+    const yarn::intermediate_model& m) const {
 
     yarn::name n;
     n.simple(registrar_name);

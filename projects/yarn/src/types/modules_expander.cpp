@@ -35,7 +35,7 @@ const std::string missing_module("Could not find module: ");
 namespace dogen {
 namespace yarn {
 
-boost::optional<name> containing_module(model& m, const name& n) {
+boost::optional<name> containing_module(intermediate_model& m, const name& n) {
     if (n.location().original_model_name().empty() ||
         n.simple() == m.name().location().original_model_name()) {
         BOOST_LOG_SEV(lg, debug) << "Type has no containing module: "
@@ -70,7 +70,7 @@ boost::optional<name> containing_module(model& m, const name& n) {
 }
 
 template<typename AssociativeContainerOfContainable>
-inline void update_containing_module(model& m,
+inline void update_containing_module(intermediate_model& m,
     AssociativeContainerOfContainable& c) {
     for (auto& pair : c) {
         auto& s(pair.second);
@@ -93,7 +93,7 @@ inline void update_containing_module(model& m,
     }
 }
 
-void modules_expander::expand_containing_module(model& m) const {
+void modules_expander::expand_containing_module(intermediate_model& m) const {
     update_containing_module(m, m.objects());
     update_containing_module(m, m.primitives());
     update_containing_module(m, m.enumerations());
@@ -101,7 +101,7 @@ void modules_expander::expand_containing_module(model& m) const {
     update_containing_module(m, m.modules());
 }
 
-void modules_expander::expand(model& m) const {
+void modules_expander::expand(intermediate_model& m) const {
     expand_containing_module(m);
 }
 

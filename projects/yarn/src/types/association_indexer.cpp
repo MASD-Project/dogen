@@ -62,7 +62,7 @@ void association_indexer::remove_duplicates(std::list<name>& names,
                              << names.size();
 }
 
-void association_indexer::recurse_nested_names(const model& m,
+void association_indexer::recurse_nested_names(const intermediate_model& m,
     object& o, const nested_name& nn, bool& is_pointer) const {
     const auto n(nn.type());
     auto& rels(o.relationships());
@@ -104,7 +104,8 @@ void association_indexer::recurse_nested_names(const model& m,
     }
 }
 
-void association_indexer::index_object(const model& m, object& o) const {
+void association_indexer::
+index_object(const intermediate_model& m, object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().qualified();
 
     for (const auto& p : o.local_properties()) {
@@ -134,7 +135,7 @@ void association_indexer::index_object(const model& m, object& o) const {
         remove_duplicates(i->second);
 }
 
-void association_indexer::index(model& m) const {
+void association_indexer::index(intermediate_model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Indexing objects. Total objects: "
                              << m.objects().size();
 

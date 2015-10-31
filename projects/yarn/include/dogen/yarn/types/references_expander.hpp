@@ -25,17 +25,18 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 
 class references_expander {
 private:
-    void expand_model_references(const nested_name& nn, model& m) const;
+    void expand_model_references(const nested_name& nn,
+        intermediate_model& m) const;
 
 public:
-    void expand(model& m) const;
+    void expand(intermediate_model& m) const;
 };
 
 } }

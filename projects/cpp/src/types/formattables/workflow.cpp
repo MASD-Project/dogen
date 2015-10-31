@@ -103,7 +103,7 @@ workflow::create_path_settings_activity(const dynamic::repository& srp,
 path_derivatives_repository workflow::
 create_path_derivatives_repository(const config::cpp_options& opts,
     const std::unordered_map<std::string, settings::path_settings>& ps,
-    const yarn::model& m) const {
+    const yarn::intermediate_model& m) const {
     path_derivatives_repository_factory f;
     return f.make(opts, ps, m);
 }
@@ -114,7 +114,7 @@ create_formatter_properties(const dynamic::repository& srp,
     const settings::bundle_repository& brp,
     const path_derivatives_repository& pdrp,
     const formatters::container& fc,
-    const yarn::model& m) const {
+    const yarn::intermediate_model& m) const {
 
     formatter_properties_repository_factory f;
     return f.make(srp, root_object, brp, pdrp, fc, m);
@@ -125,7 +125,7 @@ workflow::from_transformer_activity(
     const settings::opaque_settings_builder& osb,
     const settings::bundle_repository& brp,
     const formatter_properties_repository& fprp,
-    const yarn::model& m) const {
+    const yarn::intermediate_model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming formattables.";
 
     const transformer t(osb, brp, fprp, m);
@@ -146,7 +146,7 @@ workflow::from_factory_activity(const config::cpp_options& opts,
     const formattables::path_derivatives_repository& pdrp,
     const formatter_properties_repository& fprp,
     const formatters::container& fc,
-    const yarn::model& m) const {
+    const yarn::intermediate_model& m) const {
 
     const auto& formatters(fc.all_formatters());
     std::forward_list<std::shared_ptr<formattables::formattable> > r;
@@ -177,7 +177,7 @@ workflow::execute(const config::cpp_options& opts,
     const formatters::container& fc,
     const settings::opaque_settings_builder& osb,
     const settings::bundle_repository& brp,
-    const yarn::model& m) const {
+    const yarn::intermediate_model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started creating formattables.";
 
     const auto& ro(root_object);

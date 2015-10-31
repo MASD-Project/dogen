@@ -22,7 +22,6 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/model_io.hpp"
 #include "dogen/yarn/io/module_io.hpp"
 #include "dogen/yarn/io/object_io.hpp"
 #include "dogen/yarn/io/concept_io.hpp"
@@ -31,6 +30,7 @@
 #include "dogen/yarn/io/enumeration_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
 #include "dogen/yarn/io/generation_types_io.hpp"
+#include "dogen/yarn/io/intermediate_model_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -179,7 +179,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const model& v) {
+std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -187,7 +187,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::model\"" << ", "
+      << "\"__type__\": " << "\"dogen::yarn::intermediate_model\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"extensions\": " << v.extensions() << ", "
       << "\"name\": " << v.name() << ", "

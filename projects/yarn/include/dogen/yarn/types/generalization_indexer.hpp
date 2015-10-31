@@ -27,7 +27,7 @@
 
 #include <list>
 #include <unordered_map>
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/types/relationship_types.hpp"
@@ -66,26 +66,26 @@ private:
      *
      * @return original parents of the tree we are recursing into.
      */
-    std::list<name> recurse_generalization(
-        const model& m, const yarn::name& leaf, const yarn::object& o,
+    std::list<name> recurse_generalization(const intermediate_model& m,
+        const yarn::name& leaf, const yarn::object& o,
         generalization_details& d) const;
 
     /**
      * @brief Obtains all of the details of the generalization
      * relationships.
      */
-    generalization_details obtain_details(const model& m) const;
+    generalization_details obtain_details(const intermediate_model& m) const;
 
     /**
      * @brief Populates properties related to generalization.
      */
-    void populate(const generalization_details& d, model& m) const;
+    void populate(const generalization_details& d, intermediate_model& m) const;
 
 public:
     /**
      * @brief Indexes the generalisation relationships for this model.
      */
-    void index(model& m) const;
+    void index(intermediate_model& m) const;
 };
 
 } }

@@ -24,7 +24,7 @@
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/merging_error.hpp"
 #include "dogen/yarn/io/property_io.hpp"
-#include "dogen/yarn/io/model_io.hpp"
+#include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/merger.hpp"
 
 using namespace dogen::utility::log;
@@ -126,7 +126,7 @@ void merger::update_references() {
     merged_model_.references(updated_references);
 }
 
-void merger::add_target(const model& target) {
+void merger::add_target(const intermediate_model& target) {
     const auto qn(target.name().qualified());
     require_not_has_target(qn);
 
@@ -142,7 +142,7 @@ void merger::add_target(const model& target) {
     BOOST_LOG_SEV(lg, debug) << "added target model: " << qn;
 }
 
-void merger::add(const model& m) {
+void merger::add(const intermediate_model& m) {
     require_not_has_merged();
 
     if (m.is_target())
@@ -154,7 +154,7 @@ void merger::add(const model& m) {
     models_.insert(std::make_pair(m.name(), m));
 }
 
-void merger::merge_model(const model& m) {
+void merger::merge_model(const intermediate_model& m) {
     BOOST_LOG_SEV(lg, info) << "Merging model: '"
                             << m.name().qualified()
                             << " modules: " << m.modules().size()
@@ -198,7 +198,7 @@ void merger::merge_models() {
         merge_model(pair.second);
 }
 
-model merger::merge() {
+intermediate_model merger::merge() {
     require_has_target();
     require_not_has_merged();
     update_references();

@@ -80,7 +80,7 @@ hydrator::hydrator(const dynamic::workflow& w)
     : dynamic_workflow_(w) { }
 
 boost::optional<yarn::name>
-containing_module(yarn::model& m, const yarn::name& n) {
+containing_module(yarn::intermediate_model& m, const yarn::name& n) {
     if (n.location().original_model_name().empty() ||
         n.simple() == m.name().location().original_model_name()) {
         BOOST_LOG_SEV(lg, debug) << "Type has no containing module: "
@@ -111,8 +111,8 @@ containing_module(yarn::model& m, const yarn::name& n) {
 }
 
 template<typename AssociativeContainerOfContainable>
-inline void
-update_containing_module(yarn::model& m, AssociativeContainerOfContainable& c) {
+inline void update_containing_module(
+    yarn::intermediate_model& m, AssociativeContainerOfContainable& c) {
     for (auto& pair : c) {
         auto& s(pair.second);
         s.containing_module(containing_module(m, s.name()));
@@ -134,7 +134,7 @@ update_containing_module(yarn::model& m, AssociativeContainerOfContainable& c) {
     }
 }
 
-std::string hydrator::model_name(const yarn::model& m) const {
+std::string hydrator::model_name(const yarn::intermediate_model& m) const {
     if (m.name().location().original_model_name() == hardware_model_name)
         return empty;
     return m.name().location().original_model_name();
@@ -147,7 +147,7 @@ yarn::generation_types hydrator::generation_type(const bool is_target) const {
 }
 
 void hydrator::read_module_path(const boost::property_tree::ptree& pt,
-  yarn::model& m, yarn::name& n) const {
+    yarn::intermediate_model& m, yarn::name& n) const {
     const auto i(pt.find(module_path_key));
     if (i == pt.not_found())
         return;
@@ -191,8 +191,8 @@ create_dynamic_extensions(const boost::property_tree::ptree& pt,
     return dynamic_workflow_.execute(st, kvps);
 }
 
-void hydrator::
-read_element(const boost::property_tree::ptree& pt, yarn::model& m) const {
+void hydrator::read_element(const boost::property_tree::ptree& pt,
+    yarn::intermediate_model& m) const {
     yarn::name n;
     n.location().original_model_name(model_name(m));
     read_module_path(pt, m, n);
@@ -235,8 +235,9 @@ read_element(const boost::property_tree::ptree& pt, yarn::model& m) const {
     }
 }
 
-yarn::model hydrator::read_stream(std::istream& s, const bool is_target) const {
-    yarn::model r;
+yarn::intermediate_model hydrator::read_stream(
+    std::istream& s, const bool is_target) const {
+    yarn::intermediate_model r;
     r.generation_type(generation_type(is_target));
 
     using namespace boost::property_tree;
@@ -306,7 +307,7 @@ to_object_type(const boost::optional<std::string>& s) const {
     BOOST_THROW_EXCEPTION(hydration_error(invalid_object_type + ot));
 }
 
-void hydrator::post_process(yarn::model& m) const {
+void hydrator::post_process(yarn::intermediate_model& m) const {
     update_containing_module(m, m.objects());
     update_containing_module(m, m.primitives());
     update_containing_module(m, m.enumerations());
@@ -314,7 +315,7 @@ void hydrator::post_process(yarn::model& m) const {
     update_containing_module(m, m.modules());
 }
 
-yarn::model hydrator::hydrate(std::istream& s) const {
+yarn::intermediate_model hydrator::hydrate(std::istream& s) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON stream.";
     using namespace boost::property_tree;
     try {
@@ -337,7 +338,8 @@ yarn::model hydrator::hydrate(std::istream& s) const {
     }
 }
 
-yarn::model hydrator::hydrate(const boost::filesystem::path& p) const {
+yarn::intermediate_model hydrator::
+hydrate(const boost::filesystem::path& p) const {
     const auto gs(p.generic_string());
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << gs;
     boost::filesystem::ifstream s(p);

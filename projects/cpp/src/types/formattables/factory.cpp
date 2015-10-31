@@ -136,7 +136,7 @@ factory::clone_path_settings(
     return r;
 }
 
-yarn::name factory::create_name(const yarn::model& m,
+yarn::name factory::create_name(const yarn::intermediate_model& m,
     const std::string& simple_name) const {
 
     yarn::name r;
@@ -148,7 +148,7 @@ yarn::name factory::create_name(const yarn::model& m,
 }
 
 path_derivatives factory::create_path_derivatives(
-    const config::cpp_options& opts, const yarn::model& m,
+    const config::cpp_options& opts, const yarn::intermediate_model& m,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const yarn::name& n,
     const std::string& formatter_name) const {
@@ -193,7 +193,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     const settings::bundle_repository& brp,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
-    const yarn::model& m) const {
+    const yarn::intermediate_model& m) const {
 
     const auto n(create_name(m, registrar_name));
     BOOST_LOG_SEV(lg, debug) << "Making registrar: " << n.qualified();
@@ -282,7 +282,7 @@ make_includers(
     const std::forward_list<
     std::shared_ptr<formatters::formatter_interface>>& formatters,
     const formatter_properties_repository& fprp,
-    const yarn::model& m) const {
+    const yarn::intermediate_model& m) const {
 
     const auto n(create_name(m, includers_name));
     BOOST_LOG_SEV(lg, debug) << "Making includers: " << n.qualified();
@@ -402,7 +402,7 @@ make_cmakelists(const config::cpp_options& opts,
     const dogen::formatters::general_settings_factory& gsf,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
-    const yarn::model& m) const
+    const yarn::intermediate_model& m) const
 {
     std::forward_list<std::shared_ptr<formattable> > r;
     if (opts.disable_cmakelists()) {
@@ -460,7 +460,7 @@ factory::make_odb_options(const config::cpp_options& opts,
     const dogen::formatters::general_settings_factory& gsf,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
-    const yarn::model& m) const {
+    const yarn::intermediate_model& m) const {
 
     using namespace formatters::odb;
     const auto ch_fn(traits::class_header_formatter_name());

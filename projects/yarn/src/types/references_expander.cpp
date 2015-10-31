@@ -32,7 +32,7 @@ namespace dogen {
 namespace yarn {
 
 void references_expander::
-expand_model_references(const nested_name& nn, model& m) const {
+expand_model_references(const nested_name& nn, intermediate_model& m) const {
     const auto nn_omn(nn.type().location().original_model_name());
     const auto m_omn(m.name().location().original_model_name());
     const bool is_current_model(nn_omn == m_omn);
@@ -51,7 +51,7 @@ expand_model_references(const nested_name& nn, model& m) const {
       expand_model_references(c, m);
 }
 
-void references_expander::expand(model& m) const {
+void references_expander::expand(intermediate_model& m) const {
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
         for (auto& p : o.local_properties())

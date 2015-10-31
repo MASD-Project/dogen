@@ -62,7 +62,7 @@ container::enumeration_providers() {
 
 const std::forward_list<
     boost::shared_ptr<
-        inclusion_dependencies_provider_interface<yarn::model>
+        inclusion_dependencies_provider_interface<yarn::intermediate_model>
         >
     >&
 container::model_providers() const {
@@ -71,7 +71,7 @@ container::model_providers() const {
 
 std::forward_list<
     boost::shared_ptr<
-        inclusion_dependencies_provider_interface<yarn::model>
+        inclusion_dependencies_provider_interface<yarn::intermediate_model>
         >
     >&
 container::model_providers() {

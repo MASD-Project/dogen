@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/utility/test/file_asserter.hpp"
 
 namespace dogen {
@@ -43,7 +43,7 @@ public:
     virtual ~yarn_file_asserter() noexcept {}
 
 private:
-    yarn::model read_xml(boost::filesystem::path path) const;
+    intermediate_model read_xml(boost::filesystem::path path) const;
 
 public:
     virtual bool is_assertable(boost::filesystem::path path) const override;

@@ -160,7 +160,7 @@ inclusion_dependencies_factory::make(const yarn::concept& /*c*/) const {
 }
 
 std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const yarn::model& m) const {
+inclusion_dependencies_factory::make(const yarn::intermediate_model& m) const {
     return generate(factory_, provider_container_.model_providers(), m);
 }
 

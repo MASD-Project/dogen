@@ -29,7 +29,7 @@
 #include <memory>
 #include "dogen/dia/types/diagram_fwd.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
-#include "dogen/yarn/types/model_fwd.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn_dia/types/context.hpp"
 #include "dogen/yarn_dia/types/profiler.hpp"
 #include "dogen/yarn_dia/types/validator.hpp"
@@ -81,12 +81,12 @@ private:
 
     /**
      * @brief Transforms the entire graph of processed objects into a
-     * YARN model.
+     * Yarn model.
      */
     void graph_to_context_activity(const graph_type& g);
 
 public:
-    yarn::model execute(const dia::diagram& diagram,
+    yarn::intermediate_model execute(const dia::diagram& diagram,
         const std::string& model_name,
         const std::string& external_module_path,
         bool is_target);

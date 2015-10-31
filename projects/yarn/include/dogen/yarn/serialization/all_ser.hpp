@@ -27,7 +27,6 @@
 
 #include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/yarn/serialization/node_ser.hpp"
-#include "dogen/yarn/serialization/model_ser.hpp"
 #include "dogen/yarn/serialization/module_ser.hpp"
 #include "dogen/yarn/serialization/object_ser.hpp"
 #include "dogen/yarn/serialization/concept_ser.hpp"
@@ -43,6 +42,7 @@
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
 #include "dogen/yarn/serialization/generation_types_ser.hpp"
 #include "dogen/yarn/serialization/input_descriptor_ser.hpp"
+#include "dogen/yarn/serialization/intermediate_model_ser.hpp"
 #include "dogen/yarn/serialization/relationship_types_ser.hpp"
 
 #endif

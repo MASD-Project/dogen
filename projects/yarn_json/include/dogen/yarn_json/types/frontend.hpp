@@ -31,7 +31,8 @@ namespace dogen {
 namespace yarn_json {
 
 /**
- * @brief Generates a yarn model from a JSON file with a yarn format.
+ * @brief Generates an intermediate yarn model from a JSON file with a
+ * yarn format.
  */
 class frontend final : public yarn::frontend_interface {
 public:
@@ -40,7 +41,7 @@ public:
 public:
     std::string id() const override;
     std::list<std::string> supported_extensions() const override;
-    yarn::model execute(const dynamic::workflow& w,
+    yarn::intermediate_model execute(const dynamic::workflow& w,
         const yarn::input_descriptor& d) override;
 };
 

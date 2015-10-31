@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -45,7 +45,8 @@ public:
      * The format to use is inferred by the extension supplied. If the
      * extension supplied is not supported, an extension is thrown.
      */
-    void persist(const model& m, const boost::filesystem::path& p) const;
+    void persist(const intermediate_model& m,
+        const boost::filesystem::path& p) const;
 };
 
 } }
