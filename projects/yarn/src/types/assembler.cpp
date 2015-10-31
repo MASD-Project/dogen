@@ -125,6 +125,11 @@ model assembler::assemble(const std::list<model>& models) const {
     update_model_generability_activity(r);
 
     BOOST_LOG_SEV(lg, debug) << "Finished assembling models.";
+    BOOST_LOG_SEV(lg, debug) << "Totals: objects: " << r.objects().size()
+                             << " modules: " << r.modules().size()
+                             << " concepts: " << r.concepts().size()
+                             << " enumerations: " << r.enumerations().size()
+                             << " primitives: " << r.primitives().size();
 
     return r;
 }

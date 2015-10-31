@@ -27,12 +27,16 @@
 
 #include <map>
 #include <string>
+#include <ostream>
 #include <functional>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/config/types/knitting_options.hpp"
 #include "dogen/dynamic/types/repository.hpp"
+#include "dogen/config/types/knitting_options.hpp"
+#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/input_descriptor.hpp"
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/formatters/types/file_writer_interface.hpp"
 
 namespace dogen {
 namespace knit {
@@ -97,6 +101,40 @@ private:
      */
     dynamic::repository setup_dynamic_repository_activity(
         const std::forward_list<dynamic::ownership_hierarchy>& oh) const;
+
+    /**
+     * @brief Create a list of all input descriptors.
+     */
+    std::list<yarn::input_descriptor>
+    obtain_input_descriptors_activity() const;
+
+    /**
+     * @brief Obtain the yarn model.
+     */
+    yarn::model obtain_yarn_model_activity(
+        const dynamic::repository& rp,
+        const std::list<yarn::input_descriptor>& id) const;
+
+    /**
+     * @brief Performs a housekeeping run for the supplied directories.
+     */
+    void perform_housekeeping_activity(
+        const std::forward_list<formatters::file>& files,
+        const std::forward_list<boost::filesystem::path>& dirs) const;
+
+    /**
+     * @brief Obtains the file writer, according to configuration.
+     */
+    std::shared_ptr<dogen::formatters::file_writer_interface>
+    obtain_file_writer_activity() const;
+
+    /**
+     * @brief Outputs the pair file name and contents to its output
+     * destination.
+     */
+    void write_files_activity(
+        std::shared_ptr<dogen::formatters::file_writer_interface> writer,
+        const std::forward_list<formatters::file>& files) const;
 
 public:
     /**
