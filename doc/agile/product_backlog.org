@@ -1095,6 +1095,8 @@ This article has a good example of how to consume clang, but
 unfortunately its not about indenting:
 
 - [[https://bbannier.github.io/blog/2015/05/02/Writing-a-basic-clang-static-analysis-check.html][Writing a basic clang static analysis check]]
+- [[http://zed0.co.uk/clang-format-configurator/][clang-format configurator]]
+- [[http://clangformat.com/][online clang format]] - older site
 
 *** Use clang format in knit                                          :story:
 
