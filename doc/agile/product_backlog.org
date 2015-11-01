@@ -5623,6 +5623,21 @@ think of an obvious use case.
 Dogen only has a single backend kernel: quilt. This story looks into
 how the world looks like if we want to support multiple of these.
 
+*More recent ideas on this space*
+
+- it may be possible for simpler languages to have an outputting model
+  that has only formatters and uses yarn directly. For example for C#
+  and Java it is likely we could get away with a simple utility layer.
+- this implies that we may either end up with outputting models that
+  are nothing but just stitch templates.
+- this being the case, we could perhaps have two kernels: the cpp
+  kernel (quilt) which requires lots of hand-crafting to generate the
+  output and this more generic kernel which is just formatters per
+  language (pleat?). Quilt/cpp kernel could also be transformed into a
+  C/cpp/glib kernel, where the services we have at present for C++ are
+  shared between these different languages (they all need includes,
+  etc). Other languages may also have similar requirements (D?).
+
 *Previous notes slightly bit-rotted*
 
 At present we have hard-coded knit to support a single C++ model,
