@@ -12,15 +12,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-01 Sun 00:05]
+#+CAPTION: Clock summary at [2015-11-01 Sun 23:30]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *13:00* |       |      |
+| *Total time*                                                                | *13:41* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 13:00   |       |      |
-| Active                                                                      |         | 13:00 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:17 |
+| Stories                                                                     | 13:41   |       |      |
+| Active                                                                      |         | 13:41 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:58 |
 | COMPLETED Split "full" models from "partial" models                         |         |       | 8:37 |
 | STARTED Frontend model refactor                                             |         |       | 1:27 |
 | STARTED Model should not be an element                                      |         |       | 0:18 |
@@ -29,6 +29,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-11-01 Sun 22:49]--[2015-11-01 Sun 23:30] =>  0:41
     CLOCK: [2015-10-31 Sat 22:01]--[2015-10-31 Sat 22:37] =>  0:36
     CLOCK: [2015-10-27 Tue 19:01]--[2015-10-27 Tue 19:08] =>  0:07
     CLOCK: [2015-10-27 Tue 07:59]--[2015-10-27 Tue 08:22] =>  0:23
