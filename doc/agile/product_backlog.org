@@ -4211,6 +4211,11 @@ the C++-14 concepts light.
 
 See [[http://www.boost.org/doc/libs/1_53_0/libs/concept_check/creating_concepts.htm][Creating Concepts]].
 
+It is important to be able to switch the concept generation off
+too. We may want to create concepts for internal purposes but have no
+need to actually express it in code. This could be suppressed via
+meta-data.
+
 *** Add support for object cloning                                    :story:
 
 #+begin_quote
