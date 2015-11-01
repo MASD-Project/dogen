@@ -12,17 +12,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-10-31 Sat 22:59]
+#+CAPTION: Clock summary at [2015-11-01 Sun 00:05]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *11:55* |       |      |
+| *Total time*                                                                | *13:00* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 11:55   |       |      |
-| Active                                                                      |         | 11:55 |      |
+| Stories                                                                     | 13:00   |       |      |
+| Active                                                                      |         | 13:00 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:17 |
 | COMPLETED Split "full" models from "partial" models                         |         |       | 8:37 |
-| STARTED Frontend model refactor                                             |         |       | 0:22 |
+| STARTED Frontend model refactor                                             |         |       | 1:27 |
 | STARTED Model should not be an element                                      |         |       | 0:18 |
 | STARTED Yarn refactor around partial model construction                     |         |       | 0:48 |
 | STARTED Rename nested qname to composite qname                              |         |       | 0:33 |
@@ -88,6 +88,7 @@ Notes:
   kind?  enumeration of pointer, reference, stack.
 
 *** STARTED Frontend model refactor                                   :story:
+    CLOCK: [2015-10-31 Sat 22:59]--[2015-11-01 Sun 00:04] =>  1:05
     CLOCK: [2015-10-31 Sat 22:37]--[2015-10-31 Sat 22:59] =>  0:22
 
 Incredibly enough we still didn't get the models in the right shape

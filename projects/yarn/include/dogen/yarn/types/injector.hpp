@@ -40,7 +40,7 @@ namespace yarn {
  *
  * @li whether to augment that type; that is, due to the configuration
  * of that type, we may need to add additional properties to the
- * type. This is the case with versioning, for example.
+ * type.
  *
  * @li whether to create supporting types that enhance the current
  * type. This is the case with the generation of visitors, etc.
