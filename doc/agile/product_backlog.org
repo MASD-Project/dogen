@@ -7004,6 +7004,37 @@ should set them up too.
 - save all requests and responses to a Postgres database for analysis
   later (performance, bugs, etc). It would also be nice to have user
   comments/complaints, perhaps linked to a user voice-like interface.
+- a more useful version of this service would allow: 1) ability add
+  types to existing models such as std and boost, or even create new
+  system models altogether. Some minimal UI for model editing would be
+  required, including meta-data support (includes, etc). Ideally, each
+  of these models should have an associated test model which would
+  automatically be updated with the new types so users could get
+  compilation feedback on their changes. 2) the ability to edit stitch
+  templates on the site or even the ability to add new facets or new
+  features for existing facets, and to code generate using those. Also
+  the ability to add helper methods for a given facet to a given
+  type. The testing for this could be achieved via a docker container
+  with an incremental build and simple validation (time out, etc). If
+  the user submits dodgy changes only the container would be
+  affected. Once built, the container is used for code generation. It
+  would be really nice to be able to test the template as one is
+  editing it, perhaps by choosing a type in a model; the user could
+  press "generate" at any time and see the file for that feature and
+  facet. Behind the scenes this is stitching, building, code
+  generating and then displaying the result for that one type. 3) the
+  ability to submit PR from within the site. Users log in using their
+  github accounts. They make their changes to a remote git repo. Using
+  github magic - in a similar way to how gitter forks and creates
+  PRs - when the user is happy enough with its changes, their are
+  submitted as a PR.
+- note that this advanced version would probably require having the
+  test models in JSON so that we could edit them via the site; it
+  would be cumbersome to add new types to a dia model
+  programmatically.
+- for extra bonus points, we should integrate with clang-format
+  generation sites such as [[http://zed0.co.uk/clang-format-configurator/][this one]] and allow users to add their own
+  styles dynamically.
 
 *Previous Understanding*
 
