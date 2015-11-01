@@ -7035,6 +7035,11 @@ should set them up too.
 - for extra bonus points, we should integrate with clang-format
   generation sites such as [[http://zed0.co.uk/clang-format-configurator/][this one]] and allow users to add their own
   styles dynamically.
+- it should be possible to add more modelines/modeline groups,
+  licences, and even fields. This only makes sense if the fields are
+  totally dynamic such that the formatter could make use of the new
+  field directly. For this we would have to supply the ownership
+  hierarchy from within the stitch template.
 
 *Previous Understanding*
 
