@@ -1316,7 +1316,7 @@ and resolves all types in the combined model.#</dia:string>
         <dia:point val="35.03,38.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.4187,37.65;35.78,50.8"/>
+        <dia:rectangle val="26.4188,37.65;35.78,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1510,16 +1510,16 @@ and resolves all types in the combined model.#</dia:string>
         <dia:point val="22,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="21.95,12.95;46.42,17.45"/>
+        <dia:rectangle val="21.95,12.95;42.57,16.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="22,13"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.369999999999997"/>
+        <dia:real val="20.52"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#assembler#</dia:string>
@@ -1618,7 +1618,7 @@ and resolves all types in the combined model.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::pair&lt;bool,intermediate_model&gt;#</dia:string>
+            <dia:string>#model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1702,17 +1702,17 @@ and resolves all types in the combined model.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="34.185,17.4"/>
+        <dia:point val="32.26,16.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="33.435,16.65;35.23,31.8"/>
+        <dia:rectangle val="31.51,15.85;35.23,31.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="34.185,17.4"/>
-        <dia:point val="34.185,26"/>
+        <dia:point val="32.26,16.6"/>
+        <dia:point val="32.26,26"/>
         <dia:point val="35.03,26"/>
         <dia:point val="35.03,31"/>
       </dia:attribute>
@@ -2642,16 +2642,16 @@ all types in the merged intermediate model.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="22,17.4"/>
+        <dia:point val="22,16.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-8.07,16.65;22.75,30.8"/>
+        <dia:rectangle val="-8.07,15.85;22.75,30.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="22,17.4"/>
+        <dia:point val="22,16.6"/>
         <dia:point val="22,26"/>
         <dia:point val="-8.02,26"/>
         <dia:point val="-8.02,30"/>
@@ -6590,17 +6590,17 @@ the object or concept is involved in.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="46.37,13"/>
+        <dia:point val="42.52,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.62,2.55;62.91,13.8"/>
+        <dia:rectangle val="41.77,2.55;62.91,13.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="46.37,13"/>
-        <dia:point val="46.37,8"/>
+        <dia:point val="42.52,13"/>
+        <dia:point val="42.52,8"/>
         <dia:point val="62.71,8"/>
         <dia:point val="62.71,2.6"/>
       </dia:attribute>
@@ -7392,7 +7392,7 @@ expansion.#</dia:string>
         <dia:point val="88.1225,2.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.62,2.55;88.3225,16.9"/>
+        <dia:rectangle val="41.77,2.55;88.3225,16.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7400,8 +7400,8 @@ expansion.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="88.1225,2.6"/>
         <dia:point val="88.1225,15"/>
-        <dia:point val="46.37,15"/>
-        <dia:point val="46.37,16.1"/>
+        <dia:point val="42.52,15"/>
+        <dia:point val="42.52,16.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -10840,7 +10840,7 @@ from inputs and generates yarn types off of them.#</dia:string>
         <dia:point val="42.4038,2.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.135,1.85;43.1538,13.8"/>
+        <dia:rectangle val="32.21,1.85;43.1538,13.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10848,8 +10848,8 @@ from inputs and generates yarn types off of them.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="42.4038,2.6"/>
         <dia:point val="42.4038,8"/>
-        <dia:point val="34.185,8"/>
-        <dia:point val="34.185,13"/>
+        <dia:point val="32.26,8"/>
+        <dia:point val="32.26,13"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -12988,13 +12988,13 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
         <dia:point val="185,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="184.95,49.95;197.1,53.65"/>
+        <dia:rectangle val="184.95,49.95;195.56,53.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="185,50"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="10.51"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -13122,7 +13122,7 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#intermediate_model&amp;#</dia:string>
+                <dia:string>#frontend_model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13147,13 +13147,13 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
         <dia:point val="168,63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="167.95,62.95;180.1,66.65"/>
+        <dia:rectangle val="167.95,62.95;178.56,66.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="168,63"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="10.51"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -13281,7 +13281,7 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#intermediate_model&amp;#</dia:string>
+                <dia:string>#frontend_model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13306,13 +13306,13 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
         <dia:point val="185,63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="184.95,62.95;197.1,66.65"/>
+        <dia:rectangle val="184.95,62.95;195.56,66.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="185,63"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="10.51"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -13440,7 +13440,7 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#intermediate_model&amp;#</dia:string>
+                <dia:string>#frontend_model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13465,13 +13465,13 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
         <dia:point val="202,63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="201.95,62.95;214.1,66.65"/>
+        <dia:rectangle val="201.95,62.95;212.56,66.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="202,63"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="10.51"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -13599,7 +13599,7 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#intermediate_model&amp;#</dia:string>
+                <dia:string>#frontend_model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13657,17 +13657,17 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="174.025,63"/>
+        <dia:point val="173.255,63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="173.975,52.85;185.75,63.8"/>
+        <dia:rectangle val="173.205,52.85;185.75,63.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="174.025,63"/>
-        <dia:point val="174.025,59"/>
+        <dia:point val="173.255,63"/>
+        <dia:point val="173.255,59"/>
         <dia:point val="185,59"/>
         <dia:point val="185,53.6"/>
       </dia:attribute>
@@ -13728,19 +13728,19 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="191.025,53.6"/>
+        <dia:point val="190.255,53.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="190.275,52.85;191.775,63.8"/>
+        <dia:rectangle val="189.505,52.85;191.005,63.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="191.025,53.6"/>
-        <dia:point val="191.025,59"/>
-        <dia:point val="191.025,59"/>
-        <dia:point val="191.025,63"/>
+        <dia:point val="190.255,53.6"/>
+        <dia:point val="190.255,59"/>
+        <dia:point val="190.255,59"/>
+        <dia:point val="190.255,63"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -13799,19 +13799,19 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="197.05,53.6"/>
+        <dia:point val="195.51,53.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="196.3,52.85;208.225,63.8"/>
+        <dia:rectangle val="194.76,52.85;207.455,63.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="197.05,53.6"/>
-        <dia:point val="197.05,59"/>
-        <dia:point val="208.025,59"/>
-        <dia:point val="208.025,63"/>
+        <dia:point val="195.51,53.6"/>
+        <dia:point val="195.51,59"/>
+        <dia:point val="207.255,59"/>
+        <dia:point val="207.255,63"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -13837,7 +13837,7 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
         <dia:point val="161,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="160.95,49.95;178.505,53.35"/>
+        <dia:rectangle val="160.95,49.95;176.965,53.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13846,7 +13846,7 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
         <dia:point val="161,50"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.455000000000002"/>
+        <dia:real val="15.915000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.3000000000000003"/>
@@ -13864,7 +13864,7 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>#Frontends are expected to expand
-the intermediate models using the expander,
+the frontend models using the expander,
 which performs the expansion workflow.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -13887,16 +13887,16 @@ which performs the expansion workflow.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O117">
       <dia:attribute name="obj_pos">
-        <dia:point val="178.455,51.65"/>
+        <dia:point val="176.915,51.65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="178.401,50.6972;185.083,52.0753"/>
+        <dia:rectangle val="176.862,50.6975;185.077,52.0753"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="178.455,51.65"/>
+        <dia:point val="176.915,51.65"/>
         <dia:point val="185,51.1"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
@@ -13912,7 +13912,7 @@ which performs the expansion workflow.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="181.728,51.8753"/>
+        <dia:point val="180.958,51.8753"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O116" connection="4"/>
@@ -14067,17 +14067,17 @@ which performs the expansion workflow.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="191.025,50"/>
+        <dia:point val="190.255,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="190.275,44.25;211.094,50.8"/>
+        <dia:rectangle val="189.505,44.25;211.094,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="191.025,50"/>
-        <dia:point val="191.025,45"/>
+        <dia:point val="190.255,50"/>
+        <dia:point val="190.255,45"/>
         <dia:point val="210.894,45"/>
         <dia:point val="210.894,50"/>
       </dia:attribute>
@@ -14785,7 +14785,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:point val="88.1225,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.485,-19.75;88.8725,0.6"/>
+        <dia:rectangle val="42.485,-19.75;88.8725,-0.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14856,7 +14856,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:point val="71.575,31"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.32,17.35;72.325,32.6"/>
+        <dia:rectangle val="42.47,16.55;72.325,31.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14864,8 +14864,8 @@ Leaves are types concrete types which have a parent.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="71.575,31"/>
         <dia:point val="71.575,26"/>
-        <dia:point val="46.37,26"/>
-        <dia:point val="46.37,17.4"/>
+        <dia:point val="42.52,26"/>
+        <dia:point val="42.52,16.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -14927,7 +14927,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:point val="24,38.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.675,37.65;24.75,51.6"/>
+        <dia:rectangle val="2.675,37.65;24.75,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14998,7 +14998,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:point val="2.725,56"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.975,55.25;19.2,67.6"/>
+        <dia:rectangle val="1.975,55.25;19.2,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15069,7 +15069,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:point val="49,56"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.92,55.25;49.75,67.6"/>
+        <dia:rectangle val="27.92,55.25;49.75,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
