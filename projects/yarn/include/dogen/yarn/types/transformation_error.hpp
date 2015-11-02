@@ -32,7 +32,7 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief An error occurred whilst transforming a yarn model.
+ * @brief An error occurred whilst transforming an intermediate model.
  */
 class transformation_error : public virtual std::exception, public virtual boost::exception {
 public:

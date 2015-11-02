@@ -89,9 +89,19 @@ Notes:
   parameters, type parameters. type: name. is pointer: instance type,
   kind?  enumeration of pointer, reference, stack.
 
-*** STARTED Frontend model refactor                                   :story:
+*** COMPLETED Frontend model refactor                                 :story:
+    CLOSED: [2015-11-02 Mon 21:15]
+    CLOCK: [2015-11-02 Mon 21:01]--[2015-11-02 Mon 21:13] =>  0:12
     CLOCK: [2015-10-31 Sat 22:59]--[2015-11-01 Sun 00:04] =>  1:05
     CLOCK: [2015-10-31 Sat 22:37]--[2015-10-31 Sat 22:59] =>  0:22
+
+*New understanding*:
+
+Actually, we can't call it a frontend model because it is not specific
+to just frontend processes; we still need this representation for the
+assembly workflow or else we will have to sort objects by type etc.
+
+*Previous Understanding*
 
 Incredibly enough we still didn't get the models in the right shape
 after the full/partial refactor. The correct shape is:
@@ -102,21 +112,12 @@ after the full/partial refactor. The correct shape is:
 - merger takes a frontend model and generates a model. All other
   processes in yarn work off of this model.
 
-*** Compute qualified name                                            :story:
+*** STARTED Create a "final model" class                              :story:
+    CLOCK: [2015-11-02 Mon 21:17]--[2015-11-02 Mon 21:23] =>  0:06
+    CLOCK: [2015-11-02 Mon 21:14]--[2015-11-02 Mon 21:16] =>  0:02
 
-We added qualified name to name but never populated it. This is also a
-good time to clean up the usage of name as a hash. We could use
-qualified name as the key for all of the containers in intermediate
-model. The resolve then has to compute the possible qualified names:
-
-- use the properties of the owning type to create the fully qualified
-  name, including internal module path;
-- use every model's properties to create qualified names, starting
-  with target then references.
-
-This is all made much easier by having a single container of
-element. In fact, at present, we do not have any use cases for
-multiple containers by type.
+We should create a model that has a single container of elements
+rather than elements by type.
 
 *** STARTED Model should not be an element                            :story:
     CLOCK: [2015-10-27 Tue 08:22]--[2015-10-27 Tue 08:40] =>  0:18
@@ -131,10 +132,10 @@ etc). It can remain as a nameable.
     CLOCK: [2015-11-02 Mon 17:01]--[2015-11-02 Mon 18:16] =>  1:15
     CLOCK: [2015-10-21 Wed 20:50]--[2015-10-21 Wed 21:38] =>  0:48
 
-There are a number of activities done in the file importers which
-really belong to the main meta-model. We should create a single
-workflow for "post-processing" with these activities and move them
-away from the importers.
+There are a number of activities done in the frontends which really
+belong to the main meta-model. We should create a single workflow for
+"post-processing" with these activities and move them away from the
+importers.
 
 Notes:
 
@@ -182,6 +183,22 @@ definable name? If we choose instantiable name, we could then rename
 *Previous understanding*:
 
 We should just follow the composite pattern in the naming.
+
+*** Compute qualified name                                            :story:
+
+We added qualified name to name but never populated it. This is also a
+good time to clean up the usage of name as a hash. We could use
+qualified name as the key for all of the containers in intermediate
+model. The resolve then has to compute the possible qualified names:
+
+- use the properties of the owning type to create the fully qualified
+  name, including internal module path;
+- use every model's properties to create qualified names, starting
+  with target then references.
+
+This is all made much easier by having a single container of
+element. In fact, at present, we do not have any use cases for
+multiple containers by type.
 
 *** Refactor code around model origination                            :story:
 

@@ -105,6 +105,7 @@ namespace yarn {
 std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::model\"" << ", "
+      << "\"name\": " << v.name() << ", "
       << "\"elements\": " << v.elements() << ", "
       << "\"references\": " << v.references() << ", "
       << "\"leaves\": " << v.leaves() << ", "

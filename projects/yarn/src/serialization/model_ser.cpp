@@ -44,6 +44,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::model& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("name", v.name_);
     ar << make_nvp("elements", v.elements_);
     ar << make_nvp("references", v.references_);
     ar << make_nvp("leaves", v.leaves_);
@@ -54,6 +55,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::model& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("name", v.name_);
     ar >> make_nvp("elements", v.elements_);
     ar >> make_nvp("references", v.references_);
     ar >> make_nvp("leaves", v.leaves_);

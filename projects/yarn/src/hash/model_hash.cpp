@@ -72,6 +72,7 @@ namespace yarn {
 std::size_t model_hasher::hash(const model& v) {
     std::size_t seed(0);
 
+    combine(seed, v.name());
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element_(v.elements()));
     combine(seed, hash_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(v.references()));
     combine(seed, hash_std_unordered_set_dogen_yarn_name(v.leaves()));

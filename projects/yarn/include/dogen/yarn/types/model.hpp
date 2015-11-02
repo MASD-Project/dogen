@@ -40,6 +40,9 @@
 namespace dogen {
 namespace yarn {
 
+/**
+ * @brief Yarn model.
+ */
 class model final {
 public:
     model() = default;
@@ -49,6 +52,7 @@ public:
 
 public:
     model(
+        const dogen::yarn::name& name,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& elements,
         const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& references,
         const std::unordered_set<dogen::yarn::name>& leaves,
@@ -62,6 +66,17 @@ private:
     friend void boost::serialization::load(Archive& ar, model& v, unsigned int version);
 
 public:
+    /**
+     * @brief Fully qualified name.
+     *
+     */
+    /**@{*/
+    const dogen::yarn::name& name() const;
+    dogen::yarn::name& name();
+    void name(const dogen::yarn::name& v);
+    void name(const dogen::yarn::name&& v);
+    /**@}*/
+
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& elements() const;
     std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& elements();
     void elements(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& v);
@@ -110,6 +125,7 @@ public:
     model& operator=(model other);
 
 private:
+    dogen::yarn::name name_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> > elements_;
     std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types> references_;
     std::unordered_set<dogen::yarn::name> leaves_;

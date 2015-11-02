@@ -34,17 +34,20 @@ namespace dogen {
 namespace yarn {
 
 model::model(
+    const dogen::yarn::name& name,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& elements,
     const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& references,
     const std::unordered_set<dogen::yarn::name>& leaves,
     const dogen::yarn::module& root_module)
-    : elements_(elements),
+    : name_(name),
+      elements_(elements),
       references_(references),
       leaves_(leaves),
       root_module_(root_module) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
+    swap(name_, other.name_);
     swap(elements_, other.elements_);
     swap(references_, other.references_);
     swap(leaves_, other.leaves_);
@@ -52,7 +55,8 @@ void model::swap(model& other) noexcept {
 }
 
 bool model::operator==(const model& rhs) const {
-    return elements_ == rhs.elements_ &&
+    return name_ == rhs.name_ &&
+        elements_ == rhs.elements_ &&
         references_ == rhs.references_ &&
         leaves_ == rhs.leaves_ &&
         root_module_ == rhs.root_module_;
@@ -62,6 +66,22 @@ model& model::operator=(model other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const dogen::yarn::name& model::name() const {
+    return name_;
+}
+
+dogen::yarn::name& model::name() {
+    return name_;
+}
+
+void model::name(const dogen::yarn::name& v) {
+    name_ = v;
+}
+
+void model::name(const dogen::yarn::name&& v) {
+    name_ = std::move(v);
 }
 
 const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& model::elements() const {
