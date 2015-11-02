@@ -12,19 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-01 Sun 23:45]
+#+CAPTION: Clock summary at [2015-11-02 Mon 18:16]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *13:55* |       |      |
+| *Total time*                                                                | *15:10* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 13:55   |       |      |
-| Active                                                                      |         | 13:55 |      |
+| Stories                                                                     | 15:10   |       |      |
+| Active                                                                      |         | 15:10 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:12 |
 | COMPLETED Split "full" models from "partial" models                         |         |       | 8:37 |
 | STARTED Frontend model refactor                                             |         |       | 1:27 |
 | STARTED Model should not be an element                                      |         |       | 0:18 |
-| STARTED Yarn refactor around partial model construction                     |         |       | 0:48 |
+| STARTED Yarn refactor around partial model construction                     |         |       | 2:03 |
 | STARTED Rename nested qname to composite qname                              |         |       | 0:33 |
 #+end:
 
@@ -128,6 +128,7 @@ etc). It can remain as a nameable.
 - keep the concepts; they are still telling the truth.
 
 *** STARTED Yarn refactor around partial model construction           :story:
+    CLOCK: [2015-11-02 Mon 17:01]--[2015-11-02 Mon 18:16] =>  1:15
     CLOCK: [2015-10-21 Wed 20:50]--[2015-10-21 Wed 21:38] =>  0:48
 
 There are a number of activities done in the file importers which
