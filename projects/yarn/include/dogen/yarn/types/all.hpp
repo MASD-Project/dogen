@@ -48,6 +48,7 @@
 #include "dogen/yarn/types/nested_name.hpp"
 #include "dogen/yarn/types/transformer.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/object_types.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
 #include "dogen/yarn/types/merging_error.hpp"

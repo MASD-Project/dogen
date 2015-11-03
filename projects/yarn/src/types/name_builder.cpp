@@ -21,6 +21,7 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/string/splitter.hpp"
 #include "dogen/yarn/types/building_error.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
@@ -36,9 +37,8 @@ const std::string start_component("<");
 const std::string end_component(">");
 const std::string empty_type_name("Type name is empty.");
 const std::string empty_model_name("Model name is empty.");
-const std::string unexpected_type_name(
-    "Type name supplied when building model name: ");
 const std::string empty_internal_module_path("Internal module path is empty.");
+const std::string empty_external_module_path("External module path is empty.");
 
 inline void add_component_markers(std::ostream& s, const std::string& c) {
     if (c.empty())
@@ -52,10 +52,11 @@ inline void add_component_markers(std::ostream& s, const std::string& c) {
 namespace dogen {
 namespace yarn {
 
-name_builder::name_builder(const bool building_model_name)
-    : building_model_name_(building_model_name) { }
+name_builder::name_builder()
+    : simple_name_contributes_to_qualifed_name_(true),
+      infer_simple_name_from_model_name_(false) { }
 
-void name_builder::create_qualified_name() {
+void name_builder::compute_qualified_name() {
     const auto& l(name_.location());
 
     std::ostringstream s;
@@ -65,69 +66,101 @@ void name_builder::create_qualified_name() {
     for (const auto& m : l.model_module_path())
         add_component_markers(s, m);
 
-    if (!building_model_name_) {
-        for (const auto& m : l.internal_module_path())
-            add_component_markers(s, m);
+    for (const auto& m : l.internal_module_path())
+      add_component_markers(s, m);
 
+    if (simple_name_contributes_to_qualifed_name_)
         add_component_markers(s, name_.simple());
-    }
 
     name_.qualified(s.str());
     BOOST_LOG_SEV(lg, debug) << "Created qualified name: " << name_.qualified();
 }
 
-void name_builder::add_model_name(const std::string& mn) {
+name_builder& name_builder::
+simple_name_contributes_to_qualifed_name(const bool v) {
+    simple_name_contributes_to_qualifed_name_ = v;
+    return *this;
+}
+
+name_builder& name_builder::infer_simple_name_from_model_name(const bool v) {
+    infer_simple_name_from_model_name_ = v;
+    return *this;
+}
+
+name_builder& name_builder::simple_name(const std::string& sn) {
+    name_.simple(sn);
+    BOOST_LOG_SEV(lg, debug) << "Added simple name: " << sn;
+    return *this;
+}
+
+name_builder& name_builder::model_name(const std::string& mn) {
     if (mn.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_model_name;
         BOOST_THROW_EXCEPTION(building_error(empty_model_name));
     }
 
-    name_.location().original_model_name(mn);
-
     using utility::string::splitter;
     name_.location().model_module_path(splitter::split_scoped(mn, dot));
+    name_.location().original_model_name(mn);
 
-    if (building_model_name_)
+    if (infer_simple_name_from_model_name_)
         name_.simple(*name_.location().model_module_path().rbegin());
 
     BOOST_LOG_SEV(lg, debug) << "Added original model name: " << mn;
+    return *this;
 }
 
-void name_builder::add_type_name(const std::string& tn) {
-    if (tn.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_type_name;
-        BOOST_THROW_EXCEPTION(building_error(empty_type_name));
-    }
-
-    if (building_model_name_) {
-        BOOST_LOG_SEV(lg, error) << unexpected_type_name + tn;
-        BOOST_THROW_EXCEPTION(building_error(unexpected_type_name + tn));
-    }
-    name_.simple(tn);
-
-    BOOST_LOG_SEV(lg, debug) << "Added type name: " << tn;
-}
-
-void name_builder::add_external_module_path(const std::string& epp) {
-    if (epp.empty())
-        return;
-
-    using utility::string::splitter;
-    name_.location().external_module_path(splitter::split_scoped(epp));
-}
-
-void name_builder::add_internal_module_path(const std::string& ipp) {
-    if (ipp.empty()) {
+name_builder& name_builder::internal_module_path(const std::string& imp) {
+    if (imp.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_internal_module_path;
         BOOST_THROW_EXCEPTION(building_error(empty_internal_module_path));
     }
 
     using utility::string::splitter;
-    name_.location().external_module_path(splitter::split_scoped(ipp));
+    name_.location().internal_module_path(splitter::split_scoped(imp));
+    BOOST_LOG_SEV(lg, debug) << "Added internal model path: " << imp;
+    return *this;
+}
+
+name_builder& name_builder::internal_module_path(
+    const std::list<std::string>& imp) {
+    if (imp.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_internal_module_path;
+        BOOST_THROW_EXCEPTION(building_error(empty_internal_module_path));
+    }
+
+    name_.location().internal_module_path(imp);
+    BOOST_LOG_SEV(lg, debug) << "Added external model path: " << imp;
+    return *this;
+}
+
+name_builder& name_builder::external_module_path(const std::string& emp) {
+    if (emp.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_external_module_path;
+        BOOST_THROW_EXCEPTION(building_error(empty_external_module_path));
+    }
+
+    using utility::string::splitter;
+    name_.location().external_module_path(splitter::split_scoped(emp));
+    BOOST_LOG_SEV(lg, debug) << "Added external model path: " << emp;
+    return *this;
+}
+
+name_builder& name_builder::external_module_path(
+    const std::list<std::string>& emp) {
+    if (emp.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_external_module_path;
+        BOOST_THROW_EXCEPTION(building_error(empty_external_module_path));
+    }
+
+    name_.location().external_module_path(emp);
+    BOOST_LOG_SEV(lg, debug) << "Added external model path: " << emp;
+    return *this;
+
 }
 
 name name_builder::build() {
-    create_qualified_name();
+    compute_qualified_name();
     return name_;
 }
 

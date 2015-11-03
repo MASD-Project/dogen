@@ -317,7 +317,7 @@ void transformer::to_enumeration(const processed_object& o, const profile& p) {
     yarn::enumeration e;
     update_element(e, o, p);
 
-    // FIXME: we should do this further down the syarn.
+    // FIXME: we should do this further down the stack.
     dogen::yarn::name n;
     n.simple(unsigned_int);
     e.underlying_type(n);

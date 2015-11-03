@@ -22,7 +22,7 @@
 #include "dogen/dia/types/diagram.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
-#include "dogen/yarn/types/name_builder.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn_dia/types/grapher.hpp"
 #include "dogen/yarn_dia/types/context.hpp"
@@ -47,10 +47,8 @@ yarn::name
 workflow::create_name_for_model(const std::string& model_name,
     const std::string& external_module_path) const {
 
-    yarn::name_builder b(true/*building_model_name*/);
-    b.add_model_name(model_name);
-    b.add_external_module_path(external_module_path);
-    return b.build();
+    yarn::name_factory nf;
+    return nf.build_model_name(model_name, external_module_path);
 }
 
 yarn::module workflow::create_module_for_model(const yarn::name& n,

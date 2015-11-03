@@ -18,50 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_NAME_BUILDER_HPP
-#define DOGEN_YARN_TYPES_NAME_BUILDER_HPP
+#ifndef DOGEN_YARN_TYPES_NAME_FACTORY_FWD_HPP
+#define DOGEN_YARN_TYPES_NAME_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include "dogen/yarn/types/name.hpp"
-
 namespace dogen {
 namespace yarn {
 
-/**
- * @brief Builds a name.
- */
-class name_builder {
-public:
-    name_builder();
-
-private:
-    void compute_qualified_name();
-
-public:
-    name_builder& simple_name_contributes_to_qualifed_name(const bool v);
-    name_builder& infer_simple_name_from_model_name(const bool v);
-
-public:
-    name_builder& simple_name(const std::string& sn);
-    name_builder& model_name(const std::string& mn);
-    name_builder& internal_module_path(const std::string& imp);
-    name_builder& internal_module_path(const std::list<std::string>& imp);
-    name_builder& external_module_path(const std::string& emp);
-    name_builder& external_module_path(const std::list<std::string>& emp);
-
-public:
-    name build();
-
-private:
-    bool simple_name_contributes_to_qualifed_name_;
-    bool infer_simple_name_from_model_name_;
-    name name_;
-};
+class name_factory;
 
 } }
 

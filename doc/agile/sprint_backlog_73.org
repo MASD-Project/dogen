@@ -12,17 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-02 Mon 18:16]
+#+CAPTION: Clock summary at [2015-11-03 Tue 22:27]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *15:10* |       |      |
+| *Total time*                                                                | *18:33* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 15:10   |       |      |
-| Active                                                                      |         | 15:10 |      |
+| Stories                                                                     | 18:33   |       |      |
+| Active                                                                      |         | 18:33 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:12 |
 | COMPLETED Split "full" models from "partial" models                         |         |       | 8:37 |
-| STARTED Frontend model refactor                                             |         |       | 1:27 |
+| COMPLETED Frontend model refactor                                           |         |       | 1:39 |
+| STARTED Compute qualified name                                              |         |       | 2:52 |
+| STARTED Create a "final model" class                                        |         |       | 0:19 |
 | STARTED Model should not be an element                                      |         |       | 0:18 |
 | STARTED Yarn refactor around partial model construction                     |         |       | 2:03 |
 | STARTED Rename nested qname to composite qname                              |         |       | 0:33 |
@@ -112,7 +114,41 @@ after the full/partial refactor. The correct shape is:
 - merger takes a frontend model and generates a model. All other
   processes in yarn work off of this model.
 
+*** STARTED Compute qualified name                                    :story:
+    CLOCK: [2015-11-03 Tue 21:01]--[2015-11-03 Tue 22:27] =>  1:26
+    CLOCK: [2015-11-02 Mon 21:36]--[2015-11-02 Mon 23:02] =>  1:26
+
+We added qualified name to name but never populated it. This is also a
+good time to clean up the usage of name as a hash. We could use
+qualified name as the key for all of the containers in intermediate
+model. The resolve then has to compute the possible qualified names:
+
+- use the properties of the owning type to create the fully qualified
+  name, including internal module path - trying all values of internal
+  module path;
+- use every model's properties to create qualified names, starting
+  with target then references.
+
+This is all made much easier by having a single container of
+element. In fact, at present, we do not have any use cases for
+multiple containers by type.
+
+Notes:
+
+- all names must be constructed via the name builder.
+- model names appear to be different from all other names in that the
+  simple name and module path have the model name. It may make more
+  sense to have the model name empty. However, do we even need this at
+  all? The model name is useful for references.
+
+
+- internal module path -> must be current model
+- model path -> must be reference
+
+
+
 *** STARTED Create a "final model" class                              :story:
+    CLOCK: [2015-11-02 Mon 21:24]--[2015-11-02 Mon 21:35] =>  0:11
     CLOCK: [2015-11-02 Mon 21:17]--[2015-11-02 Mon 21:23] =>  0:06
     CLOCK: [2015-11-02 Mon 21:14]--[2015-11-02 Mon 21:16] =>  0:02
 
@@ -183,22 +219,6 @@ definable name? If we choose instantiable name, we could then rename
 *Previous understanding*:
 
 We should just follow the composite pattern in the naming.
-
-*** Compute qualified name                                            :story:
-
-We added qualified name to name but never populated it. This is also a
-good time to clean up the usage of name as a hash. We could use
-qualified name as the key for all of the containers in intermediate
-model. The resolve then has to compute the possible qualified names:
-
-- use the properties of the owning type to create the fully qualified
-  name, including internal module path;
-- use every model's properties to create qualified names, starting
-  with target then references.
-
-This is all made much easier by having a single container of
-element. In fact, at present, we do not have any use cases for
-multiple containers by type.
 
 *** Refactor code around model origination                            :story:
 
