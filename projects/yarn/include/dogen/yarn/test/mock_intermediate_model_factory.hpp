@@ -182,31 +182,6 @@ public:
      */
     std::string property_name(const unsigned int n = 0) const;
 
-    /**
-     * @brief Returns the types header file name for the given
-     * qualified name.
-     */
-    std::string types_header_filename(const name& n) const;
-
-    /**
-     * @brief Returns the types forward declaration file name for the given
-     * qualified name.
-     */
-    std::string types_forward_declaration_filename(const name& n) const;
-
-    /**
-     * @brief Returns the boost serialization header file name for the
-     * given qualified name.
-     */
-    std::string boost_serialization_header_filename(const name& n) const;
-
-    /**
-     * @brief Returns the boost serialization forward declaration file
-     * name for the given qualified name.
-     */
-    std::string boost_serialization_forward_declaration_filename(
-        const name& n) const;
-
 public:
     /**
      * @brief Returns true if the name matches the mock model factory
