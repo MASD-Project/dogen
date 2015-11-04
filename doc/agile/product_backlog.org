@@ -263,6 +263,15 @@ stops users from defining types with that name.
 
 We need to go through all of the renamed registrars and fix them.
 
+Another option is to allow users to supply a name via meta-data to
+avoid name clashes. We could error when the user has defined a type.
+
+Actually, since the clash is only internal - the names we are
+generating on the fly are clashing with the user defined names - we
+should probably have a "postfix" that can be added in case of
+clashes. The generated code will not cause problems, its just the
+formattables pipeline.
+
 *** Create more "utility" members in class info                       :story:
 
 One way of making the templates a bit more manageable is to avoid
