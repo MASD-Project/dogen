@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/io/formattables/path_derivatives_repository_io.hpp"
@@ -73,11 +74,12 @@ private:
 };
 
 void generator::generate(const yarn::name& n) {
+    BOOST_LOG_SEV(lg, debug) << "Processing name: " << n;
     auto& pd(result_.path_derivatives_by_name());
     const auto pair(pd.insert(std::make_pair(n, factory_.make(n))));
     const bool inserted(pair.second);
     if (!inserted) {
-        const auto qn(n.qualified());
+        const auto qn(n.simple());
         BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
         BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));
     }

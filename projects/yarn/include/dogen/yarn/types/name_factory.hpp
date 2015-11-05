@@ -42,10 +42,10 @@ public:
      * possibly using a separator; parses both strings and generates a
      * combined name.
      *
-     * @pre @e model_name and @e module_path must not be empty.
+     * @pre @e model_name must not be empty.
      */
     name build_model_name(const std::string& model_name,
-        const std::string& external_module_path) const;
+        const std::string& external_module_path = std::string()) const;
 };
 
 } }

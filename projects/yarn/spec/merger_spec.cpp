@@ -66,17 +66,11 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
 
     auto target(factory.make_single_type_model(0));
     target.is_target(true);
-    const unsigned int n(5);
-    for (unsigned int i(1); i < n; ++i) {
-        dogen::yarn::name n;
-        n.location().original_model_name(factory.model_name(i));
-        const auto ot(dogen::yarn::origin_types::unknown);
-        target.references().insert(std::make_pair(n, ot));
-    }
 
     dogen::yarn::merger mg;
     mg.add(target);
 
+    const unsigned int n(5);
     for (unsigned int i(1); i < n; ++i) {
         auto m(factory.make_single_type_model(i));
         m.name().location().external_module_path().push_back(some_path);
@@ -85,6 +79,8 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
 
     BOOST_CHECK(!mg.has_merged());
     const auto combined(mg.merge());
+    BOOST_LOG_SEV(lg, debug) << "Merged model: " << combined;
+
     BOOST_CHECK(mg.has_merged());
     BOOST_CHECK(combined.objects().size() == n);
     BOOST_CHECK(combined.primitives().empty());
@@ -120,8 +116,8 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
         BOOST_LOG_SEV(lg, debug) << "object name: " << *object_i;
         BOOST_LOG_SEV(lg, debug) << "model name: " << *model_i;
 
-        const auto expected_model_name(factory.model_name(i));
-        const auto expected_object_name(factory.type_name(0));
+        const auto expected_model_name(factory.simple_model_name(i));
+        const auto expected_object_name(factory.simple_type_name(0));
         BOOST_LOG_SEV(lg, debug) << "expected object name: "
                                  << expected_object_name;
         BOOST_LOG_SEV(lg, debug) << "expected model name: "
@@ -136,7 +132,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
 }
 
 BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
-    SETUP_TEST_LOG("merging_empty_model_results_in_empty_merged_model");
+    SETUP_TEST_LOG_SOURCE("merging_empty_model_results_in_empty_merged_model");
     dogen::yarn::merger mg;
     dogen::yarn::intermediate_model m;
     m.is_target(true);
@@ -145,6 +141,8 @@ BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
     BOOST_CHECK(mg.has_target());
 
     const auto combined(mg.merge());
+    BOOST_LOG_SEV(lg, debug) << "Merged model: " << combined;
+
     BOOST_CHECK(combined.objects().empty());
     BOOST_CHECK(combined.primitives().empty());
     BOOST_CHECK(combined.enumerations().empty());

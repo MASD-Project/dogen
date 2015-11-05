@@ -160,27 +160,33 @@ public:
     /**
      * @brief Returns the model name derived from n.
      */
-    std::string model_name(const unsigned int n = 0) const;
+    std::string simple_model_name(const unsigned int n = 0) const;
 
     /**
      * @brief Returns the type name derived from n.
      */
-    std::string type_name(const unsigned int n = 0) const;
+    std::string simple_type_name(const unsigned int n = 0) const;
 
     /**
      * @brief Returns the concept name derived from n.
      */
-    std::string concept_name(const unsigned int n = 0) const;
+    std::string simple_concept_name(const unsigned int n = 0) const;
 
     /**
      * @brief Returns the module name derived from n.
      */
-    std::string module_name(const unsigned int n = 0) const;
+    std::string simple_module_name(const unsigned int n = 0) const;
 
     /**
      * @brief Returns the property name derived from n.
      */
-    std::string property_name(const unsigned int n = 0) const;
+    std::string simple_property_name(const unsigned int n = 0) const;
+
+public:
+    /**
+     * @brief Returns the model name derived from n.
+     */
+    name model_name(const unsigned int n = 0) const;
 
 public:
     /**

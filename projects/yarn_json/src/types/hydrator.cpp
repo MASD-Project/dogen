@@ -26,6 +26,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn_json/types/hydration_error.hpp"
 #include "dogen/yarn_json/types/hydrator.hpp"
 
@@ -244,8 +245,8 @@ yarn::intermediate_model hydrator::read_stream(
     ptree pt;
     read_json(s, pt);
 
-    r.name().location().original_model_name(
-        pt.get<std::string>(model_name_key));
+    yarn::name_factory nf;
+    r.name(nf.build_model_name(pt.get<std::string>(model_name_key)));
     BOOST_LOG_SEV(lg, debug) << "Processing model: " << r.name().qualified();
 
     read_module_path(pt, r, r.name());

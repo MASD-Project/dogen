@@ -76,30 +76,6 @@ transformer::transformer(const dynamic::workflow& w, context& c)
     BOOST_LOG_SEV(lg, debug) << "Initial context: " << context_;
 }
 
-void transformer::
-update_model_references(const yarn::nested_name& nn) {
-    const auto omn(nn.type().location().original_model_name());
-
-    // FIXME: remove is_primitives_model handling
-    const bool is_primitives_model(omn.empty());
-    const auto& l(context_.model().name().location());
-    const bool is_current_model(omn != l.original_model_name());
-
-    if (!is_primitives_model && is_current_model) {
-        yarn::name n;
-        n.location().original_model_name(omn);
-        const auto p(std::make_pair(n, yarn::origin_types::unknown));
-        context_.model().references().insert(p);
-
-        BOOST_LOG_SEV(lg, debug) << "Adding model dependency: "
-                                 << omn << ". Current model: "
-                                 << l.original_model_name();
-    }
-
-    for (const auto c : nn.children())
-        update_model_references(c);
-}
-
 void transformer::require_is_transformable(const processed_object& po) const {
     if (!is_transformable(po)) {
         const auto type(boost::lexical_cast<std::string>(po.object_type()));
@@ -229,7 +205,6 @@ update_object(yarn::object& ao, const processed_object& o, const profile& p) {
     for (const auto& p : o.properties()) {
         const auto property(to_property(p));
         ao.local_properties().push_back(property);
-        update_model_references(property.type());
     }
 
     const auto i(context_.child_id_to_parent_ids().find(o.id()));
@@ -392,7 +367,6 @@ void transformer::to_concept(const processed_object& o, const profile& p) {
     for (const auto& prop : o.properties()) {
         auto property(to_property(prop));
         property.type(to_nested_name(prop.type()));
-        update_model_references(property.type());
         c.local_properties().push_back(property);
     }
 

@@ -26,24 +26,26 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/yarn/serialization/registrar_ser.hpp"
 
 namespace dogen {
 namespace yarn_json {
 
 template<typename Archive>
-void register_types(Archive&) {
+void register_types(Archive& ar) {
+    dogen::yarn::register_types(ar);
 }
 
-template void register_types(boost::archive::polymorphic_oarchive&);
-template void register_types(boost::archive::polymorphic_iarchive&);
+template void register_types(boost::archive::polymorphic_oarchive& ar);
+template void register_types(boost::archive::polymorphic_iarchive& ar);
 
-template void register_types(boost::archive::text_oarchive&);
-template void register_types(boost::archive::text_iarchive&);
+template void register_types(boost::archive::text_oarchive& ar);
+template void register_types(boost::archive::text_iarchive& ar);
 
-template void register_types(boost::archive::binary_oarchive&);
-template void register_types(boost::archive::binary_iarchive&);
+template void register_types(boost::archive::binary_oarchive& ar);
+template void register_types(boost::archive::binary_iarchive& ar);
 
-template void register_types(boost::archive::xml_oarchive&);
-template void register_types(boost::archive::xml_iarchive&);
+template void register_types(boost::archive::xml_oarchive& ar);
+template void register_types(boost::archive::xml_iarchive& ar);
 
 } }

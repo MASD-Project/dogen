@@ -61,12 +61,6 @@ public:
 
 private:
     /**
-     * @brief Update the model references with those which are implied
-     * by the given nested name.
-     */
-    void update_model_references(const yarn::nested_name& nqn);
-
-    /**
      * @brief Ensure that the processed object implies an YARN type
      * which is supported by the transformer.
      */

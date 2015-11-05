@@ -18,9 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/frontend_workflow.hpp"
 #include "dogen/yarn/types/assembler.hpp"
 #include "dogen/yarn/types/workflow.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("yarn.workflow"));
+
+}
 
 namespace dogen {
 namespace yarn {
@@ -41,7 +50,9 @@ intermediate_model workflow::assemble_intermediate_models_activity(
 intermediate_model workflow::execute(const dynamic::repository& rp,
     const std::list<input_descriptor>& id) const {
     const auto pm(obtain_intermediate_models_activity(rp, id));
-    return assemble_intermediate_models_activity(pm);
+    const auto r(assemble_intermediate_models_activity(pm));
+    BOOST_LOG_SEV(lg, debug) << "Final model: " << r;
+    return r;
 }
 
 } }

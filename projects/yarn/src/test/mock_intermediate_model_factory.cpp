@@ -24,9 +24,10 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include"dogen/utility/log/logger.hpp"
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/exception/utility_exception.hpp"
 #include "dogen/dynamic/types/value_factory.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/test/building_error.hpp"
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
@@ -114,10 +115,8 @@ dogen::yarn::nested_name mock_nested_name(const dogen::yarn::name& n) {
 }
 
 dogen::yarn::name mock_model_name(unsigned int i) {
-    dogen::yarn::name r;
-    r.location().original_model_name(model_name(i));
-    r.simple(model_name(i));
-    return r;
+    dogen::yarn::name_factory nf;
+    return nf.build_model_name(model_name(i));
 }
 
 dogen::yarn::nested_name
@@ -420,28 +419,33 @@ mock_intermediate_model_factory(const flags& f,
       dynamic_extension_function_(fn ? fn : add_test_dynamic_extensions) { }
 
 std::string mock_intermediate_model_factory::
-model_name(const unsigned int n) const {
+simple_model_name(const unsigned int n) const {
     return ::model_name(n);
 }
 
 std::string mock_intermediate_model_factory::
-concept_name(const unsigned int n) const {
+simple_concept_name(const unsigned int n) const {
     return ::concept_name(n);
 }
 
 std::string mock_intermediate_model_factory::
-type_name(const unsigned int n) const {
+simple_type_name(const unsigned int n) const {
     return ::type_name(n);
 }
 
 std::string mock_intermediate_model_factory::
-module_name(const unsigned int n) const {
+simple_module_name(const unsigned int n) const {
     return ::module_name(n);
 }
 
 std::string mock_intermediate_model_factory::
-property_name(const unsigned int n) const {
+simple_property_name(const unsigned int n) const {
     return ::property_name(n);
+}
+
+name mock_intermediate_model_factory::
+model_name(const unsigned int n) const {
+    return ::mock_model_name(n);
 }
 
 bool mock_intermediate_model_factory::
@@ -451,7 +455,7 @@ is_model_n(const unsigned int n, const name& name) const {
 
 bool mock_intermediate_model_factory::
 is_model_n(const unsigned int n, const std::string& name) const {
-    return model_name(n) == name;
+    return simple_model_name(n) == name;
 }
 
 bool mock_intermediate_model_factory::
@@ -613,8 +617,8 @@ name mock_intermediate_model_factory::make_name(const unsigned int model_n,
     const unsigned int simple_n) const {
 
     name r;
-    r.location().original_model_name(model_name(model_n));
-    r.simple(type_name(simple_n));
+    r.location().original_model_name(simple_model_name(model_n));
+    r.simple(simple_type_name(simple_n));
     return r;
 }
 
@@ -1163,7 +1167,7 @@ mock_intermediate_model_factory::object_with_property_type_in_different_model(
         0, property_types::value_object, o1.name());
 
     name m0_n;
-    m0_n.location().original_model_name(model_name(0));
+    m0_n.location().original_model_name(simple_model_name(0));
 
     intermediate_model m0;
     m0.name(m0_n);
@@ -1171,7 +1175,7 @@ mock_intermediate_model_factory::object_with_property_type_in_different_model(
     handle_model_module(add_model_module, m0);
 
     name m1_n;
-    m1_n.location().original_model_name(model_name(1));
+    m1_n.location().original_model_name(simple_model_name(1));
 
     intermediate_model m1;
     m1.name(m1_n);

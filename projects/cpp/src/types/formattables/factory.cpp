@@ -256,7 +256,6 @@ std::shared_ptr<formattable> factory::make_registrar_info(
         const auto qn(n.qualified());
         BOOST_LOG_SEV(lg, error) << properties_not_found << qn;
         BOOST_THROW_EXCEPTION(building_error(properties_not_found + qn));
-
     }
 
     const auto k(j->second.find(ri_fn));

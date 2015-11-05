@@ -12,18 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-03 Tue 22:27]
+#+CAPTION: Clock summary at [2015-11-05 Thu 23:05]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *18:33* |       |      |
+| *Total time*                                                                | *21:57* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 18:33   |       |      |
-| Active                                                                      |         | 18:33 |      |
+| Stories                                                                     | 21:57   |       |      |
+| Active                                                                      |         | 21:57 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:12 |
 | COMPLETED Split "full" models from "partial" models                         |         |       | 8:37 |
 | COMPLETED Frontend model refactor                                           |         |       | 1:39 |
-| STARTED Compute qualified name                                              |         |       | 2:52 |
+| COMPLETED Improve references management                                     |         |       | 1:02 |
+| STARTED Compute qualified name                                              |         |       | 5:14 |
 | STARTED Create a "final model" class                                        |         |       | 0:19 |
 | STARTED Model should not be an element                                      |         |       | 0:18 |
 | STARTED Yarn refactor around partial model construction                     |         |       | 2:03 |
@@ -114,7 +115,57 @@ after the full/partial refactor. The correct shape is:
 - merger takes a frontend model and generates a model. All other
   processes in yarn work off of this model.
 
+*** COMPLETED Improve references management                           :story:
+    CLOSED: [2015-11-05 Thu 23:05]
+    CLOCK: [2015-11-05 Thu 22:03]--[2015-11-05 Thu 23:05] =>  1:02
+
+At present, we compute model references as follows:
+
+- in dia to sml we first loop through all types and figure out the
+  distinct model names. This is done by creating a "shallow" qname
+  with just the model name and setting its origin type to unknown.
+- when we merge, we take the references of target - the only ones we
+  care about - and then we check that against the list of the models
+  we are about to merge. If there are any missing models we complain
+  (see comments below). We then loop through the list of references
+  and "resolve" the origin type of the model.
+
+Note: We could actually also complain if there are too many models, or
+more cleverly avoid merging those models which are not required. Or
+even more cleverly, we could avoid loading them in the first place, if
+only we could load target first.
+
+A slightly better way of doing this would be:
+
+- in SML create a references updater that takes a model and computes
+  its reference requirements. It could also receive a list of "other"
+  models from which to get their origin types to avoid using =unknown=
+  at all, and checks that all reference requirements have been met.
+- the current step =update_references= is just a call to the
+  references updater, prior to merging, with the target model.
+
+Note:
+
+It seems that the references are incorrect at present; on rebuild, we
+see serialisation's registrar moving for no reason:
+
+: -    dogen::config::register_types(ar);
+:      dogen::sml::register_types(ar);
+: -    dogen::dynamic::schema::register_types(ar);
+: +    dogen::config::register_types(ar);
+
+The references have not changed at all in the dogen invocation:
+
+:    --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
+:    --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
+:    --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
+:    --reference ${CMAKE_SOURCE_DIR}/diagrams/schema.dia,dogen::dynamic
+
+We need to fix this with the refactor.
+
 *** STARTED Compute qualified name                                    :story:
+    CLOCK: [2015-11-04 Wed 21:24]--[2015-11-04 Wed 22:07] =>  0:43
+    CLOCK: [2015-11-03 Tue 22:28]--[2015-11-04 Wed 00:07] =>  1:39
     CLOCK: [2015-11-03 Tue 21:01]--[2015-11-03 Tue 22:27] =>  1:26
     CLOCK: [2015-11-02 Mon 21:36]--[2015-11-02 Mon 23:02] =>  1:26
 
@@ -140,12 +191,17 @@ Notes:
   simple name and module path have the model name. It may make more
   sense to have the model name empty. However, do we even need this at
   all? The model name is useful for references.
-
-
+- we should not update references inside the transformer. It is not
+  possible to tell if something is a reference to a model or to a
+  model's module, e.g. =yarn::dia= is this the model =yarn.dia= or a
+  =dia= module inside of the model =yarn=? The resolver can handle
+  this. This wasn't a problem before because we relied on top-level
+  modules to determine if a reference was to a module in current model
+  or to another model.
+- FIXME: we broke serialisation registrar with merger change - need to
+  see how qualified name impacts this.
 - internal module path -> must be current model
 - model path -> must be reference
-
-
 
 *** STARTED Create a "final model" class                              :story:
     CLOCK: [2015-11-02 Mon 21:24]--[2015-11-02 Mon 21:35] =>  0:11
@@ -425,52 +481,6 @@ transformer's update model reference.
 Actually this is nothing at all to do with the primitive model but all
 to do with computing the correct name. We need to start using the
 builder here.
-
-*** Improve references management                                     :story:
-
-At present, we compute model references as follows:
-
-- in dia to sml we first loop through all types and figure out the
-  distinct model names. This is done by creating a "shallow" qname
-  with just the model name and setting its origin type to unknown.
-- when we merge, we take the references of target - the only ones we
-  care about - and then we check that against the list of the models
-  we are about to merge. If there are any missing models we complain
-  (see comments below). We then loop through the list of references
-  and "resolve" the origin type of the model.
-
-Note: We could actually also complain if there are too many models, or
-more cleverly avoid merging those models which are not required. Or
-even more cleverly, we could avoid loading them in the first place, if
-only we could load target first.
-
-A slightly better way of doing this would be:
-
-- in SML create a references updater that takes a model and computes
-  its reference requirements. It could also receive a list of "other"
-  models from which to get their origin types to avoid using =unknown=
-  at all, and checks that all reference requirements have been met.
-- the current step =update_references= is just a call to the
-  references updater, prior to merging, with the target model.
-
-Note:
-
-It seems that the references are incorrect at present; on rebuild, we
-see serialisation's registrar moving for no reason:
-
-: -    dogen::config::register_types(ar);
-:      dogen::sml::register_types(ar);
-: -    dogen::dynamic::schema::register_types(ar);
-: +    dogen::config::register_types(ar);
-
-The references have not changed at all in the dogen invocation:
-
-:    --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
-:    --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
-:    --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
-:    --reference ${CMAKE_SOURCE_DIR}/diagrams/schema.dia,dogen::dynamic
-
-We need to fix this with the refactor.
 
 *** Add =operator<= for names                                         :story:
 

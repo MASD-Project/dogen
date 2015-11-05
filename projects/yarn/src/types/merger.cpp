@@ -21,9 +21,14 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/map_io.hpp"
+#include "dogen/utility/io/unordered_map_io.hpp"
+#include "dogen/utility/io/pair_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/merging_error.hpp"
 #include "dogen/yarn/io/property_io.hpp"
+#include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/io/origin_types_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/merger.hpp"
 
@@ -100,30 +105,17 @@ void merger::check_name(const std::string& model_name, const name& key,
 }
 
 void merger::update_references() {
-    typedef std::pair<name, origin_types> value_type;
-    std::map<std::string, value_type> references_by_model_name;
     for (const auto& pair : models_) {
-        const auto& model(pair.second);
-        const auto value(std::make_pair(model.name(), model.origin_type()));
-        const auto mn(model.name().location().original_model_name());
-        const auto p(std::make_pair(mn, value));
-        references_by_model_name.insert(p);
-    }
-
-    std::unordered_map<name, origin_types> updated_references;
-    for (auto& pair : merged_model_.references()) {
         const auto n(pair.first);
-        const auto mn(n.location().original_model_name());
-        const auto i(references_by_model_name.find(mn));
-        if (i == references_by_model_name.end()) {
-            BOOST_LOG_SEV(lg, error) << msising_dependency << mn;
-            BOOST_THROW_EXCEPTION(merging_error(msising_dependency + mn));
-        }
+        if (merged_model_.name() == n)
+            continue;
 
-        const auto p(std::make_pair(i->second.first, i->second.second));
-        updated_references.insert(p);
+        const auto& model(pair.second);
+        const auto p(std::make_pair(model.name(), model.origin_type()));
+        merged_model_.references().insert(p);
     }
-    merged_model_.references(updated_references);
+
+    BOOST_LOG_SEV(lg, info) << "References: " << merged_model_.references();
 }
 
 void merger::add_target(const intermediate_model& target) {
@@ -148,8 +140,8 @@ void merger::add(const intermediate_model& m) {
     if (m.is_target())
         add_target(m);
 
-    BOOST_LOG_SEV(lg, debug) << "adding model: "
-                             << m.name().qualified();
+    BOOST_LOG_SEV(lg, debug) << "adding model: '"
+                             << m.name().qualified() << "'";
     BOOST_LOG_SEV(lg, debug) << "contents: " << m;
     models_.insert(std::make_pair(m.name(), m));
 }
