@@ -46,6 +46,21 @@ public:
      */
     name build_model_name(const std::string& model_name,
         const std::string& external_module_path = std::string()) const;
+
+    /**
+     * @brief Given a simple name for an element and the name of the
+     * model it is located in, creates the element name.
+     */
+    name build_element_in_model(const name& model_name,
+        const std::string& simple_name) const;
+
+    /**
+     * @brief Given a simple name for an element and the name of the
+     * module it is located in, creates the element name.
+     */
+    name build_element_in_module(const name& module_name,
+        const std::string& simple_name) const;
+
 };
 
 } }

@@ -49,4 +49,42 @@ name name_factory::build_model_name(const std::string& model_name,
     return b.build();
 }
 
+name name_factory::build_element_in_model(const name& model_name,
+    const std::string& simple_name) const {
+
+    yarn::name n;
+    n.simple(simple_name);
+
+    const auto& l(model_name.location());
+    n.location().original_model_name(l.original_model_name());
+    // n.location().model_module_path(l.model_module_path());
+    n.location().external_module_path(l.external_module_path());
+
+    // FIXME:
+    // name_builder b(n);
+    // return b.build();
+    return n;
+}
+
+name name_factory::build_element_in_module(const name& module_name,
+    const std::string& simple_name) const {
+    yarn::name n;
+    n.simple(simple_name);
+
+    const auto& l(module_name.location());
+    n.location().original_model_name(l.original_model_name());
+    // n.location().model_module_path(l.model_module_path());
+    n.location().external_module_path(l.external_module_path());
+
+    auto pp(l.internal_module_path());
+    pp.push_back(module_name.simple());
+    n.location().internal_module_path(pp);
+
+    // FIXME:
+    // name_builder b(n);
+    // return b.build();
+    return n;
+}
+
+
 } }

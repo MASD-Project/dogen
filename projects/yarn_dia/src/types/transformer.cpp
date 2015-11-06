@@ -26,6 +26,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia/types/attribute.hpp"
 #include "dogen/yarn_dia/types/traits.hpp"
@@ -99,22 +100,20 @@ yarn::name transformer::to_name(const std::string& n) const {
         BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
     }
 
-    yarn::name r;
-    const auto& l(context_.model().name().location());
-    r.location().original_model_name(l.original_model_name());
-    r.location().external_module_path(l.external_module_path());
-    r.simple(n);
-
-    return r;
+    yarn::name_factory f;
+    return f.build_element_in_model(context_.model().name(), n);
 }
 
 yarn::name transformer::to_name(const std::string& n,
     const yarn::name& module_n) const {
-    auto r(to_name(n));
-    auto pp(module_n.location().internal_module_path());
-    pp.push_back(module_n.simple());
-    r.location().internal_module_path(pp);
-    return r;
+
+    if (n.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
+        BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
+    }
+
+    yarn::name_factory f;
+    return f.build_element_in_module(module_n, n);
 }
 
 yarn::module& transformer::module_for_name(const yarn::name& n) {
@@ -177,7 +176,6 @@ yarn::enumerator transformer::to_enumerator(const processed_property& p,
 
 void transformer::
 update_object(yarn::object& ao, const processed_object& o, const profile& p) {
-
     update_element(ao, o, p);
 
     ao.is_fluent(p.is_fluent());

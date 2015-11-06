@@ -38,6 +38,7 @@ namespace yarn {
 class name_builder {
 public:
     name_builder();
+    explicit name_builder(const name& n);
 
 private:
     void compute_qualified_name();

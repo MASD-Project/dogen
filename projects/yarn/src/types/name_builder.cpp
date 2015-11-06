@@ -56,6 +56,11 @@ name_builder::name_builder()
     : simple_name_contributes_to_qualifed_name_(true),
       infer_simple_name_from_model_name_(false) { }
 
+name_builder::name_builder(const name& n)
+    : simple_name_contributes_to_qualifed_name_(true),
+      infer_simple_name_from_model_name_(false),
+      name_(n) { }
+
 void name_builder::compute_qualified_name() {
     const auto& l(name_.location());
 
