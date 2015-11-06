@@ -102,13 +102,6 @@ private:
     yarn::object_types
     to_object_type(const boost::optional<std::string>& s) const;
 
-private:
-    /**
-     * @brief Perform all of the adjustments required to the model
-     * such as generating inferred modules, etc.
-     */
-    void post_process(yarn::intermediate_model& m) const;
-
 public:
     /**
      * @brief Hydrates the model from the JSON stream.
