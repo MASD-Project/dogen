@@ -12,23 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-06 Fri 22:29]
+#+CAPTION: Clock summary at [2015-11-06 Fri 22:51]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *23:04* |       |      |
+| *Total time*                                                                | *23:25* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 23:04   |       |      |
-| Active                                                                      |         | 23:04 |      |
+| Stories                                                                     | 23:25   |       |      |
+| Active                                                                      |         | 23:25 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:12 |
 | COMPLETED Split "full" models from "partial" models                         |         |       | 8:37 |
 | COMPLETED Frontend model refactor                                           |         |       | 1:39 |
 | COMPLETED Improve references management                                     |         |       | 1:02 |
 | COMPLETED Move property type generation to expander                         |         |       | 0:50 |
+| COMPLETED Yarn refactor around partial model construction                   |         |       | 2:24 |
 | STARTED Compute qualified name                                              |         |       | 5:31 |
 | STARTED Create a "final model" class                                        |         |       | 0:19 |
 | STARTED Model should not be an element                                      |         |       | 0:18 |
-| STARTED Yarn refactor around partial model construction                     |         |       | 2:03 |
 | STARTED Rename nested qname to composite qname                              |         |       | 0:33 |
 #+end:
 
@@ -173,6 +173,27 @@ We need to fix this with the refactor.
 - create a "property expander" that parses the unparsed name and
   expands it to a proper nested name.
 
+*** COMPLETED Yarn refactor around partial model construction         :story:
+    CLOSED: [2015-11-06 Fri 22:51]
+    CLOCK: [2015-11-06 Fri 22:30]--[2015-11-06 Fri 22:51] =>  0:21
+    CLOCK: [2015-11-02 Mon 17:01]--[2015-11-02 Mon 18:16] =>  1:15
+    CLOCK: [2015-10-21 Wed 20:50]--[2015-10-21 Wed 21:38] =>  0:48
+
+There are a number of activities done in the frontends which really
+belong to the main meta-model. We should create a single workflow for
+"post-processing" with these activities and move them away from the
+importers.
+
+Notes:
+
+- add a module post processor that computes owner (containing
+  module?), members, is top level. Seems like we already have a
+  top-level module: containing module is null.
+- reference expander to compute references.
+- add some enumeration post-processing that assigns it a underlying
+  type. Should be done with merged model (look for a primitive type with
+  property =is_default_enumeration_type=).
+
 *** STARTED Compute qualified name                                    :story:
     CLOCK: [2015-11-06 Fri 21:21]--[2015-11-06 Fri 21:38] =>  0:17
     CLOCK: [2015-11-04 Wed 21:24]--[2015-11-04 Wed 22:07] =>  0:43
@@ -230,25 +251,6 @@ such that the model no longer needs to be an element (documentation,
 etc). It can remain as a nameable.
 
 - keep the concepts; they are still telling the truth.
-
-*** STARTED Yarn refactor around partial model construction           :story:
-    CLOCK: [2015-11-02 Mon 17:01]--[2015-11-02 Mon 18:16] =>  1:15
-    CLOCK: [2015-10-21 Wed 20:50]--[2015-10-21 Wed 21:38] =>  0:48
-
-There are a number of activities done in the frontends which really
-belong to the main meta-model. We should create a single workflow for
-"post-processing" with these activities and move them away from the
-importers.
-
-Notes:
-
-- add a module post processor that computes owner (containing
-  module?), members, is top level. Seems like we already have a
-  top-level module: containing module is null.
-- reference expander to compute references.
-- add some enumeration post-processing that assigns it a underlying
-  type. Should be done with merged model (look for a primitive type with
-  property =is_default_enumeration_type=).
 
 *** STARTED Rename nested qname to composite qname                    :story:
     CLOCK: [2015-10-22 Thu 08:10]--[2015-10-22 Thu 08:43] =>  0:33
@@ -341,6 +343,12 @@ was formed, and then ownership by DDC.
 
 - first update to personal ownership has been done, but we need to
   test if multiple copyright entries is properly supported.
+
+*** Handle enumeration type dynamically                               :story:
+
+- add some enumeration post-processing that assigns it a underlying
+  type. Should be done with merged model (look for a primitive type with
+  property =is_default_enumeration_type=).
 
 *** Copyright holders is scalar when it should be an array            :story:
 

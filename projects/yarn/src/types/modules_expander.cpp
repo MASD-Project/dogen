@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
+#include "dogen/yarn/types/all_model_items_traversal.hpp"
 #include "dogen/yarn/types/modules_expander.hpp"
 
 namespace {
@@ -35,9 +36,30 @@ const std::string missing_module("Could not find module: ");
 namespace dogen {
 namespace yarn {
 
-boost::optional<name> containing_module(intermediate_model& m, const name& n) {
+namespace {
+
+class updater {
+public:
+    updater(intermediate_model& m) : model_(m) { }
+
+private:
+    boost::optional<name> containing_module(const name& n);
+    void update(element& e);
+
+public:
+    void operator()(dogen::yarn::object& o) { update(o); }
+    void operator()(dogen::yarn::enumeration& e) { update(e); }
+    void operator()(dogen::yarn::primitive& p) { update(p); }
+    void operator()(dogen::yarn::module& m) { update(m); }
+    void operator()(dogen::yarn::concept& c) { update(c); }
+
+public:
+    intermediate_model& model_;
+};
+
+boost::optional<name> updater::containing_module(const name& n) {
     if (n.location().original_model_name().empty() ||
-        n.simple() == m.name().location().original_model_name()) {
+        n.simple() == model_.name().location().original_model_name()) {
         BOOST_LOG_SEV(lg, debug) << "Type has no containing module: "
                                  << n.qualified();
         return boost::optional<name>();
@@ -58,9 +80,9 @@ boost::optional<name> containing_module(intermediate_model& m, const name& n) {
         module_n.location().internal_module_path().pop_back();
     }
 
-    const auto i(m.modules().find(module_n));
-    if (i != m.modules().end()) {
-        // i->second.members().push_back(n);
+    const auto i(model_.modules().find(module_n));
+    if (i != model_.modules().end()) {
+        i->second.members().push_back(n);
         return module_n;
     }
 
@@ -69,40 +91,30 @@ boost::optional<name> containing_module(intermediate_model& m, const name& n) {
     return boost::optional<name>();;
 }
 
-template<typename AssociativeContainerOfContainable>
-inline void update_containing_module(intermediate_model& m,
-    AssociativeContainerOfContainable& c) {
-    for (auto& pair : c) {
-        auto& s(pair.second);
-        s.containing_module(containing_module(m, s.name()));
+void updater::update(element& e) {
+    e.containing_module(containing_module(e.name()));
 
-        if (!s.containing_module())
-            continue;
+    if (!e.containing_module())
+        return;
 
-        auto i(m.modules().find(*s.containing_module()));
-        if (i == m.modules().end()) {
-            const auto sn(s.containing_module()->simple());
-            BOOST_LOG_SEV(lg, error) << missing_module << sn;
-            BOOST_THROW_EXCEPTION(expansion_error(missing_module + sn));
-        }
-
-        BOOST_LOG_SEV(lg, debug) << "Adding type to module. Type: '"
-                                 << s.name().qualified()
-                                 << "' Module: '" << i->first.qualified();
-        i->second.members().push_back(s.name());
+    auto i(model_.modules().find(*e.containing_module()));
+    if (i == model_.modules().end()) {
+        const auto sn(e.containing_module()->simple());
+        BOOST_LOG_SEV(lg, error) << missing_module << sn;
+        BOOST_THROW_EXCEPTION(expansion_error(missing_module + sn));
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Adding type to module. Type: '"
+                             << e.name().qualified()
+                             << "' Module: '" << i->first.qualified();
+    i->second.members().push_back(e.name());
 }
 
-void modules_expander::expand_containing_module(intermediate_model& m) const {
-    update_containing_module(m, m.objects());
-    update_containing_module(m, m.primitives());
-    update_containing_module(m, m.enumerations());
-    update_containing_module(m, m.concepts());
-    update_containing_module(m, m.modules());
 }
 
 void modules_expander::expand(intermediate_model& m) const {
-    expand_containing_module(m);
+    updater g(m);
+    yarn::all_model_items_traversal(m, g);
 }
 
 } }
