@@ -41,7 +41,7 @@ namespace dogen {
 namespace yarn_dia {
 
 /**
- * @brief Transforms Dia objects into their YARN counterpart.
+ * @brief Transforms Dia objects into their yarn counterpart.
  */
 class transformer {
 public:
@@ -60,7 +60,7 @@ public:
 
 private:
     /**
-     * @brief Ensure that the processed object implies an YARN type
+     * @brief Ensure that the processed object implies an yarn type
      * which is supported by the transformer.
      */
     void require_is_transformable(const processed_object& o) const;
@@ -92,7 +92,7 @@ private:
         const yarn::name& module_qn) const;
 
     /**
-     * @brief Converts processed property into an YARN property.
+     * @brief Converts processed property into an yarn property.
      *
      * @param p the Dia UML attribute in processed form.
      *
@@ -102,7 +102,7 @@ private:
     yarn::property to_property(const processed_property& p) const;
 
     /**
-     * @brief Converts processed property into an YARN enumerator.
+     * @brief Converts processed property into an yarn enumerator.
      *
      * @param p the Dia UML attribute in processed form.
      * @param value what value should the enumeration take.
@@ -130,7 +130,7 @@ private:
     yarn::module& module_for_id(const std::string& id);
 
     /**
-     * @brief Update the YARN element using the processed object and
+     * @brief Update the yarn element using the processed object and
      * the profile. Also adds element's name to the containing
      * module, if any.
      */
@@ -144,15 +144,10 @@ private:
         if (!pkg_id.empty()) {
             auto& module(module_for_id(pkg_id));
             e.name(to_name(o.name(), module.name()));
-            module.members().push_back(e.name());
-            e.containing_module(module.name());
         } else {
             // type belongs to the synthetic module for the model;
             // do not add it to the name.
             e.name(to_name(o.name()));
-            auto& module(module_for_name(context_.model().name()));
-            module.members().push_back(e.name());
-            e.containing_module(module.name());
         }
 
         context_.id_to_name().insert(std::make_pair(o.id(), e.name()));
@@ -165,7 +160,7 @@ private:
     }
 
     /**
-     * @brief Update the YARN abstract object using the processed
+     * @brief Update the yarn abstract object using the processed
      * object and the profile.
      */
     void update_object(yarn::object& ao, const processed_object& o,
@@ -174,7 +169,7 @@ private:
 private:
     /**
      * @brief Converts a processed object containing a UML class with
-     * a stereotype of exception to a YARN exception.
+     * a stereotype of exception to a yarn exception.
      *
      * @param o the Dia UML class containing an enumeration.
      * @param p profile of the object.
@@ -185,7 +180,7 @@ private:
 
     /**
      * @brief Converts Dia a object containing a UML class with a
-     * stereotype of service to a YARN service.
+     * stereotype of service to a yarn service.
      *
      * @param o the Dia UML class containing an enumeration.
      * @param p profile of the object.
@@ -196,7 +191,7 @@ private:
 
     /**
      * @brief Converts Dia a object containing a UML class with a
-     * stereotype of value object to a YARN service.
+     * stereotype of value object to a yarn service.
      *
      * @param o the Dia UML class containing a value object.
      * @param p profile of the object.
@@ -214,7 +209,7 @@ private:
 
     /**
      * @brief Converts a dia object of type large UML package into a
-     * module in YARN.
+     * module in yarn.
      *
      * @param o Dia object which contains a UML package.
      */
@@ -230,7 +225,7 @@ private:
 
     /**
      * @brief Converts a dia object with a stereotype of concept
-     * into a YARN concept.
+     * into a yarn concept.
      *
      * @param o Dia object which contains a concept.
      */
@@ -246,7 +241,7 @@ private:
 
 public:
     /**
-     * @brief Checks if the processed object implies an YARN type which
+     * @brief Checks if the processed object implies an yarn type which
      * is supported by the transformer.
      */
     bool is_transformable(const processed_object& o) const;

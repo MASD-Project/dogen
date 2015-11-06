@@ -145,426 +145,8 @@ in the context of inheritance.
 					</containing_module>
 				</element>
 				<members class_id="24" tracking_level="0" version="0">
-					<count>22</count>
+					<count>0</count>
 					<item_version>0</item_version>
-					<item>
-						<simple>parent_without_members</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>child_without_members</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>parent_with_members</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>second_child_without_members</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>third_child_with_members</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>child_of_a_child1</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>child_of_a_child2</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>pkg1</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>pkg2</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>pkg3</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>parent_outside</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>pkg4</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>child_with_members</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>service_interface</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>service</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>base</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>descendant2</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>descendant1</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>descendant3</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>move_ctor_base</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>move_ctor_descendant</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>move_ctor_empty_descendant</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
 				</members>
 			</second>
 		</item>
@@ -620,53 +202,12 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<members>
-					<count>1</count>
+					<count>0</count>
 					<item_version>0</item_version>
-					<item>
-						<simple>child</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>pkg4</item>
-							</internal_module_path>
-						</location>
-					</item>
 				</members>
 			</second>
 		</item>
@@ -722,73 +263,12 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<members>
-					<count>2</count>
+					<count>0</count>
 					<item_version>0</item_version>
-					<item>
-						<simple>parent</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>pkg1</item>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>child</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>pkg1</item>
-							</internal_module_path>
-						</location>
-					</item>
 				</members>
 			</second>
 		</item>
@@ -844,53 +324,12 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<members>
-					<count>1</count>
+					<count>0</count>
 					<item_version>0</item_version>
-					<item>
-						<simple>parent</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>pkg2</item>
-							</internal_module_path>
-						</location>
-					</item>
 				</members>
 			</second>
 		</item>
@@ -946,53 +385,12 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<members>
-					<count>1</count>
+					<count>0</count>
 					<item_version>0</item_version>
-					<item>
-						<simple>child</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>pkg3</item>
-							</internal_module_path>
-						</location>
-					</item>
 				</members>
 			</second>
 		</item>
@@ -1069,28 +467,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties class_id="30" tracking_level="0" version="0">
@@ -1199,28 +576,7 @@ in the context of inheritance.
 					<generation_type>2</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -1305,27 +661,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>pkg1</simple>
-							<qualified></qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -1477,27 +813,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>pkg1</simple>
-							<qualified></qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -1620,28 +936,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -1790,28 +1085,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -1934,28 +1208,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -2106,27 +1359,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>pkg2</simple>
-							<qualified></qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -2249,28 +1482,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -2419,28 +1631,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -2523,28 +1714,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -2655,27 +1825,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>pkg3</simple>
-							<qualified></qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -2825,28 +1975,7 @@ in the context of inheritance.
 					<generation_type>2</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -2930,28 +2059,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -3101,28 +2209,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -3245,28 +2332,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -3377,27 +2443,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>pkg4</simple>
-							<qualified></qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -3546,28 +2592,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -3676,28 +2701,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -3846,28 +2850,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -3950,28 +2933,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -4120,28 +3082,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -4251,28 +3192,7 @@ in the context of inheritance.
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>trivial_inheritance</simple>
-							<qualified>&lt;trivial_inheritance&gt;</qualified>
-							<location>
-								<original_model_name>trivial_inheritance</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>trivial_inheritance</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>

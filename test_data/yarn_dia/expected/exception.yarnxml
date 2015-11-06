@@ -101,53 +101,12 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>exception</simple>
-							<qualified>&lt;exception&gt;</qualified>
-							<location>
-								<original_model_name>exception</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>exception</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<members class_id="20" tracking_level="0" version="0">
-					<count>1</count>
+					<count>0</count>
 					<item_version>0</item_version>
-					<item>
-						<simple>catastrophic_error</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>exception</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>pkg</item>
-							</internal_module_path>
-						</location>
-					</item>
 				</members>
 			</second>
 		</item>
@@ -242,65 +201,8 @@
 					</containing_module>
 				</element>
 				<members>
-					<count>3</count>
+					<count>0</count>
 					<item_version>0</item_version>
-					<item>
-						<simple>my_error</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>exception</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>pkg</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>exception</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>a_class</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>exception</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
 				</members>
 			</second>
 		</item>
@@ -376,28 +278,7 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>exception</simple>
-							<qualified>&lt;exception&gt;</qualified>
-							<location>
-								<original_model_name>exception</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>exception</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties class_id="30" tracking_level="0" version="0">
@@ -522,27 +403,7 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>pkg</simple>
-							<qualified></qualified>
-							<location>
-								<original_model_name>exception</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -626,28 +487,7 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>exception</simple>
-							<qualified>&lt;exception&gt;</qualified>
-							<location>
-								<original_model_name>exception</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>exception</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>

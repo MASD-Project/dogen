@@ -101,53 +101,12 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>boost_model</simple>
-							<qualified>&lt;boost_model&gt;</qualified>
-							<location>
-								<original_model_name>boost_model</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>boost_model</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<members class_id="20" tracking_level="0" version="0">
-					<count>1</count>
+					<count>0</count>
 					<item_version>0</item_version>
-					<item>
-						<simple>class_c</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>boost_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>pkg1</item>
-							</internal_module_path>
-						</location>
-					</item>
 				</members>
 			</second>
 		</item>
@@ -242,217 +201,8 @@
 					</containing_module>
 				</element>
 				<members>
-					<count>11</count>
+					<count>0</count>
 					<item_version>0</item_version>
-					<item>
-						<simple>class_b</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>boost_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>class_a</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>boost_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>pkg1</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>boost_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>class_base</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>boost_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>class_derived</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>boost_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>class_d</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>boost_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>some_service</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>boost_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>class_e</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>boost_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>class_f</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>boost_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>class_g</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>boost_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
-					<item>
-						<simple>class_h</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>boost_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
 				</members>
 			</second>
 		</item>
@@ -528,28 +278,7 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>boost_model</simple>
-							<qualified>&lt;boost_model&gt;</qualified>
-							<location>
-								<original_model_name>boost_model</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>boost_model</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties class_id="30" tracking_level="0" version="0">
@@ -672,28 +401,7 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>boost_model</simple>
-							<qualified>&lt;boost_model&gt;</qualified>
-							<location>
-								<original_model_name>boost_model</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>boost_model</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -818,27 +526,7 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>pkg1</simple>
-							<qualified></qualified>
-							<location>
-								<original_model_name>boost_model</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -1001,28 +689,7 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>boost_model</simple>
-							<qualified>&lt;boost_model&gt;</qualified>
-							<location>
-								<original_model_name>boost_model</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>boost_model</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -1145,28 +812,7 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>boost_model</simple>
-							<qualified>&lt;boost_model&gt;</qualified>
-							<location>
-								<original_model_name>boost_model</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>boost_model</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -1409,28 +1055,7 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>boost_model</simple>
-							<qualified>&lt;boost_model&gt;</qualified>
-							<location>
-								<original_model_name>boost_model</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>boost_model</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -1673,28 +1298,7 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>boost_model</simple>
-							<qualified>&lt;boost_model&gt;</qualified>
-							<location>
-								<original_model_name>boost_model</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>boost_model</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -2057,28 +1661,7 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>boost_model</simple>
-							<qualified>&lt;boost_model&gt;</qualified>
-							<location>
-								<original_model_name>boost_model</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>boost_model</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -2227,28 +1810,7 @@
 					<generation_type>2</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>boost_model</simple>
-							<qualified>&lt;boost_model&gt;</qualified>
-							<location>
-								<original_model_name>boost_model</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>boost_model</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -2451,28 +2013,7 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>boost_model</simple>
-							<qualified>&lt;boost_model&gt;</qualified>
-							<location>
-								<original_model_name>boost_model</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>boost_model</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>
@@ -2795,28 +2336,7 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>boost_model</simple>
-							<qualified>&lt;boost_model&gt;</qualified>
-							<location>
-								<original_model_name>boost_model</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>boost_model</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties>

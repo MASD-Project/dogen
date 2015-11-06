@@ -197,8 +197,6 @@ BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_value
     BOOST_CHECK(m.name().simple() == model_name);
     BOOST_CHECK(m.name().location().original_model_name() == model_name);
     BOOST_CHECK(m.name().location().internal_module_path().empty());
-    BOOST_CHECK(m.members().size() == 1);
-    BOOST_CHECK(m.members().front() == o.name());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_value_object_stereotype_transforms_into_expected_value_object) {
@@ -226,8 +224,6 @@ BOOST_AUTO_TEST_CASE(uml_class_with_value_object_stereotype_transforms_into_expe
     BOOST_CHECK(m.name().simple() == model_name);
     BOOST_CHECK(m.name().location().original_model_name() == model_name);
     BOOST_CHECK(m.name().location().internal_module_path().empty());
-    BOOST_CHECK(m.members().size() == 1);
-    BOOST_CHECK(m.members().front() == o.name());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expected_enumeration) {
@@ -253,8 +249,6 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expec
     BOOST_CHECK(m.name().simple() == model_name);
     BOOST_CHECK(m.name().location().original_model_name() == model_name);
     BOOST_CHECK(m.name().location().internal_module_path().empty());
-    BOOST_CHECK(m.members().size() == 1);
-    BOOST_CHECK(m.members().front() == e.name());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expected_value_object) {
@@ -281,8 +275,6 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expecte
     BOOST_CHECK(m.name().simple() == model_name);
     BOOST_CHECK(m.name().location().original_model_name() == model_name);
     BOOST_CHECK(m.name().location().internal_module_path().empty());
-    BOOST_CHECK(m.members().size() == 1);
-    BOOST_CHECK(m.members().front() == e.name());
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_transforms_into_expected_service) {
@@ -310,8 +302,6 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_transforms_into_expected_
     BOOST_CHECK(m.name().simple() == model_name);
     BOOST_CHECK(m.name().location().original_model_name() == model_name);
     BOOST_CHECK(m.name().location().internal_module_path().empty());
-    BOOST_CHECK(m.members().size() == 1);
-    BOOST_CHECK(m.members().front() == o.name());
 }
 
 BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_module) {
@@ -330,12 +320,9 @@ BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_module) {
         BOOST_CHECK(m.name().location().original_model_name() == model_name);
         BOOST_CHECK(m.name().location().internal_module_path().empty());
 
-        if (m.name().simple() == model_name)
-            BOOST_CHECK(m.members().size() == 1);
-        else {
+        if (m.name().simple() != model_name) {
             BOOST_CHECK(!m.name().simple().empty());
             BOOST_CHECK(m.documentation().empty());
-            BOOST_CHECK(m.members().empty());
         }
     }
 }
@@ -351,32 +338,24 @@ BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_object) {
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
     BOOST_REQUIRE(c.model().modules().size() == 2);
-    std::string module_name, model_member, module_member;
+    std::string module_name;
     for (const auto& pair : c.model().modules()) {
         const auto& m(pair.second);
         BOOST_CHECK(m.name().location().original_model_name() == model_name);
         BOOST_CHECK(m.name().location().internal_module_path().empty());
 
-        if (m.name().simple() == model_name) {
-            BOOST_CHECK(m.members().size() == 1);
-            model_member = m.members().front().simple();
-        } else {
+        if (m.name().simple() != model_name) {
             BOOST_CHECK(!m.name().simple().empty());
             BOOST_CHECK(m.documentation().empty());
             module_name = m.name().simple();
-            BOOST_CHECK(m.members().size() == 1);
-            module_member = m.members().front().simple();
         }
     }
-
-    BOOST_REQUIRE(!module_name.empty());
-    BOOST_REQUIRE(model_member == module_name);
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
     const auto& o(c.model().objects().begin()->second);
     BOOST_CHECK(o.name().location().original_model_name() == model_name);
     BOOST_CHECK(!o.name().simple().empty());
-    BOOST_CHECK(module_member == o.name().simple());
+
     BOOST_CHECK(o.local_properties().empty());
 
     BOOST_CHECK(o.object_type() ==
@@ -399,32 +378,23 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_package_transforms
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
     BOOST_REQUIRE(c.model().modules().size() == 2);
-    std::string module_name, model_member, module_member;
+    std::string module_name;
     for (const auto& pair : c.model().modules()) {
         const auto& m(pair.second);
         BOOST_CHECK(m.name().location().original_model_name() == model_name);
         BOOST_CHECK(m.name().location().internal_module_path().empty());
 
-        if (m.name().simple() == model_name) {
-            BOOST_CHECK(m.members().size() == 1);
-            model_member = m.members().front().simple();
-        } else {
+        if (m.name().simple() != model_name) {
             BOOST_CHECK(!m.name().simple().empty());
             BOOST_CHECK(m.documentation().empty());
             module_name = m.name().simple();
-            BOOST_CHECK(m.members().size() == 1);
-            module_member = m.members().front().simple();
         }
     }
-
-    BOOST_REQUIRE(!module_name.empty());
-    BOOST_REQUIRE(model_member == module_name);
 
     BOOST_REQUIRE(c.model().enumerations().size() == 1);
     const auto e(c.model().enumerations().begin()->second);
     BOOST_CHECK(e.name().location().original_model_name() == model_name);
     BOOST_CHECK(!e.name().simple().empty());
-    BOOST_CHECK(module_member == e.name().simple());
     BOOST_REQUIRE(e.name().location().internal_module_path().size() == 1);
     BOOST_CHECK(e.name().location().internal_module_path().front() ==
         module_name);
@@ -443,33 +413,24 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_i
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
     BOOST_REQUIRE(c.model().modules().size() == 2);
-    std::string module_name, model_member, module_member;
+    std::string module_name;
     for (const auto& pair : c.model().modules()) {
         const auto& m(pair.second);
         BOOST_CHECK(m.name().location().original_model_name() == model_name);
         BOOST_CHECK(m.name().location().internal_module_path().empty());
 
-        if (m.name().simple() == model_name) {
-            BOOST_CHECK(m.members().size() == 1);
-            model_member = m.members().front().simple();
-        } else {
+        if (m.name().simple() != model_name) {
             BOOST_CHECK(!m.name().simple().empty());
             BOOST_CHECK(m.documentation().empty());
             module_name = m.name().simple();
-            BOOST_CHECK(m.members().size() == 1);
-            module_member = m.members().front().simple();
         }
     }
-
-    BOOST_REQUIRE(!module_name.empty());
-    BOOST_REQUIRE(model_member == module_name);
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
     const auto& o(c.model().objects().begin()->second);
     BOOST_CHECK(o.object_type() == dogen::yarn::object_types::exception);
     BOOST_CHECK(o.name().location().original_model_name() == model_name);
     BOOST_CHECK(!o.name().simple().empty());
-    BOOST_CHECK(module_member == o.name().simple());
     BOOST_REQUIRE(o.name().location().internal_module_path().size() == 1);
     BOOST_CHECK(o.name().location().internal_module_path().front() ==
         module_name);
@@ -488,26 +449,18 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_package_transforms_int
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
 
     BOOST_REQUIRE(c.model().modules().size() == 2);
-    std::string module_name, model_member, module_member;
+    std::string module_name;
     for (const auto& pair : c.model().modules()) {
         const auto& m(pair.second);
         BOOST_CHECK(m.name().location().original_model_name() == model_name);
         BOOST_CHECK(m.name().location().internal_module_path().empty());
 
-        if (m.name().simple() == model_name) {
-            BOOST_CHECK(m.members().size() == 1);
-            model_member = m.members().front().simple();
-        } else {
+        if (m.name().simple() != model_name) {
             BOOST_CHECK(!m.name().simple().empty());
             BOOST_CHECK(m.documentation().empty());
             module_name = m.name().simple();
-            BOOST_CHECK(m.members().size() == 1);
-            module_member = m.members().front().simple();
         }
     }
-
-    BOOST_REQUIRE(!module_name.empty());
-    BOOST_REQUIRE(model_member == module_name);
 
     BOOST_REQUIRE(c.model().objects().size() == 1);
     const auto& o(c.model().objects().begin()->second);
@@ -515,7 +468,6 @@ BOOST_AUTO_TEST_CASE(uml_class_with_service_stereotype_in_package_transforms_int
         dogen::yarn::object_types::user_defined_service);
     BOOST_CHECK(o.name().location().original_model_name() == model_name);
     BOOST_CHECK(!o.name().simple().empty());
-    BOOST_CHECK(module_member == o.name().simple());
     BOOST_REQUIRE(o.name().location().internal_module_path().size() == 1);
     BOOST_CHECK(o.name().location().internal_module_path().front() ==
         module_name);
@@ -793,7 +745,6 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_transforms_into_model_comments) {
     BOOST_CHECK(m.name().location().original_model_name() == model_name);
     BOOST_CHECK(m.name().simple() == model_name);
     BOOST_CHECK(!m.documentation().empty());
-    BOOST_CHECK(m.members().empty());
     BOOST_CHECK(m.extensions().fields().size() == 1);
 }
 
@@ -810,7 +761,6 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_does_nothing) {
     BOOST_CHECK(m.name().location().original_model_name() == model_name);
     BOOST_CHECK(m.name().simple() == model_name);
     BOOST_CHECK(m.documentation().empty());
-    BOOST_CHECK(m.members().empty());
     BOOST_CHECK(m.extensions().fields().empty());
 }
 
@@ -826,7 +776,6 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_does_nothing) {
     BOOST_CHECK(m.name().location().original_model_name() == model_name);
     BOOST_CHECK(m.name().simple() == model_name);
     BOOST_CHECK(m.documentation().empty());
-    BOOST_CHECK(m.members().empty());
     BOOST_CHECK(m.extensions().fields().empty());
 }
 
@@ -843,25 +792,21 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package
     BOOST_CHECK(c.model().extensions().fields().empty());
 
     BOOST_REQUIRE(c.model().modules().size() == 2);
-    std::string model_member, module_name;
     for (const auto& pair : c.model().modules()) {
         const auto& m(pair.second);
 
         if (m.name().simple() == model_name) {
-            BOOST_CHECK(m.name().location().original_model_name() == model_name);
+            BOOST_CHECK(m.name().location().original_model_name() ==
+                model_name);
             BOOST_CHECK(m.name().simple() == model_name);
             BOOST_CHECK(m.documentation().empty());
-            BOOST_CHECK(m.members().size() == 1);
-            model_member = m.members().front().simple();
             BOOST_CHECK(m.extensions().fields().empty());
         } else {
-            module_name = m.name().simple();
+            BOOST_CHECK(!m.name().simple().empty());
             BOOST_CHECK(!m.documentation().empty());
             BOOST_CHECK(!m.extensions().fields().empty());
-            BOOST_CHECK(m.members().empty());
         }
     }
-    BOOST_CHECK(model_member == module_name);
 }
 
 BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothing) {
@@ -876,24 +821,19 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothin
     BOOST_CHECK(c.model().extensions().fields().empty());
     BOOST_REQUIRE(c.model().modules().size() == 2);
 
-    std::string model_member, module_name;
     for (const auto& pair : c.model().modules()) {
         const auto& m(pair.second);
         if (m.name().simple() == model_name) {
             BOOST_CHECK(m.name().location().original_model_name() == model_name);
             BOOST_CHECK(m.name().simple() == model_name);
             BOOST_CHECK(m.documentation().empty());
-            BOOST_CHECK(m.members().size() == 1);
-            model_member = m.members().front().simple();
             BOOST_CHECK(m.extensions().fields().empty());
         } else {
-            module_name = m.name().simple();
+            BOOST_CHECK(!m.name().simple().empty());
             BOOST_CHECK(m.documentation().empty());
             BOOST_CHECK(m.extensions().fields().empty());
-            BOOST_CHECK(m.members().empty());
         }
     }
-    BOOST_CHECK(model_member == module_name);
 }
 
 BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
@@ -908,23 +848,19 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
     BOOST_CHECK(c.model().documentation().empty());
     BOOST_CHECK(c.model().extensions().fields().empty());
     BOOST_REQUIRE(c.model().modules().size() == 2);
-    std::string model_member, module_name;
     for (const auto& pair : c.model().modules()) {
         const auto& m(pair.second);
         if (m.name().simple() == model_name) {
             BOOST_CHECK(m.name().location().original_model_name() == model_name);
             BOOST_CHECK(m.name().simple() == model_name);
             BOOST_CHECK(m.documentation().empty());
-            BOOST_CHECK(m.members().size() == 1);
-            model_member = m.members().front().simple();
             BOOST_CHECK(m.extensions().fields().empty());
         } else {
-            module_name = m.name().simple();
+            BOOST_CHECK(!m.name().simple().empty());
             BOOST_CHECK(m.documentation().empty());
             BOOST_CHECK(m.extensions().fields().empty());
         }
     }
-    BOOST_CHECK(model_member == module_name);
 }
 
 BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {
@@ -970,12 +906,10 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
     BOOST_CHECK(c.model().modules().size() == 1);
     const auto m(c.model().modules().begin()->second);
     BOOST_CHECK(m.name().simple() == model_name);
-    BOOST_CHECK(m.members().size() == 2);
 
     BOOST_REQUIRE(c.model().objects().size() == 2);
     for (const auto& pair : c.model().objects()) {
         const auto& n(pair.first);
-        BOOST_CHECK(m.members().front() == n || m.members().back() == n);
 
         const auto& o(pair.second);
         if (is_type_one(n)) {
@@ -1008,12 +942,10 @@ BOOST_AUTO_TEST_CASE(uml_class_with_one_property_transforms_into_value_object_wi
     BOOST_CHECK(c.model().modules().size() == 1);
     const auto m(c.model().modules().begin()->second);
     BOOST_CHECK(m.name().simple() == model_name);
-    BOOST_CHECK(m.members().size() == 1);
 
     const auto& o(c.model().objects().begin()->second);
     BOOST_CHECK(o.object_type() ==
         dogen::yarn::object_types::user_defined_value_object);
-    BOOST_CHECK(m.members().front() == o.name());
     BOOST_CHECK(o.name().location().original_model_name() == model_name);
 
     BOOST_CHECK(is_type_zero(o.name()));

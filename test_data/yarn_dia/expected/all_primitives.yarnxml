@@ -140,27 +140,8 @@
 					</containing_module>
 				</element>
 				<members class_id="24" tracking_level="0" version="0">
-					<count>1</count>
+					<count>0</count>
 					<item_version>0</item_version>
-					<item>
-						<simple>a_class</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>all_primitives</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</item>
 				</members>
 			</second>
 		</item>
@@ -236,28 +217,7 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
-						<initialized>1</initialized>
-						<item_version>0</item_version>
-						<value>
-							<simple>all_primitives</simple>
-							<qualified>&lt;all_primitives&gt;</qualified>
-							<location>
-								<original_model_name>all_primitives</original_model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<model_module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>all_primitives</item>
-								</model_module_path>
-								<internal_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_module_path>
-							</location>
-						</value>
+						<initialized>0</initialized>
 					</containing_module>
 				</element>
 				<all_properties class_id="30" tracking_level="0" version="0">

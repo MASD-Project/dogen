@@ -12,21 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-06 Fri 22:51]
+#+CAPTION: Clock summary at [2015-11-06 Fri 23:20]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *23:25* |       |      |
+| *Total time*                                                                | *23:53* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 23:25   |       |      |
-| Active                                                                      |         | 23:25 |      |
+| Stories                                                                     | 23:53   |       |      |
+| Active                                                                      |         | 23:53 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:12 |
 | COMPLETED Split "full" models from "partial" models                         |         |       | 8:37 |
 | COMPLETED Frontend model refactor                                           |         |       | 1:39 |
 | COMPLETED Improve references management                                     |         |       | 1:02 |
 | COMPLETED Move property type generation to expander                         |         |       | 0:50 |
 | COMPLETED Yarn refactor around partial model construction                   |         |       | 2:24 |
-| STARTED Compute qualified name                                              |         |       | 5:31 |
+| STARTED Compute qualified name                                              |         |       | 5:59 |
 | STARTED Create a "final model" class                                        |         |       | 0:19 |
 | STARTED Model should not be an element                                      |         |       | 0:18 |
 | STARTED Rename nested qname to composite qname                              |         |       | 0:33 |
@@ -195,6 +195,7 @@ Notes:
   property =is_default_enumeration_type=).
 
 *** STARTED Compute qualified name                                    :story:
+    CLOCK: [2015-11-06 Fri 22:52]--[2015-11-06 Fri 23:20] =>  0:28
     CLOCK: [2015-11-06 Fri 21:21]--[2015-11-06 Fri 21:38] =>  0:17
     CLOCK: [2015-11-04 Wed 21:24]--[2015-11-04 Wed 22:07] =>  0:43
     CLOCK: [2015-11-03 Tue 22:28]--[2015-11-04 Wed 00:07] =>  1:39
