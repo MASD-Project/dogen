@@ -50,26 +50,13 @@ nested_name properties_expander::make_nested_name(const identifier_parser& ip,
     return r;
 }
 
-void properties_expander::
-expand_property(const identifier_parser& /*ip*/, property& /*p*/) const {
-    /*nested_name nn(ip.parse_name(p.unparsed_name()));
-      p.type(nn);*/
-}
-
 void properties_expander::expand(intermediate_model& m) const {
     const auto ip(make_identifier_parser(m));
-    for (auto& pair : m.objects()) {
-        auto& o(pair.second);
-        for (auto& p : o.local_properties())
-            p.type(make_nested_name(ip, p.unparsed_type()));
-        // FIXME: expand_property(ip, p);
-    }
+    for (auto& pair : m.objects())
+        update_properties(ip, pair.second);
 
-    for (auto& pair : m.concepts()) {
-        auto& c(pair.second);
-        for (auto& p : c.local_properties())
-            p.type(make_nested_name(ip, p.unparsed_type()));
-    }
+    for (auto& pair : m.concepts())
+        update_properties(ip, pair.second);
 }
 
 } }

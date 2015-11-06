@@ -32,7 +32,6 @@
 #include "dogen/dynamic/types/scope_types.hpp"
 #include "dogen/yarn/types/nested_name.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/identifier_parser.hpp"
 #include "dogen/yarn_dia/types/processed_object.hpp"
 #include "dogen/yarn_dia/types/processed_property.hpp"
 #include "dogen/yarn_dia/types/context.hpp"
@@ -91,14 +90,6 @@ private:
      */
     yarn::name to_name(const std::string& n,
         const yarn::name& module_qn) const;
-
-    /**
-     * @brief Creates a nested name from a string representation of a
-     * qualified name.
-     *
-     * @pre n must not be empty.
-     */
-    yarn::nested_name to_nested_name(const std::string& n) const;
 
     /**
      * @brief Converts processed property into an YARN property.
@@ -269,7 +260,6 @@ public:
 
 private:
     context& context_;
-    std::shared_ptr<yarn::identifier_parser> identifier_parser_;
     const dynamic::workflow& dynamic_workflow_;
 };
 

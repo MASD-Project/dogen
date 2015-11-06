@@ -164,13 +164,6 @@ public:
      */
     const std::unordered_set<std::string>& parent_ids() const;
 
-    /**
-     * @brief Returns the list of top-level module names.
-     *
-     * @pre The graph must have already been generated.
-     */
-    const std::unordered_set<std::string>& top_level_module_names() const;
-
 private:
     bool generated_;
     graph_type graph_;
@@ -180,7 +173,6 @@ private:
     child_id_to_parent_ids_type child_id_to_parent_ids_;
     std::unordered_set<std::string> parent_ids_;
     std::unordered_set<std::string> connected_ids_;
-    std::unordered_set<std::string> top_level_module_names_;
 };
 
 } }

@@ -45,7 +45,6 @@ void save(Archive& ar,
     ar << make_nvp("child_id_to_parent_ids", v.child_id_to_parent_ids_);
     ar << make_nvp("parent_ids", v.parent_ids_);
     ar << make_nvp("id_to_name", v.id_to_name_);
-    ar << make_nvp("top_level_module_names", v.top_level_module_names_);
     ar << make_nvp("model", v.model_);
 }
 
@@ -56,7 +55,6 @@ void load(Archive& ar,
     ar >> make_nvp("child_id_to_parent_ids", v.child_id_to_parent_ids_);
     ar >> make_nvp("parent_ids", v.parent_ids_);
     ar >> make_nvp("id_to_name", v.id_to_name_);
-    ar >> make_nvp("top_level_module_names", v.top_level_module_names_);
     ar >> make_nvp("model", v.model_);
 }
 

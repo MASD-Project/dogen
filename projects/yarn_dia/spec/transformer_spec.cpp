@@ -1020,7 +1020,6 @@ BOOST_AUTO_TEST_CASE(uml_class_with_one_property_transforms_into_value_object_wi
     BOOST_CHECK(!o.documentation().empty());
     BOOST_REQUIRE(o.local_properties().size() == 1);
     BOOST_CHECK(is_type_zero(o.local_properties().front().name()));
-    BOOST_CHECK(!o.local_properties().front().type().type().simple().empty());
     BOOST_CHECK(!o.local_properties().front().documentation().empty());
 }
 

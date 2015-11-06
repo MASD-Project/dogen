@@ -85,8 +85,7 @@ populate(const unsigned int position, result_type& v) {
     v.child_id_to_parent_ids(create_std_unordered_map_std_string_std_list_std_string_(position + 0));
     v.parent_ids(create_std_unordered_set_std_string(position + 1));
     v.id_to_name(create_std_unordered_map_std_string_dogen_yarn_name(position + 2));
-    v.top_level_module_names(create_std_unordered_set_std_string(position + 3));
-    v.model(create_dogen_yarn_intermediate_model(position + 4));
+    v.model(create_dogen_yarn_intermediate_model(position + 3));
 }
 
 context_generator::result_type

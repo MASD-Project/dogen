@@ -639,7 +639,7 @@ third line with &quot;quote&quot;
 						<name>prop_0</name>
 						<type class_id="34" tracking_level="0" version="0">
 							<type>
-								<simple>int</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -682,7 +682,7 @@ a second line
 						<name>prop_1</name>
 						<type>
 							<type>
-								<simple>int</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -722,7 +722,7 @@ a second line
 						<name>prop_2</name>
 						<type>
 							<type>
-								<simple>int</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>

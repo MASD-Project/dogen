@@ -75,7 +75,6 @@
 #include "dogen/yarn/types/association_indexer.hpp"
 #include "dogen/yarn/types/nested_name_builder.hpp"
 #include "dogen/yarn/types/properties_expander.hpp"
-#include "dogen/yarn/types/references_expander.hpp"
 #include "dogen/yarn/types/transformation_error.hpp"
 #include "dogen/yarn/types/generalization_indexer.hpp"
 #include "dogen/yarn/types/all_model_items_traversal.hpp"

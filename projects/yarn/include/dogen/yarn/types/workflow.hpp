@@ -43,6 +43,12 @@ private:
         const std::list<input_descriptor>& id) const;
 
     /**
+     * @brief Executes the expansion workflow.
+     */
+    void expand_intermediate_models_activity(
+        std::list<intermediate_model>& m) const;
+
+    /**
      * @brief Executes the assembling workflow.
      */
     intermediate_model assemble_intermediate_models_activity(

@@ -94,7 +94,6 @@ graph_type workflow::generate_graph_activity(const dia::diagram& diagram) {
     g.generate();
     context_.child_id_to_parent_ids(g.child_id_to_parent_ids());
     context_.parent_ids(g.parent_ids());
-    context_.top_level_module_names(g.top_level_module_names());
     return g.graph();
 }
 

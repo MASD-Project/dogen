@@ -20,7 +20,6 @@
  */
 #include "dogen/yarn/types/modules_expander.hpp"
 #include "dogen/yarn/types/properties_expander.hpp"
-#include "dogen/yarn/types/references_expander.hpp"
 #include "dogen/yarn/types/expander.hpp"
 
 namespace dogen {
@@ -36,15 +35,9 @@ void expander::expand_properties(intermediate_model& m) const {
     e.expand(m);
 }
 
-void expander::expand_references(intermediate_model& m) const {
-    references_expander e;
-    e.expand(m);
-}
-
 void expander::expand(intermediate_model& m) const {
     expand_modules(m);
     expand_properties(m);
-    expand_references(m);
 }
 
 } }

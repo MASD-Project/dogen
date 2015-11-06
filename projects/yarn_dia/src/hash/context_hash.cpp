@@ -75,7 +75,6 @@ std::size_t context_hasher::hash(const context& v) {
     combine(seed, hash_std_unordered_map_std_string_std_list_std_string_(v.child_id_to_parent_ids()));
     combine(seed, hash_std_unordered_set_std_string(v.parent_ids()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_name(v.id_to_name()));
-    combine(seed, hash_std_unordered_set_std_string(v.top_level_module_names()));
     combine(seed, v.model());
 
     return seed;

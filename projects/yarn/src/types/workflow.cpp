@@ -21,6 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/frontend_workflow.hpp"
+#include "dogen/yarn/types/expander.hpp"
 #include "dogen/yarn/types/assembler.hpp"
 #include "dogen/yarn/types/workflow.hpp"
 
@@ -41,6 +42,13 @@ std::list<intermediate_model> workflow::obtain_intermediate_models_activity(
     return w.execute(id);
 }
 
+void workflow::expand_intermediate_models_activity(
+    std::list<intermediate_model>& m) const {
+    expander e;
+    for (auto& model : m)
+        e.expand(model);
+}
+
 intermediate_model workflow::assemble_intermediate_models_activity(
     const std::list<intermediate_model>& m) const {
     assembler a;
@@ -49,7 +57,9 @@ intermediate_model workflow::assemble_intermediate_models_activity(
 
 intermediate_model workflow::execute(const dynamic::repository& rp,
     const std::list<input_descriptor>& id) const {
-    const auto pm(obtain_intermediate_models_activity(rp, id));
+
+    auto pm(obtain_intermediate_models_activity(rp, id));
+    expand_intermediate_models_activity(pm);
     const auto r(assemble_intermediate_models_activity(pm));
     BOOST_LOG_SEV(lg, debug) << "Final model: " << r;
     return r;

@@ -68,10 +68,7 @@ namespace dogen {
 namespace yarn_dia {
 
 transformer::transformer(const dynamic::workflow& w, context& c)
-    : context_(c),
-      identifier_parser_(new yarn::identifier_parser(c.top_level_module_names(),
-              c.model().name().location())),
-      dynamic_workflow_(w) {
+    : context_(c), dynamic_workflow_(w) {
 
     BOOST_LOG_SEV(lg, debug) << "Initial context: " << context_;
 }
@@ -146,15 +143,6 @@ yarn::module& transformer::module_for_id(const std::string& id) {
     return module_for_name(i->second);
 }
 
-yarn::nested_name transformer::to_nested_name(const std::string& n) const {
-    yarn::nested_name r(identifier_parser_->parse_name(n));
-    if (r.type().simple().empty()) {
-        BOOST_LOG_SEV(lg, error) << invalid_type_string << n;
-        BOOST_THROW_EXCEPTION(transformation_error(invalid_type_string + n));
-    }
-    return r;
-}
-
 yarn::property transformer::to_property(const processed_property& p) const {
     if (p.name().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
@@ -163,7 +151,6 @@ yarn::property transformer::to_property(const processed_property& p) const {
 
     yarn::property r;
     r.name(p.name());
-    r.type(to_nested_name(p.type()));
     r.unparsed_type(p.type());
     r.documentation(p.comment().documentation());
 
@@ -202,10 +189,8 @@ update_object(yarn::object& ao, const processed_object& o, const profile& p) {
         ao.relationships()[relationship_types::modeled_concepts].push_back(n);
     }
 
-    for (const auto& p : o.properties()) {
-        const auto property(to_property(p));
-        ao.local_properties().push_back(property);
-    }
+    for (const auto& p : o.properties())
+        ao.local_properties().push_back(to_property(p));
 
     const auto i(context_.child_id_to_parent_ids().find(o.id()));
     if (i != context_.child_id_to_parent_ids().end()) {
@@ -364,11 +349,8 @@ void transformer::to_concept(const processed_object& o, const profile& p) {
     yarn::concept c;
     update_element(c, o, p);
 
-    for (const auto& prop : o.properties()) {
-        auto property(to_property(prop));
-        property.type(to_nested_name(prop.type()));
-        c.local_properties().push_back(property);
-    }
+    for (const auto& prop : o.properties())
+        c.local_properties().push_back(to_property(prop));
 
     const auto i(context_.child_id_to_parent_ids().find(o.id()));
     c.is_child(i != context_.child_id_to_parent_ids().end());

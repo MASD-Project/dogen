@@ -12,19 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-05 Thu 23:05]
+#+CAPTION: Clock summary at [2015-11-06 Fri 22:29]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *21:57* |       |      |
+| *Total time*                                                                | *23:04* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 21:57   |       |      |
-| Active                                                                      |         | 21:57 |      |
+| Stories                                                                     | 23:04   |       |      |
+| Active                                                                      |         | 23:04 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:12 |
 | COMPLETED Split "full" models from "partial" models                         |         |       | 8:37 |
 | COMPLETED Frontend model refactor                                           |         |       | 1:39 |
 | COMPLETED Improve references management                                     |         |       | 1:02 |
-| STARTED Compute qualified name                                              |         |       | 5:14 |
+| COMPLETED Move property type generation to expander                         |         |       | 0:50 |
+| STARTED Compute qualified name                                              |         |       | 5:31 |
 | STARTED Create a "final model" class                                        |         |       | 0:19 |
 | STARTED Model should not be an element                                      |         |       | 0:18 |
 | STARTED Yarn refactor around partial model construction                     |         |       | 2:03 |
@@ -163,7 +164,17 @@ The references have not changed at all in the dogen invocation:
 
 We need to fix this with the refactor.
 
+*** COMPLETED Move property type generation to expander               :story:
+    CLOSED: [2015-11-06 Fri 22:29]
+    CLOCK: [2015-11-06 Fri 21:38]--[2015-11-06 Fri 22:28] =>  0:50
+
+- add unparsed name to nested name.
+- update frontends to read the unparsed name and not expand it.
+- create a "property expander" that parses the unparsed name and
+  expands it to a proper nested name.
+
 *** STARTED Compute qualified name                                    :story:
+    CLOCK: [2015-11-06 Fri 21:21]--[2015-11-06 Fri 21:38] =>  0:17
     CLOCK: [2015-11-04 Wed 21:24]--[2015-11-04 Wed 22:07] =>  0:43
     CLOCK: [2015-11-03 Tue 22:28]--[2015-11-04 Wed 00:07] =>  1:39
     CLOCK: [2015-11-03 Tue 21:01]--[2015-11-03 Tue 22:27] =>  1:26
@@ -234,10 +245,6 @@ Notes:
 - add a module post processor that computes owner (containing
   module?), members, is top level. Seems like we already have a
   top-level module: containing module is null.
-- add unparsed name to nested name. Update importers to read the
-  unparsed name and not expand it. Create a "property expander" that
-  parses the unparsed name and expands it to a proper nested
-  name.
 - reference expander to compute references.
 - add some enumeration post-processing that assigns it a underlying
   type. Should be done with merged model (look for a primitive type with
@@ -630,5 +637,12 @@ names in this light.
 
 We still use these terms frequently. We should define them in dynamic
 to have specific meanings.
+
+*** Rename yarn's object                                              :story:
+
+We start off by trying to follow the DDD naming but that has now been
+changed in favour of more traditional meta-model names. In this sense,
+object is not a good name as it evokes M0 rather than M1 or
+higher. Perhaps =structure=?
 
 ** Deprecated

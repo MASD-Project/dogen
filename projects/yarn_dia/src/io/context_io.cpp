@@ -104,7 +104,6 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"child_id_to_parent_ids\": " << v.child_id_to_parent_ids() << ", "
       << "\"parent_ids\": " << v.parent_ids() << ", "
       << "\"id_to_name\": " << v.id_to_name() << ", "
-      << "\"top_level_module_names\": " << v.top_level_module_names() << ", "
       << "\"model\": " << v.model()
       << " }";
     return(s);

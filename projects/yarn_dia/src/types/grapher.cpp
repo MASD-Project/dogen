@@ -210,10 +210,6 @@ void grapher::add(const processed_object& o) {
         BOOST_THROW_EXCEPTION(graphing_error(irrelevant_object + o.id()));
     }
 
-    const bool is_package(o.object_type() == object_types::uml_large_package);
-    if (is_package && o.child_node_id().empty())
-        top_level_module_names_.insert(o.name());
-
     if (o.connection()) {
         process_connections(o);
         return;
@@ -238,12 +234,6 @@ child_id_to_parent_ids() const {
 const std::unordered_set<std::string>& grapher::parent_ids() const {
     require_generated();
     return parent_ids_;
-}
-
-const std::unordered_set<std::string>& grapher::
-top_level_module_names() const {
-    require_generated();
-    return top_level_module_names_;
 }
 
 void grapher::generate() {

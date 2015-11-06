@@ -279,7 +279,7 @@
 						<name>bool_property</name>
 						<type class_id="32" tracking_level="0" version="0">
 							<type>
-								<simple>bool</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -319,7 +319,7 @@
 						<name>char_property</name>
 						<type>
 							<type>
-								<simple>char</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -359,7 +359,7 @@
 						<name>uchar_property</name>
 						<type>
 							<type>
-								<simple>unsigned char</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -399,7 +399,7 @@
 						<name>int_property</name>
 						<type>
 							<type>
-								<simple>int</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -439,7 +439,7 @@
 						<name>uint_property</name>
 						<type>
 							<type>
-								<simple>unsigned int</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -479,7 +479,7 @@
 						<name>long_property</name>
 						<type>
 							<type>
-								<simple>long</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -519,7 +519,7 @@
 						<name>ulong_property</name>
 						<type>
 							<type>
-								<simple>unsigned long</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -559,7 +559,7 @@
 						<name>long_long_property</name>
 						<type>
 							<type>
-								<simple>long long</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -599,7 +599,7 @@
 						<name>ulong_long_property</name>
 						<type>
 							<type>
-								<simple>unsigned long long</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -639,7 +639,7 @@
 						<name>short_property</name>
 						<type>
 							<type>
-								<simple>short</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -679,7 +679,7 @@
 						<name>ushort_property</name>
 						<type>
 							<type>
-								<simple>unsigned short</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -719,7 +719,7 @@
 						<name>double_property</name>
 						<type>
 							<type>
-								<simple>double</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -759,7 +759,7 @@
 						<name>float_property</name>
 						<type>
 							<type>
-								<simple>float</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>

@@ -52,7 +52,6 @@ public:
         const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids,
         const std::unordered_set<std::string>& parent_ids,
         const std::unordered_map<std::string, dogen::yarn::name>& id_to_name,
-        const std::unordered_set<std::string>& top_level_module_names,
         const dogen::yarn::intermediate_model& model);
 
 private:
@@ -94,16 +93,6 @@ public:
     /**@}*/
 
     /**
-     * @brief All modules that sit just below the model.
-     */
-    /**@{*/
-    const std::unordered_set<std::string>& top_level_module_names() const;
-    std::unordered_set<std::string>& top_level_module_names();
-    void top_level_module_names(const std::unordered_set<std::string>& v);
-    void top_level_module_names(const std::unordered_set<std::string>&& v);
-    /**@}*/
-
-    /**
      * @brief Intermediate yarn model we are currently building.
      */
     /**@{*/
@@ -127,7 +116,6 @@ private:
     std::unordered_map<std::string, std::list<std::string> > child_id_to_parent_ids_;
     std::unordered_set<std::string> parent_ids_;
     std::unordered_map<std::string, dogen::yarn::name> id_to_name_;
-    std::unordered_set<std::string> top_level_module_names_;
     dogen::yarn::intermediate_model model_;
 };
 

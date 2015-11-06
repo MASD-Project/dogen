@@ -182,7 +182,6 @@ BOOST_AUTO_TEST_CASE(querying_state_before_generating_throws) {
     BOOST_CHECK_EXCEPTION(g.graph(), graphing_error, c);
     BOOST_CHECK_EXCEPTION(g.child_id_to_parent_ids(), graphing_error, c);
     BOOST_CHECK_EXCEPTION(g.parent_ids(), graphing_error, c);
-    BOOST_CHECK_EXCEPTION(g.top_level_module_names(), graphing_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(generating_graph_with_first_degree_cycle_throws) {

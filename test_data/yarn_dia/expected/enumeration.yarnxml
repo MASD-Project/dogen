@@ -821,7 +821,7 @@ this is a long comment
 						<name>colour_type</name>
 						<type class_id="35" tracking_level="0" version="0">
 							<type>
-								<simple>colour_types</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -861,7 +861,7 @@ this is a long comment
 						<name>book_type</name>
 						<type>
 							<type>
-								<simple>book_types</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -901,10 +901,10 @@ this is a long comment
 						<name>shape_type</name>
 						<type>
 							<type>
-								<simple>shape_types</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name>enumeration</original_model_name>
+									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -914,9 +914,8 @@ this is a long comment
 										<item_version>0</item_version>
 									</model_module_path>
 									<internal_module_path>
-										<count>1</count>
+										<count>0</count>
 										<item_version>0</item_version>
-										<item>pkg1</item>
 									</internal_module_path>
 								</location>
 							</type>

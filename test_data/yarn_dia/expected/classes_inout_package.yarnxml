@@ -400,7 +400,7 @@
 						<name>prop_0</name>
 						<type class_id="32" tracking_level="0" version="0">
 							<type>
-								<simple>int</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -545,7 +545,7 @@
 						<name>prop_0</name>
 						<type>
 							<type>
-								<simple>int</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>

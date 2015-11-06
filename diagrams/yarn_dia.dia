@@ -940,7 +940,7 @@ into its yarn representation.#</dia:string>
         <dia:point val="114,-9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="113.95,-9.05;144.965,-2.95"/>
+        <dia:rectangle val="113.95,-9.05;144.965,-3.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="114,-9"/>
@@ -949,7 +949,7 @@ into its yarn representation.#</dia:string>
         <dia:real val="30.914999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#context#</dia:string>
@@ -1097,29 +1097,6 @@ into its yarn representation.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#The name corresponding to a dia object ID.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#top_level_module_names#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::unordered_set&lt;std::string&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#All modules that sit just below the model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1450,7 +1427,7 @@ into its yarn representation.#</dia:string>
         <dia:point val="109.22,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="108.47,-3.05;129.657,8.8"/>
+        <dia:rectangle val="108.47,-3.85;129.657,8.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1459,7 +1436,7 @@ into its yarn representation.#</dia:string>
         <dia:point val="109.22,8"/>
         <dia:point val="109.22,2"/>
         <dia:point val="129.458,2"/>
-        <dia:point val="129.458,-3"/>
+        <dia:point val="129.458,-3.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -2843,13 +2820,13 @@ that make up dogen instructions.#</dia:string>
         <dia:point val="-26,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-26.05,7.95;-1.965,22.65"/>
+        <dia:rectangle val="-26.05,7.95;-1.195,22.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-26,8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.984999999999999"/>
+        <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="14.600000000000001"/>

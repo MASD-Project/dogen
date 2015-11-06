@@ -27,12 +27,10 @@ context::context(
     const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids,
     const std::unordered_set<std::string>& parent_ids,
     const std::unordered_map<std::string, dogen::yarn::name>& id_to_name,
-    const std::unordered_set<std::string>& top_level_module_names,
     const dogen::yarn::intermediate_model& model)
     : child_id_to_parent_ids_(child_id_to_parent_ids),
       parent_ids_(parent_ids),
       id_to_name_(id_to_name),
-      top_level_module_names_(top_level_module_names),
       model_(model) { }
 
 void context::swap(context& other) noexcept {
@@ -40,7 +38,6 @@ void context::swap(context& other) noexcept {
     swap(child_id_to_parent_ids_, other.child_id_to_parent_ids_);
     swap(parent_ids_, other.parent_ids_);
     swap(id_to_name_, other.id_to_name_);
-    swap(top_level_module_names_, other.top_level_module_names_);
     swap(model_, other.model_);
 }
 
@@ -48,7 +45,6 @@ bool context::operator==(const context& rhs) const {
     return child_id_to_parent_ids_ == rhs.child_id_to_parent_ids_ &&
         parent_ids_ == rhs.parent_ids_ &&
         id_to_name_ == rhs.id_to_name_ &&
-        top_level_module_names_ == rhs.top_level_module_names_ &&
         model_ == rhs.model_;
 }
 
@@ -104,22 +100,6 @@ void context::id_to_name(const std::unordered_map<std::string, dogen::yarn::name
 
 void context::id_to_name(const std::unordered_map<std::string, dogen::yarn::name>&& v) {
     id_to_name_ = std::move(v);
-}
-
-const std::unordered_set<std::string>& context::top_level_module_names() const {
-    return top_level_module_names_;
-}
-
-std::unordered_set<std::string>& context::top_level_module_names() {
-    return top_level_module_names_;
-}
-
-void context::top_level_module_names(const std::unordered_set<std::string>& v) {
-    top_level_module_names_ = v;
-}
-
-void context::top_level_module_names(const std::unordered_set<std::string>&& v) {
-    top_level_module_names_ = std::move(v);
 }
 
 const dogen::yarn::intermediate_model& context::model() const {

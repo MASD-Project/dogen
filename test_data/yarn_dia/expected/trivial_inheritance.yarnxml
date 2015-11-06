@@ -1347,7 +1347,7 @@ in the context of inheritance.
 						<name>prop_1</name>
 						<type class_id="35" tracking_level="0" version="0">
 							<type>
-								<simple>int</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -1519,7 +1519,7 @@ in the context of inheritance.
 						<name>prop_0</name>
 						<type>
 							<type>
-								<simple>unsigned int</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -1663,7 +1663,7 @@ in the context of inheritance.
 						<name>prop_2</name>
 						<type>
 							<type>
-								<simple>unsigned int</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -1833,7 +1833,7 @@ in the context of inheritance.
 						<name>prop_0</name>
 						<type>
 							<type>
-								<simple>int</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -1977,7 +1977,7 @@ in the context of inheritance.
 						<name>prop_1</name>
 						<type>
 							<type>
-								<simple>unsigned int</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -2148,7 +2148,7 @@ in the context of inheritance.
 						<name>prop_0</name>
 						<type>
 							<type>
-								<simple>int</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -2292,7 +2292,7 @@ in the context of inheritance.
 						<name>prop_0</name>
 						<type>
 							<type>
-								<simple>bool</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -2697,7 +2697,7 @@ in the context of inheritance.
 						<name>prop_1</name>
 						<type>
 							<type>
-								<simple>int</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -2974,10 +2974,10 @@ in the context of inheritance.
 						<name>prop_1</name>
 						<type>
 							<type>
-								<simple>path</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name>boost</original_model_name>
+									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -2987,9 +2987,8 @@ in the context of inheritance.
 										<item_version>0</item_version>
 									</model_module_path>
 									<internal_module_path>
-										<count>1</count>
+										<count>0</count>
 										<item_version>0</item_version>
-										<item>filesystem</item>
 									</internal_module_path>
 								</location>
 							</type>
@@ -3145,7 +3144,7 @@ in the context of inheritance.
 						<name>prop_0</name>
 						<type>
 							<type>
-								<simple>int</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -3420,7 +3419,7 @@ in the context of inheritance.
 						<name>prop_1</name>
 						<type>
 							<type>
-								<simple>int</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -3720,7 +3719,7 @@ in the context of inheritance.
 						<name>prop_0</name>
 						<type>
 							<type>
-								<simple>unsigned int</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -3994,7 +3993,7 @@ in the context of inheritance.
 						<name>prop_0</name>
 						<type>
 							<type>
-								<simple>bool</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name></original_model_name>
@@ -4296,10 +4295,10 @@ in the context of inheritance.
 						<name>prop_0</name>
 						<type>
 							<type>
-								<simple>path</simple>
+								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name>boost</original_model_name>
+									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -4309,9 +4308,8 @@ in the context of inheritance.
 										<item_version>0</item_version>
 									</model_module_path>
 									<internal_module_path>
-										<count>1</count>
+										<count>0</count>
 										<item_version>0</item_version>
-										<item>filesystem</item>
 									</internal_module_path>
 								</location>
 							</type>

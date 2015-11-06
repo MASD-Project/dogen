@@ -34,7 +34,6 @@ class expander {
 private:
     void expand_modules(intermediate_model& m) const;
     void expand_properties(intermediate_model& m) const;
-    void expand_references(intermediate_model& m) const;
 
 public:
     void expand(intermediate_model& m) const;

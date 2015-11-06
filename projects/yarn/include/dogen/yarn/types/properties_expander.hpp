@@ -35,12 +35,17 @@ namespace yarn {
 
 class properties_expander {
 private:
+    template<typename Stateful>
+    void update_properties(const identifier_parser& ip, Stateful& s) const {
+        for (auto& p : s.local_properties())
+            p.type(make_nested_name(ip, p.unparsed_type()));
+    }
+
+private:
     std::unordered_set<std::string>
     obtain_top_level_module_names(const intermediate_model& m) const;
 
     identifier_parser make_identifier_parser(const intermediate_model& m) const;
-
-    void expand_property(const identifier_parser& ip, property& p) const;
 
     nested_name make_nested_name(const identifier_parser& ip,
         const std::string& s) const;
