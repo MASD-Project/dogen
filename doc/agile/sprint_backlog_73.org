@@ -195,6 +195,7 @@ Notes:
   property =is_default_enumeration_type=).
 
 *** STARTED Compute qualified name                                    :story:
+    CLOCK: [2015-11-07 Sat 22:21]--[2015-11-07 Sat 23:46] =>  1:25
     CLOCK: [2015-11-06 Fri 23:54]--[2015-11-06 Fri 23:58] =>  0:04
     CLOCK: [2015-11-06 Fri 23:21]--[2015-11-06 Fri 23:53] =>  0:32
     CLOCK: [2015-11-06 Fri 22:52]--[2015-11-06 Fri 23:20] =>  0:28
@@ -237,6 +238,35 @@ Notes:
   see how qualified name impacts this.
 - internal module path -> must be current model
 - model path -> must be reference
+- types such as =int= etc must be handled differently from other
+  types. The idea here is that these types are part of a model but
+  declared directly into the global namespace. Effectively they exist
+  in a point in element space where everything but simple name is
+  empty. In practice this would mean that we could not distinguish the
+  origin of such types so we must still keep track of the model that
+  declared them. One way of achieving this is to have a "declared in
+  global namespace" flag in the element itself and have the resolver
+  check this when a match occurs. This is only required for the match
+  where no model name is provided (e.g. take the model name provided
+  by the reference). The final problem is that there are "backend"
+  specific elements in element space (includers, registrar, forward
+  declarations, etc). These must be somehow injected into yarn. The
+  key question here is what exactly is a modeling element? do we
+  consider cmakelists as modeling elements? if so we could say they
+  can be expressed in the "include" and "src" "facets". However, this
+  would then imply one could have relationships between say a class
+  modeling element and a cmakelists modeling element, which in
+  practice is not possible. Also, some modeling elements of this kind
+  only have an expression for one facet; should they take a point in
+  element space still? e.g. I can't create a class called cmakelists
+  now because there is a cmakelists element. Seems intuitively like
+  there are multiple dimensions to element space which do not
+  intersect. The end game of this is for formatters to work directly
+  on yarn elements (or backend specific derivations) and for the
+  backend to have a element name mapping to additional properties that
+  are passed in at formatting time (or to create a structure that
+  contains an expansion of element + formatter properties, forsaking
+  type safety).
 
 *** STARTED Create a "final model" class                              :story:
     CLOCK: [2015-11-02 Mon 21:24]--[2015-11-02 Mon 21:35] =>  0:11
