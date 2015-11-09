@@ -10,6 +10,70 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider allowing renaming of system types                        :story:
+
+Users may want to change the =_visitor= postfix for visitors or the
+boost serialisation registrar name. This could be achieved via
+meta-data.
+
+*** Create a set of definitions for tagging and meta-data             :story:
+
+We still use these terms frequently. We should define them in dynamic
+to have specific meanings.
+
+*** Rename types in =yarn= using MOF/eCore terms                      :story:
+
+Rename the types in =yarn= to make them a bit more inline with
+MOF/eCore. As much as possible but without going overboard. Ensure we
+do not pick up meta-meta-model concepts by mistake. Rename nested
+qname to something more sensible from MOF/eCore. Review all concept
+names in this light.
+
+*** Refactor ownership hierarchy                                      :story:
+
+Start implementing the archetype logic. Basically there is a artefact
+unique identifier
+
+- rename it to =artefact_descriptor=.
+- remove all dia fields; these are now file importer specific and
+  never reach dynamic.
+- add =kernel= field. This is set to =stitch= or =quilt=.
+- rename formatter field to =kind=
+
+Merged stories:
+
+*Consider adding "application" to ownership hierarchy*
+
+Not all fields make sense to all tools in the dogen suite; some are
+knit specific, some are stitch specific and some are shared. At
+present this is not a problem because stitch loads up all of knit's
+fields and assumes users won't make use of them. If they do, nothing
+bad "should" happen. But a better way to solve this may be to only
+load fields that belong to an application. We could add "application"
+to ownership hierarchy, and filter on that. Note though that we would
+need some way of saying "all applications" (e.g. at present, leave the
+field blank).
+
+*Consider renaming =ownership_hierarchy=*
+
+We came up with the name =ownership_hierarchy= because we could not
+think of anything else. However, it is not a particularly good name,
+and it is increasingly so now that we need to use it across models. We
+need a better name for this value type.
+
+This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
+
+*Split knitting from stitching settings*
+
+*Rationale*: with "kernel" we will have quilt and stitch.
+
+At present we only have a single common directory with all of the
+available fields. Not all fields apply to both stitching and
+knitting - but some do. We need a way to filter these. One possibility
+is to use an approach similar to the formatter groups in the ownership
+hierarchy. For now we simply have fields that have no meaning in
+stitching but can be supplied by users.
+
 *** Models should have an associated language                          :epic:
 
 #+begin_quote
@@ -2203,12 +2267,15 @@ we need to disable CMake generation and do it by hand. However:
 
 - for well-known dependencies such as boost we could create a
   convention (e.g. assume/require that the CMake boost libraries flags
-  are set via find boost). alternatively, the types should contain
+  are set via find boost). Alternatively, the types should contain
   meta-data that has information about linking requirements; e.g. if
   you use a type from a boost model, it should provide you with
-  linking information in its meta-data.
+  linking information in its meta-data. Each boost type could have
+  different information depending on which boost library they come
+  from.
 - for user level dependencies we should add dynamic extensions at the
-  model level.
+  model level. Also, references provide sufficient information to link
+  against other dogen models.
 
 *** Test data generator does not detect cycles in object graph        :story:
 
