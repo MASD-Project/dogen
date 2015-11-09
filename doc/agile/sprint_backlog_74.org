@@ -15,15 +15,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-09 Mon 22:50]
+#+CAPTION: Clock summary at [2015-11-09 Mon 23:59]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *3:41* |      |      |
+| *Total time*                                                                | *4:46* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 3:41   |      |      |
-| Active                                                                      |        | 3:41 |      |
+| Stories                                                                     | 4:46   |      |      |
+| Active                                                                      |        | 4:46 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 3:41 |
+| COMPLETED Write the next interesting instalment                             |        |      | 1:05 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -37,6 +38,13 @@
     CLOCK: [2015-10-21 Wed 17:51]--[2015-10-21 Wed 17:56] =>  0:05
 
 Updates to sprint and product backlog.
+
+*** COMPLETED Write the next interesting instalment                   :story:
+    CLOSED: [2015-11-09 Mon 23:56]
+    CLOCK: [2015-11-09 Mon 22:51]--[2015-11-09 Mon 23:56] =>  1:05
+
+We've accumulated plenty of tabs with articles we've read of
+late. Offload them into the next interesting instalment.
 
 *** COMPLETED Remove primitive model handling in yarn dia transformer :story:
     CLOSED: [2015-11-09 Mon 22:35]

@@ -1,0 +1,119 @@
+#+title: Nerd Food: Interesting...
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+Time to flush all those tabs again. Some interesting stuff I bumped
+into recently-ish.
+
+* Finance
+
+- [[https://medium.com/backchannel/how-bitcoins-blockchain-could-power-an-alternate-internet-bb501855af67][There’s a blockchain for that]]!: The rise and rise of the
+  blockchain...
+- [[http://www.joecoin.com/2015/02/crypto-20-and-other-misconceptions.html][Crypto 2.0--And Other Misconceptions]]: ... but maybe we are getting a
+  bit ahead of ourselves, and bitcoin is really what matters!
+- [[http://www.michaelnielsen.org/ddi/how-the-bitcoin-protocol-actually-works/][How the Bitcoin protocol actually works]]: Gory details of bitcoin's
+  internals. Must say that the [[http://shop.oreilly.com/product/0636920032281.do][BitCoin book]] already provides a pretty
+  good explanation, but interesting nonetheless.
+- [[http://blogs.wsj.com/moneybeat/2015/11/03/bitbeat-bitcoin-surges-past-400-on-back-of-the-new-shining-star/][BitBeat: Bitcoin Surges Past $400 on Back of the New ‘Shining Star’]]:
+  BitCoin is up again! Rollercoaster ride?
+- [[http://modval.org/home/][ModVal]]: How cool is that, a site for financial models.
+
+* Startups et. al.
+
+- [[http://www.newyorker.com/magazine/2015/02/23/shape-things-come][The Shape of Things to Come]]: Jonathan Ive seems like a cool fellow,
+  actually. Even though I'm not much of an apple fan.
+- [[http://blog.ycombinator.com/yc-continuity-fund][Y Combinator Posthaven]]: thoughts from the combinator. 1000 companies
+  funded!
+- [[https://medium.com/@EskoKilpi/movement-of-thought-that-led-to-airbnb-and-uber-9d4da5e3da3a#.d2dvu2nub][The Future of Firms. Is There an App for That?]]: What does it mean to
+  be a company in this world of change?
+
+* General Coding
+
+- [[https://medium.com/@landongn/12-years-later-what-i-ve-learned-about-being-a-software-engineer-d6e334d6e8a3][What I’ve learned so far about software development]]: Tales from the
+  trenches.
+- [[https://codewords.recurse.com/issues/two/git-from-the-inside-out][Git from the inside out]]: Gory details about git. And I mean *really*
+  gory and *really* detailed. As with bitcoin, the [[http://shop.oreilly.com/product/9780596520137.do][git book]] was
+  already pretty detailed but interesting nonetheless.
+- [[http://chris.beams.io/posts/git-commit/][How to Write a Git Commit Message]]: jeez, each to their own! Here's a
+  true geek of git commit messages. But very useful though.
+- [[http://www.benstopford.com/2015/04/28/elements-of-scale-composing-and-scaling-data-platforms/][Elements of Scale: Composing and Scaling Data Platforms]]: Interesting
+  take on data, should help navigate the SQL/NoSQL debate.
+- [[http://apihandyman.io/do-you-really-know-why-you-prefer-rest-over-rpc/][Do you really know why you prefer REST over RPC?]]: Title says it all,
+  interesting take on the RESTification of the world.
+- [[http://highscalability.com/blog/2015/10/12/making-the-case-for-building-scalable-stateful-services-in-t.html][Making The Case For Building Scalable Stateful Services In The
+  Modern Era]]: Instead of knee-jerk reactions about statefulness, think
+  deeply before you decide. With presentation: [[https://www.youtube.com/watch?v%3DH0i_bXKwujQ]["Building Scalable
+  Stateful Services" by Caitie McCaffrey]]
+- [[https://www.youtube.com/watch?v%3D9RMOc0SwRro]["Apache Kafka and the Next 700 Stream Processing Systems" by Jay
+  Kreps]]: Improved my understanding of Kafka somewhat. And the title
+  made me curious, so I ended up reading [[http://www.cs.cmu.edu/~crary/819-f09/Landin66.pdf][The Next 700 Programming
+  Languages]].
+- [[http://www.theatlantic.com/technology/archive/2015/11/where-was-the-internet-born/413221/][The Room Where the Internet Was Born]]: A quest for understanding the
+  cloud. Rather long but great for those that like computer history.
+- [[http://www.aaron-gray.com/a-criticism-of-scrum/][A Criticism of Scrum]]: quite well thought out actually. I love agile
+  but I must say, I agree with many of the points made. I guess in the
+  end, the key is not to fall in love with ceremony.
+
+* Databases
+
+- [[http://gotocon.com/dl/goto-berlin-2013/slides/HenningJacobs_and_ValentineGogichashvili_WhyZalandoTrustsInPostgreSQL.pdf][Why Zalando trusts in PostgreSQL]]: Great to see how the elephant is
+  used in anger. Picked up a few tips.
+
+* C++
+
+- [[https://code.facebook.com/posts/1661982097368498][Futures for C++11 at Facebook]]: futures are all the rage...
+- [[http://instagram-engineering.tumblr.com/post/121930298932/c-futures-at-instagram][C++ Futures at Instagram]]: ... everywhere!
+- [[https://www.livecoding.tv/videos/c-cplusplus/?sort%3Dnewest][Livestream]]: WOT, C++ live coding? Man this is a weird notion!
+- [[https://www.youtube.com/watch?v%3DnXaxk27zwlk&feature%3Dyoutu.be][CppCon 2015: Chandler Carruth "Tuning C++: Benchmarks, and CPUs, and
+  Compilers! Oh My!]]: Chandler at his best - hilarious but extremely
+  informative.
+- [[http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4367.html][Comparison in C++]]: A weird but weirdly useful paper. Deep thinking
+  about comparisons. For good measure, you should also watch the
+  presentation: [[https://www.youtube.com/watch?v%3Dfi0CQ7laiXE][CppCon 2015: Lawrence Crowl "Comparison is not simple,
+  but it can be simpler"]]
+- [[https://www.youtube.com/watch?v%3DmFUXNMfaciE][CppCon 2015: Eric Niebler "Ranges for the Standard Library"]]: Ranges,
+  ranges, ranges!! Can't wait! For good measure, you can also read [[http://bartoszmilewski.com/2014/10/17/c-ranges-are-pure-monadic-goodness/][C++
+  Ranges are Pure Monadic Goodness]].
+- [[https://cryptocoding.net/index.php/Coding_rules][Crypto coding rules]]: haven't parsed the entire document, but already
+  found a few very useful points.
+- [[https://github.com/emil-e/rapidcheck][RapidCheck]]: Didn't know of QuickCheck or RapidCheck, but this may
+  come in handy at some point...
+
+* Layman Science
+
+- [[https://nolaymanleftbehind.wordpress.com/2011/07/10/linear-algebra-what-matrices-actually-are/][Linear Algebra]]: What matrices actually are: an attempt to make
+  matrices accessible.
+- [[http://betterexplained.com/articles/a-gentle-introduction-to-learning-calculus/][A Gentle Introduction To Learning Calculus]]: Helpful when trying to
+  remember all the stuff one did all those years ago...
+- [[http://betterexplained.com/articles/a-visual-intuitive-guide-to-imaginary-numbers/][A Visual, Intuitive Guide to Imaginary Numbers]]: ... continued.
+- [[http://esciencecommons.blogspot.co.uk/2011/01/new-theories-reveal-nature-of-numbers.html][New theories reveal the nature of numbers]]: A [[http://www.imdb.com/title/tt0787524/][Ramanujan movie]] is due
+  out soon, and these are the guys doing the maths behind the
+  scenes. Can't wait for the movie!
+- [[http://v.cx/2010/04/feynman-brazil-education][Richard Feynman on education in Brazil]]: Hilarious, but somewhat
+  reminiscent of my own education, in a different country but
+  culturally very similar and certainly with a very similar approach
+  to science.
+- [[http://neuralnetworksanddeeplearning.com/chap1.html][Using neural nets to recognize handwritten digits]]: nice introduction
+  to neural nets with a good example.
+- [[http://nautil.us/issue/15/turbulence/your-brain-is-on-the-brink-of-chaos][Your Brain Is On the Brink of Chaos]]: *Very* interesting. This is
+  particularly interesting because I have been reading up on the
+  delicate balance between inhibitory and excitatory neurons, but the
+  literature always gives you this static impression of balance. If
+  you assume chaos on the other hand...
+- The Proof of Fermat’s Last Theorem by R.Taylor and A.Wiles: OK,
+  going to confess, haven't finished reading this yet. But
+
+* Other
+
+- [[http://www.newyorker.com/magazine/2015/06/01/extreme-city-specter][Extreme City]]: Luanda, my beloved, just keeps on getting crazier and
+  crazier. Interesting - if somewhat expat-oriented - take on the
+  city.
+- [[http://www.slate.com/blogs/schooled/2015/09/17/kiera_wilmot_arrest_florida_teenager_reacts_to_ahmed_mohamed_story.html][This Florida Teenager Knows What Ahmed Mohamed Is Going Through. It
+  Happened to Her in 2013]]: sad, really. Whatever the real truth was
+  about Ahmed.
+- [[http://www.nytimes.com/2015/10/11/opinion/sunday/will-you-ever-be-able-to-upload-your-brain.html?_r%3D1][Will You Ever Be Able to Upload Your Brain?]]: er., spoiler alert -
+  not really. Interesting though.
+- [[https://dl.dropboxusercontent.com/u/50282823/Flash%2520BBG%25202015-%2520October-Taleb.pptx.pdf][Dealing with “power laws” with upper (lower) bound]]: most certainly
+  not for laypeople. Taleb is back at it. Would be great to have this
+  translated to laymen's maths.
+- [[https://www.youtube.com/watch?v%3D5mcyUUf20Ng&feature%3Dyoutu.be&list%3DPL37ZVnwpeshH37NxpV6XbgdDpY-w48hMd][Lieke Boon: Unconscious Bias]]: we're all guilty: How to be a bit more
+  aware of your own the biases is my take on it.
