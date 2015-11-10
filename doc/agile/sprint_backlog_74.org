@@ -15,27 +15,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-09 Mon 23:59]
+#+CAPTION: Clock summary at [2015-11-10 Tue 00:00]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *4:46* |      |      |
+| *Total time*                                                                | *2:34* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 4:46   |      |      |
-| Active                                                                      |        | 4:46 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 3:41 |
+| Stories                                                                     | 2:34   |      |      |
+| Active                                                                      |        | 2:34 |      |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:29 |
 | COMPLETED Write the next interesting instalment                             |        |      | 1:05 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     CLOCK: [2015-11-09 Mon 21:21]--[2015-11-09 Mon 22:50] =>  1:29
-    CLOCK: [2015-11-01 Sun 23:31]--[2015-11-01 Sun 23:45] =>  0:14
-    CLOCK: [2015-11-01 Sun 22:49]--[2015-11-01 Sun 23:30] =>  0:41
-    CLOCK: [2015-10-31 Sat 22:01]--[2015-10-31 Sat 22:37] =>  0:36
-    CLOCK: [2015-10-27 Tue 19:01]--[2015-10-27 Tue 19:08] =>  0:07
-    CLOCK: [2015-10-27 Tue 07:59]--[2015-10-27 Tue 08:22] =>  0:23
-    CLOCK: [2015-10-22 Thu 08:44]--[2015-10-22 Thu 08:50] =>  0:06
-    CLOCK: [2015-10-21 Wed 17:51]--[2015-10-21 Wed 17:56] =>  0:05
 
 Updates to sprint and product backlog.
 
