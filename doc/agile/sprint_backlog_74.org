@@ -15,17 +15,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-10 Tue 23:01]
+#+CAPTION: Clock summary at [2015-11-10 Tue 23:21]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *4:14* |      |      |
+| *Total time*                                                                | *4:33* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 4:14   |      |      |
-| Active                                                                      |        | 4:14 |      |
+| Stories                                                                     | 4:33   |      |      |
+| Active                                                                      |        | 4:33 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 1:29 |
 | COMPLETED Write the next interesting instalment                             |        |      | 1:05 |
-| STARTED Generate all yarn names using name factory                          |        |      | 1:40 |
+| STARTED Generate all yarn names using name factory                          |        |      | 1:59 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -54,6 +54,7 @@ to do with computing the correct name. We need to start using the
 builder here.
 
 *** STARTED Generate all yarn names using name factory                :story:
+    CLOCK: [2015-11-10 Tue 23:02]--[2015-11-10 Tue 23:21] =>  0:19
     CLOCK: [2015-11-10 Tue 21:21]--[2015-11-10 Tue 23:01] =>  1:40
 
 We need to go through the code base and make sure that whenever we

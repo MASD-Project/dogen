@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
@@ -45,7 +46,6 @@ nested_name_builder::nested_name_builder(
       root_(new node) {
 
     current_ = root_;
-
     BOOST_LOG_SEV(lg, debug) << "Initialised with settings:";
     BOOST_LOG_SEV(lg, debug) << " modules: " << top_level_modules_;
     BOOST_LOG_SEV(lg, debug) << " location: " << model_location_;
@@ -58,9 +58,11 @@ void nested_name_builder::add_name(const std::string& s) {
 
 void nested_name_builder::add_primitive(const std::string& s) {
     BOOST_LOG_SEV(lg, debug) << "pushing back primitive :" << s;
-    auto n(current_->data());
-    n.simple(s);
-    current_->data(n);
+
+    name_builder b;
+    b.compute_qualifed_name(false);
+    b.simple_name(s);
+    current_->data(b.build());
 }
 
 void nested_name_builder::finish_current_node() {
@@ -133,32 +135,43 @@ void nested_name_builder::start_children() {
     BOOST_LOG_SEV(lg, debug) << "starting children";
 
     finish_current_node();
-    boost::shared_ptr<node> tmp(new node);
-    tmp->parent(current_);
-    auto c(current_->children());
-    c.push_back(tmp);
-    current_->children(c);
-    current_ = tmp;
+
+    /*
+     * Create a child node, link it up to its parent, link the parent
+     * to the child and then make the child the current node.
+     */
+    auto child(boost::make_shared<node>());
+    child->parent(current_);
+    current_->children().push_back(child);
+    current_ = child;
 }
 
 void nested_name_builder::next_child() {
     BOOST_LOG_SEV(lg, debug) << "next child";
 
     finish_current_node();
-    current_ = current_->parent();
-    boost::shared_ptr<node> tmp(new node);
-    tmp->parent(current_);
 
-    auto c(current_->children());
-    c.push_back(tmp);
-    current_->children(c);
-    current_ = tmp;
+    /*
+     * We are currently sitting on a child node. We first need to move
+     * back up to the parent; then add a new child node, link it to
+     * the parent and link the parent to the child; finally, make the
+     * new child the current node.
+     */
+    current_ = current_->parent();
+    auto child(boost::make_shared<node>());
+    child->parent(current_);
+    current_->children().push_back(child);
+    current_ = child;
 }
 
 void nested_name_builder::end_children() {
     BOOST_LOG_SEV(lg, debug) << "ending children";
 
     finish_current_node();
+
+    /*
+     * All the children have been done, so move back up to the parent.
+     */
     current_ = current_->parent();
 }
 
@@ -172,9 +185,9 @@ build_node(nested_name& n, boost::shared_ptr<node> node) {
     n.type(node->data());
     std::list<nested_name> children;
     for (const auto c : node->children()) {
-        nested_name cn;
-        build_node(cn, c);
-        children.push_back(cn);
+        nested_name cnn;
+        build_node(cnn, c);
+        children.push_back(cnn);
     }
     n.children(children);
 }
