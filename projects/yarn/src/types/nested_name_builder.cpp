@@ -22,8 +22,9 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/yarn/io/nested_name_io.hpp"
+#include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/location_io.hpp"
+#include "dogen/yarn/io/nested_name_io.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/nested_name_builder.hpp"
 
@@ -177,10 +178,7 @@ void nested_name_builder::end_children() {
 
 void nested_name_builder::
 build_node(nested_name& n, boost::shared_ptr<node> node) {
-    BOOST_LOG_SEV(lg, debug) << "bulding node: "
-                             << node->data().location().original_model_name()
-                             << " "
-                             << node->data().simple();
+    BOOST_LOG_SEV(lg, debug) << "bulding node: " << node->data();
 
     n.type(node->data());
     std::list<nested_name> children;
