@@ -48,20 +48,20 @@ public:
     /**
      * @brief Initialises the parser.
      *
-     * @param modules names of all the top-level modules in the
-     * current model.
+     * @param top_level_modules names of all the top-level modules in
+     * the current model.
      * @param external_module_path modules external to the current
      * model
      * @param model_name name of the current model
      */
-    identifier_parser(const std::unordered_set<std::string>& modules,
+    identifier_parser(const std::unordered_set<std::string>& top_level_modules,
         const location& model_location);
 
 public:
     nested_name parse_name(const std::string& s) const;
 
 private:
-    const std::unordered_set<std::string> modules_;
+    const std::unordered_set<std::string> top_level_modules_;
     const location model_location_;
 };
 

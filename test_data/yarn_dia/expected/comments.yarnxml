@@ -12,7 +12,7 @@
 	</extensions>
 	<name class_id="11" tracking_level="0" version="0">
 		<simple>comments</simple>
-		<qualified>&lt;comments&gt;</qualified>
+		<qualified></qualified>
 		<location class_id="12" tracking_level="0" version="0">
 			<original_model_name>comments</original_model_name>
 			<external_module_path class_id="13" tracking_level="0" version="0">
@@ -20,9 +20,8 @@
 				<item_version>0</item_version>
 			</external_module_path>
 			<model_module_path>
-				<count>1</count>
+				<count>0</count>
 				<item_version>0</item_version>
-				<item>comments</item>
 			</model_module_path>
 			<internal_module_path>
 				<count>0</count>
@@ -200,7 +199,7 @@
 		<item>
 			<first>
 				<simple>comments</simple>
-				<qualified>&lt;comments&gt;</qualified>
+				<qualified></qualified>
 				<location>
 					<original_model_name>comments</original_model_name>
 					<external_module_path>
@@ -208,9 +207,8 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>1</count>
+						<count>0</count>
 						<item_version>0</item_version>
-						<item>comments</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -266,7 +264,7 @@ This comment will be applied to the model namespace itself.
 					</extensions>
 					<name>
 						<simple>comments</simple>
-						<qualified>&lt;comments&gt;</qualified>
+						<qualified></qualified>
 						<location>
 							<original_model_name>comments</original_model_name>
 							<external_module_path>
@@ -274,9 +272,8 @@ This comment will be applied to the model namespace itself.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>1</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>comments</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>

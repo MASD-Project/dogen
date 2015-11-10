@@ -60,7 +60,7 @@ name name_factory::build_element_in_model(const name& model_name,
     // n.location().model_module_path(l.model_module_path());
     n.location().external_module_path(l.external_module_path());
 
-    // FIXME:
+    // FIXME: generate qualified name commented out for now
     // name_builder b(n);
     // return b.build();
     return n;

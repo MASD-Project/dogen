@@ -35,8 +35,7 @@ obtain_top_level_module_names(const intermediate_model& m) const {
     return r;
 }
 
-identifier_parser
-properties_expander::
+identifier_parser properties_expander::
 make_identifier_parser(const intermediate_model& m) const {
     const auto tlmn(obtain_top_level_module_names(m));
     const auto& l(m.name().location());

@@ -12,7 +12,7 @@
 	</extensions>
 	<name class_id="11" tracking_level="0" version="0">
 		<simple>class_in_a_package</simple>
-		<qualified>&lt;class_in_a_package&gt;</qualified>
+		<qualified></qualified>
 		<location class_id="12" tracking_level="0" version="0">
 			<original_model_name>class_in_a_package</original_model_name>
 			<external_module_path class_id="13" tracking_level="0" version="0">
@@ -20,9 +20,8 @@
 				<item_version>0</item_version>
 			</external_module_path>
 			<model_module_path>
-				<count>1</count>
+				<count>0</count>
 				<item_version>0</item_version>
-				<item>class_in_a_package</item>
 			</model_module_path>
 			<internal_module_path>
 				<count>0</count>
@@ -113,7 +112,7 @@
 		<item>
 			<first>
 				<simple>class_in_a_package</simple>
-				<qualified>&lt;class_in_a_package&gt;</qualified>
+				<qualified></qualified>
 				<location>
 					<original_model_name>class_in_a_package</original_model_name>
 					<external_module_path>
@@ -121,9 +120,8 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>1</count>
+						<count>0</count>
 						<item_version>0</item_version>
-						<item>class_in_a_package</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -176,7 +174,7 @@
 					</extensions>
 					<name>
 						<simple>class_in_a_package</simple>
-						<qualified>&lt;class_in_a_package&gt;</qualified>
+						<qualified></qualified>
 						<location>
 							<original_model_name>class_in_a_package</original_model_name>
 							<external_module_path>
@@ -184,9 +182,8 @@
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>1</count>
+								<count>0</count>
 								<item_version>0</item_version>
-								<item>class_in_a_package</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>

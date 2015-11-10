@@ -23,6 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/string/splitter.hpp"
+#include "dogen/yarn/io/location_io.hpp"
 #include "dogen/yarn/types/building_error.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 
@@ -53,15 +54,20 @@ namespace dogen {
 namespace yarn {
 
 name_builder::name_builder()
-    : simple_name_contributes_to_qualifed_name_(true),
+    : compute_qualifed_name_(true),
+      simple_name_contributes_to_qualifed_name_(true),
       infer_simple_name_from_model_name_(false) { }
 
 name_builder::name_builder(const name& n)
-    : simple_name_contributes_to_qualifed_name_(true),
+    : compute_qualifed_name_(true),
+      simple_name_contributes_to_qualifed_name_(true),
       infer_simple_name_from_model_name_(false),
       name_(n) { }
 
 void name_builder::compute_qualified_name() {
+    if (!compute_qualifed_name_)
+        return;
+
     const auto& l(name_.location());
 
     std::ostringstream s;
@@ -79,6 +85,11 @@ void name_builder::compute_qualified_name() {
 
     name_.qualified(s.str());
     BOOST_LOG_SEV(lg, debug) << "Created qualified name: " << name_.qualified();
+}
+
+name_builder& name_builder::compute_qualifed_name(const bool v) {
+    compute_qualifed_name_ = v;
+    return *this;
 }
 
 name_builder& name_builder::
@@ -104,14 +115,27 @@ name_builder& name_builder::model_name(const std::string& mn) {
         BOOST_THROW_EXCEPTION(building_error(empty_model_name));
     }
 
-    using utility::string::splitter;
-    name_.location().model_module_path(splitter::split_scoped(mn, dot));
+    // FIXME: for now
+    // using utility::string::splitter;
+    // name_.location().model_module_path(splitter::split_scoped(mn, dot));
     name_.location().original_model_name(mn);
 
-    if (infer_simple_name_from_model_name_)
-        name_.simple(*name_.location().model_module_path().rbegin());
+    if (infer_simple_name_from_model_name_) {
+        // FIXME
+        // name_.simple(*name_.location().model_module_path().rbegin());
+        name_.simple(mn);
+    }
 
-    BOOST_LOG_SEV(lg, debug) << "Added original model name: " << mn;
+    BOOST_LOG_SEV(lg, debug) << "Added model name: " << mn;
+    return *this;
+}
+
+name_builder& name_builder::model_name(const location& l) {
+    // FIXME: for now
+    // name_.location().model_module_path(l.model_module_path());
+    name_.location().original_model_name(l.original_model_name());
+
+    BOOST_LOG_SEV(lg, debug) << "Added model name from location: " << l;
     return *this;
 }
 
@@ -161,7 +185,6 @@ name_builder& name_builder::external_module_path(
     name_.location().external_module_path(emp);
     BOOST_LOG_SEV(lg, debug) << "Added external model path: " << emp;
     return *this;
-
 }
 
 name name_builder::build() {

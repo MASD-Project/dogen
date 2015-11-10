@@ -44,12 +44,14 @@ private:
     void compute_qualified_name();
 
 public:
+    name_builder& compute_qualifed_name(const bool v);
     name_builder& simple_name_contributes_to_qualifed_name(const bool v);
     name_builder& infer_simple_name_from_model_name(const bool v);
 
 public:
     name_builder& simple_name(const std::string& sn);
     name_builder& model_name(const std::string& mn);
+    name_builder& model_name(const location& l);
     name_builder& internal_module_path(const std::string& imp);
     name_builder& internal_module_path(const std::list<std::string>& imp);
     name_builder& external_module_path(const std::string& emp);
@@ -59,6 +61,7 @@ public:
     name build();
 
 private:
+    bool compute_qualifed_name_;
     bool simple_name_contributes_to_qualifed_name_;
     bool infer_simple_name_from_model_name_;
     name name_;

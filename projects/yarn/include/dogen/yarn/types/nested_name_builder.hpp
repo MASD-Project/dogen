@@ -47,7 +47,7 @@ public:
 
 public:
     nested_name_builder(
-        const std::unordered_set<std::string>& modules,
+        const std::unordered_set<std::string>& top_level_modules,
         const location& model_location);
 
 private:
@@ -63,7 +63,7 @@ public:
     nested_name build();
 
 private:
-    const std::unordered_set<std::string> modules_;
+    const std::unordered_set<std::string> top_level_modules_;
     const location model_location_;
     std::list<std::string> names_;
     boost::shared_ptr<node> root_;

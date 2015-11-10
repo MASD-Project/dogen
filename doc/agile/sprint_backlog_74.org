@@ -15,16 +15,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-10 Tue 00:00]
+#+CAPTION: Clock summary at [2015-11-10 Tue 23:01]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *2:34* |      |      |
+| *Total time*                                                                | *4:14* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 2:34   |      |      |
-| Active                                                                      |        | 2:34 |      |
+| Stories                                                                     | 4:14   |      |      |
+| Active                                                                      |        | 4:14 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 1:29 |
 | COMPLETED Write the next interesting instalment                             |        |      | 1:05 |
+| STARTED Generate all yarn names using name factory                          |        |      | 1:40 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -52,15 +53,16 @@ Actually this is nothing at all to do with the primitive model but all
 to do with computing the correct name. We need to start using the
 builder here.
 
-*** Generate all yarn names using name factory                        :story:
+*** STARTED Generate all yarn names using name factory                :story:
+    CLOCK: [2015-11-10 Tue 21:21]--[2015-11-10 Tue 23:01] =>  1:40
 
 We need to go through the code base and make sure that whenever we
 create a yarn name we do it using the factory rather than hand rolling
 one. This includes:
 
-- resolver
 - yarn dia (done)
-- yarn json (done)
+- yarn json
+- resolver
 - cpp
 
 *** Update name factory to compute qualified name                     :story:
@@ -401,6 +403,14 @@ We need to get the build green on the Linux agent again.
 *** Update Windows CDash agent                                        :story:
 
 We need to get the build green on the Windows agent again.
+
+*** Add tests to identifier parser with invalid names                 :story:
+
+We need to handle properly the following cases:
+
+- totally blank name.
+- template with angle brackets but nothing inside: =a<>=.
+- template with angle brackets, type and then a comma: =a<b,>=.
 
 ** Deprecated
 *** CANCELLED Replace name with id's in yarn                          :story:

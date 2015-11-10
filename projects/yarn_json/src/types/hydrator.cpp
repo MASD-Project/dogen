@@ -26,6 +26,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn_json/types/hydration_error.hpp"
 #include "dogen/yarn_json/types/hydrator.hpp"
@@ -87,9 +88,9 @@ std::string hydrator::model_name(const yarn::intermediate_model& m) const {
 }
 
 yarn::generation_types hydrator::generation_type(const bool is_target) const {
-    if (is_target)
-      return yarn::generation_types::full_generation;
-    return yarn::generation_types::no_generation;
+    return is_target ?
+        yarn::generation_types::full_generation :
+        yarn::generation_types::no_generation;
 }
 
 void hydrator::read_module_path(const boost::property_tree::ptree& pt,

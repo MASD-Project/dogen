@@ -168,26 +168,26 @@ namespace dogen {
 namespace yarn {
 
 identifier_parser::identifier_parser() :
-    modules_(std::unordered_set<std::string>()),
+    top_level_modules_(std::unordered_set<std::string>()),
     model_location_(location()) { }
 
 identifier_parser::
-identifier_parser(const std::unordered_set<std::string>& modules,
+identifier_parser(const std::unordered_set<std::string>& top_level_modules,
     const location& model_location)
-    : modules_(modules), model_location_(model_location) { }
+    : top_level_modules_(top_level_modules), model_location_(model_location) { }
 
 nested_name identifier_parser::parse_name(const std::string& s) const {
-    std::string::const_iterator it(s.begin());
-    std::string::const_iterator end(s.end());
-
     BOOST_LOG_SEV(lg, debug) << "parsing name: " << s;
 
-    std::shared_ptr<nested_name_builder>
-        builder(new nested_name_builder(modules_, model_location_));
+    auto builder(std::make_shared<nested_name_builder>(
+            top_level_modules_, model_location_));
     grammar<std::string::const_iterator> g(builder);
-    const bool ok(boost::spirit::qi::parse(it, end, g));
 
-    if (!ok || it != end) {
+    std::string::const_iterator i(s.begin());
+    std::string::const_iterator end(s.end());
+    const bool ok(boost::spirit::qi::parse(i, end, g));
+
+    if (!ok || i != end) {
         BOOST_LOG_SEV(lg, error) << error_msg << s;
         BOOST_THROW_EXCEPTION(parsing_error(error_msg + s));
     }

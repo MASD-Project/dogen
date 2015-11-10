@@ -23,6 +23,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/io/nested_name_io.hpp"
 #include "dogen/yarn/io/location_io.hpp"
+#include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/nested_name_builder.hpp"
 
 using namespace dogen::utility::log;
@@ -37,14 +38,16 @@ namespace dogen {
 namespace yarn {
 
 nested_name_builder::nested_name_builder(
-    const std::unordered_set<std::string>& modules,
+    const std::unordered_set<std::string>& top_level_modules,
     const location& model_location)
-    : modules_(modules), model_location_(model_location), root_(new node) {
+    : top_level_modules_(top_level_modules),
+      model_location_(model_location),
+      root_(new node) {
 
     current_ = root_;
 
     BOOST_LOG_SEV(lg, debug) << "Initialised with settings:";
-    BOOST_LOG_SEV(lg, debug) << " modules: " << modules;
+    BOOST_LOG_SEV(lg, debug) << " modules: " << top_level_modules_;
     BOOST_LOG_SEV(lg, debug) << " location: " << model_location_;
 }
 
@@ -61,42 +64,69 @@ void nested_name_builder::add_primitive(const std::string& s) {
 }
 
 void nested_name_builder::finish_current_node() {
-    BOOST_LOG_SEV(lg, debug) << "finishing current node. names: "
-                             << names_;
+    BOOST_LOG_SEV(lg, debug) << "finishing current node. names: " << names_;
 
-    name n(current_->data());
     if (names_.empty())
         return;
 
+    /*
+     * Setup the name builder. We must not yet compute the qualified
+     * name as we do not know if we have a fully formed name.
+     */
+    name_builder b;
+    b.compute_qualifed_name(false);
+
+    /*
+     * If we have a single name, we are either referencing a type
+     * defined in the global namespace (possibly in a different
+     * model), or a type defined at the top-level in this model. As we
+     * cannot tell the difference, we must fill in just the simple
+     * name and let the resolver handle it properly later on.
+     */
+    const auto front(names_.front());
     if (names_.size() == 1) {
-        n.simple(names_.front());
+        b.simple_name(front);
+        current_->data(b.build());
         names_.clear();
-        BOOST_LOG_SEV(lg, debug) << "simple name: " << n.simple();
-        current_->data(n);
+        BOOST_LOG_SEV(lg, debug) << "simple name: " << front;
         return;
     }
 
-    const auto omn(model_location_.original_model_name());
-    const auto i(modules_.find(names_.front()));
-    if (i != modules_.end()) {
-        n.location().original_model_name(omn);
-        BOOST_LOG_SEV(lg, debug) << "model name: " << omn;
+    /*
+     * Check to see if the first name matches a top-level module in
+     * this model. If it does, we must be referencing a type in a
+     * module in the current model. If it does not, we are referencing
+     * a type on a different model, and this is the foreign model
+     * name.
+     */
+    const auto i(top_level_modules_.find(front));
+    if (i != top_level_modules_.end()) {
+        b.model_name(model_location_);
+        BOOST_LOG_SEV(lg, debug) << "found module in current model: " << front;
     } else {
-        BOOST_LOG_SEV(lg, debug) << "model name: " << names_.front();
-        n.location().original_model_name(names_.front());
-        names_.pop_front();
+        BOOST_LOG_SEV(lg, debug) << "foreign model name: " << front;
+        b.model_name(front);
+        names_.pop_front(); // consume the foreign model name.
     }
 
-    n.simple(names_.back());
-    BOOST_LOG_SEV(lg, debug) << "simple name: " << n.simple();
+    /*
+     * The back of the list must now be the type's simple name.
+     */
+    const auto back(names_.back());
+    b.simple_name(back);
+    BOOST_LOG_SEV(lg, debug) << "simple name: " << back;
+    names_.pop_back(); // consume the simple name
 
-    names_.pop_back();
-    n.location().internal_module_path(names_);
-    BOOST_LOG_SEV(lg, debug) << "internal module path: "
-                             << n.location().internal_module_path();
-
-    names_.clear();
-    current_->data(n);
+    if (!names_.empty()) {
+        /*
+         * Whatever is left, if anything, must be a path to non-top-level
+         * modules defined within the model.
+         */
+        b.internal_module_path(names_);
+        BOOST_LOG_SEV(lg, debug) << "internal module path: " << names_;
+        names_.clear(); // consume internal modules
+    }
+    current_->data(b.build());
 }
 
 void nested_name_builder::start_children() {
