@@ -1364,7 +1364,8 @@ at the types qname. This is not ideal because it means one cannot
 supply meta-data for modules. We should probably revisit the layout to
 have a nested structure with namespaces containing types.
 
-See also [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#sml-json-hydrator-read_module_path-needs-refactoring][SML json hydrator =read_module_path= needs refactoring]].
+We should still support "implied" modules because it makes the file
+format less verbose for the common use case though.
 
 *** Consider renaming model module to root module                     :story:
 
@@ -3231,13 +3232,6 @@ https://github.com/rmartinho/nonius
 - [[http://lists.boost.org/boost-users/2011/01/65790.php][sent]] email to boost users mailing list asking for benchmarking
   support.
 - some tips on using chrono to benchmark [[http://www.cookandcommit.eu/2014/11/simple-macro-for-algorithms-time.html][here]].
-
-*** SML json hydrator =read_module_path= needs refactoring            :story:
-
-We have a very misleading function =read_module_path= which reads
-modules but also creates modules that do not exist. We need to split
-this into a =read= function without side-effects and a =create=
-function that creates the missing modules.
 
 *** Attributes versus properties                                      :story:
 

@@ -31,12 +31,21 @@ namespace dogen {
 namespace yarn {
 
 class modules_expander {
+public:
+    modules_expander();
+
+public:
+    void create_missing_modules(const bool v);
+
 private:
+    void create_missing_modules(intermediate_model& m) const;
     void expand_containing_module(intermediate_model& m) const;
 
 public:
     void expand(intermediate_model& m) const;
 
+private:
+    bool create_missing_modules_;
 };
 
 } }

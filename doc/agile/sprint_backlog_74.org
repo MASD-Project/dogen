@@ -15,17 +15,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-10 Tue 23:32]
+#+CAPTION: Clock summary at [2015-11-11 Wed 22:51]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *4:43* |      |      |
+| *Total time*                                                                | *6:07* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 4:43   |      |      |
-| Active                                                                      |        | 4:43 |      |
+| Stories                                                                     | 6:07   |      |      |
+| Active                                                                      |        | 6:07 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 1:29 |
 | COMPLETED Write the next interesting instalment                             |        |      | 1:05 |
-| STARTED Generate all yarn names using name factory                          |        |      | 2:09 |
+| STARTED SML json hydrator =read_module_path= needs refactoring              |        |      | 1:21 |
+| STARTED Generate all yarn names using name factory                          |        |      | 2:12 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -53,7 +54,16 @@ Actually this is nothing at all to do with the primitive model but all
 to do with computing the correct name. We need to start using the
 builder here.
 
+*** STARTED SML json hydrator =read_module_path= needs refactoring    :story:
+    CLOCK: [2015-11-11 Wed 21:30]--[2015-11-11 Wed 22:51] =>  1:21
+
+We have a very misleading function =read_module_path= which reads
+modules but also creates modules that do not exist. We need to split
+this into a =read= function without side-effects and a =create=
+function that creates the missing modules.
+
 *** STARTED Generate all yarn names using name factory                :story:
+    CLOCK: [2015-11-11 Wed 21:26]--[2015-11-11 Wed 21:29] =>  0:03
     CLOCK: [2015-11-10 Tue 23:22]--[2015-11-10 Tue 23:32] =>  0:10
     CLOCK: [2015-11-10 Tue 23:02]--[2015-11-10 Tue 23:21] =>  0:19
     CLOCK: [2015-11-10 Tue 21:21]--[2015-11-10 Tue 23:01] =>  1:40
@@ -62,6 +72,7 @@ We need to go through the code base and make sure that whenever we
 create a yarn name we do it using the factory rather than hand rolling
 one. This includes:
 
+- yarn (done)
 - yarn dia (done)
 - yarn json
 - resolver
