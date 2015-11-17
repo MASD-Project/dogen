@@ -38,7 +38,7 @@
 
 namespace {
 
-const std::string test_module("yarn");
+const std::string test_module("yarn_json");
 const std::string test_suite("hydrator_spec");
 
 const std::string model_name("a_model");
@@ -50,10 +50,10 @@ const std::string some_key("some_key");
 const std::string some_value("some_value");
 const std::string type_key("type_key");
 const bool type_value(true);
-const std::string module_path_key("module_path");
-const std::string module_path_value_1("module_1");
-const std::string module_path_value_2("module_2");
-const std::string module_path_value_3("module_3");
+const std::string internal_module_path_key("module_path");
+const std::string internal_module_path_value_1("module_1");
+const std::string internal_module_path_value_2("module_2");
+const std::string internal_module_path_value_3("module_3");
 
 const std::string cpp_std_model_path("library/cpp.std.json");
 const std::string cpp_std_model_name("std");
@@ -66,11 +66,9 @@ const std::string missing_model_name("model_name");
 const std::string missing_type_name("simple_name");
 const std::string missing_origin("origin");
 const std::string missing_elements("elements");
-const std::string missing_is_expandable("is_expandable");
 
 const std::string trivial_model(R"({
     "model_name" : "a_model",
-    "is_expandable" : false,
     "documentation" : "a_doc",
     "origin" : "system",
     "elements" : [
@@ -85,7 +83,6 @@ const std::string trivial_model(R"({
 
 const std::string tagged_model(R"({
     "model_name" : "a_model",
-    "is_expandable" : false,
     "documentation" : "a_doc",
     "origin" : "system",
     "extensions" : {
@@ -108,7 +105,6 @@ const std::string tagged_model(R"({
 
 const std::string no_documentation_model(R"({
     "model_name" : "a_model",
-    "is_expandable" : false,
     "origin" : "system",
     "elements" : [
         {
@@ -120,7 +116,6 @@ const std::string no_documentation_model(R"({
 )");
 
 const std::string no_name_model(R"({
-    "is_expandable" : false,
     "origin" : "system",
     "elements" : [
         {
@@ -133,7 +128,6 @@ const std::string no_name_model(R"({
 
 const std::string no_type_name_model(R"({
     "model_name" : "a_model",
-    "is_expandable" : false,
     "origin" : "system",
     "elements" : [
         {
@@ -145,7 +139,6 @@ const std::string no_type_name_model(R"({
 
 const std::string no_origin_model(R"({
     "model_name" : "a_model",
-    "is_expandable" : false,
     "elements" : [
         {
             "meta_type" : "object",
@@ -157,47 +150,29 @@ const std::string no_origin_model(R"({
 
 const std::string no_elements_model(R"({
     "model_name" : "a_model",
-    "is_expandable" : false,
     "origin" : "system"
   }
 )");
 
 const std::string empty_elements_model(R"({
     "model_name" : "a_model",
-    "is_expandable" : false,
     "origin" : "system",
     "elements" : [ ]
   }
 )");
 
-const std::string module_path_model(R"({
-    "model_name" : "a_model",
-    "is_expandable" : false,
-    "origin" : "system",
-    "module_path" : [ "module_1", "module_2", "module_3" ],
-    "elements" : [
-        {
-            "meta_type" : "object",
-            "simple_name" : "a_type",
-            "module_path" : [ "module_1" ]
-        }
-     ]
-  }
-)");
-
-const std::string missing_is_expandable_model(R"({
+const std::string internal_module_path_model(R"({
     "model_name" : "a_model",
     "origin" : "system",
     "elements" : [
         {
             "meta_type" : "object",
             "simple_name" : "a_type",
-            "module_path" : [ "module_1" ]
+            "internal_module_path" : [ "module_1", "module_2", "module_3" ]
         }
      ]
   }
 )");
-
 
 dogen::dynamic::repository create_repository() {
     using namespace dogen::dynamic;
@@ -354,18 +329,13 @@ BOOST_AUTO_TEST_CASE(empty_elements_model_throws) {
     BOOST_CHECK_EXCEPTION(hydrate(empty_elements_model), hydration_error, c);
 }
 
-BOOST_AUTO_TEST_CASE(module_path_model_hydrates_into_expected_model) {
-    SETUP_TEST_LOG_SOURCE("module_path_model_hydrates_into_expected_model");
-    const auto m(hydrate(module_path_model));
+BOOST_AUTO_TEST_CASE(internal_module_path_model_hydrates_into_expected_model) {
+    SETUP_TEST_LOG_SOURCE("internal_module_path_model_hydrates_into_expected_model");
+    const auto m(hydrate(internal_module_path_model));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     {
-        const auto mp(m.name().location().internal_module_path());
-        BOOST_REQUIRE(mp.size() == 3);
-        auto i(mp.begin());
-        BOOST_CHECK(*i == module_path_value_1);
-        BOOST_CHECK((*(++i)) == module_path_value_2);
-        BOOST_CHECK((*(++i)) == module_path_value_3);
+        BOOST_CHECK(m.name().location().internal_module_path().empty());
         BOOST_CHECK(m.name().location().external_module_path().empty());
     }
 
@@ -376,9 +346,13 @@ BOOST_AUTO_TEST_CASE(module_path_model_hydrates_into_expected_model) {
     BOOST_CHECK(pair.first == n);
     {
         const auto mp(n.location().internal_module_path());
-        BOOST_REQUIRE(mp.size() == 1);
+        BOOST_REQUIRE(mp.size() == 3);
+
         auto i(mp.begin());
-        BOOST_CHECK(*i == module_path_value_1);
+        BOOST_CHECK(*i == internal_module_path_value_1);
+        BOOST_CHECK((*(++i)) == internal_module_path_value_2);
+        BOOST_CHECK((*(++i)) == internal_module_path_value_3);
+
         BOOST_CHECK(n.location().external_module_path().empty());
     }
 }
@@ -451,25 +425,6 @@ BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
         using dogen::yarn::object_types;
         const auto ot(o.object_type());
         BOOST_CHECK(ot != object_types::invalid);
-
-        if (!n.location().internal_module_path().empty()) {
-            bool module_found(false);
-            for (const auto& pair : m.modules()) {
-                const auto mod(pair.second);
-                auto pp(mod.name().location().internal_module_path());
-                pp.push_back(mod.name().simple());
-                BOOST_LOG_SEV(lg, info) << "Converted path: " << pp;
-                if (n.location().internal_module_path() == pp) {
-                    module_found = true;
-                    break;
-                }
-            }
-
-            if (!module_found)
-                BOOST_LOG_SEV(lg, error) << "Object has undefined module: "
-                                         << n.qualified();
-            BOOST_CHECK(module_found);
-        }
     }
     BOOST_CHECK(m.primitives().empty());
     BOOST_CHECK(m.enumerations().empty());
@@ -501,7 +456,7 @@ BOOST_AUTO_TEST_CASE(hardware_model_hydrates_into_expected_model) {
     }
 
     BOOST_CHECK(m.enumerations().empty());
-    BOOST_CHECK(m.modules().empty());
+    BOOST_CHECK(m.modules().size() == 1);
     BOOST_CHECK(m.references().empty());
     BOOST_CHECK(m.leaves().empty());
     BOOST_CHECK(m.name().location().external_module_path().empty());

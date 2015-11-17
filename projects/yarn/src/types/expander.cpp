@@ -25,15 +25,8 @@
 namespace dogen {
 namespace yarn {
 
-expander::expander() : create_missing_modules_(false) { }
-
-void expander::create_missing_modules(const bool v) {
-    create_missing_modules_ = v;
-}
-
 void expander::expand_modules(intermediate_model& m) const {
     modules_expander e;
-    e.create_missing_modules(create_missing_modules_);
     e.expand(m);
 }
 

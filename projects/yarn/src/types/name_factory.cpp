@@ -31,6 +31,9 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.name_factory"));
 
+const std::string empty_internal_module_path(
+    "Internal module path cannot be empty.");
+
 }
 
 namespace dogen {
@@ -47,6 +50,16 @@ name name_factory::build_model_name(const std::string& model_name,
         b.external_module_path(external_module_path);
 
     return b.build();
+}
+
+name name_factory::build_root_module_name(const name& model_name) const {
+    yarn::name r;
+    const auto l(model_name.location());
+    r.simple(l.original_model_name());
+    r.location().original_model_name(l.original_model_name());
+    // r.location().model_module_path(l.model_module_path());
+    r.location().external_module_path(l.external_module_path());
+    return r;
 }
 
 name name_factory::build_element_in_model(const name& model_name,
@@ -86,5 +99,27 @@ name name_factory::build_element_in_module(const name& module_name,
     return n;
 }
 
+name name_factory::build_module_name(const name& model_name,
+    const std::list<std::string>& internal_module_path) const {
+
+    if (internal_module_path.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_internal_module_path;
+        BOOST_THROW_EXCEPTION(building_error(empty_internal_module_path));
+    }
+
+    yarn::name n;
+    n.simple(internal_module_path.back());
+
+    const auto& l(model_name.location());
+    n.location().original_model_name(l.original_model_name());
+    // n.location().model_module_path(l.model_module_path());
+    n.location().external_module_path(l.external_module_path());
+
+    auto ipp(internal_module_path);
+    ipp.pop_back();
+    n.location().internal_module_path(ipp);
+
+    return n;
+}
 
 } }

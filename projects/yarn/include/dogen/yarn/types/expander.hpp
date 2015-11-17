@@ -31,21 +31,12 @@ namespace dogen {
 namespace yarn {
 
 class expander {
-public:
-    expander();
-
-public:
-    void create_missing_modules(const bool v);
-
 private:
     void expand_modules(intermediate_model& m) const;
     void expand_properties(intermediate_model& m) const;
 
 public:
     void expand(intermediate_model& m) const;
-
-private:
-    bool create_missing_modules_;
 };
 
 } }

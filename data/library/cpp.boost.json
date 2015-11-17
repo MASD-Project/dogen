@@ -71,7 +71,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "io_service",
-            "module_path" : [
+            "internal_module_path" : [
                 "asio"
             ],
             "extensions" : {
@@ -81,7 +81,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "socket",
-            "module_path" : [
+            "internal_module_path" : [
                 "asio", "ip", "tcp"
             ],
             "extensions" : {
@@ -91,7 +91,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "acceptor",
-            "module_path" : [
+            "internal_module_path" : [
                 "asio", "ip", "tcp"
             ],
             "extensions" : {
@@ -101,7 +101,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "path",
-            "module_path" : [
+            "internal_module_path" : [
                 "filesystem"
             ],
             "extensions" : {
@@ -117,7 +117,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "date",
-            "module_path" : [
+            "internal_module_path" : [
                 "gregorian"
             ],
             "extensions" : {
@@ -133,7 +133,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "ptime",
-            "module_path" : [
+            "internal_module_path" : [
                 "posix_time"
             ],
             "extensions" : {
@@ -149,7 +149,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "time_duration",
-            "module_path" : [
+            "internal_module_path" : [
                 "posix_time"
             ],
             "extensions" : {
@@ -165,7 +165,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "ptree",
-            "module_path" : [
+            "internal_module_path" : [
                 "property_tree"
             ],
             "extensions" : {

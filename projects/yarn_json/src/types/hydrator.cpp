@@ -24,6 +24,7 @@
 #include <boost/filesystem/fstream.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
@@ -37,7 +38,7 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("yarn_json.hydrator"));
 
 const std::string empty;
-const std::string hardware_model_name("hardware");
+const std::string in_global_namespace_key("in_global_namespace");
 const std::string model_name_key("model_name");
 const std::string bool_true("true");
 const std::string bool_false("false");
@@ -53,7 +54,7 @@ const std::string meta_type_object_value("object");
 const std::string meta_type_primitive_value("primitive");
 
 const std::string simple_name_key("simple_name");
-const std::string module_path_key("module_path");
+const std::string internal_module_path_key("internal_module_path");
 const std::string extensions_key("extensions");
 
 const std::string object_type_key("object_type");
@@ -81,44 +82,10 @@ namespace yarn_json {
 hydrator::hydrator(const dynamic::workflow& w)
     : dynamic_workflow_(w) { }
 
-std::string hydrator::model_name(const yarn::intermediate_model& m) const {
-    if (m.name().location().original_model_name() == hardware_model_name)
-        return empty;
-    return m.name().location().original_model_name();
-}
-
 yarn::generation_types hydrator::generation_type(const bool is_target) const {
     return is_target ?
         yarn::generation_types::full_generation :
         yarn::generation_types::no_generation;
-}
-
-void hydrator::read_module_path(const boost::property_tree::ptree& pt,
-    yarn::intermediate_model& m, yarn::name& n) const {
-    const auto i(pt.find(module_path_key));
-    if (i == pt.not_found())
-        return;
-
-    for (auto j(i->second.begin()); j != i->second.end(); ++j) {
-        const auto module_name(j->second.get_value<std::string>());
-        n.location().internal_module_path().push_back(module_name);
-
-        yarn::name module_n;
-        module_n.simple(module_name);
-        module_n.location().original_model_name(model_name(m));
-        auto mp(n.location().internal_module_path());
-        mp.pop_back();
-        module_n.location().internal_module_path(mp);
-
-        const auto i(m.modules().find(module_n));
-        if (i == m.modules().end()) {
-            yarn::module mod;
-            mod.name(module_n);
-            mod.origin_type(m.origin_type());
-            mod.generation_type(m.generation_type());
-            m.modules().insert(std::make_pair(module_n, mod));
-        }
-    }
 }
 
 dynamic::object hydrator::
@@ -140,13 +107,32 @@ create_dynamic_extensions(const boost::property_tree::ptree& pt,
 
 void hydrator::read_element(const boost::property_tree::ptree& pt,
     yarn::intermediate_model& m) const {
-    yarn::name n;
-    n.location().original_model_name(model_name(m));
-    read_module_path(pt, m, n);
+
+    yarn::name_builder b;
+    b.compute_qualifed_name(false); // FIXME: for now
+
+    const auto in_global_namespace(pt.get(in_global_namespace_key, false));
+    if (!in_global_namespace)
+        b.model_name(m.name().location());
 
     const auto simple_name_value(pt.get<std::string>(simple_name_key));
-    n.simple(simple_name_value);
+    b.simple_name(simple_name_value);
 
+    const auto i(pt.find(internal_module_path_key));
+    if (i != pt.not_found()) {
+        std::list<std::string> ipp;
+        for (auto& item : pt.get_child(internal_module_path_key))
+            ipp.push_back(item.second.get_value<std::string>());
+
+        if (!ipp.empty())
+            b.internal_module_path(ipp);
+        else {
+            BOOST_LOG_SEV(lg, debug) << "Ignoring empty internal module path. "
+                                     << "Type: " << simple_name_value;
+        }
+    }
+
+    yarn::name n(b.build());
     const auto documentation(pt.get_optional<std::string>(documentation_key));
 
     const auto lambda([&](yarn::element& e) {
@@ -187,15 +173,13 @@ yarn::intermediate_model hydrator::read_stream(
     yarn::intermediate_model r;
     r.generation_type(generation_type(is_target));
 
-    using namespace boost::property_tree;
-    ptree pt;
+    boost::property_tree::ptree pt;
     read_json(s, pt);
 
     yarn::name_factory nf;
     r.name(nf.build_model_name(pt.get<std::string>(model_name_key)));
     BOOST_LOG_SEV(lg, debug) << "Processing model: " << r.name().qualified();
 
-    read_module_path(pt, r, r.name());
     const auto scope(dynamic::scope_types::root_module);
     r.extensions(create_dynamic_extensions(pt, scope));
 
@@ -213,15 +197,11 @@ yarn::intermediate_model hydrator::read_stream(
         BOOST_THROW_EXCEPTION(hydration_error(invalid_origin + origin_value));
     }
 
-    if (!model_name(r).empty()) {
-        yarn::module m;
-        const auto omn(r.name().location().original_model_name());
-        m.name().simple(omn);
-        m.name().location().original_model_name(omn);
-        m.origin_type(r.origin_type());
-        m.generation_type(r.generation_type());
-        r.modules().insert(std::make_pair(m.name(), m));
-    }
+    yarn::module m;
+    m.name(nf.build_root_module_name(r.name()));
+    m.origin_type(r.origin_type());
+    m.generation_type(r.generation_type());
+    r.modules().insert(std::make_pair(m.name(), m));
 
     const auto i(pt.find(elements_key));
     if (i == pt.not_found() || i->second.empty()) {

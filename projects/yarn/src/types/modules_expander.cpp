@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/all_model_items_traversal.hpp"
 #include "dogen/yarn/types/modules_expander.hpp"
@@ -61,12 +62,17 @@ public:
 };
 
 void internal_module_path_builder::process(const name& n) {
-    const auto& ipp(n.location().internal_module_path());
-    if (ipp.empty())
-        return;
+    auto ipp(n.location().internal_module_path());
+    while (!ipp.empty()) {
+        const std::string key(boost::join(ipp, separator));
+        distinct_internal_module_paths_.insert(std::make_pair(key, ipp));
+        ipp.pop_back();
+    }
+}
 
-    const std::string key(boost::join(ipp, separator));
-    distinct_internal_module_paths_.insert(std::make_pair(key, ipp));
+const std::unordered_map<std::string, std::list<std::string>>&
+    internal_module_path_builder::result() {
+    return distinct_internal_module_paths_;
 }
 
 class updater {
@@ -143,44 +149,23 @@ void updater::update(element& e) {
 
 }
 
-modules_expander::modules_expander() : create_missing_modules_(false) { }
-
-void modules_expander::create_missing_modules(const bool v) {
-    create_missing_modules_ = v;
-}
-
 void modules_expander::create_missing_modules(intermediate_model& m) const {
-    if (!create_missing_modules_)
-        return;
-
     internal_module_path_builder b;
     yarn::all_model_items_traversal(m, b);
 
-    /*
     for (const auto& pair : b.result()) {
+        yarn::name_factory f;
         const auto& ipp(pair.second);
-        for (auto i(ipp.begin()); i = ipp.end(); ++i) {
-            const auto module_name(j->second.get_value<std::string>());
-            n.location().internal_module_path().push_back(module_name);
-
-            yarn::name module_n;
-            module_n.simple(module_name);
-            module_n.location().original_model_name(model_name(m));
-            auto mp(n.location().internal_module_path());
-            mp.pop_back();
-            module_n.location().internal_module_path(mp);
-
-            const auto i(m.modules().find(module_n));
-            if (i == m.modules().end()) {
-                yarn::module mod;
-                mod.name(module_n);
-                mod.origin_type(m.origin_type());
-                mod.generation_type(m.generation_type());
-                m.modules().insert(std::make_pair(module_n, mod));
-            }
+        const auto module_n(f.build_module_name(m.name(), ipp));
+        const auto i(m.modules().find(module_n));
+        if (i == m.modules().end()) {
+            yarn::module mod;
+            mod.name(module_n);
+            mod.origin_type(m.origin_type());
+            mod.generation_type(m.generation_type());
+            m.modules().insert(std::make_pair(module_n, mod));
         }
     }
-    */
 }
 
 void modules_expander::expand_containing_module(intermediate_model& m) const {

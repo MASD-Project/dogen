@@ -66,16 +66,6 @@ private:
     std::string model_name(const yarn::intermediate_model& m) const;
 
     /**
-     * @brief Reads a module path from the property tree and uses it
-     * to populate the name.
-     *
-     * If the model does not contain all modules implied by the module
-     * path, it adds them to the model.
-     */
-    void read_module_path(const boost::property_tree::ptree& pt,
-        yarn::intermediate_model& m, yarn::name& n) const;
-
-    /**
      * @brief Creates the dynamic object by reading meta-data from the
      * property tree.
      */

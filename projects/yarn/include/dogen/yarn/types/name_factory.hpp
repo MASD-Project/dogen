@@ -48,6 +48,12 @@ public:
         const std::string& external_module_path = std::string()) const;
 
     /**
+     * @brief Given a model name, builds the corresponding root module
+     * name.
+     */
+    name build_root_module_name(const name& model_name) const;
+
+    /**
      * @brief Given a simple name for an element and the name of the
      * model it is located in, creates the element name.
      */
@@ -61,6 +67,13 @@ public:
     name build_element_in_module(const name& module_name,
         const std::string& simple_name) const;
 
+    /**
+     * @brief Builds a module name, given the model name and an
+     * internal module path. Uses the back of the module path to name
+     * the module.
+     */
+    name build_module_name(const name& model_name,
+        const std::list<std::string>& internal_module_path) const;
 };
 
 } }
