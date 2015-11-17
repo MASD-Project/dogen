@@ -26,6 +26,8 @@ namespace dogen {
 namespace yarn {
 
 primitive::primitive(
+    const bool in_global_namespace,
+    const std::string& original_model_name,
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const dogen::yarn::name& name,
@@ -33,6 +35,8 @@ primitive::primitive(
     const dogen::yarn::origin_types origin_type,
     const boost::optional<dogen::yarn::name>& containing_module)
     : dogen::yarn::element(
+      in_global_namespace,
+      original_model_name,
       documentation,
       extensions,
       name,

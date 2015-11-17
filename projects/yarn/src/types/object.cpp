@@ -105,6 +105,8 @@ object::object()
       is_final_(static_cast<bool>(0)) { }
 
 object::object(
+    const bool in_global_namespace,
+    const std::string& original_model_name,
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const dogen::yarn::name& name,
@@ -124,6 +126,8 @@ object::object(
     const dogen::yarn::object_types object_type,
     const bool is_final)
     : dogen::yarn::element(
+      in_global_namespace,
+      original_model_name,
       documentation,
       extensions,
       name,

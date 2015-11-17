@@ -56,6 +56,8 @@ public:
 
 public:
     element(
+        const bool in_global_namespace,
+        const std::string& original_model_name,
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
         const dogen::yarn::name& name,
@@ -80,6 +82,24 @@ public:
     virtual void to_stream(std::ostream& s) const;
 
 public:
+    /**
+     * @brief If true, the type is located in the global namespace.
+     */
+    /**@{*/
+    bool in_global_namespace() const;
+    void in_global_namespace(const bool v);
+    /**@}*/
+
+    /**
+     * @brief Name of the model where the element came from.
+     */
+    /**@{*/
+    const std::string& original_model_name() const;
+    std::string& original_model_name();
+    void original_model_name(const std::string& v);
+    void original_model_name(const std::string&& v);
+    /**@}*/
+
     /**
      * @brief Code comments.
      *
@@ -150,6 +170,8 @@ protected:
     void swap(element& other) noexcept;
 
 private:
+    bool in_global_namespace_;
+    std::string original_model_name_;
     std::string documentation_;
     dogen::dynamic::object extensions_;
     dogen::yarn::name name_;

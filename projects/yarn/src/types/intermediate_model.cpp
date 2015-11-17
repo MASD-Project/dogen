@@ -24,13 +24,16 @@ namespace dogen {
 namespace yarn {
 
 intermediate_model::intermediate_model()
-    : generation_type_(static_cast<dogen::yarn::generation_types>(0)),
+    : in_global_namespace_(static_cast<bool>(0)),
+      generation_type_(static_cast<dogen::yarn::generation_types>(0)),
       origin_type_(static_cast<dogen::yarn::origin_types>(0)),
       is_target_(static_cast<bool>(0)),
       has_generatable_types_(static_cast<bool>(0)) { }
 
 intermediate_model::intermediate_model(intermediate_model&& rhs)
-    : documentation_(std::move(rhs.documentation_)),
+    : in_global_namespace_(std::move(rhs.in_global_namespace_)),
+      original_model_name_(std::move(rhs.original_model_name_)),
+      documentation_(std::move(rhs.documentation_)),
       extensions_(std::move(rhs.extensions_)),
       name_(std::move(rhs.name_)),
       generation_type_(std::move(rhs.generation_type_)),
@@ -47,6 +50,8 @@ intermediate_model::intermediate_model(intermediate_model&& rhs)
       has_generatable_types_(std::move(rhs.has_generatable_types_)) { }
 
 intermediate_model::intermediate_model(
+    const bool in_global_namespace,
+    const std::string& original_model_name,
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const dogen::yarn::name& name,
@@ -62,7 +67,9 @@ intermediate_model::intermediate_model(
     const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& objects,
     const bool is_target,
     const bool has_generatable_types)
-    : documentation_(documentation),
+    : in_global_namespace_(in_global_namespace),
+      original_model_name_(original_model_name),
+      documentation_(documentation),
       extensions_(extensions),
       name_(name),
       generation_type_(generation_type),
@@ -80,6 +87,8 @@ intermediate_model::intermediate_model(
 
 void intermediate_model::swap(intermediate_model& other) noexcept {
     using std::swap;
+    swap(in_global_namespace_, other.in_global_namespace_);
+    swap(original_model_name_, other.original_model_name_);
     swap(documentation_, other.documentation_);
     swap(extensions_, other.extensions_);
     swap(name_, other.name_);
@@ -98,7 +107,9 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
 }
 
 bool intermediate_model::operator==(const intermediate_model& rhs) const {
-    return documentation_ == rhs.documentation_ &&
+    return in_global_namespace_ == rhs.in_global_namespace_ &&
+        original_model_name_ == rhs.original_model_name_ &&
+        documentation_ == rhs.documentation_ &&
         extensions_ == rhs.extensions_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
@@ -119,6 +130,30 @@ intermediate_model& intermediate_model::operator=(intermediate_model other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+bool intermediate_model::in_global_namespace() const {
+    return in_global_namespace_;
+}
+
+void intermediate_model::in_global_namespace(const bool v) {
+    in_global_namespace_ = v;
+}
+
+const std::string& intermediate_model::original_model_name() const {
+    return original_model_name_;
+}
+
+std::string& intermediate_model::original_model_name() {
+    return original_model_name_;
+}
+
+void intermediate_model::original_model_name(const std::string& v) {
+    original_model_name_ = v;
+}
+
+void intermediate_model::original_model_name(const std::string&& v) {
+    original_model_name_ = std::move(v);
 }
 
 const std::string& intermediate_model::documentation() const {

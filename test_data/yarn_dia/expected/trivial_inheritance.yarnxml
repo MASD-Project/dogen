@@ -2,6 +2,8 @@
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="13">
 <entity class_id="8" tracking_level="0" version="0">
+	<in_global_namespace>0</in_global_namespace>
+	<original_model_name></original_model_name>
 	<documentation></documentation>
 	<extensions class_id="9" tracking_level="0" version="0">
 		<fields class_id="10" tracking_level="0" version="0">
@@ -70,6 +72,8 @@
 			</first>
 			<second class_id="5" tracking_level="1" version="0" object_id="_0">
 				<element class_id="19" tracking_level="0" version="0">
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation>This model tests all aspects related to inheritance.
 
 It includes the visitable stereotype since it only makes sense
@@ -169,6 +173,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_4">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -230,6 +236,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_5">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -291,6 +299,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_6">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -352,6 +362,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_7">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -433,6 +445,8 @@ in the context of inheritance.
 			</first>
 			<second class_id="6" tracking_level="1" version="0" object_id="_8">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
 					<extensions>
@@ -543,6 +557,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_9">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -627,6 +643,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_10">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -779,6 +797,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_11">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -903,6 +923,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_12">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1052,6 +1074,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_13">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1175,6 +1199,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_14">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1325,6 +1351,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_15">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1449,6 +1477,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_16">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1598,6 +1628,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_17">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1681,6 +1713,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_18">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1791,6 +1825,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_19">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1942,6 +1978,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_20">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2025,6 +2063,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_21">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
 					<extensions>
@@ -2176,6 +2216,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_22">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2299,6 +2341,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_23">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2409,6 +2453,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_24">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2559,6 +2605,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_25">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2668,6 +2716,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_26">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2817,6 +2867,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_27">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2900,6 +2952,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_28">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -3049,6 +3103,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_29">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -3158,6 +3214,8 @@ in the context of inheritance.
 			</first>
 			<second object_id="_30">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation>Base class for scenario that tests code generated move contructors.
 </documentation>
 					<extensions>

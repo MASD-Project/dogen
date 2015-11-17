@@ -2,6 +2,8 @@
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="13">
 <entity class_id="8" tracking_level="0" version="0">
+	<in_global_namespace>0</in_global_namespace>
+	<original_model_name></original_model_name>
 	<documentation></documentation>
 	<extensions class_id="9" tracking_level="0" version="0">
 		<fields class_id="10" tracking_level="0" version="0">
@@ -70,6 +72,8 @@
 			</first>
 			<second class_id="5" tracking_level="1" version="0" object_id="_0">
 				<element class_id="19" tracking_level="0" version="0">
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -131,6 +135,8 @@
 			</first>
 			<second object_id="_1">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -245,6 +251,8 @@
 			</first>
 			<second class_id="6" tracking_level="1" version="0" object_id="_5">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -368,6 +376,8 @@
 			</first>
 			<second object_id="_6">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -492,6 +502,8 @@
 			</first>
 			<second object_id="_7">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -656,6 +668,8 @@
 			</first>
 			<second object_id="_8">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -779,6 +793,8 @@
 			</first>
 			<second object_id="_9">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1022,6 +1038,8 @@
 			</first>
 			<second object_id="_10">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1265,6 +1283,8 @@
 			</first>
 			<second object_id="_11">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1628,6 +1648,8 @@
 			</first>
 			<second object_id="_12">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1777,6 +1799,8 @@
 			</first>
 			<second object_id="_13">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1980,6 +2004,8 @@
 			</first>
 			<second object_id="_14">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2303,6 +2329,8 @@
 			</first>
 			<second object_id="_15">
 				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>

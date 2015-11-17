@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/element.hpp"
@@ -52,11 +53,14 @@ namespace dogen {
 namespace yarn {
 
 element::element()
-    : generation_type_(static_cast<dogen::yarn::generation_types>(0)),
+    : in_global_namespace_(static_cast<bool>(0)),
+      generation_type_(static_cast<dogen::yarn::generation_types>(0)),
       origin_type_(static_cast<dogen::yarn::origin_types>(0)) { }
 
 element::element(element&& rhs)
-    : documentation_(std::move(rhs.documentation_)),
+    : in_global_namespace_(std::move(rhs.in_global_namespace_)),
+      original_model_name_(std::move(rhs.original_model_name_)),
+      documentation_(std::move(rhs.documentation_)),
       extensions_(std::move(rhs.extensions_)),
       name_(std::move(rhs.name_)),
       generation_type_(std::move(rhs.generation_type_)),
@@ -64,13 +68,17 @@ element::element(element&& rhs)
       containing_module_(std::move(rhs.containing_module_)) { }
 
 element::element(
+    const bool in_global_namespace,
+    const std::string& original_model_name,
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const dogen::yarn::name& name,
     const dogen::yarn::generation_types generation_type,
     const dogen::yarn::origin_types origin_type,
     const boost::optional<dogen::yarn::name>& containing_module)
-    : documentation_(documentation),
+    : in_global_namespace_(in_global_namespace),
+      original_model_name_(original_model_name),
+      documentation_(documentation),
       extensions_(extensions),
       name_(name),
       generation_type_(generation_type),
@@ -78,8 +86,16 @@ element::element(
       containing_module_(containing_module) { }
 
 void element::to_stream(std::ostream& s) const {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::element\"" << ", "
+      << "\"in_global_namespace\": " << in_global_namespace_ << ", "
+      << "\"original_model_name\": " << "\"" << tidy_up_string(original_model_name_) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"extensions\": " << extensions_ << ", "
       << "\"name\": " << name_ << ", "
@@ -91,6 +107,8 @@ void element::to_stream(std::ostream& s) const {
 
 void element::swap(element& other) noexcept {
     using std::swap;
+    swap(in_global_namespace_, other.in_global_namespace_);
+    swap(original_model_name_, other.original_model_name_);
     swap(documentation_, other.documentation_);
     swap(extensions_, other.extensions_);
     swap(name_, other.name_);
@@ -100,12 +118,38 @@ void element::swap(element& other) noexcept {
 }
 
 bool element::compare(const element& rhs) const {
-    return documentation_ == rhs.documentation_ &&
+    return in_global_namespace_ == rhs.in_global_namespace_ &&
+        original_model_name_ == rhs.original_model_name_ &&
+        documentation_ == rhs.documentation_ &&
         extensions_ == rhs.extensions_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_ &&
         containing_module_ == rhs.containing_module_;
+}
+
+bool element::in_global_namespace() const {
+    return in_global_namespace_;
+}
+
+void element::in_global_namespace(const bool v) {
+    in_global_namespace_ = v;
+}
+
+const std::string& element::original_model_name() const {
+    return original_model_name_;
+}
+
+std::string& element::original_model_name() {
+    return original_model_name_;
+}
+
+void element::original_model_name(const std::string& v) {
+    original_model_name_ = v;
+}
+
+void element::original_model_name(const std::string&& v) {
+    original_model_name_ = std::move(v);
 }
 
 const std::string& element::documentation() const {
