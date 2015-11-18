@@ -52,14 +52,23 @@ name name_factory::build_model_name(const std::string& model_name,
     return b.build();
 }
 
-name name_factory::build_root_module_name(const name& model_name) const {
-    yarn::name r;
-    const auto l(model_name.location());
-    r.simple(l.original_model_name());
-    r.location().original_model_name(l.original_model_name());
-    // r.location().model_module_path(l.model_module_path());
-    r.location().external_module_path(l.external_module_path());
-    return r;
+name name_factory::build_element_name(const std::string& simple_name) const {
+    name_builder b;
+    b.infer_simple_name_from_model_name(false);
+    b.compute_qualifed_name(false); // FIXME
+    b.simple_name(simple_name);
+    return b.build();
+}
+
+name name_factory::build_element_name(const std::string& model_name,
+    const std::string& simple_name) const {
+
+    name_builder b;
+    b.infer_simple_name_from_model_name(false);
+    b.compute_qualifed_name(false); // FIXME
+    b.simple_name(simple_name);
+    b.model_name(model_name);
+    return b.build();
 }
 
 name name_factory::build_element_in_model(const name& model_name,
@@ -72,6 +81,25 @@ name name_factory::build_element_in_model(const name& model_name,
     n.location().original_model_name(l.original_model_name());
     // n.location().model_module_path(l.model_module_path());
     n.location().external_module_path(l.external_module_path());
+
+    // FIXME: generate qualified name commented out for now
+    // name_builder b(n);
+    // return b.build();
+    return n;
+}
+
+name name_factory::build_element_in_model(const name& model_name,
+    const std::string& simple_name,
+    const std::list<std::string>& internal_module_path) const {
+
+    yarn::name n;
+    n.simple(simple_name);
+
+    const auto& l(model_name.location());
+    n.location().original_model_name(l.original_model_name());
+    // n.location().model_module_path(l.model_module_path());
+    n.location().external_module_path(l.external_module_path());
+    n.location().internal_module_path(internal_module_path);
 
     // FIXME: generate qualified name commented out for now
     // name_builder b(n);
@@ -120,6 +148,38 @@ name name_factory::build_module_name(const name& model_name,
     n.location().internal_module_path(ipp);
 
     return n;
+}
+
+name name_factory::build_combined_element_name(const name& model_name,
+    const name& partial_element_name,
+    const bool populate_model_name_if_blank) const {
+    name r(partial_element_name);
+
+    const auto& l(model_name.location());
+    if (populate_model_name_if_blank &&
+        r.location().original_model_name().empty()) {
+        r.location().original_model_name(l.original_model_name());
+        // r.location().model_module_path(l.model_module_path());
+    }
+    r.location().external_module_path(l.external_module_path());
+
+    return r;
+}
+
+name name_factory::build_promoted_module_name(const name& model_name,
+    const name& element_name) const {
+    name r;
+    r.simple(element_name.simple());
+
+    const auto& l(element_name.location());
+    if (!l.internal_module_path().empty()) {
+        r.location().original_model_name(l.internal_module_path().front());
+        // r.location().model_module_path().push_back(
+        // l.internal_module_path().front());
+    }
+    r.location().external_module_path(
+        model_name.location().external_module_path());
+    return r;
 }
 
 } }

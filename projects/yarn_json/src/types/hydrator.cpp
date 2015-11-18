@@ -198,7 +198,7 @@ yarn::intermediate_model hydrator::read_stream(
     }
 
     yarn::module m;
-    m.name(nf.build_root_module_name(r.name()));
+    m.name(r.name());
     m.origin_type(r.origin_type());
     m.generation_type(r.generation_type());
     r.modules().insert(std::make_pair(m.name(), m));

@@ -15,18 +15,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-16 Mon 22:47]
-| <75>                                                                        |        |      |      |
-| Headline                                                                    | Time   |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *8:10* |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 8:10   |      |      |
-| Active                                                                      |        | 8:10 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:29 |
-| COMPLETED Write the next interesting instalment                             |        |      | 1:05 |
-| STARTED SML json hydrator =read_module_path= needs refactoring              |        |      | 1:21 |
-| STARTED Generate all yarn names using name factory                          |        |      | 4:15 |
+#+CAPTION: Clock summary at [2015-11-18 Wed 11:51]
+| <75>                                                                        |         |       |      |
+| Headline                                                                    | Time    |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                                | *10:21* |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| Stories                                                                     | 10:21   |       |      |
+| Active                                                                      |         | 10:21 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:29 |
+| COMPLETED Write the next interesting instalment                             |         |       | 1:05 |
+| STARTED SML json hydrator =read_module_path= needs refactoring              |         |       | 1:21 |
+| STARTED Generate all yarn names using name factory                          |         |       | 6:26 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -63,6 +63,9 @@ this into a =read= function without side-effects and a =create=
 function that creates the missing modules.
 
 *** STARTED Generate all yarn names using name factory                :story:
+    CLOCK: [2015-11-17 Tue 22:54]--[2015-11-17 Tue 23:33] =>  0:39
+    CLOCK: [2015-11-17 Tue 22:44]--[2015-11-17 Tue 22:53] =>  0:09
+    CLOCK: [2015-11-17 Tue 21:51]--[2015-11-17 Tue 22:43] =>  0:52
     CLOCK: [2015-11-17 Tue 21:19]--[2015-11-17 Tue 21:50] =>  0:31
     CLOCK: [2015-11-16 Mon 20:44]--[2015-11-16 Mon 22:47] =>  2:03
     CLOCK: [2015-11-11 Wed 21:26]--[2015-11-11 Wed 21:29] =>  0:03
@@ -74,13 +77,13 @@ We need to go through the code base and make sure that whenever we
 create a yarn name we do it using the factory rather than hand rolling
 one. This includes:
 
-- yarn (done)
+- yarn main (done)
+- yarn test
 - yarn dia (done)
 - yarn json (done)
-- resolver
+- resolver (done)
+- add in global namespace to primitve JSON model. (done)
 - cpp
-
-- add in global namespace to primitve JSON model.
 
 *** Implement module expander test                                    :story:
 

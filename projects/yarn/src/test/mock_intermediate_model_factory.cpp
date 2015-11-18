@@ -104,33 +104,25 @@ std::string module_name(const unsigned int i) {
     return stream.str();
 }
 
-dogen::yarn::nested_name mock_nested_name(const dogen::yarn::name& n) {
-    dogen::yarn::name nn;
-    nn.simple(n.simple());
-    nn.location().original_model_name(n.location().original_model_name());
-
-    dogen::yarn::nested_name r;
-    r.type(nn);
-    return r;
-}
-
 dogen::yarn::name mock_model_name(unsigned int i) {
     dogen::yarn::name_factory nf;
     return nf.build_model_name(model_name(i));
 }
 
+dogen::yarn::nested_name mock_nested_name(const dogen::yarn::name& n) {
+    dogen::yarn::nested_name r;
+    r.type(n);
+    return r;
+}
+
 dogen::yarn::nested_name
 mock_nested_name_shared_ptr(const dogen::yarn::name& n) {
-    dogen::yarn::name e;
-    e.simple("shared_ptr");
-    e.location().original_model_name("boost");
-
     dogen::yarn::nested_name r;
-    r.type(e);
+    dogen::yarn::name_factory nf;
+    r.type(nf.build_element_name("boost", "shared_ptr"));
 
     dogen::yarn::nested_name c;
     c.type(n);
-
     r.children(std::list<dogen::yarn::nested_name> { c });
 
     return r;
@@ -140,58 +132,33 @@ dogen::yarn::nested_name mock_nested_name(
     dogen::yarn::test::mock_intermediate_model_factory::property_types pt) {
     using namespace dogen::yarn;
 
-    name n;
     nested_name r;
-
+    dogen::yarn::name_factory nf;
     typedef test::mock_intermediate_model_factory::property_types property_types;
     switch(pt) {
     case property_types::unsigned_int:
-        n.simple(unsigned_int);
-        r.type(n);
+        r.type(nf.build_element_name(unsigned_int));
         break;
     case property_types::boolean:
-        n.simple(boolean);
-        r.type(n);
+        r.type(nf.build_element_name(boolean));
         break;
     case property_types::boost_variant: {
-        name e;
-        e.simple("variant");
-        e.location().original_model_name("boost");
-        r.type(e);
-
-        name f;
-        f.simple(boolean);
-        nested_name c;
-        c.type(f);
-
-        name g;
-        g.simple(unsigned_int);
-        nested_name d;
-        d.type(g);
-        r.children(std::list<nested_name> { c, d });
+        r.type(nf.build_element_name("boost", "variant"));
+        r.children(std::list<nested_name> {
+                mock_nested_name(nf.build_element_name(boolean)),
+                mock_nested_name(nf.build_element_name(unsigned_int))
+        });
         break;
     }
     case property_types::std_string:
-        n.simple("string");
-        n.location().original_model_name("std");
-        r.type(n);
+        r.type(nf.build_element_name("std", "string"));
         break;
     case property_types::std_pair: {
-        name e;
-        e.simple("pair");
-        e.location().original_model_name("std");
-        r.type(e);
-
-        name f;
-        f.simple(boolean);
-        nested_name c;
-        c.type(f);
-
-        name g;
-        g.simple(boolean);
-        nested_name d;
-        d.type(g);
-        r.children(std::list<nested_name> { c, d });
+        r.type(nf.build_element_name("std", "pair"));
+        r.children(std::list<nested_name> {
+                mock_nested_name(nf.build_element_name(boolean)),
+                mock_nested_name(nf.build_element_name(boolean))
+        });
         break;
     }
     default:
@@ -201,16 +168,21 @@ dogen::yarn::nested_name mock_nested_name(
     return r;
 }
 
+std::list<std::string> make_internal_module_path(const unsigned int module_n) {
+    std::list<std::string> r;
+    for (unsigned int i(0); i < module_n; ++i)
+        r.push_back(module_name(i));
+    return r;
+}
+
 void populate_object(dogen::yarn::object& o, const unsigned int i,
     const dogen::yarn::name& model_name, const unsigned int module_n) {
 
-    dogen::yarn::name n;
-    n.location().original_model_name(
-        model_name.location().original_model_name());
-    n.simple(type_name(i));
+    const auto sn(type_name(i));
+    const auto ipp(make_internal_module_path(module_n));
 
-    for (unsigned int i(0); i < module_n; ++i)
-        n.location().internal_module_path().push_back(module_name(i));
+    dogen::yarn::name_factory nf;
+    dogen::yarn::name n(nf.build_element_in_model(model_name, sn, ipp));
 
     o.name(n);
     o.generation_type(dogen::yarn::generation_types::full_generation);
@@ -490,11 +462,7 @@ void mock_intermediate_model_factory::handle_model_module(
     if (!add_model_module)
         return;
 
-    name n;
-    n.location().original_model_name(
-        m.name().location().original_model_name());
-    n.simple(m.name().simple());
-    const auto module(make_module(n, documentation));
+    const auto module(make_module(m.name(), documentation));
     insert_nameable(m.modules(), module);
 }
 
@@ -519,10 +487,8 @@ object mock_intermediate_model_factory::make_value_object(unsigned int i,
 concept mock_intermediate_model_factory::make_concept(const unsigned int i,
     const name& model_name) const {
 
-    name n;
-    n.location().original_model_name(
-        model_name.location().original_model_name());
-    n.simple(concept_name(i));
+    dogen::yarn::name_factory nf;
+    dogen::yarn::name n(nf.build_element_in_model(model_name, concept_name(i)));
 
     concept r;
     r.name(n);
@@ -538,13 +504,12 @@ concept mock_intermediate_model_factory::make_concept(const unsigned int i,
 enumeration mock_intermediate_model_factory::
 make_enumeration(const unsigned int i, const name& model_name,
     const unsigned int module_n) const {
-    name n;
-    n.location().original_model_name(
-        model_name.location().original_model_name());
-    n.simple(type_name(i));
 
-    for (unsigned int i(0); i < module_n; ++i)
-        n.location().internal_module_path().push_back(module_name(i));
+    const auto sn(type_name(i));
+    const auto ipp(make_internal_module_path(module_n));
+
+    dogen::yarn::name_factory nf;
+    dogen::yarn::name n(nf.build_element_in_model(model_name, sn, ipp));
 
     enumeration r;
     r.name(n);
@@ -573,13 +538,12 @@ make_enumeration(const unsigned int i, const name& model_name,
 
 object mock_intermediate_model_factory::make_exception(const unsigned int i,
     const name& model_name, const unsigned int module_n) const {
-    name n;
-    n.location().original_model_name(
-        model_name.location().original_model_name());
-    n.simple(type_name(i));
 
-    for (unsigned int i(0); i < module_n; ++i)
-        n.location().internal_module_path().push_back(module_name(i));
+    const auto sn(type_name(i));
+    const auto ipp(make_internal_module_path(module_n));
+
+    dogen::yarn::name_factory nf;
+    dogen::yarn::name n(nf.build_element_in_model(model_name, sn, ipp));
 
     object r;
     r.name(n);

@@ -48,17 +48,26 @@ public:
         const std::string& external_module_path = std::string()) const;
 
     /**
-     * @brief Given a model name, builds the corresponding root module
-     * name.
+     * @brief Given the components of a name for an element, creates
+     * the element name.
      */
-    name build_root_module_name(const name& model_name) const;
+    /**@{*/
+    name build_element_name(const std::string& simple_name) const;
+    name build_element_name(const std::string& model_name,
+        const std::string& simple_name) const;
+    /**@}*/
 
     /**
      * @brief Given a simple name for an element and the name of the
      * model it is located in, creates the element name.
      */
+    /**@{*/
     name build_element_in_model(const name& model_name,
         const std::string& simple_name) const;
+    name build_element_in_model(const name& model_name,
+        const std::string& simple_name,
+        const std::list<std::string>& internal_module_path) const;
+    /**@}*/
 
     /**
      * @brief Given a simple name for an element and the name of the
@@ -74,6 +83,20 @@ public:
      */
     name build_module_name(const name& model_name,
         const std::list<std::string>& internal_module_path) const;
+
+    /**
+     * @brief Combines element name with model name.
+     */
+    name build_combined_element_name(const name& model_name,
+        const name& partial_element_name,
+        const bool populate_model_name_if_blank = false) const;
+
+    /**
+     * @brief Promotes the first name of the internal module path to
+     * become the model name.
+     */
+    name build_promoted_module_name(const name& model_name,
+        const name& element_name) const;
 };
 
 } }

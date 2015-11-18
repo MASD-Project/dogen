@@ -27,10 +27,12 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/yarn/types/resolution_error.hpp"
+#include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/nested_name_io.hpp"
 #include "dogen/yarn/io/property_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/resolver.hpp"
 
 using namespace dogen::utility::log;
@@ -53,6 +55,102 @@ namespace dogen {
 namespace yarn {
 
 resolver::resolver(intermediate_model& m) : model_(m), has_resolved_(false) { }
+
+bool resolver::is_name_in_model(const name& n) const {
+    BOOST_LOG_SEV(lg, debug) << "Finding name:" << n;
+
+    auto i(model_.objects().find(n));
+    if (i != model_.objects().end()) {
+        BOOST_LOG_SEV(lg, debug) << "Name belongs to an object in model.";
+        return true;
+    }
+
+    auto j(model_.enumerations().find(n));
+    if (j != model_.enumerations().end()) {
+        BOOST_LOG_SEV(lg, debug) << "Name belongs to an enumeration in model.";
+        return true;
+    }
+
+    auto k(model_.primitives().find(n));
+    if (k != model_.primitives().end()) {
+        BOOST_LOG_SEV(lg, debug) << "Name belongs to a primitive in model.";
+        return true;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Name not found in model.";
+    return false;
+}
+
+name resolver::resolve_partial_type(const name& n) const {
+    BOOST_LOG_SEV(lg, debug) << "Resolving type:" << n.qualified();
+
+    /* first try the type as it was read originally. This caters for
+     * types placed in the global namespace.
+     */
+    if (is_name_in_model(n))
+        return n;
+
+    /* then handle the case of the type belonging to the current
+     * model. It either has no model name at all, or it has a model
+     * name but no external module path. We cater for both cases.
+     */
+    name_factory nf;
+    {
+        const auto r(nf.build_combined_element_name(model_.name(), n,
+                true/*populate_model_name_if_blank*/));
+
+        if (is_name_in_model(r))
+            return r;
+    }
+
+    /* now handle the case where the type belongs to a reference, but
+     * is missing the external module path.
+     */
+    for (const auto& pair : model_.references()) {
+        const auto r(nf.build_combined_element_name(pair.first, n));
+
+        if (is_name_in_model(r))
+            return r;
+    }
+
+    /* finally handle the case where a model has a package with the
+     * same name as a reference model.
+     */
+    {
+        auto r(nf.build_promoted_module_name(model_.name(), n));
+        BOOST_LOG_SEV(lg, error) << r;
+        if (is_name_in_model(r))
+            return r;
+    }
+
+    BOOST_LOG_SEV(lg, error) << undefined_type << n.qualified();
+    BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.qualified()));
+}
+
+void resolver::resolve_partial_type(nested_name& nn) const {
+    for (auto& cnn : nn.children())
+        resolve_partial_type(cnn);
+
+    name n(resolve_partial_type(nn.type()));
+    BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.qualified() << ".";
+    nn.type(n);
+}
+
+void resolver::
+resolve_properties(const name& owner, std::list<property>& p) const {
+    for (auto& prop : p) {
+        try {
+            resolve_partial_type(prop.type());
+        } catch (boost::exception& e) {
+            std::ostringstream s;
+            s << "Owner type name: " << owner.qualified()
+              << " Property name: " << prop.name()
+              << " Property type: " << prop.type();
+            e << errmsg_info(s.str());
+            throw;
+        }
+    }
+}
 
 void resolver::validate_inheritance_graph(const object& ao) const {
     auto i(ao.relationships().find(relationship_types::parents));
@@ -99,127 +197,6 @@ void resolver::validate_refinements(const concept& c) const {
 
             BOOST_LOG_SEV(lg, error) << stream.str();
             BOOST_THROW_EXCEPTION(resolution_error(stream.str()));
-        }
-    }
-}
-
-name resolver::resolve_partial_type(const name& n) const {
-    BOOST_LOG_SEV(lg, debug) << "Resolving type:" << n.qualified();
-
-    name r(n);
-
-    // first try the type as it was read originally.
-    const auto& objects(model_.objects());
-    auto i(objects.find(r));
-    if (i != objects.end())
-        return r;
-
-    // then try setting module path to the target one
-    r.location().external_module_path(
-        model_.name().location().external_module_path());
-    i = objects.find(r);
-    if (i != objects.end())
-        return r;
-
-    // now try all available module paths from references
-    for (const auto& pair : model_.references()) {
-        const auto n(pair.first);
-        r.location().external_module_path(
-            n.location().external_module_path());
-        i = objects.find(r);
-        if (i != objects.end())
-            return r;
-    }
-
-    // reset external module path
-    r.location().external_module_path(std::list<std::string>{});
-
-    // its not a object, could it be a primitive?
-    const auto& primitives(model_.primitives());
-    auto j(primitives.find(r));
-    if (j != primitives.end())
-        return r;
-
-    // try enumerations
-    const auto& enumerations(model_.enumerations());
-    auto k(enumerations.find(r));
-    if (k != enumerations.end())
-        return r;
-
-    // then try setting module path to the target one
-    r.location().external_module_path(
-        model_.name().location().external_module_path());
-    k = enumerations.find(r);
-    if (k != enumerations.end())
-        return r;
-
-    // now try all available module paths from references
-    for (const auto& pair : model_.references()) {
-        const auto n(pair.first);
-        r.location().external_module_path(
-            n.location().external_module_path());
-        k = enumerations.find(r);
-        if (k != enumerations.end())
-            return r;
-    }
-
-    if (r.location().original_model_name().empty()) {
-        const auto& l(model_.name().location());
-        // it could be a type defined in this model
-        r.location().original_model_name(l.original_model_name());
-        r.location().external_module_path(l.external_module_path());
-        i = objects.find(r);
-        if (i != objects.end())
-            return r;
-
-        auto k(enumerations.find(r));
-        if (k != enumerations.end())
-            return r;
-    }
-
-    // handle the case where a model has a package with the same name
-    // as a reference model. FIXME: big hack.
-    {
-        name n;
-        n.simple(r.simple());
-
-        if (!r.location().internal_module_path().empty()) {
-            n.location().original_model_name(
-                r.location().internal_module_path().front());
-        }
-        n.location().external_module_path(
-            model_.name().location().external_module_path());
-
-        i = objects.find(n);
-        if (i != objects.end())
-            return n;
-    }
-
-    BOOST_LOG_SEV(lg, error) << undefined_type << n.qualified();
-    BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.qualified()));
-}
-
-void resolver::resolve_partial_type(nested_name& nn) const {
-    for (auto& cnn : nn.children())
-        resolve_partial_type(cnn);
-
-    name n(resolve_partial_type(nn.type()));
-    BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.qualified() << ".";
-    nn.type(n);
-}
-
-void resolver::
-resolve_properties(const name& owner, std::list<property>& p) const {
-    for (auto& prop : p) {
-        try {
-            resolve_partial_type(prop.type());
-        } catch (boost::exception& e) {
-            std::ostringstream s;
-            s << "Owner type name: " << owner.qualified()
-              << " Property name: " << prop.name()
-              << " Property type: " << prop.type();
-            e << errmsg_info(s.str());
-            throw;
         }
     }
 }

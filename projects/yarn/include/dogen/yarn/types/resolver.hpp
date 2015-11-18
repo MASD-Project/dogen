@@ -65,6 +65,12 @@ public:
 
 private:
     /**
+     * @brief Returns true if the name is in the model, false
+     * otherwise.
+     */
+    bool is_name_in_model(const name& n) const;
+
+    /**
      * @brief Resolves a partially formed name into a full name.
      */
     name resolve_partial_type(const name& n) const;
