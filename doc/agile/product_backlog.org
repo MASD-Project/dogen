@@ -21,14 +21,6 @@ meta-data.
 We still use these terms frequently. We should define them in dynamic
 to have specific meanings.
 
-*** Rename types in =yarn= using MOF/eCore terms                      :story:
-
-Rename the types in =yarn= to make them a bit more inline with
-MOF/eCore. As much as possible but without going overboard. Ensure we
-do not pick up meta-meta-model concepts by mistake. Rename nested
-qname to something more sensible from MOF/eCore. Review all concept
-names in this light.
-
 *** Refactor ownership hierarchy                                      :story:
 
 Start implementing the archetype logic. Basically there is a artefact
@@ -115,50 +107,6 @@ Actually this could be the first case where LAM/PIM is used: we could
 call this something like integer.
 
 This is also hacked in yarn_dia's transformer.
-
-*** Add support for Language Agnostic Models (LAM)                    :story:
-
-When we start supporting more than one language, one interesting
-feature would be to be able to define a model once and have it
-generated for all supported languages. This would be achieved by
-having a system model (or set of system models) that define all the
-key types in a language agnostic manner. For example:
-
-: lam::string
-: lam::int
-: lam::int16
-
-Each of these types then has a set of meta-data fields that map them
-to a type in a supported language:
-
-: lam:string: cpp.concrete_type_mapping = std::string
-: lam:string: csharp.concrete_type_mapping = string
-
-And so on. We load the user model that makes use of LAM, we generate
-the merged model still with LAM types and then we perform a
-translation for each of the supported and enabled languages: for every
-LAM type, we replace all its references with the corresponding
-concrete type. We need to split the supplied mapping into a QName, use
-the QName to load the system models for that language, look up the
-type and replace it. After the translation no LAM types are left. We
-end up with N SML merged models where N is the number of supported and
-enabled languages.
-
-Each of these models is then sent down to code generation. This should
-be equivalent to manually generating models per language - we could
-use this as a test.
-
-Once we have LAM, it would be great to be able to exchange data
-between languages. This could be done as follows:
-
-- XML: create a "LAM" XML schema, and a set of formatters that read
-  and write from it. This is kind of like reverse mapping the types
-  back to LAM types when writing the XML.
-- JSON: similar approach to XML, minus the schema.
-- POF: use the coherence libraries to dump the models into POF.
-
-FIXME: we believed this story was already backloged but could not find
-it on a quick search. Do a more thorough search.
 
 *** Thoughts on simplifying the formattables generation               :story:
 
@@ -349,71 +297,6 @@ to stem from. For example:
 could be replaced with =has_swap=, or perhaps even =has_public_swap= /
 =has_protected_swap=.
 
-*** Add support for pulling dependencies from biicode                 :story:
-
-[[https://www.biicode.com/][Biicode]] is a nuget-like repo for c++. We should look into both
-consuming dependencies from it and pushing dogen into it. In addition
-there are associated emblems:
-
-https://github.com/Manu343726/snail
-
-We should also look into [[https://www.biicode.com/biicode-open-source-challenge][the challenge]].
-
-We should push both the C++ libraries as well as the dogen binary.
-
-We should take the least intrusive possible approach to start with, by
-creating a split setup for biicode.
-
-*** Create a blog post on biicode                                     :story:
-
-Investigate adding biicode support since we need to add a RapidJson
-dependency. Create a blog post about it.
-
-Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
-
-*** Compile dogen in Windows using Visual Studio 2015                 :story:
-
-Using our "SoC" resources, we need to setup a Dogen development
-environment on Windows using VS 2015. We need to also create a blog
-post about it.
-
-Issues:
-
-- is polymorphic in instrinsics for microsoft, remove comment. see
-  patch in github.
-- update find boost with MSVC version
-- add string to enum io
-- update exception classes: remove default in base constructor, and
-  add explicit to base and derived as well as by ref.
-
-File with instructions:
-
-0. cd c:\DEVELOPEMENT\output
-1. (only once - as admin) update version of msvc in cmake C:\Program
-  Files (x86)\CMake\share\cmake-3.3\Modules\FindBoost.cmake
-  look for msvc-140 and update it to msvc-150
-2. set CMAKE_INCLUDE_PATH=C:\boost\include;C:\DEVELOPEMENT\libxml2-2.7.8.win32\include
-   set CMAKE_LIBRARY_PATH=C:\boost\lib;C:\DEVELOPEMENT\libxml2-2.7.8.win32\lib
-3. cmake ..\dogen -G "Visual Studio 14 2015" -Wno-dev (CONFIGURATION COMMAND)
-
-if you need to re-run: delete the cache:
-
-del CMakeCache.txt
-
-4. msbuild dogen.sln /t:config
-
-5.msbuild dogen.sln /t:dia /fileLogger   => used to create log for
-  errors- called msbuild.log in output directory
-
-Links:
-
-- [[http://dominoc925.blogspot.co.uk/2013/04/how-i-build-boost-for-64-bit-windows.html][How I build Boost for 64 bit Windows]]
-- [[https://svn.boost.org/trac/boost/ticket/11449][C++11 - is_polymorphic doesn't work with final-ed class in MSVC.]]
-- [[https://github.com/boostorg/type_traits/blob/04a8a9ecc2b02b7334a4b3f0459a5f62b855cc68/include/boost/type_traits/intrinsics.hpp][type_traits/include/boost/type_traits/intrinsics.hpp]]
-- [[http://stackoverflow.com/questions/20800166/cmake-compile-with-mt-instead-of-md][CMake - compile with /MT instead of /MD]]
-- [[http://www.cmake.org/cmake/help/v3.1/manual/cmake-generators.7.html][CMake Generators]]
-- [[http://choorucode.com/2014/06/06/how-to-build-boost-for-visual-studio-2013/][How to build Boost for Visual Studio 2013]]
-
 *** Identifier parser has hard-coded primitives                       :story:
 
 Instead of using the hardware model, we have hard-coded all of the
@@ -421,13 +304,19 @@ primitives. In addition, there are some primitives which are C++
 specific (=wchar_t=), as well as others which are only valid in
 certain cases such as =void=. This needs a bit of thinking.
 
+we could look for all primitives in the global namespace. Or we could
+have a tag in the types that describes them in a way that we can
+filter: =hardware_type= flag? The problem is that we need the
+identifier parser in order to load models and we need the loaded
+models in order to locate these types.
+
 *** Improve file importer errors                                      :story:
 
 It would be nice if one could know the file, line and column where an
 error has occurred when importing any imported file. Even for Dia,
 this would make troubleshooting much easier. We need to add some
 information to the meta-model to keep track of the source of the
-types.
+types: file, line start, line end perhaps.
 
 *** Use pointer container in registrars                               :story:
 
@@ -1395,6 +1284,50 @@ text.
 The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
+
+*** Add support for Language Agnostic Models (LAM)                    :story:
+
+When we start supporting more than one language, one interesting
+feature would be to be able to define a model once and have it
+generated for all supported languages. This would be achieved by
+having a system model (or set of system models) that define all the
+key types in a language agnostic manner. For example:
+
+: lam::string
+: lam::int
+: lam::int16
+
+Each of these types then has a set of meta-data fields that map them
+to a type in a supported language:
+
+: lam:string: cpp.concrete_type_mapping = std::string
+: lam:string: csharp.concrete_type_mapping = string
+
+And so on. We load the user model that makes use of LAM, we generate
+the merged model still with LAM types and then we perform a
+translation for each of the supported and enabled languages: for every
+LAM type, we replace all its references with the corresponding
+concrete type. We need to split the supplied mapping into a QName, use
+the QName to load the system models for that language, look up the
+type and replace it. After the translation no LAM types are left. We
+end up with N SML merged models where N is the number of supported and
+enabled languages.
+
+Each of these models is then sent down to code generation. This should
+be equivalent to manually generating models per language - we could
+use this as a test.
+
+Once we have LAM, it would be great to be able to exchange data
+between languages. This could be done as follows:
+
+- XML: create a "LAM" XML schema, and a set of formatters that read
+  and write from it. This is kind of like reverse mapping the types
+  back to LAM types when writing the XML.
+- JSON: similar approach to XML, minus the schema.
+- POF: use the coherence libraries to dump the models into POF.
+
+FIXME: we believed this story was already backloged but could not find
+it on a quick search. Do a more thorough search.
 
 *** Make JSON SML a fully supported frontend                          :story:
 
@@ -5046,6 +4979,71 @@ is, what then? We can't throw.
 
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
+
+*** Add support for pulling dependencies from biicode                 :story:
+
+[[https://www.biicode.com/][Biicode]] is a nuget-like repo for c++. We should look into both
+consuming dependencies from it and pushing dogen into it. In addition
+there are associated emblems:
+
+https://github.com/Manu343726/snail
+
+We should also look into [[https://www.biicode.com/biicode-open-source-challenge][the challenge]].
+
+We should push both the C++ libraries as well as the dogen binary.
+
+We should take the least intrusive possible approach to start with, by
+creating a split setup for biicode.
+
+*** Create a blog post on biicode                                     :story:
+
+Investigate adding biicode support since we need to add a RapidJson
+dependency. Create a blog post about it.
+
+Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
+
+*** Compile dogen in Windows using Visual Studio 2015                 :story:
+
+Using our "SoC" resources, we need to setup a Dogen development
+environment on Windows using VS 2015. We need to also create a blog
+post about it.
+
+Issues:
+
+- is polymorphic in instrinsics for microsoft, remove comment. see
+  patch in github.
+- update find boost with MSVC version
+- add string to enum io
+- update exception classes: remove default in base constructor, and
+  add explicit to base and derived as well as by ref.
+
+File with instructions:
+
+0. cd c:\DEVELOPEMENT\output
+1. (only once - as admin) update version of msvc in cmake C:\Program
+  Files (x86)\CMake\share\cmake-3.3\Modules\FindBoost.cmake
+  look for msvc-140 and update it to msvc-150
+2. set CMAKE_INCLUDE_PATH=C:\boost\include;C:\DEVELOPEMENT\libxml2-2.7.8.win32\include
+   set CMAKE_LIBRARY_PATH=C:\boost\lib;C:\DEVELOPEMENT\libxml2-2.7.8.win32\lib
+3. cmake ..\dogen -G "Visual Studio 14 2015" -Wno-dev (CONFIGURATION COMMAND)
+
+if you need to re-run: delete the cache:
+
+del CMakeCache.txt
+
+4. msbuild dogen.sln /t:config
+
+5.msbuild dogen.sln /t:dia /fileLogger   => used to create log for
+  errors- called msbuild.log in output directory
+
+Links:
+
+- [[http://dominoc925.blogspot.co.uk/2013/04/how-i-build-boost-for-64-bit-windows.html][How I build Boost for 64 bit Windows]]
+- [[https://svn.boost.org/trac/boost/ticket/11449][C++11 - is_polymorphic doesn't work with final-ed class in MSVC.]]
+- [[https://github.com/boostorg/type_traits/blob/04a8a9ecc2b02b7334a4b3f0459a5f62b855cc68/include/boost/type_traits/intrinsics.hpp][type_traits/include/boost/type_traits/intrinsics.hpp]]
+- [[http://stackoverflow.com/questions/20800166/cmake-compile-with-mt-instead-of-md][CMake - compile with /MT instead of /MD]]
+- [[http://www.cmake.org/cmake/help/v3.1/manual/cmake-generators.7.html][CMake Generators]]
+- [[http://choorucode.com/2014/06/06/how-to-build-boost-for-visual-studio-2013/][How to build Boost for Visual Studio 2013]]
 
 *** Check that custom targets in CMake have correct dependencies      :story:
 

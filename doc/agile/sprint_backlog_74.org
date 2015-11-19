@@ -30,6 +30,8 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-11-19 Thu 08:44]--[2015-11-19 Thu 08:53] =>  0:09
+    CLOCK: [2015-11-19 Thu 08:04]--[2015-11-19 Thu 08:29] =>  0:25
     CLOCK: [2015-11-09 Mon 21:21]--[2015-11-09 Mon 22:50] =>  1:29
 
 Updates to sprint and product backlog.
@@ -53,8 +55,29 @@ transformer's update model reference.
 Actually this is nothing at all to do with the primitive model but all
 to do with computing the correct name. We need to start using the
 builder here.
+*** COMPLETED Create method to traverse all types when resolving names :story:
+    CLOSED: [2015-11-19 Thu 08:24]
 
-*** STARTED SML json hydrator =read_module_path= needs refactoring    :story:
+*New Understanding*
+
+We can't use all model items traversal here because we are not
+traversing all types but doing a search across the different elements
+container. However we can do a function that is reused by all.
+
+*Previous Understanding*
+
+Resolver should use all types traversal instead of hand-picked queries
+on the containers. We should do the exact same look-ups for all
+containers:
+
+- unchanged - name as it was original read out.
+- from containing module name, by moving up from the containing module
+  to the root module name (popping the internal module list of the
+  containing module until its empty).
+- from the references names, using external module path only.
+
+*** COMPLETED SML json hydrator =read_module_path= needs refactoring  :story:
+    CLOSED: [2015-11-19 Thu 08:27]
     CLOCK: [2015-11-11 Wed 21:30]--[2015-11-11 Wed 22:51] =>  1:21
 
 We have a very misleading function =read_module_path= which reads
@@ -85,27 +108,57 @@ one. This includes:
 - add in global namespace to primitve JSON model. (done)
 - cpp
 
+*** STARTED Rename yarn's =object=                                    :story:
+    CLOCK: [2015-11-19 Thu 08:35]--[2015-11-19 Thu 08:43] =>  0:08
+    CLOCK: [2015-11-19 Thu 08:29]--[2015-11-19 Thu 08:35] =>  0:06
+
+We start off by trying to follow the DDD naming but that has now been
+changed in favour of more traditional meta-model names. In this sense,
+object is not a good name as it evokes M0 rather than M1 or
+higher. Perhaps =structure=? But structures do not normally have
+methods.
+
+Actually, one crazy but possibly correct solution would be to use the
+prefix =meta=. We had decided against it many sprints ago because
+=sml= _was_ a meta-model, so it didn't make a lot of sense to use meta
+everywhere. However, now that =yarn= has grown as a proper code
+generation model - doing a lot more than just provide meta-types - we
+now only have a few types that are meta-types. These are the
+descendents of element:
+
+- =meta_class=: what we call object. This is a class that represents
+  all classes.
+- =meta_concept=: the concept that represents all concepts.
+- ...
+
+and so on. With the prefix =meta_= these names actually tell the truth
+in terms of the responsibilities of these classes. We should also
+rename the =Object= concept accordingly.
+
+Note that the stereotypes remain the same. That is =enumeration= is
+still a stereotype that applies to the current UML class, making it an
+enumeration rather than some kind of meta-enumeration. Same with
+=concept=, etc.
+
 *** Implement module expander test                                    :story:
 
 We copied across the code for the module expander test from yarn json
 but didn't actually finished implementing it.
 
+*** Rename original parents                                           :story:
+
+Inheritance follows a tree of some kind. We should use tree
+terminology for this.
+
+*** Rename all model items traversal                                  :story:
+
+We now know model items are called elements, so this should be an
+element traversal.
+
 *** Update name factory to compute qualified name                     :story:
 
 We started off by disabling the qualified name to make resolution
 work. We now need to enable it and fix all issues.
-
-*** Use all types traversal when resolving names                      :story:
-
-Resolver should use all types traversal instead of hand-picked queries
-on the containers. We should do the exact same look-ups for all
-containers:
-
-- unchanged - name as it was original read out.
-- from containing module name, by moving up from the containing module
-  to the root module name (popping the internal module list of the
-  containing module until its empty).
-- from the references names, using external module path only.
 
 *** Handle types placed in the global namespace                       :story:
 
@@ -414,13 +467,6 @@ header files called "includers". There is too much overloading. We
 should consider calling them "master header files" as per Schaling
 terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
 
-*** Rename yarn's object                                              :story:
-
-We start off by trying to follow the DDD naming but that has now been
-changed in favour of more traditional meta-model names. In this sense,
-object is not a good name as it evokes M0 rather than M1 or
-higher. Perhaps =structure=?
-
 *** Update Linux CDash agent                                          :story:
 
 We need to get the build green on the Linux agent again.
@@ -457,3 +503,15 @@ yarn. We should:
 - add a property called id to element. Compute id on the basis of
   hashing name and location. Change all model containers,
   relationships etc to use id instead of qname.
+*** CANCELLED Rename types in =yarn= using MOF/eCore terms            :story:
+    CLOSED: [2015-11-19 Thu 08:46]
+
+*Rationale*: We have more or less got to the final form for yarn given
+the use cases. There is no need for further renamings, other than the
+stories we already have open on the topic.
+
+Rename the types in =yarn= to make them a bit more inline with
+MOF/eCore. As much as possible but without going overboard. Ensure we
+do not pick up meta-meta-model concepts by mistake. Rename nested
+qname to something more sensible from MOF/eCore. Review all concept
+names in this light.
