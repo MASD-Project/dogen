@@ -2693,6 +2693,13 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+*** Consider computing hashes only once for immutable types           :story:
+
+if a type is immutable the hash should be computed once at
+construction and then cached. Not quite sure how this would be
+implemented though since we have hashing as a totally separate aspect
+from types.
+
 *** Support for locations other than filesystems                      :story:
 
 It would be nice to be able to point to a yarn intermediate model
