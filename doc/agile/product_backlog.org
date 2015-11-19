@@ -10,7 +10,7 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
-*** Consider allowing renaming of system types                        :story:
+*** Consider allowing renaming of "internal" types                    :story:
 
 Users may want to change the =_visitor= postfix for visitors or the
 boost serialisation registrar name. This could be achieved via
