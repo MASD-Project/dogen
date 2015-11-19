@@ -89,6 +89,7 @@ this into a =read= function without side-effects and a =create=
 function that creates the missing modules.
 
 *** STARTED Generate all yarn names using name factory                :story:
+    CLOCK: [2015-11-19 Thu 22:01]--[2015-11-19 Thu 22:15] =>  0:14
     CLOCK: [2015-11-17 Tue 22:54]--[2015-11-17 Tue 23:33] =>  0:39
     CLOCK: [2015-11-17 Tue 22:44]--[2015-11-17 Tue 22:53] =>  0:09
     CLOCK: [2015-11-17 Tue 21:51]--[2015-11-17 Tue 22:43] =>  0:52
