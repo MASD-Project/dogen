@@ -15,21 +15,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-18 Wed 11:51]
+#+CAPTION: Clock summary at [2015-11-19 Thu 18:17]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *10:21* |       |      |
+| *Total time*                                                                | *11:22* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 10:21   |       |      |
-| Active                                                                      |         | 10:21 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:29 |
+| Stories                                                                     | 11:22   |       |      |
+| Active                                                                      |         | 11:22 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:16 |
 | COMPLETED Write the next interesting instalment                             |         |       | 1:05 |
-| STARTED SML json hydrator =read_module_path= needs refactoring              |         |       | 1:21 |
+| COMPLETED SML json hydrator =read_module_path= needs refactoring            |         |       | 1:21 |
 | STARTED Generate all yarn names using name factory                          |         |       | 6:26 |
+| STARTED Rename yarn's =object=                                              |         |       | 0:14 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-11-19 Thu 18:04]--[2015-11-19 Thu 18:17] =>  0:13
     CLOCK: [2015-11-19 Thu 08:44]--[2015-11-19 Thu 08:53] =>  0:09
     CLOCK: [2015-11-19 Thu 08:04]--[2015-11-19 Thu 08:29] =>  0:25
     CLOCK: [2015-11-09 Mon 21:21]--[2015-11-09 Mon 22:50] =>  1:29

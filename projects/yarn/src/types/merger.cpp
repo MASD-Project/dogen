@@ -42,6 +42,8 @@ const std::string empty;
 const std::string hardware_model_name("hardware");
 const std::string msising_dependency("Cannot find target dependency: ");
 const std::string missing_target("Target model not present");
+const std::string multiple_merge("Attempt to merge more than once.");
+
 }
 
 namespace dogen {
@@ -75,11 +77,8 @@ void merger::require_not_has_merged() const {
     if (!has_merged())
         return;
 
-    std::ostringstream stream;
-    stream << "Attempt to merge more than once.";
-
-    BOOST_LOG_SEV(lg, error) << stream.str();
-    BOOST_THROW_EXCEPTION(merging_error(stream.str()));
+    BOOST_LOG_SEV(lg, error) << multiple_merge;
+    BOOST_THROW_EXCEPTION(merging_error(multiple_merge));
 }
 
 void merger::check_name(const std::string& model_name, const name& key,
