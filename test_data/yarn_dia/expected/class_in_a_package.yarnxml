@@ -54,7 +54,7 @@
 		<item class_id="18" tracking_level="0" version="0">
 			<first>
 				<simple>package1</simple>
-				<qualified></qualified>
+				<qualified>&lt;class_in_a_package&gt;&lt;package1&gt;</qualified>
 				<location>
 					<original_model_name>class_in_a_package</original_model_name>
 					<external_module_path>
@@ -86,7 +86,7 @@
 					</extensions>
 					<name>
 						<simple>package1</simple>
-						<qualified></qualified>
+						<qualified>&lt;class_in_a_package&gt;&lt;package1&gt;</qualified>
 						<location>
 							<original_model_name>class_in_a_package</original_model_name>
 							<external_module_path>
@@ -237,7 +237,7 @@
 		<item class_id="29" tracking_level="0" version="0">
 			<first>
 				<simple>first_class</simple>
-				<qualified></qualified>
+				<qualified>&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;</qualified>
 				<location>
 					<original_model_name>class_in_a_package</original_model_name>
 					<external_module_path>
@@ -270,7 +270,7 @@
 					</extensions>
 					<name>
 						<simple>first_class</simple>
-						<qualified></qualified>
+						<qualified>&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;</qualified>
 						<location>
 							<original_model_name>class_in_a_package</original_model_name>
 							<external_module_path>

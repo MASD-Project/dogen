@@ -54,20 +54,15 @@ namespace dogen {
 namespace yarn {
 
 name_builder::name_builder()
-    : compute_qualifed_name_(true),
-      simple_name_contributes_to_qualifed_name_(true),
+    : simple_name_contributes_to_qualifed_name_(true),
       infer_simple_name_from_model_name_(false) { }
 
 name_builder::name_builder(const name& n)
-    : compute_qualifed_name_(true),
-      simple_name_contributes_to_qualifed_name_(true),
+    : simple_name_contributes_to_qualifed_name_(true),
       infer_simple_name_from_model_name_(false),
       name_(n) { }
 
 void name_builder::compute_qualified_name() {
-    if (!compute_qualifed_name_)
-        return;
-
     const auto& l(name_.location());
 
     std::ostringstream s;
@@ -85,11 +80,6 @@ void name_builder::compute_qualified_name() {
 
     name_.qualified(s.str());
     BOOST_LOG_SEV(lg, debug) << "Created qualified name: " << name_.qualified();
-}
-
-name_builder& name_builder::compute_qualifed_name(const bool v) {
-    compute_qualifed_name_ = v;
-    return *this;
 }
 
 name_builder& name_builder::

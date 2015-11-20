@@ -172,7 +172,7 @@
 		<item class_id="29" tracking_level="0" version="0">
 			<first>
 				<simple>a_class</simple>
-				<qualified></qualified>
+				<qualified>&lt;all_primitives&gt;&lt;a_class&gt;</qualified>
 				<location>
 					<original_model_name>all_primitives</original_model_name>
 					<external_module_path>
@@ -204,7 +204,7 @@
 					</extensions>
 					<name>
 						<simple>a_class</simple>
-						<qualified></qualified>
+						<qualified>&lt;all_primitives&gt;&lt;a_class&gt;</qualified>
 						<location>
 							<original_model_name>all_primitives</original_model_name>
 							<external_module_path>

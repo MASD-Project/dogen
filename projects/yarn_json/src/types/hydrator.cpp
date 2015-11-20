@@ -109,8 +109,6 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
     yarn::intermediate_model& m) const {
 
     yarn::name_builder b;
-    b.compute_qualifed_name(false); // FIXME: for now
-
     const auto in_global_namespace(pt.get(in_global_namespace_key, false));
     if (!in_global_namespace)
         b.model_name(m.name().location());

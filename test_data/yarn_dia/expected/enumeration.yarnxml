@@ -54,7 +54,7 @@
 		<item class_id="18" tracking_level="0" version="0">
 			<first>
 				<simple>pkg1</simple>
-				<qualified></qualified>
+				<qualified>&lt;enumeration&gt;&lt;pkg1&gt;</qualified>
 				<location>
 					<original_model_name>enumeration</original_model_name>
 					<external_module_path>
@@ -86,7 +86,7 @@
 					</extensions>
 					<name>
 						<simple>pkg1</simple>
-						<qualified></qualified>
+						<qualified>&lt;enumeration&gt;&lt;pkg1&gt;</qualified>
 						<location>
 							<original_model_name>enumeration</original_model_name>
 							<external_module_path>
@@ -232,7 +232,7 @@
 		<item class_id="28" tracking_level="0" version="0">
 			<first>
 				<simple>shape_types</simple>
-				<qualified></qualified>
+				<qualified>&lt;enumeration&gt;&lt;pkg1&gt;&lt;shape_types&gt;</qualified>
 				<location>
 					<original_model_name>enumeration</original_model_name>
 					<external_module_path>
@@ -265,7 +265,7 @@
 					</extensions>
 					<name>
 						<simple>shape_types</simple>
-						<qualified></qualified>
+						<qualified>&lt;enumeration&gt;&lt;pkg1&gt;&lt;shape_types&gt;</qualified>
 						<location>
 							<original_model_name>enumeration</original_model_name>
 							<external_module_path>
@@ -346,7 +346,7 @@
 		<item>
 			<first>
 				<simple>colour_types</simple>
-				<qualified></qualified>
+				<qualified>&lt;enumeration&gt;&lt;colour_types&gt;</qualified>
 				<location>
 					<original_model_name>enumeration</original_model_name>
 					<external_module_path>
@@ -378,7 +378,7 @@
 					</extensions>
 					<name>
 						<simple>colour_types</simple>
-						<qualified></qualified>
+						<qualified>&lt;enumeration&gt;&lt;colour_types&gt;</qualified>
 						<location>
 							<original_model_name>enumeration</original_model_name>
 							<external_module_path>
@@ -458,7 +458,7 @@
 		<item>
 			<first>
 				<simple>book_types</simple>
-				<qualified></qualified>
+				<qualified>&lt;enumeration&gt;&lt;book_types&gt;</qualified>
 				<location>
 					<original_model_name>enumeration</original_model_name>
 					<external_module_path>
@@ -493,7 +493,7 @@ this is a long comment
 					</extensions>
 					<name>
 						<simple>book_types</simple>
-						<qualified></qualified>
+						<qualified>&lt;enumeration&gt;&lt;book_types&gt;</qualified>
 						<location>
 							<original_model_name>enumeration</original_model_name>
 							<external_module_path>
@@ -570,7 +570,7 @@ this is a long comment
 		<item class_id="32" tracking_level="0" version="0">
 			<first>
 				<simple>a_class</simple>
-				<qualified></qualified>
+				<qualified>&lt;enumeration&gt;&lt;a_class&gt;</qualified>
 				<location>
 					<original_model_name>enumeration</original_model_name>
 					<external_module_path>
@@ -602,7 +602,7 @@ this is a long comment
 					</extensions>
 					<name>
 						<simple>a_class</simple>
-						<qualified></qualified>
+						<qualified>&lt;enumeration&gt;&lt;a_class&gt;</qualified>
 						<location>
 							<original_model_name>enumeration</original_model_name>
 							<external_module_path>

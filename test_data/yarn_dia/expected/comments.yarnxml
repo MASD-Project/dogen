@@ -54,7 +54,7 @@
 		<item class_id="18" tracking_level="0" version="0">
 			<first>
 				<simple>package2</simple>
-				<qualified></qualified>
+				<qualified>&lt;comments&gt;&lt;package&gt;&lt;package2&gt;</qualified>
 				<location>
 					<original_model_name>comments</original_model_name>
 					<external_module_path>
@@ -99,7 +99,7 @@
 					</extensions>
 					<name>
 						<simple>package2</simple>
-						<qualified></qualified>
+						<qualified>&lt;comments&gt;&lt;package&gt;&lt;package2&gt;</qualified>
 						<location>
 							<original_model_name>comments</original_model_name>
 							<external_module_path>
@@ -133,7 +133,7 @@
 		<item>
 			<first>
 				<simple>package</simple>
-				<qualified></qualified>
+				<qualified>&lt;comments&gt;&lt;package&gt;</qualified>
 				<location>
 					<original_model_name>comments</original_model_name>
 					<external_module_path>
@@ -177,7 +177,7 @@
 					</extensions>
 					<name>
 						<simple>package</simple>
-						<qualified></qualified>
+						<qualified>&lt;comments&gt;&lt;package&gt;</qualified>
 						<location>
 							<original_model_name>comments</original_model_name>
 							<external_module_path>
@@ -331,7 +331,7 @@ This comment will be applied to the model namespace itself.
 		<item class_id="29" tracking_level="0" version="0">
 			<first>
 				<simple>multi_line</simple>
-				<qualified></qualified>
+				<qualified>&lt;comments&gt;&lt;multi_line&gt;</qualified>
 				<location>
 					<original_model_name>comments</original_model_name>
 					<external_module_path>
@@ -367,7 +367,7 @@ third line with &quot;quote&quot;
 					</extensions>
 					<name>
 						<simple>multi_line</simple>
-						<qualified></qualified>
+						<qualified>&lt;comments&gt;&lt;multi_line&gt;</qualified>
 						<location>
 							<original_model_name>comments</original_model_name>
 							<external_module_path>
@@ -422,7 +422,7 @@ third line with &quot;quote&quot;
 		<item>
 			<first>
 				<simple>one_line</simple>
-				<qualified></qualified>
+				<qualified>&lt;comments&gt;&lt;one_line&gt;</qualified>
 				<location>
 					<original_model_name>comments</original_model_name>
 					<external_module_path>
@@ -455,7 +455,7 @@ third line with &quot;quote&quot;
 					</extensions>
 					<name>
 						<simple>one_line</simple>
-						<qualified></qualified>
+						<qualified>&lt;comments&gt;&lt;one_line&gt;</qualified>
 						<location>
 							<original_model_name>comments</original_model_name>
 							<external_module_path>

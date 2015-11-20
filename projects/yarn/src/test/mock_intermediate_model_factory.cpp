@@ -179,7 +179,6 @@ std::list<std::string> make_internal_module_path(const unsigned int module_n) {
 
 dogen::yarn::primitive make_primitive(const std::string& simple_name) {
     dogen::yarn::name_builder b;
-    b.compute_qualifed_name(false); // FIXME
     b.simple_name(simple_name);
 
     dogen::yarn::primitive r;
@@ -592,7 +591,6 @@ name mock_intermediate_model_factory::make_name(const unsigned int model_n,
     const unsigned int simple_n) const {
 
     name_builder b;
-    b.compute_qualifed_name(false); // FIXME
     b.simple_name(simple_type_name(simple_n));
     b.model_name(simple_model_name(model_n));
     return b.build();

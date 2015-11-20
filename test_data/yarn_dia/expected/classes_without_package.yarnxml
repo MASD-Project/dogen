@@ -172,7 +172,7 @@
 		<item class_id="29" tracking_level="0" version="0">
 			<first>
 				<simple>class_5</simple>
-				<qualified></qualified>
+				<qualified>&lt;classes_without_package&gt;&lt;class_5&gt;</qualified>
 				<location>
 					<original_model_name>classes_without_package</original_model_name>
 					<external_module_path>
@@ -204,7 +204,7 @@
 					</extensions>
 					<name>
 						<simple>class_5</simple>
-						<qualified></qualified>
+						<qualified>&lt;classes_without_package&gt;&lt;class_5&gt;</qualified>
 						<location>
 							<original_model_name>classes_without_package</original_model_name>
 							<external_module_path>
@@ -299,7 +299,7 @@
 		<item>
 			<first>
 				<simple>class_1</simple>
-				<qualified></qualified>
+				<qualified>&lt;classes_without_package&gt;&lt;class_1&gt;</qualified>
 				<location>
 					<original_model_name>classes_without_package</original_model_name>
 					<external_module_path>
@@ -331,7 +331,7 @@
 					</extensions>
 					<name>
 						<simple>class_1</simple>
-						<qualified></qualified>
+						<qualified>&lt;classes_without_package&gt;&lt;class_1&gt;</qualified>
 						<location>
 							<original_model_name>classes_without_package</original_model_name>
 							<external_module_path>
@@ -426,7 +426,7 @@
 		<item>
 			<first>
 				<simple>class_2</simple>
-				<qualified></qualified>
+				<qualified>&lt;classes_without_package&gt;&lt;class_2&gt;</qualified>
 				<location>
 					<original_model_name>classes_without_package</original_model_name>
 					<external_module_path>
@@ -458,7 +458,7 @@
 					</extensions>
 					<name>
 						<simple>class_2</simple>
-						<qualified></qualified>
+						<qualified>&lt;classes_without_package&gt;&lt;class_2&gt;</qualified>
 						<location>
 							<original_model_name>classes_without_package</original_model_name>
 							<external_module_path>
@@ -553,7 +553,7 @@
 		<item>
 			<first>
 				<simple>class_3</simple>
-				<qualified></qualified>
+				<qualified>&lt;classes_without_package&gt;&lt;class_3&gt;</qualified>
 				<location>
 					<original_model_name>classes_without_package</original_model_name>
 					<external_module_path>
@@ -585,7 +585,7 @@
 					</extensions>
 					<name>
 						<simple>class_3</simple>
-						<qualified></qualified>
+						<qualified>&lt;classes_without_package&gt;&lt;class_3&gt;</qualified>
 						<location>
 							<original_model_name>classes_without_package</original_model_name>
 							<external_module_path>
@@ -680,7 +680,7 @@
 		<item>
 			<first>
 				<simple>class_4</simple>
-				<qualified></qualified>
+				<qualified>&lt;classes_without_package&gt;&lt;class_4&gt;</qualified>
 				<location>
 					<original_model_name>classes_without_package</original_model_name>
 					<external_module_path>
@@ -712,7 +712,7 @@
 					</extensions>
 					<name>
 						<simple>class_4</simple>
-						<qualified></qualified>
+						<qualified>&lt;classes_without_package&gt;&lt;class_4&gt;</qualified>
 						<location>
 							<original_model_name>classes_without_package</original_model_name>
 							<external_module_path>

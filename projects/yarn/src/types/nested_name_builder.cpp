@@ -61,7 +61,6 @@ void nested_name_builder::add_primitive(const std::string& s) {
     BOOST_LOG_SEV(lg, debug) << "pushing back primitive :" << s;
 
     name_builder b;
-    b.compute_qualifed_name(false);
     b.simple_name(s);
     current_->data(b.build());
 }
@@ -72,12 +71,7 @@ void nested_name_builder::finish_current_node() {
     if (names_.empty())
         return;
 
-    /*
-     * Setup the name builder. We must not yet compute the qualified
-     * name as we do not know if we have a fully formed name.
-     */
     name_builder b;
-    b.compute_qualifed_name(false);
 
     /*
      * If we have a single name, we are either referencing a type

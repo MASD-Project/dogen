@@ -15,20 +15,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-20 Fri 23:09]
+#+CAPTION: Clock summary at [2015-11-20 Fri 23:21]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *13:49* |       |      |
+| *Total time*                                                                | *14:00* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 13:49   |       |      |
-| Active                                                                      |         | 13:49 |      |
+| Stories                                                                     | 14:00   |       |      |
+| Active                                                                      |         | 14:00 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:45 |
 | COMPLETED Write the next interesting instalment                             |         |       | 1:05 |
 | COMPLETED SML json hydrator =read_module_path= needs refactoring            |         |       | 1:21 |
 | COMPLETED Generate all yarn names using name factory                        |         |       | 7:25 |
 | COMPLETED Rename yarn's =object=                                            |         |       | 0:14 |
 | COMPLETED Populate model module path                                        |         |       | 0:59 |
+| COMPLETED Update name factory and builder to compute qualified name         |         |       | 0:11 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -184,7 +185,9 @@ need for a prefix. The only problem is =object=.
 
 We need to start updating model name.
 
-*** Update name factory to compute qualified name                     :story:
+*** COMPLETED Update name factory and builder to compute qualified name :story:
+    CLOSED: [2015-11-20 Fri 23:21]
+    CLOCK: [2015-11-20 Fri 23:10]--[2015-11-20 Fri 23:21] =>  0:11
 
 We started off by disabling the qualified name to make resolution
 work. We now need to enable it and fix all issues.

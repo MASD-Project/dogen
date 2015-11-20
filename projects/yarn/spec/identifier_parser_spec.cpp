@@ -67,7 +67,6 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_na
     const auto a(ip.parse_name(s));
 
     dogen::yarn::name_builder b;
-    b.compute_qualifed_name(false); // FIXME
     b.simple_name("z");
     b.model_name("a");
     b.internal_module_path(std::list<std::string> { "b", "c"});
@@ -170,46 +169,39 @@ BOOST_AUTO_TEST_CASE(unsignable_types_cannot_be_unsigned) {
 BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expected_nested_names) {
     SETUP_TEST_LOG_SOURCE("parsing_string_with_single_template_argument_produces_expected_nested_names");
 
-    dogen::yarn::identifier_parser ip;
     dogen::yarn::nested_name nn;
-    dogen::yarn::name e;
-    e.simple("type");
-    nn.type(e);
+    dogen::yarn::name_factory nf;
+    nn.type(nf.build_element_name("type"));
 
-    dogen::yarn::name f;
-    f.simple("abc");
     dogen::yarn::nested_name c;
-    c.type(f);
+    c.type(nf.build_element_name("abc"));
     nn.children(std::list<dogen::yarn::nested_name> { c });
 
     const std::string s("type<abc>");
 
+    dogen::yarn::identifier_parser ip;
     const auto a(ip.parse_name(s));
     BOOST_CHECK(asserter::assert_equals(nn, a));
 }
 
 BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected_nested_names) {
     SETUP_TEST_LOG_SOURCE("parsing_string_with_two_template_argument_produces_expected_nested_names");
-    dogen::yarn::identifier_parser ip;
+
     dogen::yarn::nested_name nn;
-    dogen::yarn::name e;
-    e.simple("type");
-    nn.type(e);
+    dogen::yarn::name_factory nf;
+    nn.type(nf.build_element_name("type"));
 
-    dogen::yarn::name f;
-    f.simple("abc");
     dogen::yarn::nested_name c;
-    c.type(f);
+    c.type(nf.build_element_name("abc"));
 
-    dogen::yarn::name g;
-    g.simple("cde");
     dogen::yarn::nested_name d;
-    d.type(g);
+    d.type(nf.build_element_name("cde"));
     nn.children(std::list<dogen::yarn::nested_name> { c, d });
 
     const std::string s("type<abc,cde>");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
+    dogen::yarn::identifier_parser ip;
     const auto a(ip.parse_name(s));
     BOOST_CHECK(asserter::assert_equals(nn, a));
 }
