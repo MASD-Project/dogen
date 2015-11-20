@@ -52,7 +52,7 @@ private:
         const std::string& source_formatter_name,
         const std::string& destination_formatter_name) const;
 
-    yarn::name create_name(const yarn::intermediate_model& m,
+    yarn::name create_name(const yarn::name& model_name,
         const std::string& simple_name) const;
 
     path_derivatives create_path_derivatives(

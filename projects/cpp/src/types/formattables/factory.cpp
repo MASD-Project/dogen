@@ -25,6 +25,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/cpp/types/settings/aspect_settings_factory.hpp"
 #include "dogen/cpp/io/formattables/includers_info_io.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
@@ -136,15 +137,10 @@ factory::clone_path_settings(
     return r;
 }
 
-yarn::name factory::create_name(const yarn::intermediate_model& m,
+yarn::name factory::create_name(const yarn::name& model_name,
     const std::string& simple_name) const {
-
-    yarn::name r;
-    r.simple(simple_name);
-    r.location().original_model_name(m.name().location().original_model_name());
-    r.location().external_module_path(
-        m.name().location().external_module_path());
-    return r;
+    yarn::name_factory nf;
+    return nf.build_element_in_model(model_name, simple_name);
 }
 
 path_derivatives factory::create_path_derivatives(
@@ -195,7 +191,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     const formatter_properties_repository& fprp,
     const yarn::intermediate_model& m) const {
 
-    const auto n(create_name(m, registrar_name));
+    const auto n(create_name(m.name(), registrar_name));
     BOOST_LOG_SEV(lg, debug) << "Making registrar: " << n.qualified();
 
     name_builder b;
@@ -283,14 +279,14 @@ make_includers(
     const formatter_properties_repository& fprp,
     const yarn::intermediate_model& m) const {
 
-    const auto n(create_name(m, includers_name));
+    const auto n(create_name(m.name(), includers_name));
     BOOST_LOG_SEV(lg, debug) << "Making includers: " << n.qualified();
 
     std::unordered_map<std::string, std::list<std::string> >
         includes_by_formatter_name;
 
     const auto omn(m.name().location().original_model_name());
-    const auto registrar_n(create_name(m, registrar_name));
+    const auto registrar_n(create_name(m.name(), registrar_name));
     for (const auto& n_pair : pdrp.path_derivatives_by_name()) {
         const auto n(n_pair.first);
 

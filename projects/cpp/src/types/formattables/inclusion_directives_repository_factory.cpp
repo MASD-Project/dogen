@@ -24,6 +24,7 @@
 #include "dogen/utility/io/pair_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/io/formattables/inclusion_directives_repository_io.hpp"
@@ -110,11 +111,8 @@ inclusion_directives_repository inclusion_directives_repository_factory::make(
     generator g(f);
     yarn::all_model_items_traversal(m, g);
 
-    yarn::name n;
-    n.simple(registrar_name);
-    n.location().original_model_name(m.name().location().original_model_name());
-    n.location().external_module_path(
-        m.name().location().external_module_path());
+    yarn::name_factory nf;
+    const auto n(nf.build_element_in_model(m.name(), registrar_name));
     const auto o = dynamic::object();
     g.generate(o, n);
 
@@ -124,11 +122,7 @@ inclusion_directives_repository inclusion_directives_repository_factory::make(
             continue;
 
         const auto ref(pair.first);
-        yarn::name n;
-        n.location().original_model_name(ref.location().original_model_name());
-        n.simple(registrar_name);
-        n.location().external_module_path(
-            ref.location().external_module_path());
+        const auto n(nf.build_element_in_model(ref, registrar_name));
         g.generate(o, n);
     }
     const auto r(g.result());

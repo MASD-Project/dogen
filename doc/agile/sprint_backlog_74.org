@@ -15,18 +15,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-20 Fri 12:30]
+#+CAPTION: Clock summary at [2015-11-20 Fri 22:10]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *12:25* |       |      |
+| *Total time*                                                                | *12:50* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 12:25   |       |      |
-| Active                                                                      |         | 12:25 |      |
+| Stories                                                                     | 12:50   |       |      |
+| Active                                                                      |         | 12:50 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:45 |
 | COMPLETED Write the next interesting instalment                             |         |       | 1:05 |
 | COMPLETED SML json hydrator =read_module_path= needs refactoring            |         |       | 1:21 |
-| STARTED Generate all yarn names using name factory                          |         |       | 7:00 |
+| COMPLETED Generate all yarn names using name factory                        |         |       | 7:25 |
 | STARTED Rename yarn's =object=                                              |         |       | 0:14 |
 #+end:
 
@@ -88,7 +88,9 @@ modules but also creates modules that do not exist. We need to split
 this into a =read= function without side-effects and a =create=
 function that creates the missing modules.
 
-*** STARTED Generate all yarn names using name factory                :story:
+*** COMPLETED Generate all yarn names using name factory              :story:
+    CLOSED: [2015-11-20 Fri 22:10]
+    CLOCK: [2015-11-20 Fri 21:05]--[2015-11-20 Fri 21:30] =>  0:25
     CLOCK: [2015-11-20 Fri 12:10]--[2015-11-20 Fri 12:30] =>  0:20
     CLOCK: [2015-11-19 Thu 22:01]--[2015-11-19 Thu 22:15] =>  0:14
     CLOCK: [2015-11-17 Tue 22:54]--[2015-11-17 Tue 23:33] =>  0:39
@@ -111,7 +113,7 @@ one. This includes:
 - yarn json (done)
 - resolver (done)
 - add in global namespace to primitve JSON model. (done)
-- cpp
+- cpp (done)
 
 *** STARTED Rename yarn's =object=                                    :story:
     CLOCK: [2015-11-19 Thu 08:35]--[2015-11-19 Thu 08:43] =>  0:08

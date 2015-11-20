@@ -23,6 +23,7 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/repository_selector.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/io/formattables/enablement_repository_io.hpp"
@@ -147,11 +148,8 @@ enablement_repository enablement_repository_factory::make(
     yarn::all_model_items_traversal(m, g);
     auto r(g.result());
 
-    yarn::name n;
-    n.simple(registrar_name);
-    n.location().original_model_name(m.name().location().original_model_name());
-    n.location().external_module_path(
-        m.name().location().external_module_path());
+    yarn::name_factory nf;
+    const auto n(nf.build_element_in_model(m.name(), registrar_name));
     const auto e(f.make(root_object));
     r.enablement_by_name()[n] = e;
 
@@ -161,11 +159,8 @@ enablement_repository enablement_repository_factory::make(
             continue;
 
         const auto ref(pair.first);
-        yarn::name n;
-        n.simple(registrar_name);
-        n.location().original_model_name(ref.location().original_model_name());
-        n.location().external_module_path(
-            ref.location().external_module_path());
+        yarn::name_factory nf;
+        const auto n(nf.build_element_in_model(ref, registrar_name));
         r.enablement_by_name()[n] = e;
     }
 
