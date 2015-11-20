@@ -81,8 +81,13 @@ public:
      * internal module path. Uses the back of the module path to name
      * the module.
      */
+    /**@{*/
     name build_module_name(const name& model_name,
         const std::list<std::string>& internal_module_path) const;
+    name build_module_name(const name& model_name,
+        const std::string& module_name,
+        const std::list<std::string>& internal_module_path) const;
+    /**@}*/
 
     /**
      * @brief Combines element name with model name.

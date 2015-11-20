@@ -54,7 +54,6 @@ name name_factory::build_model_name(const std::string& model_name,
 
 name name_factory::build_element_name(const std::string& simple_name) const {
     name_builder b;
-    b.infer_simple_name_from_model_name(false);
     b.compute_qualifed_name(false); // FIXME
     b.simple_name(simple_name);
     return b.build();
@@ -64,7 +63,6 @@ name name_factory::build_element_name(const std::string& model_name,
     const std::string& simple_name) const {
 
     name_builder b;
-    b.infer_simple_name_from_model_name(false);
     b.compute_qualifed_name(false); // FIXME
     b.simple_name(simple_name);
     b.model_name(model_name);
@@ -146,6 +144,22 @@ name name_factory::build_module_name(const name& model_name,
     auto ipp(internal_module_path);
     ipp.pop_back();
     n.location().internal_module_path(ipp);
+
+    return n;
+}
+
+name name_factory::build_module_name(const name& model_name,
+    const std::string& module_name,
+    const std::list<std::string>& internal_module_path) const {
+
+    yarn::name n;
+    n.simple(module_name);
+
+    const auto& l(model_name.location());
+    n.location().original_model_name(l.original_model_name());
+    // n.location().model_module_path(l.model_module_path());
+    n.location().external_module_path(l.external_module_path());
+    n.location().internal_module_path(internal_module_path);
 
     return n;
 }

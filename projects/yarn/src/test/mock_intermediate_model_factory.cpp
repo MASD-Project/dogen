@@ -27,8 +27,10 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/exception/utility_exception.hpp"
 #include "dogen/dynamic/types/value_factory.hpp"
+#include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/test/building_error.hpp"
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
 
@@ -172,6 +174,16 @@ std::list<std::string> make_internal_module_path(const unsigned int module_n) {
     std::list<std::string> r;
     for (unsigned int i(0); i < module_n; ++i)
         r.push_back(module_name(i));
+    return r;
+}
+
+dogen::yarn::primitive make_primitive(const std::string& simple_name) {
+    dogen::yarn::name_builder b;
+    b.compute_qualifed_name(false); // FIXME
+    b.simple_name(simple_name);
+
+    dogen::yarn::primitive r;
+    r.name(b.build());
     return r;
 }
 
@@ -566,24 +578,24 @@ module mock_intermediate_model_factory::make_module(const yarn::name& n,
 }
 
 module mock_intermediate_model_factory::make_module(const unsigned int module_n,
-    const std::string& model_name,
+    const yarn::name& model_name,
     const std::list<std::string>& internal_module_path,
     const std::string& documentation) const {
 
-    name n;
-    n.location().original_model_name(model_name);
-    n.simple(module_name(module_n));
-    n.location().internal_module_path(internal_module_path);
+    name_factory nf;
+    const auto mn(module_name(module_n));
+    const auto n(nf.build_module_name(model_name, mn, internal_module_path));
     return make_module(n, documentation);
 }
 
 name mock_intermediate_model_factory::make_name(const unsigned int model_n,
     const unsigned int simple_n) const {
 
-    name r;
-    r.location().original_model_name(simple_model_name(model_n));
-    r.simple(simple_type_name(simple_n));
-    return r;
+    name_builder b;
+    b.compute_qualifed_name(false); // FIXME
+    b.simple_name(simple_type_name(simple_n));
+    b.model_name(simple_model_name(model_n));
+    return b.build();
 }
 
 intermediate_model mock_intermediate_model_factory::make_empty_model(
@@ -619,9 +631,8 @@ make_multi_type_model(const unsigned int n, const unsigned int type_n,
     intermediate_model r(make_empty_model(n, add_model_module));
 
     std::list<std::string> internal_module_path;
-    const auto mn(r.name().location().original_model_name());
     for (unsigned int i(0); i < mod_n; ++i) {
-        const auto m(make_module(i, mn, internal_module_path, documentation));
+        const auto m(make_module(i, r.name(), internal_module_path, documentation));
         insert_nameable(r.modules(), m);
         internal_module_path.push_back(module_name(i));
     }
@@ -658,8 +669,7 @@ make_single_concept_model(const unsigned int n,
     const bool add_model_module) const {
     intermediate_model r(make_empty_model(n, add_model_module));
 
-    primitive ui;
-    ui.name().simple(unsigned_int);
+    const auto ui(make_primitive(unsigned_int));
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
     concept c(make_concept(0, r.name()));
@@ -678,8 +688,8 @@ intermediate_model mock_intermediate_model_factory::
 make_first_degree_concepts_model(const unsigned int n,
     const bool add_model_module) const {
     intermediate_model r(make_empty_model(n, add_model_module));
-    primitive ui;
-    ui.name().simple(unsigned_int);
+
+    const auto ui(make_primitive(unsigned_int));
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
     concept c0(make_concept(0, r.name()));
@@ -711,8 +721,8 @@ intermediate_model mock_intermediate_model_factory::
 make_second_degree_concepts_model(const unsigned int n,
     const bool add_model_module) const {
     intermediate_model r(make_empty_model(n, add_model_module));
-    primitive ui;
-    ui.name().simple(unsigned_int);
+
+    const auto ui(make_primitive(unsigned_int));
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
     concept c0(make_concept(0, r.name()));
@@ -760,8 +770,8 @@ intermediate_model mock_intermediate_model_factory::
 make_multiple_inheritance_concepts_model(
     const unsigned int n, const bool add_model_module) const {
     intermediate_model r(make_empty_model(n, add_model_module));
-    primitive ui;
-    ui.name().simple(unsigned_int);
+
+    const auto ui(make_primitive(unsigned_int));
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
     concept c0(make_concept(0, r.name()));
@@ -788,8 +798,8 @@ intermediate_model mock_intermediate_model_factory::
 make_diamond_inheritance_concepts_model(const unsigned int n,
     const bool add_model_module) const {
     intermediate_model r(make_empty_model(n, add_model_module));
-    primitive ui;
-    ui.name().simple(unsigned_int);
+
+    const auto ui(make_primitive(unsigned_int));
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
     concept c0(make_concept(0, r.name()));
@@ -830,8 +840,8 @@ intermediate_model mock_intermediate_model_factory::
 make_object_with_parent_that_models_concept(
     const unsigned int n, const bool add_model_module) const {
     intermediate_model r(make_empty_model(n, add_model_module));
-    primitive ui;
-    ui.name().simple(unsigned_int);
+
+    const auto ui(make_primitive(unsigned_int));
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
     concept c0(make_concept(0, r.name()));
@@ -855,8 +865,8 @@ intermediate_model mock_intermediate_model_factory::
 make_object_with_parent_that_models_a_refined_concept(
     const unsigned int n, const bool add_model_module) const {
     intermediate_model r(make_empty_model(n, add_model_module));
-    primitive ui;
-    ui.name().simple(unsigned_int);
+
+    const auto ui(make_primitive(unsigned_int));
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
     concept c0(make_concept(0, r.name()));
@@ -899,8 +909,8 @@ intermediate_model mock_intermediate_model_factory::
 make_object_that_models_missing_concept(const unsigned int n,
     const bool add_model_module) const {
     intermediate_model r(make_empty_model(n, add_model_module));
-    primitive ui;
-    ui.name().simple(unsigned_int);
+
+    const auto ui(make_primitive(unsigned_int));
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
     concept c0(make_concept(0, r.name()));
@@ -917,8 +927,8 @@ intermediate_model mock_intermediate_model_factory::
 make_object_that_models_concept_with_missing_parent(
     const unsigned int n, const bool add_model_module) const {
     intermediate_model r(make_empty_model(n, add_model_module));
-    primitive ui;
-    ui.name().simple(unsigned_int);
+
+    const auto ui(make_primitive(unsigned_int));
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
     concept c0(make_concept(0, r.name()));
@@ -954,12 +964,9 @@ object_with_both_regular_and_weak_associations(
     if (flags_.associations_indexed())
         o0.relationships()[ra].push_back(o1.name());
 
-    name n;
-    n.simple("shared_ptr");
-    n.location().original_model_name("boost");
-
+    dogen::yarn::name_factory nf;
     object o2;
-    o2.name(n);
+    o2.name(nf.build_element_name("boost", "shared_ptr"));
     o2.object_type(dogen::yarn::object_types::smart_pointer);
     insert_object(r, o2);
 
@@ -983,11 +990,8 @@ object_with_both_regular_and_weak_associations(
     if (flags_.associations_indexed())
         o0.relationships()[wa].push_back(o3.name());
 
-    n.simple("string");
-    n.location().original_model_name("std");
-
     object o4;
-    o4.name(n);
+    o4.name(nf.build_element_name("std", "string"));
     o4.object_type(dogen::yarn::object_types::user_defined_value_object);
     insert_object(r, o4);
 
@@ -1024,6 +1028,7 @@ object_with_property(const object_types ot, const property_types pt,
     if (flags_.properties_indexed())
         o0.all_properties().push_back(p);
 
+    dogen::yarn::name_factory nf;
     intermediate_model r(make_empty_model(0, add_model_module));
     const auto ra(relationship_types::regular_associations);
     const auto wa(relationship_types::weak_associations);
@@ -1045,12 +1050,8 @@ object_with_property(const object_types ot, const property_types pt,
             o0.relationships()[ra].push_back(ui.name());
 
     } else if (pt == property_types::boost_shared_ptr) {
-        name n;
-        n.simple("shared_ptr");
-        n.location().original_model_name("boost");
-
         object o2;
-        o2.name(n);
+        o2.name(nf.build_element_name("boost", "shared_ptr"));
         o2.object_type(dogen::yarn::object_types::smart_pointer);
         insert_object(r, o2);
 
@@ -1058,19 +1059,14 @@ object_with_property(const object_types ot, const property_types pt,
             o0.relationships()[wa].push_back(o2.name());
 
     } else if (pt == property_types::std_pair) {
-        primitive b;
-        b.name().simple(boolean);
+        const auto b(make_primitive(boolean));
         r.primitives().insert(std::make_pair(b.name(), b));
 
         if (flags_.associations_indexed())
             o0.relationships()[ra].push_back(b.name());
 
-        name n;
-        n.simple("pair");
-        n.location().original_model_name("std");
-
         object o2;
-        o2.name(n);
+        o2.name(nf.build_element_name("std", "pair"));
         o2.object_type(dogen::yarn::object_types::user_defined_value_object);
 
         if (flags_.associations_indexed())
@@ -1078,26 +1074,20 @@ object_with_property(const object_types ot, const property_types pt,
 
         insert_object(r, o2);
     } else if (pt == property_types::boost_variant) {
-        primitive b;
-        b.name().simple(boolean);
+        const auto b(make_primitive(boolean));
         r.primitives().insert(std::make_pair(b.name(), b));
 
         if (flags_.associations_indexed())
             o0.relationships()[ra].push_back(b.name());
 
-        primitive ui;
-        ui.name().simple(unsigned_int);
+        const auto ui(make_primitive(unsigned_int));
         r.primitives().insert(std::make_pair(ui.name(), ui));
 
         if (flags_.associations_indexed())
             o0.relationships()[ra].push_back(ui.name());
 
-        name n;
-        n.simple("variant");
-        n.location().original_model_name("boost");
-
         object o2;
-        o2.name(n);
+        o2.name(nf.build_element_name("boost", "variant"));
         o2.object_type(dogen::yarn::object_types::user_defined_value_object);
         insert_object(r, o2);
 
@@ -1105,12 +1095,8 @@ object_with_property(const object_types ot, const property_types pt,
             o0.relationships()[ra].push_back(o2.name());
 
     } else if (pt == property_types::std_string) {
-        name n;
-        n.simple("string");
-        n.location().original_model_name("std");
-
         object o2;
-        o2.name(n);
+        o2.name(nf.build_element_name("std", "string"));
         o2.object_type(dogen::yarn::object_types::user_defined_value_object);
         insert_object(r, o2);
 
@@ -1130,19 +1116,14 @@ mock_intermediate_model_factory::object_with_property_type_in_different_model(
     add_property(o0, flags_.properties_indexed(),
         0, property_types::value_object, o1.name());
 
-    name m0_n;
-    m0_n.location().original_model_name(simple_model_name(0));
-
     intermediate_model m0;
-    m0.name(m0_n);
+    dogen::yarn::name_factory nf;
+    m0.name(nf.build_model_name(simple_model_name(0)));
     insert_object(m0, o0);
     handle_model_module(add_model_module, m0);
 
-    name m1_n;
-    m1_n.location().original_model_name(simple_model_name(1));
-
     intermediate_model m1;
-    m1.name(m1_n);
+    m1.name(nf.build_model_name(simple_model_name(1)));
     insert_object(m1, o1);
     handle_model_module(add_model_module, m1);
 
@@ -1175,8 +1156,7 @@ object_with_parent_in_the_same_model(const bool has_property,
 
     auto r(make_empty_model(0, add_model_module));
     if (has_property) {
-        primitive ui;
-        ui.name().simple(unsigned_int);
+        const auto ui(make_primitive(unsigned_int));
         r.primitives().insert(std::make_pair(ui.name(), ui));
     }
 
@@ -1261,8 +1241,7 @@ object_with_third_degree_parent_in_same_model(const bool has_property,
 
     auto r(make_empty_model(0, add_model_module));
     if (has_property) {
-        primitive ui;
-        ui.name().simple(unsigned_int);
+        const auto ui(make_primitive(unsigned_int));
         r.primitives().insert(std::make_pair(ui.name(), ui));
     }
 
@@ -1431,12 +1410,9 @@ object_with_group_of_properties_of_different_types(
     auto p2(mock_property(2, property_types::boost_shared_ptr, o3.name()));
     lambda(p2);
 
-    name n;
-    n.simple("shared_ptr");
-    n.location().original_model_name("boost");
-
     object o2;
-    o2.name(n);
+    dogen::yarn::name_factory nf;
+    o2.name(nf.build_element_name("boost", "shared_ptr"));
     o2.object_type(dogen::yarn::object_types::smart_pointer);
     insert_object(r, o2);
 

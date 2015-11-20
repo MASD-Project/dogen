@@ -272,10 +272,10 @@ public:
     /**
      * @brief Create a module from its components.
      */
-    module make_module(const unsigned int module_n = 0,
-        const std::string& model_name = std::string(),
-        const std::list<std::string>& module_path = std::list<std::string>(),
-        const std::string& documentation = std::string()) const;
+    module make_module(const unsigned int module_n,
+        const name& model_name,
+        const std::list<std::string>& internal_module_path,
+        const std::string& documentation) const;
 
 public:
     /**
