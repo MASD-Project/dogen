@@ -77,7 +77,7 @@ name name_factory::build_element_in_model(const name& model_name,
 
     const auto& l(model_name.location());
     n.location().original_model_name(l.original_model_name());
-    // n.location().model_module_path(l.model_module_path());
+    n.location().model_module_path(l.model_module_path());
     n.location().external_module_path(l.external_module_path());
 
     // FIXME: generate qualified name commented out for now
@@ -95,7 +95,7 @@ name name_factory::build_element_in_model(const name& model_name,
 
     const auto& l(model_name.location());
     n.location().original_model_name(l.original_model_name());
-    // n.location().model_module_path(l.model_module_path());
+    n.location().model_module_path(l.model_module_path());
     n.location().external_module_path(l.external_module_path());
     n.location().internal_module_path(internal_module_path);
 
@@ -112,7 +112,7 @@ name name_factory::build_element_in_module(const name& module_name,
 
     const auto& l(module_name.location());
     n.location().original_model_name(l.original_model_name());
-    // n.location().model_module_path(l.model_module_path());
+    n.location().model_module_path(l.model_module_path());
     n.location().external_module_path(l.external_module_path());
 
     auto pp(l.internal_module_path());
@@ -138,7 +138,7 @@ name name_factory::build_module_name(const name& model_name,
 
     const auto& l(model_name.location());
     n.location().original_model_name(l.original_model_name());
-    // n.location().model_module_path(l.model_module_path());
+    n.location().model_module_path(l.model_module_path());
     n.location().external_module_path(l.external_module_path());
 
     auto ipp(internal_module_path);
@@ -157,7 +157,7 @@ name name_factory::build_module_name(const name& model_name,
 
     const auto& l(model_name.location());
     n.location().original_model_name(l.original_model_name());
-    // n.location().model_module_path(l.model_module_path());
+    n.location().model_module_path(l.model_module_path());
     n.location().external_module_path(l.external_module_path());
     n.location().internal_module_path(internal_module_path);
 
@@ -173,7 +173,7 @@ name name_factory::build_combined_element_name(const name& model_name,
     if (populate_model_name_if_blank &&
         r.location().original_model_name().empty()) {
         r.location().original_model_name(l.original_model_name());
-        // r.location().model_module_path(l.model_module_path());
+        r.location().model_module_path(l.model_module_path());
     }
     r.location().external_module_path(l.external_module_path());
 
@@ -188,8 +188,8 @@ name name_factory::build_promoted_module_name(const name& model_name,
     const auto& l(element_name.location());
     if (!l.internal_module_path().empty()) {
         r.location().original_model_name(l.internal_module_path().front());
-        // r.location().model_module_path().push_back(
-        // l.internal_module_path().front());
+        r.location().model_module_path().push_back(
+            l.internal_module_path().front());
     }
     r.location().external_module_path(
         model_name.location().external_module_path());

@@ -14,7 +14,7 @@
 	</extensions>
 	<name class_id="11" tracking_level="0" version="0">
 		<simple>enumeration</simple>
-		<qualified></qualified>
+		<qualified>&lt;enumeration&gt;</qualified>
 		<location class_id="12" tracking_level="0" version="0">
 			<original_model_name>enumeration</original_model_name>
 			<external_module_path class_id="13" tracking_level="0" version="0">
@@ -22,8 +22,9 @@
 				<item_version>0</item_version>
 			</external_module_path>
 			<model_module_path>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>enumeration</item>
 			</model_module_path>
 			<internal_module_path>
 				<count>0</count>
@@ -61,8 +62,9 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>enumeration</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -92,8 +94,9 @@
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>enumeration</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -116,7 +119,7 @@
 		<item>
 			<first>
 				<simple>enumeration</simple>
-				<qualified></qualified>
+				<qualified>&lt;enumeration&gt;</qualified>
 				<location>
 					<original_model_name>enumeration</original_model_name>
 					<external_module_path>
@@ -124,8 +127,9 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>enumeration</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -180,7 +184,7 @@
 					</extensions>
 					<name>
 						<simple>enumeration</simple>
-						<qualified></qualified>
+						<qualified>&lt;enumeration&gt;</qualified>
 						<location>
 							<original_model_name>enumeration</original_model_name>
 							<external_module_path>
@@ -188,8 +192,9 @@
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>enumeration</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -226,7 +231,7 @@
 		<item_version>0</item_version>
 		<item class_id="28" tracking_level="0" version="0">
 			<first>
-				<simple>colour_types</simple>
+				<simple>shape_types</simple>
 				<qualified></qualified>
 				<location>
 					<original_model_name>enumeration</original_model_name>
@@ -235,12 +240,14 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>enumeration</item>
 					</model_module_path>
 					<internal_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>pkg1</item>
 					</internal_module_path>
 				</location>
 			</first>
@@ -257,7 +264,7 @@
 						</fields>
 					</extensions>
 					<name>
-						<simple>colour_types</simple>
+						<simple>shape_types</simple>
 						<qualified></qualified>
 						<location>
 							<original_model_name>enumeration</original_model_name>
@@ -266,12 +273,14 @@
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>enumeration</item>
 							</model_module_path>
 							<internal_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>pkg1</item>
 							</internal_module_path>
 						</location>
 					</name>
@@ -309,26 +318,26 @@
 						<value>0</value>
 					</item>
 					<item>
-						<documentation>this is colour red
+						<documentation>some comment
 </documentation>
-						<name>red</name>
+						<name>triangle</name>
 						<value>1</value>
 					</item>
 					<item>
-						<documentation>this is blue
+						<documentation>other comment
 </documentation>
-						<name>blue</name>
+						<name>square</name>
 						<value>2</value>
 					</item>
 					<item>
 						<documentation></documentation>
-						<name>green</name>
+						<name>rectangle</name>
 						<value>3</value>
 					</item>
 					<item>
-						<documentation>another comment
+						<documentation>some comment
 </documentation>
-						<name>gray</name>
+						<name>cube</name>
 						<value>4</value>
 					</item>
 				</enumerators>
@@ -336,7 +345,7 @@
 		</item>
 		<item>
 			<first>
-				<simple>shape_types</simple>
+				<simple>colour_types</simple>
 				<qualified></qualified>
 				<location>
 					<original_model_name>enumeration</original_model_name>
@@ -345,13 +354,13 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</model_module_path>
-					<internal_module_path>
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>pkg1</item>
+						<item>enumeration</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
 					</internal_module_path>
 				</location>
 			</first>
@@ -368,7 +377,7 @@
 						</fields>
 					</extensions>
 					<name>
-						<simple>shape_types</simple>
+						<simple>colour_types</simple>
 						<qualified></qualified>
 						<location>
 							<original_model_name>enumeration</original_model_name>
@@ -377,13 +386,13 @@
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
 								<count>1</count>
 								<item_version>0</item_version>
-								<item>pkg1</item>
+								<item>enumeration</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
 							</internal_module_path>
 						</location>
 					</name>
@@ -421,26 +430,26 @@
 						<value>0</value>
 					</item>
 					<item>
-						<documentation>some comment
+						<documentation>this is colour red
 </documentation>
-						<name>triangle</name>
+						<name>red</name>
 						<value>1</value>
 					</item>
 					<item>
-						<documentation>other comment
+						<documentation>this is blue
 </documentation>
-						<name>square</name>
+						<name>blue</name>
 						<value>2</value>
 					</item>
 					<item>
 						<documentation></documentation>
-						<name>rectangle</name>
+						<name>green</name>
 						<value>3</value>
 					</item>
 					<item>
-						<documentation>some comment
+						<documentation>another comment
 </documentation>
-						<name>cube</name>
+						<name>gray</name>
 						<value>4</value>
 					</item>
 				</enumerators>
@@ -457,8 +466,9 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>enumeration</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -491,8 +501,9 @@ this is a long comment
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>enumeration</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -567,8 +578,9 @@ this is a long comment
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>enumeration</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -598,8 +610,9 @@ this is a long comment
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>enumeration</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>

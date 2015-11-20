@@ -14,7 +14,7 @@
 	</extensions>
 	<name class_id="11" tracking_level="0" version="0">
 		<simple>exception</simple>
-		<qualified></qualified>
+		<qualified>&lt;exception&gt;</qualified>
 		<location class_id="12" tracking_level="0" version="0">
 			<original_model_name>exception</original_model_name>
 			<external_module_path class_id="13" tracking_level="0" version="0">
@@ -22,8 +22,9 @@
 				<item_version>0</item_version>
 			</external_module_path>
 			<model_module_path>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>exception</item>
 			</model_module_path>
 			<internal_module_path>
 				<count>0</count>
@@ -61,8 +62,9 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>exception</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -92,8 +94,9 @@
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>exception</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -116,7 +119,7 @@
 		<item>
 			<first>
 				<simple>exception</simple>
-				<qualified></qualified>
+				<qualified>&lt;exception&gt;</qualified>
 				<location>
 					<original_model_name>exception</original_model_name>
 					<external_module_path>
@@ -124,8 +127,9 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>exception</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -180,7 +184,7 @@
 					</extensions>
 					<name>
 						<simple>exception</simple>
-						<qualified></qualified>
+						<qualified>&lt;exception&gt;</qualified>
 						<location>
 							<original_model_name>exception</original_model_name>
 							<external_module_path>
@@ -188,8 +192,9 @@
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>exception</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -231,131 +236,6 @@
 		<item_version>0</item_version>
 		<item class_id="29" tracking_level="0" version="0">
 			<first>
-				<simple>a_class</simple>
-				<qualified></qualified>
-				<location>
-					<original_model_name>exception</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second class_id="6" tracking_level="1" version="0" object_id="_5">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>a_class</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>exception</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties class_id="30" tracking_level="0" version="0">
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item class_id="31" tracking_level="0" version="0">
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_0</name>
-						<type class_id="32" tracking_level="0" version="0">
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children class_id="33" tracking_level="0" version="0">
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
-					</item>
-				</local_properties>
-				<inherited_properties class_id="34" tracking_level="0" version="0">
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships class_id="35" tracking_level="0" version="0">
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
 				<simple>catastrophic_error</simple>
 				<qualified></qualified>
 				<location>
@@ -365,8 +245,9 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>exception</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>1</count>
@@ -375,7 +256,7 @@
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_6">
+			<second class_id="6" tracking_level="1" version="0" object_id="_5">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
 					<original_model_name></original_model_name>
@@ -397,8 +278,9 @@
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>exception</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>1</count>
@@ -413,13 +295,140 @@
 						<initialized>0</initialized>
 					</containing_module>
 				</element>
-				<all_properties>
+				<all_properties class_id="30" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_properties>
 				<local_properties>
 					<count>0</count>
 					<item_version>0</item_version>
+				</local_properties>
+				<inherited_properties class_id="31" tracking_level="0" version="0">
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships class_id="32" tracking_level="0" version="0">
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>4</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>a_class</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>exception</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>exception</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_6">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>a_class</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>exception</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>exception</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item class_id="33" tracking_level="0" version="0">
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_0</name>
+						<type class_id="34" tracking_level="0" version="0">
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name></original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children class_id="35" tracking_level="0" version="0">
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>int</unparsed_type>
+					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
@@ -437,7 +446,7 @@
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>4</object_type>
+				<object_type>3</object_type>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -452,8 +461,9 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>exception</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -484,8 +494,9 @@
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>exception</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>

@@ -19,6 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
@@ -56,11 +57,8 @@ boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::intermediate_model& m) const {
 
-    yarn::name n;
-    n.simple(registrar_name);
-    n.location().original_model_name(m.name().location().original_model_name());
-    n.location().external_module_path(
-        m.name().location().external_module_path());
+    yarn::name_factory nf;
+    const auto n(nf.build_element_in_model(m.name(), registrar_name));
 
     auto builder(f.make());
     const auto rh_fn(traits::registrar_header_formatter_name());
@@ -91,12 +89,8 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
             continue;
 
         const auto ref(pair.first);
-        yarn::name n;
-        n.location().original_model_name(
-            ref.location().original_model_name());
-        n.simple(registrar_name);
-        n.location().external_module_path(
-            ref.location().external_module_path());
+        yarn::name_factory nf;
+        const auto n(nf.build_element_in_model(ref, registrar_name));
         builder.add(n, ch_fn);
     }
     return builder.build();

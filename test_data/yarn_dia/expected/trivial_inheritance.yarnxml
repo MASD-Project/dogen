@@ -14,7 +14,7 @@
 	</extensions>
 	<name class_id="11" tracking_level="0" version="0">
 		<simple>trivial_inheritance</simple>
-		<qualified></qualified>
+		<qualified>&lt;trivial_inheritance&gt;</qualified>
 		<location class_id="12" tracking_level="0" version="0">
 			<original_model_name>trivial_inheritance</original_model_name>
 			<external_module_path class_id="13" tracking_level="0" version="0">
@@ -22,8 +22,9 @@
 				<item_version>0</item_version>
 			</external_module_path>
 			<model_module_path>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>trivial_inheritance</item>
 			</model_module_path>
 			<internal_module_path>
 				<count>0</count>
@@ -52,170 +53,6 @@
 		<item_version>0</item_version>
 		<item class_id="18" tracking_level="0" version="0">
 			<first>
-				<simple>trivial_inheritance</simple>
-				<qualified></qualified>
-				<location>
-					<original_model_name>trivial_inheritance</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second class_id="5" tracking_level="1" version="0" object_id="_0">
-				<element class_id="19" tracking_level="0" version="0">
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation>This model tests all aspects related to inheritance.
-
-It includes the visitable stereotype since it only makes sense
-in the context of inheritance.
-
-</documentation>
-					<extensions>
-						<fields>
-							<count>3</count>
-							<bucket_count>5</bucket_count>
-							<item_version>0</item_version>
-							<item class_id="20" tracking_level="0" version="0">
-								<first>dia.comment</first>
-								<second class_id="21" tracking_level="0" version="0">
-									<value class_id="22" tracking_level="0" version="1">
-										<px class_id="1" tracking_level="1" version="0" object_id="_1">
-											<value class_id="23" tracking_level="0" version="0"></value>
-											<content>true</content>
-										</px>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>licence_name</first>
-								<second>
-									<value>
-										<px class_id_reference="1" object_id="_2">
-											<value></value>
-											<content>gpl_v3</content>
-										</px>
-									</value>
-								</second>
-							</item>
-							<item>
-								<first>copyright_notice</first>
-								<second>
-									<value>
-										<px class_id_reference="1" object_id="_3">
-											<value></value>
-											<content>Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;</content>
-										</px>
-									</value>
-								</second>
-							</item>
-						</fields>
-					</extensions>
-					<name>
-						<simple>trivial_inheritance</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<members class_id="24" tracking_level="0" version="0">
-					<count>0</count>
-					<item_version>0</item_version>
-				</members>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>pkg3</simple>
-				<qualified></qualified>
-				<location>
-					<original_model_name>trivial_inheritance</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_4">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>pkg3</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<members>
-					<count>0</count>
-					<item_version>0</item_version>
-				</members>
-			</second>
-		</item>
-		<item>
-			<first>
 				<simple>pkg4</simple>
 				<qualified></qualified>
 				<location>
@@ -225,8 +62,9 @@ in the context of inheritance.
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -234,8 +72,8 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_5">
-				<element>
+			<second class_id="5" tracking_level="1" version="0" object_id="_0">
+				<element class_id="19" tracking_level="0" version="0">
 					<in_global_namespace>0</in_global_namespace>
 					<original_model_name></original_model_name>
 					<documentation></documentation>
@@ -256,8 +94,9 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -271,7 +110,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</containing_module>
 				</element>
-				<members>
+				<members class_id="20" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
@@ -279,8 +118,8 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>
-				<simple>pkg2</simple>
-				<qualified></qualified>
+				<simple>trivial_inheritance</simple>
+				<qualified>&lt;trivial_inheritance&gt;</qualified>
 				<location>
 					<original_model_name>trivial_inheritance</original_model_name>
 					<external_module_path>
@@ -288,8 +127,9 @@ in the context of inheritance.
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -297,21 +137,59 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_6">
+			<second object_id="_1">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
 					<original_model_name></original_model_name>
-					<documentation></documentation>
+					<documentation>This model tests all aspects related to inheritance.
+
+It includes the visitable stereotype since it only makes sense
+in the context of inheritance.
+
+</documentation>
 					<extensions>
 						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
+							<count>3</count>
+							<bucket_count>5</bucket_count>
 							<item_version>0</item_version>
+							<item class_id="21" tracking_level="0" version="0">
+								<first>dia.comment</first>
+								<second class_id="22" tracking_level="0" version="0">
+									<value class_id="23" tracking_level="0" version="1">
+										<px class_id="1" tracking_level="1" version="0" object_id="_2">
+											<value class_id="24" tracking_level="0" version="0"></value>
+											<content>true</content>
+										</px>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>licence_name</first>
+								<second>
+									<value>
+										<px class_id_reference="1" object_id="_3">
+											<value></value>
+											<content>gpl_v3</content>
+										</px>
+									</value>
+								</second>
+							</item>
+							<item>
+								<first>copyright_notice</first>
+								<second>
+									<value>
+										<px class_id_reference="1" object_id="_4">
+											<value></value>
+											<content>Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;</content>
+										</px>
+									</value>
+								</second>
+							</item>
 						</fields>
 					</extensions>
 					<name>
-						<simple>pkg2</simple>
-						<qualified></qualified>
+						<simple>trivial_inheritance</simple>
+						<qualified>&lt;trivial_inheritance&gt;</qualified>
 						<location>
 							<original_model_name>trivial_inheritance</original_model_name>
 							<external_module_path>
@@ -319,8 +197,9 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -351,8 +230,9 @@ in the context of inheritance.
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -360,7 +240,7 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_7">
+			<second object_id="_5">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
 					<original_model_name></original_model_name>
@@ -382,8 +262,139 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
+							</model_module_path>
+							<internal_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<members>
+					<count>0</count>
+					<item_version>0</item_version>
+				</members>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>pkg2</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>trivial_inheritance</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_6">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>pkg2</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>trivial_inheritance</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<members>
+					<count>0</count>
+					<item_version>0</item_version>
+				</members>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>pkg3</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>trivial_inheritance</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_7">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>pkg3</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>trivial_inheritance</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -434,8 +445,9 @@ in the context of inheritance.
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -466,8 +478,9 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -519,8 +532,9 @@ in the context of inheritance.
 										<item_version>0</item_version>
 									</external_module_path>
 									<model_module_path>
-										<count>0</count>
+										<count>1</count>
 										<item_version>0</item_version>
+										<item>trivial_inheritance</item>
 									</model_module_path>
 									<internal_module_path>
 										<count>0</count>
@@ -537,91 +551,6 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>
-				<simple>service_interface</simple>
-				<qualified></qualified>
-				<location>
-					<original_model_name>trivial_inheritance</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_9">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>service_interface</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>2</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>1</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
 				<simple>child</simple>
 				<qualified></qualified>
 				<location>
@@ -631,8 +560,9 @@ in the context of inheritance.
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>1</count>
@@ -641,7 +571,7 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_10">
+			<second object_id="_9">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
 					<original_model_name></original_model_name>
@@ -663,8 +593,9 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>1</count>
@@ -757,291 +688,14 @@ in the context of inheritance.
 										<item_version>0</item_version>
 									</external_module_path>
 									<model_module_path>
-										<count>0</count>
+										<count>1</count>
 										<item_version>0</item_version>
+										<item>trivial_inheritance</item>
 									</model_module_path>
 									<internal_module_path>
 										<count>1</count>
 										<item_version>0</item_version>
 										<item>pkg1</item>
-									</internal_module_path>
-								</location>
-							</item>
-						</second>
-					</item>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>parent</simple>
-				<qualified></qualified>
-				<location>
-					<original_model_name>trivial_inheritance</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</model_module_path>
-					<internal_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>pkg1</item>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_11">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>parent</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>pkg1</item>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_0</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>unsigned int</unparsed_type>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>1</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>0</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>child_of_a_child2</simple>
-				<qualified></qualified>
-				<location>
-					<original_model_name>trivial_inheritance</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_12">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>child_of_a_child2</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_2</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>unsigned int</unparsed_type>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>1</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>1</count>
-					<bucket_count>2</bucket_count>
-					<item_version>0</item_version>
-					<item>
-						<first>2</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<simple>third_child_with_members</simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name>trivial_inheritance</original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
 									</internal_module_path>
 								</location>
 							</item>
@@ -1063,8 +717,9 @@ in the context of inheritance.
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -1072,7 +727,7 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_13">
+			<second object_id="_10">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
 					<original_model_name></original_model_name>
@@ -1094,8 +749,9 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -1188,8 +844,9 @@ in the context of inheritance.
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -1197,7 +854,7 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_14">
+			<second object_id="_11">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
 					<original_model_name></original_model_name>
@@ -1219,8 +876,9 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -1312,8 +970,9 @@ in the context of inheritance.
 										<item_version>0</item_version>
 									</external_module_path>
 									<model_module_path>
-										<count>0</count>
+										<count>1</count>
 										<item_version>0</item_version>
+										<item>trivial_inheritance</item>
 									</model_module_path>
 									<internal_module_path>
 										<count>0</count>
@@ -1330,6 +989,207 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>
+				<simple>parent_without_members</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>trivial_inheritance</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_12">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>parent_without_members</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>trivial_inheritance</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>1</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>0</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>child_without_members</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>trivial_inheritance</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_13">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>child_without_members</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>trivial_inheritance</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>1</count>
+					<bucket_count>2</bucket_count>
+					<item_version>0</item_version>
+					<item>
+						<first>2</first>
+						<second>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<simple>parent_without_members</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>trivial_inheritance</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>trivial_inheritance</item>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</item>
+						</second>
+					</item>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
 				<simple>parent</simple>
 				<qualified></qualified>
 				<location>
@@ -1339,8 +1199,138 @@ in the context of inheritance.
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>pkg1</item>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_14">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>parent</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>trivial_inheritance</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>pkg1</item>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_0</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name></original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>unsigned int</unparsed_type>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>1</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>0</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>parent</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>trivial_inheritance</original_model_name>
+					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>1</count>
@@ -1371,8 +1361,9 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>1</count>
@@ -1457,6 +1448,361 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>
+				<simple>child_of_a_child2</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>trivial_inheritance</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_16">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>child_of_a_child2</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>trivial_inheritance</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_2</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name></original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>unsigned int</unparsed_type>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>1</count>
+					<bucket_count>2</bucket_count>
+					<item_version>0</item_version>
+					<item>
+						<first>2</first>
+						<second>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<simple>third_child_with_members</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>trivial_inheritance</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>trivial_inheritance</item>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</item>
+						</second>
+					</item>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>child_of_a_child1</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>trivial_inheritance</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_17">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>child_of_a_child1</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>trivial_inheritance</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>1</count>
+					<bucket_count>2</bucket_count>
+					<item_version>0</item_version>
+					<item>
+						<first>2</first>
+						<second>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<simple>third_child_with_members</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>trivial_inheritance</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>trivial_inheritance</item>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</item>
+						</second>
+					</item>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>service</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>trivial_inheritance</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_18">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>service</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>trivial_inheritance</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>2</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>1</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
 				<simple>descendant3</simple>
 				<qualified></qualified>
 				<location>
@@ -1466,8 +1812,9 @@ in the context of inheritance.
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -1475,7 +1822,7 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_16">
+			<second object_id="_19">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
 					<original_model_name></original_model_name>
@@ -1497,8 +1844,9 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -1590,204 +1938,9 @@ in the context of inheritance.
 										<item_version>0</item_version>
 									</external_module_path>
 									<model_module_path>
-										<count>0</count>
+										<count>1</count>
 										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</item>
-						</second>
-					</item>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>parent_without_members</simple>
-				<qualified></qualified>
-				<location>
-					<original_model_name>trivial_inheritance</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_17">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>parent_without_members</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>1</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>0</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>second_child_without_members</simple>
-				<qualified></qualified>
-				<location>
-					<original_model_name>trivial_inheritance</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_18">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>second_child_without_members</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>1</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>1</count>
-					<bucket_count>2</bucket_count>
-					<item_version>0</item_version>
-					<item>
-						<first>2</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<simple>parent_with_members</simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name>trivial_inheritance</original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
+										<item>trivial_inheritance</item>
 									</model_module_path>
 									<internal_module_path>
 										<count>0</count>
@@ -1813,166 +1966,14 @@ in the context of inheritance.
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>pkg3</item>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_19">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>child</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>pkg3</item>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_1</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>1</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>1</count>
-					<bucket_count>2</bucket_count>
-					<item_version>0</item_version>
-					<item>
-						<first>2</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<simple>parent</simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name>trivial_inheritance</original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>1</count>
-										<item_version>0</item_version>
-										<item>pkg2</item>
-									</internal_module_path>
-								</location>
-							</item>
-						</second>
-					</item>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>service</simple>
-				<qualified></qualified>
-				<location>
-					<original_model_name>trivial_inheritance</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
+						<item>pkg4</item>
 					</internal_module_path>
 				</location>
 			</first>
@@ -1989,481 +1990,6 @@ in the context of inheritance.
 						</fields>
 					</extensions>
 					<name>
-						<simple>service</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>2</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>1</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>move_ctor_descendant</simple>
-				<qualified></qualified>
-				<location>
-					<original_model_name>trivial_inheritance</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_21">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation>Descendant class for scenario that tests code generated move contructors.
-</documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>move_ctor_descendant</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation>Force manual move constructor.
-</documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_1</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>boost::filesystem::path</unparsed_type>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>1</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>1</count>
-					<bucket_count>2</bucket_count>
-					<item_version>0</item_version>
-					<item>
-						<first>2</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<simple>move_ctor_base</simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name>trivial_inheritance</original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</item>
-						</second>
-					</item>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>parent_outside</simple>
-				<qualified></qualified>
-				<location>
-					<original_model_name>trivial_inheritance</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_22">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>parent_outside</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_0</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>1</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>0</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>child_of_a_child1</simple>
-				<qualified></qualified>
-				<location>
-					<original_model_name>trivial_inheritance</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_23">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>child_of_a_child1</simple>
-						<qualified></qualified>
-						<location>
-							<original_model_name>trivial_inheritance</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>1</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>1</count>
-					<bucket_count>2</bucket_count>
-					<item_version>0</item_version>
-					<item>
-						<first>2</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<simple>third_child_with_members</simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name>trivial_inheritance</original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</item>
-						</second>
-					</item>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>child</simple>
-				<qualified></qualified>
-				<location>
-					<original_model_name>trivial_inheritance</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</model_module_path>
-					<internal_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>pkg4</item>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_24">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
 						<simple>child</simple>
 						<qualified></qualified>
 						<location>
@@ -2473,8 +1999,9 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>1</count>
@@ -2567,8 +2094,9 @@ in the context of inheritance.
 										<item_version>0</item_version>
 									</external_module_path>
 									<model_module_path>
-										<count>0</count>
+										<count>1</count>
 										<item_version>0</item_version>
+										<item>trivial_inheritance</item>
 									</model_module_path>
 									<internal_module_path>
 										<count>0</count>
@@ -2585,7 +2113,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>
-				<simple>child_without_members</simple>
+				<simple>parent_outside</simple>
 				<qualified></qualified>
 				<location>
 					<original_model_name>trivial_inheritance</original_model_name>
@@ -2594,8 +2122,9 @@ in the context of inheritance.
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -2603,7 +2132,7 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_25">
+			<second object_id="_21">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
 					<original_model_name></original_model_name>
@@ -2616,7 +2145,7 @@ in the context of inheritance.
 						</fields>
 					</extensions>
 					<name>
-						<simple>child_without_members</simple>
+						<simple>parent_outside</simple>
 						<qualified></qualified>
 						<location>
 							<original_model_name>trivial_inheritance</original_model_name>
@@ -2625,8 +2154,9 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -2645,8 +2175,177 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</all_properties>
 				<local_properties>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_0</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name></original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>int</unparsed_type>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>1</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>0</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>child</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>trivial_inheritance</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>pkg3</item>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_22">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>child</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>trivial_inheritance</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>pkg3</item>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
 					<count>0</count>
 					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_1</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name></original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>int</unparsed_type>
+					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
@@ -2669,7 +2368,7 @@ in the context of inheritance.
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<simple>parent_without_members</simple>
+								<simple>parent</simple>
 								<qualified></qualified>
 								<location>
 									<original_model_name>trivial_inheritance</original_model_name>
@@ -2678,12 +2377,14 @@ in the context of inheritance.
 										<item_version>0</item_version>
 									</external_module_path>
 									<model_module_path>
-										<count>0</count>
+										<count>1</count>
 										<item_version>0</item_version>
+										<item>trivial_inheritance</item>
 									</model_module_path>
 									<internal_module_path>
-										<count>0</count>
+										<count>1</count>
 										<item_version>0</item_version>
+										<item>pkg2</item>
 									</internal_module_path>
 								</location>
 							</item>
@@ -2705,8 +2406,9 @@ in the context of inheritance.
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -2714,7 +2416,7 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_26">
+			<second object_id="_23">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
 					<original_model_name></original_model_name>
@@ -2736,8 +2438,9 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -2829,8 +2532,9 @@ in the context of inheritance.
 										<item_version>0</item_version>
 									</external_module_path>
 									<model_module_path>
-										<count>0</count>
+										<count>1</count>
 										<item_version>0</item_version>
+										<item>trivial_inheritance</item>
 									</model_module_path>
 									<internal_module_path>
 										<count>0</count>
@@ -2847,7 +2551,7 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>
-				<simple>base</simple>
+				<simple>service_interface</simple>
 				<qualified></qualified>
 				<location>
 					<original_model_name>trivial_inheritance</original_model_name>
@@ -2856,8 +2560,9 @@ in the context of inheritance.
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -2865,7 +2570,7 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_27">
+			<second object_id="_24">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
 					<original_model_name></original_model_name>
@@ -2878,7 +2583,7 @@ in the context of inheritance.
 						</fields>
 					</extensions>
 					<name>
-						<simple>base</simple>
+						<simple>service_interface</simple>
 						<qualified></qualified>
 						<location>
 							<original_model_name>trivial_inheritance</original_model_name>
@@ -2887,8 +2592,9 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -2896,7 +2602,7 @@ in the context of inheritance.
 							</internal_module_path>
 						</location>
 					</name>
-					<generation_type>1</generation_type>
+					<generation_type>2</generation_type>
 					<origin_type>1</origin_type>
 					<containing_module>
 						<initialized>0</initialized>
@@ -2915,8 +2621,8 @@ in the context of inheritance.
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<is_parent>1</is_parent>
-				<is_visitable>1</is_visitable>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
@@ -2926,8 +2632,8 @@ in the context of inheritance.
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>3</object_type>
-				<is_final>0</is_final>
+				<object_type>1</object_type>
+				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -2941,8 +2647,9 @@ in the context of inheritance.
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -2950,7 +2657,7 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_28">
+			<second object_id="_25">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
 					<original_model_name></original_model_name>
@@ -2972,8 +2679,9 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -3065,8 +2773,9 @@ in the context of inheritance.
 										<item_version>0</item_version>
 									</external_module_path>
 									<model_module_path>
-										<count>0</count>
+										<count>1</count>
 										<item_version>0</item_version>
+										<item>trivial_inheritance</item>
 									</model_module_path>
 									<internal_module_path>
 										<count>0</count>
@@ -3083,6 +2792,207 @@ in the context of inheritance.
 		</item>
 		<item>
 			<first>
+				<simple>second_child_without_members</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>trivial_inheritance</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_26">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>second_child_without_members</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>trivial_inheritance</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>1</count>
+					<bucket_count>2</bucket_count>
+					<item_version>0</item_version>
+					<item>
+						<first>2</first>
+						<second>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<simple>parent_with_members</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>trivial_inheritance</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>trivial_inheritance</item>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</item>
+						</second>
+					</item>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>base</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>trivial_inheritance</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_27">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>base</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>trivial_inheritance</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>1</is_parent>
+				<is_visitable>1</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>0</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
 				<simple>descendant1</simple>
 				<qualified></qualified>
 				<location>
@@ -3092,8 +3002,9 @@ in the context of inheritance.
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -3101,7 +3012,7 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_29">
+			<second object_id="_28">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
 					<original_model_name></original_model_name>
@@ -3123,8 +3034,9 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -3176,8 +3088,9 @@ in the context of inheritance.
 										<item_version>0</item_version>
 									</external_module_path>
 									<model_module_path>
-										<count>0</count>
+										<count>1</count>
 										<item_version>0</item_version>
+										<item>trivial_inheritance</item>
 									</model_module_path>
 									<internal_module_path>
 										<count>0</count>
@@ -3203,8 +3116,9 @@ in the context of inheritance.
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -3212,7 +3126,7 @@ in the context of inheritance.
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_30">
+			<second object_id="_29">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
 					<original_model_name></original_model_name>
@@ -3235,8 +3149,9 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -3317,6 +3232,162 @@ in the context of inheritance.
 				</relationships>
 				<object_type>3</object_type>
 				<is_final>0</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>move_ctor_descendant</simple>
+				<qualified></qualified>
+				<location>
+					<original_model_name>trivial_inheritance</original_model_name>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>trivial_inheritance</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_30">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<original_model_name></original_model_name>
+					<documentation>Descendant class for scenario that tests code generated move contructors.
+</documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>move_ctor_descendant</simple>
+						<qualified></qualified>
+						<location>
+							<original_model_name>trivial_inheritance</original_model_name>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>trivial_inheritance</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation>Force manual move constructor.
+</documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_1</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name></original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>boost::filesystem::path</unparsed_type>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>1</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>1</count>
+					<bucket_count>2</bucket_count>
+					<item_version>0</item_version>
+					<item>
+						<first>2</first>
+						<second>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<simple>move_ctor_base</simple>
+								<qualified></qualified>
+								<location>
+									<original_model_name>trivial_inheritance</original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>1</count>
+										<item_version>0</item_version>
+										<item>trivial_inheritance</item>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</item>
+						</second>
+					</item>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
 			</second>
 		</item>
 	</objects>

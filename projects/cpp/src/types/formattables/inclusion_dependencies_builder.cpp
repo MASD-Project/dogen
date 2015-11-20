@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/yarn/io/name_io.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_builder.hpp"
 
@@ -123,7 +124,7 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
     const auto i(en.find(n));
     if (i == en.end()) {
         const auto qn(n.qualified());
-        BOOST_LOG_SEV(lg, error) << name_not_found << qn;
+        BOOST_LOG_SEV(lg, error) << name_not_found << n;
         BOOST_THROW_EXCEPTION(building_error(name_not_found + qn));
     }
 

@@ -14,7 +14,7 @@
 	</extensions>
 	<name class_id="11" tracking_level="0" version="0">
 		<simple>two_layers_with_objects</simple>
-		<qualified></qualified>
+		<qualified>&lt;two_layers_with_objects&gt;</qualified>
 		<location class_id="12" tracking_level="0" version="0">
 			<original_model_name>two_layers_with_objects</original_model_name>
 			<external_module_path class_id="13" tracking_level="0" version="0">
@@ -22,8 +22,9 @@
 				<item_version>0</item_version>
 			</external_module_path>
 			<model_module_path>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>two_layers_with_objects</item>
 			</model_module_path>
 			<internal_module_path>
 				<count>0</count>
@@ -61,8 +62,9 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>two_layers_with_objects</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -92,8 +94,9 @@
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>two_layers_with_objects</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -124,8 +127,9 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>two_layers_with_objects</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -155,8 +159,9 @@
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>two_layers_with_objects</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -179,7 +184,7 @@
 		<item>
 			<first>
 				<simple>two_layers_with_objects</simple>
-				<qualified></qualified>
+				<qualified>&lt;two_layers_with_objects&gt;</qualified>
 				<location>
 					<original_model_name>two_layers_with_objects</original_model_name>
 					<external_module_path>
@@ -187,8 +192,9 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>two_layers_with_objects</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>0</count>
@@ -243,7 +249,7 @@
 					</extensions>
 					<name>
 						<simple>two_layers_with_objects</simple>
-						<qualified></qualified>
+						<qualified>&lt;two_layers_with_objects&gt;</qualified>
 						<location>
 							<original_model_name>two_layers_with_objects</original_model_name>
 							<external_module_path>
@@ -251,8 +257,9 @@
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>two_layers_with_objects</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>0</count>
@@ -303,8 +310,9 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>two_layers_with_objects</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>1</count>
@@ -335,8 +343,9 @@
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>two_layers_with_objects</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>1</count>
@@ -430,8 +439,9 @@
 						<item_version>0</item_version>
 					</external_module_path>
 					<model_module_path>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>two_layers_with_objects</item>
 					</model_module_path>
 					<internal_module_path>
 						<count>1</count>
@@ -462,8 +472,9 @@
 								<item_version>0</item_version>
 							</external_module_path>
 							<model_module_path>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>two_layers_with_objects</item>
 							</model_module_path>
 							<internal_module_path>
 								<count>1</count>

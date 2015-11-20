@@ -115,9 +115,8 @@ name_builder& name_builder::model_name(const std::string& mn) {
         BOOST_THROW_EXCEPTION(building_error(empty_model_name));
     }
 
-    // FIXME: for now
-    // using utility::string::splitter;
-    // name_.location().model_module_path(splitter::split_scoped(mn, dot));
+    using utility::string::splitter;
+    name_.location().model_module_path(splitter::split_scoped(mn, dot));
     name_.location().original_model_name(mn);
 
     if (infer_simple_name_from_model_name_) {
@@ -131,8 +130,7 @@ name_builder& name_builder::model_name(const std::string& mn) {
 }
 
 name_builder& name_builder::model_name(const location& l) {
-    // FIXME: for now
-    // name_.location().model_module_path(l.model_module_path());
+    name_.location().model_module_path(l.model_module_path());
     name_.location().original_model_name(l.original_model_name());
 
     BOOST_LOG_SEV(lg, debug) << "Added model name from location: " << l;

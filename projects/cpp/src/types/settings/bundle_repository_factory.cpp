@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/io/settings/bundle_repository_io.hpp"
 #include "dogen/cpp/types/settings/bundle_factory.hpp"
@@ -101,12 +102,8 @@ make(const dynamic::repository& rp, const dynamic::object& root_object,
     auto r(g.result());
 
     // FIXME: hack to handle registars.
-    yarn::name n;
-    n.simple(registrar_name);
-    n.location().original_model_name(m.name().location().original_model_name());
-    n.location().external_module_path(
-        m.name().location().external_module_path());
-
+    yarn::name_factory nf;
+    const auto n(nf.build_element_in_model(m.name(), registrar_name));
     const auto pair(std::make_pair(n, f.make()));
     auto& deps(r.bundles_by_name());
     const auto res(deps.insert(pair));

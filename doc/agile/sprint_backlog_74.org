@@ -15,19 +15,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-20 Fri 22:10]
+#+CAPTION: Clock summary at [2015-11-20 Fri 23:09]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *12:50* |       |      |
+| *Total time*                                                                | *13:49* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 12:50   |       |      |
-| Active                                                                      |         | 12:50 |      |
+| Stories                                                                     | 13:49   |       |      |
+| Active                                                                      |         | 13:49 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:45 |
 | COMPLETED Write the next interesting instalment                             |         |       | 1:05 |
 | COMPLETED SML json hydrator =read_module_path= needs refactoring            |         |       | 1:21 |
 | COMPLETED Generate all yarn names using name factory                        |         |       | 7:25 |
-| STARTED Rename yarn's =object=                                              |         |       | 0:14 |
+| COMPLETED Rename yarn's =object=                                            |         |       | 0:14 |
+| COMPLETED Populate model module path                                        |         |       | 0:59 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -115,7 +116,8 @@ one. This includes:
 - add in global namespace to primitve JSON model. (done)
 - cpp (done)
 
-*** STARTED Rename yarn's =object=                                    :story:
+*** COMPLETED Rename yarn's =object=                                  :story:
+    CLOSED: [2015-11-20 Fri 22:15]
     CLOCK: [2015-11-19 Thu 08:35]--[2015-11-19 Thu 08:43] =>  0:08
     CLOCK: [2015-11-19 Thu 08:29]--[2015-11-19 Thu 08:35] =>  0:06
 
@@ -124,6 +126,14 @@ changed in favour of more traditional meta-model names. In this sense,
 object is not a good name as it evokes M0 rather than M1 or
 higher. Perhaps =structure=? But structures do not normally have
 methods. We probably should look at non-C-based languages for ideas.
+
+Final word on this:
+
+- object is fine, in keeping with the other names (concept,
+  enumeration, etc). In reality, we need to end this fixation for
+  =class=. We are creating a meta-model language to describe types for
+  a specific purpose.
+- we need to document this rationale in the manual at some point.
 
 **** Thought experiments on prefixing all types with =meta=
 
@@ -168,6 +178,26 @@ these places, it has lost all of its meaning. We need to take the
 eCore approach and assume we are in the meta-layer, so there is no
 need for a prefix. The only problem is =object=.
 
+*** COMPLETED Populate model module path                              :story:
+    CLOSED: [2015-11-20 Fri 23:08]
+    CLOCK: [2015-11-20 Fri 22:09]--[2015-11-20 Fri 23:08] =>  0:59
+
+We need to start updating model name.
+
+*** Update name factory to compute qualified name                     :story:
+
+We started off by disabling the qualified name to make resolution
+work. We now need to enable it and fix all issues.
+
+*** Remove original model name from location                          :story:
+
+Since the objective of location is to track a point in element space,
+it seems a bit redundant to have original model name there. We should
+move this to the element itself.
+
+The good thing about this is that we can now locate the model even
+when the type was placed in global namespace.
+
 *** Add =interface= stereotype                                        :story:
 
 Even though we can't generate much outside of plain types, we should
@@ -189,11 +219,6 @@ terminology for this.
 
 We now know model items are called elements, so this should be an
 element traversal.
-
-*** Update name factory to compute qualified name                     :story:
-
-We started off by disabling the qualified name to make resolution
-work. We now need to enable it and fix all issues.
 
 *** Handle types placed in the global namespace                       :story:
 
@@ -223,15 +248,6 @@ Actually the solution for this may be to split the "location" model
 name from the "origin" model name. Location is the position of the
 type in element space, and so should be blank. Origin is the name of
 the model it came from, and should exist in the element itself.
-
-*** Remove original model name from location                          :story:
-
-Since the objective of location is to track a point in element space,
-it seems a bit redundant to have original model name there. We should
-move this to the element itself.
-
-The good thing about this is that we can now locate the model even
-when the type was placed in global namespace.
 
 *** Use qualified name as the key of the intermediate model container :story:
 
