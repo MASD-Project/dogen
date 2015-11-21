@@ -2352,7 +2352,7 @@ bit of a hack. So instead we created a model with all the specs.
 
 Dependencies is a map of reference; why not call it references?
 
-*** Create a validator in SML                                         :story:
+*** Create a validator in yarn                                        :story:
 
 #+begin_quote
 *Story*: As a dogen user, I want to know exactly why my diagram is not
@@ -2361,7 +2361,7 @@ errors and generate valid code so that I don't have to figure out what
 went wrong by looking at the generated code and the compiler errors.
 #+end_quote
 
-We need a class responsible for checking the consistency of the SML
+We need a class responsible for checking the consistency of the yarn
 model. There are several things we need to check for non-merged
 models:
 
@@ -2374,7 +2374,7 @@ models:
   invalid characters. They should also not be a keyword on the target
   language (e.g. =if=, etc.). We should use a identifier parser for
   name validation.
-- the qname of all keys in objects, etc must be part of the current
+- the name of all keys in objects, etc must be part of the current
   model.
 - the qnames of all types as keys are consistent with the values.
 - type_name is non-empty; cannot be blank or a variable name
@@ -2420,6 +2420,8 @@ models:
 - we don't support generic types (see [[Supporting%20user%20defined%20generic%20types][Supporting user defined generic
 types]]) so we should throw if a user attempts to use them.
 - a type marked as final cannot have descendants.
+- types in global namespace must have an empty location.
+- if model module path is empty, location must also be empty.
 
 For merged models:
 
