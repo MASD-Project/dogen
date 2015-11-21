@@ -1727,39 +1727,15 @@ workflow does in each model.
 We should only implement this story when all of the major refactoring
 has been done.
 
-*** Refactor Dia to SML transformer                                   :story:
+*** Refactor =yarn_dia= transformer                                   :story:
 
-*Recent Ideas*
-
-- remove top level module names. This is required by the identifier
-  parser and should be done in SML. We need to ensure modules have a
-  way of identifying them as top-level or not top-level and the
-  identifier parser takes in a collection of modules and does the
-  appropriate pre-processing. We could add a =is_top_level= property
-  to the module as well as a name: =owner=. These could be populated
-  as part of the tack workflows.
-- references computation should be done in tack.
-
-*Previous Ideas*
-
-- remove all properties from context which are used only internally in
-  the transformer.
-- split context into inputs and outputs: =transformation_result= as a
-  candidate for the outputs.
-- inputs are passed in at construction time and remain constant.
-- each transformation method returns a value which can be slotted into
-  the model by the workflow, contained in a transformation result.
-- this does mean a lot of concatenation at the workflow level though.
-- the only problem with this approach is that we do not have a common
-  base class in SML for all the types that transformer generates. If
-  we did we could just return it and let workflow visit the base class
-  to dispatch it to the correct type. This may be the right solution
-  (to create such a base class).
-- actually the right thing to do may even be to take away dispatching
-  from the transformer and have specific methods to call from the
-  outside world: transform large package, etc. These return the
-  expected SML type. The only exception is transform note, which
-  returns some kind of =dia_to_sml= intermediate object.
+- rename context to repository and make it const for the
+  transformer. The only reason why we are mutating it now is because
+  of the id_to_name container. It must be possible to update this
+  container from outside the transformer.
+- transformer should just return a list of elements for a given
+  processed object; we should then dispatch the list and insert the
+  elements into the appropriate containers.
 - in workflow =transformation_activity= we should move the logic of
   defaulting to value object into the profiler.
 - the transformer should ensure only zero or one notes can exist for a
@@ -3804,7 +3780,7 @@ model inheritance by using dynamic extensions:
 - create a field that contains a qualified name of a parent,
   regardless of whether it's in this model or not;
 - change the transformer to convert these fields into SML inheritance
-  relationships;
+  relationships.
 
 There may be some fallout in places where we assume that the
 descendents are all in this model such as serialisation, visitors.

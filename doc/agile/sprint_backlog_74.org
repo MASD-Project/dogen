@@ -15,15 +15,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-21 Sat 22:41]
+#+CAPTION: Clock summary at [2015-11-21 Sat 23:05]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *17:25* |       |      |
+| *Total time*                                                                | *17:48* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 17:25   |       |      |
-| Active                                                                      |         | 17:25 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:45 |
+| Stories                                                                     | 17:48   |       |      |
+| Active                                                                      |         | 17:48 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 3:08 |
 | COMPLETED Write the next interesting instalment                             |         |       | 1:05 |
 | COMPLETED SML json hydrator =read_module_path= needs refactoring            |         |       | 1:21 |
 | COMPLETED Generate all yarn names using name factory                        |         |       | 7:25 |
@@ -34,6 +34,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-11-21 Sat 22:42]--[2015-11-21 Sat 23:05] =>  0:23
     CLOCK: [2015-11-19 Thu 18:18]--[2015-11-19 Thu 18:47] =>  0:29
     CLOCK: [2015-11-19 Thu 18:04]--[2015-11-19 Thu 18:17] =>  0:13
     CLOCK: [2015-11-19 Thu 08:44]--[2015-11-19 Thu 08:53] =>  0:09
