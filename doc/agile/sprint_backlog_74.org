@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-21 Sat 23:05]
+#+CAPTION: Clock summary at [2015-11-21 Sat 23:12]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *17:48* |       |      |
+| *Total time*                                                                | *17:54* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 17:48   |       |      |
-| Active                                                                      |         | 17:48 |      |
+| Stories                                                                     | 17:54   |       |      |
+| Active                                                                      |         | 17:54 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:08 |
 | COMPLETED Write the next interesting instalment                             |         |       | 1:05 |
 | COMPLETED SML json hydrator =read_module_path= needs refactoring            |         |       | 1:21 |
@@ -30,7 +30,7 @@
 | COMPLETED Rename yarn's =object=                                            |         |       | 0:14 |
 | COMPLETED Populate model module path                                        |         |       | 0:59 |
 | COMPLETED Update name factory and builder to compute qualified name         |         |       | 0:11 |
-| STARTED Remove original model name from location                            |         |       | 3:25 |
+| STARTED Remove original model name from location                            |         |       | 3:31 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -195,6 +195,7 @@ We started off by disabling the qualified name to make resolution
 work. We now need to enable it and fix all issues.
 
 *** STARTED Remove original model name from location                  :story:
+    CLOCK: [2015-11-21 Sat 23:06]--[2015-11-21 Sat 23:12] =>  0:06
     CLOCK: [2015-11-21 Sat 22:14]--[2015-11-21 Sat 22:41] =>  0:27
     CLOCK: [2015-11-21 Sat 21:20]--[2015-11-21 Sat 22:13] =>  0:53
     CLOCK: [2015-11-21 Sat 21:13]--[2015-11-21 Sat 21:20] =>  0:07

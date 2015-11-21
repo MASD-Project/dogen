@@ -68,10 +68,9 @@ void workflow::initialise_context_activity(const std::string& model_name,
 
     context_ = context();
     auto& m(context_.model());
-
-    const auto& epp(external_module_path);
-    m.name(create_name_for_model(model_name, epp));
-    BOOST_LOG_SEV(lg, debug) << "Target model name: " << m.name().simple();
+    m.name(create_name_for_model(model_name, external_module_path));
+    m.original_model_name(model_name);
+    BOOST_LOG_SEV(lg, debug) << "Model name: " << m.name().qualified();
 
     m.origin_type(yarn::origin_types::user);
     m.is_target(is_target);

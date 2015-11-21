@@ -175,8 +175,11 @@ yarn::intermediate_model hydrator::read_stream(
     boost::property_tree::ptree pt;
     read_json(s, pt);
 
+    const auto model_name_value(pt.get<std::string>(model_name_key));
+    r.original_model_name(model_name_value);
+
     yarn::name_factory nf;
-    r.name(nf.build_model_name(pt.get<std::string>(model_name_key)));
+    r.name(nf.build_model_name(model_name_value));
     BOOST_LOG_SEV(lg, debug) << "Processing model: " << r.name().qualified();
 
     const auto scope(dynamic::scope_types::root_module);
@@ -238,9 +241,9 @@ yarn::intermediate_model hydrator::hydrate(std::istream& s) const {
     using namespace boost::property_tree;
     try {
         const bool is_target(false);
-        auto m(read_stream(s, is_target));
+        auto r(read_stream(s, is_target));
         BOOST_LOG_SEV(lg, debug) << "Parsed JSON stream successfully.";
-        return m;
+        return r;
     } catch (const json_parser_error& e) {
         BOOST_LOG_SEV(lg, error) << invalid_json_file << ": " << e.what();
         BOOST_THROW_EXCEPTION(hydration_error(invalid_json_file + e.what()));
