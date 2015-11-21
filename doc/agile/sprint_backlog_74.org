@@ -192,7 +192,8 @@ We need to start updating model name.
 We started off by disabling the qualified name to make resolution
 work. We now need to enable it and fix all issues.
 
-*** Remove original model name from location                          :story:
+*** STARTED Remove original model name from location                  :story:
+    CLOCK: [2015-11-20 Fri 23:22]--[2015-11-21 Sat 00:39] =>  1:17
 
 Since the objective of location is to track a point in element space,
 it seems a bit redundant to have original model name there. We should
@@ -200,6 +201,16 @@ move this to the element itself.
 
 The good thing about this is that we can now locate the model even
 when the type was placed in global namespace.
+
+Notes:
+
+- generalisation indexer: problem with leaves location.
+- merger: problems with location.
+
+*** Rename =in_global_namespace=                                      :story:
+
+We used a C++ keyword by mistake in yarn, should have been global
+module. We should also check where we generate the global module.
 
 *** Add =interface= stereotype                                        :story:
 

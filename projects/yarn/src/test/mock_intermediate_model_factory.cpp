@@ -433,7 +433,12 @@ model_name(const unsigned int n) const {
 
 bool mock_intermediate_model_factory::
 is_model_n(const unsigned int n, const name& name) const {
-    return is_model_n(n, name.location().original_model_name());
+    const auto mmp(name.location().model_module_path());
+    if (mmp.empty())
+        return false;
+
+    const auto mn(name.location().model_module_path().back());
+    return is_model_n(n, mn);
 }
 
 bool mock_intermediate_model_factory::
@@ -630,7 +635,8 @@ make_multi_type_model(const unsigned int n, const unsigned int type_n,
 
     std::list<std::string> internal_module_path;
     for (unsigned int i(0); i < mod_n; ++i) {
-        const auto m(make_module(i, r.name(), internal_module_path, documentation));
+        const auto m(make_module(i, r.name(), internal_module_path,
+                documentation));
         insert_nameable(r.modules(), m);
         internal_module_path.push_back(module_name(i));
     }

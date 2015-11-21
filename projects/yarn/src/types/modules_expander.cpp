@@ -95,9 +95,19 @@ public:
 };
 
 boost::optional<name> updater::containing_module(const name& n) {
-    if (n.location().original_model_name().empty() ||
-        n.simple() == model_.name().location().original_model_name()) {
-        BOOST_LOG_SEV(lg, debug) << "Type has no containing module: "
+    const bool in_global_namespace(n.location().model_module_path().empty());
+    if (in_global_namespace) {
+        BOOST_LOG_SEV(lg, debug) << "Type is in global module so, it has"
+                                 << " no containing module. Type: "
+                                 << n.qualified();
+        return boost::optional<name>();
+    }
+
+    const bool at_model_level(n.location().internal_module_path().empty());
+    const auto mn(n.location().model_module_path().back());
+    if (at_model_level && n.simple() == mn) {
+        BOOST_LOG_SEV(lg, debug) << "Type is a model module, so containing "
+                                 << "module will be handled later. Type: "
                                  << n.qualified();
         return boost::optional<name>();
     }
@@ -107,6 +117,7 @@ boost::optional<name> updater::containing_module(const name& n) {
     module_n.location().original_model_name(n.location().original_model_name());
     module_n.location().external_module_path(
         n.location().external_module_path());
+
 
     if (n.location().internal_module_path().empty()) {
         module_n.simple(n.location().original_model_name());
@@ -125,7 +136,7 @@ boost::optional<name> updater::containing_module(const name& n) {
 
     BOOST_LOG_SEV(lg, debug) << "Could not find containing module: "
                              << module_n.qualified();
-    return boost::optional<name>();;
+    return boost::optional<name>();
 }
 
 void updater::update(element& e) {
