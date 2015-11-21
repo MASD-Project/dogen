@@ -138,6 +138,7 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
             e.name(n);
             e.origin_type(m.origin_type());
             e.generation_type(m.generation_type());
+            e.in_global_namespace(in_global_namespace);
 
             if (documentation)
                 e.documentation(*documentation);

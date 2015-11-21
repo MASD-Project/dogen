@@ -39,7 +39,6 @@ namespace {
 auto lg(logger_factory("yarn.merger"));
 
 const std::string empty;
-const std::string hardware_model_name("hardware");
 const std::string msising_dependency("Cannot find target dependency: ");
 const std::string missing_target("Target model not present");
 const std::string multiple_merge("Attempt to merge more than once.");
@@ -81,16 +80,20 @@ void merger::require_not_has_merged() const {
     BOOST_THROW_EXCEPTION(merging_error(multiple_merge));
 }
 
-void merger::check_name(const std::string& model_name, const name& key,
-    const name& value) const {
+void merger::check_name(const name& model_name, const name& key,
+    const name& value, const bool in_global_namespace) const {
 
-    if (key.location().original_model_name() != model_name) {
-        std::ostringstream s;
-        s << "Type does not belong to this model. Model name: '"
-          << model_name << "'. Type name: "
-          << key.qualified();
-        BOOST_LOG_SEV(lg, error) << s.str();
-        BOOST_THROW_EXCEPTION(merging_error(s.str()));
+    if (!in_global_namespace) {
+        if (key.location().external_module_path() !=
+            model_name.location().external_module_path() ||
+            key.location().model_module_path() !=
+            model_name.location().model_module_path()) {
+            std::ostringstream s;
+            s << "Type does not belong to this model. Model name: '"
+              << model_name.qualified() << "'. Type name: " << key.qualified();
+            BOOST_LOG_SEV(lg, error) << s.str();
+            BOOST_THROW_EXCEPTION(merging_error(s.str()));
+        }
     }
 
     if (key != value) {
@@ -154,32 +157,38 @@ void merger::merge_model(const intermediate_model& m) {
                             << " enumerations: " << m.enumerations().size()
                             << " objects: " << m.objects().size();
 
-    const auto mn(m.name().location().original_model_name());
-    for (const auto& c : m.concepts()) {
-        check_name(mn, c.first, c.second.name());
-        merged_model_.concepts().insert(c);
+    for (const auto& pair : m.concepts()) {
+        const auto& k(pair.first);
+        const auto& v(pair.second);
+        check_name(m.name(), k, v.name(), v.in_global_namespace());
+        merged_model_.concepts().insert(pair);
     }
 
     for (const auto& pair : m.primitives()) {
-        // FIXME: mega hack to handle primitive model.
-        const auto pmn(mn == hardware_model_name ? empty : mn);
-        check_name(pmn, pair.first, pair.second.name());
+        const auto& k(pair.first);
+        const auto& v(pair.second);
+        check_name(m.name(), k, v.name(), v.in_global_namespace());
         merged_model_.primitives().insert(pair);
     }
 
     for (const auto& pair : m.enumerations()) {
-        check_name(mn, pair.first, pair.second.name());
+        const auto& k(pair.first);
+        const auto& v(pair.second);
+        check_name(m.name(), k, v.name(), v.in_global_namespace());
         merged_model_.enumerations().insert(pair);
     }
 
     for (const auto& pair : m.objects()) {
-        check_name(mn, pair.first, pair.second.name());
+        const auto& k(pair.first);
+        const auto& v(pair.second);
+        check_name(m.name(), k, v.name(), v.in_global_namespace());
         merged_model_.objects().insert(pair);
     }
 
     for (const auto& pair : m.modules()) {
-        if (!pair.first.simple().empty())
-            check_name(mn, pair.first, pair.second.name());
+        const auto& k(pair.first);
+        const auto& v(pair.second);
+        check_name(m.name(), k, v.name(), v.in_global_namespace());
         merged_model_.modules().insert(pair);
     }
 }

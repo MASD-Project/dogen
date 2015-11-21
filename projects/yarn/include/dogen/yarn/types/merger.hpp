@@ -94,8 +94,8 @@ private:
      *
      * @note should be moved to validator.
      */
-    void check_name(const std::string& model_name, const name& key,
-        const name& value) const;
+    void check_name(const name& model_name, const name& key,
+        const name& value, const bool in_global_namespace) const;
 
     /**
      * @brief Update all references to external models.

@@ -25,6 +25,7 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
@@ -44,7 +45,6 @@ const mock_intermediate_model_factory factory(flags);
 
 const std::string invalid_simple_name("INVALID");
 const std::string invalid_model_name("INVALID");
-const std::string some_path("some_path");
 
 const std::string incorrect_model("Type does not belong to this model");
 const std::string double_merging("Attempt to merge more than once");
@@ -72,8 +72,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
 
     const unsigned int n(5);
     for (unsigned int i(1); i < n; ++i) {
-        auto m(factory.make_single_type_model(i));
-        m.name().location().external_module_path().push_back(some_path);
+        const auto m(factory.make_single_type_model(i));
         mg.add(m);
     }
 
@@ -89,11 +88,8 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     BOOST_CHECK(combined.modules().empty());
     BOOST_CHECK(combined.references().size() == 4);
 
-    for (const auto pair : combined.references()) {
-        BOOST_CHECK(pair.first.location().external_module_path().front() ==
-            some_path);
+    for (const auto pair : combined.references())
         BOOST_CHECK(pair.second == dogen::yarn::origin_types::user);
-    }
 
     std::set<std::string> object_names;
     std::set<std::string> model_names;
@@ -153,7 +149,10 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     SETUP_TEST_LOG("type_with_incorrect_model_name_throws");
     auto m(factory.make_single_type_model());
     m.is_target(true);
+
     m.name().location().original_model_name(invalid_model_name);
+    m.name().location().model_module_path().clear();
+    m.name().location().model_module_path().push_back(invalid_model_name);
 
     dogen::yarn::merger mg;
     mg.add(m);
