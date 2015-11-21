@@ -220,7 +220,9 @@ BOOST_AUTO_TEST_CASE(trivial_model_hydrates_into_expected_model) {
     const auto m(hydrate(trivial_model));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    BOOST_CHECK(m.name().location().original_model_name() == model_name);
+    BOOST_REQUIRE(m.name().location().model_module_path().size() == 1);
+    BOOST_CHECK(*(m.name().location().model_module_path().begin())
+        == model_name);
     BOOST_CHECK(m.name().location().internal_module_path().empty());
     BOOST_CHECK(m.name().location().external_module_path().empty());
     BOOST_CHECK(m.documentation() == documentation);
@@ -231,8 +233,8 @@ BOOST_AUTO_TEST_CASE(trivial_model_hydrates_into_expected_model) {
 
     BOOST_CHECK(pair.first == n);
     BOOST_CHECK(n.simple() == type_name);
-    BOOST_CHECK(n.location().original_model_name() ==
-        m.name().location().original_model_name());
+    BOOST_CHECK(n.location().model_module_path() ==
+        m.name().location().model_module_path());
     BOOST_CHECK(n.location().internal_module_path().empty());
     BOOST_CHECK(n.location().external_module_path().empty());
     BOOST_CHECK(pair.second.documentation() == documentation);
@@ -244,7 +246,9 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
     const auto m(hydrate(tagged_model));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    BOOST_CHECK(m.name().location().original_model_name() == model_name);
+    BOOST_REQUIRE(m.name().location().model_module_path().size() == 1);
+    BOOST_CHECK(*(m.name().location().model_module_path().begin())
+        == model_name);
     BOOST_CHECK(m.name().location().internal_module_path().empty());
     BOOST_CHECK(m.name().location().external_module_path().empty());
     BOOST_CHECK(m.documentation() == documentation);
@@ -269,8 +273,8 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
 
     BOOST_CHECK(pair.first == n);
     BOOST_CHECK(n.simple() == type_name);
-    BOOST_CHECK(n.location().original_model_name() ==
-        m.name().location().original_model_name());
+    BOOST_CHECK(n.location().model_module_path() ==
+        m.name().location().model_module_path());
     BOOST_CHECK(n.location().internal_module_path().empty());
     BOOST_CHECK(n.location().external_module_path().empty());
     BOOST_CHECK(pair.second.documentation() == documentation);
@@ -365,8 +369,9 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
     const auto m(hydrate(p));
 
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
-    BOOST_CHECK(m.name().location().original_model_name()
-        == cpp_std_model_name);
+    BOOST_REQUIRE(m.name().location().model_module_path().size() == 1);
+    BOOST_CHECK(m.name().location().model_module_path().front() ==
+        cpp_std_model_name);
     BOOST_CHECK(m.origin_type() == dogen::yarn::origin_types::system);
 
     const auto& objects(m.objects());
@@ -374,7 +379,10 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
     for (const auto& pair : objects) {
         const auto& o(pair.second);
         const auto n(o.name());
-        BOOST_CHECK(n.location().original_model_name() == cpp_std_model_name);
+
+        BOOST_REQUIRE(n.location().model_module_path().size() == 1);
+        BOOST_CHECK(n.location().model_module_path().front() ==
+            cpp_std_model_name);
         BOOST_CHECK(n.location().external_module_path().empty());
         BOOST_CHECK(o.origin_type() == dogen::yarn::origin_types::system);
 
@@ -388,15 +396,19 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
     for (const auto& pair : primitives) {
         const auto p(pair.second);
         const auto n(p.name());
-        BOOST_CHECK(n.location().original_model_name() == cpp_std_model_name);
+        BOOST_REQUIRE(n.location().model_module_path().size() == 1);
+        BOOST_CHECK(n.location().model_module_path().front() ==
+            cpp_std_model_name);
         BOOST_CHECK(n.location().external_module_path().empty());
     }
 
     BOOST_CHECK(m.enumerations().empty());
     BOOST_REQUIRE(m.modules().size() == 1);
     const auto& fn(m.modules().begin()->first);
-    BOOST_REQUIRE(fn.simple() == "std");
-    BOOST_REQUIRE(fn.location().original_model_name() == "std");
+    BOOST_REQUIRE(fn.simple() == cpp_std_model_name);
+    BOOST_REQUIRE(fn.location().model_module_path().size() == 1);
+    BOOST_CHECK(fn.location().model_module_path().front() ==
+        cpp_std_model_name);
     BOOST_CHECK(m.references().empty());
     BOOST_CHECK(m.leaves().empty());
     BOOST_CHECK(m.name().location().external_module_path().empty());
@@ -410,8 +422,10 @@ BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
     const auto m(hydrate(p));
 
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
-    BOOST_CHECK(m.name().location().original_model_name() ==
+    BOOST_REQUIRE(m.name().location().model_module_path().size() == 1);
+    BOOST_CHECK(m.name().location().model_module_path().front() ==
         cpp_boost_model_name);
+
     BOOST_CHECK(m.origin_type() == dogen::yarn::origin_types::system);
 
     const auto& objects(m.objects());
@@ -419,7 +433,9 @@ BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
     for (const auto& pair : objects) {
         const auto& o(pair.second);
         const auto n(o.name());
-        BOOST_CHECK(n.location().original_model_name() == cpp_boost_model_name);
+        BOOST_REQUIRE(n.location().model_module_path().size() == 1);
+        BOOST_CHECK(n.location().model_module_path().front() ==
+            cpp_boost_model_name);
         BOOST_CHECK(n.location().external_module_path().empty());
 
         using dogen::yarn::object_types;
@@ -441,7 +457,8 @@ BOOST_AUTO_TEST_CASE(hardware_model_hydrates_into_expected_model) {
     const auto m(hydrate(p));
 
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
-    BOOST_CHECK(m.name().location().original_model_name()
+    BOOST_REQUIRE(m.name().location().model_module_path().size() == 1);
+    BOOST_CHECK(*(m.name().location().model_module_path().begin())
         == hardware_model_name);
     BOOST_CHECK(m.origin_type() == dogen::yarn::origin_types::system);
 
@@ -451,7 +468,7 @@ BOOST_AUTO_TEST_CASE(hardware_model_hydrates_into_expected_model) {
     for (const auto& pair : primitives) {
         const auto p(pair.second);
         const auto n(p.name());
-        BOOST_CHECK(n.location().original_model_name().empty());
+        BOOST_CHECK(n.location().model_module_path().empty());
         BOOST_CHECK(n.location().external_module_path().empty());
     }
 

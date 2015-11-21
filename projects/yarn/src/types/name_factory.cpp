@@ -165,7 +165,7 @@ name name_factory::build_combined_element_name(const name& model_name,
 
     const auto& l(model_name.location());
     if (populate_model_name_if_blank &&
-        n.location().original_model_name().empty()) {
+        n.location().model_module_path().empty()) {
         n.location().original_model_name(l.original_model_name());
         n.location().model_module_path(l.model_module_path());
     }

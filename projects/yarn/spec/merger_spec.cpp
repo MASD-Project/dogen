@@ -95,9 +95,10 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     std::set<std::string> model_names;
     for (const auto& pair : combined.objects()) {
         const auto& n(pair.first);
-        object_names.insert(n.location().original_model_name() + "_"
-            + n.simple());
-        model_names.insert(n.location().original_model_name());
+        BOOST_REQUIRE(n.location().model_module_path().size() == 1);
+        object_names.insert(n.location().model_module_path().front() + "_" +
+            n.simple());
+        model_names.insert(n.location().model_module_path().front());
     }
 
     BOOST_REQUIRE(object_names.size() == n);
@@ -150,7 +151,6 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     auto m(factory.make_single_type_model());
     m.is_target(true);
 
-    m.name().location().original_model_name(invalid_model_name);
     m.name().location().model_module_path().clear();
     m.name().location().model_module_path().push_back(invalid_model_name);
 

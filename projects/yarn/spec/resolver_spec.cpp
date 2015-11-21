@@ -103,7 +103,7 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
             o.local_properties().empty());
         if (o.local_properties().size() == 1)
             o.local_properties().begin()->type().
-                type().location().original_model_name("");
+                type().location().model_module_path().clear();
     }
     const auto original(m);
     BOOST_LOG_SEV(lg, debug) << "original: " << original;
