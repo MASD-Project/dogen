@@ -55,31 +55,41 @@ path_derivatives_factory::path_derivatives_factory(
 boost::filesystem::path path_derivatives_factory::
 make_inclusion_path(const settings::path_settings& ps,
     const yarn::name& n) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating inclusion path for: "
-                             << n.qualified();
+    BOOST_LOG_SEV(lg, debug) << "Making inclusion path for: " << n.qualified();
 
     boost::filesystem::path r;
 
+    /* Header files require both the external module path and the
+     * model module path in the file name path.
+     */
     if (ps.file_type() == formatters::file_types::cpp_header) {
-        for(const auto& m : n.location().external_module_path())
+        for (const auto& m : n.location().external_module_path())
             r /= m;
-        r /= n.location().original_model_name();
+
+        for (const auto& m : n.location().model_module_path())
+            r /= m;
     }
 
+    /* If there is a facet directory, and it is configured to
+     * contribute to the file name path, add it.
+     */
     if (!ps.facet_directory().empty() && !ps.disable_facet_directories())
         r /= ps.facet_directory();
 
-    for(const auto& m : n.location().internal_module_path())
+    // Add the module path of the modules internal to this model.
+    for (const auto& m : n.location().internal_module_path())
         r /= m;
 
-    // modules other than the model module contribute their simple
-    // names to the directories.
+    /* Modules other than the model module contribute their simple
+     * names to the directories.
+     */
     if (n != model_.name()) {
         const auto i(model_.modules().find(n));
         if (i != model_.modules().end())
             r /= n.simple();
     }
 
+    // handle the file name.
     std::ostringstream stream;
     stream << n.simple();
 
@@ -96,7 +106,7 @@ make_inclusion_path(const settings::path_settings& ps,
 
     r /= stream.str();
 
-    BOOST_LOG_SEV(lg, debug) << "Done creating inclusion path. Result: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Done making the inclusion path. Result: " << r;
     return r;
 }
 
@@ -109,15 +119,18 @@ make_file_path(const settings::path_settings& ps,
     boost::filesystem::path r;
 
     const auto ft(ps.file_type());
-    const auto omn(n.location().original_model_name());
     switch (ft) {
     case formatters::file_types::cpp_header:
-        r = options_.project_directory_path() / omn;
+        r = options_.project_directory_path();
+        for (const auto& m : n.location().model_module_path())
+            r /= m;
         r /= ps.include_directory_name();
         break;
 
     case formatters::file_types::cpp_implementation:
-        r = options_.project_directory_path() / omn;
+        r = options_.project_directory_path();
+        for (const auto& m : n.location().model_module_path())
+            r /= m;
         r /= ps.source_directory_name();
         break;
 

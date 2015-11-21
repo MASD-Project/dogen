@@ -45,17 +45,20 @@ std::list<std::string> name_builder::
 namespace_list(const yarn::intermediate_model& m, const yarn::name& n) const {
     std::list<std::string> r(n.location().external_module_path());
 
-    // if there is no model name, it won't contribute to the namespaces.
-    if (!n.location().original_model_name().empty())
-        r.push_back(n.location().original_model_name());
+    /* If there is no model name, it won't contribute to the
+     * namespaces.
+     */
+    for (const auto& m : n.location().model_module_path())
+        r.push_back(m);
 
-    // all modules in the module path contribute to namespaces.
+    // All modules in the module path contribute to namespaces.
     const auto mp(n.location().internal_module_path());
     r.insert(r.end(), mp.begin(), mp.end());
 
-    // if the name belongs to the model's module, we need to remove the
-    // module's simple name from the module path (it is in both the
-    // module path and it is also the module's simple name).
+    /* if the name belongs to the model's module, we need to remove the
+     * module's simple name from the module path (it is in both the
+     * module path and it is also the module's simple name).
+     */
     if (n == m.name())
         r.pop_back();
 

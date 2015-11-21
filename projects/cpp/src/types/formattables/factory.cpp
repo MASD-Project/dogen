@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
@@ -62,6 +63,7 @@ const std::string odb_modeline_name("odb");
 const std::string cpp_modeline_name("cpp");
 
 const char angle_bracket('<');
+const std::string underscore("_");
 const std::string boost_name("boost");
 const std::string boost_serialization_gregorian("greg_serialize.hpp");
 
@@ -285,15 +287,15 @@ make_includers(
     std::unordered_map<std::string, std::list<std::string> >
         includes_by_formatter_name;
 
-    const auto omn(m.name().location().original_model_name());
+    const auto mmp(m.name().location().model_module_path());
     const auto registrar_n(create_name(m.name(), registrar_name));
     for (const auto& n_pair : pdrp.path_derivatives_by_name()) {
         const auto n(n_pair.first);
 
-        if (n.location().original_model_name() != omn)
+        if (n.location().model_module_path() != mmp)
             continue;
 
-        if (n.location().original_model_name().empty() && n.simple().empty())
+        if (n.location().model_module_path().empty() && n.simple().empty())
             continue;
 
         if (m.concepts().find(n) != m.concepts().end())
@@ -406,8 +408,11 @@ make_cmakelists(const config::cpp_options& opts,
     }
 
     BOOST_LOG_SEV(lg, debug) << "Generating source CMakeLists.";
+    using boost::algorithm::join;
+    const auto mn(join(m.name().location().model_module_path(), underscore));
+
     auto cm(std::make_shared<cmakelists_info>());
-    cm->model_name(m.name().location().original_model_name());
+    cm->model_name(mn);
     cm->file_name(cmakelists_name);
 
     const auto gs(gsf.make(cmake_modeline_name, root_object));
@@ -426,12 +431,13 @@ make_cmakelists(const config::cpp_options& opts,
                 settings_not_found_for_formatter + ch_fn));
     }
 
-    const auto omn(m.name().location().original_model_name());
-    cm->source_file_path(opts.project_directory_path() /
-        omn / i->second.source_directory_name() /
+    auto base(opts.project_directory_path());
+    for (const auto& p : m.name().location().model_module_path())
+        base /= p;
+
+    cm->source_file_path(base / i->second.source_directory_name() /
         cmakelists_name);
-    cm->include_file_path(opts.project_directory_path() /
-        omn / cmakelists_name);
+    cm->include_file_path(base / cmakelists_name);
 
     const auto odb_ch_fn(
         formatters::odb::traits::class_header_formatter_name());
@@ -468,7 +474,10 @@ factory::make_odb_options(const config::cpp_options& opts,
 
     auto r(std::make_shared<odb_options_info>());
     r->file_name(odb_options_name);
-    r->model_name(m.name().location().original_model_name());
+
+    using boost::algorithm::join;
+    const auto mn(join(m.name().location().model_module_path(), underscore));
+    r->model_name(mn);
 
     const auto gs(gsf.make(odb_modeline_name, root_object));
     r->general_settings(gs);
@@ -483,8 +492,10 @@ factory::make_odb_options(const config::cpp_options& opts,
     r->odb_folder(i->second.facet_directory());
 
     boost::filesystem::path fp;
-    fp = opts.project_directory_path() /
-        m.name().location().original_model_name();
+    fp = opts.project_directory_path();
+    for (const auto& p : m.name().location().model_module_path())
+        fp /= p;
+
     fp /= i->second.source_directory_name();
     fp /= odb_options_name;
     r->file_path(fp);
