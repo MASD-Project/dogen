@@ -47,18 +47,8 @@ const std::string child_with_no_original_parent(
 namespace dogen {
 namespace yarn {
 
-inline bool operator<(const location& lhs, const location& rhs) {
-    return
-        (lhs.original_model_name() < rhs.original_model_name() ||
-            (lhs.original_model_name() == rhs.original_model_name() &&
-                (lhs.external_module_path() < rhs.external_module_path())));
-}
-
 inline bool operator<(const name& lhs, const name& rhs) {
-    return
-        (lhs.location() < rhs.location() ||
-            (lhs.location() == rhs.location() &&
-                (lhs.simple() < rhs.simple())));
+    return lhs.qualified() < rhs.qualified();
 }
 
 bool generalization_indexer::is_leaf(const object& o) const {
@@ -159,10 +149,10 @@ populate(const generalization_details& d, intermediate_model& m) const {
         i->second.relationships()[rt] = pair.second;
         i->second.relationships()[rt].sort();
 
-        const auto omn(m.name().location().original_model_name());
-        for (const auto& l : pair.second) {
-            if (l.location().original_model_name() == omn)
-                m.leaves().insert(l);
+        for (const auto& leaf : pair.second) {
+            if (leaf.location().model_module_path() ==
+                m.name().location().model_module_path())
+                m.leaves().insert(leaf);
         }
     }
 
