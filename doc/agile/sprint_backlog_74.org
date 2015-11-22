@@ -15,26 +15,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-22 Sun 22:16]
+#+CAPTION: Clock summary at [2015-11-22 Sun 23:21]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *18:53* |       |      |
+| *Total time*                                                                | *19:57* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 18:53   |       |      |
-| Active                                                                      |         | 18:53 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 3:08 |
+| Stories                                                                     | 19:57   |       |      |
+| Active                                                                      |         | 19:57 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 3:50 |
 | COMPLETED Write the next interesting instalment                             |         |       | 1:05 |
 | COMPLETED SML json hydrator =read_module_path= needs refactoring            |         |       | 1:21 |
 | COMPLETED Generate all yarn names using name factory                        |         |       | 7:25 |
 | COMPLETED Rename yarn's =object=                                            |         |       | 0:14 |
 | COMPLETED Populate model module path                                        |         |       | 0:59 |
 | COMPLETED Update name factory and builder to compute qualified name         |         |       | 0:11 |
+| COMPLETED Remove original model name from location                          |         |       | 4:07 |
 | STARTED Help contributor setup a windows environment to build dogen         |         |       | 0:45 |
-| STARTED Remove original model name from location                            |         |       | 3:45 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-11-22 Sun 22:39]--[2015-11-22 Sun 23:21] =>  0:42
     CLOCK: [2015-11-21 Sat 22:42]--[2015-11-21 Sat 23:05] =>  0:23
     CLOCK: [2015-11-19 Thu 18:18]--[2015-11-19 Thu 18:47] =>  0:29
     CLOCK: [2015-11-19 Thu 18:04]--[2015-11-19 Thu 18:17] =>  0:13
@@ -218,6 +219,36 @@ Notes:
 - generalisation indexer: problem with leaves location.
 - merger: problems with location.
 
+*** COMPLETED Handle types placed in the global namespace             :story:
+    CLOSED: [2015-11-22 Sun 22:39]
+
+Types such as =int= etc must be handled differently from other
+types. The idea here is that these types are part of a model but
+declared directly into the global namespace. If we model things
+correctly, these types would exist in a point in element space where
+everything but simple name is empty. However we do not do this because
+it would mean that we could not distinguish the origin of such
+types. It is still not clear why this is a requirement.
+
+- if we do not need to remember the origin of a type, we could simply
+  change JSON and dia to allow types to live in global namespace;
+  perhaps a flag in global namespace would trigger everything on that
+  type to be blank (all location fields). This is the right solution
+  as it would then mean resolver would just work and we can now add
+  any type to the global namespace.
+- if we do need to remember the origin, we could manufacture a type
+  name from each reference name, by taking all properties from the
+  reference name (model name, etc). The problem with this is that we
+  can now refer to any type in any model without qualifying it with
+  model name, which is not ideal. So we'd have to have a flag at the
+  element level (something like is in global namespace) to figure out
+  what is valid and what is not.
+
+Actually the solution for this may be to split the "location" model
+name from the "origin" model name. Location is the position of the
+type in element space, and so should be blank. Origin is the name of
+the model it came from, and should exist in the element itself.
+
 *** STARTED Help contributor setup a windows environment to build dogen :story:
     CLOCK: [2015-11-22 Sun 20:55]--[2015-11-22 Sun 21:40] =>  0:45
 
@@ -249,6 +280,178 @@ https://cmake.org/files/v3.4/cmake-3.4.0-win32-x86.exe
 We used a C++ keyword by mistake in yarn, should have been global
 module. We should also check where we generate the global module.
 
+*** Rename original parents                                           :story:
+
+Inheritance follows a tree of some kind. We should use tree
+terminology for this.
+
+*** Rename all model items traversal                                  :story:
+
+We now know model items are called elements, so this should be an
+element traversal.
+
+*** Use qualified name as the key of the intermediate model container :story:
+
+We are using name as the key for the intermediate model container, but
+once we have proper qualified name support everywhere, there is no
+reason why we can't just use the qualified name. We should not change
+the logic in the =cpp= containers as there the name is used for
+processing reasons - we'd end up having to have the name as the value
+instead.
+
+*** Remove =service= stereotype                                       :story:
+
+This really just means non-generatable, or do not generate. We already
+have a stereotype for this. Remove =service= and any other stereotype
+which is not being used such as =value_object= etc.
+
+Actually, non-generatable is not a stereotype really. We should
+instead have some meta-data that can affect generation:
+
+- do not generate: do nothing at all. For references only. If a file
+  exists with this file name, it will be deleted as part of
+  housekeeping.
+- generate blank file if it doesn't exist: we don't even want a
+  template.
+- generate with content if it doesn't exist, do not touch otherwise:
+  what we call services at the moment. Generate a "template" that then
+  gets filled in manually.
+- generate and merge: merge the contents of the generated file with
+  the current contents in the file system. When we support merging.
+- generate and overwrite: generate the file and overwrite whatever
+  exists in the file system.
+
+The second behaviour we get for free with services is that we disable
+all facets except for types. A few points:
+
+- we may want to have io, serialisation, etc. This is not possible at
+  present. If all state of a service is of supported types, we could
+  even use existing code generation.
+
+*** Refactor code around model origination                            :story:
+
+- remove origin types and generation types, replacing it with just a
+  boolean for is target. Actually we need something like:
+  proxy_reference, non_proxy_reference, target. We also need a good
+  name for this enumeration:
+- at present we are using origin type to determine whether to create a
+  registrar, etc in cpp model. There is no other use case for
+  this. This is done in several places due to the bad handling of C++
+  specific types. Grep for =references= in =cpp= to find all
+  locations. We could split references into two (dogen, non-dogen).
+- we should also replace has generatable types with something more
+  like "target model has types" or "is target model empty". The idea
+  we are trying to capture is that the target model contained at least
+  one type. This could be set by the merger when it processes the
+  target model.
+
+*Previous Understanding*
+
+In the past we added a number of knobs around generation, all with
+their own problems:
+
+- =origin_types=: was the model/type created by the user or the
+  system. in reality this means did the model come from Dia or
+  JSON. this is confusing as the user can also add JSON files (their
+  own model library) and in the future the user can use JSON
+  exclusively without needed Dia at all.
+- =generation_types=: if the model is target, all types are to be
+  generated /unless/ they are not properly supported, in which case
+  they are to be "partially" generated (as is the case with
+  services). This is a formatter decision and yarn should not know
+  anything about it. Actually this is not quite true; users may want
+  to stop generation.
+
+These can be replaced by a single enumeration that indicates if the
+type/model is target or not.
+
+This work should be integrated with the model types story.
+
+Merged stories:
+
+*Split references into dogen and non-dogen models*
+
+If we had two containers of references, one for dogen models and
+another one for non-dogen models - which we could give a nice name, to
+imply its foreign origin - we could then use the dogen references for
+registrar, etc. This is a replacement for the origin type.
+
+We need a good name for these. Candidates:
+
+- proxy model: represents something that exists in the outside
+  world. e.g. =is_proxy=.
+
+*** Add support for composite model names in name                     :story:
+
+We added the model names list to location, but we are still not
+parsing composite model names (e.g. =yarn.dia=). This will probably
+break a lot of stuff.
+
+- deal with the fallout in terms of file paths creation, etc.
+- split model names with dots into multiple model paths.
+- resolver needs to take into account this case, in a similar way
+  which we handle models with the same name as modules in the target
+  model.
+- a model should have: an element identifier which is identical to the
+  root module (the module that represents the model). A model is
+  itself an element.
+
+Merged stories:
+
+*Add support for model names with dots*
+
+It is quite annoying to have to create folders and sub-folders for the
+main projects. This is not too bad right now because we don't really
+make use of nesting that much, other than with test models. However,
+now that the architecture is clear and we need to make use of nesting,
+it becomes more of a concern. For example:
+
+: / a
+:   / b
+:   / c
+: / d
+:   / e
+:   / f
+
+This is clearer as:
+
+: / a
+: / a.b
+: / a.c
+: / d.e
+: / d.f
+
+However, in order to implement this we need a bit of cleverness:
+
+- for the purposes of files, the dot represents a dot;
+- for the purposes of namespaces, we must create several namespaces
+  (e.g. yarn::core).
+
+This is also inline with the idea that the model name does not always
+contribute to the namespaces as required by primitives. We basically
+need a cleverer version of qname to handle all of these scenarios.
+
+It may also be worth taking into account the other story on this topic
+where we considered using underscores instead of folders for facet
+names. It may be nicer to have dots for this,
+e.g. =types.my_class.hpp=.
+
+Idea:
+
+=names= should have a model name and a model package; only the model
+package contributes to the namespaces. The model name is unpacked into
+multiple model packages (e.g. "a.b" => a::b). The file name uses the
+model name, not the model package.
+
+*** Use the single element container model in =cpp=                   :story:
+
+We have implemented a single element container in yarn but its not yet
+being used. We need to:
+
+- update yarn workflow to return this model instead of intermediate
+  model;
+ replace all usages of intermediate model in =cpp= with this model.
+
 *** Add =interface= stereotype                                        :story:
 
 Even though we can't generate much outside of plain types, we should
@@ -260,63 +463,6 @@ generate the interface.
 
 We copied across the code for the module expander test from yarn json
 but didn't actually finished implementing it.
-
-*** Rename original parents                                           :story:
-
-Inheritance follows a tree of some kind. We should use tree
-terminology for this.
-
-*** Rename all model items traversal                                  :story:
-
-We now know model items are called elements, so this should be an
-element traversal.
-
-*** Handle types placed in the global namespace                       :story:
-
-Types such as =int= etc must be handled differently from other
-types. The idea here is that these types are part of a model but
-declared directly into the global namespace. If we model things
-correctly, these types would exist in a point in element space where
-everything but simple name is empty. However we do not do this because
-it would mean that we could not distinguish the origin of such
-types. It is still not clear why this is a requirement.
-
-- if we do not need to remember the origin of a type, we could simply
-  change JSON and dia to allow types to live in global namespace;
-  perhaps a flag in global namespace would trigger everything on that
-  type to be blank (all location fields). This is the right solution
-  as it would then mean resolver would just work and we can now add
-  any type to the global namespace.
-- if we do need to remember the origin, we could manufacture a type
-  name from each reference name, by taking all properties from the
-  reference name (model name, etc). The problem with this is that we
-  can now refer to any type in any model without qualifying it with
-  model name, which is not ideal. So we'd have to have a flag at the
-  element level (something like is in global namespace) to figure out
-  what is valid and what is not.
-
-Actually the solution for this may be to split the "location" model
-name from the "origin" model name. Location is the position of the
-type in element space, and so should be blank. Origin is the name of
-the model it came from, and should exist in the element itself.
-
-*** Use qualified name as the key of the intermediate model container :story:
-
-We are using name as the key for the intermediate model container, but
-once we have proper qualified name support everywhere, there is no
-reason why we can't just use the qualified name. We should not change
-the logic in the =cpp= containers as there the name is used for
-processing reasons - we'd end up having to have the name as the value
-instead.
-
-*** Use the single element container model in =cpp=                   :story:
-
-We have implemented a single element container in yarn but its not yet
-being used. We need to:
-
-- update yarn workflow to return this model instead of intermediate
-  model;
- replace all usages of intermediate model in =cpp= with this model.
 
 *** Implement formattables in terms of yarn types                     :story:
 
@@ -426,43 +572,6 @@ should be handled the same was as odb parameters, but because that is
 done with a massive hack, we are not going to extend the hack to
 copyright holders.
 
-*** Refactor code around model origination                            :story:
-
-- remove origin types and generation types, replacing it with just a
-  boolean for is target.
-- at present we are using origin type to determine whether to create a
-  registrar, etc in cpp model. There is no other use case for
-  this. This is done in several places due to the bad handling of C++
-  specific types. Grep for =references= in =cpp= to find all
-  locations.
-- we should also replace has generatable types with something more
-  like "target model has types" or "is target model empty". The idea
-  we are trying to capture is that the target model contained at least
-  one type. This could be set by the merger when it processes the
-  target model.
-
-*Previous Understanding*
-
-In the past we added a number of knobs around generation, all with
-their own problems:
-
-- =origin_types=: was the model/type created by the user or the
-  system. in reality this means did the model come from Dia or
-  JSON. this is confusing as the user can also add JSON files (their
-  own model library) and in the future the user can use JSON
-  exclusively without needed Dia at all.
-
-- =generation_types=: if the model is target, all types are to be
-  generated /unless/ they are not properly supported, in which case
-  they are to be "partially" generated (as is the case with
-  services). This is a formatter decision and SML should not know
-  anything about it.
-
-These can be replaced by a single enumeration that indicates if the
-type/model is target or not.
-
-This work should be integrated with the model types story.
-
 *** Filter out unused types from final model                          :story:
 
 When we finished assembling the model we should be able to determine
@@ -483,79 +592,9 @@ non-target names that are in use and return those.
   type. Should be done with merged model (look for a primitive type with
   property =is_default_enumeration_type=).
 
-*** Split references into dogen and non-dogen models                  :story:
-
-If we had two containers of references, one for dogen models and
-another one for non-dogen models - which we could give a nice name, to
-imply its foreign origin - we could then use the dogen references for
-registrar, etc. This is a replacement for the origin type.
-
-*** Add support for composite model names in name                     :story:
-
-We added the model names list to location, but we are still not
-parsing composite model names (e.g. =yarn.dia=). This will probably
-break a lot of stuff.
-
-- deal with the fallout in terms of file paths creation, etc.
-- split model names with dots into multiple model paths.
-
-- a model should have: an element identifier which is identical to the
-  root module (the module that represents the model). A model is
-  itself an element.
-
-*** Add =operator<= for names                                         :story:
-
-We seem to redefine this all over the place. Create a utility class
-somewhere.
-
 *** Services and leaves are not properly handled                      :story:
 
 We are manually ignoring services when calculating leaves.
-
-*** Add support for model names with dots                             :story:
-
-It is quite annoying to have to create folders and sub-folders for the
-main projects. This is not too bad right now because we don't really
-make use of nesting that much, other than with test models. However,
-now that the architecture is clear and we need to make use of nesting,
-it becomes more of a concern. For example:
-
-: / a
-:   / b
-:   / c
-: / d
-:   / e
-:   / f
-
-This is clearer as:
-
-: / a
-: / a.b
-: / a.c
-: / d.e
-: / d.f
-
-However, in order to implement this we need a bit of cleverness:
-
-- for the purposes of files, the dot represents a dot;
-- for the purposes of namespaces, we must create several namespaces
-  (e.g. yarn::core).
-
-This is also inline with the idea that the model name does not always
-contribute to the namespaces as required by primitives. We basically
-need a cleverer version of qname to handle all of these scenarios.
-
-It may also be worth taking into account the other story on this topic
-where we considered using underscores instead of folders for facet
-names. It may be nicer to have dots for this,
-e.g. =types.my_class.hpp=.
-
-Idea:
-
-=qnames= should have a model name and a model package; only the model
-package contributes to the namespaces. The model name is unpacked into
-multiple model packages (e.g. "a.b" => a::b). The file name uses the
-model name, not the model package.
 
 *** Use dots in data files extensions                                 :story:
 
@@ -617,3 +656,11 @@ MOF/eCore. As much as possible but without going overboard. Ensure we
 do not pick up meta-meta-model concepts by mistake. Rename nested
 qname to something more sensible from MOF/eCore. Review all concept
 names in this light.
+*** CANCELLED Add =operator<= for names                               :story:
+    CLOSED: [2015-11-22 Sun 22:44]
+
+*Rationale*: we will use the element identifier as the key for most
+things so this will no longer be required.
+
+We seem to redefine this all over the place. Create a utility class
+somewhere.
