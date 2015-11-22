@@ -52,18 +52,8 @@ namespace yarn {
  * This is required as part of the current (very sub-optimal)
  * implementation of concept processing.
  */
-inline bool operator<(const location& lhs, const location& rhs) {
-    return
-        (lhs.original_model_name() < rhs.original_model_name() ||
-            (lhs.original_model_name() == rhs.original_model_name() &&
-                (lhs.external_module_path() < rhs.external_module_path())));
-}
-
 inline bool operator<(const name& lhs, const name& rhs) {
-    return
-        (lhs.location() < rhs.location() ||
-            (lhs.location() == rhs.location() &&
-                (lhs.simple() < rhs.simple())));
+    return lhs.qualified() < rhs.qualified();
 }
 
 object& concept_indexer::find_object(const name& n, intermediate_model& m) {
