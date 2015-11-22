@@ -56,7 +56,7 @@ public:
 
 public:
     element(
-        const bool in_global_namespace,
+        const bool in_global_module,
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
         const dogen::yarn::name& name,
@@ -83,11 +83,11 @@ public:
 
 public:
     /**
-     * @brief If true, the type is located in the global namespace.
+     * @brief If true, the type is located in the global module.
      */
     /**@{*/
-    bool in_global_namespace() const;
-    void in_global_namespace(const bool v);
+    bool in_global_module() const;
+    void in_global_module(const bool v);
     /**@}*/
 
     /**
@@ -170,7 +170,7 @@ protected:
     void swap(element& other) noexcept;
 
 private:
-    bool in_global_namespace_;
+    bool in_global_module_;
     std::string documentation_;
     dogen::dynamic::object extensions_;
     dogen::yarn::name name_;

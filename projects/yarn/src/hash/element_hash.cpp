@@ -50,7 +50,7 @@ namespace yarn {
 std::size_t element_hasher::hash(const element& v) {
     std::size_t seed(0);
 
-    combine(seed, v.in_global_namespace());
+    combine(seed, v.in_global_module());
     combine(seed, v.documentation());
     combine(seed, v.extensions());
     combine(seed, v.name());

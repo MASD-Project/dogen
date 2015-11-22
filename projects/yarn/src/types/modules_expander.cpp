@@ -98,7 +98,7 @@ boost::optional<name> updater::containing_module(const name& n) {
     const bool in_global_namespace(n.location().model_module_path().empty());
     if (in_global_namespace) {
         BOOST_LOG_SEV(lg, debug) << "Type is in global module so, it has"
-                                 << " no containing module. Type: "
+                                 << " no containing module yet. Type: "
                                  << n.qualified();
         return boost::optional<name>();
     }

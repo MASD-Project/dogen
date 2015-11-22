@@ -53,12 +53,12 @@ namespace dogen {
 namespace yarn {
 
 element::element()
-    : in_global_namespace_(static_cast<bool>(0)),
+    : in_global_module_(static_cast<bool>(0)),
       generation_type_(static_cast<dogen::yarn::generation_types>(0)),
       origin_type_(static_cast<dogen::yarn::origin_types>(0)) { }
 
 element::element(element&& rhs)
-    : in_global_namespace_(std::move(rhs.in_global_namespace_)),
+    : in_global_module_(std::move(rhs.in_global_module_)),
       documentation_(std::move(rhs.documentation_)),
       extensions_(std::move(rhs.extensions_)),
       name_(std::move(rhs.name_)),
@@ -68,7 +68,7 @@ element::element(element&& rhs)
       containing_module_(std::move(rhs.containing_module_)) { }
 
 element::element(
-    const bool in_global_namespace,
+    const bool in_global_module,
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const dogen::yarn::name& name,
@@ -76,7 +76,7 @@ element::element(
     const dogen::yarn::origin_types origin_type,
     const std::string& original_model_name,
     const boost::optional<dogen::yarn::name>& containing_module)
-    : in_global_namespace_(in_global_namespace),
+    : in_global_module_(in_global_module),
       documentation_(documentation),
       extensions_(extensions),
       name_(name),
@@ -94,7 +94,7 @@ void element::to_stream(std::ostream& s) const {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::element\"" << ", "
-      << "\"in_global_namespace\": " << in_global_namespace_ << ", "
+      << "\"in_global_module\": " << in_global_module_ << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"extensions\": " << extensions_ << ", "
       << "\"name\": " << name_ << ", "
@@ -107,7 +107,7 @@ void element::to_stream(std::ostream& s) const {
 
 void element::swap(element& other) noexcept {
     using std::swap;
-    swap(in_global_namespace_, other.in_global_namespace_);
+    swap(in_global_module_, other.in_global_module_);
     swap(documentation_, other.documentation_);
     swap(extensions_, other.extensions_);
     swap(name_, other.name_);
@@ -118,7 +118,7 @@ void element::swap(element& other) noexcept {
 }
 
 bool element::compare(const element& rhs) const {
-    return in_global_namespace_ == rhs.in_global_namespace_ &&
+    return in_global_module_ == rhs.in_global_module_ &&
         documentation_ == rhs.documentation_ &&
         extensions_ == rhs.extensions_ &&
         name_ == rhs.name_ &&
@@ -128,12 +128,12 @@ bool element::compare(const element& rhs) const {
         containing_module_ == rhs.containing_module_;
 }
 
-bool element::in_global_namespace() const {
-    return in_global_namespace_;
+bool element::in_global_module() const {
+    return in_global_module_;
 }
 
-void element::in_global_namespace(const bool v) {
-    in_global_namespace_ = v;
+void element::in_global_module(const bool v) {
+    in_global_module_ = v;
 }
 
 const std::string& element::documentation() const {

@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-22 Sun 23:32]
+#+CAPTION: Clock summary at [2015-11-22 Sun 23:50]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *20:07* |       |      |
+| *Total time*                                                                | *20:24* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 20:07   |       |      |
-| Active                                                                      |         | 20:07 |      |
+| Stories                                                                     | 20:24   |       |      |
+| Active                                                                      |         | 20:24 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:50 |
 | COMPLETED Write the next interesting instalment                             |         |       | 1:05 |
 | COMPLETED SML json hydrator =read_module_path= needs refactoring            |         |       | 1:21 |
@@ -31,8 +31,8 @@
 | COMPLETED Populate model module path                                        |         |       | 0:59 |
 | COMPLETED Update name factory and builder to compute qualified name         |         |       | 0:11 |
 | COMPLETED Remove original model name from location                          |         |       | 4:07 |
+| COMPLETED Rename =in_global_namespace=                                      |         |       | 0:27 |
 | STARTED Help contributor setup a windows environment to build dogen         |         |       | 0:45 |
-| STARTED Rename =in_global_namespace=                                        |         |       | 0:10 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -250,6 +250,14 @@ name from the "origin" model name. Location is the position of the
 type in element space, and so should be blank. Origin is the name of
 the model it came from, and should exist in the element itself.
 
+*** COMPLETED Rename =in_global_namespace=                            :story:
+    CLOSED: [2015-11-22 Sun 23:50]
+    CLOCK: [2015-11-22 Sun 23:33]--[2015-11-22 Sun 23:50] =>  0:17
+    CLOCK: [2015-11-22 Sun 23:22]--[2015-11-22 Sun 23:32] =>  0:10
+
+We used a C++ keyword by mistake in yarn, should have been global
+module. We should also check where we generate the global module.
+
 *** STARTED Help contributor setup a windows environment to build dogen :story:
     CLOCK: [2015-11-22 Sun 20:55]--[2015-11-22 Sun 21:40] =>  0:45
 
@@ -275,12 +283,6 @@ https://cmake.org/files/v3.4/cmake-3.4.0-win32-x86.exe
 4. download and install code lite, a free IDE: http://downloads.codelite.org/
 5. download latest boost: http://www.boost.org/users/history/version_1_59_0.html
 6. download and install latest git: https://git-scm.com/download/win
-
-*** STARTED Rename =in_global_namespace=                              :story:
-    CLOCK: [2015-11-22 Sun 23:22]--[2015-11-22 Sun 23:32] =>  0:10
-
-We used a C++ keyword by mistake in yarn, should have been global
-module. We should also check where we generate the global module.
 
 *** Rename original parents                                           :story:
 

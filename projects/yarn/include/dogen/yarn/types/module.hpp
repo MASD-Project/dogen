@@ -50,7 +50,7 @@ public:
 
 public:
     module(
-        const bool in_global_namespace,
+        const bool in_global_module,
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
         const dogen::yarn::name& name,

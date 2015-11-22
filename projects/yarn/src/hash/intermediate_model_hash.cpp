@@ -117,7 +117,7 @@ namespace yarn {
 std::size_t intermediate_model_hasher::hash(const intermediate_model& v) {
     std::size_t seed(0);
 
-    combine(seed, v.in_global_namespace());
+    combine(seed, v.in_global_module());
     combine(seed, v.documentation());
     combine(seed, v.extensions());
     combine(seed, v.name());

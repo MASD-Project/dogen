@@ -2,7 +2,7 @@
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="13">
 <entity class_id="8" tracking_level="0" version="0">
-	<in_global_namespace>0</in_global_namespace>
+	<in_global_module>0</in_global_module>
 	<documentation></documentation>
 	<extensions class_id="9" tracking_level="0" version="0">
 		<fields class_id="10" tracking_level="0" version="0">
@@ -72,7 +72,7 @@
 			</first>
 			<second class_id="5" tracking_level="1" version="0" object_id="_0">
 				<element class_id="19" tracking_level="0" version="0">
-					<in_global_namespace>0</in_global_namespace>
+					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -135,7 +135,7 @@
 			</first>
 			<second object_id="_1">
 				<element>
-					<in_global_namespace>0</in_global_namespace>
+					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -198,7 +198,7 @@
 			</first>
 			<second object_id="_2">
 				<element>
-					<in_global_namespace>0</in_global_namespace>
+					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -315,7 +315,7 @@
 			</first>
 			<second class_id="6" tracking_level="1" version="0" object_id="_6">
 				<element>
-					<in_global_namespace>0</in_global_namespace>
+					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -441,7 +441,7 @@
 			</first>
 			<second object_id="_7">
 				<element>
-					<in_global_namespace>0</in_global_namespace>
+					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>

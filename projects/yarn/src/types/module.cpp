@@ -41,7 +41,7 @@ namespace dogen {
 namespace yarn {
 
 module::module(
-    const bool in_global_namespace,
+    const bool in_global_module,
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const dogen::yarn::name& name,
@@ -51,7 +51,7 @@ module::module(
     const boost::optional<dogen::yarn::name>& containing_module,
     const std::list<dogen::yarn::name>& members)
     : dogen::yarn::element(
-      in_global_namespace,
+      in_global_module,
       documentation,
       extensions,
       name,

@@ -76,7 +76,7 @@ namespace yarn {
 
 void element_generator::
 populate(const unsigned int position, result_type& v) {
-    v.in_global_namespace(create_bool(position + 0));
+    v.in_global_module(create_bool(position + 0));
     v.documentation(create_std_string(position + 1));
     v.extensions(create_dogen_dynamic_object(position + 2));
     v.name(create_dogen_yarn_name(position + 3));

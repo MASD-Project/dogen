@@ -160,35 +160,35 @@ void merger::merge_model(const intermediate_model& m) {
     for (const auto& pair : m.concepts()) {
         const auto& k(pair.first);
         const auto& v(pair.second);
-        check_name(m.name(), k, v.name(), v.in_global_namespace());
+        check_name(m.name(), k, v.name(), v.in_global_module());
         merged_model_.concepts().insert(pair);
     }
 
     for (const auto& pair : m.primitives()) {
         const auto& k(pair.first);
         const auto& v(pair.second);
-        check_name(m.name(), k, v.name(), v.in_global_namespace());
+        check_name(m.name(), k, v.name(), v.in_global_module());
         merged_model_.primitives().insert(pair);
     }
 
     for (const auto& pair : m.enumerations()) {
         const auto& k(pair.first);
         const auto& v(pair.second);
-        check_name(m.name(), k, v.name(), v.in_global_namespace());
+        check_name(m.name(), k, v.name(), v.in_global_module());
         merged_model_.enumerations().insert(pair);
     }
 
     for (const auto& pair : m.objects()) {
         const auto& k(pair.first);
         const auto& v(pair.second);
-        check_name(m.name(), k, v.name(), v.in_global_namespace());
+        check_name(m.name(), k, v.name(), v.in_global_module());
         merged_model_.objects().insert(pair);
     }
 
     for (const auto& pair : m.modules()) {
         const auto& k(pair.first);
         const auto& v(pair.second);
-        check_name(m.name(), k, v.name(), v.in_global_namespace());
+        check_name(m.name(), k, v.name(), v.in_global_module());
         merged_model_.modules().insert(pair);
     }
 }

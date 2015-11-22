@@ -38,7 +38,7 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("yarn_json.hydrator"));
 
 const std::string empty;
-const std::string in_global_namespace_key("in_global_namespace");
+const std::string in_global_module_key("in_global_module");
 const std::string model_name_key("model_name");
 const std::string bool_true("true");
 const std::string bool_false("false");
@@ -109,8 +109,8 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
     yarn::intermediate_model& m) const {
 
     yarn::name_builder b;
-    const auto in_global_namespace(pt.get(in_global_namespace_key, false));
-    if (!in_global_namespace)
+    const auto in_global_module(pt.get(in_global_module_key, false));
+    if (!in_global_module)
         b.model_name(m.name().location());
 
     const auto simple_name_value(pt.get<std::string>(simple_name_key));
@@ -138,7 +138,7 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
             e.name(n);
             e.origin_type(m.origin_type());
             e.generation_type(m.generation_type());
-            e.in_global_namespace(in_global_namespace);
+            e.in_global_module(in_global_module);
 
             if (documentation)
                 e.documentation(*documentation);

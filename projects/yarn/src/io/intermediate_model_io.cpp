@@ -188,7 +188,7 @@ std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::intermediate_model\"" << ", "
-      << "\"in_global_namespace\": " << v.in_global_namespace() << ", "
+      << "\"in_global_module\": " << v.in_global_module() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"extensions\": " << v.extensions() << ", "
       << "\"name\": " << v.name() << ", "

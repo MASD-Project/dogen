@@ -6,7 +6,7 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "bool",
-            "in_global_namespace" : true,
+            "in_global_module" : true,
             "extensions" : {
                 "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
@@ -15,7 +15,7 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "char",
-            "in_global_namespace" : true,
+            "in_global_module" : true,
             "extensions" : {
                 "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
@@ -24,7 +24,7 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "unsigned char",
-            "in_global_namespace" : true,
+            "in_global_module" : true,
             "extensions" : {
                 "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
@@ -33,7 +33,7 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "int",
-            "in_global_namespace" : true,
+            "in_global_module" : true,
             "extensions" : {
                 "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
@@ -42,7 +42,7 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "unsigned int",
-            "in_global_namespace" : true,
+            "in_global_module" : true,
             "extensions" : {
                 "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
@@ -51,7 +51,7 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "short",
-            "in_global_namespace" : true,
+            "in_global_module" : true,
             "extensions" : {
                 "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
@@ -60,7 +60,7 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "unsigned short",
-            "in_global_namespace" : true,
+            "in_global_module" : true,
             "extensions" : {
                 "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
@@ -69,7 +69,7 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "long",
-            "in_global_namespace" : true,
+            "in_global_module" : true,
             "extensions" : {
                 "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
@@ -78,7 +78,7 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "unsigned long",
-            "in_global_namespace" : true,
+            "in_global_module" : true,
             "extensions" : {
                 "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
@@ -87,7 +87,7 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "long long",
-            "in_global_namespace" : true,
+            "in_global_module" : true,
             "extensions" : {
                 "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
@@ -96,7 +96,7 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "unsigned long long",
-            "in_global_namespace" : true,
+            "in_global_module" : true,
             "extensions" : {
                 "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
@@ -105,7 +105,7 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "float",
-            "in_global_namespace" : true,
+            "in_global_module" : true,
             "extensions" : {
                 "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
@@ -114,7 +114,7 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "double",
-            "in_global_namespace" : true,
+            "in_global_module" : true,
             "extensions" : {
                 "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
@@ -123,7 +123,7 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "long double",
-            "in_global_namespace" : true,
+            "in_global_module" : true,
             "extensions" : {
                 "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true

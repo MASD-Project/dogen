@@ -79,7 +79,7 @@ concept::concept()
       is_child_(static_cast<bool>(0)) { }
 
 concept::concept(
-    const bool in_global_namespace,
+    const bool in_global_module,
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const dogen::yarn::name& name,
@@ -94,7 +94,7 @@ concept::concept(
     const bool is_parent,
     const bool is_child)
     : dogen::yarn::element(
-      in_global_namespace,
+      in_global_module,
       documentation,
       extensions,
       name,
