@@ -3,7 +3,6 @@
 <boost_serialization signature="serialization::archive" version="13">
 <entity class_id="8" tracking_level="0" version="0">
 	<in_global_namespace>0</in_global_namespace>
-	<original_model_name>enumeration</original_model_name>
 	<documentation></documentation>
 	<extensions class_id="9" tracking_level="0" version="0">
 		<fields class_id="10" tracking_level="0" version="0">
@@ -16,7 +15,6 @@
 		<simple>enumeration</simple>
 		<qualified>&lt;enumeration&gt;</qualified>
 		<location class_id="12" tracking_level="0" version="0">
-			<original_model_name>enumeration</original_model_name>
 			<external_module_path class_id="13" tracking_level="0" version="0">
 				<count>0</count>
 				<item_version>0</item_version>
@@ -34,6 +32,7 @@
 	</name>
 	<generation_type>0</generation_type>
 	<origin_type>1</origin_type>
+	<original_model_name>enumeration</original_model_name>
 	<containing_module class_id="14" tracking_level="0" version="0">
 		<initialized>0</initialized>
 	</containing_module>
@@ -56,7 +55,6 @@
 				<simple>pkg1</simple>
 				<qualified>&lt;enumeration&gt;&lt;pkg1&gt;</qualified>
 				<location>
-					<original_model_name>enumeration</original_model_name>
 					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -75,7 +73,6 @@
 			<second class_id="5" tracking_level="1" version="0" object_id="_0">
 				<element class_id="19" tracking_level="0" version="0">
 					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -88,7 +85,6 @@
 						<simple>pkg1</simple>
 						<qualified>&lt;enumeration&gt;&lt;pkg1&gt;</qualified>
 						<location>
-							<original_model_name>enumeration</original_model_name>
 							<external_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -106,6 +102,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
@@ -121,7 +118,6 @@
 				<simple>enumeration</simple>
 				<qualified>&lt;enumeration&gt;</qualified>
 				<location>
-					<original_model_name>enumeration</original_model_name>
 					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -140,7 +136,6 @@
 			<second object_id="_1">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -186,7 +181,6 @@
 						<simple>enumeration</simple>
 						<qualified>&lt;enumeration&gt;</qualified>
 						<location>
-							<original_model_name>enumeration</original_model_name>
 							<external_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -204,6 +198,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
@@ -234,7 +229,6 @@
 				<simple>shape_types</simple>
 				<qualified>&lt;enumeration&gt;&lt;pkg1&gt;&lt;shape_types&gt;</qualified>
 				<location>
-					<original_model_name>enumeration</original_model_name>
 					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -254,7 +248,6 @@
 			<second class_id="4" tracking_level="1" version="0" object_id="_5">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -267,7 +260,6 @@
 						<simple>shape_types</simple>
 						<qualified>&lt;enumeration&gt;&lt;pkg1&gt;&lt;shape_types&gt;</qualified>
 						<location>
-							<original_model_name>enumeration</original_model_name>
 							<external_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -286,6 +278,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
@@ -294,7 +287,6 @@
 					<simple>unsigned int</simple>
 					<qualified></qualified>
 					<location>
-						<original_model_name></original_model_name>
 						<external_module_path>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -348,7 +340,6 @@
 				<simple>colour_types</simple>
 				<qualified>&lt;enumeration&gt;&lt;colour_types&gt;</qualified>
 				<location>
-					<original_model_name>enumeration</original_model_name>
 					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -367,7 +358,6 @@
 			<second object_id="_6">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -380,7 +370,6 @@
 						<simple>colour_types</simple>
 						<qualified>&lt;enumeration&gt;&lt;colour_types&gt;</qualified>
 						<location>
-							<original_model_name>enumeration</original_model_name>
 							<external_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -398,6 +387,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
@@ -406,7 +396,6 @@
 					<simple>unsigned int</simple>
 					<qualified></qualified>
 					<location>
-						<original_model_name></original_model_name>
 						<external_module_path>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -460,7 +449,6 @@
 				<simple>book_types</simple>
 				<qualified>&lt;enumeration&gt;&lt;book_types&gt;</qualified>
 				<location>
-					<original_model_name>enumeration</original_model_name>
 					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -479,7 +467,6 @@
 			<second object_id="_7">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
 					<documentation>this is a brief comment
 
 this is a long comment
@@ -495,7 +482,6 @@ this is a long comment
 						<simple>book_types</simple>
 						<qualified>&lt;enumeration&gt;&lt;book_types&gt;</qualified>
 						<location>
-							<original_model_name>enumeration</original_model_name>
 							<external_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -513,6 +499,7 @@ this is a long comment
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
@@ -521,7 +508,6 @@ this is a long comment
 					<simple>unsigned int</simple>
 					<qualified></qualified>
 					<location>
-						<original_model_name></original_model_name>
 						<external_module_path>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -572,7 +558,6 @@ this is a long comment
 				<simple>a_class</simple>
 				<qualified>&lt;enumeration&gt;&lt;a_class&gt;</qualified>
 				<location>
-					<original_model_name>enumeration</original_model_name>
 					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -591,7 +576,6 @@ this is a long comment
 			<second class_id="6" tracking_level="1" version="0" object_id="_8">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -604,7 +588,6 @@ this is a long comment
 						<simple>a_class</simple>
 						<qualified>&lt;enumeration&gt;&lt;a_class&gt;</qualified>
 						<location>
-							<original_model_name>enumeration</original_model_name>
 							<external_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -622,6 +605,7 @@ this is a long comment
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
@@ -648,7 +632,6 @@ this is a long comment
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -688,7 +671,6 @@ this is a long comment
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -728,7 +710,6 @@ this is a long comment
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>

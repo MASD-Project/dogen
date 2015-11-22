@@ -118,12 +118,12 @@ std::size_t intermediate_model_hasher::hash(const intermediate_model& v) {
     std::size_t seed(0);
 
     combine(seed, v.in_global_namespace());
-    combine(seed, v.original_model_name());
     combine(seed, v.documentation());
     combine(seed, v.extensions());
     combine(seed, v.name());
     combine(seed, v.generation_type());
     combine(seed, v.origin_type());
+    combine(seed, v.original_model_name());
     combine(seed, hash_boost_optional_dogen_yarn_name(v.containing_module()));
     combine(seed, hash_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(v.references()));
     combine(seed, hash_std_unordered_set_dogen_yarn_name(v.leaves()));

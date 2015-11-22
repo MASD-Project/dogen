@@ -3,7 +3,6 @@
 <boost_serialization signature="serialization::archive" version="13">
 <entity class_id="8" tracking_level="0" version="0">
 	<in_global_namespace>0</in_global_namespace>
-	<original_model_name>classes_without_package</original_model_name>
 	<documentation></documentation>
 	<extensions class_id="9" tracking_level="0" version="0">
 		<fields class_id="10" tracking_level="0" version="0">
@@ -16,7 +15,6 @@
 		<simple>classes_without_package</simple>
 		<qualified>&lt;classes_without_package&gt;</qualified>
 		<location class_id="12" tracking_level="0" version="0">
-			<original_model_name>classes_without_package</original_model_name>
 			<external_module_path class_id="13" tracking_level="0" version="0">
 				<count>0</count>
 				<item_version>0</item_version>
@@ -34,6 +32,7 @@
 	</name>
 	<generation_type>0</generation_type>
 	<origin_type>1</origin_type>
+	<original_model_name>classes_without_package</original_model_name>
 	<containing_module class_id="14" tracking_level="0" version="0">
 		<initialized>0</initialized>
 	</containing_module>
@@ -56,7 +55,6 @@
 				<simple>classes_without_package</simple>
 				<qualified>&lt;classes_without_package&gt;</qualified>
 				<location>
-					<original_model_name>classes_without_package</original_model_name>
 					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -75,7 +73,6 @@
 			<second class_id="5" tracking_level="1" version="0" object_id="_0">
 				<element class_id="19" tracking_level="0" version="0">
 					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -121,7 +118,6 @@
 						<simple>classes_without_package</simple>
 						<qualified>&lt;classes_without_package&gt;</qualified>
 						<location>
-							<original_model_name>classes_without_package</original_model_name>
 							<external_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -139,6 +135,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
@@ -171,10 +168,9 @@
 		<item_version>0</item_version>
 		<item class_id="29" tracking_level="0" version="0">
 			<first>
-				<simple>class_5</simple>
-				<qualified>&lt;classes_without_package&gt;&lt;class_5&gt;</qualified>
+				<simple>class_1</simple>
+				<qualified>&lt;classes_without_package&gt;&lt;class_1&gt;</qualified>
 				<location>
-					<original_model_name>classes_without_package</original_model_name>
 					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -193,7 +189,6 @@
 			<second class_id="6" tracking_level="1" version="0" object_id="_4">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -203,10 +198,9 @@
 						</fields>
 					</extensions>
 					<name>
-						<simple>class_5</simple>
-						<qualified>&lt;classes_without_package&gt;&lt;class_5&gt;</qualified>
+						<simple>class_1</simple>
+						<qualified>&lt;classes_without_package&gt;&lt;class_1&gt;</qualified>
 						<location>
-							<original_model_name>classes_without_package</original_model_name>
 							<external_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -224,6 +218,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
@@ -250,7 +245,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -298,10 +292,9 @@
 		</item>
 		<item>
 			<first>
-				<simple>class_1</simple>
-				<qualified>&lt;classes_without_package&gt;&lt;class_1&gt;</qualified>
+				<simple>class_2</simple>
+				<qualified>&lt;classes_without_package&gt;&lt;class_2&gt;</qualified>
 				<location>
-					<original_model_name>classes_without_package</original_model_name>
 					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -320,134 +313,6 @@
 			<second object_id="_5">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>class_1</simple>
-						<qualified>&lt;classes_without_package&gt;&lt;class_1&gt;</qualified>
-						<location>
-							<original_model_name>classes_without_package</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>classes_without_package</item>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_0</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>class_2</simple>
-				<qualified>&lt;classes_without_package&gt;&lt;class_2&gt;</qualified>
-				<location>
-					<original_model_name>classes_without_package</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>classes_without_package</item>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_6">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -460,7 +325,6 @@
 						<simple>class_2</simple>
 						<qualified>&lt;classes_without_package&gt;&lt;class_2&gt;</qualified>
 						<location>
-							<original_model_name>classes_without_package</original_model_name>
 							<external_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -478,6 +342,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
@@ -504,7 +369,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -555,7 +419,6 @@
 				<simple>class_3</simple>
 				<qualified>&lt;classes_without_package&gt;&lt;class_3&gt;</qualified>
 				<location>
-					<original_model_name>classes_without_package</original_model_name>
 					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -571,10 +434,9 @@
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_7">
+			<second object_id="_6">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -587,7 +449,6 @@
 						<simple>class_3</simple>
 						<qualified>&lt;classes_without_package&gt;&lt;class_3&gt;</qualified>
 						<location>
-							<original_model_name>classes_without_package</original_model_name>
 							<external_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -605,6 +466,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
@@ -631,7 +493,130 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>int</unparsed_type>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>class_5</simple>
+				<qualified>&lt;classes_without_package&gt;&lt;class_5&gt;</qualified>
+				<location>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>classes_without_package</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_7">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>class_5</simple>
+						<qualified>&lt;classes_without_package&gt;&lt;class_5&gt;</qualified>
+						<location>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>classes_without_package</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_0</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -682,7 +667,6 @@
 				<simple>class_4</simple>
 				<qualified>&lt;classes_without_package&gt;&lt;class_4&gt;</qualified>
 				<location>
-					<original_model_name>classes_without_package</original_model_name>
 					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -701,7 +685,6 @@
 			<second object_id="_8">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -714,7 +697,6 @@
 						<simple>class_4</simple>
 						<qualified>&lt;classes_without_package&gt;&lt;class_4&gt;</qualified>
 						<location>
-							<original_model_name>classes_without_package</original_model_name>
 							<external_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -732,6 +714,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
@@ -758,7 +741,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>

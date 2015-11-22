@@ -57,12 +57,12 @@ public:
 public:
     element(
         const bool in_global_namespace,
-        const std::string& original_model_name,
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
         const dogen::yarn::name& name,
         const dogen::yarn::generation_types generation_type,
         const dogen::yarn::origin_types origin_type,
+        const std::string& original_model_name,
         const boost::optional<dogen::yarn::name>& containing_module);
 
 private:
@@ -88,16 +88,6 @@ public:
     /**@{*/
     bool in_global_namespace() const;
     void in_global_namespace(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Name of the model where the element came from.
-     */
-    /**@{*/
-    const std::string& original_model_name() const;
-    std::string& original_model_name();
-    void original_model_name(const std::string& v);
-    void original_model_name(const std::string&& v);
     /**@}*/
 
     /**
@@ -152,6 +142,16 @@ public:
     /**@}*/
 
     /**
+     * @brief Name of the model where the element came from.
+     */
+    /**@{*/
+    const std::string& original_model_name() const;
+    std::string& original_model_name();
+    void original_model_name(const std::string& v);
+    void original_model_name(const std::string&& v);
+    /**@}*/
+
+    /**
      * @brief Name of the module in which we are contained.
      */
     /**@{*/
@@ -171,12 +171,12 @@ protected:
 
 private:
     bool in_global_namespace_;
-    std::string original_model_name_;
     std::string documentation_;
     dogen::dynamic::object extensions_;
     dogen::yarn::name name_;
     dogen::yarn::generation_types generation_type_;
     dogen::yarn::origin_types origin_type_;
+    std::string original_model_name_;
     boost::optional<dogen::yarn::name> containing_module_;
 };
 

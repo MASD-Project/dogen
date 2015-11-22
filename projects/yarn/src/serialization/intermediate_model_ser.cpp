@@ -50,12 +50,12 @@ void save(Archive& ar,
     const dogen::yarn::intermediate_model& v,
     const unsigned int /*version*/) {
     ar << make_nvp("in_global_namespace", v.in_global_namespace_);
-    ar << make_nvp("original_model_name", v.original_model_name_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("extensions", v.extensions_);
     ar << make_nvp("name", v.name_);
     ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("origin_type", v.origin_type_);
+    ar << make_nvp("original_model_name", v.original_model_name_);
     ar << make_nvp("containing_module", v.containing_module_);
     ar << make_nvp("references", v.references_);
     ar << make_nvp("leaves", v.leaves_);
@@ -73,12 +73,12 @@ void load(Archive& ar,
     dogen::yarn::intermediate_model& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("in_global_namespace", v.in_global_namespace_);
-    ar >> make_nvp("original_model_name", v.original_model_name_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("extensions", v.extensions_);
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("origin_type", v.origin_type_);
+    ar >> make_nvp("original_model_name", v.original_model_name_);
     ar >> make_nvp("containing_module", v.containing_module_);
     ar >> make_nvp("references", v.references_);
     ar >> make_nvp("leaves", v.leaves_);

@@ -160,12 +160,12 @@ intermediate_model_generator::intermediate_model_generator() : position_(0) { }
 void intermediate_model_generator::
 populate(const unsigned int position, result_type& v) {
     v.in_global_namespace(create_bool(position + 0));
-    v.original_model_name(create_std_string(position + 1));
-    v.documentation(create_std_string(position + 2));
-    v.extensions(create_dogen_dynamic_object(position + 3));
-    v.name(create_dogen_yarn_name(position + 4));
-    v.generation_type(create_dogen_yarn_generation_types(position + 5));
-    v.origin_type(create_dogen_yarn_origin_types(position + 6));
+    v.documentation(create_std_string(position + 1));
+    v.extensions(create_dogen_dynamic_object(position + 2));
+    v.name(create_dogen_yarn_name(position + 3));
+    v.generation_type(create_dogen_yarn_generation_types(position + 4));
+    v.origin_type(create_dogen_yarn_origin_types(position + 5));
+    v.original_model_name(create_std_string(position + 6));
     v.containing_module(create_boost_optional_dogen_yarn_name(position + 7));
     v.references(create_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(position + 8));
     v.leaves(create_std_unordered_set_dogen_yarn_name(position + 9));

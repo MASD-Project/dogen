@@ -51,12 +51,12 @@ public:
 public:
     module(
         const bool in_global_namespace,
-        const std::string& original_model_name,
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
         const dogen::yarn::name& name,
         const dogen::yarn::generation_types generation_type,
         const dogen::yarn::origin_types origin_type,
+        const std::string& original_model_name,
         const boost::optional<dogen::yarn::name>& containing_module,
         const std::list<dogen::yarn::name>& members);
 

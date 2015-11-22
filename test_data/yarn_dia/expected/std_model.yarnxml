@@ -3,7 +3,6 @@
 <boost_serialization signature="serialization::archive" version="13">
 <entity class_id="8" tracking_level="0" version="0">
 	<in_global_namespace>0</in_global_namespace>
-	<original_model_name>std_model</original_model_name>
 	<documentation></documentation>
 	<extensions class_id="9" tracking_level="0" version="0">
 		<fields class_id="10" tracking_level="0" version="0">
@@ -16,7 +15,6 @@
 		<simple>std_model</simple>
 		<qualified>&lt;std_model&gt;</qualified>
 		<location class_id="12" tracking_level="0" version="0">
-			<original_model_name>std_model</original_model_name>
 			<external_module_path class_id="13" tracking_level="0" version="0">
 				<count>0</count>
 				<item_version>0</item_version>
@@ -34,6 +32,7 @@
 	</name>
 	<generation_type>0</generation_type>
 	<origin_type>1</origin_type>
+	<original_model_name>std_model</original_model_name>
 	<containing_module class_id="14" tracking_level="0" version="0">
 		<initialized>0</initialized>
 	</containing_module>
@@ -56,7 +55,6 @@
 				<simple>pkg1</simple>
 				<qualified>&lt;std_model&gt;&lt;pkg1&gt;</qualified>
 				<location>
-					<original_model_name>std_model</original_model_name>
 					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -75,7 +73,6 @@
 			<second class_id="5" tracking_level="1" version="0" object_id="_0">
 				<element class_id="19" tracking_level="0" version="0">
 					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -88,7 +85,6 @@
 						<simple>pkg1</simple>
 						<qualified>&lt;std_model&gt;&lt;pkg1&gt;</qualified>
 						<location>
-							<original_model_name>std_model</original_model_name>
 							<external_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -106,6 +102,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
@@ -121,7 +118,6 @@
 				<simple>std_model</simple>
 				<qualified>&lt;std_model&gt;</qualified>
 				<location>
-					<original_model_name>std_model</original_model_name>
 					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -140,7 +136,6 @@
 			<second object_id="_1">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -186,7 +181,6 @@
 						<simple>std_model</simple>
 						<qualified>&lt;std_model&gt;</qualified>
 						<location>
-							<original_model_name>std_model</original_model_name>
 							<external_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -204,6 +198,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
@@ -236,10 +231,9 @@
 		<item_version>0</item_version>
 		<item class_id="29" tracking_level="0" version="0">
 			<first>
-				<simple>some_service</simple>
-				<qualified>&lt;std_model&gt;&lt;some_service&gt;</qualified>
+				<simple>primitives</simple>
+				<qualified>&lt;std_model&gt;&lt;primitives&gt;</qualified>
 				<location>
-					<original_model_name>std_model</original_model_name>
 					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -258,254 +252,6 @@
 			<second class_id="6" tracking_level="1" version="0" object_id="_5">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>some_service</simple>
-						<qualified>&lt;std_model&gt;&lt;some_service&gt;</qualified>
-						<location>
-							<original_model_name>std_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>std_model</item>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>2</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties class_id="30" tracking_level="0" version="0">
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>4</count>
-					<item_version>0</item_version>
-					<item class_id="31" tracking_level="0" version="0">
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_0</name>
-						<type class_id="32" tracking_level="0" version="0">
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children class_id="33" tracking_level="0" version="0">
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::shared_ptr&lt;base&gt;</unparsed_type>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_1</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::weak_ptr&lt;base&gt;</unparsed_type>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_2</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::unique_ptr&lt;base&gt;</unparsed_type>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_3</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::function</unparsed_type>
-					</item>
-				</local_properties>
-				<inherited_properties class_id="34" tracking_level="0" version="0">
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships class_id="35" tracking_level="0" version="0">
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>1</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>primitives</simple>
-				<qualified>&lt;std_model&gt;&lt;primitives&gt;</qualified>
-				<location>
-					<original_model_name>std_model</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>std_model</item>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_6">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -518,7 +264,6 @@
 						<simple>primitives</simple>
 						<qualified>&lt;std_model&gt;&lt;primitives&gt;</qualified>
 						<location>
-							<original_model_name>std_model</original_model_name>
 							<external_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -536,18 +281,19 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
 				</element>
-				<all_properties>
+				<all_properties class_id="30" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_properties>
 				<local_properties>
 					<count>8</count>
 					<item_version>0</item_version>
-					<item>
+					<item class_id="31" tracking_level="0" version="0">
 						<documentation></documentation>
 						<extensions>
 							<fields>
@@ -557,12 +303,11 @@
 							</fields>
 						</extensions>
 						<name>prop_0</name>
-						<type>
+						<type class_id="32" tracking_level="0" version="0">
 							<type>
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -577,7 +322,7 @@
 									</internal_module_path>
 								</location>
 							</type>
-							<children>
+							<children class_id="33" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -602,7 +347,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -642,7 +386,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -682,7 +425,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -722,7 +464,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -762,7 +503,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -802,7 +542,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -842,7 +581,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -866,6 +604,208 @@
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 						<unparsed_type>std::uint64_t</unparsed_type>
+					</item>
+				</local_properties>
+				<inherited_properties class_id="34" tracking_level="0" version="0">
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships class_id="35" tracking_level="0" version="0">
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>class_j</simple>
+				<qualified>&lt;std_model&gt;&lt;class_j&gt;</qualified>
+				<location>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>std_model</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_6">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>class_j</simple>
+						<qualified>&lt;std_model&gt;&lt;class_j&gt;</qualified>
+						<location>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>std_model</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>3</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_0</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::pair&lt;int,int&gt;</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_1</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::pair&lt;std::string,std::string&gt;</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_2</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::vector&lt;std::pair&lt;std::string,int&gt;&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -893,7 +833,6 @@
 				<simple>class_d</simple>
 				<qualified>&lt;std_model&gt;&lt;class_d&gt;</qualified>
 				<location>
-					<original_model_name>std_model</original_model_name>
 					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -912,7 +851,6 @@
 			<second object_id="_7">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -925,7 +863,6 @@
 						<simple>class_d</simple>
 						<qualified>&lt;std_model&gt;&lt;class_d&gt;</qualified>
 						<location>
-							<original_model_name>std_model</original_model_name>
 							<external_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -943,6 +880,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
@@ -969,7 +907,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -1009,7 +946,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -1049,7 +985,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -1089,7 +1024,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -1129,7 +1063,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -1169,7 +1102,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -1217,10 +1149,452 @@
 		</item>
 		<item>
 			<first>
+				<simple>class_g</simple>
+				<qualified>&lt;std_model&gt;&lt;class_g&gt;</qualified>
+				<location>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>std_model</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_8">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>class_g</simple>
+						<qualified>&lt;std_model&gt;&lt;class_g&gt;</qualified>
+						<location>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>std_model</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>3</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_0</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unordered_map&lt;class_a,std::vector&lt;pkg1::class_c&gt;&gt;</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_1</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unordered_map&lt;pkg1::class_c,std::list&lt;class_a&gt;&gt;</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_2</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unordered_map&lt;std::string, class_a&gt;</unparsed_type>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>some_service</simple>
+				<qualified>&lt;std_model&gt;&lt;some_service&gt;</qualified>
+				<location>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>std_model</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_9">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>some_service</simple>
+						<qualified>&lt;std_model&gt;&lt;some_service&gt;</qualified>
+						<location>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>std_model</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>2</generation_type>
+					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>4</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_0</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::shared_ptr&lt;base&gt;</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_1</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::weak_ptr&lt;base&gt;</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_2</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unique_ptr&lt;base&gt;</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_3</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::function</unparsed_type>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>1</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
 				<simple>class_c</simple>
 				<qualified>&lt;std_model&gt;&lt;pkg1&gt;&lt;class_c&gt;</qualified>
 				<location>
-					<original_model_name>std_model</original_model_name>
 					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -1237,10 +1611,9 @@
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_8">
+			<second object_id="_10">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1253,7 +1626,6 @@
 						<simple>class_c</simple>
 						<qualified>&lt;std_model&gt;&lt;pkg1&gt;&lt;class_c&gt;</qualified>
 						<location>
-							<original_model_name>std_model</original_model_name>
 							<external_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -1272,6 +1644,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
@@ -1298,7 +1671,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -1338,7 +1710,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -1389,7 +1760,6 @@
 				<simple>class_b</simple>
 				<qualified>&lt;std_model&gt;&lt;class_b&gt;</qualified>
 				<location>
-					<original_model_name>std_model</original_model_name>
 					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -1405,10 +1775,9 @@
 					</internal_module_path>
 				</location>
 			</first>
-			<second object_id="_9">
+			<second object_id="_11">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1421,7 +1790,6 @@
 						<simple>class_b</simple>
 						<qualified>&lt;std_model&gt;&lt;class_b&gt;</qualified>
 						<location>
-							<original_model_name>std_model</original_model_name>
 							<external_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -1439,6 +1807,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
@@ -1465,7 +1834,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -1505,7 +1873,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -1545,7 +1912,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -1585,7 +1951,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -1625,7 +1990,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -1665,7 +2029,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -1713,544 +2076,9 @@
 		</item>
 		<item>
 			<first>
-				<simple>class_e</simple>
-				<qualified>&lt;std_model&gt;&lt;class_e&gt;</qualified>
+				<simple>derived</simple>
+				<qualified>&lt;std_model&gt;&lt;derived&gt;</qualified>
 				<location>
-					<original_model_name>std_model</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>std_model</item>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_10">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>class_e</simple>
-						<qualified>&lt;std_model&gt;&lt;class_e&gt;</qualified>
-						<location>
-							<original_model_name>std_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>std_model</item>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>6</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_0</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::deque&lt;std::string&gt;</unparsed_type>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_1</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_2</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::deque&lt;pkg1::class_c&gt;</unparsed_type>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_3</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::deque&lt;unsigned int&gt;</unparsed_type>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_4</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_5</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::deque&lt;std::deque&lt;unsigned int&gt;&gt;</unparsed_type>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>class_j</simple>
-				<qualified>&lt;std_model&gt;&lt;class_j&gt;</qualified>
-				<location>
-					<original_model_name>std_model</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>std_model</item>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_11">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>class_j</simple>
-						<qualified>&lt;std_model&gt;&lt;class_j&gt;</qualified>
-						<location>
-							<original_model_name>std_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>std_model</item>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>3</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_0</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::pair&lt;int,int&gt;</unparsed_type>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_1</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::pair&lt;std::string,std::string&gt;</unparsed_type>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_2</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::vector&lt;std::pair&lt;std::string,int&gt;&gt;</unparsed_type>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>base</simple>
-				<qualified>&lt;std_model&gt;&lt;base&gt;</qualified>
-				<location>
-					<original_model_name>std_model</original_model_name>
 					<external_module_path>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -2269,894 +2097,6 @@
 			<second object_id="_12">
 				<element>
 					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>base</simple>
-						<qualified>&lt;std_model&gt;&lt;base&gt;</qualified>
-						<location>
-							<original_model_name>std_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>std_model</item>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_0</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>1</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>0</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>class_a</simple>
-				<qualified>&lt;std_model&gt;&lt;class_a&gt;</qualified>
-				<location>
-					<original_model_name>std_model</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>std_model</item>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_13">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>class_a</simple>
-						<qualified>&lt;std_model&gt;&lt;class_a&gt;</qualified>
-						<location>
-							<original_model_name>std_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>std_model</item>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>2</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>1</count>
-								<bucket_count>2</bucket_count>
-								<item_version>0</item_version>
-								<item>
-									<first>dia.identity_attribute</first>
-									<second>
-										<value>
-											<px class_id_reference="1" object_id="_14">
-												<value></value>
-												<content>true</content>
-											</px>
-										</value>
-									</second>
-								</item>
-							</fields>
-						</extensions>
-						<name>prop0</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::string</unparsed_type>
-					</item>
-					<item>
-						<documentation>test inclusion duplicates
-</documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop1</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::string</unparsed_type>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>class_g</simple>
-				<qualified>&lt;std_model&gt;&lt;class_g&gt;</qualified>
-				<location>
-					<original_model_name>std_model</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>std_model</item>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_15">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>class_g</simple>
-						<qualified>&lt;std_model&gt;&lt;class_g&gt;</qualified>
-						<location>
-							<original_model_name>std_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>std_model</item>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>3</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_0</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::unordered_map&lt;class_a,std::vector&lt;pkg1::class_c&gt;&gt;</unparsed_type>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_1</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::unordered_map&lt;pkg1::class_c,std::list&lt;class_a&gt;&gt;</unparsed_type>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_2</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::unordered_map&lt;std::string, class_a&gt;</unparsed_type>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>class_h</simple>
-				<qualified>&lt;std_model&gt;&lt;class_h&gt;</qualified>
-				<location>
-					<original_model_name>std_model</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>std_model</item>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_16">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>class_h</simple>
-						<qualified>&lt;std_model&gt;&lt;class_h&gt;</qualified>
-						<location>
-							<original_model_name>std_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>std_model</item>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>2</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_0</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::unordered_set&lt;class_a&gt;</unparsed_type>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_1</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::unordered_set&lt;pkg1::class_c&gt;</unparsed_type>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>class_f</simple>
-				<qualified>&lt;std_model&gt;&lt;class_f&gt;</qualified>
-				<location>
-					<original_model_name>std_model</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>std_model</item>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_17">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
-					<documentation></documentation>
-					<extensions>
-						<fields>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</fields>
-					</extensions>
-					<name>
-						<simple>class_f</simple>
-						<qualified>&lt;std_model&gt;&lt;class_f&gt;</qualified>
-						<location>
-							<original_model_name>std_model</original_model_name>
-							<external_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>std_model</item>
-							</model_module_path>
-							<internal_module_path>
-								<count>0</count>
-								<item_version>0</item_version>
-							</internal_module_path>
-						</location>
-					</name>
-					<generation_type>1</generation_type>
-					<origin_type>1</origin_type>
-					<containing_module>
-						<initialized>0</initialized>
-					</containing_module>
-				</element>
-				<all_properties>
-					<count>0</count>
-					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
-					<count>3</count>
-					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_0</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::unordered_map&lt;std::string,std::string&gt;</unparsed_type>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_1</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::unordered_map&lt;std::string,class_a&gt;</unparsed_type>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_2</name>
-						<type>
-							<type>
-								<simple></simple>
-								<qualified></qualified>
-								<location>
-									<original_model_name></original_model_name>
-									<external_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_module_path>
-								</location>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<unparsed_type>std::unordered_map&lt;class_a,pkg1::class_c&gt;</unparsed_type>
-					</item>
-				</local_properties>
-				<inherited_properties>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
-				<is_immutable>0</is_immutable>
-				<is_fluent>0</is_fluent>
-				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
-				<relationships>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</relationships>
-				<object_type>3</object_type>
-				<is_final>1</is_final>
-			</second>
-		</item>
-		<item>
-			<first>
-				<simple>derived</simple>
-				<qualified>&lt;std_model&gt;&lt;derived&gt;</qualified>
-				<location>
-					<original_model_name>std_model</original_model_name>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>std_model</item>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
-			<second object_id="_18">
-				<element>
-					<in_global_namespace>0</in_global_namespace>
-					<original_model_name></original_model_name>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -3169,7 +2109,6 @@
 						<simple>derived</simple>
 						<qualified>&lt;std_model&gt;&lt;derived&gt;</qualified>
 						<location>
-							<original_model_name>std_model</original_model_name>
 							<external_module_path>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -3187,6 +2126,7 @@
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
@@ -3213,7 +2153,6 @@
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<original_model_name></original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -3263,7 +2202,6 @@
 								<simple>base</simple>
 								<qualified>&lt;std_model&gt;&lt;base&gt;</qualified>
 								<location>
-									<original_model_name>std_model</original_model_name>
 									<external_module_path>
 										<count>0</count>
 										<item_version>0</item_version>
@@ -3281,6 +2219,989 @@
 							</item>
 						</second>
 					</item>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>class_a</simple>
+				<qualified>&lt;std_model&gt;&lt;class_a&gt;</qualified>
+				<location>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>std_model</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_13">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>class_a</simple>
+						<qualified>&lt;std_model&gt;&lt;class_a&gt;</qualified>
+						<location>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>std_model</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>2</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>1</count>
+								<bucket_count>2</bucket_count>
+								<item_version>0</item_version>
+								<item>
+									<first>dia.identity_attribute</first>
+									<second>
+										<value>
+											<px class_id_reference="1" object_id="_14">
+												<value></value>
+												<content>true</content>
+											</px>
+										</value>
+									</second>
+								</item>
+							</fields>
+						</extensions>
+						<name>prop0</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::string</unparsed_type>
+					</item>
+					<item>
+						<documentation>test inclusion duplicates
+</documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop1</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::string</unparsed_type>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>class_e</simple>
+				<qualified>&lt;std_model&gt;&lt;class_e&gt;</qualified>
+				<location>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>std_model</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_15">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>class_e</simple>
+						<qualified>&lt;std_model&gt;&lt;class_e&gt;</qualified>
+						<location>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>std_model</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>6</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_0</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::deque&lt;std::string&gt;</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_1</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_2</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::deque&lt;pkg1::class_c&gt;</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_3</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::deque&lt;unsigned int&gt;</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_4</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_5</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::deque&lt;std::deque&lt;unsigned int&gt;&gt;</unparsed_type>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>class_f</simple>
+				<qualified>&lt;std_model&gt;&lt;class_f&gt;</qualified>
+				<location>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>std_model</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_16">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>class_f</simple>
+						<qualified>&lt;std_model&gt;&lt;class_f&gt;</qualified>
+						<location>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>std_model</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>3</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_0</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unordered_map&lt;std::string,std::string&gt;</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_1</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unordered_map&lt;std::string,class_a&gt;</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_2</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unordered_map&lt;class_a,pkg1::class_c&gt;</unparsed_type>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>1</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>base</simple>
+				<qualified>&lt;std_model&gt;&lt;base&gt;</qualified>
+				<location>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>std_model</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_17">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>base</simple>
+						<qualified>&lt;std_model&gt;&lt;base&gt;</qualified>
+						<location>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>std_model</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_0</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>1</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</relationships>
+				<object_type>3</object_type>
+				<is_final>0</is_final>
+			</second>
+		</item>
+		<item>
+			<first>
+				<simple>class_h</simple>
+				<qualified>&lt;std_model&gt;&lt;class_h&gt;</qualified>
+				<location>
+					<external_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_module_path>
+					<model_module_path>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>std_model</item>
+					</model_module_path>
+					<internal_module_path>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_module_path>
+				</location>
+			</first>
+			<second object_id="_18">
+				<element>
+					<in_global_namespace>0</in_global_namespace>
+					<documentation></documentation>
+					<extensions>
+						<fields>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</fields>
+					</extensions>
+					<name>
+						<simple>class_h</simple>
+						<qualified>&lt;std_model&gt;&lt;class_h&gt;</qualified>
+						<location>
+							<external_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_module_path>
+							<model_module_path>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>std_model</item>
+							</model_module_path>
+							<internal_module_path>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_module_path>
+						</location>
+					</name>
+					<generation_type>1</generation_type>
+					<origin_type>1</origin_type>
+					<original_model_name></original_model_name>
+					<containing_module>
+						<initialized>0</initialized>
+					</containing_module>
+				</element>
+				<all_properties>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_properties>
+				<local_properties>
+					<count>2</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_0</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unordered_set&lt;class_a&gt;</unparsed_type>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_1</name>
+						<type>
+							<type>
+								<simple></simple>
+								<qualified></qualified>
+								<location>
+									<external_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_module_path>
+									<model_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_module_path>
+									<internal_module_path>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_module_path>
+								</location>
+							</type>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<unparsed_type>std::unordered_set&lt;pkg1::class_c&gt;</unparsed_type>
+					</item>
+				</local_properties>
+				<inherited_properties>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_properties>
+				<is_parent>0</is_parent>
+				<is_visitable>0</is_visitable>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_child>0</is_child>
+				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<relationships>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
 				<is_final>1</is_final>
