@@ -24,26 +24,22 @@ namespace dogen {
 namespace yarn {
 
 location::location(
-    const std::string& original_model_name,
     const std::list<std::string>& external_module_path,
     const std::list<std::string>& model_module_path,
     const std::list<std::string>& internal_module_path)
-    : original_model_name_(original_model_name),
-      external_module_path_(external_module_path),
+    : external_module_path_(external_module_path),
       model_module_path_(model_module_path),
       internal_module_path_(internal_module_path) { }
 
 void location::swap(location& other) noexcept {
     using std::swap;
-    swap(original_model_name_, other.original_model_name_);
     swap(external_module_path_, other.external_module_path_);
     swap(model_module_path_, other.model_module_path_);
     swap(internal_module_path_, other.internal_module_path_);
 }
 
 bool location::operator==(const location& rhs) const {
-    return original_model_name_ == rhs.original_model_name_ &&
-        external_module_path_ == rhs.external_module_path_ &&
+    return external_module_path_ == rhs.external_module_path_ &&
         model_module_path_ == rhs.model_module_path_ &&
         internal_module_path_ == rhs.internal_module_path_;
 }
@@ -52,22 +48,6 @@ location& location::operator=(location other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const std::string& location::original_model_name() const {
-    return original_model_name_;
-}
-
-std::string& location::original_model_name() {
-    return original_model_name_;
-}
-
-void location::original_model_name(const std::string& v) {
-    original_model_name_ = v;
-}
-
-void location::original_model_name(const std::string&& v) {
-    original_model_name_ = std::move(v);
 }
 
 const std::list<std::string>& location::external_module_path() const {

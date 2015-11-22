@@ -195,6 +195,29 @@ We need to start updating model name.
 We started off by disabling the qualified name to make resolution
 work. We now need to enable it and fix all issues.
 
+*** COMPLETED Remove original model name from location                :story:
+    CLOSED: [2015-11-22 Sun 22:38]
+    CLOCK: [2015-11-22 Sun 22:16]--[2015-11-22 Sun 22:38] =>  0:22
+    CLOCK: [2015-11-22 Sun 22:01]--[2015-11-22 Sun 22:15] =>  0:14
+    CLOCK: [2015-11-21 Sat 23:06]--[2015-11-21 Sat 23:12] =>  0:06
+    CLOCK: [2015-11-21 Sat 22:14]--[2015-11-21 Sat 22:41] =>  0:27
+    CLOCK: [2015-11-21 Sat 21:20]--[2015-11-21 Sat 22:13] =>  0:53
+    CLOCK: [2015-11-21 Sat 21:13]--[2015-11-21 Sat 21:20] =>  0:07
+    CLOCK: [2015-11-21 Sat 20:31]--[2015-11-21 Sat 21:12] =>  0:41
+    CLOCK: [2015-11-20 Fri 23:22]--[2015-11-21 Sat 00:39] =>  1:17
+
+Since the objective of location is to track a point in element space,
+it seems a bit redundant to have original model name there. We should
+move this to the element itself.
+
+The good thing about this is that we can now locate the model even
+when the type was placed in global namespace.
+
+Notes:
+
+- generalisation indexer: problem with leaves location.
+- merger: problems with location.
+
 *** STARTED Help contributor setup a windows environment to build dogen :story:
     CLOCK: [2015-11-22 Sun 20:55]--[2015-11-22 Sun 21:40] =>  0:45
 
@@ -220,27 +243,6 @@ https://cmake.org/files/v3.4/cmake-3.4.0-win32-x86.exe
 4. download and install code lite, a free IDE: http://downloads.codelite.org/
 5. download latest boost: http://www.boost.org/users/history/version_1_59_0.html
 6. download and install latest git: https://git-scm.com/download/win
-
-*** STARTED Remove original model name from location                  :story:
-    CLOCK: [2015-11-22 Sun 22:01]--[2015-11-22 Sun 22:15] =>  0:14
-    CLOCK: [2015-11-21 Sat 23:06]--[2015-11-21 Sat 23:12] =>  0:06
-    CLOCK: [2015-11-21 Sat 22:14]--[2015-11-21 Sat 22:41] =>  0:27
-    CLOCK: [2015-11-21 Sat 21:20]--[2015-11-21 Sat 22:13] =>  0:53
-    CLOCK: [2015-11-21 Sat 21:13]--[2015-11-21 Sat 21:20] =>  0:07
-    CLOCK: [2015-11-21 Sat 20:31]--[2015-11-21 Sat 21:12] =>  0:41
-    CLOCK: [2015-11-20 Fri 23:22]--[2015-11-21 Sat 00:39] =>  1:17
-
-Since the objective of location is to track a point in element space,
-it seems a bit redundant to have original model name there. We should
-move this to the element itself.
-
-The good thing about this is that we can now locate the model even
-when the type was placed in global namespace.
-
-Notes:
-
-- generalisation indexer: problem with leaves location.
-- merger: problems with location.
 
 *** Rename =in_global_namespace=                                      :story:
 

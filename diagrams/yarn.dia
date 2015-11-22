@@ -12101,7 +12101,7 @@ from inputs and generates yarn types off of them.#</dia:string>
         <dia:point val="-83,-38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-83.05,-38.05;-65.125,-32.75"/>
+        <dia:rectangle val="-83.05,-38.05;-65.125,-33.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-83,-38"/>
@@ -12110,7 +12110,7 @@ from inputs and generates yarn types off of them.#</dia:string>
         <dia:real val="17.824999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#location#</dia:string>
@@ -12200,29 +12200,6 @@ from inputs and generates yarn types off of them.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#original_model_name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Original name of the model to which the modeling element belongs to.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#external_module_path#</dia:string>
@@ -12344,7 +12321,7 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
         <dia:point val="-48.3225,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-74.1375,-32.85;-47.5725,-14.2"/>
+        <dia:rectangle val="-74.1375,-33.65;-47.5725,-14.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12353,7 +12330,7 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
         <dia:point val="-48.3225,-15"/>
         <dia:point val="-48.3225,-24"/>
         <dia:point val="-74.0875,-24"/>
-        <dia:point val="-74.0875,-32.8"/>
+        <dia:point val="-74.0875,-33.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -16307,7 +16284,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:point val="98.15,31"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="97.4,2.55;105.2,32.6"/>
+        <dia:rectangle val="97.4,2.55;105.2,31.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

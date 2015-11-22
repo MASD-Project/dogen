@@ -49,7 +49,6 @@ namespace yarn {
 std::ostream& operator<<(std::ostream& s, const location& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::location\"" << ", "
-      << "\"original_model_name\": " << "\"" << tidy_up_string(v.original_model_name()) << "\"" << ", "
       << "\"external_module_path\": " << v.external_module_path() << ", "
       << "\"model_module_path\": " << v.model_module_path() << ", "
       << "\"internal_module_path\": " << v.internal_module_path()

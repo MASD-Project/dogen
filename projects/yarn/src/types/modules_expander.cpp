@@ -114,13 +114,11 @@ boost::optional<name> updater::containing_module(const name& n) {
 
     // FIXME: use builder.
     name module_n;
-    module_n.location().original_model_name(n.location().original_model_name());
     module_n.location().external_module_path(
         n.location().external_module_path());
 
-
     if (n.location().internal_module_path().empty()) {
-        module_n.simple(n.location().original_model_name());
+        module_n.simple(mn);
     } else {
         module_n.simple(n.location().internal_module_path().back());
         module_n.location().internal_module_path(

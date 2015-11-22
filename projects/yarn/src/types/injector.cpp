@@ -94,13 +94,7 @@ object injector::
 create_visitor(const object& o, const std::list<name>& leaves) const {
     name n;
     n.simple(o.name().simple() + "_" + visitor_name);
-
-    const auto& l(o.name().location());
-    n.location().original_model_name(l.original_model_name());
-    n.location().external_module_path(l.external_module_path());
-    n.location().model_module_path(l.model_module_path());
-    n.location().internal_module_path(l.internal_module_path());
-
+    n.location(o.name().location());
     BOOST_LOG_SEV(lg, debug) << "Creating visitor: " << n.qualified();
 
     object r;

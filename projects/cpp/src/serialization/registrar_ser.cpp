@@ -50,9 +50,9 @@ namespace cpp {
 template<typename Archive>
 void register_types(Archive& ar) {
     dogen::config::register_types(ar);
-    dogen::yarn::register_types(ar);
-    dogen::dynamic::register_types(ar);
     dogen::formatters::register_types(ar);
+    dogen::dynamic::register_types(ar);
+    dogen::yarn::register_types(ar);
 
     ar.template register_type<dogen::cpp::formattables::class_info>();
     ar.template register_type<dogen::cpp::formattables::cmakelists_info>();

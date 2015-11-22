@@ -38,7 +38,6 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::location& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("original_model_name", v.original_model_name_);
     ar << make_nvp("external_module_path", v.external_module_path_);
     ar << make_nvp("model_module_path", v.model_module_path_);
     ar << make_nvp("internal_module_path", v.internal_module_path_);
@@ -48,7 +47,6 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::location& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("original_model_name", v.original_model_name_);
     ar >> make_nvp("external_module_path", v.external_module_path_);
     ar >> make_nvp("model_module_path", v.model_module_path_);
     ar >> make_nvp("internal_module_path", v.internal_module_path_);

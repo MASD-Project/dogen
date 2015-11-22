@@ -45,7 +45,6 @@ public:
 
 public:
     location(
-        const std::string& original_model_name,
         const std::list<std::string>& external_module_path,
         const std::list<std::string>& model_module_path,
         const std::list<std::string>& internal_module_path);
@@ -58,16 +57,6 @@ private:
     friend void boost::serialization::load(Archive& ar, location& v, unsigned int version);
 
 public:
-    /**
-     * @brief Original name of the model to which the modeling element belongs to.
-     */
-    /**@{*/
-    const std::string& original_model_name() const;
-    std::string& original_model_name();
-    void original_model_name(const std::string& v);
-    void original_model_name(const std::string&& v);
-    /**@}*/
-
     /**
      * @brief Path of modules that contain the model from where the modeling element
      * came from.
@@ -113,7 +102,6 @@ public:
     location& operator=(location other);
 
 private:
-    std::string original_model_name_;
     std::list<std::string> external_module_path_;
     std::list<std::string> model_module_path_;
     std::list<std::string> internal_module_path_;

@@ -74,7 +74,6 @@ name name_factory::build_element_in_model(const name& model_name,
     n.simple(simple_name);
 
     const auto& l(model_name.location());
-    n.location().original_model_name(l.original_model_name());
     n.location().model_module_path(l.model_module_path());
     n.location().external_module_path(l.external_module_path());
 
@@ -90,7 +89,6 @@ name name_factory::build_element_in_model(const name& model_name,
     n.simple(simple_name);
 
     const auto& l(model_name.location());
-    n.location().original_model_name(l.original_model_name());
     n.location().model_module_path(l.model_module_path());
     n.location().external_module_path(l.external_module_path());
     n.location().internal_module_path(internal_module_path);
@@ -105,7 +103,6 @@ name name_factory::build_element_in_module(const name& module_name,
     n.simple(simple_name);
 
     const auto& l(module_name.location());
-    n.location().original_model_name(l.original_model_name());
     n.location().model_module_path(l.model_module_path());
     n.location().external_module_path(l.external_module_path());
 
@@ -129,7 +126,6 @@ name name_factory::build_module_name(const name& model_name,
     n.simple(internal_module_path.back());
 
     const auto& l(model_name.location());
-    n.location().original_model_name(l.original_model_name());
     n.location().model_module_path(l.model_module_path());
     n.location().external_module_path(l.external_module_path());
 
@@ -149,7 +145,6 @@ name name_factory::build_module_name(const name& model_name,
     n.simple(module_name);
 
     const auto& l(model_name.location());
-    n.location().original_model_name(l.original_model_name());
     n.location().model_module_path(l.model_module_path());
     n.location().external_module_path(l.external_module_path());
     n.location().internal_module_path(internal_module_path);
@@ -166,7 +161,6 @@ name name_factory::build_combined_element_name(const name& model_name,
     const auto& l(model_name.location());
     if (populate_model_name_if_blank &&
         n.location().model_module_path().empty()) {
-        n.location().original_model_name(l.original_model_name());
         n.location().model_module_path(l.model_module_path());
     }
     n.location().external_module_path(l.external_module_path());
@@ -182,7 +176,6 @@ name name_factory::build_promoted_module_name(const name& model_name,
 
     const auto& l(element_name.location());
     if (!l.internal_module_path().empty()) {
-        n.location().original_model_name(l.internal_module_path().front());
         n.location().model_module_path().push_back(
             l.internal_module_path().front());
     }
