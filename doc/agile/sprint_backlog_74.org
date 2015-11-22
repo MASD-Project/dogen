@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-21 Sat 23:12]
+#+CAPTION: Clock summary at [2015-11-22 Sun 22:16]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *17:54* |       |      |
+| *Total time*                                                                | *18:53* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 17:54   |       |      |
-| Active                                                                      |         | 17:54 |      |
+| Stories                                                                     | 18:53   |       |      |
+| Active                                                                      |         | 18:53 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:08 |
 | COMPLETED Write the next interesting instalment                             |         |       | 1:05 |
 | COMPLETED SML json hydrator =read_module_path= needs refactoring            |         |       | 1:21 |
@@ -30,7 +30,8 @@
 | COMPLETED Rename yarn's =object=                                            |         |       | 0:14 |
 | COMPLETED Populate model module path                                        |         |       | 0:59 |
 | COMPLETED Update name factory and builder to compute qualified name         |         |       | 0:11 |
-| STARTED Remove original model name from location                            |         |       | 3:31 |
+| STARTED Help contributor setup a windows environment to build dogen         |         |       | 0:45 |
+| STARTED Remove original model name from location                            |         |       | 3:45 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -194,7 +195,34 @@ We need to start updating model name.
 We started off by disabling the qualified name to make resolution
 work. We now need to enable it and fix all issues.
 
+*** STARTED Help contributor setup a windows environment to build dogen :story:
+    CLOCK: [2015-11-22 Sun 20:55]--[2015-11-22 Sun 21:40] =>  0:45
+
+We should write down all instructions and use them for a blog post.
+
+Current instructions:
+
+1. Create a new folder =c:\development= with a structure that is
+   something like:
+   - =c:\development\packages= -> top-level directory for all the
+     applications we install such as cmake, git, codelite, etc.
+   - =c:\development\downloads= -> raw packages as downloaded in case we
+     need to install them again.
+   - =c:\development\code= -> place where the code we will work with
+     will live. this includes dogen and boost.
+   - =c:\development\third_party= -> place where the libraries we depend
+     on to build dogen will live when installed. this is the place
+     where we will install boost to (eventually).
+2. download and install gcc, a free c++ compiler:
+http://sourceforge.net/projects/tdm-gcc/files/TDM-GCC%20Installer/tdm-gcc-5.1.0-3.exe/download
+3. download and install latest cmake:
+https://cmake.org/files/v3.4/cmake-3.4.0-win32-x86.exe
+4. download and install code lite, a free IDE: http://downloads.codelite.org/
+5. download latest boost: http://www.boost.org/users/history/version_1_59_0.html
+6. download and install latest git: https://git-scm.com/download/win
+
 *** STARTED Remove original model name from location                  :story:
+    CLOCK: [2015-11-22 Sun 22:01]--[2015-11-22 Sun 22:15] =>  0:14
     CLOCK: [2015-11-21 Sat 23:06]--[2015-11-21 Sat 23:12] =>  0:06
     CLOCK: [2015-11-21 Sat 22:14]--[2015-11-21 Sat 22:41] =>  0:27
     CLOCK: [2015-11-21 Sat 21:20]--[2015-11-21 Sat 22:13] =>  0:53
