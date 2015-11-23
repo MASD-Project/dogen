@@ -1,0 +1,1085 @@
+diff --git a/diagrams/yarn.dia b/diagrams/yarn.dia
+index b3dbad3..9cd45ac 100644
+--- a/diagrams/yarn.dia
++++ b/diagrams/yarn.dia
+@@ -7914,13 +7914,13 @@ etc.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O72">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="44,89"/>
++        <dia:point val="48,89"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="43.95,88.95;72.655,92.65"/>
++        <dia:rectangle val="47.95,88.95;76.655,92.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="44,89"/>
++        <dia:point val="48,89"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="28.605"/>
+@@ -8236,19 +8236,19 @@ etc.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="58.3025,89"/>
++        <dia:point val="62.3025,89"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="50.95,74.95;59.0525,89.8"/>
++        <dia:rectangle val="54.95,74.95;63.0525,89.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="58.3025,89"/>
+-        <dia:point val="58.3025,81"/>
+-        <dia:point val="51,81"/>
+-        <dia:point val="51,75"/>
++        <dia:point val="62.3025,89"/>
++        <dia:point val="62.3025,81"/>
++        <dia:point val="55,81"/>
++        <dia:point val="55,75"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -11886,7 +11886,7 @@ from inputs and generates yarn types off of them.#</dia:string>
+         <dia:point val="148.06,55.2"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="71.085,54.45;148.81,81.05"/>
++        <dia:rectangle val="78.165,54.45;148.81,81.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -11894,8 +11894,8 @@ from inputs and generates yarn types off of them.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="148.06,55.2"/>
+         <dia:point val="148.06,81"/>
+-        <dia:point val="71.135,81"/>
+-        <dia:point val="71.135,75"/>
++        <dia:point val="78.215,81"/>
++        <dia:point val="78.215,75"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -14262,16 +14262,16 @@ Leaves are types concrete types which have a parent.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O124">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="51,65"/>
++        <dia:point val="55,65"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="50.95,64.95;71.185,75.05"/>
++        <dia:rectangle val="54.95,64.95;78.265,75.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="51,65"/>
++        <dia:point val="55,65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="20.134999999999998"/>
++        <dia:real val="23.215"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="10"/>
+@@ -14417,7 +14417,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
+             <dia:string>#modules#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::unordered_map&lt;name,module&gt;#</dia:string>
++            <dia:string>#std::unordered_map&lt;std::string, module&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -14440,7 +14440,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
+             <dia:string>#concepts#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::unordered_map&lt;name,concept&gt;#</dia:string>
++            <dia:string>#std::unordered_map&lt;std::string, concept&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -14463,7 +14463,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
+             <dia:string>#primitives#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::unordered_map&lt;name,primitive&gt;#</dia:string>
++            <dia:string>#std::unordered_map&lt;std::string, primitive&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -14486,7 +14486,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
+             <dia:string>#enumerations#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::unordered_map&lt;name,enumeration&gt;#</dia:string>
++            <dia:string>#std::unordered_map&lt;std::string, enumeration&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -14509,7 +14509,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
+             <dia:string>#objects#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::unordered_map&lt;name,object&gt;#</dia:string>
++            <dia:string>#std::unordered_map&lt;std::string, object&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -14780,7 +14780,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
+         <dia:point val="42.21,53.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="41.46,52.85;51.2,65.8"/>
++        <dia:rectangle val="41.46,52.85;55.2,65.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -14788,8 +14788,8 @@ Leaves are types concrete types which have a parent.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="42.21,53.6"/>
+         <dia:point val="42.21,60"/>
+-        <dia:point val="51,60"/>
+-        <dia:point val="51,65"/>
++        <dia:point val="55,60"/>
++        <dia:point val="55,65"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -15293,7 +15293,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
+         <dia:point val="74.565,53"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="70.385,52.95;74.765,65.8"/>
++        <dia:rectangle val="74.515,52.95;78.965,65.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -15301,8 +15301,8 @@ Leaves are types concrete types which have a parent.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="74.565,53"/>
+         <dia:point val="74.565,60"/>
+-        <dia:point val="71.135,60"/>
+-        <dia:point val="71.135,65"/>
++        <dia:point val="78.215,60"/>
++        <dia:point val="78.215,65"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+diff --git a/doc/agile/sprint_backlog_75.org b/doc/agile/sprint_backlog_75.org
+index 697316b..f379ebb 100644
+--- a/doc/agile/sprint_backlog_75.org
++++ b/doc/agile/sprint_backlog_75.org
+@@ -31,7 +31,8 @@
+ 
+ Updates to sprint and product backlog.
+ 
+-*** Use qualified name as the key of the intermediate model container :story:
++*** STARTED Use qualified name as the key of the intermediate model container :story:
++    CLOCK: [2015-11-23 Mon 23:03]--[2015-11-23 Mon 23:27] =>  0:24
+ 
+ We are using name as the key for the intermediate model container, but
+ once we have proper qualified name support everywhere, there is no
+diff --git a/projects/yarn/include/dogen/yarn/types/intermediate_model.hpp b/projects/yarn/include/dogen/yarn/types/intermediate_model.hpp
+index b2f20a8..0952378 100644
+--- a/projects/yarn/include/dogen/yarn/types/intermediate_model.hpp
++++ b/projects/yarn/include/dogen/yarn/types/intermediate_model.hpp
+@@ -71,11 +71,11 @@ public:
+         const boost::optional<dogen::yarn::name>& containing_module,
+         const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& references,
+         const std::unordered_set<dogen::yarn::name>& leaves,
+-        const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& modules,
+-        const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& concepts,
+-        const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& primitives,
+-        const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& enumerations,
+-        const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& objects,
++        const std::unordered_map<std::string, dogen::yarn::module>& modules,
++        const std::unordered_map<std::string, dogen::yarn::concept>& concepts,
++        const std::unordered_map<std::string, dogen::yarn::primitive>& primitives,
++        const std::unordered_map<std::string, dogen::yarn::enumeration>& enumerations,
++        const std::unordered_map<std::string, dogen::yarn::object>& objects,
+         const bool is_target,
+         const bool has_generatable_types);
+ 
+@@ -192,50 +192,50 @@ public:
+      * @brief Modules contained in the intermediate model.
+      */
+     /**@{*/
+-    const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& modules() const;
+-    std::unordered_map<dogen::yarn::name, dogen::yarn::module>& modules();
+-    void modules(const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& v);
+-    void modules(const std::unordered_map<dogen::yarn::name, dogen::yarn::module>&& v);
++    const std::unordered_map<std::string, dogen::yarn::module>& modules() const;
++    std::unordered_map<std::string, dogen::yarn::module>& modules();
++    void modules(const std::unordered_map<std::string, dogen::yarn::module>& v);
++    void modules(const std::unordered_map<std::string, dogen::yarn::module>&& v);
+     /**@}*/
+ 
+     /**
+      * @brief All the concepts available in this intermediate model.
+      */
+     /**@{*/
+-    const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& concepts() const;
+-    std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& concepts();
+-    void concepts(const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& v);
+-    void concepts(const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>&& v);
++    const std::unordered_map<std::string, dogen::yarn::concept>& concepts() const;
++    std::unordered_map<std::string, dogen::yarn::concept>& concepts();
++    void concepts(const std::unordered_map<std::string, dogen::yarn::concept>& v);
++    void concepts(const std::unordered_map<std::string, dogen::yarn::concept>&& v);
+     /**@}*/
+ 
+     /**
+      * @brief All primitives contained in this intermediate model.
+      */
+     /**@{*/
+-    const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& primitives() const;
+-    std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& primitives();
+-    void primitives(const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& v);
+-    void primitives(const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>&& v);
++    const std::unordered_map<std::string, dogen::yarn::primitive>& primitives() const;
++    std::unordered_map<std::string, dogen::yarn::primitive>& primitives();
++    void primitives(const std::unordered_map<std::string, dogen::yarn::primitive>& v);
++    void primitives(const std::unordered_map<std::string, dogen::yarn::primitive>&& v);
+     /**@}*/
+ 
+     /**
+      * @brief All enumerations contained in this intermediate model.
+      */
+     /**@{*/
+-    const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& enumerations() const;
+-    std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& enumerations();
+-    void enumerations(const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& v);
+-    void enumerations(const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>&& v);
++    const std::unordered_map<std::string, dogen::yarn::enumeration>& enumerations() const;
++    std::unordered_map<std::string, dogen::yarn::enumeration>& enumerations();
++    void enumerations(const std::unordered_map<std::string, dogen::yarn::enumeration>& v);
++    void enumerations(const std::unordered_map<std::string, dogen::yarn::enumeration>&& v);
+     /**@}*/
+ 
+     /**
+      * @brief All objects contained in this intermediate model.
+      */
+     /**@{*/
+-    const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& objects() const;
+-    std::unordered_map<dogen::yarn::name, dogen::yarn::object>& objects();
+-    void objects(const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& v);
+-    void objects(const std::unordered_map<dogen::yarn::name, dogen::yarn::object>&& v);
++    const std::unordered_map<std::string, dogen::yarn::object>& objects() const;
++    std::unordered_map<std::string, dogen::yarn::object>& objects();
++    void objects(const std::unordered_map<std::string, dogen::yarn::object>& v);
++    void objects(const std::unordered_map<std::string, dogen::yarn::object>&& v);
+     /**@}*/
+ 
+     /**
+@@ -275,11 +275,11 @@ private:
+     boost::optional<dogen::yarn::name> containing_module_;
+     std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types> references_;
+     std::unordered_set<dogen::yarn::name> leaves_;
+-    std::unordered_map<dogen::yarn::name, dogen::yarn::module> modules_;
+-    std::unordered_map<dogen::yarn::name, dogen::yarn::concept> concepts_;
+-    std::unordered_map<dogen::yarn::name, dogen::yarn::primitive> primitives_;
+-    std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration> enumerations_;
+-    std::unordered_map<dogen::yarn::name, dogen::yarn::object> objects_;
++    std::unordered_map<std::string, dogen::yarn::module> modules_;
++    std::unordered_map<std::string, dogen::yarn::concept> concepts_;
++    std::unordered_map<std::string, dogen::yarn::primitive> primitives_;
++    std::unordered_map<std::string, dogen::yarn::enumeration> enumerations_;
++    std::unordered_map<std::string, dogen::yarn::object> objects_;
+     bool is_target_;
+     bool has_generatable_types_;
+ };
+diff --git a/projects/yarn/include/dogen/yarn/types/merger.hpp b/projects/yarn/include/dogen/yarn/types/merger.hpp
+index 9d1d582..1c84d14 100644
+--- a/projects/yarn/include/dogen/yarn/types/merger.hpp
++++ b/projects/yarn/include/dogen/yarn/types/merger.hpp
+@@ -90,11 +90,12 @@ private:
+ 
+ private:
+     /**
+-     * @brief Ensure the qualified name is consistent.
++     * @brief Ensure there is consistency between model name, key and
++     * value.
+      *
+      * @note should be moved to validator.
+      */
+-    void check_name(const name& model_name, const name& key,
++    void check_name(const name& model_name, const std::string& key,
+         const name& value, const bool in_global_namespace) const;
+ 
+     /**
+diff --git a/projects/yarn/src/hash/intermediate_model_hash.cpp b/projects/yarn/src/hash/intermediate_model_hash.cpp
+index bf62aef..da20528 100644
+--- a/projects/yarn/src/hash/intermediate_model_hash.cpp
++++ b/projects/yarn/src/hash/intermediate_model_hash.cpp
+@@ -64,7 +64,7 @@ inline std::size_t hash_std_unordered_set_dogen_yarn_name(const std::unordered_s
+     return seed;
+ }
+ 
+-inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_module(const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& v) {
++inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_module(const std::unordered_map<std::string, dogen::yarn::module>& v) {
+     std::size_t seed(0);
+     for (const auto i : v) {
+         combine(seed, i.first);
+@@ -73,7 +73,7 @@ inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_module(cons
+     return seed;
+ }
+ 
+-inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_concept(const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& v) {
++inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_concept(const std::unordered_map<std::string, dogen::yarn::concept>& v) {
+     std::size_t seed(0);
+     for (const auto i : v) {
+         combine(seed, i.first);
+@@ -82,7 +82,7 @@ inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_concept(con
+     return seed;
+ }
+ 
+-inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_primitive(const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& v) {
++inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_primitive(const std::unordered_map<std::string, dogen::yarn::primitive>& v) {
+     std::size_t seed(0);
+     for (const auto i : v) {
+         combine(seed, i.first);
+@@ -91,7 +91,7 @@ inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_primitive(c
+     return seed;
+ }
+ 
+-inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_enumeration(const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& v) {
++inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_enumeration(const std::unordered_map<std::string, dogen::yarn::enumeration>& v) {
+     std::size_t seed(0);
+     for (const auto i : v) {
+         combine(seed, i.first);
+@@ -100,7 +100,7 @@ inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_enumeration
+     return seed;
+ }
+ 
+-inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_object(const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& v) {
++inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_object(const std::unordered_map<std::string, dogen::yarn::object>& v) {
+     std::size_t seed(0);
+     for (const auto i : v) {
+         combine(seed, i.first);
+@@ -127,11 +127,11 @@ std::size_t intermediate_model_hasher::hash(const intermediate_model& v) {
+     combine(seed, hash_boost_optional_dogen_yarn_name(v.containing_module()));
+     combine(seed, hash_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(v.references()));
+     combine(seed, hash_std_unordered_set_dogen_yarn_name(v.leaves()));
+-    combine(seed, hash_std_unordered_map_dogen_yarn_name_dogen_yarn_module(v.modules()));
+-    combine(seed, hash_std_unordered_map_dogen_yarn_name_dogen_yarn_concept(v.concepts()));
+-    combine(seed, hash_std_unordered_map_dogen_yarn_name_dogen_yarn_primitive(v.primitives()));
+-    combine(seed, hash_std_unordered_map_dogen_yarn_name_dogen_yarn_enumeration(v.enumerations()));
+-    combine(seed, hash_std_unordered_map_dogen_yarn_name_dogen_yarn_object(v.objects()));
++    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_module(v.modules()));
++    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_concept(v.concepts()));
++    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_primitive(v.primitives()));
++    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_enumeration(v.enumerations()));
++    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_object(v.objects()));
+     combine(seed, v.is_target());
+     combine(seed, v.has_generatable_types());
+ 
+diff --git a/projects/yarn/src/io/intermediate_model_io.cpp b/projects/yarn/src/io/intermediate_model_io.cpp
+index 884db78..01f071b 100644
+--- a/projects/yarn/src/io/intermediate_model_io.cpp
++++ b/projects/yarn/src/io/intermediate_model_io.cpp
+@@ -88,12 +88,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen:
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& v) {
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::module>& v) {
+     s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+-        s << i->first;
++        s << "\"" << tidy_up_string(i->first) << "\"";
+         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+         s << i->second;
+         s << " } ]";
+@@ -106,12 +106,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& v) {
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::concept>& v) {
+     s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+-        s << i->first;
++        s << "\"" << tidy_up_string(i->first) << "\"";
+         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+         s << i->second;
+         s << " } ]";
+@@ -124,12 +124,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& v) {
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::primitive>& v) {
+     s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+-        s << i->first;
++        s << "\"" << tidy_up_string(i->first) << "\"";
+         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+         s << i->second;
+         s << " } ]";
+@@ -142,12 +142,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& v) {
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::enumeration>& v) {
+     s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+-        s << i->first;
++        s << "\"" << tidy_up_string(i->first) << "\"";
+         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+         s << i->second;
+         s << " } ]";
+@@ -160,12 +160,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& v) {
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::object>& v) {
+     s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+-        s << i->first;
++        s << "\"" << tidy_up_string(i->first) << "\"";
+         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+         s << i->second;
+         s << " } ]";
+diff --git a/projects/yarn/src/test/mock_intermediate_model_factory.cpp b/projects/yarn/src/test/mock_intermediate_model_factory.cpp
+index 42344ad..ceb8f06 100644
+--- a/projects/yarn/src/test/mock_intermediate_model_factory.cpp
++++ b/projects/yarn/src/test/mock_intermediate_model_factory.cpp
+@@ -304,14 +304,14 @@ void parent_to_child(const bool properties_indexed,
+ }
+ 
+ template<typename Nameable>
+-void insert_nameable(std::unordered_map<dogen::yarn::name, Nameable>& map,
++void insert_nameable(std::unordered_map<std::string, Nameable>& map,
+     const Nameable& n) {
+-    map.insert(std::make_pair(n.name(), n));
++    map.insert(std::make_pair(n.name().qualified(), n));
+ }
+ 
+ void insert_object(dogen::yarn::intermediate_model& m,
+     const dogen::yarn::object& o) {
+-    m.objects().insert(std::make_pair(o.name(), o));
++    m.objects().insert(std::make_pair(o.name().qualified(), o));
+ }
+ 
+ void add_test_dynamic_extensions(dogen::dynamic::object& o) {
+@@ -674,7 +674,7 @@ make_single_concept_model(const unsigned int n,
+     intermediate_model r(make_empty_model(n, add_model_module));
+ 
+     const auto ui(make_primitive(unsigned_int));
+-    r.primitives().insert(std::make_pair(ui.name(), ui));
++    r.primitives().insert(std::make_pair(ui.name().qualified(), ui));
+ 
+     concept c(make_concept(0, r.name()));
+     add_property(c, flags_.properties_indexed());
+@@ -694,7 +694,7 @@ make_first_degree_concepts_model(const unsigned int n,
+     intermediate_model r(make_empty_model(n, add_model_module));
+ 
+     const auto ui(make_primitive(unsigned_int));
+-    r.primitives().insert(std::make_pair(ui.name(), ui));
++    r.primitives().insert(std::make_pair(ui.name().qualified(), ui));
+ 
+     concept c0(make_concept(0, r.name()));
+     add_property(c0, flags_.properties_indexed());
+@@ -727,7 +727,7 @@ make_second_degree_concepts_model(const unsigned int n,
+     intermediate_model r(make_empty_model(n, add_model_module));
+ 
+     const auto ui(make_primitive(unsigned_int));
+-    r.primitives().insert(std::make_pair(ui.name(), ui));
++    r.primitives().insert(std::make_pair(ui.name().qualified(), ui));
+ 
+     concept c0(make_concept(0, r.name()));
+     add_property(c0, flags_.properties_indexed());
+@@ -776,7 +776,7 @@ make_multiple_inheritance_concepts_model(
+     intermediate_model r(make_empty_model(n, add_model_module));
+ 
+     const auto ui(make_primitive(unsigned_int));
+-    r.primitives().insert(std::make_pair(ui.name(), ui));
++    r.primitives().insert(std::make_pair(ui.name().qualified(), ui));
+ 
+     concept c0(make_concept(0, r.name()));
+     add_property(c0, flags_.properties_indexed());
+@@ -804,7 +804,7 @@ make_diamond_inheritance_concepts_model(const unsigned int n,
+     intermediate_model r(make_empty_model(n, add_model_module));
+ 
+     const auto ui(make_primitive(unsigned_int));
+-    r.primitives().insert(std::make_pair(ui.name(), ui));
++    r.primitives().insert(std::make_pair(ui.name().qualified(), ui));
+ 
+     concept c0(make_concept(0, r.name()));
+     add_property(c0, flags_.properties_indexed());
+@@ -846,7 +846,7 @@ make_object_with_parent_that_models_concept(
+     intermediate_model r(make_empty_model(n, add_model_module));
+ 
+     const auto ui(make_primitive(unsigned_int));
+-    r.primitives().insert(std::make_pair(ui.name(), ui));
++    r.primitives().insert(std::make_pair(ui.name().qualified(), ui));
+ 
+     concept c0(make_concept(0, r.name()));
+     add_property(c0, flags_.properties_indexed());
+@@ -871,7 +871,7 @@ make_object_with_parent_that_models_a_refined_concept(
+     intermediate_model r(make_empty_model(n, add_model_module));
+ 
+     const auto ui(make_primitive(unsigned_int));
+-    r.primitives().insert(std::make_pair(ui.name(), ui));
++    r.primitives().insert(std::make_pair(ui.name().qualified(), ui));
+ 
+     concept c0(make_concept(0, r.name()));
+     add_property(c0, flags_.properties_indexed());
+@@ -915,7 +915,7 @@ make_object_that_models_missing_concept(const unsigned int n,
+     intermediate_model r(make_empty_model(n, add_model_module));
+ 
+     const auto ui(make_primitive(unsigned_int));
+-    r.primitives().insert(std::make_pair(ui.name(), ui));
++    r.primitives().insert(std::make_pair(ui.name().qualified(), ui));
+ 
+     concept c0(make_concept(0, r.name()));
+     add_property(c0, flags_.properties_indexed());
+@@ -933,7 +933,7 @@ make_object_that_models_concept_with_missing_parent(
+     intermediate_model r(make_empty_model(n, add_model_module));
+ 
+     const auto ui(make_primitive(unsigned_int));
+-    r.primitives().insert(std::make_pair(ui.name(), ui));
++    r.primitives().insert(std::make_pair(ui.name().qualified(), ui));
+ 
+     concept c0(make_concept(0, r.name()));
+     add_property(c0, flags_.properties_indexed());
+@@ -1064,7 +1064,7 @@ object_with_property(const object_types ot, const property_types pt,
+ 
+     } else if (pt == property_types::std_pair) {
+         const auto b(make_primitive(boolean));
+-        r.primitives().insert(std::make_pair(b.name(), b));
++        r.primitives().insert(std::make_pair(b.name().qualified(), b));
+ 
+         if (flags_.associations_indexed())
+             o0.relationships()[ra].push_back(b.name());
+@@ -1079,13 +1079,13 @@ object_with_property(const object_types ot, const property_types pt,
+         insert_object(r, o2);
+     } else if (pt == property_types::boost_variant) {
+         const auto b(make_primitive(boolean));
+-        r.primitives().insert(std::make_pair(b.name(), b));
++        r.primitives().insert(std::make_pair(b.name().qualified(), b));
+ 
+         if (flags_.associations_indexed())
+             o0.relationships()[ra].push_back(b.name());
+ 
+         const auto ui(make_primitive(unsigned_int));
+-        r.primitives().insert(std::make_pair(ui.name(), ui));
++        r.primitives().insert(std::make_pair(ui.name().qualified(), ui));
+ 
+         if (flags_.associations_indexed())
+             o0.relationships()[ra].push_back(ui.name());
+@@ -1161,7 +1161,7 @@ object_with_parent_in_the_same_model(const bool has_property,
+     auto r(make_empty_model(0, add_model_module));
+     if (has_property) {
+         const auto ui(make_primitive(unsigned_int));
+-        r.primitives().insert(std::make_pair(ui.name(), ui));
++        r.primitives().insert(std::make_pair(ui.name().qualified(), ui));
+     }
+ 
+     auto o0(make_value_object(0, mn));
+@@ -1246,7 +1246,7 @@ object_with_third_degree_parent_in_same_model(const bool has_property,
+     auto r(make_empty_model(0, add_model_module));
+     if (has_property) {
+         const auto ui(make_primitive(unsigned_int));
+-        r.primitives().insert(std::make_pair(ui.name(), ui));
++        r.primitives().insert(std::make_pair(ui.name().qualified(), ui));
+     }
+ 
+     auto o3(make_value_object(3, mn));
+diff --git a/projects/yarn/src/test_data/intermediate_model_td.cpp b/projects/yarn/src/test_data/intermediate_model_td.cpp
+index ec135c9..52aed52 100644
+--- a/projects/yarn/src/test_data/intermediate_model_td.cpp
++++ b/projects/yarn/src/test_data/intermediate_model_td.cpp
+@@ -90,10 +90,10 @@ create_dogen_yarn_module(const unsigned int position) {
+     return dogen::yarn::module_generator::create(position);
+ }
+ 
+-std::unordered_map<dogen::yarn::name, dogen::yarn::module> create_std_unordered_map_dogen_yarn_name_dogen_yarn_module(unsigned int position) {
+-    std::unordered_map<dogen::yarn::name, dogen::yarn::module> r;
++std::unordered_map<std::string, dogen::yarn::module> create_std_unordered_map_std_string_dogen_yarn_module(unsigned int position) {
++    std::unordered_map<std::string, dogen::yarn::module> r;
+     for (unsigned int i(0); i < 4; ++i) {
+-        r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_dogen_yarn_module(position + i)));
++        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_module(position + i)));
+     }
+     return r;
+ }
+@@ -103,10 +103,10 @@ create_dogen_yarn_concept(const unsigned int position) {
+     return dogen::yarn::concept_generator::create(position);
+ }
+ 
+-std::unordered_map<dogen::yarn::name, dogen::yarn::concept> create_std_unordered_map_dogen_yarn_name_dogen_yarn_concept(unsigned int position) {
+-    std::unordered_map<dogen::yarn::name, dogen::yarn::concept> r;
++std::unordered_map<std::string, dogen::yarn::concept> create_std_unordered_map_std_string_dogen_yarn_concept(unsigned int position) {
++    std::unordered_map<std::string, dogen::yarn::concept> r;
+     for (unsigned int i(0); i < 4; ++i) {
+-        r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_dogen_yarn_concept(position + i)));
++        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_concept(position + i)));
+     }
+     return r;
+ }
+@@ -116,10 +116,10 @@ create_dogen_yarn_primitive(const unsigned int position) {
+     return dogen::yarn::primitive_generator::create(position);
+ }
+ 
+-std::unordered_map<dogen::yarn::name, dogen::yarn::primitive> create_std_unordered_map_dogen_yarn_name_dogen_yarn_primitive(unsigned int position) {
+-    std::unordered_map<dogen::yarn::name, dogen::yarn::primitive> r;
++std::unordered_map<std::string, dogen::yarn::primitive> create_std_unordered_map_std_string_dogen_yarn_primitive(unsigned int position) {
++    std::unordered_map<std::string, dogen::yarn::primitive> r;
+     for (unsigned int i(0); i < 4; ++i) {
+-        r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_dogen_yarn_primitive(position + i)));
++        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_primitive(position + i)));
+     }
+     return r;
+ }
+@@ -129,10 +129,10 @@ create_dogen_yarn_enumeration(const unsigned int position) {
+     return dogen::yarn::enumeration_generator::create(position);
+ }
+ 
+-std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration> create_std_unordered_map_dogen_yarn_name_dogen_yarn_enumeration(unsigned int position) {
+-    std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration> r;
++std::unordered_map<std::string, dogen::yarn::enumeration> create_std_unordered_map_std_string_dogen_yarn_enumeration(unsigned int position) {
++    std::unordered_map<std::string, dogen::yarn::enumeration> r;
+     for (unsigned int i(0); i < 4; ++i) {
+-        r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_dogen_yarn_enumeration(position + i)));
++        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_enumeration(position + i)));
+     }
+     return r;
+ }
+@@ -142,10 +142,10 @@ create_dogen_yarn_object(const unsigned int position) {
+     return dogen::yarn::object_generator::create(position);
+ }
+ 
+-std::unordered_map<dogen::yarn::name, dogen::yarn::object> create_std_unordered_map_dogen_yarn_name_dogen_yarn_object(unsigned int position) {
+-    std::unordered_map<dogen::yarn::name, dogen::yarn::object> r;
++std::unordered_map<std::string, dogen::yarn::object> create_std_unordered_map_std_string_dogen_yarn_object(unsigned int position) {
++    std::unordered_map<std::string, dogen::yarn::object> r;
+     for (unsigned int i(0); i < 4; ++i) {
+-        r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_dogen_yarn_object(position + i)));
++        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_object(position + i)));
+     }
+     return r;
+ }
+@@ -169,11 +169,11 @@ populate(const unsigned int position, result_type& v) {
+     v.containing_module(create_boost_optional_dogen_yarn_name(position + 7));
+     v.references(create_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(position + 8));
+     v.leaves(create_std_unordered_set_dogen_yarn_name(position + 9));
+-    v.modules(create_std_unordered_map_dogen_yarn_name_dogen_yarn_module(position + 10));
+-    v.concepts(create_std_unordered_map_dogen_yarn_name_dogen_yarn_concept(position + 11));
+-    v.primitives(create_std_unordered_map_dogen_yarn_name_dogen_yarn_primitive(position + 12));
+-    v.enumerations(create_std_unordered_map_dogen_yarn_name_dogen_yarn_enumeration(position + 13));
+-    v.objects(create_std_unordered_map_dogen_yarn_name_dogen_yarn_object(position + 14));
++    v.modules(create_std_unordered_map_std_string_dogen_yarn_module(position + 10));
++    v.concepts(create_std_unordered_map_std_string_dogen_yarn_concept(position + 11));
++    v.primitives(create_std_unordered_map_std_string_dogen_yarn_primitive(position + 12));
++    v.enumerations(create_std_unordered_map_std_string_dogen_yarn_enumeration(position + 13));
++    v.objects(create_std_unordered_map_std_string_dogen_yarn_object(position + 14));
+     v.is_target(create_bool(position + 15));
+     v.has_generatable_types(create_bool(position + 16));
+ }
+diff --git a/projects/yarn/src/types/association_indexer.cpp b/projects/yarn/src/types/association_indexer.cpp
+index 87fb8bf..64eed83 100644
+--- a/projects/yarn/src/types/association_indexer.cpp
++++ b/projects/yarn/src/types/association_indexer.cpp
+@@ -71,19 +71,19 @@ void association_indexer::recurse_nested_names(const intermediate_model& m,
+     else
+         rels[relationship_types::regular_associations].push_back(n);
+ 
+-    const auto i(m.primitives().find(n));
++    const auto i(m.primitives().find(n.qualified()));
+     if (i != m.primitives().end()) {
+         is_pointer = false;
+         return;
+     }
+ 
+-    const auto j(m.enumerations().find(n));
++    const auto j(m.enumerations().find(n.qualified()));
+     if (j != m.enumerations().end()) {
+         is_pointer = false;
+         return;
+     }
+ 
+-    const auto k(m.objects().find(n));
++    const auto k(m.objects().find(n.qualified()));
+     if (k == m.objects().end()) {
+         const auto qn(n.qualified());
+         BOOST_LOG_SEV(lg, error) << object_not_found << qn;
+diff --git a/projects/yarn/src/types/concept_indexer.cpp b/projects/yarn/src/types/concept_indexer.cpp
+index 833ec91..2b55dc1 100644
+--- a/projects/yarn/src/types/concept_indexer.cpp
++++ b/projects/yarn/src/types/concept_indexer.cpp
+@@ -57,7 +57,7 @@ inline bool operator<(const name& lhs, const name& rhs) {
+ }
+ 
+ object& concept_indexer::find_object(const name& n, intermediate_model& m) {
+-    auto i(m.objects().find(n));
++    auto i(m.objects().find(n.qualified()));
+     if (i == m.objects().end()) {
+         BOOST_LOG_SEV(lg, error) << object_not_found << n.qualified();
+         BOOST_THROW_EXCEPTION(
+@@ -79,7 +79,7 @@ find_relationships(const relationship_types rt, object& o) {
+ }
+ 
+ concept& concept_indexer::find_concept(const name& n, intermediate_model& m) {
+-    auto i(m.concepts().find(n));
++    auto i(m.concepts().find(n.qualified()));
+     if (i == m.concepts().end()) {
+         BOOST_LOG_SEV(lg, error) << concept_not_found << n.qualified();
+         BOOST_THROW_EXCEPTION(
+diff --git a/projects/yarn/src/types/generalization_indexer.cpp b/projects/yarn/src/types/generalization_indexer.cpp
+index d7dd697..324aa33 100644
+--- a/projects/yarn/src/types/generalization_indexer.cpp
++++ b/projects/yarn/src/types/generalization_indexer.cpp
+@@ -82,7 +82,7 @@ recurse_generalization(const intermediate_model& m, const name& leaf,
+ 
+     std::list<name> root_parents;
+     for (const auto& parent : i->second) {
+-        auto j(m.objects().find(parent));
++        auto j(m.objects().find(parent.qualified()));
+         if (j == m.objects().end()) {
+             const auto qn(parent.qualified());
+             BOOST_LOG_SEV(lg, error) << parent_not_found << qn;
+@@ -136,7 +136,7 @@ void generalization_indexer::
+ populate(const generalization_details& d, intermediate_model& m) const {
+     for (const auto& pair : d.leaves) {
+         const auto& n(pair.first);
+-        auto i(m.objects().find(n));
++        auto i(m.objects().find(n.qualified()));
+         if (i == m.objects().end()) {
+             const auto qn(n.qualified());
+             BOOST_LOG_SEV(lg, error) << object_not_found << qn;
+@@ -156,7 +156,7 @@ populate(const generalization_details& d, intermediate_model& m) const {
+ 
+     for (const auto& pair : d.root_parents) {
+         const auto& n(pair.first);
+-        auto i(m.objects().find(n));
++        auto i(m.objects().find(n.qualified()));
+         if (i == m.objects().end()) {
+             const auto qn(n.qualified());
+             BOOST_LOG_SEV(lg, error) << object_not_found << qn;
+@@ -176,7 +176,7 @@ populate(const generalization_details& d, intermediate_model& m) const {
+         const auto rt(relationship_types::root_parents);
+         o.relationships()[rt] = pair.second;
+         for (const auto& opn : pair.second) {
+-            const auto j(m.objects().find(opn));
++            const auto j(m.objects().find(opn.qualified()));
+             if (j == m.objects().end()) {
+                 const auto qn(opn.qualified());
+                 BOOST_LOG_SEV(lg, error) << object_not_found << qn;
+diff --git a/projects/yarn/src/types/injector.cpp b/projects/yarn/src/types/injector.cpp
+index 6bc0c8e..958ba8d 100644
+--- a/projects/yarn/src/types/injector.cpp
++++ b/projects/yarn/src/types/injector.cpp
+@@ -85,7 +85,7 @@ private:
+ 
+ bool injector::insert(const object& o) {
+     const auto i(context_->model().objects().insert(
+-            std::make_pair(o.name(), o)));
++            std::make_pair(o.name().qualified(), o)));
+ 
+     return i.second;
+ }
+@@ -118,7 +118,7 @@ void injector::inject_visited_by(object& root, const std::list<name>& leaves,
+     root.relationships()[relationship_types::visited_by].push_back(visitor);
+ 
+     for (const auto& l : leaves) {
+-        auto i(context_->model().objects().find(l));
++        auto i(context_->model().objects().find(l.qualified()));
+         if (i == context_->model().objects().end()) {
+             const auto qn(l.qualified());
+             BOOST_LOG_SEV(lg, error) << leaf_not_found << qn;
+@@ -173,7 +173,7 @@ void injector::inject_global_module() {
+     name qn;
+ 
+     auto& model(context_->model());
+-    const auto i(model.modules().find(qn));
++    const auto i(model.modules().find(qn.qualified()));
+     if (i != model.modules().end()) {
+         const auto qn(model.name().qualified());
+         BOOST_LOG_SEV(lg, error) << model_already_has_global_module << qn;
+@@ -192,7 +192,7 @@ void injector::inject_global_module() {
+     global_module.generation_type(generation_types::no_generation);
+     global_module.origin_type(origin_types::system);
+     global_module.documentation(global_module_doc);
+-    model.modules().insert(std::make_pair(qn, global_module));
++    model.modules().insert(std::make_pair(qn.qualified(), global_module));
+ }
+ 
+ void injector::inject(intermediate_model& m) {
+diff --git a/projects/yarn/src/types/intermediate_model.cpp b/projects/yarn/src/types/intermediate_model.cpp
+index 3c19e65..987fcd2 100644
+--- a/projects/yarn/src/types/intermediate_model.cpp
++++ b/projects/yarn/src/types/intermediate_model.cpp
+@@ -60,11 +60,11 @@ intermediate_model::intermediate_model(
+     const boost::optional<dogen::yarn::name>& containing_module,
+     const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& references,
+     const std::unordered_set<dogen::yarn::name>& leaves,
+-    const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& modules,
+-    const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& concepts,
+-    const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& primitives,
+-    const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& enumerations,
+-    const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& objects,
++    const std::unordered_map<std::string, dogen::yarn::module>& modules,
++    const std::unordered_map<std::string, dogen::yarn::concept>& concepts,
++    const std::unordered_map<std::string, dogen::yarn::primitive>& primitives,
++    const std::unordered_map<std::string, dogen::yarn::enumeration>& enumerations,
++    const std::unordered_map<std::string, dogen::yarn::object>& objects,
+     const bool is_target,
+     const bool has_generatable_types)
+     : in_global_module_(in_global_module),
+@@ -268,83 +268,83 @@ void intermediate_model::leaves(const std::unordered_set<dogen::yarn::name>&& v)
+     leaves_ = std::move(v);
+ }
+ 
+-const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& intermediate_model::modules() const {
++const std::unordered_map<std::string, dogen::yarn::module>& intermediate_model::modules() const {
+     return modules_;
+ }
+ 
+-std::unordered_map<dogen::yarn::name, dogen::yarn::module>& intermediate_model::modules() {
++std::unordered_map<std::string, dogen::yarn::module>& intermediate_model::modules() {
+     return modules_;
+ }
+ 
+-void intermediate_model::modules(const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& v) {
++void intermediate_model::modules(const std::unordered_map<std::string, dogen::yarn::module>& v) {
+     modules_ = v;
+ }
+ 
+-void intermediate_model::modules(const std::unordered_map<dogen::yarn::name, dogen::yarn::module>&& v) {
++void intermediate_model::modules(const std::unordered_map<std::string, dogen::yarn::module>&& v) {
+     modules_ = std::move(v);
+ }
+ 
+-const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& intermediate_model::concepts() const {
++const std::unordered_map<std::string, dogen::yarn::concept>& intermediate_model::concepts() const {
+     return concepts_;
+ }
+ 
+-std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& intermediate_model::concepts() {
++std::unordered_map<std::string, dogen::yarn::concept>& intermediate_model::concepts() {
+     return concepts_;
+ }
+ 
+-void intermediate_model::concepts(const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& v) {
++void intermediate_model::concepts(const std::unordered_map<std::string, dogen::yarn::concept>& v) {
+     concepts_ = v;
+ }
+ 
+-void intermediate_model::concepts(const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>&& v) {
++void intermediate_model::concepts(const std::unordered_map<std::string, dogen::yarn::concept>&& v) {
+     concepts_ = std::move(v);
+ }
+ 
+-const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& intermediate_model::primitives() const {
++const std::unordered_map<std::string, dogen::yarn::primitive>& intermediate_model::primitives() const {
+     return primitives_;
+ }
+ 
+-std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& intermediate_model::primitives() {
++std::unordered_map<std::string, dogen::yarn::primitive>& intermediate_model::primitives() {
+     return primitives_;
+ }
+ 
+-void intermediate_model::primitives(const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& v) {
++void intermediate_model::primitives(const std::unordered_map<std::string, dogen::yarn::primitive>& v) {
+     primitives_ = v;
+ }
+ 
+-void intermediate_model::primitives(const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>&& v) {
++void intermediate_model::primitives(const std::unordered_map<std::string, dogen::yarn::primitive>&& v) {
+     primitives_ = std::move(v);
+ }
+ 
+-const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& intermediate_model::enumerations() const {
++const std::unordered_map<std::string, dogen::yarn::enumeration>& intermediate_model::enumerations() const {
+     return enumerations_;
+ }
+ 
+-std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& intermediate_model::enumerations() {
++std::unordered_map<std::string, dogen::yarn::enumeration>& intermediate_model::enumerations() {
+     return enumerations_;
+ }
+ 
+-void intermediate_model::enumerations(const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& v) {
++void intermediate_model::enumerations(const std::unordered_map<std::string, dogen::yarn::enumeration>& v) {
+     enumerations_ = v;
+ }
+ 
+-void intermediate_model::enumerations(const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>&& v) {
++void intermediate_model::enumerations(const std::unordered_map<std::string, dogen::yarn::enumeration>&& v) {
+     enumerations_ = std::move(v);
+ }
+ 
+-const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& intermediate_model::objects() const {
++const std::unordered_map<std::string, dogen::yarn::object>& intermediate_model::objects() const {
+     return objects_;
+ }
+ 
+-std::unordered_map<dogen::yarn::name, dogen::yarn::object>& intermediate_model::objects() {
++std::unordered_map<std::string, dogen::yarn::object>& intermediate_model::objects() {
+     return objects_;
+ }
+ 
+-void intermediate_model::objects(const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& v) {
++void intermediate_model::objects(const std::unordered_map<std::string, dogen::yarn::object>& v) {
+     objects_ = v;
+ }
+ 
+-void intermediate_model::objects(const std::unordered_map<dogen::yarn::name, dogen::yarn::object>&& v) {
++void intermediate_model::objects(const std::unordered_map<std::string, dogen::yarn::object>&& v) {
+     objects_ = std::move(v);
+ }
+ 
+diff --git a/projects/yarn/src/types/merger.cpp b/projects/yarn/src/types/merger.cpp
+index 71b8f83..a628963 100644
+--- a/projects/yarn/src/types/merger.cpp
++++ b/projects/yarn/src/types/merger.cpp
+@@ -80,27 +80,27 @@ void merger::require_not_has_merged() const {
+     BOOST_THROW_EXCEPTION(merging_error(multiple_merge));
+ }
+ 
+-void merger::check_name(const name& model_name, const name& key,
++void merger::check_name(const name& model_name, const std::string& key,
+     const name& value, const bool in_global_namespace) const {
+ 
+     if (!in_global_namespace) {
+-        if (key.location().external_module_path() !=
++        if (value.location().external_module_path() !=
+             model_name.location().external_module_path() ||
+-            key.location().model_module_path() !=
++            value.location().model_module_path() !=
+             model_name.location().model_module_path()) {
+             std::ostringstream s;
+             s << "Type does not belong to this model. Model name: '"
+-              << model_name.qualified() << "'. Type name: " << key.qualified();
++              << model_name.qualified() << "'. Type name: "
++              << value.qualified();
+             BOOST_LOG_SEV(lg, error) << s.str();
+             BOOST_THROW_EXCEPTION(merging_error(s.str()));
+         }
+     }
+ 
+-    if (key != value) {
++    if (key != value.qualified()) {
+         std::ostringstream s;
+         s << "Inconsistency between key and value names: "
+-          << " key: " << key.qualified()
+-          << " value: " << value.qualified();
++          << " key: " << key << " value: " << value.qualified();
+         BOOST_LOG_SEV(lg, error) << s.str();
+         BOOST_THROW_EXCEPTION(merging_error(s.str()));
+     }
+diff --git a/projects/yarn/src/types/property_indexer.cpp b/projects/yarn/src/types/property_indexer.cpp
+index 44b138d..fc195e3 100644
+--- a/projects/yarn/src/types/property_indexer.cpp
++++ b/projects/yarn/src/types/property_indexer.cpp
+@@ -47,9 +47,9 @@ namespace dogen {
+ namespace yarn {
+ 
+ object& property_indexer::find_object(const name& n, intermediate_model& m) {
+-    auto i(m.objects().find(n));
++    const auto qn(n.qualified());
++    auto i(m.objects().find(qn));
+     if (i == m.objects().end()) {
+-        const auto qn(n.qualified());
+         BOOST_LOG_SEV(lg, error) << object_not_found << qn;
+         BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
+     }
+@@ -69,9 +69,9 @@ find_relationships(const relationship_types rt, object& o) {
+ }
+ 
+ concept& property_indexer::find_concept(const name& n, intermediate_model& m) {
+-    auto i(m.concepts().find(n));
++    const auto& qn(n.qualified());
++    auto i(m.concepts().find(qn));
+     if (i == m.concepts().end()) {
+-        const auto& qn(n.qualified());
+         BOOST_LOG_SEV(lg, error) << concept_not_found << qn;
+         BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + qn));
+     }
+diff --git a/projects/yarn/src/types/resolver.cpp b/projects/yarn/src/types/resolver.cpp
+index 19d5441..67d5674 100644
+--- a/projects/yarn/src/types/resolver.cpp
++++ b/projects/yarn/src/types/resolver.cpp
+@@ -59,19 +59,19 @@ resolver::resolver(intermediate_model& m) : model_(m), has_resolved_(false) { }
+ bool resolver::is_name_in_model(const name& n) const {
+     BOOST_LOG_SEV(lg, debug) << "Finding name:" << n;
+ 
+-    auto i(model_.objects().find(n));
++    auto i(model_.objects().find(n.qualified()));
+     if (i != model_.objects().end()) {
+         BOOST_LOG_SEV(lg, debug) << "Name belongs to an object in model.";
+         return true;
+     }
+ 
+-    auto j(model_.enumerations().find(n));
++    auto j(model_.enumerations().find(n.qualified()));
+     if (j != model_.enumerations().end()) {
+         BOOST_LOG_SEV(lg, debug) << "Name belongs to an enumeration in model.";
+         return true;
+     }
+ 
+-    auto k(model_.primitives().find(n));
++    auto k(model_.primitives().find(n.qualified()));
+     if (k != model_.primitives().end()) {
+         BOOST_LOG_SEV(lg, debug) << "Name belongs to a primitive in model.";
+         return true;
+@@ -158,7 +158,7 @@ void resolver::validate_inheritance_graph(const object& ao) const {
+         return;
+ 
+     for (const auto& pn : i->second) {
+-        const auto j(model_.objects().find(pn));
++        const auto j(model_.objects().find(pn.qualified()));
+         if (j == model_.objects().end()) {
+             std::ostringstream s;
+             s << orphan_object << ": " << ao.name().qualified()
+@@ -174,7 +174,7 @@ void resolver::validate_inheritance_graph(const object& ao) const {
+         return;
+ 
+     for (const auto& pn : i->second) {
+-        const auto j(model_.objects().find(pn));
++        const auto j(model_.objects().find(pn.qualified()));
+         if (j == model_.objects().end()) {
+             std::ostringstream s;
+             s << orphan_object << ": " << ao.name().qualified()
+@@ -188,7 +188,7 @@ void resolver::validate_inheritance_graph(const object& ao) const {
+ 
+ void resolver::validate_refinements(const concept& c) const {
+     for (const auto& n : c.refines()) {
+-        const auto i(model_.concepts().find(n));
++        const auto i(model_.concepts().find(n.qualified()));
+         if (i == model_.concepts().end()) {
+             std::ostringstream stream;
+             stream << orphan_concept << ". concept: "
+diff --git a/projects/yarn/src/types/transformer.cpp b/projects/yarn/src/types/transformer.cpp
+index b0ae58c..e3af5cd 100644
+--- a/projects/yarn/src/types/transformer.cpp
++++ b/projects/yarn/src/types/transformer.cpp
+@@ -71,7 +71,7 @@ private:
+ }
+ 
+ model transformer::transform(const intermediate_model& m) const {
+-    const auto i(m.modules().find(m.name()));
++    const auto i(m.modules().find(m.name().qualified()));
+     if (i == m.modules().end()) {
+         const auto qn(m.name().qualified());
+         BOOST_LOG_SEV(lg, error) << missing_root_module << qn;
