@@ -38,8 +38,8 @@ namespace yarn {
  * @brief Performs a traversal across all types in an intermediate model.
  */
 /**@{*/
-template<typename TraversalVisitor> inline
-void all_model_items_traversal(const intermediate_model& m,
+template<typename TraversalVisitor>
+inline void elements_traversal(const intermediate_model& m,
     const TraversalVisitor& v) {
     for (const auto& pair : m.modules())
         v(pair.second);
@@ -57,8 +57,8 @@ void all_model_items_traversal(const intermediate_model& m,
         v(pair.second);
 }
 
-template<typename TraversalVisitor> inline
-void all_model_items_traversal(const intermediate_model& m,
+template<typename TraversalVisitor>
+inline void elements_traversal(const intermediate_model& m,
     TraversalVisitor& v) {
     for (auto& pair : m.modules())
         v(pair.second);
@@ -76,8 +76,8 @@ void all_model_items_traversal(const intermediate_model& m,
         v(pair.second);
 }
 
-template<typename TraversalVisitor> inline
-void all_model_items_traversal(intermediate_model& m, TraversalVisitor& v) {
+template<typename TraversalVisitor>
+inline void elements_traversal(intermediate_model& m, TraversalVisitor& v) {
     for (auto& pair : m.modules())
         v(pair.second);
 

@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/transformation_error.hpp"
-#include "dogen/yarn/types/all_model_items_traversal.hpp"
+#include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/yarn/types/transformer.hpp"
 
 namespace {
@@ -84,7 +84,7 @@ model transformer::transform(const intermediate_model& m) const {
     r.references(m.references());
 
     generator g;
-    yarn::all_model_items_traversal(m, g);
+    yarn::elements_traversal(m, g);
     return r;
 }
 

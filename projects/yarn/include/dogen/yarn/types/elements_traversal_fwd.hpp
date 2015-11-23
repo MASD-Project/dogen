@@ -18,12 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/all_model_items_traversal.hpp"
+#ifndef DOGEN_YARN_TYPES_ELEMENTS_TRAVERSAL_FWD_HPP
+#define DOGEN_YARN_TYPES_ELEMENTS_TRAVERSAL_FWD_HPP
 
-// dummy function to suppress ranlib warnings
-void all_model_items_traversal() { }
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace yarn {
 
+class elements_traversal;
+
 } }
+
+#endif

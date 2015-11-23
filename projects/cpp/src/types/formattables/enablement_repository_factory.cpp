@@ -24,7 +24,7 @@
 #include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/all_model_items_traversal.hpp"
+#include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/io/formattables/enablement_repository_io.hpp"
 #include "dogen/cpp/io/formattables/global_enablement_properties_io.hpp"
@@ -145,7 +145,7 @@ enablement_repository enablement_repository_factory::make(
     const auto gep(obtain_global_properties(fd, root_object));
     const enablement_factory f(rp, fc, gep);
     generator g(f);
-    yarn::all_model_items_traversal(m, g);
+    yarn::elements_traversal(m, g);
     auto r(g.result());
 
     yarn::name_factory nf;

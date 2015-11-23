@@ -24,7 +24,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/memory_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
-#include "dogen/yarn/types/all_model_items_traversal.hpp"
+#include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/cpp/types/settings/path_settings_factory.hpp"
 #include "dogen/cpp/types/formattables/factory.hpp"
 #include "dogen/cpp/types/formattables/transformer.hpp"
@@ -130,7 +130,7 @@ workflow::from_transformer_activity(
 
     const transformer t(osb, brp, fprp, m);
     generator g(t);
-    all_model_items_traversal(m, g);
+    elements_traversal(m, g);
 
     BOOST_LOG_SEV(lg, debug) << "Finished transforming formattables.";
     return g.result();

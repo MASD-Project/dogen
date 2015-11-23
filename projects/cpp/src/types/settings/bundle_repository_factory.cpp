@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/all_model_items_traversal.hpp"
+#include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/cpp/io/settings/bundle_repository_io.hpp"
 #include "dogen/cpp/types/settings/bundle_factory.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
@@ -98,7 +98,7 @@ make(const dynamic::repository& rp, const dynamic::object& root_object,
 
     const bundle_factory f(rp, root_object, gsf, osb);
     generator g(f);
-    yarn::all_model_items_traversal(m, g);
+    yarn::elements_traversal(m, g);
     auto r(g.result());
 
     // FIXME: hack to handle registars.

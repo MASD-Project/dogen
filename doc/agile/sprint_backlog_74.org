@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-23 Mon 00:11]
+#+CAPTION: Clock summary at [2015-11-23 Mon 00:22]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *20:43* |       |      |
+| *Total time*                                                                | *20:54* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 20:43   |       |      |
-| Active                                                                      |         | 20:43 |      |
+| Stories                                                                     | 20:54   |       |      |
+| Active                                                                      |         | 20:54 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:50 |
 | COMPLETED Write the next interesting instalment                             |         |       | 1:05 |
 | COMPLETED SML json hydrator =read_module_path= needs refactoring            |         |       | 1:21 |
@@ -33,6 +33,7 @@
 | COMPLETED Remove original model name from location                          |         |       | 4:07 |
 | COMPLETED Rename =in_global_namespace=                                      |         |       | 0:27 |
 | COMPLETED Rename original parents                                           |         |       | 0:19 |
+| COMPLETED Rename all model items traversal                                  |         |       | 0:11 |
 | STARTED Help contributor setup a windows environment to build dogen         |         |       | 0:45 |
 #+end:
 
@@ -267,6 +268,13 @@ Inheritance follows a tree of some kind. We should use tree
 terminology for this. According to [[https://en.wikipedia.org/wiki/Tree_(graph_theory)][wikipedia]], root parent would be a
 sensible name.
 
+*** COMPLETED Rename all model items traversal                        :story:
+    CLOSED: [2015-11-23 Mon 00:19]
+    CLOCK: [2015-11-23 Mon 00:11]--[2015-11-23 Mon 00:22] =>  0:11
+
+We now know model items are called elements, so this should be an
+element traversal.
+
 *** STARTED Help contributor setup a windows environment to build dogen :story:
     CLOCK: [2015-11-22 Sun 20:55]--[2015-11-22 Sun 21:40] =>  0:45
 
@@ -292,11 +300,6 @@ https://cmake.org/files/v3.4/cmake-3.4.0-win32-x86.exe
 4. download and install code lite, a free IDE: http://downloads.codelite.org/
 5. download latest boost: http://www.boost.org/users/history/version_1_59_0.html
 6. download and install latest git: https://git-scm.com/download/win
-
-*** Rename all model items traversal                                  :story:
-
-We now know model items are called elements, so this should be an
-element traversal.
 
 *** Use qualified name as the key of the intermediate model container :story:
 

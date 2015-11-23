@@ -68,6 +68,7 @@
 #include "dogen/yarn/types/resolution_error.hpp"
 #include "dogen/yarn/types/frontend_workflow.hpp"
 #include "dogen/yarn/types/identifier_parser.hpp"
+#include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/yarn/types/frontend_interface.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
@@ -77,6 +78,5 @@
 #include "dogen/yarn/types/properties_expander.hpp"
 #include "dogen/yarn/types/transformation_error.hpp"
 #include "dogen/yarn/types/generalization_indexer.hpp"
-#include "dogen/yarn/types/all_model_items_traversal.hpp"
 
 #endif

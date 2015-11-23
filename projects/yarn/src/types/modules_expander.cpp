@@ -23,7 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
-#include "dogen/yarn/types/all_model_items_traversal.hpp"
+#include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/yarn/types/modules_expander.hpp"
 
 namespace {
@@ -160,7 +160,7 @@ void updater::update(element& e) {
 
 void modules_expander::create_missing_modules(intermediate_model& m) const {
     internal_module_path_builder b;
-    yarn::all_model_items_traversal(m, b);
+    yarn::elements_traversal(m, b);
 
     for (const auto& pair : b.result()) {
         yarn::name_factory f;
@@ -179,7 +179,7 @@ void modules_expander::create_missing_modules(intermediate_model& m) const {
 
 void modules_expander::expand_containing_module(intermediate_model& m) const {
     updater g(m);
-    yarn::all_model_items_traversal(m, g);
+    yarn::elements_traversal(m, g);
 }
 
 void modules_expander::expand(intermediate_model& m) const {

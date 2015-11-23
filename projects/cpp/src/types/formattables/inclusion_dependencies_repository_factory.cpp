@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/all_model_items_traversal.hpp"
+#include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_factory.hpp"
 #include "dogen/cpp/io/formattables/inclusion_dependencies_repository_io.hpp"
@@ -109,7 +109,7 @@ make(const inclusion_dependencies_builder_factory& bf, const container& c,
 
     const inclusion_dependencies_factory idf(bf, c);
     generator g(idf);
-    yarn::all_model_items_traversal(m, g);
+    yarn::elements_traversal(m, g);
 
     yarn::name_factory nf;
     const auto n(nf.build_element_in_model(m.name(), registrar_name));
