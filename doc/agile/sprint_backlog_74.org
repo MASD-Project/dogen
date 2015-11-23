@@ -15,7 +15,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-23 Mon 00:22]
+#+CAPTION: Clock summary at [2015-11-23 Mon 22:59]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
@@ -23,7 +23,7 @@
 |-----------------------------------------------------------------------------+---------+-------+------|
 | Stories                                                                     | 20:54   |       |      |
 | Active                                                                      |         | 20:54 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 3:50 |
+| COMPLETED Sprint and product backlog grooming                               |         |       | 3:50 |
 | COMPLETED Write the next interesting instalment                             |         |       | 1:05 |
 | COMPLETED SML json hydrator =read_module_path= needs refactoring            |         |       | 1:21 |
 | COMPLETED Generate all yarn names using name factory                        |         |       | 7:25 |
@@ -34,10 +34,11 @@
 | COMPLETED Rename =in_global_namespace=                                      |         |       | 0:27 |
 | COMPLETED Rename original parents                                           |         |       | 0:19 |
 | COMPLETED Rename all model items traversal                                  |         |       | 0:11 |
-| STARTED Help contributor setup a windows environment to build dogen         |         |       | 0:45 |
+| POSTPONED Help contributor setup a windows environment to build dogen       |         |       | 0:45 |
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2015-11-23 Mon 22:59]
     CLOCK: [2015-11-22 Sun 22:39]--[2015-11-22 Sun 23:21] =>  0:42
     CLOCK: [2015-11-21 Sat 22:42]--[2015-11-21 Sat 23:05] =>  0:23
     CLOCK: [2015-11-19 Thu 18:18]--[2015-11-19 Thu 18:47] =>  0:29
@@ -275,7 +276,8 @@ sensible name.
 We now know model items are called elements, so this should be an
 element traversal.
 
-*** STARTED Help contributor setup a windows environment to build dogen :story:
+*** POSTPONED Help contributor setup a windows environment to build dogen :story:
+    CLOSED: [2015-11-23 Mon 22:59]
     CLOCK: [2015-11-22 Sun 20:55]--[2015-11-22 Sun 21:40] =>  0:45
 
 We should write down all instructions and use them for a blog post.
@@ -300,345 +302,6 @@ https://cmake.org/files/v3.4/cmake-3.4.0-win32-x86.exe
 4. download and install code lite, a free IDE: http://downloads.codelite.org/
 5. download latest boost: http://www.boost.org/users/history/version_1_59_0.html
 6. download and install latest git: https://git-scm.com/download/win
-
-*** Use qualified name as the key of the intermediate model container :story:
-
-We are using name as the key for the intermediate model container, but
-once we have proper qualified name support everywhere, there is no
-reason why we can't just use the qualified name. We should not change
-the logic in the =cpp= containers as there the name is used for
-processing reasons - we'd end up having to have the name as the value
-instead.
-
-*** Remove =is_root_parent_visitable=                                 :story:
-
-We should just use the =visits=, =visited_by=, etc relationships. The
-existing flag will break with multiple inheritance.
-
-*** Remove =service= stereotype                                       :story:
-
-This really just means non-generatable, or do not generate. We already
-have a stereotype for this. Remove =service= and any other stereotype
-which is not being used such as =value_object= etc.
-
-Actually, non-generatable is not a stereotype really. We should
-instead have some meta-data that can affect generation:
-
-- do not generate: do nothing at all. For references only. If a file
-  exists with this file name, it will be deleted as part of
-  housekeeping.
-- generate blank file if it doesn't exist: we don't even want a
-  template.
-- generate with content if it doesn't exist, do not touch otherwise:
-  what we call services at the moment. Generate a "template" that then
-  gets filled in manually.
-- generate and merge: merge the contents of the generated file with
-  the current contents in the file system. When we support merging.
-- generate and overwrite: generate the file and overwrite whatever
-  exists in the file system.
-
-The second behaviour we get for free with services is that we disable
-all facets except for types. A few points:
-
-- we may want to have io, serialisation, etc. This is not possible at
-  present. If all state of a service is of supported types, we could
-  even use existing code generation.
-
-*** Refactor code around model origination                            :story:
-
-- remove origin types and generation types, replacing it with just a
-  boolean for is target. Actually we need something like:
-  proxy_reference, non_proxy_reference, target. We also need a good
-  name for this enumeration:
-- at present we are using origin type to determine whether to create a
-  registrar, etc in cpp model. There is no other use case for
-  this. This is done in several places due to the bad handling of C++
-  specific types. Grep for =references= in =cpp= to find all
-  locations. We could split references into two (dogen, non-dogen).
-- we should also replace has generatable types with something more
-  like "target model has types" or "is target model empty". The idea
-  we are trying to capture is that the target model contained at least
-  one type. This could be set by the merger when it processes the
-  target model.
-
-*Previous Understanding*
-
-In the past we added a number of knobs around generation, all with
-their own problems:
-
-- =origin_types=: was the model/type created by the user or the
-  system. in reality this means did the model come from Dia or
-  JSON. this is confusing as the user can also add JSON files (their
-  own model library) and in the future the user can use JSON
-  exclusively without needed Dia at all.
-- =generation_types=: if the model is target, all types are to be
-  generated /unless/ they are not properly supported, in which case
-  they are to be "partially" generated (as is the case with
-  services). This is a formatter decision and yarn should not know
-  anything about it. Actually this is not quite true; users may want
-  to stop generation.
-
-These can be replaced by a single enumeration that indicates if the
-type/model is target or not.
-
-This work should be integrated with the model types story.
-
-Merged stories:
-
-*Split references into dogen and non-dogen models*
-
-If we had two containers of references, one for dogen models and
-another one for non-dogen models - which we could give a nice name, to
-imply its foreign origin - we could then use the dogen references for
-registrar, etc. This is a replacement for the origin type.
-
-We need a good name for these. Candidates:
-
-- proxy model: represents something that exists in the outside
-  world. e.g. =is_proxy=.
-
-*** Add support for composite model names in name                     :story:
-
-We added the model names list to location, but we are still not
-parsing composite model names (e.g. =yarn.dia=). This will probably
-break a lot of stuff.
-
-- deal with the fallout in terms of file paths creation, etc.
-- split model names with dots into multiple model paths.
-- resolver needs to take into account this case, in a similar way
-  which we handle models with the same name as modules in the target
-  model.
-- a model should have: an element identifier which is identical to the
-  root module (the module that represents the model). A model is
-  itself an element.
-
-Merged stories:
-
-*Add support for model names with dots*
-
-It is quite annoying to have to create folders and sub-folders for the
-main projects. This is not too bad right now because we don't really
-make use of nesting that much, other than with test models. However,
-now that the architecture is clear and we need to make use of nesting,
-it becomes more of a concern. For example:
-
-: / a
-:   / b
-:   / c
-: / d
-:   / e
-:   / f
-
-This is clearer as:
-
-: / a
-: / a.b
-: / a.c
-: / d.e
-: / d.f
-
-However, in order to implement this we need a bit of cleverness:
-
-- for the purposes of files, the dot represents a dot;
-- for the purposes of namespaces, we must create several namespaces
-  (e.g. yarn::core).
-
-This is also inline with the idea that the model name does not always
-contribute to the namespaces as required by primitives. We basically
-need a cleverer version of qname to handle all of these scenarios.
-
-It may also be worth taking into account the other story on this topic
-where we considered using underscores instead of folders for facet
-names. It may be nicer to have dots for this,
-e.g. =types.my_class.hpp=.
-
-Idea:
-
-=names= should have a model name and a model package; only the model
-package contributes to the namespaces. The model name is unpacked into
-multiple model packages (e.g. "a.b" => a::b). The file name uses the
-model name, not the model package.
-
-*** Use the single element container model in =cpp=                   :story:
-
-We have implemented a single element container in yarn but its not yet
-being used. We need to:
-
-- update yarn workflow to return this model instead of intermediate
-  model;
- replace all usages of intermediate model in =cpp= with this model.
-
-*** Add =interface= stereotype                                        :story:
-
-Even though we can't generate much outside of plain types, we should
-already have support for a stereotype of =interface= which for now
-behaves just like =service=. In the future we may be able to code
-generate the interface.
-
-*** Implement module expander test                                    :story:
-
-We copied across the code for the module expander test from yarn json
-but didn't actually finished implementing it.
-
-*** Implement formattables in terms of yarn types                     :story:
-
-At present formattables are just a shadow copy of yarn types plus
-additional =cpp= specific types. In practice:
-
-- for the types that are shadow copies, we could have helper utilities
-  that do the translation on the fly (e.g. for names).
-- for additional information which cannot be translated, we could have
-  containers indexed by qualified name and query those just before we
-  call the transformer. This is the case with formatter properties. We
-  need something similar to house "type properties" such as
-  =requires_stream_manipulators=. These could be moved into aspect
-  settings.
-- for types that do not exist in yarn, we could inherit from element;
-  this is the case for registrar, forward declarations, cmakelists and
-  odb options. Note that with this we are now saying that element
-  space contains anything which can be modeled, regardless of if they
-  are part of the programming language type system, or build system,
-  etc. This is not ideal, but its not a problem just yet. We could
-  update the factory to generate these types and then take a copy of
-  the model and inject them in it.
-
-*** Create =src= and =include= facets                                 :story:
-
-At present we have some formatters that are not in the traditional
-facets such as =types=, etc. We should make facets for them. We need
-to check what the current facet name is. There should only be one case
-of this, the CMakeLists formatters.
-
-*** Move all properties in =cpp= to a properties namespace            :story:
-
-Once all formattables are gone, we should have only properties left in
-the formattables namespace. We should then rename it to
-properties.
-
-Merged stories:
-
-*Split formatter properties and associated classes from formattables*
-
-We have two kinds of data: the formattables themselves (mapped from
-yarn) and associated data (formatter properties). The latter is
-totally independent. We should create a namespace for all of these
-classes and a workflow that produces the data ready for consumption. A
-tentative name is =manifest=.
-
-*** Intermediate model should not be an Element                       :story:
-
-We need to move all functionality from the model into the model module
-such that the model no longer needs to be an element (documentation,
-etc). It can remain as a nameable.
-
-*** Consider renaming nested name                                     :story:
-
-*New understanding*:
-
-This story requires further analysis. Blindly following the composite
-pattern was tried but it resulted in a lot of inconsistencies because
-we then had to follow MEC-33 and create =abstract_qname=; however, the
-nested qname does not really behave like a composite qname; its more
-like the difference between a type in isolation and a type
-instantiated as an argument of a function. For example, whilst the
-type in isolation may have unknown template parameters, presumably, as
-an argument of a function these have been instantiated with real
-types.
-
-One way to solve this is just to make the type name a bit more
-explicit rather than try to imply the composite pattern
-(e.g. "nested"). We need a name that signifies "instantiated
-type". Look at the C++ standard for the difference between defining a
-generic type and instantiating a generic type.
-
-No good names yet (type reference, type instantiation, instantiated
-name). What are we trying to represent: an identifier which points to
-a complete definition of a name such that the name can be instantiated
-as a type in the underlying language. By "instantiated" we mean used
-to define variables of this type. In this light: instantiable name,
-definable name? If we choose instantiable name, we could then rename
-"children" to type arguments.
-
-Other notes:
-
-- there is such a thing as a element instance identifier. We call it
-  nested name at present. The element instance identifier identifies
-  instantiations of types. It models two cases: for the case where the
-  type has no type parameters, the instance identifier is equal to the
-  element identifier; for all other cases, it is a hierarchical
-  collection of element identifiers, modeling the type parameter
-  structure.
-
-*Previous understanding*:
-
-We should just follow the composite pattern in the naming.
-
-*** Update copyright notices                                          :story:
-
-We need to update all notices to reflect personal ownership until DDC
-was formed, and then ownership by DDC.
-
-- first update to personal ownership has been done, but we need to
-  test if multiple copyright entries is properly supported.
-
-*** Copyright holders is scalar when it should be an array            :story:
-
-At present its only possible to specify a single copyright holder. It
-should be handled the same was as odb parameters, but because that is
-done with a massive hack, we are not going to extend the hack to
-copyright holders.
-
-*** Filter out unused types from final model                          :story:
-
-When we finished assembling the model we should be able to determine
-which supporting types are in use and drop those that are not. This
-can be done just before building the final model (or as part of that
-task).
-
-We should have a class responsible for removing all types from a model
-which are not in use. This could be done as part of model assembly.
-
-One way this could be achieved is by adding a "usages" property,
-computed during resolution. Resolver could keep track of the
-non-target names that are in use and return those.
-
-*** Handle enumeration type dynamically                               :story:
-
-- add some enumeration post-processing that assigns it a underlying
-  type. Should be done with merged model (look for a primitive type with
-  property =is_default_enumeration_type=).
-
-*** Services and leaves are not properly handled                      :story:
-
-We are manually ignoring services when calculating leaves.
-
-*** Use dots in data files extensions                                 :story:
-
-At the moment we use extensions such as =xmlyarn=. It should really be
-=.xml.yarn= or something of the kind.
-
-*** Consider renaming includers                                       :story:
-
-Its very confusing to have header files that include lots of other
-header files called "includers". There is too much overloading. We
-should consider calling them "master header files" as per Schaling
-terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
-
-*** Update Linux CDash agent                                          :story:
-
-We need to get the build green on the Linux agent again.
-
-*** Update Windows CDash agent                                        :story:
-
-We need to get the build green on the Windows agent again.
-
-*** Add tests to identifier parser with invalid names                 :story:
-
-We need to handle properly the following cases:
-
-- totally blank name.
-- template with angle brackets but nothing inside: =a<>=.
-- template with angle brackets, type and then a comma: =a<b,>=.
 
 ** Deprecated
 *** CANCELLED Replace name with id's in yarn                          :story:
