@@ -39,8 +39,8 @@ const std::string child_with_no_parents(
     "Object is child but has no parents. Child: ");
 const std::string parent_not_found("Could not find parent: ");
 const std::string object_not_found("Could not find object: ");
-const std::string child_with_no_original_parent(
-    "Object is child but has no original parent. Child: ");
+const std::string child_with_no_root_parent(
+    "Object is child but has no root parent. Child: ");
 
 }
 
@@ -80,7 +80,7 @@ recurse_generalization(const intermediate_model& m, const name& leaf,
         BOOST_THROW_EXCEPTION(indexing_error(child_with_no_parents + qn));
     }
 
-    std::list<name> original_parents;
+    std::list<name> root_parents;
     for (const auto& parent : i->second) {
         auto j(m.objects().find(parent));
         if (j == m.objects().end()) {
@@ -92,25 +92,23 @@ recurse_generalization(const intermediate_model& m, const name& leaf,
         const auto op(recurse_generalization(m, leaf, j->second, d));
         if (op.empty()) {
             const auto qn(parent.qualified());
-            BOOST_LOG_SEV(lg, error) << child_with_no_original_parent << qn;
+            BOOST_LOG_SEV(lg, error) << child_with_no_root_parent << qn;
             BOOST_THROW_EXCEPTION(
-                indexing_error(child_with_no_original_parent + qn));
+                indexing_error(child_with_no_root_parent + qn));
         }
 
         for (const auto qn : op)
-            original_parents.push_back(qn);
+            root_parents.push_back(qn);
 
-        d.original_parents[parent] = op;
-        BOOST_LOG_SEV(lg, debug) << "Type: "
-                                 << parent.qualified()
+        d.root_parents[parent] = op;
+        BOOST_LOG_SEV(lg, debug) << "Type: " << parent.qualified()
                                  << " has original parents: " << op;
 
         d.leaves[parent].push_back(leaf);
-        BOOST_LOG_SEV(lg, debug) << "Type is a leaf of: "
-                                 << parent.qualified();
+        BOOST_LOG_SEV(lg, debug) << "Type is a leaf of: " << parent.qualified();
     }
-    d.original_parents[o.name()] = original_parents;
-    return original_parents;
+    d.root_parents[o.name()] = root_parents;
+    return root_parents;
 }
 
 generalization_indexer::generalization_details generalization_indexer::
@@ -129,7 +127,7 @@ obtain_details(const intermediate_model& m) const {
     }
 
     BOOST_LOG_SEV(lg, debug) << "Leaves: " << r.leaves;
-    BOOST_LOG_SEV(lg, debug) << "Original parents: " << r.original_parents;
+    BOOST_LOG_SEV(lg, debug) << "Original parents: " << r.root_parents;
     BOOST_LOG_SEV(lg, debug) << "Finished obtaining details.";
     return r;
 }
@@ -156,7 +154,7 @@ populate(const generalization_details& d, intermediate_model& m) const {
         }
     }
 
-    for (const auto& pair : d.original_parents) {
+    for (const auto& pair : d.root_parents) {
         const auto& n(pair.first);
         auto i(m.objects().find(n));
         if (i == m.objects().end()) {
@@ -175,7 +173,7 @@ populate(const generalization_details& d, intermediate_model& m) const {
         }
 
 
-        const auto rt(relationship_types::original_parents);
+        const auto rt(relationship_types::root_parents);
         o.relationships()[rt] = pair.second;
         for (const auto& opn : pair.second) {
             const auto j(m.objects().find(opn));
@@ -184,7 +182,7 @@ populate(const generalization_details& d, intermediate_model& m) const {
                 BOOST_LOG_SEV(lg, error) << object_not_found << qn;
                 BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
             }
-            o.is_original_parent_visitable(j->second.is_visitable());
+            o.is_root_parent_visitable(j->second.is_visitable());
         }
     }
 }

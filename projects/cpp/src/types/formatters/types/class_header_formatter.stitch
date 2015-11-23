@@ -166,22 +166,22 @@ public:
     virtual void accept(<#= c.name() #>_visitor& v) = 0;
 
 <#+
-            } else if (c.is_original_parent_visitable() && !c.is_parent()) {
+            } else if (c.is_root_parent_visitable() && !c.is_parent()) {
 #>
 public:
-    virtual void accept(const <#= c.original_parent_name() #>_visitor& v) const override {
+    virtual void accept(const <#= c.root_parent_name() #>_visitor& v) const override {
         v.visit(*this);
     }
 
-    virtual void accept(<#= c.original_parent_name() #>_visitor& v) const override {
+    virtual void accept(<#= c.root_parent_name() #>_visitor& v) const override {
         v.visit(*this);
     }
 
-    virtual void accept(const <#= c.original_parent_name() #>_visitor& v) override {
+    virtual void accept(const <#= c.root_parent_name() #>_visitor& v) override {
         v.visit(*this);
     }
 
-    virtual void accept(<#= c.original_parent_name() #>_visitor& v) override {
+    virtual void accept(<#= c.root_parent_name() #>_visitor& v) override {
         v.visit(*this);
     }
 
@@ -284,11 +284,11 @@ public:
 <#+
                 } else if (c.is_parent()) {
 #>
-    virtual bool equals(const <#= c.original_parent_name_qualified() #>& other) const = 0;
+    virtual bool equals(const <#= c.root_parent_name_qualified() #>& other) const = 0;
 <#+
                 } else if (!c.parents().empty()) {
 #>
-    bool equals(const <#= c.original_parent_name_qualified() #>& other) const override;
+    bool equals(const <#= c.root_parent_name_qualified() #>& other) const override;
 <#+
                 }
 #>

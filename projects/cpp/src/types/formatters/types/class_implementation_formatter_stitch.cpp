@@ -183,7 +183,7 @@ fa.stream() << "}" << std::endl;
              */
             if (!c.is_parent() && !c.parents().empty()) {
 fa.stream() << std::endl;
-fa.stream() << "bool " << c.name() << "::equals(const " << c.original_parent_name_qualified() << "& other) const {" << std::endl;
+fa.stream() << "bool " << c.name() << "::equals(const " << c.root_parent_name_qualified() << "& other) const {" << std::endl;
 fa.stream() << "    const " << c.name() << "* const p(dynamic_cast<const " << c.name() << "* const>(&other));" << std::endl;
 fa.stream() << "    if (!p) return false;" << std::endl;
 fa.stream() << "    return *this == *p;" << std::endl;

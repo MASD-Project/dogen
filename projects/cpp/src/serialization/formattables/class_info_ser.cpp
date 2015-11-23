@@ -55,12 +55,12 @@ void save(Archive& ar,
     ar << make_nvp("requires_manual_default_constructor", v.requires_manual_default_constructor_);
     ar << make_nvp("parents", v.parents_);
     ar << make_nvp("is_parent", v.is_parent_);
-    ar << make_nvp("original_parent_name", v.original_parent_name_);
-    ar << make_nvp("original_parent_name_qualified", v.original_parent_name_qualified_);
+    ar << make_nvp("root_parent_name", v.root_parent_name_);
+    ar << make_nvp("root_parent_name_qualified", v.root_parent_name_qualified_);
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("is_visitable", v.is_visitable_);
     ar << make_nvp("is_immutable", v.is_immutable_);
-    ar << make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
+    ar << make_nvp("is_root_parent_visitable", v.is_root_parent_visitable_);
     ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("is_final", v.is_final_);
 }
@@ -78,12 +78,12 @@ void load(Archive& ar,
     ar >> make_nvp("requires_manual_default_constructor", v.requires_manual_default_constructor_);
     ar >> make_nvp("parents", v.parents_);
     ar >> make_nvp("is_parent", v.is_parent_);
-    ar >> make_nvp("original_parent_name", v.original_parent_name_);
-    ar >> make_nvp("original_parent_name_qualified", v.original_parent_name_qualified_);
+    ar >> make_nvp("root_parent_name", v.root_parent_name_);
+    ar >> make_nvp("root_parent_name_qualified", v.root_parent_name_qualified_);
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("is_visitable", v.is_visitable_);
     ar >> make_nvp("is_immutable", v.is_immutable_);
-    ar >> make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
+    ar >> make_nvp("is_root_parent_visitable", v.is_root_parent_visitable_);
     ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("is_final", v.is_final_);
 }

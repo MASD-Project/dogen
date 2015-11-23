@@ -143,21 +143,21 @@ fa.stream() << "    virtual void accept(" << c.name() << "_visitor& v) const = 0
 fa.stream() << "    virtual void accept(const " << c.name() << "_visitor& v) = 0;" << std::endl;
 fa.stream() << "    virtual void accept(" << c.name() << "_visitor& v) = 0;" << std::endl;
 fa.stream() << std::endl;
-            } else if (c.is_original_parent_visitable() && !c.is_parent()) {
+            } else if (c.is_root_parent_visitable() && !c.is_parent()) {
 fa.stream() << "public:" << std::endl;
-fa.stream() << "    virtual void accept(const " << c.original_parent_name() << "_visitor& v) const override {" << std::endl;
+fa.stream() << "    virtual void accept(const " << c.root_parent_name() << "_visitor& v) const override {" << std::endl;
 fa.stream() << "        v.visit(*this);" << std::endl;
 fa.stream() << "    }" << std::endl;
 fa.stream() << std::endl;
-fa.stream() << "    virtual void accept(" << c.original_parent_name() << "_visitor& v) const override {" << std::endl;
+fa.stream() << "    virtual void accept(" << c.root_parent_name() << "_visitor& v) const override {" << std::endl;
 fa.stream() << "        v.visit(*this);" << std::endl;
 fa.stream() << "    }" << std::endl;
 fa.stream() << std::endl;
-fa.stream() << "    virtual void accept(const " << c.original_parent_name() << "_visitor& v) override {" << std::endl;
+fa.stream() << "    virtual void accept(const " << c.root_parent_name() << "_visitor& v) override {" << std::endl;
 fa.stream() << "        v.visit(*this);" << std::endl;
 fa.stream() << "    }" << std::endl;
 fa.stream() << std::endl;
-fa.stream() << "    virtual void accept(" << c.original_parent_name() << "_visitor& v) override {" << std::endl;
+fa.stream() << "    virtual void accept(" << c.root_parent_name() << "_visitor& v) override {" << std::endl;
 fa.stream() << "        v.visit(*this);" << std::endl;
 fa.stream() << "    }" << std::endl;
 fa.stream() << std::endl;
@@ -230,9 +230,9 @@ fa.stream() << "public:" << std::endl;
                 if (c.is_parent() && c.parents().empty()) {
 fa.stream() << "    virtual bool equals(const " << c.name() << "& other) const = 0;" << std::endl;
                 } else if (c.is_parent()) {
-fa.stream() << "    virtual bool equals(const " << c.original_parent_name_qualified() << "& other) const = 0;" << std::endl;
+fa.stream() << "    virtual bool equals(const " << c.root_parent_name_qualified() << "& other) const = 0;" << std::endl;
                 } else if (!c.parents().empty()) {
-fa.stream() << "    bool equals(const " << c.original_parent_name_qualified() << "& other) const override;" << std::endl;
+fa.stream() << "    bool equals(const " << c.root_parent_name_qualified() << "& other) const override;" << std::endl;
                 }
 fa.stream() << std::endl;
              }

@@ -94,12 +94,12 @@ populate(const unsigned int position, result_type& v) {
     v.requires_manual_default_constructor(create_bool(position + 4));
     v.parents(create_std_list_dogen_cpp_formattables_parent_info(position + 5));
     v.is_parent(create_bool(position + 6));
-    v.original_parent_name(create_std_string(position + 7));
-    v.original_parent_name_qualified(create_std_string(position + 8));
+    v.root_parent_name(create_std_string(position + 7));
+    v.root_parent_name_qualified(create_std_string(position + 8));
     v.leaves(create_std_list_std_string(position + 9));
     v.is_visitable(create_bool(position + 10));
     v.is_immutable(create_bool(position + 11));
-    v.is_original_parent_visitable(create_bool(position + 12));
+    v.is_root_parent_visitable(create_bool(position + 12));
     v.generation_type(create_dogen_yarn_generation_types(position + 13));
     v.is_final(create_bool(position + 14));
 }

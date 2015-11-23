@@ -169,7 +169,7 @@ void resolver::validate_inheritance_graph(const object& ao) const {
         }
     }
 
-    i = ao.relationships().find(relationship_types::original_parents);
+    i = ao.relationships().find(relationship_types::root_parents);
     if (i == ao.relationships().end())
         return;
 

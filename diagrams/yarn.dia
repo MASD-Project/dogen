@@ -4869,7 +4869,7 @@ Only applicable if is_parent is true.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#is_original_parent_visitable#</dia:string>
+            <dia:string>#is_root_parent_visitable#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
@@ -4878,7 +4878,7 @@ Only applicable if is_parent is true.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Is the original parent of this object a visitable type?
+            <dia:string>#Is the root parent of this object a visitable type?
 
 Set to false if no parent exists, or if the parent is not visitable. #</dia:string>
           </dia:attribute>
@@ -5771,7 +5771,7 @@ not have a need for it.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#original_parents#</dia:string>
+            <dia:string>#root_parents#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>

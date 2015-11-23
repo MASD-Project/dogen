@@ -367,7 +367,7 @@ false otherwise.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#original_parent_name#</dia:string>
+            <dia:string>#root_parent_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -390,7 +390,7 @@ false otherwise.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#original_parent_name_qualified#</dia:string>
+            <dia:string>#root_parent_name_qualified#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -399,7 +399,7 @@ false otherwise.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Original parent name as a fully qualified name.#</dia:string>
+            <dia:string>#Root parent name as a fully qualified name.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -483,7 +483,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#is_original_parent_visitable#</dia:string>
+            <dia:string>#is_root_parent_visitable#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
@@ -492,7 +492,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, the class' original parent has a visitor defined.#</dia:string>
+            <dia:string>#If true, the class' root parent has a visitor defined.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3080,7 +3080,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="-18,-62"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.05,-62.05;12.595,-18.65"/>
+        <dia:rectangle val="-18.05,-62.05;17.215,-18.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3089,7 +3089,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="-18,-62"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.545000000000002"/>
+        <dia:real val="35.164999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="43.300000000000004"/>
@@ -24746,7 +24746,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="229.43,-40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="224.875,-40.05;229.63,-28.249"/>
+        <dia:rectangle val="224.867,-40.05;229.63,-28.249"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24754,8 +24754,8 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="229.43,-40"/>
         <dia:point val="229.43,-34"/>
-        <dia:point val="225.657,-34"/>
-        <dia:point val="225.629,-29.049"/>
+        <dia:point val="225.629,-34"/>
+        <dia:point val="225.619,-29.049"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -30328,7 +30328,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="148.917,134.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="140.922,133.45;149.667,146.75"/>
+        <dia:rectangle val="140.909,133.45;149.667,146.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30336,8 +30336,8 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="148.917,134.2"/>
         <dia:point val="148.917,141"/>
-        <dia:point val="141.032,141"/>
-        <dia:point val="140.973,145.95"/>
+        <dia:point val="140.972,141"/>
+        <dia:point val="140.959,145.95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

@@ -616,7 +616,7 @@
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships class_id="35" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
@@ -818,7 +818,7 @@
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
@@ -1137,7 +1137,7 @@
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
@@ -1339,7 +1339,7 @@
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
@@ -1580,7 +1580,7 @@
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
@@ -1745,7 +1745,7 @@
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
@@ -2064,7 +2064,7 @@
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
@@ -2188,7 +2188,7 @@
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>1</count>
 					<bucket_count>2</bucket_count>
@@ -2389,7 +2389,7 @@
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
@@ -2708,7 +2708,7 @@
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
@@ -2910,7 +2910,7 @@
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
@@ -3034,7 +3034,7 @@
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
@@ -3197,7 +3197,7 @@
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
-				<is_original_parent_visitable>0</is_original_parent_visitable>
+				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
 					<bucket_count>1</bucket_count>

@@ -57,7 +57,7 @@ void save(Archive& ar,
     ar << make_nvp("is_immutable", v.is_immutable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
     ar << make_nvp("is_child", v.is_child_);
-    ar << make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
+    ar << make_nvp("is_root_parent_visitable", v.is_root_parent_visitable_);
     ar << make_nvp("relationships", v.relationships_);
     ar << make_nvp("object_type", v.object_type_);
     ar << make_nvp("is_final", v.is_final_);
@@ -77,7 +77,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_immutable", v.is_immutable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
     ar >> make_nvp("is_child", v.is_child_);
-    ar >> make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
+    ar >> make_nvp("is_root_parent_visitable", v.is_root_parent_visitable_);
     ar >> make_nvp("relationships", v.relationships_);
     ar >> make_nvp("object_type", v.object_type_);
     ar >> make_nvp("is_final", v.is_final_);

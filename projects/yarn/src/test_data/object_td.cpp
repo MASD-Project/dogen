@@ -101,7 +101,7 @@ populate(const unsigned int position, result_type& v) {
     v.is_immutable(create_bool(position + 5));
     v.is_fluent(create_bool(position + 6));
     v.is_child(create_bool(position + 7));
-    v.is_original_parent_visitable(create_bool(position + 8));
+    v.is_root_parent_visitable(create_bool(position + 8));
     v.relationships(create_std_unordered_map_dogen_yarn_relationship_types_std_list_dogen_yarn_name_(position + 9));
     v.object_type(create_dogen_yarn_object_types(position + 10));
     v.is_final(create_bool(position + 11));

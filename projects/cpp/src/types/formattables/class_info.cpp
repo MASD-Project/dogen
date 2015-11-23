@@ -87,7 +87,7 @@ class_info::class_info()
       is_parent_(static_cast<bool>(0)),
       is_visitable_(static_cast<bool>(0)),
       is_immutable_(static_cast<bool>(0)),
-      is_original_parent_visitable_(static_cast<bool>(0)),
+      is_root_parent_visitable_(static_cast<bool>(0)),
       generation_type_(static_cast<dogen::yarn::generation_types>(0)),
       is_final_(static_cast<bool>(0)) { }
 
@@ -107,12 +107,12 @@ class_info::class_info(
     const bool requires_manual_default_constructor,
     const std::list<dogen::cpp::formattables::parent_info>& parents,
     const bool is_parent,
-    const std::string& original_parent_name,
-    const std::string& original_parent_name_qualified,
+    const std::string& root_parent_name,
+    const std::string& root_parent_name_qualified,
     const std::list<std::string>& leaves,
     const bool is_visitable,
     const bool is_immutable,
-    const bool is_original_parent_visitable,
+    const bool is_root_parent_visitable,
     const dogen::yarn::generation_types generation_type,
     const bool is_final)
     : dogen::cpp::formattables::entity(
@@ -131,12 +131,12 @@ class_info::class_info(
       requires_manual_default_constructor_(requires_manual_default_constructor),
       parents_(parents),
       is_parent_(is_parent),
-      original_parent_name_(original_parent_name),
-      original_parent_name_qualified_(original_parent_name_qualified),
+      root_parent_name_(root_parent_name),
+      root_parent_name_qualified_(root_parent_name_qualified),
       leaves_(leaves),
       is_visitable_(is_visitable),
       is_immutable_(is_immutable),
-      is_original_parent_visitable_(is_original_parent_visitable),
+      is_root_parent_visitable_(is_root_parent_visitable),
       generation_type_(generation_type),
       is_final_(is_final) { }
 
@@ -159,12 +159,12 @@ void class_info::to_stream(std::ostream& s) const {
       << "\"requires_manual_default_constructor\": " << requires_manual_default_constructor_ << ", "
       << "\"parents\": " << parents_ << ", "
       << "\"is_parent\": " << is_parent_ << ", "
-      << "\"original_parent_name\": " << "\"" << tidy_up_string(original_parent_name_) << "\"" << ", "
-      << "\"original_parent_name_qualified\": " << "\"" << tidy_up_string(original_parent_name_qualified_) << "\"" << ", "
+      << "\"root_parent_name\": " << "\"" << tidy_up_string(root_parent_name_) << "\"" << ", "
+      << "\"root_parent_name_qualified\": " << "\"" << tidy_up_string(root_parent_name_qualified_) << "\"" << ", "
       << "\"leaves\": " << leaves_ << ", "
       << "\"is_visitable\": " << is_visitable_ << ", "
       << "\"is_immutable\": " << is_immutable_ << ", "
-      << "\"is_original_parent_visitable\": " << is_original_parent_visitable_ << ", "
+      << "\"is_root_parent_visitable\": " << is_root_parent_visitable_ << ", "
       << "\"generation_type\": " << generation_type_ << ", "
       << "\"is_final\": " << is_final_
       << " }";
@@ -181,12 +181,12 @@ void class_info::swap(class_info& other) noexcept {
     swap(requires_manual_default_constructor_, other.requires_manual_default_constructor_);
     swap(parents_, other.parents_);
     swap(is_parent_, other.is_parent_);
-    swap(original_parent_name_, other.original_parent_name_);
-    swap(original_parent_name_qualified_, other.original_parent_name_qualified_);
+    swap(root_parent_name_, other.root_parent_name_);
+    swap(root_parent_name_qualified_, other.root_parent_name_qualified_);
     swap(leaves_, other.leaves_);
     swap(is_visitable_, other.is_visitable_);
     swap(is_immutable_, other.is_immutable_);
-    swap(is_original_parent_visitable_, other.is_original_parent_visitable_);
+    swap(is_root_parent_visitable_, other.is_root_parent_visitable_);
     swap(generation_type_, other.generation_type_);
     swap(is_final_, other.is_final_);
 }
@@ -206,12 +206,12 @@ bool class_info::operator==(const class_info& rhs) const {
         requires_manual_default_constructor_ == rhs.requires_manual_default_constructor_ &&
         parents_ == rhs.parents_ &&
         is_parent_ == rhs.is_parent_ &&
-        original_parent_name_ == rhs.original_parent_name_ &&
-        original_parent_name_qualified_ == rhs.original_parent_name_qualified_ &&
+        root_parent_name_ == rhs.root_parent_name_ &&
+        root_parent_name_qualified_ == rhs.root_parent_name_qualified_ &&
         leaves_ == rhs.leaves_ &&
         is_visitable_ == rhs.is_visitable_ &&
         is_immutable_ == rhs.is_immutable_ &&
-        is_original_parent_visitable_ == rhs.is_original_parent_visitable_ &&
+        is_root_parent_visitable_ == rhs.is_root_parent_visitable_ &&
         generation_type_ == rhs.generation_type_ &&
         is_final_ == rhs.is_final_;
 }
@@ -302,36 +302,36 @@ void class_info::is_parent(const bool v) {
     is_parent_ = v;
 }
 
-const std::string& class_info::original_parent_name() const {
-    return original_parent_name_;
+const std::string& class_info::root_parent_name() const {
+    return root_parent_name_;
 }
 
-std::string& class_info::original_parent_name() {
-    return original_parent_name_;
+std::string& class_info::root_parent_name() {
+    return root_parent_name_;
 }
 
-void class_info::original_parent_name(const std::string& v) {
-    original_parent_name_ = v;
+void class_info::root_parent_name(const std::string& v) {
+    root_parent_name_ = v;
 }
 
-void class_info::original_parent_name(const std::string&& v) {
-    original_parent_name_ = std::move(v);
+void class_info::root_parent_name(const std::string&& v) {
+    root_parent_name_ = std::move(v);
 }
 
-const std::string& class_info::original_parent_name_qualified() const {
-    return original_parent_name_qualified_;
+const std::string& class_info::root_parent_name_qualified() const {
+    return root_parent_name_qualified_;
 }
 
-std::string& class_info::original_parent_name_qualified() {
-    return original_parent_name_qualified_;
+std::string& class_info::root_parent_name_qualified() {
+    return root_parent_name_qualified_;
 }
 
-void class_info::original_parent_name_qualified(const std::string& v) {
-    original_parent_name_qualified_ = v;
+void class_info::root_parent_name_qualified(const std::string& v) {
+    root_parent_name_qualified_ = v;
 }
 
-void class_info::original_parent_name_qualified(const std::string&& v) {
-    original_parent_name_qualified_ = std::move(v);
+void class_info::root_parent_name_qualified(const std::string&& v) {
+    root_parent_name_qualified_ = std::move(v);
 }
 
 const std::list<std::string>& class_info::leaves() const {
@@ -366,12 +366,12 @@ void class_info::is_immutable(const bool v) {
     is_immutable_ = v;
 }
 
-bool class_info::is_original_parent_visitable() const {
-    return is_original_parent_visitable_;
+bool class_info::is_root_parent_visitable() const {
+    return is_root_parent_visitable_;
 }
 
-void class_info::is_original_parent_visitable(const bool v) {
-    is_original_parent_visitable_ = v;
+void class_info::is_root_parent_visitable(const bool v) {
+    is_root_parent_visitable_ = v;
 }
 
 dogen::yarn::generation_types class_info::generation_type() const {

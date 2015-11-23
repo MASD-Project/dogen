@@ -74,12 +74,12 @@ std::size_t class_info_hasher::hash(const class_info& v) {
     combine(seed, v.requires_manual_default_constructor());
     combine(seed, hash_std_list_dogen_cpp_formattables_parent_info(v.parents()));
     combine(seed, v.is_parent());
-    combine(seed, v.original_parent_name());
-    combine(seed, v.original_parent_name_qualified());
+    combine(seed, v.root_parent_name());
+    combine(seed, v.root_parent_name_qualified());
     combine(seed, hash_std_list_std_string(v.leaves()));
     combine(seed, v.is_visitable());
     combine(seed, v.is_immutable());
-    combine(seed, v.is_original_parent_visitable());
+    combine(seed, v.is_root_parent_visitable());
     combine(seed, v.generation_type());
     combine(seed, v.is_final());
 

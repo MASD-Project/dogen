@@ -203,7 +203,7 @@ void <#= c.name() #>::swap(<#= c.name() #>&<#= (empty ? "" : " other") #>) noexc
             if (!c.is_parent() && !c.parents().empty()) {
 #>
 
-bool <#= c.name() #>::equals(const <#= c.original_parent_name_qualified() #>& other) const {
+bool <#= c.name() #>::equals(const <#= c.root_parent_name_qualified() #>& other) const {
     const <#= c.name() #>* const p(dynamic_cast<const <#= c.name() #>* const>(&other));
     if (!p) return false;
     return *this == *p;

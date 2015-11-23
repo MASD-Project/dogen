@@ -50,7 +50,7 @@ private:
      */
     struct generalization_details {
         std::unordered_map<name, std::list<name> > leaves;
-        std::unordered_map<name, std::list<name> > original_parents;
+        std::unordered_map<name, std::list<name> > root_parents;
     };
 
 private:
@@ -64,7 +64,7 @@ private:
     /**
      * @brief Populates the leaves container recursively.
      *
-     * @return original parents of the tree we are recursing into.
+     * @return Root parents of the tree we are recursing into.
      */
     std::list<name> recurse_generalization(const intermediate_model& m,
         const yarn::name& leaf, const yarn::object& o,

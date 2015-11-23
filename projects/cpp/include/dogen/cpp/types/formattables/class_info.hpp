@@ -69,12 +69,12 @@ public:
         const bool requires_manual_default_constructor,
         const std::list<dogen::cpp::formattables::parent_info>& parents,
         const bool is_parent,
-        const std::string& original_parent_name,
-        const std::string& original_parent_name_qualified,
+        const std::string& root_parent_name,
+        const std::string& root_parent_name_qualified,
         const std::list<std::string>& leaves,
         const bool is_visitable,
         const bool is_immutable,
-        const bool is_original_parent_visitable,
+        const bool is_root_parent_visitable,
         const dogen::yarn::generation_types generation_type,
         const bool is_final);
 
@@ -179,20 +179,20 @@ public:
      * @brief Parent at the root of a class hierarchy, if any.
      */
     /**@{*/
-    const std::string& original_parent_name() const;
-    std::string& original_parent_name();
-    void original_parent_name(const std::string& v);
-    void original_parent_name(const std::string&& v);
+    const std::string& root_parent_name() const;
+    std::string& root_parent_name();
+    void root_parent_name(const std::string& v);
+    void root_parent_name(const std::string&& v);
     /**@}*/
 
     /**
-     * @brief Original parent name as a fully qualified name.
+     * @brief Root parent name as a fully qualified name.
      */
     /**@{*/
-    const std::string& original_parent_name_qualified() const;
-    std::string& original_parent_name_qualified();
-    void original_parent_name_qualified(const std::string& v);
-    void original_parent_name_qualified(const std::string&& v);
+    const std::string& root_parent_name_qualified() const;
+    std::string& root_parent_name_qualified();
+    void root_parent_name_qualified(const std::string& v);
+    void root_parent_name_qualified(const std::string&& v);
     /**@}*/
 
     /**
@@ -223,11 +223,11 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, the class' original parent has a visitor defined.
+     * @brief If true, the class' root parent has a visitor defined.
      */
     /**@{*/
-    bool is_original_parent_visitable() const;
-    void is_original_parent_visitable(const bool v);
+    bool is_root_parent_visitable() const;
+    void is_root_parent_visitable(const bool v);
     /**@}*/
 
     /**
@@ -262,12 +262,12 @@ private:
     bool requires_manual_default_constructor_;
     std::list<dogen::cpp::formattables::parent_info> parents_;
     bool is_parent_;
-    std::string original_parent_name_;
-    std::string original_parent_name_qualified_;
+    std::string root_parent_name_;
+    std::string root_parent_name_qualified_;
     std::list<std::string> leaves_;
     bool is_visitable_;
     bool is_immutable_;
-    bool is_original_parent_visitable_;
+    bool is_root_parent_visitable_;
     dogen::yarn::generation_types generation_type_;
     bool is_final_;
 };

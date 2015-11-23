@@ -993,8 +993,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
         const auto& o(pair.second);
         if (is_type_one(n)) {
             BOOST_CHECK(!has_relationship(relationship_types::parents, o));
-            BOOST_CHECK(!has_relationship(relationship_types::original_parents,
-                    o));
+            BOOST_CHECK(!has_relationship(relationship_types::root_parents, o));
         } else if (is_type_two(n)) {
             BOOST_REQUIRE(has_one_parent(o));
             BOOST_CHECK(is_type_one(get_parent_name(o)));

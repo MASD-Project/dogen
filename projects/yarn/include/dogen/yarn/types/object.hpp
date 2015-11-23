@@ -72,7 +72,7 @@ public:
         const bool is_immutable,
         const bool is_fluent,
         const bool is_child,
-        const bool is_original_parent_visitable,
+        const bool is_root_parent_visitable,
         const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& relationships,
         const dogen::yarn::object_types object_type,
         const bool is_final);
@@ -187,13 +187,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Is the original parent of this object a visitable type?
+     * @brief Is the root parent of this object a visitable type?
      *
      * Set to false if no parent exists, or if the parent is not visitable.
      */
     /**@{*/
-    bool is_original_parent_visitable() const;
-    void is_original_parent_visitable(const bool v);
+    bool is_root_parent_visitable() const;
+    void is_root_parent_visitable(const bool v);
     /**@}*/
 
     const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& relationships() const;
@@ -239,7 +239,7 @@ private:
     bool is_immutable_;
     bool is_fluent_;
     bool is_child_;
-    bool is_original_parent_visitable_;
+    bool is_root_parent_visitable_;
     std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> > relationships_;
     dogen::yarn::object_types object_type_;
     bool is_final_;

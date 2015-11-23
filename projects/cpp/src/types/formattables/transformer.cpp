@@ -434,7 +434,7 @@ transformer::to_class_info(const yarn::object& o) const {
         }
     }
 
-    i = o.relationships().find(yarn::relationship_types::original_parents);
+    i = o.relationships().find(yarn::relationship_types::root_parents);
     if (i != o.relationships().end() && !i->second.empty()) {
         if (i->second.size() > 1) {
             const auto qn(o.name().qualified());
@@ -447,9 +447,9 @@ transformer::to_class_info(const yarn::object& o) const {
         ns.push_back(opn.simple());
 
         using boost::join;
-        r->original_parent_name_qualified(join(ns, namespace_separator));
-        r->original_parent_name(opn.simple());
-        r->is_original_parent_visitable(o.is_original_parent_visitable());
+        r->root_parent_name_qualified(join(ns, namespace_separator));
+        r->root_parent_name(opn.simple());
+        r->is_root_parent_visitable(o.is_root_parent_visitable());
     }
 
     for (const auto& prop : o.all_properties()) {

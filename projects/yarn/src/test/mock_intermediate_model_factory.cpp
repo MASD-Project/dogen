@@ -274,12 +274,12 @@ void model_concept(const bool properties_indexed,
 void parent_to_child(const bool properties_indexed,
     dogen::yarn::object& parent,
     dogen::yarn::object& child,
-    dogen::yarn::object& original_parent,
+    dogen::yarn::object& root_parent,
     const bool add_leaf_relationship = true) {
     using dogen::yarn::relationship_types;
     add_relationship(child, parent, relationship_types::parents);
-    add_relationship(child, original_parent,
-        relationship_types::original_parents);
+    add_relationship(child, root_parent,
+        relationship_types::root_parents);
 
     if (add_leaf_relationship)
         add_relationship(parent, child, relationship_types::leaves);

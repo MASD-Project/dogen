@@ -33,7 +33,7 @@ namespace yarn {
  */
 enum class relationship_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
-    original_parents = 1, ///< Types at the root of the inheritance hierarchy.
+    root_parents = 1, ///< Types at the root of the inheritance hierarchy.
     parents = 2, ///< Types that are direct parents of this type.
     regular_associations = 3, ///< Types that are involved in aggregation or composition relationships.
     weak_associations = 4, ///< Types that are involved in aggregation or composition relationships via a pointer.

@@ -100,7 +100,7 @@ object::object()
       is_immutable_(static_cast<bool>(0)),
       is_fluent_(static_cast<bool>(0)),
       is_child_(static_cast<bool>(0)),
-      is_original_parent_visitable_(static_cast<bool>(0)),
+      is_root_parent_visitable_(static_cast<bool>(0)),
       object_type_(static_cast<dogen::yarn::object_types>(0)),
       is_final_(static_cast<bool>(0)) { }
 
@@ -121,7 +121,7 @@ object::object(
     const bool is_immutable,
     const bool is_fluent,
     const bool is_child,
-    const bool is_original_parent_visitable,
+    const bool is_root_parent_visitable,
     const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& relationships,
     const dogen::yarn::object_types object_type,
     const bool is_final)
@@ -142,7 +142,7 @@ object::object(
       is_immutable_(is_immutable),
       is_fluent_(is_fluent),
       is_child_(is_child),
-      is_original_parent_visitable_(is_original_parent_visitable),
+      is_root_parent_visitable_(is_root_parent_visitable),
       relationships_(relationships),
       object_type_(object_type),
       is_final_(is_final) { }
@@ -167,7 +167,7 @@ void object::to_stream(std::ostream& s) const {
       << "\"is_immutable\": " << is_immutable_ << ", "
       << "\"is_fluent\": " << is_fluent_ << ", "
       << "\"is_child\": " << is_child_ << ", "
-      << "\"is_original_parent_visitable\": " << is_original_parent_visitable_ << ", "
+      << "\"is_root_parent_visitable\": " << is_root_parent_visitable_ << ", "
       << "\"relationships\": " << relationships_ << ", "
       << "\"object_type\": " << object_type_ << ", "
       << "\"is_final\": " << is_final_
@@ -186,7 +186,7 @@ void object::swap(object& other) noexcept {
     swap(is_immutable_, other.is_immutable_);
     swap(is_fluent_, other.is_fluent_);
     swap(is_child_, other.is_child_);
-    swap(is_original_parent_visitable_, other.is_original_parent_visitable_);
+    swap(is_root_parent_visitable_, other.is_root_parent_visitable_);
     swap(relationships_, other.relationships_);
     swap(object_type_, other.object_type_);
     swap(is_final_, other.is_final_);
@@ -208,7 +208,7 @@ bool object::operator==(const object& rhs) const {
         is_immutable_ == rhs.is_immutable_ &&
         is_fluent_ == rhs.is_fluent_ &&
         is_child_ == rhs.is_child_ &&
-        is_original_parent_visitable_ == rhs.is_original_parent_visitable_ &&
+        is_root_parent_visitable_ == rhs.is_root_parent_visitable_ &&
         relationships_ == rhs.relationships_ &&
         object_type_ == rhs.object_type_ &&
         is_final_ == rhs.is_final_;
@@ -308,12 +308,12 @@ void object::is_child(const bool v) {
     is_child_ = v;
 }
 
-bool object::is_original_parent_visitable() const {
-    return is_original_parent_visitable_;
+bool object::is_root_parent_visitable() const {
+    return is_root_parent_visitable_;
 }
 
-void object::is_original_parent_visitable(const bool v) {
-    is_original_parent_visitable_ = v;
+void object::is_root_parent_visitable(const bool v) {
+    is_root_parent_visitable_ = v;
 }
 
 const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& object::relationships() const {

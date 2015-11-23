@@ -34,8 +34,8 @@ std::ostream& operator<<(std::ostream& s, const relationship_types& v) {
     case relationship_types::invalid:
         attr = "\"invalid\"";
         break;
-    case relationship_types::original_parents:
-        attr = "\"original_parents\"";
+    case relationship_types::root_parents:
+        attr = "\"root_parents\"";
         break;
     case relationship_types::parents:
         attr = "\"parents\"";

@@ -136,7 +136,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
             BOOST_CHECK(!o.is_immutable());
             BOOST_CHECK(!has_relationship(relationship_types::parents, o));
             BOOST_CHECK(
-                !has_relationship(relationship_types::original_parents, o));
+                !has_relationship(relationship_types::root_parents, o));
             BOOST_CHECK(
                 !has_relationship(relationship_types::modeled_concepts, o));
             BOOST_CHECK(
