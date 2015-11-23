@@ -22,6 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/yarn/types/modules_expander.hpp"
@@ -112,20 +113,21 @@ boost::optional<name> updater::containing_module(const name& n) {
         return boost::optional<name>();
     }
 
-    // FIXME: use builder.
-    name module_n;
-    module_n.location().external_module_path(
-        n.location().external_module_path());
+    name_builder b;
+    if (!n.location().external_module_path().empty())
+        b.external_module_path(n.location().external_module_path());
 
-    if (n.location().internal_module_path().empty()) {
-        module_n.simple(mn);
-    } else {
-        module_n.simple(n.location().internal_module_path().back());
-        module_n.location().internal_module_path(
-            n.location().internal_module_path());
-        module_n.location().internal_module_path().pop_back();
+    auto imp(n.location().internal_module_path());
+    if (imp.empty())
+        b.simple_name(mn);
+    else {
+        b.simple_name(imp.back());
+        imp.pop_back();
+        if (!imp.empty())
+            b.internal_module_path(imp);
     }
 
+    const auto module_n(b.build());
     const auto i(model_.modules().find(module_n));
     if (i != model_.modules().end()) {
         i->second.members().push_back(n);
