@@ -179,8 +179,8 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     for (const auto& pair : m.concepts()) {
-        const auto& n(pair.first);
         const auto& c(pair.second);
+        const auto& n(c.name());
 
         if (factory.is_concept_name_n(0, n)) {
             BOOST_CHECK(c.inherited_properties().empty());
@@ -202,8 +202,8 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
 
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& n(pair.first);
         const auto& o(pair.second);
+        const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
             BOOST_CHECK(o.inherited_properties().empty());
@@ -231,8 +231,8 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
 
     BOOST_REQUIRE(m.concepts().size() == 3);
     for (const auto& pair : m.concepts()) {
-        const auto& n(pair.first);
         const auto& c(pair.second);
+        const auto& n(c.name());
 
         if (factory.is_concept_name_n(0, n)) {
             BOOST_CHECK(c.inherited_properties().empty());
@@ -263,8 +263,8 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
 
     BOOST_REQUIRE(m.objects().size() == 3);
     for (const auto& pair : m.objects()) {
-        const auto& n(pair.first);
         const auto& o(pair.second);
+        const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
             BOOST_CHECK(o.inherited_properties().empty());
@@ -296,8 +296,8 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
     BOOST_CHECK(m.concepts().size() == 4);
     for (const auto& pair : m.concepts()) {
-        const auto& n(pair.first);
         const auto& c(pair.second);
+        const auto& n(c.name());
 
         if (factory.is_concept_name_n(0, n)) {
             BOOST_CHECK(c.inherited_properties().empty());
@@ -388,8 +388,8 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
     BOOST_REQUIRE(m.objects().size() == 4);
     for (const auto& pair : m.objects()) {
-        const auto& n(pair.first);
         const auto& o(pair.second);
+        const auto& n(o.name());
 
         if (factory.is_type_name_n(3, n)) {
             BOOST_CHECK(o.inherited_properties().empty());
@@ -435,8 +435,8 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
 
     BOOST_CHECK(m.concepts().size() == 1);
     for (const auto& pair : m.concepts()) {
-        const auto& n(pair.first);
         const auto& c(pair.second);
+        const auto& n(c.name());
 
         if (factory.is_concept_name_n(0, n)) {
             BOOST_CHECK(c.inherited_properties().empty());
@@ -448,8 +448,8 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
 
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& n(pair.first);
         const auto& o(pair.second);
+        const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
             BOOST_CHECK(o.inherited_properties().empty());
@@ -479,8 +479,8 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
 
     BOOST_CHECK(m.concepts().size() == 2);
     for (const auto& pair : m.concepts()) {
-        const auto& n(pair.first);
         const auto& c(pair.second);
+        const auto& n(c.name());
 
         if (factory.is_concept_name_n(0, n)) {
             BOOST_CHECK(c.inherited_properties().empty());
@@ -500,8 +500,8 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
 
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& n(pair.first);
         const auto& o(pair.second);
+        const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
             BOOST_CHECK(o.inherited_properties().empty());

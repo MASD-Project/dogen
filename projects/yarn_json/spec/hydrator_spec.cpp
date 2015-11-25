@@ -231,7 +231,7 @@ BOOST_AUTO_TEST_CASE(trivial_model_hydrates_into_expected_model) {
     const auto& pair(*m.objects().begin());
     const auto& n(pair.second.name());
 
-    BOOST_CHECK(pair.first == n);
+    BOOST_CHECK(pair.first == n.qualified());
     BOOST_CHECK(n.simple() == type_name);
     BOOST_CHECK(n.location().model_module_path() ==
         m.name().location().model_module_path());
@@ -271,7 +271,7 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
     const auto& pair(*m.objects().begin());
     const auto& n(pair.second.name());
 
-    BOOST_CHECK(pair.first == n);
+    BOOST_CHECK(pair.first == n.qualified());
     BOOST_CHECK(n.simple() == type_name);
     BOOST_CHECK(n.location().model_module_path() ==
         m.name().location().model_module_path());
@@ -347,7 +347,7 @@ BOOST_AUTO_TEST_CASE(internal_module_path_model_hydrates_into_expected_model) {
     const auto& pair(*m.objects().begin());
     const auto& n(pair.second.name());
 
-    BOOST_CHECK(pair.first == n);
+    BOOST_CHECK(pair.first == n.qualified());
     {
         const auto mp(n.location().internal_module_path());
         BOOST_REQUIRE(mp.size() == 3);
@@ -404,10 +404,10 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
 
     BOOST_CHECK(m.enumerations().empty());
     BOOST_REQUIRE(m.modules().size() == 1);
-    const auto& fn(m.modules().begin()->first);
-    BOOST_REQUIRE(fn.simple() == cpp_std_model_name);
-    BOOST_REQUIRE(fn.location().model_module_path().size() == 1);
-    BOOST_CHECK(fn.location().model_module_path().front() ==
+    const auto& n(m.modules().begin()->second.name());
+    BOOST_REQUIRE(n.simple() == cpp_std_model_name);
+    BOOST_REQUIRE(n.location().model_module_path().size() == 1);
+    BOOST_CHECK(n.location().model_module_path().front() ==
         cpp_std_model_name);
     BOOST_CHECK(m.references().empty());
     BOOST_CHECK(m.leaves().empty());

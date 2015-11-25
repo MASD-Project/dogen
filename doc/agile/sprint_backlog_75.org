@@ -15,15 +15,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-23 Mon 23:02]
+#+CAPTION: Clock summary at [2015-11-25 Wed 13:03]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *0:17* |      |      |
+| *Total time*                                                                | *3:22* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 0:17   |      |      |
-| Active                                                                      |        | 0:17 |      |
+| Stories                                                                     | 3:22   |      |      |
+| Active                                                                      |        | 3:22 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:17 |
+| COMPLETED Use qualified name as the key of the intermediate model container |        |      | 3:05 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -31,7 +32,10 @@
 
 Updates to sprint and product backlog.
 
-*** Use qualified name as the key of the intermediate model container :story:
+*** COMPLETED Use qualified name as the key of the intermediate model container :story:
+    CLOSED: [2015-11-25 Wed 13:03]
+    CLOCK: [2015-11-24 Tue 21:01]--[2015-11-24 Tue 23:42] =>  2:41
+    CLOCK: [2015-11-23 Mon 23:03]--[2015-11-23 Mon 23:27] =>  0:24
 
 We are using name as the key for the intermediate model container, but
 once we have proper qualified name support everywhere, there is no
@@ -39,6 +43,14 @@ reason why we can't just use the qualified name. We should not change
 the logic in the =cpp= containers as there the name is used for
 processing reasons - we'd end up having to have the name as the value
 instead.
+
+Notes:
+
+- for some reason containing module for top-level packages is empty,
+  even though it appears to be expanded correctly. This will cause the
+  identifier parser to build the name incorrectly.
+- we are not performing containment correctly for types inside a
+  package (e.g. =shape_types=).
 
 *** Remove =is_root_parent_visitable=                                 :story:
 

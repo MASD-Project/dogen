@@ -76,7 +76,7 @@ void workflow::initialise_context_activity(const std::string& model_name,
     m.is_target(is_target);
 
     const auto mm(create_module_for_model(m.name(), is_target));
-    m.modules().insert(std::make_pair(mm.name(), mm));
+    m.modules().insert(std::make_pair(mm.name().qualified(), mm));
 }
 
 graph_type workflow::generate_graph_activity(const dia::diagram& diagram) {

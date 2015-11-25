@@ -84,7 +84,7 @@ make_inclusion_path(const settings::path_settings& ps,
      * names to the directories.
      */
     if (n != model_.name()) {
-        const auto i(model_.modules().find(n));
+        const auto i(model_.modules().find(n.qualified()));
         if (i != model_.modules().end())
             r /= n.simple();
     }

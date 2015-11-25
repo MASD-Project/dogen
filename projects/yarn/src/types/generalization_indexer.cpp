@@ -82,7 +82,7 @@ recurse_generalization(const intermediate_model& m, const name& leaf,
 
     std::list<name> root_parents;
     for (const auto& parent : i->second) {
-        auto j(m.objects().find(parent));
+        auto j(m.objects().find(parent.qualified()));
         if (j == m.objects().end()) {
             const auto qn(parent.qualified());
             BOOST_LOG_SEV(lg, error) << parent_not_found << qn;
@@ -136,7 +136,7 @@ void generalization_indexer::
 populate(const generalization_details& d, intermediate_model& m) const {
     for (const auto& pair : d.leaves) {
         const auto& n(pair.first);
-        auto i(m.objects().find(n));
+        auto i(m.objects().find(n.qualified()));
         if (i == m.objects().end()) {
             const auto qn(n.qualified());
             BOOST_LOG_SEV(lg, error) << object_not_found << qn;
@@ -156,7 +156,7 @@ populate(const generalization_details& d, intermediate_model& m) const {
 
     for (const auto& pair : d.root_parents) {
         const auto& n(pair.first);
-        auto i(m.objects().find(n));
+        auto i(m.objects().find(n.qualified()));
         if (i == m.objects().end()) {
             const auto qn(n.qualified());
             BOOST_LOG_SEV(lg, error) << object_not_found << qn;
@@ -176,7 +176,7 @@ populate(const generalization_details& d, intermediate_model& m) const {
         const auto rt(relationship_types::root_parents);
         o.relationships()[rt] = pair.second;
         for (const auto& opn : pair.second) {
-            const auto j(m.objects().find(opn));
+            const auto j(m.objects().find(opn.qualified()));
             if (j == m.objects().end()) {
                 const auto qn(opn.qualified());
                 BOOST_LOG_SEV(lg, error) << object_not_found << qn;

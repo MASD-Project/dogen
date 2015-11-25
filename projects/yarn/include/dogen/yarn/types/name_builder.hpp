@@ -51,6 +51,7 @@ public:
     name_builder& simple_name(const std::string& sn);
     name_builder& model_name(const std::string& mn);
     name_builder& model_name(const location& l);
+    name_builder& model_module_path(const std::list<std::string>& mmp);
     name_builder& internal_module_path(const std::string& imp);
     name_builder& internal_module_path(const std::list<std::string>& imp);
     name_builder& external_module_path(const std::string& emp);

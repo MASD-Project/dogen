@@ -241,11 +241,11 @@ void transformer::to_nested_type_info(const yarn::nested_name& nn,
     nti.name(qualified_name);
     nti.namespaces(b.namespace_list(model_, n));
 
-    const auto i(model_.enumerations().find(n));
+    const auto i(model_.enumerations().find(n.qualified()));
     const bool is_enumeration(i != model_.enumerations().end());
     nti.is_enumeration(is_enumeration);
 
-    const auto j(model_.primitives().find(n));
+    const auto j(model_.primitives().find(n.qualified()));
     const bool is_primitive(j != model_.primitives().end());
     nti.is_primitive(is_primitive);
 
@@ -266,7 +266,7 @@ void transformer::to_nested_type_info(const yarn::nested_name& nn,
     nti.is_time_duration(is_time_duration(nti.name()));
     nti.is_ptree(is_ptree(nti.name()));
 
-    const auto k(model_.objects().find(n));
+    const auto k(model_.objects().find(n.qualified()));
     if (k != model_.objects().end()) {
         const auto ot(k->second.object_type());
         using yarn::object_types;

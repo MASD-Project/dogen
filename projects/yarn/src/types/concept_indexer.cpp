@@ -57,7 +57,7 @@ inline bool operator<(const name& lhs, const name& rhs) {
 }
 
 object& concept_indexer::find_object(const name& n, intermediate_model& m) {
-    auto i(m.objects().find(n));
+    auto i(m.objects().find(n.qualified()));
     if (i == m.objects().end()) {
         BOOST_LOG_SEV(lg, error) << object_not_found << n.qualified();
         BOOST_THROW_EXCEPTION(
@@ -79,7 +79,7 @@ find_relationships(const relationship_types rt, object& o) {
 }
 
 concept& concept_indexer::find_concept(const name& n, intermediate_model& m) {
-    auto i(m.concepts().find(n));
+    auto i(m.concepts().find(n.qualified()));
     if (i == m.concepts().end()) {
         BOOST_LOG_SEV(lg, error) << concept_not_found << n.qualified();
         BOOST_THROW_EXCEPTION(

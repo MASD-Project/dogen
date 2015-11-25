@@ -23,6 +23,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/injection_error.hpp"
@@ -85,16 +86,27 @@ private:
 
 bool injector::insert(const object& o) {
     const auto i(context_->model().objects().insert(
-            std::make_pair(o.name(), o)));
+            std::make_pair(o.name().qualified(), o)));
 
     return i.second;
 }
 
 object injector::
 create_visitor(const object& o, const std::list<name>& leaves) const {
-    name n;
-    n.simple(o.name().simple() + "_" + visitor_name);
-    n.location(o.name().location());
+    name_builder b;
+    b.simple_name(o.name().simple() + "_" + visitor_name);
+
+    const auto& l(o.name().location());
+    if (!l.model_module_path().empty())
+        b.model_module_path(l.model_module_path());
+
+    if (!l.internal_module_path().empty())
+        b.internal_module_path(l.internal_module_path());
+
+    if (!l.external_module_path().empty())
+        b.external_module_path(l.external_module_path());
+
+    const auto n(b.build());
     BOOST_LOG_SEV(lg, debug) << "Creating visitor: " << n.qualified();
 
     object r;
@@ -118,7 +130,7 @@ void injector::inject_visited_by(object& root, const std::list<name>& leaves,
     root.relationships()[relationship_types::visited_by].push_back(visitor);
 
     for (const auto& l : leaves) {
-        auto i(context_->model().objects().find(l));
+        auto i(context_->model().objects().find(l.qualified()));
         if (i == context_->model().objects().end()) {
             const auto qn(l.qualified());
             BOOST_LOG_SEV(lg, error) << leaf_not_found << qn;
@@ -173,7 +185,7 @@ void injector::inject_global_module() {
     name qn;
 
     auto& model(context_->model());
-    const auto i(model.modules().find(qn));
+    const auto i(model.modules().find(qn.qualified()));
     if (i != model.modules().end()) {
         const auto qn(model.name().qualified());
         BOOST_LOG_SEV(lg, error) << model_already_has_global_module << qn;
@@ -192,7 +204,7 @@ void injector::inject_global_module() {
     global_module.generation_type(generation_types::no_generation);
     global_module.origin_type(origin_types::system);
     global_module.documentation(global_module_doc);
-    model.modules().insert(std::make_pair(qn, global_module));
+    model.modules().insert(std::make_pair(qn.qualified(), global_module));
 }
 
 void injector::inject(intermediate_model& m) {

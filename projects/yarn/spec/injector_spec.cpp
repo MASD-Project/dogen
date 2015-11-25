@@ -78,7 +78,7 @@ BOOST_AUTO_TEST_CASE(single_type_model_results_in_adding_only_global_module) {
     BOOST_CHECK(a.objects().size() == 1);
     BOOST_CHECK(a.modules().size() == 1);
 
-    const auto n(a.modules().begin()->first);
+    const auto n(a.modules().begin()->second.name());
     BOOST_REQUIRE(a.objects().begin()->second.containing_module());
     BOOST_REQUIRE(*a.objects().begin()->second.containing_module() == n);
     BOOST_CHECK(a.primitives().empty());
@@ -106,7 +106,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     auto m(factory.object_with_parent_in_the_same_model());
     BOOST_REQUIRE(m.objects().size() == 2);
     for (auto& pair : m.objects()) {
-        const auto& n(pair.first);
+        const auto& n(pair.second.name());
         if (factory.is_type_name_n(1, n)) {
             auto& ao(pair.second);
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
@@ -122,7 +122,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     BOOST_CHECK(m.objects().size() == 3);
     bool type_one(false), visitor(false);
     for (const auto& pair : m.objects()) {
-        const auto& n(pair.first);
+        const auto& n(pair.second.name());
         if (factory.is_type_name_n(1, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
             type_one = true;

@@ -154,11 +154,11 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
 
         const auto ot(pt.get_optional<std::string>(object_type_key));
         o.object_type(to_object_type(ot));
-        m.objects().insert(std::make_pair(n, o));
+        m.objects().insert(std::make_pair(n.qualified(), o));
     } else if (meta_type_value == meta_type_primitive_value) {
         yarn::primitive p;
         lambda(p);
-        m.primitives().insert(std::make_pair(n, p));
+        m.primitives().insert(std::make_pair(n.qualified(), p));
     }
     else {
         BOOST_LOG_SEV(lg, error) << invalid_meta_type << meta_type_value;
@@ -203,7 +203,7 @@ yarn::intermediate_model hydrator::read_stream(
     m.name(r.name());
     m.origin_type(r.origin_type());
     m.generation_type(r.generation_type());
-    r.modules().insert(std::make_pair(m.name(), m));
+    r.modules().insert(std::make_pair(m.name().qualified(), m));
 
     const auto i(pt.find(elements_key));
     if (i == pt.not_found() || i->second.empty()) {

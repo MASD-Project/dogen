@@ -38,6 +38,7 @@ const std::string start_component("<");
 const std::string end_component(">");
 const std::string empty_type_name("Type name is empty.");
 const std::string empty_model_name("Model name is empty.");
+const std::string empty_model_module_path("Model module path is empty.");
 const std::string empty_internal_module_path("Internal module path is empty.");
 const std::string empty_external_module_path("External module path is empty.");
 
@@ -122,6 +123,18 @@ name_builder& name_builder::model_name(const location& l) {
     name_.location().model_module_path(l.model_module_path());
 
     BOOST_LOG_SEV(lg, debug) << "Added model name from location: " << l;
+    return *this;
+}
+
+name_builder& name_builder::
+model_module_path(const std::list<std::string>& mmp) {
+    if (mmp.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_model_module_path;
+        BOOST_THROW_EXCEPTION(building_error(empty_model_module_path));
+    }
+
+    name_.location().model_module_path(mmp);
+    BOOST_LOG_SEV(lg, debug) << "Added model module path: " << mmp;
     return *this;
 }
 

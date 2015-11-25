@@ -71,19 +71,19 @@ void association_indexer::recurse_nested_names(const intermediate_model& m,
     else
         rels[relationship_types::regular_associations].push_back(n);
 
-    const auto i(m.primitives().find(n));
+    const auto i(m.primitives().find(n.qualified()));
     if (i != m.primitives().end()) {
         is_pointer = false;
         return;
     }
 
-    const auto j(m.enumerations().find(n));
+    const auto j(m.enumerations().find(n.qualified()));
     if (j != m.enumerations().end()) {
         is_pointer = false;
         return;
     }
 
-    const auto k(m.objects().find(n));
+    const auto k(m.objects().find(n.qualified()));
     if (k == m.objects().end()) {
         const auto qn(n.qualified());
         BOOST_LOG_SEV(lg, error) << object_not_found << qn;

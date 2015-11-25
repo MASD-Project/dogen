@@ -80,27 +80,27 @@ void merger::require_not_has_merged() const {
     BOOST_THROW_EXCEPTION(merging_error(multiple_merge));
 }
 
-void merger::check_name(const name& model_name, const name& key,
+void merger::check_name(const name& model_name, const std::string& key,
     const name& value, const bool in_global_namespace) const {
 
     if (!in_global_namespace) {
-        if (key.location().external_module_path() !=
+        if (value.location().external_module_path() !=
             model_name.location().external_module_path() ||
-            key.location().model_module_path() !=
+            value.location().model_module_path() !=
             model_name.location().model_module_path()) {
             std::ostringstream s;
             s << "Type does not belong to this model. Model name: '"
-              << model_name.qualified() << "'. Type name: " << key.qualified();
+              << model_name.qualified() << "'. Type name: "
+              << value.qualified();
             BOOST_LOG_SEV(lg, error) << s.str();
             BOOST_THROW_EXCEPTION(merging_error(s.str()));
         }
     }
 
-    if (key != value) {
+    if (key != value.qualified()) {
         std::ostringstream s;
         s << "Inconsistency between key and value names: "
-          << " key: " << key.qualified()
-          << " value: " << value.qualified();
+          << " key: " << key << " value: " << value.qualified();
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(merging_error(s.str()));
     }

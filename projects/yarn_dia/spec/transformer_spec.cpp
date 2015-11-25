@@ -98,7 +98,7 @@ dogen::yarn_dia::context mock_context(const std::string& model_name) {
 
     dogen::yarn::module m;
     m.name(r.model().name());
-    r.model().modules().insert(std::make_pair(m.name(), m));
+    r.model().modules().insert(std::make_pair(m.name().qualified(), m));
     return r;
 }
 
@@ -988,9 +988,9 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
 
     BOOST_REQUIRE(c.model().objects().size() == 2);
     for (const auto& pair : c.model().objects()) {
-        const auto& n(pair.first);
-
         const auto& o(pair.second);
+        const auto& n(o.name());
+
         if (is_type_one(n)) {
             BOOST_CHECK(!has_relationship(relationship_types::parents, o));
             BOOST_CHECK(!has_relationship(relationship_types::root_parents, o));

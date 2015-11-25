@@ -58,9 +58,9 @@ intermediate_model workflow::assemble_intermediate_models_activity(
 intermediate_model workflow::execute(const dynamic::repository& rp,
     const std::list<input_descriptor>& id) const {
 
-    auto pm(obtain_intermediate_models_activity(rp, id));
-    expand_intermediate_models_activity(pm);
-    const auto r(assemble_intermediate_models_activity(pm));
+    auto im(obtain_intermediate_models_activity(rp, id));
+    expand_intermediate_models_activity(im);
+    const auto r(assemble_intermediate_models_activity(im));
     BOOST_LOG_SEV(lg, debug) << "Final model: " << r;
     return r;
 }

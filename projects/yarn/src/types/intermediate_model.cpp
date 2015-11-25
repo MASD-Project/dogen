@@ -60,11 +60,11 @@ intermediate_model::intermediate_model(
     const boost::optional<dogen::yarn::name>& containing_module,
     const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& references,
     const std::unordered_set<dogen::yarn::name>& leaves,
-    const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& modules,
-    const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& concepts,
-    const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& primitives,
-    const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& enumerations,
-    const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& objects,
+    const std::unordered_map<std::string, dogen::yarn::module>& modules,
+    const std::unordered_map<std::string, dogen::yarn::concept>& concepts,
+    const std::unordered_map<std::string, dogen::yarn::primitive>& primitives,
+    const std::unordered_map<std::string, dogen::yarn::enumeration>& enumerations,
+    const std::unordered_map<std::string, dogen::yarn::object>& objects,
     const bool is_target,
     const bool has_generatable_types)
     : in_global_module_(in_global_module),
@@ -268,83 +268,83 @@ void intermediate_model::leaves(const std::unordered_set<dogen::yarn::name>&& v)
     leaves_ = std::move(v);
 }
 
-const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& intermediate_model::modules() const {
+const std::unordered_map<std::string, dogen::yarn::module>& intermediate_model::modules() const {
     return modules_;
 }
 
-std::unordered_map<dogen::yarn::name, dogen::yarn::module>& intermediate_model::modules() {
+std::unordered_map<std::string, dogen::yarn::module>& intermediate_model::modules() {
     return modules_;
 }
 
-void intermediate_model::modules(const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& v) {
+void intermediate_model::modules(const std::unordered_map<std::string, dogen::yarn::module>& v) {
     modules_ = v;
 }
 
-void intermediate_model::modules(const std::unordered_map<dogen::yarn::name, dogen::yarn::module>&& v) {
+void intermediate_model::modules(const std::unordered_map<std::string, dogen::yarn::module>&& v) {
     modules_ = std::move(v);
 }
 
-const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& intermediate_model::concepts() const {
+const std::unordered_map<std::string, dogen::yarn::concept>& intermediate_model::concepts() const {
     return concepts_;
 }
 
-std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& intermediate_model::concepts() {
+std::unordered_map<std::string, dogen::yarn::concept>& intermediate_model::concepts() {
     return concepts_;
 }
 
-void intermediate_model::concepts(const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& v) {
+void intermediate_model::concepts(const std::unordered_map<std::string, dogen::yarn::concept>& v) {
     concepts_ = v;
 }
 
-void intermediate_model::concepts(const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>&& v) {
+void intermediate_model::concepts(const std::unordered_map<std::string, dogen::yarn::concept>&& v) {
     concepts_ = std::move(v);
 }
 
-const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& intermediate_model::primitives() const {
+const std::unordered_map<std::string, dogen::yarn::primitive>& intermediate_model::primitives() const {
     return primitives_;
 }
 
-std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& intermediate_model::primitives() {
+std::unordered_map<std::string, dogen::yarn::primitive>& intermediate_model::primitives() {
     return primitives_;
 }
 
-void intermediate_model::primitives(const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& v) {
+void intermediate_model::primitives(const std::unordered_map<std::string, dogen::yarn::primitive>& v) {
     primitives_ = v;
 }
 
-void intermediate_model::primitives(const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>&& v) {
+void intermediate_model::primitives(const std::unordered_map<std::string, dogen::yarn::primitive>&& v) {
     primitives_ = std::move(v);
 }
 
-const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& intermediate_model::enumerations() const {
+const std::unordered_map<std::string, dogen::yarn::enumeration>& intermediate_model::enumerations() const {
     return enumerations_;
 }
 
-std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& intermediate_model::enumerations() {
+std::unordered_map<std::string, dogen::yarn::enumeration>& intermediate_model::enumerations() {
     return enumerations_;
 }
 
-void intermediate_model::enumerations(const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& v) {
+void intermediate_model::enumerations(const std::unordered_map<std::string, dogen::yarn::enumeration>& v) {
     enumerations_ = v;
 }
 
-void intermediate_model::enumerations(const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>&& v) {
+void intermediate_model::enumerations(const std::unordered_map<std::string, dogen::yarn::enumeration>&& v) {
     enumerations_ = std::move(v);
 }
 
-const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& intermediate_model::objects() const {
+const std::unordered_map<std::string, dogen::yarn::object>& intermediate_model::objects() const {
     return objects_;
 }
 
-std::unordered_map<dogen::yarn::name, dogen::yarn::object>& intermediate_model::objects() {
+std::unordered_map<std::string, dogen::yarn::object>& intermediate_model::objects() {
     return objects_;
 }
 
-void intermediate_model::objects(const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& v) {
+void intermediate_model::objects(const std::unordered_map<std::string, dogen::yarn::object>& v) {
     objects_ = v;
 }
 
-void intermediate_model::objects(const std::unordered_map<dogen::yarn::name, dogen::yarn::object>&& v) {
+void intermediate_model::objects(const std::unordered_map<std::string, dogen::yarn::object>&& v) {
     objects_ = std::move(v);
 }
 

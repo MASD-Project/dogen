@@ -50,7 +50,7 @@ dynamic::object workflow::obtain_root_object(
     const yarn::intermediate_model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Obtaining model's root object.";
 
-    const auto i(m.modules().find(m.name()));
+    const auto i(m.modules().find(m.name().qualified()));
     if (i == m.modules().end()) {
         const auto qn(m.name().qualified());
         BOOST_LOG_SEV(lg, error) << model_module_not_found << qn;

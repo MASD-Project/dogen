@@ -43,7 +43,7 @@ using dogen::yarn::test::mock_intermediate_model_factory;
 const mock_intermediate_model_factory::flags flags;
 const mock_intermediate_model_factory factory(flags);
 
-const std::string invalid_simple_name("INVALID");
+const std::string invalid_qualified_name("INVALID");
 const std::string invalid_model_name("INVALID");
 
 const std::string incorrect_model("Type does not belong to this model");
@@ -94,7 +94,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     std::set<std::string> object_names;
     std::set<std::string> model_names;
     for (const auto& pair : combined.objects()) {
-        const auto& n(pair.first);
+        const auto& n(pair.second.name());
         BOOST_REQUIRE(n.location().model_module_path().size() == 1);
         object_names.insert(n.location().model_module_path().front() + "_" +
             n.simple());
@@ -166,7 +166,7 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
 
     auto m(factory.make_multi_type_model(0, 2));
     m.is_target(true);
-    m.objects().begin()->second.name().simple(invalid_simple_name);
+    m.objects().begin()->second.name().qualified(invalid_qualified_name);
 
     dogen::yarn::merger mg;
     mg.add(m);

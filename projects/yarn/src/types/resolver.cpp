@@ -35,10 +35,9 @@
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/resolver.hpp"
 
-using namespace dogen::utility::log;
-
 namespace {
 
+using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.resolver"));
 
 const std::string empty;
@@ -59,19 +58,19 @@ resolver::resolver(intermediate_model& m) : model_(m), has_resolved_(false) { }
 bool resolver::is_name_in_model(const name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Finding name:" << n;
 
-    auto i(model_.objects().find(n));
+    auto i(model_.objects().find(n.qualified()));
     if (i != model_.objects().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to an object in model.";
         return true;
     }
 
-    auto j(model_.enumerations().find(n));
+    auto j(model_.enumerations().find(n.qualified()));
     if (j != model_.enumerations().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to an enumeration in model.";
         return true;
     }
 
-    auto k(model_.primitives().find(n));
+    auto k(model_.primitives().find(n.qualified()));
     if (k != model_.primitives().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to a primitive in model.";
         return true;
@@ -158,7 +157,7 @@ void resolver::validate_inheritance_graph(const object& ao) const {
         return;
 
     for (const auto& pn : i->second) {
-        const auto j(model_.objects().find(pn));
+        const auto j(model_.objects().find(pn.qualified()));
         if (j == model_.objects().end()) {
             std::ostringstream s;
             s << orphan_object << ": " << ao.name().qualified()
@@ -174,7 +173,7 @@ void resolver::validate_inheritance_graph(const object& ao) const {
         return;
 
     for (const auto& pn : i->second) {
-        const auto j(model_.objects().find(pn));
+        const auto j(model_.objects().find(pn.qualified()));
         if (j == model_.objects().end()) {
             std::ostringstream s;
             s << orphan_object << ": " << ao.name().qualified()
@@ -188,7 +187,7 @@ void resolver::validate_inheritance_graph(const object& ao) const {
 
 void resolver::validate_refinements(const concept& c) const {
     for (const auto& n : c.refines()) {
-        const auto i(model_.concepts().find(n));
+        const auto i(model_.concepts().find(n.qualified()));
         if (i == model_.concepts().end()) {
             std::ostringstream stream;
             stream << orphan_concept << ". concept: "

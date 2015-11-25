@@ -64,7 +64,7 @@ inline std::size_t hash_std_unordered_set_dogen_yarn_name(const std::unordered_s
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_module(const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_module(const std::unordered_map<std::string, dogen::yarn::module>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -73,7 +73,7 @@ inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_module(cons
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_concept(const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_concept(const std::unordered_map<std::string, dogen::yarn::concept>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -82,7 +82,7 @@ inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_concept(con
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_primitive(const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_primitive(const std::unordered_map<std::string, dogen::yarn::primitive>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -91,7 +91,7 @@ inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_primitive(c
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_enumeration(const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_enumeration(const std::unordered_map<std::string, dogen::yarn::enumeration>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -100,7 +100,7 @@ inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_enumeration
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_object(const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_object(const std::unordered_map<std::string, dogen::yarn::object>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -127,11 +127,11 @@ std::size_t intermediate_model_hasher::hash(const intermediate_model& v) {
     combine(seed, hash_boost_optional_dogen_yarn_name(v.containing_module()));
     combine(seed, hash_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(v.references()));
     combine(seed, hash_std_unordered_set_dogen_yarn_name(v.leaves()));
-    combine(seed, hash_std_unordered_map_dogen_yarn_name_dogen_yarn_module(v.modules()));
-    combine(seed, hash_std_unordered_map_dogen_yarn_name_dogen_yarn_concept(v.concepts()));
-    combine(seed, hash_std_unordered_map_dogen_yarn_name_dogen_yarn_primitive(v.primitives()));
-    combine(seed, hash_std_unordered_map_dogen_yarn_name_dogen_yarn_enumeration(v.enumerations()));
-    combine(seed, hash_std_unordered_map_dogen_yarn_name_dogen_yarn_object(v.objects()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_module(v.modules()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_concept(v.concepts()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_primitive(v.primitives()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_enumeration(v.enumerations()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_object(v.objects()));
     combine(seed, v.is_target());
     combine(seed, v.has_generatable_types());
 

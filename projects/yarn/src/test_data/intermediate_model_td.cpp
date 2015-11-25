@@ -90,10 +90,10 @@ create_dogen_yarn_module(const unsigned int position) {
     return dogen::yarn::module_generator::create(position);
 }
 
-std::unordered_map<dogen::yarn::name, dogen::yarn::module> create_std_unordered_map_dogen_yarn_name_dogen_yarn_module(unsigned int position) {
-    std::unordered_map<dogen::yarn::name, dogen::yarn::module> r;
+std::unordered_map<std::string, dogen::yarn::module> create_std_unordered_map_std_string_dogen_yarn_module(unsigned int position) {
+    std::unordered_map<std::string, dogen::yarn::module> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_dogen_yarn_module(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_module(position + i)));
     }
     return r;
 }
@@ -103,10 +103,10 @@ create_dogen_yarn_concept(const unsigned int position) {
     return dogen::yarn::concept_generator::create(position);
 }
 
-std::unordered_map<dogen::yarn::name, dogen::yarn::concept> create_std_unordered_map_dogen_yarn_name_dogen_yarn_concept(unsigned int position) {
-    std::unordered_map<dogen::yarn::name, dogen::yarn::concept> r;
+std::unordered_map<std::string, dogen::yarn::concept> create_std_unordered_map_std_string_dogen_yarn_concept(unsigned int position) {
+    std::unordered_map<std::string, dogen::yarn::concept> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_dogen_yarn_concept(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_concept(position + i)));
     }
     return r;
 }
@@ -116,10 +116,10 @@ create_dogen_yarn_primitive(const unsigned int position) {
     return dogen::yarn::primitive_generator::create(position);
 }
 
-std::unordered_map<dogen::yarn::name, dogen::yarn::primitive> create_std_unordered_map_dogen_yarn_name_dogen_yarn_primitive(unsigned int position) {
-    std::unordered_map<dogen::yarn::name, dogen::yarn::primitive> r;
+std::unordered_map<std::string, dogen::yarn::primitive> create_std_unordered_map_std_string_dogen_yarn_primitive(unsigned int position) {
+    std::unordered_map<std::string, dogen::yarn::primitive> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_dogen_yarn_primitive(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_primitive(position + i)));
     }
     return r;
 }
@@ -129,10 +129,10 @@ create_dogen_yarn_enumeration(const unsigned int position) {
     return dogen::yarn::enumeration_generator::create(position);
 }
 
-std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration> create_std_unordered_map_dogen_yarn_name_dogen_yarn_enumeration(unsigned int position) {
-    std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration> r;
+std::unordered_map<std::string, dogen::yarn::enumeration> create_std_unordered_map_std_string_dogen_yarn_enumeration(unsigned int position) {
+    std::unordered_map<std::string, dogen::yarn::enumeration> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_dogen_yarn_enumeration(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_enumeration(position + i)));
     }
     return r;
 }
@@ -142,10 +142,10 @@ create_dogen_yarn_object(const unsigned int position) {
     return dogen::yarn::object_generator::create(position);
 }
 
-std::unordered_map<dogen::yarn::name, dogen::yarn::object> create_std_unordered_map_dogen_yarn_name_dogen_yarn_object(unsigned int position) {
-    std::unordered_map<dogen::yarn::name, dogen::yarn::object> r;
+std::unordered_map<std::string, dogen::yarn::object> create_std_unordered_map_std_string_dogen_yarn_object(unsigned int position) {
+    std::unordered_map<std::string, dogen::yarn::object> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_dogen_yarn_object(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_object(position + i)));
     }
     return r;
 }
@@ -169,11 +169,11 @@ populate(const unsigned int position, result_type& v) {
     v.containing_module(create_boost_optional_dogen_yarn_name(position + 7));
     v.references(create_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(position + 8));
     v.leaves(create_std_unordered_set_dogen_yarn_name(position + 9));
-    v.modules(create_std_unordered_map_dogen_yarn_name_dogen_yarn_module(position + 10));
-    v.concepts(create_std_unordered_map_dogen_yarn_name_dogen_yarn_concept(position + 11));
-    v.primitives(create_std_unordered_map_dogen_yarn_name_dogen_yarn_primitive(position + 12));
-    v.enumerations(create_std_unordered_map_dogen_yarn_name_dogen_yarn_enumeration(position + 13));
-    v.objects(create_std_unordered_map_dogen_yarn_name_dogen_yarn_object(position + 14));
+    v.modules(create_std_unordered_map_std_string_dogen_yarn_module(position + 10));
+    v.concepts(create_std_unordered_map_std_string_dogen_yarn_concept(position + 11));
+    v.primitives(create_std_unordered_map_std_string_dogen_yarn_primitive(position + 12));
+    v.enumerations(create_std_unordered_map_std_string_dogen_yarn_enumeration(position + 13));
+    v.objects(create_std_unordered_map_std_string_dogen_yarn_object(position + 14));
     v.is_target(create_bool(position + 15));
     v.has_generatable_types(create_bool(position + 16));
 }

@@ -146,8 +146,8 @@ BOOST_AUTO_TEST_CASE(model_with_more_than_one_property_of_the_same_type_results_
 
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& n(pair.first);
         const auto& o(pair.second);
+        const auto& n(o.name());
 
         auto i(o.relationships().find(ra));
         if (factory.is_type_name_n(0, n)) {
@@ -184,8 +184,8 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
     bool found0(false), found1(false), found3(false);
     BOOST_REQUIRE(m.objects().size() == 5);
     for (const auto& pair : m.objects()) {
-        const auto& n(pair.first);
         const auto& o(pair.second);
+        const auto& n(o.name());
 
         auto i(o.relationships().find(ra));
         if (factory.is_type_name_n(0, n)) {
@@ -254,8 +254,8 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
     bool found0(false), found1(false), found3(false);
     BOOST_REQUIRE(m.objects().size() == 5);
     for (const auto& pair : m.objects()) {
-        const auto& n(pair.first);
         const auto& o(pair.second);
+        const auto& n(o.name());
 
         auto i(o.relationships().find(ra));
         if (factory.is_type_name_n(0, n)) {
@@ -322,8 +322,8 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_property_results_in_expected_indic
 
     BOOST_REQUIRE(m.objects().size() == 1);
     for (const auto& pair : m.objects()) {
-        const auto& n(pair.first);
         const auto& o(pair.second);
+        const auto& n(o.name());
 
         using dogen::yarn::relationship_types;
         const auto ra(relationship_types::regular_associations);
@@ -358,8 +358,8 @@ BOOST_AUTO_TEST_CASE(object_with_bool_property_results_in_expected_indices) {
 
     BOOST_REQUIRE(m.objects().size() == 1);
     for (const auto& pair : m.objects()) {
-        const auto& n(pair.first);
         const auto& o(pair.second);
+        const auto& n(o.name());
 
         using dogen::yarn::relationship_types;
         const auto ra(relationship_types::regular_associations);
@@ -391,8 +391,8 @@ BOOST_AUTO_TEST_CASE(object_with_object_property_results_in_expected_indices) {
     ind.index(m);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
     for (const auto& pair : m.objects()) {
-        const auto& n(pair.first);
         const auto& o(pair.second);
+        const auto& n(o.name());
 
         using dogen::yarn::relationship_types;
         const auto ra(relationship_types::regular_associations);
@@ -444,8 +444,8 @@ BOOST_AUTO_TEST_CASE(object_with_std_pair_property_results_in_expected_indices) 
     bool found(false);
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& n(pair.first);
         const auto& o(pair.second);
+        const auto& n(o.name());
 
         using dogen::yarn::relationship_types;
         const auto ra(relationship_types::regular_associations);
@@ -485,10 +485,10 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_property_results_in_expected_indi
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     for (const auto& pair : m.objects()) {
-        const auto& n(pair.first);
         const auto& o(pair.second);
+        const auto& n(o.name());
 
-        if (factory.is_type_name_n(0, pair.first)) {
+        if (factory.is_type_name_n(0, n)) {
             found = true;
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
 
@@ -535,8 +535,8 @@ BOOST_AUTO_TEST_CASE(object_with_std_string_property_results_in_expected_indices
     bool found(false);
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& n(pair.first);
         const auto& o(pair.second);
+        const auto& n(o.name());
 
         using dogen::yarn::relationship_types;
         const auto ra(relationship_types::regular_associations);
@@ -572,10 +572,10 @@ BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_property_results_in_expected_i
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     for (const auto& pair : m.objects()) {
-        const auto& n(pair.first);
         const auto& o(pair.second);
+        const auto& n(o.name());
 
-        if (factory.is_type_name_n(0, pair.first)) {
+        if (factory.is_type_name_n(0, n)) {
             found = true;
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
 
@@ -611,10 +611,10 @@ BOOST_AUTO_TEST_CASE(object_with_both_regular_and_weak_associations_results_in_e
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     for (const auto& pair : m.objects()) {
-        const auto& n(pair.first);
         const auto& o(pair.second);
+        const auto& n(o.name());
 
-        if (factory.is_type_name_n(0, pair.first)) {
+        if (factory.is_type_name_n(0, n)) {
             found = true;
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
 

@@ -117,7 +117,7 @@ yarn::name transformer::to_name(const std::string& n,
 }
 
 yarn::module& transformer::module_for_name(const yarn::name& n) {
-    auto i(context_.model().modules().find(n));
+    auto i(context_.model().modules().find(n.qualified()));
     if (i == context_.model().modules().end()) {
         const auto sn(n.simple());
         BOOST_LOG_SEV(lg, error) << missing_module_for_name << sn;
@@ -246,19 +246,21 @@ update_object(yarn::object& ao, const processed_object& o, const profile& p) {
 void transformer::to_exception(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an exception: " << o.id();
 
-    yarn::object vo;
-    update_object(vo, o, p);
-    vo.object_type(yarn::object_types::exception);
-    context_.model().objects().insert(std::make_pair(vo.name(), vo));
+    yarn::object e;
+    update_object(e, o, p);
+    e.object_type(yarn::object_types::exception);
+    auto& objects(context_.model().objects());
+    objects.insert(std::make_pair(e.name().qualified(), e));
 }
 
-void transformer::to_service(const processed_object& po, const profile& p) {
-    BOOST_LOG_SEV(lg, debug) << "Object is a factory: " << po.id();
+void transformer::to_service(const processed_object& o, const profile& p) {
+    BOOST_LOG_SEV(lg, debug) << "Object is a service: " << o.id();
 
-    yarn::object o;
-    o.object_type(yarn::object_types::user_defined_service);
-    update_object(o, po, p);
-    context_.model().objects().insert(std::make_pair(o.name(), o));
+    yarn::object s;
+    s.object_type(yarn::object_types::user_defined_service);
+    update_object(s, o, p);
+    auto& objects(context_.model().objects());
+    objects.insert(std::make_pair(s.name().qualified(), s));
 }
 
 void transformer::to_value_object(const processed_object& o, const profile& p) {
@@ -267,7 +269,8 @@ void transformer::to_value_object(const processed_object& o, const profile& p) {
     yarn::object vo;
     update_object(vo, o, p);
     vo.object_type(yarn::object_types::user_defined_value_object);
-    context_.model().objects().insert(std::make_pair(vo.name(), vo));
+    auto& objects(context_.model().objects());
+    objects.insert(std::make_pair(vo.name().qualified(), vo));
 }
 
 void transformer::to_enumeration(const processed_object& o, const profile& p) {
@@ -303,7 +306,8 @@ void transformer::to_enumeration(const processed_object& o, const profile& p) {
         e.enumerators().push_back(enumerator);
         enumerator_names.insert(enumerator.name());
     }
-    context_.model().enumerations().insert(std::make_pair(e.name(), e));
+    auto& enumerations(context_.model().enumerations());
+    enumerations.insert(std::make_pair(e.name().qualified(), e));
 }
 
 void transformer::to_module(const processed_object& o, const profile& p) {
@@ -311,7 +315,8 @@ void transformer::to_module(const processed_object& o, const profile& p) {
 
     yarn::module m;
     update_element(m, o, p);
-    context_.model().modules().insert(std::make_pair(m.name(), m));
+    auto& modules(context_.model().modules());
+    modules.insert(std::make_pair(m.name().qualified(), m));
 }
 
 void transformer::from_note(const processed_object& o) {
@@ -377,8 +382,8 @@ void transformer::to_concept(const processed_object& o, const profile& p) {
 
     const auto j(context_.parent_ids().find(o.id()));
     c.is_parent(j != context_.parent_ids().end());
-
-    context_.model().concepts().insert(std::make_pair(c.name(), c));
+    auto& concepts(context_.model().concepts());
+    concepts.insert(std::make_pair(c.name().qualified(), c));
 }
 
 bool transformer::is_transformable(const processed_object& o) const {

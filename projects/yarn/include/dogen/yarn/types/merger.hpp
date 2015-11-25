@@ -90,11 +90,12 @@ private:
 
 private:
     /**
-     * @brief Ensure the qualified name is consistent.
+     * @brief Ensure there is consistency between model name, key and
+     * value.
      *
      * @note should be moved to validator.
      */
-    void check_name(const name& model_name, const name& key,
+    void check_name(const name& model_name, const std::string& key,
         const name& value, const bool in_global_namespace) const;
 
     /**

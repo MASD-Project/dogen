@@ -18,7 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/yarn/types/properties_expander.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.properties_expander"));
+
+}
 
 namespace dogen {
 namespace yarn {
@@ -29,9 +38,27 @@ obtain_top_level_module_names(const intermediate_model& m) const {
 
     for (const auto& pair : m.modules()) {
         const auto& module(pair.second);
-        if (!module.containing_module())
-            r.insert(module.name().simple());
+
+        if (!module.containing_module()) {
+            BOOST_LOG_SEV(lg, debug) << "Module is not a top-level module: "
+                                     << pair.first;
+            continue;
+        }
+
+        const auto& cm(*module.containing_module());
+        if (cm != m.name()) {
+            BOOST_LOG_SEV(lg, debug) << "Module is not a top-level module: "
+                                     << pair.first
+                                     << " containing module: "
+                                     << cm.qualified()
+                                     << " model name: " << m.name().qualified();
+        }
+        r.insert(module.name().simple());
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Top-level model names for "
+                             << m.name().qualified() << " : "
+                             << r;
     return r;
 }
 

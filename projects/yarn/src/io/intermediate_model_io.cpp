@@ -88,12 +88,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::module>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
+        s << "\"" << tidy_up_string(i->first) << "\"";
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
         s << i->second;
         s << " } ]";
@@ -106,12 +106,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::concept>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
+        s << "\"" << tidy_up_string(i->first) << "\"";
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
         s << i->second;
         s << " } ]";
@@ -124,12 +124,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::primitive>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
+        s << "\"" << tidy_up_string(i->first) << "\"";
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
         s << i->second;
         s << " } ]";
@@ -142,12 +142,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::enumeration>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
+        s << "\"" << tidy_up_string(i->first) << "\"";
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
         s << i->second;
         s << " } ]";
@@ -160,12 +160,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::object>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
+        s << "\"" << tidy_up_string(i->first) << "\"";
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
         s << i->second;
         s << " } ]";

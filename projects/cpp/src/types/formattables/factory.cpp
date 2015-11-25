@@ -298,10 +298,10 @@ make_includers(
         if (n.location().model_module_path().empty() && n.simple().empty())
             continue;
 
-        if (m.concepts().find(n) != m.concepts().end())
+        if (m.concepts().find(n.qualified()) != m.concepts().end())
             continue;
 
-        if (m.primitives().find(n) != m.primitives().end())
+        if (m.primitives().find(n.qualified()) != m.primitives().end())
             continue;
 
         for (const auto& fmt_pair : n_pair.second) {
@@ -313,7 +313,7 @@ make_includers(
 
             const auto is_types(boost::starts_with(fn, "cpp.types."));
             if (!is_types) {
-                const auto j(m.objects().find(n));
+                const auto j(m.objects().find(n.qualified()));
                 using yarn::object_types;
                 if (j  != m.objects().end()) {
                     const auto ot(j->second.object_type());
@@ -321,11 +321,11 @@ make_includers(
                         continue;
                 }
 
-                const auto i(m.modules().find(n));
+                const auto i(m.modules().find(n.qualified()));
                 if (i != m.modules().end())
                         continue;
             } else {
-                const auto i(m.modules().find(n));
+                const auto i(m.modules().find(n.qualified()));
                 if (i != m.modules().end()) {
                     if (i->second.documentation().empty())
                         continue;

@@ -47,9 +47,9 @@ namespace dogen {
 namespace yarn {
 
 object& property_indexer::find_object(const name& n, intermediate_model& m) {
-    auto i(m.objects().find(n));
+    const auto qn(n.qualified());
+    auto i(m.objects().find(qn));
     if (i == m.objects().end()) {
-        const auto qn(n.qualified());
         BOOST_LOG_SEV(lg, error) << object_not_found << qn;
         BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
     }
@@ -69,9 +69,9 @@ find_relationships(const relationship_types rt, object& o) {
 }
 
 concept& property_indexer::find_concept(const name& n, intermediate_model& m) {
-    auto i(m.concepts().find(n));
+    const auto& qn(n.qualified());
+    auto i(m.concepts().find(qn));
     if (i == m.concepts().end()) {
-        const auto& qn(n.qualified());
         BOOST_LOG_SEV(lg, error) << concept_not_found << qn;
         BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + qn));
     }

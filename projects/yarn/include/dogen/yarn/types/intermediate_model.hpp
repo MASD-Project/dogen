@@ -71,11 +71,11 @@ public:
         const boost::optional<dogen::yarn::name>& containing_module,
         const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& references,
         const std::unordered_set<dogen::yarn::name>& leaves,
-        const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& modules,
-        const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& concepts,
-        const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& primitives,
-        const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& enumerations,
-        const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& objects,
+        const std::unordered_map<std::string, dogen::yarn::module>& modules,
+        const std::unordered_map<std::string, dogen::yarn::concept>& concepts,
+        const std::unordered_map<std::string, dogen::yarn::primitive>& primitives,
+        const std::unordered_map<std::string, dogen::yarn::enumeration>& enumerations,
+        const std::unordered_map<std::string, dogen::yarn::object>& objects,
         const bool is_target,
         const bool has_generatable_types);
 
@@ -192,50 +192,50 @@ public:
      * @brief Modules contained in the intermediate model.
      */
     /**@{*/
-    const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& modules() const;
-    std::unordered_map<dogen::yarn::name, dogen::yarn::module>& modules();
-    void modules(const std::unordered_map<dogen::yarn::name, dogen::yarn::module>& v);
-    void modules(const std::unordered_map<dogen::yarn::name, dogen::yarn::module>&& v);
+    const std::unordered_map<std::string, dogen::yarn::module>& modules() const;
+    std::unordered_map<std::string, dogen::yarn::module>& modules();
+    void modules(const std::unordered_map<std::string, dogen::yarn::module>& v);
+    void modules(const std::unordered_map<std::string, dogen::yarn::module>&& v);
     /**@}*/
 
     /**
      * @brief All the concepts available in this intermediate model.
      */
     /**@{*/
-    const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& concepts() const;
-    std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& concepts();
-    void concepts(const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>& v);
-    void concepts(const std::unordered_map<dogen::yarn::name, dogen::yarn::concept>&& v);
+    const std::unordered_map<std::string, dogen::yarn::concept>& concepts() const;
+    std::unordered_map<std::string, dogen::yarn::concept>& concepts();
+    void concepts(const std::unordered_map<std::string, dogen::yarn::concept>& v);
+    void concepts(const std::unordered_map<std::string, dogen::yarn::concept>&& v);
     /**@}*/
 
     /**
      * @brief All primitives contained in this intermediate model.
      */
     /**@{*/
-    const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& primitives() const;
-    std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& primitives();
-    void primitives(const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>& v);
-    void primitives(const std::unordered_map<dogen::yarn::name, dogen::yarn::primitive>&& v);
+    const std::unordered_map<std::string, dogen::yarn::primitive>& primitives() const;
+    std::unordered_map<std::string, dogen::yarn::primitive>& primitives();
+    void primitives(const std::unordered_map<std::string, dogen::yarn::primitive>& v);
+    void primitives(const std::unordered_map<std::string, dogen::yarn::primitive>&& v);
     /**@}*/
 
     /**
      * @brief All enumerations contained in this intermediate model.
      */
     /**@{*/
-    const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& enumerations() const;
-    std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& enumerations();
-    void enumerations(const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>& v);
-    void enumerations(const std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration>&& v);
+    const std::unordered_map<std::string, dogen::yarn::enumeration>& enumerations() const;
+    std::unordered_map<std::string, dogen::yarn::enumeration>& enumerations();
+    void enumerations(const std::unordered_map<std::string, dogen::yarn::enumeration>& v);
+    void enumerations(const std::unordered_map<std::string, dogen::yarn::enumeration>&& v);
     /**@}*/
 
     /**
      * @brief All objects contained in this intermediate model.
      */
     /**@{*/
-    const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& objects() const;
-    std::unordered_map<dogen::yarn::name, dogen::yarn::object>& objects();
-    void objects(const std::unordered_map<dogen::yarn::name, dogen::yarn::object>& v);
-    void objects(const std::unordered_map<dogen::yarn::name, dogen::yarn::object>&& v);
+    const std::unordered_map<std::string, dogen::yarn::object>& objects() const;
+    std::unordered_map<std::string, dogen::yarn::object>& objects();
+    void objects(const std::unordered_map<std::string, dogen::yarn::object>& v);
+    void objects(const std::unordered_map<std::string, dogen::yarn::object>&& v);
     /**@}*/
 
     /**
@@ -275,11 +275,11 @@ private:
     boost::optional<dogen::yarn::name> containing_module_;
     std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types> references_;
     std::unordered_set<dogen::yarn::name> leaves_;
-    std::unordered_map<dogen::yarn::name, dogen::yarn::module> modules_;
-    std::unordered_map<dogen::yarn::name, dogen::yarn::concept> concepts_;
-    std::unordered_map<dogen::yarn::name, dogen::yarn::primitive> primitives_;
-    std::unordered_map<dogen::yarn::name, dogen::yarn::enumeration> enumerations_;
-    std::unordered_map<dogen::yarn::name, dogen::yarn::object> objects_;
+    std::unordered_map<std::string, dogen::yarn::module> modules_;
+    std::unordered_map<std::string, dogen::yarn::concept> concepts_;
+    std::unordered_map<std::string, dogen::yarn::primitive> primitives_;
+    std::unordered_map<std::string, dogen::yarn::enumeration> enumerations_;
+    std::unordered_map<std::string, dogen::yarn::object> objects_;
     bool is_target_;
     bool has_generatable_types_;
 };

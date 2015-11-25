@@ -51,26 +51,7 @@
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="18" tracking_level="0" version="0">
-			<first>
-				<simple>package2</simple>
-				<qualified>&lt;comments&gt;&lt;package&gt;&lt;package2&gt;</qualified>
-				<location>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>comments</item>
-					</model_module_path>
-					<internal_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>package</item>
-					</internal_module_path>
-				</location>
-			</first>
+			<first>&lt;comments&gt;&lt;package&gt;&lt;package2&gt;</first>
 			<second class_id="5" tracking_level="1" version="0" object_id="_0">
 				<element class_id="19" tracking_level="0" version="0">
 					<in_global_module>0</in_global_module>
@@ -128,25 +109,7 @@
 			</second>
 		</item>
 		<item>
-			<first>
-				<simple>package</simple>
-				<qualified>&lt;comments&gt;&lt;package&gt;</qualified>
-				<location>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>comments</item>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
+			<first>&lt;comments&gt;&lt;package&gt;</first>
 			<second object_id="_2">
 				<element>
 					<in_global_module>0</in_global_module>
@@ -203,25 +166,7 @@
 			</second>
 		</item>
 		<item>
-			<first>
-				<simple>comments</simple>
-				<qualified>&lt;comments&gt;</qualified>
-				<location>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>comments</item>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
+			<first>&lt;comments&gt;</first>
 			<second object_id="_4">
 				<element>
 					<in_global_module>0</in_global_module>
@@ -322,25 +267,7 @@ This comment will be applied to the model namespace itself.
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="29" tracking_level="0" version="0">
-			<first>
-				<simple>multi_line</simple>
-				<qualified>&lt;comments&gt;&lt;multi_line&gt;</qualified>
-				<location>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>comments</item>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
+			<first>&lt;comments&gt;&lt;multi_line&gt;</first>
 			<second class_id="6" tracking_level="1" version="0" object_id="_8">
 				<element>
 					<in_global_module>0</in_global_module>
@@ -411,25 +338,7 @@ third line with &quot;quote&quot;
 			</second>
 		</item>
 		<item>
-			<first>
-				<simple>one_line</simple>
-				<qualified>&lt;comments&gt;&lt;one_line&gt;</qualified>
-				<location>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>comments</item>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
+			<first>&lt;comments&gt;&lt;one_line&gt;</first>
 			<second object_id="_9">
 				<element>
 					<in_global_module>0</in_global_module>

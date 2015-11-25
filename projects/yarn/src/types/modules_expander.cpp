@@ -96,6 +96,9 @@ public:
 };
 
 boost::optional<name> updater::containing_module(const name& n) {
+    BOOST_LOG_SEV(lg, debug) << "Finding containing module for: "
+                             << n.qualified();
+
     const bool in_global_namespace(n.location().model_module_path().empty());
     if (in_global_namespace) {
         BOOST_LOG_SEV(lg, debug) << "Type is in global module so, it has"
@@ -121,6 +124,7 @@ boost::optional<name> updater::containing_module(const name& n) {
     if (imp.empty())
         b.simple_name(mn);
     else {
+        b.model_module_path(n.location().model_module_path());
         b.simple_name(imp.back());
         imp.pop_back();
         if (!imp.empty())
@@ -128,9 +132,11 @@ boost::optional<name> updater::containing_module(const name& n) {
     }
 
     const auto module_n(b.build());
-    const auto i(model_.modules().find(module_n));
+    const auto i(model_.modules().find(module_n.qualified()));
     if (i != model_.modules().end()) {
         i->second.members().push_back(n);
+        BOOST_LOG_SEV(lg, debug) << "Containing module: "
+                                 << module_n.qualified();
         return module_n;
     }
 
@@ -145,7 +151,7 @@ void updater::update(element& e) {
     if (!e.containing_module())
         return;
 
-    auto i(model_.modules().find(*e.containing_module()));
+    auto i(model_.modules().find(e.containing_module()->qualified()));
     if (i == model_.modules().end()) {
         const auto sn(e.containing_module()->simple());
         BOOST_LOG_SEV(lg, error) << missing_module << sn;
@@ -154,7 +160,7 @@ void updater::update(element& e) {
 
     BOOST_LOG_SEV(lg, debug) << "Adding type to module. Type: '"
                              << e.name().qualified()
-                             << "' Module: '" << i->first.qualified();
+                             << "' Module: '" << i->first;
     i->second.members().push_back(e.name());
 }
 
@@ -167,14 +173,14 @@ void modules_expander::create_missing_modules(intermediate_model& m) const {
     for (const auto& pair : b.result()) {
         yarn::name_factory f;
         const auto& ipp(pair.second);
-        const auto module_n(f.build_module_name(m.name(), ipp));
-        const auto i(m.modules().find(module_n));
+        const auto n(f.build_module_name(m.name(), ipp));
+        const auto i(m.modules().find(n.qualified()));
         if (i == m.modules().end()) {
             yarn::module mod;
-            mod.name(module_n);
+            mod.name(n);
             mod.origin_type(m.origin_type());
             mod.generation_type(m.generation_type());
-            m.modules().insert(std::make_pair(module_n, mod));
+            m.modules().insert(std::make_pair(n.qualified(), mod));
         }
     }
 }

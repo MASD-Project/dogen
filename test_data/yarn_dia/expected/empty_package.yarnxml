@@ -51,25 +51,7 @@
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="18" tracking_level="0" version="0">
-			<first>
-				<simple>package_1</simple>
-				<qualified>&lt;empty_package&gt;&lt;package_1&gt;</qualified>
-				<location>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>empty_package</item>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
+			<first>&lt;empty_package&gt;&lt;package_1&gt;</first>
 			<second class_id="5" tracking_level="1" version="0" object_id="_0">
 				<element class_id="19" tracking_level="0" version="0">
 					<in_global_module>0</in_global_module>
@@ -114,25 +96,7 @@
 			</second>
 		</item>
 		<item>
-			<first>
-				<simple>empty_package</simple>
-				<qualified>&lt;empty_package&gt;</qualified>
-				<location>
-					<external_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</external_module_path>
-					<model_module_path>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>empty_package</item>
-					</model_module_path>
-					<internal_module_path>
-						<count>0</count>
-						<item_version>0</item_version>
-					</internal_module_path>
-				</location>
-			</first>
+			<first>&lt;empty_package&gt;</first>
 			<second object_id="_1">
 				<element>
 					<in_global_module>0</in_global_module>
