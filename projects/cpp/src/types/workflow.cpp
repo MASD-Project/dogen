@@ -47,18 +47,18 @@ namespace cpp {
 workflow::~workflow() noexcept { }
 
 dynamic::object workflow::obtain_root_object(
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Obtaining model's root object.";
 
-    const auto i(m.modules().find(m.name().qualified()));
-    if (i == m.modules().end()) {
+    const auto i(m.elements().find(m.name().qualified()));
+    if (i == m.elements().end()) {
         const auto qn(m.name().qualified());
         BOOST_LOG_SEV(lg, error) << model_module_not_found << qn;
         BOOST_THROW_EXCEPTION(workflow_error(model_module_not_found + qn));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Obtained model's root object.";
-    return i->second.extensions();
+    return i->second->extensions();
 }
 
 dogen::formatters::repository workflow::create_formatters_repository(
@@ -86,7 +86,7 @@ settings::bundle_repository workflow::create_bundle_repository(
     const dynamic::repository& rp, const dynamic::object& root_object,
     const dogen::formatters::general_settings_factory& gsf,
     const settings::opaque_settings_builder& osb,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
     settings::bundle_repository_factory f;
     return f.make(rp, root_object, gsf, osb, m);
 }
@@ -100,7 +100,7 @@ workflow::create_formattables_activty(
     const formatters::container& fc,
     const settings::opaque_settings_builder& osb,
     const settings::bundle_repository& brp,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
 
     formattables::workflow fw;
     return fw.execute(opts, srp, root_object, gsf, fc, osb, brp, m);
@@ -120,7 +120,7 @@ std::string workflow::name() const {
 
 std::forward_list<boost::filesystem::path>
 workflow::managed_directories(const config::knitting_options& ko,
-    const dynamic::repository& rp, const yarn::intermediate_model& m) const {
+    const dynamic::repository& rp, const yarn::model& m) const {
     const auto ro(obtain_root_object(m));
     settings::directory_names_settings_factory f(rp);
     const auto dn(f.make(ro));
@@ -141,7 +141,7 @@ workflow::ownership_hierarchy() const {
 std::forward_list<dogen::formatters::file>
 workflow::generate(const config::knitting_options& ko,
     const dynamic::repository& rp,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
     const auto dir(dogen::utility::filesystem::data_files_directory());

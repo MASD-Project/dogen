@@ -26,6 +26,11 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/concept.hpp"
+#include "dogen/yarn/types/module.hpp"
+#include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/cpp/types/settings/aspect_settings_factory.hpp"
 #include "dogen/cpp/io/formattables/includers_info_io.hpp"
@@ -57,6 +62,7 @@ const std::string derivatives_not_found_for_formatter(
     "Path derivatives not found for formatter: ");
 const std::string properties_not_found(
     "Formatter properties not found for: ");
+const std::string cast_failure("Failed to cast type: ");
 const std::string empty_formatter_name("Formatter name is empty.");
 const std::string cmake_modeline_name("cmake");
 const std::string odb_modeline_name("odb");
@@ -120,6 +126,32 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
+template<typename YarnConcreteElement>
+inline const YarnConcreteElement& convert(const yarn::element& e) {
+    auto ptr(dynamic_cast<YarnConcreteElement const*>(&e));
+    if (!ptr) {
+        const auto qn(e.name().qualified());
+        BOOST_LOG_SEV(lg, error) << cast_failure << qn;
+        BOOST_THROW_EXCEPTION(building_error(cast_failure + qn));
+    }
+    return *ptr;
+}
+
+template<typename YarnConcreteElement>
+inline bool is(const boost::shared_ptr<yarn::element> e) {
+    auto ptr(boost::dynamic_pointer_cast<YarnConcreteElement>(e));
+    return ptr != nullptr;
+}
+
+template<typename YarnConcreteElement>
+inline bool is(const yarn::model& m, const yarn::name& n) {
+    const auto i(m.elements().find(n.qualified()));
+    if (i == m.elements().end())
+        return false;
+
+    return is<YarnConcreteElement>(i->second);
+}
+
 std::unordered_map<std::string, settings::path_settings>
 factory::clone_path_settings(
     const std::unordered_map<std::string, settings::path_settings>& source,
@@ -146,7 +178,7 @@ yarn::name factory::create_name(const yarn::name& model_name,
 }
 
 path_derivatives factory::create_path_derivatives(
-    const config::cpp_options& opts, const yarn::intermediate_model& m,
+    const config::cpp_options& opts, const yarn::model& m,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const yarn::name& n,
     const std::string& formatter_name) const {
@@ -191,7 +223,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     const settings::bundle_repository& brp,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
 
     const auto n(create_name(m.name(), registrar_name));
     BOOST_LOG_SEV(lg, debug) << "Making registrar: " << n.qualified();
@@ -279,7 +311,7 @@ make_includers(
     const std::forward_list<
     std::shared_ptr<formatters::formatter_interface>>& formatters,
     const formatter_properties_repository& fprp,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
 
     const auto n(create_name(m.name(), includers_name));
     BOOST_LOG_SEV(lg, debug) << "Making includers: " << n.qualified();
@@ -298,10 +330,10 @@ make_includers(
         if (n.location().model_module_path().empty() && n.simple().empty())
             continue;
 
-        if (m.concepts().find(n.qualified()) != m.concepts().end())
+        if (is<yarn::concept>(m, n))
             continue;
 
-        if (m.primitives().find(n.qualified()) != m.primitives().end())
+        if (is<yarn::primitive>(m, n))
             continue;
 
         for (const auto& fmt_pair : n_pair.second) {
@@ -313,21 +345,22 @@ make_includers(
 
             const auto is_types(boost::starts_with(fn, "cpp.types."));
             if (!is_types) {
-                const auto j(m.objects().find(n.qualified()));
-                using yarn::object_types;
-                if (j  != m.objects().end()) {
-                    const auto ot(j->second.object_type());
+                const auto j(m.elements().find(n.qualified()));
+                if (j  != m.elements().end() && is<yarn::object>(j->second)) {
+                    const auto& o(convert<yarn::object>(*j->second));
+                    const auto ot(o.object_type());
+                    using yarn::object_types;
                     if (ot != object_types::user_defined_value_object)
                         continue;
                 }
 
-                const auto i(m.modules().find(n.qualified()));
-                if (i != m.modules().end())
-                        continue;
+                if (is<yarn::module>(m, n))
+                    continue;
             } else {
-                const auto i(m.modules().find(n.qualified()));
-                if (i != m.modules().end()) {
-                    if (i->second.documentation().empty())
+                const auto i(m.elements().find(n.qualified()));
+                if (i != m.elements().end()) {
+                    const bool is_module(is<yarn::module>(i->second));
+                    if (is_module && i->second->documentation().empty())
                         continue;
                 }
             }
@@ -399,7 +432,7 @@ make_cmakelists(const config::cpp_options& opts,
     const dogen::formatters::general_settings_factory& gsf,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
-    const yarn::intermediate_model& m) const
+    const yarn::model& m) const
 {
     std::forward_list<std::shared_ptr<formattable> > r;
     if (opts.disable_cmakelists()) {
@@ -461,7 +494,7 @@ factory::make_odb_options(const config::cpp_options& opts,
     const dogen::formatters::general_settings_factory& gsf,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
 
     using namespace formatters::odb;
     const auto ch_fn(traits::class_header_formatter_name());

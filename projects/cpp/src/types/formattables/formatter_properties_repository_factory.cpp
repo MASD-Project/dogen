@@ -57,7 +57,7 @@ create_inclusion_directives_repository(
     const dynamic::repository& srp,
     const formatters::container& fc,
     const path_derivatives_repository& pdrp,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
     inclusion_directives_repository_factory f;
     return f.make(srp, fc, pdrp, m);
 }
@@ -65,7 +65,7 @@ create_inclusion_directives_repository(
 inclusion_dependencies_repository formatter_properties_repository_factory::
 create_inclusion_dependencies_repository(
     const inclusion_dependencies_builder_factory& bf,
-    const container& pc, const yarn::intermediate_model& m) const {
+    const container& pc, const yarn::model& m) const {
     inclusion_dependencies_repository_factory f;
     return f.make(bf, pc, m);
 }
@@ -73,7 +73,7 @@ create_inclusion_dependencies_repository(
 enablement_repository formatter_properties_repository_factory::
 create_enablement_repository(const dynamic::repository& srp,
     const dynamic::object& root_object, const formatters::container& fc,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
     enablement_repository_factory f;
     return f.make(srp, root_object, fc, m);
 }
@@ -130,7 +130,7 @@ formatter_properties_repository formatter_properties_repository_factory::
 make(const dynamic::repository& srp, const dynamic::object& root_object,
     const settings::bundle_repository& brp,
     const path_derivatives_repository& pdrp, const formatters::container& fc,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Building formatter properties repository.";
     const auto idrp(create_inclusion_directives_repository(srp, fc, pdrp, m));

@@ -21,7 +21,12 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/elements_traversal.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/types/concept.hpp"
+#include "dogen/yarn/types/module.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/cpp/io/settings/bundle_repository_io.hpp"
 #include "dogen/cpp/types/settings/bundle_factory.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
@@ -46,7 +51,7 @@ namespace {
 /**
  * @brief Generates all inclusion dependencies.
  */
-class generator final {
+class generator final : public yarn::element_visitor {
 public:
     explicit generator(const bundle_factory& f) : factory_(f) {}
 
@@ -72,11 +77,12 @@ private:
     }
 
 public:
-    void operator()(const dogen::yarn::object& o) { generate(o); }
-    void operator()(const dogen::yarn::enumeration& e) { generate(e); }
-    void operator()(const dogen::yarn::primitive& p) { generate(p); }
-    void operator()(const dogen::yarn::module& m) { generate(m); }
-    void operator()(const dogen::yarn::concept& c) { generate(c); }
+    using yarn::element_visitor::visit;
+    void visit(const dogen::yarn::object& o) { generate(o); }
+    void visit(const dogen::yarn::enumeration& e) { generate(e); }
+    void visit(const dogen::yarn::primitive& p) { generate(p); }
+    void visit(const dogen::yarn::module& m) { generate(m); }
+    void visit(const dogen::yarn::concept& c) { generate(c); }
 
 public:
     const bundle_repository& result() const { return result_; }
@@ -92,13 +98,16 @@ bundle_repository bundle_repository_factory::
 make(const dynamic::repository& rp, const dynamic::object& root_object,
     const dogen::formatters::general_settings_factory& gsf,
     const opaque_settings_builder& osb,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating settings bundle repository.";
 
     const bundle_factory f(rp, root_object, gsf, osb);
     generator g(f);
-    yarn::elements_traversal(m, g);
+    for (const auto& pair : m.elements()) {
+        const auto& e(*pair.second);
+        e.accept(g);
+    }
     auto r(g.result());
 
     // FIXME: hack to handle registars.

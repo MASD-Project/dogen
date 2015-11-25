@@ -31,7 +31,7 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/config/types/cpp_options.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/model.hpp"
 #include "dogen/cpp/types/settings/bundle_repository.hpp"
 #include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
@@ -64,7 +64,7 @@ private:
     path_derivatives_repository create_path_derivatives_repository(
         const config::cpp_options& opts,
         const std::unordered_map<std::string, settings::path_settings>& ps,
-        const yarn::intermediate_model& m) const;
+        const yarn::model& m) const;
 
     /**
      * @brief Creates the formatter properties.
@@ -75,7 +75,7 @@ private:
         const settings::bundle_repository& brp,
         const path_derivatives_repository& pdrp,
         const formatters::container& fc,
-        const yarn::intermediate_model& m) const;
+        const yarn::model& m) const;
 
     /**
      * @brief Generates all of the formattables that are sourced from
@@ -85,7 +85,7 @@ private:
     from_transformer_activity(const settings::opaque_settings_builder& osb,
         const settings::bundle_repository& brp,
         const formatter_properties_repository& fprp,
-        const yarn::intermediate_model& m) const;
+        const yarn::model& m) const;
 
     /**
      * @brief Generates all of the formattables that are sourced from
@@ -101,7 +101,7 @@ private:
         const formattables::path_derivatives_repository& pdrp,
         const formatter_properties_repository& fprp,
         const formatters::container& fc,
-        const yarn::intermediate_model& m) const;
+        const yarn::model& m) const;
 
 public:
     /**
@@ -115,7 +115,7 @@ public:
         const formatters::container& fc,
         const settings::opaque_settings_builder& osb,
         const settings::bundle_repository& brp,
-        const yarn::intermediate_model& m) const;
+        const yarn::model& m) const;
 };
 
 } } }

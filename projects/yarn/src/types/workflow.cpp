@@ -19,10 +19,11 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/io/intermediate_model_io.hpp"
+#include "dogen/yarn/io/model_io.hpp"
 #include "dogen/yarn/types/frontend_workflow.hpp"
 #include "dogen/yarn/types/expander.hpp"
 #include "dogen/yarn/types/assembler.hpp"
+#include "dogen/yarn/types/transformer.hpp"
 #include "dogen/yarn/types/workflow.hpp"
 
 namespace {
@@ -55,12 +56,19 @@ intermediate_model workflow::assemble_intermediate_models_activity(
     return a.assemble(m);
 }
 
-intermediate_model workflow::execute(const dynamic::repository& rp,
-    const std::list<input_descriptor>& id) const {
+model workflow::transform_intermediate_model_activity(
+    const intermediate_model& m) const {
+    transformer t;
+    return t.transform(m);
+}
 
+model workflow::execute(const dynamic::repository& rp,
+    const std::list<input_descriptor>& id) const {
     auto im(obtain_intermediate_models_activity(rp, id));
     expand_intermediate_models_activity(im);
-    const auto r(assemble_intermediate_models_activity(im));
+    const auto m(assemble_intermediate_models_activity(im));
+    const auto r(transform_intermediate_model_activity(m));
+
     BOOST_LOG_SEV(lg, debug) << "Final model: " << r;
     return r;
 }

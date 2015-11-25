@@ -33,7 +33,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/config/types/knitting_options.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/input_descriptor.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/formatters/types/file_writer_interface.hpp"
@@ -111,7 +111,7 @@ private:
     /**
      * @brief Obtain the yarn model.
      */
-    yarn::intermediate_model obtain_yarn_model_activity(
+    yarn::model obtain_yarn_model_activity(
         const dynamic::repository& rp,
         const std::list<yarn::input_descriptor>& id) const;
 

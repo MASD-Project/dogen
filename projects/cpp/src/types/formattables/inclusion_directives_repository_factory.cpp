@@ -23,9 +23,13 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/pair_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/concept.hpp"
+#include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/elements_traversal.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/io/formattables/inclusion_directives_repository_io.hpp"
 #include "dogen/cpp/types/settings/inclusion_directives_settings_factory.hpp"
@@ -52,7 +56,7 @@ namespace {
 /**
  * @brief Generates all inclusion directives.
  */
-class generator {
+class generator final : public yarn::element_visitor {
 public:
     generator(const inclusion_directives_factory& f) : factory_(f) { }
 
@@ -83,11 +87,12 @@ private:
     }
 
 public:
-    void operator()(const dogen::yarn::object& o) { generate(o); }
-    void operator()(const dogen::yarn::enumeration& e) { generate(e); }
-    void operator()(const dogen::yarn::primitive& p) { generate(p); }
-    void operator()(const dogen::yarn::module& m) { generate(m); }
-    void operator()(const dogen::yarn::concept& c) { generate(c); }
+    using yarn::element_visitor::visit;
+    void visit(const dogen::yarn::object& o) { generate(o); }
+    void visit(const dogen::yarn::enumeration& e) { generate(e); }
+    void visit(const dogen::yarn::primitive& p) { generate(p); }
+    void visit(const dogen::yarn::module& m) { generate(m); }
+    void visit(const dogen::yarn::concept& c) { generate(c); }
 
 public:
     const inclusion_directives_repository& result() const { return result_; }
@@ -103,13 +108,16 @@ inclusion_directives_repository inclusion_directives_repository_factory::make(
     const dynamic::repository& srp,
     const formatters::container& fc,
     const path_derivatives_repository& pdrp,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Making inclusion directives repository.";
 
     const inclusion_directives_factory f(srp, fc, pdrp);
     generator g(f);
-    yarn::elements_traversal(m, g);
+    for (const auto& pair : m.elements()) {
+        const auto& e(*pair.second);
+        e.accept(g);
+    }
 
     yarn::name_factory nf;
     const auto n(nf.build_element_in_model(m.name(), registrar_name));

@@ -77,6 +77,7 @@ std::size_t model_hasher::hash(const model& v) {
     combine(seed, hash_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(v.references()));
     combine(seed, hash_std_unordered_set_dogen_yarn_name(v.leaves()));
     combine(seed, v.root_module());
+    combine(seed, v.has_generatable_types());
 
     return seed;
 }

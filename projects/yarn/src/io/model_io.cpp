@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/model_io.hpp"
@@ -103,13 +104,20 @@ namespace dogen {
 namespace yarn {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::model\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"elements\": " << v.elements() << ", "
       << "\"references\": " << v.references() << ", "
       << "\"leaves\": " << v.leaves() << ", "
-      << "\"root_module\": " << v.root_module()
+      << "\"root_module\": " << v.root_module() << ", "
+      << "\"has_generatable_types\": " << v.has_generatable_types()
       << " }";
     return(s);
 }

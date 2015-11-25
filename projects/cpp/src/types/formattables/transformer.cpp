@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/pointer_cast.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
@@ -95,6 +96,7 @@ const std::string formatter_properties_missing(
     "Could not find formatter properties for type: ");
 const std::string settings_bundle_missing(
     "Could not find settings bundle for type: ");
+const std::string cast_failure("Failed to cast type: ");
 
 bool is_char_like(const std::string& type_name) {
     return
@@ -180,10 +182,35 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
+template<typename YarnConcreteElement>
+inline const YarnConcreteElement& convert(const yarn::element& e) {
+    auto ptr(dynamic_cast<YarnConcreteElement const*>(&e));
+    if (!ptr) {
+        const auto qn(e.name().qualified());
+        BOOST_LOG_SEV(lg, error) << cast_failure << qn;
+        BOOST_THROW_EXCEPTION(transformation_error(cast_failure + qn));
+    }
+    return *ptr;
+}
+
+template<typename YarnConcreteElement>
+inline bool is(const boost::shared_ptr<yarn::element> e) {
+    auto ptr(boost::dynamic_pointer_cast<YarnConcreteElement>(e));
+    return ptr != nullptr;
+}
+
+template<typename YarnConcreteElement>
+inline bool is(const yarn::model& m, const yarn::name& n) {
+    const auto i(m.elements().find(n.qualified()));
+    if (i == m.elements().end())
+        return false;
+    return is<YarnConcreteElement>(i->second);
+}
+
 transformer::transformer(const settings::opaque_settings_builder& osb,
     const settings::bundle_repository& brp,
     const formatter_properties_repository& frp,
-    const yarn::intermediate_model& m)
+    const yarn::model& m)
     : opaque_settings_builder_(osb), bundle_repository_(brp),
       formatter_properties_repository_(frp), model_(m) {}
 
@@ -240,14 +267,8 @@ void transformer::to_nested_type_info(const yarn::nested_name& nn,
     const auto qualified_name(b.qualified_name(model_, n));
     nti.name(qualified_name);
     nti.namespaces(b.namespace_list(model_, n));
-
-    const auto i(model_.enumerations().find(n.qualified()));
-    const bool is_enumeration(i != model_.enumerations().end());
-    nti.is_enumeration(is_enumeration);
-
-    const auto j(model_.primitives().find(n.qualified()));
-    const bool is_primitive(j != model_.primitives().end());
-    nti.is_primitive(is_primitive);
+    nti.is_enumeration(is<yarn::enumeration>(model_, n));
+    nti.is_primitive(is<yarn::primitive>(model_, n));
 
     if (nti.is_primitive()) {
         if (::requires_stream_manipulators(nti.name()))
@@ -266,9 +287,10 @@ void transformer::to_nested_type_info(const yarn::nested_name& nn,
     nti.is_time_duration(is_time_duration(nti.name()));
     nti.is_ptree(is_ptree(nti.name()));
 
-    const auto k(model_.objects().find(n.qualified()));
-    if (k != model_.objects().end()) {
-        const auto ot(k->second.object_type());
+    const auto k(model_.elements().find(n.qualified()));
+    if (k != model_.elements().end() && is<yarn::object>(k->second)) {
+        const auto& o(convert<yarn::object>(*k->second));
+        const auto ot(o.object_type());
         using yarn::object_types;
         nti.is_sequence_container(ot == object_types::sequence_container);
         nti.is_associative_container(ot == object_types::ordered_container ||

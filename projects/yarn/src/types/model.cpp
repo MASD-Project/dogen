@@ -33,17 +33,22 @@ const boost::shared_ptr<dogen::yarn::element>& rhs) {
 namespace dogen {
 namespace yarn {
 
+model::model()
+    : has_generatable_types_(static_cast<bool>(0)) { }
+
 model::model(
     const dogen::yarn::name& name,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& elements,
     const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& references,
     const std::unordered_set<dogen::yarn::name>& leaves,
-    const dogen::yarn::module& root_module)
+    const dogen::yarn::module& root_module,
+    const bool has_generatable_types)
     : name_(name),
       elements_(elements),
       references_(references),
       leaves_(leaves),
-      root_module_(root_module) { }
+      root_module_(root_module),
+      has_generatable_types_(has_generatable_types) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -52,6 +57,7 @@ void model::swap(model& other) noexcept {
     swap(references_, other.references_);
     swap(leaves_, other.leaves_);
     swap(root_module_, other.root_module_);
+    swap(has_generatable_types_, other.has_generatable_types_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -59,7 +65,8 @@ bool model::operator==(const model& rhs) const {
         elements_ == rhs.elements_ &&
         references_ == rhs.references_ &&
         leaves_ == rhs.leaves_ &&
-        root_module_ == rhs.root_module_;
+        root_module_ == rhs.root_module_ &&
+        has_generatable_types_ == rhs.has_generatable_types_;
 }
 
 model& model::operator=(model other) {
@@ -146,6 +153,14 @@ void model::root_module(const dogen::yarn::module& v) {
 
 void model::root_module(const dogen::yarn::module&& v) {
     root_module_ = std::move(v);
+}
+
+bool model::has_generatable_types() const {
+    return has_generatable_types_;
+}
+
+void model::has_generatable_types(const bool v) {
+    has_generatable_types_ = v;
 }
 
 } }

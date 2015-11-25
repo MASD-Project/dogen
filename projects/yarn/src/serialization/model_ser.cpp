@@ -49,6 +49,7 @@ void save(Archive& ar,
     ar << make_nvp("references", v.references_);
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("root_module", v.root_module_);
+    ar << make_nvp("has_generatable_types", v.has_generatable_types_);
 }
 
 template<typename Archive>
@@ -60,6 +61,7 @@ void load(Archive& ar,
     ar >> make_nvp("references", v.references_);
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("root_module", v.root_module_);
+    ar >> make_nvp("has_generatable_types", v.has_generatable_types_);
 }
 
 } }

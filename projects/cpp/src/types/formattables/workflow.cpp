@@ -24,7 +24,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/memory_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
-#include "dogen/yarn/types/elements_traversal.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/cpp/types/settings/path_settings_factory.hpp"
 #include "dogen/cpp/types/formattables/factory.hpp"
 #include "dogen/cpp/types/formattables/transformer.hpp"
@@ -50,7 +50,7 @@ namespace {
 /**
  * @brief Generates the formattables.
  */
-class generator {
+class generator final : public yarn::element_visitor {
 public:
     explicit generator(const transformer& t) : transformer_(t) { }
 
@@ -71,11 +71,12 @@ private:
     }
 
 public:
-    void operator()(const dogen::yarn::object& o) { transform(o); }
-    void operator()(const dogen::yarn::enumeration& e) { transform(e); }
-    void operator()(const dogen::yarn::primitive& p) { transform(p); }
-    void operator()(const dogen::yarn::module& m) { transform(m); }
-    void operator()(const dogen::yarn::concept& c) { transform(c); }
+    using yarn::element_visitor::visit;
+    void visit(const dogen::yarn::object& o) { transform(o); }
+    void visit(const dogen::yarn::enumeration& e) { transform(e); }
+    void visit(const dogen::yarn::primitive& p) { transform(p); }
+    void visit(const dogen::yarn::module& m) { transform(m); }
+    void visit(const dogen::yarn::concept& c) { transform(c); }
 
 public:
     const std::forward_list<std::shared_ptr<formattables::formattable> >&
@@ -103,7 +104,7 @@ workflow::create_path_settings_activity(const dynamic::repository& srp,
 path_derivatives_repository workflow::
 create_path_derivatives_repository(const config::cpp_options& opts,
     const std::unordered_map<std::string, settings::path_settings>& ps,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
     path_derivatives_repository_factory f;
     return f.make(opts, ps, m);
 }
@@ -114,7 +115,7 @@ create_formatter_properties(const dynamic::repository& srp,
     const settings::bundle_repository& brp,
     const path_derivatives_repository& pdrp,
     const formatters::container& fc,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
 
     formatter_properties_repository_factory f;
     return f.make(srp, root_object, brp, pdrp, fc, m);
@@ -125,12 +126,15 @@ workflow::from_transformer_activity(
     const settings::opaque_settings_builder& osb,
     const settings::bundle_repository& brp,
     const formatter_properties_repository& fprp,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming formattables.";
 
     const transformer t(osb, brp, fprp, m);
     generator g(t);
-    elements_traversal(m, g);
+    for (const auto& pair : m.elements()) {
+        const auto& e(*pair.second);
+        e.accept(g);
+    }
 
     BOOST_LOG_SEV(lg, debug) << "Finished transforming formattables.";
     return g.result();
@@ -146,7 +150,7 @@ workflow::from_factory_activity(const config::cpp_options& opts,
     const formattables::path_derivatives_repository& pdrp,
     const formatter_properties_repository& fprp,
     const formatters::container& fc,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
 
     const auto& formatters(fc.all_formatters());
     std::forward_list<std::shared_ptr<formattables::formattable> > r;
@@ -177,7 +181,7 @@ workflow::execute(const config::cpp_options& opts,
     const formatters::container& fc,
     const settings::opaque_settings_builder& osb,
     const settings::bundle_repository& brp,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started creating formattables.";
 
     const auto& ro(root_object);

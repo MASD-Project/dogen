@@ -20,9 +20,14 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/types/concept.hpp"
+#include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/elements_traversal.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/io/formattables/path_derivatives_repository_io.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_factory.hpp"
@@ -48,7 +53,7 @@ namespace {
 /**
  * @brief Generates all path derivatives.
  */
-class generator {
+class generator final : public yarn::element_visitor {
 public:
     generator(const path_derivatives_factory& f) : factory_(f) { }
 
@@ -60,11 +65,12 @@ public:
     void generate(const yarn::name& n);
 
 public:
-    void operator()(const dogen::yarn::object& o) { generate(o.name()); }
-    void operator()(const dogen::yarn::enumeration& e) { generate(e.name()); }
-    void operator()(const dogen::yarn::primitive& p) { generate(p.name()); }
-    void operator()(const dogen::yarn::module& m) { generate(m.name()); }
-    void operator()(const dogen::yarn::concept& c) { generate(c.name()); }
+    using yarn::element_visitor::visit;
+    void visit(const dogen::yarn::object& o) { generate(o.name()); }
+    void visit(const dogen::yarn::enumeration& e) { generate(e.name()); }
+    void visit(const dogen::yarn::primitive& p) { generate(p.name()); }
+    void visit(const dogen::yarn::module& m) { generate(m.name()); }
+    void visit(const dogen::yarn::concept& c) { generate(c.name()); }
 
 public:
     const path_derivatives_repository & result() const { return result_; }
@@ -91,12 +97,15 @@ void generator::generate(const yarn::name& n) {
 path_derivatives_repository path_derivatives_repository_factory::make(
     const config::cpp_options& opts,
     const std::unordered_map<std::string, settings::path_settings>& ps,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
     const path_derivatives_factory f(opts, m, ps);
     generator g(f);
-    yarn::elements_traversal(m, g);
+    for (const auto& pair : m.elements()) {
+        const auto& e(*pair.second);
+        e.accept(g);
+    }
 
     yarn::name_factory nf;
     const auto n(nf.build_element_in_model(m.name(), registrar_name));

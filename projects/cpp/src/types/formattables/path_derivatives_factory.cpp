@@ -47,8 +47,14 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
+template<typename YarnConcreteElement>
+inline bool is(const boost::shared_ptr<yarn::element> e) {
+    auto ptr(boost::dynamic_pointer_cast<YarnConcreteElement>(e));
+    return ptr != nullptr;
+}
+
 path_derivatives_factory::path_derivatives_factory(
-    const config::cpp_options& opts, const yarn::intermediate_model& m,
+    const config::cpp_options& opts, const yarn::model& m,
     const std::unordered_map<std::string, settings::path_settings>& ps)
     : options_(opts), model_(m), path_settings_(ps) { }
 
@@ -84,8 +90,8 @@ make_inclusion_path(const settings::path_settings& ps,
      * names to the directories.
      */
     if (n != model_.name()) {
-        const auto i(model_.modules().find(n.qualified()));
-        if (i != model_.modules().end())
+        const auto i(model_.elements().find(n.qualified()));
+        if (i != model_.elements().end() && is<yarn::module>(i->second))
             r /= n.simple();
     }
 

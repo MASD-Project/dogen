@@ -27,7 +27,7 @@
 
 #include <memory>
 #include <forward_list>
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/model.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
@@ -57,7 +57,7 @@ private:
 
     path_derivatives create_path_derivatives(
         const config::cpp_options& opts,
-        const yarn::intermediate_model& m,
+        const yarn::model& m,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const yarn::name& n,
         const std::string& formatter_name) const;
@@ -74,7 +74,7 @@ public:
         const settings::bundle_repository& brp,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const formatter_properties_repository& fprp,
-        const yarn::intermediate_model& m) const;
+        const yarn::model& m) const;
 
     std::forward_list<std::shared_ptr<formattable> > make_includers(
         const config::cpp_options& opts,
@@ -85,7 +85,7 @@ public:
         const std::forward_list<
         std::shared_ptr<formatters::formatter_interface>>& formatters,
         const formatter_properties_repository& fprp,
-        const yarn::intermediate_model& m) const;
+        const yarn::model& m) const;
 
     std::forward_list<std::shared_ptr<formattable> > make_cmakelists(
         const config::cpp_options& opts,
@@ -93,7 +93,7 @@ public:
         const dogen::formatters::general_settings_factory& gsf,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const formatter_properties_repository& fprp,
-        const yarn::intermediate_model& m) const;
+        const yarn::model& m) const;
 
     std::shared_ptr<formattable> make_odb_options(
         const config::cpp_options& opts,
@@ -101,7 +101,7 @@ public:
         const dogen::formatters::general_settings_factory& gsf,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const formatter_properties_repository& fprp,
-        const yarn::intermediate_model& m) const;
+        const yarn::model& m) const;
 };
 
 } } }

@@ -28,7 +28,7 @@
 #include <unordered_map>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/model.hpp"
 #include "dogen/cpp/types/settings/bundle_repository.hpp"
 #include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
@@ -49,7 +49,7 @@ public:
         const dynamic::object& root_object,
         const dogen::formatters::general_settings_factory& gsf,
         const opaque_settings_builder& osb,
-        const yarn::intermediate_model& m) const;
+        const yarn::model& m) const;
 };
 
 } } }

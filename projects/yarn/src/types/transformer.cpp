@@ -42,6 +42,9 @@ namespace {
 
 class generator {
 public:
+    explicit generator(model& m) : result_(m) { }
+
+private:
     template<typename Element>
     void generate(const Element& e) {
         const auto qn(e.name().qualified());
@@ -65,7 +68,7 @@ public:
     const model& result() const { return result_; }
 
 private:
-    model result_;
+    model& result_;
 };
 
 }
@@ -79,12 +82,15 @@ model transformer::transform(const intermediate_model& m) const {
     }
 
     model r;
+    r.name(m.name());
     r.root_module(i->second);
     r.leaves(m.leaves());
     r.references(m.references());
+    r.has_generatable_types(m.has_generatable_types());
 
-    generator g;
+    generator g(r);
     yarn::elements_traversal(m, g);
+
     return r;
 }
 

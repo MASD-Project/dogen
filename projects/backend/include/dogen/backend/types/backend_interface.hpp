@@ -30,7 +30,7 @@
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/model.hpp"
 #include "dogen/formatters/types/file.hpp"
 
 namespace dogen {
@@ -59,7 +59,7 @@ public:
     virtual std::forward_list<boost::filesystem::path>
     managed_directories(const config::knitting_options& ko,
         const dynamic::repository& rp,
-        const yarn::intermediate_model& m) const = 0;
+        const yarn::model& m) const = 0;
 
     /**
      * @brief Complete ownership hierarchy for this backend, listing
@@ -77,7 +77,7 @@ public:
     virtual std::forward_list<formatters::file> generate(
         const config::knitting_options& ko,
         const dynamic::repository& rp,
-        const yarn::intermediate_model& m) const = 0;
+        const yarn::model& m) const = 0;
 };
 
 } }

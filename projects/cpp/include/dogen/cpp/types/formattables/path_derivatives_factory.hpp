@@ -30,7 +30,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/model.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives.hpp"
 
@@ -45,7 +45,7 @@ class path_derivatives_factory {
 public:
     path_derivatives_factory(
         const config::cpp_options& opts,
-        const yarn::intermediate_model& m,
+        const yarn::model& m,
         const std::unordered_map<std::string, settings::path_settings>& ps);
 
 private:
@@ -84,7 +84,7 @@ public:
 
 private:
     const config::cpp_options& options_;
-    const yarn::intermediate_model& model_;
+    const yarn::model& model_;
     const std::unordered_map<std::string, settings::path_settings>&
     path_settings_;
 };

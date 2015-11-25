@@ -84,6 +84,10 @@ create_dogen_yarn_module(const unsigned int position) {
     return dogen::yarn::module_generator::create(position);
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 }
 
 namespace dogen {
@@ -98,6 +102,7 @@ populate(const unsigned int position, result_type& v) {
     v.references(create_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(position + 2));
     v.leaves(create_std_unordered_set_dogen_yarn_name(position + 3));
     v.root_module(create_dogen_yarn_module(position + 4));
+    v.has_generatable_types(create_bool(position + 5));
 }
 
 model_generator::result_type

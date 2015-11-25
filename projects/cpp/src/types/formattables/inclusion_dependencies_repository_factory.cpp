@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/elements_traversal.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_factory.hpp"
 #include "dogen/cpp/io/formattables/inclusion_dependencies_repository_io.hpp"
@@ -47,7 +47,7 @@ namespace {
 /**
  * @brief Generates all inclusion dependencies.
  */
-class generator final {
+class generator final : public yarn::element_visitor {
 public:
     explicit generator(const inclusion_dependencies_factory& f) : factory_(f) {}
 
@@ -85,11 +85,12 @@ private:
     }
 
 public:
-    void operator()(const dogen::yarn::object& o) { generate(o); }
-    void operator()(const dogen::yarn::enumeration& e) { generate(e); }
-    void operator()(const dogen::yarn::primitive& p) { generate(p); }
-    void operator()(const dogen::yarn::module& m) { generate(m); }
-    void operator()(const dogen::yarn::concept& c) { generate(c); }
+    using yarn::element_visitor::visit;
+    void visit(const dogen::yarn::object& o) { generate(o); }
+    void visit(const dogen::yarn::enumeration& e) { generate(e); }
+    void visit(const dogen::yarn::primitive& p) { generate(p); }
+    void visit(const dogen::yarn::module& m) { generate(m); }
+    void visit(const dogen::yarn::concept& c) { generate(c); }
 
 public:
     const inclusion_dependencies_repository& result() const { return result_; }
@@ -103,13 +104,16 @@ private:
 
 inclusion_dependencies_repository inclusion_dependencies_repository_factory::
 make(const inclusion_dependencies_builder_factory& bf, const container& c,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating inclusion dependencies.";
 
     const inclusion_dependencies_factory idf(bf, c);
     generator g(idf);
-    yarn::elements_traversal(m, g);
+    for (const auto& pair : m.elements()) {
+        const auto& e(*pair.second);
+        e.accept(g);
+    }
 
     yarn::name_factory nf;
     const auto n(nf.build_element_in_model(m.name(), registrar_name));

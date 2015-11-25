@@ -28,7 +28,7 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/model.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_repository.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository.hpp"
@@ -49,7 +49,7 @@ public:
         const dynamic::repository& srp,
         const formatters::container& fc,
         const path_derivatives_repository& pdrp,
-        const yarn::intermediate_model& m) const;
+        const yarn::model& m) const;
 };
 
 } } }

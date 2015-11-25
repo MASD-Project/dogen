@@ -29,7 +29,7 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/concept.hpp"
@@ -85,7 +85,7 @@ public:
      * @brief Makes inclusion dependencies for a model.
      */
     std::unordered_map<std::string, std::list<std::string> >
-    make(const yarn::intermediate_model& m) const;
+    make(const yarn::model& m) const;
 
 private:
     const inclusion_dependencies_builder_factory& factory_;

@@ -15,16 +15,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-25 Wed 13:03]
+#+CAPTION: Clock summary at [2015-11-25 Wed 23:15]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *3:22* |      |      |
+| *Total time*                                                                | *5:26* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 3:22   |      |      |
-| Active                                                                      |        | 3:22 |      |
+| Stories                                                                     | 5:26   |      |      |
+| Active                                                                      |        | 5:26 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:17 |
 | COMPLETED Use qualified name as the key of the intermediate model container |        |      | 3:05 |
+| COMPLETED Use the single element container model in =cpp=                   |        |      | 2:04 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -52,39 +53,16 @@ Notes:
 - we are not performing containment correctly for types inside a
   package (e.g. =shape_types=).
 
-*** Remove =is_root_parent_visitable=                                 :story:
+*** COMPLETED Use the single element container model in =cpp=         :story:
+    CLOSED: [2015-11-25 Wed 23:15]
+    CLOCK: [2015-11-25 Wed 21:11]--[2015-11-25 Wed 23:15] =>  2:04
 
-We should just use the =visits=, =visited_by=, etc relationships. The
-existing flag will break with multiple inheritance.
+We have implemented a single element container in yarn but its not yet
+being used. We need to:
 
-*** Remove =service= stereotype                                       :story:
-
-This really just means non-generatable, or do not generate. We already
-have a stereotype for this. Remove =service= and any other stereotype
-which is not being used such as =value_object= etc.
-
-Actually, non-generatable is not a stereotype really. We should
-instead have some meta-data that can affect generation:
-
-- do not generate: do nothing at all. For references only. If a file
-  exists with this file name, it will be deleted as part of
-  housekeeping.
-- generate blank file if it doesn't exist: we don't even want a
-  template.
-- generate with content if it doesn't exist, do not touch otherwise:
-  what we call services at the moment. Generate a "template" that then
-  gets filled in manually.
-- generate and merge: merge the contents of the generated file with
-  the current contents in the file system. When we support merging.
-- generate and overwrite: generate the file and overwrite whatever
-  exists in the file system.
-
-The second behaviour we get for free with services is that we disable
-all facets except for types. A few points:
-
-- we may want to have io, serialisation, etc. This is not possible at
-  present. If all state of a service is of supported types, we could
-  even use existing code generation.
+- update yarn workflow to return this model instead of intermediate
+  model;
+ replace all usages of intermediate model in =cpp= with this model.
 
 *** Refactor code around model origination                            :story:
 
@@ -138,6 +116,40 @@ We need a good name for these. Candidates:
 
 - proxy model: represents something that exists in the outside
   world. e.g. =is_proxy=.
+
+*** Remove =is_root_parent_visitable=                                 :story:
+
+We should just use the =visits=, =visited_by=, etc relationships. The
+existing flag will break with multiple inheritance.
+
+*** Remove =service= stereotype                                       :story:
+
+This really just means non-generatable, or do not generate. We already
+have a stereotype for this. Remove =service= and any other stereotype
+which is not being used such as =value_object= etc.
+
+Actually, non-generatable is not a stereotype really. We should
+instead have some meta-data that can affect generation:
+
+- do not generate: do nothing at all. For references only. If a file
+  exists with this file name, it will be deleted as part of
+  housekeeping.
+- generate blank file if it doesn't exist: we don't even want a
+  template.
+- generate with content if it doesn't exist, do not touch otherwise:
+  what we call services at the moment. Generate a "template" that then
+  gets filled in manually.
+- generate and merge: merge the contents of the generated file with
+  the current contents in the file system. When we support merging.
+- generate and overwrite: generate the file and overwrite whatever
+  exists in the file system.
+
+The second behaviour we get for free with services is that we disable
+all facets except for types. A few points:
+
+- we may want to have io, serialisation, etc. This is not possible at
+  present. If all state of a service is of supported types, we could
+  even use existing code generation.
 
 *** Add support for composite model names in name                     :story:
 
@@ -200,15 +212,6 @@ Idea:
 package contributes to the namespaces. The model name is unpacked into
 multiple model packages (e.g. "a.b" => a::b). The file name uses the
 model name, not the model package.
-
-*** Use the single element container model in =cpp=                   :story:
-
-We have implemented a single element container in yarn but its not yet
-being used. We need to:
-
-- update yarn workflow to return this model instead of intermediate
-  model;
- replace all usages of intermediate model in =cpp= with this model.
 
 *** Add =interface= stereotype                                        :story:
 

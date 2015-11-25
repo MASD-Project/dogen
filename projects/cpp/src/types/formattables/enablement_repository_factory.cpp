@@ -23,8 +23,12 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/repository_selector.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/concept.hpp"
+#include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/io/formattables/enablement_repository_io.hpp"
 #include "dogen/cpp/io/formattables/global_enablement_properties_io.hpp"
@@ -52,7 +56,7 @@ namespace {
 /**
  * @brief Generates all inclusion dependencies.
  */
-class generator final {
+class generator final : public yarn::element_visitor {
 public:
     explicit generator(const enablement_factory& f) : factory_(f) {}
 
@@ -64,15 +68,16 @@ private:
     }
 
 public:
-    void operator()(const dogen::yarn::object& o) {
+    using yarn::element_visitor::visit;
+    void visit(const dogen::yarn::object& o) {
         const auto is_service(o.object_type() ==
             yarn::object_types::user_defined_service);
         generate(o, is_service);
     }
-    void operator()(const dogen::yarn::enumeration& e) { generate(e); }
-    void operator()(const dogen::yarn::primitive& p) { generate(p); }
-    void operator()(const dogen::yarn::module& m) { generate(m); }
-    void operator()(const dogen::yarn::concept& c) { generate(c); }
+    void visit(const dogen::yarn::enumeration& e) { generate(e); }
+    void visit(const dogen::yarn::primitive& p) { generate(p); }
+    void visit(const dogen::yarn::module& m) { generate(m); }
+    void visit(const dogen::yarn::concept& c) { generate(c); }
 
 public:
     const enablement_repository& result() const { return result_; }
@@ -137,7 +142,7 @@ enablement_repository enablement_repository_factory::make(
     const dynamic::repository& rp,
     const dynamic::object& root_object,
     const formatters::container& fc,
-    const yarn::intermediate_model& m) const {
+    const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started computing enablement.";
 
@@ -145,7 +150,10 @@ enablement_repository enablement_repository_factory::make(
     const auto gep(obtain_global_properties(fd, root_object));
     const enablement_factory f(rp, fc, gep);
     generator g(f);
-    yarn::elements_traversal(m, g);
+    for (const auto& pair : m.elements()) {
+        const auto& e(*pair.second);
+        e.accept(g);
+    }
     auto r(g.result());
 
     yarn::name_factory nf;

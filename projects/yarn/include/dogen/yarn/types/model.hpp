@@ -45,10 +45,12 @@ namespace yarn {
  */
 class model final {
 public:
-    model() = default;
     model(const model&) = default;
     model(model&&) = default;
     ~model() = default;
+
+public:
+    model();
 
 public:
     model(
@@ -56,7 +58,8 @@ public:
         const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& elements,
         const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& references,
         const std::unordered_set<dogen::yarn::name>& leaves,
-        const dogen::yarn::module& root_module);
+        const dogen::yarn::module& root_module,
+        const bool has_generatable_types);
 
 private:
     template<typename Archive>
@@ -114,6 +117,14 @@ public:
     void root_module(const dogen::yarn::module&& v);
     /**@}*/
 
+    /**
+     * @brief If true the intermediate model has at least one generable type, false otherwise.
+     */
+    /**@{*/
+    bool has_generatable_types() const;
+    void has_generatable_types(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -130,6 +141,7 @@ private:
     std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types> references_;
     std::unordered_set<dogen::yarn::name> leaves_;
     dogen::yarn::module root_module_;
+    bool has_generatable_types_;
 };
 
 } }

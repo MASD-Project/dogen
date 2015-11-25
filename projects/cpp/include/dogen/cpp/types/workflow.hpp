@@ -39,7 +39,7 @@
 #include "dogen/cpp/types/formattables/formattable.hpp"
 #include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/model.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -60,7 +60,7 @@ private:
     /**
      * @brief Returns the root object.
      */
-    dynamic::object obtain_root_object(const yarn::intermediate_model& m) const;
+    dynamic::object obtain_root_object(const yarn::model& m) const;
 
 private:
     /**
@@ -89,7 +89,7 @@ private:
         const dynamic::repository& rp, const dynamic::object& root_object,
         const dogen::formatters::general_settings_factory& gsf,
         const settings::opaque_settings_builder& osb,
-        const yarn::intermediate_model& m) const;
+        const yarn::model& m) const;
 
     /**
      * @brief Create the formattables.
@@ -102,7 +102,7 @@ private:
             const formatters::container& fc,
             const settings::opaque_settings_builder& osb,
             const settings::bundle_repository& brp,
-            const yarn::intermediate_model& m) const;
+            const yarn::model& m) const;
 
     /**
      * @brief Create the files.
@@ -118,14 +118,14 @@ public:
     std::forward_list<boost::filesystem::path>
     managed_directories(const config::knitting_options& ko,
         const dynamic::repository& rp,
-        const yarn::intermediate_model& m) const override;
+        const yarn::model& m) const override;
 
     std::forward_list<dynamic::ownership_hierarchy> ownership_hierarchy() const;
 
     std::forward_list<dogen::formatters::file> generate(
         const config::knitting_options& ko,
         const dynamic::repository& rp,
-        const yarn::intermediate_model& m) const override;
+        const yarn::model& m) const override;
 };
 
 } }

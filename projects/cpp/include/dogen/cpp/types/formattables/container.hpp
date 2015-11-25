@@ -27,7 +27,7 @@
 
 #include <forward_list>
 #include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
@@ -68,14 +68,14 @@ public:
 
     const std::forward_list<
         boost::shared_ptr<
-            inclusion_dependencies_provider_interface<yarn::intermediate_model>
+            inclusion_dependencies_provider_interface<yarn::model>
             >
         >&
     model_providers() const;
 
     std::forward_list<
         boost::shared_ptr<
-            inclusion_dependencies_provider_interface<yarn::intermediate_model>
+            inclusion_dependencies_provider_interface<yarn::model>
             >
         >&
     model_providers();
@@ -93,7 +93,7 @@ private:
     > enumeration_providers_;
     std::forward_list<
         boost::shared_ptr<
-            inclusion_dependencies_provider_interface<yarn::intermediate_model>
+            inclusion_dependencies_provider_interface<yarn::model>
             >
     > model_providers_;
 };

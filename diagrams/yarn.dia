@@ -5446,7 +5446,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="-100.397,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-107.912,-9.85;-99.6475,-0.2"/>
+        <dia:rectangle val="-107.912,-9.85;-99.647,-0.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7701,7 +7701,7 @@ etc.#</dia:string>
         <dia:point val="-100.397,3.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-101.248,3.35;-88.2725,14.05"/>
+        <dia:rectangle val="-101.247,3.35;-88.2725,14.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13776,7 +13776,7 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
         <dia:point val="-14,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.05,49.95;13.5,56.05"/>
+        <dia:rectangle val="-14.05,49.95;13.5,56.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-14,50"/>
@@ -13785,7 +13785,7 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
         <dia:real val="27.449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model#</dia:string>
@@ -13958,6 +13958,29 @@ Leaves are types concrete types which have a parent.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#The module that represents the model.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#has_generatable_types#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true the intermediate model has at least one generable type, false otherwise.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14227,16 +14250,16 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-14,56"/>
+        <dia:point val="-14,56.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.75,55.25;6.685,65.8"/>
+        <dia:rectangle val="-14.75,56.05;6.685,65.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-14,56"/>
+        <dia:point val="-14,56.8"/>
         <dia:point val="-14,60"/>
         <dia:point val="6.485,60"/>
         <dia:point val="6.485,65"/>
@@ -14860,7 +14883,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:point val="24,53.6"/>
         <dia:point val="24,60"/>
         <dia:point val="13.45,60"/>
-        <dia:point val="13.45,56"/>
+        <dia:point val="13.45,56.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

@@ -29,6 +29,7 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/yarn/types/input_descriptor.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -54,8 +55,15 @@ private:
     intermediate_model assemble_intermediate_models_activity(
         const std::list<intermediate_model>& m) const;
 
+    /**
+     * @brief Transforms the intermediate model to the final
+     * representation.
+     */
+    model transform_intermediate_model_activity(
+        const intermediate_model& m) const;
+
 public:
-    intermediate_model execute(const dynamic::repository& rp,
+    model execute(const dynamic::repository& rp,
         const std::list<input_descriptor>& id) const;
 };
 
