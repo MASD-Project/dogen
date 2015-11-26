@@ -5,9 +5,7 @@
 
 * Mission Statement
 
-- get yarn into its final shape, with the work in single element
-  container;
-- finish support for composite model names;
+- wrap things up with yarn refactor and start quilt refactor.
 - get continuous builds working again.
 
 * Stories
@@ -29,6 +27,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-11-26 Thu 07:51]--[2015-11-26 Thu 07:59] =>  0:08
     CLOCK: [2015-11-23 Mon 22:45]--[2015-11-23 Mon 23:02] =>  0:17
 
 Updates to sprint and product backlog.

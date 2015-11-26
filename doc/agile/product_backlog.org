@@ -10,6 +10,17 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Perform an in-depth product backlog groom                         :story:
+
+We now have lots of references to types (and models) that have been
+refactored away - either renamed or deleted altogether. As we are
+reaching the final form for =yarn= and =quilt=, we need to go
+through all the stories and update them to the new world.
+
+- add two todos to the backlog: not reviewed, reviewed
+- mark all stores as not reviewed
+- go through all the stories and mark them suitably as we review them.
+
 *** Consider allowing renaming of "internal" types                    :story:
 
 Users may want to change the =_visitor= postfix for visitors or the
