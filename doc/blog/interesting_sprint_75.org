@@ -1,0 +1,72 @@
+#+title: Nerd Food: Interesting...
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+Time to flush all those tabs again. Some interesting stuff I bumped
+into recently-ish.
+
+* Finance, Economics, Politics
+
+- [[https://www.propublica.org/article/debt-collection-lawsuits-squeeze-black-neighborhoods][The Color of Debt: How Collection Suits Squeeze Black Neighborhoods]]:
+  Another great example of how markets are not so efficient for
+  certain things and not exactly fair.
+- [[http://www.economist.com/news/briefing/21678215-world-entering-third-stage-rolling-debt-crisis-time-centred-emerging][Pulled back in]]: The Economist's take on how the emerging markets
+  credit bubble will play out. Not sure if I agree with their
+  analysis, but its certainly very worrying to see so much EM debt
+  piling up in such a volatile world.
+- [[http://www.politico.com/magazine/story/2015/11/isil-whos-calling-the-shots-213360][ISIL: Who’s Calling the Shots?]]: Interesting analysis, much better
+  than the usual superficial take one is used to from mass-media.
+- [[http://www.newyorker.com/magazine/2015/08/31/the-other-france][The Other France]]: As with the previous article, I cannot help but be
+  surprised - even more so with this one. Truly, an amazing, in-depth
+  job. Surprisingly good coming from the American media. If you have
+  watched [[http://www.imdb.com/title/tt0113247/][La Haine]], read this. If you have read this, watch La Haine.
+
+* Startups et. al.
+
+- [[http://www.theguardian.com/technology/2015/nov/29/arm-cambridge-britain-tech-company-iphone][ARM: Britain's most successful tech company you've never heard of]]:
+  Short history of ARM. It would be great to have a book about these
+  guys!
+- [[https://medium.com/backchannel/doordash-wants-to-own-the-last-mile-27c03098a657][DoorDash Wants to Own the Last Mile]]: interesting story of a startup
+  that focuses on "last mile" delivery.
+- [[https://www.bitpesa.co][BitPesa]]: cool African start-up in the BitCoin / MPesa space.
+- [[http://ventureburn.com/2015/10/lulalend-true-fintech-company-mixing-tech-finance/][LulaLend]]: Another cool African start-up that is doing well in the
+  payments space.
+- [[https://www.youtube.com/watch?v%3DSqEo107j-uw][Elon Musk and Y Combinator President on Thinking for the Future]]:
+  Altman and Musk discuss the future. Shame the presenter is not a bit
+  geekier or it could have been one of the best.
+- [[https://www.youtube.com/watch?v%3DWwrEQklDoyE][Elon Musk with his Brother Kimbal Musk on a panel]]: Since we're doing
+  the Musk fan-boy thing, here's a great panel with Elon and his
+  brother. A more personal view of his achievements.
+
+* General Coding
+
+- [[http://www.nytimes.com/2015/11/13/technology/gene-amdahl-pioneer-of-mainframe-computing-dies-at-92.html?smprod%3Dnytcore-ipad&smid%3Dnytcore-ipad-share][Gene Amdahl, Pioneer of Mainframe Computing, Dies at 92]]: I've heard
+  the name a lot but never really read about the man.
+- [[http://jvns.ca/blog/2015/11/21/why-you-should-understand-a-little-about-tcp/][Why you should understand (a little) about TCP]]: The new generation
+  discovers the joys of understanding low-level protocols. And Nagle
+  (yes, he of [[https://en.wikipedia.org/wiki/Nagle%2527s_algorithm][Nagle Algorithm]] fame) replies on that thread.
+- [[https://www.youtube.com/channel/UCvq_RgZp3kljp9X8Io9Z1DA][systemd.conf]]: Videos from the conference. Have watched a couple,
+  seemed like a lively conference. Hard to imagine an init system with
+  its own conference though!
+- [[http://www.wired.com/brandlab/2015/05/jeff-hawkins-firing-silicon-brain/][Jeff Hawkins on Firing Up the Silicon Brain]]: I just love Jeff
+  Hawkins. I think Neuroscience needs a lot more engineers like him.
+
+* Databases
+
+
+* C++
+
+* Layman Science
+
+* Other
+
+- [[https://www.youtube.com/watch?v%3DlWJkrP4WPFw][NoiseRV Live]]: Still discovering this Portuguese musician, but love
+  his work. Great concert. Would do a little bit less talking between
+  songs, but still - artists prerogative and all that.
+- [[http://bff.fm/broadcasts/4499][Warm Focus: Winging It]]: Interesting set of "intelligent dance music"
+  as we used to call it back in the day.
+- [[https://overcast.fm/%2BBj7wZZ3Mg][Mosaic - The “First” Web Browser]]: Super-cool podcasts about internet
+  history. It would be great to have something like this for UNIX!
+- [[https://www.youtube.com/watch?v%3D0va3F2PWBJc][Jackson C. Frank (1965)]]: Tragic musician from the 60s. Great tunes.
+- [[http://www.gutenberg.org/files/15000/15000-h/vol1.html][Reason in common sense]]: Always wanted to read Santayana
+  properly. Started, but I guess it will be a _very_ long
+  exercise. Interesting, if somewhat strange book.
