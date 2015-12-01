@@ -4,23 +4,24 @@
 
 \usepackage{times}
 \usepackage{graphicx}
-% \usepackage{biblatex}
+\usepackage[backend=bibtex]{biblatex}
 % \addbibresourse{an_introduction_to_dogen.bib}
 
 \title{An Introduction to Dogen}
 \author{Marco Craveiro \\
-    Dept. of Biocomputation \\
-    University of Hertfordshire
+  Domain Driven Development
 }
 \date{\today}
 
 \AtBeginSection[]
 {
   \begin{frame}<beamer>
-\frametitle{Outline}
-\tableofcontents[currentsection]
-\end{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
 }
+
+\bibliography{an_introduction_to_dogen}
 
 \begin{document}
 
@@ -42,11 +43,11 @@ v${DOGEN_VERSION}
 
 \pause
 
-% in \cite{Evans04}  \cite{Fowler2015}
 \item The term \emph{domain model} is understood as defined by Evans
-  and summarised by Fowler: ``An object model of the domain that
-  incorporates both behaviour and data''. \emph{Domain} is the problem
-  domain one intends to model (i.e. generate classes to describe).
+  \cite{Evans2004} and summarised by Fowler: ``An object model of the
+  domain that incorporates both behaviour and data''
+  \cite{Fowler2015}. \emph{Domain} is the problem domain one intends
+  to model (i.e. generate classes to describe).
 
 \pause
 
@@ -369,6 +370,8 @@ v${DOGEN_VERSION}
 
 \end{frame}
 
-% \printbibliography
+\begin{frame}
+  \printbibliography
+\end{frame}
 
 \end{document}

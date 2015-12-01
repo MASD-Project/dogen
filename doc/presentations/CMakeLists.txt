@@ -36,15 +36,17 @@ if (WITH_PRESENTATION)
             endif()
             configure_file(${CMAKE_CURRENT_SOURCE_DIR}/${file} ${stage_doc_dir}/${file})
 
-         message(STATUS "${stage_doc_dir}/${file_name}.pdf")
-         add_custom_target(presentation_${file} ALL
-             COMMENT "Generating presentation ${file}"
-             DEPENDS ${stage_doc_dir}/${file}
-             COMMAND ${PDFLATEX_COMMAND} ${file}
-             # COMMAND bibtex ${file_name}
-             # COMMAND ${PDFLATEX_COMMAND} ${file}
-             OUTPUT ${stage_doc_dir}/${file_name}.pdf
-             WORKING_DIRECTORY ${stage_doc_dir})
-         add_dependencies(presentation presentation_${file})
+            message(STATUS "${stage_doc_dir}/${file_name}.pdf")
+            add_custom_target(presentation_${file} ALL
+                COMMENT "Generating presentation ${file}"
+                DEPENDS ${stage_doc_dir}/${file}
+                # COMMAND ${PDFLATEX_COMMAND} ${file}
+                COMMAND ${PDFLATEX_COMMAND} ${file}
+                COMMAND bibtex ${file_name}
+                COMMAND ${PDFLATEX_COMMAND} ${file}
+                OUTPUT ${stage_doc_dir}/${file_name}.pdf
+                WORKING_DIRECTORY ${stage_doc_dir})
+
+            add_dependencies(presentation presentation_${file})
     endforeach()
 endif()    
