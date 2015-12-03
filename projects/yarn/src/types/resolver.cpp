@@ -83,13 +83,13 @@ bool resolver::is_name_in_model(const name& n) const {
 name resolver::resolve_partial_type(const name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Resolving type:" << n.qualified();
 
-    /* first try the type as it was read originally. This caters for
-     * types placed in the global namespace.
+    /* First try the type as it was read originally. This caters for
+     * types placed in the global module.
      */
     if (is_name_in_model(n))
         return n;
 
-    /* then handle the case of the type belonging to the current
+    /* Then handle the case of the type belonging to the current
      * model. It either has no model name at all, or it has a model
      * name but no external module path. We cater for both cases.
      */
@@ -102,7 +102,7 @@ name resolver::resolve_partial_type(const name& n) const {
             return r;
     }
 
-    /* now handle the case where the type belongs to a reference, but
+    /* Now handle the case where the type belongs to a reference, but
      * is missing the external module path.
      */
     for (const auto& pair : model_.references()) {
@@ -112,7 +112,7 @@ name resolver::resolve_partial_type(const name& n) const {
             return r;
     }
 
-    /* finally handle the case where a model has a package with the
+    /* Finally handle the case where a model has a package with the
      * same name as a reference model.
      */
     {

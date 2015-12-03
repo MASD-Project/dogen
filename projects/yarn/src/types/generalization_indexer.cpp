@@ -172,7 +172,6 @@ populate(const generalization_details& d, intermediate_model& m) const {
             continue;
         }
 
-
         const auto rt(relationship_types::root_parents);
         o.relationships()[rt] = pair.second;
         for (const auto& opn : pair.second) {

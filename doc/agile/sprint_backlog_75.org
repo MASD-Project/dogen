@@ -13,20 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-11-25 Wed 23:15]
+#+CAPTION: Clock summary at [2015-12-03 Thu 21:30]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *5:26* |      |      |
+| *Total time*                                                                | *6:59* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 5:26   |      |      |
-| Active                                                                      |        | 5:26 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:17 |
+| Stories                                                                     | 6:59   |      |      |
+| Active                                                                      |        | 6:59 |      |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:02 |
 | COMPLETED Use qualified name as the key of the intermediate model container |        |      | 3:05 |
 | COMPLETED Use the single element container model in =cpp=                   |        |      | 2:04 |
+| STARTED Implement formattables in terms of yarn types                       |        |      | 0:11 |
+| STARTED Add relationship types to handle "requires"                         |        |      | 0:37 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-12-03 Thu 19:03]--[2015-12-03 Thu 19:40] =>  0:37
     CLOCK: [2015-11-26 Thu 07:51]--[2015-11-26 Thu 07:59] =>  0:08
     CLOCK: [2015-11-23 Mon 22:45]--[2015-11-23 Mon 23:02] =>  0:17
 
@@ -114,11 +117,6 @@ additional =cpp= specific types. In practice:
   so perhaps the relationship itself would have to be annotated). We
   could then have a default behaviour for weak relationships such as
   never follow, etc.
-
-we could express two things: the "key" that we want to
-  "compute" and the "kind" of computation we want to perform, we could
-  probably come up with a generic algorithm
-
 
 *Previous Understanding*
 
@@ -288,6 +286,43 @@ we need to check for.
 - types must be enabled
 - if serialisation is enabled, types forward declaration of the
   serialisation classes must be enabled
+
+*** Yarn minor tidy-ups                                               :story:
+
+Go through all files in yarn and do all the minor tidy-ups we haven't
+yet done:
+
+- remove context, use model references directly
+- add comments: purpose of the class, explanation of algorithms,
+  whether the class is expected to work on a partial or merged model,
+  etc.
+- break long functions.
+
+*** Add "field propagation" support to dynamic                        :story:
+
+- add a graph to yarn that allows external users to set
+  dependencies. The graph is not known to be acyclic. Normally we keep
+  track of all the orphans and link those to the root. This won't work
+  for cycles. We need a way to arbitrarily define one "end" of the
+  cycle as the starting point.
+- graph must distinguish between vertices that arise by expanding
+  generics from those that arise by other means.
+- add propagation type to fields and add enumeration.
+- add a "propagator" that is responsible for walking the graph and
+  setting the fields accordingly. The propagator is used from yarn's
+  workflow. We need to have the ability of sending in references to
+  dynamic objects into the graph so that the propagator can update
+  them.
+
+*** Handle registration of services properly                          :story:
+
+We need a way to determine if a type which is part of a generalisation
+should be added to the registrar or not. In =generalisation_indexer=:
+
+:     // FIXME: massive hack. must not add leafs for services.
+
+One way would be to check if serialisation is enabled for that type
+and if not, skip the type.
 
 *** Refactor code around model origination                            :story:
 
