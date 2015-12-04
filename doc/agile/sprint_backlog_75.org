@@ -13,19 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-03 Thu 21:30]
+#+CAPTION: Clock summary at [2015-12-04 Fri 23:46]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *6:59* |      |      |
+| *Total time*                                                                | *7:36* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 6:59   |      |      |
-| Active                                                                      |        | 6:59 |      |
+| Stories                                                                     | 7:36   |      |      |
+| Active                                                                      |        | 7:36 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 1:02 |
 | COMPLETED Use qualified name as the key of the intermediate model container |        |      | 3:05 |
 | COMPLETED Use the single element container model in =cpp=                   |        |      | 2:04 |
 | STARTED Implement formattables in terms of yarn types                       |        |      | 0:11 |
 | STARTED Add relationship types to handle "requires"                         |        |      | 0:37 |
+| STARTED Yarn minor tidy-ups                                                 |        |      | 0:37 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -287,7 +288,9 @@ we need to check for.
 - if serialisation is enabled, types forward declaration of the
   serialisation classes must be enabled
 
-*** Yarn minor tidy-ups                                               :story:
+*** STARTED Yarn minor tidy-ups                                       :story:
+    CLOCK: [2015-12-04 Fri 23:33]--[2015-12-04 Fri 23:45] =>  0:12
+    CLOCK: [2015-12-04 Fri 23:07]--[2015-12-04 Fri 23:32] =>  0:25
 
 Go through all files in yarn and do all the minor tidy-ups we haven't
 yet done:

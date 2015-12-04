@@ -36,15 +36,25 @@ namespace yarn {
 /**
  * @brief Responsible for performing the assembly of an intermediate
  * yarn model.
+ *
+ * @section yarn_assembler_0 Requirements
+ *
+ * The intermediate models supplied as input are expected to have
+ * already been through the expansion workflow. This is done to avoid
+ * having to copy and modify these models.
+ *
+ * @section yarn_assembler_1 Workflow description
+ *
+ * Assembly is defined as a workflow that starts with a set of
+ * intermediate models produced by the frontends, merges them into the
+ * @merged intermediate model and then applies a series of operations
+ * to the merged intermediate model to produce the final result. The
+ * sequence in which the operations are done is important and is
+ * dependent on the requirements of the classes responsible for those
+ * operations.
+ *
  */
 class assembler {
-public:
-    assembler() = default;
-    assembler(const assembler&) = default;
-    ~assembler() = default;
-    assembler(assembler&&) = default;
-    assembler& operator=(const assembler&) = default;
-
 private:
     /**
      * @brief Returns true if the element is generatable, false
@@ -52,27 +62,36 @@ private:
      */
     bool is_generatable(const element& e) const;
 
+    /**
+     * @brief Returns true if there are any types that require code
+     * generation, false otherwise.
+     */
+    bool has_generatable_types(const intermediate_model& m) const;
+
 private:
     /**
-     * @brief Create the intermediate merged model.
+     * @brief Create the merged intermediate model.
      */
     intermediate_model create_merged_model_activity(
         const std::list<intermediate_model>& models) const;
 
     /**
-     * @brief Index all generalizations.
+     * @brief Inject system-generated elements.
+     */
+    void inject_system_elements_activity(
+        intermediate_model& merged_model) const;
+
+    /**
+     * @brief Ensures all references to elements point to elements in
+     * the merged model.
+     */
+    void resolve_element_references_activity(
+        intermediate_model& merged_model) const;
+
+    /**
+     * @brief Index all generalization relationships.
      */
     void index_generalizations_activity(intermediate_model& merged_model) const;
-
-    /**
-     * @brief Injects system types.
-     */
-    void inject_system_types_activity(intermediate_model& merged_model) const;
-
-    /**
-     * @brief Resolve all types.
-     */
-    void resolve_types_activity(intermediate_model& merged_model) const;
 
     /**
      * @brief Index all concepts.
@@ -96,16 +115,9 @@ private:
     void update_model_generability_activity(
         intermediate_model& merged_model) const;
 
-private:
-    /**
-     * @brief Returns true if there are any types that require code
-     * generation, false otherwise.
-     */
-    bool has_generatable_types(const intermediate_model& m) const;
-
 public:
     /**
-     * @brief Executes the assembler.
+     * @brief Executes the assembly workflow.
      */
     intermediate_model assemble(const std::list<intermediate_model>& m) const;
 };

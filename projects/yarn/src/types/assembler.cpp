@@ -64,7 +64,15 @@ bool assembler::has_generatable_types(const intermediate_model& m) const {
             return true;
     }
 
-    // FIXME: add concepts, etc.
+    for (const auto pair : m.primitives()) {
+        if (is_generatable(pair.second))
+            return true;
+    }
+
+    for (const auto pair : m.concepts()) {
+        if (is_generatable(pair.second))
+            return true;
+    }
 
     return false;
 }
@@ -79,20 +87,21 @@ intermediate_model assembler::create_merged_model_activity(
 }
 
 void assembler::
-index_generalizations_activity(intermediate_model& merged_model) const {
-    generalization_indexer idx;
-    idx.index(merged_model);
-}
-
-void assembler::
-inject_system_types_activity(intermediate_model& merged_model) const {
+inject_system_elements_activity(intermediate_model& merged_model) const {
     injector i;
     i.inject(merged_model);
 }
 
-void assembler::resolve_types_activity(intermediate_model& merged_model) const {
+void assembler::
+resolve_element_references_activity(intermediate_model& merged_model) const {
     resolver res(merged_model);
     res.resolve();
+}
+
+void assembler::
+index_generalizations_activity(intermediate_model& merged_model) const {
+    generalization_indexer idx;
+    idx.index(merged_model);
 }
 
 void assembler::
@@ -123,15 +132,29 @@ assemble(const std::list<intermediate_model>& models) const {
     BOOST_LOG_SEV(lg, debug) << "Starting model assembly.";
 
     auto r(create_merged_model_activity(models));
+
+    /* We must index generalisation relationships before we inject
+     * system elements because we need to know about leaves before we
+     * can generate visitors.
+     */
     index_generalizations_activity(r);
-    inject_system_types_activity(r);
-    resolve_types_activity(r);
+    inject_system_elements_activity(r);
+
+    /* Resolution must be done after system elements have been
+     * injected or else it will fail to find any references to those
+     * elements.
+     */
+    resolve_element_references_activity(r);
     index_concepts_activity(r);
     index_properties_activity(r);
+
+    /* We must index associations after properties have been indexed
+     * as it relies on the various property containers being populated.
+     */
     index_associations_activity(r);
     update_model_generability_activity(r);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished assembling models.";
+    BOOST_LOG_SEV(lg, debug) << "Finished assembling model.";
     BOOST_LOG_SEV(lg, debug) << "Totals: objects: " << r.objects().size()
                              << " modules: " << r.modules().size()
                              << " concepts: " << r.concepts().size()
