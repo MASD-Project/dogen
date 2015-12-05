@@ -68,6 +68,11 @@ into recently-ish.
 
 * Databases
 
+- [[http://blog.2ndquadrant.com/when-are-we-going-to-contribute-bdr-to-postgresql/][When are we going to contribute BDR to PostgreSQL?]]: For those (like
+  me) who keep moaning about the lack of [[https://en.wikipedia.org/wiki/Multi-master_replication][BDR]] in Postgres, a great
+  explanation of how the patchset is being merged. Great work by the
+  2nd Quadrant guys.
+
 * C++
 
 - [[http://blog.llvm.org/2015/11/new-elf-linker-from-llvm-project.html][New ELF Linker from the LLVM Project]]: LLVM keeps on delivering! Now
