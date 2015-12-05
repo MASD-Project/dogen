@@ -196,10 +196,18 @@ public:
     void is_root_parent_visitable(const bool v);
     /**@}*/
 
+    /**
+     * @brief All relationships this object has with other model elements.
+     *
+     * Note that the names are in a list rather than a set due to a dogen limitation;
+     * namely that we cannot provide a operator< at present.
+     */
+    /**@{*/
     const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& relationships() const;
     std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& relationships();
     void relationships(const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& v);
     void relationships(const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >&& v);
+    /**@}*/
 
     /**
      * @brief What kind of object is this.

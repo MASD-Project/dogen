@@ -4903,7 +4903,10 @@ Set to false if no parent exists, or if the parent is not visitable. #</dia:stri
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#All relationships this object has with other model elements.
+
+Note that the names are in a list rather than a set due to a dogen limitation;
+namely that we cannot provide a operator&lt; at present.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

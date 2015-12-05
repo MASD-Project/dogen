@@ -65,11 +65,11 @@ void association_indexer::remove_duplicates(std::list<name>& names,
 void association_indexer::recurse_nested_names(const intermediate_model& m,
     object& o, const nested_name& nn, bool& is_pointer) const {
     const auto n(nn.type());
-    auto& rels(o.relationships());
+    auto& rel(o.relationships());
     if (is_pointer)
-        rels[relationship_types::weak_associations].push_back(n);
+        rel[relationship_types::weak_associations].push_back(n);
     else
-        rels[relationship_types::regular_associations].push_back(n);
+        rel[relationship_types::regular_associations].push_back(n);
 
     const auto i(m.primitives().find(n.qualified()));
     if (i != m.primitives().end()) {
@@ -85,19 +85,17 @@ void association_indexer::recurse_nested_names(const intermediate_model& m,
 
     const auto k(m.objects().find(n.qualified()));
     if (k == m.objects().end()) {
-        const auto qn(n.qualified());
-        BOOST_LOG_SEV(lg, error) << object_not_found << qn;
-        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
+        BOOST_LOG_SEV(lg, error) << object_not_found << n.qualified();
+        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n.qualified()));
     }
 
-    const auto sp(object_types::smart_pointer);
-    is_pointer = k->second.object_type() == sp;
+    is_pointer = k->second.object_type() == object_types::smart_pointer;
 
     bool is_first(true);
     for (const auto c : nn.children()) {
         const auto hc(object_types::hash_container);
         if (is_first && k->second.object_type() == hc)
-            rels[relationship_types::hash_container_keys].push_back(c.type());
+            rel[relationship_types::hash_container_keys].push_back(c.type());
 
         recurse_nested_names(m, o, c, is_pointer);
         is_first = false;
@@ -124,8 +122,9 @@ index_object(const intermediate_model& m, object& o) const {
 
     i = o.relationships().find(relationship_types::weak_associations);
     if (i != o.relationships().end()) {
-        // ensure we remove any items which are simultaneously regular and
-        // weak associations.
+        /* Ensure we remove any items which are simultaneously regular
+         * and weak associations.
+         */
         remove_duplicates(i->second, regular_associations);
     }
 

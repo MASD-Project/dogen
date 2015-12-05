@@ -27,10 +27,10 @@
 
 #include <list>
 #include <unordered_set>
-#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/hash/name_hash.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/relationship_types.hpp"
 
 namespace dogen {
@@ -50,23 +50,16 @@ namespace yarn {
  * nested qualified name, unpacks all the associations implied by
  * their presence.
  *
- * Associations are of two types: @e regular or @e pointer. This
+ * Associations are of two types: @e regular or @e weak. This
  * distinction is required due to the usage of the association at code
  * generation time.
  *
  * A @e regular association means a full type definition is required
- * to be available due to the association. A @e pointer definition
- * means that the type is used via pointer and as such a forward
- * declaration may suffice.
+ * to be available due to the association. A @e weak association means
+ * that the type is used via pointer and as such a forward declaration
+ * may suffice.
  */
 class association_indexer {
-public:
-    association_indexer() = default;
-    association_indexer(const association_indexer&) = default;
-    association_indexer(association_indexer&&) = default;
-    association_indexer& operator=(const association_indexer&) = default;
-    ~association_indexer() noexcept = default;
-
 private:
     /**
      * @brief Removes duplicate names, preserving the original order

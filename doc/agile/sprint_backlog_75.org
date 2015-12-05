@@ -13,20 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-04 Fri 23:46]
+#+CAPTION: Clock summary at [2015-12-05 Sat 00:05]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *7:36* |      |      |
+| *Total time*                                                                | *7:56* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 7:36   |      |      |
-| Active                                                                      |        | 7:36 |      |
+| Stories                                                                     | 7:56   |      |      |
+| Active                                                                      |        | 7:56 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 1:02 |
 | COMPLETED Use qualified name as the key of the intermediate model container |        |      | 3:05 |
 | COMPLETED Use the single element container model in =cpp=                   |        |      | 2:04 |
 | STARTED Implement formattables in terms of yarn types                       |        |      | 0:11 |
 | STARTED Add relationship types to handle "requires"                         |        |      | 0:37 |
-| STARTED Yarn minor tidy-ups                                                 |        |      | 0:37 |
+| STARTED Yarn minor tidy-ups                                                 |        |      | 0:57 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -289,6 +289,7 @@ we need to check for.
   serialisation classes must be enabled
 
 *** STARTED Yarn minor tidy-ups                                       :story:
+    CLOCK: [2015-12-04 Fri 23:46]--[2015-12-05 Sat 00:06] =>  0:20
     CLOCK: [2015-12-04 Fri 23:33]--[2015-12-04 Fri 23:45] =>  0:12
     CLOCK: [2015-12-04 Fri 23:07]--[2015-12-04 Fri 23:32] =>  0:25
 
@@ -300,6 +301,10 @@ yet done:
   whether the class is expected to work on a partial or merged model,
   etc.
 - break long functions.
+
+Classes done:
+
+- assembler, association indexer.
 
 *** Add "field propagation" support to dynamic                        :story:
 
