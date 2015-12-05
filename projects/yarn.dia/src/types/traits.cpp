@@ -18,18 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/initializer.hpp"
-#include "dogen/yarn.json/types/initializer.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
-#include "dogen/knit/types/initializer.hpp"
+#include "dogen/yarn.dia/types/traits.hpp"
 
 namespace dogen {
-namespace knit {
+namespace yarn {
+namespace dia {
 
-void initializer::initialize() {
-    dogen::yarn::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
-    dogen::cpp::initializer::initialize();
+std::string traits::comment() {
+    static std::string r("dia.comment");
+    return r;
 }
 
-} }
+std::string traits::identity_attribute() {
+    static std::string r("dia.identity_attribute");
+    return r;
+}
+
+} } }

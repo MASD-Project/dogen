@@ -18,18 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/initializer.hpp"
-#include "dogen/yarn.json/types/initializer.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
-#include "dogen/knit/types/initializer.hpp"
+#ifndef DOGEN_YARN_DIA_TEST_DATA_OBJECT_TYPES_TD_HPP
+#define DOGEN_YARN_DIA_TEST_DATA_OBJECT_TYPES_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/yarn.dia/types/object_types.hpp"
 
 namespace dogen {
-namespace knit {
+namespace yarn {
+namespace dia {
 
-void initializer::initialize() {
-    dogen::yarn::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
-    dogen::cpp::initializer::initialize();
-}
+class object_types_generator {
+public:
+    object_types_generator();
 
-} }
+public:
+    typedef dogen::yarn::dia::object_types result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
+
+} } }
+
+#endif

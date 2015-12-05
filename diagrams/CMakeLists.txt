@@ -49,9 +49,9 @@ add_custom_target(knit_yarn_json
     --verbose
     --delete-extra-files)
 if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
+    add_dependencies(knit_yarn_json knitter)
 endif()
-add_dependencies(knit_all knit_${target})
+add_dependencies(knit_all knit_yarn_json)
 
 set(target dia)
 add_custom_target(knit_${target}
@@ -149,12 +149,11 @@ if(use_latest_knitter)
 endif()
 add_dependencies(knit_all knit_${target})
 
-set(target yarn_dia)
-add_custom_target(knit_${target}
+add_custom_target(knit_yarn_dia
     COMMENT "Knitting Yarn Dia model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
+    --target ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dia.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
@@ -165,9 +164,9 @@ add_custom_target(knit_${target}
     --verbose
     --delete-extra-files)
 if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
+    add_dependencies(knit_yarn_dia knitter)
 endif()
-add_dependencies(knit_all knit_${target})
+add_dependencies(knit_all knit_yarn_dia)
 
 set(target formatters)
 add_custom_target(knit_${target}

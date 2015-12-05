@@ -18,18 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/initializer.hpp"
-#include "dogen/yarn.json/types/initializer.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
-#include "dogen/knit/types/initializer.hpp"
+#ifndef DOGEN_YARN_DIA_SERIALIZATION_PROCESSED_COMMENT_SER_HPP
+#define DOGEN_YARN_DIA_SERIALIZATION_PROCESSED_COMMENT_SER_HPP
 
-namespace dogen {
-namespace knit {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-void initializer::initialize() {
-    dogen::yarn::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
-    dogen::cpp::initializer::initialize();
-}
+#include <boost/serialization/split_free.hpp>
+#include "dogen/yarn.dia/types/processed_comment.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::dia::processed_comment)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::yarn::dia::processed_comment& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::yarn::dia::processed_comment& v, unsigned int version);
 
 } }
+
+#endif

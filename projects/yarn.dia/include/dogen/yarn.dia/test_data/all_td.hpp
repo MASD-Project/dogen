@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/initializer.hpp"
-#include "dogen/yarn.json/types/initializer.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
-#include "dogen/knit/types/initializer.hpp"
+#ifndef DOGEN_YARN_DIA_TEST_DATA_ALL_TD_HPP
+#define DOGEN_YARN_DIA_TEST_DATA_ALL_TD_HPP
 
-namespace dogen {
-namespace knit {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-void initializer::initialize() {
-    dogen::yarn::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
-    dogen::cpp::initializer::initialize();
-}
+#include "dogen/yarn.dia/test_data/context_td.hpp"
+#include "dogen/yarn.dia/test_data/profile_td.hpp"
+#include "dogen/yarn.dia/test_data/object_types_td.hpp"
+#include "dogen/yarn.dia/test_data/processed_object_td.hpp"
+#include "dogen/yarn.dia/test_data/processed_comment_td.hpp"
+#include "dogen/yarn.dia/test_data/processed_property_td.hpp"
 
-} }
+#endif

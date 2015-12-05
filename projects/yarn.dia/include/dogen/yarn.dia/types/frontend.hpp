@@ -18,18 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/initializer.hpp"
-#include "dogen/yarn.json/types/initializer.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
-#include "dogen/knit/types/initializer.hpp"
+#ifndef DOGEN_YARN_DIA_TYPES_FRONTEND_HPP
+#define DOGEN_YARN_DIA_TYPES_FRONTEND_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/yarn/types/frontend_interface.hpp"
 
 namespace dogen {
-namespace knit {
+namespace yarn {
+namespace dia {
 
-void initializer::initialize() {
-    dogen::yarn::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
-    dogen::cpp::initializer::initialize();
-}
+/**
+ * @brief Frontend wrapper for the dia to yarn workflow.
+ */
+class frontend final : public yarn::frontend_interface {
+public:
+    virtual ~frontend() noexcept;
 
-} }
+public:
+    std::string id() const override;
+    std::list<std::string> supported_extensions() const override;
+    yarn::intermediate_model execute(const dynamic::workflow& w,
+        const yarn::input_descriptor& d) override;
+};
+
+} } }
+
+#endif

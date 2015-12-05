@@ -18,18 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/initializer.hpp"
-#include "dogen/yarn.json/types/initializer.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
-#include "dogen/knit/types/initializer.hpp"
+#ifndef DOGEN_YARN_DIA_TYPES_TRAITS_HPP
+#define DOGEN_YARN_DIA_TYPES_TRAITS_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <string>
 
 namespace dogen {
-namespace knit {
+namespace yarn {
+namespace dia {
 
-void initializer::initialize() {
-    dogen::yarn::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
-    dogen::cpp::initializer::initialize();
-}
+struct traits {
+    /**
+     * @brief Comment provided by user when dia does not allow for it.
+     *
+     * For meta-types where comments are available in Dia (e.g. class,
+     * properties, etc), this parameter is ignored. For types where
+     * they are not (e.g. model, package), it will be used to populate
+     * the meta-type's documentation.
+     */
+    static std::string comment();
 
-} }
+    /**
+     * @brief Attribute that provides this entity its identity.
+     */
+    static std::string identity_attribute();
+};
+
+} } }
+
+#endif

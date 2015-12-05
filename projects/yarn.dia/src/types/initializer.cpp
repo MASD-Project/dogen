@@ -18,18 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/initializer.hpp"
-#include "dogen/yarn.json/types/initializer.hpp"
+#include "dogen/yarn/types/frontend_workflow.hpp"
+#include "dogen/yarn.dia/types/frontend.hpp"
 #include "dogen/yarn.dia/types/initializer.hpp"
-#include "dogen/knit/types/initializer.hpp"
 
 namespace dogen {
-namespace knit {
+namespace yarn {
+namespace dia {
 
 void initializer::initialize() {
-    dogen::yarn::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
-    dogen::cpp::initializer::initialize();
+    yarn::register_frontend<frontend>();
 }
 
-} }
+} } }

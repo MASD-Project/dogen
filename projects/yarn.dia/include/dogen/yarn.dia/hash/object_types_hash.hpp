@@ -18,18 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/initializer.hpp"
-#include "dogen/yarn.json/types/initializer.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
-#include "dogen/knit/types/initializer.hpp"
+#ifndef DOGEN_YARN_DIA_HASH_OBJECT_TYPES_HASH_HPP
+#define DOGEN_YARN_DIA_HASH_OBJECT_TYPES_HASH_HPP
 
-namespace dogen {
-namespace knit {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-void initializer::initialize() {
-    dogen::yarn::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
-    dogen::cpp::initializer::initialize();
+#include <functional>
+#include "dogen/yarn.dia/types/object_types.hpp"
+
+namespace std {
+
+template<>
+struct hash<dogen::yarn::dia::object_types> {
+public:
+    size_t operator()(const dogen::yarn::dia::object_types& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
+};
+
 }
 
-} }
+#endif

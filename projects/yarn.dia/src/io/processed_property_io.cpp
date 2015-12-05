@@ -18,18 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/initializer.hpp"
-#include "dogen/yarn.json/types/initializer.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
-#include "dogen/knit/types/initializer.hpp"
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen/yarn.dia/io/processed_comment_io.hpp"
+#include "dogen/yarn.dia/io/processed_property_io.hpp"
 
-namespace dogen {
-namespace knit {
-
-void initializer::initialize() {
-    dogen::yarn::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
-    dogen::cpp::initializer::initialize();
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
 }
 
-} }
+namespace dogen {
+namespace yarn {
+namespace dia {
+
+std::ostream& operator<<(std::ostream& s, const processed_property& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::yarn::dia::processed_property\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"type\": " << "\"" << tidy_up_string(v.type()) << "\"" << ", "
+      << "\"comment\": " << v.comment()
+      << " }";
+    return(s);
+}
+
+} } }

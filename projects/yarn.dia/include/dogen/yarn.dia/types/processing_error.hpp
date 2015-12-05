@@ -18,18 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/initializer.hpp"
-#include "dogen/yarn.json/types/initializer.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
-#include "dogen/knit/types/initializer.hpp"
+#ifndef DOGEN_YARN_DIA_TYPES_PROCESSING_ERROR_HPP
+#define DOGEN_YARN_DIA_TYPES_PROCESSING_ERROR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
-namespace knit {
+namespace yarn {
+namespace dia {
 
-void initializer::initialize() {
-    dogen::yarn::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
-    dogen::cpp::initializer::initialize();
-}
+/**
+ * @brief An error has occurred while processing a dia object.
+ */
+class processing_error : public virtual std::exception, public virtual boost::exception {
+public:
+    processing_error() = default;
+    ~processing_error() noexcept = default;
 
-} }
+public:
+    processing_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+} } }
+
+#endif

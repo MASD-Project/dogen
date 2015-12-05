@@ -18,18 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/initializer.hpp"
-#include "dogen/yarn.json/types/initializer.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
-#include "dogen/knit/types/initializer.hpp"
+#ifndef DOGEN_YARN_DIA_TYPES_OBJECT_TYPES_HPP
+#define DOGEN_YARN_DIA_TYPES_OBJECT_TYPES_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
-namespace knit {
+namespace yarn {
+namespace dia {
 
-void initializer::initialize() {
-    dogen::yarn::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
-    dogen::cpp::initializer::initialize();
-}
+/**
+ * @brief Identifier for the type of Dia object.
+ */
+enum class object_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    uml_large_package = 1, ///< A UML package
+    uml_class = 2, ///< A UML class
+    uml_generalization = 3, ///< UML Inheritance
+    uml_association = 4, ///< UML Association
+    uml_note = 5, ///< UML Note
+    uml_message = 6, ///< UML Message
+    uml_realization = 7 ///< UML Realization
+};
 
-} }
+} } }
+
+#endif

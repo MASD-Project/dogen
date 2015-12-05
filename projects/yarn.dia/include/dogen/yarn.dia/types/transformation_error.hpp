@@ -18,18 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/initializer.hpp"
-#include "dogen/yarn.json/types/initializer.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
-#include "dogen/knit/types/initializer.hpp"
+#ifndef DOGEN_YARN_DIA_TYPES_TRANSFORMATION_ERROR_HPP
+#define DOGEN_YARN_DIA_TYPES_TRANSFORMATION_ERROR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
-namespace knit {
+namespace yarn {
+namespace dia {
 
-void initializer::initialize() {
-    dogen::yarn::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
-    dogen::cpp::initializer::initialize();
-}
+/**
+ * @brief A fatal error has occurred while transforming a Dia model
+ * into its yarn representation.
+ */
+class transformation_error : public virtual std::exception, public virtual boost::exception {
+public:
+    transformation_error() = default;
+    ~transformation_error() noexcept = default;
 
-} }
+public:
+    transformation_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+} } }
+
+#endif

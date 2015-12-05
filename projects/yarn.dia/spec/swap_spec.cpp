@@ -18,18 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/initializer.hpp"
-#include "dogen/yarn.json/types/initializer.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
-#include "dogen/knit/types/initializer.hpp"
+#include <boost/test/unit_test.hpp>
+#include "dogen/utility/test/logging.hpp"
+#include "dogen/utility/test/canned_tests.hpp"
+#include "dogen/yarn.dia/types/all.hpp"
+#include "dogen/yarn.dia/io/all_io.hpp"
+#include "dogen/yarn.dia/test_data/all_td.hpp"
 
-namespace dogen {
-namespace knit {
+namespace {
 
-void initializer::initialize() {
-    dogen::yarn::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
-    dogen::cpp::initializer::initialize();
+const std::string empty;
+const std::string test_module("yarn.dia");
+const std::string test_suite("swap_spec");
+
 }
 
-} }
+using namespace dogen::yarn::dia;
+using namespace dogen::utility::test;
+
+BOOST_AUTO_TEST_SUITE(swap)
+
+BOOST_AUTO_TEST_CASE(validate_swap) {
+    SETUP_TEST_LOG("validate_swap");
+
+    test_swap<context_generator>();
+    test_swap<profile_generator>();
+    test_swap<object_types_generator>();
+    test_swap<processed_object_generator>();
+    test_swap<processed_property_generator>();
+}
+
+BOOST_AUTO_TEST_SUITE_END()

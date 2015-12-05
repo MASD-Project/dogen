@@ -13,20 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-05 Sat 00:05]
-| <75>                                                                        |        |      |      |
-| Headline                                                                    | Time   |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *7:56* |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 7:56   |      |      |
-| Active                                                                      |        | 7:56 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:02 |
-| COMPLETED Use qualified name as the key of the intermediate model container |        |      | 3:05 |
-| COMPLETED Use the single element container model in =cpp=                   |        |      | 2:04 |
-| STARTED Implement formattables in terms of yarn types                       |        |      | 0:11 |
-| STARTED Add relationship types to handle "requires"                         |        |      | 0:37 |
-| STARTED Yarn minor tidy-ups                                                 |        |      | 0:57 |
+#+CAPTION: Clock summary at [2015-12-05 Sat 21:18]
+| <75>                                                                        |         |       |      |
+| Headline                                                                    | Time    |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                                | *11:09* |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| Stories                                                                     | 11:09   |       |      |
+| Active                                                                      |         | 11:09 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:23 |
+| COMPLETED Use qualified name as the key of the intermediate model container |         |       | 3:05 |
+| COMPLETED Use the single element container model in =cpp=                   |         |       | 2:04 |
+| COMPLETED Add support for composite model names                             |         |       | 1:27 |
+| STARTED Implement formattables in terms of yarn types                       |         |       | 0:11 |
+| STARTED Add relationship types to handle "requires"                         |         |       | 0:37 |
+| STARTED Yarn minor tidy-ups                                                 |         |       | 0:57 |
+| STARTED Use pdflatex for the manual                                         |         |       | 1:25 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -67,6 +69,72 @@ being used. We need to:
 - update yarn workflow to return this model instead of intermediate
   model;
  replace all usages of intermediate model in =cpp= with this model.
+
+*** COMPLETED Add support for composite model names                   :story:
+    CLOSED: [2015-12-05 Sat 21:17]
+    CLOCK: [2015-12-05 Sat 21:09]--[2015-12-05 Sat 21:17] =>  0:08
+    CLOCK: [2015-12-05 Sat 17:30]--[2015-12-05 Sat 17:50] =>  0:20
+    CLOCK: [2015-12-05 Sat 15:36]--[2015-12-05 Sat 16:35] =>  0:59
+
+We added the model names list to location, but we are still not
+parsing composite model names (e.g. =yarn.dia=). This will probably
+break a lot of stuff.
+
+- deal with the fallout in terms of file paths creation, etc.
+- split model names with dots into multiple model paths.
+- resolver needs to take into account this case, in a similar way
+  which we handle models with the same name as modules in the target
+  model.
+- a model should have: an element identifier which is identical to the
+  root module (the module that represents the model). A model is
+  itself an element.
+
+Merged stories:
+
+*Add support for model names with dots*
+
+It is quite annoying to have to create folders and sub-folders for the
+main projects. This is not too bad right now because we don't really
+make use of nesting that much, other than with test models. However,
+now that the architecture is clear and we need to make use of nesting,
+it becomes more of a concern. For example:
+
+: / a
+:   / b
+:   / c
+: / d
+:   / e
+:   / f
+
+This is clearer as:
+
+: / a
+: / a.b
+: / a.c
+: / d.e
+: / d.f
+
+However, in order to implement this we need a bit of cleverness:
+
+- for the purposes of files, the dot represents a dot;
+- for the purposes of namespaces, we must create several namespaces
+  (e.g. yarn::core).
+
+This is also inline with the idea that the model name does not always
+contribute to the namespaces as required by primitives. We basically
+need a cleverer version of qname to handle all of these scenarios.
+
+It may also be worth taking into account the other story on this topic
+where we considered using underscores instead of folders for facet
+names. It may be nicer to have dots for this,
+e.g. =types.my_class.hpp=.
+
+Idea:
+
+=names= should have a model name and a model package; only the model
+package contributes to the namespaces. The model name is unpacked into
+multiple model packages (e.g. "a.b" => a::b). The file name uses the
+model name, not the model package.
 
 *** STARTED Implement formattables in terms of yarn types             :story:
     CLOCK: [2015-11-26 Thu 08:00]--[2015-11-26 Thu 08:11] =>  0:11
@@ -307,71 +375,9 @@ Classes done:
 
 - assembler, association indexer.
 
-*** STARTED Add support for composite model names in name             :story:
-    CLOCK: [2015-12-05 Sat 15:36]--[2015-12-05 Sat 16:35] =>  0:59
-
-We added the model names list to location, but we are still not
-parsing composite model names (e.g. =yarn.dia=). This will probably
-break a lot of stuff.
-
-- deal with the fallout in terms of file paths creation, etc.
-- split model names with dots into multiple model paths.
-- resolver needs to take into account this case, in a similar way
-  which we handle models with the same name as modules in the target
-  model.
-- a model should have: an element identifier which is identical to the
-  root module (the module that represents the model). A model is
-  itself an element.
-
-Merged stories:
-
-*Add support for model names with dots*
-
-It is quite annoying to have to create folders and sub-folders for the
-main projects. This is not too bad right now because we don't really
-make use of nesting that much, other than with test models. However,
-now that the architecture is clear and we need to make use of nesting,
-it becomes more of a concern. For example:
-
-: / a
-:   / b
-:   / c
-: / d
-:   / e
-:   / f
-
-This is clearer as:
-
-: / a
-: / a.b
-: / a.c
-: / d.e
-: / d.f
-
-However, in order to implement this we need a bit of cleverness:
-
-- for the purposes of files, the dot represents a dot;
-- for the purposes of namespaces, we must create several namespaces
-  (e.g. yarn::core).
-
-This is also inline with the idea that the model name does not always
-contribute to the namespaces as required by primitives. We basically
-need a cleverer version of qname to handle all of these scenarios.
-
-It may also be worth taking into account the other story on this topic
-where we considered using underscores instead of folders for facet
-names. It may be nicer to have dots for this,
-e.g. =types.my_class.hpp=.
-
-Idea:
-
-=names= should have a model name and a model package; only the model
-package contributes to the namespaces. The model name is unpacked into
-multiple model packages (e.g. "a.b" => a::b). The file name uses the
-model name, not the model package.
-
 *** STARTED Use pdflatex for the manual                               :story:
-    CLOCK: [2015-12-05 Sat 16:35]
+    CLOCK: [2015-12-05 Sat 17:50]--[2015-12-05 Sat 18:20] =>  0:30
+    CLOCK: [2015-12-05 Sat 16:35]--[2015-12-05 Sat 17:30] =>  0:55
 
 We should just use pdflatex for the manual rather than org. We need to
 convert the existing content to TeX - maybe one big file - and then
