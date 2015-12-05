@@ -19,9 +19,22 @@ into recently-ish.
   surprised - even more so with this one. Truly, an amazing, in-depth
   job. Surprisingly good coming from the American media. If you have
   watched [[http://www.imdb.com/title/tt0113247/][La Haine]], read this. If you have read this, watch La Haine.
+- [[https://www.youtube.com/watch?v%3Diavquu6PP9g][Elon Musk talks Climate Change and Carbon Tax at the Sorbone
+  (12.2.15)]]: Musk raises some interesting points, as usual, such as
+  why we need to tax carbon or else.
+- [[http://www.theguardian.com/society/2015/nov/29/future-of-work-gig-sharing-economy-juggling-jobs]['My father had one job in his life, I've had six in mine, my kids
+  will have six at the same time']]: The Guardian's take in this new
+  world of job displacement and "job context switching". Very
+  interesting.
 
 * Startups et. al.
 
+- [[http://blog.erratasec.com/2015/12/tesla-is-copying-apples-business-model.html#.VmL8A3VX9hG][Tesla is copying Apple's business model]]: very interesting comparison
+  between Tesla and Apple's businesses. I don't fully agree with the
+  article, but to be fair it does raise a number of interesting
+  points. I definitely think that when Tesla can deliver mass-market
+  quantities they will dominate sales in a similar fashion to the
+  iPhone.
 - [[http://www.theguardian.com/technology/2015/nov/29/arm-cambridge-britain-tech-company-iphone][ARM: Britain's most successful tech company you've never heard of]]:
   Short history of ARM. It would be great to have a book about these
   guys!
@@ -36,6 +49,9 @@ into recently-ish.
 - [[https://www.youtube.com/watch?v%3DWwrEQklDoyE][Elon Musk with his Brother Kimbal Musk on a panel]]: Since we're doing
   the Musk fan-boy thing, here's a great panel with Elon and his
   brother. A more personal view of his achievements.
+- [[http://www.bloomberg.com/news/articles/2015-11-24/jeff-bezos-vs-elon-musk-a-thrilling-new-space-race][Jeff Bezos vs. Elon Musk: A Thrilling, New Space Race]]: since we are
+  fanboying Musk lets go all the way and read up on the latest about
+  the space race. Very interesting.
 
 * General Coding
 
@@ -52,10 +68,34 @@ into recently-ish.
 
 * Databases
 
-
 * C++
 
+- [[http://blog.llvm.org/2015/11/new-elf-linker-from-llvm-project.html][New ELF Linker from the LLVM Project]]: LLVM keeps on delivering! Now
+  a new ELF linker. To be totally honest, I haven't even started using
+  [[https://en.wikipedia.org/wiki/Gold_(linker)][Gold]] in anger - I get the feeling the LLVM linker is going to be
+  transitioned in much quicker than Gold.
+- [[http://blogs.msdn.com/b/vcblog/archive/2015/12/04/introducing-clang-with-microsoft-codegen-in-vs-2015-update-1.aspx][Clang with Microsoft CodeGen in VS 2015 Update 1]]: OMG, OMG how cool
+  is this - MSFT decided to create a backend for Clang that is totally
+  compatible with MSVC _AND_ open source it! This is just insane. This
+  means for example that you now can develop C++ on Windows without
+  ever having to use MSVC and Visual Studio. It also means you can
+  cross-compile from Linux into Windows with 100% certainty things
+  will work. It means that projects like [[https://www.winehq.org/][Wine]] and [[https://www.reactos.org/][ReactOS]] can start
+  thinking about a migration path into Clang (not quite as simple as
+  it may sound but surely makes sense). [[https://www.jetbrains.com/clion/][CLion]] with Clang on Windows
+  will rock. The possibilities are just endless. I never quite
+  understood what C2 was all about until I read this announcement -
+  [[http://www.theregister.co.uk/2015/10/21/microsoft_promises_clang_for_windows_in_november_visual_c_update/][suddenly it all makes sense]]. This is /fantastic/ news.
+
 * Layman Science
+
+- [[http://www.wired.com/brandlab/2015/05/jeff-hawkins-firing-silicon-brain/][Jeff Hawkins on Firing Up the Silicon Brain]]: OK, let me totally
+  honest: I _love_ Jeff Hawkins. I read On Intelligence far too many
+  times to count and would be lying if I didn't admit that it had a
+  little bit to do with my researches in Computational
+  Neuroscience. So as you can imagine, I'm rather excited about [[https://en.wikipedia.org/wiki/Hierarchical_temporal_memory][HTM]]
+  and [[https://en.wikipedia.org/wiki/Numenta][Numenta's]] latest developments. This article is a good catch-up,
+  if slightly high-level.
 
 * Other
 
