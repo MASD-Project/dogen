@@ -18,39 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn_json/types/hydrator.hpp"
-#include "dogen/yarn_json/types/frontend.hpp"
+#ifndef DOGEN_YARN_JSON_TYPES_FRONTEND_HPP
+#define DOGEN_YARN_JSON_TYPES_FRONTEND_HPP
 
-using namespace dogen::utility::log;
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-namespace {
-
-const std::string id("yarn_json.frontend");
-const std::list<std::string> extensions({ ".json" });
-auto lg(logger_factory(id));
-const std::string empty;
-
-}
+#include "dogen/yarn/types/frontend_interface.hpp"
 
 namespace dogen {
-namespace yarn_json {
+namespace yarn {
+namespace json {
 
-frontend::~frontend() noexcept { }
+/**
+ * @brief Generates an intermediate yarn model from a JSON file with a
+ * yarn format.
+ */
+class frontend final : public yarn::frontend_interface {
+public:
+    virtual ~frontend() noexcept;
 
-std::string frontend::id() const {
-    return ::id;
-}
+public:
+    std::string id() const override;
+    std::list<std::string> supported_extensions() const override;
+    yarn::intermediate_model execute(const dynamic::workflow& w,
+        const yarn::input_descriptor& d) override;
+};
 
-std::list<std::string> frontend::supported_extensions() const {
-    return ::extensions;
-}
+} } }
 
-yarn::intermediate_model frontend::execute(const dynamic::workflow& w,
-    const yarn::input_descriptor& d) {
-    yarn_json::hydrator h(w);
-    return h.hydrate(d.path());
-}
-
-} }
+#endif

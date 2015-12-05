@@ -21,6 +21,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/io/formatters/file_types_io.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
@@ -72,8 +73,8 @@ make_inclusion_path(const settings::path_settings& ps,
         for (const auto& m : n.location().external_module_path())
             r /= m;
 
-        for (const auto& m : n.location().model_module_path())
-            r /= m;
+        const auto& mmp(n.location().model_module_path());
+        r /= boost::algorithm::join(mmp, dot);
     }
 
     /* If there is a facet directory, and it is configured to
@@ -125,18 +126,17 @@ make_file_path(const settings::path_settings& ps,
     boost::filesystem::path r;
 
     const auto ft(ps.file_type());
+    const auto& mmp(n.location().model_module_path());
     switch (ft) {
     case formatters::file_types::cpp_header:
         r = options_.project_directory_path();
-        for (const auto& m : n.location().model_module_path())
-            r /= m;
+        r /= boost::algorithm::join(mmp, dot);
         r /= ps.include_directory_name();
         break;
 
     case formatters::file_types::cpp_implementation:
         r = options_.project_directory_path();
-        for (const auto& m : n.location().model_module_path())
-            r /= m;
+        r /= boost::algorithm::join(mmp, dot);
         r /= ps.source_directory_name();
         break;
 

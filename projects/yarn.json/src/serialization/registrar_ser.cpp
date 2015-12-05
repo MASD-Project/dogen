@@ -29,7 +29,8 @@
 #include "dogen/yarn/serialization/registrar_ser.hpp"
 
 namespace dogen {
-namespace yarn_json {
+namespace yarn {
+namespace json {
 
 template<typename Archive>
 void register_types(Archive& ar) {
@@ -48,4 +49,4 @@ template void register_types(boost::archive::binary_iarchive& ar);
 template void register_types(boost::archive::xml_oarchive& ar);
 template void register_types(boost::archive::xml_iarchive& ar);
 
-} }
+} } }

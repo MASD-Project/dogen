@@ -144,7 +144,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/dia/include
     ${CMAKE_SOURCE_DIR}/projects/backend/include
     ${CMAKE_SOURCE_DIR}/projects/yarn/include
-    ${CMAKE_SOURCE_DIR}/projects/yarn_json/include
+    ${CMAKE_SOURCE_DIR}/projects/yarn.json/include
     ${CMAKE_SOURCE_DIR}/projects/yarn_dia/include
     ${CMAKE_SOURCE_DIR}/projects/config/include
     ${CMAKE_SOURCE_DIR}/projects/cpp/include
@@ -166,8 +166,8 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/backend/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/backend/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/yarn/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/yarn/spec)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/yarn_json/src)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/yarn_json/spec)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/yarn.json/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/yarn.json/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/yarn_dia/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/yarn_dia/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/config/src)

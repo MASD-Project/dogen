@@ -18,13 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_JSON_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_YARN_JSON_SERIALIZATION_ALL_SER_HPP
+#ifndef DOGEN_YARN_JSON_TYPES_ALL_HPP
+#define DOGEN_YARN_JSON_TYPES_ALL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn_json/serialization/registrar_ser.hpp"
+#include "dogen/yarn.json/types/json.hpp"
+#include "dogen/yarn.json/types/frontend.hpp"
+#include "dogen/yarn.json/types/hydrator.hpp"
+#include "dogen/yarn.json/types/initializer.hpp"
+#include "dogen/yarn.json/types/hydration_error.hpp"
 
 #endif

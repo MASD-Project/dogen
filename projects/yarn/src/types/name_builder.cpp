@@ -109,11 +109,8 @@ name_builder& name_builder::model_name(const std::string& mn) {
     using utility::string::splitter;
     name_.location().model_module_path(splitter::split_scoped(mn, dot));
 
-    if (infer_simple_name_from_model_name_) {
-        // FIXME
-        // name_.simple(*name_.location().model_module_path().rbegin());
-        name_.simple(mn);
-    }
+    if (infer_simple_name_from_model_name_)
+        name_.simple(*name_.location().model_module_path().rbegin());
 
     BOOST_LOG_SEV(lg, debug) << "Added model name: " << mn;
     return *this;

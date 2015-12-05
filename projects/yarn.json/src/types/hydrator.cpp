@@ -29,13 +29,13 @@
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn_json/types/hydration_error.hpp"
-#include "dogen/yarn_json/types/hydrator.hpp"
+#include "dogen/yarn.json/types/hydration_error.hpp"
+#include "dogen/yarn.json/types/hydrator.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn_json.hydrator"));
+auto lg(logger_factory("yarn.json.hydrator"));
 
 const std::string empty;
 const std::string in_global_module_key("in_global_module");
@@ -77,7 +77,8 @@ const std::string invalid_object_type("Invalid or unsupported object type: ");
 }
 
 namespace dogen {
-namespace yarn_json {
+namespace yarn {
+namespace json {
 
 hydrator::hydrator(const dynamic::workflow& w)
     : dynamic_workflow_(w) { }
@@ -274,4 +275,4 @@ hydrate(const boost::filesystem::path& p) const {
     return r;
 }
 
-} }
+} } }

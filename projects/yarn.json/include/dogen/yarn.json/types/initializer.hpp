@@ -18,33 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_JSON_TYPES_FRONTEND_HPP
-#define DOGEN_YARN_JSON_TYPES_FRONTEND_HPP
+#ifndef DOGEN_YARN_JSON_TYPES_INITIALIZER_HPP
+#define DOGEN_YARN_JSON_TYPES_INITIALIZER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/frontend_interface.hpp"
-
 namespace dogen {
-namespace yarn_json {
+namespace yarn {
+namespace json {
 
 /**
- * @brief Generates an intermediate yarn model from a JSON file with a
- * yarn format.
+ * @brief Initialises all of the static state in this model.
  */
-class frontend final : public yarn::frontend_interface {
+class initializer {
 public:
-    virtual ~frontend() noexcept;
-
-public:
-    std::string id() const override;
-    std::list<std::string> supported_extensions() const override;
-    yarn::intermediate_model execute(const dynamic::workflow& w,
-        const yarn::input_descriptor& d) override;
+    static void initialize();
 };
 
-} }
+} } }
 
 #endif

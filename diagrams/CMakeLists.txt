@@ -35,12 +35,11 @@ if(use_latest_knitter)
 endif()
 add_dependencies(knit_all knit_${target})
 
-set(target yarn_json)
-add_custom_target(knit_${target}
+add_custom_target(knit_yarn_json
     COMMENT "Knitting Yarn JSON model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
+    --target ${CMAKE_SOURCE_DIR}/diagrams/yarn.json.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-disable-cmakelists

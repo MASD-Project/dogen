@@ -18,18 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_JSON_TYPES_HYDRATOR_FWD_HPP
-#define DOGEN_YARN_JSON_TYPES_HYDRATOR_FWD_HPP
+#ifndef DOGEN_YARN_JSON_SERIALIZATION_REGISTRAR_SER_HPP
+#define DOGEN_YARN_JSON_SERIALIZATION_REGISTRAR_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 namespace dogen {
-namespace yarn_json {
+namespace yarn {
+namespace json {
 
-class hydrator;
+template<typename Archive>
+void register_types(Archive& ar);
 
-} }
+} } }
 
 #endif

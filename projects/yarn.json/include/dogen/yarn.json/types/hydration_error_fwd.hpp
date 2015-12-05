@@ -18,18 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_JSON_TYPES_FRONTEND_FWD_HPP
-#define DOGEN_YARN_JSON_TYPES_FRONTEND_FWD_HPP
+#ifndef DOGEN_YARN_JSON_TYPES_HYDRATION_ERROR_FWD_HPP
+#define DOGEN_YARN_JSON_TYPES_HYDRATION_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <string>
+#include <boost/exception/info.hpp>
+
 namespace dogen {
-namespace yarn_json {
+namespace yarn {
+namespace json {
 
-class frontend;
+class hydration_error;
 
-} }
+} } }
 
 #endif

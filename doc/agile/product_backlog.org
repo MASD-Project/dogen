@@ -4991,16 +4991,6 @@ We should probably start by creating a simple ebook first and then
 explore the dead-tree options such as [[http://www.lulu.com][Lulu]]. We should also see what
 Luigi did for [[https://leanpub.com/implementingquantlib/][QuantLib]].
 
-*** Use pdflatex for the manual                                       :story:
-
-We should just use pdflatex for the manual rather than org. We need to
-convert the existing content to TeX - maybe one big file - and then
-add a more idiomatic TeX setup such as BibTeX, once chapter per file,
-etc.
-
-We should also have a look at the [[http://implementingquantlib.blogspot.com/2013/09/intermission-latex-style-file-and-some.html][latex templates]] by Luigi for
-quantlib and the [[http://www.springer.com/computer/lncs/lncs%2Bauthors?SGWID%3D0-40209-0-0-0][Springer LaTeX templates]].
-
 *** Investigate adding polymode support for stitch templates          :story:
 
 We need a way to visualise stitch templates that is a bit more

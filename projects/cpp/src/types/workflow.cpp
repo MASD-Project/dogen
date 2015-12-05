@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
@@ -37,6 +38,7 @@ const std::string id("cpp.workflow");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(id));
 
+const std::string dot(".");
 const std::string model_module_not_found("Model module not found for model: ");
 
 }
@@ -124,11 +126,10 @@ workflow::managed_directories(const config::knitting_options& ko,
     const auto ro(obtain_root_object(m));
     settings::directory_names_settings_factory f(rp);
     const auto dn(f.make(ro));
-    const auto mn(m.name().simple());
-
+    const auto& mmp(m.name().location().model_module_path());
+    const auto mn(boost::algorithm::join(mmp, dot));
     std::forward_list<boost::filesystem::path> r;
     r.push_front(ko.cpp().project_directory_path() / mn);
-
     return r;
 }
 

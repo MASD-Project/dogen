@@ -18,15 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/frontend_workflow.hpp"
-#include "dogen/yarn_json/types/frontend.hpp"
-#include "dogen/yarn_json/types/initializer.hpp"
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn.json/types/hydrator.hpp"
+#include "dogen/yarn.json/types/frontend.hpp"
 
-namespace dogen {
-namespace yarn_json {
+using namespace dogen::utility::log;
 
-void initializer::initialize() {
-    yarn::register_frontend<frontend>();
+namespace {
+
+const std::string id("yarn.json.frontend");
+const std::list<std::string> extensions({ ".json" });
+auto lg(logger_factory(id));
+const std::string empty;
+
 }
 
-} }
+namespace dogen {
+namespace yarn {
+namespace json {
+
+frontend::~frontend() noexcept { }
+
+std::string frontend::id() const {
+    return ::id;
+}
+
+std::list<std::string> frontend::supported_extensions() const {
+    return ::extensions;
+}
+
+yarn::intermediate_model frontend::execute(const dynamic::workflow& w,
+    const yarn::input_descriptor& d) {
+    yarn::json::hydrator h(w);
+    return h.hydrate(d.path());
+}
+
+} } }

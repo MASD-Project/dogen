@@ -34,7 +34,8 @@
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
-namespace yarn_json {
+namespace yarn {
+namespace json {
 
 /**
  * @brief Reads intermediate yarn models from a well-defined JSON
@@ -108,6 +109,6 @@ private:
     const dynamic::workflow dynamic_workflow_;
 };
 
-} }
+} } }
 
 #endif

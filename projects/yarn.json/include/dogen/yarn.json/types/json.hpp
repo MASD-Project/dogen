@@ -18,22 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_JSON_TYPES_YARN_JSON_HPP
-#define DOGEN_YARN_JSON_TYPES_YARN_JSON_HPP
+#ifndef DOGEN_YARN_JSON_TYPES_JSON_HPP
+#define DOGEN_YARN_JSON_TYPES_JSON_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 namespace dogen {
+namespace yarn {
 
 /**
  * @brief Provides yarn file importing support for JSON.
  *
  */
-namespace yarn_json {
+namespace json {
 }
 
-}
+} }
 
 #endif

@@ -30,6 +30,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-12-05 Sat 15:15]--[2015-12-05 Sat 15:36] =>  0:21
     CLOCK: [2015-12-03 Thu 19:03]--[2015-12-03 Thu 19:40] =>  0:37
     CLOCK: [2015-11-26 Thu 07:51]--[2015-11-26 Thu 07:59] =>  0:08
     CLOCK: [2015-11-23 Mon 22:45]--[2015-11-23 Mon 23:02] =>  0:17
@@ -306,6 +307,80 @@ Classes done:
 
 - assembler, association indexer.
 
+*** STARTED Add support for composite model names in name             :story:
+    CLOCK: [2015-12-05 Sat 15:36]--[2015-12-05 Sat 16:35] =>  0:59
+
+We added the model names list to location, but we are still not
+parsing composite model names (e.g. =yarn.dia=). This will probably
+break a lot of stuff.
+
+- deal with the fallout in terms of file paths creation, etc.
+- split model names with dots into multiple model paths.
+- resolver needs to take into account this case, in a similar way
+  which we handle models with the same name as modules in the target
+  model.
+- a model should have: an element identifier which is identical to the
+  root module (the module that represents the model). A model is
+  itself an element.
+
+Merged stories:
+
+*Add support for model names with dots*
+
+It is quite annoying to have to create folders and sub-folders for the
+main projects. This is not too bad right now because we don't really
+make use of nesting that much, other than with test models. However,
+now that the architecture is clear and we need to make use of nesting,
+it becomes more of a concern. For example:
+
+: / a
+:   / b
+:   / c
+: / d
+:   / e
+:   / f
+
+This is clearer as:
+
+: / a
+: / a.b
+: / a.c
+: / d.e
+: / d.f
+
+However, in order to implement this we need a bit of cleverness:
+
+- for the purposes of files, the dot represents a dot;
+- for the purposes of namespaces, we must create several namespaces
+  (e.g. yarn::core).
+
+This is also inline with the idea that the model name does not always
+contribute to the namespaces as required by primitives. We basically
+need a cleverer version of qname to handle all of these scenarios.
+
+It may also be worth taking into account the other story on this topic
+where we considered using underscores instead of folders for facet
+names. It may be nicer to have dots for this,
+e.g. =types.my_class.hpp=.
+
+Idea:
+
+=names= should have a model name and a model package; only the model
+package contributes to the namespaces. The model name is unpacked into
+multiple model packages (e.g. "a.b" => a::b). The file name uses the
+model name, not the model package.
+
+*** STARTED Use pdflatex for the manual                               :story:
+    CLOCK: [2015-12-05 Sat 16:35]
+
+We should just use pdflatex for the manual rather than org. We need to
+convert the existing content to TeX - maybe one big file - and then
+add a more idiomatic TeX setup such as BibTeX, once chapter per file,
+etc.
+
+We should also have a look at the [[http://implementingquantlib.blogspot.com/2013/09/intermission-latex-style-file-and-some.html][latex templates]] by Luigi for
+quantlib and the [[http://www.springer.com/computer/lncs/lncs%2Bauthors?SGWID%3D0-40209-0-0-0][Springer LaTeX templates]].
+
 *** Add "field propagation" support to dynamic                        :story:
 
 - add a graph to yarn that allows external users to set
@@ -418,68 +493,6 @@ all facets except for types. A few points:
 - we may want to have io, serialisation, etc. This is not possible at
   present. If all state of a service is of supported types, we could
   even use existing code generation.
-
-*** Add support for composite model names in name                     :story:
-
-We added the model names list to location, but we are still not
-parsing composite model names (e.g. =yarn.dia=). This will probably
-break a lot of stuff.
-
-- deal with the fallout in terms of file paths creation, etc.
-- split model names with dots into multiple model paths.
-- resolver needs to take into account this case, in a similar way
-  which we handle models with the same name as modules in the target
-  model.
-- a model should have: an element identifier which is identical to the
-  root module (the module that represents the model). A model is
-  itself an element.
-
-Merged stories:
-
-*Add support for model names with dots*
-
-It is quite annoying to have to create folders and sub-folders for the
-main projects. This is not too bad right now because we don't really
-make use of nesting that much, other than with test models. However,
-now that the architecture is clear and we need to make use of nesting,
-it becomes more of a concern. For example:
-
-: / a
-:   / b
-:   / c
-: / d
-:   / e
-:   / f
-
-This is clearer as:
-
-: / a
-: / a.b
-: / a.c
-: / d.e
-: / d.f
-
-However, in order to implement this we need a bit of cleverness:
-
-- for the purposes of files, the dot represents a dot;
-- for the purposes of namespaces, we must create several namespaces
-  (e.g. yarn::core).
-
-This is also inline with the idea that the model name does not always
-contribute to the namespaces as required by primitives. We basically
-need a cleverer version of qname to handle all of these scenarios.
-
-It may also be worth taking into account the other story on this topic
-where we considered using underscores instead of folders for facet
-names. It may be nicer to have dots for this,
-e.g. =types.my_class.hpp=.
-
-Idea:
-
-=names= should have a model name and a model package; only the model
-package contributes to the namespaces. The model name is unpacked into
-multiple model packages (e.g. "a.b" => a::b). The file name uses the
-model name, not the model package.
 
 *** Add =interface= stereotype                                        :story:
 

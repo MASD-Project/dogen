@@ -32,13 +32,13 @@
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
-#include "dogen/yarn_json/types/hydration_error.hpp"
-#include "dogen/yarn_json/types/hydrator.hpp"
+#include "dogen/yarn.json/types/hydration_error.hpp"
+#include "dogen/yarn.json/types/hydrator.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
 namespace {
 
-const std::string test_module("yarn_json");
+const std::string test_module("yarn.json");
 const std::string test_suite("hydrator_spec");
 
 const std::string model_name("a_model");
@@ -193,7 +193,7 @@ dogen::yarn::intermediate_model hydrate(std::istream& s) {
     using dogen::dynamic::test::mock_workflow_factory;
     const auto w(mock_workflow_factory::non_validating_workflow(rp));
 
-    dogen::yarn_json::hydrator h(w);
+    dogen::yarn::json::hydrator h(w);
     return h.hydrate(s);
 }
 
@@ -210,7 +210,7 @@ dogen::yarn::intermediate_model hydrate(const std::string& content) {
 }
 
 using dogen::utility::test::contains_checker;
-using dogen::yarn_json::hydration_error;
+using dogen::yarn::json::hydration_error;
 
 BOOST_AUTO_TEST_SUITE(hydrator)
 
