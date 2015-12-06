@@ -17,4 +17,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
+add_custom_target(latex_docs)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/presentations)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/manual)

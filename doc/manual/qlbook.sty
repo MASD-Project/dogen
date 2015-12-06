@@ -1,0 +1,232 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{qlbook}[2003/08/22 Style and macros for the QuantLib book]
+
+\RequirePackage{microtype}
+
+% fonts
+\RequirePackage[T1]{fontenc}
+\RequirePackage{textcomp}
+\RequirePackage{pxfonts}
+\RequirePackage{charter}
+\RequirePackage{fourier-orns}
+\RequirePackage[scaled]{beramono}
+
+% crop marks
+\RequirePackage[cam,noinfo,center]{crop}
+
+\RequirePackage{eso-pic,graphicx,color,type1cm}
+\RequirePackage[twoside]{geometry}
+
+% draft
+\DeclareOption{draft}
+{\AddToShipoutPicture{%
+ \AtTextCenter{\makebox[0pt]{\scalebox{9}{%
+     \rotatebox[origin=c]{45}{\color[gray]{.82}\normalfont{Draft}}}}}}%
+\crop[frame,info]
+\CROP@size{210truemm}{297truemm}
+\overfullrule=5pt
+}
+
+% page sizes
+
+\DeclareOption{createspace}
+{\geometry{papersize={7in,10in}}   % Closest size to b5 for Amazon CreateSpace
+}
+
+\DeclareOption{lulu}
+{\geometry{papersize={7.44in,9.68in},   % Same textarea as CreateSpace,
+           body={354.12144pt,502.0pt}}  % but with Lulu paper size
+}
+
+\ProcessOptions
+
+\geometry{heightrounded}
+
+% headers
+\RequirePackage{fancyhdr}
+\renewcommand{\headrulewidth}{0.0pt}
+\renewcommand{\footrulewidth}{0.0pt}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\slshape\nouppercase{\rightmark}}
+\fancyhead[RE]{\slshape\nouppercase{\leftmark}}
+
+% table of contents
+\RequirePackage{pifont}
+\newcommand{\tocbreak}{%
+\addtocontents{toc}{\protect\vspace*{6pt}}
+\addtocontents{toc}{\protect\centering\protect\leafright\protect\decoone\protect\leafleft\protect\par}
+\cleardoublepage
+}
+
+% index and glossary
+\RequirePackage{makeidx,nomencl}
+\renewcommand{\nomname}{Glossary}
+\renewcommand{\nomlabel}[1]{\textbf{#1}\hfil}
+\renewcommand{\glossary}[2]{\nomenclature{#1}{#2}}
+\makeindex
+\makenomenclature
+
+% smart references
+\RequirePackage{varioref}
+
+% figure placement
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+\addtolength{\textfloatsep}{-16pt}
+
+% listings
+\RequirePackage{listings}
+\newcommand{\code}[1]{\lstinline|#1|}
+\lstset{%
+  keywordstyle=\bfseries\ttfamily,
+  identifierstyle=\ttfamily,
+  commentstyle=\itshape,
+  stringstyle=\ttfamily,
+  showstringspaces=false,
+  framesep=12pt,
+  numberstyle=\scriptsize,
+  numbersep=5pt,
+  escapechar=`,
+  escapebegin=\itshape,
+  texcl,
+}
+\lstdefinelanguage{pseudocode}
+{morekeywords={given,for,in,return},
+ sensitive=false,
+ morestring=[b]",
+}
+
+\renewcommand{\lstlistlistingname}{List of Listings}
+\newcommand{\listoflistings}{\lstlistoflistings}
+\newcommand{\lstlolbreak}{\addtocontents{lol}{\protect\addvspace{10\p@}}}
+\newcommand{\loabreak}{\addtocontents{loa}{\protect\addvspace{10\p@}}}
+
+\lstnewenvironment{pseudocode}[1][]{%
+  \lstset{language=pseudocode,basicstyle=\small,#1}}{}
+\lstnewenvironment{Python}[1][]{%
+  \lstset{language=python,basicstyle=\small,#1}}{}
+\lstnewenvironment{C++}[1][]{%
+  \lstset{language=C++,basicstyle=\small,#1}}{}
+
+% title formatting
+\newcommand{\bigchapternumber}[1]{%
+  \AddToShipoutPicture*{%
+    \AtTextUpperLeft{%
+      \put(\LenToUnit{.8\textwidth},\LenToUnit{-0.25\textheight}){%
+        \makebox[0pt]{\scalebox{20}{%
+            \color[gray]{.6}\bfseries\itshape\sffamily{#1}}}}}}}
+
+\RequirePackage[compact]{titlesec}
+\titlelabel{\thetitle.\quad}
+\titleformat{\chapter}[hang]%
+{\lstlolbreak\loabreak\Huge\bfseries\filleft}{\bigchapternumber{\thechapter}}{1em}{}
+\newcommand{\precis}[1]{\vspace*{-24pt}\textit{\raggedleft\large #1\\[12pt]}}
+
+% toc formatting
+\RequirePackage{titletoc}
+\titlecontents*{subsection}[3.0em]
+  {\small\itshape}
+  {}{}
+  {, \thecontentspage}
+  [\ \textbullet\ ][\hfill\ ]
+
+% versals
+\RequirePackage{lettrine}
+\newcommand{\versal}[3][]{\bigskip\lettrine[#1]{$\mathcal{#2}$}{#3}}
+
+% epigraphs
+\newcommand{\epigraph}[2]{
+\hfill
+\begin{minipage}{6cm}
+    \small\raggedright
+    #1
+    \ifx\relax#2\relax
+    \else
+    \\ \hfill --- #2
+    \fi
+    \bigskip
+\end{minipage}
+}
+
+% asides
+\RequirePackage{color,framed,float}
+\definecolor{lightgray}{gray}{0.9}
+\def\FrameCommand{\fboxrule=2\FrameRule \fboxsep=2\FrameSep
+                  \fcolorbox{black}{lightgray}}
+
+\newcommand*{\FirstUpper}[1]{\MakeUppercase #1}
+
+\floatstyle{plain}
+\renewcommand{\floatc@plain}[2]{}
+\newfloat{asidebody}{tbp}{loa}[chapter]
+\newenvironment{aside}[2][tbp]{%
+\begin{asidebody}[#1]
+\caption{\FirstUpper{#2}}
+\begin{framed}
+\vspace*{-3pt}
+\hfill\textbf{Aside: #2}\par
+\smallskip
+\small
+}{%
+\vspace*{-3pt}
+\end{framed}
+\end{asidebody}
+}
+\newcommand{\listofasides}{\listof{asidebody}{List of Asides}}
+
+% list formatting
+%% \RequirePackage{amssymb}
+%% \renewcommand{\labelitemi}{{\ding{111}}}
+%% \newenvironment{checklist}{%
+%% \begin{list}{\large\checkmark}{}}{%
+%% \end{list}}
+
+% nice fractions in text
+\RequirePackage{nicefrac}
+
+% hyperref
+\RequirePackage[plainpages=false,pdfpagemode=UseNone,
+                pdfstartview=Fit,pdfpagelayout=TwoPageRight,
+                colorlinks=true,
+                anchorcolor=black,
+                citecolor=black,
+                filecolor=black,
+                linkcolor=black,
+                pagecolor=black,
+                urlcolor=black,
+                pdfauthor={Luigi Ballabio},
+                pdftitle={Implementing QuantLib}]{hyperref}
+
+% add to table of contents
+\newcommand{\addcontentsentry}[1]{%
+  \phantomsection{}
+  \addcontentsline{toc}{chapter}{\numberline{}#1}}
+
+% last-minute tweaks
+
+\newcommand{\longpage}{\enlargethispage{\baselineskip}}
+\newcommand{\shortpage}{\enlargethispage{-\baselineskip}}
+
+% miscellanea
+\newcommand{\breath}{\vspace{10pt}}
+\newcommand{\latin}[1]{\textit{#1}}
+\newcommand{\foreign}[1]{\textit{#1}}
+
+\newcommand{\definition}[1]{\textit{#1}}
+\newcommand{\acronym}[1]{\textsc{#1}}
+
+\newcommand{\work}[1]{\textit{#1}}
+
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\diff}[1]{\mathrm{d}#1}
+
+\newcommand{\cpp}{C\nolinebreak+\nolinebreak\hspace{-.10em}+}
+\newcommand{\csharp}{C\nolinebreak\texttt{\#}}
+
+% prevent overfull hbox in toc
+\makeatletter
+\renewcommand*{\@pnumwidth}{2.0em}
+\makeatother

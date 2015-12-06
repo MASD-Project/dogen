@@ -17,12 +17,16 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-if (WITH_PRESENTATION)
+if (WITH_LATEX)
     if(NOT IS_DIRECTORY ${stage_doc_dir})
         file(MAKE_DIRECTORY ${stage_doc_dir})
     endif()
 
-    add_custom_target(presentation)
+    set(presentation_dir ${stage_doc_dir}/presentation)
+    if(NOT IS_DIRECTORY ${presentation_dir})
+        file(MAKE_DIRECTORY ${presentation_dir})
+    endif()
+
     set(all_files "")
     file(GLOB all_files RELATIVE
          "${CMAKE_CURRENT_SOURCE_DIR}/"
@@ -32,21 +36,21 @@ if (WITH_PRESENTATION)
             get_filename_component(file_name ${file} NAME_WE)
             if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${file_name}.bib)
                 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/${file_name}.bib
-                    DESTINATION ${stage_doc_dir})
+                    DESTINATION ${presentation_dir})
             endif()
-            configure_file(${CMAKE_CURRENT_SOURCE_DIR}/${file} ${stage_doc_dir}/${file})
+            configure_file(${CMAKE_CURRENT_SOURCE_DIR}/${file}
+              ${presentation_dir}/${file})
 
-            message(STATUS "${stage_doc_dir}/${file_name}.pdf")
+            message(STATUS "${presentation_dir}/${file_name}.pdf")
             add_custom_target(presentation_${file} ALL
                 COMMENT "Generating presentation ${file}"
-                DEPENDS ${stage_doc_dir}/${file}
-                # COMMAND ${PDFLATEX_COMMAND} ${file}
+                DEPENDS ${presentation_dir}/${file}
                 COMMAND ${PDFLATEX_COMMAND} ${file}
                 COMMAND bibtex ${file_name}
                 COMMAND ${PDFLATEX_COMMAND} ${file}
-                OUTPUT ${stage_doc_dir}/${file_name}.pdf
-                WORKING_DIRECTORY ${stage_doc_dir})
+                OUTPUT ${presentation_dir}/${file_name}.pdf
+                WORKING_DIRECTORY ${presentation_dir})
 
-            add_dependencies(presentation presentation_${file})
+            add_dependencies(latex_docs presentation_${file})
     endforeach()
 endif()    
