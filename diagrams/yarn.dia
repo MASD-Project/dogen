@@ -2287,7 +2287,7 @@ Aggregates a group of logically related types into a unit.#</dia:string>
         <dia:string>#concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Object#</dia:string>
+        <dia:string>#StatefulElement#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents a generic programming concept.
@@ -3698,7 +3698,11 @@ for Java, etc.#</dia:string>
         <dia:string>#concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#A unit of modeling that can be code generated.#</dia:string>
+        <dia:string>#A unit of modeling that can be code generated.
+
+We define the Element concept purely to make our life easier when creating
+the element class (e.g. it expresses refinement in an easy to understand way).
+It is not required for any other purpose.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3855,25 +3859,25 @@ for Java, etc.#</dia:string>
         <dia:point val="-78,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-78.05,29.95;-73.215,33.05"/>
+        <dia:rectangle val="-78.05,29.95;-70.1425,33.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-78,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="4.7350000000000003"/>
+        <dia:real val="7.8075000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#Object#</dia:string>
+        <dia:string>#StatefulElement#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#A model element which models an object as defined by OOP.#</dia:string>
+        <dia:string>#A model element which can have state.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3965,7 +3969,7 @@ for Java, etc.#</dia:string>
         <dia:point val="-61.8525,19.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-75.6825,19.15;-61.0025,30.05"/>
+        <dia:rectangle val="-74.1462,19.15;-61.0025,30.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3973,8 +3977,8 @@ for Java, etc.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-61.8525,19.2"/>
         <dia:point val="-61.8525,25"/>
-        <dia:point val="-75.6325,25"/>
-        <dia:point val="-75.6325,30"/>
+        <dia:point val="-74.0962,25"/>
+        <dia:point val="-74.0962,30"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4006,7 +4010,7 @@ for Java, etc.#</dia:string>
         <dia:point val="-88.3225,17.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-89.1725,17.55;-75.5825,30.05"/>
+        <dia:rectangle val="-89.1725,17.55;-74.0463,30.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4014,8 +4018,8 @@ for Java, etc.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-88.3225,17.6"/>
         <dia:point val="-88.3225,25"/>
-        <dia:point val="-75.6325,25"/>
-        <dia:point val="-75.6325,30"/>
+        <dia:point val="-74.0962,25"/>
+        <dia:point val="-74.0962,30"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4684,7 +4688,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:string>#object#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Object#</dia:string>
+        <dia:string>#StatefulElement#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Representation of the object notion in the OOP paradigm.#</dia:string>
