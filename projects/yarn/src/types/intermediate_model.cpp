@@ -24,40 +24,16 @@ namespace dogen {
 namespace yarn {
 
 intermediate_model::intermediate_model()
-    : in_global_module_(static_cast<bool>(0)),
+    : origin_type_(static_cast<dogen::yarn::origin_types>(0)),
       generation_type_(static_cast<dogen::yarn::generation_types>(0)),
-      origin_type_(static_cast<dogen::yarn::origin_types>(0)),
       is_target_(static_cast<bool>(0)),
       has_generatable_types_(static_cast<bool>(0)) { }
 
-intermediate_model::intermediate_model(intermediate_model&& rhs)
-    : in_global_module_(std::move(rhs.in_global_module_)),
-      documentation_(std::move(rhs.documentation_)),
-      extensions_(std::move(rhs.extensions_)),
-      name_(std::move(rhs.name_)),
-      generation_type_(std::move(rhs.generation_type_)),
-      origin_type_(std::move(rhs.origin_type_)),
-      original_model_name_(std::move(rhs.original_model_name_)),
-      containing_module_(std::move(rhs.containing_module_)),
-      references_(std::move(rhs.references_)),
-      leaves_(std::move(rhs.leaves_)),
-      modules_(std::move(rhs.modules_)),
-      concepts_(std::move(rhs.concepts_)),
-      primitives_(std::move(rhs.primitives_)),
-      enumerations_(std::move(rhs.enumerations_)),
-      objects_(std::move(rhs.objects_)),
-      is_target_(std::move(rhs.is_target_)),
-      has_generatable_types_(std::move(rhs.has_generatable_types_)) { }
-
 intermediate_model::intermediate_model(
-    const bool in_global_module,
-    const std::string& documentation,
-    const dogen::dynamic::object& extensions,
     const dogen::yarn::name& name,
-    const dogen::yarn::generation_types generation_type,
     const dogen::yarn::origin_types origin_type,
     const std::string& original_model_name,
-    const boost::optional<dogen::yarn::name>& containing_module,
+    const dogen::yarn::generation_types generation_type,
     const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& references,
     const std::unordered_set<dogen::yarn::name>& leaves,
     const std::unordered_map<std::string, dogen::yarn::module>& modules,
@@ -67,14 +43,10 @@ intermediate_model::intermediate_model(
     const std::unordered_map<std::string, dogen::yarn::object>& objects,
     const bool is_target,
     const bool has_generatable_types)
-    : in_global_module_(in_global_module),
-      documentation_(documentation),
-      extensions_(extensions),
-      name_(name),
-      generation_type_(generation_type),
+    : name_(name),
       origin_type_(origin_type),
       original_model_name_(original_model_name),
-      containing_module_(containing_module),
+      generation_type_(generation_type),
       references_(references),
       leaves_(leaves),
       modules_(modules),
@@ -87,14 +59,10 @@ intermediate_model::intermediate_model(
 
 void intermediate_model::swap(intermediate_model& other) noexcept {
     using std::swap;
-    swap(in_global_module_, other.in_global_module_);
-    swap(documentation_, other.documentation_);
-    swap(extensions_, other.extensions_);
     swap(name_, other.name_);
-    swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
     swap(original_model_name_, other.original_model_name_);
-    swap(containing_module_, other.containing_module_);
+    swap(generation_type_, other.generation_type_);
     swap(references_, other.references_);
     swap(leaves_, other.leaves_);
     swap(modules_, other.modules_);
@@ -107,14 +75,10 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
 }
 
 bool intermediate_model::operator==(const intermediate_model& rhs) const {
-    return in_global_module_ == rhs.in_global_module_ &&
-        documentation_ == rhs.documentation_ &&
-        extensions_ == rhs.extensions_ &&
-        name_ == rhs.name_ &&
-        generation_type_ == rhs.generation_type_ &&
+    return name_ == rhs.name_ &&
         origin_type_ == rhs.origin_type_ &&
         original_model_name_ == rhs.original_model_name_ &&
-        containing_module_ == rhs.containing_module_ &&
+        generation_type_ == rhs.generation_type_ &&
         references_ == rhs.references_ &&
         leaves_ == rhs.leaves_ &&
         modules_ == rhs.modules_ &&
@@ -132,46 +96,6 @@ intermediate_model& intermediate_model::operator=(intermediate_model other) {
     return *this;
 }
 
-bool intermediate_model::in_global_module() const {
-    return in_global_module_;
-}
-
-void intermediate_model::in_global_module(const bool v) {
-    in_global_module_ = v;
-}
-
-const std::string& intermediate_model::documentation() const {
-    return documentation_;
-}
-
-std::string& intermediate_model::documentation() {
-    return documentation_;
-}
-
-void intermediate_model::documentation(const std::string& v) {
-    documentation_ = v;
-}
-
-void intermediate_model::documentation(const std::string&& v) {
-    documentation_ = std::move(v);
-}
-
-const dogen::dynamic::object& intermediate_model::extensions() const {
-    return extensions_;
-}
-
-dogen::dynamic::object& intermediate_model::extensions() {
-    return extensions_;
-}
-
-void intermediate_model::extensions(const dogen::dynamic::object& v) {
-    extensions_ = v;
-}
-
-void intermediate_model::extensions(const dogen::dynamic::object&& v) {
-    extensions_ = std::move(v);
-}
-
 const dogen::yarn::name& intermediate_model::name() const {
     return name_;
 }
@@ -186,14 +110,6 @@ void intermediate_model::name(const dogen::yarn::name& v) {
 
 void intermediate_model::name(const dogen::yarn::name&& v) {
     name_ = std::move(v);
-}
-
-dogen::yarn::generation_types intermediate_model::generation_type() const {
-    return generation_type_;
-}
-
-void intermediate_model::generation_type(const dogen::yarn::generation_types v) {
-    generation_type_ = v;
 }
 
 dogen::yarn::origin_types intermediate_model::origin_type() const {
@@ -220,20 +136,12 @@ void intermediate_model::original_model_name(const std::string&& v) {
     original_model_name_ = std::move(v);
 }
 
-const boost::optional<dogen::yarn::name>& intermediate_model::containing_module() const {
-    return containing_module_;
+dogen::yarn::generation_types intermediate_model::generation_type() const {
+    return generation_type_;
 }
 
-boost::optional<dogen::yarn::name>& intermediate_model::containing_module() {
-    return containing_module_;
-}
-
-void intermediate_model::containing_module(const boost::optional<dogen::yarn::name>& v) {
-    containing_module_ = v;
-}
-
-void intermediate_model::containing_module(const boost::optional<dogen::yarn::name>&& v) {
-    containing_module_ = std::move(v);
+void intermediate_model::generation_type(const dogen::yarn::generation_types v) {
+    generation_type_ = v;
 }
 
 const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& intermediate_model::references() const {

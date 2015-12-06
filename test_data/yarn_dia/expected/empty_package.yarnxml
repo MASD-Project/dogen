@@ -2,20 +2,11 @@
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="13">
 <entity class_id="8" tracking_level="0" version="0">
-	<in_global_module>0</in_global_module>
-	<documentation></documentation>
-	<extensions class_id="9" tracking_level="0" version="0">
-		<fields class_id="10" tracking_level="0" version="0">
-			<count>0</count>
-			<bucket_count>1</bucket_count>
-			<item_version>0</item_version>
-		</fields>
-	</extensions>
-	<name class_id="11" tracking_level="0" version="0">
+	<name class_id="9" tracking_level="0" version="0">
 		<simple>empty_package</simple>
 		<qualified>&lt;empty_package&gt;</qualified>
-		<location class_id="12" tracking_level="0" version="0">
-			<external_module_path class_id="13" tracking_level="0" version="0">
+		<location class_id="10" tracking_level="0" version="0">
+			<external_module_path class_id="11" tracking_level="0" version="0">
 				<count>0</count>
 				<item_version>0</item_version>
 			</external_module_path>
@@ -30,34 +21,31 @@
 			</internal_module_path>
 		</location>
 	</name>
-	<generation_type>0</generation_type>
 	<origin_type>1</origin_type>
 	<original_model_name>empty_package</original_model_name>
-	<containing_module class_id="14" tracking_level="0" version="0">
-		<initialized>0</initialized>
-	</containing_module>
-	<references class_id="15" tracking_level="0" version="0">
+	<generation_type>0</generation_type>
+	<references class_id="12" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</references>
-	<leaves class_id="16" tracking_level="0" version="0">
+	<leaves class_id="13" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
-	<modules class_id="17" tracking_level="0" version="0">
+	<modules class_id="14" tracking_level="0" version="0">
 		<count>2</count>
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="18" tracking_level="0" version="0">
+		<item class_id="15" tracking_level="0" version="0">
 			<first>&lt;empty_package&gt;&lt;package_1&gt;</first>
 			<second class_id="5" tracking_level="1" version="0" object_id="_0">
-				<element class_id="19" tracking_level="0" version="0">
+				<element class_id="16" tracking_level="0" version="0">
 					<in_global_module>0</in_global_module>
 					<documentation></documentation>
-					<extensions>
-						<fields>
+					<extensions class_id="17" tracking_level="0" version="0">
+						<fields class_id="18" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
@@ -85,7 +73,7 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<original_model_name></original_model_name>
-					<containing_module>
+					<containing_module class_id="19" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</containing_module>
 				</element>

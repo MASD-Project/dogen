@@ -24,7 +24,6 @@
 #include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
-#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
@@ -33,7 +32,6 @@
 #include "dogen/yarn/serialization/module_ser.hpp"
 #include "dogen/yarn/serialization/object_ser.hpp"
 #include "dogen/yarn/serialization/concept_ser.hpp"
-#include "dogen/dynamic/serialization/object_ser.hpp"
 #include "dogen/yarn/serialization/primitive_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
@@ -49,14 +47,10 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::intermediate_model& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("in_global_module", v.in_global_module_);
-    ar << make_nvp("documentation", v.documentation_);
-    ar << make_nvp("extensions", v.extensions_);
     ar << make_nvp("name", v.name_);
-    ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("origin_type", v.origin_type_);
     ar << make_nvp("original_model_name", v.original_model_name_);
-    ar << make_nvp("containing_module", v.containing_module_);
+    ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("references", v.references_);
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("modules", v.modules_);
@@ -72,14 +66,10 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::intermediate_model& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("in_global_module", v.in_global_module_);
-    ar >> make_nvp("documentation", v.documentation_);
-    ar >> make_nvp("extensions", v.extensions_);
     ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("origin_type", v.origin_type_);
     ar >> make_nvp("original_model_name", v.original_model_name_);
-    ar >> make_nvp("containing_module", v.containing_module_);
+    ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("references", v.references_);
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("modules", v.modules_);

@@ -23,7 +23,6 @@
 #include "dogen/yarn/test_data/module_td.hpp"
 #include "dogen/yarn/test_data/object_td.hpp"
 #include "dogen/yarn/test_data/concept_td.hpp"
-#include "dogen/dynamic/test_data/object_td.hpp"
 #include "dogen/yarn/test_data/primitive_td.hpp"
 #include "dogen/yarn/test_data/enumeration_td.hpp"
 #include "dogen/yarn/test_data/origin_types_td.hpp"
@@ -32,8 +31,14 @@
 
 namespace {
 
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
+dogen::yarn::name
+create_dogen_yarn_name(const unsigned int position) {
+    return dogen::yarn::name_generator::create(position);
+}
+
+dogen::yarn::origin_types
+create_dogen_yarn_origin_types(const unsigned int position) {
+    return dogen::yarn::origin_types_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -42,31 +47,9 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::dynamic::object
-create_dogen_dynamic_object(const unsigned int position) {
-    return dogen::dynamic::object_generator::create(position);
-}
-
-dogen::yarn::name
-create_dogen_yarn_name(const unsigned int position) {
-    return dogen::yarn::name_generator::create(position);
-}
-
 dogen::yarn::generation_types
 create_dogen_yarn_generation_types(const unsigned int position) {
     return dogen::yarn::generation_types_generator::create(position);
-}
-
-dogen::yarn::origin_types
-create_dogen_yarn_origin_types(const unsigned int position) {
-    return dogen::yarn::origin_types_generator::create(position);
-}
-
-boost::optional<dogen::yarn::name>
-create_boost_optional_dogen_yarn_name(unsigned int position) {
-    boost::optional<dogen::yarn::name> r(
-        create_dogen_yarn_name(position));
-    return r;
 }
 
 std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types> create_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(unsigned int position) {
@@ -150,6 +133,10 @@ std::unordered_map<std::string, dogen::yarn::object> create_std_unordered_map_st
     return r;
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 }
 
 namespace dogen {
@@ -159,23 +146,19 @@ intermediate_model_generator::intermediate_model_generator() : position_(0) { }
 
 void intermediate_model_generator::
 populate(const unsigned int position, result_type& v) {
-    v.in_global_module(create_bool(position + 0));
-    v.documentation(create_std_string(position + 1));
-    v.extensions(create_dogen_dynamic_object(position + 2));
-    v.name(create_dogen_yarn_name(position + 3));
-    v.generation_type(create_dogen_yarn_generation_types(position + 4));
-    v.origin_type(create_dogen_yarn_origin_types(position + 5));
-    v.original_model_name(create_std_string(position + 6));
-    v.containing_module(create_boost_optional_dogen_yarn_name(position + 7));
-    v.references(create_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(position + 8));
-    v.leaves(create_std_unordered_set_dogen_yarn_name(position + 9));
-    v.modules(create_std_unordered_map_std_string_dogen_yarn_module(position + 10));
-    v.concepts(create_std_unordered_map_std_string_dogen_yarn_concept(position + 11));
-    v.primitives(create_std_unordered_map_std_string_dogen_yarn_primitive(position + 12));
-    v.enumerations(create_std_unordered_map_std_string_dogen_yarn_enumeration(position + 13));
-    v.objects(create_std_unordered_map_std_string_dogen_yarn_object(position + 14));
-    v.is_target(create_bool(position + 15));
-    v.has_generatable_types(create_bool(position + 16));
+    v.name(create_dogen_yarn_name(position + 0));
+    v.origin_type(create_dogen_yarn_origin_types(position + 1));
+    v.original_model_name(create_std_string(position + 2));
+    v.generation_type(create_dogen_yarn_generation_types(position + 3));
+    v.references(create_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(position + 4));
+    v.leaves(create_std_unordered_set_dogen_yarn_name(position + 5));
+    v.modules(create_std_unordered_map_std_string_dogen_yarn_module(position + 6));
+    v.concepts(create_std_unordered_map_std_string_dogen_yarn_concept(position + 7));
+    v.primitives(create_std_unordered_map_std_string_dogen_yarn_primitive(position + 8));
+    v.enumerations(create_std_unordered_map_std_string_dogen_yarn_enumeration(position + 9));
+    v.objects(create_std_unordered_map_std_string_dogen_yarn_object(position + 10));
+    v.is_target(create_bool(position + 11));
+    v.has_generatable_types(create_bool(position + 12));
 }
 
 intermediate_model_generator::result_type

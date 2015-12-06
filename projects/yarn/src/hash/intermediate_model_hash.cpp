@@ -22,7 +22,6 @@
 #include "dogen/yarn/hash/module_hash.hpp"
 #include "dogen/yarn/hash/object_hash.hpp"
 #include "dogen/yarn/hash/concept_hash.hpp"
-#include "dogen/dynamic/hash/object_hash.hpp"
 #include "dogen/yarn/hash/primitive_hash.hpp"
 #include "dogen/yarn/hash/enumeration_hash.hpp"
 #include "dogen/yarn/hash/origin_types_hash.hpp"
@@ -35,16 +34,6 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_boost_optional_dogen_yarn_name(const boost::optional<dogen::yarn::name>& v) {
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
 }
 
 inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& v) {
@@ -117,14 +106,10 @@ namespace yarn {
 std::size_t intermediate_model_hasher::hash(const intermediate_model& v) {
     std::size_t seed(0);
 
-    combine(seed, v.in_global_module());
-    combine(seed, v.documentation());
-    combine(seed, v.extensions());
     combine(seed, v.name());
-    combine(seed, v.generation_type());
     combine(seed, v.origin_type());
     combine(seed, v.original_model_name());
-    combine(seed, hash_boost_optional_dogen_yarn_name(v.containing_module()));
+    combine(seed, v.generation_type());
     combine(seed, hash_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(v.references()));
     combine(seed, hash_std_unordered_set_dogen_yarn_name(v.leaves()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_module(v.modules()));

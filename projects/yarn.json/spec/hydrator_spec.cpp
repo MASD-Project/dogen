@@ -220,24 +220,32 @@ BOOST_AUTO_TEST_CASE(trivial_model_hydrates_into_expected_model) {
     const auto m(hydrate(trivial_model));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    BOOST_REQUIRE(m.name().location().model_module_path().size() == 1);
-    BOOST_CHECK(*(m.name().location().model_module_path().begin())
-        == model_name);
-    BOOST_CHECK(m.name().location().internal_module_path().empty());
-    BOOST_CHECK(m.name().location().external_module_path().empty());
-    BOOST_CHECK(m.documentation() == documentation);
+    const auto& ml(m.name().location());
+    BOOST_REQUIRE(ml.model_module_path().size() == 1);
+    BOOST_CHECK(*(ml.model_module_path().begin()) == model_name);
+    BOOST_CHECK(ml.internal_module_path().empty());
+    BOOST_CHECK(ml.external_module_path().empty());
+
+    BOOST_REQUIRE(m.modules().size() == 1);
+    {
+        const auto& pair(*m.modules().begin());
+        BOOST_CHECK(pair.second.documentation() == documentation);
+        BOOST_CHECK(pair.second.extensions().fields().empty());
+    }
 
     BOOST_REQUIRE(m.objects().size() == 1);
-    const auto& pair(*m.objects().begin());
-    const auto& n(pair.second.name());
+    {
+        const auto& pair(*m.objects().begin());
+        const auto& n(pair.second.name());
 
-    BOOST_CHECK(pair.first == n.qualified());
-    BOOST_CHECK(n.simple() == type_name);
-    BOOST_CHECK(n.location().model_module_path() ==
-        m.name().location().model_module_path());
-    BOOST_CHECK(n.location().internal_module_path().empty());
-    BOOST_CHECK(n.location().external_module_path().empty());
-    BOOST_CHECK(pair.second.documentation() == documentation);
+        BOOST_CHECK(pair.first == n.qualified());
+        BOOST_CHECK(n.simple() == type_name);
+        const auto& nl(n.location());
+        BOOST_CHECK(nl.model_module_path() == ml.model_module_path());
+        BOOST_CHECK(nl.internal_module_path().empty());
+        BOOST_CHECK(nl.external_module_path().empty());
+        BOOST_CHECK(pair.second.documentation() == documentation);
+    }
 }
 
 BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
@@ -246,48 +254,54 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
     const auto m(hydrate(tagged_model));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    BOOST_REQUIRE(m.name().location().model_module_path().size() == 1);
-    BOOST_CHECK(*(m.name().location().model_module_path().begin())
-        == model_name);
-    BOOST_CHECK(m.name().location().internal_module_path().empty());
-    BOOST_CHECK(m.name().location().external_module_path().empty());
-    BOOST_CHECK(m.documentation() == documentation);
-
-    const auto& dyn(m.extensions());
-    BOOST_CHECK(dyn.fields().size() == 2);
+    const auto& ml(m.name().location());
+    BOOST_REQUIRE(ml.model_module_path().size() == 1);
+    BOOST_CHECK(*(ml.model_module_path().begin()) == model_name);
+    BOOST_CHECK(ml.internal_module_path().empty());
+    BOOST_CHECK(ml.external_module_path().empty());
 
     using namespace dogen::dynamic;
-    const field_selector fs(dyn);
+    BOOST_REQUIRE(m.modules().size() == 1);
     {
-        BOOST_REQUIRE(fs.has_field(some_key));
-        BOOST_REQUIRE(fs.get_text_content(some_key) == some_value);
+        const auto& pair(*m.modules().begin());
+        BOOST_CHECK(pair.second.documentation() == documentation);
 
-        BOOST_REQUIRE(fs.has_field(model_key));
-        BOOST_REQUIRE(fs.get_text_content(model_key) == model_value);
+        const auto& dyn(pair.second.extensions());
+        BOOST_CHECK(dyn.fields().size() == 2);
+
+        const field_selector fs(dyn);
+        {
+            BOOST_REQUIRE(fs.has_field(some_key));
+            BOOST_REQUIRE(fs.get_text_content(some_key) == some_value);
+
+            BOOST_REQUIRE(fs.has_field(model_key));
+            BOOST_REQUIRE(fs.get_text_content(model_key) == model_value);
+        }
     }
 
     BOOST_REQUIRE(m.objects().size() == 1);
-
-    const auto& pair(*m.objects().begin());
-    const auto& n(pair.second.name());
-
-    BOOST_CHECK(pair.first == n.qualified());
-    BOOST_CHECK(n.simple() == type_name);
-    BOOST_CHECK(n.location().model_module_path() ==
-        m.name().location().model_module_path());
-    BOOST_CHECK(n.location().internal_module_path().empty());
-    BOOST_CHECK(n.location().external_module_path().empty());
-    BOOST_CHECK(pair.second.documentation() == documentation);
-
     {
-        const auto& o(pair.second);
-        const auto& dyn(o.extensions());
-        const field_selector fs(dyn);
-        BOOST_REQUIRE(fs.has_field(some_key));
-        BOOST_REQUIRE(fs.get_text_content(some_key) == some_value);
+        const auto& pair(*m.objects().begin());
+        const auto& n(pair.second.name());
+        const auto& nl(m.name().location());
 
-        BOOST_REQUIRE(fs.has_field(type_key));
-        BOOST_REQUIRE(fs.get_boolean_content(type_key) == type_value);
+        BOOST_CHECK(pair.first == n.qualified());
+        BOOST_CHECK(n.simple() == type_name);
+        BOOST_CHECK(nl.model_module_path() == ml.model_module_path());
+        BOOST_CHECK(nl.internal_module_path().empty());
+        BOOST_CHECK(nl.external_module_path().empty());
+        BOOST_CHECK(pair.second.documentation() == documentation);
+
+        {
+            const auto& o(pair.second);
+            const auto& dyn(o.extensions());
+            const field_selector fs(dyn);
+            BOOST_REQUIRE(fs.has_field(some_key));
+            BOOST_REQUIRE(fs.get_text_content(some_key) == some_value);
+
+            BOOST_REQUIRE(fs.has_field(type_key));
+            BOOST_REQUIRE(fs.get_boolean_content(type_key) == type_value);
+        }
     }
 }
 
@@ -297,10 +311,17 @@ BOOST_AUTO_TEST_CASE(no_documentation_model_hydrates_into_expected_model) {
     const auto m(hydrate(no_documentation_model));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    BOOST_CHECK(m.documentation().empty());
+    BOOST_REQUIRE(m.modules().size() == 1);
+    {
+        const auto& pair(*m.modules().begin());
+        BOOST_CHECK(pair.second.documentation().empty());
+    }
+
     BOOST_REQUIRE(m.objects().size() == 1);
-    const auto& pair(m.objects().begin());
-    BOOST_CHECK(pair->second.documentation().empty());
+    {
+        const auto& pair(m.objects().begin());
+        BOOST_CHECK(pair->second.documentation().empty());
+    }
 }
 
 BOOST_AUTO_TEST_CASE(no_name_model_throws) {

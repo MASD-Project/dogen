@@ -5467,7 +5467,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="-100.397,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-107.912,-9.85;-99.647,-0.2"/>
+        <dia:rectangle val="-107.912,-9.85;-99.6475,-0.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7722,7 +7722,7 @@ etc.#</dia:string>
         <dia:point val="-100.397,3.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-101.247,3.35;-88.2725,14.05"/>
+        <dia:rectangle val="-101.248,3.35;-88.2725,14.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14324,7 +14324,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:string>#intermediate_model#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Element#</dia:string>
+        <dia:string>#Nameable, DeterminableOrigin, Generatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Intermediate representation of a yarn model.#</dia:string>

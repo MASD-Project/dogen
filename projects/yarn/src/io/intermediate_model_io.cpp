@@ -25,7 +25,6 @@
 #include "dogen/yarn/io/module_io.hpp"
 #include "dogen/yarn/io/object_io.hpp"
 #include "dogen/yarn/io/concept_io.hpp"
-#include "dogen/dynamic/io/object_io.hpp"
 #include "dogen/yarn/io/primitive_io.hpp"
 #include "dogen/yarn/io/enumeration_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
@@ -37,21 +36,6 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\n", "<new_line>");
     boost::replace_all(s, "\"", "<quote>");
     return s;
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::name>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
 }
 
 namespace std {
@@ -188,14 +172,10 @@ std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::intermediate_model\"" << ", "
-      << "\"in_global_module\": " << v.in_global_module() << ", "
-      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"extensions\": " << v.extensions() << ", "
       << "\"name\": " << v.name() << ", "
-      << "\"generation_type\": " << v.generation_type() << ", "
       << "\"origin_type\": " << v.origin_type() << ", "
       << "\"original_model_name\": " << "\"" << tidy_up_string(v.original_model_name()) << "\"" << ", "
-      << "\"containing_module\": " << v.containing_module() << ", "
+      << "\"generation_type\": " << v.generation_type() << ", "
       << "\"references\": " << v.references() << ", "
       << "\"leaves\": " << v.leaves() << ", "
       << "\"modules\": " << v.modules() << ", "

@@ -29,13 +29,11 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
-#include <boost/optional.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/hash/name_hash.hpp"
-#include "dogen/dynamic/types/object.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
@@ -51,24 +49,18 @@ namespace yarn {
 class intermediate_model final {
 public:
     intermediate_model(const intermediate_model&) = default;
+    intermediate_model(intermediate_model&&) = default;
     ~intermediate_model() = default;
 
 public:
     intermediate_model();
 
 public:
-    intermediate_model(intermediate_model&& rhs);
-
-public:
     intermediate_model(
-        const bool in_global_module,
-        const std::string& documentation,
-        const dogen::dynamic::object& extensions,
         const dogen::yarn::name& name,
-        const dogen::yarn::generation_types generation_type,
         const dogen::yarn::origin_types origin_type,
         const std::string& original_model_name,
-        const boost::optional<dogen::yarn::name>& containing_module,
+        const dogen::yarn::generation_types generation_type,
         const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& references,
         const std::unordered_set<dogen::yarn::name>& leaves,
         const std::unordered_map<std::string, dogen::yarn::module>& modules,
@@ -88,38 +80,6 @@ private:
 
 public:
     /**
-     * @brief If true, the type is located in the global module.
-     */
-    /**@{*/
-    bool in_global_module() const;
-    void in_global_module(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Code comments.
-     *
-     * These are expected to follow the grammar of the comment processing tools
-     * of the programming language in question, e.g. Doxygen for C++, JavaDoc
-     * for Java, etc.
-     */
-    /**@{*/
-    const std::string& documentation() const;
-    std::string& documentation();
-    void documentation(const std::string& v);
-    void documentation(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Dynamic extensions for this element.
-     */
-    /**@{*/
-    const dogen::dynamic::object& extensions() const;
-    dogen::dynamic::object& extensions();
-    void extensions(const dogen::dynamic::object& v);
-    void extensions(const dogen::dynamic::object&& v);
-    /**@}*/
-
-    /**
      * @brief Fully qualified name.
      *
      */
@@ -128,14 +88,6 @@ public:
     dogen::yarn::name& name();
     void name(const dogen::yarn::name& v);
     void name(const dogen::yarn::name&& v);
-    /**@}*/
-
-    /**
-     * @brief What to do with this type in terms of code generation.
-     */
-    /**@{*/
-    dogen::yarn::generation_types generation_type() const;
-    void generation_type(const dogen::yarn::generation_types v);
     /**@}*/
 
     /**
@@ -157,13 +109,11 @@ public:
     /**@}*/
 
     /**
-     * @brief Name of the module in which we are contained.
+     * @brief What to do with this type in terms of code generation.
      */
     /**@{*/
-    const boost::optional<dogen::yarn::name>& containing_module() const;
-    boost::optional<dogen::yarn::name>& containing_module();
-    void containing_module(const boost::optional<dogen::yarn::name>& v);
-    void containing_module(const boost::optional<dogen::yarn::name>&& v);
+    dogen::yarn::generation_types generation_type() const;
+    void generation_type(const dogen::yarn::generation_types v);
     /**@}*/
 
     /**
@@ -265,14 +215,10 @@ public:
     intermediate_model& operator=(intermediate_model other);
 
 private:
-    bool in_global_module_;
-    std::string documentation_;
-    dogen::dynamic::object extensions_;
     dogen::yarn::name name_;
-    dogen::yarn::generation_types generation_type_;
     dogen::yarn::origin_types origin_type_;
     std::string original_model_name_;
-    boost::optional<dogen::yarn::name> containing_module_;
+    dogen::yarn::generation_types generation_type_;
     std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types> references_;
     std::unordered_set<dogen::yarn::name> leaves_;
     std::unordered_map<std::string, dogen::yarn::module> modules_;

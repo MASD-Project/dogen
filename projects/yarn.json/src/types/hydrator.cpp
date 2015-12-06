@@ -183,13 +183,6 @@ yarn::intermediate_model hydrator::read_stream(
     r.name(nf.build_model_name(model_name_value));
     BOOST_LOG_SEV(lg, debug) << "Processing model: " << r.name().qualified();
 
-    const auto scope(dynamic::scope_types::root_module);
-    r.extensions(create_dynamic_extensions(pt, scope));
-
-    const auto documentation(pt.get_optional<std::string>(documentation_key));
-    if (documentation)
-        r.documentation(*documentation);
-
     const auto origin_value(pt.get<std::string>(origin_key));
     if (origin_value == origin_system_value)
         r.origin_type(yarn::origin_types::system);
@@ -201,6 +194,13 @@ yarn::intermediate_model hydrator::read_stream(
     }
 
     yarn::module m;
+    const auto scope(dynamic::scope_types::root_module);
+    m.extensions(create_dynamic_extensions(pt, scope));
+
+    const auto documentation(pt.get_optional<std::string>(documentation_key));
+    if (documentation)
+        m.documentation(*documentation);
+
     m.name(r.name());
     m.origin_type(r.origin_type());
     m.generation_type(r.generation_type());

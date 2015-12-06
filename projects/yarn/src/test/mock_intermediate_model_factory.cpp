@@ -204,7 +204,6 @@ void populate_object(dogen::yarn::object& o, const unsigned int i,
 void populate_simple_model_properties(dogen::yarn::intermediate_model& m,
     const unsigned int n) {
     m.name(mock_model_name(n));
-    m.documentation(documentation);
     m.origin_type(dogen::yarn::origin_types::user);
     m.generation_type(dogen::yarn::generation_types::full_generation);
 }
@@ -578,6 +577,10 @@ module mock_intermediate_model_factory::make_module(const yarn::name& n,
     module r;
     r.name(n);
     r.documentation(documentation);
+
+    if (flags_.tagged())
+        dynamic_extension_function_(r.extensions());
+
     return r;
 }
 
@@ -607,10 +610,6 @@ intermediate_model mock_intermediate_model_factory::make_empty_model(
     intermediate_model r;
     populate_simple_model_properties(r, n);
     handle_model_module(add_model_module, r);
-
-    if (flags_.tagged())
-        dynamic_extension_function_(r.extensions());
-
     return r;
 }
 

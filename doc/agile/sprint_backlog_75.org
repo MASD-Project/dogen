@@ -13,19 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-06 Sun 22:50]
+#+CAPTION: Clock summary at [2015-12-06 Sun 23:23]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *16:06* |       |      |
+| *Total time*                                                                | *16:37* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 16:06   |       |      |
-| Active                                                                      |         | 16:06 |      |
+| Stories                                                                     | 16:37   |       |      |
+| Active                                                                      |         | 16:37 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:23 |
 | COMPLETED Use qualified name as the key of the intermediate model container |         |       | 3:05 |
 | COMPLETED Use the single element container model in =cpp=                   |         |       | 2:04 |
 | COMPLETED Add support for composite model names                             |         |       | 1:27 |
 | COMPLETED Use pdflatex for the manual                                       |         |       | 5:25 |
+| COMPLETED Intermediate model should not be an Element                       |         |       | 0:31 |
 | STARTED Implement formattables in terms of yarn types                       |         |       | 0:11 |
 | STARTED Add relationship types to handle "requires"                         |         |       | 0:37 |
 | STARTED Yarn minor tidy-ups                                                 |         |       | 1:54 |
@@ -149,6 +150,14 @@ etc.
 
 We should also have a look at the [[http://implementingquantlib.blogspot.com/2013/09/intermission-latex-style-file-and-some.html][latex templates]] by Luigi for
 quantlib and the [[http://www.springer.com/computer/lncs/lncs%2Bauthors?SGWID%3D0-40209-0-0-0][Springer LaTeX templates]].
+
+*** COMPLETED Intermediate model should not be an Element             :story:
+    CLOSED: [2015-12-06 Sun 23:23]
+    CLOCK: [2015-12-06 Sun 22:52]--[2015-12-06 Sun 23:23] =>  0:31
+
+We need to move all functionality from the model into the model module
+such that the model no longer needs to be an element (documentation,
+etc). It can remain as a nameable.
 
 *** STARTED Implement formattables in terms of yarn types             :story:
     CLOCK: [2015-11-26 Thu 08:00]--[2015-11-26 Thu 08:11] =>  0:11
@@ -538,12 +547,6 @@ yarn) and associated data (formatter properties). The latter is
 totally independent. We should create a namespace for all of these
 classes and a workflow that produces the data ready for consumption. A
 tentative name is =manifest=.
-
-*** Intermediate model should not be an Element                       :story:
-
-We need to move all functionality from the model into the model module
-such that the model no longer needs to be an element (documentation,
-etc). It can remain as a nameable.
 
 *** Consider renaming nested name                                     :story:
 

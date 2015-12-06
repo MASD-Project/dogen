@@ -862,17 +862,15 @@ BOOST_AUTO_TEST_CASE(uml_note_with_marker_inside_package_transforms_into_package
     transform(c, {po[0], po[1]});
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
-    BOOST_CHECK(c.model().documentation().empty());
-    BOOST_CHECK(c.model().extensions().fields().empty());
 
     BOOST_REQUIRE(c.model().modules().size() == 2);
     for (const auto& pair : c.model().modules()) {
         const auto& m(pair.second);
 
         if (m.name().simple() == model_name) {
-            BOOST_REQUIRE(m.name().location().model_module_path().size() == 1);
-            BOOST_CHECK(m.name().location().model_module_path().front() ==
-                model_name);
+            const auto& l(m.name().location());
+            BOOST_REQUIRE(l.model_module_path().size() == 1);
+            BOOST_CHECK(l.model_module_path().front() == model_name);
             BOOST_CHECK(m.name().simple() == model_name);
             BOOST_CHECK(m.documentation().empty());
             BOOST_CHECK(m.extensions().fields().empty());
@@ -892,16 +890,14 @@ BOOST_AUTO_TEST_CASE(uml_note_with_text_but_no_marker_inside_package_does_nothin
     transform(c, {po[0], po[1]});
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
-    BOOST_CHECK(c.model().documentation().empty());
-    BOOST_CHECK(c.model().extensions().fields().empty());
     BOOST_REQUIRE(c.model().modules().size() == 2);
 
     for (const auto& pair : c.model().modules()) {
         const auto& m(pair.second);
         if (m.name().simple() == model_name) {
-            BOOST_REQUIRE(m.name().location().model_module_path().size() == 1);
-            BOOST_CHECK(m.name().location().model_module_path().front() ==
-                model_name);
+            const auto& l(m.name().location());
+            BOOST_REQUIRE(l.model_module_path().size() == 1);
+            BOOST_CHECK(l.model_module_path().front() == model_name);
             BOOST_CHECK(m.name().simple() == model_name);
             BOOST_CHECK(m.documentation().empty());
             BOOST_CHECK(m.extensions().fields().empty());
@@ -922,15 +918,13 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
     transform(c, {po[0], po[1]});
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
-    BOOST_CHECK(c.model().documentation().empty());
-    BOOST_CHECK(c.model().extensions().fields().empty());
     BOOST_REQUIRE(c.model().modules().size() == 2);
     for (const auto& pair : c.model().modules()) {
         const auto& m(pair.second);
         if (m.name().simple() == model_name) {
-            BOOST_REQUIRE(m.name().location().model_module_path().size() == 1);
-            BOOST_CHECK(m.name().location().model_module_path().front() ==
-                model_name);
+            const auto& l(m.name().location());
+            BOOST_REQUIRE(l.model_module_path().size() == 1);
+            BOOST_CHECK(l.model_module_path().front() == model_name);
             BOOST_CHECK(m.name().simple() == model_name);
             BOOST_CHECK(m.documentation().empty());
             BOOST_CHECK(m.extensions().fields().empty());
