@@ -39,15 +39,19 @@ namespace yarn {
  *
  * @section yarn_concept_indexer_0 Model requirements
  *
- * The concept indexer expects to receive a partial model such as ones
- * coming straight out of Dia to yarn transformation.
+ * The concept indexer expects to receive a merged intermediate model,
+ * but in practice it makes no requirements in terms of any
+ * pre-processing.
  *
- * @section yarn_concept_indexer_1 First stage: indexing concepts
+ * @section yarn_property_indexer_1 Indexing Process
  *
  * The concept indexer only touches two types of model elements:
- * concepts and abstract objects. This is because these are the only
- * two elements involved in relationships that involve concepts.
+ * concepts and objects. This is because these are the only two
+ * elements involved in relationships that involve concepts. Each of
+ * these are processed differently.
  *
+ * @subsection yarn_concept_indexer_1 First stage: indexing concepts
+  *
  * The concept indexer starts by processing all concepts. Each concept
  * goes through two steps: @e expansion and @e reduction. Expansion is
  * defined as adding to each refined concept the set of all concepts
@@ -65,20 +69,20 @@ namespace yarn {
  * avoid having the code generation move (potentially dramatically)
  * every time any alteration is done to the concept hierarchy.
  *
- * @section yarn_concept_indexer_2 Second stage: indexing objects
+ * @subsection yarn_concept_indexer_2 Second stage: indexing objects
  *
  * The concept indexer is also responsible for updating the modeled
- * concepts in abstract objects. Thus only objects that are part of
- * such relationships are affected. For example a child which does not
- * model any concepts is not affected, even if its parent does model
- * concepts.
+ * concepts in an object - if any exist. Thus only objects that are
+ * part of such relationships are affected. For example a child which
+ * does not model any concepts is not affected, even if its parent
+ * does model concepts.
  *
  * Note that object indexing must be done after the concept indexing
  * described above as it depends on it.
  *
  * For objects which do not have parents, the operation is simple: for
- * a given object o, we just need to compute its reduced concept set
- * implied by its modeled concepts.
+ * a given object o, we just need to compute the reduced concept set,
+ * as implied by the concepts it models.
  *
  * For objects with parents things are slightly more complicated. We
  * must first compute the reduced concept set implied by all its
@@ -92,15 +96,6 @@ namespace yarn {
  *
  */
 class concept_indexer {
-public:
-    concept_indexer() = default;
-    concept_indexer(const concept_indexer&) = default;
-    concept_indexer(concept_indexer&&) = default;
-    concept_indexer& operator=(const concept_indexer&) = default;
-
-public:
-    virtual ~concept_indexer() noexcept { }
-
 private:
     /**
      * @brief Returns the object with the given name, or throws.

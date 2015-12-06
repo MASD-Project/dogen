@@ -94,7 +94,6 @@ void concept_indexer::remove_duplicates(std::list<name>& names) const {
     BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
                              << names.size();
 
-    // FIXME: use std algorithm
     auto i(names.begin());
     while (i != names.end()) {
         const auto n(*i);
@@ -127,6 +126,10 @@ void concept_indexer::index_object(object& o, intermediate_model& m,
         return;
     }
 
+    /* For each of the concepts that we model, perform an expansion
+     * including their parents and so on. We can rely on the concepts'
+     * @e refines container for this.
+     */
     std::list<name> expanded_refines;
     for (auto& n : i->second) {
         auto& c(find_concept(n, m));
@@ -134,13 +137,22 @@ void concept_indexer::index_object(object& o, intermediate_model& m,
         expanded_refines.insert(expanded_refines.end(),
             c.refines().begin(), c.refines().end());
     }
+
+    /* since the expanded list may include duplicates, we must first
+     * remove those.
+     */
     remove_duplicates(expanded_refines);
 
+    /* If an object has a parent, we must then find out all of the
+     * concepts that our parents are modeling.
+     */
     if (!o.is_child()) {
         i->second = expanded_refines;
         BOOST_LOG_SEV(lg, debug) << "Object has no parents, using reduced set.";
         return;
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Object has parents, computing set difference.";
 
     std::set<name> our_concepts;
     our_concepts.insert(expanded_refines.begin(), expanded_refines.end());
@@ -170,13 +182,11 @@ void concept_indexer::index_object(object& o, intermediate_model& m,
      * difference. we do this instead of just using the set difference
      * directly to preserve order.
      */
-    BOOST_LOG_SEV(lg, debug) << "Object has parents, computing set difference.";
     i->second.clear();
     for (const auto& n : expanded_refines) {
         if (result.find(n) != result.end())
             i->second.push_back(n);
     }
-
     BOOST_LOG_SEV(lg, debug) << "Finished indexing object.";
 }
 
@@ -213,9 +223,7 @@ void concept_indexer::index_concept(concept& c, intermediate_model& m,
     for (auto& n : c.refines()) {
         auto& parent(find_concept(n, m));
         index_concept(parent, m, processed_names);
-
         expanded_refines.push_back(n);
-
         expanded_refines.insert(expanded_refines.end(),
             parent.refines().begin(), parent.refines().end());
     }

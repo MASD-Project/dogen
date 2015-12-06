@@ -39,7 +39,17 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Represents a concept, similar to the C++ definition.
+ * @brief Represents a generic programming concept.
+ *
+ * In generic programming, a concept is a description of supported operations on
+ * a type, including syntax and semantics. In this way, concepts are related to
+ * abstract base classes but concepts do not require a subtype relationship.
+ *
+ * A concept is used for two reasons in terms of modeling:
+ *
+ * @li to model the set of requirements a generic method has on a type;
+ * @li to model commonalities between types that are not expressed using
+ * generalisation relationships.
  */
 class concept final : public dogen::yarn::element {
 public:
@@ -137,6 +147,10 @@ public:
 
     /**
      * @brief List of concepts that this concept is a refinement of.
+     *
+     * A concept B is said to refine a concept A if B has all of the same type
+     * requirements as A and possibly more. It is the generalisation relationship
+     * applied to concepts.
      */
     /**@{*/
     const std::list<dogen::yarn::name>& refines() const;
@@ -147,6 +161,8 @@ public:
 
     /**
      * @brief True if this concept is the parent of one or more concepts, false otherwise.
+     *
+     * Parents are concepts that are refined by other concepts.
      */
     /**@{*/
     bool is_parent() const;
@@ -155,6 +171,8 @@ public:
 
     /**
      * @brief If true, the concept has at least one parent.
+     *
+     * Children are concepts that refine at least one other concept.
      */
     /**@{*/
     bool is_child() const;
