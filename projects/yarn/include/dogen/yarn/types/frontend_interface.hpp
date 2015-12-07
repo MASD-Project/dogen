@@ -52,13 +52,16 @@ public:
     virtual std::string id() const = 0;
 
     /**
-     * @brief List of extensions supported by this frontend.
+     * @brief List of file extensions supported by this frontend.
      */
     virtual std::list<std::string> supported_extensions() const = 0;
 
     /**
      * @brief Reads the contents of the input descriptor and
      * transforms it into an intermediate model.
+     *
+     * @note Method is non-const by design at the moment as some
+     * frontends have state.
      */
     virtual intermediate_model execute(const dynamic::workflow& w,
         const input_descriptor& d) = 0;

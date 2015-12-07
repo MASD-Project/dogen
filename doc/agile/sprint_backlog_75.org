@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-06 Sun 23:43]
+#+CAPTION: Clock summary at [2015-12-07 Mon 23:18]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *16:55* |       |      |
+| *Total time*                                                                | *17:13* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 16:55   |       |      |
-| Active                                                                      |         | 16:55 |      |
+| Stories                                                                     | 17:13   |       |      |
+| Active                                                                      |         | 17:13 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:23 |
 | COMPLETED Use qualified name as the key of the intermediate model container |         |       | 3:05 |
 | COMPLETED Use the single element container model in =cpp=                   |         |       | 2:04 |
@@ -29,7 +29,7 @@
 | COMPLETED Intermediate model should not be an Element                       |         |       | 0:31 |
 | STARTED Implement formattables in terms of yarn types                       |         |       | 0:11 |
 | STARTED Add relationship types to handle "requires"                         |         |       | 0:37 |
-| STARTED Yarn minor tidy-ups                                                 |         |       | 2:12 |
+| STARTED Yarn minor tidy-ups                                                 |         |       | 2:30 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -381,6 +381,7 @@ we need to check for.
   serialisation classes must be enabled
 
 *** STARTED Yarn minor tidy-ups                                       :story:
+    CLOCK: [2015-12-07 Mon 23:00]--[2015-12-07 Mon 23:18] =>  0:18
     CLOCK: [2015-12-06 Sun 23:34]--[2015-12-06 Sun 23:43] =>  0:09
     CLOCK: [2015-12-06 Sun 23:24]--[2015-12-06 Sun 23:33] =>  0:09
     CLOCK: [2015-12-06 Sun 21:53]--[2015-12-06 Sun 22:50] =>  0:57
@@ -400,7 +401,8 @@ yet done:
 Classes done:
 
 - assembler, association indexer, building error, concept, concept
-  indexer.
+  indexer, element, element traversal, enumerator, expander, frontend
+  registrar, frontend workflow , frontend interface.
 
 *** Add "field propagation" support to dynamic                        :story:
 

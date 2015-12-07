@@ -1740,7 +1740,7 @@ alidates all dependencies and resolves all types.#</dia:string>
         <dia:point val="-152.5,-48.4167"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-152.55,-48.4667;-117.285,-29.0667"/>
+        <dia:rectangle val="-152.55,-48.4667;-117.285,-19.4667"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1752,7 +1752,7 @@ alidates all dependencies and resolves all types.#</dia:string>
         <dia:real val="35.164999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="19.300000000000004"/>
+        <dia:real val="28.900000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -4022,7 +4022,7 @@ It is not required for any other purpose.#</dia:string>
         <dia:point val="-88.3225,17.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-89.1725,17.55;-74.0463,30.05"/>
+        <dia:rectangle val="-89.1725,17.55;-74.0462,30.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4232,7 +4232,8 @@ It is not required for any other purpose.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Defines a bounded set of logically related values for a primitive type or a string.#</dia:string>
+        <dia:string>#Defines a bounded set of logically related values for a primitive type
+or a string.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4483,7 +4484,7 @@ The enumerator defines an element in the domain of the enumeration.#</dia:string
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Qualified name for the type.#</dia:string>
+            <dia:string>#Name of the enumerator.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5483,7 +5484,7 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="-100.397,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-107.912,-9.85;-99.6475,-0.2"/>
+        <dia:rectangle val="-107.912,-9.85;-99.647,-0.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7738,7 +7739,7 @@ etc.#</dia:string>
         <dia:point val="-100.397,3.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-101.248,3.35;-88.2725,14.05"/>
+        <dia:rectangle val="-101.247,3.35;-88.2725,14.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13392,7 +13393,11 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
         <dia:string>#visitable, Element#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Represents a generic modeling construct.#</dia:string>
+        <dia:string>#Represents a generic modeling construct.
+
+An element is anything of interest in a problem domain which needs to be
+expressed in code generation. It covers both types (objects, enumerations, etc),
+meta-types (concepts) and non-types (modules and backend specific entities).#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

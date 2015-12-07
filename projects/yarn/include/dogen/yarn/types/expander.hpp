@@ -30,12 +30,26 @@
 namespace dogen {
 namespace yarn {
 
+/**
+ *  @brief Performs the expansion sub-workflow on a frontend generated
+ *  intermediate model.
+ */
 class expander {
 private:
+    /**
+     * @brief Performs a module expansion on the model.
+     */
     void expand_modules(intermediate_model& m) const;
+
+    /**
+     * @brief Performs a property expansion on the model.
+     */
     void expand_properties(intermediate_model& m) const;
 
 public:
+    /**
+     * @brief Executes the workflow.
+     */
     void expand(intermediate_model& m) const;
 };
 

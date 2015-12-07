@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_ALL_MODEL_ITEMS_TRAVERSAL_HPP
-#define DOGEN_YARN_TYPES_ALL_MODEL_ITEMS_TRAVERSAL_HPP
+#ifndef DOGEN_YARN_TYPES_ELEMENTS_TRAVERSAL_HPP
+#define DOGEN_YARN_TYPES_ELEMENTS_TRAVERSAL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,7 +35,8 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Performs a traversal across all types in an intermediate model.
+ * @brief Performs a traversal across all elements in an intermediate
+ * model.
  */
 /**@{*/
 template<typename TraversalVisitor>

@@ -36,13 +36,6 @@ namespace dogen {
 namespace yarn {
 
 class generalization_indexer {
-public:
-    generalization_indexer() = default;
-    generalization_indexer(const generalization_indexer&) = default;
-    generalization_indexer(generalization_indexer&&) = default;
-    generalization_indexer& operator=(const generalization_indexer&) = default;
-    ~generalization_indexer() noexcept = default;
-
 private:
     /**
      * @brief Details of generalization relationships we're interested

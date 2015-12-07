@@ -41,6 +41,10 @@ namespace yarn {
 
 /**
  * @brief Represents a generic modeling construct.
+ *
+ * An element is anything of interest in a problem domain which needs to be
+ * expressed in code generation. It covers both types (objects, enumerations, etc),
+ * meta-types (concepts) and non-types (modules and backend specific entities).
  */
 class element {
 public:

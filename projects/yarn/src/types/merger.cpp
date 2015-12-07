@@ -126,11 +126,9 @@ void merger::add_target(const intermediate_model& target) {
 
     has_target_ = true;
     merged_model_.name(target.name());
-    // merged_model_.documentation(target.documentation());
     merged_model_.leaves(target.leaves());
     merged_model_.modules(target.modules());
     merged_model_.references(target.references());
-    // merged_model_.extensions(target.extensions());
     merged_model_.is_target(true);
 
     BOOST_LOG_SEV(lg, debug) << "added target model: " << qn;

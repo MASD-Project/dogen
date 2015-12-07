@@ -73,7 +73,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Qualified name for the type.
+     * @brief Name of the enumerator.
      */
     /**@{*/
     const std::string& name() const;

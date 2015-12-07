@@ -37,7 +37,8 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Defines a bounded set of logically related values for a primitive type or a string.
+ * @brief Defines a bounded set of logically related values for a primitive type
+ * or a string.
  */
 class enumeration final : public dogen::yarn::element {
 public:
