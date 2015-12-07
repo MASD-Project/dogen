@@ -13,26 +13,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-07 Mon 23:18]
+#+CAPTION: Clock summary at [2015-12-07 Mon 23:24]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *17:13* |       |      |
+| *Total time*                                                                | *17:22* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 17:13   |       |      |
-| Active                                                                      |         | 17:13 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:23 |
+| Stories                                                                     | 17:22   |       |      |
+| Active                                                                      |         | 17:22 |      |
+| COMPLETED Sprint and product backlog grooming                               |         |       | 1:32 |
 | COMPLETED Use qualified name as the key of the intermediate model container |         |       | 3:05 |
 | COMPLETED Use the single element container model in =cpp=                   |         |       | 2:04 |
 | COMPLETED Add support for composite model names                             |         |       | 1:27 |
 | COMPLETED Use pdflatex for the manual                                       |         |       | 5:25 |
 | COMPLETED Intermediate model should not be an Element                       |         |       | 0:31 |
-| STARTED Implement formattables in terms of yarn types                       |         |       | 0:11 |
-| STARTED Add relationship types to handle "requires"                         |         |       | 0:37 |
-| STARTED Yarn minor tidy-ups                                                 |         |       | 2:30 |
+| POSTPONED Implement formattables in terms of yarn types                     |         |       | 0:11 |
+| POSTPONED Add relationship types to handle "requires"                       |         |       | 0:37 |
+| POSTPONED Yarn minor tidy-ups                                               |         |       | 2:30 |
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2015-12-07 Mon 23:23]
+    CLOCK: [2015-12-07 Mon 23:19]--[2015-12-07 Mon 23:28] =>  0:09
     CLOCK: [2015-12-05 Sat 15:15]--[2015-12-05 Sat 15:36] =>  0:21
     CLOCK: [2015-12-03 Thu 19:03]--[2015-12-03 Thu 19:40] =>  0:37
     CLOCK: [2015-11-26 Thu 07:51]--[2015-11-26 Thu 07:59] =>  0:08
@@ -159,7 +161,8 @@ We need to move all functionality from the model into the model module
 such that the model no longer needs to be an element (documentation,
 etc). It can remain as a nameable.
 
-*** STARTED Implement formattables in terms of yarn types             :story:
+*** POSTPONED Implement formattables in terms of yarn types           :story:
+    CLOSED: [2015-12-07 Mon 23:24]
     CLOCK: [2015-11-26 Thu 08:00]--[2015-11-26 Thu 08:11] =>  0:11
 
 At present formattables are just a shadow copy of yarn types plus
@@ -182,7 +185,8 @@ additional =cpp= specific types. In practice:
   update the factory to generate these types and then take a copy of
   the model and inject them in it.
 
-*** STARTED Add relationship types to handle "requires"               :story:
+*** POSTPONED Add relationship types to handle "requires"             :story:
+    CLOSED: [2015-12-07 Mon 23:24]
     CLOCK: [2015-11-26 Thu 08:11]--[2015-11-26 Thu 08:48] =>  0:37
 
 *New Understanding*
@@ -380,7 +384,8 @@ we need to check for.
 - if serialisation is enabled, types forward declaration of the
   serialisation classes must be enabled
 
-*** STARTED Yarn minor tidy-ups                                       :story:
+*** POSTPONED Yarn minor tidy-ups                                     :story:
+    CLOSED: [2015-12-07 Mon 23:24]
     CLOCK: [2015-12-07 Mon 23:00]--[2015-12-07 Mon 23:18] =>  0:18
     CLOCK: [2015-12-06 Sun 23:34]--[2015-12-06 Sun 23:43] =>  0:09
     CLOCK: [2015-12-06 Sun 23:24]--[2015-12-06 Sun 23:33] =>  0:09
@@ -403,263 +408,6 @@ Classes done:
 - assembler, association indexer, building error, concept, concept
   indexer, element, element traversal, enumerator, expander, frontend
   registrar, frontend workflow , frontend interface.
-
-*** Add "field propagation" support to dynamic                        :story:
-
-- add a graph to yarn that allows external users to set
-  dependencies. The graph is not known to be acyclic. Normally we keep
-  track of all the orphans and link those to the root. This won't work
-  for cycles. We need a way to arbitrarily define one "end" of the
-  cycle as the starting point.
-- graph must distinguish between vertices that arise by expanding
-  generics from those that arise by other means.
-- add propagation type to fields and add enumeration.
-- add a "propagator" that is responsible for walking the graph and
-  setting the fields accordingly. The propagator is used from yarn's
-  workflow. We need to have the ability of sending in references to
-  dynamic objects into the graph so that the propagator can update
-  them.
-
-*** Handle registration of services properly                          :story:
-
-We need a way to determine if a type which is part of a generalisation
-should be added to the registrar or not. In =generalisation_indexer=:
-
-:     // FIXME: massive hack. must not add leafs for services.
-
-One way would be to check if serialisation is enabled for that type
-and if not, skip the type.
-
-*** Refactor code around model origination                            :story:
-
-- remove origin types and generation types, replacing it with just a
-  boolean for is target. Actually we need something like:
-  proxy_reference, non_proxy_reference, target. We also need a good
-  name for this enumeration:
-- at present we are using origin type to determine whether to create a
-  registrar, etc in cpp model. There is no other use case for
-  this. This is done in several places due to the bad handling of C++
-  specific types. Grep for =references= in =cpp= to find all
-  locations. We could split references into two (dogen, non-dogen).
-- we should also replace has generatable types with something more
-  like "target model has types" or "is target model empty". The idea
-  we are trying to capture is that the target model contained at least
-  one type. This could be set by the merger when it processes the
-  target model.
-
-*Previous Understanding*
-
-In the past we added a number of knobs around generation, all with
-their own problems:
-
-- =origin_types=: was the model/type created by the user or the
-  system. in reality this means did the model come from Dia or
-  JSON. this is confusing as the user can also add JSON files (their
-  own model library) and in the future the user can use JSON
-  exclusively without needed Dia at all.
-- =generation_types=: if the model is target, all types are to be
-  generated /unless/ they are not properly supported, in which case
-  they are to be "partially" generated (as is the case with
-  services). This is a formatter decision and yarn should not know
-  anything about it. Actually this is not quite true; users may want
-  to stop generation.
-
-These can be replaced by a single enumeration that indicates if the
-type/model is target or not.
-
-This work should be integrated with the model types story.
-
-Merged stories:
-
-*Split references into dogen and non-dogen models*
-
-If we had two containers of references, one for dogen models and
-another one for non-dogen models - which we could give a nice name, to
-imply its foreign origin - we could then use the dogen references for
-registrar, etc. This is a replacement for the origin type.
-
-We need a good name for these. Candidates:
-
-- proxy model: represents something that exists in the outside
-  world. e.g. =is_proxy=.
-
-*** Remove =is_root_parent_visitable=                                 :story:
-
-We should just use the =visits=, =visited_by=, etc relationships. The
-existing flag will break with multiple inheritance.
-
-*** Remove =service= stereotype                                       :story:
-
-This really just means non-generatable, or do not generate. We already
-have a stereotype for this. Remove =service= and any other stereotype
-which is not being used such as =value_object= etc.
-
-Actually, non-generatable is not a stereotype really. We should
-instead have some meta-data that can affect generation:
-
-- do not generate: do nothing at all. For references only. If a file
-  exists with this file name, it will be deleted as part of
-  housekeeping.
-- generate blank file if it doesn't exist: we don't even want a
-  template.
-- generate with content if it doesn't exist, do not touch otherwise:
-  what we call services at the moment. Generate a "template" that then
-  gets filled in manually.
-- generate and merge: merge the contents of the generated file with
-  the current contents in the file system. When we support merging.
-- generate and overwrite: generate the file and overwrite whatever
-  exists in the file system.
-
-The second behaviour we get for free with services is that we disable
-all facets except for types. A few points:
-
-- we may want to have io, serialisation, etc. This is not possible at
-  present. If all state of a service is of supported types, we could
-  even use existing code generation.
-
-*** Add =interface= stereotype                                        :story:
-
-Even though we can't generate much outside of plain types, we should
-already have support for a stereotype of =interface= which for now
-behaves just like =service=. In the future we may be able to code
-generate the interface.
-
-*** Implement module expander test                                    :story:
-
-We copied across the code for the module expander test from yarn json
-but didn't actually finished implementing it.
-
-*** Create =src= and =include= facets                                 :story:
-
-At present we have some formatters that are not in the traditional
-facets such as =types=, etc. We should make facets for them. We need
-to check what the current facet name is. There should only be one case
-of this, the CMakeLists formatters.
-
-*** Move all properties in =cpp= to a properties namespace            :story:
-
-Once all formattables are gone, we should have only properties left in
-the formattables namespace. We should then rename it to
-properties.
-
-Merged stories:
-
-*Split formatter properties and associated classes from formattables*
-
-We have two kinds of data: the formattables themselves (mapped from
-yarn) and associated data (formatter properties). The latter is
-totally independent. We should create a namespace for all of these
-classes and a workflow that produces the data ready for consumption. A
-tentative name is =manifest=.
-
-*** Consider renaming nested name                                     :story:
-
-*New understanding*:
-
-This story requires further analysis. Blindly following the composite
-pattern was tried but it resulted in a lot of inconsistencies because
-we then had to follow MEC-33 and create =abstract_qname=; however, the
-nested qname does not really behave like a composite qname; its more
-like the difference between a type in isolation and a type
-instantiated as an argument of a function. For example, whilst the
-type in isolation may have unknown template parameters, presumably, as
-an argument of a function these have been instantiated with real
-types.
-
-One way to solve this is just to make the type name a bit more
-explicit rather than try to imply the composite pattern
-(e.g. "nested"). We need a name that signifies "instantiated
-type". Look at the C++ standard for the difference between defining a
-generic type and instantiating a generic type.
-
-No good names yet (type reference, type instantiation, instantiated
-name). What are we trying to represent: an identifier which points to
-a complete definition of a name such that the name can be instantiated
-as a type in the underlying language. By "instantiated" we mean used
-to define variables of this type. In this light: instantiable name,
-definable name? If we choose instantiable name, we could then rename
-"children" to type arguments.
-
-Other notes:
-
-- there is such a thing as a element instance identifier. We call it
-  nested name at present. The element instance identifier identifies
-  instantiations of types. It models two cases: for the case where the
-  type has no type parameters, the instance identifier is equal to the
-  element identifier; for all other cases, it is a hierarchical
-  collection of element identifiers, modeling the type parameter
-  structure.
-
-*Previous understanding*:
-
-We should just follow the composite pattern in the naming.
-
-*** Update copyright notices                                          :story:
-
-We need to update all notices to reflect personal ownership until DDC
-was formed, and then ownership by DDC.
-
-- first update to personal ownership has been done, but we need to
-  test if multiple copyright entries is properly supported.
-
-*** Copyright holders is scalar when it should be an array            :story:
-
-At present its only possible to specify a single copyright holder. It
-should be handled the same was as odb parameters, but because that is
-done with a massive hack, we are not going to extend the hack to
-copyright holders.
-
-*** Filter out unused types from final model                          :story:
-
-When we finished assembling the model we should be able to determine
-which supporting types are in use and drop those that are not. This
-can be done just before building the final model (or as part of that
-task).
-
-We should have a class responsible for removing all types from a model
-which are not in use. This could be done as part of model assembly.
-
-One way this could be achieved is by adding a "usages" property,
-computed during resolution. Resolver could keep track of the
-non-target names that are in use and return those.
-
-*** Handle enumeration type dynamically                               :story:
-
-- add some enumeration post-processing that assigns it a underlying
-  type. Should be done with merged model (look for a primitive type with
-  property =is_default_enumeration_type=).
-
-*** Services and leaves are not properly handled                      :story:
-
-We are manually ignoring services when calculating leaves.
-
-*** Use dots in data files extensions                                 :story:
-
-At the moment we use extensions such as =xmlyarn=. It should really be
-=.xml.yarn= or something of the kind.
-
-*** Consider renaming includers                                       :story:
-
-Its very confusing to have header files that include lots of other
-header files called "includers". There is too much overloading. We
-should consider calling them "master header files" as per Schaling
-terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
-
-*** Update Linux CDash agent                                          :story:
-
-We need to get the build green on the Linux agent again.
-
-*** Update Windows CDash agent                                        :story:
-
-We need to get the build green on the Windows agent again.
-
-*** Add tests to identifier parser with invalid names                 :story:
-
-We need to handle properly the following cases:
-
-- totally blank name.
-- template with angle brackets but nothing inside: =a<>=.
-- template with angle brackets, type and then a comma: =a<b,>=.
 
 ** Deprecated
 *** CANCELLED Replace name with id's in yarn                          :story:
