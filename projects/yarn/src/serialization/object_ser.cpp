@@ -52,15 +52,15 @@ void save(Archive& ar,
     ar << make_nvp("all_properties", v.all_properties_);
     ar << make_nvp("local_properties", v.local_properties_);
     ar << make_nvp("inherited_properties", v.inherited_properties_);
-    ar << make_nvp("is_parent", v.is_parent_);
-    ar << make_nvp("is_visitable", v.is_visitable_);
     ar << make_nvp("is_immutable", v.is_immutable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
+    ar << make_nvp("is_parent", v.is_parent_);
     ar << make_nvp("is_child", v.is_child_);
+    ar << make_nvp("is_final", v.is_final_);
+    ar << make_nvp("is_visitable", v.is_visitable_);
     ar << make_nvp("is_root_parent_visitable", v.is_root_parent_visitable_);
     ar << make_nvp("relationships", v.relationships_);
     ar << make_nvp("object_type", v.object_type_);
-    ar << make_nvp("is_final", v.is_final_);
 }
 
 template<typename Archive>
@@ -72,15 +72,15 @@ void load(Archive& ar,
     ar >> make_nvp("all_properties", v.all_properties_);
     ar >> make_nvp("local_properties", v.local_properties_);
     ar >> make_nvp("inherited_properties", v.inherited_properties_);
-    ar >> make_nvp("is_parent", v.is_parent_);
-    ar >> make_nvp("is_visitable", v.is_visitable_);
     ar >> make_nvp("is_immutable", v.is_immutable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
+    ar >> make_nvp("is_parent", v.is_parent_);
     ar >> make_nvp("is_child", v.is_child_);
+    ar >> make_nvp("is_final", v.is_final_);
+    ar >> make_nvp("is_visitable", v.is_visitable_);
     ar >> make_nvp("is_root_parent_visitable", v.is_root_parent_visitable_);
     ar >> make_nvp("relationships", v.relationships_);
     ar >> make_nvp("object_type", v.object_type_);
-    ar >> make_nvp("is_final", v.is_final_);
 }
 
 } }

@@ -74,6 +74,8 @@ public:
         const std::list<dogen::yarn::property>& all_properties,
         const std::list<dogen::yarn::property>& local_properties,
         const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> >& inherited_properties,
+        const bool is_immutable,
+        const bool is_fluent,
         const std::list<dogen::yarn::name>& refines,
         const bool is_parent,
         const bool is_child);
@@ -146,6 +148,22 @@ public:
     /**@}*/
 
     /**
+     * @brief If true, do not generate setters for the element's properties.
+     */
+    /**@{*/
+    bool is_immutable() const;
+    void is_immutable(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, generate fluent setters.
+     */
+    /**@{*/
+    bool is_fluent() const;
+    void is_fluent(const bool v);
+    /**@}*/
+
+    /**
      * @brief List of concepts that this concept is a refinement of.
      *
      * A concept B is said to refine a concept A if B has all of the same type
@@ -196,6 +214,8 @@ private:
     std::list<dogen::yarn::property> all_properties_;
     std::list<dogen::yarn::property> local_properties_;
     std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> > inherited_properties_;
+    bool is_immutable_;
+    bool is_fluent_;
     std::list<dogen::yarn::name> refines_;
     bool is_parent_;
     bool is_child_;

@@ -95,14 +95,14 @@ namespace dogen {
 namespace yarn {
 
 object::object()
-    : is_parent_(static_cast<bool>(0)),
-      is_visitable_(static_cast<bool>(0)),
-      is_immutable_(static_cast<bool>(0)),
+    : is_immutable_(static_cast<bool>(0)),
       is_fluent_(static_cast<bool>(0)),
+      is_parent_(static_cast<bool>(0)),
       is_child_(static_cast<bool>(0)),
+      is_final_(static_cast<bool>(0)),
+      is_visitable_(static_cast<bool>(0)),
       is_root_parent_visitable_(static_cast<bool>(0)),
-      object_type_(static_cast<dogen::yarn::object_types>(0)),
-      is_final_(static_cast<bool>(0)) { }
+      object_type_(static_cast<dogen::yarn::object_types>(0)) { }
 
 object::object(
     const bool in_global_module,
@@ -116,15 +116,15 @@ object::object(
     const std::list<dogen::yarn::property>& all_properties,
     const std::list<dogen::yarn::property>& local_properties,
     const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> >& inherited_properties,
-    const bool is_parent,
-    const bool is_visitable,
     const bool is_immutable,
     const bool is_fluent,
+    const bool is_parent,
     const bool is_child,
+    const bool is_final,
+    const bool is_visitable,
     const bool is_root_parent_visitable,
     const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& relationships,
-    const dogen::yarn::object_types object_type,
-    const bool is_final)
+    const dogen::yarn::object_types object_type)
     : dogen::yarn::element(
       in_global_module,
       documentation,
@@ -137,15 +137,15 @@ object::object(
       all_properties_(all_properties),
       local_properties_(local_properties),
       inherited_properties_(inherited_properties),
-      is_parent_(is_parent),
-      is_visitable_(is_visitable),
       is_immutable_(is_immutable),
       is_fluent_(is_fluent),
+      is_parent_(is_parent),
       is_child_(is_child),
+      is_final_(is_final),
+      is_visitable_(is_visitable),
       is_root_parent_visitable_(is_root_parent_visitable),
       relationships_(relationships),
-      object_type_(object_type),
-      is_final_(is_final) { }
+      object_type_(object_type) { }
 
 void object::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -162,15 +162,15 @@ void object::to_stream(std::ostream& s) const {
       << "\"all_properties\": " << all_properties_ << ", "
       << "\"local_properties\": " << local_properties_ << ", "
       << "\"inherited_properties\": " << inherited_properties_ << ", "
-      << "\"is_parent\": " << is_parent_ << ", "
-      << "\"is_visitable\": " << is_visitable_ << ", "
       << "\"is_immutable\": " << is_immutable_ << ", "
       << "\"is_fluent\": " << is_fluent_ << ", "
+      << "\"is_parent\": " << is_parent_ << ", "
       << "\"is_child\": " << is_child_ << ", "
+      << "\"is_final\": " << is_final_ << ", "
+      << "\"is_visitable\": " << is_visitable_ << ", "
       << "\"is_root_parent_visitable\": " << is_root_parent_visitable_ << ", "
       << "\"relationships\": " << relationships_ << ", "
-      << "\"object_type\": " << object_type_ << ", "
-      << "\"is_final\": " << is_final_
+      << "\"object_type\": " << object_type_
       << " }";
 }
 
@@ -181,15 +181,15 @@ void object::swap(object& other) noexcept {
     swap(all_properties_, other.all_properties_);
     swap(local_properties_, other.local_properties_);
     swap(inherited_properties_, other.inherited_properties_);
-    swap(is_parent_, other.is_parent_);
-    swap(is_visitable_, other.is_visitable_);
     swap(is_immutable_, other.is_immutable_);
     swap(is_fluent_, other.is_fluent_);
+    swap(is_parent_, other.is_parent_);
     swap(is_child_, other.is_child_);
+    swap(is_final_, other.is_final_);
+    swap(is_visitable_, other.is_visitable_);
     swap(is_root_parent_visitable_, other.is_root_parent_visitable_);
     swap(relationships_, other.relationships_);
     swap(object_type_, other.object_type_);
-    swap(is_final_, other.is_final_);
 }
 
 bool object::equals(const dogen::yarn::element& other) const {
@@ -203,15 +203,15 @@ bool object::operator==(const object& rhs) const {
         all_properties_ == rhs.all_properties_ &&
         local_properties_ == rhs.local_properties_ &&
         inherited_properties_ == rhs.inherited_properties_ &&
-        is_parent_ == rhs.is_parent_ &&
-        is_visitable_ == rhs.is_visitable_ &&
         is_immutable_ == rhs.is_immutable_ &&
         is_fluent_ == rhs.is_fluent_ &&
+        is_parent_ == rhs.is_parent_ &&
         is_child_ == rhs.is_child_ &&
+        is_final_ == rhs.is_final_ &&
+        is_visitable_ == rhs.is_visitable_ &&
         is_root_parent_visitable_ == rhs.is_root_parent_visitable_ &&
         relationships_ == rhs.relationships_ &&
-        object_type_ == rhs.object_type_ &&
-        is_final_ == rhs.is_final_;
+        object_type_ == rhs.object_type_;
 }
 
 object& object::operator=(object other) {
@@ -268,22 +268,6 @@ void object::inherited_properties(const std::unordered_map<dogen::yarn::name, st
     inherited_properties_ = std::move(v);
 }
 
-bool object::is_parent() const {
-    return is_parent_;
-}
-
-void object::is_parent(const bool v) {
-    is_parent_ = v;
-}
-
-bool object::is_visitable() const {
-    return is_visitable_;
-}
-
-void object::is_visitable(const bool v) {
-    is_visitable_ = v;
-}
-
 bool object::is_immutable() const {
     return is_immutable_;
 }
@@ -300,12 +284,36 @@ void object::is_fluent(const bool v) {
     is_fluent_ = v;
 }
 
+bool object::is_parent() const {
+    return is_parent_;
+}
+
+void object::is_parent(const bool v) {
+    is_parent_ = v;
+}
+
 bool object::is_child() const {
     return is_child_;
 }
 
 void object::is_child(const bool v) {
     is_child_ = v;
+}
+
+bool object::is_final() const {
+    return is_final_;
+}
+
+void object::is_final(const bool v) {
+    is_final_ = v;
+}
+
+bool object::is_visitable() const {
+    return is_visitable_;
+}
+
+void object::is_visitable(const bool v) {
+    is_visitable_ = v;
 }
 
 bool object::is_root_parent_visitable() const {
@@ -338,14 +346,6 @@ dogen::yarn::object_types object::object_type() const {
 
 void object::object_type(const dogen::yarn::object_types v) {
     object_type_ = v;
-}
-
-bool object::is_final() const {
-    return is_final_;
-}
-
-void object::is_final(const bool v) {
-    is_final_ = v;
 }
 
 } }

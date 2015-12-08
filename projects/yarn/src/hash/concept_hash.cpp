@@ -69,6 +69,8 @@ std::size_t concept_hasher::hash(const concept& v) {
     combine(seed, hash_std_list_dogen_yarn_property(v.all_properties()));
     combine(seed, hash_std_list_dogen_yarn_property(v.local_properties()));
     combine(seed, hash_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_property_(v.inherited_properties()));
+    combine(seed, v.is_immutable());
+    combine(seed, v.is_fluent());
     combine(seed, hash_std_list_dogen_yarn_name(v.refines()));
     combine(seed, v.is_parent());
     combine(seed, v.is_child());

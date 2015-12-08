@@ -75,7 +75,9 @@ namespace dogen {
 namespace yarn {
 
 concept::concept()
-    : is_parent_(static_cast<bool>(0)),
+    : is_immutable_(static_cast<bool>(0)),
+      is_fluent_(static_cast<bool>(0)),
+      is_parent_(static_cast<bool>(0)),
       is_child_(static_cast<bool>(0)) { }
 
 concept::concept(
@@ -90,6 +92,8 @@ concept::concept(
     const std::list<dogen::yarn::property>& all_properties,
     const std::list<dogen::yarn::property>& local_properties,
     const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> >& inherited_properties,
+    const bool is_immutable,
+    const bool is_fluent,
     const std::list<dogen::yarn::name>& refines,
     const bool is_parent,
     const bool is_child)
@@ -105,6 +109,8 @@ concept::concept(
       all_properties_(all_properties),
       local_properties_(local_properties),
       inherited_properties_(inherited_properties),
+      is_immutable_(is_immutable),
+      is_fluent_(is_fluent),
       refines_(refines),
       is_parent_(is_parent),
       is_child_(is_child) { }
@@ -124,6 +130,8 @@ void concept::to_stream(std::ostream& s) const {
       << "\"all_properties\": " << all_properties_ << ", "
       << "\"local_properties\": " << local_properties_ << ", "
       << "\"inherited_properties\": " << inherited_properties_ << ", "
+      << "\"is_immutable\": " << is_immutable_ << ", "
+      << "\"is_fluent\": " << is_fluent_ << ", "
       << "\"refines\": " << refines_ << ", "
       << "\"is_parent\": " << is_parent_ << ", "
       << "\"is_child\": " << is_child_
@@ -137,6 +145,8 @@ void concept::swap(concept& other) noexcept {
     swap(all_properties_, other.all_properties_);
     swap(local_properties_, other.local_properties_);
     swap(inherited_properties_, other.inherited_properties_);
+    swap(is_immutable_, other.is_immutable_);
+    swap(is_fluent_, other.is_fluent_);
     swap(refines_, other.refines_);
     swap(is_parent_, other.is_parent_);
     swap(is_child_, other.is_child_);
@@ -153,6 +163,8 @@ bool concept::operator==(const concept& rhs) const {
         all_properties_ == rhs.all_properties_ &&
         local_properties_ == rhs.local_properties_ &&
         inherited_properties_ == rhs.inherited_properties_ &&
+        is_immutable_ == rhs.is_immutable_ &&
+        is_fluent_ == rhs.is_fluent_ &&
         refines_ == rhs.refines_ &&
         is_parent_ == rhs.is_parent_ &&
         is_child_ == rhs.is_child_;
@@ -210,6 +222,22 @@ void concept::inherited_properties(const std::unordered_map<dogen::yarn::name, s
 
 void concept::inherited_properties(const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> >&& v) {
     inherited_properties_ = std::move(v);
+}
+
+bool concept::is_immutable() const {
+    return is_immutable_;
+}
+
+void concept::is_immutable(const bool v) {
+    is_immutable_ = v;
+}
+
+bool concept::is_fluent() const {
+    return is_fluent_;
+}
+
+void concept::is_fluent(const bool v) {
+    is_fluent_ = v;
 }
 
 const std::list<dogen::yarn::name>& concept::refines() const {

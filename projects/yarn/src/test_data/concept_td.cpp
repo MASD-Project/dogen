@@ -51,16 +51,16 @@ std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> > create_
     return r;
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 std::list<dogen::yarn::name> create_std_list_dogen_yarn_name(unsigned int position) {
     std::list<dogen::yarn::name> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_yarn_name(position + i));
     }
     return r;
-}
-
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
 }
 
 }
@@ -76,9 +76,11 @@ populate(const unsigned int position, result_type& v) {
     v.all_properties(create_std_list_dogen_yarn_property(position + 0));
     v.local_properties(create_std_list_dogen_yarn_property(position + 1));
     v.inherited_properties(create_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_property_(position + 2));
-    v.refines(create_std_list_dogen_yarn_name(position + 3));
-    v.is_parent(create_bool(position + 4));
-    v.is_child(create_bool(position + 5));
+    v.is_immutable(create_bool(position + 3));
+    v.is_fluent(create_bool(position + 4));
+    v.refines(create_std_list_dogen_yarn_name(position + 5));
+    v.is_parent(create_bool(position + 6));
+    v.is_child(create_bool(position + 7));
 }
 
 concept_generator::result_type

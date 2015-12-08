@@ -67,15 +67,15 @@ public:
         const std::list<dogen::yarn::property>& all_properties,
         const std::list<dogen::yarn::property>& local_properties,
         const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> >& inherited_properties,
-        const bool is_parent,
-        const bool is_visitable,
         const bool is_immutable,
         const bool is_fluent,
+        const bool is_parent,
         const bool is_child,
+        const bool is_final,
+        const bool is_visitable,
         const bool is_root_parent_visitable,
         const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& relationships,
-        const dogen::yarn::object_types object_type,
-        const bool is_final);
+        const dogen::yarn::object_types object_type);
 
 private:
     template<typename Archive>
@@ -145,25 +145,7 @@ public:
     /**@}*/
 
     /**
-     * @brief True if this class is the parent of one or more classes, false otherwise.
-     */
-    /**@{*/
-    bool is_parent() const;
-    void is_parent(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, a visitor is to be generated for this type and its descendants.
-     *
-     * Only applicable if is_parent is true.
-     */
-    /**@{*/
-    bool is_visitable() const;
-    void is_visitable(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, do not generate setters for the type's properties.
+     * @brief If true, do not generate setters for the element's properties.
      */
     /**@{*/
     bool is_immutable() const;
@@ -179,7 +161,15 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, the type has at least one parent.
+     * @brief True if this element is the parent of one or more elements, false otherwise.
+     */
+    /**@{*/
+    bool is_parent() const;
+    void is_parent(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, the element has at least one parent.
      */
     /**@{*/
     bool is_child() const;
@@ -187,7 +177,25 @@ public:
     /**@}*/
 
     /**
-     * @brief Is the root parent of this object a visitable type?
+     * @brief If true, the element cannot be inherited from.
+     */
+    /**@{*/
+    bool is_final() const;
+    void is_final(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, a visitor is to be generated for this element and its descendants.
+     *
+     * Only applicable if is_parent is true.
+     */
+    /**@{*/
+    bool is_visitable() const;
+    void is_visitable(const bool v);
+    /**@}*/
+
+    /**
+     * @brief Is the root parent of this element a visitable element?
      *
      * Set to false if no parent exists, or if the parent is not visitable.
      */
@@ -197,7 +205,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All relationships this object has with other model elements.
+     * @brief All relationships this element has with other elements.
      *
      * Note that the names are in a list rather than a set due to a dogen limitation;
      * namely that we cannot provide a operator< at present.
@@ -217,14 +225,6 @@ public:
     void object_type(const dogen::yarn::object_types v);
     /**@}*/
 
-    /**
-     * @brief If true, the type cannot be inherited from.
-     */
-    /**@{*/
-    bool is_final() const;
-    void is_final(const bool v);
-    /**@}*/
-
 public:
     bool operator==(const object& rhs) const;
     bool operator!=(const object& rhs) const {
@@ -242,15 +242,15 @@ private:
     std::list<dogen::yarn::property> all_properties_;
     std::list<dogen::yarn::property> local_properties_;
     std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> > inherited_properties_;
-    bool is_parent_;
-    bool is_visitable_;
     bool is_immutable_;
     bool is_fluent_;
+    bool is_parent_;
     bool is_child_;
+    bool is_final_;
+    bool is_visitable_;
     bool is_root_parent_visitable_;
     std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> > relationships_;
     dogen::yarn::object_types object_type_;
-    bool is_final_;
 };
 
 } }

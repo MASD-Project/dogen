@@ -80,15 +80,15 @@ std::size_t object_hasher::hash(const object& v) {
     combine(seed, hash_std_list_dogen_yarn_property(v.all_properties()));
     combine(seed, hash_std_list_dogen_yarn_property(v.local_properties()));
     combine(seed, hash_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_property_(v.inherited_properties()));
-    combine(seed, v.is_parent());
-    combine(seed, v.is_visitable());
     combine(seed, v.is_immutable());
     combine(seed, v.is_fluent());
+    combine(seed, v.is_parent());
     combine(seed, v.is_child());
+    combine(seed, v.is_final());
+    combine(seed, v.is_visitable());
     combine(seed, v.is_root_parent_visitable());
     combine(seed, hash_std_unordered_map_dogen_yarn_relationship_types_std_list_dogen_yarn_name_(v.relationships()));
     combine(seed, v.object_type());
-    combine(seed, v.is_final());
 
     return seed;
 }

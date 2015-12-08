@@ -272,11 +272,12 @@
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
+				<is_parent>0</is_parent>
 				<is_child>0</is_child>
+				<is_final>1</is_final>
+				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships class_id="35" tracking_level="0" version="0">
 					<count>0</count>
@@ -284,7 +285,6 @@
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
-				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -378,11 +378,12 @@
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
+				<is_parent>0</is_parent>
 				<is_child>0</is_child>
+				<is_final>1</is_final>
+				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
@@ -390,7 +391,6 @@
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
-				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -484,11 +484,12 @@
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
+				<is_parent>0</is_parent>
 				<is_child>1</is_child>
+				<is_final>1</is_final>
+				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>1</count>
@@ -522,7 +523,6 @@
 					</item>
 				</relationships>
 				<object_type>3</object_type>
-				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -656,11 +656,12 @@
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
+				<is_parent>0</is_parent>
 				<is_child>0</is_child>
+				<is_final>1</is_final>
+				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
@@ -668,7 +669,6 @@
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
-				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -762,11 +762,12 @@
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<is_parent>1</is_parent>
-				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
+				<is_parent>1</is_parent>
 				<is_child>0</is_child>
+				<is_final>0</is_final>
+				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
@@ -774,7 +775,6 @@
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
-				<is_final>0</is_final>
 			</second>
 		</item>
 		<item>
@@ -1102,11 +1102,12 @@
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
+				<is_parent>0</is_parent>
 				<is_child>0</is_child>
+				<is_final>1</is_final>
+				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
@@ -1114,7 +1115,6 @@
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
-				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -1325,11 +1325,12 @@
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
+				<is_parent>0</is_parent>
 				<is_child>0</is_child>
+				<is_final>1</is_final>
+				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
@@ -1337,7 +1338,6 @@
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
-				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -1509,11 +1509,12 @@
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
+				<is_parent>0</is_parent>
 				<is_child>0</is_child>
+				<is_final>1</is_final>
+				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
@@ -1521,7 +1522,6 @@
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>1</object_type>
-				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -1732,11 +1732,12 @@
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
+				<is_parent>0</is_parent>
 				<is_child>0</is_child>
+				<is_final>1</is_final>
+				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
@@ -1744,7 +1745,6 @@
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
-				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -2033,11 +2033,12 @@
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
+				<is_parent>0</is_parent>
 				<is_child>0</is_child>
+				<is_final>1</is_final>
+				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
@@ -2045,7 +2046,6 @@
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
-				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -2178,11 +2178,12 @@
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
+				<is_parent>0</is_parent>
 				<is_child>0</is_child>
+				<is_final>1</is_final>
+				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
@@ -2190,7 +2191,6 @@
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
-				<is_final>1</is_final>
 			</second>
 		</item>
 	</objects>

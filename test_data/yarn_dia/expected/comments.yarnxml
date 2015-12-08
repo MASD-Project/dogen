@@ -310,11 +310,12 @@ third line with &quot;quote&quot;
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
+				<is_parent>0</is_parent>
 				<is_child>0</is_child>
+				<is_final>1</is_final>
+				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships class_id="32" tracking_level="0" version="0">
 					<count>0</count>
@@ -322,7 +323,6 @@ third line with &quot;quote&quot;
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
-				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -499,11 +499,12 @@ a second line
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</inherited_properties>
-				<is_parent>0</is_parent>
-				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
+				<is_parent>0</is_parent>
 				<is_child>0</is_child>
+				<is_final>1</is_final>
+				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<relationships>
 					<count>0</count>
@@ -511,7 +512,6 @@ a second line
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>3</object_type>
-				<is_final>1</is_final>
 			</second>
 		</item>
 	</objects>
