@@ -475,30 +475,6 @@ JSON:
 
 This implies we are not calling =tidy_up_string=.
 
-*** Improve helper methods implementation                             :story:
-
-When a formatter relies on the helper methods, we have a problem: we
-need to determine the required includes from the main formatter
-without knowing what the helper methods may need. We have hacked this
-with things like the "special includes" but there must be a cleaner
-way of doing this. For example, we could ask the helper methods
-formatter to provide its includes and it would be its job to either
-delegate further or to compute the includes. This would at least
-remove the duplication of code between io and types.
-
-However, its important to bear in mind that helper methods are a hack
-anyways so we don't want to spend too much time fixing them. Actually,
-as we failed with the needle implementation, these may be here to stay
-for quite a bit so we need to make sure the implementation is
-maintainable. This means adding new helpers should be easy, as well as
-binding existing helpers to new types.
-
-For this we need a way to allow helper methods to bind dynamically to
-types. This can be done by using meta-data.
-
-We should also find a nicer way to package helper methods, maybe
-aligned to a model and type or concept.
-
 *** Duplicate fields in JSON result in non-intuitive errors           :story:
 
 By mistake we added the same field twice in JSON:
@@ -2850,7 +2826,8 @@ In certain cases it may not be possible to add all inheritance
 relationships in a diagram; this is the case with =formatters= in
 =cpp=. There are just too many classes implementing the
 =formatter_interface= and the diagram would become too messy if we
-added generalisation relationships for them all.
+added generalisation relationships for them all. This would also be
+the case with inheritance for exceptions.
 
 We got away with it because we are not generating these types, but one
 can imagine having the same problem with generatable types. It would
@@ -2862,6 +2839,11 @@ inheritance information, like so:
 The notation for the parent as well as the name of the tag need to be
 thought through.
 
+This means we can also inherit across models. See Allow cross model
+inheritance.
+
+*Bad Ideas*
+
 One very interesting way of doing this is via stereotypes. We could
 extend the meta-model with a stereotype called =TypeReference=. We
 would need support for qualified names as well, so for instance in
@@ -2870,6 +2852,10 @@ and that would tell Dogen that this is not a new declaration of =c=
 but a reference to an existing declaration in model =a=. This would
 also make it clear from a UML perspective that inheritance is being
 used. The class =b::c= in model =a= would be empty.
+
+This is not a very good idea as it will just cause confusion and it
+will require machinery to place the type in the right point in element
+space..
 
 *** Consider adding a start and end dogen variable block in dia       :story:
 
