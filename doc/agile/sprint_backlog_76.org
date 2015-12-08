@@ -13,16 +13,82 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-07 Mon 23:26]
-| <75>                                                                        |        |
-| Headline                                                                    | Time   |
-|-----------------------------------------------------------------------------+--------|
-| *Total time*                                                                | *0:00* |
+#+CAPTION: Clock summary at [2015-12-08 Tue 22:27]
+| <75>                                                                        |        |      |      |
+| Headline                                                                    | Time   |      |      |
+|-----------------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                                | *0:20* |      |      |
+|-----------------------------------------------------------------------------+--------+------+------|
+| Stories                                                                     | 0:20   |      |      |
+| Active                                                                      |        | 0:20 |      |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:20 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-12-08 Tue 22:07]--[2015-12-08 Tue 22:27] =>  0:20
 
 Updates to sprint and product backlog.
+
+*** COMPLETED Improvements to project layout                          :story:
+    CLOSED: [2015-12-08 Tue 22:23]
+
+*Rationale*: the bits we want to implement of this story have been
+implemented, the rest we won't be implementing.
+
+This story keeps track of general ideas around project layout.
+
+Given all of the ideals floating around (mutli-language needle, model
+groups, etc), there is a general direction in which the projects
+layout seems to be evolving. This story captures that direction.
+
+: / projects
+:   / config -> not the best of names, still needs some thinking.
+:   / dynamic
+:   / sanity
+:   / dia -> whilst we use it for the frontend, this is not frontend specific.
+:   / formatting -> rename of the formatters model. Generic formatting code.
+:   / tack
+    / tack.json
+:   / tack.dia
+:   / tack.xsd -> XML schema support (vision)
+:    / <all other tack importers>
+:   / backend
+:     / common -> current backend model. all code common across backends.
+:     / quilt -> model group for "native models"
+:       / cpp
+:       / csharp (vision)
+:       / java (vision)
+:       / <all other languages>
+:     / pleat -> model group for "cross-language compatible" models
+:       / cpp (vision)
+:       / csharp (vision)
+:       / java (vision)
+:       / <all other languages>
+:   / test_models
+:     / knit -> consider splitting them by tool?
+:       / all_primitives
+:       / <all other knit test models>
+:     / stitch -> consider splitting them by tool?
+:       / seam
+:   / utility -> consider renaming to common? or find a sewing term for this?
+:   / knit
+:   / knitter
+:   / stitch
+:   / stitcher
+
+*Notes*:
+
+- We settled on =common= for models to house shared code; =core= was
+  also considered, but its not always the case that the shared code is
+  "core code".
+- note that when we say =backend=, =frontend= and =middle-end= we are
+  implicitly talking about =knit=. Its not very elegant to have the
+  knit internals so prominent at the top, but its not obvious how else
+  to organise the code.
+- it would be nice to have top-level folders for tools (e.g. =knit=)
+  that would contain both the =knit= library and the =knitter=
+  tool. However we haven't found a good way of structuring the folders
+  that way.
 
 *** STARTED Implement formattables in terms of yarn types             :story:
 

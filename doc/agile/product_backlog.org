@@ -2485,9 +2485,7 @@ depend only on the forward declarations.
 
 *** Sanity check packages automatically                                :epic:
 
-This work is also covered by tasks in the PFH backlog so update
-accordingly. This task only refers to the dogen specific parts of the
-task.
+Create a set of ruby scripts that validate packages:
 
 - sanity check that package installed correctly, e.g. check for a few
   key files.
@@ -2502,6 +2500,8 @@ task.
   test environments. One per OS. These are clean builds with nothing
   on them. To start off with they may contain postgres so we can
   connect locally.
+
+We had some initial support for this in commit ba54859.
 
 *** Property types are always fully qualified                         :story:
 
@@ -6430,63 +6430,6 @@ The c++ frontend would also open some interesting possibilities:
   existing code bases. Not trivial because the layout of the diagram
   would be quite hard to get right.
 - *update existing diagrams*. See [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#investigate-support-for-automatic-diagram-updates][this story]].
-
-*** Improvements to project layout                                    :story:
-
-This story keeps track of general ideas around project layout.
-
-Given all of the ideals floating around (mutli-language needle, model
-groups, etc), there is a general direction in which the projects
-layout seems to be evolving. This story captures that direction.
-
-: / projects
-:   / config -> not the best of names, still needs some thinking.
-:   / dynamic
-:   / sanity
-:   / dia -> whilst we use it for the frontend, this is not frontend specific.
-:   / formatting -> rename of the formatters model. Generic formatting code.
-:   / tack
-    / tack.json
-:   / tack.dia
-:   / tack.xsd -> XML schema support (vision)
-:    / <all other tack importers>
-:   / backend
-:     / common -> current backend model. all code common across backends.
-:     / quilt -> model group for "native models"
-:       / cpp
-:       / csharp (vision)
-:       / java (vision)
-:       / <all other languages>
-:     / pleat -> model group for "cross-language compatible" models
-:       / cpp (vision)
-:       / csharp (vision)
-:       / java (vision)
-:       / <all other languages>
-:   / test_models
-:     / knit -> consider splitting them by tool?
-:       / all_primitives
-:       / <all other knit test models>
-:     / stitch -> consider splitting them by tool?
-:       / seam
-:   / utility -> consider renaming to common? or find a sewing term for this?
-:   / knit
-:   / knitter
-:   / stitch
-:   / stitcher
-
-*Notes*:
-
-- We settled on =common= for models to house shared code; =core= was
-  also considered, but its not always the case that the shared code is
-  "core code".
-- note that when we say =backend=, =frontend= and =middle-end= we are
-  implicitly talking about =knit=. Its not very elegant to have the
-  knit internals so prominent at the top, but its not obvious how else
-  to organise the code.
-- it would be nice to have top-level folders for tools (e.g. =knit=)
-  that would contain both the =knit= library and the =knitter=
-  tool. However we haven't found a good way of structuring the folders
-  that way.
 
 *** Consider compiling knit output with clang                         :story:
 
