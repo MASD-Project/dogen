@@ -4738,6 +4738,9 @@ model. We also need to be able to inherit from other exceptions in a
 model. At present exceptions are not objects so the dependency graph
 support is not there.
 
+When we do this we need to split relatable into "associatable" and
+"generalisable" and get exceptions to model generalisable.
+
 *** Add support for private and protected attributes                  :story:
 
 #+begin_quote

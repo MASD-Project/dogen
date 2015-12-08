@@ -13,20 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-08 Tue 23:35]
+#+CAPTION: Clock summary at [2015-12-08 Tue 23:47]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *1:26* |      |      |
+| *Total time*                                                                | *1:37* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 1:26   |      |      |
-| Active                                                                      |        | 1:26 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:28 |
+| Stories                                                                     | 1:37   |      |      |
+| Active                                                                      |        | 1:37 |      |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:39 |
 | STARTED Remove =service= stereotype                                         |        |      | 0:18 |
 | STARTED Create visitor and exception yarn types                             |        |      | 0:40 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-12-08 Tue 23:36]--[2015-12-08 Tue 23:47] =>  0:11
     CLOCK: [2015-12-08 Tue 22:46]--[2015-12-08 Tue 22:54] =>  0:08
     CLOCK: [2015-12-08 Tue 22:07]--[2015-12-08 Tue 22:27] =>  0:20
 
