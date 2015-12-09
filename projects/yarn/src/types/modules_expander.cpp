@@ -146,14 +146,14 @@ boost::optional<name> updater::containing_module(const name& n) {
 }
 
 void updater::update(element& e) {
-    e.containing_module(containing_module(e.name()));
+    e.contained_by(containing_module(e.name()));
 
-    if (!e.containing_module())
+    if (!e.contained_by())
         return;
 
-    auto i(model_.modules().find(e.containing_module()->qualified()));
+    auto i(model_.modules().find(e.contained_by()->qualified()));
     if (i == model_.modules().end()) {
-        const auto sn(e.containing_module()->simple());
+        const auto sn(e.contained_by()->simple());
         BOOST_LOG_SEV(lg, error) << missing_module << sn;
         BOOST_THROW_EXCEPTION(expansion_error(missing_module + sn));
     }

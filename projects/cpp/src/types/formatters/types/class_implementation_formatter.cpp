@@ -68,8 +68,7 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     const auto ch_fn(traits::class_header_formatter_name());
     builder.add(o.name(), ch_fn);
 
-    using rt = yarn::relationship_types;
-    builder.add(o, rt::weak_associations, ch_fn);
+    builder.add(o.weak_associations(), ch_fn);
 
     const auto io_fctn(formatters::io::traits::facet_name());
     const auto self_fn(class_implementation_formatter::static_formatter_name());
@@ -93,9 +92,9 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
         builder.add(inclusion_constants::boost::algorithm::string());
 
     const auto io_fn(formatters::io::traits::class_header_formatter_name());
-    builder.add(o, rt::weak_associations, io_fn);
-    builder.add(o, rt::regular_associations, io_fn);
-    builder.add(o, rt::parents, io_fn);
+    builder.add(o.weak_associations(), io_fn);
+    builder.add(o.regular_associations(), io_fn);
+    builder.add(o.parents(), io_fn);
 
     return builder.build();
 }

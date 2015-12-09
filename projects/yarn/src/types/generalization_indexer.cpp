@@ -27,7 +27,6 @@
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/indexing_error.hpp"
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/relationship_types_io.hpp"
 #include "dogen/yarn/types/generalization_indexer.hpp"
 
 namespace {
@@ -73,15 +72,14 @@ recurse_generalization(const intermediate_model& m, const name& leaf,
     if (!o.is_child())
         return std::list<name> { o.name() };
 
-    const auto i(o.relationships().find(relationship_types::parents));
-    if (i == o.relationships().end() || i->second.empty()) {
+    if (o.parents().empty()) {
         const auto qn(o.name().qualified());
         BOOST_LOG_SEV(lg, error) << child_with_no_parents << qn;
         BOOST_THROW_EXCEPTION(indexing_error(child_with_no_parents + qn));
     }
 
     std::list<name> root_parents;
-    for (const auto& parent : i->second) {
+    for (const auto& parent : o.parents()) {
         auto j(m.objects().find(parent.qualified()));
         if (j == m.objects().end()) {
             const auto qn(parent.qualified());
@@ -143,9 +141,9 @@ populate(const generalization_details& d, intermediate_model& m) const {
             BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
         }
 
-        const auto rt(relationship_types::leaves);
-        i->second.relationships()[rt] = pair.second;
-        i->second.relationships()[rt].sort();
+        auto& o(i->second);
+        o.leaves(pair.second);
+        o.leaves().sort();
 
         for (const auto& leaf : pair.second) {
             if (leaf.location().model_module_path() ==
@@ -172,8 +170,7 @@ populate(const generalization_details& d, intermediate_model& m) const {
             continue;
         }
 
-        const auto rt(relationship_types::root_parents);
-        o.relationships()[rt] = pair.second;
+        o.root_parents(pair.second);
         for (const auto& opn : pair.second) {
             const auto j(m.objects().find(opn.qualified()));
             if (j == m.objects().end()) {

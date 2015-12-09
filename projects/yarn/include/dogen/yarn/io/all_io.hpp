@@ -43,6 +43,5 @@
 #include "dogen/yarn/io/generation_types_io.hpp"
 #include "dogen/yarn/io/input_descriptor_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
-#include "dogen/yarn/io/relationship_types_io.hpp"
 
 #endif

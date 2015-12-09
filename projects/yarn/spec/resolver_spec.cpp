@@ -64,26 +64,6 @@ const std::string undefined_type("Object has property with undefined type");
 const std::string missing_parent("Object's parent could not be located");
 const std::string incorrect_meta_type("Object has incorrect meta_type");
 
-bool has_one_parent(const dogen::yarn::object& o) {
-    using dogen::yarn::relationship_types;
-    const auto i(o.relationships().find(relationship_types::parents));
-    if (i == o.relationships().end() || i->second.empty() ||
-        i->second.size() > 1)
-        return false;
-
-    return true;
-}
-
-dogen::yarn::name get_parent_name(const dogen::yarn::object& o) {
-    using dogen::yarn::relationship_types;
-    const auto i(o.relationships().find(relationship_types::parents));
-    if (i == o.relationships().end() || i->second.empty() ||
-        i->second.size() > 1)
-        BOOST_FAIL("Object has got one parent");
-
-    return i->second.front();
-}
-
 }
 
 using dogen::utility::test::contains_checker;
@@ -205,8 +185,8 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
             found = true;
 
             const auto& o(pair.second);
-            BOOST_REQUIRE(has_one_parent(o));
-            const auto pn(get_parent_name(o));
+            BOOST_REQUIRE(o.parents().size() == 1);
+            const auto pn(o.parents().front());
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(0, pn));
@@ -241,8 +221,8 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
             found = true;
 
             const auto& o(pair.second);
-            BOOST_REQUIRE(has_one_parent(o));
-            const auto pn(get_parent_name(o));
+            BOOST_REQUIRE(o.parents().size() == 1);
+            const auto pn(o.parents().front());
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(1, pn));
@@ -277,8 +257,8 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
             found_one = true;
 
             const auto& o(pair.second);
-            BOOST_REQUIRE(has_one_parent(o));
-            const auto pn(get_parent_name(o));
+            BOOST_REQUIRE(o.parents().size() == 1);
+            const auto pn(o.parents().front());
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(0, pn));
@@ -289,8 +269,8 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
             found_two = true;
 
             const auto& o(pair.second);
-            BOOST_REQUIRE(has_one_parent(o));
-            const auto pn(get_parent_name(o));
+            BOOST_REQUIRE(o.parents().size() == 1);
+            const auto pn(o.parents().front());
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
             BOOST_CHECK(factory.is_type_name_n(2, pn));
             BOOST_CHECK(factory.is_model_n(0, pn));
@@ -342,8 +322,8 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
             found = true;
 
             const auto& o(pair.second);
-            BOOST_REQUIRE(has_one_parent(o));
-            const auto pn(get_parent_name(o));
+            BOOST_REQUIRE(o.parents().size() == 1);
+            const auto pn(o.parents().front());
             BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(1, pn));

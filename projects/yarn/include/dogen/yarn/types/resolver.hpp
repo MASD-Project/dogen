@@ -90,7 +90,7 @@ private:
      *
      * @note should really be moved to validator.
      */
-    void validate_inheritance_graph(const object& ao) const;
+    void validate_inheritance_graph(const object& o) const;
 
     /**
      * @brief Ensures that all concepts refined by the current concept

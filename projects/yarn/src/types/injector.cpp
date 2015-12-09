@@ -68,8 +68,8 @@ inline void add_containing_module_to_non_contained_entities(
     const name& container_name, AssociativeContainerOfContainable& c) {
     for (auto& pair : c) {
         auto& s(pair.second);
-        if (!s.containing_module())
-            s.containing_module(container_name);
+        if (!s.contained_by())
+            s.contained_by(container_name);
     }
 }
 
@@ -118,7 +118,7 @@ create_visitor(const object& o, const std::list<name>& leaves) const {
     r.documentation(visitor_doc + o.name().simple());
 
     for (const auto& l : leaves)
-        r.relationships()[relationship_types::visits].push_back(l);
+        r.visits().push_back(l);
 
     BOOST_LOG_SEV(lg, debug) << "Created visitor: " << n.qualified();
     return r;
@@ -127,7 +127,7 @@ create_visitor(const object& o, const std::list<name>& leaves) const {
 void injector::inject_visited_by(object& root, const std::list<name>& leaves,
     const name& visitor) const {
 
-    root.relationships()[relationship_types::visited_by].push_back(visitor);
+    root.visited_by().push_back(visitor);
 
     for (const auto& l : leaves) {
         auto i(context_->model().objects().find(l.qualified()));
@@ -138,7 +138,7 @@ void injector::inject_visited_by(object& root, const std::list<name>& leaves,
         }
 
         auto& leaf(i->second);
-        leaf.relationships()[relationship_types::visited_by].push_back(visitor);
+        leaf.visited_by().push_back(visitor);
     }
 }
 
@@ -152,19 +152,15 @@ void injector::inject_visitors() {
         if (!o.is_visitable())
             continue;
 
-        const auto i(o.relationships().find(relationship_types::leaves));
-        const bool has_leaves(i != o.relationships().end() &&
-            !i->second.empty());
-
-        if (!has_leaves) {
+        if (o.leaves().empty()) {
             const auto qn(o.name().qualified());
             BOOST_LOG_SEV(lg, error) << zero_leaves << qn;
             BOOST_THROW_EXCEPTION(injection_error(zero_leaves + qn));
         }
 
-        const auto v(create_visitor(o, i->second));
+        const auto v(create_visitor(o, o.leaves()));
         visitors.push_back(v);
-        inject_visited_by(o, i->second, v.name());
+        inject_visited_by(o, o.leaves(), v.name());
     }
 
     for (const auto v : visitors) {

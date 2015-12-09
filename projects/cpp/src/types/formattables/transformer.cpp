@@ -431,40 +431,36 @@ transformer::to_class_info(const yarn::object& o) const {
     r->generation_type(o.generation_type());
 
     name_builder b;
-    auto i(o.relationships().find(yarn::relationship_types::parents));
-    if (i != o.relationships().end()) {
-        for (const auto& n : i->second) {
-            parent_info pi;
-            pi.name(n.simple());
-            pi.namespaces(b.namespace_list(model_, n));
+    for (const auto& n : o.parents()) {
+        parent_info pi;
+        pi.name(n.simple());
+        pi.namespaces(b.namespace_list(model_, n));
 
-            std::list<std::string> ns(pi.namespaces());
-            ns.push_back(pi.name());
+        std::list<std::string> ns(pi.namespaces());
+        ns.push_back(pi.name());
 
-            using boost::join;
-            pi.qualified_name(join(ns, namespace_separator));
+        using boost::join;
+        pi.qualified_name(join(ns, namespace_separator));
 
-            const auto j(o.inherited_properties().find(n));
-            if (j != o.inherited_properties().end()) {
-                for (const auto& prop : j->second) {
-                    const auto tuple(to_property_info(
-                            prop, o.is_immutable(), o.is_fluent()));
-                    pi.properties().push_back(std::get<0>(tuple));
-                }
+        const auto j(o.inherited_properties().find(n));
+        if (j != o.inherited_properties().end()) {
+            for (const auto& prop : j->second) {
+                const auto tuple(to_property_info(
+                        prop, o.is_immutable(), o.is_fluent()));
+                pi.properties().push_back(std::get<0>(tuple));
             }
-            r->parents().push_back(pi);
         }
+        r->parents().push_back(pi);
     }
 
-    i = o.relationships().find(yarn::relationship_types::root_parents);
-    if (i != o.relationships().end() && !i->second.empty()) {
-        if (i->second.size() > 1) {
+    if (!o.root_parents().empty()) {
+        if (o.root_parents().size() > 1) {
             const auto qn(o.name().qualified());
             BOOST_LOG_SEV(lg, error) << too_many_parents << qn;
             BOOST_THROW_EXCEPTION(transformation_error(too_many_parents + qn));
         }
 
-        const auto opn(i->second.front());
+        const auto opn(o.root_parents().front());
         std::list<std::string> ns(b.namespace_list(model_, opn));
         ns.push_back(opn.simple());
 
@@ -499,11 +495,8 @@ transformer::to_class_info(const yarn::object& o) const {
     if (r->all_properties().empty())
         r->requires_manual_move_constructor(false);
 
-    i = o.relationships().find(yarn::relationship_types::leaves);
-    if (i != o.relationships().end()) {
-        for (const auto l : i->second)
-            r->leaves().push_back(b.qualified_name(model_, l));
-    }
+    for (const auto l : o.leaves())
+        r->leaves().push_back(b.qualified_name(model_, l));
 
     return r;
 }
@@ -516,15 +509,14 @@ transformer::to_visitor_info(const yarn::object& o) const {
     auto r(std::make_shared<visitor_info>());
     populate_entity_properties(o.name(), o.documentation(), *r);
 
-    auto i(o.relationships().find(yarn::relationship_types::visits));
-    if (i == o.relationships().end() || i->second.empty()) {
+    if (o.visits().empty()) {
         const auto& qn(o.name().qualified());
         BOOST_LOG_SEV(lg, error) << no_visitees << qn;
         BOOST_THROW_EXCEPTION(transformation_error(no_visitees + qn));
     }
 
     name_builder b;
-    for (const auto n : i->second) {
+    for (const auto n : o.visits()) {
         cpp::formattables::visited_type_info vti;
         vti.qualified_name(b.qualified_name(model_, n));
         vti.name(n.simple());

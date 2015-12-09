@@ -23,7 +23,6 @@
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/property_td.hpp"
 #include "dogen/yarn/test_data/object_types_td.hpp"
-#include "dogen/yarn/test_data/relationship_types_td.hpp"
 
 namespace {
 
@@ -57,23 +56,10 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
-dogen::yarn::relationship_types
-create_dogen_yarn_relationship_types(const unsigned int position) {
-    return dogen::yarn::relationship_types_generator::create(position);
-}
-
 std::list<dogen::yarn::name> create_std_list_dogen_yarn_name(unsigned int position) {
     std::list<dogen::yarn::name> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_yarn_name(position + i));
-    }
-    return r;
-}
-
-std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> > create_std_unordered_map_dogen_yarn_relationship_types_std_list_dogen_yarn_name_(unsigned int position) {
-    std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_yarn_relationship_types(position + i), create_std_list_dogen_yarn_name(position + i)));
     }
     return r;
 }
@@ -101,10 +87,18 @@ populate(const unsigned int position, result_type& v) {
     v.is_parent(create_bool(position + 5));
     v.is_child(create_bool(position + 6));
     v.is_final(create_bool(position + 7));
-    v.is_visitable(create_bool(position + 8));
-    v.is_root_parent_visitable(create_bool(position + 9));
-    v.relationships(create_std_unordered_map_dogen_yarn_relationship_types_std_list_dogen_yarn_name_(position + 10));
-    v.object_type(create_dogen_yarn_object_types(position + 11));
+    v.root_parents(create_std_list_dogen_yarn_name(position + 8));
+    v.parents(create_std_list_dogen_yarn_name(position + 9));
+    v.leaves(create_std_list_dogen_yarn_name(position + 10));
+    v.regular_associations(create_std_list_dogen_yarn_name(position + 11));
+    v.weak_associations(create_std_list_dogen_yarn_name(position + 12));
+    v.is_visitable(create_bool(position + 13));
+    v.is_root_parent_visitable(create_bool(position + 14));
+    v.visits(create_std_list_dogen_yarn_name(position + 15));
+    v.visited_by(create_std_list_dogen_yarn_name(position + 16));
+    v.object_type(create_dogen_yarn_object_types(position + 17));
+    v.modeled_concepts(create_std_list_dogen_yarn_name(position + 18));
+    v.hash_container_keys(create_std_list_dogen_yarn_name(position + 19));
 }
 
 object_generator::result_type

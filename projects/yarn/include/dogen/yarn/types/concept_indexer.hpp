@@ -28,7 +28,6 @@
 #include <list>
 #include <unordered_set>
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/relationship_types.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -101,12 +100,6 @@ private:
      * @brief Returns the object with the given name, or throws.
      */
     object& find_object(const name& n, intermediate_model& m);
-
-    /**
-     * @brief Finds the relationship container, or throws.
-     */
-    std::list<name>&
-    find_relationships(const relationship_types rt, object& o);
 
     /**
      * @brief Returns the concept with the given name, or throws.

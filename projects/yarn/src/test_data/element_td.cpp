@@ -82,7 +82,7 @@ populate(const unsigned int position, result_type& v) {
     v.generation_type(create_dogen_yarn_generation_types(position + 3));
     v.origin_type(create_dogen_yarn_origin_types(position + 4));
     v.original_model_name(create_std_string(position + 5));
-    v.containing_module(create_boost_optional_dogen_yarn_name(position + 6));
+    v.contained_by(create_boost_optional_dogen_yarn_name(position + 6));
     v.in_global_module(create_bool(position + 7));
 }
 

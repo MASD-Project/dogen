@@ -34,8 +34,6 @@
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/types/property.hpp"
 #include "dogen/yarn/types/object_types.hpp"
-#include "dogen/yarn/types/relationship_types.hpp"
-#include "dogen/yarn/hash/relationship_types_hash.hpp"
 #include "dogen/yarn/serialization/object_fwd_ser.hpp"
 
 namespace dogen {
@@ -62,7 +60,7 @@ public:
         const dogen::yarn::generation_types generation_type,
         const dogen::yarn::origin_types origin_type,
         const std::string& original_model_name,
-        const boost::optional<dogen::yarn::name>& containing_module,
+        const boost::optional<dogen::yarn::name>& contained_by,
         const bool in_global_module,
         const std::list<dogen::yarn::property>& all_properties,
         const std::list<dogen::yarn::property>& local_properties,
@@ -72,10 +70,18 @@ public:
         const bool is_parent,
         const bool is_child,
         const bool is_final,
+        const std::list<dogen::yarn::name>& root_parents,
+        const std::list<dogen::yarn::name>& parents,
+        const std::list<dogen::yarn::name>& leaves,
+        const std::list<dogen::yarn::name>& regular_associations,
+        const std::list<dogen::yarn::name>& weak_associations,
         const bool is_visitable,
         const bool is_root_parent_visitable,
-        const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& relationships,
-        const dogen::yarn::object_types object_type);
+        const std::list<dogen::yarn::name>& visits,
+        const std::list<dogen::yarn::name>& visited_by,
+        const dogen::yarn::object_types object_type,
+        const std::list<dogen::yarn::name>& modeled_concepts,
+        const std::list<dogen::yarn::name>& hash_container_keys);
 
 private:
     template<typename Archive>
@@ -185,6 +191,59 @@ public:
     /**@}*/
 
     /**
+     * @brief Types at the root of the inheritance hierarchy.
+     */
+    /**@{*/
+    const std::list<dogen::yarn::name>& root_parents() const;
+    std::list<dogen::yarn::name>& root_parents();
+    void root_parents(const std::list<dogen::yarn::name>& v);
+    void root_parents(const std::list<dogen::yarn::name>&& v);
+    /**@}*/
+
+    /**
+     * @brief Elements that are direct parents of this element.
+     */
+    /**@{*/
+    const std::list<dogen::yarn::name>& parents() const;
+    std::list<dogen::yarn::name>& parents();
+    void parents(const std::list<dogen::yarn::name>& v);
+    void parents(const std::list<dogen::yarn::name>&& v);
+    /**@}*/
+
+    /**
+     * @brief Elements that are at the bottom of the inheritance tree.
+     */
+    /**@{*/
+    const std::list<dogen::yarn::name>& leaves() const;
+    std::list<dogen::yarn::name>& leaves();
+    void leaves(const std::list<dogen::yarn::name>& v);
+    void leaves(const std::list<dogen::yarn::name>&& v);
+    /**@}*/
+
+    /**
+     * @brief Elements that are involved in aggregation or composition relationships.
+     */
+    /**@{*/
+    const std::list<dogen::yarn::name>& regular_associations() const;
+    std::list<dogen::yarn::name>& regular_associations();
+    void regular_associations(const std::list<dogen::yarn::name>& v);
+    void regular_associations(const std::list<dogen::yarn::name>&& v);
+    /**@}*/
+
+    /**
+     * @brief Elements that are involved in aggregation or composition relationships via
+     * indirection.
+     *
+     * This is used to break cycles where required.
+     */
+    /**@{*/
+    const std::list<dogen::yarn::name>& weak_associations() const;
+    std::list<dogen::yarn::name>& weak_associations();
+    void weak_associations(const std::list<dogen::yarn::name>& v);
+    void weak_associations(const std::list<dogen::yarn::name>&& v);
+    /**@}*/
+
+    /**
      * @brief If true, a visitor is to be generated for this element and its descendants.
      *
      * Only applicable if is_parent is true.
@@ -205,16 +264,23 @@ public:
     /**@}*/
 
     /**
-     * @brief All relationships this element has with other elements.
-     *
-     * Note that the names are in a list rather than a set due to a dogen limitation;
-     * namely that we cannot provide a operator< at present.
+     * @brief Elements that are visited by the visitor.
      */
     /**@{*/
-    const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& relationships() const;
-    std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& relationships();
-    void relationships(const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& v);
-    void relationships(const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >&& v);
+    const std::list<dogen::yarn::name>& visits() const;
+    std::list<dogen::yarn::name>& visits();
+    void visits(const std::list<dogen::yarn::name>& v);
+    void visits(const std::list<dogen::yarn::name>&& v);
+    /**@}*/
+
+    /**
+     * @brief Elements that visit current type.
+     */
+    /**@{*/
+    const std::list<dogen::yarn::name>& visited_by() const;
+    std::list<dogen::yarn::name>& visited_by();
+    void visited_by(const std::list<dogen::yarn::name>& v);
+    void visited_by(const std::list<dogen::yarn::name>&& v);
     /**@}*/
 
     /**
@@ -223,6 +289,26 @@ public:
     /**@{*/
     dogen::yarn::object_types object_type() const;
     void object_type(const dogen::yarn::object_types v);
+    /**@}*/
+
+    /**
+     * @brief Concepts modeled by this object.
+     */
+    /**@{*/
+    const std::list<dogen::yarn::name>& modeled_concepts() const;
+    std::list<dogen::yarn::name>& modeled_concepts();
+    void modeled_concepts(const std::list<dogen::yarn::name>& v);
+    void modeled_concepts(const std::list<dogen::yarn::name>&& v);
+    /**@}*/
+
+    /**
+     * @brief Elements that are keys in a hash container.
+     */
+    /**@{*/
+    const std::list<dogen::yarn::name>& hash_container_keys() const;
+    std::list<dogen::yarn::name>& hash_container_keys();
+    void hash_container_keys(const std::list<dogen::yarn::name>& v);
+    void hash_container_keys(const std::list<dogen::yarn::name>&& v);
     /**@}*/
 
 public:
@@ -247,10 +333,18 @@ private:
     bool is_parent_;
     bool is_child_;
     bool is_final_;
+    std::list<dogen::yarn::name> root_parents_;
+    std::list<dogen::yarn::name> parents_;
+    std::list<dogen::yarn::name> leaves_;
+    std::list<dogen::yarn::name> regular_associations_;
+    std::list<dogen::yarn::name> weak_associations_;
     bool is_visitable_;
     bool is_root_parent_visitable_;
-    std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> > relationships_;
+    std::list<dogen::yarn::name> visits_;
+    std::list<dogen::yarn::name> visited_by_;
     dogen::yarn::object_types object_type_;
+    std::list<dogen::yarn::name> modeled_concepts_;
+    std::list<dogen::yarn::name> hash_container_keys_;
 };
 
 } }

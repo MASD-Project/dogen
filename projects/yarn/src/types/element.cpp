@@ -64,7 +64,7 @@ element::element(element&& rhs)
       generation_type_(std::move(rhs.generation_type_)),
       origin_type_(std::move(rhs.origin_type_)),
       original_model_name_(std::move(rhs.original_model_name_)),
-      containing_module_(std::move(rhs.containing_module_)),
+      contained_by_(std::move(rhs.contained_by_)),
       in_global_module_(std::move(rhs.in_global_module_)) { }
 
 element::element(
@@ -74,7 +74,7 @@ element::element(
     const dogen::yarn::generation_types generation_type,
     const dogen::yarn::origin_types origin_type,
     const std::string& original_model_name,
-    const boost::optional<dogen::yarn::name>& containing_module,
+    const boost::optional<dogen::yarn::name>& contained_by,
     const bool in_global_module)
     : documentation_(documentation),
       extensions_(extensions),
@@ -82,7 +82,7 @@ element::element(
       generation_type_(generation_type),
       origin_type_(origin_type),
       original_model_name_(original_model_name),
-      containing_module_(containing_module),
+      contained_by_(contained_by),
       in_global_module_(in_global_module) { }
 
 void element::to_stream(std::ostream& s) const {
@@ -100,7 +100,7 @@ void element::to_stream(std::ostream& s) const {
       << "\"generation_type\": " << generation_type_ << ", "
       << "\"origin_type\": " << origin_type_ << ", "
       << "\"original_model_name\": " << "\"" << tidy_up_string(original_model_name_) << "\"" << ", "
-      << "\"containing_module\": " << containing_module_ << ", "
+      << "\"contained_by\": " << contained_by_ << ", "
       << "\"in_global_module\": " << in_global_module_
       << " }";
 }
@@ -113,7 +113,7 @@ void element::swap(element& other) noexcept {
     swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
     swap(original_model_name_, other.original_model_name_);
-    swap(containing_module_, other.containing_module_);
+    swap(contained_by_, other.contained_by_);
     swap(in_global_module_, other.in_global_module_);
 }
 
@@ -124,7 +124,7 @@ bool element::compare(const element& rhs) const {
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_ &&
         original_model_name_ == rhs.original_model_name_ &&
-        containing_module_ == rhs.containing_module_ &&
+        contained_by_ == rhs.contained_by_ &&
         in_global_module_ == rhs.in_global_module_;
 }
 
@@ -208,20 +208,20 @@ void element::original_model_name(const std::string&& v) {
     original_model_name_ = std::move(v);
 }
 
-const boost::optional<dogen::yarn::name>& element::containing_module() const {
-    return containing_module_;
+const boost::optional<dogen::yarn::name>& element::contained_by() const {
+    return contained_by_;
 }
 
-boost::optional<dogen::yarn::name>& element::containing_module() {
-    return containing_module_;
+boost::optional<dogen::yarn::name>& element::contained_by() {
+    return contained_by_;
 }
 
-void element::containing_module(const boost::optional<dogen::yarn::name>& v) {
-    containing_module_ = v;
+void element::contained_by(const boost::optional<dogen::yarn::name>& v) {
+    contained_by_ = v;
 }
 
-void element::containing_module(const boost::optional<dogen::yarn::name>&& v) {
-    containing_module_ = std::move(v);
+void element::contained_by(const boost::optional<dogen::yarn::name>&& v) {
+    contained_by_ = std::move(v);
 }
 
 bool element::in_global_module() const {

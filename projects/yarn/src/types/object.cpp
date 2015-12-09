@@ -25,7 +25,6 @@
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/property_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
-#include "dogen/yarn/io/relationship_types_io.hpp"
 
 namespace std {
 
@@ -73,24 +72,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::na
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace yarn {
 
@@ -111,7 +92,7 @@ object::object(
     const dogen::yarn::generation_types generation_type,
     const dogen::yarn::origin_types origin_type,
     const std::string& original_model_name,
-    const boost::optional<dogen::yarn::name>& containing_module,
+    const boost::optional<dogen::yarn::name>& contained_by,
     const bool in_global_module,
     const std::list<dogen::yarn::property>& all_properties,
     const std::list<dogen::yarn::property>& local_properties,
@@ -121,10 +102,18 @@ object::object(
     const bool is_parent,
     const bool is_child,
     const bool is_final,
+    const std::list<dogen::yarn::name>& root_parents,
+    const std::list<dogen::yarn::name>& parents,
+    const std::list<dogen::yarn::name>& leaves,
+    const std::list<dogen::yarn::name>& regular_associations,
+    const std::list<dogen::yarn::name>& weak_associations,
     const bool is_visitable,
     const bool is_root_parent_visitable,
-    const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& relationships,
-    const dogen::yarn::object_types object_type)
+    const std::list<dogen::yarn::name>& visits,
+    const std::list<dogen::yarn::name>& visited_by,
+    const dogen::yarn::object_types object_type,
+    const std::list<dogen::yarn::name>& modeled_concepts,
+    const std::list<dogen::yarn::name>& hash_container_keys)
     : dogen::yarn::element(
       documentation,
       extensions,
@@ -132,7 +121,7 @@ object::object(
       generation_type,
       origin_type,
       original_model_name,
-      containing_module,
+      contained_by,
       in_global_module),
       all_properties_(all_properties),
       local_properties_(local_properties),
@@ -142,10 +131,18 @@ object::object(
       is_parent_(is_parent),
       is_child_(is_child),
       is_final_(is_final),
+      root_parents_(root_parents),
+      parents_(parents),
+      leaves_(leaves),
+      regular_associations_(regular_associations),
+      weak_associations_(weak_associations),
       is_visitable_(is_visitable),
       is_root_parent_visitable_(is_root_parent_visitable),
-      relationships_(relationships),
-      object_type_(object_type) { }
+      visits_(visits),
+      visited_by_(visited_by),
+      object_type_(object_type),
+      modeled_concepts_(modeled_concepts),
+      hash_container_keys_(hash_container_keys) { }
 
 void object::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -167,10 +164,18 @@ void object::to_stream(std::ostream& s) const {
       << "\"is_parent\": " << is_parent_ << ", "
       << "\"is_child\": " << is_child_ << ", "
       << "\"is_final\": " << is_final_ << ", "
+      << "\"root_parents\": " << root_parents_ << ", "
+      << "\"parents\": " << parents_ << ", "
+      << "\"leaves\": " << leaves_ << ", "
+      << "\"regular_associations\": " << regular_associations_ << ", "
+      << "\"weak_associations\": " << weak_associations_ << ", "
       << "\"is_visitable\": " << is_visitable_ << ", "
       << "\"is_root_parent_visitable\": " << is_root_parent_visitable_ << ", "
-      << "\"relationships\": " << relationships_ << ", "
-      << "\"object_type\": " << object_type_
+      << "\"visits\": " << visits_ << ", "
+      << "\"visited_by\": " << visited_by_ << ", "
+      << "\"object_type\": " << object_type_ << ", "
+      << "\"modeled_concepts\": " << modeled_concepts_ << ", "
+      << "\"hash_container_keys\": " << hash_container_keys_
       << " }";
 }
 
@@ -186,10 +191,18 @@ void object::swap(object& other) noexcept {
     swap(is_parent_, other.is_parent_);
     swap(is_child_, other.is_child_);
     swap(is_final_, other.is_final_);
+    swap(root_parents_, other.root_parents_);
+    swap(parents_, other.parents_);
+    swap(leaves_, other.leaves_);
+    swap(regular_associations_, other.regular_associations_);
+    swap(weak_associations_, other.weak_associations_);
     swap(is_visitable_, other.is_visitable_);
     swap(is_root_parent_visitable_, other.is_root_parent_visitable_);
-    swap(relationships_, other.relationships_);
+    swap(visits_, other.visits_);
+    swap(visited_by_, other.visited_by_);
     swap(object_type_, other.object_type_);
+    swap(modeled_concepts_, other.modeled_concepts_);
+    swap(hash_container_keys_, other.hash_container_keys_);
 }
 
 bool object::equals(const dogen::yarn::element& other) const {
@@ -208,10 +221,18 @@ bool object::operator==(const object& rhs) const {
         is_parent_ == rhs.is_parent_ &&
         is_child_ == rhs.is_child_ &&
         is_final_ == rhs.is_final_ &&
+        root_parents_ == rhs.root_parents_ &&
+        parents_ == rhs.parents_ &&
+        leaves_ == rhs.leaves_ &&
+        regular_associations_ == rhs.regular_associations_ &&
+        weak_associations_ == rhs.weak_associations_ &&
         is_visitable_ == rhs.is_visitable_ &&
         is_root_parent_visitable_ == rhs.is_root_parent_visitable_ &&
-        relationships_ == rhs.relationships_ &&
-        object_type_ == rhs.object_type_;
+        visits_ == rhs.visits_ &&
+        visited_by_ == rhs.visited_by_ &&
+        object_type_ == rhs.object_type_ &&
+        modeled_concepts_ == rhs.modeled_concepts_ &&
+        hash_container_keys_ == rhs.hash_container_keys_;
 }
 
 object& object::operator=(object other) {
@@ -308,6 +329,86 @@ void object::is_final(const bool v) {
     is_final_ = v;
 }
 
+const std::list<dogen::yarn::name>& object::root_parents() const {
+    return root_parents_;
+}
+
+std::list<dogen::yarn::name>& object::root_parents() {
+    return root_parents_;
+}
+
+void object::root_parents(const std::list<dogen::yarn::name>& v) {
+    root_parents_ = v;
+}
+
+void object::root_parents(const std::list<dogen::yarn::name>&& v) {
+    root_parents_ = std::move(v);
+}
+
+const std::list<dogen::yarn::name>& object::parents() const {
+    return parents_;
+}
+
+std::list<dogen::yarn::name>& object::parents() {
+    return parents_;
+}
+
+void object::parents(const std::list<dogen::yarn::name>& v) {
+    parents_ = v;
+}
+
+void object::parents(const std::list<dogen::yarn::name>&& v) {
+    parents_ = std::move(v);
+}
+
+const std::list<dogen::yarn::name>& object::leaves() const {
+    return leaves_;
+}
+
+std::list<dogen::yarn::name>& object::leaves() {
+    return leaves_;
+}
+
+void object::leaves(const std::list<dogen::yarn::name>& v) {
+    leaves_ = v;
+}
+
+void object::leaves(const std::list<dogen::yarn::name>&& v) {
+    leaves_ = std::move(v);
+}
+
+const std::list<dogen::yarn::name>& object::regular_associations() const {
+    return regular_associations_;
+}
+
+std::list<dogen::yarn::name>& object::regular_associations() {
+    return regular_associations_;
+}
+
+void object::regular_associations(const std::list<dogen::yarn::name>& v) {
+    regular_associations_ = v;
+}
+
+void object::regular_associations(const std::list<dogen::yarn::name>&& v) {
+    regular_associations_ = std::move(v);
+}
+
+const std::list<dogen::yarn::name>& object::weak_associations() const {
+    return weak_associations_;
+}
+
+std::list<dogen::yarn::name>& object::weak_associations() {
+    return weak_associations_;
+}
+
+void object::weak_associations(const std::list<dogen::yarn::name>& v) {
+    weak_associations_ = v;
+}
+
+void object::weak_associations(const std::list<dogen::yarn::name>&& v) {
+    weak_associations_ = std::move(v);
+}
+
 bool object::is_visitable() const {
     return is_visitable_;
 }
@@ -324,20 +425,36 @@ void object::is_root_parent_visitable(const bool v) {
     is_root_parent_visitable_ = v;
 }
 
-const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& object::relationships() const {
-    return relationships_;
+const std::list<dogen::yarn::name>& object::visits() const {
+    return visits_;
 }
 
-std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& object::relationships() {
-    return relationships_;
+std::list<dogen::yarn::name>& object::visits() {
+    return visits_;
 }
 
-void object::relationships(const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& v) {
-    relationships_ = v;
+void object::visits(const std::list<dogen::yarn::name>& v) {
+    visits_ = v;
 }
 
-void object::relationships(const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >&& v) {
-    relationships_ = std::move(v);
+void object::visits(const std::list<dogen::yarn::name>&& v) {
+    visits_ = std::move(v);
+}
+
+const std::list<dogen::yarn::name>& object::visited_by() const {
+    return visited_by_;
+}
+
+std::list<dogen::yarn::name>& object::visited_by() {
+    return visited_by_;
+}
+
+void object::visited_by(const std::list<dogen::yarn::name>& v) {
+    visited_by_ = v;
+}
+
+void object::visited_by(const std::list<dogen::yarn::name>&& v) {
+    visited_by_ = std::move(v);
 }
 
 dogen::yarn::object_types object::object_type() const {
@@ -346,6 +463,38 @@ dogen::yarn::object_types object::object_type() const {
 
 void object::object_type(const dogen::yarn::object_types v) {
     object_type_ = v;
+}
+
+const std::list<dogen::yarn::name>& object::modeled_concepts() const {
+    return modeled_concepts_;
+}
+
+std::list<dogen::yarn::name>& object::modeled_concepts() {
+    return modeled_concepts_;
+}
+
+void object::modeled_concepts(const std::list<dogen::yarn::name>& v) {
+    modeled_concepts_ = v;
+}
+
+void object::modeled_concepts(const std::list<dogen::yarn::name>&& v) {
+    modeled_concepts_ = std::move(v);
+}
+
+const std::list<dogen::yarn::name>& object::hash_container_keys() const {
+    return hash_container_keys_;
+}
+
+std::list<dogen::yarn::name>& object::hash_container_keys() {
+    return hash_container_keys_;
+}
+
+void object::hash_container_keys(const std::list<dogen::yarn::name>& v) {
+    hash_container_keys_ = v;
+}
+
+void object::hash_container_keys(const std::list<dogen::yarn::name>&& v) {
+    hash_container_keys_ = std::move(v);
 }
 
 } }

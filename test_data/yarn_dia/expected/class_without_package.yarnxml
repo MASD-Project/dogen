@@ -105,9 +105,9 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<original_model_name></original_model_name>
-					<containing_module class_id="23" tracking_level="0" version="0">
+					<contained_by class_id="23" tracking_level="0" version="0">
 						<initialized>0</initialized>
-					</containing_module>
+					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
 				<members class_id="24" tracking_level="0" version="0">
@@ -170,9 +170,9 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<original_model_name></original_model_name>
-					<containing_module>
+					<contained_by>
 						<initialized>0</initialized>
-					</containing_module>
+					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties class_id="30" tracking_level="0" version="0">
@@ -232,14 +232,45 @@
 				<is_parent>0</is_parent>
 				<is_child>0</is_child>
 				<is_final>1</is_final>
+				<root_parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</root_parents>
+				<parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</parents>
+				<leaves>
+					<count>0</count>
+					<item_version>0</item_version>
+				</leaves>
+				<regular_associations>
+					<count>0</count>
+					<item_version>0</item_version>
+				</regular_associations>
+				<weak_associations>
+					<count>0</count>
+					<item_version>0</item_version>
+				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<relationships class_id="35" tracking_level="0" version="0">
+				<visits>
 					<count>0</count>
-					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</relationships>
+				</visits>
+				<visited_by>
+					<count>0</count>
+					<item_version>0</item_version>
+				</visited_by>
 				<object_type>3</object_type>
+				<modeled_concepts>
+					<count>0</count>
+					<item_version>0</item_version>
+				</modeled_concepts>
+				<hash_container_keys>
+					<count>0</count>
+					<item_version>0</item_version>
+				</hash_container_keys>
 			</second>
 		</item>
 	</objects>

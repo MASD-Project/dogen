@@ -72,11 +72,10 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
         builder.add(ic::boost::archive::xml_oarchive());
     }
 
-    using rt = yarn::relationship_types;
-    builder.add(o, rt::weak_associations, ch_fn);
-    builder.add(o, rt::regular_associations, ch_fn);
-    builder.add(o, rt::parents, ch_fn);
-    builder.add(o, rt::leaves, ch_fn);
+    builder.add(o.weak_associations(), ch_fn);
+    builder.add(o.regular_associations(), ch_fn);
+    builder.add(o.parents(), ch_fn);
+    builder.add(o.leaves(), ch_fn);
 
     const auto si(builder.make_special_includes(o));
     if (si.has_date)

@@ -70,10 +70,9 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     if (si.has_variant)
         builder.add(inclusion_constants::boost::visitor::apply_visitor());
 
-    using rt = yarn::relationship_types;
-    builder.add(o, rt::weak_associations, ch_fn);
-    builder.add(o, rt::regular_associations, ch_fn);
-    builder.add(o, rt::parents, ch_fn);
+    builder.add(o.weak_associations(), ch_fn);
+    builder.add(o.regular_associations(), ch_fn);
+    builder.add(o.parents(), ch_fn);
 
     return builder.build();
 }

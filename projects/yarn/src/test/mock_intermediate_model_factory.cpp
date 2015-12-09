@@ -247,21 +247,12 @@ void add_property(Stateful& s, const bool properties_indexed,
         s.all_properties().push_back(p);
 }
 
-template<typename Nameable>
-void add_relationship(dogen::yarn::object& target,
-    const Nameable& relative,
-    const dogen::yarn::relationship_types rt) {
-    using dogen::yarn::relationship_types;
-    target.relationships()[rt].push_back(relative.name());
-}
-
 const bool add_leaf(true);
 
 void model_concept(const bool properties_indexed,
     dogen::yarn::object& o, const dogen::yarn::concept& c) {
 
-    using dogen::yarn::relationship_types;
-    add_relationship(o, c, relationship_types::modeled_concepts);
+    o.modeled_concepts().push_back(c.name());
     if (properties_indexed) {
         for (const auto& p : c.all_properties()) {
             o.local_properties().push_back(p);
@@ -275,13 +266,12 @@ void parent_to_child(const bool properties_indexed,
     dogen::yarn::object& child,
     dogen::yarn::object& root_parent,
     const bool add_leaf_relationship = true) {
-    using dogen::yarn::relationship_types;
-    add_relationship(child, parent, relationship_types::parents);
-    add_relationship(child, root_parent,
-        relationship_types::root_parents);
+
+    child.parents().push_back(parent.name());
+    parent.root_parents().push_back(root_parent.name());
 
     if (add_leaf_relationship)
-        add_relationship(parent, child, relationship_types::leaves);
+        parent.leaves().push_back(child.name());
 
     parent.is_parent(true);
     child.is_child(true);
@@ -963,9 +953,8 @@ object_with_both_regular_and_weak_associations(
     if (flags_.properties_indexed())
         o0.all_properties().push_back(p0);
 
-    const auto ra(relationship_types::regular_associations);
     if (flags_.associations_indexed())
-        o0.relationships()[ra].push_back(o1.name());
+        o0.regular_associations().push_back(o1.name());
 
     dogen::yarn::name_factory nf;
     object o2;
@@ -978,9 +967,8 @@ object_with_both_regular_and_weak_associations(
     if (flags_.properties_indexed())
         o0.all_properties().push_back(p1);
 
-    const auto wa(relationship_types::weak_associations);
     if (flags_.associations_indexed())
-        o0.relationships()[wa].push_back(o1.name());
+        o0.weak_associations().push_back(o1.name());
 
     object o3(make_value_object(3, mn));
     insert_object(r, o3);
@@ -991,7 +979,7 @@ object_with_both_regular_and_weak_associations(
         o0.all_properties().push_back(p2);
 
     if (flags_.associations_indexed())
-        o0.relationships()[wa].push_back(o3.name());
+        o0.weak_associations().push_back(o3.name());
 
     object o4;
     o4.name(nf.build_element_name("std", "string"));
@@ -1005,7 +993,7 @@ object_with_both_regular_and_weak_associations(
         o0.all_properties().push_back(p3);
 
     if (flags_.associations_indexed())
-        o0.relationships()[ra].push_back(o4.name());
+        o0.regular_associations().push_back(o4.name());
 
     insert_object(r, o0);
     return r;
@@ -1033,14 +1021,12 @@ object_with_property(const object_types ot, const property_types pt,
 
     dogen::yarn::name_factory nf;
     intermediate_model r(make_empty_model(0, add_model_module));
-    const auto ra(relationship_types::regular_associations);
-    const auto wa(relationship_types::weak_associations);
     if (pt == property_types::value_object ||
         pt == property_types::boost_shared_ptr) {
         insert_object(r, o1);
 
         if (flags_.associations_indexed())
-            o0.relationships()[ra].push_back(o1.name());
+            o0.regular_associations().push_back(o1.name());
     }
 
     if (pt == property_types::unsigned_int ||
@@ -1050,7 +1036,7 @@ object_with_property(const object_types ot, const property_types pt,
         insert_nameable(r.primitives(), ui);
 
         if (flags_.associations_indexed())
-            o0.relationships()[ra].push_back(ui.name());
+            o0.regular_associations().push_back(ui.name());
 
     } else if (pt == property_types::boost_shared_ptr) {
         object o2;
@@ -1059,21 +1045,21 @@ object_with_property(const object_types ot, const property_types pt,
         insert_object(r, o2);
 
         if (flags_.associations_indexed())
-            o0.relationships()[wa].push_back(o2.name());
+            o0.weak_associations().push_back(o2.name());
 
     } else if (pt == property_types::std_pair) {
         const auto b(make_primitive(boolean));
         r.primitives().insert(std::make_pair(b.name().qualified(), b));
 
         if (flags_.associations_indexed())
-            o0.relationships()[ra].push_back(b.name());
+            o0.regular_associations().push_back(b.name());
 
         object o2;
         o2.name(nf.build_element_name("std", "pair"));
         o2.object_type(dogen::yarn::object_types::user_defined_value_object);
 
         if (flags_.associations_indexed())
-            o0.relationships()[ra].push_back(o2.name());
+            o0.regular_associations().push_back(o2.name());
 
         insert_object(r, o2);
     } else if (pt == property_types::boost_variant) {
@@ -1081,13 +1067,13 @@ object_with_property(const object_types ot, const property_types pt,
         r.primitives().insert(std::make_pair(b.name().qualified(), b));
 
         if (flags_.associations_indexed())
-            o0.relationships()[ra].push_back(b.name());
+            o0.regular_associations().push_back(b.name());
 
         const auto ui(make_primitive(unsigned_int));
         r.primitives().insert(std::make_pair(ui.name().qualified(), ui));
 
         if (flags_.associations_indexed())
-            o0.relationships()[ra].push_back(ui.name());
+            o0.regular_associations().push_back(ui.name());
 
         object o2;
         o2.name(nf.build_element_name("boost", "variant"));
@@ -1095,7 +1081,7 @@ object_with_property(const object_types ot, const property_types pt,
         insert_object(r, o2);
 
         if (flags_.associations_indexed())
-            o0.relationships()[ra].push_back(o2.name());
+            o0.regular_associations().push_back(o2.name());
 
     } else if (pt == property_types::std_string) {
         object o2;
@@ -1104,7 +1090,7 @@ object_with_property(const object_types ot, const property_types pt,
         insert_object(r, o2);
 
         if (flags_.associations_indexed())
-            o0.relationships()[ra].push_back(o2.name());
+            o0.regular_associations().push_back(o2.name());
     }
     insert_object(r, o0);
     return r;
@@ -1142,9 +1128,8 @@ object_with_missing_property_type(
     add_property(o0, flags_.properties_indexed(), 0,
         property_types::value_object, o1.name());
 
-    const auto ra(relationship_types::regular_associations);
     if (flags_.associations_indexed())
-        o0.relationships()[ra].push_back(o1.name());
+        o0.regular_associations().push_back(o1.name());
 
     intermediate_model r(make_empty_model(0, add_model_module));
     insert_object(r, o0);
@@ -1269,13 +1254,13 @@ object_with_third_degree_parent_in_same_model(const bool has_property,
     parent_to_child(flags_.properties_indexed(), o1, o0, o3, !add_leaf);
 
     o1.is_parent(true);
-    add_relationship(o1, o0, relationship_types::leaves);
+    o1.leaves().push_back(o0.name());
 
     o2.is_parent(true);
-    add_relationship(o2, o0, relationship_types::leaves);
+    o2.leaves().push_back(o0.name());
 
     o3.is_parent(true);
-    add_relationship(o3, o0, relationship_types::leaves);
+    o3.leaves().push_back(o0.name());
 
     insert_object(r, o0);
     insert_object(r, o1);
@@ -1299,13 +1284,13 @@ object_with_third_degree_parent_missing(
     parent_to_child(flags_.properties_indexed(), o3, o2, o3, !add_leaf);
 
     o1.is_parent(true);
-    add_relationship(o1, o0, relationship_types::leaves);
+    o1.leaves().push_back(o0.name());
 
     o2.is_parent(true);
-    add_relationship(o2, o0, relationship_types::leaves);
+    o2.leaves().push_back(o0.name());
 
     o3.is_parent(true);
-    add_relationship(o3, o0, relationship_types::leaves);
+    o3.leaves().push_back(o0.name());
 
     auto r(make_empty_model(0, add_model_module));
     insert_object(r, o0);
@@ -1328,13 +1313,13 @@ object_with_third_degree_parent_in_different_models(
     parent_to_child(flags_.properties_indexed(), o3, o2, o3, !add_leaf);
 
     o1.is_parent(true);
-    add_relationship(o1, o0, relationship_types::leaves);
+    o1.leaves().push_back(o0.name());
 
     o2.is_parent(true);
-    add_relationship(o2, o0, relationship_types::leaves);
+    o2.leaves().push_back(o0.name());
 
     o3.is_parent(true);
-    add_relationship(o3, o0, relationship_types::leaves);
+    o3.leaves().push_back(o0.name());
 
     auto m0(make_empty_model(0, add_model_module));
     insert_object(m0, o0);
@@ -1364,13 +1349,13 @@ object_with_missing_third_degree_parent_in_different_models(
     parent_to_child(flags_.properties_indexed(), o3, o2, o3, !add_leaf);
 
     o1.is_parent(true);
-    add_relationship(o1, o0, relationship_types::leaves);
+    o1.leaves().push_back(o0.name());
 
     o2.is_parent(true);
-    add_relationship(o2, o0, relationship_types::leaves);
+    o2.leaves().push_back(o0.name());
 
     o3.is_parent(true);
-    add_relationship(o3, o0, relationship_types::leaves);
+    o3.leaves().push_back(o0.name());
 
     auto m0(make_empty_model(0, add_model_module));
     insert_object(m0, o0);

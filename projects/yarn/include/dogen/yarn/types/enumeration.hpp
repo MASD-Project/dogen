@@ -56,7 +56,7 @@ public:
         const dogen::yarn::generation_types generation_type,
         const dogen::yarn::origin_types origin_type,
         const std::string& original_model_name,
-        const boost::optional<dogen::yarn::name>& containing_module,
+        const boost::optional<dogen::yarn::name>& contained_by,
         const bool in_global_module,
         const dogen::yarn::name& underlying_type,
         const std::vector<dogen::yarn::enumerator>& enumerators);

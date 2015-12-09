@@ -176,33 +176,32 @@ yarn::enumerator transformer::to_enumerator(const processed_property& p,
 }
 
 void transformer::
-update_object(yarn::object& ao, const processed_object& o, const profile& p) {
-    update_element(ao, o, p);
+update_object(yarn::object& o, const processed_object& po, const profile& p) {
+    update_element(o, po, p);
 
-    ao.is_fluent(p.is_fluent());
-    ao.is_visitable(p.is_visitable());
+    o.is_fluent(p.is_fluent());
+    o.is_visitable(p.is_visitable());
 
     for (const auto us : p.unknown_stereotypes()) {
         const auto n(to_name(us));
-        using yarn::relationship_types;
-        ao.relationships()[relationship_types::modeled_concepts].push_back(n);
+        o.modeled_concepts().push_back(n);
     }
 
-    for (const auto& p : o.properties())
-        ao.local_properties().push_back(to_property(p));
+    for (const auto& p : po.properties())
+        o.local_properties().push_back(to_property(p));
 
-    const auto i(context_.child_id_to_parent_ids().find(o.id()));
+    const auto i(context_.child_id_to_parent_ids().find(po.id()));
     if (i != context_.child_id_to_parent_ids().end()) {
         if (i->second.empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_parent_container << o.id();
+            BOOST_LOG_SEV(lg, error) << empty_parent_container << po.id();
             BOOST_THROW_EXCEPTION(
-                transformation_error(empty_parent_container + o.id()));
+                transformation_error(empty_parent_container + po.id()));
         }
 
         if (i->second.size() > 1) {
-            BOOST_LOG_SEV(lg, error) << multiple_inheritance << o.id();
+            BOOST_LOG_SEV(lg, error) << multiple_inheritance << po.id();
             BOOST_THROW_EXCEPTION(
-                transformation_error(multiple_inheritance + o.id()));
+                transformation_error(multiple_inheritance + po.id()));
         }
 
         const auto parent_name(i->second.front());
@@ -210,37 +209,36 @@ update_object(yarn::object& ao, const processed_object& o, const profile& p) {
         if (j == context_.id_to_name().end()) {
             BOOST_LOG_SEV(lg, error) << "Object has a parent but "
                                      << " there is no Name mapping defined."
-                                     << " Child ID: '" << o.id()
+                                     << " Child ID: '" << po.id()
                                      << "' Parent ID: '" << parent_name << "'";
 
             BOOST_THROW_EXCEPTION(
-                transformation_error(parent_not_found + o.id()));
+                transformation_error(parent_not_found + po.id()));
         }
 
         BOOST_LOG_SEV(lg, debug) << "Setting parent for: "
-                                 << ao.name().simple() << " as "
+                                 << o.name().simple() << " as "
                                  << j->second.simple();
-        ao.is_child(true);
-        using yarn::relationship_types;
-        ao.relationships()[relationship_types::parents].push_back(j->second);
+        o.is_child(true);
+        o.parents().push_back(j->second);
     } else {
         BOOST_LOG_SEV(lg, debug) << "Object has no parent: "
-                                 << ao.name().simple();
+                                 << o.name().simple();
     }
 
-    const auto j(context_.parent_ids().find(o.id()));
-    ao.is_parent(j != context_.parent_ids().end());
-    ao.is_final(!ao.is_parent());
-    context_.id_to_name().insert(std::make_pair(o.id(), ao.name()));
+    const auto j(context_.parent_ids().find(po.id()));
+    o.is_parent(j != context_.parent_ids().end());
+    o.is_final(!o.is_parent());
+    context_.id_to_name().insert(std::make_pair(po.id(), o.name()));
 
-    ao.is_immutable(p.is_immutable());
-    if ((ao.is_parent() || ao.is_child()) && p.is_immutable())  {
+    o.is_immutable(p.is_immutable());
+    if ((o.is_parent() || o.is_child()) && p.is_immutable())  {
         BOOST_LOG_SEV(lg, error) << immutabilty_with_inheritance
-                                 << ao.name().simple();
+                                 << o.name().simple();
 
         BOOST_THROW_EXCEPTION(
             transformation_error(immutabilty_with_inheritance +
-                ao.name().simple()));
+                o.name().simple()));
     }
 }
 

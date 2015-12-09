@@ -32,7 +32,6 @@
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
 #include "dogen/yarn/types/injector.hpp"
 
-using dogen::yarn::relationship_types;
 using dogen::yarn::object_types;
 
 namespace {
@@ -47,12 +46,6 @@ const std::string version_name("version");
 const std::string missing_identity("Identity must have at least");
 const std::string no_leaves("Type marked as visitable but has no leaves");
 
-bool has_relationship(const relationship_types rt,
-    const dogen::yarn::object& o) {
-    const auto i(o.relationships().find(rt));
-    return i != o.relationships().end() && !i->second.empty();
-}
-
 }
 
 using dogen::utility::test::contains_checker;
@@ -66,7 +59,7 @@ BOOST_AUTO_TEST_CASE(single_type_model_results_in_adding_only_global_module) {
 
     auto a(factory.make_single_type_model());
     BOOST_REQUIRE(a.objects().size() == 1);
-    BOOST_CHECK(!a.objects().begin()->second.containing_module());
+    BOOST_CHECK(!a.objects().begin()->second.contained_by());
     BOOST_REQUIRE(a.modules().empty());
     BOOST_REQUIRE(a.primitives().empty());
     BOOST_REQUIRE(a.enumerations().empty());
@@ -79,8 +72,8 @@ BOOST_AUTO_TEST_CASE(single_type_model_results_in_adding_only_global_module) {
     BOOST_CHECK(a.modules().size() == 1);
 
     const auto n(a.modules().begin()->second.name());
-    BOOST_REQUIRE(a.objects().begin()->second.containing_module());
-    BOOST_REQUIRE(*a.objects().begin()->second.containing_module() == n);
+    BOOST_REQUIRE(a.objects().begin()->second.contained_by());
+    BOOST_REQUIRE(*a.objects().begin()->second.contained_by() == n);
     BOOST_CHECK(a.primitives().empty());
     BOOST_CHECK(a.enumerations().empty());
     BOOST_CHECK(a.concepts().empty());
@@ -134,13 +127,10 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
             BOOST_CHECK(o.object_type() == object_types::visitor);
             BOOST_CHECK(!o.is_visitable());
             BOOST_CHECK(!o.is_immutable());
-            BOOST_CHECK(!has_relationship(relationship_types::parents, o));
-            BOOST_CHECK(
-                !has_relationship(relationship_types::root_parents, o));
-            BOOST_CHECK(
-                !has_relationship(relationship_types::modeled_concepts, o));
-            BOOST_CHECK(
-                !has_relationship(relationship_types::leaves, o));
+            BOOST_CHECK(o.parents().empty());
+            BOOST_CHECK(o.root_parents().empty());
+            BOOST_CHECK(o.modeled_concepts().empty());
+            BOOST_CHECK(o.leaves().empty());
         }
     }
 

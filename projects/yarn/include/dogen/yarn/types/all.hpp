@@ -72,7 +72,6 @@
 #include "dogen/yarn/types/frontend_interface.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/relationship_types.hpp"
 #include "dogen/yarn/types/association_indexer.hpp"
 #include "dogen/yarn/types/nested_name_builder.hpp"
 #include "dogen/yarn/types/properties_expander.hpp"

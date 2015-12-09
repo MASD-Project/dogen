@@ -27,7 +27,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/indexing_error.hpp"
-#include "dogen/yarn/io/relationship_types_io.hpp"
 #include "dogen/yarn/types/property_indexer.hpp"
 
 using namespace dogen::utility::log;
@@ -56,18 +55,6 @@ object& property_indexer::find_object(const name& n, intermediate_model& m) {
     return i->second;
 }
 
-std::list<name>& property_indexer::
-find_relationships(const relationship_types rt, object& o) {
-    auto i(o.relationships().find(rt));
-    if (i == o.relationships().end() || i->second.empty()) {
-        const auto qn(o.name().qualified());
-        BOOST_LOG_SEV(lg, error) << relationship_not_found << qn
-                                 << " relationship: " << rt;
-        BOOST_THROW_EXCEPTION(indexing_error(relationship_not_found + qn));
-    }
-    return i->second;
-}
-
 concept& property_indexer::find_concept(const name& n, intermediate_model& m) {
     const auto& qn(n.qualified());
     auto i(m.concepts().find(qn));
@@ -89,31 +76,27 @@ void property_indexer::index_object(object& o, intermediate_model& m,
     }
 
     std::list<property> concept_properties;
-    auto i(o.relationships().find(relationship_types::modeled_concepts));
-    if (i != o.relationships().end()) {
-        for (const auto& n : i->second) {
-            auto& c(find_concept(n, m));
-            concept_properties.insert(concept_properties.end(),
-                c.local_properties().begin(), c.local_properties().end());
-        }
+    for (const auto& n : o.modeled_concepts()) {
+        auto& c(find_concept(n, m));
+        const auto& p(c.local_properties());
+        concept_properties.insert(concept_properties.end(), p.begin(), p.end());
     }
 
     o.local_properties().insert(o.local_properties().begin(),
         concept_properties.begin(), concept_properties.end());
 
-    i = o.relationships().find(relationship_types::parents);
-    if (i != o.relationships().end()) {
-        for (const auto& n : i->second) {
-            auto& parent(find_object(n, m));
-            index_object(parent, m, processed_names);
+    for (const auto& n : o.parents()) {
+        auto& parent(find_object(n, m));
+        index_object(parent, m, processed_names);
 
-            if (!parent.all_properties().empty())
-                o.inherited_properties().insert(
-                    std::make_pair(parent.name(), parent.all_properties()));
-
-            o.all_properties().insert(o.all_properties().end(),
-                parent.all_properties().begin(), parent.all_properties().end());
+        if (!parent.all_properties().empty()) {
+            const auto& pn(parent.name());
+            const auto pair(std::make_pair(pn, parent.all_properties()));
+            o.inherited_properties().insert(pair);
         }
+
+        const auto p(parent.all_properties());
+        o.all_properties().insert(o.all_properties().end(), p.begin(), p.end());
     }
 
     o.all_properties().insert(o.all_properties().end(),

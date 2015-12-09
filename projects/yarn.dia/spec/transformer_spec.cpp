@@ -39,7 +39,6 @@
 using namespace dogen::yarn::dia;
 using dogen::utility::test::asserter;
 using dogen::yarn::dia::test::mock_processed_object_factory;
-using dogen::yarn::relationship_types;
 
 namespace  {
 
@@ -104,32 +103,6 @@ dogen::yarn::dia::context mock_context(const std::string& model_name) {
 
 dogen::yarn::dia::context mock_context() {
     return mock_context(model_name);
-}
-
-bool has_relationship(const relationship_types rt,
-    const dogen::yarn::object& o) {
-    const auto i(o.relationships().find(rt));
-    return i != o.relationships().end() && !i->second.empty();
-}
-
-bool has_one_parent(const dogen::yarn::object& o) {
-    using dogen::yarn::relationship_types;
-    const auto i(o.relationships().find(relationship_types::parents));
-    if (i == o.relationships().end() || i->second.empty() ||
-        i->second.size() > 1)
-        return false;
-
-    return true;
-}
-
-dogen::yarn::name get_parent_name(const dogen::yarn::object& o) {
-    using dogen::yarn::relationship_types;
-    const auto i(o.relationships().find(relationship_types::parents));
-    if (i == o.relationships().end() || i->second.empty() ||
-        i->second.size() > 1)
-        BOOST_FAIL("Object has got one parent");
-
-    return i->second.front();
 }
 
 dogen::dynamic::repository empty_repository;
@@ -986,11 +959,11 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
         const auto& n(o.name());
 
         if (is_type_one(n)) {
-            BOOST_CHECK(!has_relationship(relationship_types::parents, o));
-            BOOST_CHECK(!has_relationship(relationship_types::root_parents, o));
+            BOOST_CHECK(o.parents().empty());
+            BOOST_CHECK(o.root_parents().empty());
         } else if (is_type_two(n)) {
-            BOOST_REQUIRE(has_one_parent(o));
-            BOOST_CHECK(is_type_one(get_parent_name(o)));
+            BOOST_REQUIRE(o.parents().size() == 1);
+            BOOST_CHECK(is_type_one(o.parents().front()));
         } else {
             BOOST_LOG_SEV(lg, error) << "Unexpected type name: "
                                      << n.qualified();

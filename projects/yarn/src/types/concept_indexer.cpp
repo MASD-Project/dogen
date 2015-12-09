@@ -27,7 +27,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/indexing_error.hpp"
-#include "dogen/yarn/io/relationship_types_io.hpp"
 #include "dogen/yarn/types/concept_indexer.hpp"
 
 using namespace dogen::utility::log;
@@ -62,18 +61,6 @@ object& concept_indexer::find_object(const name& n, intermediate_model& m) {
         BOOST_LOG_SEV(lg, error) << object_not_found << n.qualified();
         BOOST_THROW_EXCEPTION(
             indexing_error(object_not_found +  n.qualified()));
-    }
-    return i->second;
-}
-
-std::list<name>& concept_indexer::
-find_relationships(const relationship_types rt, object& o) {
-    auto i(o.relationships().find(rt));
-    if (i == o.relationships().end() || i->second.empty()) {
-        const auto qn(o.name().qualified());
-        BOOST_LOG_SEV(lg, error) << relationship_not_found << qn
-                                 << " relationship: " << rt;
-        BOOST_THROW_EXCEPTION(indexing_error(relationship_not_found + qn));
     }
     return i->second;
 }
@@ -119,8 +106,7 @@ void concept_indexer::index_object(object& o, intermediate_model& m,
         return;
     }
 
-    const auto i(o.relationships().find(relationship_types::modeled_concepts));
-    if (i == o.relationships().end() || i->second.empty()) {
+    if (o.modeled_concepts().empty()) {
         processed_names.insert(o.name());
         BOOST_LOG_SEV(lg, debug) << "Object models no concepts.";
         return;
@@ -131,7 +117,7 @@ void concept_indexer::index_object(object& o, intermediate_model& m,
      * @e refines container for this.
      */
     std::list<name> expanded_refines;
-    for (auto& n : i->second) {
+    for (auto& n : o.modeled_concepts()) {
         auto& c(find_concept(n, m));
         expanded_refines.push_back(n);
         expanded_refines.insert(expanded_refines.end(),
@@ -147,7 +133,7 @@ void concept_indexer::index_object(object& o, intermediate_model& m,
      * concepts that our parents are modeling.
      */
     if (!o.is_child()) {
-        i->second = expanded_refines;
+        o.modeled_concepts(expanded_refines);
         BOOST_LOG_SEV(lg, debug) << "Object has no parents, using reduced set.";
         return;
     }
@@ -158,16 +144,15 @@ void concept_indexer::index_object(object& o, intermediate_model& m,
     our_concepts.insert(expanded_refines.begin(), expanded_refines.end());
 
     std::set<name> their_concepts;
-    for (const auto& n : find_relationships(relationship_types::parents, o)) {
+    for (const auto& n : o.parents()) {
         auto& parent(find_object(n, m));
         index_object(parent, m, processed_names);
 
-        auto& pr(parent.relationships());
-        const auto j(pr.find(relationship_types::modeled_concepts));
-        if (j == pr.end() || j->second.empty())
+        const auto& mc(parent.modeled_concepts());
+        if (mc.empty())
             continue;
 
-        their_concepts.insert(j->second.begin(), j->second.end());
+        their_concepts.insert(mc.begin(), mc.end());
     }
 
     /* we want to only model concepts which have not yet been modeled
@@ -182,10 +167,10 @@ void concept_indexer::index_object(object& o, intermediate_model& m,
      * difference. we do this instead of just using the set difference
      * directly to preserve order.
      */
-    i->second.clear();
+    o.modeled_concepts().clear();
     for (const auto& n : expanded_refines) {
         if (result.find(n) != result.end())
-            i->second.push_back(n);
+            o.modeled_concepts().push_back(n);
     }
     BOOST_LOG_SEV(lg, debug) << "Finished indexing object.";
 }

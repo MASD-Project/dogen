@@ -39,13 +39,13 @@ obtain_top_level_module_names(const intermediate_model& m) const {
     for (const auto& pair : m.modules()) {
         const auto& module(pair.second);
 
-        if (!module.containing_module()) {
+        if (!module.contained_by()) {
             BOOST_LOG_SEV(lg, debug) << "Module is not a top-level module: "
                                      << pair.first;
             continue;
         }
 
-        const auto& cm(*module.containing_module());
+        const auto& cm(*module.contained_by());
         if (cm != m.name()) {
             BOOST_LOG_SEV(lg, debug) << "Module is not a top-level module: "
                                      << pair.first

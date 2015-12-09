@@ -72,9 +72,9 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<original_model_name></original_model_name>
-					<containing_module class_id="19" tracking_level="0" version="0">
+					<contained_by class_id="19" tracking_level="0" version="0">
 						<initialized>0</initialized>
-					</containing_module>
+					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
 				<members class_id="20" tracking_level="0" version="0">

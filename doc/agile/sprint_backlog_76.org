@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-09 Wed 00:13]
+#+CAPTION: Clock summary at [2015-12-09 Wed 23:38]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *2:02* |      |      |
+| *Total time*                                                                | *4:36* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 2:02   |      |      |
-| Active                                                                      |        | 2:02 |      |
+| Stories                                                                     | 4:36   |      |      |
+| Active                                                                      |        | 4:36 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:39 |
 | STARTED Remove =service= stereotype                                         |        |      | 0:18 |
-| STARTED Create visitor and exception yarn types                             |        |      | 1:05 |
+| STARTED Create visitor and exception yarn types                             |        |      | 3:39 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -382,6 +382,7 @@ all facets except for types. A few points:
   profiles" to go with "enablement profiles".
 
 *** STARTED Create visitor and exception yarn types                   :story:
+    CLOCK: [2015-12-09 Wed 21:04]--[2015-12-09 Wed 23:38] =>  2:34
     CLOCK: [2015-12-08 Tue 23:48]--[2015-12-09 Wed 00:13] =>  0:25
     CLOCK: [2015-12-08 Tue 22:55]--[2015-12-08 Tue 23:35] =>  0:40
 

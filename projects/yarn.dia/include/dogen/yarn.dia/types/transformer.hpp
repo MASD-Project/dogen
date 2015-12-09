@@ -164,7 +164,7 @@ private:
      * @brief Update the yarn abstract object using the processed
      * object and the profile.
      */
-    void update_object(yarn::object& ao, const processed_object& o,
+    void update_object(yarn::object& o, const processed_object& po,
         const profile& p);
 
 private:

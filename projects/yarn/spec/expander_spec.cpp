@@ -35,7 +35,6 @@
 #include "dogen/yarn/types/expander.hpp"
 
 /*
-using dogen::yarn::relationship_types;
 using dogen::yarn::object_types;
 
 namespace {

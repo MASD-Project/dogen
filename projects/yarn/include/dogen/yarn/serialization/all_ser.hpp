@@ -44,6 +44,5 @@
 #include "dogen/yarn/serialization/generation_types_ser.hpp"
 #include "dogen/yarn/serialization/input_descriptor_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_ser.hpp"
-#include "dogen/yarn/serialization/relationship_types_ser.hpp"
 
 #endif

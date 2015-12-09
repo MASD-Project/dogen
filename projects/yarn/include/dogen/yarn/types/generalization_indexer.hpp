@@ -30,7 +30,6 @@
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/hash/name_hash.hpp"
-#include "dogen/yarn/types/relationship_types.hpp"
 
 namespace dogen {
 namespace yarn {

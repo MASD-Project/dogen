@@ -76,18 +76,17 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     const auto ser_fwd_fn(ser::forward_declarations_formatter_name());
     builder.add(o.name(), ser_fwd_fn);
 
-    using rt = yarn::relationship_types;
     const auto fwd_fn(traits::forward_declarations_formatter_name());
-    builder.add(o, rt::weak_associations, fwd_fn);
-    builder.add(o, rt::regular_associations, self_fn);
-    builder.add(o, rt::parents, self_fn);
+    builder.add(o.weak_associations(), fwd_fn);
+    builder.add(o.regular_associations(), self_fn);
+    builder.add(o.parents(), self_fn);
 
     using hash = formatters::hash::traits;
     const auto hash_fn(hash::traits::class_header_formatter_name());
-    builder.add(o, rt::hash_container_keys, hash_fn);
+    builder.add(o.hash_container_keys(), hash_fn);
 
     if (o.is_visitable())
-        builder.add(o, rt::visited_by, self_fn);
+        builder.add(o.visited_by(), self_fn);
 
     return builder.build();
 }

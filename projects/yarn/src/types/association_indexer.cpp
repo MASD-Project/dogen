@@ -25,7 +25,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/indexing_error.hpp"
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/relationship_types_io.hpp"
 #include "dogen/yarn/types/association_indexer.hpp"
 
 namespace {
@@ -65,11 +64,10 @@ void association_indexer::remove_duplicates(std::list<name>& names,
 void association_indexer::recurse_nested_names(const intermediate_model& m,
     object& o, const nested_name& nn, bool& is_pointer) const {
     const auto n(nn.type());
-    auto& rel(o.relationships());
     if (is_pointer)
-        rel[relationship_types::weak_associations].push_back(n);
+        o.weak_associations().push_back(n);
     else
-        rel[relationship_types::regular_associations].push_back(n);
+        o.regular_associations().push_back(n);
 
     const auto i(m.primitives().find(n.qualified()));
     if (i != m.primitives().end()) {
@@ -95,7 +93,7 @@ void association_indexer::recurse_nested_names(const intermediate_model& m,
     for (const auto c : nn.children()) {
         const auto hc(object_types::hash_container);
         if (is_first && k->second.object_type() == hc)
-            rel[relationship_types::hash_container_keys].push_back(c.type());
+            o.hash_container_keys().push_back(c.type());
 
         recurse_nested_names(m, o, c, is_pointer);
         is_first = false;
@@ -112,26 +110,22 @@ index_object(const intermediate_model& m, object& o) const {
         recurse_nested_names(m, o, nn, is_pointer);
     }
 
-    auto i(o.relationships().find(relationship_types::regular_associations));
     std::unordered_set<name> regular_associations;
-    if (i != o.relationships().end()) {
-        remove_duplicates(i->second);
-        for (const auto n : i->second)
+    if (!o.regular_associations().empty()) {
+        remove_duplicates(o.regular_associations());
+        for (const auto n : o.regular_associations())
             regular_associations.insert(n);
     }
 
-    i = o.relationships().find(relationship_types::weak_associations);
-    if (i != o.relationships().end()) {
+    if (!o.weak_associations().empty()) {
         /* Ensure we remove any items which are simultaneously regular
          * and weak associations.
          */
-        remove_duplicates(i->second, regular_associations);
+        remove_duplicates(o.weak_associations(), regular_associations);
     }
 
-    const auto hck(relationship_types::hash_container_keys);
-    i = o.relationships().find(hck);
-    if (i != o.relationships().end())
-        remove_duplicates(i->second);
+    if (!o.hash_container_keys().empty())
+        remove_duplicates(o.hash_container_keys());
 }
 
 void association_indexer::index(intermediate_model& m) const {

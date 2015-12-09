@@ -25,7 +25,6 @@
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/property_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
-#include "dogen/yarn/io/relationship_types_io.hpp"
 
 namespace dogen {
 namespace yarn {

@@ -84,12 +84,11 @@ inclusion_dependencies_builder::special_includes
 inclusion_dependencies_builder::make_special_includes(
     const yarn::object& o) const {
     special_includes r;
-    const auto lambda([&](const yarn::relationship_types rt) {
-            const auto i(o.relationships().find(rt));
-            if (i == o.relationships().end())
+    const auto lambda([&](const std::list<yarn::name> names) {
+            if (names.empty())
                 return;
 
-            for (const auto& n : i->second) {
+            for (const auto& n : names) {
                 const auto sn(n.simple());
                 if (sn == bool_type || sn == double_type || sn == float_type)
                     r.requires_stream_manipulators = true;
@@ -110,9 +109,8 @@ inclusion_dependencies_builder::make_special_includes(
             }
         });
 
-    using rt = dogen::yarn::relationship_types;
-    lambda(rt::regular_associations);
-    lambda(rt::weak_associations);
+    lambda(o.regular_associations());
+    lambda(o.weak_associations());
 
     return r;
 }
@@ -198,17 +196,6 @@ void inclusion_dependencies_builder::
 add(const std::list<yarn::name>& names, const std::string& formatter_name) {
     for (const auto& n : names)
         add(n, formatter_name);
-}
-
-void inclusion_dependencies_builder::add(const yarn::object& o,
-    const yarn::relationship_types rt,
-    const std::string& formatter_name) {
-
-    const auto i(o.relationships().find(rt));
-    if (i == o.relationships().end())
-        return;
-
-    add(i->second, formatter_name);
 }
 
 std::list<std::string> inclusion_dependencies_builder::build() {

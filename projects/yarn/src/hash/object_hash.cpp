@@ -23,7 +23,6 @@
 #include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/yarn/hash/property_hash.hpp"
 #include "dogen/yarn/hash/object_types_hash.hpp"
-#include "dogen/yarn/hash/relationship_types_hash.hpp"
 
 namespace {
 
@@ -58,15 +57,6 @@ inline std::size_t hash_std_list_dogen_yarn_name(const std::list<dogen::yarn::na
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_yarn_relationship_types_std_list_dogen_yarn_name_(const std::unordered_map<dogen::yarn::relationship_types, std::list<dogen::yarn::name> >& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, hash_std_list_dogen_yarn_name(i.second));
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -85,10 +75,18 @@ std::size_t object_hasher::hash(const object& v) {
     combine(seed, v.is_parent());
     combine(seed, v.is_child());
     combine(seed, v.is_final());
+    combine(seed, hash_std_list_dogen_yarn_name(v.root_parents()));
+    combine(seed, hash_std_list_dogen_yarn_name(v.parents()));
+    combine(seed, hash_std_list_dogen_yarn_name(v.leaves()));
+    combine(seed, hash_std_list_dogen_yarn_name(v.regular_associations()));
+    combine(seed, hash_std_list_dogen_yarn_name(v.weak_associations()));
     combine(seed, v.is_visitable());
     combine(seed, v.is_root_parent_visitable());
-    combine(seed, hash_std_unordered_map_dogen_yarn_relationship_types_std_list_dogen_yarn_name_(v.relationships()));
+    combine(seed, hash_std_list_dogen_yarn_name(v.visits()));
+    combine(seed, hash_std_list_dogen_yarn_name(v.visited_by()));
     combine(seed, v.object_type());
+    combine(seed, hash_std_list_dogen_yarn_name(v.modeled_concepts()));
+    combine(seed, hash_std_list_dogen_yarn_name(v.hash_container_keys()));
 
     return seed;
 }

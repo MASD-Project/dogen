@@ -124,13 +124,6 @@ public:
     void add(const std::list<yarn::name>& names,
         const std::string& formatter_name);
 
-    /**
-     * @brief Adds the inclusion directives for all names in the
-     * relationships if any exist.
-     */
-    void add(const yarn::object& o, const yarn::relationship_types rt,
-        const std::string& formatter_name);
-
 public:
     /**
      * @brief Builds the inclusion dependencies. All additions must

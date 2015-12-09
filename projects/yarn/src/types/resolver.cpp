@@ -151,16 +151,15 @@ resolve_properties(const name& owner, std::list<property>& p) const {
     }
 }
 
-void resolver::validate_inheritance_graph(const object& ao) const {
-    auto i(ao.relationships().find(relationship_types::parents));
-    if (i == ao.relationships().end())
+void resolver::validate_inheritance_graph(const object& o) const {
+    if (o.parents().empty())
         return;
 
-    for (const auto& pn : i->second) {
+    for (const auto& pn : o.parents()) {
         const auto j(model_.objects().find(pn.qualified()));
         if (j == model_.objects().end()) {
             std::ostringstream s;
-            s << orphan_object << ": " << ao.name().qualified()
+            s << orphan_object << ": " << o.name().qualified()
               << ". parent: " << pn.qualified();
 
             BOOST_LOG_SEV(lg, error) << s.str();
@@ -168,15 +167,14 @@ void resolver::validate_inheritance_graph(const object& ao) const {
         }
     }
 
-    i = ao.relationships().find(relationship_types::root_parents);
-    if (i == ao.relationships().end())
+    if (o.root_parents().empty())
         return;
 
-    for (const auto& pn : i->second) {
+    for (const auto& pn : o.root_parents()) {
         const auto j(model_.objects().find(pn.qualified()));
         if (j == model_.objects().end()) {
             std::ostringstream s;
-            s << orphan_object << ": " << ao.name().qualified()
+            s << orphan_object << ": " << o.name().qualified()
               << ". original parent: " << pn.qualified();
 
             BOOST_LOG_SEV(lg, error) << s.str();
