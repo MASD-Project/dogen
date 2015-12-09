@@ -56,7 +56,6 @@ public:
 
 public:
     object(
-        const bool in_global_module,
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
         const dogen::yarn::name& name,
@@ -64,6 +63,7 @@ public:
         const dogen::yarn::origin_types origin_type,
         const std::string& original_model_name,
         const boost::optional<dogen::yarn::name>& containing_module,
+        const bool in_global_module,
         const std::list<dogen::yarn::property>& all_properties,
         const std::list<dogen::yarn::property>& local_properties,
         const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> >& inherited_properties,

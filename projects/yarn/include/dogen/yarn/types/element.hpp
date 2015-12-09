@@ -60,14 +60,14 @@ public:
 
 public:
     element(
-        const bool in_global_module,
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
         const dogen::yarn::name& name,
         const dogen::yarn::generation_types generation_type,
         const dogen::yarn::origin_types origin_type,
         const std::string& original_model_name,
-        const boost::optional<dogen::yarn::name>& containing_module);
+        const boost::optional<dogen::yarn::name>& containing_module,
+        const bool in_global_module);
 
 private:
     template<typename Archive>
@@ -86,14 +86,6 @@ public:
     virtual void to_stream(std::ostream& s) const;
 
 public:
-    /**
-     * @brief If true, the type is located in the global module.
-     */
-    /**@{*/
-    bool in_global_module() const;
-    void in_global_module(const bool v);
-    /**@}*/
-
     /**
      * @brief Code comments.
      *
@@ -165,6 +157,14 @@ public:
     void containing_module(const boost::optional<dogen::yarn::name>&& v);
     /**@}*/
 
+    /**
+     * @brief If true, the element is located in the global module.
+     */
+    /**@{*/
+    bool in_global_module() const;
+    void in_global_module(const bool v);
+    /**@}*/
+
 protected:
     bool compare(const element& rhs) const;
 public:
@@ -174,7 +174,6 @@ protected:
     void swap(element& other) noexcept;
 
 private:
-    bool in_global_module_;
     std::string documentation_;
     dogen::dynamic::object extensions_;
     dogen::yarn::name name_;
@@ -182,6 +181,7 @@ private:
     dogen::yarn::origin_types origin_type_;
     std::string original_model_name_;
     boost::optional<dogen::yarn::name> containing_module_;
+    bool in_global_module_;
 };
 
 inline element::~element() noexcept { }

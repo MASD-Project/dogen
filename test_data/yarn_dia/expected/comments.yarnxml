@@ -42,7 +42,6 @@
 			<first>&lt;comments&gt;&lt;package&gt;&lt;package2&gt;</first>
 			<second class_id="5" tracking_level="1" version="0" object_id="_0">
 				<element class_id="16" tracking_level="0" version="0">
-					<in_global_module>0</in_global_module>
 					<documentation>package2
 </documentation>
 					<extensions class_id="17" tracking_level="0" version="0">
@@ -89,6 +88,7 @@
 					<containing_module class_id="23" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<members class_id="24" tracking_level="0" version="0">
 					<count>0</count>
@@ -100,7 +100,6 @@
 			<first>&lt;comments&gt;&lt;package&gt;</first>
 			<second object_id="_2">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation>package
 </documentation>
 					<extensions>
@@ -146,6 +145,7 @@
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<members>
 					<count>0</count>
@@ -157,7 +157,6 @@
 			<first>&lt;comments&gt;</first>
 			<second object_id="_4">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation>This model demonstrates the use of comments in dogen.
 
 This comment will be applied to the model namespace itself.
@@ -227,6 +226,7 @@ This comment will be applied to the model namespace itself.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<members>
 					<count>0</count>
@@ -258,7 +258,6 @@ This comment will be applied to the model namespace itself.
 			<first>&lt;comments&gt;&lt;multi_line&gt;</first>
 			<second class_id="6" tracking_level="1" version="0" object_id="_8">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation>first line
 
 second line
@@ -296,6 +295,7 @@ third line with &quot;quote&quot;
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties class_id="30" tracking_level="0" version="0">
 					<count>0</count>
@@ -329,7 +329,6 @@ third line with &quot;quote&quot;
 			<first>&lt;comments&gt;&lt;one_line&gt;</first>
 			<second object_id="_9">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation>this is the brief comment
 </documentation>
 					<extensions>
@@ -364,6 +363,7 @@ third line with &quot;quote&quot;
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>

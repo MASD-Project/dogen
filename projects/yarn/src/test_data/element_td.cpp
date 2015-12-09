@@ -32,10 +32,6 @@
 
 namespace {
 
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
-}
-
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
@@ -69,6 +65,10 @@ create_boost_optional_dogen_yarn_name(unsigned int position) {
     return r;
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 }
 
 namespace dogen {
@@ -76,14 +76,14 @@ namespace yarn {
 
 void element_generator::
 populate(const unsigned int position, result_type& v) {
-    v.in_global_module(create_bool(position + 0));
-    v.documentation(create_std_string(position + 1));
-    v.extensions(create_dogen_dynamic_object(position + 2));
-    v.name(create_dogen_yarn_name(position + 3));
-    v.generation_type(create_dogen_yarn_generation_types(position + 4));
-    v.origin_type(create_dogen_yarn_origin_types(position + 5));
-    v.original_model_name(create_std_string(position + 6));
-    v.containing_module(create_boost_optional_dogen_yarn_name(position + 7));
+    v.documentation(create_std_string(position + 0));
+    v.extensions(create_dogen_dynamic_object(position + 1));
+    v.name(create_dogen_yarn_name(position + 2));
+    v.generation_type(create_dogen_yarn_generation_types(position + 3));
+    v.origin_type(create_dogen_yarn_origin_types(position + 4));
+    v.original_model_name(create_std_string(position + 5));
+    v.containing_module(create_boost_optional_dogen_yarn_name(position + 6));
+    v.in_global_module(create_bool(position + 7));
 }
 
 element_generator::result_type*

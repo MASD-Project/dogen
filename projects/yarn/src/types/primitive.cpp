@@ -26,23 +26,23 @@ namespace dogen {
 namespace yarn {
 
 primitive::primitive(
-    const bool in_global_module,
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const dogen::yarn::name& name,
     const dogen::yarn::generation_types generation_type,
     const dogen::yarn::origin_types origin_type,
     const std::string& original_model_name,
-    const boost::optional<dogen::yarn::name>& containing_module)
+    const boost::optional<dogen::yarn::name>& containing_module,
+    const bool in_global_module)
     : dogen::yarn::element(
-      in_global_module,
       documentation,
       extensions,
       name,
       generation_type,
       origin_type,
       original_model_name,
-      containing_module) { }
+      containing_module,
+      in_global_module) { }
 
 void primitive::to_stream(std::ostream& s) const {
     s << " { "

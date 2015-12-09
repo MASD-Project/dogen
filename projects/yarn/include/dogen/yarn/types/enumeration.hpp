@@ -50,7 +50,6 @@ public:
 
 public:
     enumeration(
-        const bool in_global_module,
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
         const dogen::yarn::name& name,
@@ -58,6 +57,7 @@ public:
         const dogen::yarn::origin_types origin_type,
         const std::string& original_model_name,
         const boost::optional<dogen::yarn::name>& containing_module,
+        const bool in_global_module,
         const dogen::yarn::name& underlying_type,
         const std::vector<dogen::yarn::enumerator>& enumerators);
 

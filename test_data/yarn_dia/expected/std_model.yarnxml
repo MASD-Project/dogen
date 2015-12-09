@@ -42,7 +42,6 @@
 			<first>&lt;std_model&gt;&lt;pkg1&gt;</first>
 			<second class_id="5" tracking_level="1" version="0" object_id="_0">
 				<element class_id="16" tracking_level="0" version="0">
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions class_id="17" tracking_level="0" version="0">
 						<fields class_id="18" tracking_level="0" version="0">
@@ -76,6 +75,7 @@
 					<containing_module class_id="19" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<members class_id="20" tracking_level="0" version="0">
 					<count>0</count>
@@ -87,7 +87,6 @@
 			<first>&lt;std_model&gt;</first>
 			<second object_id="_1">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -154,6 +153,7 @@
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<members>
 					<count>0</count>
@@ -185,7 +185,6 @@
 			<first>&lt;std_model&gt;&lt;primitives&gt;</first>
 			<second class_id="6" tracking_level="1" version="0" object_id="_5">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -219,6 +218,7 @@
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties class_id="30" tracking_level="0" version="0">
 					<count>0</count>
@@ -564,7 +564,6 @@
 			<first>&lt;std_model&gt;&lt;pkg1&gt;&lt;class_c&gt;</first>
 			<second object_id="_6">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -599,6 +598,7 @@
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -710,7 +710,6 @@
 			<first>&lt;std_model&gt;&lt;base&gt;</first>
 			<second object_id="_7">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -744,6 +743,7 @@
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -816,7 +816,6 @@
 			<first>&lt;std_model&gt;&lt;class_j&gt;</first>
 			<second object_id="_8">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -850,6 +849,7 @@
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -1000,7 +1000,6 @@
 			<first>&lt;std_model&gt;&lt;class_b&gt;</first>
 			<second object_id="_9">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1034,6 +1033,7 @@
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -1301,7 +1301,6 @@
 			<first>&lt;std_model&gt;&lt;class_d&gt;</first>
 			<second object_id="_10">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1335,6 +1334,7 @@
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -1602,7 +1602,6 @@
 			<first>&lt;std_model&gt;&lt;class_a&gt;</first>
 			<second object_id="_11">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1636,6 +1635,7 @@
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -1759,7 +1759,6 @@
 			<first>&lt;std_model&gt;&lt;class_e&gt;</first>
 			<second object_id="_13">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1793,6 +1792,7 @@
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -2060,7 +2060,6 @@
 			<first>&lt;std_model&gt;&lt;class_h&gt;</first>
 			<second object_id="_14">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2094,6 +2093,7 @@
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -2205,7 +2205,6 @@
 			<first>&lt;std_model&gt;&lt;class_f&gt;</first>
 			<second object_id="_15">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2239,6 +2238,7 @@
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -2389,7 +2389,6 @@
 			<first>&lt;std_model&gt;&lt;some_service&gt;</first>
 			<second object_id="_16">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2423,6 +2422,7 @@
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -2612,7 +2612,6 @@
 			<first>&lt;std_model&gt;&lt;class_g&gt;</first>
 			<second object_id="_17">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2646,6 +2645,7 @@
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -2796,7 +2796,6 @@
 			<first>&lt;std_model&gt;&lt;derived&gt;</first>
 			<second object_id="_18">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2830,6 +2829,7 @@
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>

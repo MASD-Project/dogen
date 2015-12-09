@@ -53,37 +53,37 @@ namespace dogen {
 namespace yarn {
 
 element::element()
-    : in_global_module_(static_cast<bool>(0)),
-      generation_type_(static_cast<dogen::yarn::generation_types>(0)),
-      origin_type_(static_cast<dogen::yarn::origin_types>(0)) { }
+    : generation_type_(static_cast<dogen::yarn::generation_types>(0)),
+      origin_type_(static_cast<dogen::yarn::origin_types>(0)),
+      in_global_module_(static_cast<bool>(0)) { }
 
 element::element(element&& rhs)
-    : in_global_module_(std::move(rhs.in_global_module_)),
-      documentation_(std::move(rhs.documentation_)),
+    : documentation_(std::move(rhs.documentation_)),
       extensions_(std::move(rhs.extensions_)),
       name_(std::move(rhs.name_)),
       generation_type_(std::move(rhs.generation_type_)),
       origin_type_(std::move(rhs.origin_type_)),
       original_model_name_(std::move(rhs.original_model_name_)),
-      containing_module_(std::move(rhs.containing_module_)) { }
+      containing_module_(std::move(rhs.containing_module_)),
+      in_global_module_(std::move(rhs.in_global_module_)) { }
 
 element::element(
-    const bool in_global_module,
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const dogen::yarn::name& name,
     const dogen::yarn::generation_types generation_type,
     const dogen::yarn::origin_types origin_type,
     const std::string& original_model_name,
-    const boost::optional<dogen::yarn::name>& containing_module)
-    : in_global_module_(in_global_module),
-      documentation_(documentation),
+    const boost::optional<dogen::yarn::name>& containing_module,
+    const bool in_global_module)
+    : documentation_(documentation),
       extensions_(extensions),
       name_(name),
       generation_type_(generation_type),
       origin_type_(origin_type),
       original_model_name_(original_model_name),
-      containing_module_(containing_module) { }
+      containing_module_(containing_module),
+      in_global_module_(in_global_module) { }
 
 void element::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -94,20 +94,19 @@ void element::to_stream(std::ostream& s) const {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::element\"" << ", "
-      << "\"in_global_module\": " << in_global_module_ << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"extensions\": " << extensions_ << ", "
       << "\"name\": " << name_ << ", "
       << "\"generation_type\": " << generation_type_ << ", "
       << "\"origin_type\": " << origin_type_ << ", "
       << "\"original_model_name\": " << "\"" << tidy_up_string(original_model_name_) << "\"" << ", "
-      << "\"containing_module\": " << containing_module_
+      << "\"containing_module\": " << containing_module_ << ", "
+      << "\"in_global_module\": " << in_global_module_
       << " }";
 }
 
 void element::swap(element& other) noexcept {
     using std::swap;
-    swap(in_global_module_, other.in_global_module_);
     swap(documentation_, other.documentation_);
     swap(extensions_, other.extensions_);
     swap(name_, other.name_);
@@ -115,25 +114,18 @@ void element::swap(element& other) noexcept {
     swap(origin_type_, other.origin_type_);
     swap(original_model_name_, other.original_model_name_);
     swap(containing_module_, other.containing_module_);
+    swap(in_global_module_, other.in_global_module_);
 }
 
 bool element::compare(const element& rhs) const {
-    return in_global_module_ == rhs.in_global_module_ &&
-        documentation_ == rhs.documentation_ &&
+    return documentation_ == rhs.documentation_ &&
         extensions_ == rhs.extensions_ &&
         name_ == rhs.name_ &&
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_ &&
         original_model_name_ == rhs.original_model_name_ &&
-        containing_module_ == rhs.containing_module_;
-}
-
-bool element::in_global_module() const {
-    return in_global_module_;
-}
-
-void element::in_global_module(const bool v) {
-    in_global_module_ = v;
+        containing_module_ == rhs.containing_module_ &&
+        in_global_module_ == rhs.in_global_module_;
 }
 
 const std::string& element::documentation() const {
@@ -230,6 +222,14 @@ void element::containing_module(const boost::optional<dogen::yarn::name>& v) {
 
 void element::containing_module(const boost::optional<dogen::yarn::name>&& v) {
     containing_module_ = std::move(v);
+}
+
+bool element::in_global_module() const {
+    return in_global_module_;
+}
+
+void element::in_global_module(const bool v) {
+    in_global_module_ = v;
 }
 
 } }

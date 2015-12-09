@@ -42,7 +42,6 @@
 			<first>&lt;trivial_inheritance&gt;&lt;pkg4&gt;</first>
 			<second class_id="5" tracking_level="1" version="0" object_id="_0">
 				<element class_id="16" tracking_level="0" version="0">
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions class_id="17" tracking_level="0" version="0">
 						<fields class_id="18" tracking_level="0" version="0">
@@ -76,6 +75,7 @@
 					<containing_module class_id="19" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<members class_id="20" tracking_level="0" version="0">
 					<count>0</count>
@@ -87,7 +87,6 @@
 			<first>&lt;trivial_inheritance&gt;</first>
 			<second object_id="_1">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation>This model tests all aspects related to inheritance.
 
 It includes the visitable stereotype since it only makes sense
@@ -159,6 +158,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<members>
 					<count>0</count>
@@ -170,7 +170,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;pkg2&gt;</first>
 			<second object_id="_5">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -204,6 +203,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<members>
 					<count>0</count>
@@ -215,7 +215,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;pkg1&gt;</first>
 			<second object_id="_6">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -249,6 +248,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<members>
 					<count>0</count>
@@ -260,7 +260,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;pkg3&gt;</first>
 			<second object_id="_7">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -294,6 +293,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<members>
 					<count>0</count>
@@ -325,7 +325,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;move_ctor_empty_descendant&gt;</first>
 			<second class_id="6" tracking_level="1" version="0" object_id="_8">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
 					<extensions>
@@ -360,6 +359,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties class_id="30" tracking_level="0" version="0">
 					<count>0</count>
@@ -419,7 +419,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child&gt;</first>
 			<second object_id="_9">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -454,6 +453,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -553,7 +553,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;base&gt;</first>
 			<second object_id="_10">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -587,6 +586,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -620,7 +620,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;parent&gt;</first>
 			<second object_id="_11">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -655,6 +654,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -727,7 +727,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;</first>
 			<second object_id="_12">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation>Base class for scenario that tests code generated move contructors.
 </documentation>
 					<extensions>
@@ -762,6 +761,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -835,7 +835,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;parent_without_members&gt;</first>
 			<second object_id="_13">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -869,6 +868,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -902,7 +902,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;pkg2&gt;&lt;parent&gt;</first>
 			<second object_id="_14">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -937,6 +936,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -1009,7 +1009,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;second_child_without_members&gt;</first>
 			<second object_id="_15">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1043,6 +1042,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -1102,7 +1102,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;</first>
 			<second object_id="_16">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1136,6 +1135,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -1234,7 +1234,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;</first>
 			<second object_id="_17">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1268,6 +1267,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -1340,7 +1340,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child&gt;</first>
 			<second object_id="_18">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1375,6 +1374,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -1474,7 +1474,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;child_without_members&gt;</first>
 			<second object_id="_19">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1508,6 +1507,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -1567,7 +1567,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;parent_outside&gt;</first>
 			<second object_id="_20">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1601,6 +1600,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -1673,7 +1673,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;child_with_members&gt;</first>
 			<second object_id="_21">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1707,6 +1706,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -1805,7 +1805,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;service&gt;</first>
 			<second object_id="_22">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1839,6 +1838,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -1872,7 +1872,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;descendant2&gt;</first>
 			<second object_id="_23">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -1906,6 +1905,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -2004,7 +2004,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child&gt;</first>
 			<second object_id="_24">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2039,6 +2038,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -2137,7 +2137,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;service_interface&gt;</first>
 			<second object_id="_25">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2171,6 +2170,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -2204,7 +2204,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;child_of_a_child2&gt;</first>
 			<second object_id="_26">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2238,6 +2237,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -2336,7 +2336,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;descendant1&gt;</first>
 			<second object_id="_27">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2370,6 +2369,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -2429,7 +2429,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;child_of_a_child1&gt;</first>
 			<second object_id="_28">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2463,6 +2462,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -2522,7 +2522,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;descendant3&gt;</first>
 			<second object_id="_29">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation></documentation>
 					<extensions>
 						<fields>
@@ -2556,6 +2555,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>
@@ -2654,7 +2654,6 @@ in the context of inheritance.
 			<first>&lt;trivial_inheritance&gt;&lt;move_ctor_descendant&gt;</first>
 			<second object_id="_30">
 				<element>
-					<in_global_module>0</in_global_module>
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
 					<extensions>
@@ -2689,6 +2688,7 @@ in the context of inheritance.
 					<containing_module>
 						<initialized>0</initialized>
 					</containing_module>
+					<in_global_module>0</in_global_module>
 				</element>
 				<all_properties>
 					<count>0</count>

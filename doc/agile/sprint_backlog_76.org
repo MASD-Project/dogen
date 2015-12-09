@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-08 Tue 23:47]
+#+CAPTION: Clock summary at [2015-12-09 Wed 00:13]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *1:37* |      |      |
+| *Total time*                                                                | *2:02* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 1:37   |      |      |
-| Active                                                                      |        | 1:37 |      |
+| Stories                                                                     | 2:02   |      |      |
+| Active                                                                      |        | 2:02 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:39 |
 | STARTED Remove =service= stereotype                                         |        |      | 0:18 |
-| STARTED Create visitor and exception yarn types                             |        |      | 0:40 |
+| STARTED Create visitor and exception yarn types                             |        |      | 1:05 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -382,6 +382,7 @@ all facets except for types. A few points:
   profiles" to go with "enablement profiles".
 
 *** STARTED Create visitor and exception yarn types                   :story:
+    CLOCK: [2015-12-08 Tue 23:48]--[2015-12-09 Wed 00:13] =>  0:25
     CLOCK: [2015-12-08 Tue 22:55]--[2015-12-08 Tue 23:35] =>  0:40
 
 We should not have object types for these two cases; these are

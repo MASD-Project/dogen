@@ -41,7 +41,6 @@ namespace dogen {
 namespace yarn {
 
 module::module(
-    const bool in_global_module,
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const dogen::yarn::name& name,
@@ -49,16 +48,17 @@ module::module(
     const dogen::yarn::origin_types origin_type,
     const std::string& original_model_name,
     const boost::optional<dogen::yarn::name>& containing_module,
+    const bool in_global_module,
     const std::list<dogen::yarn::name>& members)
     : dogen::yarn::element(
-      in_global_module,
       documentation,
       extensions,
       name,
       generation_type,
       origin_type,
       original_model_name,
-      containing_module),
+      containing_module,
+      in_global_module),
       members_(members) { }
 
 void module::to_stream(std::ostream& s) const {
