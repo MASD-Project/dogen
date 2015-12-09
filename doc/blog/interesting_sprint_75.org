@@ -26,6 +26,13 @@ into recently-ish.
   will have six at the same time']]: The Guardian's take in this new
   world of job displacement and "job context switching". Very
   interesting.
+- [[https://www.youtube.com/watch?v%3DLZbsxs_VGtQ&feature%3Dyoutu.be][Ship it! QuantLib, IPython Notebook, and Docker]]: QuantLib conference
+  is over, and sadly there are very few videos. This one bucks the
+  trend. The every informative Luigi talks about how QuantLib is
+  moving with the times.
+- [[http://www.theguardian.com/business/2015/dec/07/morgan-stanley-axes-400-bankers-bonds-jobs?CMP%3DShare_AndroidApp_Seesmic][Morgan Stanley axes 400 bankers as bond-trading income dives]]: The
+  contraction of the traditional banking industry continues, even as
+  cryptos are growing insanely.
 
 * Startups et. al.
 
@@ -52,6 +59,12 @@ into recently-ish.
 - [[http://www.bloomberg.com/news/articles/2015-11-24/jeff-bezos-vs-elon-musk-a-thrilling-new-space-race][Jeff Bezos vs. Elon Musk: A Thrilling, New Space Race]]: since we are
   fanboying Musk lets go all the way and read up on the latest about
   the space race. Very interesting.
+- [[https://www.youtube.com/watch?v%3Du6IZRjP39do][Tesla Shareholders Meeting June 2015]]: I think Tesla is one of the
+  few companies where non-shareholders tune in just to listen and get
+  inspiration. Elon, nerdy and awkward but great and inspiring as
+  always. Choice quote: "I'd expect SpaceX to go public once we get
+  regular flights to mars." - very few people could get away with a
+  statement like that.
 
 * General Coding
 
@@ -100,12 +113,15 @@ into recently-ish.
   little bit to do with my researches in Computational
   Neuroscience. So as you can imagine, I'm rather excited about [[https://en.wikipedia.org/wiki/Hierarchical_temporal_memory][HTM]]
   and [[https://en.wikipedia.org/wiki/Numenta][Numenta's]] latest developments. This article is a good catch-up,
-  if slightly high-level.
+  if slightly high-level. If you want something slightly more
+  technical but still very approachable, [[https://www.youtube.com/watch?v%3D6ufPpZDmPKA][Principles of Hierarchical
+  Temporal Memory (HTM): Foundations of Machine Intelligence]] is a must
+  watch.
 
 * Other
 
 - [[https://www.youtube.com/watch?v%3DlWJkrP4WPFw][NoiseRV Live]]: Still discovering this Portuguese musician, but love
-  his work. Great concert. Would do a little bit less talking between
+  his work. Great concert. Could do a little bit less talking between
   songs, but still - artists prerogative and all that.
 - [[http://bff.fm/broadcasts/4499][Warm Focus: Winging It]]: Interesting set of "intelligent dance music"
   as we used to call it back in the day.
@@ -115,3 +131,4 @@ into recently-ish.
 - [[http://www.gutenberg.org/files/15000/15000-h/vol1.html][Reason in common sense]]: Always wanted to read Santayana
   properly. Started, but I guess it will be a _very_ long
   exercise. Interesting, if somewhat strange book.
+- [[https://www.youtube.com/watch?v%3DOSD1mud8JZ8][Ceu - jazz baltica Live (2010)]]: New find, Brazilian musician Ceu.
