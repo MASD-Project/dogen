@@ -403,6 +403,15 @@ make sense for the type.
   add it as an element for now and update the inheritance story for
   exceptions.
 
+*** STARTED Update copyright notices                                  :story:
+    CLOCK: [2015-12-10 Thu 06:51]--[2015-12-10 Thu 07:10] =>  0:19
+
+We need to update all notices to reflect personal ownership until DDC
+was formed, and then ownership by DDC.
+
+- first update to personal ownership has been done, but we need to
+  test if multiple copyright entries is properly supported.
+
 *** Improve helper methods implementation                             :story:
 
 When a formatter relies on the helper methods, we have a problem: we
@@ -593,14 +602,6 @@ Other notes:
 *Previous understanding*:
 
 We should just follow the composite pattern in the naming.
-
-*** Update copyright notices                                          :story:
-
-We need to update all notices to reflect personal ownership until DDC
-was formed, and then ownership by DDC.
-
-- first update to personal ownership has been done, but we need to
-  test if multiple copyright entries is properly supported.
 
 *** Copyright holders is scalar when it should be an array            :story:
 

@@ -1,7 +1,7 @@
 <#@ relative_output_directory=../../seam/actual/src #>
 <#@ stream_variable_name=s #>
 <#@ licence_name=gpl_v3 #>
-<#@ copyright_notice=Copyright(C) 2012 Kitanda <info@kitanda.co.uk> #>
+<#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
 <#@ inclusion_dependency="simple_template_stitch.hpp" #>
 <#@ modeline_group_name=emacs #>
 <#+

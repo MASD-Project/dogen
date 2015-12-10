@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string>application_dogen.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.github.kitanda.dogen</string>
+	<string>com.github.DomainDrivenConsulting.dogen</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

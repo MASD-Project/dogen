@@ -269,7 +269,8 @@ text_template parser::parse(const std::string& s) const {
                 }
 
                 if (boost::ends_with(input_line, end_block_marker)) {
-                    const auto l(parse_inline_standard_control_block(input_line));
+                    const auto l(parse_inline_standard_control_block(
+                            input_line));
                     lines.push_back(l);
                     continue;
                 }
