@@ -34,7 +34,7 @@ into recently-ish.
   contraction of the traditional banking industry continues, even as
   cryptos are growing insanely.
 
-* Startups et. al.
+* Startups et al.
 
 - [[http://blog.erratasec.com/2015/12/tesla-is-copying-apples-business-model.html#.VmL8A3VX9hG][Tesla is copying Apple's business model]]: very interesting comparison
   between Tesla and Apple's businesses. I don't fully agree with the
