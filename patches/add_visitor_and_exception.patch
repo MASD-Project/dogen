@@ -1,0 +1,1539 @@
+diff --git a/diagrams/yarn.dia b/diagrams/yarn.dia
+index b3c539a..0e2388b 100644
+--- a/diagrams/yarn.dia
++++ b/diagrams/yarn.dia
+@@ -6509,7 +6509,7 @@ expansion.#</dia:string>
+         <dia:point val="-29,92"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-29.05,91.95;-18.44,101.25"/>
++        <dia:rectangle val="-29.05,91.95;-18.44,99.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="-29,92"/>
+@@ -6518,7 +6518,7 @@ expansion.#</dia:string>
+         <dia:real val="10.51"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="9.2000000000000011"/>
++        <dia:real val="7.6000000000000005"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+         <dia:string>#object_types#</dia:string>
+@@ -6636,29 +6636,6 @@ etc.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#visitor#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#The service is a system generated visitor.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+             <dia:string>#user_defined_value_object#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+@@ -6682,29 +6659,6 @@ etc.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#exception#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#Value represents an exception type.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+             <dia:string>#smart_pointer#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+@@ -7596,7 +7550,7 @@ etc.#</dia:string>
+         <dia:point val="62.3025,89"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="54.95,74.95;63.0525,89.8"/>
++        <dia:rectangle val="54.95,76.55;63.0525,89.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -7605,7 +7559,7 @@ etc.#</dia:string>
+         <dia:point val="62.3025,89"/>
+         <dia:point val="62.3025,81"/>
+         <dia:point val="55,81"/>
+-        <dia:point val="55,75"/>
++        <dia:point val="55,76.6"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -11252,7 +11206,7 @@ from inputs and generates yarn types off of them.#</dia:string>
+         <dia:point val="148.06,55.2"/>
+         <dia:point val="148.06,81"/>
+         <dia:point val="78.215,81"/>
+-        <dia:point val="78.215,75"/>
++        <dia:point val="78.215,76.6"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -13649,7 +13603,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
+         <dia:point val="55,65"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="54.95,64.95;78.265,75.05"/>
++        <dia:rectangle val="54.95,64.95;78.265,76.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="55,65"/>
+@@ -13658,7 +13612,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
+         <dia:real val="23.215"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="10"/>
++        <dia:real val="11.6"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+         <dia:string>#intermediate_model#</dia:string>
+@@ -13913,6 +13867,52 @@ Leaves are types concrete types which have a parent.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
++            <dia:string>#exceptions#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::unordered_map&lt;std::string, exception&gt;#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#All exceptions in this model.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#visitors#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::unordered_map&lt;std::string, visitor&gt;#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#All visitors in this model.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
+             <dia:string>#is_target#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+@@ -15615,7 +15615,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
+         <dia:point val="-180,-1"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-180.05,-1.05;-167.515,5.05"/>
++        <dia:rectangle val="-180.05,-1.05;-167.515,4.25"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="-180,-1"/>
+@@ -15624,7 +15624,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
+         <dia:real val="12.434999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="6.0000000000000009"/>
++        <dia:real val="5.2000000000000011"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+         <dia:string>#Visitable#</dia:string>
+@@ -15766,30 +15766,7 @@ Set to false if no parent exists, or if the parent is not visitable. #</dia:stri
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#visits#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#std::list&lt;name&gt;#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#Elements that are visited by the visitor.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#visited_by#</dia:string>
++            <dia:string>#visitable_by#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+             <dia:string>#std::list&lt;name&gt;#</dia:string>
+@@ -16461,16 +16438,16 @@ This is used to break cycles where required.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O140">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-173.782,5"/>
++        <dia:point val="-173.782,4.2"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-174.632,4.95;-149.557,14.0004"/>
++        <dia:rectangle val="-174.632,4.15;-149.557,14.0004"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="-173.782,5"/>
++        <dia:point val="-173.782,4.2"/>
+         <dia:point val="-173.782,9"/>
+         <dia:point val="-149.607,9"/>
+         <dia:point val="-149.607,13.9504"/>
+@@ -16502,19 +16479,19 @@ This is used to break cycles where required.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O141">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-7,92"/>
++        <dia:point val="-10,92"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-7.05,91.95;-3.575,94.25"/>
++        <dia:rectangle val="-10.05,91.95;-0.21,94.85"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-7,92"/>
++        <dia:point val="-10,92"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="3.375"/>
++        <dia:real val="9.7400000000000002"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="2.1999999999999997"/>
++        <dia:real val="2.7999999999999998"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+         <dia:string>#visitor#</dia:string>
+@@ -16603,7 +16580,31 @@ This is used to break cycles where required.#</dia:string>
+       <dia:attribute name="comment_font_height">
+         <dia:real val="0.69999999999999996"/>
+       </dia:attribute>
+-      <dia:attribute name="attributes"/>
++      <dia:attribute name="attributes">
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#visits#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::list&lt;name&gt;#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>#Elements that are visitable by the visitor.#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++      </dia:attribute>
+       <dia:attribute name="operations"/>
+       <dia:attribute name="template">
+         <dia:boolean val="false"/>
+@@ -16725,7 +16726,7 @@ This is used to break cycles where required.#</dia:string>
+         <dia:point val="-0.515,68.0496"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-5.3625,67.9996;0.335,92.05"/>
++        <dia:rectangle val="-5.18,67.9996;0.335,92.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -16733,8 +16734,8 @@ This is used to break cycles where required.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="-0.515,68.0496"/>
+         <dia:point val="-0.515,73"/>
+-        <dia:point val="-5.3125,73"/>
+-        <dia:point val="-5.3125,92"/>
++        <dia:point val="-5.13,73"/>
++        <dia:point val="-5.13,92"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+diff --git a/doc/agile/sprint_backlog_76.org b/doc/agile/sprint_backlog_76.org
+index 840fb86..0df525b 100644
+--- a/doc/agile/sprint_backlog_76.org
++++ b/doc/agile/sprint_backlog_76.org
+@@ -13,17 +13,17 @@
+ ** Active
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
+-#+CAPTION: Clock summary at [2015-12-10 Thu 07:31]
++#+CAPTION: Clock summary at [2015-12-10 Thu 18:37]
+ | <75>                                                                        |        |      |      |
+ | Headline                                                                    | Time   |      |      |
+ |-----------------------------------------------------------------------------+--------+------+------|
+-| *Total time*                                                                | *5:15* |      |      |
++| *Total time*                                                                | *5:55* |      |      |
+ |-----------------------------------------------------------------------------+--------+------+------|
+-| Stories                                                                     | 5:15   |      |      |
+-| Active                                                                      |        | 5:15 |      |
++| Stories                                                                     | 5:55   |      |      |
++| Active                                                                      |        | 5:55 |      |
+ | STARTED Sprint and product backlog grooming                                 |        |      | 0:39 |
+ | STARTED Remove =service= stereotype                                         |        |      | 0:18 |
+-| STARTED Create visitor and exception yarn types                             |        |      | 3:59 |
++| STARTED Create visitor and exception yarn types                             |        |      | 4:39 |
+ | STARTED Update copyright notices                                            |        |      | 0:19 |
+ #+end:
+ 
+@@ -383,6 +383,7 @@ all facets except for types. A few points:
+   profiles" to go with "enablement profiles".
+ 
+ *** STARTED Create visitor and exception yarn types                   :story:
++    CLOCK: [2015-12-10 Thu 17:57]--[2015-12-10 Thu 18:37] =>  0:40
+     CLOCK: [2015-12-10 Thu 07:11]--[2015-12-10 Thu 07:31] =>  0:20
+     CLOCK: [2015-12-09 Wed 21:04]--[2015-12-09 Wed 23:38] =>  2:34
+     CLOCK: [2015-12-08 Tue 23:48]--[2015-12-09 Wed 00:13] =>  0:25
+diff --git a/projects/yarn/include/dogen/yarn/test/mock_intermediate_model_factory.hpp b/projects/yarn/include/dogen/yarn/test/mock_intermediate_model_factory.hpp
+index 9a69147..9356414 100644
+--- a/projects/yarn/include/dogen/yarn/test/mock_intermediate_model_factory.hpp
++++ b/projects/yarn/include/dogen/yarn/test/mock_intermediate_model_factory.hpp
+@@ -260,7 +260,7 @@ public:
+     /**
+      * @brief Create an exception.
+      */
+-    object make_exception(const unsigned int i, const name& model_name,
++    exception make_exception(const unsigned int i, const name& model_name,
+         const unsigned int module_n = 0) const;
+ 
+     /**
+diff --git a/projects/yarn/include/dogen/yarn/types/injector.hpp b/projects/yarn/include/dogen/yarn/types/injector.hpp
+index 3647e73..7de14e3 100644
+--- a/projects/yarn/include/dogen/yarn/types/injector.hpp
++++ b/projects/yarn/include/dogen/yarn/types/injector.hpp
+@@ -26,7 +26,6 @@
+ #endif
+ 
+ #include <list>
+-#include <memory>
+ #include "dogen/yarn/types/intermediate_model.hpp"
+ 
+ namespace dogen {
+@@ -51,24 +50,11 @@ namespace yarn {
+  *
+  */
+ class injector {
+-public:
+-    injector() = default;
+-    injector(const injector&) = default;
+-    ~injector() = default;
+-    injector(injector&&) = default;
+-    injector& operator=(const injector&) = default;
+-
+-private:
+-    class context;
+-
+ private:
+     /**
+-     * @brief Inserts the object into the model's object container.
+-     *
+-     * @return True if the object did not exist in container, false
+-     * otherwise.
++     * @brief Creates the module to represent the global namespace.
+      */
+-    bool insert(const object& o);
++    module create_global_module() const;
+ 
+     /**
+      * @brief Create a visitor for the object o.
+@@ -78,26 +64,26 @@ private:
+      *
+      * @pre leaves must not be empty.
+      */
+-    object create_visitor(const object& o,
++    visitor create_visitor(const object& o,
+         const std::list<name>& leaves) const;
+ 
+     /**
+      * @brief Injects an accept operation for the given visitor, to
+      * the supplied object and all its leaves.
+      */
+-    void inject_visited_by(object& root, const std::list<name>& leaves,
+-        const name& visitor) const;
++    void inject_visitable_by(object& root, const std::list<name>& leaves,
++        const name& visitor, intermediate_model& m) const;
+ 
+     /**
+      * @brief Injects visitors for objects that require them.
+      */
+-    void inject_visitors();
++    void inject_visitors(intermediate_model& m);
+ 
+     /**
+      * @brief Injects the global module, and makes all modules that do
+      * not have a containing namespace be contained by it.
+      */
+-    void inject_global_module();
++    void inject_global_module(intermediate_model& m);
+ 
+ public:
+ 
+@@ -107,9 +93,6 @@ public:
+      * @param m Yarn model to operate on.
+      */
+     void inject(intermediate_model& m);
+-
+-private:
+-    mutable std::shared_ptr<context> context_;
+ };
+ 
+ } }
+diff --git a/projects/yarn/include/dogen/yarn/types/intermediate_model.hpp b/projects/yarn/include/dogen/yarn/types/intermediate_model.hpp
+index 1d53082..fc46675 100644
+--- a/projects/yarn/include/dogen/yarn/types/intermediate_model.hpp
++++ b/projects/yarn/include/dogen/yarn/types/intermediate_model.hpp
+@@ -33,7 +33,9 @@
+ #include "dogen/yarn/types/module.hpp"
+ #include "dogen/yarn/types/object.hpp"
+ #include "dogen/yarn/types/concept.hpp"
++#include "dogen/yarn/types/visitor.hpp"
+ #include "dogen/yarn/hash/name_hash.hpp"
++#include "dogen/yarn/types/exception.hpp"
+ #include "dogen/yarn/types/primitive.hpp"
+ #include "dogen/yarn/types/enumeration.hpp"
+ #include "dogen/yarn/types/origin_types.hpp"
+@@ -68,6 +70,8 @@ public:
+         const std::unordered_map<std::string, dogen::yarn::primitive>& primitives,
+         const std::unordered_map<std::string, dogen::yarn::enumeration>& enumerations,
+         const std::unordered_map<std::string, dogen::yarn::object>& objects,
++        const std::unordered_map<std::string, dogen::yarn::exception>& exceptions,
++        const std::unordered_map<std::string, dogen::yarn::visitor>& visitors,
+         const bool is_target,
+         const bool has_generatable_types);
+ 
+@@ -189,6 +193,26 @@ public:
+     /**@}*/
+ 
+     /**
++     * @brief All exceptions in this model.
++     */
++    /**@{*/
++    const std::unordered_map<std::string, dogen::yarn::exception>& exceptions() const;
++    std::unordered_map<std::string, dogen::yarn::exception>& exceptions();
++    void exceptions(const std::unordered_map<std::string, dogen::yarn::exception>& v);
++    void exceptions(const std::unordered_map<std::string, dogen::yarn::exception>&& v);
++    /**@}*/
++
++    /**
++     * @brief All visitors in this model.
++     */
++    /**@{*/
++    const std::unordered_map<std::string, dogen::yarn::visitor>& visitors() const;
++    std::unordered_map<std::string, dogen::yarn::visitor>& visitors();
++    void visitors(const std::unordered_map<std::string, dogen::yarn::visitor>& v);
++    void visitors(const std::unordered_map<std::string, dogen::yarn::visitor>&& v);
++    /**@}*/
++
++    /**
+      * @brief If true, this intermediate model is the target model.
+      */
+     /**@{*/
+@@ -226,6 +250,8 @@ private:
+     std::unordered_map<std::string, dogen::yarn::primitive> primitives_;
+     std::unordered_map<std::string, dogen::yarn::enumeration> enumerations_;
+     std::unordered_map<std::string, dogen::yarn::object> objects_;
++    std::unordered_map<std::string, dogen::yarn::exception> exceptions_;
++    std::unordered_map<std::string, dogen::yarn::visitor> visitors_;
+     bool is_target_;
+     bool has_generatable_types_;
+ };
+diff --git a/projects/yarn/include/dogen/yarn/types/object.hpp b/projects/yarn/include/dogen/yarn/types/object.hpp
+index 27dc79c..ae59ba3 100644
+--- a/projects/yarn/include/dogen/yarn/types/object.hpp
++++ b/projects/yarn/include/dogen/yarn/types/object.hpp
+@@ -77,8 +77,7 @@ public:
+         const std::list<dogen::yarn::name>& weak_associations,
+         const bool is_visitable,
+         const bool is_root_parent_visitable,
+-        const std::list<dogen::yarn::name>& visits,
+-        const std::list<dogen::yarn::name>& visited_by,
++        const std::list<dogen::yarn::name>& visitable_by,
+         const dogen::yarn::object_types object_type,
+         const std::list<dogen::yarn::name>& modeled_concepts,
+         const std::list<dogen::yarn::name>& hash_container_keys);
+@@ -264,23 +263,13 @@ public:
+     /**@}*/
+ 
+     /**
+-     * @brief Elements that are visited by the visitor.
+-     */
+-    /**@{*/
+-    const std::list<dogen::yarn::name>& visits() const;
+-    std::list<dogen::yarn::name>& visits();
+-    void visits(const std::list<dogen::yarn::name>& v);
+-    void visits(const std::list<dogen::yarn::name>&& v);
+-    /**@}*/
+-
+-    /**
+      * @brief Elements that visit current type.
+      */
+     /**@{*/
+-    const std::list<dogen::yarn::name>& visited_by() const;
+-    std::list<dogen::yarn::name>& visited_by();
+-    void visited_by(const std::list<dogen::yarn::name>& v);
+-    void visited_by(const std::list<dogen::yarn::name>&& v);
++    const std::list<dogen::yarn::name>& visitable_by() const;
++    std::list<dogen::yarn::name>& visitable_by();
++    void visitable_by(const std::list<dogen::yarn::name>& v);
++    void visitable_by(const std::list<dogen::yarn::name>&& v);
+     /**@}*/
+ 
+     /**
+@@ -340,8 +329,7 @@ private:
+     std::list<dogen::yarn::name> weak_associations_;
+     bool is_visitable_;
+     bool is_root_parent_visitable_;
+-    std::list<dogen::yarn::name> visits_;
+-    std::list<dogen::yarn::name> visited_by_;
++    std::list<dogen::yarn::name> visitable_by_;
+     dogen::yarn::object_types object_type_;
+     std::list<dogen::yarn::name> modeled_concepts_;
+     std::list<dogen::yarn::name> hash_container_keys_;
+diff --git a/projects/yarn/include/dogen/yarn/types/object_types.hpp b/projects/yarn/include/dogen/yarn/types/object_types.hpp
+index da5f964..afe5b86 100644
+--- a/projects/yarn/include/dogen/yarn/types/object_types.hpp
++++ b/projects/yarn/include/dogen/yarn/types/object_types.hpp
+@@ -37,13 +37,11 @@ namespace yarn {
+ enum class object_types : unsigned int {
+     invalid = 0, ///< Represents an uninitialised enum
+     user_defined_service = 1, ///< The service has been defined by the user.
+-    visitor = 2, ///< The service is a system generated visitor.
+-    user_defined_value_object = 3, ///< Regular value object with no distinguishing features.
+-    exception = 4, ///< Value represents an exception type.
+-    smart_pointer = 5, ///< Value is a smart pointer.
+-    hash_container = 6, ///< Type is a hash-based container.
+-    sequence_container = 7, ///< Type is a sequence container.
+-    ordered_container = 8 ///< Type is a ordered container.
++    user_defined_value_object = 2, ///< Regular value object with no distinguishing features.
++    smart_pointer = 3, ///< Value is a smart pointer.
++    hash_container = 4, ///< Type is a hash-based container.
++    sequence_container = 5, ///< Type is a sequence container.
++    ordered_container = 6 ///< Type is a ordered container.
+ };
+ 
+ } }
+diff --git a/projects/yarn/include/dogen/yarn/types/visitor.hpp b/projects/yarn/include/dogen/yarn/types/visitor.hpp
+index 7c58154..100f31b 100644
+--- a/projects/yarn/include/dogen/yarn/types/visitor.hpp
++++ b/projects/yarn/include/dogen/yarn/types/visitor.hpp
+@@ -25,8 +25,10 @@
+ #pragma once
+ #endif
+ 
++#include <list>
+ #include <iosfwd>
+ #include <algorithm>
++#include "dogen/yarn/types/name.hpp"
+ #include "dogen/yarn/types/element.hpp"
+ #include "dogen/yarn/serialization/visitor_fwd_ser.hpp"
+ 
+@@ -50,7 +52,8 @@ public:
+         const dogen::yarn::origin_types origin_type,
+         const std::string& original_model_name,
+         const boost::optional<dogen::yarn::name>& contained_by,
+-        const bool in_global_module);
++        const bool in_global_module,
++        const std::list<dogen::yarn::name>& visits);
+ 
+ private:
+     template<typename Archive>
+@@ -80,6 +83,17 @@ public:
+     void to_stream(std::ostream& s) const override;
+ 
+ public:
++    /**
++     * @brief Elements that are visitable by the visitor.
++     */
++    /**@{*/
++    const std::list<dogen::yarn::name>& visits() const;
++    std::list<dogen::yarn::name>& visits();
++    void visits(const std::list<dogen::yarn::name>& v);
++    void visits(const std::list<dogen::yarn::name>&& v);
++    /**@}*/
++
++public:
+     bool operator==(const visitor& rhs) const;
+     bool operator!=(const visitor& rhs) const {
+         return !this->operator==(rhs);
+@@ -92,6 +106,8 @@ public:
+     void swap(visitor& other) noexcept;
+     visitor& operator=(visitor other);
+ 
++private:
++    std::list<dogen::yarn::name> visits_;
+ };
+ 
+ } }
+diff --git a/projects/yarn/src/hash/intermediate_model_hash.cpp b/projects/yarn/src/hash/intermediate_model_hash.cpp
+index 7a1b13d..61db4d2 100644
+--- a/projects/yarn/src/hash/intermediate_model_hash.cpp
++++ b/projects/yarn/src/hash/intermediate_model_hash.cpp
+@@ -22,6 +22,8 @@
+ #include "dogen/yarn/hash/module_hash.hpp"
+ #include "dogen/yarn/hash/object_hash.hpp"
+ #include "dogen/yarn/hash/concept_hash.hpp"
++#include "dogen/yarn/hash/visitor_hash.hpp"
++#include "dogen/yarn/hash/exception_hash.hpp"
+ #include "dogen/yarn/hash/primitive_hash.hpp"
+ #include "dogen/yarn/hash/enumeration_hash.hpp"
+ #include "dogen/yarn/hash/origin_types_hash.hpp"
+@@ -98,6 +100,24 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_object(const std
+     return seed;
+ }
+ 
++inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_exception(const std::unordered_map<std::string, dogen::yarn::exception>& v) {
++    std::size_t seed(0);
++    for (const auto i : v) {
++        combine(seed, i.first);
++        combine(seed, i.second);
++    }
++    return seed;
++}
++
++inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_visitor(const std::unordered_map<std::string, dogen::yarn::visitor>& v) {
++    std::size_t seed(0);
++    for (const auto i : v) {
++        combine(seed, i.first);
++        combine(seed, i.second);
++    }
++    return seed;
++}
++
+ }
+ 
+ namespace dogen {
+@@ -117,6 +137,8 @@ std::size_t intermediate_model_hasher::hash(const intermediate_model& v) {
+     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_primitive(v.primitives()));
+     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_enumeration(v.enumerations()));
+     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_object(v.objects()));
++    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_exception(v.exceptions()));
++    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_visitor(v.visitors()));
+     combine(seed, v.is_target());
+     combine(seed, v.has_generatable_types());
+ 
+diff --git a/projects/yarn/src/hash/object_hash.cpp b/projects/yarn/src/hash/object_hash.cpp
+index 183ca28..1f7a5dd 100644
+--- a/projects/yarn/src/hash/object_hash.cpp
++++ b/projects/yarn/src/hash/object_hash.cpp
+@@ -82,8 +82,7 @@ std::size_t object_hasher::hash(const object& v) {
+     combine(seed, hash_std_list_dogen_yarn_name(v.weak_associations()));
+     combine(seed, v.is_visitable());
+     combine(seed, v.is_root_parent_visitable());
+-    combine(seed, hash_std_list_dogen_yarn_name(v.visits()));
+-    combine(seed, hash_std_list_dogen_yarn_name(v.visited_by()));
++    combine(seed, hash_std_list_dogen_yarn_name(v.visitable_by()));
+     combine(seed, v.object_type());
+     combine(seed, hash_std_list_dogen_yarn_name(v.modeled_concepts()));
+     combine(seed, hash_std_list_dogen_yarn_name(v.hash_container_keys()));
+diff --git a/projects/yarn/src/hash/visitor_hash.cpp b/projects/yarn/src/hash/visitor_hash.cpp
+index 500338f..9d623e4 100644
+--- a/projects/yarn/src/hash/visitor_hash.cpp
++++ b/projects/yarn/src/hash/visitor_hash.cpp
+@@ -18,6 +18,7 @@
+  * MA 02110-1301, USA.
+  *
+  */
++#include "dogen/yarn/hash/name_hash.hpp"
+ #include "dogen/yarn/hash/element_hash.hpp"
+ #include "dogen/yarn/hash/visitor_hash.hpp"
+ 
+@@ -29,6 +30,14 @@ inline void combine(std::size_t& seed, const HashableType& value) {
+     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+ }
+ 
++inline std::size_t hash_std_list_dogen_yarn_name(const std::list<dogen::yarn::name>& v) {
++    std::size_t seed(0);
++    for (const auto i : v) {
++        combine(seed, i);
++    }
++    return seed;
++}
++
+ }
+ 
+ namespace dogen {
+@@ -38,6 +47,8 @@ std::size_t visitor_hasher::hash(const visitor& v) {
+     std::size_t seed(0);
+ 
+     combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
++
++    combine(seed, hash_std_list_dogen_yarn_name(v.visits()));
+     return seed;
+ }
+ 
+diff --git a/projects/yarn/src/io/intermediate_model_io.cpp b/projects/yarn/src/io/intermediate_model_io.cpp
+index 01ecf4b..b864b48 100644
+--- a/projects/yarn/src/io/intermediate_model_io.cpp
++++ b/projects/yarn/src/io/intermediate_model_io.cpp
+@@ -25,6 +25,8 @@
+ #include "dogen/yarn/io/module_io.hpp"
+ #include "dogen/yarn/io/object_io.hpp"
+ #include "dogen/yarn/io/concept_io.hpp"
++#include "dogen/yarn/io/visitor_io.hpp"
++#include "dogen/yarn/io/exception_io.hpp"
+ #include "dogen/yarn/io/primitive_io.hpp"
+ #include "dogen/yarn/io/enumeration_io.hpp"
+ #include "dogen/yarn/io/origin_types_io.hpp"
+@@ -160,6 +162,42 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
+ 
+ }
+ 
++namespace std {
++
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::exception>& v) {
++    s << "[";
++    for (auto i(v.begin()); i != v.end(); ++i) {
++        if (i != v.begin()) s << ", ";
++        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->first) << "\"";
++        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
++        s << i->second;
++        s << " } ]";
++    }
++    s << " ] ";
++    return s;
++}
++
++}
++
++namespace std {
++
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::visitor>& v) {
++    s << "[";
++    for (auto i(v.begin()); i != v.end(); ++i) {
++        if (i != v.begin()) s << ", ";
++        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
++        s << "\"" << tidy_up_string(i->first) << "\"";
++        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
++        s << i->second;
++        s << " } ]";
++    }
++    s << " ] ";
++    return s;
++}
++
++}
++
+ namespace dogen {
+ namespace yarn {
+ 
+@@ -183,6 +221,8 @@ std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
+       << "\"primitives\": " << v.primitives() << ", "
+       << "\"enumerations\": " << v.enumerations() << ", "
+       << "\"objects\": " << v.objects() << ", "
++      << "\"exceptions\": " << v.exceptions() << ", "
++      << "\"visitors\": " << v.visitors() << ", "
+       << "\"is_target\": " << v.is_target() << ", "
+       << "\"has_generatable_types\": " << v.has_generatable_types()
+       << " }";
+diff --git a/projects/yarn/src/io/object_types_io.cpp b/projects/yarn/src/io/object_types_io.cpp
+index fdcc533..cde9da8 100644
+--- a/projects/yarn/src/io/object_types_io.cpp
++++ b/projects/yarn/src/io/object_types_io.cpp
+@@ -37,15 +37,9 @@ std::ostream& operator<<(std::ostream& s, const object_types& v) {
+     case object_types::user_defined_service:
+         attr = "\"user_defined_service\"";
+         break;
+-    case object_types::visitor:
+-        attr = "\"visitor\"";
+-        break;
+     case object_types::user_defined_value_object:
+         attr = "\"user_defined_value_object\"";
+         break;
+-    case object_types::exception:
+-        attr = "\"exception\"";
+-        break;
+     case object_types::smart_pointer:
+         attr = "\"smart_pointer\"";
+         break;
+diff --git a/projects/yarn/src/io/visitor_io.cpp b/projects/yarn/src/io/visitor_io.cpp
+index bb791dc..3b4460b 100644
+--- a/projects/yarn/src/io/visitor_io.cpp
++++ b/projects/yarn/src/io/visitor_io.cpp
+@@ -19,6 +19,7 @@
+  *
+  */
+ #include <ostream>
++#include "dogen/yarn/io/name_io.hpp"
+ #include "dogen/yarn/io/element_io.hpp"
+ #include "dogen/yarn/io/visitor_io.hpp"
+ 
+diff --git a/projects/yarn/src/serialization/intermediate_model_ser.cpp b/projects/yarn/src/serialization/intermediate_model_ser.cpp
+index 6c05dbd..6ff2886 100644
+--- a/projects/yarn/src/serialization/intermediate_model_ser.cpp
++++ b/projects/yarn/src/serialization/intermediate_model_ser.cpp
+@@ -32,6 +32,8 @@
+ #include "dogen/yarn/serialization/module_ser.hpp"
+ #include "dogen/yarn/serialization/object_ser.hpp"
+ #include "dogen/yarn/serialization/concept_ser.hpp"
++#include "dogen/yarn/serialization/visitor_ser.hpp"
++#include "dogen/yarn/serialization/exception_ser.hpp"
+ #include "dogen/yarn/serialization/primitive_ser.hpp"
+ #include "dogen/yarn/serialization/enumeration_ser.hpp"
+ #include "dogen/utility/serialization/unordered_map.hpp"
+@@ -58,6 +60,8 @@ void save(Archive& ar,
+     ar << make_nvp("primitives", v.primitives_);
+     ar << make_nvp("enumerations", v.enumerations_);
+     ar << make_nvp("objects", v.objects_);
++    ar << make_nvp("exceptions", v.exceptions_);
++    ar << make_nvp("visitors", v.visitors_);
+     ar << make_nvp("is_target", v.is_target_);
+     ar << make_nvp("has_generatable_types", v.has_generatable_types_);
+ }
+@@ -77,6 +81,8 @@ void load(Archive& ar,
+     ar >> make_nvp("primitives", v.primitives_);
+     ar >> make_nvp("enumerations", v.enumerations_);
+     ar >> make_nvp("objects", v.objects_);
++    ar >> make_nvp("exceptions", v.exceptions_);
++    ar >> make_nvp("visitors", v.visitors_);
+     ar >> make_nvp("is_target", v.is_target_);
+     ar >> make_nvp("has_generatable_types", v.has_generatable_types_);
+ }
+diff --git a/projects/yarn/src/serialization/object_ser.cpp b/projects/yarn/src/serialization/object_ser.cpp
+index 2de37cf..640fe4f 100644
+--- a/projects/yarn/src/serialization/object_ser.cpp
++++ b/projects/yarn/src/serialization/object_ser.cpp
+@@ -63,8 +63,7 @@ void save(Archive& ar,
+     ar << make_nvp("weak_associations", v.weak_associations_);
+     ar << make_nvp("is_visitable", v.is_visitable_);
+     ar << make_nvp("is_root_parent_visitable", v.is_root_parent_visitable_);
+-    ar << make_nvp("visits", v.visits_);
+-    ar << make_nvp("visited_by", v.visited_by_);
++    ar << make_nvp("visitable_by", v.visitable_by_);
+     ar << make_nvp("object_type", v.object_type_);
+     ar << make_nvp("modeled_concepts", v.modeled_concepts_);
+     ar << make_nvp("hash_container_keys", v.hash_container_keys_);
+@@ -91,8 +90,7 @@ void load(Archive& ar,
+     ar >> make_nvp("weak_associations", v.weak_associations_);
+     ar >> make_nvp("is_visitable", v.is_visitable_);
+     ar >> make_nvp("is_root_parent_visitable", v.is_root_parent_visitable_);
+-    ar >> make_nvp("visits", v.visits_);
+-    ar >> make_nvp("visited_by", v.visited_by_);
++    ar >> make_nvp("visitable_by", v.visitable_by_);
+     ar >> make_nvp("object_type", v.object_type_);
+     ar >> make_nvp("modeled_concepts", v.modeled_concepts_);
+     ar >> make_nvp("hash_container_keys", v.hash_container_keys_);
+diff --git a/projects/yarn/src/serialization/visitor_ser.cpp b/projects/yarn/src/serialization/visitor_ser.cpp
+index 866063c..7b82af7 100644
+--- a/projects/yarn/src/serialization/visitor_ser.cpp
++++ b/projects/yarn/src/serialization/visitor_ser.cpp
+@@ -19,6 +19,7 @@
+  *
+  */
+ #include <boost/serialization/nvp.hpp>
++#include <boost/serialization/list.hpp>
+ #include <boost/archive/xml_iarchive.hpp>
+ #include <boost/archive/xml_oarchive.hpp>
+ #include <boost/archive/text_iarchive.hpp>
+@@ -27,6 +28,7 @@
+ #include <boost/archive/binary_oarchive.hpp>
+ #include <boost/archive/polymorphic_iarchive.hpp>
+ #include <boost/archive/polymorphic_oarchive.hpp>
++#include "dogen/yarn/serialization/name_ser.hpp"
+ #include "dogen/yarn/serialization/element_ser.hpp"
+ #include "dogen/yarn/serialization/visitor_ser.hpp"
+ 
+@@ -42,6 +44,8 @@ void save(Archive& ar,
+     const dogen::yarn::visitor& v,
+     const unsigned int /*version*/) {
+     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
++
++    ar << make_nvp("visits", v.visits_);
+ }
+ 
+ template<typename Archive>
+@@ -49,6 +53,8 @@ void load(Archive& ar,
+     dogen::yarn::visitor& v,
+     const unsigned int /*version*/) {
+     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
++
++    ar >> make_nvp("visits", v.visits_);
+ }
+ 
+ } }
+diff --git a/projects/yarn/src/test/mock_intermediate_model_factory.cpp b/projects/yarn/src/test/mock_intermediate_model_factory.cpp
+index a747bee..e8beccf 100644
+--- a/projects/yarn/src/test/mock_intermediate_model_factory.cpp
++++ b/projects/yarn/src/test/mock_intermediate_model_factory.cpp
+@@ -541,7 +541,7 @@ make_enumeration(const unsigned int i, const name& model_name,
+     return r;
+ }
+ 
+-object mock_intermediate_model_factory::make_exception(const unsigned int i,
++exception mock_intermediate_model_factory::make_exception(const unsigned int i,
+     const name& model_name, const unsigned int module_n) const {
+ 
+     const auto sn(type_name(i));
+@@ -550,11 +550,10 @@ object mock_intermediate_model_factory::make_exception(const unsigned int i,
+     dogen::yarn::name_factory nf;
+     dogen::yarn::name n(nf.build_element_in_model(model_name, sn, ipp));
+ 
+-    object r;
++    exception r;
+     r.name(n);
+     r.generation_type(generation_types::full_generation);
+     r.documentation(documentation);
+-    r.object_type(dogen::yarn::object_types::exception);
+ 
+     if (flags_.tagged())
+         dynamic_extension_function_(r.extensions());
+@@ -646,7 +645,7 @@ make_multi_type_model(const unsigned int n, const unsigned int type_n,
+     case object_types::exception:
+         for (unsigned int i(0); i < type_n; ++i) {
+             const auto e(make_exception(i, r.name(), mod_n));
+-            insert_object(r, e);
++            insert_nameable(r.exceptions(), e);
+         }
+         break;
+     default:
+diff --git a/projects/yarn/src/test_data/intermediate_model_td.cpp b/projects/yarn/src/test_data/intermediate_model_td.cpp
+index 28c2316..60076b1 100644
+--- a/projects/yarn/src/test_data/intermediate_model_td.cpp
++++ b/projects/yarn/src/test_data/intermediate_model_td.cpp
+@@ -23,6 +23,8 @@
+ #include "dogen/yarn/test_data/module_td.hpp"
+ #include "dogen/yarn/test_data/object_td.hpp"
+ #include "dogen/yarn/test_data/concept_td.hpp"
++#include "dogen/yarn/test_data/visitor_td.hpp"
++#include "dogen/yarn/test_data/exception_td.hpp"
+ #include "dogen/yarn/test_data/primitive_td.hpp"
+ #include "dogen/yarn/test_data/enumeration_td.hpp"
+ #include "dogen/yarn/test_data/origin_types_td.hpp"
+@@ -133,6 +135,32 @@ std::unordered_map<std::string, dogen::yarn::object> create_std_unordered_map_st
+     return r;
+ }
+ 
++dogen::yarn::exception
++create_dogen_yarn_exception(const unsigned int position) {
++    return dogen::yarn::exception_generator::create(position);
++}
++
++std::unordered_map<std::string, dogen::yarn::exception> create_std_unordered_map_std_string_dogen_yarn_exception(unsigned int position) {
++    std::unordered_map<std::string, dogen::yarn::exception> r;
++    for (unsigned int i(0); i < 4; ++i) {
++        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_exception(position + i)));
++    }
++    return r;
++}
++
++dogen::yarn::visitor
++create_dogen_yarn_visitor(const unsigned int position) {
++    return dogen::yarn::visitor_generator::create(position);
++}
++
++std::unordered_map<std::string, dogen::yarn::visitor> create_std_unordered_map_std_string_dogen_yarn_visitor(unsigned int position) {
++    std::unordered_map<std::string, dogen::yarn::visitor> r;
++    for (unsigned int i(0); i < 4; ++i) {
++        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_visitor(position + i)));
++    }
++    return r;
++}
++
+ bool create_bool(const unsigned int position) {
+     return (position % 2) == 0;
+ }
+@@ -157,8 +185,10 @@ populate(const unsigned int position, result_type& v) {
+     v.primitives(create_std_unordered_map_std_string_dogen_yarn_primitive(position + 8));
+     v.enumerations(create_std_unordered_map_std_string_dogen_yarn_enumeration(position + 9));
+     v.objects(create_std_unordered_map_std_string_dogen_yarn_object(position + 10));
+-    v.is_target(create_bool(position + 11));
+-    v.has_generatable_types(create_bool(position + 12));
++    v.exceptions(create_std_unordered_map_std_string_dogen_yarn_exception(position + 11));
++    v.visitors(create_std_unordered_map_std_string_dogen_yarn_visitor(position + 12));
++    v.is_target(create_bool(position + 13));
++    v.has_generatable_types(create_bool(position + 14));
+ }
+ 
+ intermediate_model_generator::result_type
+diff --git a/projects/yarn/src/test_data/object_td.cpp b/projects/yarn/src/test_data/object_td.cpp
+index 4f70aca..c0857c4 100644
+--- a/projects/yarn/src/test_data/object_td.cpp
++++ b/projects/yarn/src/test_data/object_td.cpp
+@@ -94,11 +94,10 @@ populate(const unsigned int position, result_type& v) {
+     v.weak_associations(create_std_list_dogen_yarn_name(position + 12));
+     v.is_visitable(create_bool(position + 13));
+     v.is_root_parent_visitable(create_bool(position + 14));
+-    v.visits(create_std_list_dogen_yarn_name(position + 15));
+-    v.visited_by(create_std_list_dogen_yarn_name(position + 16));
+-    v.object_type(create_dogen_yarn_object_types(position + 17));
+-    v.modeled_concepts(create_std_list_dogen_yarn_name(position + 18));
+-    v.hash_container_keys(create_std_list_dogen_yarn_name(position + 19));
++    v.visitable_by(create_std_list_dogen_yarn_name(position + 15));
++    v.object_type(create_dogen_yarn_object_types(position + 16));
++    v.modeled_concepts(create_std_list_dogen_yarn_name(position + 17));
++    v.hash_container_keys(create_std_list_dogen_yarn_name(position + 18));
+ }
+ 
+ object_generator::result_type
+diff --git a/projects/yarn/src/test_data/object_types_td.cpp b/projects/yarn/src/test_data/object_types_td.cpp
+index 2aae707..ed8395a 100644
+--- a/projects/yarn/src/test_data/object_types_td.cpp
++++ b/projects/yarn/src/test_data/object_types_td.cpp
+@@ -26,7 +26,7 @@ namespace yarn {
+ object_types_generator::object_types_generator() : position_(0) { }
+ void object_types_generator::
+ populate(const unsigned int position, result_type& v) {
+-    v = static_cast<object_types>(position % 9);
++    v = static_cast<object_types>(position % 7);
+ }
+ 
+ object_types_generator::result_type
+diff --git a/projects/yarn/src/test_data/visitor_td.cpp b/projects/yarn/src/test_data/visitor_td.cpp
+index 7cec9fd..cf2f1bc 100644
+--- a/projects/yarn/src/test_data/visitor_td.cpp
++++ b/projects/yarn/src/test_data/visitor_td.cpp
+@@ -18,9 +18,27 @@
+  * MA 02110-1301, USA.
+  *
+  */
++#include "dogen/yarn/test_data/name_td.hpp"
+ #include "dogen/yarn/test_data/element_td.hpp"
+ #include "dogen/yarn/test_data/visitor_td.hpp"
+ 
++namespace {
++
++dogen::yarn::name
++create_dogen_yarn_name(const unsigned int position) {
++    return dogen::yarn::name_generator::create(position);
++}
++
++std::list<dogen::yarn::name> create_std_list_dogen_yarn_name(unsigned int position) {
++    std::list<dogen::yarn::name> r;
++    for (unsigned int i(0); i < 4; ++i) {
++        r.push_back(create_dogen_yarn_name(position + i));
++    }
++    return r;
++}
++
++}
++
+ namespace dogen {
+ namespace yarn {
+ 
+@@ -29,6 +47,7 @@ visitor_generator::visitor_generator() : position_(0) { }
+ void visitor_generator::
+ populate(const unsigned int position, result_type& v) {
+     dogen::yarn::element_generator::populate(position, v);
++    v.visits(create_std_list_dogen_yarn_name(position + 0));
+ }
+ 
+ visitor_generator::result_type
+diff --git a/projects/yarn/src/types/injector.cpp b/projects/yarn/src/types/injector.cpp
+index 0591859..8edb006 100644
+--- a/projects/yarn/src/types/injector.cpp
++++ b/projects/yarn/src/types/injector.cpp
+@@ -73,25 +73,17 @@ inline void add_containing_module_to_non_contained_entities(
+     }
+ }
+ 
+-class injector::context {
+-public:
+-    context(yarn::intermediate_model& m) : model_(m) { }
+-
+-public:
+-    yarn::intermediate_model& model() { return model_; }
+-
+-private:
+-    yarn::intermediate_model& model_;
+-};
+-
+-bool injector::insert(const object& o) {
+-    const auto i(context_->model().objects().insert(
+-            std::make_pair(o.name().qualified(), o)));
+-
+-    return i.second;
++module injector::create_global_module() const {
++    name qn;
++    module r;
++    r.name(qn);
++    r.generation_type(generation_types::no_generation);
++    r.origin_type(origin_types::system);
++    r.documentation(global_module_doc);
++    return r;
+ }
+ 
+-object injector::
++visitor injector::
+ create_visitor(const object& o, const std::list<name>& leaves) const {
+     name_builder b;
+     b.simple_name(o.name().simple() + "_" + visitor_name);
+@@ -109,12 +101,10 @@ create_visitor(const object& o, const std::list<name>& leaves) const {
+     const auto n(b.build());
+     BOOST_LOG_SEV(lg, debug) << "Creating visitor: " << n.qualified();
+ 
+-    object r;
++    visitor r;
+     r.name(n);
+-    r.is_final(true);
+     r.generation_type(o.generation_type());
+     r.origin_type(origin_types::system);
+-    r.object_type(object_types::visitor);
+     r.documentation(visitor_doc + o.name().simple());
+ 
+     for (const auto& l : leaves)
+@@ -124,29 +114,29 @@ create_visitor(const object& o, const std::list<name>& leaves) const {
+     return r;
+ }
+ 
+-void injector::inject_visited_by(object& root, const std::list<name>& leaves,
+-    const name& visitor) const {
++void injector::inject_visitable_by(object& root, const std::list<name>& leaves,
++    const name& visitor, intermediate_model& m) const {
+ 
+-    root.visited_by().push_back(visitor);
++    root.visitable_by().push_back(visitor);
+ 
+     for (const auto& l : leaves) {
+-        auto i(context_->model().objects().find(l.qualified()));
+-        if (i == context_->model().objects().end()) {
++        auto i(m.objects().find(l.qualified()));
++        if (i == m.objects().end()) {
+             const auto qn(l.qualified());
+             BOOST_LOG_SEV(lg, error) << leaf_not_found << qn;
+             BOOST_THROW_EXCEPTION(injection_error(leaf_not_found + qn));
+         }
+ 
+         auto& leaf(i->second);
+-        leaf.visited_by().push_back(visitor);
++        leaf.visitable_by().push_back(visitor);
+     }
+ }
+ 
+-void injector::inject_visitors() {
++void injector::inject_visitors(intermediate_model& m) {
+     BOOST_LOG_SEV(lg, debug) << "Injecting visitors.";
+ 
+-    std::list<object> visitors;
+-    for (auto& pair : context_->model().objects()) {
++    std::list<visitor> visitors;
++    for (auto& pair : m.objects()) {
+         auto& o(pair.second);
+ 
+         if (!o.is_visitable())
+@@ -159,15 +149,17 @@ void injector::inject_visitors() {
+         }
+ 
+         const auto v(create_visitor(o, o.leaves()));
++        inject_visitable_by(o, o.leaves(), v.name(), m);
+         visitors.push_back(v);
+-        inject_visited_by(o, o.leaves(), v.name());
+     }
+ 
+     for (const auto v : visitors) {
+         BOOST_LOG_SEV(lg, debug) << "Adding visitor: "
+                                  << v.name().qualified();
+ 
+-        if (!insert(v)) {
++        const auto pair(std::make_pair(v.name().qualified(), v));
++        const auto i(m.visitors().insert(pair));
++        if (!i.second) {
+             const auto qn(v.name().qualified());
+             BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
+             BOOST_THROW_EXCEPTION(injection_error(duplicate_name + qn));
+@@ -177,37 +169,31 @@ void injector::inject_visitors() {
+     BOOST_LOG_SEV(lg, debug) << "Done injecting visitors.";
+ }
+ 
+-void injector::inject_global_module() {
+-    name qn;
++void injector::inject_global_module(intermediate_model& m) {
++    const auto gm(create_global_module());
+ 
+-    auto& model(context_->model());
+-    const auto i(model.modules().find(qn.qualified()));
+-    if (i != model.modules().end()) {
+-        const auto qn(model.name().qualified());
++    const auto gmn(gm.name());
++    const auto i(m.modules().find(gmn.qualified()));
++    if (i != m.modules().end()) {
++        const auto qn(m.name().qualified());
+         BOOST_LOG_SEV(lg, error) << model_already_has_global_module << qn;
+         BOOST_THROW_EXCEPTION(injection_error(
+                 model_already_has_global_module + qn));
+     }
+-
+-    add_containing_module_to_non_contained_entities(qn, model.modules());
+-    add_containing_module_to_non_contained_entities(qn, model.concepts());
+-    add_containing_module_to_non_contained_entities(qn, model.primitives());
+-    add_containing_module_to_non_contained_entities(qn, model.enumerations());
+-    add_containing_module_to_non_contained_entities(qn, model.objects());
+-
+-    module global_module;
+-    global_module.name(qn);
+-    global_module.generation_type(generation_types::no_generation);
+-    global_module.origin_type(origin_types::system);
+-    global_module.documentation(global_module_doc);
+-    model.modules().insert(std::make_pair(qn.qualified(), global_module));
++    m.modules().insert(std::make_pair(gmn.qualified(), gm));
++
++    add_containing_module_to_non_contained_entities(gmn, m.modules());
++    add_containing_module_to_non_contained_entities(gmn, m.concepts());
++    add_containing_module_to_non_contained_entities(gmn, m.primitives());
++    add_containing_module_to_non_contained_entities(gmn, m.enumerations());
++    add_containing_module_to_non_contained_entities(gmn, m.objects());
++    add_containing_module_to_non_contained_entities(gmn, m.exceptions());
++    add_containing_module_to_non_contained_entities(gmn, m.visitors());
+ }
+ 
+ void injector::inject(intermediate_model& m) {
+-    context_ = std::unique_ptr<context>(new context(m));
+-    inject_visitors();
+-    inject_global_module();
+-    context_ = std::unique_ptr<context>();
++    inject_visitors(m);
++    inject_global_module(m);
+ }
+ 
+ } }
+diff --git a/projects/yarn/src/types/intermediate_model.cpp b/projects/yarn/src/types/intermediate_model.cpp
+index a0d6b23..8e3e10c 100644
+--- a/projects/yarn/src/types/intermediate_model.cpp
++++ b/projects/yarn/src/types/intermediate_model.cpp
+@@ -41,6 +41,8 @@ intermediate_model::intermediate_model(
+     const std::unordered_map<std::string, dogen::yarn::primitive>& primitives,
+     const std::unordered_map<std::string, dogen::yarn::enumeration>& enumerations,
+     const std::unordered_map<std::string, dogen::yarn::object>& objects,
++    const std::unordered_map<std::string, dogen::yarn::exception>& exceptions,
++    const std::unordered_map<std::string, dogen::yarn::visitor>& visitors,
+     const bool is_target,
+     const bool has_generatable_types)
+     : name_(name),
+@@ -54,6 +56,8 @@ intermediate_model::intermediate_model(
+       primitives_(primitives),
+       enumerations_(enumerations),
+       objects_(objects),
++      exceptions_(exceptions),
++      visitors_(visitors),
+       is_target_(is_target),
+       has_generatable_types_(has_generatable_types) { }
+ 
+@@ -70,6 +74,8 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
+     swap(primitives_, other.primitives_);
+     swap(enumerations_, other.enumerations_);
+     swap(objects_, other.objects_);
++    swap(exceptions_, other.exceptions_);
++    swap(visitors_, other.visitors_);
+     swap(is_target_, other.is_target_);
+     swap(has_generatable_types_, other.has_generatable_types_);
+ }
+@@ -86,6 +92,8 @@ bool intermediate_model::operator==(const intermediate_model& rhs) const {
+         primitives_ == rhs.primitives_ &&
+         enumerations_ == rhs.enumerations_ &&
+         objects_ == rhs.objects_ &&
++        exceptions_ == rhs.exceptions_ &&
++        visitors_ == rhs.visitors_ &&
+         is_target_ == rhs.is_target_ &&
+         has_generatable_types_ == rhs.has_generatable_types_;
+ }
+@@ -256,6 +264,38 @@ void intermediate_model::objects(const std::unordered_map<std::string, dogen::ya
+     objects_ = std::move(v);
+ }
+ 
++const std::unordered_map<std::string, dogen::yarn::exception>& intermediate_model::exceptions() const {
++    return exceptions_;
++}
++
++std::unordered_map<std::string, dogen::yarn::exception>& intermediate_model::exceptions() {
++    return exceptions_;
++}
++
++void intermediate_model::exceptions(const std::unordered_map<std::string, dogen::yarn::exception>& v) {
++    exceptions_ = v;
++}
++
++void intermediate_model::exceptions(const std::unordered_map<std::string, dogen::yarn::exception>&& v) {
++    exceptions_ = std::move(v);
++}
++
++const std::unordered_map<std::string, dogen::yarn::visitor>& intermediate_model::visitors() const {
++    return visitors_;
++}
++
++std::unordered_map<std::string, dogen::yarn::visitor>& intermediate_model::visitors() {
++    return visitors_;
++}
++
++void intermediate_model::visitors(const std::unordered_map<std::string, dogen::yarn::visitor>& v) {
++    visitors_ = v;
++}
++
++void intermediate_model::visitors(const std::unordered_map<std::string, dogen::yarn::visitor>&& v) {
++    visitors_ = std::move(v);
++}
++
+ bool intermediate_model::is_target() const {
+     return is_target_;
+ }
+diff --git a/projects/yarn/src/types/object.cpp b/projects/yarn/src/types/object.cpp
+index d62e4af..2c273fb 100644
+--- a/projects/yarn/src/types/object.cpp
++++ b/projects/yarn/src/types/object.cpp
+@@ -109,8 +109,7 @@ object::object(
+     const std::list<dogen::yarn::name>& weak_associations,
+     const bool is_visitable,
+     const bool is_root_parent_visitable,
+-    const std::list<dogen::yarn::name>& visits,
+-    const std::list<dogen::yarn::name>& visited_by,
++    const std::list<dogen::yarn::name>& visitable_by,
+     const dogen::yarn::object_types object_type,
+     const std::list<dogen::yarn::name>& modeled_concepts,
+     const std::list<dogen::yarn::name>& hash_container_keys)
+@@ -138,8 +137,7 @@ object::object(
+       weak_associations_(weak_associations),
+       is_visitable_(is_visitable),
+       is_root_parent_visitable_(is_root_parent_visitable),
+-      visits_(visits),
+-      visited_by_(visited_by),
++      visitable_by_(visitable_by),
+       object_type_(object_type),
+       modeled_concepts_(modeled_concepts),
+       hash_container_keys_(hash_container_keys) { }
+@@ -171,8 +169,7 @@ void object::to_stream(std::ostream& s) const {
+       << "\"weak_associations\": " << weak_associations_ << ", "
+       << "\"is_visitable\": " << is_visitable_ << ", "
+       << "\"is_root_parent_visitable\": " << is_root_parent_visitable_ << ", "
+-      << "\"visits\": " << visits_ << ", "
+-      << "\"visited_by\": " << visited_by_ << ", "
++      << "\"visitable_by\": " << visitable_by_ << ", "
+       << "\"object_type\": " << object_type_ << ", "
+       << "\"modeled_concepts\": " << modeled_concepts_ << ", "
+       << "\"hash_container_keys\": " << hash_container_keys_
+@@ -198,8 +195,7 @@ void object::swap(object& other) noexcept {
+     swap(weak_associations_, other.weak_associations_);
+     swap(is_visitable_, other.is_visitable_);
+     swap(is_root_parent_visitable_, other.is_root_parent_visitable_);
+-    swap(visits_, other.visits_);
+-    swap(visited_by_, other.visited_by_);
++    swap(visitable_by_, other.visitable_by_);
+     swap(object_type_, other.object_type_);
+     swap(modeled_concepts_, other.modeled_concepts_);
+     swap(hash_container_keys_, other.hash_container_keys_);
+@@ -228,8 +224,7 @@ bool object::operator==(const object& rhs) const {
+         weak_associations_ == rhs.weak_associations_ &&
+         is_visitable_ == rhs.is_visitable_ &&
+         is_root_parent_visitable_ == rhs.is_root_parent_visitable_ &&
+-        visits_ == rhs.visits_ &&
+-        visited_by_ == rhs.visited_by_ &&
++        visitable_by_ == rhs.visitable_by_ &&
+         object_type_ == rhs.object_type_ &&
+         modeled_concepts_ == rhs.modeled_concepts_ &&
+         hash_container_keys_ == rhs.hash_container_keys_;
+@@ -425,36 +420,20 @@ void object::is_root_parent_visitable(const bool v) {
+     is_root_parent_visitable_ = v;
+ }
+ 
+-const std::list<dogen::yarn::name>& object::visits() const {
+-    return visits_;
++const std::list<dogen::yarn::name>& object::visitable_by() const {
++    return visitable_by_;
+ }
+ 
+-std::list<dogen::yarn::name>& object::visits() {
+-    return visits_;
++std::list<dogen::yarn::name>& object::visitable_by() {
++    return visitable_by_;
+ }
+ 
+-void object::visits(const std::list<dogen::yarn::name>& v) {
+-    visits_ = v;
++void object::visitable_by(const std::list<dogen::yarn::name>& v) {
++    visitable_by_ = v;
+ }
+ 
+-void object::visits(const std::list<dogen::yarn::name>&& v) {
+-    visits_ = std::move(v);
+-}
+-
+-const std::list<dogen::yarn::name>& object::visited_by() const {
+-    return visited_by_;
+-}
+-
+-std::list<dogen::yarn::name>& object::visited_by() {
+-    return visited_by_;
+-}
+-
+-void object::visited_by(const std::list<dogen::yarn::name>& v) {
+-    visited_by_ = v;
+-}
+-
+-void object::visited_by(const std::list<dogen::yarn::name>&& v) {
+-    visited_by_ = std::move(v);
++void object::visitable_by(const std::list<dogen::yarn::name>&& v) {
++    visitable_by_ = std::move(v);
+ }
+ 
+ dogen::yarn::object_types object::object_type() const {
+diff --git a/projects/yarn/src/types/visitor.cpp b/projects/yarn/src/types/visitor.cpp
+index 39d9d6d..520bb63 100644
+--- a/projects/yarn/src/types/visitor.cpp
++++ b/projects/yarn/src/types/visitor.cpp
+@@ -19,9 +19,24 @@
+  *
+  */
+ #include <ostream>
++#include "dogen/yarn/io/name_io.hpp"
+ #include "dogen/yarn/io/element_io.hpp"
+ #include "dogen/yarn/types/visitor.hpp"
+ 
++namespace std {
++
++inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::name>& v) {
++    s << "[ ";
++    for (auto i(v.begin()); i != v.end(); ++i) {
++        if (i != v.begin()) s << ", ";
++        s << *i;
++    }
++    s << "] ";
++    return s;
++}
++
++}
++
+ namespace dogen {
+ namespace yarn {
+ 
+@@ -33,7 +48,8 @@ visitor::visitor(
+     const dogen::yarn::origin_types origin_type,
+     const std::string& original_model_name,
+     const boost::optional<dogen::yarn::name>& contained_by,
+-    const bool in_global_module)
++    const bool in_global_module,
++    const std::list<dogen::yarn::name>& visits)
+     : dogen::yarn::element(
+       documentation,
+       extensions,
+@@ -42,19 +58,24 @@ visitor::visitor(
+       origin_type,
+       original_model_name,
+       contained_by,
+-      in_global_module) { }
++      in_global_module),
++      visits_(visits) { }
+ 
+ void visitor::to_stream(std::ostream& s) const {
+     s << " { "
+       << "\"__type__\": " << "\"dogen::yarn::visitor\"" << ", "
+       << "\"__parent_0__\": ";
+     element::to_stream(s);
+-    s << " }";
++    s << ", "
++      << "\"visits\": " << visits_
++      << " }";
+ }
+ 
+ void visitor::swap(visitor& other) noexcept {
+     element::swap(other);
+ 
++    using std::swap;
++    swap(visits_, other.visits_);
+ }
+ 
+ bool visitor::equals(const dogen::yarn::element& other) const {
+@@ -64,7 +85,8 @@ bool visitor::equals(const dogen::yarn::element& other) const {
+ }
+ 
+ bool visitor::operator==(const visitor& rhs) const {
+-    return element::compare(rhs);
++    return element::compare(rhs) &&
++        visits_ == rhs.visits_;
+ }
+ 
+ visitor& visitor::operator=(visitor other) {
+@@ -73,4 +95,20 @@ visitor& visitor::operator=(visitor other) {
+     return *this;
+ }
+ 
++const std::list<dogen::yarn::name>& visitor::visits() const {
++    return visits_;
++}
++
++std::list<dogen::yarn::name>& visitor::visits() {
++    return visits_;
++}
++
++void visitor::visits(const std::list<dogen::yarn::name>& v) {
++    visits_ = v;
++}
++
++void visitor::visits(const std::list<dogen::yarn::name>&& v) {
++    visits_ = std::move(v);
++}
++
+ } }
