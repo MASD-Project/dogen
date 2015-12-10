@@ -24,7 +24,9 @@
 #include "dogen/yarn/test_data/object_td.hpp"
 #include "dogen/yarn/test_data/concept_td.hpp"
 #include "dogen/yarn/test_data/element_td.hpp"
+#include "dogen/yarn/test_data/visitor_td.hpp"
 #include "dogen/dynamic/test_data/object_td.hpp"
+#include "dogen/yarn/test_data/exception_td.hpp"
 #include "dogen/yarn/test_data/primitive_td.hpp"
 #include "dogen/yarn/test_data/enumeration_td.hpp"
 #include "dogen/yarn/test_data/origin_types_td.hpp"
@@ -88,14 +90,18 @@ populate(const unsigned int position, result_type& v) {
 
 element_generator::result_type*
 element_generator::create_ptr(const unsigned int position) {
-    if ((position % 4) == 0)
+    if ((position % 6) == 0)
         return dogen::yarn::enumeration_generator::create_ptr(position);
-    if ((position % 4) == 1)
+    if ((position % 6) == 1)
+        return dogen::yarn::exception_generator::create_ptr(position);
+    if ((position % 6) == 2)
         return dogen::yarn::module_generator::create_ptr(position);
-    if ((position % 4) == 2)
+    if ((position % 6) == 3)
         return dogen::yarn::object_generator::create_ptr(position);
-    if ((position % 4) == 3)
+    if ((position % 6) == 4)
         return dogen::yarn::primitive_generator::create_ptr(position);
+    if ((position % 6) == 5)
+        return dogen::yarn::visitor_generator::create_ptr(position);
     return dogen::yarn::concept_generator::create_ptr(position);
 }
 

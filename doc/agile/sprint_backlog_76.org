@@ -13,17 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-09 Wed 23:38]
+#+CAPTION: Clock summary at [2015-12-10 Thu 07:31]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *4:36* |      |      |
+| *Total time*                                                                | *5:15* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 4:36   |      |      |
-| Active                                                                      |        | 4:36 |      |
+| Stories                                                                     | 5:15   |      |      |
+| Active                                                                      |        | 5:15 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:39 |
 | STARTED Remove =service= stereotype                                         |        |      | 0:18 |
-| STARTED Create visitor and exception yarn types                             |        |      | 3:39 |
+| STARTED Create visitor and exception yarn types                             |        |      | 3:59 |
+| STARTED Update copyright notices                                            |        |      | 0:19 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -382,6 +383,7 @@ all facets except for types. A few points:
   profiles" to go with "enablement profiles".
 
 *** STARTED Create visitor and exception yarn types                   :story:
+    CLOCK: [2015-12-10 Thu 07:11]--[2015-12-10 Thu 07:31] =>  0:20
     CLOCK: [2015-12-09 Wed 21:04]--[2015-12-09 Wed 23:38] =>  2:34
     CLOCK: [2015-12-08 Tue 23:48]--[2015-12-09 Wed 00:13] =>  0:25
     CLOCK: [2015-12-08 Tue 22:55]--[2015-12-08 Tue 23:35] =>  0:40
@@ -402,6 +404,9 @@ make sense for the type.
 - add exception as a relatable element. Actually we probably should
   add it as an element for now and update the inheritance story for
   exceptions.
+- considered making concept Generalisable, but it becomes quite
+  confusing because refinement is not quite the same thing as
+  inheritance. Cancelled the change in the end.
 
 *** STARTED Update copyright notices                                  :story:
     CLOCK: [2015-12-10 Thu 06:51]--[2015-12-10 Thu 07:10] =>  0:19

@@ -29,6 +29,8 @@
 #include "dogen/yarn/serialization/module_ser.hpp"
 #include "dogen/yarn/serialization/object_ser.hpp"
 #include "dogen/yarn/serialization/concept_ser.hpp"
+#include "dogen/yarn/serialization/visitor_ser.hpp"
+#include "dogen/yarn/serialization/exception_ser.hpp"
 #include "dogen/yarn/serialization/primitive_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/dynamic/serialization/registrar_ser.hpp"
@@ -42,9 +44,11 @@ void register_types(Archive& ar) {
 
     ar.template register_type<dogen::yarn::concept>();
     ar.template register_type<dogen::yarn::enumeration>();
+    ar.template register_type<dogen::yarn::exception>();
     ar.template register_type<dogen::yarn::module>();
     ar.template register_type<dogen::yarn::object>();
     ar.template register_type<dogen::yarn::primitive>();
+    ar.template register_type<dogen::yarn::visitor>();
 }
 
 template void register_types(boost::archive::polymorphic_oarchive& ar);

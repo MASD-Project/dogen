@@ -28,6 +28,8 @@
 #include "dogen/yarn/types/module_fwd.hpp"
 #include "dogen/yarn/types/object_fwd.hpp"
 #include "dogen/yarn/types/concept_fwd.hpp"
+#include "dogen/yarn/types/visitor_fwd.hpp"
+#include "dogen/yarn/types/exception_fwd.hpp"
 #include "dogen/yarn/types/primitive_fwd.hpp"
 #include "dogen/yarn/types/enumeration_fwd.hpp"
 
@@ -63,6 +65,16 @@ public:
     /**@}*/
 
     /**
+     * @brief Accept visits for type dogen::yarn::exception
+     */
+    /**@{*/
+    virtual void visit(const dogen::yarn::exception&) const { }
+    virtual void visit(const dogen::yarn::exception&) { }
+    virtual void visit(dogen::yarn::exception&) const { }
+    virtual void visit(dogen::yarn::exception&) { }
+    /**@}*/
+
+    /**
      * @brief Accept visits for type dogen::yarn::module
      */
     /**@{*/
@@ -90,6 +102,16 @@ public:
     virtual void visit(const dogen::yarn::primitive&) { }
     virtual void visit(dogen::yarn::primitive&) const { }
     virtual void visit(dogen::yarn::primitive&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::yarn::visitor
+     */
+    /**@{*/
+    virtual void visit(const dogen::yarn::visitor&) const { }
+    virtual void visit(const dogen::yarn::visitor&) { }
+    virtual void visit(dogen::yarn::visitor&) const { }
+    virtual void visit(dogen::yarn::visitor&) { }
     /**@}*/
 };
 
