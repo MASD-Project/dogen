@@ -6,14 +6,27 @@ into recently-ish.
 
 * Finance, Economics, Politics
 
+- [[http://qz.com/564513/a-not-so-brief-history-of-the-fall-and-fall-of-the-nigerian-naira/][A (not so) brief history of the fall and fall of the Nigerian naira]]:
+  Source: [[https://twitter.com/KingDouyeAlfred/status/675280673561710592][King Alfred (twitter)]].
+
 * Startups et al.
 
 * General Coding
+
+- [[http://spectrum.ieee.org/view-from-the-valley/computing/software/yahoos-engineers-move-to-coding-without-a-net][Yahoo’s Engineers Move to Coding Without a Net]]: Source: [[https://twitter.com/newsycombinator/status/675420147365060608][Hacker News
+  (twitter)]]
 
 * Databases
 
 * C++
 
+- [[http://www.agner.org/optimize/optimizing_cpp.pdf][Optimizing software in C++]]:
+
 * Layman Science
+
+- [[http://wavewatching.net/2014/03/31/the-church-of-d-wave/][The Church of D-Wave]]: So is D-Wave a quantum computer or not? It
+  appears the verdict is "not", even with the 2X and the [[http://googleresearch.blogspot.co.uk/2015/12/when-can-quantum-annealing-win.html][Google paper]].
+- [[https://www.youtube.com/watch?v%3DqZM9JREjnp4][Intelligence and the Brain]]: Oldish but still very good and
+  relevant. Another high-level introduction into HTM.
 
 * Other
