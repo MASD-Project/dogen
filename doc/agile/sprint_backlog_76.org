@@ -95,6 +95,12 @@ layout seems to be evolving. This story captures that direction.
   tool. However we haven't found a good way of structuring the folders
   that way.
 
+*** COMPLETED Create a blog post on pull request driven development   :story:
+    CLOSED: [2015-12-11 Fri 13:32]
+    CLOCK: [2015-12-11 Fri 12:12]--[2015-12-11 Fri 13:32] =>  1:20
+
+Pen some ideas down on the advantages of the PR process.
+
 *** CANCELLED Remove =is_root_parent_visitable=                       :story:
     CLOSED: [2015-12-08 Tue 22:57]
 

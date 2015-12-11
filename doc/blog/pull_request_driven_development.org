@@ -1,0 +1,100 @@
+#+title: Nerd Food: Pull Request Driven Development
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+Being in this game for the best part of twenty years, I must confess
+that its not often I find something that revolutionises my coding
+ways. I do tend to try a lot of things, but most of them end up
+revealing themselves as fads or are incompatible with my flow. For
+instance, I never managed to get [[https://en.wikipedia.org/wiki/Behavior-driven_development][BDD]] to work for me, try as I might. I
+will keep trying because it sounds really useful, but it hasn't
+clicked just yet.
+
+Having said all of that, these moments of enlightenment do
+occasionally happen, and when they do, nothing beats that
+life-changing feeling. "Pull Request Driven Development" (or PRDD) is
+my latest find. I'll start by confessing that "PRDD" as a name was
+totally made up for this post and hopefully you can see its rather
+tongue in cheek. However, the benefits of this approach are very
+real. In fact, I've been using PRDD for a while now but I just never
+really noticed its presence creeping in. Today, as I introduced a new
+developer to the process, I finally had the eureka moment and saw just
+how brilliant it has been thus far. It also made me realise that some
+people are not aware of this great tool in the developer's arsenal.
+
+But first things first. In order to explain what I mean by PRDD, I
+need to provide a bit of context. Everyone is migrating to git these
+days, even those of us locked behind corporate walls; in our
+particular case, the migration path implied exposure to [[https://en.wikipedia.org/wiki/Stash_(software)][Git Stash]]. For
+those not in the know, picture it as an expensive and somewhat less
+featureful version of [[https://github.com/][GitHub]], but with most of the core functionality
+there. Of course, I'm sure GitHub is not that cheap for enterprises
+either, but hey at least its the tool everyone uses. Anyway -
+grumbling or not - we moved to Stash and all development started to
+revolve around Pull Requests (PRs), raised for each new [[https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow][feature]].
+
+Not long after PRs were introduced, a particularly interesting habit
+started to appear: developers begun opening the PRs earlier and
+earlier during the feature cycle rather than waiting to the very
+end. Taking this approach to the limit, the idea is that when you
+start to work on a new feature, you raise the ticket and the PR
+/before you write any code at all/. In practice - due to Stash's
+anachronisms - you need to push at least one commit, but the general
+notion is valid. This was never mandated anywhere, and there was no
+particular coordination. I guess one possible explanation for this
+behaviour is that one wants to get rid of the paperwork as quickly as
+possible to get to the coding. At any rate, the causes may be obscure
+but the emerging behaviour was not.
+
+When you combine early PRs with the [[https://sethrobertson.github.io/GitBestPractices/][commit early and commit often]]
+approach - which you should be using anyway - the PR starts to become
+a living document; people see your development work as it progresses
+and they start commenting on it and possibly even sending you patches
+/as you go along/. In a way, this is an enabler for a very efficient
+kind of peer programming - particularly if you have a tightly knit
+team - because it gives you maximum parallelism but in a very subtle,
+non-noticeable way. The main author of the PR is coding as she would
+normally be, but whenever there is a lull in development - those
+moments where you'd be browsing the web for five minutes or so - you
+can quickly check for any comments on your PR and react to
+those. Similarly, other developers can carry on doing their own work
+and browse the PRs on their downtime; this allows them to provide
+feedback whenever it is convenient /to them/, and to choose the format
+of the feedback - lengthy or quick, as time permits.
+
+Quick feedback is many a times invaluable in large code bases because
+everyone tends to know their own little corner of the code and only
+very few old hands know how it all hangs together. Thus, seemingly
+trivial one liners such as "have you considered using API xyz instead
+of rolling your own" or "don't forget to do abc when you do that"
+could save you /many/ hours of pain and enable knowledge to be
+transferred organically - something that no number of wiki pages could
+hope to achieve in a million years because its very difficult to find
+these pearls in a sea of uncurated content. And because you committed
+early and often, each commit is very small and very easy to parse in a
+small interval of time, so people are much more willing to review - as
+opposed to that several Kb (or even Mb!) patch that you will have to
+allocate a day or two for. Further: if you [[http://chris.beams.io/posts/git-commit/][take your commit message
+seriously]] - as, again, you should - you will find that the number of
+reviewers will grow rapidly simply because developers are nosy and
+opinionated.
+
+Note that this review process involves no vague meetings and no
+lengthy and unfocused email chains; it is very high-quality because it
+is (or can be) very focused to specific lines of code; it causes no
+unwanted disruptions because you review where and when you choose to
+review; reviewers can provide examples and even fix things themselves
+if they so choose; it is totally inclusive because anyone who wants to
+participate can, but no one is forced to; and it equalises local and
+remote developers because they all have access to the same data
+(modulus some IRL conversations that always take place) - an important
+feature in this world of near-shoring, off-shoring and
+home-working. Most importantly, instead of finding out some
+fundamental errors of approach at the end of an intense period of
+coding, you now have timely feedback. This saves an /enormous/ amount
+of time - an advantage that anyone who has been through lengthy code
+reviews and then spent a week or two reacting to that feedback can
+appreciate.
+
+I am now a believer in PRDD. So much so that whenever I go back to
+work on legacy projects in svn, I find myself cringing all the way to
+the end of the feature. It just feels so nineties.
