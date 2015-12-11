@@ -28,7 +28,9 @@
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/exception.hpp"
 #include "dogen/yarn/types/concept.hpp"
+#include "dogen/yarn/types/visitor.hpp"
 #include "dogen/yarn/types/module.hpp"
 
 namespace dogen {
@@ -56,6 +58,12 @@ inline void elements_traversal(const intermediate_model& m,
 
     for (const auto& pair : m.objects())
         v(pair.second);
+
+    for (const auto& pair : m.exceptions())
+        v(pair.second);
+
+    for (const auto& pair : m.visitors())
+        v(pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -75,6 +83,12 @@ inline void elements_traversal(const intermediate_model& m,
 
     for (auto& pair : m.objects())
         v(pair.second);
+
+    for (auto& pair : m.exceptions())
+        v(pair.second);
+
+    for (auto& pair : m.visitors())
+        v(pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -92,6 +106,12 @@ inline void elements_traversal(intermediate_model& m, TraversalVisitor& v) {
         v(pair.second);
 
     for (auto& pair : m.objects())
+        v(pair.second);
+
+    for (auto& pair : m.exceptions())
+        v(pair.second);
+
+    for (auto& pair : m.visitors())
         v(pair.second);
 }
 /**@}*/

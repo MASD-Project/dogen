@@ -63,8 +63,7 @@ void save(Archive& ar,
     ar << make_nvp("weak_associations", v.weak_associations_);
     ar << make_nvp("is_visitable", v.is_visitable_);
     ar << make_nvp("is_root_parent_visitable", v.is_root_parent_visitable_);
-    ar << make_nvp("visits", v.visits_);
-    ar << make_nvp("visited_by", v.visited_by_);
+    ar << make_nvp("visitable_by", v.visitable_by_);
     ar << make_nvp("object_type", v.object_type_);
     ar << make_nvp("modeled_concepts", v.modeled_concepts_);
     ar << make_nvp("hash_container_keys", v.hash_container_keys_);
@@ -91,8 +90,7 @@ void load(Archive& ar,
     ar >> make_nvp("weak_associations", v.weak_associations_);
     ar >> make_nvp("is_visitable", v.is_visitable_);
     ar >> make_nvp("is_root_parent_visitable", v.is_root_parent_visitable_);
-    ar >> make_nvp("visits", v.visits_);
-    ar >> make_nvp("visited_by", v.visited_by_);
+    ar >> make_nvp("visitable_by", v.visitable_by_);
     ar >> make_nvp("object_type", v.object_type_);
     ar >> make_nvp("modeled_concepts", v.modeled_concepts_);
     ar >> make_nvp("hash_container_keys", v.hash_container_keys_);

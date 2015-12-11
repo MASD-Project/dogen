@@ -18,8 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/visitor_td.hpp"
+
+namespace {
+
+dogen::yarn::name
+create_dogen_yarn_name(const unsigned int position) {
+    return dogen::yarn::name_generator::create(position);
+}
+
+std::list<dogen::yarn::name> create_std_list_dogen_yarn_name(unsigned int position) {
+    std::list<dogen::yarn::name> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_dogen_yarn_name(position + i));
+    }
+    return r;
+}
+
+}
 
 namespace dogen {
 namespace yarn {
@@ -29,6 +47,7 @@ visitor_generator::visitor_generator() : position_(0) { }
 void visitor_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
+    v.visits(create_std_list_dogen_yarn_name(position + 0));
 }
 
 visitor_generator::result_type

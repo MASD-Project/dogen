@@ -32,6 +32,8 @@
 #include "dogen/yarn/serialization/module_ser.hpp"
 #include "dogen/yarn/serialization/object_ser.hpp"
 #include "dogen/yarn/serialization/concept_ser.hpp"
+#include "dogen/yarn/serialization/visitor_ser.hpp"
+#include "dogen/yarn/serialization/exception_ser.hpp"
 #include "dogen/yarn/serialization/primitive_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
@@ -58,6 +60,8 @@ void save(Archive& ar,
     ar << make_nvp("primitives", v.primitives_);
     ar << make_nvp("enumerations", v.enumerations_);
     ar << make_nvp("objects", v.objects_);
+    ar << make_nvp("exceptions", v.exceptions_);
+    ar << make_nvp("visitors", v.visitors_);
     ar << make_nvp("is_target", v.is_target_);
     ar << make_nvp("has_generatable_types", v.has_generatable_types_);
 }
@@ -77,6 +81,8 @@ void load(Archive& ar,
     ar >> make_nvp("primitives", v.primitives_);
     ar >> make_nvp("enumerations", v.enumerations_);
     ar >> make_nvp("objects", v.objects_);
+    ar >> make_nvp("exceptions", v.exceptions_);
+    ar >> make_nvp("visitors", v.visitors_);
     ar >> make_nvp("is_target", v.is_target_);
     ar >> make_nvp("has_generatable_types", v.has_generatable_types_);
 }

@@ -30,6 +30,8 @@
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/types/exception.hpp"
+#include "dogen/yarn/types/visitor.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
 
 namespace dogen {
@@ -68,6 +70,34 @@ public:
 
     const std::forward_list<
         boost::shared_ptr<
+            inclusion_dependencies_provider_interface<yarn::exception>
+            >
+        >&
+    exception_providers() const;
+
+    std::forward_list<
+        boost::shared_ptr<
+            inclusion_dependencies_provider_interface<yarn::exception>
+            >
+        >&
+    exception_providers();
+
+    const std::forward_list<
+        boost::shared_ptr<
+            inclusion_dependencies_provider_interface<yarn::visitor>
+            >
+        >&
+    visitor_providers() const;
+
+    std::forward_list<
+        boost::shared_ptr<
+            inclusion_dependencies_provider_interface<yarn::visitor>
+            >
+        >&
+    visitor_providers();
+
+    const std::forward_list<
+        boost::shared_ptr<
             inclusion_dependencies_provider_interface<yarn::model>
             >
         >&
@@ -91,6 +121,16 @@ private:
             inclusion_dependencies_provider_interface<yarn::enumeration>
             >
     > enumeration_providers_;
+    std::forward_list<
+        boost::shared_ptr<
+            inclusion_dependencies_provider_interface<yarn::exception>
+            >
+    > exception_providers_;
+    std::forward_list<
+        boost::shared_ptr<
+            inclusion_dependencies_provider_interface<yarn::visitor>
+            >
+    > visitor_providers_;
     std::forward_list<
         boost::shared_ptr<
             inclusion_dependencies_provider_interface<yarn::model>

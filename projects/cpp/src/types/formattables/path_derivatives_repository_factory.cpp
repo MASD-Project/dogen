@@ -66,11 +66,13 @@ public:
 
 public:
     using yarn::element_visitor::visit;
-    void visit(const dogen::yarn::object& o) { generate(o.name()); }
-    void visit(const dogen::yarn::enumeration& e) { generate(e.name()); }
-    void visit(const dogen::yarn::primitive& p) { generate(p.name()); }
     void visit(const dogen::yarn::module& m) { generate(m.name()); }
     void visit(const dogen::yarn::concept& c) { generate(c.name()); }
+    void visit(const dogen::yarn::primitive& p) { generate(p.name()); }
+    void visit(const dogen::yarn::enumeration& e) { generate(e.name()); }
+    void visit(const dogen::yarn::object& o) { generate(o.name()); }
+    void visit(const dogen::yarn::exception& e) { generate(e.name()); }
+    void visit(const dogen::yarn::visitor& v) { generate(v.name()); }
 
 public:
     const path_derivatives_repository & result() const { return result_; }

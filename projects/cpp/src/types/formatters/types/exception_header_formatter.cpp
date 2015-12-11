@@ -39,13 +39,13 @@ namespace types {
 namespace {
 
 class provider final : public formattables::
-        inclusion_dependencies_provider_interface<yarn::object> {
+        inclusion_dependencies_provider_interface<yarn::exception> {
 public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
         provide(const formattables::inclusion_dependencies_builder_factory& f,
-        const yarn::object& o) const override;
+        const yarn::exception& o) const override;
 };
 
 std::string provider::formatter_name() const {
@@ -54,7 +54,7 @@ std::string provider::formatter_name() const {
 
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
-    const yarn::object& /*o*/) const {
+    const yarn::exception& /*o*/) const {
     auto builder(f.make());
     builder.add(inclusion_constants::std::string());
     builder.add(inclusion_constants::boost::exception::info());

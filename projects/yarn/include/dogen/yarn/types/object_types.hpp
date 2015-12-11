@@ -37,13 +37,11 @@ namespace yarn {
 enum class object_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     user_defined_service = 1, ///< The service has been defined by the user.
-    visitor = 2, ///< The service is a system generated visitor.
-    user_defined_value_object = 3, ///< Regular value object with no distinguishing features.
-    exception = 4, ///< Value represents an exception type.
-    smart_pointer = 5, ///< Value is a smart pointer.
-    hash_container = 6, ///< Type is a hash-based container.
-    sequence_container = 7, ///< Type is a sequence container.
-    ordered_container = 8 ///< Type is a ordered container.
+    user_defined_value_object = 2, ///< Regular value object with no distinguishing features.
+    smart_pointer = 3, ///< Value is a smart pointer.
+    hash_container = 4, ///< Type is a hash-based container.
+    sequence_container = 5, ///< Type is a sequence container.
+    ordered_container = 6 ///< Type is a ordered container.
 };
 
 } }

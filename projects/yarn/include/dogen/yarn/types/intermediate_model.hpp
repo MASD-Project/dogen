@@ -33,7 +33,9 @@
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/concept.hpp"
+#include "dogen/yarn/types/visitor.hpp"
 #include "dogen/yarn/hash/name_hash.hpp"
+#include "dogen/yarn/types/exception.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
@@ -68,6 +70,8 @@ public:
         const std::unordered_map<std::string, dogen::yarn::primitive>& primitives,
         const std::unordered_map<std::string, dogen::yarn::enumeration>& enumerations,
         const std::unordered_map<std::string, dogen::yarn::object>& objects,
+        const std::unordered_map<std::string, dogen::yarn::exception>& exceptions,
+        const std::unordered_map<std::string, dogen::yarn::visitor>& visitors,
         const bool is_target,
         const bool has_generatable_types);
 
@@ -189,6 +193,26 @@ public:
     /**@}*/
 
     /**
+     * @brief All exceptions in this model.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, dogen::yarn::exception>& exceptions() const;
+    std::unordered_map<std::string, dogen::yarn::exception>& exceptions();
+    void exceptions(const std::unordered_map<std::string, dogen::yarn::exception>& v);
+    void exceptions(const std::unordered_map<std::string, dogen::yarn::exception>&& v);
+    /**@}*/
+
+    /**
+     * @brief All visitors in this model.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, dogen::yarn::visitor>& visitors() const;
+    std::unordered_map<std::string, dogen::yarn::visitor>& visitors();
+    void visitors(const std::unordered_map<std::string, dogen::yarn::visitor>& v);
+    void visitors(const std::unordered_map<std::string, dogen::yarn::visitor>&& v);
+    /**@}*/
+
+    /**
      * @brief If true, this intermediate model is the target model.
      */
     /**@{*/
@@ -226,6 +250,8 @@ private:
     std::unordered_map<std::string, dogen::yarn::primitive> primitives_;
     std::unordered_map<std::string, dogen::yarn::enumeration> enumerations_;
     std::unordered_map<std::string, dogen::yarn::object> objects_;
+    std::unordered_map<std::string, dogen::yarn::exception> exceptions_;
+    std::unordered_map<std::string, dogen::yarn::visitor> visitors_;
     bool is_target_;
     bool has_generatable_types_;
 };

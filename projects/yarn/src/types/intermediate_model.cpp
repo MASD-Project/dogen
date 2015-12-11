@@ -41,6 +41,8 @@ intermediate_model::intermediate_model(
     const std::unordered_map<std::string, dogen::yarn::primitive>& primitives,
     const std::unordered_map<std::string, dogen::yarn::enumeration>& enumerations,
     const std::unordered_map<std::string, dogen::yarn::object>& objects,
+    const std::unordered_map<std::string, dogen::yarn::exception>& exceptions,
+    const std::unordered_map<std::string, dogen::yarn::visitor>& visitors,
     const bool is_target,
     const bool has_generatable_types)
     : name_(name),
@@ -54,6 +56,8 @@ intermediate_model::intermediate_model(
       primitives_(primitives),
       enumerations_(enumerations),
       objects_(objects),
+      exceptions_(exceptions),
+      visitors_(visitors),
       is_target_(is_target),
       has_generatable_types_(has_generatable_types) { }
 
@@ -70,6 +74,8 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
     swap(primitives_, other.primitives_);
     swap(enumerations_, other.enumerations_);
     swap(objects_, other.objects_);
+    swap(exceptions_, other.exceptions_);
+    swap(visitors_, other.visitors_);
     swap(is_target_, other.is_target_);
     swap(has_generatable_types_, other.has_generatable_types_);
 }
@@ -86,6 +92,8 @@ bool intermediate_model::operator==(const intermediate_model& rhs) const {
         primitives_ == rhs.primitives_ &&
         enumerations_ == rhs.enumerations_ &&
         objects_ == rhs.objects_ &&
+        exceptions_ == rhs.exceptions_ &&
+        visitors_ == rhs.visitors_ &&
         is_target_ == rhs.is_target_ &&
         has_generatable_types_ == rhs.has_generatable_types_;
 }
@@ -254,6 +262,38 @@ void intermediate_model::objects(const std::unordered_map<std::string, dogen::ya
 
 void intermediate_model::objects(const std::unordered_map<std::string, dogen::yarn::object>&& v) {
     objects_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::yarn::exception>& intermediate_model::exceptions() const {
+    return exceptions_;
+}
+
+std::unordered_map<std::string, dogen::yarn::exception>& intermediate_model::exceptions() {
+    return exceptions_;
+}
+
+void intermediate_model::exceptions(const std::unordered_map<std::string, dogen::yarn::exception>& v) {
+    exceptions_ = v;
+}
+
+void intermediate_model::exceptions(const std::unordered_map<std::string, dogen::yarn::exception>&& v) {
+    exceptions_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::yarn::visitor>& intermediate_model::visitors() const {
+    return visitors_;
+}
+
+std::unordered_map<std::string, dogen::yarn::visitor>& intermediate_model::visitors() {
+    return visitors_;
+}
+
+void intermediate_model::visitors(const std::unordered_map<std::string, dogen::yarn::visitor>& v) {
+    visitors_ = v;
+}
+
+void intermediate_model::visitors(const std::unordered_map<std::string, dogen::yarn::visitor>&& v) {
+    visitors_ = std::move(v);
 }
 
 bool intermediate_model::is_target() const {

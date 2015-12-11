@@ -55,28 +55,23 @@ public:
     explicit generator(const transformer& t) : transformer_(t) { }
 
 private:
-    void add(std::forward_list<std::shared_ptr<formattables::formattable> > f) {
-        result_.splice_after(result_.before_begin(), f);
-    }
-
-    template<typename Generatable>
-    bool ignore(const Generatable& g) const {
-        return g.generation_type() == yarn::generation_types::no_generation;
-    }
-
     template<typename Transformable>
     void transform(const Transformable& t) {
-        if (!ignore(t))
-            add(transformer_.transform(t));
+        if (t.generation_type() != yarn::generation_types::no_generation) {
+            auto f(transformer_.transform(t));
+            result_.splice_after(result_.before_begin(), f);
+        }
     }
 
 public:
     using yarn::element_visitor::visit;
-    void visit(const dogen::yarn::object& o) { transform(o); }
-    void visit(const dogen::yarn::enumeration& e) { transform(e); }
-    void visit(const dogen::yarn::primitive& p) { transform(p); }
     void visit(const dogen::yarn::module& m) { transform(m); }
     void visit(const dogen::yarn::concept& c) { transform(c); }
+    void visit(const dogen::yarn::primitive& p) { transform(p); }
+    void visit(const dogen::yarn::enumeration& e) { transform(e); }
+    void visit(const dogen::yarn::object& o) { transform(o); }
+    void visit(const dogen::yarn::exception& e) { transform(e); }
+    void visit(const dogen::yarn::visitor& v) { transform(v); }
 
 public:
     const std::forward_list<std::shared_ptr<formattables::formattable> >&

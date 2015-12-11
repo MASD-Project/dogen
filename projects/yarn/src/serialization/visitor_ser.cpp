@@ -19,6 +19,7 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -27,6 +28,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/visitor_ser.hpp"
 
@@ -42,6 +44,8 @@ void save(Archive& ar,
     const dogen::yarn::visitor& v,
     const unsigned int /*version*/) {
     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
+
+    ar << make_nvp("visits", v.visits_);
 }
 
 template<typename Archive>
@@ -49,6 +53,8 @@ void load(Archive& ar,
     dogen::yarn::visitor& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
+
+    ar >> make_nvp("visits", v.visits_);
 }
 
 } }

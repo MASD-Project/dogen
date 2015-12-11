@@ -25,8 +25,10 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
 #include <algorithm>
+#include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/serialization/visitor_fwd_ser.hpp"
 
@@ -50,7 +52,8 @@ public:
         const dogen::yarn::origin_types origin_type,
         const std::string& original_model_name,
         const boost::optional<dogen::yarn::name>& contained_by,
-        const bool in_global_module);
+        const bool in_global_module,
+        const std::list<dogen::yarn::name>& visits);
 
 private:
     template<typename Archive>
@@ -80,6 +83,17 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
+    /**
+     * @brief Elements that are visitable by the visitor.
+     */
+    /**@{*/
+    const std::list<dogen::yarn::name>& visits() const;
+    std::list<dogen::yarn::name>& visits();
+    void visits(const std::list<dogen::yarn::name>& v);
+    void visits(const std::list<dogen::yarn::name>&& v);
+    /**@}*/
+
+public:
     bool operator==(const visitor& rhs) const;
     bool operator!=(const visitor& rhs) const {
         return !this->operator==(rhs);
@@ -92,6 +106,8 @@ public:
     void swap(visitor& other) noexcept;
     visitor& operator=(visitor other);
 
+private:
+    std::list<dogen::yarn::name> visits_;
 };
 
 } }

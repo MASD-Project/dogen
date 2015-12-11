@@ -132,22 +132,6 @@ inclusion_dependencies_factory::inclusion_dependencies_factory(
     : factory_(f), provider_container_(c) {}
 
 std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const yarn::object& o) const {
-    return generate(factory_, provider_container_.object_providers(), o);
-}
-
-std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const yarn::enumeration& e) const {
-    return generate(factory_, provider_container_.enumeration_providers(), e);
-}
-
-std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const yarn::primitive& /*p*/) const {
-    std::unordered_map<std::string, std::list<std::string> > r;
-    return r;
-}
-
-std::unordered_map<std::string, std::list<std::string> >
 inclusion_dependencies_factory::make(const yarn::module& /*m*/) const {
     std::unordered_map<std::string, std::list<std::string> > r;
     return r;
@@ -157,6 +141,32 @@ std::unordered_map<std::string, std::list<std::string> >
 inclusion_dependencies_factory::make(const yarn::concept& /*c*/) const {
     std::unordered_map<std::string, std::list<std::string> > r;
     return r;
+}
+
+std::unordered_map<std::string, std::list<std::string> >
+inclusion_dependencies_factory::make(const yarn::primitive& /*p*/) const {
+    std::unordered_map<std::string, std::list<std::string> > r;
+    return r;
+}
+
+std::unordered_map<std::string, std::list<std::string> >
+inclusion_dependencies_factory::make(const yarn::enumeration& e) const {
+    return generate(factory_, provider_container_.enumeration_providers(), e);
+}
+
+std::unordered_map<std::string, std::list<std::string> >
+inclusion_dependencies_factory::make(const yarn::object& o) const {
+    return generate(factory_, provider_container_.object_providers(), o);
+}
+
+std::unordered_map<std::string, std::list<std::string> >
+inclusion_dependencies_factory::make(const yarn::exception& e) const {
+    return generate(factory_, provider_container_.exception_providers(), e);
+}
+
+std::unordered_map<std::string, std::list<std::string> >
+inclusion_dependencies_factory::make(const yarn::visitor& v) const {
+    return generate(factory_, provider_container_.visitor_providers(), v);
 }
 
 std::unordered_map<std::string, std::list<std::string> >

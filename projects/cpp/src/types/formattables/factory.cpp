@@ -345,6 +345,15 @@ make_includers(
 
             const auto is_types(boost::starts_with(fn, "cpp.types."));
             if (!is_types) {
+                if (is<yarn::visitor>(m, n))
+                    continue;
+
+                if (is<yarn::exception>(m, n))
+                    continue;
+
+                if (is<yarn::module>(m, n))
+                    continue;
+
                 const auto j(m.elements().find(n.qualified()));
                 if (j  != m.elements().end() && is<yarn::object>(j->second)) {
                     const auto& o(convert<yarn::object>(*j->second));
@@ -353,9 +362,6 @@ make_includers(
                     if (ot != object_types::user_defined_value_object)
                         continue;
                 }
-
-                if (is<yarn::module>(m, n))
-                    continue;
             } else {
                 const auto i(m.elements().find(n.qualified()));
                 if (i != m.elements().end()) {
@@ -365,7 +371,7 @@ make_includers(
                 }
             }
 
-            if ( n == registrar_n && !boost::contains(fn, "serialization"))
+            if (n == registrar_n && !boost::contains(fn, "serialization"))
                 continue;
 
             const auto id(pd.inclusion_directive());

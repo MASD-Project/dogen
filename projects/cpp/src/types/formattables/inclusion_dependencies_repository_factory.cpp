@@ -86,11 +86,13 @@ private:
 
 public:
     using yarn::element_visitor::visit;
-    void visit(const dogen::yarn::object& o) { generate(o); }
-    void visit(const dogen::yarn::enumeration& e) { generate(e); }
-    void visit(const dogen::yarn::primitive& p) { generate(p); }
     void visit(const dogen::yarn::module& m) { generate(m); }
     void visit(const dogen::yarn::concept& c) { generate(c); }
+    void visit(const dogen::yarn::primitive& p) { generate(p); }
+    void visit(const dogen::yarn::enumeration& e) { generate(e); }
+    void visit(const dogen::yarn::object& o) { generate(o); }
+    void visit(const dogen::yarn::exception& e) { generate(e); }
+    void visit(const dogen::yarn::visitor& v) { generate(v); }
 
 public:
     const inclusion_dependencies_repository& result() const { return result_; }

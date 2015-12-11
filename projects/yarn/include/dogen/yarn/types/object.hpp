@@ -77,8 +77,7 @@ public:
         const std::list<dogen::yarn::name>& weak_associations,
         const bool is_visitable,
         const bool is_root_parent_visitable,
-        const std::list<dogen::yarn::name>& visits,
-        const std::list<dogen::yarn::name>& visited_by,
+        const std::list<dogen::yarn::name>& visitable_by,
         const dogen::yarn::object_types object_type,
         const std::list<dogen::yarn::name>& modeled_concepts,
         const std::list<dogen::yarn::name>& hash_container_keys);
@@ -264,23 +263,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Elements that are visited by the visitor.
-     */
-    /**@{*/
-    const std::list<dogen::yarn::name>& visits() const;
-    std::list<dogen::yarn::name>& visits();
-    void visits(const std::list<dogen::yarn::name>& v);
-    void visits(const std::list<dogen::yarn::name>&& v);
-    /**@}*/
-
-    /**
      * @brief Elements that visit current type.
      */
     /**@{*/
-    const std::list<dogen::yarn::name>& visited_by() const;
-    std::list<dogen::yarn::name>& visited_by();
-    void visited_by(const std::list<dogen::yarn::name>& v);
-    void visited_by(const std::list<dogen::yarn::name>&& v);
+    const std::list<dogen::yarn::name>& visitable_by() const;
+    std::list<dogen::yarn::name>& visitable_by();
+    void visitable_by(const std::list<dogen::yarn::name>& v);
+    void visitable_by(const std::list<dogen::yarn::name>&& v);
     /**@}*/
 
     /**
@@ -340,8 +329,7 @@ private:
     std::list<dogen::yarn::name> weak_associations_;
     bool is_visitable_;
     bool is_root_parent_visitable_;
-    std::list<dogen::yarn::name> visits_;
-    std::list<dogen::yarn::name> visited_by_;
+    std::list<dogen::yarn::name> visitable_by_;
     dogen::yarn::object_types object_type_;
     std::list<dogen::yarn::name> modeled_concepts_;
     std::list<dogen::yarn::name> hash_container_keys_;

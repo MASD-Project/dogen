@@ -52,24 +52,6 @@ public:
         const inclusion_dependencies_builder_factory& f, const container& c);
 public:
     /**
-     * @brief Makes inclusion dependencies for an object.
-     */
-    std::unordered_map<std::string, std::list<std::string> >
-    make(const yarn::object& o) const;
-
-    /**
-     * @brief Makes inclusion dependencies for an enumeration.
-     */
-    std::unordered_map<std::string, std::list<std::string> >
-    make(const yarn::enumeration& e) const;
-
-    /**
-     * @brief Makes inclusion dependencies for a primitive.
-     */
-    std::unordered_map<std::string, std::list<std::string> >
-    make(const yarn::primitive& p) const;
-
-    /**
      * @brief Makes inclusion dependencies for a module.
      */
     std::unordered_map<std::string, std::list<std::string> >
@@ -80,6 +62,36 @@ public:
      */
     std::unordered_map<std::string, std::list<std::string> >
     make(const yarn::concept& c) const;
+
+    /**
+     * @brief Makes inclusion dependencies for a primitive.
+     */
+    std::unordered_map<std::string, std::list<std::string> >
+    make(const yarn::primitive& p) const;
+
+    /**
+     * @brief Makes inclusion dependencies for an enumeration.
+     */
+    std::unordered_map<std::string, std::list<std::string> >
+    make(const yarn::enumeration& e) const;
+
+    /**
+     * @brief Makes inclusion dependencies for an object.
+     */
+    std::unordered_map<std::string, std::list<std::string> >
+    make(const yarn::object& o) const;
+
+    /**
+     * @brief Makes inclusion dependencies for an exception.
+     */
+    std::unordered_map<std::string, std::list<std::string> >
+    make(const yarn::exception& e) const;
+
+    /**
+     * @brief Makes inclusion dependencies for a visitor.
+     */
+    std::unordered_map<std::string, std::list<std::string> >
+    make(const yarn::visitor& v) const;
 
     /**
      * @brief Makes inclusion dependencies for a model.

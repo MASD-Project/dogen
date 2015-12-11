@@ -101,9 +101,9 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     for (auto& pair : m.objects()) {
         const auto& n(pair.second.name());
         if (factory.is_type_name_n(1, n)) {
-            auto& ao(pair.second);
+            auto& o(pair.second);
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
-            ao.is_visitable(true);
+            o.is_visitable(true);
         }
     }
     BOOST_LOG_SEV(lg, debug) << "before: " << m;
@@ -112,30 +112,23 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     i.inject(m);
     BOOST_LOG_SEV(lg, debug) << "after: " << m;
 
-    BOOST_CHECK(m.objects().size() == 3);
-    bool type_one(false), visitor(false);
+    BOOST_CHECK(m.objects().size() == 2);
+    bool type_one(false);
     for (const auto& pair : m.objects()) {
         const auto& n(pair.second.name());
         if (factory.is_type_name_n(1, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
             type_one = true;
-        } else if (factory.is_type_name_n_visitor(1, n)) {
-            visitor = true;
-            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
-
-            const auto& o(pair.second);
-            BOOST_CHECK(o.object_type() == object_types::visitor);
-            BOOST_CHECK(!o.is_visitable());
-            BOOST_CHECK(!o.is_immutable());
-            BOOST_CHECK(o.parents().empty());
-            BOOST_CHECK(o.root_parents().empty());
-            BOOST_CHECK(o.modeled_concepts().empty());
-            BOOST_CHECK(o.leaves().empty());
         }
     }
-
     BOOST_CHECK(type_one);
-    BOOST_CHECK(visitor);
+
+    BOOST_REQUIRE(m.visitors().size() == 1);
+    const auto v(m.visitors().begin()->second);
+    BOOST_LOG_SEV(lg, debug) << "found visitor: " << v.name().qualified();
+    BOOST_CHECK(factory.is_type_name_n_visitor(1, v.name()));
+    BOOST_REQUIRE(v.visits().size() == 1);
+    BOOST_CHECK(factory.is_type_name_n(0, v.visits().front()));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

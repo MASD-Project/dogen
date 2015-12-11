@@ -23,6 +23,8 @@
 #include "dogen/yarn/test_data/module_td.hpp"
 #include "dogen/yarn/test_data/object_td.hpp"
 #include "dogen/yarn/test_data/concept_td.hpp"
+#include "dogen/yarn/test_data/visitor_td.hpp"
+#include "dogen/yarn/test_data/exception_td.hpp"
 #include "dogen/yarn/test_data/primitive_td.hpp"
 #include "dogen/yarn/test_data/enumeration_td.hpp"
 #include "dogen/yarn/test_data/origin_types_td.hpp"
@@ -133,6 +135,32 @@ std::unordered_map<std::string, dogen::yarn::object> create_std_unordered_map_st
     return r;
 }
 
+dogen::yarn::exception
+create_dogen_yarn_exception(const unsigned int position) {
+    return dogen::yarn::exception_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::yarn::exception> create_std_unordered_map_std_string_dogen_yarn_exception(unsigned int position) {
+    std::unordered_map<std::string, dogen::yarn::exception> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_exception(position + i)));
+    }
+    return r;
+}
+
+dogen::yarn::visitor
+create_dogen_yarn_visitor(const unsigned int position) {
+    return dogen::yarn::visitor_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::yarn::visitor> create_std_unordered_map_std_string_dogen_yarn_visitor(unsigned int position) {
+    std::unordered_map<std::string, dogen::yarn::visitor> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_visitor(position + i)));
+    }
+    return r;
+}
+
 bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
@@ -157,8 +185,10 @@ populate(const unsigned int position, result_type& v) {
     v.primitives(create_std_unordered_map_std_string_dogen_yarn_primitive(position + 8));
     v.enumerations(create_std_unordered_map_std_string_dogen_yarn_enumeration(position + 9));
     v.objects(create_std_unordered_map_std_string_dogen_yarn_object(position + 10));
-    v.is_target(create_bool(position + 11));
-    v.has_generatable_types(create_bool(position + 12));
+    v.exceptions(create_std_unordered_map_std_string_dogen_yarn_exception(position + 11));
+    v.visitors(create_std_unordered_map_std_string_dogen_yarn_visitor(position + 12));
+    v.is_target(create_bool(position + 13));
+    v.has_generatable_types(create_bool(position + 14));
 }
 
 intermediate_model_generator::result_type

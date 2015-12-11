@@ -408,12 +408,12 @@ to_namespace_info(const yarn::module& m) const {
 }
 
 std::shared_ptr<exception_info>
-transformer::to_exception_info(const yarn::object& o) const {
+transformer::to_exception_info(const yarn::exception& e) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exception: "
-                             << o.name().qualified();
+                             << e.name().qualified();
 
     auto r(std::make_shared<exception_info>());
-    populate_entity_properties(o.name(), o.documentation(), *r);
+    populate_entity_properties(e.name(), e.documentation(), *r);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed exception.";
     return r;
@@ -502,21 +502,21 @@ transformer::to_class_info(const yarn::object& o) const {
 }
 
 std::shared_ptr<visitor_info>
-transformer::to_visitor_info(const yarn::object& o) const {
+transformer::to_visitor_info(const yarn::visitor& v) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming visitor: "
-                             << o.name().qualified();
+                             << v.name().qualified();
 
     auto r(std::make_shared<visitor_info>());
-    populate_entity_properties(o.name(), o.documentation(), *r);
+    populate_entity_properties(v.name(), v.documentation(), *r);
 
-    if (o.visits().empty()) {
-        const auto& qn(o.name().qualified());
+    if (v.visits().empty()) {
+        const auto& qn(v.name().qualified());
         BOOST_LOG_SEV(lg, error) << no_visitees << qn;
         BOOST_THROW_EXCEPTION(transformation_error(no_visitees + qn));
     }
 
     name_builder b;
-    for (const auto n : o.visits()) {
+    for (const auto n : v.visits()) {
         cpp::formattables::visited_type_info vti;
         vti.qualified_name(b.qualified_name(model_, n));
         vti.name(n.simple());
@@ -531,8 +531,22 @@ transformer::to_visitor_info(const yarn::object& o) const {
 std::shared_ptr<forward_declarations_info> transformer::
 to_forward_declarations_info(const yarn::object& o) const {
     auto r(std::make_shared<forward_declarations_info>());
-    r->is_exception(o.object_type() == yarn::object_types::exception);
     populate_entity_properties(o.name(), o.documentation(), *r);
+    return r;
+}
+
+std::shared_ptr<forward_declarations_info> transformer::
+to_forward_declarations_info(const yarn::visitor& v) const {
+    auto r(std::make_shared<forward_declarations_info>());
+    populate_entity_properties(v.name(), v.documentation(), *r);
+    return r;
+}
+
+std::shared_ptr<forward_declarations_info> transformer::
+to_forward_declarations_info(const yarn::exception& e) const {
+    auto r(std::make_shared<forward_declarations_info>());
+    r->is_exception(true);
+    populate_entity_properties(e.name(), e.documentation(), *r);
     return r;
 }
 
@@ -587,12 +601,6 @@ transform(const yarn::object& o) const {
     case yarn::object_types::user_defined_service:
         r.push_front(to_class_info(o));
         break;
-    case yarn::object_types::visitor:
-        r.push_front(to_visitor_info(o));
-        break;
-    case yarn::object_types::exception:
-        r.push_front(to_exception_info(o));
-        break;
     default: {
         const auto qn(o.name().qualified());
         BOOST_LOG_SEV(lg, error) << unsupported_object_type << o.object_type()
@@ -603,6 +611,26 @@ transform(const yarn::object& o) const {
 
     for (const auto& i : r)
         BOOST_LOG_SEV(lg, debug) << "Transformed object: " << *i;
+    return r;
+}
+
+std::forward_list<std::shared_ptr<formattable> >
+transformer::transform(const yarn::exception& e) const {
+    std::forward_list<std::shared_ptr<formattable> > r;
+    r.push_front(to_exception_info(e));
+    r.push_front(to_forward_declarations_info(e));
+    return r;
+}
+
+std::forward_list<std::shared_ptr<formattable> >
+transformer::transform(const yarn::visitor& v) const {
+    std::forward_list<std::shared_ptr<formattable> > r;
+    r.push_front(to_visitor_info(v));
+
+    // FIXME: disable visitor forward declarations for now because we
+    // are generating them for serialisation, where it does not make
+    // any sense.
+    // r.push_front(to_forward_declarations_info(v));
     return r;
 }
 

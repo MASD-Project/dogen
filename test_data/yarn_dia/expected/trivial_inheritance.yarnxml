@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="13">
-<entity class_id="8" tracking_level="0" version="0">
-	<name class_id="9" tracking_level="0" version="0">
+<entity class_id="10" tracking_level="0" version="0">
+	<name class_id="11" tracking_level="0" version="0">
 		<simple>trivial_inheritance</simple>
 		<qualified>&lt;trivial_inheritance&gt;</qualified>
-		<location class_id="10" tracking_level="0" version="0">
-			<external_module_path class_id="11" tracking_level="0" version="0">
+		<location class_id="12" tracking_level="0" version="0">
+			<external_module_path class_id="13" tracking_level="0" version="0">
 				<count>0</count>
 				<item_version>0</item_version>
 			</external_module_path>
@@ -24,27 +24,27 @@
 	<origin_type>1</origin_type>
 	<original_model_name>trivial_inheritance</original_model_name>
 	<generation_type>0</generation_type>
-	<references class_id="12" tracking_level="0" version="0">
+	<references class_id="14" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</references>
-	<leaves class_id="13" tracking_level="0" version="0">
+	<leaves class_id="15" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
-	<modules class_id="14" tracking_level="0" version="0">
+	<modules class_id="16" tracking_level="0" version="0">
 		<count>5</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="15" tracking_level="0" version="0">
+		<item class_id="17" tracking_level="0" version="0">
 			<first>&lt;trivial_inheritance&gt;&lt;pkg4&gt;</first>
-			<second class_id="5" tracking_level="1" version="0" object_id="_0">
-				<element class_id="16" tracking_level="0" version="0">
+			<second class_id="6" tracking_level="1" version="0" object_id="_0">
+				<element class_id="18" tracking_level="0" version="0">
 					<documentation></documentation>
-					<extensions class_id="17" tracking_level="0" version="0">
-						<fields class_id="18" tracking_level="0" version="0">
+					<extensions class_id="19" tracking_level="0" version="0">
+						<fields class_id="20" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
@@ -72,12 +72,12 @@
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<original_model_name></original_model_name>
-					<contained_by class_id="19" tracking_level="0" version="0">
+					<contained_by class_id="21" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<members class_id="20" tracking_level="0" version="0">
+				<members class_id="22" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
@@ -98,12 +98,12 @@ in the context of inheritance.
 							<count>3</count>
 							<bucket_count>5</bucket_count>
 							<item_version>0</item_version>
-							<item class_id="21" tracking_level="0" version="0">
+							<item class_id="23" tracking_level="0" version="0">
 								<first>dia.comment</first>
-								<second class_id="22" tracking_level="0" version="0">
-									<value class_id="23" tracking_level="0" version="1">
+								<second class_id="24" tracking_level="0" version="0">
+									<value class_id="25" tracking_level="0" version="1">
 										<px class_id="1" tracking_level="1" version="0" object_id="_2">
-											<value class_id="24" tracking_level="0" version="0"></value>
+											<value class_id="26" tracking_level="0" version="0"></value>
 											<content>true</content>
 										</px>
 									</value>
@@ -302,28 +302,28 @@ in the context of inheritance.
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="25" tracking_level="0" version="0">
+	<concepts class_id="27" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="26" tracking_level="0" version="0">
+	<primitives class_id="28" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="27" tracking_level="0" version="0">
+	<enumerations class_id="29" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="28" tracking_level="0" version="0">
+	<objects class_id="30" tracking_level="0" version="0">
 		<count>23</count>
 		<bucket_count>47</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="29" tracking_level="0" version="0">
+		<item class_id="31" tracking_level="0" version="0">
 			<first>&lt;trivial_inheritance&gt;&lt;move_ctor_empty_descendant&gt;</first>
-			<second class_id="6" tracking_level="1" version="0" object_id="_8">
+			<second class_id="7" tracking_level="1" version="0" object_id="_8">
 				<element>
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
@@ -361,7 +361,7 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties class_id="30" tracking_level="0" version="0">
+				<all_properties class_id="32" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_properties>
@@ -369,7 +369,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</local_properties>
-				<inherited_properties class_id="31" tracking_level="0" version="0">
+				<inherited_properties class_id="33" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -420,15 +420,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -486,7 +482,7 @@ in the context of inheritance.
 				<local_properties>
 					<count>1</count>
 					<item_version>0</item_version>
-					<item class_id="32" tracking_level="0" version="0">
+					<item class_id="34" tracking_level="0" version="0">
 						<documentation></documentation>
 						<extensions>
 							<fields>
@@ -496,7 +492,7 @@ in the context of inheritance.
 							</fields>
 						</extensions>
 						<name>prop_1</name>
-						<type class_id="33" tracking_level="0" version="0">
+						<type class_id="35" tracking_level="0" version="0">
 							<type>
 								<simple></simple>
 								<qualified></qualified>
@@ -515,7 +511,7 @@ in the context of inheritance.
 									</internal_module_path>
 								</location>
 							</type>
-							<children class_id="34" tracking_level="0" version="0">
+							<children class_id="36" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -578,15 +574,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -676,15 +668,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>1</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -814,15 +802,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -953,15 +937,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1051,15 +1031,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1189,15 +1165,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1306,15 +1278,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1462,15 +1430,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1599,15 +1563,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1757,15 +1717,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1874,15 +1830,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2011,15 +1963,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2167,15 +2115,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2265,14 +2209,10 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
+				</visitable_by>
 				<object_type>1</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -2421,15 +2361,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2578,15 +2514,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2676,14 +2608,10 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
+				</visitable_by>
 				<object_type>1</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -2832,15 +2760,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2949,15 +2873,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3066,15 +2986,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3222,15 +3138,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3380,15 +3292,11 @@ in the context of inheritance.
 				</weak_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
-				<visits>
+				<visitable_by>
 					<count>0</count>
 					<item_version>0</item_version>
-				</visits>
-				<visited_by>
-					<count>0</count>
-					<item_version>0</item_version>
-				</visited_by>
-				<object_type>3</object_type>
+				</visitable_by>
+				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3400,6 +3308,16 @@ in the context of inheritance.
 			</second>
 		</item>
 	</objects>
+	<exceptions class_id="37" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>1</bucket_count>
+		<item_version>0</item_version>
+	</exceptions>
+	<visitors class_id="38" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>1</bucket_count>
+		<item_version>0</item_version>
+	</visitors>
 	<is_target>1</is_target>
 	<has_generatable_types>0</has_generatable_types>
 </entity>

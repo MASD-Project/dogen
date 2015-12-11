@@ -260,7 +260,7 @@ public:
     /**
      * @brief Create an exception.
      */
-    object make_exception(const unsigned int i, const name& model_name,
+    exception make_exception(const unsigned int i, const name& model_name,
         const unsigned int module_n = 0) const;
 
     /**

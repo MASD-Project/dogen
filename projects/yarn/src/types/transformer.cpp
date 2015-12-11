@@ -58,11 +58,13 @@ private:
     }
 
 public:
-    void operator()(const dogen::yarn::object& o) { generate(o); }
-    void operator()(const dogen::yarn::enumeration& e) { generate(e); }
-    void operator()(const dogen::yarn::primitive& p) { generate(p); }
     void operator()(const dogen::yarn::module& m) { generate(m); }
     void operator()(const dogen::yarn::concept& c) { generate(c); }
+    void operator()(const dogen::yarn::primitive& p) { generate(p); }
+    void operator()(const dogen::yarn::enumeration& e) { generate(e); }
+    void operator()(const dogen::yarn::object& o) { generate(o); }
+    void operator()(const dogen::yarn::exception& e) { generate(e); }
+    void operator()(const dogen::yarn::visitor& v) { generate(v); }
 
 public:
     const model& result() const { return result_; }

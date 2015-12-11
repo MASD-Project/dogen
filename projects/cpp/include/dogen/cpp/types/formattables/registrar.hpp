@@ -29,6 +29,8 @@
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/types/exception.hpp"
+#include "dogen/yarn/types/visitor.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/cpp/types/formattables/container.hpp"
 
@@ -46,6 +48,14 @@ public:
         > p);
     void register_provider(boost::shared_ptr<
         inclusion_dependencies_provider_interface<yarn::enumeration>
+        > p);
+
+    void register_provider(boost::shared_ptr<
+        inclusion_dependencies_provider_interface<yarn::exception>
+        > p);
+
+    void register_provider(boost::shared_ptr<
+        inclusion_dependencies_provider_interface<yarn::visitor>
         > p);
 
     void register_provider(boost::shared_ptr<

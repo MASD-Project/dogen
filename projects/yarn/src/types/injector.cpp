@@ -73,25 +73,17 @@ inline void add_containing_module_to_non_contained_entities(
     }
 }
 
-class injector::context {
-public:
-    context(yarn::intermediate_model& m) : model_(m) { }
-
-public:
-    yarn::intermediate_model& model() { return model_; }
-
-private:
-    yarn::intermediate_model& model_;
-};
-
-bool injector::insert(const object& o) {
-    const auto i(context_->model().objects().insert(
-            std::make_pair(o.name().qualified(), o)));
-
-    return i.second;
+module injector::create_global_module() const {
+    name qn;
+    module r;
+    r.name(qn);
+    r.generation_type(generation_types::no_generation);
+    r.origin_type(origin_types::system);
+    r.documentation(global_module_doc);
+    return r;
 }
 
-object injector::
+visitor injector::
 create_visitor(const object& o, const std::list<name>& leaves) const {
     name_builder b;
     b.simple_name(o.name().simple() + "_" + visitor_name);
@@ -109,12 +101,10 @@ create_visitor(const object& o, const std::list<name>& leaves) const {
     const auto n(b.build());
     BOOST_LOG_SEV(lg, debug) << "Creating visitor: " << n.qualified();
 
-    object r;
+    visitor r;
     r.name(n);
-    r.is_final(true);
     r.generation_type(o.generation_type());
     r.origin_type(origin_types::system);
-    r.object_type(object_types::visitor);
     r.documentation(visitor_doc + o.name().simple());
 
     for (const auto& l : leaves)
@@ -124,29 +114,29 @@ create_visitor(const object& o, const std::list<name>& leaves) const {
     return r;
 }
 
-void injector::inject_visited_by(object& root, const std::list<name>& leaves,
-    const name& visitor) const {
+void injector::inject_visitable_by(object& root, const std::list<name>& leaves,
+    const name& visitor, intermediate_model& m) const {
 
-    root.visited_by().push_back(visitor);
+    root.visitable_by().push_back(visitor);
 
     for (const auto& l : leaves) {
-        auto i(context_->model().objects().find(l.qualified()));
-        if (i == context_->model().objects().end()) {
+        auto i(m.objects().find(l.qualified()));
+        if (i == m.objects().end()) {
             const auto qn(l.qualified());
             BOOST_LOG_SEV(lg, error) << leaf_not_found << qn;
             BOOST_THROW_EXCEPTION(injection_error(leaf_not_found + qn));
         }
 
         auto& leaf(i->second);
-        leaf.visited_by().push_back(visitor);
+        leaf.visitable_by().push_back(visitor);
     }
 }
 
-void injector::inject_visitors() {
+void injector::inject_visitors(intermediate_model& m) {
     BOOST_LOG_SEV(lg, debug) << "Injecting visitors.";
 
-    std::list<object> visitors;
-    for (auto& pair : context_->model().objects()) {
+    std::list<visitor> visitors;
+    for (auto& pair : m.objects()) {
         auto& o(pair.second);
 
         if (!o.is_visitable())
@@ -159,15 +149,17 @@ void injector::inject_visitors() {
         }
 
         const auto v(create_visitor(o, o.leaves()));
+        inject_visitable_by(o, o.leaves(), v.name(), m);
         visitors.push_back(v);
-        inject_visited_by(o, o.leaves(), v.name());
     }
 
     for (const auto v : visitors) {
         BOOST_LOG_SEV(lg, debug) << "Adding visitor: "
                                  << v.name().qualified();
 
-        if (!insert(v)) {
+        const auto pair(std::make_pair(v.name().qualified(), v));
+        const auto i(m.visitors().insert(pair));
+        if (!i.second) {
             const auto qn(v.name().qualified());
             BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
             BOOST_THROW_EXCEPTION(injection_error(duplicate_name + qn));
@@ -177,37 +169,31 @@ void injector::inject_visitors() {
     BOOST_LOG_SEV(lg, debug) << "Done injecting visitors.";
 }
 
-void injector::inject_global_module() {
-    name qn;
+void injector::inject_global_module(intermediate_model& m) {
+    const auto gm(create_global_module());
 
-    auto& model(context_->model());
-    const auto i(model.modules().find(qn.qualified()));
-    if (i != model.modules().end()) {
-        const auto qn(model.name().qualified());
+    const auto gmn(gm.name());
+    const auto i(m.modules().find(gmn.qualified()));
+    if (i != m.modules().end()) {
+        const auto qn(m.name().qualified());
         BOOST_LOG_SEV(lg, error) << model_already_has_global_module << qn;
         BOOST_THROW_EXCEPTION(injection_error(
                 model_already_has_global_module + qn));
     }
+    m.modules().insert(std::make_pair(gmn.qualified(), gm));
 
-    add_containing_module_to_non_contained_entities(qn, model.modules());
-    add_containing_module_to_non_contained_entities(qn, model.concepts());
-    add_containing_module_to_non_contained_entities(qn, model.primitives());
-    add_containing_module_to_non_contained_entities(qn, model.enumerations());
-    add_containing_module_to_non_contained_entities(qn, model.objects());
-
-    module global_module;
-    global_module.name(qn);
-    global_module.generation_type(generation_types::no_generation);
-    global_module.origin_type(origin_types::system);
-    global_module.documentation(global_module_doc);
-    model.modules().insert(std::make_pair(qn.qualified(), global_module));
+    add_containing_module_to_non_contained_entities(gmn, m.modules());
+    add_containing_module_to_non_contained_entities(gmn, m.concepts());
+    add_containing_module_to_non_contained_entities(gmn, m.primitives());
+    add_containing_module_to_non_contained_entities(gmn, m.enumerations());
+    add_containing_module_to_non_contained_entities(gmn, m.objects());
+    add_containing_module_to_non_contained_entities(gmn, m.exceptions());
+    add_containing_module_to_non_contained_entities(gmn, m.visitors());
 }
 
 void injector::inject(intermediate_model& m) {
-    context_ = std::unique_ptr<context>(new context(m));
-    inject_visitors();
-    inject_global_module();
-    context_ = std::unique_ptr<context>();
+    inject_visitors(m);
+    inject_global_module(m);
 }
 
 } }

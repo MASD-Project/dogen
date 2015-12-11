@@ -86,7 +86,7 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     builder.add(o.hash_container_keys(), hash_fn);
 
     if (o.is_visitable())
-        builder.add(o.visited_by(), self_fn);
+        builder.add(o.visitable_by(), self_fn);
 
     return builder.build();
 }

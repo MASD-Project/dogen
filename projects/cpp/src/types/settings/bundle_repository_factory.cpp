@@ -26,6 +26,8 @@
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/module.hpp"
+#include "dogen/yarn/types/exception.hpp"
+#include "dogen/yarn/types/visitor.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/cpp/io/settings/bundle_repository_io.hpp"
 #include "dogen/cpp/types/settings/bundle_factory.hpp"
@@ -78,11 +80,13 @@ private:
 
 public:
     using yarn::element_visitor::visit;
-    void visit(const dogen::yarn::object& o) { generate(o); }
-    void visit(const dogen::yarn::enumeration& e) { generate(e); }
-    void visit(const dogen::yarn::primitive& p) { generate(p); }
     void visit(const dogen::yarn::module& m) { generate(m); }
     void visit(const dogen::yarn::concept& c) { generate(c); }
+    void visit(const dogen::yarn::primitive& p) { generate(p); }
+    void visit(const dogen::yarn::enumeration& e) { generate(e); }
+    void visit(const dogen::yarn::object& o) { generate(o); }
+    void visit(const dogen::yarn::exception& e) { generate(e); }
+    void visit(const dogen::yarn::visitor& v) { generate(v); }
 
 public:
     const bundle_repository& result() const { return result_; }

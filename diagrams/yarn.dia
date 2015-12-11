@@ -6509,7 +6509,7 @@ expansion.#</dia:string>
         <dia:point val="-29,92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.05,91.95;-18.44,101.25"/>
+        <dia:rectangle val="-29.05,91.95;-18.44,99.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-29,92"/>
@@ -6518,7 +6518,7 @@ expansion.#</dia:string>
         <dia:real val="10.51"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="9.2000000000000011"/>
+        <dia:real val="7.6000000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#object_types#</dia:string>
@@ -6636,29 +6636,6 @@ etc.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#visitor#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#The service is a system generated visitor.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#user_defined_value_object#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -6669,29 +6646,6 @@ etc.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Regular value object with no distinguishing features.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#exception#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Value represents an exception type.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7596,7 +7550,7 @@ etc.#</dia:string>
         <dia:point val="62.3025,89"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.95,74.95;63.0525,89.8"/>
+        <dia:rectangle val="54.95,76.55;63.0525,89.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7605,7 +7559,7 @@ etc.#</dia:string>
         <dia:point val="62.3025,89"/>
         <dia:point val="62.3025,81"/>
         <dia:point val="55,81"/>
-        <dia:point val="55,75"/>
+        <dia:point val="55,76.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -11252,7 +11206,7 @@ from inputs and generates yarn types off of them.#</dia:string>
         <dia:point val="148.06,55.2"/>
         <dia:point val="148.06,81"/>
         <dia:point val="78.215,81"/>
-        <dia:point val="78.215,75"/>
+        <dia:point val="78.215,76.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -13649,7 +13603,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:point val="55,65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.95,64.95;78.265,75.05"/>
+        <dia:rectangle val="54.95,64.95;78.265,76.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="55,65"/>
@@ -13658,7 +13612,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:real val="23.215"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="10"/>
+        <dia:real val="11.6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#intermediate_model#</dia:string>
@@ -13900,6 +13854,52 @@ Leaves are types concrete types which have a parent.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#All objects contained in this intermediate model.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#exceptions#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::unordered_map&lt;std::string, exception&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#All exceptions in this model.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#visitors#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::unordered_map&lt;std::string, visitor&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#All visitors in this model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15615,7 +15615,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:point val="-180,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-180.05,-1.05;-167.515,5.05"/>
+        <dia:rectangle val="-180.05,-1.05;-167.515,4.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-180,-1"/>
@@ -15624,7 +15624,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#Visitable#</dia:string>
@@ -15766,30 +15766,7 @@ Set to false if no parent exists, or if the parent is not visitable. #</dia:stri
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#visits#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;name&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Elements that are visited by the visitor.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#visited_by#</dia:string>
+            <dia:string>#visitable_by#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::list&lt;name&gt;#</dia:string>
@@ -16461,16 +16438,16 @@ This is used to break cycles where required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O140">
       <dia:attribute name="obj_pos">
-        <dia:point val="-173.782,5"/>
+        <dia:point val="-173.782,4.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-174.632,4.95;-149.557,14.0004"/>
+        <dia:rectangle val="-174.632,4.15;-149.557,14.0004"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-173.782,5"/>
+        <dia:point val="-173.782,4.2"/>
         <dia:point val="-173.782,9"/>
         <dia:point val="-149.607,9"/>
         <dia:point val="-149.607,13.9504"/>
@@ -16502,19 +16479,19 @@ This is used to break cycles where required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O141">
       <dia:attribute name="obj_pos">
-        <dia:point val="-7,92"/>
+        <dia:point val="-10,92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-7.05,91.95;-3.575,94.25"/>
+        <dia:rectangle val="-10.05,91.95;-0.21,94.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-7,92"/>
+        <dia:point val="-10,92"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="3.375"/>
+        <dia:real val="9.7400000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="2.1999999999999997"/>
+        <dia:real val="2.7999999999999998"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#visitor#</dia:string>
@@ -16603,7 +16580,31 @@ This is used to break cycles where required.#</dia:string>
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#visits#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::list&lt;name&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Elements that are visitable by the visitor.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -16725,7 +16726,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-0.515,68.0496"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-5.3625,67.9996;0.335,92.05"/>
+        <dia:rectangle val="-5.18,67.9996;0.335,92.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16733,8 +16734,8 @@ This is used to break cycles where required.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-0.515,68.0496"/>
         <dia:point val="-0.515,73"/>
-        <dia:point val="-5.3125,73"/>
-        <dia:point val="-5.3125,92"/>
+        <dia:point val="-5.13,73"/>
+        <dia:point val="-5.13,92"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

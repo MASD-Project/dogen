@@ -47,11 +47,13 @@ private:
     void process(const name& n);
 
 public:
-    void operator()(dogen::yarn::object& o) { process(o.name()); }
-    void operator()(dogen::yarn::enumeration& e) { process(e.name()); }
-    void operator()(dogen::yarn::primitive& p) { process(p.name()); }
     void operator()(dogen::yarn::module& m) { process(m.name()); }
     void operator()(dogen::yarn::concept& c) { process(c.name()); }
+    void operator()(dogen::yarn::primitive& p) { process(p.name()); }
+    void operator()(dogen::yarn::enumeration& e) { process(e.name()); }
+    void operator()(dogen::yarn::object& o) { process(o.name()); }
+    void operator()(dogen::yarn::exception& e) { process(e.name()); }
+    void operator()(dogen::yarn::visitor& v) { process(v.name()); }
 
 public:
     const std::unordered_map<std::string, std::list<std::string>>&
@@ -85,11 +87,13 @@ private:
     void update(element& e);
 
 public:
-    void operator()(dogen::yarn::object& o) { update(o); }
-    void operator()(dogen::yarn::enumeration& e) { update(e); }
-    void operator()(dogen::yarn::primitive& p) { update(p); }
     void operator()(dogen::yarn::module& m) { update(m); }
     void operator()(dogen::yarn::concept& c) { update(c); }
+    void operator()(dogen::yarn::primitive& p) { update(p); }
+    void operator()(dogen::yarn::enumeration& e) { update(e); }
+    void operator()(dogen::yarn::object& o) { update(o); }
+    void operator()(dogen::yarn::exception& e) { update(e); }
+    void operator()(dogen::yarn::visitor& v) { update(v); }
 
 public:
     intermediate_model& model_;

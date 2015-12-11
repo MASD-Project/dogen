@@ -13,18 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-10 Thu 07:31]
-| <75>                                                                        |        |      |      |
-| Headline                                                                    | Time   |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *5:15* |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 5:15   |      |      |
-| Active                                                                      |        | 5:15 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:39 |
-| STARTED Remove =service= stereotype                                         |        |      | 0:18 |
-| STARTED Create visitor and exception yarn types                             |        |      | 3:59 |
-| STARTED Update copyright notices                                            |        |      | 0:19 |
+#+CAPTION: Clock summary at [2015-12-11 Fri 22:29]
+| <75>                                                                        |         |       |      |
+| Headline                                                                    | Time    |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                                | *10:19* |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| Stories                                                                     | 10:19   |       |      |
+| Active                                                                      |         | 10:19 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:39 |
+| COMPLETED Create a blog post on pull request driven development             |         |       | 1:20 |
+| COMPLETED Create visitor and exception yarn types                           |         |       | 7:43 |
+| STARTED Remove =service= stereotype                                         |         |       | 0:18 |
+| STARTED Update copyright notices                                            |         |       | 0:19 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -101,6 +102,36 @@ layout seems to be evolving. This story captures that direction.
 
 Pen some ideas down on the advantages of the PR process.
 
+*** COMPLETED Create visitor and exception yarn types                 :story:
+    CLOSED: [2015-12-11 Fri 22:29]
+    CLOCK: [2015-12-11 Fri 21:31]--[2015-12-11 Fri 22:29] =>  0:58
+    CLOCK: [2015-12-10 Thu 21:34]--[2015-12-10 Thu 23:20] =>  1:46
+    CLOCK: [2015-12-10 Thu 17:57]--[2015-12-10 Thu 18:37] =>  0:40
+    CLOCK: [2015-12-10 Thu 07:11]--[2015-12-10 Thu 07:51] =>  0:40
+    CLOCK: [2015-12-09 Wed 21:04]--[2015-12-09 Wed 23:38] =>  2:34
+    CLOCK: [2015-12-08 Tue 23:48]--[2015-12-09 Wed 00:13] =>  0:25
+    CLOCK: [2015-12-08 Tue 22:55]--[2015-12-08 Tue 23:35] =>  0:40
+
+We should not have object types for these two cases; these are
+actually full blown entities. For exceptions we should have
+inheritance support but not for visitors. Add only the properties that
+make sense for the type.
+
+- create a new concept to model the ability to have relationships with
+  other elements: relatable?
+- move relationships, is final, is parent, is child, is visitable, is
+  root parent visitable to relatable.
+- move is immutable, is fluent to stateful.
+- remove stateful element.
+- make object a relatable, statuful element.
+- add visitor as an element.
+- add exception as a relatable element. Actually we probably should
+  add it as an element for now and update the inheritance story for
+  exceptions.
+- considered making concept Generalisable, but it becomes quite
+  confusing because refinement is not quite the same thing as
+  inheritance. Cancelled the change in the end.
+
 *** CANCELLED Remove =is_root_parent_visitable=                       :story:
     CLOSED: [2015-12-08 Tue 22:57]
 
@@ -159,6 +190,10 @@ additional =cpp= specific types. In practice:
   so perhaps the relationship itself would have to be annotated). We
   could then have a default behaviour for weak relationships such as
   never follow, etc.
+- at present we are handling the inclusion of non-existing formatters
+  in master includers by manually filtering these. See factory for
+  master includers. This should all be handled by enablement and the
+  graph.
 
 *Previous Understanding*
 
@@ -388,32 +423,6 @@ all facets except for types. A few points:
   with full generation and so on. We probably also need "generation
   profiles" to go with "enablement profiles".
 
-*** STARTED Create visitor and exception yarn types                   :story:
-    CLOCK: [2015-12-10 Thu 07:11]--[2015-12-10 Thu 07:31] =>  0:20
-    CLOCK: [2015-12-09 Wed 21:04]--[2015-12-09 Wed 23:38] =>  2:34
-    CLOCK: [2015-12-08 Tue 23:48]--[2015-12-09 Wed 00:13] =>  0:25
-    CLOCK: [2015-12-08 Tue 22:55]--[2015-12-08 Tue 23:35] =>  0:40
-
-We should not have object types for these two cases; these are
-actually full blown entities. For exceptions we should have
-inheritance support but not for visitors. Add only the properties that
-make sense for the type.
-
-- create a new concept to model the ability to have relationships with
-  other elements: relatable?
-- move relationships, is final, is parent, is child, is visitable, is
-  root parent visitable to relatable.
-- move is immutable, is fluent to stateful.
-- remove stateful element.
-- make object a relatable, statuful element.
-- add visitor as an element.
-- add exception as a relatable element. Actually we probably should
-  add it as an element for now and update the inheritance story for
-  exceptions.
-- considered making concept Generalisable, but it becomes quite
-  confusing because refinement is not quite the same thing as
-  inheritance. Cancelled the change in the end.
-
 *** STARTED Update copyright notices                                  :story:
     CLOCK: [2015-12-10 Thu 06:51]--[2015-12-10 Thu 07:10] =>  0:19
 
@@ -637,9 +646,16 @@ non-target names that are in use and return those.
 
 *** Handle enumeration type dynamically                               :story:
 
-- add some enumeration post-processing that assigns it a underlying
-  type. Should be done with merged model (look for a primitive type with
-  property =is_default_enumeration_type=).
+Add some enumeration post-processing that assigns it a underlying
+type. Should be done with merged model (look for a primitive type with
+property =is_default_enumeration_type=).
+
+This should be done as part of resolution perhaps; user provides a raw
+type, we expand it during expansion and resolve it during
+resolution. If the string is empty, we should use the default
+enumeration type. It is chosen from the collection of
+primitives. There can only be one type marked as
+default. =is_enumeration_default_type=? Read from JSON file.
 
 *** Services and leaves are not properly handled                      :story:
 

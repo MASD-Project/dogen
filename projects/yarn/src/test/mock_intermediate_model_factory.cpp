@@ -541,7 +541,7 @@ make_enumeration(const unsigned int i, const name& model_name,
     return r;
 }
 
-object mock_intermediate_model_factory::make_exception(const unsigned int i,
+exception mock_intermediate_model_factory::make_exception(const unsigned int i,
     const name& model_name, const unsigned int module_n) const {
 
     const auto sn(type_name(i));
@@ -550,11 +550,10 @@ object mock_intermediate_model_factory::make_exception(const unsigned int i,
     dogen::yarn::name_factory nf;
     dogen::yarn::name n(nf.build_element_in_model(model_name, sn, ipp));
 
-    object r;
+    exception r;
     r.name(n);
     r.generation_type(generation_types::full_generation);
     r.documentation(documentation);
-    r.object_type(dogen::yarn::object_types::exception);
 
     if (flags_.tagged())
         dynamic_extension_function_(r.extensions());
@@ -646,7 +645,7 @@ make_multi_type_model(const unsigned int n, const unsigned int type_n,
     case object_types::exception:
         for (unsigned int i(0); i < type_n; ++i) {
             const auto e(make_exception(i, r.name(), mod_n));
-            insert_object(r, e);
+            insert_nameable(r.exceptions(), e);
         }
         break;
     default:

@@ -26,7 +26,6 @@
 #endif
 
 #include <list>
-#include <memory>
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
@@ -51,24 +50,11 @@ namespace yarn {
  *
  */
 class injector {
-public:
-    injector() = default;
-    injector(const injector&) = default;
-    ~injector() = default;
-    injector(injector&&) = default;
-    injector& operator=(const injector&) = default;
-
-private:
-    class context;
-
 private:
     /**
-     * @brief Inserts the object into the model's object container.
-     *
-     * @return True if the object did not exist in container, false
-     * otherwise.
+     * @brief Creates the module to represent the global namespace.
      */
-    bool insert(const object& o);
+    module create_global_module() const;
 
     /**
      * @brief Create a visitor for the object o.
@@ -78,26 +64,26 @@ private:
      *
      * @pre leaves must not be empty.
      */
-    object create_visitor(const object& o,
+    visitor create_visitor(const object& o,
         const std::list<name>& leaves) const;
 
     /**
      * @brief Injects an accept operation for the given visitor, to
      * the supplied object and all its leaves.
      */
-    void inject_visited_by(object& root, const std::list<name>& leaves,
-        const name& visitor) const;
+    void inject_visitable_by(object& root, const std::list<name>& leaves,
+        const name& visitor, intermediate_model& m) const;
 
     /**
      * @brief Injects visitors for objects that require them.
      */
-    void inject_visitors();
+    void inject_visitors(intermediate_model& m);
 
     /**
      * @brief Injects the global module, and makes all modules that do
      * not have a containing namespace be contained by it.
      */
-    void inject_global_module();
+    void inject_global_module(intermediate_model& m);
 
 public:
 
@@ -107,9 +93,6 @@ public:
      * @param m Yarn model to operate on.
      */
     void inject(intermediate_model& m);
-
-private:
-    mutable std::shared_ptr<context> context_;
 };
 
 } }

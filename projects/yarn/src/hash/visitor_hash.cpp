@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/yarn/hash/visitor_hash.hpp"
 
@@ -29,6 +30,14 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_std_list_dogen_yarn_name(const std::list<dogen::yarn::name>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -38,6 +47,8 @@ std::size_t visitor_hasher::hash(const visitor& v) {
     std::size_t seed(0);
 
     combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
+
+    combine(seed, hash_std_list_dogen_yarn_name(v.visits()));
     return seed;
 }
 

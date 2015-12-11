@@ -189,6 +189,20 @@ void merger::merge_model(const intermediate_model& m) {
         check_name(m.name(), k, v.name(), v.in_global_module());
         merged_model_.modules().insert(pair);
     }
+
+    for (const auto& pair : m.exceptions()) {
+        const auto& k(pair.first);
+        const auto& v(pair.second);
+        check_name(m.name(), k, v.name(), v.in_global_module());
+        merged_model_.exceptions().insert(pair);
+    }
+
+    for (const auto& pair : m.visitors()) {
+        const auto& k(pair.first);
+        const auto& v(pair.second);
+        check_name(m.name(), k, v.name(), v.in_global_module());
+        merged_model_.visitors().insert(pair);
+    }
 }
 
 void merger::merge_models() {

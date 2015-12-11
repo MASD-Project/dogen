@@ -245,11 +245,11 @@ update_object(yarn::object& o, const processed_object& po, const profile& p) {
 void transformer::to_exception(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an exception: " << o.id();
 
-    yarn::object e;
-    update_object(e, o, p);
-    e.object_type(yarn::object_types::exception);
-    auto& objects(context_.model().objects());
-    objects.insert(std::make_pair(e.name().qualified(), e));
+    yarn::exception e;
+    update_element(e, o, p);
+
+    auto& exceptions(context_.model().exceptions());
+    exceptions.insert(std::make_pair(e.name().qualified(), e));
 }
 
 void transformer::to_service(const processed_object& o, const profile& p) {

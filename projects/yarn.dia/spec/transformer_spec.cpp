@@ -246,10 +246,10 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expecte
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
     BOOST_CHECK(c.model().enumerations().empty());
     BOOST_CHECK(c.model().primitives().empty());
-    BOOST_REQUIRE(c.model().objects().size() == 1);
+    BOOST_CHECK(c.model().objects().empty());
+    BOOST_REQUIRE(c.model().exceptions().size() == 1);
 
-    const auto& e(c.model().objects().begin()->second);
-    BOOST_CHECK(e.object_type() == dogen::yarn::object_types::exception);
+    const auto& e(c.model().exceptions().begin()->second);
     BOOST_REQUIRE(e.name().location().model_module_path().size() == 1);
     BOOST_CHECK(e.name().location().model_module_path().front() ==
         model_name);
@@ -434,9 +434,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_i
         }
     }
 
-    BOOST_REQUIRE(c.model().objects().size() == 1);
-    const auto& o(c.model().objects().begin()->second);
-    BOOST_CHECK(o.object_type() == dogen::yarn::object_types::exception);
+    BOOST_REQUIRE(c.model().exceptions().size() == 1);
+    const auto& o(c.model().exceptions().begin()->second);
     BOOST_REQUIRE(o.name().location().model_module_path().size() == 1);
     BOOST_CHECK(o.name().location().model_module_path().front() ==
         model_name);
@@ -692,9 +691,8 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transfo
             == first);
     }
 
-    BOOST_REQUIRE(c.model().objects().size() == 1);
-    const auto& o(c.model().objects().begin()->second);
-    BOOST_CHECK(o.object_type() == dogen::yarn::object_types::exception);
+    BOOST_REQUIRE(c.model().exceptions().size() == 1);
+    const auto& o(c.model().exceptions().begin()->second);
     BOOST_REQUIRE(o.name().location().model_module_path().size() == 1);
     BOOST_CHECK(o.name().location().model_module_path().front() ==
         model_name);
