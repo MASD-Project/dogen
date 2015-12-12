@@ -31,7 +31,6 @@ namespace {
 
 auto lg(logger_factory("yarn.persister"));
 
-const std::string empty;
 const std::string xml_extension(".xml");
 const std::string unsupported_extension("Extension is not supported: ");
 

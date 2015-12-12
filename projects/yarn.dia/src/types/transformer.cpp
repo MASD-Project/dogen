@@ -217,13 +217,13 @@ update_object(yarn::object& o, const processed_object& po, const profile& p) {
         }
 
         BOOST_LOG_SEV(lg, debug) << "Setting parent for: "
-                                 << o.name().simple() << " as "
-                                 << j->second.simple();
+                                 << o.name().qualified() << " as "
+                                 << j->second.qualified();
         o.is_child(true);
         o.parents().push_back(j->second);
     } else {
         BOOST_LOG_SEV(lg, debug) << "Object has no parent: "
-                                 << o.name().simple();
+                                 << o.name().qualified();
     }
 
     const auto j(context_.parent_ids().find(po.id()));

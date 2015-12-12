@@ -163,8 +163,10 @@ populate(const generalization_details& d, intermediate_model& m) const {
 
         auto& o(i->second);
         if (!o.is_child()) {
-            // a bit of a hack, top-level types have themselves as the
-            // original parent of the container just to make our life easier
+            /* Top-level types have themselves as the original parent
+             * of the container just to make our life easier, so we
+             * have to ignore them here.
+             */
             BOOST_LOG_SEV(lg, debug) << "Type has parents but is not a child: "
                                      << n.qualified();
             continue;

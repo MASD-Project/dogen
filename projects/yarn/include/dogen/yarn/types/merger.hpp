@@ -60,15 +60,6 @@ namespace yarn {
  * models have not been supplied.
  */
 class merger {
-private:
-    typedef std::unordered_map<name, intermediate_model> models_type;
-
-public:
-    merger(const merger&) = default;
-    ~merger() = default;
-    merger(merger&&) = default;
-    merger& operator=(const merger&) = default;
-
 public:
     merger();
 
@@ -87,6 +78,20 @@ private:
      * @brief Merge must @e not yet have taken place.
      */
     void require_not_has_merged() const;
+
+    /**
+     * @brief Copies the associative container across.
+     */
+    template<typename ElementAssociativeContainer>
+    void copy(const name& model_name, const ElementAssociativeContainer& source,
+        ElementAssociativeContainer& destination) {
+        for (const auto& pair : source) {
+            const auto& k(pair.first);
+            const auto& v(pair.second);
+            check_name(model_name, k, v.name(), v.in_global_module());
+            destination.insert(pair);
+        }
+    }
 
 private:
     /**
@@ -150,7 +155,7 @@ public:
     intermediate_model merge();
 
 private:
-    models_type models_;
+    std::unordered_map<name, intermediate_model> models_;
     intermediate_model merged_model_;
     bool has_target_;
     bool has_merged_;

@@ -13,17 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-11 Fri 22:29]
+#+CAPTION: Clock summary at [2015-12-12 Sat 00:10]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *10:19* |       |      |
+| *Total time*                                                                | *11:36* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 10:19   |       |      |
-| Active                                                                      |         | 10:19 |      |
+| Stories                                                                     | 11:36   |       |      |
+| Active                                                                      |         | 11:36 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:39 |
 | COMPLETED Create a blog post on pull request driven development             |         |       | 1:20 |
 | COMPLETED Create visitor and exception yarn types                           |         |       | 7:43 |
+| STARTED Yarn minor tidy-ups                                                 |         |       | 1:17 |
 | STARTED Remove =service= stereotype                                         |         |       | 0:18 |
 | STARTED Update copyright notices                                            |         |       | 0:19 |
 #+end:
@@ -365,6 +366,7 @@ we need to check for.
   serialisation classes must be enabled
 
 *** STARTED Yarn minor tidy-ups                                       :story:
+    CLOCK: [2015-12-11 Fri 22:52]--[2015-12-12 Sat 00:09] =>  1:17
 
 Go through all files in yarn and do all the minor tidy-ups we haven't
 yet done:
@@ -377,9 +379,7 @@ yet done:
 
 Classes done:
 
-- assembler, association indexer, building error, concept, concept
-  indexer, element, element traversal, enumerator, expander, frontend
-  registrar, frontend workflow , frontend interface.
+- all except resolver.
 
 *** STARTED Remove =service= stereotype                               :story:
     CLOCK: [2015-12-08 Tue 22:27]--[2015-12-08 Tue 22:45] =>  0:18

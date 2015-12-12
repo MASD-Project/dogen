@@ -65,11 +65,11 @@ public:
 };
 
 void internal_module_path_builder::process(const name& n) {
-    auto ipp(n.location().internal_module_path());
-    while (!ipp.empty()) {
-        const std::string key(boost::join(ipp, separator));
-        distinct_internal_module_paths_.insert(std::make_pair(key, ipp));
-        ipp.pop_back();
+    auto imp(n.location().internal_module_path());
+    while (!imp.empty()) {
+        const std::string key(boost::join(imp, separator));
+        distinct_internal_module_paths_.insert(std::make_pair(key, imp));
+        imp.pop_back();
     }
 }
 
@@ -121,8 +121,7 @@ boost::optional<name> updater::containing_module(const name& n) {
     }
 
     name_builder b;
-    if (!n.location().external_module_path().empty())
-        b.external_module_path(n.location().external_module_path());
+    b.external_module_path(n.location().external_module_path());
 
     auto imp(n.location().internal_module_path());
     if (imp.empty())
@@ -131,16 +130,16 @@ boost::optional<name> updater::containing_module(const name& n) {
         b.model_module_path(n.location().model_module_path());
         b.simple_name(imp.back());
         imp.pop_back();
-        if (!imp.empty())
-            b.internal_module_path(imp);
+        b.internal_module_path(imp);
     }
 
     const auto module_n(b.build());
     const auto i(model_.modules().find(module_n.qualified()));
     if (i != model_.modules().end()) {
+        BOOST_LOG_SEV(lg, debug) << "Adding type to module. Type: '"
+                                 << n.qualified()
+                                 << "' Module: '" << module_n.qualified();
         i->second.members().push_back(n);
-        BOOST_LOG_SEV(lg, debug) << "Containing module: "
-                                 << module_n.qualified();
         return module_n;
     }
 
@@ -161,11 +160,6 @@ void updater::update(element& e) {
         BOOST_LOG_SEV(lg, error) << missing_module << sn;
         BOOST_THROW_EXCEPTION(expansion_error(missing_module + sn));
     }
-
-    BOOST_LOG_SEV(lg, debug) << "Adding type to module. Type: '"
-                             << e.name().qualified()
-                             << "' Module: '" << i->first;
-    i->second.members().push_back(e.name());
 }
 
 }

@@ -36,12 +36,6 @@ namespace yarn {
 
 class identifier_parser {
 public:
-    identifier_parser(const identifier_parser&) = default;
-    ~identifier_parser() = default;
-    identifier_parser(identifier_parser&&) = default;
-    identifier_parser& operator=(const identifier_parser&) = default;
-
-public:
     identifier_parser();
 
 public:

@@ -100,12 +100,6 @@ namespace yarn {
  */
 class property_indexer {
 public:
-    property_indexer() = default;
-    property_indexer(const property_indexer&) = default;
-    property_indexer(property_indexer&&) = default;
-    property_indexer& operator=(const property_indexer&) = default;
-
-public:
     virtual ~property_indexer() noexcept { }
 
 private:

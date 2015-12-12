@@ -84,10 +84,10 @@ void merger::check_name(const name& model_name, const std::string& key,
     const name& value, const bool in_global_namespace) const {
 
     if (!in_global_namespace) {
-        if (value.location().external_module_path() !=
-            model_name.location().external_module_path() ||
-            value.location().model_module_path() !=
-            model_name.location().model_module_path()) {
+        const auto vl(value.location());
+        const auto ml(model_name.location());
+        if (vl.external_module_path() != ml.external_module_path() ||
+            vl.model_module_path() != ml.model_module_path()) {
             std::ostringstream s;
             s << "Type does not belong to this model. Model name: '"
               << model_name.qualified() << "'. Type name: "
@@ -147,62 +147,22 @@ void merger::add(const intermediate_model& m) {
 }
 
 void merger::merge_model(const intermediate_model& m) {
+    const auto mn(m.name());
     BOOST_LOG_SEV(lg, info) << "Merging model: '"
-                            << m.name().qualified()
+                            << mn.qualified()
                             << " modules: " << m.modules().size()
                             << " concepts: " << m.concepts().size()
                             << " primitives: " << m.primitives().size()
                             << " enumerations: " << m.enumerations().size()
                             << " objects: " << m.objects().size();
 
-    for (const auto& pair : m.concepts()) {
-        const auto& k(pair.first);
-        const auto& v(pair.second);
-        check_name(m.name(), k, v.name(), v.in_global_module());
-        merged_model_.concepts().insert(pair);
-    }
-
-    for (const auto& pair : m.primitives()) {
-        const auto& k(pair.first);
-        const auto& v(pair.second);
-        check_name(m.name(), k, v.name(), v.in_global_module());
-        merged_model_.primitives().insert(pair);
-    }
-
-    for (const auto& pair : m.enumerations()) {
-        const auto& k(pair.first);
-        const auto& v(pair.second);
-        check_name(m.name(), k, v.name(), v.in_global_module());
-        merged_model_.enumerations().insert(pair);
-    }
-
-    for (const auto& pair : m.objects()) {
-        const auto& k(pair.first);
-        const auto& v(pair.second);
-        check_name(m.name(), k, v.name(), v.in_global_module());
-        merged_model_.objects().insert(pair);
-    }
-
-    for (const auto& pair : m.modules()) {
-        const auto& k(pair.first);
-        const auto& v(pair.second);
-        check_name(m.name(), k, v.name(), v.in_global_module());
-        merged_model_.modules().insert(pair);
-    }
-
-    for (const auto& pair : m.exceptions()) {
-        const auto& k(pair.first);
-        const auto& v(pair.second);
-        check_name(m.name(), k, v.name(), v.in_global_module());
-        merged_model_.exceptions().insert(pair);
-    }
-
-    for (const auto& pair : m.visitors()) {
-        const auto& k(pair.first);
-        const auto& v(pair.second);
-        check_name(m.name(), k, v.name(), v.in_global_module());
-        merged_model_.visitors().insert(pair);
-    }
+    copy(mn, m.modules(), merged_model_.modules());
+    copy(mn, m.concepts(), merged_model_.concepts());
+    copy(mn, m.primitives(), merged_model_.primitives());
+    copy(mn, m.enumerations(), merged_model_.enumerations());
+    copy(mn, m.objects(), merged_model_.objects());
+    copy(mn, m.exceptions(), merged_model_.exceptions());
+    copy(mn, m.visitors(), merged_model_.visitors());
 }
 
 void merger::merge_models() {
