@@ -7,26 +7,104 @@ into recently-ish.
 * Finance, Economics, Politics
 
 - [[http://qz.com/564513/a-not-so-brief-history-of-the-fall-and-fall-of-the-nigerian-naira/][A (not so) brief history of the fall and fall of the Nigerian naira]]:
-  Source: [[https://twitter.com/KingDouyeAlfred/status/675280673561710592][King Alfred (twitter)]].
+  Very good read for Angolans; if nothing else, it makes us understand
+  that our precious Kwanza behaves in many ways like any other
+  petro-currency. Source: [[https://twitter.com/KingDouyeAlfred/status/675280673561710592][King Alfred (twitter)]].
+- [[https://www.youtube.com/watch?v%3DSRjwZvLo_hI][#ThisIsACoup - Episode 1- "Angela, suck our balls"]]: A rather
+  political take on the recent-ish financial mess in Greece. On a
+  similar vein, BBC's [[http://www.bbc.co.uk/programmes/b06s1s5x][A Greek Drama]] is worth a listen.
 
 * Startups et al.
 
+- [[http://techcrunch.com/2015/12/16/brazils-congress-has-shut-down-whatsapp-tonight-and-the-rest-of-the-social-web-could-be-next/?ncid%3Drss#.xiisrb:Oo9T][Brazilian Judge Shuts Down WhatsApp And Brazil’s Congress Wants To
+  Shut Down The Social Web Next]]: One of the most enlightened internet
+  countries decides to shut it all down. Sad day for the Internet and
+  for all Portuguese speakers. Source: Hacker News (twitter)
+- [[http://www.wired.com/2015/12/bitcoins-creator-satoshi-nakamoto-is-probably-this-unknown-australian-genius/][Bitcoin’s Creator Satoshi Nakamoto Is Probably This Unknown
+  Australian Genius]]: So they found Satoshi (again). Hesitated in
+  adding this link, to be totally honest - there have been far too
+  many fakes to recount and the whole process is such a media circus
+  that its best avoiding it altogether. But after reading it -
+  questionable media behaviour notwhitstanding - it does appear to
+  provide some insights into these bitcoin early days. Useful to
+  anyone who likes BTC. There is also the [[http://gizmodo.com/this-australian-says-he-and-his-dead-friend-invented-bi-1746958692][Gizmodo report]], with
+  additional evidence. This is all getting a bit too much for my
+  liking though.
+- [[https://blog.jolla.com/jolla-back-business/][Jolla is back in business!]]: Good to hear Jolla is still going. Now
+  that my Firefox OS phone is no longer supported, I am keen on
+  getting a Jolla. Source: Hacker News (twitter)
+- [[https://bitcoinmagazine.com/articles/tech-and-banking-giants-join-forces-with-the-linux-foundation-to-create-new-open-source-blockchain-hyperledger-1450384716][Tech and Banking Giants Join Forces with the Linux Foundation to
+  Create New Open Source Blockchain 'Hyperledger']]: In truth, hard not
+  to be sceptical - even though it's coming from the Linux
+  Foundation. I guess - in this world of [[http://radar.oreilly.com/2015/01/blockchain-scalability.html][scalability wars]] - this must
+  come as good news. However, I still think there is a lot of
+  misunderstanding around Bitcoin and the Blockchain, and there are
+  far too many "AOLs" out there trying to create their gated
+  communities, failing to understand history (again). Not quite sure
+  on which side of the fence to place this initiative but, alas, I'm
+  more inclined towards the AOL side.
+
 * General Coding
 
-- [[http://spectrum.ieee.org/view-from-the-valley/computing/software/yahoos-engineers-move-to-coding-without-a-net][Yahoo’s Engineers Move to Coding Without a Net]]: Source: [[https://twitter.com/newsycombinator/status/675420147365060608][Hacker News
-  (twitter)]]
+- [[http://spectrum.ieee.org/view-from-the-valley/computing/software/yahoos-engineers-move-to-coding-without-a-net][Yahoo’s Engineers Move to Coding Without a Net]]: How removing a
+  testing team can help reduce the bug count and ramp up
+  productivity. Source: [[https://twitter.com/newsycombinator/status/675420147365060608][Hacker News (twitter)]]
+- [[http://githubengineering.com/move-fast/][Move Fast and Fix Things]]: An /incredible/ tale of real engineering
+  from the GitHub guys with lots of take-ins - [[https://github.com/github/scientist][Scientist]] is a pretty
+  neat idea, for one. Worth a read and a re-read. Logically related to
+  the previous article. Source: Hacker News (twitter)
+- [[https://medium.com/@thi.ng/the-jacob-s-ladder-of-coding-4b12477a26c1#.v80mhs3cv][The Jacob’s Ladder of coding]]: Reminiscences on our beloved
+  profession of coding. Long and deep, so still parsing.
 
 * Databases
 
+- [[https://wiki.postgresql.org/wiki/What's_new_in_PostgreSQL_9.5][What's new in PostgreSQL 9.5]]: The RC's are starting and 9.5 looks to
+  continue the trend of amazing Postgres releases. My only missing
+  wish is for native (and full) support for bitemporality really,
+  though to be fair [[http://pgxn.org/dist/temporal_tables/][Temporal Tables]] is probably enough for [[http://clarkdave.net/2015/02/historical-records-with-postgresql-and-temporal-tables-and-sql-2011/][my needs]].
+
 * C++
 
-- [[http://www.agner.org/optimize/optimizing_cpp.pdf][Optimizing software in C++]]:
+- [[http://www.agner.org/optimize/optimizing_cpp.pdf][Optimizing software in C++]]: One to bookmark now but to digest
+  later. A whole load of stuff on optimisation.
+- [[http://blogs.msdn.com/b/vcblog/archive/2015/12/15/support-for-android-cmake-projects-in-visual-studio.aspx][Support for Android CMake projects in Visual Studio]]: So, as if the
+  latest patches to Clang hadn't been enough, MS now decides to add
+  support for CMake in Visual Studio. A bit embryonic, and a bit too
+  android focused, but surely it should be extensible for more regular
+  C++ use. Whats going on at MS? This is all far too cool to be true.
+- [[http://probablydance.com/2015/12/19/quickly-loading-things-from-disk/][Quickly Loading Things From Disk]]: interesting analysis about the
+  state of affairs of serialisation in C++. I'll probably require a
+  few passes to fully digest it.
+- [[https://www.youtube.com/watch?v%3DFYtBv_OosYw][Beyond ad-hoc automation: leveraging structured platforms]]: I've been
+  consuming this presentation slowly but steadily. It deals with a lot
+  of the questions we all have about the new world of containers and
+  microservices, and it seems vital to learn from experience before
+  one finds oneself in a much bigger mess than the monolith could ever
+  get you into. Bridget Kromhout talks intelligently about the
+  subject.
 
 * Layman Science
 
 - [[http://wavewatching.net/2014/03/31/the-church-of-d-wave/][The Church of D-Wave]]: So is D-Wave a quantum computer or not? It
   appears the verdict is "not", even with the 2X and the [[http://googleresearch.blogspot.co.uk/2015/12/when-can-quantum-annealing-win.html][Google paper]].
 - [[https://www.youtube.com/watch?v%3DqZM9JREjnp4][Intelligence and the Brain]]: Oldish but still very good and
-  relevant. Another high-level introduction into HTM.
+  relevant. Another high-level introduction to HTM.
+- [[https://www.newscientist.com/article/dn28452-nasa-probe-shows-how-solar-burps-may-have-stripped-mars-of-water/][NASA probe shows how solar burps may have stripped Mars of water]]:
+  How the sun could be responsible for stripping water away from the
+  red planet.
+- [[https://www.youtube.com/watch?v%3DGcQWZG50zX0][Artificial Intelligence Through Hierarchical Temporal Memory]]:
+  Continuing my adventures in the HTM space, Dr. Paul Cottrell is my
+  latest find. I'm still not totally sure I understand all concepts in
+  this video but what I do understand - assuming they have succeeded
+  in doing what he describes - seem mondo-cool. Basically, it's all
+  about the application of HTM to Finance and trading. He also
+  introduces the idea of adding sub-cortical machinery to HTM (which
+  is just cortical); a most puzzling concept. Once I finish parsing
+  this video, I intend to move to [[https://www.youtube.com/watch?v%3DdDD7D-fm7Wc&feature%3Dyoutu.be][Neuroscience Foundation For
+  Artificial Intelligence]].
 
 * Other
+
+- [[https://www.youtube.com/watch?v%3D6FFAQuJZmOA][Benjamin Clementine - Le Ring - Live]]: Haven't totally made up my
+  mind about Benjamin Clementine, but certainly a very interesting
+  performance.
