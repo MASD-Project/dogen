@@ -28,6 +28,7 @@ install:
 
 before_build:
     - cmd: nuget restore ./packages.config -packagesdirectory packages
+    - ps: Get-ChildItem -Path ./packages -Recurse
       
 build_script:
     - cmd: cd build
