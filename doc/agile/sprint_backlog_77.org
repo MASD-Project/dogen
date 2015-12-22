@@ -13,21 +13,52 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-21 Mon 23:41]
+#+CAPTION: Clock summary at [2015-12-22 Tue 01:20]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *0:03* |      |      |
+| *Total time*                                                                | *1:35* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 0:03   |      |      |
-| Active                                                                      |        | 0:03 |      |
+| Stories                                                                     | 1:35   |      |      |
+| Active                                                                      |        | 1:35 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:03 |
+| STARTED Update Linux CDash agent                                            |        |      | 0:09 |
+| STARTED Add support for conan.io                                            |        |      | 1:23 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     CLOCK: [2015-12-21 Mon 23:38]--[2015-12-21 Mon 23:41] =>  0:03
 
 Updates to sprint and product backlog.
+
+*** STARTED Update Linux CDash agent                                  :story:
+    CLOCK: [2015-12-21 Mon 23:46]--[2015-12-21 Mon 23:55] =>  0:09
+
+We need to get the build green on the Linux agent again.
+
+- built boost 1.59, copied scripts into PFH.
+
+*** STARTED Add support for conan.io                                  :story:
+    CLOCK: [2015-12-21 Mon 23:56]--[2015-12-22 Tue 01:19] =>  1:23
+
+[[https://www.conan.io/][Conan.io]] could be a solution for our long standing problems with
+packaging and Travis builds. It also seems less intrusive when
+compared to biicode. We should try a simple conan setup and see if it
+builds with boost as per [[http://docs.conan.io/en/latest/examples/boost.html][this example]].
+
+Notes:
+
+- conan packages available [[https://www.conan.io/downloads][from here]].
+- needs boost 1.60 due to find boost wrapper missing on 1.59 (it seems)
+- need to apply patches to boost graph (but not serialisation):
+
+: $ cd  ~/.conan/data/Boost/1.60.0/lasote/stable/package/ebdc9c0c0164b54c29125127c75297f6607946c5/include/
+: $ patch -p0 < ~/Development/DomainDrivenConsulting/dogen/patches/boost_1_59_graph.patch
+
+- example with travis available [[http://conanio.readthedocs.org/en/latest/integrations/travisci.html][here]].
+- ninja fails to build but works with make
+
+: ninja: error: '/home/marco/.conan/data/Boost/1.60.0/lasote/stable/package/ebdc9c0c0164b54c29125127c75297f6607946c5/lib/libboost_system.so', needed by 'stage/bin/dogen_utility_spec', missing and no known rule to make it
 
 *** Remove =service= stereotype                                       :story:
 
@@ -542,10 +573,6 @@ header files called "includers". There is too much overloading. We
 should consider calling them "master header files" as per Schaling
 terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
 
-*** Update Linux CDash agent                                          :story:
-
-We need to get the build green on the Linux agent again.
-
 *** Update Windows CDash agent                                        :story:
 
 We need to get the build green on the Windows agent again.
@@ -559,3 +586,30 @@ We need to handle properly the following cases:
 - template with angle brackets, type and then a comma: =a<b,>=.
 
 ** Deprecated
+*** CANCELLED Add support for pulling dependencies from biicode       :story:
+    CLOSED: [2015-12-22 Tue 01:10]
+
+*Rationale*: We are going with Conan since it was so easy to setup.
+
+[[https://www.biicode.com/][Biicode]] is a nuget-like repo for c++. We should look into both
+consuming dependencies from it and pushing dogen into it. In addition
+there are associated emblems:
+
+https://github.com/Manu343726/snail
+
+We should also look into [[https://www.biicode.com/biicode-open-source-challenge][the challenge]].
+
+We should push both the C++ libraries as well as the dogen binary.
+
+We should take the least intrusive possible approach to start with, by
+creating a split setup for biicode.
+
+*** CANCELLED Create a blog post on biicode                           :story:
+    CLOSED: [2015-12-22 Tue 01:10]
+
+*Rationale*: We are going with Conan since it was so easy to setup.
+
+Investigate adding biicode support since we need to add a RapidJson
+dependency. Create a blog post about it.
+
+Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].

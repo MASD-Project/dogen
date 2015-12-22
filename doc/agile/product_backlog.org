@@ -4796,28 +4796,6 @@ is, what then? We can't throw.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
-*** Add support for pulling dependencies from biicode                 :story:
-
-[[https://www.biicode.com/][Biicode]] is a nuget-like repo for c++. We should look into both
-consuming dependencies from it and pushing dogen into it. In addition
-there are associated emblems:
-
-https://github.com/Manu343726/snail
-
-We should also look into [[https://www.biicode.com/biicode-open-source-challenge][the challenge]].
-
-We should push both the C++ libraries as well as the dogen binary.
-
-We should take the least intrusive possible approach to start with, by
-creating a split setup for biicode.
-
-*** Create a blog post on biicode                                     :story:
-
-Investigate adding biicode support since we need to add a RapidJson
-dependency. Create a blog post about it.
-
-Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
-
 *** Compile dogen in Windows using Visual Studio 2015                 :story:
 
 Using our "SoC" resources, we need to setup a Dogen development

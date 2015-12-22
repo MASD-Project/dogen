@@ -23,7 +23,7 @@ file(GLOB_RECURSE all_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
 add_library(dia STATIC ${all_files})
-set_target_properties(dia PROPERTIES
-    OUTPUT_NAME dogen_dia)
+target_link_libraries(dia ${Boost_LIBRARIES})
+set_target_properties(dia PROPERTIES OUTPUT_NAME dogen_dia)
 
 install(TARGETS dia ARCHIVE DESTINATION lib COMPONENT libraries)

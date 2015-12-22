@@ -19,10 +19,19 @@
 #
 cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
 
-# enable ctest support
+# ctest support
 enable_testing()
 
 project(dogen)
+
+# conan support
+if(EXISTS "${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
+    message(STATUS "Setting up Conan support.")
+    include("${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
+    CONAN_BASIC_SETUP()
+else()
+    message(STATUS "Conan build file not found, skipping include")
+endif()
 
 # add our own modules
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/build/cmake)
