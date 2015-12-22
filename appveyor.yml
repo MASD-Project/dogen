@@ -6,7 +6,7 @@ branches:
 
 environment:
   matrix:
-    - VSVER: Visual Studio 15 2015 Win64
+    - VSVER: Visual Studio 14 2015 Win64
 
 platform:
   - x64
@@ -15,15 +15,21 @@ configuration:
   - Release
 
 install:
-    - choco install cmake
-    - choco upgrade cmake
-    - cmake --version
+    - cmd: choco install cmake
+    - cmd: choco upgrade cmake
+    - cmd: cmake --version
 
-before_build:
-    - cd build
-    - mkdir output
-    - cd output
-    - cmake -G "%VSVER%" ../..
+    # conan
+    - cmd: echo "Downloading conan..."
+    - ps: wget https://s3-eu-west-1.amazonaws.com/conanio-production/downloads/conan-win_0_5_0.exe -OutFile conan_installer.exe
+    - cmd: conan_installer.exe /VERYSILENT
+    - cmd: set PATH=%PATH%;C:\Program Files (x86)\Conan\conan
+    - cmd: conan --version
 
-build:
-    project: build\output\dogen.sln
+build_script:
+    - cmd: cd build
+    - cmd: mkdir output
+    - cmd: cd output
+    - cmd: conan install ../..
+    - cmd: cmake ../.. -G "%VSVER%"
+    - cmd: cmake --build . --config Release
