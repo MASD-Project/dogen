@@ -59,13 +59,16 @@ install:
 
 script:
   - export GIT_REPO="`pwd`"
-  - cd ..
+  - cd ~/.conan/data/Boost/1.60.0/lasote/stable/package/ebdc9c0c0164b54c29125127c75297f6607946c5/include/
+  - sudo patch -p0 < ${GIT_REPO}/patches/boost_1_59_graph.patch
+  - cd ${GIT_REPO}/build
   - mkdir output
   - cd output
   - conan install ${GIT_REPO}
+  # FIXME: ninja borked with conan for some reason.
   # - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on -G Ninja
-  - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on
   # - ninja -j2 package run_all_specs
+  - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on
   - make -j2 package run_all_specs
   - sudo dpkg -i stage/pkg/dogen_*_amd64-applications.deb
   - cd /tmp
