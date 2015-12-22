@@ -13,17 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-22 Tue 02:01]
+#+CAPTION: Clock summary at [2015-12-22 Tue 14:07]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *2:13* |      |      |
+| *Total time*                                                                | *6:18* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 2:13   |      |      |
-| Active                                                                      |        | 2:13 |      |
+| Stories                                                                     | 6:18   |      |      |
+| Active                                                                      |        | 6:18 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:03 |
 | STARTED Update Linux CDash agent                                            |        |      | 0:09 |
-| STARTED Add support for conan.io                                            |        |      | 2:01 |
+| COMPLETED Add support for conan.io                                          |        |      | 3:06 |
+| COMPLETED Create a blog post on conan                                       |        |      | 3:00 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -38,7 +39,9 @@ We need to get the build green on the Linux agent again.
 
 - built boost 1.59, copied scripts into PFH.
 
-*** STARTED Add support for conan.io                                  :story:
+*** COMPLETED Add support for conan.io                                :story:
+    CLOSED: [2015-12-22 Tue 14:07]
+    CLOCK: [2015-12-22 Tue 10:06]--[2015-12-22 Tue 11:06] =>  1:00
     CLOCK: [2015-12-22 Tue 02:02]--[2015-12-22 Tue 02:07] =>  0:05
     CLOCK: [2015-12-22 Tue 01:50]--[2015-12-22 Tue 02:01] =>  0:11
     CLOCK: [2015-12-22 Tue 01:40]--[2015-12-22 Tue 01:50] =>  0:10
@@ -74,6 +77,13 @@ Notes:
 should be:
 
 : https://s3-eu-west-1.amazonaws.com/conanio-production/downloads/conan-ubuntu-64_0_5_0.deb
+
+*** COMPLETED Create a blog post on conan                             :story:
+    CLOSED: [2015-12-22 Tue 14:07]
+    CLOCK: [2015-12-22 Tue 11:07]--[2015-12-22 Tue 14:07] =>  3:00
+
+Create a post narrating how conan support was added to dogen and the
+failures in the attempt of adding biicode support.
 
 *** Remove =service= stereotype                                       :story:
 

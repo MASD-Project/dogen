@@ -1,0 +1,353 @@
+#+title: Nerd Food: Dogen: The Package Management Saga
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+We've just gone past [[https://github.com/DomainDrivenConsulting/dogen][Dogen's]] [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_75.org][Sprint 75]], so I guess it's time for one
+of those "reminiscing posts" - something along the lines of what we
+did for [[http://mcraveiro.blogspot.co.uk/2014/09/nerd-food-dogen-lessons-in-incremental.html][Sprint 50]]. This one is a bit more practical though; if you are
+only interested in the practical side, keep scrolling until you see
+"Conan".
+
+So, package management. Like any other part-time C++ developer whose
+professional mainstay is C# and Java, I have keenly felt the need for
+a package manager when in C++-land. The problem is less visible when
+you are working with mature libraries and dealing with just Linux, due
+to the huge size of the package repositories and the great tooling
+built around them. However, things get messier when you start to go
+cross-platform, and messier still when you are coding on the bleeding
+edge of C++: either the package you need is not available in the
+distro's repos or even [[https://launchpad.net/ubuntu/%2Bppas][PPA's]]; or, when it is, its rarely at the
+version you require.
+
+Alas, for all our sins, that's exactly where we were when [[https://github.com/DomainDrivenConsulting/dogen][Dogen]] got
+started.
+
+* A Spoonful of Dogen History
+
+Dogen sprung to life just a tad after C++-0x became [[https://en.wikipedia.org/wiki/C%252B%252B11][C++-11]], so we
+experienced first hand the highs of a quasi-new-language followed by
+the lows of feeling the brunt of the bleeding edge pain. For starters,
+/nothing/ we ever wanted was available out of the box, on any of the
+platforms we were interested in. Even Debian testing was a bit
+behind - probably stalled due to a compiler transition or other, but I
+can't quite recall the details. In those days, Real Programmers were
+Real Programmers and mice were mice: we had to [[http://mcraveiro.blogspot.co.uk/2012/06/nerd-food-c-11-with-gcc.html][build and install the
+C++ compilers ourselves]] and, even then, C++-11 support was new, a bit
+flaky and limited. We then had to use those compilers to compile all
+of the dependencies in C++-11 mode.
+
+** The PFH Days
+
+After doing this manually once or twice, it soon stopped being
+fun. And so we solved this problem by creating the PFH - the Private
+Filesystem Hierarchy - a gloriously over-ambitious name to describe a
+set of wrapper scripts that helped with the process of downloading
+tarballs, unpacking, building and finally installing them into
+well-defined locations. It worked well enough in the confines of its
+remit, but we were often outside those, having to apply out-of-tree
+patches, adding new dependencies and so on. We also didn't use Travis
+in those days - not even sure it existed, but if it did, the rigmarole
+of the bleeding edge experience would certainly put a stop to any
+ideas of using it. So we used a local install of CDash with a number
+of build agents on OSX, Windows (MinGW) and Linux (32-bit and
+64-bit). Things worked beautifully when nothing changed and the setup
+was stable; but, every time a new version of a library - or god
+forbid, of a compiler - was released, one had that sense of dread: do
+I *really* need to upgrade?
+
+Since one of the main objectives of Dogen was to learn about C++-11,
+one has to say that the pain was worth it. But all of the moving parts
+described above were not ideal and they were certainly not the thing
+you want to be wasting your precious time on when it is very
+scarce. They were certainly not scalable.
+
+** The Good Days and the Bad Days
+
+Things improved slightly for a year or two when distros started to
+ship C++-11 compliant compilers and recent boost versions. It was all
+so good we were able to move over to [[https://travis-ci.org/DomainDrivenConsulting/dogen][Travis]] and ditch almost all of
+our private infrastructure. For a while things looked really
+good. However, due to Travis' [[https://wiki.ubuntu.com/LTS][Ubuntu LTS]] policy, we were stuck with a
+rapidly ageing Boost version. At first PPAs were a good solution for
+this, but soon these became stale too. We also needed to get latest
+CMake as there are a lot of developments on that front, but we
+certainly could not afford (time-wise) to revert back to the bad old
+days of the PFH. At the same time, it made no sense to freeze
+dependencies in time, providing a worse development experience. So the
+only route left was to break Travis and hope that some solution would
+appear. Some alternatives were tried such as [[https://drone.io/github.com/DomainDrivenConsulting/dogen][Drone.io]] but nothing was
+successful.
+
+There was nothing else for it; what was needed was a package manager
+to manage the development dependencies.
+
+** Nuget Hopes Dashed
+
+Having used [[https://www.nuget.org/][Nuget]] in anger for both C# and C++ projects, and given
+Microsoft's recent change of heart with regards to open source, I was
+secretly hoping that Nuget would get some traction in the wider C++
+world. To recap, Nuget worked [[http://mcraveiro.blogspot.co.uk/2014/05/nerd-food-using-mono-in-anger-part-ii_3422.html][well enough in Mono]]; in addition, C++
+support for Windows was added [[http://blogs.msdn.com/b/vcblog/archive/2013/04/26/nuget-for-c.aspx][early on]]. It was somewhat limited and a
+bit quirky at the start, but it kept on getting better, to the point
+of usability. Trouble was, their focus was just Visual Studio.
+
+Alas, nothing much ever came from my Nuget hopes. However, there have
+been a couple of recent announcements from Microsoft that make me
+think that they will eventually look into this space:
+
+- [[http://blogs.msdn.com/b/vcblog/archive/2015/12/04/introducing-clang-with-microsoft-codegen-in-vs-2015-update-1.aspx][Clang with Microsoft CodeGen in VS 2015 Update 1]]
+- [[http://blogs.msdn.com/b/vcblog/archive/2015/12/15/support-for-android-cmake-projects-in-visual-studio.aspx][Support for Android CMake projects in Visual Studio]]
+
+Surely the logical consequence is to be able to manage packages in a
+consistent way across platforms? We can but hope.
+
+** Biicode Comes to the Rescue?
+
+Nuget did not pan out but what did happen was even more unlikely: some
+crazy-cool Spaniards decided to create a stand alone package
+manager. Being from the same peninsula, I felt compelled to use their
+wares, and was joyful as they went from strength to strength -
+including the success of their [[https://www.biicode.com/biicode-open-source-challenge][open source campaign]]. And I loved the
+fact that it integrated really well with [[https://cmake.org][CMake]], and that [[https://www.jetbrains.com/clion/][CLion]]
+provided Biicode integration very early on.
+
+However, my biggest problem with Biicode was that it was just too
+complicated. I don't mean to say the creators of the product didn't
+have very good reasons for their technical choices - lord knows
+creating a product is hard enough, so I have nothing but praise to
+anyone who tries. However, for me personally, I never had the time to
+understand why Biicode needed its own version of CMake, nor did I want
+to modify my CMake files too much in order to fit properly with
+Biicode and so on. Basically, I needed a solution that worked well and
+required minimal changes at my end. Having been brought up with Maven
+and Nuget, I just could not understand why there wasn't a simple
+"packages.xml" file that specified the dependencies and then some
+non-intrusive CMake support to expose those into the CMake
+files. As you can see from some of [[http://forum.biicode.com/t/building-out-of-tree-using-biicode/460][my posts]], it just seemed it
+required "getting" Biicode in order to make use of it, which for me
+was not an option.
+
+Another thing that annoyed me was the difficulty on knowing what the
+"real" version of a library was. I wrote, at the time:
+
+#+begin_quote
+One slightly confusing thing about the process of adding dependencies
+is that there may be more than one page for a given dependency and it
+is not clear which one is the "best" one. For RapidJson there are
+three options, presumably from three different Biicode users:
+
+- [[https://www.biicode.com/fenix/rapidjson][fenix]]: authored on 2015-Apr-28, v1.0.1.
+- [[https://www.biicode.com/hithwen/rapidjson][hithwen]]: authored 2014-Jul-30
+- [[https://www.biicode.com/denis/rapidjson][denis]]: authored 2014-Oct-09
+
+The "fenix" option appeared to be the most up-to-date so I went with
+that one. However, this illustrates a deeper issue: how do you know
+you can trust a package? In the ideal setup, the project owners would
+add Biicode support and that would then be the one true
+version. However, like any other project, Biicode faces the initial
+adoption conundrum: people are not going to be willing to spend time
+adding support for Biicode if there aren't a lot of users of Biicode
+out there already, but without a large library of dependencies there
+is nothing to draw users in. In this light, one can understand that it
+makes sense for Biicode to allow anyone to add new packages as a way
+to bootstrap their user base; but sooner or later they will face the
+same issues as all distributions face.
+
+A few features would be helpful in the mean time:
+
+- popularity/number of downloads
+- user ratings
+
+These metrics would help in deciding which package to depend on.
+#+end_quote
+
+For all these reasons, I never found the time to get Biicode setup and
+these stories lingered in Dogen's backlog. And the build continued to
+be red.
+
+Sadly Biicode the company [[http://blog.biicode.com/biicode-just-the-company-post-mortem/][didn't make it either]]. I feel very sad for
+the guys behind it, because their heart was on the right place.
+
+Which brings us right up to date.
+
+* Enter Conan
+
+When I was a kid, we were all big fans of Conan. No, not [[https://en.wikipedia.org/wiki/Conan_the_Barbarian][the
+barbarian]], the Japanese Manga [[https://en.wikipedia.org/wiki/Future_Boy_Conan][Future Boy Conan]]. For me the name Conan
+will always bring back great memories of this show, which we watched
+in the original Japanese with Portuguese subtitles. So I was secretly
+pleased when I found [[https://www.conan.io/][conan.io]], a new package management system for
+C++. The guy behind it seems to be one of the original Biicode
+developers, so a lot of lessons from Biicode were learned.
+
+To cut a short story short, the great news is I managed to add Conan
+support to Dogen in roughly [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_77.org#add-support-for-conanio][3 hours]] and with very minimal knowledge
+about Conan. This to me was a litmus test of sorts, because I have
+very little interest in package management - creating my own product
+has proven to be challenging enough, so the last thing I need is to
+divert my energy further. The other interesting thing is that roughly
+half of that time was taken by trying to get Travis to behave, so its
+not quite fair to impute it to Conan.
+
+** Setting Up Dogen for Conan
+
+So, what changes did I do to get it all working? It was a very simple
+3-step process. First I installed Conan using a Debian package from
+[[https://www.conan.io/downloads][their site]].
+
+I then created a =conanfile.txt= on my top-level directory:
+
+#+begin_example
+[requires]
+Boost/1.60.0@lasote/stable
+
+[generators]
+cmake
+#+end_example
+
+Finally I modified my top-level =CMakeLists.txt=:
+
+#+begin_example
+# conan support
+if(EXISTS "${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
+    message(STATUS "Setting up Conan support.")
+    include("${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
+    CONAN_BASIC_SETUP()
+else()
+    message(STATUS "Conan build file not found, skipping include")
+endif()
+#+end_example
+
+This means that it is entirely possible to build Dogen without Conan,
+but if it is present, it will be used. With these two changes, all
+that was left to do was to build:
+
+#+begin_example
+$ cd dogen/build/output
+$ mkdir gcc-5-conan
+$ conan install ../../..
+$ make -j5 run_all_specs
+#+end_example
+
+/Et voila/, I had a brand spanking new build of Dogen using
+Conan. Well, actually, /not quite/. I've omitted a couple of problems
+that are a bit of a distraction on the Conan success story. Let's look
+at them now.
+
+** Problems and Their Solutions
+
+The first problem was that Boost 1.59 does not appear to have an
+overridden =FindBoost=, which means that I was not able to link. I
+moved to Boost 1.60 - which I wanted to do any way - and it worked out
+of the box.
+
+The second problem was that Conan seems to get confused with [[https://ninja-build.org/manual.html][Ninja]], my
+build system of choice. For whatever reason, when I use the Ninja
+generator, it fails like so:
+
+#+begin_example
+$ cmake ../../../ -G Ninja
+$ ninja -j5
+$ ninja: error: '~/.conan/data/Boost/1.60.0/lasote/stable/package/ebdc9c0c0164b54c29125127c75297f6607946c5/lib/libboost_system.so', needed by 'stage/bin/dogen_utility_spec', missing and no known rule to make it
+#+end_example
+
+This is very strange because boost system is clearly available in the
+Conan download folder. Using make solved this problem. I am going to
+open a ticket on the Conan GitHub project to investigate this.
+
+The third problem is more boost related than anything else. Boost
+Graph has not been as well maintained as it should, really. Thus users
+now find themselves carrying patches, and all because no one seems to
+be able to apply them upstream. Dogen is in this situation as we've
+hit the issue described here: [[http://stackoverflow.com/questions/25395805/compile-error-with-boost-graph-1-56-0-and-g-4-6-4][Compile error with boost.graph 1.56.0
+and g++ 4.6.4.]] Sadly this is still present on Boost 1.60; the patch
+exists in Trac but remains unapplied ([[https://svn.boost.org/trac/boost/ticket/10382][#10382]]). This is a tad worrying
+as we make a lot of use of Boost Graph and intend to increase the
+usage in the future.
+
+At any rate, as you can see, none of the problems were showstoppers,
+nor can they all be attributed to Conan.
+
+** Getting Travis to Behave
+
+Once I got Dogen building locally, I then went on a mission to
+convince Travis to use it. It was painful, but mainly because of the
+lag between commits and hitting an error. The core of the changes to
+my YML file were as follows:
+
+#+begin_example
+install:
+<snip>
+  # conan
+  - wget https://s3-eu-west-1.amazonaws.com/conanio-production/downloads/conan-ubuntu-64_0_5_0.deb -O conan.deb
+  - sudo dpkg -i conan.deb
+  - rm conan.deb
+<snip>
+script:
+  - export GIT_REPO="`pwd`"
+  - cd ${GIT_REPO}/build
+  - mkdir output
+  - cd output
+  - conan install ${GIT_REPO}
+  - hash=`ls ~/.conan/data/Boost/1.60.0/lasote/stable/package/`
+  - cd ~/.conan/data/Boost/1.60.0/lasote/stable/package/${hash}/include/
+  - sudo patch -p0 < ${GIT_REPO}/patches/boost_1_59_graph.patch
+  - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on
+  - make -j2 run_all_specs
+<snip>
+#+end_example
+
+I probably should have a bash script by know, given the size of the
+YML, but hey - if it works. The changes above deal with installation
+of the package, applying the boost patch and using Make instead of
+Ninja. Quite trivial in the end, even though it required a lot of
+iterations to get there.
+
+* Conclusions
+
+Having a red build is a very distressful event for a developer, so you
+can imagine how painful it has been to have red builds for /several
+months/. So it is with unmitigated pleasure that I got to see [[https://travis-ci.org/DomainDrivenConsulting/dogen/builds/98304957][build
+#628]] in a shiny emerald green. As far as that goes, it has been an
+unmitigated success.
+
+In a broader sense though, what can we say about Conan? There are many
+positives to take home, even at this early stage of Dogen usage:
+
+- it is a lot less intrusive than Biicode and easier to setup. Biicode
+  was very well documented, but it was easy to stray from the beaten
+  track and that then required reading a lot of different wiki
+  pages. It seems easier to stay on the beaten track with Conan.
+- as with Biicode, it seems to provide solutions to Debug/Release and
+  multi-platforms and compilers. We shall be testing it on Windows
+  soon and reporting back.
+- hopefully, since it started Open Source from the beginning, it will
+  form a community of developers around the source with the know-how
+  required to maintain it. It would also be great to see if a business
+  forms around it, since someone will have to pay the cloud bill.
+
+In terms of negatives:
+
+- I still believe the most scalable approach would have been to extend
+  Nuget for the C++ Linux use case, since Microsoft is willing to take
+  patches and since they foot the bill for the public repo. However,
+  I can understand why one would prefer to have total control over the
+  solution rather than depend on the whims of some middle-manager in
+  order to commit.
+- it seems publishing packages requires getting down into
+  Python. Haven't tried it yet, but I'm hoping it will be made as easy
+  as importing packages with a simple text file. The more complexity
+  around these flows the tool adds, the less likely they are to be
+  used.
+- there still are no "official builds" from projects. As explained
+  above, this is a chicken and egg problem, because people are only
+  willing to dedicate time to it once there are enough users
+  complaining. Having said that, since Conan is easy to setup, one
+  hopes to see some adoption in the near future.
+- even when using a GitHub profile, one still has to define a Conan
+  specific password. This was not required with Biicode. Minor pain,
+  but still, if they want to increase traction, this is probably an
+  unnecessary stumbling block. It was sufficient to make me think
+  twice about setting up a login, for one.
+
+In truth, these are all very minor negative points, but still worth
+making them. All and all, I am quite pleased with Conan thus far.
