@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-22 Tue 22:00]
+#+CAPTION: Clock summary at [2015-12-22 Tue 23:11]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *7:40* |      |      |
+| *Total time*                                                                | *8:20* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 7:40   |      |      |
-| Active                                                                      |        | 7:40 |      |
+| Stories                                                                     | 8:20   |      |      |
+| Active                                                                      |        | 8:20 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:03 |
 | STARTED Update Linux CDash agent                                            |        |      | 0:09 |
 | COMPLETED Add support for conan.io                                          |        |      | 3:06 |
 | COMPLETED Create a blog post on conan                                       |        |      | 3:00 |
-| STARTED Investigate AppVeyor's windows support for builds                   |        |      | 1:22 |
+| COMPLETED Investigate AppVeyor's windows support for builds                 |        |      | 2:02 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -86,7 +86,9 @@ should be:
 Create a post narrating how conan support was added to dogen and the
 failures in the attempt of adding biicode support.
 
-*** STARTED Investigate AppVeyor's windows support for builds         :story:
+*** COMPLETED Investigate AppVeyor's windows support for builds       :story:
+    CLOSED: [2015-12-22 Tue 23:11]
+    CLOCK: [2015-12-22 Tue 22:31]--[2015-12-22 Tue 23:11] =>  0:40
     CLOCK: [2015-12-22 Tue 21:32]--[2015-12-22 Tue 22:00] =>  0:28
     CLOCK: [2015-12-22 Tue 20:47]--[2015-12-22 Tue 20:55] =>  0:08
     CLOCK: [2015-12-22 Tue 20:29]--[2015-12-22 Tue 20:46] =>  0:17
