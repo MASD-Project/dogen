@@ -39,6 +39,7 @@ We need to get the build green on the Linux agent again.
 - built boost 1.59, copied scripts into PFH.
 
 *** STARTED Add support for conan.io                                  :story:
+    CLOCK: [2015-12-22 Tue 01:33]--[2015-12-22 Tue 01:39] =>  0:06
     CLOCK: [2015-12-22 Tue 01:27]--[2015-12-22 Tue 01:32] =>  0:05
     CLOCK: [2015-12-22 Tue 01:20]--[2015-12-22 Tue 01:26] =>  0:06
     CLOCK: [2015-12-21 Mon 23:56]--[2015-12-22 Tue 01:19] =>  1:23
@@ -63,6 +64,13 @@ Notes:
 : ninja: error: '/home/marco/.conan/data/Boost/1.60.0/lasote/stable/package/ebdc9c0c0164b54c29125127c75297f6607946c5/lib/libboost_system.so', needed by 'stage/bin/dogen_utility_spec', missing and no known rule to make it
 
 - test data errors when running utility spec more than once
+- path to downloads is not correct. submit PR.
+
+: https://s3-eu-west-1.amazonaws.com/conanio/downloads/conan-ubuntu-64_0_3_0.deb
+
+should be:
+
+: https://s3-eu-west-1.amazonaws.com/conanio-production/downloads/conan-ubuntu-64_0_5_0.deb
 
 *** Remove =service= stereotype                                       :story:
 
