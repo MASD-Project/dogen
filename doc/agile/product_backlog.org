@@ -5179,20 +5179,6 @@ https://github.com/Reactive-Extensions/RxCpp
 
 We should push both the C++ libraries as well as the dogen binary.
 
-*** Investigate AppVeyor's windows support for builds                 :story:
-
-These guys seem to have good windows support:
-
-http://www.appveyor.com/
-
-Similar to travis. Used by RxCpp:
-
-https://github.com/Reactive-Extensions/RxCpp
-
-Yml:
-
-https://github.com/Reactive-Extensions/RxCpp/blob/master/appveyor.yml
-
 *** Investigate the emblems used by Bit7z                             :story:
 
 This project uses emblems for version, platform and compiler:

@@ -85,6 +85,21 @@ should be:
 Create a post narrating how conan support was added to dogen and the
 failures in the attempt of adding biicode support.
 
+*** STARTED Investigate AppVeyor's windows support for builds         :story:
+    CLOCK: [2015-12-22 Tue 19:38]--[2015-12-22 Tue 19:54] =>  0:16
+
+These guys seem to have good windows support:
+
+http://www.appveyor.com/
+
+Similar to travis. Used by RxCpp:
+
+https://github.com/Reactive-Extensions/RxCpp
+
+Yml:
+
+https://github.com/Reactive-Extensions/RxCpp/blob/master/appveyor.yml
+
 *** Remove =service= stereotype                                       :story:
 
 This really just means non-generatable, or do not generate. We already

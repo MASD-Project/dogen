@@ -1,0 +1,29 @@
+version: 2.2.{build}
+
+branches:
+    only:
+        - master
+
+environment:
+  matrix:
+    - VSVER: Visual Studio 15 2015 Win64
+
+platform:
+  - x64
+
+configuration:
+  - Release
+
+install:
+    - choco install cmake
+    - choco upgrade cmake
+    - cmake --version
+
+before_build:
+    - cd build
+    - mkdir output
+    - cd output
+    - cmake -G "%VSVER%" ../..
+
+build:
+    project: build\output\dogen.sln
