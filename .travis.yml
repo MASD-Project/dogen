@@ -46,10 +46,9 @@ install:
   - rm conan.deb
 
   # cmake
-  - mkdir ~/cmake_tmp
-  - wget --no-check-certificate https://cmake.org/files/v3.4/cmake-3.4.1-Linux-x86_64.tar.gz -O ~/cmake_tmp/cmake-3.4.1-Linux-x86_64.tar.gz
-  - tar xf ~/cmake_tmp/cmake-3.4.1-Linux-x86_64.tar.gz
-  - sudo cp -r ~/cmake_tmp/cmake-3.4.1-Linux-x86_64/* /usr
+  - wget --no-check-certificate https://cmake.org/files/v3.4/cmake-3.4.1-Linux-x86_64.tar.gz -O /tmp/cmake-3.4.1-Linux-x86_64.tar.gz
+  - tar xf /tmp/cmake-3.4.1-Linux-x86_64.tar.gz -C /tmp
+  - sudo cp -r /tmp/cmake-3.4.1-Linux-x86_64/* /usr
 
   # clang 3.4
   - if [ "$CXX" == "clang++" ]; then sudo apt-get install --allow-unauthenticated -qq clang-3.4; fi
