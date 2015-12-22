@@ -13,18 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-22 Tue 14:07]
+#+CAPTION: Clock summary at [2015-12-22 Tue 20:29]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *6:18* |      |      |
+| *Total time*                                                                | *6:47* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 6:18   |      |      |
-| Active                                                                      |        | 6:18 |      |
+| Stories                                                                     | 6:47   |      |      |
+| Active                                                                      |        | 6:47 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:03 |
 | STARTED Update Linux CDash agent                                            |        |      | 0:09 |
 | COMPLETED Add support for conan.io                                          |        |      | 3:06 |
 | COMPLETED Create a blog post on conan                                       |        |      | 3:00 |
+| STARTED Investigate AppVeyor's windows support for builds                   |        |      | 0:29 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -86,6 +87,7 @@ Create a post narrating how conan support was added to dogen and the
 failures in the attempt of adding biicode support.
 
 *** STARTED Investigate AppVeyor's windows support for builds         :story:
+    CLOCK: [2015-12-22 Tue 20:15]--[2015-12-22 Tue 20:28] =>  0:13
     CLOCK: [2015-12-22 Tue 19:38]--[2015-12-22 Tue 19:54] =>  0:16
 
 These guys seem to have good windows support:
