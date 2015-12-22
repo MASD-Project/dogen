@@ -70,11 +70,13 @@ script:
   # - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on -G Ninja
   # - ninja -j2 package run_all_specs
   - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on
-  - make -j2 package run_all_specs
-  - sudo dpkg -i stage/pkg/dogen_*_amd64-applications.deb
-  - cd /tmp
-  - /usr/bin/dogen_knitter --version
-  - cd ${GIT_REPO}
+  - make -j2 run_all_specs
+  # packaging disabled because we do not have boost 1.60.
+  # - make -j2 package run_all_specs
+  # - sudo dpkg -i stage/pkg/dogen_*_amd64-applications.deb
+  # - cd /tmp
+  # - /usr/bin/dogen_knitter --version
+  # - cd ${GIT_REPO}
 
 notifications:
   email:
