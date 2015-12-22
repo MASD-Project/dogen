@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-22 Tue 20:29]
+#+CAPTION: Clock summary at [2015-12-22 Tue 22:00]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *6:47* |      |      |
+| *Total time*                                                                | *7:40* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 6:47   |      |      |
-| Active                                                                      |        | 6:47 |      |
+| Stories                                                                     | 7:40   |      |      |
+| Active                                                                      |        | 7:40 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:03 |
 | STARTED Update Linux CDash agent                                            |        |      | 0:09 |
 | COMPLETED Add support for conan.io                                          |        |      | 3:06 |
 | COMPLETED Create a blog post on conan                                       |        |      | 3:00 |
-| STARTED Investigate AppVeyor's windows support for builds                   |        |      | 0:29 |
+| STARTED Investigate AppVeyor's windows support for builds                   |        |      | 1:22 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -87,6 +87,7 @@ Create a post narrating how conan support was added to dogen and the
 failures in the attempt of adding biicode support.
 
 *** STARTED Investigate AppVeyor's windows support for builds         :story:
+    CLOCK: [2015-12-22 Tue 21:32]--[2015-12-22 Tue 22:00] =>  0:28
     CLOCK: [2015-12-22 Tue 20:47]--[2015-12-22 Tue 20:55] =>  0:08
     CLOCK: [2015-12-22 Tue 20:29]--[2015-12-22 Tue 20:46] =>  0:17
     CLOCK: [2015-12-22 Tue 20:15]--[2015-12-22 Tue 20:28] =>  0:13
@@ -107,6 +108,16 @@ https://github.com/Reactive-Extensions/RxCpp/blob/master/appveyor.yml
 Since Conan does not support libxml2 yet, we need to find another way
 to install it. One possible solution is to mix-and-match with
 nuget. Example from [[https://github.com/libimobiledevice-win32/libplist/tree/1a62450b787690658d4fa078e828fff020be35b1][libplist]].
+
+Include directories for libxml2 (=CMAKE_INCLUDE_PATH=):
+
+- C:\projects\dogen\packages\libxml2.2.7.8.7\build\native\include\
+- C:\projects\dogen\packages\libiconv.1.14.0.11\build\native\include
+
+Library directories for libxml2 (=CMAKE_LIBRARY_PATH=):
+
+- C:\projects\dogen\packages\libxml2.redist.2.7.8.7\build\native\bin\v110\x64\Release\dynamic\cdecl\libxml2.dll
+- C:\projects\dogen\packages\libiconv.redist.1.14.0.11\build\native\bin\v110\x64\Release\dynamic\cdecl\libiconv.dll
 
 *** Remove =service= stereotype                                       :story:
 

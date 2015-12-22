@@ -35,5 +35,7 @@ build_script:
     - cmd: mkdir output
     - cmd: cd output
     - cmd: conan install ../..
+    - cmd: set CMAKE_INCLUDE_PATH=C:\projects\dogen\packages\libxml2.2.7.8.7\build\native\include;C:\projects\dogen\packages\libiconv.1.14.0.11\build\native\include
+    - cmd: set CMAKE_LIBRARY_PATH=C:\projects\dogen\packages\libxml2.redist.2.7.8.7\build\native\bin\v110\x64\Release\dynamic\cdecl;C:\projects\dogen\packages\libiconv.redist.1.14.0.11\build\native\bin\v110\x64\Release\dynamic\cdecl
     - cmd: cmake ../.. -G "%VSVER%"
     - cmd: cmake --build . --config Release
