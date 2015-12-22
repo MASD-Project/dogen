@@ -87,6 +87,7 @@ Create a post narrating how conan support was added to dogen and the
 failures in the attempt of adding biicode support.
 
 *** STARTED Investigate AppVeyor's windows support for builds         :story:
+    CLOCK: [2015-12-22 Tue 20:47]--[2015-12-22 Tue 20:55] =>  0:08
     CLOCK: [2015-12-22 Tue 20:29]--[2015-12-22 Tue 20:46] =>  0:17
     CLOCK: [2015-12-22 Tue 20:15]--[2015-12-22 Tue 20:28] =>  0:13
     CLOCK: [2015-12-22 Tue 19:38]--[2015-12-22 Tue 19:54] =>  0:16
@@ -99,9 +100,13 @@ Similar to travis. Used by RxCpp:
 
 https://github.com/Reactive-Extensions/RxCpp
 
-Yml:
+YML:
 
 https://github.com/Reactive-Extensions/RxCpp/blob/master/appveyor.yml
+
+Since Conan does not support libxml2 yet, we need to find another way
+to install it. One possible solution is to mix-and-match with
+nuget. Example from [[https://github.com/libimobiledevice-win32/libplist/tree/1a62450b787690658d4fa078e828fff020be35b1][libplist]].
 
 *** Remove =service= stereotype                                       :story:
 

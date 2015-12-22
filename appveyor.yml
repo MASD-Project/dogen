@@ -27,7 +27,7 @@ install:
     - cmd: conan --version
 
 before_build:
-  - nuget restore
+    - cmd: nuget restore ./packages.config -packagesdirectory packages
       
 build_script:
     - cmd: cd build
