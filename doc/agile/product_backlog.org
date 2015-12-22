@@ -4798,6 +4798,13 @@ needed by Dogen.
 
 *** Compile dogen in Windows using Visual Studio 2015                 :story:
 
+*New Understanding*
+
+We now have an [[https://ci.appveyor.com/project/mcraveiro/dogen/history][AppVeyor build for windows]] with Conan support. We just
+need to work through the errors.
+
+*Previous Understanding*
+
 Using our "SoC" resources, we need to setup a Dogen development
 environment on Windows using VS 2015. We need to also create a blog
 post about it.
