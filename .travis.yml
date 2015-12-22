@@ -24,49 +24,48 @@ compiler:
   - gcc
 
 before_install:
-  # boost
-  - sudo add-apt-repository -y ppa:boost-latest/ppa
-  
   # cmake
   - sudo add-apt-repository -y ppa:kalakris/cmake
 
-  # g++4.9
+  # g++5.2
   - if [ "$CXX" == "g++" ]; then sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test; fi
 
-  # clang 3.4
+  # clang 3.5
   - if [ "$CXX" == "clang++" ]; then sudo add-apt-repository -y ppa:h-rayflood/llvm; fi
 
   - sudo apt-get update -qq
 
 install:
-  # boost. install all for now.
-  - sudo apt-get install libboost1.55-all-dev 
-
   # ninja
   - sudo apt-get install ninja-build
 
   # cmake
   - sudo apt-get install cmake
 
-  # g++4.9
-  - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.9; fi
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.9" CC="gcc-4.9" GCOV="gcov-4.9"; fi
+  # g++5.2
+  - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-5.2; fi
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-5.2" CC="gcc-5.2" GCOV="gcov-5.2"; fi
 
-  # clang 3.4
-  - if [ "$CXX" == "clang++" ]; then sudo apt-get install --allow-unauthenticated -qq clang-3.4; fi
-  - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.4" CC="clang-3.4"; fi
+  # clang 3.5
+  - if [ "$CXX" == "clang++" ]; then sudo apt-get install --allow-unauthenticated -qq clang-3.5; fi
+  - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.5" CC="clang-3.5"; fi
 
   # coverage
   - sudo pip install cpp-coveralls
 
-script: 
+script:
+  - wget https://s3-eu-west-1.amazonaws.com/conanio/downloads/conan-ubuntu-64_0_3_0.deb -O conan.deb
+  - sudo dpkg -i conan.deb
+  - rm conan.deb
   - export GIT_REPO="`pwd`"
   - cd ..
   - mkdir output
   - cd output
-  - export CTEST_OUTPUT_ON_FAILURE=1
-  - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on -G Ninja
-  - ninja -j2 package run_all_specs
+  - conan install ${GIT_REPO}
+  # - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on -G Ninja
+  - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on
+  # - ninja -j2 package run_all_specs
+  - make -j2 package run_all_specs
   - sudo dpkg -i stage/pkg/dogen_*_amd64-applications.deb
   - cd /tmp
   - /usr/bin/dogen_knitter --version

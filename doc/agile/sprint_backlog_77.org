@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-22 Tue 01:20]
+#+CAPTION: Clock summary at [2015-12-22 Tue 01:32]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *1:35* |      |      |
+| *Total time*                                                                | *1:46* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 1:35   |      |      |
-| Active                                                                      |        | 1:35 |      |
+| Stories                                                                     | 1:46   |      |      |
+| Active                                                                      |        | 1:46 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:03 |
 | STARTED Update Linux CDash agent                                            |        |      | 0:09 |
-| STARTED Add support for conan.io                                            |        |      | 1:23 |
+| STARTED Add support for conan.io                                            |        |      | 1:34 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -39,6 +39,8 @@ We need to get the build green on the Linux agent again.
 - built boost 1.59, copied scripts into PFH.
 
 *** STARTED Add support for conan.io                                  :story:
+    CLOCK: [2015-12-22 Tue 01:27]--[2015-12-22 Tue 01:32] =>  0:05
+    CLOCK: [2015-12-22 Tue 01:20]--[2015-12-22 Tue 01:26] =>  0:06
     CLOCK: [2015-12-21 Mon 23:56]--[2015-12-22 Tue 01:19] =>  1:23
 
 [[https://www.conan.io/][Conan.io]] could be a solution for our long standing problems with
@@ -56,9 +58,11 @@ Notes:
 : $ patch -p0 < ~/Development/DomainDrivenConsulting/dogen/patches/boost_1_59_graph.patch
 
 - example with travis available [[http://conanio.readthedocs.org/en/latest/integrations/travisci.html][here]].
-- ninja fails to build but works with make
+- ninja fails to build but works with make. Open ticket for this [[https://github.com/conan-io/conan/issues][in issues]].
 
 : ninja: error: '/home/marco/.conan/data/Boost/1.60.0/lasote/stable/package/ebdc9c0c0164b54c29125127c75297f6607946c5/lib/libboost_system.so', needed by 'stage/bin/dogen_utility_spec', missing and no known rule to make it
+
+- test data errors when running utility spec more than once
 
 *** Remove =service= stereotype                                       :story:
 
