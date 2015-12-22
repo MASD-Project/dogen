@@ -26,6 +26,9 @@ install:
     - cmd: set PATH=%PATH%;C:\Program Files (x86)\Conan\conan
     - cmd: conan --version
 
+before_build:
+  - nuget restore
+      
 build_script:
     - cmd: cd build
     - cmd: mkdir output
