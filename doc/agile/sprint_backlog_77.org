@@ -13,20 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-23 Wed 00:42]
+#+CAPTION: Clock summary at [2015-12-23 Wed 13:25]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *8:58* |      |      |
+| *Total time*                                                                | *9:22* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 8:58   |      |      |
-| Active                                                                      |        | 8:58 |      |
+| Stories                                                                     | 9:22   |      |      |
+| Active                                                                      |        | 9:22 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:03 |
 | STARTED Update Linux CDash agent                                            |        |      | 0:09 |
 | COMPLETED Add support for conan.io                                          |        |      | 3:06 |
 | COMPLETED Create a blog post on conan                                       |        |      | 3:00 |
 | COMPLETED Investigate AppVeyor's windows support for builds                 |        |      | 2:02 |
 | COMPLETED Remove utilities for serialisation of unordered containers        |        |      | 0:38 |
+| STARTED Add =iconv.h= to include path on windows                            |        |      | 0:24 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -128,6 +129,33 @@ Library directories for libxml2 (=CMAKE_LIBRARY_PATH=):
 
 It seems these are now supported directly by boost, so we do not need
 carry our own code.
+
+*** STARTED Add =iconv.h= to include path on windows                  :story:
+    CLOCK: [2015-12-23 Wed 13:01]--[2015-12-23 Wed 13:25] =>  0:24
+
+At present the windows build is failing on an iconv error:
+
+: (ClCompile target) ->
+:  C:\projects\dogen\packages\libxml2.2.7.8.7\build\native\include\libxml/encoding.h(28): fatal error C1083: Cannot open include file: 'iconv.h': No such file or directory [C:\projects\dogen\build\output\projects\utility\src\utility.vcxproj]
+
+This is due to the fact that the libxml include path is defined but
+not the iconv include path (due to the nuget rigmarole):
+
+: /IC:\Users\appveyor\.conan\data\zlib\1.2.8\lasote\stable\package\c85f9b402dd4d46acdf074e1c63b768a41181d7a\include
+: /IC:\projects\dogen\packages\libxml2.2.7.8.7\build\native\include
+: /IC:\projects\dogen\build\output\stage\include
+: <snip>
+
+The problem appears to be that when we find libxml we manually add it
+to the include and lib path:
+
+: find_package(LibXml2 REQUIRED)
+: if(LIBXML2_FOUND)
+:    include_directories(SYSTEM ${LIBXML2_INCLUDE_DIR})
+:    set(LIBS ${LIBS} ${LIBXML2_LIBRARY_DIR})
+: endif()
+
+We need something similar for iconv.
 
 *** Remove =service= stereotype                                       :story:
 

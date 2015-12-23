@@ -78,6 +78,13 @@ if(Boost_FOUND)
     include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
 endif()
 
+# iconv - required by libxml
+find_package(Iconv REQUIRED)
+if(ICONV_FOUND)
+    include_directories(SYSTEM ${ICONV_INCLUDE_DIR})
+    set(LIBS ${LIBS} ${ICONV_LIBRARIES})
+endif()
+
 # libxml
 find_package(LibXml2 REQUIRED)
 if(LIBXML2_FOUND)
