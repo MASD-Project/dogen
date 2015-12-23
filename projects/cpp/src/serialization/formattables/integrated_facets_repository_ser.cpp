@@ -26,10 +26,10 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/unordered_map.hpp>
+#include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/utility/serialization/unordered_map.hpp"
-#include "dogen/utility/serialization/unordered_set.hpp"
 #include "dogen/cpp/serialization/formattables/integrated_facets_repository_ser.hpp"
 
 namespace boost {

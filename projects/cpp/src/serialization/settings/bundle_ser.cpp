@@ -28,9 +28,9 @@
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/shared_ptr.hpp>
+#include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/cpp/serialization/settings/bundle_ser.hpp"
 #include "dogen/formatters/serialization/general_settings_ser.hpp"
 #include "dogen/cpp/serialization/settings/aspect_settings_ser.hpp"

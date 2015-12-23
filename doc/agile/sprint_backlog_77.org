@@ -13,19 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-22 Tue 23:11]
+#+CAPTION: Clock summary at [2015-12-23 Wed 00:42]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *8:20* |      |      |
+| *Total time*                                                                | *8:58* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 8:20   |      |      |
-| Active                                                                      |        | 8:20 |      |
+| Stories                                                                     | 8:58   |      |      |
+| Active                                                                      |        | 8:58 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:03 |
 | STARTED Update Linux CDash agent                                            |        |      | 0:09 |
 | COMPLETED Add support for conan.io                                          |        |      | 3:06 |
 | COMPLETED Create a blog post on conan                                       |        |      | 3:00 |
 | COMPLETED Investigate AppVeyor's windows support for builds                 |        |      | 2:02 |
+| COMPLETED Remove utilities for serialisation of unordered containers        |        |      | 0:38 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -120,6 +121,13 @@ Library directories for libxml2 (=CMAKE_LIBRARY_PATH=):
 
 - C:\projects\dogen\packages\libxml2.redist.2.7.8.7\build\native\bin\v110\x64\Release\dynamic\cdecl\libxml2.dll
 - C:\projects\dogen\packages\libiconv.redist.1.14.0.11\build\native\bin\v110\x64\Release\dynamic\cdecl\libiconv.dll
+
+*** COMPLETED Remove utilities for serialisation of unordered containers :story:
+    CLOSED: [2015-12-23 Wed 00:42]
+    CLOCK: [2015-12-23 Wed 00:04]--[2015-12-23 Wed 00:42] =>  0:38
+
+It seems these are now supported directly by boost, so we do not need
+carry our own code.
 
 *** Remove =service= stereotype                                       :story:
 

@@ -26,6 +26,8 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/unordered_map.hpp>
+#include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
@@ -36,8 +38,6 @@
 #include "dogen/yarn/serialization/exception_ser.hpp"
 #include "dogen/yarn/serialization/primitive_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
-#include "dogen/utility/serialization/unordered_map.hpp"
-#include "dogen/utility/serialization/unordered_set.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
 #include "dogen/yarn/serialization/generation_types_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_ser.hpp"

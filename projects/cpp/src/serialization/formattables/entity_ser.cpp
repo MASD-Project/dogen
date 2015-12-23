@@ -27,9 +27,9 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/cpp/serialization/settings/bundle_ser.hpp"
 #include "dogen/cpp/serialization/formattables/entity_ser.hpp"
 #include "dogen/cpp/serialization/formattables/enum_info_ser.hpp"

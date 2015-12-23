@@ -214,7 +214,7 @@
             "object_type" : "hash_container",
             "extensions" : {
                 "cpp.types.class_header_formatter.inclusion_directive" : "<unordered_set>",
-                "cpp.serialization.class_header_formatter.inclusion_directive" : "\"dogen/utility/serialization/unordered_set.hpp\"",
+                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/unordered_set.hpp>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
                 "cpp.io.class_header_formatter.inclusion_required" : false,
                 "cpp.test_data.class_header_formatter.inclusion_required" : false,
@@ -253,7 +253,7 @@
             "object_type" : "hash_container",
             "extensions" : {
                 "cpp.types.class_header_formatter.inclusion_directive" : "<unordered_map>",
-                "cpp.serialization.class_header_formatter.inclusion_directive" : "\"dogen/utility/serialization/unordered_map.hpp\"",
+                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/unordered_map.hpp>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
                 "cpp.io.class_header_formatter.inclusion_required" : false,
                 "cpp.test_data.class_header_formatter.inclusion_required" : false,

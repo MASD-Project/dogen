@@ -27,14 +27,14 @@
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/shared_ptr.hpp>
+#include <boost/serialization/unordered_map.hpp>
+#include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/yarn/serialization/model_ser.hpp"
 #include "dogen/yarn/serialization/module_ser.hpp"
 #include "dogen/yarn/serialization/element_ser.hpp"
-#include "dogen/utility/serialization/unordered_map.hpp"
-#include "dogen/utility/serialization/unordered_set.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
 
 namespace boost {
