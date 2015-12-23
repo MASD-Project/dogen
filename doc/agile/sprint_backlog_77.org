@@ -13,21 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-23 Wed 13:25]
+#+CAPTION: Clock summary at [2015-12-23 Wed 13:46]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *9:22* |      |      |
+| *Total time*                                                                | *9:42* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 9:22   |      |      |
-| Active                                                                      |        | 9:22 |      |
+| Stories                                                                     | 9:42   |      |      |
+| Active                                                                      |        | 9:42 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:03 |
 | STARTED Update Linux CDash agent                                            |        |      | 0:09 |
 | COMPLETED Add support for conan.io                                          |        |      | 3:06 |
 | COMPLETED Create a blog post on conan                                       |        |      | 3:00 |
 | COMPLETED Investigate AppVeyor's windows support for builds                 |        |      | 2:02 |
 | COMPLETED Remove utilities for serialisation of unordered containers        |        |      | 0:38 |
-| STARTED Add =iconv.h= to include path on windows                            |        |      | 0:24 |
+| STARTED Add =iconv.h= to include path on windows                            |        |      | 0:44 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -131,6 +131,7 @@ It seems these are now supported directly by boost, so we do not need
 carry our own code.
 
 *** STARTED Add =iconv.h= to include path on windows                  :story:
+    CLOCK: [2015-12-23 Wed 13:26]--[2015-12-23 Wed 13:46] =>  0:20
     CLOCK: [2015-12-23 Wed 13:01]--[2015-12-23 Wed 13:25] =>  0:24
 
 At present the windows build is failing on an iconv error:

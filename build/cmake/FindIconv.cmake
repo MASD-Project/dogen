@@ -30,10 +30,10 @@
 
 set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 include(CheckFunctionExists)
-if (ICONV_INCLUDE_DIR)
+# if (ICONV_INCLUDE_DIR)
   # Already in cache, be silent
-  set(ICONV_FIND_QUIETLY TRUE)
-endif()
+  # set(ICONV_FIND_QUIETLY TRUE)
+# endif()
 
 find_path(ICONV_INCLUDE_DIR iconv.h
  /usr/include
@@ -44,7 +44,7 @@ set(POTENTIAL_ICONV_LIBS iconv libiconv libiconv2)
 find_library(ICONV_LIBRARY NAMES ${POTENTIAL_ICONV_LIBS}
 	PATHS /usr/lib /usr/local/lib)
 
-if(WIN32)
+if(WIN32 OR WIN64)
 	set(ICONV_DLL_NAMES iconv.dll  libiconv.dll libiconv2.dll)
 	find_file(ICONV_DLL   
 					NAMES ${ICONV_DLL_NAMES}
@@ -81,8 +81,6 @@ else()
    		set(ICONV_FOUND TRUE)
 	endif()
 endif()
-
-
 
 if(ICONV_FOUND)
    if(NOT ICONV_FIND_QUIETLY)
