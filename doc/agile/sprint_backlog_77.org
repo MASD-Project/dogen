@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-23 Wed 15:54]
+#+CAPTION: Clock summary at [2015-12-23 Wed 16:58]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *11:46* |       |      |
+| *Total time*                                                                | *12:47* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 11:46   |       |      |
-| Active                                                                      |         | 11:46 |      |
+| Stories                                                                     | 12:47   |       |      |
+| Active                                                                      |         | 12:47 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:15 |
 | STARTED Update Linux CDash agent                                            |         |       | 0:09 |
 | COMPLETED Add support for conan.io                                          |         |       | 3:06 |
@@ -29,6 +29,8 @@
 | COMPLETED Remove utilities for serialisation of unordered containers        |         |       | 0:38 |
 | CANCELLED Add "field propagation" support to dynamic                        |         |       | 1:52 |
 | STARTED Add =iconv.h= to include path on windows                            |         |       | 0:44 |
+| STARTED Improve names in yarn around model element location                 |         |       | 0:30 |
+| STARTED Add qualified name to yarn properties                               |         |       | 0:31 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -195,10 +197,22 @@ to the include and lib path:
 
 We need something similar for iconv.
 
-*** Add qualified name to yarn properties                             :story:
+*** STARTED Improve names in yarn around model element location       :story:
+    CLOCK: [2015-12-23 Wed 16:27]--[2015-12-23 Wed 16:57] =>  0:30
 
-We need a way to uniquely identify a property. This could be done by
-appending the containing type's qualified name to the property name.
+Now that we have a clear conceptual model for yarn, we should rename
+the types to fit it:
+
+- =name=: this is an address of a modeling element in yarn modeling
+  space.
+- =location=: this is the module path component of the address.
+- =name::simple=: this is the name.
+- =name::qualified=: this is the unique identifier for a given
+  modeling element.
+- =nested_name=: nestable address.
+
+*** STARTED Add qualified name to yarn properties                     :story:
+    CLOCK: [2015-12-23 Wed 15:55]--[2015-12-23 Wed 16:26] =>  0:31
 
 *** Create a settings class for the "requires" settings               :story:
 
@@ -254,6 +268,22 @@ additional =cpp= specific types. In practice:
   etc. This is not ideal, but its not a problem just yet. We could
   update the factory to generate these types and then take a copy of
   the model and inject them in it.
+
+*** Create a map between UML/MOF terminology and yarn                 :story:
+
+It would be helpful to know what a yarn type means in terms of
+UML/MOF, and perhaps even explain why we have chosen certain names
+instead of the UML ones. We should also cover the modeling of
+relationships and the relation between yarn concepts and UML/MOF
+classes. This will form a chapter in the manual.
+
+The UML specification is available [[http://www.omg.org/spec/UML/2.5/][here]] and MOF specification is
+available [[http://www.omg.org/spec/MOF/2.5][here]].
+
+We need a way to uniquely identify a property. This could be done by
+appending the containing type's qualified name to the property name.
+
+See also [[http://www.uml-diagrams.org/][The Unified Modeling Language]] for a more accessible treatment.
 
 *** Remove =service= stereotype                                       :story:
 
