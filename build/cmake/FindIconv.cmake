@@ -39,12 +39,17 @@ find_path(ICONV_INCLUDE_DIR iconv.h
  /usr/include
  /usr/local/include)
 
+message(STATUS "iconv inc: ${ICONV_INCLUDE_DIR}")
+
 set(POTENTIAL_ICONV_LIBS iconv libiconv libiconv2)
 
 find_library(ICONV_LIBRARY NAMES ${POTENTIAL_ICONV_LIBS}
-	PATHS /usr/lib /usr/local/lib)
+  PATHS /usr/lib /usr/local/lib)
+
+message(STATUS "iconv lib: ${ICONV_LIBRARY}")
 
 if(WIN32 OR WIN64)
+  message(STATUS "WIN32 OR WIN64")
 	set(ICONV_DLL_NAMES iconv.dll  libiconv.dll libiconv2.dll)
 	find_file(ICONV_DLL   
 					NAMES ${ICONV_DLL_NAMES}
@@ -83,11 +88,12 @@ else()
 endif()
 
 if(ICONV_FOUND)
-   if(NOT ICONV_FIND_QUIETLY)
+   # if(NOT ICONV_FIND_QUIETLY)
       message(STATUS "Found iconv library: ${ICONV_LIBRARY}")
       #message(STATUS "Found iconv   dll  : ${ICONV_DLL}")
-   endif()
-else()
+   # endif()
+ else()
+   message(STATUS "iconv not found")
    if(ICONV_FIND_REQUIRED)
       message(STATUS "Looked for iconv library named ${POTENTIAL_ICONV_LIBS}.")
       message(STATUS "Found no acceptable iconv library. This is fatal.")
