@@ -60,6 +60,8 @@ add_custom_target(knit_${target}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --cpp-disable-cmakelists
+    --ignore-files-matching-regex .*/CMakeLists.txt    
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
     --verbose
