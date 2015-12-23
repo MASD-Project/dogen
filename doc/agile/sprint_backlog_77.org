@@ -13,24 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-23 Wed 13:46]
-| <75>                                                                        |        |      |      |
-| Headline                                                                    | Time   |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *9:42* |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 9:42   |      |      |
-| Active                                                                      |        | 9:42 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:03 |
-| STARTED Update Linux CDash agent                                            |        |      | 0:09 |
-| COMPLETED Add support for conan.io                                          |        |      | 3:06 |
-| COMPLETED Create a blog post on conan                                       |        |      | 3:00 |
-| COMPLETED Investigate AppVeyor's windows support for builds                 |        |      | 2:02 |
-| COMPLETED Remove utilities for serialisation of unordered containers        |        |      | 0:38 |
-| STARTED Add =iconv.h= to include path on windows                            |        |      | 0:44 |
+#+CAPTION: Clock summary at [2015-12-23 Wed 15:54]
+| <75>                                                                        |         |       |      |
+| Headline                                                                    | Time    |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                                | *11:46* |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| Stories                                                                     | 11:46   |       |      |
+| Active                                                                      |         | 11:46 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:15 |
+| STARTED Update Linux CDash agent                                            |         |       | 0:09 |
+| COMPLETED Add support for conan.io                                          |         |       | 3:06 |
+| COMPLETED Create a blog post on conan                                       |         |       | 3:00 |
+| COMPLETED Investigate AppVeyor's windows support for builds                 |         |       | 2:02 |
+| COMPLETED Remove utilities for serialisation of unordered containers        |         |       | 0:38 |
+| CANCELLED Add "field propagation" support to dynamic                        |         |       | 1:52 |
+| STARTED Add =iconv.h= to include path on windows                            |         |       | 0:44 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-12-23 Wed 15:42]--[2015-12-23 Wed 15:54] =>  0:12
     CLOCK: [2015-12-21 Mon 23:38]--[2015-12-21 Mon 23:41] =>  0:03
 
 Updates to sprint and product backlog.
@@ -130,6 +132,41 @@ Library directories for libxml2 (=CMAKE_LIBRARY_PATH=):
 It seems these are now supported directly by boost, so we do not need
 carry our own code.
 
+*** CANCELLED Add "field propagation" support to dynamic              :story:
+    CLOSED: [2015-12-23 Wed 15:41]
+    CLOCK: [2015-12-23 Wed 15:04]--[2015-12-23 Wed 15:40] =>  0:36
+    CLOCK: [2015-12-23 Wed 13:47]--[2015-12-23 Wed 15:03] =>  1:16
+
+*Rationale*
+
+Once we start using yarn types in c++ we will be able to compute most
+of the fields for which this was useful. The only one left is
+enablement. There is no need for a generic solution. Also, when we
+looked into implementing this, there are conceptual problems: requires
+default constructor should be set on a primitive, but then is computed
+for an object; how does a composite object know that it should look at
+its primitive constituents but ignore non-primitives?  There are
+conceptual holes in this approach which are non-trivial to solve. A
+much simpler approach is to rely on the yarn type using a special
+purpose function to compute the values for these flags and then
+populate a settings class with them. This can be done right now.
+
+*Previous Understanding*
+
+- add a graph to yarn that allows external users to set
+  dependencies. The graph is not known to be acyclic. Normally we keep
+  track of all the orphans and link those to the root. This won't work
+  for cycles. We need a way to arbitrarily define one "end" of the
+  cycle as the starting point.
+- graph must distinguish between vertices that arise by expanding
+  generics from those that arise by other means.
+- add propagation type to fields and add enumeration.
+- add a "propagator" that is responsible for walking the graph and
+  setting the fields accordingly. The propagator is used from yarn's
+  workflow. We need to have the ability of sending in references to
+  dynamic objects into the graph so that the propagator can update
+  them.
+
 *** STARTED Add =iconv.h= to include path on windows                  :story:
     CLOCK: [2015-12-23 Wed 13:26]--[2015-12-23 Wed 13:46] =>  0:20
     CLOCK: [2015-12-23 Wed 13:01]--[2015-12-23 Wed 13:25] =>  0:24
@@ -157,6 +194,66 @@ to the include and lib path:
 : endif()
 
 We need something similar for iconv.
+
+*** Add qualified name to yarn properties                             :story:
+
+We need a way to uniquely identify a property. This could be done by
+appending the containing type's qualified name to the property name.
+
+*** Create a settings class for the "requires" settings               :story:
+
+We need to populate these in a settings workflow of some kind.
+
+*** Create a top-level settings class with all of the required settings :story:
+
+We need to split settings from element in cpp in preparation for using
+yarn types. This means:
+
+- stand alone class with all settings including opaque settings for
+  properties.
+- change all formatter interfaces to take the formattable and the
+  settings separately.
+
+*** Attach helper methods to types dynamically                        :story:
+
+In order to cope with the removal of nested type info, we need a way
+to determine what helper methods are required for a given yarn type.
+
+For this we need a way to allow helper methods to bind dynamically to
+types. This can be done by using meta-data. The helper method
+registers a name and the type uses that name it its key for helper
+method. Where possible the helper method should use the name of the
+STL concept it is binding to. We need settings support for reading
+this field, and registration support for helper methods (registrar,
+etc).
+
+We should also find a nicer way to package helper methods, maybe
+aligned to a model and type or concept.
+
+Once this is done we need to remove the =object_types= that exist in
+yarn just to figure out what helper methods to use.
+
+*** Implement formattables in terms of yarn types                     :story:
+
+At present formattables are just a shadow copy of yarn types plus
+additional =cpp= specific types. In practice:
+
+- for the types that are shadow copies, we could have helper utilities
+  that do the translation on the fly (e.g. for names).
+- for additional information which cannot be translated, we could have
+  containers indexed by qualified name and query those just before we
+  call the transformer. This is the case with formatter properties. We
+  need something similar to house "type properties" such as
+  =requires_stream_manipulators=. These could be moved into aspect
+  settings.
+- for types that do not exist in yarn, we could inherit from element;
+  this is the case for registrar, forward declarations, cmakelists and
+  odb options. Note that with this we are now saying that element
+  space contains anything which can be modeled, regardless of if they
+  are part of the programming language type system, or build system,
+  etc. This is not ideal, but its not a problem just yet. We could
+  update the factory to generate these types and then take a copy of
+  the model and inject them in it.
 
 *** Remove =service= stereotype                                       :story:
 
@@ -207,29 +304,258 @@ was formed, and then ownership by DDC.
 - first update to personal ownership has been done, but we need to
   test if multiple copyright entries is properly supported.
 
-*** Implement formattables in terms of yarn types                     :story:
+*** Handle registration of services properly                          :story:
 
-At present formattables are just a shadow copy of yarn types plus
-additional =cpp= specific types. In practice:
+We need a way to determine if a type which is part of a generalisation
+should be added to the registrar or not. In =generalisation_indexer=:
 
-- for the types that are shadow copies, we could have helper utilities
-  that do the translation on the fly (e.g. for names).
-- for additional information which cannot be translated, we could have
-  containers indexed by qualified name and query those just before we
-  call the transformer. This is the case with formatter properties. We
-  need something similar to house "type properties" such as
-  =requires_stream_manipulators=. These could be moved into aspect
-  settings.
-- for types that do not exist in yarn, we could inherit from element;
-  this is the case for registrar, forward declarations, cmakelists and
-  odb options. Note that with this we are now saying that element
-  space contains anything which can be modeled, regardless of if they
-  are part of the programming language type system, or build system,
-  etc. This is not ideal, but its not a problem just yet. We could
-  update the factory to generate these types and then take a copy of
-  the model and inject them in it.
+:     // FIXME: massive hack. must not add leafs for services.
 
-*** Add relationship types to handle "requires"                       :story:
+One way would be to check if serialisation is enabled for that type
+and if not, skip the type.
+
+*** Refactor code around model origination                            :story:
+
+- remove origin types and generation types, replacing it with just a
+  boolean for is target. Actually we need something like:
+  proxy_reference, non_proxy_reference, target. We also need a good
+  name for this enumeration:
+- at present we are using origin type to determine whether to create a
+  registrar, etc in cpp model. There is no other use case for
+  this. This is done in several places due to the bad handling of C++
+  specific types. Grep for =references= in =cpp= to find all
+  locations. We could split references into two (dogen, non-dogen).
+- we should also replace has generatable types with something more
+  like "target model has types" or "is target model empty". The idea
+  we are trying to capture is that the target model contained at least
+  one type. This could be set by the merger when it processes the
+  target model.
+
+*Previous Understanding*
+
+In the past we added a number of knobs around generation, all with
+their own problems:
+
+- =origin_types=: was the model/type created by the user or the
+  system. in reality this means did the model come from Dia or
+  JSON. this is confusing as the user can also add JSON files (their
+  own model library) and in the future the user can use JSON
+  exclusively without needed Dia at all.
+- =generation_types=: if the model is target, all types are to be
+  generated /unless/ they are not properly supported, in which case
+  they are to be "partially" generated (as is the case with
+  services). This is a formatter decision and yarn should not know
+  anything about it. Actually this is not quite true; users may want
+  to stop generation.
+
+These can be replaced by a single enumeration that indicates if the
+type/model is target or not.
+
+This work should be integrated with the model types story.
+
+Merged stories:
+
+*Split references into dogen and non-dogen models*
+
+If we had two containers of references, one for dogen models and
+another one for non-dogen models - which we could give a nice name, to
+imply its foreign origin - we could then use the dogen references for
+registrar, etc. This is a replacement for the origin type.
+
+We need a good name for these. Candidates:
+
+- proxy model: represents something that exists in the outside
+  world. e.g. =is_proxy=.
+
+*** Helper methods should have their own includes                     :story:
+
+When a formatter relies on the helper methods, we have a problem: we
+need to determine the required includes from the main formatter
+without knowing what the helper methods may need. We have hacked this
+with things like the "special includes" but there must be a cleaner
+way of doing this. For example, we could ask the helper methods
+formatter to provide its includes and it would be its job to either
+delegate further or to compute the includes. This would at least
+remove the duplication of code between io and types.
+
+*** Add =interface= stereotype                                        :story:
+
+Even though we can't generate much outside of plain types, we should
+already have support for a stereotype of =interface= which for now
+behaves just like =service=. In the future we may be able to code
+generate the interface. This should be implemented in yarn as a type
+on its own right.
+
+- add an interface which is: element, operatable, relatable. Not
+  stateful. We should also have a "is abstract" flag
+  somewhere. Perhaps in relatable?
+
+*** Implement module expander test                                    :story:
+
+We copied across the code for the module expander test from yarn json
+but didn't actually finished implementing it.
+
+*** Create =src= and =include= facets                                 :story:
+
+At present we have some formatters that are not in the traditional
+facets such as =types=, etc. We should make facets for them. We need
+to check what the current facet name is. There should only be one case
+of this, the CMakeLists formatters.
+
+*** Move all properties in =cpp= to a properties namespace            :story:
+
+Once all formattables are gone, we should have only properties left in
+the formattables namespace. We should then rename it to
+properties.
+
+Merged stories:
+
+*Split formatter properties and associated classes from formattables*
+
+We have two kinds of data: the formattables themselves (mapped from
+yarn) and associated data (formatter properties). The latter is
+totally independent. We should create a namespace for all of these
+classes and a workflow that produces the data ready for consumption. A
+tentative name is =manifest=.
+
+*** Consider renaming nested name                                     :story:
+
+*New understanding*:
+
+This story requires further analysis. Blindly following the composite
+pattern was tried but it resulted in a lot of inconsistencies because
+we then had to follow MEC-33 and create =abstract_qname=; however, the
+nested qname does not really behave like a composite qname; its more
+like the difference between a type in isolation and a type
+instantiated as an argument of a function. For example, whilst the
+type in isolation may have unknown template parameters, presumably, as
+an argument of a function these have been instantiated with real
+types.
+
+One way to solve this is just to make the type name a bit more
+explicit rather than try to imply the composite pattern
+(e.g. "nested"). We need a name that signifies "instantiated
+type". Look at the C++ standard for the difference between defining a
+generic type and instantiating a generic type.
+
+No good names yet (type reference, type instantiation, instantiated
+name). What are we trying to represent: an identifier which points to
+a complete definition of a name such that the name can be instantiated
+as a type in the underlying language. By "instantiated" we mean used
+to define variables of this type. In this light: instantiable name,
+definable name? If we choose instantiable name, we could then rename
+"children" to type arguments.
+
+Other notes:
+
+- there is such a thing as a element instance identifier. We call it
+  nested name at present. The element instance identifier identifies
+  instantiations of types. It models two cases: for the case where the
+  type has no type parameters, the instance identifier is equal to the
+  element identifier; for all other cases, it is a hierarchical
+  collection of element identifiers, modeling the type parameter
+  structure.
+
+*Previous understanding*:
+
+We should just follow the composite pattern in the naming.
+
+*** Copyright holders is scalar when it should be an array            :story:
+
+At present its only possible to specify a single copyright holder. It
+should be handled the same was as odb parameters, but because that is
+done with a massive hack, we are not going to extend the hack to
+copyright holders.
+
+*** Filter out unused types from final model                          :story:
+
+When we finished assembling the model we should be able to determine
+which supporting types are in use and drop those that are not. This
+can be done just before building the final model (or as part of that
+task).
+
+We should have a class responsible for removing all types from a model
+which are not in use. This could be done as part of model assembly.
+
+One way this could be achieved is by adding a "usages" property,
+computed during resolution. Resolver could keep track of the
+non-target names that are in use and return those.
+
+*** Handle enumeration type dynamically                               :story:
+
+Add some enumeration post-processing that assigns it a underlying
+type. Should be done with merged model (look for a primitive type with
+property =is_default_enumeration_type=).
+
+This should be done as part of resolution perhaps; user provides a raw
+type, we expand it during expansion and resolve it during
+resolution. If the string is empty, we should use the default
+enumeration type. It is chosen from the collection of
+primitives. There can only be one type marked as
+default. =is_enumeration_default_type=? Read from JSON file.
+
+*** Services and leaves are not properly handled                      :story:
+
+We are manually ignoring services when calculating leaves.
+
+*** Use dots in data files extensions                                 :story:
+
+At the moment we use extensions such as =xmlyarn=. It should really be
+=.xml.yarn= or something of the kind.
+
+*** Consider renaming includers                                       :story:
+
+Its very confusing to have header files that include lots of other
+header files called "includers". There is too much overloading. We
+should consider calling them "master header files" as per Schaling
+terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
+
+*** Update Windows CDash agent                                        :story:
+
+We need to get the build green on the Windows agent again.
+
+*** Add tests to identifier parser with invalid names                 :story:
+
+We need to handle properly the following cases:
+
+- totally blank name.
+- template with angle brackets but nothing inside: =a<>=.
+- template with angle brackets, type and then a comma: =a<b,>=.
+
+** Deprecated
+*** CANCELLED Add support for pulling dependencies from biicode       :story:
+    CLOSED: [2015-12-22 Tue 01:10]
+
+*Rationale*: We are going with Conan since it was so easy to setup.
+
+[[https://www.biicode.com/][Biicode]] is a nuget-like repo for c++. We should look into both
+consuming dependencies from it and pushing dogen into it. In addition
+there are associated emblems:
+
+https://github.com/Manu343726/snail
+
+We should also look into [[https://www.biicode.com/biicode-open-source-challenge][the challenge]].
+
+We should push both the C++ libraries as well as the dogen binary.
+
+We should take the least intrusive possible approach to start with, by
+creating a split setup for biicode.
+
+*** CANCELLED Create a blog post on biicode                           :story:
+    CLOSED: [2015-12-22 Tue 01:10]
+
+*Rationale*: We are going with Conan since it was so easy to setup.
+
+Investigate adding biicode support since we need to add a RapidJson
+dependency. Create a blog post about it.
+
+Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
+*** CANCELLED Add relationship types to handle "requires"             :story:
+    CLOSED: [2015-12-23 Wed 15:44]
+
+*Rationale*: This solution is too complicated now that there is no
+need to make it generic. We need to revisit the problem and focus only
+on enablement.
 
 *New Understanding*
 
@@ -429,285 +755,3 @@ we need to check for.
 - types must be enabled
 - if serialisation is enabled, types forward declaration of the
   serialisation classes must be enabled
-
-*** Improve helper methods implementation                             :story:
-
-When a formatter relies on the helper methods, we have a problem: we
-need to determine the required includes from the main formatter
-without knowing what the helper methods may need. We have hacked this
-with things like the "special includes" but there must be a cleaner
-way of doing this. For example, we could ask the helper methods
-formatter to provide its includes and it would be its job to either
-delegate further or to compute the includes. This would at least
-remove the duplication of code between io and types.
-
-However, its important to bear in mind that helper methods are a hack
-anyways so we don't want to spend too much time fixing them. Actually,
-as we failed with the needle implementation, these may be here to stay
-for quite a bit so we need to make sure the implementation is
-maintainable. This means adding new helpers should be easy, as well as
-binding existing helpers to new types.
-
-For this we need a way to allow helper methods to bind dynamically to
-types. This can be done by using meta-data. The helper method
-registers a name and the type uses that name it its key for helper
-method. Where possible the helper method should use the name of the
-STL concept it is binding to.
-
-We should also find a nicer way to package helper methods, maybe
-aligned to a model and type or concept.
-
-Once this is done we need to remove the object types that exist in
-yarn just to figure out what helper methods to use.
-
-*** Add "field propagation" support to dynamic                        :story:
-
-- add a graph to yarn that allows external users to set
-  dependencies. The graph is not known to be acyclic. Normally we keep
-  track of all the orphans and link those to the root. This won't work
-  for cycles. We need a way to arbitrarily define one "end" of the
-  cycle as the starting point.
-- graph must distinguish between vertices that arise by expanding
-  generics from those that arise by other means.
-- add propagation type to fields and add enumeration.
-- add a "propagator" that is responsible for walking the graph and
-  setting the fields accordingly. The propagator is used from yarn's
-  workflow. We need to have the ability of sending in references to
-  dynamic objects into the graph so that the propagator can update
-  them.
-
-*** Handle registration of services properly                          :story:
-
-We need a way to determine if a type which is part of a generalisation
-should be added to the registrar or not. In =generalisation_indexer=:
-
-:     // FIXME: massive hack. must not add leafs for services.
-
-One way would be to check if serialisation is enabled for that type
-and if not, skip the type.
-
-*** Refactor code around model origination                            :story:
-
-- remove origin types and generation types, replacing it with just a
-  boolean for is target. Actually we need something like:
-  proxy_reference, non_proxy_reference, target. We also need a good
-  name for this enumeration:
-- at present we are using origin type to determine whether to create a
-  registrar, etc in cpp model. There is no other use case for
-  this. This is done in several places due to the bad handling of C++
-  specific types. Grep for =references= in =cpp= to find all
-  locations. We could split references into two (dogen, non-dogen).
-- we should also replace has generatable types with something more
-  like "target model has types" or "is target model empty". The idea
-  we are trying to capture is that the target model contained at least
-  one type. This could be set by the merger when it processes the
-  target model.
-
-*Previous Understanding*
-
-In the past we added a number of knobs around generation, all with
-their own problems:
-
-- =origin_types=: was the model/type created by the user or the
-  system. in reality this means did the model come from Dia or
-  JSON. this is confusing as the user can also add JSON files (their
-  own model library) and in the future the user can use JSON
-  exclusively without needed Dia at all.
-- =generation_types=: if the model is target, all types are to be
-  generated /unless/ they are not properly supported, in which case
-  they are to be "partially" generated (as is the case with
-  services). This is a formatter decision and yarn should not know
-  anything about it. Actually this is not quite true; users may want
-  to stop generation.
-
-These can be replaced by a single enumeration that indicates if the
-type/model is target or not.
-
-This work should be integrated with the model types story.
-
-Merged stories:
-
-*Split references into dogen and non-dogen models*
-
-If we had two containers of references, one for dogen models and
-another one for non-dogen models - which we could give a nice name, to
-imply its foreign origin - we could then use the dogen references for
-registrar, etc. This is a replacement for the origin type.
-
-We need a good name for these. Candidates:
-
-- proxy model: represents something that exists in the outside
-  world. e.g. =is_proxy=.
-
-*** Add =interface= stereotype                                        :story:
-
-Even though we can't generate much outside of plain types, we should
-already have support for a stereotype of =interface= which for now
-behaves just like =service=. In the future we may be able to code
-generate the interface. This should be implemented in yarn as a type
-on its own right.
-
-- add an interface which is: element, operatable, relatable. Not
-  stateful. We should also have a "is abstract" flag
-  somewhere. Perhaps in relatable?
-
-*** Implement module expander test                                    :story:
-
-We copied across the code for the module expander test from yarn json
-but didn't actually finished implementing it.
-
-*** Create =src= and =include= facets                                 :story:
-
-At present we have some formatters that are not in the traditional
-facets such as =types=, etc. We should make facets for them. We need
-to check what the current facet name is. There should only be one case
-of this, the CMakeLists formatters.
-
-*** Move all properties in =cpp= to a properties namespace            :story:
-
-Once all formattables are gone, we should have only properties left in
-the formattables namespace. We should then rename it to
-properties.
-
-Merged stories:
-
-*Split formatter properties and associated classes from formattables*
-
-We have two kinds of data: the formattables themselves (mapped from
-yarn) and associated data (formatter properties). The latter is
-totally independent. We should create a namespace for all of these
-classes and a workflow that produces the data ready for consumption. A
-tentative name is =manifest=.
-
-*** Consider renaming nested name                                     :story:
-
-*New understanding*:
-
-This story requires further analysis. Blindly following the composite
-pattern was tried but it resulted in a lot of inconsistencies because
-we then had to follow MEC-33 and create =abstract_qname=; however, the
-nested qname does not really behave like a composite qname; its more
-like the difference between a type in isolation and a type
-instantiated as an argument of a function. For example, whilst the
-type in isolation may have unknown template parameters, presumably, as
-an argument of a function these have been instantiated with real
-types.
-
-One way to solve this is just to make the type name a bit more
-explicit rather than try to imply the composite pattern
-(e.g. "nested"). We need a name that signifies "instantiated
-type". Look at the C++ standard for the difference between defining a
-generic type and instantiating a generic type.
-
-No good names yet (type reference, type instantiation, instantiated
-name). What are we trying to represent: an identifier which points to
-a complete definition of a name such that the name can be instantiated
-as a type in the underlying language. By "instantiated" we mean used
-to define variables of this type. In this light: instantiable name,
-definable name? If we choose instantiable name, we could then rename
-"children" to type arguments.
-
-Other notes:
-
-- there is such a thing as a element instance identifier. We call it
-  nested name at present. The element instance identifier identifies
-  instantiations of types. It models two cases: for the case where the
-  type has no type parameters, the instance identifier is equal to the
-  element identifier; for all other cases, it is a hierarchical
-  collection of element identifiers, modeling the type parameter
-  structure.
-
-*Previous understanding*:
-
-We should just follow the composite pattern in the naming.
-
-*** Copyright holders is scalar when it should be an array            :story:
-
-At present its only possible to specify a single copyright holder. It
-should be handled the same was as odb parameters, but because that is
-done with a massive hack, we are not going to extend the hack to
-copyright holders.
-
-*** Filter out unused types from final model                          :story:
-
-When we finished assembling the model we should be able to determine
-which supporting types are in use and drop those that are not. This
-can be done just before building the final model (or as part of that
-task).
-
-We should have a class responsible for removing all types from a model
-which are not in use. This could be done as part of model assembly.
-
-One way this could be achieved is by adding a "usages" property,
-computed during resolution. Resolver could keep track of the
-non-target names that are in use and return those.
-
-*** Handle enumeration type dynamically                               :story:
-
-Add some enumeration post-processing that assigns it a underlying
-type. Should be done with merged model (look for a primitive type with
-property =is_default_enumeration_type=).
-
-This should be done as part of resolution perhaps; user provides a raw
-type, we expand it during expansion and resolve it during
-resolution. If the string is empty, we should use the default
-enumeration type. It is chosen from the collection of
-primitives. There can only be one type marked as
-default. =is_enumeration_default_type=? Read from JSON file.
-
-*** Services and leaves are not properly handled                      :story:
-
-We are manually ignoring services when calculating leaves.
-
-*** Use dots in data files extensions                                 :story:
-
-At the moment we use extensions such as =xmlyarn=. It should really be
-=.xml.yarn= or something of the kind.
-
-*** Consider renaming includers                                       :story:
-
-Its very confusing to have header files that include lots of other
-header files called "includers". There is too much overloading. We
-should consider calling them "master header files" as per Schaling
-terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
-
-*** Update Windows CDash agent                                        :story:
-
-We need to get the build green on the Windows agent again.
-
-*** Add tests to identifier parser with invalid names                 :story:
-
-We need to handle properly the following cases:
-
-- totally blank name.
-- template with angle brackets but nothing inside: =a<>=.
-- template with angle brackets, type and then a comma: =a<b,>=.
-
-** Deprecated
-*** CANCELLED Add support for pulling dependencies from biicode       :story:
-    CLOSED: [2015-12-22 Tue 01:10]
-
-*Rationale*: We are going with Conan since it was so easy to setup.
-
-[[https://www.biicode.com/][Biicode]] is a nuget-like repo for c++. We should look into both
-consuming dependencies from it and pushing dogen into it. In addition
-there are associated emblems:
-
-https://github.com/Manu343726/snail
-
-We should also look into [[https://www.biicode.com/biicode-open-source-challenge][the challenge]].
-
-We should push both the C++ libraries as well as the dogen binary.
-
-We should take the least intrusive possible approach to start with, by
-creating a split setup for biicode.
-
-*** CANCELLED Create a blog post on biicode                           :story:
-    CLOSED: [2015-12-22 Tue 01:10]
-
-*Rationale*: We are going with Conan since it was so easy to setup.
-
-Investigate adding biicode support since we need to add a RapidJson
-dependency. Create a blog post about it.
-
-Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
