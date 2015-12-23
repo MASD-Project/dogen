@@ -2166,9 +2166,9 @@ and to build it.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Packaging unit.
+        <dia:string>#Container for other modeling elements.
 
-Aggregates a group of logically related types into a unit.#</dia:string>
+Aggregates a group of logically related elements into a unit.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
