@@ -1,0 +1,26 @@
+#+title: Nerd Food: Interesting...
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+Time to flush all those tabs again. Some interesting stuff I bumped
+into recently-ish.
+
+* Finance, Economics, Politics
+
+
+* Startups et al.
+
+
+* General Coding
+
+
+* Databases
+
+
+* C++
+
+- [[http://webcache.googleusercontent.com/search?q%3Dcache:z7PWAldSxdQJ:sourceforge.net/p/sobjectizer/wiki/Lessons%252520learnt%252520from%25252010%252B%252520years%252520with%252520actors%252520in%252520C%252B%252B/%2B&cd%3D1&hl%3Den&ct%3Dclnk&gl%3Duk][Lessons learnt from 10+ years with actors in C++]]:
+
+* Layman Science
+
+
+* Other
