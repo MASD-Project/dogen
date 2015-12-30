@@ -6,21 +6,77 @@ into recently-ish.
 
 * Finance, Economics, Politics
 
+- [[https://www.project-syndicate.org/commentary/marginal-pricing-end-of-western-oil-producers-by-anatole-kaletsky-2015-12][Why Big Oil Should Kill Itself]]: This is a really, really interesting
+  article. The gist of it is that the entire logic around oil
+  exploration is now a fallacy and it makes more economic sense to
+  simply give up looking for oil because all oil that is left is just
+  to expensive to commercialise. It also has a very interesting take
+  on the valuation of oil companies (and sources of take overs) but I
+  won't spoil it for you. If you are into oil (or against it), its a
+  must read.
 
 * Startups et al.
 
+- [[https://www.oreilly.com/ideas/the-wtf-economy][The WTF Economy]]: Tim O'Reilly (of publishing house fame) is setting
+  up a conference in the future of work. Sounds extremely
+  interesting. Hopefully, they will have a section dedicated to the
+  developing world.  Source: Tim O'Reilly (Twitter)
+- [[https://medium.com/@jgarzik/bitcoin-is-being-hot-wired-for-settlement-a5beb1df223a#.vn9b7chtk][Bitcoin is Being Hot-Wired for Settlement]]: Garzik is at it
+  again. Interesting news of cryptos in the settlement front. Source:
+  Jeff Garzik (Twitter)
+- [[http://www.wired.com/2015/12/elon-musks-billion-dollar-ai-plan-is-about-far-more-than-saving-the-world/?mbid%3Dsocial_fb][Elon Musk’s Billion-Dollar AI Plan Is About Far More Than Saving the
+  World]]: So it seems Musk and Altman want to ensure AI plays nice. Not
+  quite sure he's right on this one. Steven Levy's version is
+  available [[https://medium.com/backchannel/how-elon-musk-and-y-combinator-plan-to-stop-computers-from-taking-over-17e0e27dd02a#.f3ydovlgu][here]], more of an interview with Musk.
 
 * General Coding
 
+- [[https://medium.com/@henrikjohansen/feeding-graph-databases-a-third-use-case-for-modern-log-management-platforms-d5dac8a80d53#.tqmmc91uy][Feeding Graph databases - a third use-case for modern log management
+  platforms]]: Very interesting ideas on how to use logging data in a
+  graph database. Sounds extremely counter-intuitive, and then you
+  start reading at which point its like "Damn, why didn't I think of
+  that before!".  Source: Hacker News
+- [[http://www.agner.org/optimize/blog/read.php?i%3D417][Moores law hits the roof]]: Seems like the exponential function is
+  revealing itself as a sigmoid, as everyone knew it would. Some of
+  the cracks that are already present in Moore's law. Interesting to
+  note that a transistor is now only a few silicon atoms wide -
+  meaning we can't really make it much smaller. Source: Hacker News
 
 * Databases
 
+- [[http://lwn.net/Articles/667946/][Encrypted databases with ZeroDB]]: I'm not exactly impressed with the
+  technology itself, but more with the ideas one can extract from
+  it. Briefly: what if the database only stores encrypted data, which
+  only each client can decrypt? This is certainly a very useful thing
+  for certain types of information and a PostgreSQL extension would
+  be most useful. Source: Hacker News
 
 * C++
 
-- [[http://webcache.googleusercontent.com/search?q%3Dcache:z7PWAldSxdQJ:sourceforge.net/p/sobjectizer/wiki/Lessons%252520learnt%252520from%25252010%252B%252520years%252520with%252520actors%252520in%252520C%252B%252B/%2B&cd%3D1&hl%3Den&ct%3Dclnk&gl%3Duk][Lessons learnt from 10+ years with actors in C++]]:
+- [[http://webcache.googleusercontent.com/search?q%3Dcache:z7PWAldSxdQJ:sourceforge.net/p/sobjectizer/wiki/Lessons%252520learnt%252520from%25252010%252B%252520years%252520with%252520actors%252520in%252520C%252B%252B/%2B&cd%3D1&hl%3Den&ct%3Dclnk&gl%3Duk][Lessons learnt from 10+ years with actors in C++]]: The voice of
+  experience talks about what they learned from using Actors over more
+  than a decade. Worth reading if you are into that pattern.
+- [[http://blog.scottfrees.com/automating-a-c-program-from-a-node-js-web-app][Automating a C++ program from a Node.js web app]]: If you are
+  considering exposing your C++ code into JS, this is a series of
+  posts to read.
 
 * Layman Science
 
+- [[http://www.forbes.com/sites/startswithabang/2015/12/23/why-string-theory-is-not-science/][Why String Theory Is Not A Scientific Theory]]: Doesn't say a lot of
+  new things, but its good to remind ourselves on what exactly do we
+  mean when we say "Science". This would save us from a lot of grief,
+  such as considering Economics as a Science.
+- [[https://aeon.co/essays/why-do-scientists-dismiss-the-possibility-of-cold-fusion][The cold fusion horizon]]: ... talking about Science, I was surprised
+  to find out that people are still talking seriously about cold
+  fusion. Interesting article, because it takes the flip side of the
+  Science coin: nothing should /not/ be science unless it is /not/
+  using the scientific method. Whilst up til now cold fusion has been
+  more of a hoax, we should not discredit people who work on it
+  provided they are following scientific principles. Who knows, they
+  may be right in the end. Science is all about long-shots.
 
 * Other
+
+- [[http://www.blastr.com/2015-12-23/exit-sandman-neil-gaiman-goes-depth-overture-one-2015s-best-comics][Exit Sandman: Neil Gaiman goes in-depth with Overture, one of 2015's
+  best comics]]: For the Sandman fans, the new (and last) Sandman book
+  is all the rage. A great interview by the man himself.
