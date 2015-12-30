@@ -172,7 +172,7 @@ else()
     message(STATUS "Found pdflatex (${PDFLATEX_COMMAND})...")
 endif()
 
-if(WITH_LATEXT)
+if(WITH_LATEX)
     message(STATUS "Building latex documents...")
 else()
     message(STATUS "NOT building latex documents...")

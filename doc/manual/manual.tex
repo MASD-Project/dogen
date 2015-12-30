@@ -18,21 +18,43 @@
 % MA 02110-1301, USA.
 %
 \documentclass{book}
-\usepackage{qlbook}
 
 %
 % packages
 %
+\usepackage{qlbook}
 \usepackage{lettrine}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{listings}
+\usepackage{etoolbox}
+\usepackage{titlesec}
 
-% Title setup.
-\tolerance=1000
-\date{\today}
-\author{Marco Craveiro}
-\title{Dogen: The Domain Generator}
+% clear pages after chapters
+%% \let\origdoublepage\cleardoublepage
+%% \newcommand{\clearemptydoublepage}{
+%%   \clearpage
+%%   {\pagestyle{empty}\origdoublepage}
+%% }
+%% \let\cleardoublepage\clearemptydoublepage
+
+\makeatletter
+
+% First, modify the \@endpart macro.
+\def\@endpart{}
+
+% Next, copy the \chapter macro to \nonewpagechapter, and ...
+% ... suppress page-breaking instructions in the modified macro
+\let\nonewpagechapter\chapter
+\patchcmd\nonewpagechapter{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+
+% Third, suppress vertical whitespace before "Part xx" material
+\patchcmd{\part}{\null\vfil}{}{}{}
+
+\makeatother
+
+\titleformat{\part}[hang]
+{\lstlolbreak\loabreak\Huge\bfseries\filleft}{\thepart}{1em}{}
 
 \hypersetup{
   pdfkeywords={},
@@ -41,7 +63,39 @@
 
 \begin{document}
 
-\maketitle
+\clearpage
+
+\newcommand\nbvspace[1][3]{\vspace*{\stretch{#1}}}
+\newcommand\nbstretchyspace{\spaceskip0.5em plus 0.25em minus 0.25em}
+\newcommand{\nbtitlestretch}{\spaceskip0.6em}
+\pagestyle{empty}
+\begin{center}
+\bfseries
+\nbvspace[1]
+\Huge
+{\nbtitlestretch\huge
+  DOGEN\\THE DOMAIN GENERATOR}
+
+\nbvspace[1]
+\normalsize
+
+\nbvspace[1]
+\small BY\\
+\Large MARCO CRAVEIRO\\[0.5em]
+
+\nbvspace[2]
+
+\begin{center}
+  \includegraphics[width=4.5in]{images/application_dogen}
+\end{center}
+\nbvspace[3]
+\normalsize
+
+Hatfield\\
+\large
+PUBLISHED IN THE WILD
+\nbvspace[1]
+\end{center}
 
 %
 % Colophon
@@ -67,6 +121,14 @@ This book was typeset with \LaTeXe. It uses a slightly modified
 version of the \textit{QL Book} style developed by Luigi Ballabio.
 Download the \textit{QL Book} style at
 \url{http://www.implementingquantlib.com/p/the-book.html}.
+
+The cover was typeset using a modified version of the design by
+Yiannis Lazarides, available at
+\url{http://tex.stackexchange.com/questions/17579/how-can-i-design-a-book-cover}.
+
+The cover picture depicts the project icon. \textcopyright{} 2012
+Patrick Gannon. It is an abstract representation of of a cog in
+Babbage's Difference Engine.
 
 \par Permission is granted to copy, distribute and/or modify this
 document under the terms of the GNU Free Documentation License,
@@ -142,8 +204,59 @@ the latest sprint):
 
 \part{Theory}
 
-In this part we describe the philosophical underpinnings behind Dogen,
-its internal architecture and assorted aspects around its development.
+\epigraph{There is no better or truer description of the physical
+  phenomenon of light than to say it \emph{is} precisely the
+  electromagnetic field defined by Maxwell's equations. The
+  electromagnetic field is not \emph{like} Maxwell's equations; it
+  \emph{is} Maxwell's equations. While a model builder knows that his
+  model airplane is \emph{like} a true airplane, and a climate modeler
+  is aware that his equations only simulate the atmosphere, a
+  physicist knows that light and Maxwell's equations are one and the
+  same.}{Emanuel Derman}
+
+\lettrine{L}{ike many} a Free and Open Source Software project, Dogen
+too started with a cursory knowledge of the field it ended up
+covering\footnote{In fact, one could even say that Dogen's development
+  \emph{itself} has been a tool in gaining knowledge in this
+  field.}. Several years of reading and researching revealed an
+incredibly wealthy area in terms of theory, as well as a number of
+successful engineering projects based on those theories. Thus it
+became important to understand these in order to frame ideas from the
+right conceptual lens, and also to figure out where Dogen stood with
+regards to these other tools and projects. This part attempts to
+distil the knowledge gained in this process, focusing only on the most
+significant ingredients.
+
+Unfortunately, these topics are not the most approachable. This is
+both due to their unfamiliarity~--- most developers do not spend a lot
+of time contemplating these matters on their day to day jobs~--- as
+well as the innate complexity of these ideas. Alas, just like
+Tanenbaum's \emph{Operating Systems Design and Implementation}
+provided Linus with a solid foundation on which to build Linux upon,
+so do these theories inform the decisions around Dogen's development;
+you cannot understand the latter without the former.
+
+The part is organised as follows:
+
+\begin{itemize}
+  \item chapter \ref{mdsd} provides an explanation of the core
+    concepts of the Model Driven Software Development methodology.
+  \item chapter
+\end{itemize}
+
+underpinnings behind Dogen, its internal architecture and assorted
+aspects around its development.
+
+\chapter{Model Driven Software Development}
+\label{mdsd}
+
+
+\chapter{Domain Driven Development}
+\label{ddd}
+
+\chapter{Domain Driven Development}
+\label{ddd}
+
 
 \chapter{Fundamental Building Blocks}
 
