@@ -3524,7 +3524,6 @@ become very readable.
 These stories are good candidates for the subsequent release. This
 release will be all about adding new features.
 
-
 *** Create an interface for the text reader                           :story:
 
 In order to do performance testing of the dia model we should create
