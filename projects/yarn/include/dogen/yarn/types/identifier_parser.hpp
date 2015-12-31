@@ -44,9 +44,8 @@ public:
      *
      * @param top_level_modules names of all the top-level modules in
      * the current model.
-     * @param external_module_path modules external to the current
-     * model
-     * @param model_name name of the current model
+     * @param model_location location for the element representing the
+     * model.
      */
     identifier_parser(const std::unordered_set<std::string>& top_level_modules,
         const location& model_location);

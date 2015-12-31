@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-31 Thu 01:08]
+#+CAPTION: Clock summary at [2015-12-31 Thu 13:35]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *31:36* |       |       |
+| *Total time*                                                                | *33:05* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 31:36   |       |       |
-| Active                                                                      |         | 31:36 |       |
+| Stories                                                                     | 33:05   |       |       |
+| Active                                                                      |         | 33:05 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:41 |
 | STARTED Update manual                                                       |         |       |  0:43 |
 | STARTED Update Linux CDash agent                                            |         |       |  0:09 |
@@ -30,8 +30,8 @@
 | COMPLETED Remove utilities for serialisation of unordered containers        |         |       |  0:38 |
 | CANCELLED Add "field propagation" support to dynamic                        |         |       |  1:52 |
 | COMPLETED Add =iconv.h= to include path on windows                          |         |       |  0:44 |
+| COMPLETED Improve names in yarn around model element location               |         |       |  3:39 |
 | STARTED Re-read MDSD book                                                   |         |       | 15:00 |
-| STARTED Improve names in yarn around model element location                 |         |       |  2:10 |
 | STARTED Add qualified name to yarn properties                               |         |       |  0:31 |
 #+end:
 
@@ -210,18 +210,23 @@ We need something similar for iconv.
 
 Conan has also added packages for libxml, which we now depend on.
 
-*** STARTED Re-read MDSD book                                         :story:
-    CLOCK: [2015-12-29 Tue 00:00]--[2015-12-29 Tue 15:00] => 15:00
-
-A few sprints ago [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_70.org#read-model-driven-software-development-book-and-papers][we read Model Driven Software Development]], providing
-most of the theoretical foundations for Dogen. We need to re-read it
-with the objective of summarising it into a chapter in the manual.
-
-Clock manually adjusted to reflect reading time.
-
-*** STARTED Improve names in yarn around model element location       :story:
+*** COMPLETED Improve names in yarn around model element location     :story:
+    CLOSED: [2015-12-31 Thu 13:35]
+    CLOCK: [2015-12-31 Thu 12:37]--[2015-12-31 Thu 13:35] =>  0:58
+    CLOCK: [2015-12-31 Thu 12:05]--[2015-12-31 Thu 12:36] =>  0:31
     CLOCK: [2015-12-30 Wed 23:28]--[2015-12-31 Thu 01:08] =>  1:40
     CLOCK: [2015-12-23 Wed 16:27]--[2015-12-23 Wed 16:57] =>  0:30
+
+*New Understanding*
+
+After a great deal of thinking, it was decided to broadly leave these
+terms as they are. The new names do not add huge amounts of
+clarity. Instead, documentation was improved to explain the concepts
+behind these terms and minor modifications were done to location:
+avoid the word path since this is a concrete syntax reference, whereas
+location is talking about the abstract syntax of the concept.
+
+*Previous Understanding*
 
 Now that we have a clear conceptual model for yarn, we should rename
 the types to fit it:
@@ -233,6 +238,15 @@ the types to fit it:
 - =name::qualified=: this is the unique identifier for a given
   modeling element.
 - =nested_name=: nestable address.
+
+*** STARTED Re-read MDSD book                                         :story:
+    CLOCK: [2015-12-29 Tue 00:00]--[2015-12-29 Tue 15:00] => 15:00
+
+A few sprints ago [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_70.org#read-model-driven-software-development-book-and-papers][we read Model Driven Software Development]], providing
+most of the theoretical foundations for Dogen. We need to re-read it
+with the objective of summarising it into a chapter in the manual.
+
+Clock manually adjusted to reflect reading time.
 
 *** STARTED Add qualified name to yarn properties                     :story:
     CLOCK: [2015-12-23 Wed 15:55]--[2015-12-23 Wed 16:26] =>  0:31

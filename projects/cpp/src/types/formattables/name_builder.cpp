@@ -43,16 +43,16 @@ namespace formattables {
 
 std::list<std::string> name_builder::
 namespace_list(const yarn::model& m, const yarn::name& n) const {
-    std::list<std::string> r(n.location().external_module_path());
+    std::list<std::string> r(n.location().external_modules());
 
     /* If there is no model name, it won't contribute to the
      * namespaces.
      */
-    for (const auto& m : n.location().model_module_path())
+    for (const auto& m : n.location().model_modules())
         r.push_back(m);
 
     // All modules in the module path contribute to namespaces.
-    const auto mp(n.location().internal_module_path());
+    const auto mp(n.location().internal_modules());
     r.insert(r.end(), mp.begin(), mp.end());
 
     /* if the name belongs to the model's module, we need to remove the
@@ -75,7 +75,7 @@ qualified_name(const yarn::model& m, const yarn::name& n) const {
 void name_builder::
 complete_name(const yarn::model& m, const yarn::nested_name& nn,
     std::string& complete_name) const {
-    const auto qualified_name(this->qualified_name(m, nn.type()));
+    const auto qualified_name(this->qualified_name(m, nn.parent()));
     const auto& children(nn.children());
     complete_name += qualified_name;
 

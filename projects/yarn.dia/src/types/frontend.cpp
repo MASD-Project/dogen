@@ -59,7 +59,7 @@ yarn::intermediate_model frontend::execute(const dynamic::workflow& w,
 
     dogen::yarn::dia::workflow wf(w);
     const std::string name(d.path().stem().string());
-    const auto emp(d.external_module_path());
+    const auto emp(d.external_modules());
     const auto r(wf.execute(diagram, name, emp, d.is_target()));
     BOOST_LOG_SEV(lg, debug) << "Finished processing diagram.";
     return r;

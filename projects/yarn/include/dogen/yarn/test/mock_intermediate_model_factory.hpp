@@ -274,7 +274,7 @@ public:
      */
     module make_module(const unsigned int module_n,
         const name& model_name,
-        const std::list<std::string>& internal_module_path,
+        const std::list<std::string>& internal_modules,
         const std::string& documentation) const;
 
 public:

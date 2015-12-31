@@ -63,7 +63,7 @@ void association_indexer::remove_duplicates(std::list<name>& names,
 
 void association_indexer::recurse_nested_names(const intermediate_model& m,
     object& o, const nested_name& nn, bool& is_pointer) const {
-    const auto n(nn.type());
+    const auto n(nn.parent());
     if (is_pointer)
         o.weak_associations().push_back(n);
     else
@@ -93,7 +93,7 @@ void association_indexer::recurse_nested_names(const intermediate_model& m,
     for (const auto c : nn.children()) {
         const auto hc(object_types::hash_container);
         if (is_first && k->second.object_type() == hc)
-            o.hash_container_keys().push_back(c.type());
+            o.hash_container_keys().push_back(c.parent());
 
         recurse_nested_names(m, o, c, is_pointer);
         is_first = false;

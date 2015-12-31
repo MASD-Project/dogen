@@ -319,15 +319,15 @@ make_includers(
     std::unordered_map<std::string, std::list<std::string> >
         includes_by_formatter_name;
 
-    const auto mmp(m.name().location().model_module_path());
+    const auto mmp(m.name().location().model_modules());
     const auto registrar_n(create_name(m.name(), registrar_name));
     for (const auto& n_pair : pdrp.path_derivatives_by_name()) {
         const auto n(n_pair.first);
 
-        if (n.location().model_module_path() != mmp)
+        if (n.location().model_modules() != mmp)
             continue;
 
-        if (n.location().model_module_path().empty() && n.simple().empty())
+        if (n.location().model_modules().empty() && n.simple().empty())
             continue;
 
         if (is<yarn::concept>(m, n))
@@ -448,7 +448,7 @@ make_cmakelists(const config::cpp_options& opts,
 
     BOOST_LOG_SEV(lg, debug) << "Generating source CMakeLists.";
     using boost::algorithm::join;
-    const auto mn(join(m.name().location().model_module_path(), underscore));
+    const auto mn(join(m.name().location().model_modules(), underscore));
 
     auto cm(std::make_shared<cmakelists_info>());
     cm->model_name(mn);
@@ -457,8 +457,8 @@ make_cmakelists(const config::cpp_options& opts,
     const auto gs(gsf.make(cmake_modeline_name, root_object));
     cm->general_settings(gs);
 
-    if (!m.name().location().external_module_path().empty())
-        cm->product_name(m.name().location().external_module_path().front());
+    if (!m.name().location().external_modules().empty())
+        cm->product_name(m.name().location().external_modules().front());
 
     using namespace formatters::types;
     const auto ch_fn(traits::class_header_formatter_name());
@@ -471,7 +471,7 @@ make_cmakelists(const config::cpp_options& opts,
     }
 
     auto base(opts.project_directory_path());
-    for (const auto& p : m.name().location().model_module_path())
+    for (const auto& p : m.name().location().model_modules())
         base /= p;
 
     cm->source_file_path(base / i->second.source_directory_name() /
@@ -515,7 +515,7 @@ factory::make_odb_options(const config::cpp_options& opts,
     r->file_name(odb_options_name);
 
     using boost::algorithm::join;
-    const auto mn(join(m.name().location().model_module_path(), underscore));
+    const auto mn(join(m.name().location().model_modules(), underscore));
     r->model_name(mn);
 
     const auto gs(gsf.make(odb_modeline_name, root_object));
@@ -532,14 +532,14 @@ factory::make_odb_options(const config::cpp_options& opts,
 
     boost::filesystem::path fp;
     fp = opts.project_directory_path();
-    for (const auto& p : m.name().location().model_module_path())
+    for (const auto& p : m.name().location().model_modules())
         fp /= p;
 
     fp /= i->second.source_directory_name();
     fp /= odb_options_name;
     r->file_path(fp);
 
-    const auto epp(m.name().location().external_module_path());
+    const auto epp(m.name().location().external_modules());
     if (!epp.empty())
         r->product_name(epp.front());
 

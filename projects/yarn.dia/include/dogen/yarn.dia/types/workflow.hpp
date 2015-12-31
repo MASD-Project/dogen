@@ -54,7 +54,7 @@ private:
      * @brief Creates the name for the model.
      */
     yarn::name create_name_for_model(const std::string& model_name,
-        const std::string& external_module_path) const;
+        const std::string& external_modules) const;
 
     /**
      * @brief Creates a module representing the model.
@@ -67,7 +67,7 @@ private:
      * @brief Reset context and set it up with arguments supplied.
      */
     void initialise_context_activity(const std::string& model_name,
-        const std::string& external_module_path, const bool is_target);
+        const std::string& external_modules, const bool is_target);
 
     /**
      * @brief Setup the DAG of processed objects.
@@ -89,7 +89,7 @@ private:
 public:
     yarn::intermediate_model execute(const dogen::dia::diagram& diagram,
         const std::string& model_name,
-        const std::string& external_module_path,
+        const std::string& external_modules,
         bool is_target);
 
 private:

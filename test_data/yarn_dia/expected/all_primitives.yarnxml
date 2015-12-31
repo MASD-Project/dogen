@@ -6,19 +6,19 @@
 		<simple>all_primitives</simple>
 		<qualified>&lt;all_primitives&gt;</qualified>
 		<location class_id="12" tracking_level="0" version="0">
-			<external_module_path class_id="13" tracking_level="0" version="0">
+			<external_modules class_id="13" tracking_level="0" version="0">
 				<count>0</count>
 				<item_version>0</item_version>
-			</external_module_path>
-			<model_module_path>
+			</external_modules>
+			<model_modules>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>all_primitives</item>
-			</model_module_path>
-			<internal_module_path>
+			</model_modules>
+			<internal_modules>
 				<count>0</count>
 				<item_version>0</item_version>
-			</internal_module_path>
+			</internal_modules>
 		</location>
 	</name>
 	<origin_type>1</origin_type>
@@ -87,19 +87,19 @@
 						<simple>all_primitives</simple>
 						<qualified>&lt;all_primitives&gt;</qualified>
 						<location>
-							<external_module_path>
+							<external_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
+							</external_modules>
+							<model_modules>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>all_primitives</item>
-							</model_module_path>
-							<internal_module_path>
+							</model_modules>
+							<internal_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</internal_module_path>
+							</internal_modules>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -152,19 +152,19 @@
 						<simple>a_class</simple>
 						<qualified>&lt;all_primitives&gt;&lt;a_class&gt;</qualified>
 						<location>
-							<external_module_path>
+							<external_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
+							</external_modules>
+							<model_modules>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>all_primitives</item>
-							</model_module_path>
-							<internal_module_path>
+							</model_modules>
+							<internal_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</internal_module_path>
+							</internal_modules>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -193,24 +193,24 @@
 						</extensions>
 						<name>bool_property</name>
 						<type class_id="34" tracking_level="0" version="0">
-							<type>
+							<parent>
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<external_module_path>
+									<external_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
+									</external_modules>
+									<model_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
+									</model_modules>
+									<internal_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</internal_module_path>
+									</internal_modules>
 								</location>
-							</type>
+							</parent>
 							<children class_id="35" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
@@ -232,24 +232,24 @@
 						</extensions>
 						<name>char_property</name>
 						<type>
-							<type>
+							<parent>
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<external_module_path>
+									<external_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
+									</external_modules>
+									<model_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
+									</model_modules>
+									<internal_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</internal_module_path>
+									</internal_modules>
 								</location>
-							</type>
+							</parent>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -271,24 +271,24 @@
 						</extensions>
 						<name>uchar_property</name>
 						<type>
-							<type>
+							<parent>
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<external_module_path>
+									<external_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
+									</external_modules>
+									<model_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
+									</model_modules>
+									<internal_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</internal_module_path>
+									</internal_modules>
 								</location>
-							</type>
+							</parent>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -310,24 +310,24 @@
 						</extensions>
 						<name>int_property</name>
 						<type>
-							<type>
+							<parent>
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<external_module_path>
+									<external_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
+									</external_modules>
+									<model_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
+									</model_modules>
+									<internal_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</internal_module_path>
+									</internal_modules>
 								</location>
-							</type>
+							</parent>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -349,24 +349,24 @@
 						</extensions>
 						<name>uint_property</name>
 						<type>
-							<type>
+							<parent>
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<external_module_path>
+									<external_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
+									</external_modules>
+									<model_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
+									</model_modules>
+									<internal_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</internal_module_path>
+									</internal_modules>
 								</location>
-							</type>
+							</parent>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -388,24 +388,24 @@
 						</extensions>
 						<name>long_property</name>
 						<type>
-							<type>
+							<parent>
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<external_module_path>
+									<external_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
+									</external_modules>
+									<model_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
+									</model_modules>
+									<internal_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</internal_module_path>
+									</internal_modules>
 								</location>
-							</type>
+							</parent>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -427,24 +427,24 @@
 						</extensions>
 						<name>ulong_property</name>
 						<type>
-							<type>
+							<parent>
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<external_module_path>
+									<external_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
+									</external_modules>
+									<model_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
+									</model_modules>
+									<internal_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</internal_module_path>
+									</internal_modules>
 								</location>
-							</type>
+							</parent>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -466,24 +466,24 @@
 						</extensions>
 						<name>long_long_property</name>
 						<type>
-							<type>
+							<parent>
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<external_module_path>
+									<external_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
+									</external_modules>
+									<model_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
+									</model_modules>
+									<internal_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</internal_module_path>
+									</internal_modules>
 								</location>
-							</type>
+							</parent>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -505,24 +505,24 @@
 						</extensions>
 						<name>ulong_long_property</name>
 						<type>
-							<type>
+							<parent>
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<external_module_path>
+									<external_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
+									</external_modules>
+									<model_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
+									</model_modules>
+									<internal_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</internal_module_path>
+									</internal_modules>
 								</location>
-							</type>
+							</parent>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -544,24 +544,24 @@
 						</extensions>
 						<name>short_property</name>
 						<type>
-							<type>
+							<parent>
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<external_module_path>
+									<external_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
+									</external_modules>
+									<model_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
+									</model_modules>
+									<internal_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</internal_module_path>
+									</internal_modules>
 								</location>
-							</type>
+							</parent>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -583,24 +583,24 @@
 						</extensions>
 						<name>ushort_property</name>
 						<type>
-							<type>
+							<parent>
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<external_module_path>
+									<external_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
+									</external_modules>
+									<model_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
+									</model_modules>
+									<internal_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</internal_module_path>
+									</internal_modules>
 								</location>
-							</type>
+							</parent>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -622,24 +622,24 @@
 						</extensions>
 						<name>double_property</name>
 						<type>
-							<type>
+							<parent>
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<external_module_path>
+									<external_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
+									</external_modules>
+									<model_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
+									</model_modules>
+									<internal_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</internal_module_path>
+									</internal_modules>
 								</location>
-							</type>
+							</parent>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -661,24 +661,24 @@
 						</extensions>
 						<name>float_property</name>
 						<type>
-							<type>
+							<parent>
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<external_module_path>
+									<external_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
+									</external_modules>
+									<model_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
+									</model_modules>
+									<internal_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</internal_module_path>
+									</internal_modules>
 								</location>
-							</type>
+							</parent>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>

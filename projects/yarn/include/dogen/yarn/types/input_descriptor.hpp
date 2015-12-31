@@ -50,7 +50,7 @@ public:
 public:
     input_descriptor(
         const boost::filesystem::path& path,
-        const std::string& external_module_path,
+        const std::string& external_modules,
         const bool is_target);
 
 private:
@@ -75,10 +75,10 @@ public:
      * @brief External modules which contain the model, delimited by "::".
      */
     /**@{*/
-    const std::string& external_module_path() const;
-    std::string& external_module_path();
-    void external_module_path(const std::string& v);
-    void external_module_path(const std::string&& v);
+    const std::string& external_modules() const;
+    std::string& external_modules();
+    void external_modules(const std::string& v);
+    void external_modules(const std::string&& v);
     /**@}*/
 
     /**
@@ -101,7 +101,7 @@ public:
 
 private:
     boost::filesystem::path path_;
-    std::string external_module_path_;
+    std::string external_modules_;
     bool is_target_;
 };
 

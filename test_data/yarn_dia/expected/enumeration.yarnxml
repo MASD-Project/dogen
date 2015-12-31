@@ -6,19 +6,19 @@
 		<simple>enumeration</simple>
 		<qualified>&lt;enumeration&gt;</qualified>
 		<location class_id="12" tracking_level="0" version="0">
-			<external_module_path class_id="13" tracking_level="0" version="0">
+			<external_modules class_id="13" tracking_level="0" version="0">
 				<count>0</count>
 				<item_version>0</item_version>
-			</external_module_path>
-			<model_module_path>
+			</external_modules>
+			<model_modules>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>enumeration</item>
-			</model_module_path>
-			<internal_module_path>
+			</model_modules>
+			<internal_modules>
 				<count>0</count>
 				<item_version>0</item_version>
-			</internal_module_path>
+			</internal_modules>
 		</location>
 	</name>
 	<origin_type>1</origin_type>
@@ -54,19 +54,19 @@
 						<simple>pkg1</simple>
 						<qualified>&lt;enumeration&gt;&lt;pkg1&gt;</qualified>
 						<location>
-							<external_module_path>
+							<external_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
+							</external_modules>
+							<model_modules>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>enumeration</item>
-							</model_module_path>
-							<internal_module_path>
+							</model_modules>
+							<internal_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</internal_module_path>
+							</internal_modules>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -132,19 +132,19 @@
 						<simple>enumeration</simple>
 						<qualified>&lt;enumeration&gt;</qualified>
 						<location>
-							<external_module_path>
+							<external_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
+							</external_modules>
+							<model_modules>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>enumeration</item>
-							</model_module_path>
-							<internal_module_path>
+							</model_modules>
+							<internal_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</internal_module_path>
+							</internal_modules>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -192,20 +192,20 @@
 						<simple>shape_types</simple>
 						<qualified>&lt;enumeration&gt;&lt;pkg1&gt;&lt;shape_types&gt;</qualified>
 						<location>
-							<external_module_path>
+							<external_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
+							</external_modules>
+							<model_modules>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>enumeration</item>
-							</model_module_path>
-							<internal_module_path>
+							</model_modules>
+							<internal_modules>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>pkg1</item>
-							</internal_module_path>
+							</internal_modules>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -220,18 +220,18 @@
 					<simple>unsigned int</simple>
 					<qualified></qualified>
 					<location>
-						<external_module_path>
+						<external_modules>
 							<count>0</count>
 							<item_version>0</item_version>
-						</external_module_path>
-						<model_module_path>
+						</external_modules>
+						<model_modules>
 							<count>0</count>
 							<item_version>0</item_version>
-						</model_module_path>
-						<internal_module_path>
+						</model_modules>
+						<internal_modules>
 							<count>0</count>
 							<item_version>0</item_version>
-						</internal_module_path>
+						</internal_modules>
 					</location>
 				</underlying_type>
 				<enumerators class_id="31" tracking_level="0" version="0">
@@ -284,19 +284,19 @@
 						<simple>colour_types</simple>
 						<qualified>&lt;enumeration&gt;&lt;colour_types&gt;</qualified>
 						<location>
-							<external_module_path>
+							<external_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
+							</external_modules>
+							<model_modules>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>enumeration</item>
-							</model_module_path>
-							<internal_module_path>
+							</model_modules>
+							<internal_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</internal_module_path>
+							</internal_modules>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -311,18 +311,18 @@
 					<simple>unsigned int</simple>
 					<qualified></qualified>
 					<location>
-						<external_module_path>
+						<external_modules>
 							<count>0</count>
 							<item_version>0</item_version>
-						</external_module_path>
-						<model_module_path>
+						</external_modules>
+						<model_modules>
 							<count>0</count>
 							<item_version>0</item_version>
-						</model_module_path>
-						<internal_module_path>
+						</model_modules>
+						<internal_modules>
 							<count>0</count>
 							<item_version>0</item_version>
-						</internal_module_path>
+						</internal_modules>
 					</location>
 				</underlying_type>
 				<enumerators>
@@ -378,19 +378,19 @@ this is a long comment
 						<simple>book_types</simple>
 						<qualified>&lt;enumeration&gt;&lt;book_types&gt;</qualified>
 						<location>
-							<external_module_path>
+							<external_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
+							</external_modules>
+							<model_modules>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>enumeration</item>
-							</model_module_path>
-							<internal_module_path>
+							</model_modules>
+							<internal_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</internal_module_path>
+							</internal_modules>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -405,18 +405,18 @@ this is a long comment
 					<simple>unsigned int</simple>
 					<qualified></qualified>
 					<location>
-						<external_module_path>
+						<external_modules>
 							<count>0</count>
 							<item_version>0</item_version>
-						</external_module_path>
-						<model_module_path>
+						</external_modules>
+						<model_modules>
 							<count>0</count>
 							<item_version>0</item_version>
-						</model_module_path>
-						<internal_module_path>
+						</model_modules>
+						<internal_modules>
 							<count>0</count>
 							<item_version>0</item_version>
-						</internal_module_path>
+						</internal_modules>
 					</location>
 				</underlying_type>
 				<enumerators>
@@ -466,19 +466,19 @@ this is a long comment
 						<simple>a_class</simple>
 						<qualified>&lt;enumeration&gt;&lt;a_class&gt;</qualified>
 						<location>
-							<external_module_path>
+							<external_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
+							</external_modules>
+							<model_modules>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>enumeration</item>
-							</model_module_path>
-							<internal_module_path>
+							</model_modules>
+							<internal_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</internal_module_path>
+							</internal_modules>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -507,24 +507,24 @@ this is a long comment
 						</extensions>
 						<name>colour_type</name>
 						<type class_id="37" tracking_level="0" version="0">
-							<type>
+							<parent>
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<external_module_path>
+									<external_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
+									</external_modules>
+									<model_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
+									</model_modules>
+									<internal_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</internal_module_path>
+									</internal_modules>
 								</location>
-							</type>
+							</parent>
 							<children class_id="38" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
@@ -546,24 +546,24 @@ this is a long comment
 						</extensions>
 						<name>book_type</name>
 						<type>
-							<type>
+							<parent>
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<external_module_path>
+									<external_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
+									</external_modules>
+									<model_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
+									</model_modules>
+									<internal_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</internal_module_path>
+									</internal_modules>
 								</location>
-							</type>
+							</parent>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -585,24 +585,24 @@ this is a long comment
 						</extensions>
 						<name>shape_type</name>
 						<type>
-							<type>
+							<parent>
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<external_module_path>
+									<external_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
+									</external_modules>
+									<model_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
+									</model_modules>
+									<internal_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</internal_module_path>
+									</internal_modules>
 								</location>
-							</type>
+							</parent>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>

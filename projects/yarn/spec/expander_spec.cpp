@@ -74,14 +74,14 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_missing_modules_gets_correctly_expande
         const auto& o(pair.second);
         const auto n(o.name());
 
-        if (!n.location().internal_module_path().empty()) {
+        if (!n.location().internal_modules().empty()) {
             bool module_found(false);
             for (const auto& pair : m.modules()) {
                 const auto mod(pair.second);
-                auto pp(mod.name().location().internal_module_path());
+                auto pp(mod.name().location().internal_modules());
                 pp.push_back(mod.name().simple());
                 BOOST_LOG_SEV(lg, info) << "Converted path: " << pp;
-                if (n.location().internal_module_path() == pp) {
+                if (n.location().internal_modules() == pp) {
                     module_found = true;
                     break;
                 }

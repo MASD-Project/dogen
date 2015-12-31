@@ -71,7 +71,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "io_service",
-            "internal_module_path" : [
+            "internal_modules" : [
                 "asio"
             ],
             "extensions" : {
@@ -81,7 +81,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "socket",
-            "internal_module_path" : [
+            "internal_modules" : [
                 "asio", "ip", "tcp"
             ],
             "extensions" : {
@@ -91,7 +91,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "acceptor",
-            "internal_module_path" : [
+            "internal_modules" : [
                 "asio", "ip", "tcp"
             ],
             "extensions" : {
@@ -101,7 +101,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "path",
-            "internal_module_path" : [
+            "internal_modules" : [
                 "filesystem"
             ],
             "extensions" : {
@@ -117,7 +117,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "date",
-            "internal_module_path" : [
+            "internal_modules" : [
                 "gregorian"
             ],
             "extensions" : {
@@ -133,7 +133,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "ptime",
-            "internal_module_path" : [
+            "internal_modules" : [
                 "posix_time"
             ],
             "extensions" : {
@@ -149,7 +149,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "time_duration",
-            "internal_module_path" : [
+            "internal_modules" : [
                 "posix_time"
             ],
             "extensions" : {
@@ -165,7 +165,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "ptree",
-            "internal_module_path" : [
+            "internal_modules" : [
                 "property_tree"
             ],
             "extensions" : {

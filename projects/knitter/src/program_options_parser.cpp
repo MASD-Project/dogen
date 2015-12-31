@@ -101,7 +101,7 @@ config::input_descriptor program_options_parser::make_input_descriptor(
     r.is_target(is_target);
     r.path(tokens[0]);
     if (tokens.size() > 1)
-        r.external_module_path(tokens[1]);
+        r.external_modules(tokens[1]);
 
     return r;
 }
@@ -124,11 +124,11 @@ program_options_parser::modeling_options_factory() const {
         ("target,t",
             value<std::string>(),
             "Model to generate code for, in any of the supported formats."
-            "If required, you can add the module path: FILE,MODULE_PATH.")
+            "If required, you can add the module path: FILE,MODULES.")
         ("reference,r",
             value<std::vector<std::string> >(),
             "Models that our target model depends on."
-            "If required, you can add the module path: FILE,MODULE_PATH.");
+            "If required, you can add the module path: FILE,MODULES.");
 
     return r;
 }

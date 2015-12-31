@@ -678,13 +678,13 @@ with existing file.#</dia:string>
         <dia:point val="-21,-3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.05,-3.05;-7.36,1.45"/>
+        <dia:rectangle val="-21.05,-3.05;-8.9,1.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-21,-3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="12.050000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -802,7 +802,7 @@ with existing file.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#external_module_path#</dia:string>
+            <dia:string>#external_modules#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -811,7 +811,7 @@ with existing file.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#External module path for the model.
+            <dia:string>#External modules that include this model.
 #</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -1311,7 +1311,7 @@ with existing file.#</dia:string>
         <dia:point val="-28.665,-12.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.415,-13.15;-14.005,-2.2"/>
+        <dia:rectangle val="-29.415,-13.15;-14.775,-2.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1319,8 +1319,8 @@ with existing file.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-28.665,-12.4"/>
         <dia:point val="-28.665,-6"/>
-        <dia:point val="-14.205,-6"/>
-        <dia:point val="-14.205,-3"/>
+        <dia:point val="-14.975,-6"/>
+        <dia:point val="-14.975,-3"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1647,7 +1647,7 @@ with existing file.#</dia:string>
         <dia:point val="-65,-40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-65.05,-40.05;-36.715,-29.45"/>
+        <dia:rectangle val="-65.05,-40.05;-29.785,-30.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1656,10 +1656,10 @@ with existing file.#</dia:string>
         <dia:point val="-65,-40"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.235000000000003"/>
+        <dia:real val="35.164999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="10.500000000000002"/>
+        <dia:real val="9.7000000000000011"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>

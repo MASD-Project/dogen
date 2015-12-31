@@ -39,7 +39,7 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Represents a generic programming concept.
+ * @brief Represents a concept in the generic programming sense.
  *
  * In generic programming, a concept is a description of supported operations on
  * a type, including syntax and semantics. In this way, concepts are related to

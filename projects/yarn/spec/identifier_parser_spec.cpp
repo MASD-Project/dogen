@@ -48,7 +48,7 @@ bool test_primitive(const std::string& s) {
 
     dogen::yarn::nested_name nn;
     dogen::yarn::name_factory nf;
-    nn.type(nf.build_element_name(s));
+    nn.parent(nf.build_element_name(s));
     return asserter::assert_equals(nn, a);
 }
 
@@ -69,10 +69,10 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_na
     dogen::yarn::name_builder b;
     b.simple_name("z");
     b.model_name("a");
-    b.internal_module_path(std::list<std::string> { "b", "c"});
+    b.internal_modules(std::list<std::string> { "b", "c"});
 
     dogen::yarn::nested_name nn;
-    nn.type(b.build());
+    nn.parent(b.build());
     BOOST_CHECK(asserter::assert_equals(nn, a));
 }
 
@@ -86,7 +86,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_without_scope_operator_produces_expected_nam
 
     dogen::yarn::nested_name nn;
     dogen::yarn::name_factory nf;
-    nn.type(nf.build_element_name("zeta"));
+    nn.parent(nf.build_element_name("zeta"));
     BOOST_CHECK(asserter::assert_equals(nn, a));
 }
 
@@ -100,7 +100,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_one_scope_operator_produces_expected_na
 
     dogen::yarn::nested_name nn;
     dogen::yarn::name_factory nf;
-    nn.type(nf.build_element_name("a", "z"));
+    nn.parent(nf.build_element_name("a", "z"));
     BOOST_CHECK(asserter::assert_equals(nn, a));
 }
 
@@ -171,10 +171,10 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expec
 
     dogen::yarn::nested_name nn;
     dogen::yarn::name_factory nf;
-    nn.type(nf.build_element_name("type"));
+    nn.parent(nf.build_element_name("type"));
 
     dogen::yarn::nested_name c;
-    c.type(nf.build_element_name("abc"));
+    c.parent(nf.build_element_name("abc"));
     nn.children(std::list<dogen::yarn::nested_name> { c });
 
     const std::string s("type<abc>");
@@ -189,13 +189,13 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected
 
     dogen::yarn::nested_name nn;
     dogen::yarn::name_factory nf;
-    nn.type(nf.build_element_name("type"));
+    nn.parent(nf.build_element_name("type"));
 
     dogen::yarn::nested_name c;
-    c.type(nf.build_element_name("abc"));
+    c.parent(nf.build_element_name("abc"));
 
     dogen::yarn::nested_name d;
-    d.type(nf.build_element_name("cde"));
+    d.parent(nf.build_element_name("cde"));
     nn.children(std::list<dogen::yarn::nested_name> { c, d });
 
     const std::string s("type<abc,cde>");
@@ -210,10 +210,10 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_nested_names) {
     SETUP_TEST_LOG_SOURCE("parsing_vector_of_string_produces_expected_nested_names");
     dogen::yarn::nested_name nn;
     dogen::yarn::name_factory nf;
-    nn.type(nf.build_element_name("std", "vector"));
+    nn.parent(nf.build_element_name("std", "vector"));
 
     dogen::yarn::nested_name c;
-    c.type(nf.build_element_name("std", "string"));
+    c.parent(nf.build_element_name("std", "string"));
     nn.children(std::list<dogen::yarn::nested_name> { c });
 
     const std::string s("std::vector<std::string>");
@@ -229,10 +229,10 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_nested_names)
 
     dogen::yarn::nested_name nn;
     dogen::yarn::name_factory nf;
-    nn.type(nf.build_element_name("std", "vector"));
+    nn.parent(nf.build_element_name("std", "vector"));
 
     dogen::yarn::nested_name c;
-    c.type(nf.build_element_name("unsigned int"));
+    c.parent(nf.build_element_name("unsigned int"));
     nn.children(std::list<dogen::yarn::nested_name> { c });
 
     const std::string s("std::vector<unsigned int>");
@@ -249,13 +249,13 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_nested_names) {
     dogen::yarn::nested_name nn;
 
     dogen::yarn::name_factory nf;
-    nn.type(nf.build_element_name("std", "unordered_map"));
+    nn.parent(nf.build_element_name("std", "unordered_map"));
 
     dogen::yarn::nested_name c;
-    c.type(nf.build_element_name("std", "string"));
+    c.parent(nf.build_element_name("std", "string"));
 
     dogen::yarn::nested_name d;
-    d.type(nf.build_element_name("my", "type"));
+    d.parent(nf.build_element_name("my", "type"));
 
     nn.children(std::list<dogen::yarn::nested_name> { c, d });
 
@@ -278,13 +278,13 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_nested_names
 
     dogen::yarn::nested_name nn;
     dogen::yarn::name_factory nf;
-    nn.type(nf.build_element_name("std", "vector"));
+    nn.parent(nf.build_element_name("std", "vector"));
 
     dogen::yarn::nested_name c;
-    c.type(nf.build_element_name("std", "shared_ptr"));
+    c.parent(nf.build_element_name("std", "shared_ptr"));
 
     dogen::yarn::nested_name d;
-    d.type(nf.build_element_name("std", "string"));
+    d.parent(nf.build_element_name("std", "string"));
     c.children(std::list<dogen::yarn::nested_name> { d });
     nn.children(std::list<dogen::yarn::nested_name> { c });
 

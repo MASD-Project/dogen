@@ -113,7 +113,7 @@ dogen::yarn::name mock_model_name(unsigned int i) {
 
 dogen::yarn::nested_name mock_nested_name(const dogen::yarn::name& n) {
     dogen::yarn::nested_name r;
-    r.type(n);
+    r.parent(n);
     return r;
 }
 
@@ -121,10 +121,10 @@ dogen::yarn::nested_name
 mock_nested_name_shared_ptr(const dogen::yarn::name& n) {
     dogen::yarn::nested_name r;
     dogen::yarn::name_factory nf;
-    r.type(nf.build_element_name("boost", "shared_ptr"));
+    r.parent(nf.build_element_name("boost", "shared_ptr"));
 
     dogen::yarn::nested_name c;
-    c.type(n);
+    c.parent(n);
     r.children(std::list<dogen::yarn::nested_name> { c });
 
     return r;
@@ -139,13 +139,13 @@ dogen::yarn::nested_name mock_nested_name(
     typedef test::mock_intermediate_model_factory::property_types property_types;
     switch(pt) {
     case property_types::unsigned_int:
-        r.type(nf.build_element_name(unsigned_int));
+        r.parent(nf.build_element_name(unsigned_int));
         break;
     case property_types::boolean:
-        r.type(nf.build_element_name(boolean));
+        r.parent(nf.build_element_name(boolean));
         break;
     case property_types::boost_variant: {
-        r.type(nf.build_element_name("boost", "variant"));
+        r.parent(nf.build_element_name("boost", "variant"));
         r.children(std::list<nested_name> {
                 mock_nested_name(nf.build_element_name(boolean)),
                 mock_nested_name(nf.build_element_name(unsigned_int))
@@ -153,10 +153,10 @@ dogen::yarn::nested_name mock_nested_name(
         break;
     }
     case property_types::std_string:
-        r.type(nf.build_element_name("std", "string"));
+        r.parent(nf.build_element_name("std", "string"));
         break;
     case property_types::std_pair: {
-        r.type(nf.build_element_name("std", "pair"));
+        r.parent(nf.build_element_name("std", "pair"));
         r.children(std::list<nested_name> {
                 mock_nested_name(nf.build_element_name(boolean)),
                 mock_nested_name(nf.build_element_name(boolean))
@@ -170,7 +170,7 @@ dogen::yarn::nested_name mock_nested_name(
     return r;
 }
 
-std::list<std::string> make_internal_module_path(const unsigned int module_n) {
+std::list<std::string> make_internal_modules(const unsigned int module_n) {
     std::list<std::string> r;
     for (unsigned int i(0); i < module_n; ++i)
         r.push_back(module_name(i));
@@ -190,7 +190,7 @@ void populate_object(dogen::yarn::object& o, const unsigned int i,
     const dogen::yarn::name& model_name, const unsigned int module_n) {
 
     const auto sn(type_name(i));
-    const auto ipp(make_internal_module_path(module_n));
+    const auto ipp(make_internal_modules(module_n));
 
     dogen::yarn::name_factory nf;
     dogen::yarn::name n(nf.build_element_in_model(model_name, sn, ipp));
@@ -422,11 +422,11 @@ model_name(const unsigned int n) const {
 
 bool mock_intermediate_model_factory::
 is_model_n(const unsigned int n, const name& name) const {
-    const auto mmp(name.location().model_module_path());
+    const auto mmp(name.location().model_modules());
     if (mmp.empty())
         return false;
 
-    const auto mn(name.location().model_module_path().back());
+    const auto mn(name.location().model_modules().back());
     return is_model_n(n, mn);
 }
 
@@ -511,7 +511,7 @@ make_enumeration(const unsigned int i, const name& model_name,
     const unsigned int module_n) const {
 
     const auto sn(type_name(i));
-    const auto ipp(make_internal_module_path(module_n));
+    const auto ipp(make_internal_modules(module_n));
 
     dogen::yarn::name_factory nf;
     dogen::yarn::name n(nf.build_element_in_model(model_name, sn, ipp));
@@ -545,7 +545,7 @@ exception mock_intermediate_model_factory::make_exception(const unsigned int i,
     const name& model_name, const unsigned int module_n) const {
 
     const auto sn(type_name(i));
-    const auto ipp(make_internal_module_path(module_n));
+    const auto ipp(make_internal_modules(module_n));
 
     dogen::yarn::name_factory nf;
     dogen::yarn::name n(nf.build_element_in_model(model_name, sn, ipp));
@@ -575,12 +575,12 @@ module mock_intermediate_model_factory::make_module(const yarn::name& n,
 
 module mock_intermediate_model_factory::make_module(const unsigned int module_n,
     const yarn::name& model_name,
-    const std::list<std::string>& internal_module_path,
+    const std::list<std::string>& internal_modules,
     const std::string& documentation) const {
 
     name_factory nf;
     const auto mn(module_name(module_n));
-    const auto n(nf.build_module_name(model_name, mn, internal_module_path));
+    const auto n(nf.build_module_name(model_name, mn, internal_modules));
     return make_module(n, documentation);
 }
 
@@ -621,12 +621,12 @@ make_multi_type_model(const unsigned int n, const unsigned int type_n,
 
     intermediate_model r(make_empty_model(n, add_model_module));
 
-    std::list<std::string> internal_module_path;
+    std::list<std::string> internal_modules;
     for (unsigned int i(0); i < mod_n; ++i) {
-        const auto m(make_module(i, r.name(), internal_module_path,
+        const auto m(make_module(i, r.name(), internal_modules,
                 documentation));
         insert_nameable(r.modules(), m);
-        internal_module_path.push_back(module_name(i));
+        internal_modules.push_back(module_name(i));
     }
 
     switch (ot) {
@@ -1031,7 +1031,7 @@ object_with_property(const object_types ot, const property_types pt,
     if (pt == property_types::unsigned_int ||
         pt == property_types::boolean) {
         primitive ui;
-        ui.name(p.type().type());
+        ui.name(p.type().parent());
         insert_nameable(r.primitives(), ui);
 
         if (flags_.associations_indexed())
@@ -1389,7 +1389,7 @@ object_with_group_of_properties_of_different_types(
     auto p1(mock_property(1));
     lambda(p1);
     primitive ui;
-    ui.name(p1.type().type());
+    ui.name(p1.type().parent());
     insert_nameable(r.primitives(), ui);
 
     auto o3(make_value_object(3, mn));

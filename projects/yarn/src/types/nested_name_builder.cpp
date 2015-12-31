@@ -119,7 +119,7 @@ void nested_name_builder::finish_current_node() {
          * Whatever is left, if anything, must be a path to non-top-level
          * modules defined within the model.
          */
-        b.internal_module_path(names_);
+        b.internal_modules(names_);
         BOOST_LOG_SEV(lg, debug) << "internal module path: " << names_;
         names_.clear(); // consume internal modules
     }
@@ -174,7 +174,7 @@ void nested_name_builder::
 build_node(nested_name& n, boost::shared_ptr<node> node) {
     BOOST_LOG_SEV(lg, debug) << "bulding node: " << node->data();
 
-    n.type(node->data());
+    n.parent(node->data());
     std::list<nested_name> children;
     for (const auto c : node->children()) {
         nested_name cnn;

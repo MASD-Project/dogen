@@ -28,27 +28,27 @@ input_descriptor::input_descriptor()
 
 input_descriptor::input_descriptor(input_descriptor&& rhs)
     : path_(std::move(rhs.path_)),
-      external_module_path_(std::move(rhs.external_module_path_)),
+      external_modules_(std::move(rhs.external_modules_)),
       is_target_(std::move(rhs.is_target_)) { }
 
 input_descriptor::input_descriptor(
     const boost::filesystem::path& path,
-    const std::string& external_module_path,
+    const std::string& external_modules,
     const bool is_target)
     : path_(path),
-      external_module_path_(external_module_path),
+      external_modules_(external_modules),
       is_target_(is_target) { }
 
 void input_descriptor::swap(input_descriptor& other) noexcept {
     using std::swap;
     swap(path_, other.path_);
-    swap(external_module_path_, other.external_module_path_);
+    swap(external_modules_, other.external_modules_);
     swap(is_target_, other.is_target_);
 }
 
 bool input_descriptor::operator==(const input_descriptor& rhs) const {
     return path_ == rhs.path_ &&
-        external_module_path_ == rhs.external_module_path_ &&
+        external_modules_ == rhs.external_modules_ &&
         is_target_ == rhs.is_target_;
 }
 
@@ -74,20 +74,20 @@ void input_descriptor::path(const boost::filesystem::path&& v) {
     path_ = std::move(v);
 }
 
-const std::string& input_descriptor::external_module_path() const {
-    return external_module_path_;
+const std::string& input_descriptor::external_modules() const {
+    return external_modules_;
 }
 
-std::string& input_descriptor::external_module_path() {
-    return external_module_path_;
+std::string& input_descriptor::external_modules() {
+    return external_modules_;
 }
 
-void input_descriptor::external_module_path(const std::string& v) {
-    external_module_path_ = v;
+void input_descriptor::external_modules(const std::string& v) {
+    external_modules_ = v;
 }
 
-void input_descriptor::external_module_path(const std::string&& v) {
-    external_module_path_ = std::move(v);
+void input_descriptor::external_modules(const std::string&& v) {
+    external_modules_ = std::move(v);
 }
 
 bool input_descriptor::is_target() const {

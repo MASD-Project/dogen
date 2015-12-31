@@ -48,7 +48,7 @@ const std::string verbose_arg("--verbose");
 const std::string target_arg("--target");
 const std::string target_value_arg("some_target");
 const std::string target_value_external_path_arg("some_target,a module");
-const std::string external_module_path_value_arg("a module");
+const std::string external_modules_value_arg("a module");
 
 const std::string reference_arg("--reference");
 const std::string reference_value_1_arg("some reference");
@@ -57,9 +57,9 @@ const std::string reference_value_3_arg("a reference,module path 3");
 const std::string reference_value_4_arg("another reference,module path 4");
 
 const std::string reference_value_3_diagram("a reference");
-const std::string reference_value_3_module_path("module path 3");
+const std::string reference_value_3_modules("module path 3");
 const std::string reference_value_4_diagram("another reference");
-const std::string reference_value_4_module_path("module path 4");
+const std::string reference_value_4_modules("module path 4");
 
 const std::string cpp_project_dir_arg("--cpp-project-dir");
 const std::string cpp_project_dir_value_arg("a project dir");
@@ -237,8 +237,8 @@ BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_options) {
 
     const auto io(ko.input());
     BOOST_CHECK(io.target().path().string() == target_value_arg);
-    BOOST_CHECK(io.target().external_module_path() ==
-        external_module_path_value_arg);
+    BOOST_CHECK(io.target().external_modules() ==
+        external_modules_value_arg);
 
     const auto refs(io.references());
     BOOST_REQUIRE(refs.size() == 2);
@@ -246,11 +246,11 @@ BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_options) {
     BOOST_CHECK(refs[1].path().string() == reference_value_2_arg);
 }
 
-BOOST_AUTO_TEST_CASE(supplying_module_path_for_references_results_in_correct_module_path) {
-    SETUP_TEST_LOG_SOURCE("supplying_module_path_for_references_results_in_correct_module_path");
+BOOST_AUTO_TEST_CASE(supplying_modules_for_references_results_in_correct_modules) {
+    SETUP_TEST_LOG_SOURCE("supplying_modules_for_references_results_in_correct_modules");
     const std::vector<std::string> o = {
         target_arg, target_value_external_path_arg,
-        external_module_path_value_arg,
+        external_modules_value_arg,
         reference_arg,
         reference_value_3_arg,
         reference_arg,
@@ -266,10 +266,10 @@ BOOST_AUTO_TEST_CASE(supplying_module_path_for_references_results_in_correct_mod
 
     BOOST_CHECK(refs[0].path().string() == reference_value_3_diagram);
     BOOST_CHECK(
-        refs[0].external_module_path() == reference_value_3_module_path);
+        refs[0].external_modules() == reference_value_3_modules);
     BOOST_CHECK(refs[1].path().string() == reference_value_4_diagram);
     BOOST_CHECK(
-        refs[1].external_module_path() == reference_value_4_module_path);
+        refs[1].external_modules() == reference_value_4_modules);
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_modeling_options_other_than_target_results_in_expected_options) {
@@ -284,7 +284,7 @@ BOOST_AUTO_TEST_CASE(not_supplying_modeling_options_other_than_target_results_in
 
     const auto is(ko.input());
     BOOST_CHECK(is.target().path().string() == target_value_arg);
-    BOOST_CHECK(is.target().external_module_path().empty());
+    BOOST_CHECK(is.target().external_modules().empty());
     BOOST_REQUIRE(is.references().empty());
 }
 

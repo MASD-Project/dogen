@@ -49,7 +49,7 @@ std::ostream& operator<<(std::ostream& s, const nested_name& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::nested_name\"" << ", "
-      << "\"type\": " << v.type() << ", "
+      << "\"parent\": " << v.parent() << ", "
       << "\"children\": " << v.children() << ", "
       << "\"is_pointer\": " << v.is_pointer()
       << " }";

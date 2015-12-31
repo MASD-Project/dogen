@@ -70,10 +70,10 @@ make_inclusion_path(const settings::path_settings& ps,
      * model module path in the file name path.
      */
     if (ps.file_type() == formatters::file_types::cpp_header) {
-        for (const auto& m : n.location().external_module_path())
+        for (const auto& m : n.location().external_modules())
             r /= m;
 
-        const auto& mmp(n.location().model_module_path());
+        const auto& mmp(n.location().model_modules());
         r /= boost::algorithm::join(mmp, dot);
     }
 
@@ -84,7 +84,7 @@ make_inclusion_path(const settings::path_settings& ps,
         r /= ps.facet_directory();
 
     // Add the module path of the modules internal to this model.
-    for (const auto& m : n.location().internal_module_path())
+    for (const auto& m : n.location().internal_modules())
         r /= m;
 
     /* Modules other than the model module contribute their simple
@@ -126,7 +126,7 @@ make_file_path(const settings::path_settings& ps,
     boost::filesystem::path r;
 
     const auto ft(ps.file_type());
-    const auto& mmp(n.location().model_module_path());
+    const auto& mmp(n.location().model_modules());
     switch (ft) {
     case formatters::file_types::cpp_header:
         r = options_.project_directory_path();

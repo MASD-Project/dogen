@@ -35,7 +35,15 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief A composite name.
+ * @brief Adds support for name composition.
+ *
+ * A nested name has the responsibility of representing an instantiation of a generic
+ * type with all of its type parameters, which themselves can also be generic types
+ * and so on. It may also represent the simpler case of a non-generic type, in which
+ * case only the parent name is populated and there are no children.
+ *
+ * Note that we avoid the name "composite name" here to avoid confusion with the
+ * composite pattern.
  */
 class nested_name final {
 public:
@@ -48,7 +56,7 @@ public:
 
 public:
     nested_name(
-        const dogen::yarn::name& type,
+        const dogen::yarn::name& parent,
         const std::list<dogen::yarn::nested_name>& children,
         const bool is_pointer);
 
@@ -61,17 +69,17 @@ private:
 
 public:
     /**
-     * @brief Top-level, containing type.
+     * @brief Name of the top-level, containing element.
      */
     /**@{*/
-    const dogen::yarn::name& type() const;
-    dogen::yarn::name& type();
-    void type(const dogen::yarn::name& v);
-    void type(const dogen::yarn::name&& v);
+    const dogen::yarn::name& parent() const;
+    dogen::yarn::name& parent();
+    void parent(const dogen::yarn::name& v);
+    void parent(const dogen::yarn::name&& v);
     /**@}*/
 
     /**
-     * @brief Child types.
+     * @brief Names of the child elements.
      */
     /**@{*/
     const std::list<dogen::yarn::nested_name>& children() const;
@@ -99,7 +107,7 @@ public:
     nested_name& operator=(nested_name other);
 
 private:
-    dogen::yarn::name type_;
+    dogen::yarn::name parent_;
     std::list<dogen::yarn::nested_name> children_;
     bool is_pointer_;
 };

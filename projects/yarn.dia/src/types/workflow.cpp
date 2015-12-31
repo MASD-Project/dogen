@@ -46,10 +46,10 @@ workflow::workflow(const dynamic::workflow& w) : dynamic_workflow_(w) { }
 
 yarn::name
 workflow::create_name_for_model(const std::string& model_name,
-    const std::string& external_module_path) const {
+    const std::string& external_modules) const {
 
     yarn::name_factory nf;
-    return nf.build_model_name(model_name, external_module_path);
+    return nf.build_model_name(model_name, external_modules);
 }
 
 yarn::module workflow::create_module_for_model(const yarn::name& n,
@@ -65,11 +65,11 @@ yarn::module workflow::create_module_for_model(const yarn::name& n,
 }
 
 void workflow::initialise_context_activity(const std::string& model_name,
-    const std::string& external_module_path, bool is_target) {
+    const std::string& external_modules, bool is_target) {
 
     context_ = context();
     auto& m(context_.model());
-    m.name(create_name_for_model(model_name, external_module_path));
+    m.name(create_name_for_model(model_name, external_modules));
     m.original_model_name(model_name);
     BOOST_LOG_SEV(lg, debug) << "Model name: " << m.name().qualified();
 
@@ -120,10 +120,10 @@ void workflow::graph_to_context_activity(const graph_type& g) {
 }
 
 yarn::intermediate_model workflow::execute(const dogen::dia::diagram& diagram,
-    const std::string& model_name, const std::string& external_module_path,
+    const std::string& model_name, const std::string& external_modules,
     bool is_target) {
 
-    initialise_context_activity(model_name, external_module_path, is_target);
+    initialise_context_activity(model_name, external_modules, is_target);
     graph_to_context_activity(generate_graph_activity(diagram));
 
     BOOST_LOG_SEV(lg, debug) << "Final model: " << context_.model();

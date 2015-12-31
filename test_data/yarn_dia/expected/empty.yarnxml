@@ -6,19 +6,19 @@
 		<simple>empty</simple>
 		<qualified>&lt;empty&gt;</qualified>
 		<location class_id="12" tracking_level="0" version="0">
-			<external_module_path class_id="13" tracking_level="0" version="0">
+			<external_modules class_id="13" tracking_level="0" version="0">
 				<count>0</count>
 				<item_version>0</item_version>
-			</external_module_path>
-			<model_module_path>
+			</external_modules>
+			<model_modules>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>empty</item>
-			</model_module_path>
-			<internal_module_path>
+			</model_modules>
+			<internal_modules>
 				<count>0</count>
 				<item_version>0</item_version>
-			</internal_module_path>
+			</internal_modules>
 		</location>
 	</name>
 	<origin_type>1</origin_type>
@@ -54,19 +54,19 @@
 						<simple>empty</simple>
 						<qualified>&lt;empty&gt;</qualified>
 						<location>
-							<external_module_path>
+							<external_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
+							</external_modules>
+							<model_modules>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>empty</item>
-							</model_module_path>
-							<internal_module_path>
+							</model_modules>
+							<internal_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</internal_module_path>
+							</internal_modules>
 						</location>
 					</name>
 					<generation_type>1</generation_type>

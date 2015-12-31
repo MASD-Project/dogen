@@ -50,7 +50,7 @@ input_descriptor_generator::input_descriptor_generator() : position_(0) { }
 void input_descriptor_generator::
 populate(const unsigned int position, result_type& v) {
     v.path(create_boost_filesystem_path(position + 0));
-    v.external_module_path(create_std_string(position + 1));
+    v.external_modules(create_std_string(position + 1));
     v.is_target(create_bool(position + 2));
 }
 

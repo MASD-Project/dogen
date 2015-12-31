@@ -43,7 +43,7 @@ std::size_t input_descriptor_hasher::hash(const input_descriptor& v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_filesystem_path(v.path()));
-    combine(seed, v.external_module_path());
+    combine(seed, v.external_modules());
     combine(seed, v.is_target());
 
     return seed;

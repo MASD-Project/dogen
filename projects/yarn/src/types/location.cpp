@@ -24,24 +24,24 @@ namespace dogen {
 namespace yarn {
 
 location::location(
-    const std::list<std::string>& external_module_path,
-    const std::list<std::string>& model_module_path,
-    const std::list<std::string>& internal_module_path)
-    : external_module_path_(external_module_path),
-      model_module_path_(model_module_path),
-      internal_module_path_(internal_module_path) { }
+    const std::list<std::string>& external_modules,
+    const std::list<std::string>& model_modules,
+    const std::list<std::string>& internal_modules)
+    : external_modules_(external_modules),
+      model_modules_(model_modules),
+      internal_modules_(internal_modules) { }
 
 void location::swap(location& other) noexcept {
     using std::swap;
-    swap(external_module_path_, other.external_module_path_);
-    swap(model_module_path_, other.model_module_path_);
-    swap(internal_module_path_, other.internal_module_path_);
+    swap(external_modules_, other.external_modules_);
+    swap(model_modules_, other.model_modules_);
+    swap(internal_modules_, other.internal_modules_);
 }
 
 bool location::operator==(const location& rhs) const {
-    return external_module_path_ == rhs.external_module_path_ &&
-        model_module_path_ == rhs.model_module_path_ &&
-        internal_module_path_ == rhs.internal_module_path_;
+    return external_modules_ == rhs.external_modules_ &&
+        model_modules_ == rhs.model_modules_ &&
+        internal_modules_ == rhs.internal_modules_;
 }
 
 location& location::operator=(location other) {
@@ -50,52 +50,52 @@ location& location::operator=(location other) {
     return *this;
 }
 
-const std::list<std::string>& location::external_module_path() const {
-    return external_module_path_;
+const std::list<std::string>& location::external_modules() const {
+    return external_modules_;
 }
 
-std::list<std::string>& location::external_module_path() {
-    return external_module_path_;
+std::list<std::string>& location::external_modules() {
+    return external_modules_;
 }
 
-void location::external_module_path(const std::list<std::string>& v) {
-    external_module_path_ = v;
+void location::external_modules(const std::list<std::string>& v) {
+    external_modules_ = v;
 }
 
-void location::external_module_path(const std::list<std::string>&& v) {
-    external_module_path_ = std::move(v);
+void location::external_modules(const std::list<std::string>&& v) {
+    external_modules_ = std::move(v);
 }
 
-const std::list<std::string>& location::model_module_path() const {
-    return model_module_path_;
+const std::list<std::string>& location::model_modules() const {
+    return model_modules_;
 }
 
-std::list<std::string>& location::model_module_path() {
-    return model_module_path_;
+std::list<std::string>& location::model_modules() {
+    return model_modules_;
 }
 
-void location::model_module_path(const std::list<std::string>& v) {
-    model_module_path_ = v;
+void location::model_modules(const std::list<std::string>& v) {
+    model_modules_ = v;
 }
 
-void location::model_module_path(const std::list<std::string>&& v) {
-    model_module_path_ = std::move(v);
+void location::model_modules(const std::list<std::string>&& v) {
+    model_modules_ = std::move(v);
 }
 
-const std::list<std::string>& location::internal_module_path() const {
-    return internal_module_path_;
+const std::list<std::string>& location::internal_modules() const {
+    return internal_modules_;
 }
 
-std::list<std::string>& location::internal_module_path() {
-    return internal_module_path_;
+std::list<std::string>& location::internal_modules() {
+    return internal_modules_;
 }
 
-void location::internal_module_path(const std::list<std::string>& v) {
-    internal_module_path_ = v;
+void location::internal_modules(const std::list<std::string>& v) {
+    internal_modules_ = v;
 }
 
-void location::internal_module_path(const std::list<std::string>&& v) {
-    internal_module_path_ = std::move(v);
+void location::internal_modules(const std::list<std::string>&& v) {
+    internal_modules_ = std::move(v);
 }
 
 } }

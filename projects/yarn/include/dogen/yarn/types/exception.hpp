@@ -33,6 +33,9 @@
 namespace dogen {
 namespace yarn {
 
+/**
+ * @brief Represents an exception which can be thrown.
+ */
 class exception final : public dogen::yarn::element {
 public:
     exception() = default;

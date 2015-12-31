@@ -6,19 +6,19 @@
 		<simple>class_without_package</simple>
 		<qualified>&lt;class_without_package&gt;</qualified>
 		<location class_id="12" tracking_level="0" version="0">
-			<external_module_path class_id="13" tracking_level="0" version="0">
+			<external_modules class_id="13" tracking_level="0" version="0">
 				<count>0</count>
 				<item_version>0</item_version>
-			</external_module_path>
-			<model_module_path>
+			</external_modules>
+			<model_modules>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>class_without_package</item>
-			</model_module_path>
-			<internal_module_path>
+			</model_modules>
+			<internal_modules>
 				<count>0</count>
 				<item_version>0</item_version>
-			</internal_module_path>
+			</internal_modules>
 		</location>
 	</name>
 	<origin_type>1</origin_type>
@@ -87,19 +87,19 @@
 						<simple>class_without_package</simple>
 						<qualified>&lt;class_without_package&gt;</qualified>
 						<location>
-							<external_module_path>
+							<external_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
+							</external_modules>
+							<model_modules>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>class_without_package</item>
-							</model_module_path>
-							<internal_module_path>
+							</model_modules>
+							<internal_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</internal_module_path>
+							</internal_modules>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -152,19 +152,19 @@
 						<simple>class_1</simple>
 						<qualified>&lt;class_without_package&gt;&lt;class_1&gt;</qualified>
 						<location>
-							<external_module_path>
+							<external_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</external_module_path>
-							<model_module_path>
+							</external_modules>
+							<model_modules>
 								<count>1</count>
 								<item_version>0</item_version>
 								<item>class_without_package</item>
-							</model_module_path>
-							<internal_module_path>
+							</model_modules>
+							<internal_modules>
 								<count>0</count>
 								<item_version>0</item_version>
-							</internal_module_path>
+							</internal_modules>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -193,24 +193,24 @@
 						</extensions>
 						<name>an_attribute</name>
 						<type class_id="34" tracking_level="0" version="0">
-							<type>
+							<parent>
 								<simple></simple>
 								<qualified></qualified>
 								<location>
-									<external_module_path>
+									<external_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</external_module_path>
-									<model_module_path>
+									</external_modules>
+									<model_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</model_module_path>
-									<internal_module_path>
+									</model_modules>
+									<internal_modules>
 										<count>0</count>
 										<item_version>0</item_version>
-									</internal_module_path>
+									</internal_modules>
 								</location>
-							</type>
+							</parent>
 							<children class_id="35" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>

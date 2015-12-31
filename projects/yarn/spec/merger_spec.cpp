@@ -95,10 +95,10 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     std::set<std::string> model_names;
     for (const auto& pair : combined.objects()) {
         const auto& n(pair.second.name());
-        BOOST_REQUIRE(n.location().model_module_path().size() == 1);
-        object_names.insert(n.location().model_module_path().front() + "_" +
+        BOOST_REQUIRE(n.location().model_modules().size() == 1);
+        object_names.insert(n.location().model_modules().front() + "_" +
             n.simple());
-        model_names.insert(n.location().model_module_path().front());
+        model_names.insert(n.location().model_modules().front());
     }
 
     BOOST_REQUIRE(object_names.size() == n);
@@ -151,8 +151,8 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     auto m(factory.make_single_type_model());
     m.is_target(true);
 
-    m.name().location().model_module_path().clear();
-    m.name().location().model_module_path().push_back(invalid_model_name);
+    m.name().location().model_modules().clear();
+    m.name().location().model_modules().push_back(invalid_model_name);
 
     dogen::yarn::merger mg;
     mg.add(m);

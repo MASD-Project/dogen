@@ -43,7 +43,7 @@ std::ostream& operator<<(std::ostream& s, const input_descriptor& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::config::input_descriptor\"" << ", "
       << "\"path\": " << "\"" << v.path().generic_string() << "\"" << ", "
-      << "\"external_module_path\": " << "\"" << tidy_up_string(v.external_module_path()) << "\"" << ", "
+      << "\"external_modules\": " << "\"" << tidy_up_string(v.external_modules()) << "\"" << ", "
       << "\"is_target\": " << v.is_target()
       << " }";
     return(s);

@@ -45,7 +45,7 @@ namespace yarn {
 std::size_t nested_name_hasher::hash(const nested_name& v) {
     std::size_t seed(0);
 
-    combine(seed, v.type());
+    combine(seed, v.parent());
     combine(seed, hash_std_list_dogen_yarn_nested_name(v.children()));
     combine(seed, v.is_pointer());
 

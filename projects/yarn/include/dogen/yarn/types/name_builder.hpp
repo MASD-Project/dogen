@@ -51,11 +51,11 @@ public:
     name_builder& simple_name(const std::string& sn);
     name_builder& model_name(const std::string& mn);
     name_builder& model_name(const yarn::location& l);
-    name_builder& model_module_path(const std::list<std::string>& mmp);
-    name_builder& internal_module_path(const std::string& imp);
-    name_builder& internal_module_path(const std::list<std::string>& imp);
-    name_builder& external_module_path(const std::string& emp);
-    name_builder& external_module_path(const std::list<std::string>& emp);
+    name_builder& model_modules(const std::list<std::string>& mm);
+    name_builder& internal_modules(const std::string& im);
+    name_builder& internal_modules(const std::list<std::string>& im);
+    name_builder& external_modules(const std::string& em);
+    name_builder& external_modules(const std::list<std::string>& em);
     name_builder& location(const yarn::location& l);
 
 public:

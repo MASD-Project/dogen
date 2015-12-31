@@ -38,7 +38,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::nested_name& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("type", v.type_);
+    ar << make_nvp("parent", v.parent_);
     ar << make_nvp("children", v.children_);
     ar << make_nvp("is_pointer", v.is_pointer_);
 }
@@ -47,7 +47,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::nested_name& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("type", v.type_);
+    ar >> make_nvp("parent", v.parent_);
     ar >> make_nvp("children", v.children_);
     ar >> make_nvp("is_pointer", v.is_pointer_);
 }

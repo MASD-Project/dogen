@@ -34,7 +34,26 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Represents a "URL" to a type within a model.
+ * @brief Identifies a hierarchy of containment within the modeling space.
+ *
+ * Elements exist at unique points within the modeling space called @e addresses.
+ * However, certain elements have the ability to contain other elements, creating
+ * in effect new dimensions in modeling space. The location class keeps track
+ * of these dimensions. Note that the attributes of this class are hierarchical, i.e.
+ * external modules contain model modules and so forth. These attributes are best
+ * thought of as a single linked list, where segments of that linked list have different
+ * meaning. However, because we care about these meanings, we implemented the
+ * type with a number of linked lists, one per meaning.
+ *
+ * A location is not necessarily connected to modules, although these are the main
+ * model elements that provide containment. For example, inner classes are
+ * contained within classes; in yarn terms it means a location should also have an
+ * "object" attribute to represent this relationship.
+ *
+ * Also, note that the location class itself encodes the address of the element that
+ * owns that location; returning to the linked list idea, the tail of the linked list is
+ * the name of the element, and the remaining linked list provides the location of
+ * the element.
  */
 class location final {
 public:
@@ -45,9 +64,9 @@ public:
 
 public:
     location(
-        const std::list<std::string>& external_module_path,
-        const std::list<std::string>& model_module_path,
-        const std::list<std::string>& internal_module_path);
+        const std::list<std::string>& external_modules,
+        const std::list<std::string>& model_modules,
+        const std::list<std::string>& internal_modules);
 
 private:
     template<typename Archive>
@@ -58,37 +77,42 @@ private:
 
 public:
     /**
-     * @brief Path of modules that contain the model from where the modeling element
-     * came from.
+     * @brief All modules external to the model itself.
+     *
+     * It is sometimes useful to create a model within a set of existing modules. In this
+     * case, the model does not own the existing modules and they are considered
+     * "external" to the model. This is useful, for example, when declaring a model
+     * within a larger project such as @e dogen::yarn. In this case, @e dogen is the
+     * external module.
      */
     /**@{*/
-    const std::list<std::string>& external_module_path() const;
-    std::list<std::string>& external_module_path();
-    void external_module_path(const std::list<std::string>& v);
-    void external_module_path(const std::list<std::string>&& v);
+    const std::list<std::string>& external_modules() const;
+    std::list<std::string>& external_modules();
+    void external_modules(const std::list<std::string>& v);
+    void external_modules(const std::list<std::string>&& v);
     /**@}*/
 
     /**
-     * @brief Path related to just the model itself.
+     * @brief Modules related to just the model itself.
      *
      * It is only different from the model name if the model name is composite;
      * that is, if the model name has multiple fields separated by dots, e.g. @ a.b.
      */
     /**@{*/
-    const std::list<std::string>& model_module_path() const;
-    std::list<std::string>& model_module_path();
-    void model_module_path(const std::list<std::string>& v);
-    void model_module_path(const std::list<std::string>&& v);
+    const std::list<std::string>& model_modules() const;
+    std::list<std::string>& model_modules();
+    void model_modules(const std::list<std::string>& v);
+    void model_modules(const std::list<std::string>&& v);
     /**@}*/
 
     /**
-     * @brief Path of modules that contain this modeling element.
+     * @brief Sub-modules within a model.
      */
     /**@{*/
-    const std::list<std::string>& internal_module_path() const;
-    std::list<std::string>& internal_module_path();
-    void internal_module_path(const std::list<std::string>& v);
-    void internal_module_path(const std::list<std::string>&& v);
+    const std::list<std::string>& internal_modules() const;
+    std::list<std::string>& internal_modules();
+    void internal_modules(const std::list<std::string>& v);
+    void internal_modules(const std::list<std::string>&& v);
     /**@}*/
 
 public:
@@ -102,9 +126,9 @@ public:
     location& operator=(location other);
 
 private:
-    std::list<std::string> external_module_path_;
-    std::list<std::string> model_module_path_;
-    std::list<std::string> internal_module_path_;
+    std::list<std::string> external_modules_;
+    std::list<std::string> model_modules_;
+    std::list<std::string> internal_modules_;
 };
 
 } }

@@ -31,8 +31,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.name_factory"));
 
-const std::string empty_internal_module_path(
-    "Internal module path cannot be empty.");
+const std::string empty_internal_modules("Internal modules cannot be empty.");
 
 }
 
@@ -40,14 +39,14 @@ namespace dogen {
 namespace yarn {
 
 name name_factory::build_model_name(const std::string& model_name,
-    const std::string& external_module_path) const {
+    const std::string& external_modules) const {
     name_builder b;
     b.simple_name_contributes_to_qualifed_name(false);
     b.infer_simple_name_from_model_name(true);
     b.model_name(model_name);
 
-    if (!external_module_path.empty())
-        b.external_module_path(external_module_path);
+    if (!external_modules.empty())
+        b.external_modules(external_modules);
 
     return b.build();
 }
@@ -74,8 +73,8 @@ name name_factory::build_element_in_model(const name& model_name,
     n.simple(simple_name);
 
     const auto& l(model_name.location());
-    n.location().model_module_path(l.model_module_path());
-    n.location().external_module_path(l.external_module_path());
+    n.location().model_modules(l.model_modules());
+    n.location().external_modules(l.external_modules());
 
     name_builder b(n);
     return b.build();
@@ -83,15 +82,15 @@ name name_factory::build_element_in_model(const name& model_name,
 
 name name_factory::build_element_in_model(const name& model_name,
     const std::string& simple_name,
-    const std::list<std::string>& internal_module_path) const {
+    const std::list<std::string>& internal_modules) const {
 
     yarn::name n;
     n.simple(simple_name);
 
     const auto& l(model_name.location());
-    n.location().model_module_path(l.model_module_path());
-    n.location().external_module_path(l.external_module_path());
-    n.location().internal_module_path(internal_module_path);
+    n.location().model_modules(l.model_modules());
+    n.location().external_modules(l.external_modules());
+    n.location().internal_modules(internal_modules);
 
     name_builder b(n);
     return b.build();
@@ -103,35 +102,35 @@ name name_factory::build_element_in_module(const name& module_name,
     n.simple(simple_name);
 
     const auto& l(module_name.location());
-    n.location().model_module_path(l.model_module_path());
-    n.location().external_module_path(l.external_module_path());
+    n.location().model_modules(l.model_modules());
+    n.location().external_modules(l.external_modules());
 
-    auto pp(l.internal_module_path());
+    auto pp(l.internal_modules());
     pp.push_back(module_name.simple());
-    n.location().internal_module_path(pp);
+    n.location().internal_modules(pp);
 
     name_builder b(n);
     return b.build();
 }
 
 name name_factory::build_module_name(const name& model_name,
-    const std::list<std::string>& internal_module_path) const {
+    const std::list<std::string>& internal_modules) const {
 
-    if (internal_module_path.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_internal_module_path;
-        BOOST_THROW_EXCEPTION(building_error(empty_internal_module_path));
+    if (internal_modules.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_internal_modules;
+        BOOST_THROW_EXCEPTION(building_error(empty_internal_modules));
     }
 
     yarn::name n;
-    n.simple(internal_module_path.back());
+    n.simple(internal_modules.back());
 
     const auto& l(model_name.location());
-    n.location().model_module_path(l.model_module_path());
-    n.location().external_module_path(l.external_module_path());
+    n.location().model_modules(l.model_modules());
+    n.location().external_modules(l.external_modules());
 
-    auto ipp(internal_module_path);
+    auto ipp(internal_modules);
     ipp.pop_back();
-    n.location().internal_module_path(ipp);
+    n.location().internal_modules(ipp);
 
     name_builder b(n);
     return b.build();
@@ -139,15 +138,15 @@ name name_factory::build_module_name(const name& model_name,
 
 name name_factory::build_module_name(const name& model_name,
     const std::string& module_name,
-    const std::list<std::string>& internal_module_path) const {
+    const std::list<std::string>& internal_modules) const {
 
     yarn::name n;
     n.simple(module_name);
 
     const auto& l(model_name.location());
-    n.location().model_module_path(l.model_module_path());
-    n.location().external_module_path(l.external_module_path());
-    n.location().internal_module_path(internal_module_path);
+    n.location().model_modules(l.model_modules());
+    n.location().external_modules(l.external_modules());
+    n.location().internal_modules(internal_modules);
 
     name_builder b(n);
     return b.build();
@@ -160,10 +159,10 @@ name name_factory::build_combined_element_name(const name& model_name,
 
     const auto& l(model_name.location());
     if (populate_model_name_if_blank &&
-        n.location().model_module_path().empty()) {
-        n.location().model_module_path(l.model_module_path());
+        n.location().model_modules().empty()) {
+        n.location().model_modules(l.model_modules());
     }
-    n.location().external_module_path(l.external_module_path());
+    n.location().external_modules(l.external_modules());
 
     name_builder b(n);
     return b.build();
@@ -175,12 +174,12 @@ name name_factory::build_promoted_module_name(const name& model_name,
     n.simple(element_name.simple());
 
     const auto& l(element_name.location());
-    if (!l.internal_module_path().empty()) {
-        n.location().model_module_path().push_back(
-            l.internal_module_path().front());
+    if (!l.internal_modules().empty()) {
+        n.location().model_modules().push_back(
+            l.internal_modules().front());
     }
-    n.location().external_module_path(
-        model_name.location().external_module_path());
+    n.location().external_modules(
+        model_name.location().external_modules());
 
     name_builder b(n);
     return b.build();

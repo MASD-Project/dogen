@@ -46,9 +46,9 @@ location_generator::location_generator() : position_(0) { }
 
 void location_generator::
 populate(const unsigned int position, result_type& v) {
-    v.external_module_path(create_std_list_std_string(position + 0));
-    v.model_module_path(create_std_list_std_string(position + 1));
-    v.internal_module_path(create_std_list_std_string(position + 2));
+    v.external_modules(create_std_list_std_string(position + 0));
+    v.model_modules(create_std_list_std_string(position + 1));
+    v.internal_modules(create_std_list_std_string(position + 2));
 }
 
 location_generator::result_type

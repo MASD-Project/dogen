@@ -39,7 +39,7 @@ void save(Archive& ar,
     const dogen::config::input_descriptor& v,
     const unsigned int /*version*/) {
     ar << make_nvp("path", v.path_.generic_string());
-    ar << make_nvp("external_module_path", v.external_module_path_);
+    ar << make_nvp("external_modules", v.external_modules_);
     ar << make_nvp("is_target", v.is_target_);
 }
 
@@ -50,7 +50,7 @@ void load(Archive& ar,
     std::string path_tmp;
     ar >> make_nvp("path", path_tmp);
     v.path_ = path_tmp;
-    ar >> make_nvp("external_module_path", v.external_module_path_);
+    ar >> make_nvp("external_modules", v.external_modules_);
     ar >> make_nvp("is_target", v.is_target_);
 }
 

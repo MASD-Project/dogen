@@ -42,7 +42,7 @@ namespace yarn {
 
 namespace {
 
-class internal_module_path_builder {
+class internal_modules_builder {
 private:
     void process(const name& n);
 
@@ -61,21 +61,21 @@ public:
 
 public:
     std::unordered_map<std::string, std::list<std::string>>
-        distinct_internal_module_paths_;
+        distinct_internal_moduless_;
 };
 
-void internal_module_path_builder::process(const name& n) {
-    auto imp(n.location().internal_module_path());
+void internal_modules_builder::process(const name& n) {
+    auto imp(n.location().internal_modules());
     while (!imp.empty()) {
         const std::string key(boost::join(imp, separator));
-        distinct_internal_module_paths_.insert(std::make_pair(key, imp));
+        distinct_internal_moduless_.insert(std::make_pair(key, imp));
         imp.pop_back();
     }
 }
 
 const std::unordered_map<std::string, std::list<std::string>>&
-    internal_module_path_builder::result() {
-    return distinct_internal_module_paths_;
+    internal_modules_builder::result() {
+    return distinct_internal_moduless_;
 }
 
 class updater {
@@ -103,7 +103,7 @@ boost::optional<name> updater::containing_module(const name& n) {
     BOOST_LOG_SEV(lg, debug) << "Finding containing module for: "
                              << n.qualified();
 
-    const bool in_global_namespace(n.location().model_module_path().empty());
+    const bool in_global_namespace(n.location().model_modules().empty());
     if (in_global_namespace) {
         BOOST_LOG_SEV(lg, debug) << "Type is in global module so, it has"
                                  << " no containing module yet. Type: "
@@ -111,8 +111,8 @@ boost::optional<name> updater::containing_module(const name& n) {
         return boost::optional<name>();
     }
 
-    const bool at_model_level(n.location().internal_module_path().empty());
-    const auto mn(n.location().model_module_path().back());
+    const bool at_model_level(n.location().internal_modules().empty());
+    const auto mn(n.location().model_modules().back());
     if (at_model_level && n.simple() == mn) {
         BOOST_LOG_SEV(lg, debug) << "Type is a model module, so containing "
                                  << "module will be handled later. Type: "
@@ -121,16 +121,16 @@ boost::optional<name> updater::containing_module(const name& n) {
     }
 
     name_builder b;
-    b.external_module_path(n.location().external_module_path());
+    b.external_modules(n.location().external_modules());
 
-    auto imp(n.location().internal_module_path());
+    auto imp(n.location().internal_modules());
     if (imp.empty())
         b.simple_name(mn);
     else {
-        b.model_module_path(n.location().model_module_path());
+        b.model_modules(n.location().model_modules());
         b.simple_name(imp.back());
         imp.pop_back();
-        b.internal_module_path(imp);
+        b.internal_modules(imp);
     }
 
     const auto module_n(b.build());
@@ -165,7 +165,7 @@ void updater::update(element& e) {
 }
 
 void modules_expander::create_missing_modules(intermediate_model& m) const {
-    internal_module_path_builder b;
+    internal_modules_builder b;
     yarn::elements_traversal(m, b);
 
     for (const auto& pair : b.result()) {

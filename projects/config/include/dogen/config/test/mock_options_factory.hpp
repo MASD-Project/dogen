@@ -65,7 +65,7 @@ public:
      */
     static input_options make_input_options(
         const boost::filesystem::path& target,
-        const std::string& module_path);
+        const std::string& modules);
 
     /**
      * @brief Returns the knitting options with target set and
@@ -74,7 +74,7 @@ public:
     static knitting_options make_knitting_options(
         const boost::filesystem::path& target,
         const boost::filesystem::path project_dir = boost::filesystem::path(),
-        const std::string module_path = std::string(),
+        const std::string modules = std::string(),
         const bool verbose = true);
 };
 

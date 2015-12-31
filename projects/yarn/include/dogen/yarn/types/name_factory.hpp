@@ -45,7 +45,7 @@ public:
      * @pre @e model_name must not be empty.
      */
     name build_model_name(const std::string& model_name,
-        const std::string& external_module_path = std::string()) const;
+        const std::string& external_modules = std::string()) const;
 
     /**
      * @brief Given the components of a name for an element, creates
@@ -66,7 +66,7 @@ public:
         const std::string& simple_name) const;
     name build_element_in_model(const name& model_name,
         const std::string& simple_name,
-        const std::list<std::string>& internal_module_path) const;
+        const std::list<std::string>& internal_modules) const;
     /**@}*/
 
     /**
@@ -83,10 +83,10 @@ public:
      */
     /**@{*/
     name build_module_name(const name& model_name,
-        const std::list<std::string>& internal_module_path) const;
+        const std::list<std::string>& internal_modules) const;
     name build_module_name(const name& model_name,
         const std::string& module_name,
-        const std::list<std::string>& internal_module_path) const;
+        const std::list<std::string>& internal_modules) const;
     /**@}*/
 
     /**

@@ -86,8 +86,8 @@ void merger::check_name(const name& model_name, const std::string& key,
     if (!in_global_namespace) {
         const auto vl(value.location());
         const auto ml(model_name.location());
-        if (vl.external_module_path() != ml.external_module_path() ||
-            vl.model_module_path() != ml.model_module_path()) {
+        if (vl.external_modules() != ml.external_modules() ||
+            vl.model_modules() != ml.model_modules()) {
             std::ostringstream s;
             s << "Type does not belong to this model. Model name: '"
               << model_name.qualified() << "'. Type name: "

@@ -38,8 +38,8 @@ const std::string start_component("<");
 const std::string end_component(">");
 const std::string empty_type_name("Type name is empty.");
 const std::string empty_model_name("Model name is empty.");
-const std::string empty_internal_module_path("Internal module path is empty.");
-const std::string empty_external_module_path("External module path is empty.");
+const std::string empty_internal_modules("Internal modules are empty.");
+const std::string empty_external_modules("External modules are empty.");
 
 inline void add_component_markers(std::ostream& s, const std::string& c) {
     if (c.empty())
@@ -66,13 +66,13 @@ void name_builder::compute_qualified_name() {
     const auto& l(name_.location());
 
     std::ostringstream s;
-    for (const auto& m : l.external_module_path())
+    for (const auto& m : l.external_modules())
         add_component_markers(s, m);
 
-    for (const auto& m : l.model_module_path())
+    for (const auto& m : l.model_modules())
         add_component_markers(s, m);
 
-    for (const auto& m : l.internal_module_path())
+    for (const auto& m : l.internal_modules())
       add_component_markers(s, m);
 
     if (simple_name_contributes_to_qualifed_name_)
@@ -106,63 +106,63 @@ name_builder& name_builder::model_name(const std::string& mn) {
     }
 
     using utility::string::splitter;
-    name_.location().model_module_path(splitter::split_scoped(mn, dot));
+    name_.location().model_modules(splitter::split_scoped(mn, dot));
 
     if (infer_simple_name_from_model_name_)
-        name_.simple(*name_.location().model_module_path().rbegin());
+        name_.simple(*name_.location().model_modules().rbegin());
 
     BOOST_LOG_SEV(lg, debug) << "Added model name: " << mn;
     return *this;
 }
 
 name_builder& name_builder::model_name(const yarn::location& l) {
-    name_.location().model_module_path(l.model_module_path());
+    name_.location().model_modules(l.model_modules());
 
     BOOST_LOG_SEV(lg, debug) << "Added model name from location: " << l;
     return *this;
 }
 
 name_builder& name_builder::
-model_module_path(const std::list<std::string>& mmp) {
-    name_.location().model_module_path(mmp);
+model_modules(const std::list<std::string>& mmp) {
+    name_.location().model_modules(mmp);
     BOOST_LOG_SEV(lg, debug) << "Added model module path: " << mmp;
     return *this;
 }
 
-name_builder& name_builder::internal_module_path(const std::string& imp) {
+name_builder& name_builder::internal_modules(const std::string& imp) {
     if (imp.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_internal_module_path;
-        BOOST_THROW_EXCEPTION(building_error(empty_internal_module_path));
+        BOOST_LOG_SEV(lg, error) << empty_internal_modules;
+        BOOST_THROW_EXCEPTION(building_error(empty_internal_modules));
     }
 
     using utility::string::splitter;
-    name_.location().internal_module_path(splitter::split_scoped(imp));
+    name_.location().internal_modules(splitter::split_scoped(imp));
     BOOST_LOG_SEV(lg, debug) << "Added internal model path: " << imp;
     return *this;
 }
 
-name_builder& name_builder::internal_module_path(
+name_builder& name_builder::internal_modules(
     const std::list<std::string>& imp) {
-    name_.location().internal_module_path(imp);
+    name_.location().internal_modules(imp);
     BOOST_LOG_SEV(lg, debug) << "Added external model path: " << imp;
     return *this;
 }
 
-name_builder& name_builder::external_module_path(const std::string& emp) {
+name_builder& name_builder::external_modules(const std::string& emp) {
     if (emp.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_external_module_path;
-        BOOST_THROW_EXCEPTION(building_error(empty_external_module_path));
+        BOOST_LOG_SEV(lg, error) << empty_external_modules;
+        BOOST_THROW_EXCEPTION(building_error(empty_external_modules));
     }
 
     using utility::string::splitter;
-    name_.location().external_module_path(splitter::split_scoped(emp));
+    name_.location().external_modules(splitter::split_scoped(emp));
     BOOST_LOG_SEV(lg, debug) << "Added external model path: " << emp;
     return *this;
 }
 
-name_builder& name_builder::external_module_path(
+name_builder& name_builder::external_modules(
     const std::list<std::string>& emp) {
-    name_.location().external_module_path(emp);
+    name_.location().external_modules(emp);
     BOOST_LOG_SEV(lg, debug) << "Added external model path: " << emp;
     return *this;
 }

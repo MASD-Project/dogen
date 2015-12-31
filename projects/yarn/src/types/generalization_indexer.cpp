@@ -146,8 +146,8 @@ populate(const generalization_details& d, intermediate_model& m) const {
         o.leaves().sort();
 
         for (const auto& leaf : pair.second) {
-            if (leaf.location().model_module_path() ==
-                m.name().location().model_module_path())
+            if (leaf.location().model_modules() ==
+                m.name().location().model_modules())
                 m.leaves().insert(leaf);
         }
     }

@@ -44,9 +44,9 @@ namespace yarn {
 std::size_t location_hasher::hash(const location& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_std_string(v.external_module_path()));
-    combine(seed, hash_std_list_std_string(v.model_module_path()));
-    combine(seed, hash_std_list_std_string(v.internal_module_path()));
+    combine(seed, hash_std_list_std_string(v.external_modules()));
+    combine(seed, hash_std_list_std_string(v.model_modules()));
+    combine(seed, hash_std_list_std_string(v.internal_modules()));
 
     return seed;
 }

@@ -35,6 +35,9 @@
 namespace dogen {
 namespace yarn {
 
+/**
+ * @brief Represents a visitor in the GOF visitor design pattern.
+ */
 class visitor final : public dogen::yarn::element {
 public:
     visitor() = default;

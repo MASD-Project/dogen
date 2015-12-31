@@ -47,10 +47,10 @@ cpp_options mock_options_factory::make_cpp_options(
 
 input_options mock_options_factory::make_input_options(
     const boost::filesystem::path& target,
-    const std::string& module_path) {
+    const std::string& modules) {
 
     input_descriptor id;
-    id.external_module_path(module_path);
+    id.external_modules(modules);
     id.path(target);
 
     input_options r;
@@ -61,11 +61,11 @@ input_options mock_options_factory::make_input_options(
 knitting_options mock_options_factory::make_knitting_options(
     const boost::filesystem::path& target,
     const boost::filesystem::path project_dir,
-    const std::string module_path,
+    const std::string modules,
     const bool verbose) {
     knitting_options r;
     r.verbose(verbose);
-    r.input(make_input_options(target, module_path));
+    r.input(make_input_options(target, modules));
     r.cpp(make_cpp_options(project_dir));
     r.output(make_output_options());
     return r;

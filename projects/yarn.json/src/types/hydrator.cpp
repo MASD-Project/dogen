@@ -54,7 +54,7 @@ const std::string meta_type_object_value("object");
 const std::string meta_type_primitive_value("primitive");
 
 const std::string simple_name_key("simple_name");
-const std::string internal_module_path_key("internal_module_path");
+const std::string internal_modules_key("internal_modules");
 const std::string extensions_key("extensions");
 
 const std::string object_type_key("object_type");
@@ -117,14 +117,14 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
     const auto simple_name_value(pt.get<std::string>(simple_name_key));
     b.simple_name(simple_name_value);
 
-    const auto i(pt.find(internal_module_path_key));
+    const auto i(pt.find(internal_modules_key));
     if (i != pt.not_found()) {
         std::list<std::string> ipp;
-        for (auto& item : pt.get_child(internal_module_path_key))
+        for (auto& item : pt.get_child(internal_modules_key))
             ipp.push_back(item.second.get_value<std::string>());
 
         if (!ipp.empty())
-            b.internal_module_path(ipp);
+            b.internal_modules(ipp);
         else {
             BOOST_LOG_SEV(lg, debug) << "Ignoring empty internal module path. "
                                      << "Type: " << simple_name_value;

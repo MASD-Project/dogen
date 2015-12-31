@@ -130,9 +130,9 @@ void resolver::resolve_partial_type(nested_name& nn) const {
     for (auto& cnn : nn.children())
         resolve_partial_type(cnn);
 
-    name n(resolve_partial_type(nn.type()));
+    const name n(resolve_partial_type(nn.parent()));
     BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.qualified() << ".";
-    nn.type(n);
+    nn.parent(n);
 }
 
 void resolver::

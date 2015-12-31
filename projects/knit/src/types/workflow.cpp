@@ -117,7 +117,7 @@ workflow::obtain_input_descriptors_activity() const {
                                  << ref.path().filename();
         yarn::input_descriptor id;
         id.path(ref.path());
-        id.external_module_path(ref.external_module_path());
+        id.external_modules(ref.external_modules());
         id.is_target(false);
         r.push_back(id);
     }
@@ -126,7 +126,7 @@ workflow::obtain_input_descriptors_activity() const {
     yarn::input_descriptor target;
     target.path(input_options.target().path());
     target.is_target(true);
-    target.external_module_path(input_options.target().external_module_path());
+    target.external_modules(input_options.target().external_modules());
     r.push_back(target);
     BOOST_LOG_SEV(lg, debug) << "Added target model: "
                              << input_options.target().path();

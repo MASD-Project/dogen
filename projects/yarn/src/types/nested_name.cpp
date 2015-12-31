@@ -27,22 +27,22 @@ nested_name::nested_name()
     : is_pointer_(static_cast<bool>(0)) { }
 
 nested_name::nested_name(
-    const dogen::yarn::name& type,
+    const dogen::yarn::name& parent,
     const std::list<dogen::yarn::nested_name>& children,
     const bool is_pointer)
-    : type_(type),
+    : parent_(parent),
       children_(children),
       is_pointer_(is_pointer) { }
 
 void nested_name::swap(nested_name& other) noexcept {
     using std::swap;
-    swap(type_, other.type_);
+    swap(parent_, other.parent_);
     swap(children_, other.children_);
     swap(is_pointer_, other.is_pointer_);
 }
 
 bool nested_name::operator==(const nested_name& rhs) const {
-    return type_ == rhs.type_ &&
+    return parent_ == rhs.parent_ &&
         children_ == rhs.children_ &&
         is_pointer_ == rhs.is_pointer_;
 }
@@ -53,20 +53,20 @@ nested_name& nested_name::operator=(nested_name other) {
     return *this;
 }
 
-const dogen::yarn::name& nested_name::type() const {
-    return type_;
+const dogen::yarn::name& nested_name::parent() const {
+    return parent_;
 }
 
-dogen::yarn::name& nested_name::type() {
-    return type_;
+dogen::yarn::name& nested_name::parent() {
+    return parent_;
 }
 
-void nested_name::type(const dogen::yarn::name& v) {
-    type_ = v;
+void nested_name::parent(const dogen::yarn::name& v) {
+    parent_ = v;
 }
 
-void nested_name::type(const dogen::yarn::name&& v) {
-    type_ = std::move(v);
+void nested_name::parent(const dogen::yarn::name&& v) {
+    parent_ = std::move(v);
 }
 
 const std::list<dogen::yarn::nested_name>& nested_name::children() const {

@@ -36,9 +36,9 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Packaging unit.
+ * @brief Container for other modeling elements.
  *
- * Aggregates a group of logically related types into a unit.
+ * Aggregates a group of logically related elements into a unit.
  */
 class module final : public dogen::yarn::element {
 public:

@@ -126,8 +126,8 @@ workflow::managed_directories(const config::knitting_options& ko,
     const auto ro(obtain_root_object(m));
     settings::directory_names_settings_factory f(rp);
     const auto dn(f.make(ro));
-    const auto& mmp(m.name().location().model_module_path());
-    const auto mn(boost::algorithm::join(mmp, dot));
+    const auto& mm(m.name().location().model_modules());
+    const auto mn(boost::algorithm::join(mm, dot));
     std::forward_list<boost::filesystem::path> r;
     r.push_front(ko.cpp().project_directory_path() / mn);
     return r;
