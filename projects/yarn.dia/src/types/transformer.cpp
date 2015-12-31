@@ -143,14 +143,18 @@ yarn::module& transformer::module_for_id(const std::string& id) {
     return module_for_name(i->second);
 }
 
-yarn::property transformer::to_property(const processed_property& p) const {
+yarn::property transformer::to_property(const yarn::name& owning_element,
+    const processed_property& p) const {
     if (p.name().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
         BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
     }
 
+    yarn::name_factory f;
+    const auto n(f.build_property_name(owning_element, p.name()));
+
     yarn::property r;
-    r.name(p.name());
+    r.name(n);
     r.unparsed_type(p.type());
     r.documentation(p.comment().documentation());
 
@@ -188,7 +192,7 @@ update_object(yarn::object& o, const processed_object& po, const profile& p) {
     }
 
     for (const auto& p : po.properties())
-        o.local_properties().push_back(to_property(p));
+        o.local_properties().push_back(to_property(o.name(), p));
 
     const auto i(context_.child_id_to_parent_ids().find(po.id()));
     if (i != context_.child_id_to_parent_ids().end()) {
@@ -352,7 +356,7 @@ void transformer::to_concept(const processed_object& o, const profile& p) {
     update_element(c, o, p);
 
     for (const auto& prop : o.properties())
-        c.local_properties().push_back(to_property(prop));
+        c.local_properties().push_back(to_property(c.name(), prop));
 
     const auto i(context_.child_id_to_parent_ids().find(o.id()));
     c.is_child(i != context_.child_id_to_parent_ids().end());

@@ -51,7 +51,8 @@ std::ostream& operator<<(std::ostream& s, const location& v) {
       << "\"__type__\": " << "\"dogen::yarn::location\"" << ", "
       << "\"external_modules\": " << v.external_modules() << ", "
       << "\"model_modules\": " << v.model_modules() << ", "
-      << "\"internal_modules\": " << v.internal_modules()
+      << "\"internal_modules\": " << v.internal_modules() << ", "
+      << "\"element\": " << "\"" << tidy_up_string(v.element()) << "\""
       << " }";
     return(s);
 }

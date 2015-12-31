@@ -19,6 +19,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</internal_modules>
+			<element></element>
 		</location>
 	</name>
 	<origin_type>1</origin_type>
@@ -100,6 +101,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -165,6 +167,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -191,7 +194,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>bool_property</name>
+						<name>
+							<simple>bool_property</simple>
+							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;bool_property&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>all_primitives</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>a_class</element>
+							</location>
+						</name>
 						<type class_id="34" tracking_level="0" version="0">
 							<parent>
 								<simple></simple>
@@ -209,6 +231,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children class_id="35" tracking_level="0" version="0">
@@ -217,9 +240,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>bool</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -230,7 +253,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>char_property</name>
+						<name>
+							<simple>char_property</simple>
+							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;char_property&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>all_primitives</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>a_class</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -248,6 +290,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -256,9 +299,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>char</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -269,7 +312,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>uchar_property</name>
+						<name>
+							<simple>uchar_property</simple>
+							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;uchar_property&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>all_primitives</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>a_class</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -287,6 +349,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -295,9 +358,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>unsigned char</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -308,7 +371,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>int_property</name>
+						<name>
+							<simple>int_property</simple>
+							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;int_property&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>all_primitives</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>a_class</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -326,6 +408,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -334,9 +417,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>int</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -347,7 +430,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>uint_property</name>
+						<name>
+							<simple>uint_property</simple>
+							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;uint_property&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>all_primitives</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>a_class</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -365,6 +467,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -373,9 +476,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>unsigned int</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -386,7 +489,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>long_property</name>
+						<name>
+							<simple>long_property</simple>
+							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;long_property&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>all_primitives</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>a_class</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -404,6 +526,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -412,9 +535,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>long</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -425,7 +548,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>ulong_property</name>
+						<name>
+							<simple>ulong_property</simple>
+							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;ulong_property&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>all_primitives</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>a_class</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -443,6 +585,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -451,9 +594,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>unsigned long</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -464,7 +607,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>long_long_property</name>
+						<name>
+							<simple>long_long_property</simple>
+							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;long_long_property&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>all_primitives</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>a_class</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -482,6 +644,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -490,9 +653,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>long long</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -503,7 +666,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>ulong_long_property</name>
+						<name>
+							<simple>ulong_long_property</simple>
+							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;ulong_long_property&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>all_primitives</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>a_class</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -521,6 +703,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -529,9 +712,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>unsigned long long</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -542,7 +725,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>short_property</name>
+						<name>
+							<simple>short_property</simple>
+							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;short_property&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>all_primitives</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>a_class</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -560,6 +762,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -568,9 +771,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>short</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -581,7 +784,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>ushort_property</name>
+						<name>
+							<simple>ushort_property</simple>
+							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;ushort_property&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>all_primitives</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>a_class</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -599,6 +821,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -607,9 +830,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>unsigned short</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -620,7 +843,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>double_property</name>
+						<name>
+							<simple>double_property</simple>
+							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;double_property&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>all_primitives</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>a_class</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -638,6 +880,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -646,9 +889,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>double</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -659,7 +902,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>float_property</name>
+						<name>
+							<simple>float_property</simple>
+							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;float_property&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>all_primitives</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>a_class</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -677,6 +939,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -685,9 +948,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>float</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>float</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties class_id="36" tracking_level="0" version="0">

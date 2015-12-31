@@ -19,6 +19,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</internal_modules>
+			<element></element>
 		</location>
 	</name>
 	<origin_type>1</origin_type>
@@ -67,6 +68,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -145,6 +147,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -210,6 +213,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -236,7 +240,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>primitives</element>
+							</location>
+						</name>
 						<type class_id="34" tracking_level="0" version="0">
 							<parent>
 								<simple></simple>
@@ -254,6 +277,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children class_id="35" tracking_level="0" version="0">
@@ -262,9 +286,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::int8_t</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -275,7 +299,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>primitives</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -293,6 +336,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -301,9 +345,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::int16_t</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -314,7 +358,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_2</name>
+						<name>
+							<simple>prop_2</simple>
+							<qualified>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_2&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>primitives</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -332,6 +395,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -340,9 +404,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::int32_t</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -353,7 +417,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_3</name>
+						<name>
+							<simple>prop_3</simple>
+							<qualified>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_3&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>primitives</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -371,6 +454,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -379,9 +463,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::int64_t</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -392,7 +476,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_4</name>
+						<name>
+							<simple>prop_4</simple>
+							<qualified>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_4&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>primitives</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -410,6 +513,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -418,9 +522,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::uint8_t</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -431,7 +535,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_5</name>
+						<name>
+							<simple>prop_5</simple>
+							<qualified>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_5&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>primitives</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -449,6 +572,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -457,9 +581,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::uint16_t</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -470,7 +594,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_6</name>
+						<name>
+							<simple>prop_6</simple>
+							<qualified>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_6&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>primitives</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -488,6 +631,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -496,9 +640,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::uint32_t</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -509,7 +653,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_7</name>
+						<name>
+							<simple>prop_7</simple>
+							<qualified>&lt;std_model&gt;&lt;primitives&gt;&lt;prop_7&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>primitives</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -527,6 +690,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -535,9 +699,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>std::uint64_t</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>std::uint64_t</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties class_id="36" tracking_level="0" version="0">
@@ -617,6 +781,7 @@
 								<item_version>0</item_version>
 								<item>pkg1</item>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -643,7 +808,27 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;std_model&gt;&lt;pkg1&gt;&lt;class_c&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>pkg1</item>
+								</internal_modules>
+								<element>class_c</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -661,6 +846,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -669,9 +855,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -682,7 +868,27 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;std_model&gt;&lt;pkg1&gt;&lt;class_c&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>pkg1</item>
+								</internal_modules>
+								<element>class_c</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -700,6 +906,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -708,9 +915,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -789,6 +996,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -815,7 +1023,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;std_model&gt;&lt;base&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>base</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -833,6 +1060,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -841,9 +1069,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -922,6 +1150,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -948,7 +1177,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;std_model&gt;&lt;class_j&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_j</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -966,6 +1214,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -974,9 +1223,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::pair&lt;int,int&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -987,7 +1236,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;std_model&gt;&lt;class_j&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_j</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1005,6 +1273,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1013,9 +1282,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::pair&lt;std::string,std::string&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1026,7 +1295,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_2</name>
+						<name>
+							<simple>prop_2</simple>
+							<qualified>&lt;std_model&gt;&lt;class_j&gt;&lt;prop_2&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_j</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1044,6 +1332,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1052,9 +1341,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>std::vector&lt;std::pair&lt;std::string,int&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>std::vector&lt;std::pair&lt;std::string,int&gt;&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -1133,6 +1422,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -1159,7 +1449,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;std_model&gt;&lt;class_b&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_b</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1177,6 +1486,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1185,9 +1495,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1198,7 +1508,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;std_model&gt;&lt;class_b&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_b</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1216,6 +1545,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1224,9 +1554,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1237,7 +1567,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_2</name>
+						<name>
+							<simple>prop_2</simple>
+							<qualified>&lt;std_model&gt;&lt;class_b&gt;&lt;prop_2&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_b</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1255,6 +1604,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1263,9 +1613,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::vector&lt;pkg1::class_c&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1276,7 +1626,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_3</name>
+						<name>
+							<simple>prop_3</simple>
+							<qualified>&lt;std_model&gt;&lt;class_b&gt;&lt;prop_3&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_b</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1294,6 +1663,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1302,9 +1672,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::vector&lt;unsigned int&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1315,7 +1685,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_4</name>
+						<name>
+							<simple>prop_4</simple>
+							<qualified>&lt;std_model&gt;&lt;class_b&gt;&lt;prop_4&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_b</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1333,6 +1722,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1341,9 +1731,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1354,7 +1744,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_5</name>
+						<name>
+							<simple>prop_5</simple>
+							<qualified>&lt;std_model&gt;&lt;class_b&gt;&lt;prop_5&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_b</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1372,6 +1781,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1380,9 +1790,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>std::vector&lt;std::vector&lt;unsigned int&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>std::vector&lt;std::vector&lt;unsigned int&gt;&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -1461,6 +1871,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -1487,7 +1898,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;std_model&gt;&lt;class_d&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_d</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1505,6 +1935,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1513,9 +1944,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::list&lt;std::string&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1526,7 +1957,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;std_model&gt;&lt;class_d&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_d</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1544,6 +1994,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1552,9 +2003,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::list&lt;class_a&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1565,7 +2016,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_2</name>
+						<name>
+							<simple>prop_2</simple>
+							<qualified>&lt;std_model&gt;&lt;class_d&gt;&lt;prop_2&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_d</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1583,6 +2053,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1591,9 +2062,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::list&lt;pkg1::class_c&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1604,7 +2075,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_3</name>
+						<name>
+							<simple>prop_3</simple>
+							<qualified>&lt;std_model&gt;&lt;class_d&gt;&lt;prop_3&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_d</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1622,6 +2112,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1630,9 +2121,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::list&lt;unsigned int&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1643,7 +2134,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_4</name>
+						<name>
+							<simple>prop_4</simple>
+							<qualified>&lt;std_model&gt;&lt;class_d&gt;&lt;prop_4&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_d</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1661,6 +2171,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1669,9 +2180,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::list&lt;class_a&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1682,7 +2193,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_5</name>
+						<name>
+							<simple>prop_5</simple>
+							<qualified>&lt;std_model&gt;&lt;class_d&gt;&lt;prop_5&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_d</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1700,6 +2230,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1708,9 +2239,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>std::list&lt;std::list&lt;unsigned int&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>std::list&lt;std::list&lt;unsigned int&gt;&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -1789,6 +2320,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -1826,7 +2358,26 @@
 								</item>
 							</fields>
 						</extensions>
-						<name>prop0</name>
+						<name>
+							<simple>prop0</simple>
+							<qualified>&lt;std_model&gt;&lt;class_a&gt;&lt;prop0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_a</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1844,6 +2395,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1852,9 +2404,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>std::string</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>std::string</unparsed_type>
 					</item>
 					<item>
 						<documentation>test inclusion duplicates
@@ -1866,7 +2418,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop1</name>
+						<name>
+							<simple>prop1</simple>
+							<qualified>&lt;std_model&gt;&lt;class_a&gt;&lt;prop1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_a</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1884,6 +2455,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1892,9 +2464,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>std::string</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>std::string</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -1973,6 +2545,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -1999,7 +2572,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;std_model&gt;&lt;class_e&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_e</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2017,6 +2609,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2025,9 +2618,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::deque&lt;std::string&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -2038,7 +2631,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;std_model&gt;&lt;class_e&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_e</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2056,6 +2668,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2064,9 +2677,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -2077,7 +2690,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_2</name>
+						<name>
+							<simple>prop_2</simple>
+							<qualified>&lt;std_model&gt;&lt;class_e&gt;&lt;prop_2&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_e</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2095,6 +2727,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2103,9 +2736,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::deque&lt;pkg1::class_c&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -2116,7 +2749,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_3</name>
+						<name>
+							<simple>prop_3</simple>
+							<qualified>&lt;std_model&gt;&lt;class_e&gt;&lt;prop_3&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_e</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2134,6 +2786,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2142,9 +2795,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::deque&lt;unsigned int&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -2155,7 +2808,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_4</name>
+						<name>
+							<simple>prop_4</simple>
+							<qualified>&lt;std_model&gt;&lt;class_e&gt;&lt;prop_4&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_e</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2173,6 +2845,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2181,9 +2854,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -2194,7 +2867,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_5</name>
+						<name>
+							<simple>prop_5</simple>
+							<qualified>&lt;std_model&gt;&lt;class_e&gt;&lt;prop_5&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_e</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2212,6 +2904,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2220,9 +2913,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>std::deque&lt;std::deque&lt;unsigned int&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>std::deque&lt;std::deque&lt;unsigned int&gt;&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -2301,6 +2994,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -2327,7 +3021,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;std_model&gt;&lt;class_h&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_h</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2345,6 +3058,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2353,9 +3067,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>std::unordered_set&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>std::unordered_set&lt;class_a&gt;</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -2366,7 +3080,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;std_model&gt;&lt;class_h&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_h</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2384,6 +3117,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2392,9 +3126,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>std::unordered_set&lt;pkg1::class_c&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>std::unordered_set&lt;pkg1::class_c&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -2473,6 +3207,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -2499,7 +3234,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;std_model&gt;&lt;class_f&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_f</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2517,6 +3271,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2525,9 +3280,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::unordered_map&lt;std::string,std::string&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -2538,7 +3293,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;std_model&gt;&lt;class_f&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_f</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2556,6 +3330,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2564,9 +3339,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::unordered_map&lt;std::string,class_a&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -2577,7 +3352,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_2</name>
+						<name>
+							<simple>prop_2</simple>
+							<qualified>&lt;std_model&gt;&lt;class_f&gt;&lt;prop_2&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_f</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2595,6 +3389,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2603,9 +3398,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>std::unordered_map&lt;class_a,pkg1::class_c&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>std::unordered_map&lt;class_a,pkg1::class_c&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -2684,6 +3479,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>2</generation_type>
@@ -2710,7 +3506,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;std_model&gt;&lt;some_service&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>some_service</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2728,6 +3543,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2736,9 +3552,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::shared_ptr&lt;base&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -2749,7 +3565,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;std_model&gt;&lt;some_service&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>some_service</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2767,6 +3602,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2775,9 +3611,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::weak_ptr&lt;base&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -2788,7 +3624,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_2</name>
+						<name>
+							<simple>prop_2</simple>
+							<qualified>&lt;std_model&gt;&lt;some_service&gt;&lt;prop_2&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>some_service</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2806,6 +3661,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2814,9 +3670,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::unique_ptr&lt;base&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -2827,7 +3683,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_3</name>
+						<name>
+							<simple>prop_3</simple>
+							<qualified>&lt;std_model&gt;&lt;some_service&gt;&lt;prop_3&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>some_service</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2845,6 +3720,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2853,9 +3729,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>std::function</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>std::function</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -2934,6 +3810,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -2960,7 +3837,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;std_model&gt;&lt;class_g&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_g</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2978,6 +3874,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2986,9 +3883,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::unordered_map&lt;class_a,std::vector&lt;pkg1::class_c&gt;&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -2999,7 +3896,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;std_model&gt;&lt;class_g&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_g</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -3017,6 +3933,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -3025,9 +3942,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::unordered_map&lt;pkg1::class_c,std::list&lt;class_a&gt;&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -3038,7 +3955,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_2</name>
+						<name>
+							<simple>prop_2</simple>
+							<qualified>&lt;std_model&gt;&lt;class_g&gt;&lt;prop_2&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_g</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -3056,6 +3992,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -3064,9 +4001,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>std::unordered_map&lt;std::string, class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>std::unordered_map&lt;std::string, class_a&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -3145,6 +4082,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -3171,7 +4109,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;std_model&gt;&lt;derived&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>std_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>derived</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -3189,6 +4146,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -3197,9 +4155,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>std::list&lt;pkg1::class_c&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>std::list&lt;pkg1::class_c&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -3236,6 +4194,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</item>
 				</parents>

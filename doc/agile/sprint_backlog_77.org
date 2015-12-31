@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-31 Thu 13:35]
+#+CAPTION: Clock summary at [2015-12-31 Thu 18:48]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *33:05* |       |       |
+| *Total time*                                                                | *34:00* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 33:05   |       |       |
-| Active                                                                      |         | 33:05 |       |
+| Stories                                                                     | 34:00   |       |       |
+| Active                                                                      |         | 34:00 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:41 |
 | STARTED Update manual                                                       |         |       |  0:43 |
 | STARTED Update Linux CDash agent                                            |         |       |  0:09 |
@@ -31,8 +31,8 @@
 | CANCELLED Add "field propagation" support to dynamic                        |         |       |  1:52 |
 | COMPLETED Add =iconv.h= to include path on windows                          |         |       |  0:44 |
 | COMPLETED Improve names in yarn around model element location               |         |       |  3:39 |
+| COMPLETED Add qualified name to yarn properties                             |         |       |  1:26 |
 | STARTED Re-read MDSD book                                                   |         |       | 15:00 |
-| STARTED Add qualified name to yarn properties                               |         |       |  0:31 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -239,6 +239,20 @@ the types to fit it:
   modeling element.
 - =nested_name=: nestable address.
 
+*** COMPLETED Add qualified name to yarn properties                   :story:
+    CLOSED: [2015-12-31 Thu 18:47]
+    CLOCK: [2015-12-31 Thu 17:53]--[2015-12-31 Thu 18:48] =>  0:55
+    CLOCK: [2015-12-23 Wed 15:55]--[2015-12-23 Wed 16:26] =>  0:31
+
+We need to uniquely identify a property in order to attach settings
+for it. To do so we can use the owning element's qualfied name
+together with the property's simple name.
+
+Actually it makes sense to generalise and make properties also
+modeling elements with a position in modeling space. This means we can
+use names and locations and also means that this infrastructure will
+(hopefully) be reused to implement inner classes.
+
 *** STARTED Re-read MDSD book                                         :story:
     CLOCK: [2015-12-29 Tue 00:00]--[2015-12-29 Tue 15:00] => 15:00
 
@@ -247,13 +261,6 @@ most of the theoretical foundations for Dogen. We need to re-read it
 with the objective of summarising it into a chapter in the manual.
 
 Clock manually adjusted to reflect reading time.
-
-*** STARTED Add qualified name to yarn properties                     :story:
-    CLOCK: [2015-12-23 Wed 15:55]--[2015-12-23 Wed 16:26] =>  0:31
-
-We need to uniquely identify a property in order to attach settings
-for it. To do so we can use the owning element's qualfied name
-together with the property's simple name.
 
 *** Create a settings class for the "requires" settings               :story:
 

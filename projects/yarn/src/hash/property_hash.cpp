@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/hash/property_hash.hpp"
 #include "dogen/dynamic/hash/object_hash.hpp"
 #include "dogen/yarn/hash/nested_name_hash.hpp"
@@ -42,9 +43,9 @@ std::size_t property_hasher::hash(const property& v) {
     combine(seed, v.extensions());
     combine(seed, v.name());
     combine(seed, v.type());
+    combine(seed, v.unparsed_type());
     combine(seed, v.is_immutable());
     combine(seed, v.is_fluent());
-    combine(seed, v.unparsed_type());
 
     return seed;
 }

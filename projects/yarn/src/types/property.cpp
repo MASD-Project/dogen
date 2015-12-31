@@ -30,18 +30,18 @@ property::property()
 property::property(
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
-    const std::string& name,
+    const dogen::yarn::name& name,
     const dogen::yarn::nested_name& type,
+    const std::string& unparsed_type,
     const bool is_immutable,
-    const bool is_fluent,
-    const std::string& unparsed_type)
+    const bool is_fluent)
     : documentation_(documentation),
       extensions_(extensions),
       name_(name),
       type_(type),
+      unparsed_type_(unparsed_type),
       is_immutable_(is_immutable),
-      is_fluent_(is_fluent),
-      unparsed_type_(unparsed_type) { }
+      is_fluent_(is_fluent) { }
 
 void property::swap(property& other) noexcept {
     using std::swap;
@@ -49,9 +49,9 @@ void property::swap(property& other) noexcept {
     swap(extensions_, other.extensions_);
     swap(name_, other.name_);
     swap(type_, other.type_);
+    swap(unparsed_type_, other.unparsed_type_);
     swap(is_immutable_, other.is_immutable_);
     swap(is_fluent_, other.is_fluent_);
-    swap(unparsed_type_, other.unparsed_type_);
 }
 
 bool property::operator==(const property& rhs) const {
@@ -59,9 +59,9 @@ bool property::operator==(const property& rhs) const {
         extensions_ == rhs.extensions_ &&
         name_ == rhs.name_ &&
         type_ == rhs.type_ &&
+        unparsed_type_ == rhs.unparsed_type_ &&
         is_immutable_ == rhs.is_immutable_ &&
-        is_fluent_ == rhs.is_fluent_ &&
-        unparsed_type_ == rhs.unparsed_type_;
+        is_fluent_ == rhs.is_fluent_;
 }
 
 property& property::operator=(property other) {
@@ -102,19 +102,19 @@ void property::extensions(const dogen::dynamic::object&& v) {
     extensions_ = std::move(v);
 }
 
-const std::string& property::name() const {
+const dogen::yarn::name& property::name() const {
     return name_;
 }
 
-std::string& property::name() {
+dogen::yarn::name& property::name() {
     return name_;
 }
 
-void property::name(const std::string& v) {
+void property::name(const dogen::yarn::name& v) {
     name_ = v;
 }
 
-void property::name(const std::string&& v) {
+void property::name(const dogen::yarn::name&& v) {
     name_ = std::move(v);
 }
 
@@ -134,22 +134,6 @@ void property::type(const dogen::yarn::nested_name&& v) {
     type_ = std::move(v);
 }
 
-bool property::is_immutable() const {
-    return is_immutable_;
-}
-
-void property::is_immutable(const bool v) {
-    is_immutable_ = v;
-}
-
-bool property::is_fluent() const {
-    return is_fluent_;
-}
-
-void property::is_fluent(const bool v) {
-    is_fluent_ = v;
-}
-
 const std::string& property::unparsed_type() const {
     return unparsed_type_;
 }
@@ -164,6 +148,22 @@ void property::unparsed_type(const std::string& v) {
 
 void property::unparsed_type(const std::string&& v) {
     unparsed_type_ = std::move(v);
+}
+
+bool property::is_immutable() const {
+    return is_immutable_;
+}
+
+void property::is_immutable(const bool v) {
+    is_immutable_ = v;
+}
+
+bool property::is_fluent() const {
+    return is_fluent_;
+}
+
+void property::is_fluent(const bool v) {
+    is_fluent_ = v;
 }
 
 } }

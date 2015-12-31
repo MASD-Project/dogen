@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
+#include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/property_io.hpp"
 #include "dogen/dynamic/io/object_io.hpp"
 #include "dogen/yarn/io/nested_name_io.hpp"
@@ -46,11 +47,11 @@ std::ostream& operator<<(std::ostream& s, const property& v) {
       << "\"__type__\": " << "\"dogen::yarn::property\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"extensions\": " << v.extensions() << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"name\": " << v.name() << ", "
       << "\"type\": " << v.type() << ", "
+      << "\"unparsed_type\": " << "\"" << tidy_up_string(v.unparsed_type()) << "\"" << ", "
       << "\"is_immutable\": " << v.is_immutable() << ", "
-      << "\"is_fluent\": " << v.is_fluent() << ", "
-      << "\"unparsed_type\": " << "\"" << tidy_up_string(v.unparsed_type()) << "\""
+      << "\"is_fluent\": " << v.is_fluent()
       << " }";
     return(s);
 }

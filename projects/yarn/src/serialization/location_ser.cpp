@@ -41,6 +41,7 @@ void save(Archive& ar,
     ar << make_nvp("external_modules", v.external_modules_);
     ar << make_nvp("model_modules", v.model_modules_);
     ar << make_nvp("internal_modules", v.internal_modules_);
+    ar << make_nvp("element", v.element_);
 }
 
 template<typename Archive>
@@ -50,6 +51,7 @@ void load(Archive& ar,
     ar >> make_nvp("external_modules", v.external_modules_);
     ar >> make_nvp("model_modules", v.model_modules_);
     ar >> make_nvp("internal_modules", v.internal_modules_);
+    ar >> make_nvp("element", v.element_);
 }
 
 } }

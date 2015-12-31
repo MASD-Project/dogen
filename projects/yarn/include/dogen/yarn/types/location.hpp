@@ -66,7 +66,8 @@ public:
     location(
         const std::list<std::string>& external_modules,
         const std::list<std::string>& model_modules,
-        const std::list<std::string>& internal_modules);
+        const std::list<std::string>& internal_modules,
+        const std::string& element);
 
 private:
     template<typename Archive>
@@ -115,6 +116,19 @@ public:
     void internal_modules(const std::list<std::string>&& v);
     /**@}*/
 
+    /**
+     * @brief Name of the owning element, if any.
+     *
+     * For modeling elements which are located within other modeling elements that
+     * are not modules, such as properties, inner classes, etc.
+     */
+    /**@{*/
+    const std::string& element() const;
+    std::string& element();
+    void element(const std::string& v);
+    void element(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const location& rhs) const;
     bool operator!=(const location& rhs) const {
@@ -129,6 +143,7 @@ private:
     std::list<std::string> external_modules_;
     std::list<std::string> model_modules_;
     std::list<std::string> internal_modules_;
+    std::string element_;
 };
 
 } }

@@ -19,6 +19,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</internal_modules>
+			<element></element>
 		</location>
 	</name>
 	<origin_type>1</origin_type>
@@ -67,6 +68,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -150,6 +152,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -195,6 +198,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -240,6 +244,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -285,6 +290,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -351,6 +357,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -403,6 +410,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</item>
 				</parents>
@@ -465,6 +473,7 @@ in the context of inheritance.
 								<item_version>0</item_version>
 								<item>pkg1</item>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -491,7 +500,27 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>trivial_inheritance</item>
+								</model_modules>
+								<internal_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>pkg1</item>
+								</internal_modules>
+								<element>child</element>
+							</location>
+						</name>
 						<type class_id="35" tracking_level="0" version="0">
 							<parent>
 								<simple></simple>
@@ -509,6 +538,7 @@ in the context of inheritance.
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children class_id="36" tracking_level="0" version="0">
@@ -517,9 +547,9 @@ in the context of inheritance.
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -557,6 +587,7 @@ in the context of inheritance.
 								<item_version>0</item_version>
 								<item>pkg1</item>
 							</internal_modules>
+							<element></element>
 						</location>
 					</item>
 				</parents>
@@ -618,6 +649,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -713,6 +745,7 @@ in the context of inheritance.
 								<item_version>0</item_version>
 								<item>pkg1</item>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -739,7 +772,27 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;parent&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>trivial_inheritance</item>
+								</model_modules>
+								<internal_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>pkg1</item>
+								</internal_modules>
+								<element>parent</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -757,6 +810,7 @@ in the context of inheritance.
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -765,9 +819,9 @@ in the context of inheritance.
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>unsigned int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>unsigned int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -847,6 +901,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -874,7 +929,26 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>trivial_inheritance</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>move_ctor_base</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -892,6 +966,7 @@ in the context of inheritance.
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -900,9 +975,9 @@ in the context of inheritance.
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>boost::filesystem::path</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>boost::filesystem::path</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -981,6 +1056,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -1076,6 +1152,7 @@ in the context of inheritance.
 								<item_version>0</item_version>
 								<item>pkg2</item>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -1102,7 +1179,27 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;trivial_inheritance&gt;&lt;pkg2&gt;&lt;parent&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>trivial_inheritance</item>
+								</model_modules>
+								<internal_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>pkg2</item>
+								</internal_modules>
+								<element>parent</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1120,6 +1217,7 @@ in the context of inheritance.
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1128,9 +1226,9 @@ in the context of inheritance.
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -1209,6 +1307,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -1261,6 +1360,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</item>
 				</parents>
@@ -1322,6 +1422,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -1348,7 +1449,26 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>trivial_inheritance</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>third_child_with_members</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1366,6 +1486,7 @@ in the context of inheritance.
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1374,9 +1495,9 @@ in the context of inheritance.
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>unsigned int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>unsigned int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -1413,6 +1534,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</item>
 				</parents>
@@ -1474,6 +1596,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -1500,7 +1623,26 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>trivial_inheritance</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>parent_with_members</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1518,6 +1660,7 @@ in the context of inheritance.
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1526,9 +1669,9 @@ in the context of inheritance.
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -1608,6 +1751,7 @@ in the context of inheritance.
 								<item_version>0</item_version>
 								<item>pkg3</item>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -1634,7 +1778,27 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>trivial_inheritance</item>
+								</model_modules>
+								<internal_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>pkg3</item>
+								</internal_modules>
+								<element>child</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1652,6 +1816,7 @@ in the context of inheritance.
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1660,9 +1825,9 @@ in the context of inheritance.
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -1700,6 +1865,7 @@ in the context of inheritance.
 								<item_version>0</item_version>
 								<item>pkg2</item>
 							</internal_modules>
+							<element></element>
 						</location>
 					</item>
 				</parents>
@@ -1761,6 +1927,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -1813,6 +1980,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</item>
 				</parents>
@@ -1874,6 +2042,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -1900,7 +2069,26 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;trivial_inheritance&gt;&lt;parent_outside&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>trivial_inheritance</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>parent_outside</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1918,6 +2106,7 @@ in the context of inheritance.
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1926,9 +2115,9 @@ in the context of inheritance.
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -2007,6 +2196,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -2033,7 +2223,26 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;trivial_inheritance&gt;&lt;child_with_members&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>trivial_inheritance</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>child_with_members</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2051,6 +2260,7 @@ in the context of inheritance.
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2059,9 +2269,9 @@ in the context of inheritance.
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>unsigned int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>unsigned int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -2098,6 +2308,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</item>
 				</parents>
@@ -2159,6 +2370,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>2</generation_type>
@@ -2253,6 +2465,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -2279,7 +2492,26 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;trivial_inheritance&gt;&lt;descendant2&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>trivial_inheritance</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>descendant2</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2297,6 +2529,7 @@ in the context of inheritance.
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2305,9 +2538,9 @@ in the context of inheritance.
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>bool</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>bool</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -2344,6 +2577,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</item>
 				</parents>
@@ -2406,6 +2640,7 @@ in the context of inheritance.
 								<item_version>0</item_version>
 								<item>pkg4</item>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -2432,7 +2667,27 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>trivial_inheritance</item>
+								</model_modules>
+								<internal_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>pkg4</item>
+								</internal_modules>
+								<element>child</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2450,6 +2705,7 @@ in the context of inheritance.
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2458,9 +2714,9 @@ in the context of inheritance.
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -2497,6 +2753,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</item>
 				</parents>
@@ -2558,6 +2815,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>2</generation_type>
@@ -2652,6 +2910,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -2678,7 +2937,26 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_2</name>
+						<name>
+							<simple>prop_2</simple>
+							<qualified>&lt;trivial_inheritance&gt;&lt;child_of_a_child2&gt;&lt;prop_2&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>trivial_inheritance</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>child_of_a_child2</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2696,6 +2974,7 @@ in the context of inheritance.
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2704,9 +2983,9 @@ in the context of inheritance.
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>unsigned int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>unsigned int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -2743,6 +3022,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</item>
 				</parents>
@@ -2804,6 +3084,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -2856,6 +3137,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</item>
 				</parents>
@@ -2917,6 +3199,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -2969,6 +3252,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</item>
 				</parents>
@@ -3030,6 +3314,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -3056,7 +3341,26 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;trivial_inheritance&gt;&lt;descendant3&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>trivial_inheritance</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>descendant3</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -3074,6 +3378,7 @@ in the context of inheritance.
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -3082,9 +3387,9 @@ in the context of inheritance.
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>bool</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>bool</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -3121,6 +3426,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</item>
 				</parents>
@@ -3183,6 +3489,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -3210,7 +3517,26 @@ in the context of inheritance.
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;trivial_inheritance&gt;&lt;move_ctor_descendant&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>trivial_inheritance</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>move_ctor_descendant</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -3228,6 +3554,7 @@ in the context of inheritance.
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -3236,9 +3563,9 @@ in the context of inheritance.
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>boost::filesystem::path</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>boost::filesystem::path</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -3275,6 +3602,7 @@ in the context of inheritance.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</item>
 				</parents>

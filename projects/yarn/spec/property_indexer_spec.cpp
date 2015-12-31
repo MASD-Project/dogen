@@ -57,10 +57,10 @@ bool has_duplicate_property_names(const Stateful& s,
 
     for (const auto& pair : s.inherited_properties())
         for (const auto& p : pair.second)
-            count[p.name()]++;
+            count[p.name().simple()]++;
 
     for (const auto& p : s.local_properties())
-        count[p.name()]++;
+        count[p.name().simple()]++;
 
     using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, debug) << "Inherited/local properties for "
@@ -72,7 +72,7 @@ bool has_duplicate_property_names(const Stateful& s,
 
     count.clear();
     for (const auto& p : s.all_properties())
-        count[p.name()]++;
+        count[p.name().simple()]++;
 
     BOOST_LOG_SEV(lg, debug) << "All properties for "
                              << s.name().qualified() << ": " << count;

@@ -26,22 +26,26 @@ namespace yarn {
 location::location(
     const std::list<std::string>& external_modules,
     const std::list<std::string>& model_modules,
-    const std::list<std::string>& internal_modules)
+    const std::list<std::string>& internal_modules,
+    const std::string& element)
     : external_modules_(external_modules),
       model_modules_(model_modules),
-      internal_modules_(internal_modules) { }
+      internal_modules_(internal_modules),
+      element_(element) { }
 
 void location::swap(location& other) noexcept {
     using std::swap;
     swap(external_modules_, other.external_modules_);
     swap(model_modules_, other.model_modules_);
     swap(internal_modules_, other.internal_modules_);
+    swap(element_, other.element_);
 }
 
 bool location::operator==(const location& rhs) const {
     return external_modules_ == rhs.external_modules_ &&
         model_modules_ == rhs.model_modules_ &&
-        internal_modules_ == rhs.internal_modules_;
+        internal_modules_ == rhs.internal_modules_ &&
+        element_ == rhs.element_;
 }
 
 location& location::operator=(location other) {
@@ -96,6 +100,22 @@ void location::internal_modules(const std::list<std::string>& v) {
 
 void location::internal_modules(const std::list<std::string>&& v) {
     internal_modules_ = std::move(v);
+}
+
+const std::string& location::element() const {
+    return element_;
+}
+
+std::string& location::element() {
+    return element_;
+}
+
+void location::element(const std::string& v) {
+    element_ = v;
+}
+
+void location::element(const std::string&& v) {
+    element_ = std::move(v);
 }
 
 } }

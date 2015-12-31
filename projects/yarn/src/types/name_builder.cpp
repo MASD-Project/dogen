@@ -75,6 +75,8 @@ void name_builder::compute_qualified_name() {
     for (const auto& m : l.internal_modules())
       add_component_markers(s, m);
 
+    add_component_markers(s, l.element());
+
     if (simple_name_contributes_to_qualifed_name_)
         add_component_markers(s, name_.simple());
 

@@ -28,6 +28,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/yarn/serialization/property_ser.hpp"
 #include "dogen/dynamic/serialization/object_ser.hpp"
 #include "dogen/yarn/serialization/nested_name_ser.hpp"
@@ -43,9 +44,9 @@ void save(Archive& ar,
     ar << make_nvp("extensions", v.extensions_);
     ar << make_nvp("name", v.name_);
     ar << make_nvp("type", v.type_);
+    ar << make_nvp("unparsed_type", v.unparsed_type_);
     ar << make_nvp("is_immutable", v.is_immutable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
-    ar << make_nvp("unparsed_type", v.unparsed_type_);
 }
 
 template<typename Archive>
@@ -56,9 +57,9 @@ void load(Archive& ar,
     ar >> make_nvp("extensions", v.extensions_);
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("type", v.type_);
+    ar >> make_nvp("unparsed_type", v.unparsed_type_);
     ar >> make_nvp("is_immutable", v.is_immutable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
-    ar >> make_nvp("unparsed_type", v.unparsed_type_);
 }
 
 } }

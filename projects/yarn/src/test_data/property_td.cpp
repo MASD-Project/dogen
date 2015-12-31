@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/property_td.hpp"
 #include "dogen/dynamic/test_data/object_td.hpp"
 #include "dogen/yarn/test_data/nested_name_td.hpp"
@@ -34,6 +35,11 @@ std::string create_std_string(const unsigned int position) {
 dogen::dynamic::object
 create_dogen_dynamic_object(const unsigned int position) {
     return dogen::dynamic::object_generator::create(position);
+}
+
+dogen::yarn::name
+create_dogen_yarn_name(const unsigned int position) {
+    return dogen::yarn::name_generator::create(position);
 }
 
 dogen::yarn::nested_name
@@ -56,11 +62,11 @@ void property_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.extensions(create_dogen_dynamic_object(position + 1));
-    v.name(create_std_string(position + 2));
+    v.name(create_dogen_yarn_name(position + 2));
     v.type(create_dogen_yarn_nested_name(position + 3));
-    v.is_immutable(create_bool(position + 4));
-    v.is_fluent(create_bool(position + 5));
-    v.unparsed_type(create_std_string(position + 6));
+    v.unparsed_type(create_std_string(position + 4));
+    v.is_immutable(create_bool(position + 5));
+    v.is_fluent(create_bool(position + 6));
 }
 
 property_generator::result_type

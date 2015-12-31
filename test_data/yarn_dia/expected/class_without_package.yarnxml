@@ -19,6 +19,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</internal_modules>
+			<element></element>
 		</location>
 	</name>
 	<origin_type>1</origin_type>
@@ -100,6 +101,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -165,6 +167,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -191,7 +194,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>an_attribute</name>
+						<name>
+							<simple>an_attribute</simple>
+							<qualified>&lt;class_without_package&gt;&lt;class_1&gt;&lt;an_attribute&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>class_without_package</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_1</element>
+							</location>
+						</name>
 						<type class_id="34" tracking_level="0" version="0">
 							<parent>
 								<simple></simple>
@@ -209,6 +231,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children class_id="35" tracking_level="0" version="0">
@@ -217,9 +240,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties class_id="36" tracking_level="0" version="0">

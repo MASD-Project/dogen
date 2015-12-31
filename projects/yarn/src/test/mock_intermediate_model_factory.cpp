@@ -208,15 +208,20 @@ void populate_simple_model_properties(dogen::yarn::intermediate_model& m,
     m.generation_type(dogen::yarn::generation_types::full_generation);
 }
 
-dogen::yarn::property mock_property(const unsigned int n = 0,
+dogen::yarn::property mock_property(const dogen::yarn::name& owning_element,
+    const unsigned int n = 0,
     const dogen::yarn::test::mock_intermediate_model_factory::
     property_types pt =
     dogen::yarn::test::mock_intermediate_model_factory::property_types::
     unsigned_int,
     boost::optional<dogen::yarn::name> name =
     boost::optional<dogen::yarn::name>()) {
+
+    dogen::yarn::name_factory f;
+    const auto pn(f.build_property_name(owning_element, property_name(n)));
+
     dogen::yarn::property r;
-    r.name(property_name(n));
+    r.name(pn);
 
     using property_types = dogen::yarn::test::mock_intermediate_model_factory::
         property_types;
@@ -230,8 +235,8 @@ dogen::yarn::property mock_property(const unsigned int n = 0,
     return r;
 }
 
-template<typename Stateful>
-void add_property(Stateful& s, const bool properties_indexed,
+template<typename StatefulAndNameable>
+void add_property(StatefulAndNameable& sn, const bool properties_indexed,
     const unsigned int n = 0,
     const dogen::yarn::test::mock_intermediate_model_factory::
     property_types pt =
@@ -240,11 +245,11 @@ void add_property(Stateful& s, const bool properties_indexed,
     boost::optional<dogen::yarn::name> name =
     boost::optional<dogen::yarn::name>()) {
 
-    auto p(mock_property(n, pt, name));
-    s.local_properties().push_back(p);
+    auto p(mock_property(sn.name(), n, pt, name));
+    sn.local_properties().push_back(p);
 
     if (properties_indexed)
-        s.all_properties().push_back(p);
+        sn.all_properties().push_back(p);
 }
 
 const bool add_leaf(true);
@@ -947,7 +952,8 @@ object_with_both_regular_and_weak_associations(
     insert_object(r, o1);
 
     object o0(make_value_object(0, mn));
-    property p0(mock_property(0, property_types::value_object, o1.name()));
+    const auto vo(property_types::value_object);
+    property p0(mock_property(o0.name(), 0, vo, o1.name()));
     o0.local_properties().push_back(p0);
     if (flags_.properties_indexed())
         o0.all_properties().push_back(p0);
@@ -961,7 +967,8 @@ object_with_both_regular_and_weak_associations(
     o2.object_type(dogen::yarn::object_types::smart_pointer);
     insert_object(r, o2);
 
-    property p1(mock_property(1, property_types::boost_shared_ptr, o1.name()));
+    const auto bsp(property_types::boost_shared_ptr);
+    property p1(mock_property(o0.name(), 1, bsp, o1.name()));
     o0.local_properties().push_back(p1);
     if (flags_.properties_indexed())
         o0.all_properties().push_back(p1);
@@ -972,7 +979,7 @@ object_with_both_regular_and_weak_associations(
     object o3(make_value_object(3, mn));
     insert_object(r, o3);
 
-    property p2(mock_property(2, property_types::boost_shared_ptr, o3.name()));
+    property p2(mock_property(o0.name(), 2, bsp, o3.name()));
     o0.local_properties().push_back(p2);
     if (flags_.properties_indexed())
         o0.all_properties().push_back(p2);
@@ -985,7 +992,7 @@ object_with_both_regular_and_weak_associations(
     o4.object_type(dogen::yarn::object_types::user_defined_value_object);
     insert_object(r, o4);
 
-    property p3(mock_property(3, property_types::value_object, o4.name()));
+    property p3(mock_property(o0.name(), 3, vo, o4.name()));
     o0.local_properties().push_back(p3);
 
     if (flags_.properties_indexed())
@@ -1004,8 +1011,6 @@ object_with_property(const object_types ot, const property_types pt,
     const auto mn(mock_model_name(0));
     auto o1(make_value_object(1, mn));
 
-    property p(mock_property(0, pt, o1.name()));
-
     object o0;
     if (ot == object_types::value_object)
         o0 = make_value_object(0, mn);
@@ -1014,6 +1019,7 @@ object_with_property(const object_types ot, const property_types pt,
         BOOST_THROW_EXCEPTION(building_error(invalid_object_type));
     }
 
+    property p(mock_property(o0.name(), 0, pt, o1.name()));
     o0.local_properties().push_back(p);
     if (flags_.properties_indexed())
         o0.all_properties().push_back(p);
@@ -1382,11 +1388,12 @@ object_with_group_of_properties_of_different_types(
         });
 
     auto o1(make_value_object(1, mn));
-    auto p0(mock_property(0, property_types::value_object, o1.name()));
+    const auto vo(property_types::value_object);
+    auto p0(mock_property(o0.name(), 0, vo, o1.name()));
     lambda(p0);
     insert_object(r, o1);
 
-    auto p1(mock_property(1));
+    auto p1(mock_property(o0.name(), 1));
     lambda(p1);
     primitive ui;
     ui.name(p1.type().parent());
@@ -1394,7 +1401,8 @@ object_with_group_of_properties_of_different_types(
 
     auto o3(make_value_object(3, mn));
     insert_object(r, o3);
-    auto p2(mock_property(2, property_types::boost_shared_ptr, o3.name()));
+    const auto bsp(property_types::boost_shared_ptr);
+    auto p2(mock_property(o0.name(), 2, bsp, o3.name()));
     lambda(p2);
 
     object o2;
@@ -1405,20 +1413,20 @@ object_with_group_of_properties_of_different_types(
 
     auto o4(make_value_object(4, mn));
     insert_object(r, o4);
-    auto p3(mock_property(3, property_types::value_object, o4.name()));
+    auto p3(mock_property(o0.name(), 3, vo, o4.name()));
     lambda(p3);
 
     if (repeat_group) {
-        auto p4(mock_property(4, property_types::value_object, o1.name()));
+        auto p4(mock_property(o0.name(), 4, vo, o1.name()));
         lambda(p4);
 
-        auto p5(mock_property(5));
+        auto p5(mock_property(o0.name(), 5));
         lambda(p5);
 
-        auto p6(mock_property(6, property_types::boost_shared_ptr, o3.name()));
+        auto p6(mock_property(o0.name(), 6, bsp, o3.name()));
         lambda(p6);
 
-        auto p7(mock_property(7, property_types::value_object, o4.name()));
+        auto p7(mock_property(o0.name(), 7, vo, o4.name()));
         lambda(p7);
     }
     insert_object(r, o0);

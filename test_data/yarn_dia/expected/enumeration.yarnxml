@@ -19,6 +19,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</internal_modules>
+			<element></element>
 		</location>
 	</name>
 	<origin_type>1</origin_type>
@@ -67,6 +68,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -145,6 +147,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -206,6 +209,7 @@
 								<item_version>0</item_version>
 								<item>pkg1</item>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -232,6 +236,7 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</internal_modules>
+						<element></element>
 					</location>
 				</underlying_type>
 				<enumerators class_id="31" tracking_level="0" version="0">
@@ -297,6 +302,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -323,6 +329,7 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</internal_modules>
+						<element></element>
 					</location>
 				</underlying_type>
 				<enumerators>
@@ -391,6 +398,7 @@ this is a long comment
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -417,6 +425,7 @@ this is a long comment
 							<count>0</count>
 							<item_version>0</item_version>
 						</internal_modules>
+						<element></element>
 					</location>
 				</underlying_type>
 				<enumerators>
@@ -479,6 +488,7 @@ this is a long comment
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -505,7 +515,26 @@ this is a long comment
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>colour_type</name>
+						<name>
+							<simple>colour_type</simple>
+							<qualified>&lt;enumeration&gt;&lt;a_class&gt;&lt;colour_type&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>enumeration</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>a_class</element>
+							</location>
+						</name>
 						<type class_id="37" tracking_level="0" version="0">
 							<parent>
 								<simple></simple>
@@ -523,6 +552,7 @@ this is a long comment
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children class_id="38" tracking_level="0" version="0">
@@ -531,9 +561,9 @@ this is a long comment
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>colour_types</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -544,7 +574,26 @@ this is a long comment
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>book_type</name>
+						<name>
+							<simple>book_type</simple>
+							<qualified>&lt;enumeration&gt;&lt;a_class&gt;&lt;book_type&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>enumeration</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>a_class</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -562,6 +611,7 @@ this is a long comment
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -570,9 +620,9 @@ this is a long comment
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>book_types</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -583,7 +633,26 @@ this is a long comment
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>shape_type</name>
+						<name>
+							<simple>shape_type</simple>
+							<qualified>&lt;enumeration&gt;&lt;a_class&gt;&lt;shape_type&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>enumeration</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>a_class</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -601,6 +670,7 @@ this is a long comment
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -609,9 +679,9 @@ this is a long comment
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>pkg1::shape_types</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>pkg1::shape_types</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties class_id="39" tracking_level="0" version="0">

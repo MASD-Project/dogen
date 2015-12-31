@@ -19,6 +19,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</internal_modules>
+			<element></element>
 		</location>
 	</name>
 	<origin_type>1</origin_type>
@@ -80,6 +81,7 @@
 								<item_version>0</item_version>
 								<item>package</item>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -137,6 +139,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -218,6 +221,7 @@ This comment will be applied to the model namespace itself.
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -287,6 +291,7 @@ third line with &quot;quote&quot;
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -382,6 +387,7 @@ third line with &quot;quote&quot;
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -409,7 +415,26 @@ third line with &quot;quote&quot;
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;comments&gt;&lt;one_line&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>comments</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>one_line</element>
+							</location>
+						</name>
 						<type class_id="35" tracking_level="0" version="0">
 							<parent>
 								<simple></simple>
@@ -427,6 +452,7 @@ third line with &quot;quote&quot;
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children class_id="36" tracking_level="0" version="0">
@@ -435,9 +461,9 @@ third line with &quot;quote&quot;
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
 					</item>
 					<item>
 						<documentation>the brief comment
@@ -451,7 +477,26 @@ a second line
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;comments&gt;&lt;one_line&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>comments</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>one_line</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -469,6 +514,7 @@ a second line
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -477,9 +523,9 @@ a second line
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -490,7 +536,26 @@ a second line
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_2</name>
+						<name>
+							<simple>prop_2</simple>
+							<qualified>&lt;comments&gt;&lt;one_line&gt;&lt;prop_2&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>comments</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>one_line</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -508,6 +573,7 @@ a second line
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -516,9 +582,9 @@ a second line
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>

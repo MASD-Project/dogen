@@ -102,6 +102,12 @@ public:
      */
     name build_promoted_module_name(const name& model_name,
         const name& element_name) const;
+
+    /**
+     * @brief Builds a property name.
+     */
+    name build_property_name(const name& owner_name,
+        const std::string& property_simple_name) const;
 };
 
 } }

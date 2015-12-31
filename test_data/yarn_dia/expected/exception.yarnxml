@@ -19,6 +19,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</internal_modules>
+			<element></element>
 		</location>
 	</name>
 	<origin_type>1</origin_type>
@@ -67,6 +68,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -145,6 +147,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -210,6 +213,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -236,7 +240,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;exception&gt;&lt;a_class&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>exception</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>a_class</element>
+							</location>
+						</name>
 						<type class_id="34" tracking_level="0" version="0">
 							<parent>
 								<simple></simple>
@@ -254,6 +277,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children class_id="35" tracking_level="0" version="0">
@@ -262,9 +286,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties class_id="36" tracking_level="0" version="0">
@@ -349,6 +373,7 @@
 								<item_version>0</item_version>
 								<item>pkg</item>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -391,6 +416,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>

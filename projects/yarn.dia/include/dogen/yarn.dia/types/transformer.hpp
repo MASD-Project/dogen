@@ -100,7 +100,8 @@ private:
      * @pre name of property must not be empty.
      * @pre type of property must not be empty.
      */
-    yarn::property to_property(const processed_property& p) const;
+    yarn::property to_property(const yarn::name& owning_element,
+        const processed_property& p) const;
 
     /**
      * @brief Converts processed property into an yarn enumerator.

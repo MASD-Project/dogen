@@ -27,6 +27,7 @@
 
 #include <string>
 #include <algorithm>
+#include "dogen/yarn/types/name.hpp"
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/yarn/types/nested_name.hpp"
 #include "dogen/yarn/serialization/property_fwd_ser.hpp"
@@ -50,11 +51,11 @@ public:
     property(
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
-        const std::string& name,
+        const dogen::yarn::name& name,
         const dogen::yarn::nested_name& type,
+        const std::string& unparsed_type,
         const bool is_immutable,
-        const bool is_fluent,
-        const std::string& unparsed_type);
+        const bool is_fluent);
 
 private:
     template<typename Archive>
@@ -89,15 +90,14 @@ public:
     /**@}*/
 
     /**
-     * @brief Name of the property.
+     * @brief Fully qualified name.
      *
-     * Must only contain characters that can be used for identifiers in the target backend.
      */
     /**@{*/
-    const std::string& name() const;
-    std::string& name();
-    void name(const std::string& v);
-    void name(const std::string&& v);
+    const dogen::yarn::name& name() const;
+    dogen::yarn::name& name();
+    void name(const dogen::yarn::name& v);
+    void name(const dogen::yarn::name&& v);
     /**@}*/
 
     /**
@@ -108,6 +108,18 @@ public:
     dogen::yarn::nested_name& type();
     void type(const dogen::yarn::nested_name& v);
     void type(const dogen::yarn::nested_name&& v);
+    /**@}*/
+
+    /**
+     * @brief Original type name as it appeared in the source, without any parsing.
+     *
+     * Name must be in one of the supported notations.
+     */
+    /**@{*/
+    const std::string& unparsed_type() const;
+    std::string& unparsed_type();
+    void unparsed_type(const std::string& v);
+    void unparsed_type(const std::string&& v);
     /**@}*/
 
     /**
@@ -126,18 +138,6 @@ public:
     void is_fluent(const bool v);
     /**@}*/
 
-    /**
-     * @brief Original type name as it appeared in the source, without any parsing.
-     *
-     * Name must be in one of the supported notations.
-     */
-    /**@{*/
-    const std::string& unparsed_type() const;
-    std::string& unparsed_type();
-    void unparsed_type(const std::string& v);
-    void unparsed_type(const std::string&& v);
-    /**@}*/
-
 public:
     bool operator==(const property& rhs) const;
     bool operator!=(const property& rhs) const {
@@ -151,11 +151,11 @@ public:
 private:
     std::string documentation_;
     dogen::dynamic::object extensions_;
-    std::string name_;
+    dogen::yarn::name name_;
     dogen::yarn::nested_name type_;
+    std::string unparsed_type_;
     bool is_immutable_;
     bool is_fluent_;
-    std::string unparsed_type_;
 };
 
 } }

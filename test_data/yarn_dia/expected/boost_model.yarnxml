@@ -19,6 +19,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</internal_modules>
+			<element></element>
 		</location>
 	</name>
 	<origin_type>1</origin_type>
@@ -67,6 +68,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -145,6 +147,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -210,6 +213,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -236,7 +240,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_h&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_h</element>
+							</location>
+						</name>
 						<type class_id="34" tracking_level="0" version="0">
 							<parent>
 								<simple></simple>
@@ -254,6 +277,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children class_id="35" tracking_level="0" version="0">
@@ -262,9 +286,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>boost::property_tree::ptree</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>boost::property_tree::ptree</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties class_id="36" tracking_level="0" version="0">
@@ -343,6 +367,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -369,7 +394,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_a&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_a</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -387,6 +431,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -395,9 +440,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>unsigned int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>unsigned int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -476,6 +521,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -502,7 +548,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_derived&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_derived</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -520,6 +585,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -528,9 +594,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -567,6 +633,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</item>
 				</parents>
@@ -629,6 +696,7 @@
 								<item_version>0</item_version>
 								<item>pkg1</item>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -655,7 +723,27 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;boost_model&gt;&lt;pkg1&gt;&lt;class_c&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>pkg1</item>
+								</internal_modules>
+								<element>class_c</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -673,6 +761,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -681,9 +770,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -694,7 +783,27 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;boost_model&gt;&lt;pkg1&gt;&lt;class_c&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>pkg1</item>
+								</internal_modules>
+								<element>class_c</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -712,6 +821,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -720,9 +830,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -801,6 +911,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -827,7 +938,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_base&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_base</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -845,6 +975,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -853,9 +984,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>int</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -934,6 +1065,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -960,7 +1092,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_b&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_b</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -978,6 +1129,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -986,9 +1138,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>boost::shared_ptr&lt;class_a&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -999,7 +1151,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_b&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_b</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1017,6 +1188,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1025,9 +1197,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::vector&lt;boost::shared_ptr&lt;class_a&gt;&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1038,7 +1210,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_2</name>
+						<name>
+							<simple>prop_2</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_b&gt;&lt;prop_2&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_b</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1056,6 +1247,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1064,9 +1256,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::unordered_map&lt;int,boost::shared_ptr&lt;class_a&gt;&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1077,7 +1269,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_3</name>
+						<name>
+							<simple>prop_3</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_b&gt;&lt;prop_3&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_b</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1095,6 +1306,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1103,9 +1315,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>boost::shared_ptr&lt;pkg1::class_c&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1116,7 +1328,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_4</name>
+						<name>
+							<simple>prop_4</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_b&gt;&lt;prop_4&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_b</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1134,6 +1365,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1142,9 +1374,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>boost::shared_ptr&lt;class_base&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1155,7 +1387,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_5</name>
+						<name>
+							<simple>prop_5</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_b&gt;&lt;prop_5&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_b</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1173,6 +1424,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1181,9 +1433,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::vector&lt;boost::shared_ptr&lt;class_base&gt;&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1194,7 +1446,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_6</name>
+						<name>
+							<simple>prop_6</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_b&gt;&lt;prop_6&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_b</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1212,6 +1483,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1220,9 +1492,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>pkg1::class_c</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>pkg1::class_c</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -1301,6 +1573,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -1327,7 +1600,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_d&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_d</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1345,6 +1637,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1353,9 +1646,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>boost::optional&lt;int&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1366,7 +1659,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_d&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_d</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1384,6 +1696,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1392,9 +1705,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>boost::optional&lt;class_a&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1405,7 +1718,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_2</name>
+						<name>
+							<simple>prop_2</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_d&gt;&lt;prop_2&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_d</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1423,6 +1755,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1431,9 +1764,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>boost::optional&lt;pkg1::class_c&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1444,7 +1777,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_3</name>
+						<name>
+							<simple>prop_3</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_d&gt;&lt;prop_3&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_d</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1462,6 +1814,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1470,9 +1823,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>boost::optional&lt;std::vector&lt;class_a&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>boost::optional&lt;std::vector&lt;class_a&gt;&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -1551,6 +1904,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>2</generation_type>
@@ -1577,7 +1931,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;boost_model&gt;&lt;some_service&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>some_service</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1595,6 +1968,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1603,9 +1977,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>boost::asio::io_service</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1616,7 +1990,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;boost_model&gt;&lt;some_service&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>some_service</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1634,6 +2027,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1642,9 +2036,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>boost::asio::ip::tcp::socket</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1655,7 +2049,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_2</name>
+						<name>
+							<simple>prop_2</simple>
+							<qualified>&lt;boost_model&gt;&lt;some_service&gt;&lt;prop_2&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>some_service</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1673,6 +2086,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1681,9 +2095,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>boost::asio::ip::tcp::acceptor</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>boost::asio::ip::tcp::acceptor</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -1762,6 +2176,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -1788,7 +2203,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_e&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_e</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1806,6 +2240,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1814,9 +2249,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>boost::variant&lt;int,double&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1827,7 +2262,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_e&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_e</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1845,6 +2299,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1853,9 +2308,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>boost::variant&lt;int,class_derived,double&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1866,7 +2321,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_2</name>
+						<name>
+							<simple>prop_2</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_e&gt;&lt;prop_2&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_e</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1884,6 +2358,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1892,9 +2367,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::vector&lt;boost::variant&lt;int,class_derived,double&gt;&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -1905,7 +2380,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_3</name>
+						<name>
+							<simple>prop_3</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_e&gt;&lt;prop_3&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_e</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -1923,6 +2417,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -1931,9 +2426,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>boost::variant&lt;int,std::string,char&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>boost::variant&lt;int,std::string,char&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -2012,6 +2507,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -2038,7 +2534,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_f&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_f</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2056,6 +2571,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2064,9 +2580,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>boost::gregorian::date</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -2077,7 +2593,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_f&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_f</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2095,6 +2630,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2103,9 +2639,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>boost::posix_time::ptime</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -2116,7 +2652,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_2</name>
+						<name>
+							<simple>prop_2</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_f&gt;&lt;prop_2&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_f</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2134,6 +2689,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2142,9 +2698,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>boost::posix_time::time_duration</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -2155,7 +2711,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_3</name>
+						<name>
+							<simple>prop_3</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_f&gt;&lt;prop_3&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_f</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2173,6 +2748,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2181,9 +2757,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::list&lt;boost::gregorian::date&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -2194,7 +2770,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_4</name>
+						<name>
+							<simple>prop_4</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_f&gt;&lt;prop_4&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_f</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2212,6 +2807,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2220,9 +2816,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
 						<unparsed_type>std::list&lt;boost::posix_time::ptime&gt;</unparsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -2233,7 +2829,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_5</name>
+						<name>
+							<simple>prop_5</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_f&gt;&lt;prop_5&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_f</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2251,6 +2866,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2259,9 +2875,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>std::list&lt;boost::posix_time::time_duration&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>std::list&lt;boost::posix_time::time_duration&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>
@@ -2340,6 +2956,7 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</internal_modules>
+							<element></element>
 						</location>
 					</name>
 					<generation_type>1</generation_type>
@@ -2366,7 +2983,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_0</name>
+						<name>
+							<simple>prop_0</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_g&gt;&lt;prop_0&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_g</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2384,6 +3020,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2392,9 +3029,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>boost::filesystem::path</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>boost::filesystem::path</unparsed_type>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -2405,7 +3042,26 @@
 								<item_version>0</item_version>
 							</fields>
 						</extensions>
-						<name>prop_1</name>
+						<name>
+							<simple>prop_1</simple>
+							<qualified>&lt;boost_model&gt;&lt;class_g&gt;&lt;prop_1&gt;</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>boost_model</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>class_g</element>
+							</location>
+						</name>
 						<type>
 							<parent>
 								<simple></simple>
@@ -2423,6 +3079,7 @@
 										<count>0</count>
 										<item_version>0</item_version>
 									</internal_modules>
+									<element></element>
 								</location>
 							</parent>
 							<children>
@@ -2431,9 +3088,9 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
+						<unparsed_type>std::list&lt;boost::filesystem::path&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<unparsed_type>std::list&lt;boost::filesystem::path&gt;</unparsed_type>
 					</item>
 				</local_properties>
 				<inherited_properties>

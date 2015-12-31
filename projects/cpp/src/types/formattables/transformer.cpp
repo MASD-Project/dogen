@@ -336,7 +336,7 @@ transformer::to_property_info(const yarn::property p, const bool is_immutable,
     const bool is_fluent) const {
 
     property_info pi;
-    pi.name(p.name());
+    pi.name(p.name().simple());
     pi.documentation(p.documentation());
     pi.is_immutable(is_immutable);
     pi.is_fluent(is_fluent);
