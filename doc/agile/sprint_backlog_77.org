@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-30 Wed 22:59]
+#+CAPTION: Clock summary at [2015-12-31 Thu 01:08]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *29:29* |       |       |
+| *Total time*                                                                | *31:36* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 29:29   |       |       |
-| Active                                                                      |         | 29:29 |       |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:14 |
+| Stories                                                                     | 31:36   |       |       |
+| Active                                                                      |         | 31:36 |       |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:41 |
 | STARTED Update manual                                                       |         |       |  0:43 |
 | STARTED Update Linux CDash agent                                            |         |       |  0:09 |
 | COMPLETED Add support for conan.io                                          |         |       |  3:06 |
@@ -30,12 +30,13 @@
 | COMPLETED Remove utilities for serialisation of unordered containers        |         |       |  0:38 |
 | CANCELLED Add "field propagation" support to dynamic                        |         |       |  1:52 |
 | COMPLETED Add =iconv.h= to include path on windows                          |         |       |  0:44 |
-| STARTED Improve names in yarn around model element location                 |         |       |  0:30 |
-| STARTED Add qualified name to yarn properties                               |         |       |  0:31 |
 | STARTED Re-read MDSD book                                                   |         |       | 15:00 |
+| STARTED Improve names in yarn around model element location                 |         |       |  2:10 |
+| STARTED Add qualified name to yarn properties                               |         |       |  0:31 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-12-30 Wed 23:00]--[2015-12-30 Wed 23:27] =>  0:27
     CLOCK: [2015-12-30 Wed 22:30]--[2015-12-30 Wed 22:59] =>  0:29
     CLOCK: [2015-12-29 Tue 19:50]--[2015-12-29 Tue 20:20] =>  0:30
     CLOCK: [2015-12-23 Wed 15:42]--[2015-12-23 Wed 15:54] =>  0:12
@@ -209,7 +210,17 @@ We need something similar for iconv.
 
 Conan has also added packages for libxml, which we now depend on.
 
+*** STARTED Re-read MDSD book                                         :story:
+    CLOCK: [2015-12-29 Tue 00:00]--[2015-12-29 Tue 15:00] => 15:00
+
+A few sprints ago [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_70.org#read-model-driven-software-development-book-and-papers][we read Model Driven Software Development]], providing
+most of the theoretical foundations for Dogen. We need to re-read it
+with the objective of summarising it into a chapter in the manual.
+
+Clock manually adjusted to reflect reading time.
+
 *** STARTED Improve names in yarn around model element location       :story:
+    CLOCK: [2015-12-30 Wed 23:28]--[2015-12-31 Thu 01:08] =>  1:40
     CLOCK: [2015-12-23 Wed 16:27]--[2015-12-23 Wed 16:57] =>  0:30
 
 Now that we have a clear conceptual model for yarn, we should rename
@@ -226,14 +237,9 @@ the types to fit it:
 *** STARTED Add qualified name to yarn properties                     :story:
     CLOCK: [2015-12-23 Wed 15:55]--[2015-12-23 Wed 16:26] =>  0:31
 
-*** STARTED Re-read MDSD book                                         :story:
-    CLOCK: [2015-12-29 Tue 00:00]--[2015-12-29 Tue 15:00] => 15:00
-
-A few sprints ago [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_70.org#read-model-driven-software-development-book-and-papers][we read Model Driven Software Development]], providing
-most of the theoretical foundations for Dogen. We need to re-read it
-with the objective of summarising it into a chapter in the manual.
-
-Clock manually adjusted to reflect reading time.
+We need to uniquely identify a property in order to attach settings
+for it. To do so we can use the owning element's qualfied name
+together with the property's simple name.
 
 *** Create a settings class for the "requires" settings               :story:
 
@@ -289,6 +295,10 @@ additional =cpp= specific types. In practice:
   etc. This is not ideal, but its not a problem just yet. We could
   update the factory to generate these types and then take a copy of
   the model and inject them in it.
+
+*** Create a UML profile to formalise yarn concepts                   :story:
+
+Profile should include the hashable, etc changes.
 
 *** Create a map between UML/MOF terminology and yarn                 :story:
 
