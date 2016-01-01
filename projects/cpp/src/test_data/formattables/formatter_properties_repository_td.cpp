@@ -19,16 +19,10 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/cpp/test_data/formattables/formatter_properties_td.hpp"
 #include "dogen/cpp/test_data/formattables/formatter_properties_repository_td.hpp"
 
 namespace {
-
-dogen::yarn::name
-create_dogen_yarn_name(const unsigned int position) {
-    return dogen::yarn::name_generator::create(position);
-}
 
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
@@ -49,10 +43,10 @@ std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> 
     return r;
 }
 
-std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> > create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_dogen_cpp_formattables_formatter_properties_(unsigned int position) {
-    std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> > r;
+std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> > create_std_unordered_map_std_string_std_unordered_map_std_string_dogen_cpp_formattables_formatter_properties_(unsigned int position) {
+    std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_std_unordered_map_std_string_dogen_cpp_formattables_formatter_properties(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_std_unordered_map_std_string_dogen_cpp_formattables_formatter_properties(position + i)));
     }
     return r;
 }
@@ -67,7 +61,7 @@ formatter_properties_repository_generator::formatter_properties_repository_gener
 
 void formatter_properties_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.formatter_properties_by_name(create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_dogen_cpp_formattables_formatter_properties_(position + 0));
+    v.formatter_properties_by_name(create_std_unordered_map_std_string_std_unordered_map_std_string_dogen_cpp_formattables_formatter_properties_(position + 0));
 }
 
 formatter_properties_repository_generator::result_type

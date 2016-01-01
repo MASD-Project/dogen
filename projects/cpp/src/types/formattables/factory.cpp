@@ -198,7 +198,7 @@ path_derivatives factory::create_path_derivatives(
 bool factory::is_enabled(const formatter_properties_repository& fprp,
     const yarn::name& n, const std::string& formatter_name) const {
 
-    const auto i(fprp.formatter_properties_by_name().find(n));
+    const auto i(fprp.formatter_properties_by_name().find(n.qualified()));
     if (i == fprp.formatter_properties_by_name().end()) {
         const auto qn(n.qualified());
         BOOST_LOG_SEV(lg, error) << properties_not_found << qn;
@@ -281,7 +281,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     const auto ri_fn(traits::registrar_implementation_formatter_name());
     auto fp2(lambda(ci_fn, ri_fn));
 
-    const auto j(fprp.formatter_properties_by_name().find(n));
+    const auto j(fprp.formatter_properties_by_name().find(n.qualified()));
     if (j == fprp.formatter_properties_by_name().end()) {
         const auto qn(n.qualified());
         BOOST_LOG_SEV(lg, error) << properties_not_found << qn;

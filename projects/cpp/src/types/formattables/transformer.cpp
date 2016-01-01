@@ -229,7 +229,7 @@ void transformer::populate_entity_properties(const yarn::name& n,
 
     const auto& fpn(formatter_properties_repository_.
         formatter_properties_by_name());
-    const auto i(fpn.find(n));
+    const auto i(fpn.find(n.qualified()));
     if (i == fpn.end()) {
         const auto qn(n.qualified());
         BOOST_LOG_SEV(lg, error) << formatter_properties_missing << qn;

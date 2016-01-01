@@ -274,6 +274,7 @@ with the objective of summarising it into a chapter in the manual.
 Clock manually adjusted to reflect reading time.
 
 *** STARTED Use qualified name as keys for repositories in cpp        :story:
+    CLOCK: [2016-01-01 Fri 23:50]--[2016-01-01 Fri 23:58] =>  0:08
     CLOCK: [2016-01-01 Fri 23:34]--[2016-01-01 Fri 23:49] =>  0:15
 
 When we migrated yarn to use qualified name rather than names, we did
