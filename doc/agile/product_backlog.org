@@ -4297,7 +4297,7 @@ that tells dogen what string to use for debug dumping. At present
 enumerators do not have dynamic extensions support so we need to add
 it too (e.g. add the concept to them).
 
-*** Add is comparable to SML                                          :story:
+*** Add is comparable to yarn                                         :story:
 
 #+begin_quote
 *Story*: As a dogen user, I want to define types as comparable so that
@@ -4353,6 +4353,10 @@ assumption. The alternatives are:
   operations.
 
 Either approach requires [[Ignore%20files%20and%20folders%20based%20on%20regex][Ignore files and folders based on regex]].
+
+Another way of generating comparators is explained here:
+
+[[http://playfulprogramming.blogspot.se/2016/01/a-flexible-lexicographical-comparator.html][A flexible lexicographical comparator for C++ structs]]
 
 *** Add support for type framing                                      :story:
 
