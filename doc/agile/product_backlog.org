@@ -10,6 +10,52 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Stitch meta-templates                                             :story:
+
+In the quest for defining a single stitch template which then becomes
+a formatter - without any additional infrastructure required at all -
+we hit on an idea: stitch meta-templates. Basically we would have two
+different kinds of inputs to stitch: the template itself and the
+meta-template. Meta-template is a provisional name. The meta-template
+would define the formatter layout:
+
+- class definition, using a stitch variable for the yarn element type
+- registration of the formatter
+- definition of a method for the includes
+- definition of a method for the stitching
+
+These last two would result in the creation of "regions". These
+regions must then be "instantiated" in the template. This could easily
+be achieved with some kind of new element:
+
+: <#@ region "includes">
+
+Or some such stitch construct. All lines after this line are part of
+the region "includes" until a new region is defined. The region is
+stitched and then transposed to the place in the meta-template where
+it was defined, for example:
+
+: int f(int a, int b) {
+: <#@ region "includes">
+: }
+
+Would result in copying across the region into these brackets. This
+will make defining multiple functions very easy, without having to
+supply command line arguments, etc.
+
+Notes:
+
+- meta-templates are supplied as command line arguments.
+- potential extension: =meta.stitch=
+- stitch should still work on non-meta-template mode.
+- some of these ideas had already been covered on another story but
+  can't find it in backlog. It could be part of the original stitch
+  epic. We need to revisit it to see if it contains additional
+  insights.
+- when an error occurs, it would be great if we could pin point the
+  error to the template or to the meta-template. This is more of a
+  concern when we add clang compilation support.
+
 *** Perform an in-depth product backlog groom                         :story:
 
 We now have lots of references to types (and models) that have been
@@ -6298,17 +6344,6 @@ The script simply loads up the SO/static library and all of the
 includes of the SO. It also loads up all of the scripts of its
 dependencies.
 
-*** Use clang to extract stitch template header                       :story:
-
-Once we integrate clang, we could look at the expanded stitch template
-and infer the required header file. For the current use case, this is
-just a case of extracting the function signature. This may not work so
-well for more complicated scenarios such as with a class.
-
-We should keep in mind that stitch templates will not be stand-alone
-in a world where merging is supported, so this story may not make a
-whole lot of sense.
-
 *** Detect moved files                                                :story:
 
 It would be nice if we could detect files that are non-generatable and
@@ -6411,7 +6446,9 @@ work as follows:
   clang;
 - within stitch, get clang to detect the compilation database "near"
   the template; presumably clang has some infrastructure to do so
-  already - if not we could perform a file look up.
+  already - if not we could perform a file look up. Actually we should
+  just have a stitch command line parameter for the compilation
+  database as well as for the clang-format settings.
 - create a mapping of template lines to output lines during output
   generation.
 - run clang with the compilation database options against the template

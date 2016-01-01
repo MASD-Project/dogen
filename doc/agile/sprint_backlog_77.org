@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-12-31 Thu 18:48]
+#+CAPTION: Clock summary at [2016-01-01 Fri 18:02]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *34:00* |       |       |
+| *Total time*                                                                | *34:32* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 34:00   |       |       |
-| Active                                                                      |         | 34:00 |       |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:41 |
+| Stories                                                                     | 34:32   |       |       |
+| Active                                                                      |         | 34:32 |       |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |
 | STARTED Update manual                                                       |         |       |  0:43 |
 | STARTED Update Linux CDash agent                                            |         |       |  0:09 |
 | COMPLETED Add support for conan.io                                          |         |       |  3:06 |
@@ -36,6 +36,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-01-01 Fri 17:30]--[2016-01-01 Fri 18:05] =>  0:35
     CLOCK: [2015-12-30 Wed 23:00]--[2015-12-30 Wed 23:27] =>  0:27
     CLOCK: [2015-12-30 Wed 22:30]--[2015-12-30 Wed 22:59] =>  0:29
     CLOCK: [2015-12-29 Tue 19:50]--[2015-12-29 Tue 20:20] =>  0:30
@@ -262,38 +263,25 @@ with the objective of summarising it into a chapter in the manual.
 
 Clock manually adjusted to reflect reading time.
 
-*** Create a settings class for the "requires" settings               :story:
-
-We need to populate these in a settings workflow of some kind.
-
-*** Create a top-level settings class with all of the required settings :story:
+*** Update settings bundle to include property settings               :story:
 
 We need to split settings from element in cpp in preparation for using
-yarn types. This means:
+yarn types. This means updating settings bundle to be a stand alone
+class with all settings including opaque settings for properties.
 
-- stand alone class with all settings including opaque settings for
-  properties.
-- change all formatter interfaces to take the formattable and the
-  settings separately.
+*** Supply formatter properties and settings directly to formatter    :story:
 
-*** Attach helper methods to types dynamically                        :story:
+In preparation for removing the cpp formattables, we need to supply
+the formatter properties and settings in the format method, rather
+than via the cpp type.
 
-In order to cope with the removal of nested type info, we need a way
-to determine what helper methods are required for a given yarn type.
+*** Create a separate flow for yarn based types                       :story:
 
-For this we need a way to allow helper methods to bind dynamically to
-types. This can be done by using meta-data. The helper method
-registers a name and the type uses that name it its key for helper
-method. Where possible the helper method should use the name of the
-STL concept it is binding to. We need settings support for reading
-this field, and registration support for helper methods (registrar,
-etc).
-
-We should also find a nicer way to package helper methods, maybe
-aligned to a model and type or concept.
-
-Once this is done we need to remove the =object_types= that exist in
-yarn just to figure out what helper methods to use.
+We won't be able to replace all cpp types in one go, so the best way
+to go about this is to incrementally update the formatters. This could
+be done by having two sets of elements to format, one formattable
+based and the other yarn based. We can update the interfaces, one type
+a time and have them share the same registrars etc.
 
 *** Implement formattables in terms of yarn types                     :story:
 
@@ -316,6 +304,29 @@ additional =cpp= specific types. In practice:
   etc. This is not ideal, but its not a problem just yet. We could
   update the factory to generate these types and then take a copy of
   the model and inject them in it.
+
+*** Create a settings class for the "requires" settings               :story:
+
+We need to populate these in a settings workflow of some kind.
+
+*** Attach helper methods to types dynamically                        :story:
+
+In order to cope with the removal of nested type info, we need a way
+to determine what helper methods are required for a given yarn type.
+
+For this we need a way to allow helper methods to bind dynamically to
+types. This can be done by using meta-data. The helper method
+registers a name and the type uses that name it its key for helper
+method. Where possible the helper method should use the name of the
+STL concept it is binding to. We need settings support for reading
+this field, and registration support for helper methods (registrar,
+etc).
+
+We should also find a nicer way to package helper methods, maybe
+aligned to a model and type or concept.
+
+Once this is done we need to remove the =object_types= that exist in
+yarn just to figure out what helper methods to use.
 
 *** Create a UML profile to formalise yarn concepts                   :story:
 
@@ -837,3 +848,17 @@ we need to check for.
 - types must be enabled
 - if serialisation is enabled, types forward declaration of the
   serialisation classes must be enabled
+*** CANCELLED Use clang to extract stitch template header             :story:
+    CLOSED: [2016-01-01 Fri 17:50]
+
+*Rationale*: this is far too complicated. Instead we will use the
+meta-templates approach.
+
+Once we integrate clang, we could look at the expanded stitch template
+and infer the required header file. For the current use case, this is
+just a case of extracting the function signature. This may not work so
+well for more complicated scenarios such as with a class.
+
+We should keep in mind that stitch templates will not be stand-alone
+in a world where merging is supported, so this story may not make a
+whole lot of sense.
