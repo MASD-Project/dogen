@@ -37,27 +37,32 @@ namespace settings {
 bundle::bundle(bundle&& rhs)
     : general_settings_(std::move(rhs.general_settings_)),
       aspect_settings_(std::move(rhs.aspect_settings_)),
-      opaque_settings_(std::move(rhs.opaque_settings_)) { }
+      opaque_settings_(std::move(rhs.opaque_settings_)),
+      opaque_settings_for_property_(std::move(rhs.opaque_settings_for_property_)) { }
 
 bundle::bundle(
     const boost::optional<dogen::formatters::general_settings>& general_settings,
     const dogen::cpp::settings::aspect_settings& aspect_settings,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& opaque_settings)
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& opaque_settings,
+    const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > >& opaque_settings_for_property)
     : general_settings_(general_settings),
       aspect_settings_(aspect_settings),
-      opaque_settings_(opaque_settings) { }
+      opaque_settings_(opaque_settings),
+      opaque_settings_for_property_(opaque_settings_for_property) { }
 
 void bundle::swap(bundle& other) noexcept {
     using std::swap;
     swap(general_settings_, other.general_settings_);
     swap(aspect_settings_, other.aspect_settings_);
     swap(opaque_settings_, other.opaque_settings_);
+    swap(opaque_settings_for_property_, other.opaque_settings_for_property_);
 }
 
 bool bundle::operator==(const bundle& rhs) const {
     return general_settings_ == rhs.general_settings_ &&
         aspect_settings_ == rhs.aspect_settings_ &&
-        opaque_settings_ == rhs.opaque_settings_;
+        opaque_settings_ == rhs.opaque_settings_ &&
+        opaque_settings_for_property_ == rhs.opaque_settings_for_property_;
 }
 
 bundle& bundle::operator=(bundle other) {
@@ -112,6 +117,22 @@ void bundle::opaque_settings(const std::unordered_map<std::string, boost::shared
 
 void bundle::opaque_settings(const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >&& v) {
     opaque_settings_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > >& bundle::opaque_settings_for_property() const {
+    return opaque_settings_for_property_;
+}
+
+std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > >& bundle::opaque_settings_for_property() {
+    return opaque_settings_for_property_;
+}
+
+void bundle::opaque_settings_for_property(const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > >& v) {
+    opaque_settings_for_property_ = v;
+}
+
+void bundle::opaque_settings_for_property(const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > >&& v) {
+    opaque_settings_for_property_ = std::move(v);
 }
 
 } } }

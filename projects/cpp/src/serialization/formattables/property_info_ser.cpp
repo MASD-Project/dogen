@@ -26,11 +26,8 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
-#include <boost/serialization/shared_ptr.hpp>
-#include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/cpp/serialization/settings/opaque_settings_ser.hpp"
 #include "dogen/cpp/serialization/formattables/property_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/nested_type_info_ser.hpp"
 
@@ -47,7 +44,7 @@ void save(Archive& ar,
     ar << make_nvp("type", v.type_);
     ar << make_nvp("is_immutable", v.is_immutable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
-    ar << make_nvp("opaque_settings", v.opaque_settings_);
+    ar << make_nvp("id", v.id_);
 }
 
 template<typename Archive>
@@ -60,7 +57,7 @@ void load(Archive& ar,
     ar >> make_nvp("type", v.type_);
     ar >> make_nvp("is_immutable", v.is_immutable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
-    ar >> make_nvp("opaque_settings", v.opaque_settings_);
+    ar >> make_nvp("id", v.id_);
 }
 
 } }

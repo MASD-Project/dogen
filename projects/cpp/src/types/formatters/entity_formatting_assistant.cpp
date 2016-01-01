@@ -394,4 +394,16 @@ get_odb_settings(const std::unordered_map<std::string,
     return r;
 }
 
+boost::shared_ptr<settings::odb_settings> entity_formatting_assistant::
+get_odb_settings(const std::string& property_id) const {
+
+    const auto& osfp(entity_.settings().opaque_settings_for_property());
+    const auto i(osfp.find(property_id));
+    if (i == osfp.end())
+        return boost::shared_ptr<settings::odb_settings>();
+
+    const auto& os(i->second);
+    return get_odb_settings(os);
+}
+
 } } }

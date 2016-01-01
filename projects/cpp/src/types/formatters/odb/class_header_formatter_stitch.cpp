@@ -50,8 +50,7 @@ fa.stream() << "#pragma db object(" << c.name() << ") " << pg << std::endl;
 
                 bool is_first(true);
                 for (const auto p : c.properties()) {
-                    const auto& pos(p.opaque_settings());
-                    const auto podbs(fa.get_odb_settings(pos));
+                    const auto podbs(fa.get_odb_settings(p.id()));
                     if (podbs) {
                         for (const auto pg : podbs->pragmas()) {
                             if (is_first)

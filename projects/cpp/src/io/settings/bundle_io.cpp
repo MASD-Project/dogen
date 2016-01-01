@@ -81,6 +81,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace cpp {
 namespace settings {
@@ -90,7 +108,8 @@ std::ostream& operator<<(std::ostream& s, const bundle& v) {
       << "\"__type__\": " << "\"dogen::cpp::settings::bundle\"" << ", "
       << "\"general_settings\": " << v.general_settings() << ", "
       << "\"aspect_settings\": " << v.aspect_settings() << ", "
-      << "\"opaque_settings\": " << v.opaque_settings()
+      << "\"opaque_settings\": " << v.opaque_settings() << ", "
+      << "\"opaque_settings_for_property\": " << v.opaque_settings_for_property()
       << " }";
     return(s);
 }

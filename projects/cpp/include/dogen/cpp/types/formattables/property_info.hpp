@@ -27,9 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include <unordered_map>
-#include <boost/shared_ptr.hpp>
-#include "dogen/cpp/types/settings/opaque_settings_fwd.hpp"
 #include "dogen/cpp/types/formattables/nested_type_info.hpp"
 #include "dogen/cpp/serialization/formattables/property_info_fwd_ser.hpp"
 
@@ -57,7 +54,7 @@ public:
         const dogen::cpp::formattables::nested_type_info& type,
         const bool is_immutable,
         const bool is_fluent,
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& opaque_settings);
+        const std::string& id);
 
 private:
     template<typename Archive>
@@ -129,10 +126,10 @@ public:
     void is_fluent(const bool v);
     /**@}*/
 
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& opaque_settings() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& opaque_settings();
-    void opaque_settings(const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& v);
-    void opaque_settings(const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >&& v);
+    const std::string& id() const;
+    std::string& id();
+    void id(const std::string& v);
+    void id(const std::string&& v);
 
 public:
     bool operator==(const property_info& rhs) const;
@@ -151,7 +148,7 @@ private:
     dogen::cpp::formattables::nested_type_info type_;
     bool is_immutable_;
     bool is_fluent_;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > opaque_settings_;
+    std::string id_;
 };
 
 } } }

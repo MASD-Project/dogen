@@ -51,40 +51,59 @@ namespace settings {
 namespace {
 
 /**
- * @brief Generates all inclusion dependencies.
+ * @brief Generates settings bundles for all elements.
  */
 class generator final : public yarn::element_visitor {
 public:
-    explicit generator(const bundle_factory& f) : factory_(f) {}
+    generator(const bundle_factory& f, const opaque_settings_builder& osb)
+        : factory_(f), opaque_settings_builder_(osb) {}
 
 private:
-    /**
-     * @brief Generates all of the inclusion dependencies for the
-     * formatters and qualified name.
-     */
-    template<typename YarnEntity>
-    void generate(const YarnEntity& e) {
-        if (e.generation_type() == yarn::generation_types::no_generation)
-            return;
-
-        const auto b(factory_.make(e.extensions()));
-        const auto pair(std::make_pair(e.name(), b));
-        auto& deps(result_.bundles_by_name());
-        const auto res(deps.insert(pair));
+    void insert(const yarn::name& n, const settings::bundle& b) {
+        const auto pair(std::make_pair(n, b));
+        const auto res(result_.bundles_by_name().insert(pair));
         if (!res.second) {
-            const auto qn(e.name().qualified());
+            const auto qn(n.qualified());
             BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
             BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));
         }
     }
 
+private:
+    void generate(const yarn::element& e) {
+        if (e.generation_type() == yarn::generation_types::no_generation)
+            return;
+
+        const auto b(factory_.make(e.extensions()));
+        insert(e.name(), b);
+    }
+
+    template<typename YarnStatefulNameableExtensible>
+    void generate_stateful(const YarnStatefulNameableExtensible& e) {
+        if (e.generation_type() == yarn::generation_types::no_generation)
+            return;
+
+        auto b(factory_.make(e.extensions()));
+        for (const auto& p : e.all_properties()) {
+            const auto os(opaque_settings_builder_.build(p.extensions()));
+            const auto pair(std::make_pair(p.name().qualified(), os));
+            const auto res(b.opaque_settings_for_property().insert(pair));
+            if (!res.second) {
+                const auto qn(p.name().qualified());
+                BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
+                BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));
+            }
+        }
+        insert(e.name(), b);
+    }
+
 public:
     using yarn::element_visitor::visit;
     void visit(const dogen::yarn::module& m) { generate(m); }
-    void visit(const dogen::yarn::concept& c) { generate(c); }
+    void visit(const dogen::yarn::concept& c) { generate_stateful(c); }
     void visit(const dogen::yarn::primitive& p) { generate(p); }
     void visit(const dogen::yarn::enumeration& e) { generate(e); }
-    void visit(const dogen::yarn::object& o) { generate(o); }
+    void visit(const dogen::yarn::object& o) { generate_stateful(o); }
     void visit(const dogen::yarn::exception& e) { generate(e); }
     void visit(const dogen::yarn::visitor& v) { generate(v); }
 
@@ -93,6 +112,7 @@ public:
 
 private:
     const bundle_factory& factory_;
+    const opaque_settings_builder& opaque_settings_builder_;
     bundle_repository result_;
 };
 
@@ -107,7 +127,7 @@ make(const dynamic::repository& rp, const dynamic::object& root_object,
     BOOST_LOG_SEV(lg, debug) << "Creating settings bundle repository.";
 
     const bundle_factory f(rp, root_object, gsf, osb);
-    generator g(f);
+    generator g(f, osb);
     for (const auto& pair : m.elements()) {
         const auto& e(*pair.second);
         e.accept(g);

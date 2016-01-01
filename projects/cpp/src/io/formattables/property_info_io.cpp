@@ -21,7 +21,6 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/cpp/io/settings/opaque_settings_io.hpp"
 #include "dogen/cpp/io/formattables/property_info_io.hpp"
 #include "dogen/cpp/io/formattables/nested_type_info_io.hpp"
 
@@ -30,40 +29,6 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\n", "<new_line>");
     boost::replace_all(s, "\"", "<quote>");
     return s;
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
-      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
 }
 
 namespace dogen {
@@ -85,7 +50,7 @@ std::ostream& operator<<(std::ostream& s, const property_info& v) {
       << "\"type\": " << v.type() << ", "
       << "\"is_immutable\": " << v.is_immutable() << ", "
       << "\"is_fluent\": " << v.is_fluent() << ", "
-      << "\"opaque_settings\": " << v.opaque_settings()
+      << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\""
       << " }";
     return(s);
 }

@@ -19,7 +19,6 @@
  *
  */
 #include <sstream>
-#include "dogen/cpp/test_data/settings/opaque_settings_td.hpp"
 #include "dogen/cpp/test_data/formattables/property_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/nested_type_info_td.hpp"
 
@@ -40,26 +39,6 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
-dogen::cpp::settings::opaque_settings*
-create_dogen_cpp_settings_opaque_settings_ptr(const unsigned int position) {
-    return dogen::cpp::settings::opaque_settings_generator::create_ptr(position);
-}
-
-boost::shared_ptr<dogen::cpp::settings::opaque_settings>
-create_boost_shared_ptr_dogen_cpp_settings_opaque_settings(unsigned int position) {
-    boost::shared_ptr<dogen::cpp::settings::opaque_settings> r(
-        create_dogen_cpp_settings_opaque_settings_ptr(position));
-    return r;
-}
-
-std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > create_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings_(unsigned int position) {
-    std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_dogen_cpp_settings_opaque_settings(position + i)));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -76,7 +55,7 @@ populate(const unsigned int position, result_type& v) {
     v.type(create_dogen_cpp_formattables_nested_type_info(position + 3));
     v.is_immutable(create_bool(position + 4));
     v.is_fluent(create_bool(position + 5));
-    v.opaque_settings(create_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings_(position + 6));
+    v.id(create_std_string(position + 6));
 }
 
 property_info_generator::result_type

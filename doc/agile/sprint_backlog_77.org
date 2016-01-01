@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-01 Fri 18:02]
+#+CAPTION: Clock summary at [2016-01-01 Fri 23:14]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *34:32* |       |       |
+| *Total time*                                                                | *36:08* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 34:32   |       |       |
-| Active                                                                      |         | 34:32 |       |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |
+| Stories                                                                     | 36:08   |       |       |
+| Active                                                                      |         | 36:08 |       |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:16 |
 | STARTED Update manual                                                       |         |       |  0:43 |
 | STARTED Update Linux CDash agent                                            |         |       |  0:09 |
 | COMPLETED Add support for conan.io                                          |         |       |  3:06 |
@@ -32,6 +32,7 @@
 | COMPLETED Add =iconv.h= to include path on windows                          |         |       |  0:44 |
 | COMPLETED Improve names in yarn around model element location               |         |       |  3:39 |
 | COMPLETED Add qualified name to yarn properties                             |         |       |  1:26 |
+| COMPLETED Update settings bundle to include property settings               |         |       |  1:33 |
 | STARTED Re-read MDSD book                                                   |         |       | 15:00 |
 #+end:
 
@@ -254,6 +255,15 @@ modeling elements with a position in modeling space. This means we can
 use names and locations and also means that this infrastructure will
 (hopefully) be reused to implement inner classes.
 
+*** COMPLETED Update settings bundle to include property settings     :story:
+    CLOSED: [2016-01-01 Fri 23:14]
+    CLOCK: [2016-01-01 Fri 22:11]--[2016-01-01 Fri 23:14] =>  1:03
+    CLOCK: [2016-01-01 Fri 18:10]--[2016-01-01 Fri 18:40] =>  0:30
+
+We need to split settings from element in cpp in preparation for using
+yarn types. This means updating settings bundle to be a stand alone
+class with all settings including opaque settings for properties.
+
 *** STARTED Re-read MDSD book                                         :story:
     CLOCK: [2015-12-29 Tue 00:00]--[2015-12-29 Tue 15:00] => 15:00
 
@@ -262,12 +272,6 @@ most of the theoretical foundations for Dogen. We need to re-read it
 with the objective of summarising it into a chapter in the manual.
 
 Clock manually adjusted to reflect reading time.
-
-*** Update settings bundle to include property settings               :story:
-
-We need to split settings from element in cpp in preparation for using
-yarn types. This means updating settings bundle to be a stand alone
-class with all settings including opaque settings for properties.
 
 *** Supply formatter properties and settings directly to formatter    :story:
 

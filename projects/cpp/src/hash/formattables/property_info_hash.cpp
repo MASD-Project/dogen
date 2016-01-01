@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/settings/opaque_settings_hash.hpp"
 #include "dogen/cpp/hash/formattables/property_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/nested_type_info_hash.hpp"
 
@@ -28,21 +27,6 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_boost_shared_ptr_dogen_cpp_settings_opaque_settings(const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& v) {
-    std::size_t seed(0);
-    combine(seed, *v);
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings_(const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, hash_boost_shared_ptr_dogen_cpp_settings_opaque_settings(i.second));
-    }
-    return seed;
 }
 
 }
@@ -60,7 +44,7 @@ std::size_t property_info_hasher::hash(const property_info& v) {
     combine(seed, v.type());
     combine(seed, v.is_immutable());
     combine(seed, v.is_fluent());
-    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings_(v.opaque_settings()));
+    combine(seed, v.id());
 
     return seed;
 }

@@ -340,6 +340,7 @@ transformer::to_property_info(const yarn::property p, const bool is_immutable,
     pi.documentation(p.documentation());
     pi.is_immutable(is_immutable);
     pi.is_fluent(is_fluent);
+    pi.id(p.name().qualified());
 
     bool requires_stream_manipulators(false);
     bool requires_manual_move_constructor(false);
@@ -359,7 +360,6 @@ transformer::to_property_info(const yarn::property p, const bool is_immutable,
 
     nti.complete_name(complete_name);
     pi.type(nti);
-    pi.opaque_settings(opaque_settings_builder_.build(p.extensions()));
 
     return std::make_tuple(pi,
         requires_stream_manipulators,

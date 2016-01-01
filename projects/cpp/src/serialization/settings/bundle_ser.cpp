@@ -46,6 +46,7 @@ void save(Archive& ar,
     ar << make_nvp("general_settings", v.general_settings_);
     ar << make_nvp("aspect_settings", v.aspect_settings_);
     ar << make_nvp("opaque_settings", v.opaque_settings_);
+    ar << make_nvp("opaque_settings_for_property", v.opaque_settings_for_property_);
 }
 
 template<typename Archive>
@@ -55,6 +56,7 @@ void load(Archive& ar,
     ar >> make_nvp("general_settings", v.general_settings_);
     ar >> make_nvp("aspect_settings", v.aspect_settings_);
     ar >> make_nvp("opaque_settings", v.opaque_settings_);
+    ar >> make_nvp("opaque_settings_for_property", v.opaque_settings_for_property_);
 }
 
 } }

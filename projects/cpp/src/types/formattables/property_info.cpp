@@ -18,17 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/settings/opaque_settings.hpp"
 #include "dogen/cpp/types/formattables/property_info.hpp"
-
-namespace boost {
-
-inline bool operator==(const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& lhs,
-const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& rhs) {
-    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
-}
-
-}
 
 namespace dogen {
 namespace cpp {
@@ -45,14 +35,14 @@ property_info::property_info(
     const dogen::cpp::formattables::nested_type_info& type,
     const bool is_immutable,
     const bool is_fluent,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& opaque_settings)
+    const std::string& id)
     : name_(name),
       qualified_name_(qualified_name),
       documentation_(documentation),
       type_(type),
       is_immutable_(is_immutable),
       is_fluent_(is_fluent),
-      opaque_settings_(opaque_settings) { }
+      id_(id) { }
 
 void property_info::swap(property_info& other) noexcept {
     using std::swap;
@@ -62,7 +52,7 @@ void property_info::swap(property_info& other) noexcept {
     swap(type_, other.type_);
     swap(is_immutable_, other.is_immutable_);
     swap(is_fluent_, other.is_fluent_);
-    swap(opaque_settings_, other.opaque_settings_);
+    swap(id_, other.id_);
 }
 
 bool property_info::operator==(const property_info& rhs) const {
@@ -72,7 +62,7 @@ bool property_info::operator==(const property_info& rhs) const {
         type_ == rhs.type_ &&
         is_immutable_ == rhs.is_immutable_ &&
         is_fluent_ == rhs.is_fluent_ &&
-        opaque_settings_ == rhs.opaque_settings_;
+        id_ == rhs.id_;
 }
 
 property_info& property_info::operator=(property_info other) {
@@ -161,20 +151,20 @@ void property_info::is_fluent(const bool v) {
     is_fluent_ = v;
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& property_info::opaque_settings() const {
-    return opaque_settings_;
+const std::string& property_info::id() const {
+    return id_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& property_info::opaque_settings() {
-    return opaque_settings_;
+std::string& property_info::id() {
+    return id_;
 }
 
-void property_info::opaque_settings(const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& v) {
-    opaque_settings_ = v;
+void property_info::id(const std::string& v) {
+    id_ = v;
 }
 
-void property_info::opaque_settings(const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >&& v) {
-    opaque_settings_ = std::move(v);
+void property_info::id(const std::string&& v) {
+    id_ = std::move(v);
 }
 
 } } }

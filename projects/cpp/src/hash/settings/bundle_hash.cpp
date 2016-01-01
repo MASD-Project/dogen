@@ -56,6 +56,15 @@ inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_std_string_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings__(const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > >& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings_(i.second));
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -68,6 +77,7 @@ std::size_t bundle_hasher::hash(const bundle& v) {
     combine(seed, hash_boost_optional_dogen_formatters_general_settings(v.general_settings()));
     combine(seed, v.aspect_settings());
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings_(v.opaque_settings()));
+    combine(seed, hash_std_unordered_map_std_string_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings__(v.opaque_settings_for_property()));
 
     return seed;
 }

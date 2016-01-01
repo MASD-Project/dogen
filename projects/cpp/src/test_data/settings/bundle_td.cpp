@@ -69,6 +69,14 @@ std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_s
     return r;
 }
 
+std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > > create_std_unordered_map_std_string_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings__(unsigned int position) {
+    std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > > r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings_(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -82,6 +90,7 @@ populate(const unsigned int position, result_type& v) {
     v.general_settings(create_boost_optional_dogen_formatters_general_settings(position + 0));
     v.aspect_settings(create_dogen_cpp_settings_aspect_settings(position + 1));
     v.opaque_settings(create_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings_(position + 2));
+    v.opaque_settings_for_property(create_std_unordered_map_std_string_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings__(position + 3));
 }
 
 bundle_generator::result_type

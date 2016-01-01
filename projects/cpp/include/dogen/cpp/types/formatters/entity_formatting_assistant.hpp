@@ -230,6 +230,13 @@ public:
     get_odb_settings(const std::unordered_map<std::string,
         boost::shared_ptr<settings::opaque_settings> >& os) const;
 
+    /**
+     * @brief Retrieves the ODB settings for a given property from the
+     * opaque settings container, if they do exist.
+     */
+    boost::shared_ptr<settings::odb_settings>
+    get_odb_settings(const std::string& property_id) const;
+
 private:
     const formattables::entity& entity_;
     const dynamic::ownership_hierarchy ownership_hierarchy_;

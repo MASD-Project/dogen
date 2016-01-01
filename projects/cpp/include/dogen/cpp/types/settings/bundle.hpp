@@ -52,7 +52,8 @@ public:
     bundle(
         const boost::optional<dogen::formatters::general_settings>& general_settings,
         const dogen::cpp::settings::aspect_settings& aspect_settings,
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& opaque_settings);
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& opaque_settings,
+        const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > >& opaque_settings_for_property);
 
 private:
     template<typename Archive>
@@ -77,6 +78,11 @@ public:
     void opaque_settings(const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& v);
     void opaque_settings(const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >&& v);
 
+    const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > >& opaque_settings_for_property() const;
+    std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > >& opaque_settings_for_property();
+    void opaque_settings_for_property(const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > >& v);
+    void opaque_settings_for_property(const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > >&& v);
+
 public:
     bool operator==(const bundle& rhs) const;
     bool operator!=(const bundle& rhs) const {
@@ -91,6 +97,7 @@ private:
     boost::optional<dogen::formatters::general_settings> general_settings_;
     dogen::cpp::settings::aspect_settings aspect_settings_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > opaque_settings_;
+    std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > > opaque_settings_for_property_;
 };
 
 } } }
