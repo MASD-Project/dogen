@@ -273,11 +273,36 @@ with the objective of summarising it into a chapter in the manual.
 
 Clock manually adjusted to reflect reading time.
 
-*** Supply formatter properties and settings directly to formatter    :story:
+*** STARTED Use qualified name as keys for repositories in cpp        :story:
+    CLOCK: [2016-01-01 Fri 23:34]--[2016-01-01 Fri 23:49] =>  0:15
+
+When we migrated yarn to use qualified name rather than names, we did
+not update the cpp repositories. We need to do this now in order to be
+able to query the settings bundle and formatter properties from a
+formattable.
+
+- this cannot be done for path derivatives at the moment for at least
+  one reason: the way we are building the master include files
+  requires the yarn name. However, this is a massive hack. Story
+  raised for this.
+
+*** STARTED Supply formatter properties and settings directly to formatter :story:
+    CLOCK: [2016-01-01 Fri 23:15]--[2016-01-01 Fri 23:33] =>  0:18
 
 In preparation for removing the cpp formattables, we need to supply
 the formatter properties and settings in the format method, rather
 than via the cpp type.
+
+*** Tidy-up master include generation                                 :story:
+
+At present we have one humongous hack in the factory to generate the
+master includers. How to do this properly:
+
+- wait until we start using yarn types.
+- loop through the yarn model instead of the path derivatives.
+- use a visitor to dispatch the types.
+- do not filter out services?
+- filter registrars etc based on type dispatching.
 
 *** Create a separate flow for yarn based types                       :story:
 
