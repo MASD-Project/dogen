@@ -240,7 +240,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     sb.aspect_settings(f.make());
     r->settings(sb);
     */
-    const auto i(brp.bundles_by_name().find(n));
+    const auto i(brp.bundles_by_name().find(n.qualified()));
     if (i == brp.bundles_by_name().end()) {
         const auto qn(n.qualified());
         BOOST_LOG_SEV(lg, error) << bundle_not_found_for_name << qn;

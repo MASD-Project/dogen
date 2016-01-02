@@ -30306,13 +30306,13 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="128,146"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="127.95,145.95;153.96,148.85"/>
+        <dia:rectangle val="127.95,145.95;154.345,148.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="128,146"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.91"/>
+        <dia:real val="26.294999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
@@ -30410,7 +30410,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#bundles_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;yarn::name, settings::bundle&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, settings::bundle&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -30477,7 +30477,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="148.917,134.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="140.905,133.45;149.667,146.75"/>
+        <dia:rectangle val="141.097,133.45;149.667,146.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30485,8 +30485,8 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="148.917,134.2"/>
         <dia:point val="148.917,141"/>
-        <dia:point val="140.955,141"/>
-        <dia:point val="140.955,145.95"/>
+        <dia:point val="141.148,141"/>
+        <dia:point val="141.148,145.95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -30549,7 +30549,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="218.2,151.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="140.205,148.05;218.4,175.05"/>
+        <dia:rectangle val="140.398,148.05;218.4,175.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30557,8 +30557,8 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="218.2,151.2"/>
         <dia:point val="218.2,175"/>
-        <dia:point val="140.955,175"/>
-        <dia:point val="140.955,148.8"/>
+        <dia:point val="141.148,175"/>
+        <dia:point val="141.148,148.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

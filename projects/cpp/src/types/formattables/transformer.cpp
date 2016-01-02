@@ -242,7 +242,7 @@ void transformer::populate_entity_properties(const yarn::name& n,
     e.namespaces(b.namespace_list(model_, n));
 
     const auto& bn(bundle_repository_.bundles_by_name());
-    const auto j(bn.find(n));
+    const auto j(bn.find(n.qualified()));
     if (j == bn.end()) {
         const auto qn(n.qualified());
         BOOST_LOG_SEV(lg, error) << settings_bundle_missing << qn;

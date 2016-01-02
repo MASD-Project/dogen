@@ -60,7 +60,7 @@ public:
 
 private:
     void insert(const yarn::name& n, const settings::bundle& b) {
-        const auto pair(std::make_pair(n, b));
+        const auto pair(std::make_pair(n.qualified(), b));
         const auto res(result_.bundles_by_name().insert(pair));
         if (!res.second) {
             const auto qn(n.qualified());
@@ -137,7 +137,7 @@ make(const dynamic::repository& rp, const dynamic::object& root_object,
     // FIXME: hack to handle registars.
     yarn::name_factory nf;
     const auto n(nf.build_element_in_model(m.name(), registrar_name));
-    const auto pair(std::make_pair(n, f.make()));
+    const auto pair(std::make_pair(n.qualified(), f.make()));
     auto& deps(r.bundles_by_name());
     const auto res(deps.insert(pair));
     if (!res.second) {

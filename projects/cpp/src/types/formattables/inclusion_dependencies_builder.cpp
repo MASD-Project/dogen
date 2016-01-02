@@ -164,7 +164,7 @@ bool inclusion_dependencies_builder::is_integrated(
 settings::aspect_settings inclusion_dependencies_builder::
 get_aspect_settings(const yarn::name& n) const {
     const auto& bn(bundle_repository_.bundles_by_name());
-    const auto i(bn.find(n));
+    const auto i(bn.find(n.qualified()));
     if (i == bn.end()) {
         const auto qn(n.qualified());
         BOOST_LOG_SEV(lg, error) << name_not_found << qn;
