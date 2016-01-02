@@ -1,0 +1,1293 @@
+diff --git a/diagrams/cpp.dia b/diagrams/cpp.dia
+index e2df5cf..f4cf66f 100644
+--- a/diagrams/cpp.dia
++++ b/diagrams/cpp.dia
+@@ -560,13 +560,13 @@ descend from it. Names are in identifiable name format.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O3">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="90,17"/>
++        <dia:point val="127,17"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="89.95,16.95;115.19,26.25"/>
++        <dia:rectangle val="126.95,16.95;152.19,26.25"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="90,17"/>
++        <dia:point val="127,17"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="25.140000000000001"/>
+@@ -2896,19 +2896,19 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O14">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="121,17"/>
++        <dia:point val="101,17"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="120.95,16.95;156.2,22.25"/>
++        <dia:rectangle val="100.95,16.95;115.025,21.45"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="121,17"/>
++        <dia:point val="101,17"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="35.149999999999999"/>
++        <dia:real val="13.975"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="5.2000000000000011"/>
++        <dia:real val="4.4000000000000004"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+         <dia:string>#entity#</dia:string>
+@@ -3023,33 +3023,10 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#settings#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#settings::bundle#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#formatter_properties#</dia:string>
++            <dia:string>#id#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::unordered_map&lt;std::string, formattables::formatter_properties&gt;#</dia:string>
++            <dia:string>#std::string#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -14137,17 +14114,17 @@ the dynamic object.
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O104">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="138.575,22.2"/>
++        <dia:point val="107.987,21.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="69.825,22.15;139.425,34.05"/>
++        <dia:rectangle val="69.825,21.35;108.837,34.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="138.575,22.2"/>
+-        <dia:point val="138.575,29"/>
++        <dia:point val="107.987,21.4"/>
++        <dia:point val="107.987,29"/>
+         <dia:point val="69.875,29"/>
+         <dia:point val="69.875,34"/>
+       </dia:attribute>
+@@ -14179,17 +14156,17 @@ the dynamic object.
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O105">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="138.575,22.2"/>
++        <dia:point val="107.987,21.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="83.595,22.15;139.425,42.05"/>
++        <dia:rectangle val="83.595,21.35;108.837,42.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="138.575,22.2"/>
+-        <dia:point val="138.575,29"/>
++        <dia:point val="107.987,21.4"/>
++        <dia:point val="107.987,29"/>
+         <dia:point val="83.645,29"/>
+         <dia:point val="83.645,42"/>
+       </dia:attribute>
+@@ -14221,17 +14198,17 @@ the dynamic object.
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O106">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="138.575,22.2"/>
++        <dia:point val="107.987,21.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="91.8162,22.15;139.425,34.05"/>
++        <dia:rectangle val="91.8162,21.35;108.837,34.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="138.575,22.2"/>
+-        <dia:point val="138.575,29"/>
++        <dia:point val="107.987,21.4"/>
++        <dia:point val="107.987,29"/>
+         <dia:point val="91.8662,29"/>
+         <dia:point val="91.8662,34"/>
+       </dia:attribute>
+@@ -14263,17 +14240,17 @@ the dynamic object.
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O107">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="138.575,22.2"/>
++        <dia:point val="107.987,21.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="100.484,22.15;139.425,42.05"/>
++        <dia:rectangle val="100.484,21.35;108.837,42.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="138.575,22.2"/>
+-        <dia:point val="138.575,29"/>
++        <dia:point val="107.987,21.4"/>
++        <dia:point val="107.987,29"/>
+         <dia:point val="100.534,29"/>
+         <dia:point val="100.534,42"/>
+       </dia:attribute>
+@@ -14305,17 +14282,17 @@ the dynamic object.
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O108">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="138.575,22.2"/>
++        <dia:point val="107.987,21.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="41.055,22.15;139.425,34.05"/>
++        <dia:rectangle val="41.055,21.35;108.837,34.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="138.575,22.2"/>
+-        <dia:point val="138.575,29"/>
++        <dia:point val="107.987,21.4"/>
++        <dia:point val="107.987,29"/>
+         <dia:point val="41.105,29"/>
+         <dia:point val="41.105,34"/>
+       </dia:attribute>
+@@ -14347,17 +14324,17 @@ the dynamic object.
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O109">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="138.575,22.2"/>
++        <dia:point val="107.987,21.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="113.478,22.15;139.425,34.05"/>
++        <dia:rectangle val="107.137,21.35;113.578,34.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="138.575,22.2"/>
+-        <dia:point val="138.575,29"/>
++        <dia:point val="107.987,21.4"/>
++        <dia:point val="107.987,29"/>
+         <dia:point val="113.528,29"/>
+         <dia:point val="113.528,34"/>
+       </dia:attribute>
+@@ -14389,17 +14366,17 @@ the dynamic object.
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O110">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="138.575,22.2"/>
++        <dia:point val="107.987,21.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="127.038,22.15;139.425,42.05"/>
++        <dia:rectangle val="107.137,21.35;127.138,42.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="138.575,22.2"/>
+-        <dia:point val="138.575,29"/>
++        <dia:point val="107.987,21.4"/>
++        <dia:point val="107.987,29"/>
+         <dia:point val="127.088,29"/>
+         <dia:point val="127.088,42"/>
+       </dia:attribute>
+@@ -14503,17 +14480,17 @@ the dynamic object.
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O112">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="138.575,22.2"/>
++        <dia:point val="107.987,21.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="134.055,22.15;139.425,34.05"/>
++        <dia:rectangle val="107.137,21.35;134.155,34.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="138.575,22.2"/>
+-        <dia:point val="138.575,29"/>
++        <dia:point val="107.987,21.4"/>
++        <dia:point val="107.987,29"/>
+         <dia:point val="134.105,29"/>
+         <dia:point val="134.105,34"/>
+       </dia:attribute>
+@@ -14545,17 +14522,17 @@ the dynamic object.
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O113">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="138.575,22.2"/>
++        <dia:point val="107.987,21.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="137.725,22.15;142.446,42.05"/>
++        <dia:rectangle val="107.137,21.35;142.446,42.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="138.575,22.2"/>
+-        <dia:point val="138.575,29"/>
++        <dia:point val="107.987,21.4"/>
++        <dia:point val="107.987,29"/>
+         <dia:point val="142.396,29"/>
+         <dia:point val="142.396,42"/>
+       </dia:attribute>
+@@ -14587,17 +14564,17 @@ the dynamic object.
+     </dia:object>
+     <dia:object type="UML - Generalization" version="1" id="O114">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="138.575,22.2"/>
++        <dia:point val="107.987,21.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="137.725,22.15;149.407,34.05"/>
++        <dia:rectangle val="107.137,21.35;149.407,34.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="138.575,22.2"/>
+-        <dia:point val="138.575,29"/>
++        <dia:point val="107.987,21.4"/>
++        <dia:point val="107.987,29"/>
+         <dia:point val="149.357,29"/>
+         <dia:point val="149.357,34"/>
+       </dia:attribute>
+@@ -16094,7 +16071,7 @@ registry of all available formatters.#</dia:string>
+         <dia:point val="112.95,7.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="102.52,7.55;113.8,17.05"/>
++        <dia:rectangle val="112.1,7.55;139.62,17.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -16102,8 +16079,8 @@ registry of all available formatters.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="112.95,7.6"/>
+         <dia:point val="112.95,12.7"/>
+-        <dia:point val="102.57,12.7"/>
+-        <dia:point val="102.57,17"/>
++        <dia:point val="139.57,12.7"/>
++        <dia:point val="139.57,17"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -16136,7 +16113,7 @@ registry of all available formatters.#</dia:string>
+         <dia:point val="112.95,7.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="112.1,7.55;138.625,17.05"/>
++        <dia:rectangle val="107.938,7.55;113.8,17.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -16144,8 +16121,8 @@ registry of all available formatters.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="112.95,7.6"/>
+         <dia:point val="112.95,12.7"/>
+-        <dia:point val="138.575,12.7"/>
+-        <dia:point val="138.575,17"/>
++        <dia:point val="107.987,12.7"/>
++        <dia:point val="107.987,17"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+diff --git a/doc/agile/sprint_backlog_77.org b/doc/agile/sprint_backlog_77.org
+index 6d9d0cd..8336ae1 100644
+--- a/doc/agile/sprint_backlog_77.org
++++ b/doc/agile/sprint_backlog_77.org
+@@ -13,14 +13,14 @@
+ ** Active
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
+-#+CAPTION: Clock summary at [2016-01-02 Sat 00:10]
++#+CAPTION: Clock summary at [2016-01-02 Sat 00:41]
+ | <75>                                                                        |         |       |       |
+ | Headline                                                                    | Time    |       |       |
+ |-----------------------------------------------------------------------------+---------+-------+-------|
+-| *Total time*                                                                | *37:00* |       |       |
++| *Total time*                                                                | *37:30* |       |       |
+ |-----------------------------------------------------------------------------+---------+-------+-------|
+-| Stories                                                                     | 37:00   |       |       |
+-| Active                                                                      |         | 37:00 |       |
++| Stories                                                                     | 37:30   |       |       |
++| Active                                                                      |         | 37:30 |       |
+ | STARTED Sprint and product backlog grooming                                 |         |       |  2:16 |
+ | STARTED Update manual                                                       |         |       |  0:43 |
+ | STARTED Update Linux CDash agent                                            |         |       |  0:09 |
+@@ -35,7 +35,7 @@
+ | COMPLETED Update settings bundle to include property settings               |         |       |  1:33 |
+ | COMPLETED Use qualified name as keys for repositories in cpp                |         |       |  0:34 |
+ | STARTED Re-read MDSD book                                                   |         |       | 15:00 |
+-| STARTED Supply formatter properties and settings directly to formatter      |         |       |  0:18 |
++| STARTED Supply formatter properties and settings directly to formatter      |         |       |  0:48 |
+ #+end:
+ 
+ *** STARTED Sprint and product backlog grooming                       :story:
+@@ -292,6 +292,7 @@ with the objective of summarising it into a chapter in the manual.
+ Clock manually adjusted to reflect reading time.
+ 
+ *** STARTED Supply formatter properties and settings directly to formatter :story:
++    CLOCK: [2016-01-02 Sat 00:11]--[2016-01-02 Sat 00:41] =>  0:30
+     CLOCK: [2016-01-01 Fri 23:15]--[2016-01-01 Fri 23:33] =>  0:18
+ 
+ In preparation for removing the cpp formattables, we need to supply
+diff --git a/projects/cpp/include/dogen/cpp/types/formattables/class_info.hpp b/projects/cpp/include/dogen/cpp/types/formattables/class_info.hpp
+index ac7a050..8d5c113 100644
+--- a/projects/cpp/include/dogen/cpp/types/formattables/class_info.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formattables/class_info.hpp
+@@ -60,8 +60,7 @@ public:
+         const std::string& qualified_name,
+         const std::string& documentation,
+         const std::list<std::string>& namespaces,
+-        const dogen::cpp::settings::bundle& settings,
+-        const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
++        const std::string& id,
+         const std::list<dogen::cpp::formattables::property_info>& properties,
+         const std::list<dogen::cpp::formattables::property_info>& all_properties,
+         const bool requires_stream_manipulators,
+diff --git a/projects/cpp/include/dogen/cpp/types/formattables/concept_info.hpp b/projects/cpp/include/dogen/cpp/types/formattables/concept_info.hpp
+index e5c79fd..285e422 100644
+--- a/projects/cpp/include/dogen/cpp/types/formattables/concept_info.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formattables/concept_info.hpp
+@@ -52,8 +52,7 @@ public:
+         const std::string& qualified_name,
+         const std::string& documentation,
+         const std::list<std::string>& namespaces,
+-        const dogen::cpp::settings::bundle& settings,
+-        const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
++        const std::string& id,
+         const std::list<dogen::cpp::formattables::property_info>& properties,
+         const std::list<dogen::cpp::formattables::property_info>& all_properties);
+ 
+diff --git a/projects/cpp/include/dogen/cpp/types/formattables/entity.hpp b/projects/cpp/include/dogen/cpp/types/formattables/entity.hpp
+index 53d4b50..dc401b9 100644
+--- a/projects/cpp/include/dogen/cpp/types/formattables/entity.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formattables/entity.hpp
+@@ -29,10 +29,7 @@
+ #include <iosfwd>
+ #include <string>
+ #include <algorithm>
+-#include <unordered_map>
+-#include "dogen/cpp/types/settings/bundle.hpp"
+ #include "dogen/cpp/types/formattables/formattable.hpp"
+-#include "dogen/cpp/types/formattables/formatter_properties.hpp"
+ #include "dogen/cpp/serialization/formattables/entity_fwd_ser.hpp"
+ 
+ namespace dogen {
+@@ -58,8 +55,7 @@ public:
+         const std::string& qualified_name,
+         const std::string& documentation,
+         const std::list<std::string>& namespaces,
+-        const dogen::cpp::settings::bundle& settings,
+-        const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties);
++        const std::string& id);
+ 
+ private:
+     template<typename Archive>
+@@ -118,15 +114,10 @@ public:
+     void namespaces(const std::list<std::string>&& v);
+     /**@}*/
+ 
+-    const dogen::cpp::settings::bundle& settings() const;
+-    dogen::cpp::settings::bundle& settings();
+-    void settings(const dogen::cpp::settings::bundle& v);
+-    void settings(const dogen::cpp::settings::bundle&& v);
+-
+-    const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties() const;
+-    std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties();
+-    void formatter_properties(const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& v);
+-    void formatter_properties(const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>&& v);
++    const std::string& id() const;
++    std::string& id();
++    void id(const std::string& v);
++    void id(const std::string&& v);
+ 
+ protected:
+     bool compare(const entity& rhs) const;
+@@ -141,8 +132,7 @@ private:
+     std::string qualified_name_;
+     std::string documentation_;
+     std::list<std::string> namespaces_;
+-    dogen::cpp::settings::bundle settings_;
+-    std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> formatter_properties_;
++    std::string id_;
+ };
+ 
+ inline entity::~entity() noexcept { }
+diff --git a/projects/cpp/include/dogen/cpp/types/formattables/enum_info.hpp b/projects/cpp/include/dogen/cpp/types/formattables/enum_info.hpp
+index 502252c..50f400d 100644
+--- a/projects/cpp/include/dogen/cpp/types/formattables/enum_info.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formattables/enum_info.hpp
+@@ -56,8 +56,7 @@ public:
+         const std::string& qualified_name,
+         const std::string& documentation,
+         const std::list<std::string>& namespaces,
+-        const dogen::cpp::settings::bundle& settings,
+-        const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
++        const std::string& id,
+         const std::list<dogen::cpp::formattables::enumerator_info>& enumerators,
+         const std::string& type);
+ 
+diff --git a/projects/cpp/include/dogen/cpp/types/formattables/exception_info.hpp b/projects/cpp/include/dogen/cpp/types/formattables/exception_info.hpp
+index b681c7a..c20a2e9 100644
+--- a/projects/cpp/include/dogen/cpp/types/formattables/exception_info.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formattables/exception_info.hpp
+@@ -53,8 +53,7 @@ public:
+         const std::string& qualified_name,
+         const std::string& documentation,
+         const std::list<std::string>& namespaces,
+-        const dogen::cpp::settings::bundle& settings,
+-        const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties);
++        const std::string& id);
+ 
+ private:
+     template<typename Archive>
+diff --git a/projects/cpp/include/dogen/cpp/types/formattables/forward_declarations_info.hpp b/projects/cpp/include/dogen/cpp/types/formattables/forward_declarations_info.hpp
+index 8d93c0e..20c0908 100644
+--- a/projects/cpp/include/dogen/cpp/types/formattables/forward_declarations_info.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formattables/forward_declarations_info.hpp
+@@ -53,8 +53,7 @@ public:
+         const std::string& qualified_name,
+         const std::string& documentation,
+         const std::list<std::string>& namespaces,
+-        const dogen::cpp::settings::bundle& settings,
+-        const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
++        const std::string& id,
+         const bool is_enum,
+         const std::string& enum_type,
+         const bool is_exception);
+diff --git a/projects/cpp/include/dogen/cpp/types/formattables/includers_info.hpp b/projects/cpp/include/dogen/cpp/types/formattables/includers_info.hpp
+index 51c0c84..865adb7 100644
+--- a/projects/cpp/include/dogen/cpp/types/formattables/includers_info.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formattables/includers_info.hpp
+@@ -50,8 +50,7 @@ public:
+         const std::string& qualified_name,
+         const std::string& documentation,
+         const std::list<std::string>& namespaces,
+-        const dogen::cpp::settings::bundle& settings,
+-        const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties);
++        const std::string& id);
+ 
+ private:
+     template<typename Archive>
+diff --git a/projects/cpp/include/dogen/cpp/types/formattables/namespace_info.hpp b/projects/cpp/include/dogen/cpp/types/formattables/namespace_info.hpp
+index 9654eb6..939985c 100644
+--- a/projects/cpp/include/dogen/cpp/types/formattables/namespace_info.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formattables/namespace_info.hpp
+@@ -53,8 +53,7 @@ public:
+         const std::string& qualified_name,
+         const std::string& documentation,
+         const std::list<std::string>& namespaces,
+-        const dogen::cpp::settings::bundle& settings,
+-        const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties);
++        const std::string& id);
+ 
+ private:
+     template<typename Archive>
+diff --git a/projects/cpp/include/dogen/cpp/types/formattables/primitive_info.hpp b/projects/cpp/include/dogen/cpp/types/formattables/primitive_info.hpp
+index 9db597a..48c8a78 100644
+--- a/projects/cpp/include/dogen/cpp/types/formattables/primitive_info.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formattables/primitive_info.hpp
+@@ -50,8 +50,7 @@ public:
+         const std::string& qualified_name,
+         const std::string& documentation,
+         const std::list<std::string>& namespaces,
+-        const dogen::cpp::settings::bundle& settings,
+-        const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties);
++        const std::string& id);
+ 
+ private:
+     template<typename Archive>
+diff --git a/projects/cpp/include/dogen/cpp/types/formattables/registrar_info.hpp b/projects/cpp/include/dogen/cpp/types/formattables/registrar_info.hpp
+index ade31b1..4e846e8 100644
+--- a/projects/cpp/include/dogen/cpp/types/formattables/registrar_info.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formattables/registrar_info.hpp
+@@ -55,8 +55,7 @@ public:
+         const std::string& qualified_name,
+         const std::string& documentation,
+         const std::list<std::string>& namespaces,
+-        const dogen::cpp::settings::bundle& settings,
+-        const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
++        const std::string& id,
+         const std::list<std::string>& leaves,
+         const std::list<std::string>& model_dependencies);
+ 
+diff --git a/projects/cpp/include/dogen/cpp/types/formattables/transformer.hpp b/projects/cpp/include/dogen/cpp/types/formattables/transformer.hpp
+index d43f53e..2ed402f 100644
+--- a/projects/cpp/include/dogen/cpp/types/formattables/transformer.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formattables/transformer.hpp
+@@ -53,8 +53,6 @@
+ #include "dogen/cpp/types/formattables/primitive_info.hpp"
+ #include "dogen/cpp/types/formattables/forward_declarations_info.hpp"
+ #include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
+-#include "dogen/cpp/types/settings/bundle_repository.hpp"
+-#include "dogen/cpp/types/formattables/formatter_properties_repository.hpp"
+ 
+ namespace dogen {
+ namespace cpp {
+@@ -66,8 +64,6 @@ namespace formattables {
+ class transformer {
+ public:
+     transformer(const settings::opaque_settings_builder& osb,
+-        const settings::bundle_repository& brp,
+-        const formatter_properties_repository& frp,
+         const yarn::model& m);
+ 
+ private:
+@@ -216,8 +212,6 @@ public:
+ 
+ private:
+     const settings::opaque_settings_builder& opaque_settings_builder_;
+-    const settings::bundle_repository& bundle_repository_;
+-    const formatter_properties_repository& formatter_properties_repository_;
+     const yarn::model& model_;
+ };
+ 
+diff --git a/projects/cpp/include/dogen/cpp/types/formattables/visitor_info.hpp b/projects/cpp/include/dogen/cpp/types/formattables/visitor_info.hpp
+index 16f5dfa..937dac4 100644
+--- a/projects/cpp/include/dogen/cpp/types/formattables/visitor_info.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formattables/visitor_info.hpp
+@@ -55,8 +55,7 @@ public:
+         const std::string& qualified_name,
+         const std::string& documentation,
+         const std::list<std::string>& namespaces,
+-        const dogen::cpp::settings::bundle& settings,
+-        const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
++        const std::string& id,
+         const std::list<dogen::cpp::formattables::visited_type_info>& types);
+ 
+ private:
+diff --git a/projects/cpp/include/dogen/cpp/types/formattables/workflow.hpp b/projects/cpp/include/dogen/cpp/types/formattables/workflow.hpp
+index aafd5fb..3b5cfc7 100644
+--- a/projects/cpp/include/dogen/cpp/types/formattables/workflow.hpp
++++ b/projects/cpp/include/dogen/cpp/types/formattables/workflow.hpp
+@@ -26,6 +26,7 @@
+ #endif
+ 
+ #include <memory>
++#include <utility>
+ #include <forward_list>
+ #include "dogen/dynamic/types/object.hpp"
+ #include "dogen/dynamic/types/repository.hpp"
+@@ -83,8 +84,6 @@ private:
+      */
+     std::forward_list<std::shared_ptr<formattables::formattable> >
+     from_transformer_activity(const settings::opaque_settings_builder& osb,
+-        const settings::bundle_repository& brp,
+-        const formatter_properties_repository& fprp,
+         const yarn::model& m) const;
+ 
+     /**
+@@ -107,7 +106,10 @@ public:
+     /**
+      * @brief Executes the workflow.
+      */
+-    std::forward_list<std::shared_ptr<formattables::formattable> >
++    std::pair<
++        std::forward_list<std::shared_ptr<formattables::formattable> >,
++        formattables::formatter_properties_repository
++    >
+     execute(const config::cpp_options& opts,
+         const dynamic::repository& drp,
+         const dynamic::object& root_object,
+diff --git a/projects/cpp/src/hash/formattables/entity_hash.cpp b/projects/cpp/src/hash/formattables/entity_hash.cpp
+index 3c22b65..c09ef44 100644
+--- a/projects/cpp/src/hash/formattables/entity_hash.cpp
++++ b/projects/cpp/src/hash/formattables/entity_hash.cpp
+@@ -18,10 +18,8 @@
+  * MA 02110-1301, USA.
+  *
+  */
+-#include "dogen/cpp/hash/settings/bundle_hash.hpp"
+ #include "dogen/cpp/hash/formattables/entity_hash.hpp"
+ #include "dogen/cpp/hash/formattables/formattable_hash.hpp"
+-#include "dogen/cpp/hash/formattables/formatter_properties_hash.hpp"
+ 
+ namespace {
+ 
+@@ -39,15 +37,6 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
+     return seed;
+ }
+ 
+-inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_formattables_formatter_properties(const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& v) {
+-    std::size_t seed(0);
+-    for (const auto i : v) {
+-        combine(seed, i.first);
+-        combine(seed, i.second);
+-    }
+-    return seed;
+-}
+-
+ }
+ 
+ namespace dogen {
+@@ -63,8 +52,7 @@ std::size_t entity_hasher::hash(const entity& v) {
+     combine(seed, v.qualified_name());
+     combine(seed, v.documentation());
+     combine(seed, hash_std_list_std_string(v.namespaces()));
+-    combine(seed, v.settings());
+-    combine(seed, hash_std_unordered_map_std_string_dogen_cpp_formattables_formatter_properties(v.formatter_properties()));
++    combine(seed, v.id());
+ 
+     return seed;
+ }
+diff --git a/projects/cpp/src/io/formattables/entity_io.cpp b/projects/cpp/src/io/formattables/entity_io.cpp
+index 306ba78..49cade5 100644
+--- a/projects/cpp/src/io/formattables/entity_io.cpp
++++ b/projects/cpp/src/io/formattables/entity_io.cpp
+@@ -20,10 +20,8 @@
+  */
+ #include <ostream>
+ #include <boost/algorithm/string.hpp>
+-#include "dogen/cpp/io/settings/bundle_io.hpp"
+ #include "dogen/cpp/io/formattables/entity_io.hpp"
+ #include "dogen/cpp/io/formattables/formattable_io.hpp"
+-#include "dogen/cpp/io/formattables/formatter_properties_io.hpp"
+ 
+ namespace dogen {
+ namespace cpp {
+diff --git a/projects/cpp/src/serialization/formattables/entity_ser.cpp b/projects/cpp/src/serialization/formattables/entity_ser.cpp
+index 4e48e9e..e409eee 100644
+--- a/projects/cpp/src/serialization/formattables/entity_ser.cpp
++++ b/projects/cpp/src/serialization/formattables/entity_ser.cpp
+@@ -27,10 +27,8 @@
+ #include <boost/archive/text_oarchive.hpp>
+ #include <boost/archive/binary_iarchive.hpp>
+ #include <boost/archive/binary_oarchive.hpp>
+-#include <boost/serialization/unordered_map.hpp>
+ #include <boost/archive/polymorphic_iarchive.hpp>
+ #include <boost/archive/polymorphic_oarchive.hpp>
+-#include "dogen/cpp/serialization/settings/bundle_ser.hpp"
+ #include "dogen/cpp/serialization/formattables/entity_ser.hpp"
+ #include "dogen/cpp/serialization/formattables/enum_info_ser.hpp"
+ #include "dogen/cpp/serialization/formattables/class_info_ser.hpp"
+@@ -42,7 +40,6 @@
+ #include "dogen/cpp/serialization/formattables/namespace_info_ser.hpp"
+ #include "dogen/cpp/serialization/formattables/primitive_info_ser.hpp"
+ #include "dogen/cpp/serialization/formattables/registrar_info_ser.hpp"
+-#include "dogen/cpp/serialization/formattables/formatter_properties_ser.hpp"
+ #include "dogen/cpp/serialization/formattables/forward_declarations_info_ser.hpp"
+ 
+ BOOST_CLASS_TRACKING(
+@@ -62,8 +59,7 @@ void save(Archive& ar,
+     ar << make_nvp("qualified_name", v.qualified_name_);
+     ar << make_nvp("documentation", v.documentation_);
+     ar << make_nvp("namespaces", v.namespaces_);
+-    ar << make_nvp("settings", v.settings_);
+-    ar << make_nvp("formatter_properties", v.formatter_properties_);
++    ar << make_nvp("id", v.id_);
+ }
+ 
+ template<typename Archive>
+@@ -76,8 +72,7 @@ void load(Archive& ar,
+     ar >> make_nvp("qualified_name", v.qualified_name_);
+     ar >> make_nvp("documentation", v.documentation_);
+     ar >> make_nvp("namespaces", v.namespaces_);
+-    ar >> make_nvp("settings", v.settings_);
+-    ar >> make_nvp("formatter_properties", v.formatter_properties_);
++    ar >> make_nvp("id", v.id_);
+ }
+ 
+ } }
+diff --git a/projects/cpp/src/test_data/formattables/entity_td.cpp b/projects/cpp/src/test_data/formattables/entity_td.cpp
+index 82c00e7..8b2f914 100644
+--- a/projects/cpp/src/test_data/formattables/entity_td.cpp
++++ b/projects/cpp/src/test_data/formattables/entity_td.cpp
+@@ -19,7 +19,6 @@
+  *
+  */
+ #include <sstream>
+-#include "dogen/cpp/test_data/settings/bundle_td.hpp"
+ #include "dogen/cpp/test_data/formattables/entity_td.hpp"
+ #include "dogen/cpp/test_data/formattables/enum_info_td.hpp"
+ #include "dogen/cpp/test_data/formattables/class_info_td.hpp"
+@@ -31,7 +30,6 @@
+ #include "dogen/cpp/test_data/formattables/namespace_info_td.hpp"
+ #include "dogen/cpp/test_data/formattables/primitive_info_td.hpp"
+ #include "dogen/cpp/test_data/formattables/registrar_info_td.hpp"
+-#include "dogen/cpp/test_data/formattables/formatter_properties_td.hpp"
+ #include "dogen/cpp/test_data/formattables/forward_declarations_info_td.hpp"
+ 
+ namespace {
+@@ -50,24 +48,6 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
+     return r;
+ }
+ 
+-dogen::cpp::settings::bundle
+-create_dogen_cpp_settings_bundle(const unsigned int position) {
+-    return dogen::cpp::settings::bundle_generator::create(position);
+-}
+-
+-dogen::cpp::formattables::formatter_properties
+-create_dogen_cpp_formattables_formatter_properties(const unsigned int position) {
+-    return dogen::cpp::formattables::formatter_properties_generator::create(position);
+-}
+-
+-std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> create_std_unordered_map_std_string_dogen_cpp_formattables_formatter_properties(unsigned int position) {
+-    std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> r;
+-    for (unsigned int i(0); i < 4; ++i) {
+-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_cpp_formattables_formatter_properties(position + i)));
+-    }
+-    return r;
+-}
+-
+ }
+ 
+ namespace dogen {
+@@ -81,8 +61,7 @@ populate(const unsigned int position, result_type& v) {
+     v.qualified_name(create_std_string(position + 1));
+     v.documentation(create_std_string(position + 2));
+     v.namespaces(create_std_list_std_string(position + 3));
+-    v.settings(create_dogen_cpp_settings_bundle(position + 4));
+-    v.formatter_properties(create_std_unordered_map_std_string_dogen_cpp_formattables_formatter_properties(position + 5));
++    v.id(create_std_string(position + 4));
+ }
+ 
+ entity_generator::result_type*
+diff --git a/projects/cpp/src/types/formattables/class_info.cpp b/projects/cpp/src/types/formattables/class_info.cpp
+index 198da49..9cf00d2 100644
+--- a/projects/cpp/src/types/formattables/class_info.cpp
++++ b/projects/cpp/src/types/formattables/class_info.cpp
+@@ -98,8 +98,7 @@ class_info::class_info(
+     const std::string& qualified_name,
+     const std::string& documentation,
+     const std::list<std::string>& namespaces,
+-    const dogen::cpp::settings::bundle& settings,
+-    const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
++    const std::string& id,
+     const std::list<dogen::cpp::formattables::property_info>& properties,
+     const std::list<dogen::cpp::formattables::property_info>& all_properties,
+     const bool requires_stream_manipulators,
+@@ -122,8 +121,7 @@ class_info::class_info(
+       qualified_name,
+       documentation,
+       namespaces,
+-      settings,
+-      formatter_properties),
++      id),
+       properties_(properties),
+       all_properties_(all_properties),
+       requires_stream_manipulators_(requires_stream_manipulators),
+diff --git a/projects/cpp/src/types/formattables/concept_info.cpp b/projects/cpp/src/types/formattables/concept_info.cpp
+index 4617b80..224af29 100644
+--- a/projects/cpp/src/types/formattables/concept_info.cpp
++++ b/projects/cpp/src/types/formattables/concept_info.cpp
+@@ -48,8 +48,7 @@ concept_info::concept_info(
+     const std::string& qualified_name,
+     const std::string& documentation,
+     const std::list<std::string>& namespaces,
+-    const dogen::cpp::settings::bundle& settings,
+-    const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
++    const std::string& id,
+     const std::list<dogen::cpp::formattables::property_info>& properties,
+     const std::list<dogen::cpp::formattables::property_info>& all_properties)
+     : dogen::cpp::formattables::entity(
+@@ -59,8 +58,7 @@ concept_info::concept_info(
+       qualified_name,
+       documentation,
+       namespaces,
+-      settings,
+-      formatter_properties),
++      id),
+       properties_(properties),
+       all_properties_(all_properties) { }
+ 
+diff --git a/projects/cpp/src/types/formattables/entity.cpp b/projects/cpp/src/types/formattables/entity.cpp
+index d2820f4..2d41b06 100644
+--- a/projects/cpp/src/types/formattables/entity.cpp
++++ b/projects/cpp/src/types/formattables/entity.cpp
+@@ -20,10 +20,8 @@
+  */
+ #include <ostream>
+ #include <boost/algorithm/string.hpp>
+-#include "dogen/cpp/io/settings/bundle_io.hpp"
+ #include "dogen/cpp/types/formattables/entity.hpp"
+ #include "dogen/cpp/io/formattables/formattable_io.hpp"
+-#include "dogen/cpp/io/formattables/formatter_properties_io.hpp"
+ 
+ inline std::string tidy_up_string(std::string s) {
+     boost::replace_all(s, "\r\n", "<new_line>");
+@@ -46,24 +44,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
+ 
+ }
+ 
+-namespace std {
+-
+-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& v) {
+-    s << "[";
+-    for (auto i(v.begin()); i != v.end(); ++i) {
+-        if (i != v.begin()) s << ", ";
+-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+-        s << "\"" << tidy_up_string(i->first) << "\"";
+-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+-        s << i->second;
+-        s << " } ]";
+-    }
+-    s << " ] ";
+-    return s;
+-}
+-
+-}
+-
+ namespace dogen {
+ namespace cpp {
+ namespace formattables {
+@@ -75,8 +55,7 @@ entity::entity(
+     const std::string& qualified_name,
+     const std::string& documentation,
+     const std::list<std::string>& namespaces,
+-    const dogen::cpp::settings::bundle& settings,
+-    const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties)
++    const std::string& id)
+     : dogen::cpp::formattables::formattable(
+       identity,
+       origin_type),
+@@ -84,8 +63,7 @@ entity::entity(
+       qualified_name_(qualified_name),
+       documentation_(documentation),
+       namespaces_(namespaces),
+-      settings_(settings),
+-      formatter_properties_(formatter_properties) { }
++      id_(id) { }
+ 
+ void entity::to_stream(std::ostream& s) const {
+     s << " { "
+@@ -97,8 +75,7 @@ void entity::to_stream(std::ostream& s) const {
+       << "\"qualified_name\": " << "\"" << tidy_up_string(qualified_name_) << "\"" << ", "
+       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
+       << "\"namespaces\": " << namespaces_ << ", "
+-      << "\"settings\": " << settings_ << ", "
+-      << "\"formatter_properties\": " << formatter_properties_
++      << "\"id\": " << "\"" << tidy_up_string(id_) << "\""
+       << " }";
+ }
+ 
+@@ -110,8 +87,7 @@ void entity::swap(entity& other) noexcept {
+     swap(qualified_name_, other.qualified_name_);
+     swap(documentation_, other.documentation_);
+     swap(namespaces_, other.namespaces_);
+-    swap(settings_, other.settings_);
+-    swap(formatter_properties_, other.formatter_properties_);
++    swap(id_, other.id_);
+ }
+ 
+ bool entity::compare(const entity& rhs) const {
+@@ -120,8 +96,7 @@ bool entity::compare(const entity& rhs) const {
+         qualified_name_ == rhs.qualified_name_ &&
+         documentation_ == rhs.documentation_ &&
+         namespaces_ == rhs.namespaces_ &&
+-        settings_ == rhs.settings_ &&
+-        formatter_properties_ == rhs.formatter_properties_;
++        id_ == rhs.id_;
+ }
+ 
+ const std::string& entity::name() const {
+@@ -188,36 +163,20 @@ void entity::namespaces(const std::list<std::string>&& v) {
+     namespaces_ = std::move(v);
+ }
+ 
+-const dogen::cpp::settings::bundle& entity::settings() const {
+-    return settings_;
+-}
+-
+-dogen::cpp::settings::bundle& entity::settings() {
+-    return settings_;
+-}
+-
+-void entity::settings(const dogen::cpp::settings::bundle& v) {
+-    settings_ = v;
+-}
+-
+-void entity::settings(const dogen::cpp::settings::bundle&& v) {
+-    settings_ = std::move(v);
+-}
+-
+-const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& entity::formatter_properties() const {
+-    return formatter_properties_;
++const std::string& entity::id() const {
++    return id_;
+ }
+ 
+-std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& entity::formatter_properties() {
+-    return formatter_properties_;
++std::string& entity::id() {
++    return id_;
+ }
+ 
+-void entity::formatter_properties(const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& v) {
+-    formatter_properties_ = v;
++void entity::id(const std::string& v) {
++    id_ = v;
+ }
+ 
+-void entity::formatter_properties(const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>&& v) {
+-    formatter_properties_ = std::move(v);
++void entity::id(const std::string&& v) {
++    id_ = std::move(v);
+ }
+ 
+ } } }
+diff --git a/projects/cpp/src/types/formattables/enum_info.cpp b/projects/cpp/src/types/formattables/enum_info.cpp
+index c0beb37..42eb2ea 100644
+--- a/projects/cpp/src/types/formattables/enum_info.cpp
++++ b/projects/cpp/src/types/formattables/enum_info.cpp
+@@ -56,8 +56,7 @@ enum_info::enum_info(
+     const std::string& qualified_name,
+     const std::string& documentation,
+     const std::list<std::string>& namespaces,
+-    const dogen::cpp::settings::bundle& settings,
+-    const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
++    const std::string& id,
+     const std::list<dogen::cpp::formattables::enumerator_info>& enumerators,
+     const std::string& type)
+     : dogen::cpp::formattables::entity(
+@@ -67,8 +66,7 @@ enum_info::enum_info(
+       qualified_name,
+       documentation,
+       namespaces,
+-      settings,
+-      formatter_properties),
++      id),
+       enumerators_(enumerators),
+       type_(type) { }
+ 
+diff --git a/projects/cpp/src/types/formattables/exception_info.cpp b/projects/cpp/src/types/formattables/exception_info.cpp
+index 8d95443..1a915b8 100644
+--- a/projects/cpp/src/types/formattables/exception_info.cpp
++++ b/projects/cpp/src/types/formattables/exception_info.cpp
+@@ -33,8 +33,7 @@ exception_info::exception_info(
+     const std::string& qualified_name,
+     const std::string& documentation,
+     const std::list<std::string>& namespaces,
+-    const dogen::cpp::settings::bundle& settings,
+-    const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties)
++    const std::string& id)
+     : dogen::cpp::formattables::entity(
+       identity,
+       origin_type,
+@@ -42,8 +41,7 @@ exception_info::exception_info(
+       qualified_name,
+       documentation,
+       namespaces,
+-      settings,
+-      formatter_properties) { }
++      id) { }
+ 
+ void exception_info::to_stream(std::ostream& s) const {
+     s << " { "
+diff --git a/projects/cpp/src/types/formattables/forward_declarations_info.cpp b/projects/cpp/src/types/formattables/forward_declarations_info.cpp
+index 43eeeb2..ffb22bd 100644
+--- a/projects/cpp/src/types/formattables/forward_declarations_info.cpp
++++ b/projects/cpp/src/types/formattables/forward_declarations_info.cpp
+@@ -46,8 +46,7 @@ forward_declarations_info::forward_declarations_info(
+     const std::string& qualified_name,
+     const std::string& documentation,
+     const std::list<std::string>& namespaces,
+-    const dogen::cpp::settings::bundle& settings,
+-    const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
++    const std::string& id,
+     const bool is_enum,
+     const std::string& enum_type,
+     const bool is_exception)
+@@ -58,8 +57,7 @@ forward_declarations_info::forward_declarations_info(
+       qualified_name,
+       documentation,
+       namespaces,
+-      settings,
+-      formatter_properties),
++      id),
+       is_enum_(is_enum),
+       enum_type_(enum_type),
+       is_exception_(is_exception) { }
+diff --git a/projects/cpp/src/types/formattables/includers_info.cpp b/projects/cpp/src/types/formattables/includers_info.cpp
+index 04cb1a7..6f67198 100644
+--- a/projects/cpp/src/types/formattables/includers_info.cpp
++++ b/projects/cpp/src/types/formattables/includers_info.cpp
+@@ -33,8 +33,7 @@ includers_info::includers_info(
+     const std::string& qualified_name,
+     const std::string& documentation,
+     const std::list<std::string>& namespaces,
+-    const dogen::cpp::settings::bundle& settings,
+-    const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties)
++    const std::string& id)
+     : dogen::cpp::formattables::entity(
+       identity,
+       origin_type,
+@@ -42,8 +41,7 @@ includers_info::includers_info(
+       qualified_name,
+       documentation,
+       namespaces,
+-      settings,
+-      formatter_properties) { }
++      id) { }
+ 
+ void includers_info::to_stream(std::ostream& s) const {
+     s << " { "
+diff --git a/projects/cpp/src/types/formattables/namespace_info.cpp b/projects/cpp/src/types/formattables/namespace_info.cpp
+index d08d13d..f3cc6ba 100644
+--- a/projects/cpp/src/types/formattables/namespace_info.cpp
++++ b/projects/cpp/src/types/formattables/namespace_info.cpp
+@@ -33,8 +33,7 @@ namespace_info::namespace_info(
+     const std::string& qualified_name,
+     const std::string& documentation,
+     const std::list<std::string>& namespaces,
+-    const dogen::cpp::settings::bundle& settings,
+-    const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties)
++    const std::string& id)
+     : dogen::cpp::formattables::entity(
+       identity,
+       origin_type,
+@@ -42,8 +41,7 @@ namespace_info::namespace_info(
+       qualified_name,
+       documentation,
+       namespaces,
+-      settings,
+-      formatter_properties) { }
++      id) { }
+ 
+ void namespace_info::to_stream(std::ostream& s) const {
+     s << " { "
+diff --git a/projects/cpp/src/types/formattables/primitive_info.cpp b/projects/cpp/src/types/formattables/primitive_info.cpp
+index 36291ed..e4399ae 100644
+--- a/projects/cpp/src/types/formattables/primitive_info.cpp
++++ b/projects/cpp/src/types/formattables/primitive_info.cpp
+@@ -33,8 +33,7 @@ primitive_info::primitive_info(
+     const std::string& qualified_name,
+     const std::string& documentation,
+     const std::list<std::string>& namespaces,
+-    const dogen::cpp::settings::bundle& settings,
+-    const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties)
++    const std::string& id)
+     : dogen::cpp::formattables::entity(
+       identity,
+       origin_type,
+@@ -42,8 +41,7 @@ primitive_info::primitive_info(
+       qualified_name,
+       documentation,
+       namespaces,
+-      settings,
+-      formatter_properties) { }
++      id) { }
+ 
+ void primitive_info::to_stream(std::ostream& s) const {
+     s << " { "
+diff --git a/projects/cpp/src/types/formattables/registrar_info.cpp b/projects/cpp/src/types/formattables/registrar_info.cpp
+index c61f4e4..d0235b8 100644
+--- a/projects/cpp/src/types/formattables/registrar_info.cpp
++++ b/projects/cpp/src/types/formattables/registrar_info.cpp
+@@ -55,8 +55,7 @@ registrar_info::registrar_info(
+     const std::string& qualified_name,
+     const std::string& documentation,
+     const std::list<std::string>& namespaces,
+-    const dogen::cpp::settings::bundle& settings,
+-    const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
++    const std::string& id,
+     const std::list<std::string>& leaves,
+     const std::list<std::string>& model_dependencies)
+     : dogen::cpp::formattables::entity(
+@@ -66,8 +65,7 @@ registrar_info::registrar_info(
+       qualified_name,
+       documentation,
+       namespaces,
+-      settings,
+-      formatter_properties),
++      id),
+       leaves_(leaves),
+       model_dependencies_(model_dependencies) { }
+ 
+diff --git a/projects/cpp/src/types/formattables/transformer.cpp b/projects/cpp/src/types/formattables/transformer.cpp
+index 7e3b108..5c3a1c3 100644
+--- a/projects/cpp/src/types/formattables/transformer.cpp
++++ b/projects/cpp/src/types/formattables/transformer.cpp
+@@ -92,10 +92,6 @@ const std::string type_has_no_inclusion_dependencies(
+     "Could not find inclusion dependencies for type: ");
+ const std::string type_has_no_inclusion("Could not find inclusion for type: ");
+ const std::string no_visitees("Visitor is not visiting any types: ");
+-const std::string formatter_properties_missing(
+-    "Could not find formatter properties for type: ");
+-const std::string settings_bundle_missing(
+-    "Could not find settings bundle for type: ");
+ const std::string cast_failure("Failed to cast type: ");
+ 
+ bool is_char_like(const std::string& type_name) {
+@@ -208,11 +204,8 @@ inline bool is(const yarn::model& m, const yarn::name& n) {
+ }
+ 
+ transformer::transformer(const settings::opaque_settings_builder& osb,
+-    const settings::bundle_repository& brp,
+-    const formatter_properties_repository& frp,
+     const yarn::model& m)
+-    : opaque_settings_builder_(osb), bundle_repository_(brp),
+-      formatter_properties_repository_(frp), model_(m) {}
++    : opaque_settings_builder_(osb), model_(m) {}
+ 
+ void transformer::
+ populate_formattable_properties(const yarn::name& n, formattable& f) const {
+@@ -226,31 +219,11 @@ void transformer::populate_entity_properties(const yarn::name& n,
+ 
+     e.name(n.simple());
+     e.documentation(documentation);
+-
+-    const auto& fpn(formatter_properties_repository_.
+-        formatter_properties_by_name());
+-    const auto i(fpn.find(n.qualified()));
+-    if (i == fpn.end()) {
+-        const auto qn(n.qualified());
+-        BOOST_LOG_SEV(lg, error) << formatter_properties_missing << qn;
+-        BOOST_THROW_EXCEPTION(
+-            transformation_error(formatter_properties_missing + qn));
+-    }
+-    e.formatter_properties(i->second);
++    e.id(n.qualified());
+ 
+     name_builder b;
+     e.namespaces(b.namespace_list(model_, n));
+ 
+-    const auto& bn(bundle_repository_.bundles_by_name());
+-    const auto j(bn.find(n.qualified()));
+-    if (j == bn.end()) {
+-        const auto qn(n.qualified());
+-        BOOST_LOG_SEV(lg, error) << settings_bundle_missing << qn;
+-        BOOST_THROW_EXCEPTION(
+-            transformation_error(settings_bundle_missing + qn));
+-    }
+-    e.settings(j->second);
+-
+     std::list<std::string> ns(e.namespaces());
+     ns.push_back(e.name());
+ 
+diff --git a/projects/cpp/src/types/formattables/visitor_info.cpp b/projects/cpp/src/types/formattables/visitor_info.cpp
+index 90c3ac5..6e7fac8 100644
+--- a/projects/cpp/src/types/formattables/visitor_info.cpp
++++ b/projects/cpp/src/types/formattables/visitor_info.cpp
+@@ -48,8 +48,7 @@ visitor_info::visitor_info(
+     const std::string& qualified_name,
+     const std::string& documentation,
+     const std::list<std::string>& namespaces,
+-    const dogen::cpp::settings::bundle& settings,
+-    const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
++    const std::string& id,
+     const std::list<dogen::cpp::formattables::visited_type_info>& types)
+     : dogen::cpp::formattables::entity(
+       identity,
+@@ -58,8 +57,7 @@ visitor_info::visitor_info(
+       qualified_name,
+       documentation,
+       namespaces,
+-      settings,
+-      formatter_properties),
++      id),
+       types_(types) { }
+ 
+ void visitor_info::to_stream(std::ostream& s) const {
+diff --git a/projects/cpp/src/types/formattables/workflow.cpp b/projects/cpp/src/types/formattables/workflow.cpp
+index 25fea7b..9a4c304 100644
+--- a/projects/cpp/src/types/formattables/workflow.cpp
++++ b/projects/cpp/src/types/formattables/workflow.cpp
+@@ -119,12 +119,10 @@ create_formatter_properties(const dynamic::repository& srp,
+ std::forward_list<std::shared_ptr<formattables::formattable> >
+ workflow::from_transformer_activity(
+     const settings::opaque_settings_builder& osb,
+-    const settings::bundle_repository& brp,
+-    const formatter_properties_repository& fprp,
+     const yarn::model& m) const {
+     BOOST_LOG_SEV(lg, debug) << "Transforming formattables.";
+ 
+-    const transformer t(osb, brp, fprp, m);
++    const transformer t(osb, m);
+     generator g(t);
+     for (const auto& pair : m.elements()) {
+         const auto& e(*pair.second);
+@@ -168,7 +166,10 @@ workflow::from_factory_activity(const config::cpp_options& opts,
+     return r;
+ }
+ 
+-std::forward_list<std::shared_ptr<formattables::formattable> >
++std::pair<
++    std::forward_list<std::shared_ptr<formattables::formattable> >,
++    formattables::formatter_properties_repository
++>
+ workflow::execute(const config::cpp_options& opts,
+     const dynamic::repository& drp,
+     const dynamic::object& root_object,
+@@ -184,14 +185,14 @@ workflow::execute(const config::cpp_options& opts,
+     const auto pdrp(create_path_derivatives_repository(opts, ps, m));
+     const auto fprp(create_formatter_properties(drp, ro, brp, pdrp, fc, m));
+ 
+-    auto r(from_transformer_activity(osb, brp, fprp, m));
+-    r.splice_after(r.before_begin(),
++    auto formattables(from_transformer_activity(osb, m));
++    formattables.splice_after(formattables.before_begin(),
+         from_factory_activity(opts, drp, ro, gsf, brp, ps, pdrp, fprp, fc, m));
+-    BOOST_LOG_SEV(lg, debug) << "Formattables: " << r;
++    BOOST_LOG_SEV(lg, debug) << "Formattables: " << formattables;
+ 
+     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
+ 
+-    return r;
++    return std::make_pair(formattables, fprp);
+ }
+ 
+ } } }
+diff --git a/projects/cpp/src/types/workflow.cpp b/projects/cpp/src/types/workflow.cpp
+index f5c48c7..7fc412a 100644
+--- a/projects/cpp/src/types/workflow.cpp
++++ b/projects/cpp/src/types/workflow.cpp
+@@ -159,7 +159,7 @@ workflow::generate(const config::knitting_options& ko,
+     const auto& fc(formatters::workflow::registrar().formatter_container());
+ 
+     const auto& kcpp(ko.cpp());
+-    const auto f(
++    const auto pair(
+         create_formattables_activty(kcpp, rp, ro, gsf, fc, osb, brp, m));
+     const auto r(format_activty(f));
+ 
