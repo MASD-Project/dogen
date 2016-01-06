@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/formatters/context.hpp"
 #include "dogen/cpp/types/formattables/includers_info.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
 
@@ -35,18 +36,18 @@ namespace formatters {
 
 class includers_formatter_interface : public formatter_interface {
 public:
-  includers_formatter_interface() = default;
-  includers_formatter_interface(
-    const includers_formatter_interface&) = delete;
-  includers_formatter_interface(includers_formatter_interface&&) = default;
-  virtual ~includers_formatter_interface() noexcept = 0;
+    includers_formatter_interface() = default;
+    includers_formatter_interface(
+        const includers_formatter_interface&) = delete;
+    includers_formatter_interface(includers_formatter_interface&&) = default;
+    virtual ~includers_formatter_interface() noexcept = 0;
 
 public:
-  /**
-   * @brief Generate the includers file.
-   */
-  virtual dogen::formatters::file
-  format(const formattables::includers_info& c) const = 0;
+    /**
+     * @brief Generate the includers file.
+     */
+    virtual dogen::formatters::file
+    format(const context& ctx, const formattables::includers_info& i) const = 0;
 };
 
 } } }

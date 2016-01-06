@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/cpp/test_data/settings/bundle_td.hpp"
+#include "dogen/cpp/test_data/formatters/context_td.hpp"
 #include "dogen/cpp/test_data/formattables/entity_td.hpp"
 #include "dogen/cpp/test_data/formatters/file_types_td.hpp"
 #include "dogen/cpp/test_data/settings/odb_settings_td.hpp"

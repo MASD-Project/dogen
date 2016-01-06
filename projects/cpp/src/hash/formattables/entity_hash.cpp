@@ -18,10 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/settings/bundle_hash.hpp"
 #include "dogen/cpp/hash/formattables/entity_hash.hpp"
 #include "dogen/cpp/hash/formattables/formattable_hash.hpp"
-#include "dogen/cpp/hash/formattables/formatter_properties_hash.hpp"
 
 namespace {
 
@@ -35,15 +33,6 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_formattables_formatter_properties(const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
     }
     return seed;
 }
@@ -63,8 +52,6 @@ std::size_t entity_hasher::hash(const entity& v) {
     combine(seed, v.qualified_name());
     combine(seed, v.documentation());
     combine(seed, hash_std_list_std_string(v.namespaces()));
-    combine(seed, v.settings());
-    combine(seed, hash_std_unordered_map_std_string_dogen_cpp_formattables_formatter_properties(v.formatter_properties()));
 
     return seed;
 }

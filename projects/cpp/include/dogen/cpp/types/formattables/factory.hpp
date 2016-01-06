@@ -27,6 +27,7 @@
 
 #include <memory>
 #include <forward_list>
+#include "dogen/dynamic/types/repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/formatters/types/general_settings_factory.hpp"
@@ -68,23 +69,21 @@ private:
 public:
     std::shared_ptr<formattable> make_registrar_info(
         const config::cpp_options& opts,
-        const dynamic::repository& drp,
-        const dynamic::object& root_object,
-        const dogen::formatters::general_settings_factory& gsf,
         const settings::bundle_repository& brp,
         const std::unordered_map<std::string, settings::path_settings>& ps,
-        const formatter_properties_repository& fprp,
+        formatter_properties_repository& fprp,
         const yarn::model& m) const;
 
     std::forward_list<std::shared_ptr<formattable> > make_includers(
         const config::cpp_options& opts,
         const dynamic::object& root_object,
         const dogen::formatters::general_settings_factory& gsf,
+        settings::bundle_repository& brp,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const formattables::path_derivatives_repository& pdrp,
         const std::forward_list<
         std::shared_ptr<formatters::formatter_interface>>& formatters,
-        const formatter_properties_repository& fprp,
+        formatter_properties_repository& fprp,
         const yarn::model& m) const;
 
     std::forward_list<std::shared_ptr<formattable> > make_cmakelists(

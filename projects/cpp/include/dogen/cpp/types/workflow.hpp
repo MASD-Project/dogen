@@ -37,6 +37,7 @@
 #include "dogen/cpp/types/settings/bundle_repository.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
+#include "dogen/cpp/types/formattables/formatter_properties_repository.hpp"
 #include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
 #include "dogen/yarn/types/model.hpp"
@@ -94,23 +95,28 @@ private:
     /**
      * @brief Create the formattables.
      */
-    std::forward_list<std::shared_ptr<formattables::formattable> >
-        create_formattables_activty(const config::cpp_options& opts,
-            const dynamic::repository& srp,
-            const dynamic::object& root_object,
-            const dogen::formatters::general_settings_factory& gsf,
-            const formatters::container& fc,
-            const settings::opaque_settings_builder& osb,
-            const settings::bundle_repository& brp,
-            const yarn::model& m) const;
+    std::pair<
+        formattables::formatter_properties_repository,
+        std::forward_list<std::shared_ptr<formattables::formattable> >
+    >
+    create_formattables_activty(const config::cpp_options& opts,
+        const dynamic::repository& srp,
+        const dynamic::object& root_object,
+        const dogen::formatters::general_settings_factory& gsf,
+        const formatters::container& fc,
+        const settings::opaque_settings_builder& osb,
+        settings::bundle_repository& brp,
+        const yarn::model& m) const;
 
     /**
      * @brief Create the files.
      */
     std::forward_list<dogen::formatters::file>
-    format_activty(const std::forward_list<
-            std::shared_ptr<formattables::formattable>
-            >& f) const;
+    format_activty(const settings::bundle_repository& brp,
+        const formattables::formatter_properties_repository& fprp,
+        const std::forward_list<
+        std::shared_ptr<formattables::formattable>
+        >& f) const;
 
 public:
     std::string name() const override;

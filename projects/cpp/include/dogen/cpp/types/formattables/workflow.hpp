@@ -26,6 +26,7 @@
 #endif
 
 #include <memory>
+#include <utility>
 #include <forward_list>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
@@ -83,8 +84,6 @@ private:
      */
     std::forward_list<std::shared_ptr<formattables::formattable> >
     from_transformer_activity(const settings::opaque_settings_builder& osb,
-        const settings::bundle_repository& brp,
-        const formatter_properties_repository& fprp,
         const yarn::model& m) const;
 
     /**
@@ -93,13 +92,12 @@ private:
      */
     std::forward_list<std::shared_ptr<formattables::formattable> >
     from_factory_activity(const config::cpp_options& opts,
-        const dynamic::repository& drp,
         const dynamic::object& root_object,
         const dogen::formatters::general_settings_factory& gsf,
-        const settings::bundle_repository& brp,
+        settings::bundle_repository& brp,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const formattables::path_derivatives_repository& pdrp,
-        const formatter_properties_repository& fprp,
+        formatter_properties_repository& fprp,
         const formatters::container& fc,
         const yarn::model& m) const;
 
@@ -107,14 +105,17 @@ public:
     /**
      * @brief Executes the workflow.
      */
-    std::forward_list<std::shared_ptr<formattables::formattable> >
+    std::pair<
+        formattables::formatter_properties_repository,
+        std::forward_list<std::shared_ptr<formattables::formattable> >
+    >
     execute(const config::cpp_options& opts,
         const dynamic::repository& drp,
         const dynamic::object& root_object,
         const dogen::formatters::general_settings_factory& gsf,
         const formatters::container& fc,
         const settings::opaque_settings_builder& osb,
-        const settings::bundle_repository& brp,
+        settings::bundle_repository& brp,
         const yarn::model& m) const;
 };
 

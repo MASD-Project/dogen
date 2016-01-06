@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/formatters/context.hpp"
 #include "dogen/cpp/types/formattables/namespace_info.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
 
@@ -46,7 +47,7 @@ public:
      * @brief Generate a c++ representation for the type.
      */
     virtual dogen::formatters::file
-    format(const formattables::namespace_info& c) const = 0;
+    format(const context& ctx, const formattables::namespace_info& c) const = 0;
 };
 
 } } }

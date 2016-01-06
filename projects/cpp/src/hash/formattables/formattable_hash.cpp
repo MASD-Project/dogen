@@ -40,6 +40,7 @@ std::size_t formattable_hasher::hash(const formattable& v) {
 
     combine(seed, v.identity());
     combine(seed, v.origin_type());
+    combine(seed, v.id());
 
     return seed;
 }

@@ -39,15 +39,18 @@ formattable::formattable()
 
 formattable::formattable(
     const std::string& identity,
-    const dogen::cpp::formattables::origin_types origin_type)
+    const dogen::cpp::formattables::origin_types origin_type,
+    const std::string& id)
     : identity_(identity),
-      origin_type_(origin_type) { }
+      origin_type_(origin_type),
+      id_(id) { }
 
 void formattable::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::formattables::formattable\"" << ", "
       << "\"identity\": " << "\"" << tidy_up_string(identity_) << "\"" << ", "
-      << "\"origin_type\": " << origin_type_
+      << "\"origin_type\": " << origin_type_ << ", "
+      << "\"id\": " << "\"" << tidy_up_string(id_) << "\""
       << " }";
 }
 
@@ -55,11 +58,13 @@ void formattable::swap(formattable& other) noexcept {
     using std::swap;
     swap(identity_, other.identity_);
     swap(origin_type_, other.origin_type_);
+    swap(id_, other.id_);
 }
 
 bool formattable::compare(const formattable& rhs) const {
     return identity_ == rhs.identity_ &&
-        origin_type_ == rhs.origin_type_;
+        origin_type_ == rhs.origin_type_ &&
+        id_ == rhs.id_;
 }
 
 const std::string& formattable::identity() const {
@@ -84,6 +89,22 @@ dogen::cpp::formattables::origin_types formattable::origin_type() const {
 
 void formattable::origin_type(const dogen::cpp::formattables::origin_types v) {
     origin_type_ = v;
+}
+
+const std::string& formattable::id() const {
+    return id_;
+}
+
+std::string& formattable::id() {
+    return id_;
+}
+
+void formattable::id(const std::string& v) {
+    id_ = v;
+}
+
+void formattable::id(const std::string&& v) {
+    id_ = std::move(v);
 }
 
 } } }

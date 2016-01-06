@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-02 Sat 00:10]
+#+CAPTION: Clock summary at [2016-01-04 Mon 21:41]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *37:00* |       |       |
+| *Total time*                                                                | *37:30* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 37:00   |       |       |
-| Active                                                                      |         | 37:00 |       |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:16 |
-| STARTED Update manual                                                       |         |       |  0:43 |
-| STARTED Update Linux CDash agent                                            |         |       |  0:09 |
+| Stories                                                                     | 37:30   |       |       |
+| Active                                                                      |         | 37:30 |       |
+| COMPLETED Sprint and product backlog grooming                               |         |       |  2:16 |
+| COMPLETED Update manual                                                     |         |       |  0:43 |
+| POSTPONED Update Linux CDash agent                                          |         |       |  0:09 |
 | COMPLETED Add support for conan.io                                          |         |       |  3:06 |
 | COMPLETED Create a blog post on conan                                       |         |       |  3:00 |
 | COMPLETED Investigate AppVeyor's windows support for builds                 |         |       |  2:02 |
@@ -34,8 +34,8 @@
 | COMPLETED Add qualified name to yarn properties                             |         |       |  1:26 |
 | COMPLETED Update settings bundle to include property settings               |         |       |  1:33 |
 | COMPLETED Use qualified name as keys for repositories in cpp                |         |       |  0:34 |
-| STARTED Re-read MDSD book                                                   |         |       | 15:00 |
-| STARTED Supply formatter properties and settings directly to formatter      |         |       |  0:18 |
+| COMPLETED Re-read MDSD book                                                 |         |       | 15:00 |
+| POSTPONED Supply formatter properties and settings directly to formatter    |         |       |  0:48 |
 #+end:
 
 *** COMPLETED Sprint and product backlog grooming                     :story:
@@ -297,6 +297,7 @@ Clock manually adjusted to reflect reading time.
 
 *** POSTPONED Supply formatter properties and settings directly to formatter :story:
     CLOSED: [2016-01-04 Mon 21:32]
+    CLOCK: [2016-01-02 Sat 00:11]--[2016-01-02 Sat 00:41] =>  0:30
     CLOCK: [2016-01-01 Fri 23:15]--[2016-01-01 Fri 23:33] =>  0:18
 
 In preparation for removing the cpp formattables, we need to supply

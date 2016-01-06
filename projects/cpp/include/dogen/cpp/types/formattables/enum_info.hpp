@@ -52,12 +52,11 @@ public:
     enum_info(
         const std::string& identity,
         const dogen::cpp::formattables::origin_types origin_type,
+        const std::string& id,
         const std::string& name,
         const std::string& qualified_name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
-        const dogen::cpp::settings::bundle& settings,
-        const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
         const std::list<dogen::cpp::formattables::enumerator_info>& enumerators,
         const std::string& type);
 

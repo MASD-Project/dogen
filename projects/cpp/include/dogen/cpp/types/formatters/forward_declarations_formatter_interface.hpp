@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/formatters/context.hpp"
 #include "dogen/cpp/types/formattables/forward_declarations_info.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
 
@@ -36,8 +37,10 @@ namespace formatters {
 class forward_declarations_formatter_interface : public formatter_interface {
 public:
     forward_declarations_formatter_interface() = default;
-    forward_declarations_formatter_interface(const forward_declarations_formatter_interface&) = delete;
-    forward_declarations_formatter_interface(forward_declarations_formatter_interface&&) = default;
+    forward_declarations_formatter_interface(
+        const forward_declarations_formatter_interface&) = delete;
+    forward_declarations_formatter_interface(
+        forward_declarations_formatter_interface&&) = default;
     virtual ~forward_declarations_formatter_interface() noexcept = 0;
 
 public:
@@ -45,7 +48,8 @@ public:
      * @brief Generate a c++ representation for the type.
      */
     virtual dogen::formatters::file
-    format(const formattables::forward_declarations_info& fd) const = 0;
+    format(const context& ctx,
+        const formattables::forward_declarations_info& fd) const = 0;
 };
 
 } } }

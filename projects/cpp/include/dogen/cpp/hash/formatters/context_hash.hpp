@@ -18,26 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_TYPES_ENUM_HEADER_FORMATTER_STITCH_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_TYPES_ENUM_HEADER_FORMATTER_STITCH_HPP
+#ifndef DOGEN_CPP_HASH_FORMATTERS_CONTEXT_HASH_HPP
+#define DOGEN_CPP_HASH_FORMATTERS_CONTEXT_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/formatters/types/file.hpp"
-#include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
-#include "dogen/cpp/types/formattables/enum_info.hpp"
+#include <functional>
+#include "dogen/cpp/types/formatters/context.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
-namespace types {
 
-dogen::formatters::file enum_header_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::enum_info& e);
+struct context_hasher {
+public:
+    static std::size_t hash(const context& v);
+};
 
-} } } }
+} } }
 
+namespace std {
+
+template<>
+struct hash<dogen::cpp::formatters::context> {
+public:
+    size_t operator()(const dogen::cpp::formatters::context& v) const {
+        return dogen::cpp::formatters::context_hasher::hash(v);
+    }
+};
+
+}
 #endif

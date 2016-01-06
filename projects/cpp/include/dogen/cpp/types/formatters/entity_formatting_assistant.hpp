@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include <unordered_map>
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/cpp/types/settings/odb_settings.hpp"
@@ -36,8 +37,8 @@
 #include "dogen/cpp/types/formattables/entity.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp/types/formattables/property_info.hpp"
-#include "dogen/cpp/types/formattables/formatter_properties.hpp"
 #include "dogen/cpp/types/formatters/nested_type_formatting_assistant.hpp"
+#include "dogen/cpp/types/formatters/context.hpp"
 #include "dogen/cpp/types/formatters/formatting_assistant.hpp"
 
 namespace dogen {
@@ -75,7 +76,7 @@ public:
 
 public:
     entity_formatting_assistant(const formattables::entity& e,
-        const dynamic::ownership_hierarchy& oh,
+        const context& ctx, const dynamic::ownership_hierarchy& oh,
         const formatters::file_types ft);
 
 private:
@@ -221,14 +222,21 @@ public:
     bool requires_hashing_helper_method(
         const formattables::nested_type_info& t) const;
 
-public:
+private:
     /**
      * @brief Retrieves the ODB settings from the opaque settings
      * container, if they do exist.
      */
     boost::shared_ptr<settings::odb_settings>
-    get_odb_settings(const std::unordered_map<std::string,
-        boost::shared_ptr<settings::opaque_settings> >& os) const;
+        get_odb_settings(const std::unordered_map<std::string,
+            boost::shared_ptr<settings::opaque_settings> >& os) const;
+
+public:
+    /**
+     * @brief Retrieves the ODB settings from the opaque settings
+     * container, if they do exist.
+     */
+    boost::shared_ptr<settings::odb_settings> get_odb_settings() const;
 
     /**
      * @brief Retrieves the ODB settings for a given property from the
@@ -239,8 +247,9 @@ public:
 
 private:
     const formattables::entity& entity_;
-    const dynamic::ownership_hierarchy ownership_hierarchy_;
+    const context& context_;
     const formattables::formatter_properties formatter_properties_;
+    const dynamic::ownership_hierarchy ownership_hierarchy_;
     const formatters::file_types file_type_;
 };
 

@@ -61,8 +61,8 @@ class class_implementation_formatter final : public class_formatter_interface {
   void register_inclusion_dependencies_provider(
     formattables::registrar& rg) const override;
 
-  dogen::formatters::file
-    format(const formattables::class_info& c) const override;
+  dogen::formatters::file format(const context& ctx,
+      const formattables::class_info& c) const override;
 };
 
 } } } }

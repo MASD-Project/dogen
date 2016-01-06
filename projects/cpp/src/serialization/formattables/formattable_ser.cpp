@@ -56,6 +56,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("identity", v.identity_);
     ar << make_nvp("origin_type", v.origin_type_);
+    ar << make_nvp("id", v.id_);
 }
 
 template<typename Archive>
@@ -64,6 +65,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("identity", v.identity_);
     ar >> make_nvp("origin_type", v.origin_type_);
+    ar >> make_nvp("id", v.id_);
 }
 
 } }

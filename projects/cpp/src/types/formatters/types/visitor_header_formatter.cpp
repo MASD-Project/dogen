@@ -96,8 +96,8 @@ void visitor_header_formatter::register_inclusion_dependencies_provider(
 }
 
 dogen::formatters::file visitor_header_formatter::
-format(const formattables::visitor_info& e) const {
-    entity_formatting_assistant fa(e, ownership_hierarchy(), file_type());
+format(const context& ctx, const formattables::visitor_info& e) const {
+    entity_formatting_assistant fa(e, ctx, ownership_hierarchy(), file_type());
     const auto r(visitor_header_formatter_stitch(fa, e));
     return r;
 }

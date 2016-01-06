@@ -63,6 +63,7 @@ odb_options_info::odb_options_info(odb_options_info&& rhs)
 odb_options_info::odb_options_info(
     const std::string& identity,
     const dogen::cpp::formattables::origin_types origin_type,
+    const std::string& id,
     const std::string& model_name,
     const std::string& product_name,
     const boost::filesystem::path& file_path,
@@ -71,7 +72,8 @@ odb_options_info::odb_options_info(
     const boost::optional<dogen::formatters::general_settings>& general_settings)
     : dogen::cpp::formattables::formattable(
       identity,
-      origin_type),
+      origin_type,
+      id),
       model_name_(model_name),
       product_name_(product_name),
       file_path_(file_path),

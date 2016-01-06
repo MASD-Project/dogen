@@ -93,7 +93,10 @@ settings::bundle_repository workflow::create_bundle_repository(
     return f.make(rp, root_object, gsf, osb, m);
 }
 
-std::forward_list<std::shared_ptr<formattables::formattable> >
+std::pair<
+    formattables::formatter_properties_repository,
+    std::forward_list<std::shared_ptr<formattables::formattable> >
+>
 workflow::create_formattables_activty(
     const config::cpp_options& opts,
     const dynamic::repository& srp,
@@ -101,7 +104,7 @@ workflow::create_formattables_activty(
     const dogen::formatters::general_settings_factory& gsf,
     const formatters::container& fc,
     const settings::opaque_settings_builder& osb,
-    const settings::bundle_repository& brp,
+    settings::bundle_repository& brp,
     const yarn::model& m) const {
 
     formattables::workflow fw;
@@ -109,11 +112,13 @@ workflow::create_formattables_activty(
 }
 
 std::forward_list<dogen::formatters::file>
-workflow::format_activty(const std::forward_list<
-        std::shared_ptr<formattables::formattable>
-        >& f) const {
+workflow::format_activty(const settings::bundle_repository& brp,
+    const formattables::formatter_properties_repository& fprp,
+    const std::forward_list<
+    std::shared_ptr<formattables::formattable>
+    >& f) const {
     formatters::workflow w;
-    return w.execute(f);
+    return w.execute(brp, fprp, f);
 }
 
 std::string workflow::name() const {
@@ -153,15 +158,15 @@ workflow::generate(const config::knitting_options& ko,
     const auto gsf(create_general_settings_factory(frp, ro));
 
     const auto osb(create_opaque_settings_builder(rp));
-    const auto brp(create_bundle_repository(rp, ro, gsf, osb, m));
+    auto brp(create_bundle_repository(rp, ro, gsf, osb, m));
 
     formatters::workflow::registrar().validate();
     const auto& fc(formatters::workflow::registrar().formatter_container());
 
     const auto& kcpp(ko.cpp());
-    const auto f(
+    const auto pair(
         create_formattables_activty(kcpp, rp, ro, gsf, fc, osb, brp, m));
-    const auto r(format_activty(f));
+    const auto r(format_activty(brp, pair.first, pair.second));
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";
     return r;

@@ -92,10 +92,6 @@ const std::string type_has_no_inclusion_dependencies(
     "Could not find inclusion dependencies for type: ");
 const std::string type_has_no_inclusion("Could not find inclusion for type: ");
 const std::string no_visitees("Visitor is not visiting any types: ");
-const std::string formatter_properties_missing(
-    "Could not find formatter properties for type: ");
-const std::string settings_bundle_missing(
-    "Could not find settings bundle for type: ");
 const std::string cast_failure("Failed to cast type: ");
 
 bool is_char_like(const std::string& type_name) {
@@ -208,11 +204,8 @@ inline bool is(const yarn::model& m, const yarn::name& n) {
 }
 
 transformer::transformer(const settings::opaque_settings_builder& osb,
-    const settings::bundle_repository& brp,
-    const formatter_properties_repository& frp,
     const yarn::model& m)
-    : opaque_settings_builder_(osb), bundle_repository_(brp),
-      formatter_properties_repository_(frp), model_(m) {}
+    : opaque_settings_builder_(osb), model_(m) {}
 
 void transformer::
 populate_formattable_properties(const yarn::name& n, formattable& f) const {
@@ -226,30 +219,10 @@ void transformer::populate_entity_properties(const yarn::name& n,
 
     e.name(n.simple());
     e.documentation(documentation);
-
-    const auto& fpn(formatter_properties_repository_.
-        formatter_properties_by_name());
-    const auto i(fpn.find(n.qualified()));
-    if (i == fpn.end()) {
-        const auto qn(n.qualified());
-        BOOST_LOG_SEV(lg, error) << formatter_properties_missing << qn;
-        BOOST_THROW_EXCEPTION(
-            transformation_error(formatter_properties_missing + qn));
-    }
-    e.formatter_properties(i->second);
+    e.id(n.qualified());
 
     name_builder b;
     e.namespaces(b.namespace_list(model_, n));
-
-    const auto& bn(bundle_repository_.bundles_by_name());
-    const auto j(bn.find(n.qualified()));
-    if (j == bn.end()) {
-        const auto qn(n.qualified());
-        BOOST_LOG_SEV(lg, error) << settings_bundle_missing << qn;
-        BOOST_THROW_EXCEPTION(
-            transformation_error(settings_bundle_missing + qn));
-    }
-    e.settings(j->second);
 
     std::list<std::string> ns(e.namespaces());
     ns.push_back(e.name());

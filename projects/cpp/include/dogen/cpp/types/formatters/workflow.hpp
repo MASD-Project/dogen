@@ -31,6 +31,8 @@
 #include <unordered_map>
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
+#include "dogen/cpp/types/settings/bundle_repository.hpp"
+#include "dogen/cpp/types/formattables/formatter_properties_repository.hpp"
 #include "dogen/cpp/types/formatters/registrar.hpp"
 
 namespace dogen {
@@ -54,8 +56,10 @@ public:
      * representations.
      */
     std::forward_list<dogen::formatters::file>
-    execute(const std::forward_list<
-            std::shared_ptr<formattables::formattable> >& f) const;
+    execute(const settings::bundle_repository& brp,
+        const formattables::formatter_properties_repository& fprp,
+        const std::forward_list<
+        std::shared_ptr<formattables::formattable> >& f) const;
 
 private:
     static std::shared_ptr<cpp::formatters::registrar> registrar_;

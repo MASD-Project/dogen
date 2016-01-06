@@ -89,8 +89,9 @@ void includers_formatter::register_inclusion_dependencies_provider(
 }
 
 dogen::formatters::file
-includers_formatter::format(const formattables::includers_info& i) const {
-    entity_formatting_assistant fa(i, ownership_hierarchy(), file_type());
+includers_formatter::format(const context& ctx,
+    const formattables::includers_info& i) const {
+    entity_formatting_assistant fa(i, ctx, ownership_hierarchy(), file_type());
     const auto r(includers_formatter_stitch(fa, i));
     return r;
 }

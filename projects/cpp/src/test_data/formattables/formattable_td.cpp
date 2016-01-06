@@ -57,6 +57,7 @@ void formattable_generator::
 populate(const unsigned int position, result_type& v) {
     v.identity(create_std_string(position + 0));
     v.origin_type(create_dogen_cpp_formattables_origin_types(position + 1));
+    v.id(create_std_string(position + 2));
 }
 
 formattable_generator::result_type*

@@ -45,8 +45,8 @@ public:
     void register_inclusion_dependencies_provider(
         formattables::registrar& rg) const override;
 
-    dogen::formatters::file
-    format(const formattables::includers_info& i) const override;
+    dogen::formatters::file format(const context& ctx,
+        const formattables::includers_info& i) const override;
 
 public:
     const dynamic::ownership_hierarchy ownership_hierarchy_;

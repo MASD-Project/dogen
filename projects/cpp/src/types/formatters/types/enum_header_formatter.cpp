@@ -57,8 +57,8 @@ void enum_header_formatter::register_inclusion_dependencies_provider(
     formattables::registrar& /*rg*/) const {}
 
 dogen::formatters::file enum_header_formatter::
-format(const formattables::enum_info& c) const {
-    entity_formatting_assistant fa(c, ownership_hierarchy(), file_type());
+format(const context& ctx, const formattables::enum_info& c) const {
+    entity_formatting_assistant fa(c, ctx, ownership_hierarchy(), file_type());
     const auto r(enum_header_formatter_stitch(fa, c));
     return r;
 }

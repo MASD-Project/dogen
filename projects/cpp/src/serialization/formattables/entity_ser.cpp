@@ -27,10 +27,8 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
-#include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/cpp/serialization/settings/bundle_ser.hpp"
 #include "dogen/cpp/serialization/formattables/entity_ser.hpp"
 #include "dogen/cpp/serialization/formattables/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/class_info_ser.hpp"
@@ -42,7 +40,6 @@
 #include "dogen/cpp/serialization/formattables/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/primitive_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/registrar_info_ser.hpp"
-#include "dogen/cpp/serialization/formattables/formatter_properties_ser.hpp"
 #include "dogen/cpp/serialization/formattables/forward_declarations_info_ser.hpp"
 
 BOOST_CLASS_TRACKING(
@@ -62,8 +59,6 @@ void save(Archive& ar,
     ar << make_nvp("qualified_name", v.qualified_name_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("namespaces", v.namespaces_);
-    ar << make_nvp("settings", v.settings_);
-    ar << make_nvp("formatter_properties", v.formatter_properties_);
 }
 
 template<typename Archive>
@@ -76,8 +71,6 @@ void load(Archive& ar,
     ar >> make_nvp("qualified_name", v.qualified_name_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("namespaces", v.namespaces_);
-    ar >> make_nvp("settings", v.settings_);
-    ar >> make_nvp("formatter_properties", v.formatter_properties_);
 }
 
 } }

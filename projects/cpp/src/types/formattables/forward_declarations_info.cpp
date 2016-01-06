@@ -42,24 +42,22 @@ forward_declarations_info::forward_declarations_info()
 forward_declarations_info::forward_declarations_info(
     const std::string& identity,
     const dogen::cpp::formattables::origin_types origin_type,
+    const std::string& id,
     const std::string& name,
     const std::string& qualified_name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
-    const dogen::cpp::settings::bundle& settings,
-    const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
     const bool is_enum,
     const std::string& enum_type,
     const bool is_exception)
     : dogen::cpp::formattables::entity(
       identity,
       origin_type,
+      id,
       name,
       qualified_name,
       documentation,
-      namespaces,
-      settings,
-      formatter_properties),
+      namespaces),
       is_enum_(is_enum),
       enum_type_(enum_type),
       is_exception_(is_exception) { }

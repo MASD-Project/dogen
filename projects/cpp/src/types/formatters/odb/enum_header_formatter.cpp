@@ -89,8 +89,9 @@ void enum_header_formatter::register_inclusion_dependencies_provider(
 }
 
 dogen::formatters::file
-enum_header_formatter::format(const formattables::enum_info& e) const {
-    entity_formatting_assistant fa(e, ownership_hierarchy(), file_type());
+enum_header_formatter::format(const context& ctx,
+    const formattables::enum_info& e) const {
+    entity_formatting_assistant fa(e, ctx, ownership_hierarchy(), file_type());
     const auto r(enum_header_formatter_stitch(fa, e));
     return r;
 }

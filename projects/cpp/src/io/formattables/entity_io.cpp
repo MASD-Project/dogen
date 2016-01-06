@@ -20,10 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/cpp/io/settings/bundle_io.hpp"
 #include "dogen/cpp/io/formattables/entity_io.hpp"
 #include "dogen/cpp/io/formattables/formattable_io.hpp"
-#include "dogen/cpp/io/formattables/formatter_properties_io.hpp"
 
 namespace dogen {
 namespace cpp {

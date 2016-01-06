@@ -12,20 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-04 Mon 21:36]
+#+CAPTION: Clock summary at [2016-01-06 Wed 22:29]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *0:07* |      |      |
+| *Total time*                                                                | *4:24* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 0:07   |      |      |
-| Active                                                                      |        | 0:07 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:07 |
+| Stories                                                                     | 4:24   |      |      |
+| Active                                                                      |        | 4:24 |      |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:12 |
+| COMPLETED Supply formatter properties and settings directly to formatter    |        |      | 4:12 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
-    CLOCK: [2016-01-04 Mon 21:28]--[2016-01-04 Mon 21:35] =>  0:07
-
+    CLOCK: [2016-01-04 Mon 21:28]--[2016-01-04 Mon 21:40] =>  0:12
 
 Updates to sprint and product backlog.
 
@@ -33,11 +33,24 @@ Updates to sprint and product backlog.
 
 Updates to manual.
 
-*** STARTED Supply formatter properties and settings directly to formatter :story:
+*** COMPLETED Supply formatter properties and settings directly to formatter :story:
+    CLOSED: [2016-01-06 Wed 22:29]
+    CLOCK: [2016-01-06 Wed 21:32]--[2016-01-06 Wed 22:29] =>  0:57
+    CLOCK: [2016-01-05 Tue 21:15]--[2016-01-05 Tue 23:11] =>  1:56
+    CLOCK: [2016-01-04 Mon 21:41]--[2016-01-04 Mon 23:00] =>  1:19
 
 In preparation for removing the cpp formattables, we need to supply
 the formatter properties and settings in the format method, rather
 than via the cpp type.
+
+Notes:
+
+- we must pass in the whole map into the formatter not just the
+  formatter properties for a given formatter.
+- we need to do some hackery around the formattables factory and pass
+  in the repositories as non-const references to populate them for the
+  hacked types. This will all be handled properly once we move to yarn
+  types.
 
 *** Tidy-up master include generation                                 :story:
 

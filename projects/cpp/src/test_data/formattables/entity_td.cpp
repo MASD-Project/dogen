@@ -19,7 +19,6 @@
  *
  */
 #include <sstream>
-#include "dogen/cpp/test_data/settings/bundle_td.hpp"
 #include "dogen/cpp/test_data/formattables/entity_td.hpp"
 #include "dogen/cpp/test_data/formattables/enum_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/class_info_td.hpp"
@@ -31,7 +30,6 @@
 #include "dogen/cpp/test_data/formattables/namespace_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/primitive_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/registrar_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/formatter_properties_td.hpp"
 #include "dogen/cpp/test_data/formattables/forward_declarations_info_td.hpp"
 
 namespace {
@@ -50,24 +48,6 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
-dogen::cpp::settings::bundle
-create_dogen_cpp_settings_bundle(const unsigned int position) {
-    return dogen::cpp::settings::bundle_generator::create(position);
-}
-
-dogen::cpp::formattables::formatter_properties
-create_dogen_cpp_formattables_formatter_properties(const unsigned int position) {
-    return dogen::cpp::formattables::formatter_properties_generator::create(position);
-}
-
-std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> create_std_unordered_map_std_string_dogen_cpp_formattables_formatter_properties(unsigned int position) {
-    std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_cpp_formattables_formatter_properties(position + i)));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -81,8 +61,6 @@ populate(const unsigned int position, result_type& v) {
     v.qualified_name(create_std_string(position + 1));
     v.documentation(create_std_string(position + 2));
     v.namespaces(create_std_list_std_string(position + 3));
-    v.settings(create_dogen_cpp_settings_bundle(position + 4));
-    v.formatter_properties(create_std_unordered_map_std_string_dogen_cpp_formattables_formatter_properties(position + 5));
 }
 
 entity_generator::result_type*

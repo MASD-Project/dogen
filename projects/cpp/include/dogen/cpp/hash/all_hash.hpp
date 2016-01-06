@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/cpp/hash/settings/bundle_hash.hpp"
+#include "dogen/cpp/hash/formatters/context_hash.hpp"
 #include "dogen/cpp/hash/formattables/entity_hash.hpp"
 #include "dogen/cpp/hash/formatters/file_types_hash.hpp"
 #include "dogen/cpp/hash/settings/odb_settings_hash.hpp"

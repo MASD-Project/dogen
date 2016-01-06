@@ -51,7 +51,8 @@ public:
         formattables::registrar& rg) const override;
 
     dogen::formatters::file
-    format(const formattables::forward_declarations_info& fd) const override;
+    format(const context& ctx,
+        const formattables::forward_declarations_info& fd) const override;
 };
 
 } } } }

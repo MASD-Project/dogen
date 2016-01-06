@@ -35,6 +35,7 @@
 #include "dogen/cpp/types/formattables/forward_declarations_info.hpp"
 #include "dogen/cpp/types/formattables/formattable_visitor.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
+#include "dogen/cpp/types/formatters/context.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 
 namespace {
@@ -44,6 +45,9 @@ static logger lg(logger_factory("cpp.formatters.workflow"));
 
 const std::string formatter_properties_not_found(
     "Could not find properties for formatter: ");
+const std::string bundle_not_found(
+    "Could not find settings bundle for: ");
+
 }
 
 namespace dogen {
@@ -56,7 +60,9 @@ namespace formatters {
  */
 class dispatcher final : public formattables::formattable_visitor {
 public:
-    explicit dispatcher(const container& c);
+    dispatcher(const settings::bundle_repository& brp,
+        const formattables::formatter_properties_repository& fprp,
+        const container& c);
     ~dispatcher() noexcept { }
 
 private:
@@ -93,20 +99,37 @@ private:
         BOOST_LOG_SEV(lg, debug) << "Formatting: '" << e.name()
                                  << "' with '" << fn << "'";
 
-        const auto i(e.formatter_properties().find(fn));
-        if (i == e.formatter_properties().end()) {
+        const auto fp(formatter_properties_.formatter_properties_by_name());
+        const auto i(fp.find(e.id()));
+        if (i == fp.end()) {
+            BOOST_LOG_SEV(lg, error) << formatter_properties_not_found
+                                     << e.id();
+            BOOST_THROW_EXCEPTION(
+                workflow_error(formatter_properties_not_found + e.id()));
+        }
+
+        const auto j(i->second.find(fn));
+        if (j == i->second.end()) {
             BOOST_LOG_SEV(lg, error) << formatter_properties_not_found << fn;
             BOOST_THROW_EXCEPTION(
                 workflow_error(formatter_properties_not_found + fn));
         }
 
-        const auto is_formatter_enabled(i->second.enabled());
+        const auto is_formatter_enabled(j->second.enabled());
         if (!is_formatter_enabled) {
             BOOST_LOG_SEV(lg, debug) << "Formatter not enabled for type.";
             return;
         }
 
-        auto file(f.format(e));
+        const auto& b(bundle_.bundles_by_name());
+        const auto k(b.find(e.id()));
+        if (k == b.end()) {
+            BOOST_LOG_SEV(lg, error) << bundle_not_found << e.id();
+            BOOST_THROW_EXCEPTION(workflow_error(bundle_not_found + e.id()));
+        }
+
+        const context ctx(k->second, i->second);
+        auto file(f.format(ctx, e));
 
         if (empty_out_content) {
             BOOST_LOG_SEV(lg, debug) << "Emptying out content.";
@@ -172,11 +195,16 @@ public:
     const std::forward_list<dogen::formatters::file>& files();
 
 private:
+    const settings::bundle_repository& bundle_;
+    const formattables::formatter_properties_repository& formatter_properties_;
     const container& container_;
     std::forward_list<dogen::formatters::file> files_;
 };
 
-dispatcher::dispatcher(const container& c) : container_(c) { }
+dispatcher::dispatcher(const settings::bundle_repository& brp,
+    const formattables::formatter_properties_repository& fprp,
+    const container& c) :
+    bundle_(brp), formatter_properties_(fprp), container_(c) { }
 
 void dispatcher::visit(const formattables::class_info& c) {
     const bool empty_out_content(
@@ -250,12 +278,12 @@ cpp::formatters::registrar& workflow::registrar() {
 }
 
 std::forward_list<dogen::formatters::file>
-workflow::execute(const std::forward_list<
-        std::shared_ptr<formattables::formattable>
-        >& f)
-    const {
+workflow::execute(const settings::bundle_repository& brp,
+    const formattables::formatter_properties_repository& fprp,
+    const std::forward_list<
+    std::shared_ptr<formattables::formattable> >& f) const {
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
-    dispatcher d(registrar().formatter_container());
+    dispatcher d(brp, fprp, registrar().formatter_container());
     for (const auto sp : f)
         d.format(*sp);
 

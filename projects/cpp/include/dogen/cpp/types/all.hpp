@@ -34,6 +34,7 @@
 #include "dogen/cpp/types/formatters/io/io.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/settings/settings.hpp"
+#include "dogen/cpp/types/formatters/context.hpp"
 #include "dogen/cpp/types/formatters/odb/odb.hpp"
 #include "dogen/cpp/types/settings/registrar.hpp"
 #include "dogen/cpp/types/formattables/entity.hpp"

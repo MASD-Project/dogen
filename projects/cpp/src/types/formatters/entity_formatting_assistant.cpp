@@ -94,19 +94,19 @@ make_setter_return_type(const std::string& containing_type_name,
 
 entity_formatting_assistant::
 entity_formatting_assistant(const formattables::entity& e,
-    const dynamic::ownership_hierarchy& oh,
+    const context& ctx, const dynamic::ownership_hierarchy& oh,
     const formatters::file_types ft) :
-    entity_(e), ownership_hierarchy_(oh),
+    entity_(e), context_(ctx),
     formatter_properties_(obtain_formatter_properties(oh.formatter_name())),
-    file_type_(ft) {
+    ownership_hierarchy_(oh), file_type_(ft) {
     validate();
 }
 
 formattables::formatter_properties entity_formatting_assistant::
 obtain_formatter_properties(const std::string& formatter_name) const {
     const auto& fn(formatter_name);
-    const auto i(entity_.formatter_properties().find(fn));
-    if (i == entity_.formatter_properties().end()) {
+    const auto i(context_.formatter_properties().find(fn));
+    if (i == context_.formatter_properties().end()) {
         BOOST_LOG_SEV(lg, error) << formatter_properties_missing << fn;
         BOOST_THROW_EXCEPTION(
             formatting_error(formatter_properties_missing + fn));
@@ -163,11 +163,11 @@ bool entity_formatting_assistant::is_test_data_enabled() const {
 }
 
 bool entity_formatting_assistant::is_complete_constructor_disabled() const {
-    return entity_.settings().aspect_settings().disable_complete_constructor();
+    return context_.bundle().aspect_settings().disable_complete_constructor();
 }
 
 bool entity_formatting_assistant::is_xml_serialization_disabled() const {
-    return entity_.settings().aspect_settings().disable_xml_serialization();
+    return context_.bundle().aspect_settings().disable_xml_serialization();
 }
 
 void entity_formatting_assistant::validate() const {
@@ -189,7 +189,7 @@ void entity_formatting_assistant::validate() const {
 dogen::formatters::cpp::scoped_boilerplate_formatter
 entity_formatting_assistant::make_scoped_boilerplate_formatter() {
     const auto& fp(formatter_properties_);
-    const auto gs(entity_.settings().general_settings());
+    const auto gs(context_.bundle().general_settings());
     return dogen::formatters::cpp::scoped_boilerplate_formatter(
         stream(), gs, fp.inclusion_dependencies(),
         fp.header_guard() ? *fp.header_guard() : empty);
@@ -394,10 +394,16 @@ get_odb_settings(const std::unordered_map<std::string,
     return r;
 }
 
+boost::shared_ptr<settings::odb_settings>
+entity_formatting_assistant::get_odb_settings() const {
+    const auto& os(context_.bundle().opaque_settings());
+    return get_odb_settings(os);
+}
+
 boost::shared_ptr<settings::odb_settings> entity_formatting_assistant::
 get_odb_settings(const std::string& property_id) const {
 
-    const auto& osfp(entity_.settings().opaque_settings_for_property());
+    const auto& osfp(context_.bundle().opaque_settings_for_property());
     const auto i(osfp.find(property_id));
     if (i == osfp.end())
         return boost::shared_ptr<settings::odb_settings>();

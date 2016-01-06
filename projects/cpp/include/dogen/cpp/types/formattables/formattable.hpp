@@ -49,7 +49,8 @@ public:
 public:
     formattable(
         const std::string& identity,
-        const dogen::cpp::formattables::origin_types origin_type);
+        const dogen::cpp::formattables::origin_types origin_type,
+        const std::string& id);
 
 private:
     template<typename Archive>
@@ -76,6 +77,11 @@ public:
     dogen::cpp::formattables::origin_types origin_type() const;
     void origin_type(const dogen::cpp::formattables::origin_types v);
 
+    const std::string& id() const;
+    std::string& id();
+    void id(const std::string& v);
+    void id(const std::string&& v);
+
 protected:
     bool compare(const formattable& rhs) const;
 public:
@@ -87,6 +93,7 @@ protected:
 private:
     std::string identity_;
     dogen::cpp::formattables::origin_types origin_type_;
+    std::string id_;
 };
 
 inline formattable::~formattable() noexcept { }

@@ -32,8 +32,7 @@ dogen::formatters::file class_header_formatter_stitch(
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
-        const auto& os(c.settings().opaque_settings());
-        const auto odbs(fa.get_odb_settings(os));
+        const auto odbs(fa.get_odb_settings());
         if (!odbs || odbs->pragmas().empty()) {
 fa.stream() << "// class has no ODB pragmas defined." << std::endl;
 fa.stream() << std::endl;

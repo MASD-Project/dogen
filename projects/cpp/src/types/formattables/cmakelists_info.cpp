@@ -70,6 +70,7 @@ cmakelists_info::cmakelists_info(cmakelists_info&& rhs)
 cmakelists_info::cmakelists_info(
     const std::string& identity,
     const dogen::cpp::formattables::origin_types origin_type,
+    const std::string& id,
     const boost::filesystem::path& file_path,
     const std::string& model_name,
     const std::string& product_name,
@@ -81,7 +82,8 @@ cmakelists_info::cmakelists_info(
     const bool odb_enabled)
     : dogen::cpp::formattables::formattable(
       identity,
-      origin_type),
+      origin_type,
+      id),
       file_path_(file_path),
       model_name_(model_name),
       product_name_(product_name),

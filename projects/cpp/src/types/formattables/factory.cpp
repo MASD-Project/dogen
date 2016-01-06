@@ -217,12 +217,9 @@ bool factory::is_enabled(const formatter_properties_repository& fprp,
 
 std::shared_ptr<formattable> factory::make_registrar_info(
     const config::cpp_options& opts,
-    const dynamic::repository& /*drp*/,
-    const dynamic::object& /*root_object*/,
-    const dogen::formatters::general_settings_factory& /*gsf*/,
     const settings::bundle_repository& brp,
     const std::unordered_map<std::string, settings::path_settings>& ps,
-    const formatter_properties_repository& fprp,
+    formatter_properties_repository& fprp,
     const yarn::model& m) const {
 
     const auto n(create_name(m.name(), registrar_name));
@@ -231,22 +228,14 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     name_builder b;
     auto r(std::make_shared<registrar_info>());
     r->namespaces(b.namespace_list(m, n));
+    r->id(n.qualified());
 
-    /*
-    const auto gs(gsf.make(cpp_modeline_name, root_object));
-    settings::bundle sb;
-    sb.general_settings(gs);
-    settings::aspect_settings_factory f(drp, root_object);
-    sb.aspect_settings(f.make());
-    r->settings(sb);
-    */
     const auto i(brp.bundles_by_name().find(n.qualified()));
     if (i == brp.bundles_by_name().end()) {
         const auto qn(n.qualified());
         BOOST_LOG_SEV(lg, error) << bundle_not_found_for_name << qn;
         BOOST_THROW_EXCEPTION(building_error(bundle_not_found_for_name + qn));
     }
-    r->settings(i->second);
 
     for (const auto& pair : m.references()) {
         if (pair.second != yarn::origin_types::system) {
@@ -275,7 +264,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     const auto ch_fn(traits::class_header_formatter_name());
     const auto rh_fn(traits::registrar_header_formatter_name());
     const auto fp1(lambda(ch_fn, rh_fn));
-    r->formatter_properties().insert(std::make_pair(rh_fn, fp1));
+    fprp.formatter_properties_by_name()[r->id()][rh_fn] = fp1;
 
     const auto ci_fn(traits::class_implementation_formatter_name());
     const auto ri_fn(traits::registrar_implementation_formatter_name());
@@ -295,8 +284,8 @@ std::shared_ptr<formattable> factory::make_registrar_info(
                 settings_not_found_for_formatter + ri_fn));
     }
     fp2.inclusion_dependencies(k->second.inclusion_dependencies());
+    fprp.formatter_properties_by_name()[r->id()][ri_fn] = fp2;
 
-    r->formatter_properties().insert(std::make_pair(ri_fn, fp2));
     BOOST_LOG_SEV(lg, debug) << "Made registrar: " << n.qualified();
     return r;
 }
@@ -306,11 +295,12 @@ make_includers(
     const config::cpp_options& opts,
     const dynamic::object& root_object,
     const dogen::formatters::general_settings_factory& gsf,
+    settings::bundle_repository& brp,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formattables::path_derivatives_repository& pdrp,
     const std::forward_list<
     std::shared_ptr<formatters::formatter_interface>>& formatters,
-    const formatter_properties_repository& fprp,
+    formatter_properties_repository& fprp,
     const yarn::model& m) const {
 
     const auto n(create_name(m.name(), includers_name));
@@ -405,8 +395,9 @@ make_includers(
 
     std::forward_list<std::shared_ptr<formattable> > r;
     auto inc(std::make_shared<includers_info>());
+    inc->id(n.qualified());
     const auto gs(gsf.make(cpp_modeline_name, root_object));
-    inc->settings().general_settings(gs);
+    brp.bundles_by_name()[inc->id()].general_settings(gs);
 
     for(const auto& pair : includes_by_facet_name) {
         const auto& facet_name(pair.first);
@@ -422,7 +413,8 @@ make_includers(
         p.header_guard(pd.header_guard());
         p.enabled(is_enabled(fprp, m.name(), ch_fn));
         p.inclusion_dependencies(pair.second);
-        inc->formatter_properties().insert(std::make_pair(ifn, p));
+
+        fprp.formatter_properties_by_name()[inc->id()][ifn] = p;
     }
     r.push_front(inc);
     BOOST_LOG_SEV(lg, debug) << "Includer: " << *inc;

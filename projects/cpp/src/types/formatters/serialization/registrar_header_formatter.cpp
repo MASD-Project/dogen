@@ -55,8 +55,8 @@ void registrar_header_formatter::register_inclusion_dependencies_provider(
     formattables::registrar& /*rg*/) const { }
 
 dogen::formatters::file registrar_header_formatter::
-format(const formattables::registrar_info& ri) const {
-    entity_formatting_assistant fa(ri, ownership_hierarchy(), file_type());
+format(const context& ctx, const formattables::registrar_info& ri) const {
+    entity_formatting_assistant fa(ri, ctx, ownership_hierarchy(), file_type());
     const auto r(registrar_header_formatter_stitch(fa, ri));
     return r;
 }
