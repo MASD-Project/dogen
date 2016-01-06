@@ -12,20 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-06 Wed 23:27]
+#+CAPTION: Clock summary at [2016-01-06 Wed 23:30]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *5:21* |      |      |
+| *Total time*                                                                | *5:24* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 5:21   |      |      |
-| Active                                                                      |        | 5:21 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:12 |
+| Stories                                                                     | 5:24   |      |      |
+| Active                                                                      |        | 5:24 |      |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:15 |
 | COMPLETED Supply formatter properties and settings directly to formatter    |        |      | 4:12 |
 | STARTED Create a separate flow for yarn based types                         |        |      | 0:57 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-01-06 Wed 23:28]--[2016-01-06 Wed 23:31] =>  0:03
     CLOCK: [2016-01-04 Mon 21:28]--[2016-01-04 Mon 21:40] =>  0:12
 
 Updates to sprint and product backlog.
@@ -61,6 +62,13 @@ to go about this is to incrementally update the formatters. This could
 be done by having two sets of elements to format, one formattable
 based and the other yarn based. We can update the interfaces, one type
 a time and have them share the same registrars etc.
+
+*** Investigate slow down                                             :story:
+
+With commit 7e89ddb we introduced a set of hacks to inject settings
+and formatter properties into the repositories. This seems to have had
+a very negative impact in performance. We need to ensure performance
+goes back to normal after the hacks have been removed.
 
 *** Tidy-up master include generation                                 :story:
 
