@@ -30,6 +30,7 @@
 #include "dogen/cpp/types/workflow.hpp"
 #include "dogen/cpp/types/initializer.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
+#include "dogen/cpp/types/fabric/workflow.hpp"
 #include "dogen/cpp/types/settings/bundle.hpp"
 #include "dogen/cpp/types/formatters/io/io.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"

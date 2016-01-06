@@ -12,16 +12,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-06 Wed 22:29]
+#+CAPTION: Clock summary at [2016-01-06 Wed 23:27]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *4:24* |      |      |
+| *Total time*                                                                | *5:21* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 4:24   |      |      |
-| Active                                                                      |        | 4:24 |      |
+| Stories                                                                     | 5:21   |      |      |
+| Active                                                                      |        | 5:21 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:12 |
 | COMPLETED Supply formatter properties and settings directly to formatter    |        |      | 4:12 |
+| STARTED Create a separate flow for yarn based types                         |        |      | 0:57 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -52,6 +53,15 @@ Notes:
   hacked types. This will all be handled properly once we move to yarn
   types.
 
+*** STARTED Create a separate flow for yarn based types               :story:
+    CLOCK: [2016-01-06 Wed 22:30]--[2016-01-06 Wed 23:27] =>  0:57
+
+We won't be able to replace all cpp types in one go, so the best way
+to go about this is to incrementally update the formatters. This could
+be done by having two sets of elements to format, one formattable
+based and the other yarn based. We can update the interfaces, one type
+a time and have them share the same registrars etc.
+
 *** Tidy-up master include generation                                 :story:
 
 At present we have one humongous hack in the factory to generate the
@@ -62,14 +72,6 @@ master includers. How to do this properly:
 - use a visitor to dispatch the types.
 - do not filter out services?
 - filter registrars etc based on type dispatching.
-
-*** Create a separate flow for yarn based types                       :story:
-
-We won't be able to replace all cpp types in one go, so the best way
-to go about this is to incrementally update the formatters. This could
-be done by having two sets of elements to format, one formattable
-based and the other yarn based. We can update the interfaces, one type
-a time and have them share the same registrars etc.
 
 *** Implement formattables in terms of yarn types                     :story:
 
