@@ -12,20 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-06 Wed 23:30]
+#+CAPTION: Clock summary at [2016-01-07 Thu 08:05]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *5:24* |      |      |
+| *Total time*                                                                | *6:11* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 5:24   |      |      |
-| Active                                                                      |        | 5:24 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:15 |
+| Stories                                                                     | 6:11   |      |      |
+| Active                                                                      |        | 6:11 |      |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:29 |
 | COMPLETED Supply formatter properties and settings directly to formatter    |        |      | 4:12 |
 | STARTED Create a separate flow for yarn based types                         |        |      | 0:57 |
+| STARTED Create a blog post on product backlogs                              |        |      | 0:33 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-01-07 Thu 06:10]--[2016-01-07 Thu 06:24] =>  0:20
     CLOCK: [2016-01-06 Wed 23:28]--[2016-01-06 Wed 23:31] =>  0:03
     CLOCK: [2016-01-04 Mon 21:28]--[2016-01-04 Mon 21:40] =>  0:12
 
@@ -62,6 +64,91 @@ to go about this is to incrementally update the formatters. This could
 be done by having two sets of elements to format, one formattable
 based and the other yarn based. We can update the interfaces, one type
 a time and have them share the same registrars etc.
+*** STARTED Create a blog post on product backlogs                    :story:
+    CLOCK: [2016-01-07 Thu 06:25]--[2016-01-07 Thu 06:58] =>  0:33
+
+- linus quote on bug trackers
+- how the management of the backlog is not the same as the management
+  of stories/tasks. A task management system is still useful.
+- jira as a fire and forget capture system.
+- issues in github are not a replacement for a backlog, but useful in
+  managing user interactions; the kind of stories that go into the
+  backlog are different.
+- on product backlog grooming.
+- graph of features: a) all features in the world b) all features in
+  your product that are compatible with your vision c) all features in
+  the backlog d) all features in the sprint log.
+- find Kevlin Henney's graph on the relationship between product and
+  sprint backlog (had some arrows in a cycle). Also find some of his
+  quotes.
+- the importance of vision as the function that determines if a story
+  should go in the backlog or not; and how stories refine the
+  vision. It starts hazy but then coalesces over time and comes to
+  define what the product means.
+- define strategy has the set of steps required to implement the
+  vision.
+- the importance of mission for a sprint as a function that determines
+  what to get out of the backlog. Tactics go along with missions.
+- how a good product backlog could have a story that evolves over the
+  years only to become exactly the thing you need at a given sprint
+  and then you benefit from the knowledge and insight gained over that
+  period of time.
+- Stories mature in the backlog. They are at different stages:
+  occasional one-liner/todo style story, which gets filled in over
+  time until it has enough information to become implementable; it
+  then waits until there is a sprint with a consistent mission. Or it
+  could be that the story has to mature within the sprint
+  itself. Mature stories get refined: trimmed in scope, re-targeted,
+  or even cancelled because they no longer fit with the
+  vision. Cancelled stories are important because we may came back to
+  them - its just very unlikely that we do.
+- if your product backlog is empty your product is dead - find the
+  quote, probably Henney.
+- backlog becomes stale so its important to do deep grooming very
+  frequently. This is an expensive activity as time goes by because
+  a good backlog increases in size with time. As the number of
+  developers will not grow in line with the size of the backlog, this
+  becomes more of a problem over time. However, its still very
+  important to avoid from letting it go stale.
+- managing a backlog in org mode is very advantageous: one big flat
+  file, renderable in HTML; easy to fold and create structure as
+  required.
+- finding the right level of structure in the backlog is difficult; we
+  tried lots of structure but then it became expensive to maintain. At
+  the same time, stories become harder to find without structure so
+  there is less value. For example it would be nice to find all bugs
+  on a given component, or all visionary tasks, etc.
+- FIXME: we should not use the word "vision" as a label or category in
+  the backlog as it makes it confusing since its not the product
+  vision.
+- provide a definition of product and backlog (e.g. dictionary) and
+  then of product backlog using an agile definition.
+- before writing a story try very hard to find prior art. You need to
+  find all stories in the backlog that have any vague relation to this
+  new story and either modify those or extract the commonalities from
+  those into this new story.
+- if a product is the exploration of an unknown space, the backlog is
+  the sum total knowledge of that exploration, akin to a map of that
+  space. The backlog is akin to an historical map: it gives you the
+  thoughts of the person that last was in that area, in a given state
+  of mind. It is not a very accurate map, but then like those maps its
+  better than nothing.
+- FIXME: find the Henney quote on how even if you write the same code
+  twice you would not write it the same way because you are not the
+  same.
+- stories in backlog should have age/recency: time they were last
+  groomed. Devs must take a certain percentage of backlog stories
+  every sprint and groom them. The percentage is determined by the
+  rate at which stories are going in and out of backlog (some kind of
+  backlog growth rate).
+- find story on dead project that was on hacker news because the
+  number of open stories was too large.
+- talk about how useless and counter productive backlogs are in
+  professional places with large teams because the signal to noise
+  ratio is too high. People first start that sprint planning by going
+  through the backlog, then a subset of the backlog and then
+  eventually just ignore it all together because they spent the whole
+  sprint planning meet looking through the backlog.
 
 *** Investigate slow down                                             :story:
 
