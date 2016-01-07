@@ -5660,7 +5660,21 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
-***
+*** Easy addition of facets and formatters                            :story:
+
+The ideal state of the world is one where:
+
+- the facet directory contains a small JSON file with the fields
+  specific to a facet, including defaults, etc.
+- the facet directory is made up of a number of stitch templates and
+  their expansion into c++.
+- the backend model has an entity marked as =Stitch= or =Stitchable=
+  and linked to a stitch meta-template. Ideally one should be able to
+  create a concept for it so that we can define these properties only
+  once.
+- the template should have all of the parameters required such as
+  types of variables.
+
 *** Keep track of sewing terms allocation                             :story:
 
 This story just keeps track of how we are using the different sewing
