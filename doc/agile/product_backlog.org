@@ -5660,6 +5660,7 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+***
 *** Keep track of sewing terms allocation                             :story:
 
 This story just keeps track of how we are using the different sewing

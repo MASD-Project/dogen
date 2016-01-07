@@ -18,22 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt/types/workflow.hpp"
-#include "dogen/cpp/types/formatters/workflow.hpp"
-#include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
-#include "dogen/cpp/types/settings/initializer.hpp"
-#include "dogen/cpp/types/formatters/initializer.hpp"
-#include "dogen/cpp/types/workflow.hpp"
-#include "dogen/cpp/types/initializer.hpp"
+#ifndef DOGEN_QUILT_SERIALIZATION_REGISTRAR_SER_HPP
+#define DOGEN_QUILT_SERIALIZATION_REGISTRAR_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
-namespace cpp {
+namespace quilt {
 
-void initializer::initialize() {
-    formatters::initializer::initialize(formatters::workflow::registrar());
-    settings::initializer::initialize(
-        settings::opaque_settings_builder::registrar());
-    quilt::workflow::registrar().register_backend(std::make_shared<workflow>());
-}
+template<typename Archive>
+void register_types(Archive& ar);
 
 } }
+
+#endif

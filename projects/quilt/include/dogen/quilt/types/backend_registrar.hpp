@@ -18,22 +18,45 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt/types/workflow.hpp"
-#include "dogen/cpp/types/formatters/workflow.hpp"
-#include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
-#include "dogen/cpp/types/settings/initializer.hpp"
-#include "dogen/cpp/types/formatters/initializer.hpp"
-#include "dogen/cpp/types/workflow.hpp"
-#include "dogen/cpp/types/initializer.hpp"
+#ifndef DOGEN_QUILT_TYPES_BACKEND_REGISTRAR_HPP
+#define DOGEN_QUILT_TYPES_BACKEND_REGISTRAR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <memory>
+#include <forward_list>
+#include "dogen/quilt/types/backend_interface.hpp"
 
 namespace dogen {
-namespace cpp {
+namespace quilt {
 
-void initializer::initialize() {
-    formatters::initializer::initialize(formatters::workflow::registrar());
-    settings::initializer::initialize(
-        settings::opaque_settings_builder::registrar());
-    quilt::workflow::registrar().register_backend(std::make_shared<workflow>());
-}
+/**
+ * @brief Keeps track of all the available backends.
+ */
+class backend_registrar {
+public:
+    /**
+     * @brief Ensures the registrar is ready to be used.
+     */
+    void validate() const;
+
+    /**
+     * @brief Registers a backend.
+     */
+    void register_backend(std::shared_ptr<backend_interface> b);
+
+    /**
+     * @brief Returns all available backends.
+     */
+    const std::forward_list<std::shared_ptr<backend_interface> >&
+    backends() const;
+
+private:
+    std::forward_list<std::shared_ptr<backend_interface> > backends_;
+};
 
 } }
+
+#endif

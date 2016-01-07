@@ -61,7 +61,7 @@ add_custom_target(knit_${target}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-disable-cmakelists
-    --ignore-files-matching-regex .*/CMakeLists.txt    
+    --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
     --verbose
@@ -195,9 +195,9 @@ if(use_latest_knitter)
 endif()
 add_dependencies(knit_all knit_${target})
 
-set(target backend)
+set(target quilt)
 add_custom_target(knit_${target}
-    COMMENT "Knitting Backend model" VERBATIM
+    COMMENT "Knitting Quilt model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen

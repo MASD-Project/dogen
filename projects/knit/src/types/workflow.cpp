@@ -29,7 +29,7 @@
 #include "dogen/yarn/types/workflow.hpp"
 #include "dogen/formatters/types/formatting_error.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
-#include "dogen/backend/types/workflow.hpp"
+#include "dogen/quilt/types/workflow.hpp"
 #include "dogen/knit/types/workflow_error.hpp"
 #include "dogen/knit/types/housekeeper.hpp"
 #include "dogen/knit/types/workflow.hpp"
@@ -74,7 +74,7 @@ bool workflow::housekeeping_required() const {
 std::forward_list<dynamic::ownership_hierarchy> workflow::
 obtain_ownership_hierarchy_activity() const {
     std::forward_list<dynamic::ownership_hierarchy> r;
-    const auto& rg(backend::workflow::registrar());
+    const auto& rg(quilt::workflow::registrar());
     for (const auto b : rg.backends())
         r.splice_after(r.before_begin(), b->ownership_hierarchy());
 
@@ -192,7 +192,7 @@ void workflow::execute() const {
             return;
         }
 
-        dogen::backend::workflow w(knitting_options_, rp);
+        quilt::workflow w(knitting_options_, rp);
         const auto files(w.execute(m));
 
         const auto writer(obtain_file_writer_activity());

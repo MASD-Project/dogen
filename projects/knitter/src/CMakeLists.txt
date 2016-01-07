@@ -28,7 +28,7 @@ set_target_properties(knitter PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(knitter
     knit
-    backend
+    quilt
     cpp
     dia
     yarn

@@ -12,16 +12,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-07 Thu 08:05]
+#+CAPTION: Clock summary at [2016-01-07 Thu 23:33]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *6:11* |      |      |
+| *Total time*                                                                | *7:32* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 6:11   |      |      |
-| Active                                                                      |        | 6:11 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:29 |
+| Stories                                                                     | 7:32   |      |      |
+| Active                                                                      |        | 7:32 |      |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:09 |
 | COMPLETED Supply formatter properties and settings directly to formatter    |        |      | 4:12 |
+| COMPLETED Rename =backend= to =quilt=                                       |        |      | 0:41 |
 | STARTED Create a separate flow for yarn based types                         |        |      | 0:57 |
 | STARTED Create a blog post on product backlogs                              |        |      | 0:33 |
 #+end:
@@ -57,6 +58,12 @@ Notes:
   in the repositories as non-const references to populate them for the
   hacked types. This will all be handled properly once we move to yarn
   types.
+
+*** COMPLETED Rename =backend= to =quilt=                             :story:
+    CLOSED: [2016-01-07 Thu 23:33]
+    CLOCK: [2016-01-07 Thu 22:52]--[2016-01-07 Thu 23:33] =>  0:41
+
+As part of the quilt refactor, we need to rename =backend= to =quilt=.
 
 *** STARTED Create a separate flow for yarn based types               :story:
     CLOCK: [2016-01-06 Wed 22:30]--[2016-01-06 Wed 23:27] =>  0:57
@@ -153,10 +160,7 @@ a time and have them share the same registrars etc.
   eventually just ignore it all together because they spent the whole
   sprint planning meet looking through the backlog.
 - post: on product backlogs
-
-*** Rename =backend= to =quilt=                                       :story:
-
-As part of the quilt refactor, we need to rename =backend= to =quilt=.
+- [[http://tinyletter.com/programming-beyond-practices/letters/the-sad-graph-of-software-death][The sad graph of software death]]
 
 *** Rename =cpp= to =quilt.cpp=                                       :story:
 

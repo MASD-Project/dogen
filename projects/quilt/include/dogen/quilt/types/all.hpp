@@ -18,22 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_QUILT_TYPES_ALL_HPP
+#define DOGEN_QUILT_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/quilt/types/workflow.hpp"
-#include "dogen/cpp/types/formatters/workflow.hpp"
-#include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
-#include "dogen/cpp/types/settings/initializer.hpp"
-#include "dogen/cpp/types/formatters/initializer.hpp"
-#include "dogen/cpp/types/workflow.hpp"
-#include "dogen/cpp/types/initializer.hpp"
+#include "dogen/quilt/types/workflow_error.hpp"
+#include "dogen/quilt/types/registrar_error.hpp"
+#include "dogen/quilt/types/backend_interface.hpp"
+#include "dogen/quilt/types/backend_registrar.hpp"
 
-namespace dogen {
-namespace cpp {
-
-void initializer::initialize() {
-    formatters::initializer::initialize(formatters::workflow::registrar());
-    settings::initializer::initialize(
-        settings::opaque_settings_builder::registrar());
-    quilt::workflow::registrar().register_backend(std::make_shared<workflow>());
-}
-
-} }
+#endif

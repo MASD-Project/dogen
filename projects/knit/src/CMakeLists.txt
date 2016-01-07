@@ -28,7 +28,7 @@ target_link_libraries(knit
     dia
     yarn_dia
     yarn_json
-    backend
+    quilt
     formatters
     cpp
     config

@@ -33,7 +33,7 @@
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/formatters/types/repository.hpp"
-#include "dogen/backend/types/backend_interface.hpp"
+#include "dogen/quilt/types/backend_interface.hpp"
 #include "dogen/cpp/types/settings/bundle_repository.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
@@ -48,7 +48,7 @@ namespace cpp {
 /**
  * @brief Manages the c++ backend workflow.
  */
-class workflow final : public backend::backend_interface {
+class workflow final : public quilt::backend_interface {
 public:
     workflow() = default;
     workflow(const workflow&) = delete;
