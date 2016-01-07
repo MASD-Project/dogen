@@ -5036,6 +5036,12 @@ is, what then? We can't throw.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
+*** Emblems for appveyor and for version                              :story:
+
+The [[https://github.com/no1msd/mstch][mstch]] project seems to have great emblems for appveyor - you can
+actually distinguish it from travis - and also an emblem for the
+current project version. See if we can apply it to Dogen.
+
 *** Compile dogen in Windows using Visual Studio 2015                 :story:
 
 *New Understanding*
