@@ -181,6 +181,9 @@ We need to handle properly the following cases:
 
 *** Stitch meta-templates                                             :story:
 
+*Note*: re-read story [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_64.org#code-generating-formatters-as-text-templates][Code-generating formatters as text templates]] as
+some of these ideas were already there.
+
 In the quest for defining a single stitch template which then becomes
 a formatter - without any additional infrastructure required at all -
 we hit on an idea: stitch meta-templates. Basically we would have two
