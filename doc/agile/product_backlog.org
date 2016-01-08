@@ -10,6 +10,13 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider renaming test data to sequence                           :story:
+
+Test data is a strange name. We need something slightly more idiomatic
+such as perhaps sequence? We need to look into STL generator
+terminology. We should also look into Rx and transducers - these
+should be pluggable into these. Ranges also come to mind.
+
 *** Handle registration of services properly                          :story:
 
 We need a way to determine if a type which is part of a generalisation
