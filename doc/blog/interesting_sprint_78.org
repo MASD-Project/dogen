@@ -59,6 +59,9 @@ into recently-ish.
 - [[http://blog.scottfrees.com/automating-a-c-program-from-a-node-js-web-app][Automating a C++ program from a Node.js web app]]: If you are
   considering exposing your C++ code into JS, this is a series of
   posts to read.
+- [[https://medium.com/swlh/starting-a-tech-startup-with-c-6b5d5856e6de#.tocwuwbe8][Starting a tech startup with C++]]: lots of libraries I never heard of
+  and an insight on the performance differences between python and
+  c++.
 
 * Layman Science
 
