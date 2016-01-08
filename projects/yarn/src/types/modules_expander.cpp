@@ -121,12 +121,32 @@ boost::optional<name> updater::containing_module(const name& n) {
     }
 
     name_builder b;
-    b.external_modules(n.location().external_modules());
+
+    /* we can always take the external modules regardless because these
+     * do not contribute to the modules in the model.
+     */
+     b.external_modules(n.location().external_modules());
 
     auto imp(n.location().internal_modules());
-    if (imp.empty())
+    if (imp.empty()) {
+        /* if there are no internal modules, we must be at the
+         * top-level, so take the model name.
+         */
         b.simple_name(mn);
-    else {
+
+        /* the model name may be composite. If so, we need to make
+         * sure we add the remaining components.
+         */
+        if (!n.location().model_modules().empty()) {
+            auto remaining_model_modules(n.location().model_modules());
+            remaining_model_modules.pop_back();
+            b.model_modules(remaining_model_modules);
+        }
+    } else {
+        /* if we are an internal module, we can take the module name
+         * and use that as our simple name. We need to add the
+         * remaining internal module names to our location.
+         */
         b.model_modules(n.location().model_modules());
         b.simple_name(imp.back());
         imp.pop_back();
@@ -143,8 +163,8 @@ boost::optional<name> updater::containing_module(const name& n) {
         return module_n;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Could not find containing module: "
-                             << module_n.qualified();
+    BOOST_LOG_SEV(lg, warn) << "Could not find containing module: "
+                            << module_n.qualified();
     return boost::optional<name>();
 }
 

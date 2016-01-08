@@ -35,6 +35,8 @@ namespace yarn {
 std::unordered_set<std::string> properties_expander::
 obtain_top_level_module_names(const intermediate_model& m) const {
     std::unordered_set<std::string> r;
+    BOOST_LOG_SEV(lg, debug) << "Obtaining top-level modules for: "
+                             << m.name().qualified();
 
     for (const auto& pair : m.modules()) {
         const auto& module(pair.second);
