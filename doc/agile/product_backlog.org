@@ -10,6 +10,25 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Reference to non-existent dynamic fields produce unhelpful errors :story:
+
+When renaming fields, we get the following dogen errors:
+
+: 2016-01-09 22:54:27.703708 [ERROR] [dynamic.workflow] Field definition not found: cpp.odb.class_header_formatter.inclusion_required
+
+This is not particularly helpful. We should state:
+
+- that the field instance is in the user model but does not exist in
+  the library;
+- the type in which the field instance was used;
+- for extra bonus points use the [[http://en.wikipedia.org/wiki/levenshtein_distance][levenshtein distance]] for spelling
+  suggestions. See story on this.
+
+In addition this also depends on the field. For example, while
+renaming =dia.comment= to =yarn.dia.comment=, we had no errors at all,
+but then all fields defaulted. We should have gotten an error message
+stating that the field did not exist.
+
 *** Consider renaming test data to sequence                           :story:
 
 Test data is a strange name. We need something slightly more idiomatic
