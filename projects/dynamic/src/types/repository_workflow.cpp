@@ -21,7 +21,9 @@
 #include <unordered_set>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/dynamic/io/repository_io.hpp"
+#include "dogen/dynamic/io/ownership_hierarchy_io.hpp"
 #include "dogen/dynamic/types/instantiator.hpp"
 #include "dogen/dynamic/types/workflow_error.hpp"
 #include "dogen/dynamic/types/hydration_workflow.hpp"
@@ -75,6 +77,7 @@ repository repository_workflow::execute(
     const std::forward_list<ownership_hierarchy>& oh,
     const std::forward_list<boost::filesystem::path>& dirs) const {
     BOOST_LOG_SEV(lg, debug) << "Generating repository.";
+    BOOST_LOG_SEV(lg, debug) << "Ownership hierarchy: " << oh;
 
     const auto original(hydrate_directories_activity(dirs));
     const auto instantiated(instantiate_templates_activity(oh, original));

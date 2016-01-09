@@ -1,0 +1,40 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/formatters/types/cpp/scoped_namespace_formatter.hpp" #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/associative_container_helper_stitch.hpp" #>
+<#@ containing_namespaces=dogen::quilt::cpp::formatters::io #>
+<#+
+
+void associative_container_helper_stitch(
+    formatters::nested_type_formatting_assistant& fa,
+    const formattables::nested_type_info& t) {
+
+    {
+        auto snf(fa.make_scoped_namespace_formatter(t));
+        const auto key(t.children().front());
+        const auto value(t.children().back());
+#>
+
+inline std::ostream& operator<<(std::ostream& s, const <#= t.complete_name() #>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << <#= fa.streaming_for_type(key, "i->first") #>;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << <#= fa.streaming_for_type(value, "i->second") #>;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+<#+
+    }
+#>
+
+<#+
+}
+#>

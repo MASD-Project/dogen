@@ -1,0 +1,34 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/pair_helper_stitch.hpp" #>
+<#@ containing_namespaces=dogen::quilt::cpp::formatters::io #>
+<#+
+
+void pair_helper_stitch(
+    formatters::nested_type_formatting_assistant& fa,
+    const formattables::nested_type_info& t) {
+
+    {
+        auto snf(fa.make_scoped_namespace_formatter(t));
+        const auto first(t.children().front());
+        const auto second(t.children().back());
+#>
+
+inline std::ostream& operator<<(std::ostream& s, const <#= t.complete_name() #>& v) {
+    s << "{ " << "\"__type__\": " << "\"<#= t.name() #>\"" << ", ";
+
+    s << "\"first\": " << <#= fa.streaming_for_type(first, "v.first") #> << ", ";
+    s << "\"second\": " << <#= fa.streaming_for_type(second, "v.second") #>;
+    s << " }";
+    return s;
+}
+
+<#+
+    }
+#>
+
+<#+
+}
+#>

@@ -12,19 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-07 Thu 23:33]
-| <75>                                                                        |        |      |      |
-| Headline                                                                    | Time   |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *7:32* |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 7:32   |      |      |
-| Active                                                                      |        | 7:32 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:09 |
-| COMPLETED Supply formatter properties and settings directly to formatter    |        |      | 4:12 |
-| COMPLETED Rename =backend= to =quilt=                                       |        |      | 0:41 |
-| STARTED Create a separate flow for yarn based types                         |        |      | 0:57 |
-| STARTED Create a blog post on product backlogs                              |        |      | 0:33 |
+#+CAPTION: Clock summary at [2016-01-09 Sat 02:52]
+| <75>                                                                        |         |       |      |
+| Headline                                                                    | Time    |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                                | *12:33* |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| Stories                                                                     | 12:33   |       |      |
+| Active                                                                      |         | 12:33 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:09 |
+| COMPLETED Supply formatter properties and settings directly to formatter    |         |       | 4:12 |
+| COMPLETED Rename =backend= to =quilt=                                       |         |       | 0:41 |
+| STARTED Rename =cpp= to =quilt.cpp=                                         |         |       | 5:01 |
+| STARTED Create a separate flow for yarn based types                         |         |       | 0:57 |
+| STARTED Create a blog post on product backlogs                              |         |       | 0:33 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -64,6 +65,12 @@ Notes:
     CLOCK: [2016-01-07 Thu 22:52]--[2016-01-07 Thu 23:33] =>  0:41
 
 As part of the quilt refactor, we need to rename =backend= to =quilt=.
+
+*** STARTED Rename =cpp= to =quilt.cpp=                               :story:
+    CLOCK: [2016-01-08 Fri 23:20]--[2016-01-09 Sat 02:52] =>  3:32
+    CLOCK: [2016-01-08 Fri 21:11]--[2016-01-08 Fri 22:40] =>  1:29
+
+As part of the quilt refactor we need to rename =cpp= to =quilt.cpp=.
 
 *** STARTED Create a separate flow for yarn based types               :story:
     CLOCK: [2016-01-06 Wed 22:30]--[2016-01-06 Wed 23:27] =>  0:57
@@ -161,10 +168,6 @@ a time and have them share the same registrars etc.
   sprint planning meet looking through the backlog.
 - post: on product backlogs
 - [[http://tinyletter.com/programming-beyond-practices/letters/the-sad-graph-of-software-death][The sad graph of software death]]
-
-*** Rename =cpp= to =quilt.cpp=                                       :story:
-
-As part of the quilt refactor we need to rename =cpp= to =quilt.cpp=.
 
 *** Attach helper methods to types dynamically                        :story:
 

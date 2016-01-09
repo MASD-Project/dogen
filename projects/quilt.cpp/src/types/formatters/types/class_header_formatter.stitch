@@ -1,0 +1,398 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/class_header_formatter_stitch.hpp" #>
+<#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+<#@ containing_namespaces=dogen::quilt::cpp::formatters::types #>
+<#+
+
+dogen::formatters::file class_header_formatter_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::class_info& c) {
+
+    {
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
+#>
+
+<#+
+            fa.comment(c.documentation());
+            if (c.parents().empty()) {
+#>
+class <#= c.name() #> <#= fa.make_final_keyword_text(c) #>{
+<#+
+            } else if (c.parents().size() == 1) {
+#>
+class <#= c.name() #> <#= fa.make_final_keyword_text(c) #>: public <#= c.parents().front().qualified_name() #> {
+<#+
+            } else {
+                dogen::formatters::sequence_formatter sf(c.parents().size());
+                for (const auto p : c.parents()) {
+#>
+    public <#= p.qualified_name() #><#= sf.postfix() #>
+<#+
+                    sf.next();
+                }
+            }
+#>
+public:
+<#+
+            /*
+             * Compiler generated constructors and destructors.
+             */
+            if (!c.requires_manual_default_constructor())
+#>
+    <#= c.name() #>() = default;
+    <#= c.name() #>(const <#= c.name() #>&) = default;
+<#+
+            if (!c.requires_manual_move_constructor())
+#>
+    <#= c.name() #>(<#= c.name() #>&&) = default;
+<#+
+            if (!c.is_parent() && c.parents().empty())
+#>
+    ~<#= c.name() #>() = default;
+<#+
+            if (c.is_immutable())
+#>
+    <#= c.name() #>& operator=(const <#= c.name() #>&) = delete;
+<#+
+            else if (c.all_properties().empty())
+#>
+    <#= c.name() #>& operator=(const <#= c.name() #>&) = default;
+
+<#+
+            /*
+             * Manually generated default constructor.
+             */
+            if (c.requires_manual_default_constructor()) {
+#>
+public:
+    <#= c.name() #>();
+
+<#+
+            }
+
+            /*
+             * Manually generated destructor.
+             *
+             * according to MEC++, item 33, base classes should always be
+             * abstract. this avoids all sorts of tricky problems with
+             * assignment and swap.
+             *
+             * incidentally, this also fixes some strange clang errors:
+             * undefined reference to `vtable.
+             */
+            if (c.is_parent()) {
+#>
+    virtual ~<#= c.name() #>() noexcept = 0;
+
+<#+
+            } else if (c.parents().size() != 0) {
+#>
+    virtual ~<#= c.name() #>() noexcept { }
+
+<#+
+            }
+
+            /*
+             * Manually generated move constructor.
+             */
+            if (c.requires_manual_move_constructor()) {
+#>
+public:
+    <#= c.name() #>(<#= c.name() #>&& rhs);
+
+<#+
+            }
+
+            /*
+             * Manually generated complete constructor.
+             */
+            if (!fa.is_complete_constructor_disabled() && !c.all_properties().empty()) {
+#>
+public:
+<#+
+                const auto prop_count(c.all_properties().size());
+                if (prop_count == 1) {
+                    const auto p(*c.all_properties().begin());
+#>
+    explicit <#= c.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #>);
+<#+
+                } else {
+#>
+    <#= c.name() #>(
+<#+
+                    dogen::formatters::sequence_formatter sf(prop_count);
+                    sf.postfix_configuration().last(");");
+                    for (const auto& p : c.all_properties()) {
+#>
+        const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #><#= sf.postfix() #>
+<#+
+                        sf.next();
+                    }
+                }
+#>
+
+<#+
+            }
+
+            /*
+             * Friends
+             */
+            if (fa.is_serialization_enabled()) {
+#>
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const <#= c.name() #>& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, <#= c.name() #>& v, unsigned int version);
+
+<#+
+            }
+
+            /*
+             * Visitation.
+             */
+            if (c.is_visitable()) {
+#>
+public:
+    virtual void accept(const <#= c.name() #>_visitor& v) const = 0;
+    virtual void accept(<#= c.name() #>_visitor& v) const = 0;
+    virtual void accept(const <#= c.name() #>_visitor& v) = 0;
+    virtual void accept(<#= c.name() #>_visitor& v) = 0;
+
+<#+
+            } else if (c.is_root_parent_visitable() && !c.is_parent()) {
+#>
+public:
+    virtual void accept(const <#= c.root_parent_name() #>_visitor& v) const override {
+        v.visit(*this);
+    }
+
+    virtual void accept(<#= c.root_parent_name() #>_visitor& v) const override {
+        v.visit(*this);
+    }
+
+    virtual void accept(const <#= c.root_parent_name() #>_visitor& v) override {
+        v.visit(*this);
+    }
+
+    virtual void accept(<#= c.root_parent_name() #>_visitor& v) override {
+        v.visit(*this);
+    }
+
+<#+
+            }
+
+            /*
+             * Streaming
+             */
+            if (fa.is_io_enabled()) {
+                if (c.is_parent()) {
+#>
+public:
+    virtual void to_stream(std::ostream& s) const;
+
+<#+
+                } else if (!c.parents().empty()) {
+#>
+public:
+    void to_stream(std::ostream& s) const override;
+
+<#+
+                }
+            }
+
+            /*
+             * Getters and setters.
+             */
+            if (!c.properties().empty()) {
+#>
+public:
+<#+
+                for (const auto p : c.properties()) {
+                    fa.comment_start_method_group(p.documentation(), !p.is_immutable());
+
+                    if (p.type().is_primitive() || p.type().is_enumeration()) {
+#>
+    <#= p.type().complete_name() #> <#= p.name() #>() const;
+<#+
+                        if (p.is_immutable()) {
+#>
+
+<#+
+                            continue;
+                        }
+#>
+    <#= fa.make_setter_return_type(c.name(), p) #> <#= p.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> v);
+<#+
+                    } else {
+#>
+    const <#= p.type().complete_name() #>& <#= p.name() #>() const;
+<#+
+                        if (p.is_immutable()) {
+#>
+
+<#+
+                            continue;
+                        }
+#>
+    <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #>();
+    <#= fa.make_setter_return_type(c.name(), p) #> <#= p.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> v);
+    <#= fa.make_setter_return_type(c.name(), p) #> <#= p.name() #>(const <#= p.type().complete_name() #>&& v);
+<#+
+                    }
+                    fa.comment_end_method_group(p.documentation(), !p.is_immutable());
+#>
+
+<#+
+                }
+            }
+
+            /*
+             * Equality.
+             *
+             * Equality is only public in leaf classes - MEC++-33.
+             */
+            if (c.is_parent()) {
+#>
+protected:
+    bool compare(const <#= c.name() #>& rhs) const;
+<#+
+            } else {
+#>
+public:
+    bool operator==(const <#= c.name() #>& rhs) const;
+    bool operator!=(const <#= c.name() #>& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+<#+
+            }
+
+            if (c.is_parent() || !c.parents().empty()) {
+#>
+public:
+<#+
+                if (c.is_parent() && c.parents().empty()) {
+#>
+    virtual bool equals(const <#= c.name() #>& other) const = 0;
+<#+
+                } else if (c.is_parent()) {
+#>
+    virtual bool equals(const <#= c.root_parent_name_qualified() #>& other) const = 0;
+<#+
+                } else if (!c.parents().empty()) {
+#>
+    bool equals(const <#= c.root_parent_name_qualified() #>& other) const override;
+<#+
+                }
+#>
+
+<#+
+             }
+
+            /*
+             * Swap and assignment.
+             *
+             * Swap and assignment are only public in leaf classes - MEC++-33
+             */
+            if ((!c.all_properties().empty() || c.is_parent()) && !c.is_immutable()) {
+                if (c.is_parent()) {
+#>
+protected:
+<#+
+                } else {
+#>
+public:
+<#+
+                }
+#>
+    void swap(<#= c.name() #>& other) noexcept;
+<#+
+                if (!c.is_parent() && !c.is_immutable()) {
+#>
+    <#= c.name() #>& operator=(<#= c.name() #> other);
+<#+
+                }
+#>
+
+<#+
+            }
+
+            /*
+             * Member variables.
+             */
+            if (!c.properties().empty()) {
+#>
+private:
+<#+
+                for (const auto& p : c.properties()) {
+#>
+    <#= p.type().complete_name() #> <#= fa.make_member_variable_name(p) #>;
+<#+
+                }
+            }
+#>
+};
+
+<#+
+            /*
+             * Destructor implementation.
+             */
+            if (c.is_parent()) {
+#>
+inline <#= c.name() #>::~<#= c.name() #>() noexcept { }
+
+<#+
+            }
+
+            /*
+             * Global inserter operator implementation
+             */
+            if (fa.is_io_enabled() && fa.is_io_integrated()) {
+#>
+    std::ostream& operator<<(std::ostream& s, const <#= c.name() #>& v);
+
+<#+
+            }
+
+            /*
+             * Global equality operator implementation.
+             */
+            if (c.is_parent()) {
+#>
+inline bool operator==(const <#= c.name() #>& lhs, const <#= c.name() #>& rhs) {
+    return lhs.equals(rhs);
+}
+
+<#+
+            }
+        }
+
+        if (!c.all_properties().empty() && !c.is_parent() && !c.is_immutable()) {
+#>
+
+namespace std {
+
+template<>
+inline void swap(
+    <#= c.qualified_name() #>& lhs,
+    <#= c.qualified_name() #>& rhs) {
+    lhs.swap(rhs);
+}
+
+}
+<#+
+        } // snf
+#>
+
+<#+
+    } // sbf
+    return fa.make_file();
+}
+#>

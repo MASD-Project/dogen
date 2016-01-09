@@ -1,0 +1,84 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp" #>
+<#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+<#@ containing_namespaces=dogen::quilt::cpp::formatters::io #>
+<#+
+
+void inserter_implementation_helper_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::class_info& c,
+    const bool inside_class) {
+
+    if (c.requires_stream_manipulators()) {
+#>
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+<#+
+    }
+
+    const bool no_parents_and_no_properties(c.parents().empty() &&
+        c.all_properties().empty());
+#>
+    s << " { "
+      << "\"__type__\": " << "\"<#= c.qualified_name() #>\""<#= (no_parents_and_no_properties ? " << \" }\";" : " << \", \"") #>
+<#+
+
+    dogen::formatters::sequence_formatter sf(c.parents().size());
+    sf.prefix_configuration().first("  << ").not_first("s << ");
+    sf.element_separator("");
+    for (const auto p : c.parents()) {
+#>
+    <#= sf.prefix() #>"\"__parent_<#= sf.current_position() #>__\": "<#= sf.postfix() #>;
+    <#= p.name() #>::to_stream(s);
+<#+
+        sf.next();
+    }
+
+    auto ntfa(fa.make_nested_type_formatting_assistant());
+    sf.reset(c.properties().size());
+
+    if (!c.parents().empty())
+        sf.prefix_configuration().first("s << \", \"\n      ");
+    else
+        sf.prefix_configuration().first("  ");
+    sf.prefix_configuration().not_first("  ");
+    sf.postfix_configuration().not_last(" << \", \"");
+    sf.element_separator("");
+
+    for (const auto p : c.properties()) {
+        std::string variable_name;
+        if (inside_class)
+            variable_name = fa.make_member_variable_name(p);
+        else
+            variable_name = "v." + fa.make_getter_setter_name(p) + "()";
+
+#>
+    <#= sf.prefix() #><< "\"<#=p.name() #>\": " << <#= ntfa.streaming_for_type(p.type(), variable_name) #><#= sf.postfix() #>
+<#+
+        sf.next();
+    }
+
+    if (!no_parents_and_no_properties) {
+        if (!c.properties().empty())
+#>
+      << " }";
+<#+
+        else
+#>
+    s << " }";
+<#+
+    }
+
+    if (!inside_class)
+#>
+    return(s);
+<#+
+}
+#>

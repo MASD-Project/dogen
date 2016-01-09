@@ -1,0 +1,43 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/class_implementation_formatter_stitch.hpp" #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp" #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp" #>
+<#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+<#@ containing_namespaces=dogen::quilt::cpp::formatters::io #>
+<#+
+
+dogen::formatters::file class_implementation_formatter_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::class_info& c) {
+
+    {
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+        fa.add_helper_methods();
+
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
+            const bool no_arg(!c.is_parent() && c.parents().empty() &&
+                c.properties().empty());
+#>
+
+std::ostream& operator<<(std::ostream& s, const <#= c.name() #>&<#= (no_arg ? "" : " v")  #>) {
+<#+
+            if (c.is_parent() || !c.parents().empty()) {
+#>
+    v.to_stream(s);
+    return(s);
+<#+
+            } else
+                io::inserter_implementation_helper_stitch(fa, c, false/*inside_class*/);
+#>
+}
+
+<#+
+        } // snf
+    } // sbf
+    return fa.make_file();
+}
+#>

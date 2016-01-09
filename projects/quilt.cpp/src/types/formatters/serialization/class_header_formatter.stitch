@@ -1,0 +1,57 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/serialization/class_header_formatter_stitch.hpp" #>
+<#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+<#@ containing_namespaces=dogen::quilt::cpp::formatters::serialization #>
+<#+
+
+dogen::formatters::file class_header_formatter_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::class_info& c) {
+    {
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+
+        if (!c.is_parent() && !c.parents().empty()) {
+            for (const auto p : c.parents()) {
+#>
+namespace boost {
+
+template<>struct
+is_virtual_base_of<
+    <#= p.qualified_name() #>,
+    <#= c.qualified_name() #>
+> : public mpl::true_ {};
+
+}
+<#+
+            }
+        }
+#>
+
+BOOST_SERIALIZATION_SPLIT_FREE(<#= c.qualified_name() #>)
+<#+
+        if (c.is_parent()) {
+#>
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(<#= c.qualified_name() #>)
+
+<#+
+        }
+#>
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const <#= c.qualified_name() #>& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, <#= c.qualified_name() #>& v, unsigned int version);
+
+} }
+
+<#+
+    } // sbf
+    return fa.make_file();
+}
+#>

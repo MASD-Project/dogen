@@ -1,0 +1,34 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/namespace_header_formatter_stitch.hpp" #>
+<#@ containing_namespaces=dogen::quilt::cpp::formatters::types #>
+<#+
+
+dogen::formatters::file namespace_header_formatter_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::namespace_info& n) {
+
+    {
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
+#>
+
+<#+
+            fa.comment(n.documentation());
+#>
+namespace <#= n.name() #> {
+}
+
+<#+
+        } // snf
+#>
+
+<#+
+    } // sbf
+    return fa.make_file();
+}
+
+#>

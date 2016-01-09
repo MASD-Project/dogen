@@ -29,13 +29,13 @@ set_target_properties(knit_spec PROPERTIES OUTPUT_NAME ${binary_name})
 target_link_libraries(knit_spec
     knit
     utility
-    cpp
+    quilt
+    quilt_cpp
     dia
     yarn
     yarn_json
     yarn_dia
     config
-    quilt
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${PQXX_LIBRARIES}

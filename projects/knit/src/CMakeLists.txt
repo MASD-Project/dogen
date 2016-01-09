@@ -29,8 +29,8 @@ target_link_libraries(knit
     yarn_dia
     yarn_json
     quilt
+    quilt_cpp
     formatters
-    cpp
     config
     utility
     ${LIBXML2_LIBRARIES}

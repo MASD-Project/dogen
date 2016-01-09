@@ -1,0 +1,26 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/hash/ptree_helper_stitch.hpp" #>
+<#@ containing_namespaces=dogen::quilt::cpp::formatters::hash #>
+<#+
+
+void ptree_helper_stitch(
+    formatters::nested_type_formatting_assistant& fa,
+    const formattables::nested_type_info& t) {
+#>
+
+inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
+    std::size_t seed(0);
+    for (const auto& node : v) {
+        combine(seed, node.first);
+        combine(seed, node.second.data());
+        combine(seed, hash_<#= t.complete_identifiable_name() #>(node.second));
+    }
+
+    return seed;
+}
+<#+
+}
+#>

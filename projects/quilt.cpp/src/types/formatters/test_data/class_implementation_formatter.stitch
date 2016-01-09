@@ -1,0 +1,181 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/test_data/class_implementation_formatter_stitch.hpp" #>
+<#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+<#@ containing_namespaces=dogen::quilt::cpp::formatters::test_data #>
+<#+
+
+dogen::formatters::file class_implementation_formatter_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::class_info& c) {
+
+    {
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+        if (!c.properties().empty()) {
+#>
+namespace {
+<#+
+        fa.add_helper_methods();
+#>
+
+}
+
+<#+
+        }
+
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
+
+            /*
+             * Default constructor.
+             */
+            if (!c.is_parent()) {
+#>
+
+<#= c.name() #>_generator::<#= c.name() #>_generator() : position_(0) { }
+<#+
+            }
+
+            /*
+             * Populate method.
+             */
+            if (!c.is_immutable()) {
+                bool no_args(c.properties().empty() && c.parents().empty());
+                if (no_args) {
+#>
+
+void <#= c.name() #>_generator::
+populate(const unsigned int /*position*/, result_type& /*v*/) {
+<#+
+                } else {
+#>
+
+void <#= c.name() #>_generator::
+populate(const unsigned int position, result_type& v) {
+<#+
+                }
+
+                for (const auto p : c.parents()) {
+#>
+    <#= p.qualified_name() #>_generator::populate(position, v);
+<#+
+                }
+                unsigned int i(0);
+                for (const auto p : c.properties()) {
+#>
+    v.<#= p.name() #>(create_<#= p.type().complete_identifiable_name() #>(position + <#= i #>));
+<#+
+                    ++i;
+                }
+#>
+}
+<#+
+            }
+
+            /*
+             * Create method.
+             */
+            if (!c.is_parent()) {
+                 const bool no_arg(c.all_properties().empty());
+#>
+
+<#= c.name() #>_generator::result_type
+<#= c.name() #>_generator::create(const unsigned int<#= (no_arg ? "/*position*/" : " position") #>) {
+<#+
+                if (c.is_immutable()) {
+#>
+    return <#= c.name() #>(
+<#+
+                    // FIXME: hack
+                    if (c.properties().empty())
+#>
+
+<#+
+                    else {
+                        dogen::formatters::sequence_formatter sf(c.properties().size());
+                        for (const auto p : c.properties()) {
+#>
+        create_<#=  p.type().complete_identifiable_name() #>(position + <#= sf.current_position() #>)<#= sf.postfix() #>
+<#+
+                            sf.next();
+                        }
+                    }
+#>
+        );
+<#+
+                } else {
+#>
+    <#= c.name() #> r;
+<#+
+                    if (!c.all_properties().empty())
+#>
+    <#= c.name() #>_generator::populate(position, r);
+    return r;
+<#+
+                }
+#>
+}
+<#+
+            }
+
+            /*
+             * Create method ptr.
+             */
+#>
+
+<#= c.name() #>_generator::result_type*
+<#= c.name() #>_generator::create_ptr(const unsigned int position) {
+<#+
+            if (c.leaves().empty()) {
+                if (c.is_immutable())
+#>
+    return new <#= c.name() #>(create(position));
+<#+
+                else {
+#>
+    <#= c.name() #>* p = new <#= c.name() #>();
+    <#= c.name() #>_generator::populate(position, *p);
+    return p;
+<#+
+                }
+            } else {
+                auto leaves(c.leaves());
+                const auto front(leaves.front());
+                leaves.pop_front();
+                unsigned int i(0);
+                unsigned int total(leaves.size());
+                for (const auto l : leaves) {
+#>
+    if ((position % <#= total #>) == <#= i++ #>)
+        return <#= l #>_generator::create_ptr(position);
+<#+
+                }
+#>
+    return <#= front #>_generator::create_ptr(position);
+<#+
+            }
+#>
+}
+<#+
+            /*
+             * Function operator
+             */
+             if (!c.is_parent()) {
+#>
+
+<#= c.name() #>_generator::result_type
+<#= c.name() #>_generator::operator()() {
+    return create(position_++);
+}
+<#+
+            }
+#>
+
+<#+
+        } // snf
+    } // sbf
+    return fa.make_file();
+}
+#>
