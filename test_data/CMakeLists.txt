@@ -19,11 +19,10 @@
 #
 set(cur_dir ${CMAKE_CURRENT_SOURCE_DIR})
 file(GLOB sub_dir RELATIVE ${cur_dir} *)
-set(list_of_dirs "")
 add_custom_target(rebase_dataset)
 add_custom_target(diff_dataset)
 
-# handle the special case of empty TDS
+# handle the special case of empty test data set
 file(MAKE_DIRECTORY ${stage_test_data_dir}/empty_tds/actual)
 file(MAKE_DIRECTORY ${stage_test_data_dir}/empty_tds/expected)
 

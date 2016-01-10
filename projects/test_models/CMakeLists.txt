@@ -37,7 +37,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/test_models/enable_facet_io/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/enable_facet_serialization/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/two_layers_with_objects/include
-        ${CMAKE_SOURCE_DIR}/projects/test_models/trivial_inheritance/include
+    ${CMAKE_SOURCE_DIR}/projects/test_models/trivial_inheritance/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/trivial_association/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/std_model/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/boost_model/include
