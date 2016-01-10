@@ -40,16 +40,16 @@ const std::string xml_reader_input_dir("xml_reader/input");
 const std::string xml_reader_expected_dir("xml_reader/expected");
 const std::string xml_reader_actual_dir("xml_reader/actual");
 
-const std::string yarn_dia_dir("yarn_dia");
-const std::string yarn_dia_input_dir("yarn_dia/input");
-const std::string yarn_dia_expected_dir("yarn_dia/expected");
-const std::string yarn_dia_actual_dir("yarn_dia/actual");
+const std::string yarn_dia_dir("yarn.dia");
+const std::string yarn_dia_input_dir("yarn.dia/input");
+const std::string yarn_dia_expected_dir("yarn.dia/expected");
+const std::string yarn_dia_actual_dir("yarn.dia/actual");
 
 const std::string boolean_values_file("xml_reader/input/boolean_values.xml");
 const std::string class_namespace_file_dia(
-    "yarn_dia/input/class_in_a_package.dia");
+    "yarn.dia/input/class_in_a_package.dia");
 const std::string class_namespace_file_diaxml(
-    "yarn_dia/expected/class_in_a_package.diaxml");
+    "yarn.dia/expected/class_in_a_package.diaxml");
 const std::string non_existent_file_name("non_existent_file");
 
 void test_main_directory(boost::filesystem::path path, std::string data_set) {

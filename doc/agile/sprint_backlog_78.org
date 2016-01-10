@@ -12,18 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-10 Sun 10:33]
+#+CAPTION: Clock summary at [2016-01-10 Sun 10:42]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *14:56* |       |      |
+| *Total time*                                                                | *15:01* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 14:56   |       |      |
-| Active                                                                      |         | 14:56 |      |
+| Stories                                                                     | 15:01   |       |      |
+| Active                                                                      |         | 15:01 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:09 |
 | COMPLETED Supply formatter properties and settings directly to formatter    |         |       | 4:12 |
 | COMPLETED Rename =backend= to =quilt=                                       |         |       | 0:41 |
 | COMPLETED Rename =cpp= to =quilt.cpp=                                       |         |       | 7:24 |
+| COMPLETED Rename test data folder for yarn.dia files                        |         |       | 0:05 |
 | STARTED Create a separate flow for yarn based types                         |         |       | 0:57 |
 | STARTED Create a blog post on product backlogs                              |         |       | 0:33 |
 #+end:
@@ -80,7 +81,9 @@ Notes:
 - namespace documentation file is not part of master includer
 - not generating services
 
-*** Rename test data folder for yarn.dia files                        :story:
+*** COMPLETED Rename test data folder for yarn.dia files              :story:
+    CLOSED: [2016-01-10 Sun 10:42]
+    CLOCK: [2016-01-10 Sun 10:37]--[2016-01-10 Sun 10:42] =>  0:05
 
 Test data folder is still called =yarn_dia= rather than =yarn.dia=.
 
