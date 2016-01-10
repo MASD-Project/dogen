@@ -36,7 +36,7 @@ validating_resolver::resolve(boost::filesystem::path relative) {
         return r;
 
     using dogen::utility::filesystem::file_not_found;
-    BOOST_THROW_EXCEPTION(file_not_found(relative.string()));
+    BOOST_THROW_EXCEPTION(file_not_found(r.string()));
 }
 
 } } }

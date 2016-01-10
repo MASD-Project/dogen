@@ -17,8 +17,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(curdir ${CMAKE_CURRENT_SOURCE_DIR})
-file(GLOB sub-dir RELATIVE ${curdir} *)
+set(cur_dir ${CMAKE_CURRENT_SOURCE_DIR})
+file(GLOB sub_dir RELATIVE ${cur_dir} *)
 set(list_of_dirs "")
 add_custom_target(rebase_dataset)
 add_custom_target(diff_dataset)
@@ -27,10 +27,10 @@ add_custom_target(diff_dataset)
 file(MAKE_DIRECTORY ${stage_test_data_dir}/empty_tds/actual)
 file(MAKE_DIRECTORY ${stage_test_data_dir}/empty_tds/expected)
 
-foreach(dir ${sub-dir})
-    if(IS_DIRECTORY ${curdir}/${dir})
+foreach(dir ${sub_dir})
+    if(IS_DIRECTORY ${cur_dir}/${dir})
         file(REMOVE_RECURSE ${stage_test_data_dir}/${dir}/expected)
-        file(COPY ${curdir}/${dir} DESTINATION ${stage_dir}/test_data)
+        file(COPY ${cur_dir}/${dir} DESTINATION ${stage_dir}/test_data)
         file(MAKE_DIRECTORY ${stage_test_data_dir}/${dir}/actual)
         file(MAKE_DIRECTORY ${stage_test_data_dir}/${dir}/expected)
 
