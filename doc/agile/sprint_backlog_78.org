@@ -12,19 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-10 Sun 22:10]
+#+CAPTION: Clock summary at [2016-01-10 Sun 23:01]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *16:17* |       |      |
+| *Total time*                                                                | *17:07* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 16:17   |       |      |
-| Active                                                                      |         | 16:17 |      |
+| Stories                                                                     | 17:07   |       |      |
+| Active                                                                      |         | 17:07 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:09 |
 | COMPLETED Supply formatter properties and settings directly to formatter    |         |       | 4:12 |
 | COMPLETED Rename =backend= to =quilt=                                       |         |       | 0:41 |
 | COMPLETED Rename =cpp= to =quilt.cpp=                                       |         |       | 7:24 |
 | COMPLETED Rename test data folder for yarn.dia files                        |         |       | 0:50 |
+| COMPLETED Sort out annoyances with current emacs setup                      |         |       | 0:50 |
 | STARTED Create a blog post on product backlogs                              |         |       | 1:04 |
 | STARTED Create a separate flow for yarn based types                         |         |       | 0:57 |
 #+end:
@@ -88,6 +89,17 @@ Notes:
     CLOCK: [2016-01-10 Sun 10:37]--[2016-01-10 Sun 10:42] =>  0:05
 
 Test data folder is still called =yarn_dia= rather than =yarn.dia=.
+
+*** COMPLETED Sort out annoyances with current emacs setup            :story:
+    CLOSED: [2016-01-10 Sun 23:00]
+    CLOCK: [2016-01-10 Sun 22:11]--[2016-01-10 Sun 23:01] =>  0:50
+
+We need to:
+
+- update to latest prelude and get latest of everything.
+- sort out problems with our fork of prelude.
+- comment out semantic.
+- hide ede top-level project to avoid clutter.
 
 *** STARTED Create a blog post on product backlogs                    :story:
     CLOCK: [2016-01-10 Sun 13:47]--[2016-01-10 Sun 14:10] =>  0:23
