@@ -87,26 +87,23 @@ Notes:
 
 Test data folder is still called =yarn_dia= rather than =yarn.dia=.
 
-*** STARTED Create a separate flow for yarn based types               :story:
-    CLOCK: [2016-01-06 Wed 22:30]--[2016-01-06 Wed 23:27] =>  0:57
-
-We won't be able to replace all cpp types in one go, so the best way
-to go about this is to incrementally update the formatters. This could
-be done by having two sets of elements to format, one formattable
-based and the other yarn based. We can update the interfaces, one type
-a time and have them share the same registrars etc.
-
 *** STARTED Create a blog post on product backlogs                    :story:
+    CLOCK: [2016-01-10 Sun 13:47]--[2016-01-10 Sun 14:10] =>  0:23
+    CLOCK: [2016-01-10 Sun 13:33]--[2016-01-10 Sun 13:41] =>  0:08
     CLOCK: [2016-01-07 Thu 06:25]--[2016-01-07 Thu 06:58] =>  0:33
 
-- linus quote on bug trackers
+- [[http://yarchive.net/comp/linux/bug_tracking.html][linus quote on bug trackers]]: Would be be good to have a better
+  bug-tracking setup? Yes. But I think it takes man-power, and it
+  would take something *fundamentally* better than bugzilla.
+- [[http://zerodollarbill.blogspot.co.uk/2012/06/how-to-learn-scrum-in-10-minutes-and.html][How to learn Scrum in 10 minutes and clean your house in the process]]
+- [[https://lh6.googleusercontent.com/-v2b40kpb2xc/t88cpeli6qi/aaaaaaaac_u/ig2qwsjlq_8/s800/scrum_iterative_development.jpg][Scrum Iteration Chart]]:
 - how the management of the backlog is not the same as the management
   of stories/tasks. A task management system is still useful.
 - jira as a fire and forget capture system.
 - issues in github are not a replacement for a backlog, but useful in
   managing user interactions; the kind of stories that go into the
   backlog are different.
-- on product backlog grooming.
+- title: on product backlog grooming? on product backlogs?
 - graph of features: a) all features in the world b) all features in
   your product that are compatible with your vision c) all features in
   the backlog d) all features in the sprint log.
@@ -181,8 +178,16 @@ a time and have them share the same registrars etc.
   through the backlog, then a subset of the backlog and then
   eventually just ignore it all together because they spent the whole
   sprint planning meet looking through the backlog.
-- post: on product backlogs
 - [[http://tinyletter.com/programming-beyond-practices/letters/the-sad-graph-of-software-death][The sad graph of software death]]
+
+*** STARTED Create a separate flow for yarn based types               :story:
+    CLOCK: [2016-01-06 Wed 22:30]--[2016-01-06 Wed 23:27] =>  0:57
+
+We won't be able to replace all cpp types in one go, so the best way
+to go about this is to incrementally update the formatters. This could
+be done by having two sets of elements to format, one formattable
+based and the other yarn based. We can update the interfaces, one type
+a time and have them share the same registrars etc.
 
 *** Attach helper methods to types dynamically                        :story:
 
