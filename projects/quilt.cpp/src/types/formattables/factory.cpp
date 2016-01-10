@@ -334,7 +334,7 @@ make_includers(
             if (boost::contains(fn, "forward_declarations_formatter"))
                 continue;
 
-            const auto is_types(boost::starts_with(fn, "cpp.types."));
+            const auto is_types(boost::starts_with(fn, "quilt.cpp.types."));
             if (!is_types) {
                 if (is<yarn::visitor>(m, n))
                     continue;

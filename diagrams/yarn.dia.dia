@@ -6220,9 +6220,10 @@ in the Domain Driven Design book.
 
 @li any type without any stereotype defaults to @e value @e object.
 
-@li any UML Note with the marker #DOGEN dia.comment=true will be used as the
-documentation of the current package, or the model. Only one such note is
-expexted.
+@li any UML Note with the marker #DOGEN yarn.dia.comment=true will be
+used as the documentation of the current package - or the model, if
+place at the top-level. Only one such note is expected per containing
+entity.
 
 The yarn stereotypes have the following behaviours:
 
@@ -6248,11 +6249,11 @@ the root of an inheritance tree.
 
 @li @b comparable: unused as of yet.
 
-#DOGEN dia.comment=true
+#DOGEN yarn.dia.comment=true
 #DOGEN licence_name=gpl_v3
 #DOGEN copyright_notice=Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;
 #DOGEN modeline_group_name=emacs
-#DOGEN cpp.odb.enabled=false#</dia:string>
+#DOGEN quilt.cpp.odb.enabled=false#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

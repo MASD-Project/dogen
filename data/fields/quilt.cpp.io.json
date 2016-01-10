@@ -2,55 +2,40 @@
     {
         "name" : {
             "simple" : "directory",
-            "qualified" : "cpp.test_data.directory"
+            "qualified" : "quilt.cpp.io.directory"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.test_data"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.io"
         },
         "value_type" : "text",
         "definition_type" : "instance",
         "scope" : "root_module",
-        "default_value" : "test_data"
+        "default_value" : "io"
     },
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.test_data.postfix"
+            "qualified" : "quilt.cpp.io.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.test_data"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.io"
         },
         "value_type" : "text",
         "definition_type" : "instance",
         "scope" : "root_module",
-        "default_value" : "td"
+        "default_value" : "io"
     },
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.test_data.class_header_formatter.postfix"
+            "qualified" : "quilt.cpp.io.class_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.test_data",
-            "formatter_name" : "cpp.test_data.class_header_formatter"
-        },
-        "value_type" : "text",
-        "definition_type" : "instance",
-        "scope" : "root_module",
-        "default_value" : ""
-    },
-    {
-        "name" : {
-            "simple" : "postfix",
-            "qualified" : "cpp.test_data.class_implementation_formatter.postfix"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.test_data",
-            "formatter_name" : "cpp.test_data.class_implementation_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.io",
+            "formatter_name" : "quilt.cpp.io.class_header_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -60,12 +45,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.test_data.enum_header_formatter.postfix"
+            "qualified" : "quilt.cpp.io.class_implementation_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.test_data",
-            "formatter_name" : "cpp.test_data.enum_header_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.io",
+            "formatter_name" : "quilt.cpp.io.class_implementation_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -75,12 +60,27 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.test_data.enum_implementation_formatter.postfix"
+            "qualified" : "quilt.cpp.io.enum_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.test_data",
-            "formatter_name" : "cpp.test_data.enum_implementation_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.io",
+            "formatter_name" : "quilt.cpp.io.enum_header_formatter"
+        },
+        "value_type" : "text",
+        "definition_type" : "instance",
+        "scope" : "root_module",
+        "default_value" : ""
+    },
+    {
+        "name" : {
+            "simple" : "postfix",
+            "qualified" : "quilt.cpp.io.enum_implementation_formatter.postfix"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.io",
+            "formatter_name" : "quilt.cpp.io.enum_implementation_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",

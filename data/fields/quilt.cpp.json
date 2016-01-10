@@ -4,7 +4,7 @@
             "simple" : "enabled"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "definition_type" : "global_template",
@@ -16,7 +16,7 @@
             "simple" : "supported"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "definition_type" : "facet_template",
@@ -28,7 +28,7 @@
             "simple" : "file_path"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "text",
         "definition_type" : "formatter_template",
@@ -39,8 +39,8 @@
             "simple" : "header_guard"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "formatter_group" : "cpp.header_files"
+            "model_name" : "quilt.cpp",
+            "formatter_group" : "quilt.cpp.header_files"
         },
         "value_type" : "text",
         "definition_type" : "formatter_template",
@@ -49,11 +49,11 @@
     {
         "name" : {
             "simple" : "inclusion_required",
-            "qualified" : "cpp.inclusion_required"
+            "qualified" : "quilt.cpp.inclusion_required"
 
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "definition_type" : "instance",
@@ -63,10 +63,10 @@
     {
         "name" : {
             "simple" : "inclusion_directive",
-            "formatter_group" : "cpp.header_files"
+            "formatter_group" : "quilt.cpp.header_files"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "text",
         "definition_type" : "formatter_template",
@@ -77,7 +77,7 @@
             "simple" : "inclusion_dependency"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "text_collection",
         "definition_type" : "formatter_template",
@@ -86,11 +86,11 @@
     {
         "name" : {
             "simple" : "inclusion_required",
-            "formatter_group" : "cpp.header_files"
+            "formatter_group" : "quilt.cpp.header_files"
 
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "definition_type" : "formatter_template",
@@ -100,10 +100,10 @@
     {
         "name" : {
             "simple" : "split_project",
-            "qualified" : "cpp.split_project"
+            "qualified" : "quilt.cpp.split_project"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "definition_type" : "instance",
@@ -113,10 +113,10 @@
     {
         "name" : {
             "simple" : "source_directory_name",
-            "qualified" : "cpp.source_directory_name"
+            "qualified" : "quilt.cpp.source_directory_name"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -126,10 +126,10 @@
     {
         "name" : {
             "simple" : "include_directory_name",
-            "qualified" : "cpp.include_directory_name"
+            "qualified" : "quilt.cpp.include_directory_name"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -139,10 +139,10 @@
     {
         "name" : {
             "simple" : "header_file_extension",
-            "qualified" : "cpp.header_file_extension"
+            "qualified" : "quilt.cpp.header_file_extension"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -152,10 +152,10 @@
     {
         "name" : {
             "simple" : "implementation_file_extension",
-            "qualified" : "cpp.implementation_file_extension"
+            "qualified" : "quilt.cpp.implementation_file_extension"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -165,10 +165,10 @@
     {
         "name" : {
             "simple" : "enable_facet_folders",
-            "qualified" : "cpp.enable_facet_folders"
+            "qualified" : "quilt.cpp.enable_facet_folders"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "definition_type" : "instance",
@@ -178,10 +178,10 @@
     {
         "name" : {
             "simple" : "enable_unique_file_names",
-            "qualified" : "cpp.enable_unique_file_names"
+            "qualified" : "quilt.cpp.enable_unique_file_names"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "definition_type" : "instance",
@@ -191,10 +191,10 @@
     {
         "name" : {
             "simple" : "requires_manual_default_constructor",
-            "qualified" : "cpp.type.requires_manual_default_constructor"
+            "qualified" : "quilt.cpp.type.requires_manual_default_constructor"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "definition_type" : "instance",
@@ -204,10 +204,10 @@
     {
         "name" : {
             "simple" : "requires_manual_move_constructor",
-            "qualified" : "cpp.type.requires_manual_move_constructor"
+            "qualified" : "quilt.cpp.type.requires_manual_move_constructor"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "definition_type" : "instance",
@@ -217,10 +217,10 @@
     {
         "name" : {
             "simple" : "disable_complete_constructor",
-            "qualified" : "cpp.disable_complete_constructor"
+            "qualified" : "quilt.cpp.disable_complete_constructor"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "definition_type" : "instance",
@@ -230,10 +230,10 @@
     {
         "name" : {
             "simple" : "disable_xml_serialization",
-            "qualified" : "cpp.disable_xml_serialization"
+            "qualified" : "quilt.cpp.disable_xml_serialization"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "definition_type" : "instance",
@@ -243,10 +243,10 @@
     {
         "name" : {
             "simple" : "disable_versioning",
-            "qualified" : "cpp.disable_versioning"
+            "qualified" : "quilt.cpp.disable_versioning"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "definition_type" : "instance",
@@ -256,10 +256,10 @@
    {
         "name" : {
             "simple" : "disable_facet_directories",
-            "qualified" : "cpp.disable_facet_directories"
+            "qualified" : "quilt.cpp.disable_facet_directories"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp"
+            "model_name" : "quilt.cpp"
         },
         "value_type" : "boolean",
         "definition_type" : "instance",

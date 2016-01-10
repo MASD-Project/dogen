@@ -92,7 +92,7 @@ This is one of the simplest models you can generate, a single class with one
 property. You can see the use of comments at the class level and property
 level.
 
-#DOGEN dia.comment=true#</dia:string>
+#DOGEN yarn.dia.comment=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

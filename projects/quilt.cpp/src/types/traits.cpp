@@ -75,42 +75,42 @@ std::string traits::inclusion_dependency() {
 }
 
 std::string traits::disable_complete_constructor() {
-    static std::string r("cpp.disable_complete_constructor");
+    static std::string r("quilt.cpp.disable_complete_constructor");
     return r;
 }
 
 std::string traits::disable_xml_serialization() {
-    static std::string r("cpp.disable_xml_serialization");
+    static std::string r("quilt.cpp.disable_xml_serialization");
     return r;
 }
 
 std::string traits::cpp::inclusion_required() {
-    static std::string r("cpp.inclusion_required");
+    static std::string r("quilt.cpp.inclusion_required");
     return r;
 }
 
 std::string traits::cpp::header_file_extension() {
-    static std::string r("cpp.header_file_extension");
+    static std::string r("quilt.cpp.header_file_extension");
     return r;
 }
 
 std::string traits::cpp::implementation_file_extension() {
-    static std::string r("cpp.implementation_file_extension");
+    static std::string r("quilt.cpp.implementation_file_extension");
     return r;
 }
 
 std::string traits::cpp::include_directory_name() {
-    static std::string r("cpp.include_directory_name");
+    static std::string r("quilt.cpp.include_directory_name");
     return r;
 }
 
 std::string traits::cpp::source_directory_name() {
-    static std::string r("cpp.source_directory_name");
+    static std::string r("quilt.cpp.source_directory_name");
     return r;
 }
 
 std::string traits::cpp::disable_facet_directories() {
-    static std::string r("cpp.disable_facet_directories");
+    static std::string r("quilt.cpp.disable_facet_directories");
     return r;
 }
 

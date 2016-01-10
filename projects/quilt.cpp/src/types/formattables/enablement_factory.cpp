@@ -113,7 +113,7 @@ enablement_factory::compute_enablement_value(
         }
 
         if (types_only) {
-            const auto is_types(boost::starts_with(fn, "cpp.types."));
+            const auto is_types(boost::starts_with(fn, "quilt.cpp.types."));
             r[fn] = is_types;
             continue;
         }

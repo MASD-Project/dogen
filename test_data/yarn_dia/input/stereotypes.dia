@@ -1426,7 +1426,7 @@ These are the main cases:
 @li @e entity: pods marked as entity must have an identity
 @li @e keyed: entities marked as keyed will generate external keys.
 
-#DOGEN dia.comment=true
+#DOGEN yarn.dia.comment=true
 #DOGEN licence_name=gpl_v3
 #DOGEN copyright_notice=Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;
 #DOGEN modeline_group_name=emacs#</dia:string>

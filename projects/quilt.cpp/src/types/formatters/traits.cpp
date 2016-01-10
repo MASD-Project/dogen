@@ -26,17 +26,17 @@ namespace cpp {
 namespace formatters {
 
 std::string traits::model_name() {
-    static std::string r("cpp");
+    static std::string r("quilt.cpp");
     return r;
 }
 
 std::string traits::header_formatter_group_name() {
-    static std::string r("cpp.header_files");
+    static std::string r("quilt.cpp.header_files");
     return r;
 }
 
 std::string traits::implementation_formatter_group_name() {
-    static std::string r("cpp.implementation_files");
+    static std::string r("quilt.cpp.implementation_files");
     return r;
 }
 
@@ -45,12 +45,12 @@ std::string traits::includers_formatter_name(const std::string& facet_name) {
 }
 
 std::string traits::include_cmakelists_formatter_name() {
-    static std::string r("cpp.include_cmakelists");
+    static std::string r("quilt.cpp.include_cmakelists");
     return r;
 }
 
 std::string traits::source_cmakelists_formatter_name() {
-    static std::string r("cpp.source_cmakelists");
+    static std::string r("quilt.cpp.source_cmakelists");
     return r;
 }
 

@@ -101,7 +101,7 @@ in the context of inheritance.
 							<bucket_count>5</bucket_count>
 							<item_version>0</item_version>
 							<item class_id="23" tracking_level="0" version="0">
-								<first>dia.comment</first>
+								<first>yarn.dia.comment</first>
 								<second class_id="24" tracking_level="0" version="0">
 									<value class_id="25" tracking_level="0" version="1">
 										<px class_id="1" tracking_level="1" version="0" object_id="_2">

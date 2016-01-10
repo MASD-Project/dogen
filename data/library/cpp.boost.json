@@ -8,12 +8,12 @@
             "simple_name" : "shared_ptr",
             "object_type" : "smart_pointer",
             "extensions" : {
-                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/shared_ptr.hpp>",
-                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/shared_ptr.hpp>",
-                "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false,
-                "cpp.test_data.class_header_formatter.inclusion_required" : false,
-                "cpp.odb.class_header_formatter.inclusion_required" : false
+                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/shared_ptr.hpp>",
+                "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/shared_ptr.hpp>",
+                "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.test_data.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.odb.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -21,12 +21,12 @@
             "simple_name" : "weak_ptr",
             "object_type" : "smart_pointer",
             "extensions" : {
-                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/weak_ptr.hpp>",
-                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/weak_ptr.hpp>",
-                "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false,
-                "cpp.test_data.class_header_formatter.inclusion_required" : false,
-                "cpp.odb.class_header_formatter.inclusion_required" : false
+                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/weak_ptr.hpp>",
+                "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/weak_ptr.hpp>",
+                "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.test_data.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.odb.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -34,38 +34,38 @@
             "simple_name" : "scoped_ptr",
             "object_type" : "smart_pointer",
             "extensions" : {
-                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/scoped_ptr.hpp>",
-                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/scoped_ptr.hpp>",
-                "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false,
-                "cpp.test_data.class_header_formatter.inclusion_required" : false,
-                "cpp.odb.class_header_formatter.inclusion_required" : false
+                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/scoped_ptr.hpp>",
+                "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/scoped_ptr.hpp>",
+                "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.test_data.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.odb.class_header_formatter.inclusion_required" : false
             }
         },
         {
             "meta_type" : "object",
             "simple_name" : "optional",
             "extensions" : {
-                "cpp.type.requires_manual_move_constructor" : true,
-                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/optional.hpp>",
-                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/optional.hpp>",
-                "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false,
-                "cpp.test_data.class_header_formatter.inclusion_required" : false,
-                "cpp.odb.class_header_formatter.inclusion_required" : false
+                "quilt.cpp.type.requires_manual_move_constructor" : true,
+                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/optional.hpp>",
+                "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/optional.hpp>",
+                "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.test_data.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.odb.class_header_formatter.inclusion_required" : false
             }
         },
         {
             "meta_type" : "object",
             "simple_name" : "variant",
             "extensions" : {
-                "cpp.type.requires_manual_move_constructor" : true,
-                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/variant.hpp>",
-                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/variant.hpp>",
-                "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false,
-                "cpp.test_data.class_header_formatter.inclusion_required" : false,
-                "cpp.odb.class_header_formatter.inclusion_required" : false
+                "quilt.cpp.type.requires_manual_move_constructor" : true,
+                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/variant.hpp>",
+                "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/variant.hpp>",
+                "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.test_data.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.odb.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -75,7 +75,7 @@
                 "asio"
             ],
             "extensions" : {
-                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/asio/io_service.hpp>"
+                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/asio/io_service.hpp>"
             }
         },
         {
@@ -85,7 +85,7 @@
                 "asio", "ip", "tcp"
             ],
             "extensions" : {
-                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/asio/ip/tcp.hpp>"
+                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/asio/ip/tcp.hpp>"
             }
         },
         {
@@ -95,7 +95,7 @@
                 "asio", "ip", "tcp"
             ],
             "extensions" : {
-                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/asio/ip/tcp.hpp>"
+                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/asio/ip/tcp.hpp>"
             }
         },
         {
@@ -105,13 +105,13 @@
                 "filesystem"
             ],
             "extensions" : {
-                "cpp.type.requires_manual_move_constructor" : true,
-                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/filesystem/path.hpp>",
-                "cpp.serialization.class_header_formatter.inclusion_directive" : "\"dogen/utility/serialization/path.hpp\"",
-                "cpp.io.class_header_formatter.inclusion_required" : false,
-                "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.test_data.class_header_formatter.inclusion_required" : false,
-                "cpp.odb.class_header_formatter.inclusion_required" : false
+                "quilt.cpp.type.requires_manual_move_constructor" : true,
+                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/filesystem/path.hpp>",
+                "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "\"dogen/utility/serialization/path.hpp\"",
+                "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.test_data.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.odb.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -121,13 +121,13 @@
                 "gregorian"
             ],
             "extensions" : {
-                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/date_time/gregorian/gregorian_types.hpp>",
-                "cpp.io.class_header_formatter.inclusion_directive" : "<boost/date_time/gregorian/gregorian.hpp>",
-                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/date_time/gregorian/gregorian.hpp>",
-                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/date_time/gregorian/greg_serialize.hpp>",
-                "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.test_data.class_header_formatter.inclusion_required" : false,
-                "cpp.odb.class_header_formatter.inclusion_required" : false
+                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/date_time/gregorian/gregorian_types.hpp>",
+                "quilt.cpp.io.class_header_formatter.inclusion_directive" : "<boost/date_time/gregorian/gregorian.hpp>",
+                "quilt.cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/date_time/gregorian/gregorian.hpp>",
+                "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/date_time/gregorian/greg_serialize.hpp>",
+                "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.test_data.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.odb.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -137,13 +137,13 @@
                 "posix_time"
             ],
             "extensions" : {
-                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/posix_time_types.hpp>",
-                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/time_serialize.hpp>",
-                "cpp.io.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/posix_time.hpp>",
-                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/date_time/posix_time/posix_time.hpp>",
-                "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.test_data.class_header_formatter.inclusion_required" : false,
-                "cpp.odb.class_header_formatter.inclusion_required" : false
+                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/posix_time_types.hpp>",
+                "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/time_serialize.hpp>",
+                "quilt.cpp.io.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/posix_time.hpp>",
+                "quilt.cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/date_time/posix_time/posix_time.hpp>",
+                "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.test_data.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.odb.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -153,13 +153,13 @@
                 "posix_time"
             ],
             "extensions" : {
-                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/posix_time_types.hpp>",
-                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/time_serialize.hpp>",
-                "cpp.io.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/posix_time.hpp>",
-                "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false,
-                "cpp.test_data.class_header_formatter.inclusion_required" : false,
-                "cpp.odb.class_header_formatter.inclusion_required" : false
+                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/posix_time_types.hpp>",
+                "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/time_serialize.hpp>",
+                "quilt.cpp.io.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/posix_time.hpp>",
+                "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.test_data.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.odb.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -169,13 +169,13 @@
                 "property_tree"
             ],
             "extensions" : {
-                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree.hpp>",
-                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree_serialization.hpp>",
-                "cpp.io.class_header_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
-                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
-                "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.test_data.class_header_formatter.inclusion_required" : false,
-                "cpp.odb.class_header_formatter.inclusion_required" : false
+                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree.hpp>",
+                "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree_serialization.hpp>",
+                "quilt.cpp.io.class_header_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
+                "quilt.cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
+                "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.test_data.class_header_formatter.inclusion_required" : false,
+                "quilt.cpp.odb.class_header_formatter.inclusion_required" : false
             }
         }
     ]

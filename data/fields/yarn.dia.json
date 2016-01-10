@@ -2,10 +2,10 @@
     {
         "name" : {
             "simple" : "comment",
-            "qualified" : "dia.comment"
+            "qualified" : "yarn.dia.comment"
         },
         "ownership_hierarchy" : {
-            "model_name" : "dia_to_tack"
+            "model_name" : "yarn.dia"
         },
         "value_type" : "boolean",
         "definition_type" : "instance",
@@ -14,10 +14,10 @@
     {
         "name" : {
             "simple" : "identity_attribute",
-            "qualified" : "dia.identity_attribute"
+            "qualified" : "yarn.dia.identity_attribute"
         },
         "ownership_hierarchy" : {
-            "model_name" : "dia_to_tack"
+            "model_name" : "yarn.dia"
         },
         "value_type" : "boolean",
         "definition_type" : "instance",

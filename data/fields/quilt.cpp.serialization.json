@@ -2,11 +2,11 @@
     {
         "name" : {
             "simple" : "directory",
-            "qualified" : "cpp.serialization.directory"
+            "qualified" : "quilt.cpp.serialization.directory"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.serialization"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.serialization"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -16,11 +16,11 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.serialization.postfix"
+            "qualified" : "quilt.cpp.serialization.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.serialization"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.serialization"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -30,12 +30,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.serialization.class_header_formatter.postfix"
+            "qualified" : "quilt.cpp.serialization.class_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.serialization",
-            "formatter_name" : "cpp.serialization.class_header_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.serialization",
+            "formatter_name" : "quilt.cpp.serialization.class_header_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -45,12 +45,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.serialization.class_implementation_formatter.postfix"
+            "qualified" : "quilt.cpp.serialization.class_implementation_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.serialization",
-            "formatter_name" : "cpp.serialization.class_implementation_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.serialization",
+            "formatter_name" : "quilt.cpp.serialization.class_implementation_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -60,12 +60,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.serialization.enum_header_formatter.postfix"
+            "qualified" : "quilt.cpp.serialization.enum_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.serialization",
-            "formatter_name" : "cpp.serialization.enum_header_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.serialization",
+            "formatter_name" : "quilt.cpp.serialization.enum_header_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -75,12 +75,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.serialization.registrar_header_formatter.postfix"
+            "qualified" : "quilt.cpp.serialization.registrar_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.serialization",
-            "formatter_name" : "cpp.serialization.registrar_header_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.serialization",
+            "formatter_name" : "quilt.cpp.serialization.registrar_header_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -90,12 +90,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.serialization.registrar_implementation_formatter.postfix"
+            "qualified" : "quilt.cpp.serialization.registrar_implementation_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.serialization",
-            "formatter_name" : "cpp.serialization.registrar_implementation_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.serialization",
+            "formatter_name" : "quilt.cpp.serialization.registrar_implementation_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -105,12 +105,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.serialization.forward_declarations_formatter.postfix"
+            "qualified" : "quilt.cpp.serialization.forward_declarations_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.serialization",
-            "formatter_name" : "cpp.serialization.forward_declarations_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.serialization",
+            "formatter_name" : "quilt.cpp.serialization.forward_declarations_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",

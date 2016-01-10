@@ -100,9 +100,10 @@ namespace yarn {
  *
  * @li any type without any stereotype defaults to @e value @e object.
  *
- * @li any UML Note with the marker #DOGEN dia.comment=true will be used as the
- * documentation of the current package, or the model. Only one such note is
- * expexted.
+ * @li any UML Note with the marker #DOGEN yarn.dia.comment=true will be
+ * used as the documentation of the current package - or the model, if
+ * place at the top-level. Only one such note is expected per containing
+ * entity.
  *
  * The yarn stereotypes have the following behaviours:
  *

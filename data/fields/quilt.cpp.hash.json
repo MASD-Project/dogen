@@ -2,11 +2,11 @@
     {
         "name" : {
             "simple" : "directory",
-            "qualified" : "cpp.hash.directory"
+            "qualified" : "quilt.cpp.hash.directory"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.hash"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.hash"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -16,11 +16,11 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.hash.postfix"
+            "qualified" : "quilt.cpp.hash.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.hash"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.hash"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -30,12 +30,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.hash.class_header_formatter.postfix"
+            "qualified" : "quilt.cpp.hash.class_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.hash",
-            "formatter_name" : "cpp.hash.class_header_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.hash",
+            "formatter_name" : "quilt.cpp.hash.class_header_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -45,12 +45,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.hash.class_implementation_formatter.postfix"
+            "qualified" : "quilt.cpp.hash.class_implementation_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.hash",
-            "formatter_name" : "cpp.hash.class_implementation_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.hash",
+            "formatter_name" : "quilt.cpp.hash.class_implementation_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -60,12 +60,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.hash.enum_header_formatter.postfix"
+            "qualified" : "quilt.cpp.hash.enum_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.hash",
-            "formatter_name" : "cpp.hash.enum_header_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.hash",
+            "formatter_name" : "quilt.cpp.hash.enum_header_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -75,12 +75,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.hash.enum_implementation_formatter.postfix"
+            "qualified" : "quilt.cpp.hash.enum_implementation_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.hash",
-            "formatter_name" : "cpp.hash.enum_implementation_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.hash",
+            "formatter_name" : "quilt.cpp.hash.enum_implementation_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",

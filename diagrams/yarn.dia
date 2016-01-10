@@ -1779,11 +1779,11 @@ etc.).
 @li to provide all the information required to build the final model
 and to build it.
 
-#DOGEN dia.comment=true
+#DOGEN yarn.dia.comment=true
 #DOGEN licence_name=gpl_v3
 #DOGEN copyright_notice=Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;
 #DOGEN modeline_group_name=emacs
-#DOGEN cpp.odb.enabled=false#</dia:string>
+#DOGEN quilt.cpp.odb.enabled=false#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -3122,7 +3122,7 @@ all types in the merged intermediate model.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Fully qualified name.
 
-#DOGEN dia.identity_attribute=true#</dia:string>
+#DOGEN yarn.dia.identity_attribute=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

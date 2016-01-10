@@ -2,11 +2,11 @@
     {
         "name" : {
             "simple" : "directory",
-            "qualified" : "cpp.types.directory"
+            "qualified" : "quilt.cpp.types.directory"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.types"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -16,11 +16,11 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.types.postfix"
+            "qualified" : "quilt.cpp.types.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.types"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -30,11 +30,11 @@
     {
         "name" : {
             "simple" : "integrated_facet",
-            "qualified" : "cpp.types.integrated_facet"
+            "qualified" : "quilt.cpp.types.integrated_facet"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.types"
         },
         "value_type" : "text_collection",
         "definition_type" : "instance",
@@ -43,12 +43,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.types.class_header_formatter.postfix"
+            "qualified" : "quilt.cpp.types.class_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.class_header_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.types",
+            "formatter_name" : "quilt.cpp.types.class_header_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -58,12 +58,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.types.class_implementation_formatter.postfix"
+            "qualified" : "quilt.cpp.types.class_implementation_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.class_implementation_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.types",
+            "formatter_name" : "quilt.cpp.types.class_implementation_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -73,12 +73,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.types.enum_header_formatter.postfix"
+            "qualified" : "quilt.cpp.types.enum_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.enum_header_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.types",
+            "formatter_name" : "quilt.cpp.types.enum_header_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -88,12 +88,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.types.enum_implementation_formatter.postfix"
+            "qualified" : "quilt.cpp.types.enum_implementation_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.enum_implementation_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.types",
+            "formatter_name" : "quilt.cpp.types.enum_implementation_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -103,12 +103,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.types.exception_header_formatter.postfix"
+            "qualified" : "quilt.cpp.types.exception_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.exception_header_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.types",
+            "formatter_name" : "quilt.cpp.types.exception_header_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -118,12 +118,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.types.namespace_header_formatter.postfix"
+            "qualified" : "quilt.cpp.types.namespace_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.namespace_header_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.types",
+            "formatter_name" : "quilt.cpp.types.namespace_header_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -133,12 +133,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.types.visitor_header_formatter.postfix"
+            "qualified" : "quilt.cpp.types.visitor_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.visitor_header_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.types",
+            "formatter_name" : "quilt.cpp.types.visitor_header_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -148,12 +148,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.types.forward_declarations_formatter.postfix"
+            "qualified" : "quilt.cpp.types.forward_declarations_formatter.postfix"
         },
         "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.forward_declarations_formatter"
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.types",
+            "formatter_name" : "quilt.cpp.types.forward_declarations_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",

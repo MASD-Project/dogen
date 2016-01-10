@@ -12,18 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-09 Sat 02:52]
+#+CAPTION: Clock summary at [2016-01-10 Sun 10:33]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *12:33* |       |      |
+| *Total time*                                                                | *14:56* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 12:33   |       |      |
-| Active                                                                      |         | 12:33 |      |
+| Stories                                                                     | 14:56   |       |      |
+| Active                                                                      |         | 14:56 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:09 |
 | COMPLETED Supply formatter properties and settings directly to formatter    |         |       | 4:12 |
 | COMPLETED Rename =backend= to =quilt=                                       |         |       | 0:41 |
-| STARTED Rename =cpp= to =quilt.cpp=                                         |         |       | 5:01 |
+| COMPLETED Rename =cpp= to =quilt.cpp=                                       |         |       | 7:24 |
 | STARTED Create a separate flow for yarn based types                         |         |       | 0:57 |
 | STARTED Create a blog post on product backlogs                              |         |       | 0:33 |
 #+end:
@@ -66,11 +66,23 @@ Notes:
 
 As part of the quilt refactor, we need to rename =backend= to =quilt=.
 
-*** STARTED Rename =cpp= to =quilt.cpp=                               :story:
+*** COMPLETED Rename =cpp= to =quilt.cpp=                             :story:
+    CLOSED: [2016-01-10 Sun 10:33]
+    CLOCK: [2016-01-10 Sun 09:55]--[2016-01-10 Sun 10:32] =>  0:37
+    CLOCK: [2016-01-09 Sat 22:41]--[2016-01-10 Sun 00:27] =>  1:46
     CLOCK: [2016-01-08 Fri 23:20]--[2016-01-09 Sat 02:52] =>  3:32
     CLOCK: [2016-01-08 Fri 21:11]--[2016-01-08 Fri 22:40] =>  1:29
 
 As part of the quilt refactor we need to rename =cpp= to =quilt.cpp=.
+
+Notes:
+
+- namespace documentation file is not part of master includer
+- not generating services
+
+*** Rename test data folder for yarn.dia files                        :story:
+
+Test data folder is still called =yarn_dia= rather than =yarn.dia=.
 
 *** STARTED Create a separate flow for yarn based types               :story:
     CLOCK: [2016-01-06 Wed 22:30]--[2016-01-06 Wed 23:27] =>  0:57

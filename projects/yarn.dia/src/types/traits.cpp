@@ -25,12 +25,12 @@ namespace yarn {
 namespace dia {
 
 std::string traits::comment() {
-    static std::string r("dia.comment");
+    static std::string r("yarn.dia.comment");
     return r;
 }
 
 std::string traits::identity_attribute() {
-    static std::string r("dia.identity_attribute");
+    static std::string r("yarn.dia.identity_attribute");
     return r;
 }
 
