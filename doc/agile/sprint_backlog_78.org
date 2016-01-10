@@ -102,6 +102,7 @@ We need to:
 - hide ede top-level project to avoid clutter.
 
 *** STARTED Create a blog post on product backlogs                    :story:
+    CLOCK: [2016-01-10 Sun 23:02]--[2016-01-10 Sun 23:07] =>  0:05
     CLOCK: [2016-01-10 Sun 13:47]--[2016-01-10 Sun 14:10] =>  0:23
     CLOCK: [2016-01-10 Sun 13:33]--[2016-01-10 Sun 13:41] =>  0:08
     CLOCK: [2016-01-07 Thu 06:25]--[2016-01-07 Thu 06:58] =>  0:33

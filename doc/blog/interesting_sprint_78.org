@@ -62,6 +62,9 @@ into recently-ish.
 - [[https://medium.com/swlh/starting-a-tech-startup-with-c-6b5d5856e6de#.tocwuwbe8][Starting a tech startup with C++]]: lots of libraries I never heard of
   and an insight on the performance differences between python and
   c++.
+- [[https://medium.com/hacker-daily/writing-high-performance-servers-in-modern-c-7cd00926828#.hksbtpyoh][Writing modern C++ servers using Wangle:]] The follow up to the
+  previous post, explaining how to write servers with Facebook
+  technologies.
 
 * Layman Science
 
