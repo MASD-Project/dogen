@@ -8324,17 +8324,17 @@ etc.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="27.755,-38"/>
+        <dia:point val="26.215,-38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.005,-43.75;39.4888,-37.2"/>
+        <dia:rectangle val="25.465,-43.75;39.4888,-37.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="27.755,-38"/>
-        <dia:point val="27.755,-43"/>
+        <dia:point val="26.215,-38"/>
+        <dia:point val="26.215,-43"/>
         <dia:point val="39.2888,-43"/>
         <dia:point val="39.2888,-38"/>
       </dia:attribute>
@@ -8362,14 +8362,14 @@ etc.#</dia:string>
         <dia:point val="11.8825,-25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.8119,-28.5288;15.6845,-24.9294"/>
+        <dia:rectangle val="11.812,-28.4974;14.9445,-24.9295"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="11.8825,-25"/>
-        <dia:point val="15.3775,-28.2"/>
+        <dia:point val="14.6075,-28.2"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -8384,7 +8384,7 @@ etc.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="13.6302,-26.0997"/>
+        <dia:point val="13.2452,-26.0997"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O76" connection="1"/>
