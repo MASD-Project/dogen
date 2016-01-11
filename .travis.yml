@@ -41,7 +41,7 @@ install:
   - if [ "$CXX" = "g++" ]; then export CXX="g++-4.9" CC="gcc-4.9" GCOV="gcov-4.9"; fi
 
   # conan
-  - wget https://s3-eu-west-1.amazonaws.com/conanio-production/downloads/conan-ubuntu-64_0_5_0.deb -O conan.deb
+  - wget https://s3-eu-west-1.amazonaws.com/conanio-production/downloads/conan-ubuntu-64_0_6_0.deb -O conan.deb
   - sudo dpkg -i conan.deb
   - rm conan.deb
 
@@ -65,7 +65,7 @@ script:
   - conan install ${GIT_REPO}
   - hash=`ls ~/.conan/data/Boost/1.60.0/lasote/stable/package/`
   - cd ~/.conan/data/Boost/1.60.0/lasote/stable/package/${hash}/include/
-  - sudo patch -p0 < ${GIT_REPO}/patches/boost_1_59_graph.patch  
+  - sudo patch -p0 < ${GIT_REPO}/patches/boost_1_59_graph.patch
   # FIXME: ninja borked with conan for some reason.
   # - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on -G Ninja
   # - ninja -j2 package run_all_specs
