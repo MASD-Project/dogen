@@ -41,7 +41,7 @@ install:
   - if [ "$CXX" = "g++" ]; then export CXX="g++-4.9" CC="gcc-4.9" GCOV="gcov-4.9"; fi
 
   # conan
-  - wget https://s3-eu-west-1.amazonaws.com/conanio-production/downloads/conan-ubuntu-64_0_6_0.deb -O conan.deb
+  - wget http://downloads.conan.io/latest_debian -O conan.deb
   - sudo dpkg -i conan.deb
   - rm conan.deb
 

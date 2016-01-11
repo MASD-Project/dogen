@@ -21,7 +21,7 @@ install:
 
     # conan
     - cmd: echo "Downloading conan..."
-    - ps: wget https://s3-eu-west-1.amazonaws.com/conanio-production/downloads/conan-win_0_6_0.exe -OutFile conan_installer.exe
+    - ps: wget http://downloads.conan.io/latest_windows -OutFile conan_installer.exe
     - cmd: conan_installer.exe /VERYSILENT
     - cmd: set PATH=%PATH%;C:\Program Files (x86)\Conan\conan
     - cmd: conan --version
