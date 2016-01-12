@@ -127,7 +127,8 @@ public:
         const dynamic::repository& rp,
         const yarn::model& m) const override;
 
-    std::forward_list<dynamic::ownership_hierarchy> ownership_hierarchy() const;
+    std::forward_list<dynamic::ownership_hierarchy>
+        ownership_hierarchy() const override;
 
     std::forward_list<dogen::formatters::file> generate(
         const config::knitting_options& ko,

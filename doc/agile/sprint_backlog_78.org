@@ -12,21 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-10 Sun 23:01]
+#+CAPTION: Clock summary at [2016-01-12 Tue 23:53]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *17:07* |       |      |
+| *Total time*                                                                | *19:34* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 17:07   |       |      |
-| Active                                                                      |         | 17:07 |      |
+| Stories                                                                     | 19:34   |       |      |
+| Active                                                                      |         | 19:34 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:09 |
 | COMPLETED Supply formatter properties and settings directly to formatter    |         |       | 4:12 |
 | COMPLETED Rename =backend= to =quilt=                                       |         |       | 0:41 |
 | COMPLETED Rename =cpp= to =quilt.cpp=                                       |         |       | 7:24 |
 | COMPLETED Rename test data folder for yarn.dia files                        |         |       | 0:50 |
 | COMPLETED Sort out annoyances with current emacs setup                      |         |       | 0:50 |
-| STARTED Create a blog post on product backlogs                              |         |       | 1:04 |
+| COMPLETED Add support for clang in travis                                   |         |       | 2:22 |
+| STARTED Create a blog post on product backlogs                              |         |       | 1:09 |
 | STARTED Create a separate flow for yarn based types                         |         |       | 0:57 |
 #+end:
 
@@ -100,6 +101,16 @@ We need to:
 - sort out problems with our fork of prelude.
 - comment out semantic.
 - hide ede top-level project to avoid clutter.
+
+*** COMPLETED Add support for clang in travis                         :story:
+    CLOSED: [2016-01-12 Tue 23:21]
+    CLOCK: [2016-01-12 Tue 23:22]--[2016-01-12 Tue 23:53] =>  0:31
+    CLOCK: [2016-01-12 Tue 21:30]--[2016-01-12 Tue 23:21] =>  1:51
+
+Since we had a few problems with clang some months ago due to a Debian
+transition, we stopped using it. We should try using it again to see
+if the transition is finished. We should also enable Travis support
+for clang to ensure we don't break clang.
 
 *** STARTED Create a blog post on product backlogs                    :story:
     CLOCK: [2016-01-10 Sun 23:02]--[2016-01-10 Sun 23:07] =>  0:05
