@@ -105,7 +105,6 @@ private:
         const dynamic::object& root_object,
         const dogen::formatters::general_settings_factory& gsf,
         const formatters::container& fc,
-        const settings::opaque_settings_builder& osb,
         settings::bundle_repository& brp,
         const yarn::model& m) const;
 

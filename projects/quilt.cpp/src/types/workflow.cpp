@@ -104,12 +104,11 @@ workflow::create_formattables_activty(
     const dynamic::object& root_object,
     const dogen::formatters::general_settings_factory& gsf,
     const formatters::container& fc,
-    const settings::opaque_settings_builder& osb,
     settings::bundle_repository& brp,
     const yarn::model& m) const {
 
     formattables::workflow fw;
-    return fw.execute(opts, srp, root_object, gsf, fc, osb, brp, m);
+    return fw.execute(opts, srp, root_object, gsf, fc, brp, m);
 }
 
 std::forward_list<dogen::formatters::file>
@@ -165,8 +164,7 @@ workflow::generate(const config::knitting_options& ko,
     const auto& fc(formatters::workflow::registrar().formatter_container());
 
     const auto& kcpp(ko.cpp());
-    const auto pair(
-        create_formattables_activty(kcpp, rp, ro, gsf, fc, osb, brp, m));
+    const auto pair(create_formattables_activty(kcpp, rp, ro, gsf, fc, brp, m));
     const auto r(format_activty(brp, pair.first, pair.second));
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";

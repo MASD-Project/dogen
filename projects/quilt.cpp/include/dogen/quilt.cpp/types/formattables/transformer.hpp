@@ -52,7 +52,6 @@
 #include "dogen/quilt.cpp/types/formattables/namespace_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/primitive_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/forward_declarations_info.hpp"
-#include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -64,8 +63,7 @@ namespace formattables {
  */
 class transformer {
 public:
-    transformer(const settings::opaque_settings_builder& osb,
-        const yarn::model& m);
+    explicit transformer(const yarn::model& m);
 
 private:
     /**
@@ -212,7 +210,6 @@ public:
     transform(const yarn::visitor& v) const;
 
 private:
-    const settings::opaque_settings_builder& opaque_settings_builder_;
     const yarn::model& model_;
 };
 

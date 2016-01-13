@@ -204,9 +204,7 @@ inline bool is(const yarn::model& m, const yarn::name& n) {
     return is<YarnConcreteElement>(i->second);
 }
 
-transformer::transformer(const settings::opaque_settings_builder& osb,
-    const yarn::model& m)
-    : opaque_settings_builder_(osb), model_(m) {}
+transformer::transformer(const yarn::model& m) :  model_(m) {}
 
 void transformer::
 populate_formattable_properties(const yarn::name& n, formattable& f) const {

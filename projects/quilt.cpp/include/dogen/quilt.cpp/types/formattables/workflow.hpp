@@ -34,7 +34,6 @@
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
-#include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/path_derivatives_repository.hpp"
@@ -84,8 +83,7 @@ private:
      * the transformer.
      */
     std::forward_list<std::shared_ptr<formattables::formattable> >
-    from_transformer_activity(const settings::opaque_settings_builder& osb,
-        const yarn::model& m) const;
+    from_transformer_activity(const yarn::model& m) const;
 
     /**
      * @brief Generates all of the formattables that are sourced from
@@ -115,7 +113,6 @@ public:
         const dynamic::object& root_object,
         const dogen::formatters::general_settings_factory& gsf,
         const formatters::container& fc,
-        const settings::opaque_settings_builder& osb,
         settings::bundle_repository& brp,
         const yarn::model& m) const;
 };

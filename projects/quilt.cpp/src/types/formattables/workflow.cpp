@@ -118,12 +118,10 @@ create_formatter_properties(const dynamic::repository& srp,
 }
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
-workflow::from_transformer_activity(
-    const settings::opaque_settings_builder& osb,
-    const yarn::model& m) const {
+workflow::from_transformer_activity(const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming formattables.";
 
-    const transformer t(osb, m);
+    const transformer t(m);
     generator g(t);
     for (const auto& pair : m.elements()) {
         const auto& e(*pair.second);
@@ -175,7 +173,6 @@ workflow::execute(const config::cpp_options& opts,
     const dynamic::object& root_object,
     const dogen::formatters::general_settings_factory& gsf,
     const formatters::container& fc,
-    const settings::opaque_settings_builder& osb,
     settings::bundle_repository& brp,
     const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started creating formattables.";
@@ -185,7 +182,7 @@ workflow::execute(const config::cpp_options& opts,
     const auto pdrp(create_path_derivatives_repository(opts, ps, m));
     auto fprp(create_formatter_properties(drp, ro, brp, pdrp, fc, m));
 
-    auto formattables(from_transformer_activity(osb, m));
+    auto formattables(from_transformer_activity(m));
     formattables.splice_after(formattables.before_begin(),
         from_factory_activity(opts, ro, gsf, brp, ps, pdrp, fprp, fc, m));
     BOOST_LOG_SEV(lg, debug) << "Formattables: " << formattables;
