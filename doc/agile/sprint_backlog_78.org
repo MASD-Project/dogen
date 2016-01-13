@@ -12,26 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-13 Wed 14:07]
+#+CAPTION: Clock summary at [2016-01-13 Wed 23:41]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *19:51* |       |      |
+| *Total time*                                                                | *21:02* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 19:51   |       |      |
-| Active                                                                      |         | 19:51 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:09 |
+| Stories                                                                     | 21:02   |       |      |
+| Active                                                                      |         | 21:02 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:11 |
 | COMPLETED Supply formatter properties and settings directly to formatter    |         |       | 4:12 |
 | COMPLETED Rename =backend= to =quilt=                                       |         |       | 0:41 |
 | COMPLETED Rename =cpp= to =quilt.cpp=                                       |         |       | 7:24 |
 | COMPLETED Rename test data folder for yarn.dia files                        |         |       | 0:50 |
 | COMPLETED Sort out annoyances with current emacs setup                      |         |       | 0:50 |
 | COMPLETED Add support for clang in travis                                   |         |       | 2:39 |
+| COMPLETED Create a separate flow for yarn based types                       |         |       | 2:06 |
 | STARTED Create a blog post on product backlogs                              |         |       | 1:09 |
-| STARTED Create a separate flow for yarn based types                         |         |       | 0:57 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-01-13 Wed 23:39]--[2016-01-13 Wed 23:41] =>  0:02
     CLOCK: [2016-01-07 Thu 20:20]--[2016-01-07 Thu 20:35] =>  0:15
     CLOCK: [2016-01-07 Thu 19:55]--[2016-01-07 Thu 20:20] =>  0:25
     CLOCK: [2016-01-07 Thu 06:10]--[2016-01-07 Thu 06:24] =>  0:20
@@ -217,6 +218,17 @@ a time and have them share the same registrars etc.
   eventually just ignore it all together because they spent the whole
   sprint planning meet looking through the backlog.
 - [[http://tinyletter.com/programming-beyond-practices/letters/the-sad-graph-of-software-death][The sad graph of software death]]
+
+*** Generate exceptions using yarn types                              :story:
+
+Tasks:
+
+- delete the quilt exception type;
+- create a yarn element based assistant;
+- remove transformation support for exception;
+- update the formatter interfaces to use yarn types;
+- update the yarn formatting workflow to process yarn exceptions;
+- update the stitch templates to make use of yarn exceptions.
 
 *** Attach helper methods to types dynamically                        :story:
 
