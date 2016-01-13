@@ -109,6 +109,12 @@ private:
         const yarn::model& m) const;
 
     /**
+     * @brief Obtains the enriched version of the yarn model.
+     */
+    std::forward_list<boost::shared_ptr<yarn::element> >
+    obtain_enriched_yarn_model_activity(const yarn::model& m) const;
+
+    /**
      * @brief Create the files.
      */
     std::forward_list<dogen::formatters::file>
@@ -117,6 +123,15 @@ private:
         const std::forward_list<
         std::shared_ptr<formattables::formattable>
         >& f) const;
+
+    /**
+     * @brief Create the files.
+     */
+    std::forward_list<dogen::formatters::file>
+    format_yarn_activity(const settings::bundle_repository& brp,
+        const formattables::formatter_properties_repository& fprp,
+        const std::forward_list<
+        boost::shared_ptr<yarn::element> >& elements) const;
 
 public:
     std::string name() const override;

@@ -28,6 +28,7 @@
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 #include "dogen/quilt.cpp/types/settings/directory_names_settings_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/bundle_repository_factory.hpp"
+#include "dogen/quilt.cpp/types/fabric/workflow.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
 #include "dogen/quilt.cpp/types/workflow.hpp"
 
@@ -111,6 +112,12 @@ workflow::create_formattables_activty(
     return fw.execute(opts, srp, root_object, gsf, fc, brp, m);
 }
 
+std::forward_list<boost::shared_ptr<yarn::element> >
+workflow::obtain_enriched_yarn_model_activity(const yarn::model& m) const {
+    fabric::workflow w;
+    return w.execute(m);
+}
+
 std::forward_list<dogen::formatters::file>
 workflow::format_activty(const settings::bundle_repository& brp,
     const formattables::formatter_properties_repository& fprp,
@@ -119,6 +126,15 @@ workflow::format_activty(const settings::bundle_repository& brp,
     >& f) const {
     formatters::workflow w;
     return w.execute(brp, fprp, f);
+}
+
+std::forward_list<dogen::formatters::file> workflow::
+format_yarn_activity(const settings::bundle_repository& brp,
+    const formattables::formatter_properties_repository& fprp,
+    const std::forward_list<
+    boost::shared_ptr<yarn::element> >& elements) const {
+    formatters::workflow w;
+    return w.execute(brp, fprp, elements);
 }
 
 std::string workflow::name() const {
@@ -165,7 +181,11 @@ workflow::generate(const config::knitting_options& ko,
 
     const auto& kcpp(ko.cpp());
     const auto pair(create_formattables_activty(kcpp, rp, ro, gsf, fc, brp, m));
-    const auto r(format_activty(brp, pair.first, pair.second));
+    auto r(format_activty(brp, pair.first, pair.second));
+
+    const auto elements(obtain_enriched_yarn_model_activity(m));
+    auto ye(format_yarn_activity(brp, pair.first, elements));
+    r.splice_after(r.before_begin(), ye);
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";
     return r;

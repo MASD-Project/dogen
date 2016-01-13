@@ -113,6 +113,17 @@ transition, we stopped using it. We should try using it again to see
 if the transition is finished. We should also enable Travis support
 for clang to ensure we don't break clang.
 
+*** COMPLETED Create a separate flow for yarn based types             :story:
+    CLOSED: [2016-01-13 Wed 23:38]
+    CLOCK: [2016-01-13 Wed 22:26]--[2016-01-13 Wed 23:35] =>  1:09
+    CLOCK: [2016-01-06 Wed 22:30]--[2016-01-06 Wed 23:27] =>  0:57
+
+We won't be able to replace all cpp types in one go, so the best way
+to go about this is to incrementally update the formatters. This could
+be done by having two sets of elements to format, one formattable
+based and the other yarn based. We can update the interfaces, one type
+a time and have them share the same registrars etc.
+
 *** STARTED Create a blog post on product backlogs                    :story:
     CLOCK: [2016-01-10 Sun 23:02]--[2016-01-10 Sun 23:07] =>  0:05
     CLOCK: [2016-01-10 Sun 13:47]--[2016-01-10 Sun 14:10] =>  0:23
@@ -206,15 +217,6 @@ for clang to ensure we don't break clang.
   eventually just ignore it all together because they spent the whole
   sprint planning meet looking through the backlog.
 - [[http://tinyletter.com/programming-beyond-practices/letters/the-sad-graph-of-software-death][The sad graph of software death]]
-
-*** STARTED Create a separate flow for yarn based types               :story:
-    CLOCK: [2016-01-06 Wed 22:30]--[2016-01-06 Wed 23:27] =>  0:57
-
-We won't be able to replace all cpp types in one go, so the best way
-to go about this is to incrementally update the formatters. This could
-be done by having two sets of elements to format, one formattable
-based and the other yarn based. We can update the interfaces, one type
-a time and have them share the same registrars etc.
 
 *** Attach helper methods to types dynamically                        :story:
 
