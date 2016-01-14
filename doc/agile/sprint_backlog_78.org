@@ -231,6 +231,16 @@ Tasks:
 - update the yarn formatting workflow to process yarn exceptions;
 - update the stitch templates to make use of yarn exceptions.
 
+*** STARTED Move non-entity properties to base formatter assistant    :story:
+    CLOCK: [2016-01-14 Thu 22:15]--[2016-01-14 Thu 22:41] =>  0:26
+
+As part of the "yarnification" of the formatters, we need to be able
+to use most of the entity formatter assistant properties over to the
+base formatter assistant. We should get rid of the trivial formatting
+assistant and entity formatting assistant and move all the code to the
+base. The two methods that require an entity should receive it as an
+input parameter.
+
 *** Attach helper methods to types dynamically                        :story:
 
 In order to cope with the removal of nested type info, we need a way
