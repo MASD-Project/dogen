@@ -1,0 +1,40 @@
+#+title: Nerd Food: On Product Backlogs
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+#+begin_quote
+Would be be good to have a better bug-tracking setup? Yes. But I think
+it takes man-power, and it would take something *fundamentally* better
+than bugzilla. -- Linus
+#+end_quote
+
+Most developers in large companies tend to be exposed to a strange
+variation of Agile which I like to call "Enterprise Grade Agile", but
+I've also heard it called "Fragile" and "Cargo-Cult Agile". However
+you decide to name the phenomena, the gist of it is that these setups
+contain most or all of the ceremony of Agile - including stand-ups,
+sprint planning, iteration retrospectives, scrum-masters and so on -
+but none of its spirit.
+
+There are many aspects we could tackle, but this will focus just on
+product backlogs. A word of warning first: this post takes a slightly
+narrow and somewhat "advanced" view of Agile; if you require a more
+introductory approach, you are probably better off looking at other
+resources such as [[http://zerodollarbill.blogspot.co.uk/2012/06/how-to-learn-scrum-in-10-minutes-and.html][How to learn Scrum in 10 minutes and clean your
+house in the process]].
+
+
+
+
+One
+
+My personal Agile journey has been an interesting ride. When
+introduced informally at work some seven or eight years ago, it
+improved dramatically our practices. However, it is difficult to
+ensure a large team of developers all "get it", so it had different
+value for different people. Eventually it got formalised and adapted
+via some kind of Conway's Law applied to processes, and became "the
+norm". It still shows value for some of the newer systems, but the
+legacy systems have
+
+ I then met another guise of Agile working on a start-up
+environment and that was quite refreshing
