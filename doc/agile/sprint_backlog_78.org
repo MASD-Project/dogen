@@ -220,6 +220,147 @@ a time and have them share the same registrars etc.
   sprint planning meet looking through the backlog.
 - [[http://tinyletter.com/programming-beyond-practices/letters/the-sad-graph-of-software-death][The sad graph of software death]]
 
+*** STARTED Document all of the Windows build errors                  :story:
+    CLOCK: [2016-01-15 Fri 23:10]--[2016-01-15 Fri 23:54] =>  0:44
+
+General:
+
+- lots of warnings in the guts of boost.
+
+**** Boost test
+
+- boost test warning:
+
+: C:\Users\appveyor\.conan\data\Boost\1.60.0\lasote\stable\package\7569deb7626b9f88e03d1b57f5ad4b34f8383a6f\include\boost/test/impl/test_tools.ipp(369): warning C4273: 'boost::test_tools::tt_detail::format_assertion_result': inconsistent dll linkage [C:\proj
+: ects\dogen\build\output\projects\config\spec\config_spec.vcxproj]
+:   C:\Users\appveyor\.conan\data\Boost\1.60.0\lasote\stable\package\7569deb7626b9f88e03d1b57f5ad4b34f8383a6f\include\boost/test/tools/detail/fwd.hpp(96): note: see previous definition of 'format_assertion_result'
+
+- boost test errors:
+
+: C:\Users\appveyor\.conan\data\Boost\1.60.0\lasote\stable\package\7569deb7626b9f88e03d1b57f5ad4b34f8383a6f\include\boost/test/impl/test_tools.ipp(396): error C2491: 'boost::test_tools::tt_detail::prod_report_format': definition of dllimport function not all
+: owed [C:\projects\dogen\build\output\projects\config\spec\config_spec.vcxproj]
+
+: C:\Users\appveyor\.conan\data\Boost\1.60.0\lasote\stable\package\7569deb7626b9f88e03d1b57f5ad4b34f8383a6f\include\boost/test/tools/old/impl.hpp(118): error C2264: 'boost::test_tools::tt_detail::equal_impl': error in function definition or declaration; func
+: tion not called [C:\projects\dogen\build\output\projects\config\spec\config_spec.vcxproj]
+
+It may be due to this:
+
+[[http://boost.2283326.n4.nabble.com/Test-Thread-Regression-since-9-December-td4670920.html][Regression since 9 December?]]
+
+**** Boost serialisation
+
+: C:\projects\dogen\projects\utility\include\dogen/utility/test/serialization_tester.hpp(73): error C2668: 'dogen::config::register_types': ambiguous call to overloaded function [C:\projects\dogen\build\output\projects\config\spec\config_spec.vcxproj]
+:   C:\projects\dogen\projects\config\include\dogen/config/serialization/registrar_ser.hpp(32): note: could be 'void dogen::config::register_types<OutputArchive>(Archive &)'
+:           with
+:           [
+:               OutputArchive=boost::archive::binary_oarchive,
+:               Archive=boost::archive::binary_oarchive
+:           ]
+:   C:\projects\dogen\projects\config\spec\serialization_spec.cpp(30): note: or       'void register_types<OutputArchive>(Archive &)'
+:           with
+:           [
+:               OutputArchive=boost::archive::binary_oarchive,
+:               Archive=boost::archive::binary_oarchive
+:           ]
+:   C:\projects\dogen\projects\utility\include\dogen/utility/test/serialization_tester.hpp(73): note: while trying to match the argument list '(boost::archive::binary_oarchive)'
+:   C:\projects\dogen\projects\utility\include\dogen/utility/test/serialization_tester.hpp(121): note: see reference to function template instantiation 'void dogen::utility::test::serialization_tester<dogen::config::knitting_options_generator::result_type>::
+: roundtrip_produces_the_same_entity<boost::archive::binary_iarchive,boost::archive::binary_oarchive>(const dogen::config::knitting_options &)' being compiled
+:   C:\projects\dogen\projects\utility\include\dogen/utility/test/serialization_tester.hpp(121): note: see reference to function template instantiation 'void dogen::utility::test::serialization_tester<dogen::config::knitting_options_generator::result_type>::
+: roundtrip_produces_the_same_entity<boost::archive::binary_iarchive,boost::archive::binary_oarchive>(const dogen::config::knitting_options &)' being compiled
+:   C:\projects\dogen\projects\utility\include\dogen/utility/test/serialization_tester.hpp(116): note: while compiling class template member function 'void dogen::utility::test::serialization_tester<dogen::config::knitting_options_generator::result_type>::bi
+: nary_roundtrip_produces_the_same_entity(const dogen::config::knitting_options &)'
+:   C:\projects\dogen\projects\utility\include\dogen/utility/test/serialization_tester.hpp(130): note: see reference to function template instantiation 'void dogen::utility::test::serialization_tester<dogen::config::knitting_options_generator::result_type>::
+: binary_roundtrip_produces_the_same_entity(const dogen::config::knitting_options &)' being compiled
+:   C:\projects\dogen\projects\utility\include\dogen/utility/test/canned_tests.hpp(72): note: see reference to class template instantiation 'dogen::utility::test::serialization_tester<dogen::config::knitting_options_generator::result_type>' being compiled
+:   C:\projects\dogen\projects\config\spec\serialization_spec.cpp(54): note: see reference to function template instantiation 'void dogen::utility::test::roundtrip_type<dogen::config::knitting_options_generator>(void)' being compiled
+
+**** Dogen yarn exception
+
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(60): error C2063: 'boost::serialization::save': not a function [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(63): error C2063: 'boost::serialization::load': not a function [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(67): error C3927: '->': trailing return type is not allowed after a non-function declarator [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(67): error C3484: syntax error: expected '->' before the return type [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(67): error C3613: missing return type after '->' ('int' assumed) [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(67): error C3646: 'visit': unknown override specifier [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(67): error C2988: unrecognizable template declaration/definition [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(67): error C2059: syntax error: '(' [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(67): error C2238: unexpected token(s) preceding ';' [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(66): error C3668: 'dogen::yarn::exception::accept': method with override specifier 'override' did not override any base class methods [C:\projects\dogen\build\output\projects\yarn\src\y
+: arn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(70): error C2628: 'dogen::yarn::exception' followed by 'void' is illegal (did you forget a ';'?) [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(70): error C2270: 'accept': modifiers not allowed on nonmember functions [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(70): error C2259: 'dogen::yarn::exception': cannot instantiate abstract class [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(70): note: due to following members:
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(70): note: 'void dogen::yarn::element::accept(dogen::yarn::element_visitor &)': is abstract
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/element.hpp(83): note: see declaration of 'dogen::yarn::element::accept'
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(70): note: 'void dogen::yarn::element::accept(const dogen::yarn::element_visitor &)': is abstract
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/element.hpp(82): note: see declaration of 'dogen::yarn::element::accept'
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(70): note: 'void dogen::yarn::element::accept(dogen::yarn::element_visitor &) const': is abstract
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/element.hpp(81): note: see declaration of 'dogen::yarn::element::accept'
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(70): note: 'void dogen::yarn::element::accept(const dogen::yarn::element_visitor &) const': is abstract
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/element.hpp(80): note: see declaration of 'dogen::yarn::element::accept'
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/exception.hpp(70): note: 'bool dogen::yarn::element::equals(const dogen::yarn::element &) const': is abstract
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/element.hpp(171): note: see declaration of 'dogen::yarn::element::equals'
+
+**** Dogen yarn primitive
+
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/serialization/primitive_fwd_ser.hpp(30): error C2143: syntax error: missing ';' before '{' [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/serialization/primitive_fwd_ser.hpp(30): error C2447: '{': missing function header (old-style formal list?) [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/primitive.hpp(47): error C2059: syntax error: 'public' [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/primitive.hpp(47): error C2143: syntax error: missing ';' before ':' [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/primitive.hpp(47): error C2059: syntax error: ':' [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/primitive.hpp(49): error C2059: syntax error: 'const' [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/primitive.hpp(58): error C2059: syntax error: 'private' [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/primitive.hpp(60): error C2255: 'friend': not allowed outside of a class definition [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/primitive.hpp(60): error C2244: 'save': unable to match function definition to an existing declaration [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/primitive.hpp(60): note: see declaration of 'save'
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/primitive.hpp(63): error C2255: 'friend': not allowed outside of a class definition [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/primitive.hpp(63): error C2244: 'load': unable to match function definition to an existing declaration [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/primitive.hpp(63): note: see declaration of 'load'
+
+**** Dogen yarn enumeration
+
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/enumerator.hpp(40): error C2990: 'dogen::yarn::enumerator': non-class template has already been declared as a class template [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/enumerator_fwd.hpp(31): note: see declaration of 'dogen::yarn::enumerator'
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/enumerator.hpp(121): error C2027: use of undefined type 'dogen::yarn::enumerator' [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/enumerator_fwd.hpp(31): note: see declaration of 'dogen::yarn::enumerator'
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/enumerator.hpp(121): error C2228: left of '.swap' must have class/struct/union [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/enumeration.hpp(52): error C3203: 'enumerator': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type [C:\projects\dogen\build\output\pr
+: ojects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/enumeration.hpp(106): error C3203: 'enumerator': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type [C:\projects\dogen\build\output\p
+: rojects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/enumeration.hpp(107): error C3203: 'enumerator': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type [C:\projects\dogen\build\output\p
+: rojects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/enumeration.hpp(108): error C3203: 'enumerator': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type [C:\projects\dogen\build\output\p
+: rojects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/types/enumeration.hpp(109): error C3203: 'enumerator': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type [C:\projects\dogen\build\output\p
+: rojects\yarn\src\yarn.vcxproj]
+
+**** Dogen mock model factory
+
+: C:\projects\dogen\projects\yarn\include\dogen/yarn/test/mock_intermediate_model_factory.hpp(264): error C2259: 'dogen::yarn::exception': cannot instantiate abstract class [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/test/mock_intermediate_model_factory.hpp(264): note: due to following members:
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/test/mock_intermediate_model_factory.hpp(264): note: 'void dogen::yarn::element::accept(dogen::yarn::element_visitor &)': is abstract
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/element.hpp(83): note: see declaration of 'dogen::yarn::element::accept'
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/test/mock_intermediate_model_factory.hpp(264): note: 'void dogen::yarn::element::accept(const dogen::yarn::element_visitor &)': is abstract
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/element.hpp(82): note: see declaration of 'dogen::yarn::element::accept'
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/test/mock_intermediate_model_factory.hpp(264): note: 'void dogen::yarn::element::accept(dogen::yarn::element_visitor &) const': is abstract
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/element.hpp(81): note: see declaration of 'dogen::yarn::element::accept'
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/test/mock_intermediate_model_factory.hpp(264): note: 'void dogen::yarn::element::accept(const dogen::yarn::element_visitor &) const': is abstract
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/element.hpp(80): note: see declaration of 'dogen::yarn::element::accept'
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/test/mock_intermediate_model_factory.hpp(264): note: 'bool dogen::yarn::element::equals(const dogen::yarn::element &) const': is abstract
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/element.hpp(171): note: see declaration of 'dogen::yarn::element::equals'
+: C:\projects\dogen\projects\yarn\src\test\mock_intermediate_model_factory.cpp(533): error C2027: use of undefined type 'dogen::yarn::enumerator' [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/enumerator_fwd.hpp(31): note: see declaration of 'dogen::yarn::enumerator'
+: C:\projects\dogen\projects\yarn\src\test\mock_intermediate_model_factory.cpp(534): error C2079: 'r' uses undefined class 'dogen::yarn::enumerator' [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+: C:\projects\dogen\projects\yarn\src\test\mock_intermediate_model_factory.cpp(535): error C2228: left of '.name' must have class/struct/union [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+:   C:\projects\dogen\projects\yarn\src\test\mock_intermediate_model_factory.cpp(535): note: type is 'int'
+: C:\projects\dogen\projects\yarn\src\test\mock_intermediate_model_factory.cpp(536): error C2228: left of '.value' must have class/struct/union [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+:   C:\projects\dogen\projects\yarn\src\test\mock_intermediate_model_factory.cpp(536): note: type is 'int'
+: C:\projects\dogen\projects\yarn\src\test\mock_intermediate_model_factory.cpp(540): error C2027: use of undefined type 'dogen::yarn::enumerator' [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
+:   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/enumerator_fwd.hpp(31): note: see declaration of 'dogen::yarn::enumerator'
+
+
 *** STARTED Generate exceptions using yarn types                      :story:
 
 Tasks:
