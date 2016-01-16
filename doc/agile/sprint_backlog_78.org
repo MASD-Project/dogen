@@ -266,6 +266,7 @@ It may be due to this:
 :   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/enumerator_fwd.hpp(31): note: see declaration of 'dogen::yarn::enumerator'
 
 *** STARTED Create a blog post on product backlogs                    :story:
+    CLOCK: [2016-01-16 Sat 14:21]--[2016-01-16 Sat 15:21] =>  1:00
     CLOCK: [2016-01-14 Thu 06:28]--[2016-01-14 Thu 06:58] =>  0:30
     CLOCK: [2016-01-10 Sun 23:02]--[2016-01-10 Sun 23:07] =>  0:05
     CLOCK: [2016-01-10 Sun 13:47]--[2016-01-10 Sun 14:10] =>  0:23

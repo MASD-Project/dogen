@@ -1,11 +1,17 @@
 #+title: Nerd Food: On Product Backlogs
 #+options: date:nil toc:nil author:nil num:nil title:nil
 
-#+begin_quote
+#+begin_html
+<p class="verse" style="text-align:right">
+<small>
 Would be be good to have a better bug-tracking setup? Yes. But I think
 it takes man-power, and it would take something *fundamentally* better
-than bugzilla. -- Linus
-#+end_quote
+than bugzilla.
+<br>
+<i>Linus</i>
+</small>
+</p>
+#+end_html
 
 Most developers in large companies tend to be exposed to a strange
 variation of Agile which I like to call "Enterprise Grade Agile", but
@@ -13,16 +19,25 @@ I've also heard it called "Fragile" and "Cargo-Cult Agile". However
 you decide to name the phenomena, the gist of it is that these setups
 contain most or all of the ceremony of Agile - including stand-ups,
 sprint planning, iteration retrospectives, scrum-masters and so on -
-but none of its spirit.
+but none of its spirit. Tweets such as these capture the essence of
+the problem:
 
-There are many aspects we could tackle, but this will focus just on
-product backlogs. A word of warning first: this post takes a slightly
-narrow and somewhat "advanced" view of Agile; if you require a more
-introductory approach, you are probably better off looking at other
-resources such as [[http://zerodollarbill.blogspot.co.uk/2012/06/how-to-learn-scrum-in-10-minutes-and.html][How to learn Scrum in 10 minutes and clean your
-house in the process]].
+#+begin_html
+<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">Top
+tip: if you need to bring a notepad to the daily stand up to tell us
+what you did yesterday that&#39;s too many details</p>&mdash; Fran
+Buontempo (@fbuontempo) <a
+href="https://twitter.com/fbuontempo/status/686856528696086528">January
+12, 2016</a></blockquote> <script async
+src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+#+end_html
 
-
+There are many aspects one could tackle, but this post will focus just
+on product backlogs. A word of warning first: this post takes a
+slightly narrow and somewhat "advanced" view of Agile; if you require
+a more introductory approach, you are probably better off looking at
+other resources such as [[http://zerodollarbill.blogspot.co.uk/2012/06/how-to-learn-scrum-in-10-minutes-and.html][How to learn Scrum in 10 minutes and clean
+your house in the process]].
 
 
 One
