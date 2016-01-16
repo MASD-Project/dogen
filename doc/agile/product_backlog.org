@@ -5704,6 +5704,13 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Unmaintained emblem                                               :story:
+
+If we ever reach a point where Dogen is complete according to the
+vision, we should add this emblem:
+
+http://unmaintained.tech/
+
 *** Easy addition of facets and formatters                            :story:
 
 The ideal state of the world is one where:
