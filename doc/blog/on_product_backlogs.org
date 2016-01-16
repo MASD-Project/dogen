@@ -2,25 +2,28 @@
 #+options: date:nil toc:nil author:nil num:nil title:nil
 
 #+begin_html
-<p class="verse" style="text-align:right">
+<table border="0">
+<tr>
+<td width="50%"></td>
+<td width="50%"><p class="verse" style="text-align:left">
 <small>
-Would be be good to have a better bug-tracking setup? Yes. But I think
-it takes man-power, and it would take something *fundamentally* better
-than bugzilla.
-<br>
-<i>Linus</i>
+Would be be good to have a better bug-tracking setup? Yes.
+But I think it takes man-power, and it would take something
+*fundamentally* better than bugzilla. <i>-- Linus</i>
 </small>
-</p>
+</p></td>
+</tr>
+</table>
 #+end_html
 
 Most developers in large companies tend to be exposed to a strange
 variation of Agile which I like to call "Enterprise Grade Agile", but
-I've also heard it called "Fragile" and "Cargo-Cult Agile". However
-you decide to name the phenomena, the gist of it is that these setups
-contain most or all of the ceremony of Agile - including stand-ups,
-sprint planning, iteration retrospectives, scrum-masters and so on -
-but none of its spirit. Tweets such as these capture the essence of
-the problem:
+I've also heard it called "Fragile" and, most aptly, "Cargo-Cult
+Agile". However you decide to name the phenomena, the gist of it is
+that these setups contain most or all of the ceremony of Agile -
+including stand-ups, sprint planning, iteration retrospectives,
+scrum-masters and so on - but none of its spirit. Tweets such as these
+are great at capturing the essence of the problem:
 
 #+begin_html
 <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">Top
@@ -32,12 +35,175 @@ href="https://twitter.com/fbuontempo/status/686856528696086528">January
 src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_html
 
+Once you start having the nagging feeling of doing things "just
+because", and once your stand-ups become more of a status report to
+the "project manager" and/or "deliver manager - the existence of which
+is in itself rather worrying - your Cargo Cult Agile alarm bells
+should start ringing. As I see it, Agile is just a toolbox, with a
+number of tools that only really start to add value once you've
+adapted to your circumstances. The fitness function that determines if
+a tool should be used is how much it adds value to all (or at least
+most) of its users. If it does not, the tool must be adapted or
+removed altogether. And, crucially, you learn about Agile tools _by
+using them_. There is no other way.
+
+The tool I'd like to discuss on this post is the Product Backlog. Now,
+before you read through the whole rant, its probably worth saying that
+this post takes a slightly narrow and somewhat "advanced" view of
+Agile, with a target audience of those already using it. If you
+require a more introductory approach, you are probably better off
+looking at other online resources such as [[http://zerodollarbill.blogspot.co.uk/2012/06/how-to-learn-scrum-in-10-minutes-and.html][How to learn Scrum in 10
+minutes and clean your house in the process]]. Having said that, I'll
+try to define terms best I can to make sure we are all on the same
+page.
+
+With that said, let's get cracking.
+
+* The Product Backlog
+
+Once your company has grokked the basics of Agile and starts to move
+away from those lengthy specification documents - those that no one
+reads properly until implementation and those that never really
+specified anything the customer wanted, but everything we thought the
+customer wanted and then some more - you will start to use the Product
+Backlog in anger. And that's when you will realise that it is not
+quite as simple as memorising the text book definitions.
+
+So what do the "text books" say? Let's take a fairly typical
+definition[fn:definition]:
+
+#+begin_quote
+The agile product backlog in Scrum is a prioritized features list,
+containing short descriptions of all functionality desired in the
+product. When applying Scrum, it's not necessary to start a project
+with a lengthy, upfront effort to document all
+requirements. Typically, a Scrum team and its product owner begin by
+writing down everything they can think of for agile backlog
+prioritization. This agile product backlog is almost always more than
+enough for a first sprint. The Scrum product backlog is then allowed
+to grow and change as more is learned about the product and its
+customers.
+#+end_quote
+
+This is a good working definition, which will suffice for the purposes
+of the remaining of this post. However, always remember Yogi: "In
+theory, there is no difference between theory and practice. But in
+practice, there is."
+
+* The "Potmenkin Product Backlog"
+
+Many teams finish reading one such definition, find it amazingly
+inspiring, install the "Agile plug-in" on their bug-tracking software
+of choice and then furiously start typing those tickets in. But if you
+look closely, you'd be hard-pressed to find any difference between the
+bug tickets of old versus the new and improved "Product Backlog" that
+apparently you are now using.
+
+This is a classic management disconnect, whereby a renaming exercise
+is applied and suddenly, [[https://en.wikipedia.org/wiki/Potemkin_village][Potemkin village-style]], we are now in with
+the kool kids and our company suddenly becomes a modern and desirable
+place to work. But just like Potemkin villages where not designed for
+real people to live in, so "Potmenkin Product Backlogs" are not
+designed to help you manage the lifecycle of a product; they are there
+just to give you the _appearance_ of doing said management, for the
+purposes of reporting to the higher eschelons and so that you can tell
+stakeholders that "their story has been added to the Product Backlog"
+for prioritisation.
+
+Alas, very soon you will find that most of the "stories" are really
+nothing but glorified one-liners that no one seems to recall just what
+exactly they mean, and those few elaborately detailed tickets ended up
+rotting because they keep being deprioritised. Soon enough you will
+find that your Sprint Planning meetings will cover less and less of
+the Product Backlog - after all, who is able to prioritise this mess?
+Some stories don't even make any sense! The final stage is when all
+stories worked on are stories raised directly on the Sprint Backlog,
+and the Product Backlog is nothing but the dumping ground for the
+stories that didn't make it on a Sprint. The Product Backlog is such a
+terrible mess that no one really looks at it, and the occasional
+search looking for valuable details of how a bug was fixed reveal
+nothing of particular use. Eventually the backlog is zeroed - maybe a
+dozen or so stories make the cull - and the entire process begins
+anew.
+
+As expected, the Potmenkin Product Backlog adds very little value - in
+fact it can be argued that it detracts value - but it must be kept
+because Agile requires a Product Backlog.
+
+* Lessons From History
+
+In order to understand the difficulties with a Product Backlog we
+should turn to their logical predecessors, the Bug-Tracking systems
+such as [[https://www.bugzilla.org/][Bugzilla]] or [[https://www.atlassian.com/software/jira][Jira]]. The quote from Linus above illustrates the
+problem. Linus has long taken the approach that there is no need to
+have a Bug-Tracker in kernel development although he does not object
+if someone wants to use one for a subsystem. You may think this is a
+very primitive approach but in some ways it is also a _very_ modern
+approach, very much in line with Agile. If you have a Bug-Tracking
+system which is taking time away from developers without providing you
+with any additional value, you should _remove_ the Bug-Tracking
+system. There simply is no space for ceremony in kernel development or
+for anything which slows things down[fn:evolution].
+
+All of this begs the question: what exactly makes Bug-Tracking systems
+so useless? From experience, there are a few factors:
+
+- they are a "fire and forget" capture system. Most users just care
+  about putting data in, rather than worry about the lifecycle of a
+  ticket. Very few places have some kind of "ticket quality control"
+  which ensures that the content of the ticket is vaguely sensible,
+  and those who do suffer from another problem:
+- they require dedicated teams. By this I don't just mean running the
+  software - which you will most likely do in a close shop; I also
+  mean the entire notion of Q&A and Testing as separate from
+  development, with reams of people dedicated to setting
+  "environments" up (and keeping them up!), organising database
+  restores and other practices that are not compatible with current
+  practices in software development.
+- they are temples of ceremony: a look at the myriad of fields you
+  need to fill in, and the rules and permutations required to get them
+  just right is sufficient to put off even the most ardent
+  developer. Most just memorise some incantation without really
+  knowing what the majority of fields actually mean.
+- as products age, you will be faced with [[http://tinyletter.com/programming-beyond-practices/letters/the-sad-graph-of-software-death][the sad graph of software
+  death]]. The main problem is that resources get taken away from
+  systems as they age, and this manifests itself in a raising number
+  of open tickets against a falling number of closing tickets. This is
+  actually a _really_ useful indicator but one that is often
+  ignored.[fn:maintenance].
+
+
+the need to worry about Testing Notes
+
+stop going through the entire
+Product Backlog - there are just too many stories, and it requires too
+much talking
+
+; perhaps the
+developers can read them
+
+, to the point that
+
+
+
+
+
+ which are readily
+adaptable to your particular circumstances. Any tool should only be
+used because it adds value to all (or at least most) of those
+involved. Once you start
+
+
+
+
+My personal view of Agile is that you should only be doing things
+which you feel that add value;
+
+
+
+
 There are many aspects one could tackle, but this post will focus just
-on product backlogs. A word of warning first: this post takes a
-slightly narrow and somewhat "advanced" view of Agile; if you require
-a more introductory approach, you are probably better off looking at
-other resources such as [[http://zerodollarbill.blogspot.co.uk/2012/06/how-to-learn-scrum-in-10-minutes-and.html][How to learn Scrum in 10 minutes and clean
-your house in the process]].
+on product backlogs.
 
 
 One
@@ -51,5 +217,22 @@ via some kind of Conway's Law applied to processes, and became "the
 norm". It still shows value for some of the newer systems, but the
 legacy systems have
 
+I'm not sure how widespread these misunderstandings of Agile are but I
+fear they are everywhere - to one degree or another - and presumably
+small companies are not immune to it either. I suspect that much of it
+is intimately related to Conway's Law, a train of thought I'd like to
+explore on a different post. This post, however, is just focusing on
+discussing the lessons I've learned with Product Backlogs.
+
+
  I then met another guise of Agile working on a start-up
 environment and that was quite refreshing
+
+
+[fn:definition] [[https://www.mountaingoatsoftware.com/agile/scrum/product-backlog][Scrum Product Backlog]], from Mountain Goat Software.
+
+[fn:evolution] A topic which I covered some time ago here: [[http://mcraveiro.blogspot.co.uk/2008/06/nerd-food-on-evolutionary-methodology.html][On
+Evolutionary Methodology]].
+
+[fn:maintenance] Another topic which I also covered here some time
+ago: [[http://mcraveiro.blogspot.co.uk/2007/05/nerd-food-on-maintenance.html][On Maintenance]].
