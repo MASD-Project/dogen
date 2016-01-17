@@ -266,6 +266,8 @@ It may be due to this:
 :   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/enumerator_fwd.hpp(31): note: see declaration of 'dogen::yarn::enumerator'
 
 *** STARTED Create a blog post on product backlogs                    :story:
+    CLOCK: [2016-01-17 Sun 00:45]--[2016-01-17 Sun 01:09] =>  0:24
+    CLOCK: [2016-01-16 Sat 22:05]--[2016-01-17 Sun 00:38] =>  2:33
     CLOCK: [2016-01-16 Sat 17:34]--[2016-01-16 Sat 18:26] =>  0:52
     CLOCK: [2016-01-16 Sat 16:15]--[2016-01-16 Sat 17:14] =>  0:59
     CLOCK: [2016-01-16 Sat 14:21]--[2016-01-16 Sat 15:21] =>  1:00
@@ -275,32 +277,19 @@ It may be due to this:
     CLOCK: [2016-01-10 Sun 13:33]--[2016-01-10 Sun 13:41] =>  0:08
     CLOCK: [2016-01-07 Thu 06:25]--[2016-01-07 Thu 06:58] =>  0:33
 
-- [[http://yarchive.net/comp/linux/bug_tracking.html][linus quote on bug trackers]]: Would be be good to have a better
-  bug-tracking setup? Yes. But I think it takes man-power, and it
-  would take something *fundamentally* better than bugzilla.
-- [[http://zerodollarbill.blogspot.co.uk/2012/06/how-to-learn-scrum-in-10-minutes-and.html][How to learn Scrum in 10 minutes and clean your house in the process]]
-- [[https://lh6.googleusercontent.com/-v2b40kpb2xc/t88cpeli6qi/aaaaaaaac_u/ig2qwsjlq_8/s800/scrum_iterative_development.jpg][Scrum Iteration Chart]]:
-- how the management of the backlog is not the same as the management
-  of stories/tasks. A task management system is still useful.
-- jira as a fire and forget capture system.
-- issues in github are not a replacement for a backlog, but useful in
-  managing user interactions; the kind of stories that go into the
-  backlog are different.
-- title: on product backlog grooming? on product backlogs?
+To do:
+
 - graph of features: a) all features in the world b) all features in
   your product that are compatible with your vision c) all features in
   the backlog d) all features in the sprint log.
-- find Kevlin Henney's graph on the relationship between product and
-  sprint backlog (had some arrows in a cycle). Also find some of his
-  quotes.
-- the importance of vision as the function that determines if a story
-  should go in the backlog or not; and how stories refine the
-  vision. It starts hazy but then coalesces over time and comes to
-  define what the product means.
 - define strategy has the set of steps required to implement the
   vision.
 - the importance of mission for a sprint as a function that determines
   what to get out of the backlog. Tactics go along with missions.
+- the importance of vision as the function that determines if a story
+  should go in the backlog or not; and how stories refine the
+  vision. It starts hazy but then coalesces over time and comes to
+  define what the product means.
 - how a good product backlog could have a story that evolves over the
   years only to become exactly the thing you need at a given sprint
   and then you benefit from the knowledge and insight gained over that
@@ -314,8 +303,6 @@ It may be due to this:
   or even cancelled because they no longer fit with the
   vision. Cancelled stories are important because we may came back to
   them - its just very unlikely that we do.
-- if your product backlog is empty your product is dead - find the
-  quote, probably Henney.
 - backlog becomes stale so its important to do deep grooming very
   frequently. This is an expensive activity as time goes by because
   a good backlog increases in size with time. As the number of
@@ -333,8 +320,6 @@ It may be due to this:
 - FIXME: we should not use the word "vision" as a label or category in
   the backlog as it makes it confusing since its not the product
   vision.
-- provide a definition of product and backlog (e.g. dictionary) and
-  then of product backlog using an agile definition.
 - before writing a story try very hard to find prior art. You need to
   find all stories in the backlog that have any vague relation to this
   new story and either modify those or extract the commonalities from
@@ -345,108 +330,29 @@ It may be due to this:
   thoughts of the person that last was in that area, in a given state
   of mind. It is not a very accurate map, but then like those maps its
   better than nothing.
-- FIXME: find the Henney quote on how even if you write the same code
-  twice you would not write it the same way because you are not the
-  same.
 - stories in backlog should have age/recency: time they were last
   groomed. Devs must take a certain percentage of backlog stories
   every sprint and groom them. The percentage is determined by the
   rate at which stories are going in and out of backlog (some kind of
   backlog growth rate).
-- find story on dead project that was on hacker news because the
-  number of open stories was too large.
-- talk about how useless and counter productive backlogs are in
-  professional places with large teams because the signal to noise
-  ratio is too high. People first start that sprint planning by going
-  through the backlog, then a subset of the backlog and then
-  eventually just ignore it all together because they spent the whole
-  sprint planning meet looking through the backlog.
-- [[http://tinyletter.com/programming-beyond-practices/letters/the-sad-graph-of-software-death][The sad graph of software death]]
 
-*** STARTED Create a blog post on product backlogs                    :story:
-    CLOCK: [2016-01-10 Sun 23:02]--[2016-01-10 Sun 23:07] =>  0:05
-    CLOCK: [2016-01-10 Sun 13:47]--[2016-01-10 Sun 14:10] =>  0:23
-    CLOCK: [2016-01-10 Sun 13:33]--[2016-01-10 Sun 13:41] =>  0:08
-    CLOCK: [2016-01-07 Thu 06:25]--[2016-01-07 Thu 06:58] =>  0:33
+Done:
 
 - [[http://yarchive.net/comp/linux/bug_tracking.html][linus quote on bug trackers]]: Would be be good to have a better
   bug-tracking setup? Yes. But I think it takes man-power, and it
   would take something *fundamentally* better than bugzilla.
 - [[http://zerodollarbill.blogspot.co.uk/2012/06/how-to-learn-scrum-in-10-minutes-and.html][How to learn Scrum in 10 minutes and clean your house in the process]]
-- [[https://lh6.googleusercontent.com/-v2b40kpb2xc/t88cpeli6qi/aaaaaaaac_u/ig2qwsjlq_8/s800/scrum_iterative_development.jpg][Scrum Iteration Chart]]:
-- how the management of the backlog is not the same as the management
-  of stories/tasks. A task management system is still useful.
+- [[https://lh6.googleusercontent.com/-v2b40kpb2xc/t88cpeli6qi/aaaaaaaac_u/ig2qwsjlq_8/s800/scrum_iterative_development.jpg][Scrum Iteration Chart]]
 - jira as a fire and forget capture system.
-- issues in github are not a replacement for a backlog, but useful in
-  managing user interactions; the kind of stories that go into the
-  backlog are different.
 - title: on product backlog grooming? on product backlogs?
-- graph of features: a) all features in the world b) all features in
-  your product that are compatible with your vision c) all features in
-  the backlog d) all features in the sprint log.
-- find Kevlin Henney's graph on the relationship between product and
-  sprint backlog (had some arrows in a cycle). Also find some of his
-  quotes.
-- the importance of vision as the function that determines if a story
-  should go in the backlog or not; and how stories refine the
-  vision. It starts hazy but then coalesces over time and comes to
-  define what the product means.
-- define strategy has the set of steps required to implement the
-  vision.
-- the importance of mission for a sprint as a function that determines
-  what to get out of the backlog. Tactics go along with missions.
-- how a good product backlog could have a story that evolves over the
-  years only to become exactly the thing you need at a given sprint
-  and then you benefit from the knowledge and insight gained over that
-  period of time.
-- Stories mature in the backlog. They are at different stages:
-  occasional one-liner/todo style story, which gets filled in over
-  time until it has enough information to become implementable; it
-  then waits until there is a sprint with a consistent mission. Or it
-  could be that the story has to mature within the sprint
-  itself. Mature stories get refined: trimmed in scope, re-targeted,
-  or even cancelled because they no longer fit with the
-  vision. Cancelled stories are important because we may came back to
-  them - its just very unlikely that we do.
 - if your product backlog is empty your product is dead - find the
-  quote, probably Henney.
-- backlog becomes stale so its important to do deep grooming very
-  frequently. This is an expensive activity as time goes by because
-  a good backlog increases in size with time. As the number of
-  developers will not grow in line with the size of the backlog, this
-  becomes more of a problem over time. However, its still very
-  important to avoid from letting it go stale.
-- managing a backlog in org mode is very advantageous: one big flat
-  file, renderable in HTML; easy to fold and create structure as
-  required.
-- finding the right level of structure in the backlog is difficult; we
-  tried lots of structure but then it became expensive to maintain. At
-  the same time, stories become harder to find without structure so
-  there is less value. For example it would be nice to find all bugs
-  on a given component, or all visionary tasks, etc.
-- FIXME: we should not use the word "vision" as a label or category in
-  the backlog as it makes it confusing since its not the product
-  vision.
+  quote, probably Henney. When your product backlog is empty, your
+  product is dead @KevlinHenney twitter
 - provide a definition of product and backlog (e.g. dictionary) and
   then of product backlog using an agile definition.
-- before writing a story try very hard to find prior art. You need to
-  find all stories in the backlog that have any vague relation to this
-  new story and either modify those or extract the commonalities from
-  those into this new story.
-- if a product is the exploration of an unknown space, the backlog is
-  the sum total knowledge of that exploration, akin to a map of that
-  space. The backlog is akin to an historical map: it gives you the
-  thoughts of the person that last was in that area, in a given state
-  of mind. It is not a very accurate map, but then like those maps its
-  better than nothing.
 - FIXME: find the Henney quote on how even if you write the same code
   twice you would not write it the same way because you are not the
   same.
-- stories in backlog should have age/recency: time they were last
-  groomed. Devs must take a certain percentage of backlog stories
-  every sprint and groom them. The percentage is determined by the
-  rate at which stories are going in and out of backlog (some kind of
-  backlog growth rate).
 - find story on dead project that was on hacker news because the
   number of open stories was too large.
 - talk about how useless and counter productive backlogs are in
@@ -456,6 +362,14 @@ It may be due to this:
   eventually just ignore it all together because they spent the whole
   sprint planning meet looking through the backlog.
 - [[http://tinyletter.com/programming-beyond-practices/letters/the-sad-graph-of-software-death][The sad graph of software death]]
+- how the management of the backlog is not the same as the management
+  of stories/tasks. A task management system is still useful.
+- issues in github are not a replacement for a backlog, but useful in
+  managing user interactions; the kind of stories that go into the
+  backlog are different.
+- find Kevlin Henney's graph on the relationship between product and
+  sprint backlog (had some arrows in a cycle). Also find some of his
+  quotes.
 
 *** STARTED Generate exceptions using yarn types                      :story:
 
