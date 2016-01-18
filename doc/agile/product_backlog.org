@@ -5546,6 +5546,8 @@ and
 Yet another way seems to be creating a script to do coverage, as per
 [[https://github.com/BoostGSoC13/boost.afio][boost.afio]] [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/.travis.yml][travis.yml]]. The script is available [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/test/update_coveralls.sh][here]].
 
+Another example from [[https://github.com/boostorg/dll/blob/develop/.travis.yml][Boost.Dll]].
+
 *** Travis deployment of tags fails                                   :story:
 
 As per [[https://github.com/travis-ci/travis-ci/issues/2577][issue 2577]] in travis, it does not support wildcards at the
