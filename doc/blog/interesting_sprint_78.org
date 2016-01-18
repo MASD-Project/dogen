@@ -14,6 +14,25 @@ into recently-ish.
   on the valuation of oil companies (and sources of take overs) but I
   won't spoil it for you. If you are into oil (or against it), its a
   must read.
+- [[http://krugman.blogs.nytimes.com/2016/01/16/oil-goes-nonlinear/][Oil Goes Nonlinear]]: Short but thought provoking. I don't tend to
+  agree with Krugman on a lot of things, but quite like this analysis.
+- [[http://foreignpolicy.com/2015/12/31/africas-boom-is-over/?utm_content%3Dbufferc093b&utm_medium%3Dsocial&utm_source%3Dtwitter.com&utm_campaign%3Dbuffer][Africa’s Boom Is Over]]: And the bad news continue. Totally spot on
+  analysis of what will befall us.
+- [[http://startupboy.com/2016/01/15/american-spring/][American Spring]]: interesting take on the state of affairs of
+  American politics. Not sure I agree with everything, but definitely
+  food for thought. "Statistically speaking, what are the odds that the
+  two most qualified candidates to be president out of 300 million
+  people are siblings? Or married?" Indeed.
+- [[https://www.project-syndicate.org/commentary/sovereign-default-wave-emerging-markets-by-carmen-reinhart-2015-12#Z3gIvCtPUzZmf8PF.01][A Year of Sovereign Defaults?]]: Very good and very scary. This has to
+  be on the cards, the only question is the timing.
+- [[https://www.washingtonpost.com/news/wonk/wp/2015/12/30/really-rich-people-are-suddenly-paying-quite-a-bit-more-in-taxes/][Really rich people are suddenly paying quite a bit more in taxes]]:
+  some good news on the equality front I guess. But not quite sure it
+  makes much of a difference in the big scheme of US things.
+- [[http://www.latimes.com/world/mexico-americas/la-fg-argentina-economy-new-president-20151230-story.html][Argentina's 'little trees' getting chopped down by new president]]:
+  Seems like Argentina is going to go through yet another turbulent
+  period, with some good and bad news coming out. Interesting take on
+  the impact to the less well off of the new policies. The chap is
+  certainly a doer, it seems: [[http://linkis.com/www.economist.com/ne/HiAjy][A fast start]].
 
 * Startups et al.
 
@@ -28,6 +47,30 @@ into recently-ish.
   World]]: So it seems Musk and Altman want to ensure AI plays nice. Not
   quite sure he's right on this one. Steven Levy's version is
   available [[https://medium.com/backchannel/how-elon-musk-and-y-combinator-plan-to-stop-computers-from-taking-over-17e0e27dd02a#.f3ydovlgu][here]], more of an interview with Musk.
+- [[https://medium.com/backchannel/license-to-not-drive-6dbea84b9c45#.w9jh0xlyw][License to (Not) Drive]]: Levy gets to try the Google self-driving
+  cars. Very interesting.
+- [[http://arches.io/2016/01/hire-literally-anyone/][Hire Literally Anyone]]: Extremely interesting. I always thought the
+  existing hiring practices are not very well thought out, but this
+  article makes me realise that the flaws are deeper than I
+  expected. While we are on this topic, this ain't too bad either: [[https://medium.com/swlh/how-to-hire-34f4ded5f176#.mb0pcnhda][How
+  to Hire]].
+- [[https://medium.com/@octskyward/the-resolution-of-the-bitcoin-experiment-dabb30201f7#.vk8lilnkk][The resolution of the Bitcoin experiment]]: Great - nay - insanely
+  great analysis on the state of affairs in the BTC world. Spoken with
+  authority.
+- [[https://tonyarcieri.com/on-the-dangers-of-a-blockchain-monoculture][On the dangers of a blockchain monoculture]]: Pours more petrol in the
+  raging BTC fire. Very interesting. Never saw BTC as a monoculture,
+  but actually it so is.
+- [[http://www.bloomberg.com/news/articles/2015-12-30/the-final-days-of-the-bitcoin-foundation-][The Final Days of the Bitcoin Foundation?]]: And yet some more on the
+  BTC impending doom. I just gotta stop reading about it now, the
+  whole saga is far too depressing. Lets hope the technology survives
+  where humans failed.
+- [[http://www.coindesk.com/ibm-open-ledger-blockchain/?utm_content%3Dbuffer601ae&utm_medium%3Dsocial&utm_source%3Dtwitter.com&utm_campaign%3Dbuffer][IBM Talks Open Ledger Project, Bright Future for Blockchain]]: Still
+  trying to catch my breath on all the BTC articles coming out, and
+  lo-and-behold, I missed the whole Open Ledger thing.
+- [[https://www.policyalternatives.ca/publications/monitor/apploitation-city-instaserfs][Apploitation in a city of instaserfs]]: Scary. Very scary. Reminiscent
+  of the older Mirani article [[http://qz.com/312537/the-secret-to-the-uber-economy-is-wealth-inequality/][The secret to the Uber economy is wealth
+  inequality]]. San Francisco is becoming more like Mumbai and that is
+  not good news.
 
 * General Coding
 
@@ -41,6 +84,20 @@ into recently-ish.
   the cracks that are already present in Moore's law. Interesting to
   note that a transistor is now only a few silicon atoms wide -
   meaning we can't really make it much smaller. Source: Hacker News
+- [[http://robotlolita.me/2016/01/09/no-i-dont-want-to-configure-your-app.html][No, I Don't Want To Configure Your App]]: Call to arms to get us all
+  thinking on just how many configuration knobs you need to use
+  something. Source: Hacker News
+- [[http://jameshunt.us/writings/your-ide-is-killing-you.html][Your IDE Is Killing You]]: Somewhat preaching to the choir, since I am
+  an Emacs user of old, but still a very cogent argument on why
+  relying too much on IDEs is not a good thing. Source: Bruno Antunes
+  (twitter)
+- [[http://jlongster.com/Starters-and-Maintainers][Starters and Maintainers]]: The different personas around an open
+  source project. Interesting, its good to be aware of which hat you
+  are wearing when.
+- [[https://medium.com/backchannel/i-moved-to-linux-and-it-s-even-better-than-i-expected-9f2dcac3f8fb#.aakpzoln9][I Moved to Linux and It’s Even Better Than I Expected]]: A feel good
+  story about the Linux desktop. Given how slowly things are
+  progressing on that front, we all need one of these some times to
+  cheer us up. Main value of the article though.
 
 * Databases
 
@@ -50,6 +107,12 @@ into recently-ish.
   only each client can decrypt? This is certainly a very useful thing
   for certain types of information and a PostgreSQL extension would
   be most useful. Source: Hacker News
+- [[http://rachbelaid.com/introduction-to-postgres-physical-storage/][Introduction to PostgreSQL physical storage]]: Great article on Postgres
+  low-level details. One to read if you want to get serious about the
+  Elephant but are not yet in the know.
+- [[http://tech.valgog.com/2012/01/schema-based-versioning-and-deployment.html][Schema based versioning and deployment for PostgreSQL]]: Tips on how
+  to manage versions for your stored procs, and also contains links
+  for table management. For those of us not totally taken by NoSQL.
 
 * C++
 
@@ -65,6 +128,9 @@ into recently-ish.
 - [[https://medium.com/hacker-daily/writing-high-performance-servers-in-modern-c-7cd00926828#.hksbtpyoh][Writing modern C++ servers using Wangle:]] The follow up to the
   previous post, explaining how to write servers with Facebook
   technologies.
+- [[http://www.di.unipi.it/~nids/docs/i_want_my_pony_or_why_you_cannot_have_cpp_exceptions_with_a_stack_trace.html][I want my pony! Or why you cannot have C++ exceptions with a stack
+  trace]]: very interesting. Since I started using Boost.Exception I
+  never missed the stack traces either. Source: Hacker News
 
 * Layman Science
 
@@ -86,3 +152,15 @@ into recently-ish.
 - [[http://www.blastr.com/2015-12-23/exit-sandman-neil-gaiman-goes-depth-overture-one-2015s-best-comics][Exit Sandman: Neil Gaiman goes in-depth with Overture, one of 2015's
   best comics]]: For the Sandman fans, the new (and last) Sandman book
   is all the rage. A great interview by the man himself.
+- [[https://www.youtube.com/watch?v%3DMpkqfZ95jtw][Dear Zachary]]: bumped into this via [[waitbutwhy.com][Wait But Why]], and, as usual,
+  great tip. Fantastic documentary.
+- [[https://www.youtube.com/watch?v%3DGG9Anstjlro&feature%3Dyoutu.be][Solaris]]: Always wanted to watch this Tarkovsky movie and now it
+  seems it is available online! This is part of an initiative
+  described by Open Culture [[http://www.openculture.com/2010/07/tarkovksy.html][here]]. Source: Bruno Antunes (twitter)
+- [[https://www.youtube.com/watch?v%3D8BoKjQfMihs][Wittgenstein: A Wonderful Life]]: Found a Wittgenstein documentary,
+  but sadly haven't had time to watch it just yet. In my watch list
+  though.
+- [[http://therealnews.com/t2/index.php?option%3Dcom_content&task%3Dview&id%3D31&Itemid%3D74&jumival%3D14293][Je ne suis pas Charlie]]: Haven't yet watched it but seems
+  thought-provoking. Watch listed.
+- [[https://www.youtube.com/watch?v%3DTHKCteQocns][Tulipa Ruiz - Efêmera - Album Completo]]: New musical find in the
+  Brazilian space (Portuguese).
