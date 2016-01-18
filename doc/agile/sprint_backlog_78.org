@@ -12,26 +12,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-14 Thu 06:58]
-| <75>                                                                        |         |       |      |
-| Headline                                                                    | Time    |       |      |
-|-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *21:32* |       |      |
-|-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 21:32   |       |      |
-| Active                                                                      |         | 21:32 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:11 |
-| COMPLETED Supply formatter properties and settings directly to formatter    |         |       | 4:12 |
-| COMPLETED Rename =backend= to =quilt=                                       |         |       | 0:41 |
-| COMPLETED Rename =cpp= to =quilt.cpp=                                       |         |       | 7:24 |
-| COMPLETED Rename test data folder for yarn.dia files                        |         |       | 0:50 |
-| COMPLETED Sort out annoyances with current emacs setup                      |         |       | 0:50 |
-| COMPLETED Add support for clang in travis                                   |         |       | 2:39 |
-| COMPLETED Create a separate flow for yarn based types                       |         |       | 2:06 |
-| STARTED Create a blog post on product backlogs                              |         |       | 1:39 |
+#+CAPTION: Clock summary at [2016-01-18 Mon 22:06]
+| <75>                                                                        |         |       |       |
+| Headline                                                                    | Time    |       |       |
+|-----------------------------------------------------------------------------+---------+-------+-------|
+| *Total time*                                                                | *32:03* |       |       |
+|-----------------------------------------------------------------------------+---------+-------+-------|
+| Stories                                                                     | 32:03   |       |       |
+| Active                                                                      |         | 32:03 |       |
+| COMPLETED Sprint and product backlog grooming                               |         |       |  1:47 |
+| COMPLETED Supply formatter properties and settings directly to formatter    |         |       |  4:12 |
+| COMPLETED Rename =backend= to =quilt=                                       |         |       |  0:41 |
+| COMPLETED Rename =cpp= to =quilt.cpp=                                       |         |       |  7:24 |
+| COMPLETED Rename test data folder for yarn.dia files                        |         |       |  0:50 |
+| COMPLETED Sort out annoyances with current emacs setup                      |         |       |  0:50 |
+| COMPLETED Add support for clang in travis                                   |         |       |  2:39 |
+| COMPLETED Create a separate flow for yarn based types                       |         |       |  2:06 |
+| COMPLETED Document all of the Windows build errors                          |         |       |  0:44 |
+| COMPLETED Create a blog post on product backlogs                            |         |       | 10:02 |
+| POSTPONED Generate exceptions using yarn types                              |         |       |  0:22 |
+| POSTPONED Move non-entity properties to base formatter assistant            |         |       |  0:26 |
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2016-01-18 Mon 22:05]
     CLOCK: [2016-01-18 Mon 12:15]--[2016-01-18 Mon 12:51] =>  0:36
     CLOCK: [2016-01-13 Wed 23:39]--[2016-01-13 Wed 23:41] =>  0:02
     CLOCK: [2016-01-07 Thu 20:20]--[2016-01-07 Thu 20:35] =>  0:15
@@ -42,7 +46,8 @@
 
 Updates to sprint and product backlog.
 
-*** STARTED Update manual                                             :story:
+*** COMPLETED Update manual                                           :story:
+    CLOSED: [2016-01-18 Mon 22:06]
 
 Updates to manual.
 
@@ -266,7 +271,8 @@ It may be due to this:
 : C:\projects\dogen\projects\yarn\src\test\mock_intermediate_model_factory.cpp(540): error C2027: use of undefined type 'dogen::yarn::enumerator' [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
 :   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/enumerator_fwd.hpp(31): note: see declaration of 'dogen::yarn::enumerator'
 
-*** STARTED Create a blog post on product backlogs                    :story:
+*** COMPLETED Create a blog post on product backlogs                  :story:
+    CLOSED: [2016-01-18 Mon 22:05]
     CLOCK: [2016-01-17 Sun 21:29]--[2016-01-18 Mon 00:04] =>  2:35
     CLOCK: [2016-01-17 Sun 00:45]--[2016-01-17 Sun 01:09] =>  0:24
     CLOCK: [2016-01-16 Sat 22:05]--[2016-01-17 Sun 00:38] =>  2:33
@@ -369,7 +375,9 @@ Done:
   of mind. It is not a very accurate map, but then like those maps its
   better than nothing.
 
-*** STARTED Generate exceptions using yarn types                      :story:
+*** POSTPONED Generate exceptions using yarn types                    :story:
+    CLOSED: [2016-01-18 Mon 22:06]
+    CLOCK: [2016-01-14 Thu 21:52]--[2016-01-14 Thu 22:14] =>  0:22
 
 Tasks:
 
@@ -380,7 +388,8 @@ Tasks:
 - update the yarn formatting workflow to process yarn exceptions;
 - update the stitch templates to make use of yarn exceptions.
 
-*** STARTED Move non-entity properties to base formatter assistant    :story:
+*** POSTPONED Move non-entity properties to base formatter assistant  :story:
+    CLOSED: [2016-01-18 Mon 22:06]
     CLOCK: [2016-01-14 Thu 22:15]--[2016-01-14 Thu 22:41] =>  0:26
 
 As part of the "yarnification" of the formatters, we need to be able
@@ -389,148 +398,6 @@ base formatter assistant. We should get rid of the trivial formatting
 assistant and entity formatting assistant and move all the code to the
 base. The two methods that require an entity should receive it as an
 input parameter.
-
-*** Attach helper methods to types dynamically                        :story:
-
-In order to cope with the removal of nested type info, we need a way
-to determine what helper methods are required for a given yarn type.
-
-For this we need a way to allow helper methods to bind dynamically to
-types. This can be done by using meta-data. The helper method
-registers a name and the type uses that name it its key for helper
-method. Where possible the helper method should use the name of the
-STL concept it is binding to. We need settings support for reading
-this field, and registration support for helper methods (registrar,
-etc).
-
-We should also find a nicer way to package helper methods, maybe
-aligned to a model and type or concept.
-
-Once this is done we need to remove the =object_types= that exist in
-yarn just to figure out what helper methods to use.
-
-*** Implement formattables in terms of yarn types                     :story:
-
-At present formattables are just a shadow copy of yarn types plus
-additional =cpp= specific types. In practice:
-
-- for the types that are shadow copies, we could have helper utilities
-  that do the translation on the fly (e.g. for names).
-- for additional information which cannot be translated, we could have
-  containers indexed by qualified name and query those just before we
-  call the transformer. This is the case with formatter properties. We
-  need something similar to house "type properties" such as
-  =requires_stream_manipulators=. These could be moved into aspect
-  settings.
-- for types that do not exist in yarn, we could inherit from element;
-  this is the case for registrar, forward declarations, cmakelists and
-  odb options. Note that with this we are now saying that element
-  space contains anything which can be modeled, regardless of if they
-  are part of the programming language type system, or build system,
-  etc. This is not ideal, but its not a problem just yet. We could
-  update the factory to generate these types and then take a copy of
-  the model and inject them in it.
-
-*** Create a settings class for the "requires" settings               :story:
-
-We need to populate these in a settings workflow of some kind.
-
-*** Move all properties in =cpp= to a properties namespace            :story:
-
-Once all formattables are gone, we should have only properties left in
-the formattables namespace. We should then rename it to
-properties. Thus we have two kinds of things: settings, which are a
-direct translation of meta-data without any further processing and
-properties which require processing.
-
-Merged stories:
-
-*Split formatter properties and associated classes from formattables*
-
-We have two kinds of data: the formattables themselves (mapped from
-yarn) and associated data (formatter properties). The latter is
-totally independent. We should create a namespace for all of these
-classes and a workflow that produces the data ready for consumption. A
-tentative name is =manifest=.
-
-*** Investigate slow down                                             :story:
-
-With commit 7e89ddb we introduced a set of hacks to inject settings
-and formatter properties into the repositories. This seems to have had
-a very negative impact in performance. We need to ensure performance
-goes back to normal after the hacks have been removed.
-
-*** Tidy-up master include generation                                 :story:
-
-At present we have one humongous hack in the factory to generate the
-master includers. How to do this properly:
-
-- wait until we start using yarn types.
-- loop through the yarn model instead of the path derivatives.
-- use a visitor to dispatch the types.
-- do not filter out services?
-- filter registrars etc based on type dispatching.
-
-*** Create a UML profile to formalise yarn concepts                   :story:
-
-Profile should include the hashable, etc changes.
-
-*** Create a map between UML/MOF terminology and yarn                 :story:
-
-It would be helpful to know what a yarn type means in terms of
-UML/MOF, and perhaps even explain why we have chosen certain names
-instead of the UML ones. We should also cover the modeling of
-relationships and the relation between yarn concepts and UML/MOF
-classes. This will form a chapter in the manual.
-
-The UML specification is available [[http://www.omg.org/spec/UML/2.5/][here]] and MOF specification is
-available [[http://www.omg.org/spec/MOF/2.5][here]].
-
-We need a way to uniquely identify a property. This could be done by
-appending the containing type's qualified name to the property name.
-
-See also [[http://www.uml-diagrams.org/][The Unified Modeling Language]] for a more accessible treatment.
-
-*** Remove =service= stereotype                                       :story:
-
-This really just means non-generatable, or do not generate. We already
-have a stereotype for this. Remove =service= and any other stereotype
-which is not being used such as =value_object= etc.
-
-Actually, non-generatable is not a stereotype really. We should
-instead have some meta-data that can affect generation:
-
-- do not generate: do nothing at all. For references only. If a file
-  exists with this file name, it will be deleted as part of
-  housekeeping.
-- generate blank file if it doesn't exist: we don't even want a
-  template.
-- generate with content if it doesn't exist, do not touch otherwise:
-  what we call services at the moment. Generate a "template" that then
-  gets filled in manually.
-- generate and merge: merge the contents of the generated file with
-  the current contents in the file system. When we support merging.
-- generate and overwrite: generate the file and overwrite whatever
-  exists in the file system.
-
-This could be called "generation policy".
-
-The second behaviour we get for free with services is that we disable
-all facets except for types. A few points:
-
-- we may want to have io, serialisation, etc. This is not possible at
-  present. If a state of a service is made up of supported types, we
-  could even use existing code generation.
-- in order for this to be implemented correctly we need to hook in to
-  the enablement management somehow. In addition, it seems each facet
-  can have its own generation policy. For example we may want to
-  manually create types but automatically generate io.
-- the best way to handle this may be to setup "enablement profiles"
-  that the user can hook up to. For example we could have a "default"
-  profile that enables all facets (or uses facet defaults), a second
-  "service" profile that enables types with partial generation and io
-  with full generation and so on. We probably also need "generation
-  profiles" to go with "enablement profiles".
 
 ** Deprecated
 *** CANCELLED Consider renaming nested name                           :story:
