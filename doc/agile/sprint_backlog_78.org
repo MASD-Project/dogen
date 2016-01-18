@@ -266,6 +266,7 @@ It may be due to this:
 :   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/enumerator_fwd.hpp(31): note: see declaration of 'dogen::yarn::enumerator'
 
 *** STARTED Create a blog post on product backlogs                    :story:
+    CLOCK: [2016-01-17 Sun 21:29]--[2016-01-18 Mon 00:04] =>  2:35
     CLOCK: [2016-01-17 Sun 00:45]--[2016-01-17 Sun 01:09] =>  0:24
     CLOCK: [2016-01-16 Sat 22:05]--[2016-01-17 Sun 00:38] =>  2:33
     CLOCK: [2016-01-16 Sat 17:34]--[2016-01-16 Sat 18:26] =>  0:52
@@ -279,39 +280,6 @@ It may be due to this:
 
 To do:
 
-- graph of features: a) all features in the world b) all features in
-  your product that are compatible with your vision c) all features in
-  the backlog d) all features in the sprint log.
-- define strategy has the set of steps required to implement the
-  vision.
-- the importance of mission for a sprint as a function that determines
-  what to get out of the backlog. Tactics go along with missions.
-- the importance of vision as the function that determines if a story
-  should go in the backlog or not; and how stories refine the
-  vision. It starts hazy but then coalesces over time and comes to
-  define what the product means.
-- how a good product backlog could have a story that evolves over the
-  years only to become exactly the thing you need at a given sprint
-  and then you benefit from the knowledge and insight gained over that
-  period of time.
-- Stories mature in the backlog. They are at different stages:
-  occasional one-liner/todo style story, which gets filled in over
-  time until it has enough information to become implementable; it
-  then waits until there is a sprint with a consistent mission. Or it
-  could be that the story has to mature within the sprint
-  itself. Mature stories get refined: trimmed in scope, re-targeted,
-  or even cancelled because they no longer fit with the
-  vision. Cancelled stories are important because we may came back to
-  them - its just very unlikely that we do.
-- backlog becomes stale so its important to do deep grooming very
-  frequently. This is an expensive activity as time goes by because
-  a good backlog increases in size with time. As the number of
-  developers will not grow in line with the size of the backlog, this
-  becomes more of a problem over time. However, its still very
-  important to avoid from letting it go stale.
-- managing a backlog in org mode is very advantageous: one big flat
-  file, renderable in HTML; easy to fold and create structure as
-  required.
 - finding the right level of structure in the backlog is difficult; we
   tried lots of structure but then it became expensive to maintain. At
   the same time, stories become harder to find without structure so
@@ -320,16 +288,6 @@ To do:
 - FIXME: we should not use the word "vision" as a label or category in
   the backlog as it makes it confusing since its not the product
   vision.
-- before writing a story try very hard to find prior art. You need to
-  find all stories in the backlog that have any vague relation to this
-  new story and either modify those or extract the commonalities from
-  those into this new story.
-- if a product is the exploration of an unknown space, the backlog is
-  the sum total knowledge of that exploration, akin to a map of that
-  space. The backlog is akin to an historical map: it gives you the
-  thoughts of the person that last was in that area, in a given state
-  of mind. It is not a very accurate map, but then like those maps its
-  better than nothing.
 - stories in backlog should have age/recency: time they were last
   groomed. Devs must take a certain percentage of backlog stories
   every sprint and groom them. The percentage is determined by the
@@ -370,6 +328,45 @@ Done:
 - find Kevlin Henney's graph on the relationship between product and
   sprint backlog (had some arrows in a cycle). Also find some of his
   quotes.
+- the importance of mission for a sprint as a function that determines
+  what to get out of the backlog. Tactics go along with missions.
+- the importance of vision as the function that determines if a story
+  should go in the backlog or not; and how stories refine the
+  vision. It starts hazy but then coalesces over time and comes to
+  define what the product means.
+- managing a backlog in org mode is very advantageous: one big flat
+  file, renderable in HTML; easy to fold and create structure as
+  required.
+- before writing a story try very hard to find prior art. You need to
+  find all stories in the backlog that have any vague relation to this
+  new story and either modify those or extract the commonalities from
+  those into this new story.
+- graph of features: a) all features in the world b) all features in
+  your product that are compatible with your vision c) all features in
+  the backlog d) all features in the sprint log.
+- define strategy has the set of steps required to implement the
+  vision.
+- Stories mature in the backlog. They are at different stages:
+  occasional one-liner/todo style story, which gets filled in over
+  time until it has enough information to become implementable; it
+  then waits until there is a sprint with a consistent mission. Or it
+  could be that the story has to mature within the sprint
+  itself. Mature stories get refined: trimmed in scope, re-targeted,
+  or even cancelled because they no longer fit with the
+  vision. Cancelled stories are important because we may came back to
+  them - its just very unlikely that we do.
+- backlog becomes stale so its important to do deep grooming very
+  frequently. This is an expensive activity as time goes by because
+  a good backlog increases in size with time. As the number of
+  developers will not grow in line with the size of the backlog, this
+  becomes more of a problem over time. However, its still very
+  important to avoid from letting it go stale.
+- if a product is the exploration of an unknown space, the backlog is
+  the sum total knowledge of that exploration, akin to a map of that
+  space. The backlog is akin to an historical map: it gives you the
+  thoughts of the person that last was in that area, in a given state
+  of mind. It is not a very accurate map, but then like those maps its
+  better than nothing.
 
 *** STARTED Generate exceptions using yarn types                      :story:
 

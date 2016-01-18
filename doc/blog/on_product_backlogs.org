@@ -9,7 +9,7 @@
 <small>
 Would be be good to have a better bug-tracking setup? Yes.
 But I think it takes man-power, and it would take something
-*fundamentally* better than bugzilla. <i>-- Linus</i>
+*fundamentally* better than bugzilla. <i>-- <a href="http://yarchive.net/comp/linux/bug_tracking.html">Linus</a></i>
 </small>
 </p></td>
 </tr>
@@ -89,13 +89,13 @@ of this post. It is deceptively simple. However, as always, one must
 remember Yogi Berra: "In theory, there is no difference between theory
 and practice. But in practice, there is."
 
-* The "Potmenkin Product Backlog"
+* Potmenkin Product Backlogs
 
 Many teams finish reading one such definition, find it amazingly
 inspiring, install the "agile plug-in" on their bug-tracking software
 of choice and then furiously start typing in those tickets. But if you
 look closely, you'd be hard-pressed to find any difference between the
-bug tickets of old versus the "user stories" in the new and improved
+bug tickets of old versus the "stories" in the new and improved
 "product backlog" that apparently you are now using.
 
 This is a classic management disconnect, whereby a renaming exercise
@@ -121,10 +121,11 @@ stories raised directly on the sprint backlog, and the product backlog
 is nothing but the dumping ground for the stories that didn't make it
 on a given sprint. At this stage, the product backlog is in such a
 terrible mess that no one looks at it, other than for the occasional
-historic search for valuable details of how a bug was
+historic search for valuable details on how a bug was
 fixed. Eventually the product backlog is zeroed - maybe a dozen or so
 of the most recent stories make it through the cull - and the entire
-process begins anew, but enlightenment is never achieved.
+process begins anew. Alas, enlightenment is never achieved, so you are
+condemned to repeat this cycle for all eternity.
 
 As expected, the Potmenkin Product Backlog adds very little value - in
 fact it can be argued that it detracts value - but it must be kept
@@ -132,9 +133,9 @@ because "agile requires a product backlog".
 
 * Bug-Trackers: Lessons From History
 
-In order to understand the difficulties with a product backlog we
-should turn to their logical predecessors: bug-tracking systems such
-as [[https://www.bugzilla.org/][Bugzilla]] or [[https://www.atlassian.com/software/jira][Jira]]. This post starts with a quote from the kernel's
+In order to understand the difficulties with a product backlog, we
+turn next to their logical predecessors: bug-tracking systems such as
+[[https://www.bugzilla.org/][Bugzilla]] or [[https://www.atlassian.com/software/jira][Jira]]. This post starts with a quote from the kernel's
 Benevolent Dictator that illustrates the problem with these. Linus has
 long taken the approach that there is no need for a bug-tracker in
 kernel development, although he does not object if someone wants to
@@ -159,8 +160,8 @@ useless? From experience, there are a few factors:
   proprietary shop; I also mean the entire notion of Q&A and Testing
   as separate from development, with reams of people dedicated to
   setting "environments" up (and keeping them up!), organising
-  database restores and other practices that are not compatible with
-  current practices in software development.
+  database restores and other such activities that are incompatible
+  with current best practices of software development.
 - they are temples of ceremony: a glance at the myriad of fields you
   need to fill in - and the rules and permutations required to get
   them exactly right - should be sufficient to put off even the most
@@ -185,8 +186,8 @@ the author(s) or other users with /zero setup/ - something that
 previously required mailinglist membership, opening an account on a
 bug-tracker and so forth. We now take all of this for granted, of
 course, but it is important to bear in mind that many open source
-projects would probably not even have any form of user interaction
-support were it not for GitHub. After all, most of them are a
+projects would probably not even have /any/ form of user interaction
+support, were it not for GitHub. After all, most of them are a
 one-person shop with very little disposable time, and it makes no
 sense to spend part of that time maintaining infrastructure for the
 odd person or two who may drop by to chat.
@@ -198,12 +199,12 @@ the product and, as we shall see, it must be carefully groomed if it
 is to be continually useful. This is at loggerheads with allowing free
 flow of information from users. Your Issues will eventually be filled
 up with user requests and questions which you may not want to address,
-or general discussions which may or may not have a user story behind
+or general discussions which may or may not have a story behind
 it. They are simply different tools for different jobs, albeit with an
-overlap of functionality.
+overlap in functionality.
 
-So, history tells us what does not work. But what do we want from a
-product backlog?
+So, history tells us what does not work. But is the product backlog
+even worth all this hassle?
 
 * Voyaging Through Strange Seas of Thought
 
@@ -219,14 +220,15 @@ of a device.
 Imagine that you start off by admitting that you know very little
 about what it is that you are intending to do and that the problem
 domain you are about to explore is vast and complex. In this scenario,
-the product backlog is the sum of the knowledge gained whilst
-exploring this space, like explorer's maps were in the
-fifteen-hundreds. In those days, "users" knew that much of it was
-incorrect and a great part was sketchy and ill-defined, but it was all
-you had. Given that the odds of success were stacked against you,
-you'd hold that map pretty tightly while the storms were raging about
-you. Those that made it back would provide corrections and amendments
-and, over time, the maps eventually converged with the real geography.
+the product backlog is the sum total of the knowledge gained whilst
+exploring this space that has yet not been transformed into source
+code. Think of it like the explorer's maps in the fifteen-hundreds. In
+those days, "users" knew that much of it was incorrect and a great
+part was sketchy and ill-defined, but it was all you had. Given that
+the odds of success were stacked against you, you'd hold that map
+pretty tightly while the storms were raging about you. Those that made
+it back would provide corrections and amendments and, over time, the
+maps eventually converged with the real geography.
 
 The product backlog does something similar, but of course, the space
 you are exploring does not have a fixed geometry or topography and
@@ -254,20 +256,145 @@ charset="utf-8"></script>
 
 So, if the backlog is this important, how should one manage it?
 
-* Back To Basics
+* Works For Me, Guv!
 
-There are three things to consider: how stories get into the product
-backlog, how they are managed once they are there and how they exit
-the product backlog. All of these are of extreme importance.
+Up to this point - whilst we were delving into the problem space - we
+have been dealing with a fairly general argument, likely applicable to
+many. Now, as we enter the solution space, I'm afraid I will have to
+move from the general to the particular and talk only about the
+specific circumstances of my one-man-project [[https://github.com/DomainDrivenConsulting/dogen][Dogen]]. You can find
+Dogen's product backlog [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org][here]].
 
-You
+This may sound like a bit of a cop out, you may say, and not without
+reason: how on earth are you supposed to extrapolate conclusions from
+a one-person open source project to a team of N working on a
+commercial product? However, it is also important to take into account
+what I said at the start: agile is what you make of it. I personally
+think of it as a) the smallest amount of processes required to make
+your development process work smoothly and b) and the continual
+improvement of those processes. Thus, there are no one-size-fits-all
+solutions; all one can do is to look at others for ideas. So, lets
+look at my findings[fn:incremental].
 
+The first and most important thing I did to help me manage my product
+backlog was to use a simple text file in [[http://orgmode.org/][Org Mode]] notation. Clearly,
+this is not a setup that is workable for a development team much
+larger than a set of one, or one that doesn't use Emacs (or [[https://github.com/hsitz/VimOrganizer][Vim]]). But
+for my particular circumstances it has worked /wonders/:
 
-One of the most enlightening things I learned with Dogen was how
-useful it is to use plain text files to manage most of my agile
+- the product backlog is close to the code, so wherever you go, you
+  take it with you. This means you can always search the product
+  backlog and - most importantly - add to it /wherever/ you are and
+  /whenever/ an idea happens to come by. I use this flexibility
+  frequently.
+- the Org Mode interface makes it really easy to move stories up and
+  down (order is taken to mean priority here) and to create "buckets"
+  of stories according to whatever categorisation you decide to use,
+  up to any level of nesting. At some point you end up converging to a
+  reasonable level of nesting, of course. It is surprising how one can
+  manage *very* large amounts of stories thanks to this flexible tree
+  structure.
+- it's trivial to move stories in and out of a sprint, keeping track
+  of all changes to a story - they are just text that can be copy and
+  pasted and committed.
+- Org Mode provides a very capable [[http://orgmode.org/manual/Tags.html][tagging system]]. I first started by
+  overusing these, but when tagging got too fine grained it became
+  unmaintainable. Now we use too few - just =epic= and =story= - so
+  this will have to change again in the near future. For example, it
+  should be trivial to add tags for different components in the system
+  or to mark stories as bugs or features, etc. [[http://orgmode.org/manual/Tag-searches.html#Tag-searches][Searching]] then allows
+  you to see a subset of the stories that match those labels.
 
+A second decision which has proven to be a very good one has been to
+groom the product backlog /very often/. And by this I don't just mean
+a cursory look, but a deep inspection of /all/ stories, fixing them
+where required. Again, the choice of format has proved very helpful:
 
-[fn:definition] [[https://www.mountaingoatsoftware.com/agile/scrum/product-backlog][Scrum Product Backlog]], from Mountain Goat Software.
+- it is easy to mark all stories as "non-reviewed" or some other
+  suitable tag in Org Mode, and then unmark them as one finishes the
+  groom - thereby ensuring all stories get some attention. As the
+  product backlog becomes larger, a full groom could take multiple
+  sprints, but this is not an issue once you understand its value and
+  the cost of having it rot.
+- because the product backlog is with the code, any downtime can be
+  used for grooming; those idle weekends or that long wait at the
+  airport are perfect candidates to get a few stories looked at. Time
+  spent waiting for the build is also a good candidate.
+- you get an HTML representation of the Org Mode file for free in
+  GitHub, meaning you can read your backlog from your phone. And with
+  the new editing functionality, you can also edit stories too.
+
+Thirdly, I decided to take a "multi-pass" approach at managing the
+story lifecycle. These are some of the key aspects of this lifecycle
+management:
+
+- stories can only be captured if they are aligned with the
+  [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/vision.org][vision]]. This filter saves me from adding all sorts of ideas which
+  are just too "out of the left field" to be of practical use, but
+  keeps [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#visionary-work-and-random-ideas][those that may sound crazy]] are but aligned with the vision.
+- stories can only be captured if there is no "prior art". I always
+  perform a number of searches in the backlog to look for anything
+  which covers similar ground. If found, I append to that.
+- new stories tend to start with very little content - just the
+  minimum required to allow resetting state back to the idea I was
+  trying to capture. Due to this, very little gets lost. At this
+  point, we have a "proto-story".
+- as time progresses, I end up having more ideas on this space, and I
+  update the story with those ideas - mainly bullet points with one
+  liners and links.
+- at some point the story begins to mature; there is enough on it that
+  we can convert the "proto-story" to a full blown story. After a
+  number of grooms, the story becomes fully formed and is then a
+  candidate to be moved to a sprint backlog for implementation. It may
+  stay in this state /ad-infinitum/, with periodic updates just to
+  make sure it does not rot.
+- A candidate story can still get refined: trimmed in scope,
+  re-targeted, or even cancelled because it no longer fits with the
+  current architecture or even the vision. Cancelled stories are
+  important because we may came back to them - its just very unlikely
+  that we do.
+- every sprint has a "sprint mission"[fn:mission]. When we start to
+  move stories into the sprint backlog, we look for those which
+  resonate with the sprint mission. Not all of them are fully formed,
+  and the work on the sprint can entail the analysis required to
+  create a full blown story. But many will be implementable directly
+  off of the product backlog.
+- some times I end up finding related threads in multiple stories and
+  decide to merge them. Merging of related stories is done by simply
+  copying and pasting them into a single story; over time, with the
+  multiple passes done in the grooms, we end up again with a single
+  consistent story.
+
+What all of this means is that a story can evolve over time in the
+product backlog, only to become the exact thing you need at a given
+sprint; at that point you benefit from the knowledge and insight
+gained over that long period of time. Some stories in Dogen's backlog
+have been there for years, and when I finally get to them, I find them
+extremely useful. Remember: they are a map to the unknown space you
+are exploring.
+
+With all of this machinery in place, we've ended up with a very useful
+product backlog for Dogen - one that certainly adds a lot of
+value. Don't take me wrong, the cost of maintenance is high and I'd
+rather be coding instead of maintaining the product backlog,
+especially given the limited resources. But I keep it because I can
+see on a daily basis how much it improves the overall quality of the
+development process. It is a price I find worth paying, given what I
+get in return.
+
+* Final Thoughts
+
+This post was an attempt to summarise some of the thoughts I've been
+having on the space of product backlogs. One of its main objectives
+was to try to convey the importance of this tool, and to provide ideas
+on how you can improve the management of your own product backlog by
+discussing the approach I have taken with Dogen.
+
+If you have any suggestions or want to share your own tips on how to
+manage your product backlog please reach me on the comments section -
+there is always space for improvement.
+
+[fn:definition] Source: [[https://www.mountaingoatsoftware.com/agile/scrum/product-backlog][Scrum Product Backlog]], Mountain Goat Software.
 
 [fn:evolution] A topic which I covered some time ago here: [[http://mcraveiro.blogspot.co.uk/2008/06/nerd-food-on-evolutionary-methodology.html][On
 Evolutionary Methodology]]. It is also interesting to see how the kernel
@@ -277,5 +404,8 @@ mainline]].
 [fn:maintenance] Another topic which I also covered here some time
 ago: [[http://mcraveiro.blogspot.co.uk/2007/05/nerd-food-on-maintenance.html][On Maintenance]].
 
-[fn:github]
-was reminded of this usefuln
+[fn:incremental] I am self-plagiarising a little bit here and
+rehashing some of the arguments I've used before in [[http://mcraveiro.blogspot.co.uk/2014/09/nerd-food-dogen-lessons-in-incremental.html][Lessons in
+Incremental Coding]], mainly from section DVCS to the Core.
+
+[fn:mission] See the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_78.org][current sprint backlog]] for an example.
