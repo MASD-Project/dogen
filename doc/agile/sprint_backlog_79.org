@@ -13,15 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-18 Mon 22:29]
+#+CAPTION: Clock summary at [2016-01-18 Mon 23:31]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *0:30* |      |      |
+| *Total time*                                                                | *1:02* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 0:30   |      |      |
-| Active                                                                      |        | 0:30 |      |
+| Stories                                                                     | 1:02   |      |      |
+| Active                                                                      |        | 1:02 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:18 |
+| STARTED Move non-entity properties to base formatter assistant              |        |      | 0:32 |
 | STARTED Create a debug build for clang in travis                            |        |      | 0:12 |
 #+end:
 
@@ -33,6 +34,17 @@ Updates to sprint and product backlog.
 *** Update manual                                                     :story:
 
 Updates to manual.
+
+*** STARTED Move non-entity properties to base formatter assistant    :story:
+    CLOCK: [2016-01-18 Mon 23:09]--[2016-01-18 Mon 23:31] =>  0:22
+    CLOCK: [2016-01-18 Mon 22:30]--[2016-01-18 Mon 22:40] =>  0:10
+
+As part of the "yarnification" of the formatters, we need to be able
+to use most of the entity formatter assistant properties over to the
+base formatter assistant. We should get rid of the trivial formatting
+assistant and entity formatting assistant and move all the code to the
+base. The two methods that require an entity should receive it as an
+input parameter.
 
 *** STARTED Create a debug build for clang in travis                  :story:
     CLOCK: [2016-01-18 Mon 22:14]--[2016-01-18 Mon 22:26] =>  0:12
@@ -126,15 +138,6 @@ Tasks:
 - update the formatter interfaces to use yarn types;
 - update the yarn formatting workflow to process yarn exceptions;
 - update the stitch templates to make use of yarn exceptions.
-
-*** Move non-entity properties to base formatter assistant            :story:
-
-As part of the "yarnification" of the formatters, we need to be able
-to use most of the entity formatter assistant properties over to the
-base formatter assistant. We should get rid of the trivial formatting
-assistant and entity formatting assistant and move all the code to the
-base. The two methods that require an entity should receive it as an
-input parameter.
 
 *** Attach helper methods to types dynamically                        :story:
 
