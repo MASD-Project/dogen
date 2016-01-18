@@ -1,0 +1,242 @@
+#+title: Sprint Backlog 79
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) spike(p) }
+
+* Mission Statement
+
+- start implementing quilt.cpp formatters using yarn types.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
+#+CAPTION: Clock summary at [2016-01-18 Mon 22:14]
+| <75>                                                                        |        |      |      |
+| Headline                                                                    | Time   |      |      |
+|-----------------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                                | *0:18* |      |      |
+|-----------------------------------------------------------------------------+--------+------+------|
+| Stories                                                                     | 0:18   |      |      |
+| Active                                                                      |        | 0:18 |      |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:18 |
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-01-18 Mon 21:55]--[2016-01-18 Mon 22:13] =>  0:18
+
+Updates to sprint and product backlog.
+
+*** Update manual                                                     :story:
+
+Updates to manual.
+
+*** Generate exceptions using yarn types                              :story:
+
+Tasks:
+
+- delete the quilt exception type;
+- remove transformation support for exception;
+- create a yarn element based assistant;
+- update the formatter interfaces to use yarn types;
+- update the yarn formatting workflow to process yarn exceptions;
+- update the stitch templates to make use of yarn exceptions.
+
+*** Move non-entity properties to base formatter assistant            :story:
+
+As part of the "yarnification" of the formatters, we need to be able
+to use most of the entity formatter assistant properties over to the
+base formatter assistant. We should get rid of the trivial formatting
+assistant and entity formatting assistant and move all the code to the
+base. The two methods that require an entity should receive it as an
+input parameter.
+
+*** Attach helper methods to types dynamically                        :story:
+
+In order to cope with the removal of nested type info, we need a way
+to determine what helper methods are required for a given yarn type.
+
+For this we need a way to allow helper methods to bind dynamically to
+types. This can be done by using meta-data. The helper method
+registers a name and the type uses that name it its key for helper
+method. Where possible the helper method should use the name of the
+STL concept it is binding to. We need settings support for reading
+this field, and registration support for helper methods (registrar,
+etc).
+
+We should also find a nicer way to package helper methods, maybe
+aligned to a model and type or concept.
+
+Once this is done we need to remove the =object_types= that exist in
+yarn just to figure out what helper methods to use.
+
+*** Implement formattables in terms of yarn types                     :story:
+
+At present formattables are just a shadow copy of yarn types plus
+additional =cpp= specific types. In practice:
+
+- for the types that are shadow copies, we could have helper utilities
+  that do the translation on the fly (e.g. for names).
+- for additional information which cannot be translated, we could have
+  containers indexed by qualified name and query those just before we
+  call the transformer. This is the case with formatter properties. We
+  need something similar to house "type properties" such as
+  =requires_stream_manipulators=. These could be moved into aspect
+  settings.
+- for types that do not exist in yarn, we could inherit from element;
+  this is the case for registrar, forward declarations, cmakelists and
+  odb options. Note that with this we are now saying that element
+  space contains anything which can be modeled, regardless of if they
+  are part of the programming language type system, or build system,
+  etc. This is not ideal, but its not a problem just yet. We could
+  update the factory to generate these types and then take a copy of
+  the model and inject them in it.
+
+*** Create a settings class for the "requires" settings               :story:
+
+We need to populate these in a settings workflow of some kind.
+
+*** Move all properties in =cpp= to a properties namespace            :story:
+
+Once all formattables are gone, we should have only properties left in
+the formattables namespace. We should then rename it to
+properties. Thus we have two kinds of things: settings, which are a
+direct translation of meta-data without any further processing and
+properties which require processing.
+
+Merged stories:
+
+*Split formatter properties and associated classes from formattables*
+
+We have two kinds of data: the formattables themselves (mapped from
+yarn) and associated data (formatter properties). The latter is
+totally independent. We should create a namespace for all of these
+classes and a workflow that produces the data ready for consumption. A
+tentative name is =manifest=.
+
+*** Investigate slow down                                             :story:
+
+With commit 7e89ddb we introduced a set of hacks to inject settings
+and formatter properties into the repositories. This seems to have had
+a very negative impact in performance. We need to ensure performance
+goes back to normal after the hacks have been removed.
+
+*** Tidy-up master include generation                                 :story:
+
+At present we have one humongous hack in the factory to generate the
+master includers. How to do this properly:
+
+- wait until we start using yarn types.
+- loop through the yarn model instead of the path derivatives.
+- use a visitor to dispatch the types.
+- do not filter out services?
+- filter registrars etc based on type dispatching.
+
+*** Create a UML profile to formalise yarn concepts                   :story:
+
+Profile should include the hashable, etc changes.
+
+*** Create a map between UML/MOF terminology and yarn                 :story:
+
+It would be helpful to know what a yarn type means in terms of
+UML/MOF, and perhaps even explain why we have chosen certain names
+instead of the UML ones. We should also cover the modeling of
+relationships and the relation between yarn concepts and UML/MOF
+classes. This will form a chapter in the manual.
+
+The UML specification is available [[http://www.omg.org/spec/UML/2.5/][here]] and MOF specification is
+available [[http://www.omg.org/spec/MOF/2.5][here]].
+
+We need a way to uniquely identify a property. This could be done by
+appending the containing type's qualified name to the property name.
+
+See also [[http://www.uml-diagrams.org/][The Unified Modeling Language]] for a more accessible treatment.
+
+*** Remove =service= stereotype                                       :story:
+
+This really just means non-generatable, or do not generate. We already
+have a stereotype for this. Remove =service= and any other stereotype
+which is not being used such as =value_object= etc.
+
+Actually, non-generatable is not a stereotype really. We should
+instead have some meta-data that can affect generation:
+
+- do not generate: do nothing at all. For references only. If a file
+  exists with this file name, it will be deleted as part of
+  housekeeping.
+- generate blank file if it doesn't exist: we don't even want a
+  template.
+- generate with content if it doesn't exist, do not touch otherwise:
+  what we call services at the moment. Generate a "template" that then
+  gets filled in manually.
+- generate and merge: merge the contents of the generated file with
+  the current contents in the file system. When we support merging.
+- generate and overwrite: generate the file and overwrite whatever
+  exists in the file system.
+
+This could be called "generation policy".
+
+The second behaviour we get for free with services is that we disable
+all facets except for types. A few points:
+
+- we may want to have io, serialisation, etc. This is not possible at
+  present. If a state of a service is made up of supported types, we
+  could even use existing code generation.
+- in order for this to be implemented correctly we need to hook in to
+  the enablement management somehow. In addition, it seems each facet
+  can have its own generation policy. For example we may want to
+  manually create types but automatically generate io.
+- the best way to handle this may be to setup "enablement profiles"
+  that the user can hook up to. For example we could have a "default"
+  profile that enables all facets (or uses facet defaults), a second
+  "service" profile that enables types with partial generation and io
+  with full generation and so on. We probably also need "generation
+  profiles" to go with "enablement profiles".
+
+** Deprecated
+*** CANCELLED Consider renaming nested name                           :story:
+    CLOSED: [2016-01-07 Thu 20:18]
+
+*Rationale*: the final conclusion on this was that nested name is the
+best of a bad bunch. See Sprint 77 stories on renames for details.
+
+*New understanding*:
+
+This story requires further analysis. Blindly following the composite
+pattern was tried but it resulted in a lot of inconsistencies because
+we then had to follow MEC-33 and create =abstract_qname=; however, the
+nested qname does not really behave like a composite qname; its more
+like the difference between a type in isolation and a type
+instantiated as an argument of a function. For example, whilst the
+type in isolation may have unknown template parameters, presumably, as
+an argument of a function these have been instantiated with real
+types.
+
+One way to solve this is just to make the type name a bit more
+explicit rather than try to imply the composite pattern
+(e.g. "nested"). We need a name that signifies "instantiated
+type". Look at the C++ standard for the difference between defining a
+generic type and instantiating a generic type.
+
+No good names yet (type reference, type instantiation, instantiated
+name). What are we trying to represent: an identifier which points to
+a complete definition of a name such that the name can be instantiated
+as a type in the underlying language. By "instantiated" we mean used
+to define variables of this type. In this light: instantiable name,
+definable name? If we choose instantiable name, we could then rename
+"children" to type arguments.
+
+Other notes:
+
+- there is such a thing as a element instance identifier. We call it
+  nested name at present. The element instance identifier identifies
+  instantiations of types. It models two cases: for the case where the
+  type has no type parameters, the instance identifier is equal to the
+  element identifier; for all other cases, it is a hierarchical
+  collection of element identifiers, modeling the type parameter
+  structure.
+
+*Previous understanding*:
+
+We should just follow the composite pattern in the naming.
