@@ -13,20 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-19 Tue 22:25]
+#+CAPTION: Clock summary at [2016-01-19 Tue 23:28]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *2:50* |      |      |
+| *Total time*                                                                | *3:09* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 2:50   |      |      |
-| Active                                                                      |        | 2:50 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:18 |
+| Stories                                                                     | 3:09   |      |      |
+| Active                                                                      |        | 3:09 |      |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:21 |
 | COMPLETED Merge all formatter assistants into one                           |        |      | 2:20 |
+| STARTED Generate exceptions using yarn types                                |        |      | 0:16 |
 | STARTED Create a debug build for clang in travis                            |        |      | 0:12 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-01-19 Tue 23:27]--[2016-01-19 Tue 23:30] =>  0:03
     CLOCK: [2016-01-18 Mon 21:55]--[2016-01-18 Mon 22:13] =>  0:18
 
 Updates to sprint and product backlog.
@@ -47,6 +49,28 @@ base formatter assistant. We should get rid of the trivial formatting
 assistant and entity formatting assistant and move all the code to the
 base. The two methods that require an entity should receive it as an
 input parameter.
+
+*** STARTED Generate exceptions using yarn types                      :story:
+    CLOCK: [2016-01-19 Tue 23:11]--[2016-01-19 Tue 23:27] =>  0:16
+
+Tasks:
+
+- delete the quilt exception type;
+- remove transformation support for exception;
+- create a yarn element based assistant;
+- update the formatter interfaces to use yarn types;
+- update the yarn formatting workflow to process yarn exceptions;
+- update the stitch templates to make use of yarn exceptions.
+
+*** Name builder should take only model name                          :story:
+
+At present name builder requires an entire model just to get the name
+out of it.
+
+*** Access model name from within formatters workflow                 :story:
+
+In order for the assistant to build names, it will need to be able to
+access the yarn model name.
 
 *** STARTED Create a debug build for clang in travis                  :story:
     CLOCK: [2016-01-18 Mon 22:14]--[2016-01-18 Mon 22:26] =>  0:12
@@ -129,17 +153,6 @@ Yet another way seems to be creating a script to do coverage, as per
 [[https://github.com/BoostGSoC13/boost.afio][boost.afio]] [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/.travis.yml][travis.yml]]. The script is available [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/test/update_coveralls.sh][here]].
 
 Another example from [[https://github.com/boostorg/dll/blob/develop/.travis.yml][Boost.Dll]].
-
-*** Generate exceptions using yarn types                              :story:
-
-Tasks:
-
-- delete the quilt exception type;
-- remove transformation support for exception;
-- create a yarn element based assistant;
-- update the formatter interfaces to use yarn types;
-- update the yarn formatting workflow to process yarn exceptions;
-- update the stitch templates to make use of yarn exceptions.
 
 *** Attach helper methods to types dynamically                        :story:
 
