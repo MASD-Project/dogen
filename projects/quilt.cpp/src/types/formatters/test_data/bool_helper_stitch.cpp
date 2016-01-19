@@ -28,11 +28,11 @@ namespace formatters {
 namespace test_data {
 
 void bool_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
+    nested_type_formatting_assistant& a,
     const formattables::nested_type_info& /*t*/) {
-fa.stream() << std::endl;
-fa.stream() << "bool create_bool(const unsigned int position) {" << std::endl;
-fa.stream() << "    return (position % 2) == 0;" << std::endl;
-fa.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "bool create_bool(const unsigned int position) {" << std::endl;
+a.stream() << "    return (position % 2) == 0;" << std::endl;
+a.stream() << "}" << std::endl;
 }
 } } } } }

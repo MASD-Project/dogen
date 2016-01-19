@@ -1,15 +1,14 @@
 <#@ licence_name=gpl_v3 #>
 <#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
 <#@ modeline_group_name=emacs #>
-<#@ stream_variable_name=fa.stream() #>
+<#@ stream_variable_name=a.stream() #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp" #>
 <#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::io #>
 <#+
 
 void inserter_implementation_helper_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::class_info& c,
+    assistant& a, const formattables::class_info& c,
     const bool inside_class) {
 
     if (c.requires_stream_manipulators()) {
@@ -41,7 +40,7 @@ void inserter_implementation_helper_stitch(
         sf.next();
     }
 
-    auto ntfa(fa.make_nested_type_formatting_assistant());
+    auto ntfa(a.make_nested_type_formatting_assistant());
     sf.reset(c.properties().size());
 
     if (!c.parents().empty())
@@ -55,9 +54,9 @@ void inserter_implementation_helper_stitch(
     for (const auto p : c.properties()) {
         std::string variable_name;
         if (inside_class)
-            variable_name = fa.make_member_variable_name(p);
+            variable_name = a.make_member_variable_name(p);
         else
-            variable_name = "v." + fa.make_getter_setter_name(p) + "()";
+            variable_name = "v." + a.make_getter_setter_name(p) + "()";
 
 #>
     <#= sf.prefix() #><< "\"<#=p.name() #>\": " << <#= ntfa.streaming_for_type(p.type(), variable_name) #><#= sf.postfix() #>

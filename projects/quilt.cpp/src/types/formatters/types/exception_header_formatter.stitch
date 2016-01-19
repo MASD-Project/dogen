@@ -1,23 +1,22 @@
 <#@ licence_name=gpl_v3 #>
 <#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
 <#@ modeline_group_name=emacs #>
-<#@ stream_variable_name=fa.stream() #>
+<#@ stream_variable_name=a.stream() #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/exception_header_formatter_stitch.hpp" #>
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::types #>
 <#+
 
 dogen::formatters::file exception_header_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::exception_info& e) {
+    assistant& a, const formattables::exception_info& e) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(fa.make_scoped_namespace_formatter());
+            auto snf(a.make_scoped_namespace_formatter(e.namespaces()));
 #>
 
 <#+
-            fa.comment(e.documentation());
+            a.comment(e.documentation());
 #>
 class <#= e.name() #> : public virtual std::exception, public virtual boost::exception {
 public:
@@ -40,7 +39,7 @@ private:
 
 <#+
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 
 #>

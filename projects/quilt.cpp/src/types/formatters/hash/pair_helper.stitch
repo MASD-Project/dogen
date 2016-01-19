@@ -1,13 +1,13 @@
 <#@ licence_name=gpl_v3 #>
 <#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
 <#@ modeline_group_name=emacs #>
-<#@ stream_variable_name=fa.stream() #>
+<#@ stream_variable_name=a.stream() #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/hash/pair_helper_stitch.hpp" #>
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::hash #>
 <#+
 
 void pair_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
+    nested_type_formatting_assistant& a,
     const formattables::nested_type_info& t) {
 
     const auto first(t.children().front());
@@ -18,7 +18,7 @@ inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.comple
     std::size_t seed(0);
 
 <#+
-    if (!fa.requires_hashing_helper_method(first))
+    if (!a.requires_hashing_helper_method(first))
 #>
     combine(seed, v.first);
 <#+
@@ -27,7 +27,7 @@ inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.comple
     combine(seed, hash_<#= first.complete_identifiable_name() #>(v.first));
 <#+
 
-    if (!fa.requires_hashing_helper_method(second))
+    if (!a.requires_hashing_helper_method(second))
 #>
     combine(seed, v.second);
 <#+

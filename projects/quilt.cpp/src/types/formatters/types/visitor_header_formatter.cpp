@@ -21,7 +21,7 @@
 #include <boost/make_shared.hpp>
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/entity_formatting_assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
@@ -98,8 +98,8 @@ void visitor_header_formatter::register_inclusion_dependencies_provider(
 
 dogen::formatters::file visitor_header_formatter::
 format(const context& ctx, const formattables::visitor_info& e) const {
-    entity_formatting_assistant fa(e, ctx, ownership_hierarchy(), file_type());
-    const auto r(visitor_header_formatter_stitch(fa, e));
+    assistant a(ctx, ownership_hierarchy(), file_type());
+    const auto r(visitor_header_formatter_stitch(a, e));
     return r;
 }
 

@@ -51,33 +51,33 @@ private:
     /**
      * @brief Helper method for chars
      */
-    void char_helper(formatters::nested_type_formatting_assistant& fa,
+    void char_helper(formatters::nested_type_formatting_assistant& a,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for ints
      */
-    void int_helper(formatters::nested_type_formatting_assistant& fa,
+    void int_helper(formatters::nested_type_formatting_assistant& a,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for bools
      */
-    void bool_helper(formatters::nested_type_formatting_assistant& fa,
+    void bool_helper(formatters::nested_type_formatting_assistant& a,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for containers such as list and vector.
      */
     void sequence_container_helper(
-        formatters::nested_type_formatting_assistant& fa,
+        formatters::nested_type_formatting_assistant& a,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for containers such as maps and sets.
      */
     void associative_container_helper(
-        formatters::nested_type_formatting_assistant& fa,
+        formatters::nested_type_formatting_assistant& a,
         const formattables::nested_type_info& t) const;
 
     /**
@@ -85,7 +85,7 @@ private:
      * shared pointer.
      */
     void smart_pointer_helper(
-        formatters::nested_type_formatting_assistant& fa,
+        formatters::nested_type_formatting_assistant& a,
         const formattables::nested_type_info& t) const;
 
     /**
@@ -93,70 +93,70 @@ private:
      * optional.
      */
     void optional_helper(
-        formatters::nested_type_formatting_assistant& fa,
+        formatters::nested_type_formatting_assistant& a,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for containers such as std::pair.
      */
     void pair_helper(
-        formatters::nested_type_formatting_assistant& fa,
+        formatters::nested_type_formatting_assistant& a,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for containers such as boost variant.
      */
     void variant_helper(
-        formatters::nested_type_formatting_assistant& fa,
+        formatters::nested_type_formatting_assistant& a,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for boost path.
      */
     void path_helper(
-        formatters::nested_type_formatting_assistant& fa,
+        formatters::nested_type_formatting_assistant& a,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for boost date.
      */
     void date_helper(
-        formatters::nested_type_formatting_assistant& fa,
+        formatters::nested_type_formatting_assistant& a,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for boost ptime.
      */
     void ptime_helper(
-        formatters::nested_type_formatting_assistant& fa,
+        formatters::nested_type_formatting_assistant& a,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for boost time duration.
      */
     void time_duration_helper(
-        formatters::nested_type_formatting_assistant& fa,
+        formatters::nested_type_formatting_assistant& a,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for boost property tree.
      */
     void ptree_helper(
-        formatters::nested_type_formatting_assistant& fa,
+        formatters::nested_type_formatting_assistant& a,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for strings.
      */
     void string_helper(
-        formatters::nested_type_formatting_assistant& fa,
+        formatters::nested_type_formatting_assistant& a,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for composite types.
      */
     void composite_type_helper(
-        formatters::nested_type_formatting_assistant& fa,
+        formatters::nested_type_formatting_assistant& a,
         const formattables::nested_type_info& t,
         const bool as_pointer) const;
 
@@ -164,7 +164,7 @@ private:
      * @brief Helper method for regular domain types.
      */
     void domain_type_helper(
-        formatters::nested_type_formatting_assistant& fa,
+        formatters::nested_type_formatting_assistant& a,
         const formattables::nested_type_info& t,
         const bool as_pointer) const;
 
@@ -174,7 +174,7 @@ private:
      * nested type info.
      */
     void recursive_helper_method_creator(
-        formatters::nested_type_formatting_assistant& fa,
+        formatters::nested_type_formatting_assistant& a,
         const formattables::nested_type_info& t,
         std::unordered_set<std::string>& types_done,
         const bool as_pointer) const;

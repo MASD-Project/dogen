@@ -28,34 +28,33 @@ namespace formatters {
 namespace io {
 
 dogen::formatters::file enum_implementation_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::enum_info& e) {
+    assistant& a, const formattables::enum_info& e) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(fa.make_scoped_namespace_formatter());
-fa.stream() << std::endl;
-fa.stream() << "std::ostream& operator<<(std::ostream& s, const " << e.name() << "& v) {" << std::endl;
-fa.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << e.name() << "\\\", \" << \"\\\"value\\\": \";" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "    std::string attr;" << std::endl;
-fa.stream() << "    switch (v) {" << std::endl;
+            auto snf(a.make_scoped_namespace_formatter(e.namespaces()));
+a.stream() << std::endl;
+a.stream() << "std::ostream& operator<<(std::ostream& s, const " << e.name() << "& v) {" << std::endl;
+a.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << e.name() << "\\\", \" << \"\\\"value\\\": \";" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    std::string attr;" << std::endl;
+a.stream() << "    switch (v) {" << std::endl;
             for (const auto en : e.enumerators()) {
-fa.stream() << "    case " << e.name() << "::" << en.name() << ":" << std::endl;
-fa.stream() << "        attr = \"\\\"" << en.name() << "\\\"\";" << std::endl;
-fa.stream() << "        break;" << std::endl;
+a.stream() << "    case " << e.name() << "::" << en.name() << ":" << std::endl;
+a.stream() << "        attr = \"\\\"" << en.name() << "\\\"\";" << std::endl;
+a.stream() << "        break;" << std::endl;
             }
-fa.stream() << "    default:" << std::endl;
-fa.stream() << "        throw std::invalid_argument(\"Invalid value for " << e.name() << "\");" << std::endl;
-fa.stream() << "    }" << std::endl;
-fa.stream() << "    s << attr << \" }\";" << std::endl;
-fa.stream() << "    return s;" << std::endl;
-fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
+a.stream() << "    default:" << std::endl;
+a.stream() << "        throw std::invalid_argument(\"Invalid value for " << e.name() << "\");" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << "    s << attr << \" }\";" << std::endl;
+a.stream() << "    return s;" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
          } // snf
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 
 } } } } }

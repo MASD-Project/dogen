@@ -18,28 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_ENTITY_FORMATTING_ASSISTANT_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_ENTITY_FORMATTING_ASSISTANT_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_ASSISTANT_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_ASSISTANT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <list>
+#include <string>
+#include <sstream>
 #include <unordered_map>
+#include <boost/optional.hpp>
+#include <boost/iostreams/filtering_stream.hpp>
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
-#include "dogen/quilt.cpp/types/settings/odb_settings.hpp"
-#include "dogen/quilt.cpp/types/settings/opaque_settings.hpp"
-#include "dogen/quilt.cpp/types/formatters/file_types.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
+#include "dogen/quilt.cpp/types/settings/odb_settings.hpp"
+#include "dogen/quilt.cpp/types/settings/opaque_settings.hpp"
+#include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/formattables/entity.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_types.hpp"
 #include "dogen/quilt.cpp/types/formattables/class_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/property_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/nested_type_formatting_assistant.hpp"
-#include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/formatters/formatting_assistant.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -47,12 +50,12 @@ namespace cpp {
 namespace formatters {
 
 /**
- * @brief Provides a number of utilities to formatters that generate
- * files for entities.
+ * @brief Provides a number of utilities to formatters.
  */
-class entity_formatting_assistant final : public formatting_assistant {
+class assistant final {
 public:
-    ~entity_formatting_assistant() noexcept;
+    assistant(const context& ctx, const dynamic::ownership_hierarchy& oh,
+        const formatters::file_types ft);
 
 public:
     /**
@@ -75,17 +78,14 @@ public:
     make_setter_return_type(const std::string& containing_type_name,
         const formattables::property_info& p);
 
-public:
-    entity_formatting_assistant(const formattables::entity& e,
-        const context& ctx, const dynamic::ownership_hierarchy& oh,
-        const formatters::file_types ft);
-
 private:
+    void ensure_formatter_properties_are_present() const;
+
     /**
      * @brief Obtains the formatter settings for the formatter as
      * given by the ownership hierarchy.
      */
-    formattables::formatter_properties
+    boost::optional<formattables::formatter_properties>
     obtain_formatter_properties(const std::string& formatter_name) const;
 
     /**
@@ -169,7 +169,7 @@ public:
      * @brief Returns a scoped namespace formatter.
      */
     dogen::formatters::cpp::scoped_namespace_formatter
-    make_scoped_namespace_formatter();
+    make_scoped_namespace_formatter(const std::list<std::string>& ns);
 
     /**
      * @brief Creates a nested type formatting assistant, latched on
@@ -177,6 +177,12 @@ public:
      */
     nested_type_formatting_assistant
     make_nested_type_formatting_assistant();
+
+    /**
+     * @brief Creates the preamble.
+     */
+    void make_annotation_preamble(
+        const boost::optional<dogen::formatters::general_settings> gs);
 
     /**
      * @brief Generates a file with the current contents of the
@@ -214,7 +220,7 @@ public:
      * @brief Creates any helper methods that may be required for this
      * formatter.
      */
-    void add_helper_methods();
+    void add_helper_methods(const formattables::class_info& c);
 
     /**
      * @brief Returns true if the type can be hashed without requiring a
@@ -246,10 +252,25 @@ public:
     boost::shared_ptr<settings::odb_settings>
     get_odb_settings(const std::string& property_id) const;
 
+public:
+    /**
+     * @brief Returns the stream that is currently being populated.
+     */
+    std::ostream& stream();
+
+    /**
+     * @brief Generates a file with the current contents of the
+     * stream.
+     */
+    dogen::formatters::file make_file(const boost::filesystem::path& full_path,
+        const bool overwrite = true) const;
+
 private:
-    const formattables::entity& entity_;
+    std::ostringstream stream_;
+    boost::iostreams::filtering_ostream filtering_stream_;
     const context& context_;
-    const formattables::formatter_properties formatter_properties_;
+    const boost::optional<formattables::formatter_properties>
+    formatter_properties_;
     const dynamic::ownership_hierarchy ownership_hierarchy_;
     const formatters::file_types file_type_;
 };

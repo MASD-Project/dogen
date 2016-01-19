@@ -25,29 +25,27 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 namespace types {
-
 dogen::formatters::file forward_declarations_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::forward_declarations_info& fd) {
+    assistant& a, const formattables::forward_declarations_info& fd) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(fa.make_scoped_namespace_formatter());
+            auto snf(a.make_scoped_namespace_formatter(fd.namespaces()));
 
             if (fd.is_enum()) {
-fa.stream() << std::endl;
-fa.stream() << "enum class " << fd.name() << " : " << fd.enum_type() << ";" << std::endl;
-fa.stream() << std::endl;
+a.stream() << std::endl;
+a.stream() << "enum class " << fd.name() << " : " << fd.enum_type() << ";" << std::endl;
+a.stream() << std::endl;
             } else {
-fa.stream() << std::endl;
-fa.stream() << "class " << fd.name() << ";" << std::endl;
-fa.stream() << std::endl;
+a.stream() << std::endl;
+a.stream() << "class " << fd.name() << ";" << std::endl;
+a.stream() << std::endl;
             }
         } // snf
-fa.stream() << std::endl;
+a.stream() << std::endl;
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 
 } } } } }

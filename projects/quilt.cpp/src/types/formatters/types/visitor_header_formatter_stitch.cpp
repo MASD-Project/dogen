@@ -27,40 +27,39 @@ namespace formatters {
 namespace types {
 
 dogen::formatters::file visitor_header_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::visitor_info& v) {
+    assistant& a, const formattables::visitor_info& v) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(fa.make_scoped_namespace_formatter());
-fa.stream() << std::endl;
-            fa.comment(v.documentation());
-fa.stream() << "class " << v.name() << " {" << std::endl;
-fa.stream() << "public:" << std::endl;
-fa.stream() << "    virtual ~" << v.name() << "() noexcept = 0;" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "public:" << std::endl;
+            auto snf(a.make_scoped_namespace_formatter(v.namespaces()));
+a.stream() << std::endl;
+            a.comment(v.documentation());
+a.stream() << "class " << v.name() << " {" << std::endl;
+a.stream() << "public:" << std::endl;
+a.stream() << "    virtual ~" << v.name() << "() noexcept = 0;" << std::endl;
+a.stream() << std::endl;
+a.stream() << "public:" << std::endl;
             bool is_first(true);
             for (const auto& t : v.types()) {
                 if (!is_first)
-fa.stream() << std::endl;
-                fa.comment_start_method_group(t.documentation());
-fa.stream() << "    virtual void visit(const " << t.qualified_name() << "&) const { }" << std::endl;
-fa.stream() << "    virtual void visit(const " << t.qualified_name() << "&) { }" << std::endl;
-fa.stream() << "    virtual void visit(" << t.qualified_name() << "&) const { }" << std::endl;
-fa.stream() << "    virtual void visit(" << t.qualified_name() << "&) { }" << std::endl;
-                fa.comment_end_method_group(t.documentation());
+a.stream() << std::endl;
+                a.comment_start_method_group(t.documentation());
+a.stream() << "    virtual void visit(const " << t.qualified_name() << "&) const { }" << std::endl;
+a.stream() << "    virtual void visit(const " << t.qualified_name() << "&) { }" << std::endl;
+a.stream() << "    virtual void visit(" << t.qualified_name() << "&) const { }" << std::endl;
+a.stream() << "    virtual void visit(" << t.qualified_name() << "&) { }" << std::endl;
+                a.comment_end_method_group(t.documentation());
                 is_first = false;
             }
-fa.stream() << "};" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "inline " << v.name() << "::~" << v.name() << "() noexcept { }" << std::endl;
-fa.stream() << std::endl;
+a.stream() << "};" << std::endl;
+a.stream() << std::endl;
+a.stream() << "inline " << v.name() << "::~" << v.name() << "() noexcept { }" << std::endl;
+a.stream() << std::endl;
         } // snf
-fa.stream() << std::endl;
+a.stream() << std::endl;
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 
 } } } } }

@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/formatters/types/file.hpp"
-#include "dogen/quilt.cpp/types/formatters/entity_formatting_assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formattables/visitor_info.hpp"
 
 namespace dogen {
@@ -36,8 +36,7 @@ namespace formatters {
 namespace types {
 
 dogen::formatters::file visitor_header_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::visitor_info& v);
+    assistant& a, const formattables::visitor_info& v);
 
 } } } } }
 

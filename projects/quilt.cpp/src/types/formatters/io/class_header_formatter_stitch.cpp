@@ -28,22 +28,21 @@ namespace formatters {
 namespace io {
 
 dogen::formatters::file class_header_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::class_info& c) {
+    assistant& a, const formattables::class_info& c) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(fa.make_scoped_namespace_formatter());
+            auto snf(a.make_scoped_namespace_formatter(c.namespaces()));
 
-fa.stream() << std::endl;
-fa.stream() << "std::ostream&" << std::endl;
-fa.stream() << "operator<<(std::ostream& s," << std::endl;
-fa.stream() << "     const " << c.qualified_name() << "& v);" << std::endl;
-fa.stream() << std::endl;
+a.stream() << std::endl;
+a.stream() << "std::ostream&" << std::endl;
+a.stream() << "operator<<(std::ostream& s," << std::endl;
+a.stream() << "     const " << c.qualified_name() << "& v);" << std::endl;
+a.stream() << std::endl;
         } // snf
-fa.stream() << std::endl;
+a.stream() << std::endl;
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 } } } } }

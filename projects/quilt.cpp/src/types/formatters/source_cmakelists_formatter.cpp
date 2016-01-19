@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/trivial_formatting_assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/source_cmakelists_formatter_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/source_cmakelists_formatter.hpp"
 
@@ -60,9 +60,9 @@ void source_cmakelists_formatter::register_inclusion_dependencies_provider(
     formattables::registrar& /*rg*/) const {}
 
 dogen::formatters::file source_cmakelists_formatter::
-format(const formattables::cmakelists_info& c) const {
-    trivial_formatting_assistant fa;
-    const auto r(source_cmakelists_formatter_stitch(fa, c));
+format(const context& ctx, const formattables::cmakelists_info& c) const {
+    assistant a(ctx, ownership_hierarchy(), file_type());
+    const auto r(source_cmakelists_formatter_stitch(a, c));
     return r;
 }
 

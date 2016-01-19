@@ -27,7 +27,7 @@
 
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/quilt.cpp/types/formattables/enum_info.hpp"
-#include "dogen/quilt.cpp/types/formatters/entity_formatting_assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -36,8 +36,7 @@ namespace formatters {
 namespace odb {
 
 dogen::formatters::file enum_header_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::enum_info& e);
+    assistant& a, const formattables::enum_info& e);
 
 } } } } }
 

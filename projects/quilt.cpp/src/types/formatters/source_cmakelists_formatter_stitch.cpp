@@ -28,23 +28,22 @@ namespace cpp {
 namespace formatters {
 
 dogen::formatters::file source_cmakelists_formatter_stitch(
-    formatters::trivial_formatting_assistant& fa,
-    const formattables::cmakelists_info& s) {
+    assistant& a, const formattables::cmakelists_info& s) {
 
     {
-        fa.make_annotation_preamble(s.general_settings());
+        a.make_annotation_preamble(s.general_settings());
         const std::string mn(s.model_name());
-fa.stream() << "set(all_files \"\")" << std::endl;
-fa.stream() << "file(GLOB_RECURSE all_files RELATIVE" << std::endl;
-fa.stream() << "    \"${CMAKE_CURRENT_SOURCE_DIR}/\"" << std::endl;
-fa.stream() << "    \"${CMAKE_CURRENT_SOURCE_DIR}/*.cpp\")" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "add_library(" << mn << " STATIC ${all_files})" << std::endl;
-fa.stream() << "set_target_properties(" << mn << " PROPERTIES" << std::endl;
-fa.stream() << "    OUTPUT_NAME " << s.product_name() << (s.product_name().empty() ? "" : "_") << mn << ")" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "install(TARGETS " << mn << " ARCHIVE DESTINATION lib COMPONENT libraries)" << std::endl;
+a.stream() << "set(all_files \"\")" << std::endl;
+a.stream() << "file(GLOB_RECURSE all_files RELATIVE" << std::endl;
+a.stream() << "    \"${CMAKE_CURRENT_SOURCE_DIR}/\"" << std::endl;
+a.stream() << "    \"${CMAKE_CURRENT_SOURCE_DIR}/*.cpp\")" << std::endl;
+a.stream() << std::endl;
+a.stream() << "add_library(" << mn << " STATIC ${all_files})" << std::endl;
+a.stream() << "set_target_properties(" << mn << " PROPERTIES" << std::endl;
+a.stream() << "    OUTPUT_NAME " << s.product_name() << (s.product_name().empty() ? "" : "_") << mn << ")" << std::endl;
+a.stream() << std::endl;
+a.stream() << "install(TARGETS " << mn << " ARCHIVE DESTINATION lib COMPONENT libraries)" << std::endl;
     } // sbf
-    return fa.make_file(s.source_file_path());
+    return a.make_file(s.source_file_path());
 }
 } } } }

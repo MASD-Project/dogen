@@ -74,7 +74,7 @@ private:
         const auto fn(f.ownership_hierarchy().formatter_name());
         BOOST_LOG_SEV(lg, debug) << "Formatting with: '" << fn << "'";
 
-        auto file(f.format(e));
+        auto file(f.format(empty_context_, e));
 
         if (empty_out_content) {
             BOOST_LOG_SEV(lg, debug) << "Emptying out content.";
@@ -197,6 +197,7 @@ public:
     const std::forward_list<dogen::formatters::file>& files();
 
 private:
+    const context empty_context_;
     const settings::bundle_repository& bundle_;
     const formattables::formatter_properties_repository& formatter_properties_;
     const container& container_;
@@ -205,8 +206,8 @@ private:
 
 dispatcher::dispatcher(const settings::bundle_repository& brp,
     const formattables::formatter_properties_repository& fprp,
-    const container& c) :
-    bundle_(brp), formatter_properties_(fprp), container_(c) { }
+    const container& c) : empty_context_(), bundle_(brp),
+                          formatter_properties_(fprp), container_(c) { }
 
 void dispatcher::visit(const formattables::class_info& c) {
     const bool empty_out_content(

@@ -27,15 +27,15 @@ namespace formatters {
 namespace hash {
 
 void ptime_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
+    nested_type_formatting_assistant& a,
     const formattables::nested_type_info& t) {
-fa.stream() << std::endl;
-fa.stream() << "inline std::size_t hash_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
-fa.stream() << "    std::size_t seed(0);" << std::endl;
-fa.stream() << "    const boost::posix_time::ptime epoch(boost::gregorian::date(1970, 1, 1));" << std::endl;
-fa.stream() << "    boost::posix_time::time_duration d(v - epoch);" << std::endl;
-fa.stream() << "    seed = static_cast<std::size_t>(d.total_seconds());" << std::endl;
-fa.stream() << "    return seed;" << std::endl;
-fa.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "inline std::size_t hash_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
+a.stream() << "    std::size_t seed(0);" << std::endl;
+a.stream() << "    const boost::posix_time::ptime epoch(boost::gregorian::date(1970, 1, 1));" << std::endl;
+a.stream() << "    boost::posix_time::time_duration d(v - epoch);" << std::endl;
+a.stream() << "    seed = static_cast<std::size_t>(d.total_seconds());" << std::endl;
+a.stream() << "    return seed;" << std::endl;
+a.stream() << "}" << std::endl;
 }
 } } } } }

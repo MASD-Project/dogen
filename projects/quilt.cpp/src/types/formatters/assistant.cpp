@@ -21,8 +21,9 @@
 #include <sstream>
 #include <boost/pointer_cast.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/formatters/types/comment_formatter.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
+#include "dogen/formatters/types/comment_formatter.hpp"
+#include "dogen/formatters/types/annotation_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
@@ -34,13 +35,13 @@
 #include "dogen/quilt.cpp/types/formatters/hash/helper_methods_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/helper_methods_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/helper_methods_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/entity_formatting_assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(
-        "quilt.cpp.formatters.entity_formatting_assistant"));
+        "quilt.cpp.formatters.assistant"));
 
 const std::string empty;
 const std::string by_ref_text = "&";
@@ -69,20 +70,29 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-entity_formatting_assistant::~entity_formatting_assistant() noexcept { }
+assistant::assistant(const context& ctx, const dynamic::ownership_hierarchy& oh,
+    const formatters::file_types ft) :
+    context_(ctx),
+    formatter_properties_(obtain_formatter_properties(oh.formatter_name())),
+    ownership_hierarchy_(oh), file_type_(ft) {
 
-std::string entity_formatting_assistant::
+    dogen::formatters::indent_filter::push(filtering_stream_, 4);
+    filtering_stream_.push(stream_);
+    validate();
+}
+
+std::string assistant::
 make_final_keyword_text(const formattables::class_info& c) {
     return c.is_final() ? final_keyword_text : empty;
 }
 
-std::string entity_formatting_assistant::
+std::string assistant::
 make_by_ref_text(const formattables::property_info& p) {
     return (p.type().is_primitive() || p.type().is_enumeration()) ?
         empty : by_ref_text;
 }
 
-std::string entity_formatting_assistant::
+std::string assistant::
 make_setter_return_type(const std::string& containing_type_name,
     const formattables::property_info& p) {
     std::ostringstream s;
@@ -94,87 +104,93 @@ make_setter_return_type(const std::string& containing_type_name,
     return s.str();
 }
 
-entity_formatting_assistant::
-entity_formatting_assistant(const formattables::entity& e,
-    const context& ctx, const dynamic::ownership_hierarchy& oh,
-    const formatters::file_types ft) :
-    entity_(e), context_(ctx),
-    formatter_properties_(obtain_formatter_properties(oh.formatter_name())),
-    ownership_hierarchy_(oh), file_type_(ft) {
-    validate();
+void assistant::ensure_formatter_properties_are_present() const {
+    if (formatter_properties_)
+        return;
+
+    const auto fn(ownership_hierarchy_.formatter_name());
+    BOOST_LOG_SEV(lg, error) << formatter_properties_missing << fn;
+    BOOST_THROW_EXCEPTION(formatting_error(formatter_properties_missing + fn));
 }
 
-formattables::formatter_properties entity_formatting_assistant::
+boost::optional<formattables::formatter_properties> assistant::
 obtain_formatter_properties(const std::string& formatter_name) const {
     const auto& fn(formatter_name);
     const auto i(context_.formatter_properties().find(fn));
-    if (i == context_.formatter_properties().end()) {
-        BOOST_LOG_SEV(lg, error) << formatter_properties_missing << fn;
-        BOOST_THROW_EXCEPTION(
-            formatting_error(formatter_properties_missing + fn));
-    }
+    if (i == context_.formatter_properties().end())
+        return boost::optional<formattables::formatter_properties>();
     return i->second;
 }
 
-std::string entity_formatting_assistant::make_member_variable_name(
+std::string assistant::make_member_variable_name(
     const formattables::property_info& p) const {
     return p.name() + member_variable_postfix;
 }
 
-std::string entity_formatting_assistant::make_getter_setter_name(
+std::string assistant::make_getter_setter_name(
     const formattables::property_info& p) const {
     return p.name();
 }
 
-bool entity_formatting_assistant::
+bool assistant::
 is_formatter_enabled(const std::string& formatter_name) const {
     const auto fp(obtain_formatter_properties(formatter_name));
-    return fp.enabled();
+    if (!fp) {
+        BOOST_LOG_SEV(lg, error) << formatter_properties_missing
+                                 << formatter_name;
+        BOOST_THROW_EXCEPTION(formatting_error(formatter_properties_missing +
+                formatter_name));
+    }
+    return fp->enabled();
 }
 
-bool entity_formatting_assistant::
+bool assistant::
 is_facet_integrated(const std::string& facet_name) const {
-    const auto& f(formatter_properties_.integrated_facets());
+    ensure_formatter_properties_are_present();
+    const auto& f(formatter_properties_->integrated_facets());
     const auto i(f.find(facet_name));
     return i != f.end();
 }
 
-bool entity_formatting_assistant::is_serialization_enabled() const {
+bool assistant::is_serialization_enabled() const {
     using formatters::serialization::traits;
     return is_formatter_enabled(traits::class_header_formatter_name());
 }
 
-bool entity_formatting_assistant::is_io_enabled() const {
+bool assistant::is_io_enabled() const {
     using formatters::io::traits;
     return is_formatter_enabled(traits::class_header_formatter_name());
 }
 
-bool entity_formatting_assistant::is_io_integrated() const {
+bool assistant::is_io_integrated() const {
     using formatters::io::traits;
     return is_facet_integrated(traits::facet_name());
 }
 
-bool entity_formatting_assistant::is_hash_enabled() const {
+bool assistant::is_hash_enabled() const {
     using formatters::hash::traits;
     return is_formatter_enabled(traits::class_header_formatter_name());
 }
 
-bool entity_formatting_assistant::is_test_data_enabled() const {
+bool assistant::is_test_data_enabled() const {
     using formatters::test_data::traits;
     return is_formatter_enabled(traits::class_header_formatter_name());
 }
 
-bool entity_formatting_assistant::is_complete_constructor_disabled() const {
+bool assistant::is_complete_constructor_disabled() const {
     return context_.bundle().aspect_settings().disable_complete_constructor();
 }
 
-bool entity_formatting_assistant::is_xml_serialization_disabled() const {
+bool assistant::is_xml_serialization_disabled() const {
     return context_.bundle().aspect_settings().disable_xml_serialization();
 }
 
-void entity_formatting_assistant::validate() const {
+void assistant::validate() const {
+    if (!formatter_properties_)
+        return;
+
     const auto& fn(ownership_hierarchy_.formatter_name());
-    const auto& fp(formatter_properties_);
+    const auto fp(*formatter_properties_);
     if (fp.file_path().empty()) {
         BOOST_LOG_SEV(lg, error) << file_path_not_set << fn;
         BOOST_THROW_EXCEPTION(formatting_error(file_path_not_set + fn));
@@ -189,8 +205,9 @@ void entity_formatting_assistant::validate() const {
 }
 
 dogen::formatters::cpp::scoped_boilerplate_formatter
-entity_formatting_assistant::make_scoped_boilerplate_formatter() {
-    const auto& fp(formatter_properties_);
+assistant::make_scoped_boilerplate_formatter() {
+    ensure_formatter_properties_are_present();
+    const auto& fp(*formatter_properties_);
     const auto gs(context_.bundle().general_settings());
     return dogen::formatters::cpp::scoped_boilerplate_formatter(
         stream(), gs, fp.inclusion_dependencies(),
@@ -198,25 +215,34 @@ entity_formatting_assistant::make_scoped_boilerplate_formatter() {
 }
 
 dogen::formatters::cpp::scoped_namespace_formatter
-entity_formatting_assistant::make_scoped_namespace_formatter() {
+assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
     return dogen::formatters::cpp::scoped_namespace_formatter(
-        stream(), entity_.namespaces(),
-        false/*create_anonymous_namespace*/,
+        stream(), ns, false/*create_anonymous_namespace*/,
         true/*add_new_line*/);
 }
 
-nested_type_formatting_assistant entity_formatting_assistant::
+nested_type_formatting_assistant assistant::
 make_nested_type_formatting_assistant() {
     return nested_type_formatting_assistant(stream());
 }
 
-dogen::formatters::file entity_formatting_assistant::
-make_file(const bool overwrite) const {
-    return formatting_assistant::make_file(
-        formatter_properties_.file_path(), overwrite);
+void assistant::make_annotation_preamble(
+    const boost::optional<dogen::formatters::general_settings> gs) {
+    if (!gs)
+        return;
+
+    dogen::formatters::annotation_formatter af;
+    af.format_preamble(stream(), dogen::formatters::comment_styles::shell_style,
+        (*gs).annotation());
 }
 
-void entity_formatting_assistant::comment(const std::string& c) {
+dogen::formatters::file assistant::
+make_file(const bool overwrite) const {
+    ensure_formatter_properties_are_present();
+    return make_file(formatter_properties_->file_path(), overwrite);
+}
+
+void assistant::comment(const std::string& c) {
     if (c.empty())
         return;
 
@@ -229,7 +255,7 @@ void entity_formatting_assistant::comment(const std::string& c) {
     f.format(stream(), c);
 }
 
-void entity_formatting_assistant::
+void assistant::
 comment_start_method_group(const std::string& documentation,
     const bool add_comment_blocks) {
     if (documentation.empty())
@@ -252,8 +278,7 @@ comment_start_method_group(const std::string& documentation,
     }
 }
 
-void entity_formatting_assistant::
-comment_end_method_group(const std::string& documentation,
+void assistant::comment_end_method_group(const std::string& documentation,
     const bool add_comment_blocks) {
     if (documentation.empty())
         return;
@@ -274,8 +299,7 @@ comment_end_method_group(const std::string& documentation,
     }
 }
 
-std::string entity_formatting_assistant::comment_inline(
-    const std::string& c) const {
+std::string assistant::comment_inline(const std::string& c) const {
     if (c.empty())
         return empty;
 
@@ -292,27 +316,20 @@ std::string entity_formatting_assistant::comment_inline(
     return s.str();
 }
 
-void entity_formatting_assistant::add_helper_methods() {
-    const auto c(dynamic_cast<const formattables::class_info*>(&entity_));
-    if (!c) {
-        BOOST_LOG_SEV(lg, debug) << "Entity does not require helper methods: "
-                                 << c->name();
-        return;
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Processing entity: " << c->name();
+void assistant::add_helper_methods(const formattables::class_info& c) {
+    BOOST_LOG_SEV(lg, debug) << "Processing entity: " << c.name();
 
     using tt = formatters::types::traits;
     const auto cifn(tt::class_implementation_formatter_name());
     const auto fn(ownership_hierarchy_.formatter_name());
     const bool is_types_class_implementation(fn == cifn);
-    const bool in_inheritance(c->is_parent() || !c->parents().empty());
+    const bool in_inheritance(c.is_parent() || !c.parents().empty());
     const bool requires_io(is_io_enabled() &&
         (in_inheritance || is_io_integrated()));
 
     if (is_types_class_implementation && requires_io) {
         BOOST_LOG_SEV(lg, debug) << "Creating io helper methods in types.";
-        io::helper_methods_formatter f(c->properties());
+        io::helper_methods_formatter f(c.properties());
         f.format(stream());
     } else
         BOOST_LOG_SEV(lg, debug) << "Helper methods for types io not required."
@@ -325,7 +342,7 @@ void entity_formatting_assistant::add_helper_methods() {
     const bool is_io_class_implementation(fn == io_ci_fn);
     if (is_io_class_implementation && !in_inheritance && !is_io_integrated()) {
         BOOST_LOG_SEV(lg, debug) << "Creating io helper methods.";
-        io::helper_methods_formatter f(c->properties());
+        io::helper_methods_formatter f(c.properties());
         f.format(stream());
     } else
         BOOST_LOG_SEV(lg, debug) << "Helper methods for io not required."
@@ -334,7 +351,7 @@ void entity_formatting_assistant::add_helper_methods() {
 
     if (is_types_class_implementation) {
         BOOST_LOG_SEV(lg, debug) << "Creating types helper methods.";
-        types::helper_methods_formatter f(c->properties());
+        types::helper_methods_formatter f(c.properties());
         f.format(stream());
     } else {
         BOOST_LOG_SEV(lg, debug) << "Type helper methods not required."
@@ -349,7 +366,7 @@ void entity_formatting_assistant::add_helper_methods() {
 
     if (is_hash_class_implementation && requires_hash) {
         BOOST_LOG_SEV(lg, debug) << "Creating hash helper methods.";
-        hash::helper_methods_formatter f(c->properties());
+        hash::helper_methods_formatter f(c.properties());
         f.format(stream());
     } else {
         BOOST_LOG_SEV(lg, debug) << "Hash helper methods not required."
@@ -364,7 +381,7 @@ void entity_formatting_assistant::add_helper_methods() {
 
     if (is_test_data_class_implementation && requires_test_data) {
         BOOST_LOG_SEV(lg, debug) << "Creating test data helper methods.";
-        test_data::helper_methods_formatter f(c->name(), c->properties());
+        test_data::helper_methods_formatter f(c.name(), c.properties());
         f.format(stream());
     } else {
         BOOST_LOG_SEV(lg, debug) << "Test data helper methods not required."
@@ -373,13 +390,13 @@ void entity_formatting_assistant::add_helper_methods() {
     }
 }
 
-bool entity_formatting_assistant::requires_hashing_helper_method(
+bool assistant::requires_hashing_helper_method(
     const formattables::nested_type_info& t) const {
     return nested_type_formatting_assistant::
         requires_hashing_helper_method(t);
 }
 
-boost::shared_ptr<settings::odb_settings> entity_formatting_assistant::
+boost::shared_ptr<settings::odb_settings> assistant::
 get_odb_settings(const std::unordered_map<std::string,
     boost::shared_ptr<quilt::cpp::settings::opaque_settings>
     >& os) const {
@@ -397,12 +414,12 @@ get_odb_settings(const std::unordered_map<std::string,
 }
 
 boost::shared_ptr<settings::odb_settings>
-entity_formatting_assistant::get_odb_settings() const {
+assistant::get_odb_settings() const {
     const auto& os(context_.bundle().opaque_settings());
     return get_odb_settings(os);
 }
 
-boost::shared_ptr<settings::odb_settings> entity_formatting_assistant::
+boost::shared_ptr<settings::odb_settings> assistant::
 get_odb_settings(const std::string& property_id) const {
 
     const auto& osfp(context_.bundle().opaque_settings_for_property());
@@ -412,6 +429,19 @@ get_odb_settings(const std::string& property_id) const {
 
     const auto& os(i->second);
     return get_odb_settings(os);
+}
+
+std::ostream& assistant::stream() {
+    return filtering_stream_;
+}
+
+dogen::formatters::file assistant::make_file(
+    const boost::filesystem::path& full_path, const bool overwrite) const {
+    dogen::formatters::file r;
+    r.content(stream_.str());
+    r.path(full_path);
+    r.overwrite(overwrite);
+    return r;
 }
 
 } } } }

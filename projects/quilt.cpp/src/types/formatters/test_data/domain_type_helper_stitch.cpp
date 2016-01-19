@@ -28,13 +28,13 @@ namespace formatters {
 namespace test_data {
 
 void domain_type_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
+    nested_type_formatting_assistant& a,
     const formattables::nested_type_info& t,
     const bool as_pointer) {
-fa.stream() << std::endl;
-fa.stream() << t.complete_name() << (as_pointer ? "*" : "") << std::endl;
-fa.stream() << "create_" << t.complete_identifiable_name() << (as_pointer ? "_ptr" : "") << "(const unsigned int position) {" << std::endl;
-fa.stream() << "    return " << t.complete_name() << "_generator::create" << (as_pointer ? "_ptr" : "") << "(position);" << std::endl;
-fa.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << t.complete_name() << (as_pointer ? "*" : "") << std::endl;
+a.stream() << "create_" << t.complete_identifiable_name() << (as_pointer ? "_ptr" : "") << "(const unsigned int position) {" << std::endl;
+a.stream() << "    return " << t.complete_name() << "_generator::create" << (as_pointer ? "_ptr" : "") << "(position);" << std::endl;
+a.stream() << "}" << std::endl;
 }
 } } } } }

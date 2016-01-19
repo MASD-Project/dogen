@@ -24,7 +24,7 @@
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
-#include "dogen/quilt.cpp/types/formatters/entity_formatting_assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/enum_implementation_formatter_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/enum_implementation_formatter.hpp"
 
@@ -95,8 +95,8 @@ void enum_implementation_formatter::register_inclusion_dependencies_provider(
 
 dogen::formatters::file enum_implementation_formatter::
 format(const context& ctx, const formattables::enum_info& c) const {
-    entity_formatting_assistant fa(c, ctx, ownership_hierarchy(), file_type());
-    const auto r(enum_implementation_formatter_stitch(fa, c));
+    assistant a(ctx, ownership_hierarchy(), file_type());
+    const auto r(enum_implementation_formatter_stitch(a, c));
     return r;
 }
 

@@ -30,28 +30,27 @@ namespace formatters {
 namespace io {
 
 dogen::formatters::file class_implementation_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::class_info& c) {
+    assistant& a, const formattables::class_info& c) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
-        fa.add_helper_methods();
+        auto sbf(a.make_scoped_boilerplate_formatter());
+        a.add_helper_methods(c);
 
         {
-            auto snf(fa.make_scoped_namespace_formatter());
+            auto snf(a.make_scoped_namespace_formatter(c.namespaces()));
             const bool no_arg(!c.is_parent() && c.parents().empty() &&
                 c.properties().empty());
-fa.stream() << std::endl;
-fa.stream() << "std::ostream& operator<<(std::ostream& s, const " << c.name() << "&" << (no_arg ? "" : " v") << ") {" << std::endl;
+a.stream() << std::endl;
+a.stream() << "std::ostream& operator<<(std::ostream& s, const " << c.name() << "&" << (no_arg ? "" : " v") << ") {" << std::endl;
             if (c.is_parent() || !c.parents().empty()) {
-fa.stream() << "    v.to_stream(s);" << std::endl;
-fa.stream() << "    return(s);" << std::endl;
+a.stream() << "    v.to_stream(s);" << std::endl;
+a.stream() << "    return(s);" << std::endl;
             } else
-                io::inserter_implementation_helper_stitch(fa, c, false/*inside_class*/);
-fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
+                io::inserter_implementation_helper_stitch(a, c, false/*inside_class*/);
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
         } // snf
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 } } } } }

@@ -32,9 +32,9 @@ nested_type_formatting_assistant(std::ostream& s) : stream_(s) {}
 
 dogen::formatters::cpp::scoped_namespace_formatter
 nested_type_formatting_assistant::
-make_scoped_namespace_formatter(const formattables::nested_type_info& t) {
+make_scoped_namespace_formatter(const std::list<std::string>& ns) {
     return dogen::formatters::cpp::scoped_namespace_formatter(
-        stream_, t.namespaces(),
+        stream_, ns,
         false/*create_anonymous_namespace*/,
         true/*add_new_line*/);
 }

@@ -27,25 +27,25 @@ namespace formatters {
 namespace io {
 
 void ptree_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
+    nested_type_formatting_assistant& a,
     const formattables::nested_type_info& t) {
 
     {
-        auto snf(fa.make_scoped_namespace_formatter(t));
-fa.stream() << std::endl;
-fa.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << t.complete_name() << "& v) {" << std::endl;
-fa.stream() << "    std::ostringstream ss;" << std::endl;
-fa.stream() << "    boost::property_tree::write_json(ss, v);" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "    std::string content(ss.str());" << std::endl;
-fa.stream() << "    boost::replace_all(content, \"\\r\\n\", \"\");" << std::endl;
-fa.stream() << "    boost::replace_all(content, \"\\n\", \"\");" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "    s << content;" << std::endl;
-fa.stream() << "    return s;" << std::endl;
-fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
+        auto snf(a.make_scoped_namespace_formatter(t.namespaces()));
+a.stream() << std::endl;
+a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << t.complete_name() << "& v) {" << std::endl;
+a.stream() << "    std::ostringstream ss;" << std::endl;
+a.stream() << "    boost::property_tree::write_json(ss, v);" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    std::string content(ss.str());" << std::endl;
+a.stream() << "    boost::replace_all(content, \"\\r\\n\", \"\");" << std::endl;
+a.stream() << "    boost::replace_all(content, \"\\n\", \"\");" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    s << content;" << std::endl;
+a.stream() << "    return s;" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
     }
-fa.stream() << std::endl;
+a.stream() << std::endl;
 }
 } } } } }

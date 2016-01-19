@@ -1,19 +1,18 @@
 <#@ licence_name=gpl_v3 #>
 <#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
 <#@ modeline_group_name=emacs #>
-<#@ stream_variable_name=fa.stream() #>
+<#@ stream_variable_name=a.stream() #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/odb/class_header_formatter_stitch.hpp" #>
 <#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::odb #>
 <#+
 
 dogen::formatters::file class_header_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::class_info& c) {
+    assistant& a, const formattables::class_info& c) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
-        const auto odbs(fa.get_odb_settings());
+        auto sbf(a.make_scoped_boilerplate_formatter());
+        const auto odbs(a.get_odb_settings());
         if (!odbs || odbs->pragmas().empty()) {
 #>
 // class has no ODB pragmas defined.
@@ -21,7 +20,7 @@ dogen::formatters::file class_header_formatter_stitch(
 <#+
         } else {
             {
-                auto snf(fa.make_scoped_namespace_formatter());
+                auto snf(a.make_scoped_namespace_formatter(c.namespaces()));
 
 #>
 
@@ -36,7 +35,7 @@ dogen::formatters::file class_header_formatter_stitch(
 
                 bool is_first(true);
                 for (const auto p : c.properties()) {
-                    const auto podbs(fa.get_odb_settings(p.id()));
+                    const auto podbs(a.get_odb_settings(p.id()));
                     if (podbs) {
                         for (const auto pg : podbs->pragmas()) {
                             if (is_first)
@@ -45,7 +44,7 @@ dogen::formatters::file class_header_formatter_stitch(
 <#+
                             is_first = false;
 #>
-#pragma db member(<#= c.name() #>::<#= fa.make_member_variable_name(p) #>) <#= pg #>
+#pragma db member(<#= c.name() #>::<#= a.make_member_variable_name(p) #>) <#= pg #>
 <#+
                         }
                     }
@@ -61,6 +60,6 @@ dogen::formatters::file class_header_formatter_stitch(
 <#+
         }
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 #>

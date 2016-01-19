@@ -28,27 +28,26 @@ namespace formatters {
 namespace types {
 
 dogen::formatters::file enum_header_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::enum_info& e) {
+    assistant& a, const formattables::enum_info& e) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(fa.make_scoped_namespace_formatter());
-fa.stream() << std::endl;
-            fa.comment(e.documentation());
-fa.stream() << "enum class " << e.name() << " : " << e.type() << " {" << std::endl;
+            auto snf(a.make_scoped_namespace_formatter(e.namespaces()));
+a.stream() << std::endl;
+            a.comment(e.documentation());
+a.stream() << "enum class " << e.name() << " : " << e.type() << " {" << std::endl;
             dogen::formatters::sequence_formatter sf(e.enumerators().size());
             for (const auto& en : e.enumerators()) {
-fa.stream() << "    " << en.name() << " = " << en.value() << sf.postfix() << fa.comment_inline(en.documentation()) << std::endl;
+a.stream() << "    " << en.name() << " = " << en.value() << sf.postfix() << a.comment_inline(en.documentation()) << std::endl;
                 sf.next();
             }
-fa.stream() << "};" << std::endl;
-fa.stream() << std::endl;
+a.stream() << "};" << std::endl;
+a.stream() << std::endl;
         } // snf
-fa.stream() << std::endl;
+a.stream() << std::endl;
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 
 } } } } }

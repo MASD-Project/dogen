@@ -27,19 +27,19 @@ namespace formatters {
 namespace types {
 
 void smart_pointer_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
+    nested_type_formatting_assistant& a,
     const formattables::nested_type_info& t) {
 
     {
-        auto snf(fa.make_scoped_namespace_formatter(t));
+        auto snf(a.make_scoped_namespace_formatter(t.namespaces()));
         const auto containee(t.children().front());
-fa.stream() << std::endl;
-fa.stream() << "inline bool operator==(const " << t.complete_name() << "& lhs," << std::endl;
-fa.stream() << "const " << t.complete_name() << "& rhs) {" << std::endl;
-fa.stream() << "    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));" << std::endl;
-fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
+a.stream() << std::endl;
+a.stream() << "inline bool operator==(const " << t.complete_name() << "& lhs," << std::endl;
+a.stream() << "const " << t.complete_name() << "& rhs) {" << std::endl;
+a.stream() << "    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
     }
-fa.stream() << std::endl;
+a.stream() << std::endl;
 }
 } } } } }

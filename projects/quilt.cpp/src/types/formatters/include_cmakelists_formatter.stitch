@@ -1,7 +1,7 @@
 <#@ licence_name=gpl_v3 #>
 <#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
 <#@ modeline_group_name=emacs #>
-<#@ stream_variable_name=fa.stream() #>
+<#@ stream_variable_name=a.stream() #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/include_cmakelists_formatter_stitch.hpp" #>
 <#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
 <#@ inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
@@ -9,11 +9,10 @@
 <#+
 
 dogen::formatters::file include_cmakelists_formatter_stitch(
-    formatters::trivial_formatting_assistant& fa,
-    const formattables::cmakelists_info& c) {
+    assistant& a, const formattables::cmakelists_info& c) {
 
     {
-        fa.make_annotation_preamble(c.general_settings());
+        a.make_annotation_preamble(c.general_settings());
 #>
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
 
@@ -74,7 +73,6 @@ endforeach()
 <#+
         }
     } // sbf
-    return fa.make_file(c.include_file_path());
-    // return fa.make_file(c.include_file_path(), false/*overwrite*/);
+    return a.make_file(c.include_file_path());
 }
 #>

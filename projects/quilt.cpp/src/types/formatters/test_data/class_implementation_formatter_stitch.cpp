@@ -28,28 +28,28 @@ namespace formatters {
 namespace test_data {
 
 dogen::formatters::file class_implementation_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::class_info& c) {
+    assistant& a, const formattables::class_info& c) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter());
         if (!c.properties().empty()) {
-fa.stream() << "namespace {" << std::endl;
-        fa.add_helper_methods();
-fa.stream() << std::endl;
-fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
+a.stream() << "namespace {" << std::endl;
+        a.add_helper_methods(c);
+a.stream() << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
         }
 
         {
-            auto snf(fa.make_scoped_namespace_formatter());
+            auto snf(a.make_scoped_namespace_formatter(c.namespaces()));
+
 
             /*
              * Default constructor.
              */
             if (!c.is_parent()) {
-fa.stream() << std::endl;
-fa.stream() << c.name() << "_generator::" << c.name() << "_generator() : position_(0) { }" << std::endl;
+a.stream() << std::endl;
+a.stream() << c.name() << "_generator::" << c.name() << "_generator() : position_(0) { }" << std::endl;
             }
 
             /*
@@ -58,24 +58,24 @@ fa.stream() << c.name() << "_generator::" << c.name() << "_generator() : positio
             if (!c.is_immutable()) {
                 bool no_args(c.properties().empty() && c.parents().empty());
                 if (no_args) {
-fa.stream() << std::endl;
-fa.stream() << "void " << c.name() << "_generator::" << std::endl;
-fa.stream() << "populate(const unsigned int /*position*/, result_type& /*v*/) {" << std::endl;
+a.stream() << std::endl;
+a.stream() << "void " << c.name() << "_generator::" << std::endl;
+a.stream() << "populate(const unsigned int /*position*/, result_type& /*v*/) {" << std::endl;
                 } else {
-fa.stream() << std::endl;
-fa.stream() << "void " << c.name() << "_generator::" << std::endl;
-fa.stream() << "populate(const unsigned int position, result_type& v) {" << std::endl;
+a.stream() << std::endl;
+a.stream() << "void " << c.name() << "_generator::" << std::endl;
+a.stream() << "populate(const unsigned int position, result_type& v) {" << std::endl;
                 }
 
                 for (const auto p : c.parents()) {
-fa.stream() << "    " << p.qualified_name() << "_generator::populate(position, v);" << std::endl;
+a.stream() << "    " << p.qualified_name() << "_generator::populate(position, v);" << std::endl;
                 }
                 unsigned int i(0);
                 for (const auto p : c.properties()) {
-fa.stream() << "    v." << p.name() << "(create_" << p.type().complete_identifiable_name() << "(position + " << i << "));" << std::endl;
+a.stream() << "    v." << p.name() << "(create_" << p.type().complete_identifiable_name() << "(position + " << i << "));" << std::endl;
                     ++i;
                 }
-fa.stream() << "}" << std::endl;
+a.stream() << "}" << std::endl;
             }
 
             /*
@@ -83,44 +83,44 @@ fa.stream() << "}" << std::endl;
              */
             if (!c.is_parent()) {
                  const bool no_arg(c.all_properties().empty());
-fa.stream() << std::endl;
-fa.stream() << c.name() << "_generator::result_type" << std::endl;
-fa.stream() << c.name() << "_generator::create(const unsigned int" << (no_arg ? "/*position*/" : " position") << ") {" << std::endl;
+a.stream() << std::endl;
+a.stream() << c.name() << "_generator::result_type" << std::endl;
+a.stream() << c.name() << "_generator::create(const unsigned int" << (no_arg ? "/*position*/" : " position") << ") {" << std::endl;
                 if (c.is_immutable()) {
-fa.stream() << "    return " << c.name() << "(" << std::endl;
+a.stream() << "    return " << c.name() << "(" << std::endl;
                     // FIXME: hack
                     if (c.properties().empty())
-fa.stream() << std::endl;
+a.stream() << std::endl;
                     else {
                         dogen::formatters::sequence_formatter sf(c.properties().size());
                         for (const auto p : c.properties()) {
-fa.stream() << "        create_" << p.type().complete_identifiable_name() << "(position + " << sf.current_position() << ")" << sf.postfix() << std::endl;
+a.stream() << "        create_" << p.type().complete_identifiable_name() << "(position + " << sf.current_position() << ")" << sf.postfix() << std::endl;
                             sf.next();
                         }
                     }
-fa.stream() << "        );" << std::endl;
+a.stream() << "        );" << std::endl;
                 } else {
-fa.stream() << "    " << c.name() << " r;" << std::endl;
+a.stream() << "    " << c.name() << " r;" << std::endl;
                     if (!c.all_properties().empty())
-fa.stream() << "    " << c.name() << "_generator::populate(position, r);" << std::endl;
-fa.stream() << "    return r;" << std::endl;
+a.stream() << "    " << c.name() << "_generator::populate(position, r);" << std::endl;
+a.stream() << "    return r;" << std::endl;
                 }
-fa.stream() << "}" << std::endl;
+a.stream() << "}" << std::endl;
             }
 
             /*
              * Create method ptr.
              */
-fa.stream() << std::endl;
-fa.stream() << c.name() << "_generator::result_type*" << std::endl;
-fa.stream() << c.name() << "_generator::create_ptr(const unsigned int position) {" << std::endl;
+a.stream() << std::endl;
+a.stream() << c.name() << "_generator::result_type*" << std::endl;
+a.stream() << c.name() << "_generator::create_ptr(const unsigned int position) {" << std::endl;
             if (c.leaves().empty()) {
                 if (c.is_immutable())
-fa.stream() << "    return new " << c.name() << "(create(position));" << std::endl;
+a.stream() << "    return new " << c.name() << "(create(position));" << std::endl;
                 else {
-fa.stream() << "    " << c.name() << "* p = new " << c.name() << "();" << std::endl;
-fa.stream() << "    " << c.name() << "_generator::populate(position, *p);" << std::endl;
-fa.stream() << "    return p;" << std::endl;
+a.stream() << "    " << c.name() << "* p = new " << c.name() << "();" << std::endl;
+a.stream() << "    " << c.name() << "_generator::populate(position, *p);" << std::endl;
+a.stream() << "    return p;" << std::endl;
                 }
             } else {
                 auto leaves(c.leaves());
@@ -129,25 +129,25 @@ fa.stream() << "    return p;" << std::endl;
                 unsigned int i(0);
                 unsigned int total(leaves.size());
                 for (const auto l : leaves) {
-fa.stream() << "    if ((position % " << total << ") == " << i++ << ")" << std::endl;
-fa.stream() << "        return " << l << "_generator::create_ptr(position);" << std::endl;
+a.stream() << "    if ((position % " << total << ") == " << i++ << ")" << std::endl;
+a.stream() << "        return " << l << "_generator::create_ptr(position);" << std::endl;
                 }
-fa.stream() << "    return " << front << "_generator::create_ptr(position);" << std::endl;
+a.stream() << "    return " << front << "_generator::create_ptr(position);" << std::endl;
             }
-fa.stream() << "}" << std::endl;
+a.stream() << "}" << std::endl;
             /*
              * Function operator
              */
              if (!c.is_parent()) {
-fa.stream() << std::endl;
-fa.stream() << c.name() << "_generator::result_type" << std::endl;
-fa.stream() << c.name() << "_generator::operator()() {" << std::endl;
-fa.stream() << "    return create(position_++);" << std::endl;
-fa.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << c.name() << "_generator::result_type" << std::endl;
+a.stream() << c.name() << "_generator::operator()() {" << std::endl;
+a.stream() << "    return create(position_++);" << std::endl;
+a.stream() << "}" << std::endl;
             }
-fa.stream() << std::endl;
+a.stream() << std::endl;
         } // snf
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 } } } } }

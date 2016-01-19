@@ -28,29 +28,29 @@ namespace formatters {
 namespace io {
 
 void associative_container_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
+    nested_type_formatting_assistant& a,
     const formattables::nested_type_info& t) {
 
     {
-        auto snf(fa.make_scoped_namespace_formatter(t));
+        auto snf(a.make_scoped_namespace_formatter(t.namespaces()));
         const auto key(t.children().front());
         const auto value(t.children().back());
-fa.stream() << std::endl;
-fa.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << t.complete_name() << "& v) {" << std::endl;
-fa.stream() << "    s << \"[\";" << std::endl;
-fa.stream() << "    for (auto i(v.begin()); i != v.end(); ++i) {" << std::endl;
-fa.stream() << "        if (i != v.begin()) s << \", \";" << std::endl;
-fa.stream() << "        s << \"[ { \" << \"\\\"__type__\\\": \" << \"\\\"key\\\"\" << \", \" << \"\\\"data\\\": \";" << std::endl;
-fa.stream() << "        s << " << fa.streaming_for_type(key, "i->first") << ";" << std::endl;
-fa.stream() << "        s << \" }, { \" << \"\\\"__type__\\\": \" << \"\\\"value\\\"\" << \", \" << \"\\\"data\\\": \";" << std::endl;
-fa.stream() << "        s << " << fa.streaming_for_type(value, "i->second") << ";" << std::endl;
-fa.stream() << "        s << \" } ]\";" << std::endl;
-fa.stream() << "    }" << std::endl;
-fa.stream() << "    s << \" ] \";" << std::endl;
-fa.stream() << "    return s;" << std::endl;
-fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
+a.stream() << std::endl;
+a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << t.complete_name() << "& v) {" << std::endl;
+a.stream() << "    s << \"[\";" << std::endl;
+a.stream() << "    for (auto i(v.begin()); i != v.end(); ++i) {" << std::endl;
+a.stream() << "        if (i != v.begin()) s << \", \";" << std::endl;
+a.stream() << "        s << \"[ { \" << \"\\\"__type__\\\": \" << \"\\\"key\\\"\" << \", \" << \"\\\"data\\\": \";" << std::endl;
+a.stream() << "        s << " << a.streaming_for_type(key, "i->first") << ";" << std::endl;
+a.stream() << "        s << \" }, { \" << \"\\\"__type__\\\": \" << \"\\\"value\\\"\" << \", \" << \"\\\"data\\\": \";" << std::endl;
+a.stream() << "        s << " << a.streaming_for_type(value, "i->second") << ";" << std::endl;
+a.stream() << "        s << \" } ]\";" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << "    s << \" ] \";" << std::endl;
+a.stream() << "    return s;" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
     }
-fa.stream() << std::endl;
+a.stream() << std::endl;
 }
 } } } } }

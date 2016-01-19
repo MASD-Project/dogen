@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-18 Mon 23:31]
+#+CAPTION: Clock summary at [2016-01-19 Tue 22:25]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *1:02* |      |      |
+| *Total time*                                                                | *2:50* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 1:02   |      |      |
-| Active                                                                      |        | 1:02 |      |
+| Stories                                                                     | 2:50   |      |      |
+| Active                                                                      |        | 2:50 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:18 |
-| STARTED Move non-entity properties to base formatter assistant              |        |      | 0:32 |
+| COMPLETED Merge all formatter assistants into one                           |        |      | 2:20 |
 | STARTED Create a debug build for clang in travis                            |        |      | 0:12 |
 #+end:
 
@@ -35,7 +35,9 @@ Updates to sprint and product backlog.
 
 Updates to manual.
 
-*** STARTED Move non-entity properties to base formatter assistant    :story:
+*** COMPLETED Merge all formatter assistants into one                 :story:
+    CLOSED: [2016-01-19 Tue 22:24]
+    CLOCK: [2016-01-19 Tue 20:36]--[2016-01-19 Tue 22:24] =>  1:48
     CLOCK: [2016-01-18 Mon 23:09]--[2016-01-18 Mon 23:31] =>  0:22
     CLOCK: [2016-01-18 Mon 22:30]--[2016-01-18 Mon 22:40] =>  0:10
 

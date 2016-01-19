@@ -1,7 +1,7 @@
 <#@ licence_name=gpl_v3 #>
 <#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
 <#@ modeline_group_name=emacs #>
-<#@ stream_variable_name=fa.stream() #>
+<#@ stream_variable_name=a.stream() #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/forward_declarations_formatter_stitch.hpp" #>
 <#@ inclusion_dependency="dogen/formatters/types/cpp/scoped_namespace_formatter.hpp" #>
 <#@ inclusion_dependency="dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp" #>
@@ -9,11 +9,10 @@
 <#+
 
 dogen::formatters::file forward_declarations_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::forward_declarations_info& fd) {
+    assistant& a, const formattables::forward_declarations_info& fd) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter());
 #>
 
 namespace boost {
@@ -29,7 +28,7 @@ void load(Archive& ar, <#= fd.qualified_name() #>& v, unsigned int version);
 
 <#+
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 
 #>

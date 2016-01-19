@@ -1,7 +1,7 @@
 <#@ licence_name=gpl_v3 #>
 <#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
 <#@ modeline_group_name=emacs #>
-<#@ stream_variable_name=fa.stream() #>
+<#@ stream_variable_name=a.stream() #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/odb/odb_options_formatter_stitch.hpp" #>
 <#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
 <#@ inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
@@ -9,11 +9,10 @@
 <#+
 
 dogen::formatters::file odb_options_formatter_stitch(
-    formatters::trivial_formatting_assistant& fa,
-    const formattables::odb_options_info& i) {
+    assistant& a, const formattables::odb_options_info& i) {
 
     {
-        fa.make_annotation_preamble(i.general_settings());
+        a.make_annotation_preamble(i.general_settings());
 #>
 # enable C++11. FIXME: causes ODB crash in options file.
 # --std c++11
@@ -48,7 +47,6 @@ dogen::formatters::file odb_options_formatter_stitch(
 --guard-prefix <#= boost::to_upper_copy(i.product_name()) #>_<#= boost::to_upper_copy(i.model_name()) #>_<#= boost::to_upper_copy(i.odb_folder()) #>
 <#+
     } // sbf
-    return fa.make_file(i.file_path());
-    // return fa.make_file(i.file_path(), false/*overwrite*/);
+    return a.make_file(i.file_path());
 }
 #>

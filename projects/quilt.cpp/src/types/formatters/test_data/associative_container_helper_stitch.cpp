@@ -28,23 +28,23 @@ namespace formatters {
 namespace test_data {
 
 void associative_container_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
+    nested_type_formatting_assistant& a,
     const formattables::nested_type_info& t) {
-fa.stream() << std::endl;
-fa.stream() << t.complete_name() << " create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
-fa.stream() << "    " << t.complete_name() << " r;" << std::endl;
-fa.stream() << "    for (unsigned int i(0); i < 4; ++i) {" << std::endl;
+a.stream() << std::endl;
+a.stream() << t.complete_name() << " create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
+a.stream() << "    " << t.complete_name() << " r;" << std::endl;
+a.stream() << "    for (unsigned int i(0); i < 4; ++i) {" << std::endl;
     if (t.children().size() == 1) {
         const auto containee(t.children().front());
-fa.stream() << "        r.insert(create_" << containee.complete_identifiable_name() << "(position + i));" << std::endl;
+a.stream() << "        r.insert(create_" << containee.complete_identifiable_name() << "(position + i));" << std::endl;
     } else if (t.children().size() == 2) {
         const auto key(t.children().front());
         const auto value(t.children().back());
 
-fa.stream() << "        r.insert(std::make_pair(create_" << key.complete_identifiable_name() << "(position + i), create_" << value.complete_identifiable_name() << "(position + i)));" << std::endl;
+a.stream() << "        r.insert(std::make_pair(create_" << key.complete_identifiable_name() << "(position + i), create_" << value.complete_identifiable_name() << "(position + i)));" << std::endl;
     }
-fa.stream() << "    }" << std::endl;
-fa.stream() << "    return r;" << std::endl;
-fa.stream() << "}" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << "    return r;" << std::endl;
+a.stream() << "}" << std::endl;
 }
 } } } } }

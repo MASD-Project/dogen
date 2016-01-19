@@ -28,34 +28,33 @@ namespace formatters {
 namespace io {
 
 void inserter_implementation_helper_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::class_info& c,
+    assistant& a, const formattables::class_info& c,
     const bool inside_class) {
 
     if (c.requires_stream_manipulators()) {
-fa.stream() << "    boost::io::ios_flags_saver ifs(s);" << std::endl;
-fa.stream() << "    s.setf(std::ios_base::boolalpha);" << std::endl;
-fa.stream() << "    s.setf(std::ios::fixed, std::ios::floatfield);" << std::endl;
-fa.stream() << "    s.precision(6);" << std::endl;
-fa.stream() << "    s.setf(std::ios::showpoint);" << std::endl;
-fa.stream() << std::endl;
+a.stream() << "    boost::io::ios_flags_saver ifs(s);" << std::endl;
+a.stream() << "    s.setf(std::ios_base::boolalpha);" << std::endl;
+a.stream() << "    s.setf(std::ios::fixed, std::ios::floatfield);" << std::endl;
+a.stream() << "    s.precision(6);" << std::endl;
+a.stream() << "    s.setf(std::ios::showpoint);" << std::endl;
+a.stream() << std::endl;
     }
 
     const bool no_parents_and_no_properties(c.parents().empty() &&
         c.all_properties().empty());
-fa.stream() << "    s << \" { \"" << std::endl;
-fa.stream() << "      << \"\\\"__type__\\\": \" << \"\\\"" << c.qualified_name() << "\\\"\"" << (no_parents_and_no_properties ? " << \" }\";" : " << \", \"") << std::endl;
+a.stream() << "    s << \" { \"" << std::endl;
+a.stream() << "      << \"\\\"__type__\\\": \" << \"\\\"" << c.qualified_name() << "\\\"\"" << (no_parents_and_no_properties ? " << \" }\";" : " << \", \"") << std::endl;
 
     dogen::formatters::sequence_formatter sf(c.parents().size());
     sf.prefix_configuration().first("  << ").not_first("s << ");
     sf.element_separator("");
     for (const auto p : c.parents()) {
-fa.stream() << "    " << sf.prefix() << "\"\\\"__parent_" << sf.current_position() << "__\\\": \"" << sf.postfix() << ";" << std::endl;
-fa.stream() << "    " << p.name() << "::to_stream(s);" << std::endl;
+a.stream() << "    " << sf.prefix() << "\"\\\"__parent_" << sf.current_position() << "__\\\": \"" << sf.postfix() << ";" << std::endl;
+a.stream() << "    " << p.name() << "::to_stream(s);" << std::endl;
         sf.next();
     }
 
-    auto ntfa(fa.make_nested_type_formatting_assistant());
+    auto ntfa(a.make_nested_type_formatting_assistant());
     sf.reset(c.properties().size());
 
     if (!c.parents().empty())
@@ -69,22 +68,22 @@ fa.stream() << "    " << p.name() << "::to_stream(s);" << std::endl;
     for (const auto p : c.properties()) {
         std::string variable_name;
         if (inside_class)
-            variable_name = fa.make_member_variable_name(p);
+            variable_name = a.make_member_variable_name(p);
         else
-            variable_name = "v." + fa.make_getter_setter_name(p) + "()";
+            variable_name = "v." + a.make_getter_setter_name(p) + "()";
 
-fa.stream() << "    " << sf.prefix() << "<< \"\\\"" << p.name() << "\\\": \" << " << ntfa.streaming_for_type(p.type(), variable_name) << sf.postfix() << std::endl;
+a.stream() << "    " << sf.prefix() << "<< \"\\\"" << p.name() << "\\\": \" << " << ntfa.streaming_for_type(p.type(), variable_name) << sf.postfix() << std::endl;
         sf.next();
     }
 
     if (!no_parents_and_no_properties) {
         if (!c.properties().empty())
-fa.stream() << "      << \" }\";" << std::endl;
+a.stream() << "      << \" }\";" << std::endl;
         else
-fa.stream() << "    s << \" }\";" << std::endl;
+a.stream() << "    s << \" }\";" << std::endl;
     }
 
     if (!inside_class)
-fa.stream() << "    return(s);" << std::endl;
+a.stream() << "    return(s);" << std::endl;
 }
 } } } } }

@@ -28,14 +28,14 @@ namespace formatters {
 namespace test_data {
 
 void int_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
+    nested_type_formatting_assistant& a,
     const formattables::nested_type_info& t) {
-fa.stream() << std::endl;
-fa.stream() << t.name() << " create_" << t.identifiable_name() << "(const unsigned int position) {" << std::endl;
+a.stream() << std::endl;
+a.stream() << t.name() << " create_" << t.identifiable_name() << "(const unsigned int position) {" << std::endl;
     if (t.name() == "int")
-fa.stream() << "    return position;" << std::endl;
+a.stream() << "    return position;" << std::endl;
     else
-fa.stream() << "    return static_cast<" << t.name() << ">(position);" << std::endl;
-fa.stream() << "}" << std::endl;
+a.stream() << "    return static_cast<" << t.name() << ">(position);" << std::endl;
+a.stream() << "}" << std::endl;
 }
 } } } } }

@@ -27,14 +27,14 @@ namespace formatters {
 namespace io {
 
 void string_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
+    nested_type_formatting_assistant& a,
     const formattables::nested_type_info& /*t*/) {
-fa.stream() << "inline std::string tidy_up_string(std::string s) {" << std::endl;
-fa.stream() << "    boost::replace_all(s, \"\\r\\n\", \"<new_line>\");" << std::endl;
-fa.stream() << "    boost::replace_all(s, \"\\n\", \"<new_line>\");" << std::endl;
-fa.stream() << "    boost::replace_all(s, \"\\\"\", \"<quote>\");" << std::endl;
-fa.stream() << "    return s;" << std::endl;
-fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
+a.stream() << "inline std::string tidy_up_string(std::string s) {" << std::endl;
+a.stream() << "    boost::replace_all(s, \"\\r\\n\", \"<new_line>\");" << std::endl;
+a.stream() << "    boost::replace_all(s, \"\\n\", \"<new_line>\");" << std::endl;
+a.stream() << "    boost::replace_all(s, \"\\\"\", \"<quote>\");" << std::endl;
+a.stream() << "    return s;" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
 }
 } } } } }

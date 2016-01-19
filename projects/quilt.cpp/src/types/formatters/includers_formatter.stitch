@@ -1,22 +1,21 @@
 <#@ licence_name=gpl_v3 #> 
 <#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
 <#@ modeline_group_name=emacs #>
-<#@ stream_variable_name=fa.stream() #>
+<#@ stream_variable_name=a.stream() #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/includers_formatter_stitch.hpp" #>
 <#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
 <#@ containing_namespaces=dogen::quilt::cpp::formatters #>
 <#+
 
 dogen::formatters::file includers_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::includers_info& /*i*/) {
+    assistant& a, const formattables::includers_info& /*i*/) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter());
 #>
 
 <#+
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 #>

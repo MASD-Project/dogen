@@ -30,7 +30,7 @@
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
-#include "dogen/quilt.cpp/types/formatters/entity_formatting_assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/forward_declarations_formatter_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/forward_declarations_formatter.hpp"
 
@@ -108,8 +108,8 @@ void forward_declarations_formatter::register_inclusion_dependencies_provider(
 dogen::formatters::file forward_declarations_formatter::
 format(const context& ctx,
     const formattables::forward_declarations_info& fd) const {
-    entity_formatting_assistant fa(fd, ctx, ownership_hierarchy(), file_type());
-    const auto r(forward_declarations_formatter_stitch(fa, fd));
+    assistant a(ctx, ownership_hierarchy(), file_type());
+    const auto r(forward_declarations_formatter_stitch(a, fd));
     return r;
 }
 

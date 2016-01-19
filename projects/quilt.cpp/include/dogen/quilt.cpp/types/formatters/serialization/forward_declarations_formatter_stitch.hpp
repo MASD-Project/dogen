@@ -27,7 +27,7 @@
 
 #include <ostream>
 #include <boost/optional.hpp>
-#include "dogen/quilt.cpp/types/formatters/entity_formatting_assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formattables/forward_declarations_info.hpp"
 
 namespace dogen {
@@ -37,8 +37,7 @@ namespace formatters {
 namespace serialization {
 
 dogen::formatters::file  forward_declarations_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::forward_declarations_info& fd);
+    assistant& a, const formattables::forward_declarations_info& fd);
 
 } } } } }
 

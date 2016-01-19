@@ -27,17 +27,17 @@ namespace formatters {
 namespace test_data {
 
 void ptree_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
+    nested_type_formatting_assistant& a,
     const formattables::nested_type_info& t) {
-fa.stream() << std::endl;
-fa.stream() << t.complete_name() << std::endl;
-fa.stream() << "create_" << t.complete_identifiable_name() << "(const unsigned int position) {" << std::endl;
-fa.stream() << "    using boost::property_tree::ptree;" << std::endl;
-fa.stream() << "    ptree c;" << std::endl;
-fa.stream() << "    c.put(\"key_2\", position);" << std::endl;
-fa.stream() << "    ptree r;" << std::endl;
-fa.stream() << "    r.push_back(ptree::value_type(\"key_1\", c));" << std::endl;
-fa.stream() << "    return r;" << std::endl;
-fa.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << t.complete_name() << std::endl;
+a.stream() << "create_" << t.complete_identifiable_name() << "(const unsigned int position) {" << std::endl;
+a.stream() << "    using boost::property_tree::ptree;" << std::endl;
+a.stream() << "    ptree c;" << std::endl;
+a.stream() << "    c.put(\"key_2\", position);" << std::endl;
+a.stream() << "    ptree r;" << std::endl;
+a.stream() << "    r.push_back(ptree::value_type(\"key_1\", c));" << std::endl;
+a.stream() << "    return r;" << std::endl;
+a.stream() << "}" << std::endl;
 }
 } } } } }

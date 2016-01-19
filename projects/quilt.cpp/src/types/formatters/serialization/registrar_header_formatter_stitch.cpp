@@ -29,22 +29,21 @@ namespace formatters {
 namespace serialization {
 
 dogen::formatters::file registrar_header_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::registrar_info& /*ri*/) {
+    assistant& a, const formattables::registrar_info& ri) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(fa.make_scoped_namespace_formatter());
-fa.stream() << std::endl;
-fa.stream() << "template<typename Archive>" << std::endl;
-fa.stream() << "void register_types(Archive& ar);" << std::endl;
-fa.stream() << std::endl;
+            auto snf(a.make_scoped_namespace_formatter(ri.namespaces()));
+a.stream() << std::endl;
+a.stream() << "template<typename Archive>" << std::endl;
+a.stream() << "void register_types(Archive& ar);" << std::endl;
+a.stream() << std::endl;
         } // snf
-fa.stream() << std::endl;
+a.stream() << std::endl;
 
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 
 } } } } }

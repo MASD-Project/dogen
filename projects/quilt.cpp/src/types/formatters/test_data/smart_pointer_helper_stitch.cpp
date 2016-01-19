@@ -27,15 +27,15 @@ namespace formatters {
 namespace test_data {
 
 void smart_pointer_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
+    nested_type_formatting_assistant& a,
     const formattables::nested_type_info& t) {
     const auto containee(t.children().front());
-fa.stream() << std::endl;
-fa.stream() << t.complete_name() << std::endl;
-fa.stream() << "create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
-fa.stream() << "    " << t.complete_name() << " r(" << std::endl;
-fa.stream() << "        create_" << containee.complete_identifiable_name() << "_ptr(position));" << std::endl;
-fa.stream() << "    return r;" << std::endl;
-fa.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << t.complete_name() << std::endl;
+a.stream() << "create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
+a.stream() << "    " << t.complete_name() << " r(" << std::endl;
+a.stream() << "        create_" << containee.complete_identifiable_name() << "_ptr(position));" << std::endl;
+a.stream() << "    return r;" << std::endl;
+a.stream() << "}" << std::endl;
 }
 } } } } }

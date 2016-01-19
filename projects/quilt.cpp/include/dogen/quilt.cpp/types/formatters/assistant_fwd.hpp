@@ -18,32 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/indent_filter.hpp"
-#include "dogen/quilt.cpp/types/formatters/formatting_assistant.hpp"
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_ASSISTANT_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_ASSISTANT_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
 
-formatting_assistant::formatting_assistant() {
-    dogen::formatters::indent_filter::push(filtering_stream_, 4);
-    filtering_stream_.push(stream_);
-}
-
-formatting_assistant::~formatting_assistant() noexcept { }
-
-std::ostream& formatting_assistant::stream() {
-    return filtering_stream_;
-}
-
-dogen::formatters::file formatting_assistant::make_file(
-    const boost::filesystem::path& full_path, const bool overwrite) const {
-    dogen::formatters::file r;
-    r.content(stream_.str());
-    r.path(full_path);
-    r.overwrite(overwrite);
-    return r;
-}
+class assistant;
 
 } } } }
+
+#endif

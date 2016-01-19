@@ -1,23 +1,22 @@
 <#@ licence_name=gpl_v3 #>
 <#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
 <#@ modeline_group_name=emacs #>
-<#@ stream_variable_name=fa.stream() #>
+<#@ stream_variable_name=a.stream() #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/visitor_header_formatter_stitch.hpp" #>
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::types #>
 <#+
 
 dogen::formatters::file visitor_header_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::visitor_info& v) {
+    assistant& a, const formattables::visitor_info& v) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(fa.make_scoped_namespace_formatter());
+            auto snf(a.make_scoped_namespace_formatter(v.namespaces()));
 #>
 
 <#+
-            fa.comment(v.documentation());
+            a.comment(v.documentation());
 #>
 class <#= v.name() #> {
 public:
@@ -31,14 +30,14 @@ public:
 #>
 
 <#+
-                fa.comment_start_method_group(t.documentation());
+                a.comment_start_method_group(t.documentation());
 #>
     virtual void visit(const <#= t.qualified_name() #>&) const { }
     virtual void visit(const <#= t.qualified_name() #>&) { }
     virtual void visit(<#= t.qualified_name() #>&) const { }
     virtual void visit(<#= t.qualified_name() #>&) { }
 <#+
-                fa.comment_end_method_group(t.documentation());
+                a.comment_end_method_group(t.documentation());
                 is_first = false;
             }
 #>
@@ -52,7 +51,7 @@ inline <#= v.name() #>::~<#= v.name() #>() noexcept { }
 
 <#+
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 
 #>

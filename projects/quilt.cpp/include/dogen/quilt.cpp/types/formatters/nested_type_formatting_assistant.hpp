@@ -48,7 +48,7 @@ public:
      * @brief Returns a scoped namespace formatter.
      */
     dogen::formatters::cpp::scoped_namespace_formatter
-    make_scoped_namespace_formatter(const formattables::nested_type_info& t);
+    make_scoped_namespace_formatter(const std::list<std::string>& ns);
 
 private:
     /**

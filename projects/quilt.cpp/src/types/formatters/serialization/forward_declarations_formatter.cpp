@@ -116,8 +116,8 @@ format(const context& ctx,
     if (fd.is_enum() || fd.is_exception())
         return dogen::formatters::file();
 
-    entity_formatting_assistant fa(fd, ctx, ownership_hierarchy(), file_type());
-    const auto r(forward_declarations_formatter_stitch(fa, fd));
+    assistant a(ctx, ownership_hierarchy(), file_type());
+    const auto r(forward_declarations_formatter_stitch(a, fd));
     return r;
 }
 

@@ -27,7 +27,7 @@
 
 #include <ostream>
 #include <boost/optional.hpp>
-#include "dogen/quilt.cpp/types/formatters/entity_formatting_assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formattables/registrar_info.hpp"
 
 namespace dogen {
@@ -37,8 +37,7 @@ namespace formatters {
 namespace serialization {
 
 dogen::formatters::file  registrar_header_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::registrar_info& ri);
+    assistant& a, const formattables::registrar_info& ri);
 
 } } } } }
 

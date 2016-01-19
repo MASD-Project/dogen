@@ -27,22 +27,21 @@ namespace formatters {
 namespace types {
 
 dogen::formatters::file namespace_header_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::namespace_info& n) {
+    assistant& a, const formattables::namespace_info& n) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(fa.make_scoped_namespace_formatter());
-fa.stream() << std::endl;
-            fa.comment(n.documentation());
-fa.stream() << "namespace " << n.name() << " {" << std::endl;
-fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
+            auto snf(a.make_scoped_namespace_formatter(n.namespaces()));
+a.stream() << std::endl;
+            a.comment(n.documentation());
+a.stream() << "namespace " << n.name() << " {" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
         } // snf
-fa.stream() << std::endl;
+a.stream() << std::endl;
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 
 } } } } }

@@ -28,21 +28,20 @@ namespace formatters {
 namespace odb {
 
 dogen::formatters::file enum_header_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::enum_info& /*e*/) {
+    assistant& a, const formattables::enum_info& e) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(fa.make_scoped_namespace_formatter());
-fa.stream() << std::endl;
-fa.stream() << "#ifdef ODB_COMPILER" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "#endif" << std::endl;
-fa.stream() << std::endl;
+            auto snf(a.make_scoped_namespace_formatter(e.namespaces()));
+a.stream() << std::endl;
+a.stream() << "#ifdef ODB_COMPILER" << std::endl;
+a.stream() << std::endl;
+a.stream() << "#endif" << std::endl;
+a.stream() << std::endl;
         } // snf
-fa.stream() << std::endl;
+a.stream() << std::endl;
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 } } } } }

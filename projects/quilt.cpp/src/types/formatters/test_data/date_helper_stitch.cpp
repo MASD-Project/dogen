@@ -27,14 +27,14 @@ namespace formatters {
 namespace test_data {
 
 void date_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
+    nested_type_formatting_assistant& a,
     const formattables::nested_type_info& t) {
-fa.stream() << std::endl;
-fa.stream() << t.complete_name() << std::endl;
-fa.stream() << "create_" << t.complete_identifiable_name() << "(const unsigned int position) {" << std::endl;
-fa.stream() << "    unsigned int day((position + 1) % 27);" << std::endl;
-fa.stream() << "    boost::gregorian::date r(2002, 2, day);" << std::endl;
-fa.stream() << "    return r;" << std::endl;
-fa.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << t.complete_name() << std::endl;
+a.stream() << "create_" << t.complete_identifiable_name() << "(const unsigned int position) {" << std::endl;
+a.stream() << "    unsigned int day((position + 1) % 27);" << std::endl;
+a.stream() << "    boost::gregorian::date r(2002, 2, day);" << std::endl;
+a.stream() << "    return r;" << std::endl;
+a.stream() << "}" << std::endl;
 }
 } } } } }

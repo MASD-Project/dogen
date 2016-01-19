@@ -28,39 +28,38 @@ namespace formatters {
 namespace test_data {
 
 dogen::formatters::file class_header_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::class_info& c) {
+    assistant& a, const formattables::class_info& c) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(fa.make_scoped_namespace_formatter());
+            auto snf(a.make_scoped_namespace_formatter(c.namespaces()));
 
-fa.stream() << std::endl;
-fa.stream() << "class " << c.name() << "_generator {" << std::endl;
-fa.stream() << "public:" << std::endl;
-fa.stream() << "    " << c.name() << "_generator();" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "public:" << std::endl;
-fa.stream() << "    typedef " << c.qualified_name() << " result_type;" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "public:" << std::endl;
+a.stream() << std::endl;
+a.stream() << "class " << c.name() << "_generator {" << std::endl;
+a.stream() << "public:" << std::endl;
+a.stream() << "    " << c.name() << "_generator();" << std::endl;
+a.stream() << std::endl;
+a.stream() << "public:" << std::endl;
+a.stream() << "    typedef " << c.qualified_name() << " result_type;" << std::endl;
+a.stream() << std::endl;
+a.stream() << "public:" << std::endl;
             if (!c.is_immutable())
-fa.stream() << "    static void populate(const unsigned int position, result_type& v);" << std::endl;
+a.stream() << "    static void populate(const unsigned int position, result_type& v);" << std::endl;
             if (!c.is_parent()) {
-fa.stream() << "    static result_type create(const unsigned int position);" << std::endl;
-fa.stream() << "    result_type operator()();" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "private:" << std::endl;
-fa.stream() << "    unsigned int position_;" << std::endl;
+a.stream() << "    static result_type create(const unsigned int position);" << std::endl;
+a.stream() << "    result_type operator()();" << std::endl;
+a.stream() << std::endl;
+a.stream() << "private:" << std::endl;
+a.stream() << "    unsigned int position_;" << std::endl;
             }
-fa.stream() << "public:" << std::endl;
-fa.stream() << "    static result_type* create_ptr(const unsigned int position);" << std::endl;
-fa.stream() << "};" << std::endl;
-fa.stream() << std::endl;
+a.stream() << "public:" << std::endl;
+a.stream() << "    static result_type* create_ptr(const unsigned int position);" << std::endl;
+a.stream() << "};" << std::endl;
+a.stream() << std::endl;
         } // snf
-fa.stream() << std::endl;
+a.stream() << std::endl;
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 } } } } }

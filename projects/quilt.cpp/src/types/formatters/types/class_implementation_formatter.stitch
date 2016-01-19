@@ -1,7 +1,7 @@
 <#@ licence_name=gpl_v3 #>
 <#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
 <#@ modeline_group_name=emacs #>
-<#@ stream_variable_name=fa.stream() #>
+<#@ stream_variable_name=a.stream() #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/class_implementation_formatter_stitch.hpp" #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp" #>
 <#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
@@ -9,15 +9,14 @@
 <#+
 
 dogen::formatters::file class_implementation_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::class_info& c) {
+    assistant& a, const formattables::class_info& c) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
-        fa.add_helper_methods();
+        auto sbf(a.make_scoped_boilerplate_formatter());
+        a.add_helper_methods(c);
 
         {
-            auto snf(fa.make_scoped_namespace_formatter());
+            auto snf(a.make_scoped_namespace_formatter(c.namespaces()));
 
             /*
              * Default constructor.
@@ -38,7 +37,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
                     if (!is_first)
                         ss << "," << std::endl << "      ";
 
-                    ss << fa.make_member_variable_name(p)
+                    ss << a.make_member_variable_name(p)
                        << "(static_cast<" << p.type().complete_name()
                        << ">(0))";
 
@@ -74,7 +73,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
 
                 for (const auto p : c.properties()) {
 #>
-    <#= sf.prefix() #><#= fa.make_member_variable_name(p) #>(std::move(rhs.<#= fa.make_member_variable_name(p) #>))<#= sf.postfix() #>
+    <#= sf.prefix() #><#= a.make_member_variable_name(p) #>(std::move(rhs.<#= a.make_member_variable_name(p) #>))<#= sf.postfix() #>
 <#+
                     sf.next();
                 }
@@ -83,13 +82,13 @@ dogen::formatters::file class_implementation_formatter_stitch(
             /*
              * Complete constructor.
              */
-            if (!fa.is_complete_constructor_disabled() && !c.all_properties().empty()) {
+            if (!a.is_complete_constructor_disabled() && !c.all_properties().empty()) {
                 const auto prop_count(c.all_properties().size());
                 if (prop_count == 1) {
                      const auto p(*c.all_properties().begin());
 #>
 
-<#= c.name() #>::<#= c.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #>)
+<#= c.name() #>::<#= c.name() #>(const <#= p.type().complete_name() #><#= a.make_by_ref_text(p) #> <#= p.name() #>)
 <#+
                 } else {
 #>
@@ -101,7 +100,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
                     sf.postfix_configuration().last(")");
                     for (const auto p : c.all_properties()) {
 #>
-    const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #><#= sf.postfix() #>
+    const <#= p.type().complete_name() #><#= a.make_by_ref_text(p) #> <#= p.name() #><#= sf.postfix() #>
 <#+
                         sf.next();
                     }
@@ -143,7 +142,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
 
                 for (const auto p : c.properties()) {
 #>
-    <#= sf.prefix() #><#= fa.make_member_variable_name(p) #>(<#= p.name() #>)<#= sf.postfix() #>
+    <#= sf.prefix() #><#= a.make_member_variable_name(p) #>(<#= p.name() #>)<#= sf.postfix() #>
 <#+
                     sf.next();
                 }
@@ -152,13 +151,13 @@ dogen::formatters::file class_implementation_formatter_stitch(
             /*
              * Streaming
              */
-            if (fa.is_io_enabled()) {
+            if (a.is_io_enabled()) {
                 if (c.is_parent() || !c.parents().empty()) {
 #>
 
 void <#= c.name() #>::to_stream(std::ostream& s) const {
 <#+
-                io::inserter_implementation_helper_stitch(fa, c, true/*inside_class*/);
+                io::inserter_implementation_helper_stitch(a, c, true/*inside_class*/);
 #>
 }
 <#+
@@ -189,7 +188,7 @@ void <#= c.name() #>::swap(<#= c.name() #>&<#= (empty ? "" : " other") #>) noexc
 <#+
                    for (const auto p : c.properties())
 #>
-    swap(<#= fa.make_member_variable_name(p) #>, other.<#= fa.make_member_variable_name(p) #>);
+    swap(<#= a.make_member_variable_name(p) #>, other.<#= a.make_member_variable_name(p) #>);
 <#+
                }
 #>
@@ -254,7 +253,7 @@ bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_prope
                 sf.postfix_configuration().last(";").not_last(" &&");
                 for (const auto p : c.properties()) {
 #>
-    <#= sf.prefix() #><#= fa.make_member_variable_name(p) #> == rhs.<#= fa.make_member_variable_name(p) #><#= sf.postfix() #>
+    <#= sf.prefix() #><#= a.make_member_variable_name(p) #> == rhs.<#= a.make_member_variable_name(p) #><#= sf.postfix() #>
 <#+
                     sf.next();
                 }
@@ -285,14 +284,14 @@ bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_prope
 #>
 
 <#= p.type().complete_name() #> <#= c.name() #>::<#= p.name() #>() const {
-    return <#= fa.make_member_variable_name(p) #>;
+    return <#= a.make_member_variable_name(p) #>;
 }
 <#+
                     if (!c.is_immutable()) {
 #>
 
 <#= (p.is_fluent() ? c.name() + "&" : "void") #> <#= c.name() #>::<#= p.name() #>(const <#= p.type().complete_name() #> v) {
-    <#= fa.make_member_variable_name(p) #> = v;
+    <#= a.make_member_variable_name(p) #> = v;
 <#+
                         if (p.is_fluent()) {
 #>
@@ -307,18 +306,18 @@ bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_prope
 #>
 
 const <#= p.type().complete_name() #>& <#= c.name() #>::<#= p.name() #>() const {
-    return <#= fa.make_member_variable_name(p) #>;
+    return <#= a.make_member_variable_name(p) #>;
 }
 <#+
                     if (!c.is_immutable()) {
 #>
 
 <#= p.type().complete_name() #>& <#= c.name() #>::<#= p.name() #>() {
-    return <#= fa.make_member_variable_name(p) #>;
+    return <#= a.make_member_variable_name(p) #>;
 }
 
 <#= (p.is_fluent() ? c.name() + "&" : "void") #> <#= c.name() #>::<#= p.name() #>(const <#= p.type().complete_name() #>& v) {
-    <#= fa.make_member_variable_name(p) #> = v;
+    <#= a.make_member_variable_name(p) #> = v;
 <#+
                         if (p.is_fluent()) {
 #>
@@ -329,7 +328,7 @@ const <#= p.type().complete_name() #>& <#= c.name() #>::<#= p.name() #>() const 
 }
 
 <#= (p.is_fluent() ? c.name() + "&" : "void") #> <#= c.name() #>::<#= p.name() #>(const <#= p.type().complete_name() #>&& v) {
-    <#= fa.make_member_variable_name(p) #> = std::move(v);
+    <#= a.make_member_variable_name(p) #> = std::move(v);
 <#+
                         if (p.is_fluent()) {
 #>
@@ -347,7 +346,7 @@ const <#= p.type().complete_name() #>& <#= c.name() #>::<#= p.name() #>() const 
 <#+
         } // snf
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 
 #>

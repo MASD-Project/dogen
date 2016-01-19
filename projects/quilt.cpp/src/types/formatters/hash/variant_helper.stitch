@@ -1,13 +1,13 @@
 <#@ licence_name=gpl_v3 #>
 <#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
 <#@ modeline_group_name=emacs #>
-<#@ stream_variable_name=fa.stream() #>
+<#@ stream_variable_name=a.stream() #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/hash/variant_helper_stitch.hpp" #>
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::hash #>
 <#+
 
 void variant_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
+    nested_type_formatting_assistant& a,
     const formattables::nested_type_info& t) {
 #>
 
@@ -19,7 +19,7 @@ struct <#= t.complete_identifiable_name() #>_visitor : public boost::static_visi
 #>
     void operator()(const <#= c.name() #><#= (c.is_primitive() ? "" : "&") #> v) const {
 <#+
-        if (!fa.requires_hashing_helper_method(c))
+        if (!a.requires_hashing_helper_method(c))
 #>
         combine(hash, v);
 <#+

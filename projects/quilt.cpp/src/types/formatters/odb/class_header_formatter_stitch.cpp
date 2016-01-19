@@ -28,45 +28,44 @@ namespace formatters {
 namespace odb {
 
 dogen::formatters::file class_header_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::class_info& c) {
+    assistant& a, const formattables::class_info& c) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
-        const auto odbs(fa.get_odb_settings());
+        auto sbf(a.make_scoped_boilerplate_formatter());
+        const auto odbs(a.get_odb_settings());
         if (!odbs || odbs->pragmas().empty()) {
-fa.stream() << "// class has no ODB pragmas defined." << std::endl;
-fa.stream() << std::endl;
+a.stream() << "// class has no ODB pragmas defined." << std::endl;
+a.stream() << std::endl;
         } else {
             {
-                auto snf(fa.make_scoped_namespace_formatter());
+                auto snf(a.make_scoped_namespace_formatter(c.namespaces()));
 
-fa.stream() << std::endl;
-fa.stream() << "#ifdef ODB_COMPILER" << std::endl;
-fa.stream() << std::endl;
+a.stream() << std::endl;
+a.stream() << "#ifdef ODB_COMPILER" << std::endl;
+a.stream() << std::endl;
                 const std::string odb_key("odb_pragma");
                 for (const auto& pg : odbs->pragmas())
-fa.stream() << "#pragma db object(" << c.name() << ") " << pg << std::endl;
+a.stream() << "#pragma db object(" << c.name() << ") " << pg << std::endl;
 
                 bool is_first(true);
                 for (const auto p : c.properties()) {
-                    const auto podbs(fa.get_odb_settings(p.id()));
+                    const auto podbs(a.get_odb_settings(p.id()));
                     if (podbs) {
                         for (const auto pg : podbs->pragmas()) {
                             if (is_first)
-fa.stream() << std::endl;
+a.stream() << std::endl;
                             is_first = false;
-fa.stream() << "#pragma db member(" << c.name() << "::" << fa.make_member_variable_name(p) << ") " << pg << std::endl;
+a.stream() << "#pragma db member(" << c.name() << "::" << a.make_member_variable_name(p) << ") " << pg << std::endl;
                         }
                     }
                 }
-fa.stream() << std::endl;
-fa.stream() << "#endif" << std::endl;
-fa.stream() << std::endl;
+a.stream() << std::endl;
+a.stream() << "#endif" << std::endl;
+a.stream() << std::endl;
             }
-fa.stream() << std::endl;
+a.stream() << std::endl;
         }
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 } } } } }

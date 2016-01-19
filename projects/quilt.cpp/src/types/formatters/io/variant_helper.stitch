@@ -1,17 +1,17 @@
 <#@ licence_name=gpl_v3 #>
 <#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
 <#@ modeline_group_name=emacs #>
-<#@ stream_variable_name=fa.stream() #>
+<#@ stream_variable_name=a.stream() #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/variant_helper_stitch.hpp" #>
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::io #>
 <#+
 
 void variant_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
+    nested_type_formatting_assistant& a,
     const formattables::nested_type_info& t) {
 
     {
-        auto snf(fa.make_scoped_namespace_formatter(t));
+        auto snf(a.make_scoped_namespace_formatter(t.namespaces()));
 #>
 
 struct <#= t.complete_identifiable_name() #>_visitor : public boost::static_visitor<> {
@@ -31,12 +31,12 @@ struct <#= t.complete_identifiable_name() #>_visitor : public boost::static_visi
 #>
         stream_ << "{ " << "\"__type__\": " << "\"<#= c.name() #>\"" << ", ";
         stream_ << "\"value\": ";
-        stream_ << <#= fa.streaming_for_type(c, "v") #>;
+        stream_ << <#= a.streaming_for_type(c, "v") #>;
         stream_ << " }";
 <#+
             } else
 #>
-        stream_ << <#= fa.streaming_for_type(c, "v") #>;
+        stream_ << <#= a.streaming_for_type(c, "v") #>;
     }
 <#+
         }

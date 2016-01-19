@@ -27,7 +27,7 @@
 
 #include <ostream>
 #include "dogen/quilt.cpp/types/formattables/class_info.hpp"
-#include "dogen/quilt.cpp/types/formatters/entity_formatting_assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -36,8 +36,7 @@ namespace formatters {
 namespace io {
 
 void inserter_implementation_helper_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::class_info& ci,
+    assistant& a, const formattables::class_info& ci,
     const bool inside_class);
 
 } } } } }

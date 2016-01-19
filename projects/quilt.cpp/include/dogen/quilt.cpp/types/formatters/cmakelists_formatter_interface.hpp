@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/formatters/types/file.hpp"
+#include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/formattables/cmakelists_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
 
@@ -46,8 +47,8 @@ public:
     /**
      * @brief Generate a c++ representation for the CMakeLists.
      */
-    virtual dogen::formatters::file
-    format(const formattables::cmakelists_info& c) const = 0;
+    virtual dogen::formatters::file format(const context& ctx,
+        const formattables::cmakelists_info& c) const = 0;
 };
 
 } } } }

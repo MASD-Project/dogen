@@ -1,14 +1,14 @@
 <#@ licence_name=gpl_v3 #>
 <#@ copyright_notice=Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com> #>
 <#@ modeline_group_name=emacs #>
-<#@ stream_variable_name=fa.stream() #>
+<#@ stream_variable_name=a.stream() #>
 <#@ inclusion_dependency="dogen/formatters/types/cpp/scoped_namespace_formatter.hpp" #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/hash/associative_container_helper_stitch.hpp" #>
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::hash #>
 <#+
 
 void associative_container_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
+    nested_type_formatting_assistant& a,
     const formattables::nested_type_info& t) {
 
     const auto key(t.children().front());
@@ -19,7 +19,7 @@ inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.comple
     std::size_t seed(0);
     for (const auto i : v) {
 <#+
-    if (!fa.requires_hashing_helper_method(key))
+    if (!a.requires_hashing_helper_method(key))
 #>
         combine(seed, i.first);
 <#+
@@ -28,7 +28,7 @@ inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.comple
         combine(seed, hash_<#= key.complete_identifiable_name() #>(i.first));
 <#+
 
-    if (!fa.requires_hashing_helper_method(value))
+    if (!a.requires_hashing_helper_method(value))
 #>
         combine(seed, i.second);
 <#+

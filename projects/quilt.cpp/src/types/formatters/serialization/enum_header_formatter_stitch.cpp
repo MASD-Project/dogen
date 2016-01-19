@@ -28,23 +28,21 @@ namespace formatters {
 namespace serialization {
 
 dogen::formatters::file enum_header_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::enum_info& e) {
+    assistant& a, const formattables::enum_info& e) {
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
-fa.stream() << std::endl;
-fa.stream() << "template<class Archive>" << std::endl;
-fa.stream() << "void serialize(Archive& ar, " << e.qualified_name() << "& v, unsigned int /*version*/){" << std::endl;
-        if (!fa.is_xml_serialization_disabled()) {
-fa.stream() << "    using boost::serialization::make_nvp;" << std::endl;
-fa.stream() << "    ar & make_nvp(\"" << e.name() << "\", v);" << std::endl;
+        auto sbf(a.make_scoped_boilerplate_formatter());
+a.stream() << std::endl;
+a.stream() << "template<class Archive>" << std::endl;
+a.stream() << "void serialize(Archive& ar, " << e.qualified_name() << "& v, unsigned int /*version*/){" << std::endl;
+        if (!a.is_xml_serialization_disabled()) {
+a.stream() << "    using boost::serialization::make_nvp;" << std::endl;
+a.stream() << "    ar & make_nvp(\"" << e.name() << "\", v);" << std::endl;
         } else {
-fa.stream() << "    ar & v;" << std::endl;
+a.stream() << "    ar & v;" << std::endl;
         }
-fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
     } // sbf
-    return fa.make_file();
-    // return fa.make_file(false/*overwrite*/);
+    return a.make_file();
 }
 } } } } }

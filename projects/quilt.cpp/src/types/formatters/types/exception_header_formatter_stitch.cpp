@@ -27,34 +27,33 @@ namespace formatters {
 namespace types {
 
 dogen::formatters::file exception_header_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::exception_info& e) {
+    assistant& a, const formattables::exception_info& e) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(fa.make_scoped_namespace_formatter());
-fa.stream() << std::endl;
-            fa.comment(e.documentation());
-fa.stream() << "class " << e.name() << " : public virtual std::exception, public virtual boost::exception {" << std::endl;
-fa.stream() << "public:" << std::endl;
-fa.stream() << "    " << e.name() << "() = default;" << std::endl;
-fa.stream() << "    ~" << e.name() << "() noexcept = default;" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "public:" << std::endl;
-fa.stream() << "    " << e.name() << "(const std::string& message) : message_(message) { }" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "public:" << std::endl;
-fa.stream() << "    const char* what() const noexcept { return(message_.c_str()); }" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "private:" << std::endl;
-fa.stream() << "    const std::string message_;" << std::endl;
-fa.stream() << "};" << std::endl;
-fa.stream() << std::endl;
+            auto snf(a.make_scoped_namespace_formatter(e.namespaces()));
+a.stream() << std::endl;
+            a.comment(e.documentation());
+a.stream() << "class " << e.name() << " : public virtual std::exception, public virtual boost::exception {" << std::endl;
+a.stream() << "public:" << std::endl;
+a.stream() << "    " << e.name() << "() = default;" << std::endl;
+a.stream() << "    ~" << e.name() << "() noexcept = default;" << std::endl;
+a.stream() << std::endl;
+a.stream() << "public:" << std::endl;
+a.stream() << "    " << e.name() << "(const std::string& message) : message_(message) { }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "public:" << std::endl;
+a.stream() << "    const char* what() const noexcept { return(message_.c_str()); }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "private:" << std::endl;
+a.stream() << "    const std::string message_;" << std::endl;
+a.stream() << "};" << std::endl;
+a.stream() << std::endl;
         } // snf
-fa.stream() << std::endl;
+a.stream() << std::endl;
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 
 } } } } }

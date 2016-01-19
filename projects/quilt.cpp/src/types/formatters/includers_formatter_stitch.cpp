@@ -27,13 +27,12 @@ namespace cpp {
 namespace formatters {
 
 dogen::formatters::file includers_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::includers_info& /*i*/) {
+    assistant& a, const formattables::includers_info& /*i*/) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
-fa.stream() << std::endl;
+        auto sbf(a.make_scoped_boilerplate_formatter());
+a.stream() << std::endl;
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 } } } }

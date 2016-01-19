@@ -21,7 +21,7 @@
 #include <boost/make_shared.hpp>
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/trivial_formatting_assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
@@ -90,9 +90,10 @@ void odb_options_formatter::register_inclusion_dependencies_provider(
 }
 
 dogen::formatters::file
-odb_options_formatter::format(const formattables::odb_options_info& o) const {
-    trivial_formatting_assistant fa;
-    const auto r(odb_options_formatter_stitch(fa, o));
+odb_options_formatter::format(const context& ctx,
+    const formattables::odb_options_info& o) const {
+    assistant a(ctx, ownership_hierarchy(), file_type());
+    const auto r(odb_options_formatter_stitch(a, o));
     return r;
 }
 

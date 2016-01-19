@@ -27,7 +27,7 @@
 
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_options_info.hpp"
-#include "dogen/quilt.cpp/types/formatters/trivial_formatting_assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -36,8 +36,7 @@ namespace formatters {
 namespace odb {
 
 dogen::formatters::file odb_options_formatter_stitch(
-    formatters::trivial_formatting_assistant& fa,
-    const formattables::odb_options_info& fd);
+    assistant& a, const formattables::odb_options_info& fd);
 
 } } } } }
 

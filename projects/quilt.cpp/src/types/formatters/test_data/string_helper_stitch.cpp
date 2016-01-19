@@ -28,13 +28,13 @@ namespace formatters {
 namespace test_data {
 
 void string_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
+    nested_type_formatting_assistant& a,
     const formattables::nested_type_info& /*t*/) {
-fa.stream() << std::endl;
-fa.stream() << "std::string create_std_string(const unsigned int position) {" << std::endl;
-fa.stream() << "    std::ostringstream s;" << std::endl;
-fa.stream() << "    s << \"a_string_\" << position;" << std::endl;
-fa.stream() << "    return s.str();" << std::endl;
-fa.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "std::string create_std_string(const unsigned int position) {" << std::endl;
+a.stream() << "    std::ostringstream s;" << std::endl;
+a.stream() << "    s << \"a_string_\" << position;" << std::endl;
+a.stream() << "    return s.str();" << std::endl;
+a.stream() << "}" << std::endl;
 }
 } } } } }

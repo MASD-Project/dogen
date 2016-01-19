@@ -27,22 +27,22 @@ namespace formatters {
 namespace hash {
 
 void optional_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
+    nested_type_formatting_assistant& a,
     const formattables::nested_type_info& t) {
 
     const auto containee(t.children().front());
-fa.stream() << std::endl;
-fa.stream() << "inline std::size_t hash_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
-fa.stream() << "    std::size_t seed(0);" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "    if (!v)" << std::endl;
-fa.stream() << "        return seed;" << std::endl;
-fa.stream() << std::endl;
-    if (!fa.requires_hashing_helper_method(containee))
-fa.stream() << "    combine(seed, *v);" << std::endl;
+a.stream() << std::endl;
+a.stream() << "inline std::size_t hash_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
+a.stream() << "    std::size_t seed(0);" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    if (!v)" << std::endl;
+a.stream() << "        return seed;" << std::endl;
+a.stream() << std::endl;
+    if (!a.requires_hashing_helper_method(containee))
+a.stream() << "    combine(seed, *v);" << std::endl;
     else
-fa.stream() << "    combine(seed, hash_" << containee.complete_identifiable_name() << "(*v));" << std::endl;
-fa.stream() << "    return seed;" << std::endl;
-fa.stream() << "}" << std::endl;
+a.stream() << "    combine(seed, hash_" << containee.complete_identifiable_name() << "(*v));" << std::endl;
+a.stream() << "    return seed;" << std::endl;
+a.stream() << "}" << std::endl;
 }
 } } } } }

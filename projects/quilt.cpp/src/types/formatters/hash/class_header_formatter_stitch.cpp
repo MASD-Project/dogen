@@ -28,33 +28,32 @@ namespace formatters {
 namespace hash {
 
 dogen::formatters::file class_header_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::class_info& c) {
+    assistant& a, const formattables::class_info& c) {
 
     {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(fa.make_scoped_namespace_formatter());
-fa.stream() << std::endl;
-fa.stream() << "struct " << c.name() << "_hasher {" << std::endl;
-fa.stream() << "public:" << std::endl;
-fa.stream() << "    static std::size_t hash(const " << c.name() << "& v);" << std::endl;
-fa.stream() << "};" << std::endl;
-fa.stream() << std::endl;
+            auto snf(a.make_scoped_namespace_formatter(c.namespaces()));
+a.stream() << std::endl;
+a.stream() << "struct " << c.name() << "_hasher {" << std::endl;
+a.stream() << "public:" << std::endl;
+a.stream() << "    static std::size_t hash(const " << c.name() << "& v);" << std::endl;
+a.stream() << "};" << std::endl;
+a.stream() << std::endl;
         } // snf
-fa.stream() << std::endl;
-fa.stream() << "namespace std {" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "template<>" << std::endl;
-fa.stream() << "struct hash<" << c.qualified_name() << "> {" << std::endl;
-fa.stream() << "public:" << std::endl;
-fa.stream() << "    size_t operator()(const " << c.qualified_name() << "& v) const {" << std::endl;
-fa.stream() << "        return " << c.qualified_name() << "_hasher::hash(v);" << std::endl;
-fa.stream() << "    }" << std::endl;
-fa.stream() << "};" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "namespace std {" << std::endl;
+a.stream() << std::endl;
+a.stream() << "template<>" << std::endl;
+a.stream() << "struct hash<" << c.qualified_name() << "> {" << std::endl;
+a.stream() << "public:" << std::endl;
+a.stream() << "    size_t operator()(const " << c.qualified_name() << "& v) const {" << std::endl;
+a.stream() << "        return " << c.qualified_name() << "_hasher::hash(v);" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << "};" << std::endl;
+a.stream() << std::endl;
+a.stream() << "}" << std::endl;
     } // sbf
-    return fa.make_file();
+    return a.make_file();
 }
 } } } } }
