@@ -6835,6 +6835,21 @@ This may also make sense for the front-end, but less so.
 
 See [[http://apolukhin.github.io/Boost.DLL/index.html][Boost.DLL]].
 
+An interesting logical conclusion for this would be that - if stitch
+generated all of the infrastructure required to create a new
+formatter - we should have a tool that creates all of the
+infrastructure to build the stitch template into a shared object. This
+would mean generating CMakeLists with right targets, conan file to
+pull in dogen dependencies, etc and possibly even having a target to
+call dogen loading the SO. In terms of conan - since we need to have
+the dogen package installed, we probably should just require users to
+install the dev package too. Or perhaps dogen as a tool (e.g. the
+EXEs) could also be provided via conan? If we go for packages, we
+should generate an "install script" to install all the required
+dependencies, including compiler and so on.
+
+We can either extend dogen or create a new utility for this.
+
 *** Improving test data generation via SML "reflection"               :story:
 
 A really random but perhaps implementable idea: to create a
