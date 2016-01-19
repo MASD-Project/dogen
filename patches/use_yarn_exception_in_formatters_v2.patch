@@ -1,0 +1,172 @@
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/assistant.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/assistant.hpp
+index 3a01211..5241f67 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/assistant.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/assistant.hpp
+@@ -33,6 +33,7 @@
+ #include <boost/iostreams/filtering_stream.hpp>
+ #include "dogen/dynamic/types/ownership_hierarchy.hpp"
+ #include "dogen/formatters/types/file.hpp"
++#include "dogen/yarn/types/name.hpp"
+ #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
+ #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
+ #include "dogen/quilt.cpp/types/settings/odb_settings.hpp"
+@@ -113,7 +114,12 @@ public:
+     std::string make_getter_setter_name(
+         const formattables::property_info& p) const;
+ 
+-public:
++    /**
++     * @brief returns the c++ namespaces for the name.
++     */
++    std::list<std::string> make_namespaces(const yarn::name& n) const;
++
++ public:
+     /**
+      * @brief Returns true if serialization is enabled.
+      */
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/exception_formatter_interface.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/exception_formatter_interface.hpp
+index 2d4a02d..5b17928 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/exception_formatter_interface.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/exception_formatter_interface.hpp
+@@ -26,8 +26,8 @@
+ #endif
+ 
+ #include "dogen/formatters/types/file.hpp"
++#include "dogen/yarn/types/exception.hpp"
+ #include "dogen/quilt.cpp/types/formatters/context.hpp"
+-#include "dogen/quilt.cpp/types/formattables/exception_info.hpp"
+ #include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
+ 
+ namespace dogen {
+@@ -48,7 +48,7 @@ public:
+      * @brief Generate a c++ representation for the type.
+      */
+     virtual dogen::formatters::file
+-    format(const context& ctx, const formattables::exception_info& e) const = 0;
++    format(const context& ctx, const yarn::exception& e) const = 0;
+ };
+ 
+ } } } }
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/exception_header_formatter.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/exception_header_formatter.hpp
+index 964871c..a366d01 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/exception_header_formatter.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/exception_header_formatter.hpp
+@@ -58,7 +58,7 @@ public:
+         formattables::registrar& rg) const override;
+ 
+     dogen::formatters::file format(const context& ctx,
+-        const formattables::exception_info& c) const override;
++        const yarn::exception& c) const override;
+ };
+ 
+ } } } } }
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/exception_header_formatter_stitch.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/exception_header_formatter_stitch.hpp
+index 18bd63e..d98bed7 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/exception_header_formatter_stitch.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/exception_header_formatter_stitch.hpp
+@@ -26,8 +26,8 @@
+ #endif
+ 
+ #include "dogen/formatters/types/file.hpp"
++#include "dogen/yarn/types/exception.hpp"
+ #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
+-#include "dogen/quilt.cpp/types/formattables/exception_info.hpp"
+ 
+ namespace dogen {
+ namespace quilt {
+@@ -36,7 +36,7 @@ namespace formatters {
+ namespace types {
+ 
+ dogen::formatters::file exception_header_formatter_stitch(
+-    assistant& a, const formattables::exception_info& e);
++    assistant& a, const yarn::exception& e);
+ 
+ } } } } }
+ 
+diff --git a/projects/quilt.cpp/src/types/formatters/assistant.cpp b/projects/quilt.cpp/src/types/formatters/assistant.cpp
+index e006213..776c7fa 100644
+--- a/projects/quilt.cpp/src/types/formatters/assistant.cpp
++++ b/projects/quilt.cpp/src/types/formatters/assistant.cpp
+@@ -132,6 +132,10 @@ std::string assistant::make_getter_setter_name(
+     return p.name();
+ }
+ 
++std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
++
++}
++
+ bool assistant::
+ is_formatter_enabled(const std::string& formatter_name) const {
+     const auto fp(obtain_formatter_properties(formatter_name));
+diff --git a/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.cpp
+index 97dd5d8..cf7053f 100644
+--- a/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.cpp
+@@ -55,7 +55,7 @@ std::string provider::formatter_name() const {
+ 
+ boost::optional<std::list<std::string> >
+ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
+-    const yarn::exception& /*o*/) const {
++    const yarn::exception& /*e*/) const {
+     auto builder(f.make());
+     builder.add(inclusion_constants::std::string());
+     builder.add(inclusion_constants::boost::exception::info());
+@@ -92,7 +92,7 @@ void exception_header_formatter::register_inclusion_dependencies_provider(
+ }
+ 
+ dogen::formatters::file exception_header_formatter::
+-format(const context& ctx, const formattables::exception_info& e) const {
++format(const context& ctx, const yarn::exception& e) const {
+     assistant a(ctx, ownership_hierarchy(), file_type());
+     const auto r(exception_header_formatter_stitch(a, e));
+     return r;
+diff --git a/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.stitch b/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.stitch
+index 4457505..34ee91b 100644
+--- a/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.stitch
++++ b/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.stitch
+@@ -7,7 +7,7 @@
+ <#+
+ 
+ dogen::formatters::file exception_header_formatter_stitch(
+-    assistant& a, const formattables::exception_info& e) {
++    assistant& a, const yarn::exception& e) {
+ 
+     {
+         auto sbf(a.make_scoped_boilerplate_formatter());
+@@ -18,13 +18,13 @@ dogen::formatters::file exception_header_formatter_stitch(
+ <#+
+             a.comment(e.documentation());
+ #>
+-class <#= e.name() #> : public virtual std::exception, public virtual boost::exception {
++class <#= e.name().simple() #> : public virtual std::exception, public virtual boost::exception {
+ public:
+-    <#= e.name() #>() = default;
+-    ~<#= e.name() #>() noexcept = default;
++    <#= e.name().simple() #>() = default;
++    ~<#= e.name().simple() #>() noexcept = default;
+ 
+ public:
+-    <#= e.name() #>(const std::string& message) : message_(message) { }
++    <#= e.name().simple() #>(const std::string& message) : message_(message) { }
+ 
+ public:
+     const char* what() const noexcept { return(message_.c_str()); }
+diff --git a/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter_stitch.cpp b/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter_stitch.cpp
+index 7056906..b103736 100644
+--- a/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter_stitch.cpp
++++ b/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter_stitch.cpp
+@@ -27,12 +27,12 @@ namespace formatters {
+ namespace types {
+ 
+ dogen::formatters::file exception_header_formatter_stitch(
+-    assistant& a, const formattables::exception_info& e) {
++    assistant& a, const yarn::exception& e) {
+ 
+     {
+         auto sbf(a.make_scoped_boilerplate_formatter());
+         {
+-            auto snf(a.make_scoped_namespace_formatter(e.namespaces()));
++            // auto snf(a.make_scoped_namespace_formatter(e.namespaces()));
+ a.stream() << std::endl;
+             a.comment(e.documentation());
+ a.stream() << "class " << e.name() << " : public virtual std::exception, public virtual boost::exception {" << std::endl;
