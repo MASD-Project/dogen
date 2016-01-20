@@ -62,6 +62,18 @@ Tasks:
 - update the yarn formatting workflow to process yarn exceptions;
 - update the stitch templates to make use of yarn exceptions.
 
+*** ODB options file is generated even when disabled                  :story:
+
+At present it seems the file is always generated regardless of the
+meta-data. This is probably due to a typo in the field name.
+
+*** ODB options file is generated to incorrect location               :story:
+
+Models with composite names seem to have their ODB options file
+generated under the =projects= directory, e.g.:
+
+: projects/vtk/geometry/src/options.odb
+
 *** Name builder should take only model name                          :story:
 
 At present name builder requires an entire model just to get the name
