@@ -1,5 +1,5 @@
 diff --git a/diagrams/quilt.cpp.dia b/diagrams/quilt.cpp.dia
-index 4bab216..b4a3d92 100644
+index 2d2bc02..3a29141 100644
 --- a/diagrams/quilt.cpp.dia
 +++ b/diagrams/quilt.cpp.dia
 @@ -1172,117 +1172,6 @@ descend from it. Names are in identifiable name format.#</dia:string>
@@ -1896,9 +1896,9 @@ index 4bab216..b4a3d92 100644
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O265" connection="6"/>
+-        <dia:connection handle="0" to="O264" connection="6"/>
 -        <dia:connection handle="1" to="O144" connection="2"/>
-+        <dia:connection handle="0" to="O263" connection="6"/>
++        <dia:connection handle="0" to="O262" connection="6"/>
 +        <dia:connection handle="1" to="O142" connection="2"/>
        </dia:connections>
        <dia:childnode parent="O1"/>
@@ -2017,7 +2017,7 @@ index 4bab216..b4a3d92 100644
        <dia:attribute name="obj_pos">
          <dia:point val="254,98"/>
        </dia:attribute>
-@@ -18915,12 +18762,12 @@ main, or from another initialiser.#</dia:string>
+@@ -18915,7 +18762,7 @@ main, or from another initialiser.#</dia:string>
          </dia:composite>
        </dia:attribute>
      </dia:object>
@@ -2026,12 +2026,6 @@ index 4bab216..b4a3d92 100644
        <dia:attribute name="obj_pos">
          <dia:point val="261.572,101.3"/>
        </dia:attribute>
-       <dia:attribute name="obj_bb">
--        <dia:rectangle val="255.539,101.234;261.639,104.384"/>
-+        <dia:rectangle val="255.538,101.234;261.638,104.384"/>
-       </dia:attribute>
-       <dia:attribute name="meta">
-         <dia:composite type="dict"/>
 @@ -18945,11 +18792,11 @@ main, or from another initialiser.#</dia:string>
          <dia:point val="258.662,103.15"/>
        </dia:attribute>
@@ -2372,31 +2366,35 @@ index 4bab216..b4a3d92 100644
 -    <dia:object type="UML - Class" version="0" id="O188">
 +    <dia:object type="UML - Class" version="0" id="O186">
        <dia:attribute name="obj_pos">
-         <dia:point val="535,188"/>
+         <dia:point val="259,-55"/>
        </dia:attribute>
-@@ -23997,9 +23844,9 @@ main, or from another initialiser.#</dia:string>
-         <dia:boolean val="false"/>
-       </dia:attribute>
+@@ -23988,7 +23835,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
--      <dia:childnode parent="O16"/>
-+      <dia:childnode parent="O15"/>
+       <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Class" version="0" id="O189">
 +    <dia:object type="UML - Class" version="0" id="O187">
        <dia:attribute name="obj_pos">
-         <dia:point val="259,-55"/>
+         <dia:point val="247,-29"/>
        </dia:attribute>
-@@ -24624,7 +24471,7 @@ main, or from another initialiser.#</dia:string>
+@@ -24123,7 +23970,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O190">
-+    <dia:object type="UML - Class" version="0" id="O188">
-       <dia:attribute name="obj_pos">
-         <dia:point val="247,-29"/>
+-    <dia:object type="UML - Association" version="2" id="O190">
++    <dia:object type="UML - Association" version="2" id="O188">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
        </dia:attribute>
-@@ -24759,7 +24606,7 @@ main, or from another initialiser.#</dia:string>
-       <dia:attribute name="templates"/>
+@@ -24190,12 +24037,12 @@ main, or from another initialiser.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O169" connection="0"/>
+-        <dia:connection handle="1" to="O189" connection="7"/>
++        <dia:connection handle="0" to="O167" connection="0"/>
++        <dia:connection handle="1" to="O187" connection="7"/>
+       </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O191">
@@ -2404,378 +2402,378 @@ index 4bab216..b4a3d92 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -24826,12 +24673,12 @@ main, or from another initialiser.#</dia:string>
+@@ -24262,12 +24109,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O169" connection="0"/>
--        <dia:connection handle="1" to="O190" connection="7"/>
-+        <dia:connection handle="0" to="O167" connection="0"/>
-+        <dia:connection handle="1" to="O188" connection="7"/>
+-        <dia:connection handle="0" to="O196" connection="6"/>
+-        <dia:connection handle="1" to="O215" connection="14"/>
++        <dia:connection handle="0" to="O194" connection="6"/>
++        <dia:connection handle="1" to="O213" connection="14"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Association" version="2" id="O192">
-+    <dia:object type="UML - Association" version="2" id="O190">
-       <dia:attribute name="name">
-         <dia:string>##</dia:string>
+-    <dia:object type="UML - Class" version="0" id="O192">
++    <dia:object type="UML - Class" version="0" id="O190">
+       <dia:attribute name="obj_pos">
+         <dia:point val="226,-14"/>
        </dia:attribute>
-@@ -24898,12 +24745,12 @@ main, or from another initialiser.#</dia:string>
-         <dia:color val="#000000"/>
-       </dia:attribute>
-       <dia:connections>
--        <dia:connection handle="0" to="O197" connection="6"/>
--        <dia:connection handle="1" to="O216" connection="14"/>
-+        <dia:connection handle="0" to="O195" connection="6"/>
-+        <dia:connection handle="1" to="O214" connection="14"/>
-       </dia:connections>
+@@ -24478,7 +24325,7 @@ main, or from another initialiser.#</dia:string>
+       <dia:attribute name="templates"/>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Class" version="0" id="O193">
 +    <dia:object type="UML - Class" version="0" id="O191">
        <dia:attribute name="obj_pos">
-         <dia:point val="226,-14"/>
-       </dia:attribute>
-@@ -25114,7 +24961,7 @@ main, or from another initialiser.#</dia:string>
-       <dia:attribute name="templates"/>
-       <dia:childnode parent="O0"/>
-     </dia:object>
--    <dia:object type="UML - Class" version="0" id="O194">
-+    <dia:object type="UML - Class" version="0" id="O192">
-       <dia:attribute name="obj_pos">
          <dia:point val="202,198"/>
        </dia:attribute>
-@@ -25272,7 +25119,7 @@ main, or from another initialiser.#</dia:string>
+@@ -24636,7 +24483,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
+       <dia:childnode parent="O1"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O194">
++    <dia:object type="UML - Association" version="2" id="O192">
+       <dia:attribute name="name">
+         <dia:string>#&lt; produces#</dia:string>
+       </dia:attribute>
+@@ -24703,12 +24550,12 @@ main, or from another initialiser.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O186" connection="1"/>
+-        <dia:connection handle="1" to="O193" connection="5"/>
++        <dia:connection handle="0" to="O184" connection="1"/>
++        <dia:connection handle="1" to="O191" connection="5"/>
+       </dia:connections>
        <dia:childnode parent="O1"/>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O195">
 +    <dia:object type="UML - Association" version="2" id="O193">
        <dia:attribute name="name">
-         <dia:string>#&lt; produces#</dia:string>
-       </dia:attribute>
-@@ -25339,12 +25186,12 @@ main, or from another initialiser.#</dia:string>
-         <dia:color val="#000000"/>
-       </dia:attribute>
-       <dia:connections>
--        <dia:connection handle="0" to="O186" connection="1"/>
--        <dia:connection handle="1" to="O194" connection="5"/>
-+        <dia:connection handle="0" to="O184" connection="1"/>
-+        <dia:connection handle="1" to="O192" connection="5"/>
-       </dia:connections>
-       <dia:childnode parent="O1"/>
-     </dia:object>
--    <dia:object type="UML - Association" version="2" id="O196">
-+    <dia:object type="UML - Association" version="2" id="O194">
-       <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -25411,12 +25258,12 @@ main, or from another initialiser.#</dia:string>
+@@ -24775,12 +24622,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O193" connection="2"/>
--        <dia:connection handle="1" to="O190" connection="5"/>
-+        <dia:connection handle="0" to="O191" connection="2"/>
-+        <dia:connection handle="1" to="O188" connection="5"/>
+-        <dia:connection handle="0" to="O192" connection="2"/>
+-        <dia:connection handle="1" to="O189" connection="5"/>
++        <dia:connection handle="0" to="O190" connection="2"/>
++        <dia:connection handle="1" to="O187" connection="5"/>
        </dia:connections>
+       <dia:childnode parent="O0"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O196">
++    <dia:object type="UML - Class" version="0" id="O194">
+       <dia:attribute name="obj_pos">
+         <dia:point val="226,-43"/>
+       </dia:attribute>
+@@ -24891,7 +24738,7 @@ main, or from another initialiser.#</dia:string>
+       <dia:attribute name="templates"/>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Class" version="0" id="O197">
 +    <dia:object type="UML - Class" version="0" id="O195">
        <dia:attribute name="obj_pos">
-         <dia:point val="226,-43"/>
-       </dia:attribute>
-@@ -25527,7 +25374,7 @@ main, or from another initialiser.#</dia:string>
-       <dia:attribute name="templates"/>
-       <dia:childnode parent="O0"/>
-     </dia:object>
--    <dia:object type="UML - Class" version="0" id="O198">
-+    <dia:object type="UML - Class" version="0" id="O196">
-       <dia:attribute name="obj_pos">
          <dia:point val="409,188"/>
        </dia:attribute>
-@@ -25667,9 +25514,9 @@ main, or from another initialiser.#</dia:string>
+@@ -25031,9 +24878,9 @@ main, or from another initialiser.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="templates"/>
 -      <dia:childnode parent="O21"/>
 +      <dia:childnode parent="O20"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O199">
-+    <dia:object type="UML - Class" version="0" id="O197">
+-    <dia:object type="UML - Class" version="0" id="O198">
++    <dia:object type="UML - Class" version="0" id="O196">
        <dia:attribute name="obj_pos">
          <dia:point val="236,214"/>
        </dia:attribute>
-@@ -25827,7 +25674,7 @@ main, or from another initialiser.#</dia:string>
+@@ -25191,7 +25038,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O1"/>
      </dia:object>
--    <dia:object type="UML - Association" version="2" id="O200">
-+    <dia:object type="UML - Association" version="2" id="O198">
+-    <dia:object type="UML - Association" version="2" id="O199">
++    <dia:object type="UML - Association" version="2" id="O197">
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -25894,12 +25741,12 @@ main, or from another initialiser.#</dia:string>
+@@ -25258,12 +25105,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O194" connection="7"/>
--        <dia:connection handle="1" to="O199" connection="1"/>
-+        <dia:connection handle="0" to="O192" connection="7"/>
-+        <dia:connection handle="1" to="O197" connection="1"/>
+-        <dia:connection handle="0" to="O193" connection="7"/>
+-        <dia:connection handle="1" to="O198" connection="1"/>
++        <dia:connection handle="0" to="O191" connection="7"/>
++        <dia:connection handle="1" to="O196" connection="1"/>
        </dia:connections>
        <dia:childnode parent="O1"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O200">
++    <dia:object type="UML - Class" version="0" id="O198">
+       <dia:attribute name="obj_pos">
+         <dia:point val="256,52"/>
+       </dia:attribute>
+@@ -25490,7 +25337,7 @@ main, or from another initialiser.#</dia:string>
+       <dia:attribute name="templates"/>
+       <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Class" version="0" id="O201">
 +    <dia:object type="UML - Class" version="0" id="O199">
        <dia:attribute name="obj_pos">
-         <dia:point val="256,52"/>
-       </dia:attribute>
-@@ -26126,7 +25973,7 @@ main, or from another initialiser.#</dia:string>
-       <dia:attribute name="templates"/>
-       <dia:childnode parent="O0"/>
-     </dia:object>
--    <dia:object type="UML - Class" version="0" id="O202">
-+    <dia:object type="UML - Class" version="0" id="O200">
-       <dia:attribute name="obj_pos">
          <dia:point val="271,18"/>
        </dia:attribute>
-@@ -26337,7 +26184,7 @@ main, or from another initialiser.#</dia:string>
+@@ -25701,7 +25548,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Association" version="2" id="O203">
-+    <dia:object type="UML - Association" version="2" id="O201">
+-    <dia:object type="UML - Association" version="2" id="O202">
++    <dia:object type="UML - Association" version="2" id="O200">
        <dia:attribute name="name">
          <dia:string>#updates entities using &gt;#</dia:string>
        </dia:attribute>
-@@ -26404,12 +26251,12 @@ main, or from another initialiser.#</dia:string>
+@@ -25768,12 +25615,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
 -        <dia:connection handle="0" to="O78" connection="2"/>
--        <dia:connection handle="1" to="O207" connection="5"/>
+-        <dia:connection handle="1" to="O206" connection="5"/>
 +        <dia:connection handle="0" to="O77" connection="2"/>
-+        <dia:connection handle="1" to="O205" connection="5"/>
++        <dia:connection handle="1" to="O204" connection="5"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O204">
-+    <dia:object type="UML - Class" version="0" id="O202">
+-    <dia:object type="UML - Class" version="0" id="O203">
++    <dia:object type="UML - Class" version="0" id="O201">
        <dia:attribute name="obj_pos">
          <dia:point val="214,3"/>
        </dia:attribute>
-@@ -26544,7 +26391,7 @@ main, or from another initialiser.#</dia:string>
+@@ -25908,7 +25755,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Association" version="2" id="O205">
-+    <dia:object type="UML - Association" version="2" id="O203">
+-    <dia:object type="UML - Association" version="2" id="O204">
++    <dia:object type="UML - Association" version="2" id="O202">
        <dia:attribute name="name">
          <dia:string>#&lt; builds#</dia:string>
        </dia:attribute>
-@@ -26611,12 +26458,12 @@ main, or from another initialiser.#</dia:string>
+@@ -25975,12 +25822,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
 -        <dia:connection handle="0" to="O168" connection="1"/>
--        <dia:connection handle="1" to="O204" connection="5"/>
+-        <dia:connection handle="1" to="O203" connection="5"/>
 +        <dia:connection handle="0" to="O166" connection="1"/>
-+        <dia:connection handle="1" to="O202" connection="5"/>
++        <dia:connection handle="1" to="O201" connection="5"/>
        </dia:connections>
+       <dia:childnode parent="O0"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O205">
++    <dia:object type="UML - Class" version="0" id="O203">
+       <dia:attribute name="obj_pos">
+         <dia:point val="312,3"/>
+       </dia:attribute>
+@@ -26115,7 +25962,7 @@ main, or from another initialiser.#</dia:string>
+       <dia:attribute name="templates"/>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Class" version="0" id="O206">
 +    <dia:object type="UML - Class" version="0" id="O204">
        <dia:attribute name="obj_pos">
-         <dia:point val="312,3"/>
-       </dia:attribute>
-@@ -26751,7 +26598,7 @@ main, or from another initialiser.#</dia:string>
-       <dia:attribute name="templates"/>
-       <dia:childnode parent="O0"/>
-     </dia:object>
--    <dia:object type="UML - Class" version="0" id="O207">
-+    <dia:object type="UML - Class" version="0" id="O205">
-       <dia:attribute name="obj_pos">
          <dia:point val="233,34"/>
        </dia:attribute>
-@@ -26886,7 +26733,7 @@ main, or from another initialiser.#</dia:string>
+@@ -26250,7 +26097,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Association" version="2" id="O208">
-+    <dia:object type="UML - Association" version="2" id="O206">
+-    <dia:object type="UML - Association" version="2" id="O207">
++    <dia:object type="UML - Association" version="2" id="O205">
        <dia:attribute name="name">
          <dia:string>#contains &gt;#</dia:string>
        </dia:attribute>
-@@ -26953,12 +26800,12 @@ main, or from another initialiser.#</dia:string>
+@@ -26317,12 +26164,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O207" connection="6"/>
--        <dia:connection handle="1" to="O201" connection="1"/>
-+        <dia:connection handle="0" to="O205" connection="6"/>
-+        <dia:connection handle="1" to="O199" connection="1"/>
+-        <dia:connection handle="0" to="O206" connection="6"/>
+-        <dia:connection handle="1" to="O200" connection="1"/>
++        <dia:connection handle="0" to="O204" connection="6"/>
++        <dia:connection handle="1" to="O198" connection="1"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O209">
-+    <dia:object type="UML - Class" version="0" id="O207">
+-    <dia:object type="UML - Class" version="0" id="O208">
++    <dia:object type="UML - Class" version="0" id="O206">
        <dia:attribute name="obj_pos">
          <dia:point val="221,52"/>
        </dia:attribute>
-@@ -27118,7 +26965,7 @@ main, or from another initialiser.#</dia:string>
+@@ -26482,7 +26329,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Association" version="2" id="O210">
-+    <dia:object type="UML - Association" version="2" id="O208">
+-    <dia:object type="UML - Association" version="2" id="O209">
++    <dia:object type="UML - Association" version="2" id="O207">
        <dia:attribute name="name">
          <dia:string>#builds for each formatter &gt;#</dia:string>
        </dia:attribute>
-@@ -27185,12 +27032,12 @@ main, or from another initialiser.#</dia:string>
+@@ -26549,12 +26396,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O209" connection="6"/>
--        <dia:connection handle="1" to="O201" connection="6"/>
-+        <dia:connection handle="0" to="O207" connection="6"/>
-+        <dia:connection handle="1" to="O199" connection="6"/>
+-        <dia:connection handle="0" to="O208" connection="6"/>
+-        <dia:connection handle="1" to="O200" connection="6"/>
++        <dia:connection handle="0" to="O206" connection="6"/>
++        <dia:connection handle="1" to="O198" connection="6"/>
        </dia:connections>
+       <dia:childnode parent="O0"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O210">
++    <dia:object type="UML - Class" version="0" id="O208">
+       <dia:attribute name="obj_pos">
+         <dia:point val="330,34"/>
+       </dia:attribute>
+@@ -26689,7 +26536,7 @@ main, or from another initialiser.#</dia:string>
+       <dia:attribute name="templates"/>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Class" version="0" id="O211">
 +    <dia:object type="UML - Class" version="0" id="O209">
        <dia:attribute name="obj_pos">
-         <dia:point val="330,34"/>
-       </dia:attribute>
-@@ -27325,7 +27172,7 @@ main, or from another initialiser.#</dia:string>
-       <dia:attribute name="templates"/>
-       <dia:childnode parent="O0"/>
-     </dia:object>
--    <dia:object type="UML - Class" version="0" id="O212">
-+    <dia:object type="UML - Class" version="0" id="O210">
-       <dia:attribute name="obj_pos">
          <dia:point val="292,34"/>
        </dia:attribute>
-@@ -27519,7 +27366,7 @@ main, or from another initialiser.#</dia:string>
+@@ -26883,7 +26730,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Association" version="2" id="O213">
-+    <dia:object type="UML - Association" version="2" id="O211">
+-    <dia:object type="UML - Association" version="2" id="O212">
++    <dia:object type="UML - Association" version="2" id="O210">
        <dia:attribute name="name">
          <dia:string>#builds &gt;#</dia:string>
        </dia:attribute>
-@@ -27586,12 +27433,12 @@ main, or from another initialiser.#</dia:string>
+@@ -26950,12 +26797,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O212" connection="2"/>
--        <dia:connection handle="1" to="O211" connection="1"/>
-+        <dia:connection handle="0" to="O210" connection="2"/>
-+        <dia:connection handle="1" to="O209" connection="1"/>
+-        <dia:connection handle="0" to="O211" connection="2"/>
+-        <dia:connection handle="1" to="O210" connection="1"/>
++        <dia:connection handle="0" to="O209" connection="2"/>
++        <dia:connection handle="1" to="O208" connection="1"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O214">
-+    <dia:object type="UML - Class" version="0" id="O212">
+-    <dia:object type="UML - Class" version="0" id="O213">
++    <dia:object type="UML - Class" version="0" id="O211">
        <dia:attribute name="obj_pos">
          <dia:point val="-18,4"/>
        </dia:attribute>
-@@ -27748,7 +27595,7 @@ main, or from another initialiser.#</dia:string>
+@@ -27112,7 +26959,7 @@ main, or from another initialiser.#</dia:string>
        </dia:attribute>
        <dia:attribute name="templates"/>
      </dia:object>
--    <dia:object type="UML - Association" version="2" id="O215">
-+    <dia:object type="UML - Association" version="2" id="O213">
+-    <dia:object type="UML - Association" version="2" id="O214">
++    <dia:object type="UML - Association" version="2" id="O212">
        <dia:attribute name="name">
          <dia:string>#&lt; builds#</dia:string>
        </dia:attribute>
-@@ -27815,12 +27662,12 @@ main, or from another initialiser.#</dia:string>
+@@ -27179,12 +27026,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
 -        <dia:connection handle="0" to="O183" connection="5"/>
--        <dia:connection handle="1" to="O206" connection="1"/>
+-        <dia:connection handle="1" to="O205" connection="1"/>
 +        <dia:connection handle="0" to="O181" connection="5"/>
-+        <dia:connection handle="1" to="O204" connection="1"/>
++        <dia:connection handle="1" to="O203" connection="1"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O216">
-+    <dia:object type="UML - Class" version="0" id="O214">
+-    <dia:object type="UML - Class" version="0" id="O215">
++    <dia:object type="UML - Class" version="0" id="O213">
        <dia:attribute name="obj_pos">
          <dia:point val="209,-29"/>
        </dia:attribute>
-@@ -28069,7 +27916,7 @@ main, or from another initialiser.#</dia:string>
+@@ -27433,7 +27280,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Association" version="2" id="O217">
-+    <dia:object type="UML - Association" version="2" id="O215">
+-    <dia:object type="UML - Association" version="2" id="O216">
++    <dia:object type="UML - Association" version="2" id="O214">
        <dia:attribute name="name">
          <dia:string>#builds directives for formatters using &gt;#</dia:string>
        </dia:attribute>
-@@ -28136,12 +27983,12 @@ main, or from another initialiser.#</dia:string>
+@@ -27500,12 +27347,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O193" connection="0"/>
--        <dia:connection handle="1" to="O216" connection="7"/>
-+        <dia:connection handle="0" to="O191" connection="0"/>
-+        <dia:connection handle="1" to="O214" connection="7"/>
+-        <dia:connection handle="0" to="O192" connection="0"/>
+-        <dia:connection handle="1" to="O215" connection="7"/>
++        <dia:connection handle="0" to="O190" connection="0"/>
++        <dia:connection handle="1" to="O213" connection="7"/>
        </dia:connections>
+       <dia:childnode parent="O0"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O217">
++    <dia:object type="UML - Class" version="0" id="O215">
+       <dia:attribute name="obj_pos">
+         <dia:point val="331,52"/>
+       </dia:attribute>
+@@ -27716,7 +27563,7 @@ main, or from another initialiser.#</dia:string>
+       <dia:attribute name="templates"/>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Class" version="0" id="O218">
 +    <dia:object type="UML - Class" version="0" id="O216">
        <dia:attribute name="obj_pos">
-         <dia:point val="331,52"/>
+         <dia:point val="299,52"/>
        </dia:attribute>
-@@ -28352,7 +28199,7 @@ main, or from another initialiser.#</dia:string>
+@@ -27897,7 +27744,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O219">
-+    <dia:object type="UML - Class" version="0" id="O217">
-       <dia:attribute name="obj_pos">
-         <dia:point val="299,52"/>
+-    <dia:object type="UML - Association" version="2" id="O219">
++    <dia:object type="UML - Association" version="2" id="O217">
+       <dia:attribute name="name">
+         <dia:string>#&lt; generates the enabled / disabled state for#</dia:string>
        </dia:attribute>
-@@ -28533,7 +28380,7 @@ main, or from another initialiser.#</dia:string>
-       <dia:attribute name="templates"/>
+@@ -27964,12 +27811,12 @@ main, or from another initialiser.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O211" connection="7"/>
+-        <dia:connection handle="1" to="O217" connection="1"/>
++        <dia:connection handle="0" to="O209" connection="7"/>
++        <dia:connection handle="1" to="O215" connection="1"/>
+       </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O220">
 +    <dia:object type="UML - Association" version="2" id="O218">
        <dia:attribute name="name">
-         <dia:string>#&lt; generates the enabled / disabled state for#</dia:string>
+         <dia:string>#&lt; uses as global defaults#</dia:string>
        </dia:attribute>
-@@ -28600,12 +28447,12 @@ main, or from another initialiser.#</dia:string>
+@@ -28036,12 +27883,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O212" connection="7"/>
--        <dia:connection handle="1" to="O218" connection="1"/>
-+        <dia:connection handle="0" to="O210" connection="7"/>
-+        <dia:connection handle="1" to="O216" connection="1"/>
+-        <dia:connection handle="0" to="O217" connection="6"/>
+-        <dia:connection handle="1" to="O218" connection="6"/>
++        <dia:connection handle="0" to="O215" connection="6"/>
++        <dia:connection handle="1" to="O216" connection="6"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O221">
 +    <dia:object type="UML - Association" version="2" id="O219">
        <dia:attribute name="name">
-         <dia:string>#&lt; uses as global defaults#</dia:string>
+         <dia:string>##</dia:string>
        </dia:attribute>
-@@ -28672,12 +28519,12 @@ main, or from another initialiser.#</dia:string>
+@@ -28108,12 +27955,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O218" connection="6"/>
--        <dia:connection handle="1" to="O219" connection="6"/>
-+        <dia:connection handle="0" to="O216" connection="6"/>
-+        <dia:connection handle="1" to="O217" connection="6"/>
+-        <dia:connection handle="0" to="O192" connection="5"/>
+-        <dia:connection handle="1" to="O203" connection="1"/>
++        <dia:connection handle="0" to="O190" connection="5"/>
++        <dia:connection handle="1" to="O201" connection="1"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
@@ -2784,39 +2782,23 @@ index 4bab216..b4a3d92 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -28744,12 +28591,12 @@ main, or from another initialiser.#</dia:string>
+@@ -28180,12 +28027,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O193" connection="5"/>
--        <dia:connection handle="1" to="O204" connection="1"/>
-+        <dia:connection handle="0" to="O191" connection="5"/>
-+        <dia:connection handle="1" to="O202" connection="1"/>
+-        <dia:connection handle="0" to="O215" connection="5"/>
+-        <dia:connection handle="1" to="O203" connection="0"/>
++        <dia:connection handle="0" to="O213" connection="5"/>
++        <dia:connection handle="1" to="O201" connection="0"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O223">
 +    <dia:object type="UML - Association" version="2" id="O221">
        <dia:attribute name="name">
-         <dia:string>##</dia:string>
-       </dia:attribute>
-@@ -28816,12 +28663,12 @@ main, or from another initialiser.#</dia:string>
-         <dia:color val="#000000"/>
-       </dia:attribute>
-       <dia:connections>
--        <dia:connection handle="0" to="O216" connection="5"/>
--        <dia:connection handle="1" to="O204" connection="0"/>
-+        <dia:connection handle="0" to="O214" connection="5"/>
-+        <dia:connection handle="1" to="O202" connection="0"/>
-       </dia:connections>
-       <dia:childnode parent="O0"/>
-     </dia:object>
--    <dia:object type="UML - Association" version="2" id="O224">
-+    <dia:object type="UML - Association" version="2" id="O222">
-       <dia:attribute name="name">
          <dia:string>#builds for each formatter &gt;#</dia:string>
        </dia:attribute>
-@@ -28888,12 +28735,12 @@ main, or from another initialiser.#</dia:string>
+@@ -28252,12 +28099,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -2827,91 +2809,91 @@ index 4bab216..b4a3d92 100644
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Association" version="2" id="O225">
-+    <dia:object type="UML - Association" version="2" id="O223">
+-    <dia:object type="UML - Association" version="2" id="O224">
++    <dia:object type="UML - Association" version="2" id="O222">
        <dia:attribute name="name">
          <dia:string>#&lt; creates path derivatives using#</dia:string>
        </dia:attribute>
-@@ -28960,12 +28807,12 @@ main, or from another initialiser.#</dia:string>
+@@ -28324,12 +28171,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O202" connection="0"/>
+-        <dia:connection handle="0" to="O201" connection="0"/>
 -        <dia:connection handle="1" to="O168" connection="2"/>
-+        <dia:connection handle="0" to="O200" connection="0"/>
++        <dia:connection handle="0" to="O199" connection="0"/>
 +        <dia:connection handle="1" to="O166" connection="2"/>
+       </dia:connections>
+       <dia:childnode parent="O0"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O225">
++    <dia:object type="UML - Association" version="2" id="O223">
+       <dia:attribute name="name">
+         <dia:string>#&lt; consumes path derivatives from#</dia:string>
+       </dia:attribute>
+@@ -28396,12 +28243,12 @@ main, or from another initialiser.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O203" connection="7"/>
+-        <dia:connection handle="1" to="O201" connection="1"/>
++        <dia:connection handle="0" to="O201" connection="7"/>
++        <dia:connection handle="1" to="O199" connection="1"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O226">
 +    <dia:object type="UML - Association" version="2" id="O224">
        <dia:attribute name="name">
-         <dia:string>#&lt; consumes path derivatives from#</dia:string>
+         <dia:string>##</dia:string>
        </dia:attribute>
-@@ -29032,12 +28879,12 @@ main, or from another initialiser.#</dia:string>
+@@ -28468,12 +28315,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O204" connection="7"/>
--        <dia:connection handle="1" to="O202" connection="1"/>
-+        <dia:connection handle="0" to="O202" connection="7"/>
-+        <dia:connection handle="1" to="O200" connection="1"/>
+-        <dia:connection handle="0" to="O192" connection="7"/>
+-        <dia:connection handle="1" to="O201" connection="2"/>
++        <dia:connection handle="0" to="O190" connection="7"/>
++        <dia:connection handle="1" to="O199" connection="2"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O227">
 +    <dia:object type="UML - Association" version="2" id="O225">
        <dia:attribute name="name">
-         <dia:string>##</dia:string>
+         <dia:string>#&lt; builds#</dia:string>
        </dia:attribute>
-@@ -29104,12 +28951,12 @@ main, or from another initialiser.#</dia:string>
+@@ -28540,11 +28387,11 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O193" connection="7"/>
--        <dia:connection handle="1" to="O202" connection="2"/>
-+        <dia:connection handle="0" to="O191" connection="7"/>
-+        <dia:connection handle="1" to="O200" connection="2"/>
+-        <dia:connection handle="0" to="O201" connection="5"/>
+-        <dia:connection handle="1" to="O206" connection="1"/>
++        <dia:connection handle="0" to="O199" connection="5"/>
++        <dia:connection handle="1" to="O204" connection="1"/>
        </dia:connections>
-       <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O228">
 +    <dia:object type="UML - Association" version="2" id="O226">
        <dia:attribute name="name">
-         <dia:string>#&lt; builds#</dia:string>
-       </dia:attribute>
-@@ -29176,11 +29023,11 @@ main, or from another initialiser.#</dia:string>
-         <dia:color val="#000000"/>
-       </dia:attribute>
-       <dia:connections>
--        <dia:connection handle="0" to="O202" connection="5"/>
--        <dia:connection handle="1" to="O207" connection="1"/>
-+        <dia:connection handle="0" to="O200" connection="5"/>
-+        <dia:connection handle="1" to="O205" connection="1"/>
-       </dia:connections>
-     </dia:object>
--    <dia:object type="UML - Association" version="2" id="O229">
-+    <dia:object type="UML - Association" version="2" id="O227">
-       <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -29247,12 +29094,12 @@ main, or from another initialiser.#</dia:string>
+@@ -28611,12 +28458,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O202" connection="6"/>
+-        <dia:connection handle="0" to="O201" connection="6"/>
 -        <dia:connection handle="1" to="O102" connection="2"/>
-+        <dia:connection handle="0" to="O200" connection="6"/>
++        <dia:connection handle="0" to="O199" connection="6"/>
 +        <dia:connection handle="1" to="O101" connection="2"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Association" version="2" id="O230">
-+    <dia:object type="UML - Association" version="2" id="O228">
+-    <dia:object type="UML - Association" version="2" id="O229">
++    <dia:object type="UML - Association" version="2" id="O227">
        <dia:attribute name="name">
          <dia:string>#&lt; creates inclusion dependencies for formatters for#</dia:string>
        </dia:attribute>
-@@ -29319,12 +29166,12 @@ main, or from another initialiser.#</dia:string>
+@@ -28683,12 +28530,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -2922,92 +2904,92 @@ index 4bab216..b4a3d92 100644
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Association" version="2" id="O231">
-+    <dia:object type="UML - Association" version="2" id="O229">
+-    <dia:object type="UML - Association" version="2" id="O230">
++    <dia:object type="UML - Association" version="2" id="O228">
        <dia:attribute name="name">
          <dia:string>#stores inclusion dependency details in &gt;#</dia:string>
        </dia:attribute>
-@@ -29389,12 +29236,12 @@ main, or from another initialiser.#</dia:string>
+@@ -28753,12 +28600,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O202" connection="4"/>
--        <dia:connection handle="1" to="O206" connection="6"/>
-+        <dia:connection handle="0" to="O200" connection="4"/>
-+        <dia:connection handle="1" to="O204" connection="6"/>
+-        <dia:connection handle="0" to="O201" connection="4"/>
+-        <dia:connection handle="1" to="O205" connection="6"/>
++        <dia:connection handle="0" to="O199" connection="4"/>
++        <dia:connection handle="1" to="O203" connection="6"/>
+       </dia:connections>
+       <dia:childnode parent="O0"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O231">
++    <dia:object type="UML - Association" version="2" id="O229">
+       <dia:attribute name="name">
+         <dia:string>#creates inclusion dependency details using &gt;#</dia:string>
+       </dia:attribute>
+@@ -28823,12 +28670,12 @@ main, or from another initialiser.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O201" connection="9"/>
+-        <dia:connection handle="1" to="O183" connection="6"/>
++        <dia:connection handle="0" to="O199" connection="9"/>
++        <dia:connection handle="1" to="O181" connection="6"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O232">
 +    <dia:object type="UML - Association" version="2" id="O230">
        <dia:attribute name="name">
-         <dia:string>#creates inclusion dependency details using &gt;#</dia:string>
+         <dia:string>#computes enablement for &gt;#</dia:string>
        </dia:attribute>
-@@ -29459,12 +29306,12 @@ main, or from another initialiser.#</dia:string>
+@@ -28895,12 +28742,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O202" connection="9"/>
--        <dia:connection handle="1" to="O183" connection="6"/>
-+        <dia:connection handle="0" to="O200" connection="9"/>
-+        <dia:connection handle="1" to="O181" connection="6"/>
+-        <dia:connection handle="0" to="O201" connection="7"/>
+-        <dia:connection handle="1" to="O211" connection="0"/>
++        <dia:connection handle="0" to="O199" connection="7"/>
++        <dia:connection handle="1" to="O209" connection="0"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O233">
 +    <dia:object type="UML - Association" version="2" id="O231">
        <dia:attribute name="name">
-         <dia:string>#computes enablement for &gt;#</dia:string>
+         <dia:string>#reads from root object &gt;#</dia:string>
        </dia:attribute>
-@@ -29531,12 +29378,12 @@ main, or from another initialiser.#</dia:string>
+@@ -28967,12 +28814,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O202" connection="7"/>
--        <dia:connection handle="1" to="O212" connection="0"/>
-+        <dia:connection handle="0" to="O200" connection="7"/>
-+        <dia:connection handle="1" to="O210" connection="0"/>
+-        <dia:connection handle="0" to="O211" connection="5"/>
+-        <dia:connection handle="1" to="O218" connection="14"/>
++        <dia:connection handle="0" to="O209" connection="5"/>
++        <dia:connection handle="1" to="O216" connection="14"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O234">
 +    <dia:object type="UML - Association" version="2" id="O232">
        <dia:attribute name="name">
-         <dia:string>#reads from root object &gt;#</dia:string>
+         <dia:string>#stores formatter properties in &gt;#</dia:string>
        </dia:attribute>
-@@ -29603,12 +29450,12 @@ main, or from another initialiser.#</dia:string>
+@@ -29039,12 +28886,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O212" connection="5"/>
--        <dia:connection handle="1" to="O219" connection="14"/>
-+        <dia:connection handle="0" to="O210" connection="5"/>
-+        <dia:connection handle="1" to="O217" connection="14"/>
+-        <dia:connection handle="0" to="O102" connection="1"/>
+-        <dia:connection handle="1" to="O206" connection="7"/>
++        <dia:connection handle="0" to="O101" connection="1"/>
++        <dia:connection handle="1" to="O204" connection="7"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O235">
 +    <dia:object type="UML - Association" version="2" id="O233">
        <dia:attribute name="name">
-         <dia:string>#stores formatter properties in &gt;#</dia:string>
-       </dia:attribute>
-@@ -29675,12 +29522,12 @@ main, or from another initialiser.#</dia:string>
-         <dia:color val="#000000"/>
-       </dia:attribute>
-       <dia:connections>
--        <dia:connection handle="0" to="O102" connection="1"/>
--        <dia:connection handle="1" to="O207" connection="7"/>
-+        <dia:connection handle="0" to="O101" connection="1"/>
-+        <dia:connection handle="1" to="O205" connection="7"/>
-       </dia:connections>
-       <dia:childnode parent="O0"/>
-     </dia:object>
--    <dia:object type="UML - Association" version="2" id="O236">
-+    <dia:object type="UML - Association" version="2" id="O234">
-       <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -29747,12 +29594,12 @@ main, or from another initialiser.#</dia:string>
+@@ -29111,12 +28958,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
@@ -3018,62 +3000,78 @@ index 4bab216..b4a3d92 100644
        </dia:connections>
        <dia:childnode parent="O1"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O237">
-+    <dia:object type="UML - Class" version="0" id="O235">
+-    <dia:object type="UML - Class" version="0" id="O236">
++    <dia:object type="UML - Class" version="0" id="O234">
        <dia:attribute name="obj_pos">
          <dia:point val="182,162"/>
        </dia:attribute>
-@@ -29910,7 +29757,7 @@ main, or from another initialiser.#</dia:string>
+@@ -29274,7 +29121,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O1"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O238">
-+    <dia:object type="UML - Class" version="0" id="O236">
+-    <dia:object type="UML - Class" version="0" id="O237">
++    <dia:object type="UML - Class" version="0" id="O235">
        <dia:attribute name="obj_pos">
          <dia:point val="161,146"/>
        </dia:attribute>
-@@ -30135,7 +29982,7 @@ main, or from another initialiser.#</dia:string>
+@@ -29499,7 +29346,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O1"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O238">
++    <dia:object type="UML - Association" version="2" id="O236">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -29566,11 +29413,11 @@ main, or from another initialiser.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O146" connection="5"/>
+-        <dia:connection handle="1" to="O237" connection="1"/>
++        <dia:connection handle="0" to="O144" connection="5"/>
++        <dia:connection handle="1" to="O235" connection="1"/>
+       </dia:connections>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O239">
 +    <dia:object type="UML - Association" version="2" id="O237">
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -30202,11 +30049,11 @@ main, or from another initialiser.#</dia:string>
+@@ -29637,12 +29484,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O146" connection="5"/>
--        <dia:connection handle="1" to="O238" connection="1"/>
-+        <dia:connection handle="0" to="O144" connection="5"/>
-+        <dia:connection handle="1" to="O236" connection="1"/>
-       </dia:connections>
-     </dia:object>
--    <dia:object type="UML - Association" version="2" id="O240">
-+    <dia:object type="UML - Association" version="2" id="O238">
-       <dia:attribute name="name">
-         <dia:string>##</dia:string>
-       </dia:attribute>
-@@ -30273,12 +30120,12 @@ main, or from another initialiser.#</dia:string>
-         <dia:color val="#000000"/>
-       </dia:attribute>
-       <dia:connections>
--        <dia:connection handle="0" to="O238" connection="12"/>
--        <dia:connection handle="1" to="O237" connection="0"/>
-+        <dia:connection handle="0" to="O236" connection="12"/>
-+        <dia:connection handle="1" to="O235" connection="0"/>
+-        <dia:connection handle="0" to="O237" connection="12"/>
+-        <dia:connection handle="1" to="O236" connection="0"/>
++        <dia:connection handle="0" to="O235" connection="12"/>
++        <dia:connection handle="1" to="O234" connection="0"/>
        </dia:connections>
        <dia:childnode parent="O1"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O241">
-+    <dia:object type="UML - Class" version="0" id="O239">
+-    <dia:object type="UML - Class" version="0" id="O240">
++    <dia:object type="UML - Class" version="0" id="O238">
        <dia:attribute name="obj_pos">
          <dia:point val="128,146"/>
        </dia:attribute>
-@@ -30413,7 +30260,7 @@ main, or from another initialiser.#</dia:string>
+@@ -29777,7 +29624,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
+       <dia:childnode parent="O1"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O241">
++    <dia:object type="UML - Association" version="2" id="O239">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
+       </dia:attribute>
+@@ -29844,12 +29691,12 @@ main, or from another initialiser.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O94" connection="6"/>
+-        <dia:connection handle="1" to="O240" connection="10"/>
++        <dia:connection handle="0" to="O93" connection="6"/>
++        <dia:connection handle="1" to="O238" connection="10"/>
+       </dia:connections>
        <dia:childnode parent="O1"/>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O242">
@@ -3081,244 +3079,231 @@ index 4bab216..b4a3d92 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -30454,7 +30301,7 @@ main, or from another initialiser.#</dia:string>
-         <dia:point val="148.917,134.2"/>
-       </dia:attribute>
-       <dia:attribute name="obj_bb">
--        <dia:rectangle val="141.097,133.45;149.667,146.75"/>
-+        <dia:rectangle val="141.098,133.45;149.667,146.75"/>
-       </dia:attribute>
-       <dia:attribute name="meta">
-         <dia:composite type="dict"/>
-@@ -30480,12 +30327,12 @@ main, or from another initialiser.#</dia:string>
-         <dia:color val="#000000"/>
-       </dia:attribute>
-       <dia:connections>
--        <dia:connection handle="0" to="O94" connection="6"/>
--        <dia:connection handle="1" to="O241" connection="10"/>
-+        <dia:connection handle="0" to="O93" connection="6"/>
-+        <dia:connection handle="1" to="O239" connection="10"/>
-       </dia:connections>
-       <dia:childnode parent="O1"/>
-     </dia:object>
--    <dia:object type="UML - Association" version="2" id="O243">
-+    <dia:object type="UML - Association" version="2" id="O241">
-       <dia:attribute name="name">
-         <dia:string>##</dia:string>
-       </dia:attribute>
-@@ -30552,12 +30399,12 @@ main, or from another initialiser.#</dia:string>
+@@ -29916,12 +29763,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
 -        <dia:connection handle="0" to="O96" connection="6"/>
--        <dia:connection handle="1" to="O241" connection="6"/>
+-        <dia:connection handle="1" to="O240" connection="6"/>
 +        <dia:connection handle="0" to="O95" connection="6"/>
-+        <dia:connection handle="1" to="O239" connection="6"/>
++        <dia:connection handle="1" to="O238" connection="6"/>
        </dia:connections>
        <dia:childnode parent="O1"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O243">
++    <dia:object type="UML - Class" version="0" id="O241">
+       <dia:attribute name="obj_pos">
+         <dia:point val="187,34"/>
+       </dia:attribute>
+@@ -30056,7 +29903,7 @@ main, or from another initialiser.#</dia:string>
+       <dia:attribute name="templates"/>
+       <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Class" version="0" id="O244">
 +    <dia:object type="UML - Class" version="0" id="O242">
        <dia:attribute name="obj_pos">
-         <dia:point val="187,34"/>
+         <dia:point val="156,34"/>
        </dia:attribute>
-@@ -30692,7 +30539,7 @@ main, or from another initialiser.#</dia:string>
+@@ -30216,7 +30063,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O245">
-+    <dia:object type="UML - Class" version="0" id="O243">
-       <dia:attribute name="obj_pos">
-         <dia:point val="156,34"/>
+-    <dia:object type="UML - Association" version="2" id="O245">
++    <dia:object type="UML - Association" version="2" id="O243">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
        </dia:attribute>
-@@ -30852,7 +30699,7 @@ main, or from another initialiser.#</dia:string>
-       <dia:attribute name="templates"/>
+@@ -30283,12 +30130,12 @@ main, or from another initialiser.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O206" connection="3"/>
+-        <dia:connection handle="1" to="O243" connection="4"/>
++        <dia:connection handle="0" to="O204" connection="3"/>
++        <dia:connection handle="1" to="O241" connection="4"/>
+       </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O246">
 +    <dia:object type="UML - Association" version="2" id="O244">
        <dia:attribute name="name">
-         <dia:string>##</dia:string>
+         <dia:string>#creates integrated facet information for &gt;#</dia:string>
        </dia:attribute>
-@@ -30919,12 +30766,12 @@ main, or from another initialiser.#</dia:string>
+@@ -30355,12 +30202,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O207" connection="3"/>
--        <dia:connection handle="1" to="O244" connection="4"/>
-+        <dia:connection handle="0" to="O205" connection="3"/>
-+        <dia:connection handle="1" to="O242" connection="4"/>
+-        <dia:connection handle="0" to="O206" connection="0"/>
+-        <dia:connection handle="1" to="O244" connection="1"/>
++        <dia:connection handle="0" to="O204" connection="0"/>
++        <dia:connection handle="1" to="O242" connection="1"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O247">
 +    <dia:object type="UML - Association" version="2" id="O245">
        <dia:attribute name="name">
-         <dia:string>#creates integrated facet information for &gt;#</dia:string>
-       </dia:attribute>
-@@ -30991,12 +30838,12 @@ main, or from another initialiser.#</dia:string>
-         <dia:color val="#000000"/>
-       </dia:attribute>
-       <dia:connections>
--        <dia:connection handle="0" to="O207" connection="0"/>
--        <dia:connection handle="1" to="O245" connection="1"/>
-+        <dia:connection handle="0" to="O205" connection="0"/>
-+        <dia:connection handle="1" to="O243" connection="1"/>
-       </dia:connections>
-       <dia:childnode parent="O0"/>
-     </dia:object>
--    <dia:object type="UML - Association" version="2" id="O248">
-+    <dia:object type="UML - Association" version="2" id="O246">
-       <dia:attribute name="name">
          <dia:string>#creates &gt;#</dia:string>
        </dia:attribute>
-@@ -31063,12 +30910,12 @@ main, or from another initialiser.#</dia:string>
+@@ -30427,12 +30274,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O245" connection="6"/>
--        <dia:connection handle="1" to="O244" connection="6"/>
-+        <dia:connection handle="0" to="O243" connection="6"/>
-+        <dia:connection handle="1" to="O242" connection="6"/>
+-        <dia:connection handle="0" to="O244" connection="6"/>
+-        <dia:connection handle="1" to="O243" connection="6"/>
++        <dia:connection handle="0" to="O242" connection="6"/>
++        <dia:connection handle="1" to="O241" connection="6"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O249">
-+    <dia:object type="UML - Class" version="0" id="O247">
+-    <dia:object type="UML - Class" version="0" id="O248">
++    <dia:object type="UML - Class" version="0" id="O246">
        <dia:attribute name="obj_pos">
          <dia:point val="293,-29"/>
        </dia:attribute>
-@@ -31292,7 +31139,7 @@ main, or from another initialiser.#</dia:string>
+@@ -30656,7 +30503,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
+       <dia:childnode parent="O0"/>
+     </dia:object>
+-    <dia:object type="UML - Association" version="2" id="O249">
++    <dia:object type="UML - Association" version="2" id="O247">
+       <dia:attribute name="name">
+         <dia:string>#queries &gt;#</dia:string>
+       </dia:attribute>
+@@ -30723,12 +30570,12 @@ main, or from another initialiser.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O188" connection="5"/>
+-        <dia:connection handle="1" to="O189" connection="1"/>
++        <dia:connection handle="0" to="O186" connection="5"/>
++        <dia:connection handle="1" to="O187" connection="1"/>
+       </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O250">
 +    <dia:object type="UML - Association" version="2" id="O248">
        <dia:attribute name="name">
-         <dia:string>#queries &gt;#</dia:string>
+         <dia:string>##</dia:string>
        </dia:attribute>
-@@ -31359,12 +31206,12 @@ main, or from another initialiser.#</dia:string>
+@@ -30795,12 +30642,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O189" connection="5"/>
--        <dia:connection handle="1" to="O190" connection="1"/>
-+        <dia:connection handle="0" to="O187" connection="5"/>
-+        <dia:connection handle="1" to="O188" connection="1"/>
+-        <dia:connection handle="0" to="O169" connection="1"/>
+-        <dia:connection handle="1" to="O248" connection="6"/>
++        <dia:connection handle="0" to="O167" connection="1"/>
++        <dia:connection handle="1" to="O246" connection="6"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O251">
 +    <dia:object type="UML - Association" version="2" id="O249">
        <dia:attribute name="name">
-         <dia:string>##</dia:string>
-       </dia:attribute>
-@@ -31431,12 +31278,12 @@ main, or from another initialiser.#</dia:string>
-         <dia:color val="#000000"/>
-       </dia:attribute>
-       <dia:connections>
--        <dia:connection handle="0" to="O169" connection="1"/>
--        <dia:connection handle="1" to="O249" connection="6"/>
-+        <dia:connection handle="0" to="O167" connection="1"/>
-+        <dia:connection handle="1" to="O247" connection="6"/>
-       </dia:connections>
-       <dia:childnode parent="O0"/>
-     </dia:object>
--    <dia:object type="UML - Association" version="2" id="O252">
-+    <dia:object type="UML - Association" version="2" id="O250">
-       <dia:attribute name="name">
          <dia:string>#&lt; creates#</dia:string>
        </dia:attribute>
-@@ -31503,12 +31350,12 @@ main, or from another initialiser.#</dia:string>
+@@ -30867,12 +30714,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O249" connection="1"/>
--        <dia:connection handle="1" to="O189" connection="7"/>
-+        <dia:connection handle="0" to="O247" connection="1"/>
-+        <dia:connection handle="1" to="O187" connection="7"/>
+-        <dia:connection handle="0" to="O248" connection="1"/>
+-        <dia:connection handle="1" to="O188" connection="7"/>
++        <dia:connection handle="0" to="O246" connection="1"/>
++        <dia:connection handle="1" to="O186" connection="7"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O253">
-+    <dia:object type="UML - Class" version="0" id="O251">
+-    <dia:object type="UML - Class" version="0" id="O252">
++    <dia:object type="UML - Class" version="0" id="O250">
        <dia:attribute name="obj_pos">
          <dia:point val="62,49"/>
        </dia:attribute>
-@@ -31619,7 +31466,7 @@ main, or from another initialiser.#</dia:string>
+@@ -30983,7 +30830,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Association" version="2" id="O254">
-+    <dia:object type="UML - Association" version="2" id="O252">
+-    <dia:object type="UML - Association" version="2" id="O253">
++    <dia:object type="UML - Association" version="2" id="O251">
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -31686,12 +31533,12 @@ main, or from another initialiser.#</dia:string>
+@@ -31050,12 +30897,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
 -        <dia:connection handle="0" to="O13" connection="6"/>
--        <dia:connection handle="1" to="O253" connection="1"/>
+-        <dia:connection handle="1" to="O252" connection="1"/>
 +        <dia:connection handle="0" to="O12" connection="6"/>
-+        <dia:connection handle="1" to="O251" connection="1"/>
++        <dia:connection handle="1" to="O250" connection="1"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O255">
-+    <dia:object type="UML - Class" version="0" id="O253">
+-    <dia:object type="UML - Class" version="0" id="O254">
++    <dia:object type="UML - Class" version="0" id="O252">
        <dia:attribute name="obj_pos">
          <dia:point val="434,205"/>
        </dia:attribute>
-@@ -31800,9 +31647,9 @@ main, or from another initialiser.#</dia:string>
+@@ -31164,9 +31011,9 @@ main, or from another initialiser.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="templates"/>
 -      <dia:childnode parent="O39"/>
 +      <dia:childnode parent="O38"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O256">
-+    <dia:object type="UML - Class" version="0" id="O254">
+-    <dia:object type="UML - Class" version="0" id="O255">
++    <dia:object type="UML - Class" version="0" id="O253">
        <dia:attribute name="obj_pos">
-         <dia:point val="480,188"/>
+         <dia:point val="482,188"/>
        </dia:attribute>
-@@ -32127,9 +31974,9 @@ main, or from another initialiser.#</dia:string>
+@@ -31491,9 +31338,9 @@ main, or from another initialiser.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="templates"/>
 -      <dia:childnode parent="O16"/>
 +      <dia:childnode parent="O15"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O257">
-+    <dia:object type="UML - Class" version="0" id="O255">
+-    <dia:object type="UML - Class" version="0" id="O256">
++    <dia:object type="UML - Class" version="0" id="O254">
        <dia:attribute name="obj_pos">
          <dia:point val="363,213"/>
        </dia:attribute>
-@@ -32238,9 +32085,9 @@ main, or from another initialiser.#</dia:string>
+@@ -31602,9 +31449,9 @@ main, or from another initialiser.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="templates"/>
 -      <dia:childnode parent="O17"/>
 +      <dia:childnode parent="O16"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O258">
-+    <dia:object type="UML - Class" version="0" id="O256">
+-    <dia:object type="UML - Class" version="0" id="O257">
++    <dia:object type="UML - Class" version="0" id="O255">
        <dia:attribute name="obj_pos">
          <dia:point val="388,205"/>
        </dia:attribute>
-@@ -32349,9 +32196,9 @@ main, or from another initialiser.#</dia:string>
+@@ -31713,9 +31560,9 @@ main, or from another initialiser.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="templates"/>
 -      <dia:childnode parent="O21"/>
 +      <dia:childnode parent="O20"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O259">
-+    <dia:object type="UML - Class" version="0" id="O257">
+-    <dia:object type="UML - Class" version="0" id="O258">
++    <dia:object type="UML - Class" version="0" id="O256">
        <dia:attribute name="obj_pos">
          <dia:point val="388,232"/>
        </dia:attribute>
-@@ -32460,9 +32307,9 @@ main, or from another initialiser.#</dia:string>
+@@ -31824,9 +31671,9 @@ main, or from another initialiser.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+-      <dia:childnode parent="O49"/>
++      <dia:childnode parent="O48"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O259">
++    <dia:object type="UML - Class" version="0" id="O257">
+       <dia:attribute name="obj_pos">
+         <dia:point val="408,216"/>
+       </dia:attribute>
+@@ -31966,9 +31813,9 @@ main, or from another initialiser.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="templates"/>
@@ -3328,87 +3313,91 @@ index 4bab216..b4a3d92 100644
 -    <dia:object type="UML - Class" version="0" id="O260">
 +    <dia:object type="UML - Class" version="0" id="O258">
        <dia:attribute name="obj_pos">
-         <dia:point val="408,216"/>
-       </dia:attribute>
-@@ -32602,9 +32449,9 @@ main, or from another initialiser.#</dia:string>
-         <dia:boolean val="false"/>
-       </dia:attribute>
-       <dia:attribute name="templates"/>
--      <dia:childnode parent="O49"/>
-+      <dia:childnode parent="O48"/>
-     </dia:object>
--    <dia:object type="UML - Class" version="0" id="O261">
-+    <dia:object type="UML - Class" version="0" id="O259">
-       <dia:attribute name="obj_pos">
          <dia:point val="282,178"/>
        </dia:attribute>
-@@ -32715,7 +32562,7 @@ main, or from another initialiser.#</dia:string>
+@@ -32079,7 +31926,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O1"/>
      </dia:object>
--    <dia:object type="UML - Generalization" version="1" id="O262">
-+    <dia:object type="UML - Generalization" version="1" id="O260">
+-    <dia:object type="UML - Generalization" version="1" id="O261">
++    <dia:object type="UML - Generalization" version="1" id="O259">
        <dia:attribute name="obj_pos">
          <dia:point val="290.265,168.2"/>
        </dia:attribute>
-@@ -32752,12 +32599,12 @@ main, or from another initialiser.#</dia:string>
+@@ -32116,12 +31963,12 @@ main, or from another initialiser.#</dia:string>
          <dia:string>##</dia:string>
        </dia:attribute>
        <dia:connections>
 -        <dia:connection handle="0" to="O148" connection="6"/>
--        <dia:connection handle="1" to="O261" connection="1"/>
+-        <dia:connection handle="1" to="O260" connection="1"/>
 +        <dia:connection handle="0" to="O146" connection="6"/>
-+        <dia:connection handle="1" to="O259" connection="1"/>
++        <dia:connection handle="1" to="O258" connection="1"/>
        </dia:connections>
        <dia:childnode parent="O1"/>
      </dia:object>
--    <dia:object type="UML - Association" version="2" id="O263">
-+    <dia:object type="UML - Association" version="2" id="O261">
+-    <dia:object type="UML - Association" version="2" id="O262">
++    <dia:object type="UML - Association" version="2" id="O260">
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -32824,12 +32671,12 @@ main, or from another initialiser.#</dia:string>
+@@ -32188,12 +32035,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O261" connection="6"/>
+-        <dia:connection handle="0" to="O260" connection="6"/>
 -        <dia:connection handle="1" to="O156" connection="6"/>
-+        <dia:connection handle="0" to="O259" connection="6"/>
++        <dia:connection handle="0" to="O258" connection="6"/>
 +        <dia:connection handle="1" to="O154" connection="6"/>
        </dia:connections>
+       <dia:childnode parent="O1"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O263">
++    <dia:object type="UML - Class" version="0" id="O261">
+       <dia:attribute name="obj_pos">
+         <dia:point val="276,129"/>
+       </dia:attribute>
+@@ -32335,7 +32182,7 @@ main, or from another initialiser.#</dia:string>
+       <dia:attribute name="templates"/>
        <dia:childnode parent="O1"/>
      </dia:object>
 -    <dia:object type="UML - Class" version="0" id="O264">
 +    <dia:object type="UML - Class" version="0" id="O262">
        <dia:attribute name="obj_pos">
-         <dia:point val="276,129"/>
+         <dia:point val="251,146"/>
        </dia:attribute>
-@@ -32971,7 +32818,7 @@ main, or from another initialiser.#</dia:string>
+@@ -32627,7 +32474,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O1"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O265">
-+    <dia:object type="UML - Class" version="0" id="O263">
-       <dia:attribute name="obj_pos">
-         <dia:point val="251,146"/>
+-    <dia:object type="UML - Association" version="2" id="O265">
++    <dia:object type="UML - Association" version="2" id="O263">
+       <dia:attribute name="name">
+         <dia:string>#keeps track of factories using &gt;#</dia:string>
        </dia:attribute>
-@@ -33263,7 +33110,7 @@ main, or from another initialiser.#</dia:string>
-       <dia:attribute name="templates"/>
+@@ -32694,12 +32541,12 @@ main, or from another initialiser.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O264" connection="2"/>
+-        <dia:connection handle="1" to="O145" connection="0"/>
++        <dia:connection handle="0" to="O262" connection="2"/>
++        <dia:connection handle="1" to="O143" connection="0"/>
+       </dia:connections>
        <dia:childnode parent="O1"/>
      </dia:object>
 -    <dia:object type="UML - Association" version="2" id="O266">
 +    <dia:object type="UML - Association" version="2" id="O264">
        <dia:attribute name="name">
-         <dia:string>#keeps track of factories using &gt;#</dia:string>
+         <dia:string>##</dia:string>
        </dia:attribute>
-@@ -33330,12 +33177,12 @@ main, or from another initialiser.#</dia:string>
+@@ -32766,12 +32613,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O265" connection="2"/>
--        <dia:connection handle="1" to="O145" connection="0"/>
-+        <dia:connection handle="0" to="O263" connection="2"/>
-+        <dia:connection handle="1" to="O143" connection="0"/>
+-        <dia:connection handle="0" to="O146" connection="7"/>
+-        <dia:connection handle="1" to="O264" connection="0"/>
++        <dia:connection handle="0" to="O144" connection="7"/>
++        <dia:connection handle="1" to="O262" connection="0"/>
        </dia:connections>
        <dia:childnode parent="O1"/>
      </dia:object>
@@ -3417,88 +3406,84 @@ index 4bab216..b4a3d92 100644
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -33402,12 +33249,12 @@ main, or from another initialiser.#</dia:string>
+@@ -32838,11 +32685,11 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O146" connection="7"/>
--        <dia:connection handle="1" to="O265" connection="0"/>
-+        <dia:connection handle="0" to="O144" connection="7"/>
-+        <dia:connection handle="1" to="O263" connection="0"/>
-       </dia:connections>
-       <dia:childnode parent="O1"/>
-     </dia:object>
--    <dia:object type="UML - Association" version="2" id="O268">
-+    <dia:object type="UML - Association" version="2" id="O266">
-       <dia:attribute name="name">
-         <dia:string>##</dia:string>
-       </dia:attribute>
-@@ -33474,11 +33321,11 @@ main, or from another initialiser.#</dia:string>
-         <dia:color val="#000000"/>
-       </dia:attribute>
-       <dia:connections>
--        <dia:connection handle="0" to="O237" connection="2"/>
+-        <dia:connection handle="0" to="O236" connection="2"/>
 -        <dia:connection handle="1" to="O96" connection="5"/>
-+        <dia:connection handle="0" to="O235" connection="2"/>
++        <dia:connection handle="0" to="O234" connection="2"/>
 +        <dia:connection handle="1" to="O95" connection="5"/>
        </dia:connections>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O269">
-+    <dia:object type="UML - Class" version="0" id="O267">
+-    <dia:object type="UML - Class" version="0" id="O268">
++    <dia:object type="UML - Class" version="0" id="O266">
        <dia:attribute name="obj_pos">
          <dia:point val="115,-14"/>
        </dia:attribute>
-@@ -33636,7 +33483,7 @@ main, or from another initialiser.#</dia:string>
+@@ -33000,7 +32847,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Association" version="2" id="O270">
-+    <dia:object type="UML - Association" version="2" id="O268">
+-    <dia:object type="UML - Association" version="2" id="O269">
++    <dia:object type="UML - Association" version="2" id="O267">
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -33703,12 +33550,12 @@ main, or from another initialiser.#</dia:string>
+@@ -33067,12 +32914,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
 -        <dia:connection handle="0" to="O103" connection="12"/>
--        <dia:connection handle="1" to="O269" connection="12"/>
+-        <dia:connection handle="1" to="O268" connection="12"/>
 +        <dia:connection handle="0" to="O102" connection="12"/>
-+        <dia:connection handle="1" to="O267" connection="12"/>
++        <dia:connection handle="1" to="O266" connection="12"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O271">
-+    <dia:object type="UML - Class" version="0" id="O269">
+-    <dia:object type="UML - Class" version="0" id="O270">
++    <dia:object type="UML - Class" version="0" id="O268">
        <dia:attribute name="obj_pos">
          <dia:point val="116,52"/>
        </dia:attribute>
-@@ -34046,7 +33893,7 @@ main, or from another initialiser.#</dia:string>
+@@ -33410,7 +33257,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O0"/>
      </dia:object>
--    <dia:object type="UML - Association" version="2" id="O272">
-+    <dia:object type="UML - Association" version="2" id="O270">
+-    <dia:object type="UML - Association" version="2" id="O271">
++    <dia:object type="UML - Association" version="2" id="O269">
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -34113,12 +33960,12 @@ main, or from another initialiser.#</dia:string>
+@@ -33477,12 +33324,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
 -        <dia:connection handle="0" to="O102" connection="5"/>
--        <dia:connection handle="1" to="O271" connection="6"/>
+-        <dia:connection handle="1" to="O270" connection="6"/>
 +        <dia:connection handle="0" to="O101" connection="5"/>
-+        <dia:connection handle="1" to="O269" connection="6"/>
++        <dia:connection handle="1" to="O268" connection="6"/>
        </dia:connections>
        <dia:childnode parent="O0"/>
+     </dia:object>
+-    <dia:object type="UML - Class" version="0" id="O272">
++    <dia:object type="UML - Class" version="0" id="O270">
+       <dia:attribute name="obj_pos">
+         <dia:point val="381,178"/>
+       </dia:attribute>
+@@ -33640,9 +33487,9 @@ main, or from another initialiser.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+-      <dia:childnode parent="O16"/>
++      <dia:childnode parent="O15"/>
      </dia:object>
 -    <dia:object type="UML - Class" version="0" id="O273">
 +    <dia:object type="UML - Class" version="0" id="O271">
        <dia:attribute name="obj_pos">
-         <dia:point val="381,178"/>
+         <dia:point val="406,166"/>
        </dia:attribute>
-@@ -34276,9 +34123,9 @@ main, or from another initialiser.#</dia:string>
+@@ -33800,9 +33647,9 @@ main, or from another initialiser.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="templates"/>
@@ -3508,242 +3493,233 @@ index 4bab216..b4a3d92 100644
 -    <dia:object type="UML - Class" version="0" id="O274">
 +    <dia:object type="UML - Class" version="0" id="O272">
        <dia:attribute name="obj_pos">
-         <dia:point val="406,166"/>
+         <dia:point val="520,188"/>
        </dia:attribute>
-@@ -34436,9 +34283,9 @@ main, or from another initialiser.#</dia:string>
+@@ -34400,9 +34247,9 @@ main, or from another initialiser.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="templates"/>
 -      <dia:childnode parent="O16"/>
 +      <dia:childnode parent="O15"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O275">
-+    <dia:object type="UML - Class" version="0" id="O273">
-       <dia:attribute name="obj_pos">
-         <dia:point val="514,171"/>
+-    <dia:object type="UML - Association" version="2" id="O275">
++    <dia:object type="UML - Association" version="2" id="O273">
+       <dia:attribute name="name">
+         <dia:string>##</dia:string>
        </dia:attribute>
-@@ -34728,9 +34575,9 @@ main, or from another initialiser.#</dia:string>
-         <dia:boolean val="false"/>
+@@ -34443,7 +34290,7 @@ main, or from another initialiser.#</dia:string>
+         <dia:point val="543.158,188"/>
        </dia:attribute>
-       <dia:attribute name="templates"/>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="498.562,178.25;543.908,188.8"/>
++        <dia:rectangle val="498.563,178.25;543.908,188.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -34469,12 +34316,12 @@ main, or from another initialiser.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O274" connection="1"/>
+-        <dia:connection handle="1" to="O255" connection="1"/>
++        <dia:connection handle="0" to="O272" connection="1"/>
++        <dia:connection handle="1" to="O253" connection="1"/>
+       </dia:connections>
 -      <dia:childnode parent="O16"/>
 +      <dia:childnode parent="O15"/>
      </dia:object>
 -    <dia:object type="UML - Class" version="0" id="O276">
 +    <dia:object type="UML - Class" version="0" id="O274">
        <dia:attribute name="obj_pos">
-         <dia:point val="518,188"/>
-       </dia:attribute>
-@@ -34839,9 +34686,9 @@ main, or from another initialiser.#</dia:string>
-         <dia:boolean val="false"/>
-       </dia:attribute>
-       <dia:attribute name="templates"/>
--      <dia:childnode parent="O16"/>
-+      <dia:childnode parent="O15"/>
-     </dia:object>
--    <dia:object type="UML - Generalization" version="1" id="O277">
-+    <dia:object type="UML - Generalization" version="1" id="O275">
-       <dia:attribute name="obj_pos">
-         <dia:point val="537.158,177.6"/>
-       </dia:attribute>
-@@ -34878,12 +34725,12 @@ main, or from another initialiser.#</dia:string>
-         <dia:string>##</dia:string>
-       </dia:attribute>
-       <dia:connections>
--        <dia:connection handle="0" to="O275" connection="6"/>
--        <dia:connection handle="1" to="O276" connection="1"/>
-+        <dia:connection handle="0" to="O273" connection="6"/>
-+        <dia:connection handle="1" to="O274" connection="1"/>
-       </dia:connections>
--      <dia:childnode parent="O16"/>
-+      <dia:childnode parent="O15"/>
-     </dia:object>
--    <dia:object type="UML - Generalization" version="1" id="O278">
-+    <dia:object type="UML - Generalization" version="1" id="O276">
-       <dia:attribute name="obj_pos">
-         <dia:point val="537.158,177.65"/>
-       </dia:attribute>
-@@ -34920,12 +34767,12 @@ main, or from another initialiser.#</dia:string>
-         <dia:string>##</dia:string>
-       </dia:attribute>
-       <dia:connections>
--        <dia:connection handle="0" to="O275" connection="18"/>
--        <dia:connection handle="1" to="O188" connection="36"/>
-+        <dia:connection handle="0" to="O273" connection="18"/>
-+        <dia:connection handle="1" to="O186" connection="36"/>
-       </dia:connections>
--      <dia:childnode parent="O16"/>
-+      <dia:childnode parent="O15"/>
-     </dia:object>
--    <dia:object type="UML - Association" version="2" id="O279">
-+    <dia:object type="UML - Association" version="2" id="O277">
-       <dia:attribute name="name">
-         <dia:string>##</dia:string>
-       </dia:attribute>
-@@ -34992,12 +34839,12 @@ main, or from another initialiser.#</dia:string>
-         <dia:color val="#000000"/>
-       </dia:attribute>
-       <dia:connections>
--        <dia:connection handle="0" to="O188" connection="6"/>
--        <dia:connection handle="1" to="O256" connection="6"/>
-+        <dia:connection handle="0" to="O186" connection="6"/>
-+        <dia:connection handle="1" to="O254" connection="6"/>
-       </dia:connections>
--      <dia:childnode parent="O16"/>
-+      <dia:childnode parent="O15"/>
-     </dia:object>
--    <dia:object type="UML - Class" version="0" id="O280">
-+    <dia:object type="UML - Class" version="0" id="O278">
-       <dia:attribute name="obj_pos">
          <dia:point val="482,227"/>
        </dia:attribute>
-@@ -35106,9 +34953,9 @@ main, or from another initialiser.#</dia:string>
+@@ -34583,9 +34430,9 @@ main, or from another initialiser.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="templates"/>
 -      <dia:childnode parent="O44"/>
 +      <dia:childnode parent="O43"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O281">
-+    <dia:object type="UML - Class" version="0" id="O279">
+-    <dia:object type="UML - Class" version="0" id="O277">
++    <dia:object type="UML - Class" version="0" id="O275">
        <dia:attribute name="obj_pos">
          <dia:point val="503,227"/>
        </dia:attribute>
-@@ -35217,9 +35064,9 @@ main, or from another initialiser.#</dia:string>
+@@ -34694,9 +34541,9 @@ main, or from another initialiser.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="templates"/>
 -      <dia:childnode parent="O44"/>
 +      <dia:childnode parent="O43"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O282">
-+    <dia:object type="UML - Class" version="0" id="O280">
+-    <dia:object type="UML - Class" version="0" id="O278">
++    <dia:object type="UML - Class" version="0" id="O276">
        <dia:attribute name="obj_pos">
          <dia:point val="503,232"/>
        </dia:attribute>
-@@ -35328,9 +35175,9 @@ main, or from another initialiser.#</dia:string>
+@@ -34805,9 +34652,9 @@ main, or from another initialiser.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="templates"/>
 -      <dia:childnode parent="O44"/>
 +      <dia:childnode parent="O43"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O283">
-+    <dia:object type="UML - Class" version="0" id="O281">
+-    <dia:object type="UML - Class" version="0" id="O279">
++    <dia:object type="UML - Class" version="0" id="O277">
        <dia:attribute name="obj_pos">
          <dia:point val="434,227"/>
        </dia:attribute>
-@@ -35439,9 +35286,9 @@ main, or from another initialiser.#</dia:string>
+@@ -34916,9 +34763,9 @@ main, or from another initialiser.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="templates"/>
 -      <dia:childnode parent="O54"/>
 +      <dia:childnode parent="O53"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O284">
-+    <dia:object type="UML - Class" version="0" id="O282">
+-    <dia:object type="UML - Class" version="0" id="O280">
++    <dia:object type="UML - Class" version="0" id="O278">
        <dia:attribute name="obj_pos">
          <dia:point val="137,214"/>
        </dia:attribute>
-@@ -35599,7 +35446,7 @@ main, or from another initialiser.#</dia:string>
+@@ -35076,7 +34923,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O1"/>
      </dia:object>
--    <dia:object type="UML - Association" version="2" id="O285">
-+    <dia:object type="UML - Association" version="2" id="O283">
+-    <dia:object type="UML - Association" version="2" id="O281">
++    <dia:object type="UML - Association" version="2" id="O279">
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -35666,12 +35513,12 @@ main, or from another initialiser.#</dia:string>
+@@ -35143,12 +34990,12 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
--        <dia:connection handle="0" to="O286" connection="6"/>
--        <dia:connection handle="1" to="O284" connection="6"/>
-+        <dia:connection handle="0" to="O284" connection="6"/>
-+        <dia:connection handle="1" to="O282" connection="6"/>
+-        <dia:connection handle="0" to="O282" connection="6"/>
+-        <dia:connection handle="1" to="O280" connection="6"/>
++        <dia:connection handle="0" to="O280" connection="6"/>
++        <dia:connection handle="1" to="O278" connection="6"/>
        </dia:connections>
        <dia:childnode parent="O1"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O286">
-+    <dia:object type="UML - Class" version="0" id="O284">
+-    <dia:object type="UML - Class" version="0" id="O282">
++    <dia:object type="UML - Class" version="0" id="O280">
        <dia:attribute name="obj_pos">
          <dia:point val="164,214"/>
        </dia:attribute>
-@@ -35831,7 +35678,7 @@ main, or from another initialiser.#</dia:string>
+@@ -35308,7 +35155,7 @@ main, or from another initialiser.#</dia:string>
        <dia:attribute name="templates"/>
        <dia:childnode parent="O1"/>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O287">
-+    <dia:object type="UML - Class" version="0" id="O285">
+-    <dia:object type="UML - Class" version="0" id="O283">
++    <dia:object type="UML - Class" version="0" id="O281">
        <dia:attribute name="obj_pos">
          <dia:point val="417,151"/>
        </dia:attribute>
-@@ -35987,9 +35834,9 @@ main, or from another initialiser.#</dia:string>
+@@ -35464,9 +35311,9 @@ main, or from another initialiser.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="templates"/>
 -      <dia:childnode parent="O16"/>
 +      <dia:childnode parent="O15"/>
      </dia:object>
--    <dia:object type="UML - LargePackage" version="0" id="O288">
-+    <dia:object type="UML - LargePackage" version="0" id="O286">
+-    <dia:object type="UML - LargePackage" version="0" id="O284">
++    <dia:object type="UML - LargePackage" version="0" id="O282">
        <dia:attribute name="obj_pos">
          <dia:point val="466,37"/>
        </dia:attribute>
-@@ -36027,7 +35874,7 @@ main, or from another initialiser.#</dia:string>
+@@ -35504,7 +35351,7 @@ main, or from another initialiser.#</dia:string>
          <dia:string>#fabric#</dia:string>
        </dia:attribute>
      </dia:object>
--    <dia:object type="UML - Class" version="0" id="O289">
-+    <dia:object type="UML - Class" version="0" id="O287">
+-    <dia:object type="UML - Class" version="0" id="O285">
++    <dia:object type="UML - Class" version="0" id="O283">
        <dia:attribute name="obj_pos">
          <dia:point val="472,84"/>
        </dia:attribute>
-@@ -36185,9 +36032,9 @@ main, or from another initialiser.#</dia:string>
+@@ -35662,9 +35509,9 @@ main, or from another initialiser.#</dia:string>
          <dia:boolean val="false"/>
        </dia:attribute>
        <dia:attribute name="templates"/>
--      <dia:childnode parent="O288"/>
-+      <dia:childnode parent="O286"/>
+-      <dia:childnode parent="O284"/>
++      <dia:childnode parent="O282"/>
      </dia:object>
--    <dia:object type="UML - Association" version="2" id="O290">
-+    <dia:object type="UML - Association" version="2" id="O288">
+-    <dia:object type="UML - Association" version="2" id="O286">
++    <dia:object type="UML - Association" version="2" id="O284">
        <dia:attribute name="name">
          <dia:string>##</dia:string>
        </dia:attribute>
-@@ -36228,7 +36075,7 @@ main, or from another initialiser.#</dia:string>
-         <dia:point val="341.15,99"/>
-       </dia:attribute>
-       <dia:attribute name="obj_bb">
--        <dia:rectangle val="340.4,87.55;478.225,100.6"/>
-+        <dia:rectangle val="340.4,87.55;478.225,99.8"/>
-       </dia:attribute>
-       <dia:attribute name="meta">
-         <dia:composite type="dict"/>
-@@ -36254,8 +36101,8 @@ main, or from another initialiser.#</dia:string>
+@@ -35731,8 +35578,8 @@ main, or from another initialiser.#</dia:string>
          <dia:color val="#000000"/>
        </dia:attribute>
        <dia:connections>
 -        <dia:connection handle="0" to="O20" connection="2"/>
--        <dia:connection handle="1" to="O289" connection="6"/>
+-        <dia:connection handle="1" to="O285" connection="6"/>
 +        <dia:connection handle="0" to="O19" connection="2"/>
-+        <dia:connection handle="1" to="O287" connection="6"/>
++        <dia:connection handle="1" to="O283" connection="6"/>
        </dia:connections>
      </dia:object>
    </dia:layer>
-diff --git a/doc/agile/sprint_backlog_78.org b/doc/agile/sprint_backlog_78.org
-index f707b36..b2a6d07 100644
---- a/doc/agile/sprint_backlog_78.org
-+++ b/doc/agile/sprint_backlog_78.org
-@@ -221,6 +221,7 @@ a time and have them share the same registrars etc.
- - [[http://tinyletter.com/programming-beyond-practices/letters/the-sad-graph-of-software-death][The sad graph of software death]]
+diff --git a/doc/agile/sprint_backlog_79.org b/doc/agile/sprint_backlog_79.org
+index ec6e9bb..a5a9d57 100644
+--- a/doc/agile/sprint_backlog_79.org
++++ b/doc/agile/sprint_backlog_79.org
+@@ -13,18 +13,18 @@
+ ** Active
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
+-#+CAPTION: Clock summary at [2016-01-20 Wed 21:06]
++#+CAPTION: Clock summary at [2016-01-20 Wed 22:34]
+ | <75>                                                                        |        |      |      |
+ | Headline                                                                    | Time   |      |      |
+ |-----------------------------------------------------------------------------+--------+------+------|
+-| *Total time*                                                                | *3:39* |      |      |
++| *Total time*                                                                | *5:04* |      |      |
+ |-----------------------------------------------------------------------------+--------+------+------|
+-| Stories                                                                     | 3:39   |      |      |
+-| Active                                                                      |        | 3:39 |      |
++| Stories                                                                     | 5:04   |      |      |
++| Active                                                                      |        | 5:04 |      |
+ | STARTED Sprint and product backlog grooming                                 |        |      | 0:21 |
+ | COMPLETED Merge all formatter assistants into one                           |        |      | 2:20 |
+-| COMPLETED Name builder should take only model name                          |        |      | 0:30 |
+-| STARTED Generate exceptions using yarn types                                |        |      | 0:16 |
++| COMPLETED Name builder should take only model name                          |        |      | 0:48 |
++| STARTED Generate exceptions using yarn types                                |        |      | 1:23 |
+ | STARTED Create a debug build for clang in travis                            |        |      | 0:12 |
+ #+end:
+ 
+@@ -53,15 +53,18 @@ input parameter.
+ 
+ *** COMPLETED Name builder should take only model name                :story:
+     CLOSED: [2016-01-20 Wed 21:05]
++    CLOCK: [2016-01-20 Wed 21:46]--[2016-01-20 Wed 22:04] =>  0:18
+     CLOCK: [2016-01-20 Wed 20:35]--[2016-01-20 Wed 21:05] =>  0:30
+ 
+ At present name builder requires an entire model just to get the name
+ out of it.
  
  *** STARTED Generate exceptions using yarn types                      :story:
-+    CLOCK: [2016-01-14 Thu 21:52]--[2016-01-14 Thu 22:14] =>  0:22
++    CLOCK: [2016-01-20 Wed 22:05]--[2016-01-20 Wed 22:33] =>  0:28
++    CLOCK: [2016-01-20 Wed 21:06]--[2016-01-20 Wed 21:45] =>  0:39
+     CLOCK: [2016-01-19 Tue 23:11]--[2016-01-19 Tue 23:27] =>  0:16
  
- Tasks:
+-Tasks:
++Tasks completed:
  
+ - delete the quilt exception type;
+ - remove transformation support for exception;
+@@ -70,6 +73,11 @@ Tasks:
+ - update the yarn formatting workflow to process yarn exceptions;
+ - update the stitch templates to make use of yarn exceptions.
+ 
++Todo:
++
++- cannot find formatter properties for
++  quilt.cpp.types.exception_header_formatter
++
+ *** Access model name from within formatters workflow                 :story:
+ 
+ In order for the assistant to build names, it will need to be able to
 diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/hash/all_hash.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/hash/all_hash.hpp
 index 362fed2..43aca24 100644
 --- a/projects/quilt.cpp/include/dogen/quilt.cpp/hash/all_hash.hpp
@@ -4069,50 +4045,10 @@ index 4e1c0e6..0000000
 -
 -#endif
 diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/all.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/all.hpp
-index 1b058f9..1669af5 100644
+index 4b3de61..fca4423 100644
 --- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/all.hpp
 +++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/all.hpp
-@@ -32,23 +32,18 @@
- #include "dogen/quilt.cpp/types/workflow_error.hpp"
- #include "dogen/quilt.cpp/types/fabric/workflow.hpp"
- #include "dogen/quilt.cpp/types/settings/bundle.hpp"
--#include "dogen/quilt.cpp/types/formatters/io/io.hpp"
- #include "dogen/quilt.cpp/types/formatters/traits.hpp"
--#include "dogen/quilt.cpp/types/settings/settings.hpp"
- #include "dogen/quilt.cpp/types/formatters/context.hpp"
--#include "dogen/quilt.cpp/types/formatters/odb/odb.hpp"
- #include "dogen/quilt.cpp/types/settings/registrar.hpp"
- #include "dogen/quilt.cpp/types/formattables/entity.hpp"
- #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
- #include "dogen/quilt.cpp/types/formattables/factory.hpp"
- #include "dogen/quilt.cpp/types/formatters/container.hpp"
--#include "dogen/quilt.cpp/types/formatters/hash/hash.hpp"
- #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
- #include "dogen/quilt.cpp/types/formatters/registrar.hpp"
- #include "dogen/quilt.cpp/types/settings/initializer.hpp"
- #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
- #include "dogen/quilt.cpp/types/formatters/file_types.hpp"
--#include "dogen/quilt.cpp/types/formatters/formatters.hpp"
- #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
- #include "dogen/quilt.cpp/types/settings/odb_settings.hpp"
- #include "dogen/quilt.cpp/types/formattables/container.hpp"
-@@ -56,7 +51,6 @@
- #include "dogen/quilt.cpp/types/formattables/registrar.hpp"
- #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
- #include "dogen/quilt.cpp/types/formatters/initializer.hpp"
--#include "dogen/quilt.cpp/types/formatters/types/types.hpp"
- #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
- #include "dogen/quilt.cpp/types/formattables/class_info.hpp"
- #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
-@@ -69,7 +63,6 @@
- #include "dogen/quilt.cpp/types/settings/opaque_settings.hpp"
- #include "dogen/quilt.cpp/types/settings/registrar_error.hpp"
- #include "dogen/quilt.cpp/types/formattables/concept_info.hpp"
--#include "dogen/quilt.cpp/types/formattables/formattables.hpp"
- #include "dogen/quilt.cpp/types/formattables/name_builder.hpp"
- #include "dogen/quilt.cpp/types/formattables/origin_types.hpp"
- #include "dogen/quilt.cpp/types/formattables/visitor_info.hpp"
-@@ -79,7 +72,6 @@
+@@ -73,7 +73,6 @@
  #include "dogen/quilt.cpp/types/formatters/registrar_error.hpp"
  #include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
  #include "dogen/quilt.cpp/types/formattables/building_error.hpp"
@@ -4120,22 +4056,6 @@ index 1b058f9..1669af5 100644
  #include "dogen/quilt.cpp/types/formattables/includers_info.hpp"
  #include "dogen/quilt.cpp/types/formattables/namespace_info.hpp"
  #include "dogen/quilt.cpp/types/formattables/primitive_info.hpp"
-@@ -100,7 +92,6 @@
- #include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
- #include "dogen/quilt.cpp/types/formatters/includers_formatter.hpp"
- #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
--#include "dogen/quilt.cpp/types/formatters/test_data/test_data.hpp"
- #include "dogen/quilt.cpp/types/settings/path_settings_factory.hpp"
- #include "dogen/quilt.cpp/types/formattables/enablement_factory.hpp"
- #include "dogen/quilt.cpp/types/formatters/formatting_assistant.hpp"
-@@ -130,7 +121,6 @@
- #include "dogen/quilt.cpp/types/formatters/entity_formatting_assistant.hpp"
- #include "dogen/quilt.cpp/types/formatters/hash/class_header_formatter.hpp"
- #include "dogen/quilt.cpp/types/formatters/io/helper_methods_formatter.hpp"
--#include "dogen/quilt.cpp/types/formatters/serialization/serialization.hpp"
- #include "dogen/quilt.cpp/types/formatters/source_cmakelists_formatter.hpp"
- #include "dogen/quilt.cpp/types/formatters/types/enum_header_formatter.hpp"
- #include "dogen/quilt.cpp/types/formatters/visitor_formatter_interface.hpp"
 diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formattables/exception_info.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formattables/exception_info.hpp
 deleted file mode 100644
 index f9dab68..0000000
@@ -4328,75 +4248,6 @@ index db9dc3b..491b0ef 100644
       * @brief Accept visits for type dogen::quilt::cpp::formattables::forward_declarations_info
       */
      /**@{*/
-diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formattables/formattables.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formattables/formattables.hpp
-deleted file mode 100644
-index e30a10c..0000000
---- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formattables/formattables.hpp
-+++ /dev/null
-@@ -1,63 +0,0 @@
--/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
-- *
-- * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
-- *
-- * This program is free software; you can redistribute it and/or modify
-- * it under the terms of the GNU General Public License as published by
-- * the Free Software Foundation; either version 3 of the License, or
-- * (at your option) any later version.
-- *
-- * This program is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-- * GNU General Public License for more details.
-- *
-- * You should have received a copy of the GNU General Public License
-- * along with this program; if not, write to the Free Software
-- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-- * MA 02110-1301, USA.
-- *
-- */
--#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FORMATTABLES_HPP
--#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FORMATTABLES_HPP
--
--#if defined(_MSC_VER) && (_MSC_VER >= 1200)
--#pragma once
--#endif
--
--namespace dogen {
--namespace quilt {
--namespace cpp {
--
--/**
-- * @brief Formattables contains all types required by the formatters
-- * and those used to generate them.
-- *
-- * @section cpp_1 Inclusion Directive and Inclusion Dependency
-- *
-- * In this module we use two similar terms with very different meanings:
-- * inclusion directive and inclusion dependency.
-- *
-- * An inclusion directive is a string with delimiters but without the
-- * #include pragma. For example "a/b/c,hpp" and <a/b/c.hpp> are
-- * inclusion directives; note that the quotes and angle brackets are part
-- * of the directive. There should be an inclusion directive associated
-- * with every pair (name, formatter name). The inclusion directive
-- * repository contains the complete set of inclusion directives - the
-- * inclusion directives universe if you'd like.
-- *
-- * Inclusion dependencies are a set of inclusion directives.  They are
-- * also associated with a pair (name, formatter).  The inclusion
-- * dependences for each formatter are created by the inclusion
-- * dependencies providers. Each formatter is expected to supply one of
-- * one of these. It uses the inclusion directives available n the
-- * repository to assemble the inclusion dependencies that the formatter
-- * needs in order to generate a compilable C++ file.
-- *
-- */
--namespace formattables {
--}
--
--} } }
--
--#endif
 diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formattables/transformer.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formattables/transformer.hpp
 index d79bbfb..e45dae8 100644
 --- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formattables/transformer.hpp
@@ -4422,6 +4273,32 @@ index d79bbfb..e45dae8 100644
       * @brief Transform a Yarn object into a class info.
       *
       * @param ao object to transform.
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/assistant.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/assistant.hpp
+index 3a01211..5241f67 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/assistant.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/assistant.hpp
+@@ -33,6 +33,7 @@
+ #include <boost/iostreams/filtering_stream.hpp>
+ #include "dogen/dynamic/types/ownership_hierarchy.hpp"
+ #include "dogen/formatters/types/file.hpp"
++#include "dogen/yarn/types/name.hpp"
+ #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
+ #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
+ #include "dogen/quilt.cpp/types/settings/odb_settings.hpp"
+@@ -113,7 +114,12 @@ public:
+     std::string make_getter_setter_name(
+         const formattables::property_info& p) const;
+ 
+-public:
++    /**
++     * @brief returns the c++ namespaces for the name.
++     */
++    std::list<std::string> make_namespaces(const yarn::name& n) const;
++
++ public:
+     /**
+      * @brief Returns true if serialization is enabled.
+      */
 diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/exception_formatter_interface.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/exception_formatter_interface.hpp
 index 2d4a02d..5b17928 100644
 --- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/exception_formatter_interface.hpp
@@ -4445,319 +4322,21 @@ index 2d4a02d..5b17928 100644
  };
  
  } } } }
-diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/formatters.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/formatters.hpp
-deleted file mode 100644
-index e855836..0000000
---- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/formatters.hpp
-+++ /dev/null
-@@ -1,45 +0,0 @@
--/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
-- *
-- * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
-- *
-- * This program is free software; you can redistribute it and/or modify
-- * it under the terms of the GNU General Public License as published by
-- * the Free Software Foundation; either version 3 of the License, or
-- * (at your option) any later version.
-- *
-- * This program is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-- * GNU General Public License for more details.
-- *
-- * You should have received a copy of the GNU General Public License
-- * along with this program; if not, write to the Free Software
-- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-- * MA 02110-1301, USA.
-- *
-- */
--#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_FORMATTERS_HPP
--#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_FORMATTERS_HPP
--
--#if defined(_MSC_VER) && (_MSC_VER >= 1200)
--#pragma once
--#endif
--
--namespace dogen {
--namespace quilt {
--namespace cpp {
--
--/**
-- * @brief Formatters for the C++ model.
-- *
-- * Takes types in the C++ model and creates a file
-- * representation of these types according to the
-- * grammar of the C++-11 programming language.
-- *
-- */
--namespace formatters {
--}
--
--} } }
--
--#endif
-diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/hash/hash.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/hash/hash.hpp
-deleted file mode 100644
-index 9625b9f..0000000
---- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/hash/hash.hpp
-+++ /dev/null
-@@ -1,43 +0,0 @@
--/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
-- *
-- * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
-- *
-- * This program is free software; you can redistribute it and/or modify
-- * it under the terms of the GNU General Public License as published by
-- * the Free Software Foundation; either version 3 of the License, or
-- * (at your option) any later version.
-- *
-- * This program is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-- * GNU General Public License for more details.
-- *
-- * You should have received a copy of the GNU General Public License
-- * along with this program; if not, write to the Free Software
-- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-- * MA 02110-1301, USA.
-- *
-- */
--#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_HASH_HASH_HPP
--#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_HASH_HASH_HPP
--
--#if defined(_MSC_VER) && (_MSC_VER >= 1200)
--#pragma once
--#endif
--
--namespace dogen {
--namespace quilt {
--namespace cpp {
--namespace formatters {
--
--/**
-- * @brief Formatters for the hash facet of the
-- * C++ language.
-- *
-- */
--namespace hash {
--}
--
--} } } }
--
--#endif
-diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/io/io.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/io/io.hpp
-deleted file mode 100644
-index e86149d..0000000
---- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/io/io.hpp
-+++ /dev/null
-@@ -1,43 +0,0 @@
--/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
-- *
-- * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
-- *
-- * This program is free software; you can redistribute it and/or modify
-- * it under the terms of the GNU General Public License as published by
-- * the Free Software Foundation; either version 3 of the License, or
-- * (at your option) any later version.
-- *
-- * This program is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-- * GNU General Public License for more details.
-- *
-- * You should have received a copy of the GNU General Public License
-- * along with this program; if not, write to the Free Software
-- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-- * MA 02110-1301, USA.
-- *
-- */
--#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_IO_IO_HPP
--#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_IO_IO_HPP
--
--#if defined(_MSC_VER) && (_MSC_VER >= 1200)
--#pragma once
--#endif
--
--namespace dogen {
--namespace quilt {
--namespace cpp {
--namespace formatters {
--
--/**
-- * @brief Formatters for the io facet of the
-- * C++ language.
-- *
-- */
--namespace io {
--}
--
--} } } }
--
--#endif
-diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/odb.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/odb.hpp
-deleted file mode 100644
-index feccba7..0000000
---- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/odb.hpp
-+++ /dev/null
-@@ -1,43 +0,0 @@
--/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
-- *
-- * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
-- *
-- * This program is free software; you can redistribute it and/or modify
-- * it under the terms of the GNU General Public License as published by
-- * the Free Software Foundation; either version 3 of the License, or
-- * (at your option) any later version.
-- *
-- * This program is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-- * GNU General Public License for more details.
-- *
-- * You should have received a copy of the GNU General Public License
-- * along with this program; if not, write to the Free Software
-- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-- * MA 02110-1301, USA.
-- *
-- */
--#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_ODB_ODB_HPP
--#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_ODB_ODB_HPP
--
--#if defined(_MSC_VER) && (_MSC_VER >= 1200)
--#pragma once
--#endif
--
--namespace dogen {
--namespace quilt {
--namespace cpp {
--namespace formatters {
--
--/**
-- * @brief Formatters for the odb facet of the
-- * C++ language.
-- *
-- */
--namespace odb {
--}
--
--} } } }
--
--#endif
-diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/serialization/serialization.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/serialization/serialization.hpp
-deleted file mode 100644
-index eaab10c..0000000
---- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/serialization/serialization.hpp
-+++ /dev/null
-@@ -1,43 +0,0 @@
--/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
-- *
-- * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
-- *
-- * This program is free software; you can redistribute it and/or modify
-- * it under the terms of the GNU General Public License as published by
-- * the Free Software Foundation; either version 3 of the License, or
-- * (at your option) any later version.
-- *
-- * This program is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-- * GNU General Public License for more details.
-- *
-- * You should have received a copy of the GNU General Public License
-- * along with this program; if not, write to the Free Software
-- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-- * MA 02110-1301, USA.
-- *
-- */
--#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_SERIALIZATION_SERIALIZATION_HPP
--#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_SERIALIZATION_SERIALIZATION_HPP
--
--#if defined(_MSC_VER) && (_MSC_VER >= 1200)
--#pragma once
--#endif
--
--namespace dogen {
--namespace quilt {
--namespace cpp {
--namespace formatters {
--
--/**
-- * @brief Formatters for the boost serialisation
-- * facet of the C++ language.
-- *
-- */
--namespace serialization {
--}
--
--} } } }
--
--#endif
-diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/test_data/test_data.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/test_data/test_data.hpp
-deleted file mode 100644
-index 5c87bc7..0000000
---- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/test_data/test_data.hpp
-+++ /dev/null
-@@ -1,43 +0,0 @@
--/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
-- *
-- * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
-- *
-- * This program is free software; you can redistribute it and/or modify
-- * it under the terms of the GNU General Public License as published by
-- * the Free Software Foundation; either version 3 of the License, or
-- * (at your option) any later version.
-- *
-- * This program is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-- * GNU General Public License for more details.
-- *
-- * You should have received a copy of the GNU General Public License
-- * along with this program; if not, write to the Free Software
-- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-- * MA 02110-1301, USA.
-- *
-- */
--#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_TEST_DATA_TEST_DATA_HPP
--#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_TEST_DATA_TEST_DATA_HPP
--
--#if defined(_MSC_VER) && (_MSC_VER >= 1200)
--#pragma once
--#endif
--
--namespace dogen {
--namespace quilt {
--namespace cpp {
--namespace formatters {
--
--/**
-- * @brief Formatters for the test_data facet
-- * of the C++ language.
-- *
-- */
--namespace test_data {
--}
--
--} } } }
--
--#endif
 diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/exception_header_formatter.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/exception_header_formatter.hpp
-index 964871c..ca92552 100644
+index 964871c..a366d01 100644
 --- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/exception_header_formatter.hpp
 +++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/exception_header_formatter.hpp
-@@ -57,8 +57,8 @@ public:
-     void register_inclusion_dependencies_provider(
+@@ -58,7 +58,7 @@ public:
          formattables::registrar& rg) const override;
  
--    dogen::formatters::file format(const context& ctx,
+     dogen::formatters::file format(const context& ctx,
 -        const formattables::exception_info& c) const override;
-+    dogen::formatters::file
-+    format(const context& ctx, const yarn::exception& e) const override;
++        const yarn::exception& c) const override;
  };
  
  } } } } }
 diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/exception_header_formatter_stitch.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/exception_header_formatter_stitch.hpp
-index b5f40e9..e091ff9 100644
+index 18bd63e..d98bed7 100644
 --- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/exception_header_formatter_stitch.hpp
 +++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/exception_header_formatter_stitch.hpp
 @@ -26,8 +26,8 @@
@@ -4765,122 +4344,20 @@ index b5f40e9..e091ff9 100644
  
  #include "dogen/formatters/types/file.hpp"
 +#include "dogen/yarn/types/exception.hpp"
- #include "dogen/quilt.cpp/types/formatters/entity_formatting_assistant.hpp"
+ #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 -#include "dogen/quilt.cpp/types/formattables/exception_info.hpp"
  
  namespace dogen {
  namespace quilt {
-@@ -36,8 +36,7 @@ namespace formatters {
+@@ -36,7 +36,7 @@ namespace formatters {
  namespace types {
  
  dogen::formatters::file exception_header_formatter_stitch(
--    formatters::entity_formatting_assistant& fa,
--    const formattables::exception_info& e);
-+    formatters::entity_formatting_assistant& fa, const yarn::exception& e);
+-    assistant& a, const formattables::exception_info& e);
++    assistant& a, const yarn::exception& e);
  
  } } } } }
  
-diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/types.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/types.hpp
-deleted file mode 100644
-index 748bbaf..0000000
---- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/types.hpp
-+++ /dev/null
-@@ -1,43 +0,0 @@
--/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
-- *
-- * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
-- *
-- * This program is free software; you can redistribute it and/or modify
-- * it under the terms of the GNU General Public License as published by
-- * the Free Software Foundation; either version 3 of the License, or
-- * (at your option) any later version.
-- *
-- * This program is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-- * GNU General Public License for more details.
-- *
-- * You should have received a copy of the GNU General Public License
-- * along with this program; if not, write to the Free Software
-- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-- * MA 02110-1301, USA.
-- *
-- */
--#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_TYPES_TYPES_HPP
--#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_TYPES_TYPES_HPP
--
--#if defined(_MSC_VER) && (_MSC_VER >= 1200)
--#pragma once
--#endif
--
--namespace dogen {
--namespace quilt {
--namespace cpp {
--namespace formatters {
--
--/**
-- * @brief Formatters for the types facet of the
-- * C++ language.
-- *
-- */
--namespace types {
--}
--
--} } } }
--
--#endif
-diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/settings/settings.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/settings/settings.hpp
-deleted file mode 100644
-index e3df7c4..0000000
---- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/settings/settings.hpp
-+++ /dev/null
-@@ -1,46 +0,0 @@
--/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
-- *
-- * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
-- *
-- * This program is free software; you can redistribute it and/or modify
-- * it under the terms of the GNU General Public License as published by
-- * the Free Software Foundation; either version 3 of the License, or
-- * (at your option) any later version.
-- *
-- * This program is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-- * GNU General Public License for more details.
-- *
-- * You should have received a copy of the GNU General Public License
-- * along with this program; if not, write to the Free Software
-- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-- * MA 02110-1301, USA.
-- *
-- */
--#ifndef DOGEN_QUILT_CPP_TYPES_SETTINGS_SETTINGS_HPP
--#define DOGEN_QUILT_CPP_TYPES_SETTINGS_SETTINGS_HPP
--
--#if defined(_MSC_VER) && (_MSC_VER >= 1200)
--#pragma once
--#endif
--
--namespace dogen {
--namespace quilt {
--namespace cpp {
--
--/**
-- * @brief Settings for the C++ Model.
-- *
-- * This namespace contains all classes that model
-- * settings used by the formatters, as well as all
-- * classes required to extract those settings from
-- * the dynamic object.
-- *
-- */
--namespace settings {
--}
--
--} } }
--
--#endif
 diff --git a/projects/quilt.cpp/src/hash/formattables/exception_info_hash.cpp b/projects/quilt.cpp/src/hash/formattables/exception_info_hash.cpp
 deleted file mode 100644
 index 813fde8..0000000
@@ -5333,7 +4810,7 @@ index e28206c..0000000
 -
 -} } } }
 diff --git a/projects/quilt.cpp/src/types/formattables/transformer.cpp b/projects/quilt.cpp/src/types/formattables/transformer.cpp
-index 9a6156e..9ef2242 100644
+index 3669747..d59c01b 100644
 --- a/projects/quilt.cpp/src/types/formattables/transformer.cpp
 +++ b/projects/quilt.cpp/src/types/formattables/transformer.cpp
 @@ -379,18 +379,6 @@ to_namespace_info(const yarn::module& m) const {
@@ -5363,16 +4840,286 @@ index 9a6156e..9ef2242 100644
      r.push_front(to_forward_declarations_info(e));
      return r;
  }
+diff --git a/projects/quilt.cpp/src/types/formatters/assistant.cpp b/projects/quilt.cpp/src/types/formatters/assistant.cpp
+index e006213..8710460 100644
+--- a/projects/quilt.cpp/src/types/formatters/assistant.cpp
++++ b/projects/quilt.cpp/src/types/formatters/assistant.cpp
+@@ -24,6 +24,7 @@
+ #include "dogen/formatters/types/indent_filter.hpp"
+ #include "dogen/formatters/types/comment_formatter.hpp"
+ #include "dogen/formatters/types/annotation_formatter.hpp"
++#include "dogen/quilt.cpp/types/formattables/name_builder.hpp"
+ #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
+ #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
+ #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
+@@ -132,6 +133,11 @@ std::string assistant::make_getter_setter_name(
+     return p.name();
+ }
+ 
++std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
++    formattables::name_builder b;
++    return b.namespace_list(n);
++}
++
+ bool assistant::
+ is_formatter_enabled(const std::string& formatter_name) const {
+     const auto fp(obtain_formatter_properties(formatter_name));
 diff --git a/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.cpp
-index b326019..eaf81ec 100644
+index 97dd5d8..cf7053f 100644
 --- a/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.cpp
 +++ b/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.cpp
+@@ -55,7 +55,7 @@ std::string provider::formatter_name() const {
+ 
+ boost::optional<std::list<std::string> >
+ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
+-    const yarn::exception& /*o*/) const {
++    const yarn::exception& /*e*/) const {
+     auto builder(f.make());
+     builder.add(inclusion_constants::std::string());
+     builder.add(inclusion_constants::boost::exception::info());
 @@ -92,7 +92,7 @@ void exception_header_formatter::register_inclusion_dependencies_provider(
  }
  
  dogen::formatters::file exception_header_formatter::
 -format(const context& ctx, const formattables::exception_info& e) const {
 +format(const context& ctx, const yarn::exception& e) const {
-     entity_formatting_assistant fa(e, ctx, ownership_hierarchy(), file_type());
-     const auto r(exception_header_formatter_stitch(fa, e));
+     assistant a(ctx, ownership_hierarchy(), file_type());
+     const auto r(exception_header_formatter_stitch(a, e));
      return r;
+diff --git a/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.stitch b/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.stitch
+index 4457505..cce527e 100644
+--- a/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.stitch
++++ b/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.stitch
+@@ -7,24 +7,24 @@
+ <#+
+ 
+ dogen::formatters::file exception_header_formatter_stitch(
+-    assistant& a, const formattables::exception_info& e) {
++    assistant& a, const yarn::exception& e) {
+ 
+     {
+         auto sbf(a.make_scoped_boilerplate_formatter());
+         {
+-            auto snf(a.make_scoped_namespace_formatter(e.namespaces()));
++            auto snf(a.make_scoped_namespace_formatter(a.make_namespaces(e.name())));
+ #>
+ 
+ <#+
+             a.comment(e.documentation());
+ #>
+-class <#= e.name() #> : public virtual std::exception, public virtual boost::exception {
++class <#= e.name().simple() #> : public virtual std::exception, public virtual boost::exception {
+ public:
+-    <#= e.name() #>() = default;
+-    ~<#= e.name() #>() noexcept = default;
++    <#= e.name().simple() #>() = default;
++    ~<#= e.name().simple() #>() noexcept = default;
+ 
+ public:
+-    <#= e.name() #>(const std::string& message) : message_(message) { }
++    <#= e.name().simple() #>(const std::string& message) : message_(message) { }
+ 
+ public:
+     const char* what() const noexcept { return(message_.c_str()); }
+diff --git a/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter_stitch.cpp b/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter_stitch.cpp
+index 7056906..2f8cab9 100644
+--- a/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter_stitch.cpp
++++ b/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter_stitch.cpp
+@@ -27,21 +27,21 @@ namespace formatters {
+ namespace types {
+ 
+ dogen::formatters::file exception_header_formatter_stitch(
+-    assistant& a, const formattables::exception_info& e) {
++    assistant& a, const yarn::exception& e) {
+ 
+     {
+         auto sbf(a.make_scoped_boilerplate_formatter());
+         {
+-            auto snf(a.make_scoped_namespace_formatter(e.namespaces()));
++            auto snf(a.make_scoped_namespace_formatter(a.make_namespaces(e.name())));
+ a.stream() << std::endl;
+             a.comment(e.documentation());
+-a.stream() << "class " << e.name() << " : public virtual std::exception, public virtual boost::exception {" << std::endl;
++a.stream() << "class " << e.name().simple() << " : public virtual std::exception, public virtual boost::exception {" << std::endl;
+ a.stream() << "public:" << std::endl;
+-a.stream() << "    " << e.name() << "() = default;" << std::endl;
+-a.stream() << "    ~" << e.name() << "() noexcept = default;" << std::endl;
++a.stream() << "    " << e.name().simple() << "() = default;" << std::endl;
++a.stream() << "    ~" << e.name().simple() << "() noexcept = default;" << std::endl;
+ a.stream() << std::endl;
+ a.stream() << "public:" << std::endl;
+-a.stream() << "    " << e.name() << "(const std::string& message) : message_(message) { }" << std::endl;
++a.stream() << "    " << e.name().simple() << "(const std::string& message) : message_(message) { }" << std::endl;
+ a.stream() << std::endl;
+ a.stream() << "public:" << std::endl;
+ a.stream() << "    const char* what() const noexcept { return(message_.c_str()); }" << std::endl;
+diff --git a/projects/quilt.cpp/src/types/formatters/workflow.cpp b/projects/quilt.cpp/src/types/formatters/workflow.cpp
+index ea2e0de..350f3e8 100644
+--- a/projects/quilt.cpp/src/types/formatters/workflow.cpp
++++ b/projects/quilt.cpp/src/types/formatters/workflow.cpp
+@@ -26,7 +26,6 @@
+ #include "dogen/quilt.cpp/types/formattables/class_info.hpp"
+ #include "dogen/quilt.cpp/types/formattables/concept_info.hpp"
+ #include "dogen/quilt.cpp/types/formattables/visitor_info.hpp"
+-#include "dogen/quilt.cpp/types/formattables/exception_info.hpp"
+ #include "dogen/quilt.cpp/types/formattables/includers_info.hpp"
+ #include "dogen/quilt.cpp/types/formattables/namespace_info.hpp"
+ #include "dogen/quilt.cpp/types/formattables/primitive_info.hpp"
+@@ -173,7 +172,6 @@ public:
+     void visit(const formattables::class_info& c) override;
+     void visit(const formattables::forward_declarations_info& fd) override;
+     void visit(const formattables::enum_info& e) override;
+-    void visit(const formattables::exception_info& e) override;
+     void visit(const formattables::registrar_info& r) override;
+     void visit(const formattables::namespace_info& n) override;
+     void visit(const formattables::visitor_info& v) override;
+@@ -224,10 +222,6 @@ void dispatcher::visit(const formattables::enum_info& e) {
+     format_entity(container_.enum_formatters(), e);
+ }
+ 
+-void dispatcher::visit(const formattables::exception_info& e) {
+-    format_entity(container_.exception_formatters(), e);
+-}
+-
+ void dispatcher::visit(const formattables::registrar_info& r) {
+     format_entity(container_.registrar_formatters(), r);
+ }
+@@ -284,8 +278,8 @@ class yarn_dispatcher final : public yarn::element_visitor {
+ public:
+     yarn_dispatcher(const settings::bundle_repository& brp,
+         const formattables::formatter_properties_repository& fprp,
+-        const container& /*c*/) : bundle_(brp), formatter_properties_(fprp) {}
+-    /*, container_(c)*/
++        const container& c) : bundle_(brp), formatter_properties_(fprp),
++        container_(c) {}
+ 
+ public:
+     /**
+@@ -307,60 +301,67 @@ private:
+ 
+ private:
+     template<typename Formatter, typename YarnElement>
+-        void format(const std::forward_list<std::shared_ptr<Formatter>>& fc,
+-            const YarnElement& e) {
+-
+-        for (const auto f : fc) {
+-            const auto fn(f.ownership_hierarchy().formatter_name());
+-            BOOST_LOG_SEV(lg, debug) << "Formatting: '" << e.name()
+-                                     << "' with '" << fn << "'";
+-
+-            const auto& fp(properties_for_name(e.name()));
+-            if (!is_formatter_enabled(fp, fn)) {
+-                BOOST_LOG_SEV(lg, debug) << "Formatter not enabled for type.";
+-                return;
+-            }
+-
+-            const auto ctx(create_context_for_name(fp, fn));
+-            auto file(f.format(ctx, e));
+-
+-            files_.push_front(file);
+-            if (!file.overwrite()) {
+-                BOOST_LOG_SEV(lg, debug) << "Filename: "
+-                                         << file.path().generic_string();
+-                BOOST_LOG_SEV(lg, debug) << "Content: "
+-                                         << (file.content().empty() ? "<empty>" :
+-                                             file.content());
+-                BOOST_LOG_SEV(lg, debug) << "Finished formatting: '" << e.name()
+-                                         << "'";
+-            } else {
+-                BOOST_LOG_SEV(lg, debug) << "Not dumping file contents to log "
+-                                         << "(overwrite is false).";
+-            }
++        void format(const Formatter& f, const YarnElement& e) {
++
++        const auto qn(e.name().qualified());
++        const auto fn(f.ownership_hierarchy().formatter_name());
++        BOOST_LOG_SEV(lg, debug) << "XFormatting: '" << qn << "' with '"
++                                 << fn << "'";
++
++        const auto& fp(properties_for_name(e.name()));
++        if (!is_formatter_enabled(fp, fn)) {
++            BOOST_LOG_SEV(lg, debug) << "XFormatter not enabled for type.";
++            return;
++        }
++
++        const auto ctx(create_context_for_name(fp, e.name()));
++        auto file(f.format(ctx, e));
++
++        files_.push_front(file);
++        if (!file.overwrite()) {
++            BOOST_LOG_SEV(lg, debug) << "XFilename: "
++                                     << file.path().generic_string();
++            BOOST_LOG_SEV(lg, debug) << "Content: "
++                                     << (file.content().empty() ? "<empty>" :
++                                         file.content());
++            BOOST_LOG_SEV(lg, debug) << "XFinished formatting: '" << qn << "'";
++        } else {
++            BOOST_LOG_SEV(lg, debug) << "XNot dumping file contents to log "
++                                     << "(overwrite is false).";
+         }
+     }
+ 
++    template<typename Formatter, typename Formattable>
++        void format(const std::forward_list<std::shared_ptr<Formatter>>& fc,
++            const Formattable& e) {
++        for (const auto f : fc)
++            format(*f, e);
++    }
++
++
+ public:
+     using yarn::element_visitor::visit;
+-    void visit(const dogen::yarn::module& /*m*/) {}
+-    void visit(const dogen::yarn::concept& /*c*/) {}
+-    void visit(const dogen::yarn::primitive& /*p*/) {}
+-    void visit(const dogen::yarn::enumeration& /*e*/) {}
+-    void visit(const dogen::yarn::object& /*o*/) {}
+-    void visit(const dogen::yarn::exception& /*e*/) {}
+-    void visit(const dogen::yarn::visitor& /*v*/) {}
++    void visit(const dogen::yarn::module& /*m*/) override {}
++    void visit(const dogen::yarn::concept& /*c*/) override {}
++    void visit(const dogen::yarn::primitive& /*p*/) override {}
++    void visit(const dogen::yarn::enumeration& /*e*/) override {}
++    void visit(const dogen::yarn::object& /*o*/) override {}
++    void visit(const dogen::yarn::exception& e) override {
++        format(container_.exception_formatters(), e);
++    }
++    void visit(const dogen::yarn::visitor& /*v*/) override {}
+ 
+ public:
+     /**
+      * @brief Converts the supplied entity into all supported
+      * representations.
+      */
+-    void format(const yarn::element& e) const;
++    void format(const yarn::element& e);
+ 
+ private:
+     const settings::bundle_repository& bundle_;
+     const formattables::formatter_properties_repository& formatter_properties_;
+-    // const container& container_;
++    const container& container_;
+     std::forward_list<dogen::formatters::file> files_;
+ };
+ 
+@@ -409,7 +410,7 @@ create_context_for_name(const std::unordered_map<std::string,
+     return context(i->second, fp);
+ }
+ 
+-void yarn_dispatcher::format(const yarn::element& e) const {
++void yarn_dispatcher::format(const yarn::element& e) {
+     e.accept(*this);
+ }
+ 
+@@ -440,8 +441,10 @@ workflow::execute(const settings::bundle_repository& brp,
+ 
+     BOOST_LOG_SEV(lg, debug) << "Starting workflow - yarn version.";
+     yarn_dispatcher d(brp, fprp, registrar().formatter_container());
+-    for (const auto e : elements)
++    for (const auto e : elements) {
++        BOOST_LOG_SEV(lg, warn) << "ELEMENTS: " << e->name().qualified();
+         d.format(*e);
++    }
+ 
+     const auto r(d.files());
+     BOOST_LOG_SEV(lg, debug) << "Files generated: ";
