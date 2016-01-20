@@ -27,7 +27,6 @@
 
 #include <list>
 #include <string>
-#include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/nested_name.hpp"
 
@@ -53,19 +52,19 @@ public:
      * name into a list of strings with C++ namespaces.
      */
     std::list<std::string>
-    namespace_list(const yarn::model& m, const yarn::name& n) const;
+    namespace_list(const yarn::name& n) const;
 
     /**
      * @brief Flat representation of the qualified name.
      */
-    std::string qualified_name(const yarn::model& m, const yarn::name& n) const;
+    std::string qualified_name(const yarn::name& n) const;
 
     /**
      * @brief Returns a complete name representation of the nested
      * qualified name.
      */
-    void complete_name(const yarn::model& m,
-        const yarn::nested_name& nn, std::string& complete_name) const;
+    void complete_name(const yarn::nested_name& nn,
+        std::string& complete_name) const;
 
     /**
      * @brief Returns a string representation of the name supplied

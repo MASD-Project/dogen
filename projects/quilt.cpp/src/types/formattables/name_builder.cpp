@@ -43,40 +43,42 @@ namespace cpp {
 namespace formattables {
 
 std::list<std::string> name_builder::
-namespace_list(const yarn::model& m, const yarn::name& n) const {
-    std::list<std::string> r(n.location().external_modules());
+namespace_list(const yarn::name& n) const {
+    const auto& l(n.location());
+    std::list<std::string> r(l.external_modules());
 
-    /* If there is no model name, it won't contribute to the
-     * namespaces.
-     */
-    for (const auto& m : n.location().model_modules())
+    for (const auto& m : l.model_modules())
         r.push_back(m);
 
     // All modules in the module path contribute to namespaces.
-    const auto mp(n.location().internal_modules());
-    r.insert(r.end(), mp.begin(), mp.end());
+    for (const auto& m : l.internal_modules())
+        r.push_back(m);
 
     /* if the name belongs to the model's module, we need to remove the
      * module's simple name from the module path (it is in both the
      * module path and it is also the module's simple name).
      */
-    if (n == m.name())
+    const bool no_internal_modules(l.internal_modules().empty());
+    const bool has_model_modules(!l.model_modules().empty());
+    const bool is_model_name(no_internal_modules && has_model_modules &&
+        n.simple() == l.model_modules().back());
+
+    if (is_model_name)
         r.pop_back();
 
     return r;
 }
 
 std::string name_builder::
-qualified_name(const yarn::model& m, const yarn::name& n) const {
-    std::list<std::string> l(namespace_list(m, n));
+qualified_name(const yarn::name& n) const {
+    std::list<std::string> l(namespace_list(n));
     l.push_back(n.simple());
     return boost::algorithm::join(l, scope_operator);
 }
 
 void name_builder::
-complete_name(const yarn::model& m, const yarn::nested_name& nn,
-    std::string& complete_name) const {
-    const auto qualified_name(this->qualified_name(m, nn.parent()));
+complete_name(const yarn::nested_name& nn, std::string& complete_name) const {
+    const auto qualified_name(this->qualified_name(nn.parent()));
     const auto& children(nn.children());
     complete_name += qualified_name;
 
@@ -94,7 +96,7 @@ complete_name(const yarn::model& m, const yarn::nested_name& nn,
         if (!is_first)
             complete_name += ", ";
 
-        this->complete_name(m, c, complete_name);
+        this->complete_name(c, complete_name);
         is_first = false;
     }
     lambda('>');

@@ -221,7 +221,7 @@ void transformer::populate_entity_properties(const yarn::name& n,
     e.id(n.qualified());
 
     name_builder b;
-    e.namespaces(b.namespace_list(model_, n));
+    e.namespaces(b.namespace_list(n));
 
     std::list<std::string> ns(e.namespaces());
     ns.push_back(e.name());
@@ -236,9 +236,9 @@ void transformer::to_nested_type_info(const yarn::nested_name& nn,
 
     const auto n(nn.parent());
     name_builder b;
-    const auto qualified_name(b.qualified_name(model_, n));
+    const auto qualified_name(b.qualified_name(n));
     nti.name(qualified_name);
-    nti.namespaces(b.namespace_list(model_, n));
+    nti.namespaces(b.namespace_list(n));
     nti.is_enumeration(is<yarn::enumeration>(model_, n));
     nti.is_primitive(is<yarn::primitive>(model_, n));
 
@@ -406,7 +406,7 @@ transformer::to_class_info(const yarn::object& o) const {
     for (const auto& n : o.parents()) {
         parent_info pi;
         pi.name(n.simple());
-        pi.namespaces(b.namespace_list(model_, n));
+        pi.namespaces(b.namespace_list(n));
 
         std::list<std::string> ns(pi.namespaces());
         ns.push_back(pi.name());
@@ -433,7 +433,7 @@ transformer::to_class_info(const yarn::object& o) const {
         }
 
         const auto opn(o.root_parents().front());
-        std::list<std::string> ns(b.namespace_list(model_, opn));
+        std::list<std::string> ns(b.namespace_list(opn));
         ns.push_back(opn.simple());
 
         using boost::join;
@@ -468,7 +468,7 @@ transformer::to_class_info(const yarn::object& o) const {
         r->requires_manual_move_constructor(false);
 
     for (const auto l : o.leaves())
-        r->leaves().push_back(b.qualified_name(model_, l));
+        r->leaves().push_back(b.qualified_name(l));
 
     return r;
 }
@@ -490,7 +490,7 @@ transformer::to_visitor_info(const yarn::visitor& v) const {
     name_builder b;
     for (const auto n : v.visits()) {
         cpp::formattables::visited_type_info vti;
-        vti.qualified_name(b.qualified_name(model_, n));
+        vti.qualified_name(b.qualified_name(n));
         vti.name(n.simple());
         vti.documentation(visitor_comments + vti.qualified_name());
         r->types().push_back(vti);

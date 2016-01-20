@@ -228,7 +228,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
 
     name_builder b;
     auto r(std::make_shared<registrar_info>());
-    r->namespaces(b.namespace_list(m, n));
+    r->namespaces(b.namespace_list(n));
     r->id(n.qualified());
 
     const auto i(brp.bundles_by_name().find(n.qualified()));
@@ -240,14 +240,14 @@ std::shared_ptr<formattable> factory::make_registrar_info(
 
     for (const auto& pair : m.references()) {
         if (pair.second != yarn::origin_types::system) {
-            const auto l(b.namespace_list(m, pair.first));
+            const auto l(b.namespace_list(pair.first));
             const auto s(boost::algorithm::join(l, namespace_separator));
             r->model_dependencies().push_back(s);
         }
     }
 
     for (const auto& l : m.leaves())
-        r->leaves().push_back(b.qualified_name(m, l));
+        r->leaves().push_back(b.qualified_name(l));
     r->leaves().sort();
 
     const auto lambda([&](const std::string& src, const std::string& dst) {

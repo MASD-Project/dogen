@@ -13,16 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-19 Tue 23:28]
+#+CAPTION: Clock summary at [2016-01-20 Wed 21:06]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *3:09* |      |      |
+| *Total time*                                                                | *3:39* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 3:09   |      |      |
-| Active                                                                      |        | 3:09 |      |
+| Stories                                                                     | 3:39   |      |      |
+| Active                                                                      |        | 3:39 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:21 |
 | COMPLETED Merge all formatter assistants into one                           |        |      | 2:20 |
+| COMPLETED Name builder should take only model name                          |        |      | 0:30 |
 | STARTED Generate exceptions using yarn types                                |        |      | 0:16 |
 | STARTED Create a debug build for clang in travis                            |        |      | 0:12 |
 #+end:
@@ -50,6 +51,13 @@ assistant and entity formatting assistant and move all the code to the
 base. The two methods that require an entity should receive it as an
 input parameter.
 
+*** COMPLETED Name builder should take only model name                :story:
+    CLOSED: [2016-01-20 Wed 21:05]
+    CLOCK: [2016-01-20 Wed 20:35]--[2016-01-20 Wed 21:05] =>  0:30
+
+At present name builder requires an entire model just to get the name
+out of it.
+
 *** STARTED Generate exceptions using yarn types                      :story:
     CLOCK: [2016-01-19 Tue 23:11]--[2016-01-19 Tue 23:27] =>  0:16
 
@@ -61,23 +69,6 @@ Tasks:
 - update the formatter interfaces to use yarn types;
 - update the yarn formatting workflow to process yarn exceptions;
 - update the stitch templates to make use of yarn exceptions.
-
-*** ODB options file is generated even when disabled                  :story:
-
-At present it seems the file is always generated regardless of the
-meta-data. This is probably due to a typo in the field name.
-
-*** ODB options file is generated to incorrect location               :story:
-
-Models with composite names seem to have their ODB options file
-generated under the =projects= directory, e.g.:
-
-: projects/vtk/geometry/src/options.odb
-
-*** Name builder should take only model name                          :story:
-
-At present name builder requires an entire model just to get the name
-out of it.
 
 *** Access model name from within formatters workflow                 :story:
 
@@ -92,6 +83,13 @@ this we need to setup travis with a build matrix, with two build types
 for clang (debug and release).
 
 Example YML: [[https://github.com/Microsoft/GSL/blob/master/.travis.yml][GSL]]
+
+*** ODB options file is generated to incorrect location               :story:
+
+Models with composite names seem to have their ODB options file
+generated under the =projects= directory, e.g.:
+
+: projects/vtk/geometry/src/options.odb
 
 *** Add support for coveralls                                         :story:
 
@@ -354,3 +352,11 @@ Other notes:
 *Previous understanding*:
 
 We should just follow the composite pattern in the naming.
+*** CANCELLED ODB options file is generated even when disabled        :story:
+    CLOSED: [2016-01-20 Wed 20:39]
+
+*Rationale*: this was due to incorrect key name for
+=yarn.dia.comment=. We already have a story for better validation.
+
+At present it seems the file is always generated regardless of the
+meta-data. This is probably due to a typo in the field name.
