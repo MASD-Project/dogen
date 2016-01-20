@@ -240,7 +240,11 @@ std::shared_ptr<formattable> factory::make_registrar_info(
 
     for (const auto& pair : m.references()) {
         if (pair.second != yarn::origin_types::system) {
-            const auto l(b.namespace_list(pair.first));
+            /* we want the model name to contribute to the list of
+             * namespaces so we must disable model name detection.
+             */
+            const bool detect_model_name(false);
+            const auto l(b.namespace_list(pair.first, detect_model_name));
             const auto s(boost::algorithm::join(l, namespace_separator));
             r->model_dependencies().push_back(s);
         }

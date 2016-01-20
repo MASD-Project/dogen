@@ -43,7 +43,7 @@ namespace cpp {
 namespace formattables {
 
 std::list<std::string> name_builder::
-namespace_list(const yarn::name& n) const {
+namespace_list(const yarn::name& n, const bool detect_model_name) const {
     const auto& l(n.location());
     std::list<std::string> r(l.external_modules());
 
@@ -53,6 +53,9 @@ namespace_list(const yarn::name& n) const {
     // All modules in the module path contribute to namespaces.
     for (const auto& m : l.internal_modules())
         r.push_back(m);
+
+    if (!detect_model_name)
+        return r;
 
     /* if the name belongs to the model's module, we need to remove the
      * module's simple name from the module path (it is in both the
@@ -71,7 +74,7 @@ namespace_list(const yarn::name& n) const {
 
 std::string name_builder::
 qualified_name(const yarn::name& n) const {
-    std::list<std::string> l(namespace_list(n));
+    std::list<std::string> l(namespace_list(n, true));
     l.push_back(n.simple());
     return boost::algorithm::join(l, scope_operator);
 }

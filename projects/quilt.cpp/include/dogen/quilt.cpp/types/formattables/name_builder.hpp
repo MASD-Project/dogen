@@ -52,7 +52,8 @@ public:
      * name into a list of strings with C++ namespaces.
      */
     std::list<std::string>
-    namespace_list(const yarn::name& n) const;
+    namespace_list(const yarn::name& n,
+        const bool detect_model_name = true) const;
 
     /**
      * @brief Flat representation of the qualified name.
