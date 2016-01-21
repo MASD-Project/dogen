@@ -34,7 +34,7 @@ namespace {
 
 using namespace dogen::utility::log;
 auto lg(logger_factory("knitter"));
-const std::string log_file_prefix("log/dogen_knitter_");
+const std::string log_file_prefix("log/dogen.knitter.");
 const std::string get_help("Use --help option to see usage instructions.");
 const std::string knitter_product("Dogen Knitter v" DOGEN_VERSION);
 const std::string usage_error_msg("Usage error: ");

@@ -17,13 +17,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(all_files "")
-file(GLOB_RECURSE all_files RELATIVE
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(all_primitives STATIC ${all_files})
+add_library(all_primitives STATIC ${files})
 set_target_properties(all_primitives PROPERTIES
-    OUTPUT_NAME dogen_all_primitives)
+    OUTPUT_NAME dogen.all_primitives)
 
 install(TARGETS all_primitives ARCHIVE DESTINATION lib COMPONENT libraries)

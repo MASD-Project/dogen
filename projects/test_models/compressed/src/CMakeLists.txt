@@ -17,13 +17,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(all_files "")
-file(GLOB_RECURSE all_files RELATIVE
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(compressed STATIC ${all_files})
+add_library(compressed STATIC ${files})
 set_target_properties(compressed PROPERTIES
-    OUTPUT_NAME dogen_compressed)
+    OUTPUT_NAME dogen.compressed)
 
 install(TARGETS compressed ARCHIVE DESTINATION lib COMPONENT libraries)

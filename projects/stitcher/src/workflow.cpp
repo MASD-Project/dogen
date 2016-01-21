@@ -36,7 +36,7 @@ using namespace dogen::utility::log;
 namespace {
 
 auto lg(logger_factory("stitcher"));
-const std::string log_file_prefix("log/dogen_stitcher_");
+const std::string log_file_prefix("log/dogen.stitcher.");
 const std::string get_help("Use --help option to see usage instructions.");
 const std::string stitcher_product("Dogen Stitcher v" DOGEN_VERSION);
 const std::string usage_error_msg("Usage error: ");

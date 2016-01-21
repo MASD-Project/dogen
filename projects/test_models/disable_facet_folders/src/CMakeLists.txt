@@ -17,13 +17,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(all_files "")
-file(GLOB_RECURSE all_files RELATIVE
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(disable_facet_folders STATIC ${all_files})
+add_library(disable_facet_folders STATIC ${files})
 set_target_properties(disable_facet_folders PROPERTIES
-    OUTPUT_NAME dogen_disable_facet_folders)
+    OUTPUT_NAME dogen.disable_facet_folders)
 
 install(TARGETS disable_facet_folders ARCHIVE DESTINATION lib COMPONENT libraries)

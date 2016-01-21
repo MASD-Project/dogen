@@ -17,13 +17,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(all_files "")
-file(GLOB_RECURSE all_files RELATIVE
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(exception STATIC ${all_files})
+add_library(exception STATIC ${files})
 set_target_properties(exception PROPERTIES
-    OUTPUT_NAME dogen_exception)
+    OUTPUT_NAME dogen.exception)
 
 install(TARGETS exception ARCHIVE DESTINATION lib COMPONENT libraries)

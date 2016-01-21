@@ -17,13 +17,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(all_files "")
-file(GLOB_RECURSE all_files RELATIVE
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(two_layers_with_objects STATIC ${all_files})
+add_library(two_layers_with_objects STATIC ${files})
 set_target_properties(two_layers_with_objects PROPERTIES
-    OUTPUT_NAME dogen_two_layers_with_objects)
+    OUTPUT_NAME dogen.two_layers_with_objects)
 
 install(TARGETS two_layers_with_objects ARCHIVE DESTINATION lib COMPONENT libraries)

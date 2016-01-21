@@ -17,13 +17,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(all_files "")
-file(GLOB_RECURSE all_files RELATIVE
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(trivial_association STATIC ${all_files})
+add_library(trivial_association STATIC ${files})
 set_target_properties(trivial_association PROPERTIES
-    OUTPUT_NAME dogen_trivial_association)
+    OUTPUT_NAME dogen.trivial_association)
 
 install(TARGETS trivial_association ARCHIVE DESTINATION lib COMPONENT libraries)

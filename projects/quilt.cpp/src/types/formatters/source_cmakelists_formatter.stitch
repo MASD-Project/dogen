@@ -15,14 +15,14 @@ dogen::formatters::file source_cmakelists_formatter_stitch(
         a.make_annotation_preamble(s.general_settings());
         const std::string mn(s.model_name());
 #>
-set(all_files "")
-file(GLOB_RECURSE all_files RELATIVE
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(<#= mn #> STATIC ${all_files})
+add_library(<#= mn #> STATIC ${files})
 set_target_properties(<#= mn #> PROPERTIES
-    OUTPUT_NAME <#= s.product_name() #><#= (s.product_name().empty() ? "" : "_") #><#= mn #>)
+    OUTPUT_NAME <#= s.product_name() #><#= (s.product_name().empty() ? "" : ".") #><#= mn #>)
 
 install(TARGETS <#= mn #> ARCHIVE DESTINATION lib COMPONENT libraries)
 <#+

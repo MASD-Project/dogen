@@ -33,14 +33,14 @@ dogen::formatters::file source_cmakelists_formatter_stitch(
     {
         a.make_annotation_preamble(s.general_settings());
         const std::string mn(s.model_name());
-a.stream() << "set(all_files \"\")" << std::endl;
-a.stream() << "file(GLOB_RECURSE all_files RELATIVE" << std::endl;
+a.stream() << "set(files \"\")" << std::endl;
+a.stream() << "file(GLOB_RECURSE files RELATIVE" << std::endl;
 a.stream() << "    \"${CMAKE_CURRENT_SOURCE_DIR}/\"" << std::endl;
 a.stream() << "    \"${CMAKE_CURRENT_SOURCE_DIR}/*.cpp\")" << std::endl;
 a.stream() << std::endl;
-a.stream() << "add_library(" << mn << " STATIC ${all_files})" << std::endl;
+a.stream() << "add_library(" << mn << " STATIC ${files})" << std::endl;
 a.stream() << "set_target_properties(" << mn << " PROPERTIES" << std::endl;
-a.stream() << "    OUTPUT_NAME " << s.product_name() << (s.product_name().empty() ? "" : "_") << mn << ")" << std::endl;
+a.stream() << "    OUTPUT_NAME " << s.product_name() << (s.product_name().empty() ? "" : ".") << mn << ")" << std::endl;
 a.stream() << std::endl;
 a.stream() << "install(TARGETS " << mn << " ARCHIVE DESTINATION lib COMPONENT libraries)" << std::endl;
     } // sbf

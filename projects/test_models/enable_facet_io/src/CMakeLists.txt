@@ -17,13 +17,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(all_files "")
-file(GLOB_RECURSE all_files RELATIVE
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(enable_facet_io STATIC ${all_files})
+add_library(enable_facet_io STATIC ${files})
 set_target_properties(enable_facet_io PROPERTIES
-    OUTPUT_NAME dogen_enable_facet_io)
+    OUTPUT_NAME dogen.enable_facet_io)
 
 install(TARGETS enable_facet_io ARCHIVE DESTINATION lib COMPONENT libraries)
