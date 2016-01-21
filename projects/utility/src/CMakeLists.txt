@@ -17,20 +17,20 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(utility_files "")
-file(GLOB_RECURSE utility_files RELATIVE
+set(name "utility")
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(utility STATIC ${utility_files})
-target_link_libraries(utility
+add_library(${name} STATIC ${files})
+set_target_properties(${name} PROPERTIES OUTPUT_NAME dogen.${name})
+set_target_properties(${name}
+    PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
+
+target_link_libraries(${name}
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 
-set_target_properties(utility
-    PROPERTIES OUTPUT_NAME dogen_utility)
-set_target_properties(utility
-    PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
-
-install(TARGETS utility ARCHIVE DESTINATION lib COMPONENT libraries)
+install(TARGETS ${name} ARCHIVE DESTINATION lib COMPONENT libraries)

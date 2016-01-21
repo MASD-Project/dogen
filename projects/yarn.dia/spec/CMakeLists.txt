@@ -17,17 +17,18 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(yarn_dia_spec_files "")
-file(GLOB_RECURSE yarn_dia_spec_files RELATIVE
+set(name "yarn_dia")
+set(binary_name "dogen.yarn.dia.spec")
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_executable(yarn_dia_spec ${yarn_dia_spec_files})
-set(binary_name "dogen_yarn_dia_spec")
-set_target_properties(yarn_dia_spec PROPERTIES OUTPUT_NAME ${binary_name})
+add_executable(${name}_spec ${files})
+set_target_properties(${name}_spec PROPERTIES OUTPUT_NAME ${binary_name})
 
-target_link_libraries(yarn_dia_spec
-    yarn_dia
+target_link_libraries(${name}_spec
+    ${name}
     utility
     dia
     yarn
@@ -36,14 +37,14 @@ target_link_libraries(yarn_dia_spec
     ${PQXX_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 
-set(yarn_dia_spec_cmd ${stage_bin_dir}/${binary_name}
-    ${boost_test_parameters})
+set(command ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
 
-add_custom_target(run_yarn_dia_spec
-    COMMAND ${yarn_dia_spec_cmd}
+add_custom_target(run_${name}_spec
+    COMMAND ${command}
     WORKING_DIRECTORY ${stage_bin_dir}
-    DEPENDS yarn_dia_spec)
-add_dependencies(run_all_specs run_yarn_dia_spec)
+    DEPENDS ${name}_spec)
+add_dependencies(run_all_specs run_${name}_spec)
 
-add_boost_tests(yarn_dia ${yarn_dia_spec_files})
-install(TARGETS yarn_dia_spec RUNTIME DESTINATION bin COMPONENT tests)
+add_boost_tests(${name} ${files})
+
+install(TARGETS ${name}_spec RUNTIME DESTINATION bin COMPONENT tests)

@@ -13,20 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-21 Thu 20:27]
+#+CAPTION: Clock summary at [2016-01-21 Thu 22:56]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *6:53* |      |      |
+| *Total time*                                                                | *8:39* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 6:53   |      |      |
-| Active                                                                      |        | 6:53 |      |
+| Stories                                                                     | 8:39   |      |      |
+| Active                                                                      |        | 8:39 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:21 |
 | COMPLETED Merge all formatter assistants into one                           |        |      | 2:20 |
 | COMPLETED Name builder should take only model name                          |        |      | 0:48 |
 | COMPLETED Generate exceptions using yarn types                              |        |      | 2:21 |
 | COMPLETED Generate modules using yarn types                                 |        |      | 0:32 |
 | COMPLETED Delete all =quilt::cpp::formattable= types not in use             |        |      | 0:19 |
+| STARTED Use dots to separate namespaces in binary names                     |        |      | 1:33 |
+| STARTED Generate enumerations using yarn types                              |        |      | 0:13 |
 | STARTED Create a debug build for clang in travis                            |        |      | 0:12 |
 #+end:
 
@@ -102,6 +104,18 @@ Tasks:
 We seem to have created a number of formattable types but not actually
 used them in formatters. Remove them all.
 
+*** STARTED Use dots to separate namespaces in binary names           :story:
+    CLOCK: [2016-01-21 Thu 21:23]--[2016-01-21 Thu 22:56] =>  1:33
+
+Originally we started using underscores to separate namespaces in
+binary names. However, since we added support for composite model
+names, we also started using dots for this. We should use dots in
+binary names as well, for consistency.
+
+We should do the same for log file names too, e.g.:
+
+: dogen_knitter_yarn.json.log
+
 *** STARTED Generate enumerations using yarn types                    :story:
     CLOCK: [2016-01-21 Thu 21:09]--[2016-01-21 Thu 21:22] =>  0:13
 
@@ -127,17 +141,6 @@ resolution. If the string is empty, we should use the default
 enumeration type. It is chosen from the collection of
 primitives. There can only be one type marked as
 default. =is_enumeration_default_type=? Read from JSON file.
-
-*** Use dots to separate namespaces in binary names                   :story:
-
-Originally we started using underscores to separate namespaces in
-binary names. However, since we added support for composite model
-names, we also started using dots for this. We should use dots in
-binary names as well, for consistency.
-
-We should do the same for log file names too, e.g.:
-
-: dogen_knitter_yarn.json.log
 
 *** Access model name from within formatters workflow                 :story:
 

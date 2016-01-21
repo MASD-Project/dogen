@@ -17,26 +17,24 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(all_files "")
-file(GLOB_RECURSE all_files RELATIVE
+set(name "quilt_cpp")
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(quilt_cpp STATIC ${all_files})
-target_link_libraries(quilt_cpp
-    formatters
-    quilt
-    ${Boost_LIBRARIES})
+add_library(${name} STATIC ${files})
+target_link_libraries(${name} formatters quilt ${Boost_LIBRARIES})
 
-set_target_properties(quilt_cpp PROPERTIES
-    OUTPUT_NAME dogen_quild_cpp)
+set_target_properties(${name} PROPERTIES
+    OUTPUT_NAME dogen.quilt.cpp)
 
-install(TARGETS quilt_cpp ARCHIVE DESTINATION lib COMPONENT libraries)
-
-add_custom_target(stitch_quilt_cpp
+add_custom_target(stitch_${name}
     COMMENT "Stitching Quilt C++ model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${stitcher_binary}
     --target ${CMAKE_CURRENT_SOURCE_DIR}/
     --verbose)
-add_dependencies(stitch_all stitch_quilt_cpp)
+add_dependencies(stitch_all stitch_${name})
+
+install(TARGETS ${name} ARCHIVE DESTINATION lib COMPONENT libraries)

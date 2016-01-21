@@ -17,8 +17,10 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(knitter_spec_files "")
-file(GLOB_RECURSE knitter_spec_files RELATIVE
+set(name "knitter")
+set(binary_name "dogen.${name}.spec")
+set(spec_files "")
+file(GLOB_RECURSE spec_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
@@ -27,25 +29,25 @@ file(GLOB_RECURSE all_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/../src"
     "${CMAKE_CURRENT_SOURCE_DIR}/../src/*.cpp")
 
-set(knitter_files "")
+set(executable_files "")
 set(ignore_file false)
 foreach(cpp_file ${all_files})
-    if("${cpp_file}" MATCHES "knitter.cpp")
+    if("${cpp_file}" MATCHES "main.cpp")
         set(ignore_file true)
     endif()
 
     if(NOT ignore_file)
-        set(knitter_files ${knitter_files}
+        set(executable_files ${executable_files}
             "${CMAKE_CURRENT_SOURCE_DIR}/../src/${cpp_file}")
     endif()
     set(ignore_file false)
 endforeach()
 
-add_executable(knitter_spec ${knitter_spec_files} ${knitter_files})
-set(binary_name "dogen_knitter_spec")
-set_target_properties(knitter_spec PROPERTIES OUTPUT_NAME ${binary_name})
+add_executable(${name}_spec ${spec_files} ${executable_files})
 
-target_link_libraries(knitter_spec
+set_target_properties(${name}_spec PROPERTIES OUTPUT_NAME ${binary_name})
+
+target_link_libraries(${name}_spec
     knit
     utility
     config
@@ -54,13 +56,14 @@ target_link_libraries(knitter_spec
     ${PQXX_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 
-set(knitter_spec_cmd ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
+set(command ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
 
-add_custom_target(run_knitter_spec
-    COMMAND ${knitter_spec_cmd}
+add_custom_target(run_${name}_spec
+    COMMAND ${command}
     WORKING_DIRECTORY ${stage_bin_dir}
-    DEPENDS knitter_spec)
-add_dependencies(run_all_specs run_knitter_spec)
+    DEPENDS ${name}_spec)
+add_dependencies(run_all_specs run_${name}_spec)
 
-add_boost_tests(knitter ${knitter_spec_files})
-install(TARGETS knitter_spec RUNTIME DESTINATION bin COMPONENT tests)
+add_boost_tests(${name} ${spec_files})
+
+install(TARGETS ${name}_spec RUNTIME DESTINATION bin COMPONENT tests)

@@ -17,21 +17,23 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(all_files "")
-file(GLOB_RECURSE all_files RELATIVE
+set(name "quilt")
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(quilt STATIC ${all_files})
-target_link_libraries(quilt
+add_library(${name} STATIC ${files})
+set_target_properties(${name} PROPERTIES OUTPUT_NAME dogen.${name})
+set_target_properties(${name}
+  PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
+
+target_link_libraries(${name}
+    utility
     config
+    formatters
     dynamic
     yarn
-    formatters
-    utility
     ${Boost_LIBRARIES})
-
-set_target_properties(quilt PROPERTIES
-    OUTPUT_NAME dogen_quilt)
 
 install(TARGETS quilt ARCHIVE DESTINATION lib COMPONENT libraries)

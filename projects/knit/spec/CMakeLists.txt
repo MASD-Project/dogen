@@ -17,37 +17,40 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(knit_spec_files "")
-file(GLOB_RECURSE knit_spec_files RELATIVE
+set(name "knit")
+set(binary_name "dogen.${name}.spec")
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_executable(knit_spec ${knit_spec_files})
-set(binary_name "dogen_knit_spec")
-set_target_properties(knit_spec PROPERTIES OUTPUT_NAME ${binary_name})
+add_executable(${name}_spec ${files})
+set_target_properties(${name}_spec PROPERTIES OUTPUT_NAME ${binary_name})
 
-target_link_libraries(knit_spec
-    knit
+target_link_libraries(${name}_spec
+    ${name}
     utility
-    quilt
-    quilt_cpp
+    config
     dia
     yarn
     yarn_json
     yarn_dia
-    config
+    quilt
+    quilt_cpp
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${PQXX_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 
-set(knit_spec_cmd ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
+set(command ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
 
-add_custom_target(run_knit_spec
-    COMMAND ${knit_spec_cmd}
+add_custom_target(run_${name}_spec
+    COMMAND ${command}
     WORKING_DIRECTORY ${stage_bin_dir}
-    DEPENDS knit_spec)
-add_dependencies(run_all_specs run_knit_spec)
+    DEPENDS ${name}_spec)
 
-add_boost_tests(knit ${knit_spec_files})
-install(TARGETS knit_spec RUNTIME DESTINATION bin COMPONENT tests)
+  add_dependencies(run_all_specs run_${name}_spec)
+
+add_boost_tests(${name} ${files})
+
+install(TARGETS ${name}_spec RUNTIME DESTINATION bin COMPONENT tests)

@@ -17,19 +17,19 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(stitcher_files "")
-file(GLOB_RECURSE stitcher_files RELATIVE
+set(name "stitcher")
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_executable(stitcher ${stitcher_files})
-set(binary_name "dogen_stitcher")
-set_target_properties(stitcher PROPERTIES OUTPUT_NAME ${binary_name})
+add_executable(${name} ${files})
+set_target_properties(${name} PROPERTIES OUTPUT_NAME dogen.${name})
 
-target_link_libraries(stitcher
+target_link_libraries(${name}
     stitch
     utility
     config
     ${Boost_LIBRARIES})
 
-install(TARGETS stitcher RUNTIME DESTINATION bin COMPONENT applications)
+install(TARGETS ${name} RUNTIME DESTINATION bin COMPONENT applications)

@@ -17,17 +17,17 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(all_files "")
-file(GLOB_RECURSE all_files RELATIVE
+set(name "dynamic")
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(dynamic STATIC ${all_files})
-target_link_libraries(dynamic
-    config
-    utility
-    ${Boost_LIBRARIES})
+add_library(${name} STATIC ${files})
+set_target_properties(${name} PROPERTIES OUTPUT_NAME dogen.${name})
+set_target_properties(${name}
+  PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
 
-set_target_properties(dynamic PROPERTIES OUTPUT_NAME dogen_dynamic)
+target_link_libraries(${name} config utility ${Boost_LIBRARIES})
 
-install(TARGETS dynamic ARCHIVE DESTINATION lib COMPONENT libraries)
+install(TARGETS ${name} ARCHIVE DESTINATION lib COMPONENT libraries)

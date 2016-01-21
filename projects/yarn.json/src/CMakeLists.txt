@@ -17,20 +17,23 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(all_files "")
-file(GLOB_RECURSE all_files RELATIVE
+set(name "yarn_json")
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(yarn_json STATIC ${all_files})
-target_link_libraries(yarn_json
-    yarn
+add_library(${name} STATIC ${files})
+set_target_properties(${name} PROPERTIES OUTPUT_NAME dogen.yarn.json)
+set_target_properties(${name}
+  PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
+
+target_link_libraries(${name}
+    utility
     config
     dynamic
-    utility
+    yarn
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})
 
-set_target_properties(yarn_json PROPERTIES OUTPUT_NAME dogen_yarn_json)
-
-install(TARGETS yarn_json ARCHIVE DESTINATION lib COMPONENT libraries)
+install(TARGETS ${name} ARCHIVE DESTINATION lib COMPONENT libraries)

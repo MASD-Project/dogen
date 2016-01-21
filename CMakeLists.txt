@@ -293,7 +293,7 @@ if(use_latest_knitter)
     add_dependencies(knit_all knitter)
 endif()
 
-set(knitter_binary "${stage_bin_dir}/dogen_knitter")
+set(knitter_binary "${stage_bin_dir}/dogen.knitter")
 set(knitter_version "")
 execute_process(
     COMMAND ${knitter_binary} --version
@@ -314,7 +314,7 @@ if(use_latest_stitcher)
     add_dependencies(stitch_all stitcher)
 endif()
 
-set(stitcher_binary "${stage_bin_dir}/dogen_stitcher")
+set(stitcher_binary "${stage_bin_dir}/dogen.stitcher")
 set(stitcher_version "")
 execute_process(
     COMMAND ${stitcher_binary} --version

@@ -17,21 +17,17 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(stitch_files "")
-file(GLOB_RECURSE stitch_files RELATIVE
+set(name "stitch")
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(stitch STATIC ${stitch_files})
-target_link_libraries(stitch
-    dynamic
-    utility
-    formatters
-    ${Boost_LIBRARIES})
+add_library(${name} STATIC ${files})
+set_target_properties(${name} PROPERTIES OUTPUT_NAME dogen.${name})
+set_target_properties(${name}
+  PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
 
-set_target_properties(stitch
-    PROPERTIES OUTPUT_NAME dogen_stitch)
-set_target_properties(stitch
-    PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
+target_link_libraries(${name} utility dynamic formatters ${Boost_LIBRARIES})
 
-install(TARGETS stitch ARCHIVE DESTINATION lib COMPONENT libraries)
+install(TARGETS ${name} ARCHIVE DESTINATION lib COMPONENT libraries)
