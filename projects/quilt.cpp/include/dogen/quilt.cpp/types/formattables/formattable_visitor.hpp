@@ -30,7 +30,6 @@
 #include "dogen/quilt.cpp/types/formattables/concept_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/visitor_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/includers_info_fwd.hpp"
-#include "dogen/quilt.cpp/types/formattables/namespace_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/primitive_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/registrar_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/cmakelists_info_fwd.hpp"
@@ -108,16 +107,6 @@ public:
     virtual void visit(const dogen::quilt::cpp::formattables::includers_info&) { }
     virtual void visit(dogen::quilt::cpp::formattables::includers_info&) const { }
     virtual void visit(dogen::quilt::cpp::formattables::includers_info&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::quilt::cpp::formattables::namespace_info
-     */
-    /**@{*/
-    virtual void visit(const dogen::quilt::cpp::formattables::namespace_info&) const { }
-    virtual void visit(const dogen::quilt::cpp::formattables::namespace_info&) { }
-    virtual void visit(dogen::quilt::cpp::formattables::namespace_info&) const { }
-    virtual void visit(dogen::quilt::cpp::formattables::namespace_info&) { }
     /**@}*/
 
     /**

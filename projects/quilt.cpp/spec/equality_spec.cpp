@@ -45,7 +45,6 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<formattables::cmakelists_info_generator>();
     test_equality<formattables::enum_info_generator>();
     test_equality<formattables::enumerator_info_generator>();
-    test_equality<formattables::namespace_info_generator>();
     test_equality<formattables::nested_type_info_generator>();
     test_equality<formattables::odb_options_info_generator>();
     test_equality<formattables::parent_info_generator>();

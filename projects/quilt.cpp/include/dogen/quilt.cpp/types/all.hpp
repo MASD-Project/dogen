@@ -74,7 +74,6 @@
 #include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/building_error.hpp"
 #include "dogen/quilt.cpp/types/formattables/includers_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/namespace_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/primitive_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/registrar_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"

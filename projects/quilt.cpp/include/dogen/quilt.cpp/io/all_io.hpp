@@ -43,7 +43,6 @@
 #include "dogen/quilt.cpp/io/formattables/property_info_io.hpp"
 #include "dogen/quilt.cpp/io/settings/bundle_repository_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/includers_info_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/namespace_info_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/primitive_info_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/registrar_info_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/cmakelists_info_io.hpp"
