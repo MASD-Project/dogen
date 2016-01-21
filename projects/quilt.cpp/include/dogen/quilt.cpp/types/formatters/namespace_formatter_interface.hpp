@@ -26,8 +26,8 @@
 #endif
 
 #include "dogen/formatters/types/file.hpp"
+#include "dogen/yarn/types/module.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/formattables/namespace_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
 
 namespace dogen {
@@ -45,10 +45,10 @@ public:
 
 public:
     /**
-     * @brief Generate a c++ representation for the type.
+     * @brief Generate a c++ representation for the module.
      */
     virtual dogen::formatters::file
-    format(const context& ctx, const formattables::namespace_info& c) const = 0;
+    format(const context& ctx, const yarn::module& m) const = 0;
 };
 
 } } } }

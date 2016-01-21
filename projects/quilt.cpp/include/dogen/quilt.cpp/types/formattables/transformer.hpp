@@ -33,7 +33,6 @@
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/types/model.hpp"
-#include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/visitor.hpp"
 #include "dogen/yarn/types/concept.hpp"
@@ -48,7 +47,6 @@
 #include "dogen/quilt.cpp/types/formattables/concept_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/visitor_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/property_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/namespace_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/primitive_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/forward_declarations_info.hpp"
 
@@ -118,12 +116,6 @@ private:
     std::shared_ptr<enum_info> to_enum_info(const yarn::enumeration& e) const;
 
     /**
-     * @brief Transforms a Yarn module into a namespace info.
-     */
-    std::shared_ptr<namespace_info>
-    to_namespace_info(const yarn::module& m) const;
-
-    /**
      * @brief Transform a Yarn object into a class info.
      *
      * @param ao object to transform.
@@ -165,12 +157,6 @@ public:
      */
     std::forward_list<std::shared_ptr<formattable> >
     transform(const yarn::enumeration& e) const;
-
-    /**
-     * @brief Transform an Yarn module into a C++ entity.
-     */
-    std::forward_list<std::shared_ptr<formattable> >
-    transform(const yarn::module& m) const;
 
     /**
      * @brief Transform an Yarn concept into a C++ entity.

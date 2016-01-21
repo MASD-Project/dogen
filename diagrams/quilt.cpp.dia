@@ -4320,7 +4320,7 @@ seems like the least bad approach.
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const namespace_info&amp;#</dia:string>
+                <dia:string>#const yarn::module&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -4800,7 +4800,7 @@ seems like the least bad approach.
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const exception_info&amp;#</dia:string>
+                <dia:string>#const yarn::exception&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

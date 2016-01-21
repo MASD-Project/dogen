@@ -27,15 +27,16 @@ namespace formatters {
 namespace types {
 
 dogen::formatters::file namespace_header_formatter_stitch(
-    assistant& a, const formattables::namespace_info& n) {
+    assistant& a, const yarn::module& m) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(n.namespaces()));
+            const auto ns(a.make_namespaces(m.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
-            a.comment(n.documentation());
-a.stream() << "namespace " << n.name() << " {" << std::endl;
+            a.comment(m.documentation());
+a.stream() << "namespace " << m.name().simple() << " {" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
         } // snf

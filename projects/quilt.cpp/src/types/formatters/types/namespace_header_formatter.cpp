@@ -58,9 +58,9 @@ void namespace_header_formatter::register_inclusion_dependencies_provider(
     formattables::registrar& /*rg*/) const {}
 
 dogen::formatters::file namespace_header_formatter::
-format(const context& ctx, const formattables::namespace_info& n) const {
+format(const context& ctx, const yarn::module& m) const {
     assistant a(ctx, ownership_hierarchy(), file_type());
-    const auto r(namespace_header_formatter_stitch(a, n));
+    const auto r(namespace_header_formatter_stitch(a, m));
     return r;
 }
 

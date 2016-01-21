@@ -58,7 +58,7 @@ public:
         formattables::registrar& rg) const override;
 
     dogen::formatters::file format(const context& ctx,
-        const formattables::namespace_info& c) const override;
+        const yarn::module& m) const override;
 };
 
 } } } } }

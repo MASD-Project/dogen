@@ -29,7 +29,6 @@
 #include "dogen/quilt.cpp/types/formattables/concept_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/visitor_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/includers_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/namespace_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/primitive_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/registrar_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/cmakelists_info.hpp"
@@ -175,7 +174,6 @@ public:
     void visit(const formattables::forward_declarations_info& fd) override;
     void visit(const formattables::enum_info& e) override;
     void visit(const formattables::registrar_info& r) override;
-    void visit(const formattables::namespace_info& n) override;
     void visit(const formattables::visitor_info& v) override;
     void visit(const formattables::concept_info& c) override;
     void visit(const formattables::primitive_info& p) override;
@@ -226,13 +224,6 @@ void dispatcher::visit(const formattables::enum_info& e) {
 
 void dispatcher::visit(const formattables::registrar_info& r) {
     format_entity(container_.registrar_formatters(), r);
-}
-
-void dispatcher::visit(const formattables::namespace_info& n) {
-    if (n.documentation().empty())
-        return;
-
-    format_entity(container_.namespace_formatters(), n);
 }
 
 void dispatcher::visit(const formattables::visitor_info& v) {
@@ -343,7 +334,12 @@ private:
 
 public:
     using yarn::element_visitor::visit;
-    void visit(const dogen::yarn::module& /*m*/) override {}
+    void visit(const dogen::yarn::module& m) override {
+        if (m.documentation().empty())
+            return;
+
+        format(container_.namespace_formatters(), m);
+    }
     void visit(const dogen::yarn::concept& /*c*/) override {}
     void visit(const dogen::yarn::primitive& /*p*/) override {}
     void visit(const dogen::yarn::enumeration& /*e*/) override {}

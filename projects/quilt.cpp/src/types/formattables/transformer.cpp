@@ -367,18 +367,6 @@ transformer::to_enum_info(const yarn::enumeration& e) const {
     return r;
 }
 
-std::shared_ptr<namespace_info> transformer::
-to_namespace_info(const yarn::module& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming module: "
-                             << m.name().qualified();
-
-    auto r(std::make_shared<namespace_info>());
-    populate_entity_properties(m.name(), m.documentation(), *r);
-
-    BOOST_LOG_SEV(lg, debug) << "Transformed module.";
-    return r;
-}
-
 std::shared_ptr<class_info>
 transformer::to_class_info(const yarn::object& o) const {
     auto r(std::make_shared<class_info>());
@@ -524,13 +512,6 @@ transformer::transform(const yarn::enumeration& e) const {
     std::forward_list<std::shared_ptr<formattable> > r;
     r.push_front(to_enum_info(e));
     r.push_front(to_forward_declarations_info(e));
-    return r;
-}
-
-std::forward_list<std::shared_ptr<formattable> > transformer::
-transform(const yarn::module& m) const {
-    std::forward_list<std::shared_ptr<formattable> > r;
-    r.push_front(to_namespace_info(m));
     return r;
 }
 
