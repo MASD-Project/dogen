@@ -7,24 +7,25 @@
 <#+
 
 dogen::formatters::file exception_header_formatter_stitch(
-    assistant& a, const formattables::exception_info& e) {
+    assistant& a, const yarn::exception& e) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(e.namespaces()));
+            const auto ns(a.make_namespaces(e.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 #>
 
 <#+
             a.comment(e.documentation());
 #>
-class <#= e.name() #> : public virtual std::exception, public virtual boost::exception {
+class <#= e.name().simple() #> : public virtual std::exception, public virtual boost::exception {
 public:
-    <#= e.name() #>() = default;
-    ~<#= e.name() #>() noexcept = default;
+    <#= e.name().simple() #>() = default;
+    ~<#= e.name().simple() #>() noexcept = default;
 
 public:
-    <#= e.name() #>(const std::string& message) : message_(message) { }
+    <#= e.name().simple() #>(const std::string& message) : message_(message) { }
 
 public:
     const char* what() const noexcept { return(message_.c_str()); }

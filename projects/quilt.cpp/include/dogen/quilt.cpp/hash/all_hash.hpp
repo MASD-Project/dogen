@@ -42,7 +42,6 @@
 #include "dogen/quilt.cpp/hash/formattables/visitor_info_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/property_info_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/bundle_repository_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/exception_info_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/includers_info_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/namespace_info_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/primitive_info_hash.hpp"

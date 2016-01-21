@@ -24,6 +24,7 @@
 #include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/formatters/types/comment_formatter.hpp"
 #include "dogen/formatters/types/annotation_formatter.hpp"
+#include "dogen/quilt.cpp/types/formattables/name_builder.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
@@ -130,6 +131,11 @@ std::string assistant::make_member_variable_name(
 std::string assistant::make_getter_setter_name(
     const formattables::property_info& p) const {
     return p.name();
+}
+
+std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
+    formattables::name_builder b;
+    return b.namespace_list(n);
 }
 
 bool assistant::

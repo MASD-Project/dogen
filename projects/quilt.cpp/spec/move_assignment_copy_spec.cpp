@@ -45,7 +45,6 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<formattables::cmakelists_info_generator>();
     test_move_assignment_copy<formattables::enum_info_generator>();
     test_move_assignment_copy<formattables::enumerator_info_generator>();
-    test_move_assignment_copy<formattables::exception_info_generator>();
     test_move_assignment_copy<formattables::namespace_info_generator>();
     test_move_assignment_copy<formattables::nested_type_info_generator>();
     test_move_assignment_copy<formattables::odb_options_info_generator>();

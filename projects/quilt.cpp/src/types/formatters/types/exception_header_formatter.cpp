@@ -55,7 +55,7 @@ std::string provider::formatter_name() const {
 
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
-    const yarn::exception& /*o*/) const {
+    const yarn::exception& /*e*/) const {
     auto builder(f.make());
     builder.add(inclusion_constants::std::string());
     builder.add(inclusion_constants::boost::exception::info());
@@ -92,7 +92,7 @@ void exception_header_formatter::register_inclusion_dependencies_provider(
 }
 
 dogen::formatters::file exception_header_formatter::
-format(const context& ctx, const formattables::exception_info& e) const {
+format(const context& ctx, const yarn::exception& e) const {
     assistant a(ctx, ownership_hierarchy(), file_type());
     const auto r(exception_header_formatter_stitch(a, e));
     return r;

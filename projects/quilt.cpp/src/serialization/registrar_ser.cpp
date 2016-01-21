@@ -35,7 +35,6 @@
 #include "dogen/quilt.cpp/serialization/formattables/class_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/concept_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/visitor_info_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/exception_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/includers_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/namespace_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/primitive_info_ser.hpp"
@@ -59,7 +58,6 @@ void register_types(Archive& ar) {
     ar.template register_type<dogen::quilt::cpp::formattables::cmakelists_info>();
     ar.template register_type<dogen::quilt::cpp::formattables::concept_info>();
     ar.template register_type<dogen::quilt::cpp::formattables::enum_info>();
-    ar.template register_type<dogen::quilt::cpp::formattables::exception_info>();
     ar.template register_type<dogen::quilt::cpp::formattables::forward_declarations_info>();
     ar.template register_type<dogen::quilt::cpp::formattables::includers_info>();
     ar.template register_type<dogen::quilt::cpp::formattables::namespace_info>();

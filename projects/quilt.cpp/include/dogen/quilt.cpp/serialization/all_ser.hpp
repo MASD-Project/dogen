@@ -43,7 +43,6 @@
 #include "dogen/quilt.cpp/serialization/formattables/visitor_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/property_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/bundle_repository_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/exception_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/includers_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/namespace_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/primitive_info_ser.hpp"

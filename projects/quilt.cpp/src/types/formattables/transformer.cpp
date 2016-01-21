@@ -379,18 +379,6 @@ to_namespace_info(const yarn::module& m) const {
     return r;
 }
 
-std::shared_ptr<exception_info>
-transformer::to_exception_info(const yarn::exception& e) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming exception: "
-                             << e.name().qualified();
-
-    auto r(std::make_shared<exception_info>());
-    populate_entity_properties(e.name(), e.documentation(), *r);
-
-    BOOST_LOG_SEV(lg, debug) << "Transformed exception.";
-    return r;
-}
-
 std::shared_ptr<class_info>
 transformer::to_class_info(const yarn::object& o) const {
     auto r(std::make_shared<class_info>());
@@ -589,7 +577,6 @@ transform(const yarn::object& o) const {
 std::forward_list<std::shared_ptr<formattable> >
 transformer::transform(const yarn::exception& e) const {
     std::forward_list<std::shared_ptr<formattable> > r;
-    r.push_front(to_exception_info(e));
     r.push_front(to_forward_declarations_info(e));
     return r;
 }

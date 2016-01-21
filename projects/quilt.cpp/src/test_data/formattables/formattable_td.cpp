@@ -25,7 +25,6 @@
 #include "dogen/quilt.cpp/test_data/formattables/concept_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/origin_types_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/visitor_info_td.hpp"
-#include "dogen/quilt.cpp/test_data/formattables/exception_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/includers_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/namespace_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/primitive_info_td.hpp"
@@ -63,27 +62,25 @@ populate(const unsigned int position, result_type& v) {
 
 formattable_generator::result_type*
 formattable_generator::create_ptr(const unsigned int position) {
-    if ((position % 11) == 0)
+    if ((position % 10) == 0)
         return dogen::quilt::cpp::formattables::cmakelists_info_generator::create_ptr(position);
-    if ((position % 11) == 1)
+    if ((position % 10) == 1)
         return dogen::quilt::cpp::formattables::concept_info_generator::create_ptr(position);
-    if ((position % 11) == 2)
+    if ((position % 10) == 2)
         return dogen::quilt::cpp::formattables::enum_info_generator::create_ptr(position);
-    if ((position % 11) == 3)
-        return dogen::quilt::cpp::formattables::exception_info_generator::create_ptr(position);
-    if ((position % 11) == 4)
+    if ((position % 10) == 3)
         return dogen::quilt::cpp::formattables::forward_declarations_info_generator::create_ptr(position);
-    if ((position % 11) == 5)
+    if ((position % 10) == 4)
         return dogen::quilt::cpp::formattables::includers_info_generator::create_ptr(position);
-    if ((position % 11) == 6)
+    if ((position % 10) == 5)
         return dogen::quilt::cpp::formattables::namespace_info_generator::create_ptr(position);
-    if ((position % 11) == 7)
+    if ((position % 10) == 6)
         return dogen::quilt::cpp::formattables::odb_options_info_generator::create_ptr(position);
-    if ((position % 11) == 8)
+    if ((position % 10) == 7)
         return dogen::quilt::cpp::formattables::primitive_info_generator::create_ptr(position);
-    if ((position % 11) == 9)
+    if ((position % 10) == 8)
         return dogen::quilt::cpp::formattables::registrar_info_generator::create_ptr(position);
-    if ((position % 11) == 10)
+    if ((position % 10) == 9)
         return dogen::quilt::cpp::formattables::visitor_info_generator::create_ptr(position);
     return dogen::quilt::cpp::formattables::class_info_generator::create_ptr(position);
 }

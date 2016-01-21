@@ -48,7 +48,6 @@
 #include "dogen/quilt.cpp/types/formattables/concept_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/visitor_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/property_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/exception_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/namespace_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/primitive_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/forward_declarations_info.hpp"
@@ -123,12 +122,6 @@ private:
      */
     std::shared_ptr<namespace_info>
     to_namespace_info(const yarn::module& m) const;
-
-    /**
-     * @brief Transforms a yarn exception into an exception info.
-     */
-    std::shared_ptr<exception_info>
-    to_exception_info(const yarn::exception& e) const;
 
     /**
      * @brief Transform a Yarn object into a class info.

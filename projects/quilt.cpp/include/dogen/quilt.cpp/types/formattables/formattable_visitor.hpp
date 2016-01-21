@@ -29,7 +29,6 @@
 #include "dogen/quilt.cpp/types/formattables/class_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/concept_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/visitor_info_fwd.hpp"
-#include "dogen/quilt.cpp/types/formattables/exception_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/includers_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/namespace_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/primitive_info_fwd.hpp"
@@ -89,16 +88,6 @@ public:
     virtual void visit(const dogen::quilt::cpp::formattables::enum_info&) { }
     virtual void visit(dogen::quilt::cpp::formattables::enum_info&) const { }
     virtual void visit(dogen::quilt::cpp::formattables::enum_info&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::quilt::cpp::formattables::exception_info
-     */
-    /**@{*/
-    virtual void visit(const dogen::quilt::cpp::formattables::exception_info&) const { }
-    virtual void visit(const dogen::quilt::cpp::formattables::exception_info&) { }
-    virtual void visit(dogen::quilt::cpp::formattables::exception_info&) const { }
-    virtual void visit(dogen::quilt::cpp::formattables::exception_info&) { }
     /**@}*/
 
     /**

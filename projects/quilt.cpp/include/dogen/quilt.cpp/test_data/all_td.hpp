@@ -42,7 +42,6 @@
 #include "dogen/quilt.cpp/test_data/formattables/visitor_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/property_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/settings/bundle_repository_td.hpp"
-#include "dogen/quilt.cpp/test_data/formattables/exception_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/includers_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/namespace_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/primitive_info_td.hpp"

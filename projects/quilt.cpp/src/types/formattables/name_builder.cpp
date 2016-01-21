@@ -50,7 +50,6 @@ namespace_list(const yarn::name& n, const bool detect_model_name) const {
     for (const auto& m : l.model_modules())
         r.push_back(m);
 
-    // All modules in the module path contribute to namespaces.
     for (const auto& m : l.internal_modules())
         r.push_back(m);
 

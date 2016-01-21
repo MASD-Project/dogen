@@ -27,21 +27,22 @@ namespace formatters {
 namespace types {
 
 dogen::formatters::file exception_header_formatter_stitch(
-    assistant& a, const formattables::exception_info& e) {
+    assistant& a, const yarn::exception& e) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(e.namespaces()));
+            const auto ns(a.make_namespaces(e.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
             a.comment(e.documentation());
-a.stream() << "class " << e.name() << " : public virtual std::exception, public virtual boost::exception {" << std::endl;
+a.stream() << "class " << e.name().simple() << " : public virtual std::exception, public virtual boost::exception {" << std::endl;
 a.stream() << "public:" << std::endl;
-a.stream() << "    " << e.name() << "() = default;" << std::endl;
-a.stream() << "    ~" << e.name() << "() noexcept = default;" << std::endl;
+a.stream() << "    " << e.name().simple() << "() = default;" << std::endl;
+a.stream() << "    ~" << e.name().simple() << "() noexcept = default;" << std::endl;
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
-a.stream() << "    " << e.name() << "(const std::string& message) : message_(message) { }" << std::endl;
+a.stream() << "    " << e.name().simple() << "(const std::string& message) : message_(message) { }" << std::endl;
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
 a.stream() << "    const char* what() const noexcept { return(message_.c_str()); }" << std::endl;

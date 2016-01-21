@@ -58,7 +58,7 @@ public:
         formattables::registrar& rg) const override;
 
     dogen::formatters::file format(const context& ctx,
-        const formattables::exception_info& c) const override;
+        const yarn::exception& c) const override;
 };
 
 } } } } }

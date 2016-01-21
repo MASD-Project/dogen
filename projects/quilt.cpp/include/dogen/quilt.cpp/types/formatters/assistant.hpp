@@ -33,6 +33,7 @@
 #include <boost/iostreams/filtering_stream.hpp>
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
+#include "dogen/yarn/types/name.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/quilt.cpp/types/settings/odb_settings.hpp"
@@ -113,7 +114,12 @@ public:
     std::string make_getter_setter_name(
         const formattables::property_info& p) const;
 
-public:
+    /**
+     * @brief returns the c++ namespaces for the name.
+     */
+    std::list<std::string> make_namespaces(const yarn::name& n) const;
+
+ public:
     /**
      * @brief Returns true if serialization is enabled.
      */

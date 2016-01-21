@@ -26,8 +26,8 @@
 #endif
 
 #include "dogen/formatters/types/file.hpp"
+#include "dogen/yarn/types/exception.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
-#include "dogen/quilt.cpp/types/formattables/exception_info.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -36,7 +36,7 @@ namespace formatters {
 namespace types {
 
 dogen::formatters::file exception_header_formatter_stitch(
-    assistant& a, const formattables::exception_info& e);
+    assistant& a, const yarn::exception& e);
 
 } } } } }
 

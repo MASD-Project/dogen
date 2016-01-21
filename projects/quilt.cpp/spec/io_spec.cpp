@@ -45,7 +45,6 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<formattables::cmakelists_info_generator>();
     test_io<formattables::enum_info_generator>();
     test_io<formattables::enumerator_info_generator>();
-    test_io<formattables::exception_info_generator>();
     test_io<formattables::namespace_info_generator>();
     test_io<formattables::nested_type_info_generator>();
     test_io<formattables::odb_options_info_generator>();

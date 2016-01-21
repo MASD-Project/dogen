@@ -35,7 +35,6 @@
 #include "dogen/quilt.cpp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/concept_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/visitor_info_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/exception_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/includers_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/namespace_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/primitive_info_ser.hpp"
