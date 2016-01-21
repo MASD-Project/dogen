@@ -31,7 +31,8 @@ workflow::model_elements_as_list_activity(const yarn::model& m) const {
 
     for (const auto& pair : m.elements()) {
         const auto e(pair.second);
-        r.push_front(e);
+        if (e->generation_type() != yarn::generation_types::no_generation)
+            r.push_front(e);
     }
     return r;
 }
