@@ -102,6 +102,32 @@ Tasks:
 We seem to have created a number of formattable types but not actually
 used them in formatters. Remove them all.
 
+*** STARTED Generate enumerations using yarn types                    :story:
+    CLOCK: [2016-01-21 Thu 21:09]--[2016-01-21 Thu 21:22] =>  0:13
+
+Tasks:
+
+- handle enumeration type assignment within yarn (was done in quilt
+  before).
+- delete the quilt formattable;
+- remove transformation support;
+- update the formatter interfaces to use yarn types;
+- update the yarn formatting workflow to process yarn enumerations;
+- update the stitch templates to make use of yarn enumerations.
+
+*** Handle enumeration type dynamically                               :story:
+
+Add some enumeration post-processing that assigns it a underlying
+type. Should be done with merged model (look for a primitive type with
+property =is_default_enumeration_type=).
+
+This should be done as part of resolution perhaps; user provides a raw
+type, we expand it during expansion and resolve it during
+resolution. If the string is empty, we should use the default
+enumeration type. It is chosen from the collection of
+primitives. There can only be one type marked as
+default. =is_enumeration_default_type=? Read from JSON file.
+
 *** Use dots to separate namespaces in binary names                   :story:
 
 Originally we started using underscores to separate namespaces in

@@ -282,19 +282,6 @@ One way this could be achieved is by adding a "usages" property,
 computed during resolution. Resolver could keep track of the
 non-target names that are in use and return those.
 
-*** Handle enumeration type dynamically                               :story:
-
-Add some enumeration post-processing that assigns it a underlying
-type. Should be done with merged model (look for a primitive type with
-property =is_default_enumeration_type=).
-
-This should be done as part of resolution perhaps; user provides a raw
-type, we expand it during expansion and resolve it during
-resolution. If the string is empty, we should use the default
-enumeration type. It is chosen from the collection of
-primitives. There can only be one type marked as
-default. =is_enumeration_default_type=? Read from JSON file.
-
 *** Services and leaves are not properly handled                      :story:
 
 We are manually ignoring services when calculating leaves.
