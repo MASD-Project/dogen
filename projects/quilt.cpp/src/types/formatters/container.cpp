@@ -72,18 +72,6 @@ const std::forward_list<
 }
 
 const std::forward_list<
-    std::shared_ptr<formatters::primitive_formatter_interface>
-    >& container::primitive_formatters() const {
-    return primitive_formatters_;
-}
-
-const std::forward_list<
-    std::shared_ptr<formatters::concept_formatter_interface>
-    >& container::concept_formatters() const {
-    return concept_formatters_;
-}
-
-const std::forward_list<
     std::shared_ptr<formatters::registrar_formatter_interface>
     >& container::registrar_formatters() const {
     return registrar_formatters_;

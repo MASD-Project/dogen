@@ -44,10 +44,8 @@
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/class_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/enum_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/concept_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/visitor_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/property_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/primitive_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/forward_declarations_info.hpp"
 
 namespace dogen {
@@ -157,18 +155,6 @@ public:
      */
     std::forward_list<std::shared_ptr<formattable> >
     transform(const yarn::enumeration& e) const;
-
-    /**
-     * @brief Transform an Yarn concept into a C++ entity.
-     */
-    std::forward_list<std::shared_ptr<formattable> >
-    transform(const yarn::concept& c) const;
-
-    /**
-     * @brief Transform an Yarn primitive into a C++ entity.
-     */
-    std::forward_list<std::shared_ptr<formattable> >
-    transform(const yarn::primitive& p) const;
 
     /**
      * @brief Transform an Yarn object into a C++ entity.

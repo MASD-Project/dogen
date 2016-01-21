@@ -13,19 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-21 Thu 19:01]
+#+CAPTION: Clock summary at [2016-01-21 Thu 20:27]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *6:34* |      |      |
+| *Total time*                                                                | *6:53* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 6:34   |      |      |
-| Active                                                                      |        | 6:34 |      |
+| Stories                                                                     | 6:53   |      |      |
+| Active                                                                      |        | 6:53 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:21 |
 | COMPLETED Merge all formatter assistants into one                           |        |      | 2:20 |
 | COMPLETED Name builder should take only model name                          |        |      | 0:48 |
 | COMPLETED Generate exceptions using yarn types                              |        |      | 2:21 |
 | COMPLETED Generate modules using yarn types                                 |        |      | 0:32 |
+| COMPLETED Delete all =quilt::cpp::formattable= types not in use             |        |      | 0:19 |
 | STARTED Create a debug build for clang in travis                            |        |      | 0:12 |
 #+end:
 
@@ -93,7 +94,10 @@ Tasks:
 - update the yarn formatting workflow to process yarn modules;
 - update the stitch templates to make use of yarn modules.
 
-*** Delete all =quilt::cpp::formattable= types not in use             :story:
+*** COMPLETED Delete all =quilt::cpp::formattable= types not in use   :story:
+    CLOSED: [2016-01-21 Thu 20:27]
+    CLOCK: [2016-01-21 Thu 20:17]--[2016-01-21 Thu 20:27] =>  0:10
+    CLOCK: [2016-01-21 Thu 19:01]--[2016-01-21 Thu 19:10] =>  0:09
 
 We seem to have created a number of formattable types but not actually
 used them in formatters. Remove them all.

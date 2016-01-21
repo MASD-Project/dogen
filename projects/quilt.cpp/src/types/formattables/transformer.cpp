@@ -515,20 +515,6 @@ transformer::transform(const yarn::enumeration& e) const {
     return r;
 }
 
-std::forward_list<std::shared_ptr<formattable> >
-transformer::transform(const yarn::concept& /*c*/) const {
-    std::forward_list<std::shared_ptr<formattable> > r;
-    r.push_front(std::make_shared<concept_info>());
-    return r;
-}
-
-std::forward_list<std::shared_ptr<formattable> >
-transformer::transform(const yarn::primitive& /*p*/) const {
-    std::forward_list<std::shared_ptr<formattable> > r;
-    r.push_front(std::make_shared<primitive_info>());
-    return r;
-}
-
 std::forward_list<std::shared_ptr<formattable> > transformer::
 transform(const yarn::object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming object: "

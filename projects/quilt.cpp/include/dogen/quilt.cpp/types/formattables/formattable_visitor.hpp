@@ -27,10 +27,8 @@
 
 #include "dogen/quilt.cpp/types/formattables/enum_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/class_info_fwd.hpp"
-#include "dogen/quilt.cpp/types/formattables/concept_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/visitor_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/includers_info_fwd.hpp"
-#include "dogen/quilt.cpp/types/formattables/primitive_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/registrar_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/cmakelists_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_options_info_fwd.hpp"
@@ -67,16 +65,6 @@ public:
     virtual void visit(const dogen::quilt::cpp::formattables::cmakelists_info&) { }
     virtual void visit(dogen::quilt::cpp::formattables::cmakelists_info&) const { }
     virtual void visit(dogen::quilt::cpp::formattables::cmakelists_info&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::quilt::cpp::formattables::concept_info
-     */
-    /**@{*/
-    virtual void visit(const dogen::quilt::cpp::formattables::concept_info&) const { }
-    virtual void visit(const dogen::quilt::cpp::formattables::concept_info&) { }
-    virtual void visit(dogen::quilt::cpp::formattables::concept_info&) const { }
-    virtual void visit(dogen::quilt::cpp::formattables::concept_info&) { }
     /**@}*/
 
     /**
@@ -117,16 +105,6 @@ public:
     virtual void visit(const dogen::quilt::cpp::formattables::odb_options_info&) { }
     virtual void visit(dogen::quilt::cpp::formattables::odb_options_info&) const { }
     virtual void visit(dogen::quilt::cpp::formattables::odb_options_info&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::quilt::cpp::formattables::primitive_info
-     */
-    /**@{*/
-    virtual void visit(const dogen::quilt::cpp::formattables::primitive_info&) const { }
-    virtual void visit(const dogen::quilt::cpp::formattables::primitive_info&) { }
-    virtual void visit(dogen::quilt::cpp::formattables::primitive_info&) const { }
-    virtual void visit(dogen::quilt::cpp::formattables::primitive_info&) { }
     /**@}*/
 
     /**

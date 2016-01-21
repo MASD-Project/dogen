@@ -36,8 +36,6 @@
 #include "dogen/quilt.cpp/types/formatters/namespace_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb_options_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/cmakelists_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/primitive_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/concept_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/includers_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/forward_declarations_formatter_interface.hpp"
@@ -122,22 +120,6 @@ public:
     cmakelists_formatters() const;
 
     /**
-     * @brief Returns all available primitive formatters.
-     */
-    const std::forward_list<
-        std::shared_ptr<formatters::primitive_formatter_interface>
-        >&
-    primitive_formatters() const;
-
-    /**
-     * @brief Returns all available concept formatters.
-     */
-    const std::forward_list<
-        std::shared_ptr<formatters::concept_formatter_interface>
-        >&
-     concept_formatters() const;
-
-    /**
      * @brief Returns all available registrar formatters.
      */
     const std::forward_list<
@@ -192,12 +174,6 @@ private:
     std::forward_list<std::shared_ptr<
         formatters::cmakelists_formatter_interface> >
     cmakelists_formatters_;
-    std::forward_list<std::shared_ptr<
-        formatters::primitive_formatter_interface> >
-    primitive_formatters_;
-    std::forward_list<std::shared_ptr<
-        formatters::concept_formatter_interface> >
-    concept_formatters_;
     std::forward_list<std::shared_ptr<
         formatters::registrar_formatter_interface> >
     registrar_formatters_;

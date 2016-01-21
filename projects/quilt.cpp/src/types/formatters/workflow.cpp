@@ -26,10 +26,8 @@
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/formattables/enum_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/class_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/concept_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/visitor_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/includers_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/primitive_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/registrar_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/cmakelists_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_options_info.hpp"
@@ -175,8 +173,6 @@ public:
     void visit(const formattables::enum_info& e) override;
     void visit(const formattables::registrar_info& r) override;
     void visit(const formattables::visitor_info& v) override;
-    void visit(const formattables::concept_info& c) override;
-    void visit(const formattables::primitive_info& p) override;
     void visit(const formattables::cmakelists_info& c) override;
     void visit(const formattables::odb_options_info& o) override;
     void visit(const formattables::includers_info& o) override;
@@ -228,14 +224,6 @@ void dispatcher::visit(const formattables::registrar_info& r) {
 
 void dispatcher::visit(const formattables::visitor_info& v) {
     format_entity(container_.visitor_formatters(), v);
-}
-
-void dispatcher::visit(const formattables::concept_info& c) {
-    format_entity(container_.concept_formatters(), c);
-}
-
-void dispatcher::visit(const formattables::primitive_info& p) {
-    format_entity(container_.primitive_formatters(), p);
 }
 
 void dispatcher::visit(const formattables::cmakelists_info& c) {

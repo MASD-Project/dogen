@@ -95,8 +95,6 @@ void registrar::validate() const {
         fc.forward_declarations_formatters());
     log_container_sizes("odb options formatters", fc.odb_options_formatters());
     log_container_sizes("cmakelists formatters", fc.cmakelists_formatters());
-    log_container_sizes("primitive formatters", fc.primitive_formatters());
-    log_container_sizes("concept formatters", fc.concept_formatters());
     log_container_sizes("registrar formatters", fc.registrar_formatters());
     log_container_sizes("Includers formatters", fc.includers_formatters());
 
@@ -192,26 +190,6 @@ void registrar::register_formatter(
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
     formatter_container_.cmakelists_formatters_.push_front(f);
-    common_registration(f);
-}
-
-void registrar::register_formatter(
-    std::shared_ptr<primitive_formatter_interface> f) {
-    // note: not logging by design
-    if (!f)
-        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
-
-    formatter_container_.primitive_formatters_.push_front(f);
-    common_registration(f);
-}
-
-void registrar::register_formatter(
-    std::shared_ptr<concept_formatter_interface> f) {
-    // note: not logging by design
-    if (!f)
-        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
-
-    formatter_container_.concept_formatters_.push_front(f);
     common_registration(f);
 }
 
