@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-21 Thu 23:16]
+#+CAPTION: Clock summary at [2016-01-22 Fri 13:50]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *8:58* |      |      |
+| *Total time*                                                                | *9:36* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 8:58   |      |      |
-| Active                                                                      |        | 8:58 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:21 |
+| Stories                                                                     | 9:36   |      |      |
+| Active                                                                      |        | 9:36 |      |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:59 |
 | COMPLETED Merge all formatter assistants into one                           |        |      | 2:20 |
 | COMPLETED Name builder should take only model name                          |        |      | 0:48 |
 | COMPLETED Generate exceptions using yarn types                              |        |      | 2:21 |
@@ -33,6 +33,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-01-22 Fri 13:11]--[2016-01-22 Fri 13:49] =>  0:38
     CLOCK: [2016-01-19 Tue 23:27]--[2016-01-19 Tue 23:30] =>  0:03
     CLOCK: [2016-01-18 Mon 21:55]--[2016-01-18 Mon 22:13] =>  0:18
 
