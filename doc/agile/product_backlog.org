@@ -5735,6 +5735,29 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Generate formatter interfaces                                     :story:
+
+For some trivial types such as formatter interfaces, formatter
+container, registrar and so on, it should be relatively trivial to
+generate them; we need:
+
+- a mustache type template;
+- a set of fields from yarn types to be exposed to mustache;
+- a list of types to iterate through.
+
+Once we got this we could instantiate the templates. To integrate this
+with knit we would need some way of specifying which types the
+iteration would be over. We could mark a specific type with a given
+stereotype, and then supply say the base class ("all leaf descendants
+of xyz"). Dogen would then locate the descendants and for each call
+the template.
+
+For registrar and container its a bit trickier because we want a
+collection of types in one go.
+
+We also need a way to keep these templates away from the main (user
+visible) code, since they are useful only for dogen.
+
 *** Generate spec skeleton                                            :story:
 
 When we create a dogen project for the first time, we should be able
