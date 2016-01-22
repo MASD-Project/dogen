@@ -3890,6 +3890,16 @@ become very readable.
 These stories are good candidates for the subsequent release. This
 release will be all about adding new features.
 
+*** Improve handling of defaulting for enumeration types              :story:
+
+At present we check for a primitive market as the default type for
+enumerations, and apply this type to all enumerations that have no
+underlying type. The problem is that if a user creates a type for
+primitives (or if we use =std::string= as a primitive type, say) we
+still require loading the primitive model to locate a default type. We
+should probably only locate this type once we have got the first
+enumeration that needs it.
+
 *** Create an interface for the text reader                           :story:
 
 In order to do performance testing of the dia model we should create
