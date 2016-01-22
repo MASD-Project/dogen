@@ -17,24 +17,25 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(main_name "test_model_sanitizer")
-set(spec_name "${main_name}_spec")
-set(candindate_spec_files "")
-set(spec_files "")
-file(GLOB_RECURSE candindate_spec_files RELATIVE
+set(name "test_model_sanitizer")
+set(binary_name "dogen.${name}.spec")
+set(candidate_files "")
+set(files "")
+file(GLOB_RECURSE candidate_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
 set(ignore_file false)
-foreach(candindate_spec_file ${candindate_spec_files})
+foreach(candidate_file ${candidate_files})
+  MESSAGE(STATUS ${candidate_file})
     if(NOT ODB_FOUND)
-        if (candindate_spec_file MATCHES "database")
+        if (candidate_file MATCHES "database")
             set(ignore_file true)
         endif()
     endif()
 
     if(NOT ignore_file)
-        set(spec_files ${spec_files} ${candindate_spec_file})
+        set(files ${files} ${candidate_file})
     endif()
     set(ignore_file false)
 endforeach()
@@ -44,11 +45,10 @@ endforeach()
 file(GLOB_RECURSE disable_cmakelists_files ABSOLUTE
     "${CMAKE_SOURCE_DIR}/projects/test_models/disable_cmakelists/src/*.cpp")
 
-add_executable(${spec_name} ${spec_files} ${disable_cmakelists_files})
-set(binary_name "dogen_${spec_name}")
-set_target_properties(${spec_name} PROPERTIES OUTPUT_NAME ${binary_name})
+add_executable(${name}_spec ${files} ${disable_cmakelists_files})
+set_target_properties(${name}_spec PROPERTIES OUTPUT_NAME ${binary_name})
 
-target_link_libraries(${spec_name}
+target_link_libraries(${name}_spec
     all_primitives
     classes_in_a_package
     classes_inout_package
@@ -75,13 +75,15 @@ target_link_libraries(${spec_name}
     ${Boost_LIBRARIES}
     )
 
-set(${spec_name}_cmd ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
+# FIXME: link against database if feature is on?
 
-add_custom_target(run_${spec_name}
-    COMMAND ${${spec_name}_cmd}
+set(command ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
+
+add_custom_target(run_${name}_spec
+    COMMAND ${command}
     WORKING_DIRECTORY ${stage_bin_dir}
-    DEPENDS ${spec_name})
-add_dependencies(run_all_specs run_${spec_name})
+    DEPENDS ${name}_spec)
+add_dependencies(run_all_specs run_${name}_spec)
 
-add_boost_tests(${main_name} ${spec_files})
-install(TARGETS ${spec_name} RUNTIME DESTINATION bin COMPONENT tests)
+add_boost_tests(${name} ${files})
+install(TARGETS ${name}_spec RUNTIME DESTINATION bin COMPONENT tests)

@@ -68,6 +68,7 @@ script:
   - hash=`ls ~/.conan/data/Boost/1.60.0/lasote/stable/package/`
   - cd ~/.conan/data/Boost/1.60.0/lasote/stable/package/${hash}/include/
   - sudo patch -p0 < ${GIT_REPO}/patches/boost_1_59_graph.patch
+  - cd ${GIT_REPO}/build/output
   # FIXME: ninja borked with conan for some reason.
   # - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on -G Ninja
   # - ninja -j2 package run_all_specs
