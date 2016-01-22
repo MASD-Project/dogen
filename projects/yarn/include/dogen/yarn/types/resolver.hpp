@@ -46,6 +46,17 @@ namespace yarn {
  */
 class resolver {
 private:
+    bool is_primitive(const intermediate_model& m, const name& n) const;
+    bool is_enumeration(const intermediate_model& m, const name& n) const;
+    bool is_object(const intermediate_model& m, const name& n) const;
+    bool is_concept(const intermediate_model& m, const name& n) const;
+
+private:
+    /**
+     * @brief Returns the default enumeration type.
+     */
+    name obtain_default_enumeration_type(const intermediate_model& m) const;
+
     /**
      * @brief Returns true if the name is in the model, false
      * otherwise.
@@ -95,6 +106,11 @@ private:
      * @brief Resolve all objects.
      */
     void resolve_objects(intermediate_model& m) const;
+
+    /**
+     * @brief Resolve all enumerations.
+     */
+    void resolve_enumerations(intermediate_model& m) const;
 
 public:
     /**

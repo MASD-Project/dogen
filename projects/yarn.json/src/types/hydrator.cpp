@@ -38,6 +38,8 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.json.hydrator"));
 
 const std::string empty;
+const std::string is_default_enumeration_type_key(
+    "is_default_enumeration_type");
 const std::string in_global_module_key("in_global_module");
 const std::string model_name_key("model_name");
 const std::string bool_true("true");
@@ -158,6 +160,8 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
         m.objects().insert(std::make_pair(n.qualified(), o));
     } else if (meta_type_value == meta_type_primitive_value) {
         yarn::primitive p;
+        const auto dit(pt.get(is_default_enumeration_type_key, false));
+        p.is_default_enumeration_type(dit);
         lambda(p);
         m.primitives().insert(std::make_pair(n.qualified(), p));
     }

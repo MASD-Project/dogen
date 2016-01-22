@@ -44,7 +44,12 @@ const std::string empty;
 const std::string orphan_object("Object's parent could not be located: ");
 const std::string orphan_concept("Refined concept could not be located: ");
 const std::string undefined_type("Object has property with undefined type: ");
-const std::string model_resolved("Resolution has already been done for model");
+const std::string too_many_defaults(
+    "Model has more than one default enumeration: ");
+const std::string missing_default(
+    "Model does not have a default enumeration type: ");
+const std::string invalid_default(
+    "Model has a default enumeration type that cannot be found: ");
 
 typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 
@@ -53,27 +58,77 @@ typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 namespace dogen {
 namespace yarn {
 
-bool resolver::
-is_name_in_model(const intermediate_model& m, const name& n) const {
-    BOOST_LOG_SEV(lg, debug) << "Finding name:" << n;
+bool resolver::is_primitive(const intermediate_model& m, const name& n) const {
+    auto i(m.primitives().find(n.qualified()));
+    if (i != m.primitives().end()) {
+        BOOST_LOG_SEV(lg, debug) << "Name belongs to a primitive in model.";
+        return true;
+    }
+    return false;
+}
 
+bool resolver::is_enumeration(const intermediate_model& m, const name& n) const {
+    auto i(m.enumerations().find(n.qualified()));
+    if (i != m.enumerations().end()) {
+        BOOST_LOG_SEV(lg, debug) << "Name belongs to an enumeration in model.";
+        return true;
+    }
+    return false;
+}
+
+bool resolver::is_object(const intermediate_model& m, const name& n) const {
     auto i(m.objects().find(n.qualified()));
     if (i != m.objects().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to an object in model.";
         return true;
     }
+    return false;
+}
 
-    auto j(m.enumerations().find(n.qualified()));
-    if (j != m.enumerations().end()) {
-        BOOST_LOG_SEV(lg, debug) << "Name belongs to an enumeration in model.";
+bool resolver:: is_concept(const intermediate_model& m, const name& n) const {
+    auto i(m.concepts().find(n.qualified()));
+    if (i != m.concepts().end()) {
+        BOOST_LOG_SEV(lg, debug) << "Name belongs to a concept in model.";
         return true;
     }
+    return false;
+}
 
-    auto k(m.primitives().find(n.qualified()));
-    if (k != m.primitives().end()) {
-        BOOST_LOG_SEV(lg, debug) << "Name belongs to a primitive in model.";
-        return true;
+name resolver::
+obtain_default_enumeration_type(const intermediate_model& m) const {
+    name r;
+    bool found(false);
+    for (const auto& pair : m.primitives()) {
+        const auto p(pair.second);
+        if (p.is_default_enumeration_type()) {
+            BOOST_LOG_SEV(lg, debug) << "Found default enumeration name type:"
+                                     << p.name().qualified();
+
+            if (found) {
+                BOOST_LOG_SEV(lg, error) << too_many_defaults
+                                         << p.name().qualified();
+                BOOST_THROW_EXCEPTION(
+                    resolution_error(too_many_defaults + p.name().qualified()));
+            }
+            found = true;
+            r = p.name();
+        }
     }
+
+    if (!found) {
+        BOOST_LOG_SEV(lg, error) << missing_default;
+        BOOST_THROW_EXCEPTION(resolution_error(missing_default));
+    }
+
+    return r;
+}
+
+bool resolver::
+is_name_in_model(const intermediate_model& m, const name& n) const {
+    BOOST_LOG_SEV(lg, debug) << "Finding name:" << n;
+
+    if (is_object(m, n) || is_enumeration(m, n) || is_primitive(m, n))
+        return true;
 
     BOOST_LOG_SEV(lg, debug) << "Name not found in model.";
     return false;
@@ -158,8 +213,7 @@ void resolver::validate_inheritance_graph(const intermediate_model& m,
         return;
 
     for (const auto& pn : o.parents()) {
-        const auto j(m.objects().find(pn.qualified()));
-        if (j == m.objects().end()) {
+        if (!is_object(m, pn)) {
             std::ostringstream s;
             s << orphan_object << ": " << o.name().qualified()
               << ". parent: " << pn.qualified();
@@ -173,8 +227,7 @@ void resolver::validate_inheritance_graph(const intermediate_model& m,
         return;
 
     for (const auto& pn : o.root_parents()) {
-        const auto j(m.objects().find(pn.qualified()));
-        if (j == m.objects().end()) {
+        if (!is_object(m, pn)) {
             std::ostringstream s;
             s << orphan_object << ": " << o.name().qualified()
               << ". original parent: " << pn.qualified();
@@ -188,8 +241,7 @@ void resolver::validate_inheritance_graph(const intermediate_model& m,
 void resolver::validate_refinements(const intermediate_model& m,
     const concept& c) const {
     for (const auto& n : c.refines()) {
-        const auto i(m.concepts().find(n.qualified()));
-        if (i == m.concepts().end()) {
+        if (!is_concept(m, n)) {
             std::ostringstream stream;
             stream << orphan_concept << ". concept: "
                    << c.name().qualified()
@@ -202,35 +254,73 @@ void resolver::validate_refinements(const intermediate_model& m,
 }
 
 void resolver::resolve_concepts(intermediate_model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Concepts: " << m.concepts().size();
+
     for (auto& pair : m.concepts()) {
         concept& c(pair.second);
 
         if (c.generation_type() == generation_types::no_generation)
             continue;
 
+        BOOST_LOG_SEV(lg, debug) << "Resolving: " << c.name().qualified();
         resolve_properties(m, c.name(), c.local_properties());
         validate_refinements(m, c);
     }
 }
 
 void resolver::resolve_objects(intermediate_model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Objects found: " << m.objects().size();
+    BOOST_LOG_SEV(lg, debug) << "Objects: " << m.objects().size();
 
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
-        BOOST_LOG_SEV(lg, debug) << "Resolving type " << o.name().qualified();
 
         if (o.generation_type() == generation_types::no_generation)
             continue;
 
+        BOOST_LOG_SEV(lg, debug) << "Resolving: " << o.name().qualified();
         validate_inheritance_graph(m, o);
         resolve_properties(m, o.name(), o.local_properties());
+    }
+}
+
+void resolver::resolve_enumerations(intermediate_model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Enumerations: " << m.enumerations().size();
+
+    /* if no enumerations exist, we can just exit. This means we can
+     * still support models that have no dependencies, provided they
+     * do not use enumerations.
+     */
+    if (m.enumerations().empty())
+        return;
+
+    const auto det(obtain_default_enumeration_type(m));
+    for (auto& pair : m.enumerations()) {
+        auto& e(pair.second);
+
+        if (e.generation_type() == generation_types::no_generation)
+            continue;
+
+        BOOST_LOG_SEV(lg, debug) << "Resolving: " << e.name().qualified();
+
+        const auto ut(e.underlying_type());
+        BOOST_LOG_SEV(lg, debug) << "Underlying type: " << ut;
+
+        if (ut.simple().empty()) {
+            BOOST_LOG_SEV(lg, debug) << "Defaulting enumeration to type: "
+                                     << det.qualified();
+            e.underlying_type(det);
+        } else if (!is_primitive(m, ut)) {
+            BOOST_LOG_SEV(lg, error) << invalid_default << ut.qualified();
+            BOOST_THROW_EXCEPTION(resolution_error(
+                    invalid_default + ut.qualified()));
+        }
     }
 }
 
 void resolver::resolve(intermediate_model& m) const {
     resolve_concepts(m);
     resolve_objects(m);
+    resolve_enumerations(m);
 }
 
 } }

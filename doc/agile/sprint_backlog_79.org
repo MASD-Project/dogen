@@ -13,24 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-22 Fri 21:55]
-| <75>                                                                        |        |      |      |
-| Headline                                                                    | Time   |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *9:55* |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 9:55   |      |      |
-| Active                                                                      |        | 9:55 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:59 |
-| COMPLETED Merge all formatter assistants into one                           |        |      | 2:20 |
-| COMPLETED Name builder should take only model name                          |        |      | 0:48 |
-| COMPLETED Generate exceptions using yarn types                              |        |      | 2:21 |
-| COMPLETED Generate modules using yarn types                                 |        |      | 0:32 |
-| COMPLETED Delete all =quilt::cpp::formattable= types not in use             |        |      | 0:19 |
-| COMPLETED Use dots to separate namespaces in binary names                   |        |      | 1:52 |
-| COMPLETED Refactor resolver class                                           |        |      | 0:19 |
-| STARTED Generate enumerations using yarn types                              |        |      | 0:13 |
-| STARTED Create a debug build for clang in travis                            |        |      | 0:12 |
+#+CAPTION: Clock summary at [2016-01-22 Fri 22:43]
+| <75>                                                                        |         |       |      |
+| Headline                                                                    | Time    |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                                | *11:00* |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| Stories                                                                     | 11:00   |       |      |
+| Active                                                                      |         | 11:00 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:59 |
+| COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
+| COMPLETED Name builder should take only model name                          |         |       | 0:48 |
+| COMPLETED Generate exceptions using yarn types                              |         |       | 2:21 |
+| COMPLETED Generate modules using yarn types                                 |         |       | 0:32 |
+| COMPLETED Delete all =quilt::cpp::formattable= types not in use             |         |       | 0:19 |
+| COMPLETED Use dots to separate namespaces in binary names                   |         |       | 1:52 |
+| COMPLETED Refactor resolver class                                           |         |       | 0:19 |
+| COMPLETED Handle enumeration type dynamically                               |         |       | 1:05 |
+| STARTED Generate enumerations using yarn types                              |         |       | 0:13 |
+| STARTED Create a debug build for clang in travis                            |         |       | 0:12 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -142,6 +143,35 @@ We are supplying the model in the constructor and then modifying it
 internally. We should use the same pattern as other yarn services and
 supply the model on the main method.
 
+*** COMPLETED Handle enumeration type dynamically                     :story:
+    CLOSED: [2016-01-22 Fri 22:43]
+    CLOCK: [2016-01-22 Fri 21:55]--[2016-01-22 Fri 22:42] =>  0:47
+    CLOCK: [2016-01-22 Fri 21:16]--[2016-01-22 Fri 21:34] =>  0:18
+
+Add some enumeration post-processing that assigns it a underlying
+type. Should be done with merged model (look for a primitive type with
+property =is_default_enumeration_type=).
+
+This should be done as part of resolution perhaps; user provides a raw
+type, we expand it during expansion and resolve it during
+resolution. If the string is empty, we should use the default
+enumeration type. It is chosen from the collection of
+primitives. There can only be one type marked as
+default. =is_enumeration_default_type=? Read from JSON file.
+
+Merged stories:
+
+*Set enumeration underlying type in yarn*
+
+In cpp transformer we have hacked the underlying type of the
+enumeration. Remove this hack and set it in SML. Still a hack, but
+a tad better.
+
+Actually this could be the first case where LAM/PIM is used: we could
+call this something like integer.
+
+This is also hacked in yarn_dia's transformer.
+
 *** STARTED Generate enumerations using yarn types                    :story:
     CLOCK: [2016-01-21 Thu 21:09]--[2016-01-21 Thu 21:22] =>  0:13
 
@@ -154,19 +184,6 @@ Tasks:
 - update the formatter interfaces to use yarn types;
 - update the yarn formatting workflow to process yarn enumerations;
 - update the stitch templates to make use of yarn enumerations.
-
-*** Handle enumeration type dynamically                               :story:
-
-Add some enumeration post-processing that assigns it a underlying
-type. Should be done with merged model (look for a primitive type with
-property =is_default_enumeration_type=).
-
-This should be done as part of resolution perhaps; user provides a raw
-type, we expand it during expansion and resolve it during
-resolution. If the string is empty, we should use the default
-enumeration type. It is chosen from the collection of
-primitives. There can only be one type marked as
-default. =is_enumeration_default_type=? Read from JSON file.
 
 *** Access model name from within formatters workflow                 :story:
 

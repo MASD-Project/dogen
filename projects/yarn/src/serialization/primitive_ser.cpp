@@ -42,6 +42,8 @@ void save(Archive& ar,
     const dogen::yarn::primitive& v,
     const unsigned int /*version*/) {
     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
+
+    ar << make_nvp("is_default_enumeration_type", v.is_default_enumeration_type_);
 }
 
 template<typename Archive>
@@ -49,6 +51,8 @@ void load(Archive& ar,
     dogen::yarn::primitive& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
+
+    ar >> make_nvp("is_default_enumeration_type", v.is_default_enumeration_type_);
 }
 
 } }

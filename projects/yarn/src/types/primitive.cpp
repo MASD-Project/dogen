@@ -19,11 +19,15 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 
 namespace dogen {
 namespace yarn {
+
+primitive::primitive()
+    : is_default_enumeration_type_(static_cast<bool>(0)) { }
 
 primitive::primitive(
     const std::string& documentation,
@@ -33,7 +37,8 @@ primitive::primitive(
     const dogen::yarn::origin_types origin_type,
     const std::string& original_model_name,
     const boost::optional<dogen::yarn::name>& contained_by,
-    const bool in_global_module)
+    const bool in_global_module,
+    const bool is_default_enumeration_type)
     : dogen::yarn::element(
       documentation,
       extensions,
@@ -42,19 +47,30 @@ primitive::primitive(
       origin_type,
       original_model_name,
       contained_by,
-      in_global_module) { }
+      in_global_module),
+      is_default_enumeration_type_(is_default_enumeration_type) { }
 
 void primitive::to_stream(std::ostream& s) const {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::primitive\"" << ", "
       << "\"__parent_0__\": ";
     element::to_stream(s);
-    s << " }";
+    s << ", "
+      << "\"is_default_enumeration_type\": " << is_default_enumeration_type_
+      << " }";
 }
 
 void primitive::swap(primitive& other) noexcept {
     element::swap(other);
 
+    using std::swap;
+    swap(is_default_enumeration_type_, other.is_default_enumeration_type_);
 }
 
 bool primitive::equals(const dogen::yarn::element& other) const {
@@ -64,13 +80,22 @@ bool primitive::equals(const dogen::yarn::element& other) const {
 }
 
 bool primitive::operator==(const primitive& rhs) const {
-    return element::compare(rhs);
+    return element::compare(rhs) &&
+        is_default_enumeration_type_ == rhs.is_default_enumeration_type_;
 }
 
 primitive& primitive::operator=(primitive other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+bool primitive::is_default_enumeration_type() const {
+    return is_default_enumeration_type_;
+}
+
+void primitive::is_default_enumeration_type(const bool v) {
+    is_default_enumeration_type_ = v;
 }
 
 } }

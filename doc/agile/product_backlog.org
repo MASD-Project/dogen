@@ -476,17 +476,6 @@ A first step for this would be to have a language enumeration in SML
 which is a property of the model, and one entry of which is "language
 agnostic".
 
-*** Set enumeration underlying type in SML                            :story:
-
-In cpp transformer we have hacked the underlying type of the
-enumeration. Remove this hack and set it in SML. Still a hack, but
-a tad better.
-
-Actually this could be the first case where LAM/PIM is used: we could
-call this something like integer.
-
-This is also hacked in yarn_dia's transformer.
-
 *** Thoughts on simplifying the formattables generation               :story:
 
 We have a problem in the way which we are doing the formattables:

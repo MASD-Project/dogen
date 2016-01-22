@@ -42,6 +42,7 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "unsigned int",
+            "is_default_enumeration_type" : true,
             "in_global_module" : true,
             "extensions" : {
                 "quilt.cpp.inclusion_required" : false,

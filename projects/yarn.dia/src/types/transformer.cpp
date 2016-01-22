@@ -44,7 +44,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.dia.transformer"));
 
 const std::string empty;
-const std::string unsigned_int("unsigned int");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string empty_package_id("Supplied package id is empty");
 const std::string parent_not_found("Object has a parent but its not defined: ");
@@ -280,11 +279,6 @@ void transformer::to_enumeration(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an enumeration: " << o.id();
     yarn::enumeration e;
     update_element(e, o, p);
-
-    // FIXME: we should do this further down the stack.
-    dogen::yarn::name n;
-    n.simple(unsigned_int);
-    e.underlying_type(n);
 
     dogen::yarn::enumerator invalid;
     invalid.name("invalid");

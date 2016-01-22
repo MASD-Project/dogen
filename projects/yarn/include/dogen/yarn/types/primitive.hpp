@@ -38,9 +38,11 @@ namespace yarn {
  */
 class primitive final : public dogen::yarn::element {
 public:
-    primitive() = default;
     primitive(const primitive&) = default;
     primitive(primitive&&) = default;
+
+public:
+    primitive();
 
     virtual ~primitive() noexcept { }
 
@@ -53,7 +55,8 @@ public:
         const dogen::yarn::origin_types origin_type,
         const std::string& original_model_name,
         const boost::optional<dogen::yarn::name>& contained_by,
-        const bool in_global_module);
+        const bool in_global_module,
+        const bool is_default_enumeration_type);
 
 private:
     template<typename Archive>
@@ -83,6 +86,15 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
+    /**
+     * @brief If true, this primitive is the default type to be used on enumerations.
+     */
+    /**@{*/
+    bool is_default_enumeration_type() const;
+    void is_default_enumeration_type(const bool v);
+    /**@}*/
+
+public:
     bool operator==(const primitive& rhs) const;
     bool operator!=(const primitive& rhs) const {
         return !this->operator==(rhs);
@@ -95,6 +107,8 @@ public:
     void swap(primitive& other) noexcept;
     primitive& operator=(primitive other);
 
+private:
+    bool is_default_enumeration_type_;
 };
 
 } }

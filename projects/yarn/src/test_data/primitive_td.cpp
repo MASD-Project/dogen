@@ -21,6 +21,14 @@
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/primitive_td.hpp"
 
+namespace {
+
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
+}
+
 namespace dogen {
 namespace yarn {
 
@@ -29,6 +37,7 @@ primitive_generator::primitive_generator() : position_(0) { }
 void primitive_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
+    v.is_default_enumeration_type(create_bool(position + 0));
 }
 
 primitive_generator::result_type
