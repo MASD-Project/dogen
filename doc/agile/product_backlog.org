@@ -5746,7 +5746,7 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
-*** Generate product skeletons                                        :story:
+*** Create a tool to generate product skeletons                       :story:
 
 Now that dogen is evolving to a MDSD tool, it would be great to be
 able to create a complete product skeleton from a tool. This would
@@ -5786,6 +5786,27 @@ and AppVeyor from dart.
 
 We should also generate a RPM/Deb installation script for at least
 boost, doxygen, build essentials, clang.
+
+We should also consider a "refresh" or "force" statement, perhaps on a
+file-by-file basis, which would allow one to regenerate all of these
+files. This would be useful to pick-up changes in travis files, etc.
+
+One problem with travis files is that each project has its own
+dependencies. We should move these over to a shell script and call
+these. The script is not generated or perhaps we just generate a
+skeleton. This also highlights the issue that we have different kinds
+of files:
+
+- files that we generate and expect the user to modify;
+- files that we generate but don't expect user modifications;
+- files that the user generates.
+
+We need a way to classify these.
+
+Dart should use stitch templates to generate files.
+
+We may need some options such as "generate boost test ctest
+integration", etc.
 
 *** Add support for bintray                                           :story:
 
