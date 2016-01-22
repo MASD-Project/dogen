@@ -28,15 +28,16 @@ namespace formatters {
 namespace types {
 
 dogen::formatters::file enum_header_formatter_stitch(
-    assistant& a, const formattables::enum_info& e) {
+    assistant& a, const yarn::enumeration& e) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(e.namespaces()));
+            const auto ns(a.make_namespaces(e.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
             a.comment(e.documentation());
-a.stream() << "enum class " << e.name() << " : " << e.type() << " {" << std::endl;
+a.stream() << "enum class " << e.name().simple() << " : " << a.make_qualified_name(e.underlying_type()) << " {" << std::endl;
             dogen::formatters::sequence_formatter sf(e.enumerators().size());
             for (const auto& en : e.enumerators()) {
 a.stream() << "    " << en.name() << " = " << en.value() << sf.postfix() << a.comment_inline(en.documentation()) << std::endl;

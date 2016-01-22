@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include <boost/pointer_cast.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/formatters/types/comment_formatter.hpp"
@@ -45,9 +46,10 @@ static logger lg(logger_factory(
         "quilt.cpp.formatters.assistant"));
 
 const std::string empty;
-const std::string by_ref_text = "&";
-const std::string void_keyword_text = "void";
-const std::string final_keyword_text = "final ";
+const std::string by_ref_text("&");
+const std::string void_keyword_text("void");
+const std::string final_keyword_text("final ");
+const std::string namespace_separator("::");
 const std::string member_variable_postfix("_");
 
 const bool start_on_first_line(true);
@@ -103,6 +105,14 @@ make_setter_return_type(const std::string& containing_type_name,
         s << void_keyword_text;
 
     return s.str();
+}
+
+std::string assistant::make_qualified_name(const yarn::name& n) const {
+    formattables::name_builder b;
+    auto ns(b.namespace_list(n));
+    ns.push_back(n.simple());
+    const auto r(boost::join(ns, namespace_separator));
+    return r;
 }
 
 void assistant::ensure_formatter_properties_are_present() const {

@@ -60,7 +60,7 @@ public:
         formattables::registrar& rg) const override;
 
     dogen::formatters::file
-    format(const context& ctx, const formattables::enum_info& c) const override;
+    format(const context& ctx, const yarn::enumeration& e) const override;
 };
 
 } } } } }

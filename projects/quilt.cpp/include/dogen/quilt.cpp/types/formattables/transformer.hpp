@@ -43,7 +43,6 @@
 #include "dogen/quilt.cpp/types/formattables/entity.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/class_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/enum_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/visitor_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/property_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/forward_declarations_info.hpp"
@@ -101,17 +100,6 @@ private:
     std::tuple<property_info, bool, bool, bool>
     to_property_info(const yarn::property p, const bool is_immutable,
         const bool is_fluent) const;
-
-    /**
-     * @brief Transforms an Yarn property to an enumerator info.
-     */
-    enumerator_info to_enumerator_info(const yarn::enumerator& e) const;
-
-    /**
-     * @brief Transforms a Yarn value containing an enumeration into an
-     * enumeration info.
-     */
-    std::shared_ptr<enum_info> to_enum_info(const yarn::enumeration& e) const;
 
     /**
      * @brief Transform a Yarn object into a class info.

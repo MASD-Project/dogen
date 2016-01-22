@@ -24,7 +24,6 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formatter_properties_io.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
-#include "dogen/quilt.cpp/types/formattables/enum_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/class_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/visitor_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/includers_info.hpp"
@@ -170,7 +169,6 @@ public:
     using formattable_visitor::visit;
     void visit(const formattables::class_info& c) override;
     void visit(const formattables::forward_declarations_info& fd) override;
-    void visit(const formattables::enum_info& e) override;
     void visit(const formattables::registrar_info& r) override;
     void visit(const formattables::visitor_info& v) override;
     void visit(const formattables::cmakelists_info& c) override;
@@ -212,10 +210,6 @@ void dispatcher::visit(const formattables::class_info& c) {
 
 void dispatcher::visit(const formattables::forward_declarations_info& fd) {
     format_entity(container_.forward_declarations_formatters(), fd);
-}
-
-void dispatcher::visit(const formattables::enum_info& e) {
-    format_entity(container_.enum_formatters(), e);
 }
 
 void dispatcher::visit(const formattables::registrar_info& r) {
@@ -330,7 +324,9 @@ public:
     }
     void visit(const dogen::yarn::concept& /*c*/) override {}
     void visit(const dogen::yarn::primitive& /*p*/) override {}
-    void visit(const dogen::yarn::enumeration& /*e*/) override {}
+    void visit(const dogen::yarn::enumeration& e) override {
+        format(container_.enum_formatters(), e);
+    }
     void visit(const dogen::yarn::object& /*o*/) override {}
     void visit(const dogen::yarn::exception& e) override {
         format(container_.exception_formatters(), e);

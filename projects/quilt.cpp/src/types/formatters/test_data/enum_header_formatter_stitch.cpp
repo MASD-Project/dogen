@@ -28,19 +28,20 @@ namespace formatters {
 namespace test_data {
 
 dogen::formatters::file enum_header_formatter_stitch(
-    assistant& a, const formattables::enum_info& e) {
+    assistant& a, const yarn::enumeration& e) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(e.namespaces()));
+            const auto ns(a.make_namespaces(e.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
-a.stream() << "class " << e.name() << "_generator {" << std::endl;
+a.stream() << "class " << e.name().simple() << "_generator {" << std::endl;
 a.stream() << "public:" << std::endl;
-a.stream() << "    " << e.name() << "_generator();" << std::endl;
+a.stream() << "    " << e.name().simple() << "_generator();" << std::endl;
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
-a.stream() << "    typedef " << e.qualified_name() << " result_type;" << std::endl;
+a.stream() << "    typedef " << a.make_qualified_name(e.name()) << " result_type;" << std::endl;
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
 a.stream() << "    static void populate(const unsigned int position, result_type& v);" << std::endl;

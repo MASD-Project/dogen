@@ -28,7 +28,7 @@ namespace formatters {
 namespace hash {
 
 dogen::formatters::file enum_header_formatter_stitch(
-    assistant& a, const formattables::enum_info& e) {
+    assistant& a, const yarn::enumeration& e) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
@@ -36,9 +36,9 @@ a.stream() << std::endl;
 a.stream() << "namespace std {" << std::endl;
 a.stream() << std::endl;
 a.stream() << "template<>" << std::endl;
-a.stream() << "struct hash<" << e.qualified_name() << "> {" << std::endl;
+a.stream() << "struct hash<" << a.make_qualified_name(e.name()) << "> {" << std::endl;
 a.stream() << "public:" << std::endl;
-a.stream() << "    size_t operator()(const " << e.qualified_name() << "& v) const {" << std::endl;
+a.stream() << "    size_t operator()(const " << a.make_qualified_name(e.name()) << "& v) const {" << std::endl;
 a.stream() << "        return std::hash<unsigned int>()(static_cast<unsigned int>(v));" << std::endl;
 a.stream() << "    }" << std::endl;
 a.stream() << "};" << std::endl;

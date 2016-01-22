@@ -339,34 +339,6 @@ transformer::to_property_info(const yarn::property p, const bool is_immutable,
         requires_manual_default_constructor);
 }
 
-enumerator_info
-transformer::to_enumerator_info(const yarn::enumerator& e) const {
-    enumerator_info r;
-    r.name(e.name());
-    r.value(e.value());
-    r.documentation(e.documentation());
-    return r;
-}
-
-std::shared_ptr<enum_info>
-transformer::to_enum_info(const yarn::enumeration& e) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: "
-                             << e.name().qualified();
-
-    auto r(std::make_shared<enum_info>());
-    populate_entity_properties(e.name(), e.documentation(), *r);
-
-    // FIXME: Yarn is not setting this properly.
-    // r->type(e.underlying_type().simple_name());
-    r->type("unsigned int");
-
-    for (const auto& en : e.enumerators())
-        r->enumerators().push_back(to_enumerator_info(en));
-
-    BOOST_LOG_SEV(lg, debug) << "Transformed enumeration.";
-    return r;
-}
-
 std::shared_ptr<class_info>
 transformer::to_class_info(const yarn::object& o) const {
     auto r(std::make_shared<class_info>());
@@ -510,7 +482,6 @@ to_forward_declarations_info(const yarn::enumeration& e) const {
 std::forward_list<std::shared_ptr<formattable> >
 transformer::transform(const yarn::enumeration& e) const {
     std::forward_list<std::shared_ptr<formattable> > r;
-    r.push_front(to_enum_info(e));
     r.push_front(to_forward_declarations_info(e));
     return r;
 }

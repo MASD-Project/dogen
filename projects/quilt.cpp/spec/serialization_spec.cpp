@@ -49,8 +49,6 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
 
     roundtrip_type<formattables::class_info_generator>();
     roundtrip_type<formattables::cmakelists_info_generator>();
-    roundtrip_type<formattables::enum_info_generator>();
-    roundtrip_type<formattables::enumerator_info_generator>();
     roundtrip_type<formattables::nested_type_info_generator>();
     roundtrip_type<formattables::odb_options_info_generator>();
     roundtrip_type<formattables::parent_info_generator>();

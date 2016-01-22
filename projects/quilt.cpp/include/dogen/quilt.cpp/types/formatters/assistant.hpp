@@ -79,6 +79,11 @@ public:
     make_setter_return_type(const std::string& containing_type_name,
         const formattables::property_info& p);
 
+    /**
+     * @brief Creates a qualified name
+     */
+    std::string make_qualified_name(const yarn::name& n) const;
+
 private:
     void ensure_formatter_properties_are_present() const;
 

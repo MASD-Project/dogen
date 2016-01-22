@@ -8,18 +8,18 @@
 <#+
 
 dogen::formatters::file enum_header_formatter_stitch(
-    assistant& a, const formattables::enum_info& e) {
+    assistant& a, const yarn::enumeration& e) {
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
 #>
 
 template<class Archive>
-void serialize(Archive& ar, <#= e.qualified_name() #>& v, unsigned int /*version*/){
+void serialize(Archive& ar, <#= a.make_qualified_name(e.name()) #>& v, unsigned int /*version*/){
 <#+
         if (!a.is_xml_serialization_disabled()) {
 #>
     using boost::serialization::make_nvp;
-    ar & make_nvp("<#= e.name() #>", v);
+    ar & make_nvp("<#= e.name().simple() #>", v);
 <#+
         } else {
 #>

@@ -19,7 +19,6 @@
  *
  */
 #include <sstream>
-#include "dogen/quilt.cpp/test_data/formattables/enum_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/class_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/formattable_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/origin_types_td.hpp"
@@ -59,19 +58,17 @@ populate(const unsigned int position, result_type& v) {
 
 formattable_generator::result_type*
 formattable_generator::create_ptr(const unsigned int position) {
-    if ((position % 7) == 0)
+    if ((position % 6) == 0)
         return dogen::quilt::cpp::formattables::cmakelists_info_generator::create_ptr(position);
-    if ((position % 7) == 1)
-        return dogen::quilt::cpp::formattables::enum_info_generator::create_ptr(position);
-    if ((position % 7) == 2)
+    if ((position % 6) == 1)
         return dogen::quilt::cpp::formattables::forward_declarations_info_generator::create_ptr(position);
-    if ((position % 7) == 3)
+    if ((position % 6) == 2)
         return dogen::quilt::cpp::formattables::includers_info_generator::create_ptr(position);
-    if ((position % 7) == 4)
+    if ((position % 6) == 3)
         return dogen::quilt::cpp::formattables::odb_options_info_generator::create_ptr(position);
-    if ((position % 7) == 5)
+    if ((position % 6) == 4)
         return dogen::quilt::cpp::formattables::registrar_info_generator::create_ptr(position);
-    if ((position % 7) == 6)
+    if ((position % 6) == 5)
         return dogen::quilt::cpp::formattables::visitor_info_generator::create_ptr(position);
     return dogen::quilt::cpp::formattables::class_info_generator::create_ptr(position);
 }

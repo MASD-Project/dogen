@@ -28,14 +28,15 @@ namespace formatters {
 namespace io {
 
 dogen::formatters::file enum_header_formatter_stitch(
-    assistant& a, const formattables::enum_info& e) {
+    assistant& a, const yarn::enumeration& e) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(e.namespaces()));
+            const auto ns(a.make_namespaces(e.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
-a.stream() << "std::ostream& operator<<(std::ostream& s, const " << e.name() << "& v);" << std::endl;
+a.stream() << "std::ostream& operator<<(std::ostream& s, const " << e.name().simple() << "& v);" << std::endl;
 a.stream() << std::endl;
          } // snf
 a.stream() << std::endl;

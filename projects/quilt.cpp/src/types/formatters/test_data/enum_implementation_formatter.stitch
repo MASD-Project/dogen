@@ -8,29 +8,30 @@
 <#+
 
 dogen::formatters::file enum_implementation_formatter_stitch(
-    assistant& a, const formattables::enum_info& e) {
+    assistant& a, const yarn::enumeration& e) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(e.namespaces()));
+            const auto ns(a.make_namespaces(e.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 #>
 
-<#= e.name() #>_generator::<#= e.name() #>_generator() : position_(0) { }
-void <#= e.name() #>_generator::
+<#= e.name().simple() #>_generator::<#= e.name().simple() #>_generator() : position_(0) { }
+void <#= e.name().simple() #>_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<<#= e.name() #>>(position % <#= e.enumerators().size() #>);
+    v = static_cast<<#= e.name().simple() #>>(position % <#= e.enumerators().size() #>);
 }
 
-<#= e.name() #>_generator::result_type
-<#= e.name() #>_generator::create(const unsigned int  position) {
+<#= e.name().simple() #>_generator::result_type
+<#= e.name().simple() #>_generator::create(const unsigned int  position) {
     result_type r;
-    <#= e.name() #>_generator::populate(position, r);
+    <#= e.name().simple() #>_generator::populate(position, r);
     return r;
 }
 
-<#= e.name() #>_generator::result_type
-<#= e.name() #>_generator::operator()() {
+<#= e.name().simple() #>_generator::result_type
+<#= e.name().simple() #>_generator::operator()() {
     return create(position_++);
 }
 

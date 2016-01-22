@@ -28,25 +28,26 @@ namespace formatters {
 namespace io {
 
 dogen::formatters::file enum_implementation_formatter_stitch(
-    assistant& a, const formattables::enum_info& e) {
+    assistant& a, const yarn::enumeration& e) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(e.namespaces()));
+            const auto ns(a.make_namespaces(e.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
-a.stream() << "std::ostream& operator<<(std::ostream& s, const " << e.name() << "& v) {" << std::endl;
-a.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << e.name() << "\\\", \" << \"\\\"value\\\": \";" << std::endl;
+a.stream() << "std::ostream& operator<<(std::ostream& s, const " << e.name().simple() << "& v) {" << std::endl;
+a.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << e.name().simple() << "\\\", \" << \"\\\"value\\\": \";" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    std::string attr;" << std::endl;
 a.stream() << "    switch (v) {" << std::endl;
-            for (const auto en : e.enumerators()) {
-a.stream() << "    case " << e.name() << "::" << en.name() << ":" << std::endl;
+            for (const auto& en : e.enumerators()) {
+a.stream() << "    case " << e.name().simple() << "::" << en.name() << ":" << std::endl;
 a.stream() << "        attr = \"\\\"" << en.name() << "\\\"\";" << std::endl;
 a.stream() << "        break;" << std::endl;
             }
 a.stream() << "    default:" << std::endl;
-a.stream() << "        throw std::invalid_argument(\"Invalid value for " << e.name() << "\");" << std::endl;
+a.stream() << "        throw std::invalid_argument(\"Invalid value for " << e.name().simple() << "\");" << std::endl;
 a.stream() << "    }" << std::endl;
 a.stream() << "    s << attr << \" }\";" << std::endl;
 a.stream() << "    return s;" << std::endl;

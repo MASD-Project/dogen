@@ -28,28 +28,29 @@ namespace formatters {
 namespace test_data {
 
 dogen::formatters::file enum_implementation_formatter_stitch(
-    assistant& a, const formattables::enum_info& e) {
+    assistant& a, const yarn::enumeration& e) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(e.namespaces()));
+            const auto ns(a.make_namespaces(e.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
-a.stream() << e.name() << "_generator::" << e.name() << "_generator() : position_(0) { }" << std::endl;
-a.stream() << "void " << e.name() << "_generator::" << std::endl;
+a.stream() << e.name().simple() << "_generator::" << e.name().simple() << "_generator() : position_(0) { }" << std::endl;
+a.stream() << "void " << e.name().simple() << "_generator::" << std::endl;
 a.stream() << "populate(const unsigned int position, result_type& v) {" << std::endl;
-a.stream() << "    v = static_cast<" << e.name() << ">(position % " << e.enumerators().size() << ");" << std::endl;
+a.stream() << "    v = static_cast<" << e.name().simple() << ">(position % " << e.enumerators().size() << ");" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
-a.stream() << e.name() << "_generator::result_type" << std::endl;
-a.stream() << e.name() << "_generator::create(const unsigned int  position) {" << std::endl;
+a.stream() << e.name().simple() << "_generator::result_type" << std::endl;
+a.stream() << e.name().simple() << "_generator::create(const unsigned int  position) {" << std::endl;
 a.stream() << "    result_type r;" << std::endl;
-a.stream() << "    " << e.name() << "_generator::populate(position, r);" << std::endl;
+a.stream() << "    " << e.name().simple() << "_generator::populate(position, r);" << std::endl;
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
-a.stream() << e.name() << "_generator::result_type" << std::endl;
-a.stream() << e.name() << "_generator::operator()() {" << std::endl;
+a.stream() << e.name().simple() << "_generator::result_type" << std::endl;
+a.stream() << e.name().simple() << "_generator::operator()() {" << std::endl;
 a.stream() << "    return create(position_++);" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;

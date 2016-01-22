@@ -43,8 +43,6 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
 
     test_swap<formattables::class_info_generator>();
     test_swap<formattables::cmakelists_info_generator>();
-    test_swap<formattables::enum_info_generator>();
-    test_swap<formattables::enumerator_info_generator>();
     test_swap<formattables::nested_type_info_generator>();
     test_swap<formattables::odb_options_info_generator>();
     test_swap<formattables::parent_info_generator>();

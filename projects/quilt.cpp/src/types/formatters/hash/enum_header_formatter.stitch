@@ -8,7 +8,7 @@
 <#+
 
 dogen::formatters::file enum_header_formatter_stitch(
-    assistant& a, const formattables::enum_info& e) {
+    assistant& a, const yarn::enumeration& e) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
@@ -17,9 +17,9 @@ dogen::formatters::file enum_header_formatter_stitch(
 namespace std {
 
 template<>
-struct hash<<#= e.qualified_name() #>> {
+struct hash<<#= a.make_qualified_name(e.name()) #>> {
 public:
-    size_t operator()(const <#= e.qualified_name() #>& v) const {
+    size_t operator()(const <#= a.make_qualified_name(e.name()) #>& v) const {
         return std::hash<unsigned int>()(static_cast<unsigned int>(v));
     }
 };

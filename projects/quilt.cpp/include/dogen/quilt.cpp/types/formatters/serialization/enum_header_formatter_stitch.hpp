@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/formatters/types/file.hpp"
-#include "dogen/quilt.cpp/types/formattables/enum_info.hpp"
+#include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {
@@ -36,7 +36,7 @@ namespace formatters {
 namespace serialization {
 
 dogen::formatters::file enum_header_formatter_stitch(
-    assistant& a, const formattables::enum_info& e);
+    assistant& a, const yarn::enumeration& e);
 
 } } } } }
 

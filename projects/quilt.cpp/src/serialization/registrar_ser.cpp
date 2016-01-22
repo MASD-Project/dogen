@@ -31,7 +31,6 @@
 #include "dogen/dynamic/serialization/registrar_ser.hpp"
 #include "dogen/formatters/serialization/registrar_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/odb_settings_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/enum_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/class_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/visitor_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/includers_info_ser.hpp"
@@ -53,7 +52,6 @@ void register_types(Archive& ar) {
 
     ar.template register_type<dogen::quilt::cpp::formattables::class_info>();
     ar.template register_type<dogen::quilt::cpp::formattables::cmakelists_info>();
-    ar.template register_type<dogen::quilt::cpp::formattables::enum_info>();
     ar.template register_type<dogen::quilt::cpp::formattables::forward_declarations_info>();
     ar.template register_type<dogen::quilt::cpp::formattables::includers_info>();
     ar.template register_type<dogen::quilt::cpp::formattables::odb_options_info>();
