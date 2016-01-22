@@ -5746,6 +5746,30 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Consider generating program options code                          :story:
+
+If there was a syntax to describe boost program options, we should be
+able to generate most of the code for it:
+
+- the code that initialises the options;
+- the domain objects that will store the options;
+- the copying of values from program options objects into domain
+  objects.
+
+This would mean that creating a command line tool would be a matter of
+just supplying an options file. We could then have a stereotype for
+this (name to be yet identified). Marking a type with this stereotype
+and supplying the appropriate meta-data so one could locate the
+options file would cause dogen to emit the program options binding
+code.
+
+A similar concept seems to exist for python: [[http://docopt.org/][docopt]]. We should keep
+the same syntax. We just need to have a well defined domain object for
+these. The aim would be to replace config.
+
+For models such as these, the dia representation is just overhead. It
+would be great if we could do it using just JSON.
+
 *** Create a tool to generate product skeletons                       :story:
 
 Now that dogen is evolving to a MDSD tool, it would be great to be
