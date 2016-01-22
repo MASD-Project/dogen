@@ -5746,6 +5746,13 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Generate spec skeleton                                            :story:
+
+When we create a dogen project for the first time, we should be able
+to, optionally, add the spec directory with skeleton code and a sample
+spec. If the directory already exists (or if the option is off) we do
+nothing.
+
 *** Allow generating executables from dogen                           :story:
 
 At present dogen always assumes we want to generate a static
@@ -5798,9 +5805,6 @@ entail:
 - README with emblems.
 
 Name for the tool: dart.
-
-Tool should also be able to add new projects to existing products,
-creating spec directories with skeleton code and sample spec.
 
 Tool should have different "template sets" so that we could have a
 "standard dogen product" but users can come up with other project
