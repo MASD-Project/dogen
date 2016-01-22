@@ -812,7 +812,9 @@ better way to do this would be to split this functionality into two:
 - model supplies "import statements". The problem here is that we need
   to also supply the file name of the model. We could perhaps omit the
   extension and then load all files that match (e.g. =.dia=, =.json=,
-  etc). If more than one matches we should error.
+  etc). If more than one matches we should error. Actually we should
+  just supply the full filename, as well as keep the current notation
+  for the external project path.
 
 This is also a nice way to avoid loading system models unnecessary;
 users still need to declare the models they depend on, regardless if
@@ -833,6 +835,12 @@ path, etc are - and so should remain command line options.
 We need to move these two into the meta-data. This would also mean we
 no longer need to pass in external module paths for references, which
 is much cleaner.
+
+*** Consider generating the diagram targets from files in directory   :story:
+
+Once references are supplied as meta-data, we could conceivably create
+a loop in CMake to generates all of the knitting targets based on the
+contents of the diagrams directory.
 
 *** Lists of strings are not properly tidied up on io                 :story:
 
