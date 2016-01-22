@@ -90,10 +90,8 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
     const auto original(m);
     BOOST_LOG_SEV(lg, debug) << "original: " << original;
 
-    dogen::yarn::resolver res(m);
-    BOOST_CHECK(!res.has_resolved());
-    res.resolve();
-    BOOST_CHECK(res.has_resolved());
+    dogen::yarn::resolver rs;
+    rs.resolve(m);
     BOOST_LOG_SEV(lg, debug) << "resolved: " << m;
     BOOST_CHECK(m != original);
 
@@ -131,8 +129,8 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_different_model_results_in_suc
     BOOST_CHECK(combined.objects().size() == 2);
     BOOST_CHECK(combined.primitives().empty());
 
-    dogen::yarn::resolver res(combined);
-    res.resolve();
+    dogen::yarn::resolver rs;
+    rs.resolve(combined);
 
     bool found(false);
     for (const auto pair : combined.objects()) {
@@ -159,9 +157,9 @@ BOOST_AUTO_TEST_CASE(object_with_missing_property_type_throws) {
     SETUP_TEST_LOG("object_with_missing_property_type_throws");
 
     auto m(factory.object_with_missing_property_type());
-    dogen::yarn::resolver res(m);
+    dogen::yarn::resolver rs;
     contains_checker<resolution_error> c(undefined_type);
-    BOOST_CHECK_EXCEPTION(res.resolve(), resolution_error, c);
+    BOOST_CHECK_EXCEPTION(rs.resolve(m), resolution_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully) {
@@ -174,8 +172,8 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
     BOOST_CHECK(combined.objects().size() == 2);
     BOOST_CHECK(combined.primitives().empty());
 
-    dogen::yarn::resolver res(combined);
-    res.resolve();
+    dogen::yarn::resolver rs;
+    rs.resolve(combined);
 
     bool found(false);
     for (const auto pair : combined.objects()) {
@@ -210,8 +208,8 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
     BOOST_CHECK(combined.objects().size() == 2);
     BOOST_CHECK(combined.primitives().empty());
 
-    dogen::yarn::resolver res(combined);
-    res.resolve();
+    dogen::yarn::resolver rs;
+    rs.resolve(combined);
 
     bool found(false);
     for (const auto pair : combined.objects()) {
@@ -245,8 +243,8 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
     BOOST_CHECK(combined.objects().size() == 4);
     BOOST_CHECK(combined.primitives().empty());
 
-    dogen::yarn::resolver res(combined);
-    res.resolve();
+    dogen::yarn::resolver rs;
+    rs.resolve(combined);
 
     bool found_one(false);
     bool found_two(false);
@@ -291,8 +289,8 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_missing_within_single_model
     mg.merge();
 
     contains_checker<resolution_error> c(missing_parent);
-    dogen::yarn::resolver res(m);
-    BOOST_CHECK_EXCEPTION(res.resolve(), resolution_error, c);
+    dogen::yarn::resolver rs;
+    BOOST_CHECK_EXCEPTION(rs.resolve(m), resolution_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolves_successfully) {
@@ -311,8 +309,8 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
     BOOST_CHECK(combined.objects().size() == 4);
     BOOST_CHECK(combined.primitives().empty());
 
-    dogen::yarn::resolver res(combined);
-    res.resolve();
+    dogen::yarn::resolver rs;
+    rs.resolve(combined);
 
     bool found(false);
     for (const auto pair : combined.objects()) {
@@ -345,10 +343,10 @@ BOOST_AUTO_TEST_CASE(object_with_missing_third_degree_parent_in_different_models
     mg.add(a[2]);
 
     auto combined(mg.merge());
-    dogen::yarn::resolver res(combined);
+    dogen::yarn::resolver rs;
 
     contains_checker<resolution_error> c(missing_parent);
-    BOOST_CHECK_EXCEPTION(res.resolve(), resolution_error, c);
+    BOOST_CHECK_EXCEPTION(rs.resolve(combined), resolution_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

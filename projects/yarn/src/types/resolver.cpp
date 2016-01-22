@@ -53,25 +53,24 @@ typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 namespace dogen {
 namespace yarn {
 
-resolver::resolver(intermediate_model& m) : model_(m), has_resolved_(false) { }
-
-bool resolver::is_name_in_model(const name& n) const {
+bool resolver::
+is_name_in_model(const intermediate_model& m, const name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Finding name:" << n;
 
-    auto i(model_.objects().find(n.qualified()));
-    if (i != model_.objects().end()) {
+    auto i(m.objects().find(n.qualified()));
+    if (i != m.objects().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to an object in model.";
         return true;
     }
 
-    auto j(model_.enumerations().find(n.qualified()));
-    if (j != model_.enumerations().end()) {
+    auto j(m.enumerations().find(n.qualified()));
+    if (j != m.enumerations().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to an enumeration in model.";
         return true;
     }
 
-    auto k(model_.primitives().find(n.qualified()));
-    if (k != model_.primitives().end()) {
+    auto k(m.primitives().find(n.qualified()));
+    if (k != m.primitives().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to a primitive in model.";
         return true;
     }
@@ -80,13 +79,14 @@ bool resolver::is_name_in_model(const name& n) const {
     return false;
 }
 
-name resolver::resolve_partial_type(const name& n) const {
+name resolver::
+resolve_partial_type(const intermediate_model& m, const name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Resolving type:" << n.qualified();
 
     /* First try the type as it was read originally. This caters for
      * types placed in the global module.
      */
-    if (is_name_in_model(n))
+    if (is_name_in_model(m, n))
         return n;
 
     /* Then handle the case of the type belonging to the current
@@ -95,20 +95,20 @@ name resolver::resolve_partial_type(const name& n) const {
      */
     name_factory nf;
     {
-        const auto r(nf.build_combined_element_name(model_.name(), n,
+        const auto r(nf.build_combined_element_name(m.name(), n,
                 true/*populate_model_name_if_blank*/));
 
-        if (is_name_in_model(r))
+        if (is_name_in_model(m, r))
             return r;
     }
 
     /* Now handle the case where the type belongs to a reference, but
      * is missing the external module path.
      */
-    for (const auto& pair : model_.references()) {
+    for (const auto& pair : m.references()) {
         const auto r(nf.build_combined_element_name(pair.first, n));
 
-        if (is_name_in_model(r))
+        if (is_name_in_model(m, r))
             return r;
     }
 
@@ -116,9 +116,9 @@ name resolver::resolve_partial_type(const name& n) const {
      * same name as a reference model.
      */
     {
-        auto r(nf.build_promoted_module_name(model_.name(), n));
+        auto r(nf.build_promoted_module_name(m.name(), n));
         BOOST_LOG_SEV(lg, error) << r;
-        if (is_name_in_model(r))
+        if (is_name_in_model(m, r))
             return r;
     }
 
@@ -126,20 +126,21 @@ name resolver::resolve_partial_type(const name& n) const {
     BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.qualified()));
 }
 
-void resolver::resolve_partial_type(nested_name& nn) const {
+void resolver::
+resolve_partial_type(const intermediate_model& m, nested_name& nn) const {
     for (auto& cnn : nn.children())
-        resolve_partial_type(cnn);
+        resolve_partial_type(m, cnn);
 
-    const name n(resolve_partial_type(nn.parent()));
+    const name n(resolve_partial_type(m, nn.parent()));
     BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.qualified() << ".";
     nn.parent(n);
 }
 
-void resolver::
-resolve_properties(const name& owner, std::list<property>& p) const {
+void resolver::resolve_properties(const intermediate_model& m,
+    const name& owner, std::list<property>& p) const {
     for (auto& prop : p) {
         try {
-            resolve_partial_type(prop.type());
+            resolve_partial_type(m, prop.type());
         } catch (boost::exception& e) {
             std::ostringstream s;
             s << "Owner type name: " << owner.qualified()
@@ -151,13 +152,14 @@ resolve_properties(const name& owner, std::list<property>& p) const {
     }
 }
 
-void resolver::validate_inheritance_graph(const object& o) const {
+void resolver::validate_inheritance_graph(const intermediate_model& m,
+    const object& o) const {
     if (o.parents().empty())
         return;
 
     for (const auto& pn : o.parents()) {
-        const auto j(model_.objects().find(pn.qualified()));
-        if (j == model_.objects().end()) {
+        const auto j(m.objects().find(pn.qualified()));
+        if (j == m.objects().end()) {
             std::ostringstream s;
             s << orphan_object << ": " << o.name().qualified()
               << ". parent: " << pn.qualified();
@@ -171,8 +173,8 @@ void resolver::validate_inheritance_graph(const object& o) const {
         return;
 
     for (const auto& pn : o.root_parents()) {
-        const auto j(model_.objects().find(pn.qualified()));
-        if (j == model_.objects().end()) {
+        const auto j(m.objects().find(pn.qualified()));
+        if (j == m.objects().end()) {
             std::ostringstream s;
             s << orphan_object << ": " << o.name().qualified()
               << ". original parent: " << pn.qualified();
@@ -183,10 +185,11 @@ void resolver::validate_inheritance_graph(const object& o) const {
     }
 }
 
-void resolver::validate_refinements(const concept& c) const {
+void resolver::validate_refinements(const intermediate_model& m,
+    const concept& c) const {
     for (const auto& n : c.refines()) {
-        const auto i(model_.concepts().find(n.qualified()));
-        if (i == model_.concepts().end()) {
+        const auto i(m.concepts().find(n.qualified()));
+        if (i == m.concepts().end()) {
             std::ostringstream stream;
             stream << orphan_concept << ". concept: "
                    << c.name().qualified()
@@ -198,46 +201,36 @@ void resolver::validate_refinements(const concept& c) const {
     }
 }
 
-void resolver::require_not_has_resolved() const {
-    if (!has_resolved())
-        return;
-
-    BOOST_LOG_SEV(lg, error) << model_resolved;
-    BOOST_THROW_EXCEPTION(resolution_error(model_resolved));
-}
-
-void resolver::resolve_concepts() {
-    for (auto& pair : model_.concepts()) {
+void resolver::resolve_concepts(intermediate_model& m) const {
+    for (auto& pair : m.concepts()) {
         concept& c(pair.second);
 
         if (c.generation_type() == generation_types::no_generation)
             continue;
 
-        resolve_properties(c.name(), c.local_properties());
-        validate_refinements(c);
+        resolve_properties(m, c.name(), c.local_properties());
+        validate_refinements(m, c);
     }
 }
 
-void resolver::resolve_objects() {
-    BOOST_LOG_SEV(lg, debug) << "Objects found: " << model_.objects().size();
+void resolver::resolve_objects(intermediate_model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Objects found: " << m.objects().size();
 
-    for (auto& pair : model_.objects()) {
+    for (auto& pair : m.objects()) {
         auto& o(pair.second);
         BOOST_LOG_SEV(lg, debug) << "Resolving type " << o.name().qualified();
 
         if (o.generation_type() == generation_types::no_generation)
             continue;
 
-        validate_inheritance_graph(o);
-        resolve_properties(o.name(), o.local_properties());
+        validate_inheritance_graph(m, o);
+        resolve_properties(m, o.name(), o.local_properties());
     }
 }
 
-void resolver::resolve() {
-    require_not_has_resolved();
-    resolve_concepts();
-    resolve_objects();
-    has_resolved_ = true;
+void resolver::resolve(intermediate_model& m) const {
+    resolve_concepts(m);
+    resolve_objects(m);
 }
 
 } }

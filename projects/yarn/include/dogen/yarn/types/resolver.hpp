@@ -45,52 +45,37 @@ namespace yarn {
  * model.
  */
 class resolver {
-public:
-    resolver() = delete;
-    resolver(const resolver&) = default;
-    ~resolver() = default;
-    resolver(resolver&&) = default;
-    resolver& operator=(const resolver&) = default;
-
-public:
-    /**
-     * @brief Initialises resolver to resolve model m.
-     *
-     * @param model to resolve.
-     *
-     * @pre Model must continue to live until resolution has been
-     * completed.
-     */
-    explicit resolver(intermediate_model& m);
-
 private:
     /**
      * @brief Returns true if the name is in the model, false
      * otherwise.
      */
-    bool is_name_in_model(const name& n) const;
+    bool is_name_in_model(const intermediate_model& m, const name& n) const;
 
     /**
      * @brief Resolves a partially formed name into a full name.
      */
-    name resolve_partial_type(const name& n) const;
+    name resolve_partial_type(const intermediate_model& m, const name& n) const;
 
     /**
      * @brief Resolves all references contained in a nested name.
      */
-    void resolve_partial_type(nested_name& nn) const;
+    void resolve_partial_type(const intermediate_model& m,
+        nested_name& nn) const;
 
     /**
      * @brief Resolves all references to types in the supplied properties.
      */
-    void resolve_properties(const name& owner, std::list<property>& p) const;
+    void resolve_properties(const intermediate_model& m,
+        const name& owner, std::list<property>& p) const;
 
     /**
      * @brief Validates the inheritance graph for the object.
      *
      * @note should really be moved to validator.
      */
-    void validate_inheritance_graph(const object& o) const;
+    void validate_inheritance_graph(const intermediate_model& m,
+        const object& o) const;
 
     /**
      * @brief Ensures that all concepts refined by the current concept
@@ -98,40 +83,26 @@ private:
      *
      * @note should really be moved to validator.
      */
-    void validate_refinements(const concept& c) const;
-
-    /**
-     * @brief Resolution must not yet have taken place.
-     */
-    void require_not_has_resolved() const;
+    void validate_refinements(const intermediate_model& m,
+        const concept& c) const;
 
     /**
      * @brief Resolve all concepts.
      */
-    void resolve_concepts();
+    void resolve_concepts(intermediate_model& m) const;
 
     /**
      * @brief Resolve all objects.
      */
-    void resolve_objects();
+    void resolve_objects(intermediate_model& m) const;
 
 public:
-    /**
-     * @brief Returns true if resolution has already been performed,
-     * false otherwise.
-     */
-    bool has_resolved() const { return has_resolved_; }
-
     /**
      * @brief Resolve all references to types within model.
      *
      * @pre Resolution has not been performed yet.
      */
-    void resolve();
-
-private:
-    intermediate_model& model_;
-    bool has_resolved_;
+    void resolve(intermediate_model& m) const;
 };
 
 } }

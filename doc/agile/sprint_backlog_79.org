@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-22 Fri 13:50]
+#+CAPTION: Clock summary at [2016-01-22 Fri 21:55]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *9:36* |      |      |
+| *Total time*                                                                | *9:55* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 9:36   |      |      |
-| Active                                                                      |        | 9:36 |      |
+| Stories                                                                     | 9:55   |      |      |
+| Active                                                                      |        | 9:55 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:59 |
 | COMPLETED Merge all formatter assistants into one                           |        |      | 2:20 |
 | COMPLETED Name builder should take only model name                          |        |      | 0:48 |
@@ -28,6 +28,7 @@
 | COMPLETED Generate modules using yarn types                                 |        |      | 0:32 |
 | COMPLETED Delete all =quilt::cpp::formattable= types not in use             |        |      | 0:19 |
 | COMPLETED Use dots to separate namespaces in binary names                   |        |      | 1:52 |
+| COMPLETED Refactor resolver class                                           |        |      | 0:19 |
 | STARTED Generate enumerations using yarn types                              |        |      | 0:13 |
 | STARTED Create a debug build for clang in travis                            |        |      | 0:12 |
 #+end:
@@ -118,6 +119,28 @@ binary names as well, for consistency.
 We should do the same for log file names too, e.g.:
 
 : dogen_knitter_yarn.json.log
+
+*** COMPLETED Improve resolution of partial types in resolver         :story:
+    CLOSED: [2016-01-22 Fri 21:52]
+
+*Rationale*: the current state of the code is more or less according
+to this story.
+
+At present the code in =resolve_partial_type= is one big hack. We
+should create a "lookup" routine that given a qname, tries it on all
+containers and returns true or false. Then we should have different
+"attempt" routines that try modifying the qname according to a rule
+and call the "lookup" routine to see if it worked or not. We should
+then continue to the next rule until we exhaust all rules or we find a
+match. Each rule should provide some logging.
+
+*** COMPLETED Refactor resolver class                                 :story:
+    CLOSED: [2016-01-22 Fri 21:54]
+    CLOCK: [2016-01-22 Fri 21:35]--[2016-01-22 Fri 21:54] =>  0:19
+
+We are supplying the model in the constructor and then modifying it
+internally. We should use the same pattern as other yarn services and
+supply the model on the main method.
 
 *** STARTED Generate enumerations using yarn types                    :story:
     CLOCK: [2016-01-21 Thu 21:09]--[2016-01-21 Thu 21:22] =>  0:13

@@ -94,8 +94,8 @@ inject_system_elements_activity(intermediate_model& merged_model) const {
 
 void assembler::
 resolve_element_references_activity(intermediate_model& merged_model) const {
-    resolver res(merged_model);
-    res.resolve();
+    resolver rs;
+    rs.resolve(merged_model);
 }
 
 void assembler::

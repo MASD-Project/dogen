@@ -1806,16 +1806,6 @@ following error:
 There is no clue as to which object caused the error. Add a class name
 and dia object ID to the exception.
 
-*** Improve resolution of partial types in resolver                   :story:
-
-At present the code in =resolve_partial_type= is one big hack. We
-should create a "lookup" routine that given a qname, tries it on all
-containers and returns true or false. Then we should have different
-"attempt" routines that try modifying the qname according to a rule
-and call the "lookup" routine to see if it worked or not. We should
-then continue to the next rule until we exhaust all rules or we find a
-match. Each rule should provide some logging.
-
 *** Improve error messages around dynamic extensions kvp's            :story:
 
 Consider a dynamic extension "kvp" without a value, in a dia diagram
