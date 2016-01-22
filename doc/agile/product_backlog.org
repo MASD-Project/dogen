@@ -5738,6 +5738,47 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Generate product skeletons                                        :story:
+
+Now that dogen is evolving to a MDSD tool, it would be great to be
+able to create a complete product skeleton from a tool. This would
+entail:
+
+- directory structure. We should document our standard product
+  directory structure as part of this exercise.
+- licence: user can choose one.
+- copyright: input by user, used in CMakeFiles, etc. added to the
+  licence.
+- CI support: travis, appveyor
+- EDE support:
+- CMake support: top-level CMakefiles, CPack. versioning
+  templates, valgrind, doxygen. For CTest we should also generate a
+  "setup cron" and "setup windows scheduler" scripts. User can just
+  run these from the build machine and it will start running CTest.
+- conan support: perhaps with just boost for now
+- agile with first sprint
+- README with emblems.
+
+Name for the tool: dart.
+
+Tool should also be able to add new projects to existing products,
+creating spec directories with skeleton code and sample spec.
+
+Tool should have different "template sets" so that we could have a
+"standard dogen product" but users can come up with other project
+structures.
+
+Tool should add FindODB if user wants ODB support. Similar for EOS
+when we support it again.
+
+Tool should also create git repo and do first commit (optional).
+
+For extra bonus points, we should create a project in GitHub, Travis
+and AppVeyor from dart.
+
+We should also generate a RPM/Deb installation script for at least
+boost, doxygen, build essentials, clang.
+
 *** Add support for bintray                                           :story:
 
 There is a new web application that interfaces with GitHub:
