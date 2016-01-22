@@ -5746,6 +5746,12 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Allow generating executables from dogen                           :story:
+
+At present dogen always assumes we want to generate a static
+library. It would be nice to be able to generate an executable too,
+with all of the cmake infrastructure generated.
+
 *** Consider generating program options code                          :story:
 
 If there was a syntax to describe boost program options, we should be
