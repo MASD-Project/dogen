@@ -17,9 +17,8 @@ platform:
   - x64
 
 install:
-    - cmd: choco install mingw
-    - cmd: choco install cmake
-    - cmd: choco upgrade cmake
+    - cmd: choco install cmake -y
+    - cmd: choco upgrade cmake -y
     - cmd: cmake --version
 
     # conan
@@ -29,10 +28,15 @@ install:
     - cmd: set PATH=%PATH%;C:\Program Files (x86)\Conan\conan
     - cmd: conan --version
 
+before_build:
+  # Workaround for CMake not wanting sh.exe on PATH for MinGW
+  - cmd: set PATH=%PATH:C:\Program Files (x86)\Git\bin;=%
+  - cmd: set PATH=C:\MinGW\bin;%PATH%
+  - cmd: cd build
+  - cmd: mkdir output
+  - cmd: cd output
+  - cmd: conan install ../..
+  - cmd: cmake ../.. -DCMAKE_BUILD_TYPE=%configuration% -G "%generator%"
+
 build_script:
-    - cmd: cd build
-    - cmd: mkdir output
-    - cmd: cd output
-    - cmd: conan install ../..
-    - cmd: cmake ../.. -G "%generator%"
     - cmd: cmake --build . --config "%configuration%"
