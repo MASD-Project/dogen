@@ -5176,6 +5176,14 @@ is, what then? We can't throw.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
+*** Add travis build for OSX                                          :story:
+
+Travis apparently supports OSX. We should aim to get a green build on
+it.
+
+- [[http://www.mactech.com/articles/mactech/Vol.26/26.02/TheFlatPackage/index.html][The Flat Package]]
+- [[https://docs.travis-ci.com/user/multi-os/][Matrix with multiple OSs]]
+
 *** Assorted improvements to CMake files                              :story:
 
 It seems we are not using proper CMake idioms to pick up compiler
@@ -5427,7 +5435,7 @@ platform conventions.
 
 There are some known limitations in package naming:
 
-- http://public.kitware.com/Bug/view.php?id=12997
+- [[http://public.kitware.com/Bug/view.php?id%3D12997][0012997: Provide a more flexible way to name package produced by CPack]]
 
 *** Build shared objects instead of dynamic libraries                 :story:
 

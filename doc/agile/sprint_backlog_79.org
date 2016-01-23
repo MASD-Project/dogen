@@ -221,6 +221,7 @@ We have already proven that the code builds out of the box in
 sprint 50.
 
 *** STARTED Add support for MinGW on AppVeyor                         :story:
+    CLOCK: [2016-01-23 Sat 22:23]--[2016-01-23 Sat 23:25] =>  1:02
     CLOCK: [2016-01-23 Sat 22:14]--[2016-01-23 Sat 22:22] =>  0:08
     CLOCK: [2016-01-23 Sat 21:57]--[2016-01-23 Sat 22:13] =>  0:16
 
@@ -228,6 +229,9 @@ It seems its possible to build using MinGW on windows:
 
 - [[http://help.appveyor.com/discussions/questions/372-build-setup-for-a-c-program][Build setup for a C program]]
 - [[https://github.com/imazen/libpng/blob/master/appveyor.yml][libpng appveyor.yml]]
+- [[https://github.com/jibsen/brieflz/blob/0c6fb73984f11e697dfaade5cdc5e291c1655c67/appveyor.yml][Removing Git's sh from the path]]. See also
+- [[https://www.appveyor.com/updates/2015/05/30][Appveyor adds support for MinGW]]
+- [[http://altrepo.eu/matyapiro31/mingw-w64-thrift/blob/master/appveyor.yml][mingw-w64-thrift]]
 
 We should probably enable this on our AppVeyor build matrix.
 
