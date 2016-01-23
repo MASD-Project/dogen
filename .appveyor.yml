@@ -16,9 +16,6 @@ configuration:
 platform:
   - x64
 
-configuration:
-  - Release
-
 install:
     - cmd: choco install mingw
     - cmd: choco install cmake
