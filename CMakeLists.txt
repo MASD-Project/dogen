@@ -58,9 +58,6 @@ if (DEFINED ENV{PFH_LOCATION})
     include_directories(SYSTEM $ENV{PFH_LOCATION}/include)
 endif()
 
-# note: we should be able to compile with boost 1.54, but due to some
-# strange behaviour with boost::variant, we can't. see this email for
-# details: http://lists.boost.org/boost-users/2013/08/79650.php
 add_definitions(-DBOOST_ALL_DYN_LINK)
 find_package(Boost 1.59 REQUIRED COMPONENTS
     system
@@ -78,7 +75,7 @@ if(Boost_FOUND)
     include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
 endif()
 
-# iconv - required by libxm
+# iconv - required by libxml
 find_package(Iconv REQUIRED)
 if(ICONV_FOUND)
     include_directories(SYSTEM ${ICONV_INCLUDE_DIR})

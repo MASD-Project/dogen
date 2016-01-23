@@ -19,9 +19,23 @@
 #
 language: cpp
 
-compiler:
-  - clang
-  - gcc
+matrix:
+  include:
+    - os: osx
+      compiler: clang
+      env: BUILD_TYPE=Release
+    - os: linux
+      compiler: gcc
+      env: BUILD_TYPE=Release
+    - os: linux
+      compiler: clang
+      env: BUILD_TYPE=Release
+    - os: linux
+      compiler: gcc
+      env: BUILD_TYPE=Debug
+    - os: linux
+      compiler: clang
+      env: BUILD_TYPE=Debug
 
 before_install:
   - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
@@ -72,7 +86,7 @@ script:
   # FIXME: ninja borked with conan for some reason.
   # - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on -G Ninja
   # - ninja -j2 package run_all_specs
-  - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on
+  - cmake ${GIT_REPO} -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DWITH_MINIMAL_PACKAGING=on
   - make -j2 run_all_specs
   # packaging disabled because we do not have boost 1.60.
   # - make -j2 package run_all_specs

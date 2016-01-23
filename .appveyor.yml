@@ -6,7 +6,12 @@ branches:
 
 environment:
   matrix:
-    - VSVER: Visual Studio 14 2015 Win64
+    - generator: "MinGW Makefiles"
+    - generator: "Visual Studio 14 2015 Win64"
+
+configuration:
+  - Debug
+  - Release
 
 platform:
   - x64
@@ -15,6 +20,7 @@ configuration:
   - Release
 
 install:
+    - cmd: choco install mingw
     - cmd: choco install cmake
     - cmd: choco upgrade cmake
     - cmd: cmake --version
@@ -31,5 +37,5 @@ build_script:
     - cmd: mkdir output
     - cmd: cd output
     - cmd: conan install ../..
-    - cmd: cmake ../.. -G "%VSVER%"
-    - cmd: cmake --build . --config Release
+    - cmd: cmake ../.. -G "%generator%"
+    - cmd: cmake --build . --config "%configuration%"

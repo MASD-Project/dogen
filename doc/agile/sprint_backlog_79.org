@@ -220,6 +220,17 @@ Windows, we would have to upgrade these compilers first.
 We have already proven that the code builds out of the box in
 sprint 50.
 
+*** STARTED Add support for MinGW on AppVeyor                         :story:
+    CLOCK: [2016-01-23 Sat 22:14]--[2016-01-23 Sat 22:22] =>  0:08
+    CLOCK: [2016-01-23 Sat 21:57]--[2016-01-23 Sat 22:13] =>  0:16
+
+It seems its possible to build using MinGW on windows:
+
+- [[http://help.appveyor.com/discussions/questions/372-build-setup-for-a-c-program][Build setup for a C program]]
+- [[https://github.com/imazen/libpng/blob/master/appveyor.yml][libpng appveyor.yml]]
+
+We should probably enable this on our AppVeyor build matrix.
+
 *** Add more types to =quilt::cpp= canned tests                       :story:
 
 Originally we used the =*_info= types in the canned tests, but these

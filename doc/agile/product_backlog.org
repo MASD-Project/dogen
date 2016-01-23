@@ -5223,15 +5223,6 @@ not change. It should have changed to:
 
 : dogen_test_models_all_primitives
 
-*** Add support for MinGW on AppVeyor                                 :story:
-
-It seems its possible to build using MinGW on windows:
-
-- [[http://help.appveyor.com/discussions/questions/372-build-setup-for-a-c-program][Build setup for a C program]]
-- [[https://github.com/imazen/libpng/blob/master/appveyor.yml][libpng appveyor.yml]]
-
-We should probably enable this on our AppVeyor build matrix.
-
 *** Emblems for appveyor and for version                              :story:
 
 The [[https://github.com/no1msd/mstch][mstch]] project seems to have great emblems for appveyor - you can
