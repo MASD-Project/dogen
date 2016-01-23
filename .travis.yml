@@ -47,7 +47,7 @@ addons:
 install:
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then build/scripts/travis.install.linux.sh; fi
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then build/scripts/travis.install.osx.sh; fi
-  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then export PATH=$PATH:~/conan
+  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then export PATH=$PATH:~/conan; fi
 
 script:
   - export GIT_REPO="`pwd`"
