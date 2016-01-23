@@ -36,6 +36,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-01-23 Sat 20:05]--[2016-01-23 Sat 20:22] =>  0:17
     CLOCK: [2016-01-22 Fri 13:11]--[2016-01-22 Fri 13:49] =>  0:38
     CLOCK: [2016-01-19 Tue 23:27]--[2016-01-19 Tue 23:30] =>  0:03
     CLOCK: [2016-01-18 Mon 21:55]--[2016-01-18 Mon 22:13] =>  0:18
@@ -210,26 +211,6 @@ are all about to be removed. We need to hunt for types in the
 
 In order for the assistant to build names, it will need to be able to
 access the yarn model name.
-
-*** Fix windows errors on boost test                                  :story:
-
-Boost test warning:
-
-: C:\Users\appveyor\.conan\data\Boost\1.60.0\lasote\stable\package\7569deb7626b9f88e03d1b57f5ad4b34f8383a6f\include\boost/test/impl/test_tools.ipp(369): warning C4273: 'boost::test_tools::tt_detail::format_assertion_result': inconsistent dll linkage [C:\proj
-: ects\dogen\build\output\projects\config\spec\config_spec.vcxproj]
-:   C:\Users\appveyor\.conan\data\Boost\1.60.0\lasote\stable\package\7569deb7626b9f88e03d1b57f5ad4b34f8383a6f\include\boost/test/tools/detail/fwd.hpp(96): note: see previous definition of 'format_assertion_result'
-
-Boost test errors:
-
-: C:\Users\appveyor\.conan\data\Boost\1.60.0\lasote\stable\package\7569deb7626b9f88e03d1b57f5ad4b34f8383a6f\include\boost/test/impl/test_tools.ipp(396): error C2491: 'boost::test_tools::tt_detail::prod_report_format': definition of dllimport function not all
-: owed [C:\projects\dogen\build\output\projects\config\spec\config_spec.vcxproj]
-
-: C:\Users\appveyor\.conan\data\Boost\1.60.0\lasote\stable\package\7569deb7626b9f88e03d1b57f5ad4b34f8383a6f\include\boost/test/tools/old/impl.hpp(118): error C2264: 'boost::test_tools::tt_detail::equal_impl': error in function definition or declaration; func
-: tion not called [C:\projects\dogen\build\output\projects\config\spec\config_spec.vcxproj]
-
-It may be due to this:
-
-[[http://boost.2283326.n4.nabble.com/Test-Thread-Regression-since-9-December-td4670920.html][Regression since 9 December?]]
 
 *** STARTED Create a debug build for clang in travis                  :story:
     CLOCK: [2016-01-18 Mon 22:14]--[2016-01-18 Mon 22:26] =>  0:12
