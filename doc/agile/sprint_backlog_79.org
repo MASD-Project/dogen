@@ -200,6 +200,12 @@ Tasks:
 - update the yarn formatting workflow to process yarn visitors;
 - update the stitch templates to make use of yarn visitors.
 
+*** Add more types to =quilt::cpp= canned tests                       :story:
+
+Originally we used the =*_info= types in the canned tests, but these
+are all about to be removed. We need to hunt for types in the
+=quilt::cpp= model and add those to the canned tests.
+
 *** Access model name from within formatters workflow                 :story:
 
 In order for the assistant to build names, it will need to be able to
