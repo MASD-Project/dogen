@@ -45,8 +45,8 @@ addons:
       - ubuntu-toolchain-r-test
 
 install:
-  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then build/scripts/travis.install.linux.sh; fi
-  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then build/scripts/travis.install.osx.sh; fi
+  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then source ./build/scripts/travis.install.linux.sh; fi
+  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then source ./build/scripts/travis.install.osx.sh; fi
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then export PATH=$PATH:~/conan; fi
 
 script:
@@ -64,8 +64,9 @@ script:
   # - ninja -j2 package run_all_specs
   - cmake ${GIT_REPO} -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DWITH_MINIMAL_PACKAGING=on
   - ls -l
-  - ls -l stage/bin
+  - ls -l stage
   - make -j2 run_all_specs
+  - ls -l bin
   # packaging disabled because we do not have boost 1.60.
   # - make -j2 package run_all_specs
   # - sudo dpkg -i stage/pkg/dogen_*_amd64-applications.deb
