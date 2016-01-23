@@ -54,7 +54,6 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     roundtrip_type<formattables::parent_info_generator>();
     roundtrip_type<formattables::property_info_generator>();
     roundtrip_type<formattables::registrar_info_generator>();
-    roundtrip_type<formattables::visitor_info_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

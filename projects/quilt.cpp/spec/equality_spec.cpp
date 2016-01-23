@@ -48,7 +48,6 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<formattables::parent_info_generator>();
     test_equality<formattables::property_info_generator>();
     test_equality<formattables::registrar_info_generator>();
-    test_equality<formattables::visitor_info_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

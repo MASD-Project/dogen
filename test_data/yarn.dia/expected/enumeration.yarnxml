@@ -221,7 +221,7 @@
 					<in_global_module>0</in_global_module>
 				</element>
 				<underlying_type>
-					<simple>unsigned int</simple>
+					<simple></simple>
 					<qualified></qualified>
 					<location>
 						<external_modules>
@@ -314,7 +314,7 @@
 					<in_global_module>0</in_global_module>
 				</element>
 				<underlying_type>
-					<simple>unsigned int</simple>
+					<simple></simple>
 					<qualified></qualified>
 					<location>
 						<external_modules>
@@ -410,7 +410,7 @@ this is a long comment
 					<in_global_module>0</in_global_module>
 				</element>
 				<underlying_type>
-					<simple>unsigned int</simple>
+					<simple></simple>
 					<qualified></qualified>
 					<location>
 						<external_modules>

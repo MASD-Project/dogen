@@ -25,7 +25,6 @@
 #include "dogen/quilt.cpp/io/formattables/formatter_properties_io.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/formattables/class_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/visitor_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/includers_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/registrar_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/cmakelists_info.hpp"
@@ -170,7 +169,6 @@ public:
     void visit(const formattables::class_info& c) override;
     void visit(const formattables::forward_declarations_info& fd) override;
     void visit(const formattables::registrar_info& r) override;
-    void visit(const formattables::visitor_info& v) override;
     void visit(const formattables::cmakelists_info& c) override;
     void visit(const formattables::odb_options_info& o) override;
     void visit(const formattables::includers_info& o) override;
@@ -214,10 +212,6 @@ void dispatcher::visit(const formattables::forward_declarations_info& fd) {
 
 void dispatcher::visit(const formattables::registrar_info& r) {
     format_entity(container_.registrar_formatters(), r);
-}
-
-void dispatcher::visit(const formattables::visitor_info& v) {
-    format_entity(container_.visitor_formatters(), v);
 }
 
 void dispatcher::visit(const formattables::cmakelists_info& c) {
@@ -331,7 +325,10 @@ public:
     void visit(const dogen::yarn::exception& e) override {
         format(container_.exception_formatters(), e);
     }
-    void visit(const dogen::yarn::visitor& /*v*/) override {}
+    void visit(const dogen::yarn::visitor& v) override {
+        format(container_.visitor_formatters(), v);
+    }
+
 
 public:
     /**

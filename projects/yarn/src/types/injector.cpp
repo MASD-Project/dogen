@@ -57,6 +57,7 @@ const std::string zero_leaves("Type marked as visitable but has no leaves: ");
 const std::string leaf_not_found("Could not find leaf object: ");
 const std::string model_already_has_global_module(
     "Found a global module in model: ");
+const std::string no_visitees("Visitor is not visiting any types: ");
 
 }
 
@@ -97,6 +98,12 @@ create_visitor(const object& o, const std::list<name>& leaves) const {
     r.generation_type(o.generation_type());
     r.origin_type(origin_types::system);
     r.documentation(visitor_doc + o.name().simple());
+
+    if (leaves.empty()) {
+        const auto& qn(n.qualified());
+        BOOST_LOG_SEV(lg, error) << no_visitees << qn;
+        BOOST_THROW_EXCEPTION(injection_error(no_visitees + qn));
+    }
 
     for (const auto& l : leaves)
         r.visits().push_back(l);

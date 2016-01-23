@@ -31,7 +31,6 @@
 #include "dogen/quilt.cpp/serialization/formattables/class_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/origin_types_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/visitor_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/includers_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/registrar_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/cmakelists_info_ser.hpp"

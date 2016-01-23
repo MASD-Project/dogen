@@ -47,7 +47,6 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<formattables::parent_info_generator>();
     test_io<formattables::property_info_generator>();
     test_io<formattables::registrar_info_generator>();
-    test_io<formattables::visitor_info_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

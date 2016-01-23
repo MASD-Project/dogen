@@ -7,43 +7,45 @@
 <#+
 
 dogen::formatters::file visitor_header_formatter_stitch(
-    assistant& a, const formattables::visitor_info& v) {
+    assistant& a, const yarn::visitor& v) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(v.namespaces()));
+            const auto ns(a.make_namespaces(v.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 #>
 
 <#+
             a.comment(v.documentation());
 #>
-class <#= v.name() #> {
+class <#= v.name().simple() #> {
 public:
-    virtual ~<#= v.name() #>() noexcept = 0;
+    virtual ~<#= v.name().simple() #>() noexcept = 0;
 
 public:
 <#+
             bool is_first(true);
-            for (const auto& t : v.types()) {
+            for (const auto& t : v.visits()) {
                 if (!is_first)
 #>
 
 <#+
-                a.comment_start_method_group(t.documentation());
+                const auto doc("Accept visits for type " + a.make_qualified_name(t));
+                a.comment_start_method_group(doc);
 #>
-    virtual void visit(const <#= t.qualified_name() #>&) const { }
-    virtual void visit(const <#= t.qualified_name() #>&) { }
-    virtual void visit(<#= t.qualified_name() #>&) const { }
-    virtual void visit(<#= t.qualified_name() #>&) { }
+    virtual void visit(const <#= a.make_qualified_name(t) #>&) const { }
+    virtual void visit(const <#= a.make_qualified_name(t) #>&) { }
+    virtual void visit(<#= a.make_qualified_name(t) #>&) const { }
+    virtual void visit(<#= a.make_qualified_name(t) #>&) { }
 <#+
-                a.comment_end_method_group(t.documentation());
+                a.comment_end_method_group(doc);
                 is_first = false;
             }
 #>
 };
 
-inline <#= v.name() #>::~<#= v.name() #>() noexcept { }
+inline <#= v.name().simple() #>::~<#= v.name().simple() #>() noexcept { }
 
 <#+
         } // snf

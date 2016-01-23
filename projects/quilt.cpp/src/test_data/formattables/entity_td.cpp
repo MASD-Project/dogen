@@ -22,7 +22,6 @@
 #include "dogen/quilt.cpp/test_data/formattables/entity_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/class_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/formattable_td.hpp"
-#include "dogen/quilt.cpp/test_data/formattables/visitor_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/includers_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/registrar_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/forward_declarations_info_td.hpp"
@@ -61,14 +60,12 @@ populate(const unsigned int position, result_type& v) {
 
 entity_generator::result_type*
 entity_generator::create_ptr(const unsigned int position) {
-    if ((position % 4) == 0)
+    if ((position % 3) == 0)
         return dogen::quilt::cpp::formattables::forward_declarations_info_generator::create_ptr(position);
-    if ((position % 4) == 1)
+    if ((position % 3) == 1)
         return dogen::quilt::cpp::formattables::includers_info_generator::create_ptr(position);
-    if ((position % 4) == 2)
+    if ((position % 3) == 2)
         return dogen::quilt::cpp::formattables::registrar_info_generator::create_ptr(position);
-    if ((position % 4) == 3)
-        return dogen::quilt::cpp::formattables::visitor_info_generator::create_ptr(position);
     return dogen::quilt::cpp::formattables::class_info_generator::create_ptr(position);
 }
 

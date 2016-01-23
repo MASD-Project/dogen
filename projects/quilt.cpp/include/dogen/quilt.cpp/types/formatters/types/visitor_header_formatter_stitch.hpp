@@ -26,8 +26,8 @@
 #endif
 
 #include "dogen/formatters/types/file.hpp"
+#include "dogen/yarn/types/visitor.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
-#include "dogen/quilt.cpp/types/formattables/visitor_info.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -36,7 +36,7 @@ namespace formatters {
 namespace types {
 
 dogen::formatters::file visitor_header_formatter_stitch(
-    assistant& a, const formattables::visitor_info& v);
+    assistant& a, const yarn::visitor& v);
 
 } } } } }
 

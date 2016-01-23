@@ -61,7 +61,7 @@ public:
         formattables::registrar& rg) const override;
 
     dogen::formatters::file format(const context& ctx,
-        const formattables::visitor_info& c) const override;
+        const yarn::visitor& v) const override;
 };
 
 } } } } }

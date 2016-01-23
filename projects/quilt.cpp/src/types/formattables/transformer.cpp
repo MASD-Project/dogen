@@ -69,7 +69,6 @@ const std::string ptime_type("boost::posix_time::ptime");
 const std::string time_duration_type("boost::posix_time::time_duration");
 const std::string ptree_type("boost::property_tree::ptree");
 const std::string pair_type("std::pair");
-const std::string visitor_comments("Accept visits for type ");
 
 const std::string int8_t_type("std::int8_t");
 const std::string int16_t_type("std::int16_t");
@@ -91,7 +90,6 @@ const std::string type_has_no_file_properties(
 const std::string type_has_no_inclusion_dependencies(
     "Could not find inclusion dependencies for type: ");
 const std::string type_has_no_inclusion("Could not find inclusion for type: ");
-const std::string no_visitees("Visitor is not visiting any types: ");
 const std::string cast_failure("Failed to cast type: ");
 
 bool is_char_like(const std::string& type_name) {
@@ -421,44 +419,10 @@ transformer::to_class_info(const yarn::object& o) const {
     return r;
 }
 
-std::shared_ptr<visitor_info>
-transformer::to_visitor_info(const yarn::visitor& v) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming visitor: "
-                             << v.name().qualified();
-
-    auto r(std::make_shared<visitor_info>());
-    populate_entity_properties(v.name(), v.documentation(), *r);
-
-    if (v.visits().empty()) {
-        const auto& qn(v.name().qualified());
-        BOOST_LOG_SEV(lg, error) << no_visitees << qn;
-        BOOST_THROW_EXCEPTION(transformation_error(no_visitees + qn));
-    }
-
-    name_builder b;
-    for (const auto n : v.visits()) {
-        cpp::formattables::visited_type_info vti;
-        vti.qualified_name(b.qualified_name(n));
-        vti.name(n.simple());
-        vti.documentation(visitor_comments + vti.qualified_name());
-        r->types().push_back(vti);
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Transformed visitor.";
-    return r;
-}
-
 std::shared_ptr<forward_declarations_info> transformer::
 to_forward_declarations_info(const yarn::object& o) const {
     auto r(std::make_shared<forward_declarations_info>());
     populate_entity_properties(o.name(), o.documentation(), *r);
-    return r;
-}
-
-std::shared_ptr<forward_declarations_info> transformer::
-to_forward_declarations_info(const yarn::visitor& v) const {
-    auto r(std::make_shared<forward_declarations_info>());
-    populate_entity_properties(v.name(), v.documentation(), *r);
     return r;
 }
 
@@ -516,18 +480,6 @@ std::forward_list<std::shared_ptr<formattable> >
 transformer::transform(const yarn::exception& e) const {
     std::forward_list<std::shared_ptr<formattable> > r;
     r.push_front(to_forward_declarations_info(e));
-    return r;
-}
-
-std::forward_list<std::shared_ptr<formattable> >
-transformer::transform(const yarn::visitor& v) const {
-    std::forward_list<std::shared_ptr<formattable> > r;
-    r.push_front(to_visitor_info(v));
-
-    // FIXME: disable visitor forward declarations for now because we
-    // are generating them for serialisation, where it does not make
-    // any sense.
-    // r.push_front(to_forward_declarations_info(v));
     return r;
 }
 

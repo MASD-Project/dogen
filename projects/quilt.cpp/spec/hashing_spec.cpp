@@ -49,7 +49,6 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<formattables::parent_info_generator>();
     test_hashing<formattables::property_info_generator>();
     test_hashing<formattables::registrar_info_generator>();
-    test_hashing<formattables::visitor_info_generator>();
  }
 
 BOOST_AUTO_TEST_SUITE_END()

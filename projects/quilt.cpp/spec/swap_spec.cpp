@@ -48,7 +48,6 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<formattables::parent_info_generator>();
     test_swap<formattables::property_info_generator>();
     test_swap<formattables::registrar_info_generator>();
-    test_swap<formattables::visitor_info_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

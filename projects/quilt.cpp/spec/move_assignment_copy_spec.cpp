@@ -48,7 +48,6 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<formattables::parent_info_generator>();
     test_move_assignment_copy<formattables::property_info_generator>();
     test_move_assignment_copy<formattables::registrar_info_generator>();
-    test_move_assignment_copy<formattables::visitor_info_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

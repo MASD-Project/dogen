@@ -34,7 +34,6 @@
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/visitor.hpp"
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/exception.hpp"
@@ -43,7 +42,6 @@
 #include "dogen/quilt.cpp/types/formattables/entity.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/class_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/visitor_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/property_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/forward_declarations_info.hpp"
 
@@ -109,11 +107,6 @@ private:
     std::shared_ptr<class_info> to_class_info(const yarn::object& o) const;
 
     /**
-     * @brief Transform a yarn visitor into a visitor info.
-     */
-    std::shared_ptr<visitor_info> to_visitor_info(const yarn::visitor& v) const;
-
-    /**
      * @brief Creates a forward declaration for the object.
      */
     std::shared_ptr<forward_declarations_info>
@@ -124,12 +117,6 @@ private:
      */
     std::shared_ptr<forward_declarations_info>
     to_forward_declarations_info(const yarn::exception& e) const;
-
-    /**
-     * @brief Creates a forward declaration for the visitor.
-     */
-    std::shared_ptr<forward_declarations_info>
-    to_forward_declarations_info(const yarn::visitor& v) const;
 
     /**
      * @brief Creates a forward declaration for the enumeration.
@@ -155,12 +142,6 @@ public:
      */
     std::forward_list<std::shared_ptr<formattable> >
     transform(const yarn::exception& e) const;
-
-    /**
-     * @brief Transform an Yarn visitor into a C++ entity.
-     */
-    std::forward_list<std::shared_ptr<formattable> >
-    transform(const yarn::visitor& v) const;
 
 private:
     const yarn::model& model_;

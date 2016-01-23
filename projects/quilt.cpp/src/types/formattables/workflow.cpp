@@ -69,7 +69,6 @@ public:
     void visit(const dogen::yarn::enumeration& e) { transform(e); }
     void visit(const dogen::yarn::object& o) { transform(o); }
     void visit(const dogen::yarn::exception& e) { transform(e); }
-    void visit(const dogen::yarn::visitor& v) { transform(v); }
 
 public:
     const std::forward_list<std::shared_ptr<formattables::formattable> >&

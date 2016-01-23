@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-22 Fri 23:48]
+#+CAPTION: Clock summary at [2016-01-23 Sat 00:20]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *11:54* |       |      |
+| *Total time*                                                                | *12:25* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 11:54   |       |      |
-| Active                                                                      |         | 11:54 |      |
+| Stories                                                                     | 12:25   |       |      |
+| Active                                                                      |         | 12:25 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:59 |
 | COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
 | COMPLETED Name builder should take only model name                          |         |       | 0:48 |
@@ -31,6 +31,7 @@
 | COMPLETED Refactor resolver class                                           |         |       | 0:19 |
 | COMPLETED Handle enumeration type dynamically                               |         |       | 1:05 |
 | COMPLETED Generate enumerations using yarn types                            |         |       | 1:07 |
+| COMPLETED Generate visitors using yarn types                                |         |       | 0:31 |
 | STARTED Create a debug build for clang in travis                            |         |       | 0:12 |
 #+end:
 
@@ -186,6 +187,18 @@ Tasks:
 - update the formatter interfaces to use yarn types;
 - update the yarn formatting workflow to process yarn enumerations;
 - update the stitch templates to make use of yarn enumerations.
+
+*** COMPLETED Generate visitors using yarn types                      :story:
+    CLOSED: [2016-01-23 Sat 00:18]
+    CLOCK: [2016-01-22 Fri 23:49]--[2016-01-23 Sat 00:20] =>  0:29
+
+Tasks:
+
+- delete the quilt formattable;
+- remove transformation support;
+- update the formatter interfaces to use yarn types;
+- update the yarn formatting workflow to process yarn visitors;
+- update the stitch templates to make use of yarn visitors.
 
 *** Access model name from within formatters workflow                 :story:
 

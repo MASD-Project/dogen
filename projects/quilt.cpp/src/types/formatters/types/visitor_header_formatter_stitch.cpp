@@ -27,34 +27,36 @@ namespace formatters {
 namespace types {
 
 dogen::formatters::file visitor_header_formatter_stitch(
-    assistant& a, const formattables::visitor_info& v) {
+    assistant& a, const yarn::visitor& v) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(v.namespaces()));
+            const auto ns(a.make_namespaces(v.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
             a.comment(v.documentation());
-a.stream() << "class " << v.name() << " {" << std::endl;
+a.stream() << "class " << v.name().simple() << " {" << std::endl;
 a.stream() << "public:" << std::endl;
-a.stream() << "    virtual ~" << v.name() << "() noexcept = 0;" << std::endl;
+a.stream() << "    virtual ~" << v.name().simple() << "() noexcept = 0;" << std::endl;
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
             bool is_first(true);
-            for (const auto& t : v.types()) {
+            for (const auto& t : v.visits()) {
                 if (!is_first)
 a.stream() << std::endl;
-                a.comment_start_method_group(t.documentation());
-a.stream() << "    virtual void visit(const " << t.qualified_name() << "&) const { }" << std::endl;
-a.stream() << "    virtual void visit(const " << t.qualified_name() << "&) { }" << std::endl;
-a.stream() << "    virtual void visit(" << t.qualified_name() << "&) const { }" << std::endl;
-a.stream() << "    virtual void visit(" << t.qualified_name() << "&) { }" << std::endl;
-                a.comment_end_method_group(t.documentation());
+                const auto doc("Accept visits for type " + a.make_qualified_name(t));
+                a.comment_start_method_group(doc);
+a.stream() << "    virtual void visit(const " << a.make_qualified_name(t) << "&) const { }" << std::endl;
+a.stream() << "    virtual void visit(const " << a.make_qualified_name(t) << "&) { }" << std::endl;
+a.stream() << "    virtual void visit(" << a.make_qualified_name(t) << "&) const { }" << std::endl;
+a.stream() << "    virtual void visit(" << a.make_qualified_name(t) << "&) { }" << std::endl;
+                a.comment_end_method_group(doc);
                 is_first = false;
             }
 a.stream() << "};" << std::endl;
 a.stream() << std::endl;
-a.stream() << "inline " << v.name() << "::~" << v.name() << "() noexcept { }" << std::endl;
+a.stream() << "inline " << v.name().simple() << "::~" << v.name().simple() << "() noexcept { }" << std::endl;
 a.stream() << std::endl;
         } // snf
 a.stream() << std::endl;
