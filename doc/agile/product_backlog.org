@@ -1979,18 +1979,6 @@ reproduce this problem create an enumeration but remove the
 enumerations (forgetting to set the stereotype). We should supply some
 kind of clue ("did you mean to set the stereotype to enumeration?").
 
-*** Usage of external module path in cmakelists                       :story:
-
-It seems like we are not populating the target names
-properly. Originally the target name for test model all primitives was:
-
-: dogen_all_primitives
-
-When we moved the test models into =test_models= the target name did
-not change. It should have changed to:
-
-: dogen_test_models_all_primitives
-
 *** The =types= facet should always be on                             :story:
 
 At present users are given the option to enable or disable the
@@ -5188,6 +5176,53 @@ is, what then? We can't throw.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
+*** Assorted improvements to CMake files                              :story:
+
+It seems we are not using proper CMake idioms to pick up compiler
+features, as explained here:
+
+- [[http://www.slideshare.net/DanielPfeifer1/cmake-48475415][CMake - Introduction and best practices]]
+- [[https://datascience.lanl.gov/data/151208-LANL-Hoffman-Science.pdf][Building Science with CMake]]
+- [[http://voices.canonical.com/jussi.pakkanen/2013/03/26/a-list-of-common-cmake-antipatterns/][A list of common CMake antipatterns]]
+
+We need to implement this using proper CMake idioms.
+
+Notes:
+
+- Add version and language to project.
+- start using [[https://cmake.org/cmake/help/v3.3/command/target_compile_options.html][target compile options]] for each target. We will have to
+  repeat the same flags; this could be avoided by passing in a
+  variable. See also [[http://stackoverflow.com/questions/23995019/what-is-the-modern-method-for-setting-general-compile-flags-in-cmake][What is the modern method for setting general
+  compile flags in CMake?]]
+- define qualified aliases for all libraries, including nested
+  aliasing for =dogen::test_models=. Ensure all linking is done
+  against qualified names.
+- use target include directories for each target and only add the
+  required include directories to each target. Mark them with the
+  appropriate visibility, including using =interface=. We should then
+  remove all duplication of libraries in the specs.
+- try replacing calls to =-std=c++-14= with compiler feature
+  detection. We need to create a list of all C++-14 features we're
+  using.
+- remove all of the debug/release compilation options and start using
+  =CMAKE_BUILD_TYPE= instead. See [[http://pastebin.com/jCDW5Aa9][this]] example.
+- remove =STATIC= on all libraries and let users specify which linkage
+  to use.
+
+Merged stories:
+
+*Usage of external module path in cmakelists*                       :story:
+
+It seems like we are not populating the target names
+properly. Originally the target name for test model all primitives was:
+
+: dogen_all_primitives
+
+When we moved the test models into =test_models= the target name did
+not change. It should have changed to:
+
+: dogen_test_models_all_primitives
+
 *** Add support for MinGW on AppVeyor                                 :story:
 
 It seems its possible to build using MinGW on windows:
@@ -5422,28 +5457,6 @@ We probably need a dogen command line option to determine what to
 build so that users are not forced to always build static / shared
 libraries. We should make sure one of the tests is using a static
 library to make sure this scenario doesn't get borked.
-
-*** Move code to C++ 14                                               :story:
-
-#+begin_quote
-*Story*: As a dogen user or developer, I want to make use of C++-14
-features so that I can generate more modern code.
-#+end_quote
-
-Now that the standard is out, we should move to it. Both clang and gcc
-have some kind of support at present, so it should be a matter of
-compiling on this mode. However, as we have gcc 4.7 on OSX and
-Windows, we would have to upgrade these compilers first.
-
-We have already proven that the code builds out of the box in
-sprint 50.
-
-Actually, it seems we are not using proper CMake idioms to pick up
-compiler features, as explained here:
-
-[[http://www.slideshare.net/DanielPfeifer1/cmake-48475415][CMake - Introduction and best practices]]
-
-We need to implement this using proper CMake idioms.
 
 *** Migrate from Boost Test to Catch                                  :story:
 

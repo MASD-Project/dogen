@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-23 Sat 00:20]
+#+CAPTION: Clock summary at [2016-01-23 Sat 21:56]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *12:25* |       |      |
+| *Total time*                                                                | *13:58* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 12:25   |       |      |
-| Active                                                                      |         | 12:25 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:59 |
+| Stories                                                                     | 13:58   |       |      |
+| Active                                                                      |         | 13:58 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:32 |
 | COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
 | COMPLETED Name builder should take only model name                          |         |       | 0:48 |
 | COMPLETED Generate exceptions using yarn types                              |         |       | 2:21 |
@@ -36,6 +36,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-01-23 Sat 20:40]--[2016-01-23 Sat 21:56] =>  1:16
     CLOCK: [2016-01-23 Sat 20:05]--[2016-01-23 Sat 20:22] =>  0:17
     CLOCK: [2016-01-22 Fri 13:11]--[2016-01-22 Fri 13:49] =>  0:38
     CLOCK: [2016-01-19 Tue 23:27]--[2016-01-19 Tue 23:30] =>  0:03
@@ -200,6 +201,24 @@ Tasks:
 - update the formatter interfaces to use yarn types;
 - update the yarn formatting workflow to process yarn visitors;
 - update the stitch templates to make use of yarn visitors.
+
+*** COMPLETED Move code to C++ 14                                     :story:
+    CLOSED: [2016-01-23 Sat 21:28]
+
+*Rationale*: We are building in C++ 14.
+
+#+begin_quote
+*Story*: As a dogen user or developer, I want to make use of C++-14
+features so that I can generate more modern code.
+#+end_quote
+
+Now that the standard is out, we should move to it. Both clang and gcc
+have some kind of support at present, so it should be a matter of
+compiling on this mode. However, as we have gcc 4.7 on OSX and
+Windows, we would have to upgrade these compilers first.
+
+We have already proven that the code builds out of the box in
+sprint 50.
 
 *** Add more types to =quilt::cpp= canned tests                       :story:
 
