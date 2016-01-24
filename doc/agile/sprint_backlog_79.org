@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-24 Sun 15:27]
+#+CAPTION: Clock summary at [2016-01-24 Sun 16:40]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *16:44* |       |      |
+| *Total time*                                                                | *17:54* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 16:44   |       |      |
-| Active                                                                      |         | 16:44 |      |
+| Stories                                                                     | 17:54   |       |      |
+| Active                                                                      |         | 17:54 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:50 |
 | COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
 | COMPLETED Name builder should take only model name                          |         |       | 0:48 |
@@ -34,6 +34,7 @@
 | COMPLETED Generate visitors using yarn types                                |         |       | 0:31 |
 | COMPLETED Add initial support for MinGW and OSX                             |         |       | 2:28 |
 | POSTPONED Create a debug build for clang in travis                          |         |       | 0:12 |
+| COMPLETED How to attach helper methods to types dynamically                 |         |       | 1:10 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -268,7 +269,9 @@ names.
 In order for the assistant to build names, it will need to be able to
 access the yarn model name.
 
-*** Attach helper methods to types dynamically                        :story:
+*** COMPLETED How to attach helper methods to types dynamically       :story:
+    CLOSED: [2016-01-24 Sun 16:39]
+    CLOCK: [2016-01-24 Sun 15:29]--[2016-01-24 Sun 16:39] =>  1:10
 
 In order to cope with the removal of nested type info, we need a way
 to determine what helper methods are required for a given yarn type.
@@ -286,6 +289,119 @@ aligned to a model and type or concept.
 
 Once this is done we need to remove the =object_types= that exist in
 yarn just to figure out what helper methods to use.
+
+This must be implemented as follows:
+
+- aspect settings need an additional optional property: formatter
+  class. This is just a string. We read them in with the bundle. We
+  need to associate this helper name with a non-qualified formatter
+  name (e.g. =class_implementation_formatter=). Simple map of string
+  to string (helper class to formatter "class"). This should be doable
+  from the existing dynamic fields infrastructure, but we may not have
+  the required expansion yet.
+- formattables workflow need an additional repository: helpers. This
+  contains the helpers by name, by formatter name. It is constructed
+  by iterating through the model and asking each type for their aspect
+  settings and collecting the helper classes per formatter.
+- formatter properties needs to store the helpers for a given
+  formatter, read out from the repository above.
+- formatters need a helper interface and a helper registrar. Each
+  helper template needs to call the registrar and register itself
+  using the helper and formatter class.
+- formatter helper needs to ask the registrar for all helpers given
+  current formatter class (ownership hierarchy, formatter name) and
+  helper class. If none are found it errors.
+- once this infrastructure is in place, we need to remove nested type
+  info and make sure everything still works.
+
+Actually, we can get away with just a "type family" because the type
+itself need not care about which formatters bind to which
+helpers. This means we can simply say =cpp.type_family= is
+=smart_pointer= and then ask for all helpers for this formatter class
+(the helper must know its formatter class) which bind to this type
+family. Resurrecting notes on type families:
+
+- =cpp.type_family=: string, to convert to enum. e.g.:
+  =smart_pointer=. note: do not convert to enum.
+- =cpp.type.family=: we need a "choice" value type for this. note: use
+  of dot instead of underscore is better.
+- re-read prior (detailed) analysis in [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_67.org#implement-io-helper-method-generator][Implement io helper method
+  generator]].
+
+In this view, we then do:
+
+- rename aspect settings to type settings since they are no longer at
+  the aspect level.
+- add family type to aspect settings.
+- create a new settings class to contain all of the dependent type
+  families. We need a good name for this.
+- update formattables workflow to generate this new class and append
+  it to bundle, adding repository etc as required.
+- in formatters: create registrar, interface etc and update all helper
+  methods to register themselves.
+- make context more efficient by using references and create all
+  contexts up front, supplying the formatting workflow with just a
+  container of name to context. Context should also have a container
+  of helper methods performatter, created by querying the registrar.
+- assistant has a method to generate all helpers.
+
+*** Rename aspect settings to type settings                           :story:
+
+These will no longer be confined to aspects so need to be renamed.
+
+*** Add a field for =cpp.type.family=                                 :story:
+
+We need to:
+
+- determine all of the required values given the existing helper
+  methods.
+- add the field.
+- add a type family property in type settings.
+
+*** Add an helper method interface                                    :story:
+
+We should also investigate on the need for the nested type info
+assistant.
+
+Tasks:
+
+- create interface.
+- create a registrar for interface with family and formatter name.
+- update all helpers to implement interface and to register
+  themselves.
+
+*** Create new settings class to represent dependent type families   :story:
+
+We need a place to store all of the type families a given type is
+associated with. This includes all of the processing required in
+settings to attach this container to the bundle.
+
+*** Make context non-generatable                                      :story:
+
+We need to extend context in a few ways dogen does not yet support:
+
+- make formatter properties and bundles by reference since we do not
+  need to copy them.
+- create a context generator that merges the containers and generates
+  a map of type to context. Supply this context to the formatters
+  workflow and to the formatters.
+
+*** Add helper methods to context                                     :story:
+
+Tasks:
+
+- add a container of helper method interface to the context, by
+  formatter name;
+- add an activity to the formattables workflow that populates this
+  container using the new settings class and the helper registrar.
+- populate helper methods from context, removing all of the existing
+  scaffolding code for helper methods.
+
+*** Remove nested type info                                           :story:
+
+Once all of the infrastructure is in place, we should not need this
+class any more. Remove code from transformer and remove object types
+and anything else that was used to dispatch based on type.
 
 *** Add more types to =quilt::cpp= canned tests                       :story:
 
