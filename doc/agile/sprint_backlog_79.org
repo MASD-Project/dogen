@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-24 Sun 16:46]
+#+CAPTION: Clock summary at [2016-01-24 Sun 23:07]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *18:00* |       |      |
+| *Total time*                                                                | *19:20* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 18:00   |       |      |
-| Active                                                                      |         | 18:00 |      |
+| Stories                                                                     | 19:20   |       |      |
+| Active                                                                      |         | 19:20 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:50 |
 | COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
 | COMPLETED Name builder should take only model name                          |         |       | 0:48 |
@@ -35,6 +35,8 @@
 | COMPLETED Add initial support for MinGW and OSX                             |         |       | 2:28 |
 | POSTPONED Create a debug build for clang in travis                          |         |       | 0:12 |
 | COMPLETED How to attach helper methods to types dynamically                 |         |       | 1:16 |
+| STARTED How to handle composition and pointers                              |         |       | 1:08 |
+| STARTED Rename aspect settings to element settings                          |         |       | 0:12 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -245,6 +247,18 @@ We can also start adding support for OSX.
 For now the objective of this story is just to explore these builds;
 we will address errors later on.
 
+*** COMPLETED Treat shared pointers as JSON objects                   :story:
+    CLOSED: [2016-01-24 Sun 22:45]
+
+*Rationale*: this has been implemented some time ago.
+
+At present we are not treating shared pointers as objects:
+
+:         s << "\"shared_ptr\": \"empty shared pointer\"";
+
+We need to start outputting them as JSON objects, just like we do for
+containers, with a name for the "pointee".
+
 *** POSTPONED Create a debug build for clang in travis                :story:
     CLOSED: [2016-01-24 Sun 15:23]
     CLOCK: [2016-01-18 Mon 22:14]--[2016-01-18 Mon 22:26] =>  0:12
@@ -353,18 +367,116 @@ by the inclusion dependencies builder. The only slight snag is that we
 need to first resolve the type into a type family and then go to the
 helper interface.
 
-*** Rename aspect settings to type settings                           :story:
+*** STARTED How to handle composition and pointers                    :story:
+    CLOCK: [2016-01-24 Sun 21:59]--[2016-01-24 Sun 23:07] =>  1:08
 
-These will no longer be confined to aspects so need to be renamed.
+At present we manually detect composition via a bit of a hack (string
+comparisons) and then use a helper to break the infinite cycle. When
+we move to a world of dynamic helpers this is no longer possible.
 
-*** Add a field for =cpp.type.family=                                 :story:
+In addition, we are also relying on knowing if an instance of a type
+is a pointer or not. This works because we rely on knowing if our
+containing type is a smart pointer or not.
+
+This points to two more general problem: detecting cycles and
+determining when to forward declare. Whenever there is a cycle we need
+to forward declare. In addition, whenever we have a pointer we can
+forward declare. Since we always use pointers for cycles, this means
+detecting a pointer is sufficient. However, a pointer is a C/C++
+concept so we need to map it to a language agnostic concept that
+exists at the yarn level.
+
+Another problem is that we capture hash container keys. This is
+required so we can tell types to include hash. However we do this by
+marking a type as =object_types::hash_container=. This can be renamed
+to associative container to make it a bit more generic. We could have
+a boolean =is_container= followed by an enumeration =container_type=:
+
+- associative
+- sequence
+- ordered
+
+We need to look at the STL concepts for these to make sure we are at
+the right level. Ideally there should also be a concept for a smart
+pointer as a container of one or zero. Couldn't find any. We need to
+find a good name such as "resource manager", "resource holder"? This
+would mean that "is pointer" then becomes something akin to "is
+potentially weak relationship" - some kind of language agnostic
+version of "can use forward declaration".
+
+The final conclusion of all of this is that we need to refactor object
+types slightly to make it language neutral and to remove hacks such as
+service etc, but on the main we can't get away from it. Further, we
+need "is pointer" to become "is weak", and for it to be populated in
+three cases:
+
+- if the owning class is also part of the nested type;
+- if a resource holder is holding on to a type;
+- if a type has a pointer or reference to a type (when we do support
+  c++ syntax). The parser would be responsible for setting the
+  property in the front end and we'd have to not set it in yarn if it
+  has already been set. This can be ignored for now.
+
+In C++ "is weak" means a forward declaration. For the first case we
+also need an additional property at the nested type level: is self
+referencing. If true, this means we found a cycle.
+
+Merged stories:
+
+*Move language-specific object types to meta-data*
+
+There are a number of object types that exist solely to provide the
+method helpers with information:
+
+- smart_pointer
+- hash_container
+- sequence_container
+- ordered_container
+
+These should be conveyed using the meta-data.
+
+*Test data generator does not detect cycles in object graph*
+
+At present we handle composition correctly, but not other forms of
+cycles in the object graph.
+
+Let model M be composed of class A with a member of type class B, and
+class B with a member of type =shared_ptr= to class A. The test data
+generated for such model will contain an infinite loop. We need a way
+to detect such loops, potentially in SML, and then generate code which
+breaks the loop.
+
+This could be done by explicitly checking if the type of any member
+variable loops back into the type itself. Of course one could conceive
+cycles that involve many edges in the object graph, and for these we'd
+still generate invalid code.
+
+Another approach would be to have an unordered map of type
+association; the map would have the IDs of every type as we go further
+into the association graph. It would be pushed and popped as we go in
+and out of branches; at the same time we need to have a look back
+capacity to see the few elements in the stack. When a pattern emerges
+that involved types of a certain ID, they would stop creating any
+further associations.
+
+*** STARTED Rename aspect settings to element settings                :story:
+    CLOCK: [2016-01-24 Sun 21:46]--[2016-01-24 Sun 21:58] =>  0:12
+
+These will no longer be confined to aspects so need to be
+renamed. Actually =element= makes more sense than =type=, so it maps
+back to =yarn::element= (at least conceptually).
+
+*** Add a field for =quilt.cpp.family=                                :story:
 
 We need to:
 
 - determine all of the required values given the existing helper
   methods.
 - add the field.
-- add a type family property in type settings.
+- add a =family= property in =element= settings.
+
+One interesting point: the helper methods represent either a concept
+(i.e. smart pointer) or a concrete type (i.e. boost date time).
 
 *** Add an helper method interface                                    :story:
 

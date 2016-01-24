@@ -603,18 +603,6 @@ it needs to be done in more than one place. We should consider
 something like we had in =sml_to_cpp::locator= that is initialised
 with the path settings and can then be used to create paths.
 
-*** Move language-specific object types to meta-data                  :story:
-
-There are a number of object types that exist solely to provide the
-method helpers with information:
-
-- smart_pointer
-- hash_container
-- sequence_container
-- ordered_container
-
-These should be conveyed using the meta-data.
-
 *** Remove intermediate fields from dynamic                           :story:
 
 With the previous approach we had fields in dynamic that were
@@ -830,13 +818,6 @@ containers have so that I don't have to count it manually.
 
 It would be nice to have the container type and size in the JSON
 output.
-
-At present we are not treating shared pointers as objects:
-
-:         s << "\"shared_ptr\": \"empty shared pointer\"";
-
-We need to start outputting them as JSON objects, just like we do for
-containers, with a name for the "pointee".
 
 *** Do not include algorithm if swap is disabled                      :story:
 
@@ -2249,30 +2230,6 @@ we need to disable CMake generation and do it by hand. However:
 - for user level dependencies we should add dynamic extensions at the
   model level. Also, references provide sufficient information to link
   against other dogen models.
-
-*** Test data generator does not detect cycles in object graph        :story:
-
-At present we handle composition correctly, but not other forms of
-cycles in the object graph.
-
-Let model M be composed of class A with a member of type class B, and
-class B with a member of type =shared_ptr= to class A. The test data
-generated for such model will contain an infinite loop. We need a way
-to detect such loops, potentially in SML, and then generate code which
-breaks the loop.
-
-This could be done by explicitly checking if the type of any member
-variable loops back into the type itself. Of course one could conceive
-cycles that involve many edges in the object graph, and for these we'd
-still generate invalid code.
-
-Another approach would be to have an unordered map of type
-association; the map would have the IDs of every type as we go further
-into the association graph. It would be pushed and popped as we go in
-and out of branches; at the same time we need to have a look back
-capacity to see the few elements in the stack. When a pattern emerges
-that involved types of a certain ID, they would stop creating any
-further associations.
 
 *** Consider not creating unversioned keys for single property        :story:
 
