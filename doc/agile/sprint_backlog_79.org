@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-24 Sun 16:40]
+#+CAPTION: Clock summary at [2016-01-24 Sun 16:46]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *17:54* |       |      |
+| *Total time*                                                                | *18:00* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 17:54   |       |      |
-| Active                                                                      |         | 17:54 |      |
+| Stories                                                                     | 18:00   |       |      |
+| Active                                                                      |         | 18:00 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:50 |
 | COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
 | COMPLETED Name builder should take only model name                          |         |       | 0:48 |
@@ -34,7 +34,7 @@
 | COMPLETED Generate visitors using yarn types                                |         |       | 0:31 |
 | COMPLETED Add initial support for MinGW and OSX                             |         |       | 2:28 |
 | POSTPONED Create a debug build for clang in travis                          |         |       | 0:12 |
-| COMPLETED How to attach helper methods to types dynamically                 |         |       | 1:10 |
+| COMPLETED How to attach helper methods to types dynamically                 |         |       | 1:16 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -271,6 +271,7 @@ access the yarn model name.
 
 *** COMPLETED How to attach helper methods to types dynamically       :story:
     CLOSED: [2016-01-24 Sun 16:39]
+    CLOCK: [2016-01-24 Sun 16:40]--[2016-01-24 Sun 16:46] =>  0:06
     CLOCK: [2016-01-24 Sun 15:29]--[2016-01-24 Sun 16:39] =>  1:10
 
 In order to cope with the removal of nested type info, we need a way
@@ -344,6 +345,13 @@ In this view, we then do:
   container of name to context. Context should also have a container
   of helper methods performatter, created by querying the registrar.
 - assistant has a method to generate all helpers.
+
+Note: when time comes to support includes in helper methods, we can
+take a similar approach as we do for formatters now. The helper method
+implements some kind of include provider interface, which is then used
+by the inclusion dependencies builder. The only slight snag is that we
+need to first resolve the type into a type family and then go to the
+helper interface.
 
 *** Rename aspect settings to type settings                           :story:
 

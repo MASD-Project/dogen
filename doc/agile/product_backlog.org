@@ -117,6 +117,19 @@ formatter to provide its includes and it would be its job to either
 delegate further or to compute the includes. This would at least
 remove the duplication of code between io and types.
 
+This task will be made much easier once we have stitch support
+for named regions.
+
+As part of the work to make helpers dynamic we reached the following
+conclusions:
+
+Note: when time comes to support includes in helper methods, we can
+take a similar approach as we do for formatters now. The helper method
+implements some kind of include provider interface, which is then used
+by the inclusion dependencies builder. The only slight snag is that we
+need to first resolve the type into a type family and then go to the
+helper interface.
+
 *** Add =interface= stereotype                                        :story:
 
 Even though we can't generate much outside of plain types, we should
