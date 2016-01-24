@@ -89,6 +89,11 @@ void association_indexer::recurse_nested_names(const intermediate_model& m,
 
     is_pointer = k->second.object_type() == object_types::smart_pointer;
 
+    /* if the parent type is an associative container, the first child
+     * type will represent the key of the associative container and
+     * the second type will be its value. We need to remember the
+     * keys.
+     */
     bool is_first(true);
     for (const auto c : nn.children()) {
         const auto hc(object_types::hash_container);

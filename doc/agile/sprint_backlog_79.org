@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-24 Sun 23:07]
+#+CAPTION: Clock summary at [2016-01-24 Sun 23:27]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *19:20* |       |      |
+| *Total time*                                                                | *19:37* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 19:20   |       |      |
-| Active                                                                      |         | 19:20 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:50 |
+| Stories                                                                     | 19:37   |       |      |
+| Active                                                                      |         | 19:37 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:57 |
 | COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
 | COMPLETED Name builder should take only model name                          |         |       | 0:48 |
 | COMPLETED Generate exceptions using yarn types                              |         |       | 2:21 |
@@ -35,11 +35,12 @@
 | COMPLETED Add initial support for MinGW and OSX                             |         |       | 2:28 |
 | POSTPONED Create a debug build for clang in travis                          |         |       | 0:12 |
 | COMPLETED How to attach helper methods to types dynamically                 |         |       | 1:16 |
-| STARTED How to handle composition and pointers                              |         |       | 1:08 |
+| COMPLETED How to handle composition and pointers                            |         |       | 1:18 |
 | STARTED Rename aspect settings to element settings                          |         |       | 0:12 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-01-24 Sun 23:19]--[2016-01-24 Sun 23:26] =>  0:07
     CLOCK: [2016-01-24 Sun 15:10]--[2016-01-24 Sun 15:28] =>  0:18
     CLOCK: [2016-01-23 Sat 20:40]--[2016-01-23 Sat 21:56] =>  1:16
     CLOCK: [2016-01-23 Sat 20:05]--[2016-01-23 Sat 20:22] =>  0:17
@@ -274,15 +275,6 @@ seems to disable the stage folder in travis (though it works
 locally). We probably shouldn't use the stage folder since its not a
 CMake idiom.
 
-*** CANCELLED Access model name from within formatters workflow       :story:
-    CLOSED: [2016-01-24 Sun 15:25]
-
-*Rationale*: We removed the need for the model name when building
-names.
-
-In order for the assistant to build names, it will need to be able to
-access the yarn model name.
-
 *** COMPLETED How to attach helper methods to types dynamically       :story:
     CLOSED: [2016-01-24 Sun 16:39]
     CLOCK: [2016-01-24 Sun 16:40]--[2016-01-24 Sun 16:46] =>  0:06
@@ -367,7 +359,9 @@ by the inclusion dependencies builder. The only slight snag is that we
 need to first resolve the type into a type family and then go to the
 helper interface.
 
-*** STARTED How to handle composition and pointers                    :story:
+*** COMPLETED How to handle composition and pointers                  :story:
+    CLOSED: [2016-01-24 Sun 23:26]
+    CLOCK: [2016-01-24 Sun 23:08]--[2016-01-24 Sun 23:18] =>  0:10
     CLOCK: [2016-01-24 Sun 21:59]--[2016-01-24 Sun 23:07] =>  1:08
 
 At present we manually detect composition via a bit of a hack (string
@@ -421,6 +415,11 @@ In C++ "is weak" means a forward declaration. For the first case we
 also need an additional property at the nested type level: is self
 referencing. If true, this means we found a cycle.
 
+With this clean up we can also use object types to make some
+validation on the nested type instantiations (e.g. resource holder
+must have one and only one type parameter, etc). Add this to validator
+story.
+
 Merged stories:
 
 *Move language-specific object types to meta-data*
@@ -459,6 +458,29 @@ capacity to see the few elements in the stack. When a pattern emerges
 that involved types of a certain ID, they would stop creating any
 further associations.
 
+*** Partial clean up of object types                                  :story:
+
+Tasks:
+
+- rename hash container to associative container and all associated
+  names such as hash container keys, etc.
+- rename smart pointer to resource holder.
+- investigate the usage of ordered container, and if not used, remove
+  it.
+
+We need to update all JSON documents, parser etc. Do not address the
+"user defined" entries at this point.
+
+*** Improve handling of weak relationships in nested name             :story:
+
+Tasks:
+
+- rename is pointer to is weak;
+- add a is self referencing property which is true if the nested name
+  refers to the owning object.
+- propagate these changes to nested type info and remove the composite
+  vs domain type distinction in test data.
+
 *** STARTED Rename aspect settings to element settings                :story:
     CLOCK: [2016-01-24 Sun 21:46]--[2016-01-24 Sun 21:58] =>  0:12
 
@@ -477,6 +499,9 @@ We need to:
 
 One interesting point: the helper methods represent either a concept
 (i.e. smart pointer) or a concrete type (i.e. boost date time).
+
+To avoid confusion we should probably use concept-like naming
+(e.g. =SmartPointer=).
 
 *** Add an helper method interface                                    :story:
 
@@ -706,3 +731,12 @@ We should just follow the composite pattern in the naming.
 
 At present it seems the file is always generated regardless of the
 meta-data. This is probably due to a typo in the field name.
+
+*** CANCELLED Access model name from within formatters workflow       :story:
+    CLOSED: [2016-01-24 Sun 15:25]
+
+*Rationale*: We removed the need for the model name when building
+names.
+
+In order for the assistant to build names, it will need to be able to
+access the yarn model name.
