@@ -20,24 +20,24 @@
 language: cpp
 
 matrix:
-  allow_failures:
-    - os: osx
+  # allow_failures:
+  #   - os: osx
   include:
-    - os: osx
-      compiler: clang
-      env: BUILD_TYPE=Release
+    # - os: osx
+    #   compiler: clang
+    #   env: BUILD_TYPE=Release
     - os: linux
       compiler: gcc
       env: BUILD_TYPE=Release
     - os: linux
       compiler: clang
       env: BUILD_TYPE=Release
-    - os: linux
-      compiler: gcc
-      env: BUILD_TYPE=Debug
-    - os: linux
-      compiler: clang
-      env: BUILD_TYPE=Debug
+    # - os: linux
+    #   compiler: gcc
+    #   env: BUILD_TYPE=Debug
+    # - os: linux
+    #   compiler: clang
+    #   env: BUILD_TYPE=Debug
 
 addons:
   apt:
@@ -62,11 +62,9 @@ script:
   # FIXME: ninja borked with conan for some reason.
   # - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on -G Ninja
   # - ninja -j2 package run_all_specs
+  # FIXME: removed -DCMAKE_BUILD_TYPE=${BUILD_TYPE} as it causes the build to break
   - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on
-  - ls -l
-  - ls -l stage
   - make -j2 run_all_specs
-  - ls -l bin
   # packaging disabled because we do not have boost 1.60.
   # - make -j2 package run_all_specs
   # - sudo dpkg -i stage/pkg/dogen_*_amd64-applications.deb

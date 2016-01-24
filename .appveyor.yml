@@ -10,7 +10,7 @@ environment:
     - generator: "Visual Studio 14 2015 Win64"
 
 configuration:
-  - Debug
+  # - Debug
   - Release
 
 platform:
