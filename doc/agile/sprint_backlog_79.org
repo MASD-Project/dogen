@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-24 Sun 00:30]
+#+CAPTION: Clock summary at [2016-01-24 Sun 15:27]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *16:26* |       |      |
+| *Total time*                                                                | *16:44* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 16:26   |       |      |
-| Active                                                                      |         | 16:26 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:32 |
+| Stories                                                                     | 16:44   |       |      |
+| Active                                                                      |         | 16:44 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:50 |
 | COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
 | COMPLETED Name builder should take only model name                          |         |       | 0:48 |
 | COMPLETED Generate exceptions using yarn types                              |         |       | 2:21 |
@@ -33,10 +33,11 @@
 | COMPLETED Generate enumerations using yarn types                            |         |       | 1:07 |
 | COMPLETED Generate visitors using yarn types                                |         |       | 0:31 |
 | COMPLETED Add initial support for MinGW and OSX                             |         |       | 2:28 |
-| STARTED Create a debug build for clang in travis                            |         |       | 0:12 |
+| POSTPONED Create a debug build for clang in travis                          |         |       | 0:12 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-01-24 Sun 15:10]--[2016-01-24 Sun 15:28] =>  0:18
     CLOCK: [2016-01-23 Sat 20:40]--[2016-01-23 Sat 21:56] =>  1:16
     CLOCK: [2016-01-23 Sat 20:05]--[2016-01-23 Sat 20:22] =>  0:17
     CLOCK: [2016-01-22 Fri 13:11]--[2016-01-22 Fri 13:49] =>  0:38
@@ -243,18 +244,8 @@ We can also start adding support for OSX.
 For now the objective of this story is just to explore these builds;
 we will address errors later on.
 
-*** Add more types to =quilt::cpp= canned tests                       :story:
-
-Originally we used the =*_info= types in the canned tests, but these
-are all about to be removed. We need to hunt for types in the
-=quilt::cpp= model and add those to the canned tests.
-
-*** Access model name from within formatters workflow                 :story:
-
-In order for the assistant to build names, it will need to be able to
-access the yarn model name.
-
-*** STARTED Create a debug build for clang in travis                  :story:
+*** POSTPONED Create a debug build for clang in travis                :story:
+    CLOSED: [2016-01-24 Sun 15:23]
     CLOCK: [2016-01-18 Mon 22:14]--[2016-01-18 Mon 22:26] =>  0:12
 
 In order to enable code coverage we need to have a debug build. For
@@ -263,85 +254,19 @@ for clang (debug and release).
 
 Example YML: [[https://github.com/Microsoft/GSL/blob/master/.travis.yml][GSL]]
 
-*** ODB options file is generated to incorrect location               :story:
+We almost made this work, but now we have a problem: using BUILD_TYPE
+seems to disable the stage folder in travis (though it works
+locally). We probably shouldn't use the stage folder since its not a
+CMake idiom.
 
-Models with composite names seem to have their ODB options file
-generated under the =projects= directory, e.g.:
+*** CANCELLED Access model name from within formatters workflow       :story:
+    CLOSED: [2016-01-24 Sun 15:25]
 
-: projects/vtk/geometry/src/options.odb
+*Rationale*: We removed the need for the model name when building
+names.
 
-*** Add support for coveralls                                         :story:
-
-Seems like all we need to do to have code coverage from travis is to
-enable it in the YML file.
-
-*Direct use of Coveralls failed*
-
-We had to remove coveralls:
-
-: - coveralls --gcov "$GCOV" --gcov-options '\-lp' -e /usr
-
-This was generating over 10 MB of logging so the build got terminated.
-
-We also add to remove debug builds:
-
-: -DWITH_DEBUG=on -DWITH_PROFILING=on
-
-We were getting a lot of internal compiler errors:
-
-: FAILED: /usr/bin/g++-4.9   -DBOOST_ALL_DYN_LINK -g -O0 -Wall -Wextra -pedantic -Werror -Wno-system-headers -Woverloaded-virtual -Wwrite-strings -fprofile-arcs -ftest-coverage -std=c++11 -frtti -fvisibility-inlines-hidden -fvisibility=default -isystem /usr/include/libxml2 -Istage/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/dia/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/dia_to_sml/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/frontend/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/backend/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/sml/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/config/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/cpp/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/cpp_formatters/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/sml_to_cpp/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/formatters/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/utility/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/knit/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/knitter/include -MMD -MT projects/sml_to_cpp/src/CMakeFiles/sml_to_cpp.dir/types/transformer.cpp.o -MF "projects/sml_to_cpp/src/CMakeFiles/sml_to_cpp.dir/types/transformer.cpp.o.d" -o projects/sml_to_cpp/src/CMakeFiles/sml_to_cpp.dir/types/transformer.cpp.o -c /home/travis/build/DomainDrivenConsulting/dogen/projects/sml_to_cpp/src/types/transformer.cpp
-: g++-4.9: internal compiler error: Killed (program cc1plus)
-: Please submit a full bug report,
-: with preprocessed source if appropriate.
-: See <file:///usr/share/doc/gcc-4.9/README.Bugs> for instructions.
-
-Finally note also that we must add coverage _after_ the script
-executes or else we risk doing coverage whilst the build is taking
-place. Hopefully this is the reason for these errors:
-
-: /home/travis/build/DomainDrivenConsulting/output/projects/test_models/class_without_attributes/src/CMakeFiles/class_without_attributes.dir/io/package_1/class_1_io.cpp.gcda:cannot open data file, assuming not executed
-: File '/usr/include/c++/4.9/bits/basic_ios.h'
-: No executable lines
-
-We should read up on the [[http://docs.travis-ci.com/user/build-lifecycle/][life-cycle]] properly.
-
-*Travis Examples*
-
-Seems like all we need to do to have code coverage from travis is to
-enable it in the YML file. We should look into copying it from the
-[[https://github.com/apolukhin/Boost.DLL][Boost.DLL]] [[https://raw.githubusercontent.com/apolukhin/Boost.DLL/master/.travis.yml][example]]. We also need to enable coverage on all builds,
-separately from nightlies. The key parts appear to be these:
-
-:  - ../../../b2 cxxflags="--coverage -std=$CXX_STANDARD" linkflags="--coverage"
-
-and
-
-: after_success:
-:    - find ../../../bin.v2/ -name "*.gcda" -exec cp "{}" ./ \;
-:    - find ../../../bin.v2/ -name "*.gcno" -exec cp "{}" ./ \;
-:    - sudo apt-get install -qq python-yaml lcov
-:    - lcov --directory ./ --base-directory ./ --capture --output-file coverage.info
-:    - lcov --remove coverage.info '/usr*' '*/filesystem*' '*/container*' '*/core/*' '*/exception/*' '*/intrusive/*' '*/smart_ptr/*' '*/move/*' '*/fusion/*' '*/io/*' '*/function/*' '*/iterator/*' '*/preprocessor/*' '*/system/*' '*/boost/test/*' '*/boost/detail/*' '*/utility/*' '*/dll/example/*' '*/dll/test/*' '*/pe_info.hpp' '*/macho_info.hpp' -o coverage.info
-:    - gem install coveralls-lcov
-:    - cd .. && coveralls-lcov test/coverage.info
-
-Another way seems to be using gcov, as per [[https://github.com/fabianschuiki/Maxwell][Maxwell]] [[https://raw.githubusercontent.com/fabianschuiki/Maxwell/master/.travis.yml][travis.yml]]:
-
-: - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.8; export CXX="g++-4.8" CC="gcc-4.8" GCOV="gcov-4.8"; fi
-:  - sudo pip install cpp-coveralls
-
-and
-
-: script:
-:  - export CTEST_OUTPUT_ON_FAILURE=1
-:  - cmake -DCMAKE_BUILD_TYPE=gcov . && make && make test
-: after_success:
-:  - coveralls --gcov "$GCOV" --gcov-options '\-lp' -e CMakeFiles -E ".*/test/.*" -E ".*/mock/.*" -e maxwell/gen -e language -e thirdparty -e maxwell/ast/nodes -e maxwell/driver/gramdiag.c -e maxwell/driver/Parser.cpp -e maxwell/driver/Parser.hpp -e maxwell/driver/Scanner.cpp -e maxwell/driver/position.hh -e maxwell/driver/stack.hh -e maxwell/driver/location.hh
-
-Yet another way seems to be creating a script to do coverage, as per
-[[https://github.com/BoostGSoC13/boost.afio][boost.afio]] [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/.travis.yml][travis.yml]]. The script is available [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/test/update_coveralls.sh][here]].
-
-Another example from [[https://github.com/boostorg/dll/blob/develop/.travis.yml][Boost.Dll]].
+In order for the assistant to build names, it will need to be able to
+access the yarn model name.
 
 *** Attach helper methods to types dynamically                        :story:
 
@@ -362,7 +287,13 @@ aligned to a model and type or concept.
 Once this is done we need to remove the =object_types= that exist in
 yarn just to figure out what helper methods to use.
 
-*** Implement formattables in terms of yarn types                     :story:
+*** Add more types to =quilt::cpp= canned tests                       :story:
+
+Originally we used the =*_info= types in the canned tests, but these
+are all about to be removed. We need to hunt for types in the
+=quilt::cpp= model and add those to the canned tests.
+
+*** Implement formattables in terms of yarn types                     :epic:
 
 At present formattables are just a shadow copy of yarn types plus
 additional =cpp= specific types. In practice:
