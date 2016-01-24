@@ -214,7 +214,7 @@ string(STRIP ${GIT_COMMIT_COUNT} GIT_COMMIT_COUNT)
 site_name(DOGEN_SITE)
 
 # staging directory
-set(stage_dir ${CMAKE_BINARY_DIR}/stage)
+set(stage_dir ${PROJECT_BINARY_DIR}/stage)
 set(stage_bin_dir ${stage_dir}/bin)
 set(stage_pkg_dir ${stage_dir}/pkg)
 set(stage_lib_dir ${stage_dir}/lib)
