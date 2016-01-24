@@ -62,7 +62,7 @@ script:
   # FIXME: ninja borked with conan for some reason.
   # - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on -G Ninja
   # - ninja -j2 package run_all_specs
-  - cmake ${GIT_REPO} -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DWITH_MINIMAL_PACKAGING=on
+  - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on
   - ls -l
   - ls -l stage
   - make -j2 run_all_specs
