@@ -5176,10 +5176,52 @@ is, what then? We can't throw.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
-*** Add travis build for OSX                                          :story:
+*** Get Mingw build to compile code                                   :story:
 
-Travis apparently supports OSX. We should aim to get a green build on
-it.
+We've added the initial support to MinGW on Appveyor:
+
+- [[http://help.appveyor.com/discussions/questions/372-build-setup-for-a-c-program][Build setup for a C program]]
+- [[https://github.com/imazen/libpng/blob/master/appveyor.yml][libpng appveyor.yml]]
+- [[https://www.appveyor.com/updates/2015/05/30][Appveyor adds support for MinGW]]
+- [[http://altrepo.eu/matyapiro31/mingw-w64-thrift/blob/master/appveyor.yml][mingw-w64-thrift]]
+
+However the build is now failing with:
+
+: cmake ../.. -DCMAKE_BUILD_TYPE=%configuration% -G "%generator%"
+: CMake Error at C:/Program Files (x86)/CMake/share/cmake-3.4/Modules/CMakeMinGWFindMake.cmake:22 (message):
+:   sh.exe was found in your PATH, here:
+:
+:   C:/Program Files/Git/usr/bin/sh.exe
+:
+:   For MinGW make to work correctly sh.exe must NOT be in your path.
+:
+:   Run cmake from a shell that does not have sh.exe in your PATH.
+:
+:   If you want to use a UNIX shell, then use MSYS Makefiles.
+:
+: Call Stack (most recent call first):
+:   CMakeLists.txt:25 (project)
+:
+:
+: CMake Error: CMAKE_C_COMPILER not set, after EnableLanguage
+: CMake Error: CMAKE_CXX_COMPILER not set, after EnableLanguage
+: -- Configuring incomplete, errors occurred!
+
+We have attempted to remove Git from path as per these instructions:
+
+- [[https://github.com/jibsen/brieflz/blob/0c6fb73984f11e697dfaade5cdc5e291c1655c67/appveyor.yml][Removing Git's sh from the path]]
+
+But it did not resolve the error above.
+
+*** Get OSX build to compile code                                     :story:
+
+We've added the initial support for OSX. However, it still needs a lot
+of work:
+
+- we can't install the conan package because we don't know how to
+  install pkg files. We should raise a ticket on conan for this.
+
+Notes:
 
 - [[http://www.mactech.com/articles/mactech/Vol.26/26.02/TheFlatPackage/index.html][The Flat Package]]
 - [[https://docs.travis-ci.com/user/multi-os/][Matrix with multiple OSs]]
@@ -5213,7 +5255,9 @@ Notes:
   detection. We need to create a list of all C++-14 features we're
   using.
 - remove all of the debug/release compilation options and start using
-  =CMAKE_BUILD_TYPE= instead. See [[http://pastebin.com/jCDW5Aa9][this]] example.
+  =CMAKE_BUILD_TYPE= instead. See [[http://pastebin.com/jCDW5Aa9][this]] example. We added build type
+  support to our builds, but as a result, the binaries moved from
+  =stage/bin= to =bin=. There is no obvious explanation for this.
 - remove =STATIC= on all libraries and let users specify which linkage
   to use.
 

@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-23 Sat 21:56]
+#+CAPTION: Clock summary at [2016-01-24 Sun 00:30]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *13:58* |       |      |
+| *Total time*                                                                | *16:26* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 13:58   |       |      |
-| Active                                                                      |         | 13:58 |      |
+| Stories                                                                     | 16:26   |       |      |
+| Active                                                                      |         | 16:26 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:32 |
 | COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
 | COMPLETED Name builder should take only model name                          |         |       | 0:48 |
@@ -32,6 +32,7 @@
 | COMPLETED Handle enumeration type dynamically                               |         |       | 1:05 |
 | COMPLETED Generate enumerations using yarn types                            |         |       | 1:07 |
 | COMPLETED Generate visitors using yarn types                                |         |       | 0:31 |
+| COMPLETED Add initial support for MinGW and OSX                             |         |       | 2:28 |
 | STARTED Create a debug build for clang in travis                            |         |       | 0:12 |
 #+end:
 
@@ -220,7 +221,9 @@ Windows, we would have to upgrade these compilers first.
 We have already proven that the code builds out of the box in
 sprint 50.
 
-*** STARTED Add support for MinGW on AppVeyor                         :story:
+*** COMPLETED Add initial support for MinGW and OSX                   :story:
+    CLOSED: [2016-01-24 Sun 00:29]
+    CLOCK: [2016-01-23 Sat 23:25]--[2016-01-24 Sun 00:27] =>  0:56
     CLOCK: [2016-01-23 Sat 22:23]--[2016-01-23 Sat 23:25] =>  1:02
     CLOCK: [2016-01-23 Sat 22:14]--[2016-01-23 Sat 22:22] =>  0:08
     CLOCK: [2016-01-23 Sat 21:57]--[2016-01-23 Sat 22:13] =>  0:16
@@ -234,6 +237,11 @@ It seems its possible to build using MinGW on windows:
 - [[http://altrepo.eu/matyapiro31/mingw-w64-thrift/blob/master/appveyor.yml][mingw-w64-thrift]]
 
 We should probably enable this on our AppVeyor build matrix.
+
+We can also start adding support for OSX.
+
+For now the objective of this story is just to explore these builds;
+we will address errors later on.
 
 *** Add more types to =quilt::cpp= canned tests                       :story:
 
