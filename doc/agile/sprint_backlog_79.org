@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-24 Sun 23:27]
+#+CAPTION: Clock summary at [2016-01-26 Tue 22:01]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *19:37* |       |      |
+| *Total time*                                                                | *20:52* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 19:37   |       |      |
-| Active                                                                      |         | 19:37 |      |
+| Stories                                                                     | 20:52   |       |      |
+| Active                                                                      |         | 20:52 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:57 |
 | COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
 | COMPLETED Name builder should take only model name                          |         |       | 0:48 |
@@ -36,6 +36,7 @@
 | POSTPONED Create a debug build for clang in travis                          |         |       | 0:12 |
 | COMPLETED How to attach helper methods to types dynamically                 |         |       | 1:16 |
 | COMPLETED How to handle composition and pointers                            |         |       | 1:18 |
+| STARTED Clean up usage of is pointer in yarn                                |         |       | 1:15 |
 | STARTED Rename aspect settings to element settings                          |         |       | 0:12 |
 #+end:
 
@@ -458,7 +459,31 @@ capacity to see the few elements in the stack. When a pattern emerges
 that involved types of a certain ID, they would stop creating any
 further associations.
 
-*** Partial clean up of object types                                  :story:
+*** STARTED Clean up usage of is pointer in yarn                      :story:
+    CLOCK: [2016-01-26 Tue 20:45]--[2016-01-26 Tue 22:00] =>  1:15
+
+We need to make our usage of is pointer more language neutral. In
+reality what we really mean is "can I use an incomplete class
+declaration for this type?". See [[http://www-01.ibm.com/support/knowledgecenter/SSPSQF_9.0.0/com.ibm.xlcpp111.aix.doc/language_ref/cplr060.html][Incomplete class declarations]]. We
+need to leave object types as is (e.g. with =smart_pointer=) because
+we won't be changing nested type info just now, but we should at least
+tidy up yarn properly.
+
+There are three moving parts to this task:
+
+- the association types in =Associatable=: we must not use the word
+  "weak" to avoid confusion with UML terminology. We can use one of
+  the following: opaque, incomplete, partial. In addition, "regular"
+  is also a bad word. The opposites would then be: transparent,
+  complete, full.
+- the type instantiation in =nested_name=: are children opaque?
+- the type itself: provides opaqueness? is opaqueness provider?
+
+Tasks:
+
+- create a property at object level: allows_incomplete
+
+*Previous Understanding*
 
 Tasks:
 
@@ -471,7 +496,9 @@ Tasks:
 We need to update all JSON documents, parser etc. Do not address the
 "user defined" entries at this point.
 
-*** Improve handling of weak relationships in nested name             :story:
+Merged stories:
+
+*Improve handling of weak relationships in nested name*
 
 Tasks:
 
@@ -634,7 +661,10 @@ available [[http://www.omg.org/spec/MOF/2.5][here]].
 We need a way to uniquely identify a property. This could be done by
 appending the containing type's qualified name to the property name.
 
-See also [[http://www.uml-diagrams.org/][The Unified Modeling Language]] for a more accessible treatment.
+See also [[http://www.uml-diagrams.org/][The Unified Modeling Language]] for a more accessible
+treatment.
+
+See [[http://www-01.ibm.com/support/knowledgecenter/SS5JSH_9.1.2/com.ibm.xtools.transform.uml2.cpp.doc/topics/rucppprofile.html][Stereotypes of the UML-to-C++ transformation profile]] for ideas.
 
 *** Remove =service= stereotype                                       :story:
 
