@@ -383,7 +383,7 @@ Name must be in one of the supported notations.#</dia:string>
         <dia:point val="-33,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-33.05,-1.05;-19.745,3.45"/>
+        <dia:rectangle val="-33.05,-1.05;-19.745,4.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-33,-1"/>
@@ -392,7 +392,7 @@ Name must be in one of the supported notations.#</dia:string>
         <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#nested_name#</dia:string>
@@ -538,7 +538,7 @@ composite pattern.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#is_pointer#</dia:string>
+            <dia:string>#opaque_children#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
@@ -547,7 +547,30 @@ composite pattern.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string># If true, the top-level type is a pointer. If false, its a stack variable.#</dia:string>
+            <dia:string># If true, the association with its children can be opaque.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#circular_dependency#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, the presence of parent name causes a circular dependency.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -607,7 +630,7 @@ composite pattern.#</dia:string>
         <dia:point val="-37.435,14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-38.185,3.35;-26.1975,14.8"/>
+        <dia:rectangle val="-38.185,4.15;-26.1975,14.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -616,7 +639,7 @@ composite pattern.#</dia:string>
         <dia:point val="-37.435,14"/>
         <dia:point val="-37.435,9"/>
         <dia:point val="-26.3975,9"/>
-        <dia:point val="-26.3975,3.4"/>
+        <dia:point val="-26.3975,4.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4436,7 +4459,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="-0.515,68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-33.33,67.95;0.335,78.05"/>
+        <dia:rectangle val="-36.33,67.95;0.335,78.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4444,8 +4467,8 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
       <dia:attribute name="orth_points">
         <dia:point val="-0.515,68"/>
         <dia:point val="-0.515,73"/>
-        <dia:point val="-33.28,73"/>
-        <dia:point val="-33.28,78"/>
+        <dia:point val="-36.28,73"/>
+        <dia:point val="-36.28,78"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4474,19 +4497,19 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O42">
       <dia:attribute name="obj_pos">
-        <dia:point val="-42,78"/>
+        <dia:point val="-45,78"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-42.05,77.95;-24.51,83.25"/>
+        <dia:rectangle val="-45.05,77.95;-27.51,84.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-42,78"/>
+        <dia:point val="-45,78"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.440000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#object#</dia:string>
@@ -4639,6 +4662,29 @@ decided instead to use the word object.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Elements that are keys in an associative container.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#provides_opaqueness#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, this type provides opaqueness to any type parameters it may have.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6803,17 +6849,17 @@ etc.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-33.28,83.2"/>
+        <dia:point val="-36.28,84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-34.03,82.45;-23.545,92.8"/>
+        <dia:rectangle val="-37.03,83.25;-23.545,92.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-33.28,83.2"/>
-        <dia:point val="-33.28,87"/>
+        <dia:point val="-36.28,84"/>
+        <dia:point val="-36.28,87"/>
         <dia:point val="-23.745,87"/>
         <dia:point val="-23.745,92"/>
       </dia:attribute>
@@ -15858,13 +15904,13 @@ Set to false if no parent exists, or if the parent is not visitable. #</dia:stri
         <dia:point val="-164,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-164.05,-1.05;-148.82,3.45"/>
+        <dia:rectangle val="-164.05,-1.05;-147.28,3.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-164,-1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.130000000000001"/>
+        <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -15959,7 +16005,7 @@ Set to false if no parent exists, or if the parent is not visitable. #</dia:stri
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#regular_associations#</dia:string>
+            <dia:string>#transparent_associations#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::list&lt;name&gt;#</dia:string>
@@ -15982,7 +16028,7 @@ Set to false if no parent exists, or if the parent is not visitable. #</dia:stri
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#weak_associations#</dia:string>
+            <dia:string>#opaque_associations#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::list&lt;name&gt;#</dia:string>
@@ -16456,17 +16502,17 @@ This is used to break cycles where required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O139">
       <dia:attribute name="obj_pos">
-        <dia:point val="-156.435,3.4"/>
+        <dia:point val="-155.665,3.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-157.285,3.35;-149.557,14.05"/>
+        <dia:rectangle val="-156.515,3.35;-149.557,14.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-156.435,3.4"/>
-        <dia:point val="-156.435,9"/>
+        <dia:point val="-155.665,3.4"/>
+        <dia:point val="-155.665,9"/>
         <dia:point val="-149.607,9"/>
         <dia:point val="-149.607,14"/>
       </dia:attribute>
