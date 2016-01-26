@@ -725,10 +725,10 @@ this is a long comment
 					<count>0</count>
 					<item_version>0</item_version>
 				</modeled_concepts>
-				<hash_container_keys>
+				<associative_container_keys>
 					<count>0</count>
 					<item_version>0</item_version>
-				</hash_container_keys>
+				</associative_container_keys>
 			</second>
 		</item>
 	</objects>

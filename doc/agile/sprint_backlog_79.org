@@ -459,6 +459,18 @@ capacity to see the few elements in the stack. When a pattern emerges
 that involved types of a certain ID, they would stop creating any
 further associations.
 
+*** COMPLETED Rename hash container to associative container          :story:
+    CLOSED: [2016-01-26 Tue 23:12]
+    CLOCK: [2016-01-26 Tue 22:30]--[2016-01-26 Tue 23:12] =>  0:42
+
+As part of the yarn tidy-up to avoid C++'isms, rename hash container
+to associative container and all associated names such as hash
+container keys, etc.
+
+Remove ordered container as we seem to use it for sets and maps but
+there is no difference in handling between these and the hash
+versions.
+
 *** STARTED Clean up usage of is pointer in yarn                      :story:
     CLOCK: [2016-01-26 Tue 20:45]--[2016-01-26 Tue 22:00] =>  1:15
 

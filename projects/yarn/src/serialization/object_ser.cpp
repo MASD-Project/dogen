@@ -66,7 +66,7 @@ void save(Archive& ar,
     ar << make_nvp("visitable_by", v.visitable_by_);
     ar << make_nvp("object_type", v.object_type_);
     ar << make_nvp("modeled_concepts", v.modeled_concepts_);
-    ar << make_nvp("hash_container_keys", v.hash_container_keys_);
+    ar << make_nvp("associative_container_keys", v.associative_container_keys_);
 }
 
 template<typename Archive>
@@ -93,7 +93,7 @@ void load(Archive& ar,
     ar >> make_nvp("visitable_by", v.visitable_by_);
     ar >> make_nvp("object_type", v.object_type_);
     ar >> make_nvp("modeled_concepts", v.modeled_concepts_);
-    ar >> make_nvp("hash_container_keys", v.hash_container_keys_);
+    ar >> make_nvp("associative_container_keys", v.associative_container_keys_);
 }
 
 } }

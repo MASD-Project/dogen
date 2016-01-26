@@ -43,14 +43,11 @@ std::ostream& operator<<(std::ostream& s, const object_types& v) {
     case object_types::smart_pointer:
         attr = "\"smart_pointer\"";
         break;
-    case object_types::hash_container:
-        attr = "\"hash_container\"";
+    case object_types::associative_container:
+        attr = "\"associative_container\"";
         break;
     case object_types::sequence_container:
         attr = "\"sequence_container\"";
-        break;
-    case object_types::ordered_container:
-        attr = "\"ordered_container\"";
         break;
     default:
         throw std::invalid_argument("Invalid value for object_types");

@@ -84,7 +84,7 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
 
     using hash = formatters::hash::traits;
     const auto hash_fn(hash::traits::class_header_formatter_name());
-    builder.add(o.hash_container_keys(), hash_fn);
+    builder.add(o.associative_container_keys(), hash_fn);
 
     if (o.is_visitable())
         builder.add(o.visitable_by(), self_fn);

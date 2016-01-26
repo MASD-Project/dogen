@@ -112,7 +112,7 @@ object::object(
     const std::list<dogen::yarn::name>& visitable_by,
     const dogen::yarn::object_types object_type,
     const std::list<dogen::yarn::name>& modeled_concepts,
-    const std::list<dogen::yarn::name>& hash_container_keys)
+    const std::list<dogen::yarn::name>& associative_container_keys)
     : dogen::yarn::element(
       documentation,
       extensions,
@@ -140,7 +140,7 @@ object::object(
       visitable_by_(visitable_by),
       object_type_(object_type),
       modeled_concepts_(modeled_concepts),
-      hash_container_keys_(hash_container_keys) { }
+      associative_container_keys_(associative_container_keys) { }
 
 void object::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -172,7 +172,7 @@ void object::to_stream(std::ostream& s) const {
       << "\"visitable_by\": " << visitable_by_ << ", "
       << "\"object_type\": " << object_type_ << ", "
       << "\"modeled_concepts\": " << modeled_concepts_ << ", "
-      << "\"hash_container_keys\": " << hash_container_keys_
+      << "\"associative_container_keys\": " << associative_container_keys_
       << " }";
 }
 
@@ -198,7 +198,7 @@ void object::swap(object& other) noexcept {
     swap(visitable_by_, other.visitable_by_);
     swap(object_type_, other.object_type_);
     swap(modeled_concepts_, other.modeled_concepts_);
-    swap(hash_container_keys_, other.hash_container_keys_);
+    swap(associative_container_keys_, other.associative_container_keys_);
 }
 
 bool object::equals(const dogen::yarn::element& other) const {
@@ -227,7 +227,7 @@ bool object::operator==(const object& rhs) const {
         visitable_by_ == rhs.visitable_by_ &&
         object_type_ == rhs.object_type_ &&
         modeled_concepts_ == rhs.modeled_concepts_ &&
-        hash_container_keys_ == rhs.hash_container_keys_;
+        associative_container_keys_ == rhs.associative_container_keys_;
 }
 
 object& object::operator=(object other) {
@@ -460,20 +460,20 @@ void object::modeled_concepts(const std::list<dogen::yarn::name>&& v) {
     modeled_concepts_ = std::move(v);
 }
 
-const std::list<dogen::yarn::name>& object::hash_container_keys() const {
-    return hash_container_keys_;
+const std::list<dogen::yarn::name>& object::associative_container_keys() const {
+    return associative_container_keys_;
 }
 
-std::list<dogen::yarn::name>& object::hash_container_keys() {
-    return hash_container_keys_;
+std::list<dogen::yarn::name>& object::associative_container_keys() {
+    return associative_container_keys_;
 }
 
-void object::hash_container_keys(const std::list<dogen::yarn::name>& v) {
-    hash_container_keys_ = v;
+void object::associative_container_keys(const std::list<dogen::yarn::name>& v) {
+    associative_container_keys_ = v;
 }
 
-void object::hash_container_keys(const std::list<dogen::yarn::name>&& v) {
-    hash_container_keys_ = std::move(v);
+void object::associative_container_keys(const std::list<dogen::yarn::name>&& v) {
+    associative_container_keys_ = std::move(v);
 }
 
 } }

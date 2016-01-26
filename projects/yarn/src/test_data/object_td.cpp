@@ -97,7 +97,7 @@ populate(const unsigned int position, result_type& v) {
     v.visitable_by(create_std_list_dogen_yarn_name(position + 15));
     v.object_type(create_dogen_yarn_object_types(position + 16));
     v.modeled_concepts(create_std_list_dogen_yarn_name(position + 17));
-    v.hash_container_keys(create_std_list_dogen_yarn_name(position + 18));
+    v.associative_container_keys(create_std_list_dogen_yarn_name(position + 18));
 }
 
 object_generator::result_type

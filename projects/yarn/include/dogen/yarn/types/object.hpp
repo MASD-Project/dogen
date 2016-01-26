@@ -85,7 +85,7 @@ public:
         const std::list<dogen::yarn::name>& visitable_by,
         const dogen::yarn::object_types object_type,
         const std::list<dogen::yarn::name>& modeled_concepts,
-        const std::list<dogen::yarn::name>& hash_container_keys);
+        const std::list<dogen::yarn::name>& associative_container_keys);
 
 private:
     template<typename Archive>
@@ -296,13 +296,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Elements that are keys in a hash container.
+     * @brief Elements that are keys in an associative container.
      */
     /**@{*/
-    const std::list<dogen::yarn::name>& hash_container_keys() const;
-    std::list<dogen::yarn::name>& hash_container_keys();
-    void hash_container_keys(const std::list<dogen::yarn::name>& v);
-    void hash_container_keys(const std::list<dogen::yarn::name>&& v);
+    const std::list<dogen::yarn::name>& associative_container_keys() const;
+    std::list<dogen::yarn::name>& associative_container_keys();
+    void associative_container_keys(const std::list<dogen::yarn::name>& v);
+    void associative_container_keys(const std::list<dogen::yarn::name>&& v);
     /**@}*/
 
 public:
@@ -337,7 +337,7 @@ private:
     std::list<dogen::yarn::name> visitable_by_;
     dogen::yarn::object_types object_type_;
     std::list<dogen::yarn::name> modeled_concepts_;
-    std::list<dogen::yarn::name> hash_container_keys_;
+    std::list<dogen::yarn::name> associative_container_keys_;
 };
 
 } }

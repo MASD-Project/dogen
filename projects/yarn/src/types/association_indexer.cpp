@@ -96,9 +96,9 @@ void association_indexer::recurse_nested_names(const intermediate_model& m,
      */
     bool is_first(true);
     for (const auto c : nn.children()) {
-        const auto hc(object_types::hash_container);
+        const auto hc(object_types::associative_container);
         if (is_first && k->second.object_type() == hc)
-            o.hash_container_keys().push_back(c.parent());
+            o.associative_container_keys().push_back(c.parent());
 
         recurse_nested_names(m, o, c, is_pointer);
         is_first = false;
@@ -129,8 +129,8 @@ index_object(const intermediate_model& m, object& o) const {
         remove_duplicates(o.weak_associations(), regular_associations);
     }
 
-    if (!o.hash_container_keys().empty())
-        remove_duplicates(o.hash_container_keys());
+    if (!o.associative_container_keys().empty())
+        remove_duplicates(o.associative_container_keys());
 }
 
 void association_indexer::index(intermediate_model& m) const {

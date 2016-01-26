@@ -61,8 +61,7 @@ const std::string extensions_key("extensions");
 
 const std::string object_type_key("object_type");
 const std::string object_type_smart_pointer_value("smart_pointer");
-const std::string object_type_ordered_container_value("ordered_container");
-const std::string object_type_hash_container_value("hash_container");
+const std::string object_type_associative_container_value("associative_container");
 const std::string object_type_sequence_container_value("sequence_container");
 
 const std::string invalid_json_file("Failed to parse JSON file");
@@ -230,10 +229,8 @@ to_object_type(const boost::optional<std::string>& s) const {
     const auto ot(*s);
     if (ot == object_type_smart_pointer_value)
         return yarn::object_types::smart_pointer;
-    else if (ot == object_type_ordered_container_value)
-        return yarn::object_types::ordered_container;
-    else if (ot == object_type_hash_container_value)
-        return yarn::object_types::hash_container;
+    else if (ot == object_type_associative_container_value)
+        return yarn::object_types::associative_container;
     else if (ot == object_type_sequence_container_value)
         return yarn::object_types::sequence_container;
 

@@ -185,7 +185,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "set",
-            "object_type" : "ordered_container",
+            "object_type" : "associative_container",
             "extensions" : {
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<set>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/set.hpp>",
@@ -198,7 +198,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "multiset",
-            "object_type" : "ordered_container",
+            "object_type" : "associative_container",
             "extensions" : {
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<multiset>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/multiset.hpp>",
@@ -211,7 +211,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "unordered_set",
-            "object_type" : "hash_container",
+            "object_type" : "associative_container",
             "extensions" : {
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<unordered_set>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/unordered_set.hpp>",
@@ -224,7 +224,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "map",
-            "object_type" : "ordered_container",
+            "object_type" : "associative_container",
             "extensions" : {
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<map>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/map.hpp>",
@@ -237,7 +237,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "multimap",
-            "object_type" : "ordered_container",
+            "object_type" : "associative_container",
             "extensions" : {
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<multimap>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/multimap.hpp>",
@@ -250,7 +250,7 @@
         {
             "meta_type" : "object",
             "simple_name" : "unordered_map",
-            "object_type" : "hash_container",
+            "object_type" : "associative_container",
             "extensions" : {
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<unordered_map>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/unordered_map.hpp>",

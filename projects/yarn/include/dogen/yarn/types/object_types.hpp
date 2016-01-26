@@ -39,9 +39,8 @@ enum class object_types : unsigned int {
     user_defined_service = 1, ///< The service has been defined by the user.
     user_defined_value_object = 2, ///< Regular value object with no distinguishing features.
     smart_pointer = 3, ///< Value is a smart pointer.
-    hash_container = 4, ///< Type is a hash-based container.
-    sequence_container = 5, ///< Type is a sequence container.
-    ordered_container = 6 ///< Type is a ordered container.
+    associative_container = 4, ///< Type is an associative container.
+    sequence_container = 5 ///< Type is a sequence container.
 };
 
 } }
