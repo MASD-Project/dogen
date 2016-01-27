@@ -18,24 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_ASPECT_SETTINGS_FWD_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_ASPECT_SETTINGS_FWD_SER_HPP
+#ifndef DOGEN_QUILT_CPP_TEST_DATA_SETTINGS_ELEMENT_SETTINGS_TD_HPP
+#define DOGEN_QUILT_CPP_TEST_DATA_SETTINGS_ELEMENT_SETTINGS_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/settings/aspect_settings_fwd.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace quilt {
+namespace cpp {
+namespace settings {
 
-template<class Archive>
-void save(Archive& ar, const dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
+class element_settings_generator {
+public:
+    element_settings_generator();
 
-template<class Archive>
-void load(Archive& ar, dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
+public:
+    typedef dogen::quilt::cpp::settings::element_settings result_type;
 
-} }
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} } } }
 
 #endif

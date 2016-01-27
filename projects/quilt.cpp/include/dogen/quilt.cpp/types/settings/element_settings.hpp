@@ -18,41 +18,41 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_SETTINGS_ASPECT_SETTINGS_HPP
-#define DOGEN_QUILT_CPP_TYPES_SETTINGS_ASPECT_SETTINGS_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_SETTINGS_ELEMENT_SETTINGS_HPP
+#define DOGEN_QUILT_CPP_TYPES_SETTINGS_ELEMENT_SETTINGS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
-#include "dogen/quilt.cpp/serialization/settings/aspect_settings_fwd_ser.hpp"
+#include "dogen/quilt.cpp/serialization/settings/element_settings_fwd_ser.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace settings {
 
-class aspect_settings final {
+class element_settings final {
 public:
-    aspect_settings(const aspect_settings&) = default;
-    aspect_settings(aspect_settings&&) = default;
-    ~aspect_settings() = default;
+    element_settings(const element_settings&) = default;
+    element_settings(element_settings&&) = default;
+    ~element_settings() = default;
 
 public:
-    aspect_settings();
+    element_settings();
 
 public:
-    aspect_settings(
+    element_settings(
         const bool disable_complete_constructor,
         const bool disable_xml_serialization);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const aspect_settings& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const element_settings& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, aspect_settings& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, element_settings& v, unsigned int version);
 
 public:
     bool disable_complete_constructor() const;
@@ -62,14 +62,14 @@ public:
     void disable_xml_serialization(const bool v);
 
 public:
-    bool operator==(const aspect_settings& rhs) const;
-    bool operator!=(const aspect_settings& rhs) const {
+    bool operator==(const element_settings& rhs) const;
+    bool operator!=(const element_settings& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(aspect_settings& other) noexcept;
-    aspect_settings& operator=(aspect_settings other);
+    void swap(element_settings& other) noexcept;
+    element_settings& operator=(element_settings other);
 
 private:
     bool disable_complete_constructor_;
@@ -82,8 +82,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::quilt::cpp::settings::aspect_settings& lhs,
-    dogen::quilt::cpp::settings::aspect_settings& rhs) {
+    dogen::quilt::cpp::settings::element_settings& lhs,
+    dogen::quilt::cpp::settings::element_settings& rhs) {
     lhs.swap(rhs);
 }
 

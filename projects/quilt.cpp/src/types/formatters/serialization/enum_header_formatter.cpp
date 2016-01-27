@@ -58,7 +58,7 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     builder.add(e.name(), types::traits::enum_header_formatter_name());
 
     using ic = inclusion_constants;
-    const auto as(builder.get_aspect_settings(e.name()));
+    const auto as(builder.get_element_settings(e.name()));
     if (!as.disable_xml_serialization())
         builder.add(ic::boost::serialization::nvp());
 

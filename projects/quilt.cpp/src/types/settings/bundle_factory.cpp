@@ -22,7 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
-#include "dogen/quilt.cpp/types/settings/aspect_settings_factory.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/bundle_factory.hpp"
 
 namespace {
@@ -51,9 +51,9 @@ create_general_settings(const dynamic::object& o) const {
     return general_settings_factory_.make(cpp_modeline_name, o);
 }
 
-aspect_settings bundle_factory::
-create_aspect_settings(const dynamic::object& o) const {
-    aspect_settings_factory f(dynamic_repository_, root_object_);
+element_settings bundle_factory::
+create_element_settings(const dynamic::object& o) const {
+    element_settings_factory f(dynamic_repository_, root_object_);
     return f.make(o);
 }
 
@@ -68,7 +68,7 @@ bundle bundle_factory::make(const dynamic::object& o) const {
     bundle r;
     r.general_settings(create_general_settings(o));
     r.opaque_settings(create_opaque_settings(o));
-    r.aspect_settings(create_aspect_settings(o));
+    r.element_settings(create_element_settings(o));
     return r;
 }
 
@@ -76,8 +76,8 @@ bundle bundle_factory::make() const {
     bundle r;
     r.general_settings(create_general_settings(root_object_));
 
-    aspect_settings_factory f(dynamic_repository_, root_object_);
-    r.aspect_settings(f.make());
+    element_settings_factory f(dynamic_repository_, root_object_);
+    r.element_settings(f.make());
     return r;
 
 }

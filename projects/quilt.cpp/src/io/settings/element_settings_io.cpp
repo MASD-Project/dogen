@@ -18,26 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_ASPECT_SETTINGS_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_ASPECT_SETTINGS_SER_HPP
+#include <ostream>
+#include <boost/io/ios_state.hpp>
+#include "dogen/quilt.cpp/io/settings/element_settings_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace quilt {
+namespace cpp {
+namespace settings {
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/quilt.cpp/types/settings/aspect_settings.hpp"
+std::ostream& operator<<(std::ostream& s, const element_settings& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::settings::aspect_settings)
-namespace boost {
-namespace serialization {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::settings::element_settings\"" << ", "
+      << "\"disable_complete_constructor\": " << v.disable_complete_constructor() << ", "
+      << "\"disable_xml_serialization\": " << v.disable_xml_serialization()
+      << " }";
+    return(s);
+}
 
-template<typename Archive>
-void save(Archive& ar, const dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
-
-} }
-
-#endif
+} } } }

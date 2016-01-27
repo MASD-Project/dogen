@@ -525,7 +525,9 @@ Tasks:
 - propagate these changes to nested type info and remove the composite
   vs domain type distinction in test data.
 
-*** STARTED Rename aspect settings to element settings                :story:
+*** COMPLETED Rename aspect settings to element settings              :story:
+    CLOSED: [2016-01-27 Wed 22:28]
+    CLOCK: [2016-01-27 Wed 22:14]--[2016-01-27 Wed 22:28] =>  0:14
     CLOCK: [2016-01-24 Sun 21:46]--[2016-01-24 Sun 21:58] =>  0:12
 
 These will no longer be confined to aspects so need to be

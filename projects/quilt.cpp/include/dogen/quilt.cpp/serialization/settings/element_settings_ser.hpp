@@ -18,30 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/settings/aspect_settings_hash.hpp"
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_ELEMENT_SETTINGS_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_ELEMENT_SETTINGS_SER_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
+#include <boost/serialization/split_free.hpp>
+#include "dogen/quilt.cpp/types/settings/element_settings.hpp"
 
-}
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::settings::element_settings)
+namespace boost {
+namespace serialization {
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
-namespace settings {
+template<typename Archive>
+void save(Archive& ar, const dogen::quilt::cpp::settings::element_settings& v, unsigned int version);
 
-std::size_t aspect_settings_hasher::hash(const aspect_settings& v) {
-    std::size_t seed(0);
+template<typename Archive>
+void load(Archive& ar, dogen::quilt::cpp::settings::element_settings& v, unsigned int version);
 
-    combine(seed, v.disable_complete_constructor());
-    combine(seed, v.disable_xml_serialization());
+} }
 
-    return seed;
-}
-
-} } } }
+#endif

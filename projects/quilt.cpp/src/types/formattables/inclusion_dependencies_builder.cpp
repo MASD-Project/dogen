@@ -162,8 +162,8 @@ bool inclusion_dependencies_builder::is_integrated(
     return r;
 }
 
-settings::aspect_settings inclusion_dependencies_builder::
-get_aspect_settings(const yarn::name& n) const {
+settings::element_settings inclusion_dependencies_builder::
+get_element_settings(const yarn::name& n) const {
     const auto& bn(bundle_repository_.bundles_by_name());
     const auto i(bn.find(n.qualified()));
     if (i == bn.end()) {
@@ -171,7 +171,7 @@ get_aspect_settings(const yarn::name& n) const {
         BOOST_LOG_SEV(lg, error) << name_not_found << qn;
         BOOST_THROW_EXCEPTION(building_error(name_not_found + qn));
     }
-    return i->second.aspect_settings();
+    return i->second.element_settings();
 }
 
 void inclusion_dependencies_builder::

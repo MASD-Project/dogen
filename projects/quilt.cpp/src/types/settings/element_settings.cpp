@@ -18,53 +18,53 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/settings/aspect_settings.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace settings {
 
-aspect_settings::aspect_settings()
+element_settings::element_settings()
     : disable_complete_constructor_(static_cast<bool>(0)),
       disable_xml_serialization_(static_cast<bool>(0)) { }
 
-aspect_settings::aspect_settings(
+element_settings::element_settings(
     const bool disable_complete_constructor,
     const bool disable_xml_serialization)
     : disable_complete_constructor_(disable_complete_constructor),
       disable_xml_serialization_(disable_xml_serialization) { }
 
-void aspect_settings::swap(aspect_settings& other) noexcept {
+void element_settings::swap(element_settings& other) noexcept {
     using std::swap;
     swap(disable_complete_constructor_, other.disable_complete_constructor_);
     swap(disable_xml_serialization_, other.disable_xml_serialization_);
 }
 
-bool aspect_settings::operator==(const aspect_settings& rhs) const {
+bool element_settings::operator==(const element_settings& rhs) const {
     return disable_complete_constructor_ == rhs.disable_complete_constructor_ &&
         disable_xml_serialization_ == rhs.disable_xml_serialization_;
 }
 
-aspect_settings& aspect_settings::operator=(aspect_settings other) {
+element_settings& element_settings::operator=(element_settings other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool aspect_settings::disable_complete_constructor() const {
+bool element_settings::disable_complete_constructor() const {
     return disable_complete_constructor_;
 }
 
-void aspect_settings::disable_complete_constructor(const bool v) {
+void element_settings::disable_complete_constructor(const bool v) {
     disable_complete_constructor_ = v;
 }
 
-bool aspect_settings::disable_xml_serialization() const {
+bool element_settings::disable_xml_serialization() const {
     return disable_xml_serialization_;
 }
 
-void aspect_settings::disable_xml_serialization(const bool v) {
+void element_settings::disable_xml_serialization(const bool v) {
     disable_xml_serialization_ = v;
 }
 

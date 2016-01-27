@@ -104,7 +104,7 @@ public:
      *
      * @pre name must exist in the settings bundle repository.
      */
-    settings::aspect_settings get_aspect_settings(const yarn::name& n) const;
+    settings::element_settings get_element_settings(const yarn::name& n) const;
 
 public:
     /**

@@ -12378,10 +12378,10 @@ for a given C++ entity.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#aspect_settings#</dia:string>
+            <dia:string>#element_settings#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#settings::aspect_settings#</dia:string>
+            <dia:string>#settings::element_settings#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -27937,7 +27937,7 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#aspect_settings#</dia:string>
+        <dia:string>#element_settings#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -28095,7 +28095,7 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="5.2000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#aspect_settings_factory#</dia:string>
+        <dia:string>#element_settings_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
