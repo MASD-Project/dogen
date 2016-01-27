@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-26 Tue 23:27]
+#+CAPTION: Clock summary at [2016-01-27 Wed 21:38]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *21:48* |       |      |
+| *Total time*                                                                | *22:05* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 21:48   |       |      |
-| Active                                                                      |         | 21:48 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:57 |
+| Stories                                                                     | 22:05   |       |      |
+| Active                                                                      |         | 22:05 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 3:14 |
 | COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
 | COMPLETED Name builder should take only model name                          |         |       | 0:48 |
 | COMPLETED Generate exceptions using yarn types                              |         |       | 2:21 |
@@ -42,6 +42,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-01-27 Wed 21:20]--[2016-01-27 Wed 21:37] =>  0:17
     CLOCK: [2016-01-24 Sun 23:19]--[2016-01-24 Sun 23:26] =>  0:07
     CLOCK: [2016-01-24 Sun 15:10]--[2016-01-24 Sun 15:28] =>  0:18
     CLOCK: [2016-01-23 Sat 20:40]--[2016-01-23 Sat 21:56] =>  1:16

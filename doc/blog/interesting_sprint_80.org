@@ -1,0 +1,48 @@
+#+title: Nerd Food: Interesting...
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+Time to flush all those tabs again. Some interesting stuff I bumped
+into recently-ish.
+
+* Finance, Economics, Politics
+
+- [[http://www.ted.com/talks/yanis_varoufakis_capitalism_will_eat_democracy_unless_we_speak_up?utm_campaign%3Dsocial&utm_medium%3Dreferral&utm_source%3Dt.co&utm_content%3Dtalk&utm_term%3Dglobal-social%2520issues#t-874630][Yanis Varoufakis: Capitalism will eat democracy -- unless we speak
+  up]]: Very interesting Ted talk by Varoufakis.
+
+* Startups et al.
+
+- Spotify engineering culture: [[https://labs.spotify.com/2014/03/27/spotify-engineering-culture-part-1/][Part I]], [[https://labs.spotify.com/2014/09/20/spotify-engineering-culture-part-2/][Part II]]. "Oldie" but
+  goodie. How a modern company is organised, for raw efficiency.
+- [[http://www.themacro.com/articles/2016/01/advice-startups-running-out-of-money/][Advice for Companies With Less Than 1 Year of Runway]]: Lots of useful
+  bits of advice for how to manage your runway. Source: Hacker News
+  (twitter).
+
+* General Coding
+
+- [[http://www.nytimes.com/2016/01/26/business/marvin-minsky-pioneer-in-artificial-intelligence-dies-at-88.html][Marvin Minsky, Pioneer in Artificial Intelligence, Dies at 88]]:
+  Minsky is no more. Sad day for our field.
+- [[https://medium.com/backchannel/marvin-minsky-s-marvelous-meat-machine-f436aec02fdf#.qcarjjdif][Marvin Minsky’s Marvelous Meat Machine]]: Levy's eulogy to Minsky. I
+  met Minsky through [[http://www.amazon.co.uk/Hackers-Heroes-Computer-Revolution-Anniversary/dp/1449388396/ref%3Dsr_1_3?ie%3DUTF8&qid%3D1453930109&sr%3D8-3&keywords%3Dhackers][Hackers]] so this is particularly poignant.
+- [[http://blog.stephenwolfram.com/2016/01/farewell-marvin-minsky-19272016/][Farewell, Marvin Minsky (1927–2016)]]: Wolfram's eulogy to
+  Minsky. Most excellent and, dare I say, almost humble.
+- [[https://github.com/blog/2042-git-2-5-including-multiple-worktrees-and-triangular-workflows][Git 2.5, including multiple worktrees and triangular workflows]]: I
+  seemed to have missed this extremely useful new feature in Git. If
+  you have too, check it out.
+
+* Databases
+
+
+* C++
+
+
+* Layperson Science
+
+- [[http://www.sciencefriday.com/segments/when-water-flows-uphill/][When Water Flows Uphill]]: How science can be great fun. Dying to try
+  this with my kids. Source: Hacker News (twitter)
+- [[http://gizmodo.com/heres-why-finding-gravitational-waves-would-be-such-a-b-1752286165][Why Finding Gravitational Waves Would Be Such a Big Deal]]: Layperson
+  introduction to gravitational waves and why they are important.
+
+* Other
+
+- [[http://www.bbc.co.uk/iplayer/episode/b06vm9qp/empire-of-the-tsars-romanov-russia-with-lucy-worsley-1-reinventing-russia][Empire of the Tsars: Romanov Russia]]: Great BBC documentary about Russian history.
+- [[http://www.bbc.co.uk/iplayer/episode/b06y8hyr/the-brain-with-david-eagleman-1-what-is-reality][The Brain with David Eagleman]]: BBC documentary about the brain.
