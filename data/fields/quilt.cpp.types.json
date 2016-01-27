@@ -29,19 +29,6 @@
     },
     {
         "name" : {
-            "simple" : "integrated_facet",
-            "qualified" : "quilt.cpp.types.integrated_facet"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp",
-            "facet_name" : "quilt.cpp.types"
-        },
-        "value_type" : "text_collection",
-        "definition_type" : "instance",
-        "scope" : "root_module"
-    },
-    {
-        "name" : {
             "simple" : "postfix",
             "qualified" : "quilt.cpp.types.class_header_formatter.postfix"
         },

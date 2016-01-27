@@ -68,7 +68,6 @@ path input_enable_facet_serialization_dia(
     "yarn.dia/input/enable_facet_serialization.dia"
     );
 path input_rename_facet_folder_dia("yarn.dia/input/rename_facet_folder.dia");
-path input_use_integrated_io_dia("yarn.dia/input/use_integrated_io.dia");
 path input_all_primitives_dia("yarn.dia/input/all_primitives.dia");
 path input_trivial_inheritance_dia("yarn.dia/input/trivial_inheritance.dia");
 path input_trivial_association_dia("yarn.dia/input/trivial_association.dia");
@@ -383,10 +382,6 @@ path yarn_dia::input_enable_facet_serialization_dia() {
 
 path yarn_dia::input_rename_facet_folder_dia() {
     return validating_resolver::resolve(::input_rename_facet_folder_dia);
-}
-
-path yarn_dia::input_use_integrated_io_dia() {
-    return validating_resolver::resolve(::input_use_integrated_io_dia);
 }
 
 path yarn_dia::input_all_primitives_dia() {

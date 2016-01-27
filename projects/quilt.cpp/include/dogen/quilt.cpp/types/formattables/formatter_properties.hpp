@@ -28,7 +28,6 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include <unordered_set>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/quilt.cpp/serialization/formattables/formatter_properties_fwd_ser.hpp"
@@ -54,8 +53,7 @@ public:
         const bool enabled,
         const boost::filesystem::path& file_path,
         const boost::optional<std::string>& header_guard,
-        const std::list<std::string>& inclusion_dependencies,
-        const std::unordered_set<std::string>& integrated_facets);
+        const std::list<std::string>& inclusion_dependencies);
 
 private:
     template<typename Archive>
@@ -83,11 +81,6 @@ public:
     void inclusion_dependencies(const std::list<std::string>& v);
     void inclusion_dependencies(const std::list<std::string>&& v);
 
-    const std::unordered_set<std::string>& integrated_facets() const;
-    std::unordered_set<std::string>& integrated_facets();
-    void integrated_facets(const std::unordered_set<std::string>& v);
-    void integrated_facets(const std::unordered_set<std::string>&& v);
-
 public:
     bool operator==(const formatter_properties& rhs) const;
     bool operator!=(const formatter_properties& rhs) const {
@@ -103,7 +96,6 @@ private:
     boost::filesystem::path file_path_;
     boost::optional<std::string> header_guard_;
     std::list<std::string> inclusion_dependencies_;
-    std::unordered_set<std::string> integrated_facets_;
 };
 
 } } } }

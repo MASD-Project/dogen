@@ -275,14 +275,6 @@ a.stream() << std::endl;
             }
 
             /*
-             * Global inserter operator implementation
-             */
-            if (a.is_io_enabled() && a.is_io_integrated()) {
-a.stream() << "    std::ostream& operator<<(std::ostream& s, const " << c.name() << "& v);" << std::endl;
-a.stream() << std::endl;
-            }
-
-            /*
              * Global equality operator implementation.
              */
             if (c.is_parent()) {

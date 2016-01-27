@@ -56,8 +56,6 @@ const std::string expected("/expected");
 const std::string actual("/actual");
 
 const std::string domain_facet_must_be_enabled("Domain facet must be enabled");
-const std::string io_facet_and_integrated_io_error(
-    "Integrated IO cannot be used with the IO facet");
 const std::string dia_invalid_name("Dia object name is empty");
 
 bool generate_and_diff(const boost::filesystem::path& target,

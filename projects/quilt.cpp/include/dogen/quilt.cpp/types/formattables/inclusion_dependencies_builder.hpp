@@ -32,7 +32,6 @@
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/enablement_repository.hpp"
-#include "dogen/quilt.cpp/types/formattables/integrated_facets_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_directives_repository.hpp"
 
 namespace dogen {
@@ -68,8 +67,7 @@ public:
     inclusion_dependencies_builder(
         const enablement_repository& erp,
         const settings::bundle_repository& brp,
-        const inclusion_directives_repository& idrp,
-        const integrated_facets_repository& ifrp);
+        const inclusion_directives_repository& idrp);
 
 private:
     /**
@@ -92,12 +90,6 @@ public:
      */
     bool is_enabled(const yarn::name& n,
         const std::string& formatter_name) const;
-
-    /**
-     * @brief Returns true if the facet is integrated.
-     */
-    bool is_integrated(const std::string& formatter_name,
-        const std::string& facet_name) const;
 
     /**
      * @brief Returns the aspect settings for the supplied name.
@@ -136,7 +128,6 @@ private:
     const enablement_repository& enablement_repository_;
     const settings::bundle_repository& bundle_repository_;
     const inclusion_directives_repository& directives_repository_;
-    const integrated_facets_repository& integrated_facets_repository_;
     std::list<std::string> inclusion_dependencies_;
 };
 

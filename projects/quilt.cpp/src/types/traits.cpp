@@ -44,11 +44,6 @@ std::string traits::postfix() {
     return r;
 }
 
-std::string traits::integrated_facet() {
-    static std::string r("integrated_facet");
-    return r;
-}
-
 std::string traits::file_path() {
     static std::string r("file_path");
     return r;

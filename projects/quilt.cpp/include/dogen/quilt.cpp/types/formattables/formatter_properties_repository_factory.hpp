@@ -38,7 +38,6 @@
 #include "dogen/quilt.cpp/types/formattables/registrar.hpp"
 #include "dogen/quilt.cpp/types/formattables/enablement_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/path_derivatives_repository.hpp"
-#include "dogen/quilt.cpp/types/formattables/integrated_facets_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_properties_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_directives_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_repository.hpp"
@@ -96,14 +95,6 @@ private:
         const yarn::model& m) const;
 
     /**
-     * @brief Creates integrated facets repository
-     */
-    integrated_facets_repository create_integrated_facets_repository(
-        const dynamic::repository& srp,
-        const dynamic::object& root_object,
-        const formatters::container& fc) const;
-
-    /**
      * @brief Merge all data structures.
      */
     std::unordered_map<yarn::name, merged_formatter_data>
@@ -116,8 +107,7 @@ private:
      */
     formatter_properties_repository
     create_formatter_properties(
-        const std::unordered_map<yarn::name, merged_formatter_data>& mfd,
-        const integrated_facets_repository& ifrp) const;
+        const std::unordered_map<yarn::name, merged_formatter_data>& mfd) const;
 
 public:
     formatter_properties_repository make(

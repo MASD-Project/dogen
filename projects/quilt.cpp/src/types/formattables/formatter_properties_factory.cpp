@@ -34,9 +34,7 @@ formatter_properties_factory::make(
     path_derivatives,
     const std::unordered_map<std::string, std::list<std::string> >&
     inclusion_dependencies,
-    const std::unordered_map<std::string, bool>& enablement,
-    const std::unordered_map<std::string, std::unordered_set<std::string> >
-    integrated_facets) const {
+    const std::unordered_map<std::string, bool>& enablement) const {
 
     std::unordered_map<std::string, formatter_properties> r;
     for (const auto& pair : path_derivatives) {
@@ -46,9 +44,6 @@ formatter_properties_factory::make(
 
     for (const auto& pair : inclusion_dependencies)
         r[pair.first].inclusion_dependencies(pair.second);
-
-    for (const auto& pair : integrated_facets)
-        r[pair.first].integrated_facets(pair.second);
 
     for (const auto& pair : enablement)
         r[pair.first].enabled(pair.second);

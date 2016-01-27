@@ -52,14 +52,6 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     return seed;
 }
 
-inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<std::string>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -74,7 +66,6 @@ std::size_t formatter_properties_hasher::hash(const formatter_properties& v) {
     combine(seed, hash_boost_filesystem_path(v.file_path()));
     combine(seed, hash_boost_optional_std_string(v.header_guard()));
     combine(seed, hash_std_list_std_string(v.inclusion_dependencies()));
-    combine(seed, hash_std_unordered_set_std_string(v.integrated_facets()));
 
     return seed;
 }

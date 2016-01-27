@@ -59,20 +59,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace quilt {
 namespace cpp {
@@ -90,8 +76,7 @@ std::ostream& operator<<(std::ostream& s, const formatter_properties& v) {
       << "\"enabled\": " << v.enabled() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"header_guard\": " << v.header_guard() << ", "
-      << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "
-      << "\"integrated_facets\": " << v.integrated_facets()
+      << "\"inclusion_dependencies\": " << v.inclusion_dependencies()
       << " }";
     return(s);
 }

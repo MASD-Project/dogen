@@ -57,12 +57,6 @@ struct traits {
     static std::string postfix();
 
     /**
-     * @brief All facets that have been integrated with the present
-     * facet.
-     */
-    static std::string integrated_facet();
-
-    /**
      * @brief Full path to the file for this formatter.
      */
     static std::string file_path();

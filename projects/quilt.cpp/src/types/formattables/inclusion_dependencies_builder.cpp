@@ -57,12 +57,10 @@ namespace formattables {
 inclusion_dependencies_builder::
 inclusion_dependencies_builder(const enablement_repository& erp,
     const settings::bundle_repository& brp,
-    const inclusion_directives_repository& idrp,
-    const integrated_facets_repository& ifrp)
+    const inclusion_directives_repository& idrp)
     : enablement_repository_(erp),
       bundle_repository_(brp),
-      directives_repository_(idrp),
-      integrated_facets_repository_(ifrp) {}
+      directives_repository_(idrp) { }
 
 boost::optional<std::string>
 inclusion_dependencies_builder::get_inclusion_directive(
@@ -139,25 +137,6 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
         BOOST_LOG_SEV(lg, debug) << "Formatter disabled. Formatter: "
                                  << formatter_name << " on type: "
                                  << n.qualified() << "'";
-    }
-    return r;
-}
-
-bool inclusion_dependencies_builder::is_integrated(
-    const std::string& formatter_name, const std::string& facet_name) const {
-    const auto& ifrp(integrated_facets_repository_);
-    const auto& iffn(ifrp.integrated_facets_by_formatter_name());
-
-    const auto i(iffn.find(formatter_name));
-    if (i == iffn.end())
-        return false;
-
-    const auto j(i->second.find(facet_name));
-    const bool r(j != i->second.end());
-
-    if (!r) {
-        BOOST_LOG_SEV(lg, debug) << "Facet not integrated. "
-                                 << " Facet: '" << facet_name << "'";
     }
     return r;
 }

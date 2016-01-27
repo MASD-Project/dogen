@@ -160,14 +160,6 @@ is_formatter_enabled(const std::string& formatter_name) const {
     return fp->enabled();
 }
 
-bool assistant::
-is_facet_integrated(const std::string& facet_name) const {
-    ensure_formatter_properties_are_present();
-    const auto& f(formatter_properties_->integrated_facets());
-    const auto i(f.find(facet_name));
-    return i != f.end();
-}
-
 bool assistant::is_serialization_enabled() const {
     using formatters::serialization::traits;
     return is_formatter_enabled(traits::class_header_formatter_name());
@@ -176,11 +168,6 @@ bool assistant::is_serialization_enabled() const {
 bool assistant::is_io_enabled() const {
     using formatters::io::traits;
     return is_formatter_enabled(traits::class_header_formatter_name());
-}
-
-bool assistant::is_io_integrated() const {
-    using formatters::io::traits;
-    return is_facet_integrated(traits::facet_name());
 }
 
 bool assistant::is_hash_enabled() const {
@@ -340,8 +327,7 @@ void assistant::add_helper_methods(const formattables::class_info& c) {
     const auto fn(ownership_hierarchy_.formatter_name());
     const bool is_types_class_implementation(fn == cifn);
     const bool in_inheritance(c.is_parent() || !c.parents().empty());
-    const bool requires_io(is_io_enabled() &&
-        (in_inheritance || is_io_integrated()));
+    const bool requires_io(is_io_enabled() && in_inheritance);
 
     if (is_types_class_implementation && requires_io) {
         BOOST_LOG_SEV(lg, debug) << "Creating io helper methods in types.";
@@ -356,7 +342,7 @@ void assistant::add_helper_methods(const formattables::class_info& c) {
     using iot = formatters::io::traits;
     const auto io_ci_fn(iot::class_implementation_formatter_name());
     const bool is_io_class_implementation(fn == io_ci_fn);
-    if (is_io_class_implementation && !in_inheritance && !is_io_integrated()) {
+    if (is_io_class_implementation && !in_inheritance) {
         BOOST_LOG_SEV(lg, debug) << "Creating io helper methods.";
         io::helper_methods_formatter f(c.properties());
         f.format(stream());

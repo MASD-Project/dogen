@@ -28,19 +28,16 @@ namespace formattables {
 inclusion_dependencies_builder_factory::inclusion_dependencies_builder_factory(
     const enablement_repository& erp,
     const settings::bundle_repository& brp,
-    const inclusion_directives_repository& idrp,
-    const integrated_facets_repository& ifrp)
+    const inclusion_directives_repository& idrp)
     : enablement_repository_(erp), bundle_repository_(brp),
-      directives_repository_(idrp),
-      integrated_facets_repository_(ifrp) {}
+      directives_repository_(idrp) { }
 
 inclusion_dependencies_builder inclusion_dependencies_builder_factory::
 make() const {
     return inclusion_dependencies_builder(
         enablement_repository_,
         bundle_repository_,
-        directives_repository_,
-        integrated_facets_repository_);
+        directives_repository_);
 }
 
 } } } }

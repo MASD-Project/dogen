@@ -55,14 +55,6 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
-std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int position) {
-    std::unordered_set<std::string> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(create_std_string(position + i));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -78,7 +70,6 @@ populate(const unsigned int position, result_type& v) {
     v.file_path(create_boost_filesystem_path(position + 1));
     v.header_guard(create_boost_optional_std_string(position + 2));
     v.inclusion_dependencies(create_std_list_std_string(position + 3));
-    v.integrated_facets(create_std_unordered_set_std_string(position + 4));
 }
 
 formatter_properties_generator::result_type

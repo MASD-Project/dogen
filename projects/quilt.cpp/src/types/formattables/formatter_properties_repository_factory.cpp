@@ -25,7 +25,6 @@
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_properties_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/enablement_repository_factory.hpp"
-#include "dogen/quilt.cpp/types/formattables/integrated_facets_repository_factory.hpp"
 #include "dogen/quilt.cpp/io/formattables/formatter_properties_repository_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_properties_repository_factory.hpp"
 
@@ -79,14 +78,6 @@ create_enablement_repository(const dynamic::repository& srp,
     return f.make(srp, root_object, fc, m);
 }
 
-integrated_facets_repository formatter_properties_repository_factory::
-create_integrated_facets_repository(const dynamic::repository& srp,
-    const dynamic::object& root_object,
-    const formatters::container& fc) const {
-    integrated_facets_repository_factory f;
-    return f.make(srp, root_object, fc);
-}
-
 std::unordered_map<
     yarn::name,
     formatter_properties_repository_factory::merged_formatter_data
@@ -109,10 +100,9 @@ formatter_properties_repository_factory::merge(
     return r;
 }
 
-formatter_properties_repository formatter_properties_repository_factory::
-create_formatter_properties(
-    const std::unordered_map<yarn::name, merged_formatter_data>& mfd,
-    const integrated_facets_repository& ifrp) const {
+formatter_properties_repository
+formatter_properties_repository_factory::create_formatter_properties(
+    const std::unordered_map<yarn::name, merged_formatter_data>& mfd) const {
 
     formatter_properties_repository r;
     formatter_properties_factory f;
@@ -120,8 +110,7 @@ create_formatter_properties(
         r.formatter_properties_by_name()[pair.first.qualified()] = f.make(
             pair.second.path_derivatives_,
             pair.second.inclusion_dependencies,
-            pair.second.enablement,
-            ifrp.integrated_facets_by_formatter_name());
+            pair.second.enablement);
     }
 
     return r;
@@ -136,16 +125,15 @@ make(const dynamic::repository& srp, const dynamic::object& root_object,
     BOOST_LOG_SEV(lg, debug) << "Building formatter properties repository.";
     const auto idrp(create_inclusion_directives_repository(srp, fc, pdrp, m));
     const auto erp(create_enablement_repository(srp, root_object, fc, m));
-    const auto ifrp(create_integrated_facets_repository(srp, root_object, fc));
 
     registrar rg;
     initialise_registrar(fc, rg);
     const auto pc(rg.container());
-    const inclusion_dependencies_builder_factory bf(erp, brp, idrp, ifrp);
+    const inclusion_dependencies_builder_factory bf(erp, brp, idrp);
     const auto dprp(create_inclusion_dependencies_repository(bf, pc, m));
 
     const auto mfd(merge(pdrp, dprp, erp));
-    const auto r(create_formatter_properties(mfd, ifrp));
+    const auto r(create_formatter_properties(mfd));
 
     BOOST_LOG_SEV(lg, debug) << "Built formatter properties repository: " << r;
     return r;
