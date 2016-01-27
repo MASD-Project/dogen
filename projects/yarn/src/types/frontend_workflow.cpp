@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/yarn/types/persister.hpp"
