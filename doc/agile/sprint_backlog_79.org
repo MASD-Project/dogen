@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-27 Wed 23:23]
+#+CAPTION: Clock summary at [2016-01-27 Wed 23:32]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *23:44* |       |      |
+| *Total time*                                                                | *23:53* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 23:44   |       |      |
-| Active                                                                      |         | 23:44 |      |
+| Stories                                                                     | 23:53   |       |      |
+| Active                                                                      |         | 23:53 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:14 |
 | COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
 | COMPLETED Name builder should take only model name                          |         |       | 0:48 |
@@ -40,6 +40,7 @@
 | COMPLETED Clean up usage of is pointer in yarn                              |         |       | 2:03 |
 | COMPLETED Rename aspect settings to element settings                        |         |       | 0:26 |
 | COMPLETED Remove support for integrated io                                  |         |       | 0:37 |
+| CANCELLED Implement io for inheritance in the io facet                      |         |       | 0:09 |
 | STARTED Add a field for =quilt.cpp.family=                                  |         |       | 0:14 |
 #+end:
 
@@ -546,7 +547,13 @@ complexity - its the only case where a feature can either be part of a
 facet (types) or exist as its own facet (io). Remove it, and leave
 just the io facet.
 
-*** Implement io for inheritance in the io facet                      :story:
+*** CANCELLED Implement io for inheritance in the io facet            :story:
+    CLOSED: [2016-01-27 Wed 23:31]
+    CLOCK: [2016-01-27 Wed 23:22]--[2016-01-27 Wed 23:31] =>  0:09
+
+*Rationale*: this cannot be done; it is a limitation of how resolution
+works in the presence of inheritance. See [[http://stackoverflow.com/questions/4164902/overloading-and-in-inherited-classes][Overloading << and >> in
+inherited classes]].
 
 At present we use the types facet to implement io when in
 inheritance. This causes unnecessary complexity in the formatter
