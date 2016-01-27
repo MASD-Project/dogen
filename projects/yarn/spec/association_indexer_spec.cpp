@@ -105,8 +105,8 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_property_results_in_expected_indices) 
     BOOST_REQUIRE(m.objects().size() == 1);
 
     const auto& o(m.objects().begin()->second);
-    BOOST_CHECK(o.regular_associations().size() == 1);
-    BOOST_CHECK(o.weak_associations().empty());
+    BOOST_CHECK(o.transparent_associations().size() == 1);
+    BOOST_CHECK(o.opaque_associations().empty());
 }
 
 BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_association_indexer) {
@@ -139,8 +139,8 @@ BOOST_AUTO_TEST_CASE(model_with_more_than_one_property_of_the_same_type_results_
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n) || factory.is_type_name_n(1, n)) {
-            BOOST_CHECK(o.regular_associations().size() == 1);
-            BOOST_CHECK(o.weak_associations().empty());
+            BOOST_CHECK(o.transparent_associations().size() == 1);
+            BOOST_CHECK(o.opaque_associations().empty());
         } else
             BOOST_FAIL("Unexpected object: " << n.qualified());
     }
@@ -164,11 +164,11 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
 
         if (factory.is_type_name_n(0, n)) {
             found0 = true;
-            BOOST_CHECK(o.regular_associations().size() == 4);
+            BOOST_CHECK(o.transparent_associations().size() == 4);
 
             std::vector<bool> found;
             found.resize(4);
-            for (const auto& n : o.regular_associations()) {
+            for (const auto& n : o.transparent_associations()) {
                 if (n.simple() == "shared_ptr")
                     found[0] = true;
 
@@ -185,17 +185,17 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
             for (const auto b : found)
                 BOOST_CHECK(b);
 
-            BOOST_REQUIRE(o.weak_associations().size() == 1);
-            const auto sn(o.weak_associations().front().simple());
+            BOOST_REQUIRE(o.opaque_associations().size() == 1);
+            const auto sn(o.opaque_associations().front().simple());
             BOOST_CHECK(factory.is_type_name_n(3, sn));
         } else if (factory.is_type_name_n(1, n)) {
             found1 = true;
-            BOOST_CHECK(o.regular_associations().empty());
-            BOOST_CHECK(o.weak_associations().empty());
+            BOOST_CHECK(o.transparent_associations().empty());
+            BOOST_CHECK(o.opaque_associations().empty());
         } else if (factory.is_type_name_n(3, n)) {
             found3 = true;
-            BOOST_CHECK(o.regular_associations().empty());
-            BOOST_CHECK(o.weak_associations().empty());
+            BOOST_CHECK(o.transparent_associations().empty());
+            BOOST_CHECK(o.opaque_associations().empty());
         }
         // ignore boost shared ptr, pair, etc
     }
@@ -224,10 +224,10 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
 
         if (factory.is_type_name_n(0, n)) {
             found0 = true;
-            BOOST_CHECK(o.regular_associations().size() == 4);
+            BOOST_CHECK(o.transparent_associations().size() == 4);
             std::vector<bool> found;
             found.resize(4);
-            for (const auto& n : o.regular_associations()) {
+            for (const auto& n : o.transparent_associations()) {
                 if (n.simple() == "shared_ptr")
                     found[0] = true;
 
@@ -244,17 +244,17 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
             for (const auto b : found)
                 BOOST_CHECK(b);
 
-            BOOST_REQUIRE(o.weak_associations().size() == 1);
-            const auto sn(o.weak_associations().front().simple());
+            BOOST_REQUIRE(o.opaque_associations().size() == 1);
+            const auto sn(o.opaque_associations().front().simple());
             BOOST_CHECK(factory.is_type_name_n(3, sn));
         } else if (factory.is_type_name_n(1, n)) {
             found1 = true;
-            BOOST_CHECK(o.regular_associations().empty());
-            BOOST_CHECK(o.weak_associations().empty());
+            BOOST_CHECK(o.transparent_associations().empty());
+            BOOST_CHECK(o.opaque_associations().empty());
         } else if (factory.is_type_name_n(3, n)) {
             found3 = true;
-            BOOST_CHECK(o.regular_associations().empty());
-            BOOST_CHECK(o.weak_associations().empty());
+            BOOST_CHECK(o.transparent_associations().empty());
+            BOOST_CHECK(o.opaque_associations().empty());
         }
         // ignore boost shared ptr, pair, etc
     }
@@ -284,10 +284,10 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_property_results_in_expected_indic
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
-            BOOST_REQUIRE(o.regular_associations().size() == 1);
-            const auto sn(o.regular_associations().begin()->simple());
+            BOOST_REQUIRE(o.transparent_associations().size() == 1);
+            const auto sn(o.transparent_associations().begin()->simple());
             BOOST_CHECK(sn == "unsigned int");
-            BOOST_CHECK(o.weak_associations().empty());
+            BOOST_CHECK(o.opaque_associations().empty());
         } else
             BOOST_FAIL("Unexpected object: " << n.qualified());
     }
@@ -313,10 +313,10 @@ BOOST_AUTO_TEST_CASE(object_with_bool_property_results_in_expected_indices) {
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
-            BOOST_REQUIRE(o.regular_associations().size() == 1);
-            const auto sn(o.regular_associations().begin()->simple());
+            BOOST_REQUIRE(o.transparent_associations().size() == 1);
+            const auto sn(o.transparent_associations().begin()->simple());
             BOOST_CHECK(sn == "bool");
-            BOOST_CHECK(o.weak_associations().empty());
+            BOOST_CHECK(o.opaque_associations().empty());
         } else
             BOOST_FAIL("Unexpected object: " << n.qualified());
     }
@@ -339,13 +339,13 @@ BOOST_AUTO_TEST_CASE(object_with_object_property_results_in_expected_indices) {
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
-            BOOST_REQUIRE(o.regular_associations().size() == 1);
-            const auto sn(o.regular_associations().begin()->simple());
+            BOOST_REQUIRE(o.transparent_associations().size() == 1);
+            const auto sn(o.transparent_associations().begin()->simple());
             BOOST_CHECK(factory.is_type_name_n(1, sn));
-            BOOST_CHECK(o.weak_associations().empty());
+            BOOST_CHECK(o.opaque_associations().empty());
         } else if (factory.is_type_name_n(1, n)) {
-            BOOST_CHECK(o.regular_associations().empty());
-            BOOST_CHECK(o.weak_associations().empty());
+            BOOST_CHECK(o.transparent_associations().empty());
+            BOOST_CHECK(o.opaque_associations().empty());
         } else
             BOOST_FAIL("Unexpected object: " << n.qualified());
     }
@@ -384,12 +384,12 @@ BOOST_AUTO_TEST_CASE(object_with_std_pair_property_results_in_expected_indices) 
 
         if (factory.is_type_name_n(0, n)) {
             found = true;
-            BOOST_CHECK(o.regular_associations().size() == 2);
-            const auto front_sn(o.regular_associations().front().simple());
+            BOOST_CHECK(o.transparent_associations().size() == 2);
+            const auto front_sn(o.transparent_associations().front().simple());
             BOOST_CHECK(front_sn == "bool" || front_sn == "pair");
-            const auto back_sn(o.regular_associations().back().simple());
+            const auto back_sn(o.transparent_associations().back().simple());
             BOOST_CHECK(back_sn == "bool" || back_sn == "pair");
-            BOOST_CHECK(o.weak_associations().empty());
+            BOOST_CHECK(o.opaque_associations().empty());
         }
         // ignore std pair, etc.
     }
@@ -419,9 +419,9 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_property_results_in_expected_indi
             found = true;
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
 
-            BOOST_REQUIRE(o.regular_associations().size() == 3);
+            BOOST_REQUIRE(o.transparent_associations().size() == 3);
             bool found_uint(false), found_bool(false), found_variant(false);
-            for (const auto& n : o.regular_associations()) {
+            for (const auto& n : o.transparent_associations()) {
                 const auto sn(n.simple());
                 if (sn == "unsigned int")
                     found_uint = true;
@@ -433,7 +433,7 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_property_results_in_expected_indi
             BOOST_CHECK(found_uint);
             BOOST_CHECK(found_bool);
             BOOST_CHECK(found_variant);
-            BOOST_CHECK(o.weak_associations().empty());
+            BOOST_CHECK(o.opaque_associations().empty());
         }
     }
     BOOST_CHECK(found);
@@ -459,9 +459,9 @@ BOOST_AUTO_TEST_CASE(object_with_std_string_property_results_in_expected_indices
 
         if (factory.is_type_name_n(0, n)) {
             found = true;
-            BOOST_REQUIRE(o.regular_associations().size() == 1);
-            BOOST_CHECK(o.regular_associations().front().simple() == "string");
-            BOOST_CHECK(o.weak_associations().empty());
+            BOOST_REQUIRE(o.transparent_associations().size() == 1);
+            BOOST_CHECK(o.transparent_associations().front().simple() == "string");
+            BOOST_CHECK(o.opaque_associations().empty());
         }
         // ignore std pair, etc.
     }
@@ -490,22 +490,22 @@ BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_property_results_in_expected_i
             found = true;
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
 
-            BOOST_REQUIRE(o.regular_associations().size() == 1);
-            const auto sn(o.regular_associations().front().simple());
+            BOOST_REQUIRE(o.transparent_associations().size() == 1);
+            const auto sn(o.transparent_associations().front().simple());
             BOOST_CHECK(sn == "shared_ptr");
 
-            BOOST_REQUIRE(o.weak_associations().size() == 1);
+            BOOST_REQUIRE(o.opaque_associations().size() == 1);
             BOOST_CHECK(factory.is_type_name_n(1,
-                    o.weak_associations().front().simple()));
+                    o.opaque_associations().front().simple()));
         }
     }
     BOOST_CHECK(found);
 }
 
-BOOST_AUTO_TEST_CASE(object_with_both_regular_and_weak_associations_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("object_with_both_regular_and_weak_associations_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(object_with_both_regular_and_opaque_associations_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("object_with_both_regular_and_opaque_associations_results_in_expected_indices");
 
-    auto m(factory.object_with_both_regular_and_weak_associations());
+    auto m(factory.object_with_both_transparent_and_opaque_associations());
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.objects().size() == 5);
 
@@ -522,10 +522,10 @@ BOOST_AUTO_TEST_CASE(object_with_both_regular_and_weak_associations_results_in_e
             found = true;
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
 
-            BOOST_REQUIRE(o.regular_associations().size() == 3);
+            BOOST_REQUIRE(o.transparent_associations().size() == 3);
             std::vector<bool> found;
             found.resize(3);
-            for (const auto& n : o.regular_associations()) {
+            for (const auto& n : o.transparent_associations()) {
                 if (n.simple() == "shared_ptr")
                     found[0] = true;
 
@@ -539,9 +539,9 @@ BOOST_AUTO_TEST_CASE(object_with_both_regular_and_weak_associations_results_in_e
             for (const auto b : found)
                 BOOST_CHECK(b);
 
-            BOOST_REQUIRE(o.weak_associations().size() == 1);
+            BOOST_REQUIRE(o.opaque_associations().size() == 1);
             BOOST_CHECK(factory.is_type_name_n(3,
-                    o.weak_associations().front().simple()));
+                    o.opaque_associations().front().simple()));
         }
     }
     BOOST_CHECK(found);

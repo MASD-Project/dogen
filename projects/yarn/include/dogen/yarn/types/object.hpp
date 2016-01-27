@@ -78,14 +78,15 @@ public:
         const std::list<dogen::yarn::name>& root_parents,
         const std::list<dogen::yarn::name>& parents,
         const std::list<dogen::yarn::name>& leaves,
-        const std::list<dogen::yarn::name>& regular_associations,
-        const std::list<dogen::yarn::name>& weak_associations,
+        const std::list<dogen::yarn::name>& transparent_associations,
+        const std::list<dogen::yarn::name>& opaque_associations,
         const bool is_visitable,
         const bool is_root_parent_visitable,
         const std::list<dogen::yarn::name>& visitable_by,
         const dogen::yarn::object_types object_type,
         const std::list<dogen::yarn::name>& modeled_concepts,
-        const std::list<dogen::yarn::name>& associative_container_keys);
+        const std::list<dogen::yarn::name>& associative_container_keys,
+        const bool provides_opaqueness);
 
 private:
     template<typename Archive>
@@ -228,10 +229,10 @@ public:
      * @brief Elements that are involved in aggregation or composition relationships.
      */
     /**@{*/
-    const std::list<dogen::yarn::name>& regular_associations() const;
-    std::list<dogen::yarn::name>& regular_associations();
-    void regular_associations(const std::list<dogen::yarn::name>& v);
-    void regular_associations(const std::list<dogen::yarn::name>&& v);
+    const std::list<dogen::yarn::name>& transparent_associations() const;
+    std::list<dogen::yarn::name>& transparent_associations();
+    void transparent_associations(const std::list<dogen::yarn::name>& v);
+    void transparent_associations(const std::list<dogen::yarn::name>&& v);
     /**@}*/
 
     /**
@@ -241,10 +242,10 @@ public:
      * This is used to break cycles where required.
      */
     /**@{*/
-    const std::list<dogen::yarn::name>& weak_associations() const;
-    std::list<dogen::yarn::name>& weak_associations();
-    void weak_associations(const std::list<dogen::yarn::name>& v);
-    void weak_associations(const std::list<dogen::yarn::name>&& v);
+    const std::list<dogen::yarn::name>& opaque_associations() const;
+    std::list<dogen::yarn::name>& opaque_associations();
+    void opaque_associations(const std::list<dogen::yarn::name>& v);
+    void opaque_associations(const std::list<dogen::yarn::name>&& v);
     /**@}*/
 
     /**
@@ -305,6 +306,14 @@ public:
     void associative_container_keys(const std::list<dogen::yarn::name>&& v);
     /**@}*/
 
+    /**
+     * @brief If true, this type provides opaqueness to any type parameters it may have.
+     */
+    /**@{*/
+    bool provides_opaqueness() const;
+    void provides_opaqueness(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const object& rhs) const;
     bool operator!=(const object& rhs) const {
@@ -330,14 +339,15 @@ private:
     std::list<dogen::yarn::name> root_parents_;
     std::list<dogen::yarn::name> parents_;
     std::list<dogen::yarn::name> leaves_;
-    std::list<dogen::yarn::name> regular_associations_;
-    std::list<dogen::yarn::name> weak_associations_;
+    std::list<dogen::yarn::name> transparent_associations_;
+    std::list<dogen::yarn::name> opaque_associations_;
     bool is_visitable_;
     bool is_root_parent_visitable_;
     std::list<dogen::yarn::name> visitable_by_;
     dogen::yarn::object_types object_type_;
     std::list<dogen::yarn::name> modeled_concepts_;
     std::list<dogen::yarn::name> associative_container_keys_;
+    bool provides_opaqueness_;
 };
 
 } }

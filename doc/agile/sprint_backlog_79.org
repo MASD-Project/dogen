@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-27 Wed 21:38]
+#+CAPTION: Clock summary at [2016-01-27 Wed 22:12]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *22:05* |       |      |
+| *Total time*                                                                | *22:39* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 22:05   |       |      |
-| Active                                                                      |         | 22:05 |      |
+| Stories                                                                     | 22:39   |       |      |
+| Active                                                                      |         | 22:39 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:14 |
 | COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
 | COMPLETED Name builder should take only model name                          |         |       | 0:48 |
@@ -37,7 +37,7 @@
 | COMPLETED How to attach helper methods to types dynamically                 |         |       | 1:16 |
 | COMPLETED How to handle composition and pointers                            |         |       | 1:18 |
 | COMPLETED Rename hash container to associative container                    |         |       | 0:42 |
-| STARTED Clean up usage of is pointer in yarn                                |         |       | 1:29 |
+| COMPLETED Clean up usage of is pointer in yarn                              |         |       | 2:03 |
 | STARTED Rename aspect settings to element settings                          |         |       | 0:12 |
 #+end:
 
@@ -473,7 +473,9 @@ Remove ordered container as we seem to use it for sets and maps but
 there is no difference in handling between these and the hash
 versions.
 
-*** STARTED Clean up usage of is pointer in yarn                      :story:
+*** COMPLETED Clean up usage of is pointer in yarn                    :story:
+    CLOSED: [2016-01-27 Wed 22:12]
+    CLOCK: [2016-01-27 Wed 21:39]--[2016-01-27 Wed 22:13] =>  0:34
     CLOCK: [2016-01-26 Tue 23:13]--[2016-01-26 Tue 23:27] =>  0:14
     CLOCK: [2016-01-26 Tue 20:45]--[2016-01-26 Tue 22:00] =>  1:15
 

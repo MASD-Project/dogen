@@ -538,7 +538,7 @@ composite pattern.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#opaque_children#</dia:string>
+            <dia:string>#are_children_opaque#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
@@ -561,7 +561,7 @@ composite pattern.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#circular_dependency#</dia:string>
+            <dia:string>#is_circular_dependency#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
@@ -15901,13 +15901,13 @@ Set to false if no parent exists, or if the parent is not visitable. #</dia:stri
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O134">
       <dia:attribute name="obj_pos">
-        <dia:point val="-164,-1"/>
+        <dia:point val="-165,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-164.05,-1.05;-147.28,3.45"/>
+        <dia:rectangle val="-165.05,-1.05;-148.28,3.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-164,-1"/>
+        <dia:point val="-165,-1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.669999999999998"/>
@@ -16502,17 +16502,17 @@ This is used to break cycles where required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O139">
       <dia:attribute name="obj_pos">
-        <dia:point val="-155.665,3.4"/>
+        <dia:point val="-156.665,3.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-156.515,3.35;-149.557,14.05"/>
+        <dia:rectangle val="-157.515,3.35;-149.557,14.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-155.665,3.4"/>
-        <dia:point val="-155.665,9"/>
+        <dia:point val="-156.665,3.4"/>
+        <dia:point val="-156.665,9"/>
         <dia:point val="-149.607,9"/>
         <dia:point val="-149.607,14"/>
       </dia:attribute>

@@ -62,22 +62,22 @@ void association_indexer::remove_duplicates(std::list<name>& names,
 }
 
 void association_indexer::recurse_nested_names(const intermediate_model& m,
-    object& o, const nested_name& nn, bool& is_pointer) const {
+    object& o, const nested_name& nn, bool& is_opaque) const {
     const auto n(nn.parent());
-    if (is_pointer)
-        o.weak_associations().push_back(n);
+    if (is_opaque)
+        o.opaque_associations().push_back(n);
     else
-        o.regular_associations().push_back(n);
+        o.transparent_associations().push_back(n);
 
     const auto i(m.primitives().find(n.qualified()));
     if (i != m.primitives().end()) {
-        is_pointer = false;
+        is_opaque = false;
         return;
     }
 
     const auto j(m.enumerations().find(n.qualified()));
     if (j != m.enumerations().end()) {
-        is_pointer = false;
+        is_opaque = false;
         return;
     }
 
@@ -87,7 +87,7 @@ void association_indexer::recurse_nested_names(const intermediate_model& m,
         BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n.qualified()));
     }
 
-    is_pointer = k->second.object_type() == object_types::smart_pointer;
+    is_opaque = k->second.object_type() == object_types::smart_pointer;
 
     /* if the parent type is an associative container, the first child
      * type will represent the key of the associative container and
@@ -96,11 +96,11 @@ void association_indexer::recurse_nested_names(const intermediate_model& m,
      */
     bool is_first(true);
     for (const auto c : nn.children()) {
-        const auto hc(object_types::associative_container);
-        if (is_first && k->second.object_type() == hc)
+        const auto ac(object_types::associative_container);
+        if (is_first && k->second.object_type() == ac)
             o.associative_container_keys().push_back(c.parent());
 
-        recurse_nested_names(m, o, c, is_pointer);
+        recurse_nested_names(m, o, c, is_opaque);
         is_first = false;
     }
 }
@@ -111,22 +111,22 @@ index_object(const intermediate_model& m, object& o) const {
 
     for (const auto& p : o.local_properties()) {
         const auto nn(p.type());
-        bool is_pointer(nn.is_pointer());
-        recurse_nested_names(m, o, nn, is_pointer);
+        bool is_opaque(nn.are_children_opaque());
+        recurse_nested_names(m, o, nn, is_opaque);
     }
 
-    std::unordered_set<name> regular_associations;
-    if (!o.regular_associations().empty()) {
-        remove_duplicates(o.regular_associations());
-        for (const auto n : o.regular_associations())
-            regular_associations.insert(n);
+    std::unordered_set<name> transparent_associations;
+    if (!o.transparent_associations().empty()) {
+        remove_duplicates(o.transparent_associations());
+        for (const auto n : o.transparent_associations())
+            transparent_associations.insert(n);
     }
 
-    if (!o.weak_associations().empty()) {
+    if (!o.opaque_associations().empty()) {
         /* Ensure we remove any items which are simultaneously regular
          * and weak associations.
          */
-        remove_duplicates(o.weak_associations(), regular_associations);
+        remove_duplicates(o.opaque_associations(), transparent_associations);
     }
 
     if (!o.associative_container_keys().empty())

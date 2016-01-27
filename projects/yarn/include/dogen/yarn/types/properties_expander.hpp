@@ -35,10 +35,16 @@ namespace yarn {
 
 class properties_expander {
 private:
-    template<typename Stateful>
-    void update_properties(const identifier_parser& ip, Stateful& s) const {
-        for (auto& p : s.local_properties())
-            p.type(make_nested_name(ip, p.unparsed_type()));
+    bool is_circular_dependency(const name& owner, const nested_name& nn) const;
+
+    template<typename NameableAndStateful>
+    void update_properties(const identifier_parser& ip,
+        NameableAndStateful& nas) const {
+        for (auto& p : nas.local_properties()) {
+            auto nn(make_nested_name(ip, p.unparsed_type()));
+            nn.is_circular_dependency(is_circular_dependency(nas.name(), nn));
+            p.type(nn);
+        }
     }
 
 private:

@@ -59,8 +59,8 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     builder.add(o.name(), types::traits::class_header_formatter_name());
 
     const auto self_fn(class_header_formatter::static_formatter_name());
-    builder.add(o.weak_associations(), self_fn);
-    builder.add(o.regular_associations(), self_fn);
+    builder.add(o.transparent_associations(), self_fn);
+    builder.add(o.opaque_associations(), self_fn);
     builder.add(o.parents(), self_fn);
     return builder.build();
 }

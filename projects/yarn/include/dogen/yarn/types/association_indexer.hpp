@@ -77,7 +77,7 @@ private:
      * up associations as it goes along.
      */
     void recurse_nested_names(const intermediate_model& m, object& o,
-        const nested_name& nn, bool& is_pointer) const;
+        const nested_name& nn, bool& is_opaque) const;
 
 private:
     /**

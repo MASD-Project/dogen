@@ -59,14 +59,15 @@ void save(Archive& ar,
     ar << make_nvp("root_parents", v.root_parents_);
     ar << make_nvp("parents", v.parents_);
     ar << make_nvp("leaves", v.leaves_);
-    ar << make_nvp("regular_associations", v.regular_associations_);
-    ar << make_nvp("weak_associations", v.weak_associations_);
+    ar << make_nvp("transparent_associations", v.transparent_associations_);
+    ar << make_nvp("opaque_associations", v.opaque_associations_);
     ar << make_nvp("is_visitable", v.is_visitable_);
     ar << make_nvp("is_root_parent_visitable", v.is_root_parent_visitable_);
     ar << make_nvp("visitable_by", v.visitable_by_);
     ar << make_nvp("object_type", v.object_type_);
     ar << make_nvp("modeled_concepts", v.modeled_concepts_);
     ar << make_nvp("associative_container_keys", v.associative_container_keys_);
+    ar << make_nvp("provides_opaqueness", v.provides_opaqueness_);
 }
 
 template<typename Archive>
@@ -86,14 +87,15 @@ void load(Archive& ar,
     ar >> make_nvp("root_parents", v.root_parents_);
     ar >> make_nvp("parents", v.parents_);
     ar >> make_nvp("leaves", v.leaves_);
-    ar >> make_nvp("regular_associations", v.regular_associations_);
-    ar >> make_nvp("weak_associations", v.weak_associations_);
+    ar >> make_nvp("transparent_associations", v.transparent_associations_);
+    ar >> make_nvp("opaque_associations", v.opaque_associations_);
     ar >> make_nvp("is_visitable", v.is_visitable_);
     ar >> make_nvp("is_root_parent_visitable", v.is_root_parent_visitable_);
     ar >> make_nvp("visitable_by", v.visitable_by_);
     ar >> make_nvp("object_type", v.object_type_);
     ar >> make_nvp("modeled_concepts", v.modeled_concepts_);
     ar >> make_nvp("associative_container_keys", v.associative_container_keys_);
+    ar >> make_nvp("provides_opaqueness", v.provides_opaqueness_);
 }
 
 } }

@@ -110,8 +110,8 @@ inclusion_dependencies_builder::make_special_includes(
             }
         });
 
-    lambda(o.regular_associations());
-    lambda(o.weak_associations());
+    lambda(o.opaque_associations());
+    lambda(o.transparent_associations());
 
     return r;
 }

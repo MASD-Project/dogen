@@ -58,7 +58,8 @@ public:
     nested_name(
         const dogen::yarn::name& parent,
         const std::list<dogen::yarn::nested_name>& children,
-        const bool is_pointer);
+        const bool are_children_opaque,
+        const bool is_circular_dependency);
 
 private:
     template<typename Archive>
@@ -89,11 +90,19 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, the top-level type is a pointer. If false, its a stack variable.
+     * @brief If true, the association with its children can be opaque.
      */
     /**@{*/
-    bool is_pointer() const;
-    void is_pointer(const bool v);
+    bool are_children_opaque() const;
+    void are_children_opaque(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, the presence of parent name causes a circular dependency.
+     */
+    /**@{*/
+    bool is_circular_dependency() const;
+    void is_circular_dependency(const bool v);
     /**@}*/
 
 public:
@@ -109,7 +118,8 @@ public:
 private:
     dogen::yarn::name parent_;
     std::list<dogen::yarn::nested_name> children_;
-    bool is_pointer_;
+    bool are_children_opaque_;
+    bool is_circular_dependency_;
 };
 
 } }

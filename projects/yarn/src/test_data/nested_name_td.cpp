@@ -56,7 +56,8 @@ void nested_name_generator::
 populate(const unsigned int position, result_type& v) {
     v.parent(create_dogen_yarn_name(position + 0));
     v.children(create_std_list_dogen_yarn_nested_name(position + 1));
-    v.is_pointer(create_bool(position + 2));
+    v.are_children_opaque(create_bool(position + 2));
+    v.is_circular_dependency(create_bool(position + 3));
 }
 
 nested_name_generator::result_type

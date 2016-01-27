@@ -73,8 +73,8 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
         builder.add(ic::boost::archive::xml_oarchive());
     }
 
-    builder.add(o.weak_associations(), ch_fn);
-    builder.add(o.regular_associations(), ch_fn);
+    builder.add(o.transparent_associations(), ch_fn);
+    builder.add(o.opaque_associations(), ch_fn);
     builder.add(o.parents(), ch_fn);
     builder.add(o.leaves(), ch_fn);
 

@@ -944,7 +944,7 @@ make_object_that_models_concept_with_missing_parent(
 }
 
 intermediate_model mock_intermediate_model_factory::
-object_with_both_regular_and_weak_associations(
+object_with_both_transparent_and_opaque_associations(
     const bool add_model_module) const {
     intermediate_model r(make_empty_model(0, add_model_module));
     const auto mn(mock_model_name(0));
@@ -959,7 +959,7 @@ object_with_both_regular_and_weak_associations(
         o0.all_properties().push_back(p0);
 
     if (flags_.associations_indexed())
-        o0.regular_associations().push_back(o1.name());
+        o0.transparent_associations().push_back(o1.name());
 
     dogen::yarn::name_factory nf;
     object o2;
@@ -974,7 +974,7 @@ object_with_both_regular_and_weak_associations(
         o0.all_properties().push_back(p1);
 
     if (flags_.associations_indexed())
-        o0.weak_associations().push_back(o1.name());
+        o0.opaque_associations().push_back(o1.name());
 
     object o3(make_value_object(3, mn));
     insert_object(r, o3);
@@ -985,7 +985,7 @@ object_with_both_regular_and_weak_associations(
         o0.all_properties().push_back(p2);
 
     if (flags_.associations_indexed())
-        o0.weak_associations().push_back(o3.name());
+        o0.opaque_associations().push_back(o3.name());
 
     object o4;
     o4.name(nf.build_element_name("std", "string"));
@@ -999,7 +999,7 @@ object_with_both_regular_and_weak_associations(
         o0.all_properties().push_back(p3);
 
     if (flags_.associations_indexed())
-        o0.regular_associations().push_back(o4.name());
+        o0.transparent_associations().push_back(o4.name());
 
     insert_object(r, o0);
     return r;
@@ -1031,7 +1031,7 @@ object_with_property(const object_types ot, const property_types pt,
         insert_object(r, o1);
 
         if (flags_.associations_indexed())
-            o0.regular_associations().push_back(o1.name());
+            o0.transparent_associations().push_back(o1.name());
     }
 
     if (pt == property_types::unsigned_int ||
@@ -1041,7 +1041,7 @@ object_with_property(const object_types ot, const property_types pt,
         insert_nameable(r.primitives(), ui);
 
         if (flags_.associations_indexed())
-            o0.regular_associations().push_back(ui.name());
+            o0.transparent_associations().push_back(ui.name());
 
     } else if (pt == property_types::boost_shared_ptr) {
         object o2;
@@ -1050,21 +1050,21 @@ object_with_property(const object_types ot, const property_types pt,
         insert_object(r, o2);
 
         if (flags_.associations_indexed())
-            o0.weak_associations().push_back(o2.name());
+            o0.opaque_associations().push_back(o2.name());
 
     } else if (pt == property_types::std_pair) {
         const auto b(make_primitive(boolean));
         r.primitives().insert(std::make_pair(b.name().qualified(), b));
 
         if (flags_.associations_indexed())
-            o0.regular_associations().push_back(b.name());
+            o0.transparent_associations().push_back(b.name());
 
         object o2;
         o2.name(nf.build_element_name("std", "pair"));
         o2.object_type(dogen::yarn::object_types::user_defined_value_object);
 
         if (flags_.associations_indexed())
-            o0.regular_associations().push_back(o2.name());
+            o0.transparent_associations().push_back(o2.name());
 
         insert_object(r, o2);
     } else if (pt == property_types::boost_variant) {
@@ -1072,13 +1072,13 @@ object_with_property(const object_types ot, const property_types pt,
         r.primitives().insert(std::make_pair(b.name().qualified(), b));
 
         if (flags_.associations_indexed())
-            o0.regular_associations().push_back(b.name());
+            o0.transparent_associations().push_back(b.name());
 
         const auto ui(make_primitive(unsigned_int));
         r.primitives().insert(std::make_pair(ui.name().qualified(), ui));
 
         if (flags_.associations_indexed())
-            o0.regular_associations().push_back(ui.name());
+            o0.transparent_associations().push_back(ui.name());
 
         object o2;
         o2.name(nf.build_element_name("boost", "variant"));
@@ -1086,7 +1086,7 @@ object_with_property(const object_types ot, const property_types pt,
         insert_object(r, o2);
 
         if (flags_.associations_indexed())
-            o0.regular_associations().push_back(o2.name());
+            o0.transparent_associations().push_back(o2.name());
 
     } else if (pt == property_types::std_string) {
         object o2;
@@ -1095,7 +1095,7 @@ object_with_property(const object_types ot, const property_types pt,
         insert_object(r, o2);
 
         if (flags_.associations_indexed())
-            o0.regular_associations().push_back(o2.name());
+            o0.transparent_associations().push_back(o2.name());
     }
     insert_object(r, o0);
     return r;
@@ -1134,7 +1134,7 @@ object_with_missing_property_type(
         property_types::value_object, o1.name());
 
     if (flags_.associations_indexed())
-        o0.regular_associations().push_back(o1.name());
+        o0.transparent_associations().push_back(o1.name());
 
     intermediate_model r(make_empty_model(0, add_model_module));
     insert_object(r, o0);

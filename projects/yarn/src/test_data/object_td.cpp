@@ -90,14 +90,15 @@ populate(const unsigned int position, result_type& v) {
     v.root_parents(create_std_list_dogen_yarn_name(position + 8));
     v.parents(create_std_list_dogen_yarn_name(position + 9));
     v.leaves(create_std_list_dogen_yarn_name(position + 10));
-    v.regular_associations(create_std_list_dogen_yarn_name(position + 11));
-    v.weak_associations(create_std_list_dogen_yarn_name(position + 12));
+    v.transparent_associations(create_std_list_dogen_yarn_name(position + 11));
+    v.opaque_associations(create_std_list_dogen_yarn_name(position + 12));
     v.is_visitable(create_bool(position + 13));
     v.is_root_parent_visitable(create_bool(position + 14));
     v.visitable_by(create_std_list_dogen_yarn_name(position + 15));
     v.object_type(create_dogen_yarn_object_types(position + 16));
     v.modeled_concepts(create_std_list_dogen_yarn_name(position + 17));
     v.associative_container_keys(create_std_list_dogen_yarn_name(position + 18));
+    v.provides_opaqueness(create_bool(position + 19));
 }
 
 object_generator::result_type

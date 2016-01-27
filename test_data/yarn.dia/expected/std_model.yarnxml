@@ -284,7 +284,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::int8_t</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -343,7 +344,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::int16_t</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -402,7 +404,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::int32_t</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -461,7 +464,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::int64_t</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -520,7 +524,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::uint8_t</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -579,7 +584,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::uint16_t</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -638,7 +644,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::uint32_t</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -697,7 +704,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::uint64_t</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -726,14 +734,14 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<regular_associations>
+				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</regular_associations>
-				<weak_associations>
+				</transparent_associations>
+				<opaque_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</weak_associations>
+				</opaque_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
@@ -749,6 +757,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</associative_container_keys>
+				<provides_opaqueness>0</provides_opaqueness>
 			</second>
 		</item>
 		<item>
@@ -853,7 +862,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -913,7 +923,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -942,14 +953,14 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<regular_associations>
+				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</regular_associations>
-				<weak_associations>
+				</transparent_associations>
+				<opaque_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</weak_associations>
+				</opaque_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
@@ -965,6 +976,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</associative_container_keys>
+				<provides_opaqueness>0</provides_opaqueness>
 			</second>
 		</item>
 		<item>
@@ -1067,7 +1079,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -1096,14 +1109,14 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<regular_associations>
+				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</regular_associations>
-				<weak_associations>
+				</transparent_associations>
+				<opaque_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</weak_associations>
+				</opaque_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
@@ -1119,6 +1132,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</associative_container_keys>
+				<provides_opaqueness>0</provides_opaqueness>
 			</second>
 		</item>
 		<item>
@@ -1221,7 +1235,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::pair&lt;int,int&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -1280,7 +1295,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::pair&lt;std::string,std::string&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -1339,7 +1355,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::vector&lt;std::pair&lt;std::string,int&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -1368,14 +1385,14 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<regular_associations>
+				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</regular_associations>
-				<weak_associations>
+				</transparent_associations>
+				<opaque_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</weak_associations>
+				</opaque_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
@@ -1391,6 +1408,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</associative_container_keys>
+				<provides_opaqueness>0</provides_opaqueness>
 			</second>
 		</item>
 		<item>
@@ -1493,7 +1511,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -1552,7 +1571,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -1611,7 +1631,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::vector&lt;pkg1::class_c&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -1670,7 +1691,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::vector&lt;unsigned int&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -1729,7 +1751,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -1788,7 +1811,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::vector&lt;std::vector&lt;unsigned int&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -1817,14 +1841,14 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<regular_associations>
+				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</regular_associations>
-				<weak_associations>
+				</transparent_associations>
+				<opaque_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</weak_associations>
+				</opaque_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
@@ -1840,6 +1864,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</associative_container_keys>
+				<provides_opaqueness>0</provides_opaqueness>
 			</second>
 		</item>
 		<item>
@@ -1942,7 +1967,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::list&lt;std::string&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -2001,7 +2027,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::list&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -2060,7 +2087,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::list&lt;pkg1::class_c&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -2119,7 +2147,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::list&lt;unsigned int&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -2178,7 +2207,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::list&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -2237,7 +2267,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::list&lt;std::list&lt;unsigned int&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -2266,14 +2297,14 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<regular_associations>
+				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</regular_associations>
-				<weak_associations>
+				</transparent_associations>
+				<opaque_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</weak_associations>
+				</opaque_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
@@ -2289,6 +2320,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</associative_container_keys>
+				<provides_opaqueness>0</provides_opaqueness>
 			</second>
 		</item>
 		<item>
@@ -2402,7 +2434,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::string</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -2462,7 +2495,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::string</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -2491,14 +2525,14 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<regular_associations>
+				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</regular_associations>
-				<weak_associations>
+				</transparent_associations>
+				<opaque_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</weak_associations>
+				</opaque_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
@@ -2514,6 +2548,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</associative_container_keys>
+				<provides_opaqueness>0</provides_opaqueness>
 			</second>
 		</item>
 		<item>
@@ -2616,7 +2651,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::deque&lt;std::string&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -2675,7 +2711,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -2734,7 +2771,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::deque&lt;pkg1::class_c&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -2793,7 +2831,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::deque&lt;unsigned int&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -2852,7 +2891,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -2911,7 +2951,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::deque&lt;std::deque&lt;unsigned int&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -2940,14 +2981,14 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<regular_associations>
+				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</regular_associations>
-				<weak_associations>
+				</transparent_associations>
+				<opaque_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</weak_associations>
+				</opaque_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
@@ -2963,6 +3004,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</associative_container_keys>
+				<provides_opaqueness>0</provides_opaqueness>
 			</second>
 		</item>
 		<item>
@@ -3065,7 +3107,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::unordered_set&lt;class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -3124,7 +3167,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::unordered_set&lt;pkg1::class_c&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -3153,14 +3197,14 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<regular_associations>
+				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</regular_associations>
-				<weak_associations>
+				</transparent_associations>
+				<opaque_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</weak_associations>
+				</opaque_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
@@ -3176,6 +3220,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</associative_container_keys>
+				<provides_opaqueness>0</provides_opaqueness>
 			</second>
 		</item>
 		<item>
@@ -3278,7 +3323,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::unordered_map&lt;std::string,std::string&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -3337,7 +3383,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::unordered_map&lt;std::string,class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -3396,7 +3443,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::unordered_map&lt;class_a,pkg1::class_c&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -3425,14 +3473,14 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<regular_associations>
+				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</regular_associations>
-				<weak_associations>
+				</transparent_associations>
+				<opaque_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</weak_associations>
+				</opaque_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
@@ -3448,6 +3496,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</associative_container_keys>
+				<provides_opaqueness>0</provides_opaqueness>
 			</second>
 		</item>
 		<item>
@@ -3550,7 +3599,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::shared_ptr&lt;base&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -3609,7 +3659,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::weak_ptr&lt;base&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -3668,7 +3719,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::unique_ptr&lt;base&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -3727,7 +3779,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::function</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -3756,14 +3809,14 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<regular_associations>
+				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</regular_associations>
-				<weak_associations>
+				</transparent_associations>
+				<opaque_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</weak_associations>
+				</opaque_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
@@ -3779,6 +3832,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</associative_container_keys>
+				<provides_opaqueness>0</provides_opaqueness>
 			</second>
 		</item>
 		<item>
@@ -3881,7 +3935,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::unordered_map&lt;class_a,std::vector&lt;pkg1::class_c&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -3940,7 +3995,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::unordered_map&lt;pkg1::class_c,std::list&lt;class_a&gt;&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -3999,7 +4055,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::unordered_map&lt;std::string, class_a&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -4028,14 +4085,14 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<regular_associations>
+				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</regular_associations>
-				<weak_associations>
+				</transparent_associations>
+				<opaque_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</weak_associations>
+				</opaque_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
@@ -4051,6 +4108,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</associative_container_keys>
+				<provides_opaqueness>0</provides_opaqueness>
 			</second>
 		</item>
 		<item>
@@ -4153,7 +4211,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>std::list&lt;pkg1::class_c&gt;</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -4202,14 +4261,14 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<regular_associations>
+				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</regular_associations>
-				<weak_associations>
+				</transparent_associations>
+				<opaque_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</weak_associations>
+				</opaque_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
@@ -4225,6 +4284,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</associative_container_keys>
+				<provides_opaqueness>0</provides_opaqueness>
 			</second>
 		</item>
 	</objects>

@@ -238,7 +238,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>bool</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -297,7 +298,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>char</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -356,7 +358,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>unsigned char</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -415,7 +418,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>int</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -474,7 +478,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>unsigned int</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -533,7 +538,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>long</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -592,7 +598,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>unsigned long</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -651,7 +658,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>long long</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -710,7 +718,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>unsigned long long</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -769,7 +778,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>short</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -828,7 +838,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>unsigned short</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -887,7 +898,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>double</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -946,7 +958,8 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
-							<is_pointer>0</is_pointer>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
 						</type>
 						<unparsed_type>float</unparsed_type>
 						<is_immutable>0</is_immutable>
@@ -975,14 +988,14 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
-				<regular_associations>
+				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</regular_associations>
-				<weak_associations>
+				</transparent_associations>
+				<opaque_associations>
 					<count>0</count>
 					<item_version>0</item_version>
-				</weak_associations>
+				</opaque_associations>
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
@@ -998,6 +1011,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</associative_container_keys>
+				<provides_opaqueness>0</provides_opaqueness>
 			</second>
 		</item>
 	</objects>

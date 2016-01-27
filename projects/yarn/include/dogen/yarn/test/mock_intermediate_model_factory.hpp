@@ -393,7 +393,7 @@ public:
      * @brief Scenario: object that exercises both weak and regular
      * associations.
      */
-    intermediate_model object_with_both_regular_and_weak_associations(
+    intermediate_model object_with_both_transparent_and_opaque_associations(
         const bool add_model_module = false) const;
 
     /**

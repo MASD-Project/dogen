@@ -32,6 +32,19 @@ auto lg(logger_factory("yarn.properties_expander"));
 namespace dogen {
 namespace yarn {
 
+bool properties_expander::is_circular_dependency(const name& owner,
+    const nested_name& nn) const {
+
+    if (owner == nn.parent())
+        return true;
+
+    for (const auto& c : nn.children()) {
+        if (is_circular_dependency(owner, c))
+            return true;
+    }
+    return false;
+}
+
 std::unordered_set<std::string> properties_expander::
 obtain_top_level_module_names(const intermediate_model& m) const {
     std::unordered_set<std::string> r;

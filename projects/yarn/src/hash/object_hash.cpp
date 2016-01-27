@@ -78,14 +78,15 @@ std::size_t object_hasher::hash(const object& v) {
     combine(seed, hash_std_list_dogen_yarn_name(v.root_parents()));
     combine(seed, hash_std_list_dogen_yarn_name(v.parents()));
     combine(seed, hash_std_list_dogen_yarn_name(v.leaves()));
-    combine(seed, hash_std_list_dogen_yarn_name(v.regular_associations()));
-    combine(seed, hash_std_list_dogen_yarn_name(v.weak_associations()));
+    combine(seed, hash_std_list_dogen_yarn_name(v.transparent_associations()));
+    combine(seed, hash_std_list_dogen_yarn_name(v.opaque_associations()));
     combine(seed, v.is_visitable());
     combine(seed, v.is_root_parent_visitable());
     combine(seed, hash_std_list_dogen_yarn_name(v.visitable_by()));
     combine(seed, v.object_type());
     combine(seed, hash_std_list_dogen_yarn_name(v.modeled_concepts()));
     combine(seed, hash_std_list_dogen_yarn_name(v.associative_container_keys()));
+    combine(seed, v.provides_opaqueness());
 
     return seed;
 }

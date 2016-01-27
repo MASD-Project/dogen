@@ -51,7 +51,8 @@ std::ostream& operator<<(std::ostream& s, const nested_name& v) {
       << "\"__type__\": " << "\"dogen::yarn::nested_name\"" << ", "
       << "\"parent\": " << v.parent() << ", "
       << "\"children\": " << v.children() << ", "
-      << "\"is_pointer\": " << v.is_pointer()
+      << "\"are_children_opaque\": " << v.are_children_opaque() << ", "
+      << "\"is_circular_dependency\": " << v.is_circular_dependency()
       << " }";
     return(s);
 }

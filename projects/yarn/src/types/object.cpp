@@ -83,7 +83,8 @@ object::object()
       is_final_(static_cast<bool>(0)),
       is_visitable_(static_cast<bool>(0)),
       is_root_parent_visitable_(static_cast<bool>(0)),
-      object_type_(static_cast<dogen::yarn::object_types>(0)) { }
+      object_type_(static_cast<dogen::yarn::object_types>(0)),
+      provides_opaqueness_(static_cast<bool>(0)) { }
 
 object::object(
     const std::string& documentation,
@@ -105,14 +106,15 @@ object::object(
     const std::list<dogen::yarn::name>& root_parents,
     const std::list<dogen::yarn::name>& parents,
     const std::list<dogen::yarn::name>& leaves,
-    const std::list<dogen::yarn::name>& regular_associations,
-    const std::list<dogen::yarn::name>& weak_associations,
+    const std::list<dogen::yarn::name>& transparent_associations,
+    const std::list<dogen::yarn::name>& opaque_associations,
     const bool is_visitable,
     const bool is_root_parent_visitable,
     const std::list<dogen::yarn::name>& visitable_by,
     const dogen::yarn::object_types object_type,
     const std::list<dogen::yarn::name>& modeled_concepts,
-    const std::list<dogen::yarn::name>& associative_container_keys)
+    const std::list<dogen::yarn::name>& associative_container_keys,
+    const bool provides_opaqueness)
     : dogen::yarn::element(
       documentation,
       extensions,
@@ -133,14 +135,15 @@ object::object(
       root_parents_(root_parents),
       parents_(parents),
       leaves_(leaves),
-      regular_associations_(regular_associations),
-      weak_associations_(weak_associations),
+      transparent_associations_(transparent_associations),
+      opaque_associations_(opaque_associations),
       is_visitable_(is_visitable),
       is_root_parent_visitable_(is_root_parent_visitable),
       visitable_by_(visitable_by),
       object_type_(object_type),
       modeled_concepts_(modeled_concepts),
-      associative_container_keys_(associative_container_keys) { }
+      associative_container_keys_(associative_container_keys),
+      provides_opaqueness_(provides_opaqueness) { }
 
 void object::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -165,14 +168,15 @@ void object::to_stream(std::ostream& s) const {
       << "\"root_parents\": " << root_parents_ << ", "
       << "\"parents\": " << parents_ << ", "
       << "\"leaves\": " << leaves_ << ", "
-      << "\"regular_associations\": " << regular_associations_ << ", "
-      << "\"weak_associations\": " << weak_associations_ << ", "
+      << "\"transparent_associations\": " << transparent_associations_ << ", "
+      << "\"opaque_associations\": " << opaque_associations_ << ", "
       << "\"is_visitable\": " << is_visitable_ << ", "
       << "\"is_root_parent_visitable\": " << is_root_parent_visitable_ << ", "
       << "\"visitable_by\": " << visitable_by_ << ", "
       << "\"object_type\": " << object_type_ << ", "
       << "\"modeled_concepts\": " << modeled_concepts_ << ", "
-      << "\"associative_container_keys\": " << associative_container_keys_
+      << "\"associative_container_keys\": " << associative_container_keys_ << ", "
+      << "\"provides_opaqueness\": " << provides_opaqueness_
       << " }";
 }
 
@@ -191,14 +195,15 @@ void object::swap(object& other) noexcept {
     swap(root_parents_, other.root_parents_);
     swap(parents_, other.parents_);
     swap(leaves_, other.leaves_);
-    swap(regular_associations_, other.regular_associations_);
-    swap(weak_associations_, other.weak_associations_);
+    swap(transparent_associations_, other.transparent_associations_);
+    swap(opaque_associations_, other.opaque_associations_);
     swap(is_visitable_, other.is_visitable_);
     swap(is_root_parent_visitable_, other.is_root_parent_visitable_);
     swap(visitable_by_, other.visitable_by_);
     swap(object_type_, other.object_type_);
     swap(modeled_concepts_, other.modeled_concepts_);
     swap(associative_container_keys_, other.associative_container_keys_);
+    swap(provides_opaqueness_, other.provides_opaqueness_);
 }
 
 bool object::equals(const dogen::yarn::element& other) const {
@@ -220,14 +225,15 @@ bool object::operator==(const object& rhs) const {
         root_parents_ == rhs.root_parents_ &&
         parents_ == rhs.parents_ &&
         leaves_ == rhs.leaves_ &&
-        regular_associations_ == rhs.regular_associations_ &&
-        weak_associations_ == rhs.weak_associations_ &&
+        transparent_associations_ == rhs.transparent_associations_ &&
+        opaque_associations_ == rhs.opaque_associations_ &&
         is_visitable_ == rhs.is_visitable_ &&
         is_root_parent_visitable_ == rhs.is_root_parent_visitable_ &&
         visitable_by_ == rhs.visitable_by_ &&
         object_type_ == rhs.object_type_ &&
         modeled_concepts_ == rhs.modeled_concepts_ &&
-        associative_container_keys_ == rhs.associative_container_keys_;
+        associative_container_keys_ == rhs.associative_container_keys_ &&
+        provides_opaqueness_ == rhs.provides_opaqueness_;
 }
 
 object& object::operator=(object other) {
@@ -372,36 +378,36 @@ void object::leaves(const std::list<dogen::yarn::name>&& v) {
     leaves_ = std::move(v);
 }
 
-const std::list<dogen::yarn::name>& object::regular_associations() const {
-    return regular_associations_;
+const std::list<dogen::yarn::name>& object::transparent_associations() const {
+    return transparent_associations_;
 }
 
-std::list<dogen::yarn::name>& object::regular_associations() {
-    return regular_associations_;
+std::list<dogen::yarn::name>& object::transparent_associations() {
+    return transparent_associations_;
 }
 
-void object::regular_associations(const std::list<dogen::yarn::name>& v) {
-    regular_associations_ = v;
+void object::transparent_associations(const std::list<dogen::yarn::name>& v) {
+    transparent_associations_ = v;
 }
 
-void object::regular_associations(const std::list<dogen::yarn::name>&& v) {
-    regular_associations_ = std::move(v);
+void object::transparent_associations(const std::list<dogen::yarn::name>&& v) {
+    transparent_associations_ = std::move(v);
 }
 
-const std::list<dogen::yarn::name>& object::weak_associations() const {
-    return weak_associations_;
+const std::list<dogen::yarn::name>& object::opaque_associations() const {
+    return opaque_associations_;
 }
 
-std::list<dogen::yarn::name>& object::weak_associations() {
-    return weak_associations_;
+std::list<dogen::yarn::name>& object::opaque_associations() {
+    return opaque_associations_;
 }
 
-void object::weak_associations(const std::list<dogen::yarn::name>& v) {
-    weak_associations_ = v;
+void object::opaque_associations(const std::list<dogen::yarn::name>& v) {
+    opaque_associations_ = v;
 }
 
-void object::weak_associations(const std::list<dogen::yarn::name>&& v) {
-    weak_associations_ = std::move(v);
+void object::opaque_associations(const std::list<dogen::yarn::name>&& v) {
+    opaque_associations_ = std::move(v);
 }
 
 bool object::is_visitable() const {
@@ -474,6 +480,14 @@ void object::associative_container_keys(const std::list<dogen::yarn::name>& v) {
 
 void object::associative_container_keys(const std::list<dogen::yarn::name>&& v) {
     associative_container_keys_ = std::move(v);
+}
+
+bool object::provides_opaqueness() const {
+    return provides_opaqueness_;
+}
+
+void object::provides_opaqueness(const bool v) {
+    provides_opaqueness_ = v;
 }
 
 } }

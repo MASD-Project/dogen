@@ -40,7 +40,8 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("parent", v.parent_);
     ar << make_nvp("children", v.children_);
-    ar << make_nvp("is_pointer", v.is_pointer_);
+    ar << make_nvp("are_children_opaque", v.are_children_opaque_);
+    ar << make_nvp("is_circular_dependency", v.is_circular_dependency_);
 }
 
 template<typename Archive>
@@ -49,7 +50,8 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("parent", v.parent_);
     ar >> make_nvp("children", v.children_);
-    ar >> make_nvp("is_pointer", v.is_pointer_);
+    ar >> make_nvp("are_children_opaque", v.are_children_opaque_);
+    ar >> make_nvp("is_circular_dependency", v.is_circular_dependency_);
 }
 
 } }

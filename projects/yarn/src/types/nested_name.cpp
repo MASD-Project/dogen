@@ -24,27 +24,32 @@ namespace dogen {
 namespace yarn {
 
 nested_name::nested_name()
-    : is_pointer_(static_cast<bool>(0)) { }
+    : are_children_opaque_(static_cast<bool>(0)),
+      is_circular_dependency_(static_cast<bool>(0)) { }
 
 nested_name::nested_name(
     const dogen::yarn::name& parent,
     const std::list<dogen::yarn::nested_name>& children,
-    const bool is_pointer)
+    const bool are_children_opaque,
+    const bool is_circular_dependency)
     : parent_(parent),
       children_(children),
-      is_pointer_(is_pointer) { }
+      are_children_opaque_(are_children_opaque),
+      is_circular_dependency_(is_circular_dependency) { }
 
 void nested_name::swap(nested_name& other) noexcept {
     using std::swap;
     swap(parent_, other.parent_);
     swap(children_, other.children_);
-    swap(is_pointer_, other.is_pointer_);
+    swap(are_children_opaque_, other.are_children_opaque_);
+    swap(is_circular_dependency_, other.is_circular_dependency_);
 }
 
 bool nested_name::operator==(const nested_name& rhs) const {
     return parent_ == rhs.parent_ &&
         children_ == rhs.children_ &&
-        is_pointer_ == rhs.is_pointer_;
+        are_children_opaque_ == rhs.are_children_opaque_ &&
+        is_circular_dependency_ == rhs.is_circular_dependency_;
 }
 
 nested_name& nested_name::operator=(nested_name other) {
@@ -85,12 +90,20 @@ void nested_name::children(const std::list<dogen::yarn::nested_name>&& v) {
     children_ = std::move(v);
 }
 
-bool nested_name::is_pointer() const {
-    return is_pointer_;
+bool nested_name::are_children_opaque() const {
+    return are_children_opaque_;
 }
 
-void nested_name::is_pointer(const bool v) {
-    is_pointer_ = v;
+void nested_name::are_children_opaque(const bool v) {
+    are_children_opaque_ = v;
+}
+
+bool nested_name::is_circular_dependency() const {
+    return is_circular_dependency_;
+}
+
+void nested_name::is_circular_dependency(const bool v) {
+    is_circular_dependency_ = v;
 }
 
 } }

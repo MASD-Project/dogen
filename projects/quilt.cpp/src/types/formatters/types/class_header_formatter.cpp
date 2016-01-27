@@ -78,8 +78,8 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     builder.add(o.name(), ser_fwd_fn);
 
     const auto fwd_fn(traits::forward_declarations_formatter_name());
-    builder.add(o.weak_associations(), fwd_fn);
-    builder.add(o.regular_associations(), self_fn);
+    builder.add(o.transparent_associations(), self_fn);
+    builder.add(o.opaque_associations(), fwd_fn);
     builder.add(o.parents(), self_fn);
 
     using hash = formatters::hash::traits;
