@@ -374,7 +374,7 @@ code on any supported language (presumably a supported language is
 defined to be that for which we have both mappings and a code
 generation backend).
 
-A first step for this would be to have a language enumeration in SML
+A first step for this would be to have a language enumeration in yarn
 which is a property of the model, and one entry of which is "language
 agnostic".
 
@@ -387,7 +387,7 @@ registrar and includers. However, if we started off the main workflow
 by creating a structure like so:
 
 - qname
-- optional entity (new base class in SML); if null we need to create
+- optional entity (new base class in yarn); if null we need to create
   extensions as an empty object.
 
 We then need a list of these that get passed in to all repository
@@ -398,25 +398,25 @@ We can inject types to this list that have a qname but no entity. For
 these we generate some parts of the formatter properties. Actually, we
 still need to generate inclusion lists even when there is no
 entity. Perhaps we need to create a new method in the provider that
-does not take an SML entity but still generates the inclusion list.
+does not take an yarn entity but still generates the inclusion list.
 
-Actually this should all be done in SML. We should have zero qname
-look-ups coming out of SML, just follow references. This story is a
+Actually this should all be done in yarn. We should have zero qname
+look-ups coming out of yarn, just follow references. This story is a
 variation of the split between "partial" models and "full" models.
 
-Well not everything should be done in SML. We still need to create a
+Well not everything should be done in yarn. We still need to create a
 structure with the properties above, but that is done by iterating
-through a list in the SML model.
+through a list in the yarn model.
 
 One slight problem with this approach: sometimes we need to preserve
 some relationships in the newly generated objects. For registrar we
 need to preserve the model leaves. For the includers / master headers
 we need to express somehow the inclusion relationship at the formatter
 level. The latter is definitely a special case because it is a pure
-C++ concept: include files cannot be modeled in SML. However,
+C++ concept: include files cannot be modeled in yarn. However,
 registrar is slightly different because we still need to compute the
 includes based on the leaves. This means that the above approach will
-not provide a clean solution, unless we synthesise an SML object when
+not provide a clean solution, unless we synthesise an yarn object when
 providing the includes. And of course we need to be careful taking
 that route or else we will end up generating the object across all
 facets.
@@ -449,7 +449,7 @@ returning a composite type from generation:
 - list of managed directories.
 
 Alternatively we could have a =managed_directories= method that takes
-in an SML model and then internally reads in the meta-data for a given
+in an yarn model and then internally reads in the meta-data for a given
 model to produce the list.
 
 *Merged with previous story*
@@ -467,11 +467,11 @@ come up with all the directories used by the backend. We need to make
 these decisions during path expansion, expect we only need manged
 directories for the root object. However we do not know which object
 is the root object at present, during the expansion. We could identify
-it via the QName and the SML model in context thought. We could then
+it via the QName and the yarn model in context thought. We could then
 populate the managed directories as a text collection. We then need
 some settings and a factory to pull out the managed directories from
 the root object. This could be done in =managed_directories=, by
-having an SML model as input.
+having an yarn model as input.
 
 *** Add include providers for all types                               :story:
 
@@ -1376,7 +1376,7 @@ LAM type, we replace all its references with the corresponding
 concrete type. We need to split the supplied mapping into a QName, use
 the QName to load the system models for that language, look up the
 type and replace it. After the translation no LAM types are left. We
-end up with N SML merged models where N is the number of supported and
+end up with N yarn merged models where N is the number of supported and
 enabled languages.
 
 Each of these models is then sent down to code generation. This should
@@ -1395,32 +1395,32 @@ between languages. This could be done as follows:
 FIXME: we believed this story was already backloged but could not find
 it on a quick search. Do a more thorough search.
 
-*** Make JSON SML a fully supported frontend                          :story:
+*** Make JSON yarn a fully supported frontend                          :story:
 
 #+begin_quote
 *Story*: As a dogen user, I want to be able to write my domain models
 in JSON since I don't have any need for UML visualisation.
 #+end_quote
 
-At present we are using an SML JSON format to supply Dogen the system
+At present we are using an yarn JSON format to supply Dogen the system
 libraries. However, there is nothing stopping us from having a
 full-blown JSON frontend useful for code generation. For this we need:
 
 - flag to state if its a target model or not;
 - ability to supply external module path;
-- ability to supply all of the missing information for SML types
+- ability to supply all of the missing information for yarn types
   (properties for object, stereotypes, enumerations, etc).
 
 In order to test this we could generate a model from both Dia and JSON
-and make sure we arrive at the same SML.
+and make sure we arrive at the same yarn.
 
-As part of this work we probably need to create a new stage in the SML
+As part of this work we probably need to create a new stage in the yarn
 pipeline where we populate:
 
 - inheritance related properties (is_parent, leaves, is_final)
 
 We need to look at the dia to sml transformer and see what it is doing
-that is also required by JSON and move it to SML.
+that is also required by JSON and move it to yarn.
 
 We should have a look at the Boost Fusion approach:
 
@@ -1504,7 +1504,7 @@ also stitch as required. This could be achieved as follows:
 *** Path derivatives factory generates all possible includes          :story:
 
 At present we are generating all possible includes for all
-formatters. The problem is that we do not have a way to map a SML type
+formatters. The problem is that we do not have a way to map a yarn type
 to a set of  C++ formatters, so to make our life easier we simply
 generate them all. This has another (lucky) side-effect: when we are
 doing the includes, we do not know what formatter the qname belongs to
@@ -2101,7 +2101,7 @@ If an object has pointers, the canned tests will not perform a deep
 copy of the object. We need to [[*Add%20support%20for%20object%20cloning][implement cloning]] and then use it in
 canned tests.
 
-*** Clean up SML resolver tests by extending mock factory             :story:
+*** Clean up yarn resolver tests by extending mock factory             :story:
 
 Now that the mock factory has the concept of "stages" of processing,
 we need to create a "stage" for merged but unresolved models and
@@ -2109,12 +2109,12 @@ remove the merger from the resolver tests. The flag for this has been
 added, we just need to go through the different scenarios and add
 handling code for them.
 
-*** Refactor SML mock factory method names                            :story:
+*** Refactor yarn mock factory method names                            :story:
 
 We have a zoo of naming conventions, some starting with =build_=, some
 starting with =object_= etc.
 
-*** Validate SML mock factory on its own tests                        :story:
+*** Validate yarn mock factory on its own tests                        :story:
 
 At present we have a lot of code that ensures that the output of mock
 factory actually corresponds to expectations. However, this validation
@@ -2255,7 +2255,7 @@ elements which can have children, and if not issue good error
 messages - perhaps even talking about the possible cause for the
 error.
 
-*** Add tests for SML main workflow                                   :story:
+*** Add tests for yarn main workflow                                   :story:
 
 A few come to mind:
 
@@ -2391,7 +2391,7 @@ models:
 - model name is non-empty.
 - documentation does not have non-printable characters.
 - number of type arguments is consistent with objects type.
-- objects marked as is comparable must follow the [[*Add%20is%20comparable%20to%20SML][comparison rules]].
+- objects marked as is comparable must follow the [[*Add%20is%20comparable%20to%20yarn][comparison rules]].
 - objects marked as is parent must have at least one child.
 - property can only have a default value if primitive
 - property default value must be castable to primitive type.
@@ -2401,7 +2401,7 @@ models:
 - duplicate checks: properties cannot have duplicate names; classes in
   a package cannot have the same name; namespaces at the same level
   cannot have the same name;
-- Issue error when a property is a value of an abstract class: SML
+- Issue error when a property is a value of an abstract class: yarn
   should fail to merge if the user attempts to create a property of a
   base class. It should allow pointers to the base class though (raw,
   shared pointers, boost optional etc).
@@ -2530,9 +2530,9 @@ We seem to have a strange bug whereby creating a
 package. This appears to be some misunderstanding in namespacing
 rules.
 
-*** Naming of saved SML/Dia files is incorrect                        :story:
+*** Naming of saved yarn/Dia files is incorrect                        :story:
 
-For some random reason when we use dogen to save SML/Dia files the
+For some random reason when we use dogen to save yarn/Dia files the
 names look like this:
 
 : test_data/dia_sml/expected/boost_model.xmldia
@@ -2764,7 +2764,7 @@ More thoughts on this:
 - the slight problem with this is that we need some tests to ensure
   the packages we create are actually exporting all public types; we
   could easily have a public type that depends on a private type
-  etc. We should also validate SML to ensure this does not happen.
+  etc. We should also validate yarn to ensure this does not happen.
 - this could also just be a packaging artefact - we would only package
   public headers. Layout of source code would remain the same.
 
@@ -3191,7 +3191,7 @@ class level that defaults all attributes to properties (or to member
 variables). This could be the default for objects but not for
 services.
 
-We would have to extend SML to understand member variables as well as
+We would have to extend yarn to understand member variables as well as
 properties.
 
 *** Returning optional of base class results in invalid code          :story:
@@ -3335,12 +3335,12 @@ of the types being ignored.
 
 *** Setup containing module correctly in mock factory                 :story:
 
-We did not update the SML mock model factory to populate the
+We did not update the yarn mock model factory to populate the
 containing type. We also did not setup the members of the module.
 
 *** Consider moving =add_model_module= to flags                       :story:
 
-When we implemented support for =add_model_module= in SML mock factory
+When we implemented support for =add_model_module= in yarn mock factory
 we added the flag to all relevant methods. We could have added it to
 the flags instead. The downside of this approach is that we have
 static factories in specs, so all tests will have the same set of
@@ -3431,7 +3431,7 @@ the whole of serialisation optional or
 =cpp.boost_serialization.main_header= to make the header optional. Not
 sure if the latter has any use.
 
-*** Add a configuration class to SML mock factory                     :story:
+*** Add a configuration class to yarn mock factory                     :story:
 
 Every time we need to extend the mock factory we are finding we need
 to modify every single function. This is particularly painful due to
@@ -3536,7 +3536,7 @@ See also [[http://www.json-generator.com/][JSON generator]].
 *** Forward declaration is not always correct for services            :story:
 
 In cases where we used a service as a way of declaring a stand alone
-function (such as the traversals in SML), the forward declarations do
+function (such as the traversals in yarn), the forward declarations do
 not match the header file at all. In this cases we should use
 =nongeneratable= rather than =service= stereotypes, and perhaps when
 that happens we should switch off forward declarations?
@@ -3759,7 +3759,7 @@ share in common is that in some cases we want to be able to send
 several types into a given formatter. This is actually not that hard
 to do:
 
-- find a way to "label" types in SML, perhaps for a given formatter;
+- find a way to "label" types in yarn, perhaps for a given formatter;
 - transfer those labels across to CPP's formattables;
 - group formattables by label;
 - have a separate interface for formatters that take multiple
@@ -3768,7 +3768,7 @@ to do:
   on.
 
 One thing to bear in mind though is that the labeling is done at the
-SML level; and for a given SML entity, we may have a number of
+yarn level; and for a given yarn entity, we may have a number of
 formattables. Should all be passed in?
 
 This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
@@ -3818,13 +3818,13 @@ model inheritance by using dynamic extensions:
   regardless of whether there are any children or not;
 - create a field that contains a qualified name of a parent,
   regardless of whether it's in this model or not;
-- change the transformer to convert these fields into SML inheritance
+- change the transformer to convert these fields into yarn inheritance
   relationships.
 
 There may be some fallout in places where we assume that the
 descendents are all in this model such as serialisation, visitors.
 
-Now that we have =is_final= in SML, we should check when adding cross
+Now that we have =is_final= in yarn, we should check when adding cross
 model inheritance that the type we have inherited from is not
 final. This may just be part of the validator's work.
 
@@ -3833,9 +3833,9 @@ final. This may just be part of the validator's work.
 Inner classes could be expressed in the same way as the short-hand for
 namespaces. For example, given a class =a=, an inner class =b= could
 be declared as =a::b=. The system would have to recognise that =a= is
-a class and then treat it accordingly in SML. The formatters would
+a class and then treat it accordingly in yarn. The formatters would
 have to be taught to express inner classes when formatting the main
-class. This probably requires merging two SML entities into a single
+class. This probably requires merging two yarn entities into a single
 cpp entity. Finally some dynamic extension support would be required
 to determine if the inner class is public or private.
 
@@ -4334,7 +4334,7 @@ removed in 4ed3fbd.
 - The model version is a human level concept and has no direct
   relation to class versioning. It will be implemented as an
   implementation specific parameter in the Dia model and as a string
-  in the SML model class. See [[*Improve%20OM's%20code%20generation%20marker][this story]].
+  in the yarn model class. See [[*Improve%20OM's%20code%20generation%20marker][this story]].
 - Model version will be used for the following:
   - stamped on doxygen documentation for the model namespace;
   - stamped on DLLs, etc.
@@ -4343,8 +4343,8 @@ removed in 4ed3fbd.
 
 Previous understanding:
 
-Versioning support is now available in SML, so we need to apply it to
-SML itself. That is, we need a way of having two versions of an SML
+Versioning support is now available in yarn, so we need to apply it to
+yarn itself. That is, we need a way of having two versions of an yarn
 model coexist, and allow Dogen to diff those two versions to make code
 generation decisions so that we can add basic backwards compatibility
 support.
@@ -4371,7 +4371,7 @@ dogen:
   of the kind.
 - the model supplied by this argument must have the same name as the
   model supplied by =--target=.
-- change all SML types to be versioned.
+- change all yarn types to be versioned.
 - dogen will load up both models, and stamp the versions in each
   type. Merger will then be responsible for stamping the versions on
   each property, taking previous and new as input.
@@ -4431,7 +4431,7 @@ This would be part of the injection framework.
 that I don't have to manually generate code for types that use it.
 #+end_quote
 
-We are using a lot of boolean variables in SML. In reality, these all
+We are using a lot of boolean variables in yarn. In reality, these all
 could be implemented with =std::bitset=, plus an enumeration. One
 possible implementation is:
 
@@ -4709,7 +4709,7 @@ also handle things like the actual and expected directories, etc.
 It should fix the following issues:
 
 - [[*Adding%20new%20engine%20spec%20tests%20is%20hard][Adding new engine spec tests is hard]]
-- [[*Naming%20of%20saved%20SML/Dia%20files%20is%20incorrect][Naming of saved SML/Dia files is incorrect]]
+- [[*Naming%20of%20saved%20yarn/Dia%20files%20is%20incorrect][Naming of saved yarn/Dia files is incorrect]]
 
 *Old understanding*:
 
@@ -4778,7 +4778,7 @@ In addition, even if the parser succeeded, we still need a way to tell
 dogen that the class has a template parameter; this is hard-coded at
 the moment for containers (we determine if the type is an associative
 container, etc). We need it to be dynamically determined when
-inspecting the SML type. For example, we could have a "number of
+inspecting the yarn type. For example, we could have a "number of
 template parameters" in the type. This could be set in the meta-data
 for STL containers. Or we could actually specify the template
 parameters as "type arguments" just like we do with operations and
@@ -6127,7 +6127,7 @@ cpp. However, in reality the world looks more like this:
   groups. These can be housed in language specific folders:
   =backends::cpp= and so on. For instance, the language specific stuff
   now in =formatters= should move here.
-- different groups may express SML models differently; almost by
+- different groups may express yarn models differently; almost by
   definition, they will, or else there is little purpose in having
   multiple groups. For example, one can imagine a model group (say
   =pleat=) which expresses [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#add-support-for-language-agnostic-models-lam][LAM]] as a model that is identical on every
@@ -6216,7 +6216,7 @@ same code as the original tools. All that would be required to do so
 is:
 
 - create a front-end that reads in their specification;
-- to ensure SML is expressive enough to cover all of the aspects of
+- to ensure yarn is expressive enough to cover all of the aspects of
   the code that needs to be generated;
 - to create the formatters.
 
@@ -6234,9 +6234,9 @@ In this view of the world, we have two options:
 
 Taking this to its logical consequence, even a tool as complex as ODB
 could potentially be implementable in this way: one can conceive a
-clang front-end that reads in source code and generates an SML model;
+clang front-end that reads in source code and generates an yarn model;
 this model then can be used to generate C++ code that is identical to
-the code produced by ODB (again assuming that SML is extended to be
+the code produced by ODB (again assuming that yarn is extended to be
 expressive enough to represent all the constructs required by ODB).
 
 This would be a compelling proposition if we had =stitch= because it
@@ -6464,7 +6464,7 @@ template types, this seems like an ok limitation.
 
 *** Replace Boolean attributes with flags                             :story:
 
-We have a number of Boolean attributes in SML which could easily be
+We have a number of Boolean attributes in yarn which could easily be
 replaced by a single int and a flag enumeration. We would also need a
 set of utility methods to access the values.
 
@@ -6637,7 +6637,7 @@ out parameters, to make the code compilable out of the box.
 When we have merging support we can actually implement stitch in a
 good way. We could mark the formatters with meta-data stating they
 have a method which is a stitch template. That then results in a c++
-operation which makes reference to stitch. When converting SML into
+operation which makes reference to stitch. When converting yarn into
 the CPP model we can add a "content" property to the stitchable
 operations that contains the expansion of the stitch
 template. Finally, when inside of the stitch template that is
@@ -6727,10 +6727,10 @@ possible:
   "manually generated" and if there is implementation content, we dump
   that; otherwise we generate the skeleton of the method as if it was
   not "manually generated".
-- merging could be done as part of SML, in meta-data. That is, we
+- merging could be done as part of yarn, in meta-data. That is, we
   could annotate the merged method into language specific properties
   in the meta-data and then query those in the language specific model
-  generation. We could have another SML workflow to look for files; it
+  generation. We could have another yarn workflow to look for files; it
   could use the meta-data for file path. The extension will tell it
   what "function parser" to use. We could literally look through the
   meta-data extensions looking for file path, and for each run the
@@ -6818,8 +6818,8 @@ JSON documents are supplied, we should be able to create a type that
 is the superset of these.
 
 To be clear, this story is not about using a JSON or XML schema to
-generate a SML model, but to use instances of a given schema in JSON
-or XML to infer a possible SML model that could read that instance
+generate a yarn model, but to use instances of a given schema in JSON
+or XML to infer a possible yarn model that could read that instance
 document.
 
 *** Investigate GDB visualisers for generated models                  :epic:
@@ -6837,7 +6837,7 @@ STL containers with types of that model.
 - [[https://github.com/ruediger/Boost-Pretty-Printer][Boost pretty printer]]
 - [[https://groups.google.com/group/boost-list/browse_thread/thread/ff232ac626bf41cf/18fbf516ceb091da?pli%3D1][Example for multi-index]]
 
-*** SML models could have a model classification                       :epic:
+*** yarn models could have a model classification                       :epic:
 
 Consider creating an enumeration for model classification (e.g. type
 of the model):
@@ -6852,7 +6852,7 @@ This still requires a lot of analysis work around the DDD book.
 *Merged with modes of operation story:*
 
 Create "modes" of operation: relational, object-oriented and
-procedural. they limit the types available in SML. relational only
+procedural. they limit the types available in yarn. relational only
 allows primitives plus relational commands (FK and PK; FK is when
 using a model type, PK is a marker on a property). procedural only
 allows primitives plus model types. we will need pointer support for
@@ -6942,7 +6942,7 @@ We just bumped into an error where a type was not spelled correctly:
 We meant to say =inclusion= rather than =inlcusion=. We should
 investigate if the clang "misspell" matching is available to use from
 the outside word; it would be useful in cases such as this. We should
-be able to just push all of the available qnames in SML and then,
+be able to just push all of the available qnames in yarn and then,
 given a name, see if it matches.
 
 See Spell Checker section of [[http://blog.llvm.org/2010/04/amazing-feats-of-clang-error-recovery.html][this]] post.
@@ -6953,7 +6953,7 @@ several implementations available.
 
 - https://github.com/cdmh/algorithms
 
-*** Consider using a graph in SML for indexing and other tasks        :story:
+*** Consider using a graph in yarn for indexing and other tasks        :story:
 
 To keep things simple we created a number of specialised indexers,
 each performing a complete loop, recursion, etc over the merged
@@ -6973,8 +6973,8 @@ used. The graph could probably be reused as is. See:
 
 One can imagine a clang-based front-end that reads C++ code suitably
 annotated, perhaps with =Generatable= or some such attributes -
-basically all attributes required to build a sensible SML model. The
-frontend will parse the code and generate SML. We can then generate
+basically all attributes required to build a sensible yarn model. The
+frontend will parse the code and generate yarn. We can then generate
 serialisation, hashing etc for the hand-crafted code.
 
 One very good use case for this is for legacy code bases. One could
@@ -7104,11 +7104,11 @@ dependencies, including compiler and so on.
 
 We can either extend dogen or create a new utility for this.
 
-*** Improving test data generation via SML "reflection"               :story:
+*** Improving test data generation via yarn "reflection"               :story:
 
 A really random but perhaps implementable idea: to create a
 description of test data as JSON objects. For example, one could
-supply a "SML instantiation description language" for a user model,
+supply a "yarn instantiation description language" for a user model,
 such as:
 
 : {
@@ -7122,12 +7122,12 @@ such as:
 : }
 
 Where =__type__= is the "meta-type" for the object we want to
-instantiate, allowing us to locate it in the SML model, and the
-remaining properties are as per user SML model. Once the type is
-located, one could then iterate through the properties in SML and
+instantiate, allowing us to locate it in the yarn model, and the
+remaining properties are as per user yarn model. Once the type is
+located, one could then iterate through the properties in yarn and
 locate their instance values in the JSON.
 
-With this JSON and an SML instance of =my_model= we could generate
+With this JSON and an yarn instance of =my_model= we could generate
 code that looks like so:
 
 : my_model m;
@@ -7143,10 +7143,10 @@ same values (or algorithm of value generation), all ints etc.
 
 This is almost like reflection, in that if one had a strongly typed
 model for the instantiation description language, it would look like a
-reflected SML model. The problem, of course, is that we do not code
-generate SML; we code generate in language specific models such as
+reflected yarn model. The problem, of course, is that we do not code
+generate yarn; we code generate in language specific models such as
 =cpp=, etc. We would also have to have some kind of reflection support
-for these models, and a transformation layer between the SML
+for these models, and a transformation layer between the yarn
 reflection and the implementation model. This is what the formatter
 would then use to output.
 
@@ -7154,7 +7154,7 @@ would then use to output.
 
 - See also [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#make-test-data-generator-more-configurable][Make test data generator more configurable]]
 - this idea stems from the need to generate [[http://www.neuron.yale.edu/neuron/static/docs/refman/hoc.html][Hoc]] files from a neuron
-  model described SML. For that particular use case we would have a
+  model described yarn. For that particular use case we would have a
   language model (=hoc=) that uses the instantiation description
   language to generate hoc files.
 
@@ -7311,7 +7311,7 @@ that I don't have to install Dia.
 #+end_quote
 
 It should be fairly straightforward to add a yuml front end that reads
-a file using their markup language and generates an SML model from it.
+a file using their markup language and generates an yarn model from it.
 
 *** Add support for thrift and protocol buffers                        :epic:
 
@@ -7635,7 +7635,7 @@ YQL offers a REST based API with lots of interesting information; an
 example of the information provided is available [[https://github.com/yql/yql-tables/blob/master/yahoo/finance/yahoo.finance.quant.xml][here]]. There should be
 somewhere a matching XML schema for each of these queries, at least
 for the end points that return XML. It would be great if one could
-take one of those schemas and generate an SML representation for them.
+take one of those schemas and generate an yarn representation for them.
 
 More generally, it would be great if dogen was able to create a domain
 model off of an XML schema. However, we already have the Code
