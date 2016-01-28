@@ -31,19 +31,23 @@ element_settings::element_settings()
 
 element_settings::element_settings(
     const bool disable_complete_constructor,
-    const bool disable_xml_serialization)
+    const bool disable_xml_serialization,
+    const std::string& helper_family)
     : disable_complete_constructor_(disable_complete_constructor),
-      disable_xml_serialization_(disable_xml_serialization) { }
+      disable_xml_serialization_(disable_xml_serialization),
+      helper_family_(helper_family) { }
 
 void element_settings::swap(element_settings& other) noexcept {
     using std::swap;
     swap(disable_complete_constructor_, other.disable_complete_constructor_);
     swap(disable_xml_serialization_, other.disable_xml_serialization_);
+    swap(helper_family_, other.helper_family_);
 }
 
 bool element_settings::operator==(const element_settings& rhs) const {
     return disable_complete_constructor_ == rhs.disable_complete_constructor_ &&
-        disable_xml_serialization_ == rhs.disable_xml_serialization_;
+        disable_xml_serialization_ == rhs.disable_xml_serialization_ &&
+        helper_family_ == rhs.helper_family_;
 }
 
 element_settings& element_settings::operator=(element_settings other) {
@@ -66,6 +70,22 @@ bool element_settings::disable_xml_serialization() const {
 
 void element_settings::disable_xml_serialization(const bool v) {
     disable_xml_serialization_ = v;
+}
+
+const std::string& element_settings::helper_family() const {
+    return helper_family_;
+}
+
+std::string& element_settings::helper_family() {
+    return helper_family_;
+}
+
+void element_settings::helper_family(const std::string& v) {
+    helper_family_ = v;
+}
+
+void element_settings::helper_family(const std::string&& v) {
+    helper_family_ = std::move(v);
 }
 
 } } } }

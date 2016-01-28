@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <string>
 #include <algorithm>
 #include "dogen/quilt.cpp/serialization/settings/element_settings_fwd_ser.hpp"
 
@@ -45,7 +46,8 @@ public:
 public:
     element_settings(
         const bool disable_complete_constructor,
-        const bool disable_xml_serialization);
+        const bool disable_xml_serialization,
+        const std::string& helper_family);
 
 private:
     template<typename Archive>
@@ -61,6 +63,16 @@ public:
     bool disable_xml_serialization() const;
     void disable_xml_serialization(const bool v);
 
+    /**
+     * @brief Family of the helper methods for this element.
+     */
+    /**@{*/
+    const std::string& helper_family() const;
+    std::string& helper_family();
+    void helper_family(const std::string& v);
+    void helper_family(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const element_settings& rhs) const;
     bool operator!=(const element_settings& rhs) const {
@@ -74,6 +86,7 @@ public:
 private:
     bool disable_complete_constructor_;
     bool disable_xml_serialization_;
+    std::string helper_family_;
 };
 
 } } } }

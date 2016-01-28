@@ -20,7 +20,15 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen/quilt.cpp/io/settings/element_settings_io.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace quilt {
@@ -37,7 +45,8 @@ std::ostream& operator<<(std::ostream& s, const element_settings& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::settings::element_settings\"" << ", "
       << "\"disable_complete_constructor\": " << v.disable_complete_constructor() << ", "
-      << "\"disable_xml_serialization\": " << v.disable_xml_serialization()
+      << "\"disable_xml_serialization\": " << v.disable_xml_serialization() << ", "
+      << "\"helper_family\": " << "\"" << tidy_up_string(v.helper_family()) << "\""
       << " }";
     return(s);
 }
