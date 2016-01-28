@@ -7,6 +7,7 @@
             "meta_type" : "primitive",
             "simple_name" : "int8_t",
             "extensions" : {
+                "quilt.cpp.helper_family" : "Number",
                 "quilt.cpp.type.requires_manual_default_constructor" : true,
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -20,6 +21,7 @@
             "meta_type" : "primitive",
             "simple_name" : "int16_t",
             "extensions" : {
+                "quilt.cpp.helper_family" : "Number",
                 "quilt.cpp.type.requires_manual_default_constructor" : true,
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -33,6 +35,7 @@
             "meta_type" : "primitive",
             "simple_name" : "int32_t",
             "extensions" : {
+                "quilt.cpp.helper_family" : "Number",
                 "quilt.cpp.type.requires_manual_default_constructor" : true,
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -46,6 +49,7 @@
             "meta_type" : "primitive",
             "simple_name" : "int64_t",
             "extensions" : {
+                "quilt.cpp.helper_family" : "Number",
                 "quilt.cpp.type.requires_manual_default_constructor" : true,
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -59,6 +63,7 @@
             "meta_type" : "primitive",
             "simple_name" : "uint8_t",
             "extensions" : {
+                "quilt.cpp.helper_family" : "Character",
                 "quilt.cpp.type.requires_manual_default_constructor" : true,
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -72,6 +77,7 @@
             "meta_type" : "primitive",
             "simple_name" : "uint16_t",
             "extensions" : {
+                "quilt.cpp.helper_family" : "Number",
                 "quilt.cpp.type.requires_manual_default_constructor" : true,
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -85,6 +91,7 @@
             "meta_type" : "primitive",
             "simple_name" : "uint32_t",
             "extensions" : {
+                "quilt.cpp.helper_family" : "Number",
                 "quilt.cpp.type.requires_manual_default_constructor" : true,
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -98,6 +105,7 @@
             "meta_type" : "primitive",
             "simple_name" : "uint64_t",
             "extensions" : {
+                "quilt.cpp.helper_family" : "Number",
                 "quilt.cpp.type.requires_manual_default_constructor" : true,
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -111,6 +119,7 @@
             "meta_type" : "object",
             "simple_name" : "string",
             "extensions" : {
+                "quilt.cpp.helper_family" : "String",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<string>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/string.hpp>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -124,6 +133,7 @@
             "simple_name" : "vector",
             "object_type" : "sequence_container",
             "extensions" : {
+                "quilt.cpp.helper_family" : "SequenceContainer",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<vector>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/vector.hpp>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -137,6 +147,7 @@
             "simple_name" : "deque",
             "object_type" : "sequence_container",
             "extensions" : {
+                "quilt.cpp.helper_family" : "SequenceContainer",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<deque>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/deque.hpp>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -150,6 +161,7 @@
             "simple_name" : "array",
             "object_type" : "sequence_container",
             "extensions" : {
+                "quilt.cpp.helper_family" : "SequenceContainer",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<array>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
                 "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
@@ -162,6 +174,7 @@
             "simple_name" : "list",
             "object_type" : "sequence_container",
             "extensions" : {
+                "quilt.cpp.helper_family" : "SequenceContainer",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<list>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/list.hpp>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -175,6 +188,7 @@
             "simple_name" : "forward_list",
             "object_type" : "sequence_container",
             "extensions" : {
+                "quilt.cpp.helper_family" : "SequenceContainer",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<forward_list>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
                 "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
@@ -187,6 +201,7 @@
             "simple_name" : "set",
             "object_type" : "associative_container",
             "extensions" : {
+                "quilt.cpp.helper_family" : "AssociativeContainer",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<set>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/set.hpp>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -200,6 +215,7 @@
             "simple_name" : "multiset",
             "object_type" : "associative_container",
             "extensions" : {
+                "quilt.cpp.helper_family" : "AssociativeContainer",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<multiset>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/multiset.hpp>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -213,6 +229,7 @@
             "simple_name" : "unordered_set",
             "object_type" : "associative_container",
             "extensions" : {
+                "quilt.cpp.helper_family" : "AssociativeContainer",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<unordered_set>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/unordered_set.hpp>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -226,6 +243,7 @@
             "simple_name" : "map",
             "object_type" : "associative_container",
             "extensions" : {
+                "quilt.cpp.helper_family" : "AssociativeContainer",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<map>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/map.hpp>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -239,6 +257,7 @@
             "simple_name" : "multimap",
             "object_type" : "associative_container",
             "extensions" : {
+                "quilt.cpp.helper_family" : "AssociativeContainer",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<multimap>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/multimap.hpp>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -252,6 +271,7 @@
             "simple_name" : "unordered_map",
             "object_type" : "associative_container",
             "extensions" : {
+                "quilt.cpp.helper_family" : "AssociativeContainer",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<unordered_map>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/unordered_map.hpp>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -264,6 +284,7 @@
             "meta_type" : "object",
             "simple_name" : "pair",
             "extensions" : {
+                "quilt.cpp.helper_family" : "Pair",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<utility>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/utility.hpp>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -277,6 +298,7 @@
             "simple_name" : "shared_ptr",
             "object_type" : "smart_pointer",
             "extensions" : {
+                "quilt.cpp.helper_family" : "Dereferenceable",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<memory>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
                 "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
@@ -289,6 +311,7 @@
             "simple_name" : "weak_ptr",
             "object_type" : "smart_pointer",
             "extensions" : {
+                "quilt.cpp.helper_family" : "Dereferenceable",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<memory>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
                 "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
@@ -301,6 +324,7 @@
             "simple_name" : "unique_ptr",
             "object_type" : "smart_pointer",
             "extensions" : {
+                "quilt.cpp.helper_family" : "Dereferenceable",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<memory>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
                 "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
@@ -323,6 +347,7 @@
             "meta_type" : "object",
             "simple_name" : "optional",
             "extensions" : {
+                "quilt.cpp.helper_family" : "Dereferenceable",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<functional>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
                 "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
