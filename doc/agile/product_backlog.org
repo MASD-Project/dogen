@@ -7766,119 +7766,39 @@ reflection class and field.
 Diff support is injected into the model just like keys. It also
 requires that reflection support gets injected too.
 
-*** Generation of cache code                                           :epic:
+*** Add support for object caches                                      :epic:
 
-*New understanding*:
+It would be good to have meta-model knowledge of "cacheability". This
+is done by marking objects with a stereotype of =Cacheable=. It then
+could translate to:
 
-- create a cache interface in types;  all types marked as =cacheable=
-  have gets, puts  etc.
-- create a memcache implementation.
+- adding a serialisation like interface with gets, puts, etc. We need
+  to bind this to a specific cache such as memcache, coherence, etc.
 - create a type to string which converts a key made up of primitives
   into a underscore delimited string, used as a key in the cache.
 - we should also consider external libraries like [[https://github.com/cripplet/cachepp][cachepp]].
 
-*Old Understanding*:
-
-Some thought on adding caching to dogen:
-
-- we could have "modes" in dogen; instead of the
-  relational/procedural/etc approach, it would be more task based:
-  domain, cache.
-- in cache mode we do not need to a target. we load up all diagrams in
-  references and we find all types which have a stereotype of
-  versioned. we mark them as generatable.
-- if a target is supplied, it can only have objects of stereotype
-  =mapping= or =cache= (tbd). These are simply a key-value-pair and
-  determine additional caches to create. the attributes must be called
-  key and value. the key entity must be versioned, value doesn't have
-  to.
-- for each versioned type, we create the following "shadow" objects: get,
-  put, erase. each has versioned and unversioned. these objects are in
-  the namespace cache::type_namespaces,
-  e.g. =cache::credit_risk::model_configuration::versioned_get= or
-  maybe
-  =cache::credit_risk::model_configuration::versioned::get=. they are
-  protocol messages to be sent on the wire.
-- new formatter: named cache, with unordered maps for an entity with
-  key, value. Any additional mappings that were added manually using
-  the target are also added to the kvp mapping.
-- new formatter: raw named cache, with unordered maps for an entity with
-  key, value. value is raw storage, with an indication of the type of
-  data being stored (e.g. xml, binary or text).
-- new formatter: repository. contains all of the named caches.
-- new formatter: dispatcher. given a message of one of the known types
-  (get/put/remove) it dispatches it to the correct location in the
-  repository and takes appropriate action. we may need one per named
-  cache.
-- put/get/erase are regular domain objects so they go through the
-  usual formatters
-
-Sample flow:
-
-: credit_risk::model_configuration_unversioned_key k(123);
-: cache::near near;
-: cache::credit_risk::model_configuration::named_cache nc(
-:    near.named_cache<credit_risk::model_configuration>());
-: std::future v(n.async_get(k));
-
-- we need to re-read the coherence docs to clarify the roles of
-  front/back cache, local/remote cache and near cache.
-
 *** Add SQL support to Dogen                                           :epic:
-**** Note on formatters                                                :note:
 
-- Use an attribute with the type to determine if we want only the ID of
-  the foreign key in C++ code or if we want a whole type.
+It would be nice to generate all of the tables required to store a
+model as well as the stored procs to read and write instances of the
+model.
 
-Formatters:
+Notes:
 
-- File names are: FQN_ENTITY, e.g. kitanda_prototype_currency_table
-- create: table, load, save, erase, test data generators, test
-- drop: table, load, save, erase, test data generators, test
-- domains
-- create schema formatter
-- create all tables
-- create all procs
-- drop all tables
-- drop all procs
-- drop all
-- create all
-
-**** Analyse deployment support on CMake
-
-Ideally, get a state of affairs that resebles something like this:
-
-- make deploy_database
-- make undeploy_database
-
-**** Test database deployment
-
-We need to setup a build that deploys all the SQL (tables, procs, etc)
-to a clean database, runs all SQL tests and un-deploys all the SQL.
-
-**** Setup a postgres url in cmake file
-
-The database password is set to trust. We should really have user
-passwords. To make things more secure we should also pass in the
-database credentials to the unit tests. One potential approach is to
-do so in cmake. Example from VTK:
-
-#+begin_src cmake
-IF ( BUILD_TESTING )
-   SET ( VTK_PSQL_TEST_URL "" CACHE STRING "A URL for a PostgreSQL server
-         of the form psql://[[username[:password]@]hostname[:port]]/[dbname]" )
-ENDIF ( BUILD_TESTING )
-#+end_src
-
-Suggestion: maybe there's a possibility of using an environment
-variable for all the used parameters (username, hostname, etc)
-
-**** Add multiple database support to makefiles
-
-Our makefiles don't cope very well with the test/development database
-separation. There is a massive hack required to populate both
-databases (changing makefile manually and then reverting the change).
-
-There should be a way of passing in the database name as an
-environment variable into the makefile (not into the cmake as we want
-to be able to change databases without having to rebuild makefiles).
+- use an attribute with the type to determine if we want only the ID
+  of the foreign key in C++ code or if we want a whole type.
+- file names are: "qualified name-entity", e.g. model_type.
+- drop/create statements: schema, table, load, save, erase, test data
+  generators, test.
+- ability to drop/create all: table, procs, etc.
+- CMake deployment support: targets such as deploy_database,
+  undeploy_database
+- testing/CI: target that deploys all the SQL to a clean database,
+  runs all SQL tests and un-deploys all the SQL.
+- database connection settings: use pgpass.
+- must cope with the test/development database separation. At present
+  there is a massive hack required to populate both databases
+  (changing makefile manually and then reverting the change).
+- there should be a way of passing in the database name as an
+  environment variable into the CMake
