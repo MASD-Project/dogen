@@ -79,7 +79,6 @@ bundle bundle_factory::make() const {
     element_settings_factory f(dynamic_repository_, root_object_);
     r.element_settings(f.make());
     return r;
-
 }
 
 } } } }
