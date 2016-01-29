@@ -5980,7 +5980,8 @@ Tool should have different "template sets" so that we could have a
 structures.
 
 Tool should add FindODB if user wants ODB support. Similar for EOS
-when we support it again.
+when we support it again. We should probably have HTTP links to the
+sources of these packages and download them on the fly.
 
 Tool should also create git repo and do first commit (optional).
 
@@ -6010,6 +6011,10 @@ Dart should use stitch templates to generate files.
 
 We may need some options such as "generate boost test ctest
 integration", etc.
+
+Notes:
+
+- [[https://github.com/elbeno/skeleton][Skeleton]]: project to generate c++ project skeletons.
 
 *** Add support for bintray                                           :story:
 
