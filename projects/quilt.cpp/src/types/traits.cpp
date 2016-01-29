@@ -79,6 +79,11 @@ std::string traits::disable_xml_serialization() {
     return r;
 }
 
+std::string traits::helper_family() {
+    static std::string r("quilt.cpp.helper_family");
+    return r;
+}
+
 std::string traits::cpp::inclusion_required() {
     static std::string r("quilt.cpp.inclusion_required");
     return r;

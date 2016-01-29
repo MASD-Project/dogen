@@ -91,6 +91,11 @@ struct traits {
      */
     static std::string disable_xml_serialization();
 
+    /**
+     * @brief Family of the helper methods.
+     */
+    static std::string helper_family();
+
     struct cpp {
         /**
          * @brief Is inclusion required for all formatters.

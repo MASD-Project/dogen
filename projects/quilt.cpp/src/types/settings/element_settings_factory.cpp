@@ -57,6 +57,9 @@ make_field_definitions(const dynamic::repository& rp) const {
     const auto& xs(traits::disable_xml_serialization());
     r.disable_xml_serialization = s.select_field_by_name(xs);
 
+    const auto& hf(traits::helper_family());
+    r.helper_family = s.select_field_by_name(hf);
+
     return r;
 }
 
@@ -65,19 +68,11 @@ make_root_object_field_values(const field_definitions& fd,
     const dynamic::object& root_object) const {
 
     root_object_field_values r;
-    r.disable_complete_constructor =
-        obtain_field_value(fd.disable_complete_constructor, root_object);
-    r.disable_xml_serialization =
-        obtain_field_value(fd.disable_xml_serialization, root_object);
-    return r;
-}
-
-bool element_settings_factory::
-obtain_field_value(const dynamic::field_definition& fd,
-    const dynamic::object& o) const {
-    using namespace dynamic;
-    const field_selector fs(o);
-    const auto r(fs.get_boolean_content_or_default(fd));
+    const dynamic::field_selector fs(root_object);
+    r.disable_complete_constructor = fs.get_boolean_content_or_default(
+        fd.disable_complete_constructor);
+    r.disable_xml_serialization = fs.get_boolean_content_or_default(
+        fd.disable_xml_serialization);
     return r;
 }
 
@@ -92,7 +87,8 @@ obtain_field_value(const dynamic::field_definition& fd,
     return root_object_value;
 }
 
-element_settings element_settings_factory::make(const dynamic::object& o) const {
+element_settings
+element_settings_factory::make(const dynamic::object& o) const {
     element_settings r;
     r.disable_complete_constructor(
         obtain_field_value(field_definitions_.disable_complete_constructor,
@@ -101,6 +97,10 @@ element_settings element_settings_factory::make(const dynamic::object& o) const 
     r.disable_xml_serialization(
         obtain_field_value(field_definitions_.disable_xml_serialization,
             field_values_.disable_xml_serialization, o));
+
+    const dynamic::field_selector fs(o);
+    r.helper_family(
+        fs.get_text_content_or_default(field_definitions_.helper_family));
 
     return r;
 }

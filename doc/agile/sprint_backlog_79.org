@@ -561,6 +561,7 @@ inheritance. This causes unnecessary complexity in the formatter
 helpers. We need to try to implement it purely in the io facet.
 
 *** STARTED Add a field for =quilt.cpp.helper_family=                 :story:
+    CLOCK: [2016-01-29 Fri 21:45]
     CLOCK: [2016-01-28 Thu 07:02]--[2016-01-28 Thu 07:12] =>  0:10
     CLOCK: [2016-01-28 Thu 06:56]--[2016-01-28 Thu 07:01] =>  0:05
     CLOCK: [2016-01-28 Thu 06:29]--[2016-01-28 Thu 06:55] =>  0:26
@@ -601,9 +602,18 @@ Names:
 To implement element settings retrieval:
 
 - rename root_object_field_values to just field_values and all
-  related functions
-- add field definition and value
+  related functions: actually these are really root object specific so
+  do not rename.
+- add field definition and value.
 - update make method to read in value.
+- problem: in the past we only created setting bundles for generatable
+  types. However, we now need to do this for all types in order to
+  access this property. This will have an impact on performance. The
+  solution to this problem is to take a similar approach to what we
+  did for includes: create settings machinery to read out this one
+  property, create a repository of this property by name, and then use
+  these to construct the formatter properties with all of the
+  dependent helper methods.
 
 *** Stitcher log file names look weird                                :story:
 

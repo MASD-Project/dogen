@@ -53,6 +53,7 @@ private:
     struct field_definitions {
         dynamic::field_definition disable_complete_constructor;
         dynamic::field_definition disable_xml_serialization;
+        dynamic::field_definition helper_family;
     };
 
     /**
@@ -79,13 +80,6 @@ private:
         const dynamic::object& root_object) const;
 
 private:
-    /**
-     * @brief Obtains the value of the supplied field. Must be a
-     * Boolean field.
-     */
-    bool obtain_field_value(const dynamic::field_definition& fd,
-        const dynamic::object& o) const;
-
     /**
      * @brief Obtains the value of the supplied field. If not
      * available, uses the supplied root value.
