@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-28 Thu 06:55]
+#+CAPTION: Clock summary at [2016-01-30 Sat 22:04]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *24:19* |       |      |
+| *Total time*                                                                | *26:54* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 24:19   |       |      |
-| Active                                                                      |         | 24:19 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 3:14 |
+| Stories                                                                     | 26:54   |       |      |
+| Active                                                                      |         | 26:54 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 3:40 |
 | COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
 | COMPLETED Name builder should take only model name                          |         |       | 0:48 |
 | COMPLETED Generate exceptions using yarn types                              |         |       | 2:21 |
@@ -41,7 +41,7 @@
 | COMPLETED Rename aspect settings to element settings                        |         |       | 0:26 |
 | COMPLETED Remove support for integrated io                                  |         |       | 0:37 |
 | CANCELLED Implement io for inheritance in the io facet                      |         |       | 0:09 |
-| STARTED Add a field for =quilt.cpp.helper_family=                           |         |       | 0:40 |
+| STARTED Add a field for =quilt.cpp.helper_family=                           |         |       | 2:49 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -561,7 +561,8 @@ inheritance. This causes unnecessary complexity in the formatter
 helpers. We need to try to implement it purely in the io facet.
 
 *** STARTED Add a field for =quilt.cpp.helper_family=                 :story:
-    CLOCK: [2016-01-29 Fri 21:45]
+    CLOCK: [2016-01-30 Sat 21:16]--[2016-01-30 Sat 22:04] =>  0:48
+    CLOCK: [2016-01-29 Fri 21:45]--[2016-01-29 Fri 22:51] =>  1:06
     CLOCK: [2016-01-28 Thu 07:02]--[2016-01-28 Thu 07:12] =>  0:10
     CLOCK: [2016-01-28 Thu 06:56]--[2016-01-28 Thu 07:01] =>  0:05
     CLOCK: [2016-01-28 Thu 06:29]--[2016-01-28 Thu 06:55] =>  0:26
@@ -614,12 +615,18 @@ To implement element settings retrieval:
   property, create a repository of this property by name, and then use
   these to construct the formatter properties with all of the
   dependent helper methods.
+- note we are calling the field "helper family" not "formatter helper
+  family" because it is scoped in =quilt.cpp=, and the whole point of
+  =quilt.cpp= is to provide formatters.
 
-*** Stitcher log file names look weird                                :story:
+Fixes:
 
-At present we are writing files with names like:
-
-: dogen.stitcher...log
+- rename element settings back to aspect settings.
+- create a settings class just for helper settings and associated
+  classes. Add helper family to this class.
+- create a helper properties repository in formattables that stores
+  the helper properties for each type in model. We just need a map of
+  string to string. Add all associated machinery (workflow, etc).
 
 *** Add an helper method interface                                    :story:
 
@@ -633,11 +640,31 @@ Tasks:
 - update all helpers to implement interface and to register
   themselves.
 
-*** Create new settings class to represent dependent type families   :story:
+*** Add formatter helpers for type support in formatter properties    :story:
 
-We need a place to store all of the type families a given type is
-associated with. This includes all of the processing required in
-settings to attach this container to the bundle.
+We need a place to store all of the formatter helper families a given
+type is associated with.
+
+- follow the same pattern as in inclusion directives / inclusion
+  dependencies. So the name is helper family / helper family
+  dependencies. Not the best name but it will do for now. We just need
+  a helper family dependencies repository that has a map of string to
+  list of string.
+- add formatter helper family dependencies to formatter
+  properties as a list of string. Add processing to populate this.
+
+*** Update assistant to use new helper information                    :story:
+
+Once all the pieces are in place, the assistant can then use the
+formatter properties to find out which helpers are required for each
+type; call those helpers and populate the file with the generate
+code. We can remove all previous helper support.
+
+*** Remove nested type info                                           :story:
+
+Once all of the infrastructure is in place, we should not need this
+class any more. Remove code from transformer and remove object types
+and anything else that was used to dispatch based on type.
 
 *** Make context non-generatable                                      :story:
 
@@ -649,22 +676,11 @@ We need to extend context in a few ways dogen does not yet support:
   a map of type to context. Supply this context to the formatters
   workflow and to the formatters.
 
-*** Add helper methods to context                                     :story:
+*** Stitcher log file names look weird                                :story:
 
-Tasks:
+At present we are writing files with names like:
 
-- add a container of helper method interface to the context, by
-  formatter name;
-- add an activity to the formattables workflow that populates this
-  container using the new settings class and the helper registrar.
-- populate helper methods from context, removing all of the existing
-  scaffolding code for helper methods.
-
-*** Remove nested type info                                           :story:
-
-Once all of the infrastructure is in place, we should not need this
-class any more. Remove code from transformer and remove object types
-and anything else that was used to dispatch based on type.
+: dogen.stitcher...log
 
 *** Add more types to =quilt::cpp= canned tests                       :story:
 
