@@ -18,38 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_SETTINGS_HELPER_SETTINGS_FACTORY_HPP
-#define DOGEN_QUILT_CPP_TYPES_SETTINGS_HELPER_SETTINGS_FACTORY_HPP
+#ifndef DOGEN_QUILT_CPP_HASH_SETTINGS_HELPER_SETTINGS_REPOSITORY_HASH_HPP
+#define DOGEN_QUILT_CPP_HASH_SETTINGS_HELPER_SETTINGS_REPOSITORY_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/dynamic/types/field_definition.hpp"
-#include "dogen/quilt.cpp/types/settings/helper_settings.hpp"
+#include <functional>
+#include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace settings {
 
-class helper_settings_factory {
+struct helper_settings_repository_hasher {
 public:
-    explicit helper_settings_factory(const dynamic::repository& rp);
-
-private:
-    dynamic::field_definition
-    make_helper_family_field_definition(const dynamic::repository& rp);
-
-public:
-    helper_settings make(const dynamic::object& o) const;
-
-private:
-    const dynamic::field_definition helper_family_;
+    static std::size_t hash(const helper_settings_repository& v);
 };
 
 } } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::quilt::cpp::settings::helper_settings_repository> {
+public:
+    size_t operator()(const dogen::quilt::cpp::settings::helper_settings_repository& v) const {
+        return dogen::quilt::cpp::settings::helper_settings_repository_hasher::hash(v);
+    }
+};
+
+}
 #endif

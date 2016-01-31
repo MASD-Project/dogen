@@ -20,6 +20,7 @@
  */
 #include "dogen/quilt.cpp/hash/settings/bundle_hash.hpp"
 #include "dogen/quilt.cpp/hash/formatters/context_hash.hpp"
+#include "dogen/quilt.cpp/hash/settings/helper_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/formatter_properties_hash.hpp"
 
 namespace {
@@ -31,6 +32,15 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 }
 
 inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_settings_helper_settings(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -51,6 +61,7 @@ std::size_t context_hasher::hash(const context& v) {
 
     combine(seed, v.bundle());
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(v.formatter_properties()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_settings_helper_settings(v.helper_settings()));
 
     return seed;
 }

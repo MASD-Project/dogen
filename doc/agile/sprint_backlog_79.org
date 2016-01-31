@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-31 Sun 15:38]
+#+CAPTION: Clock summary at [2016-01-31 Sun 16:17]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *32:06* |       |      |
+| *Total time*                                                                | *32:44* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 32:06   |       |      |
-| Active                                                                      |         | 32:06 |      |
+| Stories                                                                     | 32:44   |       |      |
+| Active                                                                      |         | 32:44 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 4:10 |
 | COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
 | COMPLETED Name builder should take only model name                          |         |       | 0:48 |
@@ -43,7 +43,7 @@
 | CANCELLED Implement io for inheritance in the io facet                      |         |       | 0:09 |
 | COMPLETED Add a field for =quilt.cpp.helper_family=                         |         |       | 2:49 |
 | STARTED Add formatter helpers to formatter properties                       |         |       | 3:20 |
-| STARTED Add an helper method interface                                      |         |       | 1:22 |
+| STARTED Add an helper method interface                                      |         |       | 2:00 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -663,6 +663,7 @@ Notes:
   which dependencies apply to what formatters.
 
 *** STARTED Add an helper method interface                            :story:
+    CLOCK: [2016-01-31 Sun 15:39]--[2016-01-31 Sun 16:17] =>  0:38
     CLOCK: [2016-01-31 Sun 14:34]--[2016-01-31 Sun 15:38] =>  1:04
     CLOCK: [2016-01-31 Sun 13:42]--[2016-01-31 Sun 14:00] =>  0:18
 

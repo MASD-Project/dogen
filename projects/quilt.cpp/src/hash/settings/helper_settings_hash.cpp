@@ -38,7 +38,12 @@ namespace settings {
 std::size_t helper_settings_hasher::hash(const helper_settings& v) {
     std::size_t seed(0);
 
-    combine(seed, v.helper_family());
+    combine(seed, v.family());
+    combine(seed, v.string_conversion_method());
+    combine(seed, v.requires_quoting());
+    combine(seed, v.remove_unprintable_characters());
+    combine(seed, v.requires_dereferencing());
+
     return seed;
 }
 

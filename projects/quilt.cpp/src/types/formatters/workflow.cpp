@@ -126,7 +126,9 @@ private:
             BOOST_THROW_EXCEPTION(workflow_error(bundle_not_found + e.id()));
         }
 
-        const context ctx(k->second, i->second);
+        // FIXME
+        std::unordered_map<std::string, settings::helper_settings> hs;
+        const context ctx(k->second, i->second, hs);
         auto file(f.format(ctx, e));
 
         if (empty_out_content) {
@@ -385,7 +387,9 @@ create_context_for_name(const std::unordered_map<std::string,
         BOOST_LOG_SEV(lg, error) << bundle_not_found << qn;
         BOOST_THROW_EXCEPTION(workflow_error(bundle_not_found + qn));
     }
-    return context(i->second, fp);
+    // FIXME
+    std::unordered_map<std::string, settings::helper_settings> hs;
+    return context(i->second, fp, hs);
 }
 
 void yarn_dispatcher::format(const yarn::element& e) {

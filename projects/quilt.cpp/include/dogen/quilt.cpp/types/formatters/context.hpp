@@ -29,6 +29,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen/quilt.cpp/types/settings/bundle.hpp"
+#include "dogen/quilt.cpp/types/settings/helper_settings.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_properties.hpp"
 #include "dogen/quilt.cpp/serialization/formatters/context_fwd_ser.hpp"
 
@@ -50,7 +51,8 @@ public:
 public:
     context(
         const dogen::quilt::cpp::settings::bundle& bundle,
-        const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& formatter_properties);
+        const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& formatter_properties,
+        const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& helper_settings);
 
 private:
     template<typename Archive>
@@ -70,6 +72,11 @@ public:
     void formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& v);
     void formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>&& v);
 
+    const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& helper_settings() const;
+    std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& helper_settings();
+    void helper_settings(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& v);
+    void helper_settings(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>&& v);
+
 public:
     bool operator==(const context& rhs) const;
     bool operator!=(const context& rhs) const {
@@ -83,6 +90,7 @@ public:
 private:
     dogen::quilt::cpp::settings::bundle bundle_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> formatter_properties_;
+    std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings> helper_settings_;
 };
 
 } } } }

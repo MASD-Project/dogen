@@ -33,17 +33,16 @@ helper_settings_factory::helper_settings_factory(const dynamic::repository& rp)
 
 dynamic::field_definition
 helper_settings_factory::make_helper_family_field_definition(const dynamic::repository& rp) {
-    const auto& hf(traits::helper_family());
+    const auto& hf(traits::cpp::helper::family());
     const dynamic::repository_selector s(rp);
     return s.select_field_by_name(hf);
 }
-    
+
 helper_settings helper_settings_factory::make(const dynamic::object& o) const {
     const dynamic::field_selector fs(o);
     helper_settings r;
-    r.helper_family(fs.get_text_content_or_default(helper_family_));
+    r.family(fs.get_text_content_or_default(helper_family_));
     return r;
 }
 
 } } } }
-

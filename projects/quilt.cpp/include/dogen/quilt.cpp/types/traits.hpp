@@ -91,11 +91,6 @@ struct traits {
      */
     static std::string disable_xml_serialization();
 
-    /**
-     * @brief Family of the helper methods.
-     */
-    static std::string helper_family();
-
     struct cpp {
         /**
          * @brief Is inclusion required for all formatters.
@@ -126,6 +121,33 @@ struct traits {
          * @brief If true, facet directories will be ignored.
          */
         static std::string disable_facet_directories();
+
+        struct helper {
+            /**
+             * @brief Family of the helper methods.
+             */
+            static std::string family();
+
+            /**
+             * @brief Method to convert object to a string, if any.
+             */
+            static std::string string_conversion_method();
+
+            /**
+             * @brief If true, the type must be quoted.
+             */
+            static std::string requires_quoting();
+
+            /**
+             * @brief If true, remove unprintable characters.
+             */
+            static std::string remove_unprintable_characters();
+
+            /**
+             * @brief If true, the type must be dereferenced.
+             */
+            static std::string requires_dereferencing();
+        };
     };
 };
 

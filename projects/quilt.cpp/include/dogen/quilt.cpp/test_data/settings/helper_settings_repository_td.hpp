@@ -18,36 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_SETTINGS_HELPER_SETTINGS_FACTORY_HPP
-#define DOGEN_QUILT_CPP_TYPES_SETTINGS_HELPER_SETTINGS_FACTORY_HPP
+#ifndef DOGEN_QUILT_CPP_TEST_DATA_SETTINGS_HELPER_SETTINGS_REPOSITORY_TD_HPP
+#define DOGEN_QUILT_CPP_TEST_DATA_SETTINGS_HELPER_SETTINGS_REPOSITORY_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/dynamic/types/field_definition.hpp"
-#include "dogen/quilt.cpp/types/settings/helper_settings.hpp"
+#include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace settings {
 
-class helper_settings_factory {
+class helper_settings_repository_generator {
 public:
-    explicit helper_settings_factory(const dynamic::repository& rp);
-
-private:
-    dynamic::field_definition
-    make_helper_family_field_definition(const dynamic::repository& rp);
+    helper_settings_repository_generator();
 
 public:
-    helper_settings make(const dynamic::object& o) const;
+    typedef dogen::quilt::cpp::settings::helper_settings_repository result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
 
 private:
-    const dynamic::field_definition helper_family_;
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } } } }

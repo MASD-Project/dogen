@@ -18,38 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_SETTINGS_HELPER_SETTINGS_FACTORY_HPP
-#define DOGEN_QUILT_CPP_TYPES_SETTINGS_HELPER_SETTINGS_FACTORY_HPP
+#include "dogen/quilt.cpp/hash/settings/helper_settings_hash.hpp"
+#include "dogen/quilt.cpp/hash/settings/helper_settings_repository_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/dynamic/types/field_definition.hpp"
-#include "dogen/quilt.cpp/types/settings/helper_settings.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_settings_helper_settings(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace settings {
 
-class helper_settings_factory {
-public:
-    explicit helper_settings_factory(const dynamic::repository& rp);
+std::size_t helper_settings_repository_hasher::hash(const helper_settings_repository& v) {
+    std::size_t seed(0);
 
-private:
-    dynamic::field_definition
-    make_helper_family_field_definition(const dynamic::repository& rp);
-
-public:
-    helper_settings make(const dynamic::object& o) const;
-
-private:
-    const dynamic::field_definition helper_family_;
-};
+    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_settings_helper_settings(v.helper_settings_by_name()));
+    return seed;
+}
 
 } } } }
-
-#endif

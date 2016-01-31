@@ -18,38 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_SETTINGS_HELPER_SETTINGS_FACTORY_HPP
-#define DOGEN_QUILT_CPP_TYPES_SETTINGS_HELPER_SETTINGS_FACTORY_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_HELPER_SETTINGS_REPOSITORY_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_HELPER_SETTINGS_REPOSITORY_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/dynamic/types/field_definition.hpp"
-#include "dogen/quilt.cpp/types/settings/helper_settings.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
-namespace settings {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::settings::helper_settings_repository)
+namespace boost {
+namespace serialization {
 
-class helper_settings_factory {
-public:
-    explicit helper_settings_factory(const dynamic::repository& rp);
+template<typename Archive>
+void save(Archive& ar, const dogen::quilt::cpp::settings::helper_settings_repository& v, unsigned int version);
 
-private:
-    dynamic::field_definition
-    make_helper_family_field_definition(const dynamic::repository& rp);
+template<typename Archive>
+void load(Archive& ar, dogen::quilt::cpp::settings::helper_settings_repository& v, unsigned int version);
 
-public:
-    helper_settings make(const dynamic::object& o) const;
-
-private:
-    const dynamic::field_definition helper_family_;
-};
-
-} } } }
+} }
 
 #endif

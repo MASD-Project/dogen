@@ -39,13 +39,20 @@ namespace settings {
  */
 class helper_settings final {
 public:
-    helper_settings() = default;
     helper_settings(const helper_settings&) = default;
     helper_settings(helper_settings&&) = default;
     ~helper_settings() = default;
 
 public:
-    explicit helper_settings(const std::string& helper_family);
+    helper_settings();
+
+public:
+    helper_settings(
+        const std::string& family,
+        const std::string& string_conversion_method,
+        const bool requires_quoting,
+        const bool remove_unprintable_characters,
+        const bool requires_dereferencing);
 
 private:
     template<typename Archive>
@@ -59,11 +66,25 @@ public:
      * @brief Family of the helper methods for this element.
      */
     /**@{*/
-    const std::string& helper_family() const;
-    std::string& helper_family();
-    void helper_family(const std::string& v);
-    void helper_family(const std::string&& v);
+    const std::string& family() const;
+    std::string& family();
+    void family(const std::string& v);
+    void family(const std::string&& v);
     /**@}*/
+
+    const std::string& string_conversion_method() const;
+    std::string& string_conversion_method();
+    void string_conversion_method(const std::string& v);
+    void string_conversion_method(const std::string&& v);
+
+    bool requires_quoting() const;
+    void requires_quoting(const bool v);
+
+    bool remove_unprintable_characters() const;
+    void remove_unprintable_characters(const bool v);
+
+    bool requires_dereferencing() const;
+    void requires_dereferencing(const bool v);
 
 public:
     bool operator==(const helper_settings& rhs) const;
@@ -76,7 +97,11 @@ public:
     helper_settings& operator=(helper_settings other);
 
 private:
-    std::string helper_family_;
+    std::string family_;
+    std::string string_conversion_method_;
+    bool requires_quoting_;
+    bool remove_unprintable_characters_;
+    bool requires_dereferencing_;
 };
 
 } } } }

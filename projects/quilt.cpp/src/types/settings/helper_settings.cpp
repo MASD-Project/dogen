@@ -25,16 +25,38 @@ namespace quilt {
 namespace cpp {
 namespace settings {
 
-helper_settings::helper_settings(const std::string& helper_family)
-    : helper_family_(helper_family) { }
+helper_settings::helper_settings()
+    : requires_quoting_(static_cast<bool>(0)),
+      remove_unprintable_characters_(static_cast<bool>(0)),
+      requires_dereferencing_(static_cast<bool>(0)) { }
+
+helper_settings::helper_settings(
+    const std::string& family,
+    const std::string& string_conversion_method,
+    const bool requires_quoting,
+    const bool remove_unprintable_characters,
+    const bool requires_dereferencing)
+    : family_(family),
+      string_conversion_method_(string_conversion_method),
+      requires_quoting_(requires_quoting),
+      remove_unprintable_characters_(remove_unprintable_characters),
+      requires_dereferencing_(requires_dereferencing) { }
 
 void helper_settings::swap(helper_settings& other) noexcept {
     using std::swap;
-    swap(helper_family_, other.helper_family_);
+    swap(family_, other.family_);
+    swap(string_conversion_method_, other.string_conversion_method_);
+    swap(requires_quoting_, other.requires_quoting_);
+    swap(remove_unprintable_characters_, other.remove_unprintable_characters_);
+    swap(requires_dereferencing_, other.requires_dereferencing_);
 }
 
 bool helper_settings::operator==(const helper_settings& rhs) const {
-    return helper_family_ == rhs.helper_family_;
+    return family_ == rhs.family_ &&
+        string_conversion_method_ == rhs.string_conversion_method_ &&
+        requires_quoting_ == rhs.requires_quoting_ &&
+        remove_unprintable_characters_ == rhs.remove_unprintable_characters_ &&
+        requires_dereferencing_ == rhs.requires_dereferencing_;
 }
 
 helper_settings& helper_settings::operator=(helper_settings other) {
@@ -43,20 +65,60 @@ helper_settings& helper_settings::operator=(helper_settings other) {
     return *this;
 }
 
-const std::string& helper_settings::helper_family() const {
-    return helper_family_;
+const std::string& helper_settings::family() const {
+    return family_;
 }
 
-std::string& helper_settings::helper_family() {
-    return helper_family_;
+std::string& helper_settings::family() {
+    return family_;
 }
 
-void helper_settings::helper_family(const std::string& v) {
-    helper_family_ = v;
+void helper_settings::family(const std::string& v) {
+    family_ = v;
 }
 
-void helper_settings::helper_family(const std::string&& v) {
-    helper_family_ = std::move(v);
+void helper_settings::family(const std::string&& v) {
+    family_ = std::move(v);
+}
+
+const std::string& helper_settings::string_conversion_method() const {
+    return string_conversion_method_;
+}
+
+std::string& helper_settings::string_conversion_method() {
+    return string_conversion_method_;
+}
+
+void helper_settings::string_conversion_method(const std::string& v) {
+    string_conversion_method_ = v;
+}
+
+void helper_settings::string_conversion_method(const std::string&& v) {
+    string_conversion_method_ = std::move(v);
+}
+
+bool helper_settings::requires_quoting() const {
+    return requires_quoting_;
+}
+
+void helper_settings::requires_quoting(const bool v) {
+    requires_quoting_ = v;
+}
+
+bool helper_settings::remove_unprintable_characters() const {
+    return remove_unprintable_characters_;
+}
+
+void helper_settings::remove_unprintable_characters(const bool v) {
+    remove_unprintable_characters_ = v;
+}
+
+bool helper_settings::requires_dereferencing() const {
+    return requires_dereferencing_;
+}
+
+void helper_settings::requires_dereferencing(const bool v) {
+    requires_dereferencing_ = v;
 }
 
 } } } }

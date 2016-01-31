@@ -255,8 +255,8 @@
     },
     {
         "name" : {
-            "simple" : "helper_family",
-            "qualified" : "quilt.cpp.helper_family"
+            "simple" : "family",
+            "qualified" : "quilt.cpp.helper.family"
         },
         "ownership_hierarchy" : {
             "model_name" : "quilt.cpp"

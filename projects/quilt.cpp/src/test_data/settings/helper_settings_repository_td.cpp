@@ -19,35 +19,15 @@
  *
  */
 #include <sstream>
-#include "dogen/quilt.cpp/test_data/settings/bundle_td.hpp"
-#include "dogen/quilt.cpp/test_data/formatters/context_td.hpp"
 #include "dogen/quilt.cpp/test_data/settings/helper_settings_td.hpp"
-#include "dogen/quilt.cpp/test_data/formattables/formatter_properties_td.hpp"
+#include "dogen/quilt.cpp/test_data/settings/helper_settings_repository_td.hpp"
 
 namespace {
-
-dogen::quilt::cpp::settings::bundle
-create_dogen_quilt_cpp_settings_bundle(const unsigned int position) {
-    return dogen::quilt::cpp::settings::bundle_generator::create(position);
-}
 
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
     return s.str();
-}
-
-dogen::quilt::cpp::formattables::formatter_properties
-create_dogen_quilt_cpp_formattables_formatter_properties(const unsigned int position) {
-    return dogen::quilt::cpp::formattables::formatter_properties_generator::create(position);
-}
-
-std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(unsigned int position) {
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_formattables_formatter_properties(position + i)));
-    }
-    return r;
 }
 
 dogen::quilt::cpp::settings::helper_settings
@@ -68,33 +48,31 @@ std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings> cr
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace formatters {
+namespace settings {
 
-context_generator::context_generator() : position_(0) { }
+helper_settings_repository_generator::helper_settings_repository_generator() : position_(0) { }
 
-void context_generator::
+void helper_settings_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.bundle(create_dogen_quilt_cpp_settings_bundle(position + 0));
-    v.formatter_properties(create_std_unordered_map_std_string_dogen_quilt_cpp_formattables_formatter_properties(position + 1));
-    v.helper_settings(create_std_unordered_map_std_string_dogen_quilt_cpp_settings_helper_settings(position + 2));
+    v.helper_settings_by_name(create_std_unordered_map_std_string_dogen_quilt_cpp_settings_helper_settings(position + 0));
 }
 
-context_generator::result_type
-context_generator::create(const unsigned int position) {
-    context r;
-    context_generator::populate(position, r);
+helper_settings_repository_generator::result_type
+helper_settings_repository_generator::create(const unsigned int position) {
+    helper_settings_repository r;
+    helper_settings_repository_generator::populate(position, r);
     return r;
 }
 
-context_generator::result_type*
-context_generator::create_ptr(const unsigned int position) {
-    context* p = new context();
-    context_generator::populate(position, *p);
+helper_settings_repository_generator::result_type*
+helper_settings_repository_generator::create_ptr(const unsigned int position) {
+    helper_settings_repository* p = new helper_settings_repository();
+    helper_settings_repository_generator::populate(position, *p);
     return p;
 }
 
-context_generator::result_type
-context_generator::operator()() {
+helper_settings_repository_generator::result_type
+helper_settings_repository_generator::operator()() {
     return create(position_++);
 }
 

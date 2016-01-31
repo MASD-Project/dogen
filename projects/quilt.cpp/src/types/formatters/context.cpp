@@ -27,19 +27,23 @@ namespace formatters {
 
 context::context(
     const dogen::quilt::cpp::settings::bundle& bundle,
-    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& formatter_properties)
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& formatter_properties,
+    const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& helper_settings)
     : bundle_(bundle),
-      formatter_properties_(formatter_properties) { }
+      formatter_properties_(formatter_properties),
+      helper_settings_(helper_settings) { }
 
 void context::swap(context& other) noexcept {
     using std::swap;
     swap(bundle_, other.bundle_);
     swap(formatter_properties_, other.formatter_properties_);
+    swap(helper_settings_, other.helper_settings_);
 }
 
 bool context::operator==(const context& rhs) const {
     return bundle_ == rhs.bundle_ &&
-        formatter_properties_ == rhs.formatter_properties_;
+        formatter_properties_ == rhs.formatter_properties_ &&
+        helper_settings_ == rhs.helper_settings_;
 }
 
 context& context::operator=(context other) {
@@ -78,6 +82,22 @@ void context::formatter_properties(const std::unordered_map<std::string, dogen::
 
 void context::formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>&& v) {
     formatter_properties_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& context::helper_settings() const {
+    return helper_settings_;
+}
+
+std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& context::helper_settings() {
+    return helper_settings_;
+}
+
+void context::helper_settings(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& v) {
+    helper_settings_ = v;
+}
+
+void context::helper_settings(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>&& v) {
+    helper_settings_ = std::move(v);
 }
 
 } } } }

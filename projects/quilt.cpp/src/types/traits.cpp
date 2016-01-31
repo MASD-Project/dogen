@@ -79,11 +79,6 @@ std::string traits::disable_xml_serialization() {
     return r;
 }
 
-std::string traits::helper_family() {
-    static std::string r("quilt.cpp.helper_family");
-    return r;
-}
-
 std::string traits::cpp::inclusion_required() {
     static std::string r("quilt.cpp.inclusion_required");
     return r;
@@ -111,6 +106,31 @@ std::string traits::cpp::source_directory_name() {
 
 std::string traits::cpp::disable_facet_directories() {
     static std::string r("quilt.cpp.disable_facet_directories");
+    return r;
+}
+
+std::string traits::cpp::helper::family() {
+    static std::string r("quilt.cpp.helper.family");
+    return r;
+}
+
+std::string traits::cpp::helper::string_conversion_method() {
+    static std::string r("quilt.cpp.helper.string_conversion_method");
+    return r;
+}
+
+std::string traits::cpp::helper::requires_quoting() {
+    static std::string r("quilt.cpp.helper.requires_quoting(");
+    return r;
+}
+
+std::string traits::cpp::helper::remove_unprintable_characters() {
+    static std::string r("quilt.cpp.helper.remove_unprintable_characters");
+    return r;
+}
+
+std::string traits::cpp::helper::requires_dereferencing() {
+    static std::string r("quilt.cpp.helper.requires_dereferencing");
     return r;
 }
 
