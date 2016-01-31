@@ -7879,7 +7879,27 @@ make sure the compiler is not in C++-11 mode when compiling 03.
 
 *** Add diff support                                                   :epic:
 
-*New understanding*:
+One very useful feature we need to implement is the ability to compare
+objects (even composite objects such as an entire model) and to obtain
+a list of differences. This has several use cases:
+
+- when something breaks we want to know the before and after (or the
+  actual and expected) but we also want to know why they are
+  different, in particular for complex object graphs. This is the case
+  with unit tests and with changes to code when we have A/B paths.
+- in general, users of a system want to explain differences. For
+  example, if we had a report that was generating one set of numbers S
+  but is now generating another set of numbers S' we need to know
+  what contributes to this change.
+- for efficiency purposes, we may want to only send the differences
+  between two very large objects over the wire rather than the
+  entirety of the new version.
+
+In theory nothing stops us from code generating all of the required
+classes needed to diff objects in a model. There are two possible
+approaches:
+
+*Simple approach*:
 
 Just create a new facet call diff and make these classes generate a
 simple textual representation of differences, inspired in
@@ -7887,10 +7907,13 @@ simple textual representation of differences, inspired in
 provide some "path" to the difference, e.g. model/object/member
 variable/etc.
 
-*Old understanding*:
+This is mainly useful for the first use case and it is simpler to
+implement.
 
-Dogen should have a =diff= option. When switched on, it would generate
-=diff= classes. These are system types like keys and live in a
+*Complex Approach*:
+
+Models can have a =diff= option. When switched on, knit generates a
+set of =diff= classes. These are system types like keys and live in a
 sub-folder of =types=. They have full serialisation, hashing etc
 support like any other model type. The generated classes are:
 
@@ -7903,14 +7926,16 @@ support like any other model type. The generated classes are:
   all other cases, including containers, it uses the type itself.
 
 In addition, we need set of enumerations in =reflection=. To start off
-with all it contains is a list of classes in the model and a list of
+with, all it contains is a list of classes in the model and a list of
 fields in each class.
 
 The =changeset= then has a container of =changeset_types= against a
 reflection class and field.
 
 Diff support is injected into the model just like keys. It also
-requires that reflection support gets injected too.
+requires that basic reflection support gets injected too.
+
+With this approach we can satisfy all use cases.
 
 *** Add support for object caches                                      :epic:
 
