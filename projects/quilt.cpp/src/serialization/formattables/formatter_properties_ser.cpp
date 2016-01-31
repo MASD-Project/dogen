@@ -44,7 +44,6 @@ void save(Archive& ar,
     ar << make_nvp("file_path", v.file_path_.generic_string());
     ar << make_nvp("header_guard", v.header_guard_);
     ar << make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
-    ar << make_nvp("helper_dependencies", v.helper_dependencies_);
 }
 
 template<typename Archive>
@@ -57,7 +56,6 @@ void load(Archive& ar,
     v.file_path_ = file_path_tmp;
     ar >> make_nvp("header_guard", v.header_guard_);
     ar >> make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
-    ar >> make_nvp("helper_dependencies", v.helper_dependencies_);
 }
 
 } }

@@ -66,7 +66,6 @@ std::size_t formatter_properties_hasher::hash(const formatter_properties& v) {
     combine(seed, hash_boost_filesystem_path(v.file_path()));
     combine(seed, hash_boost_optional_std_string(v.header_guard()));
     combine(seed, hash_std_list_std_string(v.inclusion_dependencies()));
-    combine(seed, hash_std_list_std_string(v.helper_dependencies()));
 
     return seed;
 }

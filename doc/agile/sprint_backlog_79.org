@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-31 Sun 12:37]
+#+CAPTION: Clock summary at [2016-01-31 Sun 15:38]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *30:44* |       |      |
+| *Total time*                                                                | *32:06* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 30:44   |       |      |
-| Active                                                                      |         | 30:44 |      |
+| Stories                                                                     | 32:06   |       |      |
+| Active                                                                      |         | 32:06 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 4:10 |
 | COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
 | COMPLETED Name builder should take only model name                          |         |       | 0:48 |
@@ -43,6 +43,7 @@
 | CANCELLED Implement io for inheritance in the io facet                      |         |       | 0:09 |
 | COMPLETED Add a field for =quilt.cpp.helper_family=                         |         |       | 2:49 |
 | STARTED Add formatter helpers to formatter properties                       |         |       | 3:20 |
+| STARTED Add an helper method interface                                      |         |       | 1:22 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -661,7 +662,9 @@ Notes:
   same list for every formatter and then later on have to figure out
   which dependencies apply to what formatters.
 
-*** Add an helper method interface                                    :story:
+*** STARTED Add an helper method interface                            :story:
+    CLOCK: [2016-01-31 Sun 14:34]--[2016-01-31 Sun 15:38] =>  1:04
+    CLOCK: [2016-01-31 Sun 13:42]--[2016-01-31 Sun 14:00] =>  0:18
 
 We should also investigate on the need for the nested type info
 assistant.
@@ -682,6 +685,26 @@ Tasks:
   store this interface; the formatter helper interface can extend this
   interface; the main workflow returns all registered formatter
   helpers in terms of the formatter helper details provider interface.
+- problem: we need additional properties related to the helper which
+  have been hard-coded:
+  - requires generic string; in a general form "string conversion
+    method";
+  - requires quoting;
+  - requires tidying up; in a general form "remove unprintable
+    characters";
+  - requires hashing helper method; in a general form: we need a way
+    to query the helper settings to figure out if a given type has an
+    associated helper method for a given formatter, and if we need to
+    call it implicitly or explicitly; and, if explicitly, we need to
+    ask the helper method formatter for the name of the helper method.
+  - requires dereferencing; for pointer types.
+- seems like yet again we found the wrong solution for this
+  problem. We need to create a top-level set of helper settings for
+  each type with all additional properties; propagate those into
+  formatters via context; and then use the assistant to loop through
+  the nested name (nested info for now) and pick the helper
+  settings. It should also consult the registrar to see if there are
+  any helpers available for this formatter and family.
 
 *** Update assistant to use new helper information                    :story:
 

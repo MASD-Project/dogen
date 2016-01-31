@@ -18,27 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_HELPER_PROPERTIES_REPOSITORY_FACTORY_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_HELPER_PROPERTIES_REPOSITORY_FACTORY_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_FORMATTER_HELPER_INTERFACE_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_FORMATTER_HELPER_INTERFACE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/quilt.cpp/types/formattables/helper_properties_repository.hpp"
-
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace formattables {
+namespace formatters {
 
-class helper_properties_repository_factory {
-public:
-    helper_properties_repository make(const dynamic::repository& rp,
-        const yarn::model& m) const;
-};
+class formatter_helper_interface;
 
 } } } }
 

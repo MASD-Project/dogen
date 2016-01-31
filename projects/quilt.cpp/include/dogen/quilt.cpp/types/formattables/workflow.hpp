@@ -37,8 +37,6 @@
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/path_derivatives_repository.hpp"
-#include "dogen/quilt.cpp/types/formattables/helper_properties_repository.hpp"
-#include "dogen/quilt.cpp/types/formattables/helper_dependencies_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_properties_repository_factory.hpp"
 
 
@@ -69,18 +67,6 @@ private:
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const yarn::model& m) const;
 
-    /**
-     * @brief Create the helper properties repository.
-     */
-    helper_properties_repository create_helper_properties_repository(
-        const dynamic::repository& rp, const yarn::model& m) const;
-
-    /**
-     * @brief Create the helper dependencies repository.
-     */
-    helper_dependencies_repository create_helper_dependencies_repository(
-        const helper_properties_repository& hprp, const yarn::model& m) const;
-    
     /**
      * @brief Creates the formatter properties.
      */

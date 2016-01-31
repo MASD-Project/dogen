@@ -55,8 +55,6 @@
 #include "dogen/quilt.cpp/serialization/settings/inclusion_directives_settings_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/path_derivatives_repository_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/global_enablement_properties_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/helper_properties_repository_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/helper_dependencies_repository_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formatter_properties_repository_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/inclusion_directives_repository_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/inclusion_dependencies_repository_ser.hpp"

@@ -30,8 +30,6 @@
 #include "dogen/quilt.cpp/types/formattables/transformer.hpp"
 #include "dogen/quilt.cpp/io/formattables/formattable_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/path_derivatives_repository_factory.hpp"
-#include "dogen/quilt.cpp/types/formattables/helper_properties_repository_factory.hpp"
-#include "dogen/quilt.cpp/types/formattables/helper_dependencies_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 
 namespace {
@@ -101,18 +99,6 @@ create_path_derivatives_repository(const config::cpp_options& opts,
     const yarn::model& m) const {
     path_derivatives_repository_factory f;
     return f.make(opts, ps, m);
-}
-
-helper_properties_repository workflow::create_helper_properties_repository(
-    const dynamic::repository& rp, const yarn::model& m) const {
-    helper_properties_repository_factory f;
-    return f.make(rp, m);
-}
-
-helper_dependencies_repository workflow::create_helper_dependencies_repository(
-    const helper_properties_repository& hprp, const yarn::model& m) const {
-    helper_dependencies_repository_factory f;
-    return f.make(hprp, m);
 }
 
 formatter_properties_repository workflow::
@@ -190,9 +176,7 @@ workflow::execute(const config::cpp_options& opts,
     const auto& ro(root_object);
     const auto ps(create_path_settings_activity(rp, ro, fc));
     const auto pdrp(create_path_derivatives_repository(opts, ps, m));
-    const auto hp(create_helper_properties_repository(rp, m));
-    /*const auto hd = */create_helper_dependencies_repository(hp, m);
-    
+
     auto fprp(create_formatter_properties(rp, ro, brp, pdrp, fc, m));
 
     auto formattables(from_transformer_activity(m));

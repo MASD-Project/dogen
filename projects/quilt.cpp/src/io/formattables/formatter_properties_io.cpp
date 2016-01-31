@@ -76,8 +76,7 @@ std::ostream& operator<<(std::ostream& s, const formatter_properties& v) {
       << "\"enabled\": " << v.enabled() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"header_guard\": " << v.header_guard() << ", "
-      << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "
-      << "\"helper_dependencies\": " << v.helper_dependencies()
+      << "\"inclusion_dependencies\": " << v.inclusion_dependencies()
       << " }";
     return(s);
 }

@@ -54,8 +54,6 @@
 #include "dogen/quilt.cpp/io/settings/inclusion_directives_settings_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/path_derivatives_repository_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/global_enablement_properties_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/helper_properties_repository_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/helper_dependencies_repository_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formatter_properties_repository_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/inclusion_directives_repository_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/inclusion_dependencies_repository_io.hpp"
