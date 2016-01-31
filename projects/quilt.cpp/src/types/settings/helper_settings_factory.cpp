@@ -38,6 +38,19 @@ helper_settings_factory::make_field_definitions(const dynamic::repository& rp) {
     const dynamic::repository_selector s(rp);
     const auto hf(traits::cpp::helper::family());
     r.family = s.select_field_by_name(hf);
+
+    const auto scm(traits::cpp::helper::string_conversion_method());
+    r.string_conversion_method = s.select_field_by_name(scm);
+
+    const auto rq(traits::cpp::helper::requires_quoting());
+    r.requires_quoting = s.select_field_by_name(rq);
+
+    const auto ruc(traits::cpp::helper::remove_unprintable_characters());
+    r.remove_unprintable_characters = s.select_field_by_name(ruc);
+
+    const auto rd(traits::cpp::helper::requires_dereferencing());
+    r.requires_dereferencing = s.select_field_by_name(rd);
+
     return r;
 }
 

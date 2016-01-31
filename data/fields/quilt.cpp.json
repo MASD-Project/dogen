@@ -290,12 +290,12 @@
         "value_type" : "boolean",
         "definition_type" : "instance",
         "scope" : "entity",
-        "default_value" : "false"
+        "default_value" : false
     },
     {
         "name" : {
             "simple" : "remove_unprintable_characters",
-            "qualified" : "quilt.cpp.helper.family.remove_unprintable_characters"
+            "qualified" : "quilt.cpp.helper.remove_unprintable_characters"
         },
         "ownership_hierarchy" : {
             "model_name" : "quilt.cpp"
@@ -303,12 +303,12 @@
         "value_type" : "boolean",
         "definition_type" : "instance",
         "scope" : "entity",
-        "default_value" : "false"
+        "default_value" : false
     },
     {
         "name" : {
             "simple" : "requires_dereferencing",
-            "qualified" : "quilt.cpp.helper.family.requires_dereferencing"
+            "qualified" : "quilt.cpp.helper.requires_dereferencing"
         },
         "ownership_hierarchy" : {
             "model_name" : "quilt.cpp"
@@ -316,7 +316,7 @@
         "value_type" : "boolean",
         "definition_type" : "instance",
         "scope" : "entity",
-        "default_value" : "false"
+        "default_value" : false
     }
 
 

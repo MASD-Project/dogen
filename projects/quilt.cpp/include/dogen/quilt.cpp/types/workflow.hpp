@@ -40,6 +40,7 @@
 #include "dogen/quilt.cpp/types/formattables/formatter_properties_repository.hpp"
 #include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
+#include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 
 namespace dogen {
@@ -92,6 +93,12 @@ private:
         const dogen::formatters::general_settings_factory& gsf,
         const settings::opaque_settings_builder& osb,
         const yarn::model& m) const;
+
+    /**
+     * @brief Create the helper settings repository.
+     */
+    settings::helper_settings_repository create_helper_settings_repository(
+        const dynamic::repository& rp, const yarn::model& m) const;
 
     /**
      * @brief Create the formattables.

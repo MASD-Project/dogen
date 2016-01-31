@@ -120,7 +120,7 @@ std::string traits::cpp::helper::string_conversion_method() {
 }
 
 std::string traits::cpp::helper::requires_quoting() {
-    static std::string r("quilt.cpp.helper.requires_quoting(");
+    static std::string r("quilt.cpp.helper.requires_quoting");
     return r;
 }
 
