@@ -562,6 +562,7 @@ inheritance. This causes unnecessary complexity in the formatter
 helpers. We need to try to implement it purely in the io facet.
 
 *** STARTED Add a field for =quilt.cpp.helper_family=                 :story:
+    CLOCK: [2016-01-31 Sun 08:50]--[2016-01-31 Sun 09:19] =>  0:29
     CLOCK: [2016-01-30 Sat 21:16]--[2016-01-30 Sat 22:04] =>  0:48
     CLOCK: [2016-01-29 Fri 21:45]--[2016-01-29 Fri 22:51] =>  1:06
     CLOCK: [2016-01-28 Thu 07:02]--[2016-01-28 Thu 07:12] =>  0:10

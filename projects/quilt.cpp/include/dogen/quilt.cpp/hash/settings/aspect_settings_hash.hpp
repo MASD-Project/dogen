@@ -18,26 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_ELEMENT_SETTINGS_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_ELEMENT_SETTINGS_SER_HPP
+#ifndef DOGEN_QUILT_CPP_HASH_SETTINGS_ASPECT_SETTINGS_HASH_HPP
+#define DOGEN_QUILT_CPP_HASH_SETTINGS_ASPECT_SETTINGS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/quilt.cpp/types/settings/element_settings.hpp"
+#include <functional>
+#include "dogen/quilt.cpp/types/settings/aspect_settings.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::settings::element_settings)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace quilt {
+namespace cpp {
+namespace settings {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::quilt::cpp::settings::element_settings& v, unsigned int version);
+struct aspect_settings_hasher {
+public:
+    static std::size_t hash(const aspect_settings& v);
+};
 
-template<typename Archive>
-void load(Archive& ar, dogen::quilt::cpp::settings::element_settings& v, unsigned int version);
+} } } }
 
-} }
+namespace std {
 
+template<>
+struct hash<dogen::quilt::cpp::settings::aspect_settings> {
+public:
+    size_t operator()(const dogen::quilt::cpp::settings::aspect_settings& v) const {
+        return dogen::quilt::cpp::settings::aspect_settings_hasher::hash(v);
+    }
+};
+
+}
 #endif

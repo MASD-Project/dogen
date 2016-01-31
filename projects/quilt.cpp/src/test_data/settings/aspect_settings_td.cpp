@@ -18,14 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/settings/element_settings_hash.hpp"
+#include "dogen/quilt.cpp/test_data/settings/aspect_settings_td.hpp"
 
 namespace {
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
 }
 
 }
@@ -35,14 +33,31 @@ namespace quilt {
 namespace cpp {
 namespace settings {
 
-std::size_t element_settings_hasher::hash(const element_settings& v) {
-    std::size_t seed(0);
+aspect_settings_generator::aspect_settings_generator() : position_(0) { }
 
-    combine(seed, v.disable_complete_constructor());
-    combine(seed, v.disable_xml_serialization());
-    combine(seed, v.helper_family());
+void aspect_settings_generator::
+populate(const unsigned int position, result_type& v) {
+    v.disable_complete_constructor(create_bool(position + 0));
+    v.disable_xml_serialization(create_bool(position + 1));
+}
 
-    return seed;
+aspect_settings_generator::result_type
+aspect_settings_generator::create(const unsigned int position) {
+    aspect_settings r;
+    aspect_settings_generator::populate(position, r);
+    return r;
+}
+
+aspect_settings_generator::result_type*
+aspect_settings_generator::create_ptr(const unsigned int position) {
+    aspect_settings* p = new aspect_settings();
+    aspect_settings_generator::populate(position, *p);
+    return p;
+}
+
+aspect_settings_generator::result_type
+aspect_settings_generator::operator()() {
+    return create(position_++);
 }
 
 } } } }

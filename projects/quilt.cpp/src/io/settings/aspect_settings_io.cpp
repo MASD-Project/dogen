@@ -18,37 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_HASH_SETTINGS_ELEMENT_SETTINGS_HASH_HPP
-#define DOGEN_QUILT_CPP_HASH_SETTINGS_ELEMENT_SETTINGS_HASH_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <functional>
-#include "dogen/quilt.cpp/types/settings/element_settings.hpp"
+#include <ostream>
+#include <boost/io/ios_state.hpp>
+#include "dogen/quilt.cpp/io/settings/aspect_settings_io.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace settings {
 
-struct element_settings_hasher {
-public:
-    static std::size_t hash(const element_settings& v);
-};
+std::ostream& operator<<(std::ostream& s, const aspect_settings& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::settings::aspect_settings\"" << ", "
+      << "\"disable_complete_constructor\": " << v.disable_complete_constructor() << ", "
+      << "\"disable_xml_serialization\": " << v.disable_xml_serialization()
+      << " }";
+    return(s);
+}
 
 } } } }
-
-namespace std {
-
-template<>
-struct hash<dogen::quilt::cpp::settings::element_settings> {
-public:
-    size_t operator()(const dogen::quilt::cpp::settings::element_settings& v) const {
-        return dogen::quilt::cpp::settings::element_settings_hasher::hash(v);
-    }
-};
-
-}
-#endif

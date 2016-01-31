@@ -66,7 +66,7 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     builder.add(n, rh_fn);
 
     using ic = inclusion_constants;
-    const auto as(builder.get_element_settings(n));
+    const auto as(builder.get_aspect_settings(n));
 
     builder.add(ic::boost::archive::text_iarchive());
     builder.add(ic::boost::archive::text_oarchive());

@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_ELEMENT_SETTINGS_FWD_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_ELEMENT_SETTINGS_FWD_SER_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_ASPECT_SETTINGS_FWD_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_ASPECT_SETTINGS_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/settings/element_settings_fwd.hpp"
+#include "dogen/quilt.cpp/types/settings/aspect_settings_fwd.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<class Archive>
-void save(Archive& ar, const dogen::quilt::cpp::settings::element_settings& v, unsigned int version);
+void save(Archive& ar, const dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
 
 template<class Archive>
-void load(Archive& ar, dogen::quilt::cpp::settings::element_settings& v, unsigned int version);
+void load(Archive& ar, dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
 
 } }
 

@@ -103,16 +103,16 @@
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="82,118"/>
+        <dia:point val="82.0833,118"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="81.95,116.95;334.05,242.05"/>
+        <dia:rectangle val="82.0333,116.95;334.133,242.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="82,118"/>
+        <dia:point val="82.0833,118"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="252"/>
@@ -12378,10 +12378,10 @@ for a given C++ entity.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#element_settings#</dia:string>
+            <dia:string>#aspect_settings#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#settings::element_settings#</dia:string>
+            <dia:string>#settings::aspect_settings#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -17134,7 +17134,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="169.232,198"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.478,192.25;169.982,198.8"/>
+        <dia:rectangle val="131.477,192.25;169.982,198.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27879,7 +27879,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="182,162"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="181.95,161.95;196.025,166.45"/>
+        <dia:rectangle val="181.95,161.95;196.025,165.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="182,162"/>
@@ -27888,10 +27888,10 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="13.975"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#element_settings#</dia:string>
+        <dia:string>#aspect_settings#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -28024,29 +28024,6 @@ main, or from another initialiser.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#helper_family#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Family of the helper methods for this element.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -28072,7 +28049,7 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="5.2000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#element_settings_factory#</dia:string>
+        <dia:string>#aspect_settings_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -28599,7 +28576,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="148.917,134.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="141.098,133.45;149.667,146.75"/>
+        <dia:rectangle val="141.097,133.45;149.667,146.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

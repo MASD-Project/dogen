@@ -22,8 +22,8 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/quilt.cpp/io/settings/bundle_io.hpp"
 #include "dogen/formatters/io/general_settings_io.hpp"
+#include "dogen/quilt.cpp/io/settings/aspect_settings_io.hpp"
 #include "dogen/quilt.cpp/io/settings/opaque_settings_io.hpp"
-#include "dogen/quilt.cpp/io/settings/element_settings_io.hpp"
 
 namespace boost {
 
@@ -108,7 +108,7 @@ std::ostream& operator<<(std::ostream& s, const bundle& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::settings::bundle\"" << ", "
       << "\"general_settings\": " << v.general_settings() << ", "
-      << "\"element_settings\": " << v.element_settings() << ", "
+      << "\"aspect_settings\": " << v.aspect_settings() << ", "
       << "\"opaque_settings\": " << v.opaque_settings() << ", "
       << "\"opaque_settings_for_property\": " << v.opaque_settings_for_property()
       << " }";

@@ -181,11 +181,11 @@ bool assistant::is_test_data_enabled() const {
 }
 
 bool assistant::is_complete_constructor_disabled() const {
-    return context_.bundle().element_settings().disable_complete_constructor();
+    return context_.bundle().aspect_settings().disable_complete_constructor();
 }
 
 bool assistant::is_xml_serialization_disabled() const {
-    return context_.bundle().element_settings().disable_xml_serialization();
+    return context_.bundle().aspect_settings().disable_xml_serialization();
 }
 
 void assistant::validate() const {

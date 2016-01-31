@@ -32,7 +32,6 @@
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/quilt.cpp/types/settings/element_settings_factory.hpp"
 #include "dogen/quilt.cpp/io/formattables/includers_info_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"

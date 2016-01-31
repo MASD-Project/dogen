@@ -18,74 +18,54 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/settings/element_settings.hpp"
+#include "dogen/quilt.cpp/types/settings/aspect_settings.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace settings {
 
-element_settings::element_settings()
+aspect_settings::aspect_settings()
     : disable_complete_constructor_(static_cast<bool>(0)),
       disable_xml_serialization_(static_cast<bool>(0)) { }
 
-element_settings::element_settings(
+aspect_settings::aspect_settings(
     const bool disable_complete_constructor,
-    const bool disable_xml_serialization,
-    const std::string& helper_family)
+    const bool disable_xml_serialization)
     : disable_complete_constructor_(disable_complete_constructor),
-      disable_xml_serialization_(disable_xml_serialization),
-      helper_family_(helper_family) { }
+      disable_xml_serialization_(disable_xml_serialization) { }
 
-void element_settings::swap(element_settings& other) noexcept {
+void aspect_settings::swap(aspect_settings& other) noexcept {
     using std::swap;
     swap(disable_complete_constructor_, other.disable_complete_constructor_);
     swap(disable_xml_serialization_, other.disable_xml_serialization_);
-    swap(helper_family_, other.helper_family_);
 }
 
-bool element_settings::operator==(const element_settings& rhs) const {
+bool aspect_settings::operator==(const aspect_settings& rhs) const {
     return disable_complete_constructor_ == rhs.disable_complete_constructor_ &&
-        disable_xml_serialization_ == rhs.disable_xml_serialization_ &&
-        helper_family_ == rhs.helper_family_;
+        disable_xml_serialization_ == rhs.disable_xml_serialization_;
 }
 
-element_settings& element_settings::operator=(element_settings other) {
+aspect_settings& aspect_settings::operator=(aspect_settings other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool element_settings::disable_complete_constructor() const {
+bool aspect_settings::disable_complete_constructor() const {
     return disable_complete_constructor_;
 }
 
-void element_settings::disable_complete_constructor(const bool v) {
+void aspect_settings::disable_complete_constructor(const bool v) {
     disable_complete_constructor_ = v;
 }
 
-bool element_settings::disable_xml_serialization() const {
+bool aspect_settings::disable_xml_serialization() const {
     return disable_xml_serialization_;
 }
 
-void element_settings::disable_xml_serialization(const bool v) {
+void aspect_settings::disable_xml_serialization(const bool v) {
     disable_xml_serialization_ = v;
-}
-
-const std::string& element_settings::helper_family() const {
-    return helper_family_;
-}
-
-std::string& element_settings::helper_family() {
-    return helper_family_;
-}
-
-void element_settings::helper_family(const std::string& v) {
-    helper_family_ = v;
-}
-
-void element_settings::helper_family(const std::string&& v) {
-    helper_family_ = std::move(v);
 }
 
 } } } }

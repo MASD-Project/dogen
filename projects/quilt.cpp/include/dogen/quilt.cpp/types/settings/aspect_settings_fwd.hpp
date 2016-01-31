@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_SETTINGS_ELEMENT_SETTINGS_FACTORY_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_SETTINGS_ELEMENT_SETTINGS_FACTORY_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_SETTINGS_ASPECT_SETTINGS_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_SETTINGS_ASPECT_SETTINGS_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@ namespace quilt {
 namespace cpp {
 namespace settings {
 
-class element_settings_factory;
+class aspect_settings;
 
 } } } }
 
