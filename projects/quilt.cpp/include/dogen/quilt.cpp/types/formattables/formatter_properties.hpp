@@ -53,7 +53,8 @@ public:
         const bool enabled,
         const boost::filesystem::path& file_path,
         const boost::optional<std::string>& header_guard,
-        const std::list<std::string>& inclusion_dependencies);
+        const std::list<std::string>& inclusion_dependencies,
+        const std::list<std::string>& helper_dependencies);
 
 private:
     template<typename Archive>
@@ -81,6 +82,17 @@ public:
     void inclusion_dependencies(const std::list<std::string>& v);
     void inclusion_dependencies(const std::list<std::string>&& v);
 
+    /**
+     * @brief List of all helper families required for this formatter in order to format the given
+     * yarn element.
+     */
+    /**@{*/
+    const std::list<std::string>& helper_dependencies() const;
+    std::list<std::string>& helper_dependencies();
+    void helper_dependencies(const std::list<std::string>& v);
+    void helper_dependencies(const std::list<std::string>&& v);
+    /**@}*/
+
 public:
     bool operator==(const formatter_properties& rhs) const;
     bool operator!=(const formatter_properties& rhs) const {
@@ -96,6 +108,7 @@ private:
     boost::filesystem::path file_path_;
     boost::optional<std::string> header_guard_;
     std::list<std::string> inclusion_dependencies_;
+    std::list<std::string> helper_dependencies_;
 };
 
 } } } }

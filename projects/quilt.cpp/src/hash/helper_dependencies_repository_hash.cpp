@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/formattables/formatter_properties_hash.hpp"
+#include "dogen/quilt.cpp/hash/helper_dependencies_repository_hash.hpp"
 
 namespace {
 
@@ -28,26 +28,11 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
-    std::size_t seed(0);
-    combine(seed, v.generic_string());
-    return seed;
-}
-
-inline std::size_t hash_boost_optional_std_string(const boost::optional<std::string>& v) {
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
-}
-
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
+inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, i);
+        combine(seed, i.first);
+        combine(seed, i.second);
     }
     return seed;
 }
@@ -57,18 +42,12 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace formattables {
 
-std::size_t formatter_properties_hasher::hash(const formatter_properties& v) {
+std::size_t helper_dependencies_repository_hasher::hash(const helper_dependencies_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, v.enabled());
-    combine(seed, hash_boost_filesystem_path(v.file_path()));
-    combine(seed, hash_boost_optional_std_string(v.header_guard()));
-    combine(seed, hash_std_list_std_string(v.inclusion_dependencies()));
-    combine(seed, hash_std_list_std_string(v.helper_dependencies()));
-
+    combine(seed, hash_std_unordered_map_std_string_std_string(v.helper_properties_by_name()));
     return seed;
 }
 
-} } } }
+} } }

@@ -32,17 +32,20 @@ formatter_properties::formatter_properties(formatter_properties&& rhs)
     : enabled_(std::move(rhs.enabled_)),
       file_path_(std::move(rhs.file_path_)),
       header_guard_(std::move(rhs.header_guard_)),
-      inclusion_dependencies_(std::move(rhs.inclusion_dependencies_)) { }
+      inclusion_dependencies_(std::move(rhs.inclusion_dependencies_)),
+      helper_dependencies_(std::move(rhs.helper_dependencies_)) { }
 
 formatter_properties::formatter_properties(
     const bool enabled,
     const boost::filesystem::path& file_path,
     const boost::optional<std::string>& header_guard,
-    const std::list<std::string>& inclusion_dependencies)
+    const std::list<std::string>& inclusion_dependencies,
+    const std::list<std::string>& helper_dependencies)
     : enabled_(enabled),
       file_path_(file_path),
       header_guard_(header_guard),
-      inclusion_dependencies_(inclusion_dependencies) { }
+      inclusion_dependencies_(inclusion_dependencies),
+      helper_dependencies_(helper_dependencies) { }
 
 void formatter_properties::swap(formatter_properties& other) noexcept {
     using std::swap;
@@ -50,13 +53,15 @@ void formatter_properties::swap(formatter_properties& other) noexcept {
     swap(file_path_, other.file_path_);
     swap(header_guard_, other.header_guard_);
     swap(inclusion_dependencies_, other.inclusion_dependencies_);
+    swap(helper_dependencies_, other.helper_dependencies_);
 }
 
 bool formatter_properties::operator==(const formatter_properties& rhs) const {
     return enabled_ == rhs.enabled_ &&
         file_path_ == rhs.file_path_ &&
         header_guard_ == rhs.header_guard_ &&
-        inclusion_dependencies_ == rhs.inclusion_dependencies_;
+        inclusion_dependencies_ == rhs.inclusion_dependencies_ &&
+        helper_dependencies_ == rhs.helper_dependencies_;
 }
 
 formatter_properties& formatter_properties::operator=(formatter_properties other) {
@@ -119,6 +124,22 @@ void formatter_properties::inclusion_dependencies(const std::list<std::string>& 
 
 void formatter_properties::inclusion_dependencies(const std::list<std::string>&& v) {
     inclusion_dependencies_ = std::move(v);
+}
+
+const std::list<std::string>& formatter_properties::helper_dependencies() const {
+    return helper_dependencies_;
+}
+
+std::list<std::string>& formatter_properties::helper_dependencies() {
+    return helper_dependencies_;
+}
+
+void formatter_properties::helper_dependencies(const std::list<std::string>& v) {
+    helper_dependencies_ = v;
+}
+
+void formatter_properties::helper_dependencies(const std::list<std::string>&& v) {
+    helper_dependencies_ = std::move(v);
 }
 
 } } } }

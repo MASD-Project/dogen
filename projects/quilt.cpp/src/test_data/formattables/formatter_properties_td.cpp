@@ -70,6 +70,7 @@ populate(const unsigned int position, result_type& v) {
     v.file_path(create_boost_filesystem_path(position + 1));
     v.header_guard(create_boost_optional_std_string(position + 2));
     v.inclusion_dependencies(create_std_list_std_string(position + 3));
+    v.helper_dependencies(create_std_list_std_string(position + 4));
 }
 
 formatter_properties_generator::result_type

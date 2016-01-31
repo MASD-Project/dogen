@@ -19,9 +19,8 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/formattables/formatter_properties_io.hpp"
+#include "dogen/quilt.cpp/io/helper_dependencies_repository_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,30 +29,19 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<std::string>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << "\"" << tidy_up_string(*v) << "\"";
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
-
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
+    s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->second) << "\"";
+        s << " } ]";
     }
-    s << "] ";
+    s << " ] ";
     return s;
 }
 
@@ -62,24 +50,13 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace formattables {
 
-std::ostream& operator<<(std::ostream& s, const formatter_properties& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
+std::ostream& operator<<(std::ostream& s, const helper_dependencies_repository& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::formatter_properties\"" << ", "
-      << "\"enabled\": " << v.enabled() << ", "
-      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
-      << "\"header_guard\": " << v.header_guard() << ", "
-      << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "
-      << "\"helper_dependencies\": " << v.helper_dependencies()
+      << "\"__type__\": " << "\"dogen::quilt::cpp::helper_dependencies_repository\"" << ", "
+      << "\"helper_properties_by_name\": " << v.helper_properties_by_name()
       << " }";
     return(s);
 }
 
-} } } }
+} } }

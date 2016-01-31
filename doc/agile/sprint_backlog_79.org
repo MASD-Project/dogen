@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-31 Sun 09:41]
+#+CAPTION: Clock summary at [2016-01-31 Sun 10:56]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *27:54* |       |      |
+| *Total time*                                                                | *28:57* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 27:54   |       |      |
-| Active                                                                      |         | 27:54 |      |
+| Stories                                                                     | 28:57   |       |      |
+| Active                                                                      |         | 28:57 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:51 |
 | COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
 | COMPLETED Name builder should take only model name                          |         |       | 0:48 |
@@ -41,7 +41,8 @@
 | COMPLETED Rename aspect settings to element settings                        |         |       | 0:26 |
 | COMPLETED Remove support for integrated io                                  |         |       | 0:37 |
 | CANCELLED Implement io for inheritance in the io facet                      |         |       | 0:09 |
-| STARTED Add a field for =quilt.cpp.helper_family=                           |         |       | 3:38 |
+| COMPLETED Add a field for =quilt.cpp.helper_family=                         |         |       | 2:49 |
+| STARTED Add formatter helpers to formatter properties                       |         |       | 1:52 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -561,9 +562,8 @@ At present we use the types facet to implement io when in
 inheritance. This causes unnecessary complexity in the formatter
 helpers. We need to try to implement it purely in the io facet.
 
-*** STARTED Add a field for =quilt.cpp.helper_family=                 :story:
-    CLOCK: [2016-01-31 Sun 09:20]--[2016-01-31 Sun 09:40] =>  0:20
-    CLOCK: [2016-01-31 Sun 08:50]--[2016-01-31 Sun 09:19] =>  0:29
+*** COMPLETED Add a field for =quilt.cpp.helper_family=               :story:
+    CLOSED: [2016-01-31 Sun 10:55]
     CLOCK: [2016-01-30 Sat 21:16]--[2016-01-30 Sat 22:04] =>  0:48
     CLOCK: [2016-01-29 Fri 21:45]--[2016-01-29 Fri 22:51] =>  1:06
     CLOCK: [2016-01-28 Thu 07:02]--[2016-01-28 Thu 07:12] =>  0:10
@@ -627,9 +627,27 @@ Fixes:
 - rename element settings back to aspect settings.
 - create a settings class just for helper settings and associated
   classes. Add helper family to this class.
+
+*** STARTED Add formatter helpers to formatter properties             :story:
+    CLOCK: [2016-01-31 Sun 09:41]--[2016-01-31 Sun 10:44] =>  1:03
+    CLOCK: [2016-01-31 Sun 09:20]--[2016-01-31 Sun 09:40] =>  0:20
+    CLOCK: [2016-01-31 Sun 08:50]--[2016-01-31 Sun 09:19] =>  0:29
+
+We need a place to store all of the formatter helper families a given
+type is associated with.
+
+Notes:
+
 - create a helper properties repository in formattables that stores
   the helper properties for each type in model. We just need a map of
   string to string. Add all associated machinery (workflow, etc).
+- follow the same pattern as in inclusion directives / inclusion
+  dependencies. So the name is helper family / helper family
+  dependencies. Not the best name but it will do for now. We just need
+  a helper family dependencies repository that has a map of string to
+  list of string.
+- add formatter helper family dependencies to formatter
+  properties as a list of string. Add processing to populate this.
 
 *** Add an helper method interface                                    :story:
 
@@ -652,19 +670,6 @@ Tasks:
   store this interface; the formatter helper interface can extend this
   interface; the main workflow returns all registered formatter
   helpers in terms of the formatter helper details provider interface.
-
-*** Add formatter helpers for type support in formatter properties    :story:
-
-We need a place to store all of the formatter helper families a given
-type is associated with.
-
-- follow the same pattern as in inclusion directives / inclusion
-  dependencies. So the name is helper family / helper family
-  dependencies. Not the best name but it will do for now. We just need
-  a helper family dependencies repository that has a map of string to
-  list of string.
-- add formatter helper family dependencies to formatter
-  properties as a list of string. Add processing to populate this.
 
 *** Update assistant to use new helper information                    :story:
 
