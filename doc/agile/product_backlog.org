@@ -10,6 +10,13 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Using =std::set<std::string>= causes compilation errors           :story:
+
+In theory sets of strings (and any other type that has =operator<=
+should work out of the box, even though we do not support sets of
+dogen types. However, when we tried to use a set of strings we got a
+whole load of compilation errors in serialisation, etc.
+
 *** Stitcher log file names look weird                                :story:
 
 At present we are writing files with names like:
