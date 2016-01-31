@@ -35,6 +35,7 @@
 #include "dogen/quilt.cpp/io/formattables/formattable_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/parent_info_io.hpp"
 #include "dogen/quilt.cpp/io/settings/aspect_settings_io.hpp"
+#include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
 #include "dogen/quilt.cpp/io/settings/opaque_settings_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/origin_types_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/property_info_io.hpp"

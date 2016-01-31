@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-30 Sat 22:16]
+#+CAPTION: Clock summary at [2016-01-31 Sun 09:41]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *27:05* |       |      |
+| *Total time*                                                                | *27:54* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 27:05   |       |      |
-| Active                                                                      |         | 27:05 |      |
+| Stories                                                                     | 27:54   |       |      |
+| Active                                                                      |         | 27:54 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:51 |
 | COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
 | COMPLETED Name builder should take only model name                          |         |       | 0:48 |
@@ -41,7 +41,7 @@
 | COMPLETED Rename aspect settings to element settings                        |         |       | 0:26 |
 | COMPLETED Remove support for integrated io                                  |         |       | 0:37 |
 | CANCELLED Implement io for inheritance in the io facet                      |         |       | 0:09 |
-| STARTED Add a field for =quilt.cpp.helper_family=                           |         |       | 2:49 |
+| STARTED Add a field for =quilt.cpp.helper_family=                           |         |       | 3:38 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -562,6 +562,7 @@ inheritance. This causes unnecessary complexity in the formatter
 helpers. We need to try to implement it purely in the io facet.
 
 *** STARTED Add a field for =quilt.cpp.helper_family=                 :story:
+    CLOCK: [2016-01-31 Sun 09:20]--[2016-01-31 Sun 09:40] =>  0:20
     CLOCK: [2016-01-31 Sun 08:50]--[2016-01-31 Sun 09:19] =>  0:29
     CLOCK: [2016-01-30 Sat 21:16]--[2016-01-30 Sat 22:04] =>  0:48
     CLOCK: [2016-01-29 Fri 21:45]--[2016-01-29 Fri 22:51] =>  1:06

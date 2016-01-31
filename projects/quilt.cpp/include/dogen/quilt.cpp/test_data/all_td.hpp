@@ -35,6 +35,7 @@
 #include "dogen/quilt.cpp/test_data/formattables/formattable_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/parent_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/settings/aspect_settings_td.hpp"
+#include "dogen/quilt.cpp/test_data/settings/helper_settings_td.hpp"
 #include "dogen/quilt.cpp/test_data/settings/opaque_settings_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/origin_types_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/property_info_td.hpp"

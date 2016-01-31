@@ -36,6 +36,7 @@
 #include "dogen/quilt.cpp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/parent_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/aspect_settings_ser.hpp"
+#include "dogen/quilt.cpp/serialization/settings/helper_settings_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/opaque_settings_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/origin_types_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/property_info_ser.hpp"
