@@ -44,55 +44,55 @@ path_settings_factory::
 path_settings_factory(const dynamic::repository& rp,
     const std::forward_list<
     std::shared_ptr<formatters::formatter_interface>>& formatters)
-    : formatter_properties_(make_formatter_properties(rp, formatters)) { }
+    : field_definitions_(make_field_definitions(rp, formatters)) { }
 
 void path_settings_factory::setup_top_level_fields(
-    const dynamic::repository& rp, formatter_properties& fp) const {
+    const dynamic::repository& rp, field_definitions& fd) const {
 
     const dynamic::repository_selector s(rp);
     const auto& idn(traits::cpp::include_directory_name());
-    fp.include_directory_name = s.select_field_by_name(idn);
+    fd.include_directory_name = s.select_field_by_name(idn);
 
     const auto& sdn(traits::cpp::source_directory_name());
-    fp.source_directory_name = s.select_field_by_name(sdn);
+    fd.source_directory_name = s.select_field_by_name(sdn);
 
     const auto& hde(traits::cpp::header_file_extension());
-    fp.header_file_extension = s.select_field_by_name(hde);
+    fd.header_file_extension = s.select_field_by_name(hde);
 
     const auto& ife(traits::cpp::implementation_file_extension());
-    fp.implementation_file_extension = s.select_field_by_name(ife);
+    fd.implementation_file_extension = s.select_field_by_name(ife);
 
     const auto& dfd(traits::cpp::disable_facet_directories());
-    fp.disable_facet_directories = s.select_field_by_name(dfd);
+    fd.disable_facet_directories = s.select_field_by_name(dfd);
 }
 
 void path_settings_factory::setup_facet_fields(
     const dynamic::repository& rp,
     const std::string& facet_name,
-    path_settings_factory::formatter_properties& fp) const {
+    path_settings_factory::field_definitions& fd) const {
 
     const auto& fn(facet_name);
     const dynamic::repository_selector s(rp);
-    fp.facet_directory = s.select_field_by_name(fn, traits::directory());
-    fp.facet_postfix = s.select_field_by_name(fn, traits::postfix());
+    fd.facet_directory = s.select_field_by_name(fn, traits::directory());
+    fd.facet_postfix = s.select_field_by_name(fn, traits::postfix());
 }
 
 void path_settings_factory::setup_formatter_fields(
     const dynamic::repository& rp,
     const std::string& formatter_name,
-    path_settings_factory::formatter_properties& fp) const {
+    path_settings_factory::field_definitions& fd) const {
 
     const auto& fn(formatter_name);
     const dynamic::repository_selector s(rp);
-    fp.formatter_postfix = s.select_field_by_name(fn, traits::postfix());
+    fd.formatter_postfix = s.select_field_by_name(fn, traits::postfix());
 }
 
-path_settings_factory::formatter_properties
-path_settings_factory::make_formatter_properties(
+path_settings_factory::field_definitions
+path_settings_factory::make_field_definitions(
     const dynamic::repository& rp,
     const formatters::formatter_interface& f) const {
 
-    formatter_properties r;
+    field_definitions r;
     r.file_type = f.file_type();
     const auto oh(f.ownership_hierarchy());
     r.formatter_name = oh.formatter_name();
@@ -103,12 +103,12 @@ path_settings_factory::make_formatter_properties(
     return r;
 }
 
-std::unordered_map<std::string, path_settings_factory::formatter_properties>
-path_settings_factory::make_formatter_properties(
+std::unordered_map<std::string, path_settings_factory::field_definitions>
+path_settings_factory::make_field_definitions(
     const dynamic::repository& rp,
     const std::forward_list<
     std::shared_ptr<formatters::formatter_interface>>& formatters) const {
-    std::unordered_map<std::string, formatter_properties> r;
+    std::unordered_map<std::string, field_definitions> r;
 
     for (const auto f : formatters) {
         const auto& oh(f->ownership_hierarchy());
@@ -116,37 +116,37 @@ path_settings_factory::make_formatter_properties(
             BOOST_LOG_SEV(lg, error) << empty_formatter_name;
             BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
         }
-        r[oh.formatter_name()] = make_formatter_properties(rp, *f);
+        r[oh.formatter_name()] = make_field_definitions(rp, *f);
     }
 
     return r;
 }
 
 path_settings path_settings_factory::
-create_settings_for_formatter(const formatter_properties& fp,
+create_settings_for_formatter(const field_definitions& fd,
     const dynamic::object& o) const {
 
     path_settings r;
-    r.file_type(fp.file_type);
+    r.file_type(fd.file_type);
 
     const dynamic::field_selector fs(o);
-    r.facet_directory(fs.get_text_content_or_default(fp.facet_directory));
-    r.facet_postfix(fs.get_text_content_or_default(fp.facet_postfix));
-    r.formatter_postfix(fs.get_text_content_or_default(fp.formatter_postfix));
+    r.facet_directory(fs.get_text_content_or_default(fd.facet_directory));
+    r.facet_postfix(fs.get_text_content_or_default(fd.facet_postfix));
+    r.formatter_postfix(fs.get_text_content_or_default(fd.formatter_postfix));
 
-    const auto& hfe(fp.header_file_extension);
+    const auto& hfe(fd.header_file_extension);
     r.header_file_extension(fs.get_text_content_or_default(hfe));
 
-    const auto& ife(fp.implementation_file_extension);
+    const auto& ife(fd.implementation_file_extension);
     r.implementation_file_extension(fs.get_text_content_or_default(ife));
 
-    const auto& idn(fp.include_directory_name);
+    const auto& idn(fd.include_directory_name);
     r.include_directory_name(fs.get_text_content_or_default(idn));
 
-    const auto& sdn(fp.source_directory_name);
+    const auto& sdn(fd.source_directory_name);
     r.source_directory_name(fs.get_text_content_or_default(sdn));
 
-    const auto& dfd(fp.disable_facet_directories);
+    const auto& dfd(fd.disable_facet_directories);
     r.disable_facet_directories(fs.get_boolean_content_or_default(dfd));
 
     return r;
@@ -155,10 +155,10 @@ create_settings_for_formatter(const formatter_properties& fp,
 std::unordered_map<std::string, path_settings> path_settings_factory::
 make(const dynamic::object& o) const {
     std::unordered_map<std::string, path_settings> r;
-    for (const auto& pair : formatter_properties_) {
-        const auto& fp(pair.second);
-        const auto s(create_settings_for_formatter(fp, o));
-        r.insert(std::make_pair(fp.formatter_name, s));
+    for (const auto& pair : field_definitions_) {
+        const auto& fd(pair.second);
+        const auto s(create_settings_for_formatter(fd, o));
+        r.insert(std::make_pair(fd.formatter_name, s));
     }
     return r;
 }

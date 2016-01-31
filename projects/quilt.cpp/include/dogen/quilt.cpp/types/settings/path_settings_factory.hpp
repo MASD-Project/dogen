@@ -53,9 +53,10 @@ public:
 
 private:
     /**
-     * @brief All relevant properties we need to remember for each formatter.
+     * @brief All relevant field definitions we need to remember for
+     * each formatter.
      */
-    struct formatter_properties {
+    struct field_definitions {
         std::string formatter_name;
         quilt::cpp::formatters::file_types file_type;
         dynamic::field_definition facet_directory;
@@ -72,36 +73,35 @@ private:
      * @brief Sets up top-level fields.
      */
     void setup_top_level_fields(const dynamic::repository& rp,
-        formatter_properties& fp) const;
+        field_definitions& fd) const;
 
     /**
      * @brief Sets up facet fields.
      */
     void setup_facet_fields(const dynamic::repository& rp,
-        const std::string& facet_name,
-        formatter_properties& fp) const;
+        const std::string& facet_name, field_definitions& fd) const;
 
     /**
      * @brief Sets up formatter fields.
      */
     void setup_formatter_fields(const dynamic::repository& rp,
         const std::string& formatter_name,
-        formatter_properties& fp) const;
+        field_definitions& fp) const;
 
     /**
-     * @brief Creates the set of formatter properties for a given
+     * @brief Creates the set of field definitions for a given
      * formatter.
      */
-    formatter_properties make_formatter_properties(
+    field_definitions make_field_definitions(
         const dynamic::repository& rp,
         const formatters::formatter_interface& f) const;
 
     /**
-     * @brief Generates all of the formatter properties, using the
+     * @brief Generates all of the formatter , using the
      * repository data and the registered formatters.
      */
-    std::unordered_map<std::string, formatter_properties>
-    make_formatter_properties(const dynamic::repository& rp,
+    std::unordered_map<std::string, field_definitions>
+    make_field_definitions(const dynamic::repository& rp,
         const std::forward_list<
         std::shared_ptr<formatters::formatter_interface>>& formatters) const;
 
@@ -109,7 +109,7 @@ private:
     /**
      * @brief Creates the path settings for a given formatter.
      */
-    path_settings create_settings_for_formatter(const formatter_properties& fp,
+    path_settings create_settings_for_formatter(const field_definitions& fd,
         const dynamic::object& o) const;
 
 public:
@@ -122,8 +122,8 @@ public:
     make(const dynamic::object& o) const;
 
 private:
-    const std::unordered_map<std::string, formatter_properties>
-    formatter_properties_;
+    const std::unordered_map<std::string, field_definitions>
+    field_definitions_;
 };
 
 } } } }
