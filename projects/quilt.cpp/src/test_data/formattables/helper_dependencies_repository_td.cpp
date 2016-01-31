@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/quilt.cpp/test_data/helper_dependencies_repository_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/helper_dependencies_repository_td.hpp"
 
 namespace {
 
@@ -42,6 +42,7 @@ std::unordered_map<std::string, std::string> create_std_unordered_map_std_string
 namespace dogen {
 namespace quilt {
 namespace cpp {
+namespace formattables {
 
 helper_dependencies_repository_generator::helper_dependencies_repository_generator() : position_(0) { }
 
@@ -69,4 +70,4 @@ helper_dependencies_repository_generator::operator()() {
     return create(position_++);
 }
 
-} } }
+} } } }

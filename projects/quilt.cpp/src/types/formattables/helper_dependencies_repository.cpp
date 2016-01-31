@@ -18,11 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/helper_dependencies_repository.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_dependencies_repository.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
+namespace formattables {
 
 helper_dependencies_repository::helper_dependencies_repository(const std::unordered_map<std::string, std::string>& helper_properties_by_name)
     : helper_properties_by_name_(helper_properties_by_name) { }
@@ -58,4 +59,4 @@ void helper_dependencies_repository::helper_properties_by_name(const std::unorde
     helper_properties_by_name_ = std::move(v);
 }
 
-} } }
+} } } }

@@ -18,19 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_HELPER_DEPENDENCIES_REPOSITORY_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_HELPER_DEPENDENCIES_REPOSITORY_FWD_HPP
+#include "dogen/quilt.cpp/hash/formattables/helper_dependencies_repository_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
+namespace formattables {
 
-class helper_dependencies_repository;
+std::size_t helper_dependencies_repository_hasher::hash(const helper_dependencies_repository& v) {
+    std::size_t seed(0);
 
-} } }
+    combine(seed, hash_std_unordered_map_std_string_std_string(v.helper_properties_by_name()));
+    return seed;
+}
 
-#endif
+} } } }

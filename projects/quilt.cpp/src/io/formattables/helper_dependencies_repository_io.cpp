@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/helper_dependencies_repository_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/helper_dependencies_repository_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -50,13 +50,14 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 namespace dogen {
 namespace quilt {
 namespace cpp {
+namespace formattables {
 
 std::ostream& operator<<(std::ostream& s, const helper_dependencies_repository& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::helper_dependencies_repository\"" << ", "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::helper_dependencies_repository\"" << ", "
       << "\"helper_properties_by_name\": " << v.helper_properties_by_name()
       << " }";
     return(s);
 }
 
-} } }
+} } } }

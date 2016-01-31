@@ -18,36 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_HASH_HELPER_DEPENDENCIES_REPOSITORY_HASH_HPP
-#define DOGEN_QUILT_CPP_HASH_HELPER_DEPENDENCIES_REPOSITORY_HASH_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_HELPER_DEPENDENCIES_REPOSITORY_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_HELPER_DEPENDENCIES_REPOSITORY_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/quilt.cpp/types/helper_dependencies_repository.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/quilt.cpp/types/formattables/helper_dependencies_repository.hpp"
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::formattables::helper_dependencies_repository)
+namespace boost {
+namespace serialization {
 
-struct helper_dependencies_repository_hasher {
-public:
-    static std::size_t hash(const helper_dependencies_repository& v);
-};
+template<typename Archive>
+void save(Archive& ar, const dogen::quilt::cpp::formattables::helper_dependencies_repository& v, unsigned int version);
 
-} } }
+template<typename Archive>
+void load(Archive& ar, dogen::quilt::cpp::formattables::helper_dependencies_repository& v, unsigned int version);
 
-namespace std {
+} }
 
-template<>
-struct hash<dogen::quilt::cpp::helper_dependencies_repository> {
-public:
-    size_t operator()(const dogen::quilt::cpp::helper_dependencies_repository& v) const {
-        return dogen::quilt::cpp::helper_dependencies_repository_hasher::hash(v);
-    }
-};
-
-}
 #endif

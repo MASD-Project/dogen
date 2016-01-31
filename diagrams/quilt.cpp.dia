@@ -34415,6 +34415,7 @@ modeling helper properties as a class.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
+      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O271">
       <dia:attribute name="obj_pos">
@@ -34552,6 +34553,7 @@ bother modeling helper dependencies as a class.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
+      <dia:childnode parent="O0"/>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O272">
       <dia:attribute name="name">

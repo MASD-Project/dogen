@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_HELPER_DEPENDENCIES_REPOSITORY_HPP
-#define DOGEN_QUILT_CPP_TYPES_HELPER_DEPENDENCIES_REPOSITORY_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_HELPER_DEPENDENCIES_REPOSITORY_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_HELPER_DEPENDENCIES_REPOSITORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,11 +28,12 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/quilt.cpp/serialization/helper_dependencies_repository_fwd_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/helper_dependencies_repository_fwd_ser.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
+namespace formattables {
 
 /**
  * @brief Maps a qualified name to the helper dependencies associated with it.
@@ -77,14 +78,14 @@ private:
     std::unordered_map<std::string, std::string> helper_properties_by_name_;
 };
 
-} } }
+} } } }
 
 namespace std {
 
 template<>
 inline void swap(
-    dogen::quilt::cpp::helper_dependencies_repository& lhs,
-    dogen::quilt::cpp::helper_dependencies_repository& rhs) {
+    dogen::quilt::cpp::formattables::helper_dependencies_repository& lhs,
+    dogen::quilt::cpp::formattables::helper_dependencies_repository& rhs) {
     lhs.swap(rhs);
 }
 

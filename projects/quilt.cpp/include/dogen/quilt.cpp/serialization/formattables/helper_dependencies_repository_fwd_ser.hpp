@@ -18,19 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_HELPER_DEPENDENCIES_REPOSITORY_FACTORY_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_HELPER_DEPENDENCIES_REPOSITORY_FACTORY_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_HELPER_DEPENDENCIES_REPOSITORY_FWD_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_HELPER_DEPENDENCIES_REPOSITORY_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
+#include "dogen/quilt.cpp/types/formattables/helper_dependencies_repository_fwd.hpp"
 
-class helper_dependencies_repository_factory;
+namespace boost {
+namespace serialization {
 
-} } }
+template<class Archive>
+void save(Archive& ar, const dogen::quilt::cpp::formattables::helper_dependencies_repository& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::quilt::cpp::formattables::helper_dependencies_repository& v, unsigned int version);
+
+} }
 
 #endif
