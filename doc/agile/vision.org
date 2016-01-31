@@ -10,8 +10,8 @@ what guides us when we think about the product.
 
 The vision for Dogen is:
 
-- To create a suite of code generation tools targeting model
-  generation;
+- To create a suite of code generation tools targeting model and
+  product generation according to a well-specified product line.
 - for these tools to be useful to developers in multiple programming
   languages, and to be designed to be integrated with IDEs and text
   editors;
