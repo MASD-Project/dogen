@@ -29,19 +29,30 @@ namespace cpp {
 namespace settings {
 
 helper_settings_factory::helper_settings_factory(const dynamic::repository& rp)
-    : helper_family_(make_helper_family_field_definition(rp)) { }
+    : field_definitions_(make_field_definitions(rp)) { }
 
-dynamic::field_definition
-helper_settings_factory::make_helper_family_field_definition(const dynamic::repository& rp) {
-    const auto& hf(traits::cpp::helper::family());
+helper_settings_factory::field_definitions
+helper_settings_factory::make_field_definitions(const dynamic::repository& rp) {
+    field_definitions r;
+
     const dynamic::repository_selector s(rp);
-    return s.select_field_by_name(hf);
+    const auto hf(traits::cpp::helper::family());
+    r.family = s.select_field_by_name(hf);
+    return r;
 }
 
 helper_settings helper_settings_factory::make(const dynamic::object& o) const {
     const dynamic::field_selector fs(o);
     helper_settings r;
-    r.family(fs.get_text_content_or_default(helper_family_));
+    r.family(fs.get_text_content_or_default(field_definitions_.family));
+    r.string_conversion_method(fs.get_text_content_or_default(
+            field_definitions_.string_conversion_method));
+    r.requires_quoting(fs.get_boolean_content_or_default(
+            field_definitions_.requires_quoting));
+    r.remove_unprintable_characters(fs.get_boolean_content_or_default(
+            field_definitions_.remove_unprintable_characters));
+    r.requires_dereferencing(fs.get_boolean_content_or_default(
+            field_definitions_.requires_dereferencing));
     return r;
 }
 

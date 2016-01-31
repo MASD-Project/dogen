@@ -40,14 +40,21 @@ public:
     explicit helper_settings_factory(const dynamic::repository& rp);
 
 private:
-    dynamic::field_definition
-    make_helper_family_field_definition(const dynamic::repository& rp);
+    struct field_definitions {
+        dynamic::field_definition family;
+        dynamic::field_definition string_conversion_method;
+        dynamic::field_definition requires_quoting;
+        dynamic::field_definition remove_unprintable_characters;
+        dynamic::field_definition requires_dereferencing;
+    };
+
+    field_definitions make_field_definitions(const dynamic::repository& rp);
 
 public:
     helper_settings make(const dynamic::object& o) const;
 
 private:
-    const dynamic::field_definition helper_family_;
+    const field_definitions field_definitions_;
 };
 
 } } } }
