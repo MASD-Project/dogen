@@ -25,16 +25,16 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-helper_dependencies_repository::helper_dependencies_repository(const std::unordered_map<std::string, std::string>& helper_properties_by_name)
-    : helper_properties_by_name_(helper_properties_by_name) { }
+helper_dependencies_repository::helper_dependencies_repository(const std::unordered_map<std::string, std::list<std::string> >& helper_dependencies_by_name)
+    : helper_dependencies_by_name_(helper_dependencies_by_name) { }
 
 void helper_dependencies_repository::swap(helper_dependencies_repository& other) noexcept {
     using std::swap;
-    swap(helper_properties_by_name_, other.helper_properties_by_name_);
+    swap(helper_dependencies_by_name_, other.helper_dependencies_by_name_);
 }
 
 bool helper_dependencies_repository::operator==(const helper_dependencies_repository& rhs) const {
-    return helper_properties_by_name_ == rhs.helper_properties_by_name_;
+    return helper_dependencies_by_name_ == rhs.helper_dependencies_by_name_;
 }
 
 helper_dependencies_repository& helper_dependencies_repository::operator=(helper_dependencies_repository other) {
@@ -43,20 +43,20 @@ helper_dependencies_repository& helper_dependencies_repository::operator=(helper
     return *this;
 }
 
-const std::unordered_map<std::string, std::string>& helper_dependencies_repository::helper_properties_by_name() const {
-    return helper_properties_by_name_;
+const std::unordered_map<std::string, std::list<std::string> >& helper_dependencies_repository::helper_dependencies_by_name() const {
+    return helper_dependencies_by_name_;
 }
 
-std::unordered_map<std::string, std::string>& helper_dependencies_repository::helper_properties_by_name() {
-    return helper_properties_by_name_;
+std::unordered_map<std::string, std::list<std::string> >& helper_dependencies_repository::helper_dependencies_by_name() {
+    return helper_dependencies_by_name_;
 }
 
-void helper_dependencies_repository::helper_properties_by_name(const std::unordered_map<std::string, std::string>& v) {
-    helper_properties_by_name_ = v;
+void helper_dependencies_repository::helper_dependencies_by_name(const std::unordered_map<std::string, std::list<std::string> >& v) {
+    helper_dependencies_by_name_ = v;
 }
 
-void helper_dependencies_repository::helper_properties_by_name(const std::unordered_map<std::string, std::string>&& v) {
-    helper_properties_by_name_ = std::move(v);
+void helper_dependencies_repository::helper_dependencies_by_name(const std::unordered_map<std::string, std::list<std::string> >&& v) {
+    helper_dependencies_by_name_ = std::move(v);
 }
 
 } } } }

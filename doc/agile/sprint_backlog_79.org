@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2016-01-31 Sun 11:45]
+#+CAPTION: Clock summary at [2016-01-31 Sun 12:25]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *29:53* |       |      |
+| *Total time*                                                                | *30:33* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 29:53   |       |      |
-| Active                                                                      |         | 29:53 |      |
+| Stories                                                                     | 30:33   |       |      |
+| Active                                                                      |         | 30:33 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 4:10 |
 | COMPLETED Merge all formatter assistants into one                           |         |       | 2:20 |
 | COMPLETED Name builder should take only model name                          |         |       | 0:48 |
@@ -42,7 +42,7 @@
 | COMPLETED Remove support for integrated io                                  |         |       | 0:37 |
 | CANCELLED Implement io for inheritance in the io facet                      |         |       | 0:09 |
 | COMPLETED Add a field for =quilt.cpp.helper_family=                         |         |       | 2:49 |
-| STARTED Add formatter helpers to formatter properties                       |         |       | 2:29 |
+| STARTED Add formatter helpers to formatter properties                       |         |       | 3:09 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -631,6 +631,7 @@ Fixes:
   classes. Add helper family to this class.
 
 *** STARTED Add formatter helpers to formatter properties             :story:
+    CLOCK: [2016-01-31 Sun 11:45]--[2016-01-31 Sun 12:25] =>  0:40
     CLOCK: [2016-01-31 Sun 11:12]--[2016-01-31 Sun 11:44] =>  0:32
     CLOCK: [2016-01-31 Sun 11:06]--[2016-01-31 Sun 11:11] =>  0:05
     CLOCK: [2016-01-31 Sun 09:41]--[2016-01-31 Sun 10:44] =>  1:03

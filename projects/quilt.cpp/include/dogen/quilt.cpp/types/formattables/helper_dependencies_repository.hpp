@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <algorithm>
 #include <unordered_map>
@@ -49,7 +50,7 @@ public:
     ~helper_dependencies_repository() = default;
 
 public:
-    explicit helper_dependencies_repository(const std::unordered_map<std::string, std::string>& helper_properties_by_name);
+    explicit helper_dependencies_repository(const std::unordered_map<std::string, std::list<std::string> >& helper_dependencies_by_name);
 
 private:
     template<typename Archive>
@@ -59,10 +60,10 @@ private:
     friend void boost::serialization::load(Archive& ar, helper_dependencies_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<std::string, std::string>& helper_properties_by_name() const;
-    std::unordered_map<std::string, std::string>& helper_properties_by_name();
-    void helper_properties_by_name(const std::unordered_map<std::string, std::string>& v);
-    void helper_properties_by_name(const std::unordered_map<std::string, std::string>&& v);
+    const std::unordered_map<std::string, std::list<std::string> >& helper_dependencies_by_name() const;
+    std::unordered_map<std::string, std::list<std::string> >& helper_dependencies_by_name();
+    void helper_dependencies_by_name(const std::unordered_map<std::string, std::list<std::string> >& v);
+    void helper_dependencies_by_name(const std::unordered_map<std::string, std::list<std::string> >&& v);
 
 public:
     bool operator==(const helper_dependencies_repository& rhs) const;
@@ -75,7 +76,7 @@ public:
     helper_dependencies_repository& operator=(helper_dependencies_repository other);
 
 private:
-    std::unordered_map<std::string, std::string> helper_properties_by_name_;
+    std::unordered_map<std::string, std::list<std::string> > helper_dependencies_by_name_;
 };
 
 } } } }

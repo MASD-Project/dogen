@@ -65,16 +65,16 @@
   <dia:layer name="Background" visible="true" active="true">
     <dia:object type="UML - LargePackage" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="22,-61"/>
+        <dia:point val="21.9167,-61.0833"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="21.95,-62.05;465.05,91.2167"/>
+        <dia:rectangle val="21.8667,-62.1333;464.967,91.1334"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="22,-61"/>
+        <dia:point val="21.9167,-61.0833"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="443"/>
@@ -17134,7 +17134,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="169.232,198"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.477,192.25;169.982,198.8"/>
+        <dia:rectangle val="131.478,192.25;169.982,198.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -28600,7 +28600,7 @@ yarn element.#</dia:string>
         <dia:point val="148.917,134.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="141.097,133.45;149.667,146.75"/>
+        <dia:rectangle val="141.098,133.45;149.667,146.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -33839,7 +33839,7 @@ yarn element.#</dia:string>
         <dia:point val="278.645,214"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="270.397,200.75;279.395,215.6"/>
+        <dia:rectangle val="270.397,200.75;279.395,214.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -34071,7 +34071,7 @@ yarn element.#</dia:string>
         <dia:point val="274,17.1834"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="266.395,16.1334;274.75,18.7834"/>
+        <dia:rectangle val="266.395,15.4334;274.75,18.0334"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -34242,16 +34242,16 @@ modeling helper properties as a class.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O270">
       <dia:attribute name="obj_pos">
-        <dia:point val="189,32"/>
+        <dia:point val="191,32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="188.95,31.95;226.51,35.65"/>
+        <dia:rectangle val="190.95,31.95;229.28,35.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="189,32"/>
+        <dia:point val="191,32"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="37.460000000000001"/>
+        <dia:real val="38.230000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -34353,7 +34353,7 @@ modeling helper properties as a class.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#helper_properties_repository#</dia:string>
+            <dia:string>#helper_dependencies_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34422,13 +34422,13 @@ modeling helper properties as a class.#</dia:string>
         <dia:point val="140,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="139.95,44.95;168.27,47.85"/>
+        <dia:rectangle val="139.95,44.95;173.275,47.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="140,45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.219999999999999"/>
+        <dia:real val="33.225000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
@@ -34526,10 +34526,10 @@ bother modeling helper dependencies as a class.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#helper_properties_by_name#</dia:string>
+            <dia:string>#helper_dependencies_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::string&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::list&lt;std::string&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -34596,7 +34596,7 @@ bother modeling helper dependencies as a class.#</dia:string>
         <dia:point val="274,19.1834"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="210.68,18.4334;274.75,33.6834"/>
+        <dia:rectangle val="210.065,18.4334;274.75,32.85"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -34606,8 +34606,8 @@ bother modeling helper dependencies as a class.#</dia:string>
         <dia:point val="270,19.1834"/>
         <dia:point val="270,26.0834"/>
         <dia:point val="211,26.0834"/>
-        <dia:point val="211,32.0834"/>
-        <dia:point val="210.73,32.0834"/>
+        <dia:point val="211,32"/>
+        <dia:point val="210.115,32"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -34672,7 +34672,7 @@ bother modeling helper dependencies as a class.#</dia:string>
         <dia:point val="255.222,18.6834"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="173.06,17.9334;255.972,33.6834"/>
+        <dia:rectangle val="173.06,17.9334;255.972,32.8834"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -34741,19 +34741,19 @@ bother modeling helper dependencies as a class.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="157.11,45.0834"/>
+        <dia:point val="156.613,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="157.06,34.9334;211.48,46.6834"/>
+        <dia:rectangle val="156.562,34.85;210.865,45.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="157.11,45.0834"/>
-        <dia:point val="157.11,40.7334"/>
-        <dia:point val="210.73,40.7334"/>
-        <dia:point val="210.73,35.6834"/>
+        <dia:point val="156.613,45"/>
+        <dia:point val="156.613,40.65"/>
+        <dia:point val="210.115,40.65"/>
+        <dia:point val="210.115,35.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

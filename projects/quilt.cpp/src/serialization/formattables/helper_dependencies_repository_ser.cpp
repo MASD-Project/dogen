@@ -19,6 +19,7 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/string.hpp>
@@ -38,14 +39,14 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::formattables::helper_dependencies_repository& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("helper_properties_by_name", v.helper_properties_by_name_);
+    ar << make_nvp("helper_dependencies_by_name", v.helper_dependencies_by_name_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::formattables::helper_dependencies_repository& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("helper_properties_by_name", v.helper_properties_by_name_);
+    ar >> make_nvp("helper_dependencies_by_name", v.helper_dependencies_by_name_);
 }
 
 } }

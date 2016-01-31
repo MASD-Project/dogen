@@ -29,10 +29,18 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
-    std::unordered_map<std::string, std::string> r;
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
+        r.push_back(create_std_string(position + i));
+    }
+    return r;
+}
+
+std::unordered_map<std::string, std::list<std::string> > create_std_unordered_map_std_string_std_list_std_string_(unsigned int position) {
+    std::unordered_map<std::string, std::list<std::string> > r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_std_list_std_string(position + i)));
     }
     return r;
 }
@@ -48,7 +56,7 @@ helper_dependencies_repository_generator::helper_dependencies_repository_generat
 
 void helper_dependencies_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.helper_properties_by_name(create_std_unordered_map_std_string_std_string(position + 0));
+    v.helper_dependencies_by_name(create_std_unordered_map_std_string_std_list_std_string_(position + 0));
 }
 
 helper_dependencies_repository_generator::result_type

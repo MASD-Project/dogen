@@ -28,11 +28,19 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v) {
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_unordered_map_std_string_std_list_std_string_(const std::unordered_map<std::string, std::list<std::string> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, i.second);
+        combine(seed, hash_std_list_std_string(i.second));
     }
     return seed;
 }
@@ -47,7 +55,7 @@ namespace formattables {
 std::size_t helper_dependencies_repository_hasher::hash(const helper_dependencies_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_std_string(v.helper_properties_by_name()));
+    combine(seed, hash_std_unordered_map_std_string_std_list_std_string_(v.helper_dependencies_by_name()));
     return seed;
 }
 
