@@ -126,6 +126,7 @@ private:
      */
     std::forward_list<dogen::formatters::file>
     format_activty(const settings::bundle_repository& brp,
+        const settings::helper_settings_repository& hsrp,
         const formattables::formatter_properties_repository& fprp,
         const std::forward_list<
         std::shared_ptr<formattables::formattable>
@@ -136,6 +137,7 @@ private:
      */
     std::forward_list<dogen::formatters::file>
     format_yarn_activity(const settings::bundle_repository& brp,
+        const settings::helper_settings_repository& hsrp,
         const formattables::formatter_properties_repository& fprp,
         const std::forward_list<
         boost::shared_ptr<yarn::element> >& elements) const;

@@ -59,6 +59,7 @@ namespace formatters {
 class dispatcher final : public formattables::formattable_visitor {
 public:
     dispatcher(const settings::bundle_repository& brp,
+        const settings::helper_settings_repository& hsrp,
         const formattables::formatter_properties_repository& fprp,
         const container& c);
     ~dispatcher() noexcept { }
@@ -126,8 +127,7 @@ private:
             BOOST_THROW_EXCEPTION(workflow_error(bundle_not_found + e.id()));
         }
 
-        // FIXME
-        std::unordered_map<std::string, settings::helper_settings> hs;
+        const auto& hs(helper_settings_.helper_settings_by_name());
         const context ctx(k->second, i->second, hs);
         auto file(f.format(ctx, e));
 
@@ -191,15 +191,18 @@ public:
 private:
     const context empty_context_;
     const settings::bundle_repository& bundle_;
+    const settings::helper_settings_repository& helper_settings_;
     const formattables::formatter_properties_repository& formatter_properties_;
     const container& container_;
     std::forward_list<dogen::formatters::file> files_;
 };
 
 dispatcher::dispatcher(const settings::bundle_repository& brp,
+    const settings::helper_settings_repository& hsrp,
     const formattables::formatter_properties_repository& fprp,
     const container& c) : empty_context_(), bundle_(brp),
-                          formatter_properties_(fprp), container_(c) { }
+                          helper_settings_(hsrp), formatter_properties_(fprp),
+                          container_(c) { }
 
 void dispatcher::visit(const formattables::class_info& c) {
     const bool empty_out_content(
@@ -248,9 +251,10 @@ cpp::formatters::registrar& workflow::registrar() {
 class yarn_dispatcher final : public yarn::element_visitor {
 public:
     yarn_dispatcher(const settings::bundle_repository& brp,
+        const settings::helper_settings_repository& hsrp,
         const formattables::formatter_properties_repository& fprp,
-        const container& c) : bundle_(brp), formatter_properties_(fprp),
-        container_(c) {}
+        const container& c) : bundle_(brp), helper_settings_(hsrp),
+        formatter_properties_(fprp), container_(c) {}
 
 public:
     /**
@@ -341,6 +345,7 @@ public:
 
 private:
     const settings::bundle_repository& bundle_;
+    const settings::helper_settings_repository& helper_settings_;
     const formattables::formatter_properties_repository& formatter_properties_;
     const container& container_;
     std::forward_list<dogen::formatters::file> files_;
@@ -387,8 +392,8 @@ create_context_for_name(const std::unordered_map<std::string,
         BOOST_LOG_SEV(lg, error) << bundle_not_found << qn;
         BOOST_THROW_EXCEPTION(workflow_error(bundle_not_found + qn));
     }
-    // FIXME
-    std::unordered_map<std::string, settings::helper_settings> hs;
+
+    const auto& hs(helper_settings_.helper_settings_by_name());
     return context(i->second, fp, hs);
 }
 
@@ -398,11 +403,12 @@ void yarn_dispatcher::format(const yarn::element& e) {
 
 std::forward_list<dogen::formatters::file>
 workflow::execute(const settings::bundle_repository& brp,
+    const settings::helper_settings_repository& hsrp,
     const formattables::formatter_properties_repository& fprp,
     const std::forward_list<
     std::shared_ptr<formattables::formattable> >& f) const {
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
-    dispatcher d(brp, fprp, registrar().formatter_container());
+    dispatcher d(brp, hsrp, fprp, registrar().formatter_container());
     for (const auto sp : f)
         d.format(*sp);
 
@@ -417,14 +423,16 @@ workflow::execute(const settings::bundle_repository& brp,
 
 std::forward_list<dogen::formatters::file>
 workflow::execute(const settings::bundle_repository& brp,
+    const settings::helper_settings_repository& hsrp,
     const formattables::formatter_properties_repository& fprp,
     const std::forward_list<
     boost::shared_ptr<yarn::element> >& elements) const {
 
     BOOST_LOG_SEV(lg, debug) << "Starting workflow - yarn version.";
-    yarn_dispatcher d(brp, fprp, registrar().formatter_container());
+    yarn_dispatcher d(brp, hsrp, fprp, registrar().formatter_container());
     for (const auto e : elements) {
-        BOOST_LOG_SEV(lg, warn) << "Processing element: " << e->name().qualified();
+        BOOST_LOG_SEV(lg, warn) << "Processing element: "
+                                << e->name().qualified();
         d.format(*e);
     }
 
