@@ -6193,11 +6193,14 @@ The ideal state of the world is one where:
 *** Keep track of sewing terms allocation                             :story:
 
 This story just keeps track of how we are using the different sewing
-terms in Dogen.
+terms in Dogen. We are only tracking terms which are not yet
+incorporated into the product.
 
-| Term  | Meaning | Dogen usage                            |
-| weave |         | Not used yet. Reserved for AOP support |
-|       |         |                                        |
+| Term  | Meaning | Dogen usage                                  |
+|-------+---------+----------------------------------------------|
+| weave |         | Not used yet. Reserved for AOP support       |
+| [[https://en.wikipedia.org/wiki/Glossary_of_sewing_terms#D][dart]]  |         | Will be used for the skeleton generator tool |
+| [[https://en.wikipedia.org/wiki/Yoke_(clothing)][yoke]]  |         | Not used yet.                                |
 
 *** Overuse of =std::set=, =std::map=, etc                            :story:
 
