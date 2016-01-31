@@ -30,6 +30,7 @@
 #include "dogen/quilt.cpp/types/formattables/transformer.hpp"
 #include "dogen/quilt.cpp/io/formattables/formattable_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/path_derivatives_repository_factory.hpp"
+#include "dogen/quilt.cpp/types/formattables/helper_properties_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 
 namespace {
@@ -82,12 +83,12 @@ private:
 }
 
 std::unordered_map<std::string, settings::path_settings>
-workflow::create_path_settings_activity(const dynamic::repository& srp,
+workflow::create_path_settings_activity(const dynamic::repository& rp,
     const dynamic::object& root_object,
     const formatters::container& fc) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating path settings for root object.";
-    settings::path_settings_factory f(srp, fc.all_external_formatters());
+    settings::path_settings_factory f(rp, fc.all_external_formatters());
     const auto r(f.make(root_object));
     BOOST_LOG_SEV(lg, debug) << "Created path settings for root object.";
     return r;
@@ -101,8 +102,14 @@ create_path_derivatives_repository(const config::cpp_options& opts,
     return f.make(opts, ps, m);
 }
 
+helper_properties_repository workflow::create_helper_properties_repository(
+    const dynamic::repository& rp, const yarn::model& m) const {
+    helper_properties_repository_factory f;
+    return f.make(rp, m);
+}
+
 formatter_properties_repository workflow::
-create_formatter_properties(const dynamic::repository& srp,
+create_formatter_properties(const dynamic::repository& rp,
     const dynamic::object& root_object,
     const settings::bundle_repository& brp,
     const path_derivatives_repository& pdrp,
@@ -110,7 +117,7 @@ create_formatter_properties(const dynamic::repository& srp,
     const yarn::model& m) const {
 
     formatter_properties_repository_factory f;
-    return f.make(srp, root_object, brp, pdrp, fc, m);
+    return f.make(rp, root_object, brp, pdrp, fc, m);
 }
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
@@ -165,7 +172,7 @@ std::pair<
     std::forward_list<std::shared_ptr<formattables::formattable> >
 >
 workflow::execute(const config::cpp_options& opts,
-    const dynamic::repository& drp,
+    const dynamic::repository& rp,
     const dynamic::object& root_object,
     const dogen::formatters::general_settings_factory& gsf,
     const formatters::container& fc,
@@ -174,9 +181,11 @@ workflow::execute(const config::cpp_options& opts,
     BOOST_LOG_SEV(lg, debug) << "Started creating formattables.";
 
     const auto& ro(root_object);
-    const auto ps(create_path_settings_activity(drp, ro, fc));
+    const auto ps(create_path_settings_activity(rp, ro, fc));
     const auto pdrp(create_path_derivatives_repository(opts, ps, m));
-    auto fprp(create_formatter_properties(drp, ro, brp, pdrp, fc, m));
+    /*const auto hp = */ create_helper_properties_repository(rp, m);
+    
+    auto fprp(create_formatter_properties(rp, ro, brp, pdrp, fc, m));
 
     auto formattables(from_transformer_activity(m));
     formattables.splice_after(formattables.before_begin(),

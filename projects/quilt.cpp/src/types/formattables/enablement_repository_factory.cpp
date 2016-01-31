@@ -146,7 +146,7 @@ enablement_repository enablement_repository_factory::make(
     const dynamic::object& root_object,
     const formatters::container& fc,
     const yarn::model& m) const {
-
+    
     BOOST_LOG_SEV(lg, debug) << "Started computing enablement.";
 
     const auto fd(create_field_definitions(rp, fc));
