@@ -33227,7 +33227,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="420,151"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="419.95,150.95;455.2,155.45"/>
+        <dia:rectangle val="419.95,150.95;455.2,156.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="420,151"/>
@@ -33236,13 +33236,13 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="35.149999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#context#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Supplies additional information required for formatting.#</dia:string>

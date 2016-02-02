@@ -189,6 +189,11 @@ public:
     const std::forward_list<dogen::formatters::file>& files();
 
 private:
+    const settings::bundle empty_bundle_;
+    const std::unordered_map<std::string, formattables::formatter_properties>
+        empty_formatter_properties_;
+    const std::unordered_map<std::string, settings::helper_settings>
+        empty_helper_settings_;
     const context empty_context_;
     const settings::bundle_repository& bundle_;
     const settings::helper_settings_repository& helper_settings_;
@@ -200,9 +205,13 @@ private:
 dispatcher::dispatcher(const settings::bundle_repository& brp,
     const settings::helper_settings_repository& hsrp,
     const formattables::formatter_properties_repository& fprp,
-    const container& c) : empty_context_(), bundle_(brp),
-                          helper_settings_(hsrp), formatter_properties_(fprp),
-                          container_(c) { }
+    const container& c)
+    : empty_bundle_(), empty_formatter_properties_(),
+      empty_helper_settings_(),
+      empty_context_(empty_bundle_, empty_formatter_properties_,
+          empty_helper_settings_), bundle_(brp),
+      helper_settings_(hsrp), formatter_properties_(fprp),
+      container_(c) { }
 
 void dispatcher::visit(const formattables::class_info& c) {
     const bool empty_out_content(

@@ -27,7 +27,6 @@
 
 #include "dogen/quilt.cpp/serialization/registrar_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/bundle_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formatters/context_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/entity_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formatters/file_types_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/odb_settings_ser.hpp"

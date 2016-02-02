@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/quilt.cpp/hash/settings/bundle_hash.hpp"
-#include "dogen/quilt.cpp/hash/formatters/context_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/entity_hash.hpp"
 #include "dogen/quilt.cpp/hash/formatters/file_types_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/odb_settings_hash.hpp"

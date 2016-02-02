@@ -31,7 +31,6 @@
 #include "dogen/quilt.cpp/types/settings/bundle.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_properties.hpp"
-#include "dogen/quilt.cpp/serialization/formatters/context_fwd_ser.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -43,67 +42,28 @@ namespace formatters {
  */
 class context final {
 public:
-    context() = default;
-    context(const context&) = default;
-    context(context&&) = default;
-    ~context() = default;
-
-public:
     context(
-        const dogen::quilt::cpp::settings::bundle& bundle,
-        const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& formatter_properties,
-        const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& helper_settings);
+        const settings::bundle& bundle,
+        const std::unordered_map<std::string,
+        formattables::formatter_properties>& formatter_properties,
+        const std::unordered_map<std::string,
+        settings::helper_settings>& helper_settings);
+
+public:
+    const settings::bundle& bundle() const;
+    const std::unordered_map<std::string, formattables::formatter_properties>&
+        formatter_properties() const;
+    const std::unordered_map<std::string, settings::helper_settings>&
+        helper_settings() const;
 
 private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const context& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, context& v, unsigned int version);
-
-public:
-    const dogen::quilt::cpp::settings::bundle& bundle() const;
-    dogen::quilt::cpp::settings::bundle& bundle();
-    void bundle(const dogen::quilt::cpp::settings::bundle& v);
-    void bundle(const dogen::quilt::cpp::settings::bundle&& v);
-
-    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& formatter_properties() const;
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& formatter_properties();
-    void formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>& v);
-    void formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties>&& v);
-
-    const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& helper_settings() const;
-    std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& helper_settings();
-    void helper_settings(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& v);
-    void helper_settings(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>&& v);
-
-public:
-    bool operator==(const context& rhs) const;
-    bool operator!=(const context& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(context& other) noexcept;
-    context& operator=(context other);
-
-private:
-    dogen::quilt::cpp::settings::bundle bundle_;
-    std::unordered_map<std::string, dogen::quilt::cpp::formattables::formatter_properties> formatter_properties_;
-    std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings> helper_settings_;
+    const settings::bundle& bundle_;
+    const std::unordered_map<std::string, formattables::formatter_properties>&
+        formatter_properties_;
+    const std::unordered_map<std::string, settings::helper_settings>&
+        helper_settings_;
 };
 
 } } } }
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::quilt::cpp::formatters::context& lhs,
-    dogen::quilt::cpp::formatters::context& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

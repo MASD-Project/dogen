@@ -12,15 +12,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-02-01 Mon 20:53]
+#+CAPTION: Clock summary at [2016-02-02 Tue 22:45]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:12* |      |      | 100.0 |
+| *Total time*                                                                | *1:01* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:12   |      |      | 100.0 |
-| Active                                                                      |        | 0:12 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:12 | 100.0 |
+| Stories                                                                     | 1:01   |      |      | 100.0 |
+| Active                                                                      |        | 1:01 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:12 |  19.7 |
+| COMPLETED Make context non-generatable                                      |        |      | 0:49 |  80.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -32,6 +33,19 @@ Updates to sprint and product backlog.
 *** Update manual                                                     :story:
 
 Updates to manual.
+
+*** COMPLETED Make context non-generatable                            :story:
+    CLOSED: [2016-02-02 Tue 22:44]
+    CLOCK: [2016-02-02 Tue 21:55]--[2016-02-02 Tue 22:44] =>  0:49
+
+We need to extend context in a few ways dogen does not yet support:
+
+- make formatter properties and bundles by reference since we do not
+  need to copy them.
+- create a context generator that merges the containers and generates
+  a map of type to context. Supply this context to the formatters
+  workflow and to the formatters. Actually we left the generation code
+  as it is pretty trivial.
 
 *** Add an helper method interface                                    :story:
 
@@ -87,15 +101,5 @@ code. We can remove all previous helper support.
 Once all of the infrastructure is in place, we should not need this
 class any more. Remove code from transformer and remove object types
 and anything else that was used to dispatch based on type.
-
-*** Make context non-generatable                                      :story:
-
-We need to extend context in a few ways dogen does not yet support:
-
-- make formatter properties and bundles by reference since we do not
-  need to copy them.
-- create a context generator that merges the containers and generates
-  a map of type to context. Supply this context to the formatters
-  workflow and to the formatters.
 
 ** Deprecated
