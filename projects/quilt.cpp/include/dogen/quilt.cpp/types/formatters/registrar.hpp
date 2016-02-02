@@ -31,6 +31,7 @@
 #include <unordered_map>
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/formatters/formatter_helper_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/enum_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/class_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/visitor_formatter_interface.hpp"
@@ -64,6 +65,10 @@ private:
         std::shared_ptr<formatters::formatter_interface> f);
 
 public:
+    void register_formatter_helper(
+        std::shared_ptr<formatter_helper_interface> fh);
+
+ public:
     /**
      * @brief Registers a class formatter.
      */
@@ -133,6 +138,11 @@ public:
 
 private:
     container formatter_container_;
+    std::unordered_map<
+        std::string,
+        std::unordered_map<std::string,
+                           std::shared_ptr<formatter_helper_interface>>>
+    formatter_helpers_;
     std::forward_list<dynamic::ownership_hierarchy> ownership_hierarchy_;
 };
 
@@ -146,6 +156,12 @@ template<typename Formatter>
 inline void initialise_formatter(registrar& rg, const std::string& facet_name) {
     const auto f(std::make_shared<Formatter>(facet_name));
     rg.register_formatter(f);
+}
+
+template<typename Formatter>
+inline void initialise_formatter_helper(registrar& rg) {
+    const auto f(std::make_shared<Formatter>());
+    rg.register_formatter_helper(f);
 }
 
 } } } }

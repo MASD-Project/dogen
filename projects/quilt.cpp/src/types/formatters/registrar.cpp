@@ -35,6 +35,8 @@ const std::string no_class_formatters("No class formatters provided.");
 const std::string no_forward_declarations_formatters(
     "No forward declarations formatters provided.");
 const std::string null_formatter("Formatter supplied is null");
+const std::string null_formatter_helper("Formatter helper supplied is null");
+const std::string helper_already_registered("Helper already registered: ");
 
 }
 
@@ -111,6 +113,21 @@ common_registration(std::shared_ptr<formatters::formatter_interface> f) {
         formatter_container_.all_internal_formatters_.push_front(f);
     else if (f->formattable_origin_type() == ot::external)
         formatter_container_.all_external_formatters_.push_front(f);
+}
+
+void registrar::register_formatter_helper(
+    std::shared_ptr<formatter_helper_interface> fh) {
+
+    // note: not logging by design
+    if (!fh)
+        BOOST_THROW_EXCEPTION(registrar_error(null_formatter_helper));
+
+    auto& c(formatter_helpers_[fh->owning_formatter()]);
+    const auto result(c.insert(std::make_pair(fh->family(), fh)));
+    if (!result.second) {
+        BOOST_THROW_EXCEPTION(
+            registrar_error(helper_already_registered + fh->helper_name()));
+    }
 }
 
 void registrar::register_formatter(
