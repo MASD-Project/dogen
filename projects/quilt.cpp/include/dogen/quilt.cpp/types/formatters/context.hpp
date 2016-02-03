@@ -25,12 +25,14 @@
 #pragma once
 #endif
 
+#include <memory>
 #include <string>
 #include <algorithm>
 #include <unordered_map>
 #include "dogen/quilt.cpp/types/settings/bundle.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_properties.hpp"
+#include "dogen/quilt.cpp/types/formatters/formatter_helper_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -45,23 +47,35 @@ public:
     context(
         const settings::bundle& bundle,
         const std::unordered_map<std::string,
-        formattables::formatter_properties>& formatter_properties,
+        settings::helper_settings>& helper_settings,
         const std::unordered_map<std::string,
-        settings::helper_settings>& helper_settings);
+        formattables::formatter_properties>& formatter_properties,
+        std::unordered_map<std::string, std::unordered_map<std::string,
+        std::shared_ptr<formatter_helper_interface>>> helpers);
 
 public:
     const settings::bundle& bundle() const;
-    const std::unordered_map<std::string, formattables::formatter_properties>&
-        formatter_properties() const;
     const std::unordered_map<std::string, settings::helper_settings>&
         helper_settings() const;
+    const std::unordered_map<std::string, formattables::formatter_properties>&
+        formatter_properties() const;
+    const std::unordered_map<
+        std::string,
+        std::unordered_map<
+            std::string, std::shared_ptr<formatter_helper_interface>>>&
+        helpers() const;
 
 private:
     const settings::bundle& bundle_;
-    const std::unordered_map<std::string, formattables::formatter_properties>&
-        formatter_properties_;
     const std::unordered_map<std::string, settings::helper_settings>&
         helper_settings_;
+    const std::unordered_map<std::string, formattables::formatter_properties>&
+        formatter_properties_;
+    const std::unordered_map<
+        std::string,
+        std::unordered_map<
+            std::string, std::shared_ptr<formatter_helper_interface>>>&
+    helpers_;
 };
 
 } } } }

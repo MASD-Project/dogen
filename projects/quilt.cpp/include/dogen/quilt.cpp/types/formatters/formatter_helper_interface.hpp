@@ -27,7 +27,7 @@
 
 #include <string>
 #include "dogen/yarn/types/nested_name.hpp"
-
+#include "dogen/quilt.cpp/types/formatters/assistant_fwd.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -47,7 +47,8 @@ public:
     virtual bool requires_explicit_call() const = 0;
     virtual std::string function_name() const = 0;
     virtual std::string helper_name() const = 0;
-    virtual void format(const yarn::nested_name& nn) const = 0;
+    virtual void format(const assistant& a,
+        const yarn::nested_name& nn) const = 0;
 };
 
 } } } }

@@ -73,8 +73,8 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-assistant::assistant(const context& ctx, const dynamic::ownership_hierarchy& oh,
-    const formatters::file_types ft) :
+assistant::assistant(const context& ctx,
+    const dynamic::ownership_hierarchy& oh, const formatters::file_types ft) :
     context_(ctx),
     formatter_properties_(obtain_formatter_properties(oh.formatter_name())),
     ownership_hierarchy_(oh), file_type_(ft) {
@@ -317,6 +317,45 @@ std::string assistant::comment_inline(const std::string& c) const {
 
     f.format(s, c);
     return s.str();
+}
+
+void assistant::recursive_helper_method_creator(const yarn::nested_name& nn,
+    std::unordered_set<std::string>& types_done) const {
+    if (types_done.find(nn.parent().qualified()) != types_done.end())
+        return;
+
+    for (const auto c : nn.children())
+        recursive_helper_method_creator(c, types_done);
+
+    const auto i(context_.helper_settings().find(nn.parent().qualified()));
+    if (i == context_.helper_settings().end())
+        return;
+
+    const auto& hs(i->second);
+    const auto j(context_.helpers().find(hs.family()));
+    if (j == context_.helpers().end())
+        return;
+
+    const auto k(j->second.find(ownership_hierarchy_.formatter_name()));
+    if (k == j->second.end())
+        return;
+
+    const auto& helper(*k->second);
+    helper.format(*this, nn);
+}
+
+void assistant::
+add_helper_methods(const std::list<formattables::property_info>& properties) {
+    BOOST_LOG_SEV(lg, debug) << "Creating helper methods.";
+    if (properties.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No properties found.";
+        return;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Properties found: " << properties.size();
+    std::unordered_set<std::string> types_done;
+    for (const auto p : properties)
+        recursive_helper_method_creator(p.nested_name(), types_done);
 }
 
 void assistant::add_helper_methods(const formattables::class_info& c) {

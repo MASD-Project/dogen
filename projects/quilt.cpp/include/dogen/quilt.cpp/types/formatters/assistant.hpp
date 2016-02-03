@@ -28,12 +28,14 @@
 #include <list>
 #include <string>
 #include <sstream>
+#include <unordered_set>
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/nested_name.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/quilt.cpp/types/settings/odb_settings.hpp"
@@ -214,7 +216,23 @@ public:
      */
     std::string comment_inline(const std::string& c) const;
 
+private:
+    /**
+     * @brief Creates all the helper methods by recursing into the
+     * nested type info.
+     */
+    void recursive_helper_method_creator(
+        const yarn::nested_name& nn,
+        std::unordered_set<std::string>& types_done) const;
+
 public:
+    /**
+     * @brief Creates any helper methods that may be required for this
+     * formatter.
+     */
+    void add_helper_methods(const std::list<formattables::property_info>&
+        properties);
+
     /**
      * @brief Creates any helper methods that may be required for this
      * formatter.

@@ -27,16 +27,24 @@ namespace formatters {
 
 context::context(
     const settings::bundle& bundle,
+    const std::unordered_map<std::string, settings::helper_settings>&
+    helper_settings,
     const std::unordered_map<std::string, formattables::formatter_properties>&
     formatter_properties,
-    const std::unordered_map<std::string, settings::helper_settings>&
-    helper_settings)
+    std::unordered_map<std::string, std::unordered_map<std::string,
+    std::shared_ptr<formatter_helper_interface>>> helpers)
     : bundle_(bundle),
+      helper_settings_(helper_settings),
       formatter_properties_(formatter_properties),
-      helper_settings_(helper_settings) { }
+      helpers_(helpers) { }
 
 const settings::bundle& context::bundle() const {
     return bundle_;
+}
+
+const std::unordered_map<std::string, settings::helper_settings>&
+context::helper_settings() const {
+    return helper_settings_;
 }
 
 const std::unordered_map<std::string, formattables::formatter_properties>&
@@ -44,9 +52,12 @@ context::formatter_properties() const {
     return formatter_properties_;
 }
 
-const std::unordered_map<std::string, settings::helper_settings>&
-context::helper_settings() const {
-    return helper_settings_;
+const std::unordered_map<
+    std::string,
+    std::unordered_map<
+        std::string, std::shared_ptr<formatter_helper_interface>>>&
+context::helpers() const {
+    return helpers_;
 }
 
 } } } }

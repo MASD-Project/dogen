@@ -61,6 +61,8 @@ public:
     dispatcher(const settings::bundle_repository& brp,
         const settings::helper_settings_repository& hsrp,
         const formattables::formatter_properties_repository& fprp,
+        const std::unordered_map<std::string, std::unordered_map<std::string,
+        std::shared_ptr<formatter_helper_interface>>>& helpers,
         const container& c);
     ~dispatcher() noexcept { }
 
@@ -128,7 +130,7 @@ private:
         }
 
         const auto& hs(helper_settings_.helper_settings_by_name());
-        const context ctx(k->second, i->second, hs);
+        const context ctx(k->second, hs, i->second, helpers_);
         auto file(f.format(ctx, e));
 
         if (empty_out_content) {
@@ -194,6 +196,11 @@ private:
         empty_formatter_properties_;
     const std::unordered_map<std::string, settings::helper_settings>
         empty_helper_settings_;
+    const std::unordered_map<
+        std::string,
+        std::unordered_map<
+            std::string,
+            std::shared_ptr<formatter_helper_interface>>>& helpers_;
     const context empty_context_;
     const settings::bundle_repository& bundle_;
     const settings::helper_settings_repository& helper_settings_;
@@ -205,11 +212,13 @@ private:
 dispatcher::dispatcher(const settings::bundle_repository& brp,
     const settings::helper_settings_repository& hsrp,
     const formattables::formatter_properties_repository& fprp,
+    const std::unordered_map<std::string, std::unordered_map<
+    std::string, std::shared_ptr<formatter_helper_interface>>>& helpers,
     const container& c)
     : empty_bundle_(), empty_formatter_properties_(),
-      empty_helper_settings_(),
-      empty_context_(empty_bundle_, empty_formatter_properties_,
-          empty_helper_settings_), bundle_(brp),
+      empty_helper_settings_(), helpers_(helpers),
+      empty_context_(empty_bundle_, empty_helper_settings_,
+          empty_formatter_properties_, helpers_), bundle_(brp),
       helper_settings_(hsrp), formatter_properties_(fprp),
       container_(c) { }
 
@@ -262,8 +271,10 @@ public:
     yarn_dispatcher(const settings::bundle_repository& brp,
         const settings::helper_settings_repository& hsrp,
         const formattables::formatter_properties_repository& fprp,
+        const std::unordered_map<std::string, std::unordered_map<
+        std::string, std::shared_ptr<formatter_helper_interface>>>& helpers,
         const container& c) : bundle_(brp), helper_settings_(hsrp),
-        formatter_properties_(fprp), container_(c) {}
+        formatter_properties_(fprp), helpers_(helpers), container_(c) {}
 
 public:
     /**
@@ -356,6 +367,11 @@ private:
     const settings::bundle_repository& bundle_;
     const settings::helper_settings_repository& helper_settings_;
     const formattables::formatter_properties_repository& formatter_properties_;
+    const std::unordered_map<
+        std::string,
+        std::unordered_map<
+            std::string,
+            std::shared_ptr<formatter_helper_interface>>>& helpers_;
     const container& container_;
     std::forward_list<dogen::formatters::file> files_;
 };
@@ -403,7 +419,7 @@ create_context_for_name(const std::unordered_map<std::string,
     }
 
     const auto& hs(helper_settings_.helper_settings_by_name());
-    return context(i->second, fp, hs);
+    return context(i->second, hs, fp, helpers_);
 }
 
 void yarn_dispatcher::format(const yarn::element& e) {
@@ -417,7 +433,8 @@ workflow::execute(const settings::bundle_repository& brp,
     const std::forward_list<
     std::shared_ptr<formattables::formattable> >& f) const {
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
-    dispatcher d(brp, hsrp, fprp, registrar().formatter_container());
+    dispatcher d(brp, hsrp, fprp, registrar().formatter_helpers(),
+        registrar().formatter_container());
     for (const auto sp : f)
         d.format(*sp);
 
@@ -438,7 +455,8 @@ workflow::execute(const settings::bundle_repository& brp,
     boost::shared_ptr<yarn::element> >& elements) const {
 
     BOOST_LOG_SEV(lg, debug) << "Starting workflow - yarn version.";
-    yarn_dispatcher d(brp, hsrp, fprp, registrar().formatter_container());
+    yarn_dispatcher d(brp, hsrp, fprp, registrar().formatter_helpers(),
+        registrar().formatter_container());
     for (const auto e : elements) {
         BOOST_LOG_SEV(lg, warn) << "Processing element: "
                                 << e->name().qualified();

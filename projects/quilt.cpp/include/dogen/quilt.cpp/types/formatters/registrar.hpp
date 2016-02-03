@@ -136,6 +136,12 @@ public:
     const std::forward_list<dynamic::ownership_hierarchy>&
     ownership_hierarchy() const;
 
+    const std::unordered_map<
+        std::string,
+        std::unordered_map<std::string,
+                           std::shared_ptr<formatter_helper_interface>>>&
+    formatter_helpers() const;
+
 private:
     container formatter_container_;
     std::unordered_map<

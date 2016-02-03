@@ -239,4 +239,12 @@ registrar::ownership_hierarchy() const {
     return ownership_hierarchy_;
 }
 
+const std::unordered_map<
+    std::string, std::unordered_map<
+                     std::string,
+                     std::shared_ptr<formatter_helper_interface>>>&
+registrar::formatter_helpers() const {
+    return formatter_helpers_;
+}
+
 } } } }
