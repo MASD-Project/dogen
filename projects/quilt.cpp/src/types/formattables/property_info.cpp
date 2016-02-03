@@ -36,14 +36,16 @@ property_info::property_info(
     const dogen::quilt::cpp::formattables::nested_type_info& type,
     const bool is_immutable,
     const bool is_fluent,
-    const std::string& id)
+    const std::string& id,
+    const dogen::yarn::nested_name& nested_name)
     : name_(name),
       qualified_name_(qualified_name),
       documentation_(documentation),
       type_(type),
       is_immutable_(is_immutable),
       is_fluent_(is_fluent),
-      id_(id) { }
+      id_(id),
+      nested_name_(nested_name) { }
 
 void property_info::swap(property_info& other) noexcept {
     using std::swap;
@@ -54,6 +56,7 @@ void property_info::swap(property_info& other) noexcept {
     swap(is_immutable_, other.is_immutable_);
     swap(is_fluent_, other.is_fluent_);
     swap(id_, other.id_);
+    swap(nested_name_, other.nested_name_);
 }
 
 bool property_info::operator==(const property_info& rhs) const {
@@ -63,7 +66,8 @@ bool property_info::operator==(const property_info& rhs) const {
         type_ == rhs.type_ &&
         is_immutable_ == rhs.is_immutable_ &&
         is_fluent_ == rhs.is_fluent_ &&
-        id_ == rhs.id_;
+        id_ == rhs.id_ &&
+        nested_name_ == rhs.nested_name_;
 }
 
 property_info& property_info::operator=(property_info other) {
@@ -166,6 +170,22 @@ void property_info::id(const std::string& v) {
 
 void property_info::id(const std::string&& v) {
     id_ = std::move(v);
+}
+
+const dogen::yarn::nested_name& property_info::nested_name() const {
+    return nested_name_;
+}
+
+dogen::yarn::nested_name& property_info::nested_name() {
+    return nested_name_;
+}
+
+void property_info::nested_name(const dogen::yarn::nested_name& v) {
+    nested_name_ = v;
+}
+
+void property_info::nested_name(const dogen::yarn::nested_name&& v) {
+    nested_name_ = std::move(v);
 }
 
 } } } }

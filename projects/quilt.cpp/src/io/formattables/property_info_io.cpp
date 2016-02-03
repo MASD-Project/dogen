@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
+#include "dogen/yarn/io/nested_name_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/property_info_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/nested_type_info_io.hpp"
 
@@ -51,7 +52,8 @@ std::ostream& operator<<(std::ostream& s, const property_info& v) {
       << "\"type\": " << v.type() << ", "
       << "\"is_immutable\": " << v.is_immutable() << ", "
       << "\"is_fluent\": " << v.is_fluent() << ", "
-      << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\""
+      << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "
+      << "\"nested_name\": " << v.nested_name()
       << " }";
     return(s);
 }

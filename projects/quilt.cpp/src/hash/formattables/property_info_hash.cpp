@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/hash/nested_name_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/property_info_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/nested_type_info_hash.hpp"
 
@@ -46,6 +47,7 @@ std::size_t property_info_hasher::hash(const property_info& v) {
     combine(seed, v.is_immutable());
     combine(seed, v.is_fluent());
     combine(seed, v.id());
+    combine(seed, v.nested_name());
 
     return seed;
 }

@@ -318,6 +318,7 @@ transformer::to_property_info(const yarn::property p, const bool is_immutable,
     nested_type_info nti;
     std::string complete_name;
     const auto t(p.type());
+    pi.nested_name(t);
     if (::requires_manual_move_constructor(t.parent().simple()))
         requires_manual_move_constructor = true;
 

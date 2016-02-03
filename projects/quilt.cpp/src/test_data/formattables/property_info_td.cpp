@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/yarn/test_data/nested_name_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/property_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/nested_type_info_td.hpp"
 
@@ -39,6 +40,11 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
+dogen::yarn::nested_name
+create_dogen_yarn_nested_name(const unsigned int position) {
+    return dogen::yarn::nested_name_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -57,6 +63,7 @@ populate(const unsigned int position, result_type& v) {
     v.is_immutable(create_bool(position + 4));
     v.is_fluent(create_bool(position + 5));
     v.id(create_std_string(position + 6));
+    v.nested_name(create_dogen_yarn_nested_name(position + 7));
 }
 
 property_info_generator::result_type

@@ -134,7 +134,7 @@ public:
      * @brief Returns the ownership hierarchy for all formatters.
      */
     const std::forward_list<dynamic::ownership_hierarchy>&
-        ownership_hierarchy() const;
+    ownership_hierarchy() const;
 
 private:
     container formatter_container_;
