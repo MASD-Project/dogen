@@ -1,0 +1,65 @@
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/smart_pointer_helper_stitch.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/smart_pointer_helper_stitch.hpp
+index e2dd1ea..10f6642 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/smart_pointer_helper_stitch.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/smart_pointer_helper_stitch.hpp
+@@ -26,8 +26,7 @@
+ #endif
+ 
+ #include <ostream>
+-#include "dogen/quilt.cpp/types/formattables/nested_type_info.hpp"
+-#include "dogen/quilt.cpp/types/formatters/nested_type_formatting_assistant.hpp"
++#include "dogen/quilt.cpp/types/formatters/formatter_helper_interface.hpp"
+ 
+ namespace dogen {
+ namespace quilt {
+@@ -35,9 +34,15 @@ namespace cpp {
+ namespace formatters {
+ namespace types {
+ 
+-void smart_pointer_helper_stitch(
+-    formatters::nested_type_formatting_assistant& fa,
+-    const formattables::nested_type_info& t);
++class smart_pointer_helper_stitch : public formatter_helper_interface {
++public:
++    std::string family() const;
++    std::string owning_formatter() const;
++    bool requires_explicit_call() const;
++    std::string function_name() const;
++    std::string helper_name() const;
++    void format(const assistant& a, const yarn::nested_name& nn) const;
++};
+ 
+ } } } } }
+ 
+diff --git a/projects/quilt.cpp/src/types/formatters/types/smart_pointer_helper.stitch b/projects/quilt.cpp/src/types/formatters/types/smart_pointer_helper.stitch
+index b35af99..de8d7b8 100644
+--- a/projects/quilt.cpp/src/types/formatters/types/smart_pointer_helper.stitch
++++ b/projects/quilt.cpp/src/types/formatters/types/smart_pointer_helper.stitch
+@@ -6,10 +6,24 @@
+ <#@ containing_namespaces=dogen::quilt::cpp::formatters::types #>
+ <#+
+ 
+-void smart_pointer_helper_stitch(
+-    nested_type_formatting_assistant& a,
+-    const formattables::nested_type_info& t) {
++std::string smart_pointer_helper_stitch::family() const {
++    return std::string("Dereferenceable");
++}
++
++std::string smart_pointer_helper_stitch::owning_formatter() const {
++}
++
++bool smart_pointer_helper_stitch::requires_explicit_call() const {
++}
++
++std::string smart_pointer_helper_stitch::function_name() const {
++}
++
++std::string smart_pointer_helper_stitch::helper_name() const {
++}
+ 
++void smart_pointer_helper_stitch::
++format(const assistant& a, const yarn::nested_name& nn) const {
+     {
+         auto snf(a.make_scoped_namespace_formatter(t.namespaces()));
+         const auto containee(t.children().front());
