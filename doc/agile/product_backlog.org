@@ -6073,6 +6073,8 @@ collection of types in one go.
 We also need a way to keep these templates away from the main (user
 visible) code, since they are useful only for dogen.
 
+See also [[https://github.com/cierelabs/boostache/tree/develop][boostache]].
+
 *** Generate spec skeleton                                            :story:
 
 When we create a dogen project for the first time, we should be able
