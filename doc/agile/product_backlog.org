@@ -6075,6 +6075,13 @@ visible) code, since they are useful only for dogen.
 
 See also [[https://github.com/cierelabs/boostache/tree/develop][boostache]].
 
+Notes:
+
+- we will need some "special" tags for copyright, includes
+  etc. Includes will be particularly special because we need to
+  augment the include list with additional includes. However, we may
+  not even need to be aware of this.
+
 *** Generate spec skeleton                                            :story:
 
 When we create a dogen project for the first time, we should be able
