@@ -31,8 +31,8 @@ context::context(
     helper_settings,
     const std::unordered_map<std::string, formattables::formatter_properties>&
     formatter_properties,
-    std::unordered_map<std::string, std::unordered_map<std::string,
-    std::shared_ptr<formatter_helper_interface>>> helpers)
+    const std::unordered_map<std::string, std::unordered_map<std::string,
+    std::shared_ptr<formatter_helper_interface>>>& helpers)
     : bundle_(bundle),
       helper_settings_(helper_settings),
       formatter_properties_(formatter_properties),

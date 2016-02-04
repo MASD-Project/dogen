@@ -25,6 +25,7 @@
 #include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/formatters/types/comment_formatter.hpp"
 #include "dogen/formatters/types/annotation_formatter.hpp"
+#include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/name_builder.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
@@ -319,43 +320,69 @@ std::string assistant::comment_inline(const std::string& c) const {
     return s.str();
 }
 
-void assistant::recursive_helper_method_creator(const yarn::nested_name& nn,
-    std::unordered_set<std::string>& types_done) const {
-    if (types_done.find(nn.parent().qualified()) != types_done.end())
+void assistant::recursive_helper_method_creator(
+    const formattables::class_info& owner, const yarn::nested_name& nn,
+    std::unordered_set<std::string>& types_done) {
+    BOOST_LOG_SEV(lg, debug) << "[New] Processing type: "
+                             << nn.parent().qualified();
+
+    if (types_done.find(nn.parent().qualified()) != types_done.end()) {
+        BOOST_LOG_SEV(lg, debug) << "[New] Type already done.";
         return;
+    }
 
     for (const auto c : nn.children())
-        recursive_helper_method_creator(c, types_done);
+        recursive_helper_method_creator(owner, c, types_done);
 
     const auto i(context_.helper_settings().find(nn.parent().qualified()));
-    if (i == context_.helper_settings().end())
+    if (i == context_.helper_settings().end()) {
+        BOOST_LOG_SEV(lg, debug) << "[New] No settings for type.";
         return;
+    }
 
     const auto& hs(i->second);
+    BOOST_LOG_SEV(lg, debug) << "[New] helper settings: " << hs;
     const auto j(context_.helpers().find(hs.family()));
-    if (j == context_.helpers().end())
+
+    if (j == context_.helpers().end()) {
+        BOOST_LOG_SEV(lg, debug) << "[New] No helpers for family: "
+                                 << hs.family();
         return;
+    }
 
     const auto k(j->second.find(ownership_hierarchy_.formatter_name()));
-    if (k == j->second.end())
+    if (k == j->second.end()) {
+        BOOST_LOG_SEV(lg, debug) << "[New] Formatter helper not found. "
+                                 << " formatter: "
+                                 << ownership_hierarchy_.formatter_name()
+                                 << " family: " << hs.family();
         return;
+    }
 
-    const auto& helper(*k->second);
+    const auto& helper(*(k->second));
+    if (!helper.is_enabled(*this, owner)) {
+        BOOST_LOG_SEV(lg, debug) << "[New] Formatter helper not enabled: "
+                                 << ownership_hierarchy_.formatter_name()
+                                 << " family " << hs.family();
+        return;
+    }
+    BOOST_LOG_SEV(lg, debug) << "[New] Formatting with helper.";
     helper.format(*this, nn);
 }
 
 void assistant::
-add_helper_methods(const std::list<formattables::property_info>& properties) {
-    BOOST_LOG_SEV(lg, debug) << "Creating helper methods.";
+add_helper_methods(const formattables::class_info& owner,
+    const std::list<formattables::property_info>& properties) {
+    BOOST_LOG_SEV(lg, debug) << "[New] Creating helper methods.";
     if (properties.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "No properties found.";
+        BOOST_LOG_SEV(lg, debug) << "[New] No properties found.";
         return;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Properties found: " << properties.size();
+    BOOST_LOG_SEV(lg, debug) << "[New] Properties found: " << properties.size();
     std::unordered_set<std::string> types_done;
     for (const auto p : properties)
-        recursive_helper_method_creator(p.nested_name(), types_done);
+        recursive_helper_method_creator(owner, p.nested_name(), types_done);
 }
 
 void assistant::add_helper_methods(const formattables::class_info& c) {

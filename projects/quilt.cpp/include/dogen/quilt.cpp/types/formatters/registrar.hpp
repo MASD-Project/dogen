@@ -68,7 +68,7 @@ public:
     void register_formatter_helper(
         std::shared_ptr<formatter_helper_interface> fh);
 
- public:
+public:
     /**
      * @brief Registers a class formatter.
      */

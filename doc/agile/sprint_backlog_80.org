@@ -5,24 +5,24 @@
 
 * Mission Statement
 
-- finish implementing quilt.cpp formatters using yarn types;
+- finish implementing quilt.cpp formatters using yarn types.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-02-03 Wed 22:57]
+#+CAPTION: Clock summary at [2016-02-04 Thu 23:19]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *3:49* |      |      | 100.0 |
+| *Total time*                                                                | *6:58* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 3:49   |      |      | 100.0 |
-| Active                                                                      |        | 3:49 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:12 |   5.2 |
-| COMPLETED Make context non-generatable                                      |        |      | 0:49 |  21.4 |
-| STARTED Add an helper method interface                                      |        |      | 2:48 |  73.4 |
+| Stories                                                                     | 6:58   |      |      | 100.0 |
+| Active                                                                      |        | 6:58 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:12 |   2.9 |
+| COMPLETED Make context non-generatable                                      |        |      | 0:49 |  11.7 |
+| STARTED Add an helper method interface                                      |        |      | 5:57 |  85.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -49,6 +49,9 @@ We need to extend context in a few ways dogen does not yet support:
   as it is pretty trivial.
 
 *** STARTED Add an helper method interface                            :story:
+    CLOCK: [2016-02-04 Thu 21:45]--[2016-02-04 Thu 23:19] =>  1:34
+    CLOCK: [2016-02-04 Thu 18:39]--[2016-02-04 Thu 19:27] =>  0:48
+    CLOCK: [2016-02-04 Thu 06:29]--[2016-02-04 Thu 07:16] =>  0:47
     CLOCK: [2016-02-03 Wed 21:16]--[2016-02-03 Wed 22:57] =>  1:41
     CLOCK: [2016-02-03 Wed 21:03]--[2016-02-03 Wed 21:15] =>  0:12
     CLOCK: [2016-02-02 Tue 22:45]--[2016-02-02 Tue 23:40] =>  0:55
@@ -63,6 +66,13 @@ Tasks:
 - implement interface in at least one helper.
 - update assistant to query registrar for helpers based on type family
   in context. Performs a recursive descent on nested name.
+- problem: io helpers in types should only be enabled if io is enabled
+  and if type is in an inheritance relationship. For this we need to
+  have access to formatter properties (potentially via assistant) but
+  we also need to have access to the type that owns the properties. We
+  could augment helper interface with the assistant - easy as we
+  already have it on the format method - and the element - harder; we
+  need to supply the object as part of helper method creation.
 
 *Previous Understanding*
 
@@ -99,6 +109,14 @@ Tasks:
   the nested name (nested info for now) and pick the helper
   settings. It should also consult the registrar to see if there are
   any helpers available for this formatter and family.
+
+*** Initialise formatters in the formatter's translation unit         :story:
+
+At present we are initialising the formatters in each of the facet
+initialisers. However, it makes more sense to initialise them on the
+translation unit for each formatter. This will also make life easier
+when we move to a mustache world where there may not be a formatter
+header file at all.
 
 *** Update assistant to use new helper information                    :story:
 

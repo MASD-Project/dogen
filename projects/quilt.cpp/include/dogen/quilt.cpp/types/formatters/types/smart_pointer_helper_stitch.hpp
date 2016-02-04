@@ -28,12 +28,25 @@
 #include <ostream>
 #include "dogen/quilt.cpp/types/formattables/nested_type_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/nested_type_formatting_assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/formatter_helper_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
 namespace types {
+
+class smart_pointer_helper : public formatter_helper_interface {
+public:
+    std::string family() const;
+    std::string owning_formatter() const;
+    bool requires_explicit_call() const;
+    std::string function_name() const;
+    std::string helper_name() const;
+    bool is_enabled(const assistant& a,
+        const formattables::class_info& owner) const;
+    void format(assistant& a, const yarn::nested_name& nn) const;
+};
 
 void smart_pointer_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,

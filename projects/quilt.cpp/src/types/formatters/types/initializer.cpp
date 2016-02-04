@@ -29,6 +29,7 @@
 #include "dogen/quilt.cpp/types/formatters/types/namespace_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/visitor_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/forward_declarations_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/types/smart_pointer_helper_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/initializer.hpp"
 
 namespace dogen {
@@ -46,6 +47,7 @@ void initializer::initialize(registrar& rg) {
     initialise_formatter<namespace_header_formatter>(rg);
     initialise_formatter<visitor_header_formatter>(rg);
     initialise_formatter<forward_declarations_formatter>(rg);
+    initialise_formatter_helper<smart_pointer_helper>(rg);
 }
 
 } } } } }

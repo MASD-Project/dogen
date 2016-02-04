@@ -100,6 +100,9 @@ void registrar::validate() const {
     log_container_sizes("registrar formatters", fc.registrar_formatters());
     log_container_sizes("Includers formatters", fc.includers_formatters());
 
+    BOOST_LOG_SEV(lg, debug) << "Registered formatter helpers: "
+                             << formatter_helpers_.size();
+
     BOOST_LOG_SEV(lg, debug) << "Ownership hierarchy: "
                              << ownership_hierarchy_;
 }
@@ -122,8 +125,8 @@ void registrar::register_formatter_helper(
     if (!fh)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter_helper));
 
-    auto& c(formatter_helpers_[fh->owning_formatter()]);
-    const auto result(c.insert(std::make_pair(fh->family(), fh)));
+    auto& c(formatter_helpers_[fh->family()]);
+    const auto result(c.insert(std::make_pair(fh->owning_formatter(), fh)));
     if (!result.second) {
         BOOST_THROW_EXCEPTION(
             registrar_error(helper_already_registered + fh->helper_name()));

@@ -18,6 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/smart_pointer_helper_stitch.hpp"
 
 namespace dogen {
@@ -25,6 +27,48 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 namespace types {
+
+std::string smart_pointer_helper::family() const {
+    static std::string r("Dereferenceable");
+    return r;
+}
+
+std::string smart_pointer_helper::owning_formatter() const {
+    return traits::class_implementation_formatter_name();
+}
+
+bool smart_pointer_helper::requires_explicit_call() const {
+    return false;
+}
+
+std::string smart_pointer_helper::function_name() const {
+    static std::string r("operator==");
+    return r;
+}
+
+std::string smart_pointer_helper::helper_name() const {
+    static std::string r(owning_formatter() + "." + family());
+    return r;
+}
+
+bool smart_pointer_helper::is_enabled(const assistant& /*a*/,
+    const formattables::class_info& /*owner*/) const {
+    return true;
+}
+
+void smart_pointer_helper::
+format(assistant& a, const yarn::nested_name& nn) const {
+    {
+        const auto ns(a.make_namespaces(nn.parent()));
+        auto snf(a.make_scoped_namespace_formatter(ns));
+a.stream() << std::endl;
+a.stream() << "inline bool operator==(const " << a.make_qualified_name(nn.parent()) << "& lhs," << std::endl;
+a.stream() << "const " << a.make_qualified_name(nn.parent()) << "& rhs) {" << std::endl;
+a.stream() << "    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+    }
+}
 
 void smart_pointer_helper_stitch(
     nested_type_formatting_assistant& a,
