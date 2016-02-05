@@ -12,17 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-02-04 Thu 23:19]
+#+CAPTION: Clock summary at [2016-02-05 Fri 23:52]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *6:58* |      |      | 100.0 |
+| *Total time*                                                                | *8:44* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 6:58   |      |      | 100.0 |
-| Active                                                                      |        | 6:58 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:12 |   2.9 |
-| COMPLETED Make context non-generatable                                      |        |      | 0:49 |  11.7 |
-| STARTED Add an helper method interface                                      |        |      | 5:57 |  85.4 |
+| Stories                                                                     | 8:44   |      |      | 100.0 |
+| Active                                                                      |        | 8:44 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:12 |   2.3 |
+| COMPLETED Make context non-generatable                                      |        |      | 0:49 |   9.4 |
+| STARTED Setup logging syntax highlighting on emacs                          |        |      | 1:46 |  20.2 |
+| STARTED Add an helper method interface                                      |        |      | 5:57 |  68.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -47,6 +48,22 @@ We need to extend context in a few ways dogen does not yet support:
   a map of type to context. Supply this context to the formatters
   workflow and to the formatters. Actually we left the generation code
   as it is pretty trivial.
+
+*** STARTED Setup logging syntax highlighting on emacs                :story:
+    CLOCK: [2016-02-05 Fri 23:38]--[2016-02-05 Fri 23:52] =>  0:14
+    CLOCK: [2016-02-05 Fri 22:05]--[2016-02-05 Fri 23:37] =>  1:32
+
+The Log4J mode is not highlighting syntax for a while now. It would be
+good to move to [[https://github.com/doublep/logview][LogView]], which is actively maintained. However, our
+log files do not work out of the box for some reason.
+
+- opened ticket in LogView: [[https://github.com/doublep/logview/issues/3][Problem detecting log file using boost log format]]
+- updated conventions to match SLF4J (removed FINE, using TRACE, etc).
+
+It is not easy to update boost to have milisecond timestamps:
+
+- [[http://stackoverflow.com/questions/27870064/how-to-truncate-boost-log-format-expression][How to truncate boost log format expression]]
+- [[http://stackoverflow.com/questions/5947018/how-to-customize-timestamp-format-of-boost-log][how to customize "TimeStamp" format of Boost.Log]]
 
 *** STARTED Add an helper method interface                            :story:
     CLOCK: [2016-02-04 Thu 21:45]--[2016-02-04 Thu 23:19] =>  1:34

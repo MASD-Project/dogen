@@ -122,18 +122,17 @@ BOOST_AUTO_TEST_CASE(exercise_log_life_cycle_manager) {
 
     // exercise 3: write something at a log level lower than the
     // current log level.
-    BOOST_LOG_SEV(lg, fine_debug) << "this statement should not appear";
+    BOOST_LOG_SEV(lg, trace) << "this statement should not appear";
 
     // exercise 4: exercise error log levels
     BOOST_LOG_SEV(lg, error) << "this statement is an error";
-    BOOST_LOG_SEV(lg, fatal) << "this statement is fatal";
 
     // exercise 5: shutdown logging and initialise it with different settings.
     lcm.shutdown();
     lcm.initialise(log_file_name("exercise_log_life_cycle_manager", 2),
-        severity_level::fatal);
-    BOOST_LOG_SEV(lg, error) << "this statement should not appear";
-    BOOST_LOG_SEV(lg, fatal) << "this statement should appear";
+        severity_level::warn);
+    BOOST_LOG_SEV(lg, debug) << "this statement should not appear";
+    BOOST_LOG_SEV(lg, error) << "this statement should appear";
     lcm.shutdown();
     BOOST_CHECK(true);
 }
@@ -148,20 +147,20 @@ BOOST_AUTO_TEST_CASE(exercise_scoped_log_life_cycle_manager) {
             log_file_name("exercise_scoped_log_life_cycle_manager", 1),
             severity_level::debug,
             log_to_console);
-        BOOST_LOG_SEV(lg, fine_debug)
+        BOOST_LOG_SEV(lg, trace)
             << "scoped1: " << "this statement should not appear";
-        BOOST_LOG_SEV(lg, fatal)
+        BOOST_LOG_SEV(lg, error)
             << "scoped2: " << "this statement should appear";
     }
 
     {
         scoped_life_cycle_manager slcm(
             log_file_name("exercise_scoped_log_life_cycle_manager", 2),
-            severity_level::fine_debug,
+            severity_level::trace,
             log_to_console);
-        BOOST_LOG_SEV(lg, fine_debug)
+        BOOST_LOG_SEV(lg, trace)
             << "scoped3: " << "this statement should appear";
-        BOOST_LOG_SEV(lg, fatal)
+        BOOST_LOG_SEV(lg, error)
             << "scoped4: " << "this statement should appear";
     }
 }
