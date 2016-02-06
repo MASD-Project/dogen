@@ -49,6 +49,21 @@ We need to extend context in a few ways dogen does not yet support:
   workflow and to the formatters. Actually we left the generation code
   as it is pretty trivial.
 
+*** STARTED Help conan with strange warning                           :story:
+    CLOCK: [2016-02-05 Fri 23:53]--[2016-02-06 Sat 00:19] =>  0:26
+
+We are getting a CMake warning on our builds:
+
+: CMake Warning (dev) in build/output/conanbuildinfo.cmake:
+:  Syntax Warning in cmake code at
+:    /home/travis/build/DomainDrivenConsulting/dogen/build/output/conanbuildinfo.cmake:142:88
+:  Argument not separated from preceding token by whitespace.
+: Call Stack (most recent call first):
+:  CMakeLists.txt:30 (include)
+: This warning is for project developers.  Use -Wno-dev to suppress it.
+
+Report it to conan.
+
 *** STARTED Setup logging syntax highlighting on emacs                :story:
     CLOCK: [2016-02-05 Fri 23:38]--[2016-02-05 Fri 23:52] =>  0:14
     CLOCK: [2016-02-05 Fri 22:05]--[2016-02-05 Fri 23:37] =>  1:32
