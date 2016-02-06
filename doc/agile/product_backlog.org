@@ -1401,7 +1401,7 @@ This could be implemented as follows:
 Create a log config file (say =logging.ini=) that contains a list of
 strings and valid severities:
 
-: root = fine_debug
+: root = trace
 : cpp = debug
 : cpp.settings = info
 
@@ -3151,24 +3151,23 @@ Things the marker can/should have:
   every time there is a new commit so perhaps we need to have this
   switched off by default.
 
-*** Move some of the more verbose logging to fine debug               :story:
+*** Move some of the more verbose logging to trace                    :story:
 
-We have a category for fine debug logging (=FINE_DEBUG=) but we are
-not making use of it. There is some rather verbose logging that could
-be moved to it. Go through all the logging and move some to
-=FINE_DEBUG=.
+We have a category for finer debug logging (=TRACE=) but we are not
+making use of it. There is some rather verbose logging that could be
+moved to it. Go through all the logging and move some to =TRACE=.
 
 One strategy would be to put in the final object of each workflow as
 =DEBUG= (say the expanded model, etc) but the intermediate steps as
-=FINE_DEBUG=. This mirrors the way we investigate the problem: we
+=TRACE=. This mirrors the way we investigate the problem: we
 could check if each sub-system has done it's job correctly, and spot
 the one that didn't; we can then just enable that one sub-system's
-=FINE_DEBUG= (when that is supported).
+=TRACE= (when that is supported).
 
 We probably should only do this at the end, as we want to make sure
 that the code generator is usable with full logging on. Or perhaps set
-the default to fine debug. We should also add a command line option,
-perhaps really verbose.
+the default to =TRACE=. We should also add a command line option,
+perhaps really verbose or extra verbose.
 
 *** Inline comments in =comment_formatter= are a hack                 :story:
 
