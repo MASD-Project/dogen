@@ -55,7 +55,6 @@ script:
   - mkdir output
   - cd output
   - conan install --file=${GIT_REPO}/.conanfile.txt
-  - sed -n '135,145p' /home/travis/build/DomainDrivenConsulting/dogen/build/output/conanbuildinfo.cmake
   - hash=`ls ~/.conan/data/Boost/1.60.0/lasote/stable/package/`
   - cd ~/.conan/data/Boost/1.60.0/lasote/stable/package/${hash}/include/
   - sudo patch -p0 < ${GIT_REPO}/patches/boost_1_59_graph.patch
