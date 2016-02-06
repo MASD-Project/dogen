@@ -126,7 +126,7 @@ void workflow::report_exception(const std::exception& e) const {
      */
     const auto be(dynamic_cast<const boost::exception* const>(&e));
     if (be && can_log_) {
-        BOOST_LOG_SEV(lg, fatal) << "Error: "
+        BOOST_LOG_SEV(lg, error) << "Error: "
                                  << boost::diagnostic_information(*be);
     }
 
