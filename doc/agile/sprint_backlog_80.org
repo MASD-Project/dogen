@@ -37,6 +37,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-02-06 Sat 19:00]--[2016-02-06 Sat 19:43] =>  0:43
     CLOCK: [2016-02-13 Sat 23:43]--[2016-02-13 Sat 23:51] =>  0:08
     CLOCK: [2016-02-12 Fri 17:50]--[2016-02-12 Fri 17:55] =>  0:05
     CLOCK: [2016-02-10 Wed 23:15]--[2016-02-10 Wed 23:24] =>  0:09
@@ -170,6 +171,11 @@ Dogen. A good example is [[https://github.com/nlamirault/emacs-travis/blob/maste
 Update the workflow to use =context_factory= and =fileset_buider=.
 
 We decided against fileset builder in the end.
+
+*** Sort out problems with main machine                               :story:
+
+Massive spike. Seems like debian unstable no longer has drivers for
+our graphics card so we need to move to legacy drivers.
 
 *** STARTED Help conan with strange warning                           :story:
     CLOCK: [2016-02-10 Wed 22:17]--[2016-02-10 Wed 22:35] =>  0:18
