@@ -12,23 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-02-06 Sat 12:39]
+#+CAPTION: Clock summary at [2016-02-06 Sat 15:04]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *12:34* |       |      | 100.0 |
+| *Total time*                                                                | *13:29* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 12:34   |       |      | 100.0 |
-| Active                                                                      |         | 12:34 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:51 |  14.7 |
-| COMPLETED Make context non-generatable                                      |         |       | 0:49 |   6.5 |
-| COMPLETED Setup logging syntax highlighting on emacs                        |         |       | 2:32 |  20.2 |
-| STARTED Help conan with strange warning                                     |         |       | 0:26 |   3.4 |
-| STARTED Add an helper method interface                                      |         |       | 6:56 |  55.2 |
+| Stories                                                                     | 13:29   |       |      | 100.0 |
+| Active                                                                      |         | 13:29 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:46 |  20.5 |
+| COMPLETED Make context non-generatable                                      |         |       | 0:49 |   6.1 |
+| COMPLETED Setup logging syntax highlighting on emacs                        |         |       | 2:32 |  18.8 |
+| STARTED Help conan with strange warning                                     |         |       | 0:26 |   3.2 |
+| STARTED Add an helper method interface                                      |         |       | 6:56 |  51.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-02-06 Sat 13:45]--[2016-02-06 Sat 14:15] =>  0:30
+    CLOCK: [2016-02-06 Sat 12:40]--[2016-02-06 Sat 13:05] =>  0:25
     CLOCK: [2016-02-06 Sat 12:35]--[2016-02-06 Sat 12:39] =>  0:04
     CLOCK: [2016-02-06 Sat 12:09]--[2016-02-06 Sat 12:34] =>  0:25
     CLOCK: [2016-02-06 Sat 11:15]--[2016-02-06 Sat 12:08] =>  0:53
@@ -180,27 +182,22 @@ list<file>=).
 
 Update the workflow to use =context_factory= and =fileset_buider=.
 
-*** Consider renaming =yarn::property= to attribute                   :story:
+*** Add index support for =yarn::nested_name=                         :story:
 
-Since we use properties quite a lot in =quilt.cpp= - and more so when
-we rename formattables to properties - we should probably avoid the
-need to overload the term in yarn. We could rename it to attribute.
+Add an index to =yarn::nested_name=. Compute it as part of the
+existing yarn infrastructure. Ordinal number is attributed from the
+all properties collection, and recurses over the nesting.
 
-Or perhaps the problem is with formatter properties. After all these
-are not "properties of the formatter"; these are inputs into the
-formatting process (and so are settings).
+*** Add properties for =yarn::nested_name=                            :story:
 
-We need to add properties for =yarn::property= so it cannot stay as
-property. We cannot think of a better name other than "properties" for
-formatters so yarn will have to be renamed.
+We need to store the identifiable name of the nested name, as well as
+the language specific representation of the type. The container should
+make use of the index - e.g. use a vector. The only problem is that we
+do not know what the size of the container is without doing look
+ups. We could have a property nested name size in stateful. Naming it
+is not easy though. Nested name cardinality?
 
-*** Add index support for =yarn::property=                            :story:
-
-Add an index to =yarn::property=. Compute it as part of the existing
-yarn infrastructure. Ordinal number is attributed from the all
-properties collection.
-
-*** Add properties for =yarn::property=                               :story:
+*Previous Understanding*
 
 We need to store the identifiable name of the nested name, as well as
 the language specific representation of the type. These are properties
@@ -208,7 +205,18 @@ at the level of the =yarn::property=. The container should make use of
 the index - e.g. use a vector of size of properties list.
 
 Note that these are not properties of the property, but instead
-properties of the property type,
+properties of the property type.
+
+Actually this is not correct; we need the properties for each nested
+name and for each particular nested name structure, possibly unique to
+each property. An alternative is then to come up with an index that
+takes into account the nesting (effectively flattens the nested
+structure). The index starts at zero for a type and increments for
+every property for every level of nesting. Each nested name has an
+index. Then, nested name properties is a flat container for each name
+with the required properties. With this the helpers can continue to
+rely on just the nested name (plus the nested name properties via the
+assistant).
 
 *** Initialise formatters in the formatter's translation unit         :story:
 
@@ -230,6 +238,22 @@ code. We can remove all previous helper support.
 Once all of the infrastructure is in place, we should not need this
 class any more. Remove code from transformer and remove object types
 and anything else that was used to dispatch based on type.
+
+*** Consider renaming =yarn::property= to attribute                   :story:
+
+Since we use properties quite a lot in =quilt.cpp= - and more so when
+we rename formattables to properties - we should probably avoid the
+need to overload the term in yarn. We could rename it to attribute.
+
+Or perhaps the problem is with formatter properties. After all these
+are not "properties of the formatter"; these are inputs into the
+formatting process (and so are settings).
+
+We need to add properties for =yarn::property= so it cannot stay as
+property. We cannot think of a better name other than "properties" for
+formatters so yarn will have to be renamed.
+
+Actually this is no longer urgent so the story can go back to backlog.
 
 *** Consider using indices rather than associative containers         :story:
 
