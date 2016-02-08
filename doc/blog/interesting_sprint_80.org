@@ -8,6 +8,18 @@ into recently-ish.
 
 - [[http://www.ted.com/talks/yanis_varoufakis_capitalism_will_eat_democracy_unless_we_speak_up?utm_campaign%3Dsocial&utm_medium%3Dreferral&utm_source%3Dt.co&utm_content%3Dtalk&utm_term%3Dglobal-social%2520issues#t-874630][Yanis Varoufakis: Capitalism will eat democracy -- unless we speak
   up]]: Very interesting Ted talk by Varoufakis.
+- [[http://www.salon.com/2016/02/04/naomi_klein_there_are_no_non_radical_options_left_before_us_partner/][Naomi Klein: “There are no non-radical options left before us"]]: I
+  always have time for Naomi Klein even if I don't always agree with
+  her. Very interesting post on market failures (predictably).
+- [[http://www.theguardian.com/technology/2016/jan/28/apple-quarterly-results-iphone-silicon-valley-developers][Apple – losing out on talent and in need of a killer new device]]:
+  Very interesting post on Apple, and how it is not cool with the cool
+  developers any longer. Good read and worrying one for Apple.
+- [[http://www.spectator.co.uk/2016/01/the-low-tricks-of-high-finance-how-greedy-bankers-weak-politicians-and-timid-journalists-could-cause-a-new-crash/][The low tricks of high finance: how greedy bankers, weak politicians
+  and timid journalists could cause a new crash]]. Always have time for
+  Michael Lewis. While waiting for the Big Short, this article kept me
+  entertained.
+- [[http://bottlerocketscience.blogspot.co.uk/2016/01/startup-geometry-ep-016-emanuel-derman.html][Startup Geometry EP 016 Emanuel Derman]]: Postcast with uber nerd,
+  quintessential Quant and fellow African Emanuel Derman.
 
 * Startups et al.
 
@@ -16,6 +28,34 @@ into recently-ish.
 - [[http://www.themacro.com/articles/2016/01/advice-startups-running-out-of-money/][Advice for Companies With Less Than 1 Year of Runway]]: Lots of useful
   bits of advice for how to manage your runway. Source: Hacker News
   (twitter).
+- [[http://dealbook.nytimes.com/2014/10/20/the-truth-hidden-by-ibms-buybacks/][The Truth Hidden by IBM’s Buybacks]]: Something slightly dodgy seems
+  to be going on in IBM, very strange financial transactions!
+- [[http://www.wired.com/2016/02/ai-is-changing-the-technology-behind-google-searches/][AI Is Transforming Google Search. The Rest of the Web Is Next]]:
+  Google is moving from a "human algo" approach to AI in search. Very
+  interesting.
+- [[http://gavinandresen.ninja/a-guided-tour-of-the-2mb-fork][A Guided Tour of the 2mb Fork]]: The BTC main man Gavin takes us on a
+  detailed tour of one of the BTC forks. Source: Hacker News (twitter)
+- [[http://www.coindesk.com/state-of-bitcoin-blockchain-2016/?utm_content%3Dbufferccc2b&utm_medium%3Dsocial&utm_source%3Dtwitter.com&utm_campaign%3Dbuffer][State of Bitcoin and Blockchain 2016]]: Blockchain Hits Critical Mass:
+  A very detailed - some say /too detailed/ - look at BTC
+  in 2016. Source: CoinDesk (twitter).
+- [[http://www.wired.com/2016/02/why-bitcoin-will-thrive-first-in-the-developing-world/?utm_content%3Dbuffer9ce0d&utm_medium%3Dsocial&utm_source%3Dtwitter.com&utm_campaign%3Dbuffer][Why Bitcoin Will Thrive First in the Developing World]]: Most
+  interesting hypothesis - that BTC will first gain lots of traction
+  in the developing world - but to me, it fails slightly to provide
+  enough evidence. It reminds me how I always thought that Linux would
+  explode in the developing world, but in the end it was the developed
+  world that took the lead, whereas the poorer nations simply pirated
+  windows. I want to believe them, but unfortunately reality does not
+  tend to be that linear. Source: CoinDesk (twitter)
+- [[http://blog.nootch.net/2016/02/02/on-motivation-and-shipping/][On motivation, shipping and startups]]: Great post on life on the
+  start-up trenches. Source: Bruno Antunes (twitter)
+- [[http://techcrunch.com/2016/01/18/why-big-companies-keep-failing-the-stack-fallacy/#.xiisrb:9sQZ][Why Big Companies Keep Failing: The Stack Fallacy]]: Interesting
+  hypothesis but not sure if totally buy it: "Stack fallacy is the
+  mistaken belief that it is trivial to build the layer above
+  yours.". Does seem to explain some behaviour that appears to be
+  pretty irrational otherwise though.
+- [[https://backchannel.com/the-next-social-media-we-want-and-need-2d03a7e0551c#.a07nlopz1][The Next Social Media We Want and Need!]]: The next social media
+  revolution, apparently. Some good ideas but as always, I fear they
+  overestimate people's demand for privacy - unfortunately.
 
 * General Coding
 
@@ -28,12 +68,41 @@ into recently-ish.
 - [[https://github.com/blog/2042-git-2-5-including-multiple-worktrees-and-triangular-workflows][Git 2.5, including multiple worktrees and triangular workflows]]: I
   seemed to have missed this extremely useful new feature in Git. If
   you have too, check it out.
+- [[http://sealedabstract.com/rants/nanomsg-postmortem-and-other-stories/][nanomsg postmortem and other stories]]: Extremely interesting post on
+  FOSS projects, project governance and personalities. Hat tip: Bruno
+  Antunes (twitter)
+- [[http://www.iron.io/blog/2016/01/microcontainers-tiny-portable-containers.html][Microcontainers – Tiny, Portable Docker Containers]]: [[http://www.iron.io/][iron.io]] has a
+  repo of Dockerfiles with really small images. Source: Hacker News
+  (twitter)
+- [[https://www.brianchristner.io/docker-is-moving-to-alpine-linux/][Docker Official Images are Moving to Alpine Linux]]: After the whole
+  excitement around [[http://www.iron.io/][iron.io]], we all started to pay attention to Alpine
+  and it seems so did docker. It certainly would be great to have
+  sensible sized base images, but not quite sure about using a
+  different libc. Lets see how this plays out! Source: Hacker News
+  (twitter)
+- [[http://www.eweek.com/virtualization/coreos-launches-docker-rival-rkt-1.0.html][CoreOS Launches Docker Rival Rkt 1.0]]: Rocket reaches 1.0. Still
+  haven't used it, but still rooting on the sidelines - docker needs
+  competition. Source: Hacker News (twitter)
+- [[https://vimeo.com/56748054][Kevlin Henney - It Is Possible to Do Object-Oriented Programming in
+  Java]]: haven't seen it yet, but being a Kevlin presentation I
+  recommend it without hesitation. Can't wait to watch it.
+- [[https://yow.eventer.com/yow-2013-1080/the-solid-design-principles-deconstructed-by-kevlin-henney-1386][The SOLID Design Principles Deconstructed]]: Another Henney special,
+  next on the play list.
+- [[http://web.media.mit.edu/~minsky/papers/sciam.inherit.html]]: As we
+  morn Minsky, we start to rediscover his papers. Oldie but
+  goodie. The man was a true genius.
 
 * Databases
 
+- [[http://dailytechvideo.com/video-435-simon-riggs-databases-the-long-view/][Databases - the Long View]]: good presentation on databases and
+  Postgres in particular, giving you a perspective of how things
+  changed over time.
 
 * C++
 
+- [[https://github.com/ipkn/crow][Crow]]: New find. Simple library to write web services in C++. If you
+  need to quickly expose some code as a web service, this may be
+  easier than using [[https://github.com/Microsoft/cpprestsdk][Casablanca]].
 
 * Layperson Science
 
@@ -41,8 +110,19 @@ into recently-ish.
   this with my kids. Source: Hacker News (twitter)
 - [[http://gizmodo.com/heres-why-finding-gravitational-waves-would-be-such-a-b-1752286165][Why Finding Gravitational Waves Would Be Such a Big Deal]]: Layperson
   introduction to gravitational waves and why they are important.
+- [[https://tincman.wordpress.com/2011/01/04/research-paper-management-with-emacs-org-mode-and-reftex/][Research Paper Management with Emacs, org-mode and RefTeX]]: I
+  personally have been using [[https://github.com/mcraveiro/referencer][Gnome Referencer]] for my reference
+  management, but I should have known there would be an Emacs
+  solution. Will move over to this when I have the time.
+- [[https://github.com/emacsmirror][Emacs Mirror]]: Lots and lots of emacs packages. I am currently using
+  this as an inspiration to find new packages such as [[https://github.com/emacsmirror/wsd-mode][wsd-mode]], a
+  WebSequenceDiagrams mode - pretty nifty. Its all in ELPA/MELPA etc
+  but somehow the GitHub interface seems to make it more discoverable?
 
 * Other
 
 - [[http://www.bbc.co.uk/iplayer/episode/b06vm9qp/empire-of-the-tsars-romanov-russia-with-lucy-worsley-1-reinventing-russia][Empire of the Tsars: Romanov Russia]]: Great BBC documentary about Russian history.
 - [[http://www.bbc.co.uk/iplayer/episode/b06y8hyr/the-brain-with-david-eagleman-1-what-is-reality][The Brain with David Eagleman]]: BBC documentary about the brain.
+- [[http://www.openculture.com/2012/08/bob_dylan_and_the_grateful_dead_rehearse_together_in_summer_1987_listen_to_74_tracks.html][Bob Dylan & The Grateful Dead Rehearse Together in Summer 1987: Hear
+  74 Tracks]]: The name says it all. Deeply personal tracks.
+- [[http://www.neilgaiman.com/Cool_Stuff/Short_Stories/The_Return_of_the_Thin_White_Duke][The return of the Thin White Duke]]: Gaiman on Bowie. Great read.

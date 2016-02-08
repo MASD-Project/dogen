@@ -12,19 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-02-06 Sat 15:04]
+#+CAPTION: Clock summary at [2016-02-08 Mon 22:29]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *13:29* |       |      | 100.0 |
+| *Total time*                                                                | *14:06* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 13:29   |       |      | 100.0 |
-| Active                                                                      |         | 13:29 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:46 |  20.5 |
-| COMPLETED Make context non-generatable                                      |         |       | 0:49 |   6.1 |
-| COMPLETED Setup logging syntax highlighting on emacs                        |         |       | 2:32 |  18.8 |
-| STARTED Help conan with strange warning                                     |         |       | 0:26 |   3.2 |
-| STARTED Add an helper method interface                                      |         |       | 6:56 |  51.4 |
+| Stories                                                                     | 14:06   |       |      | 100.0 |
+| Active                                                                      |         | 14:06 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:46 |  19.6 |
+| COMPLETED Make context non-generatable                                      |         |       | 0:49 |   5.8 |
+| COMPLETED Setup logging syntax highlighting on emacs                        |         |       | 2:32 |  18.0 |
+| COMPLETED Create next interesting blog post                                 |         |       | 0:37 |   4.4 |
+| STARTED Help conan with strange warning                                     |         |       | 0:26 |   3.1 |
+| STARTED Add an helper method interface                                      |         |       | 6:56 |  49.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -75,6 +76,12 @@ It is not easy to update boost to have milisecond timestamps:
 - [[http://stackoverflow.com/questions/5947018/how-to-customize-timestamp-format-of-boost-log][how to customize "TimeStamp" format of Boost.Log]]
 
 PR raised: [[https://github.com/doublep/logview/pull/4][Add support for timestamps with microseconds]]
+
+*** COMPLETED Create next interesting blog post                       :story:
+    CLOSED: [2016-02-08 Mon 22:29]
+    CLOCK: [2016-02-08 Mon 21:51]--[2016-02-08 Mon 22:28] =>  0:37
+
+Ship the latest links.
 
 *** STARTED Help conan with strange warning                           :story:
     CLOCK: [2016-02-05 Fri 23:53]--[2016-02-06 Sat 00:19] =>  0:26
