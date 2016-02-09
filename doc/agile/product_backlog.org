@@ -7632,6 +7632,10 @@ should set them up too.
   totally dynamic such that the formatter could make use of the new
   field directly. For this we would have to supply the ownership
   hierarchy from within the stitch template.
+- we should create interesting end points such as: dia to json
+  conversion; merged model generation; merged model to code
+  generation, with language options; formatting; etc. Each is a
+  distinct end point.
 
 *Previous Understanding*
 
