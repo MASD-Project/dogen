@@ -1830,10 +1830,10 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#nested_name#</dia:string>
+            <dia:string>#yarn::name_tree#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#yarn::nested_name#</dia:string>
+            <dia:string>#yarn::name_tree#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -8678,7 +8678,7 @@ facet of the C++ language.
                 <dia:string>#nqn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::nested_name&amp;#</dia:string>
+                <dia:string>#const yarn::name_tree&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -34048,13 +34048,13 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="375,129"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="374.95,128.95;401.345,138.25"/>
+        <dia:rectangle val="374.95,128.95;400.575,138.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="375,129"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.294999999999998"/>
+        <dia:real val="25.524999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.1999999999999993"/>
@@ -34272,7 +34272,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#nn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::nested_name&amp;#</dia:string>
+                <dia:string>#const yarn::name_tree&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -34432,7 +34432,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#nn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::nested_name&amp;#</dia:string>
+                <dia:string>#const yarn::name_tree&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

@@ -1714,7 +1714,7 @@ into its yarn representation.#</dia:string>
                 <dia:string>#nn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::nested_name&amp;#</dia:string>
+                <dia:string>#const yarn::name_tree&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
