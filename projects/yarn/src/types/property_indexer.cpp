@@ -75,6 +75,12 @@ void property_indexer::index_object(object& o, intermediate_model& m,
         return;
     }
 
+    /*
+     * We first grab all of the concept properties in one go, and them
+     * add them to the local properties at the beginning. The idea is
+     * to keep changes from rippling through, but there is no evidence
+     * that this order is more effective than other alternatives.
+     */
     std::list<property> concept_properties;
     for (const auto& n : o.modeled_concepts()) {
         auto& c(find_concept(n, m));

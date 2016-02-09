@@ -68,6 +68,9 @@ void nested_name_builder::add_primitive(const std::string& s) {
 void nested_name_builder::finish_current_node() {
     BOOST_LOG_SEV(lg, debug) << "finishing current node. names: " << names_;
 
+    /*
+     * if there are no names, we do not have any work to do.
+     */
     if (names_.empty())
         return;
 
@@ -165,7 +168,7 @@ void nested_name_builder::end_children() {
     finish_current_node();
 
     /*
-     * All the children have been done, so move back up to the parent.
+     * All the children are done, so move back up to the parent.
      */
     current_ = current_->parent();
 }

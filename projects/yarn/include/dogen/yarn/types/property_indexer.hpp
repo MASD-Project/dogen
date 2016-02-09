@@ -38,9 +38,9 @@ namespace yarn {
  *
  * @section yarn_property_indexer_0 Model requirements
  *
- * The concept indexer expects to receive a partial model such as ones
- * coming straight out of Dia to Yarn transformation. The indexing of
- * concepts is expected to have taken place.
+ * The property indexer expects to receive a partial model such as
+ * ones coming straight out of Dia to Yarn transformation. The
+ * indexing of concepts is expected to have taken place.
  *
  * @section yarn_property_indexer_1 Types of properties
  *
