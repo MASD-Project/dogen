@@ -63,7 +63,7 @@ script:
   # - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on -G Ninja
   # - ninja -j2 package run_all_specs
   # FIXME: removed -DCMAKE_BUILD_TYPE=${BUILD_TYPE} as it causes the build to break
-  - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on
+  - cmake ${GIT_REPO} # -DWITH_MINIMAL_PACKAGING=on
   - make -j2 run_all_specs
   # packaging disabled because we do not have boost 1.60.
   # - make -j2 package run_all_specs
