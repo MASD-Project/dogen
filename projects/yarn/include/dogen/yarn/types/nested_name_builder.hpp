@@ -52,7 +52,7 @@ public:
 
 private:
     void finish_current_node();
-    void build_node(nested_name& qn, boost::shared_ptr<node> node);
+    void build_node(nested_name& nn, boost::shared_ptr<node> node);
 
 public:
     void add_name(const std::string& n);

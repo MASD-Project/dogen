@@ -174,17 +174,17 @@ void nested_name_builder::end_children() {
 }
 
 void nested_name_builder::
-build_node(nested_name& n, boost::shared_ptr<node> node) {
+build_node(nested_name& nn, boost::shared_ptr<node> node) {
     BOOST_LOG_SEV(lg, debug) << "bulding node: " << node->data();
 
-    n.parent(node->data());
+    nn.parent(node->data());
     std::list<nested_name> children;
     for (const auto c : node->children()) {
         nested_name cnn;
         build_node(cnn, c);
         children.push_back(cnn);
     }
-    n.children(children);
+    nn.children(children);
 }
 
 nested_name nested_name_builder::build() {
