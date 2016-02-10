@@ -29,14 +29,14 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
-#include "dogen/yarn/serialization/nested_name_ser.hpp"
+#include "dogen/yarn/serialization/name_tree_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::yarn::nested_name& v,
+    const dogen::yarn::name_tree& v,
     const unsigned int /*version*/) {
     ar << make_nvp("parent", v.parent_);
     ar << make_nvp("children", v.children_);
@@ -46,7 +46,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::yarn::nested_name& v,
+    dogen::yarn::name_tree& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("parent", v.parent_);
     ar >> make_nvp("children", v.children_);
@@ -59,16 +59,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::yarn::nested_name& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::yarn::nested_name& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::yarn::name_tree& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::yarn::name_tree& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::yarn::nested_name& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::yarn::nested_name& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::yarn::name_tree& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::yarn::name_tree& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::yarn::nested_name& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::yarn::nested_name& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::yarn::name_tree& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::yarn::name_tree& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::yarn::nested_name& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::yarn::nested_name& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::yarn::name_tree& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::yarn::name_tree& v, unsigned int version);
 
 } }

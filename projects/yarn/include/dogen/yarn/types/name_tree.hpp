@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_NESTED_NAME_HPP
-#define DOGEN_YARN_TYPES_NESTED_NAME_HPP
+#ifndef DOGEN_YARN_TYPES_NAME_TREE_HPP
+#define DOGEN_YARN_TYPES_NAME_TREE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,45 +28,42 @@
 #include <list>
 #include <algorithm>
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/nested_name.hpp"
-#include "dogen/yarn/serialization/nested_name_fwd_ser.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/yarn/serialization/name_tree_fwd_ser.hpp"
 
 namespace dogen {
 namespace yarn {
 
 /**
- * @brief Adds support for name composition.
+ * @brief Adds support for name composition as a tree-like structure.
  *
- * A nested name has the responsibility of representing an instantiation of a generic
+ * A name tree has the responsibility of representing an instantiation of a generic
  * type with all of its type parameters, which themselves can also be generic types
  * and so on. It may also represent the simpler case of a non-generic type, in which
  * case only the parent name is populated and there are no children.
- *
- * Note that we avoid the name "composite name" here to avoid confusion with the
- * composite pattern.
  */
-class nested_name final {
+class name_tree final {
 public:
-    nested_name(const nested_name&) = default;
-    nested_name(nested_name&&) = default;
-    ~nested_name() = default;
+    name_tree(const name_tree&) = default;
+    name_tree(name_tree&&) = default;
+    ~name_tree() = default;
 
 public:
-    nested_name();
+    name_tree();
 
 public:
-    nested_name(
+    name_tree(
         const dogen::yarn::name& parent,
-        const std::list<dogen::yarn::nested_name>& children,
+        const std::list<dogen::yarn::name_tree>& children,
         const bool are_children_opaque,
         const bool is_circular_dependency);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const nested_name& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const name_tree& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, nested_name& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, name_tree& v, unsigned int version);
 
 public:
     /**
@@ -83,14 +80,18 @@ public:
      * @brief Names of the child elements.
      */
     /**@{*/
-    const std::list<dogen::yarn::nested_name>& children() const;
-    std::list<dogen::yarn::nested_name>& children();
-    void children(const std::list<dogen::yarn::nested_name>& v);
-    void children(const std::list<dogen::yarn::nested_name>&& v);
+    const std::list<dogen::yarn::name_tree>& children() const;
+    std::list<dogen::yarn::name_tree>& children();
+    void children(const std::list<dogen::yarn::name_tree>& v);
+    void children(const std::list<dogen::yarn::name_tree>&& v);
     /**@}*/
 
     /**
      * @brief If true, the association with its children can be opaque.
+     *
+     * Children are considered opaque when the parent does not require knowledge
+     * about the childs' internal structure. This is the case, for example, with C and
+     * C++ pointers, references and so on.
      */
     /**@{*/
     bool are_children_opaque() const;
@@ -106,18 +107,18 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const nested_name& rhs) const;
-    bool operator!=(const nested_name& rhs) const {
+    bool operator==(const name_tree& rhs) const;
+    bool operator!=(const name_tree& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(nested_name& other) noexcept;
-    nested_name& operator=(nested_name other);
+    void swap(name_tree& other) noexcept;
+    name_tree& operator=(name_tree other);
 
 private:
     dogen::yarn::name parent_;
-    std::list<dogen::yarn::nested_name> children_;
+    std::list<dogen::yarn::name_tree> children_;
     bool are_children_opaque_;
     bool is_circular_dependency_;
 };
@@ -128,8 +129,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::yarn::nested_name& lhs,
-    dogen::yarn::nested_name& rhs) {
+    dogen::yarn::name_tree& lhs,
+    dogen::yarn::name_tree& rhs) {
     lhs.swap(rhs);
 }
 

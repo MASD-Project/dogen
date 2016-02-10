@@ -111,30 +111,30 @@ dogen::yarn::name mock_model_name(unsigned int i) {
     return nf.build_model_name(model_name(i));
 }
 
-dogen::yarn::nested_name mock_nested_name(const dogen::yarn::name& n) {
-    dogen::yarn::nested_name r;
+dogen::yarn::name_tree mock_name_tree(const dogen::yarn::name& n) {
+    dogen::yarn::name_tree r;
     r.parent(n);
     return r;
 }
 
-dogen::yarn::nested_name
-mock_nested_name_shared_ptr(const dogen::yarn::name& n) {
-    dogen::yarn::nested_name r;
+dogen::yarn::name_tree
+mock_name_tree_shared_ptr(const dogen::yarn::name& n) {
+    dogen::yarn::name_tree r;
     dogen::yarn::name_factory nf;
     r.parent(nf.build_element_name("boost", "shared_ptr"));
 
-    dogen::yarn::nested_name c;
+    dogen::yarn::name_tree c;
     c.parent(n);
-    r.children(std::list<dogen::yarn::nested_name> { c });
+    r.children(std::list<dogen::yarn::name_tree> { c });
 
     return r;
 }
 
-dogen::yarn::nested_name mock_nested_name(
+dogen::yarn::name_tree mock_name_tree(
     dogen::yarn::test::mock_intermediate_model_factory::property_types pt) {
     using namespace dogen::yarn;
 
-    nested_name r;
+    name_tree r;
     dogen::yarn::name_factory nf;
     typedef test::mock_intermediate_model_factory::property_types property_types;
     switch(pt) {
@@ -146,9 +146,9 @@ dogen::yarn::nested_name mock_nested_name(
         break;
     case property_types::boost_variant: {
         r.parent(nf.build_element_name("boost", "variant"));
-        r.children(std::list<nested_name> {
-                mock_nested_name(nf.build_element_name(boolean)),
-                mock_nested_name(nf.build_element_name(unsigned_int))
+        r.children(std::list<name_tree> {
+                mock_name_tree(nf.build_element_name(boolean)),
+                mock_name_tree(nf.build_element_name(unsigned_int))
         });
         break;
     }
@@ -157,9 +157,9 @@ dogen::yarn::nested_name mock_nested_name(
         break;
     case property_types::std_pair: {
         r.parent(nf.build_element_name("std", "pair"));
-        r.children(std::list<nested_name> {
-                mock_nested_name(nf.build_element_name(boolean)),
-                mock_nested_name(nf.build_element_name(boolean))
+        r.children(std::list<name_tree> {
+                mock_name_tree(nf.build_element_name(boolean)),
+                mock_name_tree(nf.build_element_name(boolean))
         });
         break;
     }
@@ -226,11 +226,11 @@ dogen::yarn::property mock_property(const dogen::yarn::name& owning_element,
     using property_types = dogen::yarn::test::mock_intermediate_model_factory::
         property_types;
     if (pt == property_types::value_object)
-        r.type(mock_nested_name(*name));
+        r.type(mock_name_tree(*name));
     else if (pt == property_types::boost_shared_ptr)
-        r.type(mock_nested_name_shared_ptr(*name));
+        r.type(mock_name_tree_shared_ptr(*name));
     else
-        r.type(mock_nested_name(pt));
+        r.type(mock_name_tree(pt));
 
     return r;
 }

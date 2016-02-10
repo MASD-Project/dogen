@@ -21,11 +21,11 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/nested_name_io.hpp"
+#include "dogen/yarn/io/name_tree_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::nested_name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::name_tree>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -40,7 +40,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::ne
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const nested_name& v) {
+std::ostream& operator<<(std::ostream& s, const name_tree& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -48,7 +48,7 @@ std::ostream& operator<<(std::ostream& s, const nested_name& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::nested_name\"" << ", "
+      << "\"__type__\": " << "\"dogen::yarn::name_tree\"" << ", "
       << "\"parent\": " << v.parent() << ", "
       << "\"children\": " << v.children() << ", "
       << "\"are_children_opaque\": " << v.are_children_opaque() << ", "

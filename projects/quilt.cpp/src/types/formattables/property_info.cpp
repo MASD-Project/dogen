@@ -37,7 +37,7 @@ property_info::property_info(
     const bool is_immutable,
     const bool is_fluent,
     const std::string& id,
-    const dogen::yarn::nested_name& nested_name)
+    const dogen::yarn::name_tree& name_tree)
     : name_(name),
       qualified_name_(qualified_name),
       documentation_(documentation),
@@ -45,7 +45,7 @@ property_info::property_info(
       is_immutable_(is_immutable),
       is_fluent_(is_fluent),
       id_(id),
-      nested_name_(nested_name) { }
+      name_tree_(name_tree) { }
 
 void property_info::swap(property_info& other) noexcept {
     using std::swap;
@@ -56,7 +56,7 @@ void property_info::swap(property_info& other) noexcept {
     swap(is_immutable_, other.is_immutable_);
     swap(is_fluent_, other.is_fluent_);
     swap(id_, other.id_);
-    swap(nested_name_, other.nested_name_);
+    swap(name_tree_, other.name_tree_);
 }
 
 bool property_info::operator==(const property_info& rhs) const {
@@ -67,7 +67,7 @@ bool property_info::operator==(const property_info& rhs) const {
         is_immutable_ == rhs.is_immutable_ &&
         is_fluent_ == rhs.is_fluent_ &&
         id_ == rhs.id_ &&
-        nested_name_ == rhs.nested_name_;
+        name_tree_ == rhs.name_tree_;
 }
 
 property_info& property_info::operator=(property_info other) {
@@ -172,20 +172,20 @@ void property_info::id(const std::string&& v) {
     id_ = std::move(v);
 }
 
-const dogen::yarn::nested_name& property_info::nested_name() const {
-    return nested_name_;
+const dogen::yarn::name_tree& property_info::name_tree() const {
+    return name_tree_;
 }
 
-dogen::yarn::nested_name& property_info::nested_name() {
-    return nested_name_;
+dogen::yarn::name_tree& property_info::name_tree() {
+    return name_tree_;
 }
 
-void property_info::nested_name(const dogen::yarn::nested_name& v) {
-    nested_name_ = v;
+void property_info::name_tree(const dogen::yarn::name_tree& v) {
+    name_tree_ = v;
 }
 
-void property_info::nested_name(const dogen::yarn::nested_name&& v) {
-    nested_name_ = std::move(v);
+void property_info::name_tree(const dogen::yarn::name_tree&& v) {
+    name_tree_ = std::move(v);
 }
 
 } } } }

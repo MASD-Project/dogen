@@ -57,13 +57,13 @@ bool smart_pointer_helper::is_enabled(const assistant& /*a*/,
 }
 
 void smart_pointer_helper::
-format(assistant& a, const yarn::nested_name& nn) const {
+format(assistant& a, const yarn::name_tree& nt) const {
     {
-        const auto ns(a.make_namespaces(nn.parent()));
+        const auto ns(a.make_namespaces(nt.parent()));
         auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
-a.stream() << "inline bool operator==(const " << a.make_qualified_name(nn.parent()) << "& lhs," << std::endl;
-a.stream() << "const " << a.make_qualified_name(nn.parent()) << "& rhs) {" << std::endl;
+a.stream() << "inline bool operator==(const " << a.make_qualified_name(nt.parent()) << "& lhs," << std::endl;
+a.stream() << "const " << a.make_qualified_name(nt.parent()) << "& rhs) {" << std::endl;
 a.stream() << "    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;

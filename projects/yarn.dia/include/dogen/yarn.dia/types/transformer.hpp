@@ -30,7 +30,6 @@
 #include "dogen/dia/types/object.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/dynamic/types/scope_types.hpp"
-#include "dogen/yarn/types/nested_name.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processed_property.hpp"

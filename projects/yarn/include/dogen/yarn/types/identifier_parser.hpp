@@ -29,7 +29,7 @@
 #include <string>
 #include <unordered_set>
 #include "dogen/yarn/types/location.hpp"
-#include "dogen/yarn/types/nested_name.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -51,7 +51,7 @@ public:
         const location& model_location);
 
 public:
-    nested_name parse_name(const std::string& s) const;
+    name_tree parse(const std::string& s) const;
 
 private:
     const std::unordered_set<std::string> top_level_modules_;

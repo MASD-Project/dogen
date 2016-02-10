@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/yarn/hash/name_hash.hpp"
-#include "dogen/yarn/hash/nested_name_hash.hpp"
+#include "dogen/yarn/hash/name_tree_hash.hpp"
 
 namespace {
 
@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_yarn_nested_name(const std::list<dogen::yarn::nested_name>& v) {
+inline std::size_t hash_std_list_dogen_yarn_name_tree(const std::list<dogen::yarn::name_tree>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -42,11 +42,11 @@ inline std::size_t hash_std_list_dogen_yarn_nested_name(const std::list<dogen::y
 namespace dogen {
 namespace yarn {
 
-std::size_t nested_name_hasher::hash(const nested_name& v) {
+std::size_t name_tree_hasher::hash(const name_tree& v) {
     std::size_t seed(0);
 
     combine(seed, v.parent());
-    combine(seed, hash_std_list_dogen_yarn_nested_name(v.children()));
+    combine(seed, hash_std_list_dogen_yarn_name_tree(v.children()));
     combine(seed, v.are_children_opaque());
     combine(seed, v.is_circular_dependency());
 

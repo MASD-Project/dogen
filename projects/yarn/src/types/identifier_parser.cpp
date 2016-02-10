@@ -30,9 +30,9 @@
 #include <boost/spirit/include/phoenix_object.hpp>
 #include <boost/spirit/repository/include/qi_distinct.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/io/nested_name_io.hpp"
+#include "dogen/yarn/io/name_tree_io.hpp"
 #include "dogen/yarn/types/parsing_error.hpp"
-#include "dogen/yarn/types/nested_name_builder.hpp"
+#include "dogen/yarn/types/name_tree_builder.hpp"
 #include "dogen/yarn/types/identifier_parser.hpp"
 
 namespace {
@@ -43,7 +43,7 @@ auto lg(logger_factory("yarn.identifier_parser"));
 const std::string error_msg("Failed to parse string: ");
 using namespace boost::spirit;
 
-using dogen::yarn::nested_name_builder;
+using dogen::yarn::name_tree_builder;
 
 namespace distinct {
 
@@ -81,23 +81,23 @@ const keyword_tag_type keyword = distinct_spec(char_spec(keyword_spec));
 
 template<typename Iterator>
 struct grammar : qi::grammar<Iterator> {
-    std::shared_ptr<nested_name_builder> builder;
-    qi::rule<Iterator, std::string()> nested_name, name, nondigit, alphanum,
+    std::shared_ptr<name_tree_builder> builder;
+    qi::rule<Iterator, std::string()> name_tree, name, nondigit, alphanum,
         primitive, signable_primitive;
     qi::rule<Iterator> identifier, scope_operator, type_name, template_id,
         templated_name, template_argument_list, template_argument;
 
     std::function<void()> start_template_, next_type_argument_, end_template_;
-    std::function<void(const std::string&)> add_nested_name_, add_primitive_;
+    std::function<void(const std::string&)> add_name_tree_, add_primitive_;
 
-    void add_nested_name(const std::string& s) { builder->add_name(s); }
+    void add_name_tree(const std::string& s) { builder->add_name(s); }
     void add_primitive(const std::string& s) { builder->add_primitive(s); }
     void start_template() { builder->start_children(); }
     void next_type_argument() { builder->next_child(); }
     void end_template() { builder->end_children(); }
 
     void setup_functors() {
-        add_nested_name_ = std::bind(&grammar::add_nested_name, this,
+        add_name_tree_ = std::bind(&grammar::add_name_tree, this,
             std::placeholders::_1);
         add_primitive_ = std::bind(&grammar::add_primitive, this,
             std::placeholders::_1);
@@ -106,7 +106,7 @@ struct grammar : qi::grammar<Iterator> {
         end_template_ = std::bind(&grammar::end_template, this);
     }
 
-    grammar(std::shared_ptr<nested_name_builder> b)
+    grammar(std::shared_ptr<name_tree_builder> b)
         : grammar::base_type(type_name), builder(b) {
         setup_functors();
         using qi::on_error;
@@ -124,8 +124,8 @@ struct grammar : qi::grammar<Iterator> {
         nondigit = boost::spirit::qi::alpha | string("_");
         name %= lexeme[nondigit >> *(alphanum)];
         scope_operator = "::";
-        nested_name = name[add_nested_name_]
-            >> *(scope_operator >> name[add_nested_name_]);
+        name_tree = name[add_name_tree_]
+            >> *(scope_operator >> name[add_name_tree_]);
         signable_primitive =
             -(string("unsigned") >> string(" ")) >>
             (
@@ -142,7 +142,7 @@ struct grammar : qi::grammar<Iterator> {
             distinct::keyword[string("double")] |
             distinct::keyword[string("void")];
         type_name %= primitive[add_primitive_] |
-            (nested_name >> -(templated_name));
+            (name_tree >> -(templated_name));
 
         templated_name = qi::lit("<")[start_template_]
             >> template_argument_list >> qi::lit(">")[end_template_];
@@ -176,10 +176,10 @@ identifier_parser(const std::unordered_set<std::string>& top_level_modules,
     const location& model_location)
     : top_level_modules_(top_level_modules), model_location_(model_location) { }
 
-nested_name identifier_parser::parse_name(const std::string& s) const {
+name_tree identifier_parser::parse(const std::string& s) const {
     BOOST_LOG_SEV(lg, debug) << "parsing name: " << s;
 
-    auto builder(std::make_shared<nested_name_builder>(
+    auto builder(std::make_shared<name_tree_builder>(
             top_level_modules_, model_location_));
     grammar<std::string::const_iterator> g(builder);
 

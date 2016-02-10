@@ -35,6 +35,11 @@
 namespace dogen {
 namespace yarn {
 
+/**
+ * @brief Node in a tree of names.
+ *
+ * Temporary data structure used to build trees of names.
+ */
 class node final {
 public:
     node() = default;
@@ -56,20 +61,35 @@ private:
     friend void boost::serialization::load(Archive& ar, node& v, unsigned int version);
 
 public:
+    /**
+     * @brief Parent in a tree.
+     */
+    /**@{*/
     const boost::shared_ptr<dogen::yarn::node>& parent() const;
     boost::shared_ptr<dogen::yarn::node>& parent();
     void parent(const boost::shared_ptr<dogen::yarn::node>& v);
     void parent(const boost::shared_ptr<dogen::yarn::node>&& v);
+    /**@}*/
 
+    /**
+     * @brief Current node.
+     */
+    /**@{*/
     const dogen::yarn::name& data() const;
     dogen::yarn::name& data();
     void data(const dogen::yarn::name& v);
     void data(const dogen::yarn::name&& v);
+    /**@}*/
 
+    /**
+     * @brief Child nodes in a tree.
+     */
+    /**@{*/
     const std::list<boost::shared_ptr<dogen::yarn::node> >& children() const;
     std::list<boost::shared_ptr<dogen::yarn::node> >& children();
     void children(const std::list<boost::shared_ptr<dogen::yarn::node> >& v);
     void children(const std::list<boost::shared_ptr<dogen::yarn::node> >&& v);
+    /**@}*/
 
 public:
     bool operator==(const node& rhs) const;

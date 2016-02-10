@@ -28,7 +28,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/nested_name_ser.hpp"
+#include "dogen/yarn/serialization/name_tree_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/property_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/nested_type_info_ser.hpp"
 
@@ -46,7 +46,7 @@ void save(Archive& ar,
     ar << make_nvp("is_immutable", v.is_immutable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
     ar << make_nvp("id", v.id_);
-    ar << make_nvp("nested_name", v.nested_name_);
+    ar << make_nvp("name_tree", v.name_tree_);
 }
 
 template<typename Archive>
@@ -60,7 +60,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_immutable", v.is_immutable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
     ar >> make_nvp("id", v.id_);
-    ar >> make_nvp("nested_name", v.nested_name_);
+    ar >> make_nvp("name_tree", v.name_tree_);
 }
 
 } }

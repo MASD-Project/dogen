@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     SETUP_TEST_LOG("validate_serialization");
 
     roundtrip_type<generation_types_generator>();
-    roundtrip_type<nested_name_generator>();
+    roundtrip_type<name_tree_generator>();
     roundtrip_type<node_generator>();
     roundtrip_type<property_generator>();
     roundtrip_type<name_generator>();

@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/yarn/test_data/name_td.hpp"
-#include "dogen/yarn/test_data/nested_name_td.hpp"
+#include "dogen/yarn/test_data/name_tree_td.hpp"
 
 namespace {
 
@@ -28,15 +28,15 @@ create_dogen_yarn_name(const unsigned int position) {
     return dogen::yarn::name_generator::create(position);
 }
 
-dogen::yarn::nested_name
-create_dogen_yarn_nested_name(const unsigned int) {
-    return dogen::yarn::nested_name();
+dogen::yarn::name_tree
+create_dogen_yarn_name_tree(const unsigned int) {
+    return dogen::yarn::name_tree();
 }
 
-std::list<dogen::yarn::nested_name> create_std_list_dogen_yarn_nested_name(unsigned int position) {
-    std::list<dogen::yarn::nested_name> r;
+std::list<dogen::yarn::name_tree> create_std_list_dogen_yarn_name_tree(unsigned int position) {
+    std::list<dogen::yarn::name_tree> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_yarn_nested_name(position + i));
+        r.push_back(create_dogen_yarn_name_tree(position + i));
     }
     return r;
 }
@@ -50,32 +50,32 @@ bool create_bool(const unsigned int position) {
 namespace dogen {
 namespace yarn {
 
-nested_name_generator::nested_name_generator() : position_(0) { }
+name_tree_generator::name_tree_generator() : position_(0) { }
 
-void nested_name_generator::
+void name_tree_generator::
 populate(const unsigned int position, result_type& v) {
     v.parent(create_dogen_yarn_name(position + 0));
-    v.children(create_std_list_dogen_yarn_nested_name(position + 1));
+    v.children(create_std_list_dogen_yarn_name_tree(position + 1));
     v.are_children_opaque(create_bool(position + 2));
     v.is_circular_dependency(create_bool(position + 3));
 }
 
-nested_name_generator::result_type
-nested_name_generator::create(const unsigned int position) {
-    nested_name r;
-    nested_name_generator::populate(position, r);
+name_tree_generator::result_type
+name_tree_generator::create(const unsigned int position) {
+    name_tree r;
+    name_tree_generator::populate(position, r);
     return r;
 }
 
-nested_name_generator::result_type*
-nested_name_generator::create_ptr(const unsigned int position) {
-    nested_name* p = new nested_name();
-    nested_name_generator::populate(position, *p);
+name_tree_generator::result_type*
+name_tree_generator::create_ptr(const unsigned int position) {
+    name_tree* p = new name_tree();
+    name_tree_generator::populate(position, *p);
     return p;
 }
 
-nested_name_generator::result_type
-nested_name_generator::operator()() {
+name_tree_generator::result_type
+name_tree_generator::operator()() {
     return create(position_++);
 }
 

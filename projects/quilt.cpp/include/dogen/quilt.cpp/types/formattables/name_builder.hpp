@@ -1,4 +1,4 @@
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+/* -*- mode++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
  *
@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/nested_name.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -64,7 +64,7 @@ public:
      * @brief Returns a complete name representation of the nested
      * qualified name.
      */
-    void complete_name(const yarn::nested_name& nn,
+    void complete_name(const yarn::name_tree& nt,
         std::string& complete_name) const;
 
     /**

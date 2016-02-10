@@ -46,8 +46,7 @@ namespace yarn {
  * @section yarn_property_indexer_1 Indexing Process
  *
  * The indexer goes through all properties in objects and, for every
- * nested qualified name, unpacks all the associations implied by
- * their presence.
+ * name tree, unpacks all the associations implied by their presence.
  *
  * Associations are of two types: @e regular or @e weak. This
  * distinction is required due to the usage of the association at code
@@ -73,11 +72,11 @@ private:
         std::unordered_set<name>()) const;
 
     /**
-     * @brief Iterates through the nested name recursively, picking
-     * up associations as it goes along.
+     * @brief Walks through the name tree, picking up associations as
+     * it goes along.
      */
-    void recurse_nested_names(const intermediate_model& m, object& o,
-        const nested_name& nn, bool& is_opaque) const;
+    void walk_name_tree(const intermediate_model& m, object& o,
+        const name_tree& nt, bool& is_opaque) const;
 
 private:
     /**

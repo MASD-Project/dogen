@@ -24,7 +24,7 @@
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/property_io.hpp"
 #include "dogen/dynamic/io/object_io.hpp"
-#include "dogen/yarn/io/nested_name_io.hpp"
+#include "dogen/yarn/io/name_tree_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

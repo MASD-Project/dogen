@@ -79,9 +79,9 @@ qualified_name(const yarn::name& n) const {
 }
 
 void name_builder::
-complete_name(const yarn::nested_name& nn, std::string& complete_name) const {
-    const auto qualified_name(this->qualified_name(nn.parent()));
-    const auto& children(nn.children());
+complete_name(const yarn::name_tree& nt, std::string& complete_name) const {
+    const auto qualified_name(this->qualified_name(nt.parent()));
+    const auto& children(nt.children());
     complete_name += qualified_name;
 
     auto lambda([&](char c) {

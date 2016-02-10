@@ -38,7 +38,7 @@
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/exception.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
-#include "dogen/yarn/types/nested_name.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/quilt.cpp/types/formattables/entity.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/class_info.hpp"
@@ -74,7 +74,7 @@ private:
     /**
      * @brief Transforms the Yarn nested name into a nested type info.
      */
-    void to_nested_type_info(const yarn::nested_name& nn,
+    void to_nested_type_info(const yarn::name_tree& nt,
         nested_type_info& nti, std::string& complete_name,
         bool& requires_stream_manipulators) const;
 

@@ -321,20 +321,20 @@ std::string assistant::comment_inline(const std::string& c) const {
 }
 
 void assistant::recursive_helper_method_creator(
-    const formattables::class_info& owner, const yarn::nested_name& nn,
+    const formattables::class_info& owner, const yarn::name_tree& nt,
     std::unordered_set<std::string>& types_done) {
     BOOST_LOG_SEV(lg, debug) << "[New] Processing type: "
-                             << nn.parent().qualified();
+                             << nt.parent().qualified();
 
-    if (types_done.find(nn.parent().qualified()) != types_done.end()) {
+    if (types_done.find(nt.parent().qualified()) != types_done.end()) {
         BOOST_LOG_SEV(lg, debug) << "[New] Type already done.";
         return;
     }
 
-    for (const auto c : nn.children())
+    for (const auto c : nt.children())
         recursive_helper_method_creator(owner, c, types_done);
 
-    const auto i(context_.helper_settings().find(nn.parent().qualified()));
+    const auto i(context_.helper_settings().find(nt.parent().qualified()));
     if (i == context_.helper_settings().end()) {
         BOOST_LOG_SEV(lg, debug) << "[New] No settings for type.";
         return;
@@ -367,7 +367,7 @@ void assistant::recursive_helper_method_creator(
         return;
     }
     BOOST_LOG_SEV(lg, debug) << "[New] Formatting with helper.";
-    helper.format(*this, nn);
+    helper.format(*this, nt);
 }
 
 void assistant::
@@ -382,7 +382,7 @@ add_helper_methods(const formattables::class_info& owner,
     BOOST_LOG_SEV(lg, debug) << "[New] Properties found: " << properties.size();
     std::unordered_set<std::string> types_done;
     for (const auto p : properties)
-        recursive_helper_method_creator(owner, p.nested_name(), types_done);
+        recursive_helper_method_creator(owner, p.name_tree(), types_done);
 }
 
 void assistant::add_helper_methods(const formattables::class_info& c) {

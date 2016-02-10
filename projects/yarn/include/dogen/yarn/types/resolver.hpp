@@ -69,10 +69,9 @@ private:
     name resolve_partial_type(const intermediate_model& m, const name& n) const;
 
     /**
-     * @brief Resolves all references contained in a nested name.
+     * @brief Resolves all references contained in a name tree.
      */
-    void resolve_partial_type(const intermediate_model& m,
-        nested_name& nn) const;
+    void resolve_partial_type(const intermediate_model& m, name_tree& nt) const;
 
     /**
      * @brief Resolves all references to types in the supplied properties.

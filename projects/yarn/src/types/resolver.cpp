@@ -28,7 +28,7 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/yarn/types/resolution_error.hpp"
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/nested_name_io.hpp"
+#include "dogen/yarn/io/name_tree_io.hpp"
 #include "dogen/yarn/io/property_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/object.hpp"
@@ -182,13 +182,13 @@ resolve_partial_type(const intermediate_model& m, const name& n) const {
 }
 
 void resolver::
-resolve_partial_type(const intermediate_model& m, nested_name& nn) const {
-    for (auto& cnn : nn.children())
-        resolve_partial_type(m, cnn);
+resolve_partial_type(const intermediate_model& m, name_tree& nt) const {
+    for (auto& cnt : nt.children())
+        resolve_partial_type(m, cnt);
 
-    const name n(resolve_partial_type(m, nn.parent()));
+    const name n(resolve_partial_type(m, nt.parent()));
     BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.qualified() << ".";
-    nn.parent(n);
+    nt.parent(n);
 }
 
 void resolver::resolve_properties(const intermediate_model& m,

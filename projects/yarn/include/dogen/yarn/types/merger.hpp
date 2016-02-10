@@ -29,7 +29,6 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
-#include "dogen/yarn/types/nested_name.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {

@@ -35,7 +35,7 @@
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/nested_name.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/quilt.cpp/types/settings/odb_settings.hpp"
@@ -222,7 +222,7 @@ private:
      * nested type info.
      */
     void recursive_helper_method_creator(const formattables::class_info& owner,
-        const yarn::nested_name& nn,
+        const yarn::name_tree& nt,
         std::unordered_set<std::string>& types_done);
 
 public:

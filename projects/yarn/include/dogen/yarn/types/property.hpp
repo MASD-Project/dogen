@@ -29,7 +29,7 @@
 #include <algorithm>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/dynamic/types/object.hpp"
-#include "dogen/yarn/types/nested_name.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/serialization/property_fwd_ser.hpp"
 
 namespace dogen {
@@ -52,7 +52,7 @@ public:
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
         const dogen::yarn::name& name,
-        const dogen::yarn::nested_name& type,
+        const dogen::yarn::name_tree& type,
         const std::string& unparsed_type,
         const bool is_immutable,
         const bool is_fluent);
@@ -101,13 +101,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Qualified name for the type of the property.
+     * @brief Tree of names that represent the type of the property.
      */
     /**@{*/
-    const dogen::yarn::nested_name& type() const;
-    dogen::yarn::nested_name& type();
-    void type(const dogen::yarn::nested_name& v);
-    void type(const dogen::yarn::nested_name&& v);
+    const dogen::yarn::name_tree& type() const;
+    dogen::yarn::name_tree& type();
+    void type(const dogen::yarn::name_tree& v);
+    void type(const dogen::yarn::name_tree&& v);
     /**@}*/
 
     /**
@@ -152,7 +152,7 @@ private:
     std::string documentation_;
     dogen::dynamic::object extensions_;
     dogen::yarn::name name_;
-    dogen::yarn::nested_name type_;
+    dogen::yarn::name_tree type_;
     std::string unparsed_type_;
     bool is_immutable_;
     bool is_fluent_;

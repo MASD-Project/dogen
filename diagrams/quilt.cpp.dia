@@ -1830,7 +1830,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#yarn::name_tree#</dia:string>
+            <dia:string>#name_tree#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#yarn::name_tree#</dia:string>

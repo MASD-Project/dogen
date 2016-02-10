@@ -27,7 +27,7 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen/yarn/types/nested_name.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/quilt.cpp/types/formattables/nested_type_info.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/property_info_fwd_ser.hpp"
 
@@ -57,7 +57,7 @@ public:
         const bool is_immutable,
         const bool is_fluent,
         const std::string& id,
-        const dogen::yarn::nested_name& nested_name);
+        const dogen::yarn::name_tree& name_tree);
 
 private:
     template<typename Archive>
@@ -134,10 +134,10 @@ public:
     void id(const std::string& v);
     void id(const std::string&& v);
 
-    const dogen::yarn::nested_name& nested_name() const;
-    dogen::yarn::nested_name& nested_name();
-    void nested_name(const dogen::yarn::nested_name& v);
-    void nested_name(const dogen::yarn::nested_name&& v);
+    const dogen::yarn::name_tree& name_tree() const;
+    dogen::yarn::name_tree& name_tree();
+    void name_tree(const dogen::yarn::name_tree& v);
+    void name_tree(const dogen::yarn::name_tree&& v);
 
 public:
     bool operator==(const property_info& rhs) const;
@@ -157,7 +157,7 @@ private:
     bool is_immutable_;
     bool is_fluent_;
     std::string id_;
-    dogen::yarn::nested_name nested_name_;
+    dogen::yarn::name_tree name_tree_;
 };
 
 } } } }

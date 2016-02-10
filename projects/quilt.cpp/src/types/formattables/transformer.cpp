@@ -228,11 +228,11 @@ void transformer::populate_entity_properties(const yarn::name& n,
     e.qualified_name(join(ns, namespace_separator));
 }
 
-void transformer::to_nested_type_info(const yarn::nested_name& nn,
+void transformer::to_nested_type_info(const yarn::name_tree& nt,
     nested_type_info& nti, std::string& complete_name,
     bool& requires_stream_manipulators) const {
 
-    const auto n(nn.parent());
+    const auto n(nt.parent());
     name_builder b;
     const auto qualified_name(b.qualified_name(n));
     nti.name(qualified_name);
@@ -267,11 +267,11 @@ void transformer::to_nested_type_info(const yarn::nested_name& nn,
         nti.is_smart_pointer(ot == object_types::smart_pointer);
     }
 
-    const auto nn_children(nn.children());
+    const auto ntc(nt.children());
 
     std::string my_complete_name(nti.name());
     auto lambda([&](char c) {
-            if (!nn_children.empty()) {
+            if (!ntc.empty()) {
                 if (my_complete_name[my_complete_name.length() - 1] == c)
                     my_complete_name += " ";
                 my_complete_name += c;
@@ -281,7 +281,7 @@ void transformer::to_nested_type_info(const yarn::nested_name& nn,
     std::list<nested_type_info> children;
     lambda('<');
     bool is_first(true);
-    for (const auto c : nn.children()) {
+    for (const auto c : nt.children()) {
         if (!is_first)
             my_complete_name += ", ";
 
@@ -318,7 +318,7 @@ transformer::to_property_info(const yarn::property p, const bool is_immutable,
     nested_type_info nti;
     std::string complete_name;
     const auto t(p.type());
-    pi.nested_name(t);
+    pi.name_tree(t);
     if (::requires_manual_move_constructor(t.parent().simple()))
         requires_manual_move_constructor = true;
 

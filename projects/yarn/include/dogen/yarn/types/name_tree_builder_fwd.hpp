@@ -18,22 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_IO_NESTED_NAME_IO_HPP
-#define DOGEN_YARN_IO_NESTED_NAME_IO_HPP
+#ifndef DOGEN_YARN_TYPES_NAME_TREE_BUILDER_FWD_HPP
+#define DOGEN_YARN_TYPES_NAME_TREE_BUILDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/yarn/types/nested_name.hpp"
-
 namespace dogen {
 namespace yarn {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::yarn::nested_name& v);
+class name_tree_builder;
 
 } }
 

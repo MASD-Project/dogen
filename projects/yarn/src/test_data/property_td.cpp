@@ -22,7 +22,7 @@
 #include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/property_td.hpp"
 #include "dogen/dynamic/test_data/object_td.hpp"
-#include "dogen/yarn/test_data/nested_name_td.hpp"
+#include "dogen/yarn/test_data/name_tree_td.hpp"
 
 namespace {
 
@@ -42,9 +42,9 @@ create_dogen_yarn_name(const unsigned int position) {
     return dogen::yarn::name_generator::create(position);
 }
 
-dogen::yarn::nested_name
-create_dogen_yarn_nested_name(const unsigned int position) {
-    return dogen::yarn::nested_name_generator::create(position);
+dogen::yarn::name_tree
+create_dogen_yarn_name_tree(const unsigned int position) {
+    return dogen::yarn::name_tree_generator::create(position);
 }
 
 bool create_bool(const unsigned int position) {
@@ -63,7 +63,7 @@ populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.extensions(create_dogen_dynamic_object(position + 1));
     v.name(create_dogen_yarn_name(position + 2));
-    v.type(create_dogen_yarn_nested_name(position + 3));
+    v.type(create_dogen_yarn_name_tree(position + 3));
     v.unparsed_type(create_std_string(position + 4));
     v.is_immutable(create_bool(position + 5));
     v.is_fluent(create_bool(position + 6));

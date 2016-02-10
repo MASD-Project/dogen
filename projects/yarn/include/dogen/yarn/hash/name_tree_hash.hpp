@@ -18,18 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_NESTED_NAME_FWD_HPP
-#define DOGEN_YARN_TYPES_NESTED_NAME_FWD_HPP
+#ifndef DOGEN_YARN_HASH_NAME_TREE_HASH_HPP
+#define DOGEN_YARN_HASH_NAME_TREE_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <functional>
+#include "dogen/yarn/types/name_tree.hpp"
+
 namespace dogen {
 namespace yarn {
 
-class nested_name;
+struct name_tree_hasher {
+public:
+    static std::size_t hash(const name_tree& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::yarn::name_tree> {
+public:
+    size_t operator()(const dogen::yarn::name_tree& v) const {
+        return dogen::yarn::name_tree_hasher::hash(v);
+    }
+};
+
+}
 #endif

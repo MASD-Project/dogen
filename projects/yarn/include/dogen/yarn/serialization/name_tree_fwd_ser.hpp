@@ -18,35 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TEST_DATA_NESTED_NAME_TD_HPP
-#define DOGEN_YARN_TEST_DATA_NESTED_NAME_TD_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_NAME_TREE_FWD_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_NAME_TREE_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/nested_name.hpp"
+#include "dogen/yarn/types/name_tree_fwd.hpp"
 
-namespace dogen {
-namespace yarn {
+namespace boost {
+namespace serialization {
 
-class nested_name_generator {
-public:
-    nested_name_generator();
+template<class Archive>
+void save(Archive& ar, const dogen::yarn::name_tree& v, unsigned int version);
 
-public:
-    typedef dogen::yarn::nested_name result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+template<class Archive>
+void load(Archive& ar, dogen::yarn::name_tree& v, unsigned int version);
 
 } }
 

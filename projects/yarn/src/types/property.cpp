@@ -31,7 +31,7 @@ property::property(
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const dogen::yarn::name& name,
-    const dogen::yarn::nested_name& type,
+    const dogen::yarn::name_tree& type,
     const std::string& unparsed_type,
     const bool is_immutable,
     const bool is_fluent)
@@ -118,19 +118,19 @@ void property::name(const dogen::yarn::name&& v) {
     name_ = std::move(v);
 }
 
-const dogen::yarn::nested_name& property::type() const {
+const dogen::yarn::name_tree& property::type() const {
     return type_;
 }
 
-dogen::yarn::nested_name& property::type() {
+dogen::yarn::name_tree& property::type() {
     return type_;
 }
 
-void property::type(const dogen::yarn::nested_name& v) {
+void property::type(const dogen::yarn::name_tree& v) {
     type_ = v;
 }
 
-void property::type(const dogen::yarn::nested_name&& v) {
+void property::type(const dogen::yarn::name_tree&& v) {
     type_ = std::move(v);
 }
 

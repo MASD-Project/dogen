@@ -31,28 +31,28 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/location.hpp"
-#include "dogen/yarn/types/nested_name.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/node.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class nested_name_builder {
+class name_tree_builder {
 public:
-    nested_name_builder() = delete;
-    nested_name_builder(const nested_name_builder&) = delete;
-    ~nested_name_builder() = default;
-    nested_name_builder(nested_name_builder&&) = delete;
-    nested_name_builder& operator=(const nested_name_builder&) = delete;
+    name_tree_builder() = delete;
+    name_tree_builder(const name_tree_builder&) = delete;
+    ~name_tree_builder() = default;
+    name_tree_builder(name_tree_builder&&) = delete;
+    name_tree_builder& operator=(const name_tree_builder&) = delete;
 
 public:
-    nested_name_builder(
+    name_tree_builder(
         const std::unordered_set<std::string>& top_level_modules,
         const location& model_location);
 
 private:
     void finish_current_node();
-    void build_node(nested_name& nn, boost::shared_ptr<node> node);
+    void build_node(name_tree& nn, boost::shared_ptr<node> node);
 
 public:
     void add_name(const std::string& n);
@@ -60,7 +60,7 @@ public:
     void start_children();
     void next_child();
     void end_children();
-    nested_name build();
+    name_tree build();
 
 private:
     const std::unordered_set<std::string> top_level_modules_;

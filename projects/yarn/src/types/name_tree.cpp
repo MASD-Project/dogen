@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/nested_name.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
 
 namespace dogen {
 namespace yarn {
 
-nested_name::nested_name()
+name_tree::name_tree()
     : are_children_opaque_(static_cast<bool>(0)),
       is_circular_dependency_(static_cast<bool>(0)) { }
 
-nested_name::nested_name(
+name_tree::name_tree(
     const dogen::yarn::name& parent,
-    const std::list<dogen::yarn::nested_name>& children,
+    const std::list<dogen::yarn::name_tree>& children,
     const bool are_children_opaque,
     const bool is_circular_dependency)
     : parent_(parent),
@@ -37,7 +37,7 @@ nested_name::nested_name(
       are_children_opaque_(are_children_opaque),
       is_circular_dependency_(is_circular_dependency) { }
 
-void nested_name::swap(nested_name& other) noexcept {
+void name_tree::swap(name_tree& other) noexcept {
     using std::swap;
     swap(parent_, other.parent_);
     swap(children_, other.children_);
@@ -45,64 +45,64 @@ void nested_name::swap(nested_name& other) noexcept {
     swap(is_circular_dependency_, other.is_circular_dependency_);
 }
 
-bool nested_name::operator==(const nested_name& rhs) const {
+bool name_tree::operator==(const name_tree& rhs) const {
     return parent_ == rhs.parent_ &&
         children_ == rhs.children_ &&
         are_children_opaque_ == rhs.are_children_opaque_ &&
         is_circular_dependency_ == rhs.is_circular_dependency_;
 }
 
-nested_name& nested_name::operator=(nested_name other) {
+name_tree& name_tree::operator=(name_tree other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const dogen::yarn::name& nested_name::parent() const {
+const dogen::yarn::name& name_tree::parent() const {
     return parent_;
 }
 
-dogen::yarn::name& nested_name::parent() {
+dogen::yarn::name& name_tree::parent() {
     return parent_;
 }
 
-void nested_name::parent(const dogen::yarn::name& v) {
+void name_tree::parent(const dogen::yarn::name& v) {
     parent_ = v;
 }
 
-void nested_name::parent(const dogen::yarn::name&& v) {
+void name_tree::parent(const dogen::yarn::name&& v) {
     parent_ = std::move(v);
 }
 
-const std::list<dogen::yarn::nested_name>& nested_name::children() const {
+const std::list<dogen::yarn::name_tree>& name_tree::children() const {
     return children_;
 }
 
-std::list<dogen::yarn::nested_name>& nested_name::children() {
+std::list<dogen::yarn::name_tree>& name_tree::children() {
     return children_;
 }
 
-void nested_name::children(const std::list<dogen::yarn::nested_name>& v) {
+void name_tree::children(const std::list<dogen::yarn::name_tree>& v) {
     children_ = v;
 }
 
-void nested_name::children(const std::list<dogen::yarn::nested_name>&& v) {
+void name_tree::children(const std::list<dogen::yarn::name_tree>&& v) {
     children_ = std::move(v);
 }
 
-bool nested_name::are_children_opaque() const {
+bool name_tree::are_children_opaque() const {
     return are_children_opaque_;
 }
 
-void nested_name::are_children_opaque(const bool v) {
+void name_tree::are_children_opaque(const bool v) {
     are_children_opaque_ = v;
 }
 
-bool nested_name::is_circular_dependency() const {
+bool name_tree::is_circular_dependency() const {
     return is_circular_dependency_;
 }
 
-void nested_name::is_circular_dependency(const bool v) {
+void name_tree::is_circular_dependency(const bool v) {
     is_circular_dependency_ = v;
 }
 

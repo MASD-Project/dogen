@@ -37,7 +37,7 @@ target_link_libraries(${name}_spec
 set(command ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
 
 add_custom_target(run_${name}_spec
-    COMMAND command
+    COMMAND ${command}
     WORKING_DIRECTORY ${stage_bin_dir}
     DEPENDS ${name}_spec)
 add_dependencies(run_all_specs run_${name}_spec)

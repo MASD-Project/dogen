@@ -18,23 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_NESTED_NAME_FWD_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_NESTED_NAME_FWD_SER_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_NAME_TREE_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_NAME_TREE_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/nested_name_fwd.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/yarn/types/name_tree.hpp"
 
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::name_tree)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-void save(Archive& ar, const dogen::yarn::nested_name& v, unsigned int version);
+template<typename Archive>
+void save(Archive& ar, const dogen::yarn::name_tree& v, unsigned int version);
 
-template<class Archive>
-void load(Archive& ar, dogen::yarn::nested_name& v, unsigned int version);
+template<typename Archive>
+void load(Archive& ar, dogen::yarn::name_tree& v, unsigned int version);
 
 } }
 

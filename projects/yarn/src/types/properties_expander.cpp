@@ -33,7 +33,7 @@ namespace dogen {
 namespace yarn {
 
 bool properties_expander::is_circular_dependency(const name& owner,
-    const nested_name& nn) const {
+    const name_tree& nn) const {
 
     if (owner == nn.parent())
         return true;
@@ -85,9 +85,9 @@ make_identifier_parser(const intermediate_model& m) const {
     return r;
 }
 
-nested_name properties_expander::make_nested_name(const identifier_parser& ip,
+name_tree properties_expander::make_name_tree(const identifier_parser& ip,
     const std::string& s) const {
-    nested_name r(ip.parse_name(s));
+    name_tree r(ip.parse(s));
     return r;
 }
 

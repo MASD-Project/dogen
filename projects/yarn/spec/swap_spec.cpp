@@ -43,7 +43,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_swap");
 
     test_swap<generation_types_generator>();
-    test_swap<nested_name_generator>();
+    test_swap<name_tree_generator>();
     test_swap<node_generator>();
     test_swap<property_generator>();
     test_swap<name_generator>();

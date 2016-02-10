@@ -132,6 +132,7 @@
 #include "dogen/quilt.cpp/types/formattables/global_enablement_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_directives_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/cmakelists_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/types/helper_methods_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/visitor_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/settings/directory_names_settings_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/enablement_repository_factory.hpp"

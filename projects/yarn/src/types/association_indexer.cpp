@@ -61,9 +61,9 @@ void association_indexer::remove_duplicates(std::list<name>& names,
                              << names.size();
 }
 
-void association_indexer::recurse_nested_names(const intermediate_model& m,
-    object& o, const nested_name& nn, bool& is_opaque) const {
-    const auto n(nn.parent());
+void association_indexer::walk_name_tree(const intermediate_model& m,
+    object& o, const name_tree& nt, bool& is_opaque) const {
+    const auto n(nt.parent());
     if (is_opaque)
         o.opaque_associations().push_back(n);
     else
@@ -95,12 +95,12 @@ void association_indexer::recurse_nested_names(const intermediate_model& m,
      * keys.
      */
     bool is_first(true);
-    for (const auto c : nn.children()) {
+    for (const auto c : nt.children()) {
         const auto ac(object_types::associative_container);
         if (is_first && k->second.object_type() == ac)
             o.associative_container_keys().push_back(c.parent());
 
-        recurse_nested_names(m, o, c, is_opaque);
+        walk_name_tree(m, o, c, is_opaque);
         is_first = false;
     }
 }
@@ -110,9 +110,9 @@ index_object(const intermediate_model& m, object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().qualified();
 
     for (const auto& p : o.local_properties()) {
-        const auto nn(p.type());
-        bool is_opaque(nn.are_children_opaque());
-        recurse_nested_names(m, o, nn, is_opaque);
+        const auto nt(p.type());
+        bool is_opaque(nt.are_children_opaque());
+        walk_name_tree(m, o, nt, is_opaque);
     }
 
     std::unordered_set<name> transparent_associations;

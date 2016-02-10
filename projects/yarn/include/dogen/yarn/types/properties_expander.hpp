@@ -26,8 +26,8 @@
 #endif
 
 #include <string>
+#include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/identifier_parser.hpp"
-#include "dogen/yarn/types/nested_name.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
@@ -35,13 +35,13 @@ namespace yarn {
 
 class properties_expander {
 private:
-    bool is_circular_dependency(const name& owner, const nested_name& nn) const;
+    bool is_circular_dependency(const name& owner, const name_tree& nt) const;
 
     template<typename NameableAndStateful>
     void update_properties(const identifier_parser& ip,
         NameableAndStateful& nas) const {
         for (auto& p : nas.local_properties()) {
-            auto nn(make_nested_name(ip, p.unparsed_type()));
+            auto nn(make_name_tree(ip, p.unparsed_type()));
             nn.is_circular_dependency(is_circular_dependency(nas.name(), nn));
             p.type(nn);
         }
@@ -53,7 +53,7 @@ private:
 
     identifier_parser make_identifier_parser(const intermediate_model& m) const;
 
-    nested_name make_nested_name(const identifier_parser& ip,
+    name_tree make_name_tree(const identifier_parser& ip,
         const std::string& s) const;
 
 public:

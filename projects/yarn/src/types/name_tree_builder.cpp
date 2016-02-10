@@ -24,22 +24,22 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/location_io.hpp"
-#include "dogen/yarn/io/nested_name_io.hpp"
+#include "dogen/yarn/io/name_tree_io.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
-#include "dogen/yarn/types/nested_name_builder.hpp"
+#include "dogen/yarn/types/name_tree_builder.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("yarn.nested_name_builder"));
+auto lg(logger_factory("yarn.name_tree_builder"));
 
 }
 
 namespace dogen {
 namespace yarn {
 
-nested_name_builder::nested_name_builder(
+name_tree_builder::name_tree_builder(
     const std::unordered_set<std::string>& top_level_modules,
     const location& model_location)
     : top_level_modules_(top_level_modules),
@@ -52,12 +52,12 @@ nested_name_builder::nested_name_builder(
     BOOST_LOG_SEV(lg, debug) << " location: " << model_location_;
 }
 
-void nested_name_builder::add_name(const std::string& s) {
+void name_tree_builder::add_name(const std::string& s) {
     BOOST_LOG_SEV(lg, debug) << "pushing back name: " << s;
     names_.push_back(s);
 }
 
-void nested_name_builder::add_primitive(const std::string& s) {
+void name_tree_builder::add_primitive(const std::string& s) {
     BOOST_LOG_SEV(lg, debug) << "pushing back primitive :" << s;
 
     name_builder b;
@@ -65,7 +65,7 @@ void nested_name_builder::add_primitive(const std::string& s) {
     current_->data(b.build());
 }
 
-void nested_name_builder::finish_current_node() {
+void name_tree_builder::finish_current_node() {
     BOOST_LOG_SEV(lg, debug) << "finishing current node. names: " << names_;
 
     /*
@@ -129,7 +129,7 @@ void nested_name_builder::finish_current_node() {
     current_->data(b.build());
 }
 
-void nested_name_builder::start_children() {
+void name_tree_builder::start_children() {
     BOOST_LOG_SEV(lg, debug) << "starting children";
 
     finish_current_node();
@@ -144,7 +144,7 @@ void nested_name_builder::start_children() {
     current_ = child;
 }
 
-void nested_name_builder::next_child() {
+void name_tree_builder::next_child() {
     BOOST_LOG_SEV(lg, debug) << "next child";
 
     finish_current_node();
@@ -162,7 +162,7 @@ void nested_name_builder::next_child() {
     current_ = child;
 }
 
-void nested_name_builder::end_children() {
+void name_tree_builder::end_children() {
     BOOST_LOG_SEV(lg, debug) << "ending children";
 
     finish_current_node();
@@ -173,25 +173,25 @@ void nested_name_builder::end_children() {
     current_ = current_->parent();
 }
 
-void nested_name_builder::
-build_node(nested_name& nn, boost::shared_ptr<node> node) {
+void name_tree_builder::
+build_node(name_tree& nn, boost::shared_ptr<node> node) {
     BOOST_LOG_SEV(lg, debug) << "bulding node: " << node->data();
 
     nn.parent(node->data());
-    std::list<nested_name> children;
+    std::list<name_tree> children;
     for (const auto c : node->children()) {
-        nested_name cnn;
+        name_tree cnn;
         build_node(cnn, c);
         children.push_back(cnn);
     }
     nn.children(children);
 }
 
-nested_name nested_name_builder::build() {
+name_tree name_tree_builder::build() {
     BOOST_LOG_SEV(lg, debug) << "started build";
 
     finish_current_node();
-    nested_name r;
+    name_tree r;
     build_node(r, root_);
 
     BOOST_LOG_SEV(lg, debug) << "finished build. Final name: " << r;

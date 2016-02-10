@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/yarn/types/nested_name.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/quilt.cpp/types/formattables/class_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant_fwd.hpp"
 
@@ -50,7 +50,7 @@ public:
     virtual std::string helper_name() const = 0;
     virtual bool is_enabled(const assistant& a,
         const formattables::class_info& owner) const = 0;
-    virtual void format(assistant& a, const yarn::nested_name& nn) const = 0;
+    virtual void format(assistant& a, const yarn::name_tree& nt) const = 0;
 };
 
 } } } }

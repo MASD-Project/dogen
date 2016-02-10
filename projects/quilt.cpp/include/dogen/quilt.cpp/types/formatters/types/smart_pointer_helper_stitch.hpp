@@ -45,7 +45,7 @@ public:
     std::string helper_name() const;
     bool is_enabled(const assistant& a,
         const formattables::class_info& owner) const;
-    void format(assistant& a, const yarn::nested_name& nn) const;
+    void format(assistant& a, const yarn::name_tree& nt) const;
 };
 
 void smart_pointer_helper_stitch(
