@@ -260,7 +260,8 @@
 								<element>primitives</element>
 							</location>
 						</name>
-						<type class_id="34" tracking_level="0" version="0">
+						<unparsed_type>std::int8_t</unparsed_type>
+						<parsed_type class_id="34" tracking_level="0" version="0">
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -286,8 +287,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::int8_t</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -320,7 +320,8 @@
 								<element>primitives</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::int16_t</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -346,8 +347,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::int16_t</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -380,7 +380,8 @@
 								<element>primitives</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::int32_t</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -406,8 +407,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::int32_t</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -440,7 +440,8 @@
 								<element>primitives</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::int64_t</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -466,8 +467,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::int64_t</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -500,7 +500,8 @@
 								<element>primitives</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::uint8_t</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -526,8 +527,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::uint8_t</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -560,7 +560,8 @@
 								<element>primitives</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::uint16_t</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -586,8 +587,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::uint16_t</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -620,7 +620,8 @@
 								<element>primitives</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::uint32_t</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -646,8 +647,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::uint32_t</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -680,7 +680,8 @@
 								<element>primitives</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::uint64_t</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -706,8 +707,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::uint64_t</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -838,7 +838,8 @@
 								<element>class_c</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -864,8 +865,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -899,7 +899,8 @@
 								<element>class_c</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -925,8 +926,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1055,7 +1055,8 @@
 								<element>base</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1081,8 +1082,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1211,7 +1211,8 @@
 								<element>class_j</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::pair&lt;int,int&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1237,8 +1238,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::pair&lt;int,int&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1271,7 +1271,8 @@
 								<element>class_j</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::pair&lt;std::string,std::string&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1297,8 +1298,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::pair&lt;std::string,std::string&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1331,7 +1331,8 @@
 								<element>class_j</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::vector&lt;std::pair&lt;std::string,int&gt;&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1357,8 +1358,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::vector&lt;std::pair&lt;std::string,int&gt;&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1487,7 +1487,8 @@
 								<element>class_b</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1513,8 +1514,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1547,7 +1547,8 @@
 								<element>class_b</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1573,8 +1574,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1607,7 +1607,8 @@
 								<element>class_b</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::vector&lt;pkg1::class_c&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1633,8 +1634,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::vector&lt;pkg1::class_c&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1667,7 +1667,8 @@
 								<element>class_b</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::vector&lt;unsigned int&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1693,8 +1694,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::vector&lt;unsigned int&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1727,7 +1727,8 @@
 								<element>class_b</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1753,8 +1754,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1787,7 +1787,8 @@
 								<element>class_b</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::vector&lt;std::vector&lt;unsigned int&gt;&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1813,8 +1814,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::vector&lt;std::vector&lt;unsigned int&gt;&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1943,7 +1943,8 @@
 								<element>class_d</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::list&lt;std::string&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1969,8 +1970,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::list&lt;std::string&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2003,7 +2003,8 @@
 								<element>class_d</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::list&lt;class_a&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2029,8 +2030,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::list&lt;class_a&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2063,7 +2063,8 @@
 								<element>class_d</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::list&lt;pkg1::class_c&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2089,8 +2090,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::list&lt;pkg1::class_c&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2123,7 +2123,8 @@
 								<element>class_d</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::list&lt;unsigned int&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2149,8 +2150,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::list&lt;unsigned int&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2183,7 +2183,8 @@
 								<element>class_d</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::list&lt;class_a&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2209,8 +2210,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::list&lt;class_a&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2243,7 +2243,8 @@
 								<element>class_d</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::list&lt;std::list&lt;unsigned int&gt;&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2269,8 +2270,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::list&lt;std::list&lt;unsigned int&gt;&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2410,7 +2410,8 @@
 								<element>class_a</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::string</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2436,8 +2437,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::string</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2471,7 +2471,8 @@
 								<element>class_a</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::string</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2497,8 +2498,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::string</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2627,7 +2627,8 @@
 								<element>class_e</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::deque&lt;std::string&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2653,8 +2654,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::deque&lt;std::string&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2687,7 +2687,8 @@
 								<element>class_e</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2713,8 +2714,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2747,7 +2747,8 @@
 								<element>class_e</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::deque&lt;pkg1::class_c&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2773,8 +2774,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::deque&lt;pkg1::class_c&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2807,7 +2807,8 @@
 								<element>class_e</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::deque&lt;unsigned int&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2833,8 +2834,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::deque&lt;unsigned int&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2867,7 +2867,8 @@
 								<element>class_e</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2893,8 +2894,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2927,7 +2927,8 @@
 								<element>class_e</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::deque&lt;std::deque&lt;unsigned int&gt;&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2953,8 +2954,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::deque&lt;std::deque&lt;unsigned int&gt;&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -3083,7 +3083,8 @@
 								<element>class_h</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::unordered_set&lt;class_a&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -3109,8 +3110,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::unordered_set&lt;class_a&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -3143,7 +3143,8 @@
 								<element>class_h</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::unordered_set&lt;pkg1::class_c&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -3169,8 +3170,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::unordered_set&lt;pkg1::class_c&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -3299,7 +3299,8 @@
 								<element>class_f</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::unordered_map&lt;std::string,std::string&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -3325,8 +3326,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::unordered_map&lt;std::string,std::string&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -3359,7 +3359,8 @@
 								<element>class_f</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::unordered_map&lt;std::string,class_a&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -3385,8 +3386,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::unordered_map&lt;std::string,class_a&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -3419,7 +3419,8 @@
 								<element>class_f</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::unordered_map&lt;class_a,pkg1::class_c&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -3445,8 +3446,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::unordered_map&lt;class_a,pkg1::class_c&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -3575,7 +3575,8 @@
 								<element>some_service</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::shared_ptr&lt;base&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -3601,8 +3602,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::shared_ptr&lt;base&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -3635,7 +3635,8 @@
 								<element>some_service</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::weak_ptr&lt;base&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -3661,8 +3662,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::weak_ptr&lt;base&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -3695,7 +3695,8 @@
 								<element>some_service</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::unique_ptr&lt;base&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -3721,8 +3722,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::unique_ptr&lt;base&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -3755,7 +3755,8 @@
 								<element>some_service</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::function</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -3781,8 +3782,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::function</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -3911,7 +3911,8 @@
 								<element>class_g</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::unordered_map&lt;class_a,std::vector&lt;pkg1::class_c&gt;&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -3937,8 +3938,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::unordered_map&lt;class_a,std::vector&lt;pkg1::class_c&gt;&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -3971,7 +3971,8 @@
 								<element>class_g</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::unordered_map&lt;pkg1::class_c,std::list&lt;class_a&gt;&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -3997,8 +3998,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::unordered_map&lt;pkg1::class_c,std::list&lt;class_a&gt;&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -4031,7 +4031,8 @@
 								<element>class_g</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::unordered_map&lt;std::string, class_a&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -4057,8 +4058,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::unordered_map&lt;std::string, class_a&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -4187,7 +4187,8 @@
 								<element>derived</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::list&lt;pkg1::class_c&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -4213,8 +4214,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::list&lt;pkg1::class_c&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>

@@ -52,8 +52,8 @@ public:
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
         const dogen::yarn::name& name,
-        const dogen::yarn::name_tree& type,
         const std::string& unparsed_type,
+        const dogen::yarn::name_tree& parsed_type,
         const bool is_immutable,
         const bool is_fluent);
 
@@ -101,16 +101,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Tree of names that represent the type of the property.
-     */
-    /**@{*/
-    const dogen::yarn::name_tree& type() const;
-    dogen::yarn::name_tree& type();
-    void type(const dogen::yarn::name_tree& v);
-    void type(const dogen::yarn::name_tree&& v);
-    /**@}*/
-
-    /**
      * @brief Original type name as it appeared in the source, without any parsing.
      *
      * Name must be in one of the supported notations.
@@ -120,6 +110,16 @@ public:
     std::string& unparsed_type();
     void unparsed_type(const std::string& v);
     void unparsed_type(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Tree of names that represent the type of the property, after suitable parsing.
+     */
+    /**@{*/
+    const dogen::yarn::name_tree& parsed_type() const;
+    dogen::yarn::name_tree& parsed_type();
+    void parsed_type(const dogen::yarn::name_tree& v);
+    void parsed_type(const dogen::yarn::name_tree&& v);
     /**@}*/
 
     /**
@@ -152,8 +152,8 @@ private:
     std::string documentation_;
     dogen::dynamic::object extensions_;
     dogen::yarn::name name_;
-    dogen::yarn::name_tree type_;
     std::string unparsed_type_;
+    dogen::yarn::name_tree parsed_type_;
     bool is_immutable_;
     bool is_fluent_;
 };

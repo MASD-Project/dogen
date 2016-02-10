@@ -214,7 +214,8 @@
 								<element>a_class</element>
 							</location>
 						</name>
-						<type class_id="34" tracking_level="0" version="0">
+						<unparsed_type>bool</unparsed_type>
+						<parsed_type class_id="34" tracking_level="0" version="0">
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -240,8 +241,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>bool</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -274,7 +274,8 @@
 								<element>a_class</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>char</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -300,8 +301,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>char</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -334,7 +334,8 @@
 								<element>a_class</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>unsigned char</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -360,8 +361,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>unsigned char</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -394,7 +394,8 @@
 								<element>a_class</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -420,8 +421,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -454,7 +454,8 @@
 								<element>a_class</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>unsigned int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -480,8 +481,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>unsigned int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -514,7 +514,8 @@
 								<element>a_class</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>long</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -540,8 +541,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>long</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -574,7 +574,8 @@
 								<element>a_class</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>unsigned long</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -600,8 +601,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>unsigned long</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -634,7 +634,8 @@
 								<element>a_class</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>long long</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -660,8 +661,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>long long</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -694,7 +694,8 @@
 								<element>a_class</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>unsigned long long</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -720,8 +721,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>unsigned long long</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -754,7 +754,8 @@
 								<element>a_class</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>short</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -780,8 +781,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>short</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -814,7 +814,8 @@
 								<element>a_class</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>unsigned short</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -840,8 +841,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>unsigned short</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -874,7 +874,8 @@
 								<element>a_class</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>double</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -900,8 +901,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>double</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -934,7 +934,8 @@
 								<element>a_class</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>float</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -960,8 +961,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>float</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>

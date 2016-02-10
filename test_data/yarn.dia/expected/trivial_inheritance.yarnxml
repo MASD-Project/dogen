@@ -522,7 +522,8 @@ in the context of inheritance.
 								<element>child</element>
 							</location>
 						</name>
-						<type class_id="35" tracking_level="0" version="0">
+						<unparsed_type>int</unparsed_type>
+						<parsed_type class_id="35" tracking_level="0" version="0">
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -548,8 +549,7 @@ in the context of inheritance.
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -797,7 +797,8 @@ in the context of inheritance.
 								<element>parent</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>unsigned int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -823,8 +824,7 @@ in the context of inheritance.
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>unsigned int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -955,7 +955,8 @@ in the context of inheritance.
 								<element>move_ctor_base</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::filesystem::path</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -981,8 +982,7 @@ in the context of inheritance.
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::filesystem::path</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1209,7 +1209,8 @@ in the context of inheritance.
 								<element>parent</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1235,8 +1236,7 @@ in the context of inheritance.
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1481,7 +1481,8 @@ in the context of inheritance.
 								<element>third_child_with_members</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>unsigned int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1507,8 +1508,7 @@ in the context of inheritance.
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>unsigned int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1657,7 +1657,8 @@ in the context of inheritance.
 								<element>parent_with_members</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1683,8 +1684,7 @@ in the context of inheritance.
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1815,7 +1815,8 @@ in the context of inheritance.
 								<element>child</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1841,8 +1842,7 @@ in the context of inheritance.
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2108,7 +2108,8 @@ in the context of inheritance.
 								<element>parent_outside</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2134,8 +2135,7 @@ in the context of inheritance.
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2264,7 +2264,8 @@ in the context of inheritance.
 								<element>child_with_members</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>unsigned int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2290,8 +2291,7 @@ in the context of inheritance.
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>unsigned int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2536,7 +2536,8 @@ in the context of inheritance.
 								<element>descendant2</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>bool</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2562,8 +2563,7 @@ in the context of inheritance.
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>bool</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2714,7 +2714,8 @@ in the context of inheritance.
 								<element>child</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2740,8 +2741,7 @@ in the context of inheritance.
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2986,7 +2986,8 @@ in the context of inheritance.
 								<element>child_of_a_child2</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>unsigned int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -3012,8 +3013,7 @@ in the context of inheritance.
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>unsigned int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -3394,7 +3394,8 @@ in the context of inheritance.
 								<element>descendant3</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>bool</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -3420,8 +3421,7 @@ in the context of inheritance.
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>bool</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -3572,7 +3572,8 @@ in the context of inheritance.
 								<element>move_ctor_descendant</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::filesystem::path</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -3598,8 +3599,7 @@ in the context of inheritance.
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::filesystem::path</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>

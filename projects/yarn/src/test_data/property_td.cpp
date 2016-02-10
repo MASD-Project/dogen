@@ -63,8 +63,8 @@ populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.extensions(create_dogen_dynamic_object(position + 1));
     v.name(create_dogen_yarn_name(position + 2));
-    v.type(create_dogen_yarn_name_tree(position + 3));
-    v.unparsed_type(create_std_string(position + 4));
+    v.unparsed_type(create_std_string(position + 3));
+    v.parsed_type(create_dogen_yarn_name_tree(position + 4));
     v.is_immutable(create_bool(position + 5));
     v.is_fluent(create_bool(position + 6));
 }

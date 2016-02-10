@@ -82,7 +82,7 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
         BOOST_CHECK(o.local_properties().size() == 1 ||
             o.local_properties().empty());
         if (o.local_properties().size() == 1) {
-            auto& t(o.local_properties().begin()->type().parent());
+            auto& t(o.local_properties().begin()->parsed_type().parent());
             t.location().model_modules().clear();
             t.qualified(t.simple());
         }
@@ -106,8 +106,8 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
             BOOST_CHECK(o.local_properties().size() == 1);
             const auto& prop(o.local_properties().front());
             BOOST_LOG_SEV(lg, debug) << "property: " << prop;
-            BOOST_CHECK(factory.is_type_name_n(1, prop.type().parent()));
-            BOOST_CHECK(factory.is_model_n(0, prop.type().parent()));
+            BOOST_CHECK(factory.is_type_name_n(1, prop.parsed_type().parent()));
+            BOOST_CHECK(factory.is_model_n(0, prop.parsed_type().parent()));
             BOOST_CHECK(o.object_type() ==
                 dogen::yarn::object_types::user_defined_value_object);
         }
@@ -144,8 +144,8 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_different_model_results_in_suc
             const auto& prop(o.local_properties().front());
             BOOST_LOG_SEV(lg, debug) << "property: " << prop;
 
-            BOOST_CHECK(factory.is_type_name_n(1, prop.type().parent()));
-            BOOST_CHECK(factory.is_model_n(1, prop.type().parent()));
+            BOOST_CHECK(factory.is_type_name_n(1, prop.parsed_type().parent()));
+            BOOST_CHECK(factory.is_model_n(1, prop.parsed_type().parent()));
             BOOST_CHECK(o.object_type() ==
                 dogen::yarn::object_types::user_defined_value_object);
         }

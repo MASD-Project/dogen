@@ -214,7 +214,8 @@
 								<element>class_5</element>
 							</location>
 						</name>
-						<type class_id="34" tracking_level="0" version="0">
+						<unparsed_type>int</unparsed_type>
+						<parsed_type class_id="34" tracking_level="0" version="0">
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -240,8 +241,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -370,7 +370,8 @@
 								<element>class_1</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -396,8 +397,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -526,7 +526,8 @@
 								<element>class_2</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -552,8 +553,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -682,7 +682,8 @@
 								<element>class_4</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -708,8 +709,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -838,7 +838,8 @@
 								<element>class_3</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -864,8 +865,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>

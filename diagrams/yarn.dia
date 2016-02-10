@@ -169,16 +169,18 @@
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#type#</dia:string>
+            <dia:string>#unparsed_type#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#name_tree#</dia:string>
+            <dia:string>#std::string#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Tree of names that represent the type of the property.#</dia:string>
+            <dia:string>#Original type name as it appeared in the source, without any parsing.
+
+Name must be in one of the supported notations.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -192,18 +194,16 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#unparsed_type#</dia:string>
+            <dia:string>#parsed_type#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#name_tree#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Original type name as it appeared in the source, without any parsing.
-
-Name must be in one of the supported notations.#</dia:string>
+            <dia:string>#Tree of names that represent the type of the property, after suitable parsing.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

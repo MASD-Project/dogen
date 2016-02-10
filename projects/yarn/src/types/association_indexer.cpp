@@ -110,7 +110,7 @@ index_object(const intermediate_model& m, object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().qualified();
 
     for (const auto& p : o.local_properties()) {
-        const auto nt(p.type());
+        const auto nt(p.parsed_type());
         bool is_opaque(nt.are_children_opaque());
         walk_name_tree(m, o, nt, is_opaque);
     }

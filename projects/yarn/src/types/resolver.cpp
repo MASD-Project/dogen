@@ -195,12 +195,12 @@ void resolver::resolve_properties(const intermediate_model& m,
     const name& owner, std::list<property>& p) const {
     for (auto& prop : p) {
         try {
-            resolve_partial_type(m, prop.type());
+            resolve_partial_type(m, prop.parsed_type());
         } catch (boost::exception& e) {
             std::ostringstream s;
             s << "Owner type name: " << owner.qualified()
               << " Property name: " << prop.name()
-              << " Property type: " << prop.type();
+              << " Property type: " << prop.parsed_type();
             e << errmsg_info(s.str());
             throw;
         }

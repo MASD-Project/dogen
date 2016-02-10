@@ -41,9 +41,9 @@ private:
     void update_properties(const identifier_parser& ip,
         NameableAndStateful& nas) const {
         for (auto& p : nas.local_properties()) {
-            auto nn(make_name_tree(ip, p.unparsed_type()));
-            nn.is_circular_dependency(is_circular_dependency(nas.name(), nn));
-            p.type(nn);
+            auto nt(make_name_tree(ip, p.unparsed_type()));
+            nt.is_circular_dependency(is_circular_dependency(nas.name(), nt));
+            p.parsed_type(nt);
         }
     }
 

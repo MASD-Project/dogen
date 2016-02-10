@@ -226,11 +226,11 @@ dogen::yarn::property mock_property(const dogen::yarn::name& owning_element,
     using property_types = dogen::yarn::test::mock_intermediate_model_factory::
         property_types;
     if (pt == property_types::value_object)
-        r.type(mock_name_tree(*name));
+        r.parsed_type(mock_name_tree(*name));
     else if (pt == property_types::boost_shared_ptr)
-        r.type(mock_name_tree_shared_ptr(*name));
+        r.parsed_type(mock_name_tree_shared_ptr(*name));
     else
-        r.type(mock_name_tree(pt));
+        r.parsed_type(mock_name_tree(pt));
 
     return r;
 }
@@ -1037,7 +1037,7 @@ object_with_property(const object_types ot, const property_types pt,
     if (pt == property_types::unsigned_int ||
         pt == property_types::boolean) {
         primitive ui;
-        ui.name(p.type().parent());
+        ui.name(p.parsed_type().parent());
         insert_nameable(r.primitives(), ui);
 
         if (flags_.associations_indexed())
@@ -1396,7 +1396,7 @@ object_with_group_of_properties_of_different_types(
     auto p1(mock_property(o0.name(), 1));
     lambda(p1);
     primitive ui;
-    ui.name(p1.type().parent());
+    ui.name(p1.parsed_type().parent());
     insert_nameable(r.primitives(), ui);
 
     auto o3(make_value_object(3, mn));

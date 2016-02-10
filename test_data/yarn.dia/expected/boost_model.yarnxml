@@ -260,7 +260,8 @@
 								<element>class_h</element>
 							</location>
 						</name>
-						<type class_id="34" tracking_level="0" version="0">
+						<unparsed_type>boost::property_tree::ptree</unparsed_type>
+						<parsed_type class_id="34" tracking_level="0" version="0">
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -286,8 +287,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::property_tree::ptree</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -416,7 +416,8 @@
 								<element>class_a</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>unsigned int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -442,8 +443,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>unsigned int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -572,7 +572,8 @@
 								<element>class_derived</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -598,8 +599,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -750,7 +750,8 @@
 								<element>class_c</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -776,8 +777,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -811,7 +811,8 @@
 								<element>class_c</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -837,8 +838,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -967,7 +967,8 @@
 								<element>class_base</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>int</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -993,8 +994,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>int</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1123,7 +1123,8 @@
 								<element>class_b</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::shared_ptr&lt;class_a&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1149,8 +1150,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::shared_ptr&lt;class_a&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1183,7 +1183,8 @@
 								<element>class_b</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::vector&lt;boost::shared_ptr&lt;class_a&gt;&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1209,8 +1210,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::vector&lt;boost::shared_ptr&lt;class_a&gt;&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1243,7 +1243,8 @@
 								<element>class_b</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::unordered_map&lt;int,boost::shared_ptr&lt;class_a&gt;&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1269,8 +1270,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::unordered_map&lt;int,boost::shared_ptr&lt;class_a&gt;&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1303,7 +1303,8 @@
 								<element>class_b</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::shared_ptr&lt;pkg1::class_c&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1329,8 +1330,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::shared_ptr&lt;pkg1::class_c&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1363,7 +1363,8 @@
 								<element>class_b</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::shared_ptr&lt;class_base&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1389,8 +1390,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::shared_ptr&lt;class_base&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1423,7 +1423,8 @@
 								<element>class_b</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::vector&lt;boost::shared_ptr&lt;class_base&gt;&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1449,8 +1450,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::vector&lt;boost::shared_ptr&lt;class_base&gt;&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1483,7 +1483,8 @@
 								<element>class_b</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>pkg1::class_c</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1509,8 +1510,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>pkg1::class_c</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1639,7 +1639,8 @@
 								<element>class_d</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::optional&lt;int&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1665,8 +1666,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::optional&lt;int&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1699,7 +1699,8 @@
 								<element>class_d</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::optional&lt;class_a&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1725,8 +1726,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::optional&lt;class_a&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1759,7 +1759,8 @@
 								<element>class_d</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::optional&lt;pkg1::class_c&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1785,8 +1786,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::optional&lt;pkg1::class_c&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1819,7 +1819,8 @@
 								<element>class_d</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::optional&lt;std::vector&lt;class_a&gt;&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -1845,8 +1846,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::optional&lt;std::vector&lt;class_a&gt;&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1975,7 +1975,8 @@
 								<element>some_service</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::asio::io_service</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2001,8 +2002,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::asio::io_service</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2035,7 +2035,8 @@
 								<element>some_service</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::asio::ip::tcp::socket</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2061,8 +2062,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::asio::ip::tcp::socket</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2095,7 +2095,8 @@
 								<element>some_service</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::asio::ip::tcp::acceptor</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2121,8 +2122,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::asio::ip::tcp::acceptor</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2251,7 +2251,8 @@
 								<element>class_e</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::variant&lt;int,double&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2277,8 +2278,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::variant&lt;int,double&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2311,7 +2311,8 @@
 								<element>class_e</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::variant&lt;int,class_derived,double&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2337,8 +2338,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::variant&lt;int,class_derived,double&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2371,7 +2371,8 @@
 								<element>class_e</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::vector&lt;boost::variant&lt;int,class_derived,double&gt;&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2397,8 +2398,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::vector&lt;boost::variant&lt;int,class_derived,double&gt;&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2431,7 +2431,8 @@
 								<element>class_e</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::variant&lt;int,std::string,char&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2457,8 +2458,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::variant&lt;int,std::string,char&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2587,7 +2587,8 @@
 								<element>class_f</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::gregorian::date</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2613,8 +2614,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::gregorian::date</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2647,7 +2647,8 @@
 								<element>class_f</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::posix_time::ptime</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2673,8 +2674,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::posix_time::ptime</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2707,7 +2707,8 @@
 								<element>class_f</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::posix_time::time_duration</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2733,8 +2734,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::posix_time::time_duration</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2767,7 +2767,8 @@
 								<element>class_f</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::list&lt;boost::gregorian::date&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2793,8 +2794,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::list&lt;boost::gregorian::date&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2827,7 +2827,8 @@
 								<element>class_f</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::list&lt;boost::posix_time::ptime&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2853,8 +2854,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::list&lt;boost::posix_time::ptime&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2887,7 +2887,8 @@
 								<element>class_f</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::list&lt;boost::posix_time::time_duration&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -2913,8 +2914,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::list&lt;boost::posix_time::time_duration&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -3043,7 +3043,8 @@
 								<element>class_g</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>boost::filesystem::path</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -3069,8 +3070,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>boost::filesystem::path</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -3103,7 +3103,8 @@
 								<element>class_g</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>std::list&lt;boost::filesystem::path&gt;</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -3129,8 +3130,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>std::list&lt;boost::filesystem::path&gt;</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>

@@ -535,7 +535,8 @@ this is a long comment
 								<element>a_class</element>
 							</location>
 						</name>
-						<type class_id="37" tracking_level="0" version="0">
+						<unparsed_type>colour_types</unparsed_type>
+						<parsed_type class_id="37" tracking_level="0" version="0">
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -561,8 +562,7 @@ this is a long comment
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>colour_types</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -595,7 +595,8 @@ this is a long comment
 								<element>a_class</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>book_types</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -621,8 +622,7 @@ this is a long comment
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>book_types</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -655,7 +655,8 @@ this is a long comment
 								<element>a_class</element>
 							</location>
 						</name>
-						<type>
+						<unparsed_type>pkg1::shape_types</unparsed_type>
+						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
@@ -681,8 +682,7 @@ this is a long comment
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-						</type>
-						<unparsed_type>pkg1::shape_types</unparsed_type>
+						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>

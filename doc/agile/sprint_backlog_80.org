@@ -12,21 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-02-10 Wed 23:24]
+#+CAPTION: Clock summary at [2016-02-10 Wed 23:38]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *16:59* |       |      | 100.0 |
+| *Total time*                                                                | *17:13* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 16:59   |       |      | 100.0 |
-| Active                                                                      |         | 16:59 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 3:30 |  20.6 |
-| COMPLETED Make context non-generatable                                      |         |       | 0:49 |   4.8 |
-| COMPLETED Setup logging syntax highlighting on emacs                        |         |       | 2:32 |  14.9 |
+| Stories                                                                     | 17:13   |       |      | 100.0 |
+| Active                                                                      |         | 17:13 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 3:30 |  20.3 |
+| COMPLETED Make context non-generatable                                      |         |       | 0:49 |   4.7 |
+| COMPLETED Setup logging syntax highlighting on emacs                        |         |       | 2:32 |  14.7 |
 | COMPLETED Create next interesting blog post                                 |         |       | 0:37 |   3.6 |
-| COMPLETED Rename =yarn::nested_name= to =yarn::name_tree=                   |         |       | 1:05 |   6.4 |
-| STARTED Help conan with strange warning                                     |         |       | 1:30 |   8.8 |
-| STARTED Add an helper method interface                                      |         |       | 6:56 |  40.8 |
+| COMPLETED Rename =yarn::nested_name= to =yarn::name_tree=                   |         |       | 1:05 |   6.3 |
+| COMPLETED Rename =type= to =parsed_type=                                    |         |       | 0:14 |   1.4 |
+| STARTED Help conan with strange warning                                     |         |       | 1:30 |   8.7 |
+| STARTED Add an helper method interface                                      |         |       | 6:56 |  40.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -102,6 +103,13 @@ now take the approach of naming it after the data structure it models.
 This rename will ripple across (builder, etc).
 
 See also the [[https://en.wikipedia.org/wiki/Tree_(data_structure)#Terminologies_used_in_Trees][related terminology]].
+
+*** COMPLETED Rename =type= to =parsed_type=                          :story:
+    CLOSED: [2016-02-10 Wed 23:38]
+    CLOCK: [2016-02-10 Wed 23:24]--[2016-02-10 Wed 23:38] =>  0:14
+
+For consistency purposes - since we already have a =unparsed_type= in
+=yarn::property= - we should rename =type= to =parsed_type=.
 
 *** STARTED Help conan with strange warning                           :story:
     CLOCK: [2016-02-10 Wed 22:17]--[2016-02-10 Wed 22:35] =>  0:18
@@ -194,11 +202,6 @@ Tasks:
   the nested name (nested info for now) and pick the helper
   settings. It should also consult the registrar to see if there are
   any helpers available for this formatter and family.
-
-*** Rename =type= to =parsed_type=                                    :story:
-
-For consistency purposes - since we already have a =unparsed_type= in
-=yarn::property= - we should rename =type= to =parsed_type=.
 
 *** Add index support for =yarn::name_tree=                           :story:
 
