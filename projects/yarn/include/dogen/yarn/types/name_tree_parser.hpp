@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_IDENTIFIER_PARSER_HPP
-#define DOGEN_YARN_TYPES_IDENTIFIER_PARSER_HPP
+#ifndef DOGEN_YARN_TYPES_NAME_TREE_PARSER_HPP
+#define DOGEN_YARN_TYPES_NAME_TREE_PARSER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,9 +34,13 @@
 namespace dogen {
 namespace yarn {
 
-class identifier_parser {
+/**
+ * @brief Parses identifiers according to a well-defined syntax, and
+ * generates a tree of names from them.
+ */
+class name_tree_parser {
 public:
-    identifier_parser();
+    name_tree_parser();
 
 public:
     /**
@@ -47,10 +51,13 @@ public:
      * @param model_location location for the element representing the
      * model.
      */
-    identifier_parser(const std::unordered_set<std::string>& top_level_modules,
+    name_tree_parser(const std::unordered_set<std::string>& top_level_modules,
         const location& model_location);
 
 public:
+    /**
+     * @brief Parse the string into a name tree.
+     */
     name_tree parse(const std::string& s) const;
 
 private:

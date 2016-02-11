@@ -1427,7 +1427,7 @@ into its yarn representation.#</dia:string>
         <dia:point val="109.22,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="108.47,-3.85;129.657,8.8"/>
+        <dia:rectangle val="108.47,-3.85;129.658,8.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1462,7 +1462,7 @@ into its yarn representation.#</dia:string>
         <dia:point val="81,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="80.95,7.95;109.27,21.05"/>
+        <dia:rectangle val="80.95,7.95;109.27,20.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="81,8"/>
@@ -1471,7 +1471,7 @@ into its yarn representation.#</dia:string>
         <dia:real val="28.219999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13"/>
+        <dia:real val="12.199999999999999"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#transformer#</dia:string>
@@ -1567,29 +1567,6 @@ into its yarn representation.#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#context#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="1"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#identifier_parser_#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::shared_ptr&lt;yarn::identifier_parser&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -2714,7 +2691,7 @@ that make up dogen instructions.#</dia:string>
         <dia:point val="-14.0075,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.7575,-14.75;129.657,8.8"/>
+        <dia:rectangle val="-14.7575,-14.75;129.658,8.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6123,7 +6100,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:point val="-128,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-128.05,-15.05;-92.785,69.15"/>
+        <dia:rectangle val="-128.05,-15.05;-92.785,69.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6135,7 +6112,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:real val="35.164999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="84.099999999999994"/>
+        <dia:real val="84.899999999999991"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -6569,16 +6546,16 @@ and child relationships between objects.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="109.22,21"/>
+        <dia:point val="109.22,20.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="108.47,20.25;115.995,34.8"/>
+        <dia:rectangle val="108.47,19.45;115.995,34.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="109.22,21"/>
+        <dia:point val="109.22,20.2"/>
         <dia:point val="109.22,29"/>
         <dia:point val="115.795,29"/>
         <dia:point val="115.795,34"/>
@@ -7056,16 +7033,16 @@ and child relationships between objects.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="81,21"/>
+        <dia:point val="81,20.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.39,20.25;81.75,29.05"/>
+        <dia:rectangle val="71.39,19.45;81.75,29.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="81,21"/>
+        <dia:point val="81,20.2"/>
         <dia:point val="81,29"/>
         <dia:point val="71.44,29"/>
         <dia:point val="71.44,23.6"/>
@@ -7356,16 +7333,16 @@ manageable format.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="95.11,21"/>
+        <dia:point val="95.11,20.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.48,20.25;95.86,78.05"/>
+        <dia:rectangle val="-29.48,19.45;95.86,78.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="95.11,21"/>
+        <dia:point val="95.11,20.2"/>
         <dia:point val="95.11,78"/>
         <dia:point val="-29.43,78"/>
         <dia:point val="-29.43,69.4"/>

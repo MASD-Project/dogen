@@ -12,23 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-02-11 Thu 21:04]
+#+CAPTION: Clock summary at [2016-02-11 Thu 21:44]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *17:33* |       |      | 100.0 |
+| *Total time*                                                                | *18:05* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 17:33   |       |      | 100.0 |
-| Active                                                                      |         | 17:33 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 3:30 |  19.9 |
-| COMPLETED Make context non-generatable                                      |         |       | 0:49 |   4.7 |
-| COMPLETED Setup logging syntax highlighting on emacs                        |         |       | 2:32 |  14.4 |
-| COMPLETED Create next interesting blog post                                 |         |       | 0:37 |   3.5 |
-| COMPLETED Rename =yarn::nested_name= to =yarn::name_tree=                   |         |       | 1:05 |   6.2 |
+| Stories                                                                     | 18:05   |       |      | 100.0 |
+| Active                                                                      |         | 18:05 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 3:30 |  19.4 |
+| COMPLETED Make context non-generatable                                      |         |       | 0:49 |   4.5 |
+| COMPLETED Setup logging syntax highlighting on emacs                        |         |       | 2:32 |  14.0 |
+| COMPLETED Create next interesting blog post                                 |         |       | 0:37 |   3.4 |
+| COMPLETED Rename =yarn::nested_name= to =yarn::name_tree=                   |         |       | 1:05 |   6.0 |
 | COMPLETED Rename =type= to =parsed_type=                                    |         |       | 0:14 |   1.3 |
-| STARTED Help conan with strange warning                                     |         |       | 1:30 |   8.5 |
-| STARTED Add an helper method interface                                      |         |       | 6:56 |  39.5 |
-| STARTED Add index support for =yarn::name_tree=                             |         |       | 0:20 |   1.9 |
+| STARTED Help conan with strange warning                                     |         |       | 1:30 |   8.3 |
+| STARTED Add an helper method interface                                      |         |       | 6:56 |  38.3 |
+| STARTED Add index support for =yarn::name_tree=                             |         |       | 0:52 |   4.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -205,6 +205,7 @@ Tasks:
   any helpers available for this formatter and family.
 
 *** STARTED Add index support for =yarn::name_tree=                   :story:
+    CLOCK: [2016-02-11 Thu 21:05]--[2016-02-11 Thu 21:37] =>  0:32
     CLOCK: [2016-02-11 Thu 20:44]--[2016-02-11 Thu 21:04] =>  0:20
 
 Add an index to =yarn::name_tree= and add a heigth too. Compute it as

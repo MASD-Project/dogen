@@ -32,8 +32,8 @@ auto lg(logger_factory("yarn.properties_expander"));
 namespace dogen {
 namespace yarn {
 
-bool properties_expander::is_circular_dependency(const name& owner,
-    const name_tree& nn) const {
+bool properties_expander::
+is_circular_dependency(const name& owner, const name_tree& nn) const {
 
     if (owner == nn.parent())
         return true;
@@ -77,27 +77,15 @@ obtain_top_level_module_names(const intermediate_model& m) const {
     return r;
 }
 
-identifier_parser properties_expander::
-make_identifier_parser(const intermediate_model& m) const {
-    const auto tlmn(obtain_top_level_module_names(m));
-    const auto& l(m.name().location());
-    identifier_parser r(tlmn, l);
-    return r;
-}
-
-name_tree properties_expander::make_name_tree(const identifier_parser& ip,
-    const std::string& s) const {
-    name_tree r(ip.parse(s));
-    return r;
-}
-
 void properties_expander::expand(intermediate_model& m) const {
-    const auto ip(make_identifier_parser(m));
+    const auto tlmn(obtain_top_level_module_names(m));
+    const name_tree_parser ntp(tlmn, m.name().location());
+
     for (auto& pair : m.objects())
-        update_properties(ip, pair.second);
+        update_properties(ntp, pair.second);
 
     for (auto& pair : m.concepts())
-        update_properties(ip, pair.second);
+        update_properties(ntp, pair.second);
 }
 
 } }

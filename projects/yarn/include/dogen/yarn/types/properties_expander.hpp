@@ -27,36 +27,49 @@
 
 #include <string>
 #include "dogen/yarn/types/name_tree.hpp"
-#include "dogen/yarn/types/identifier_parser.hpp"
+#include "dogen/yarn/types/name_tree_parser.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 
+/**
+ * @brief Performs the expansion of all properties in the supplied
+ * model.
+ */
 class properties_expander {
 private:
+    /**
+     * @brief Returns true if the supplied name tree would result in a
+     * circular reference back to @e owner.
+     */
     bool is_circular_dependency(const name& owner, const name_tree& nt) const;
 
+    /**
+     * @brief Update all properties in the supplied element.
+     */
     template<typename NameableAndStateful>
-    void update_properties(const identifier_parser& ip,
+    void update_properties(const name_tree_parser& ntp,
         NameableAndStateful& nas) const {
         for (auto& p : nas.local_properties()) {
-            auto nt(make_name_tree(ip, p.unparsed_type()));
+            auto nt(ntp.parse(p.unparsed_type()));
             nt.is_circular_dependency(is_circular_dependency(nas.name(), nt));
             p.parsed_type(nt);
         }
     }
 
 private:
+    /**
+     * @brief Returns all of the top-level modules in the supplied
+     * model.
+     */
     std::unordered_set<std::string>
     obtain_top_level_module_names(const intermediate_model& m) const;
 
-    identifier_parser make_identifier_parser(const intermediate_model& m) const;
-
-    name_tree make_name_tree(const identifier_parser& ip,
-        const std::string& s) const;
-
 public:
+    /**
+     * Execute the property expansion against the model.
+     */
     void expand(intermediate_model& m) const;
 };
 

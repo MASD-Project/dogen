@@ -33,12 +33,12 @@
 #include "dogen/yarn/io/name_tree_io.hpp"
 #include "dogen/yarn/types/parsing_error.hpp"
 #include "dogen/yarn/types/name_tree_builder.hpp"
-#include "dogen/yarn/types/identifier_parser.hpp"
+#include "dogen/yarn/types/name_tree_parser.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.identifier_parser"));
+auto lg(logger_factory("yarn.name_tree_parser"));
 
 const std::string error_msg("Failed to parse string: ");
 using namespace boost::spirit;
@@ -167,16 +167,16 @@ struct grammar : qi::grammar<Iterator> {
 namespace dogen {
 namespace yarn {
 
-identifier_parser::identifier_parser() :
+name_tree_parser::name_tree_parser() :
     top_level_modules_(std::unordered_set<std::string>()),
     model_location_(location()) { }
 
-identifier_parser::
-identifier_parser(const std::unordered_set<std::string>& top_level_modules,
+name_tree_parser::
+name_tree_parser(const std::unordered_set<std::string>& top_level_modules,
     const location& model_location)
     : top_level_modules_(top_level_modules), model_location_(model_location) { }
 
-name_tree identifier_parser::parse(const std::string& s) const {
+name_tree name_tree_parser::parse(const std::string& s) const {
     BOOST_LOG_SEV(lg, debug) << "parsing name: " << s;
 
     auto builder(std::make_shared<name_tree_builder>(

@@ -37,6 +37,9 @@
 namespace dogen {
 namespace yarn {
 
+/**
+ * @brief Creates a name tree as directed by the external caller.
+ */
 class name_tree_builder {
 public:
     name_tree_builder() = delete;
@@ -55,7 +58,14 @@ private:
     name_tree make_name_tree(const node& n);
 
 public:
+    /**
+     * @brief Adds the element name to the tree.
+     */
     void add_name(const std::string& n);
+
+    /**
+     * @brief Adds the primitive element name to the tree.
+     */
     void add_primitive(const std::string& n);
     void start_children();
     void next_child();
