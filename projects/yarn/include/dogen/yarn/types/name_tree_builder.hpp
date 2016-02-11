@@ -52,7 +52,7 @@ public:
 
 private:
     void finish_current_node();
-    void build_node(name_tree& nn, boost::shared_ptr<node> node);
+    name_tree make_name_tree(const node& n);
 
 public:
     void add_name(const std::string& n);

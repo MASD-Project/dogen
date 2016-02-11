@@ -53,12 +53,12 @@ name_tree_builder::name_tree_builder(
 }
 
 void name_tree_builder::add_name(const std::string& s) {
-    BOOST_LOG_SEV(lg, debug) << "pushing back name: " << s;
+    BOOST_LOG_SEV(lg, debug) << "Pushing back name: " << s;
     names_.push_back(s);
 }
 
 void name_tree_builder::add_primitive(const std::string& s) {
-    BOOST_LOG_SEV(lg, debug) << "pushing back primitive :" << s;
+    BOOST_LOG_SEV(lg, debug) << "Pushing back primitive :" << s;
 
     name_builder b;
     b.simple_name(s);
@@ -66,7 +66,7 @@ void name_tree_builder::add_primitive(const std::string& s) {
 }
 
 void name_tree_builder::finish_current_node() {
-    BOOST_LOG_SEV(lg, debug) << "finishing current node. names: " << names_;
+    BOOST_LOG_SEV(lg, debug) << "Finishing current node. names: " << names_;
 
     /*
      * if there are no names, we do not have any work to do.
@@ -88,7 +88,7 @@ void name_tree_builder::finish_current_node() {
         b.simple_name(front);
         current_->data(b.build());
         names_.clear();
-        BOOST_LOG_SEV(lg, debug) << "simple name: " << front;
+        BOOST_LOG_SEV(lg, debug) << "Simple name: " << front;
         return;
     }
 
@@ -102,9 +102,9 @@ void name_tree_builder::finish_current_node() {
     const auto i(top_level_modules_.find(front));
     if (i != top_level_modules_.end()) {
         b.model_name(model_location_);
-        BOOST_LOG_SEV(lg, debug) << "found module in current model: " << front;
+        BOOST_LOG_SEV(lg, debug) << "Found module in current model: " << front;
     } else {
-        BOOST_LOG_SEV(lg, debug) << "foreign model name: " << front;
+        BOOST_LOG_SEV(lg, debug) << "Foreign model name: " << front;
         b.model_name(front);
         names_.pop_front(); // consume the foreign model name.
     }
@@ -114,7 +114,7 @@ void name_tree_builder::finish_current_node() {
      */
     const auto back(names_.back());
     b.simple_name(back);
-    BOOST_LOG_SEV(lg, debug) << "simple name: " << back;
+    BOOST_LOG_SEV(lg, debug) << "Simple name: " << back;
     names_.pop_back(); // consume the simple name
 
     if (!names_.empty()) {
@@ -123,14 +123,14 @@ void name_tree_builder::finish_current_node() {
          * modules defined within the model.
          */
         b.internal_modules(names_);
-        BOOST_LOG_SEV(lg, debug) << "internal module path: " << names_;
+        BOOST_LOG_SEV(lg, debug) << "Internal modules: " << names_;
         names_.clear(); // consume internal modules
     }
     current_->data(b.build());
 }
 
 void name_tree_builder::start_children() {
-    BOOST_LOG_SEV(lg, debug) << "starting children";
+    BOOST_LOG_SEV(lg, debug) << "Starting children.";
 
     finish_current_node();
 
@@ -145,7 +145,7 @@ void name_tree_builder::start_children() {
 }
 
 void name_tree_builder::next_child() {
-    BOOST_LOG_SEV(lg, debug) << "next child";
+    BOOST_LOG_SEV(lg, debug) << "Moving to next child.";
 
     finish_current_node();
 
@@ -163,7 +163,7 @@ void name_tree_builder::next_child() {
 }
 
 void name_tree_builder::end_children() {
-    BOOST_LOG_SEV(lg, debug) << "ending children";
+    BOOST_LOG_SEV(lg, debug) << "Children have ended.";
 
     finish_current_node();
 
@@ -173,28 +173,24 @@ void name_tree_builder::end_children() {
     current_ = current_->parent();
 }
 
-void name_tree_builder::
-build_node(name_tree& nn, boost::shared_ptr<node> node) {
-    BOOST_LOG_SEV(lg, debug) << "bulding node: " << node->data();
+name_tree name_tree_builder::make_name_tree(const node& n) {
+    BOOST_LOG_SEV(lg, debug) << "Node: " << n.data();
 
-    nn.parent(node->data());
-    std::list<name_tree> children;
-    for (const auto c : node->children()) {
-        name_tree cnn;
-        build_node(cnn, c);
-        children.push_back(cnn);
-    }
-    nn.children(children);
+    name_tree r;
+    r.parent(n.data());
+    for (const auto c : n.children())
+        r.children().push_back(make_name_tree(*c));
+
+    return r;
 }
 
 name_tree name_tree_builder::build() {
-    BOOST_LOG_SEV(lg, debug) << "started build";
+    BOOST_LOG_SEV(lg, debug) << "Started build";
 
     finish_current_node();
-    name_tree r;
-    build_node(r, root_);
+    name_tree r(make_name_tree(*root_));
 
-    BOOST_LOG_SEV(lg, debug) << "finished build. Final name: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished build. Final name: " << r;
 
     return r;
 }
