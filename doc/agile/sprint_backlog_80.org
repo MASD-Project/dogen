@@ -12,23 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-02-11 Thu 22:44]
+#+CAPTION: Clock summary at [2016-02-11 Thu 23:21]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *19:09* |       |      | 100.0 |
+| *Total time*                                                                | *19:46* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 19:09   |       |      | 100.0 |
-| Active                                                                      |         | 19:09 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 3:30 |  18.3 |
-| COMPLETED Make context non-generatable                                      |         |       | 0:49 |   4.3 |
-| COMPLETED Setup logging syntax highlighting on emacs                        |         |       | 2:32 |  13.2 |
-| COMPLETED Create next interesting blog post                                 |         |       | 0:37 |   3.2 |
-| COMPLETED Rename =yarn::nested_name= to =yarn::name_tree=                   |         |       | 1:05 |   5.7 |
+| Stories                                                                     | 19:46   |       |      | 100.0 |
+| Active                                                                      |         | 19:46 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 3:30 |  17.7 |
+| COMPLETED Make context non-generatable                                      |         |       | 0:49 |   4.1 |
+| COMPLETED Setup logging syntax highlighting on emacs                        |         |       | 2:32 |  12.8 |
+| COMPLETED Create next interesting blog post                                 |         |       | 0:37 |   3.1 |
+| COMPLETED Rename =yarn::nested_name= to =yarn::name_tree=                   |         |       | 1:05 |   5.5 |
 | COMPLETED Rename =type= to =parsed_type=                                    |         |       | 0:14 |   1.2 |
-| COMPLETED Add index support for =yarn::name_tree=                           |         |       | 1:56 |  10.1 |
-| STARTED Help conan with strange warning                                     |         |       | 1:30 |   7.8 |
-| STARTED Add an helper method interface                                      |         |       | 6:56 |  36.2 |
+| COMPLETED Add index support for =yarn::name_tree=                           |         |       | 1:56 |   9.8 |
+| STARTED Help conan with strange warning                                     |         |       | 1:30 |   7.6 |
+| STARTED Add an helper method interface                                      |         |       | 6:56 |  35.1 |
+| STARTED Create a context factory                                            |         |       | 0:37 |   3.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -218,7 +219,8 @@ Tasks:
   settings. It should also consult the registrar to see if there are
   any helpers available for this formatter and family.
 
-*** Create a context factory                                          :story:
+*** STARTED Create a context factory                                  :story:
+    CLOCK: [2016-02-11 Thu 22:44]--[2016-02-11 Thu 23:21] =>  0:37
 
 We should have a class responsible for generating the context given
 all the required inputs, doing filtering, etc.
