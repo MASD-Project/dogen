@@ -732,11 +732,22 @@ primitives. In addition, there are some primitives which are C++
 specific (=wchar_t=), as well as others which are only valid in
 certain cases such as =void=. This needs a bit of thinking.
 
-we could look for all primitives in the global namespace. Or we could
+We could look for all primitives in the global namespace. Or we could
 have a tag in the types that describes them in a way that we can
 filter: =hardware_type= flag? The problem is that we need the
 identifier parser in order to load models and we need the loaded
 models in order to locate these types.
+
+One solution for this problem is to move the properties expansion to
+later on after the front end workflow has finished executing. Once we
+have a merged model we can then easily take the primitives container
+and inject that into the identifier parser. The only slight problem is
+that we need to know of the top-level modules for a given model in
+order to use the identifier parser. This means we need to expand
+unparsed types before merging. There is a circular dependency here.
+
+We somehow need a first pass to obtain all the primitives and a second
+pass to parse.
 
 *** Improve file importer errors                                      :story:
 
