@@ -40,9 +40,6 @@ namespace yarn {
  */
 class name_tree_parser {
 public:
-    name_tree_parser();
-
-public:
     /**
      * @brief Initialises the parser.
      *
@@ -61,8 +58,8 @@ public:
     name_tree parse(const std::string& s) const;
 
 private:
-    const std::unordered_set<std::string> top_level_modules_;
-    const location model_location_;
+    const std::unordered_set<std::string>& top_level_modules_;
+    const location& model_location_;
 };
 
 } }

@@ -167,10 +167,6 @@ struct grammar : qi::grammar<Iterator> {
 namespace dogen {
 namespace yarn {
 
-name_tree_parser::name_tree_parser() :
-    top_level_modules_(std::unordered_set<std::string>()),
-    model_location_(location()) { }
-
 name_tree_parser::
 name_tree_parser(const std::unordered_set<std::string>& top_level_modules,
     const location& model_location)

@@ -73,8 +73,8 @@ public:
     name_tree build();
 
 private:
-    const std::unordered_set<std::string> top_level_modules_;
-    const location model_location_;
+    const std::unordered_set<std::string>& top_level_modules_;
+    const location& model_location_;
     std::list<std::string> names_;
     boost::shared_ptr<node> root_;
     boost::shared_ptr<node> current_;
