@@ -52,7 +52,9 @@ std::ostream& operator<<(std::ostream& s, const name_tree& v) {
       << "\"parent\": " << v.parent() << ", "
       << "\"children\": " << v.children() << ", "
       << "\"are_children_opaque\": " << v.are_children_opaque() << ", "
-      << "\"is_circular_dependency\": " << v.is_circular_dependency()
+      << "\"is_circular_dependency\": " << v.is_circular_dependency() << ", "
+      << "\"cardinality\": " << v.cardinality() << ", "
+      << "\"index\": " << v.index()
       << " }";
     return(s);
 }

@@ -56,7 +56,9 @@ public:
         const dogen::yarn::name& parent,
         const std::list<dogen::yarn::name_tree>& children,
         const bool are_children_opaque,
-        const bool is_circular_dependency);
+        const bool is_circular_dependency,
+        const unsigned int cardinality,
+        const unsigned int index);
 
 private:
     template<typename Archive>
@@ -106,6 +108,22 @@ public:
     void is_circular_dependency(const bool v);
     /**@}*/
 
+    /**
+     * @brief Cardinality of the name tree, starting at the current node.
+     */
+    /**@{*/
+    unsigned int cardinality() const;
+    void cardinality(const unsigned int v);
+    /**@}*/
+
+    /**
+     * @brief Index for the current node. Root has index of zero.
+     */
+    /**@{*/
+    unsigned int index() const;
+    void index(const unsigned int v);
+    /**@}*/
+
 public:
     bool operator==(const name_tree& rhs) const;
     bool operator!=(const name_tree& rhs) const {
@@ -121,6 +139,8 @@ private:
     std::list<dogen::yarn::name_tree> children_;
     bool are_children_opaque_;
     bool is_circular_dependency_;
+    unsigned int cardinality_;
+    unsigned int index_;
 };
 
 } }

@@ -39,6 +39,12 @@ namespace yarn {
 
 /**
  * @brief Creates a name tree as directed by the external caller.
+ *
+ * Starts by producing an intermediate representation using @e nodes,
+ * and then transforms that intermediate representation into a name
+ * tree. The generation of the intermediate representation is done via
+ * a notification mechanism, with the client being responsible for
+ * providing the notifications into the builder.
  */
 class name_tree_builder {
 public:
@@ -54,12 +60,15 @@ public:
         const location& model_location);
 
 private:
+    /**
+     * Notify the end of the current node, allowing for any required
+     * post-processing.
+     */
     void finish_current_node();
-    name_tree make_name_tree(const node& n);
 
 public:
     /**
-     * @brief Adds the element name to the tree.
+     * @brief Adds the name to the tree.
      */
     void add_name(const std::string& n);
 
@@ -67,9 +76,34 @@ public:
      * @brief Adds the primitive element name to the tree.
      */
     void add_primitive(const std::string& n);
+
+    /**
+     * @brief Notify the start of children.
+     */
     void start_children();
+
+    /**
+     * @brief Notify the presence of an additional child name.
+     */
     void next_child();
+
+    /**
+     * @brief Notify the end of children.
+     */
     void end_children();
+
+private:
+    /**
+     * @brief Generate the name tree for the given node
+     * representation.
+     */
+    name_tree make_name_tree(const node& n, unsigned int index);
+
+public:
+    /**
+     * @brief Generate the name tree representation for the current
+     * node representation.
+     */
     name_tree build();
 
 private:

@@ -25,17 +25,23 @@ namespace yarn {
 
 name_tree::name_tree()
     : are_children_opaque_(static_cast<bool>(0)),
-      is_circular_dependency_(static_cast<bool>(0)) { }
+      is_circular_dependency_(static_cast<bool>(0)),
+      cardinality_(static_cast<unsigned int>(0)),
+      index_(static_cast<unsigned int>(0)) { }
 
 name_tree::name_tree(
     const dogen::yarn::name& parent,
     const std::list<dogen::yarn::name_tree>& children,
     const bool are_children_opaque,
-    const bool is_circular_dependency)
+    const bool is_circular_dependency,
+    const unsigned int cardinality,
+    const unsigned int index)
     : parent_(parent),
       children_(children),
       are_children_opaque_(are_children_opaque),
-      is_circular_dependency_(is_circular_dependency) { }
+      is_circular_dependency_(is_circular_dependency),
+      cardinality_(cardinality),
+      index_(index) { }
 
 void name_tree::swap(name_tree& other) noexcept {
     using std::swap;
@@ -43,13 +49,17 @@ void name_tree::swap(name_tree& other) noexcept {
     swap(children_, other.children_);
     swap(are_children_opaque_, other.are_children_opaque_);
     swap(is_circular_dependency_, other.is_circular_dependency_);
+    swap(cardinality_, other.cardinality_);
+    swap(index_, other.index_);
 }
 
 bool name_tree::operator==(const name_tree& rhs) const {
     return parent_ == rhs.parent_ &&
         children_ == rhs.children_ &&
         are_children_opaque_ == rhs.are_children_opaque_ &&
-        is_circular_dependency_ == rhs.is_circular_dependency_;
+        is_circular_dependency_ == rhs.is_circular_dependency_ &&
+        cardinality_ == rhs.cardinality_ &&
+        index_ == rhs.index_;
 }
 
 name_tree& name_tree::operator=(name_tree other) {
@@ -104,6 +114,22 @@ bool name_tree::is_circular_dependency() const {
 
 void name_tree::is_circular_dependency(const bool v) {
     is_circular_dependency_ = v;
+}
+
+unsigned int name_tree::cardinality() const {
+    return cardinality_;
+}
+
+void name_tree::cardinality(const unsigned int v) {
+    cardinality_ = v;
+}
+
+unsigned int name_tree::index() const {
+    return index_;
+}
+
+void name_tree::index(const unsigned int v) {
+    index_ = v;
 }
 
 } }

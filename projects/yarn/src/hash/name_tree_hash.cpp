@@ -49,6 +49,8 @@ std::size_t name_tree_hasher::hash(const name_tree& v) {
     combine(seed, hash_std_list_dogen_yarn_name_tree(v.children()));
     combine(seed, v.are_children_opaque());
     combine(seed, v.is_circular_dependency());
+    combine(seed, v.cardinality());
+    combine(seed, v.index());
 
     return seed;
 }
