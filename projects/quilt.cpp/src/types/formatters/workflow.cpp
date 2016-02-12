@@ -33,6 +33,7 @@
 #include "dogen/quilt.cpp/types/formattables/formattable_visitor.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
+#include "dogen/quilt.cpp/types/formatters/element_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 
 namespace {
@@ -222,132 +223,6 @@ cpp::formatters::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-class yarn_dispatcher final : public yarn::element_visitor {
-public:
-    yarn_dispatcher(const context_factory& f, const container& c)
-        : factory_(f), container_(c) {}
-
-public:
-    /**
-     * @brief Returns all the generated files.
-     */
-    const std::forward_list<dogen::formatters::file>& files();
-
-private:
-    const std::unordered_map<std::string,
-                             formattables::formatter_properties>&
-    properties_for_name(const yarn::name& n) const;
-
-    bool is_formatter_enabled(const std::unordered_map<std::string,
-        formattables::formatter_properties>& fp,
-        const std::string& formatter_name) const;
-
-private:
-    template<typename Formatter, typename YarnElement>
-    void format(const Formatter& f, const YarnElement& e) {
-
-        const auto qn(e.name().qualified());
-        const auto fn(f.ownership_hierarchy().formatter_name());
-        BOOST_LOG_SEV(lg, debug) << "Formatting: '" << qn << "' with '"
-                                 << fn << "'";
-
-        const auto ctx(factory_.make(e.name().qualified()));
-        const auto fp(ctx.formatter_properties());
-        const auto i(fp.find(fn));
-        if (i == fp.end()) {
-            BOOST_LOG_SEV(lg, error) << formatter_properties_not_found << fn;
-            BOOST_THROW_EXCEPTION(
-                workflow_error(formatter_properties_not_found + fn));
-        }
-
-        const auto is_formatter_enabled(i->second.enabled());
-        if (!is_formatter_enabled) {
-            BOOST_LOG_SEV(lg, debug) << "Formatter not enabled for type.";
-            return;
-        }
-
-        auto file(f.format(ctx, e));
-
-        files_.push_front(file);
-        if (!file.overwrite()) {
-            BOOST_LOG_SEV(lg, debug) << "Filename: "
-                                     << file.path().generic_string();
-            BOOST_LOG_SEV(lg, debug) << "Content: "
-                                     << (file.content().empty() ? "<empty>" :
-                                         file.content());
-            BOOST_LOG_SEV(lg, debug) << "Finished formatting: '" << qn << "'";
-        } else {
-            BOOST_LOG_SEV(lg, debug) << "Not dumping file contents to log "
-                                     << "(overwrite is false).";
-        }
-    }
-
-    template<typename Formatter, typename Formattable>
-        void format(const std::forward_list<std::shared_ptr<Formatter>>& fc,
-            const Formattable& e) {
-        for (const auto f : fc)
-            format(*f, e);
-    }
-
-
-public:
-    using yarn::element_visitor::visit;
-    void visit(const dogen::yarn::module& m) override {
-        if (m.documentation().empty())
-            return;
-
-        format(container_.namespace_formatters(), m);
-    }
-    void visit(const dogen::yarn::concept& /*c*/) override {}
-    void visit(const dogen::yarn::primitive& /*p*/) override {}
-    void visit(const dogen::yarn::enumeration& e) override {
-        format(container_.enum_formatters(), e);
-    }
-    void visit(const dogen::yarn::object& /*o*/) override {}
-    void visit(const dogen::yarn::exception& e) override {
-        format(container_.exception_formatters(), e);
-    }
-    void visit(const dogen::yarn::visitor& v) override {
-        format(container_.visitor_formatters(), v);
-    }
-
-
-public:
-    /**
-     * @brief Converts the supplied entity into all supported
-     * representations.
-     */
-    void format(const yarn::element& e);
-
-private:
-    const context_factory factory_;
-    const container& container_;
-    std::forward_list<dogen::formatters::file> files_;
-};
-
-const std::forward_list<dogen::formatters::file>& yarn_dispatcher::files() {
-    return files_;
-}
-
-
-bool yarn_dispatcher::is_formatter_enabled(const std::unordered_map<std::string,
-    formattables::formatter_properties>& fp,
-    const std::string& formatter_name) const {
-    const auto i(fp.find(formatter_name));
-    if (i == fp.end()) {
-        BOOST_LOG_SEV(lg, error) << formatter_properties_not_found
-                                 << formatter_name;
-        BOOST_THROW_EXCEPTION(
-            workflow_error(formatter_properties_not_found + formatter_name));
-    }
-    BOOST_LOG_SEV(lg, debug) << "enabled: " << i->second.enabled();
-    return i->second.enabled();
-}
-
-void yarn_dispatcher::format(const yarn::element& e) {
-    e.accept(*this);
-}
-
 std::forward_list<dogen::formatters::file>
 workflow::execute(const settings::bundle_repository& brp,
     const settings::helper_settings_repository& hsrp,
@@ -379,15 +254,15 @@ workflow::execute(const settings::bundle_repository& brp,
 
     BOOST_LOG_SEV(lg, debug) << "Starting workflow - yarn version.";
 
+    std::forward_list<dogen::formatters::file> r;
     context_factory factory(brp, hsrp, fprp, registrar().formatter_helpers());
-    yarn_dispatcher d(factory, registrar().formatter_container());
+    element_formatter ef(factory, registrar().formatter_container());
     for (const auto e : elements) {
         BOOST_LOG_SEV(lg, warn) << "Processing element: "
                                 << e->name().qualified();
-        d.format(*e);
+        r.splice_after(r.before_begin(), ef.format(*e));
     }
 
-    const auto r(d.files());
     BOOST_LOG_SEV(lg, debug) << "Files generated: ";
     for (const auto& file : r)
         BOOST_LOG_SEV(lg, debug) << "Name: " << file.path().generic_string();

@@ -81,6 +81,7 @@
 #include "dogen/quilt.cpp/types/formattables/cmakelists_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/provision_error.hpp"
 #include "dogen/quilt.cpp/types/formattables/registrar_error.hpp"
+#include "dogen/quilt.cpp/types/formatters/element_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/initializer.hpp"
 #include "dogen/quilt.cpp/types/formattables/nested_type_info.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_options_info.hpp"
