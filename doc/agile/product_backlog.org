@@ -10,6 +10,19 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider adding =fileset= to formatters                           :story:
+
+We are using collections of files quite a bit, and it makes sense to
+create an abstraction for it such as a =fileset=. However, for this to
+work properly we need to add at least one basic behaviours: the
+ability to merge two file sets. Or else we will end up having to
+unpack the files, then merging them, then creating a new fileset.
+
+Problem is, we either create the fileset as a non-generatable type -
+not ideal - or we create it as generatable and need to add this as a
+free function. We need to wait until dogen has support for merging
+code generation.
+
 *** Create a debug build for clang in travis                          :story:
 
 In order to enable code coverage we need to have a debug build. For
