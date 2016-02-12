@@ -37,6 +37,7 @@
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatter_properties_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar.hpp"
+#include "dogen/quilt.cpp/types/formatters/context_factory.hpp"
 
 namespace dogen {
 namespace quilt {

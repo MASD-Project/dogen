@@ -26,7 +26,6 @@
 #endif
 
 #include <string>
-#include "dogen/yarn/types/name.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
 #include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
@@ -51,20 +50,34 @@ public:
 private:
     const std::unordered_map<std::string,
                              formattables::formatter_properties>&
-    properties_for_name(const yarn::name& n) const;
+    properties_for_name(const std::string& n) const;
 
-    const settings::bundle& bundle_for_name(const yarn::name& n) const;
+    const settings::bundle& bundle_for_name(const std::string& n) const;
 
-    context make(const yarn::name& n) const;
+public:
+    context make(const std::string& n) const;
+    context make_empty_context() const;
 
 private:
+    static const settings::bundle empty_bundle_;
+    static const std::unordered_map<std::string, settings::helper_settings>
+    empty_helper_settings_;
+    static const std::unordered_map<std::string,
+                                    formattables::formatter_properties>
+    empty_formatter_properties_;
+    static const std::unordered_map<
+        std::string,
+        std::unordered_map<
+            std::string,
+            std::shared_ptr<formatter_helper_interface>>> empty_helpers_;
+
     const settings::bundle_repository& bundle_;
     const settings::helper_settings_repository& helper_settings_;
     const formattables::formatter_properties_repository& formatter_properties_;
     const std::unordered_map<
         std::string,
-        std::unordered_map<std::string
-                           , std::shared_ptr<formatter_helper_interface>>>&
+        std::unordered_map<std::string,
+                           std::shared_ptr<formatter_helper_interface>>>&
         formatter_helpers_;
 };
 

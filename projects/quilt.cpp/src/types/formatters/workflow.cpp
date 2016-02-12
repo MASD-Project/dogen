@@ -58,12 +58,7 @@ namespace formatters {
  */
 class dispatcher final : public formattables::formattable_visitor {
 public:
-    dispatcher(const settings::bundle_repository& brp,
-        const settings::helper_settings_repository& hsrp,
-        const formattables::formatter_properties_repository& fprp,
-        const std::unordered_map<std::string, std::unordered_map<std::string,
-        std::shared_ptr<formatter_helper_interface>>>& helpers,
-        const container& c);
+    dispatcher(const context_factory& f, const container& c);
     ~dispatcher() noexcept { }
 
 private:
@@ -73,7 +68,7 @@ private:
         const auto fn(f.ownership_hierarchy().formatter_name());
         BOOST_LOG_SEV(lg, debug) << "Formatting with: '" << fn << "'";
 
-        auto file(f.format(empty_context_, e));
+        auto file(f.format(factory_.make_empty_context(), e));
 
         if (empty_out_content) {
             BOOST_LOG_SEV(lg, debug) << "Emptying out content.";
@@ -100,37 +95,21 @@ private:
         BOOST_LOG_SEV(lg, debug) << "Formatting: '" << e.name()
                                  << "' with '" << fn << "'";
 
-        const auto fp(formatter_properties_.formatter_properties_by_name());
-        const auto i(fp.find(e.id()));
+        const auto ctx(factory_.make(e.id()));
+        const auto fp(ctx.formatter_properties());
+        const auto i(fp.find(fn));
         if (i == fp.end()) {
-            BOOST_LOG_SEV(lg, error) << formatter_properties_not_found
-                                     << e.id();
-            BOOST_THROW_EXCEPTION(
-                workflow_error(formatter_properties_not_found + e.id()));
-        }
-
-        const auto j(i->second.find(fn));
-        if (j == i->second.end()) {
             BOOST_LOG_SEV(lg, error) << formatter_properties_not_found << fn;
             BOOST_THROW_EXCEPTION(
                 workflow_error(formatter_properties_not_found + fn));
         }
 
-        const auto is_formatter_enabled(j->second.enabled());
+        const auto is_formatter_enabled(i->second.enabled());
         if (!is_formatter_enabled) {
             BOOST_LOG_SEV(lg, debug) << "Formatter not enabled for type.";
             return;
         }
 
-        const auto& b(bundle_.bundles_by_name());
-        const auto k(b.find(e.id()));
-        if (k == b.end()) {
-            BOOST_LOG_SEV(lg, error) << bundle_not_found << e.id();
-            BOOST_THROW_EXCEPTION(workflow_error(bundle_not_found + e.id()));
-        }
-
-        const auto& hs(helper_settings_.helper_settings_by_name());
-        const context ctx(k->second, hs, i->second, helpers_);
         auto file(f.format(ctx, e));
 
         if (empty_out_content) {
@@ -191,36 +170,13 @@ public:
     const std::forward_list<dogen::formatters::file>& files();
 
 private:
-    const settings::bundle empty_bundle_;
-    const std::unordered_map<std::string, formattables::formatter_properties>
-        empty_formatter_properties_;
-    const std::unordered_map<std::string, settings::helper_settings>
-        empty_helper_settings_;
-    const std::unordered_map<
-        std::string,
-        std::unordered_map<
-            std::string,
-            std::shared_ptr<formatter_helper_interface>>>& helpers_;
-    const context empty_context_;
-    const settings::bundle_repository& bundle_;
-    const settings::helper_settings_repository& helper_settings_;
-    const formattables::formatter_properties_repository& formatter_properties_;
+    const context_factory factory_;
     const container& container_;
     std::forward_list<dogen::formatters::file> files_;
 };
 
-dispatcher::dispatcher(const settings::bundle_repository& brp,
-    const settings::helper_settings_repository& hsrp,
-    const formattables::formatter_properties_repository& fprp,
-    const std::unordered_map<std::string, std::unordered_map<
-    std::string, std::shared_ptr<formatter_helper_interface>>>& helpers,
-    const container& c)
-    : empty_bundle_(), empty_formatter_properties_(),
-      empty_helper_settings_(), helpers_(helpers),
-      empty_context_(empty_bundle_, empty_helper_settings_,
-          empty_formatter_properties_, helpers_), bundle_(brp),
-      helper_settings_(hsrp), formatter_properties_(fprp),
-      container_(c) { }
+dispatcher::dispatcher(const context_factory& f, const container& c)
+    : factory_(f), container_(c) { }
 
 void dispatcher::visit(const formattables::class_info& c) {
     const bool empty_out_content(
@@ -268,13 +224,8 @@ cpp::formatters::registrar& workflow::registrar() {
 
 class yarn_dispatcher final : public yarn::element_visitor {
 public:
-    yarn_dispatcher(const settings::bundle_repository& brp,
-        const settings::helper_settings_repository& hsrp,
-        const formattables::formatter_properties_repository& fprp,
-        const std::unordered_map<std::string, std::unordered_map<
-        std::string, std::shared_ptr<formatter_helper_interface>>>& helpers,
-        const container& c) : bundle_(brp), helper_settings_(hsrp),
-        formatter_properties_(fprp), helpers_(helpers), container_(c) {}
+    yarn_dispatcher(const context_factory& f, const container& c)
+        : factory_(f), container_(c) {}
 
 public:
     /**
@@ -291,9 +242,6 @@ private:
         formattables::formatter_properties>& fp,
         const std::string& formatter_name) const;
 
-    context create_context_for_name(const std::unordered_map<std::string,
-        formattables::formatter_properties>& fp, const yarn::name& n) const;
-
 private:
     template<typename Formatter, typename YarnElement>
     void format(const Formatter& f, const YarnElement& e) {
@@ -303,13 +251,21 @@ private:
         BOOST_LOG_SEV(lg, debug) << "Formatting: '" << qn << "' with '"
                                  << fn << "'";
 
-        const auto& fp(properties_for_name(e.name()));
-        if (!is_formatter_enabled(fp, fn)) {
+        const auto ctx(factory_.make(e.name().qualified()));
+        const auto fp(ctx.formatter_properties());
+        const auto i(fp.find(fn));
+        if (i == fp.end()) {
+            BOOST_LOG_SEV(lg, error) << formatter_properties_not_found << fn;
+            BOOST_THROW_EXCEPTION(
+                workflow_error(formatter_properties_not_found + fn));
+        }
+
+        const auto is_formatter_enabled(i->second.enabled());
+        if (!is_formatter_enabled) {
             BOOST_LOG_SEV(lg, debug) << "Formatter not enabled for type.";
             return;
         }
 
-        const auto ctx(create_context_for_name(fp, e.name()));
         auto file(f.format(ctx, e));
 
         files_.push_front(file);
@@ -364,14 +320,7 @@ public:
     void format(const yarn::element& e);
 
 private:
-    const settings::bundle_repository& bundle_;
-    const settings::helper_settings_repository& helper_settings_;
-    const formattables::formatter_properties_repository& formatter_properties_;
-    const std::unordered_map<
-        std::string,
-        std::unordered_map<
-            std::string,
-            std::shared_ptr<formatter_helper_interface>>>& helpers_;
+    const context_factory factory_;
     const container& container_;
     std::forward_list<dogen::formatters::file> files_;
 };
@@ -380,18 +329,6 @@ const std::forward_list<dogen::formatters::file>& yarn_dispatcher::files() {
     return files_;
 }
 
-const std::unordered_map<std::string, formattables::formatter_properties>&
-yarn_dispatcher::properties_for_name(const yarn::name& n) const {
-    const auto& fp(formatter_properties_.formatter_properties_by_name());
-    const auto qn(n.qualified());
-    const auto i(fp.find(qn));
-    if (i == fp.end()) {
-        BOOST_LOG_SEV(lg, error) << formatter_properties_not_found << qn;
-        BOOST_THROW_EXCEPTION(
-            workflow_error(formatter_properties_not_found + qn));
-    }
-    return i->second;
-}
 
 bool yarn_dispatcher::is_formatter_enabled(const std::unordered_map<std::string,
     formattables::formatter_properties>& fp,
@@ -407,21 +344,6 @@ bool yarn_dispatcher::is_formatter_enabled(const std::unordered_map<std::string,
     return i->second.enabled();
 }
 
-context yarn_dispatcher::
-create_context_for_name(const std::unordered_map<std::string,
-    formattables::formatter_properties>& fp, const yarn::name& n) const {
-    const auto& b(bundle_.bundles_by_name());
-    const auto qn(n.qualified());
-    const auto i(b.find(qn));
-    if (i == b.end()) {
-        BOOST_LOG_SEV(lg, error) << bundle_not_found << qn;
-        BOOST_THROW_EXCEPTION(workflow_error(bundle_not_found + qn));
-    }
-
-    const auto& hs(helper_settings_.helper_settings_by_name());
-    return context(i->second, hs, fp, helpers_);
-}
-
 void yarn_dispatcher::format(const yarn::element& e) {
     e.accept(*this);
 }
@@ -433,8 +355,8 @@ workflow::execute(const settings::bundle_repository& brp,
     const std::forward_list<
     std::shared_ptr<formattables::formattable> >& f) const {
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
-    dispatcher d(brp, hsrp, fprp, registrar().formatter_helpers(),
-        registrar().formatter_container());
+    context_factory factory(brp, hsrp, fprp, registrar().formatter_helpers());
+    dispatcher d(factory, registrar().formatter_container());
     for (const auto sp : f)
         d.format(*sp);
 
@@ -445,6 +367,7 @@ workflow::execute(const settings::bundle_repository& brp,
 
     BOOST_LOG_SEV(lg, debug) << "Finished workflow.";
     return r;
+
 }
 
 std::forward_list<dogen::formatters::file>
@@ -455,8 +378,9 @@ workflow::execute(const settings::bundle_repository& brp,
     boost::shared_ptr<yarn::element> >& elements) const {
 
     BOOST_LOG_SEV(lg, debug) << "Starting workflow - yarn version.";
-    yarn_dispatcher d(brp, hsrp, fprp, registrar().formatter_helpers(),
-        registrar().formatter_container());
+
+    context_factory factory(brp, hsrp, fprp, registrar().formatter_helpers());
+    yarn_dispatcher d(factory, registrar().formatter_container());
     for (const auto e : elements) {
         BOOST_LOG_SEV(lg, warn) << "Processing element: "
                                 << e->name().qualified();

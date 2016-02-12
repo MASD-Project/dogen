@@ -12,24 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-02-11 Thu 23:21]
+#+CAPTION: Clock summary at [2016-02-12 Fri 16:51]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *19:46* |       |      | 100.0 |
+| *Total time*                                                                | *20:22* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 19:46   |       |      | 100.0 |
-| Active                                                                      |         | 19:46 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 3:30 |  17.7 |
-| COMPLETED Make context non-generatable                                      |         |       | 0:49 |   4.1 |
-| COMPLETED Setup logging syntax highlighting on emacs                        |         |       | 2:32 |  12.8 |
-| COMPLETED Create next interesting blog post                                 |         |       | 0:37 |   3.1 |
-| COMPLETED Rename =yarn::nested_name= to =yarn::name_tree=                   |         |       | 1:05 |   5.5 |
-| COMPLETED Rename =type= to =parsed_type=                                    |         |       | 0:14 |   1.2 |
-| COMPLETED Add index support for =yarn::name_tree=                           |         |       | 1:56 |   9.8 |
-| STARTED Help conan with strange warning                                     |         |       | 1:30 |   7.6 |
-| STARTED Add an helper method interface                                      |         |       | 6:56 |  35.1 |
-| STARTED Create a context factory                                            |         |       | 0:37 |   3.1 |
+| Stories                                                                     | 20:22   |       |      | 100.0 |
+| Active                                                                      |         | 20:22 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 3:30 |  17.2 |
+| COMPLETED Make context non-generatable                                      |         |       | 0:49 |   4.0 |
+| COMPLETED Setup logging syntax highlighting on emacs                        |         |       | 2:32 |  12.4 |
+| COMPLETED Create next interesting blog post                                 |         |       | 0:37 |   3.0 |
+| COMPLETED Rename =yarn::nested_name= to =yarn::name_tree=                   |         |       | 1:05 |   5.3 |
+| COMPLETED Rename =type= to =parsed_type=                                    |         |       | 0:14 |   1.1 |
+| COMPLETED Add index support for =yarn::name_tree=                           |         |       | 1:56 |   9.5 |
+| COMPLETED Create a context factory                                          |         |       | 1:13 |   6.0 |
+| STARTED Help conan with strange warning                                     |         |       | 1:30 |   7.4 |
+| STARTED Add an helper method interface                                      |         |       | 6:56 |  34.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -127,6 +127,14 @@ one as we walk the tree. We can go for depth first but it doesn't
 really matter what approach we use for naming provided the names are
 unique (for a given property) and go from 0 to the height of the tree.
 
+*** COMPLETED Create a context factory                                :story:
+    CLOSED: [2016-02-12 Fri 16:51]
+    CLOCK: [2016-02-12 Fri 16:15]--[2016-02-12 Fri 16:51] =>  0:36
+    CLOCK: [2016-02-11 Thu 22:44]--[2016-02-11 Thu 23:21] =>  0:37
+
+We should have a class responsible for generating the context given
+all the required inputs, doing filtering, etc.
+
 *** STARTED Help conan with strange warning                           :story:
     CLOCK: [2016-02-10 Wed 22:17]--[2016-02-10 Wed 22:35] =>  0:18
     CLOCK: [2016-02-10 Wed 21:55]--[2016-02-10 Wed 22:16] =>  0:21
@@ -218,12 +226,6 @@ Tasks:
   the nested name (nested info for now) and pick the helper
   settings. It should also consult the registrar to see if there are
   any helpers available for this formatter and family.
-
-*** STARTED Create a context factory                                  :story:
-    CLOCK: [2016-02-11 Thu 22:44]--[2016-02-11 Thu 23:21] =>  0:37
-
-We should have a class responsible for generating the context given
-all the required inputs, doing filtering, etc.
 
 *** Split dispatcher from formatters workflow and rename it           :story:
 
