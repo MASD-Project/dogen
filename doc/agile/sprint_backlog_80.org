@@ -12,26 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-02-12 Fri 18:47]
+#+CAPTION: Clock summary at [2016-02-13 Sat 00:42]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *21:46* |       |      | 100.0 |
+| *Total time*                                                                | *23:31* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 21:46   |       |      | 100.0 |
-| Active                                                                      |         | 21:46 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 3:35 |  16.5 |
-| COMPLETED Make context non-generatable                                      |         |       | 0:49 |   3.8 |
-| COMPLETED Setup logging syntax highlighting on emacs                        |         |       | 2:32 |  11.6 |
-| COMPLETED Create next interesting blog post                                 |         |       | 0:37 |   2.8 |
-| COMPLETED Rename =yarn::nested_name= to =yarn::name_tree=                   |         |       | 1:05 |   5.0 |
-| COMPLETED Rename =type= to =parsed_type=                                    |         |       | 0:14 |   1.1 |
-| COMPLETED Add index support for =yarn::name_tree=                           |         |       | 1:56 |   8.9 |
-| COMPLETED Create a context factory                                          |         |       | 1:13 |   5.6 |
-| COMPLETED Split dispatcher from formatters workflow and rename it           |         |       | 0:57 |   4.4 |
-| COMPLETED Create a contributing document for Github                         |         |       | 0:22 |   1.7 |
-| STARTED Help conan with strange warning                                     |         |       | 1:30 |   6.9 |
-| STARTED Add an helper method interface                                      |         |       | 6:56 |  31.9 |
+| Stories                                                                     | 23:31   |       |      | 100.0 |
+| Active                                                                      |         | 23:31 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 3:35 |  15.2 |
+| COMPLETED Make context non-generatable                                      |         |       | 0:49 |   3.5 |
+| COMPLETED Setup logging syntax highlighting on emacs                        |         |       | 2:32 |  10.8 |
+| COMPLETED Create next interesting blog post                                 |         |       | 0:37 |   2.6 |
+| COMPLETED Rename =yarn::nested_name= to =yarn::name_tree=                   |         |       | 1:05 |   4.6 |
+| COMPLETED Rename =type= to =parsed_type=                                    |         |       | 0:14 |   1.0 |
+| COMPLETED Add index support for =yarn::name_tree=                           |         |       | 1:56 |   8.2 |
+| COMPLETED Create a context factory                                          |         |       | 1:13 |   5.2 |
+| COMPLETED Split dispatcher from formatters workflow and rename it           |         |       | 0:57 |   4.0 |
+| COMPLETED Create a contributing document for Github                         |         |       | 0:22 |   1.6 |
+| STARTED Help conan with strange warning                                     |         |       | 1:30 |   6.4 |
+| STARTED Add an helper method interface                                      |         |       | 6:56 |  29.5 |
+| STARTED Add properties for helpers                                          |         |       | 1:45 |   7.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -162,6 +163,13 @@ list<file>=).
 We should copy one of the the standard "contributing" docos into
 Dogen. A good example is [[https://github.com/nlamirault/emacs-travis/blob/master/CONTRIBUTING.md][this]] one.
 
+*** COMPLETED Implement formatters workflow in terms of new classes   :story:
+    CLOSED: [2016-02-12 Fri 23:15]
+
+Update the workflow to use =context_factory= and =fileset_buider=.
+
+We decided against fileset builder in the end.
+
 *** STARTED Help conan with strange warning                           :story:
     CLOCK: [2016-02-10 Wed 22:17]--[2016-02-10 Wed 22:35] =>  0:18
     CLOCK: [2016-02-10 Wed 21:55]--[2016-02-10 Wed 22:16] =>  0:21
@@ -254,18 +262,23 @@ Tasks:
   settings. It should also consult the registrar to see if there are
   any helpers available for this formatter and family.
 
-*** Implement formatters workflow in terms of new classes             :story:
+*** STARTED Add properties for helpers                               :story:
+    CLOCK: [2016-02-13 Sat 00:33]--[2016-02-13 Sat 00:41] =>  0:08
+    CLOCK: [2016-02-12 Fri 23:41]--[2016-02-13 Sat 00:32] =>  0:51
+    CLOCK: [2016-02-12 Fri 22:55]--[2016-02-12 Fri 23:41] =>  0:46
 
-Update the workflow to use =context_factory= and =fileset_buider=.
+We should pre-compute all of the required helper instances for a given
+element and have them ready for formatting. Create all of the types
+required for this.
 
-*** Add properties for =yarn::name_tree=                              :story:
+*Previous Understanding*
 
-We need to store the identifiable name of the nested name, as well as
+We need to store the identifiable name of the name tree, as well as
 the language specific representation of the type. The container should
-make use of the index - e.g. use a vector. The only problem is that we
-do not know what the size of the container is without doing look
-ups. We could have a property nested name size in stateful. Naming it
-is not easy though. Nested name cardinality?
+make use of the name tree index - e.g. use a vector. The only problem
+is that we do not know what the size of the container is without doing
+look ups. We could have a property nested name size in
+stateful. Naming it is not easy though. Nested name cardinality?
 
 *Previous Understanding*
 
@@ -288,14 +301,6 @@ with the required properties. With this the helpers can continue to
 rely on just the nested name (plus the nested name properties via the
 assistant).
 
-*** Initialise formatters in the formatter's translation unit         :story:
-
-At present we are initialising the formatters in each of the facet
-initialisers. However, it makes more sense to initialise them on the
-translation unit for each formatter. This will also make life easier
-when we move to a mustache world where there may not be a formatter
-header file at all.
-
 *** Update assistant to use new helper information                    :story:
 
 Once all the pieces are in place, the assistant can then use the
@@ -308,6 +313,14 @@ code. We can remove all previous helper support.
 Once all of the infrastructure is in place, we should not need this
 class any more. Remove code from transformer and remove object types
 and anything else that was used to dispatch based on type.
+
+*** Initialise formatters in the formatter's translation unit         :story:
+
+At present we are initialising the formatters in each of the facet
+initialisers. However, it makes more sense to initialise them on the
+translation unit for each formatter. This will also make life easier
+when we move to a mustache world where there may not be a formatter
+header file at all.
 
 *** Consider renaming =yarn::property= to attribute                   :story:
 
