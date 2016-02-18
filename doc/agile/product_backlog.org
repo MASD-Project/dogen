@@ -5055,9 +5055,9 @@ be applied at each level to achieve the desired effect.
 
 It would be great to be able to mark a type as an interface, add all
 methods that the interface has, and have dogen fully code-generate the
-interface, marking all methods as pure virtual, etc. We would want to
-distinguish this from the abstract base class case, because we may
-want to add one or more concrete methods to the ABC.
+interface, marking all methods as pure virtual, override, etc. We
+would want to distinguish this from the abstract base class case,
+because we may want to add one or more concrete methods to the ABC.
 
 *** Use error codes in exceptions                                     :story:
 
@@ -6246,18 +6246,19 @@ The ideal state of the world is one where:
 
 This story just keeps track of how we are using the different sewing
 terms in Dogen. We are only tracking terms which are not yet
-incorporated into the product.
+incorporated into the product. It also keeps track of ideas that have
+not yet allocated a term.
 
-| Term   | Meaning | Dogen usage                                            |
-|--------+---------+--------------------------------------------------------|
-| weave  |         | Not used yet. Reserved for AOP support                 |
-| [[https://en.wikipedia.org/wiki/Glossary_of_sewing_terms#D][dart]]   |         | Will be used for the skeleton generator tool           |
-| [[https://en.wikipedia.org/wiki/Yoke_(clothing)][yoke]]   |         | Not used yet.                                          |
-| tailor |         | Not used yet. Format converter? e.g. Dia to JSON, etc. |
-| jersey |         | Not used yet. Code generation service.                 |"
-| hem    |         | Not used yet. HTTP Wrapper around jersey.              |
-|        |         |                                                        |
-
+| Term   | Meaning | Dogen usage                                               |
+|--------+---------+-----------------------------------------------------------|
+| weave  |         | Not used yet. Reserved for AOP support                    |
+| [[https://en.wikipedia.org/wiki/Glossary_of_sewing_terms#D][dart]]   |         | Will be used for the skeleton generator tool              |
+| [[https://en.wikipedia.org/wiki/Yoke_(clothing)][yoke]]   |         | Not used yet.                                             |
+| tailor |         | Not used yet. Format converter? e.g. Dia to JSON, etc.    |
+| jersey |         | Not used yet. Code generation service.                    |
+| hem    |         | Not used yet. HTTP Wrapper around jersey.                 |
+|        |         | Tool to infer model from XML/JSON/CSV instance documents. |
+|        |         | Tool to infer model from SQL database schemas.            |
 
 *** Overuse of =std::set=, =std::map=, etc                            :story:
 
@@ -6700,6 +6701,8 @@ the functions have been assigned and call them. If not, throw.
 
 *** Use pimpl for a few "one-shot" services                           :story:
 
+<REVIEWING>
+
 We have quite a few services where it would be great to have
 transactional semantics. For example, when building a graph in
 =sml::grapher=, it would be great if one could have a list of objects
@@ -6747,7 +6750,10 @@ own formatter.
 have the ability to print them.
 #+end_quote
 
-We should build HTML and PDF representations of the manual.
+We should build HTML and PDF representations of the manual. When we
+start using worktrees we could also have a simple script that copies
+across these into the website. This can be done manually for now at
+the end of each script (running the script).
 
 *** Investigate the possibility of creating a mock facet              :story:
 
@@ -6756,13 +6762,14 @@ We should build HTML and PDF representations of the manual.
 so that I don't have to generate this code manually.
 #+end_quote
 
-This is straight out of left-field, but may actually be a good
-idea. One annoying thing with mocking frameworks such as [[http://turtle.sourceforge.net/index.html][turtle]] is
-the amount of macros. However, =dogen= already has all the required
-information needed to create an expectation based mock - the
+This is straight out of left-field (pardon the pun), but may actually
+be a good idea. One annoying thing with mocking frameworks such as
+[[http://turtle.sourceforge.net/index.html][turtle]] is the amount of macros. However, =dogen= already has all the
+required information needed to create an expectation based mock - the
 meta-model. We could mimic the turtle API with a mock facet that is
 made up of real C++ objects. When a class is marked as an interface,
-we could automatically generate its mock in a mock facet.
+we could automatically generate its mock in a mock facet and allow
+users to supply lambdas for the expectations.
 
 This will require proper operations support.
 
@@ -6778,6 +6785,9 @@ At present we only generate the types facet for exceptions. However,
 there is nothing stopping us from adding serialisation support for
 exceptions. This would be useful for example for services to convey
 errors on the remote end point. The same logic applies to io.
+
+This should be fairly straightforward since exceptions are simple
+types. We haven't got a use case for it yet though.
 
 *** Consider representing namespaces in file names rather than directories :story:
 
@@ -6800,6 +6810,11 @@ or, using dot notation, so we can distinguish namespaces from
 : /a_project/types.a.cpp
 : /a_project/io.a_io.cpp
 
+We do not have a use case for this yet, but it should be fairly
+straight forward to add it. We just need meta-data support to enable
+the feature and then take it into account when generating the file
+names (e.g. instead of using =/= as a separator, use =.=).
+
 *** Allow manual overrides to facets                                  :story:
 
 #+begin_quote
@@ -6812,43 +6827,31 @@ for a given facet. For example for qname it may make sense to use the
 string converter approach to do the actual JSON serialisation. However
 its not possible to just disable code generation of a given type's
 inserters and then provide a manual implementation. This could easily
-be achieved via dynamic extensions.
+be achieved via dynamic extensions: we could provide a meta-data
+parameter for each facet such as "generation type", manual or
+automatic. This can be done once we get rid of the current use of
+generation types for full/partial/no generation.
 
 *** Investigate ribosome for ideas                                    :story:
 
 [[http://ribosome.ch/][Ribosome]] seems like a templating tool with a simple syntax. May have
 some ideas useful for stitch.
 
-*** Generate service skeleton                                          :epic:
+*** Generate skeleton for "non-generatable" files                      :epic:
 
-Since we already have all of the boiler plate code for services such
-as licence, header guards, etc - we could just create a service
-skeleton to stop us from having to copy it from the forward
-declarations.
+We are using non-generatable files quite a lot (at present called
+"services"). Every time we do this we end up copying manually the
+contents of the forward declarations to setup the skeleton of the
+file. Since we already have all of the boiler plate code such as
+licence, header guards, etc, we could just create a skeleton to stop
+us from having to copy and paste it.
 
 In addition to the class definition, it should also define all of the
-automatic constructors, and add a private section at the bottom.
-
-Also, for cases where the service is implementing an interface, we
-should generate stubs for all methods, similar to what we'd do for the
-original interface, but marking the methods as override, and adding a
-blank implementation - with return types where required and commented
-out parameters, to make the code compilable out of the box.
-
-*** Implement stitch with merging                                      :epic:
-
-When we have merging support we can actually implement stitch in a
-good way. We could mark the formatters with meta-data stating they
-have a method which is a stitch template. That then results in a c++
-operation which makes reference to stitch. When converting yarn into
-the CPP model we can add a "content" property to the stitchable
-operations that contains the expansion of the stitch
-template. Finally, when inside of the stitch template that is
-code-generating, we will loop through all of the operations. For the
-stitched ones, we can then dump the content property. Merge support is
-required because formatters are always expected to have a component of
-hand-crafting (include providers etc) and cannot be implemented
-without it.
+automatic constructors, and add a private section at the
+bottom. Ideally we should also generate stubs for all methods - adding
+a blank implementation with return types where required and commented
+out parameters, to make the code compilable out of the box. This will
+be possible once we start supporting operations.
 
 *** Add merging code generation support                                :epic:
 
@@ -6860,13 +6863,17 @@ dogen.
 
 At present it is not possible to manually add methods to a class that
 was code generated; one must stop code generating the class and
-maintain the whole class manually. However, in some cases it makes
-sense to have a combination of both:
+maintain the whole class manually. This is made even more painful by
+the fact that one cannot add support for IO etc for these types
+manually.
+
+However, in a lot of cases it makes sense to have a combination of
+manually generated and code generated code:
 
 - value objects need helper methods such as for example boolean
   properties (e.g. =is_empty=) that make use of other properties, or
-  simple methods such as population etc that really belong to the
-  object rather than an external service
+  simple methods such as population etc that really belong in the
+  object rather than an external service;
 - services sometimes need state and it would be good if we could
   manage that via code generation.
 
@@ -6876,10 +6883,9 @@ it - but instead "intelligently" merges manual with code generated
 code.
 
 From the beginning we avoided this because we thought it would be too
-complicated for dogen. However, its increasingly becoming apparent
-that this is a needed feature for the real world - there are many
-cases where we are working around this deficiency. A few solutions are
-possible:
+complicated for dogen. However, its becoming apparent that this is a
+needed feature for the real world - there are many cases where we are
+working around this deficiency. A few solutions are possible:
 
 - let the code generator manage the header file and create two types
   of CPP files, one which includes the other: a manual and an
@@ -6897,20 +6903,21 @@ possible:
   determine which files require merging. The dynamic extension could
   be populated automatically (e.g. grep for the manual attribute) or
   manually. Note that using clang to do merging will make things a lot
-  slower.
+  slower so we probably want to know up front which files need to be
+  merged to avoid doing spurious work.
 
-*Random Thoughts*
+Notes:
 
-- include management with be a mix of manual versus automatically
+- include management would be a mix of manual versus automatically
   generated. This is not possible because there will be no way to
   determine which one is which. To solve this problem we need to allow
   users to add include files from the dynamic extensions and get those
   processed like all the other includes. In the new world this means
   adding includes to the formatter settings. These are local
   settings. As at present, we cannot identify a use case for adding an
-  include file for all types, there is no need to support this feature
-  at the global settings level, so this fits nicely with the existing
-  settings infrastructure.
+  include file for all types, so there is no need to support this
+  feature at the global settings level. Thus this fits nicely with the
+  existing settings infrastructure.
 - merging could be done without needing clang, which would also make
   it cross language. All that is required is for the language to
   support some kind of meta-data to mark a method as "manually
@@ -6929,16 +6936,31 @@ possible:
   correct method. When code generating, if a method is marked as
   "manually generated" and if there is implementation content, we dump
   that; otherwise we generate the skeleton of the method as if it was
-  not "manually generated".
+  not "manually generated". We could also create a very simple spirit
+  parser that only knows of comments, function names and function
+  bodies.
 - merging could be done as part of yarn, in meta-data. That is, we
   could annotate the merged method into language specific properties
   in the meta-data and then query those in the language specific model
-  generation. We could have another yarn workflow to look for files; it
-  could use the meta-data for file path. The extension will tell it
+  generation. We could have another yarn workflow to look for files;
+  it could use the meta-data for file path. The extension will tell it
   what "function parser" to use. We could literally look through the
   meta-data extensions looking for file path, and for each run the
   "function parser"; it will return a set of "manual" functions. These
-  we can then slot into the meta-data and reuse later on.
+  we can then slot into the meta-data and reuse later on. Actually, we
+  can't use meta-data for this given the existing convention that
+  meta-data is constant. However, nothing stops us from adding the
+  required properties to yarn directly (e.g. we could have an
+  =operation= which has a language specific container of
+  implementations), to be used by formatters. Interestingly, this then
+  seems to share some logic with method helpers. That is, if we could
+  supply the stitch template as an operation (per facet, per
+  language) and if we could annotate the operation somehow as
+  "external" to the object, helper methods could use the same
+  infrastructure. But perhaps this doesn't make a lot of sense since
+  for helper methods we need to run the formatter whereas for merging
+  we already have the final form of the code and we just need to carry
+  it along to dump it in the formatter.
 - the proper technical name for methods that can be manually edited is
   "protected regions". Merging is not a technical term according to
   MDSD at least.
@@ -6947,7 +6969,7 @@ We should also address the MDSD comment:
 
 #+begin_quote
 If, for performance reasons, or because the target language doesn’t
-offer any options for con- solidating different artifacts, handwritten
+offer any options for consolidating different artifacts, handwritten
 code must be inserted into generated code directly, the introduction
 of protected areas is inevitable. Please do this only if such
 exceptional conditions require this approach!
@@ -6984,7 +7006,13 @@ tables. This could be filtered by the user. Idea came from here:
 
 All we need is a "database frontend" responsible for connecting to the
 database and performing the mapping between the database types and the
-language specific types.
+language specific types. The model would then have ODB support to read
+and write these tables.
+
+We should have a specific tool to do this. Ideally the tool itself
+should use ODB or at least the ODB database specific libraries to
+access the DML. We should also investigate existing ODB support for
+this.
 
 *** Generate model from CSV files                                     :story:
 
@@ -7007,6 +7035,9 @@ With [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/pro
 importer and processor very quickly. With support for diffs, this
 would mean one could create a CSV file differ easily.
 
+We should probably add this to the same tool that supports JSON/XML
+imports.
+
 *** Generate model from JSON or XML instance files                    :story:
 
 It would be great if one could point dogen at a given JSON or XML file
@@ -7023,7 +7054,10 @@ is the superset of these.
 To be clear, this story is not about using a JSON or XML schema to
 generate a yarn model, but to use instances of a given schema in JSON
 or XML to infer a possible yarn model that could read that instance
-document.
+document. This is useful for example to consume a web service from
+C++.
+
+We should have a separate tool to do this work.
 
 *** Investigate GDB visualisers for generated models                  :epic:
 
@@ -7041,8 +7075,6 @@ STL containers with types of that model.
 - [[https://groups.google.com/group/boost-list/browse_thread/thread/ff232ac626bf41cf/18fbf516ceb091da?pli%3D1][Example for multi-index]]
 
 *** yarn models could have a model classification                       :epic:
-
-<REVIEWED>
 
 Consider creating an enumeration for model classification (e.g. type
 of the model):
@@ -7221,6 +7253,19 @@ once we are finished with it. They are passed on up all the way to
 quilt indexers. We need to come up with a streams architecture linking
 all indexers. We then use the graph to determine the order in which
 yarn type are being passed in to the stream pipeline.
+
+More thoughts: what we really want is to have a "transfomers" pipeline
+("indexers" seems too limited a name) that is designed to generate the
+inputs for the formatters. This means that by the end of the pipeline
+we end up with properties, settings and the yarn type. And of course
+we could take this one step further and then say that the formatters
+themselves are also in the pipeline and the ultimate result of the
+pipeline is a file.
+
+We should not tackle this task until we have support for a few
+languages other than C++ because we may be hacking things for C++
+which wont work for those languages. It will be much harder to change
+the code once we have a graph + pipeline.
 
 *** Consider c++ itself as a front-end                                 :epic:
 

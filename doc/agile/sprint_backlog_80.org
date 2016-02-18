@@ -12,32 +12,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-02-17 Wed 21:49]
+#+CAPTION: Clock summary at [2016-02-18 Thu 11:16]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *29:22* |       |      | 100.0 |
+| *Total time*                                                                | *30:09* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 29:22   |       |      | 100.0 |
-| Active                                                                      |         | 29:22 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 5:21 |  18.2 |
-| COMPLETED Make context non-generatable                                      |         |       | 0:49 |   2.8 |
-| COMPLETED Setup logging syntax highlighting on emacs                        |         |       | 2:32 |   8.6 |
-| COMPLETED Create next interesting blog post                                 |         |       | 0:37 |   2.1 |
-| COMPLETED Rename =yarn::nested_name= to =yarn::name_tree=                   |         |       | 1:05 |   3.7 |
+| Stories                                                                     | 30:09   |       |      | 100.0 |
+| Active                                                                      |         | 30:09 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 6:08 |  20.3 |
+| COMPLETED Make context non-generatable                                      |         |       | 0:49 |   2.7 |
+| COMPLETED Setup logging syntax highlighting on emacs                        |         |       | 2:32 |   8.4 |
+| COMPLETED Create next interesting blog post                                 |         |       | 0:37 |   2.0 |
+| COMPLETED Rename =yarn::nested_name= to =yarn::name_tree=                   |         |       | 1:05 |   3.6 |
 | COMPLETED Rename =type= to =parsed_type=                                    |         |       | 0:14 |   0.8 |
-| COMPLETED Add index support for =yarn::name_tree=                           |         |       | 1:56 |   6.6 |
-| COMPLETED Create a context factory                                          |         |       | 1:13 |   4.1 |
+| COMPLETED Add index support for =yarn::name_tree=                           |         |       | 1:56 |   6.4 |
+| COMPLETED Create a context factory                                          |         |       | 1:13 |   4.0 |
 | COMPLETED Split dispatcher from formatters workflow and rename it           |         |       | 0:57 |   3.2 |
 | COMPLETED Create a contributing document for Github                         |         |       | 0:22 |   1.2 |
-| COMPLETED Sort out problems with main machine                               |         |       | 2:00 |   6.8 |
-| STARTED Help conan with strange warning                                     |         |       | 1:30 |   5.1 |
-| STARTED Add an helper method interface                                      |         |       | 6:56 |  23.6 |
-| STARTED Add properties for helpers                                          |         |       | 3:50 |  13.1 |
+| COMPLETED Sort out problems with main machine                               |         |       | 2:00 |   6.6 |
+| STARTED Help conan with strange warning                                     |         |       | 1:30 |   5.0 |
+| STARTED Add an helper method interface                                      |         |       | 6:56 |  23.0 |
+| STARTED Add properties for helpers                                          |         |       | 3:50 |  12.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-02-18 Thu 07:52]--[2016-02-18 Thu 08:39] =>  0:47
     CLOCK: [2016-02-17 Wed 11:03]--[2016-02-17 Wed 11:23] =>  0:20
     CLOCK: [2016-02-17 Wed 10:34]--[2016-02-17 Wed 10:48] =>  0:14
     CLOCK: [2016-02-17 Wed 06:04]--[2016-02-17 Wed 06:25] =>  0:21
@@ -422,3 +423,21 @@ to inject. This problem can be solved later on - create a separate
 story for this.
 
 ** Deprecated
+*** CANCELLED Implement stitch with merging                            :epic:
+    CLOSED: [2016-02-18 Thu 08:24]
+
+*Rationale*: we don't need this now that we will have stitch
+meta-templates.
+
+When we have merging support we can actually implement stitch in a
+better way. We could mark the formatters with meta-data stating they
+have a method which is a stitch template. That then results in a c++
+operation which makes reference to stitch. When converting yarn into
+the CPP model we can add a "content" property to the stitchable
+operations that contains the expansion of the stitch
+template. Finally, when inside of the stitch template that is
+code-generating, we will loop through all of the operations. For the
+stitched ones, we can then dump the content property. Merge support is
+required because formatters are always expected to have a component of
+hand-crafting (include providers etc) and cannot be implemented
+without it.
