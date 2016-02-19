@@ -6631,6 +6631,8 @@ This may be a useful thing.
 
 *** Consider adding support for OCL                                   :story:
 
+<REVIEWING>
+
 UML supports adding constraints via [[http://www.omg.org/spec/OCL/2.4/][OCL]], the Object Constraint
 Language. We could generate code from it.
 
@@ -6652,34 +6654,22 @@ into a temporary directory and then swap them at the end.
 
 *** Supporting user defined generic types                             :story:
 
-At present we have a bit of a hack to support templates. However, all
-that is required to allow users to create their own template types is:
+At present we have done a bit of a hack to support templates. However,
+all that is required to allow users to create their own template types
+is:
 
-- parse dia information for type arguments
-- change object to have type arguments
-- change merger to allow variables of the type of the type argument
-- change view model to propagate type arguments
+- parse dia information for type arguments;
+- change object to have type arguments;
+- change merger to allow variables of the type of the type argument;
+- change view model to propagate type arguments;
 - change formatter to create template class if type arguments are
-  present
+  present.
 
 However this would then mean that IO and serialisation would fail
 since they are implemented on the cpp. As there is no need for
 template types, this seems like an ok limitation.
 
-*** Replace Boolean attributes with flags                             :story:
-
-We have a number of Boolean attributes in yarn which could easily be
-replaced by a single int and a flag enumeration. We would also need a
-set of utility methods to access the values.
-
-This story has a dependency on [[*Add%20support%20for%20bitsets][bitset support]].
-
 *** Visitor adaptor for usage in ranges                               :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to make use of visitor in ranges so
-that I generate code that follows the modern C++ approach.
-#+end_quote
 
 It would be great if we automatically generated an adaptor to visitors
 which could be plugged into a range. Internally the adaptor would
@@ -6699,31 +6689,6 @@ its properties a set of =std::function= which match the signature of
 the visit functions; then the visit functions would just check that
 the functions have been assigned and call them. If not, throw.
 
-*** Use pimpl for a few "one-shot" services                           :story:
-
-<REVIEWING>
-
-We have quite a few services where it would be great to have
-transactional semantics. For example, when building a graph in
-=sml::grapher=, it would be great if one could have a list of objects
-to graph as an input and some kind of =grapher_result= as the
-output. From a potential =grapher_interface= it would look like a
-simple method in the interface, almost static. The problem with this
-approach of course is that it makes the =grapher_interface=
-implementations cumbersome because one has to pass all parameters to
-all internal methods instead of using class state. The present
-approach is to make it a "prepare" and then "use" sort of service,
-causing the usual nonsensical methods of "is it finished yet" and "are
-you trying to use the service a second time" (e.g. =is_built=,
-etc). Even if we pass in all the inputs in the constructor, its still
-not ideal. There are two options:
-
-- set member variables inside the "one-shot" function and then unset
-  them at the end;
-- have a =grapher= implementation which uses a =grapher_impl= that
-  does provide a sensible implementation. We used to do this inside
-  the =.cpp= files but then they became too big to manage.
-
 *** Create a visitor interface with multiple implementations          :story:
 
 #+begin_quote
@@ -6734,10 +6699,9 @@ can decide which one is best for my requirements.
 We decided to use a base class for visitor; it would have been better
 to create an interface, with multiple implementations:
 
-- negative visitor: any unimplemented methods throw
-- default visitor: all methods do nothing
-- [[*Visitor%20with%20%3Dstd::function%3D%20for%20each%20%3Dvisit%3D%20method][std::function visitor]]
-- ...
+- "negative" visitor: any unimplemented methods throw;
+- default visitor: all methods do nothing;
+- [[*Visitor%20with%20%3Dstd::function%3D%20for%20each%20%3Dvisit%3D%20method][std::function visitor]]: usr supplies lambdas to visitor.
 
 Users can then inherit from these visitors where appropriate
 (e.g. negative and default visitors). Each of these would have their

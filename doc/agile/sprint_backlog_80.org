@@ -38,6 +38,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-02-18 Thu 23:26]
     CLOCK: [2016-02-18 Thu 07:52]--[2016-02-18 Thu 08:39] =>  0:47
     CLOCK: [2016-02-17 Wed 11:03]--[2016-02-17 Wed 11:23] =>  0:20
     CLOCK: [2016-02-17 Wed 10:34]--[2016-02-17 Wed 10:48] =>  0:14
@@ -441,3 +442,40 @@ stitched ones, we can then dump the content property. Merge support is
 required because formatters are always expected to have a component of
 hand-crafting (include providers etc) and cannot be implemented
 without it.
+*** CANCELLED Use pimpl for a few "one-shot" services                 :story:
+    CLOSED: [2016-02-18 Thu 23:28]
+
+*Rationale*: we should refactor each class as we get to them; having a
+generic story is not helpful.
+
+We have quite a few services where it would be great to have
+transactional semantics. For example, when building a graph it would
+be great if one could have a list of objects to graph as an input and
+some kind of =grapher_result= as the output. From a potential
+=grapher_interface= it would look like a simple method in the
+interface, almost static. The problem with this approach of course is
+that it makes the =grapher_interface= implementations cumbersome
+because one has to pass all parameters to all internal methods instead
+of using class state. The present approach is to make it a "prepare"
+and then "use" sort of service, causing the usual nonsensical methods
+of "is it finished yet" and "are you trying to use the service a
+second time" (e.g. =is_built=, etc). Even if we pass in all the inputs
+in the constructor, its still not ideal. There are two options:
+
+- set member variables inside the "one-shot" function and then unset
+  them at the end;
+- have a =grapher= implementation which uses a =grapher_impl= that
+  does provide a sensible implementation. We used to do this inside
+  the =.cpp= files but then they became too big to manage.
+*** CANCELLED Replace Boolean attributes with flags                   :story:
+    CLOSED: [2016-02-18 Thu 23:36]
+
+*Rationale*: this story is too vague; what flags are these and how
+will this change make the code better? Looking at the model, nothing
+obvious comes to mind.
+
+We have a number of Boolean attributes in yarn which could easily be
+replaced by a single int and a flag enumeration. We would also need a
+set of utility methods to access the values.
+
+This story has a dependency on [[*Add%20support%20for%20bitsets][bitset support]].
