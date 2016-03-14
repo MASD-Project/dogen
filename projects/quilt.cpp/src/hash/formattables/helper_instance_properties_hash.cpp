@@ -40,7 +40,7 @@ std::size_t helper_instance_properties_hasher::hash(const helper_instance_proper
 
     combine(seed, v.identifiable_name());
     combine(seed, v.complete_name());
-    combine(seed, v.complete_name_identifiable_name());
+    combine(seed, v.complete_identifiable_name());
 
     return seed;
 }

@@ -39,7 +39,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("identifiable_name", v.identifiable_name_);
     ar << make_nvp("complete_name", v.complete_name_);
-    ar << make_nvp("complete_name_identifiable_name", v.complete_name_identifiable_name_);
+    ar << make_nvp("complete_identifiable_name", v.complete_identifiable_name_);
 }
 
 template<typename Archive>
@@ -48,7 +48,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("identifiable_name", v.identifiable_name_);
     ar >> make_nvp("complete_name", v.complete_name_);
-    ar >> make_nvp("complete_name_identifiable_name", v.complete_name_identifiable_name_);
+    ar >> make_nvp("complete_identifiable_name", v.complete_identifiable_name_);
 }
 
 } }

@@ -45,7 +45,7 @@ public:
     helper_instance_properties(
         const std::string& identifiable_name,
         const std::string& complete_name,
-        const std::string& complete_name_identifiable_name);
+        const std::string& complete_identifiable_name);
 
 private:
     template<typename Archive>
@@ -85,10 +85,10 @@ public:
      * Example: std_map.
      */
     /**@{*/
-    const std::string& complete_name_identifiable_name() const;
-    std::string& complete_name_identifiable_name();
-    void complete_name_identifiable_name(const std::string& v);
-    void complete_name_identifiable_name(const std::string&& v);
+    const std::string& complete_identifiable_name() const;
+    std::string& complete_identifiable_name();
+    void complete_identifiable_name(const std::string& v);
+    void complete_identifiable_name(const std::string&& v);
     /**@}*/
 
 public:
@@ -104,7 +104,7 @@ public:
 private:
     std::string identifiable_name_;
     std::string complete_name_;
-    std::string complete_name_identifiable_name_;
+    std::string complete_identifiable_name_;
 };
 
 } } } }

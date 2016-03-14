@@ -12,15 +12,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-03-14 Mon 21:48]
+#+CAPTION: Clock summary at [2016-03-14 Mon 22:11]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:06* |      |      | 100.0 |
+| *Total time*                                                                | *0:28* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:06   |      |      | 100.0 |
-| Active                                                                      |        | 0:06 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:06 | 100.0 |
+| Stories                                                                     | 0:28   |      |      | 100.0 |
+| Active                                                                      |        | 0:28 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:06 |  21.4 |
+| STARTED Add properties for helpers                                          |        |      | 0:22 |  78.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -110,7 +111,9 @@ Tasks:
   settings. It should also consult the registrar to see if there are
   any helpers available for this formatter and family.
 
-*** Add properties for helpers                                        :story:
+*** STARTED Add properties for helpers                                :story:
+    CLOCK: [2016-03-14 Mon 21:48]--[2016-03-14 Mon 22:10] =>  0:22
+
 
 We should pre-compute all of the required helper instances for a given
 element and have them ready for formatting. Create all of the types

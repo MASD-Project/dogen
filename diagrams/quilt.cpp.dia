@@ -36079,13 +36079,13 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="370,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="369.95,51.95;387.875,56.45"/>
+        <dia:rectangle val="369.95,51.95;385.95,56.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="370,52"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.824999999999999"/>
+        <dia:real val="15.9"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -36230,7 +36230,7 @@ Example: std::map.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#complete_name_identifiable_name#</dia:string>
+            <dia:string>#complete_identifiable_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -36555,7 +36555,7 @@ Example: std_map.#</dia:string>
         <dia:point val="394,56.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="378.863,55.65;394.75,63.05"/>
+        <dia:rectangle val="377.9,55.65;394.75,63.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36563,8 +36563,8 @@ Example: std_map.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="394,56.4"/>
         <dia:point val="394,63"/>
-        <dia:point val="378.913,63"/>
-        <dia:point val="378.913,56.4"/>
+        <dia:point val="377.95,63"/>
+        <dia:point val="377.95,56.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

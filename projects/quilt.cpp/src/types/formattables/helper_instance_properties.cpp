@@ -28,22 +28,22 @@ namespace formattables {
 helper_instance_properties::helper_instance_properties(
     const std::string& identifiable_name,
     const std::string& complete_name,
-    const std::string& complete_name_identifiable_name)
+    const std::string& complete_identifiable_name)
     : identifiable_name_(identifiable_name),
       complete_name_(complete_name),
-      complete_name_identifiable_name_(complete_name_identifiable_name) { }
+      complete_identifiable_name_(complete_identifiable_name) { }
 
 void helper_instance_properties::swap(helper_instance_properties& other) noexcept {
     using std::swap;
     swap(identifiable_name_, other.identifiable_name_);
     swap(complete_name_, other.complete_name_);
-    swap(complete_name_identifiable_name_, other.complete_name_identifiable_name_);
+    swap(complete_identifiable_name_, other.complete_identifiable_name_);
 }
 
 bool helper_instance_properties::operator==(const helper_instance_properties& rhs) const {
     return identifiable_name_ == rhs.identifiable_name_ &&
         complete_name_ == rhs.complete_name_ &&
-        complete_name_identifiable_name_ == rhs.complete_name_identifiable_name_;
+        complete_identifiable_name_ == rhs.complete_identifiable_name_;
 }
 
 helper_instance_properties& helper_instance_properties::operator=(helper_instance_properties other) {
@@ -84,20 +84,20 @@ void helper_instance_properties::complete_name(const std::string&& v) {
     complete_name_ = std::move(v);
 }
 
-const std::string& helper_instance_properties::complete_name_identifiable_name() const {
-    return complete_name_identifiable_name_;
+const std::string& helper_instance_properties::complete_identifiable_name() const {
+    return complete_identifiable_name_;
 }
 
-std::string& helper_instance_properties::complete_name_identifiable_name() {
-    return complete_name_identifiable_name_;
+std::string& helper_instance_properties::complete_identifiable_name() {
+    return complete_identifiable_name_;
 }
 
-void helper_instance_properties::complete_name_identifiable_name(const std::string& v) {
-    complete_name_identifiable_name_ = v;
+void helper_instance_properties::complete_identifiable_name(const std::string& v) {
+    complete_identifiable_name_ = v;
 }
 
-void helper_instance_properties::complete_name_identifiable_name(const std::string&& v) {
-    complete_name_identifiable_name_ = std::move(v);
+void helper_instance_properties::complete_identifiable_name(const std::string&& v) {
+    complete_identifiable_name_ = std::move(v);
 }
 
 } } } }

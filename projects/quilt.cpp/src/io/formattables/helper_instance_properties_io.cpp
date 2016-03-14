@@ -39,7 +39,7 @@ std::ostream& operator<<(std::ostream& s, const helper_instance_properties& v) {
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::helper_instance_properties\"" << ", "
       << "\"identifiable_name\": " << "\"" << tidy_up_string(v.identifiable_name()) << "\"" << ", "
       << "\"complete_name\": " << "\"" << tidy_up_string(v.complete_name()) << "\"" << ", "
-      << "\"complete_name_identifiable_name\": " << "\"" << tidy_up_string(v.complete_name_identifiable_name()) << "\""
+      << "\"complete_identifiable_name\": " << "\"" << tidy_up_string(v.complete_identifiable_name()) << "\""
       << " }";
     return(s);
 }
