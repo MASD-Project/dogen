@@ -1,0 +1,307 @@
+#+title: Sprint Backlog 81
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) spike(p) }
+
+* Mission Statement
+
+- continue implementing helper methods dynamically and using yarn types.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2016-03-14 Mon 21:48]
+| <75>                                                                        |        |      |      |       |
+| Headline                                                                    | Time   |      |      |     % |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                                                | *0:06* |      |      | 100.0 |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| Stories                                                                     | 0:06   |      |      | 100.0 |
+| Active                                                                      |        | 0:06 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:06 | 100.0 |
+#+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-03-14 Mon 21:41]--[2016-03-14 Mon 21:47] =>  0:06
+
+Updates to sprint and product backlog.
+
+*** Help conan with strange warning                                   :story:
+
+We are getting a CMake warning on our builds:
+
+: CMake Warning (dev) in build/output/conanbuildinfo.cmake:
+:  Syntax Warning in cmake code at
+:    /home/travis/build/DomainDrivenConsulting/dogen/build/output/conanbuildinfo.cmake:142:88
+:  Argument not separated from preceding token by whitespace.
+: Call Stack (most recent call first):
+:  CMakeLists.txt:30 (include)
+: This warning is for project developers.  Use -Wno-dev to suppress it.
+
+Report it to conan.
+
+Actually, this is a bit trickier than expected, and the fix is now
+breaking the build:
+
+- [[https://github.com/conan-io/conan/issues/138][Warning in CMake file created by conan]]
+
+We will wait until conan comes up with a fix.
+
+*** Add an helper method interface                                    :story:
+
+We should also investigate on the need for the nested type info
+assistant.
+
+Tasks:
+
+- create interface.
+- add interface to registrar.
+- implement interface in at least one helper.
+- update assistant to query registrar for helpers based on type family
+  in context. Performs a recursive descent on nested name.
+- problem: io helpers in types should only be enabled if io is enabled
+  and if type is in an inheritance relationship. For this we need to
+  have access to formatter properties (potentially via assistant) but
+  we also need to have access to the type that owns the properties. We
+  could augment helper interface with the assistant - easy as we
+  already have it on the format method - and the element - harder; we
+  need to supply the object as part of helper method creation.
+- problem: we need to ask for complete and identifiable name N times
+  for a given formatter. It is not a good idea to dynamically compute
+  it or to store it in an associative container - it somehow needs to
+  be next to the nested name.
+
+*Previous Understanding*
+
+- create a registrar for interface with family and formatter name.
+- update all helpers to implement interface and to register
+  themselves.
+- it seems we have two use cases here: the formatter helper interface
+  for formatting purposes and the helper family interface that tells
+  us what formatter this helper belongs to. We do not want to leak
+  details of formatting into formattables. We need to find a name for
+  such an interface in formattables, a bit like the inclusion
+  dependencies provider. Formatter helper details provider? We can
+  then extend the existing formattables registrar and container to
+  store this interface; the formatter helper interface can extend this
+  interface; the main workflow returns all registered formatter
+  helpers in terms of the formatter helper details provider interface.
+- problem: we need additional properties related to the helper which
+  have been hard-coded:
+  - requires generic string; in a general form "string conversion
+    method";
+  - requires quoting;
+  - requires tidying up; in a general form "remove unprintable
+    characters";
+  - requires hashing helper method; in a general form: we need a way
+    to query the helper settings to figure out if a given type has an
+    associated helper method for a given formatter, and if we need to
+    call it implicitly or explicitly; and, if explicitly, we need to
+    ask the helper method formatter for the name of the helper method.
+  - requires dereferencing; for pointer types.
+- seems like yet again we found the wrong solution for this
+  problem. We need to create a top-level set of helper settings for
+  each type with all additional properties; propagate those into
+  formatters via context; and then use the assistant to loop through
+  the nested name (nested info for now) and pick the helper
+  settings. It should also consult the registrar to see if there are
+  any helpers available for this formatter and family.
+
+*** Add properties for helpers                                        :story:
+
+We should pre-compute all of the required helper instances for a given
+element and have them ready for formatting. Create all of the types
+required for this.
+
+*Previous Understanding*
+
+We need to store the identifiable name of the name tree, as well as
+the language specific representation of the type. The container should
+make use of the name tree index - e.g. use a vector. The only problem
+is that we do not know what the size of the container is without doing
+look ups. We could have a property nested name size in
+stateful. Naming it is not easy though. Nested name cardinality?
+
+*Previous Understanding*
+
+We need to store the identifiable name of the nested name, as well as
+the language specific representation of the type. These are properties
+at the level of the =yarn::property=. The container should make use of
+the index - e.g. use a vector of size of properties list.
+
+Note that these are not properties of the property, but instead
+properties of the property type.
+
+Actually this is not correct; we need the properties for each nested
+name and for each particular nested name structure, possibly unique to
+each property. An alternative is then to come up with an index that
+takes into account the nesting (effectively flattens the nested
+structure). The index starts at zero for a type and increments for
+every property for every level of nesting. Each nested name has an
+index. Then, nested name properties is a flat container for each name
+with the required properties. With this the helpers can continue to
+rely on just the nested name (plus the nested name properties via the
+assistant).
+
+*** Update assistant to use new helper information                    :story:
+
+Once all the pieces are in place, the assistant can then use the
+formatter properties to find out which helpers are required for each
+type; call those helpers and populate the file with the generate
+code. We can remove all previous helper support.
+
+*** Remove nested type info                                           :story:
+
+Once all of the infrastructure is in place, we should not need this
+class any more. Remove code from transformer and remove object types
+and anything else that was used to dispatch based on type.
+
+*** Initialise formatters in the formatter's translation unit         :story:
+
+At present we are initialising the formatters in each of the facet
+initialisers. However, it makes more sense to initialise them on the
+translation unit for each formatter. This will also make life easier
+when we move to a mustache world where there may not be a formatter
+header file at all.
+
+*** Consider renaming =yarn::property= to attribute                   :story:
+
+Since we use properties quite a lot in =quilt.cpp= - and more so when
+we rename formattables to properties - we should probably avoid the
+need to overload the term in yarn. We could rename it to attribute.
+
+Or perhaps the problem is with formatter properties. After all these
+are not "properties of the formatter"; these are inputs into the
+formatting process (and so are settings).
+
+We need to add properties for =yarn::property= so it cannot stay as
+property. We cannot think of a better name other than "properties" for
+formatters so yarn will have to be renamed.
+
+Actually this is no longer urgent so the story can go back to backlog.
+
+*** Consider using indices rather than associative containers         :story:
+
+Once we generate the final model the model becomes constant; this
+means we can easily assign an [[https://en.wikipedia.org/wiki/Ordinal_number][ordinal number]] to each model
+element. These could be arranged so that we always start with
+generatable types first; this way we always generate dense
+containers - there are some cases where we need both generatable types
+and non-generatable types; in other cases we just need generatable
+types; we never need just non-generatable types. We also need to know
+the position of the first non-generatable type (or alternatively, the
+size of the generatable types set).
+
+Once we have this, we can start creating vectors with a fixed size
+(either total number of elements or just size of generatable
+types). We can also make it so that each name has an id which is the
+ordinal (another model post-processing activity). Actually we should
+call it "type index" or some other name because its a transient
+id. This means both properties and settings require no lookups at all
+since all positions are known beforehand (except in cases where the
+key of the associative container must be the =yarn::name= because we
+use it for processing).
+
+In theory, a similar approach can be done for formatters too. We know
+upfront what the ordinal number is for each formatter because they are
+all registered before we start processing. If formatters obtained
+their ordinal number at registration, wherever we are using a map of
+formatter name to a resource, we could use a fixed-size
+vector. However, formatters may be sparse in many cases (if not all
+cases?). For example, we do not have formatter properties for all
+formatters for every =yarn::name= because many (most) formatters don't
+make sense for every yarn type. Thus this is less applicable, at least
+for formatter properties. We need to look carefully at all use cases
+and see if there is any place where this approach is applicable.
+
+*** Handle "special includes" correctly                               :story:
+
+We did a quick hack to handle "special includes": we simply "detected"
+them in include builder and then did the appropriate action in each of
+the include providers. In order to make this work dynamically, we need
+somehow to have "associated includes" on a per type basis. For
+example:
+
+- type =x= requires include =y= in formatter =f=.
+
+This can easily be achieved via an "additional inclusion directive"
+which is a container. For example:
+
+:        "extensions" : {
+:                "quilt.cpp.helper.family" : "Dereferenceable",
+:                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/weak_ptr.hpp>",
+
+Could have:
+
+:                "quilt.cpp.types.class_header_formatter.additional_inclusion_directive" : "<some_include.hpp>",
+
+If multiple are provided then they are all added. This highlights an
+important point: we need a way to inject type specific includes from a
+formatter. It makes no sense to declare all of these up front in a
+library since we do not know what all possible formatters are, nor
+what requirements they may have for inclusion. At the same time,
+formatters cannot be expected to declare types. The solution is to be
+able to "inject" these dependencies from a JSON file associated with
+the formatter. We could supply the qualified name and the properties
+to inject. This problem can be solved later on - create a separate
+story for this.
+
+** Deprecated
+*** CANCELLED Implement stitch with merging                            :epic:
+    CLOSED: [2016-02-18 Thu 08:24]
+
+*Rationale*: we don't need this now that we will have stitch
+meta-templates.
+
+When we have merging support we can actually implement stitch in a
+better way. We could mark the formatters with meta-data stating they
+have a method which is a stitch template. That then results in a c++
+operation which makes reference to stitch. When converting yarn into
+the CPP model we can add a "content" property to the stitchable
+operations that contains the expansion of the stitch
+template. Finally, when inside of the stitch template that is
+code-generating, we will loop through all of the operations. For the
+stitched ones, we can then dump the content property. Merge support is
+required because formatters are always expected to have a component of
+hand-crafting (include providers etc) and cannot be implemented
+without it.
+*** CANCELLED Use pimpl for a few "one-shot" services                 :story:
+    CLOSED: [2016-02-18 Thu 23:28]
+
+*Rationale*: we should refactor each class as we get to them; having a
+generic story is not helpful.
+
+We have quite a few services where it would be great to have
+transactional semantics. For example, when building a graph it would
+be great if one could have a list of objects to graph as an input and
+some kind of =grapher_result= as the output. From a potential
+=grapher_interface= it would look like a simple method in the
+interface, almost static. The problem with this approach of course is
+that it makes the =grapher_interface= implementations cumbersome
+because one has to pass all parameters to all internal methods instead
+of using class state. The present approach is to make it a "prepare"
+and then "use" sort of service, causing the usual nonsensical methods
+of "is it finished yet" and "are you trying to use the service a
+second time" (e.g. =is_built=, etc). Even if we pass in all the inputs
+in the constructor, its still not ideal. There are two options:
+
+- set member variables inside the "one-shot" function and then unset
+  them at the end;
+- have a =grapher= implementation which uses a =grapher_impl= that
+  does provide a sensible implementation. We used to do this inside
+  the =.cpp= files but then they became too big to manage.
+*** CANCELLED Replace Boolean attributes with flags                   :story:
+    CLOSED: [2016-02-18 Thu 23:36]
+
+*Rationale*: this story is too vague; what flags are these and how
+will this change make the code better? Looking at the model, nothing
+obvious comes to mind.
+
+We have a number of Boolean attributes in yarn which could easily be
+replaced by a single int and a flag enumeration. We would also need a
+set of utility methods to access the values.
+
+This story has a dependency on [[*Add%20support%20for%20bitsets][bitset support]].
