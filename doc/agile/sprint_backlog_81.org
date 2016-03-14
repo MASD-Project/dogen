@@ -12,16 +12,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-03-14 Mon 22:11]
+#+CAPTION: Clock summary at [2016-03-14 Mon 22:59]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:28* |      |      | 100.0 |
+| *Total time*                                                                | *1:15* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:28   |      |      | 100.0 |
-| Active                                                                      |        | 0:28 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:06 |  21.4 |
-| STARTED Add properties for helpers                                          |        |      | 0:22 |  78.6 |
+| Stories                                                                     | 1:15   |      |      | 100.0 |
+| Active                                                                      |        | 1:15 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:06 |   8.0 |
+| STARTED Add properties for helpers                                          |        |      | 1:09 |  92.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -112,12 +112,27 @@ Tasks:
   any helpers available for this formatter and family.
 
 *** STARTED Add properties for helpers                                :story:
+    CLOCK: [2016-03-14 Mon 22:11]--[2016-03-14 Mon 22:58] =>  0:47
     CLOCK: [2016-03-14 Mon 21:48]--[2016-03-14 Mon 22:10] =>  0:22
 
 
 We should pre-compute all of the required helper instances for a given
 element and have them ready for formatting. Create all of the types
 required for this.
+
+What we were trying to say in this terse form is this:
+
+- every type needs a set of helpers with zero or more elements. This
+  is a set in that there are no duplicates.
+- this set is computed on the basis of relationships with other types
+  which themselves have helper settings.
+- once we got this set, we can then loop through it and ask the
+  registrar for the helpers for each family.
+- however, we must also have the helper settings next to this
+  information as we will need these.
+- finally, a given helper may call other methods inside it. This is
+  why we need to have the associated helpers. At present this happens
+  only in hashing.
 
 *Previous Understanding*
 
