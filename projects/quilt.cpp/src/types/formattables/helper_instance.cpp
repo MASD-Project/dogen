@@ -28,22 +28,26 @@ namespace formattables {
 helper_instance::helper_instance(
     const std::string& family,
     const dogen::quilt::cpp::formattables::helper_instance_properties& properties,
-    const std::list<dogen::quilt::cpp::formattables::helper_instance_properties>& associated_helpers)
+    const std::list<dogen::quilt::cpp::formattables::helper_instance_properties>& associated_helpers,
+    const dogen::quilt::cpp::settings::helper_settings& settings)
     : family_(family),
       properties_(properties),
-      associated_helpers_(associated_helpers) { }
+      associated_helpers_(associated_helpers),
+      settings_(settings) { }
 
 void helper_instance::swap(helper_instance& other) noexcept {
     using std::swap;
     swap(family_, other.family_);
     swap(properties_, other.properties_);
     swap(associated_helpers_, other.associated_helpers_);
+    swap(settings_, other.settings_);
 }
 
 bool helper_instance::operator==(const helper_instance& rhs) const {
     return family_ == rhs.family_ &&
         properties_ == rhs.properties_ &&
-        associated_helpers_ == rhs.associated_helpers_;
+        associated_helpers_ == rhs.associated_helpers_ &&
+        settings_ == rhs.settings_;
 }
 
 helper_instance& helper_instance::operator=(helper_instance other) {
@@ -98,6 +102,22 @@ void helper_instance::associated_helpers(const std::list<dogen::quilt::cpp::form
 
 void helper_instance::associated_helpers(const std::list<dogen::quilt::cpp::formattables::helper_instance_properties>&& v) {
     associated_helpers_ = std::move(v);
+}
+
+const dogen::quilt::cpp::settings::helper_settings& helper_instance::settings() const {
+    return settings_;
+}
+
+dogen::quilt::cpp::settings::helper_settings& helper_instance::settings() {
+    return settings_;
+}
+
+void helper_instance::settings(const dogen::quilt::cpp::settings::helper_settings& v) {
+    settings_ = v;
+}
+
+void helper_instance::settings(const dogen::quilt::cpp::settings::helper_settings&& v) {
+    settings_ = std::move(v);
 }
 
 } } } }

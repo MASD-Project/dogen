@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_instance_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_instance_properties_io.hpp"
 
@@ -54,7 +55,8 @@ std::ostream& operator<<(std::ostream& s, const helper_instance& v) {
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::helper_instance\"" << ", "
       << "\"family\": " << "\"" << tidy_up_string(v.family()) << "\"" << ", "
       << "\"properties\": " << v.properties() << ", "
-      << "\"associated_helpers\": " << v.associated_helpers()
+      << "\"associated_helpers\": " << v.associated_helpers() << ", "
+      << "\"settings\": " << v.settings()
       << " }";
     return(s);
 }

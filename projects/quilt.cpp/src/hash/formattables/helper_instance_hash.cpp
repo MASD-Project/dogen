@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/hash/settings/helper_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/helper_instance_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/helper_instance_properties_hash.hpp"
 
@@ -50,6 +51,7 @@ std::size_t helper_instance_hasher::hash(const helper_instance& v) {
     combine(seed, v.family());
     combine(seed, v.properties());
     combine(seed, hash_std_list_dogen_quilt_cpp_formattables_helper_instance_properties(v.associated_helpers()));
+    combine(seed, v.settings());
 
     return seed;
 }

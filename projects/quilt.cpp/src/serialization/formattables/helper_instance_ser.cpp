@@ -29,6 +29,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/quilt.cpp/serialization/settings/helper_settings_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_instance_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_instance_properties_ser.hpp"
 
@@ -42,6 +43,7 @@ void save(Archive& ar,
     ar << make_nvp("family", v.family_);
     ar << make_nvp("properties", v.properties_);
     ar << make_nvp("associated_helpers", v.associated_helpers_);
+    ar << make_nvp("settings", v.settings_);
 }
 
 template<typename Archive>
@@ -51,6 +53,7 @@ void load(Archive& ar,
     ar >> make_nvp("family", v.family_);
     ar >> make_nvp("properties", v.properties_);
     ar >> make_nvp("associated_helpers", v.associated_helpers_);
+    ar >> make_nvp("settings", v.settings_);
 }
 
 } }

@@ -28,6 +28,7 @@
 #include <list>
 #include <string>
 #include <algorithm>
+#include "dogen/quilt.cpp/types/settings/helper_settings.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_instance_properties.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/helper_instance_fwd_ser.hpp"
 
@@ -47,7 +48,8 @@ public:
     helper_instance(
         const std::string& family,
         const dogen::quilt::cpp::formattables::helper_instance_properties& properties,
-        const std::list<dogen::quilt::cpp::formattables::helper_instance_properties>& associated_helpers);
+        const std::list<dogen::quilt::cpp::formattables::helper_instance_properties>& associated_helpers,
+        const dogen::quilt::cpp::settings::helper_settings& settings);
 
 private:
     template<typename Archive>
@@ -72,6 +74,16 @@ public:
     void associated_helpers(const std::list<dogen::quilt::cpp::formattables::helper_instance_properties>& v);
     void associated_helpers(const std::list<dogen::quilt::cpp::formattables::helper_instance_properties>&& v);
 
+    /**
+     * @brief Settings for this helper
+     */
+    /**@{*/
+    const dogen::quilt::cpp::settings::helper_settings& settings() const;
+    dogen::quilt::cpp::settings::helper_settings& settings();
+    void settings(const dogen::quilt::cpp::settings::helper_settings& v);
+    void settings(const dogen::quilt::cpp::settings::helper_settings&& v);
+    /**@}*/
+
 public:
     bool operator==(const helper_instance& rhs) const;
     bool operator!=(const helper_instance& rhs) const {
@@ -86,6 +98,7 @@ private:
     std::string family_;
     dogen::quilt::cpp::formattables::helper_instance_properties properties_;
     std::list<dogen::quilt::cpp::formattables::helper_instance_properties> associated_helpers_;
+    dogen::quilt::cpp::settings::helper_settings settings_;
 };
 
 } } } }

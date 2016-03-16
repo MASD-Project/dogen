@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/quilt.cpp/test_data/settings/helper_settings_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_instance_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_instance_properties_td.hpp"
 
@@ -43,6 +44,11 @@ std::list<dogen::quilt::cpp::formattables::helper_instance_properties> create_st
     return r;
 }
 
+dogen::quilt::cpp::settings::helper_settings
+create_dogen_quilt_cpp_settings_helper_settings(const unsigned int position) {
+    return dogen::quilt::cpp::settings::helper_settings_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -57,6 +63,7 @@ populate(const unsigned int position, result_type& v) {
     v.family(create_std_string(position + 0));
     v.properties(create_dogen_quilt_cpp_formattables_helper_instance_properties(position + 1));
     v.associated_helpers(create_std_list_dogen_quilt_cpp_formattables_helper_instance_properties(position + 2));
+    v.settings(create_dogen_quilt_cpp_settings_helper_settings(position + 3));
 }
 
 helper_instance_generator::result_type
