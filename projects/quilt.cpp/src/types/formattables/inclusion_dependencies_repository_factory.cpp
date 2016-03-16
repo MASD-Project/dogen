@@ -61,7 +61,7 @@ public:
         // would complicate the logic in the factory.
         if (id.empty())
             return;
-
+        
         const auto pair(std::make_pair(n, id));
         auto& deps(result_.inclusion_dependencies_by_name());
         const auto res(deps.insert(pair));
