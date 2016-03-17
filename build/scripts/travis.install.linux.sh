@@ -29,6 +29,7 @@ sudo apt-get install ninja-build
 wget http://downloads.conan.io/latest_debian -O conan.deb
 sudo dpkg -i conan.deb
 rm conan.deb
+conan --version
 
 # cmake
 wget --no-check-certificate https://cmake.org/files/v3.4/cmake-3.4.1-Linux-x86_64.tar.gz -O /tmp/cmake-3.4.1-Linux-x86_64.tar.gz
