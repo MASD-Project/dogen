@@ -216,23 +216,7 @@ public:
      */
     std::string comment_inline(const std::string& c) const;
 
-private:
-    /**
-     * @brief Creates all the helper methods by recursing into the
-     * nested type info.
-     */
-    void recursive_helper_method_creator(const formattables::class_info& owner,
-        const yarn::name_tree& nt,
-        std::unordered_set<std::string>& types_done);
-
 public:
-    /**
-     * @brief Creates any helper methods that may be required for this
-     * formatter.
-     */
-    void add_helper_methods(const formattables::class_info& owner,
-        const std::list<formattables::property_info>& properties);
-
     /**
      * @brief Creates any helper methods that may be required for this
      * formatter.

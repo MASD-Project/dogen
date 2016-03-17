@@ -12,16 +12,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-03-17 Thu 22:29]
+#+CAPTION: Clock summary at [2016-03-17 Thu 22:56]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *5:05* |      |      | 100.0 |
+| *Total time*                                                                | *5:20* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 5:05   |      |      | 100.0 |
-| Active                                                                      |        | 5:05 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:06 |   2.0 |
-| STARTED Add properties for helpers                                          |        |      | 4:59 |  98.0 |
+| Stories                                                                     | 5:20   |      |      | 100.0 |
+| Active                                                                      |        | 5:20 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:06 |   1.9 |
+| STARTED Remove experimental helper implementation                           |        |      | 0:15 |   4.7 |
+| STARTED Add properties for helpers                                          |        |      | 4:59 |  93.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -29,6 +30,81 @@
     CLOCK: [2016-03-14 Mon 21:41]--[2016-03-14 Mon 21:47] =>  0:06
 
 Updates to sprint and product backlog.
+
+*** COMPLETED Remove experimental helper implementation               :story:
+    CLOSED: [2016-03-17 Thu 22:56]
+    CLOCK: [2016-03-17 Thu 22:31]--[2016-03-17 Thu 22:46] =>  0:15
+
+Now we figured out the right way of doing the helpers dynamically, we
+should remove the previous attempt.
+
+*** STARTED Add properties for helpers                                :story:
+    CLOCK: [2016-03-17 Thu 21:02]--[2016-03-17 Thu 22:29] =>  1:27
+    CLOCK: [2016-03-17 Thu 08:01]--[2016-03-17 Thu 08:37] =>  0:36
+    CLOCK: [2016-03-16 Wed 21:34]--[2016-03-16 Wed 22:50] =>  1:16
+    CLOCK: [2016-03-16 Wed 21:02]--[2016-03-16 Wed 21:33] =>  0:31
+    CLOCK: [2016-03-14 Mon 22:11]--[2016-03-14 Mon 22:58] =>  0:47
+    CLOCK: [2016-03-14 Mon 21:48]--[2016-03-14 Mon 22:10] =>  0:22
+
+
+We should pre-compute all of the required helper instances for a given
+element and have them ready for formatting. Create all of the types
+required for this.
+
+What we were trying to say in this terse form is this:
+
+- every type needs a set of helpers with zero or more elements. This
+  is a set in that there are no duplicates.
+- this set is computed on the basis of relationships with other types
+  which themselves have helper settings.
+- once we got this set, we can then loop through it and ask the
+  registrar for the helpers for each family.
+- however, we must also have the helper settings next to this
+  information as we will need these.
+- finally, a given helper may call other methods inside it. This is
+  why we need to have the associated helpers. At present this happens
+  only in hashing.
+
+Notes:
+
+- we must keep track of types done by complete name. This can be done
+  in main function.
+- we must remember the children's helper instance properties to
+  populate associated helpers (but just direct children). This can be
+  achieved by returning these in the recursive function.
+- we must build helper instances for all children. This requires
+  supplying a list by reference.
+- we must build complete name.
+
+*Previous Understanding*
+
+We need to store the identifiable name of the name tree, as well as
+the language specific representation of the type. The container should
+make use of the name tree index - e.g. use a vector. The only problem
+is that we do not know what the size of the container is without doing
+look ups. We could have a property nested name size in
+stateful. Naming it is not easy though. Nested name cardinality?
+
+*Previous Understanding*
+
+We need to store the identifiable name of the nested name, as well as
+the language specific representation of the type. These are properties
+at the level of the =yarn::property=. The container should make use of
+the index - e.g. use a vector of size of properties list.
+
+Note that these are not properties of the property, but instead
+properties of the property type.
+
+Actually this is not correct; we need the properties for each nested
+name and for each particular nested name structure, possibly unique to
+each property. An alternative is then to come up with an index that
+takes into account the nesting (effectively flattens the nested
+structure). The index starts at zero for a type and increments for
+every property for every level of nesting. Each nested name has an
+index. Then, nested name properties is a flat container for each name
+with the required properties. With this the helpers can continue to
+rely on just the nested name (plus the nested name properties via the
+assistant).
 
 *** Help conan with strange warning                                   :story:
 
@@ -110,74 +186,6 @@ Tasks:
   the nested name (nested info for now) and pick the helper
   settings. It should also consult the registrar to see if there are
   any helpers available for this formatter and family.
-
-*** STARTED Add properties for helpers                                :story:
-    CLOCK: [2016-03-17 Thu 21:02]--[2016-03-17 Thu 22:29] =>  1:27
-    CLOCK: [2016-03-17 Thu 08:01]--[2016-03-17 Thu 08:37] =>  0:36
-    CLOCK: [2016-03-16 Wed 21:34]--[2016-03-16 Wed 22:50] =>  1:16
-    CLOCK: [2016-03-16 Wed 21:02]--[2016-03-16 Wed 21:33] =>  0:31
-    CLOCK: [2016-03-14 Mon 22:11]--[2016-03-14 Mon 22:58] =>  0:47
-    CLOCK: [2016-03-14 Mon 21:48]--[2016-03-14 Mon 22:10] =>  0:22
-
-
-We should pre-compute all of the required helper instances for a given
-element and have them ready for formatting. Create all of the types
-required for this.
-
-What we were trying to say in this terse form is this:
-
-- every type needs a set of helpers with zero or more elements. This
-  is a set in that there are no duplicates.
-- this set is computed on the basis of relationships with other types
-  which themselves have helper settings.
-- once we got this set, we can then loop through it and ask the
-  registrar for the helpers for each family.
-- however, we must also have the helper settings next to this
-  information as we will need these.
-- finally, a given helper may call other methods inside it. This is
-  why we need to have the associated helpers. At present this happens
-  only in hashing.
-
-Notes:
-
-- we must keep track of types done by complete name. This can be done
-  in main function.
-- we must remember the children's helper instance properties to
-  populate associated helpers (but just direct children). This can be
-  achieved by returning these in the recursive function.
-- we must build helper instances for all children. This requires
-  supplying a list by reference.
-- we must build complete name.
-
-*Previous Understanding*
-
-We need to store the identifiable name of the name tree, as well as
-the language specific representation of the type. The container should
-make use of the name tree index - e.g. use a vector. The only problem
-is that we do not know what the size of the container is without doing
-look ups. We could have a property nested name size in
-stateful. Naming it is not easy though. Nested name cardinality?
-
-*Previous Understanding*
-
-We need to store the identifiable name of the nested name, as well as
-the language specific representation of the type. These are properties
-at the level of the =yarn::property=. The container should make use of
-the index - e.g. use a vector of size of properties list.
-
-Note that these are not properties of the property, but instead
-properties of the property type.
-
-Actually this is not correct; we need the properties for each nested
-name and for each particular nested name structure, possibly unique to
-each property. An alternative is then to come up with an index that
-takes into account the nesting (effectively flattens the nested
-structure). The index starts at zero for a type and increments for
-every property for every level of nesting. Each nested name has an
-index. Then, nested name properties is a flat container for each name
-with the required properties. With this the helpers can continue to
-rely on just the nested name (plus the nested name properties via the
-assistant).
 
 *** Compute yarn property related information                         :story:
 
