@@ -18,18 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
 #include "dogen/quilt.cpp/test_data/settings/helper_settings_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_instance_td.hpp"
 #include "dogen/quilt.cpp/test_data/formattables/helper_instance_properties_td.hpp"
 
 namespace {
-
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
-}
 
 dogen::quilt::cpp::formattables::helper_instance_properties
 create_dogen_quilt_cpp_formattables_helper_instance_properties(const unsigned int position) {
@@ -60,10 +53,9 @@ helper_instance_generator::helper_instance_generator() : position_(0) { }
 
 void helper_instance_generator::
 populate(const unsigned int position, result_type& v) {
-    v.family(create_std_string(position + 0));
-    v.properties(create_dogen_quilt_cpp_formattables_helper_instance_properties(position + 1));
-    v.associated_helpers(create_std_list_dogen_quilt_cpp_formattables_helper_instance_properties(position + 2));
-    v.settings(create_dogen_quilt_cpp_settings_helper_settings(position + 3));
+    v.properties(create_dogen_quilt_cpp_formattables_helper_instance_properties(position + 0));
+    v.associated_helpers(create_std_list_dogen_quilt_cpp_formattables_helper_instance_properties(position + 1));
+    v.settings(create_dogen_quilt_cpp_settings_helper_settings(position + 2));
 }
 
 helper_instance_generator::result_type

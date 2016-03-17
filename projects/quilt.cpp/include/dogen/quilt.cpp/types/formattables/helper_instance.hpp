@@ -26,7 +26,6 @@
 #endif
 
 #include <list>
-#include <string>
 #include <algorithm>
 #include "dogen/quilt.cpp/types/settings/helper_settings.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_instance_properties.hpp"
@@ -46,7 +45,6 @@ public:
 
 public:
     helper_instance(
-        const std::string& family,
         const dogen::quilt::cpp::formattables::helper_instance_properties& properties,
         const std::list<dogen::quilt::cpp::formattables::helper_instance_properties>& associated_helpers,
         const dogen::quilt::cpp::settings::helper_settings& settings);
@@ -59,11 +57,6 @@ private:
     friend void boost::serialization::load(Archive& ar, helper_instance& v, unsigned int version);
 
 public:
-    const std::string& family() const;
-    std::string& family();
-    void family(const std::string& v);
-    void family(const std::string&& v);
-
     const dogen::quilt::cpp::formattables::helper_instance_properties& properties() const;
     dogen::quilt::cpp::formattables::helper_instance_properties& properties();
     void properties(const dogen::quilt::cpp::formattables::helper_instance_properties& v);
@@ -95,7 +88,6 @@ public:
     helper_instance& operator=(helper_instance other);
 
 private:
-    std::string family_;
     dogen::quilt::cpp::formattables::helper_instance_properties properties_;
     std::list<dogen::quilt::cpp::formattables::helper_instance_properties> associated_helpers_;
     dogen::quilt::cpp::settings::helper_settings settings_;

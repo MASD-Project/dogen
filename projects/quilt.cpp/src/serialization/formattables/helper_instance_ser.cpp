@@ -22,7 +22,6 @@
 #include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
@@ -40,7 +39,6 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::formattables::helper_instance& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("family", v.family_);
     ar << make_nvp("properties", v.properties_);
     ar << make_nvp("associated_helpers", v.associated_helpers_);
     ar << make_nvp("settings", v.settings_);
@@ -50,7 +48,6 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::formattables::helper_instance& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("family", v.family_);
     ar >> make_nvp("properties", v.properties_);
     ar >> make_nvp("associated_helpers", v.associated_helpers_);
     ar >> make_nvp("settings", v.settings_);

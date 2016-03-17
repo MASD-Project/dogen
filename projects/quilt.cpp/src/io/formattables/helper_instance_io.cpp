@@ -19,17 +19,9 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
 #include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_instance_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_instance_properties_io.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
 
 namespace std {
 
@@ -53,7 +45,6 @@ namespace formattables {
 std::ostream& operator<<(std::ostream& s, const helper_instance& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::helper_instance\"" << ", "
-      << "\"family\": " << "\"" << tidy_up_string(v.family()) << "\"" << ", "
       << "\"properties\": " << v.properties() << ", "
       << "\"associated_helpers\": " << v.associated_helpers() << ", "
       << "\"settings\": " << v.settings()

@@ -27,7 +27,7 @@
 
 #include <list>
 #include <string>
-#include <unordered_set>
+#include <boost/optional.hpp>
 #include "dogen/yarn/types/property.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_instance.hpp"
@@ -44,10 +44,10 @@ public:
         const settings::helper_settings_repository& hsrp);
 
 private:
-    void make(const yarn::name_tree& nt,
-        std::list<helper_instance>& instances,
-        std::unordered_set<std::string>& types_done) const;
-    
+    boost::optional<helper_instance_properties> make(
+        const yarn::name_tree& nt, std::string& complete_name,
+        std::list<helper_instance>& instances) const;
+
 public:
     std::list<helper_instance>
     make(const std::list<yarn::property>& properties) const;

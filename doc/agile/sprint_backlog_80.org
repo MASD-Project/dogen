@@ -39,7 +39,6 @@
 
 *** COMPLETED Sprint and product backlog grooming                     :story:
     CLOSED: [2016-03-14 Mon 21:44]
-    CLOCK: [2016-02-18 Thu 23:26]
     CLOCK: [2016-02-18 Thu 07:52]--[2016-02-18 Thu 08:39] =>  0:47
     CLOCK: [2016-02-17 Wed 11:03]--[2016-02-17 Wed 11:23] =>  0:20
     CLOCK: [2016-02-17 Wed 10:34]--[2016-02-17 Wed 10:48] =>  0:14

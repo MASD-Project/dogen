@@ -48,7 +48,6 @@ namespace formattables {
 std::size_t helper_instance_hasher::hash(const helper_instance& v) {
     std::size_t seed(0);
 
-    combine(seed, v.family());
     combine(seed, v.properties());
     combine(seed, hash_std_list_dogen_quilt_cpp_formattables_helper_instance_properties(v.associated_helpers()));
     combine(seed, v.settings());
