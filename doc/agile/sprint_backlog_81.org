@@ -38,6 +38,30 @@ Updates to sprint and product backlog.
 Now we figured out the right way of doing the helpers dynamically, we
 should remove the previous attempt.
 
+*** COMPLETED Help conan with strange warning                         :story:
+    CLOSED: [2016-03-26 Sat 17:46]
+
+*Rationale*: This has now been fixed in conan 0.8.0.
+
+We are getting a CMake warning on our builds:
+
+: CMake Warning (dev) in build/output/conanbuildinfo.cmake:
+:  Syntax Warning in cmake code at
+:    /home/travis/build/DomainDrivenConsulting/dogen/build/output/conanbuildinfo.cmake:142:88
+:  Argument not separated from preceding token by whitespace.
+: Call Stack (most recent call first):
+:  CMakeLists.txt:30 (include)
+: This warning is for project developers.  Use -Wno-dev to suppress it.
+
+Report it to conan.
+
+Actually, this is a bit trickier than expected, and the fix is now
+breaking the build:
+
+- [[https://github.com/conan-io/conan/issues/138][Warning in CMake file created by conan]]
+
+We will wait until conan comes up with a fix.
+
 *** STARTED Add properties for helpers                                :story:
     CLOCK: [2016-03-17 Thu 21:02]--[2016-03-17 Thu 22:29] =>  1:27
     CLOCK: [2016-03-17 Thu 08:01]--[2016-03-17 Thu 08:37] =>  0:36
@@ -105,27 +129,6 @@ index. Then, nested name properties is a flat container for each name
 with the required properties. With this the helpers can continue to
 rely on just the nested name (plus the nested name properties via the
 assistant).
-
-*** Help conan with strange warning                                   :story:
-
-We are getting a CMake warning on our builds:
-
-: CMake Warning (dev) in build/output/conanbuildinfo.cmake:
-:  Syntax Warning in cmake code at
-:    /home/travis/build/DomainDrivenConsulting/dogen/build/output/conanbuildinfo.cmake:142:88
-:  Argument not separated from preceding token by whitespace.
-: Call Stack (most recent call first):
-:  CMakeLists.txt:30 (include)
-: This warning is for project developers.  Use -Wno-dev to suppress it.
-
-Report it to conan.
-
-Actually, this is a bit trickier than expected, and the fix is now
-breaking the build:
-
-- [[https://github.com/conan-io/conan/issues/138][Warning in CMake file created by conan]]
-
-We will wait until conan comes up with a fix.
 
 *** Add an helper method interface                                    :story:
 
