@@ -1,0 +1,93 @@
+#+title: Nerd Food: Interesting...
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+Time to flush all those tabs again. Some interesting stuff I bumped
+into recently-ish.
+
+* Finance, Economics, Politics
+
+- [[http://www.strongtowns.org/journal/2016/3/20/dbuidkmm60m63enun84oqs07mktdwq][Understanding Growth, part 1]]: looks very promising although I've
+  only started parsing it. Also pointed me to - Tomas Sedlacek and the
+  [[http://www.amazon.co.uk/Economics-Good-Evil-Economic-Gilgamesh/dp/019932218X][Economics of Good and Evil]].
+- [[http://www.bloomberg.com/features/2016-ev-oil-crisis/][Here’s How Electric Cars Will Cause the Next Oil Crisis]]: Extremely
+  interesting take on the relationship between electric cars and the
+  oil price. Its along the lines of articles posted in the past, to be
+  fair, but still. Basically, it won't take a huge number of sales of
+  electric cars to start knocking down the oil price. And with Model 3
+  [[http://www.bloomberg.com/news/features/2016-03-22/how-tesla-model-3-can-complete-its-take-over-of-the-u-s-luxury-market][on the horizon]], this all seems quite ominous to the oil producing
+  countries.
+
+* Startups et al.
+
+- [[http://www.zdnet.com/article/red-hat-becomes-first-2b-open-source-company/][Red Hat becomes first $2b open-source company]]: I may not use their
+  stuff any more but RedHat is still one of my favourite
+  companies. Really happy to see they are growing nicely and hopefully
+  continuing all of their investment into Linux.
+- [[https://stratechery.com/2016/the-amazon-tax/][The Amazon Tax]]: Really, *really* good article about Amazon and their
+  strategy. If you read only one, read this one.
+- [[https://stratechery.com/2015/venture-capital-and-the-internets-impact/][Venture capital and the internet’s impact]]: From the same guys as the
+  Amazon post, this is also a very interesting take on VCs and the
+  internet. Highly recommended.
+- [[http://news.efinancialcareers.com/uk-en/240115/believe-not-want-quit-banking-job-tech-unicorn/][Believe me, you do not want to quit your banking job for a tech
+  unicorn]]: Stories from the trenches on how Unicorns are not always
+  rosy. Of course, given it comes from "eFinacialCareers", one must
+  assume they are talking their book. Cautionary tale, nonetheless.
+- [[http://obscurehandhelds.com/2016/02/sir-clive-sinclair-revives-the-zx-spectrum/][Sir Clive Sinclair Revives the ZX Spectrum]]: so the Spectrum is back!
+  I know I shouldn't - there isn't a single logical reason to back it
+  up - but I just feel like I need to get me one of these...
+
+* General Coding
+
+- [[http://www.theregister.co.uk/2016/03/24/water_utility_hacked/][Water treatment plant hacked, chemical mix changed for tap supplies]]:
+  this is a tad worrying. Can you imagine the amount of systems out
+  there with vulnerabilities, etc - many of which are connected to the
+  internet.
+- [[http://www.metzdowd.com/pipermail/cryptography/2016-March/028824.html][On the Impending Crypto Monoculture]]: Talking about security, very
+  worrying news from the crypto front. It seems our foundations are
+  much less solid than expected - and after all the OpenSSL bugs, this
+  is a surprising statement indeed. Very interesting email on the
+  subject.
+- [[http://lumiverse.io/video/part-1-data-and-architecture][Neural Networks Demystified - Part 1: Data and Architecture]]: just
+  started browsing this in my spare time, but it looks very
+  promising. For the layperson.
+-  [[http://www.telegraph.co.uk/technology/2016/03/24/microsofts-teen-girl-ai-turns-into-a-hitler-loving-sex-robot-wit/][Microsoft deletes 'teen girl' AI after it became a Hitler-loving
+   sex robot within 24 hours]]: friggin' hilarious in a
+   /funny-not-funny/ sort of way. This tweet said it best: "Tay" went
+   from "humans are super cool" to full nazi in <24 hrs and I'm not at
+   all concerned about the future of AI. -- Gerry
+
+* Databases
+
+- [[https://www.citusdata.com/blog/17-ozgun-erdogan/403-citus-unforks-postgresql-goes-open-source][Citus Unforks From PostgreSQL, Goes Open Source]]: Great news
+  everyone! Sharding in Postgres just became easier with the open
+  sourcing of Citus!
+- [[http://blog.2ndquadrant.com/parallel-aggregate/][Parallel Aggregate – Getting the most out of your CPUs]]: The elephant
+  just keeps getting better and better. Improved scaling on multi-CPU
+  for a few scenarios is coming on 9.6.
+
+* C++
+
+- [[https://randomascii.wordpress.com/2016/03/24/compiler-bugs-found-when-porting-chromium-to-vc-2015/][Compiler Bugs Found When Porting Chromium to VC++ 2015]]: great tales
+  form the frontline. Also good to hear that MS is really responsive
+  to bug reports. Can't wait to be able to build my C++ 14 code on
+  Windows...
+- https://github.com/haptork/easylambda: C++ 14 library for data
+  processing. Based on MPI though. Still, seems like an interesting
+  find.
+
+* Layperson Science
+
+- [[http://www.fastcompany.com/3042443/mendeley-elsevier-and-the-future-of-scholarly-publishing][The Open Publishing Revolution, Now Behind A Billion-Dollar Paywall]]:
+  this is very sad news. How science has regressed yet again, now that
+  Mendeley has been bought out. This saga gets worse and worse. On the
+  slightly more positive side: [[http://techcrunch.com/2014/03/03/from-crowdfunding-to-open-access-startups-are-experimenting-with-academic-research/][From Crowdfunding To Open Access,
+  Startups Are Experimenting With Academic Research]]. But will they
+  succeed?
+
+* Other
+
+- [[https://medium.com/@thatdavidhopkins/how-a-tv-sitcom-triggered-the-downfall-of-western-civilization-336e8ccf7dd0#.gjnifjo0k][How a TV Sitcom Triggered the Downfall of Western Civilization]]: ok,
+  I got to say that with a click bait title as bad as this, I almost
+  immediately ignored this article. Somehow I went back to it. Its
+  very long and a bit crazy but its actually very interesting. Friends
+  (the sitcom) as the signal of the end.
