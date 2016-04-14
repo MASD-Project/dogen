@@ -8,23 +8,41 @@ into recently-ish.
 
 - [[http://www.strongtowns.org/journal/2016/3/20/dbuidkmm60m63enun84oqs07mktdwq][Understanding Growth, part 1]]: looks very promising although I've
   only started parsing it. Also pointed me to - Tomas Sedlacek and the
-  [[http://www.amazon.co.uk/Economics-Good-Evil-Economic-Gilgamesh/dp/019932218X][Economics of Good and Evil]].
+  [[http://www.amazon.co.uk/Economics-Good-Evil-Economic-Gilgamesh/dp/019932218X][Economics of Good and Evil]]. Bought the book, but still reading
+  it. Seems very thoughtful.
 - [[http://www.bloomberg.com/features/2016-ev-oil-crisis/][Here’s How Electric Cars Will Cause the Next Oil Crisis]]: Extremely
   interesting take on the relationship between electric cars and the
   oil price. Its along the lines of articles posted in the past, to be
   fair, but still. Basically, it won't take a huge number of sales of
   electric cars to start knocking down the oil price. And with Model 3
-  [[http://www.bloomberg.com/news/features/2016-03-22/how-tesla-model-3-can-complete-its-take-over-of-the-u-s-luxury-market][on the horizon]], this all seems quite ominous to the oil producing
-  countries.
+  [[http://www.bloomberg.com/news/features/2016-03-22/how-tesla-model-3-can-complete-its-take-over-of-the-u-s-luxury-market][coming out]], this all seems quite ominous to the oil producing
+  countries. Here we go again, Angola.
+- [[http://www.zdnet.com/article/red-hat-becomes-first-2b-open-source-company/][Red Hat becomes first $2b open-source company]]: I may not use their
+  wares any more but RedHat will always be one of my favourite
+  companies. Really happy to see they are growing nicely and hopefully
+  continuing all of their incredible investment on Linux.
+- [[https://stratechery.com/2016/the-amazon-tax/][The Amazon Tax]]: Really, *really* good article about Amazon and their
+  strategy. If you read only one, read this. Amazon is amazing - and
+  its dominance is very worrying because they are so good at
+  executing! See also Bezos letter.
+- [[https://stratechery.com/2016/its-a-tesla/][It’s a Tesla]]: Great article about Tesla. Some of the usual Fanboyism
+  we all know and love, of course, but still a lot of very good
+  points. The core of the article is a interesting comparison between
+  Tesla and Apple. By the by, not at all convinced about that
+  dashboard and the launch ceremony itself was a bit sparse too! But,
+  Model 3 looks great. I'm officially a Stratechery fanboy now.
+- [[http://www.wired.com/2016/04/googles-alphabet-transition-tougher-b-c/][Google’s Alphabet Transition Has Been Tougher Than A-B-C]]: Great
+  article on the pains of moving to a single monolithic structure to
+  something more distributed. In truth, what would one expect with
+  such a seismic change? And, also, how come it took Google so long to
+  make this shift? After all, programmers are supposedly taught how
+  important separation of concerns is. The other very interesting
+  point is the CED difficulties. These guys were able founders (at
+  least able enough to get bought out by Google) but seem to fail
+  badly at the CEO'ing malarky.
 
 * Startups et al.
 
-- [[http://www.zdnet.com/article/red-hat-becomes-first-2b-open-source-company/][Red Hat becomes first $2b open-source company]]: I may not use their
-  stuff any more but RedHat is still one of my favourite
-  companies. Really happy to see they are growing nicely and hopefully
-  continuing all of their investment into Linux.
-- [[https://stratechery.com/2016/the-amazon-tax/][The Amazon Tax]]: Really, *really* good article about Amazon and their
-  strategy. If you read only one, read this one.
 - [[https://stratechery.com/2015/venture-capital-and-the-internets-impact/][Venture capital and the internet’s impact]]: From the same guys as the
   Amazon post, this is also a very interesting take on VCs and the
   internet. Highly recommended.
@@ -46,21 +64,38 @@ into recently-ish.
   worrying news from the crypto front. It seems our foundations are
   much less solid than expected - and after all the OpenSSL bugs, this
   is a surprising statement indeed. Very interesting email on the
-  subject.
+  subject. The LWN article is a must read too.
 - [[http://lumiverse.io/video/part-1-data-and-architecture][Neural Networks Demystified - Part 1: Data and Architecture]]: just
   started browsing this in my spare time, but it looks very
   promising. For the layperson.
--  [[http://www.telegraph.co.uk/technology/2016/03/24/microsofts-teen-girl-ai-turns-into-a-hitler-loving-sex-robot-wit/][Microsoft deletes 'teen girl' AI after it became a Hitler-loving
-   sex robot within 24 hours]]: friggin' hilarious in a
-   /funny-not-funny/ sort of way. This tweet said it best: "Tay" went
-   from "humans are super cool" to full nazi in <24 hrs and I'm not at
-   all concerned about the future of AI. -- Gerry
+- [[http://www.telegraph.co.uk/technology/2016/03/24/microsofts-teen-girl-ai-turns-into-a-hitler-loving-sex-robot-wit/][Microsoft deletes 'teen girl' AI after it became a Hitler-loving sex
+  robot within 24 hours]]: friggin' hilarious in a /funny-not-funny/
+  sort of way. This tweet said it best: "Tay" went from "humans are
+  super cool" to full nazi in <24 hrs and I'm not at all concerned
+  about the future of AI. -- Gerry
+- [[http://www.beepsend.com/2016/04/05/abandoning-gitflow-github-favour-gerrit/][Abandoning Gitflow and GitHub in favour of Gerrit]]: I've always
+  wanted to know more about Gerrit but never seem to find the
+  time. The article explains it to my required extent, contrasting it
+  with the model I'm more familiar with - GitHub, forks and pull
+  requests. I must say, still not convinced about Gerrit, but having
+  said that, it seems there is definitely scope for some kind of
+  hybrid between the two. A lot of the issues they mention in the
+  article are definitely pain points for GitHub users.
+- [[http://githubengineering.com/introducing-dgit/][Introducing DGit]]: OK this one is a puzzling post, from our friends
+  at GitHub engineering. I'm not sure I get it at all, but seems
+  amazing. Basically, they talk about all the hard work they've made
+  to make git distributed. Fine, I'm jesting - but not totally. The
+  part that leaves no doubts is that GitHub as a whole is a lot more
+  reliable after this work and can handle a lot more traffic - *without*
+  increasing its hardware requirements. Amazing stuff.
 
 * Databases
 
 - [[https://www.citusdata.com/blog/17-ozgun-erdogan/403-citus-unforks-postgresql-goes-open-source][Citus Unforks From PostgreSQL, Goes Open Source]]: Great news
   everyone! Sharding in Postgres just became easier with the open
-  sourcing of Citus!
+  sourcing of Citus! Also worth watching / reading: [[https://www.citusdata.com/blog/15-marco-slot/402-interactive-analytics-github-data-using-postgresql-citus][Interactive
+  Analytics on GitHub Data using PostgreSQL with Citus]]. This explains
+  in a very understandable way how you will use Citus to shard.
 - [[http://blog.2ndquadrant.com/parallel-aggregate/][Parallel Aggregate – Getting the most out of your CPUs]]: The elephant
   just keeps getting better and better. Improved scaling on multi-CPU
   for a few scenarios is coming on 9.6.
@@ -71,9 +106,8 @@ into recently-ish.
   form the frontline. Also good to hear that MS is really responsive
   to bug reports. Can't wait to be able to build my C++ 14 code on
   Windows...
-- https://github.com/haptork/easylambda: C++ 14 library for data
-  processing. Based on MPI though. Still, seems like an interesting
-  find.
+- [[https://github.com/haptork/easylambda][EasyLambda]]: C++ 14 library for data processing. Based on MPI
+  though. Still, seems like an interesting find.
 
 * Layperson Science
 
@@ -83,10 +117,18 @@ into recently-ish.
   slightly more positive side: [[http://techcrunch.com/2014/03/03/from-crowdfunding-to-open-access-startups-are-experimenting-with-academic-research/][From Crowdfunding To Open Access,
   Startups Are Experimenting With Academic Research]]. But will they
   succeed?
+- [[https://www.edge.org/conversation/stephen_wolfram-ai-the-future-of-civilization][AI & The Future Of Civilization]]: Very interesting chat with
+  Wolfram. Absurdly long but worth a read.
+- [[https://www.quora.com/What-is-the-best-way-to-explain-the-concept-of-manifold-to-a-novice][What is the best way to explain the concept of manifold to a
+  novice?]]: Bumped into this in Quora. If only we had more of these. We
+  need an entire book of "mathematics for lay people".
+- [[http://kernelmag.dailydot.com/issue-sections/staff-editorials/16335/neuroskeptic-neurohype-brain-training-apps/?utm_content%3Dbuffer874e9&utm_medium%3Dsocial&utm_source%3Dtwitter.com&utm_campaign%3Dbuffer][Why we’re living in an era of neuroscience hype]]: One that everyone
+  interested on the field should read. Interesting take on the wave of
+  progress on the neuroscience front.
 
 * Other
 
-- [[https://medium.com/@thatdavidhopkins/how-a-tv-sitcom-triggered-the-downfall-of-western-civilization-336e8ccf7dd0#.gjnifjo0k][How a TV Sitcom Triggered the Downfall of Western Civilization]]: ok,
+- [[https://medium.com/@thatdavidhopkins/how-a-tv-sitcom-triggered-the-downfall-of-western-civilization-336e8ccf7dd0#.gjnifjo0k][How a TV Sitcom Triggered the Downfall of Western Civilization]]: OK,
   I got to say that with a click bait title as bad as this, I almost
   immediately ignored this article. Somehow I went back to it. Its
   very long and a bit crazy but its actually very interesting. Friends
