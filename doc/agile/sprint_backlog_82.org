@@ -12,16 +12,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-04-14 Thu 07:35]
+#+CAPTION: Clock summary at [2016-04-14 Thu 10:41]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:36* |      |      | 100.0 |
+| *Total time*                                                                | *0:41* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:36   |      |      | 100.0 |
-| Active                                                                      |        | 0:36 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:03 |   8.3 |
-| STARTED Manual updates and blog posts                                       |        |      | 0:33 |  91.7 |
+| Stories                                                                     | 0:41   |      |      | 100.0 |
+| Active                                                                      |        | 0:41 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:03 |   7.3 |
+| STARTED Manual updates and blog posts                                       |        |      | 0:33 |  80.5 |
+| STARTED Add properties for helpers                                          |        |      | 0:05 |  12.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -35,7 +36,8 @@ Updates to sprint and product backlog.
 
 Time taken with blog posts and updates to the manual.
 
-*** Add properties for helpers                                        :story:
+*** STARTED Add properties for helpers                                :story:
+    CLOCK: [2016-04-14 Thu 07:36]--[2016-04-14 Thu 07:41] =>  0:05
 
 We should pre-compute all of the required helper instances for a given
 element and have them ready for formatting. Create all of the types
