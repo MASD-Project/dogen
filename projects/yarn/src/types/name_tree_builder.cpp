@@ -173,22 +173,15 @@ void name_tree_builder::end_children() {
     current_ = current_->parent();
 }
 
-name_tree name_tree_builder::
-make_name_tree(const node& n, unsigned int index) {
+name_tree name_tree_builder::make_name_tree(const node& n) {
     BOOST_LOG_SEV(lg, debug) << "Node: " << n.data();
 
     name_tree r;
-    r.index(index);
     r.parent(n.data());
 
-    unsigned int cardinality(1);
-    for (const auto c : n.children()) {
-        const auto ntc(make_name_tree(*c, ++index));
-        r.children().push_back(ntc);
-        cardinality += ntc.cardinality();
-    }
+    for (const auto c : n.children())
+        r.children().push_back(make_name_tree(*c));
 
-    r.cardinality(cardinality);
     return r;
 }
 
@@ -196,8 +189,7 @@ name_tree name_tree_builder::build() {
     BOOST_LOG_SEV(lg, debug) << "Started build";
 
     finish_current_node();
-    const unsigned int root_index(0);
-    name_tree r(make_name_tree(*root_, root_index));
+    name_tree r(make_name_tree(*root_));
 
     BOOST_LOG_SEV(lg, debug) << "Finished build. Final name: " << r;
 

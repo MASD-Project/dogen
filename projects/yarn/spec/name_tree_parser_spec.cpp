@@ -47,8 +47,6 @@ const auto model_location = dogen::yarn::location();
 
 dogen::yarn::name_tree make(const dogen::yarn::name& n) {
     dogen::yarn::name_tree r;
-    r.index(0);
-    r.cardinality(1);
     r.parent(n);
     return r;
 }
@@ -56,8 +54,6 @@ dogen::yarn::name_tree make(const dogen::yarn::name& n) {
 bool test_primitive(const std::string& s) {
     dogen::yarn::name_tree_parser ntp(top_level_modules, model_location);
     const auto a(ntp.parse(s));
-    BOOST_CHECK(a.index() == 0);
-    BOOST_CHECK(a.cardinality() == 1);
 
     dogen::yarn::name_factory nf;
     const auto e(make(nf.build_element_name(s)));
@@ -181,13 +177,9 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expec
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("type"));
-    e.index(0);
-    e.cardinality(2);
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("abc"));
-    c.index(1);
-    c.cardinality(1);
 
     e.children(std::list<dogen::yarn::name_tree> { c });
 
@@ -204,18 +196,12 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("type"));
-    e.index(0);
-    e.cardinality(3);
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("abc"));
-    c.index(1);
-    c.cardinality(1);
 
     dogen::yarn::name_tree d;
     d.parent(nf.build_element_name("cde"));
-    d.index(2);
-    d.cardinality(1);
 
     e.children(std::list<dogen::yarn::name_tree> { c, d });
 
@@ -232,13 +218,9 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_name_trees) {
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("std", "vector"));
-    e.index(0);
-    e.cardinality(2);
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("std", "string"));
-    c.index(1);
-    c.cardinality(1);
 
     e.children(std::list<dogen::yarn::name_tree> { c });
 
@@ -256,13 +238,9 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_name_trees) {
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("std", "vector"));
-    e.index(0);
-    e.cardinality(2);
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("unsigned int"));
-    c.index(1);
-    c.cardinality(1);
 
     e.children(std::list<dogen::yarn::name_tree> { c });
 
@@ -281,18 +259,12 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_name_trees) {
 
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("std", "unordered_map"));
-    e.index(0);
-    e.cardinality(3);
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("std", "string"));
-    c.index(1);
-    c.cardinality(1);
 
     dogen::yarn::name_tree d;
     d.parent(nf.build_element_name("my", "type"));
-    d.index(2);
-    d.cardinality(1);
 
     e.children(std::list<dogen::yarn::name_tree> { c, d });
 
@@ -316,18 +288,12 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_name_trees) 
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("std", "vector"));
-    e.index(0);
-    e.cardinality(3);
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("std", "shared_ptr"));
-    c.index(1);
-    c.cardinality(2);
 
     dogen::yarn::name_tree d;
     d.parent(nf.build_element_name("std", "string"));
-    d.index(2);
-    d.cardinality(1);
 
     c.children(std::list<dogen::yarn::name_tree> { d });
     e.children(std::list<dogen::yarn::name_tree> { c });

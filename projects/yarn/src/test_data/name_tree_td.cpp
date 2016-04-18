@@ -45,10 +45,6 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
-unsigned int create_unsigned_int(const unsigned int position) {
-    return static_cast<unsigned int>(position);
-}
-
 }
 
 namespace dogen {
@@ -62,8 +58,6 @@ populate(const unsigned int position, result_type& v) {
     v.children(create_std_list_dogen_yarn_name_tree(position + 1));
     v.are_children_opaque(create_bool(position + 2));
     v.is_circular_dependency(create_bool(position + 3));
-    v.cardinality(create_unsigned_int(position + 4));
-    v.index(create_unsigned_int(position + 5));
 }
 
 name_tree_generator::result_type

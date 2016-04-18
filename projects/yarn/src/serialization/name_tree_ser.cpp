@@ -42,8 +42,6 @@ void save(Archive& ar,
     ar << make_nvp("children", v.children_);
     ar << make_nvp("are_children_opaque", v.are_children_opaque_);
     ar << make_nvp("is_circular_dependency", v.is_circular_dependency_);
-    ar << make_nvp("cardinality", v.cardinality_);
-    ar << make_nvp("index", v.index_);
 }
 
 template<typename Archive>
@@ -54,8 +52,6 @@ void load(Archive& ar,
     ar >> make_nvp("children", v.children_);
     ar >> make_nvp("are_children_opaque", v.are_children_opaque_);
     ar >> make_nvp("is_circular_dependency", v.is_circular_dependency_);
-    ar >> make_nvp("cardinality", v.cardinality_);
-    ar >> make_nvp("index", v.index_);
 }
 
 } }

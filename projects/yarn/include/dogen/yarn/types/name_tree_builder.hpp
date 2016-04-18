@@ -97,7 +97,7 @@ private:
      * @brief Generate the name tree for the given node
      * representation.
      */
-    name_tree make_name_tree(const node& n, unsigned int index);
+    name_tree make_name_tree(const node& n);
 
 public:
     /**
