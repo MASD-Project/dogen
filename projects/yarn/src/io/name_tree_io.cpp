@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/name_tree_io.hpp"
 
@@ -37,6 +38,13 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::na
 
 }
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
 namespace dogen {
 namespace yarn {
 
@@ -52,7 +60,8 @@ std::ostream& operator<<(std::ostream& s, const name_tree& v) {
       << "\"parent\": " << v.parent() << ", "
       << "\"children\": " << v.children() << ", "
       << "\"are_children_opaque\": " << v.are_children_opaque() << ", "
-      << "\"is_circular_dependency\": " << v.is_circular_dependency()
+      << "\"is_circular_dependency\": " << v.is_circular_dependency() << ", "
+      << "\"unparsed_type\": " << "\"" << tidy_up_string(v.unparsed_type()) << "\""
       << " }";
     return(s);
 }

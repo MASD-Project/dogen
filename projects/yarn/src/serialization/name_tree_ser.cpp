@@ -22,6 +22,7 @@
 #include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
@@ -42,6 +43,7 @@ void save(Archive& ar,
     ar << make_nvp("children", v.children_);
     ar << make_nvp("are_children_opaque", v.are_children_opaque_);
     ar << make_nvp("is_circular_dependency", v.is_circular_dependency_);
+    ar << make_nvp("unparsed_type", v.unparsed_type_);
 }
 
 template<typename Archive>
@@ -52,6 +54,7 @@ void load(Archive& ar,
     ar >> make_nvp("children", v.children_);
     ar >> make_nvp("are_children_opaque", v.are_children_opaque_);
     ar >> make_nvp("is_circular_dependency", v.is_circular_dependency_);
+    ar >> make_nvp("unparsed_type", v.unparsed_type_);
 }
 
 } }

@@ -383,7 +383,7 @@ Name must be in one of the supported notations.#</dia:string>
         <dia:point val="-33,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-33.05,-1.05;-20.515,4.25"/>
+        <dia:rectangle val="-33.05,-1.05;-20.515,5.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-33,-1"/>
@@ -392,7 +392,7 @@ Name must be in one of the supported notations.#</dia:string>
         <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#name_tree#</dia:string>
@@ -583,6 +583,29 @@ C++ pointers, references and so on.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#unparsed_type#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Portion of the original unparsed type relevant to this node and its children.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -631,7 +654,7 @@ C++ pointers, references and so on.#</dia:string>
         <dia:point val="-37.435,14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-38.185,4.15;-26.5825,14.8"/>
+        <dia:rectangle val="-38.185,4.95;-26.5825,14.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -640,7 +663,7 @@ C++ pointers, references and so on.#</dia:string>
         <dia:point val="-37.435,14"/>
         <dia:point val="-37.435,9"/>
         <dia:point val="-26.7825,9"/>
-        <dia:point val="-26.7825,4.2"/>
+        <dia:point val="-26.7825,5"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

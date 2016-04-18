@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include <string>
 #include <algorithm>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
@@ -56,7 +57,8 @@ public:
         const dogen::yarn::name& parent,
         const std::list<dogen::yarn::name_tree>& children,
         const bool are_children_opaque,
-        const bool is_circular_dependency);
+        const bool is_circular_dependency,
+        const std::string& unparsed_type);
 
 private:
     template<typename Archive>
@@ -106,6 +108,16 @@ public:
     void is_circular_dependency(const bool v);
     /**@}*/
 
+    /**
+     * @brief Portion of the original unparsed type relevant to this node and its children.
+     */
+    /**@{*/
+    const std::string& unparsed_type() const;
+    std::string& unparsed_type();
+    void unparsed_type(const std::string& v);
+    void unparsed_type(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const name_tree& rhs) const;
     bool operator!=(const name_tree& rhs) const {
@@ -121,6 +133,7 @@ private:
     std::list<dogen::yarn::name_tree> children_;
     bool are_children_opaque_;
     bool is_circular_dependency_;
+    std::string unparsed_type_;
 };
 
 } }
