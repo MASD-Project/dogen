@@ -12,21 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-04-14 Thu 10:41]
+#+CAPTION: Clock summary at [2016-04-18 Mon 22:27]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:41* |      |      | 100.0 |
+| *Total time*                                                                | *1:53* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:41   |      |      | 100.0 |
-| Active                                                                      |        | 0:41 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:03 |   7.3 |
-| STARTED Manual updates and blog posts                                       |        |      | 0:33 |  80.5 |
-| STARTED Add properties for helpers                                          |        |      | 0:05 |  12.2 |
+| Stories                                                                     | 1:53   |      |      | 100.0 |
+| Active                                                                      |        | 1:53 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:04 |   3.5 |
+| STARTED Manual updates and blog posts                                       |        |      | 0:33 |  29.2 |
+| STARTED Add properties for helpers                                          |        |      | 1:16 |  67.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-04-18 Mon 22:25]--[2016-04-18 Mon 22:26] =>  0:01
     CLOCK: [2016-04-14 Thu 07:32]--[2016-04-14 Thu 07:35] =>  0:03
 
 Updates to sprint and product backlog.
@@ -37,6 +38,7 @@ Updates to sprint and product backlog.
 Time taken with blog posts and updates to the manual.
 
 *** STARTED Add properties for helpers                                :story:
+    CLOCK: [2016-04-18 Mon 21:14]--[2016-04-18 Mon 22:25] =>  1:11
     CLOCK: [2016-04-14 Thu 07:36]--[2016-04-14 Thu 07:41] =>  0:05
 
 We should pre-compute all of the required helper instances for a given
@@ -66,7 +68,14 @@ Notes:
   achieved by returning these in the recursive function.
 - we must build helper instances for all children. This requires
   supplying a list by reference.
-- we must build complete name.
+- we must build the complete name.
+- we need the complete name in two places: helpers and properties. For
+  properties all we care about is the top-level complete name. We
+  don't really need identifiable names etc. For helpers we need the
+  child complete names and their identifiable versions. Since we are
+  using C++ syntax for the unparsed type, we could extend this logic
+  and move the unparsed type from the property into the name tree - at
+  all levels.
 
 *Previous Understanding*
 
@@ -97,6 +106,12 @@ index. Then, nested name properties is a flat container for each name
 with the required properties. With this the helpers can continue to
 rely on just the nested name (plus the nested name properties via the
 assistant).
+
+*** Move unparsed type to name tree                                   :story:
+
+We need to compute the unparsed type at all levels of the name tree
+during the name tree building process. We can then use this for the
+helper methods generation.
 
 *** Add an helper method interface                                    :story:
 
