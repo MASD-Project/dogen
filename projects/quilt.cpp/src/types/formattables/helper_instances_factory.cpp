@@ -30,7 +30,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.helper_instances_factory"));
 
 const char less_than('<');
-const char greater_than('<');
+const char greater_than('>');
 
 }
 
@@ -67,7 +67,7 @@ helper_instances_factory::make(const yarn::name_tree& nt,
 
     lambda(less_than);
     helper_instance hi;
-    bool is_first(true);    
+    bool is_first(true);
     for (const auto c : nt.children()) {
         if (!is_first)
             my_complete_name += ", ";
@@ -90,12 +90,13 @@ helper_instances_factory::make(const yarn::name_tree& nt,
     const auto& hs(i->second);
     BOOST_LOG_SEV(lg, debug) << "Helper settings: " << hs;
     hi.settings(hs);
-    
+
     name_builder b;
     helper_instance_properties properties;
     properties.identifiable_name(b.identifiable_name(qn));
     properties.complete_name(my_complete_name);
-    properties.complete_identifiable_name(b.identifiable_name(my_complete_name));
+    properties.complete_identifiable_name(
+        b.identifiable_name(my_complete_name));
     hi.properties(properties);
 
     instances.push_back(hi);
@@ -125,7 +126,7 @@ make(const std::list<yarn::property>& properties) const {
         const auto cn(i.properties().complete_name());
         if (done.find(cn) == done.end())
             continue;
-        
+
         r.push_back(i);
         done.insert(cn);
     }

@@ -58,7 +58,7 @@ private:
 
         const auto qn(s.name().qualified());
         BOOST_LOG_SEV(lg, debug) << "Creating helper instances for" << qn;
-        
+
         const auto pair(std::make_pair(qn, factory_.make(s.local_properties())));
         auto& hi(result_.helper_instances_by_name());
         const auto res(hi.insert(pair));
@@ -96,10 +96,10 @@ helper_instances_repository_factory::make(const yarn::model& m,
         const auto& e(*pair.second);
         e.accept(g);
     }
-    
+
     BOOST_LOG_SEV(lg, debug) << "Finished creating helper instances:"
                              << g.result();
-    return g.result();    
+    return g.result();
 }
 
 } } } }

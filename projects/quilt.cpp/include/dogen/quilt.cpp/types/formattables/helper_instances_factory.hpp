@@ -40,7 +40,7 @@ namespace formattables {
 
 class helper_instances_factory {
 public:
-    helper_instances_factory(
+    explicit helper_instances_factory(
         const settings::helper_settings_repository& hsrp);
 
 private:
