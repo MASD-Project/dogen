@@ -43,6 +43,7 @@
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/object_types_ser.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
+#include "dogen/yarn/serialization/printing_styles_ser.hpp"
 #include "dogen/yarn/serialization/generation_types_ser.hpp"
 #include "dogen/yarn/serialization/input_descriptor_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_ser.hpp"

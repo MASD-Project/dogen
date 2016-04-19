@@ -12,18 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-04-19 Tue 20:33]
+#+CAPTION: Clock summary at [2016-04-19 Tue 22:14]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *4:18* |      |      | 100.0 |
+| *Total time*                                                                | *4:29* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 4:18   |      |      | 100.0 |
-| Active                                                                      |        | 4:18 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:04 |   1.6 |
-| STARTED Manual updates and blog posts                                       |        |      | 0:33 |  12.8 |
-| STARTED Add properties for helpers                                          |        |      | 1:16 |  29.5 |
-| STARTED Move unparsed type to name tree                                     |        |      | 2:25 |  56.2 |
+| Stories                                                                     | 4:29   |      |      | 100.0 |
+| Active                                                                      |        | 4:29 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:04 |   1.5 |
+| STARTED Manual updates and blog posts                                       |        |      | 0:33 |  12.3 |
+| STARTED Add properties for helpers                                          |        |      | 1:16 |  28.3 |
+| STARTED Create a name pretty printer                                        |        |      | 1:45 |  39.0 |
+| STARTED Move unparsed type to name tree                                     |        |      | 0:51 |  19.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -108,10 +109,17 @@ with the required properties. With this the helpers can continue to
 rely on just the nested name (plus the nested name properties via the
 assistant).
 
-*** STARTED Move unparsed type to name tree                           :story:
+*** STARTED Create a name pretty printer                              :story:
+    CLOCK: [2016-04-19 Tue 20:33]--[2016-04-19 Tue 20:44] =>  0:11
     CLOCK: [2016-04-19 Tue 20:12]--[2016-04-19 Tue 20:32] =>  0:20
     CLOCK: [2016-04-19 Tue 19:41]--[2016-04-19 Tue 20:10] =>  0:29
     CLOCK: [2016-04-19 Tue 07:55]--[2016-04-19 Tue 08:40] =>  0:45
+
+We need to reuse the code for "printing" names when generating name
+tree's unparsed type strings. Refactor this code into it's own
+class. Tidy-up yarn's diagram around name trees.
+
+*** STARTED Move unparsed type to name tree                           :story:
     CLOCK: [2016-04-18 Mon 23:11]--[2016-04-18 Mon 23:19] =>  0:08
     CLOCK: [2016-04-18 Mon 22:27]--[2016-04-18 Mon 23:10] =>  0:43
 

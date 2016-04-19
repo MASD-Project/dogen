@@ -42,6 +42,7 @@
 #include "dogen/yarn/io/enumeration_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
+#include "dogen/yarn/io/printing_styles_io.hpp"
 #include "dogen/yarn/io/generation_types_io.hpp"
 #include "dogen/yarn/io/input_descriptor_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
