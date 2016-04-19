@@ -132,6 +132,9 @@ void name_tree_builder::finish_current_node() {
 void name_tree_builder::start_children() {
     BOOST_LOG_SEV(lg, debug) << "Starting children.";
 
+    /*
+     * We are done building the parent's name so flush it.
+     */
     finish_current_node();
 
     /*
@@ -147,6 +150,9 @@ void name_tree_builder::start_children() {
 void name_tree_builder::next_child() {
     BOOST_LOG_SEV(lg, debug) << "Moving to next child.";
 
+    /*
+     * We are done building the current child's name so flush it.
+     */
     finish_current_node();
 
     /*
@@ -165,6 +171,9 @@ void name_tree_builder::next_child() {
 void name_tree_builder::end_children() {
     BOOST_LOG_SEV(lg, debug) << "Children have ended.";
 
+    /*
+     * We are done building the current child's name so flush it.
+     */
     finish_current_node();
 
     /*
@@ -188,7 +197,15 @@ name_tree name_tree_builder::make_name_tree(const node& n) {
 name_tree name_tree_builder::build() {
     BOOST_LOG_SEV(lg, debug) << "Started build";
 
+    /*
+     * Flush any pending work and build the name for it. This handles
+     * the case of a parent without any children.
+     */
     finish_current_node();
+
+    /*
+     * Convert the node representation into a tree representation.
+     */
     name_tree r(make_name_tree(*root_));
 
     BOOST_LOG_SEV(lg, debug) << "Finished build. Final name: " << r;
