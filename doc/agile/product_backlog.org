@@ -10,6 +10,28 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Recursive structures result in crashes                            :story:
+
+If one defines a tree node with a parent and children (such as =node=
+in =yarn=) dogen generates code that recurses inifinitely. This is
+because the structure contains a parent and we loop through the parent
+back to itself and so on. To stop this from happening we need to tell
+dogen to exclude certain fields. For example, we could mark =parent=
+as a cycle. This is then interpreted by the io feature as a "do not
+follow the pointer" (just dump its memory address). We could have a
+manipulator that tells the =boost::shared_ptr= io to skip its payload,
+much like we do when the pointer is empty.
+
+In summary:
+
+- add a tag to mark a property as circular. Do not confuse this with
+  name tree cycles which are at the type level.
+- create a manipulator that is set when a circular property is
+  found. Set it appropriately.
+- on all pointer code (io, comparisons, etc) check for the
+  manipulator; if set, do not dereference the pointer. For equality do
+  a pointer comparison, for io dump the address, etc.
+
 *** Consider adding =fileset= to formatters                           :story:
 
 We are using collections of files quite a bit, and it makes sense to
