@@ -25,6 +25,7 @@
 #include "dogen/utility/string/splitter.hpp"
 #include "dogen/yarn/io/location_io.hpp"
 #include "dogen/yarn/types/building_error.hpp"
+#include "dogen/yarn/types/name_pretty_printer.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 
 namespace {
@@ -34,19 +35,10 @@ auto lg(logger_factory("yarn.name_builder"));
 
 
 const std::string dot(".");
-const std::string start_component("<");
-const std::string end_component(">");
 const std::string empty_type_name("Type name is empty.");
 const std::string empty_model_name("Model name is empty.");
 const std::string empty_internal_modules("Internal modules are empty.");
 const std::string empty_external_modules("External modules are empty.");
-
-inline void add_component_markers(std::ostream& s, const std::string& c) {
-    if (c.empty())
-        return;
-
-    s << start_component << c << end_component;
-}
 
 }
 
@@ -63,24 +55,9 @@ name_builder::name_builder(const name& n)
       name_(n) { }
 
 void name_builder::compute_qualified_name() {
-    const auto& l(name_.location());
-
-    std::ostringstream s;
-    for (const auto& m : l.external_modules())
-        add_component_markers(s, m);
-
-    for (const auto& m : l.model_modules())
-        add_component_markers(s, m);
-
-    for (const auto& m : l.internal_modules())
-      add_component_markers(s, m);
-
-    add_component_markers(s, l.element());
-
-    if (simple_name_contributes_to_qualifed_name_)
-        add_component_markers(s, name_.simple());
-
-    name_.qualified(s.str());
+    name_pretty_printer p(printing_styles::delimited);
+    const bool skip_simple_name(!simple_name_contributes_to_qualifed_name_);
+    name_.qualified(p.print(name_, skip_simple_name));
     BOOST_LOG_SEV(lg, debug) << "Created qualified name: " << name_.qualified();
 }
 

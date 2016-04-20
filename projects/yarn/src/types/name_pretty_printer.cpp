@@ -30,57 +30,72 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.name_pretty_printer"));
 
 const std::string scope("::");
-const std::string start_component("<");
-const std::string end_component(">");
-const std::string unsupported_style("Printing style is unsupported");
+const std::string start_marker("<");
+const std::string end_marker(">");
+const std::string unsupported_style("Unsupported printing style");
 
 }
 
 namespace dogen {
 namespace yarn {
 
-name_pretty_printer::name_pretty_printer(const printing_styles style)
-    : style_(style) {
-}
+name_pretty_printer::
+name_pretty_printer(const printing_styles style) : style_(style) { }
 
-void name_pretty_printer::
-add_with_delimiters(std::ostream& s, const std::string& c) const {
-    if (c.empty())
-        return;
+std::list<std::string> name_pretty_printer::to_list(const name& n,
+    const bool skip_simple_name) const {
+    std::list<std::string> r;
+    auto lambda([&](const std::string& s) {
+            if (!s.empty())
+                r.push_back(s);
+        });
 
-    s << start_component << c << end_component;
-}
-
-void name_pretty_printer::
-print_delimited(std::ostream& s, const name& n) const {
     const auto& l(n.location());
-
     for (const auto& m : l.external_modules())
-        add_with_delimiters(s, m);
+        lambda(m);
 
     for (const auto& m : l.model_modules())
-        add_with_delimiters(s, m);
+        lambda(m);
 
     for (const auto& m : l.internal_modules())
-        add_with_delimiters(s, m);
+        lambda(m);
 
-    add_with_delimiters(s, l.element());
-    add_with_delimiters(s, n.simple());
+    if (!l.element().empty())
+        lambda(l.element());
+
+    if (!skip_simple_name)
+        lambda(n.simple());
+
+    return r;
 }
 
-void name_pretty_printer::print_scoped(std::ostream& /*s*/, const name& /*n*/) const {
-    
+void name_pretty_printer::
+print_delimited(std::ostream& s, const std::list<std::string>& l) const {
+    for (const auto& c : l)
+        s << start_marker << c << end_marker;
 }
 
-std::string name_pretty_printer::print(const name& n) const {
+void name_pretty_printer::
+print_scoped(std::ostream& s, const std::list<std::string>& l) const {
+    bool is_first(true);
+    for (const auto& c : l) {
+        if (!is_first)
+            s << scope;
+        s << c;
+    }
+}
+
+std::string name_pretty_printer::
+print(const name& n, const bool skip_simple_name) const {
+    const auto l(to_list(n, skip_simple_name));
+
     std::ostringstream s;
-
     switch (style_) {
     case printing_styles::delimited:
-        print_delimited(s, n);
+        print_delimited(s, l);
         break;
     case printing_styles::scoped:
-        print_scoped(s, n);
+        print_scoped(s, l);
         break;
     default:
         BOOST_LOG_SEV(lg, error) << unsupported_style << ": "

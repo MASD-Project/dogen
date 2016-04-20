@@ -37,13 +37,14 @@ public:
     explicit name_pretty_printer(const printing_styles style);
 
 private:
-    std::list<std::string> to_list(const name& n) const;
-    void add_with_delimiters(std::ostream& s, const std::string& c) const;
-    void print_delimited(std::ostream& s, const name& n) const;
-    void print_scoped(std::ostream& s, const name& n) const;
+    std::list<std::string> to_list(const name& n,
+        const bool skip_simple_name) const;
+    void print_delimited(std::ostream& s,
+        const std::list<std::string>& l) const;
+    void print_scoped(std::ostream& s, const std::list<std::string>& l) const;
 
 public:
-    std::string print(const name& n) const;
+    std::string print(const name& n, const bool skip_simple_name = false) const;
 
 private:
     const printing_styles style_;
