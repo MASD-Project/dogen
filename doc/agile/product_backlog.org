@@ -5214,6 +5214,14 @@ is, what then? We can't throw.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
+*** Add doxygen build in travis using GitHub pages                    :story:
+
+It seems is pretty straightforward to add a doxygen build to travis:
+
+- [[http://blog.gockelhut.com/2014/09/automatic-documentation-publishing-with.html][Automatic Documentation Publishing with GitHub and TravisCI]]
+
+See also [[https://github.com/tgockel/nginxconfig/blob/master/config/publish-doxygen][this script]].
+
 *** Fix Windows build errors                                           :epic:
 
 This epic contains all the known errors in the windows build. We
