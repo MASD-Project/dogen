@@ -65,6 +65,7 @@ Note that we cannot move it out of property because we are using the
 unparsed type in property as an input for the name tree generation.
 
 *** STARTED Add properties for helpers                                :story:
+    CLOCK: [2016-04-21 Thu 22:06]--[2016-04-21 Thu 22:25] =>  0:19
     CLOCK: [2016-04-21 Thu 21:42]--[2016-04-21 Thu 22:05] =>  0:23
     CLOCK: [2016-04-21 Thu 08:32]--[2016-04-21 Thu 08:41] =>  0:09
     CLOCK: [2016-04-18 Mon 21:14]--[2016-04-18 Mon 22:25] =>  1:11

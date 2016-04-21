@@ -35,6 +35,10 @@ using namespace dogen::utility::log;
 namespace {
 
 auto lg(logger_factory("yarn.name_tree_builder"));
+const char less_than('<');
+const char greater_than('>');
+const char space(' ');
+const std::string comma_space(", ");
 
 }
 
@@ -197,9 +201,9 @@ name_tree name_tree_builder::make_name_tree(const node& n) {
     bool is_first = true;
     for (const auto c : n.children()) {
         if (is_first)
-            s << "<";
+            s << less_than;
         else
-            s << ", ";
+            s << comma_space;
 
         const auto cnt(make_name_tree(*c));
         s << cnt.unparsed_type();
@@ -214,9 +218,9 @@ name_tree name_tree_builder::make_name_tree(const node& n) {
          * but we will leave it for now to avoid spurious differences.
          */
         const auto& ut(r.children().back().unparsed_type());
-        if (ut[ut.length() - 1] == '>')
-            s << " ";
-        s << ">";
+        if (ut[ut.length() - 1] == greater_than)
+            s << space;
+        s << greater_than;
     }
 
     r.unparsed_type(s.str());

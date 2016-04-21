@@ -29,9 +29,6 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.helper_instances_factory"));
 
-const char less_than('<');
-const char greater_than('>');
-
 }
 
 namespace dogen {
@@ -43,42 +40,17 @@ helper_instances_factory::helper_instances_factory(
     const settings::helper_settings_repository& hsrp) : helper_settings_(hsrp) {
 }
 
-boost::optional<helper_instance_properties>
-helper_instances_factory::make(const yarn::name_tree& nt,
-    std::string& complete_name, std::list<helper_instance>& instances) const {
-
+boost::optional<helper_instance_properties> helper_instances_factory::
+make(const yarn::name_tree& nt, std::list<helper_instance>& instances) const {
     const auto qn(nt.parent().qualified());
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << qn;
 
-    std::string my_complete_name(nt.parent().simple());
-    auto lambda([&](char c) {
-            if (nt.children().empty())
-                return;
-
-            /* Add a space between template markers. Not really
-             * required for C++ 11 and above, but we will leave it for
-             * now to avoid spurious differences.
-             */
-            if (my_complete_name[my_complete_name.length() - 1] == c)
-                my_complete_name += " ";
-
-            my_complete_name += c;
-        });
-
-    lambda(less_than);
     helper_instance hi;
-    bool is_first(true);
     for (const auto c : nt.children()) {
-        if (!is_first)
-            my_complete_name += ", ";
-
-        const auto child_properties(make(c, my_complete_name, instances));
+        const auto child_properties(make(c, instances));
         if (child_properties)
             hi.associated_helpers().push_back(*child_properties);
-
-        is_first = false;
     }
-    lambda(greater_than);
 
     const auto& hsbn(helper_settings_.helper_settings_by_name());
     const auto i(hsbn.find(qn));
@@ -94,13 +66,11 @@ helper_instances_factory::make(const yarn::name_tree& nt,
     name_builder b;
     helper_instance_properties properties;
     properties.identifiable_name(b.identifiable_name(qn));
-    properties.complete_name(my_complete_name);
+    properties.complete_name(nt.unparsed_type());
     properties.complete_identifiable_name(
-        b.identifiable_name(my_complete_name));
+        b.identifiable_name(nt.unparsed_type()));
     hi.properties(properties);
-
     instances.push_back(hi);
-    complete_name += my_complete_name;
 
     return properties;
 }
@@ -112,13 +82,11 @@ make(const std::list<yarn::property>& properties) const {
         BOOST_LOG_SEV(lg, debug) << "No properties found.";
         return std::list<helper_instance>();
     }
-    BOOST_LOG_SEV(lg, debug) << "Properties found: " << properties.size();
 
+    BOOST_LOG_SEV(lg, debug) << "Properties found: " << properties.size();
     std::list<helper_instance> instances;
-    for (const auto p : properties) {
-        std::string complete_name;
-        make(p.parsed_type(), complete_name, instances);
-    }
+    for (const auto p : properties)
+        make(p.parsed_type(), instances);
 
     std::list<helper_instance> r;
     std::unordered_set<std::string> done;

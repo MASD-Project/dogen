@@ -45,8 +45,7 @@ public:
 
 private:
     boost::optional<helper_instance_properties> make(
-        const yarn::name_tree& nt, std::string& complete_name,
-        std::list<helper_instance>& instances) const;
+        const yarn::name_tree& nt, std::list<helper_instance>& instances) const;
 
 public:
     std::list<helper_instance>
