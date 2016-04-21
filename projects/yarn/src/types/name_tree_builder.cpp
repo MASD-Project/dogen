@@ -207,8 +207,17 @@ name_tree name_tree_builder::make_name_tree(const node& n) {
         is_first = false;
     }
 
-    if (!n.children().empty())
+    if (!r.children().empty()) {
+        /*
+         * If the last child also had children, add a space between
+         * template markers. Not really required for C++ 11 and above,
+         * but we will leave it for now to avoid spurious differences.
+         */
+        const auto& ut(r.children().back().unparsed_type());
+        if (ut[ut.length() - 1] == '>')
+            s << " ";
         s << ">";
+    }
 
     r.unparsed_type(s.str());
     return r;

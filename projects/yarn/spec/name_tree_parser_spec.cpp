@@ -301,7 +301,7 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_name_trees) 
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("std", "vector"));
-    e.unparsed_type("std::vector<std::shared_ptr<std::string>>");
+    e.unparsed_type("std::vector<std::shared_ptr<std::string> >");
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("std", "shared_ptr"));
