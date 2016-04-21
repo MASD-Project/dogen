@@ -82,6 +82,7 @@ print_scoped(std::ostream& s, const std::list<std::string>& l) const {
         if (!is_first)
             s << scope;
         s << c;
+        is_first = false;
     }
 }
 

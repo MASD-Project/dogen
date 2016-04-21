@@ -45,9 +45,11 @@ const std::string test_suite("name_tree_parser_spec");
 const auto top_level_modules = std::unordered_set<std::string>();
 const auto model_location = dogen::yarn::location();
 
-dogen::yarn::name_tree make(const dogen::yarn::name& n) {
+dogen::yarn::
+name_tree make(const dogen::yarn::name& n, const std::string& unparsed_type) {
     dogen::yarn::name_tree r;
     r.parent(n);
+    r.unparsed_type(unparsed_type);
     return r;
 }
 
@@ -56,7 +58,7 @@ bool test_primitive(const std::string& s) {
     const auto a(ntp.parse(s));
 
     dogen::yarn::name_factory nf;
-    const auto e(make(nf.build_element_name(s)));
+    const auto e(make(nf.build_element_name(s), s));
     return asserter::assert_equals(e, a);
 }
 
@@ -78,7 +80,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_na
     b.simple_name("z");
     b.model_name("a");
     b.internal_modules(std::list<std::string> { "b", "c"});
-    const auto e(make(b.build()));
+    const auto e(make(b.build(), s));
 
     BOOST_CHECK(asserter::assert_equals(e, a));
 }
@@ -92,7 +94,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_without_scope_operator_produces_expected_nam
     const auto a(ntp.parse(s));
 
     dogen::yarn::name_factory nf;
-    const auto e(make(nf.build_element_name("zeta")));
+    const auto e(make(nf.build_element_name("zeta"), s));
     BOOST_CHECK(asserter::assert_equals(e, a));
 }
 
@@ -105,7 +107,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_one_scope_operator_produces_expected_na
     const auto a(ntp.parse(s));
 
     dogen::yarn::name_factory nf;
-    const auto e(make(nf.build_element_name("a", "z")));
+    const auto e(make(nf.build_element_name("a", "z"), s));
     BOOST_CHECK(asserter::assert_equals(e, a));
 }
 
@@ -177,14 +179,15 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expec
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("type"));
+    e.unparsed_type("type<abc>");
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("abc"));
+    c.unparsed_type("abc");
 
     e.children(std::list<dogen::yarn::name_tree> { c });
 
     const std::string s("type<abc>");
-
     dogen::yarn::name_tree_parser ntp(top_level_modules, model_location);
     const auto a(ntp.parse(s));
     BOOST_CHECK(asserter::assert_equals(e, a));
@@ -196,12 +199,15 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("type"));
+    e.unparsed_type("type<abc, cde>");
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("abc"));
+    c.unparsed_type("abc");
 
     dogen::yarn::name_tree d;
     d.parent(nf.build_element_name("cde"));
+    d.unparsed_type("cde");
 
     e.children(std::list<dogen::yarn::name_tree> { c, d });
 
@@ -218,9 +224,11 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_name_trees) {
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("std", "vector"));
+    e.unparsed_type("std::vector<std::string>");
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("std", "string"));
+    c.unparsed_type("std::string");
 
     e.children(std::list<dogen::yarn::name_tree> { c });
 
@@ -238,9 +246,11 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_name_trees) {
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("std", "vector"));
+    e.unparsed_type("std::vector<unsigned int>");
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("unsigned int"));
+    c.unparsed_type("unsigned int");
 
     e.children(std::list<dogen::yarn::name_tree> { c });
 
@@ -259,12 +269,15 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_name_trees) {
 
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("std", "unordered_map"));
+    e.unparsed_type("std::unordered_map<std::string, my::type>");
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("std", "string"));
+    c.unparsed_type("std::string");
 
     dogen::yarn::name_tree d;
     d.parent(nf.build_element_name("my", "type"));
+    d.unparsed_type("my::type");
 
     e.children(std::list<dogen::yarn::name_tree> { c, d });
 
@@ -288,12 +301,15 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_name_trees) 
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("std", "vector"));
+    e.unparsed_type("std::vector<std::shared_ptr<std::string>>");
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("std", "shared_ptr"));
+    c.unparsed_type("std::shared_ptr<std::string>");
 
     dogen::yarn::name_tree d;
     d.parent(nf.build_element_name("std", "string"));
+    d.unparsed_type("std::string");
 
     c.children(std::list<dogen::yarn::name_tree> { d });
     e.children(std::list<dogen::yarn::name_tree> { c });

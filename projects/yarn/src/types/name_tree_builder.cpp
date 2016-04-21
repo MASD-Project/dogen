@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include <boost/make_shared.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
@@ -26,6 +27,7 @@
 #include "dogen/yarn/io/location_io.hpp"
 #include "dogen/yarn/io/name_tree_io.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
+#include "dogen/yarn/types/name_pretty_printer.hpp"
 #include "dogen/yarn/types/name_tree_builder.hpp"
 
 using namespace dogen::utility::log;
@@ -188,9 +190,27 @@ name_tree name_tree_builder::make_name_tree(const node& n) {
     name_tree r;
     r.parent(n.data());
 
-    for (const auto c : n.children())
-        r.children().push_back(make_name_tree(*c));
+    std::ostringstream s;
+    name_pretty_printer p(printing_styles::scoped);
+    s << p.print(n.data());
 
+    bool is_first = true;
+    for (const auto c : n.children()) {
+        if (is_first)
+            s << "<";
+        else
+            s << ", ";
+
+        const auto cnt(make_name_tree(*c));
+        s << cnt.unparsed_type();
+        r.children().push_back(cnt);
+        is_first = false;
+    }
+
+    if (!n.children().empty())
+        s << ">";
+
+    r.unparsed_type(s.str());
     return r;
 }
 
