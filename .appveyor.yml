@@ -36,7 +36,7 @@ before_build:
   - cmd: cd build
   - cmd: mkdir output
   - cmd: cd output
-  - cmd: conan install ../..
+  - cmd: conan install ../.. --file=.conanfile.txt
   - cmd: cmake ../.. -DCMAKE_BUILD_TYPE=%configuration% -G "%generator%"
 
 build_script:
