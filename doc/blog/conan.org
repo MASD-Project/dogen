@@ -1,24 +1,36 @@
 #+title: Nerd Food: Dogen: The Package Management Saga
 #+options: date:nil toc:nil author:nil num:nil title:nil
 
-We've just gone past [[https://github.com/DomainDrivenConsulting/dogen][Dogen's]] [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_75.org][Sprint 75]], so I guess it's time for one
-of those "reminiscing posts" - something along the lines of what we
-did for [[http://mcraveiro.blogspot.co.uk/2014/09/nerd-food-dogen-lessons-in-incremental.html][Sprint 50]]. This one is a bit more practical though; if you are
-only interested in the practical side, keep scrolling until you see
-"Conan".
+Over the last few years I've had a little project on the side called
+/[[https://github.com/DomainDrivenConsulting/dogen][Dogen]]/. Dogen is a code generator designed to target domain models,
+with the lofty ambition of automating the modeling process as much as
+possible: users create domain models using a supported UML tool and
+respecting a set of predefined restrictions; Dogen uses the tool’s
+diagram files to generate the source code representation. The
+generated code contains most of the services required from a typical
+domain object such as serialisation, hashing, streaming and so on.
+Dogen is written in C++ 14 and generates C++ 14 too, but other
+languages will eventually be supported as well.
 
-So, package management. Like any other part-time C++ developer whose
-professional mainstay is C# and Java, I have keenly felt the need for
-a package manager when in C++-land. The problem is less visible when
-you are working with mature libraries and dealing with just Linux, due
-to the huge size of the package repositories and the great tooling
-built around them. However, things get messier when you start to go
-cross-platform, and messier still when you are coding on the bleeding
-edge of C++: either the package you need is not available in the
-distro's repos or even [[https://launchpad.net/ubuntu/%2Bppas][PPA's]]; or, when it is, its rarely at the
-version you require.
+Now, for a four-year-old project, I guess it's fair to say that Dogen
+hasn't exactly set the Open Source world on fire. Nevertheless, it has
+proven to be a personal fountain of lessons and experiences on
+software development; one such lesson was package management and
+that's what I shall reminisce about in this article.
 
-Alas, for all our sins, that's exactly where we were when [[https://github.com/DomainDrivenConsulting/dogen][Dogen]] got
+* The Conundrum
+
+Like any other part-time C++ developer whose professional mainstay is
+C# and Java, I have keenly felt the need for a package manager when in
+C++-land. The problem is less visible when you are working with mature
+libraries and dealing with just Linux, due to the huge size of the
+package repositories and the great tooling built around them. However,
+things get messier when you start to go cross-platform, and messier
+still when you are coding on the bleeding edge of C++: either the
+package you need is not available in the distro's repos or even [[https://launchpad.net/ubuntu/%2Bppas][PPA's]];
+or, when it is, its rarely at the version you require.
+
+Alas, for all our sins, that's exactly where we were when Dogen got
 started.
 
 * A Spoonful of Dogen History
@@ -27,13 +39,13 @@ Dogen sprung to life just a tad after C++-0x became [[https://en.wikipedia.org/w
 experienced first hand the highs of a quasi-new-language followed by
 the lows of feeling the brunt of the bleeding edge pain. For starters,
 /nothing/ we ever wanted was available out of the box, on any of the
-platforms we were interested in. Even Debian testing was a bit
-behind - probably stalled due to a compiler transition or other, but I
-can't quite recall the details. In those days, Real Programmers were
-Real Programmers and mice were mice: we had to [[http://mcraveiro.blogspot.co.uk/2012/06/nerd-food-c-11-with-gcc.html][build and install the
-C++ compilers ourselves]] and, even then, C++-11 support was new, a bit
-flaky and limited. We then had to use those compilers to compile all
-of the dependencies in C++-11 mode.
+platforms we were interested in. Even Debian Testing was a fair bit
+behind the curve - probably stalled due to a compiler transition or
+other. In those days, Real Programmers were Real Programmers and mice
+were mice: we had to [[http://mcraveiro.blogspot.co.uk/2012/06/nerd-food-c-11-with-gcc.html][build and install the C++ compilers ourselves]]
+and, even then, C++-11 support was new, a bit flaky and limited. We
+then had to use those compilers to compile all of the dependencies in
+C++-11 mode.
 
 ** The PFH Days
 
@@ -45,14 +57,14 @@ tarballs, unpacking, building and finally installing them into
 well-defined locations. It worked well enough in the confines of its
 remit, but we were often outside those, having to apply out-of-tree
 patches, adding new dependencies and so on. We also didn't use Travis
-in those days - not even sure it existed, but if it did, the rigmarole
-of the bleeding edge experience would certainly put a stop to any
-ideas of using it. So we used a local install of CDash with a number
-of build agents on OSX, Windows (MinGW) and Linux (32-bit and
-64-bit). Things worked beautifully when nothing changed and the setup
-was stable; but, every time a new version of a library - or god
-forbid, of a compiler - was released, one had that sense of dread: do
-I *really* need to upgrade?
+then; not even sure it existed, but if it did, the rigmarole of the
+bleeding edge experience would certainly put a stop to any ideas of
+using it. So we used a local install of CDash with a number of build
+agents on OSX, Windows (MinGW) and Linux (32-bit and 64-bit). Things
+worked beautifully when nothing changed and the setup was stable; but
+every time a new version of a library - or god forbid, of a compiler -
+was released, one had that sense of dread: do I *really* need to
+upgrade? And yet we often did, because we needed the features.
 
 Since one of the main objectives of Dogen was to learn about C++-11,
 one has to say that the pain was worth it. But all of the moving parts
@@ -62,37 +74,45 @@ scarce. They were certainly not scalable.
 
 ** The Good Days and the Bad Days
 
-Things improved slightly for a year or two when distros started to
-ship C++-11 compliant compilers and recent boost versions. It was all
-so good we were able to move over to [[https://travis-ci.org/DomainDrivenConsulting/dogen][Travis]] and ditch almost all of
-our private infrastructure. For a while things looked really
-good. However, due to Travis' [[https://wiki.ubuntu.com/LTS][Ubuntu LTS]] policy, we were stuck with a
-rapidly ageing Boost version. At first PPAs were a good solution for
-this, but soon these became stale too. We also needed to get latest
-CMake as there are a lot of developments on that front, but we
-certainly could not afford (time-wise) to revert back to the bad old
-days of the PFH. At the same time, it made no sense to freeze
-dependencies in time, providing a worse development experience. So the
-only route left was to break Travis and hope that some solution would
-appear. Some alternatives were tried such as [[https://drone.io/github.com/DomainDrivenConsulting/dogen][Drone.io]] but nothing was
-successful.
+Things improved slightly for a year or two when distros started
+shipping C++-11 compliant compilers and recent Boost versions. This
+led to an attack of pragmatism, during which we ditched all platforms
+except for Linux, got rid of almost all our private infrastructure and
+moved over to [[https://travis-ci.org/DomainDrivenConsulting/dogen][Travis]]. For a while things looked really good. However,
+due to Travis' [[https://wiki.ubuntu.com/LTS][Ubuntu LTS]] policy, we were stuck with a rapidly ageing
+Boost version. At first PPAs were a good solution, but over time these
+became stale too.
 
-There was nothing else for it; what was needed was a package manager
-to manage the development dependencies.
+Soon we were stuck, unable to afford to revert back to the bad old
+days of the PFH but also unable to freeze all dependencies in time, as
+it would provide a worse development experience. So it was that the
+only route left was to break the build on Travis and hope that a
+solution would manifest itself. The red build painfully lingered on,
+commit after commit, whilst alternatives such as Drone.io and GitLab
+were unsuccessfully tried.
+
+Finally, there was nothing else for it. We simply needed a package
+manager to manage the development dependencies.
 
 ** Nuget Hopes Dashed
 
-Having used [[https://www.nuget.org/][Nuget]] in anger for both C# and C++ projects, and given
-Microsoft's recent change of heart with regards to open source, I was
+Having used [[https://www.nuget.org/][Nuget]] in anger for both C# and C++ projects - and given
+Microsoft's recent change of heart with regards to open source - I was
 secretly hoping that Nuget would get some traction in the wider C++
-world. To recap, Nuget worked [[http://mcraveiro.blogspot.co.uk/2014/05/nerd-food-using-mono-in-anger-part-ii_3422.html][well enough in Mono]]; in addition, C++
-support for Windows was added [[http://blogs.msdn.com/b/vcblog/archive/2013/04/26/nuget-for-c.aspx][early on]]. It was somewhat limited and a
-bit quirky at the start, but it kept on getting better, to the point
-of usability. Trouble was, their focus was just Visual Studio.
+world. Nuget works [[http://mcraveiro.blogspot.co.uk/2014/05/nerd-food-using-mono-in-anger-part-ii_3422.html][well enough in Mono]], and C++ support for Windows
+was added fairly [[http://blogs.msdn.com/b/vcblog/archive/2013/04/26/nuget-for-c.aspx][early on]]. It was somewhat limited and a bit quirky at
+the start but it kept on getting better, to the point of being
+actually usable; we now use Nuget to manage our C++ dependencies at
+work - a Windows shop on the main - and it has improved our quality of
+life dramatically.
 
-Alas, nothing much ever came from my Nuget hopes. However, there have
-been a couple of recent announcements from Microsoft that make me
-think that they will eventually look into this space:
+Unfortunately, the troubles begun on closer inspection. The truth is
+that Microsoft's current Nuget focus is C# and Visual Studio, not
+Linux and C++. Also, it seems that outside Microsoft and Xamarin there
+just isn't enough traction for this tool at present.
+
+However, there have been a couple of recent announcements from
+Microsoft that give me hope things may change in the future:
 
 - [[http://blogs.msdn.com/b/vcblog/archive/2015/12/04/introducing-clang-with-microsoft-codegen-in-vs-2015-update-1.aspx][Clang with Microsoft CodeGen in VS 2015 Update 1]]
 - [[http://blogs.msdn.com/b/vcblog/archive/2015/12/15/support-for-android-cmake-projects-in-visual-studio.aspx][Support for Android CMake projects in Visual Studio]]
@@ -103,7 +123,7 @@ consistent way across platforms? We can but hope.
 ** Biicode Comes to the Rescue?
 
 Nuget did not pan out but what did happen was even more unlikely: some
-crazy-cool Spaniards decided to create a stand alone package
+crazy-cool Spaniards had decided to create a stand alone package
 manager. Being from the same peninsula, I felt compelled to use their
 wares, and was joyful as they went from strength to strength -
 including the success of their [[https://www.biicode.com/biicode-open-source-challenge][open source campaign]]. And I loved the
@@ -120,11 +140,11 @@ to modify my CMake files too much in order to fit properly with
 Biicode and so on. Basically, I needed a solution that worked well and
 required minimal changes at my end. Having been brought up with Maven
 and Nuget, I just could not understand why there wasn't a simple
-"packages.xml" file that specified the dependencies and then some
-non-intrusive CMake support to expose those into the CMake
-files. As you can see from some of [[http://forum.biicode.com/t/building-out-of-tree-using-biicode/460][my posts]], it just seemed it
-required "getting" Biicode in order to make use of it, which for me
-was not an option.
+=packages.xml= file that specified the dependencies and then some
+non-intrusive CMake support to expose those into the CMake files. As
+you can see from some of [[http://forum.biicode.com/t/building-out-of-tree-using-biicode/460][my posts]], it just seemed it required
+"getting" Biicode in order to make use of it, which for me was not an
+option.
 
 Another thing that annoyed me was the difficulty on knowing what the
 "real" version of a library was. I wrote, at the time:
@@ -237,7 +257,7 @@ at them now.
 
 The first problem was that Boost 1.59 does not appear to have an
 overridden =FindBoost=, which means that I was not able to link. I
-moved to Boost 1.60 - which I wanted to do any way - and it worked out
+moved to Boost 1.60 - which I wanted to do anyway - and it worked out
 of the box.
 
 The second problem was that Conan seems to get confused with [[https://ninja-build.org/manual.html][Ninja]], my
@@ -251,8 +271,8 @@ $ ninja: error: '~/.conan/data/Boost/1.60.0/lasote/stable/package/ebdc9c0c0164b5
 #+end_example
 
 This is very strange because boost system is clearly available in the
-Conan download folder. Using make solved this problem. I am going to
-open a ticket on the Conan GitHub project to investigate this.
+Conan download folder. Going back to =make= solved this problem. I've
+opened an issue in Conan ([[https://github.com/conan-io/conan/issues/56][#56]]) and its currently under investigation.
 
 The third problem is more boost related than anything else. Boost
 Graph has not been as well maintained as it should, really. Thus users
@@ -323,7 +343,8 @@ positives to take home, even at this early stage of Dogen usage:
 - hopefully, since it started Open Source from the beginning, it will
   form a community of developers around the source with the know-how
   required to maintain it. It would also be great to see if a business
-  forms around it, since someone will have to pay the cloud bill.
+  forms around it, since someone will have to pay the cloud bill. It
+  certainly is gaining popularity, as [[http://cppcast.com/2016/05/diego-rodriguez-losada/][the recent CppCast]] attests.
 
 In terms of negatives:
 
