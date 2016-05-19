@@ -51,6 +51,13 @@ if (CMAKE_CXX_COMPILER MATCHES ".*clang")
     set(CMAKE_COMPILER_IS_CLANGXX 1)
 endif ()
 
+if (UNIX)
+    check_library_exists(rt clock_gettime "" HAVE_CLOCK_GETTIME)
+    if (HAVE_LIBRT OR HAVE_CLOCK_GETTIME)
+        set(CMAKE_REQUIRED_LIBRARIES ${CMAKE_REQUIRED_LIBRARIES} rt)
+    endif (HAVE_LIBRT OR HAVE_CLOCK_GETTIME)
+endif (UNIX)
+
 if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
     # enable as many warnings as possible
     set(warning_flags "-Wall -Wextra")
