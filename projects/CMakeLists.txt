@@ -49,14 +49,17 @@ endmacro()
 # compiler and linker flags
 if (CMAKE_CXX_COMPILER MATCHES ".*clang")
     set(CMAKE_COMPILER_IS_CLANGXX 1)
-endif ()
+endif()
 
 if (UNIX)
     check_library_exists(rt clock_gettime "" HAVE_CLOCK_GETTIME)
-    if (HAVE_LIBRT OR HAVE_CLOCK_GETTIME)
+    if (HAVE_CLOCK_GETTIME)
+        message(STATUS "Requires clock_gettime.")
         set(CMAKE_REQUIRED_LIBRARIES ${CMAKE_REQUIRED_LIBRARIES} rt)
-    endif (HAVE_LIBRT OR HAVE_CLOCK_GETTIME)
-endif (UNIX)
+    else()
+        message(STATUS "Does NOT require clock_gettime.")
+    endif()
+endif()
 
 if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
     # enable as many warnings as possible
