@@ -33,6 +33,7 @@ target_link_libraries(${name}_spec
     dynamic
     yarn
     ${LIBXML2_LIBRARIES}
+    ${CMAKE_REQUIRED_LIBRARIES}
     ${Boost_LIBRARIES})
 
 set(command ${stage_bin_dir}/${binary_name} ${boost_test_parameters})

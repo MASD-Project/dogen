@@ -71,8 +71,8 @@ target_link_libraries(${name}_spec
     stereotypes
     utility
     ${LIBXML2_LIBRARIES}
-    ${Boost_LIBRARIES}
-    )
+    ${CMAKE_REQUIRED_LIBRARIES}
+    ${Boost_LIBRARIES})
 
 # FIXME: link against database if feature is on?
 

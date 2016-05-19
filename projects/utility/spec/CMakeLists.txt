@@ -30,6 +30,7 @@ set_target_properties(${name}_spec PROPERTIES OUTPUT_NAME ${binary_name})
 target_link_libraries(${name}_spec
     ${name}
     ${LIBXML2_LIBRARIES}
+    ${CMAKE_REQUIRED_LIBRARIES}
     ${Boost_LIBRARIES})
 
 set(command ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
