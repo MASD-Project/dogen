@@ -58,7 +58,7 @@ if (DEFINED ENV{PFH_LOCATION})
     include_directories(SYSTEM $ENV{PFH_LOCATION}/include)
 endif()
 
-add_definitions(-DBOOST_ALL_DYN_LINK)
+# add_definitions(-DBOOST_ALL_DYN_LINK)
 find_package(Boost 1.59 REQUIRED COMPONENTS
     system
     chrono
