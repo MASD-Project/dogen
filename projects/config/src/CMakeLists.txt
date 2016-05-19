@@ -27,6 +27,6 @@ add_library(${name} STATIC ${files})
 set_target_properties(${name} PROPERTIES OUTPUT_NAME dogen.${name})
 set_target_properties(${name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
-target_link_libraries(${name} ${Boost_LIBRARIES})
+target_link_libraries(${name} ${Boost_LIBRARIES} ${CMAKE_REQUIRED_LIBRARIES})
 
 install(TARGETS config ARCHIVE DESTINATION lib COMPONENT libraries)
