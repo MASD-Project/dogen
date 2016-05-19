@@ -27,7 +27,6 @@ file(GLOB_RECURSE candidate_files RELATIVE
 
 set(ignore_file false)
 foreach(candidate_file ${candidate_files})
-  MESSAGE(STATUS ${candidate_file})
     if(NOT ODB_FOUND)
         if (candidate_file MATCHES "database")
             set(ignore_file true)

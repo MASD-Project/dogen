@@ -58,7 +58,11 @@ if (DEFINED ENV{PFH_LOCATION})
     include_directories(SYSTEM $ENV{PFH_LOCATION}/include)
 endif()
 
-# add_definitions(-DBOOST_ALL_DYN_LINK)
+# force static linking for all libraries
+set(Boost_USE_STATIC_LIBS ON)
+set(Boost_USE_MULTITHREADED ON)
+set(Boost_USE_STATIC_RUNTIME ON)
+set(BOOST_ALL_DYN_LINK OFF)
 find_package(Boost 1.59 REQUIRED COMPONENTS
     system
     chrono
