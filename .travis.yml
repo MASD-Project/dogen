@@ -54,17 +54,9 @@ script:
   - cd ${GIT_REPO}/build
   - mkdir output
   - cd output
-  - conan install --file=${GIT_REPO}/.conanfile.txt
-  - hash=`ls ~/.conan/data/Boost/1.60.0/lasote/stable/package/`
-  - cd ~/.conan/data/Boost/1.60.0/lasote/stable/package/${hash}/include/
-  - sudo patch -p0 < ${GIT_REPO}/patches/boost_1_59_graph.patch
-  - cd ${GIT_REPO}/build/output
-  # FIXME: ninja borked with conan for some reason.
-  # - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on -G Ninja
-  # - ninja -j2 package run_all_specs
   # FIXME: removed -DCMAKE_BUILD_TYPE=${BUILD_TYPE} as it causes the build to break
-  - cmake ${GIT_REPO} # -DWITH_MINIMAL_PACKAGING=on
-  - make -j2 run_all_specs
+  - CMAKE_INCLUDE_PATH=/tmp/dogen_deps/dogen_deps_gcc_5.3_linux_amd64/include CMAKE_LIBRARY_PATH=/tmp/dogen_deps/dogen_deps_gcc_5.3_linux_amd64/lib cmake ${GIT_REPO} -G Ninja # -DWITH_MINIMAL_PACKAGING=on
+  - ninja -j2 package run_all_specs
   # packaging disabled because we do not have boost 1.60.
   # - make -j2 package run_all_specs
   # - sudo dpkg -i stage/pkg/dogen_*_amd64-applications.deb

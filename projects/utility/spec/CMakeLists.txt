@@ -31,6 +31,7 @@ target_link_libraries(${name}_spec
     ${name}
     ${LIBXML2_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}
+    ${CMAKE_THREAD_LIBS_INIT}
     ${Boost_LIBRARIES})
 
 set(command ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
