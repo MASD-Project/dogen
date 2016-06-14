@@ -52,12 +52,6 @@ option(WITH_JSON_VALIDATION "Adds JSON validation targets. Requires jq." on)
 find_package(Threads REQUIRED)
 
 # boost
-if (DEFINED ENV{PFH_LOCATION})
-    set(BOOST_ROOT "$ENV{PFH_LOCATION}")
-    set(Boost_NO_SYSTEM_PATHS "ON")
-    include_directories(SYSTEM $ENV{PFH_LOCATION}/include)
-endif()
-
 # force static linking for all libraries
 set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
