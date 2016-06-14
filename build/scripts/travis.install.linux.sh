@@ -32,9 +32,10 @@ sudo apt-get install ninja-build
 # conan --version
 
 # deps
-wget --no-check-certificate https://dl.dropboxusercontent.com/u/541873/packages/dogen_deps_gcc_5.3_linux_amd64_v2.bz2 -O /tmp/dogen_deps_gcc_5.3_linux_amd64_v3.bz2
+version=4
+wget --no-check-certificate https://dl.dropboxusercontent.com/u/541873/packages/dogen_deps_gcc_5.3_linux_amd64_v2.bz2 -O /tmp/dogen_deps_gcc_5.3_linux_amd64_v${version}.bz2
 mkdir /tmp/dogen_deps
-tar -xaf /tmp/dogen_deps_gcc_5.3_linux_amd64_v3.bz2 -C /tmp/dogen_deps
+tar -xaf /tmp/dogen_deps_gcc_5.3_linux_amd64_v${version}.bz2 -C /tmp/dogen_deps
 
 # cmake
 wget --no-check-certificate https://cmake.org/files/v3.4/cmake-3.4.1-Linux-x86_64.tar.gz -O /tmp/cmake-3.4.1-Linux-x86_64.tar.gz
