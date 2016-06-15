@@ -33,7 +33,7 @@ sudo apt-get install ninja-build
 
 # deps
 version=6
-wget --no-check-certificate https://dl.dropboxusercontent.com/u/541873/packages/dogen_deps_gcc_5.3_linux_amd64_v2.bz2 -O /tmp/dogen_deps_gcc_5.3_linux_amd64_v${version}.bz2
+wget --no-check-certificate https://dl.dropboxusercontent.com/u/541873/packages/dogen_deps_gcc_5.3_linux_amd64_v${version}.bz2 -O /tmp/dogen_deps_gcc_5.3_linux_amd64_v${version}.bz2
 mkdir /tmp/dogen_deps
 tar -xaf /tmp/dogen_deps_gcc_5.3_linux_amd64_v${version}.bz2 -C /tmp/dogen_deps
 
