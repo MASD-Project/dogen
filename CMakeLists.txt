@@ -66,7 +66,6 @@ find_package(Boost 1.59 REQUIRED COMPONENTS
     log
     filesystem
     program_options
-    iostreams
     )
 
 if(Boost_FOUND)
