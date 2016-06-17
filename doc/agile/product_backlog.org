@@ -2622,6 +2622,9 @@ types]]) so we should throw if a user attempts to use them.
 - a type marked as final cannot have descendants.
 - types in global namespace must have an empty location.
 - if model module path is empty, location must also be empty.
+- helper settings: if family is not supplied, no other helper setting
+  should be supplied either. However, the validation must be done
+  inside of quilt's settings.
 
 For merged models:
 
