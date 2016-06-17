@@ -19,13 +19,6 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/concept.hpp"
-#include "dogen/yarn/types/primitive.hpp"
-#include "dogen/yarn/types/enumeration.hpp"
-#include "dogen/yarn/types/visitor.hpp"
-#include "dogen/yarn/types/exception.hpp"
-#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_factory.hpp"
 #include "dogen/quilt.cpp/io/settings/helper_settings_repository_io.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository_factory.hpp"
@@ -43,54 +36,19 @@ namespace quilt {
 namespace cpp {
 namespace settings {
 
-namespace {
-
-/**
- * @brief Generates all helper properties.
-*/
-class generator final : public yarn::element_visitor {
-public:
-    explicit generator(const helper_settings_factory& f) : factory_(f) { }
-private:
-    template<typename YarnEntity>
-    void generate(const YarnEntity& e) {
-        const auto hs(factory_.make(e.extensions()));
-        if (hs.family().empty())
-            return;
-
-        result_.helper_settings_by_name()[e.name().qualified()] = hs;
-    }
-
-public:
-    using yarn::element_visitor::visit;
-    void visit(const dogen::yarn::module& m) { generate(m); }
-    void visit(const dogen::yarn::concept& c) { generate(c); }
-    void visit(const dogen::yarn::primitive& p) { generate(p); }
-    void visit(const dogen::yarn::enumeration& e) { generate(e); }
-    void visit(const dogen::yarn::object& o) { generate(o); }
-    void visit(const dogen::yarn::exception& e) { generate(e); }
-    void visit(const dogen::yarn::visitor& v) { generate(v); }
-
-public:
-    const helper_settings_repository& result() const { return result_; }
-
-private:
-    const helper_settings_factory& factory_;
-    helper_settings_repository result_;
-};
-
-}
-
 helper_settings_repository helper_settings_repository_factory::
 make(const dynamic::repository& rp, const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started making helper settings.";
     helper_settings_factory f(rp);
-    generator g(f);
+    helper_settings_repository r;
     for (const auto& pair : m.elements()) {
         const auto& e(*pair.second);
-        e.accept(g);
+        const auto hs(f.make(e.extensions()));
+        if (!hs)
+            continue;
+
+        r.helper_settings_by_name()[e.name().qualified()] = *hs;
     }
-    auto r(g.result());
     BOOST_LOG_SEV(lg, debug) << "Finished making helper settings" << r;
     return r;
 }

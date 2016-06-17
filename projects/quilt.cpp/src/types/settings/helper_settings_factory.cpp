@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_factory.hpp"
 
@@ -54,18 +53,41 @@ helper_settings_factory::make_field_definitions(const dynamic::repository& rp) {
     return r;
 }
 
-helper_settings helper_settings_factory::make(const dynamic::object& o) const {
-    const dynamic::field_selector fs(o);
+void helper_settings_factory::
+throw_if_dependent_fields_are_present(const dynamic::field_selector& fs) const {
+    const auto& fd(field_definitions_);
+    const bool dependent_fields_present(
+        fs.has_field(fd.string_conversion_method) ||
+        fs.has_field(fd.requires_quoting) ||
+        fs.has_field(fd.remove_unprintable_characters) ||
+        fs.has_field(fd.requires_dereferencing));
+
+    if (dependent_fields_present) {
+    }
+}
+
+boost::optional<helper_settings> helper_settings_factory::make(const dynamic::object& o) const {
     helper_settings r;
-    r.family(fs.get_text_content_or_default(field_definitions_.family));
-    r.string_conversion_method(fs.get_text_content_or_default(
-            field_definitions_.string_conversion_method));
-    r.requires_quoting(fs.get_boolean_content_or_default(
-            field_definitions_.requires_quoting));
-    r.remove_unprintable_characters(fs.get_boolean_content_or_default(
-            field_definitions_.remove_unprintable_characters));
-    r.requires_dereferencing(fs.get_boolean_content_or_default(
-            field_definitions_.requires_dereferencing));
+    const auto& fd(field_definitions_);
+    const dynamic::field_selector fs(o);
+    const bool has_family_field(fs.has_field(fd.family));
+
+    if (!has_family_field) {
+        throw_if_dependent_fields_are_present(fs);
+        return boost::optional<helper_settings>();
+    }
+
+    r.family(fs.get_text_content(fd.family));
+
+    const auto scm(fs.get_text_content_or_default(fd.string_conversion_method));
+    r.requires_quoting(fs.get_boolean_content_or_default(fd.requires_quoting));
+
+    const auto rup(fd.remove_unprintable_characters);
+    r.remove_unprintable_characters(fs.get_boolean_content_or_default(rup));
+
+    const auto rd(fs.get_boolean_content_or_default(fd.requires_dereferencing));
+    r.requires_dereferencing(rd);
+
     return r;
 }
 
