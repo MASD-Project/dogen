@@ -2628,12 +2628,26 @@ For merged models:
 - issue error when a property is a value of an abstract class
 - properties exist in merged model.
 
-Validator should provide contextual validation error messages:
+*** Provide contextual error messages during validation               :story:
+
+As per the validator story, we need to ensure the model we are
+processing is valid. However, the validator must provide contextual
+validation error messages:
 
 : error 1: properties must have a non-null name
 : in model 'my_model' (Dia ID: O0)
 : in object 'my_object (Dia ID: O0)
 : property 'my_property' has empty name.
+
+We should also try to make this compatible with compiler errors so
+that we can go to the file where the error occurred:
+
+: file.dia:5:10: properties must have a non-null name
+
+For this to work we need to label everything with a file, column and
+line. We can't call this class a =location= since we already use that
+name for positions in model space. We could probably call it
+=source_location= like [[http://clang.llvm.org/doxygen/classclang_1_1SourceLocation.htlm][clang does]].
 
 *** Validation-only or dry-run mode                                   :story:
 
