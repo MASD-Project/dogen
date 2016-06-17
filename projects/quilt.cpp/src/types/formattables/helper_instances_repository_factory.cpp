@@ -59,9 +59,11 @@ private:
         const auto qn(s.name().qualified());
         BOOST_LOG_SEV(lg, debug) << "Creating helper instances for" << qn;
 
-        const auto pair(std::make_pair(qn, factory_.make(s.local_properties())));
-        auto& hi(result_.helper_instances_by_name());
-        const auto res(hi.insert(pair));
+
+        const auto hi(factory_.make(s.local_properties()));
+        const auto pair(std::make_pair(qn, hi));
+        auto& hibn(result_.helper_instances_by_name());
+        const auto res(hibn.insert(pair));
         if (!res.second) {
             BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
             BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));

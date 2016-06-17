@@ -45,6 +45,7 @@ Time taken with blog posts and updates to the manual.
 - add some basic validation to ensure we throw if no family is supplied.
 
 *** STARTED Add properties for helpers                                :story:
+    CLOCK: [2016-06-17 Fri 12:33]--[2016-06-17 Fri 13:11] =>  0:38
     CLOCK: [2016-06-17 Fri 11:05]--[2016-06-17 Fri 11:49] =>  0:44
 
 We should pre-compute all of the required helper instances for a given
@@ -112,6 +113,10 @@ index. Then, nested name properties is a flat container for each name
 with the required properties. With this the helpers can continue to
 rely on just the nested name (plus the nested name properties via the
 assistant).
+
+*** Rename =name_tree='s parent                                       :story:
+
+Parent is not a good name as we are referring to the current node.
 
 *** Add an helper method interface                                    :story:
 

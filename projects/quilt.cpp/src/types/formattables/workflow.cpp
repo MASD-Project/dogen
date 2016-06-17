@@ -34,10 +34,8 @@
 
 namespace {
 
-const std::string id("quilt.cpp.formattables.workflow");
-
 using namespace dogen::utility::log;
-static logger lg(logger_factory(id));
+static logger lg(logger_factory("quilt.cpp.formattables.workflow"));
 
 }
 

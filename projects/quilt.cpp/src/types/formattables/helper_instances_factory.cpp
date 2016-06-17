@@ -45,13 +45,10 @@ make(const yarn::name_tree& nt, std::list<helper_instance>& instances) const {
     const auto qn(nt.parent().qualified());
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << qn;
 
-    helper_instance hi;
-    for (const auto c : nt.children()) {
-        const auto child_properties(make(c, instances));
-        if (child_properties)
-            hi.associated_helpers().push_back(*child_properties);
-    }
-
+    /*
+     * Does the top-level type require any helpers? If not, we don't
+     * need to do any work.
+     */
     const auto& hsbn(helper_settings_.helper_settings_by_name());
     const auto i(hsbn.find(qn));
     if (i == hsbn.end()) {
@@ -59,20 +56,37 @@ make(const yarn::name_tree& nt, std::list<helper_instance>& instances) const {
         return boost::optional<helper_instance_properties>();
     }
 
+    /*
+     * If the top-level type has any children, we must remember them
+     * as associated helpers. This basically means that the helper
+     * needs to delegate to other helpers.
+     */
+    helper_instance hi;
+    for (const auto c : nt.children()) {
+        const auto child_properties(make(c, instances));
+        if (!child_properties)
+            continue;
+
+        /*
+         * At present we are possibly adding duplicates in the type
+         * variables.
+         */
+        hi.associated_helpers().push_back(*child_properties);
+    }
+
     const auto& hs(i->second);
     BOOST_LOG_SEV(lg, debug) << "Helper settings: " << hs;
     hi.settings(hs);
 
     name_builder b;
-    helper_instance_properties properties;
-    properties.identifiable_name(b.identifiable_name(qn));
-    properties.complete_name(nt.unparsed_type());
-    properties.complete_identifiable_name(
-        b.identifiable_name(nt.unparsed_type()));
-    hi.properties(properties);
+    helper_instance_properties r;
+    r.identifiable_name(b.identifiable_name(qn));
+    r.complete_name(nt.unparsed_type());
+    r.complete_identifiable_name(b.identifiable_name(nt.unparsed_type()));
+    hi.properties(r);
     instances.push_back(hi);
 
-    return properties;
+    return r;
 }
 
 std::list<helper_instance> helper_instances_factory::
