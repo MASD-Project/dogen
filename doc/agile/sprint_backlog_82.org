@@ -12,7 +12,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-05-18 Wed 22:59]
+#+CAPTION: Clock summary at [2016-06-17 Fri 11:02]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
@@ -20,22 +20,24 @@
 |-----------------------------------------------------------------------------+--------+------+------+-------|
 | Stories                                                                     | 7:07   |      |      | 100.0 |
 | Active                                                                      |        | 7:07 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:04 |   0.9 |
-| STARTED Manual updates and blog posts                                       |        |      | 0:33 |   7.7 |
+| COMPLETED Sprint and product backlog grooming                               |        |      | 0:04 |   0.9 |
+| COMPLETED Manual updates and blog posts                                     |        |      | 0:33 |   7.7 |
 | COMPLETED Create a name pretty printer                                      |        |      | 2:35 |  36.3 |
 | COMPLETED Add unparsed type to name tree                                    |        |      | 1:27 |  20.4 |
 | COMPLETED Appveyor build is not finding conan file                          |        |      | 0:21 |   4.9 |
-| STARTED Add properties for helpers                                          |        |      | 2:07 |  29.7 |
+| POSTPONED Add properties for helpers                                        |        |      | 2:07 |  29.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2016-06-17 Fri 11:02]
     CLOCK: [2016-04-18 Mon 22:25]--[2016-04-18 Mon 22:26] =>  0:01
     CLOCK: [2016-04-14 Thu 07:32]--[2016-04-14 Thu 07:35] =>  0:03
 
 Updates to sprint and product backlog.
 
-*** STARTED Manual updates and blog posts
+*** COMPLETED Manual updates and blog posts
+    CLOSED: [2016-06-17 Fri 11:02]
     CLOCK: [2016-04-14 Thu 06:58]--[2016-04-14 Thu 07:31] =>  0:33
 
 Time taken with blog posts and updates to the manual.
@@ -73,7 +75,8 @@ We somehow managed to break the windows build even further: it is not
 even compiling the code any more. This is due to the renaming of the
 conan file. Get it back to the previous state of borkedness.
 
-*** STARTED Add properties for helpers                                :story:
+*** POSTPONED Add properties for helpers                              :story:
+    CLOSED: [2016-06-17 Fri 11:02]
     CLOCK: [2016-04-21 Thu 22:06]--[2016-04-21 Thu 22:25] =>  0:19
     CLOCK: [2016-04-21 Thu 21:42]--[2016-04-21 Thu 22:05] =>  0:23
     CLOCK: [2016-04-21 Thu 08:32]--[2016-04-21 Thu 08:41] =>  0:09
@@ -145,176 +148,5 @@ index. Then, nested name properties is a flat container for each name
 with the required properties. With this the helpers can continue to
 rely on just the nested name (plus the nested name properties via the
 assistant).
-
-*** Add an helper method interface                                    :story:
-
-We should also investigate on the need for the nested type info
-assistant.
-
-Tasks:
-
-- create interface.
-- add interface to registrar.
-- implement interface in at least one helper.
-- update assistant to query registrar for helpers based on type family
-  in context. Performs a recursive descent on nested name.
-- problem: io helpers in types should only be enabled if io is enabled
-  and if type is in an inheritance relationship. For this we need to
-  have access to formatter properties (potentially via assistant) but
-  we also need to have access to the type that owns the properties. We
-  could augment helper interface with the assistant - easy as we
-  already have it on the format method - and the element - harder; we
-  need to supply the object as part of helper method creation.
-- problem: we need to ask for complete and identifiable name N times
-  for a given formatter. It is not a good idea to dynamically compute
-  it or to store it in an associative container - it somehow needs to
-  be next to the nested name.
-
-*Previous Understanding*
-
-- create a registrar for interface with family and formatter name.
-- update all helpers to implement interface and to register
-  themselves.
-- it seems we have two use cases here: the formatter helper interface
-  for formatting purposes and the helper family interface that tells
-  us what formatter this helper belongs to. We do not want to leak
-  details of formatting into formattables. We need to find a name for
-  such an interface in formattables, a bit like the inclusion
-  dependencies provider. Formatter helper details provider? We can
-  then extend the existing formattables registrar and container to
-  store this interface; the formatter helper interface can extend this
-  interface; the main workflow returns all registered formatter
-  helpers in terms of the formatter helper details provider interface.
-- problem: we need additional properties related to the helper which
-  have been hard-coded:
-  - requires generic string; in a general form "string conversion
-    method";
-  - requires quoting;
-  - requires tidying up; in a general form "remove unprintable
-    characters";
-  - requires hashing helper method; in a general form: we need a way
-    to query the helper settings to figure out if a given type has an
-    associated helper method for a given formatter, and if we need to
-    call it implicitly or explicitly; and, if explicitly, we need to
-    ask the helper method formatter for the name of the helper method.
-  - requires dereferencing; for pointer types.
-- seems like yet again we found the wrong solution for this
-  problem. We need to create a top-level set of helper settings for
-  each type with all additional properties; propagate those into
-  formatters via context; and then use the assistant to loop through
-  the nested name (nested info for now) and pick the helper
-  settings. It should also consult the registrar to see if there are
-  any helpers available for this formatter and family.
-
-*** Compute yarn property related information                         :story:
-
-Now that we no longer have nested type infos, we need to recompute the
-complete names etc for all properties up front and store them in a
-repository. This information is almost identical to that of the
-helpers but its not easy to share it. For now we should just brute
-force it and then look for patterns.
-
-*** Update assistant to use new helper information                    :story:
-
-Once all the pieces are in place, the assistant can then use the
-formatter properties to find out which helpers are required for each
-type; call those helpers and populate the file with the generate
-code. We can remove all previous helper support.
-
-*** Remove nested type info                                           :story:
-
-Once all of the infrastructure is in place, we should not need this
-class any more. Remove code from transformer and remove object types
-and anything else that was used to dispatch based on type.
-
-*** Initialise formatters in the formatter's translation unit         :story:
-
-At present we are initialising the formatters in each of the facet
-initialisers. However, it makes more sense to initialise them on the
-translation unit for each formatter. This will also make life easier
-when we move to a mustache world where there may not be a formatter
-header file at all.
-
-*** Consider renaming =yarn::property= to attribute                   :story:
-
-Since we use properties quite a lot in =quilt.cpp= - and more so when
-we rename formattables to properties - we should probably avoid the
-need to overload the term in yarn. We could rename it to attribute.
-
-Or perhaps the problem is with formatter properties. After all these
-are not "properties of the formatter"; these are inputs into the
-formatting process (and so are settings).
-
-We need to add properties for =yarn::property= so it cannot stay as
-property. We cannot think of a better name other than "properties" for
-formatters so yarn will have to be renamed.
-
-Actually this is no longer urgent so the story can go back to backlog.
-
-*** Consider using indices rather than associative containers         :story:
-
-Once we generate the final model the model becomes constant; this
-means we can easily assign an [[https://en.wikipedia.org/wiki/Ordinal_number][ordinal number]] to each model
-element. These could be arranged so that we always start with
-generatable types first; this way we always generate dense
-containers - there are some cases where we need both generatable types
-and non-generatable types; in other cases we just need generatable
-types; we never need just non-generatable types. We also need to know
-the position of the first non-generatable type (or alternatively, the
-size of the generatable types set).
-
-Once we have this, we can start creating vectors with a fixed size
-(either total number of elements or just size of generatable
-types). We can also make it so that each name has an id which is the
-ordinal (another model post-processing activity). Actually we should
-call it "type index" or some other name because its a transient
-id. This means both properties and settings require no lookups at all
-since all positions are known beforehand (except in cases where the
-key of the associative container must be the =yarn::name= because we
-use it for processing).
-
-In theory, a similar approach can be done for formatters too. We know
-upfront what the ordinal number is for each formatter because they are
-all registered before we start processing. If formatters obtained
-their ordinal number at registration, wherever we are using a map of
-formatter name to a resource, we could use a fixed-size
-vector. However, formatters may be sparse in many cases (if not all
-cases?). For example, we do not have formatter properties for all
-formatters for every =yarn::name= because many (most) formatters don't
-make sense for every yarn type. Thus this is less applicable, at least
-for formatter properties. We need to look carefully at all use cases
-and see if there is any place where this approach is applicable.
-
-*** Handle "special includes" correctly                               :story:
-
-We did a quick hack to handle "special includes": we simply "detected"
-them in include builder and then did the appropriate action in each of
-the include providers. In order to make this work dynamically, we need
-somehow to have "associated includes" on a per type basis. For
-example:
-
-- type =x= requires include =y= in formatter =f=.
-
-This can easily be achieved via an "additional inclusion directive"
-which is a container. For example:
-
-:        "extensions" : {
-:                "quilt.cpp.helper.family" : "Dereferenceable",
-:                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/weak_ptr.hpp>",
-
-Could have:
-
-:                "quilt.cpp.types.class_header_formatter.additional_inclusion_directive" : "<some_include.hpp>",
-
-If multiple are provided then they are all added. This highlights an
-important point: we need a way to inject type specific includes from a
-formatter. It makes no sense to declare all of these up front in a
-library since we do not know what all possible formatters are, nor
-what requirements they may have for inclusion. At the same time,
-formatters cannot be expected to declare types. The solution is to be
-able to "inject" these dependencies from a JSON file associated with
-the formatter. We could supply the qualified name and the properties
-to inject. This problem can be solved later on - create a separate
-story for this.
 
 ** Deprecated
