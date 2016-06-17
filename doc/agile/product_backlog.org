@@ -2649,6 +2649,24 @@ line. We can't call this class a =location= since we already use that
 name for positions in model space. We could probably call it
 =source_location= like [[http://clang.llvm.org/doxygen/classclang_1_1SourceLocation.htlm][clang does]].
 
+The context should be provided using Boost Exception diagnostics and
+dumped into =std::cerr= at the very top.
+
+*** Add warning support for validation                                :story:
+
+Once we implement a validator, we will soon run into warnings: cases
+where the user has done something silly but we still want to code
+generate. These are best handled as warnings rather than errors.
+
+This story keeps track of things we think should be a warning.  List
+of known warnings:
+
+- unconnected dia object
+- comment greater than 80 columns
+
+We will probably soon need a way to enable/disable warnings. We could
+use a similar scheme as GCC: =-Wname= and =-Wno-name=.
+
 *** Validation-only or dry-run mode                                   :story:
 
 Both stitcher and knitter could do with a "dry-run" mode in which we'd
