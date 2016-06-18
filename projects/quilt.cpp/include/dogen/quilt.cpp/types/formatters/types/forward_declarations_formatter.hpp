@@ -46,14 +46,14 @@ public:
 
     file_types file_type() const override;
 
-    formattables::origin_types formattable_origin_type() const override;
+    properties::origin_types formattable_origin_type() const override;
 
     void register_inclusion_dependencies_provider(
-        formattables::registrar& rg) const override;
+        properties::registrar& rg) const override;
 
     dogen::formatters::file
     format(const context& ctx,
-        const formattables::forward_declarations_info& fd) const override;
+        const properties::forward_declarations_info& fd) const override;
 };
 
 } } } } }

@@ -42,13 +42,13 @@ BOOST_AUTO_TEST_SUITE(hashing)
 BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
 
-    test_hashing<formattables::class_info_generator>();
-    test_hashing<formattables::cmakelists_info_generator>();
-    test_hashing<formattables::nested_type_info_generator>();
-    test_hashing<formattables::odb_options_info_generator>();
-    test_hashing<formattables::parent_info_generator>();
-    test_hashing<formattables::property_info_generator>();
-    test_hashing<formattables::registrar_info_generator>();
+    test_hashing<properties::class_info_generator>();
+    test_hashing<properties::cmakelists_info_generator>();
+    test_hashing<properties::nested_type_info_generator>();
+    test_hashing<properties::odb_options_info_generator>();
+    test_hashing<properties::parent_info_generator>();
+    test_hashing<properties::property_info_generator>();
+    test_hashing<properties::registrar_info_generator>();
  }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -29,7 +29,7 @@ namespace formatters {
 namespace odb {
 
 dogen::formatters::file odb_options_formatter_stitch(
-    assistant& a, const formattables::odb_options_info& i) {
+    assistant& a, const properties::odb_options_info& i) {
 
     {
         a.make_annotation_preamble(i.general_settings());

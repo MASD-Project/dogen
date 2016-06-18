@@ -28,8 +28,8 @@
 #include <list>
 #include <ostream>
 #include <unordered_set>
-#include "dogen/quilt.cpp/types/formattables/property_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/nested_type_info.hpp"
+#include "dogen/quilt.cpp/types/properties/property_info.hpp"
+#include "dogen/quilt.cpp/types/properties/nested_type_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/nested_type_formatting_assistant.hpp"
 
 namespace dogen {
@@ -44,7 +44,7 @@ namespace types {
 class helper_methods_formatter {
 public:
     explicit helper_methods_formatter(
-        const std::list<formattables::property_info>& properties);
+        const std::list<properties::property_info>& properties);
 
 private:
     /**
@@ -53,7 +53,7 @@ private:
      */
     void smart_pointer_helper(
         formatters::nested_type_formatting_assistant& fa,
-        const formattables::nested_type_info& t) const;
+        const properties::nested_type_info& t) const;
 
 private:
     /**
@@ -62,7 +62,7 @@ private:
      */
     void recursive_helper_method_creator(
         formatters::nested_type_formatting_assistant& fa,
-        const formattables::nested_type_info& t,
+        const properties::nested_type_info& t,
         std::unordered_set<std::string>& types_done) const;
 
 public:
@@ -72,7 +72,7 @@ public:
     void format(std::ostream& s) const;
 
 private:
-    const std::list<formattables::property_info>& properties_;
+    const std::list<properties::property_info>& properties_;
 };
 
 } } } } }

@@ -26,7 +26,7 @@
 #endif
 
 #include <ostream>
-#include "dogen/quilt.cpp/types/formattables/class_info.hpp"
+#include "dogen/quilt.cpp/types/properties/class_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {
@@ -36,7 +36,7 @@ namespace formatters {
 namespace io {
 
 void inserter_implementation_helper_stitch(
-    assistant& a, const formattables::class_info& ci,
+    assistant& a, const properties::class_info& ci,
     const bool inside_class);
 
 } } } } }

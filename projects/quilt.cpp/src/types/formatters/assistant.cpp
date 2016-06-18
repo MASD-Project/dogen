@@ -26,7 +26,7 @@
 #include "dogen/formatters/types/comment_formatter.hpp"
 #include "dogen/formatters/types/annotation_formatter.hpp"
 #include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
-#include "dogen/quilt.cpp/types/formattables/name_builder.hpp"
+#include "dogen/quilt.cpp/types/properties/name_builder.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
@@ -86,19 +86,19 @@ assistant::assistant(const context& ctx,
 }
 
 std::string assistant::
-make_final_keyword_text(const formattables::class_info& c) {
+make_final_keyword_text(const properties::class_info& c) {
     return c.is_final() ? final_keyword_text : empty;
 }
 
 std::string assistant::
-make_by_ref_text(const formattables::property_info& p) {
+make_by_ref_text(const properties::property_info& p) {
     return (p.type().is_primitive() || p.type().is_enumeration()) ?
         empty : by_ref_text;
 }
 
 std::string assistant::
 make_setter_return_type(const std::string& containing_type_name,
-    const formattables::property_info& p) {
+    const properties::property_info& p) {
     std::ostringstream s;
     if (p.is_fluent())
         s << containing_type_name << by_ref_text;
@@ -109,7 +109,7 @@ make_setter_return_type(const std::string& containing_type_name,
 }
 
 std::string assistant::make_qualified_name(const yarn::name& n) const {
-    formattables::name_builder b;
+    properties::name_builder b;
     auto ns(b.namespace_list(n));
     ns.push_back(n.simple());
     const auto r(boost::join(ns, namespace_separator));
@@ -125,27 +125,27 @@ void assistant::ensure_formatter_properties_are_present() const {
     BOOST_THROW_EXCEPTION(formatting_error(formatter_properties_missing + fn));
 }
 
-boost::optional<formattables::formatter_properties> assistant::
+boost::optional<properties::formatter_properties> assistant::
 obtain_formatter_properties(const std::string& formatter_name) const {
     const auto& fn(formatter_name);
     const auto i(context_.formatter_properties().find(fn));
     if (i == context_.formatter_properties().end())
-        return boost::optional<formattables::formatter_properties>();
+        return boost::optional<properties::formatter_properties>();
     return i->second;
 }
 
 std::string assistant::make_member_variable_name(
-    const formattables::property_info& p) const {
+    const properties::property_info& p) const {
     return p.name() + member_variable_postfix;
 }
 
 std::string assistant::make_getter_setter_name(
-    const formattables::property_info& p) const {
+    const properties::property_info& p) const {
     return p.name();
 }
 
 std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
-    formattables::name_builder b;
+    properties::name_builder b;
     return b.namespace_list(n);
 }
 
@@ -320,7 +320,7 @@ std::string assistant::comment_inline(const std::string& c) const {
     return s.str();
 }
 
-void assistant::add_helper_methods(const formattables::class_info& c) {
+void assistant::add_helper_methods(const properties::class_info& c) {
     BOOST_LOG_SEV(lg, debug) << "Processing entity: " << c.name();
 
     using tt = formatters::types::traits;
@@ -394,7 +394,7 @@ void assistant::add_helper_methods(const formattables::class_info& c) {
 }
 
 bool assistant::requires_hashing_helper_method(
-    const formattables::nested_type_info& t) const {
+    const properties::nested_type_info& t) const {
     return nested_type_formatting_assistant::
         requires_hashing_helper_method(t);
 }

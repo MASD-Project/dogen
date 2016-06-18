@@ -45,9 +45,9 @@ const std::unordered_map<std::string, settings::helper_settings>
 context_factory::empty_helper_settings_ =
     std::unordered_map<std::string, settings::helper_settings>();
 const std::unordered_map<std::string,
-                         formattables::formatter_properties>
+                         properties::formatter_properties>
 context_factory::empty_formatter_properties_ =
-    std::unordered_map<std::string, formattables::formatter_properties>();
+    std::unordered_map<std::string, properties::formatter_properties>();
 const std::unordered_map<
     std::string,
     std::unordered_map<
@@ -61,7 +61,7 @@ const std::unordered_map<
 
 context_factory::context_factory(const settings::bundle_repository& brp,
     const settings::helper_settings_repository& hsrp,
-    const formattables::formatter_properties_repository& fprp,
+    const properties::formatter_properties_repository& fprp,
     const std::unordered_map<
     std::string, std::unordered_map<
     std::string,
@@ -69,7 +69,7 @@ context_factory::context_factory(const settings::bundle_repository& brp,
     : bundle_(brp), helper_settings_(hsrp),
       formatter_properties_(fprp), formatter_helpers_(helpers) {}
 
-const std::unordered_map<std::string, formattables::formatter_properties>&
+const std::unordered_map<std::string, properties::formatter_properties>&
 context_factory::properties_for_name(const std::string& n) const {
     const auto& fp(formatter_properties_.formatter_properties_by_name());
     const auto i(fp.find(n));

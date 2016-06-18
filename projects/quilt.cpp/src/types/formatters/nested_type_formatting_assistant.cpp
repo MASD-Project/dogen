@@ -40,23 +40,23 @@ make_scoped_namespace_formatter(const std::list<std::string>& ns) {
 }
 
 bool nested_type_formatting_assistant::
-requires_generic_string(const formattables::nested_type_info& t) const {
+requires_generic_string(const properties::nested_type_info& t) const {
     return t.is_filesystem_path();
 }
 
 bool nested_type_formatting_assistant::
-requires_quoting(const formattables::nested_type_info& t) const {
+requires_quoting(const properties::nested_type_info& t) const {
     return t.is_date() || t.is_ptime() || t.is_time_duration() ||
         t.is_char_like() || t.is_string_like();
 }
 
 bool nested_type_formatting_assistant::
-requires_tidying_up(const formattables::nested_type_info& t) const {
+requires_tidying_up(const properties::nested_type_info& t) const {
     return t.is_string_like() && !t.is_char_like();
 }
 
 bool nested_type_formatting_assistant::requires_hashing_helper_method(
-    const formattables::nested_type_info& t) {
+    const properties::nested_type_info& t) {
     return
         t.is_sequence_container() ||
         t.is_associative_container() ||
@@ -72,7 +72,7 @@ bool nested_type_formatting_assistant::requires_hashing_helper_method(
 }
 
 std::string nested_type_formatting_assistant::streaming_for_type(
-    const formattables::nested_type_info& t, const std::string& s) const {
+    const properties::nested_type_info& t, const std::string& s) const {
     std::ostringstream ss;
     dogen::formatters::utility_formatter uf(ss);
 

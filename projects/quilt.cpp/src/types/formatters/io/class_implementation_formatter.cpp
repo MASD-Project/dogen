@@ -21,7 +21,7 @@
 #include <boost/make_shared.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
+#include "dogen/quilt.cpp/types/properties/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
@@ -48,13 +48,13 @@ namespace io {
 
 namespace {
 
-class provider final : public formattables::
+class provider final : public properties::
         inclusion_dependencies_provider_interface<yarn::object> {
 public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
-        provide(const formattables::inclusion_dependencies_builder_factory& f,
+        provide(const properties::inclusion_dependencies_builder_factory& f,
         const yarn::object& o) const override;
 };
 
@@ -63,7 +63,7 @@ std::string provider::formatter_name() const {
 }
 
 boost::optional<std::list<std::string> >
-provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
+provider::provide(const properties::inclusion_dependencies_builder_factory& f,
     const yarn::object& o) const {
     auto builder(f.make());
     const auto ch_fn(traits::class_header_formatter_name());
@@ -123,18 +123,18 @@ file_types class_implementation_formatter::file_type() const {
     return file_types::cpp_implementation;
 }
 
-formattables::origin_types
+properties::origin_types
 class_implementation_formatter::formattable_origin_type() const {
-    return formattables::origin_types::external;
+    return properties::origin_types::external;
 }
 
 void class_implementation_formatter::register_inclusion_dependencies_provider(
-    formattables::registrar& rg) const {
+    properties::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 
 dogen::formatters::file class_implementation_formatter::
-format(const context& ctx, const formattables::class_info& c) const {
+format(const context& ctx, const properties::class_info& c) const {
     assistant a(ctx, ownership_hierarchy(), file_type());
     const auto r(class_implementation_formatter_stitch(a, c));
     return r;

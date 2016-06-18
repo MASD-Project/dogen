@@ -29,7 +29,7 @@ namespace test_data {
 
 void string_helper_stitch(
     nested_type_formatting_assistant& a,
-    const formattables::nested_type_info& /*t*/) {
+    const properties::nested_type_info& /*t*/) {
 a.stream() << std::endl;
 a.stream() << "std::string create_std_string(const unsigned int position) {" << std::endl;
 a.stream() << "    std::ostringstream s;" << std::endl;

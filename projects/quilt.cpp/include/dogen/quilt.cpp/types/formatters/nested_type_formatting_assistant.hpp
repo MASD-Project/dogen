@@ -28,7 +28,7 @@
 #include <string>
 #include <ostream>
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
-#include "dogen/quilt.cpp/types/formattables/nested_type_info.hpp"
+#include "dogen/quilt.cpp/types/properties/nested_type_info.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -54,17 +54,17 @@ private:
     /**
      * @brief Returns true if type requires quoting.
      */
-    bool requires_quoting(const formattables::nested_type_info& t) const;
+    bool requires_quoting(const properties::nested_type_info& t) const;
 
     /**
      * @brief Returns true if type requires generic string call.
      */
-    bool requires_generic_string(const formattables::nested_type_info& t) const;
+    bool requires_generic_string(const properties::nested_type_info& t) const;
 
     /**
      * @brief Returns true if type requires tidying up call.
      */
-    bool requires_tidying_up(const formattables::nested_type_info& t) const;
+    bool requires_tidying_up(const properties::nested_type_info& t) const;
 
 public:
     /**
@@ -72,14 +72,14 @@ public:
      * helper method.
      */
     static bool requires_hashing_helper_method(
-        const formattables::nested_type_info& t);
+        const properties::nested_type_info& t);
 
 public:
     /**
      * @brief Returns the correct streaming invocation for the
      * supplied type.
      */
-    std::string streaming_for_type(const formattables::nested_type_info& t,
+    std::string streaming_for_type(const properties::nested_type_info& t,
         const std::string& s) const;
 
 public:

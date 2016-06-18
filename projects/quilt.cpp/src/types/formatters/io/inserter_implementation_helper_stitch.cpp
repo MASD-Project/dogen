@@ -28,7 +28,7 @@ namespace formatters {
 namespace io {
 
 void inserter_implementation_helper_stitch(
-    assistant& a, const formattables::class_info& c,
+    assistant& a, const properties::class_info& c,
     const bool inside_class) {
 
     if (c.requires_stream_manipulators()) {

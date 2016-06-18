@@ -27,7 +27,7 @@
 
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/formattables/includers_info.hpp"
+#include "dogen/quilt.cpp/types/properties/includers_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
 
 namespace dogen {
@@ -48,7 +48,7 @@ public:
      * @brief Generate the includers file.
      */
     virtual dogen::formatters::file
-    format(const context& ctx, const formattables::includers_info& i) const = 0;
+    format(const context& ctx, const properties::includers_info& i) const = 0;
 };
 
 } } } }

@@ -41,10 +41,10 @@
 #include "dogen/quilt.cpp/types/settings/odb_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/formattables/entity.hpp"
+#include "dogen/quilt.cpp/types/properties/entity.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_types.hpp"
-#include "dogen/quilt.cpp/types/formattables/class_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/property_info.hpp"
+#include "dogen/quilt.cpp/types/properties/class_info.hpp"
+#include "dogen/quilt.cpp/types/properties/property_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/nested_type_formatting_assistant.hpp"
 
 namespace dogen {
@@ -66,12 +66,12 @@ public:
      * final keyword. If non-empty, includes a trailing space.
      */
     static std::string
-    make_final_keyword_text(const formattables::class_info& c);
+    make_final_keyword_text(const properties::class_info& c);
 
     /**
      * @brief Returns the by-ref to use given the property.
      */
-    static std::string make_by_ref_text(const formattables::property_info& p);
+    static std::string make_by_ref_text(const properties::property_info& p);
 
     /**
      * @brief Makes the return type of a setter, taking into account
@@ -79,7 +79,7 @@ public:
      */
     static std::string
     make_setter_return_type(const std::string& containing_type_name,
-        const formattables::property_info& p);
+        const properties::property_info& p);
 
     /**
      * @brief Creates a qualified name
@@ -93,7 +93,7 @@ private:
      * @brief Obtains the formatter settings for the formatter as
      * given by the ownership hierarchy.
      */
-    boost::optional<formattables::formatter_properties>
+    boost::optional<properties::formatter_properties>
     obtain_formatter_properties(const std::string& formatter_name) const;
 
     /**
@@ -107,13 +107,13 @@ public:
      * @brief Returns the property as a member variable.
      */
     std::string make_member_variable_name(
-        const formattables::property_info& p) const;
+        const properties::property_info& p) const;
 
     /**
      * @brief Returns the property as a getter.
      */
     std::string make_getter_setter_name(
-        const formattables::property_info& p) const;
+        const properties::property_info& p) const;
 
     /**
      * @brief returns the c++ namespaces for the name.
@@ -221,14 +221,14 @@ public:
      * @brief Creates any helper methods that may be required for this
      * formatter.
      */
-    void add_helper_methods(const formattables::class_info& c);
+    void add_helper_methods(const properties::class_info& c);
 
     /**
      * @brief Returns true if the type can be hashed without requiring a
      * helper method.
      */
     bool requires_hashing_helper_method(
-        const formattables::nested_type_info& t) const;
+        const properties::nested_type_info& t) const;
 
 private:
     /**
@@ -270,7 +270,7 @@ private:
     std::ostringstream stream_;
     boost::iostreams::filtering_ostream filtering_stream_;
     const context& context_;
-    const boost::optional<formattables::formatter_properties>
+    const boost::optional<properties::formatter_properties>
     formatter_properties_;
     const dynamic::ownership_hierarchy ownership_hierarchy_;
     const formatters::file_types file_type_;

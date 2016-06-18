@@ -40,12 +40,12 @@ namespace formatters {
 namespace types {
 
 helper_methods_formatter::helper_methods_formatter(
-  const std::list<formattables::property_info>& properties)
+  const std::list<properties::property_info>& properties)
   : properties_(properties) {}
 
 void helper_methods_formatter::smart_pointer_helper(
     formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& t) const {
+    const properties::nested_type_info& t) const {
     const auto children(t.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
@@ -56,7 +56,7 @@ void helper_methods_formatter::smart_pointer_helper(
 
 void helper_methods_formatter::recursive_helper_method_creator(
     formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& t,
+    const properties::nested_type_info& t,
     std::unordered_set<std::string>& types_done) const {
 
     if (types_done.find(t.complete_identifiable_name()) != types_done.end())

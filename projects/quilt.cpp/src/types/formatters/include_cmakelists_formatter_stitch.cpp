@@ -28,7 +28,7 @@ namespace cpp {
 namespace formatters {
 
 dogen::formatters::file include_cmakelists_formatter_stitch(
-    assistant& a, const formattables::cmakelists_info& c) {
+    assistant& a, const properties::cmakelists_info& c) {
 
     {
         a.make_annotation_preamble(c.general_settings());

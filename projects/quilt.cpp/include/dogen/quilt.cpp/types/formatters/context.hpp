@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include "dogen/quilt.cpp/types/settings/bundle.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings.hpp"
-#include "dogen/quilt.cpp/types/formattables/formatter_properties.hpp"
+#include "dogen/quilt.cpp/types/properties/formatter_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatter_helper_interface.hpp"
 
 namespace dogen {
@@ -49,7 +49,7 @@ public:
         const std::unordered_map<std::string,
         settings::helper_settings>& helper_settings,
         const std::unordered_map<std::string,
-        formattables::formatter_properties>& formatter_properties,
+        properties::formatter_properties>& formatter_properties,
         const std::unordered_map<std::string, std::unordered_map<std::string,
         std::shared_ptr<formatter_helper_interface>>>& helpers);
 
@@ -57,7 +57,7 @@ public:
     const settings::bundle& bundle() const;
     const std::unordered_map<std::string, settings::helper_settings>&
         helper_settings() const;
-    const std::unordered_map<std::string, formattables::formatter_properties>&
+    const std::unordered_map<std::string, properties::formatter_properties>&
         formatter_properties() const;
     const std::unordered_map<
         std::string,
@@ -69,7 +69,7 @@ private:
     const settings::bundle& bundle_;
     const std::unordered_map<std::string, settings::helper_settings>&
         helper_settings_;
-    const std::unordered_map<std::string, formattables::formatter_properties>&
+    const std::unordered_map<std::string, properties::formatter_properties>&
         formatter_properties_;
     const std::unordered_map<
         std::string,

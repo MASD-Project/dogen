@@ -27,7 +27,7 @@
 
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/formattables/odb_options_info.hpp"
+#include "dogen/quilt.cpp/types/properties/odb_options_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
 
 namespace dogen {
@@ -48,7 +48,7 @@ public:
      * @brief Generate the odb representation for the type.
      */
     virtual dogen::formatters::file format(const context& ctx,
-        const formattables::odb_options_info& c) const = 0;
+        const properties::odb_options_info& c) const = 0;
 };
 
 } } } }

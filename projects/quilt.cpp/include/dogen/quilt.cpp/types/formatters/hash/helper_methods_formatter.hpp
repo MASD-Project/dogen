@@ -29,8 +29,8 @@
 #include <string>
 #include <ostream>
 #include <unordered_set>
-#include "dogen/quilt.cpp/types/formattables/property_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/nested_type_info.hpp"
+#include "dogen/quilt.cpp/types/properties/property_info.hpp"
+#include "dogen/quilt.cpp/types/properties/nested_type_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/nested_type_formatting_assistant.hpp"
 
 namespace dogen {
@@ -45,7 +45,7 @@ namespace hash {
 class helper_methods_formatter {
 public:
     explicit helper_methods_formatter(
-        const std::list<formattables::property_info>& properties);
+        const std::list<properties::property_info>& properties);
 
 private:
     /**
@@ -53,14 +53,14 @@ private:
      */
     void sequence_container_helper(
         formatters::nested_type_formatting_assistant& fa,
-        const formattables::nested_type_info& t) const;
+        const properties::nested_type_info& t) const;
 
     /**
      * @brief Helper method for containers such as maps and sets.
      */
     void associative_container_helper(
         formatters::nested_type_formatting_assistant& fa,
-        const formattables::nested_type_info& t) const;
+        const properties::nested_type_info& t) const;
 
     /**
      * @brief Helper method for smart pointers such as boost and std
@@ -68,14 +68,14 @@ private:
      */
     void smart_pointer_helper(
         formatters::nested_type_formatting_assistant& fa,
-        const formattables::nested_type_info& t) const;
+        const properties::nested_type_info& t) const;
 
     /**
      * @brief Helper method for containers such as std::pair.
      */
     void pair_helper(
         formatters::nested_type_formatting_assistant& fa,
-        const formattables::nested_type_info& t) const;
+        const properties::nested_type_info& t) const;
 
     /**
      * @brief Helper method for containers such as boost and std
@@ -83,49 +83,49 @@ private:
      */
     void optional_helper(
         formatters::nested_type_formatting_assistant& fa,
-        const formattables::nested_type_info& t) const;
+        const properties::nested_type_info& t) const;
 
     /**
      * @brief Helper method for containers such as boost variant.
      */
     void variant_helper(
         formatters::nested_type_formatting_assistant& fa,
-        const formattables::nested_type_info& t) const;
+        const properties::nested_type_info& t) const;
 
     /**
      * @brief Helper method for boost date.
      */
     void date_helper(
         formatters::nested_type_formatting_assistant& fa,
-        const formattables::nested_type_info& t) const;
+        const properties::nested_type_info& t) const;
 
     /**
      * @brief Helper method for boost ptime.
      */
     void ptime_helper(
         formatters::nested_type_formatting_assistant& fa,
-        const formattables::nested_type_info& t) const;
+        const properties::nested_type_info& t) const;
 
     /**
      * @brief Helper method for boost time duration.
      */
     void time_duration_helper(
         formatters::nested_type_formatting_assistant& fa,
-        const formattables::nested_type_info& t) const;
+        const properties::nested_type_info& t) const;
 
     /**
      * @brief Helper method for boost property tree.
      */
     void ptree_helper(
         formatters::nested_type_formatting_assistant& fa,
-        const formattables::nested_type_info& t) const;
+        const properties::nested_type_info& t) const;
 
     /**
      * @brief Helper method for boost path.
      */
     void path_helper(
         formatters::nested_type_formatting_assistant& fa,
-        const formattables::nested_type_info& t) const;
+        const properties::nested_type_info& t) const;
 
 private:
     /**
@@ -134,7 +134,7 @@ private:
      */
     void recursive_helper_method_creator(
         formatters::nested_type_formatting_assistant& fa,
-        const formattables::nested_type_info& t,
+        const properties::nested_type_info& t,
         std::unordered_set<std::string>& types_done) const;
 
 public:
@@ -144,7 +144,7 @@ public:
     void format(std::ostream& s) const;
 
 private:
-    const std::list<formattables::property_info>& properties_;
+    const std::list<properties::property_info>& properties_;
 };
 
 } } } } }

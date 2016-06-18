@@ -57,13 +57,13 @@ namespace formatters {
 namespace io {
 
 helper_methods_formatter::helper_methods_formatter(
-    const std::list<formattables::property_info>& properties)
+    const std::list<properties::property_info>& properties)
     : properties_(properties) {}
 
 
 void helper_methods_formatter::sequence_container_helper(
     formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& t) const {
+    const properties::nested_type_info& t) const {
 
     if (t.children().size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_sequence_container;
@@ -74,7 +74,7 @@ void helper_methods_formatter::sequence_container_helper(
 
 void helper_methods_formatter::associative_container_helper(
     formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& t) const {
+    const properties::nested_type_info& t) const {
 
     if (t.children().size() != 1 && t.children().size() != 2) {
         BOOST_LOG_SEV(lg, error) << invalid_associative_container;
@@ -90,7 +90,7 @@ void helper_methods_formatter::associative_container_helper(
 
 void helper_methods_formatter::smart_pointer_helper(
     formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& t) const {
+    const properties::nested_type_info& t) const {
 
     if (t.children().size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
@@ -101,7 +101,7 @@ void helper_methods_formatter::smart_pointer_helper(
 
 void helper_methods_formatter::optional_helper(
     formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& t) const {
+    const properties::nested_type_info& t) const {
     if (t.children().size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_optional_type;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_optional_type));
@@ -112,7 +112,7 @@ void helper_methods_formatter::optional_helper(
 
 void helper_methods_formatter::
 pair_helper(formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& t) const {
+    const properties::nested_type_info& t) const {
     if (t.children().size() != 2) {
         BOOST_LOG_SEV(lg, error) << invalid_pair_type;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_pair_type));
@@ -123,7 +123,7 @@ pair_helper(formatters::nested_type_formatting_assistant& fa,
 
 void helper_methods_formatter::
 variant_helper(formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& t) const {
+    const properties::nested_type_info& t) const {
     if (t.children().empty()) {
         BOOST_LOG_SEV(lg, error) << invalid_variant;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_variant));
@@ -134,7 +134,7 @@ variant_helper(formatters::nested_type_formatting_assistant& fa,
 
 void helper_methods_formatter::ptree_helper(
     formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& t) const {
+    const properties::nested_type_info& t) const {
     if (!t.children().empty()) {
         BOOST_LOG_SEV(lg, error) << invalid_ptree;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_ptree));
@@ -145,7 +145,7 @@ void helper_methods_formatter::ptree_helper(
 
 void helper_methods_formatter::recursive_helper_method_creator(
     formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& t,
+    const properties::nested_type_info& t,
     std::unordered_set<std::string>& types_done) const {
 
     if (types_done.find(t.complete_identifiable_name()) != types_done.end())

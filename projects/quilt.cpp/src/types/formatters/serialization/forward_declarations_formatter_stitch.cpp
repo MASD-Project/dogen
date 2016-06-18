@@ -29,7 +29,7 @@ namespace formatters {
 namespace serialization {
 
 dogen::formatters::file forward_declarations_formatter_stitch(
-    assistant& a, const formattables::forward_declarations_info& fd) {
+    assistant& a, const properties::forward_declarations_info& fd) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());

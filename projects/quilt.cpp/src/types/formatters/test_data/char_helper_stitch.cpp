@@ -29,7 +29,7 @@ namespace test_data {
 
 void char_helper_stitch(
     nested_type_formatting_assistant& a,
-    const formattables::nested_type_info& t) {
+    const properties::nested_type_info& t) {
 a.stream() << std::endl;
 a.stream() << t.name() << " create_" << t.identifiable_name() << "(const unsigned int position) {" << std::endl;
 a.stream() << "    return static_cast<" << t.name() << ">(((position % 95) + 32) == 34) ? 35 : ((position % 95) + 32);" << std::endl;

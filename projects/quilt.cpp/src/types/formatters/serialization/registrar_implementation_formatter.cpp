@@ -40,13 +40,13 @@ namespace serialization {
 
 namespace {
 
-class provider final : public formattables::
+class provider final : public properties::
         inclusion_dependencies_provider_interface<yarn::model> {
 public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
-    provide(const formattables::inclusion_dependencies_builder_factory& f,
+    provide(const properties::inclusion_dependencies_builder_factory& f,
         const yarn::model& m) const override;
 };
 
@@ -55,7 +55,7 @@ std::string provider::formatter_name() const {
 }
 
 boost::optional<std::list<std::string> >
-provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
+provider::provide(const properties::inclusion_dependencies_builder_factory& f,
     const yarn::model& m) const {
 
     yarn::name_factory nf;
@@ -116,19 +116,19 @@ file_types registrar_implementation_formatter::file_type() const {
     return file_types::cpp_implementation;
 }
 
-formattables::origin_types
+properties::origin_types
 registrar_implementation_formatter::formattable_origin_type() const {
-    return formattables::origin_types::internal;
+    return properties::origin_types::internal;
 }
 
 void registrar_implementation_formatter::
 register_inclusion_dependencies_provider(
-  formattables::registrar& rg) const {
+  properties::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 
 dogen::formatters::file registrar_implementation_formatter::
-format(const context& ctx, const formattables::registrar_info& ri) const {
+format(const context& ctx, const properties::registrar_info& ri) const {
     assistant a(ctx, ownership_hierarchy(), file_type());
     const auto r(registrar_implementation_formatter_stitch(a, ri));
     return r;

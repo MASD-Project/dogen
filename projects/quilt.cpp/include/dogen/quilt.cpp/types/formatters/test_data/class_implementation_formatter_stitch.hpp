@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/formatters/types/file.hpp"
-#include "dogen/quilt.cpp/types/formattables/class_info.hpp"
+#include "dogen/quilt.cpp/types/properties/class_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {
@@ -36,7 +36,7 @@ namespace formatters {
 namespace test_data {
 
 dogen::formatters::file class_implementation_formatter_stitch(
-    assistant& a, const formattables::class_info& fd);
+    assistant& a, const properties::class_info& fd);
 
 } } } } }
 

@@ -29,7 +29,7 @@
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
 #include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
-#include "dogen/quilt.cpp/types/formattables/formatter_properties_repository.hpp"
+#include "dogen/quilt.cpp/types/properties/formatter_properties_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 
 namespace dogen {
@@ -41,7 +41,7 @@ class context_factory {
 public:
     context_factory(const settings::bundle_repository& brp,
         const settings::helper_settings_repository& hsrp,
-        const formattables::formatter_properties_repository& fprp,
+        const properties::formatter_properties_repository& fprp,
         const std::unordered_map<
         std::string, std::unordered_map<
         std::string,
@@ -49,7 +49,7 @@ public:
 
 private:
     const std::unordered_map<std::string,
-                             formattables::formatter_properties>&
+                             properties::formatter_properties>&
     properties_for_name(const std::string& n) const;
 
     const settings::bundle& bundle_for_name(const std::string& n) const;
@@ -63,7 +63,7 @@ private:
     static const std::unordered_map<std::string, settings::helper_settings>
     empty_helper_settings_;
     static const std::unordered_map<std::string,
-                                    formattables::formatter_properties>
+                                    properties::formatter_properties>
     empty_formatter_properties_;
     static const std::unordered_map<
         std::string,
@@ -73,7 +73,7 @@ private:
 
     const settings::bundle_repository& bundle_;
     const settings::helper_settings_repository& helper_settings_;
-    const formattables::formatter_properties_repository& formatter_properties_;
+    const properties::formatter_properties_repository& formatter_properties_;
     const std::unordered_map<
         std::string,
         std::unordered_map<std::string,

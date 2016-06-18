@@ -27,7 +27,7 @@
 
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/formattables/class_info.hpp"
+#include "dogen/quilt.cpp/types/properties/class_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
 
 namespace dogen {
@@ -47,7 +47,7 @@ public:
      * @brief Generate a c++ representation for the type.
      */
     virtual dogen::formatters::file
-    format(const context& ctx, const formattables::class_info& c) const = 0;
+    format(const context& ctx, const properties::class_info& c) const = 0;
 };
 
 } } } }

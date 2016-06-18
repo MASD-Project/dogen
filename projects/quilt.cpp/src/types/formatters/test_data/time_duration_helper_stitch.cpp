@@ -28,7 +28,7 @@ namespace test_data {
 
 void time_duration_helper_stitch(
     nested_type_formatting_assistant& a,
-    const formattables::nested_type_info& t) {
+    const properties::nested_type_info& t) {
 a.stream() << std::endl;
 a.stream() << t.complete_name() << std::endl;
 a.stream() << "create_" << t.complete_identifiable_name() << "(const unsigned int position) {" << std::endl;

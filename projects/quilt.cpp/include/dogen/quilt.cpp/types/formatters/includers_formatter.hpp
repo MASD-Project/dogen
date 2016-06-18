@@ -41,13 +41,13 @@ public:
 
     file_types file_type() const override;
 
-    formattables::origin_types formattable_origin_type() const override;
+    properties::origin_types formattable_origin_type() const override;
 
     void register_inclusion_dependencies_provider(
-        formattables::registrar& rg) const override;
+        properties::registrar& rg) const override;
 
     dogen::formatters::file format(const context& ctx,
-        const formattables::includers_info& i) const override;
+        const properties::includers_info& i) const override;
 
 public:
     const dynamic::ownership_hierarchy ownership_hierarchy_;

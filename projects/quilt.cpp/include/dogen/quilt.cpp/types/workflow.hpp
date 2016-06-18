@@ -36,8 +36,8 @@
 #include "dogen/quilt/types/backend_interface.hpp"
 #include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
-#include "dogen/quilt.cpp/types/formattables/formattable.hpp"
-#include "dogen/quilt.cpp/types/formattables/formatter_properties_repository.hpp"
+#include "dogen/quilt.cpp/types/properties/formattable.hpp"
+#include "dogen/quilt.cpp/types/properties/formatter_properties_repository.hpp"
 #include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
@@ -101,13 +101,13 @@ private:
         const dynamic::repository& rp, const yarn::model& m) const;
 
     /**
-     * @brief Create the formattables.
+     * @brief Create the properties.
      */
     std::pair<
-        formattables::formatter_properties_repository,
-        std::forward_list<std::shared_ptr<formattables::formattable> >
+        properties::formatter_properties_repository,
+        std::forward_list<std::shared_ptr<properties::formattable> >
     >
-    create_formattables_activty(const config::cpp_options& opts,
+    create_properties_activty(const config::cpp_options& opts,
         const dynamic::repository& srp,
         const dynamic::object& root_object,
         const dogen::formatters::general_settings_factory& gsf,
@@ -127,9 +127,9 @@ private:
     std::forward_list<dogen::formatters::file>
     format_activty(const settings::bundle_repository& brp,
         const settings::helper_settings_repository& hsrp,
-        const formattables::formatter_properties_repository& fprp,
+        const properties::formatter_properties_repository& fprp,
         const std::forward_list<
-        std::shared_ptr<formattables::formattable>
+        std::shared_ptr<properties::formattable>
         >& f) const;
 
     /**
@@ -138,7 +138,7 @@ private:
     std::forward_list<dogen::formatters::file>
     format_yarn_activity(const settings::bundle_repository& brp,
         const settings::helper_settings_repository& hsrp,
-        const formattables::formatter_properties_repository& fprp,
+        const properties::formatter_properties_repository& fprp,
         const std::forward_list<
         boost::shared_ptr<yarn::element> >& elements) const;
 

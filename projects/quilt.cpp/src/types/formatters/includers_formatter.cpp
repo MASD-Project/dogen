@@ -31,7 +31,7 @@ namespace formatters {
 
 namespace {
 
-class provider final : public formattables::
+class provider final : public properties::
         inclusion_dependencies_provider_interface<yarn::object> {
 public:
     explicit provider(const std::string& formatter_name);
@@ -40,7 +40,7 @@ public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
-        provide(const formattables::inclusion_dependencies_builder_factory& f,
+        provide(const properties::inclusion_dependencies_builder_factory& f,
             const yarn::object& o) const override;
 
 private:
@@ -51,7 +51,7 @@ provider::provider(const std::string& formatter_name)
     : formatter_name_(formatter_name) { }
 
 boost::optional<std::list<std::string> >
-provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
+provider::provide(const properties::inclusion_dependencies_builder_factory& f,
     const yarn::object& /*o*/) const {
 
     auto builder(f.make());
@@ -78,20 +78,20 @@ file_types includers_formatter::file_type() const {
     return file_types::cpp_header;
 }
 
-formattables::origin_types includers_formatter::
+properties::origin_types includers_formatter::
 formattable_origin_type() const {
-    return formattables::origin_types::internal;
+    return properties::origin_types::internal;
 }
 
 void includers_formatter::register_inclusion_dependencies_provider(
-    formattables::registrar& rg) const {
+    properties::registrar& rg) const {
     rg.register_provider(
         boost::make_shared<provider>(ownership_hierarchy_.formatter_name()));
 }
 
 dogen::formatters::file
 includers_formatter::format(const context& ctx,
-    const formattables::includers_info& i) const {
+    const properties::includers_info& i) const {
     assistant a(ctx, ownership_hierarchy(), file_type());
     const auto r(includers_formatter_stitch(a, i));
     return r;

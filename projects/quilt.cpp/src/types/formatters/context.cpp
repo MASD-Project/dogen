@@ -29,7 +29,7 @@ context::context(
     const settings::bundle& bundle,
     const std::unordered_map<std::string, settings::helper_settings>&
     helper_settings,
-    const std::unordered_map<std::string, formattables::formatter_properties>&
+    const std::unordered_map<std::string, properties::formatter_properties>&
     formatter_properties,
     const std::unordered_map<std::string, std::unordered_map<std::string,
     std::shared_ptr<formatter_helper_interface>>>& helpers)
@@ -47,7 +47,7 @@ context::helper_settings() const {
     return helper_settings_;
 }
 
-const std::unordered_map<std::string, formattables::formatter_properties>&
+const std::unordered_map<std::string, properties::formatter_properties>&
 context::formatter_properties() const {
     return formatter_properties_;
 }

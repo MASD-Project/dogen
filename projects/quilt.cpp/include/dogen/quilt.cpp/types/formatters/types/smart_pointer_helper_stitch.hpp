@@ -26,7 +26,7 @@
 #endif
 
 #include <ostream>
-#include "dogen/quilt.cpp/types/formattables/nested_type_info.hpp"
+#include "dogen/quilt.cpp/types/properties/nested_type_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/nested_type_formatting_assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatter_helper_interface.hpp"
 
@@ -44,13 +44,13 @@ public:
     std::string function_name() const;
     std::string helper_name() const;
     bool is_enabled(const assistant& a,
-        const formattables::class_info& owner) const;
+        const properties::class_info& owner) const;
     void format(assistant& a, const yarn::name_tree& nt) const;
 };
 
 void smart_pointer_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& t);
+    const properties::nested_type_info& t);
 
 } } } } }
 

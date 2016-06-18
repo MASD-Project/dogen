@@ -98,7 +98,7 @@
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#formattables#</dia:string>
+        <dia:string>#properties#</dia:string>
       </dia:attribute>
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O1">
@@ -323,7 +323,7 @@ constructor, false otherwise.#</dia:string>
             <dia:string>#parents#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;formattables::parent_info&gt;#</dia:string>
+            <dia:string>#std::list&lt;properties::parent_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1287,7 +1287,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
             <dia:string>#children#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;formattables::nested_type_info&gt;#</dia:string>
+            <dia:string>#std::list&lt;properties::nested_type_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1606,7 +1606,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
             <dia:string>#properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;formattables::property_info&gt;#</dia:string>
+            <dia:string>#std::list&lt;properties::property_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1741,7 +1741,7 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
             <dia:string>#type#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formattables::nested_type_info#</dia:string>
+            <dia:string>#properties::nested_type_info#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -2866,7 +2866,7 @@ seems like the least bad approach.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formattables::origin_types#</dia:string>
+            <dia:string>#properties::origin_types#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2922,7 +2922,7 @@ seems like the least bad approach.
                 <dia:string>#r#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#formattables::registrar&amp;#</dia:string>
+                <dia:string>#properties::registrar&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11789,7 +11789,7 @@ facet of the C++ language.
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::forward_list&lt;std::shared_ptr&lt;formattables::formattable&gt;&gt;&amp;#</dia:string>
+                <dia:string>#const std::forward_list&lt;std::shared_ptr&lt;properties::formattable&gt;&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13143,7 +13143,7 @@ the dynamic object.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;std::shared_ptr&lt;formattables::formattable&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;std::shared_ptr&lt;properties::formattable&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -13384,7 +13384,7 @@ the dynamic object.
             <dia:string>#origin_type#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formattables::origin_types#</dia:string>
+            <dia:string>#properties::origin_types#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -19022,7 +19022,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string,formattables::path_derivatives&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string,properties::path_derivatives&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19432,7 +19432,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const formattables::inclusion_dependencies_builder_factory&amp;#</dia:string>
+                <dia:string>#const properties::inclusion_dependencies_builder_factory&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -19618,7 +19618,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::module&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::module&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -19666,7 +19666,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::concept&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::concept&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -19714,7 +19714,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::primitive&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::primitive&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -19762,7 +19762,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::enumeration&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::enumeration&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -19810,7 +19810,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::object&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::object&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -19858,7 +19858,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::exception&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::exception&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -19906,7 +19906,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::visitor&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::visitor&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -20112,7 +20112,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::module&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::module&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20142,7 +20142,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::concept&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::concept&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20172,7 +20172,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::primitive&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::primitive&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20202,7 +20202,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::enumeration&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::enumeration&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20232,7 +20232,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::object&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::object&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20262,7 +20262,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::exception&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::exception&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20292,7 +20292,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;formattables::inclusion_dependencies_provider_interface&lt;yarn::visitor&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;properties::inclusion_dependencies_provider_interface&lt;yarn::visitor&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20669,7 +20669,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#container_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formattables::container#</dia:string>
+            <dia:string>#properties::container#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -20692,7 +20692,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#inclusion_directives_repository_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formattables::inclusion_directives_repository#</dia:string>
+            <dia:string>#properties::inclusion_directives_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -20763,7 +20763,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#c#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const formattables::container&amp;#</dia:string>
+                <dia:string>#const properties::container&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -22469,7 +22469,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#enablement_repository_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formattables::enablement_repository#</dia:string>
+            <dia:string>#properties::enablement_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -22492,7 +22492,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#directives_repository_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formattables::inclusion_directives_repository#</dia:string>
+            <dia:string>#properties::inclusion_directives_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -22586,7 +22586,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#idrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const formattables::inclusion_directives_repository&amp;#</dia:string>
+                <dia:string>#const properties::inclusion_directives_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -23414,7 +23414,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#pdrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const formattables::path_derivatives_repository&amp;#</dia:string>
+                <dia:string>#const properties::path_derivatives_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -24554,7 +24554,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, formattables::formatter_properties&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, properties::formatter_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -24833,7 +24833,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#path_derivatives_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;yarn::name, std::unordered_map&lt;std::string, formattables::path_derivatives&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;yarn::name, std::unordered_map&lt;std::string, properties::path_derivatives&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -25175,7 +25175,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#formatter_properties_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;std::string, formattables::formatter_properties&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;std::string, properties::formatter_properties&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -25386,7 +25386,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, formattables::formatter_properties&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, properties::formatter_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -25412,7 +25412,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#pd#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::unordered_map&lt;std::string,formattables::path_derivatives&gt;&amp;#</dia:string>
+                <dia:string>#const std::unordered_map&lt;std::string,properties::path_derivatives&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -26015,7 +26015,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;formattables::property_info&gt;#</dia:string>
+            <dia:string>#std::list&lt;properties::property_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -26038,7 +26038,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#all_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;formattables::property_info&gt;#</dia:string>
+            <dia:string>#std::list&lt;properties::property_info&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -26244,7 +26244,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#repository_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formattables::path_derivatives_repository#</dia:string>
+            <dia:string>#properties::path_derivatives_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -26298,7 +26298,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#pdrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const formattables::path_derivatives_repository&amp;#</dia:string>
+                <dia:string>#const properties::path_derivatives_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -29011,7 +29011,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#erp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const formattables::enablement_repository&amp;#</dia:string>
+                <dia:string>#const properties::enablement_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -29028,7 +29028,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#idrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const formattables::inclusion_directives_repository&amp;#</dia:string>
+                <dia:string>#const properties::inclusion_directives_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -29045,7 +29045,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#ifrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const formattables::integrated_facet_repository&amp;#</dia:string>
+                <dia:string>#const properties::integrated_facet_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -29532,7 +29532,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#type_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formattables::nested_type_info#</dia:string>
+            <dia:string>#properties::nested_type_info#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -29586,7 +29586,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#t#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const formattables::nested_type_info&amp;#</dia:string>
+                <dia:string>#const properties::nested_type_info&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -31405,7 +31405,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#rp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const formattables::path_derivatives_repository&amp;#</dia:string>
+                <dia:string>#const properties::path_derivatives_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -31903,7 +31903,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#c#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const formattables::class_info&amp;#</dia:string>
+                <dia:string>#const properties::class_info&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -31951,7 +31951,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const formattables::property_info&amp;#</dia:string>
+                <dia:string>#const properties::property_info&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -32016,7 +32016,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const formattables::property_info&amp;#</dia:string>
+                <dia:string>#const properties::property_info&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -33266,7 +33266,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#formatter_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, formattables::formatter_properties&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, properties::formatter_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -33289,7 +33289,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#helper_instances#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;formattables::helper_instance&gt;#</dia:string>
+            <dia:string>#std::list&lt;properties::helper_instance&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -34390,7 +34390,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#owner#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const formattables::class_info&amp;#</dia:string>
+                <dia:string>#const properties::class_info&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -35181,7 +35181,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#formatter_properties_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formattables::formatter_properties_repository#</dia:string>
+            <dia:string>#properties::formatter_properties_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -35204,7 +35204,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#helper_instances#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formattables::helper_instances_repository#</dia:string>
+            <dia:string>#properties::helper_instances_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -35292,7 +35292,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#fprp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const formattables::formatter_properties_repository&amp;#</dia:string>
+                <dia:string>#const properties::formatter_properties_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -36442,7 +36442,7 @@ Example: std_map.#</dia:string>
             <dia:string>#properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formattables::helper_instance_properties#</dia:string>
+            <dia:string>#properties::helper_instance_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -36465,7 +36465,7 @@ Example: std_map.#</dia:string>
             <dia:string>#associated_helpers#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;formattables::helper_instance_properties&gt;#</dia:string>
+            <dia:string>#std::list&lt;properties::helper_instance_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -36996,7 +36996,7 @@ Example: std_map.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;formattables::helper_instance&gt;#</dia:string>
+            <dia:string>#std::list&lt;properties::helper_instance&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -37296,7 +37296,7 @@ Example: std_map.#</dia:string>
             <dia:string>#helper_instances_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::list&lt;formattables::helper_instance&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::list&lt;properties::helper_instance&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

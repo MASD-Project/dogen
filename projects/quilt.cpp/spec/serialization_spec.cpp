@@ -47,13 +47,13 @@ BOOST_AUTO_TEST_SUITE(serialization)
 BOOST_AUTO_TEST_CASE(validate_serialization) {
     SETUP_TEST_LOG("validate_serialization");
 
-    roundtrip_type<formattables::class_info_generator>();
-    roundtrip_type<formattables::cmakelists_info_generator>();
-    roundtrip_type<formattables::nested_type_info_generator>();
-    roundtrip_type<formattables::odb_options_info_generator>();
-    roundtrip_type<formattables::parent_info_generator>();
-    roundtrip_type<formattables::property_info_generator>();
-    roundtrip_type<formattables::registrar_info_generator>();
+    roundtrip_type<properties::class_info_generator>();
+    roundtrip_type<properties::cmakelists_info_generator>();
+    roundtrip_type<properties::nested_type_info_generator>();
+    roundtrip_type<properties::odb_options_info_generator>();
+    roundtrip_type<properties::parent_info_generator>();
+    roundtrip_type<properties::property_info_generator>();
+    roundtrip_type<properties::registrar_info_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

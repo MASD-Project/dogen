@@ -52,7 +52,7 @@ std::string smart_pointer_helper::helper_name() const {
 }
 
 bool smart_pointer_helper::is_enabled(const assistant& /*a*/,
-    const formattables::class_info& /*owner*/) const {
+    const properties::class_info& /*owner*/) const {
     return true;
 }
 
@@ -72,7 +72,7 @@ a.stream() << std::endl;
 
 void smart_pointer_helper_stitch(
     nested_type_formatting_assistant& a,
-    const formattables::nested_type_info& t) {
+    const properties::nested_type_info& t) {
 
     {
         auto snf(a.make_scoped_namespace_formatter(t.namespaces()));

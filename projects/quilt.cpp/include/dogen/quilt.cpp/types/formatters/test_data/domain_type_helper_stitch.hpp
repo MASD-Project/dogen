@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/quilt.cpp/types/formatters/nested_type_formatting_assistant.hpp"
-#include "dogen/quilt.cpp/types/formattables/nested_type_info.hpp"
+#include "dogen/quilt.cpp/types/properties/nested_type_info.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -36,7 +36,7 @@ namespace test_data {
 
 void domain_type_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& t,
+    const properties::nested_type_info& t,
     const bool as_pointer);
 
 } } } } }

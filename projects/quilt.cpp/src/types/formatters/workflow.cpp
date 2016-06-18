@@ -22,15 +22,15 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/formatter_properties_io.hpp"
+#include "dogen/quilt.cpp/io/properties/formatter_properties_io.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
-#include "dogen/quilt.cpp/types/formattables/class_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/includers_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/registrar_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/cmakelists_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/odb_options_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/forward_declarations_info.hpp"
-#include "dogen/quilt.cpp/types/formattables/formattable_visitor.hpp"
+#include "dogen/quilt.cpp/types/properties/class_info.hpp"
+#include "dogen/quilt.cpp/types/properties/includers_info.hpp"
+#include "dogen/quilt.cpp/types/properties/registrar_info.hpp"
+#include "dogen/quilt.cpp/types/properties/cmakelists_info.hpp"
+#include "dogen/quilt.cpp/types/properties/odb_options_info.hpp"
+#include "dogen/quilt.cpp/types/properties/forward_declarations_info.hpp"
+#include "dogen/quilt.cpp/types/properties/formattable_visitor.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/formatters/element_formatter.hpp"
@@ -57,7 +57,7 @@ namespace formatters {
  * @brief Responsible for dispatching the formattable to the
  * appropriate formatters.
  */
-class dispatcher final : public formattables::formattable_visitor {
+class dispatcher final : public properties::formattable_visitor {
 public:
     dispatcher(const context_factory& f, const container& c);
     ~dispatcher() noexcept { }
@@ -150,19 +150,19 @@ private:
 
 public:
     using formattable_visitor::visit;
-    void visit(const formattables::class_info& c) override;
-    void visit(const formattables::forward_declarations_info& fd) override;
-    void visit(const formattables::registrar_info& r) override;
-    void visit(const formattables::cmakelists_info& c) override;
-    void visit(const formattables::odb_options_info& o) override;
-    void visit(const formattables::includers_info& o) override;
+    void visit(const properties::class_info& c) override;
+    void visit(const properties::forward_declarations_info& fd) override;
+    void visit(const properties::registrar_info& r) override;
+    void visit(const properties::cmakelists_info& c) override;
+    void visit(const properties::odb_options_info& o) override;
+    void visit(const properties::includers_info& o) override;
 
 public:
     /**
      * @brief Converts the supplied entity into all supported
      * representations.
      */
-    void format(const formattables::formattable& f);
+    void format(const properties::formattable& f);
 
 public:
     /**
@@ -179,34 +179,34 @@ private:
 dispatcher::dispatcher(const context_factory& f, const container& c)
     : factory_(f), container_(c) { }
 
-void dispatcher::visit(const formattables::class_info& c) {
+void dispatcher::visit(const properties::class_info& c) {
     const bool empty_out_content(
         c.generation_type() == yarn::generation_types::partial_generation);
     for (const auto f : container_.class_formatters())
         format_entity(*f, c, empty_out_content);
 }
 
-void dispatcher::visit(const formattables::forward_declarations_info& fd) {
+void dispatcher::visit(const properties::forward_declarations_info& fd) {
     format_entity(container_.forward_declarations_formatters(), fd);
 }
 
-void dispatcher::visit(const formattables::registrar_info& r) {
+void dispatcher::visit(const properties::registrar_info& r) {
     format_entity(container_.registrar_formatters(), r);
 }
 
-void dispatcher::visit(const formattables::cmakelists_info& c) {
+void dispatcher::visit(const properties::cmakelists_info& c) {
     format(container_.cmakelists_formatters(), c);
 }
 
-void dispatcher::visit(const formattables::odb_options_info& o) {
+void dispatcher::visit(const properties::odb_options_info& o) {
     format(container_.odb_options_formatters(), o);
 }
 
-void dispatcher::visit(const formattables::includers_info& i) {
+void dispatcher::visit(const properties::includers_info& i) {
     format_entity(container_.includers_formatters(), i);
 }
 
-void dispatcher::format(const formattables::formattable& f) {
+void dispatcher::format(const properties::formattable& f) {
     f.accept(*this);
 }
 
@@ -226,9 +226,9 @@ cpp::formatters::registrar& workflow::registrar() {
 std::forward_list<dogen::formatters::file>
 workflow::execute(const settings::bundle_repository& brp,
     const settings::helper_settings_repository& hsrp,
-    const formattables::formatter_properties_repository& fprp,
+    const properties::formatter_properties_repository& fprp,
     const std::forward_list<
-    std::shared_ptr<formattables::formattable> >& f) const {
+    std::shared_ptr<properties::formattable> >& f) const {
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
     context_factory factory(brp, hsrp, fprp, registrar().formatter_helpers());
     dispatcher d(factory, registrar().formatter_container());
@@ -248,7 +248,7 @@ workflow::execute(const settings::bundle_repository& brp,
 std::forward_list<dogen::formatters::file>
 workflow::execute(const settings::bundle_repository& brp,
     const settings::helper_settings_repository& hsrp,
-    const formattables::formatter_properties_repository& fprp,
+    const properties::formatter_properties_repository& fprp,
     const std::forward_list<
     boost::shared_ptr<yarn::element> >& elements) const {
 

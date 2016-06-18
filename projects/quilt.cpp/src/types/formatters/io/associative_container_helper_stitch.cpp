@@ -29,7 +29,7 @@ namespace io {
 
 void associative_container_helper_stitch(
     nested_type_formatting_assistant& a,
-    const formattables::nested_type_info& t) {
+    const properties::nested_type_info& t) {
 
     {
         auto snf(a.make_scoped_namespace_formatter(t.namespaces()));

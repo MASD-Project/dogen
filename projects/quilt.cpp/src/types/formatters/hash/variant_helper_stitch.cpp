@@ -28,7 +28,7 @@ namespace hash {
 
 void variant_helper_stitch(
     nested_type_formatting_assistant& a,
-    const formattables::nested_type_info& t) {
+    const properties::nested_type_info& t) {
 a.stream() << std::endl;
 a.stream() << "struct " << t.complete_identifiable_name() << "_visitor : public boost::static_visitor<> {" << std::endl;
 a.stream() << "    " << t.complete_identifiable_name() << "_visitor() : hash(0) {}" << std::endl;

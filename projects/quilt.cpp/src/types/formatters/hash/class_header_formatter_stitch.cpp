@@ -28,7 +28,7 @@ namespace formatters {
 namespace hash {
 
 dogen::formatters::file class_header_formatter_stitch(
-    assistant& a, const formattables::class_info& c) {
+    assistant& a, const properties::class_info& c) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());

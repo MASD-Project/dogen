@@ -28,7 +28,7 @@ namespace hash {
 
 void pair_helper_stitch(
     nested_type_formatting_assistant& a,
-    const formattables::nested_type_info& t) {
+    const properties::nested_type_info& t) {
 
     const auto first(t.children().front());
     const auto second(t.children().back());

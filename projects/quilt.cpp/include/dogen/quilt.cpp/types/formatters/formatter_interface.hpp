@@ -27,8 +27,8 @@
 
 #include <string>
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
-#include "dogen/quilt.cpp/types/formattables/registrar.hpp"
-#include "dogen/quilt.cpp/types/formattables/origin_types.hpp"
+#include "dogen/quilt.cpp/types/properties/registrar.hpp"
+#include "dogen/quilt.cpp/types/properties/origin_types.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_types.hpp"
 
 namespace dogen {
@@ -57,14 +57,14 @@ public:
     /**
      * @brief Origin of the formattable this formatter handles.
      */
-    virtual formattables::origin_types formattable_origin_type() const = 0;
+    virtual properties::origin_types formattable_origin_type() const = 0;
 
     /**
      * @brief Registers an inclusion dependency providers this
      * formatter may know of.
      */
     virtual void register_inclusion_dependencies_provider(
-        formattables::registrar& rg) const = 0;
+        properties::registrar& rg) const = 0;
 };
 
 } } } }

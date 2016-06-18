@@ -25,7 +25,7 @@
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
-#include "dogen/quilt.cpp/types/formattables/workflow.hpp"
+#include "dogen/quilt.cpp/types/properties/workflow.hpp"
 #include "dogen/quilt.cpp/types/settings/directory_names_settings_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/bundle_repository_factory.hpp"
@@ -104,10 +104,10 @@ create_helper_settings_repository(const dynamic::repository& rp,
 }
 
 std::pair<
-    formattables::formatter_properties_repository,
-    std::forward_list<std::shared_ptr<formattables::formattable> >
+    properties::formatter_properties_repository,
+    std::forward_list<std::shared_ptr<properties::formattable> >
 >
-workflow::create_formattables_activty(
+workflow::create_properties_activty(
     const config::cpp_options& opts,
     const dynamic::repository& srp,
     const dynamic::object& root_object,
@@ -116,7 +116,7 @@ workflow::create_formattables_activty(
     settings::bundle_repository& brp,
     const yarn::model& m) const {
 
-    formattables::workflow fw;
+    properties::workflow fw;
     return fw.execute(opts, srp, root_object, gsf, fc, brp, m);
 }
 
@@ -129,9 +129,9 @@ workflow::obtain_enriched_yarn_model_activity(const yarn::model& m) const {
 std::forward_list<dogen::formatters::file>
 workflow::format_activty(const settings::bundle_repository& brp,
     const settings::helper_settings_repository& hsrp,
-    const formattables::formatter_properties_repository& fprp,
+    const properties::formatter_properties_repository& fprp,
     const std::forward_list<
-    std::shared_ptr<formattables::formattable>
+    std::shared_ptr<properties::formattable>
     >& f) const {
     formatters::workflow w;
     return w.execute(brp, hsrp, fprp, f);
@@ -140,7 +140,7 @@ workflow::format_activty(const settings::bundle_repository& brp,
 std::forward_list<dogen::formatters::file> workflow::
 format_yarn_activity(const settings::bundle_repository& brp,
     const settings::helper_settings_repository& hsrp,
-    const formattables::formatter_properties_repository& fprp,
+    const properties::formatter_properties_repository& fprp,
     const std::forward_list<
     boost::shared_ptr<yarn::element> >& elements) const {
     formatters::workflow w;
@@ -191,7 +191,7 @@ workflow::generate(const config::knitting_options& ko,
     const auto& fc(formatters::workflow::registrar().formatter_container());
 
     const auto& kcpp(ko.cpp());
-    const auto pair(create_formattables_activty(kcpp, rp, ro, gsf, fc, brp, m));
+    const auto pair(create_properties_activty(kcpp, rp, ro, gsf, fc, brp, m));
     auto r(format_activty(brp, hsrp, pair.first, pair.second));
 
     const auto elements(obtain_enriched_yarn_model_activity(m));

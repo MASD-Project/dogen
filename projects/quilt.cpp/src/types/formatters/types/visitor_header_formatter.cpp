@@ -20,7 +20,7 @@
  */
 #include <boost/make_shared.hpp>
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
+#include "dogen/quilt.cpp/types/properties/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
@@ -39,13 +39,13 @@ namespace types {
 
 namespace {
 
-class provider final : public formattables::
+class provider final : public properties::
         inclusion_dependencies_provider_interface<yarn::visitor> {
 public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
-        provide(const formattables::inclusion_dependencies_builder_factory& f,
+        provide(const properties::inclusion_dependencies_builder_factory& f,
         const yarn::visitor& v) const override;
 };
 
@@ -54,7 +54,7 @@ std::string provider::formatter_name() const {
 }
 
 boost::optional<std::list<std::string> >
-provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
+provider::provide(const properties::inclusion_dependencies_builder_factory& f,
     const yarn::visitor& v) const {
 
     auto builder(f.make());
@@ -86,13 +86,13 @@ file_types visitor_header_formatter::file_type() const {
     return file_types::cpp_header;
 }
 
-formattables::origin_types
+properties::origin_types
 visitor_header_formatter::formattable_origin_type() const {
-    return formattables::origin_types::external;
+    return properties::origin_types::external;
 }
 
 void visitor_header_formatter::register_inclusion_dependencies_provider(
-    formattables::registrar& rg) const {
+    properties::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 

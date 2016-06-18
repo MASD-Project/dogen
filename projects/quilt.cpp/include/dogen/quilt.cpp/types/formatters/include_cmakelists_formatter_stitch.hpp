@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/formatters/types/file.hpp"
-#include "dogen/quilt.cpp/types/formattables/cmakelists_info.hpp"
+#include "dogen/quilt.cpp/types/properties/cmakelists_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {
@@ -35,7 +35,7 @@ namespace cpp {
 namespace formatters {
 
 dogen::formatters::file include_cmakelists_formatter_stitch(
-    assistant& a, const formattables::cmakelists_info& c);
+    assistant& a, const properties::cmakelists_info& c);
 
 } } } }
 

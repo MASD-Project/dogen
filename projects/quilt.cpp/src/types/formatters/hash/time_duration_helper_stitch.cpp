@@ -28,7 +28,7 @@ namespace hash {
 
 void time_duration_helper_stitch(
     nested_type_formatting_assistant& a,
-    const formattables::nested_type_info& t) {
+    const properties::nested_type_info& t) {
 a.stream() << std::endl;
 a.stream() << "inline std::size_t hash_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
 a.stream() << "    std::size_t seed(0);" << std::endl;

@@ -29,7 +29,7 @@ namespace hash {
 
 void associative_container_helper_stitch(
     nested_type_formatting_assistant& a,
-    const formattables::nested_type_info& t) {
+    const properties::nested_type_info& t) {
 
     const auto key(t.children().front());
     const auto value(t.children().back());

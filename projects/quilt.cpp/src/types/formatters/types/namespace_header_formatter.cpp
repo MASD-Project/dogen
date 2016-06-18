@@ -49,13 +49,13 @@ file_types namespace_header_formatter::file_type() const {
     return file_types::cpp_header;
 }
 
-formattables::origin_types
+properties::origin_types
 namespace_header_formatter::formattable_origin_type() const {
-    return formattables::origin_types::external;
+    return properties::origin_types::external;
 }
 
 void namespace_header_formatter::register_inclusion_dependencies_provider(
-    formattables::registrar& /*rg*/) const {}
+    properties::registrar& /*rg*/) const {}
 
 dogen::formatters::file namespace_header_formatter::
 format(const context& ctx, const yarn::module& m) const {

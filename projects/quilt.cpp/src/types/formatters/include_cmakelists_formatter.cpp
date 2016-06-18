@@ -51,16 +51,16 @@ file_types include_cmakelists_formatter::file_type() const {
     return file_types::cmakefile;
 }
 
-formattables::origin_types
+properties::origin_types
 include_cmakelists_formatter::formattable_origin_type() const {
-    return formattables::origin_types::internal;
+    return properties::origin_types::internal;
 }
 
 void include_cmakelists_formatter::register_inclusion_dependencies_provider(
-    formattables::registrar& /*rg*/) const {}
+    properties::registrar& /*rg*/) const {}
 
 dogen::formatters::file include_cmakelists_formatter::
-format(const context& ctx, const formattables::cmakelists_info& c) const {
+format(const context& ctx, const properties::cmakelists_info& c) const {
     assistant a(ctx, ownership_hierarchy(), file_type());
     const auto r(include_cmakelists_formatter_stitch(a, c));
     return r;

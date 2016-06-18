@@ -41,13 +41,13 @@ BOOST_AUTO_TEST_SUITE(swap)
 BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_swap");
 
-    test_swap<formattables::class_info_generator>();
-    test_swap<formattables::cmakelists_info_generator>();
-    test_swap<formattables::nested_type_info_generator>();
-    test_swap<formattables::odb_options_info_generator>();
-    test_swap<formattables::parent_info_generator>();
-    test_swap<formattables::property_info_generator>();
-    test_swap<formattables::registrar_info_generator>();
+    test_swap<properties::class_info_generator>();
+    test_swap<properties::cmakelists_info_generator>();
+    test_swap<properties::nested_type_info_generator>();
+    test_swap<properties::odb_options_info_generator>();
+    test_swap<properties::parent_info_generator>();
+    test_swap<properties::property_info_generator>();
+    test_swap<properties::registrar_info_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()
