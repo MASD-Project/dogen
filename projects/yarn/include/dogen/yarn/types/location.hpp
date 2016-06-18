@@ -120,7 +120,7 @@ public:
      * @brief Name of the owning element, if any.
      *
      * For modeling elements which are located within other modeling elements that
-     * are not modules, such as properties, inner classes, etc.
+     * are not modules, such as attributes, inner classes, etc.
      */
     /**@{*/
     const std::string& element() const;

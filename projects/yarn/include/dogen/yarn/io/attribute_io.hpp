@@ -18,19 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_PROCESSED_PROPERTY_FWD_HPP
-#define DOGEN_YARN_DIA_TYPES_PROCESSED_PROPERTY_FWD_HPP
+#ifndef DOGEN_YARN_IO_ATTRIBUTE_IO_HPP
+#define DOGEN_YARN_IO_ATTRIBUTE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen/yarn/types/attribute.hpp"
+
 namespace dogen {
 namespace yarn {
-namespace dia {
 
-class processed_property;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::yarn::attribute& v);
 
-} } }
+} }
 
 #endif

@@ -243,19 +243,19 @@ processed_object object_processor::process(const dogen::dia::object& o) {
                 BOOST_LOG_SEV(lg, debug) << "Found composite of type "
                                          << c.type();
 
-                processed_property p;
+                processed_attribute pa;
                 for (const auto a : c.value()) {
                     if (a->name() == dia_name)
-                        p.name(parse_string_attribute(*a));
+                        pa.name(parse_string_attribute(*a));
                     else if (a->name() == dia_type)
-                        p.type(parse_string_attribute(*a));
+                        pa.type(parse_string_attribute(*a));
                     else if (a->name() == dia_comment)
-                        p.comment(create_processed_comment(*a));
+                        pa.comment(create_processed_comment(*a));
                     else
                         BOOST_LOG_SEV(lg, warn) << "Ignoring attribute: "
                                                 << a->name();
                 }
-                r.properties().push_back(p);
+                r.attributes().push_back(pa);
             }
         }
     }

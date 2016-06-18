@@ -34,7 +34,7 @@
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/visitor_ser.hpp"
 #include "dogen/yarn/serialization/location_ser.hpp"
-#include "dogen/yarn/serialization/property_ser.hpp"
+#include "dogen/yarn/serialization/attribute_ser.hpp"
 #include "dogen/yarn/serialization/exception_ser.hpp"
 #include "dogen/yarn/serialization/name_tree_ser.hpp"
 #include "dogen/yarn/serialization/primitive_ser.hpp"

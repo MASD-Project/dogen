@@ -104,10 +104,10 @@ public:
         const name& element_name) const;
 
     /**
-     * @brief Builds a property name.
+     * @brief Builds an attribute name.
      */
-    name build_property_name(const name& owner_name,
-        const std::string& property_simple_name) const;
+    name build_attribute_name(const name& owner_name,
+        const std::string& simple_name) const;
 };
 
 } }

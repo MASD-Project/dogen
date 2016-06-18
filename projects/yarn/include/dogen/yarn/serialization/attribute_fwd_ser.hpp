@@ -18,17 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_PROPERTIES_EXPANDER_FWD_HPP
-#define DOGEN_YARN_TYPES_PROPERTIES_EXPANDER_FWD_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_ATTRIBUTE_FWD_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_ATTRIBUTE_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace yarn {
+#include "dogen/yarn/types/attribute_fwd.hpp"
 
-class properties_expander;
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::yarn::attribute& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::yarn::attribute& v, unsigned int version);
 
 } }
 

@@ -46,7 +46,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     // FIXME: bug in composition?
     // test_hashing<name_tree_generator>();
     // test_hashing<node_generator>();
-    test_hashing<property_generator>();
+    test_hashing<attribute_generator>();
     test_hashing<name_generator>();
     test_hashing<primitive_generator>();
     test_hashing<enumerator_generator>();

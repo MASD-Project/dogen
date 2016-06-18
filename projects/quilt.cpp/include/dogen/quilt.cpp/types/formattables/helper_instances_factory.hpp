@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <boost/optional.hpp>
-#include "dogen/yarn/types/property.hpp"
+#include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_instance.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
@@ -49,7 +49,7 @@ private:
 
 public:
     std::list<helper_instance>
-    make(const std::list<yarn::property>& properties) const;
+    make(const std::list<yarn::attribute>& attributes) const;
 
 private:
     const settings::helper_settings_repository& helper_settings_;

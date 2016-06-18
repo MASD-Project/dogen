@@ -41,11 +41,11 @@ namespace yarn {
  *
  * @section yarn_association_indexer_0 Requirements
  *
- * The indexing of properties is expected to have taken place.
+ * The indexing of attributes is expected to have taken place.
  *
- * @section yarn_property_indexer_1 Indexing Process
+ * @section yarn_attribute_indexer_1 Indexing Process
  *
- * The indexer goes through all properties in objects and, for every
+ * The indexer goes through all attributes in objects and, for every
  * name tree, unpacks all the associations implied by their presence.
  *
  * Associations are of two types: @e regular or @e weak. This

@@ -18,17 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_PROPERTY_FWD_HPP
-#define DOGEN_YARN_TYPES_PROPERTY_FWD_HPP
+#ifndef DOGEN_YARN_DIA_SERIALIZATION_PROCESSED_ATTRIBUTE_FWD_SER_HPP
+#define DOGEN_YARN_DIA_SERIALIZATION_PROCESSED_ATTRIBUTE_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace yarn {
+#include "dogen/yarn.dia/types/processed_attribute_fwd.hpp"
 
-class property;
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::yarn::dia::processed_attribute& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::yarn::dia::processed_attribute& v, unsigned int version);
 
 } }
 

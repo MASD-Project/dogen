@@ -18,30 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen/yarn.dia/io/processed_comment_io.hpp"
-#include "dogen/yarn.dia/io/processed_property_io.hpp"
+#ifndef DOGEN_YARN_HASH_ATTRIBUTE_HASH_HPP
+#define DOGEN_YARN_HASH_ATTRIBUTE_HASH_HPP
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/yarn/types/attribute.hpp"
 
 namespace dogen {
 namespace yarn {
-namespace dia {
 
-std::ostream& operator<<(std::ostream& s, const processed_property& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::dia::processed_property\"" << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"type\": " << "\"" << tidy_up_string(v.type()) << "\"" << ", "
-      << "\"comment\": " << v.comment()
-      << " }";
-    return(s);
+struct attribute_hasher {
+public:
+    static std::size_t hash(const attribute& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+struct hash<dogen::yarn::attribute> {
+public:
+    size_t operator()(const dogen::yarn::attribute& v) const {
+        return dogen::yarn::attribute_hasher::hash(v);
+    }
+};
+
 }
-
-} } }
+#endif

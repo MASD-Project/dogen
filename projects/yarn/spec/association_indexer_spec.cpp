@@ -47,7 +47,7 @@ using dogen::yarn::test::mock_intermediate_model_factory;
  */
 const mock_intermediate_model_factory::flags flags(
     false/*tagged*/, false/*merged*/, false/*resolved*/,
-    true/*concepts_indexed*/, true/*properties_indexed*/,
+    true/*concepts_indexed*/, true/*attributes_indexed*/,
     false/*associations_indexed*/);
 const mock_intermediate_model_factory factory(flags);
 
@@ -58,8 +58,8 @@ using dogen::yarn::indexing_error;
 using dogen::utility::test::asserter;
 using object_types = dogen::yarn::test::mock_intermediate_model_factory::
     object_types;
-using property_types = dogen::yarn::test::mock_intermediate_model_factory::
-    property_types;
+using attribute_types = dogen::yarn::test::mock_intermediate_model_factory::
+    attribute_types;
 
 BOOST_AUTO_TEST_SUITE(association_indexer)
 
@@ -77,8 +77,8 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_association_indexer) {
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_properties_is_untouched_by_association_indexer) {
-    SETUP_TEST_LOG_SOURCE("model_with_single_type_and_no_properties_is_untouched_by_association_indexer");
+BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_association_indexer) {
+    SETUP_TEST_LOG_SOURCE("model_with_single_type_and_no_attributes_is_untouched_by_association_indexer");
 
     auto a(factory.make_single_type_model());
     const auto e(factory.make_single_type_model());
@@ -91,11 +91,11 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_properties_is_untouched_by_as
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(model_with_type_with_property_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("model_with_type_with_property_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("model_with_type_with_attribute_results_in_expected_indices");
 
-    auto m(factory.object_with_property(object_types::value_object,
-            property_types::unsigned_int));
+    auto m(factory.object_with_attribute(object_types::value_object,
+            attribute_types::unsigned_int));
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::yarn::association_indexer ind;
@@ -123,8 +123,8 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_association_index
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(model_with_more_than_one_property_of_the_same_type_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("model_with_more_than_one_property_of_the_same_type_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(model_with_more_than_one_attribute_of_the_same_type_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("model_with_more_than_one_attribute_of_the_same_type_results_in_expected_indices");
 
     auto m(factory.make_first_degree_concepts_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
@@ -146,10 +146,10 @@ BOOST_AUTO_TEST_CASE(model_with_more_than_one_property_of_the_same_type_results_
     }
 }
 
-BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_types_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("model_with_object_with_multiple_properties_of_different_types_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_types_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("model_with_object_with_multiple_attributes_of_different_types_results_in_expected_indices");
 
-    auto m(factory.object_with_group_of_properties_of_different_types());
+    auto m(factory.object_with_group_of_attributes_of_different_types());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::yarn::association_indexer ind;
@@ -205,10 +205,10 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
     BOOST_CHECK(found3);
 }
 
-BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_types_that_are_repeated_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("model_with_object_with_multiple_properties_of_different_types_that_are_repeated_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_types_that_are_repeated_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("model_with_object_with_multiple_attributes_of_different_types_that_are_repeated_results_in_expected_indices");
 
-    auto m(factory.object_with_group_of_properties_of_different_types(
+    auto m(factory.object_with_group_of_attributes_of_different_types(
             true/*repeat_group*/));
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
@@ -264,14 +264,14 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
     BOOST_CHECK(found3);
 }
 
-BOOST_AUTO_TEST_CASE(object_with_unsigned_int_property_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("object_with_unsigned_int_property_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(object_with_unsigned_int_attribute_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("object_with_unsigned_int_attribute_results_in_expected_indices");
 
     const auto ot(object_types::value_object);
-    const auto pt(property_types::unsigned_int);
-    auto m(factory.object_with_property(ot, pt));
+    const auto pt(attribute_types::unsigned_int);
+    auto m(factory.object_with_attribute(ot, pt));
     BOOST_REQUIRE(m.objects().size() == 1);
-    BOOST_REQUIRE(m.objects().begin()->second.local_properties().size() == 1);
+    BOOST_REQUIRE(m.objects().begin()->second.local_attributes().size() == 1);
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::yarn::association_indexer ind;
@@ -293,14 +293,14 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_property_results_in_expected_indic
     }
 }
 
-BOOST_AUTO_TEST_CASE(object_with_bool_property_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("object_with_bool_property_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(object_with_bool_attribute_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("object_with_bool_attribute_results_in_expected_indices");
 
     const auto ot(object_types::value_object);
-    const auto pt(property_types::boolean);
-    auto m(factory.object_with_property(ot, pt));
+    const auto pt(attribute_types::boolean);
+    auto m(factory.object_with_attribute(ot, pt));
     BOOST_REQUIRE(m.objects().size() == 1);
-    BOOST_REQUIRE(m.objects().begin()->second.local_properties().size() == 1);
+    BOOST_REQUIRE(m.objects().begin()->second.local_attributes().size() == 1);
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::yarn::association_indexer ind;
@@ -322,12 +322,12 @@ BOOST_AUTO_TEST_CASE(object_with_bool_property_results_in_expected_indices) {
     }
 }
 
-BOOST_AUTO_TEST_CASE(object_with_object_property_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("object_with_object_property_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(object_with_object_attribute_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("object_with_object_attribute_results_in_expected_indices");
 
     const auto ot(object_types::value_object);
-    const auto pt(property_types::value_object);
-    auto m(factory.object_with_property(ot, pt));
+    const auto pt(attribute_types::value_object);
+    auto m(factory.object_with_attribute(ot, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.objects().size() == 2);
 
@@ -351,10 +351,10 @@ BOOST_AUTO_TEST_CASE(object_with_object_property_results_in_expected_indices) {
     }
 }
 
-BOOST_AUTO_TEST_CASE(model_with_object_with_missing_object_property_throws) {
-    SETUP_TEST_LOG_SOURCE("model_with_object_with_missing_object_property_throws");
+BOOST_AUTO_TEST_CASE(model_with_object_with_missing_object_attribute_throws) {
+    SETUP_TEST_LOG_SOURCE("model_with_object_with_missing_object_attribute_throws");
 
-    auto m(factory.object_with_missing_property_type());
+    auto m(factory.object_with_missing_attribute_type());
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
 
@@ -364,12 +364,12 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_object_property_throws) {
     BOOST_CHECK_EXCEPTION(i.index(m), indexing_error, c);
 }
 
-BOOST_AUTO_TEST_CASE(object_with_std_pair_property_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("object_with_std_pair_property_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(object_with_std_pair_attribute_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("object_with_std_pair_attribute_results_in_expected_indices");
 
     const auto ot(object_types::value_object);
-    const auto pt(property_types::std_pair);
-    auto m(factory.object_with_property(ot, pt));
+    const auto pt(attribute_types::std_pair);
+    auto m(factory.object_with_attribute(ot, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
 
     dogen::yarn::association_indexer ind;
@@ -396,12 +396,12 @@ BOOST_AUTO_TEST_CASE(object_with_std_pair_property_results_in_expected_indices) 
     BOOST_CHECK(found);
 }
 
-BOOST_AUTO_TEST_CASE(object_with_boost_variant_property_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("object_with_boost_variant_property_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(object_with_boost_variant_attribute_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("object_with_boost_variant_attribute_results_in_expected_indices");
 
     const auto ot(object_types::value_object);
-    const auto pt(property_types::boost_variant);
-    auto m(factory.object_with_property(ot, pt));
+    const auto pt(attribute_types::boost_variant);
+    auto m(factory.object_with_attribute(ot, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.objects().size() == 2);
     BOOST_REQUIRE(m.primitives().size() == 2);
@@ -439,12 +439,12 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_property_results_in_expected_indi
     BOOST_CHECK(found);
 }
 
-BOOST_AUTO_TEST_CASE(object_with_std_string_property_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("object_with_std_string_property_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(object_with_std_string_attribute_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("object_with_std_string_attribute_results_in_expected_indices");
 
     const auto ot(object_types::value_object);
-    const auto pt(property_types::std_string);
-    auto m(factory.object_with_property(ot, pt));
+    const auto pt(attribute_types::std_string);
+    auto m(factory.object_with_attribute(ot, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
 
     dogen::yarn::association_indexer ind;
@@ -468,12 +468,12 @@ BOOST_AUTO_TEST_CASE(object_with_std_string_property_results_in_expected_indices
     BOOST_CHECK(found);
 }
 
-BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_property_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("object_with_boost_shared_ptr_property_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_attribute_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("object_with_boost_shared_ptr_attribute_results_in_expected_indices");
 
     const auto ot(object_types::value_object);
-    const auto pt(property_types::boost_shared_ptr);
-    auto m(factory.object_with_property(ot, pt));
+    const auto pt(attribute_types::boost_shared_ptr);
+    auto m(factory.object_with_attribute(ot, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.objects().size() == 3);
 

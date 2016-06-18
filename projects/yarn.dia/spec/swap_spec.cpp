@@ -45,7 +45,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<profile_generator>();
     test_swap<object_types_generator>();
     test_swap<processed_object_generator>();
-    test_swap<processed_property_generator>();
+    test_swap<processed_attribute_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

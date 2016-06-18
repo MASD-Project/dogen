@@ -45,7 +45,7 @@
 #include "dogen/yarn.dia/types/validation_error.hpp"
 #include "dogen/yarn.dia/types/comment_processor.hpp"
 #include "dogen/yarn.dia/types/processed_comment.hpp"
-#include "dogen/yarn.dia/types/processed_property.hpp"
+#include "dogen/yarn.dia/types/processed_attribute.hpp"
 #include "dogen/yarn.dia/types/transformation_error.hpp"
 
 #endif

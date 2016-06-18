@@ -32,7 +32,7 @@
 #include <boost/optional.hpp>
 #include "dogen/yarn.dia/types/object_types.hpp"
 #include "dogen/yarn.dia/types/processed_comment.hpp"
-#include "dogen/yarn.dia/types/processed_property.hpp"
+#include "dogen/yarn.dia/types/processed_attribute.hpp"
 #include "dogen/yarn.dia/serialization/processed_object_fwd_ser.hpp"
 
 namespace dogen {
@@ -62,7 +62,7 @@ public:
         const dogen::yarn::dia::processed_comment& comment,
         const std::string& child_node_id,
         const boost::optional<std::pair<std::string, std::string> >& connection,
-        const std::list<dogen::yarn::dia::processed_property>& properties);
+        const std::list<dogen::yarn::dia::processed_attribute>& attributes);
 
 private:
     template<typename Archive>
@@ -143,13 +143,13 @@ public:
     /**@}*/
 
     /**
-     * @brief All properties associated with dia object.
+     * @brief All attributes associated with dia object.
      */
     /**@{*/
-    const std::list<dogen::yarn::dia::processed_property>& properties() const;
-    std::list<dogen::yarn::dia::processed_property>& properties();
-    void properties(const std::list<dogen::yarn::dia::processed_property>& v);
-    void properties(const std::list<dogen::yarn::dia::processed_property>&& v);
+    const std::list<dogen::yarn::dia::processed_attribute>& attributes() const;
+    std::list<dogen::yarn::dia::processed_attribute>& attributes();
+    void attributes(const std::list<dogen::yarn::dia::processed_attribute>& v);
+    void attributes(const std::list<dogen::yarn::dia::processed_attribute>&& v);
     /**@}*/
 
 public:
@@ -170,7 +170,7 @@ private:
     dogen::yarn::dia::processed_comment comment_;
     std::string child_node_id_;
     boost::optional<std::pair<std::string, std::string> > connection_;
-    std::list<dogen::yarn::dia::processed_property> properties_;
+    std::list<dogen::yarn::dia::processed_attribute> attributes_;
 };
 
 } } }

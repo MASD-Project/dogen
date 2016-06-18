@@ -35,7 +35,7 @@ processed_object::processed_object(processed_object&& rhs)
       comment_(std::move(rhs.comment_)),
       child_node_id_(std::move(rhs.child_node_id_)),
       connection_(std::move(rhs.connection_)),
-      properties_(std::move(rhs.properties_)) { }
+      attributes_(std::move(rhs.attributes_)) { }
 
 processed_object::processed_object(
     const std::string& id,
@@ -45,7 +45,7 @@ processed_object::processed_object(
     const dogen::yarn::dia::processed_comment& comment,
     const std::string& child_node_id,
     const boost::optional<std::pair<std::string, std::string> >& connection,
-    const std::list<dogen::yarn::dia::processed_property>& properties)
+    const std::list<dogen::yarn::dia::processed_attribute>& attributes)
     : id_(id),
       name_(name),
       object_type_(object_type),
@@ -53,7 +53,7 @@ processed_object::processed_object(
       comment_(comment),
       child_node_id_(child_node_id),
       connection_(connection),
-      properties_(properties) { }
+      attributes_(attributes) { }
 
 void processed_object::swap(processed_object& other) noexcept {
     using std::swap;
@@ -64,7 +64,7 @@ void processed_object::swap(processed_object& other) noexcept {
     swap(comment_, other.comment_);
     swap(child_node_id_, other.child_node_id_);
     swap(connection_, other.connection_);
-    swap(properties_, other.properties_);
+    swap(attributes_, other.attributes_);
 }
 
 bool processed_object::operator==(const processed_object& rhs) const {
@@ -75,7 +75,7 @@ bool processed_object::operator==(const processed_object& rhs) const {
         comment_ == rhs.comment_ &&
         child_node_id_ == rhs.child_node_id_ &&
         connection_ == rhs.connection_ &&
-        properties_ == rhs.properties_;
+        attributes_ == rhs.attributes_;
 }
 
 processed_object& processed_object::operator=(processed_object other) {
@@ -188,20 +188,20 @@ void processed_object::connection(const boost::optional<std::pair<std::string, s
     connection_ = std::move(v);
 }
 
-const std::list<dogen::yarn::dia::processed_property>& processed_object::properties() const {
-    return properties_;
+const std::list<dogen::yarn::dia::processed_attribute>& processed_object::attributes() const {
+    return attributes_;
 }
 
-std::list<dogen::yarn::dia::processed_property>& processed_object::properties() {
-    return properties_;
+std::list<dogen::yarn::dia::processed_attribute>& processed_object::attributes() {
+    return attributes_;
 }
 
-void processed_object::properties(const std::list<dogen::yarn::dia::processed_property>& v) {
-    properties_ = v;
+void processed_object::attributes(const std::list<dogen::yarn::dia::processed_attribute>& v) {
+    attributes_ = v;
 }
 
-void processed_object::properties(const std::list<dogen::yarn::dia::processed_property>&& v) {
-    properties_ = std::move(v);
+void processed_object::attributes(const std::list<dogen::yarn::dia::processed_attribute>&& v) {
+    attributes_ = std::move(v);
 }
 
 } } }

@@ -25,7 +25,7 @@
 #include "dogen/yarn/types/injector.hpp"
 #include "dogen/yarn/types/resolver.hpp"
 #include "dogen/yarn/types/concept_indexer.hpp"
-#include "dogen/yarn/types/property_indexer.hpp"
+#include "dogen/yarn/types/attributes_indexer.hpp"
 #include "dogen/yarn/types/association_indexer.hpp"
 #include "dogen/yarn/types/generalization_indexer.hpp"
 #include "dogen/yarn/types/assembler.hpp"
@@ -111,8 +111,8 @@ index_concepts_activity(intermediate_model& merged_model) const {
 }
 
 void assembler::
-index_properties_activity(intermediate_model& merged_model) const {
-    property_indexer idx;
+index_attributes_activity(intermediate_model& merged_model) const {
+    attributes_indexer idx;
     idx.index(merged_model);
 }
 
@@ -146,10 +146,10 @@ assemble(const std::list<intermediate_model>& models) const {
      */
     resolve_element_references_activity(r);
     index_concepts_activity(r);
-    index_properties_activity(r);
+    index_attributes_activity(r);
 
-    /* We must index associations after properties have been indexed
-     * as it relies on the various property containers being populated.
+    /* We must index associations after attributes have been indexed
+     * as it relies on the various attribute containers being populated.
      */
     index_associations_activity(r);
     update_model_generability_activity(r);

@@ -32,7 +32,7 @@
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/hash/name_hash.hpp"
-#include "dogen/yarn/types/property.hpp"
+#include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/serialization/concept_fwd_ser.hpp"
 
 namespace dogen {
@@ -71,9 +71,9 @@ public:
         const std::string& original_model_name,
         const boost::optional<dogen::yarn::name>& contained_by,
         const bool in_global_module,
-        const std::list<dogen::yarn::property>& all_properties,
-        const std::list<dogen::yarn::property>& local_properties,
-        const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> >& inherited_properties,
+        const std::list<dogen::yarn::attribute>& all_attributes,
+        const std::list<dogen::yarn::attribute>& local_attributes,
+        const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::attribute> >& inherited_attributes,
         const bool is_immutable,
         const bool is_fluent,
         const std::list<dogen::yarn::name>& refines,
@@ -109,46 +109,46 @@ public:
 
 public:
     /**
-     * @brief All the properties associated with this type.
+     * @brief All attributes associated with this type.
      *
      * This is a union of the following sets:
      *
-     * @li the set of all properies obtained via inheritance relationships;
-     * @li the set of all properies obtained via modeling of concepts, including any refinements;
-     * @li the set of all properies directly associated with the type (local).
+     * @li the set of all attributes obtained via inheritance relationships;
+     * @li the set of all attributes obtained via modeling of concepts, including any refinements;
+     * @li the set of all attributes directly associated with the type (local).
      *
      * The first and third sets are cached in this object. The second isn't as we do
      * not have a need for it.
      */
     /**@{*/
-    const std::list<dogen::yarn::property>& all_properties() const;
-    std::list<dogen::yarn::property>& all_properties();
-    void all_properties(const std::list<dogen::yarn::property>& v);
-    void all_properties(const std::list<dogen::yarn::property>&& v);
+    const std::list<dogen::yarn::attribute>& all_attributes() const;
+    std::list<dogen::yarn::attribute>& all_attributes();
+    void all_attributes(const std::list<dogen::yarn::attribute>& v);
+    void all_attributes(const std::list<dogen::yarn::attribute>&& v);
     /**@}*/
 
     /**
-     * @brief The set of all properies directly associated with the type.
+     * @brief The set of all attributes directly associated with the type.
      */
     /**@{*/
-    const std::list<dogen::yarn::property>& local_properties() const;
-    std::list<dogen::yarn::property>& local_properties();
-    void local_properties(const std::list<dogen::yarn::property>& v);
-    void local_properties(const std::list<dogen::yarn::property>&& v);
+    const std::list<dogen::yarn::attribute>& local_attributes() const;
+    std::list<dogen::yarn::attribute>& local_attributes();
+    void local_attributes(const std::list<dogen::yarn::attribute>& v);
+    void local_attributes(const std::list<dogen::yarn::attribute>&& v);
     /**@}*/
 
     /**
-     * @brief The set of all properies obtained via inheritance, by parent name.
+     * @brief The set of all attributes obtained via inheritance, by parent name.
      */
     /**@{*/
-    const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> >& inherited_properties() const;
-    std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> >& inherited_properties();
-    void inherited_properties(const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> >& v);
-    void inherited_properties(const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> >&& v);
+    const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::attribute> >& inherited_attributes() const;
+    std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::attribute> >& inherited_attributes();
+    void inherited_attributes(const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::attribute> >& v);
+    void inherited_attributes(const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::attribute> >&& v);
     /**@}*/
 
     /**
-     * @brief If true, do not generate setters for the element's properties.
+     * @brief If true, do not generate setters for the element's attributes.
      */
     /**@{*/
     bool is_immutable() const;
@@ -211,9 +211,9 @@ public:
     concept& operator=(concept other);
 
 private:
-    std::list<dogen::yarn::property> all_properties_;
-    std::list<dogen::yarn::property> local_properties_;
-    std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> > inherited_properties_;
+    std::list<dogen::yarn::attribute> all_attributes_;
+    std::list<dogen::yarn::attribute> local_attributes_;
+    std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::attribute> > inherited_attributes_;
     bool is_immutable_;
     bool is_fluent_;
     std::list<dogen::yarn::name> refines_;

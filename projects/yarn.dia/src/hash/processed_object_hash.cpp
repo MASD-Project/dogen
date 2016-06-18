@@ -21,7 +21,7 @@
 #include "dogen/yarn.dia/hash/object_types_hash.hpp"
 #include "dogen/yarn.dia/hash/processed_object_hash.hpp"
 #include "dogen/yarn.dia/hash/processed_comment_hash.hpp"
-#include "dogen/yarn.dia/hash/processed_property_hash.hpp"
+#include "dogen/yarn.dia/hash/processed_attribute_hash.hpp"
 
 namespace {
 
@@ -49,7 +49,7 @@ inline std::size_t hash_boost_optional_std_pair_std_string_std_string_(const boo
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_yarn_dia_processed_property(const std::list<dogen::yarn::dia::processed_property>& v) {
+inline std::size_t hash_std_list_dogen_yarn_dia_processed_attribute(const std::list<dogen::yarn::dia::processed_attribute>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -73,7 +73,7 @@ std::size_t processed_object_hasher::hash(const processed_object& v) {
     combine(seed, v.comment());
     combine(seed, v.child_node_id());
     combine(seed, hash_boost_optional_std_pair_std_string_std_string_(v.connection()));
-    combine(seed, hash_std_list_dogen_yarn_dia_processed_property(v.properties()));
+    combine(seed, hash_std_list_dogen_yarn_dia_processed_attribute(v.attributes()));
 
     return seed;
 }

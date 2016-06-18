@@ -79,24 +79,24 @@ private:
         bool& requires_stream_manipulators) const;
 
     /**
-     * @brief Transforms an Yarn property into a property info.
+     * @brief Transforms an Yarn attribute into a property info.
      *
      * The four Boolean values on the tuple work as follows:
      *
-     * @li position 1: if true, the property has a top-level primitive
+     * @li position 1: if true, the attribute has a top-level primitive
      * type.
      *
-     * @li position 2: if true, the property requires stream
+     * @li position 2: if true, the attribute requires stream
      * manipulators.
      *
-     * @li position 3: if true, the property invalidates the compiler
+     * @li position 3: if true, the attribute invalidates the compiler
      * generated move constructor.
      *
-     * @li position 4: if true, the property invalidates the compiler
+     * @li position 4: if true, the attribute invalidates the compiler
      * generated default constructor.
      */
     std::tuple<property_info, bool, bool, bool>
-    to_property_info(const yarn::property p, const bool is_immutable,
+    to_property_info(const yarn::attribute a, const bool is_immutable,
         const bool is_fluent) const;
 
     /**

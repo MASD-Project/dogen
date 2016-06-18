@@ -99,9 +99,9 @@ private:
     void index_concepts_activity(intermediate_model& merged_model) const;
 
     /**
-     * @brief Index all properties.
+     * @brief Index all attributes.
      */
-    void index_properties_activity(intermediate_model& merged_model) const;
+    void index_attributes_activity(intermediate_model& merged_model) const;
 
     /**
      * @brief Index all associations.

@@ -26,7 +26,7 @@
 #include "dogen/utility/io/pair_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/merging_error.hpp"
-#include "dogen/yarn/io/property_io.hpp"
+#include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"

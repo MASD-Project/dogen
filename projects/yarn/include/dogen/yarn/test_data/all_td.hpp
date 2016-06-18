@@ -34,7 +34,7 @@
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/visitor_td.hpp"
 #include "dogen/yarn/test_data/location_td.hpp"
-#include "dogen/yarn/test_data/property_td.hpp"
+#include "dogen/yarn/test_data/attribute_td.hpp"
 #include "dogen/yarn/test_data/exception_td.hpp"
 #include "dogen/yarn/test_data/name_tree_td.hpp"
 #include "dogen/yarn/test_data/primitive_td.hpp"

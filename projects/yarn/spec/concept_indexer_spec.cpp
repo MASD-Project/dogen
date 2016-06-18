@@ -50,7 +50,7 @@ using dogen::yarn::test::mock_intermediate_model_factory;
  */
 const mock_intermediate_model_factory::flags flags(false/*tagged*/,
     false/*resolved*/, false/*merged*/, false/*concepts_indexed*/,
-    false/*properties_indexed*/);
+    false/*attributes_indexed*/);
 
 const mock_intermediate_model_factory factory(flags);
 
@@ -61,8 +61,8 @@ using dogen::yarn::indexing_error;
 using dogen::utility::test::asserter;
 using object_types = dogen::yarn::test::mock_intermediate_model_factory::
     object_types;
-using property_types = dogen::yarn::test::mock_intermediate_model_factory::
-    property_types;
+using attribute_types = dogen::yarn::test::mock_intermediate_model_factory::
+    attribute_types;
 
 BOOST_AUTO_TEST_SUITE(concept_indexer)
 
@@ -80,8 +80,8 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_concept_indexer) {
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_properties_is_untouched_by_concept_indexer) {
-    SETUP_TEST_LOG_SOURCE("model_with_single_type_and_no_properties_is_untouched_by_concept_indexer");
+BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_concept_indexer) {
+    SETUP_TEST_LOG_SOURCE("model_with_single_type_and_no_attributes_is_untouched_by_concept_indexer");
 
     auto a(factory.make_single_type_model());
     const auto e(factory.make_single_type_model());
@@ -94,12 +94,12 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_properties_is_untouched_by_co
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(model_with_type_with_property_is_untouched_by_concept_indexer) {
-    SETUP_TEST_LOG_SOURCE("model_with_type_with_property_is_untouched_by_concept_indexer");
+BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_is_untouched_by_concept_indexer) {
+    SETUP_TEST_LOG_SOURCE("model_with_type_with_attribute_is_untouched_by_concept_indexer");
 
-    const auto pt(property_types::unsigned_int);
-    auto a(factory.object_with_property(object_types::value_object, pt));
-    const auto e(factory.object_with_property(object_types::value_object, pt));
+    const auto pt(attribute_types::unsigned_int);
+    auto a(factory.object_with_attribute(object_types::value_object, pt));
+    const auto e(factory.object_with_attribute(object_types::value_object, pt));
 
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
@@ -109,9 +109,9 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_property_is_untouched_by_concept_index
 
     BOOST_REQUIRE(a.objects().size() == 1);
     const auto& o(a.objects().begin()->second);
-    BOOST_CHECK(o.local_properties().size() == 1);
-    BOOST_CHECK(o.inherited_properties().empty());
-    BOOST_CHECK(o.all_properties().empty());
+    BOOST_CHECK(o.local_attributes().size() == 1);
+    BOOST_CHECK(o.inherited_attributes().empty());
+    BOOST_CHECK(o.all_attributes().empty());
     BOOST_CHECK(o.modeled_concepts().empty());
 
     dogen::yarn::concept_indexer ind;

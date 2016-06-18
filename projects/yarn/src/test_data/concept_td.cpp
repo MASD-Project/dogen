@@ -21,19 +21,19 @@
 #include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/concept_td.hpp"
 #include "dogen/yarn/test_data/element_td.hpp"
-#include "dogen/yarn/test_data/property_td.hpp"
+#include "dogen/yarn/test_data/attribute_td.hpp"
 
 namespace {
 
-dogen::yarn::property
-create_dogen_yarn_property(const unsigned int position) {
-    return dogen::yarn::property_generator::create(position);
+dogen::yarn::attribute
+create_dogen_yarn_attribute(const unsigned int position) {
+    return dogen::yarn::attribute_generator::create(position);
 }
 
-std::list<dogen::yarn::property> create_std_list_dogen_yarn_property(unsigned int position) {
-    std::list<dogen::yarn::property> r;
+std::list<dogen::yarn::attribute> create_std_list_dogen_yarn_attribute(unsigned int position) {
+    std::list<dogen::yarn::attribute> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_yarn_property(position + i));
+        r.push_back(create_dogen_yarn_attribute(position + i));
     }
     return r;
 }
@@ -43,10 +43,10 @@ create_dogen_yarn_name(const unsigned int position) {
     return dogen::yarn::name_generator::create(position);
 }
 
-std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> > create_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_property_(unsigned int position) {
-    std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> > r;
+std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::attribute> > create_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_attribute_(unsigned int position) {
+    std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::attribute> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_std_list_dogen_yarn_property(position + i)));
+        r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_std_list_dogen_yarn_attribute(position + i)));
     }
     return r;
 }
@@ -73,9 +73,9 @@ concept_generator::concept_generator() : position_(0) { }
 void concept_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
-    v.all_properties(create_std_list_dogen_yarn_property(position + 0));
-    v.local_properties(create_std_list_dogen_yarn_property(position + 1));
-    v.inherited_properties(create_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_property_(position + 2));
+    v.all_attributes(create_std_list_dogen_yarn_attribute(position + 0));
+    v.local_attributes(create_std_list_dogen_yarn_attribute(position + 1));
+    v.inherited_attributes(create_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_attribute_(position + 2));
     v.is_immutable(create_bool(position + 3));
     v.is_fluent(create_bool(position + 4));
     v.refines(create_std_list_dogen_yarn_name(position + 5));

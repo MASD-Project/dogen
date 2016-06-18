@@ -18,35 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_HASH_PROPERTY_HASH_HPP
-#define DOGEN_YARN_HASH_PROPERTY_HASH_HPP
+#ifndef DOGEN_YARN_DIA_TEST_DATA_PROCESSED_ATTRIBUTE_TD_HPP
+#define DOGEN_YARN_DIA_TEST_DATA_PROCESSED_ATTRIBUTE_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/yarn/types/property.hpp"
+#include "dogen/yarn.dia/types/processed_attribute.hpp"
 
 namespace dogen {
 namespace yarn {
+namespace dia {
 
-struct property_hasher {
+class processed_attribute_generator {
 public:
-    static std::size_t hash(const property& v);
+    processed_attribute_generator();
+
+public:
+    typedef dogen::yarn::dia::processed_attribute result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
-} }
+} } }
 
-namespace std {
-
-template<>
-struct hash<dogen::yarn::property> {
-public:
-    size_t operator()(const dogen::yarn::property& v) const {
-        return dogen::yarn::property_hasher::hash(v);
-    }
-};
-
-}
 #endif

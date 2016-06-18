@@ -21,7 +21,7 @@
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/hash/concept_hash.hpp"
 #include "dogen/yarn/hash/element_hash.hpp"
-#include "dogen/yarn/hash/property_hash.hpp"
+#include "dogen/yarn/hash/attribute_hash.hpp"
 
 namespace {
 
@@ -31,7 +31,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_yarn_property(const std::list<dogen::yarn::property>& v) {
+inline std::size_t hash_std_list_dogen_yarn_attribute(const std::list<dogen::yarn::attribute>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -39,11 +39,11 @@ inline std::size_t hash_std_list_dogen_yarn_property(const std::list<dogen::yarn
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_property_(const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::property> >& v) {
+inline std::size_t hash_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_attribute_(const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::attribute> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_std_list_dogen_yarn_property(i.second));
+        combine(seed, hash_std_list_dogen_yarn_attribute(i.second));
     }
     return seed;
 }
@@ -66,9 +66,9 @@ std::size_t concept_hasher::hash(const concept& v) {
 
     combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
 
-    combine(seed, hash_std_list_dogen_yarn_property(v.all_properties()));
-    combine(seed, hash_std_list_dogen_yarn_property(v.local_properties()));
-    combine(seed, hash_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_property_(v.inherited_properties()));
+    combine(seed, hash_std_list_dogen_yarn_attribute(v.all_attributes()));
+    combine(seed, hash_std_list_dogen_yarn_attribute(v.local_attributes()));
+    combine(seed, hash_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_attribute_(v.inherited_attributes()));
     combine(seed, v.is_immutable());
     combine(seed, v.is_fluent());
     combine(seed, hash_std_list_dogen_yarn_name(v.refines()));

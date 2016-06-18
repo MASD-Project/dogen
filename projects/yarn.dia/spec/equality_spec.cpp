@@ -45,7 +45,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<profile_generator>();
     test_equality<object_types_generator>();
     test_equality<processed_object_generator>();
-    test_equality<processed_property_generator>();
+    test_equality<processed_attribute_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_PROPERTY_HPP
-#define DOGEN_YARN_TYPES_PROPERTY_HPP
+#ifndef DOGEN_YARN_TYPES_ATTRIBUTE_HPP
+#define DOGEN_YARN_TYPES_ATTRIBUTE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
-#include "dogen/yarn/serialization/property_fwd_ser.hpp"
+#include "dogen/yarn/serialization/attribute_fwd_ser.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -38,17 +38,17 @@ namespace yarn {
 /**
  * @brief Represents an attribute in an object.
  */
-class property final {
+class attribute final {
 public:
-    property(const property&) = default;
-    property(property&&) = default;
-    ~property() = default;
+    attribute(const attribute&) = default;
+    attribute(attribute&&) = default;
+    ~attribute() = default;
 
 public:
-    property();
+    attribute();
 
 public:
-    property(
+    attribute(
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
         const dogen::yarn::name& name,
@@ -59,10 +59,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const property& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const attribute& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, property& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, attribute& v, unsigned int version);
 
 public:
     /**
@@ -113,7 +113,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Tree of names that represent the type of the property, after suitable parsing.
+     * @brief Tree of names that represent the type of the attribute, after suitable parsing.
      */
     /**@{*/
     const dogen::yarn::name_tree& parsed_type() const;
@@ -123,7 +123,7 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, the property can only be read but not set.
+     * @brief If true, the attribute can only be read but not set.
      */
     /**@{*/
     bool is_immutable() const;
@@ -131,7 +131,7 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, the property's setter will return the object iteself.
+     * @brief If true, the attribute's setter will return the object iteself.
      */
     /**@{*/
     bool is_fluent() const;
@@ -139,14 +139,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const property& rhs) const;
-    bool operator!=(const property& rhs) const {
+    bool operator==(const attribute& rhs) const;
+    bool operator!=(const attribute& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(property& other) noexcept;
-    property& operator=(property other);
+    void swap(attribute& other) noexcept;
+    attribute& operator=(attribute other);
 
 private:
     std::string documentation_;
@@ -164,8 +164,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::yarn::property& lhs,
-    dogen::yarn::property& rhs) {
+    dogen::yarn::attribute& lhs,
+    dogen::yarn::attribute& rhs) {
     lhs.swap(rhs);
 }
 

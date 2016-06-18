@@ -29,7 +29,7 @@
 #include "dogen/yarn/types/merger.hpp"
 #include "dogen/yarn/types/resolver.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
-#include "dogen/yarn/io/property_io.hpp"
+#include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/utility/test/equality_tester.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
@@ -45,14 +45,14 @@ using dogen::yarn::test::mock_intermediate_model_factory;
  * FIXME: we need to update the mock factory to generate merged
  * models. for now as a quick hack, we just  used the merger.
  *
- * FIXME: all properties have model name set and need to be manually
+ * FIXME: all attributes have model name set and need to be manually
  * unset.
  *
  * Flag was added but does nothing yet.
  */
 const mock_intermediate_model_factory::flags flags(false/*tagged*/,
     false/*resolved*/, true/*merged*/, false/*concepts_indexed*/,
-    false/*properties_indexed*/);
+    false/*attributes_indexed*/);
 
 const mock_intermediate_model_factory factory(flags);
 
@@ -60,7 +60,7 @@ const std::string incorrect_model("Object does not belong to this model");
 const std::string inconsistent_kvp("Inconsistency between key and value");
 const std::string missing_target("No target model found");
 const std::string too_many_targets("Only one target expected.");
-const std::string undefined_type("Object has property with undefined type");
+const std::string undefined_type("Object has attribute with undefined type");
 const std::string missing_parent("Object's parent could not be located");
 const std::string incorrect_meta_type("Object has incorrect meta_type");
 
@@ -71,18 +71,18 @@ using dogen::yarn::resolution_error;
 
 BOOST_AUTO_TEST_SUITE(resolver)
 
-BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_successfully) {
-    SETUP_TEST_LOG_SOURCE("object_with_property_type_in_the_same_model_resolves_successfully");
-    auto m(factory.object_with_property());
+BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_successfully) {
+    SETUP_TEST_LOG_SOURCE("object_with_attribute_type_in_the_same_model_resolves_successfully");
+    auto m(factory.object_with_attribute());
     BOOST_CHECK(m.objects().size() == 2);
     BOOST_CHECK(m.primitives().empty());
 
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
-        BOOST_CHECK(o.local_properties().size() == 1 ||
-            o.local_properties().empty());
-        if (o.local_properties().size() == 1) {
-            auto& t(o.local_properties().begin()->parsed_type().parent());
+        BOOST_CHECK(o.local_attributes().size() == 1 ||
+            o.local_attributes().empty());
+        if (o.local_attributes().size() == 1) {
+            auto& t(o.local_attributes().begin()->parsed_type().parent());
             t.location().model_modules().clear();
             t.qualified(t.simple());
         }
@@ -103,9 +103,9 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
             found = true;
 
             const auto& o(pair.second);
-            BOOST_CHECK(o.local_properties().size() == 1);
-            const auto& prop(o.local_properties().front());
-            BOOST_LOG_SEV(lg, debug) << "property: " << prop;
+            BOOST_CHECK(o.local_attributes().size() == 1);
+            const auto& prop(o.local_attributes().front());
+            BOOST_LOG_SEV(lg, debug) << "attribute: " << prop;
             BOOST_CHECK(factory.is_type_name_n(1, prop.parsed_type().parent()));
             BOOST_CHECK(factory.is_model_n(0, prop.parsed_type().parent()));
             BOOST_CHECK(o.object_type() ==
@@ -115,10 +115,10 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
     BOOST_CHECK(found);
 }
 
-BOOST_AUTO_TEST_CASE(object_with_property_type_in_different_model_results_in_successful_merge) {
-    SETUP_TEST_LOG_SOURCE("object_with_property_type_in_different_model_results_in_successful_merge");
+BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_different_model_results_in_successful_merge) {
+    SETUP_TEST_LOG_SOURCE("object_with_attribute_type_in_different_model_results_in_successful_merge");
 
-    auto m(factory.object_with_property_type_in_different_model());
+    auto m(factory.object_with_attribute_type_in_different_model());
     m[0].is_target(true);
 
     dogen::yarn::merger mg;
@@ -140,9 +140,9 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_different_model_results_in_suc
             found = true;
 
             const auto& o(pair.second);
-            BOOST_CHECK(o.local_properties().size() == 1);
-            const auto& prop(o.local_properties().front());
-            BOOST_LOG_SEV(lg, debug) << "property: " << prop;
+            BOOST_CHECK(o.local_attributes().size() == 1);
+            const auto& prop(o.local_attributes().front());
+            BOOST_LOG_SEV(lg, debug) << "attribute: " << prop;
 
             BOOST_CHECK(factory.is_type_name_n(1, prop.parsed_type().parent()));
             BOOST_CHECK(factory.is_model_n(1, prop.parsed_type().parent()));
@@ -153,10 +153,10 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_different_model_results_in_suc
     BOOST_CHECK(found);
 }
 
-BOOST_AUTO_TEST_CASE(object_with_missing_property_type_throws) {
-    SETUP_TEST_LOG("object_with_missing_property_type_throws");
+BOOST_AUTO_TEST_CASE(object_with_missing_attribute_type_throws) {
+    SETUP_TEST_LOG("object_with_missing_attribute_type_throws");
 
-    auto m(factory.object_with_missing_property_type());
+    auto m(factory.object_with_missing_attribute_type());
     dogen::yarn::resolver rs;
     contains_checker<resolution_error> c(undefined_type);
     BOOST_CHECK_EXCEPTION(rs.resolve(m), resolution_error, c);

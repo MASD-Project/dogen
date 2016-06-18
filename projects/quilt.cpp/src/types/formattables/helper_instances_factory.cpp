@@ -90,17 +90,17 @@ make(const yarn::name_tree& nt, std::list<helper_instance>& instances) const {
 }
 
 std::list<helper_instance> helper_instances_factory::
-make(const std::list<yarn::property>& properties) const {
+make(const std::list<yarn::attribute>& attributes) const {
 
-    if (properties.empty()) {
+    if (attributes.empty()) {
         BOOST_LOG_SEV(lg, debug) << "No properties found.";
         return std::list<helper_instance>();
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Properties found: " << properties.size();
+    BOOST_LOG_SEV(lg, debug) << "Properties found: " << attributes.size();
     std::list<helper_instance> instances;
-    for (const auto p : properties)
-        make(p.parsed_type(), instances);
+    for (const auto a : attributes)
+        make(a.parsed_type(), instances);
 
     std::list<helper_instance> r;
     std::unordered_set<std::string> done;

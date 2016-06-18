@@ -53,9 +53,9 @@ public:
     };
 
     /**
-     * @brief Types of properties supported by the factory.
+     * @brief Types of attributes supported by the factory.
      */
-    enum class property_types {
+    enum class attribute_types {
         invalid = 0,
         unsigned_int,
         boolean,
@@ -77,7 +77,7 @@ public:
             const bool merged = false,
             const bool resolved = false,
             const bool concepts_indexed = false,
-            const bool properties_indexed = false,
+            const bool attributes_indexed = false,
             const bool associations_indexed = false);
 
     public:
@@ -100,7 +100,7 @@ public:
 
         /**
          * @brief For methods that return more than one model, when
-         * false, leaves properties unresolved for all models other
+         * false, leaves attributes unresolved for all models other
          * than the target model.
          */
         /**@{*/
@@ -118,12 +118,12 @@ public:
         /**@}*/
 
         /**
-         * @brief If true, returns a model as if property indexing was
+         * @brief If true, returns a model as if attribute indexing was
          * already performed.
          */
         /**@{*/
-        bool properties_indexed() const;
-        void properties_indexed(const bool v);
+        bool attributes_indexed() const;
+        void attributes_indexed(const bool v);
         /**@}*/
 
         /**
@@ -140,7 +140,7 @@ public:
         bool merged_;
         bool resolved_;
         bool concepts_indexed_;
-        bool properties_indexed_;
+        bool attributes_indexed_;
         bool associations_indexed_;
     };
 
@@ -178,9 +178,9 @@ public:
     std::string simple_module_name(const unsigned int n = 0) const;
 
     /**
-     * @brief Returns the property name derived from n.
+     * @brief Returns the attribute name derived from n.
      */
-    std::string simple_property_name(const unsigned int n = 0) const;
+    std::string simple_attribute_name(const unsigned int n = 0) const;
 
 public:
     /**
@@ -397,33 +397,33 @@ public:
         const bool add_model_module = false) const;
 
     /**
-     * @brief Scenario: object with single property of a type existent in
+     * @brief Scenario: object with single attribute of a type existent in
      * current model.
      */
-    intermediate_model object_with_property(
+    intermediate_model object_with_attribute(
         const object_types ot = object_types::value_object,
-        const property_types pt = property_types::value_object,
+        const attribute_types pt = attribute_types::value_object,
         const bool add_model_module = false) const;
 
     /**
-     * @brief Scenario: object with single property of a type existent in
+     * @brief Scenario: object with single attribute of a type existent in
      * a second model.
      */
     std::array<intermediate_model, 2>
-    object_with_property_type_in_different_model(
+    object_with_attribute_type_in_different_model(
         const bool add_model_module = false) const;
 
     /**
-     * @brief Scenario: object with property of missing type.
+     * @brief Scenario: object with attribute of missing type.
      */
-    intermediate_model object_with_missing_property_type(
+    intermediate_model object_with_missing_attribute_type(
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with parent in current model.
      */
     intermediate_model object_with_parent_in_the_same_model(
-        const bool has_property = false,
+        const bool has_attribute = false,
         const bool add_model_module = false) const;
 
     /**
@@ -450,7 +450,7 @@ public:
      * in current model.
      */
     intermediate_model object_with_third_degree_parent_in_same_model(
-        const bool has_property = false,
+        const bool has_attribute = false,
         const bool add_model_module = false) const;
 
     /**
@@ -480,12 +480,12 @@ public:
 public:
     /**
      * @brief Returns a model with a single object that contains one
-     * or two instances of a group of properties of different types.
+     * or two instances of a group of attributes of different types.
      *
      * @param repeat_group if true, adds two instances of the group,
      * otherwise just one.
      */
-    intermediate_model object_with_group_of_properties_of_different_types(
+    intermediate_model object_with_group_of_attributes_of_different_types(
         const bool repeat_group = false,
         const bool add_model_module = false) const;
 

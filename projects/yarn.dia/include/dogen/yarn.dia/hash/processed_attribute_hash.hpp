@@ -18,18 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_PROPERTY_INDEXER_FWD_HPP
-#define DOGEN_YARN_TYPES_PROPERTY_INDEXER_FWD_HPP
+#ifndef DOGEN_YARN_DIA_HASH_PROCESSED_ATTRIBUTE_HASH_HPP
+#define DOGEN_YARN_DIA_HASH_PROCESSED_ATTRIBUTE_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <functional>
+#include "dogen/yarn.dia/types/processed_attribute.hpp"
+
 namespace dogen {
 namespace yarn {
+namespace dia {
 
-class property_indexer;
+struct processed_attribute_hasher {
+public:
+    static std::size_t hash(const processed_attribute& v);
+};
 
-} }
+} } }
 
+namespace std {
+
+template<>
+struct hash<dogen::yarn::dia::processed_attribute> {
+public:
+    size_t operator()(const dogen::yarn::dia::processed_attribute& v) const {
+        return dogen::yarn::dia::processed_attribute_hasher::hash(v);
+    }
+};
+
+}
 #endif

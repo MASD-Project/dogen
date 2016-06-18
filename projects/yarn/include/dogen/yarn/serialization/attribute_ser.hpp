@@ -18,36 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/name_hash.hpp"
-#include "dogen/yarn/hash/property_hash.hpp"
-#include "dogen/dynamic/hash/object_hash.hpp"
-#include "dogen/yarn/hash/name_tree_hash.hpp"
+#ifndef DOGEN_YARN_SERIALIZATION_ATTRIBUTE_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_ATTRIBUTE_SER_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
+#include <boost/serialization/split_free.hpp>
+#include "dogen/yarn/types/attribute.hpp"
 
-}
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::attribute)
+namespace boost {
+namespace serialization {
 
-namespace dogen {
-namespace yarn {
+template<typename Archive>
+void save(Archive& ar, const dogen::yarn::attribute& v, unsigned int version);
 
-std::size_t property_hasher::hash(const property& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.documentation());
-    combine(seed, v.extensions());
-    combine(seed, v.name());
-    combine(seed, v.unparsed_type());
-    combine(seed, v.parsed_type());
-    combine(seed, v.is_immutable());
-    combine(seed, v.is_fluent());
-
-    return seed;
-}
+template<typename Archive>
+void load(Archive& ar, dogen::yarn::attribute& v, unsigned int version);
 
 } }
+
+#endif

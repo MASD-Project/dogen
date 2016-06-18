@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "dogen/yarn.dia/test_data/processed_comment_td.hpp"
-#include "dogen/yarn.dia/test_data/processed_property_td.hpp"
+#include "dogen/yarn.dia/test_data/processed_attribute_td.hpp"
 
 namespace {
 
@@ -41,31 +41,31 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-processed_property_generator::processed_property_generator() : position_(0) { }
+processed_attribute_generator::processed_attribute_generator() : position_(0) { }
 
-void processed_property_generator::
+void processed_attribute_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.type(create_std_string(position + 1));
     v.comment(create_dogen_yarn_dia_processed_comment(position + 2));
 }
 
-processed_property_generator::result_type
-processed_property_generator::create(const unsigned int position) {
-    processed_property r;
-    processed_property_generator::populate(position, r);
+processed_attribute_generator::result_type
+processed_attribute_generator::create(const unsigned int position) {
+    processed_attribute r;
+    processed_attribute_generator::populate(position, r);
     return r;
 }
 
-processed_property_generator::result_type*
-processed_property_generator::create_ptr(const unsigned int position) {
-    processed_property* p = new processed_property();
-    processed_property_generator::populate(position, *p);
+processed_attribute_generator::result_type*
+processed_attribute_generator::create_ptr(const unsigned int position) {
+    processed_attribute* p = new processed_attribute();
+    processed_attribute_generator::populate(position, *p);
     return p;
 }
 
-processed_property_generator::result_type
-processed_property_generator::operator()() {
+processed_attribute_generator::result_type
+processed_attribute_generator::operator()() {
     return create(position_++);
 }
 

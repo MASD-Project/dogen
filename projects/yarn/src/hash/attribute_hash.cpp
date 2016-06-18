@@ -18,37 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TEST_DATA_PROCESSED_PROPERTY_TD_HPP
-#define DOGEN_YARN_DIA_TEST_DATA_PROCESSED_PROPERTY_TD_HPP
+#include "dogen/yarn/hash/name_hash.hpp"
+#include "dogen/dynamic/hash/object_hash.hpp"
+#include "dogen/yarn/hash/attribute_hash.hpp"
+#include "dogen/yarn/hash/name_tree_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include "dogen/yarn.dia/types/processed_property.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace yarn {
-namespace dia {
 
-class processed_property_generator {
-public:
-    processed_property_generator();
+std::size_t attribute_hasher::hash(const attribute& v) {
+    std::size_t seed(0);
 
-public:
-    typedef dogen::yarn::dia::processed_property result_type;
+    combine(seed, v.documentation());
+    combine(seed, v.extensions());
+    combine(seed, v.name());
+    combine(seed, v.unparsed_type());
+    combine(seed, v.parsed_type());
+    combine(seed, v.is_immutable());
+    combine(seed, v.is_fluent());
 
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
+    return seed;
+}
 
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
-
-} } }
-
-#endif
+} }

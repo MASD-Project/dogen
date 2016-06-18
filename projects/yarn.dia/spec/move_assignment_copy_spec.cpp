@@ -45,7 +45,7 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<profile_generator>();
     test_move_assignment_copy<object_types_generator>();
     test_move_assignment_copy<processed_object_generator>();
-    test_move_assignment_copy<processed_property_generator>();
+    test_move_assignment_copy<processed_attribute_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

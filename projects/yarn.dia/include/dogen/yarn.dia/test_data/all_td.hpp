@@ -30,6 +30,6 @@
 #include "dogen/yarn.dia/test_data/object_types_td.hpp"
 #include "dogen/yarn.dia/test_data/processed_object_td.hpp"
 #include "dogen/yarn.dia/test_data/processed_comment_td.hpp"
-#include "dogen/yarn.dia/test_data/processed_property_td.hpp"
+#include "dogen/yarn.dia/test_data/processed_attribute_td.hpp"
 
 #endif

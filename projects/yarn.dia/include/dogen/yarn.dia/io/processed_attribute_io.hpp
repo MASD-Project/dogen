@@ -18,36 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_HASH_PROCESSED_PROPERTY_HASH_HPP
-#define DOGEN_YARN_DIA_HASH_PROCESSED_PROPERTY_HASH_HPP
+#ifndef DOGEN_YARN_DIA_IO_PROCESSED_ATTRIBUTE_IO_HPP
+#define DOGEN_YARN_DIA_IO_PROCESSED_ATTRIBUTE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/yarn.dia/types/processed_property.hpp"
+#include <iosfwd>
+#include "dogen/yarn.dia/types/processed_attribute.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace dia {
 
-struct processed_property_hasher {
-public:
-    static std::size_t hash(const processed_property& v);
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::yarn::dia::processed_attribute& v);
 
 } } }
 
-namespace std {
-
-template<>
-struct hash<dogen::yarn::dia::processed_property> {
-public:
-    size_t operator()(const dogen::yarn::dia::processed_property& v) const {
-        return dogen::yarn::dia::processed_property_hasher::hash(v);
-    }
-};
-
-}
 #endif

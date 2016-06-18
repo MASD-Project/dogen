@@ -32,7 +32,7 @@
 #include "dogen/dynamic/types/scope_types.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
-#include "dogen/yarn.dia/types/processed_property.hpp"
+#include "dogen/yarn.dia/types/processed_attribute.hpp"
 #include "dogen/yarn.dia/types/context.hpp"
 #include "dogen/yarn.dia/types/profile.hpp"
 
@@ -92,15 +92,15 @@ private:
         const yarn::name& module_qn) const;
 
     /**
-     * @brief Converts processed property into an yarn property.
+     * @brief Converts a processed attribute into an yarn attribute.
      *
      * @param p the Dia UML attribute in processed form.
      *
-     * @pre name of property must not be empty.
-     * @pre type of property must not be empty.
+     * @pre name of attribute must not be empty.
+     * @pre type of attribute must not be empty.
      */
-    yarn::property to_property(const yarn::name& owning_element,
-        const processed_property& p) const;
+    yarn::attribute to_attribute(const yarn::name& owning_element,
+        const processed_attribute& a) const;
 
     /**
      * @brief Converts processed property into an yarn enumerator.
@@ -111,7 +111,7 @@ private:
      * @pre name of property must not be empty.
      * @pre type of property must be empty.
      */
-    yarn::enumerator to_enumerator(const processed_property& p,
+    yarn::enumerator to_enumerator(const processed_attribute& a,
         const unsigned int value) const;
 
 private:

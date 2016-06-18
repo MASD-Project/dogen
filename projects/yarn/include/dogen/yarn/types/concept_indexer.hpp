@@ -42,7 +42,7 @@ namespace yarn {
  * but in practice it makes no requirements in terms of any
  * pre-processing.
  *
- * @section yarn_property_indexer_1 Indexing Process
+ * @section yarn_attribute_indexer_1 Indexing Process
  *
  * The concept indexer only touches two types of model elements:
  * concepts and objects. This is because these are the only two

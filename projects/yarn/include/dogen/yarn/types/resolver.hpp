@@ -74,10 +74,10 @@ private:
     void resolve_partial_type(const intermediate_model& m, name_tree& nt) const;
 
     /**
-     * @brief Resolves all references to types in the supplied properties.
+     * @brief Resolves all references to types in the supplied attributes.
      */
-    void resolve_properties(const intermediate_model& m,
-        const name& owner, std::list<property>& p) const;
+    void resolve_attributes(const intermediate_model& m,
+        const name& owner, std::list<attribute>& attributes) const;
 
     /**
      * @brief Validates the inheritance graph for the object.

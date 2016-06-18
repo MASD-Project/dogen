@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_PROPERTY_INDEXER_HPP
-#define DOGEN_YARN_TYPES_PROPERTY_INDEXER_HPP
+#ifndef DOGEN_YARN_TYPES_ATTRIBUTES_INDEXER_HPP
+#define DOGEN_YARN_TYPES_ATTRIBUTES_INDEXER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,73 +34,73 @@ namespace yarn {
 
 /**
  * @brief Information indexer that specialises in indexing
- * properties across the model.
+ * attributes across the model.
  *
- * @section yarn_property_indexer_0 Model requirements
+ * @section yarn_attributes_indexer_0 Model requirements
  *
- * The property indexer expects to receive a partial model such as
+ * The attribute indexer expects to receive a partial model such as
  * ones coming straight out of Dia to Yarn transformation. The
  * indexing of concepts is expected to have taken place.
  *
- * @section yarn_property_indexer_1 Types of properties
+ * @section yarn_attributes_indexer_1 Types of attributes
  *
- * There are three sets of properties the indexer is interested in:
+ * There are three sets of attributes the indexer is interested in:
  *
- * @li local properties;
- * @li inherited properties;
- * @li all properties.
+ * @li local attributes;
+ * @li inherited attributes;
+ * @li all attributes.
  *
  * Lets cover each of these in more details.
  *
- * @subsection yarn_property_indexer_11 Local properties
+ * @subsection yarn_attributes_indexer_11 Local attributes
  *
- * On a natural, pre-indexed state, local properties encompass only
- * the properties defined on the class directly. The indexer behaves
+ * On a natural, pre-indexed state, local attributes encompass only
+ * the attributes defined on the class directly. The indexer behaves
  * differently depending on whether it is indexing an object or a
  * concept.
  *
  * For objects, the job of the indexer is to expand the local
- * properties to include all properties obtained by modeling
+ * attributes to include all attributes obtained by modeling
  * concepts. This is because we treat them no differently from
- * properties defined in the class for purposes of code generation. As
+ * attributes defined in the class for purposes of code generation. As
  * we rely on concept expansion, all we need is the set of all
- * properties of all concepts we model. Local properties are useful to
+ * attributes of all concepts we model. Local attributes are useful to
  * define all member variables owned by a class.
  *
- * For concepts, local properties are untouched. This is for two
- * reasons. First, because we rely on the local properties of concepts
- * to process the local properties of objects, as explained above, via
- * concept expansion; thus local properties provide a quick way to
- * access all the properties of all concepts one models. The second
+ * For concepts, local attributes are untouched. This is for two
+ * reasons. First, because we rely on the local attributes of concepts
+ * to process the local attributes of objects, as explained above, via
+ * concept expansion; thus local attributes provide a quick way to
+ * access all the attributes of all concepts one models. The second
  * reason is due to the representation of concepts in source code:
  * there is no requirement for a "meta-concept" - something from which
- * concepts get properties from. There is nothing above concepts that
+ * concepts get attributes from. There is nothing above concepts that
  * replicate the relationship we have between concepts and
  * objects. When concepts get expressed in source code, all we require
- * is the set of all properties for that concept (see below).
+ * is the set of all attributes for that concept (see below).
  *
- * @subsection yarn_property_indexer_12 Inherited properties
+ * @subsection yarn_attributes_indexer_12 Inherited attributes
  *
- * These provide an easy way to look-up which properties one has
- * inherited and from whom. For objects, the inherited properties are
- * the "all property" set of each parent (see below). They are useful
+ * These provide an easy way to look-up which attributes one has
+ * inherited and from whom. For objects, the inherited attributes are
+ * the "all attribute" set of each parent (see below). They are useful
  * to call parent constructors and the like.
  *
- * For concepts, inherited properties are not particularly useful. We
- * still index them by, arbitrarily, adding all the local properties
+ * For concepts, inherited attributes are not particularly useful. We
+ * still index them by, arbitrarily, adding all the local attributes
  * of the parent. However, we still haven't found a good use for them.
  *
- * @subsection yarn_property_indexer_13 All properties
+ * @subsection yarn_attributes_indexer_13 All attributes
  *
- * The "all property" set contains every single property. It is the
- * sum all the local properties with all of the inherited
- * properties. For objects it is useful for full constructors. For
+ * The "all attribute" set contains every single attribute. It is the
+ * sum all the local attributes with all of the inherited
+ * attributes. For objects it is useful for full constructors. For
  * concepts it is effectively the full interface of the concept.
  *
  */
-class property_indexer {
+class attributes_indexer {
 public:
-    virtual ~property_indexer() noexcept { }
+    virtual ~attributes_indexer() noexcept { }
 
 private:
     /**

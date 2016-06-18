@@ -34,7 +34,7 @@
 #include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/yarn/hash/visitor_hash.hpp"
 #include "dogen/yarn/hash/location_hash.hpp"
-#include "dogen/yarn/hash/property_hash.hpp"
+#include "dogen/yarn/hash/attribute_hash.hpp"
 #include "dogen/yarn/hash/exception_hash.hpp"
 #include "dogen/yarn/hash/name_tree_hash.hpp"
 #include "dogen/yarn/hash/primitive_hash.hpp"

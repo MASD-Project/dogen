@@ -185,15 +185,15 @@ name name_factory::build_promoted_module_name(const name& model_name,
     return b.build();
 }
 
-name name_factory::build_property_name(const name& owner_name,
-    const std::string& property_simple_name) const {
+name name_factory::build_attribute_name(const name& owner_name,
+    const std::string& simple_name) const {
 
     location l(owner_name.location());
     l.element(owner_name.simple());
 
     name n;
     n.location(l);
-    n.simple(property_simple_name);
+    n.simple(simple_name);
     name_builder b(n);
     return b.build();
 }

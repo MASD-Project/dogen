@@ -22,7 +22,7 @@
 #include "dogen/yarn.dia/test_data/object_types_td.hpp"
 #include "dogen/yarn.dia/test_data/processed_object_td.hpp"
 #include "dogen/yarn.dia/test_data/processed_comment_td.hpp"
-#include "dogen/yarn.dia/test_data/processed_property_td.hpp"
+#include "dogen/yarn.dia/test_data/processed_attribute_td.hpp"
 
 namespace {
 
@@ -57,15 +57,15 @@ create_boost_optional_std_pair_std_string_std_string_(unsigned int position) {
     return r;
 }
 
-dogen::yarn::dia::processed_property
-create_dogen_yarn_dia_processed_property(const unsigned int position) {
-    return dogen::yarn::dia::processed_property_generator::create(position);
+dogen::yarn::dia::processed_attribute
+create_dogen_yarn_dia_processed_attribute(const unsigned int position) {
+    return dogen::yarn::dia::processed_attribute_generator::create(position);
 }
 
-std::list<dogen::yarn::dia::processed_property> create_std_list_dogen_yarn_dia_processed_property(unsigned int position) {
-    std::list<dogen::yarn::dia::processed_property> r;
+std::list<dogen::yarn::dia::processed_attribute> create_std_list_dogen_yarn_dia_processed_attribute(unsigned int position) {
+    std::list<dogen::yarn::dia::processed_attribute> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_yarn_dia_processed_property(position + i));
+        r.push_back(create_dogen_yarn_dia_processed_attribute(position + i));
     }
     return r;
 }
@@ -87,7 +87,7 @@ populate(const unsigned int position, result_type& v) {
     v.comment(create_dogen_yarn_dia_processed_comment(position + 4));
     v.child_node_id(create_std_string(position + 5));
     v.connection(create_boost_optional_std_pair_std_string_std_string_(position + 6));
-    v.properties(create_std_list_dogen_yarn_dia_processed_property(position + 7));
+    v.attributes(create_std_list_dogen_yarn_dia_processed_attribute(position + 7));
 }
 
 processed_object_generator::result_type

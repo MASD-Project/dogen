@@ -44,7 +44,7 @@ const std::string uml_realization("UML - Realizes");
 const std::string unsigned_int("unsigned int");
 
 using dogen::yarn::dia::processed_object;
-using dogen::yarn::dia::processed_property;
+using dogen::yarn::dia::processed_attribute;
 using dogen::yarn::dia::test::mock_processed_object_factory;
 
 processed_object
@@ -68,9 +68,9 @@ processed_object create_named_object(const dogen::yarn::dia::object_types ot,
     return r;
 }
 
-processed_property
-create_processed_property(const unsigned int n) {
-    processed_property r;
+processed_attribute
+create_processed_attribute(const unsigned int n) {
+    processed_attribute r;
     r.name(name(n));
     r.type(unsigned_int);
     r.comment().documentation(doxygen_comment);
@@ -172,9 +172,9 @@ make_class(const unsigned int n, const std::string& st) {
 }
 
 processed_object mock_processed_object_factory::
-make_class_with_property(const unsigned int n, const std::string& st) {
+make_class_with_attribute(const unsigned int n, const std::string& st) {
     auto r(make_class(n, st));
-    r.properties().push_back(create_processed_property(n));
+    r.attributes().push_back(create_processed_attribute(n));
     return r;
 }
 

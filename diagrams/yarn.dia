@@ -80,7 +80,7 @@
         <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#property#</dia:string>
+        <dia:string>#attribute#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#Documentable, Extensible, Nameable#</dia:string>
@@ -203,7 +203,7 @@ Name must be in one of the supported notations.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Tree of names that represent the type of the property, after suitable parsing.#</dia:string>
+            <dia:string>#Tree of names that represent the type of the attribute, after suitable parsing.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -226,7 +226,7 @@ Name must be in one of the supported notations.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, the property can only be read but not set.#</dia:string>
+            <dia:string>#If true, the attribute can only be read but not set.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -249,7 +249,7 @@ Name must be in one of the supported notations.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, the property's setter will return the object iteself.#</dia:string>
+            <dia:string>#If true, the attribute's setter will return the object iteself.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5361,22 +5361,22 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#all_properties#</dia:string>
+            <dia:string>#all_attributes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;property&gt;#</dia:string>
+            <dia:string>#std::list&lt;attribute&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All the properties associated with this type.
+            <dia:string>#All attributes associated with this type.
 
 This is a union of the following sets:
 
-@li the set of all properies obtained via inheritance relationships;
-@li the set of all properies obtained via modeling of concepts, including any refinements;
-@li the set of all properies directly associated with the type (local).
+@li the set of all attributes obtained via inheritance relationships;
+@li the set of all attributes obtained via modeling of concepts, including any refinements;
+@li the set of all attributes directly associated with the type (local).
 
 The first and third sets are cached in this object. The second isn't as we do
 not have a need for it.#</dia:string>
@@ -5393,16 +5393,16 @@ not have a need for it.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#local_properties#</dia:string>
+            <dia:string>#local_attributes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;property&gt;#</dia:string>
+            <dia:string>#std::list&lt;attribute&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#The set of all properies directly associated with the type.#</dia:string>
+            <dia:string>#The set of all attributes directly associated with the type.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5416,16 +5416,16 @@ not have a need for it.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#inherited_properties#</dia:string>
+            <dia:string>#inherited_attributes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;name,std::list&lt;property&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;name,std::list&lt;attribute&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string># The set of all properies obtained via inheritance, by parent name.#</dia:string>
+            <dia:string># The set of all attributes obtained via inheritance, by parent name.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5448,7 +5448,7 @@ not have a need for it.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, do not generate setters for the element's properties.#</dia:string>
+            <dia:string>#If true, do not generate setters for the element's attributes.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6393,7 +6393,7 @@ expansion.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#property_indexer#</dia:string>
+        <dia:string>#attributes_indexer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -6537,7 +6537,7 @@ expansion.#</dia:string>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O60">
       <dia:attribute name="name">
-        <dia:string>#indexes properties for &gt;#</dia:string>
+        <dia:string>#indexes attributes for &gt;#</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
         <dia:enum val="2"/>
@@ -8450,7 +8450,7 @@ etc.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#build_property_name#</dia:string>
+            <dia:string>#build_attribute_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -8496,7 +8496,7 @@ etc.#</dia:string>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#property_simple_name#</dia:string>
+                <dia:string>#attribute_simple_name#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const std::string&amp;#</dia:string>
@@ -12390,7 +12390,7 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
             <dia:string>#Name of the owning element, if any.
 
 For modeling elements which are located within other modeling elements that
-are not modules, such as properties, inner classes, etc.#</dia:string>
+are not modules, such as attributes, inner classes, etc.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -12996,7 +12996,7 @@ are not modules, such as properties, inner classes, etc.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#properties_expander#</dia:string>
+        <dia:string>#attributes_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -17738,9 +17738,9 @@ relationships.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Expands all property types into name
+            <dia:string>#Expands all attribute types into name
 trees across all elements in the model
-that have properties.#</dia:string>
+that have attributes.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

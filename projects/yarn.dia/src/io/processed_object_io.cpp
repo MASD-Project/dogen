@@ -23,7 +23,7 @@
 #include "dogen/yarn.dia/io/object_types_io.hpp"
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/yarn.dia/io/processed_comment_io.hpp"
-#include "dogen/yarn.dia/io/processed_property_io.hpp"
+#include "dogen/yarn.dia/io/processed_attribute_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -62,7 +62,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<std::pair
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::dia::processed_property>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::dia::processed_attribute>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -88,7 +88,7 @@ std::ostream& operator<<(std::ostream& s, const processed_object& v) {
       << "\"comment\": " << v.comment() << ", "
       << "\"child_node_id\": " << "\"" << tidy_up_string(v.child_node_id()) << "\"" << ", "
       << "\"connection\": " << v.connection() << ", "
-      << "\"properties\": " << v.properties()
+      << "\"attributes\": " << v.attributes()
       << " }";
     return(s);
 }

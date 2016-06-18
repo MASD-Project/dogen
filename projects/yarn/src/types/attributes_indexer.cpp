@@ -27,13 +27,13 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/indexing_error.hpp"
-#include "dogen/yarn/types/property_indexer.hpp"
+#include "dogen/yarn/types/attributes_indexer.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("yarn.property_indexer"));
+auto lg(logger_factory("yarn.attributes_indexer"));
 
 const std::string relationship_not_found(
     "Could not find relationship in object. Details: ");
@@ -45,7 +45,7 @@ const std::string concept_not_found("Concept not found in concept container: ");
 namespace dogen {
 namespace yarn {
 
-object& property_indexer::find_object(const name& n, intermediate_model& m) {
+object& attributes_indexer::find_object(const name& n, intermediate_model& m) {
     const auto qn(n.qualified());
     auto i(m.objects().find(qn));
     if (i == m.objects().end()) {
@@ -55,7 +55,7 @@ object& property_indexer::find_object(const name& n, intermediate_model& m) {
     return i->second;
 }
 
-concept& property_indexer::find_concept(const name& n, intermediate_model& m) {
+concept& attributes_indexer::find_concept(const name& n, intermediate_model& m) {
     const auto& qn(n.qualified());
     auto i(m.concepts().find(qn));
     if (i == m.concepts().end()) {
@@ -65,7 +65,7 @@ concept& property_indexer::find_concept(const name& n, intermediate_model& m) {
     return i->second;
 }
 
-void property_indexer::index_object(object& o, intermediate_model& m,
+void attributes_indexer::index_object(object& o, intermediate_model& m,
     std::unordered_set<name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().qualified();
 
@@ -76,42 +76,42 @@ void property_indexer::index_object(object& o, intermediate_model& m,
     }
 
     /*
-     * We first grab all of the concept properties in one go, and them
-     * add them to the local properties at the beginning. The idea is
+     * We first grab all of the concept attributes in one go, and them
+     * add them to the local attributes at the beginning. The idea is
      * to keep changes from rippling through, but there is no evidence
      * that this order is more effective than other alternatives.
      */
-    std::list<property> concept_properties;
+    std::list<attribute> concept_attributes;
     for (const auto& n : o.modeled_concepts()) {
         auto& c(find_concept(n, m));
-        const auto& p(c.local_properties());
-        concept_properties.insert(concept_properties.end(), p.begin(), p.end());
+        const auto& p(c.local_attributes());
+        concept_attributes.insert(concept_attributes.end(), p.begin(), p.end());
     }
 
-    o.local_properties().insert(o.local_properties().begin(),
-        concept_properties.begin(), concept_properties.end());
+    o.local_attributes().insert(o.local_attributes().begin(),
+        concept_attributes.begin(), concept_attributes.end());
 
     for (const auto& n : o.parents()) {
         auto& parent(find_object(n, m));
         index_object(parent, m, processed_names);
 
-        if (!parent.all_properties().empty()) {
+        if (!parent.all_attributes().empty()) {
             const auto& pn(parent.name());
-            const auto pair(std::make_pair(pn, parent.all_properties()));
-            o.inherited_properties().insert(pair);
+            const auto pair(std::make_pair(pn, parent.all_attributes()));
+            o.inherited_attributes().insert(pair);
         }
 
-        const auto p(parent.all_properties());
-        o.all_properties().insert(o.all_properties().end(), p.begin(), p.end());
+        const auto p(parent.all_attributes());
+        o.all_attributes().insert(o.all_attributes().end(), p.begin(), p.end());
     }
 
-    o.all_properties().insert(o.all_properties().end(),
-        o.local_properties().begin(), o.local_properties().end());
+    o.all_attributes().insert(o.all_attributes().end(),
+        o.local_attributes().begin(), o.local_attributes().end());
 
     processed_names.insert(o.name());
 }
 
-void property_indexer::index_objects(intermediate_model& m) {
+void attributes_indexer::index_objects(intermediate_model& m) {
     BOOST_LOG_SEV(lg, debug) << "Indexing objects: " << m.objects().size();
 
     std::unordered_set<name> processed_names;
@@ -125,7 +125,7 @@ void property_indexer::index_objects(intermediate_model& m) {
     }
 }
 
-void property_indexer::index_concept(concept& c, intermediate_model& m,
+void attributes_indexer::index_concept(concept& c, intermediate_model& m,
     std::unordered_set<name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Indexing concept: " << c.name().qualified();
 
@@ -135,23 +135,23 @@ void property_indexer::index_concept(concept& c, intermediate_model& m,
         return;
     }
 
-    c.all_properties().insert(c.all_properties().end(),
-        c.local_properties().begin(), c.local_properties().end());
+    c.all_attributes().insert(c.all_attributes().end(),
+        c.local_attributes().begin(), c.local_attributes().end());
 
     for (const auto& n : c.refines()) {
         auto& parent(find_concept(n, m));
         index_concept(parent, m, processed_names);
 
-        c.inherited_properties().insert(
-            std::make_pair(parent.name(), parent.local_properties()));
+        c.inherited_attributes().insert(
+            std::make_pair(parent.name(), parent.local_attributes()));
 
-        c.all_properties().insert(c.all_properties().end(),
-            parent.local_properties().begin(), parent.local_properties().end());
+        c.all_attributes().insert(c.all_attributes().end(),
+            parent.local_attributes().begin(), parent.local_attributes().end());
     }
     processed_names.insert(c.name());
 }
 
-void property_indexer::index_concepts(intermediate_model& m) {
+void attributes_indexer::index_concepts(intermediate_model& m) {
     BOOST_LOG_SEV(lg, debug) << "Indexing concepts: " << m.concepts().size();
 
     std::unordered_set<name> processed_names;
@@ -165,7 +165,7 @@ void property_indexer::index_concepts(intermediate_model& m) {
     }
 }
 
-void property_indexer::index(intermediate_model& m) {
+void attributes_indexer::index(intermediate_model& m) {
     index_concepts(m);
     index_objects(m);
 }

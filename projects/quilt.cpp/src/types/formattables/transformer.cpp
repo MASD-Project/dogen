@@ -301,15 +301,15 @@ void transformer::to_nested_type_info(const yarn::name_tree& nt,
 }
 
 std::tuple<property_info, bool, bool, bool>
-transformer::to_property_info(const yarn::property p, const bool is_immutable,
+transformer::to_property_info(const yarn::attribute a, const bool is_immutable,
     const bool is_fluent) const {
 
     property_info pi;
-    pi.name(p.name().simple());
-    pi.documentation(p.documentation());
+    pi.name(a.name().simple());
+    pi.documentation(a.documentation());
     pi.is_immutable(is_immutable);
     pi.is_fluent(is_fluent);
-    pi.id(p.name().qualified());
+    pi.id(a.name().qualified());
 
     bool requires_stream_manipulators(false);
     bool requires_manual_move_constructor(false);
@@ -317,7 +317,7 @@ transformer::to_property_info(const yarn::property p, const bool is_immutable,
 
     nested_type_info nti;
     std::string complete_name;
-    const auto t(p.parsed_type());
+    const auto t(a.parsed_type());
     pi.name_tree(t);
     if (::requires_manual_move_constructor(t.parent().simple()))
         requires_manual_move_constructor = true;
@@ -360,8 +360,8 @@ transformer::to_class_info(const yarn::object& o) const {
         using boost::join;
         pi.qualified_name(join(ns, namespace_separator));
 
-        const auto j(o.inherited_properties().find(n));
-        if (j != o.inherited_properties().end()) {
+        const auto j(o.inherited_attributes().find(n));
+        if (j != o.inherited_attributes().end()) {
             for (const auto& prop : j->second) {
                 const auto tuple(to_property_info(
                         prop, o.is_immutable(), o.is_fluent()));
@@ -388,13 +388,13 @@ transformer::to_class_info(const yarn::object& o) const {
         r->is_root_parent_visitable(o.is_root_parent_visitable());
     }
 
-    for (const auto& prop : o.all_properties()) {
+    for (const auto& prop : o.all_attributes()) {
         const auto tuple(to_property_info(
                 prop, o.is_immutable(), o.is_fluent()));
         r->all_properties().push_back(std::get<0>(tuple));
     }
 
-    for (const auto& prop : o.local_properties()) {
+    for (const auto& prop : o.local_attributes()) {
         const auto tuple(to_property_info(
                 prop, o.is_immutable(), o.is_fluent()));
 

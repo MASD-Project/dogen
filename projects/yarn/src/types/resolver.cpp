@@ -29,7 +29,7 @@
 #include "dogen/yarn/types/resolution_error.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/name_tree_io.hpp"
-#include "dogen/yarn/io/property_io.hpp"
+#include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
@@ -43,7 +43,7 @@ auto lg(logger_factory("yarn.resolver"));
 const std::string empty;
 const std::string orphan_object("Object's parent could not be located: ");
 const std::string orphan_concept("Refined concept could not be located: ");
-const std::string undefined_type("Object has property with undefined type: ");
+const std::string undefined_type("Object has attribute with undefined type: ");
 const std::string too_many_defaults(
     "Model has more than one default enumeration: ");
 const std::string missing_default(
@@ -191,16 +191,16 @@ resolve_partial_type(const intermediate_model& m, name_tree& nt) const {
     nt.parent(n);
 }
 
-void resolver::resolve_properties(const intermediate_model& m,
-    const name& owner, std::list<property>& p) const {
-    for (auto& prop : p) {
+void resolver::resolve_attributes(const intermediate_model& m,
+    const name& owner, std::list<attribute>& attributes) const {
+    for (auto& a : attributes) {
         try {
-            resolve_partial_type(m, prop.parsed_type());
+            resolve_partial_type(m, a.parsed_type());
         } catch (boost::exception& e) {
             std::ostringstream s;
             s << "Owner type name: " << owner.qualified()
-              << " Property name: " << prop.name()
-              << " Property type: " << prop.parsed_type();
+              << " Attribute name: " << a.name()
+              << " Attribute type: " << a.parsed_type();
             e << errmsg_info(s.str());
             throw;
         }
@@ -263,7 +263,7 @@ void resolver::resolve_concepts(intermediate_model& m) const {
             continue;
 
         BOOST_LOG_SEV(lg, debug) << "Resolving: " << c.name().qualified();
-        resolve_properties(m, c.name(), c.local_properties());
+        resolve_attributes(m, c.name(), c.local_attributes());
         validate_refinements(m, c);
     }
 }
@@ -279,7 +279,7 @@ void resolver::resolve_objects(intermediate_model& m) const {
 
         BOOST_LOG_SEV(lg, debug) << "Resolving: " << o.name().qualified();
         validate_inheritance_graph(m, o);
-        resolve_properties(m, o.name(), o.local_properties());
+        resolve_attributes(m, o.name(), o.local_attributes());
     }
 }
 

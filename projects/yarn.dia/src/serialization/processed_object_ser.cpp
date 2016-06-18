@@ -34,7 +34,7 @@
 #include "dogen/yarn.dia/serialization/object_types_ser.hpp"
 #include "dogen/yarn.dia/serialization/processed_object_ser.hpp"
 #include "dogen/yarn.dia/serialization/processed_comment_ser.hpp"
-#include "dogen/yarn.dia/serialization/processed_property_ser.hpp"
+#include "dogen/yarn.dia/serialization/processed_attribute_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -50,7 +50,7 @@ void save(Archive& ar,
     ar << make_nvp("comment", v.comment_);
     ar << make_nvp("child_node_id", v.child_node_id_);
     ar << make_nvp("connection", v.connection_);
-    ar << make_nvp("properties", v.properties_);
+    ar << make_nvp("attributes", v.attributes_);
 }
 
 template<typename Archive>
@@ -64,7 +64,7 @@ void load(Archive& ar,
     ar >> make_nvp("comment", v.comment_);
     ar >> make_nvp("child_node_id", v.child_node_id_);
     ar >> make_nvp("connection", v.connection_);
-    ar >> make_nvp("properties", v.properties_);
+    ar >> make_nvp("attributes", v.attributes_);
 }
 
 } }

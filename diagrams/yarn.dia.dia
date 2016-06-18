@@ -3915,7 +3915,7 @@ that make up dogen instructions.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#processed_property#</dia:string>
+        <dia:string>#processed_attribute#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -4151,7 +4151,7 @@ that make up dogen instructions.#</dia:string>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O26">
       <dia:attribute name="name">
-        <dia:string>#processes dia objects into &gt;#</dia:string>
+        <dia:string>#&lt; processes dia objects into#</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
         <dia:enum val="1"/>
@@ -5012,16 +5012,16 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#properties#</dia:string>
+            <dia:string>#attributes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;processed_property&gt;#</dia:string>
+            <dia:string>#std::list&lt;processed_attribute&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All properties associated with dia object.#</dia:string>
+            <dia:string>#All attributes associated with dia object.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

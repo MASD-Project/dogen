@@ -42,9 +42,9 @@ private:
     void expand_modules(intermediate_model& m) const;
 
     /**
-     * @brief Performs a property expansion on the model.
+     * @brief Performs an attribute expansion on the model.
      */
-    void expand_properties(intermediate_model& m) const;
+    void expand_attributes(intermediate_model& m) const;
 
 public:
     /**

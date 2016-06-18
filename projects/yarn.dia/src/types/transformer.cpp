@@ -142,34 +142,34 @@ yarn::module& transformer::module_for_id(const std::string& id) {
     return module_for_name(i->second);
 }
 
-yarn::property transformer::to_property(const yarn::name& owning_element,
-    const processed_property& p) const {
-    if (p.name().empty()) {
+yarn::attribute transformer::to_attribute(const yarn::name& owning_element,
+    const processed_attribute& a) const {
+    if (a.name().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
         BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
     }
 
     yarn::name_factory f;
-    const auto n(f.build_property_name(owning_element, p.name()));
+    const auto n(f.build_attribute_name(owning_element, a.name()));
 
-    yarn::property r;
+    yarn::attribute r;
     r.name(n);
-    r.unparsed_type(p.type());
-    r.documentation(p.comment().documentation());
+    r.unparsed_type(a.type());
+    r.documentation(a.comment().documentation());
 
-    const auto& kvps(p.comment().key_value_pairs());
+    const auto& kvps(a.comment().key_value_pairs());
     const auto scope(dynamic::scope_types::property);
     r.extensions(dynamic_workflow_.execute(scope, kvps));
 
     return r;
 }
 
-yarn::enumerator transformer::to_enumerator(const processed_property& p,
+yarn::enumerator transformer::to_enumerator(const processed_attribute& a,
     const unsigned int position) const {
     yarn::enumerator r;
-    r.name(p.name());
+    r.name(a.name());
     r.value(boost::lexical_cast<std::string>(position));
-    r.documentation(p.comment().documentation());
+    r.documentation(a.comment().documentation());
 
     if (r.name().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
@@ -190,8 +190,8 @@ update_object(yarn::object& o, const processed_object& po, const profile& p) {
         o.modeled_concepts().push_back(n);
     }
 
-    for (const auto& p : po.properties())
-        o.local_properties().push_back(to_property(o.name(), p));
+    for (const auto& p : po.attributes())
+        o.local_attributes().push_back(to_attribute(o.name(), p));
 
     const auto i(context_.child_id_to_parent_ids().find(po.id()));
     if (i != context_.child_id_to_parent_ids().end()) {
@@ -290,7 +290,7 @@ void transformer::to_enumeration(const processed_object& o, const profile& p) {
     enumerator_names.insert(invalid.name());
 
     unsigned int pos(1);
-    for (const auto& p : o.properties()) {
+    for (const auto& p : o.attributes()) {
         auto enumerator(to_enumerator(p, pos++));
 
         const auto i(enumerator_names.find(enumerator.name()));
@@ -349,8 +349,8 @@ void transformer::to_concept(const processed_object& o, const profile& p) {
     yarn::concept c;
     update_element(c, o, p);
 
-    for (const auto& prop : o.properties())
-        c.local_properties().push_back(to_property(c.name(), prop));
+    for (const auto& prop : o.attributes())
+        c.local_attributes().push_back(to_attribute(c.name(), prop));
 
     const auto i(context_.child_id_to_parent_ids().find(o.id()));
     c.is_child(i != context_.child_id_to_parent_ids().end());

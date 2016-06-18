@@ -19,12 +19,9 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/property_io.hpp"
-#include "dogen/dynamic/io/object_io.hpp"
-#include "dogen/yarn/io/name_tree_io.hpp"
+#include "dogen/yarn.dia/io/processed_comment_io.hpp"
+#include "dogen/yarn.dia/io/processed_attribute_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -35,25 +32,16 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace dogen {
 namespace yarn {
+namespace dia {
 
-std::ostream& operator<<(std::ostream& s, const property& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
+std::ostream& operator<<(std::ostream& s, const processed_attribute& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::property\"" << ", "
-      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"extensions\": " << v.extensions() << ", "
-      << "\"name\": " << v.name() << ", "
-      << "\"unparsed_type\": " << "\"" << tidy_up_string(v.unparsed_type()) << "\"" << ", "
-      << "\"parsed_type\": " << v.parsed_type() << ", "
-      << "\"is_immutable\": " << v.is_immutable() << ", "
-      << "\"is_fluent\": " << v.is_fluent()
+      << "\"__type__\": " << "\"dogen::yarn::dia::processed_attribute\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"type\": " << "\"" << tidy_up_string(v.type()) << "\"" << ", "
+      << "\"comment\": " << v.comment()
       << " }";
     return(s);
 }
 
-} }
+} } }

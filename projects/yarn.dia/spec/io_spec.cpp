@@ -45,7 +45,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<profile_generator>();
     test_io<object_types_generator>();
     test_io<processed_object_generator>();
-    test_io<processed_property_generator>();
+    test_io<processed_attribute_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

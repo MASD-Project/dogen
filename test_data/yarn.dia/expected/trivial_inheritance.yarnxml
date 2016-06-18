@@ -368,19 +368,19 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties class_id="32" tracking_level="0" version="0">
+				<all_attributes class_id="32" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</local_properties>
-				<inherited_properties class_id="33" tracking_level="0" version="0">
+				</local_attributes>
+				<inherited_attributes class_id="33" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>0</is_parent>
@@ -485,11 +485,11 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item class_id="34" tracking_level="0" version="0">
@@ -554,12 +554,12 @@ in the context of inheritance.
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>0</is_parent>
@@ -664,19 +664,19 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>1</is_parent>
@@ -761,11 +761,11 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -830,12 +830,12 @@ in the context of inheritance.
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>1</is_parent>
@@ -920,11 +920,11 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -989,12 +989,12 @@ in the context of inheritance.
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>1</is_parent>
@@ -1078,19 +1078,19 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>1</is_parent>
@@ -1175,11 +1175,11 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -1244,12 +1244,12 @@ in the context of inheritance.
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>1</is_parent>
@@ -1333,19 +1333,19 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>0</is_parent>
@@ -1449,11 +1449,11 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -1517,12 +1517,12 @@ in the context of inheritance.
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>1</is_parent>
@@ -1626,11 +1626,11 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -1694,12 +1694,12 @@ in the context of inheritance.
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>1</is_parent>
@@ -1784,11 +1784,11 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -1853,12 +1853,12 @@ in the context of inheritance.
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>0</is_parent>
@@ -1963,19 +1963,19 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>0</is_parent>
@@ -2079,11 +2079,11 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -2147,12 +2147,12 @@ in the context of inheritance.
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>1</is_parent>
@@ -2236,11 +2236,11 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -2304,12 +2304,12 @@ in the context of inheritance.
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>0</is_parent>
@@ -2413,19 +2413,19 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>0</is_parent>
@@ -2509,11 +2509,11 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -2577,12 +2577,12 @@ in the context of inheritance.
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>0</is_parent>
@@ -2687,11 +2687,11 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -2756,12 +2756,12 @@ in the context of inheritance.
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>0</is_parent>
@@ -2865,19 +2865,19 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>0</is_parent>
@@ -2961,11 +2961,11 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -3029,12 +3029,12 @@ in the context of inheritance.
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>0</is_parent>
@@ -3138,19 +3138,19 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>1</is_parent>
@@ -3254,19 +3254,19 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>0</is_parent>
@@ -3370,11 +3370,11 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -3438,12 +3438,12 @@ in the context of inheritance.
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>0</is_parent>
@@ -3548,11 +3548,11 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_properties>
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
-				</all_properties>
-				<local_properties>
+				</all_attributes>
+				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
 					<item>
@@ -3617,12 +3617,12 @@ in the context of inheritance.
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
-				</local_properties>
-				<inherited_properties>
+				</local_attributes>
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
-				</inherited_properties>
+				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>0</is_parent>

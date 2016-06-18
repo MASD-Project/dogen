@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_PROPERTIES_EXPANDER_HPP
-#define DOGEN_YARN_TYPES_PROPERTIES_EXPANDER_HPP
+#ifndef DOGEN_YARN_TYPES_ATTRIBUTES_EXPANDER_HPP
+#define DOGEN_YARN_TYPES_ATTRIBUTES_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,10 +34,10 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Performs the expansion of all properties in the supplied
+ * @brief Performs the expansion of all attributes in the supplied
  * model.
  */
-class properties_expander {
+class attributes_expander {
 private:
     /**
      * @brief Returns true if the supplied name tree would result in a
@@ -46,12 +46,12 @@ private:
     bool is_circular_dependency(const name& owner, const name_tree& nt) const;
 
     /**
-     * @brief Update all properties in the supplied element.
+     * @brief Update all attributes in the supplied element.
      */
     template<typename NameableAndStateful>
-    void update_properties(const name_tree_parser& ntp,
+    void update_attributes(const name_tree_parser& ntp,
         NameableAndStateful& nas) const {
-        for (auto& p : nas.local_properties()) {
+        for (auto& p : nas.local_attributes()) {
             auto nt(ntp.parse(p.unparsed_type()));
             nt.is_circular_dependency(is_circular_dependency(nas.name(), nt));
             p.parsed_type(nt);

@@ -32,7 +32,7 @@
 #include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/yarn/serialization/object_ser.hpp"
 #include "dogen/yarn/serialization/element_ser.hpp"
-#include "dogen/yarn/serialization/property_ser.hpp"
+#include "dogen/yarn/serialization/attribute_ser.hpp"
 #include "dogen/yarn/serialization/object_types_ser.hpp"
 
 BOOST_CLASS_TRACKING(
@@ -48,9 +48,9 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
 
-    ar << make_nvp("all_properties", v.all_properties_);
-    ar << make_nvp("local_properties", v.local_properties_);
-    ar << make_nvp("inherited_properties", v.inherited_properties_);
+    ar << make_nvp("all_attributes", v.all_attributes_);
+    ar << make_nvp("local_attributes", v.local_attributes_);
+    ar << make_nvp("inherited_attributes", v.inherited_attributes_);
     ar << make_nvp("is_immutable", v.is_immutable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
     ar << make_nvp("is_parent", v.is_parent_);
@@ -76,9 +76,9 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
 
-    ar >> make_nvp("all_properties", v.all_properties_);
-    ar >> make_nvp("local_properties", v.local_properties_);
-    ar >> make_nvp("inherited_properties", v.inherited_properties_);
+    ar >> make_nvp("all_attributes", v.all_attributes_);
+    ar >> make_nvp("local_attributes", v.local_attributes_);
+    ar >> make_nvp("inherited_attributes", v.inherited_attributes_);
     ar >> make_nvp("is_immutable", v.is_immutable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
     ar >> make_nvp("is_parent", v.is_parent_);

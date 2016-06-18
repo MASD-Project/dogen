@@ -20,8 +20,8 @@
  */
 #include <sstream>
 #include "dogen/yarn/test_data/name_td.hpp"
-#include "dogen/yarn/test_data/property_td.hpp"
 #include "dogen/dynamic/test_data/object_td.hpp"
+#include "dogen/yarn/test_data/attribute_td.hpp"
 #include "dogen/yarn/test_data/name_tree_td.hpp"
 
 namespace {
@@ -56,9 +56,9 @@ bool create_bool(const unsigned int position) {
 namespace dogen {
 namespace yarn {
 
-property_generator::property_generator() : position_(0) { }
+attribute_generator::attribute_generator() : position_(0) { }
 
-void property_generator::
+void attribute_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.extensions(create_dogen_dynamic_object(position + 1));
@@ -69,22 +69,22 @@ populate(const unsigned int position, result_type& v) {
     v.is_fluent(create_bool(position + 6));
 }
 
-property_generator::result_type
-property_generator::create(const unsigned int position) {
-    property r;
-    property_generator::populate(position, r);
+attribute_generator::result_type
+attribute_generator::create(const unsigned int position) {
+    attribute r;
+    attribute_generator::populate(position, r);
     return r;
 }
 
-property_generator::result_type*
-property_generator::create_ptr(const unsigned int position) {
-    property* p = new property();
-    property_generator::populate(position, *p);
+attribute_generator::result_type*
+attribute_generator::create_ptr(const unsigned int position) {
+    attribute* p = new attribute();
+    attribute_generator::populate(position, *p);
     return p;
 }
 
-property_generator::result_type
-property_generator::operator()() {
+attribute_generator::result_type
+attribute_generator::operator()() {
     return create(position_++);
 }
 

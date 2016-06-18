@@ -30,6 +30,6 @@
 #include "dogen/yarn.dia/hash/object_types_hash.hpp"
 #include "dogen/yarn.dia/hash/processed_object_hash.hpp"
 #include "dogen/yarn.dia/hash/processed_comment_hash.hpp"
-#include "dogen/yarn.dia/hash/processed_property_hash.hpp"
+#include "dogen/yarn.dia/hash/processed_attribute_hash.hpp"
 
 #endif

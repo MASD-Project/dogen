@@ -86,7 +86,7 @@ private:
             return;
 
         auto b(factory_.make(e.extensions()));
-        for (const auto& p : e.all_properties()) {
+        for (const auto& p : e.all_attributes()) {
             const auto os(opaque_settings_builder_.build(p.extensions()));
             const auto pair(std::make_pair(p.name().qualified(), os));
             const auto res(b.opaque_settings_for_property().insert(pair));

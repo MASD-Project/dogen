@@ -12,21 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-17 Fri 12:29]
+#+CAPTION: Clock summary at [2016-06-18 Sat 01:13]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *1:43* |      |      | 100.0 |
+| *Total time*                                                                | *4:51* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 1:43   |      |      | 100.0 |
-| Active                                                                      |        | 1:43 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:24 |  23.3 |
-| COMPLETED Refactor helper settings                                          |        |      | 0:35 |  34.0 |
-| STARTED Add properties for helpers                                          |        |      | 0:44 |  42.7 |
+| Stories                                                                     | 4:51   |      |      | 100.0 |
+| Active                                                                      |        | 4:51 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:18 |  26.8 |
+| COMPLETED Refactor helper settings                                          |        |      | 0:35 |  12.0 |
+| COMPLETED Add properties for helpers                                        |        |      | 1:35 |  32.6 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |        |      | 1:23 |  28.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-06-17 Fri 23:46]--[2016-06-17 Fri 23:50] =>  0:04
+    CLOCK: [2016-06-17 Fri 22:55]--[2016-06-17 Fri 23:45] =>  0:50
     CLOCK: [2016-06-17 Fri 10:40]--[2016-06-17 Fri 11:04] =>  0:24
 
 Updates to sprint and product backlog.
@@ -44,7 +47,9 @@ Time taken with blog posts and updates to the manual.
 - remove the nonsense around visitors since we don't need concrete types;
 - add some basic validation to ensure we throw if no family is supplied.
 
-*** STARTED Add properties for helpers                                :story:
+*** COMPLETED Add properties for helpers                              :story:
+    CLOSED: [2016-06-17 Fri 22:54]
+    CLOCK: [2016-06-17 Fri 22:41]--[2016-06-17 Fri 22:54] =>  0:13
     CLOCK: [2016-06-17 Fri 12:33]--[2016-06-17 Fri 13:11] =>  0:38
     CLOCK: [2016-06-17 Fri 11:05]--[2016-06-17 Fri 11:49] =>  0:44
 
@@ -114,9 +119,65 @@ with the required properties. With this the helpers can continue to
 rely on just the nested name (plus the nested name properties via the
 assistant).
 
+*** COMPLETED Consider renaming =yarn::property= to attribute         :story:
+    CLOSED: [2016-06-18 Sat 01:13]
+    CLOCK: [2016-06-17 Fri 23:50]--[2016-06-18 Sat 01:13] =>  1:23
+
+Since we use properties quite a lot in =quilt.cpp= - and more so when
+we rename formattables to properties - we should probably avoid the
+need to overload the term in yarn. We could rename it to attribute.
+
+Or perhaps the problem is with formatter properties. After all these
+are not "properties of the formatter"; these are inputs into the
+formatting process (and so are settings).
+
+We need to add properties for =yarn::property= so it cannot stay as
+property. We cannot think of a better name other than "properties" for
+formatters so yarn will have to be renamed.
+
+Actually this is no longer urgent so the story can go back to backlog.
+
+*** Rename formattables to properties                                 :story:
+
+Now that we are getting close to the end of the quilt refactor we
+should rename formattables to properties.
+
+- rename namespace to properties
+- rename helper instances etc to helper properties
+- rename helper properties etc to helper descriptor
+
 *** Rename =name_tree='s parent                                       :story:
 
-Parent is not a good name as we are referring to the current node.
+Parent is not a good name as we are referring to the current
+node. Maybe =self=?
+
+*** Create a top-level type to aggregate properties and helpers       :story:
+
+We need a way to create an aggregate type that contains all of the
+"auxiliary" information about a type: basically formatter properties
+and helper settings.
+
+This type should be called =element_properties=.
+
+- change the return type of the properties workflow to be element
+  properties (well pair of element properties and formattables - for
+  now).
+
+*** Compute yarn property related information                         :story:
+
+Now that we no longer have nested type infos, we need to recompute the
+complete names etc for all properties up front and store them in a
+repository. This information is almost identical to that of the
+helpers but its not easy to share it. For now we should just brute
+force it and then look for patterns.
+
+By brute-force it we mean recompute it every time we need to use
+it. Or alternatively we could just add these directly to the name
+tree. After all they are (or should be) applicable to all languages.
+
+- add the three properties to name tree;
+- add logic to compute them into yarn;
+- change helpers to reuse this.
 
 *** Add an helper method interface                                    :story:
 
@@ -178,20 +239,38 @@ Tasks:
   settings. It should also consult the registrar to see if there are
   any helpers available for this formatter and family.
 
-*** Compute yarn property related information                         :story:
-
-Now that we no longer have nested type infos, we need to recompute the
-complete names etc for all properties up front and store them in a
-repository. This information is almost identical to that of the
-helpers but its not easy to share it. For now we should just brute
-force it and then look for patterns.
-
 *** Update assistant to use new helper information                    :story:
 
 Once all the pieces are in place, the assistant can then use the
 formatter properties to find out which helpers are required for each
 type; call those helpers and populate the file with the generate
 code. We can remove all previous helper support.
+
+*** Create a settings class for the "requires" settings               :story:
+
+We need to populate these in a settings workflow of some kind.
+
+*** Implement formattables in terms of yarn types                     :epic:
+
+At present formattables are just a shadow copy of yarn types plus
+additional =cpp= specific types. In practice:
+
+- for the types that are shadow copies, we could have helper utilities
+  that do the translation on the fly (e.g. for names).
+- for additional information which cannot be translated, we could have
+  containers indexed by qualified name and query those just before we
+  call the transformer. This is the case with formatter properties. We
+  need something similar to house "type properties" such as
+  =requires_stream_manipulators=. These could be moved into aspect
+  settings.
+- for types that do not exist in yarn, we could inherit from element;
+  this is the case for registrar, forward declarations, cmakelists and
+  odb options. Note that with this we are now saying that element
+  space contains anything which can be modeled, regardless of if they
+  are part of the programming language type system, or build system,
+  etc. This is not ideal, but its not a problem just yet. We could
+  update the factory to generate these types and then take a copy of
+  the model and inject them in it.
 
 *** Remove nested type info                                           :story:
 
@@ -206,22 +285,6 @@ initialisers. However, it makes more sense to initialise them on the
 translation unit for each formatter. This will also make life easier
 when we move to a mustache world where there may not be a formatter
 header file at all.
-
-*** Consider renaming =yarn::property= to attribute                   :story:
-
-Since we use properties quite a lot in =quilt.cpp= - and more so when
-we rename formattables to properties - we should probably avoid the
-need to overload the term in yarn. We could rename it to attribute.
-
-Or perhaps the problem is with formatter properties. After all these
-are not "properties of the formatter"; these are inputs into the
-formatting process (and so are settings).
-
-We need to add properties for =yarn::property= so it cannot stay as
-property. We cannot think of a better name other than "properties" for
-formatters so yarn will have to be renamed.
-
-Actually this is no longer urgent so the story can go back to backlog.
 
 *** Consider using indices rather than associative containers         :story:
 

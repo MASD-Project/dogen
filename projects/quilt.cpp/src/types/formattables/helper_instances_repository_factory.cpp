@@ -21,7 +21,7 @@
 #include <list>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/property.hpp"
+#include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/quilt.cpp/types/formattables/building_error.hpp"
@@ -60,7 +60,7 @@ private:
         BOOST_LOG_SEV(lg, debug) << "Creating helper instances for" << qn;
 
 
-        const auto hi(factory_.make(s.local_properties()));
+        const auto hi(factory_.make(s.local_attributes()));
         const auto pair(std::make_pair(qn, hi));
         auto& hibn(result_.helper_instances_by_name());
         const auto res(hibn.insert(pair));

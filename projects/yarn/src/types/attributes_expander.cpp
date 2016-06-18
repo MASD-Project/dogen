@@ -20,19 +20,19 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
-#include "dogen/yarn/types/properties_expander.hpp"
+#include "dogen/yarn/types/attributes_expander.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.properties_expander"));
+auto lg(logger_factory("yarn.attributes_expander"));
 
 }
 
 namespace dogen {
 namespace yarn {
 
-bool properties_expander::
+bool attributes_expander::
 is_circular_dependency(const name& owner, const name_tree& nn) const {
 
     if (owner == nn.parent())
@@ -45,7 +45,7 @@ is_circular_dependency(const name& owner, const name_tree& nn) const {
     return false;
 }
 
-std::unordered_set<std::string> properties_expander::
+std::unordered_set<std::string> attributes_expander::
 obtain_top_level_module_names(const intermediate_model& m) const {
     std::unordered_set<std::string> r;
     BOOST_LOG_SEV(lg, debug) << "Obtaining top-level modules for: "
@@ -77,15 +77,15 @@ obtain_top_level_module_names(const intermediate_model& m) const {
     return r;
 }
 
-void properties_expander::expand(intermediate_model& m) const {
+void attributes_expander::expand(intermediate_model& m) const {
     const auto tlmn(obtain_top_level_module_names(m));
     const name_tree_parser ntp(tlmn, m.name().location());
 
     for (auto& pair : m.objects())
-        update_properties(ntp, pair.second);
+        update_attributes(ntp, pair.second);
 
     for (auto& pair : m.concepts())
-        update_properties(ntp, pair.second);
+        update_attributes(ntp, pair.second);
 }
 
 } }

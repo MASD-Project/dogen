@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_PROCESSED_PROPERTY_HPP
-#define DOGEN_YARN_DIA_TYPES_PROCESSED_PROPERTY_HPP
+#ifndef DOGEN_YARN_DIA_TYPES_PROCESSED_ATTRIBUTE_HPP
+#define DOGEN_YARN_DIA_TYPES_PROCESSED_ATTRIBUTE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,31 +28,31 @@
 #include <string>
 #include <algorithm>
 #include "dogen/yarn.dia/types/processed_comment.hpp"
-#include "dogen/yarn.dia/serialization/processed_property_fwd_ser.hpp"
+#include "dogen/yarn.dia/serialization/processed_attribute_fwd_ser.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace dia {
 
-class processed_property final {
+class processed_attribute final {
 public:
-    processed_property() = default;
-    processed_property(const processed_property&) = default;
-    processed_property(processed_property&&) = default;
-    ~processed_property() = default;
+    processed_attribute() = default;
+    processed_attribute(const processed_attribute&) = default;
+    processed_attribute(processed_attribute&&) = default;
+    ~processed_attribute() = default;
 
 public:
-    processed_property(
+    processed_attribute(
         const std::string& name,
         const std::string& type,
         const dogen::yarn::dia::processed_comment& comment);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const processed_property& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const processed_attribute& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, processed_property& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, processed_attribute& v, unsigned int version);
 
 public:
     /**
@@ -86,14 +86,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const processed_property& rhs) const;
-    bool operator!=(const processed_property& rhs) const {
+    bool operator==(const processed_attribute& rhs) const;
+    bool operator!=(const processed_attribute& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(processed_property& other) noexcept;
-    processed_property& operator=(processed_property other);
+    void swap(processed_attribute& other) noexcept;
+    processed_attribute& operator=(processed_attribute other);
 
 private:
     std::string name_;
@@ -107,8 +107,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::yarn::dia::processed_property& lhs,
-    dogen::yarn::dia::processed_property& rhs) {
+    dogen::yarn::dia::processed_attribute& lhs,
+    dogen::yarn::dia::processed_attribute& rhs) {
     lhs.swap(rhs);
 }
 

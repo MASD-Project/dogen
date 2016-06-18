@@ -77,32 +77,6 @@ Originally we used the =*_info= types in the canned tests, but these
 are all about to be removed. We need to hunt for types in the
 =quilt::cpp= model and add those to the canned tests.
 
-*** Implement formattables in terms of yarn types                     :epic:
-
-At present formattables are just a shadow copy of yarn types plus
-additional =cpp= specific types. In practice:
-
-- for the types that are shadow copies, we could have helper utilities
-  that do the translation on the fly (e.g. for names).
-- for additional information which cannot be translated, we could have
-  containers indexed by qualified name and query those just before we
-  call the transformer. This is the case with formatter properties. We
-  need something similar to house "type properties" such as
-  =requires_stream_manipulators=. These could be moved into aspect
-  settings.
-- for types that do not exist in yarn, we could inherit from element;
-  this is the case for registrar, forward declarations, cmakelists and
-  odb options. Note that with this we are now saying that element
-  space contains anything which can be modeled, regardless of if they
-  are part of the programming language type system, or build system,
-  etc. This is not ideal, but its not a problem just yet. We could
-  update the factory to generate these types and then take a copy of
-  the model and inject them in it.
-
-*** Create a settings class for the "requires" settings               :story:
-
-We need to populate these in a settings workflow of some kind.
-
 *** Move all properties in =cpp= to a properties namespace            :story:
 
 Once all formattables are gone, we should have only properties left in
@@ -6319,7 +6293,7 @@ not yet allocated a term.
 | tailor |         | Not used yet. Format converter? e.g. Dia to JSON, etc.    |
 | jersey |         | Not used yet. Code generation service.                    |
 | hem    |         | Not used yet. HTTP Wrapper around jersey.                 |
-|        |         | Tool to infer model from XML/JSON/CSV instance documents. |
+| twine  |         | Tool to infer model from XML/JSON/CSV instance documents. |
 |        |         | Tool to infer model from SQL database schemas.            |
 
 *** Overuse of =std::set=, =std::map=, etc                            :story:

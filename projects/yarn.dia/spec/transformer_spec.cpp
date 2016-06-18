@@ -163,7 +163,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_value
     BOOST_CHECK(o.name().location().model_modules().front() ==
         model_name);
     BOOST_CHECK(!o.name().simple().empty());
-    BOOST_CHECK(o.local_properties().empty());
+    BOOST_CHECK(o.local_attributes().empty());
     BOOST_CHECK(!o.documentation().empty());
 
     BOOST_REQUIRE(c.model().modules().size() == 1);
@@ -354,7 +354,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_object) {
             model_name);
     BOOST_CHECK(!o.name().simple().empty());
 
-    BOOST_CHECK(o.local_properties().empty());
+    BOOST_CHECK(o.local_attributes().empty());
 
     BOOST_CHECK(o.object_type() ==
         dogen::yarn::object_types::user_defined_value_object);
@@ -565,7 +565,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_object) 
     BOOST_CHECK(o.name().location().model_modules().front() ==
         model_name);
     BOOST_CHECK(!o.name().simple().empty());
-    BOOST_CHECK(o.local_properties().empty());
+    BOOST_CHECK(o.local_attributes().empty());
     BOOST_CHECK(o.object_type() ==
         dogen::yarn::object_types::user_defined_value_object);
     BOOST_REQUIRE(o.name().location().internal_modules().size() == 2);
@@ -970,11 +970,11 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
     }
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_with_one_property_transforms_into_value_object_with_one_property) {
-    SETUP_TEST_LOG_SOURCE("uml_class_with_one_property_transforms_into_value_object_with_one_property");
+BOOST_AUTO_TEST_CASE(uml_class_with_one_attribute_transforms_into_value_object_with_one_attribute) {
+    SETUP_TEST_LOG_SOURCE("uml_class_with_one_attribute_transforms_into_value_object_with_one_attribute");
 
     auto c(mock_context());
-    const auto po(mock_processed_object_factory::make_class_with_property());
+    const auto po(mock_processed_object_factory::make_class_with_attribute());
     transform(c, {po});
 
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
@@ -994,9 +994,9 @@ BOOST_AUTO_TEST_CASE(uml_class_with_one_property_transforms_into_value_object_wi
         model_name);
     BOOST_CHECK(is_type_zero(o.name()));
     BOOST_CHECK(!o.documentation().empty());
-    BOOST_REQUIRE(o.local_properties().size() == 1);
-    BOOST_CHECK(is_type_zero(o.local_properties().front().name()));
-    BOOST_CHECK(!o.local_properties().front().documentation().empty());
+    BOOST_REQUIRE(o.local_attributes().size() == 1);
+    BOOST_CHECK(is_type_zero(o.local_attributes().front().name()));
+    BOOST_CHECK(!o.local_attributes().front().documentation().empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

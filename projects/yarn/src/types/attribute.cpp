@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/property.hpp"
+#include "dogen/yarn/types/attribute.hpp"
 
 namespace dogen {
 namespace yarn {
 
-property::property()
+attribute::attribute()
     : is_immutable_(static_cast<bool>(0)),
       is_fluent_(static_cast<bool>(0)) { }
 
-property::property(
+attribute::attribute(
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const dogen::yarn::name& name,
@@ -43,7 +43,7 @@ property::property(
       is_immutable_(is_immutable),
       is_fluent_(is_fluent) { }
 
-void property::swap(property& other) noexcept {
+void attribute::swap(attribute& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
     swap(extensions_, other.extensions_);
@@ -54,7 +54,7 @@ void property::swap(property& other) noexcept {
     swap(is_fluent_, other.is_fluent_);
 }
 
-bool property::operator==(const property& rhs) const {
+bool attribute::operator==(const attribute& rhs) const {
     return documentation_ == rhs.documentation_ &&
         extensions_ == rhs.extensions_ &&
         name_ == rhs.name_ &&
@@ -64,105 +64,105 @@ bool property::operator==(const property& rhs) const {
         is_fluent_ == rhs.is_fluent_;
 }
 
-property& property::operator=(property other) {
+attribute& attribute::operator=(attribute other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& property::documentation() const {
+const std::string& attribute::documentation() const {
     return documentation_;
 }
 
-std::string& property::documentation() {
+std::string& attribute::documentation() {
     return documentation_;
 }
 
-void property::documentation(const std::string& v) {
+void attribute::documentation(const std::string& v) {
     documentation_ = v;
 }
 
-void property::documentation(const std::string&& v) {
+void attribute::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const dogen::dynamic::object& property::extensions() const {
+const dogen::dynamic::object& attribute::extensions() const {
     return extensions_;
 }
 
-dogen::dynamic::object& property::extensions() {
+dogen::dynamic::object& attribute::extensions() {
     return extensions_;
 }
 
-void property::extensions(const dogen::dynamic::object& v) {
+void attribute::extensions(const dogen::dynamic::object& v) {
     extensions_ = v;
 }
 
-void property::extensions(const dogen::dynamic::object&& v) {
+void attribute::extensions(const dogen::dynamic::object&& v) {
     extensions_ = std::move(v);
 }
 
-const dogen::yarn::name& property::name() const {
+const dogen::yarn::name& attribute::name() const {
     return name_;
 }
 
-dogen::yarn::name& property::name() {
+dogen::yarn::name& attribute::name() {
     return name_;
 }
 
-void property::name(const dogen::yarn::name& v) {
+void attribute::name(const dogen::yarn::name& v) {
     name_ = v;
 }
 
-void property::name(const dogen::yarn::name&& v) {
+void attribute::name(const dogen::yarn::name&& v) {
     name_ = std::move(v);
 }
 
-const std::string& property::unparsed_type() const {
+const std::string& attribute::unparsed_type() const {
     return unparsed_type_;
 }
 
-std::string& property::unparsed_type() {
+std::string& attribute::unparsed_type() {
     return unparsed_type_;
 }
 
-void property::unparsed_type(const std::string& v) {
+void attribute::unparsed_type(const std::string& v) {
     unparsed_type_ = v;
 }
 
-void property::unparsed_type(const std::string&& v) {
+void attribute::unparsed_type(const std::string&& v) {
     unparsed_type_ = std::move(v);
 }
 
-const dogen::yarn::name_tree& property::parsed_type() const {
+const dogen::yarn::name_tree& attribute::parsed_type() const {
     return parsed_type_;
 }
 
-dogen::yarn::name_tree& property::parsed_type() {
+dogen::yarn::name_tree& attribute::parsed_type() {
     return parsed_type_;
 }
 
-void property::parsed_type(const dogen::yarn::name_tree& v) {
+void attribute::parsed_type(const dogen::yarn::name_tree& v) {
     parsed_type_ = v;
 }
 
-void property::parsed_type(const dogen::yarn::name_tree&& v) {
+void attribute::parsed_type(const dogen::yarn::name_tree&& v) {
     parsed_type_ = std::move(v);
 }
 
-bool property::is_immutable() const {
+bool attribute::is_immutable() const {
     return is_immutable_;
 }
 
-void property::is_immutable(const bool v) {
+void attribute::is_immutable(const bool v) {
     is_immutable_ = v;
 }
 
-bool property::is_fluent() const {
+bool attribute::is_fluent() const {
     return is_fluent_;
 }
 
-void property::is_fluent(const bool v) {
+void attribute::is_fluent(const bool v) {
     is_fluent_ = v;
 }
 

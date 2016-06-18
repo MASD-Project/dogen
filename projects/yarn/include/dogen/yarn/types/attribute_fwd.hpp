@@ -18,31 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn.dia/hash/processed_comment_hash.hpp"
-#include "dogen/yarn.dia/hash/processed_property_hash.hpp"
+#ifndef DOGEN_YARN_TYPES_ATTRIBUTE_FWD_HPP
+#define DOGEN_YARN_TYPES_ATTRIBUTE_FWD_HPP
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace yarn {
-namespace dia {
 
-std::size_t processed_property_hasher::hash(const processed_property& v) {
-    std::size_t seed(0);
+class attribute;
 
-    combine(seed, v.name());
-    combine(seed, v.type());
-    combine(seed, v.comment());
+} }
 
-    return seed;
-}
-
-} } }
+#endif
