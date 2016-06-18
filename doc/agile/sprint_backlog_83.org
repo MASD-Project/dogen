@@ -12,20 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-18 Sat 02:42]
+#+CAPTION: Clock summary at [2016-06-18 Sat 08:46]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *6:18* |      |      | 100.0 |
+| *Total time*                                                                | *6:51* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 6:18   |      |      | 100.0 |
-| Active                                                                      |        | 6:18 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:18 |  20.6 |
-| COMPLETED Refactor helper settings                                          |        |      | 0:35 |   9.3 |
-| COMPLETED Add properties for helpers                                        |        |      | 1:35 |  25.1 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |        |      | 1:23 |  22.0 |
-| COMPLETED Rename formattables to properties                                 |        |      | 0:50 |  13.2 |
-| COMPLETED Rename helper instances                                           |        |      | 0:37 |   9.8 |
+| Stories                                                                     | 6:51   |      |      | 100.0 |
+| Active                                                                      |        | 6:51 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:18 |  19.0 |
+| COMPLETED Refactor helper settings                                          |        |      | 0:35 |   8.5 |
+| COMPLETED Add properties for helpers                                        |        |      | 1:35 |  23.1 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |        |      | 1:23 |  20.2 |
+| COMPLETED Rename formattables to properties                                 |        |      | 0:50 |  12.2 |
+| COMPLETED Rename helper instances                                           |        |      | 0:37 |   9.0 |
+| STARTED Compute yarn property related information                           |        |      | 0:33 |   8.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -153,6 +154,44 @@ should rename formattables to properties.
 - rename helper instances etc to helper properties
 - rename helper properties etc to helper descriptor
 
+*** STARTED Compute yarn property related information                 :story:
+    CLOCK: [2016-06-18 Sat 08:13]--[2016-06-18 Sat 08:46] =>  0:33
+
+Now that we no longer have nested type infos, we need to recompute the
+complete names etc for all properties up front and store them in a
+repository. This information is almost identical to that of the
+helpers but its not easy to share it. For now we should just brute
+force it and then look for patterns.
+
+By brute-force it we mean recompute it every time we need to use
+it. Or alternatively we could just add these directly to the name
+tree. After all they are (or should be) applicable to all languages.
+
+- add the three properties to name tree;
+- add logic to compute them into yarn;
+- change helpers to reuse this.
+
+Actually the qualified name is language specific. Having said that,
+its such a minimal thing that we could conceivably add it to yarn: we
+could have a language specific representation on a a container.
+
+- add enumeration for language as per language agnostic story
+  (backlog);
+- add language specific containers for qualified name.
+
+*** Support only specific attributes for certain facets               :story:
+
+Whenever an object has a unique identifier, it may make sense to make
+use of it for:
+
+- hashing
+- equality
+- less than
+
+And so forth. For example, names and name trees don't really require
+comparing the entire state of the object. We need a way to mark
+properties against each facet in the meta-data.
+
 *** Remove redundancy in properties' repositories                     :story:
 
 At present we have attributes in repositories such as:
@@ -179,22 +218,6 @@ This type should be called =element_properties=.
   properties (well pair of element properties and formattables - for
   now).
 - have a look at the context type in formatters.
-
-*** Compute yarn property related information                         :story:
-
-Now that we no longer have nested type infos, we need to recompute the
-complete names etc for all properties up front and store them in a
-repository. This information is almost identical to that of the
-helpers but its not easy to share it. For now we should just brute
-force it and then look for patterns.
-
-By brute-force it we mean recompute it every time we need to use
-it. Or alternatively we could just add these directly to the name
-tree. After all they are (or should be) applicable to all languages.
-
-- add the three properties to name tree;
-- add logic to compute them into yarn;
-- change helpers to reuse this.
 
 *** Add an helper method interface                                    :story:
 
