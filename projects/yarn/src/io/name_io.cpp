@@ -57,9 +57,9 @@ std::ostream& operator<<(std::ostream& s, const name& v) {
       << "\"__type__\": " << "\"dogen::yarn::name\"" << ", "
       << "\"simple\": " << "\"" << tidy_up_string(v.simple()) << "\"" << ", "
       << "\"qualified\": " << "\"" << tidy_up_string(v.qualified()) << "\"" << ", "
+      << "\"qualified_for\": " << v.qualified_for() << ", "
       << "\"identifiable\": " << "\"" << tidy_up_string(v.identifiable()) << "\"" << ", "
-      << "\"location\": " << v.location() << ", "
-      << "\"qualified_for\": " << v.qualified_for()
+      << "\"location\": " << v.location()
       << " }";
     return(s);
 }

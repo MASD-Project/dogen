@@ -31,11 +31,6 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::yarn::location
-create_dogen_yarn_location(const unsigned int position) {
-    return dogen::yarn::location_generator::create(position);
-}
-
 dogen::yarn::language
 create_dogen_yarn_language(const unsigned int position) {
     return dogen::yarn::language_generator::create(position);
@@ -49,6 +44,11 @@ std::map<dogen::yarn::language, std::string> create_std_map_dogen_yarn_language_
     return r;
 }
 
+dogen::yarn::location
+create_dogen_yarn_location(const unsigned int position) {
+    return dogen::yarn::location_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -60,9 +60,9 @@ void name_generator::
 populate(const unsigned int position, result_type& v) {
     v.simple(create_std_string(position + 0));
     v.qualified(create_std_string(position + 1));
-    v.identifiable(create_std_string(position + 2));
-    v.location(create_dogen_yarn_location(position + 3));
-    v.qualified_for(create_std_map_dogen_yarn_language_std_string(position + 4));
+    v.qualified_for(create_std_map_dogen_yarn_language_std_string(position + 2));
+    v.identifiable(create_std_string(position + 3));
+    v.location(create_dogen_yarn_location(position + 4));
 }
 
 name_generator::result_type

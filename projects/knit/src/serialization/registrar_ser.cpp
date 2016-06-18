@@ -35,9 +35,9 @@ namespace knit {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    dogen::quilt::cpp::register_types(ar);
-    dogen::yarn::register_types(ar);
     dogen::config::register_types(ar);
+    dogen::yarn::register_types(ar);
+    dogen::quilt::cpp::register_types(ar);
 }
 
 template void register_types(boost::archive::polymorphic_oarchive& ar);

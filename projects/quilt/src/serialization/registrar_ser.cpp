@@ -36,10 +36,10 @@ namespace quilt {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    dogen::dynamic::register_types(ar);
-    dogen::formatters::register_types(ar);
-    dogen::yarn::register_types(ar);
     dogen::config::register_types(ar);
+    dogen::formatters::register_types(ar);
+    dogen::dynamic::register_types(ar);
+    dogen::yarn::register_types(ar);
 }
 
 template void register_types(boost::archive::polymorphic_oarchive& ar);

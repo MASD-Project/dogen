@@ -5,9 +5,13 @@
 	<name class_id="11" tracking_level="0" version="0">
 		<simple>class_without_package</simple>
 		<qualified>&lt;class_without_package&gt;</qualified>
+		<qualified_for class_id="12" tracking_level="0" version="0">
+			<count>0</count>
+			<item_version>0</item_version>
+		</qualified_for>
 		<identifiable></identifiable>
-		<location class_id="12" tracking_level="0" version="0">
-			<external_modules class_id="13" tracking_level="0" version="0">
+		<location class_id="13" tracking_level="0" version="0">
+			<external_modules class_id="14" tracking_level="0" version="0">
 				<count>0</count>
 				<item_version>0</item_version>
 			</external_modules>
@@ -22,10 +26,6 @@
 			</internal_modules>
 			<element></element>
 		</location>
-		<qualified_for class_id="14" tracking_level="0" version="0">
-			<count>0</count>
-			<item_version>0</item_version>
-		</qualified_for>
 	</name>
 	<origin_type>1</origin_type>
 	<original_model_name>class_without_package</original_model_name>
@@ -92,6 +92,10 @@
 					<name>
 						<simple>class_without_package</simple>
 						<qualified>&lt;class_without_package&gt;</qualified>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 						<identifiable></identifiable>
 						<location>
 							<external_modules>
@@ -109,10 +113,6 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<qualified_for>
-							<count>0</count>
-							<item_version>0</item_version>
-						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -163,6 +163,10 @@
 					<name>
 						<simple>class_1</simple>
 						<qualified>&lt;class_without_package&gt;&lt;class_1&gt;</qualified>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 						<identifiable></identifiable>
 						<location>
 							<external_modules>
@@ -180,10 +184,6 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<qualified_for>
-							<count>0</count>
-							<item_version>0</item_version>
-						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -212,6 +212,10 @@
 						<name>
 							<simple>an_attribute</simple>
 							<qualified>&lt;class_without_package&gt;&lt;class_1&gt;&lt;an_attribute&gt;</qualified>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -229,16 +233,16 @@
 								</internal_modules>
 								<element>class_1</element>
 							</location>
-							<qualified_for>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified_for>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type class_id="35" tracking_level="0" version="0">
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -255,10 +259,6 @@
 									</internal_modules>
 									<element></element>
 								</location>
-								<qualified_for>
-									<count>0</count>
-									<item_version>0</item_version>
-								</qualified_for>
 							</parent>
 							<children class_id="36" tracking_level="0" version="0">
 								<count>0</count>

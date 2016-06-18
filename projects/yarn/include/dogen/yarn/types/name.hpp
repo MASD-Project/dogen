@@ -62,9 +62,9 @@ public:
     name(
         const std::string& simple,
         const std::string& qualified,
+        const std::map<dogen::yarn::language, std::string>& qualified_for,
         const std::string& identifiable,
-        const dogen::yarn::location& location,
-        const std::map<dogen::yarn::language, std::string>& qualified_for);
+        const dogen::yarn::location& location);
 
 private:
     template<typename Archive>
@@ -103,6 +103,16 @@ public:
     /**@}*/
 
     /**
+     * @brief Qualified name in a language specific representation.
+     */
+    /**@{*/
+    const std::map<dogen::yarn::language, std::string>& qualified_for() const;
+    std::map<dogen::yarn::language, std::string>& qualified_for();
+    void qualified_for(const std::map<dogen::yarn::language, std::string>& v);
+    void qualified_for(const std::map<dogen::yarn::language, std::string>&& v);
+    /**@}*/
+
+    /**
      * @brief Representation of the name that can usable as an identifier on all of the supported
      * languages, using the entire name structure.
      */
@@ -123,16 +133,6 @@ public:
     void location(const dogen::yarn::location&& v);
     /**@}*/
 
-    /**
-     * @brief Qualified name in a language specific representation.
-     */
-    /**@{*/
-    const std::map<dogen::yarn::language, std::string>& qualified_for() const;
-    std::map<dogen::yarn::language, std::string>& qualified_for();
-    void qualified_for(const std::map<dogen::yarn::language, std::string>& v);
-    void qualified_for(const std::map<dogen::yarn::language, std::string>&& v);
-    /**@}*/
-
 public:
     bool operator==(const name& rhs) const;
     bool operator!=(const name& rhs) const {
@@ -146,9 +146,9 @@ public:
 private:
     std::string simple_;
     std::string qualified_;
+    std::map<dogen::yarn::language, std::string> qualified_for_;
     std::string identifiable_;
     dogen::yarn::location location_;
-    std::map<dogen::yarn::language, std::string> qualified_for_;
 };
 
 } }

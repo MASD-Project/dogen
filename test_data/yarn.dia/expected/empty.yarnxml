@@ -5,9 +5,13 @@
 	<name class_id="11" tracking_level="0" version="0">
 		<simple>empty</simple>
 		<qualified>&lt;empty&gt;</qualified>
+		<qualified_for class_id="12" tracking_level="0" version="0">
+			<count>0</count>
+			<item_version>0</item_version>
+		</qualified_for>
 		<identifiable></identifiable>
-		<location class_id="12" tracking_level="0" version="0">
-			<external_modules class_id="13" tracking_level="0" version="0">
+		<location class_id="13" tracking_level="0" version="0">
+			<external_modules class_id="14" tracking_level="0" version="0">
 				<count>0</count>
 				<item_version>0</item_version>
 			</external_modules>
@@ -22,10 +26,6 @@
 			</internal_modules>
 			<element></element>
 		</location>
-		<qualified_for class_id="14" tracking_level="0" version="0">
-			<count>0</count>
-			<item_version>0</item_version>
-		</qualified_for>
 	</name>
 	<origin_type>1</origin_type>
 	<original_model_name>empty</original_model_name>
@@ -59,6 +59,10 @@
 					<name>
 						<simple>empty</simple>
 						<qualified>&lt;empty&gt;</qualified>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 						<identifiable></identifiable>
 						<location>
 							<external_modules>
@@ -76,10 +80,6 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<qualified_for>
-							<count>0</count>
-							<item_version>0</item_version>
-						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>

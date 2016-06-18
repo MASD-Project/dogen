@@ -12,21 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-18 Sat 22:51]
+#+CAPTION: Clock summary at [2016-06-18 Sat 23:10]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *7:37* |      |      | 100.0 |
+| *Total time*                                                                | *7:54* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 7:37   |      |      | 100.0 |
-| Active                                                                      |        | 7:37 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:18 |  17.1 |
-| COMPLETED Refactor helper settings                                          |        |      | 0:35 |   7.7 |
-| COMPLETED Add properties for helpers                                        |        |      | 1:35 |  20.8 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |        |      | 1:23 |  18.2 |
-| COMPLETED Rename formattables to properties                                 |        |      | 0:50 |  10.9 |
-| COMPLETED Rename helper instances                                           |        |      | 0:37 |   8.1 |
-| STARTED Compute yarn property related information                           |        |      | 1:19 |  17.3 |
+| Stories                                                                     | 7:54   |      |      | 100.0 |
+| Active                                                                      |        | 7:54 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:18 |  16.5 |
+| COMPLETED Refactor helper settings                                          |        |      | 0:35 |   7.4 |
+| COMPLETED Add properties for helpers                                        |        |      | 1:35 |  20.0 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |        |      | 1:23 |  17.5 |
+| COMPLETED Rename formattables to properties                                 |        |      | 0:50 |  10.5 |
+| COMPLETED Rename helper instances                                           |        |      | 0:37 |   7.8 |
+| STARTED Compute yarn property related information                           |        |      | 1:36 |  20.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -155,6 +155,8 @@ should rename formattables to properties.
 - rename helper properties etc to helper descriptor
 
 *** STARTED Compute yarn property related information                 :story:
+    CLOCK: [2016-06-18 Sat 23:05]--[2016-06-18 Sat 23:10] =>  0:05
+    CLOCK: [2016-06-18 Sat 22:52]--[2016-06-18 Sat 23:04] =>  0:12
     CLOCK: [2016-06-18 Sat 22:05]--[2016-06-18 Sat 22:51] =>  0:46
     CLOCK: [2016-06-18 Sat 08:13]--[2016-06-18 Sat 08:46] =>  0:33
 
@@ -180,38 +182,15 @@ could have a language specific representation on a a container.
   (backlog);
 - add language specific containers for qualified name.
 
-*** Registrar in serialisation is not stable sorted                   :story:
+We need to update the name pretty printer to take on responsibilities
+from the name builder in quilt:
 
-We seem to have a traffic light diff on =registrar_ser.cpp=:
-
-: -    dogen::config::register_types(ar);
-:      dogen::quilt::cpp::register_types(ar);
-:      dogen::yarn::register_types(ar);
-: +    dogen::config::register_types(ar);
-
-This is probably a lack of a stable sort in model dependencies.
-
-*** Support only specific attributes for certain facets               :story:
-
-Whenever an object has a unique identifier, it may make sense to make
-use of it for:
-
-- hashing
-- equality
-- less than
-
-And so forth. For example, names and name trees don't really require
-comparing the entire state of the object. We need a way to mark
-properties against each facet in the meta-data.
-
-*** Remove redundancy in properties' repositories                     :story:
-
-At present we have attributes in repositories such as:
-
-: path_derivatives_by_name
-
-Since we are in =path_derivatives_repository=, perhaps we could call
-the attribute simply =by_name=.
+- add a printing style for scoped with dot and scoped with =::=
+- add support for name trees - and so rename it to just pretty
+  printer? We can then have a print name and a print name tree.
+- the name builder can then be responsible for programming language
+  specific logic and calls to the pretty printer to populate the new
+  properties.
 
 *** Rename =name_tree='s parent                                       :story:
 
@@ -301,6 +280,15 @@ code. We can remove all previous helper support.
 *** Create a settings class for the "requires" settings               :story:
 
 We need to populate these in a settings workflow of some kind.
+
+*** Remove redundancy in properties' repositories                     :story:
+
+At present we have attributes in repositories such as:
+
+: path_derivatives_by_name
+
+Since we are in =path_derivatives_repository=, perhaps we could call
+the attribute simply =by_name=.
 
 *** Implement formattables in terms of yarn types                     :epic:
 
@@ -403,5 +391,29 @@ able to "inject" these dependencies from a JSON file associated with
 the formatter. We could supply the qualified name and the properties
 to inject. This problem can be solved later on - create a separate
 story for this.
+
+*** Registrar in serialisation is not stable sorted                   :story:
+
+We seem to have a traffic light diff on =registrar_ser.cpp=:
+
+: -    dogen::config::register_types(ar);
+:      dogen::quilt::cpp::register_types(ar);
+:      dogen::yarn::register_types(ar);
+: +    dogen::config::register_types(ar);
+
+This is probably a lack of a stable sort in model dependencies.
+
+*** Support only specific attributes for certain facets               :story:
+
+Whenever an object has a unique identifier, it may make sense to make
+use of it for:
+
+- hashing
+- equality
+- less than
+
+And so forth. For example, names and name trees don't really require
+comparing the entire state of the object. We need a way to mark
+properties against each facet in the meta-data.
 
 ** Deprecated
