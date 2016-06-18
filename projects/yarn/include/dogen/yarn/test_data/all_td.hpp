@@ -33,6 +33,7 @@
 #include "dogen/yarn/test_data/concept_td.hpp"
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/visitor_td.hpp"
+#include "dogen/yarn/test_data/language_td.hpp"
 #include "dogen/yarn/test_data/location_td.hpp"
 #include "dogen/yarn/test_data/attribute_td.hpp"
 #include "dogen/yarn/test_data/exception_td.hpp"

@@ -22,6 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/io/language_io.hpp"
 #include "dogen/yarn/io/name_tree_io.hpp"
 
 namespace std {
@@ -45,6 +46,24 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::map<dogen::yarn::language, std::string>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->second) << "\"";
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace yarn {
 
@@ -61,7 +80,9 @@ std::ostream& operator<<(std::ostream& s, const name_tree& v) {
       << "\"children\": " << v.children() << ", "
       << "\"are_children_opaque\": " << v.are_children_opaque() << ", "
       << "\"is_circular_dependency\": " << v.is_circular_dependency() << ", "
-      << "\"unparsed_type\": " << "\"" << tidy_up_string(v.unparsed_type()) << "\""
+      << "\"unparsed_type\": " << "\"" << tidy_up_string(v.unparsed_type()) << "\"" << ", "
+      << "\"qualified_for\": " << v.qualified_for() << ", "
+      << "\"identifiable\": " << "\"" << tidy_up_string(v.identifiable()) << "\""
       << " }";
     return(s);
 }

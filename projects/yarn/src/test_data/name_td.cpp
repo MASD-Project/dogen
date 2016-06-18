@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include "dogen/yarn/test_data/name_td.hpp"
+#include "dogen/yarn/test_data/language_td.hpp"
 #include "dogen/yarn/test_data/location_td.hpp"
 
 namespace {
@@ -35,6 +36,19 @@ create_dogen_yarn_location(const unsigned int position) {
     return dogen::yarn::location_generator::create(position);
 }
 
+dogen::yarn::language
+create_dogen_yarn_language(const unsigned int position) {
+    return dogen::yarn::language_generator::create(position);
+}
+
+std::map<dogen::yarn::language, std::string> create_std_map_dogen_yarn_language_std_string(unsigned int position) {
+    std::map<dogen::yarn::language, std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_dogen_yarn_language(position + i), create_std_string(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -46,7 +60,9 @@ void name_generator::
 populate(const unsigned int position, result_type& v) {
     v.simple(create_std_string(position + 0));
     v.qualified(create_std_string(position + 1));
-    v.location(create_dogen_yarn_location(position + 2));
+    v.identifiable(create_std_string(position + 2));
+    v.location(create_dogen_yarn_location(position + 3));
+    v.qualified_for(create_std_map_dogen_yarn_language_std_string(position + 4));
 }
 
 name_generator::result_type

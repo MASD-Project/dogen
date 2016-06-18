@@ -27,7 +27,10 @@
 
 #include <string>
 #include <algorithm>
+#include <map>
+#include "dogen/yarn/types/language.hpp"
 #include "dogen/yarn/types/location.hpp"
+#include "dogen/yarn/hash/language_hash.hpp"
 #include "dogen/yarn/serialization/name_fwd_ser.hpp"
 
 namespace dogen {
@@ -59,7 +62,9 @@ public:
     name(
         const std::string& simple,
         const std::string& qualified,
-        const dogen::yarn::location& location);
+        const std::string& identifiable,
+        const dogen::yarn::location& location,
+        const std::map<dogen::yarn::language, std::string>& qualified_for);
 
 private:
     template<typename Archive>
@@ -98,6 +103,17 @@ public:
     /**@}*/
 
     /**
+     * @brief Representation of the name that can usable as an identifier on all of the supported
+     * languages, using the entire name structure.
+     */
+    /**@{*/
+    const std::string& identifiable() const;
+    std::string& identifiable();
+    void identifiable(const std::string& v);
+    void identifiable(const std::string&& v);
+    /**@}*/
+
+    /**
      * @brief Where the name is located in element space.
      */
     /**@{*/
@@ -105,6 +121,16 @@ public:
     dogen::yarn::location& location();
     void location(const dogen::yarn::location& v);
     void location(const dogen::yarn::location&& v);
+    /**@}*/
+
+    /**
+     * @brief Qualified name in a language specific representation.
+     */
+    /**@{*/
+    const std::map<dogen::yarn::language, std::string>& qualified_for() const;
+    std::map<dogen::yarn::language, std::string>& qualified_for();
+    void qualified_for(const std::map<dogen::yarn::language, std::string>& v);
+    void qualified_for(const std::map<dogen::yarn::language, std::string>&& v);
     /**@}*/
 
 public:
@@ -120,7 +146,9 @@ public:
 private:
     std::string simple_;
     std::string qualified_;
+    std::string identifiable_;
     dogen::yarn::location location_;
+    std::map<dogen::yarn::language, std::string> qualified_for_;
 };
 
 } }

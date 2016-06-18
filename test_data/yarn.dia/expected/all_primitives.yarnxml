@@ -5,6 +5,7 @@
 	<name class_id="11" tracking_level="0" version="0">
 		<simple>all_primitives</simple>
 		<qualified>&lt;all_primitives&gt;</qualified>
+		<identifiable></identifiable>
 		<location class_id="12" tracking_level="0" version="0">
 			<external_modules class_id="13" tracking_level="0" version="0">
 				<count>0</count>
@@ -21,40 +22,44 @@
 			</internal_modules>
 			<element></element>
 		</location>
+		<qualified_for class_id="14" tracking_level="0" version="0">
+			<count>0</count>
+			<item_version>0</item_version>
+		</qualified_for>
 	</name>
 	<origin_type>1</origin_type>
 	<original_model_name>all_primitives</original_model_name>
 	<generation_type>0</generation_type>
-	<references class_id="14" tracking_level="0" version="0">
+	<references class_id="15" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</references>
-	<leaves class_id="15" tracking_level="0" version="0">
+	<leaves class_id="16" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
-	<modules class_id="16" tracking_level="0" version="0">
+	<modules class_id="17" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>2</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="17" tracking_level="0" version="0">
+		<item class_id="18" tracking_level="0" version="0">
 			<first>&lt;all_primitives&gt;</first>
 			<second class_id="6" tracking_level="1" version="0" object_id="_0">
-				<element class_id="18" tracking_level="0" version="0">
+				<element class_id="19" tracking_level="0" version="0">
 					<documentation></documentation>
-					<extensions class_id="19" tracking_level="0" version="0">
-						<fields class_id="20" tracking_level="0" version="0">
+					<extensions class_id="20" tracking_level="0" version="0">
+						<fields class_id="21" tracking_level="0" version="0">
 							<count>3</count>
 							<bucket_count>5</bucket_count>
 							<item_version>0</item_version>
-							<item class_id="21" tracking_level="0" version="0">
+							<item class_id="22" tracking_level="0" version="0">
 								<first>yarn.dia.comment</first>
-								<second class_id="22" tracking_level="0" version="0">
-									<value class_id="23" tracking_level="0" version="1">
+								<second class_id="23" tracking_level="0" version="0">
+									<value class_id="24" tracking_level="0" version="1">
 										<px class_id="1" tracking_level="1" version="0" object_id="_1">
-											<value class_id="24" tracking_level="0" version="0"></value>
+											<value class_id="25" tracking_level="0" version="0"></value>
 											<content>true</content>
 										</px>
 									</value>
@@ -87,6 +92,7 @@
 					<name>
 						<simple>all_primitives</simple>
 						<qualified>&lt;all_primitives&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -103,42 +109,46 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<original_model_name></original_model_name>
-					<contained_by class_id="25" tracking_level="0" version="0">
+					<contained_by class_id="26" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<members class_id="26" tracking_level="0" version="0">
+				<members class_id="27" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="27" tracking_level="0" version="0">
+	<concepts class_id="28" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="28" tracking_level="0" version="0">
+	<primitives class_id="29" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="29" tracking_level="0" version="0">
+	<enumerations class_id="30" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="30" tracking_level="0" version="0">
+	<objects class_id="31" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>2</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="31" tracking_level="0" version="0">
+		<item class_id="32" tracking_level="0" version="0">
 			<first>&lt;all_primitives&gt;&lt;a_class&gt;</first>
 			<second class_id="7" tracking_level="1" version="0" object_id="_4">
 				<element>
@@ -153,6 +163,7 @@
 					<name>
 						<simple>a_class</simple>
 						<qualified>&lt;all_primitives&gt;&lt;a_class&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -169,6 +180,10 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -178,14 +193,14 @@
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_attributes class_id="32" tracking_level="0" version="0">
+				<all_attributes class_id="33" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_attributes>
 				<local_attributes>
 					<count>13</count>
 					<item_version>0</item_version>
-					<item class_id="33" tracking_level="0" version="0">
+					<item class_id="34" tracking_level="0" version="0">
 						<documentation></documentation>
 						<extensions>
 							<fields>
@@ -197,6 +212,7 @@
 						<name>
 							<simple>bool_property</simple>
 							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;bool_property&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -213,12 +229,17 @@
 								</internal_modules>
 								<element>a_class</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>bool</unparsed_type>
-						<parsed_type class_id="34" tracking_level="0" version="0">
+						<parsed_type class_id="35" tracking_level="0" version="0">
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -234,14 +255,23 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
-							<children class_id="35" tracking_level="0" version="0">
+							<children class_id="36" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -258,6 +288,7 @@
 						<name>
 							<simple>char_property</simple>
 							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;char_property&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -274,12 +305,17 @@
 								</internal_modules>
 								<element>a_class</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>char</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -295,6 +331,10 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -303,6 +343,11 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -319,6 +364,7 @@
 						<name>
 							<simple>uchar_property</simple>
 							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;uchar_property&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -335,12 +381,17 @@
 								</internal_modules>
 								<element>a_class</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>unsigned char</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -356,6 +407,10 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -364,6 +419,11 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -380,6 +440,7 @@
 						<name>
 							<simple>int_property</simple>
 							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;int_property&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -396,12 +457,17 @@
 								</internal_modules>
 								<element>a_class</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -417,6 +483,10 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -425,6 +495,11 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -441,6 +516,7 @@
 						<name>
 							<simple>uint_property</simple>
 							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;uint_property&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -457,12 +533,17 @@
 								</internal_modules>
 								<element>a_class</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>unsigned int</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -478,6 +559,10 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -486,6 +571,11 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -502,6 +592,7 @@
 						<name>
 							<simple>long_property</simple>
 							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;long_property&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -518,12 +609,17 @@
 								</internal_modules>
 								<element>a_class</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>long</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -539,6 +635,10 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -547,6 +647,11 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -563,6 +668,7 @@
 						<name>
 							<simple>ulong_property</simple>
 							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;ulong_property&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -579,12 +685,17 @@
 								</internal_modules>
 								<element>a_class</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>unsigned long</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -600,6 +711,10 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -608,6 +723,11 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -624,6 +744,7 @@
 						<name>
 							<simple>long_long_property</simple>
 							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;long_long_property&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -640,12 +761,17 @@
 								</internal_modules>
 								<element>a_class</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>long long</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -661,6 +787,10 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -669,6 +799,11 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -685,6 +820,7 @@
 						<name>
 							<simple>ulong_long_property</simple>
 							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;ulong_long_property&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -701,12 +837,17 @@
 								</internal_modules>
 								<element>a_class</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>unsigned long long</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -722,6 +863,10 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -730,6 +875,11 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -746,6 +896,7 @@
 						<name>
 							<simple>short_property</simple>
 							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;short_property&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -762,12 +913,17 @@
 								</internal_modules>
 								<element>a_class</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>short</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -783,6 +939,10 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -791,6 +951,11 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -807,6 +972,7 @@
 						<name>
 							<simple>ushort_property</simple>
 							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;ushort_property&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -823,12 +989,17 @@
 								</internal_modules>
 								<element>a_class</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>unsigned short</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -844,6 +1015,10 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -852,6 +1027,11 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -868,6 +1048,7 @@
 						<name>
 							<simple>double_property</simple>
 							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;double_property&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -884,12 +1065,17 @@
 								</internal_modules>
 								<element>a_class</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>double</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -905,6 +1091,10 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -913,6 +1103,11 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -929,6 +1124,7 @@
 						<name>
 							<simple>float_property</simple>
 							<qualified>&lt;all_primitives&gt;&lt;a_class&gt;&lt;float_property&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -945,12 +1141,17 @@
 								</internal_modules>
 								<element>a_class</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>float</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -966,6 +1167,10 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -974,12 +1179,17 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
 				</local_attributes>
-				<inherited_attributes class_id="36" tracking_level="0" version="0">
+				<inherited_attributes class_id="37" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -1028,12 +1238,12 @@
 			</second>
 		</item>
 	</objects>
-	<exceptions class_id="37" tracking_level="0" version="0">
+	<exceptions class_id="38" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<visitors class_id="38" tracking_level="0" version="0">
+	<visitors class_id="39" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>

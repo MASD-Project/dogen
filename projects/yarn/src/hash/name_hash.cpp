@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/yarn/hash/name_hash.hpp"
+#include "dogen/yarn/hash/language_hash.hpp"
 #include "dogen/yarn/hash/location_hash.hpp"
 
 namespace {
@@ -27,6 +28,15 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_map_dogen_yarn_language_std_string(const std::map<dogen::yarn::language, std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
 }
 
 }
@@ -39,7 +49,9 @@ std::size_t name_hasher::hash(const name& v) {
 
     combine(seed, v.simple());
     combine(seed, v.qualified());
+    combine(seed, v.identifiable());
     combine(seed, v.location());
+    combine(seed, hash_std_map_dogen_yarn_language_std_string(v.qualified_for()));
 
     return seed;
 }

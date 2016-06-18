@@ -37,6 +37,7 @@
 #include "dogen/yarn/types/visitor.hpp"
 #include "dogen/yarn/types/expander.hpp"
 #include "dogen/yarn/types/injector.hpp"
+#include "dogen/yarn/types/language.hpp"
 #include "dogen/yarn/types/location.hpp"
 #include "dogen/yarn/types/resolver.hpp"
 #include "dogen/yarn/types/workflow.hpp"

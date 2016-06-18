@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/serialization/map.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
@@ -29,6 +30,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
+#include "dogen/yarn/serialization/language_ser.hpp"
 #include "dogen/yarn/serialization/location_ser.hpp"
 
 namespace boost {
@@ -40,7 +42,9 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("simple", v.simple_);
     ar << make_nvp("qualified", v.qualified_);
+    ar << make_nvp("identifiable", v.identifiable_);
     ar << make_nvp("location", v.location_);
+    ar << make_nvp("qualified_for", v.qualified_for_);
 }
 
 template<typename Archive>
@@ -49,7 +53,9 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("simple", v.simple_);
     ar >> make_nvp("qualified", v.qualified_);
+    ar >> make_nvp("identifiable", v.identifiable_);
     ar >> make_nvp("location", v.location_);
+    ar >> make_nvp("qualified_for", v.qualified_for_);
 }
 
 } }

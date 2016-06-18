@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include "dogen/yarn/test_data/name_td.hpp"
+#include "dogen/yarn/test_data/language_td.hpp"
 #include "dogen/yarn/test_data/name_tree_td.hpp"
 
 namespace {
@@ -52,6 +53,19 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
+dogen::yarn::language
+create_dogen_yarn_language(const unsigned int position) {
+    return dogen::yarn::language_generator::create(position);
+}
+
+std::map<dogen::yarn::language, std::string> create_std_map_dogen_yarn_language_std_string(unsigned int position) {
+    std::map<dogen::yarn::language, std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_dogen_yarn_language(position + i), create_std_string(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -66,6 +80,8 @@ populate(const unsigned int position, result_type& v) {
     v.are_children_opaque(create_bool(position + 2));
     v.is_circular_dependency(create_bool(position + 3));
     v.unparsed_type(create_std_string(position + 4));
+    v.qualified_for(create_std_map_dogen_yarn_language_std_string(position + 5));
+    v.identifiable(create_std_string(position + 6));
 }
 
 name_tree_generator::result_type

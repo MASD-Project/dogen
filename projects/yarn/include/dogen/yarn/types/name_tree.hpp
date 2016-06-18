@@ -28,8 +28,11 @@
 #include <list>
 #include <string>
 #include <algorithm>
+#include <map>
 #include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/language.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/yarn/hash/language_hash.hpp"
 #include "dogen/yarn/serialization/name_tree_fwd_ser.hpp"
 
 namespace dogen {
@@ -58,7 +61,9 @@ public:
         const std::list<dogen::yarn::name_tree>& children,
         const bool are_children_opaque,
         const bool is_circular_dependency,
-        const std::string& unparsed_type);
+        const std::string& unparsed_type,
+        const std::map<dogen::yarn::language, std::string>& qualified_for,
+        const std::string& identifiable);
 
 private:
     template<typename Archive>
@@ -118,6 +123,27 @@ public:
     void unparsed_type(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Qualified representation of the name tree in a language specific representation.
+     */
+    /**@{*/
+    const std::map<dogen::yarn::language, std::string>& qualified_for() const;
+    std::map<dogen::yarn::language, std::string>& qualified_for();
+    void qualified_for(const std::map<dogen::yarn::language, std::string>& v);
+    void qualified_for(const std::map<dogen::yarn::language, std::string>&& v);
+    /**@}*/
+
+    /**
+     * @brief Representation of the named tree that can usable as an identifier on all of the
+     * supported languages, using the entire name tree.
+     */
+    /**@{*/
+    const std::string& identifiable() const;
+    std::string& identifiable();
+    void identifiable(const std::string& v);
+    void identifiable(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const name_tree& rhs) const;
     bool operator!=(const name_tree& rhs) const {
@@ -134,6 +160,8 @@ private:
     bool are_children_opaque_;
     bool is_circular_dependency_;
     std::string unparsed_type_;
+    std::map<dogen::yarn::language, std::string> qualified_for_;
+    std::string identifiable_;
 };
 
 } }

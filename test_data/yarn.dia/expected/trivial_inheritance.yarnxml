@@ -5,6 +5,7 @@
 	<name class_id="11" tracking_level="0" version="0">
 		<simple>trivial_inheritance</simple>
 		<qualified>&lt;trivial_inheritance&gt;</qualified>
+		<identifiable></identifiable>
 		<location class_id="12" tracking_level="0" version="0">
 			<external_modules class_id="13" tracking_level="0" version="0">
 				<count>0</count>
@@ -21,31 +22,35 @@
 			</internal_modules>
 			<element></element>
 		</location>
+		<qualified_for class_id="14" tracking_level="0" version="0">
+			<count>0</count>
+			<item_version>0</item_version>
+		</qualified_for>
 	</name>
 	<origin_type>1</origin_type>
 	<original_model_name>trivial_inheritance</original_model_name>
 	<generation_type>0</generation_type>
-	<references class_id="14" tracking_level="0" version="0">
+	<references class_id="15" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</references>
-	<leaves class_id="15" tracking_level="0" version="0">
+	<leaves class_id="16" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
-	<modules class_id="16" tracking_level="0" version="0">
+	<modules class_id="17" tracking_level="0" version="0">
 		<count>5</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="17" tracking_level="0" version="0">
+		<item class_id="18" tracking_level="0" version="0">
 			<first>&lt;trivial_inheritance&gt;&lt;pkg4&gt;</first>
 			<second class_id="6" tracking_level="1" version="0" object_id="_0">
-				<element class_id="18" tracking_level="0" version="0">
+				<element class_id="19" tracking_level="0" version="0">
 					<documentation></documentation>
-					<extensions class_id="19" tracking_level="0" version="0">
-						<fields class_id="20" tracking_level="0" version="0">
+					<extensions class_id="20" tracking_level="0" version="0">
+						<fields class_id="21" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
@@ -54,6 +59,7 @@
 					<name>
 						<simple>pkg4</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;pkg4&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -70,16 +76,20 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<original_model_name></original_model_name>
-					<contained_by class_id="21" tracking_level="0" version="0">
+					<contained_by class_id="22" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<members class_id="22" tracking_level="0" version="0">
+				<members class_id="23" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
@@ -100,12 +110,12 @@ in the context of inheritance.
 							<count>3</count>
 							<bucket_count>5</bucket_count>
 							<item_version>0</item_version>
-							<item class_id="23" tracking_level="0" version="0">
+							<item class_id="24" tracking_level="0" version="0">
 								<first>yarn.dia.comment</first>
-								<second class_id="24" tracking_level="0" version="0">
-									<value class_id="25" tracking_level="0" version="1">
+								<second class_id="25" tracking_level="0" version="0">
+									<value class_id="26" tracking_level="0" version="1">
 										<px class_id="1" tracking_level="1" version="0" object_id="_2">
-											<value class_id="26" tracking_level="0" version="0"></value>
+											<value class_id="27" tracking_level="0" version="0"></value>
 											<content>true</content>
 										</px>
 									</value>
@@ -138,6 +148,7 @@ in the context of inheritance.
 					<name>
 						<simple>trivial_inheritance</simple>
 						<qualified>&lt;trivial_inheritance&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -154,6 +165,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -184,6 +199,7 @@ in the context of inheritance.
 					<name>
 						<simple>pkg2</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;pkg2&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -200,6 +216,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -230,6 +250,7 @@ in the context of inheritance.
 					<name>
 						<simple>pkg1</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;pkg1&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -246,6 +267,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -276,6 +301,7 @@ in the context of inheritance.
 					<name>
 						<simple>pkg3</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;pkg3&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -292,6 +318,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -308,26 +338,26 @@ in the context of inheritance.
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="27" tracking_level="0" version="0">
+	<concepts class_id="28" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="28" tracking_level="0" version="0">
+	<primitives class_id="29" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="29" tracking_level="0" version="0">
+	<enumerations class_id="30" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="30" tracking_level="0" version="0">
+	<objects class_id="31" tracking_level="0" version="0">
 		<count>23</count>
 		<bucket_count>47</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="31" tracking_level="0" version="0">
+		<item class_id="32" tracking_level="0" version="0">
 			<first>&lt;trivial_inheritance&gt;&lt;move_ctor_empty_descendant&gt;</first>
 			<second class_id="7" tracking_level="1" version="0" object_id="_8">
 				<element>
@@ -343,6 +373,7 @@ in the context of inheritance.
 					<name>
 						<simple>move_ctor_empty_descendant</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;move_ctor_empty_descendant&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -359,6 +390,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -368,7 +403,7 @@ in the context of inheritance.
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_attributes class_id="32" tracking_level="0" version="0">
+				<all_attributes class_id="33" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_attributes>
@@ -376,7 +411,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</local_attributes>
-				<inherited_attributes class_id="33" tracking_level="0" version="0">
+				<inherited_attributes class_id="34" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -396,6 +431,7 @@ in the context of inheritance.
 					<item>
 						<simple>move_ctor_base</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -412,6 +448,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</item>
 				</parents>
 				<leaves>
@@ -459,6 +499,7 @@ in the context of inheritance.
 					<name>
 						<simple>child</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -476,6 +517,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -492,7 +537,7 @@ in the context of inheritance.
 				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
-					<item class_id="34" tracking_level="0" version="0">
+					<item class_id="35" tracking_level="0" version="0">
 						<documentation></documentation>
 						<extensions>
 							<fields>
@@ -504,6 +549,7 @@ in the context of inheritance.
 						<name>
 							<simple>prop_1</simple>
 							<qualified>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;child&gt;&lt;prop_1&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -521,12 +567,17 @@ in the context of inheritance.
 								</internal_modules>
 								<element>child</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>int</unparsed_type>
-						<parsed_type class_id="35" tracking_level="0" version="0">
+						<parsed_type class_id="36" tracking_level="0" version="0">
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -542,14 +593,23 @@ in the context of inheritance.
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
-							<children class_id="36" tracking_level="0" version="0">
+							<children class_id="37" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -575,6 +635,7 @@ in the context of inheritance.
 					<item>
 						<simple>parent</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;parent&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -592,6 +653,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</item>
 				</parents>
 				<leaves>
@@ -639,6 +704,7 @@ in the context of inheritance.
 					<name>
 						<simple>base</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;base&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -655,6 +721,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -735,6 +805,7 @@ in the context of inheritance.
 					<name>
 						<simple>parent</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;parent&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -752,6 +823,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -780,6 +855,7 @@ in the context of inheritance.
 						<name>
 							<simple>prop_0</simple>
 							<qualified>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;parent&gt;&lt;prop_0&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -797,12 +873,17 @@ in the context of inheritance.
 								</internal_modules>
 								<element>parent</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>unsigned int</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -818,6 +899,10 @@ in the context of inheritance.
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -826,6 +911,11 @@ in the context of inheritance.
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -895,6 +985,7 @@ in the context of inheritance.
 					<name>
 						<simple>move_ctor_base</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -911,6 +1002,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -940,6 +1035,7 @@ in the context of inheritance.
 						<name>
 							<simple>prop_0</simple>
 							<qualified>&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;&lt;prop_0&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -956,12 +1052,17 @@ in the context of inheritance.
 								</internal_modules>
 								<element>move_ctor_base</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>boost::filesystem::path</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -977,6 +1078,10 @@ in the context of inheritance.
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -985,6 +1090,11 @@ in the context of inheritance.
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1053,6 +1163,7 @@ in the context of inheritance.
 					<name>
 						<simple>parent_without_members</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;parent_without_members&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -1069,6 +1180,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -1149,6 +1264,7 @@ in the context of inheritance.
 					<name>
 						<simple>parent</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;pkg2&gt;&lt;parent&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -1166,6 +1282,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -1194,6 +1314,7 @@ in the context of inheritance.
 						<name>
 							<simple>prop_0</simple>
 							<qualified>&lt;trivial_inheritance&gt;&lt;pkg2&gt;&lt;parent&gt;&lt;prop_0&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -1211,12 +1332,17 @@ in the context of inheritance.
 								</internal_modules>
 								<element>parent</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -1232,6 +1358,10 @@ in the context of inheritance.
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -1240,6 +1370,11 @@ in the context of inheritance.
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1308,6 +1443,7 @@ in the context of inheritance.
 					<name>
 						<simple>second_child_without_members</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;second_child_without_members&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -1324,6 +1460,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -1361,6 +1501,7 @@ in the context of inheritance.
 					<item>
 						<simple>parent_with_members</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -1377,6 +1518,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</item>
 				</parents>
 				<leaves>
@@ -1424,6 +1569,7 @@ in the context of inheritance.
 					<name>
 						<simple>third_child_with_members</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -1440,6 +1586,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -1468,6 +1618,7 @@ in the context of inheritance.
 						<name>
 							<simple>prop_1</simple>
 							<qualified>&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;&lt;prop_1&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -1484,12 +1635,17 @@ in the context of inheritance.
 								</internal_modules>
 								<element>third_child_with_members</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>unsigned int</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -1505,6 +1661,10 @@ in the context of inheritance.
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -1513,6 +1673,11 @@ in the context of inheritance.
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1538,6 +1703,7 @@ in the context of inheritance.
 					<item>
 						<simple>parent_with_members</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -1554,6 +1720,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</item>
 				</parents>
 				<leaves>
@@ -1601,6 +1771,7 @@ in the context of inheritance.
 					<name>
 						<simple>parent_with_members</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -1617,6 +1788,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -1645,6 +1820,7 @@ in the context of inheritance.
 						<name>
 							<simple>prop_0</simple>
 							<qualified>&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;&lt;prop_0&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -1661,12 +1837,17 @@ in the context of inheritance.
 								</internal_modules>
 								<element>parent_with_members</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -1682,6 +1863,10 @@ in the context of inheritance.
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -1690,6 +1875,11 @@ in the context of inheritance.
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1758,6 +1948,7 @@ in the context of inheritance.
 					<name>
 						<simple>child</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -1775,6 +1966,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -1803,6 +1998,7 @@ in the context of inheritance.
 						<name>
 							<simple>prop_1</simple>
 							<qualified>&lt;trivial_inheritance&gt;&lt;pkg3&gt;&lt;child&gt;&lt;prop_1&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -1820,12 +2016,17 @@ in the context of inheritance.
 								</internal_modules>
 								<element>child</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -1841,6 +2042,10 @@ in the context of inheritance.
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -1849,6 +2054,11 @@ in the context of inheritance.
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -1874,6 +2084,7 @@ in the context of inheritance.
 					<item>
 						<simple>parent</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;pkg2&gt;&lt;parent&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -1891,6 +2102,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</item>
 				</parents>
 				<leaves>
@@ -1938,6 +2153,7 @@ in the context of inheritance.
 					<name>
 						<simple>child_without_members</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;child_without_members&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -1954,6 +2170,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -1991,6 +2211,7 @@ in the context of inheritance.
 					<item>
 						<simple>parent_without_members</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;parent_without_members&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -2007,6 +2228,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</item>
 				</parents>
 				<leaves>
@@ -2054,6 +2279,7 @@ in the context of inheritance.
 					<name>
 						<simple>parent_outside</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;parent_outside&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -2070,6 +2296,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -2098,6 +2328,7 @@ in the context of inheritance.
 						<name>
 							<simple>prop_0</simple>
 							<qualified>&lt;trivial_inheritance&gt;&lt;parent_outside&gt;&lt;prop_0&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -2114,12 +2345,17 @@ in the context of inheritance.
 								</internal_modules>
 								<element>parent_outside</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -2135,6 +2371,10 @@ in the context of inheritance.
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -2143,6 +2383,11 @@ in the context of inheritance.
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2211,6 +2456,7 @@ in the context of inheritance.
 					<name>
 						<simple>child_with_members</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;child_with_members&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -2227,6 +2473,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -2255,6 +2505,7 @@ in the context of inheritance.
 						<name>
 							<simple>prop_0</simple>
 							<qualified>&lt;trivial_inheritance&gt;&lt;child_with_members&gt;&lt;prop_0&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -2271,12 +2522,17 @@ in the context of inheritance.
 								</internal_modules>
 								<element>child_with_members</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>unsigned int</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -2292,6 +2548,10 @@ in the context of inheritance.
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -2300,6 +2560,11 @@ in the context of inheritance.
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2325,6 +2590,7 @@ in the context of inheritance.
 					<item>
 						<simple>parent_without_members</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;parent_without_members&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -2341,6 +2607,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</item>
 				</parents>
 				<leaves>
@@ -2388,6 +2658,7 @@ in the context of inheritance.
 					<name>
 						<simple>service</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;service&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -2404,6 +2675,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>2</generation_type>
 					<origin_type>1</origin_type>
@@ -2484,6 +2759,7 @@ in the context of inheritance.
 					<name>
 						<simple>descendant2</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;descendant2&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -2500,6 +2776,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -2528,6 +2808,7 @@ in the context of inheritance.
 						<name>
 							<simple>prop_0</simple>
 							<qualified>&lt;trivial_inheritance&gt;&lt;descendant2&gt;&lt;prop_0&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -2544,12 +2825,17 @@ in the context of inheritance.
 								</internal_modules>
 								<element>descendant2</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>bool</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -2565,6 +2851,10 @@ in the context of inheritance.
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -2573,6 +2863,11 @@ in the context of inheritance.
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2598,6 +2893,7 @@ in the context of inheritance.
 					<item>
 						<simple>base</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;base&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -2614,6 +2910,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</item>
 				</parents>
 				<leaves>
@@ -2661,6 +2961,7 @@ in the context of inheritance.
 					<name>
 						<simple>child</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -2678,6 +2979,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -2706,6 +3011,7 @@ in the context of inheritance.
 						<name>
 							<simple>prop_1</simple>
 							<qualified>&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child&gt;&lt;prop_1&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -2723,12 +3029,17 @@ in the context of inheritance.
 								</internal_modules>
 								<element>child</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -2744,6 +3055,10 @@ in the context of inheritance.
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -2752,6 +3067,11 @@ in the context of inheritance.
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -2777,6 +3097,7 @@ in the context of inheritance.
 					<item>
 						<simple>parent_outside</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;parent_outside&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -2793,6 +3114,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</item>
 				</parents>
 				<leaves>
@@ -2840,6 +3165,7 @@ in the context of inheritance.
 					<name>
 						<simple>service_interface</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;service_interface&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -2856,6 +3182,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>2</generation_type>
 					<origin_type>1</origin_type>
@@ -2936,6 +3266,7 @@ in the context of inheritance.
 					<name>
 						<simple>child_of_a_child2</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;child_of_a_child2&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -2952,6 +3283,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -2980,6 +3315,7 @@ in the context of inheritance.
 						<name>
 							<simple>prop_2</simple>
 							<qualified>&lt;trivial_inheritance&gt;&lt;child_of_a_child2&gt;&lt;prop_2&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -2996,12 +3332,17 @@ in the context of inheritance.
 								</internal_modules>
 								<element>child_of_a_child2</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>unsigned int</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -3017,6 +3358,10 @@ in the context of inheritance.
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -3025,6 +3370,11 @@ in the context of inheritance.
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3050,6 +3400,7 @@ in the context of inheritance.
 					<item>
 						<simple>third_child_with_members</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -3066,6 +3417,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</item>
 				</parents>
 				<leaves>
@@ -3113,6 +3468,7 @@ in the context of inheritance.
 					<name>
 						<simple>descendant1</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;descendant1&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -3129,6 +3485,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -3166,6 +3526,7 @@ in the context of inheritance.
 					<item>
 						<simple>base</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;base&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -3182,6 +3543,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</item>
 				</parents>
 				<leaves>
@@ -3229,6 +3594,7 @@ in the context of inheritance.
 					<name>
 						<simple>child_of_a_child1</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;child_of_a_child1&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -3245,6 +3611,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -3282,6 +3652,7 @@ in the context of inheritance.
 					<item>
 						<simple>third_child_with_members</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -3298,6 +3669,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</item>
 				</parents>
 				<leaves>
@@ -3345,6 +3720,7 @@ in the context of inheritance.
 					<name>
 						<simple>descendant3</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;descendant3&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -3361,6 +3737,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -3389,6 +3769,7 @@ in the context of inheritance.
 						<name>
 							<simple>prop_0</simple>
 							<qualified>&lt;trivial_inheritance&gt;&lt;descendant3&gt;&lt;prop_0&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -3405,12 +3786,17 @@ in the context of inheritance.
 								</internal_modules>
 								<element>descendant3</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>bool</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -3426,6 +3812,10 @@ in the context of inheritance.
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -3434,6 +3824,11 @@ in the context of inheritance.
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3459,6 +3854,7 @@ in the context of inheritance.
 					<item>
 						<simple>descendant1</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;descendant1&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -3475,6 +3871,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</item>
 				</parents>
 				<leaves>
@@ -3523,6 +3923,7 @@ in the context of inheritance.
 					<name>
 						<simple>move_ctor_descendant</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;move_ctor_descendant&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -3539,6 +3940,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -3568,6 +3973,7 @@ in the context of inheritance.
 						<name>
 							<simple>prop_1</simple>
 							<qualified>&lt;trivial_inheritance&gt;&lt;move_ctor_descendant&gt;&lt;prop_1&gt;</qualified>
+							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -3584,12 +3990,17 @@ in the context of inheritance.
 								</internal_modules>
 								<element>move_ctor_descendant</element>
 							</location>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
 						</name>
 						<unparsed_type>boost::filesystem::path</unparsed_type>
 						<parsed_type>
 							<parent>
 								<simple></simple>
 								<qualified></qualified>
+								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -3605,6 +4016,10 @@ in the context of inheritance.
 									</internal_modules>
 									<element></element>
 								</location>
+								<qualified_for>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified_for>
 							</parent>
 							<children>
 								<count>0</count>
@@ -3613,6 +4028,11 @@ in the context of inheritance.
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
+							<qualified_for>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified_for>
+							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
@@ -3638,6 +4058,7 @@ in the context of inheritance.
 					<item>
 						<simple>move_ctor_base</simple>
 						<qualified>&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;</qualified>
+						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -3654,6 +4075,10 @@ in the context of inheritance.
 							</internal_modules>
 							<element></element>
 						</location>
+						<qualified_for>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified_for>
 					</item>
 				</parents>
 				<leaves>
@@ -3687,12 +4112,12 @@ in the context of inheritance.
 			</second>
 		</item>
 	</objects>
-	<exceptions class_id="37" tracking_level="0" version="0">
+	<exceptions class_id="38" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<visitors class_id="38" tracking_level="0" version="0">
+	<visitors class_id="39" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
