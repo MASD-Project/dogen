@@ -18,25 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_PROPERTIES_HELPER_INSTANCES_REPOSITORY_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_PROPERTIES_HELPER_INSTANCES_REPOSITORY_SER_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_PROPERTIES_HELPER_PROPERTIES_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_PROPERTIES_HELPER_PROPERTIES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/quilt.cpp/types/properties/helper_instances_repository.hpp"
+#include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::properties::helper_instances_repository)
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::properties::helper_properties)
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar, const dogen::quilt::cpp::properties::helper_instances_repository& v, unsigned int version);
+void save(Archive& ar, const dogen::quilt::cpp::properties::helper_properties& v, unsigned int version);
 
 template<typename Archive>
-void load(Archive& ar, dogen::quilt::cpp::properties::helper_instances_repository& v, unsigned int version);
+void load(Archive& ar, dogen::quilt::cpp::properties::helper_properties& v, unsigned int version);
 
 } }
 

@@ -18,20 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_INSTANCES_FACTORY_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_INSTANCES_FACTORY_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_PROPERTIES_HELPER_PROPERTIES_FWD_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_PROPERTIES_HELPER_PROPERTIES_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
-namespace properties {
+#include "dogen/quilt.cpp/types/properties/helper_properties_fwd.hpp"
 
-class helper_instances_factory;
+namespace boost {
+namespace serialization {
 
-} } } }
+template<class Archive>
+void save(Archive& ar, const dogen::quilt::cpp::properties::helper_properties& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::quilt::cpp::properties::helper_properties& v, unsigned int version);
+
+} }
 
 #endif

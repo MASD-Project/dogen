@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_HASH_PROPERTIES_HELPER_INSTANCE_HASH_HPP
-#define DOGEN_QUILT_CPP_HASH_PROPERTIES_HELPER_INSTANCE_HASH_HPP
+#ifndef DOGEN_QUILT_CPP_HASH_PROPERTIES_HELPER_PROPERTIES_REPOSITORY_HASH_HPP
+#define DOGEN_QUILT_CPP_HASH_PROPERTIES_HELPER_PROPERTIES_REPOSITORY_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen/quilt.cpp/types/properties/helper_instance.hpp"
+#include "dogen/quilt.cpp/types/properties/helper_properties_repository.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace properties {
 
-struct helper_instance_hasher {
+struct helper_properties_repository_hasher {
 public:
-    static std::size_t hash(const helper_instance& v);
+    static std::size_t hash(const helper_properties_repository& v);
 };
 
 } } } }
@@ -43,10 +43,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::quilt::cpp::properties::helper_instance> {
+struct hash<dogen::quilt::cpp::properties::helper_properties_repository> {
 public:
-    size_t operator()(const dogen::quilt::cpp::properties::helper_instance& v) const {
-        return dogen::quilt::cpp::properties::helper_instance_hasher::hash(v);
+    size_t operator()(const dogen::quilt::cpp::properties::helper_properties_repository& v) const {
+        return dogen::quilt::cpp::properties::helper_properties_repository_hasher::hash(v);
     }
 };
 

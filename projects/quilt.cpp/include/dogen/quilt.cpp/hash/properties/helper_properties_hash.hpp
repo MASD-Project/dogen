@@ -18,20 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_INSTANCES_REPOSITORY_FACTORY_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_INSTANCES_REPOSITORY_FACTORY_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_HASH_PROPERTIES_HELPER_PROPERTIES_HASH_HPP
+#define DOGEN_QUILT_CPP_HASH_PROPERTIES_HELPER_PROPERTIES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
+
+#include <functional>
+#include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace properties {
 
-class helper_instances_repository_factory;
+struct helper_properties_hasher {
+public:
+    static std::size_t hash(const helper_properties& v);
+};
 
 } } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::quilt::cpp::properties::helper_properties> {
+public:
+    size_t operator()(const dogen::quilt::cpp::properties::helper_properties& v) const {
+        return dogen::quilt::cpp::properties::helper_properties_hasher::hash(v);
+    }
+};
+
+}
 #endif

@@ -18,25 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_IO_PROPERTIES_HELPER_INSTANCE_IO_HPP
-#define DOGEN_QUILT_CPP_IO_PROPERTIES_HELPER_INSTANCE_IO_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_PROPERTIES_HELPER_PROPERTIES_REPOSITORY_FWD_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_PROPERTIES_HELPER_PROPERTIES_REPOSITORY_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/quilt.cpp/types/properties/helper_instance.hpp"
+#include "dogen/quilt.cpp/types/properties/helper_properties_repository_fwd.hpp"
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
-namespace properties {
+namespace boost {
+namespace serialization {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::quilt::cpp::properties::helper_instance& v);
+template<class Archive>
+void save(Archive& ar, const dogen::quilt::cpp::properties::helper_properties_repository& v, unsigned int version);
 
-} } } }
+template<class Archive>
+void load(Archive& ar, dogen::quilt::cpp::properties::helper_properties_repository& v, unsigned int version);
+
+} }
 
 #endif

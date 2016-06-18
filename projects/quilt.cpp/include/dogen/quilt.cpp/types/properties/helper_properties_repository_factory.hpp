@@ -18,36 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TEST_DATA_PROPERTIES_HELPER_INSTANCE_TD_HPP
-#define DOGEN_QUILT_CPP_TEST_DATA_PROPERTIES_HELPER_INSTANCE_TD_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_INSTANCES_REPOSITORY_FACTORY_HPP
+#define DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_INSTANCES_REPOSITORY_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/properties/helper_instance.hpp"
+#include "dogen/yarn/types/model.hpp"
+#include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/properties/helper_properties_repository.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace properties {
 
-class helper_instance_generator {
+class helper_properties_repository_factory {
 public:
-    helper_instance_generator();
-
-public:
-    typedef dogen::quilt::cpp::properties::helper_instance result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
+    helper_properties_repository make(const yarn::model& m,
+        const settings::helper_settings_repository& hsrp) const;
 };
 
 } } } }

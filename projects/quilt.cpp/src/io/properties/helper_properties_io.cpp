@@ -18,28 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_INSTANCES_REPOSITORY_FACTORY_HPP
-#define DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_INSTANCES_REPOSITORY_FACTORY_HPP
+#include <ostream>
+#include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
+#include "dogen/quilt.cpp/io/properties/helper_descriptor_io.hpp"
+#include "dogen/quilt.cpp/io/properties/helper_properties_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace std {
 
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
-#include "dogen/quilt.cpp/types/properties/helper_instances_repository.hpp"
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::quilt::cpp::properties::helper_descriptor>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace properties {
 
-class helper_instances_repository_factory {
-public:
-    helper_instances_repository make(const yarn::model& m,
-        const settings::helper_settings_repository& hsrp) const;
-};
+std::ostream& operator<<(std::ostream& s, const helper_properties& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::properties::helper_properties\"" << ", "
+      << "\"descriptors\": " << v.descriptors() << ", "
+      << "\"associated_helpers\": " << v.associated_helpers() << ", "
+      << "\"settings\": " << v.settings()
+      << " }";
+    return(s);
+}
 
 } } } }
-
-#endif

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_INSTANCES_REPOSITORY_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_INSTANCES_REPOSITORY_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_PROPERTIES_FACTORY_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_PROPERTIES_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-class helper_instances_repository;
+class helper_properties_factory;
 
 } } } }
 

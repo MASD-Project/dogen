@@ -22,12 +22,12 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
 #include "dogen/quilt.cpp/types/properties/name_builder.hpp"
-#include "dogen/quilt.cpp/types/properties/helper_instances_factory.hpp"
+#include "dogen/quilt.cpp/types/properties/helper_properties_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quilt.cpp.helper_instances_factory"));
+static logger lg(logger_factory("quilt.cpp.helper_properties_factory"));
 
 }
 
@@ -36,12 +36,12 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-helper_instances_factory::helper_instances_factory(
+helper_properties_factory::helper_properties_factory(
     const settings::helper_settings_repository& hsrp) : helper_settings_(hsrp) {
 }
 
-boost::optional<helper_descriptor> helper_instances_factory::
-make(const yarn::name_tree& nt, std::list<helper_instance>& instances) const {
+boost::optional<helper_descriptor> helper_properties_factory::
+make(const yarn::name_tree& nt, std::list<helper_properties>& properties) const {
     const auto qn(nt.parent().qualified());
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << qn;
 
@@ -61,48 +61,48 @@ make(const yarn::name_tree& nt, std::list<helper_instance>& instances) const {
      * as associated helpers. This basically means that the helper
      * needs to delegate to other helpers.
      */
-    helper_instance hi;
+    helper_properties hp;
     for (const auto c : nt.children()) {
-        const auto child_properties(make(c, instances));
-        if (!child_properties)
+        const auto child_descriptors(make(c, properties));
+        if (!child_descriptors)
             continue;
 
         /*
          * At present we are possibly adding duplicates in the type
          * variables.
          */
-        hi.associated_helpers().push_back(*child_properties);
+        hp.associated_helpers().push_back(*child_descriptors);
     }
 
     const auto& hs(i->second);
     BOOST_LOG_SEV(lg, debug) << "Helper settings: " << hs;
-    hi.settings(hs);
+    hp.settings(hs);
 
     name_builder b;
     helper_descriptor r;
     r.identifiable_name(b.identifiable_name(qn));
     r.complete_name(nt.unparsed_type());
     r.complete_identifiable_name(b.identifiable_name(nt.unparsed_type()));
-    hi.descriptors(r);
-    instances.push_back(hi);
+    hp.descriptors(r);
+    properties.push_back(hp);
 
     return r;
 }
 
-std::list<helper_instance> helper_instances_factory::
+std::list<helper_properties> helper_properties_factory::
 make(const std::list<yarn::attribute>& attributes) const {
 
     if (attributes.empty()) {
         BOOST_LOG_SEV(lg, debug) << "No properties found.";
-        return std::list<helper_instance>();
+        return std::list<helper_properties>();
     }
 
     BOOST_LOG_SEV(lg, debug) << "Properties found: " << attributes.size();
-    std::list<helper_instance> instances;
+    std::list<helper_properties> instances;
     for (const auto a : attributes)
         make(a.parsed_type(), instances);
 
-    std::list<helper_instance> r;
+    std::list<helper_properties> r;
     std::unordered_set<std::string> done;
     for (const auto& i : instances) {
         const auto cn(i.descriptors().complete_name());

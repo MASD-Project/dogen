@@ -18,19 +18,43 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_INSTANCE_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_INSTANCE_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_PROPERTIES_FACTORY_HPP
+#define DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_PROPERTIES_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
+
+#include <list>
+#include <string>
+#include <boost/optional.hpp>
+#include "dogen/yarn/types/attribute.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace properties {
 
-class helper_instance;
+class helper_properties_factory {
+public:
+    explicit helper_properties_factory(
+        const settings::helper_settings_repository& hsrp);
+
+private:
+    boost::optional<helper_descriptor>
+    make(const yarn::name_tree& nt,
+        std::list<helper_properties>& properties) const;
+
+public:
+    std::list<helper_properties>
+    make(const std::list<yarn::attribute>& attributes) const;
+
+private:
+    const settings::helper_settings_repository& helper_settings_;
+};
 
 } } } }
 

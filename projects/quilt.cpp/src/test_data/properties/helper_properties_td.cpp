@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/quilt.cpp/test_data/settings/helper_settings_td.hpp"
-#include "dogen/quilt.cpp/test_data/properties/helper_instance_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/helper_descriptor_td.hpp"
+#include "dogen/quilt.cpp/test_data/properties/helper_properties_td.hpp"
 
 namespace {
 
@@ -49,31 +49,31 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-helper_instance_generator::helper_instance_generator() : position_(0) { }
+helper_properties_generator::helper_properties_generator() : position_(0) { }
 
-void helper_instance_generator::
+void helper_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.descriptors(create_dogen_quilt_cpp_properties_helper_descriptor(position + 0));
     v.associated_helpers(create_std_list_dogen_quilt_cpp_properties_helper_descriptor(position + 1));
     v.settings(create_dogen_quilt_cpp_settings_helper_settings(position + 2));
 }
 
-helper_instance_generator::result_type
-helper_instance_generator::create(const unsigned int position) {
-    helper_instance r;
-    helper_instance_generator::populate(position, r);
+helper_properties_generator::result_type
+helper_properties_generator::create(const unsigned int position) {
+    helper_properties r;
+    helper_properties_generator::populate(position, r);
     return r;
 }
 
-helper_instance_generator::result_type*
-helper_instance_generator::create_ptr(const unsigned int position) {
-    helper_instance* p = new helper_instance();
-    helper_instance_generator::populate(position, *p);
+helper_properties_generator::result_type*
+helper_properties_generator::create_ptr(const unsigned int position) {
+    helper_properties* p = new helper_properties();
+    helper_properties_generator::populate(position, *p);
     return p;
 }
 
-helper_instance_generator::result_type
-helper_instance_generator::operator()() {
+helper_properties_generator::result_type
+helper_properties_generator::operator()() {
     return create(position_++);
 }
 

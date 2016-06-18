@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/properties/helper_instance.hpp"
+#include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace properties {
 
-helper_instance::helper_instance(
+helper_properties::helper_properties(
     const dogen::quilt::cpp::properties::helper_descriptor& descriptors,
     const std::list<dogen::quilt::cpp::properties::helper_descriptor>& associated_helpers,
     const dogen::quilt::cpp::settings::helper_settings& settings)
@@ -33,70 +33,70 @@ helper_instance::helper_instance(
       associated_helpers_(associated_helpers),
       settings_(settings) { }
 
-void helper_instance::swap(helper_instance& other) noexcept {
+void helper_properties::swap(helper_properties& other) noexcept {
     using std::swap;
     swap(descriptors_, other.descriptors_);
     swap(associated_helpers_, other.associated_helpers_);
     swap(settings_, other.settings_);
 }
 
-bool helper_instance::operator==(const helper_instance& rhs) const {
+bool helper_properties::operator==(const helper_properties& rhs) const {
     return descriptors_ == rhs.descriptors_ &&
         associated_helpers_ == rhs.associated_helpers_ &&
         settings_ == rhs.settings_;
 }
 
-helper_instance& helper_instance::operator=(helper_instance other) {
+helper_properties& helper_properties::operator=(helper_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const dogen::quilt::cpp::properties::helper_descriptor& helper_instance::descriptors() const {
+const dogen::quilt::cpp::properties::helper_descriptor& helper_properties::descriptors() const {
     return descriptors_;
 }
 
-dogen::quilt::cpp::properties::helper_descriptor& helper_instance::descriptors() {
+dogen::quilt::cpp::properties::helper_descriptor& helper_properties::descriptors() {
     return descriptors_;
 }
 
-void helper_instance::descriptors(const dogen::quilt::cpp::properties::helper_descriptor& v) {
+void helper_properties::descriptors(const dogen::quilt::cpp::properties::helper_descriptor& v) {
     descriptors_ = v;
 }
 
-void helper_instance::descriptors(const dogen::quilt::cpp::properties::helper_descriptor&& v) {
+void helper_properties::descriptors(const dogen::quilt::cpp::properties::helper_descriptor&& v) {
     descriptors_ = std::move(v);
 }
 
-const std::list<dogen::quilt::cpp::properties::helper_descriptor>& helper_instance::associated_helpers() const {
+const std::list<dogen::quilt::cpp::properties::helper_descriptor>& helper_properties::associated_helpers() const {
     return associated_helpers_;
 }
 
-std::list<dogen::quilt::cpp::properties::helper_descriptor>& helper_instance::associated_helpers() {
+std::list<dogen::quilt::cpp::properties::helper_descriptor>& helper_properties::associated_helpers() {
     return associated_helpers_;
 }
 
-void helper_instance::associated_helpers(const std::list<dogen::quilt::cpp::properties::helper_descriptor>& v) {
+void helper_properties::associated_helpers(const std::list<dogen::quilt::cpp::properties::helper_descriptor>& v) {
     associated_helpers_ = v;
 }
 
-void helper_instance::associated_helpers(const std::list<dogen::quilt::cpp::properties::helper_descriptor>&& v) {
+void helper_properties::associated_helpers(const std::list<dogen::quilt::cpp::properties::helper_descriptor>&& v) {
     associated_helpers_ = std::move(v);
 }
 
-const dogen::quilt::cpp::settings::helper_settings& helper_instance::settings() const {
+const dogen::quilt::cpp::settings::helper_settings& helper_properties::settings() const {
     return settings_;
 }
 
-dogen::quilt::cpp::settings::helper_settings& helper_instance::settings() {
+dogen::quilt::cpp::settings::helper_settings& helper_properties::settings() {
     return settings_;
 }
 
-void helper_instance::settings(const dogen::quilt::cpp::settings::helper_settings& v) {
+void helper_properties::settings(const dogen::quilt::cpp::settings::helper_settings& v) {
     settings_ = v;
 }
 
-void helper_instance::settings(const dogen::quilt::cpp::settings::helper_settings&& v) {
+void helper_properties::settings(const dogen::quilt::cpp::settings::helper_settings&& v) {
     settings_ = std::move(v);
 }
 

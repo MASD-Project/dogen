@@ -12,19 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-18 Sat 02:04]
+#+CAPTION: Clock summary at [2016-06-18 Sat 02:42]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *5:41* |      |      | 100.0 |
+| *Total time*                                                                | *6:18* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 5:41   |      |      | 100.0 |
-| Active                                                                      |        | 5:41 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:18 |  22.9 |
-| COMPLETED Refactor helper settings                                          |        |      | 0:35 |  10.3 |
-| COMPLETED Add properties for helpers                                        |        |      | 1:35 |  27.9 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |        |      | 1:23 |  24.3 |
-| COMPLETED Rename formattables to properties                                 |        |      | 0:50 |  14.7 |
+| Stories                                                                     | 6:18   |      |      | 100.0 |
+| Active                                                                      |        | 6:18 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:18 |  20.6 |
+| COMPLETED Refactor helper settings                                          |        |      | 0:35 |   9.3 |
+| COMPLETED Add properties for helpers                                        |        |      | 1:35 |  25.1 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |        |      | 1:23 |  22.0 |
+| COMPLETED Rename formattables to properties                                 |        |      | 0:50 |  13.2 |
+| COMPLETED Rename helper instances                                           |        |      | 0:37 |   9.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -145,10 +146,21 @@ Actually this is no longer urgent so the story can go back to backlog.
 Now that we are getting close to the end of the quilt refactor we
 should rename formattables to properties.
 
-*** Rename helper instances                                           :story:
+*** COMPLETED Rename helper instances                                 :story:
+    CLOSED: [2016-06-18 Sat 02:42]
+    CLOCK: [2016-06-18 Sat 02:05]--[2016-06-18 Sat 02:42] =>  0:37
 
 - rename helper instances etc to helper properties
 - rename helper properties etc to helper descriptor
+
+*** Remove redundancy in properties' repositories                     :story:
+
+At present we have attributes in repositories such as:
+
+: path_derivatives_by_name
+
+Since we are in =path_derivatives_repository=, perhaps we could call
+the attribute simply =by_name=.
 
 *** Rename =name_tree='s parent                                       :story:
 
@@ -166,6 +178,7 @@ This type should be called =element_properties=.
 - change the return type of the properties workflow to be element
   properties (well pair of element properties and formattables - for
   now).
+- have a look at the context type in formatters.
 
 *** Compute yarn property related information                         :story:
 

@@ -18,41 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_INSTANCES_FACTORY_HPP
-#define DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_INSTANCES_FACTORY_HPP
+#ifndef DOGEN_QUILT_CPP_TEST_DATA_PROPERTIES_HELPER_PROPERTIES_TD_HPP
+#define DOGEN_QUILT_CPP_TEST_DATA_PROPERTIES_HELPER_PROPERTIES_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include <boost/optional.hpp>
-#include "dogen/yarn/types/attribute.hpp"
-#include "dogen/yarn/types/name_tree.hpp"
-#include "dogen/quilt.cpp/types/properties/helper_instance.hpp"
-#include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace properties {
 
-class helper_instances_factory {
+class helper_properties_generator {
 public:
-    explicit helper_instances_factory(
-        const settings::helper_settings_repository& hsrp);
-
-private:
-    boost::optional<helper_descriptor> make(
-        const yarn::name_tree& nt, std::list<helper_instance>& instances) const;
+    helper_properties_generator();
 
 public:
-    std::list<helper_instance>
-    make(const std::list<yarn::attribute>& attributes) const;
+    typedef dogen::quilt::cpp::properties::helper_properties result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
 
 private:
-    const settings::helper_settings_repository& helper_settings_;
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } } } }

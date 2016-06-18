@@ -18,38 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TEST_DATA_PROPERTIES_HELPER_INSTANCES_REPOSITORY_TD_HPP
-#define DOGEN_QUILT_CPP_TEST_DATA_PROPERTIES_HELPER_INSTANCES_REPOSITORY_TD_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_PROPERTIES_HELPER_PROPERTIES_REPOSITORY_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_PROPERTIES_HELPER_PROPERTIES_REPOSITORY_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/properties/helper_instances_repository.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/quilt.cpp/types/properties/helper_properties_repository.hpp"
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
-namespace properties {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::properties::helper_properties_repository)
+namespace boost {
+namespace serialization {
 
-class helper_instances_repository_generator {
-public:
-    helper_instances_repository_generator();
+template<typename Archive>
+void save(Archive& ar, const dogen::quilt::cpp::properties::helper_properties_repository& v, unsigned int version);
 
-public:
-    typedef dogen::quilt::cpp::properties::helper_instances_repository result_type;
+template<typename Archive>
+void load(Archive& ar, dogen::quilt::cpp::properties::helper_properties_repository& v, unsigned int version);
 
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
-
-} } } }
+} }
 
 #endif

@@ -18,9 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/settings/helper_settings_hash.hpp"
-#include "dogen/quilt.cpp/hash/properties/helper_instance_hash.hpp"
-#include "dogen/quilt.cpp/hash/properties/helper_descriptor_hash.hpp"
+#include "dogen/quilt.cpp/hash/properties/helper_properties_hash.hpp"
+#include "dogen/quilt.cpp/hash/properties/helper_properties_repository_hash.hpp"
 
 namespace {
 
@@ -30,10 +29,19 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_quilt_cpp_properties_helper_descriptor(const std::list<dogen::quilt::cpp::properties::helper_descriptor>& v) {
+inline std::size_t hash_std_list_dogen_quilt_cpp_properties_helper_properties(const std::list<dogen::quilt::cpp::properties::helper_properties>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_unordered_map_std_string_std_list_dogen_quilt_cpp_properties_helper_properties_(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, hash_std_list_dogen_quilt_cpp_properties_helper_properties(i.second));
     }
     return seed;
 }
@@ -45,13 +53,10 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-std::size_t helper_instance_hasher::hash(const helper_instance& v) {
+std::size_t helper_properties_repository_hasher::hash(const helper_properties_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, v.descriptors());
-    combine(seed, hash_std_list_dogen_quilt_cpp_properties_helper_descriptor(v.associated_helpers()));
-    combine(seed, v.settings());
-
+    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_quilt_cpp_properties_helper_properties_(v.helper_properties_by_name()));
     return seed;
 }
 

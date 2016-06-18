@@ -18,24 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_IO_PROPERTIES_HELPER_INSTANCES_REPOSITORY_IO_HPP
-#define DOGEN_QUILT_CPP_IO_PROPERTIES_HELPER_INSTANCES_REPOSITORY_IO_HPP
+#ifndef DOGEN_QUILT_CPP_TEST_DATA_PROPERTIES_HELPER_PROPERTIES_REPOSITORY_TD_HPP
+#define DOGEN_QUILT_CPP_TEST_DATA_PROPERTIES_HELPER_PROPERTIES_REPOSITORY_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/quilt.cpp/types/properties/helper_instances_repository.hpp"
+#include "dogen/quilt.cpp/types/properties/helper_properties_repository.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace properties {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::quilt::cpp::properties::helper_instances_repository& v);
+class helper_properties_repository_generator {
+public:
+    helper_properties_repository_generator();
+
+public:
+    typedef dogen::quilt::cpp::properties::helper_properties_repository result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } } } }
 
