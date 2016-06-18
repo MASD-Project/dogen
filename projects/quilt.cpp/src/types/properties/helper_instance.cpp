@@ -26,22 +26,22 @@ namespace cpp {
 namespace properties {
 
 helper_instance::helper_instance(
-    const dogen::quilt::cpp::properties::helper_instance_properties& properties,
-    const std::list<dogen::quilt::cpp::properties::helper_instance_properties>& associated_helpers,
+    const dogen::quilt::cpp::properties::helper_descriptor& descriptors,
+    const std::list<dogen::quilt::cpp::properties::helper_descriptor>& associated_helpers,
     const dogen::quilt::cpp::settings::helper_settings& settings)
-    : properties_(properties),
+    : descriptors_(descriptors),
       associated_helpers_(associated_helpers),
       settings_(settings) { }
 
 void helper_instance::swap(helper_instance& other) noexcept {
     using std::swap;
-    swap(properties_, other.properties_);
+    swap(descriptors_, other.descriptors_);
     swap(associated_helpers_, other.associated_helpers_);
     swap(settings_, other.settings_);
 }
 
 bool helper_instance::operator==(const helper_instance& rhs) const {
-    return properties_ == rhs.properties_ &&
+    return descriptors_ == rhs.descriptors_ &&
         associated_helpers_ == rhs.associated_helpers_ &&
         settings_ == rhs.settings_;
 }
@@ -52,35 +52,35 @@ helper_instance& helper_instance::operator=(helper_instance other) {
     return *this;
 }
 
-const dogen::quilt::cpp::properties::helper_instance_properties& helper_instance::properties() const {
-    return properties_;
+const dogen::quilt::cpp::properties::helper_descriptor& helper_instance::descriptors() const {
+    return descriptors_;
 }
 
-dogen::quilt::cpp::properties::helper_instance_properties& helper_instance::properties() {
-    return properties_;
+dogen::quilt::cpp::properties::helper_descriptor& helper_instance::descriptors() {
+    return descriptors_;
 }
 
-void helper_instance::properties(const dogen::quilt::cpp::properties::helper_instance_properties& v) {
-    properties_ = v;
+void helper_instance::descriptors(const dogen::quilt::cpp::properties::helper_descriptor& v) {
+    descriptors_ = v;
 }
 
-void helper_instance::properties(const dogen::quilt::cpp::properties::helper_instance_properties&& v) {
-    properties_ = std::move(v);
+void helper_instance::descriptors(const dogen::quilt::cpp::properties::helper_descriptor&& v) {
+    descriptors_ = std::move(v);
 }
 
-const std::list<dogen::quilt::cpp::properties::helper_instance_properties>& helper_instance::associated_helpers() const {
+const std::list<dogen::quilt::cpp::properties::helper_descriptor>& helper_instance::associated_helpers() const {
     return associated_helpers_;
 }
 
-std::list<dogen::quilt::cpp::properties::helper_instance_properties>& helper_instance::associated_helpers() {
+std::list<dogen::quilt::cpp::properties::helper_descriptor>& helper_instance::associated_helpers() {
     return associated_helpers_;
 }
 
-void helper_instance::associated_helpers(const std::list<dogen::quilt::cpp::properties::helper_instance_properties>& v) {
+void helper_instance::associated_helpers(const std::list<dogen::quilt::cpp::properties::helper_descriptor>& v) {
     associated_helpers_ = v;
 }
 
-void helper_instance::associated_helpers(const std::list<dogen::quilt::cpp::properties::helper_instance_properties>&& v) {
+void helper_instance::associated_helpers(const std::list<dogen::quilt::cpp::properties::helper_descriptor>&& v) {
     associated_helpers_ = std::move(v);
 }
 

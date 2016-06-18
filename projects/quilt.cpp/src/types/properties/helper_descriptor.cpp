@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/properties/helper_instance_properties.hpp"
+#include "dogen/quilt.cpp/types/properties/helper_descriptor.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace properties {
 
-helper_instance_properties::helper_instance_properties(
+helper_descriptor::helper_descriptor(
     const std::string& identifiable_name,
     const std::string& complete_name,
     const std::string& complete_identifiable_name)
@@ -33,70 +33,70 @@ helper_instance_properties::helper_instance_properties(
       complete_name_(complete_name),
       complete_identifiable_name_(complete_identifiable_name) { }
 
-void helper_instance_properties::swap(helper_instance_properties& other) noexcept {
+void helper_descriptor::swap(helper_descriptor& other) noexcept {
     using std::swap;
     swap(identifiable_name_, other.identifiable_name_);
     swap(complete_name_, other.complete_name_);
     swap(complete_identifiable_name_, other.complete_identifiable_name_);
 }
 
-bool helper_instance_properties::operator==(const helper_instance_properties& rhs) const {
+bool helper_descriptor::operator==(const helper_descriptor& rhs) const {
     return identifiable_name_ == rhs.identifiable_name_ &&
         complete_name_ == rhs.complete_name_ &&
         complete_identifiable_name_ == rhs.complete_identifiable_name_;
 }
 
-helper_instance_properties& helper_instance_properties::operator=(helper_instance_properties other) {
+helper_descriptor& helper_descriptor::operator=(helper_descriptor other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& helper_instance_properties::identifiable_name() const {
+const std::string& helper_descriptor::identifiable_name() const {
     return identifiable_name_;
 }
 
-std::string& helper_instance_properties::identifiable_name() {
+std::string& helper_descriptor::identifiable_name() {
     return identifiable_name_;
 }
 
-void helper_instance_properties::identifiable_name(const std::string& v) {
+void helper_descriptor::identifiable_name(const std::string& v) {
     identifiable_name_ = v;
 }
 
-void helper_instance_properties::identifiable_name(const std::string&& v) {
+void helper_descriptor::identifiable_name(const std::string&& v) {
     identifiable_name_ = std::move(v);
 }
 
-const std::string& helper_instance_properties::complete_name() const {
+const std::string& helper_descriptor::complete_name() const {
     return complete_name_;
 }
 
-std::string& helper_instance_properties::complete_name() {
+std::string& helper_descriptor::complete_name() {
     return complete_name_;
 }
 
-void helper_instance_properties::complete_name(const std::string& v) {
+void helper_descriptor::complete_name(const std::string& v) {
     complete_name_ = v;
 }
 
-void helper_instance_properties::complete_name(const std::string&& v) {
+void helper_descriptor::complete_name(const std::string&& v) {
     complete_name_ = std::move(v);
 }
 
-const std::string& helper_instance_properties::complete_identifiable_name() const {
+const std::string& helper_descriptor::complete_identifiable_name() const {
     return complete_identifiable_name_;
 }
 
-std::string& helper_instance_properties::complete_identifiable_name() {
+std::string& helper_descriptor::complete_identifiable_name() {
     return complete_identifiable_name_;
 }
 
-void helper_instance_properties::complete_identifiable_name(const std::string& v) {
+void helper_descriptor::complete_identifiable_name(const std::string& v) {
     complete_identifiable_name_ = v;
 }
 
-void helper_instance_properties::complete_identifiable_name(const std::string&& v) {
+void helper_descriptor::complete_identifiable_name(const std::string&& v) {
     complete_identifiable_name_ = std::move(v);
 }
 

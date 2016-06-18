@@ -18,24 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_PROPERTIES_HELPER_INSTANCE_PROPERTIES_FWD_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_PROPERTIES_HELPER_INSTANCE_PROPERTIES_FWD_SER_HPP
+#include "dogen/quilt.cpp/hash/properties/helper_descriptor_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include "dogen/quilt.cpp/types/properties/helper_instance_properties_fwd.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
 
-namespace boost {
-namespace serialization {
+}
 
-template<class Archive>
-void save(Archive& ar, const dogen::quilt::cpp::properties::helper_instance_properties& v, unsigned int version);
+namespace dogen {
+namespace quilt {
+namespace cpp {
+namespace properties {
 
-template<class Archive>
-void load(Archive& ar, dogen::quilt::cpp::properties::helper_instance_properties& v, unsigned int version);
+std::size_t helper_descriptor_hasher::hash(const helper_descriptor& v) {
+    std::size_t seed(0);
 
-} }
+    combine(seed, v.identifiable_name());
+    combine(seed, v.complete_name());
+    combine(seed, v.complete_identifiable_name());
 
-#endif
+    return seed;
+}
+
+} } } }

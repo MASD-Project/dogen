@@ -20,19 +20,19 @@
  */
 #include "dogen/quilt.cpp/test_data/settings/helper_settings_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/helper_instance_td.hpp"
-#include "dogen/quilt.cpp/test_data/properties/helper_instance_properties_td.hpp"
+#include "dogen/quilt.cpp/test_data/properties/helper_descriptor_td.hpp"
 
 namespace {
 
-dogen::quilt::cpp::properties::helper_instance_properties
-create_dogen_quilt_cpp_properties_helper_instance_properties(const unsigned int position) {
-    return dogen::quilt::cpp::properties::helper_instance_properties_generator::create(position);
+dogen::quilt::cpp::properties::helper_descriptor
+create_dogen_quilt_cpp_properties_helper_descriptor(const unsigned int position) {
+    return dogen::quilt::cpp::properties::helper_descriptor_generator::create(position);
 }
 
-std::list<dogen::quilt::cpp::properties::helper_instance_properties> create_std_list_dogen_quilt_cpp_properties_helper_instance_properties(unsigned int position) {
-    std::list<dogen::quilt::cpp::properties::helper_instance_properties> r;
+std::list<dogen::quilt::cpp::properties::helper_descriptor> create_std_list_dogen_quilt_cpp_properties_helper_descriptor(unsigned int position) {
+    std::list<dogen::quilt::cpp::properties::helper_descriptor> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_quilt_cpp_properties_helper_instance_properties(position + i));
+        r.push_back(create_dogen_quilt_cpp_properties_helper_descriptor(position + i));
     }
     return r;
 }
@@ -53,8 +53,8 @@ helper_instance_generator::helper_instance_generator() : position_(0) { }
 
 void helper_instance_generator::
 populate(const unsigned int position, result_type& v) {
-    v.properties(create_dogen_quilt_cpp_properties_helper_instance_properties(position + 0));
-    v.associated_helpers(create_std_list_dogen_quilt_cpp_properties_helper_instance_properties(position + 1));
+    v.descriptors(create_dogen_quilt_cpp_properties_helper_descriptor(position + 0));
+    v.associated_helpers(create_std_list_dogen_quilt_cpp_properties_helper_descriptor(position + 1));
     v.settings(create_dogen_quilt_cpp_settings_helper_settings(position + 2));
 }
 

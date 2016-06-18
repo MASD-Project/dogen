@@ -18,25 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_IO_PROPERTIES_HELPER_INSTANCE_PROPERTIES_IO_HPP
-#define DOGEN_QUILT_CPP_IO_PROPERTIES_HELPER_INSTANCE_PROPERTIES_IO_HPP
+#ifndef DOGEN_QUILT_CPP_HASH_PROPERTIES_HELPER_DESCRIPTOR_HASH_HPP
+#define DOGEN_QUILT_CPP_HASH_PROPERTIES_HELPER_DESCRIPTOR_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/quilt.cpp/types/properties/helper_instance_properties.hpp"
+#include <functional>
+#include "dogen/quilt.cpp/types/properties/helper_descriptor.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace properties {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::quilt::cpp::properties::helper_instance_properties& v);
+struct helper_descriptor_hasher {
+public:
+    static std::size_t hash(const helper_descriptor& v);
+};
 
 } } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::quilt::cpp::properties::helper_descriptor> {
+public:
+    size_t operator()(const dogen::quilt::cpp::properties::helper_descriptor& v) const {
+        return dogen::quilt::cpp::properties::helper_descriptor_hasher::hash(v);
+    }
+};
+
+}
 #endif

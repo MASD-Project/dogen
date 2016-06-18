@@ -21,11 +21,11 @@
 #include <ostream>
 #include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
 #include "dogen/quilt.cpp/io/properties/helper_instance_io.hpp"
-#include "dogen/quilt.cpp/io/properties/helper_instance_properties_io.hpp"
+#include "dogen/quilt.cpp/io/properties/helper_descriptor_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::quilt::cpp::properties::helper_instance_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::quilt::cpp::properties::helper_descriptor>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -45,7 +45,7 @@ namespace properties {
 std::ostream& operator<<(std::ostream& s, const helper_instance& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::properties::helper_instance\"" << ", "
-      << "\"properties\": " << v.properties() << ", "
+      << "\"descriptors\": " << v.descriptors() << ", "
       << "\"associated_helpers\": " << v.associated_helpers() << ", "
       << "\"settings\": " << v.settings()
       << " }";

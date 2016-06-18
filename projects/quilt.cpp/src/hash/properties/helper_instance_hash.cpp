@@ -20,7 +20,7 @@
  */
 #include "dogen/quilt.cpp/hash/settings/helper_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/helper_instance_hash.hpp"
-#include "dogen/quilt.cpp/hash/properties/helper_instance_properties_hash.hpp"
+#include "dogen/quilt.cpp/hash/properties/helper_descriptor_hash.hpp"
 
 namespace {
 
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_quilt_cpp_properties_helper_instance_properties(const std::list<dogen::quilt::cpp::properties::helper_instance_properties>& v) {
+inline std::size_t hash_std_list_dogen_quilt_cpp_properties_helper_descriptor(const std::list<dogen::quilt::cpp::properties::helper_descriptor>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -48,8 +48,8 @@ namespace properties {
 std::size_t helper_instance_hasher::hash(const helper_instance& v) {
     std::size_t seed(0);
 
-    combine(seed, v.properties());
-    combine(seed, hash_std_list_dogen_quilt_cpp_properties_helper_instance_properties(v.associated_helpers()));
+    combine(seed, v.descriptors());
+    combine(seed, hash_std_list_dogen_quilt_cpp_properties_helper_descriptor(v.associated_helpers()));
     combine(seed, v.settings());
 
     return seed;

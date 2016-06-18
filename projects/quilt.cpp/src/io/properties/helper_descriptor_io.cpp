@@ -18,38 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TEST_DATA_PROPERTIES_HELPER_INSTANCE_PROPERTIES_TD_HPP
-#define DOGEN_QUILT_CPP_TEST_DATA_PROPERTIES_HELPER_INSTANCE_PROPERTIES_TD_HPP
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen/quilt.cpp/io/properties/helper_descriptor_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/quilt.cpp/types/properties/helper_instance_properties.hpp"
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace properties {
 
-class helper_instance_properties_generator {
-public:
-    helper_instance_properties_generator();
-
-public:
-    typedef dogen::quilt::cpp::properties::helper_instance_properties result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::properties::helper_descriptor\"" << ", "
+      << "\"identifiable_name\": " << "\"" << tidy_up_string(v.identifiable_name()) << "\"" << ", "
+      << "\"complete_name\": " << "\"" << tidy_up_string(v.complete_name()) << "\"" << ", "
+      << "\"complete_identifiable_name\": " << "\"" << tidy_up_string(v.complete_identifiable_name()) << "\""
+      << " }";
+    return(s);
+}
 
 } } } }
-
-#endif

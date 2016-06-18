@@ -40,7 +40,7 @@ helper_instances_factory::helper_instances_factory(
     const settings::helper_settings_repository& hsrp) : helper_settings_(hsrp) {
 }
 
-boost::optional<helper_instance_properties> helper_instances_factory::
+boost::optional<helper_descriptor> helper_instances_factory::
 make(const yarn::name_tree& nt, std::list<helper_instance>& instances) const {
     const auto qn(nt.parent().qualified());
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << qn;
@@ -53,7 +53,7 @@ make(const yarn::name_tree& nt, std::list<helper_instance>& instances) const {
     const auto i(hsbn.find(qn));
     if (i == hsbn.end()) {
         BOOST_LOG_SEV(lg, debug) << "No settings for type.";
-        return boost::optional<helper_instance_properties>();
+        return boost::optional<helper_descriptor>();
     }
 
     /*
@@ -79,11 +79,11 @@ make(const yarn::name_tree& nt, std::list<helper_instance>& instances) const {
     hi.settings(hs);
 
     name_builder b;
-    helper_instance_properties r;
+    helper_descriptor r;
     r.identifiable_name(b.identifiable_name(qn));
     r.complete_name(nt.unparsed_type());
     r.complete_identifiable_name(b.identifiable_name(nt.unparsed_type()));
-    hi.properties(r);
+    hi.descriptors(r);
     instances.push_back(hi);
 
     return r;
@@ -105,7 +105,7 @@ make(const std::list<yarn::attribute>& attributes) const {
     std::list<helper_instance> r;
     std::unordered_set<std::string> done;
     for (const auto& i : instances) {
-        const auto cn(i.properties().complete_name());
+        const auto cn(i.descriptors().complete_name());
         if (done.find(cn) == done.end())
             continue;
 

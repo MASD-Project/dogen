@@ -44,7 +44,7 @@ public:
         const settings::helper_settings_repository& hsrp);
 
 private:
-    boost::optional<helper_instance_properties> make(
+    boost::optional<helper_descriptor> make(
         const yarn::name_tree& nt, std::list<helper_instance>& instances) const;
 
 public:

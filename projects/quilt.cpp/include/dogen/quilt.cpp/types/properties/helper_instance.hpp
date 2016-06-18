@@ -28,7 +28,7 @@
 #include <list>
 #include <algorithm>
 #include "dogen/quilt.cpp/types/settings/helper_settings.hpp"
-#include "dogen/quilt.cpp/types/properties/helper_instance_properties.hpp"
+#include "dogen/quilt.cpp/types/properties/helper_descriptor.hpp"
 #include "dogen/quilt.cpp/serialization/properties/helper_instance_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,8 +45,8 @@ public:
 
 public:
     helper_instance(
-        const dogen::quilt::cpp::properties::helper_instance_properties& properties,
-        const std::list<dogen::quilt::cpp::properties::helper_instance_properties>& associated_helpers,
+        const dogen::quilt::cpp::properties::helper_descriptor& descriptors,
+        const std::list<dogen::quilt::cpp::properties::helper_descriptor>& associated_helpers,
         const dogen::quilt::cpp::settings::helper_settings& settings);
 
 private:
@@ -57,15 +57,15 @@ private:
     friend void boost::serialization::load(Archive& ar, helper_instance& v, unsigned int version);
 
 public:
-    const dogen::quilt::cpp::properties::helper_instance_properties& properties() const;
-    dogen::quilt::cpp::properties::helper_instance_properties& properties();
-    void properties(const dogen::quilt::cpp::properties::helper_instance_properties& v);
-    void properties(const dogen::quilt::cpp::properties::helper_instance_properties&& v);
+    const dogen::quilt::cpp::properties::helper_descriptor& descriptors() const;
+    dogen::quilt::cpp::properties::helper_descriptor& descriptors();
+    void descriptors(const dogen::quilt::cpp::properties::helper_descriptor& v);
+    void descriptors(const dogen::quilt::cpp::properties::helper_descriptor&& v);
 
-    const std::list<dogen::quilt::cpp::properties::helper_instance_properties>& associated_helpers() const;
-    std::list<dogen::quilt::cpp::properties::helper_instance_properties>& associated_helpers();
-    void associated_helpers(const std::list<dogen::quilt::cpp::properties::helper_instance_properties>& v);
-    void associated_helpers(const std::list<dogen::quilt::cpp::properties::helper_instance_properties>&& v);
+    const std::list<dogen::quilt::cpp::properties::helper_descriptor>& associated_helpers() const;
+    std::list<dogen::quilt::cpp::properties::helper_descriptor>& associated_helpers();
+    void associated_helpers(const std::list<dogen::quilt::cpp::properties::helper_descriptor>& v);
+    void associated_helpers(const std::list<dogen::quilt::cpp::properties::helper_descriptor>&& v);
 
     /**
      * @brief Settings for this helper
@@ -88,8 +88,8 @@ public:
     helper_instance& operator=(helper_instance other);
 
 private:
-    dogen::quilt::cpp::properties::helper_instance_properties properties_;
-    std::list<dogen::quilt::cpp::properties::helper_instance_properties> associated_helpers_;
+    dogen::quilt::cpp::properties::helper_descriptor descriptors_;
+    std::list<dogen::quilt::cpp::properties::helper_descriptor> associated_helpers_;
     dogen::quilt::cpp::settings::helper_settings settings_;
 };
 

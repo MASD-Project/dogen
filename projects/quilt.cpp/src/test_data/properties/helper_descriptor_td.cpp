@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/quilt.cpp/test_data/properties/helper_instance_properties_td.hpp"
+#include "dogen/quilt.cpp/test_data/properties/helper_descriptor_td.hpp"
 
 namespace {
 
@@ -36,31 +36,31 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-helper_instance_properties_generator::helper_instance_properties_generator() : position_(0) { }
+helper_descriptor_generator::helper_descriptor_generator() : position_(0) { }
 
-void helper_instance_properties_generator::
+void helper_descriptor_generator::
 populate(const unsigned int position, result_type& v) {
     v.identifiable_name(create_std_string(position + 0));
     v.complete_name(create_std_string(position + 1));
     v.complete_identifiable_name(create_std_string(position + 2));
 }
 
-helper_instance_properties_generator::result_type
-helper_instance_properties_generator::create(const unsigned int position) {
-    helper_instance_properties r;
-    helper_instance_properties_generator::populate(position, r);
+helper_descriptor_generator::result_type
+helper_descriptor_generator::create(const unsigned int position) {
+    helper_descriptor r;
+    helper_descriptor_generator::populate(position, r);
     return r;
 }
 
-helper_instance_properties_generator::result_type*
-helper_instance_properties_generator::create_ptr(const unsigned int position) {
-    helper_instance_properties* p = new helper_instance_properties();
-    helper_instance_properties_generator::populate(position, *p);
+helper_descriptor_generator::result_type*
+helper_descriptor_generator::create_ptr(const unsigned int position) {
+    helper_descriptor* p = new helper_descriptor();
+    helper_descriptor_generator::populate(position, *p);
     return p;
 }
 
-helper_instance_properties_generator::result_type
-helper_instance_properties_generator::operator()() {
+helper_descriptor_generator::result_type
+helper_descriptor_generator::operator()() {
     return create(position_++);
 }
 

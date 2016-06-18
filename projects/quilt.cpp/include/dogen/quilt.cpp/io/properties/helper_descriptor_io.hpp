@@ -18,19 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_INSTANCE_PROPERTIES_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_INSTANCE_PROPERTIES_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_IO_PROPERTIES_HELPER_DESCRIPTOR_IO_HPP
+#define DOGEN_QUILT_CPP_IO_PROPERTIES_HELPER_DESCRIPTOR_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
+
+#include <iosfwd>
+#include "dogen/quilt.cpp/types/properties/helper_descriptor.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace properties {
 
-class helper_instance_properties;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::quilt::cpp::properties::helper_descriptor& v);
 
 } } } }
 

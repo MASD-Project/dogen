@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_INSTANCE_PROPERTIES_HPP
-#define DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_INSTANCE_PROPERTIES_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_DESCRIPTOR_HPP
+#define DOGEN_QUILT_CPP_TYPES_PROPERTIES_HELPER_DESCRIPTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,32 +27,32 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen/quilt.cpp/serialization/properties/helper_instance_properties_fwd_ser.hpp"
+#include "dogen/quilt.cpp/serialization/properties/helper_descriptor_fwd_ser.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace properties {
 
-class helper_instance_properties final {
+class helper_descriptor final {
 public:
-    helper_instance_properties() = default;
-    helper_instance_properties(const helper_instance_properties&) = default;
-    helper_instance_properties(helper_instance_properties&&) = default;
-    ~helper_instance_properties() = default;
+    helper_descriptor() = default;
+    helper_descriptor(const helper_descriptor&) = default;
+    helper_descriptor(helper_descriptor&&) = default;
+    ~helper_descriptor() = default;
 
 public:
-    helper_instance_properties(
+    helper_descriptor(
         const std::string& identifiable_name,
         const std::string& complete_name,
         const std::string& complete_identifiable_name);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const helper_instance_properties& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const helper_descriptor& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, helper_instance_properties& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, helper_descriptor& v, unsigned int version);
 
 public:
     /**
@@ -92,14 +92,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const helper_instance_properties& rhs) const;
-    bool operator!=(const helper_instance_properties& rhs) const {
+    bool operator==(const helper_descriptor& rhs) const;
+    bool operator!=(const helper_descriptor& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(helper_instance_properties& other) noexcept;
-    helper_instance_properties& operator=(helper_instance_properties other);
+    void swap(helper_descriptor& other) noexcept;
+    helper_descriptor& operator=(helper_descriptor other);
 
 private:
     std::string identifiable_name_;
@@ -113,8 +113,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::quilt::cpp::properties::helper_instance_properties& lhs,
-    dogen::quilt::cpp::properties::helper_instance_properties& rhs) {
+    dogen::quilt::cpp::properties::helper_descriptor& lhs,
+    dogen::quilt::cpp::properties::helper_descriptor& rhs) {
     lhs.swap(rhs);
 }
 
