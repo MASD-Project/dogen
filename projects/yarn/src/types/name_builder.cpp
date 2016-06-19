@@ -55,9 +55,10 @@ name_builder::name_builder(const name& n)
       name_(n) { }
 
 void name_builder::create_name_id() {
-    const pretty_printer pp;
     const bool skip_simple_name(!simple_name_contributes_to_qualifed_name_);
-    name_.id(pp.print(name_, skip_simple_name));
+    pretty_printer pp;
+    pp.add(name_, skip_simple_name);
+    name_.id(pp.print());
     BOOST_LOG_SEV(lg, debug) << "Created name id: " << name_.id();
 }
 

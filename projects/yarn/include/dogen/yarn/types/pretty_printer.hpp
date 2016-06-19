@@ -26,7 +26,9 @@
 #endif
 
 #include <string>
+#include <sstream>
 #include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/separators.hpp"
 
 namespace dogen {
@@ -42,18 +44,21 @@ private:
         const bool skip_simple_name) const;
 
 private:
-    void print_scoped(std::ostream& s, const std::string& separator,
-        const std::list<std::string>& l) const;
-    void print_delimited(std::ostream& s,
-        const std::list<std::string>& l) const;
+    void print_scoped(const std::string& separator,
+        const std::list<std::string>& l);
+    void print_enclosed(const std::list<std::string>& l);
 
 public:
-    void print(std::ostream& s, const name& n,
-        const bool skip_simple_name = false) const;
+    void add(const name& n, const bool skip_simple_name = false);
+    void add(const name_tree& nt);
 
-    std::string print(const name& n, const bool skip_simple_name = false) const;
+public:
+    std::string print();
 
 private:
+    bool has_name_trees_;
+    bool last_name_tree_had_children_;
+    std::ostringstream stream_;
     const separators separator_;
 };
 

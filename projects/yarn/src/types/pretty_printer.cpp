@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/printing_error.hpp"
@@ -29,9 +28,11 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.pretty_printer"));
 
+const char space(' ');
+const std::string comma_space(", ");
 const std::string double_colon("::");
-const std::string start_marker("<");
-const std::string end_marker(">");
+const char less_than('<');
+const char greater_than('>');
 const std::string unsupported_separator("Unsupported separator");
 
 }
@@ -39,10 +40,13 @@ const std::string unsupported_separator("Unsupported separator");
 namespace dogen {
 namespace yarn {
 
-pretty_printer::pretty_printer() : separator_(separators::angle_brackets) { }
+pretty_printer::pretty_printer()
+    : has_name_trees_(false), last_name_tree_had_children_(false),
+      separator_(separators::angle_brackets) { }
 
-pretty_printer::
-pretty_printer(const separators s) : separator_(s) { }
+pretty_printer::pretty_printer(const separators s)
+    : has_name_trees_(false), last_name_tree_had_children_(false),
+      separator_(s) { }
 
 std::list<std::string> pretty_printer::to_list(const name& n,
     const bool skip_simple_name) const {
@@ -71,34 +75,32 @@ std::list<std::string> pretty_printer::to_list(const name& n,
     return r;
 }
 
-void pretty_printer::
-print_delimited(std::ostream& s, const std::list<std::string>& l) const {
+void pretty_printer::print_enclosed(const std::list<std::string>& l) {
     for (const auto& c : l)
-        s << start_marker << c << end_marker;
+        stream_ << less_than << c << greater_than;
 }
 
-void pretty_printer::print_scoped(std::ostream& s, const std::string& separator,
-    const std::list<std::string>& l) const {
+void pretty_printer::
+print_scoped(const std::string& separator, const std::list<std::string>& l) {
     bool is_first(true);
 
     for (const auto& c : l) {
         if (!is_first)
-            s << separator;
-        s << c;
+            stream_ << separator;
+        stream_ << c;
         is_first = false;
     }
 }
 
-void pretty_printer::
-print(std::ostream& s, const name& n, const bool skip_simple_name) const {
+void pretty_printer::add(const name& n, const bool skip_simple_name) {
     const auto l(to_list(n, skip_simple_name));
 
     switch (separator_) {
     case separators::angle_brackets:
-        print_delimited(s, l);
+        print_enclosed(l);
         break;
     case separators::double_colons:
-        print_scoped(s, double_colon, l);
+        print_scoped(double_colon, l);
         break;
     default:
         BOOST_LOG_SEV(lg, error) << unsupported_separator << ": "
@@ -107,11 +109,39 @@ print(std::ostream& s, const name& n, const bool skip_simple_name) const {
     }
 }
 
-std::string pretty_printer::
-print(const name& n, const bool skip_simple_name) const {
-    std::ostringstream s;
-    print(s, n,skip_simple_name);
-    return s.str();
+void pretty_printer::add(const name_tree& nt) {
+    /*
+     * If we are the first name tree to be added, open the angle
+     * brackets; otherwise, separate the name trees.
+     */
+    if (!has_name_trees_)
+        stream_ << less_than;
+    else
+        stream_ << comma_space;
+
+    stream_ << nt.encoded();
+    has_name_trees_ = true;
+
+    /*
+     * Remember if the last name tree child also had children.
+     */
+    last_name_tree_had_children_ = nt.encoded().back() == greater_than;
+}
+
+std::string pretty_printer::print() {
+    if (!has_name_trees_)
+        return stream_.str();
+
+    /*
+     * If the last name tree child had children, add a space between
+     * template markers. Not really required for C++ 11 and above, but
+     * we will leave it for now to avoid spurious differences.
+     */
+    if (last_name_tree_had_children_)
+        stream_ << space;
+
+    stream_ << greater_than;
+    return stream_.str();
 }
 
 } }

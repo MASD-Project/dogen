@@ -35,10 +35,6 @@ using namespace dogen::utility::log;
 namespace {
 
 auto lg(logger_factory("yarn.name_tree_builder"));
-const char less_than('<');
-const char greater_than('>');
-const char space(' ');
-const std::string comma_space(", ");
 
 }
 
@@ -194,36 +190,16 @@ name_tree name_tree_builder::make_name_tree(const node& n) {
     name_tree r;
     r.parent(n.data());
 
-    std::ostringstream s;
     pretty_printer pp(separators::double_colons);
-    pp.print(s, n.data());
+    pp.add(n.data());
 
-    bool is_first = true;
     for (const auto c : n.children()) {
-        if (is_first)
-            s << less_than;
-        else
-            s << comma_space;
-
         const auto cnt(make_name_tree(*c));
-        s << cnt.encoded();
         r.children().push_back(cnt);
-        is_first = false;
+        pp.add(cnt);
     }
 
-    if (!r.children().empty()) {
-        /*
-         * If the last child also had children, add a space between
-         * template markers. Not really required for C++ 11 and above,
-         * but we will leave it for now to avoid spurious differences.
-         */
-        const auto& ut(r.children().back().encoded());
-        if (ut[ut.length() - 1] == greater_than)
-            s << space;
-        s << greater_than;
-    }
-
-    r.encoded(s.str());
+    r.encoded(pp.print());
     return r;
 }
 

@@ -3046,7 +3046,7 @@ all types in the merged intermediate model.#</dia:string>
         <dia:point val="-11.895,34.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-34.1688,33.65;-11.145,50.8"/>
+        <dia:rectangle val="-34.1687,33.65;-11.145,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17957,16 +17957,16 @@ but the module does not yet exist.#</dia:string>
         <dia:point val="-72,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-72.05,-1.05;-42.96,4.25"/>
+        <dia:rectangle val="-72.05,-1.05;-46.04,5.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-72,-1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.989999999999998"/>
+        <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000002"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#pretty_printer#</dia:string>
@@ -18107,7 +18107,7 @@ but the module does not yet exist.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#print#</dia:string>
+            <dia:string>#add#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -18128,7 +18128,7 @@ but the module does not yet exist.#</dia:string>
             <dia:enum val="2"/>
           </dia:attribute>
           <dia:attribute name="query">
-            <dia:boolean val="true"/>
+            <dia:boolean val="false"/>
           </dia:attribute>
           <dia:attribute name="class_scope">
             <dia:boolean val="false"/>
@@ -18172,7 +18172,7 @@ but the module does not yet exist.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#print#</dia:string>
+            <dia:string>#add#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -18193,7 +18193,7 @@ but the module does not yet exist.#</dia:string>
             <dia:enum val="2"/>
           </dia:attribute>
           <dia:attribute name="query">
-            <dia:boolean val="true"/>
+            <dia:boolean val="false"/>
           </dia:attribute>
           <dia:attribute name="class_scope">
             <dia:boolean val="false"/>
@@ -18217,6 +18217,36 @@ but the module does not yet exist.#</dia:string>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umloperation">
+          <dia:attribute name="name">
+            <dia:string>#print#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="stereotype">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="inheritance_type">
+            <dia:enum val="2"/>
+          </dia:attribute>
+          <dia:attribute name="query">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="parameters"/>
         </dia:composite>
       </dia:attribute>
       <dia:attribute name="template">
@@ -18297,13 +18327,13 @@ but the module does not yet exist.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O153">
       <dia:attribute name="obj_pos">
-        <dia:point val="-72,14"/>
+        <dia:point val="-73,14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-72.05,13.95;-65.675,18.45"/>
+        <dia:rectangle val="-73.05,13.95;-66.675,18.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-72,14"/>
+        <dia:point val="-73,14"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="6.2750000000000004"/>
@@ -18490,19 +18520,19 @@ but the module does not yet exist.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-68.8625,14"/>
+        <dia:point val="-69.8625,14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-68.9125,3.45;-56.755,14.8"/>
+        <dia:rectangle val="-69.9125,4.25;-58.295,14.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-68.8625,14"/>
-        <dia:point val="-68.8625,9"/>
-        <dia:point val="-57.505,9"/>
-        <dia:point val="-57.505,4.2"/>
+        <dia:point val="-69.8625,14"/>
+        <dia:point val="-69.8625,9"/>
+        <dia:point val="-59.045,9"/>
+        <dia:point val="-59.045,5"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -18829,16 +18859,16 @@ space.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-72,4.2"/>
+        <dia:point val="-72,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-79.655,3.45;-71.25,14.8"/>
+        <dia:rectangle val="-79.655,4.25;-71.25,14.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-72,4.2"/>
+        <dia:point val="-72,5"/>
         <dia:point val="-72,9"/>
         <dia:point val="-79.605,9"/>
         <dia:point val="-79.605,14"/>
@@ -19105,17 +19135,17 @@ space.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-43.01,4.2"/>
+        <dia:point val="-46.09,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-43.76,3.45;-34.8,9.05"/>
+        <dia:rectangle val="-46.84,4.25;-34.8,9.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-43.01,4.2"/>
-        <dia:point val="-43.01,9"/>
+        <dia:point val="-46.09,5"/>
+        <dia:point val="-46.09,9"/>
         <dia:point val="-35,9"/>
         <dia:point val="-35,5.8"/>
       </dia:attribute>
