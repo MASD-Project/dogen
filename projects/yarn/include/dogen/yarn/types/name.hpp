@@ -63,8 +63,8 @@ public:
         const std::string& id,
         const std::string& simple,
         const std::map<dogen::yarn::language, std::string>& qualified,
-        const std::string& identifiable,
-        const dogen::yarn::location& location);
+        const dogen::yarn::location& location,
+        const std::string& identifiable);
 
 private:
     template<typename Archive>
@@ -113,6 +113,16 @@ public:
     /**@}*/
 
     /**
+     * @brief Where the name is located in element space.
+     */
+    /**@{*/
+    const dogen::yarn::location& location() const;
+    dogen::yarn::location& location();
+    void location(const dogen::yarn::location& v);
+    void location(const dogen::yarn::location&& v);
+    /**@}*/
+
+    /**
      * @brief Representation of the name that can usable as an identifier on all of the supported
      * languages, using the entire name structure.
      */
@@ -121,16 +131,6 @@ public:
     std::string& identifiable();
     void identifiable(const std::string& v);
     void identifiable(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Where the name is located in element space.
-     */
-    /**@{*/
-    const dogen::yarn::location& location() const;
-    dogen::yarn::location& location();
-    void location(const dogen::yarn::location& v);
-    void location(const dogen::yarn::location&& v);
     /**@}*/
 
 public:
@@ -147,8 +147,8 @@ private:
     std::string id_;
     std::string simple_;
     std::map<dogen::yarn::language, std::string> qualified_;
-    std::string identifiable_;
     dogen::yarn::location location_;
+    std::string identifiable_;
 };
 
 } }

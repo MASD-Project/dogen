@@ -27,29 +27,29 @@ name::name(
     const std::string& id,
     const std::string& simple,
     const std::map<dogen::yarn::language, std::string>& qualified,
-    const std::string& identifiable,
-    const dogen::yarn::location& location)
+    const dogen::yarn::location& location,
+    const std::string& identifiable)
     : id_(id),
       simple_(simple),
       qualified_(qualified),
-      identifiable_(identifiable),
-      location_(location) { }
+      location_(location),
+      identifiable_(identifiable) { }
 
 void name::swap(name& other) noexcept {
     using std::swap;
     swap(id_, other.id_);
     swap(simple_, other.simple_);
     swap(qualified_, other.qualified_);
-    swap(identifiable_, other.identifiable_);
     swap(location_, other.location_);
+    swap(identifiable_, other.identifiable_);
 }
 
 bool name::operator==(const name& rhs) const {
     return id_ == rhs.id_ &&
         simple_ == rhs.simple_ &&
         qualified_ == rhs.qualified_ &&
-        identifiable_ == rhs.identifiable_ &&
-        location_ == rhs.location_;
+        location_ == rhs.location_ &&
+        identifiable_ == rhs.identifiable_;
 }
 
 name& name::operator=(name other) {
@@ -106,22 +106,6 @@ void name::qualified(const std::map<dogen::yarn::language, std::string>&& v) {
     qualified_ = std::move(v);
 }
 
-const std::string& name::identifiable() const {
-    return identifiable_;
-}
-
-std::string& name::identifiable() {
-    return identifiable_;
-}
-
-void name::identifiable(const std::string& v) {
-    identifiable_ = v;
-}
-
-void name::identifiable(const std::string&& v) {
-    identifiable_ = std::move(v);
-}
-
 const dogen::yarn::location& name::location() const {
     return location_;
 }
@@ -136,6 +120,22 @@ void name::location(const dogen::yarn::location& v) {
 
 void name::location(const dogen::yarn::location&& v) {
     location_ = std::move(v);
+}
+
+const std::string& name::identifiable() const {
+    return identifiable_;
+}
+
+std::string& name::identifiable() {
+    return identifiable_;
+}
+
+void name::identifiable(const std::string& v) {
+    identifiable_ = v;
+}
+
+void name::identifiable(const std::string&& v) {
+    identifiable_ = std::move(v);
 }
 
 } }

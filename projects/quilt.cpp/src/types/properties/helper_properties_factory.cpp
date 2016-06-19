@@ -81,8 +81,8 @@ make(const yarn::name_tree& nt, std::list<helper_properties>& properties) const 
     name_builder b;
     helper_descriptor r;
     r.identifiable_name(b.identifiable_name(qn));
-    r.complete_name(nt.unparsed_type());
-    r.complete_identifiable_name(b.identifiable_name(nt.unparsed_type()));
+    r.complete_name(nt.encoded());
+    r.complete_identifiable_name(b.identifiable_name(nt.encoded()));
     hp.descriptors(r);
     properties.push_back(hp);
 

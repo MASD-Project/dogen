@@ -206,7 +206,7 @@ name_tree name_tree_builder::make_name_tree(const node& n) {
             s << comma_space;
 
         const auto cnt(make_name_tree(*c));
-        s << cnt.unparsed_type();
+        s << cnt.encoded();
         r.children().push_back(cnt);
         is_first = false;
     }
@@ -217,13 +217,13 @@ name_tree name_tree_builder::make_name_tree(const node& n) {
          * template markers. Not really required for C++ 11 and above,
          * but we will leave it for now to avoid spurious differences.
          */
-        const auto& ut(r.children().back().unparsed_type());
+        const auto& ut(r.children().back().encoded());
         if (ut[ut.length() - 1] == greater_than)
             s << space;
         s << greater_than;
     }
 
-    r.unparsed_type(s.str());
+    r.encoded(s.str());
     return r;
 }
 

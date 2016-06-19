@@ -50,8 +50,8 @@ std::size_t name_hasher::hash(const name& v) {
     combine(seed, v.id());
     combine(seed, v.simple());
     combine(seed, hash_std_map_dogen_yarn_language_std_string(v.qualified()));
-    combine(seed, v.identifiable());
     combine(seed, v.location());
+    combine(seed, v.identifiable());
 
     return seed;
 }

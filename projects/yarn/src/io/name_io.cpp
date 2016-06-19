@@ -58,8 +58,8 @@ std::ostream& operator<<(std::ostream& s, const name& v) {
       << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "
       << "\"simple\": " << "\"" << tidy_up_string(v.simple()) << "\"" << ", "
       << "\"qualified\": " << v.qualified() << ", "
-      << "\"identifiable\": " << "\"" << tidy_up_string(v.identifiable()) << "\"" << ", "
-      << "\"location\": " << v.location()
+      << "\"location\": " << v.location() << ", "
+      << "\"identifiable\": " << "\"" << tidy_up_string(v.identifiable()) << "\""
       << " }";
     return(s);
 }

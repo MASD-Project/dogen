@@ -9,7 +9,6 @@
 			<count>0</count>
 			<item_version>0</item_version>
 		</qualified>
-		<identifiable></identifiable>
 		<location class_id="13" tracking_level="0" version="0">
 			<external_modules class_id="14" tracking_level="0" version="0">
 				<count>0</count>
@@ -26,6 +25,7 @@
 			</internal_modules>
 			<element></element>
 		</location>
+		<identifiable></identifiable>
 	</name>
 	<origin_type>1</origin_type>
 	<original_model_name>std_model</original_model_name>
@@ -63,7 +63,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -80,6 +79,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -147,7 +147,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -164,6 +163,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -218,7 +218,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -235,6 +234,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -267,7 +267,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -284,6 +283,7 @@
 								</internal_modules>
 								<element>primitives</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::int8_t</unparsed_type>
 						<parsed_type class_id="35" tracking_level="0" version="0">
@@ -294,7 +294,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -310,6 +309,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children class_id="36" tracking_level="0" version="0">
 								<count>0</count>
@@ -317,11 +317,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -343,7 +339,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -360,6 +355,7 @@
 								</internal_modules>
 								<element>primitives</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::int16_t</unparsed_type>
 						<parsed_type>
@@ -370,7 +366,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -386,6 +381,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -393,11 +389,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -419,7 +411,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -436,6 +427,7 @@
 								</internal_modules>
 								<element>primitives</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::int32_t</unparsed_type>
 						<parsed_type>
@@ -446,7 +438,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -462,6 +453,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -469,11 +461,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -495,7 +483,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -512,6 +499,7 @@
 								</internal_modules>
 								<element>primitives</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::int64_t</unparsed_type>
 						<parsed_type>
@@ -522,7 +510,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -538,6 +525,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -545,11 +533,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -571,7 +555,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -588,6 +571,7 @@
 								</internal_modules>
 								<element>primitives</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::uint8_t</unparsed_type>
 						<parsed_type>
@@ -598,7 +582,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -614,6 +597,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -621,11 +605,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -647,7 +627,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -664,6 +643,7 @@
 								</internal_modules>
 								<element>primitives</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::uint16_t</unparsed_type>
 						<parsed_type>
@@ -674,7 +654,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -690,6 +669,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -697,11 +677,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -723,7 +699,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -740,6 +715,7 @@
 								</internal_modules>
 								<element>primitives</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::uint32_t</unparsed_type>
 						<parsed_type>
@@ -750,7 +726,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -766,6 +741,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -773,11 +749,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -799,7 +771,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -816,6 +787,7 @@
 								</internal_modules>
 								<element>primitives</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::uint64_t</unparsed_type>
 						<parsed_type>
@@ -826,7 +798,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -842,6 +813,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -849,11 +821,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -927,7 +895,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -945,6 +912,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -977,7 +945,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -995,6 +962,7 @@
 								</internal_modules>
 								<element>class_c</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -1005,7 +973,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -1021,6 +988,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -1028,11 +996,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -1054,7 +1018,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -1072,6 +1035,7 @@
 								</internal_modules>
 								<element>class_c</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -1082,7 +1046,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -1098,6 +1061,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -1105,11 +1069,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -1183,7 +1143,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -1200,6 +1159,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -1232,7 +1192,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -1249,6 +1208,7 @@
 								</internal_modules>
 								<element>base</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
 						<parsed_type>
@@ -1259,7 +1219,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -1275,6 +1234,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -1282,11 +1242,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -1360,7 +1316,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -1377,6 +1332,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -1409,7 +1365,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -1426,6 +1381,7 @@
 								</internal_modules>
 								<element>class_j</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::pair&lt;int,int&gt;</unparsed_type>
 						<parsed_type>
@@ -1436,7 +1392,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -1452,6 +1407,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -1459,11 +1415,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -1485,7 +1437,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -1502,6 +1453,7 @@
 								</internal_modules>
 								<element>class_j</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::pair&lt;std::string,std::string&gt;</unparsed_type>
 						<parsed_type>
@@ -1512,7 +1464,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -1528,6 +1479,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -1535,11 +1487,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -1561,7 +1509,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -1578,6 +1525,7 @@
 								</internal_modules>
 								<element>class_j</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::vector&lt;std::pair&lt;std::string,int&gt;&gt;</unparsed_type>
 						<parsed_type>
@@ -1588,7 +1536,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -1604,6 +1551,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -1611,11 +1559,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -1689,7 +1633,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -1706,6 +1649,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -1738,7 +1682,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -1755,6 +1698,7 @@
 								</internal_modules>
 								<element>class_b</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::vector&lt;std::string&gt;</unparsed_type>
 						<parsed_type>
@@ -1765,7 +1709,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -1781,6 +1724,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -1788,11 +1732,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -1814,7 +1754,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -1831,6 +1770,7 @@
 								</internal_modules>
 								<element>class_b</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -1841,7 +1781,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -1857,6 +1796,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -1864,11 +1804,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -1890,7 +1826,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -1907,6 +1842,7 @@
 								</internal_modules>
 								<element>class_b</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::vector&lt;pkg1::class_c&gt;</unparsed_type>
 						<parsed_type>
@@ -1917,7 +1853,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -1933,6 +1868,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -1940,11 +1876,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -1966,7 +1898,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -1983,6 +1914,7 @@
 								</internal_modules>
 								<element>class_b</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::vector&lt;unsigned int&gt;</unparsed_type>
 						<parsed_type>
@@ -1993,7 +1925,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -2009,6 +1940,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -2016,11 +1948,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -2042,7 +1970,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -2059,6 +1986,7 @@
 								</internal_modules>
 								<element>class_b</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -2069,7 +1997,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -2085,6 +2012,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -2092,11 +2020,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -2118,7 +2042,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -2135,6 +2058,7 @@
 								</internal_modules>
 								<element>class_b</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::vector&lt;std::vector&lt;unsigned int&gt;&gt;</unparsed_type>
 						<parsed_type>
@@ -2145,7 +2069,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -2161,6 +2084,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -2168,11 +2092,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -2246,7 +2166,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -2263,6 +2182,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -2295,7 +2215,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -2312,6 +2231,7 @@
 								</internal_modules>
 								<element>class_d</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::list&lt;std::string&gt;</unparsed_type>
 						<parsed_type>
@@ -2322,7 +2242,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -2338,6 +2257,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -2345,11 +2265,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -2371,7 +2287,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -2388,6 +2303,7 @@
 								</internal_modules>
 								<element>class_d</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::list&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -2398,7 +2314,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -2414,6 +2329,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -2421,11 +2337,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -2447,7 +2359,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -2464,6 +2375,7 @@
 								</internal_modules>
 								<element>class_d</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::list&lt;pkg1::class_c&gt;</unparsed_type>
 						<parsed_type>
@@ -2474,7 +2386,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -2490,6 +2401,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -2497,11 +2409,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -2523,7 +2431,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -2540,6 +2447,7 @@
 								</internal_modules>
 								<element>class_d</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::list&lt;unsigned int&gt;</unparsed_type>
 						<parsed_type>
@@ -2550,7 +2458,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -2566,6 +2473,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -2573,11 +2481,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -2599,7 +2503,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -2616,6 +2519,7 @@
 								</internal_modules>
 								<element>class_d</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::list&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -2626,7 +2530,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -2642,6 +2545,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -2649,11 +2553,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -2675,7 +2575,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -2692,6 +2591,7 @@
 								</internal_modules>
 								<element>class_d</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::list&lt;std::list&lt;unsigned int&gt;&gt;</unparsed_type>
 						<parsed_type>
@@ -2702,7 +2602,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -2718,6 +2617,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -2725,11 +2625,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -2803,7 +2699,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -2820,6 +2715,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -2863,7 +2759,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -2880,6 +2775,7 @@
 								</internal_modules>
 								<element>class_a</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::string</unparsed_type>
 						<parsed_type>
@@ -2890,7 +2786,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -2906,6 +2801,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -2913,11 +2809,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -2940,7 +2832,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -2957,6 +2848,7 @@
 								</internal_modules>
 								<element>class_a</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::string</unparsed_type>
 						<parsed_type>
@@ -2967,7 +2859,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -2983,6 +2874,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -2990,11 +2882,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -3068,7 +2956,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -3085,6 +2972,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -3117,7 +3005,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -3134,6 +3021,7 @@
 								</internal_modules>
 								<element>class_e</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::deque&lt;std::string&gt;</unparsed_type>
 						<parsed_type>
@@ -3144,7 +3032,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -3160,6 +3047,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -3167,11 +3055,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -3193,7 +3077,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -3210,6 +3093,7 @@
 								</internal_modules>
 								<element>class_e</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -3220,7 +3104,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -3236,6 +3119,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -3243,11 +3127,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -3269,7 +3149,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -3286,6 +3165,7 @@
 								</internal_modules>
 								<element>class_e</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::deque&lt;pkg1::class_c&gt;</unparsed_type>
 						<parsed_type>
@@ -3296,7 +3176,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -3312,6 +3191,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -3319,11 +3199,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -3345,7 +3221,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -3362,6 +3237,7 @@
 								</internal_modules>
 								<element>class_e</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::deque&lt;unsigned int&gt;</unparsed_type>
 						<parsed_type>
@@ -3372,7 +3248,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -3388,6 +3263,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -3395,11 +3271,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -3421,7 +3293,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -3438,6 +3309,7 @@
 								</internal_modules>
 								<element>class_e</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::deque&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -3448,7 +3320,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -3464,6 +3335,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -3471,11 +3343,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -3497,7 +3365,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -3514,6 +3381,7 @@
 								</internal_modules>
 								<element>class_e</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::deque&lt;std::deque&lt;unsigned int&gt;&gt;</unparsed_type>
 						<parsed_type>
@@ -3524,7 +3392,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -3540,6 +3407,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -3547,11 +3415,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -3625,7 +3489,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -3642,6 +3505,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -3674,7 +3538,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -3691,6 +3554,7 @@
 								</internal_modules>
 								<element>class_h</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::unordered_set&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -3701,7 +3565,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -3717,6 +3580,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -3724,11 +3588,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -3750,7 +3610,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -3767,6 +3626,7 @@
 								</internal_modules>
 								<element>class_h</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::unordered_set&lt;pkg1::class_c&gt;</unparsed_type>
 						<parsed_type>
@@ -3777,7 +3637,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -3793,6 +3652,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -3800,11 +3660,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -3878,7 +3734,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -3895,6 +3750,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -3927,7 +3783,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -3944,6 +3799,7 @@
 								</internal_modules>
 								<element>class_f</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::unordered_map&lt;std::string,std::string&gt;</unparsed_type>
 						<parsed_type>
@@ -3954,7 +3810,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -3970,6 +3825,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -3977,11 +3833,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -4003,7 +3855,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -4020,6 +3871,7 @@
 								</internal_modules>
 								<element>class_f</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::unordered_map&lt;std::string,class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -4030,7 +3882,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -4046,6 +3897,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -4053,11 +3905,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -4079,7 +3927,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -4096,6 +3943,7 @@
 								</internal_modules>
 								<element>class_f</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::unordered_map&lt;class_a,pkg1::class_c&gt;</unparsed_type>
 						<parsed_type>
@@ -4106,7 +3954,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -4122,6 +3969,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -4129,11 +3977,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -4207,7 +4051,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -4224,6 +4067,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>2</generation_type>
 					<origin_type>1</origin_type>
@@ -4256,7 +4100,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -4273,6 +4116,7 @@
 								</internal_modules>
 								<element>some_service</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::shared_ptr&lt;base&gt;</unparsed_type>
 						<parsed_type>
@@ -4283,7 +4127,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -4299,6 +4142,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -4306,11 +4150,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -4332,7 +4172,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -4349,6 +4188,7 @@
 								</internal_modules>
 								<element>some_service</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::weak_ptr&lt;base&gt;</unparsed_type>
 						<parsed_type>
@@ -4359,7 +4199,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -4375,6 +4214,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -4382,11 +4222,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -4408,7 +4244,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -4425,6 +4260,7 @@
 								</internal_modules>
 								<element>some_service</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::unique_ptr&lt;base&gt;</unparsed_type>
 						<parsed_type>
@@ -4435,7 +4271,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -4451,6 +4286,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -4458,11 +4294,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -4484,7 +4316,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -4501,6 +4332,7 @@
 								</internal_modules>
 								<element>some_service</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::function</unparsed_type>
 						<parsed_type>
@@ -4511,7 +4343,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -4527,6 +4358,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -4534,11 +4366,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -4612,7 +4440,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -4629,6 +4456,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -4661,7 +4489,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -4678,6 +4505,7 @@
 								</internal_modules>
 								<element>class_g</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::unordered_map&lt;class_a,std::vector&lt;pkg1::class_c&gt;&gt;</unparsed_type>
 						<parsed_type>
@@ -4688,7 +4516,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -4704,6 +4531,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -4711,11 +4539,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -4737,7 +4561,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -4754,6 +4577,7 @@
 								</internal_modules>
 								<element>class_g</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::unordered_map&lt;pkg1::class_c,std::list&lt;class_a&gt;&gt;</unparsed_type>
 						<parsed_type>
@@ -4764,7 +4588,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -4780,6 +4603,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -4787,11 +4611,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -4813,7 +4633,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -4830,6 +4649,7 @@
 								</internal_modules>
 								<element>class_g</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::unordered_map&lt;std::string, class_a&gt;</unparsed_type>
 						<parsed_type>
@@ -4840,7 +4660,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -4856,6 +4675,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -4863,11 +4683,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -4941,7 +4757,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -4958,6 +4773,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -4990,7 +4806,6 @@
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -5007,6 +4822,7 @@
 								</internal_modules>
 								<element>derived</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>std::list&lt;pkg1::class_c&gt;</unparsed_type>
 						<parsed_type>
@@ -5017,7 +4833,6 @@
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -5033,6 +4848,7 @@
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -5040,11 +4856,7 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -5075,7 +4887,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -5092,6 +4903,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</item>
 				</parents>
 				<leaves>

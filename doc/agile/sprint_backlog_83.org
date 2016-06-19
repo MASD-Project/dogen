@@ -182,6 +182,38 @@ but an identifier. Rename:
 - qualified to id
 - qualified for to qualified.
 
+*** COMPLETED Rename unparsed type  in name tree                      :story:
+    CLOSED: [2016-06-19 Sun 13:37]
+    CLOCK: [2016-06-19 Sun 12:50]--[2016-06-19 Sun 13:37] =>  0:47
+
+The name "unparsed type" in name tree is very misleading because:
+
+- we are parsing the type in order to obtain the child representation;
+- it is using a dogen specific notation.
+
+We need to rename it, and also make identifiable clearer.
+
+Actually we just can't think of a good name for identifiable so let's
+stick with that for now.
+
+*** STARTED Rename pretty printer to encoder                          :story:
+    CLOCK: [2016-06-19 Sun 13:38]--[2016-06-19 Sun 13:40] =>  0:02
+
+The more one thinks about it the more pretty printer looks weird:
+
+- it is not actually pretty printing types for user visualisation; it
+  is encoding types according to a scheme into a string
+  representation.
+- the name tree "pretty printing" is partially done in name tree
+  builder.
+- in order to move it to "pretty printer" avoiding looping through the
+  tree again we need a builder interface.
+
+So:
+
+- rename =pretty_printer= to =encoder=;
+- add an =encoder::builder= which handles name trees.
+
 *** STARTED Compute yarn property related information                 :story:
     CLOCK: [2016-06-18 Sat 23:05]--[2016-06-18 Sat 23:10] =>  0:05
     CLOCK: [2016-06-18 Sat 22:52]--[2016-06-18 Sat 23:04] =>  0:12

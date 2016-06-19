@@ -9,7 +9,6 @@
 			<count>0</count>
 			<item_version>0</item_version>
 		</qualified>
-		<identifiable></identifiable>
 		<location class_id="13" tracking_level="0" version="0">
 			<external_modules class_id="14" tracking_level="0" version="0">
 				<count>0</count>
@@ -26,6 +25,7 @@
 			</internal_modules>
 			<element></element>
 		</location>
+		<identifiable></identifiable>
 	</name>
 	<origin_type>1</origin_type>
 	<original_model_name>enumeration</original_model_name>
@@ -63,7 +63,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -80,6 +79,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -147,7 +147,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -164,6 +163,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -213,7 +213,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -231,6 +230,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -247,7 +247,6 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</qualified>
-					<identifiable></identifiable>
 					<location>
 						<external_modules>
 							<count>0</count>
@@ -263,6 +262,7 @@
 						</internal_modules>
 						<element></element>
 					</location>
+					<identifiable></identifiable>
 				</underlying_type>
 				<enumerators class_id="32" tracking_level="0" version="0">
 					<count>5</count>
@@ -317,7 +317,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -334,6 +333,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -350,7 +350,6 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</qualified>
-					<identifiable></identifiable>
 					<location>
 						<external_modules>
 							<count>0</count>
@@ -366,6 +365,7 @@
 						</internal_modules>
 						<element></element>
 					</location>
+					<identifiable></identifiable>
 				</underlying_type>
 				<enumerators>
 					<count>5</count>
@@ -423,7 +423,6 @@ this is a long comment
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -440,6 +439,7 @@ this is a long comment
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -456,7 +456,6 @@ this is a long comment
 						<count>0</count>
 						<item_version>0</item_version>
 					</qualified>
-					<identifiable></identifiable>
 					<location>
 						<external_modules>
 							<count>0</count>
@@ -472,6 +471,7 @@ this is a long comment
 						</internal_modules>
 						<element></element>
 					</location>
+					<identifiable></identifiable>
 				</underlying_type>
 				<enumerators>
 					<count>4</count>
@@ -523,7 +523,6 @@ this is a long comment
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -540,6 +539,7 @@ this is a long comment
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -572,7 +572,6 @@ this is a long comment
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -589,6 +588,7 @@ this is a long comment
 								</internal_modules>
 								<element>a_class</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>colour_types</unparsed_type>
 						<parsed_type class_id="38" tracking_level="0" version="0">
@@ -599,7 +599,6 @@ this is a long comment
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -615,6 +614,7 @@ this is a long comment
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children class_id="39" tracking_level="0" version="0">
 								<count>0</count>
@@ -622,11 +622,7 @@ this is a long comment
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -648,7 +644,6 @@ this is a long comment
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -665,6 +660,7 @@ this is a long comment
 								</internal_modules>
 								<element>a_class</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>book_types</unparsed_type>
 						<parsed_type>
@@ -675,7 +671,6 @@ this is a long comment
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -691,6 +686,7 @@ this is a long comment
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -698,11 +694,7 @@ this is a long comment
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -724,7 +716,6 @@ this is a long comment
 								<count>0</count>
 								<item_version>0</item_version>
 							</qualified>
-							<identifiable></identifiable>
 							<location>
 								<external_modules>
 									<count>0</count>
@@ -741,6 +732,7 @@ this is a long comment
 								</internal_modules>
 								<element>a_class</element>
 							</location>
+							<identifiable></identifiable>
 						</name>
 						<unparsed_type>pkg1::shape_types</unparsed_type>
 						<parsed_type>
@@ -751,7 +743,6 @@ this is a long comment
 									<count>0</count>
 									<item_version>0</item_version>
 								</qualified>
-								<identifiable></identifiable>
 								<location>
 									<external_modules>
 										<count>0</count>
@@ -767,6 +758,7 @@ this is a long comment
 									</internal_modules>
 									<element></element>
 								</location>
+								<identifiable></identifiable>
 							</parent>
 							<children>
 								<count>0</count>
@@ -774,11 +766,7 @@ this is a long comment
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<unparsed_type></unparsed_type>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
+							<encoded></encoded>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>

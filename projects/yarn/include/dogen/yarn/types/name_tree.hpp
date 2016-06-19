@@ -28,11 +28,8 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include <map>
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/language.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
-#include "dogen/yarn/hash/language_hash.hpp"
 #include "dogen/yarn/serialization/name_tree_fwd_ser.hpp"
 
 namespace dogen {
@@ -61,8 +58,7 @@ public:
         const std::list<dogen::yarn::name_tree>& children,
         const bool are_children_opaque,
         const bool is_circular_dependency,
-        const std::string& unparsed_type,
-        const std::map<dogen::yarn::language, std::string>& qualified,
+        const std::string& encoded,
         const std::string& identifiable);
 
 private:
@@ -114,28 +110,18 @@ public:
     /**@}*/
 
     /**
-     * @brief Portion of the original unparsed type relevant to this node and its children.
+     * @brief Textual representaion of the name tree and its children, using a dogen grammar.
      */
     /**@{*/
-    const std::string& unparsed_type() const;
-    std::string& unparsed_type();
-    void unparsed_type(const std::string& v);
-    void unparsed_type(const std::string&& v);
+    const std::string& encoded() const;
+    std::string& encoded();
+    void encoded(const std::string& v);
+    void encoded(const std::string&& v);
     /**@}*/
 
     /**
-     * @brief Qualified representation of the name tree in a language specific representation.
-     */
-    /**@{*/
-    const std::map<dogen::yarn::language, std::string>& qualified() const;
-    std::map<dogen::yarn::language, std::string>& qualified();
-    void qualified(const std::map<dogen::yarn::language, std::string>& v);
-    void qualified(const std::map<dogen::yarn::language, std::string>&& v);
-    /**@}*/
-
-    /**
-     * @brief Representation of the named tree that can usable as an identifier on all of the
-     * supported languages, using the entire name tree.
+     * @brief Representation of the named tree that can usable as an identifier across all
+     * supported languages.
      */
     /**@{*/
     const std::string& identifiable() const;
@@ -159,8 +145,7 @@ private:
     std::list<dogen::yarn::name_tree> children_;
     bool are_children_opaque_;
     bool is_circular_dependency_;
-    std::string unparsed_type_;
-    std::map<dogen::yarn::language, std::string> qualified_;
+    std::string encoded_;
     std::string identifiable_;
 };
 

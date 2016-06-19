@@ -43,8 +43,8 @@ void save(Archive& ar,
     ar << make_nvp("id", v.id_);
     ar << make_nvp("simple", v.simple_);
     ar << make_nvp("qualified", v.qualified_);
-    ar << make_nvp("identifiable", v.identifiable_);
     ar << make_nvp("location", v.location_);
+    ar << make_nvp("identifiable", v.identifiable_);
 }
 
 template<typename Archive>
@@ -54,8 +54,8 @@ void load(Archive& ar,
     ar >> make_nvp("id", v.id_);
     ar >> make_nvp("simple", v.simple_);
     ar >> make_nvp("qualified", v.qualified_);
-    ar >> make_nvp("identifiable", v.identifiable_);
     ar >> make_nvp("location", v.location_);
+    ar >> make_nvp("identifiable", v.identifiable_);
 }
 
 } }

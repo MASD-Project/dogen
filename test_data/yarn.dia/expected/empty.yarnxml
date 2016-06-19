@@ -9,7 +9,6 @@
 			<count>0</count>
 			<item_version>0</item_version>
 		</qualified>
-		<identifiable></identifiable>
 		<location class_id="13" tracking_level="0" version="0">
 			<external_modules class_id="14" tracking_level="0" version="0">
 				<count>0</count>
@@ -26,6 +25,7 @@
 			</internal_modules>
 			<element></element>
 		</location>
+		<identifiable></identifiable>
 	</name>
 	<origin_type>1</origin_type>
 	<original_model_name>empty</original_model_name>
@@ -63,7 +63,6 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</qualified>
-						<identifiable></identifiable>
 						<location>
 							<external_modules>
 								<count>0</count>
@@ -80,6 +79,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
+						<identifiable></identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>

@@ -46,10 +46,10 @@ const auto top_level_modules = std::unordered_set<std::string>();
 const auto model_location = dogen::yarn::location();
 
 dogen::yarn::
-name_tree make(const dogen::yarn::name& n, const std::string& unparsed_type) {
+name_tree make(const dogen::yarn::name& n, const std::string& encoded) {
     dogen::yarn::name_tree r;
     r.parent(n);
-    r.unparsed_type(unparsed_type);
+    r.encoded(encoded);
     return r;
 }
 
@@ -179,11 +179,11 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expec
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("type"));
-    e.unparsed_type("type<abc>");
+    e.encoded("type<abc>");
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("abc"));
-    c.unparsed_type("abc");
+    c.encoded("abc");
 
     e.children(std::list<dogen::yarn::name_tree> { c });
 
@@ -199,15 +199,15 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("type"));
-    e.unparsed_type("type<abc, cde>");
+    e.encoded("type<abc, cde>");
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("abc"));
-    c.unparsed_type("abc");
+    c.encoded("abc");
 
     dogen::yarn::name_tree d;
     d.parent(nf.build_element_name("cde"));
-    d.unparsed_type("cde");
+    d.encoded("cde");
 
     e.children(std::list<dogen::yarn::name_tree> { c, d });
 
@@ -224,11 +224,11 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_name_trees) {
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("std", "vector"));
-    e.unparsed_type("std::vector<std::string>");
+    e.encoded("std::vector<std::string>");
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("std", "string"));
-    c.unparsed_type("std::string");
+    c.encoded("std::string");
 
     e.children(std::list<dogen::yarn::name_tree> { c });
 
@@ -246,11 +246,11 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_name_trees) {
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("std", "vector"));
-    e.unparsed_type("std::vector<unsigned int>");
+    e.encoded("std::vector<unsigned int>");
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("unsigned int"));
-    c.unparsed_type("unsigned int");
+    c.encoded("unsigned int");
 
     e.children(std::list<dogen::yarn::name_tree> { c });
 
@@ -269,15 +269,15 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_name_trees) {
 
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("std", "unordered_map"));
-    e.unparsed_type("std::unordered_map<std::string, my::type>");
+    e.encoded("std::unordered_map<std::string, my::type>");
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("std", "string"));
-    c.unparsed_type("std::string");
+    c.encoded("std::string");
 
     dogen::yarn::name_tree d;
     d.parent(nf.build_element_name("my", "type"));
-    d.unparsed_type("my::type");
+    d.encoded("my::type");
 
     e.children(std::list<dogen::yarn::name_tree> { c, d });
 
@@ -301,15 +301,15 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_name_trees) 
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.parent(nf.build_element_name("std", "vector"));
-    e.unparsed_type("std::vector<std::shared_ptr<std::string> >");
+    e.encoded("std::vector<std::shared_ptr<std::string> >");
 
     dogen::yarn::name_tree c;
     c.parent(nf.build_element_name("std", "shared_ptr"));
-    c.unparsed_type("std::shared_ptr<std::string>");
+    c.encoded("std::shared_ptr<std::string>");
 
     dogen::yarn::name_tree d;
     d.parent(nf.build_element_name("std", "string"));
-    d.unparsed_type("std::string");
+    d.encoded("std::string");
 
     c.children(std::list<dogen::yarn::name_tree> { d });
     e.children(std::list<dogen::yarn::name_tree> { c });
