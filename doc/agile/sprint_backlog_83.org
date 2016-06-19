@@ -242,6 +242,26 @@ Final decision on this:
   list is still =pretty_printer=. We will have to stick with that for
   now.
 
+*** STARTED Implement automatic model name detection in name builder  :story:
+    CLOCK: [2016-06-19 Sun 21:25]--[2016-06-19 Sun 21:31] =>  0:06
+
+At present we have a flag in name builder to detect if we are building
+a model name; if so, we deal with the simple name correctly. However,
+we implemented some logic in quilt that detects this without user
+input. Remove the flag and add this logic.
+
+*** STARTED Populate qualified and identifiable name                  :story:
+    CLOCK: [2016-06-19 Sun 21:01]--[2016-06-19 Sun 21:24] =>  0:23
+
+We need to populate the new name and name tree properties for
+qualified and identifiable name.
+
+- we can use model name detection in name builder instead of the
+  multiple Boolean flags we have at the moment.
+- location could have a "all modules" list that concatenates external,
+  model and internal modules. We should look at performance before
+  doing this change though.
+
 *** STARTED Compute yarn property related information                 :story:
     CLOCK: [2016-06-18 Sat 23:05]--[2016-06-18 Sat 23:10] =>  0:05
     CLOCK: [2016-06-18 Sat 22:52]--[2016-06-18 Sat 23:04] =>  0:12
