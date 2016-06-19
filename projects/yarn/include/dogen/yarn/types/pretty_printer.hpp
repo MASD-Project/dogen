@@ -41,7 +41,7 @@ public:
 
 private:
     std::list<std::string> to_list(const name& n,
-        const bool skip_simple_name) const;
+        const bool model_name_mode) const;
 
 private:
     void print_scoped(const std::string& separator,
@@ -49,7 +49,7 @@ private:
     void print_enclosed(const std::list<std::string>& l);
 
 public:
-    void add(const name& n, const bool skip_simple_name = false);
+    void add(const name& n, const bool model_name_mode = false);
     void add(const name_tree& nt);
 
 public:

@@ -40,9 +40,7 @@ namespace yarn {
 
 name name_factory::build_model_name(const std::string& model_name,
     const std::string& external_modules) const {
-    name_builder b;
-    b.simple_name_contributes_to_qualifed_name(false);
-    b.infer_simple_name_from_model_name(true);
+    name_builder b(true/*model_name_mode*/);
     b.model_name(model_name);
 
     if (!external_modules.empty())

@@ -48,8 +48,8 @@ pretty_printer::pretty_printer(const separators s)
     : has_name_trees_(false), last_name_tree_had_children_(false),
       separator_(s) { }
 
-std::list<std::string> pretty_printer::to_list(const name& n,
-    const bool skip_simple_name) const {
+std::list<std::string> pretty_printer::
+to_list(const name& n, const bool model_name_mode) const {
     std::list<std::string> r;
     auto lambda([&](const std::string& s) {
             if (!s.empty())
@@ -69,7 +69,11 @@ std::list<std::string> pretty_printer::to_list(const name& n,
     if (!l.element().empty())
         lambda(l.element());
 
-    if (!skip_simple_name)
+    /*
+     * If the name we are printing is a model name, we must not add
+     * the simple name as it is already in the model module path.
+     */
+    if (!model_name_mode)
         lambda(n.simple());
 
     return r;
@@ -92,8 +96,8 @@ print_scoped(const std::string& separator, const std::list<std::string>& l) {
     }
 }
 
-void pretty_printer::add(const name& n, const bool skip_simple_name) {
-    const auto l(to_list(n, skip_simple_name));
+void pretty_printer::add(const name& n, const bool model_name_mode) {
+    const auto l(to_list(n, model_name_mode));
 
     switch (separator_) {
     case separators::angle_brackets:

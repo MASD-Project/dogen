@@ -37,8 +37,8 @@ namespace quilt {
 template<typename Archive>
 void register_types(Archive& ar) {
     dogen::config::register_types(ar);
-    dogen::formatters::register_types(ar);
     dogen::dynamic::register_types(ar);
+    dogen::formatters::register_types(ar);
     dogen::yarn::register_types(ar);
 }
 

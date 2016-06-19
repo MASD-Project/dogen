@@ -39,41 +39,32 @@ const std::string empty_type_name("Type name is empty.");
 const std::string empty_model_name("Model name is empty.");
 const std::string empty_internal_modules("Internal modules are empty.");
 const std::string empty_external_modules("External modules are empty.");
+const std::string unexpected_simple_name("Simple name is not expected.");
 
 }
 
 namespace dogen {
 namespace yarn {
 
-name_builder::name_builder()
-    : simple_name_contributes_to_qualifed_name_(true),
-      infer_simple_name_from_model_name_(false) { }
+name_builder::name_builder(const bool model_name_mode)
+    : model_name_mode_(model_name_mode) { }
 
-name_builder::name_builder(const name& n)
-    : simple_name_contributes_to_qualifed_name_(true),
-      infer_simple_name_from_model_name_(false),
-      name_(n) { }
+name_builder::name_builder(const name& n, const bool model_name_mode)
+    : model_name_mode_(model_name_mode), name_(n) { }
 
 void name_builder::create_name_id() {
-    const bool skip_simple_name(!simple_name_contributes_to_qualifed_name_);
     pretty_printer pp;
-    pp.add(name_, skip_simple_name);
+    pp.add(name_, model_name_mode_);
     name_.id(pp.print());
     BOOST_LOG_SEV(lg, debug) << "Created name id: " << name_.id();
 }
 
-name_builder& name_builder::
-simple_name_contributes_to_qualifed_name(const bool v) {
-    simple_name_contributes_to_qualifed_name_ = v;
-    return *this;
-}
-
-name_builder& name_builder::infer_simple_name_from_model_name(const bool v) {
-    infer_simple_name_from_model_name_ = v;
-    return *this;
-}
-
 name_builder& name_builder::simple_name(const std::string& sn) {
+    if (model_name_mode_) {
+        BOOST_LOG_SEV(lg, error) << unexpected_simple_name;
+        BOOST_THROW_EXCEPTION(building_error(unexpected_simple_name));
+    }
+
     name_.simple(sn);
     BOOST_LOG_SEV(lg, debug) << "Added simple name: " << sn;
     return *this;
@@ -88,7 +79,7 @@ name_builder& name_builder::model_name(const std::string& mn) {
     using utility::string::splitter;
     name_.location().model_modules(splitter::split_scoped(mn, dot));
 
-    if (infer_simple_name_from_model_name_)
+    if (model_name_mode_)
         name_.simple(*name_.location().model_modules().rbegin());
 
     BOOST_LOG_SEV(lg, debug) << "Added model name: " << mn;

@@ -12,25 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-19 Sun 21:00]
+#+CAPTION: Clock summary at [2016-06-19 Sun 23:19]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *11:43* |       |      | 100.0 |
+| *Total time*                                                                | *12:57* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 11:43   |       |      | 100.0 |
-| Active                                                                      |         | 11:43 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:18 |  11.1 |
-| COMPLETED Refactor helper settings                                          |         |       | 0:35 |   5.0 |
-| COMPLETED Add properties for helpers                                        |         |       | 1:35 |  13.5 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |  11.8 |
-| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   7.1 |
-| COMPLETED Rename helper instances                                           |         |       | 0:37 |   5.3 |
-| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |  10.0 |
-| COMPLETED Rename qualified to id                                            |         |       | 0:34 |   4.8 |
-| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   6.7 |
-| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |  11.1 |
-| STARTED Compute yarn property related information                           |         |       | 1:36 |  13.7 |
+| Stories                                                                     | 12:57   |       |      | 100.0 |
+| Active                                                                      |         | 12:57 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:18 |  10.0 |
+| COMPLETED Refactor helper settings                                          |         |       | 0:35 |   4.5 |
+| COMPLETED Add properties for helpers                                        |         |       | 1:35 |  12.2 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |  10.7 |
+| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   6.4 |
+| COMPLETED Rename helper instances                                           |         |       | 0:37 |   4.8 |
+| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   9.0 |
+| COMPLETED Rename qualified to id                                            |         |       | 0:34 |   4.4 |
+| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   6.0 |
+| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |  10.0 |
+| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   6.6 |
+| STARTED Populate qualified and identifiable name                            |         |       | 0:23 |   3.0 |
+| STARTED Compute yarn property related information                           |         |       | 1:36 |  12.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -242,13 +244,19 @@ Final decision on this:
   list is still =pretty_printer=. We will have to stick with that for
   now.
 
-*** STARTED Implement automatic model name detection in name builder  :story:
+*** COMPLETED Implement automatic model name detection in name builder :story:
+    CLOSED: [2016-06-19 Sun 23:19]
+    CLOCK: [2016-06-19 Sun 22:33]--[2016-06-19 Sun 23:18] =>  0:45
     CLOCK: [2016-06-19 Sun 21:25]--[2016-06-19 Sun 21:31] =>  0:06
 
 At present we have a flag in name builder to detect if we are building
 a model name; if so, we deal with the simple name correctly. However,
 we implemented some logic in quilt that detects this without user
 input. Remove the flag and add this logic.
+
+Actually, instead of wasting cycles detecting things, we should just
+have modes of operation - we always know when we are building a model
+name.
 
 *** STARTED Populate qualified and identifiable name                  :story:
     CLOCK: [2016-06-19 Sun 21:01]--[2016-06-19 Sun 21:24] =>  0:23

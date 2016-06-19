@@ -34,18 +34,20 @@ namespace yarn {
 
 /**
  * @brief Builds a name.
+ *
+ * If setup in model name mode, the following will hold:
+ *
+ * @li the simple name will be set from the model name (and cannot be
+ * set individually);
+ * @li the model name will not contribute to the qualified name.
  */
 class name_builder {
 public:
-    name_builder();
-    explicit name_builder(const name& n);
+    explicit name_builder(const bool model_name_mode_ = false);
+    explicit name_builder(const name& n, const bool model_name_mode_ = false);
 
 private:
     void create_name_id();
-
-public:
-    name_builder& simple_name_contributes_to_qualifed_name(const bool v);
-    name_builder& infer_simple_name_from_model_name(const bool v);
 
 public:
     name_builder& simple_name(const std::string& sn);
@@ -62,8 +64,7 @@ public:
     name build();
 
 private:
-    bool simple_name_contributes_to_qualifed_name_;
-    bool infer_simple_name_from_model_name_;
+    const bool model_name_mode_;
     name name_;
 };
 
