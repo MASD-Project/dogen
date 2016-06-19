@@ -5,10 +5,10 @@
 	<name class_id="11" tracking_level="0" version="0">
 		<id>&lt;class_without_package&gt;</id>
 		<simple>class_without_package</simple>
-		<qualified_for class_id="12" tracking_level="0" version="0">
+		<qualified class_id="12" tracking_level="0" version="0">
 			<count>0</count>
 			<item_version>0</item_version>
-		</qualified_for>
+		</qualified>
 		<identifiable></identifiable>
 		<location class_id="13" tracking_level="0" version="0">
 			<external_modules class_id="14" tracking_level="0" version="0">
@@ -92,10 +92,10 @@
 					<name>
 						<id>&lt;class_without_package&gt;</id>
 						<simple>class_without_package</simple>
-						<qualified_for>
+						<qualified>
 							<count>0</count>
 							<item_version>0</item_version>
-						</qualified_for>
+						</qualified>
 						<identifiable></identifiable>
 						<location>
 							<external_modules>
@@ -163,10 +163,10 @@
 					<name>
 						<id>&lt;class_without_package&gt;&lt;class_1&gt;</id>
 						<simple>class_1</simple>
-						<qualified_for>
+						<qualified>
 							<count>0</count>
 							<item_version>0</item_version>
-						</qualified_for>
+						</qualified>
 						<identifiable></identifiable>
 						<location>
 							<external_modules>
@@ -212,10 +212,10 @@
 						<name>
 							<id>&lt;class_without_package&gt;&lt;class_1&gt;&lt;an_attribute&gt;</id>
 							<simple>an_attribute</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -239,10 +239,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -267,10 +267,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>

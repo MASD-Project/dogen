@@ -62,7 +62,7 @@ public:
         const bool are_children_opaque,
         const bool is_circular_dependency,
         const std::string& unparsed_type,
-        const std::map<dogen::yarn::language, std::string>& qualified_for,
+        const std::map<dogen::yarn::language, std::string>& qualified,
         const std::string& identifiable);
 
 private:
@@ -127,10 +127,10 @@ public:
      * @brief Qualified representation of the name tree in a language specific representation.
      */
     /**@{*/
-    const std::map<dogen::yarn::language, std::string>& qualified_for() const;
-    std::map<dogen::yarn::language, std::string>& qualified_for();
-    void qualified_for(const std::map<dogen::yarn::language, std::string>& v);
-    void qualified_for(const std::map<dogen::yarn::language, std::string>&& v);
+    const std::map<dogen::yarn::language, std::string>& qualified() const;
+    std::map<dogen::yarn::language, std::string>& qualified();
+    void qualified(const std::map<dogen::yarn::language, std::string>& v);
+    void qualified(const std::map<dogen::yarn::language, std::string>&& v);
     /**@}*/
 
     /**
@@ -160,7 +160,7 @@ private:
     bool are_children_opaque_;
     bool is_circular_dependency_;
     std::string unparsed_type_;
-    std::map<dogen::yarn::language, std::string> qualified_for_;
+    std::map<dogen::yarn::language, std::string> qualified_;
     std::string identifiable_;
 };
 

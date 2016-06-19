@@ -81,7 +81,7 @@ std::ostream& operator<<(std::ostream& s, const name_tree& v) {
       << "\"are_children_opaque\": " << v.are_children_opaque() << ", "
       << "\"is_circular_dependency\": " << v.is_circular_dependency() << ", "
       << "\"unparsed_type\": " << "\"" << tidy_up_string(v.unparsed_type()) << "\"" << ", "
-      << "\"qualified_for\": " << v.qualified_for() << ", "
+      << "\"qualified\": " << v.qualified() << ", "
       << "\"identifiable\": " << "\"" << tidy_up_string(v.identifiable()) << "\""
       << " }";
     return(s);

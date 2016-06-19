@@ -60,7 +60,7 @@ std::size_t name_tree_hasher::hash(const name_tree& v) {
     combine(seed, v.are_children_opaque());
     combine(seed, v.is_circular_dependency());
     combine(seed, v.unparsed_type());
-    combine(seed, hash_std_map_dogen_yarn_language_std_string(v.qualified_for()));
+    combine(seed, hash_std_map_dogen_yarn_language_std_string(v.qualified()));
     combine(seed, v.identifiable());
 
     return seed;

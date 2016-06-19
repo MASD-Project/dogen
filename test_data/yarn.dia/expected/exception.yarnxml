@@ -5,10 +5,10 @@
 	<name class_id="11" tracking_level="0" version="0">
 		<id>&lt;exception&gt;</id>
 		<simple>exception</simple>
-		<qualified_for class_id="12" tracking_level="0" version="0">
+		<qualified class_id="12" tracking_level="0" version="0">
 			<count>0</count>
 			<item_version>0</item_version>
-		</qualified_for>
+		</qualified>
 		<identifiable></identifiable>
 		<location class_id="13" tracking_level="0" version="0">
 			<external_modules class_id="14" tracking_level="0" version="0">
@@ -59,10 +59,10 @@
 					<name>
 						<id>&lt;exception&gt;&lt;pkg&gt;</id>
 						<simple>pkg</simple>
-						<qualified_for>
+						<qualified>
 							<count>0</count>
 							<item_version>0</item_version>
-						</qualified_for>
+						</qualified>
 						<identifiable></identifiable>
 						<location>
 							<external_modules>
@@ -143,10 +143,10 @@
 					<name>
 						<id>&lt;exception&gt;</id>
 						<simple>exception</simple>
-						<qualified_for>
+						<qualified>
 							<count>0</count>
 							<item_version>0</item_version>
-						</qualified_for>
+						</qualified>
 						<identifiable></identifiable>
 						<location>
 							<external_modules>
@@ -214,10 +214,10 @@
 					<name>
 						<id>&lt;exception&gt;&lt;a_class&gt;</id>
 						<simple>a_class</simple>
-						<qualified_for>
+						<qualified>
 							<count>0</count>
 							<item_version>0</item_version>
-						</qualified_for>
+						</qualified>
 						<identifiable></identifiable>
 						<location>
 							<external_modules>
@@ -263,10 +263,10 @@
 						<name>
 							<id>&lt;exception&gt;&lt;a_class&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -290,10 +290,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -318,10 +318,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -396,10 +396,10 @@
 					<name>
 						<id>&lt;exception&gt;&lt;pkg&gt;&lt;catastrophic_error&gt;</id>
 						<simple>catastrophic_error</simple>
-						<qualified_for>
+						<qualified>
 							<count>0</count>
 							<item_version>0</item_version>
-						</qualified_for>
+						</qualified>
 						<identifiable></identifiable>
 						<location>
 							<external_modules>
@@ -445,10 +445,10 @@
 					<name>
 						<id>&lt;exception&gt;&lt;my_error&gt;</id>
 						<simple>my_error</simple>
-						<qualified_for>
+						<qualified>
 							<count>0</count>
 							<item_version>0</item_version>
-						</qualified_for>
+						</qualified>
 						<identifiable></identifiable>
 						<location>
 							<external_modules>

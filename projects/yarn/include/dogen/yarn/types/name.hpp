@@ -62,7 +62,7 @@ public:
     name(
         const std::string& id,
         const std::string& simple,
-        const std::map<dogen::yarn::language, std::string>& qualified_for,
+        const std::map<dogen::yarn::language, std::string>& qualified,
         const std::string& identifiable,
         const dogen::yarn::location& location);
 
@@ -106,10 +106,10 @@ public:
      * @brief Qualified name in a language specific representation.
      */
     /**@{*/
-    const std::map<dogen::yarn::language, std::string>& qualified_for() const;
-    std::map<dogen::yarn::language, std::string>& qualified_for();
-    void qualified_for(const std::map<dogen::yarn::language, std::string>& v);
-    void qualified_for(const std::map<dogen::yarn::language, std::string>&& v);
+    const std::map<dogen::yarn::language, std::string>& qualified() const;
+    std::map<dogen::yarn::language, std::string>& qualified();
+    void qualified(const std::map<dogen::yarn::language, std::string>& v);
+    void qualified(const std::map<dogen::yarn::language, std::string>&& v);
     /**@}*/
 
     /**
@@ -146,7 +146,7 @@ public:
 private:
     std::string id_;
     std::string simple_;
-    std::map<dogen::yarn::language, std::string> qualified_for_;
+    std::map<dogen::yarn::language, std::string> qualified_;
     std::string identifiable_;
     dogen::yarn::location location_;
 };

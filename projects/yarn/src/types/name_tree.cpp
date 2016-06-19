@@ -33,14 +33,14 @@ name_tree::name_tree(
     const bool are_children_opaque,
     const bool is_circular_dependency,
     const std::string& unparsed_type,
-    const std::map<dogen::yarn::language, std::string>& qualified_for,
+    const std::map<dogen::yarn::language, std::string>& qualified,
     const std::string& identifiable)
     : parent_(parent),
       children_(children),
       are_children_opaque_(are_children_opaque),
       is_circular_dependency_(is_circular_dependency),
       unparsed_type_(unparsed_type),
-      qualified_for_(qualified_for),
+      qualified_(qualified),
       identifiable_(identifiable) { }
 
 void name_tree::swap(name_tree& other) noexcept {
@@ -50,7 +50,7 @@ void name_tree::swap(name_tree& other) noexcept {
     swap(are_children_opaque_, other.are_children_opaque_);
     swap(is_circular_dependency_, other.is_circular_dependency_);
     swap(unparsed_type_, other.unparsed_type_);
-    swap(qualified_for_, other.qualified_for_);
+    swap(qualified_, other.qualified_);
     swap(identifiable_, other.identifiable_);
 }
 
@@ -60,7 +60,7 @@ bool name_tree::operator==(const name_tree& rhs) const {
         are_children_opaque_ == rhs.are_children_opaque_ &&
         is_circular_dependency_ == rhs.is_circular_dependency_ &&
         unparsed_type_ == rhs.unparsed_type_ &&
-        qualified_for_ == rhs.qualified_for_ &&
+        qualified_ == rhs.qualified_ &&
         identifiable_ == rhs.identifiable_;
 }
 
@@ -134,20 +134,20 @@ void name_tree::unparsed_type(const std::string&& v) {
     unparsed_type_ = std::move(v);
 }
 
-const std::map<dogen::yarn::language, std::string>& name_tree::qualified_for() const {
-    return qualified_for_;
+const std::map<dogen::yarn::language, std::string>& name_tree::qualified() const {
+    return qualified_;
 }
 
-std::map<dogen::yarn::language, std::string>& name_tree::qualified_for() {
-    return qualified_for_;
+std::map<dogen::yarn::language, std::string>& name_tree::qualified() {
+    return qualified_;
 }
 
-void name_tree::qualified_for(const std::map<dogen::yarn::language, std::string>& v) {
-    qualified_for_ = v;
+void name_tree::qualified(const std::map<dogen::yarn::language, std::string>& v) {
+    qualified_ = v;
 }
 
-void name_tree::qualified_for(const std::map<dogen::yarn::language, std::string>&& v) {
-    qualified_for_ = std::move(v);
+void name_tree::qualified(const std::map<dogen::yarn::language, std::string>&& v) {
+    qualified_ = std::move(v);
 }
 
 const std::string& name_tree::identifiable() const {

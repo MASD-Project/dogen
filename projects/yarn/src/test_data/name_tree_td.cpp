@@ -80,7 +80,7 @@ populate(const unsigned int position, result_type& v) {
     v.are_children_opaque(create_bool(position + 2));
     v.is_circular_dependency(create_bool(position + 3));
     v.unparsed_type(create_std_string(position + 4));
-    v.qualified_for(create_std_map_dogen_yarn_language_std_string(position + 5));
+    v.qualified(create_std_map_dogen_yarn_language_std_string(position + 5));
     v.identifiable(create_std_string(position + 6));
 }
 

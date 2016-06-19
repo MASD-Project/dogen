@@ -26,12 +26,12 @@ namespace yarn {
 name::name(
     const std::string& id,
     const std::string& simple,
-    const std::map<dogen::yarn::language, std::string>& qualified_for,
+    const std::map<dogen::yarn::language, std::string>& qualified,
     const std::string& identifiable,
     const dogen::yarn::location& location)
     : id_(id),
       simple_(simple),
-      qualified_for_(qualified_for),
+      qualified_(qualified),
       identifiable_(identifiable),
       location_(location) { }
 
@@ -39,7 +39,7 @@ void name::swap(name& other) noexcept {
     using std::swap;
     swap(id_, other.id_);
     swap(simple_, other.simple_);
-    swap(qualified_for_, other.qualified_for_);
+    swap(qualified_, other.qualified_);
     swap(identifiable_, other.identifiable_);
     swap(location_, other.location_);
 }
@@ -47,7 +47,7 @@ void name::swap(name& other) noexcept {
 bool name::operator==(const name& rhs) const {
     return id_ == rhs.id_ &&
         simple_ == rhs.simple_ &&
-        qualified_for_ == rhs.qualified_for_ &&
+        qualified_ == rhs.qualified_ &&
         identifiable_ == rhs.identifiable_ &&
         location_ == rhs.location_;
 }
@@ -90,20 +90,20 @@ void name::simple(const std::string&& v) {
     simple_ = std::move(v);
 }
 
-const std::map<dogen::yarn::language, std::string>& name::qualified_for() const {
-    return qualified_for_;
+const std::map<dogen::yarn::language, std::string>& name::qualified() const {
+    return qualified_;
 }
 
-std::map<dogen::yarn::language, std::string>& name::qualified_for() {
-    return qualified_for_;
+std::map<dogen::yarn::language, std::string>& name::qualified() {
+    return qualified_;
 }
 
-void name::qualified_for(const std::map<dogen::yarn::language, std::string>& v) {
-    qualified_for_ = v;
+void name::qualified(const std::map<dogen::yarn::language, std::string>& v) {
+    qualified_ = v;
 }
 
-void name::qualified_for(const std::map<dogen::yarn::language, std::string>&& v) {
-    qualified_for_ = std::move(v);
+void name::qualified(const std::map<dogen::yarn::language, std::string>&& v) {
+    qualified_ = std::move(v);
 }
 
 const std::string& name::identifiable() const {

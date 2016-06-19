@@ -5,10 +5,10 @@
 	<name class_id="11" tracking_level="0" version="0">
 		<id>&lt;classes_without_package&gt;</id>
 		<simple>classes_without_package</simple>
-		<qualified_for class_id="12" tracking_level="0" version="0">
+		<qualified class_id="12" tracking_level="0" version="0">
 			<count>0</count>
 			<item_version>0</item_version>
-		</qualified_for>
+		</qualified>
 		<identifiable></identifiable>
 		<location class_id="13" tracking_level="0" version="0">
 			<external_modules class_id="14" tracking_level="0" version="0">
@@ -92,10 +92,10 @@
 					<name>
 						<id>&lt;classes_without_package&gt;</id>
 						<simple>classes_without_package</simple>
-						<qualified_for>
+						<qualified>
 							<count>0</count>
 							<item_version>0</item_version>
-						</qualified_for>
+						</qualified>
 						<identifiable></identifiable>
 						<location>
 							<external_modules>
@@ -163,10 +163,10 @@
 					<name>
 						<id>&lt;classes_without_package&gt;&lt;class_5&gt;</id>
 						<simple>class_5</simple>
-						<qualified_for>
+						<qualified>
 							<count>0</count>
 							<item_version>0</item_version>
-						</qualified_for>
+						</qualified>
 						<identifiable></identifiable>
 						<location>
 							<external_modules>
@@ -212,10 +212,10 @@
 						<name>
 							<id>&lt;classes_without_package&gt;&lt;class_5&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -239,10 +239,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -267,10 +267,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -340,10 +340,10 @@
 					<name>
 						<id>&lt;classes_without_package&gt;&lt;class_1&gt;</id>
 						<simple>class_1</simple>
-						<qualified_for>
+						<qualified>
 							<count>0</count>
 							<item_version>0</item_version>
-						</qualified_for>
+						</qualified>
 						<identifiable></identifiable>
 						<location>
 							<external_modules>
@@ -389,10 +389,10 @@
 						<name>
 							<id>&lt;classes_without_package&gt;&lt;class_1&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -416,10 +416,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -444,10 +444,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -517,10 +517,10 @@
 					<name>
 						<id>&lt;classes_without_package&gt;&lt;class_2&gt;</id>
 						<simple>class_2</simple>
-						<qualified_for>
+						<qualified>
 							<count>0</count>
 							<item_version>0</item_version>
-						</qualified_for>
+						</qualified>
 						<identifiable></identifiable>
 						<location>
 							<external_modules>
@@ -566,10 +566,10 @@
 						<name>
 							<id>&lt;classes_without_package&gt;&lt;class_2&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -593,10 +593,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -621,10 +621,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -694,10 +694,10 @@
 					<name>
 						<id>&lt;classes_without_package&gt;&lt;class_4&gt;</id>
 						<simple>class_4</simple>
-						<qualified_for>
+						<qualified>
 							<count>0</count>
 							<item_version>0</item_version>
-						</qualified_for>
+						</qualified>
 						<identifiable></identifiable>
 						<location>
 							<external_modules>
@@ -743,10 +743,10 @@
 						<name>
 							<id>&lt;classes_without_package&gt;&lt;class_4&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -770,10 +770,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -798,10 +798,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -871,10 +871,10 @@
 					<name>
 						<id>&lt;classes_without_package&gt;&lt;class_3&gt;</id>
 						<simple>class_3</simple>
-						<qualified_for>
+						<qualified>
 							<count>0</count>
 							<item_version>0</item_version>
-						</qualified_for>
+						</qualified>
 						<identifiable></identifiable>
 						<location>
 							<external_modules>
@@ -920,10 +920,10 @@
 						<name>
 							<id>&lt;classes_without_package&gt;&lt;class_3&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -947,10 +947,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -975,10 +975,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>

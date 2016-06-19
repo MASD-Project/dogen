@@ -5,10 +5,10 @@
 	<name class_id="11" tracking_level="0" version="0">
 		<id>&lt;all_primitives&gt;</id>
 		<simple>all_primitives</simple>
-		<qualified_for class_id="12" tracking_level="0" version="0">
+		<qualified class_id="12" tracking_level="0" version="0">
 			<count>0</count>
 			<item_version>0</item_version>
-		</qualified_for>
+		</qualified>
 		<identifiable></identifiable>
 		<location class_id="13" tracking_level="0" version="0">
 			<external_modules class_id="14" tracking_level="0" version="0">
@@ -92,10 +92,10 @@
 					<name>
 						<id>&lt;all_primitives&gt;</id>
 						<simple>all_primitives</simple>
-						<qualified_for>
+						<qualified>
 							<count>0</count>
 							<item_version>0</item_version>
-						</qualified_for>
+						</qualified>
 						<identifiable></identifiable>
 						<location>
 							<external_modules>
@@ -163,10 +163,10 @@
 					<name>
 						<id>&lt;all_primitives&gt;&lt;a_class&gt;</id>
 						<simple>a_class</simple>
-						<qualified_for>
+						<qualified>
 							<count>0</count>
 							<item_version>0</item_version>
-						</qualified_for>
+						</qualified>
 						<identifiable></identifiable>
 						<location>
 							<external_modules>
@@ -212,10 +212,10 @@
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;bool_property&gt;</id>
 							<simple>bool_property</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -239,10 +239,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -267,10 +267,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -288,10 +288,10 @@
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;char_property&gt;</id>
 							<simple>char_property</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -315,10 +315,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -343,10 +343,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -364,10 +364,10 @@
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;uchar_property&gt;</id>
 							<simple>uchar_property</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -391,10 +391,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -419,10 +419,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -440,10 +440,10 @@
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;int_property&gt;</id>
 							<simple>int_property</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -467,10 +467,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -495,10 +495,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -516,10 +516,10 @@
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;uint_property&gt;</id>
 							<simple>uint_property</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -543,10 +543,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -571,10 +571,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -592,10 +592,10 @@
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;long_property&gt;</id>
 							<simple>long_property</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -619,10 +619,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -647,10 +647,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -668,10 +668,10 @@
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;ulong_property&gt;</id>
 							<simple>ulong_property</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -695,10 +695,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -723,10 +723,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -744,10 +744,10 @@
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;long_long_property&gt;</id>
 							<simple>long_long_property</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -771,10 +771,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -799,10 +799,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -820,10 +820,10 @@
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;ulong_long_property&gt;</id>
 							<simple>ulong_long_property</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -847,10 +847,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -875,10 +875,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -896,10 +896,10 @@
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;short_property&gt;</id>
 							<simple>short_property</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -923,10 +923,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -951,10 +951,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -972,10 +972,10 @@
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;ushort_property&gt;</id>
 							<simple>ushort_property</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -999,10 +999,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -1027,10 +1027,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -1048,10 +1048,10 @@
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;double_property&gt;</id>
 							<simple>double_property</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -1075,10 +1075,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -1103,10 +1103,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -1124,10 +1124,10 @@
 						<name>
 							<id>&lt;all_primitives&gt;&lt;a_class&gt;&lt;float_property&gt;</id>
 							<simple>float_property</simple>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 							<location>
 								<external_modules>
@@ -1151,10 +1151,10 @@
 							<parent>
 								<id></id>
 								<simple></simple>
-								<qualified_for>
+								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
-								</qualified_for>
+								</qualified>
 								<identifiable></identifiable>
 								<location>
 									<external_modules>
@@ -1179,10 +1179,10 @@
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
 							<unparsed_type></unparsed_type>
-							<qualified_for>
+							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
-							</qualified_for>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>

@@ -46,7 +46,7 @@ void save(Archive& ar,
     ar << make_nvp("are_children_opaque", v.are_children_opaque_);
     ar << make_nvp("is_circular_dependency", v.is_circular_dependency_);
     ar << make_nvp("unparsed_type", v.unparsed_type_);
-    ar << make_nvp("qualified_for", v.qualified_for_);
+    ar << make_nvp("qualified", v.qualified_);
     ar << make_nvp("identifiable", v.identifiable_);
 }
 
@@ -59,7 +59,7 @@ void load(Archive& ar,
     ar >> make_nvp("are_children_opaque", v.are_children_opaque_);
     ar >> make_nvp("is_circular_dependency", v.is_circular_dependency_);
     ar >> make_nvp("unparsed_type", v.unparsed_type_);
-    ar >> make_nvp("qualified_for", v.qualified_for_);
+    ar >> make_nvp("qualified", v.qualified_);
     ar >> make_nvp("identifiable", v.identifiable_);
 }
 
