@@ -12,21 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-18 Sat 23:10]
+#+CAPTION: Clock summary at [2016-06-19 Sun 12:14]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *7:54* |      |      | 100.0 |
+| *Total time*                                                                | *9:04* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 7:54   |      |      | 100.0 |
-| Active                                                                      |        | 7:54 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:18 |  16.5 |
-| COMPLETED Refactor helper settings                                          |        |      | 0:35 |   7.4 |
-| COMPLETED Add properties for helpers                                        |        |      | 1:35 |  20.0 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |        |      | 1:23 |  17.5 |
-| COMPLETED Rename formattables to properties                                 |        |      | 0:50 |  10.5 |
-| COMPLETED Rename helper instances                                           |        |      | 0:37 |   7.8 |
-| STARTED Compute yarn property related information                           |        |      | 1:36 |  20.3 |
+| Stories                                                                     | 9:04   |      |      | 100.0 |
+| Active                                                                      |        | 9:04 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:18 |  14.3 |
+| COMPLETED Refactor helper settings                                          |        |      | 0:35 |   6.4 |
+| COMPLETED Add properties for helpers                                        |        |      | 1:35 |  17.5 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |        |      | 1:23 |  15.3 |
+| COMPLETED Rename formattables to properties                                 |        |      | 0:50 |   9.2 |
+| COMPLETED Rename helper instances                                           |        |      | 0:37 |   6.8 |
+| COMPLETED Tidy-up pretty printer                                            |        |      | 1:10 |  12.9 |
+| STARTED Compute yarn property related information                           |        |      | 1:36 |  17.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -154,6 +155,20 @@ should rename formattables to properties.
 - rename helper instances etc to helper properties
 - rename helper properties etc to helper descriptor
 
+*** COMPLETED Tidy-up pretty printer                                  :story:
+    CLOSED: [2016-06-19 Sun 12:13]
+    CLOCK: [2016-06-19 Sun 12:05]--[2016-06-19 Sun 12:13] =>  0:08
+    CLOCK: [2016-06-19 Sun 11:02]--[2016-06-19 Sun 12:04] =>  1:02
+
+- rename it to just pretty printer as it will print more than names
+  soon.
+- clean up printing styles - these are just separators. Also make it
+  explicit as the double colon rather than scope operator since we are
+  not using language specific terminology at this level. We don't need
+  to worry about =.= operator for now (as we don't yet support java or
+  C#) but the code should be refactored to make it easy to add it.
+- add support for printing to stream.
+
 *** STARTED Compute yarn property related information                 :story:
     CLOCK: [2016-06-18 Sat 23:05]--[2016-06-18 Sat 23:10] =>  0:05
     CLOCK: [2016-06-18 Sat 22:52]--[2016-06-18 Sat 23:04] =>  0:12
@@ -185,7 +200,6 @@ could have a language specific representation on a a container.
 We need to update the name pretty printer to take on responsibilities
 from the name builder in quilt:
 
-- add a printing style for scoped with dot and scoped with =::=
 - add support for name trees - and so rename it to just pretty
   printer? We can then have a print name and a print name tree.
 - the name builder can then be responsible for programming language

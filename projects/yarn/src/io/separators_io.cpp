@@ -18,20 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_PRINTING_STYLES_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_PRINTING_STYLES_SER_HPP
+#include <string>
+#include <ostream>
+#include <stdexcept>
+#include "dogen/yarn/io/separators_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace yarn {
 
-#include <boost/serialization/nvp.hpp>
-#include "dogen/yarn/types/printing_styles.hpp"
+std::ostream& operator<<(std::ostream& s, const separators& v) {
+    s << "{ " << "\"__type__\": " << "\"separators\", " << "\"value\": ";
 
-template<class Archive>
-void serialize(Archive& ar, dogen::yarn::printing_styles& v, unsigned int /*version*/){
-    using boost::serialization::make_nvp;
-    ar & make_nvp("printing_styles", v);
+    std::string attr;
+    switch (v) {
+    case separators::invalid:
+        attr = "\"invalid\"";
+        break;
+    case separators::angle_brackets:
+        attr = "\"angle_brackets\"";
+        break;
+    case separators::double_colons:
+        attr = "\"double_colons\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for separators");
+    }
+    s << attr << " }";
+    return s;
 }
 
-#endif
+} }

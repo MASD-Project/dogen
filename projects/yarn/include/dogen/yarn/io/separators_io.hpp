@@ -18,17 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_NAME_PRETTY_PRINTER_FWD_HPP
-#define DOGEN_YARN_TYPES_NAME_PRETTY_PRINTER_FWD_HPP
+#ifndef DOGEN_YARN_IO_SEPARATORS_IO_HPP
+#define DOGEN_YARN_IO_SEPARATORS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen/yarn/types/separators.hpp"
+
 namespace dogen {
 namespace yarn {
 
-class name_pretty_printer;
+std::ostream& operator<<(std::ostream& s, const separators& v);
 
 } }
 

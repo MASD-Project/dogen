@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TEST_DATA_PRINTING_STYLES_TD_HPP
-#define DOGEN_YARN_TEST_DATA_PRINTING_STYLES_TD_HPP
+#ifndef DOGEN_YARN_TEST_DATA_SEPARATORS_TD_HPP
+#define DOGEN_YARN_TEST_DATA_SEPARATORS_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/printing_styles.hpp"
+#include "dogen/yarn/types/separators.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class printing_styles_generator {
+class separators_generator {
 public:
-    printing_styles_generator();
+    separators_generator();
 
 public:
-    typedef dogen::yarn::printing_styles result_type;
+    typedef dogen::yarn::separators result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

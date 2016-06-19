@@ -18,26 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_HASH_PRINTING_STYLES_HASH_HPP
-#define DOGEN_YARN_HASH_PRINTING_STYLES_HASH_HPP
+#ifndef DOGEN_YARN_TYPES_SEPARATORS_FWD_HPP
+#define DOGEN_YARN_TYPES_SEPARATORS_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/yarn/types/printing_styles.hpp"
+namespace dogen {
+namespace yarn {
 
-namespace std {
+enum class separators : unsigned int;
 
-template<>
-struct hash<dogen::yarn::printing_styles> {
-public:
-    size_t operator()(const dogen::yarn::printing_styles& v) const {
-        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
-    }
-};
-
-}
+} }
 
 #endif

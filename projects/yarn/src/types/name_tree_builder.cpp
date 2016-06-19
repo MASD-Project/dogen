@@ -27,7 +27,7 @@
 #include "dogen/yarn/io/location_io.hpp"
 #include "dogen/yarn/io/name_tree_io.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
-#include "dogen/yarn/types/name_pretty_printer.hpp"
+#include "dogen/yarn/types/pretty_printer.hpp"
 #include "dogen/yarn/types/name_tree_builder.hpp"
 
 using namespace dogen::utility::log;
@@ -195,8 +195,8 @@ name_tree name_tree_builder::make_name_tree(const node& n) {
     r.parent(n.data());
 
     std::ostringstream s;
-    name_pretty_printer p(printing_styles::scoped);
-    s << p.print(n.data());
+    pretty_printer pp(separators::double_colons);
+    pp.print(s, n.data());
 
     bool is_first = true;
     for (const auto c : n.children()) {

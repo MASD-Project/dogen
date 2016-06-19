@@ -18,21 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_IO_PRINTING_STYLES_IO_HPP
-#define DOGEN_YARN_IO_PRINTING_STYLES_IO_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_SEPARATORS_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_SEPARATORS_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/yarn/types/printing_styles.hpp"
+#include <boost/serialization/nvp.hpp>
+#include "dogen/yarn/types/separators.hpp"
 
-namespace dogen {
-namespace yarn {
-
-std::ostream& operator<<(std::ostream& s, const printing_styles& v);
-
-} }
+template<class Archive>
+void serialize(Archive& ar, dogen::yarn::separators& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("separators", v);
+}
 
 #endif

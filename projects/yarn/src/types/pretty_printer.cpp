@@ -22,27 +22,29 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/printing_error.hpp"
-#include "dogen/yarn/types/name_pretty_printer.hpp"
+#include "dogen/yarn/types/pretty_printer.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.name_pretty_printer"));
+auto lg(logger_factory("yarn.pretty_printer"));
 
-const std::string scope("::");
+const std::string double_colon("::");
 const std::string start_marker("<");
 const std::string end_marker(">");
-const std::string unsupported_style("Unsupported printing style");
+const std::string unsupported_separator("Unsupported separator");
 
 }
 
 namespace dogen {
 namespace yarn {
 
-name_pretty_printer::
-name_pretty_printer(const printing_styles style) : style_(style) { }
+pretty_printer::pretty_printer() : separator_(separators::angle_brackets) { }
 
-std::list<std::string> name_pretty_printer::to_list(const name& n,
+pretty_printer::
+pretty_printer(const separators s) : separator_(s) { }
+
+std::list<std::string> pretty_printer::to_list(const name& n,
     const bool skip_simple_name) const {
     std::list<std::string> r;
     auto lambda([&](const std::string& s) {
@@ -69,40 +71,46 @@ std::list<std::string> name_pretty_printer::to_list(const name& n,
     return r;
 }
 
-void name_pretty_printer::
+void pretty_printer::
 print_delimited(std::ostream& s, const std::list<std::string>& l) const {
     for (const auto& c : l)
         s << start_marker << c << end_marker;
 }
 
-void name_pretty_printer::
-print_scoped(std::ostream& s, const std::list<std::string>& l) const {
+void pretty_printer::print_scoped(std::ostream& s, const std::string& separator,
+    const std::list<std::string>& l) const {
     bool is_first(true);
+
     for (const auto& c : l) {
         if (!is_first)
-            s << scope;
+            s << separator;
         s << c;
         is_first = false;
     }
 }
 
-std::string name_pretty_printer::
-print(const name& n, const bool skip_simple_name) const {
+void pretty_printer::
+print(std::ostream& s, const name& n, const bool skip_simple_name) const {
     const auto l(to_list(n, skip_simple_name));
 
-    std::ostringstream s;
-    switch (style_) {
-    case printing_styles::delimited:
+    switch (separator_) {
+    case separators::angle_brackets:
         print_delimited(s, l);
         break;
-    case printing_styles::scoped:
-        print_scoped(s, l);
+    case separators::double_colons:
+        print_scoped(s, double_colon, l);
         break;
     default:
-        BOOST_LOG_SEV(lg, error) << unsupported_style << ": "
-                                 << static_cast<unsigned int>(style_);
-        BOOST_THROW_EXCEPTION(printing_error(unsupported_style));
+        BOOST_LOG_SEV(lg, error) << unsupported_separator << ": "
+                                 << static_cast<unsigned int>(separator_);
+        BOOST_THROW_EXCEPTION(printing_error(unsupported_separator));
     }
+}
+
+std::string pretty_printer::
+print(const name& n, const bool skip_simple_name) const {
+    std::ostringstream s;
+    print(s, n,skip_simple_name);
     return s.str();
 }
 

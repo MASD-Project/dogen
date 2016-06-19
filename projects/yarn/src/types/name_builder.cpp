@@ -25,7 +25,7 @@
 #include "dogen/utility/string/splitter.hpp"
 #include "dogen/yarn/io/location_io.hpp"
 #include "dogen/yarn/types/building_error.hpp"
-#include "dogen/yarn/types/name_pretty_printer.hpp"
+#include "dogen/yarn/types/pretty_printer.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 
 namespace {
@@ -55,9 +55,9 @@ name_builder::name_builder(const name& n)
       name_(n) { }
 
 void name_builder::compute_qualified_name() {
-    name_pretty_printer p(printing_styles::delimited);
+    const pretty_printer pp;
     const bool skip_simple_name(!simple_name_contributes_to_qualifed_name_);
-    name_.qualified(p.print(name_, skip_simple_name));
+    name_.qualified(pp.print(name_, skip_simple_name));
     BOOST_LOG_SEV(lg, debug) << "Created qualified name: " << name_.qualified();
 }
 

@@ -18,27 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/test_data/printing_styles_td.hpp"
+#ifndef DOGEN_YARN_HASH_SEPARATORS_HASH_HPP
+#define DOGEN_YARN_HASH_SEPARATORS_HASH_HPP
 
-namespace dogen {
-namespace yarn {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-printing_styles_generator::printing_styles_generator() : position_(0) { }
-void printing_styles_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<printing_styles>(position % 3);
+#include <functional>
+#include "dogen/yarn/types/separators.hpp"
+
+namespace std {
+
+template<>
+struct hash<dogen::yarn::separators> {
+public:
+    size_t operator()(const dogen::yarn::separators& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
+};
+
 }
 
-printing_styles_generator::result_type
-printing_styles_generator::create(const unsigned int  position) {
-    result_type r;
-    printing_styles_generator::populate(position, r);
-    return r;
-}
-
-printing_styles_generator::result_type
-printing_styles_generator::operator()() {
-    return create(position_++);
-}
-
-} }
+#endif

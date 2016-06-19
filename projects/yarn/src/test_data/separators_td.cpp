@@ -18,22 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_PRINTING_STYLES_HPP
-#define DOGEN_YARN_TYPES_PRINTING_STYLES_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include "dogen/yarn/test_data/separators_td.hpp"
 
 namespace dogen {
 namespace yarn {
 
-enum class printing_styles : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    scoped = 1, ///< Separates the name elements with the scope operator '::'.
-    delimited = 2 ///< Separates the name elements by enclosing them in '<' and '>'.
-};
+separators_generator::separators_generator() : position_(0) { }
+void separators_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<separators>(position % 3);
+}
+
+separators_generator::result_type
+separators_generator::create(const unsigned int  position) {
+    result_type r;
+    separators_generator::populate(position, r);
+    return r;
+}
+
+separators_generator::result_type
+separators_generator::operator()() {
+    return create(position_++);
+}
 
 } }
-
-#endif

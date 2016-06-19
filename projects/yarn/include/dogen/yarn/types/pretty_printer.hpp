@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_NAME_PRETTY_PRINTER_HPP
-#define DOGEN_YARN_TYPES_NAME_PRETTY_PRINTER_HPP
+#ifndef DOGEN_YARN_TYPES_PRETTY_PRINTER_HPP
+#define DOGEN_YARN_TYPES_PRETTY_PRINTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,27 +27,34 @@
 
 #include <string>
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/printing_styles.hpp"
+#include "dogen/yarn/types/separators.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class name_pretty_printer {
+class pretty_printer {
 public:
-    explicit name_pretty_printer(const printing_styles style);
+    pretty_printer();
+    explicit pretty_printer(const separators s);
 
 private:
     std::list<std::string> to_list(const name& n,
         const bool skip_simple_name) const;
+
+private:
+    void print_scoped(std::ostream& s, const std::string& separator,
+        const std::list<std::string>& l) const;
     void print_delimited(std::ostream& s,
         const std::list<std::string>& l) const;
-    void print_scoped(std::ostream& s, const std::list<std::string>& l) const;
 
 public:
+    void print(std::ostream& s, const name& n,
+        const bool skip_simple_name = false) const;
+
     std::string print(const name& n, const bool skip_simple_name = false) const;
 
 private:
-    const printing_styles style_;
+    const separators separator_;
 };
 
 } }
