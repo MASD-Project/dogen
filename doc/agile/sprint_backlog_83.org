@@ -218,7 +218,6 @@ from the name builder in quilt:
 - the name builder can then be responsible for programming language
   specific logic and calls to the pretty printer to populate the new
   properties.
-- FIXME: uncomment yarn serialisation tests.
 
 *** Rename =name_tree='s parent                                       :story:
 
