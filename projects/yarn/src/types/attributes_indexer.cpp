@@ -46,7 +46,7 @@ namespace dogen {
 namespace yarn {
 
 object& attributes_indexer::find_object(const name& n, intermediate_model& m) {
-    const auto qn(n.qualified());
+    const auto qn(n.id());
     auto i(m.objects().find(qn));
     if (i == m.objects().end()) {
         BOOST_LOG_SEV(lg, error) << object_not_found << qn;
@@ -56,7 +56,7 @@ object& attributes_indexer::find_object(const name& n, intermediate_model& m) {
 }
 
 concept& attributes_indexer::find_concept(const name& n, intermediate_model& m) {
-    const auto& qn(n.qualified());
+    const auto& qn(n.id());
     auto i(m.concepts().find(qn));
     if (i == m.concepts().end()) {
         BOOST_LOG_SEV(lg, error) << concept_not_found << qn;
@@ -67,11 +67,11 @@ concept& attributes_indexer::find_concept(const name& n, intermediate_model& m) 
 
 void attributes_indexer::index_object(object& o, intermediate_model& m,
     std::unordered_set<name>& processed_names) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().qualified();
+    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().id();
 
     if (processed_names.find(o.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed: "
-                                 << o.name().qualified();
+                                 << o.name().id();
         return;
     }
 
@@ -127,11 +127,11 @@ void attributes_indexer::index_objects(intermediate_model& m) {
 
 void attributes_indexer::index_concept(concept& c, intermediate_model& m,
     std::unordered_set<name>& processed_names) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing concept: " << c.name().qualified();
+    BOOST_LOG_SEV(lg, debug) << "Indexing concept: " << c.name().id();
 
     if (processed_names.find(c.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed:"
-                                 << c.name().qualified();
+                                 << c.name().id();
         return;
     }
 

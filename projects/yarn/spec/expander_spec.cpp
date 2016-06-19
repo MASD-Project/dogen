@@ -89,7 +89,7 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_missing_modules_gets_correctly_expande
 
             if (!module_found)
                 BOOST_LOG_SEV(lg, error) << "Object has undefined module: "
-                                         << n.qualified();
+                                         << n.id();
             BOOST_CHECK(module_found);
         }
     }

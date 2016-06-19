@@ -98,7 +98,7 @@ generate(const inclusion_dependencies_builder_factory& f,
             >
         > providers, const YarnEntity& e) {
 
-    const auto qn(e.name().qualified());
+    const auto qn(e.name().id());
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies for: " << qn;
 
     std::unordered_map<std::string, std::list<std::string> > r;

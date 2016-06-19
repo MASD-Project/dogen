@@ -52,25 +52,25 @@ namespace yarn {
  * implementation of concept processing.
  */
 inline bool operator<(const name& lhs, const name& rhs) {
-    return lhs.qualified() < rhs.qualified();
+    return lhs.id() < rhs.id();
 }
 
 object& concept_indexer::find_object(const name& n, intermediate_model& m) {
-    auto i(m.objects().find(n.qualified()));
+    auto i(m.objects().find(n.id()));
     if (i == m.objects().end()) {
-        BOOST_LOG_SEV(lg, error) << object_not_found << n.qualified();
+        BOOST_LOG_SEV(lg, error) << object_not_found << n.id();
         BOOST_THROW_EXCEPTION(
-            indexing_error(object_not_found +  n.qualified()));
+            indexing_error(object_not_found +  n.id()));
     }
     return i->second;
 }
 
 concept& concept_indexer::find_concept(const name& n, intermediate_model& m) {
-    auto i(m.concepts().find(n.qualified()));
+    auto i(m.concepts().find(n.id()));
     if (i == m.concepts().end()) {
-        BOOST_LOG_SEV(lg, error) << concept_not_found << n.qualified();
+        BOOST_LOG_SEV(lg, error) << concept_not_found << n.id();
         BOOST_THROW_EXCEPTION(
-            indexing_error(concept_not_found + n.qualified()));
+            indexing_error(concept_not_found + n.id()));
     }
     return i->second;
 }
@@ -99,7 +99,7 @@ void concept_indexer::remove_duplicates(std::list<name>& names) const {
 
 void concept_indexer::index_object(object& o, intermediate_model& m,
     std::unordered_set<name>& processed_names) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().qualified();
+    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().id();
 
     if (processed_names.find(o.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed.";
@@ -191,7 +191,7 @@ void concept_indexer::index_objects(intermediate_model& m) {
 
 void concept_indexer::index_concept(concept& c, intermediate_model& m,
     std::unordered_set<name>& processed_names) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing concept: " << c.name().qualified();
+    BOOST_LOG_SEV(lg, debug) << "Indexing concept: " << c.name().id();
 
     if (processed_names.find(c.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Concept already processed.";

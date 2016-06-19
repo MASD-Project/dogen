@@ -107,7 +107,7 @@ formatter_properties_repository_factory::create_formatter_properties(
     formatter_properties_repository r;
     formatter_properties_factory f;
     for (const auto& pair : mfd) {
-        r.formatter_properties_by_name()[pair.first.qualified()] = f.make(
+        r.formatter_properties_by_name()[pair.first.id()] = f.make(
             pair.second.path_derivatives_,
             pair.second.inclusion_dependencies,
             pair.second.enablement);

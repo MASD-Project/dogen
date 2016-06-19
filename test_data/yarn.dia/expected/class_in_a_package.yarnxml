@@ -3,8 +3,8 @@
 <boost_serialization signature="serialization::archive" version="13">
 <entity class_id="10" tracking_level="0" version="0">
 	<name class_id="11" tracking_level="0" version="0">
+		<id>&lt;class_in_a_package&gt;</id>
 		<simple>class_in_a_package</simple>
-		<qualified>&lt;class_in_a_package&gt;</qualified>
 		<qualified_for class_id="12" tracking_level="0" version="0">
 			<count>0</count>
 			<item_version>0</item_version>
@@ -57,8 +57,8 @@
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;class_in_a_package&gt;&lt;package1&gt;</id>
 						<simple>package1</simple>
-						<qualified>&lt;class_in_a_package&gt;&lt;package1&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -141,8 +141,8 @@
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;class_in_a_package&gt;</id>
 						<simple>class_in_a_package</simple>
-						<qualified>&lt;class_in_a_package&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -212,8 +212,8 @@
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;</id>
 						<simple>first_class</simple>
-						<qualified>&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -262,8 +262,8 @@
 							</fields>
 						</extensions>
 						<name>
+							<id>&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;&lt;public_attribute&gt;</id>
 							<simple>public_attribute</simple>
-							<qualified>&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;&lt;public_attribute&gt;</qualified>
 							<qualified_for>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -290,8 +290,8 @@
 						<unparsed_type>int</unparsed_type>
 						<parsed_type class_id="35" tracking_level="0" version="0">
 							<parent>
+								<id></id>
 								<simple></simple>
-								<qualified></qualified>
 								<qualified_for>
 									<count>0</count>
 									<item_version>0</item_version>
@@ -339,8 +339,8 @@
 							</fields>
 						</extensions>
 						<name>
+							<id>&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;&lt;private_attribute&gt;</id>
 							<simple>private_attribute</simple>
-							<qualified>&lt;class_in_a_package&gt;&lt;package1&gt;&lt;first_class&gt;&lt;private_attribute&gt;</qualified>
 							<qualified_for>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -367,8 +367,8 @@
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
 							<parent>
+								<id></id>
 								<simple></simple>
-								<qualified></qualified>
 								<qualified_for>
 									<count>0</count>
 									<item_version>0</item_version>

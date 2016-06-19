@@ -3,8 +3,8 @@
 <boost_serialization signature="serialization::archive" version="13">
 <entity class_id="10" tracking_level="0" version="0">
 	<name class_id="11" tracking_level="0" version="0">
+		<id>&lt;enumeration&gt;</id>
 		<simple>enumeration</simple>
-		<qualified>&lt;enumeration&gt;</qualified>
 		<qualified_for class_id="12" tracking_level="0" version="0">
 			<count>0</count>
 			<item_version>0</item_version>
@@ -57,8 +57,8 @@
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;enumeration&gt;&lt;pkg1&gt;</id>
 						<simple>pkg1</simple>
-						<qualified>&lt;enumeration&gt;&lt;pkg1&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -141,8 +141,8 @@
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;enumeration&gt;</id>
 						<simple>enumeration</simple>
-						<qualified>&lt;enumeration&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -207,8 +207,8 @@
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;enumeration&gt;&lt;pkg1&gt;&lt;shape_types&gt;</id>
 						<simple>shape_types</simple>
-						<qualified>&lt;enumeration&gt;&lt;pkg1&gt;&lt;shape_types&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -241,8 +241,8 @@
 					<in_global_module>0</in_global_module>
 				</element>
 				<underlying_type>
+					<id></id>
 					<simple></simple>
-					<qualified></qualified>
 					<qualified_for>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -311,8 +311,8 @@
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;enumeration&gt;&lt;colour_types&gt;</id>
 						<simple>colour_types</simple>
-						<qualified>&lt;enumeration&gt;&lt;colour_types&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -344,8 +344,8 @@
 					<in_global_module>0</in_global_module>
 				</element>
 				<underlying_type>
+					<id></id>
 					<simple></simple>
-					<qualified></qualified>
 					<qualified_for>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -417,8 +417,8 @@ this is a long comment
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;enumeration&gt;&lt;book_types&gt;</id>
 						<simple>book_types</simple>
-						<qualified>&lt;enumeration&gt;&lt;book_types&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -450,8 +450,8 @@ this is a long comment
 					<in_global_module>0</in_global_module>
 				</element>
 				<underlying_type>
+					<id></id>
 					<simple></simple>
-					<qualified></qualified>
 					<qualified_for>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -517,8 +517,8 @@ this is a long comment
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;enumeration&gt;&lt;a_class&gt;</id>
 						<simple>a_class</simple>
-						<qualified>&lt;enumeration&gt;&lt;a_class&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -566,8 +566,8 @@ this is a long comment
 							</fields>
 						</extensions>
 						<name>
+							<id>&lt;enumeration&gt;&lt;a_class&gt;&lt;colour_type&gt;</id>
 							<simple>colour_type</simple>
-							<qualified>&lt;enumeration&gt;&lt;a_class&gt;&lt;colour_type&gt;</qualified>
 							<qualified_for>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -593,8 +593,8 @@ this is a long comment
 						<unparsed_type>colour_types</unparsed_type>
 						<parsed_type class_id="38" tracking_level="0" version="0">
 							<parent>
+								<id></id>
 								<simple></simple>
-								<qualified></qualified>
 								<qualified_for>
 									<count>0</count>
 									<item_version>0</item_version>
@@ -642,8 +642,8 @@ this is a long comment
 							</fields>
 						</extensions>
 						<name>
+							<id>&lt;enumeration&gt;&lt;a_class&gt;&lt;book_type&gt;</id>
 							<simple>book_type</simple>
-							<qualified>&lt;enumeration&gt;&lt;a_class&gt;&lt;book_type&gt;</qualified>
 							<qualified_for>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -669,8 +669,8 @@ this is a long comment
 						<unparsed_type>book_types</unparsed_type>
 						<parsed_type>
 							<parent>
+								<id></id>
 								<simple></simple>
-								<qualified></qualified>
 								<qualified_for>
 									<count>0</count>
 									<item_version>0</item_version>
@@ -718,8 +718,8 @@ this is a long comment
 							</fields>
 						</extensions>
 						<name>
+							<id>&lt;enumeration&gt;&lt;a_class&gt;&lt;shape_type&gt;</id>
 							<simple>shape_type</simple>
-							<qualified>&lt;enumeration&gt;&lt;a_class&gt;&lt;shape_type&gt;</qualified>
 							<qualified_for>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -745,8 +745,8 @@ this is a long comment
 						<unparsed_type>pkg1::shape_types</unparsed_type>
 						<parsed_type>
 							<parent>
+								<id></id>
 								<simple></simple>
-								<qualified></qualified>
 								<qualified_for>
 									<count>0</count>
 									<item_version>0</item_version>

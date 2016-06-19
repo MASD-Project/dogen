@@ -71,13 +71,13 @@ void workflow::initialise_context_activity(const std::string& model_name,
     auto& m(context_.model());
     m.name(create_name_for_model(model_name, external_modules));
     m.original_model_name(model_name);
-    BOOST_LOG_SEV(lg, debug) << "Model name: " << m.name().qualified();
+    BOOST_LOG_SEV(lg, debug) << "Model: " << m.name().id();
 
     m.origin_type(yarn::origin_types::user);
     m.is_target(is_target);
 
     const auto mm(create_module_for_model(m.name(), is_target));
-    m.modules().insert(std::make_pair(mm.name().qualified(), mm));
+    m.modules().insert(std::make_pair(mm.name().id(), mm));
 }
 
 graph_type workflow::

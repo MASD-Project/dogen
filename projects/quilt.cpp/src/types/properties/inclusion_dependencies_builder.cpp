@@ -120,7 +120,7 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
     const auto& en(enablement_repository_.enablement_by_name());
     const auto i(en.find(n));
     if (i == en.end()) {
-        const auto qn(n.qualified());
+        const auto qn(n.id());
         BOOST_LOG_SEV(lg, error) << name_not_found << n;
         BOOST_THROW_EXCEPTION(building_error(name_not_found + qn));
     }
@@ -136,7 +136,7 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
     if (!r) {
         BOOST_LOG_SEV(lg, debug) << "Formatter disabled. Formatter: "
                                  << formatter_name << " on type: "
-                                 << n.qualified() << "'";
+                                 << n.id() << "'";
     }
     return r;
 }
@@ -144,9 +144,9 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
 settings::aspect_settings inclusion_dependencies_builder::
 get_aspect_settings(const yarn::name& n) const {
     const auto& bn(bundle_repository_.bundles_by_name());
-    const auto i(bn.find(n.qualified()));
+    const auto i(bn.find(n.id()));
     if (i == bn.end()) {
-        const auto qn(n.qualified());
+        const auto qn(n.id());
         BOOST_LOG_SEV(lg, error) << name_not_found << qn;
         BOOST_THROW_EXCEPTION(building_error(name_not_found + qn));
     }

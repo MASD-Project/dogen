@@ -57,12 +57,12 @@ private:
     template<typename Formatter, typename YarnElement>
     void format(const Formatter& f, const YarnElement& e) {
 
-        const auto qn(e.name().qualified());
+        const auto qn(e.name().id());
         const auto fn(f.ownership_hierarchy().formatter_name());
         BOOST_LOG_SEV(lg, debug) << "Formatting: '" << qn << "' with '"
                                  << fn << "'";
 
-        const auto ctx(factory_.make(e.name().qualified()));
+        const auto ctx(factory_.make(e.name().id()));
         const auto fp(ctx.formatter_properties());
         const auto i(fp.find(fn));
         if (i == fp.end()) {

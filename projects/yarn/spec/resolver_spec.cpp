@@ -84,7 +84,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
         if (o.local_attributes().size() == 1) {
             auto& t(o.local_attributes().begin()->parsed_type().parent());
             t.location().model_modules().clear();
-            t.qualified(t.simple());
+            t.id(t.simple());
         }
     }
     const auto original(m);
@@ -99,7 +99,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
     for (const auto pair : m.objects()) {
         const auto& n(pair.second.name());
         if (factory.is_type_name_n(0, n)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
             found = true;
 
             const auto& o(pair.second);
@@ -136,7 +136,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_different_model_results_in_su
     for (const auto pair : combined.objects()) {
         const auto& n(pair.second.name());
         if (factory.is_type_name_n(0, n)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
             found = true;
 
             const auto& o(pair.second);
@@ -179,13 +179,13 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
     for (const auto pair : combined.objects()) {
         const auto& n(pair.second.name());
         if (factory.is_type_name_n(0, n)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
             found = true;
 
             const auto& o(pair.second);
             BOOST_REQUIRE(o.parents().size() == 1);
             const auto pn(o.parents().front());
-            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
+            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.id();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(0, pn));
             BOOST_CHECK(o.object_type() ==
@@ -215,13 +215,13 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
     for (const auto pair : combined.objects()) {
         const auto& n(pair.second.name());
         if (factory.is_type_name_n(0, n)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
             found = true;
 
             const auto& o(pair.second);
             BOOST_REQUIRE(o.parents().size() == 1);
             const auto pn(o.parents().front());
-            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
+            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.id();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(1, pn));
             BOOST_CHECK(o.object_type() ==
@@ -251,25 +251,25 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
     for (const auto pair : combined.objects()) {
         const auto& n(pair.second.name());
         if (factory.is_type_name_n(0, n)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
             found_one = true;
 
             const auto& o(pair.second);
             BOOST_REQUIRE(o.parents().size() == 1);
             const auto pn(o.parents().front());
-            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
+            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.id();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(0, pn));
             BOOST_CHECK(o.object_type() ==
                 dogen::yarn::object_types::user_defined_value_object);
         } else if (factory.is_type_name_n(1, n)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
             found_two = true;
 
             const auto& o(pair.second);
             BOOST_REQUIRE(o.parents().size() == 1);
             const auto pn(o.parents().front());
-            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
+            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.id();
             BOOST_CHECK(factory.is_type_name_n(2, pn));
             BOOST_CHECK(factory.is_model_n(0, pn));
             BOOST_CHECK(o.object_type() ==
@@ -316,13 +316,13 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
     for (const auto pair : combined.objects()) {
         const auto& n(pair.second.name());
         if (factory.is_type_name_n(0, n)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
             found = true;
 
             const auto& o(pair.second);
             BOOST_REQUIRE(o.parents().size() == 1);
             const auto pn(o.parents().front());
-            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
+            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.id();
             BOOST_CHECK(factory.is_type_name_n(1, pn));
             BOOST_CHECK(factory.is_model_n(1, pn));
             BOOST_CHECK(o.object_type() ==

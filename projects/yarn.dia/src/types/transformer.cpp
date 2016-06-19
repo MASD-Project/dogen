@@ -117,7 +117,7 @@ yarn::name transformer::to_name(const std::string& n,
 }
 
 yarn::module& transformer::module_for_name(const yarn::name& n) {
-    auto i(context_.model().modules().find(n.qualified()));
+    auto i(context_.model().modules().find(n.id()));
     if (i == context_.model().modules().end()) {
         const auto sn(n.simple());
         BOOST_LOG_SEV(lg, error) << missing_module_for_name << sn;
@@ -220,13 +220,13 @@ update_object(yarn::object& o, const processed_object& po, const profile& p) {
         }
 
         BOOST_LOG_SEV(lg, debug) << "Setting parent for: "
-                                 << o.name().qualified() << " as "
-                                 << j->second.qualified();
+                                 << o.name().id() << " as "
+                                 << j->second.id();
         o.is_child(true);
         o.parents().push_back(j->second);
     } else {
         BOOST_LOG_SEV(lg, debug) << "Object has no parent: "
-                                 << o.name().qualified();
+                                 << o.name().id();
     }
 
     const auto j(context_.parent_ids().find(po.id()));
@@ -252,7 +252,7 @@ void transformer::to_exception(const processed_object& o, const profile& p) {
     update_element(e, o, p);
 
     auto& exceptions(context_.model().exceptions());
-    exceptions.insert(std::make_pair(e.name().qualified(), e));
+    exceptions.insert(std::make_pair(e.name().id(), e));
 }
 
 void transformer::to_service(const processed_object& o, const profile& p) {
@@ -262,7 +262,7 @@ void transformer::to_service(const processed_object& o, const profile& p) {
     s.object_type(yarn::object_types::user_defined_service);
     update_object(s, o, p);
     auto& objects(context_.model().objects());
-    objects.insert(std::make_pair(s.name().qualified(), s));
+    objects.insert(std::make_pair(s.name().id(), s));
 }
 
 void transformer::to_value_object(const processed_object& o, const profile& p) {
@@ -272,7 +272,7 @@ void transformer::to_value_object(const processed_object& o, const profile& p) {
     update_object(vo, o, p);
     vo.object_type(yarn::object_types::user_defined_value_object);
     auto& objects(context_.model().objects());
-    objects.insert(std::make_pair(vo.name().qualified(), vo));
+    objects.insert(std::make_pair(vo.name().id(), vo));
 }
 
 void transformer::to_enumeration(const processed_object& o, const profile& p) {
@@ -304,7 +304,7 @@ void transformer::to_enumeration(const processed_object& o, const profile& p) {
         enumerator_names.insert(enumerator.name());
     }
     auto& enumerations(context_.model().enumerations());
-    enumerations.insert(std::make_pair(e.name().qualified(), e));
+    enumerations.insert(std::make_pair(e.name().id(), e));
 }
 
 void transformer::to_module(const processed_object& o, const profile& p) {
@@ -313,7 +313,7 @@ void transformer::to_module(const processed_object& o, const profile& p) {
     yarn::module m;
     update_element(m, o, p);
     auto& modules(context_.model().modules());
-    modules.insert(std::make_pair(m.name().qualified(), m));
+    modules.insert(std::make_pair(m.name().id(), m));
 }
 
 void transformer::from_note(const processed_object& o) {
@@ -380,7 +380,7 @@ void transformer::to_concept(const processed_object& o, const profile& p) {
     const auto j(context_.parent_ids().find(o.id()));
     c.is_parent(j != context_.parent_ids().end());
     auto& concepts(context_.model().concepts());
-    concepts.insert(std::make_pair(c.name().qualified(), c));
+    concepts.insert(std::make_pair(c.name().id(), c));
 }
 
 bool transformer::is_transformable(const processed_object& o) const {

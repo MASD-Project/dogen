@@ -69,22 +69,22 @@ void association_indexer::walk_name_tree(const intermediate_model& m,
     else
         o.transparent_associations().push_back(n);
 
-    const auto i(m.primitives().find(n.qualified()));
+    const auto i(m.primitives().find(n.id()));
     if (i != m.primitives().end()) {
         is_opaque = false;
         return;
     }
 
-    const auto j(m.enumerations().find(n.qualified()));
+    const auto j(m.enumerations().find(n.id()));
     if (j != m.enumerations().end()) {
         is_opaque = false;
         return;
     }
 
-    const auto k(m.objects().find(n.qualified()));
+    const auto k(m.objects().find(n.id()));
     if (k == m.objects().end()) {
-        BOOST_LOG_SEV(lg, error) << object_not_found << n.qualified();
-        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n.qualified()));
+        BOOST_LOG_SEV(lg, error) << object_not_found << n.id();
+        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n.id()));
     }
 
     is_opaque = k->second.object_type() == object_types::smart_pointer;
@@ -107,7 +107,7 @@ void association_indexer::walk_name_tree(const intermediate_model& m,
 
 void association_indexer::
 index_object(const intermediate_model& m, object& o) const {
-    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().qualified();
+    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().id();
 
     for (const auto& p : o.local_attributes()) {
         const auto nt(p.parsed_type());

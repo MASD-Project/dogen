@@ -3,8 +3,8 @@
 <boost_serialization signature="serialization::archive" version="13">
 <entity class_id="10" tracking_level="0" version="0">
 	<name class_id="11" tracking_level="0" version="0">
+		<id>&lt;two_layers_with_objects&gt;</id>
 		<simple>two_layers_with_objects</simple>
-		<qualified>&lt;two_layers_with_objects&gt;</qualified>
 		<qualified_for class_id="12" tracking_level="0" version="0">
 			<count>0</count>
 			<item_version>0</item_version>
@@ -57,8 +57,8 @@
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;two_layers_with_objects&gt;&lt;Package_2&gt;</id>
 						<simple>Package_2</simple>
-						<qualified>&lt;two_layers_with_objects&gt;&lt;Package_2&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -108,8 +108,8 @@
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;two_layers_with_objects&gt;&lt;package_1&gt;</id>
 						<simple>package_1</simple>
-						<qualified>&lt;two_layers_with_objects&gt;&lt;package_1&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -192,8 +192,8 @@
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;two_layers_with_objects&gt;</id>
 						<simple>two_layers_with_objects</simple>
-						<qualified>&lt;two_layers_with_objects&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -263,8 +263,8 @@
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;two_layers_with_objects&gt;&lt;Package_2&gt;&lt;class_2&gt;</id>
 						<simple>class_2</simple>
-						<qualified>&lt;two_layers_with_objects&gt;&lt;Package_2&gt;&lt;class_2&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -313,8 +313,8 @@
 							</fields>
 						</extensions>
 						<name>
+							<id>&lt;two_layers_with_objects&gt;&lt;Package_2&gt;&lt;class_2&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
-							<qualified>&lt;two_layers_with_objects&gt;&lt;Package_2&gt;&lt;class_2&gt;&lt;prop_0&gt;</qualified>
 							<qualified_for>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -341,8 +341,8 @@
 						<unparsed_type>int</unparsed_type>
 						<parsed_type class_id="35" tracking_level="0" version="0">
 							<parent>
+								<id></id>
 								<simple></simple>
-								<qualified></qualified>
 								<qualified_for>
 									<count>0</count>
 									<item_version>0</item_version>
@@ -442,8 +442,8 @@
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;two_layers_with_objects&gt;&lt;package_1&gt;&lt;class_1&gt;</id>
 						<simple>class_1</simple>
-						<qualified>&lt;two_layers_with_objects&gt;&lt;package_1&gt;&lt;class_1&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -492,8 +492,8 @@
 							</fields>
 						</extensions>
 						<name>
+							<id>&lt;two_layers_with_objects&gt;&lt;package_1&gt;&lt;class_1&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
-							<qualified>&lt;two_layers_with_objects&gt;&lt;package_1&gt;&lt;class_1&gt;&lt;prop_0&gt;</qualified>
 							<qualified_for>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -520,8 +520,8 @@
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
 							<parent>
+								<id></id>
 								<simple></simple>
-								<qualified></qualified>
 								<qualified_for>
 									<count>0</count>
 									<item_version>0</item_version>

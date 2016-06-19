@@ -62,10 +62,10 @@ public:
 
 private:
     void insert(const yarn::name& n, const settings::bundle& b) {
-        const auto pair(std::make_pair(n.qualified(), b));
+        const auto pair(std::make_pair(n.id(), b));
         const auto res(result_.bundles_by_name().insert(pair));
         if (!res.second) {
-            const auto qn(n.qualified());
+            const auto qn(n.id());
             BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
             BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));
         }
@@ -88,10 +88,10 @@ private:
         auto b(factory_.make(e.extensions()));
         for (const auto& p : e.all_attributes()) {
             const auto os(opaque_settings_builder_.build(p.extensions()));
-            const auto pair(std::make_pair(p.name().qualified(), os));
+            const auto pair(std::make_pair(p.name().id(), os));
             const auto res(b.opaque_settings_for_property().insert(pair));
             if (!res.second) {
-                const auto qn(p.name().qualified());
+                const auto qn(p.name().id());
                 BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
                 BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));
             }
@@ -139,11 +139,11 @@ make(const dynamic::repository& rp, const dynamic::object& root_object,
     // FIXME: hack to handle registars.
     yarn::name_factory nf;
     const auto n(nf.build_element_in_model(m.name(), registrar_name));
-    const auto pair(std::make_pair(n.qualified(), f.make()));
+    const auto pair(std::make_pair(n.id(), f.make()));
     auto& deps(r.bundles_by_name());
     const auto res(deps.insert(pair));
     if (!res.second) {
-        const auto qn(n.qualified());
+        const auto qn(n.id());
         BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
         BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));
     }

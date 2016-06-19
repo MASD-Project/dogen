@@ -24,29 +24,29 @@ namespace dogen {
 namespace yarn {
 
 name::name(
+    const std::string& id,
     const std::string& simple,
-    const std::string& qualified,
     const std::map<dogen::yarn::language, std::string>& qualified_for,
     const std::string& identifiable,
     const dogen::yarn::location& location)
-    : simple_(simple),
-      qualified_(qualified),
+    : id_(id),
+      simple_(simple),
       qualified_for_(qualified_for),
       identifiable_(identifiable),
       location_(location) { }
 
 void name::swap(name& other) noexcept {
     using std::swap;
+    swap(id_, other.id_);
     swap(simple_, other.simple_);
-    swap(qualified_, other.qualified_);
     swap(qualified_for_, other.qualified_for_);
     swap(identifiable_, other.identifiable_);
     swap(location_, other.location_);
 }
 
 bool name::operator==(const name& rhs) const {
-    return simple_ == rhs.simple_ &&
-        qualified_ == rhs.qualified_ &&
+    return id_ == rhs.id_ &&
+        simple_ == rhs.simple_ &&
         qualified_for_ == rhs.qualified_for_ &&
         identifiable_ == rhs.identifiable_ &&
         location_ == rhs.location_;
@@ -56,6 +56,22 @@ name& name::operator=(name other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::string& name::id() const {
+    return id_;
+}
+
+std::string& name::id() {
+    return id_;
+}
+
+void name::id(const std::string& v) {
+    id_ = v;
+}
+
+void name::id(const std::string&& v) {
+    id_ = std::move(v);
 }
 
 const std::string& name::simple() const {
@@ -72,22 +88,6 @@ void name::simple(const std::string& v) {
 
 void name::simple(const std::string&& v) {
     simple_ = std::move(v);
-}
-
-const std::string& name::qualified() const {
-    return qualified_;
-}
-
-std::string& name::qualified() {
-    return qualified_;
-}
-
-void name::qualified(const std::string& v) {
-    qualified_ = v;
-}
-
-void name::qualified(const std::string&& v) {
-    qualified_ = std::move(v);
 }
 
 const std::map<dogen::yarn::language, std::string>& name::qualified_for() const {

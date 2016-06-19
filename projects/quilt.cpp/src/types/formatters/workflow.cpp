@@ -258,8 +258,7 @@ workflow::execute(const settings::bundle_repository& brp,
     context_factory factory(brp, hsrp, fprp, registrar().formatter_helpers());
     element_formatter ef(factory, registrar().formatter_container());
     for (const auto e : elements) {
-        BOOST_LOG_SEV(lg, warn) << "Processing element: "
-                                << e->name().qualified();
+        BOOST_LOG_SEV(lg, warn) << "Processing element: " << e->name().id();
         r.splice_after(r.before_begin(), ef.format(*e));
     }
 

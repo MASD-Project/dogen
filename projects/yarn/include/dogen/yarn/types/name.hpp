@@ -60,8 +60,8 @@ public:
 
 public:
     name(
+        const std::string& id,
         const std::string& simple,
-        const std::string& qualified,
         const std::map<dogen::yarn::language, std::string>& qualified_for,
         const std::string& identifiable,
         const dogen::yarn::location& location);
@@ -75,18 +75,6 @@ private:
 
 public:
     /**
-     * @brief Simple (non-qualified) name of the modeling element at this address.
-     *
-     * The simple name must be unique for a given location.
-     */
-    /**@{*/
-    const std::string& simple() const;
-    std::string& simple();
-    void simple(const std::string& v);
-    void simple(const std::string&& v);
-    /**@}*/
-
-    /**
      * @brief Unique identifier representation for this name, using a well-defined notation.
      *
      * Note that the qualified ID itself should not be part of the address, but it is
@@ -96,10 +84,22 @@ public:
      * location (but not the ID itself, of course).
      */
     /**@{*/
-    const std::string& qualified() const;
-    std::string& qualified();
-    void qualified(const std::string& v);
-    void qualified(const std::string&& v);
+    const std::string& id() const;
+    std::string& id();
+    void id(const std::string& v);
+    void id(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Simple (non-qualified) name of the modeling element at this address.
+     *
+     * The simple name must be unique for a given location.
+     */
+    /**@{*/
+    const std::string& simple() const;
+    std::string& simple();
+    void simple(const std::string& v);
+    void simple(const std::string&& v);
     /**@}*/
 
     /**
@@ -144,8 +144,8 @@ public:
     name& operator=(name other);
 
 private:
+    std::string id_;
     std::string simple_;
-    std::string qualified_;
     std::map<dogen::yarn::language, std::string> qualified_for_;
     std::string identifiable_;
     dogen::yarn::location location_;

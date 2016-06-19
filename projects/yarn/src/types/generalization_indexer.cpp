@@ -47,7 +47,7 @@ namespace dogen {
 namespace yarn {
 
 inline bool operator<(const name& lhs, const name& rhs) {
-    return lhs.qualified() < rhs.qualified();
+    return lhs.id() < rhs.id();
 }
 
 bool generalization_indexer::is_leaf(const object& o) const {
@@ -73,23 +73,23 @@ recurse_generalization(const intermediate_model& m, const name& leaf,
         return std::list<name> { o.name() };
 
     if (o.parents().empty()) {
-        const auto qn(o.name().qualified());
+        const auto qn(o.name().id());
         BOOST_LOG_SEV(lg, error) << child_with_no_parents << qn;
         BOOST_THROW_EXCEPTION(indexing_error(child_with_no_parents + qn));
     }
 
     std::list<name> root_parents;
     for (const auto& parent : o.parents()) {
-        auto j(m.objects().find(parent.qualified()));
+        auto j(m.objects().find(parent.id()));
         if (j == m.objects().end()) {
-            const auto qn(parent.qualified());
+            const auto qn(parent.id());
             BOOST_LOG_SEV(lg, error) << parent_not_found << qn;
             BOOST_THROW_EXCEPTION(indexing_error(parent_not_found + qn));
         }
 
         const auto op(recurse_generalization(m, leaf, j->second, d));
         if (op.empty()) {
-            const auto qn(parent.qualified());
+            const auto qn(parent.id());
             BOOST_LOG_SEV(lg, error) << child_with_no_root_parent << qn;
             BOOST_THROW_EXCEPTION(
                 indexing_error(child_with_no_root_parent + qn));
@@ -99,11 +99,11 @@ recurse_generalization(const intermediate_model& m, const name& leaf,
             root_parents.push_back(qn);
 
         d.root_parents[parent] = op;
-        BOOST_LOG_SEV(lg, debug) << "Type: " << parent.qualified()
+        BOOST_LOG_SEV(lg, debug) << "Type: " << parent.id()
                                  << " has original parents: " << op;
 
         d.leaves[parent].push_back(leaf);
-        BOOST_LOG_SEV(lg, debug) << "Type is a leaf of: " << parent.qualified();
+        BOOST_LOG_SEV(lg, debug) << "Type is a leaf of: " << parent.id();
     }
     d.root_parents[o.name()] = root_parents;
     return root_parents;
@@ -116,7 +116,7 @@ obtain_details(const intermediate_model& m) const {
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
         BOOST_LOG_SEV(lg, debug) << "Processing type: "
-                                 << o.name().qualified();
+                                 << o.name().id();
 
         if (!is_leaf(o))
             continue;
@@ -134,9 +134,9 @@ void generalization_indexer::
 populate(const generalization_details& d, intermediate_model& m) const {
     for (const auto& pair : d.leaves) {
         const auto& n(pair.first);
-        auto i(m.objects().find(n.qualified()));
+        auto i(m.objects().find(n.id()));
         if (i == m.objects().end()) {
-            const auto qn(n.qualified());
+            const auto qn(n.id());
             BOOST_LOG_SEV(lg, error) << object_not_found << qn;
             BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
         }
@@ -154,9 +154,9 @@ populate(const generalization_details& d, intermediate_model& m) const {
 
     for (const auto& pair : d.root_parents) {
         const auto& n(pair.first);
-        auto i(m.objects().find(n.qualified()));
+        auto i(m.objects().find(n.id()));
         if (i == m.objects().end()) {
-            const auto qn(n.qualified());
+            const auto qn(n.id());
             BOOST_LOG_SEV(lg, error) << object_not_found << qn;
             BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
         }
@@ -168,15 +168,15 @@ populate(const generalization_details& d, intermediate_model& m) const {
              * have to ignore them here.
              */
             BOOST_LOG_SEV(lg, debug) << "Type has parents but is not a child: "
-                                     << n.qualified();
+                                     << n.id();
             continue;
         }
 
         o.root_parents(pair.second);
         for (const auto& opn : pair.second) {
-            const auto j(m.objects().find(opn.qualified()));
+            const auto j(m.objects().find(opn.id()));
             if (j == m.objects().end()) {
-                const auto qn(opn.qualified());
+                const auto qn(opn.id());
                 BOOST_LOG_SEV(lg, error) << object_not_found << qn;
                 BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
             }

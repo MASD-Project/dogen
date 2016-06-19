@@ -238,7 +238,7 @@ BOOST_AUTO_TEST_CASE(trivial_model_hydrates_into_expected_model) {
         const auto& pair(*m.objects().begin());
         const auto& n(pair.second.name());
 
-        BOOST_CHECK(pair.first == n.qualified());
+        BOOST_CHECK(pair.first == n.id());
         BOOST_CHECK(n.simple() == type_name);
         const auto& nl(n.location());
         BOOST_CHECK(nl.model_modules() == ml.model_modules());
@@ -285,7 +285,7 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
         const auto& n(pair.second.name());
         const auto& nl(m.name().location());
 
-        BOOST_CHECK(pair.first == n.qualified());
+        BOOST_CHECK(pair.first == n.id());
         BOOST_CHECK(n.simple() == type_name);
         BOOST_CHECK(nl.model_modules() == ml.model_modules());
         BOOST_CHECK(nl.internal_modules().empty());
@@ -368,7 +368,7 @@ BOOST_AUTO_TEST_CASE(internal_modules_model_hydrates_into_expected_model) {
     const auto& pair(*m.objects().begin());
     const auto& n(pair.second.name());
 
-    BOOST_CHECK(pair.first == n.qualified());
+    BOOST_CHECK(pair.first == n.id());
     {
         const auto mp(n.location().internal_modules());
         BOOST_REQUIRE(mp.size() == 3);

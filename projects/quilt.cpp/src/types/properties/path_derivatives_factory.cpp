@@ -64,7 +64,7 @@ path_derivatives_factory::path_derivatives_factory(
 boost::filesystem::path path_derivatives_factory::
 make_inclusion_path(const settings::path_settings& ps,
     const yarn::name& n) const {
-    BOOST_LOG_SEV(lg, debug) << "Making inclusion path for: " << n.qualified();
+    BOOST_LOG_SEV(lg, debug) << "Making inclusion path for: " << n.id();
 
     boost::filesystem::path r;
 
@@ -93,7 +93,7 @@ make_inclusion_path(const settings::path_settings& ps,
      * names to the directories.
      */
     if (n != model_.name()) {
-        const auto i(model_.elements().find(n.qualified()));
+        const auto i(model_.elements().find(n.id()));
         if (i != model_.elements().end() && is<yarn::module>(i->second))
             r /= n.simple();
     }
@@ -123,7 +123,7 @@ boost::filesystem::path path_derivatives_factory::
 make_file_path(const settings::path_settings& ps,
     const boost::filesystem::path& inclusion_path,
     const yarn::name& n) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating file path for: " << n.qualified();
+    BOOST_LOG_SEV(lg, debug) << "Creating file path for: " << n.id();
 
     boost::filesystem::path r;
 

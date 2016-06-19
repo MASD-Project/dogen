@@ -102,7 +102,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
         const auto& n(pair.second.name());
         if (factory.is_type_name_n(1, n)) {
             auto& o(pair.second);
-            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
             o.is_visitable(true);
         }
     }
@@ -117,7 +117,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     for (const auto& pair : m.objects()) {
         const auto& n(pair.second.name());
         if (factory.is_type_name_n(1, n)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
             type_one = true;
         }
     }
@@ -125,7 +125,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
 
     BOOST_REQUIRE(m.visitors().size() == 1);
     const auto v(m.visitors().begin()->second);
-    BOOST_LOG_SEV(lg, debug) << "found visitor: " << v.name().qualified();
+    BOOST_LOG_SEV(lg, debug) << "found visitor: " << v.name().id();
     BOOST_CHECK(factory.is_type_name_n_visitor(1, v.name()));
     BOOST_REQUIRE(v.visits().size() == 1);
     BOOST_CHECK(factory.is_type_name_n(0, v.visits().front()));

@@ -181,7 +181,7 @@ template<typename YarnConcreteElement>
 inline const YarnConcreteElement& convert(const yarn::element& e) {
     auto ptr(dynamic_cast<YarnConcreteElement const*>(&e));
     if (!ptr) {
-        const auto qn(e.name().qualified());
+        const auto qn(e.name().id());
         BOOST_LOG_SEV(lg, error) << cast_failure << qn;
         BOOST_THROW_EXCEPTION(transformation_error(cast_failure + qn));
     }
@@ -196,7 +196,7 @@ inline bool is(const boost::shared_ptr<yarn::element> e) {
 
 template<typename YarnConcreteElement>
 inline bool is(const yarn::model& m, const yarn::name& n) {
-    const auto i(m.elements().find(n.qualified()));
+    const auto i(m.elements().find(n.id()));
     if (i == m.elements().end())
         return false;
     return is<YarnConcreteElement>(i->second);
@@ -206,7 +206,7 @@ transformer::transformer(const yarn::model& m) :  model_(m) {}
 
 void transformer::
 populate_formattable_properties(const yarn::name& n, formattable& f) const {
-    f.identity(n.qualified());
+    f.identity(n.id());
 }
 
 void transformer::populate_entity_properties(const yarn::name& n,
@@ -216,7 +216,7 @@ void transformer::populate_entity_properties(const yarn::name& n,
 
     e.name(n.simple());
     e.documentation(documentation);
-    e.id(n.qualified());
+    e.id(n.id());
 
     name_builder b;
     e.namespaces(b.namespace_list(n));
@@ -257,7 +257,7 @@ void transformer::to_nested_type_info(const yarn::name_tree& nt,
     nti.is_time_duration(is_time_duration(nti.name()));
     nti.is_ptree(is_ptree(nti.name()));
 
-    const auto k(model_.elements().find(n.qualified()));
+    const auto k(model_.elements().find(n.id()));
     if (k != model_.elements().end() && is<yarn::object>(k->second)) {
         const auto& o(convert<yarn::object>(*k->second));
         const auto ot(o.object_type());
@@ -309,7 +309,7 @@ transformer::to_property_info(const yarn::attribute a, const bool is_immutable,
     pi.documentation(a.documentation());
     pi.is_immutable(is_immutable);
     pi.is_fluent(is_fluent);
-    pi.id(a.name().qualified());
+    pi.id(a.name().id());
 
     bool requires_stream_manipulators(false);
     bool requires_manual_move_constructor(false);
@@ -373,7 +373,7 @@ transformer::to_class_info(const yarn::object& o) const {
 
     if (!o.root_parents().empty()) {
         if (o.root_parents().size() > 1) {
-            const auto qn(o.name().qualified());
+            const auto qn(o.name().id());
             BOOST_LOG_SEV(lg, error) << too_many_parents << qn;
             BOOST_THROW_EXCEPTION(transformation_error(too_many_parents + qn));
         }
@@ -453,7 +453,7 @@ transformer::transform(const yarn::enumeration& e) const {
 std::forward_list<std::shared_ptr<formattable> > transformer::
 transform(const yarn::object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming object: "
-                             << o.name().qualified();
+                             << o.name().id();
 
     std::forward_list<std::shared_ptr<formattable> > r;
     r.push_front(to_forward_declarations_info(o));
@@ -464,7 +464,7 @@ transform(const yarn::object& o) const {
         r.push_front(to_class_info(o));
         break;
     default: {
-        const auto qn(o.name().qualified());
+        const auto qn(o.name().id());
         BOOST_LOG_SEV(lg, error) << unsupported_object_type << o.object_type()
                                  << " name: " << qn;
         BOOST_THROW_EXCEPTION(transformation_error(unsupported_object_type +

@@ -12,22 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-19 Sun 12:14]
+#+CAPTION: Clock summary at [2016-06-19 Sun 12:35]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *9:04* |      |      | 100.0 |
+| *Total time*                                                                | *9:25* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 9:04   |      |      | 100.0 |
-| Active                                                                      |        | 9:04 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:18 |  14.3 |
-| COMPLETED Refactor helper settings                                          |        |      | 0:35 |   6.4 |
-| COMPLETED Add properties for helpers                                        |        |      | 1:35 |  17.5 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |        |      | 1:23 |  15.3 |
-| COMPLETED Rename formattables to properties                                 |        |      | 0:50 |   9.2 |
-| COMPLETED Rename helper instances                                           |        |      | 0:37 |   6.8 |
-| COMPLETED Tidy-up pretty printer                                            |        |      | 1:10 |  12.9 |
-| STARTED Compute yarn property related information                           |        |      | 1:36 |  17.6 |
+| Stories                                                                     | 9:25   |      |      | 100.0 |
+| Active                                                                      |        | 9:25 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:18 |  13.8 |
+| COMPLETED Refactor helper settings                                          |        |      | 0:35 |   6.2 |
+| COMPLETED Add properties for helpers                                        |        |      | 1:35 |  16.8 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |        |      | 1:23 |  14.7 |
+| COMPLETED Rename formattables to properties                                 |        |      | 0:50 |   8.8 |
+| COMPLETED Rename helper instances                                           |        |      | 0:37 |   6.5 |
+| COMPLETED Tidy-up pretty printer                                            |        |      | 1:10 |  12.4 |
+| STARTED Rename qualified to id                                              |        |      | 0:21 |   3.7 |
+| STARTED Compute yarn property related information                           |        |      | 1:36 |  17.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -169,6 +170,16 @@ should rename formattables to properties.
   C#) but the code should be refactored to make it easy to add it.
 - add support for printing to stream.
 
+*** STARTED Rename qualified to id                                    :story:
+    CLOCK: [2016-06-19 Sun 12:14]--[2016-06-19 Sun 12:35] =>  0:21
+
+Now that we have language specific qualified names, it became obvious
+that what we are calling "qualified" is not a qualified name at all
+but an identifier. Rename:
+
+- qualified to id
+- qualified for to qualified.
+
 *** STARTED Compute yarn property related information                 :story:
     CLOCK: [2016-06-18 Sat 23:05]--[2016-06-18 Sat 23:10] =>  0:05
     CLOCK: [2016-06-18 Sat 22:52]--[2016-06-18 Sat 23:04] =>  0:12
@@ -205,6 +216,7 @@ from the name builder in quilt:
 - the name builder can then be responsible for programming language
   specific logic and calls to the pretty printer to populate the new
   properties.
+- FIXME: uncomment yarn serialisation tests.
 
 *** Rename =name_tree='s parent                                       :story:
 

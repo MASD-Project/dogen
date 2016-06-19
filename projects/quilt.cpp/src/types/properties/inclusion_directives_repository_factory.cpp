@@ -72,7 +72,7 @@ public:
         if (pair.second)
             return;
 
-        const auto qn(n.qualified());
+        const auto qn(n.id());
         BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
         BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));
     }

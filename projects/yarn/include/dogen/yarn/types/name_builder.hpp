@@ -41,7 +41,7 @@ public:
     explicit name_builder(const name& n);
 
 private:
-    void compute_qualified_name();
+    void create_name_id();
 
 public:
     name_builder& simple_name_contributes_to_qualifed_name(const bool v);

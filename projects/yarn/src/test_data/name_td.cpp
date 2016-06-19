@@ -58,8 +58,8 @@ name_generator::name_generator() : position_(0) { }
 
 void name_generator::
 populate(const unsigned int position, result_type& v) {
-    v.simple(create_std_string(position + 0));
-    v.qualified(create_std_string(position + 1));
+    v.id(create_std_string(position + 0));
+    v.simple(create_std_string(position + 1));
     v.qualified_for(create_std_map_dogen_yarn_language_std_string(position + 2));
     v.identifiable(create_std_string(position + 3));
     v.location(create_dogen_yarn_location(position + 4));

@@ -130,7 +130,7 @@ template<typename YarnConcreteElement>
 inline const YarnConcreteElement& convert(const yarn::element& e) {
     auto ptr(dynamic_cast<YarnConcreteElement const*>(&e));
     if (!ptr) {
-        const auto qn(e.name().qualified());
+        const auto qn(e.name().id());
         BOOST_LOG_SEV(lg, error) << cast_failure << qn;
         BOOST_THROW_EXCEPTION(building_error(cast_failure + qn));
     }
@@ -145,7 +145,7 @@ inline bool is(const boost::shared_ptr<yarn::element> e) {
 
 template<typename YarnConcreteElement>
 inline bool is(const yarn::model& m, const yarn::name& n) {
-    const auto i(m.elements().find(n.qualified()));
+    const auto i(m.elements().find(n.id()));
     if (i == m.elements().end())
         return false;
 
@@ -198,9 +198,9 @@ path_derivatives factory::create_path_derivatives(
 bool factory::is_enabled(const formatter_properties_repository& fprp,
     const yarn::name& n, const std::string& formatter_name) const {
 
-    const auto i(fprp.formatter_properties_by_name().find(n.qualified()));
+    const auto i(fprp.formatter_properties_by_name().find(n.id()));
     if (i == fprp.formatter_properties_by_name().end()) {
-        const auto qn(n.qualified());
+        const auto qn(n.id());
         BOOST_LOG_SEV(lg, error) << properties_not_found << qn;
         BOOST_THROW_EXCEPTION(building_error(properties_not_found + qn));
     }
@@ -223,16 +223,16 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     const yarn::model& m) const {
 
     const auto n(create_name(m.name(), registrar_name));
-    BOOST_LOG_SEV(lg, debug) << "Making registrar: " << n.qualified();
+    BOOST_LOG_SEV(lg, debug) << "Making registrar: " << n.id();
 
     name_builder b;
     auto r(std::make_shared<registrar_info>());
     r->namespaces(b.namespace_list(n));
-    r->id(n.qualified());
+    r->id(n.id());
 
-    const auto i(brp.bundles_by_name().find(n.qualified()));
+    const auto i(brp.bundles_by_name().find(n.id()));
     if (i == brp.bundles_by_name().end()) {
-        const auto qn(n.qualified());
+        const auto qn(n.id());
         BOOST_LOG_SEV(lg, error) << bundle_not_found_for_name << qn;
         BOOST_THROW_EXCEPTION(building_error(bundle_not_found_for_name + qn));
     }
@@ -274,9 +274,9 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     const auto ri_fn(traits::registrar_implementation_formatter_name());
     auto fp2(lambda(ci_fn, ri_fn));
 
-    const auto j(fprp.formatter_properties_by_name().find(n.qualified()));
+    const auto j(fprp.formatter_properties_by_name().find(n.id()));
     if (j == fprp.formatter_properties_by_name().end()) {
-        const auto qn(n.qualified());
+        const auto qn(n.id());
         BOOST_LOG_SEV(lg, error) << properties_not_found << qn;
         BOOST_THROW_EXCEPTION(building_error(properties_not_found + qn));
     }
@@ -290,7 +290,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     fp2.inclusion_dependencies(k->second.inclusion_dependencies());
     fprp.formatter_properties_by_name()[r->id()][ri_fn] = fp2;
 
-    BOOST_LOG_SEV(lg, debug) << "Made registrar: " << n.qualified();
+    BOOST_LOG_SEV(lg, debug) << "Made registrar: " << n.id();
     return r;
 }
 
@@ -308,7 +308,7 @@ make_includers(
     const yarn::model& m) const {
 
     const auto n(create_name(m.name(), includers_name));
-    BOOST_LOG_SEV(lg, debug) << "Making includers: " << n.qualified();
+    BOOST_LOG_SEV(lg, debug) << "Making includers: " << n.id();
 
     std::unordered_map<std::string, std::list<std::string> >
         includes_by_formatter_name;
@@ -348,7 +348,7 @@ make_includers(
                 if (is<yarn::module>(m, n))
                     continue;
 
-                const auto j(m.elements().find(n.qualified()));
+                const auto j(m.elements().find(n.id()));
                 if (j  != m.elements().end() && is<yarn::object>(j->second)) {
                     const auto& o(convert<yarn::object>(*j->second));
                     const auto ot(o.object_type());
@@ -357,7 +357,7 @@ make_includers(
                         continue;
                 }
             } else {
-                const auto i(m.elements().find(n.qualified()));
+                const auto i(m.elements().find(n.id()));
                 if (i != m.elements().end()) {
                     const bool is_module(is<yarn::module>(i->second));
                     if (is_module && i->second->documentation().empty())
@@ -399,7 +399,7 @@ make_includers(
 
     std::forward_list<std::shared_ptr<formattable> > r;
     auto inc(std::make_shared<includers_info>());
-    inc->id(n.qualified());
+    inc->id(n.id());
     const auto gs(gsf.make(cpp_modeline_name, root_object));
     brp.bundles_by_name()[inc->id()].general_settings(gs);
 
@@ -423,7 +423,7 @@ make_includers(
     r.push_front(inc);
     BOOST_LOG_SEV(lg, debug) << "Includer: " << *inc;
 
-    BOOST_LOG_SEV(lg, debug) << "Made includers: " << n.qualified();
+    BOOST_LOG_SEV(lg, debug) << "Made includers: " << n.id();
 
     return r;
 }

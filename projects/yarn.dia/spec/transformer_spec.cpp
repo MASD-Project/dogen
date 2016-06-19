@@ -97,7 +97,7 @@ dogen::yarn::dia::context mock_context(const std::string& model_name) {
 
     dogen::yarn::module m;
     m.name(r.model().name());
-    r.model().modules().insert(std::make_pair(m.name().qualified(), m));
+    r.model().modules().insert(std::make_pair(m.name().id(), m));
     return r;
 }
 
@@ -963,8 +963,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
             BOOST_REQUIRE(o.parents().size() == 1);
             BOOST_CHECK(is_type_one(o.parents().front()));
         } else {
-            BOOST_LOG_SEV(lg, error) << "Unexpected type name: "
-                                     << n.qualified();
+            BOOST_LOG_SEV(lg, error) << "Unexpected type name: " << n.id();
             BOOST_FAIL("Unexpected type name");
         }
     }

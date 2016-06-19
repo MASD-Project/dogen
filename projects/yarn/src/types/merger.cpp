@@ -56,7 +56,7 @@ void merger::require_not_has_target(const std::string& name) const {
 
     std::ostringstream stream;
     stream << "Only one target expected. Last target model name: '"
-           << merged_model_.name().qualified()
+           << merged_model_.name().id()
            << "'. New target model name: "
            << name;
 
@@ -90,17 +90,17 @@ void merger::check_name(const name& model_name, const std::string& key,
             vl.model_modules() != ml.model_modules()) {
             std::ostringstream s;
             s << "Type does not belong to this model. Model name: '"
-              << model_name.qualified() << "'. Type name: "
-              << value.qualified();
+              << model_name.id() << "'. Type name: "
+              << value.id();
             BOOST_LOG_SEV(lg, error) << s.str();
             BOOST_THROW_EXCEPTION(merging_error(s.str()));
         }
     }
 
-    if (key != value.qualified()) {
+    if (key != value.id()) {
         std::ostringstream s;
         s << "Inconsistency between key and value names: "
-          << " key: " << key << " value: " << value.qualified();
+          << " key: " << key << " value: " << value.id();
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(merging_error(s.str()));
     }
@@ -121,7 +121,7 @@ void merger::update_references() {
 }
 
 void merger::add_target(const intermediate_model& target) {
-    const auto qn(target.name().qualified());
+    const auto qn(target.name().id());
     require_not_has_target(qn);
 
     has_target_ = true;
@@ -141,7 +141,7 @@ void merger::add(const intermediate_model& m) {
         add_target(m);
 
     BOOST_LOG_SEV(lg, debug) << "adding model: '"
-                             << m.name().qualified() << "'";
+                             << m.name().id() << "'";
     BOOST_LOG_SEV(lg, debug) << "contents: " << m;
     models_.insert(std::make_pair(m.name(), m));
 }
@@ -149,7 +149,7 @@ void merger::add(const intermediate_model& m) {
 void merger::merge_model(const intermediate_model& m) {
     const auto mn(m.name());
     BOOST_LOG_SEV(lg, info) << "Merging model: '"
-                            << mn.qualified()
+                            << mn.id()
                             << " modules: " << m.modules().size()
                             << " concepts: " << m.concepts().size()
                             << " primitives: " << m.primitives().size()

@@ -59,7 +59,7 @@ namespace dogen {
 namespace yarn {
 
 bool resolver::is_primitive(const intermediate_model& m, const name& n) const {
-    auto i(m.primitives().find(n.qualified()));
+    auto i(m.primitives().find(n.id()));
     if (i != m.primitives().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to a primitive in model.";
         return true;
@@ -68,7 +68,7 @@ bool resolver::is_primitive(const intermediate_model& m, const name& n) const {
 }
 
 bool resolver::is_enumeration(const intermediate_model& m, const name& n) const {
-    auto i(m.enumerations().find(n.qualified()));
+    auto i(m.enumerations().find(n.id()));
     if (i != m.enumerations().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to an enumeration in model.";
         return true;
@@ -77,7 +77,7 @@ bool resolver::is_enumeration(const intermediate_model& m, const name& n) const 
 }
 
 bool resolver::is_object(const intermediate_model& m, const name& n) const {
-    auto i(m.objects().find(n.qualified()));
+    auto i(m.objects().find(n.id()));
     if (i != m.objects().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to an object in model.";
         return true;
@@ -86,7 +86,7 @@ bool resolver::is_object(const intermediate_model& m, const name& n) const {
 }
 
 bool resolver:: is_concept(const intermediate_model& m, const name& n) const {
-    auto i(m.concepts().find(n.qualified()));
+    auto i(m.concepts().find(n.id()));
     if (i != m.concepts().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to a concept in model.";
         return true;
@@ -102,13 +102,13 @@ obtain_default_enumeration_type(const intermediate_model& m) const {
         const auto p(pair.second);
         if (p.is_default_enumeration_type()) {
             BOOST_LOG_SEV(lg, debug) << "Found default enumeration name type:"
-                                     << p.name().qualified();
+                                     << p.name().id();
 
             if (found) {
                 BOOST_LOG_SEV(lg, error) << too_many_defaults
-                                         << p.name().qualified();
+                                         << p.name().id();
                 BOOST_THROW_EXCEPTION(
-                    resolution_error(too_many_defaults + p.name().qualified()));
+                    resolution_error(too_many_defaults + p.name().id()));
             }
             found = true;
             r = p.name();
@@ -136,7 +136,7 @@ is_name_in_model(const intermediate_model& m, const name& n) const {
 
 name resolver::
 resolve_partial_type(const intermediate_model& m, const name& n) const {
-    BOOST_LOG_SEV(lg, debug) << "Resolving type:" << n.qualified();
+    BOOST_LOG_SEV(lg, debug) << "Resolving type:" << n.id();
 
     /* First try the type as it was read originally. This caters for
      * types placed in the global module.
@@ -177,8 +177,8 @@ resolve_partial_type(const intermediate_model& m, const name& n) const {
             return r;
     }
 
-    BOOST_LOG_SEV(lg, error) << undefined_type << n.qualified();
-    BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.qualified()));
+    BOOST_LOG_SEV(lg, error) << undefined_type << n.id();
+    BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.id()));
 }
 
 void resolver::
@@ -187,7 +187,7 @@ resolve_partial_type(const intermediate_model& m, name_tree& nt) const {
         resolve_partial_type(m, cnt);
 
     const name n(resolve_partial_type(m, nt.parent()));
-    BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.qualified() << ".";
+    BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.id() << ".";
     nt.parent(n);
 }
 
@@ -198,7 +198,7 @@ void resolver::resolve_attributes(const intermediate_model& m,
             resolve_partial_type(m, a.parsed_type());
         } catch (boost::exception& e) {
             std::ostringstream s;
-            s << "Owner type name: " << owner.qualified()
+            s << "Owner type name: " << owner.id()
               << " Attribute name: " << a.name()
               << " Attribute type: " << a.parsed_type();
             e << errmsg_info(s.str());
@@ -215,8 +215,8 @@ void resolver::validate_inheritance_graph(const intermediate_model& m,
     for (const auto& pn : o.parents()) {
         if (!is_object(m, pn)) {
             std::ostringstream s;
-            s << orphan_object << ": " << o.name().qualified()
-              << ". parent: " << pn.qualified();
+            s << orphan_object << ": " << o.name().id()
+              << ". parent: " << pn.id();
 
             BOOST_LOG_SEV(lg, error) << s.str();
             BOOST_THROW_EXCEPTION(resolution_error(s.str()));
@@ -229,8 +229,8 @@ void resolver::validate_inheritance_graph(const intermediate_model& m,
     for (const auto& pn : o.root_parents()) {
         if (!is_object(m, pn)) {
             std::ostringstream s;
-            s << orphan_object << ": " << o.name().qualified()
-              << ". original parent: " << pn.qualified();
+            s << orphan_object << ": " << o.name().id()
+              << ". original parent: " << pn.id();
 
             BOOST_LOG_SEV(lg, error) << s.str();
             BOOST_THROW_EXCEPTION(resolution_error(s.str()));
@@ -244,8 +244,8 @@ void resolver::validate_refinements(const intermediate_model& m,
         if (!is_concept(m, n)) {
             std::ostringstream stream;
             stream << orphan_concept << ". concept: "
-                   << c.name().qualified()
-                   << ". refined concept: " << n.qualified();
+                   << c.name().id()
+                   << ". refined concept: " << n.id();
 
             BOOST_LOG_SEV(lg, error) << stream.str();
             BOOST_THROW_EXCEPTION(resolution_error(stream.str()));
@@ -262,7 +262,7 @@ void resolver::resolve_concepts(intermediate_model& m) const {
         if (c.generation_type() == generation_types::no_generation)
             continue;
 
-        BOOST_LOG_SEV(lg, debug) << "Resolving: " << c.name().qualified();
+        BOOST_LOG_SEV(lg, debug) << "Resolving: " << c.name().id();
         resolve_attributes(m, c.name(), c.local_attributes());
         validate_refinements(m, c);
     }
@@ -277,7 +277,7 @@ void resolver::resolve_objects(intermediate_model& m) const {
         if (o.generation_type() == generation_types::no_generation)
             continue;
 
-        BOOST_LOG_SEV(lg, debug) << "Resolving: " << o.name().qualified();
+        BOOST_LOG_SEV(lg, debug) << "Resolving: " << o.name().id();
         validate_inheritance_graph(m, o);
         resolve_attributes(m, o.name(), o.local_attributes());
     }
@@ -300,19 +300,19 @@ void resolver::resolve_enumerations(intermediate_model& m) const {
         if (e.generation_type() == generation_types::no_generation)
             continue;
 
-        BOOST_LOG_SEV(lg, debug) << "Resolving: " << e.name().qualified();
+        BOOST_LOG_SEV(lg, debug) << "Resolving: " << e.name().id();
 
         const auto ut(e.underlying_type());
         BOOST_LOG_SEV(lg, debug) << "Underlying type: " << ut;
 
         if (ut.simple().empty()) {
             BOOST_LOG_SEV(lg, debug) << "Defaulting enumeration to type: "
-                                     << det.qualified();
+                                     << det.id();
             e.underlying_type(det);
         } else if (!is_primitive(m, ut)) {
-            BOOST_LOG_SEV(lg, error) << invalid_default << ut.qualified();
+            BOOST_LOG_SEV(lg, error) << invalid_default << ut.id();
             BOOST_THROW_EXCEPTION(resolution_error(
-                    invalid_default + ut.qualified()));
+                    invalid_default + ut.id()));
         }
     }
 }

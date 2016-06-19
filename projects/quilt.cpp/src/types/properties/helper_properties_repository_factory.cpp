@@ -56,7 +56,7 @@ private:
         if (s.generation_type() == yarn::generation_types::no_generation)
             return;
 
-        const auto qn(s.name().qualified());
+        const auto qn(s.name().id());
         BOOST_LOG_SEV(lg, debug) << "Creating helper instances for" << qn;
 
 

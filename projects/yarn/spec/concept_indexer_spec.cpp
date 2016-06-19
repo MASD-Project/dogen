@@ -160,7 +160,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
             BOOST_CHECK(factory.is_concept_name_n(1,
                     o.modeled_concepts().front()));
         } else
-            BOOST_FAIL("Unexpected object: " << n.qualified());
+            BOOST_FAIL("Unexpected object: " << n.id());
 
         BOOST_CHECK(o.parents().empty());
     }
@@ -176,7 +176,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
             BOOST_REQUIRE(c.refines().size() == 1);
             BOOST_CHECK(factory.is_concept_name_n(0, c.refines().front()));
         } else
-            BOOST_FAIL("Unexpected concept: " << n.qualified());
+            BOOST_FAIL("Unexpected concept: " << n.id());
     }
 
     dogen::yarn::concept_indexer ind;
@@ -192,7 +192,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
         } else if (factory.is_concept_name_n(1, n)) {
             BOOST_CHECK(c.refines().size() == 1);
         } else
-            BOOST_FAIL("Unexpected concept: " << n.qualified());
+            BOOST_FAIL("Unexpected concept: " << n.id());
     }
 
     BOOST_REQUIRE(m.objects().size() == 2);
@@ -205,7 +205,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
         else if (factory.is_type_name_n(1, n)) {
             BOOST_CHECK(o.modeled_concepts().size() == 2);
         } else
-            BOOST_FAIL("Unexpected object: " << n.qualified());
+            BOOST_FAIL("Unexpected object: " << n.id());
     }
 }
 
@@ -232,7 +232,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
             BOOST_CHECK(factory.is_concept_name_n(2,
                     o.modeled_concepts().front()));
         } else
-            BOOST_FAIL("Unexpected object: " << n.qualified());
+            BOOST_FAIL("Unexpected object: " << n.id());
 
         BOOST_CHECK(o.parents().empty());
     }
@@ -251,7 +251,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
             BOOST_REQUIRE(c.refines().size() == 1);
             BOOST_CHECK(factory.is_concept_name_n(1, c.refines().front()));
         } else
-            BOOST_FAIL("Unexpected concept: " << n.qualified());
+            BOOST_FAIL("Unexpected concept: " << n.id());
     }
 
     dogen::yarn::concept_indexer ind;
@@ -269,7 +269,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
         } else if (factory.is_concept_name_n(2, n)) {
             BOOST_CHECK(c.refines().size() == 2);
         } else
-            BOOST_FAIL("Unexpected concept: " << n.qualified());
+            BOOST_FAIL("Unexpected concept: " << n.id());
     }
 
     BOOST_REQUIRE(m.objects().size() == 3);
@@ -284,7 +284,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
         } else if (factory.is_type_name_n(2, n)) {
             BOOST_CHECK(o.modeled_concepts().size() == 3);
         } else
-            BOOST_FAIL("Unexpected object: " << n.qualified());
+            BOOST_FAIL("Unexpected object: " << n.id());
     }
 }
 
@@ -306,7 +306,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
 
             BOOST_CHECK(o.parents().empty());
         } else
-            BOOST_FAIL("Unexpected object: " << n.qualified());
+            BOOST_FAIL("Unexpected object: " << n.id());
     }
 
     BOOST_REQUIRE(m.concepts().size() == 4);
@@ -331,7 +331,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
                 factory.is_concept_name_n(1, c.refines().back()) ||
                 factory.is_concept_name_n(2, c.refines().back()));
         } else
-            BOOST_FAIL("Unexpected concept: " << n.qualified());
+            BOOST_FAIL("Unexpected concept: " << n.id());
     }
 
     dogen::yarn::concept_indexer ind;
@@ -362,7 +362,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
             BOOST_CHECK(found_one);
             BOOST_CHECK(found_two);
         } else
-            BOOST_FAIL("Unexpected concept: " << n.qualified());
+            BOOST_FAIL("Unexpected concept: " << n.id());
     }
 
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -421,7 +421,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
         if (factory.is_concept_name_n(0, n))
             BOOST_REQUIRE(c.refines().empty());
         else
-            BOOST_FAIL("Unexpected object: " << n.qualified());
+            BOOST_FAIL("Unexpected object: " << n.id());
     }
 
     BOOST_CHECK(a.objects().size() == 2);
@@ -438,7 +438,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
             BOOST_REQUIRE(o.parents().size() == 1);
             BOOST_REQUIRE(factory.is_type_name_n(0, o.parents().front()));
         } else
-            BOOST_FAIL("Unexpected object: " << n.qualified());
+            BOOST_FAIL("Unexpected object: " << n.id());
     }
 
     dogen::yarn::concept_indexer ind;
@@ -464,7 +464,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_REQUIRE(c.refines().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
         } else
-            BOOST_FAIL("Unexpected object: " << n.qualified());
+            BOOST_FAIL("Unexpected object: " << n.id());
     }
 
     BOOST_REQUIRE(m.objects().size() == 2);
@@ -481,7 +481,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_REQUIRE(o.parents().size() == 1);
             BOOST_REQUIRE(factory.is_type_name_n(0, o.parents().front()));
         } else
-            BOOST_FAIL("Unexpected object: " << n.qualified());
+            BOOST_FAIL("Unexpected object: " << n.id());
     }
 
     dogen::yarn::concept_indexer ind;
@@ -499,7 +499,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_CHECK(c.refines().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
         } else
-            BOOST_FAIL("Unexpected concept: " << n.qualified());
+            BOOST_FAIL("Unexpected concept: " << n.id());
     }
 
     BOOST_REQUIRE(m.objects().size() == 2);
@@ -521,7 +521,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_REQUIRE(o.parents().size() == 1);
             BOOST_REQUIRE(factory.is_type_name_n(0, o.parents().front()));
         } else
-            BOOST_FAIL("Unexpected object: " << n.qualified());
+            BOOST_FAIL("Unexpected object: " << n.id());
     }
 }
 
@@ -539,7 +539,7 @@ BOOST_AUTO_TEST_CASE(model_with_concept_that_refines_missing_concept_throws) {
             BOOST_REQUIRE(c.refines().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
         } else
-            BOOST_FAIL("Unexpected object: " << n.qualified());
+            BOOST_FAIL("Unexpected object: " << n.id());
     }
 
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
@@ -603,7 +603,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
             BOOST_REQUIRE(o.parents().size() == 1);
             BOOST_REQUIRE(factory.is_type_name_n(0, o.parents().front()));
         } else
-            BOOST_FAIL("Unexpected object: " << n.qualified());
+            BOOST_FAIL("Unexpected object: " << n.id());
     }
 
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;

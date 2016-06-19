@@ -47,7 +47,7 @@ public:
 private:
     template<typename Element>
     void generate(const Element& e) {
-        const auto qn(e.name().qualified());
+        const auto qn(e.name().id());
         const auto ptr(boost::make_shared<Element>(e));
         const auto r(result_.elements().insert(std::make_pair(qn, ptr)));
         if (!r.second) {
@@ -76,9 +76,9 @@ private:
 }
 
 model transformer::transform(const intermediate_model& m) const {
-    const auto i(m.modules().find(m.name().qualified()));
+    const auto i(m.modules().find(m.name().id()));
     if (i == m.modules().end()) {
-        const auto qn(m.name().qualified());
+        const auto qn(m.name().id());
         BOOST_LOG_SEV(lg, error) << missing_root_module << qn;
         BOOST_THROW_EXCEPTION(transformation_error(missing_root_module + qn));
     }

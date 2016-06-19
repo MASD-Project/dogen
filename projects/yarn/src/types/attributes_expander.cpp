@@ -49,7 +49,7 @@ std::unordered_set<std::string> attributes_expander::
 obtain_top_level_module_names(const intermediate_model& m) const {
     std::unordered_set<std::string> r;
     BOOST_LOG_SEV(lg, debug) << "Obtaining top-level modules for: "
-                             << m.name().qualified();
+                             << m.name().id();
 
     for (const auto& pair : m.modules()) {
         const auto& module(pair.second);
@@ -65,14 +65,14 @@ obtain_top_level_module_names(const intermediate_model& m) const {
             BOOST_LOG_SEV(lg, debug) << "Module is not a top-level module: "
                                      << pair.first
                                      << " containing module: "
-                                     << cm.qualified()
-                                     << " model name: " << m.name().qualified();
+                                     << cm.id()
+                                     << " model name: " << m.name().id();
         }
         r.insert(module.name().simple());
     }
 
     BOOST_LOG_SEV(lg, debug) << "Top-level model names for "
-                             << m.name().qualified() << " : "
+                             << m.name().id() << " : "
                              << r;
     return r;
 }

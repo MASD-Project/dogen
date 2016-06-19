@@ -54,11 +54,11 @@ name_builder::name_builder(const name& n)
       infer_simple_name_from_model_name_(false),
       name_(n) { }
 
-void name_builder::compute_qualified_name() {
+void name_builder::create_name_id() {
     const pretty_printer pp;
     const bool skip_simple_name(!simple_name_contributes_to_qualifed_name_);
-    name_.qualified(pp.print(name_, skip_simple_name));
-    BOOST_LOG_SEV(lg, debug) << "Created qualified name: " << name_.qualified();
+    name_.id(pp.print(name_, skip_simple_name));
+    BOOST_LOG_SEV(lg, debug) << "Created name id: " << name_.id();
 }
 
 name_builder& name_builder::
@@ -153,7 +153,7 @@ name_builder& name_builder::location(const yarn::location& l) {
 }
 
 name name_builder::build() {
-    compute_qualified_name();
+    create_name_id();
     return name_;
 }
 

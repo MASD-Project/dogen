@@ -3,8 +3,8 @@
 <boost_serialization signature="serialization::archive" version="13">
 <entity class_id="10" tracking_level="0" version="0">
 	<name class_id="11" tracking_level="0" version="0">
+		<id>&lt;exception&gt;</id>
 		<simple>exception</simple>
-		<qualified>&lt;exception&gt;</qualified>
 		<qualified_for class_id="12" tracking_level="0" version="0">
 			<count>0</count>
 			<item_version>0</item_version>
@@ -57,8 +57,8 @@
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;exception&gt;&lt;pkg&gt;</id>
 						<simple>pkg</simple>
-						<qualified>&lt;exception&gt;&lt;pkg&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -141,8 +141,8 @@
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;exception&gt;</id>
 						<simple>exception</simple>
-						<qualified>&lt;exception&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -212,8 +212,8 @@
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;exception&gt;&lt;a_class&gt;</id>
 						<simple>a_class</simple>
-						<qualified>&lt;exception&gt;&lt;a_class&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -261,8 +261,8 @@
 							</fields>
 						</extensions>
 						<name>
+							<id>&lt;exception&gt;&lt;a_class&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
-							<qualified>&lt;exception&gt;&lt;a_class&gt;&lt;prop_0&gt;</qualified>
 							<qualified_for>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -288,8 +288,8 @@
 						<unparsed_type>int</unparsed_type>
 						<parsed_type class_id="35" tracking_level="0" version="0">
 							<parent>
+								<id></id>
 								<simple></simple>
-								<qualified></qualified>
 								<qualified_for>
 									<count>0</count>
 									<item_version>0</item_version>
@@ -394,8 +394,8 @@
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;exception&gt;&lt;pkg&gt;&lt;catastrophic_error&gt;</id>
 						<simple>catastrophic_error</simple>
-						<qualified>&lt;exception&gt;&lt;pkg&gt;&lt;catastrophic_error&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -443,8 +443,8 @@
 						</fields>
 					</extensions>
 					<name>
+						<id>&lt;exception&gt;&lt;my_error&gt;</id>
 						<simple>my_error</simple>
-						<qualified>&lt;exception&gt;&lt;my_error&gt;</qualified>
 						<qualified_for>
 							<count>0</count>
 							<item_version>0</item_version>
