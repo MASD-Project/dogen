@@ -18,26 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_HASH_LANGUAGE_HASH_HPP
-#define DOGEN_YARN_HASH_LANGUAGE_HASH_HPP
+#include "dogen/yarn/test_data/languages_td.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace yarn {
 
-#include <functional>
-#include "dogen/yarn/types/language.hpp"
-
-namespace std {
-
-template<>
-struct hash<dogen::yarn::language> {
-public:
-    size_t operator()(const dogen::yarn::language& v) const {
-        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
-    }
-};
-
+languages_generator::languages_generator() : position_(0) { }
+void languages_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<languages>(position % 2);
 }
 
-#endif
+languages_generator::result_type
+languages_generator::create(const unsigned int  position) {
+    result_type r;
+    languages_generator::populate(position, r);
+    return r;
+}
+
+languages_generator::result_type
+languages_generator::operator()() {
+    return create(position_++);
+}
+
+} }

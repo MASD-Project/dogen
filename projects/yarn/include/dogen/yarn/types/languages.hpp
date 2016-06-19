@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_LANGUAGE_FWD_HPP
-#define DOGEN_YARN_TYPES_LANGUAGE_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_LANGUAGES_HPP
+#define DOGEN_YARN_TYPES_LANGUAGES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,13 @@
 namespace dogen {
 namespace yarn {
 
-enum class language : unsigned int;
+/**
+ * @brief For language specific aspects, identifies which language is being used.
+ */
+enum class languages : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    cpp = 1
+};
 
 } }
 

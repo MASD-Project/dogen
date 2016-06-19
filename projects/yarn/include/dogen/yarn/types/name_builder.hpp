@@ -47,7 +47,9 @@ public:
     explicit name_builder(const name& n, const bool model_name_mode_ = false);
 
 private:
-    void create_name_id();
+    void setup_id();
+    void setup_qualified();
+    void setup_identifiable();
 
 public:
     name_builder& simple_name(const std::string& sn);

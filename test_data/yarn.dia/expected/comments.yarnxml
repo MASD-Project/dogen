@@ -6,11 +6,15 @@
 		<id>&lt;comments&gt;</id>
 		<simple>comments</simple>
 		<qualified class_id="12" tracking_level="0" version="0">
-			<count>0</count>
+			<count>1</count>
 			<item_version>0</item_version>
+			<item class_id="13" tracking_level="0" version="0">
+				<first>1</first>
+				<second>comments</second>
+			</item>
 		</qualified>
-		<location class_id="13" tracking_level="0" version="0">
-			<external_modules class_id="14" tracking_level="0" version="0">
+		<location class_id="14" tracking_level="0" version="0">
+			<external_modules class_id="15" tracking_level="0" version="0">
 				<count>0</count>
 				<item_version>0</item_version>
 			</external_modules>
@@ -25,42 +29,42 @@
 			</internal_modules>
 			<element></element>
 		</location>
-		<identifiable></identifiable>
+		<identifiable>comments</identifiable>
 	</name>
 	<origin_type>1</origin_type>
 	<original_model_name>comments</original_model_name>
 	<generation_type>0</generation_type>
-	<references class_id="15" tracking_level="0" version="0">
+	<references class_id="16" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</references>
-	<leaves class_id="16" tracking_level="0" version="0">
+	<leaves class_id="17" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
-	<modules class_id="17" tracking_level="0" version="0">
+	<modules class_id="18" tracking_level="0" version="0">
 		<count>3</count>
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="18" tracking_level="0" version="0">
+		<item class_id="19" tracking_level="0" version="0">
 			<first>&lt;comments&gt;&lt;package&gt;&lt;package2&gt;</first>
 			<second class_id="6" tracking_level="1" version="0" object_id="_0">
-				<element class_id="19" tracking_level="0" version="0">
+				<element class_id="20" tracking_level="0" version="0">
 					<documentation>package2
 </documentation>
-					<extensions class_id="20" tracking_level="0" version="0">
-						<fields class_id="21" tracking_level="0" version="0">
+					<extensions class_id="21" tracking_level="0" version="0">
+						<fields class_id="22" tracking_level="0" version="0">
 							<count>1</count>
 							<bucket_count>2</bucket_count>
 							<item_version>0</item_version>
-							<item class_id="22" tracking_level="0" version="0">
+							<item class_id="23" tracking_level="0" version="0">
 								<first>yarn.dia.comment</first>
-								<second class_id="23" tracking_level="0" version="0">
-									<value class_id="24" tracking_level="0" version="1">
+								<second class_id="24" tracking_level="0" version="0">
+									<value class_id="25" tracking_level="0" version="1">
 										<px class_id="1" tracking_level="1" version="0" object_id="_1">
-											<value class_id="25" tracking_level="0" version="0"></value>
+											<value class_id="26" tracking_level="0" version="0"></value>
 											<content>true</content>
 										</px>
 									</value>
@@ -72,8 +76,12 @@
 						<id>&lt;comments&gt;&lt;package&gt;&lt;package2&gt;</id>
 						<simple>package2</simple>
 						<qualified>
-							<count>0</count>
+							<count>1</count>
 							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>comments::package::package2</second>
+							</item>
 						</qualified>
 						<location>
 							<external_modules>
@@ -92,17 +100,17 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable></identifiable>
+						<identifiable>comments_package_package2</identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<original_model_name></original_model_name>
-					<contained_by class_id="26" tracking_level="0" version="0">
+					<contained_by class_id="27" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<members class_id="27" tracking_level="0" version="0">
+				<members class_id="28" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
@@ -136,8 +144,12 @@
 						<id>&lt;comments&gt;&lt;package&gt;</id>
 						<simple>package</simple>
 						<qualified>
-							<count>0</count>
+							<count>1</count>
 							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>comments::package</second>
+							</item>
 						</qualified>
 						<location>
 							<external_modules>
@@ -155,7 +167,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable></identifiable>
+						<identifiable>comments_package</identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -223,8 +235,12 @@ This comment will be applied to the model namespace itself.
 						<id>&lt;comments&gt;</id>
 						<simple>comments</simple>
 						<qualified>
-							<count>0</count>
+							<count>1</count>
 							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>comments</second>
+							</item>
 						</qualified>
 						<location>
 							<external_modules>
@@ -242,7 +258,7 @@ This comment will be applied to the model namespace itself.
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable></identifiable>
+						<identifiable>comments</identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -259,26 +275,26 @@ This comment will be applied to the model namespace itself.
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="28" tracking_level="0" version="0">
+	<concepts class_id="29" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="29" tracking_level="0" version="0">
+	<primitives class_id="30" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="30" tracking_level="0" version="0">
+	<enumerations class_id="31" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="31" tracking_level="0" version="0">
+	<objects class_id="32" tracking_level="0" version="0">
 		<count>2</count>
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="32" tracking_level="0" version="0">
+		<item class_id="33" tracking_level="0" version="0">
 			<first>&lt;comments&gt;&lt;multi_line&gt;</first>
 			<second class_id="7" tracking_level="1" version="0" object_id="_8">
 				<element>
@@ -298,8 +314,12 @@ third line with &quot;quote&quot;
 						<id>&lt;comments&gt;&lt;multi_line&gt;</id>
 						<simple>multi_line</simple>
 						<qualified>
-							<count>0</count>
+							<count>1</count>
 							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>comments::multi_line</second>
+							</item>
 						</qualified>
 						<location>
 							<external_modules>
@@ -317,7 +337,7 @@ third line with &quot;quote&quot;
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable></identifiable>
+						<identifiable>comments_multi_line</identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -327,7 +347,7 @@ third line with &quot;quote&quot;
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_attributes class_id="33" tracking_level="0" version="0">
+				<all_attributes class_id="34" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_attributes>
@@ -335,7 +355,7 @@ third line with &quot;quote&quot;
 					<count>0</count>
 					<item_version>0</item_version>
 				</local_attributes>
-				<inherited_attributes class_id="34" tracking_level="0" version="0">
+				<inherited_attributes class_id="35" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -400,8 +420,12 @@ third line with &quot;quote&quot;
 						<id>&lt;comments&gt;&lt;one_line&gt;</id>
 						<simple>one_line</simple>
 						<qualified>
-							<count>0</count>
+							<count>1</count>
 							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>comments::one_line</second>
+							</item>
 						</qualified>
 						<location>
 							<external_modules>
@@ -419,7 +443,7 @@ third line with &quot;quote&quot;
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable></identifiable>
+						<identifiable>comments_one_line</identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -436,7 +460,7 @@ third line with &quot;quote&quot;
 				<local_attributes>
 					<count>3</count>
 					<item_version>0</item_version>
-					<item class_id="35" tracking_level="0" version="0">
+					<item class_id="36" tracking_level="0" version="0">
 						<documentation>another brief comment
 </documentation>
 						<extensions>
@@ -450,8 +474,12 @@ third line with &quot;quote&quot;
 							<id>&lt;comments&gt;&lt;one_line&gt;&lt;prop_0&gt;</id>
 							<simple>prop_0</simple>
 							<qualified>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>
+									<first>1</first>
+									<second>comments::one_line::prop_0</second>
+								</item>
 							</qualified>
 							<location>
 								<external_modules>
@@ -469,10 +497,10 @@ third line with &quot;quote&quot;
 								</internal_modules>
 								<element>one_line</element>
 							</location>
-							<identifiable></identifiable>
+							<identifiable>comments_one_line_prop_0</identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
-						<parsed_type class_id="36" tracking_level="0" version="0">
+						<parsed_type class_id="37" tracking_level="0" version="0">
 							<parent>
 								<id></id>
 								<simple></simple>
@@ -497,7 +525,7 @@ third line with &quot;quote&quot;
 								</location>
 								<identifiable></identifiable>
 							</parent>
-							<children class_id="37" tracking_level="0" version="0">
+							<children class_id="38" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -525,8 +553,12 @@ a second line
 							<id>&lt;comments&gt;&lt;one_line&gt;&lt;prop_1&gt;</id>
 							<simple>prop_1</simple>
 							<qualified>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>
+									<first>1</first>
+									<second>comments::one_line::prop_1</second>
+								</item>
 							</qualified>
 							<location>
 								<external_modules>
@@ -544,7 +576,7 @@ a second line
 								</internal_modules>
 								<element>one_line</element>
 							</location>
-							<identifiable></identifiable>
+							<identifiable>comments_one_line_prop_1</identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -597,8 +629,12 @@ a second line
 							<id>&lt;comments&gt;&lt;one_line&gt;&lt;prop_2&gt;</id>
 							<simple>prop_2</simple>
 							<qualified>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>
+									<first>1</first>
+									<second>comments::one_line::prop_2</second>
+								</item>
 							</qualified>
 							<location>
 								<external_modules>
@@ -616,7 +652,7 @@ a second line
 								</internal_modules>
 								<element>one_line</element>
 							</location>
-							<identifiable></identifiable>
+							<identifiable>comments_one_line_prop_2</identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
@@ -706,12 +742,12 @@ a second line
 			</second>
 		</item>
 	</objects>
-	<exceptions class_id="38" tracking_level="0" version="0">
+	<exceptions class_id="39" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<visitors class_id="39" tracking_level="0" version="0">
+	<visitors class_id="40" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>

@@ -26,7 +26,7 @@ namespace yarn {
 separators_generator::separators_generator() : position_(0) { }
 void separators_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<separators>(position % 3);
+    v = static_cast<separators>(position % 4);
 }
 
 separators_generator::result_type

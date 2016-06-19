@@ -18,30 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include <string>
-#include <ostream>
-#include <stdexcept>
-#include "dogen/yarn/io/language_io.hpp"
+#ifndef DOGEN_YARN_TYPES_LANGUAGES_FWD_HPP
+#define DOGEN_YARN_TYPES_LANGUAGES_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const language& v) {
-    s << "{ " << "\"__type__\": " << "\"language\", " << "\"value\": ";
-
-    std::string attr;
-    switch (v) {
-    case language::invalid:
-        attr = "\"invalid\"";
-        break;
-    case language::cpp:
-        attr = "\"cpp\"";
-        break;
-    default:
-        throw std::invalid_argument("Invalid value for language");
-    }
-    s << attr << " }";
-    return s;
-}
+enum class languages : unsigned int;
 
 } }
+
+#endif

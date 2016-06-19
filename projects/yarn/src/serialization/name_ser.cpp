@@ -30,8 +30,8 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
-#include "dogen/yarn/serialization/language_ser.hpp"
 #include "dogen/yarn/serialization/location_ser.hpp"
+#include "dogen/yarn/serialization/languages_ser.hpp"
 
 namespace boost {
 namespace serialization {

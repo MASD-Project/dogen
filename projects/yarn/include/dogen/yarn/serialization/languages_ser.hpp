@@ -18,27 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/test_data/language_td.hpp"
+#ifndef DOGEN_YARN_SERIALIZATION_LANGUAGES_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_LANGUAGES_SER_HPP
 
-namespace dogen {
-namespace yarn {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-language_generator::language_generator() : position_(0) { }
-void language_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<language>(position % 2);
+#include <boost/serialization/nvp.hpp>
+#include "dogen/yarn/types/languages.hpp"
+
+template<class Archive>
+void serialize(Archive& ar, dogen::yarn::languages& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("languages", v);
 }
 
-language_generator::result_type
-language_generator::create(const unsigned int  position) {
-    result_type r;
-    language_generator::populate(position, r);
-    return r;
-}
-
-language_generator::result_type
-language_generator::operator()() {
-    return create(position_++);
-}
-
-} }
+#endif

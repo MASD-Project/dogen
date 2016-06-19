@@ -18,20 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_LANGUAGE_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_LANGUAGE_SER_HPP
+#ifndef DOGEN_YARN_IO_LANGUAGES_IO_HPP
+#define DOGEN_YARN_IO_LANGUAGES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/nvp.hpp>
-#include "dogen/yarn/types/language.hpp"
+#include <iosfwd>
+#include "dogen/yarn/types/languages.hpp"
 
-template<class Archive>
-void serialize(Archive& ar, dogen::yarn::language& v, unsigned int /*version*/){
-    using boost::serialization::make_nvp;
-    ar & make_nvp("language", v);
-}
+namespace dogen {
+namespace yarn {
+
+std::ostream& operator<<(std::ostream& s, const languages& v);
+
+} }
 
 #endif

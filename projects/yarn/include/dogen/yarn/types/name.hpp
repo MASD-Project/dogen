@@ -28,9 +28,9 @@
 #include <string>
 #include <algorithm>
 #include <map>
-#include "dogen/yarn/types/language.hpp"
 #include "dogen/yarn/types/location.hpp"
-#include "dogen/yarn/hash/language_hash.hpp"
+#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/hash/languages_hash.hpp"
 #include "dogen/yarn/serialization/name_fwd_ser.hpp"
 
 namespace dogen {
@@ -62,7 +62,7 @@ public:
     name(
         const std::string& id,
         const std::string& simple,
-        const std::map<dogen::yarn::language, std::string>& qualified,
+        const std::map<dogen::yarn::languages, std::string>& qualified,
         const dogen::yarn::location& location,
         const std::string& identifiable);
 
@@ -106,10 +106,10 @@ public:
      * @brief Qualified name in a language specific representation.
      */
     /**@{*/
-    const std::map<dogen::yarn::language, std::string>& qualified() const;
-    std::map<dogen::yarn::language, std::string>& qualified();
-    void qualified(const std::map<dogen::yarn::language, std::string>& v);
-    void qualified(const std::map<dogen::yarn::language, std::string>&& v);
+    const std::map<dogen::yarn::languages, std::string>& qualified() const;
+    std::map<dogen::yarn::languages, std::string>& qualified();
+    void qualified(const std::map<dogen::yarn::languages, std::string>& v);
+    void qualified(const std::map<dogen::yarn::languages, std::string>&& v);
     /**@}*/
 
     /**
@@ -146,7 +146,7 @@ public:
 private:
     std::string id_;
     std::string simple_;
-    std::map<dogen::yarn::language, std::string> qualified_;
+    std::map<dogen::yarn::languages, std::string> qualified_;
     dogen::yarn::location location_;
     std::string identifiable_;
 };

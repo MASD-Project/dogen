@@ -26,7 +26,7 @@ namespace yarn {
 name::name(
     const std::string& id,
     const std::string& simple,
-    const std::map<dogen::yarn::language, std::string>& qualified,
+    const std::map<dogen::yarn::languages, std::string>& qualified,
     const dogen::yarn::location& location,
     const std::string& identifiable)
     : id_(id),
@@ -90,19 +90,19 @@ void name::simple(const std::string&& v) {
     simple_ = std::move(v);
 }
 
-const std::map<dogen::yarn::language, std::string>& name::qualified() const {
+const std::map<dogen::yarn::languages, std::string>& name::qualified() const {
     return qualified_;
 }
 
-std::map<dogen::yarn::language, std::string>& name::qualified() {
+std::map<dogen::yarn::languages, std::string>& name::qualified() {
     return qualified_;
 }
 
-void name::qualified(const std::map<dogen::yarn::language, std::string>& v) {
+void name::qualified(const std::map<dogen::yarn::languages, std::string>& v) {
     qualified_ = v;
 }
 
-void name::qualified(const std::map<dogen::yarn::language, std::string>&& v) {
+void name::qualified(const std::map<dogen::yarn::languages, std::string>&& v) {
     qualified_ = std::move(v);
 }
 

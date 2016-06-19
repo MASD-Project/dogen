@@ -259,16 +259,19 @@ have modes of operation - we always know when we are building a model
 name.
 
 *** STARTED Populate qualified and identifiable name                  :story:
+    CLOCK: [2016-06-19 Sun 23:30]--[2016-06-20 Mon 00:02] =>  0:32
+    CLOCK: [2016-06-19 Sun 23:20]--[2016-06-19 Sun 23:30] =>  0:10
     CLOCK: [2016-06-19 Sun 21:01]--[2016-06-19 Sun 21:24] =>  0:23
 
 We need to populate the new name and name tree properties for
 qualified and identifiable name.
 
-- we can use model name detection in name builder instead of the
-  multiple Boolean flags we have at the moment.
-- location could have a "all modules" list that concatenates external,
-  model and internal modules. We should look at performance before
-  doing this change though.
+*** Consider caching "all modules" in location                        :story:
+
+At present we are adding the module lists together to build the
+qualified name; location could have a "all modules" list that
+concatenates external, model and internal modules. We should look at
+performance before doing this change though.
 
 *** STARTED Compute yarn property related information                 :story:
     CLOCK: [2016-06-18 Sat 23:05]--[2016-06-18 Sat 23:10] =>  0:05

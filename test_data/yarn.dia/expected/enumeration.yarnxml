@@ -6,11 +6,15 @@
 		<id>&lt;enumeration&gt;</id>
 		<simple>enumeration</simple>
 		<qualified class_id="12" tracking_level="0" version="0">
-			<count>0</count>
+			<count>1</count>
 			<item_version>0</item_version>
+			<item class_id="13" tracking_level="0" version="0">
+				<first>1</first>
+				<second>enumeration</second>
+			</item>
 		</qualified>
-		<location class_id="13" tracking_level="0" version="0">
-			<external_modules class_id="14" tracking_level="0" version="0">
+		<location class_id="14" tracking_level="0" version="0">
+			<external_modules class_id="15" tracking_level="0" version="0">
 				<count>0</count>
 				<item_version>0</item_version>
 			</external_modules>
@@ -25,32 +29,32 @@
 			</internal_modules>
 			<element></element>
 		</location>
-		<identifiable></identifiable>
+		<identifiable>enumeration</identifiable>
 	</name>
 	<origin_type>1</origin_type>
 	<original_model_name>enumeration</original_model_name>
 	<generation_type>0</generation_type>
-	<references class_id="15" tracking_level="0" version="0">
+	<references class_id="16" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</references>
-	<leaves class_id="16" tracking_level="0" version="0">
+	<leaves class_id="17" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
-	<modules class_id="17" tracking_level="0" version="0">
+	<modules class_id="18" tracking_level="0" version="0">
 		<count>2</count>
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="18" tracking_level="0" version="0">
+		<item class_id="19" tracking_level="0" version="0">
 			<first>&lt;enumeration&gt;&lt;pkg1&gt;</first>
 			<second class_id="6" tracking_level="1" version="0" object_id="_0">
-				<element class_id="19" tracking_level="0" version="0">
+				<element class_id="20" tracking_level="0" version="0">
 					<documentation></documentation>
-					<extensions class_id="20" tracking_level="0" version="0">
-						<fields class_id="21" tracking_level="0" version="0">
+					<extensions class_id="21" tracking_level="0" version="0">
+						<fields class_id="22" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
@@ -60,8 +64,12 @@
 						<id>&lt;enumeration&gt;&lt;pkg1&gt;</id>
 						<simple>pkg1</simple>
 						<qualified>
-							<count>0</count>
+							<count>1</count>
 							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>enumeration::pkg1</second>
+							</item>
 						</qualified>
 						<location>
 							<external_modules>
@@ -79,17 +87,17 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable></identifiable>
+						<identifiable>enumeration_pkg1</identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
 					<original_model_name></original_model_name>
-					<contained_by class_id="22" tracking_level="0" version="0">
+					<contained_by class_id="23" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<members class_id="23" tracking_level="0" version="0">
+				<members class_id="24" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
@@ -105,12 +113,12 @@
 							<count>3</count>
 							<bucket_count>5</bucket_count>
 							<item_version>0</item_version>
-							<item class_id="24" tracking_level="0" version="0">
+							<item class_id="25" tracking_level="0" version="0">
 								<first>yarn.dia.comment</first>
-								<second class_id="25" tracking_level="0" version="0">
-									<value class_id="26" tracking_level="0" version="1">
+								<second class_id="26" tracking_level="0" version="0">
+									<value class_id="27" tracking_level="0" version="1">
 										<px class_id="1" tracking_level="1" version="0" object_id="_2">
-											<value class_id="27" tracking_level="0" version="0"></value>
+											<value class_id="28" tracking_level="0" version="0"></value>
 											<content>true</content>
 										</px>
 									</value>
@@ -144,8 +152,12 @@
 						<id>&lt;enumeration&gt;</id>
 						<simple>enumeration</simple>
 						<qualified>
-							<count>0</count>
+							<count>1</count>
 							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>enumeration</second>
+							</item>
 						</qualified>
 						<location>
 							<external_modules>
@@ -163,7 +175,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable></identifiable>
+						<identifiable>enumeration</identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -180,21 +192,21 @@
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="28" tracking_level="0" version="0">
+	<concepts class_id="29" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="29" tracking_level="0" version="0">
+	<primitives class_id="30" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<enumerations class_id="30" tracking_level="0" version="0">
+	<enumerations class_id="31" tracking_level="0" version="0">
 		<count>3</count>
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="31" tracking_level="0" version="0">
+		<item class_id="32" tracking_level="0" version="0">
 			<first>&lt;enumeration&gt;&lt;pkg1&gt;&lt;shape_types&gt;</first>
 			<second class_id="4" tracking_level="1" version="0" object_id="_5">
 				<element>
@@ -210,8 +222,12 @@
 						<id>&lt;enumeration&gt;&lt;pkg1&gt;&lt;shape_types&gt;</id>
 						<simple>shape_types</simple>
 						<qualified>
-							<count>0</count>
+							<count>1</count>
 							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>enumeration::pkg1::shape_types</second>
+							</item>
 						</qualified>
 						<location>
 							<external_modules>
@@ -230,7 +246,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable></identifiable>
+						<identifiable>enumeration_pkg1_shape_types</identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -264,10 +280,10 @@
 					</location>
 					<identifiable></identifiable>
 				</underlying_type>
-				<enumerators class_id="32" tracking_level="0" version="0">
+				<enumerators class_id="33" tracking_level="0" version="0">
 					<count>5</count>
 					<item_version>0</item_version>
-					<item class_id="33" tracking_level="0" version="0">
+					<item class_id="34" tracking_level="0" version="0">
 						<documentation>Represents an uninitialised enum</documentation>
 						<name>invalid</name>
 						<value>0</value>
@@ -314,8 +330,12 @@
 						<id>&lt;enumeration&gt;&lt;colour_types&gt;</id>
 						<simple>colour_types</simple>
 						<qualified>
-							<count>0</count>
+							<count>1</count>
 							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>enumeration::colour_types</second>
+							</item>
 						</qualified>
 						<location>
 							<external_modules>
@@ -333,7 +353,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable></identifiable>
+						<identifiable>enumeration_colour_types</identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -420,8 +440,12 @@ this is a long comment
 						<id>&lt;enumeration&gt;&lt;book_types&gt;</id>
 						<simple>book_types</simple>
 						<qualified>
-							<count>0</count>
+							<count>1</count>
 							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>enumeration::book_types</second>
+							</item>
 						</qualified>
 						<location>
 							<external_modules>
@@ -439,7 +463,7 @@ this is a long comment
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable></identifiable>
+						<identifiable>enumeration_book_types</identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -500,11 +524,11 @@ this is a long comment
 			</second>
 		</item>
 	</enumerations>
-	<objects class_id="34" tracking_level="0" version="0">
+	<objects class_id="35" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>2</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="35" tracking_level="0" version="0">
+		<item class_id="36" tracking_level="0" version="0">
 			<first>&lt;enumeration&gt;&lt;a_class&gt;</first>
 			<second class_id="7" tracking_level="1" version="0" object_id="_8">
 				<element>
@@ -520,8 +544,12 @@ this is a long comment
 						<id>&lt;enumeration&gt;&lt;a_class&gt;</id>
 						<simple>a_class</simple>
 						<qualified>
-							<count>0</count>
+							<count>1</count>
 							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>enumeration::a_class</second>
+							</item>
 						</qualified>
 						<location>
 							<external_modules>
@@ -539,7 +567,7 @@ this is a long comment
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable></identifiable>
+						<identifiable>enumeration_a_class</identifiable>
 					</name>
 					<generation_type>1</generation_type>
 					<origin_type>1</origin_type>
@@ -549,14 +577,14 @@ this is a long comment
 					</contained_by>
 					<in_global_module>0</in_global_module>
 				</element>
-				<all_attributes class_id="36" tracking_level="0" version="0">
+				<all_attributes class_id="37" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_attributes>
 				<local_attributes>
 					<count>3</count>
 					<item_version>0</item_version>
-					<item class_id="37" tracking_level="0" version="0">
+					<item class_id="38" tracking_level="0" version="0">
 						<documentation></documentation>
 						<extensions>
 							<fields>
@@ -569,8 +597,12 @@ this is a long comment
 							<id>&lt;enumeration&gt;&lt;a_class&gt;&lt;colour_type&gt;</id>
 							<simple>colour_type</simple>
 							<qualified>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>
+									<first>1</first>
+									<second>enumeration::a_class::colour_type</second>
+								</item>
 							</qualified>
 							<location>
 								<external_modules>
@@ -588,10 +620,10 @@ this is a long comment
 								</internal_modules>
 								<element>a_class</element>
 							</location>
-							<identifiable></identifiable>
+							<identifiable>enumeration_a_class_colour_type</identifiable>
 						</name>
 						<unparsed_type>colour_types</unparsed_type>
-						<parsed_type class_id="38" tracking_level="0" version="0">
+						<parsed_type class_id="39" tracking_level="0" version="0">
 							<parent>
 								<id></id>
 								<simple></simple>
@@ -616,7 +648,7 @@ this is a long comment
 								</location>
 								<identifiable></identifiable>
 							</parent>
-							<children class_id="39" tracking_level="0" version="0">
+							<children class_id="40" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -641,8 +673,12 @@ this is a long comment
 							<id>&lt;enumeration&gt;&lt;a_class&gt;&lt;book_type&gt;</id>
 							<simple>book_type</simple>
 							<qualified>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>
+									<first>1</first>
+									<second>enumeration::a_class::book_type</second>
+								</item>
 							</qualified>
 							<location>
 								<external_modules>
@@ -660,7 +696,7 @@ this is a long comment
 								</internal_modules>
 								<element>a_class</element>
 							</location>
-							<identifiable></identifiable>
+							<identifiable>enumeration_a_class_book_type</identifiable>
 						</name>
 						<unparsed_type>book_types</unparsed_type>
 						<parsed_type>
@@ -713,8 +749,12 @@ this is a long comment
 							<id>&lt;enumeration&gt;&lt;a_class&gt;&lt;shape_type&gt;</id>
 							<simple>shape_type</simple>
 							<qualified>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>
+									<first>1</first>
+									<second>enumeration::a_class::shape_type</second>
+								</item>
 							</qualified>
 							<location>
 								<external_modules>
@@ -732,7 +772,7 @@ this is a long comment
 								</internal_modules>
 								<element>a_class</element>
 							</location>
-							<identifiable></identifiable>
+							<identifiable>enumeration_a_class_shape_type</identifiable>
 						</name>
 						<unparsed_type>pkg1::shape_types</unparsed_type>
 						<parsed_type>
@@ -773,7 +813,7 @@ this is a long comment
 						<is_fluent>0</is_fluent>
 					</item>
 				</local_attributes>
-				<inherited_attributes class_id="40" tracking_level="0" version="0">
+				<inherited_attributes class_id="41" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -822,12 +862,12 @@ this is a long comment
 			</second>
 		</item>
 	</objects>
-	<exceptions class_id="41" tracking_level="0" version="0">
+	<exceptions class_id="42" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<visitors class_id="42" tracking_level="0" version="0">
+	<visitors class_id="43" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>

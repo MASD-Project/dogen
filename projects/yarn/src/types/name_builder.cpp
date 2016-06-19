@@ -24,6 +24,8 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/string/splitter.hpp"
 #include "dogen/yarn/io/location_io.hpp"
+#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/separators.hpp"
 #include "dogen/yarn/types/building_error.hpp"
 #include "dogen/yarn/types/pretty_printer.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
@@ -52,11 +54,26 @@ name_builder::name_builder(const bool model_name_mode)
 name_builder::name_builder(const name& n, const bool model_name_mode)
     : model_name_mode_(model_name_mode), name_(n) { }
 
-void name_builder::create_name_id() {
+void name_builder::setup_id() {
     pretty_printer pp;
     pp.add(name_, model_name_mode_);
     name_.id(pp.print());
-    BOOST_LOG_SEV(lg, debug) << "Created name id: " << name_.id();
+    BOOST_LOG_SEV(lg, debug) << "Set up id: " << name_.id();
+}
+
+void name_builder::setup_qualified() {
+    pretty_printer pp(separators::double_colons);
+    pp.add(name_, model_name_mode_);
+    name_.qualified()[languages::cpp] = pp.print();
+    BOOST_LOG_SEV(lg, debug) << "Set up identifiable: " << name_.id();
+
+}
+
+void name_builder::setup_identifiable() {
+    pretty_printer pp(separators::underscores);
+    pp.add(name_, model_name_mode_);
+    name_.identifiable(pp.print());
+    BOOST_LOG_SEV(lg, debug) << "Set up identifiable: " << name_.id();
 }
 
 name_builder& name_builder::simple_name(const std::string& sn) {
@@ -145,7 +162,9 @@ name_builder& name_builder::location(const yarn::location& l) {
 }
 
 name name_builder::build() {
-    create_name_id();
+    setup_id();
+    setup_qualified();
+    setup_identifiable();
     return name_;
 }
 
