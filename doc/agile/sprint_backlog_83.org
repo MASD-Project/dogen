@@ -12,23 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-19 Sun 12:48]
-| <75>                                                                        |        |      |      |       |
-| Headline                                                                    | Time   |      |      |     % |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *9:38* |      |      | 100.0 |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 9:38   |      |      | 100.0 |
-| Active                                                                      |        | 9:38 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:18 |  13.5 |
-| COMPLETED Refactor helper settings                                          |        |      | 0:35 |   6.1 |
-| COMPLETED Add properties for helpers                                        |        |      | 1:35 |  16.4 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |        |      | 1:23 |  14.4 |
-| COMPLETED Rename formattables to properties                                 |        |      | 0:50 |   8.7 |
-| COMPLETED Rename helper instances                                           |        |      | 0:37 |   6.4 |
-| COMPLETED Tidy-up pretty printer                                            |        |      | 1:10 |  12.1 |
-| COMPLETED Rename qualified to id                                            |        |      | 0:34 |   5.9 |
-| STARTED Compute yarn property related information                           |        |      | 1:36 |  16.6 |
+#+CAPTION: Clock summary at [2016-06-19 Sun 18:44]
+| <75>                                                                        |         |       |      |       |
+| Headline                                                                    | Time    |       |      |     % |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                                                | *10:56* |       |      | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                                     | 10:56   |       |      | 100.0 |
+| Active                                                                      |         | 10:56 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:18 |  11.9 |
+| COMPLETED Refactor helper settings                                          |         |       | 0:35 |   5.3 |
+| COMPLETED Add properties for helpers                                        |         |       | 1:35 |  14.5 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |  12.7 |
+| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   7.6 |
+| COMPLETED Rename helper instances                                           |         |       | 0:37 |   5.6 |
+| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |  10.7 |
+| COMPLETED Rename qualified to id                                            |         |       | 0:34 |   5.2 |
+| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   7.2 |
+| STARTED Add a builder-like API to pretty printer                            |         |       | 0:31 |   4.7 |
+| STARTED Compute yarn property related information                           |         |       | 1:36 |  14.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -196,8 +198,14 @@ We need to rename it, and also make identifiable clearer.
 Actually we just can't think of a good name for identifiable so let's
 stick with that for now.
 
-*** STARTED Rename pretty printer to encoder                          :story:
+*** STARTED Add a builder-like API to pretty printer                  :story:
+    CLOCK: [2016-06-19 Sun 18:14]--[2016-06-19 Sun 18:43] =>  0:29
     CLOCK: [2016-06-19 Sun 13:38]--[2016-06-19 Sun 13:40] =>  0:02
+
+- make the entire API a builder based API, even for the simpler case
+  of printing just a name.
+
+*Previous Understanding*
 
 The more one thinks about it the more pretty printer looks weird:
 
@@ -213,6 +221,24 @@ So:
 
 - rename =pretty_printer= to =encoder=;
 - add an =encoder::builder= which handles name trees.
+
+Encoder is a bit of a strong name though. Some reading up on printing
+AST into code reveals a couple of possibilities:
+
+- rewriter: clang; not ideal
+- code printer: closure.
+
+Lets go with =name_printer=. A bit misleading since we also do name
+tree's but better than just petty printer.
+
+Final decision on this:
+
+- make the entire API a builder based API, even for the simpler case
+  of printing just a name.
+- after much discussion with names, the name that seems to lie the
+  list is still =pretty_printer=. We will have to stick with that for
+  now.
+
 
 *** STARTED Compute yarn property related information                 :story:
     CLOCK: [2016-06-18 Sat 23:05]--[2016-06-18 Sat 23:10] =>  0:05
