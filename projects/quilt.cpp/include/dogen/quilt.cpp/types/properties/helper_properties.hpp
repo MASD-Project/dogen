@@ -45,7 +45,7 @@ public:
 
 public:
     helper_properties(
-        const dogen::quilt::cpp::properties::helper_descriptor& descriptors,
+        const dogen::quilt::cpp::properties::helper_descriptor& descriptor,
         const std::list<dogen::quilt::cpp::properties::helper_descriptor>& associated_helpers,
         const dogen::quilt::cpp::settings::helper_settings& settings);
 
@@ -57,10 +57,10 @@ private:
     friend void boost::serialization::load(Archive& ar, helper_properties& v, unsigned int version);
 
 public:
-    const dogen::quilt::cpp::properties::helper_descriptor& descriptors() const;
-    dogen::quilt::cpp::properties::helper_descriptor& descriptors();
-    void descriptors(const dogen::quilt::cpp::properties::helper_descriptor& v);
-    void descriptors(const dogen::quilt::cpp::properties::helper_descriptor&& v);
+    const dogen::quilt::cpp::properties::helper_descriptor& descriptor() const;
+    dogen::quilt::cpp::properties::helper_descriptor& descriptor();
+    void descriptor(const dogen::quilt::cpp::properties::helper_descriptor& v);
+    void descriptor(const dogen::quilt::cpp::properties::helper_descriptor&& v);
 
     const std::list<dogen::quilt::cpp::properties::helper_descriptor>& associated_helpers() const;
     std::list<dogen::quilt::cpp::properties::helper_descriptor>& associated_helpers();
@@ -88,7 +88,7 @@ public:
     helper_properties& operator=(helper_properties other);
 
 private:
-    dogen::quilt::cpp::properties::helper_descriptor descriptors_;
+    dogen::quilt::cpp::properties::helper_descriptor descriptor_;
     std::list<dogen::quilt::cpp::properties::helper_descriptor> associated_helpers_;
     dogen::quilt::cpp::settings::helper_settings settings_;
 };

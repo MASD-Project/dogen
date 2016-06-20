@@ -81,7 +81,7 @@ boost::optional<helper_descriptor> helper_properties_factory::make(
     r.helped_type(nt.current());
     r.name_tree_encoded(nt.encoded());
     r.name_tree_identifiable(nt.identifiable());
-    hp.descriptors(r);
+    hp.descriptor(r);
     properties.push_back(hp);
 
     return r;
@@ -103,7 +103,7 @@ make(const std::list<yarn::attribute>& attributes) const {
     std::list<helper_properties> r;
     std::unordered_set<std::string> done;
     for (const auto& i : instances) {
-        const auto cn(i.descriptors().name_tree_identifiable());
+        const auto cn(i.descriptor().name_tree_identifiable());
         if (done.find(cn) == done.end())
             continue;
 

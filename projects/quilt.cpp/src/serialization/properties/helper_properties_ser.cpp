@@ -39,7 +39,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::properties::helper_properties& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("descriptors", v.descriptors_);
+    ar << make_nvp("descriptor", v.descriptor_);
     ar << make_nvp("associated_helpers", v.associated_helpers_);
     ar << make_nvp("settings", v.settings_);
 }
@@ -48,7 +48,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::properties::helper_properties& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("descriptors", v.descriptors_);
+    ar >> make_nvp("descriptor", v.descriptor_);
     ar >> make_nvp("associated_helpers", v.associated_helpers_);
     ar >> make_nvp("settings", v.settings_);
 }

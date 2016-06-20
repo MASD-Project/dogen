@@ -44,7 +44,7 @@ public:
     std::string function_name() const;
     std::string helper_name() const;
     bool is_enabled(const assistant& a) const;
-    void format(assistant& a, const yarn::name_tree& nt) const;
+    void format(assistant& a, const properties::helper_properties& hp) const;
 };
 
 void smart_pointer_helper_stitch(

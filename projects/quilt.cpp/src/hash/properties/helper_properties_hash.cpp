@@ -48,7 +48,7 @@ namespace properties {
 std::size_t helper_properties_hasher::hash(const helper_properties& v) {
     std::size_t seed(0);
 
-    combine(seed, v.descriptors());
+    combine(seed, v.descriptor());
     combine(seed, hash_std_list_dogen_quilt_cpp_properties_helper_descriptor(v.associated_helpers()));
     combine(seed, v.settings());
 

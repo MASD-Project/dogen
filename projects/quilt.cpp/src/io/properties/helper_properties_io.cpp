@@ -45,7 +45,7 @@ namespace properties {
 std::ostream& operator<<(std::ostream& s, const helper_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::properties::helper_properties\"" << ", "
-      << "\"descriptors\": " << v.descriptors() << ", "
+      << "\"descriptor\": " << v.descriptor() << ", "
       << "\"associated_helpers\": " << v.associated_helpers() << ", "
       << "\"settings\": " << v.settings()
       << " }";

@@ -53,7 +53,7 @@ helper_properties_generator::helper_properties_generator() : position_(0) { }
 
 void helper_properties_generator::
 populate(const unsigned int position, result_type& v) {
-    v.descriptors(create_dogen_quilt_cpp_properties_helper_descriptor(position + 0));
+    v.descriptor(create_dogen_quilt_cpp_properties_helper_descriptor(position + 0));
     v.associated_helpers(create_std_list_dogen_quilt_cpp_properties_helper_descriptor(position + 1));
     v.settings(create_dogen_quilt_cpp_settings_helper_settings(position + 2));
 }
