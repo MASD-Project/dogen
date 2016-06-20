@@ -18,27 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/test_data/separators_td.hpp"
+#include <boost/algorithm/string.hpp>
+#include "dogen/yarn/types/string_processor.hpp"
+
+namespace {
+
+const std::string empty;
+const std::string comma(",");
+const std::string space(" ");
+const std::string less_than("<");
+const std::string more_than(">");
+const std::string separator("_");
+const std::string scope_operator("::");
+
+}
 
 namespace dogen {
 namespace yarn {
 
-separators_generator::separators_generator() : position_(0) { }
-void separators_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<separators>(position % 3);
-}
+std::string string_processor::to_identifiable(const std::string& s) const {
+    std::string r(s);
 
-separators_generator::result_type
-separators_generator::create(const unsigned int  position) {
-    result_type r;
-    separators_generator::populate(position, r);
+    boost::replace_all(r, scope_operator, separator);
+    boost::replace_all(r, less_than, separator);
+
+    boost::replace_all(r, comma, empty);
+    boost::replace_all(r, more_than, empty);
+    boost::trim(r);
+
+    boost::replace_all(r, space, separator);
+
     return r;
-}
-
-separators_generator::result_type
-separators_generator::operator()() {
-    return create(position_++);
 }
 
 } }

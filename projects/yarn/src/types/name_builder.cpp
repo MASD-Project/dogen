@@ -27,6 +27,7 @@
 #include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/separators.hpp"
 #include "dogen/yarn/types/building_error.hpp"
+#include "dogen/yarn/types/string_processor.hpp"
 #include "dogen/yarn/types/pretty_printer.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 
@@ -54,26 +55,34 @@ name_builder::name_builder(const bool model_name_mode)
 name_builder::name_builder(const name& n, const bool model_name_mode)
     : model_name_mode_(model_name_mode), name_(n) { }
 
-void name_builder::setup_id() {
+std::string name_builder::compute_id() {
     pretty_printer pp;
     pp.add(name_, model_name_mode_);
-    name_.id(pp.print());
-    BOOST_LOG_SEV(lg, debug) << "Set up id: " << name_.id();
+    const auto r(pp.print());
+    BOOST_LOG_SEV(lg, debug) << "Computed id: " << r;
+    return r;
 }
 
-void name_builder::setup_qualified() {
+std::string name_builder::compute_qualified_for_cpp() {
     pretty_printer pp(separators::double_colons);
     pp.add(name_, model_name_mode_);
-    name_.qualified()[languages::cpp] = pp.print();
-    BOOST_LOG_SEV(lg, debug) << "Set up identifiable: " << name_.id();
-
+    const auto r(pp.print());
+    BOOST_LOG_SEV(lg, debug) << "Computed qualified: " << r;
+    return r;
 }
 
-void name_builder::setup_identifiable() {
-    pretty_printer pp(separators::underscores);
-    pp.add(name_, model_name_mode_);
-    name_.identifiable(pp.print());
-    BOOST_LOG_SEV(lg, debug) << "Set up identifiable: " << name_.id();
+std::string name_builder::compute_identifiable(const std::string& qualified) {
+    string_processor sp;
+    const auto r(sp.to_identifiable(qualified));
+    BOOST_LOG_SEV(lg, debug) << "Computed identifiable: " << r;
+    return r;
+}
+
+void name_builder::setup_computed_properties() {
+    name_.id(compute_id());
+    const auto q(compute_qualified_for_cpp());
+    name_.qualified()[languages::cpp] = q;
+    name_.identifiable(compute_identifiable(q));
 }
 
 name_builder& name_builder::simple_name(const std::string& sn) {
@@ -162,9 +171,7 @@ name_builder& name_builder::location(const yarn::location& l) {
 }
 
 name name_builder::build() {
-    setup_id();
-    setup_qualified();
-    setup_identifiable();
+    setup_computed_properties();
     return name_;
 }
 

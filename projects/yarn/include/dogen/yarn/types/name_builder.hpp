@@ -47,9 +47,10 @@ public:
     explicit name_builder(const name& n, const bool model_name_mode_ = false);
 
 private:
-    void setup_id();
-    void setup_qualified();
-    void setup_identifiable();
+    std::string compute_id();
+    std::string compute_qualified_for_cpp();
+    std::string compute_identifiable(const std::string& qualified);
+    void setup_computed_properties();
 
 public:
     name_builder& simple_name(const std::string& sn);

@@ -20,6 +20,9 @@
  */
 #include <sstream>
 #include <boost/make_shared.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/join.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
@@ -28,6 +31,7 @@
 #include "dogen/yarn/io/name_tree_io.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/pretty_printer.hpp"
+#include "dogen/yarn/types/string_processor.hpp"
 #include "dogen/yarn/types/name_tree_builder.hpp"
 
 using namespace dogen::utility::log;
@@ -200,6 +204,10 @@ name_tree name_tree_builder::make_name_tree(const node& n) {
     }
 
     r.encoded(pp.print());
+
+    string_processor sp;
+    r.identifiable(sp.to_identifiable(r.encoded()));
+
     return r;
 }
 

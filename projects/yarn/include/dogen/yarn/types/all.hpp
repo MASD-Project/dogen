@@ -72,6 +72,7 @@
 #include "dogen/yarn/types/modules_expander.hpp"
 #include "dogen/yarn/types/name_tree_parser.hpp"
 #include "dogen/yarn/types/resolution_error.hpp"
+#include "dogen/yarn/types/string_processor.hpp"
 #include "dogen/yarn/types/frontend_workflow.hpp"
 #include "dogen/yarn/types/name_tree_builder.hpp"
 #include "dogen/yarn/types/attributes_indexer.hpp"

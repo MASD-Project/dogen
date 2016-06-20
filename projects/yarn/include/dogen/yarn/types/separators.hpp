@@ -34,8 +34,7 @@ namespace yarn {
 enum class separators : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     angle_brackets = 1, ///< Enclose name elements in '<' and '>'.
-    double_colons = 2, ///< Separate name elements with a '::'.
-    underscores = 3 ///< Separate name elements with a '_'.
+    double_colons = 2 ///< Separate name elements with a '::'.
 };
 
 } }
