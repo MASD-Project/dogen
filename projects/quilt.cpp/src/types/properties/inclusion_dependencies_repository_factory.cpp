@@ -64,7 +64,7 @@ public:
             return;
 
         const auto pair(std::make_pair(n, id));
-        auto& deps(result_.inclusion_dependencies_by_name());
+        auto& deps(result_.by_name());
         const auto res(deps.insert(pair));
         if (!res.second) {
             const auto qn(n.id());

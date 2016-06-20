@@ -65,7 +65,7 @@ namespace properties {
 std::size_t inclusion_dependencies_repository_hasher::hash(const inclusion_dependencies_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_list_std_string__(v.inclusion_dependencies_by_name()));
+    combine(seed, hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_list_std_string__(v.by_name()));
     return seed;
 }
 

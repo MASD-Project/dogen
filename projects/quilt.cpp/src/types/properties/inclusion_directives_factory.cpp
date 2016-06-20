@@ -52,8 +52,8 @@ inclusion_directives_factory::inclusion_directives_factory(
 std::unordered_map<std::string, path_derivatives>
 inclusion_directives_factory::path_derivatives_for_name(
     const yarn::name& n) const {
-    const auto i(path_repository_.path_derivatives_by_name().find(n));
-    if (i == path_repository_.path_derivatives_by_name().end()) {
+    const auto i(path_repository_.by_name().find(n));
+    if (i == path_repository_.by_name().end()) {
         const auto qn(n.id());
         BOOST_LOG_SEV(lg, error) << name_not_found << qn;
         BOOST_THROW_EXCEPTION(building_error(name_not_found + qn));

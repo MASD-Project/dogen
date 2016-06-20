@@ -25,16 +25,16 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-helper_properties_repository::helper_properties_repository(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& helper_properties_by_name)
-    : helper_properties_by_name_(helper_properties_by_name) { }
+helper_properties_repository::helper_properties_repository(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& by_id)
+    : by_id_(by_id) { }
 
 void helper_properties_repository::swap(helper_properties_repository& other) noexcept {
     using std::swap;
-    swap(helper_properties_by_name_, other.helper_properties_by_name_);
+    swap(by_id_, other.by_id_);
 }
 
 bool helper_properties_repository::operator==(const helper_properties_repository& rhs) const {
-    return helper_properties_by_name_ == rhs.helper_properties_by_name_;
+    return by_id_ == rhs.by_id_;
 }
 
 helper_properties_repository& helper_properties_repository::operator=(helper_properties_repository other) {
@@ -43,20 +43,20 @@ helper_properties_repository& helper_properties_repository::operator=(helper_pro
     return *this;
 }
 
-const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& helper_properties_repository::helper_properties_by_name() const {
-    return helper_properties_by_name_;
+const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& helper_properties_repository::by_id() const {
+    return by_id_;
 }
 
-std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& helper_properties_repository::helper_properties_by_name() {
-    return helper_properties_by_name_;
+std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& helper_properties_repository::by_id() {
+    return by_id_;
 }
 
-void helper_properties_repository::helper_properties_by_name(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& v) {
-    helper_properties_by_name_ = v;
+void helper_properties_repository::by_id(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& v) {
+    by_id_ = v;
 }
 
-void helper_properties_repository::helper_properties_by_name(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >&& v) {
-    helper_properties_by_name_ = std::move(v);
+void helper_properties_repository::by_id(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >&& v) {
+    by_id_ = std::move(v);
 }
 
 } } } }

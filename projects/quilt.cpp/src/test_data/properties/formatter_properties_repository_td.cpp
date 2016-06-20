@@ -62,7 +62,7 @@ formatter_properties_repository_generator::formatter_properties_repository_gener
 
 void formatter_properties_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.formatter_properties_by_name(create_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties_(position + 0));
+    v.by_id(create_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties_(position + 0));
 }
 
 formatter_properties_repository_generator::result_type

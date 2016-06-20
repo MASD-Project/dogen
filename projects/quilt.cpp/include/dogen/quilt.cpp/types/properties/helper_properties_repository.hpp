@@ -45,7 +45,7 @@ public:
     ~helper_properties_repository() = default;
 
 public:
-    explicit helper_properties_repository(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& helper_properties_by_name);
+    explicit helper_properties_repository(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& by_id);
 
 private:
     template<typename Archive>
@@ -55,10 +55,10 @@ private:
     friend void boost::serialization::load(Archive& ar, helper_properties_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& helper_properties_by_name() const;
-    std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& helper_properties_by_name();
-    void helper_properties_by_name(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& v);
-    void helper_properties_by_name(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >&& v);
+    const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& by_id() const;
+    std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& by_id();
+    void by_id(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& v);
+    void by_id(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >&& v);
 
 public:
     bool operator==(const helper_properties_repository& rhs) const;
@@ -71,7 +71,7 @@ public:
     helper_properties_repository& operator=(helper_properties_repository other);
 
 private:
-    std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> > helper_properties_by_name_;
+    std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> > by_id_;
 };
 
 } } } }

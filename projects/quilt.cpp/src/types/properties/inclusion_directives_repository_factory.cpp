@@ -67,7 +67,7 @@ public:
         if (!id)
             return;
 
-        auto& id_n(result_.inclusion_directives_by_name());
+        auto& id_n(result_.by_name());
         const auto pair(id_n.insert(std::make_pair(n, *id)));
         if (pair.second)
             return;

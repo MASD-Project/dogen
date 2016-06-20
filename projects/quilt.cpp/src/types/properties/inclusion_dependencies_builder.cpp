@@ -67,7 +67,7 @@ inclusion_dependencies_builder::get_inclusion_directive(
     const yarn::name& n,
     const std::string& formatter_name) const {
 
-    const auto& idn(directives_repository_.inclusion_directives_by_name());
+    const auto& idn(directives_repository_.by_name());
     const auto i(idn.find(n));
     if (i == idn.end())
         return boost::optional<std::string>();
@@ -117,7 +117,7 @@ inclusion_dependencies_builder::make_special_includes(
 bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
     const std::string& formatter_name) const {
 
-    const auto& en(enablement_repository_.enablement_by_name());
+    const auto& en(enablement_repository_.by_name());
     const auto i(en.find(n));
     if (i == en.end()) {
         const auto qn(n.id());

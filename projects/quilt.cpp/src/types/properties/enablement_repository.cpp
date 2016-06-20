@@ -25,16 +25,16 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-enablement_repository::enablement_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& enablement_by_name)
-    : enablement_by_name_(enablement_by_name) { }
+enablement_repository::enablement_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& by_name)
+    : by_name_(by_name) { }
 
 void enablement_repository::swap(enablement_repository& other) noexcept {
     using std::swap;
-    swap(enablement_by_name_, other.enablement_by_name_);
+    swap(by_name_, other.by_name_);
 }
 
 bool enablement_repository::operator==(const enablement_repository& rhs) const {
-    return enablement_by_name_ == rhs.enablement_by_name_;
+    return by_name_ == rhs.by_name_;
 }
 
 enablement_repository& enablement_repository::operator=(enablement_repository other) {
@@ -43,20 +43,20 @@ enablement_repository& enablement_repository::operator=(enablement_repository ot
     return *this;
 }
 
-const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& enablement_repository::enablement_by_name() const {
-    return enablement_by_name_;
+const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& enablement_repository::by_name() const {
+    return by_name_;
 }
 
-std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& enablement_repository::enablement_by_name() {
-    return enablement_by_name_;
+std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& enablement_repository::by_name() {
+    return by_name_;
 }
 
-void enablement_repository::enablement_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& v) {
-    enablement_by_name_ = v;
+void enablement_repository::by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& v) {
+    by_name_ = v;
 }
 
-void enablement_repository::enablement_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >&& v) {
-    enablement_by_name_ = std::move(v);
+void enablement_repository::by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >&& v) {
+    by_name_ = std::move(v);
 }
 
 } } } }

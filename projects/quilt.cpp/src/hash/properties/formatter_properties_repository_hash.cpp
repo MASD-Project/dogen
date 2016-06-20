@@ -57,7 +57,7 @@ namespace properties {
 std::size_t formatter_properties_repository_hasher::hash(const formatter_properties_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties_(v.formatter_properties_by_name()));
+    combine(seed, hash_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties_(v.by_id()));
     return seed;
 }
 

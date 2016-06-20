@@ -25,16 +25,16 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-inclusion_directives_repository::inclusion_directives_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& inclusion_directives_by_name)
-    : inclusion_directives_by_name_(inclusion_directives_by_name) { }
+inclusion_directives_repository::inclusion_directives_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& by_name)
+    : by_name_(by_name) { }
 
 void inclusion_directives_repository::swap(inclusion_directives_repository& other) noexcept {
     using std::swap;
-    swap(inclusion_directives_by_name_, other.inclusion_directives_by_name_);
+    swap(by_name_, other.by_name_);
 }
 
 bool inclusion_directives_repository::operator==(const inclusion_directives_repository& rhs) const {
-    return inclusion_directives_by_name_ == rhs.inclusion_directives_by_name_;
+    return by_name_ == rhs.by_name_;
 }
 
 inclusion_directives_repository& inclusion_directives_repository::operator=(inclusion_directives_repository other) {
@@ -43,20 +43,20 @@ inclusion_directives_repository& inclusion_directives_repository::operator=(incl
     return *this;
 }
 
-const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& inclusion_directives_repository::inclusion_directives_by_name() const {
-    return inclusion_directives_by_name_;
+const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& inclusion_directives_repository::by_name() const {
+    return by_name_;
 }
 
-std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& inclusion_directives_repository::inclusion_directives_by_name() {
-    return inclusion_directives_by_name_;
+std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& inclusion_directives_repository::by_name() {
+    return by_name_;
 }
 
-void inclusion_directives_repository::inclusion_directives_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& v) {
-    inclusion_directives_by_name_ = v;
+void inclusion_directives_repository::by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& v) {
+    by_name_ = v;
 }
 
-void inclusion_directives_repository::inclusion_directives_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >&& v) {
-    inclusion_directives_by_name_ = std::move(v);
+void inclusion_directives_repository::by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >&& v) {
+    by_name_ = std::move(v);
 }
 
 } } } }

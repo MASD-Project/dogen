@@ -74,7 +74,7 @@ namespace properties {
 std::ostream& operator<<(std::ostream& s, const formatter_properties_repository& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::properties::formatter_properties_repository\"" << ", "
-      << "\"formatter_properties_by_name\": " << v.formatter_properties_by_name()
+      << "\"by_id\": " << v.by_id()
       << " }";
     return(s);
 }

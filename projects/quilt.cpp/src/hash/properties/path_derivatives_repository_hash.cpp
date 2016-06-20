@@ -58,7 +58,7 @@ namespace properties {
 std::size_t path_derivatives_repository_hasher::hash(const path_derivatives_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_dogen_quilt_cpp_properties_path_derivatives_(v.path_derivatives_by_name()));
+    combine(seed, hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_dogen_quilt_cpp_properties_path_derivatives_(v.by_name()));
     return seed;
 }
 

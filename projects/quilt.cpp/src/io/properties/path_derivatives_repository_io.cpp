@@ -75,7 +75,7 @@ namespace properties {
 std::ostream& operator<<(std::ostream& s, const path_derivatives_repository& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::properties::path_derivatives_repository\"" << ", "
-      << "\"path_derivatives_by_name\": " << v.path_derivatives_by_name()
+      << "\"by_name\": " << v.by_name()
       << " }";
     return(s);
 }

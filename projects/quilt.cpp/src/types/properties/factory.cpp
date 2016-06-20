@@ -198,8 +198,8 @@ path_derivatives factory::create_path_derivatives(
 bool factory::is_enabled(const formatter_properties_repository& fprp,
     const yarn::name& n, const std::string& formatter_name) const {
 
-    const auto i(fprp.formatter_properties_by_name().find(n.id()));
-    if (i == fprp.formatter_properties_by_name().end()) {
+    const auto i(fprp.by_id().find(n.id()));
+    if (i == fprp.by_id().end()) {
         const auto qn(n.id());
         BOOST_LOG_SEV(lg, error) << properties_not_found << qn;
         BOOST_THROW_EXCEPTION(building_error(properties_not_found + qn));
@@ -268,14 +268,14 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     const auto ch_fn(traits::class_header_formatter_name());
     const auto rh_fn(traits::registrar_header_formatter_name());
     const auto fp1(lambda(ch_fn, rh_fn));
-    fprp.formatter_properties_by_name()[r->id()][rh_fn] = fp1;
+    fprp.by_id()[r->id()][rh_fn] = fp1;
 
     const auto ci_fn(traits::class_implementation_formatter_name());
     const auto ri_fn(traits::registrar_implementation_formatter_name());
     auto fp2(lambda(ci_fn, ri_fn));
 
-    const auto j(fprp.formatter_properties_by_name().find(n.id()));
-    if (j == fprp.formatter_properties_by_name().end()) {
+    const auto j(fprp.by_id().find(n.id()));
+    if (j == fprp.by_id().end()) {
         const auto qn(n.id());
         BOOST_LOG_SEV(lg, error) << properties_not_found << qn;
         BOOST_THROW_EXCEPTION(building_error(properties_not_found + qn));
@@ -288,7 +288,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
                 settings_not_found_for_formatter + ri_fn));
     }
     fp2.inclusion_dependencies(k->second.inclusion_dependencies());
-    fprp.formatter_properties_by_name()[r->id()][ri_fn] = fp2;
+    fprp.by_id()[r->id()][ri_fn] = fp2;
 
     BOOST_LOG_SEV(lg, debug) << "Made registrar: " << n.id();
     return r;
@@ -315,7 +315,7 @@ make_includers(
 
     const auto mmp(m.name().location().model_modules());
     const auto registrar_n(create_name(m.name(), registrar_name));
-    for (const auto& n_pair : pdrp.path_derivatives_by_name()) {
+    for (const auto& n_pair : pdrp.by_name()) {
         const auto n(n_pair.first);
 
         if (n.location().model_modules() != mmp)
@@ -418,7 +418,7 @@ make_includers(
         p.enabled(is_enabled(fprp, m.name(), ch_fn));
         p.inclusion_dependencies(pair.second);
 
-        fprp.formatter_properties_by_name()[inc->id()][ifn] = p;
+        fprp.by_id()[inc->id()][ifn] = p;
     }
     r.push_front(inc);
     BOOST_LOG_SEV(lg, debug) << "Includer: " << *inc;

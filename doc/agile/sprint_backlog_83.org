@@ -12,29 +12,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-20 Mon 16:08]
+#+CAPTION: Clock summary at [2016-06-20 Mon 16:36]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *15:45* |       |      | 100.0 |
+| *Total time*                                                                | *16:13* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 15:45   |       |      | 100.0 |
-| Active                                                                      |         | 15:45 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:45 |  11.1 |
-| COMPLETED Refactor helper settings                                          |         |       | 0:35 |   3.7 |
-| COMPLETED Add properties for helpers                                        |         |       | 1:35 |  10.1 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   8.8 |
-| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   5.3 |
-| COMPLETED Rename helper instances                                           |         |       | 0:37 |   3.9 |
-| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   7.4 |
-| COMPLETED Rename qualified to id                                            |         |       | 0:34 |   3.6 |
-| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   5.0 |
-| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   8.3 |
-| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   5.4 |
-| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |  13.2 |
-| COMPLETED Rename =name_tree='s parent                                       |         |       | 0:16 |   1.7 |
-| COMPLETED Compute yarn property related information                         |         |       | 1:36 |  10.2 |
-| STARTED Create a top-level type to aggregate properties and helpers         |         |       | 0:23 |   2.4 |
+| Stories                                                                     | 16:13   |       |      | 100.0 |
+| Active                                                                      |         | 16:13 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:45 |  10.8 |
+| COMPLETED Refactor helper settings                                          |         |       | 0:35 |   3.6 |
+| COMPLETED Add properties for helpers                                        |         |       | 1:35 |   9.8 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   8.5 |
+| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   5.1 |
+| COMPLETED Rename helper instances                                           |         |       | 0:37 |   3.8 |
+| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   7.2 |
+| COMPLETED Rename qualified to id                                            |         |       | 0:34 |   3.5 |
+| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   4.8 |
+| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   8.0 |
+| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   5.2 |
+| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |  12.8 |
+| COMPLETED Rename =name_tree='s parent                                       |         |       | 0:16 |   1.6 |
+| COMPLETED Compute yarn property related information                         |         |       | 1:36 |   9.9 |
+| COMPLETED Remove redundancy in properties' repositories                     |         |       | 0:14 |   1.4 |
+| STARTED Create a top-level type to aggregate properties and helpers         |         |       | 0:37 |   3.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -303,21 +304,6 @@ and populate qualified name.
 
 This is in nested type info.
 
-*** COMPLETED Consider reducing the number of qname lookups in cpp model :story:
-    CLOSED: [2016-06-20 Mon 15:39]
-
-*Rationale*: This has largely been done, where it can be done.
-
-At present we are using qnames all over the place in CPP. Nothing
-stops us from using strings instead of qnames if that is more
-efficient.
-
-What is worse is that we seem to be doing a ridiculous amount of qname
-lookups. It would be much nicer if we could somehow have all the data
-in the right shape to avoid doing so many lookups.
-
-This should be done as part of the move to =yarn=.
-
 *** COMPLETED Thoughts on simplifying the formattables generation     :story:
     CLOSED: [2016-06-20 Mon 15:39]
 
@@ -422,7 +408,19 @@ from the name builder in quilt:
   specific logic and calls to the pretty printer to populate the new
   properties.
 
+*** COMPLETED Remove redundancy in properties' repositories           :story:
+    CLOSED: [2016-06-20 Mon 16:36]
+    CLOCK: [2016-06-20 Mon 16:22]--[2016-06-20 Mon 16:36] =>  0:14
+
+At present we have attributes in repositories such as:
+
+: path_derivatives_by_name
+
+Since we are in =path_derivatives_repository=, perhaps we could call
+the attribute simply =by_name=.
+
 *** STARTED Create a top-level type to aggregate properties and helpers :story:
+    CLOCK: [2016-06-20 Mon 16:08]--[2016-06-20 Mon 16:22] =>  0:14
     CLOCK: [2016-06-20 Mon 15:44]--[2016-06-20 Mon 16:07] =>  0:23
 
 We need a way to create an aggregate type that contains all of the
@@ -437,6 +435,13 @@ This type should be called =element_properties=.
 - have a look at the context type in formatters. Looked at this, we
   just need to do minor updates to it to take in the element
   properties.
+
+*** Consider reducing the number of qname lookups in cpp model        :story:
+
+At present we are still using =yarn::name= in a lot of repositories in
+quilt. We already had one go in moving to id's but there are still
+quite a few left. Investigate to see if there are more that can be
+moved.
 
 *** Add an helper method interface                                    :story:
 
@@ -515,15 +520,6 @@ At present we are adding the module lists together to build the
 qualified name; location could have a "all modules" list that
 concatenates external, model and internal modules. We should look at
 performance before doing this change though.
-
-*** Remove redundancy in properties' repositories                     :story:
-
-At present we have attributes in repositories such as:
-
-: path_derivatives_by_name
-
-Since we are in =path_derivatives_repository=, perhaps we could call
-the attribute simply =by_name=.
 
 *** Implement formattables in terms of yarn types                     :epic:
 

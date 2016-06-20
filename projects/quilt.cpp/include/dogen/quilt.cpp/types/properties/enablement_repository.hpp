@@ -45,7 +45,7 @@ public:
     ~enablement_repository() = default;
 
 public:
-    explicit enablement_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& enablement_by_name);
+    explicit enablement_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& by_name);
 
 private:
     template<typename Archive>
@@ -55,10 +55,10 @@ private:
     friend void boost::serialization::load(Archive& ar, enablement_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& enablement_by_name() const;
-    std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& enablement_by_name();
-    void enablement_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& v);
-    void enablement_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >&& v);
+    const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& by_name() const;
+    std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& by_name();
+    void by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& v);
+    void by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >&& v);
 
 public:
     bool operator==(const enablement_repository& rhs) const;
@@ -71,7 +71,7 @@ public:
     enablement_repository& operator=(enablement_repository other);
 
 private:
-    std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> > enablement_by_name_;
+    std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> > by_name_;
 };
 
 } } } }

@@ -62,7 +62,7 @@ inclusion_directives_repository_generator::inclusion_directives_repository_gener
 
 void inclusion_directives_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.inclusion_directives_by_name(create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_string_(position + 0));
+    v.by_name(create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_string_(position + 0));
 }
 
 inclusion_directives_repository_generator::result_type

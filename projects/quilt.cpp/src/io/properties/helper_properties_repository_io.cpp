@@ -70,7 +70,7 @@ namespace properties {
 std::ostream& operator<<(std::ostream& s, const helper_properties_repository& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::properties::helper_properties_repository\"" << ", "
-      << "\"helper_properties_by_name\": " << v.helper_properties_by_name()
+      << "\"by_id\": " << v.by_id()
       << " }";
     return(s);
 }

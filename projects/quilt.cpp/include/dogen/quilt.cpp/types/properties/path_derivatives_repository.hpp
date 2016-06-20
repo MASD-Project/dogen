@@ -46,7 +46,7 @@ public:
     ~path_derivatives_repository() = default;
 
 public:
-    explicit path_derivatives_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >& path_derivatives_by_name);
+    explicit path_derivatives_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >& by_name);
 
 private:
     template<typename Archive>
@@ -56,10 +56,10 @@ private:
     friend void boost::serialization::load(Archive& ar, path_derivatives_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >& path_derivatives_by_name() const;
-    std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >& path_derivatives_by_name();
-    void path_derivatives_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >& v);
-    void path_derivatives_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >&& v);
+    const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >& by_name() const;
+    std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >& by_name();
+    void by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >& v);
+    void by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >&& v);
 
 public:
     bool operator==(const path_derivatives_repository& rhs) const;
@@ -72,7 +72,7 @@ public:
     path_derivatives_repository& operator=(path_derivatives_repository other);
 
 private:
-    std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> > path_derivatives_by_name_;
+    std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> > by_name_;
 };
 
 } } } }

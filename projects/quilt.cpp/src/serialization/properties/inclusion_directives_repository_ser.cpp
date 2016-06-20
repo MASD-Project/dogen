@@ -39,14 +39,14 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::properties::inclusion_directives_repository& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("inclusion_directives_by_name", v.inclusion_directives_by_name_);
+    ar << make_nvp("by_name", v.by_name_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::properties::inclusion_directives_repository& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("inclusion_directives_by_name", v.inclusion_directives_by_name_);
+    ar >> make_nvp("by_name", v.by_name_);
 }
 
 } }

@@ -88,13 +88,13 @@ formatter_properties_repository_factory::merge(
     const enablement_repository& erp) const {
 
     std::unordered_map<yarn::name, merged_formatter_data> r;
-    for (const auto& pair : pdrp.path_derivatives_by_name())
+    for (const auto& pair : pdrp.by_name())
         r[pair.first].path_derivatives_ = pair.second;
 
-    for (const auto& pair : idrp.inclusion_dependencies_by_name())
+    for (const auto& pair : idrp.by_name())
         r[pair.first].inclusion_dependencies = pair.second;
 
-    for (const auto& pair : erp.enablement_by_name())
+    for (const auto& pair : erp.by_name())
         r[pair.first].enablement = pair.second;
 
     return r;
@@ -107,7 +107,7 @@ formatter_properties_repository_factory::create_formatter_properties(
     formatter_properties_repository r;
     formatter_properties_factory f;
     for (const auto& pair : mfd) {
-        r.formatter_properties_by_name()[pair.first.id()] = f.make(
+        r.by_id()[pair.first.id()] = f.make(
             pair.second.path_derivatives_,
             pair.second.inclusion_dependencies,
             pair.second.enablement);

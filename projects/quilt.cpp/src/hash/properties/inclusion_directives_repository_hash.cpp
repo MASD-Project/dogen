@@ -57,7 +57,7 @@ namespace properties {
 std::size_t inclusion_directives_repository_hasher::hash(const inclusion_directives_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_string_(v.inclusion_directives_by_name()));
+    combine(seed, hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_string_(v.by_name()));
     return seed;
 }
 

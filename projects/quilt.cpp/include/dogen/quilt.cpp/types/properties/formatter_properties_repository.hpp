@@ -44,7 +44,7 @@ public:
     ~formatter_properties_repository() = default;
 
 public:
-    explicit formatter_properties_repository(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> >& formatter_properties_by_name);
+    explicit formatter_properties_repository(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> >& by_id);
 
 private:
     template<typename Archive>
@@ -54,10 +54,10 @@ private:
     friend void boost::serialization::load(Archive& ar, formatter_properties_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> >& formatter_properties_by_name() const;
-    std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> >& formatter_properties_by_name();
-    void formatter_properties_by_name(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> >& v);
-    void formatter_properties_by_name(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> >&& v);
+    const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> >& by_id() const;
+    std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> >& by_id();
+    void by_id(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> >& v);
+    void by_id(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> >&& v);
 
 public:
     bool operator==(const formatter_properties_repository& rhs) const;
@@ -70,7 +70,7 @@ public:
     formatter_properties_repository& operator=(formatter_properties_repository other);
 
 private:
-    std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> > formatter_properties_by_name_;
+    std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> > by_id_;
 };
 
 } } } }

@@ -81,7 +81,7 @@ std::ostream& operator<<(std::ostream& s, const enablement_repository& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::properties::enablement_repository\"" << ", "
-      << "\"enablement_by_name\": " << v.enablement_by_name()
+      << "\"by_name\": " << v.by_name()
       << " }";
     return(s);
 }

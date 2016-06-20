@@ -25,16 +25,16 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-path_derivatives_repository::path_derivatives_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >& path_derivatives_by_name)
-    : path_derivatives_by_name_(path_derivatives_by_name) { }
+path_derivatives_repository::path_derivatives_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >& by_name)
+    : by_name_(by_name) { }
 
 void path_derivatives_repository::swap(path_derivatives_repository& other) noexcept {
     using std::swap;
-    swap(path_derivatives_by_name_, other.path_derivatives_by_name_);
+    swap(by_name_, other.by_name_);
 }
 
 bool path_derivatives_repository::operator==(const path_derivatives_repository& rhs) const {
-    return path_derivatives_by_name_ == rhs.path_derivatives_by_name_;
+    return by_name_ == rhs.by_name_;
 }
 
 path_derivatives_repository& path_derivatives_repository::operator=(path_derivatives_repository other) {
@@ -43,20 +43,20 @@ path_derivatives_repository& path_derivatives_repository::operator=(path_derivat
     return *this;
 }
 
-const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >& path_derivatives_repository::path_derivatives_by_name() const {
-    return path_derivatives_by_name_;
+const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >& path_derivatives_repository::by_name() const {
+    return by_name_;
 }
 
-std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >& path_derivatives_repository::path_derivatives_by_name() {
-    return path_derivatives_by_name_;
+std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >& path_derivatives_repository::by_name() {
+    return by_name_;
 }
 
-void path_derivatives_repository::path_derivatives_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >& v) {
-    path_derivatives_by_name_ = v;
+void path_derivatives_repository::by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >& v) {
+    by_name_ = v;
 }
 
-void path_derivatives_repository::path_derivatives_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >&& v) {
-    path_derivatives_by_name_ = std::move(v);
+void path_derivatives_repository::by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >&& v) {
+    by_name_ = std::move(v);
 }
 
 } } } }

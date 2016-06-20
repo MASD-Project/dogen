@@ -25,16 +25,16 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-inclusion_dependencies_repository::inclusion_dependencies_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_by_name)
-    : inclusion_dependencies_by_name_(inclusion_dependencies_by_name) { }
+inclusion_dependencies_repository::inclusion_dependencies_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >& by_name)
+    : by_name_(by_name) { }
 
 void inclusion_dependencies_repository::swap(inclusion_dependencies_repository& other) noexcept {
     using std::swap;
-    swap(inclusion_dependencies_by_name_, other.inclusion_dependencies_by_name_);
+    swap(by_name_, other.by_name_);
 }
 
 bool inclusion_dependencies_repository::operator==(const inclusion_dependencies_repository& rhs) const {
-    return inclusion_dependencies_by_name_ == rhs.inclusion_dependencies_by_name_;
+    return by_name_ == rhs.by_name_;
 }
 
 inclusion_dependencies_repository& inclusion_dependencies_repository::operator=(inclusion_dependencies_repository other) {
@@ -43,20 +43,20 @@ inclusion_dependencies_repository& inclusion_dependencies_repository::operator=(
     return *this;
 }
 
-const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_repository::inclusion_dependencies_by_name() const {
-    return inclusion_dependencies_by_name_;
+const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_repository::by_name() const {
+    return by_name_;
 }
 
-std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_repository::inclusion_dependencies_by_name() {
-    return inclusion_dependencies_by_name_;
+std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_repository::by_name() {
+    return by_name_;
 }
 
-void inclusion_dependencies_repository::inclusion_dependencies_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >& v) {
-    inclusion_dependencies_by_name_ = v;
+void inclusion_dependencies_repository::by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >& v) {
+    by_name_ = v;
 }
 
-void inclusion_dependencies_repository::inclusion_dependencies_by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >&& v) {
-    inclusion_dependencies_by_name_ = std::move(v);
+void inclusion_dependencies_repository::by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >&& v) {
+    by_name_ = std::move(v);
 }
 
 } } } }

@@ -62,7 +62,7 @@ private:
 
         const auto hi(factory_.make(s.local_attributes()));
         const auto pair(std::make_pair(qn, hi));
-        auto& hibn(result_.helper_properties_by_name());
+        auto& hibn(result_.by_id());
         const auto res(hibn.insert(pair));
         if (!res.second) {
             BOOST_LOG_SEV(lg, error) << duplicate_name << qn;

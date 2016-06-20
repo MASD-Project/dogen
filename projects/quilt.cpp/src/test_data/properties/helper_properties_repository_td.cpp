@@ -62,7 +62,7 @@ helper_properties_repository_generator::helper_properties_repository_generator()
 
 void helper_properties_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.helper_properties_by_name(create_std_unordered_map_std_string_std_list_dogen_quilt_cpp_properties_helper_properties_(position + 0));
+    v.by_id(create_std_unordered_map_std_string_std_list_dogen_quilt_cpp_properties_helper_properties_(position + 0));
 }
 
 helper_properties_repository_generator::result_type

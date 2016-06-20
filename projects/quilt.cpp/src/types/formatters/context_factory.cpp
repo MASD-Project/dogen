@@ -71,7 +71,7 @@ context_factory::context_factory(const settings::bundle_repository& brp,
 
 const std::unordered_map<std::string, properties::formatter_properties>&
 context_factory::properties_for_name(const std::string& n) const {
-    const auto& fp(formatter_properties_.formatter_properties_by_name());
+    const auto& fp(formatter_properties_.by_id());
     const auto i(fp.find(n));
     if (i == fp.end()) {
         BOOST_LOG_SEV(lg, error) << formatter_properties_not_found << n;

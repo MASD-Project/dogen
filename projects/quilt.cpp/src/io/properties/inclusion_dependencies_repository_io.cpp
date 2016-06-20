@@ -88,7 +88,7 @@ namespace properties {
 std::ostream& operator<<(std::ostream& s, const inclusion_dependencies_repository& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::properties::inclusion_dependencies_repository\"" << ", "
-      << "\"inclusion_dependencies_by_name\": " << v.inclusion_dependencies_by_name()
+      << "\"by_name\": " << v.by_name()
       << " }";
     return(s);
 }

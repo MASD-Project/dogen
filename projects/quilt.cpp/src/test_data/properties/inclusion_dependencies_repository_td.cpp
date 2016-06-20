@@ -70,7 +70,7 @@ inclusion_dependencies_repository_generator::inclusion_dependencies_repository_g
 
 void inclusion_dependencies_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.inclusion_dependencies_by_name(create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_list_std_string__(position + 0));
+    v.by_name(create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_list_std_string__(position + 0));
 }
 
 inclusion_dependencies_repository_generator::result_type

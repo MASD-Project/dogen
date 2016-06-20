@@ -85,7 +85,7 @@ private:
 
 void generator::generate(const yarn::name& n) {
     BOOST_LOG_SEV(lg, debug) << "Processing name: " << n;
-    auto& pd(result_.path_derivatives_by_name());
+    auto& pd(result_.by_name());
     const auto pair(pd.insert(std::make_pair(n, factory_.make(n))));
     const bool inserted(pair.second);
     if (!inserted) {

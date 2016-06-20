@@ -39,14 +39,14 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::properties::enablement_repository& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("enablement_by_name", v.enablement_by_name_);
+    ar << make_nvp("by_name", v.by_name_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::properties::enablement_repository& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("enablement_by_name", v.enablement_by_name_);
+    ar >> make_nvp("by_name", v.by_name_);
 }
 
 } }

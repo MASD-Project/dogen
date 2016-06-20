@@ -74,7 +74,7 @@ namespace properties {
 std::ostream& operator<<(std::ostream& s, const inclusion_directives_repository& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::properties::inclusion_directives_repository\"" << ", "
-      << "\"inclusion_directives_by_name\": " << v.inclusion_directives_by_name()
+      << "\"by_name\": " << v.by_name()
       << " }";
     return(s);
 }

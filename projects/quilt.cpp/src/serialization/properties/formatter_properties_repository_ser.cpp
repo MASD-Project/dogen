@@ -39,14 +39,14 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::properties::formatter_properties_repository& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("formatter_properties_by_name", v.formatter_properties_by_name_);
+    ar << make_nvp("by_id", v.by_id_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::properties::formatter_properties_repository& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("formatter_properties_by_name", v.formatter_properties_by_name_);
+    ar >> make_nvp("by_id", v.by_id_);
 }
 
 } }

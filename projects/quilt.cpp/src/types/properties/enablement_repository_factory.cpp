@@ -65,7 +65,7 @@ private:
     template<typename YarnEntity>
     void generate(const YarnEntity& e, const bool types_only = false) {
         const auto o(e.extensions());
-        result_.enablement_by_name()[e.name()] = factory_.make(o, types_only);
+        result_.by_name()[e.name()] = factory_.make(o, types_only);
     }
 
 public:
@@ -162,7 +162,7 @@ enablement_repository enablement_repository_factory::make(
     yarn::name_factory nf;
     const auto n(nf.build_element_in_model(m.name(), registrar_name));
     const auto e(f.make(root_object));
-    r.enablement_by_name()[n] = e;
+    r.by_name()[n] = e;
 
     for (const auto& pair : m.references()) {
         const auto origin_type(pair.second);
@@ -172,7 +172,7 @@ enablement_repository enablement_repository_factory::make(
         const auto ref(pair.first);
         yarn::name_factory nf;
         const auto n(nf.build_element_in_model(ref, registrar_name));
-        r.enablement_by_name()[n] = e;
+        r.by_name()[n] = e;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished computing enablement:" << r;
