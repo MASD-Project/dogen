@@ -65,9 +65,8 @@ private:
         const auto pair(std::make_pair(n.id(), b));
         const auto res(result_.by_id().insert(pair));
         if (!res.second) {
-            const auto qn(n.id());
-            BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
-            BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));
+            BOOST_LOG_SEV(lg, error) << duplicate_name << n.id();
+            BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
         }
     }
 
@@ -91,9 +90,9 @@ private:
             const auto pair(std::make_pair(p.name().id(), os));
             const auto res(b.opaque_settings_for_property().insert(pair));
             if (!res.second) {
-                const auto qn(p.name().id());
-                BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
-                BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));
+                const auto id(p.name().id());
+                BOOST_LOG_SEV(lg, error) << duplicate_name << id;
+                BOOST_THROW_EXCEPTION(building_error(duplicate_name + id));
             }
         }
         insert(e.name(), b);
@@ -143,9 +142,8 @@ make(const dynamic::repository& rp, const dynamic::object& root_object,
     auto& deps(r.by_id());
     const auto res(deps.insert(pair));
     if (!res.second) {
-        const auto qn(n.id());
-        BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
-        BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));
+        BOOST_LOG_SEV(lg, error) << duplicate_name << n.id();
+        BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating settings bundle repository."

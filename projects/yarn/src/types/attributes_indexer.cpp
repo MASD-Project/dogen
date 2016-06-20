@@ -46,21 +46,21 @@ namespace dogen {
 namespace yarn {
 
 object& attributes_indexer::find_object(const name& n, intermediate_model& m) {
-    const auto qn(n.id());
-    auto i(m.objects().find(qn));
+    const auto id(n.id());
+    auto i(m.objects().find(id));
     if (i == m.objects().end()) {
-        BOOST_LOG_SEV(lg, error) << object_not_found << qn;
-        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
+        BOOST_LOG_SEV(lg, error) << object_not_found << id;
+        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + id));
     }
     return i->second;
 }
 
 concept& attributes_indexer::find_concept(const name& n, intermediate_model& m) {
-    const auto& qn(n.id());
-    auto i(m.concepts().find(qn));
+    const auto& id(n.id());
+    auto i(m.concepts().find(id));
     if (i == m.concepts().end()) {
-        BOOST_LOG_SEV(lg, error) << concept_not_found << qn;
-        BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + qn));
+        BOOST_LOG_SEV(lg, error) << concept_not_found << id;
+        BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + id));
     }
     return i->second;
 }

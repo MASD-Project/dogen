@@ -56,19 +56,19 @@ private:
         if (s.generation_type() == yarn::generation_types::no_generation)
             return;
 
-        const auto qn(s.name().id());
-        BOOST_LOG_SEV(lg, debug) << "Creating helper instances for" << qn;
+        const auto id(s.name().id());
+        BOOST_LOG_SEV(lg, debug) << "Creating helper instances for" << id;
 
 
         const auto hi(factory_.make(s.local_attributes()));
-        const auto pair(std::make_pair(qn, hi));
+        const auto pair(std::make_pair(id, hi));
         auto& hibn(result_.by_id());
         const auto res(hibn.insert(pair));
         if (!res.second) {
-            BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
-            BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));
+            BOOST_LOG_SEV(lg, error) << duplicate_name << id;
+            BOOST_THROW_EXCEPTION(building_error(duplicate_name + id));
         }
-        BOOST_LOG_SEV(lg, debug) << "Done creating helper instances for" << qn;
+        BOOST_LOG_SEV(lg, debug) << "Done creating helper instances for" << id;
     }
 
 public:

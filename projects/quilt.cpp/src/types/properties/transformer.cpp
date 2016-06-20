@@ -181,9 +181,9 @@ template<typename YarnConcreteElement>
 inline const YarnConcreteElement& convert(const yarn::element& e) {
     auto ptr(dynamic_cast<YarnConcreteElement const*>(&e));
     if (!ptr) {
-        const auto qn(e.name().id());
-        BOOST_LOG_SEV(lg, error) << cast_failure << qn;
-        BOOST_THROW_EXCEPTION(transformation_error(cast_failure + qn));
+        const auto id(e.name().id());
+        BOOST_LOG_SEV(lg, error) << cast_failure << id;
+        BOOST_THROW_EXCEPTION(transformation_error(cast_failure + id));
     }
     return *ptr;
 }
@@ -373,9 +373,9 @@ transformer::to_class_info(const yarn::object& o) const {
 
     if (!o.root_parents().empty()) {
         if (o.root_parents().size() > 1) {
-            const auto qn(o.name().id());
-            BOOST_LOG_SEV(lg, error) << too_many_parents << qn;
-            BOOST_THROW_EXCEPTION(transformation_error(too_many_parents + qn));
+            const auto id(o.name().id());
+            BOOST_LOG_SEV(lg, error) << too_many_parents << id;
+            BOOST_THROW_EXCEPTION(transformation_error(too_many_parents + id));
         }
 
         const auto opn(o.root_parents().front());
@@ -464,9 +464,9 @@ transform(const yarn::object& o) const {
         r.push_front(to_class_info(o));
         break;
     default: {
-        const auto qn(o.name().id());
+        const auto id(o.name().id());
         BOOST_LOG_SEV(lg, error) << unsupported_object_type << o.object_type()
-                                 << " name: " << qn;
+                                 << " name: " << id;
         BOOST_THROW_EXCEPTION(transformation_error(unsupported_object_type +
                 boost::lexical_cast<std::string>(o.object_type())));
     } };

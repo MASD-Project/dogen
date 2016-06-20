@@ -12,30 +12,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-20 Mon 21:39]
+#+CAPTION: Clock summary at [2016-06-20 Mon 21:57]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *18:11* |       |      | 100.0 |
+| *Total time*                                                                | *18:28* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 18:11   |       |      | 100.0 |
-| Active                                                                      |         | 18:11 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:07 |  11.6 |
+| Stories                                                                     | 18:28   |       |      | 100.0 |
+| Active                                                                      |         | 18:28 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:07 |  11.5 |
 | COMPLETED Refactor helper settings                                          |         |       | 0:35 |   3.2 |
-| COMPLETED Add properties for helpers                                        |         |       | 1:35 |   8.7 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   7.6 |
-| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   4.6 |
-| COMPLETED Rename helper instances                                           |         |       | 0:37 |   3.4 |
-| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   6.4 |
-| COMPLETED Rename qualified to id                                            |         |       | 0:34 |   3.1 |
-| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   4.3 |
-| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   7.1 |
-| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   4.7 |
-| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |  11.5 |
-| COMPLETED Rename =name_tree='s parent                                       |         |       | 0:16 |   1.5 |
-| COMPLETED Compute yarn property related information                         |         |       | 1:36 |   8.8 |
+| COMPLETED Add properties for helpers                                        |         |       | 1:35 |   8.6 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   7.5 |
+| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   4.5 |
+| COMPLETED Rename helper instances                                           |         |       | 0:37 |   3.3 |
+| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   6.3 |
+| COMPLETED Rename qualified to id                                            |         |       | 0:51 |   4.6 |
+| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   4.2 |
+| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   7.0 |
+| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   4.6 |
+| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |  11.3 |
+| COMPLETED Rename =name_tree='s parent                                       |         |       | 0:16 |   1.4 |
+| COMPLETED Compute yarn property related information                         |         |       | 1:36 |   8.7 |
 | COMPLETED Remove redundancy in properties' repositories                     |         |       | 0:22 |   2.0 |
-| COMPLETED Create a top-level type to aggregate properties and helpers       |         |       | 1:42 |   9.3 |
+| COMPLETED Create a top-level type to aggregate properties and helpers       |         |       | 1:42 |   9.2 |
 | COMPLETED Refactor helper descriptor                                        |         |       | 0:23 |   2.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -182,6 +182,7 @@ should rename formattables to properties.
 
 *** COMPLETED Rename qualified to id                                  :story:
     CLOSED: [2016-06-19 Sun 12:37]
+    CLOCK: [2016-06-20 Mon 21:41]--[2016-06-20 Mon 21:58] =>  0:17
     CLOCK: [2016-06-19 Sun 12:36]--[2016-06-19 Sun 12:49] =>  0:13
     CLOCK: [2016-06-19 Sun 12:14]--[2016-06-19 Sun 12:35] =>  0:21
 

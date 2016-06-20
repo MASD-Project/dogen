@@ -89,7 +89,7 @@ private:
      * @pre n must be a simple name, not a qualified name.
      */
     yarn::name to_name(const std::string& n,
-        const yarn::name& module_qn) const;
+        const yarn::name& module_name) const;
 
     /**
      * @brief Converts a processed attribute into an yarn attribute.
@@ -120,7 +120,7 @@ private:
      *
      * @pre module must exist in context.
      */
-    yarn::module& module_for_name(const yarn::name& qn);
+    yarn::module& module_for_name(const yarn::name& n);
 
     /**
      * @brief Returns the module associated with a dia package id.

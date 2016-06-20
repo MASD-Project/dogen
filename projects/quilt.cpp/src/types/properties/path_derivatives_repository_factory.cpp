@@ -89,9 +89,8 @@ void generator::generate(const yarn::name& n) {
     const auto pair(pd.insert(std::make_pair(n, factory_.make(n))));
     const bool inserted(pair.second);
     if (!inserted) {
-        const auto qn(n.simple());
-        BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
-        BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));
+        BOOST_LOG_SEV(lg, error) << duplicate_name << n.id();
+        BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
     }
 }
 

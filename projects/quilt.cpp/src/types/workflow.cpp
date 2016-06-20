@@ -56,9 +56,9 @@ dynamic::object workflow::obtain_root_object(
 
     const auto i(m.elements().find(m.name().id()));
     if (i == m.elements().end()) {
-        const auto qn(m.name().id());
-        BOOST_LOG_SEV(lg, error) << model_module_not_found << qn;
-        BOOST_THROW_EXCEPTION(workflow_error(model_module_not_found + qn));
+        const auto id(m.name().id());
+        BOOST_LOG_SEV(lg, error) << model_module_not_found << id;
+        BOOST_THROW_EXCEPTION(workflow_error(model_module_not_found + id));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Obtained model's root object.";

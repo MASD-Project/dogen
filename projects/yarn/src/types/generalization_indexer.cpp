@@ -73,30 +73,30 @@ recurse_generalization(const intermediate_model& m, const name& leaf,
         return std::list<name> { o.name() };
 
     if (o.parents().empty()) {
-        const auto qn(o.name().id());
-        BOOST_LOG_SEV(lg, error) << child_with_no_parents << qn;
-        BOOST_THROW_EXCEPTION(indexing_error(child_with_no_parents + qn));
+        const auto id(o.name().id());
+        BOOST_LOG_SEV(lg, error) << child_with_no_parents << id;
+        BOOST_THROW_EXCEPTION(indexing_error(child_with_no_parents + id));
     }
 
     std::list<name> root_parents;
     for (const auto& parent : o.parents()) {
         auto j(m.objects().find(parent.id()));
         if (j == m.objects().end()) {
-            const auto qn(parent.id());
-            BOOST_LOG_SEV(lg, error) << parent_not_found << qn;
-            BOOST_THROW_EXCEPTION(indexing_error(parent_not_found + qn));
+            const auto id(parent.id());
+            BOOST_LOG_SEV(lg, error) << parent_not_found << id;
+            BOOST_THROW_EXCEPTION(indexing_error(parent_not_found + id));
         }
 
         const auto op(recurse_generalization(m, leaf, j->second, d));
         if (op.empty()) {
-            const auto qn(parent.id());
-            BOOST_LOG_SEV(lg, error) << child_with_no_root_parent << qn;
+            const auto id(parent.id());
+            BOOST_LOG_SEV(lg, error) << child_with_no_root_parent << id;
             BOOST_THROW_EXCEPTION(
-                indexing_error(child_with_no_root_parent + qn));
+                indexing_error(child_with_no_root_parent + id));
         }
 
-        for (const auto qn : op)
-            root_parents.push_back(qn);
+        for (const auto n : op)
+            root_parents.push_back(n);
 
         d.root_parents[parent] = op;
         BOOST_LOG_SEV(lg, debug) << "Type: " << parent.id()
@@ -136,9 +136,8 @@ populate(const generalization_details& d, intermediate_model& m) const {
         const auto& n(pair.first);
         auto i(m.objects().find(n.id()));
         if (i == m.objects().end()) {
-            const auto qn(n.id());
-            BOOST_LOG_SEV(lg, error) << object_not_found << qn;
-            BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
+            BOOST_LOG_SEV(lg, error) << object_not_found << n.id();
+            BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n.id()));
         }
 
         auto& o(i->second);
@@ -156,9 +155,8 @@ populate(const generalization_details& d, intermediate_model& m) const {
         const auto& n(pair.first);
         auto i(m.objects().find(n.id()));
         if (i == m.objects().end()) {
-            const auto qn(n.id());
-            BOOST_LOG_SEV(lg, error) << object_not_found << qn;
-            BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
+            BOOST_LOG_SEV(lg, error) << object_not_found << n.id();
+            BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n.id()));
         }
 
         auto& o(i->second);
@@ -176,9 +174,9 @@ populate(const generalization_details& d, intermediate_model& m) const {
         for (const auto& opn : pair.second) {
             const auto j(m.objects().find(opn.id()));
             if (j == m.objects().end()) {
-                const auto qn(opn.id());
-                BOOST_LOG_SEV(lg, error) << object_not_found << qn;
-                BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
+                const auto id(opn.id());
+                BOOST_LOG_SEV(lg, error) << object_not_found << id;
+                BOOST_THROW_EXCEPTION(indexing_error(object_not_found + id));
             }
             o.is_root_parent_visitable(j->second.is_visitable());
         }

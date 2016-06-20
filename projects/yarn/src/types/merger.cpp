@@ -121,8 +121,8 @@ void merger::update_references() {
 }
 
 void merger::add_target(const intermediate_model& target) {
-    const auto qn(target.name().id());
-    require_not_has_target(qn);
+    const auto id(target.name().id());
+    require_not_has_target(id);
 
     has_target_ = true;
     merged_model_.name(target.name());
@@ -131,7 +131,7 @@ void merger::add_target(const intermediate_model& target) {
     merged_model_.references(target.references());
     merged_model_.is_target(true);
 
-    BOOST_LOG_SEV(lg, debug) << "added target model: " << qn;
+    BOOST_LOG_SEV(lg, debug) << "added target model: " << id;
 }
 
 void merger::add(const intermediate_model& m) {

@@ -75,9 +75,7 @@ inline void add_containing_module_to_non_contained_entities(
 }
 
 module injector::create_global_module() const {
-    name qn;
     module r;
-    r.name(qn);
     r.generation_type(generation_types::no_generation);
     r.origin_type(origin_types::system);
     r.documentation(global_module_doc);
@@ -100,9 +98,8 @@ create_visitor(const object& o, const std::list<name>& leaves) const {
     r.documentation(visitor_doc + o.name().simple());
 
     if (leaves.empty()) {
-        const auto& qn(n.id());
-        BOOST_LOG_SEV(lg, error) << no_visitees << qn;
-        BOOST_THROW_EXCEPTION(injection_error(no_visitees + qn));
+        BOOST_LOG_SEV(lg, error) << no_visitees << n.id();
+        BOOST_THROW_EXCEPTION(injection_error(no_visitees + n.id()));
     }
 
     for (const auto& l : leaves)
@@ -120,9 +117,8 @@ void injector::inject_visitable_by(object& root, const std::list<name>& leaves,
     for (const auto& l : leaves) {
         auto i(m.objects().find(l.id()));
         if (i == m.objects().end()) {
-            const auto qn(l.id());
-            BOOST_LOG_SEV(lg, error) << leaf_not_found << qn;
-            BOOST_THROW_EXCEPTION(injection_error(leaf_not_found + qn));
+            BOOST_LOG_SEV(lg, error) << leaf_not_found << l.id();
+            BOOST_THROW_EXCEPTION(injection_error(leaf_not_found + l.id()));
         }
 
         auto& leaf(i->second);
@@ -141,9 +137,9 @@ void injector::inject_visitors(intermediate_model& m) {
             continue;
 
         if (o.leaves().empty()) {
-            const auto qn(o.name().id());
-            BOOST_LOG_SEV(lg, error) << zero_leaves << qn;
-            BOOST_THROW_EXCEPTION(injection_error(zero_leaves + qn));
+            const auto id(o.name().id());
+            BOOST_LOG_SEV(lg, error) << zero_leaves << id;
+            BOOST_THROW_EXCEPTION(injection_error(zero_leaves + id));
         }
 
         const auto v(create_visitor(o, o.leaves()));
@@ -158,9 +154,9 @@ void injector::inject_visitors(intermediate_model& m) {
         const auto pair(std::make_pair(v.name().id(), v));
         const auto i(m.visitors().insert(pair));
         if (!i.second) {
-            const auto qn(v.name().id());
-            BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
-            BOOST_THROW_EXCEPTION(injection_error(duplicate_name + qn));
+            const auto id(v.name().id());
+            BOOST_LOG_SEV(lg, error) << duplicate_name << id;
+            BOOST_THROW_EXCEPTION(injection_error(duplicate_name + id));
         }
     }
 
@@ -173,10 +169,10 @@ void injector::inject_global_module(intermediate_model& m) {
     const auto gmn(gm.name());
     const auto i(m.modules().find(gmn.id()));
     if (i != m.modules().end()) {
-        const auto qn(m.name().id());
-        BOOST_LOG_SEV(lg, error) << model_already_has_global_module << qn;
-        BOOST_THROW_EXCEPTION(injection_error(
-                model_already_has_global_module + qn));
+        const auto id(m.name().id());
+        BOOST_LOG_SEV(lg, error) << model_already_has_global_module << id;
+        BOOST_THROW_EXCEPTION(
+            injection_error(model_already_has_global_module + id));
     }
     m.modules().insert(std::make_pair(gmn.id(), gm));
 

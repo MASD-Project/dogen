@@ -98,32 +98,32 @@ generate(const inclusion_dependencies_builder_factory& f,
             >
         > providers, const YarnEntity& e) {
 
-    const auto qn(e.name().id());
-    BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies for: " << qn;
+    const auto id(e.name().id());
+    BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies for: " << id;
 
     std::unordered_map<std::string, std::list<std::string> > r;
     for (const auto p : providers) {
         BOOST_LOG_SEV(lg, debug) << "Providing for: " << p->formatter_name();
-        auto id(p->provide(f, e));
+        auto ideps(p->provide(f, e));
 
-        if (!id)
+        if (!ideps)
             continue;
 
-        id->sort(include_directive_comparer);
-        id->unique();
-        const auto id_pair(std::make_pair(p->formatter_name(), *id));
+        ideps->sort(include_directive_comparer);
+        ideps->unique();
+        const auto id_pair(std::make_pair(p->formatter_name(), *ideps));
         const bool inserted(r.insert(id_pair).second);
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_formatter_name
                                      << p->formatter_name()
-                                     << " for type: " << qn;
+                                     << " for type: " << id;
             BOOST_THROW_EXCEPTION(building_error(duplicate_formatter_name +
                     p->formatter_name()));
         }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies for: "
-                             << qn;
+                             << id;
 
     return r;
 }

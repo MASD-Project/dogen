@@ -72,15 +72,14 @@ public:
         if (pair.second)
             return;
 
-        const auto qn(n.id());
-        BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
-        BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));
+        BOOST_LOG_SEV(lg, error) << duplicate_name << n.id();
+        BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
     }
 
 private:
     /**
      * @brief Generates all of the inclusion dependencies for the
-     * formatters and qualified name.
+     * formatters and name.
      */
     template<typename ExtensibleAndNameable>
     void generate(const ExtensibleAndNameable& e) {

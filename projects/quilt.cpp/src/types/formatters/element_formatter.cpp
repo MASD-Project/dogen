@@ -57,9 +57,9 @@ private:
     template<typename Formatter, typename YarnElement>
     void format(const Formatter& f, const YarnElement& e) {
 
-        const auto qn(e.name().id());
+        const auto id(e.name().id());
         const auto fn(f.ownership_hierarchy().formatter_name());
-        BOOST_LOG_SEV(lg, debug) << "Formatting: '" << qn << "' with '"
+        BOOST_LOG_SEV(lg, debug) << "Formatting: '" << id << "' with '"
                                  << fn << "'";
 
         const auto ctx(factory_.make(e.name().id()));
@@ -86,7 +86,7 @@ private:
             BOOST_LOG_SEV(lg, debug) << "Content: "
                                      << (file.content().empty() ? "<empty>" :
                                          file.content());
-            BOOST_LOG_SEV(lg, debug) << "Finished formatting: '" << qn << "'";
+            BOOST_LOG_SEV(lg, debug) << "Finished formatting: '" << id << "'";
         } else {
             BOOST_LOG_SEV(lg, debug) << "Not dumping file contents to log "
                                      << "(overwrite is false).";

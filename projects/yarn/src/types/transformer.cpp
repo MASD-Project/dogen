@@ -47,13 +47,13 @@ public:
 private:
     template<typename Element>
     void generate(const Element& e) {
-        const auto qn(e.name().id());
+        const auto id(e.name().id());
         const auto ptr(boost::make_shared<Element>(e));
-        const auto r(result_.elements().insert(std::make_pair(qn, ptr)));
+        const auto r(result_.elements().insert(std::make_pair(id, ptr)));
         if (!r.second) {
-            BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << qn;
+            BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << id;
             BOOST_THROW_EXCEPTION(
-                transformation_error(duplicate_qualified_name + qn));
+                transformation_error(duplicate_qualified_name + id));
         }
     }
 
@@ -78,9 +78,9 @@ private:
 model transformer::transform(const intermediate_model& m) const {
     const auto i(m.modules().find(m.name().id()));
     if (i == m.modules().end()) {
-        const auto qn(m.name().id());
-        BOOST_LOG_SEV(lg, error) << missing_root_module << qn;
-        BOOST_THROW_EXCEPTION(transformation_error(missing_root_module + qn));
+        const auto id(m.name().id());
+        BOOST_LOG_SEV(lg, error) << missing_root_module << id;
+        BOOST_THROW_EXCEPTION(transformation_error(missing_root_module + id));
     }
 
     model r;

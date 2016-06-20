@@ -67,9 +67,8 @@ public:
         auto& deps(result_.by_name());
         const auto res(deps.insert(pair));
         if (!res.second) {
-            const auto qn(n.id());
-            BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
-            BOOST_THROW_EXCEPTION(building_error(duplicate_name + qn));
+            BOOST_LOG_SEV(lg, error) << duplicate_name << n.id();
+            BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
         }
     }
 

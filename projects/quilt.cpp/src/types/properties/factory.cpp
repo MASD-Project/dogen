@@ -130,9 +130,9 @@ template<typename YarnConcreteElement>
 inline const YarnConcreteElement& convert(const yarn::element& e) {
     auto ptr(dynamic_cast<YarnConcreteElement const*>(&e));
     if (!ptr) {
-        const auto qn(e.name().id());
-        BOOST_LOG_SEV(lg, error) << cast_failure << qn;
-        BOOST_THROW_EXCEPTION(building_error(cast_failure + qn));
+        const auto id(e.name().id());
+        BOOST_LOG_SEV(lg, error) << cast_failure << id;
+        BOOST_THROW_EXCEPTION(building_error(cast_failure + id));
     }
     return *ptr;
 }
@@ -200,9 +200,8 @@ bool factory::is_enabled(const formatter_properties_repository& fprp,
 
     const auto i(fprp.by_id().find(n.id()));
     if (i == fprp.by_id().end()) {
-        const auto qn(n.id());
-        BOOST_LOG_SEV(lg, error) << properties_not_found << qn;
-        BOOST_THROW_EXCEPTION(building_error(properties_not_found + qn));
+        BOOST_LOG_SEV(lg, error) << properties_not_found << n.id();
+        BOOST_THROW_EXCEPTION(building_error(properties_not_found + n.id()));
     }
 
     const auto j(i->second.find(formatter_name));
@@ -232,9 +231,9 @@ std::shared_ptr<formattable> factory::make_registrar_info(
 
     const auto i(brp.by_id().find(n.id()));
     if (i == brp.by_id().end()) {
-        const auto qn(n.id());
-        BOOST_LOG_SEV(lg, error) << bundle_not_found_for_name << qn;
-        BOOST_THROW_EXCEPTION(building_error(bundle_not_found_for_name + qn));
+        const auto id(n.id());
+        BOOST_LOG_SEV(lg, error) << bundle_not_found_for_name << id;
+        BOOST_THROW_EXCEPTION(building_error(bundle_not_found_for_name + id));
     }
 
     for (const auto& pair : m.references()) {
@@ -276,9 +275,9 @@ std::shared_ptr<formattable> factory::make_registrar_info(
 
     const auto j(fprp.by_id().find(n.id()));
     if (j == fprp.by_id().end()) {
-        const auto qn(n.id());
-        BOOST_LOG_SEV(lg, error) << properties_not_found << qn;
-        BOOST_THROW_EXCEPTION(building_error(properties_not_found + qn));
+        const auto id(n.id());
+        BOOST_LOG_SEV(lg, error) << properties_not_found << id;
+        BOOST_THROW_EXCEPTION(building_error(properties_not_found + id));
     }
 
     const auto k(j->second.find(ri_fn));

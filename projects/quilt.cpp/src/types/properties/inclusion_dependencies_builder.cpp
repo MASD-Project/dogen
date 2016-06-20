@@ -120,9 +120,8 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
     const auto& en(enablement_repository_.by_name());
     const auto i(en.find(n));
     if (i == en.end()) {
-        const auto qn(n.id());
-        BOOST_LOG_SEV(lg, error) << name_not_found << n;
-        BOOST_THROW_EXCEPTION(building_error(name_not_found + qn));
+        BOOST_LOG_SEV(lg, error) << name_not_found << n.id();
+        BOOST_THROW_EXCEPTION(building_error(name_not_found + n.id()));
     }
 
     const auto j(i->second.find(formatter_name));
@@ -146,9 +145,8 @@ get_aspect_settings(const yarn::name& n) const {
     const auto& bn(bundle_repository_.by_id());
     const auto i(bn.find(n.id()));
     if (i == bn.end()) {
-        const auto qn(n.id());
-        BOOST_LOG_SEV(lg, error) << name_not_found << qn;
-        BOOST_THROW_EXCEPTION(building_error(name_not_found + qn));
+        BOOST_LOG_SEV(lg, error) << name_not_found << n.id();
+        BOOST_THROW_EXCEPTION(building_error(name_not_found + n.id()));
     }
     return i->second.aspect_settings();
 }

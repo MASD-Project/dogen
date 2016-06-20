@@ -54,9 +54,9 @@ inclusion_directives_factory::path_derivatives_for_name(
     const yarn::name& n) const {
     const auto i(path_repository_.by_name().find(n));
     if (i == path_repository_.by_name().end()) {
-        const auto qn(n.id());
-        BOOST_LOG_SEV(lg, error) << name_not_found << qn;
-        BOOST_THROW_EXCEPTION(building_error(name_not_found + qn));
+        const auto id(n.id());
+        BOOST_LOG_SEV(lg, error) << name_not_found << id;
+        BOOST_THROW_EXCEPTION(building_error(name_not_found + id));
     }
     return i->second;
 }
@@ -135,10 +135,10 @@ inclusion_directives_factory::obtain_include_directive(
 boost::optional<std::unordered_map<std::string, std::string> >
 inclusion_directives_factory::
 make(const dynamic::object& o, const yarn::name& n) const {
-    const auto qn(n.id());
+    const auto id(n.id());
     const auto directives_settings(create_inclusion_directives_settings(o));
     if (!directives_settings.inclusion_required()) {
-        BOOST_LOG_SEV(lg, debug) << "Inclusion directive not required: " << qn;
+        BOOST_LOG_SEV(lg, debug) << "Inclusion directive not required: " << id;
         return boost::optional<std::unordered_map<std::string, std::string> >();
     }
 
@@ -148,7 +148,7 @@ make(const dynamic::object& o, const yarn::name& n) const {
         const auto fn(p.first);
         const auto ds(p.second);
 
-        const auto id_pair(obtain_include_directive(fn, qn, pd, ds));
+        const auto id_pair(obtain_include_directive(fn, id, pd, ds));
         if (!id_pair)
             continue;
 
