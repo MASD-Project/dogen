@@ -37,10 +37,10 @@
 #include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/properties/formattable.hpp"
-#include "dogen/quilt.cpp/types/properties/formatter_properties_repository.hpp"
+#include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
 #include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
-#include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
+
 #include "dogen/yarn/types/model.hpp"
 
 namespace dogen {
@@ -95,16 +95,10 @@ private:
         const yarn::model& m) const;
 
     /**
-     * @brief Create the helper settings repository.
-     */
-    settings::helper_settings_repository create_helper_settings_repository(
-        const dynamic::repository& rp, const yarn::model& m) const;
-
-    /**
      * @brief Create the properties.
      */
     std::pair<
-        properties::formatter_properties_repository,
+        properties::element_properties_repository,
         std::forward_list<std::shared_ptr<properties::formattable> >
     >
     create_properties_activty(const config::cpp_options& opts,
@@ -126,8 +120,7 @@ private:
      */
     std::forward_list<dogen::formatters::file>
     format_activty(const settings::bundle_repository& brp,
-        const settings::helper_settings_repository& hsrp,
-        const properties::formatter_properties_repository& fprp,
+        const properties::element_properties_repository& eprp,
         const std::forward_list<
         std::shared_ptr<properties::formattable>
         >& f) const;
@@ -137,8 +130,7 @@ private:
      */
     std::forward_list<dogen::formatters::file>
     format_yarn_activity(const settings::bundle_repository& brp,
-        const settings::helper_settings_repository& hsrp,
-        const properties::formatter_properties_repository& fprp,
+        const properties::element_properties_repository& eprp,
         const std::forward_list<
         boost::shared_ptr<yarn::element> >& elements) const;
 

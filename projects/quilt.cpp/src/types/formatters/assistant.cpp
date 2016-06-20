@@ -128,8 +128,8 @@ void assistant::ensure_formatter_properties_are_present() const {
 boost::optional<properties::formatter_properties> assistant::
 obtain_formatter_properties(const std::string& formatter_name) const {
     const auto& fn(formatter_name);
-    const auto i(context_.formatter_properties().find(fn));
-    if (i == context_.formatter_properties().end())
+    const auto i(context_.element_properties().formatter_properties().find(fn));
+    if (i == context_.element_properties().formatter_properties().end())
         return boost::optional<properties::formatter_properties>();
     return i->second;
 }

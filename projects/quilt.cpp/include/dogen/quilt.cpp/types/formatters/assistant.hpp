@@ -90,7 +90,7 @@ private:
     void ensure_formatter_properties_are_present() const;
 
     /**
-     * @brief Obtains the formatter settings for the formatter as
+     * @brief Obtains the formatter properties for the formatter as
      * given by the ownership hierarchy.
      */
     boost::optional<properties::formatter_properties>
@@ -271,7 +271,7 @@ private:
     boost::iostreams::filtering_ostream filtering_stream_;
     const context& context_;
     const boost::optional<properties::formatter_properties>
-    formatter_properties_;
+        formatter_properties_;
     const dynamic::ownership_hierarchy ownership_hierarchy_;
     const formatters::file_types file_type_;
 };

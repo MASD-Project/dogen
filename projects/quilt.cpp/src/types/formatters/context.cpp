@@ -27,29 +27,19 @@ namespace formatters {
 
 context::context(
     const settings::bundle& bundle,
-    const std::unordered_map<std::string, settings::helper_settings>&
-    helper_settings,
-    const std::unordered_map<std::string, properties::formatter_properties>&
-    formatter_properties,
+    const properties::element_properties& element_properties,
     const std::unordered_map<std::string, std::unordered_map<std::string,
     std::shared_ptr<formatter_helper_interface>>>& helpers)
     : bundle_(bundle),
-      helper_settings_(helper_settings),
-      formatter_properties_(formatter_properties),
+      element_properties_(element_properties),
       helpers_(helpers) { }
 
 const settings::bundle& context::bundle() const {
     return bundle_;
 }
 
-const std::unordered_map<std::string, settings::helper_settings>&
-context::helper_settings() const {
-    return helper_settings_;
-}
-
-const std::unordered_map<std::string, properties::formatter_properties>&
-context::formatter_properties() const {
-    return formatter_properties_;
+const properties::element_properties& context::element_properties() const {
+    return element_properties_;
 }
 
 const std::unordered_map<

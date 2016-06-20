@@ -97,7 +97,7 @@ private:
                                  << "' with '" << fn << "'";
 
         const auto ctx(factory_.make(e.id()));
-        const auto fp(ctx.formatter_properties());
+        const auto fp(ctx.element_properties().formatter_properties());
         const auto i(fp.find(fn));
         if (i == fp.end()) {
             BOOST_LOG_SEV(lg, error) << formatter_properties_not_found << fn;
@@ -225,12 +225,11 @@ cpp::formatters::registrar& workflow::registrar() {
 
 std::forward_list<dogen::formatters::file>
 workflow::execute(const settings::bundle_repository& brp,
-    const settings::helper_settings_repository& hsrp,
-    const properties::formatter_properties_repository& fprp,
+    const properties::element_properties_repository& eprp,
     const std::forward_list<
     std::shared_ptr<properties::formattable> >& f) const {
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
-    context_factory factory(brp, hsrp, fprp, registrar().formatter_helpers());
+    context_factory factory(brp, eprp, registrar().formatter_helpers());
     dispatcher d(factory, registrar().formatter_container());
     for (const auto sp : f)
         d.format(*sp);
@@ -247,15 +246,14 @@ workflow::execute(const settings::bundle_repository& brp,
 
 std::forward_list<dogen::formatters::file>
 workflow::execute(const settings::bundle_repository& brp,
-    const settings::helper_settings_repository& hsrp,
-    const properties::formatter_properties_repository& fprp,
+    const properties::element_properties_repository& eprp,
     const std::forward_list<
     boost::shared_ptr<yarn::element> >& elements) const {
 
     BOOST_LOG_SEV(lg, debug) << "Starting workflow - yarn version.";
 
     std::forward_list<dogen::formatters::file> r;
-    context_factory factory(brp, hsrp, fprp, registrar().formatter_helpers());
+    context_factory factory(brp, eprp, registrar().formatter_helpers());
     element_formatter ef(factory, registrar().formatter_container());
     for (const auto e : elements) {
         BOOST_LOG_SEV(lg, warn) << "Processing element: " << e->name().id();

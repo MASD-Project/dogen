@@ -63,7 +63,7 @@ private:
                                  << fn << "'";
 
         const auto ctx(factory_.make(e.name().id()));
-        const auto fp(ctx.formatter_properties());
+        const auto fp(ctx.element_properties().formatter_properties());
         const auto i(fp.find(fn));
         if (i == fp.end()) {
             BOOST_LOG_SEV(lg, error) << formatter_properties_not_found << fn;

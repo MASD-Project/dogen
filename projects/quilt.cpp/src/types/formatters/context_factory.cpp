@@ -41,13 +41,8 @@ namespace cpp {
 namespace formatters {
 
 const settings::bundle context_factory::empty_bundle_ = settings::bundle();
-const std::unordered_map<std::string, settings::helper_settings>
-context_factory::empty_helper_settings_ =
-    std::unordered_map<std::string, settings::helper_settings>();
-const std::unordered_map<std::string,
-                         properties::formatter_properties>
-context_factory::empty_formatter_properties_ =
-    std::unordered_map<std::string, properties::formatter_properties>();
+const properties::element_properties
+context_factory::empty_element_properties_ = properties::element_properties();
 const std::unordered_map<
     std::string,
     std::unordered_map<
@@ -60,18 +55,16 @@ const std::unordered_map<
         std::shared_ptr<formatter_helper_interface>>>();
 
 context_factory::context_factory(const settings::bundle_repository& brp,
-    const settings::helper_settings_repository& hsrp,
-    const properties::formatter_properties_repository& fprp,
+    const properties::element_properties_repository& eprp,
     const std::unordered_map<
     std::string, std::unordered_map<
     std::string,
     std::shared_ptr<formatter_helper_interface>>>& helpers)
-    : bundle_(brp), helper_settings_(hsrp),
-      formatter_properties_(fprp), formatter_helpers_(helpers) {}
+    : bundle_(brp), element_properties_(eprp), formatter_helpers_(helpers) {}
 
-const std::unordered_map<std::string, properties::formatter_properties>&
-context_factory::properties_for_name(const std::string& n) const {
-    const auto& fp(formatter_properties_.by_id());
+const properties::element_properties& context_factory::
+properties_for_id(const std::string& n) const {
+    const auto& fp(element_properties_.by_id());
     const auto i(fp.find(n));
     if (i == fp.end()) {
         BOOST_LOG_SEV(lg, error) << formatter_properties_not_found << n;
@@ -82,7 +75,7 @@ context_factory::properties_for_name(const std::string& n) const {
 }
 
 const settings::bundle& context_factory::
-bundle_for_name(const std::string& n) const {
+bundle_for_id(const std::string& n) const {
     const auto& b(bundle_.bundles_by_name());
     const auto i(b.find(n));
     if (i == b.end()) {
@@ -93,15 +86,13 @@ bundle_for_name(const std::string& n) const {
 }
 
 context context_factory::make_empty_context() const {
-    return context(empty_bundle_, empty_helper_settings_,
-        empty_formatter_properties_, empty_helpers_);
+    return context(empty_bundle_, empty_element_properties_, empty_helpers_);
 }
 
-context context_factory::make(const std::string& n) const {
-    const auto& fp(properties_for_name(n));
-    const auto& hs(helper_settings_.helper_settings_by_name());
-    const auto& b(bundle_for_name(n));
-    return context(b, hs, fp, formatter_helpers_);
+context context_factory::make(const std::string& id) const {
+    const auto& ep(properties_for_id(id));
+    const auto& b(bundle_for_id(id));
+    return context(b, ep, formatter_helpers_);
 }
 
 } } } }

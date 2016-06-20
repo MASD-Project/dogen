@@ -26,10 +26,13 @@
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/settings/path_settings_factory.hpp"
+#include "dogen/quilt.cpp/types/settings/helper_settings_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/factory.hpp"
 #include "dogen/quilt.cpp/types/properties/transformer.hpp"
 #include "dogen/quilt.cpp/io/properties/formattable_io.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository_factory.hpp"
+#include "dogen/quilt.cpp/types/properties/element_properties_repository_factory.hpp"
+#include "dogen/quilt.cpp/types/properties/formatter_properties_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/workflow.hpp"
 
 namespace {
@@ -89,6 +92,13 @@ workflow::create_path_settings_activity(const dynamic::repository& rp,
     const auto r(f.make(root_object));
     BOOST_LOG_SEV(lg, debug) << "Created path settings for root object.";
     return r;
+}
+
+settings::helper_settings_repository workflow::
+create_helper_settings_repository(const dynamic::repository& rp,
+    const yarn::model& m) const {
+    settings::helper_settings_repository_factory f;
+    return f.make(rp, m);
 }
 
 path_derivatives_repository workflow::
@@ -158,8 +168,16 @@ workflow::from_factory_activity(const config::cpp_options& opts,
     return r;
 }
 
+element_properties_repository workflow::create_element_properties(
+    const settings::helper_settings_repository& hsrp,
+    const formatter_properties_repository& fprp,
+    const yarn::model& m) const {
+    element_properties_repository_factory f;
+    return f.make(hsrp, fprp, m);
+}
+
 std::pair<
-    properties::formatter_properties_repository,
+    element_properties_repository,
     std::forward_list<std::shared_ptr<properties::formattable> >
 >
 workflow::execute(const config::cpp_options& opts,
@@ -175,6 +193,7 @@ workflow::execute(const config::cpp_options& opts,
     const auto ps(create_path_settings_activity(rp, ro, fc));
     const auto pdrp(create_path_derivatives_repository(opts, ps, m));
 
+    const auto hsrp(create_helper_settings_repository(rp, m));
     auto fprp(create_formatter_properties(rp, ro, brp, pdrp, fc, m));
 
     auto formattables(from_transformer_activity(m));
@@ -184,7 +203,8 @@ workflow::execute(const config::cpp_options& opts,
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
 
-    return std::make_pair(fprp, formattables);
+    const auto eprp(create_element_properties(hsrp, fprp, m));
+    return std::make_pair(eprp, formattables);
 }
 
 } } } }

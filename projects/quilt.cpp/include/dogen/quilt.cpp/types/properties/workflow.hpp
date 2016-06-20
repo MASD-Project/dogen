@@ -33,12 +33,14 @@
 #include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/yarn/types/model.hpp"
+#include "dogen/quilt.cpp/types/settings/path_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
+#include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/properties/formattable.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository.hpp"
-#include "dogen/quilt.cpp/types/properties/formatter_properties_repository_factory.hpp"
-
+#include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
+#include "dogen/quilt.cpp/types/properties/formatter_properties_repository.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -58,6 +60,12 @@ private:
     create_path_settings_activity(const dynamic::repository& rp,
         const dynamic::object& root_object,
         const formatters::container& fc) const;
+
+    /**
+     * @brief Create the helper settings repository.
+     */
+    settings::helper_settings_repository create_helper_settings_repository(
+        const dynamic::repository& rp, const yarn::model& m) const;
 
     /**
      * @brief Create the path derivatives repository.
@@ -100,12 +108,17 @@ private:
         const formatters::container& fc,
         const yarn::model& m) const;
 
+    element_properties_repository create_element_properties(
+        const settings::helper_settings_repository& hsrp,
+        const formatter_properties_repository& fprp,
+        const yarn::model& m) const;
+
 public:
     /**
      * @brief Executes the workflow.
      */
     std::pair<
-        properties::formatter_properties_repository,
+        element_properties_repository,
         std::forward_list<std::shared_ptr<formattable> >
     >
     execute(const config::cpp_options& opts,
