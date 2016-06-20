@@ -252,7 +252,7 @@
 						</name>
 						<unparsed_type>bool</unparsed_type>
 						<parsed_type class_id="36" tracking_level="0" version="0">
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -275,7 +275,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children class_id="37" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
@@ -328,7 +328,7 @@
 						</name>
 						<unparsed_type>char</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -351,7 +351,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -404,7 +404,7 @@
 						</name>
 						<unparsed_type>unsigned char</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -427,7 +427,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -480,7 +480,7 @@
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -503,7 +503,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -556,7 +556,7 @@
 						</name>
 						<unparsed_type>unsigned int</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -579,7 +579,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -632,7 +632,7 @@
 						</name>
 						<unparsed_type>long</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -655,7 +655,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -708,7 +708,7 @@
 						</name>
 						<unparsed_type>unsigned long</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -731,7 +731,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -784,7 +784,7 @@
 						</name>
 						<unparsed_type>long long</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -807,7 +807,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -860,7 +860,7 @@
 						</name>
 						<unparsed_type>unsigned long long</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -883,7 +883,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -936,7 +936,7 @@
 						</name>
 						<unparsed_type>short</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -959,7 +959,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -1012,7 +1012,7 @@
 						</name>
 						<unparsed_type>unsigned short</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -1035,7 +1035,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -1088,7 +1088,7 @@
 						</name>
 						<unparsed_type>double</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -1111,7 +1111,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -1164,7 +1164,7 @@
 						</name>
 						<unparsed_type>float</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -1187,7 +1187,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>

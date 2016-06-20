@@ -192,7 +192,7 @@ name_tree name_tree_builder::make_name_tree(const node& n) {
     BOOST_LOG_SEV(lg, debug) << "Node: " << n.data();
 
     name_tree r;
-    r.parent(n.data());
+    r.current(n.data());
 
     pretty_printer pp(separators::double_colons);
     pp.add(n.data());

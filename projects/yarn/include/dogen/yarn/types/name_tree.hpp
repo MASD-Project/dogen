@@ -54,7 +54,7 @@ public:
 
 public:
     name_tree(
-        const dogen::yarn::name& parent,
+        const dogen::yarn::name& current,
         const std::list<dogen::yarn::name_tree>& children,
         const bool are_children_opaque,
         const bool is_circular_dependency,
@@ -70,13 +70,13 @@ private:
 
 public:
     /**
-     * @brief Name of the top-level, containing element.
+     * @brief Name for the current level of the tree.
      */
     /**@{*/
-    const dogen::yarn::name& parent() const;
-    dogen::yarn::name& parent();
-    void parent(const dogen::yarn::name& v);
-    void parent(const dogen::yarn::name&& v);
+    const dogen::yarn::name& current() const;
+    dogen::yarn::name& current();
+    void current(const dogen::yarn::name& v);
+    void current(const dogen::yarn::name&& v);
     /**@}*/
 
     /**
@@ -141,7 +141,7 @@ public:
     name_tree& operator=(name_tree other);
 
 private:
-    dogen::yarn::name parent_;
+    dogen::yarn::name current_;
     std::list<dogen::yarn::name_tree> children_;
     bool are_children_opaque_;
     bool is_circular_dependency_;

@@ -624,7 +624,7 @@ this is a long comment
 						</name>
 						<unparsed_type>colour_types</unparsed_type>
 						<parsed_type class_id="39" tracking_level="0" version="0">
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -647,7 +647,7 @@ this is a long comment
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children class_id="40" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
@@ -700,7 +700,7 @@ this is a long comment
 						</name>
 						<unparsed_type>book_types</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -723,7 +723,7 @@ this is a long comment
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -776,7 +776,7 @@ this is a long comment
 						</name>
 						<unparsed_type>pkg1::shape_types</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -799,7 +799,7 @@ this is a long comment
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>

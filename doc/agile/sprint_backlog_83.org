@@ -12,27 +12,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-20 Mon 01:03]
+#+CAPTION: Clock summary at [2016-06-20 Mon 01:21]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *14:39* |       |      | 100.0 |
+| *Total time*                                                                | *14:55* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 14:39   |       |      | 100.0 |
-| Active                                                                      |         | 14:39 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:18 |   8.9 |
-| COMPLETED Refactor helper settings                                          |         |       | 0:35 |   4.0 |
-| COMPLETED Add properties for helpers                                        |         |       | 1:35 |  10.8 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   9.4 |
-| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   5.7 |
-| COMPLETED Rename helper instances                                           |         |       | 0:37 |   4.2 |
-| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   8.0 |
-| COMPLETED Rename qualified to id                                            |         |       | 0:34 |   3.9 |
+| Stories                                                                     | 14:55   |       |      | 100.0 |
+| Active                                                                      |         | 14:55 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:18 |   8.7 |
+| COMPLETED Refactor helper settings                                          |         |       | 0:35 |   3.9 |
+| COMPLETED Add properties for helpers                                        |         |       | 1:35 |  10.6 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   9.3 |
+| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   5.6 |
+| COMPLETED Rename helper instances                                           |         |       | 0:37 |   4.1 |
+| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   7.8 |
+| COMPLETED Rename qualified to id                                            |         |       | 0:34 |   3.8 |
 | COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   5.3 |
-| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   8.9 |
-| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   5.8 |
-| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |  14.2 |
-| STARTED Compute yarn property related information                           |         |       | 1:36 |  10.9 |
+| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   8.7 |
+| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   5.7 |
+| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |  14.0 |
+| COMPLETED Rename =name_tree='s parent                                       |         |       | 0:16 |   1.8 |
+| STARTED Compute yarn property related information                           |         |       | 1:36 |  10.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -268,12 +269,13 @@ name.
 We need to populate the new name and name tree properties for
 qualified and identifiable name.
 
-*** Consider caching "all modules" in location                        :story:
+*** COMPLETED Rename =name_tree='s parent                             :story:
+    CLOSED: [2016-06-20 Mon 01:20]
+    CLOCK: [2016-06-20 Mon 01:04]--[2016-06-20 Mon 01:20] =>  0:16
 
-At present we are adding the module lists together to build the
-qualified name; location could have a "all modules" list that
-concatenates external, model and internal modules. We should look at
-performance before doing this change though.
+Parent is not a good name as we are referring to the current
+node. Maybe =self=? We went with =current= in the end. Not ideal, but
+at least it does not lie like =parent= did.
 
 *** STARTED Compute yarn property related information                 :story:
     CLOCK: [2016-06-18 Sat 23:05]--[2016-06-18 Sat 23:10] =>  0:05
@@ -311,11 +313,6 @@ from the name builder in quilt:
 - the name builder can then be responsible for programming language
   specific logic and calls to the pretty printer to populate the new
   properties.
-
-*** Rename =name_tree='s parent                                       :story:
-
-Parent is not a good name as we are referring to the current
-node. Maybe =self=?
 
 *** Create a top-level type to aggregate properties and helpers       :story:
 
@@ -400,6 +397,13 @@ code. We can remove all previous helper support.
 *** Create a settings class for the "requires" settings               :story:
 
 We need to populate these in a settings workflow of some kind.
+
+*** Consider caching "all modules" in location                        :story:
+
+At present we are adding the module lists together to build the
+qualified name; location could have a "all modules" list that
+concatenates external, model and internal modules. We should look at
+performance before doing this change though.
 
 *** Remove redundancy in properties' repositories                     :story:
 

@@ -364,7 +364,7 @@
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type class_id="36" tracking_level="0" version="0">
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -387,7 +387,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children class_id="37" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
@@ -547,7 +547,7 @@
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -570,7 +570,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>

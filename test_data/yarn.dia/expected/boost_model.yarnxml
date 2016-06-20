@@ -307,7 +307,7 @@
 						</name>
 						<unparsed_type>boost::property_tree::ptree</unparsed_type>
 						<parsed_type class_id="36" tracking_level="0" version="0">
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -330,7 +330,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children class_id="37" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
@@ -488,7 +488,7 @@
 						</name>
 						<unparsed_type>unsigned int</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -511,7 +511,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -669,7 +669,7 @@
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -692,7 +692,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -881,7 +881,7 @@
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -904,7 +904,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -958,7 +958,7 @@
 						</name>
 						<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -981,7 +981,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -1139,7 +1139,7 @@
 						</name>
 						<unparsed_type>int</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -1162,7 +1162,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -1320,7 +1320,7 @@
 						</name>
 						<unparsed_type>boost::shared_ptr&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -1343,7 +1343,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -1396,7 +1396,7 @@
 						</name>
 						<unparsed_type>std::vector&lt;boost::shared_ptr&lt;class_a&gt;&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -1419,7 +1419,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -1472,7 +1472,7 @@
 						</name>
 						<unparsed_type>std::unordered_map&lt;int,boost::shared_ptr&lt;class_a&gt;&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -1495,7 +1495,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -1548,7 +1548,7 @@
 						</name>
 						<unparsed_type>boost::shared_ptr&lt;pkg1::class_c&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -1571,7 +1571,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -1624,7 +1624,7 @@
 						</name>
 						<unparsed_type>boost::shared_ptr&lt;class_base&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -1647,7 +1647,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -1700,7 +1700,7 @@
 						</name>
 						<unparsed_type>std::vector&lt;boost::shared_ptr&lt;class_base&gt;&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -1723,7 +1723,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -1776,7 +1776,7 @@
 						</name>
 						<unparsed_type>pkg1::class_c</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -1799,7 +1799,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -1957,7 +1957,7 @@
 						</name>
 						<unparsed_type>boost::optional&lt;int&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -1980,7 +1980,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -2033,7 +2033,7 @@
 						</name>
 						<unparsed_type>boost::optional&lt;class_a&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -2056,7 +2056,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -2109,7 +2109,7 @@
 						</name>
 						<unparsed_type>boost::optional&lt;pkg1::class_c&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -2132,7 +2132,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -2185,7 +2185,7 @@
 						</name>
 						<unparsed_type>boost::optional&lt;std::vector&lt;class_a&gt;&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -2208,7 +2208,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -2366,7 +2366,7 @@
 						</name>
 						<unparsed_type>boost::asio::io_service</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -2389,7 +2389,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -2442,7 +2442,7 @@
 						</name>
 						<unparsed_type>boost::asio::ip::tcp::socket</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -2465,7 +2465,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -2518,7 +2518,7 @@
 						</name>
 						<unparsed_type>boost::asio::ip::tcp::acceptor</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -2541,7 +2541,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -2699,7 +2699,7 @@
 						</name>
 						<unparsed_type>boost::variant&lt;int,double&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -2722,7 +2722,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -2775,7 +2775,7 @@
 						</name>
 						<unparsed_type>boost::variant&lt;int,class_derived,double&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -2798,7 +2798,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -2851,7 +2851,7 @@
 						</name>
 						<unparsed_type>std::vector&lt;boost::variant&lt;int,class_derived,double&gt;&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -2874,7 +2874,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -2927,7 +2927,7 @@
 						</name>
 						<unparsed_type>boost::variant&lt;int,std::string,char&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -2950,7 +2950,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -3108,7 +3108,7 @@
 						</name>
 						<unparsed_type>boost::gregorian::date</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -3131,7 +3131,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -3184,7 +3184,7 @@
 						</name>
 						<unparsed_type>boost::posix_time::ptime</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -3207,7 +3207,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -3260,7 +3260,7 @@
 						</name>
 						<unparsed_type>boost::posix_time::time_duration</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -3283,7 +3283,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -3336,7 +3336,7 @@
 						</name>
 						<unparsed_type>std::list&lt;boost::gregorian::date&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -3359,7 +3359,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -3412,7 +3412,7 @@
 						</name>
 						<unparsed_type>std::list&lt;boost::posix_time::ptime&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -3435,7 +3435,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -3488,7 +3488,7 @@
 						</name>
 						<unparsed_type>std::list&lt;boost::posix_time::time_duration&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -3511,7 +3511,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -3669,7 +3669,7 @@
 						</name>
 						<unparsed_type>boost::filesystem::path</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -3692,7 +3692,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -3745,7 +3745,7 @@
 						</name>
 						<unparsed_type>std::list&lt;boost::filesystem::path&gt;</unparsed_type>
 						<parsed_type>
-							<parent>
+							<current>
 								<id></id>
 								<simple></simple>
 								<qualified>
@@ -3768,7 +3768,7 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</parent>
+							</current>
 							<children>
 								<count>0</count>
 								<item_version>0</item_version>

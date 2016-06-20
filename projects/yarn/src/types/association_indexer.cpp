@@ -63,7 +63,7 @@ void association_indexer::remove_duplicates(std::list<name>& names,
 
 void association_indexer::walk_name_tree(const intermediate_model& m,
     object& o, const name_tree& nt, bool& is_opaque) const {
-    const auto n(nt.parent());
+    const auto n(nt.current());
     if (is_opaque)
         o.opaque_associations().push_back(n);
     else
@@ -98,7 +98,7 @@ void association_indexer::walk_name_tree(const intermediate_model& m,
     for (const auto c : nt.children()) {
         const auto ac(object_types::associative_container);
         if (is_first && k->second.object_type() == ac)
-            o.associative_container_keys().push_back(c.parent());
+            o.associative_container_keys().push_back(c.current());
 
         walk_name_tree(m, o, c, is_opaque);
         is_first = false;

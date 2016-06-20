@@ -45,7 +45,7 @@ namespace yarn {
 std::size_t name_tree_hasher::hash(const name_tree& v) {
     std::size_t seed(0);
 
-    combine(seed, v.parent());
+    combine(seed, v.current());
     combine(seed, hash_std_list_dogen_yarn_name_tree(v.children()));
     combine(seed, v.are_children_opaque());
     combine(seed, v.is_circular_dependency());

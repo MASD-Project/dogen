@@ -28,13 +28,13 @@ name_tree::name_tree()
       is_circular_dependency_(static_cast<bool>(0)) { }
 
 name_tree::name_tree(
-    const dogen::yarn::name& parent,
+    const dogen::yarn::name& current,
     const std::list<dogen::yarn::name_tree>& children,
     const bool are_children_opaque,
     const bool is_circular_dependency,
     const std::string& encoded,
     const std::string& identifiable)
-    : parent_(parent),
+    : current_(current),
       children_(children),
       are_children_opaque_(are_children_opaque),
       is_circular_dependency_(is_circular_dependency),
@@ -43,7 +43,7 @@ name_tree::name_tree(
 
 void name_tree::swap(name_tree& other) noexcept {
     using std::swap;
-    swap(parent_, other.parent_);
+    swap(current_, other.current_);
     swap(children_, other.children_);
     swap(are_children_opaque_, other.are_children_opaque_);
     swap(is_circular_dependency_, other.is_circular_dependency_);
@@ -52,7 +52,7 @@ void name_tree::swap(name_tree& other) noexcept {
 }
 
 bool name_tree::operator==(const name_tree& rhs) const {
-    return parent_ == rhs.parent_ &&
+    return current_ == rhs.current_ &&
         children_ == rhs.children_ &&
         are_children_opaque_ == rhs.are_children_opaque_ &&
         is_circular_dependency_ == rhs.is_circular_dependency_ &&
@@ -66,20 +66,20 @@ name_tree& name_tree::operator=(name_tree other) {
     return *this;
 }
 
-const dogen::yarn::name& name_tree::parent() const {
-    return parent_;
+const dogen::yarn::name& name_tree::current() const {
+    return current_;
 }
 
-dogen::yarn::name& name_tree::parent() {
-    return parent_;
+dogen::yarn::name& name_tree::current() {
+    return current_;
 }
 
-void name_tree::parent(const dogen::yarn::name& v) {
-    parent_ = v;
+void name_tree::current(const dogen::yarn::name& v) {
+    current_ = v;
 }
 
-void name_tree::parent(const dogen::yarn::name&& v) {
-    parent_ = std::move(v);
+void name_tree::current(const dogen::yarn::name&& v) {
+    current_ = std::move(v);
 }
 
 const std::list<dogen::yarn::name_tree>& name_tree::children() const {

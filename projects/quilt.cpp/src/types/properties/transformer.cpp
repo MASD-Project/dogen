@@ -232,7 +232,7 @@ void transformer::to_nested_type_info(const yarn::name_tree& nt,
     nested_type_info& nti, std::string& complete_name,
     bool& requires_stream_manipulators) const {
 
-    const auto n(nt.parent());
+    const auto n(nt.current());
     name_builder b;
     const auto qualified_name(b.qualified_name(n));
     nti.name(qualified_name);
@@ -319,7 +319,7 @@ transformer::to_property_info(const yarn::attribute a, const bool is_immutable,
     std::string complete_name;
     const auto t(a.parsed_type());
     pi.name_tree(t);
-    if (::requires_manual_move_constructor(t.parent().simple()))
+    if (::requires_manual_move_constructor(t.current().simple()))
         requires_manual_move_constructor = true;
 
     to_nested_type_info(t, nti, complete_name, requires_stream_manipulators);

@@ -35,7 +35,7 @@ namespace yarn {
 bool attributes_expander::
 is_circular_dependency(const name& owner, const name_tree& nn) const {
 
-    if (owner == nn.parent())
+    if (owner == nn.current())
         return true;
 
     for (const auto& c : nn.children()) {

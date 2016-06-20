@@ -42,7 +42,7 @@ helper_properties_factory::helper_properties_factory(
 
 boost::optional<helper_descriptor> helper_properties_factory::
 make(const yarn::name_tree& nt, std::list<helper_properties>& properties) const {
-    const auto qn(nt.parent().id());
+    const auto qn(nt.current().id());
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << qn;
 
     /*

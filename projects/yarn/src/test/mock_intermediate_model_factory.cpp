@@ -113,7 +113,7 @@ dogen::yarn::name mock_model_name(unsigned int i) {
 
 dogen::yarn::name_tree mock_name_tree(const dogen::yarn::name& n) {
     dogen::yarn::name_tree r;
-    r.parent(n);
+    r.current(n);
     return r;
 }
 
@@ -121,10 +121,10 @@ dogen::yarn::name_tree
 mock_name_tree_shared_ptr(const dogen::yarn::name& n) {
     dogen::yarn::name_tree r;
     dogen::yarn::name_factory nf;
-    r.parent(nf.build_element_name("boost", "shared_ptr"));
+    r.current(nf.build_element_name("boost", "shared_ptr"));
 
     dogen::yarn::name_tree c;
-    c.parent(n);
+    c.current(n);
     r.children(std::list<dogen::yarn::name_tree> { c });
 
     return r;
@@ -139,13 +139,13 @@ dogen::yarn::name_tree mock_name_tree(
     typedef test::mock_intermediate_model_factory::attribute_types attribute_types;
     switch(pt) {
     case attribute_types::unsigned_int:
-        r.parent(nf.build_element_name(unsigned_int));
+        r.current(nf.build_element_name(unsigned_int));
         break;
     case attribute_types::boolean:
-        r.parent(nf.build_element_name(boolean));
+        r.current(nf.build_element_name(boolean));
         break;
     case attribute_types::boost_variant: {
-        r.parent(nf.build_element_name("boost", "variant"));
+        r.current(nf.build_element_name("boost", "variant"));
         r.children(std::list<name_tree> {
                 mock_name_tree(nf.build_element_name(boolean)),
                 mock_name_tree(nf.build_element_name(unsigned_int))
@@ -153,10 +153,10 @@ dogen::yarn::name_tree mock_name_tree(
         break;
     }
     case attribute_types::std_string:
-        r.parent(nf.build_element_name("std", "string"));
+        r.current(nf.build_element_name("std", "string"));
         break;
     case attribute_types::std_pair: {
-        r.parent(nf.build_element_name("std", "pair"));
+        r.current(nf.build_element_name("std", "pair"));
         r.children(std::list<name_tree> {
                 mock_name_tree(nf.build_element_name(boolean)),
                 mock_name_tree(nf.build_element_name(boolean))
@@ -1037,7 +1037,7 @@ object_with_attribute(const object_types ot, const attribute_types pt,
     if (pt == attribute_types::unsigned_int ||
         pt == attribute_types::boolean) {
         primitive ui;
-        ui.name(p.parsed_type().parent());
+        ui.name(p.parsed_type().current());
         insert_nameable(r.primitives(), ui);
 
         if (flags_.associations_indexed())
@@ -1396,7 +1396,7 @@ object_with_group_of_attributes_of_different_types(
     auto p1(mock_attribute(o0.name(), 1));
     lambda(p1);
     primitive ui;
-    ui.name(p1.parsed_type().parent());
+    ui.name(p1.parsed_type().current());
     insert_nameable(r.primitives(), ui);
 
     auto o3(make_value_object(3, mn));

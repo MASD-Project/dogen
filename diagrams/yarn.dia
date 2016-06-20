@@ -489,7 +489,7 @@ case only the parent name is populated and there are no children.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#parent#</dia:string>
+            <dia:string>#current#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#name#</dia:string>
@@ -498,7 +498,7 @@ case only the parent name is populated and there are no children.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Name of the top-level, containing element.#</dia:string>
+            <dia:string>#Name for the current level of the tree.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

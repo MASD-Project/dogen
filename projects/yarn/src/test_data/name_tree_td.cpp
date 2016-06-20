@@ -61,7 +61,7 @@ name_tree_generator::name_tree_generator() : position_(0) { }
 
 void name_tree_generator::
 populate(const unsigned int position, result_type& v) {
-    v.parent(create_dogen_yarn_name(position + 0));
+    v.current(create_dogen_yarn_name(position + 0));
     v.children(create_std_list_dogen_yarn_name_tree(position + 1));
     v.are_children_opaque(create_bool(position + 2));
     v.is_circular_dependency(create_bool(position + 3));

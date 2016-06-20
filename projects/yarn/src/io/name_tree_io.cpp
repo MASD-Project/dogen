@@ -57,7 +57,7 @@ std::ostream& operator<<(std::ostream& s, const name_tree& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::name_tree\"" << ", "
-      << "\"parent\": " << v.parent() << ", "
+      << "\"current\": " << v.current() << ", "
       << "\"children\": " << v.children() << ", "
       << "\"are_children_opaque\": " << v.are_children_opaque() << ", "
       << "\"is_circular_dependency\": " << v.is_circular_dependency() << ", "

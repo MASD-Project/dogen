@@ -186,9 +186,9 @@ resolve_partial_type(const intermediate_model& m, name_tree& nt) const {
     for (auto& cnt : nt.children())
         resolve_partial_type(m, cnt);
 
-    const name n(resolve_partial_type(m, nt.parent()));
+    const name n(resolve_partial_type(m, nt.current()));
     BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.id() << ".";
-    nt.parent(n);
+    nt.current(n);
 }
 
 void resolver::resolve_attributes(const intermediate_model& m,
