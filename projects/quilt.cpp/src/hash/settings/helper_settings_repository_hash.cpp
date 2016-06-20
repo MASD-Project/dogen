@@ -48,7 +48,7 @@ namespace settings {
 std::size_t helper_settings_repository_hasher::hash(const helper_settings_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_settings_helper_settings(v.helper_settings_by_name()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_settings_helper_settings(v.by_id()));
     return seed;
 }
 

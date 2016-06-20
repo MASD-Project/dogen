@@ -54,7 +54,7 @@ bundle_repository_generator::bundle_repository_generator() : position_(0) { }
 
 void bundle_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.bundles_by_name(create_std_unordered_map_std_string_dogen_quilt_cpp_settings_bundle(position + 0));
+    v.by_id(create_std_unordered_map_std_string_dogen_quilt_cpp_settings_bundle(position + 0));
 }
 
 bundle_repository_generator::result_type

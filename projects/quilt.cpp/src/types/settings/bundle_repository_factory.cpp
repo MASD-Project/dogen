@@ -63,7 +63,7 @@ public:
 private:
     void insert(const yarn::name& n, const settings::bundle& b) {
         const auto pair(std::make_pair(n.id(), b));
-        const auto res(result_.bundles_by_name().insert(pair));
+        const auto res(result_.by_id().insert(pair));
         if (!res.second) {
             const auto qn(n.id());
             BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
@@ -140,7 +140,7 @@ make(const dynamic::repository& rp, const dynamic::object& root_object,
     yarn::name_factory nf;
     const auto n(nf.build_element_in_model(m.name(), registrar_name));
     const auto pair(std::make_pair(n.id(), f.make()));
-    auto& deps(r.bundles_by_name());
+    auto& deps(r.by_id());
     const auto res(deps.insert(pair));
     if (!res.second) {
         const auto qn(n.id());

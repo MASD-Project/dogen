@@ -76,7 +76,7 @@ properties_for_id(const std::string& n) const {
 
 const settings::bundle& context_factory::
 bundle_for_id(const std::string& n) const {
-    const auto& b(bundle_.bundles_by_name());
+    const auto& b(bundle_.by_id());
     const auto i(b.find(n));
     if (i == b.end()) {
         BOOST_LOG_SEV(lg, error) << bundle_not_found << n;

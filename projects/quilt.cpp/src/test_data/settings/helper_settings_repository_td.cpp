@@ -54,7 +54,7 @@ helper_settings_repository_generator::helper_settings_repository_generator() : p
 
 void helper_settings_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.helper_settings_by_name(create_std_unordered_map_std_string_dogen_quilt_cpp_settings_helper_settings(position + 0));
+    v.by_id(create_std_unordered_map_std_string_dogen_quilt_cpp_settings_helper_settings(position + 0));
 }
 
 helper_settings_repository_generator::result_type

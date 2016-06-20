@@ -40,8 +40,8 @@ helper_properties_factory::helper_properties_factory(
     const settings::helper_settings_repository& hsrp) : helper_settings_(hsrp) {
 }
 
-boost::optional<helper_descriptor> helper_properties_factory::
-make(const yarn::name_tree& nt, std::list<helper_properties>& properties) const {
+boost::optional<helper_descriptor> helper_properties_factory::make(
+    const yarn::name_tree& nt, std::list<helper_properties>& properties) const {
     const auto qn(nt.current().id());
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << qn;
 
@@ -49,7 +49,7 @@ make(const yarn::name_tree& nt, std::list<helper_properties>& properties) const 
      * Does the top-level type require any helpers? If not, we don't
      * need to do any work.
      */
-    const auto& hsbn(helper_settings_.helper_settings_by_name());
+    const auto& hsbn(helper_settings_.by_id());
     const auto i(hsbn.find(qn));
     if (i == hsbn.end()) {
         BOOST_LOG_SEV(lg, debug) << "No settings for type.";

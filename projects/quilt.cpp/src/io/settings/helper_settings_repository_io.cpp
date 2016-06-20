@@ -56,7 +56,7 @@ namespace settings {
 std::ostream& operator<<(std::ostream& s, const helper_settings_repository& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::settings::helper_settings_repository\"" << ", "
-      << "\"helper_settings_by_name\": " << v.helper_settings_by_name()
+      << "\"by_id\": " << v.by_id()
       << " }";
     return(s);
 }

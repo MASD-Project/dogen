@@ -143,7 +143,7 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
 
 settings::aspect_settings inclusion_dependencies_builder::
 get_aspect_settings(const yarn::name& n) const {
-    const auto& bn(bundle_repository_.bundles_by_name());
+    const auto& bn(bundle_repository_.by_id());
     const auto i(bn.find(n.id()));
     if (i == bn.end()) {
         const auto qn(n.id());

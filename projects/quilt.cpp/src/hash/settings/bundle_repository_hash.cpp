@@ -48,7 +48,7 @@ namespace settings {
 std::size_t bundle_repository_hasher::hash(const bundle_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_settings_bundle(v.bundles_by_name()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_settings_bundle(v.by_id()));
     return seed;
 }
 

@@ -25,16 +25,16 @@ namespace quilt {
 namespace cpp {
 namespace settings {
 
-helper_settings_repository::helper_settings_repository(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& helper_settings_by_name)
-    : helper_settings_by_name_(helper_settings_by_name) { }
+helper_settings_repository::helper_settings_repository(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& by_id)
+    : by_id_(by_id) { }
 
 void helper_settings_repository::swap(helper_settings_repository& other) noexcept {
     using std::swap;
-    swap(helper_settings_by_name_, other.helper_settings_by_name_);
+    swap(by_id_, other.by_id_);
 }
 
 bool helper_settings_repository::operator==(const helper_settings_repository& rhs) const {
-    return helper_settings_by_name_ == rhs.helper_settings_by_name_;
+    return by_id_ == rhs.by_id_;
 }
 
 helper_settings_repository& helper_settings_repository::operator=(helper_settings_repository other) {
@@ -43,20 +43,20 @@ helper_settings_repository& helper_settings_repository::operator=(helper_setting
     return *this;
 }
 
-const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& helper_settings_repository::helper_settings_by_name() const {
-    return helper_settings_by_name_;
+const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& helper_settings_repository::by_id() const {
+    return by_id_;
 }
 
-std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& helper_settings_repository::helper_settings_by_name() {
-    return helper_settings_by_name_;
+std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& helper_settings_repository::by_id() {
+    return by_id_;
 }
 
-void helper_settings_repository::helper_settings_by_name(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& v) {
-    helper_settings_by_name_ = v;
+void helper_settings_repository::by_id(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& v) {
+    by_id_ = v;
 }
 
-void helper_settings_repository::helper_settings_by_name(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>&& v) {
-    helper_settings_by_name_ = std::move(v);
+void helper_settings_repository::by_id(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>&& v) {
+    by_id_ = std::move(v);
 }
 
 } } } }

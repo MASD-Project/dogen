@@ -44,7 +44,7 @@ public:
     ~helper_settings_repository() = default;
 
 public:
-    explicit helper_settings_repository(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& helper_settings_by_name);
+    explicit helper_settings_repository(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& by_id);
 
 private:
     template<typename Archive>
@@ -54,10 +54,10 @@ private:
     friend void boost::serialization::load(Archive& ar, helper_settings_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& helper_settings_by_name() const;
-    std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& helper_settings_by_name();
-    void helper_settings_by_name(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& v);
-    void helper_settings_by_name(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>&& v);
+    const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& by_id() const;
+    std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& by_id();
+    void by_id(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& v);
+    void by_id(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>&& v);
 
 public:
     bool operator==(const helper_settings_repository& rhs) const;
@@ -70,7 +70,7 @@ public:
     helper_settings_repository& operator=(helper_settings_repository other);
 
 private:
-    std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings> helper_settings_by_name_;
+    std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings> by_id_;
 };
 
 } } } }

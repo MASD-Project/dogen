@@ -230,8 +230,8 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     r->namespaces(b.namespace_list(n));
     r->id(n.id());
 
-    const auto i(brp.bundles_by_name().find(n.id()));
-    if (i == brp.bundles_by_name().end()) {
+    const auto i(brp.by_id().find(n.id()));
+    if (i == brp.by_id().end()) {
         const auto qn(n.id());
         BOOST_LOG_SEV(lg, error) << bundle_not_found_for_name << qn;
         BOOST_THROW_EXCEPTION(building_error(bundle_not_found_for_name + qn));
@@ -401,7 +401,7 @@ make_includers(
     auto inc(std::make_shared<includers_info>());
     inc->id(n.id());
     const auto gs(gsf.make(cpp_modeline_name, root_object));
-    brp.bundles_by_name()[inc->id()].general_settings(gs);
+    brp.by_id()[inc->id()].general_settings(gs);
 
     for(const auto& pair : includes_by_facet_name) {
         const auto& facet_name(pair.first);

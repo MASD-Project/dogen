@@ -44,7 +44,7 @@ public:
     ~bundle_repository() = default;
 
 public:
-    explicit bundle_repository(const std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle>& bundles_by_name);
+    explicit bundle_repository(const std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle>& by_id);
 
 private:
     template<typename Archive>
@@ -54,10 +54,10 @@ private:
     friend void boost::serialization::load(Archive& ar, bundle_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle>& bundles_by_name() const;
-    std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle>& bundles_by_name();
-    void bundles_by_name(const std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle>& v);
-    void bundles_by_name(const std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle>&& v);
+    const std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle>& by_id() const;
+    std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle>& by_id();
+    void by_id(const std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle>& v);
+    void by_id(const std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle>&& v);
 
 public:
     bool operator==(const bundle_repository& rhs) const;
@@ -70,7 +70,7 @@ public:
     bundle_repository& operator=(bundle_repository other);
 
 private:
-    std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle> bundles_by_name_;
+    std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle> by_id_;
 };
 
 } } } }

@@ -48,7 +48,7 @@ make(const dynamic::repository& rp, const yarn::model& m) const {
         if (!hs)
             continue;
 
-        r.helper_settings_by_name()[e.name().id()] = *hs;
+        r.by_id()[e.name().id()] = *hs;
     }
     BOOST_LOG_SEV(lg, debug) << "Finished making helper settings" << r;
     return r;
