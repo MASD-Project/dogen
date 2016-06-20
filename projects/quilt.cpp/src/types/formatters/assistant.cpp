@@ -66,6 +66,7 @@ const std::string formatter_properties_missing(
     "Could not find formatter properties for formatter: ");
 const std::string unexpected_opaque_settings(
     "Unexpectd opaque settings type.");
+const std::string family_not_found("Family not found: ");
 
 }
 
@@ -394,10 +395,34 @@ void assistant::add_helper_methods(const properties::class_info& c) {
 }
 
 void assistant::add_helper_methods() {
-    /*for (const auto& hp : context_.element_properties().helper_properties()) {
+    for (const auto& hp : context_.element_properties().helper_properties()) {
+        const auto i(context_.helpers().find(hp.settings().family()));
+        if (i == context_.helpers().end()) {
+            BOOST_LOG_SEV(lg, debug) << "Could not find helpers for family: "
+                                     << hp.settings().family();
+            continue;
+        }
+        BOOST_LOG_SEV(lg, debug) << "Found helpers for family: "
+                                 << hp.settings().family();
 
+        const auto j(i->second.find(ownership_hierarchy_.formatter_name()));
+        if (j == i->second.end()) {
+            BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
+                                     << ownership_hierarchy_.formatter_name();
+            continue;
+        }
+        BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
+                                 << ownership_hierarchy_.formatter_name();
+
+
+        const auto& helper(*j->second);
+        if (!helper.is_enabled(*this)) {
+            BOOST_LOG_SEV(lg, debug) << "Helper is not enabled.";
+            continue;
+        }
+
+        helper.format(*this, hp);
     }
-    */
 }
 
 bool assistant::requires_hashing_helper_method(
