@@ -19,9 +19,15 @@
  *
  */
 #include <sstream>
+#include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/helper_descriptor_td.hpp"
 
 namespace {
+
+dogen::yarn::name
+create_dogen_yarn_name(const unsigned int position) {
+    return dogen::yarn::name_generator::create(position);
+}
 
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
@@ -40,9 +46,9 @@ helper_descriptor_generator::helper_descriptor_generator() : position_(0) { }
 
 void helper_descriptor_generator::
 populate(const unsigned int position, result_type& v) {
-    v.identifiable_name(create_std_string(position + 0));
-    v.complete_name(create_std_string(position + 1));
-    v.complete_identifiable_name(create_std_string(position + 2));
+    v.helped_type(create_dogen_yarn_name(position + 0));
+    v.name_tree_encoded(create_std_string(position + 1));
+    v.name_tree_identifiable(create_std_string(position + 2));
 }
 
 helper_descriptor_generator::result_type

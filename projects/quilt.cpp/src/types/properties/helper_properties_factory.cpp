@@ -21,7 +21,6 @@
 #include <unordered_set>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
-#include "dogen/quilt.cpp/types/properties/name_builder.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties_factory.hpp"
 
 namespace {
@@ -42,15 +41,15 @@ helper_properties_factory::helper_properties_factory(
 
 boost::optional<helper_descriptor> helper_properties_factory::make(
     const yarn::name_tree& nt, std::list<helper_properties>& properties) const {
-    const auto qn(nt.current().id());
-    BOOST_LOG_SEV(lg, debug) << "Processing type: " << qn;
+    const auto id(nt.current().id());
+    BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
     /*
      * Does the top-level type require any helpers? If not, we don't
      * need to do any work.
      */
     const auto& hsbn(helper_settings_.by_id());
-    const auto i(hsbn.find(qn));
+    const auto i(hsbn.find(id));
     if (i == hsbn.end()) {
         BOOST_LOG_SEV(lg, debug) << "No settings for type.";
         return boost::optional<helper_descriptor>();
@@ -78,11 +77,10 @@ boost::optional<helper_descriptor> helper_properties_factory::make(
     BOOST_LOG_SEV(lg, debug) << "Helper settings: " << hs;
     hp.settings(hs);
 
-    name_builder b;
     helper_descriptor r;
-    r.identifiable_name(b.identifiable_name(qn));
-    r.complete_name(nt.encoded());
-    r.complete_identifiable_name(b.identifiable_name(nt.encoded()));
+    r.helped_type(nt.current());
+    r.name_tree_encoded(nt.encoded());
+    r.name_tree_identifiable(nt.identifiable());
     hp.descriptors(r);
     properties.push_back(hp);
 
@@ -105,7 +103,7 @@ make(const std::list<yarn::attribute>& attributes) const {
     std::list<helper_properties> r;
     std::unordered_set<std::string> done;
     for (const auto& i : instances) {
-        const auto cn(i.descriptors().complete_name());
+        const auto cn(i.descriptors().name_tree_identifiable());
         if (done.find(cn) == done.end())
             continue;
 

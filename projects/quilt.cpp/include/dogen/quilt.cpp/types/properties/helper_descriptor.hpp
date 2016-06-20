@@ -27,6 +27,7 @@
 
 #include <string>
 #include <algorithm>
+#include "dogen/yarn/types/name.hpp"
 #include "dogen/quilt.cpp/serialization/properties/helper_descriptor_fwd_ser.hpp"
 
 namespace dogen {
@@ -43,9 +44,9 @@ public:
 
 public:
     helper_descriptor(
-        const std::string& identifiable_name,
-        const std::string& complete_name,
-        const std::string& complete_identifiable_name);
+        const dogen::yarn::name& helped_type,
+        const std::string& name_tree_encoded,
+        const std::string& name_tree_identifiable);
 
 private:
     template<typename Archive>
@@ -55,41 +56,20 @@ private:
     friend void boost::serialization::load(Archive& ar, helper_descriptor& v, unsigned int version);
 
 public:
-    /**
-     * @brief Representation of the nested tree that is usable as an identifier.
-     *
-     * Example: std_map_std_string_std_string.
-     */
-    /**@{*/
-    const std::string& identifiable_name() const;
-    std::string& identifiable_name();
-    void identifiable_name(const std::string& v);
-    void identifiable_name(const std::string&& v);
-    /**@}*/
+    const dogen::yarn::name& helped_type() const;
+    dogen::yarn::name& helped_type();
+    void helped_type(const dogen::yarn::name& v);
+    void helped_type(const dogen::yarn::name&& v);
 
-    /**
-     * @brief Qualified name of the helping target, using a C++ syntax.
-     *
-     * Example: std::map.
-     */
-    /**@{*/
-    const std::string& complete_name() const;
-    std::string& complete_name();
-    void complete_name(const std::string& v);
-    void complete_name(const std::string&& v);
-    /**@}*/
+    const std::string& name_tree_encoded() const;
+    std::string& name_tree_encoded();
+    void name_tree_encoded(const std::string& v);
+    void name_tree_encoded(const std::string&& v);
 
-    /**
-     * @brief Qualified name of the helping target, usable as an identifier.
-     *
-     * Example: std_map.
-     */
-    /**@{*/
-    const std::string& complete_identifiable_name() const;
-    std::string& complete_identifiable_name();
-    void complete_identifiable_name(const std::string& v);
-    void complete_identifiable_name(const std::string&& v);
-    /**@}*/
+    const std::string& name_tree_identifiable() const;
+    std::string& name_tree_identifiable();
+    void name_tree_identifiable(const std::string& v);
+    void name_tree_identifiable(const std::string&& v);
 
 public:
     bool operator==(const helper_descriptor& rhs) const;
@@ -102,9 +82,9 @@ public:
     helper_descriptor& operator=(helper_descriptor other);
 
 private:
-    std::string identifiable_name_;
-    std::string complete_name_;
-    std::string complete_identifiable_name_;
+    dogen::yarn::name helped_type_;
+    std::string name_tree_encoded_;
+    std::string name_tree_identifiable_;
 };
 
 } } } }

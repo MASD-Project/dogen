@@ -26,24 +26,24 @@ namespace cpp {
 namespace properties {
 
 helper_descriptor::helper_descriptor(
-    const std::string& identifiable_name,
-    const std::string& complete_name,
-    const std::string& complete_identifiable_name)
-    : identifiable_name_(identifiable_name),
-      complete_name_(complete_name),
-      complete_identifiable_name_(complete_identifiable_name) { }
+    const dogen::yarn::name& helped_type,
+    const std::string& name_tree_encoded,
+    const std::string& name_tree_identifiable)
+    : helped_type_(helped_type),
+      name_tree_encoded_(name_tree_encoded),
+      name_tree_identifiable_(name_tree_identifiable) { }
 
 void helper_descriptor::swap(helper_descriptor& other) noexcept {
     using std::swap;
-    swap(identifiable_name_, other.identifiable_name_);
-    swap(complete_name_, other.complete_name_);
-    swap(complete_identifiable_name_, other.complete_identifiable_name_);
+    swap(helped_type_, other.helped_type_);
+    swap(name_tree_encoded_, other.name_tree_encoded_);
+    swap(name_tree_identifiable_, other.name_tree_identifiable_);
 }
 
 bool helper_descriptor::operator==(const helper_descriptor& rhs) const {
-    return identifiable_name_ == rhs.identifiable_name_ &&
-        complete_name_ == rhs.complete_name_ &&
-        complete_identifiable_name_ == rhs.complete_identifiable_name_;
+    return helped_type_ == rhs.helped_type_ &&
+        name_tree_encoded_ == rhs.name_tree_encoded_ &&
+        name_tree_identifiable_ == rhs.name_tree_identifiable_;
 }
 
 helper_descriptor& helper_descriptor::operator=(helper_descriptor other) {
@@ -52,52 +52,52 @@ helper_descriptor& helper_descriptor::operator=(helper_descriptor other) {
     return *this;
 }
 
-const std::string& helper_descriptor::identifiable_name() const {
-    return identifiable_name_;
+const dogen::yarn::name& helper_descriptor::helped_type() const {
+    return helped_type_;
 }
 
-std::string& helper_descriptor::identifiable_name() {
-    return identifiable_name_;
+dogen::yarn::name& helper_descriptor::helped_type() {
+    return helped_type_;
 }
 
-void helper_descriptor::identifiable_name(const std::string& v) {
-    identifiable_name_ = v;
+void helper_descriptor::helped_type(const dogen::yarn::name& v) {
+    helped_type_ = v;
 }
 
-void helper_descriptor::identifiable_name(const std::string&& v) {
-    identifiable_name_ = std::move(v);
+void helper_descriptor::helped_type(const dogen::yarn::name&& v) {
+    helped_type_ = std::move(v);
 }
 
-const std::string& helper_descriptor::complete_name() const {
-    return complete_name_;
+const std::string& helper_descriptor::name_tree_encoded() const {
+    return name_tree_encoded_;
 }
 
-std::string& helper_descriptor::complete_name() {
-    return complete_name_;
+std::string& helper_descriptor::name_tree_encoded() {
+    return name_tree_encoded_;
 }
 
-void helper_descriptor::complete_name(const std::string& v) {
-    complete_name_ = v;
+void helper_descriptor::name_tree_encoded(const std::string& v) {
+    name_tree_encoded_ = v;
 }
 
-void helper_descriptor::complete_name(const std::string&& v) {
-    complete_name_ = std::move(v);
+void helper_descriptor::name_tree_encoded(const std::string&& v) {
+    name_tree_encoded_ = std::move(v);
 }
 
-const std::string& helper_descriptor::complete_identifiable_name() const {
-    return complete_identifiable_name_;
+const std::string& helper_descriptor::name_tree_identifiable() const {
+    return name_tree_identifiable_;
 }
 
-std::string& helper_descriptor::complete_identifiable_name() {
-    return complete_identifiable_name_;
+std::string& helper_descriptor::name_tree_identifiable() {
+    return name_tree_identifiable_;
 }
 
-void helper_descriptor::complete_identifiable_name(const std::string& v) {
-    complete_identifiable_name_ = v;
+void helper_descriptor::name_tree_identifiable(const std::string& v) {
+    name_tree_identifiable_ = v;
 }
 
-void helper_descriptor::complete_identifiable_name(const std::string&& v) {
-    complete_identifiable_name_ = std::move(v);
+void helper_descriptor::name_tree_identifiable(const std::string&& v) {
+    name_tree_identifiable_ = std::move(v);
 }
 
 } } } }

@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen/yarn/io/name_io.hpp"
 #include "dogen/quilt.cpp/io/properties/helper_descriptor_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -37,9 +38,9 @@ namespace properties {
 std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::properties::helper_descriptor\"" << ", "
-      << "\"identifiable_name\": " << "\"" << tidy_up_string(v.identifiable_name()) << "\"" << ", "
-      << "\"complete_name\": " << "\"" << tidy_up_string(v.complete_name()) << "\"" << ", "
-      << "\"complete_identifiable_name\": " << "\"" << tidy_up_string(v.complete_identifiable_name()) << "\""
+      << "\"helped_type\": " << v.helped_type() << ", "
+      << "\"name_tree_encoded\": " << "\"" << tidy_up_string(v.name_tree_encoded()) << "\"" << ", "
+      << "\"name_tree_identifiable\": " << "\"" << tidy_up_string(v.name_tree_identifiable()) << "\""
       << " }";
     return(s);
 }

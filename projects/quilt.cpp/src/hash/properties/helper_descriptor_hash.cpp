@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/helper_descriptor_hash.hpp"
 
 namespace {
@@ -38,9 +39,9 @@ namespace properties {
 std::size_t helper_descriptor_hasher::hash(const helper_descriptor& v) {
     std::size_t seed(0);
 
-    combine(seed, v.identifiable_name());
-    combine(seed, v.complete_name());
-    combine(seed, v.complete_identifiable_name());
+    combine(seed, v.helped_type());
+    combine(seed, v.name_tree_encoded());
+    combine(seed, v.name_tree_identifiable());
 
     return seed;
 }
