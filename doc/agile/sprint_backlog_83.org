@@ -12,28 +12,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-20 Mon 15:39]
+#+CAPTION: Clock summary at [2016-06-20 Mon 16:08]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *15:22* |       |      | 100.0 |
+| *Total time*                                                                | *15:45* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 15:22   |       |      | 100.0 |
-| Active                                                                      |         | 15:22 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:45 |  11.4 |
-| COMPLETED Refactor helper settings                                          |         |       | 0:35 |   3.8 |
-| COMPLETED Add properties for helpers                                        |         |       | 1:35 |  10.3 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   9.0 |
-| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   5.4 |
-| COMPLETED Rename helper instances                                           |         |       | 0:37 |   4.0 |
-| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   7.6 |
-| COMPLETED Rename qualified to id                                            |         |       | 0:34 |   3.7 |
-| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   5.1 |
-| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   8.5 |
-| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   5.5 |
-| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |  13.6 |
+| Stories                                                                     | 15:45   |       |      | 100.0 |
+| Active                                                                      |         | 15:45 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:45 |  11.1 |
+| COMPLETED Refactor helper settings                                          |         |       | 0:35 |   3.7 |
+| COMPLETED Add properties for helpers                                        |         |       | 1:35 |  10.1 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   8.8 |
+| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   5.3 |
+| COMPLETED Rename helper instances                                           |         |       | 0:37 |   3.9 |
+| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   7.4 |
+| COMPLETED Rename qualified to id                                            |         |       | 0:34 |   3.6 |
+| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   5.0 |
+| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   8.3 |
+| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   5.4 |
+| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |  13.2 |
 | COMPLETED Rename =name_tree='s parent                                       |         |       | 0:16 |   1.7 |
-| STARTED Compute yarn property related information                           |         |       | 1:36 |  10.4 |
+| COMPLETED Compute yarn property related information                         |         |       | 1:36 |  10.2 |
+| STARTED Create a top-level type to aggregate properties and helpers         |         |       | 0:23 |   2.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -383,7 +384,8 @@ totally independent. We should create a namespace for all of these
 classes and a workflow that produces the data ready for consumption. A
 tentative name is =manifest=.
 
-*** STARTED Compute yarn property related information                 :story:
+*** COMPLETED Compute yarn property related information               :story:
+    CLOSED: [2016-06-20 Mon 15:44]
     CLOCK: [2016-06-18 Sat 23:05]--[2016-06-18 Sat 23:10] =>  0:05
     CLOCK: [2016-06-18 Sat 22:52]--[2016-06-18 Sat 23:04] =>  0:12
     CLOCK: [2016-06-18 Sat 22:05]--[2016-06-18 Sat 22:51] =>  0:46
@@ -420,7 +422,8 @@ from the name builder in quilt:
   specific logic and calls to the pretty printer to populate the new
   properties.
 
-*** Create a top-level type to aggregate properties and helpers       :story:
+*** STARTED Create a top-level type to aggregate properties and helpers :story:
+    CLOCK: [2016-06-20 Mon 15:44]--[2016-06-20 Mon 16:07] =>  0:23
 
 We need a way to create an aggregate type that contains all of the
 "auxiliary" information about a type: basically formatter properties
@@ -431,7 +434,9 @@ This type should be called =element_properties=.
 - change the return type of the properties workflow to be element
   properties (well pair of element properties and formattables - for
   now).
-- have a look at the context type in formatters.
+- have a look at the context type in formatters. Looked at this, we
+  just need to do minor updates to it to take in the element
+  properties.
 
 *** Add an helper method interface                                    :story:
 
@@ -647,7 +652,8 @@ comparing the entire state of the object. We need a way to mark
 properties against each facet in the meta-data.
 
 ** Deprecated
-*** Investigate slow down                                             :story:
+*** CANCELLED Investigate slow down                                   :story:
+    CLOSED: [2016-06-20 Mon 15:51]
 
 *Rationale*: Speed is back to normal so lets not waste time on this.
 
@@ -656,7 +662,8 @@ and formatter properties into the repositories. This seems to have had
 a very negative impact in performance. We need to ensure performance
 goes back to normal after the hacks have been removed.
 
-*** Consider splitting =formattables::transformer=                    :story:
+*** CANCELLED Consider splitting =formattables::transformer=          :story:
+    CLOSED: [2016-06-20 Mon 15:51]
 
 *Rationale*: We will decom transformer so no need to worry.
 
