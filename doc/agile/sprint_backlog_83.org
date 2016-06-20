@@ -12,32 +12,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-20 Mon 01:21]
+#+CAPTION: Clock summary at [2016-06-20 Mon 15:39]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *14:55* |       |      | 100.0 |
+| *Total time*                                                                | *15:22* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 14:55   |       |      | 100.0 |
-| Active                                                                      |         | 14:55 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:18 |   8.7 |
-| COMPLETED Refactor helper settings                                          |         |       | 0:35 |   3.9 |
-| COMPLETED Add properties for helpers                                        |         |       | 1:35 |  10.6 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   9.3 |
-| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   5.6 |
-| COMPLETED Rename helper instances                                           |         |       | 0:37 |   4.1 |
-| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   7.8 |
-| COMPLETED Rename qualified to id                                            |         |       | 0:34 |   3.8 |
-| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   5.3 |
-| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   8.7 |
-| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   5.7 |
-| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |  14.0 |
-| COMPLETED Rename =name_tree='s parent                                       |         |       | 0:16 |   1.8 |
-| STARTED Compute yarn property related information                           |         |       | 1:36 |  10.7 |
+| Stories                                                                     | 15:22   |       |      | 100.0 |
+| Active                                                                      |         | 15:22 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:45 |  11.4 |
+| COMPLETED Refactor helper settings                                          |         |       | 0:35 |   3.8 |
+| COMPLETED Add properties for helpers                                        |         |       | 1:35 |  10.3 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   9.0 |
+| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   5.4 |
+| COMPLETED Rename helper instances                                           |         |       | 0:37 |   4.0 |
+| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   7.6 |
+| COMPLETED Rename qualified to id                                            |         |       | 0:34 |   3.7 |
+| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   5.1 |
+| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   8.5 |
+| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   5.5 |
+| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |  13.6 |
+| COMPLETED Rename =name_tree='s parent                                       |         |       | 0:16 |   1.7 |
+| STARTED Compute yarn property related information                           |         |       | 1:36 |  10.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-06-20 Mon 15:12]--[2016-06-20 Mon 15:39] =>  0:27
     CLOCK: [2016-06-17 Fri 23:46]--[2016-06-17 Fri 23:50] =>  0:04
     CLOCK: [2016-06-17 Fri 22:55]--[2016-06-17 Fri 23:45] =>  0:50
     CLOCK: [2016-06-17 Fri 10:40]--[2016-06-17 Fri 11:04] =>  0:24
@@ -276,6 +277,111 @@ qualified and identifiable name.
 Parent is not a good name as we are referring to the current
 node. Maybe =self=? We went with =current= in the end. Not ideal, but
 at least it does not lie like =parent= did.
+
+*** COMPLETED Create a module indexer in sml                          :story:
+    CLOSED: [2016-06-20 Mon 15:39]
+
+*Rationale*: This was done as part of the yarn refactors.
+
+We need to create a class that computes module containment. At present
+this is done in JSON hydrator.
+
+In addition, we also have huge amounts of nonsense in injector, in
+particular =add_containing_module_to_non_contained_entities=. This
+should also be handled by the module indexer.
+
+*** COMPLETED Remove complete name and use qualified name             :story:
+    CLOSED: [2016-06-20 Mon 15:39]
+
+*Rationale*: This won't be a problem after the
+formattables/properties/fabric refactor in quilt.
+
+At present we have both complete name and qualified name in
+formatables. Qualified name is blank. We should remove complete name
+and populate qualified name.
+
+This is in nested type info.
+
+*** COMPLETED Consider reducing the number of qname lookups in cpp model :story:
+    CLOSED: [2016-06-20 Mon 15:39]
+
+*Rationale*: This has largely been done, where it can be done.
+
+At present we are using qnames all over the place in CPP. Nothing
+stops us from using strings instead of qnames if that is more
+efficient.
+
+What is worse is that we seem to be doing a ridiculous amount of qname
+lookups. It would be much nicer if we could somehow have all the data
+in the right shape to avoid doing so many lookups.
+
+This should be done as part of the move to =yarn=.
+
+*** COMPLETED Thoughts on simplifying the formattables generation     :story:
+    CLOSED: [2016-06-20 Mon 15:39]
+
+*Rationale*: This is already under way with the
+formattables/properties/fabric refactor in quilt.
+
+We have a problem in the way which we are doing the formattables:
+because we are doing model traversals for each of the factories, we
+cannot easily introduce a set of manually generated qnames such as the
+registrar and includers. However, if we started off the main workflow
+by creating a structure like so:
+
+- qname
+- optional entity (new base class in yarn); if null we need to create
+  extensions as an empty object.
+
+We then need a list of these that get passed in to all repository
+factories. These use a visitor of entity to resolve to a type (where
+required).
+
+We can inject types to this list that have a qname but no entity. For
+these we generate some parts of the formatter properties. Actually, we
+still need to generate inclusion lists even when there is no
+entity. Perhaps we need to create a new method in the provider that
+does not take an yarn entity but still generates the inclusion list.
+
+Actually this should all be done in yarn. We should have zero qname
+look-ups coming out of yarn, just follow references. This story is a
+variation of the split between "partial" models and "full" models.
+
+Well not everything should be done in yarn. We still need to create a
+structure with the properties above, but that is done by iterating
+through a list in the yarn model.
+
+One slight problem with this approach: sometimes we need to preserve
+some relationships in the newly generated objects. For registrar we
+need to preserve the model leaves. For the includers / master headers
+we need to express somehow the inclusion relationship at the formatter
+level. The latter is definitely a special case because it is a pure
+C++ concept: include files cannot be modeled in yarn. However,
+registrar is slightly different because we still need to compute the
+includes based on the leaves. This means that the above approach will
+not provide a clean solution, unless we synthesise an yarn object when
+providing the includes. And of course we need to be careful taking
+that route or else we will end up generating the object across all
+facets.
+
+*** COMPLETED Move all properties in =cpp= to a properties namespace  :story:
+    CLOSED: [2016-06-20 Mon 15:39]
+
+Once all formattables are gone, we should have only properties left in
+the formattables namespace. We should then rename it to
+properties. Thus we have two kinds of things: settings, which are a
+direct translation of meta-data without any further processing and
+properties which require processing.
+
+Merged stories:
+
+*Split formatter properties and associated classes from formattables*
+
+We have two kinds of data: the formattables themselves (mapped from
+yarn) and associated data (formatter properties). The latter is
+totally independent. We should create a namespace for all of these
+classes and a workflow that produces the data ready for consumption. A
+tentative name is =manifest=.
 
 *** STARTED Compute yarn property related information                 :story:
     CLOCK: [2016-06-18 Sat 23:05]--[2016-06-18 Sat 23:10] =>  0:05
@@ -541,3 +647,32 @@ comparing the entire state of the object. We need a way to mark
 properties against each facet in the meta-data.
 
 ** Deprecated
+*** Investigate slow down                                             :story:
+
+*Rationale*: Speed is back to normal so lets not waste time on this.
+
+With commit 7e89ddb we introduced a set of hacks to inject settings
+and formatter properties into the repositories. This seems to have had
+a very negative impact in performance. We need to ensure performance
+goes back to normal after the hacks have been removed.
+
+*** Consider splitting =formattables::transformer=                    :story:
+
+*Rationale*: We will decom transformer so no need to worry.
+
+We have two different responsibilities within transformer:
+
+- to perform an individual (1-1) transformation of a tack type into a
+  formatable;
+- to determine how many transformations of a tack type are required,
+  and to do them.
+
+Maybe we should have a transformer sub-workflow that collaborates with
+specific transformers, aligned to =cpp= types
+(e.g. =class_info_transformer=, =enum_info_transformer= and so on,
+each taking different tack types). The role of the top-level
+transformer is to call all of the sub-transformers for a given tack
+type.
+
+The other option is to align them to tack types and to produce
+different =cpp= types.

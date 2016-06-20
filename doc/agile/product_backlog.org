@@ -1,5 +1,6 @@
 #+title: Product Backlog
 #+options: date:nil toc:nil author:nil num:nil
+#+tags: { reviewing(r) }
 #+tags: { story(s) epic(e) }
 
 * Stories
@@ -32,32 +33,6 @@ In summary:
   manipulator; if set, do not dereference the pointer. For equality do
   a pointer comparison, for io dump the address, etc.
 
-*** Consider adding =fileset= to formatters                           :story:
-
-We are using collections of files quite a bit, and it makes sense to
-create an abstraction for it such as a =fileset=. However, for this to
-work properly we need to add at least one basic behaviours: the
-ability to merge two file sets. Or else we will end up having to
-unpack the files, then merging them, then creating a new fileset.
-
-Problem is, we either create the fileset as a non-generatable type -
-not ideal - or we create it as generatable and need to add this as a
-free function. We need to wait until dogen has support for merging
-code generation.
-
-*** Create a debug build for clang in travis                          :story:
-
-In order to enable code coverage we need to have a debug build. For
-this we need to setup travis with a build matrix, with two build types
-for clang (debug and release).
-
-Example YML: [[https://github.com/Microsoft/GSL/blob/master/.travis.yml][GSL]]
-
-We almost made this work, but now we have a problem: using BUILD_TYPE
-seems to disable the stage folder in travis (though it works
-locally). We probably shouldn't use the stage folder since its not a
-CMake idiom.
-
 *** Using =std::set<std::string>= causes compilation errors           :story:
 
 In theory sets of strings (and any other type that has =operator<=
@@ -65,76 +40,18 @@ should work out of the box, even though we do not support sets of
 dogen types. However, when we tried to use a set of strings we got a
 whole load of compilation errors in serialisation, etc.
 
+*** Using =std::unordered_map<my_enum, ...>= fails equality           :story:
+
+We changed the map in =name= to an unordered map and suddenly the
+equality tests started to fail. Since we use it for strings quite a
+lot, it may be related to the fact that we used an enum? Add a test
+case on the test models and see if we can reproduce it.
+
 *** Stitcher log file names look weird                                :story:
 
 At present we are writing files with names like:
 
 : dogen.stitcher...log
-
-*** Add more types to =quilt::cpp= canned tests                       :story:
-
-Originally we used the =*_info= types in the canned tests, but these
-are all about to be removed. We need to hunt for types in the
-=quilt::cpp= model and add those to the canned tests.
-
-*** Move all properties in =cpp= to a properties namespace            :story:
-
-Once all formattables are gone, we should have only properties left in
-the formattables namespace. We should then rename it to
-properties. Thus we have two kinds of things: settings, which are a
-direct translation of meta-data without any further processing and
-properties which require processing.
-
-Merged stories:
-
-*Split formatter properties and associated classes from formattables*
-
-We have two kinds of data: the formattables themselves (mapped from
-yarn) and associated data (formatter properties). The latter is
-totally independent. We should create a namespace for all of these
-classes and a workflow that produces the data ready for consumption. A
-tentative name is =manifest=.
-
-*** Investigate slow down                                             :story:
-
-With commit 7e89ddb we introduced a set of hacks to inject settings
-and formatter properties into the repositories. This seems to have had
-a very negative impact in performance. We need to ensure performance
-goes back to normal after the hacks have been removed.
-
-*** Tidy-up master include generation                                 :story:
-
-At present we have one humongous hack in the factory to generate the
-master includers. How to do this properly:
-
-- wait until we start using yarn types.
-- loop through the yarn model instead of the path derivatives.
-- use a visitor to dispatch the types.
-- do not filter out services?
-- filter registrars etc based on type dispatching.
-
-*** Create a UML profile to formalise yarn concepts                   :story:
-
-Profile should include the hashable, etc changes.
-
-*** Create a map between UML/MOF terminology and yarn                 :story:
-
-It would be helpful to know what a yarn type means in terms of
-UML/MOF, and perhaps even explain why we have chosen certain names
-instead of the UML ones. We should also cover the modeling of
-relationships and the relation between yarn concepts and UML/MOF
-classes. This will form a chapter in the manual.
-
-The UML specification is available [[http://www.omg.org/spec/UML/2.5/][here]] and MOF specification is
-available [[http://www.omg.org/spec/MOF/2.5][here]].
-
-We need a way to uniquely identify a property. This could be done by
-appending the containing type's qualified name to the property name.
-
-See also [[http://www.uml-diagrams.org/][The Unified Modeling Language]] for a more accessible
-treatment.
-
-See [[http://www-01.ibm.com/support/knowledgecenter/SS5JSH_9.1.2/com.ibm.xtools.transform.uml2.cpp.doc/topics/rucppprofile.html][Stereotypes of the UML-to-C++ transformation profile]] for ideas.
 
 *** Remove =service= stereotype                                       :story:
 
@@ -297,31 +214,6 @@ by the inclusion dependencies builder. The only slight snag is that we
 need to first resolve the type into a type family and then go to the
 helper interface.
 
-*** Add =interface= stereotype                                        :story:
-
-Even though we can't generate much outside of plain types, we should
-already have support for a stereotype of =interface= which for now
-behaves just like =service=. In the future we may be able to code
-generate the interface. This should be implemented in yarn as a type
-on its own right.
-
-- add an interface which is: element, operatable, relatable. Not
-  stateful. We should also have a "is abstract" flag
-  somewhere. Perhaps in relatable?
-- this should only be done after the UML profile for yarn.
-
-*** Implement module expander test                                    :story:
-
-We copied across the code for the module expander test from yarn json
-but didn't actually finished implementing it.
-
-*** Create =src= and =include= facets                                 :story:
-
-At present we have some formatters that are not in the traditional
-facets such as =types=, etc. We should make facets for them. We need
-to check what the current facet name is. There should only be one case
-of this, the CMakeLists formatters.
-
 *** Copyright holders is scalar when it should be an array            :story:
 
 At present its only possible to specify a single copyright holder. It
@@ -359,17 +251,6 @@ We are manually ignoring services when calculating leaves.
 
 At the moment we use extensions such as =xmlyarn=. It should really be
 =.xml.yarn= or something of the kind.
-
-*** Consider renaming includers                                       :story:
-
-Its very confusing to have header files that include lots of other
-header files called "includers". There is too much overloading. We
-should consider calling them "master header files" as per Schaling
-terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
-
-*** Update Windows CDash agent                                        :story:
-
-We need to get the build green on the Windows agent again.
 
 *** Add tests to identifier parser with invalid names                 :story:
 
@@ -447,7 +328,7 @@ Further thoughts:
   generates the file. Actually we probably can't have this in quilt
   because we still need formatter properties.
 
-*** Perform an in-depth product backlog groom                         :story:
+*** Perform an in-depth product backlog groom                          :epic:
 
 We now have lots of references to types (and models) that have been
 refactored away - either renamed or deleted altogether. As we are
@@ -455,14 +336,10 @@ reaching the final form for =yarn= and =quilt=, we need to go
 through all the stories and update them to the new world.
 
 - add two todos to the backlog: not reviewed, reviewed
+  (=<REVIEWING>=). Actually, added org mode tag support for this to
+  make it more obvious and filterable.
 - mark all stores as not reviewed
 - go through all the stories and mark them suitably as we review them.
-
-*** Consider allowing renaming of "internal" types                    :story:
-
-Users may want to change the =_visitor= postfix for visitors or the
-boost serialisation registrar name. This could be achieved via
-meta-data.
 
 *** Create a set of definitions for tagging and meta-data             :story:
 
@@ -544,61 +421,6 @@ generation backend).
 A first step for this would be to have a language enumeration in yarn
 which is a property of the model, and one entry of which is "language
 agnostic".
-
-*** Thoughts on simplifying the formattables generation               :story:
-
-We have a problem in the way which we are doing the formattables:
-because we are doing model traversals for each of the factories, we
-cannot easily introduce a set of manually generated qnames such as the
-registrar and includers. However, if we started off the main workflow
-by creating a structure like so:
-
-- qname
-- optional entity (new base class in yarn); if null we need to create
-  extensions as an empty object.
-
-We then need a list of these that get passed in to all repository
-factories. These use a visitor of entity to resolve to a type (where
-required).
-
-We can inject types to this list that have a qname but no entity. For
-these we generate some parts of the formatter properties. Actually, we
-still need to generate inclusion lists even when there is no
-entity. Perhaps we need to create a new method in the provider that
-does not take an yarn entity but still generates the inclusion list.
-
-Actually this should all be done in yarn. We should have zero qname
-look-ups coming out of yarn, just follow references. This story is a
-variation of the split between "partial" models and "full" models.
-
-Well not everything should be done in yarn. We still need to create a
-structure with the properties above, but that is done by iterating
-through a list in the yarn model.
-
-One slight problem with this approach: sometimes we need to preserve
-some relationships in the newly generated objects. For registrar we
-need to preserve the model leaves. For the includers / master headers
-we need to express somehow the inclusion relationship at the formatter
-level. The latter is definitely a special case because it is a pure
-C++ concept: include files cannot be modeled in yarn. However,
-registrar is slightly different because we still need to compute the
-includes based on the leaves. This means that the above approach will
-not provide a clean solution, unless we synthesise an yarn object when
-providing the includes. And of course we need to be careful taking
-that route or else we will end up generating the object across all
-facets.
-
-*** Consider reducing the number of qname lookups in cpp model        :story:
-
-At present we are using qnames all over the place in CPP. Nothing
-stops us from using strings instead of qnames if that is more
-efficient.
-
-What is worse is that we seem to be doing a ridiculous amount of qname
-lookups. It would be much nicer if we could somehow have all the data
-in the right shape to avoid doing so many lookups.
-
-This should be done as part of the move to =yarn=.
 
 *** Handling of managed directories is incorrect                      :story:
 
@@ -686,14 +508,6 @@ need to compute inclusion, path etc or not.
 At present we are relying on empty header guards to determine what to
 do in boilerplate. We should use boost optional.
 
-*** Remove complete name and use qualified name                       :story:
-
-At present we have both complete name and qualified name in
-formatables. Qualified name is blank. We should remove complete name
-and populate qualified name.
-
-This is in nested type info.
-
 *** Consider renaming registrar in boost serialisation                :story:
 
 At present we have a registrar formatter that does the boost
@@ -721,7 +535,7 @@ should probably have a "postfix" that can be added in case of
 clashes. The generated code will not cause problems, its just the
 formattables pipeline.
 
-*** Create more "utility" members in class info                       :story:
+*** Create more "utility" members for formatters                      :story:
 
 One way of making the templates a bit more manageable is to avoid
 having really complex conditions. We could simplify these by giving
@@ -757,14 +571,6 @@ unparsed types before merging. There is a circular dependency here.
 
 We somehow need a first pass to obtain all the primitives and a second
 pass to parse.
-
-*** Improve file importer errors                                      :story:
-
-It would be nice if one could know the file, line and column where an
-error has occurred when importing any imported file. Even for Dia,
-this would make troubleshooting much easier. We need to add some
-information to the meta-model to keep track of the source of the
-types: file, line start, line end perhaps.
 
 *** Use pointer container in registrars                               :story:
 
@@ -1008,25 +814,6 @@ with:
 
 As per stitch template.
 
-*** Consider splitting =formattables::transformer=                    :story:
-
-We have two different responsibilities within transformer:
-
-- to perform an individual (1-1) transformation of a tack type into a
-  formatable;
-- to determine how many transformations of a tack type are required,
-  and to do them.
-
-Maybe we should have a transformer sub-workflow that collaborates with
-specific transformers, aligned to =cpp= types
-(e.g. =class_info_transformer=, =enum_info_transformer= and so on,
-each taking different tack types). The role of the top-level
-transformer is to call all of the sub-transformers for a given tack
-type.
-
-The other option is to align them to tack types and to produce
-different =cpp= types.
-
 *** Formatters need different =enabled= defaults                      :story:
 
 We should be able to disable some formatters such as forward
@@ -1207,15 +994,6 @@ single pace, and use boost spirit or tokenizer. For one such
 implementation with spirit see:
 
 [[http://boost-spirit.com/home/2010/02/24/parsing-skippers-and-skipping-parsers/][Parsing Skippers and Skipping Parsers]]
-
-*** Create a module indexer in sml                                    :story:
-
-We need to create a class that computes module containment. At present
-this is done in JSON hydrator.
-
-In addition, we also have huge amounts of nonsense in injector, in
-particular =add_containing_module_to_non_contained_entities=. This
-should also be handled by the module indexer.
 
 *** Assignment operator seems to pass types by value                  :story:
 
@@ -1528,6 +1306,96 @@ text.
 The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
+*** Consider allowing renaming of "internal" types                    :story:
+
+Users may want to change the =_visitor= postfix for visitors or the
+boost serialisation registrar name. This could be achieved via
+meta-data.
+
+*** Add =interface= stereotype                                        :story:
+
+Even though we can't generate much outside of plain types, we should
+already have support for a stereotype of =interface= which for now
+behaves just like =service=. In the future we may be able to code
+generate the interface. This should be implemented in yarn as a type
+on its own right.
+
+- add an interface which is: element, operatable, relatable. Not
+  stateful. We should also have a "is abstract" flag
+  somewhere. Perhaps in relatable?
+- this should only be done after the UML profile for yarn.
+
+*** Implement module expander test                                    :story:
+
+We copied across the code for the module expander test from yarn json
+but didn't actually finished implementing it.
+
+*** Create =src= and =include= facets                                 :story:
+
+At present we have some formatters that are not in the traditional
+facets such as =types=, etc. We should make facets for them. We need
+to check what the current facet name is. There should only be one case
+of this, the CMakeLists formatters.
+
+*** Add more types to =quilt::cpp= canned tests                       :story:
+
+Originally we used the =*_info= types in the canned tests, but these
+are all about to be removed. We need to hunt for types in the
+=quilt::cpp= model and add those to the canned tests.
+
+*** Consider renaming includers                                       :story:
+
+Its very confusing to have header files that include lots of other
+header files called "includers". There is too much overloading. We
+should consider calling them "master header files" as per Schaling
+terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
+
+*** Tidy-up master include generation                                 :story:
+
+At present we have one humongous hack in the factory to generate the
+master includers. How to do this properly:
+
+- wait until we start using yarn types.
+- loop through the yarn model instead of the path derivatives.
+- use a visitor to dispatch the types.
+- do not filter out services?
+- filter registrars etc based on type dispatching.
+
+*** Create a UML profile to formalise yarn concepts                    :epic:
+
+Profile should include the hashable, etc changes.
+
+*** Create a map between UML/MOF terminology and yarn                  :epic:
+
+It would be helpful to know what a yarn type means in terms of
+UML/MOF, and perhaps even explain why we have chosen certain names
+instead of the UML ones. We should also cover the modeling of
+relationships and the relation between yarn concepts and UML/MOF
+classes. This will form a chapter in the manual.
+
+The UML specification is available [[http://www.omg.org/spec/UML/2.5/][here]] and MOF specification is
+available [[http://www.omg.org/spec/MOF/2.5][here]].
+
+We need a way to uniquely identify a property. This could be done by
+appending the containing type's qualified name to the property name.
+
+See also [[http://www.uml-diagrams.org/][The Unified Modeling Language]] for a more accessible
+treatment.
+
+See [[http://www-01.ibm.com/support/knowledgecenter/SS5JSH_9.1.2/com.ibm.xtools.transform.uml2.cpp.doc/topics/rucppprofile.html][Stereotypes of the UML-to-C++ transformation profile]] for ideas.
+
+*** Consider adding =fileset= to formatters                           :story:
+
+We are using collections of files quite a bit, and it makes sense to
+create an abstraction for it such as a =fileset=. However, for this to
+work properly we need to add at least one basic behaviours: the
+ability to merge two file sets. Or else we will end up having to
+unpack the files, then merging them, then creating a new fileset.
+
+Problem is, we either create the fileset as a non-generatable type -
+not ideal - or we create it as generatable and need to add this as a
+free function. We need to wait until dogen has support for merging
+code generation.
 
 *** Add support for Language Agnostic Models (LAM)                    :story:
 
@@ -2625,6 +2493,16 @@ name for positions in model space. We could probably call it
 
 The context should be provided using Boost Exception diagnostics and
 dumped into =std::cerr= at the very top.
+
+Merged stories:
+
+*Improve file importer errors*
+
+It would be nice if one could know the file, line and column where an
+error has occurred when importing any imported file. Even for Dia,
+this would make troubleshooting much easier. We need to add some
+information to the meta-model to keep track of the source of the
+types: file, line start, line end perhaps.
 
 *** Add warning support for validation                                :story:
 
@@ -5205,6 +5083,15 @@ that declares all of the application tags in one go. If most tags are
 exception specific, then the first approach is better. If many tags
 are shared, the latter is preferable.
 
+In terms of dia/frontend, we can simply add these as attributes of the
+exception and have the code generator do the right thing for
+C++. Other languages would/could have different implementations.
+
+Once we implement this we need to go through all exceptions and add
+all the needed attributes; in many cases we are being lazy and logging
+one message but throwing a less informative one. This should really be
+captured in the exception type.
+
 *** Ensure an error info tag is not set already before we set it      :story:
 
 Now that we will start making use of error info tags in anger, one
@@ -5219,6 +5106,40 @@ is, what then? We can't throw.
 
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
+
+*** Add support for bintray                                           :story:
+
+There is a new web application that interfaces with GitHub:
+[[https://bintray.com/][bintray]].
+
+Notes:
+
+- an account was created [[https://bintray.com/mcraveiro][linked to GitHub]].
+- it supports the uploads of [[https://bintray.com/mcraveiro/deb][debs]].
+- [[https://bintray.com/docs/usermanual/uploads/uploads_howdoiuploadmystufftobintray.html][How Do I Upload My Stuff to Bintray?]]
+- [[https://github.com/tim-janik/beast][Beast]] project [[https://raw.githubusercontent.com/tim-janik/beast/master/README.md][README]] with emblems
+- Beast [[https://github.com/tim-janik/beast/blob/master/.travis.yml][travis.yml]]
+- [[https://github.com/tim-janik/rapicorn/blob/master/citool.sh.][citool.sh]] script from [[https://github.com/tim-janik/rapicorn][Rapicorn]] project and their [[https://raw.githubusercontent.com/tim-janik/rapicorn/master/README.md][README]].
+
+*** Resurrect CDash agents                                            :story:
+
+CDash has bitrotted and is no longer working.
+
+- we need to get the build green on the Windows agent again.
+- we need to get the linux agent up and running again.
+
+*** Create a debug build for clang in travis                          :story:
+
+In order to enable code coverage we need to have a debug build. For
+this we need to setup travis with a build matrix, with two build types
+for clang (debug and release).
+
+Example YML: [[https://github.com/Microsoft/GSL/blob/master/.travis.yml][GSL]]
+
+We almost made this work, but now we have a problem: using BUILD_TYPE
+seems to disable the stage folder in travis (though it works
+locally). We probably shouldn't use the stage folder since its not a
+CMake idiom.
 
 *** Add doxygen build in travis using GitHub pages                    :story:
 
@@ -6242,20 +6163,6 @@ Notes:
 
 - [[https://github.com/elbeno/skeleton][Skeleton]]: project to generate c++ project skeletons.
 
-*** Add support for bintray                                           :story:
-
-There is a new web application that interfaces with GitHub:
-[[https://bintray.com/][bintray]].
-
-Notes:
-
-- an account was created [[https://bintray.com/mcraveiro][linked to GitHub]].
-- it supports the uploads of [[https://bintray.com/mcraveiro/deb][debs]].
-- [[https://bintray.com/docs/usermanual/uploads/uploads_howdoiuploadmystufftobintray.html][How Do I Upload My Stuff to Bintray?]]
-- [[https://github.com/tim-janik/beast][Beast]] project [[https://raw.githubusercontent.com/tim-janik/beast/master/README.md][README]] with emblems
-- Beast [[https://github.com/tim-janik/beast/blob/master/.travis.yml][travis.yml]]
-- [[https://github.com/tim-janik/rapicorn/blob/master/citool.sh.][citool.sh]] script from [[https://github.com/tim-janik/rapicorn][Rapicorn]] project and their [[https://raw.githubusercontent.com/tim-janik/rapicorn/master/README.md][README]].
-
 *** Unmaintained emblem                                               :story:
 
 If we ever reach a point where Dogen is complete according to the
@@ -6329,7 +6236,7 @@ trim down the obvious ones:
 Basically any feature which we are not using at present and cannot
 think of an obvious use case.
 
-*** Thoughts around multi-kernel support                               :epic:
+*** Thoughts around multi-kernel support                     :reviewing:epic:
 
 Dogen only has a single backend kernel: quilt. This story looks into
 how the world looks like if we want to support multiple of these.
@@ -6654,20 +6561,20 @@ Source code is available [[http://repo.isis.vanderbilt.edu/GME/old/15.5.8/][here
 In MDSD, we have the notion of "location strngs":
 
 #+begin_quote
-A third and very useful technique is the application of location strings that identify the
-transformation or the template used, as well as the underlying model elements in the gen-
-erated code. A location string might look like this:
+A third and very useful technique is the application of location
+strings that identify the transformation or the template used, as well
+as the underlying model elements in the gen- erated code. A location
+string might look like this:
 
 : [2003-10-04 17:05:36]
 : GENERATED FROM TEMPLATE SomeTemplate
 : MODEL ELEMENT aPackage::aClass::SomeOperation().
 #+end_quote
 
-This may be a useful thing.
+This may be a useful thing. However, adding dates and dogen version
+etc will cause spurious diffs.
 
 *** Consider adding support for OCL                                   :story:
-
-<REVIEWING>
 
 UML supports adding constraints via [[http://www.omg.org/spec/OCL/2.4/][OCL]], the Object Constraint
 Language. We could generate code from it.
