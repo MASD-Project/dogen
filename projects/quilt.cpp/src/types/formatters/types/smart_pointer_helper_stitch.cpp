@@ -51,8 +51,7 @@ std::string smart_pointer_helper::helper_name() const {
     return r;
 }
 
-bool smart_pointer_helper::is_enabled(const assistant& /*a*/,
-    const properties::class_info& /*owner*/) const {
+bool smart_pointer_helper::is_enabled(const assistant& /*a*/) const {
     return true;
 }
 

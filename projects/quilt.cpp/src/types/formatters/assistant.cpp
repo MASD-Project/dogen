@@ -393,6 +393,13 @@ void assistant::add_helper_methods(const properties::class_info& c) {
     }
 }
 
+void assistant::add_helper_methods() {
+    /*for (const auto& hp : context_.element_properties().helper_properties()) {
+
+    }
+    */
+}
+
 bool assistant::requires_hashing_helper_method(
     const properties::nested_type_info& t) const {
     return nested_type_formatting_assistant::

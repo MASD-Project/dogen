@@ -33067,7 +33067,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="443,151"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="442.95,150.95;493.985,157.05"/>
+        <dia:rectangle val="442.95,150.95;493.985,156.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="443,151"/>
@@ -33076,7 +33076,7 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="50.935000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#context#</dia:string>
@@ -33191,33 +33191,10 @@ main, or from another initialiser.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#formatter_properties#</dia:string>
+            <dia:string>#element_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, properties::formatter_properties&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#helper_properties#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;properties::helper_properties&gt;#</dia:string>
+            <dia:string>#properties::element_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -35899,7 +35876,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="489,178"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="468.417,156.95;489.75,178.8"/>
+        <dia:rectangle val="468.417,156.15;489.75,178.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -35908,7 +35885,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="489,178"/>
         <dia:point val="489,174"/>
         <dia:point val="468.467,174"/>
-        <dia:point val="468.467,157"/>
+        <dia:point val="468.467,156.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -36361,7 +36338,7 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#descriptors#</dia:string>
+            <dia:string>#descriptor#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#properties::helper_descriptor#</dia:string>

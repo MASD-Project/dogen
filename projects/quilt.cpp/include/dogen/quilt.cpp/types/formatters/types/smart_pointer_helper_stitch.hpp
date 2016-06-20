@@ -43,8 +43,7 @@ public:
     bool requires_explicit_call() const;
     std::string function_name() const;
     std::string helper_name() const;
-    bool is_enabled(const assistant& a,
-        const properties::class_info& owner) const;
+    bool is_enabled(const assistant& a) const;
     void format(assistant& a, const yarn::name_tree& nt) const;
 };
 
