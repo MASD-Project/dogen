@@ -12,35 +12,35 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-21 Tue 23:08]
+#+CAPTION: Clock summary at [2016-06-21 Tue 23:34]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *22:32* |       |      | 100.0 |
+| *Total time*                                                                | *22:56* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 22:32   |       |      | 100.0 |
-| Active                                                                      |         | 22:32 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:19 |  10.3 |
-| STARTED Manual updates and blog posts                                       |         |       | 0:44 |   3.3 |
-| COMPLETED Refactor helper settings                                          |         |       | 0:35 |   2.6 |
-| COMPLETED Add properties for helpers                                        |         |       | 1:35 |   7.0 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   6.1 |
-| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   3.7 |
+| Stories                                                                     | 22:56   |       |      | 100.0 |
+| Active                                                                      |         | 22:56 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:19 |  10.1 |
+| STARTED Manual updates and blog posts                                       |         |       | 0:44 |   3.2 |
+| COMPLETED Refactor helper settings                                          |         |       | 0:35 |   2.5 |
+| COMPLETED Add properties for helpers                                        |         |       | 1:35 |   6.9 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   6.0 |
+| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   3.6 |
 | COMPLETED Rename helper instances                                           |         |       | 0:37 |   2.7 |
-| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   5.2 |
-| COMPLETED Rename qualified to id                                            |         |       | 0:51 |   3.8 |
-| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   3.5 |
-| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   5.8 |
-| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   3.8 |
-| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |   9.2 |
+| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   5.1 |
+| COMPLETED Rename qualified to id                                            |         |       | 0:51 |   3.7 |
+| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   3.4 |
+| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   5.7 |
+| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   3.7 |
+| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |   9.1 |
 | COMPLETED Rename =name_tree='s parent                                       |         |       | 0:16 |   1.2 |
-| COMPLETED Compute yarn property related information                         |         |       | 1:36 |   7.1 |
+| COMPLETED Compute yarn property related information                         |         |       | 1:36 |   7.0 |
 | COMPLETED Remove redundancy in properties' repositories                     |         |       | 0:22 |   1.6 |
-| COMPLETED Create a top-level type to aggregate properties and helpers       |         |       | 1:42 |   7.5 |
+| COMPLETED Create a top-level type to aggregate properties and helpers       |         |       | 1:42 |   7.4 |
 | COMPLETED Refactor helper descriptor                                        |         |       | 0:23 |   1.7 |
-| COMPLETED Add an helper method interface                                    |         |       | 1:03 |   4.7 |
-| STARTED Remove encoded from yarn's name tree                                |         |       | 1:00 |   4.4 |
-| STARTED Implement types helper methods with new helper infrastructure       |         |       | 1:05 |   4.8 |
+| COMPLETED Add an helper method interface                                    |         |       | 1:03 |   4.6 |
+| COMPLETED Remove encoded from yarn's name tree                              |         |       | 1:24 |   6.1 |
+| STARTED Implement types helper methods with new helper infrastructure       |         |       | 1:05 |   4.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -526,7 +526,9 @@ Tasks:
   settings. It should also consult the registrar to see if there are
   any helpers available for this formatter and family.
 
-*** STARTED Remove encoded from yarn's name tree                      :story:
+*** COMPLETED Remove encoded from yarn's name tree                    :story:
+    CLOSED: [2016-06-21 Tue 23:33]
+    CLOCK: [2016-06-21 Tue 23:09]--[2016-06-21 Tue 23:33] =>  0:24
     CLOCK: [2016-06-21 Tue 22:08]--[2016-06-21 Tue 23:08] =>  1:00
 
 Encoded was a mistake: we don't really need to preserve the

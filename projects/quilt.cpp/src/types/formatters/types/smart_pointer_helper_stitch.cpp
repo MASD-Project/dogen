@@ -58,12 +58,11 @@ bool smart_pointer_helper::is_enabled(const assistant& /*a*/) const {
 void smart_pointer_helper::
 format(assistant& a, const properties::helper_properties& hp) const {
     {
-        const auto ht(hp.descriptor().helped_type());
-        const auto ns(a.make_namespaces(ht));
-        auto snf(a.make_scoped_namespace_formatter(ns));
+        const auto d(hp.descriptor());
+        auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
 a.stream() << std::endl;
-a.stream() << "inline bool operator==(const " << a.make_qualified_name(ht) << "& lhs," << std::endl;
-a.stream() << "const " << a.make_qualified_name(ht) << "& rhs) {" << std::endl;
+a.stream() << "inline bool operator==(const " << d.name_tree_qualified() << "& lhs," << std::endl;
+a.stream() << "const " << d.name_tree_qualified() << "& rhs) {" << std::endl;
 a.stream() << "    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;

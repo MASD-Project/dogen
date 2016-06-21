@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <algorithm>
-#include "dogen/yarn/types/name.hpp"
 #include "dogen/quilt.cpp/serialization/properties/helper_descriptor_fwd_ser.hpp"
 
 namespace dogen {
@@ -44,8 +44,10 @@ public:
 
 public:
     helper_descriptor(
-        const dogen::yarn::name& helped_type,
-        const std::string& name_tree_encoded,
+        const std::list<std::string>& namespaces,
+        const std::string& name_qualified,
+        const std::string& name_identifiable,
+        const std::string& name_tree_qualified,
         const std::string& name_tree_identifiable);
 
 private:
@@ -56,15 +58,25 @@ private:
     friend void boost::serialization::load(Archive& ar, helper_descriptor& v, unsigned int version);
 
 public:
-    const dogen::yarn::name& helped_type() const;
-    dogen::yarn::name& helped_type();
-    void helped_type(const dogen::yarn::name& v);
-    void helped_type(const dogen::yarn::name&& v);
+    const std::list<std::string>& namespaces() const;
+    std::list<std::string>& namespaces();
+    void namespaces(const std::list<std::string>& v);
+    void namespaces(const std::list<std::string>&& v);
 
-    const std::string& name_tree_encoded() const;
-    std::string& name_tree_encoded();
-    void name_tree_encoded(const std::string& v);
-    void name_tree_encoded(const std::string&& v);
+    const std::string& name_qualified() const;
+    std::string& name_qualified();
+    void name_qualified(const std::string& v);
+    void name_qualified(const std::string&& v);
+
+    const std::string& name_identifiable() const;
+    std::string& name_identifiable();
+    void name_identifiable(const std::string& v);
+    void name_identifiable(const std::string&& v);
+
+    const std::string& name_tree_qualified() const;
+    std::string& name_tree_qualified();
+    void name_tree_qualified(const std::string& v);
+    void name_tree_qualified(const std::string&& v);
 
     const std::string& name_tree_identifiable() const;
     std::string& name_tree_identifiable();
@@ -82,8 +94,10 @@ public:
     helper_descriptor& operator=(helper_descriptor other);
 
 private:
-    dogen::yarn::name helped_type_;
-    std::string name_tree_encoded_;
+    std::list<std::string> namespaces_;
+    std::string name_qualified_;
+    std::string name_identifiable_;
+    std::string name_tree_qualified_;
     std::string name_tree_identifiable_;
 };
 

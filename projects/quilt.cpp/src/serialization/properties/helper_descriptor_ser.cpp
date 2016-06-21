@@ -19,6 +19,7 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/string.hpp>
@@ -28,7 +29,6 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/helper_descriptor_ser.hpp"
 
 namespace boost {
@@ -38,8 +38,10 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::properties::helper_descriptor& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("helped_type", v.helped_type_);
-    ar << make_nvp("name_tree_encoded", v.name_tree_encoded_);
+    ar << make_nvp("namespaces", v.namespaces_);
+    ar << make_nvp("name_qualified", v.name_qualified_);
+    ar << make_nvp("name_identifiable", v.name_identifiable_);
+    ar << make_nvp("name_tree_qualified", v.name_tree_qualified_);
     ar << make_nvp("name_tree_identifiable", v.name_tree_identifiable_);
 }
 
@@ -47,8 +49,10 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::properties::helper_descriptor& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("helped_type", v.helped_type_);
-    ar >> make_nvp("name_tree_encoded", v.name_tree_encoded_);
+    ar >> make_nvp("namespaces", v.namespaces_);
+    ar >> make_nvp("name_qualified", v.name_qualified_);
+    ar >> make_nvp("name_identifiable", v.name_identifiable_);
+    ar >> make_nvp("name_tree_qualified", v.name_tree_qualified_);
     ar >> make_nvp("name_tree_identifiable", v.name_tree_identifiable_);
 }
 

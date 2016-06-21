@@ -18,16 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
+#include <utility>
 #include <unordered_set>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/quilt.cpp/types/properties/name_builder.hpp"
+#include "dogen/quilt.cpp/types/properties/building_error.hpp"
 #include "dogen/quilt.cpp/io/properties/helper_properties_io.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger
-lg(logger_factory("quilt.cpp.properties.helper_properties_factory"));
+static logger lg(
+    logger_factory("quilt.cpp.properties.helper_properties_factory"));
+
+const std::string qn_missing("Could not find qualified name for language.");
 
 }
 
@@ -35,6 +41,18 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace properties {
+
+template<typename IdentifiableAndQualified>
+inline std::pair<std::string, std::string>
+get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
+    const auto i(iaq.qualified().find(yarn::languages::cpp));
+    if (i == iaq.qualified().end()) {
+        BOOST_LOG_SEV(lg, error) << qn_missing << yarn::languages::cpp;
+        BOOST_THROW_EXCEPTION(building_error(qn_missing));
+    }
+
+    return std::make_pair(iaq.identifiable(), i->second);
+}
 
 helper_properties_factory::helper_properties_factory(
     const settings::helper_settings_repository& hsrp) : helper_settings_(hsrp) {
@@ -78,12 +96,21 @@ boost::optional<helper_descriptor> helper_properties_factory::make(
     hp.settings(hs);
 
     helper_descriptor r;
-    r.helped_type(nt.current());
-    // FIXME: r.name_tree_encoded(nt.encoded());
-    r.name_tree_identifiable(nt.identifiable());
+    properties::name_builder b;
+    r.namespaces(b.namespace_list(nt.current()));
+
+    const auto p1(get_identifiable_and_qualified(nt.current()));
+    r.name_identifiable(p1.first);
+    r.name_qualified(p1.second);
+
+    const auto p2(get_identifiable_and_qualified(nt));
+    r.name_tree_identifiable(p2.first);
+    r.name_tree_qualified(p2.second);
+
     hp.descriptor(r);
-    properties.push_back(hp);
     BOOST_LOG_SEV(lg, debug) << "Helper properties: " << hp;
+
+    properties.push_back(hp);
     return r;
 }
 
