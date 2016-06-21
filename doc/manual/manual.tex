@@ -30,14 +30,6 @@
 \usepackage{etoolbox}
 \usepackage{titlesec}
 
-% clear pages after chapters
-%% \let\origdoublepage\cleardoublepage
-%% \newcommand{\clearemptydoublepage}{
-%%   \clearpage
-%%   {\pagestyle{empty}\origdoublepage}
-%% }
-%% \let\cleardoublepage\clearemptydoublepage
-
 \makeatletter
 
 % First, modify the \@endpart macro.
@@ -59,7 +51,7 @@
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
-  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+  pdfcreator={Emacs 24.5.1}}
 
 \begin{document}
 
@@ -104,15 +96,13 @@ PUBLISHED IN THE WILD
 \pdfbookmark[0]{Colophon}{Colophon}
 \section*{}
 \pagestyle{empty}
-%\chapter*{}
 \vfill
 \begingroup
 \footnotesize
 \parindent 0pt
 \parskip \baselineskip
 
-\textcopyright{} 2012-2015 Marco Craveiro \\
-All rights reserved.
+\textcopyright{} 2012--\the\year\ Marco Craveiro. All rights reserved.
 
 Revision \textbf{DRAFT}. Generated for Dogen v${DOGEN_VERSION}, git
 commit ${CURRENT_GIT_COMMIT}.
@@ -149,70 +139,106 @@ entitled ``GNU Free Documentation License.''
 
 \chapter*{Preface}
 
-\epigraph{Le mieux est l'ennemi du bien.}{Voltaire}
+\epigraph{In fact, my main conclusion after spending ten years of my
+  life working on the \TeX project is that software is hard. It's
+  harder than anything else I've ever had to do.}{Donald Knuth}
+
+\lettrine{T}{hat many open source} and free software projects are a
+labour of love, we are all well too aware. The tragedy is that most of
+the code consumers do not know \emph{just how much love} is required
+to create and maintain a successful project in your spare time. The
+only way to find out is to do one yourself. When I started Dogen, I
+had absolutely no idea of the long and tortuous journey that awaited
+me. This is in itself rather ironic, as I have spent the best part of
+two decades in the commercial software industry~--- including many a
+time on the front lines of new product development~--- and I've used
+free software on a daily basis for decades. Looking back, the only
+explanation I can conceive of for this blind spot is that programmers
+are perennial optimists by nature or have \emph{very} short term
+memory. Or both.
+
+As it was, I attempted to ``create a simple code generator and then
+get on with real work''; I thought ``it would take me a couple of
+months or so, since I've written them before''. Years later, I still
+find myself working towards fulfilling this very simple idea to my
+satisfaction. And, lest you start blaming my organisational skills, it
+wasn't as if there has been a lack of ``professionalism and
+focus''. I've been to enough management school lessons to learn all
+the buzzwords, including the need to define the \emph{vision} before
+embarking on the road to \emph{execution}.
+
+Dogen's vision eventually stabilised to the following:
+
+\begin{itemize}
+\item to create a suite of code generation tools targeting model and
+  product generation, according to a well-specified product line;
+\item for these tools to have the potential to be useful to developers
+  in multiple programming languages, and to be designed to be
+  integrated with IDEs and text editors;
+\item to make the suite extensible, such that users can come up with
+  modifications suited to their particular domain.
+\end{itemize}
+
+What you have on your hands then is a document describing how Dogen
+realises this vision. I hope you enjoy reading this book as much as I
+have enjoyed this wild ride.
+
+\begin{flushright}\emph{Marco Craveiro}, \the\year\end{flushright}
+
+\chapter*{Introduction}
 
 \epigraph{First write the code generator; don't worry about the code,
   it will write itself.}{\emph{author}}
 
-\epigraph{Malembe, Malembe.}{Angola proverb}
+\lettrine{T}{his book is} the official manual for
+\emph{Dogen}. Dogen~--- the domain generator~--- is a suite of code
+generation tools designed specifically to target domain models. Dogen
+was created to make the modeling process simpler: the user creates a
+domain model using a supported UML editor and the tools provided by
+Dogen use its output to generate a source code representation. The
+generated code contains most of the services required from a typical
+domain object such as serialisation, hashing, debug printing and so
+on.
 
-\section*{About This Document}
+The book is split into three parts. Part I summarises the key domain
+knowledge around code generation and Domain Driven Development. It
+provides a basic theoretical foundation that serves as the background
+to the remainder of the book and, hopefully, supplies enough context
+to understand the design choices made. The second part describes the
+internals of the product, allowing one to make sense of the code base
+and adapt it as required. The third part is a user manual for the
+different tools in the suite.
 
-This document is the official manual for Dogen. Dogen~--- the domain
-generator~--- is a suite of code generation tools designed
-specifically to target domain models. Dogen was created to make the
-modeling process simpler: the user creates a domain model using a UML
-tool and the tools provided by Dogen use it to generate its source
-code representation. The generated code contains most of the services
-required from a typical C++ domain object such as serialisation,
-hashing, io (streaming) and so on.
+For those that are also interested in coding folklore, the appendix
+provides a number of ``lessons learned'' stories. They were originally
+published as blog posts on my column Nerd Food and give the reader a
+good feel for the development process and the steepness of the
+journey.
 
-If you are reading a printed copy of this manual, you can always
-access the latest version online:
+\section*{On the Web}
 
-\begin{itemize}
-\item \url{https://github.com/kitanda/dogen/blob/master/doc/manual/manual.org}
-\end{itemize}
-
-\section*{More Information}
-
-You can find the latest source code for Dogen at the official
-repository in GitHub:
-
-\begin{itemize}
-\item \url{https://github.com/kitanda/dogen}
-\end{itemize}
-
-There is also a mirror in BitBucket:
+The following web resources are available:
 
 \begin{itemize}
-\item \url{https://bitbucket.org/marco_craveiro/dogen/overview}
-\end{itemize}
-
-Continuous builds are available via CDash:
-
-\begin{itemize}
-\item \url{http://my.cdash.org/index.php?project=Dogen}
-\end{itemize}
-
-You can find details on the ongoing work in the Agile folder (look for
-the latest sprint):
-
-\begin{itemize}
-\item \url{https://github.com/kitanda/dogen/tree/master/doc/agile}
+\item if you are reading a printed copy of this manual, you can always
+  access the latest version online (in raw \LaTeXe form): \url{https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.tex}
+\item you can find the latest source code for Dogen at the official
+  repository in GitHub:
+  \url{https://github.com/DomainDrivenConsulting/dogen}
+\item there is also a mirror in BitBucket:
+  \url{https://bitbucket.org/marco_craveiro/dogen/overview}
+\item continuous builds for Dogen are available via Travis:
+  \url{https://travis-ci.org/DomainDrivenConsulting/dogen/builds}
+\item you can chat to us on IRC via Gitter:
+  \url{https://gitter.im/DomainDrivenConsulting/dogen}
+\item you can find details on the ongoing work in the Agile folder
+  (look for the latest sprint):
+  \url{https://github.com/DomainDrivenConsulting/dogen/tree/master/doc/agile}
 \end{itemize}
 
 \part{Theory}
 
-\epigraph{There is no better or truer description of the physical
-  phenomenon of light than to say it \emph{is} precisely the
-  electromagnetic field defined by Maxwell's equations. The
-  electromagnetic field is not \emph{like} Maxwell's equations; it
-  \emph{is} Maxwell's equations. While a model builder knows that his
-  model airplane is \emph{like} a true airplane, and a climate modeler
-  is aware that his equations only simulate the atmosphere, a
-  physicist knows that light and Maxwell's equations are one and the
-  same.}{Emanuel Derman}
+\epigraph{Malembe, Malembe.}{Angola proverb}
 
 \lettrine{L}{ike many} a Free and Open Source Software project, Dogen
 too started with a cursory knowledge of the field it ended up
@@ -250,15 +276,363 @@ aspects around its development.
 \chapter{Model Driven Software Development}
 \label{mdsd}
 
+\epigraph{There is no better or truer description of the physical
+  phenomenon of light than to say it \emph{is} precisely the
+  electromagnetic field defined by Maxwell's equations. The
+  electromagnetic field is not \emph{like} Maxwell's equations; it
+  \emph{is} Maxwell's equations. While a model builder knows that his
+  model airplane is \emph{like} a true airplane, and a climate modeler
+  is aware that his equations only simulate the atmosphere, a
+  physicist knows that light and Maxwell's equations are one and the
+  same.}{Emanuel Derman}
+
+\lettrine{L}{ike many} a
+
+Seems like the Model-Driven field already contains a lot of very
+useful definitions in this space. Read mainly the book but also the
+papers and figure out what they can do to help us find a way around
+the domain.
+
+%% **** Links of books and papers to read
+
+%% - [[http://www.voelter.de/data/books/mdsd-en.pdf][Model-Driven Software Development]]
+%% - [[http://researcher.ibm.com/researcher/files/zurich-jku/mdse-08.pdf][Model-Driven Software Engineering]]
+%% - [[http://people.cs.umass.edu/~brun/pubs/pubs/Edwards11ase.pdf][Isomorphism in Model Tools and Editors]]
+%% - [[http://met.guc.edu.eg/Repository/Faculty/Publications/371/2009.SCP.pdf][A type-centric framework for specifying heterogeneous, large-scale,
+%%   component-oriented, architectures]]
+%% - [[http://gsd.uwaterloo.ca/sites/default/files/2014-Bak-Clafer-Unifying-Class-Feature-Modeling(SOSYM).pdf][Clafer: Unifying Class and Feature Modeling]]
+%% - [[http://research.microsoft.com/en-us/um/people/pcosta/slides/generativeprogramming.pdf][Generative Programming]]
+%% - [[http://www.issi.uned.es/doctorado/generative/Bibliografia/TesisCzarnecki.pdf][Principles and Techniques of Software Engineering Based on Automated
+%%   Configuration and Fragment-Based Component Models]]
+%% - [[http://essay.utwente.nl/57286/1/scriptie_Overbeek.pdf][Meta Object Facility (MOF): investigation of the state of the art]]
+%% - [[http://www2.informatik.hu-berlin.de/sam/lehre/MDA-UML/UML-Infra-03-09-15.pdf][UML 2.0 Infrastructure Specification]]
+
+%% **** Useful terms and definitions from the book
+
+- *Model-based development*: the traditional kind of software
+  development, where developers create UML diagrams to represent the
+  code that they are working or going to work on, and perhaps use some
+  kind of simple tool to automate the generation of skeleton code; but
+  fundamentally, the models are there just as documentation. The idea
+  is to provide a visual representation of what is or will be in code.
+- *MDSD*: Model Driven Software Development. Models do not constitute
+  documentation, but are considered equal to code. Conversion of
+  models to code is automated. Models are blueprints like in CAD.
+  MDSD aims to find domain-specific abstractions and make them
+  accessible through formal modeling. Models can also be understood by
+  domain experts. "Driven" means that models are not peripheral but
+  central to the development process and as artefacts are at the same
+  level as source code. MDSD attempts to FIXME
+  - *MDE*:
+  %% [[https://en.wikipedia.org/wiki/Model-driven_engineering][Model-driven engineering]]
+  is a software development
+  methodology which focuses on creating and exploiting domain models,
+  which are conceptual models of all the topics related to a specific
+  problem. Seems very similar to MDD and MDSD.
+  - ADL:
+  %% [[https://en.wikipedia.org/wiki/Architecture_description_language][Architecture description language]].
+  A computer language to
+  create a description of a software architecture. In the case of a
+  so-called technical architecture, the architecture must be
+  communicated to software developers; a functional architecture is
+  communicated to various stakeholders and users. Some ADLs that have
+  been developed are: Acme (developed by CMU), AADL (standardized by
+  the SAE), C2 (developed by UCI), Darwin (developed by Imperial
+  College London), and Wright (developed by CMU).
+- *Reverse Engineering*: The generation of UML diagrams or other
+  models from source code. The model has the same level of abstraction
+  as the code.
+- *Forward Engineering*: The generation of source code from high-level
+  models such as UML diagrams.
+- *Roundtripping*: The ability to do both Forward and Reverse
+  Engineering. The concept of being able to make any kind of change to
+  a model as well as to the code generated from that model. The
+  changes always propagate bidirectionally and both artifacts are
+  always consistent.
+- *MDD*: Model-Driven Development. A less precise but common name for
+  MDSD. For all intents and purposes can be thought of as a synonym of
+  MDSD.
+- MDSD is normally incompatible with roundtripping. The model is
+  definitely more abstract than the code generated from it. Thus it is
+  generally impossible to keep the model consistent automatically
+  after a manual change of the generated code. For this reason, manual
+  changes to generated code should be avoided.
+- *MDA*: Model Driven Architecture. Initiative by OMG to standardise
+  concepts around MDSD. Can be thought of as one flavour of
+  MDSD. Designed to fit UML since OMG is also responsible for it. Its
+  primary goal is interoperability between tools and the long-term
+  standardisation of models for popular application
+  domains. Ontologically, MDA is a specialization of MDSD.
+- Three "kinds" of code in an application:
+  - Individual Code: and finally an application-specific part that
+    cannot be generalized.
+  - Generic Code: a generic part that is identical for all future
+    applications
+  - Schematic Repetitive Code: a schematic part that is not identical
+    for all applications, but possesses the same systematics (for
+    example, based on the same design patterns). Also called
+    Infrastructure code: The existence of a software infrastructure
+    also implies the existence of corresponding infra- structure code
+    in the software systems using it. This is source code, which
+    mostly serves to establish the technical coupling between
+    infrastructure and applications to facilitate the development of
+    domain-specific code on top of it. 60% and 70% of modern
+    e-business applications typically consists of infrastructure code.
+    %% - *[[https://en.wikipedia.org/wiki/Profile_(UML)][
+        UML Profile: A profile in the Unified Modeling Language (UML)
+  provides a generic extension mechanism for customizing UML models
+  for particular domains and platforms. Extension mechanisms allow
+  refining standard semantics in strictly additive manner, preventing
+  them from contradicting standard semantics. Profiles are defined
+  using stereotypes, tag definitions, and constraints. A Profile is a
+  collection of such extensions that collectively customize UML for a
+  particular domain (e.g., aerospace, healthcare, financial) or
+  platform (J2EE, .NET). UML models are not per se MDA models. The
+  most important difference between common UML models (for example
+  analysis models) and MDA models is that the meaning (semantics) of
+  MDA models is defined formally. This is guaranteed through the use
+  of a corresponding modeling language which that is typically
+  realised by a UML profile and its associated transformation rules.
+- PIM and PSM: PIM: Platform-Independent Model. Can be done via a UML
+  Profile. PSM: Platform-Specific Model. Can be done via a UML
+  Profile. It is important to note that a PIM and a PSM are relative
+  concepts – relative to the platform
+- transformation: map models to the respective next level, be it
+  further models or source code:
+  - Model-to-model transformation
+  - Model-to-code transformation
+- mapping: the mapping of one mode to another. Transformation is done
+  by means of mapping.
+- *Model*: an abstract representation of a system’s structure,
+  function or behaviour.
+- *Platform*: Anything that can be targeted such as CORBA, C++, etc.
+- *Generative Software Architecture*: all implementation details of
+  the architecture’s definition – that is, all architectural schemata
+  – are incorporated in software form. This requires a domain model of
+  the application as its input, and as output it generates the
+  complete infrastructure code of the application – the very code that
+  otherwise would need to be generated via a tedious copy/paste/modify
+  process.
+- *Protected regions*: also known as protected areas. Syntactically,
+  these are comments in the target language, but are interpreted by
+  the MDSD generator. Each protected region within the generated code
+  possesses a globally unique identifier disguised as a comment, and
+  is thus uniquely linked to a model element.
+- *Domain*: bounded field of interest or knowledge. To internalise and
+  process this knowledge, it is useful to create an ontology of a
+  domain’s concepts.
+- *Subdomains*: describe single parts or aspects of an entire system
+  for which a specialised modeling language is appropriate.
+- *Partition*: A comprehensive system can be broken down into
+  partitions or content increments. In an insurance domain, for
+  example, partitions could be defined for single sections or product
+  types, such as a "life", "vehicle", "liability" and so on.
+- *Abstract Syntax*: specifies what the language’s structure looks
+  like. An abstraction is introduced from such details as the spelling
+  of keywords, etc. The concrete syntax is the realisation of an
+  abstract syntax. Various concrete syntax forms can have a common
+  abstract syntax. Put anther way, the meta-model of a domain can be
+  expressed in different notations. How can the abstract syntax or the
+  meta-model of a domain be specified? Via a meta-model.
+- *MOF*: the meta object facility. specified by OMG.
+- *Static semantics*: property of a language that determines its
+  criteria for well-formedness.
+- *DSL*: Domain-specific language. Makes the key aspects of a domain –
+  but not all of its contents – formally expressable and
+  modelable.Possesses a meta-model, including its static semantics,
+  and a corresponding concrete syntax. The DSL should adopt concepts
+  from the problem space, so that a domain expert will recognize its
+  "domain language".
+- *Formal Models*: needs a DSL, and is thus obviously connected with
+  the respective domain.
+- *Platform*: has the task of supporting the realization of the
+  domain, that is, the transformation of the formal model into
+  something concrete.
+- *transformations*: A model-to-model transformation creates another
+  model. However, this model is typically based on a different
+  metamodel than the source model. A model-to-platform transformation,
+  in contrast, ‘knows’ the platform and generates artefacts (generated
+  artifacts) that are based on the platform.
+- *Platform Idioms*: Idioms that exist within the platform
+  transformation alone and need not be specified in the source model.
+- *Product*: MDSD pursues the goal of creating a software product in
+  part or in whole through one or more transformations. The product
+  can be an entire application or merely a component to be used as a
+  building block elsewhere. Such a product aggregates the platform,
+  generated, and sometimes even non-generated artefacts.
+- *Domain architecture*: The metamodel of a domain, a platform, and
+  the corresponding transformations, including the implemented idioms,
+  are the tools that are needed to make the transition from the model
+  to the product, whether completely or partially automated.
+- *Software System Families*: The set of all products that can be
+  created with a certain domain architecture.
+- *Product line*: set of complementary single products. From a user’s
+  perspective, the products in a product line can constitute
+  alternatives – that is, they be applicable in different but related
+  contexts – or can complement each other content-wise and thus define
+  a suite.
+- *Domain-Driven Design*: not directly related to MDSD. The only
+  connection is that DDD talks about deep domain understanding and the
+  importance of models. MDSD talks about automation. They are
+  complementary technologies.
+- *Software architecture*: describes to a certain level of detail the
+  structure (layering, modularization etc.) and the systematics
+  (patterns, conventions etc.) of a software system.
+- *Component*: is a self-contained piece of software with
+  clearly-defined interfaces and explicitlydeclared context
+  dependencies.
+- *Generate Good-Looking Code – Whenever Possible*: It is unrealistic
+  to assume that developers will never see the generated code. Even if
+  developers don’t have to change generated code, for example by
+  inserting manually-written sections, they will be confronted with it
+  if they debug the generated applications with conventional tools, or
+  if they have to check the generator configuration.
+- *Cartridges*: a cartridge is a ‘piece of generator’ for a certain
+  architectural aspect. ODB etc. Third-party off-the-shelf
+  cartridges. The problem then often becomes how to combine these
+  different cartridges, especially if they have been developed
+  independently and thus use different metamodels – different
+  stereotypes, tagged values, and so on. You certainly don’t want to
+  model things several times merely to be able to use various
+  incompatible cartridges. NOTE: this is the approach we use for ODB.
+- *Explicit Integration of Generated Code and Manual Parts*: this is
+  what dia2code does, but as a one off.
+- *3-tier implementation*: split generated code from manual code via
+  inheritance. We need to explain why we didn't take this approach.
+- *Code-generators*: meta-programs that process specifications (or
+  models) as input parameters, and which generate source code as
+  output. Meta-programs can be run at different times in relation to
+  the generated program: a) Completely independently of the base
+  program – that is, before it. b) During compilation of the base
+  program. c) While the base program runs.
+- Separation/Mixing of Program and Meta-program: a common (or at least
+  integrated) language exists for programming and metaprogramming, and
+  the source code components are not separated, but mixed. This can
+  lead to invocation relationships between the two levels, in
+  principle in both directions. C++ template metaprogramming can fall
+  into this category, as well as Lisp and CLOS. If program and
+  metaprogram are separated, the system’s creation takes place in two
+  distinct phases. The metaprogram is run and creates the base program
+  (or parts of it) as output, then ter- minates. The program does not
+  know that the metaprogram exists 1 . The separation is maintained
+  throughout the (meta-)programming process, including the build
+  process.
+- Separation of code classes. This involves the adaptation of the
+  target architecture in such a way that manually-created code must be
+  written into classes specifically created for this purpose.
+- *Model markings*: In some cases it is necessary to configure the
+  intermediate products manually to control their further
+  transformation stages. The OMG calls such a configuration model
+  markings. Model markings cannot be annotated directly in the PIM,
+  because this would involve the risk of losing platform independence.
+
+- we should define a UML profile in Dia that contains all of the
+  required concepts for Dogen. Perhaps we don't even need
+  meta-data/KVPs. In particular it seems that "tagged values" are
+  already KVPs. There is also "extensions". These are used in
+  conjunction with stereotypes. So for example we could "extend" the
+  UML notion of an attribute with say a new UML meta-class called
+  Key. We would then mark attributes as =<<Key>>=. This would mean
+  they are not regular UML attributes, but instead they are an
+  instance of our extension.
+- we seem to have layers of "abstraction" around generation. The first
+  layer is simply: if I define a class called X, create me a class X
+  in language y. This is Dia2Code. The second is the application of
+  some minimal infrastructural behaviour: create boost serialisation
+  for X, hashing for X, etc. The third is another level up in
+  abstraction: annotating types with "architectural concepts". For
+  example we could have a =RemoteService= stereotype which by default
+  in C++ results in the generation of all boilerplate code required
+  for ASIO. All that is required is to associate commands and queries
+  with the service. This could be achieved by marking a type with some
+  other stereotype - or even better, to define an attribute such as
+  =<<Command>>= or something more meaningful and apply that to a UML
+  attribute. From this we have all the information required to
+  generate the networking code.
+- for ODB it would be nice if we could mark types with generic
+  stereotypes which could be mapped to ODB specific pragmas:
+  =<<PrimaryKey>>= etc. Actually, just =Key=; it is somebody else's
+  job to map it to a foreign or primary key. We could even have some
+  stereotypes which are PSM: =BoostSerialisable=, etc. Such that by
+  default =Serialisable= maps to =BoostSerialisable= in
+  C++. =RelationalEntity=?
+- does UML have a concept of stereotype sets or groups? If it did we
+  could create some such as =DomainEntity=: =Serialisable=,
+  =Printable= etc. =ComparableDomainEntity= and so on; we could create
+  an entire hierarchy of stereotypes. These would then be translated
+  to having facets on and off. These are also "additive": =Visitable=,
+  =DomainEntity= etc could be applied to a single entity. Actually
+  maybe it should just be called =Entity= as domain does not add much
+  value. Or =ValueObject=. We need to create a hierarchy of these.
+- this means that Concepts are very much like all other kinds of
+  stereotypes. It just means that sometimes a stereotype resolves to a
+  hard-coded meaning (=Serialisable=, etc) whereas sometimes it is
+  user defined (e.g. the user created a concept).
+- all backends should be grouped under one name (say quilt) but there
+  is no need to have multiple kinds of backends (at least for
+  now). All the use cases we have can be handled by one kind of
+  backend, with a way to toggle SML transformation. So if a user is
+  making use of LAM (a PIM), we should have the option to either map
+  LAM types to native types or to use LAM "natively". This would mean
+  we need a C++ implementation of LAM, etc. Other LAM like models
+  could be defined.
+- users should be able to add the same kind of mappings to UML
+  stereotypes to facets of their own making. That is, I should be able
+  to create a set of stitch templates, register them against a
+  stereotype and then load up my DLL via a plugin and have knit
+  generate my code. This would mean that you could make DSL
+  extensions. The classic case is when you spot repetitive
+  infrastructural code in your system which is not common to other
+  systems.
+- targeting of platforms: a given stereotype can map to very different
+  implementations depending on the platform the user chooses to
+  target. In addition, the user may choose to target multiple
+  platforms. The name "platform" is not a very good one. For example,
+  lets say the user marks a type as serialisable and there are N
+  different types of serialisation. It would be really nice if we
+  could define the set of target serialisations (e.g. boost, POF,
+  etc).
+- this is actually quite simple. There are meta-concepts: Visitable,
+  Entity, and so on. One of these meta-concepts is
+  Concept. Meta-concepts are refinable: thus Entity can refine
+  Serialisable and so on. Meta-concepts can be modeled by one or
+  more implementations: thus Hashable is modeled by Boost Hash,
+  std::hash and so on. There is a mapping between meta-concepts
+  (modeling world) and facets/formatters (implementation). A formatter
+  is (or can be) a model of a meta-concept. Actually, we don't need to
+  call it a meta-concept; its just a meta-class. This is because the
+  translation of a meta-class from meta-model to platform concrete
+  artefact could involve the generation of multiple classes. That is,
+  a single meta-class could be transformed into multiple concrete
+  classes. Conceptually its still the same meta-class.
+- we are creating our own specialisation of MDSD with its own
+  values. We need to define dogen's MDSD infrastructure.
+- how do we intend to allow a restricted form of roundtripping:
+  - abstraction: can only be done when the meta-model is not that far
+    removed from code. Certain aspects cannot be roundtripped. For
+    example, if you need to change a visitor manually, you need to
+    disable generation. Because it is a concept at a higher level of
+    abstraction, it cannot be roundtripped.
+  - tagging the model: we are tagging the model via dynamic to provide
+    additional information that is not at the right level of
+    abstraction.
+  - separation of code classes: only certain classes are
+    roundtrippable (e.g. types). The rest are ignored.
+  - tagging the code: language attributes and other markers will be
+    used to keep track of what was manually generated versus what was
+    automatically generated.
+- *Viewpoint*: interesting word that can be used in the context of
+  facets. One way of using this term is to imagine DDD as a way of
+  defining the Domain Model and then having multiple representations,
+  each being a viewpoint: presentation layer, business layer,
+  persistence.
 
 \chapter{Domain Driven Development}
 \label{ddd}
-
-\chapter{Domain Driven Development}
-\label{ddd}
-
 
 \chapter{Fundamental Building Blocks}
+
+\epigraph{Le mieux est l'ennemi du bien.}{Voltaire}
 
 \lettrine{T}{his} section focuses on the more abstract aspects of
 Dogen.
@@ -534,6 +908,8 @@ Dogen is an attempt to create such a tool. As we are C++ developers we
 started off by trying to implement the vision as a C++ tool; but the
 notions are general enough that they would apply to any programming
 language.
+
+\part{Implementation}
 
 \chapter{The Architecture}
 
@@ -1213,7 +1589,7 @@ build numbers you must have the tool
 the path. If the tool is not available, the default build number is
 assigned: \texttt{no\_build\_number\_assigned}.
 
-\part{PRACTICE}
+\part{Use}
 
 In this part we describe how to build and install Dogen, and how to
 use it effectively~--- from very simple use cases all the way to the
@@ -2744,6 +3120,1101 @@ and papers on the subject we have read, or intend to read.
   provide ideas on code generation and can be used to generate plain
   domain objects.
 \end{itemize}
+
+\chapter{Nerd Food: Dogen: Lessons in Incremental Coding}
+
+A lot of interesting lessons have been learned during the development
+of \href{https://github.com/DomainDrivenConsulting/dogen}{Dogen} and I'm rather afraid many more are still in store. As it is
+typical with agile, I'm constantly reviewing processes in search of
+improvements. One such idea was that putting pen to paper could help
+improving the retrospective process itself. The result is this rather
+long blog post, which hopefully is of use to developers in similar
+circumstances. Unlike the typical bullet-point based retrospective,
+this post it is a rambling narrative as it aims to provide context to
+the reader. Subsequent retrospectives will be a lot smaller and more
+to the point.
+
+Talking about context: I haven't spoken very much about Dogen in this
+blog, so a small introduction is in order. Dogen is an attempt to
+create a domain model generator. The \href{https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#fundamental-building-blocks}{manual} goes into quite a bit more
+detail, but for the purposes of this exercise, it suffices to think of
+it as a C++ code generator. Dogen has been developed continuously
+since 2012 - with a few dry spells - and reached its \href{https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_50.org}{fiftieth sprint}
+recently. Having said that, our road to a finished product is still a
+\href{https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/definition_of_done.org}{long one}.
+
+The remainder of this article looks at what what has worked and what
+has not worked so well thus far into Dogen's development history.
+
+\section*{Understanding Time}
+\label{sec-1}
+
+Dogen was conceived when we were trying to do our \href{http://kitanda.co.uk/html/index.html}{first start up}. Once
+that ended - around the back end of 2012 - I kept working on the tool
+in my spare time, and this was a setup that has continued ever
+since. There are no other contributors; development just keeps
+chugging along, slowly but steadily, with no pressures other than to
+enjoy the sights.
+
+Working on my own and in my spare time meant that I had two
+conflicting requirements: very little development resources and very
+ambitious ideas that required lots of work. With family commitments
+and a full time job, I quickly found out that there weren't a lot of
+spare cycles left. In fact, after some analysis, I realised I was in a
+conundrum. Whilst there is was a lot of "dead-time" in the average
+week, it was mostly "low-quality grade time": lots of discontinued
+segments of varying and unpredictable lengths. Summed together in a
+naive way it seemed like a lot, but - as every programmer knows - six
+blocks of ten minutes do not one solid hour make.
+
+Nevertheless, one has to play the game with the cards that were dealt.
+I soon realised that the correct question to ask was: "what kind of
+development style makes one productive under these conditions?". The
+answer turned out to be opportunistic coding. This is rooted in having
+a better understanding of the different "qualities" of time and how
+best to exploit them. For example, when you have say five to fifteen
+minutes available, it makes sense to do small updates to the manual or
+fix trivial problems - a typo in the documentation, renaming variables
+in a function, mopping up the backlog and other activities of that
+ilk. A solid block of forty minutes to an hour affords you more: for
+instance, implementing part or the whole of stories for which the
+analysis has been completed, or doing some analysis for existing
+stories. On those rare cases where half-a-day or longer is available,
+one must make the most of it and take on a complex piece of work that
+requires sustained concentration. This sessions proved to be most
+valuable when the output is a set of well defined stories that are
+ready for implementation.
+
+One needs very good processes in order to be able to manage the usage
+of time in this fashion. Luckily, agile provides it.
+
+\section*{Slow Motion Agile}
+\label{sec-2}
+
+Looking back on \textasciitilde{}2.4k commits, one of the major wins in terms of
+development process was to think incrementally. Of course, agile
+already gives you a mental framework for that, and we had a
+functioning scrum process during our start up days: daily stand-ups,
+bi-weekly sprints, pre-sprint planning, post-sprint reviews, demos and
+all of that good stuff. It worked really well, and keep us honest and
+clean. We used a very simple org-mode file to keep track of all the
+open stories, and at one point we even built a simple burn-down chart
+generator to allow us to measure velocity.
+
+Granted, when you are working alone in your spare time, a chunk of
+agile may not make sense; for instance, providing status updates to
+yourself may not be the most productive use of scarce
+time. Surprisingly, I found quite a bit of process to be vital. I've
+kept the bi-weekly sprint cycle, the sprint logs, the product backlog
+and the time-tracking we had originally setup and found them
+\textbf{extremely} useful - quite possibly the thing that has kept me going
+for such an extended period of time, to be brutally honest. When you
+are working on an open source project it is very easy to get lost in
+its open-ended-ness and find yourself giving up, particularly if you
+are not getting (or expecting) any user feedback. Even Linus himself
+has said many times he would have given up the kernel if it wasn't for
+other people bringing him problems to keep him interested.
+
+Lacking Linus' ability to attract crowds of interested developers, I
+went for the next best thing: I made them up. Well, at least in
+metaphorical way, I guess, as this is what user stories are when you
+have no external users to drive them. As I am using the product in
+anger, I find it very easy to put myself in the head of a user and
+come up with requirements that push development forward. These stories
+really help, because they transform the cloud of possibilities into
+concrete, simple, measurable deliverables that one can choose to
+deliver or not. Once you have a set of stories, you have no excuse to
+be lazy because you can visualise in your head just how much effort it
+would require you to implement a story - and hey, since nerds are
+terrible at estimating, it's never that much effort at all. As
+everyone knows, it's not quite that easy in the end; but once you've
+started, you get the feeling you have to at least finish the task at
+hand, and so on, one story at a time, one sprint at a time, until a
+body of work starts building up. It's slow, excruciatingly slow, but
+it's steady like water working in geological time; when you look back
+5 sprints, you cannot help but be amazed on how much can be achieved
+in such a incremental way - and how much is still left.
+
+And then you get hooked into measurements. I now love measuring
+everything, from how long it takes me to complete a story, to where
+time goes in an sprint, to how many commits I do a day, to, well,
+everything that can easily be measured without adding any
+overhead. There is no incentive for you to game the system - hell, you
+could create a script that commits 20 times a day, if the commit count
+is all you care about. But it's not, so why bother. Due to this,
+statistics start to actually tell you valuable information about the
+world and to impel you forward. For instance, GitHub streaks mean that
+I always try to at least make one commit per day. Because of this,
+even on days when I'm tired, I always force my self to do \emph{something}
+and sometimes that quick commit morphs into an hour or two of work
+that wouldn't have happened otherwise.
+
+As I mentioned before, it was revealing to find out that there are
+different types of time. In order to to take advantage of this
+heterogeneity, one must make scrupulous use of the product
+backlog. This has proven invaluable, as you can attest by its \href{https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org}{current}
+size. Whether we are part way through a story or just idly
+daydreaming, each and every idea must be added to the product backlog,
+with sufficient detail to allow one to reconstruct one's train of
+thought at that point in time. Once in the backlog, items can be
+continuously refined until eventually we find a suitable sprint to
+tackle them or they get deprecated altogether. But without an healthy
+backlog it is not possible to make the most these illusive time
+slots. Conversely, it is important to try to make each story as small
+and as focused as possible, and to minimise spikes unless they really
+are on the critical path of the story. This is mainly for
+psychological reasons: one needs to mark stories as complete, to feel
+like work has been done. Never-ending stories are just bad for morale.
+
+In general, this extreme incrementalism has served us well. Not all is
+positive though. The worst problem has been a great difficulty in
+tackling complex problems - those that require several hours just to
+load them into your head. These are unavoidable in any sufficiently
+large code base. Having lots of discontinued segments of unpredictable
+duration have reduced efficiency considerably. In particular, I notice
+I have spent a lot more time lost in conceptual circles, and I've
+taken a lot longer to explore alternatives when compared to working
+full time.
+
+\section*{DVCS to the Core}
+\label{sec-3}
+
+We had already started to use git during the start-up days, and it had
+proved to be a major win at the time. After all, one never quite knows
+where one will be coding from, and whether internet access is
+available or not, so it's important to have a self-contained
+environment. In the end we found out it brought many, many more
+advantages such as great collaborative flows, good managed web
+interfaces/hosting providers (\href{http://www.github.com}{GitHub} and, to some extent, \href{http://www.bitbucket.com}{BitBucket}),
+amazing raw speed even on low-powered machines, and a number of other
+wins - all covered by lots and lots of posts around the web, so I
+won't bore you with that.
+
+On the surface it may seem that DVCS is most useful on a
+multi-developer team. This is not the case. The more discontinued your
+time is, the more you start appreciating its distributed nature. This
+is because each "kind" of time has a more suitable device - perhaps a
+netbook for the train, a desktop at someone's house or even a phone
+while waiting somewhere. With DVCS you can easily to switch devices
+and continue exactly where you left off. With GitHub you can even
+author using the web interface, so a mobile phone suddenly becomes
+useful for reading and writing.
+
+Another decision that turned out to be a major win is still not the
+done thing. Ever the trailblazers, we decided to put everything
+related to the project in version control. And by "everything" I do
+mean \textbf{everything}: documentation, bug reports, agile process, blog
+posts, the whole lot. It did seem a bit silly not to use GitHub's Wiki
+and Issues at the time, but, on hindsight, having everything in one
+versioned controlled place proved to be a major win:
+
+\begin{itemize}
+\item searching is never further than a couple of greps away, and it's not
+sensitive to connectivity;
+\item all you need is a tiny sliver of connectivity to push or pull, and
+work can be batched to wait for that moment;
+\item updates by other people come in as commits and can be easily
+reviewed as part of the normal push/pull process - not that we got
+any of late, to be fair;
+\item changes can easily be diffed;
+\item history can be checked using the familiar version control interface,
+which is available wherever you go.
+\end{itemize}
+
+When you have little time, these advantages are life-savers.
+
+The last but very important lesson learned was to commit early and
+commit often. It's rather obvious in hindsight, really. After all, if
+you have very small blocks of time to do work, you want to make sure
+you don't break anything; last thing you need is to spend a week
+debugging a tricky problem, with no idea of where you're going or how
+far you still have to travel. So it's important to make your commits
+\emph{very small} and \emph{very focused} such that a bisection would almost
+immediately reveal a problem - or at least provide you with an obvious
+rollback strategy. This has proved itself to be invaluable far too
+many times to count. The gist of this approach it is to split changes
+in an almost OCD sort of way, to the point that anyone can look at the
+commit comment and the commit diff and make a judgement as to whether
+the change was correct or not. To be fair, it's not quite always that
+straightforward, but that has been the overall aim.
+
+\section*{Struggling to stay Continuously Integrated}
+\label{sec-4}
+
+After the commit comes the build, and the proof is in the pudding, as
+they say. When it comes to code, that largely means CI; granted, it
+may not be a very reliable proof, but nevertheless it is the best
+proof we've got. One of the major wins from the start up days was to
+setup CI, and to give it as wide a coverage as we could muster. We
+setup multiple build agents across compilers and platforms, added
+dynamic analysis, code coverage, packaging and basic sanity tests on
+those packages.
+
+All of these have proven to be major steps in keeping the show on the
+road, and once setup, they were \emph{normally} fairly trivial to
+maintain. We did have a couple of minor issues with \href{http://www.cdash.org/}{CDash} whilst we
+were running our own server. Eventually we moved over to the \href{http://my.cdash.org/index.php?project\%3DDogen}{hosted
+CDash server} but it has limitations on the number of builds, which
+meant I had to switch some build agents off. In addition to this, the
+main other stumbling block is finding the time to do large
+infrastructural updates to the build agents such as setting up new
+versions of \href{http://www.boost.org/users/history/version_1_56_0.html}{Boost}, new compilers and so on. These are horrendously
+time consuming across platforms because you never know what issues you
+are going to hit, and each platform has their own way of doing things.
+
+The biggest lesson we learned here is that CI is vital but software
+product with no time at all should not waste time managing their own
+CI. There are just not enough hours in the day. I have been looking
+into \href{https://travis-ci.org/}{travis} to make this process easier in the future. Also, whilst
+being cross-platform is a very worthy objective, one has to weigh the
+costs with the benefits. If you have a tiny user base, it may make
+sense to stick to one platform and continue to do portable coding
+without "proof"; once users start asking for multiple platforms, it is
+then worth considering doing the work required to support them.
+
+The packaging story was also a very good one to start off with - after
+all, most users will probably rely on those - but it turned out to be
+\textbf{much} harder than first thought. We spent quite a bit of time
+integrating with the GitHub API, uploading packages into their
+downloads section, downloading them from there, testing, and then
+renaming them for user consumption. Whilst it lasted, this setup was
+very useful. Unfortunately it didn't last very long as GitHub decided
+to decommission their downloads section. Since most of the upload and
+download code was GitHub specific, we could not readily move over to a
+different location. The lesson here was that this sort of
+functionality is extremely useful, and it is worth dedicating time to
+it, but one should always have a plan B and even a plan C. To make a
+long story short, the end result is that we don't have any downloads
+available at all - not even a stale ones - nor do we have any sanity
+checks on packages we produce; they basically go to \texttt{/dev/null}.
+
+In summary, all of our pains led us to conclude that one should
+externalise early, externalise often and externalise everything. If
+there is a free (or cheap) provider in the cloud that can take on some
+or all of your infrastructure work away, you should always consider
+using them first rather than host your own infrastructure. And
+remember: your time is worth some money, and it is better spent
+coding. Of course, it is important to ensure that the provider is
+reliable, has been around for a while and is used by a critical
+mass. There is nothing worse than spending a lot of effort migrating
+to a platform, only to find out that it is about to dramatically
+change its APIs, prices, terms and conditions - or even worse, to be
+shutdown altogether.
+
+\section*{Loosely Coupled}
+\label{sec-5}
+
+Another very useful lesson I learned was to keep the \emph{off-distro}
+dependencies to a minimum. This is rather related to the previous
+points on CI and cross-platform-ness, really. During the start up days
+we started off by requiring a C++ compiler with good C++ 11 support,
+and a Boost library with a few off-tree libraries - mainly
+\href{http://www.boost.org/doc/libs/1_56_0/libs/log/doc/html/index.html}{Boost.Log}. This meant we had to have our own little "chroot" with all
+of these, and we had to build them by hand, sprinkled with plenty of
+helper scripts. In those dark days, almost nothing was supplied by the
+distro and life was painful. It was just about workable when we had
+time on our hands, but this is really not the sort of thing you want
+to spend time maintaining if you are working on a project in your
+spare time.
+
+To be fair, I had always intended to move to distro-supplied packages
+as soon as they caught up, and when that happened the transition was
+smooth enough. As things stand, we have a very small off-distro
+footprint - mainly \href{http://www.codesynthesis.com/products/odb/}{ODB} and \href{http://epa.codeplex.com/}{EOS}. The additional advantage of not having
+off-distro dependencies is that you can start to consider yourself for
+inclusion on a distro. Even in these days of Docker, being shipped by
+a distro is still a good milestone for any open source project, so it's
+important to aim for it. Once more, it's the old psychological factors.
+
+All and all, it seems to me we took the right decisions as both C++ 11
+and Boost.Log have proven quite useful; but in the future I certainly
+will think very carefully about adding dependencies to off-distro
+libraries.
+
+\section*{Conclusions}
+\label{sec-6}
+
+In general, the first fifty iterations of Dogen have been very
+positive. It has been a rather interesting journey, and dealing with
+pure uncertainty is not always easy - after all, one always wants to
+reach a destination. At the same time, much has been learned in the
+process, and a setup has been created that is sustainable given the
+available resources. In the near future I intend to improve the
+visibility of the project as I believe that, for all it's faults, it
+is still useful in its current form.
+% Emacs 24.5.1 (Org mode 8.2.10)
+
+\chapter{Nerd Food: Dogen: The Package Management Saga}
+
+Over the last few years I've had a little project on the side called
+\emph{\href{https://github.com/DomainDrivenConsulting/dogen}{Dogen}}. Dogen is a code generator designed to target domain models,
+with the lofty ambition of automating the modeling process as much as
+possible: users create domain models using a supported UML tool and
+respecting a set of predefined restrictions; Dogen uses the tool’s
+diagram files to generate the source code representation. The
+generated code contains most of the services required from a typical
+domain object such as serialisation, hashing, streaming and so on.
+Dogen is written in C++ 14 and generates C++ 14 too, but other
+languages will eventually be supported as well.
+
+Now, for a four-year-old project, I guess it's fair to say that Dogen
+hasn't exactly set the Open Source world on fire. Nevertheless, it has
+proven to be a personal fountain of lessons and experiences on
+software development; one such lesson was package management and
+that's what I shall reminisce about in this article.
+
+\section*{The Conundrum}
+\label{sec-1}
+
+Like any other part-time C++ developer whose professional mainstay is
+C\# and Java, I have keenly felt the need for a package manager when in
+C++-land. The problem is less visible when you are working with mature
+libraries and dealing with just Linux, due to the huge size of the
+package repositories and the great tooling built around them. However,
+things get messier when you start to go cross-platform, and messier
+still when you are coding on the bleeding edge of C++: either the
+package you need is not available in the distro's repos or even \href{https://launchpad.net/ubuntu/\%2Bppas}{PPA's};
+or, when it is, its rarely at the version you require.
+
+Alas, for all our sins, that's exactly where we were when Dogen got
+started.
+
+\section*{A Spoonful of Dogen History}
+\label{sec-2}
+
+Dogen sprung to life just a tad after C++-0x became \href{https://en.wikipedia.org/wiki/C\%252B\%252B11}{C++-11}, so we
+experienced first hand the highs of a quasi-new-language followed by
+the lows of feeling the brunt of the bleeding edge pain. For starters,
+\emph{nothing} we ever wanted was available out of the box, on any of the
+platforms we were interested in. Even Debian Testing was a fair bit
+behind the curve - probably stalled due to a compiler transition or
+other. In those days, Real Programmers were Real Programmers and mice
+were mice: we had to \href{http://mcraveiro.blogspot.co.uk/2012/06/nerd-food-c-11-with-gcc.html}{build and install the C++ compilers ourselves}
+and, even then, C++-11 support was new, a bit flaky and limited. We
+then had to use those compilers to compile all of the dependencies in
+C++-11 mode.
+
+\subsection*{The PFH Days}
+\label{sec-2-1}
+
+After doing this manually once or twice, it soon stopped being
+fun. And so we solved this problem by creating the PFH - the Private
+Filesystem Hierarchy - a gloriously over-ambitious name to describe a
+set of wrapper scripts that helped with the process of downloading
+tarballs, unpacking, building and finally installing them into
+well-defined locations. It worked well enough in the confines of its
+remit, but we were often outside those, having to apply out-of-tree
+patches, adding new dependencies and so on. We also didn't use Travis
+then; not even sure it existed, but if it did, the rigmarole of the
+bleeding edge experience would certainly put a stop to any ideas of
+using it. So we used a local install of CDash with a number of build
+agents on OSX, Windows (MinGW) and Linux (32-bit and 64-bit). Things
+worked beautifully when nothing changed and the setup was stable; but
+every time a new version of a library - or god forbid, of a compiler -
+was released, one had that sense of dread: do I \textbf{really} need to
+upgrade? And yet we often did, because we needed the features.
+
+Since one of the main objectives of Dogen was to learn about C++-11,
+one has to say that the pain was worth it. But all of the moving parts
+described above were not ideal and they were certainly not the thing
+you want to be wasting your precious time on when it is very
+scarce. They were certainly not scalable.
+
+\subsection*{The Good Days and the Bad Days}
+\label{sec-2-2}
+
+Things improved slightly for a year or two when distros started
+shipping C++-11 compliant compilers and recent Boost versions. This
+led to an attack of pragmatism, during which we ditched all platforms
+except for Linux, got rid of almost all our private infrastructure and
+moved over to \href{https://travis-ci.org/DomainDrivenConsulting/dogen}{Travis}. For a while things looked really good. However,
+due to Travis' \href{https://wiki.ubuntu.com/LTS}{Ubuntu LTS} policy, we were stuck with a rapidly ageing
+Boost version. At first PPAs were a good solution, but over time these
+became stale too.
+
+Soon we were stuck, unable to afford to revert back to the bad old
+days of the PFH but also unable to freeze all dependencies in time, as
+it would provide a worse development experience. So it was that the
+only route left was to break the build on Travis and hope that a
+solution would manifest itself. The red build painfully lingered on,
+commit after commit, whilst alternatives such as Drone.io and GitLab
+were unsuccessfully tried.
+
+Finally, there was nothing else for it. We simply needed a package
+manager to manage the development dependencies.
+
+\subsection*{Nuget Hopes Dashed}
+\label{sec-2-3}
+
+Having used \href{https://www.nuget.org/}{Nuget} in anger for both C\# and C++ projects - and given
+Microsoft's recent change of heart with regards to open source - I was
+secretly hoping that Nuget would get some traction in the wider C++
+world. Nuget works \href{http://mcraveiro.blogspot.co.uk/2014/05/nerd-food-using-mono-in-anger-part-ii_3422.html}{well enough in Mono}, and C++ support for Windows
+was added fairly \href{http://blogs.msdn.com/b/vcblog/archive/2013/04/26/nuget-for-c.aspx}{early on}. It was somewhat limited and a bit quirky at
+the start but it kept on getting better, to the point of being
+actually usable; we now use Nuget to manage our C++ dependencies at
+work - a Windows shop on the main - and it has improved our quality of
+life dramatically.
+
+Unfortunately, the troubles begun on closer inspection. The truth is
+that Microsoft's current Nuget focus is C\# and Visual Studio, not
+Linux and C++. Also, it seems that outside Microsoft and Xamarin there
+just isn't enough traction for this tool at present.
+
+However, there have been a couple of recent announcements from
+Microsoft that give me hope things may change in the future:
+
+\begin{itemize}
+\item \href{http://blogs.msdn.com/b/vcblog/archive/2015/12/04/introducing-clang-with-microsoft-codegen-in-vs-2015-update-1.aspx}{Clang with Microsoft CodeGen in VS 2015 Update 1}
+\item \href{http://blogs.msdn.com/b/vcblog/archive/2015/12/15/support-for-android-cmake-projects-in-visual-studio.aspx}{Support for Android CMake projects in Visual Studio}
+\end{itemize}
+
+Surely the logical consequence is to be able to manage packages in a
+consistent way across platforms? We can but hope.
+
+\subsection*{Biicode Comes to the Rescue?}
+\label{sec-2-4}
+
+Nuget did not pan out but what did happen was even more unlikely: some
+crazy-cool Spaniards had decided to create a stand alone package
+manager. Being from the same peninsula, I felt compelled to use their
+wares, and was joyful as they went from strength to strength -
+including the success of their \href{https://www.biicode.com/biicode-open-source-challenge}{open source campaign}. And I loved the
+fact that it integrated really well with \href{https://cmake.org}{CMake}, and that \href{https://www.jetbrains.com/clion/}{CLion}
+provided Biicode integration very early on.
+
+However, my biggest problem with Biicode was that it was just too
+complicated. I don't mean to say the creators of the product didn't
+have very good reasons for their technical choices - lord knows
+creating a product is hard enough, so I have nothing but praise to
+anyone who tries. However, for me personally, I never had the time to
+understand why Biicode needed its own version of CMake, nor did I want
+to modify my CMake files too much in order to fit properly with
+Biicode and so on. Basically, I needed a solution that worked well and
+required minimal changes at my end. Having been brought up with Maven
+and Nuget, I just could not understand why there wasn't a simple
+\texttt{packages.xml} file that specified the dependencies and then some
+non-intrusive CMake support to expose those into the CMake files. As
+you can see from some of \href{http://forum.biicode.com/t/building-out-of-tree-using-biicode/460}{my posts}, it just seemed it required
+"getting" Biicode in order to make use of it, which for me was not an
+option.
+
+Another thing that annoyed me was the difficulty on knowing what the
+"real" version of a library was. I wrote, at the time:
+
+\begin{quote}
+One slightly confusing thing about the process of adding dependencies
+is that there may be more than one page for a given dependency and it
+is not clear which one is the "best" one. For RapidJson there are
+three options, presumably from three different Biicode users:
+
+\begin{itemize}
+\item \href{https://www.biicode.com/fenix/rapidjson}{fenix}: authored on 2015-Apr-28, v1.0.1.
+\item \href{https://www.biicode.com/hithwen/rapidjson}{hithwen}: authored 2014-Jul-30
+\item \href{https://www.biicode.com/denis/rapidjson}{denis}: authored 2014-Oct-09
+\end{itemize}
+
+The "fenix" option appeared to be the most up-to-date so I went with
+that one. However, this illustrates a deeper issue: how do you know
+you can trust a package? In the ideal setup, the project owners would
+add Biicode support and that would then be the one true
+version. However, like any other project, Biicode faces the initial
+adoption conundrum: people are not going to be willing to spend time
+adding support for Biicode if there aren't a lot of users of Biicode
+out there already, but without a large library of dependencies there
+is nothing to draw users in. In this light, one can understand that it
+makes sense for Biicode to allow anyone to add new packages as a way
+to bootstrap their user base; but sooner or later they will face the
+same issues as all distributions face.
+
+A few features would be helpful in the mean time:
+
+\begin{itemize}
+\item popularity/number of downloads
+\item user ratings
+\end{itemize}
+
+These metrics would help in deciding which package to depend on.
+\end{quote}
+
+For all these reasons, I never found the time to get Biicode setup and
+these stories lingered in Dogen's backlog. And the build continued to
+be red.
+
+Sadly Biicode the company \href{http://blog.biicode.com/biicode-just-the-company-post-mortem/}{didn't make it either}. I feel very sad for
+the guys behind it, because their heart was on the right place.
+
+Which brings us right up to date.
+
+\section*{Enter Conan}
+\label{sec-3}
+
+When I was a kid, we were all big fans of Conan. No, not \href{https://en.wikipedia.org/wiki/Conan_the_Barbarian}{the
+barbarian}, the Japanese Manga \href{https://en.wikipedia.org/wiki/Future_Boy_Conan}{Future Boy Conan}. For me the name Conan
+will always bring back great memories of this show, which we watched
+in the original Japanese with Portuguese subtitles. So I was secretly
+pleased when I found \href{https://www.conan.io/}{conan.io}, a new package management system for
+C++. The guy behind it seems to be one of the original Biicode
+developers, so a lot of lessons from Biicode were learned.
+
+To cut a short story short, the great news is I managed to add Conan
+support to Dogen in roughly \href{https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_77.org#add-support-for-conanio}{3 hours} and with very minimal knowledge
+about Conan. This to me was a litmus test of sorts, because I have
+very little interest in package management - creating my own product
+has proven to be challenging enough, so the last thing I need is to
+divert my energy further. The other interesting thing is that roughly
+half of that time was taken by trying to get Travis to behave, so its
+not quite fair to impute it to Conan.
+
+\subsection*{Setting Up Dogen for Conan}
+\label{sec-3-1}
+
+So, what changes did I do to get it all working? It was a very simple
+3-step process. First I installed Conan using a Debian package from
+\href{https://www.conan.io/downloads}{their site}.
+
+I then created a \texttt{conanfile.txt} on my top-level directory:
+
+\begin{verbatim}
+[requires]
+Boost/1.60.0@lasote/stable
+
+[generators]
+cmake
+\end{verbatim}
+
+Finally I modified my top-level \texttt{CMakeLists.txt}:
+
+\begin{verbatim}
+# conan support
+if(EXISTS "${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
+    message(STATUS "Setting up Conan support.")
+    include("${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
+    CONAN_BASIC_SETUP()
+else()
+    message(STATUS "Conan build file not found, skipping include")
+endif()
+\end{verbatim}
+
+This means that it is entirely possible to build Dogen without Conan,
+but if it is present, it will be used. With these two changes, all
+that was left to do was to build:
+
+\begin{verbatim}
+$ cd dogen/build/output
+$ mkdir gcc-5-conan
+$ conan install ../../..
+$ make -j5 run_all_specs
+\end{verbatim}
+
+\emph{Et voila}, I had a brand spanking new build of Dogen using
+Conan. Well, actually, \emph{not quite}. I've omitted a couple of problems
+that are a bit of a distraction on the Conan success story. Let's look
+at them now.
+
+\subsection*{Problems and Their Solutions}
+\label{sec-3-2}
+
+The first problem was that Boost 1.59 does not appear to have an
+overridden \texttt{FindBoost}, which means that I was not able to link. I
+moved to Boost 1.60 - which I wanted to do anyway - and it worked out
+of the box.
+
+The second problem was that Conan seems to get confused with \href{https://ninja-build.org/manual.html}{Ninja}, my
+build system of choice. For whatever reason, when I use the Ninja
+generator, it fails like so:
+
+\begin{verbatim}
+$ cmake ../../../ -G Ninja
+$ ninja -j5
+$ ninja: error: '~/.conan/data/Boost/1.60.0/lasote/stable/package/ebdc9c0c0164b54c29125127c75297f6607946c5/lib/libboost_system.so', needed by 'stage/bin/dogen_utility_spec', missing and no known rule to make it
+\end{verbatim}
+
+This is very strange because boost system is clearly available in the
+Conan download folder. Going back to \texttt{make} solved this problem. I've
+opened an issue in Conan (\href{https://github.com/conan-io/conan/issues/56}{\#56}) and its currently under investigation.
+
+The third problem is more boost related than anything else. Boost
+Graph has not been as well maintained as it should, really. Thus users
+now find themselves carrying patches, and all because no one seems to
+be able to apply them upstream. Dogen is in this situation as we've
+hit the issue described here: \href{http://stackoverflow.com/questions/25395805/compile-error-with-boost-graph-1-56-0-and-g-4-6-4}{Compile error with boost.graph 1.56.0
+and g++ 4.6.4.} Sadly this is still present on Boost 1.60; the patch
+exists in Trac but remains unapplied (\href{https://svn.boost.org/trac/boost/ticket/10382}{\#10382}). This is a tad worrying
+as we make a lot of use of Boost Graph and intend to increase the
+usage in the future.
+
+At any rate, as you can see, none of the problems were showstoppers,
+nor can they all be attributed to Conan.
+
+\subsection*{Getting Travis to Behave}
+\label{sec-3-3}
+
+Once I got Dogen building locally, I then went on a mission to
+convince Travis to use it. It was painful, but mainly because of the
+lag between commits and hitting an error. The core of the changes to
+my YML file were as follows:
+
+\begin{verbatim}
+install:
+<snip>
+  # conan
+  - wget https://s3-eu-west-1.amazonaws.com/conanio-production/downloads/conan-ubuntu-64_0_5_0.deb -O conan.deb
+  - sudo dpkg -i conan.deb
+  - rm conan.deb
+<snip>
+script:
+  - export GIT_REPO="`pwd`"
+  - cd ${GIT_REPO}/build
+  - mkdir output
+  - cd output
+  - conan install ${GIT_REPO}
+  - hash=`ls ~/.conan/data/Boost/1.60.0/lasote/stable/package/`
+  - cd ~/.conan/data/Boost/1.60.0/lasote/stable/package/${hash}/include/
+  - sudo patch -p0 < ${GIT_REPO}/patches/boost_1_59_graph.patch
+  - cmake ${GIT_REPO} -DWITH_MINIMAL_PACKAGING=on
+  - make -j2 run_all_specs
+<snip>
+\end{verbatim}
+
+I probably should have a bash script by know, given the size of the
+YML, but hey - if it works. The changes above deal with installation
+of the package, applying the boost patch and using Make instead of
+Ninja. Quite trivial in the end, even though it required a lot of
+iterations to get there.
+
+\section*{Conclusions}
+\label{sec-4}
+
+Having a red build is a very distressful event for a developer, so you
+can imagine how painful it has been to have red builds for \emph{several
+months}. So it is with unmitigated pleasure that I got to see \href{https://travis-ci.org/DomainDrivenConsulting/dogen/builds/98304957}{build
+\#628} in a shiny emerald green. As far as that goes, it has been an
+unmitigated success.
+
+In a broader sense though, what can we say about Conan? There are many
+positives to take home, even at this early stage of Dogen usage:
+
+\begin{itemize}
+\item it is a lot less intrusive than Biicode and easier to setup. Biicode
+was very well documented, but it was easy to stray from the beaten
+track and that then required reading a lot of different wiki
+pages. It seems easier to stay on the beaten track with Conan.
+\item as with Biicode, it seems to provide solutions to Debug/Release and
+multi-platforms and compilers. We shall be testing it on Windows
+soon and reporting back.
+\item hopefully, since it started Open Source from the beginning, it will
+form a community of developers around the source with the know-how
+required to maintain it. It would also be great to see if a business
+forms around it, since someone will have to pay the cloud bill. It
+certainly is gaining popularity, as \href{http://cppcast.com/2016/05/diego-rodriguez-losada/}{the recent CppCast} attests.
+\end{itemize}
+
+In terms of negatives:
+
+\begin{itemize}
+\item I still believe the most scalable approach would have been to extend
+Nuget for the C++ Linux use case, since Microsoft is willing to take
+patches and since they foot the bill for the public repo. However,
+I can understand why one would prefer to have total control over the
+solution rather than depend on the whims of some middle-manager in
+order to commit.
+\item it seems publishing packages requires getting down into
+Python. Haven't tried it yet, but I'm hoping it will be made as easy
+as importing packages with a simple text file. The more complexity
+around these flows the tool adds, the less likely they are to be
+used.
+\item there still are no "official builds" from projects. As explained
+above, this is a chicken and egg problem, because people are only
+willing to dedicate time to it once there are enough users
+complaining. Having said that, since Conan is easy to setup, one
+hopes to see some adoption in the near future.
+\item even when using a GitHub profile, one still has to define a Conan
+specific password. This was not required with Biicode. Minor pain,
+but still, if they want to increase traction, this is probably an
+unnecessary stumbling block. It was sufficient to make me think
+twice about setting up a login, for one.
+\end{itemize}
+
+In truth, these are all very minor negative points, but still worth
+making them. All and all, I am quite pleased with Conan thus far.
+
+\chapter{Nerd Food: On Product Backlog}
+
+Many developers in large companies tend to be exposed to a strange
+variation of agile which I like to call "Enterprise Grade Agile", but
+I've also heard it called "Fragile" and, most aptly, "Cargo-Cult
+Agile". However you decide to name the phenomena, the gist of it is
+that these setups contain nearly all of the ceremony of agile -
+including stand-ups, sprint planning, retrospectives and so on - but
+none of its spirit. Tweets such as this are great at capturing the
+essence of the problem:
+
+Once you start having that nagging feeling of doing things "because
+you are told to", and once your stand-ups become more of a status
+report to the "project manager" and/or "delivery manager" - the
+existence of which, in itself, is rather worrying - your Cargo Cult
+Agile alarm bells should start ringing. As I see it, agile is a
+toolbox with a number of tools, and they only start to add value once
+you've adapted them to your personal circumstances. The fitness
+function that determines if a tool should be used is how much value it
+adds to all (or at least most) of its users. If it does not, the tool
+must be further adapted or removed altogether. And, crucially, you
+learn about agile tools by using them and by reflecting on the lessons
+learned. There is no other way.
+
+This post is one such exercise and the tool I'd like to reflect on is
+the \emph{Product Backlog}. Now, before you read through the whole rant,
+its probably worth saying that this post takes a slightly narrow and
+somewhat "advanced" view of agile, with a target audience of those
+already using it. If you require a more introductory approach, you are
+probably better off looking at other online resources such as \href{http://zerodollarbill.blogspot.co.uk/2012/06/how-to-learn-scrum-in-10-minutes-and.html}{How to
+learn Scrum in 10 minutes and clean your house in the process}. Having
+said that, I'll try to define terms best I can to make sure we are all
+on the same page.
+
+\section*{Working Definition}
+\label{sec-1}
+
+Once your company has grokked the basics of agile and starts to move
+away from those lengthy specification documents - those that no one
+reads properly until implementation and those that never specified
+anything the customer wanted, but everything we thought the customer
+wanted and then some - you will start to use the product backlog in
+anger. And that's when you will realise that it is not quite as simple
+as memorising text books.
+
+So what do the "text books" say? Let's take a fairly typical
+definition - this one from \href{https://en.wikipedia.org/wiki/Scrum_(software_development)}{Scrum}:
+
+\begin{quote}
+The agile product backlog in Scrum is a prioritized features list,
+containing short descriptions of all functionality desired in the
+product. When applying Scrum, it's not necessary to start a project
+with a lengthy, upfront effort to document all
+requirements. Typically, a Scrum team and its product owner begin by
+writing down everything they can think of for agile backlog
+prioritization. This agile product backlog is almost always more than
+enough for a first sprint. The Scrum product backlog is then allowed
+to grow and change as more is learned about the product and its
+customers.\footnote{Source: \href{https://www.mountaingoatsoftware.com/agile/scrum/product-backlog}{Scrum Product Backlog}, Mountain Goat Software.}
+\end{quote}
+
+This is a good working definition, which will suffice for the purposes
+of this post. It is deceptively simple. However, as always, one must
+remember Yogi Berra: "In theory, there is no difference between theory
+and practice. But in practice, there is."
+
+\section*{Potmenkin Product Backlogs}
+\label{sec-2}
+
+Many teams finish reading one such definition, find it amazingly
+inspiring, install the "agile plug-in" on their bug-tracking software
+of choice and then furiously start typing in those tickets. But if you
+look closely, you'd be hard-pressed to find any difference between the
+bug tickets of old versus the "stories" in the new and improved
+"product backlog" that apparently you are now using.
+
+This is a classic management disconnect, whereby a renaming exercise
+is applied and suddenly, \href{https://en.wikipedia.org/wiki/Potemkin_village}{Potemkin village-style}, we are now in with
+the kool kids and our company suddenly becomes a modern and desirable
+place to work. But much like Potemkin villages were not designed for
+real people to live in, so "Potmenkin Product Backlogs" are not
+designed to help you manage the lifecycle of a real product; they are
+there to give you the \emph{appearance} of doing said management, for the
+purposes of reporting to the higher eschelons and so that you can tell
+stakeholders that "their story has been added to the product backlog
+for prioritisation".
+
+Alas, very soon you will find that the bulk of the "user stories" are
+nothing but glorified one-liners that no one seems to recall what
+exactly they're supposed to mean, and those few elaborately detailed
+tickets end up rotting because they keep being deprioritised and now
+describe a world long gone. Soon enough you will find that your sprint
+planning meetings will cover less and less of the product backlog -
+after all, who is able to prioritise this mess?  Some stories don't
+even make any sense! The final act is when all stories worked on are
+stories raised directly on the sprint backlog, and the product backlog
+is nothing but the dumping ground for the stories that didn't make it
+on a given sprint. At this stage, the product backlog is in such a
+terrible mess that no one looks at it, other than for the occasional
+historic search for valuable details on how a bug was
+fixed. Eventually the product backlog is zeroed - maybe a dozen or so
+of the most recent stories make it through the cull - and the entire
+process begins anew. Alas, enlightenment is never achieved, so you are
+condemned to repeat this cycle for all eternity.
+
+As expected, the Potmenkin Product Backlog adds very little value - in
+fact it can be argued that it detracts value - but it must be kept
+because "agile requires a product backlog".
+
+\section*{Bug-Trackers: Lessons From History}
+\label{sec-3}
+
+In order to understand the difficulties with a product backlog, we
+turn next to their logical predecessors: bug-tracking systems such as
+\href{https://www.bugzilla.org/}{Bugzilla} or \href{https://www.atlassian.com/software/jira}{Jira}. This post starts with a quote from the kernel's
+Benevolent Dictator that illustrates the problem with these. Linus has
+long taken the approach that there is no need for a bug-tracker in
+kernel development, although he does not object if someone wants to
+use one for a subsystem. You may think this is a very primitive
+approach but in some ways it is also a \emph{very} modern approach, very
+much in line with agile; if you have a bug-tracking system which is
+taking time away from developers without providing any value, you
+should \emph{remove} the bug-tracking system. In kernel development, there
+simply is no space for ceremony - or, for that matter, for anything
+which slows things down\footnote{A topic which I covered some time ago here: \href{http://mcraveiro.blogspot.co.uk/2008/06/nerd-food-on-evolutionary-methodology.html}{On
+Evolutionary Methodology}. It is also interesting to see how the kernel
+processes are organised for speed: \href{http://lwn.net/Articles/670209/}{How 4.4's patches got to the
+mainline}.}.
+
+All of which begs the question: what makes bug-tracking systems so
+useless? From experience, there are a few factors:
+
+\begin{itemize}
+\item they are a "fire and forget" capture system. Most users only care
+about entering new data, rather than worrying about the lifecycle of
+a ticket. Very few places have some kind of "ticket quality control"
+which ensures that the content of the ticket is vaguely sensible,
+and those who do suffer from another problem:
+\item they require dedicated teams. By this I don't just mean running the
+bug-tracking software - which you will most likely have to do in a
+proprietary shop; I also mean the entire notion of Q\&A and Testing
+as separate from development, with reams of people dedicated to
+setting "environments" up (and keeping them up!), organising
+database restores and other such activities that are incompatible
+with current best practices of software development.
+\item they are temples of ceremony: a glance at the myriad of fields you
+need to fill in - and the rules and permutations required to get
+them exactly right - should be sufficient to put off even the most
+ardent believer in process. Most developers end up memorising some
+safe incantation that allows them to get on with life, without
+understanding the majority of the data they are entering.
+\item as the underlying product ages, you will be faced with \href{http://tinyletter.com/programming-beyond-practices/letters/the-sad-graph-of-software-death}{the sad graph
+of software death}. The main problem is that resources get taken away
+from systems as they get older, a phenomena that manifests itself as
+a growth in the delta between the number of open tickets against the
+number of closed tickets. This is actually a \emph{really} useful metric
+but one that is often ignored.\footnote{Another topic which I also covered here some time
+ago: \href{http://mcraveiro.blogspot.co.uk/2007/05/nerd-food-on-maintenance.html}{On Maintenance}.}.
+\end{itemize}
+
+And what of the newest iterations on this venerable concept such as
+\href{https://guides.github.com/features/issues/}{GitHub Issues}? Well, clearly they solve a number of the problems
+above - such as lowering the complexity and cost barriers - and
+certainly they do serve a very useful purpose: they allow the
+efficient management of user interactions. Every time I create an
+issue - such as this \href{https://github.com/flycheck/flycheck/issues/852}{one} - it never ceases to amaze me how easily the
+information flows within GitHub projects; one can initiate comms with
+the author(s) or other users with \emph{zero setup} - something that
+previously required mailinglist membership, opening an account on a
+bug-tracker and so forth. We now take all of this for granted, of
+course, but it is important to bear in mind that many open source
+projects would probably not even have \emph{any} form of user interaction
+support, were it not for GitHub. After all, most of them are a
+one-person shop with very little disposable time, and it makes no
+sense to spend part of that time maintaining infrastructure for the
+odd person or two who may drop by to chat.
+
+However, for all of its glory, it is also important to bear in mind
+that GitHub Issues is \textbf{not} a product backlog solution. What I mean by
+this is that the product backlog must be owned by the team that owns
+the product and, as we shall see, it must be carefully groomed if it
+is to be continually useful. This is at loggerheads with allowing free
+flow of information from users. Your Issues will eventually be filled
+up with user requests and questions which you may not want to address,
+or general discussions which may or may not have a story behind
+it. They are simply different tools for different jobs, albeit with an
+overlap in functionality.
+
+So, history tells us what does not work. But is the product backlog
+even worth all this hassle?
+
+\section*{Voyaging Through Strange Seas of Thought}
+\label{sec-4}
+
+One of the great things about agile is how much it reflects on itself;
+a strange loop of sorts. Presentations such as Kevlin Henney's \href{http://www.infoq.com/presentations/architecture-uncertainty}{The
+Architecture of Uncertainty} are part of this continual process of
+discovery and understanding, and provide great insights about the
+fundamental nature of the development process. The product backlog
+plays - or should play - a crucial role exactly because of this
+uncertain nature of software development. We can explain this by way
+of a device.
+
+Imagine that you start off by admitting that you know very little
+about what it is that you are intending to do and that the problem
+domain you are about to explore is vast and complex. In this scenario,
+the product backlog is the sum total of the knowledge gained whilst
+exploring this space that has yet not been transformed into source
+code. Think of it like the explorer's maps in the fifteen-hundreds. In
+those days, "users" knew that much of it was incorrect and a great
+part was sketchy and ill-defined, but it was all you had. Given that
+the odds of success were stacked against you, you'd hold that map
+pretty tightly while the storms were raging about you. Those that made
+it back would provide corrections and amendments and, over time, the
+maps eventually converged with the real geography.
+
+The product backlog does something similar, but of course, the space
+you are exploring does not have a fixed geometry or topography and
+your knowledge of the problem domain can actively \emph{change} the domain
+itself too - an unavoidable consequence of dealing with pure thought
+stuff. But the general principle applies. Thus, in the same way \href{http://www.joelonsoftware.com/articles/fog0000000069.html}{a code
+base is precious} because it embodies the sum total knowledge of a
+domain - heck, in many ways it \emph{is} the sum total knowledge of a
+domain! - so the product backlog is precious because it captures all
+the known knowledge of these yet-to-be-explored areas. In this light,
+you can understand statements such as this:
+
+So, if the backlog is this important, how should one manage it?
+
+\section*{Works For Me, Guv!}
+\label{sec-5}
+
+Up to this point - whilst we were delving into the problem space - we
+have been dealing with a fairly general argument, likely applicable to
+many. Now, as we enter the solution space, I'm afraid I will have to
+move from the general to the particular and talk only about the
+specific circumstances of my one-man-project \href{https://github.com/DomainDrivenConsulting/dogen}{Dogen}. You can find
+Dogen's product backlog \href{https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org}{here}.
+
+This may sound like a bit of a cop out, you may say, and not without
+reason: how on earth are you supposed to extrapolate conclusions from
+a one-person open source project to a team of N working on a
+commercial product? However, it is also important to take into account
+what I said at the start: agile is what you make of it. I personally
+think of it as a) the smallest amount of processes required to make
+your development process work smoothly and b) and the continual
+improvement of those processes. Thus, there are no one-size-fits-all
+solutions; all one can do is to look at others for ideas. So, lets
+look at my findings\footnote{I am self-plagiarising a little bit here and
+rehashing some of the arguments I've used before in \href{http://mcraveiro.blogspot.co.uk/2014/09/nerd-food-dogen-lessons-in-incremental.html}{Lessons in
+Incremental Coding}, mainly from section DVCS to the Core.}.
+
+The first and most important thing I did to help me manage my product
+backlog was to use a simple text file in \href{http://orgmode.org/}{Org Mode} notation. Clearly,
+this is not a setup that is workable for a development team much
+larger than a set of one, or one that doesn't use Emacs (or \href{https://github.com/hsitz/VimOrganizer}{Vim}). But
+for my particular circumstances it has worked \emph{wonders}:
+
+\begin{itemize}
+\item the product backlog is close to the code, so wherever you go, you
+take it with you. This means you can always search the product
+backlog and - most importantly - add to it \emph{wherever} you are and
+\emph{whenever} an idea happens to come by. I use this flexibility
+frequently.
+\item the Org Mode interface makes it really easy to move stories up and
+down (order is taken to mean priority here) and to create "buckets"
+of stories according to whatever categorisation you decide to use,
+up to any level of nesting. At some point you end up converging to a
+reasonable level of nesting, of course. It is surprising how one can
+manage \textbf{very} large amounts of stories thanks to this flexible tree
+structure.
+\item it's trivial to move stories in and out of a sprint, keeping track
+of all changes to a story - they are just text that can be copy and
+pasted and committed.
+\item Org Mode provides a very capable \href{http://orgmode.org/manual/Tags.html}{tagging system}. I first started by
+overusing these, but when tagging got too fine grained it became
+unmaintainable. Now we use too few - just \texttt{epic} and \texttt{story} - so
+this will have to change again in the near future. For example, it
+should be trivial to add tags for different components in the system
+or to mark stories as bugs or features, etc. \href{http://orgmode.org/manual/Tag-searches.html#Tag-searches}{Searching} then allows
+you to see a subset of the stories that match those labels.
+\end{itemize}
+
+A second decision which has proven to be a very good one has been to
+groom the product backlog \emph{very often}. And by this I don't just mean
+a cursory look, but a deep inspection of \emph{all} stories, fixing them
+where required. Again, the choice of format has proved very helpful:
+
+\begin{itemize}
+\item it is easy to mark all stories as "non-reviewed" or some other
+suitable tag in Org Mode, and then unmark them as one finishes the
+groom - thereby ensuring all stories get some attention. As the
+product backlog becomes larger, a full groom could take multiple
+sprints, but this is not an issue once you understand its value and
+the cost of having it rot.
+\item because the product backlog is with the code, any downtime can be
+used for grooming; those idle weekends or that long wait at the
+airport are perfect candidates to get a few stories looked at. Time
+spent waiting for the build is also a good candidate.
+\item you get an HTML representation of the Org Mode file for free in
+GitHub, meaning you can read your backlog from your phone. And with
+the new editing functionality, you can also edit stories too.
+\end{itemize}
+
+Thirdly, I decided to take a "multi-pass" approach at managing the
+story lifecycle. These are some of the key aspects of this lifecycle
+management:
+
+\begin{itemize}
+\item stories can only be captured if they are aligned with the
+\href{https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/vision.org}{vision}. This filter saves me from adding all sorts of ideas which
+are just too "out of the left field" to be of practical use, but
+keeps \href{https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#visionary-work-and-random-ideas}{those that may sound crazy} are but aligned with the vision.
+\item stories can only be captured if there is no "prior art". I always
+perform a number of searches in the backlog to look for anything
+which covers similar ground. If found, I append to that.
+\item new stories tend to start with very little content - just the
+minimum required to allow resetting state back to the idea I was
+trying to capture. Due to this, very little gets lost. At this
+point, we have a "proto-story".
+\item as time progresses, I end up having more ideas on this space, and I
+update the story with those ideas - mainly bullet points with one
+liners and links.
+\item at some point the story begins to mature; there is enough on it that
+we can convert the "proto-story" to a full blown story. After a
+number of grooms, the story becomes fully formed and is then a
+candidate to be moved to a sprint backlog for implementation. It may
+stay in this state \emph{ad-infinitum}, with periodic updates just to
+make sure it does not rot.
+\item A candidate story can still get refined: trimmed in scope,
+re-targeted, or even cancelled because it no longer fits with the
+current architecture or even the vision. Cancelled stories are
+important because we may came back to them - its just very unlikely
+that we do.
+\item every sprint has a "sprint mission"\footnote{See the \href{https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_78.org}{current sprint backlog} for an example.}. When we start to
+move stories into the sprint backlog, we look for those which
+resonate with the sprint mission. Not all of them are fully formed,
+and the work on the sprint can entail the analysis required to
+create a full blown story. But many will be implementable directly
+off of the product backlog.
+\item some times I end up finding related threads in multiple stories and
+decide to merge them. Merging of related stories is done by simply
+copying and pasting them into a single story; over time, with the
+multiple passes done in the grooms, we end up again with a single
+consistent story.
+\end{itemize}
+
+What all of this means is that a story can evolve over time in the
+product backlog, only to become the exact thing you need at a given
+sprint; at that point you benefit from the knowledge and insight
+gained over that long period of time. Some stories in Dogen's backlog
+have been there for years, and when I finally get to them, I find them
+extremely useful. Remember: they are a map to the unknown space you
+are exploring.
+
+With all of this machinery in place, we've ended up with a very useful
+product backlog for Dogen - one that certainly adds a lot of
+value. Don't take me wrong, the cost of maintenance is high and I'd
+rather be coding instead of maintaining the product backlog,
+especially given the limited resources. But I keep it because I can
+see on a daily basis how much it improves the overall quality of the
+development process. It is a price I find worth paying, given what I
+get in return.
+
+\section*{Final Thoughts}
+\label{sec-6}
+
+This post was an attempt to summarise some of the thoughts I've been
+having on the space of product backlogs. One of its main objectives
+was to try to convey the importance of this tool, and to provide ideas
+on how you can improve the management of your own product backlog by
+discussing the approach I have taken with Dogen.
+
+If you have any suggestions or want to share your own tips on how to
+manage your product backlog please reach me on the comments section -
+there is always space for improvement.
 
 \chapter{Assorted Text}
 
