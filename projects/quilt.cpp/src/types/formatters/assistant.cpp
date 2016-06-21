@@ -395,6 +395,13 @@ void assistant::add_helper_methods(const properties::class_info& c) {
 }
 
 void assistant::add_helper_methods() {
+    if (context_.element_properties().helper_properties().empty()) {
+        // FIXME: supply target name as an argument and print its ID
+        // FIXME: here. This needs to wait until we start using yarn
+        // FIXME: types on all formatters.
+        BOOST_LOG_SEV(lg, debug) << "No helper methods for: ";
+    }
+
     for (const auto& hp : context_.element_properties().helper_properties()) {
         const auto i(context_.helpers().find(hp.settings().family()));
         if (i == context_.helpers().end()) {

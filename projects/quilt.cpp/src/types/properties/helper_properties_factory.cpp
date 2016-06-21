@@ -20,13 +20,14 @@
  */
 #include <unordered_set>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
+#include "dogen/quilt.cpp/io/properties/helper_properties_io.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quilt.cpp.helper_properties_factory"));
+static logger
+lg(logger_factory("quilt.cpp.properties.helper_properties_factory"));
 
 }
 
@@ -74,7 +75,6 @@ boost::optional<helper_descriptor> helper_properties_factory::make(
     }
 
     const auto& hs(i->second);
-    BOOST_LOG_SEV(lg, debug) << "Helper settings: " << hs;
     hp.settings(hs);
 
     helper_descriptor r;
@@ -83,7 +83,7 @@ boost::optional<helper_descriptor> helper_properties_factory::make(
     r.name_tree_identifiable(nt.identifiable());
     hp.descriptor(r);
     properties.push_back(hp);
-
+    BOOST_LOG_SEV(lg, debug) << "Helper properties: " << hp;
     return r;
 }
 
@@ -96,19 +96,26 @@ make(const std::list<yarn::attribute>& attributes) const {
     }
 
     BOOST_LOG_SEV(lg, debug) << "Properties found: " << attributes.size();
-    std::list<helper_properties> instances;
+    std::list<helper_properties> properties;
     for (const auto a : attributes)
-        make(a.parsed_type(), instances);
+        make(a.parsed_type(), properties);
 
     std::list<helper_properties> r;
+    if (properties.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No helper properties found.";
+        return r;
+    }
+
     std::unordered_set<std::string> done;
-    for (const auto& i : instances) {
-        const auto cn(i.descriptor().name_tree_identifiable());
-        if (done.find(cn) == done.end())
+    for (const auto& i : properties) {
+        const auto in(i.descriptor().name_tree_identifiable());
+        if (done.find(in) != done.end()) {
+            BOOST_LOG_SEV(lg, debug) << "Name tree already processed: " << in;
             continue;
+        }
 
         r.push_back(i);
-        done.insert(cn);
+        done.insert(in);
     }
 
     return r;
