@@ -68,6 +68,7 @@ a.stream() << "    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));" << s
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
     }
+a.stream() << std::endl;
 }
 
 void smart_pointer_helper_stitch(

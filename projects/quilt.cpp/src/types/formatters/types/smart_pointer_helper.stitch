@@ -50,6 +50,9 @@ const <#= a.make_qualified_name(ht) #>& rhs) {
 
 <#+
     }
+#>
+
+<#+
 }
 
 void smart_pointer_helper_stitch(
