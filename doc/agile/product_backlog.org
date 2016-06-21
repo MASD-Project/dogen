@@ -5123,6 +5123,36 @@ is, what then? We can't throw.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
+*** Link against boost dynamic libraries                              :story:
+
+At present we are statically linking against Boost just to make our
+life easier. This was done mainly to fix the problems we had with
+Travis red builds but had the side effect of fixing our Debian
+packages. However, as soon as boost 1.60 is available on Travis we
+probably should go back to dynamic linking. Removed code:
+
+:    # elseif (UNIX)
+:    #     if (library_path MATCHES "boost")
+:    #         set(version "${Boost_MAJOR_VERSION}")
+:    #         set(version "${version}.${Boost_MINOR_VERSION}")
+:    #         set(version "${version}.${Boost_SUBMINOR_VERSION}")
+:
+:    #         get_filename_component(library_name ${library_path} NAME_WE)
+:    #         string(REGEX REPLACE "_" "-" library_name "${library_name}")
+:
+:    #         # FIXME: boost 1.55 is not the default in unstable yet.
+:    #         # set(library_name "${library_name}-dev")
+:    #         set(library_name "${library_name}${Boost_MAJOR_VERSION}.")
+:    #         set(library_name "${library_name}${Boost_MINOR_VERSION}-dev")
+:    #         if ("${boost_deps}" STREQUAL "")
+:    #             set(boost_deps "${library_name} (>= ${version})")
+:    #         else()
+:    #             set(boost_deps "${boost_deps}, ${library_name} (>= ${version})")
+:    #         endif()
+:    #     endif()
+
+See also main CMakeLists.txt around =6b837334c3247bee2f6be8099cd5288a284fa36c=.
+
 *** Add support for bintray                                           :story:
 
 There is a new web application that interfaces with GitHub:

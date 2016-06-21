@@ -113,26 +113,6 @@ foreach(library_path ${Boost_LIBRARIES})
         get_filename_component(library_name ${library_path} NAME)
         install(FILES ${stage_lib_dir}/${library_name}
             DESTINATION bin COMPONENT applications)
-
-    elseif (UNIX)
-        if (library_path MATCHES "boost")
-            set(version "${Boost_MAJOR_VERSION}")
-            set(version "${version}.${Boost_MINOR_VERSION}")
-            set(version "${version}.${Boost_SUBMINOR_VERSION}")
-
-            get_filename_component(library_name ${library_path} NAME_WE)
-            string(REGEX REPLACE "_" "-" library_name "${library_name}")
-
-            # FIXME: boost 1.55 is not the default in unstable yet.
-            # set(library_name "${library_name}-dev")
-            set(library_name "${library_name}${Boost_MAJOR_VERSION}.")
-            set(library_name "${library_name}${Boost_MINOR_VERSION}-dev")
-            if ("${boost_deps}" STREQUAL "")
-                set(boost_deps "${library_name} (>= ${version})")
-            else()
-                set(boost_deps "${boost_deps}, ${library_name} (>= ${version})")
-            endif()
-        endif()
     endif()
 endforeach()
 
