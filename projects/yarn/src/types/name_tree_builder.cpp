@@ -29,13 +29,10 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/location_io.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/io/name_tree_io.hpp"
 #include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/building_error.hpp"
-#include "dogen/yarn/types/pretty_printer.hpp"
-#include "dogen/yarn/types/string_processor.hpp"
 #include "dogen/yarn/types/name_tree_builder.hpp"
 
 using namespace dogen::utility::log;
@@ -199,26 +196,10 @@ name_tree name_tree_builder::make_name_tree(const node& n) {
     name_tree r;
     r.current(n.data());
 
-    pretty_printer pp(separators::double_colons);
-    pp.add(n.data());
-
     for (const auto c : n.children()) {
         const auto cnt(make_name_tree(*c));
         r.children().push_back(cnt);
-
-        const auto i(cnt.qualified().find(languages::cpp));
-        if (i == cnt.qualified().end()) {
-            BOOST_LOG_SEV(lg, error) << qn_missing << languages::cpp;
-            BOOST_THROW_EXCEPTION(building_error(qn_missing));
-        }
-        pp.add_child(i->second);
     }
-
-    const auto cpp_qn(pp.print());
-    r.qualified()[languages::cpp] = cpp_qn;
-
-    string_processor sp;
-    r.identifiable(sp.to_identifiable(cpp_qn));
 
     return r;
 }

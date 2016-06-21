@@ -28,11 +28,15 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/yarn/types/resolution_error.hpp"
 #include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/io/name_tree_io.hpp"
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/separators.hpp"
+#include "dogen/yarn/types/pretty_printer.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/string_processor.hpp"
 #include "dogen/yarn/types/resolver.hpp"
 
 namespace {
@@ -50,6 +54,7 @@ const std::string missing_default(
     "Model does not have a default enumeration type: ");
 const std::string invalid_default(
     "Model has a default enumeration type that cannot be found: ");
+const std::string qn_missing("Could not find qualified name for language.");
 
 typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 
@@ -57,6 +62,17 @@ typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 
 namespace dogen {
 namespace yarn {
+
+template<typename Qualifiable>
+inline std::string obtain_qualified(const Qualifiable& q) {
+    const auto i(q.qualified().find(languages::cpp));
+    if (i == q.qualified().end()) {
+        BOOST_LOG_SEV(lg, error) << qn_missing << yarn::languages::cpp;
+        BOOST_THROW_EXCEPTION(resolution_error(qn_missing));
+    }
+
+    return i->second;
+}
 
 bool resolver::is_primitive(const intermediate_model& m, const name& n) const {
     auto i(m.primitives().find(n.id()));
@@ -183,12 +199,22 @@ resolve_partial_type(const intermediate_model& m, const name& n) const {
 
 void resolver::
 resolve_partial_type(const intermediate_model& m, name_tree& nt) const {
-    for (auto& cnt : nt.children())
-        resolve_partial_type(m, cnt);
-
     const name n(resolve_partial_type(m, nt.current()));
-    BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.id() << ".";
     nt.current(n);
+
+    pretty_printer pp(separators::double_colons);
+    pp.add(obtain_qualified(n));
+
+    for (auto& cnt : nt.children()) {
+        resolve_partial_type(m, cnt);
+        pp.add_child(obtain_qualified(cnt));
+    }
+
+    const auto cpp_qn(pp.print());
+    nt.qualified()[languages::cpp] = cpp_qn;
+
+    string_processor sp;
+    nt.identifiable(sp.to_identifiable(cpp_qn));
 }
 
 void resolver::resolve_attributes(const intermediate_model& m,
@@ -196,6 +222,7 @@ void resolver::resolve_attributes(const intermediate_model& m,
     for (auto& a : attributes) {
         try {
             resolve_partial_type(m, a.parsed_type());
+            BOOST_LOG_SEV(lg, debug) << "Resolved attribute: " << a.name().id();
         } catch (boost::exception& e) {
             std::ostringstream s;
             s << "Owner type name: " << owner.id()

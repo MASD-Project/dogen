@@ -114,6 +114,10 @@ void pretty_printer::add(const name& n, const bool model_name_mode) {
     }
 }
 
+void pretty_printer::add(const std::string& c) {
+    stream_ << c;
+}
+
 void pretty_printer::add_child(const std::string& c) {
     if (c.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_child;

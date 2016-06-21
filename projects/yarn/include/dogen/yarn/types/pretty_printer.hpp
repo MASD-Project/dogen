@@ -49,6 +49,7 @@ private:
 
 public:
     void add(const name& n, const bool model_name_mode = false);
+    void add(const std::string& c);
     void add_child(const std::string& c);
 
 public:
