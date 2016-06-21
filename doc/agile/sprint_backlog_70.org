@@ -694,6 +694,7 @@ the domain.
   defining the Domain Model and then having multiple representations,
   each being a viewpoint: presentation layer, business layer,
   persistence.
+
 *** COMPLETED Split a fully formed model from partial models          :story:
     CLOSED: [2015-07-15 Wed 19:01]
     CLOCK: [2015-07-13 Mon 17:24]--[2015-07-13 Mon 17:40] =>  0:16

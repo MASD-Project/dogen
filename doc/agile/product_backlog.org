@@ -1306,6 +1306,7 @@ text.
 The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
+
 *** Consider allowing renaming of "internal" types                    :story:
 
 Users may want to change the =_visitor= postfix for visitors or the
@@ -2489,7 +2490,9 @@ that we can go to the file where the error occurred:
 For this to work we need to label everything with a file, column and
 line. We can't call this class a =location= since we already use that
 name for positions in model space. We could probably call it
-=source_location= like [[http://clang.llvm.org/doxygen/classclang_1_1SourceLocation.htlm][clang does]].
+=source_location= like [[http://clang.llvm.org/doxygen/classclang_1_1SourceLocation.htlm][clang does]]. We can use [[https://developer.apple.com/library/prerelease/content/documentation/Darwin/Reference/usr_APIs/tree/index.html][XML_GET_LINE]] to get
+information about the line number of dia documents. We need something
+similar for JSON.
 
 The context should be provided using Boost Exception diagnostics and
 dumped into =std::cerr= at the very top.
@@ -2778,6 +2781,19 @@ them even if they are on the same namespace as the containing type.
 
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
+
+*** Consider supporting non-boost exceptions                          :story:
+
+It should be fairly trivial to disable the use of boost exception when
+generating exceptions. This would allow us to create a model that is
+totally independent of boost.
+
+*** Consider supporting user supplied exception base class            :story:
+
+For models that interface with other models, it may make sense to have
+an exception class that is derived from a user defined class. We could
+easily support an exception base class supplied via meta-data. The
+user would have to expose the type via JSON.
 
 *** Consider computing hashes only once for immutable types           :story:
 
@@ -6185,7 +6201,7 @@ The ideal state of the world is one where:
 - the template should have all of the parameters required such as
   types of variables.
 
-*** Keep track of sewing terms allocation                             :story:
+*** Keep track of sewing terms allocation                   :reviewing:story:
 
 This story just keeps track of how we are using the different sewing
 terms in Dogen. We are only tracking terms which are not yet
@@ -6194,12 +6210,12 @@ not yet allocated a term.
 
 | Term   | Meaning | Dogen usage                                               |
 |--------+---------+-----------------------------------------------------------|
-| weave  |         | Not used yet. Reserved for AOP support                    |
+| weave  |         | Reserved for AOP support?                                 |
 | [[https://en.wikipedia.org/wiki/Glossary_of_sewing_terms#D][dart]]   |         | Will be used for the skeleton generator tool              |
-| [[https://en.wikipedia.org/wiki/Yoke_(clothing)][yoke]]   |         | Not used yet.                                             |
-| tailor |         | Not used yet. Format converter? e.g. Dia to JSON, etc.    |
-| jersey |         | Not used yet. Code generation service.                    |
-| hem    |         | Not used yet. HTTP Wrapper around jersey.                 |
+| [[https://en.wikipedia.org/wiki/Yoke_(clothing)][yoke]]   |         |                                                           |
+| tailor |         | Format converter. e.g. Dia to JSON, etc.                  |
+| jersey |         | Code generation service.                                  |
+| hem    |         | HTTP Wrapper around jersey.                               |
 | twine  |         | Tool to infer model from XML/JSON/CSV instance documents. |
 |        |         | Tool to infer model from SQL database schemas.            |
 
@@ -6236,7 +6252,7 @@ trim down the obvious ones:
 Basically any feature which we are not using at present and cannot
 think of an obvious use case.
 
-*** Thoughts around multi-kernel support                     :reviewing:epic:
+*** Thoughts around multi-kernel support                               :epic:
 
 Dogen only has a single backend kernel: quilt. This story looks into
 how the world looks like if we want to support multiple of these.
@@ -6256,7 +6272,7 @@ how the world looks like if we want to support multiple of these.
   shared between these different languages (they all need includes,
   etc). Other languages may also have similar requirements (D?).
 
-*Previous notes slightly bit-rotted*
+*Previous notes, slightly bit-rotted*
 
 At present we have hard-coded knit to support a single C++ model,
 cpp. However, in reality the world looks more like this:
