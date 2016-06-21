@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include "dogen/yarn/test_data/name_td.hpp"
+#include "dogen/yarn/test_data/languages_td.hpp"
 #include "dogen/yarn/test_data/name_tree_td.hpp"
 
 namespace {
@@ -46,10 +47,23 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
+dogen::yarn::languages
+create_dogen_yarn_languages(const unsigned int position) {
+    return dogen::yarn::languages_generator::create(position);
+}
+
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
     return s.str();
+}
+
+std::map<dogen::yarn::languages, std::string> create_std_map_dogen_yarn_languages_std_string(unsigned int position) {
+    std::map<dogen::yarn::languages, std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_dogen_yarn_languages(position + i), create_std_string(position + i)));
+    }
+    return r;
 }
 
 }
@@ -65,7 +79,7 @@ populate(const unsigned int position, result_type& v) {
     v.children(create_std_list_dogen_yarn_name_tree(position + 1));
     v.are_children_opaque(create_bool(position + 2));
     v.is_circular_dependency(create_bool(position + 3));
-    v.encoded(create_std_string(position + 4));
+    v.qualified(create_std_map_dogen_yarn_languages_std_string(position + 4));
     v.identifiable(create_std_string(position + 5));
 }
 

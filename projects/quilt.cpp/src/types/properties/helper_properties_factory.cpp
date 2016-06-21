@@ -79,7 +79,7 @@ boost::optional<helper_descriptor> helper_properties_factory::make(
 
     helper_descriptor r;
     r.helped_type(nt.current());
-    r.name_tree_encoded(nt.encoded());
+    // FIXME: r.name_tree_encoded(nt.encoded());
     r.name_tree_identifiable(nt.identifiable());
     hp.descriptor(r);
     properties.push_back(hp);

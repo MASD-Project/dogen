@@ -34,6 +34,7 @@ const std::string double_colon("::");
 const char less_than('<');
 const char greater_than('>');
 const std::string unsupported_separator("Unsupported separator");
+const std::string empty_child("Attempt to add an empty child.");
 
 }
 
@@ -41,11 +42,11 @@ namespace dogen {
 namespace yarn {
 
 pretty_printer::pretty_printer()
-    : has_name_trees_(false), last_name_tree_had_children_(false),
+    : has_children_(false), last_child_had_children_(false),
       separator_(separators::angle_brackets) { }
 
 pretty_printer::pretty_printer(const separators s)
-    : has_name_trees_(false), last_name_tree_had_children_(false),
+    : has_children_(false), last_child_had_children_(false),
       separator_(s) { }
 
 std::list<std::string> pretty_printer::
@@ -113,38 +114,51 @@ void pretty_printer::add(const name& n, const bool model_name_mode) {
     }
 }
 
-void pretty_printer::add(const name_tree& nt) {
+void pretty_printer::add_child(const std::string& c) {
+    if (c.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_child;
+        BOOST_THROW_EXCEPTION(printing_error(empty_child));
+    }
+
     /*
-     * If we are the first name tree to be added, open the angle
-     * brackets; otherwise, separate the name trees.
+     * If we are the first child to be added, open the angle brackets;
+     * otherwise, separate the siblings.
      */
-    if (!has_name_trees_)
+    if (!has_children_)
         stream_ << less_than;
     else
         stream_ << comma_space;
 
-    stream_ << nt.encoded();
-    has_name_trees_ = true;
+    stream_ << c;
+    has_children_ = true;
 
     /*
      * Remember if the last name tree child also had children.
      */
-    last_name_tree_had_children_ = nt.encoded().back() == greater_than;
+    last_child_had_children_ = c.back() == greater_than;
 }
 
 std::string pretty_printer::print() {
-    if (!has_name_trees_)
+    /*
+    * If we do not have any children, the printing is finished.
+    */
+    if (!has_children_)
         return stream_.str();
 
     /*
-     * If the last name tree child had children, add a space between
-     * template markers. Not really required for C++ 11 and above, but
-     * we will leave it for now to avoid spurious differences.
+     * If we did have some children and the last child had children,
+     * add a space between template markers. Not really required for
+     * C++ 11 and above, but we will leave it for now to avoid
+     * spurious differences.
      */
-    if (last_name_tree_had_children_)
+    if (last_child_had_children_)
         stream_ << space;
 
+    /*
+     * Close the children separators.
+     */
     stream_ << greater_than;
+
     return stream_.str();
 }
 

@@ -28,7 +28,6 @@
 #include <string>
 #include <sstream>
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/separators.hpp"
 
 namespace dogen {
@@ -50,14 +49,14 @@ private:
 
 public:
     void add(const name& n, const bool model_name_mode = false);
-    void add(const name_tree& nt);
+    void add_child(const std::string& c);
 
 public:
     std::string print();
 
 private:
-    bool has_name_trees_;
-    bool last_name_tree_had_children_;
+    bool has_children_;
+    bool last_child_had_children_;
     std::ostringstream stream_;
     const separators separator_;
 };

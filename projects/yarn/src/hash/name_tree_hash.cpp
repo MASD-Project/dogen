@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/yarn/hash/name_hash.hpp"
+#include "dogen/yarn/hash/languages_hash.hpp"
 #include "dogen/yarn/hash/name_tree_hash.hpp"
 
 namespace {
@@ -37,6 +38,15 @@ inline std::size_t hash_std_list_dogen_yarn_name_tree(const std::list<dogen::yar
     return seed;
 }
 
+inline std::size_t hash_std_map_dogen_yarn_languages_std_string(const std::map<dogen::yarn::languages, std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -49,7 +59,7 @@ std::size_t name_tree_hasher::hash(const name_tree& v) {
     combine(seed, hash_std_list_dogen_yarn_name_tree(v.children()));
     combine(seed, v.are_children_opaque());
     combine(seed, v.is_circular_dependency());
-    combine(seed, v.encoded());
+    combine(seed, hash_std_map_dogen_yarn_languages_std_string(v.qualified()));
     combine(seed, v.identifiable());
 
     return seed;

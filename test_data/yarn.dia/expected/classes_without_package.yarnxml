@@ -282,7 +282,10 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<encoded></encoded>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -463,7 +466,10 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<encoded></encoded>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -644,7 +650,10 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<encoded></encoded>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -825,7 +834,10 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<encoded></encoded>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>
@@ -1006,7 +1018,10 @@
 							</children>
 							<are_children_opaque>0</are_children_opaque>
 							<is_circular_dependency>0</is_circular_dependency>
-							<encoded></encoded>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
 							<identifiable></identifiable>
 						</parsed_type>
 						<is_immutable>0</is_immutable>

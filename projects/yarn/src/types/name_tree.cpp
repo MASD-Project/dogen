@@ -32,13 +32,13 @@ name_tree::name_tree(
     const std::list<dogen::yarn::name_tree>& children,
     const bool are_children_opaque,
     const bool is_circular_dependency,
-    const std::string& encoded,
+    const std::map<dogen::yarn::languages, std::string>& qualified,
     const std::string& identifiable)
     : current_(current),
       children_(children),
       are_children_opaque_(are_children_opaque),
       is_circular_dependency_(is_circular_dependency),
-      encoded_(encoded),
+      qualified_(qualified),
       identifiable_(identifiable) { }
 
 void name_tree::swap(name_tree& other) noexcept {
@@ -47,7 +47,7 @@ void name_tree::swap(name_tree& other) noexcept {
     swap(children_, other.children_);
     swap(are_children_opaque_, other.are_children_opaque_);
     swap(is_circular_dependency_, other.is_circular_dependency_);
-    swap(encoded_, other.encoded_);
+    swap(qualified_, other.qualified_);
     swap(identifiable_, other.identifiable_);
 }
 
@@ -56,7 +56,7 @@ bool name_tree::operator==(const name_tree& rhs) const {
         children_ == rhs.children_ &&
         are_children_opaque_ == rhs.are_children_opaque_ &&
         is_circular_dependency_ == rhs.is_circular_dependency_ &&
-        encoded_ == rhs.encoded_ &&
+        qualified_ == rhs.qualified_ &&
         identifiable_ == rhs.identifiable_;
 }
 
@@ -114,20 +114,20 @@ void name_tree::is_circular_dependency(const bool v) {
     is_circular_dependency_ = v;
 }
 
-const std::string& name_tree::encoded() const {
-    return encoded_;
+const std::map<dogen::yarn::languages, std::string>& name_tree::qualified() const {
+    return qualified_;
 }
 
-std::string& name_tree::encoded() {
-    return encoded_;
+std::map<dogen::yarn::languages, std::string>& name_tree::qualified() {
+    return qualified_;
 }
 
-void name_tree::encoded(const std::string& v) {
-    encoded_ = v;
+void name_tree::qualified(const std::map<dogen::yarn::languages, std::string>& v) {
+    qualified_ = v;
 }
 
-void name_tree::encoded(const std::string&& v) {
-    encoded_ = std::move(v);
+void name_tree::qualified(const std::map<dogen::yarn::languages, std::string>&& v) {
+    qualified_ = std::move(v);
 }
 
 const std::string& name_tree::identifiable() const {

@@ -28,8 +28,11 @@
 #include <list>
 #include <string>
 #include <algorithm>
+#include <map>
 #include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/yarn/hash/languages_hash.hpp"
 #include "dogen/yarn/serialization/name_tree_fwd_ser.hpp"
 
 namespace dogen {
@@ -58,7 +61,7 @@ public:
         const std::list<dogen::yarn::name_tree>& children,
         const bool are_children_opaque,
         const bool is_circular_dependency,
-        const std::string& encoded,
+        const std::map<dogen::yarn::languages, std::string>& qualified,
         const std::string& identifiable);
 
 private:
@@ -110,13 +113,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Textual representaion of the name tree and its children, using a dogen grammar.
+     * @brief Qualified name in a language specific representation.
      */
     /**@{*/
-    const std::string& encoded() const;
-    std::string& encoded();
-    void encoded(const std::string& v);
-    void encoded(const std::string&& v);
+    const std::map<dogen::yarn::languages, std::string>& qualified() const;
+    std::map<dogen::yarn::languages, std::string>& qualified();
+    void qualified(const std::map<dogen::yarn::languages, std::string>& v);
+    void qualified(const std::map<dogen::yarn::languages, std::string>&& v);
     /**@}*/
 
     /**
@@ -145,7 +148,7 @@ private:
     std::list<dogen::yarn::name_tree> children_;
     bool are_children_opaque_;
     bool is_circular_dependency_;
-    std::string encoded_;
+    std::map<dogen::yarn::languages, std::string> qualified_;
     std::string identifiable_;
 };
 

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/serialization/map.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
@@ -30,6 +31,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
+#include "dogen/yarn/serialization/languages_ser.hpp"
 #include "dogen/yarn/serialization/name_tree_ser.hpp"
 
 namespace boost {
@@ -43,7 +45,7 @@ void save(Archive& ar,
     ar << make_nvp("children", v.children_);
     ar << make_nvp("are_children_opaque", v.are_children_opaque_);
     ar << make_nvp("is_circular_dependency", v.is_circular_dependency_);
-    ar << make_nvp("encoded", v.encoded_);
+    ar << make_nvp("qualified", v.qualified_);
     ar << make_nvp("identifiable", v.identifiable_);
 }
 
@@ -55,7 +57,7 @@ void load(Archive& ar,
     ar >> make_nvp("children", v.children_);
     ar >> make_nvp("are_children_opaque", v.are_children_opaque_);
     ar >> make_nvp("is_circular_dependency", v.is_circular_dependency_);
-    ar >> make_nvp("encoded", v.encoded_);
+    ar >> make_nvp("qualified", v.qualified_);
     ar >> make_nvp("identifiable", v.identifiable_);
 }
 
