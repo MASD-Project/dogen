@@ -410,14 +410,13 @@ void assistant::add_helper_methods() {
         BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
                                  << ownership_hierarchy_.formatter_name();
 
-
-        const auto& helper(*j->second);
-        if (!helper.is_enabled(*this)) {
-            BOOST_LOG_SEV(lg, debug) << "Helper is not enabled.";
-            continue;
+        for (const auto& h : j->second) {
+            if (!h->is_enabled(*this)) {
+                BOOST_LOG_SEV(lg, debug) << "Helper is not enabled.";
+                continue;
+            }
+            h->format(*this, hp);
         }
-
-        helper.format(*this, hp);
     }
 }
 

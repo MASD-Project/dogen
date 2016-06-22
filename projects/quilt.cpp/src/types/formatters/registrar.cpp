@@ -36,7 +36,6 @@ const std::string no_forward_declarations_formatters(
     "No forward declarations formatters provided.");
 const std::string null_formatter("Formatter supplied is null");
 const std::string null_formatter_helper("Formatter helper supplied is null");
-const std::string helper_already_registered("Helper already registered: ");
 
 }
 
@@ -125,12 +124,9 @@ void registrar::register_formatter_helper(
     if (!fh)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter_helper));
 
-    auto& c(formatter_helpers_[fh->family()]);
-    const auto result(c.insert(std::make_pair(fh->owning_formatter(), fh)));
-    if (!result.second) {
-        BOOST_THROW_EXCEPTION(
-            registrar_error(helper_already_registered + fh->helper_name()));
-    }
+    auto& f(formatter_helpers_[fh->family()]);
+    for (const auto& of : fh->owning_formatters())
+        f[of].push_back(fh);
 }
 
 void registrar::register_formatter(
@@ -245,7 +241,8 @@ registrar::ownership_hierarchy() const {
 const std::unordered_map<
     std::string, std::unordered_map<
                      std::string,
-                     std::shared_ptr<formatter_helper_interface>>>&
+                     std::list<
+                         std::shared_ptr<formatter_helper_interface>>>>&
 registrar::formatter_helpers() const {
     return formatter_helpers_;
 }

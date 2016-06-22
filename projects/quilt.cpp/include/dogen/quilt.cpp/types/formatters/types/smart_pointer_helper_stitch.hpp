@@ -37,7 +37,7 @@ namespace types {
 class smart_pointer_helper : public formatter_helper_interface {
 public:
     std::string family() const;
-    std::string owning_formatter() const;
+    std::list<std::string> owning_formatters() const;
     bool requires_explicit_call() const;
     std::string function_name() const;
     std::string helper_name() const;

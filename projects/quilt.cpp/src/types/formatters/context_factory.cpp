@@ -47,19 +47,20 @@ const std::unordered_map<
     std::string,
     std::unordered_map<
         std::string,
-        std::shared_ptr<formatter_helper_interface>>> context_factory::
+        std::list<std::shared_ptr<formatter_helper_interface>>>>
+    context_factory::
     empty_helpers_ = std::unordered_map<
     std::string,
     std::unordered_map<
         std::string,
-        std::shared_ptr<formatter_helper_interface>>>();
+        std::list<std::shared_ptr<formatter_helper_interface>>>>();
 
 context_factory::context_factory(const settings::bundle_repository& brp,
     const properties::element_properties_repository& eprp,
     const std::unordered_map<
     std::string, std::unordered_map<
     std::string,
-    std::shared_ptr<formatter_helper_interface>>>& helpers)
+    std::list<std::shared_ptr<formatter_helper_interface>>>>& helpers)
     : bundle_(brp), element_properties_(eprp), formatter_helpers_(helpers) {}
 
 const properties::element_properties& context_factory::

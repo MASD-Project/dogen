@@ -29,7 +29,7 @@ context::context(
     const settings::bundle& bundle,
     const properties::element_properties& element_properties,
     const std::unordered_map<std::string, std::unordered_map<std::string,
-    std::shared_ptr<formatter_helper_interface>>>& helpers)
+    std::list<std::shared_ptr<formatter_helper_interface>>>>& helpers)
     : bundle_(bundle),
       element_properties_(element_properties),
       helpers_(helpers) { }
@@ -45,7 +45,7 @@ const properties::element_properties& context::element_properties() const {
 const std::unordered_map<
     std::string,
     std::unordered_map<
-        std::string, std::shared_ptr<formatter_helper_interface>>>&
+        std::string, std::list<std::shared_ptr<formatter_helper_interface>>>>&
 context::helpers() const {
     return helpers_;
 }

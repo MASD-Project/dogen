@@ -43,7 +43,7 @@ public:
         const std::unordered_map<
         std::string, std::unordered_map<
         std::string,
-        std::shared_ptr<formatter_helper_interface>>>& helpers);
+        std::list<std::shared_ptr<formatter_helper_interface>>>>& helpers);
 
 private:
     const properties::element_properties&
@@ -61,14 +61,16 @@ private:
         std::string,
         std::unordered_map<
             std::string,
-            std::shared_ptr<formatter_helper_interface>>> empty_helpers_;
+            std::list<
+                std::shared_ptr<formatter_helper_interface>>>> empty_helpers_;
     static const properties::element_properties empty_element_properties_;
     const settings::bundle_repository& bundle_;
     const properties::element_properties_repository& element_properties_;
     const std::unordered_map<
         std::string,
         std::unordered_map<std::string,
-                           std::shared_ptr<formatter_helper_interface>>>&
+                           std::list<
+                               std::shared_ptr<formatter_helper_interface>>>>&
         formatter_helpers_;
 };
 

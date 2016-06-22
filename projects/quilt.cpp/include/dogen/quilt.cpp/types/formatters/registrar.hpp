@@ -139,7 +139,8 @@ public:
     const std::unordered_map<
         std::string,
         std::unordered_map<std::string,
-                           std::shared_ptr<formatter_helper_interface>>>&
+                           std::list<
+                               std::shared_ptr<formatter_helper_interface>>>>&
     formatter_helpers() const;
 
 private:
@@ -147,7 +148,8 @@ private:
     std::unordered_map<
         std::string,
         std::unordered_map<std::string,
-                           std::shared_ptr<formatter_helper_interface>>>
+                           std::list<
+                               std::shared_ptr<formatter_helper_interface>>>>
     formatter_helpers_;
     std::forward_list<dynamic::ownership_hierarchy> ownership_hierarchy_;
 };

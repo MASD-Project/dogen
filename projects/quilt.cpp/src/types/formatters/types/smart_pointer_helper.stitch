@@ -13,8 +13,12 @@ std::string smart_pointer_helper::family() const {
     return r;
 }
 
-std::string smart_pointer_helper::owning_formatter() const {
-    return traits::class_implementation_formatter_name();
+std::list<std::string>
+smart_pointer_helper::owning_formatters() const {
+    static auto r(std::list<std::string> {
+        traits::class_implementation_formatter_name()
+    });
+    return r;
 }
 
 bool smart_pointer_helper::requires_explicit_call() const {
@@ -27,7 +31,7 @@ std::string smart_pointer_helper::function_name() const {
 }
 
 std::string smart_pointer_helper::helper_name() const {
-    static std::string r(owning_formatter() + "." + family());
+    static std::string r(/*owning_formatter() +*/ "." + family());
     return r;
 }
 

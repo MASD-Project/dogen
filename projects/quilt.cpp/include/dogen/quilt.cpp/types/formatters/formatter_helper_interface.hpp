@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant_fwd.hpp"
@@ -44,7 +45,7 @@ public:
 
 public:
     virtual std::string family() const = 0;
-    virtual std::string owning_formatter() const = 0;
+    virtual std::list<std::string> owning_formatters() const = 0;
     virtual bool requires_explicit_call() const = 0;
     virtual std::string function_name() const = 0;
     virtual std::string helper_name() const = 0;

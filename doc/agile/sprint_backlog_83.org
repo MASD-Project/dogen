@@ -541,6 +541,18 @@ qualified name tree.
 
 We also need the helper descriptor to follow the same pattern.
 
+*** COMPLETED Add support for helpers bound to multiple formatters.   :story:
+    CLOSED: [2016-06-22 Wed 21:32]
+    CLOCK: [2016-06-22 Wed 20:50]--[2016-06-22 Wed 21:31] =>  0:41
+
+Update the formatter helper interface to cater for the following use
+cases:
+
+- there can be more than one helper for a given formatter and
+  family. Example: types needs both IO and types helpers.
+- conversely a helper can have more than one owning formatter (io
+  helper has types and io formatters).
+
 *** Add class info to is enabled in formatter helper interface        :story:
 
 In order to determine if a helper is enabled or not we need to have
@@ -551,13 +563,6 @@ enablement. We probably should avoid coupling the two together -
 e.g. what happens when we are generating helpers for enumerations;
 there is no yarn object then. At present we have a uniform interface
 for the helpers across yarn types. We should preserve this.
-
-*** Add support for helpers bound to multiple formatters.             :story:
-
-- there can be more than one helper for a given formatter and
-  family. Example: types needs both IO and types helpers.
-- conversely a helper can have more than one owning formatter (io
-  helper has types and io formatters).
 
 *** STARTED Implement types helper methods with new helper infrastructure :story:
     CLOCK: [2016-06-22 Wed 15:47]--[2016-06-22 Wed 16:16] =>  0:29
