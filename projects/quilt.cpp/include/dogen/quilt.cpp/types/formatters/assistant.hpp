@@ -222,7 +222,7 @@ public:
      * formatter.
      */
     void add_helper_methods(const properties::class_info& c);
-    void add_helper_methods();
+    void add_helper_methods(const bool in_inheritance = false);
 
     /**
      * @brief Returns true if the type can be hashed without requiring a

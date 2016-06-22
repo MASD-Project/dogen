@@ -383,7 +383,7 @@ void assistant::add_helper_methods(const properties::class_info& c) {
     }
 }
 
-void assistant::add_helper_methods() {
+void assistant::add_helper_methods(const bool in_inheritance) {
     if (context_.element_properties().helper_properties().empty()) {
         // FIXME: supply target name as an argument and print its ID
         // FIXME: here. This needs to wait until we start using yarn
@@ -411,7 +411,7 @@ void assistant::add_helper_methods() {
                                  << ownership_hierarchy_.formatter_name();
 
         for (const auto& h : j->second) {
-            if (!h->is_enabled(*this)) {
+            if (!h->is_enabled(*this, in_inheritance)) {
                 BOOST_LOG_SEV(lg, debug) << "Helper is not enabled.";
                 continue;
             }

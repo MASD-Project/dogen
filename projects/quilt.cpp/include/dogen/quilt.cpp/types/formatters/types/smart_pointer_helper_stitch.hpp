@@ -41,7 +41,7 @@ public:
     bool requires_explicit_call() const;
     std::string function_name() const;
     std::string helper_name() const;
-    bool is_enabled(const assistant& a) const;
+    bool is_enabled(const assistant& a, const bool in_inheritance) const;
     void format(assistant& a, const properties::helper_properties& hp) const;
 };
 
