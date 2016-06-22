@@ -298,7 +298,7 @@
             "simple_name" : "shared_ptr",
             "object_type" : "smart_pointer",
             "extensions" : {
-                "quilt.cpp.helper.family" : "Dereferenceable",
+                "quilt.cpp.helper.family" : "SmartPointer",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<memory>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
                 "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
@@ -311,7 +311,7 @@
             "simple_name" : "weak_ptr",
             "object_type" : "smart_pointer",
             "extensions" : {
-                "quilt.cpp.helper.family" : "Dereferenceable",
+                "quilt.cpp.helper.family" : "SmartPointer",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<memory>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
                 "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
@@ -324,7 +324,7 @@
             "simple_name" : "unique_ptr",
             "object_type" : "smart_pointer",
             "extensions" : {
-                "quilt.cpp.helper.family" : "Dereferenceable",
+                "quilt.cpp.helper.family" : "SmartPointer",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<memory>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
                 "quilt.cpp.io.class_header_formatter.inclusion_required" : false,
@@ -347,7 +347,7 @@
             "meta_type" : "object",
             "simple_name" : "optional",
             "extensions" : {
-                "quilt.cpp.helper.family" : "Dereferenceable",
+                "quilt.cpp.helper.family" : "Optional",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<functional>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
                 "quilt.cpp.io.class_header_formatter.inclusion_required" : false,

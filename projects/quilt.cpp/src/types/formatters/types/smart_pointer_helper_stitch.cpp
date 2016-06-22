@@ -29,7 +29,7 @@ namespace formatters {
 namespace types {
 
 std::string smart_pointer_helper::family() const {
-    static std::string r("Dereferenceable");
+    static std::string r("SmartPointer");
     return r;
 }
 

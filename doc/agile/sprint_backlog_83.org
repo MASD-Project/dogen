@@ -540,6 +540,7 @@ qualified name tree.
 We also need the helper descriptor to follow the same pattern.
 
 *** STARTED Implement types helper methods with new helper infrastructure :story:
+    CLOCK: [2016-06-22 Wed 15:30]--[2016-06-22 Wed 15:46] =>  0:16
     CLOCK: [2016-06-21 Tue 21:46]--[2016-06-21 Tue 22:07] =>  0:21
     CLOCK: [2016-06-21 Tue 20:01]--[2016-06-21 Tue 20:45] =>  0:44
 
