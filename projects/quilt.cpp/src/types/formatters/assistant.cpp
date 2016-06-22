@@ -36,7 +36,6 @@
 #include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/helper_methods_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/helper_methods_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/helper_methods_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/helper_methods_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 

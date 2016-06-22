@@ -26,8 +26,6 @@
 #endif
 
 #include <ostream>
-#include "dogen/quilt.cpp/types/properties/nested_type_info.hpp"
-#include "dogen/quilt.cpp/types/formatters/nested_type_formatting_assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatter_helper_interface.hpp"
 
 namespace dogen {
@@ -46,10 +44,6 @@ public:
     bool is_enabled(const assistant& a) const;
     void format(assistant& a, const properties::helper_properties& hp) const;
 };
-
-void smart_pointer_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
-    const properties::nested_type_info& t);
 
 } } } } }
 

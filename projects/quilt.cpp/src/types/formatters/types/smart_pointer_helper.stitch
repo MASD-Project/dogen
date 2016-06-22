@@ -54,24 +54,4 @@ const <#= d.name_tree_qualified() #>& rhs) {
 <#+
 }
 
-void smart_pointer_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-
-    {
-        auto snf(a.make_scoped_namespace_formatter(t.namespaces()));
-        const auto containee(t.children().front());
-#>
-
-inline bool operator==(const <#= t.complete_name() #>& lhs,
-const <#= t.complete_name() #>& rhs) {
-    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
-}
-
-<#+
-    }
-#>
-
-<#+
-}
 #>

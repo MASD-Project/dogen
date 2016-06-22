@@ -70,20 +70,4 @@ a.stream() << std::endl;
 a.stream() << std::endl;
 }
 
-void smart_pointer_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-
-    {
-        auto snf(a.make_scoped_namespace_formatter(t.namespaces()));
-        const auto containee(t.children().front());
-a.stream() << std::endl;
-a.stream() << "inline bool operator==(const " << t.complete_name() << "& lhs," << std::endl;
-a.stream() << "const " << t.complete_name() << "& rhs) {" << std::endl;
-a.stream() << "    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-    }
-a.stream() << std::endl;
-}
 } } } } }

@@ -142,7 +142,6 @@
 #include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/enablement_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/cmakelists_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/helper_methods_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/visitor_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_builder.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_factory.hpp"
