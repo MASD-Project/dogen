@@ -142,12 +142,13 @@ and if not, skip the type.
 - remove origin types and generation types, replacing it with just a
   boolean for is target. Actually we need something like:
   proxy_reference, non_proxy_reference, target. We also need a good
-  name for this enumeration:
+  name for this enumeration.
 - at present we are using origin type to determine whether to create a
   registrar, etc in cpp model. There is no other use case for
   this. This is done in several places due to the bad handling of C++
   specific types. Grep for =references= in =cpp= to find all
-  locations. We could split references into two (dogen, non-dogen).
+  locations. We could split references into two (dogen, non-dogen). Or
+  references could have a origin type too.
 - we should also replace has generatable types with something more
   like "target model has types" or "is target model empty". The idea
   we are trying to capture is that the target model contained at least
