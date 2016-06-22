@@ -12,39 +12,40 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-22 Wed 16:16]
+#+CAPTION: Clock summary at [2016-06-22 Wed 16:38]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *24:22* |       |      | 100.0 |
+| *Total time*                                                                | *24:43* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 24:22   |       |      | 100.0 |
-| Active                                                                      |         | 24:22 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:19 |   9.5 |
+| Stories                                                                     | 24:43   |       |      | 100.0 |
+| Active                                                                      |         | 24:43 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |  10.8 |
 | STARTED Manual updates and blog posts                                       |         |       | 0:44 |   3.0 |
 | COMPLETED Refactor helper settings                                          |         |       | 0:35 |   2.4 |
-| COMPLETED Add properties for helpers                                        |         |       | 1:35 |   6.5 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   5.7 |
+| COMPLETED Add properties for helpers                                        |         |       | 1:35 |   6.4 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   5.6 |
 | COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   3.4 |
 | COMPLETED Rename helper instances                                           |         |       | 0:37 |   2.5 |
-| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   4.8 |
-| COMPLETED Rename qualified to id                                            |         |       | 0:51 |   3.5 |
+| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   4.7 |
+| COMPLETED Rename qualified to id                                            |         |       | 0:51 |   3.4 |
 | COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   3.2 |
 | COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   5.3 |
-| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   3.5 |
-| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |   8.5 |
+| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   3.4 |
+| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |   8.4 |
 | COMPLETED Rename =name_tree='s parent                                       |         |       | 0:16 |   1.1 |
-| COMPLETED Compute yarn property related information                         |         |       | 2:17 |   9.4 |
+| COMPLETED Compute yarn property related information                         |         |       | 2:17 |   9.2 |
 | COMPLETED Remove redundancy in properties' repositories                     |         |       | 0:22 |   1.5 |
-| COMPLETED Create a top-level type to aggregate properties and helpers       |         |       | 1:42 |   7.0 |
+| COMPLETED Create a top-level type to aggregate properties and helpers       |         |       | 1:42 |   6.9 |
 | COMPLETED Refactor helper descriptor                                        |         |       | 0:23 |   1.6 |
-| COMPLETED Add an helper method interface                                    |         |       | 1:03 |   4.3 |
+| COMPLETED Add an helper method interface                                    |         |       | 1:03 |   4.2 |
 | COMPLETED Remove encoded from yarn's name tree                              |         |       | 1:24 |   5.7 |
-| STARTED Implement types helper methods with new helper infrastructure       |         |       | 1:50 |   7.5 |
+| STARTED Implement types helper methods with new helper infrastructure       |         |       | 1:50 |   7.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-06-22 Wed 16:17]--[2016-06-22 Wed 16:38] =>  0:21
     CLOCK: [2016-06-21 Tue 21:30]--[2016-06-21 Tue 21:42] =>  0:12
     CLOCK: [2016-06-20 Mon 20:45]--[2016-06-20 Mon 21:07] =>  0:22
     CLOCK: [2016-06-20 Mon 15:12]--[2016-06-20 Mon 15:39] =>  0:27
@@ -539,6 +540,24 @@ qualified name tree.
 
 We also need the helper descriptor to follow the same pattern.
 
+*** Add class info to is enabled in formatter helper interface        :story:
+
+In order to determine if a helper is enabled or not we need to have
+access to the yarn type. Since those are not yet available we need
+access to the class info. The interesting thing is that the helper is
+not directly bound to the yarn type, we just need some information for
+enablement. We probably should avoid coupling the two together -
+e.g. what happens when we are generating helpers for enumerations;
+there is no yarn object then. At present we have a uniform interface
+for the helpers across yarn types. We should preserve this.
+
+*** Add support for helpers bound to multiple formatters.             :story:
+
+- there can be more than one helper for a given formatter and
+  family. Example: types needs both IO and types helpers.
+- conversely a helper can have more than one owning formatter (io
+  helper has types and io formatters).
+
 *** STARTED Implement types helper methods with new helper infrastructure :story:
     CLOCK: [2016-06-22 Wed 15:47]--[2016-06-22 Wed 16:16] =>  0:29
     CLOCK: [2016-06-22 Wed 15:30]--[2016-06-22 Wed 15:46] =>  0:16
@@ -548,15 +567,6 @@ We also need the helper descriptor to follow the same pattern.
 - call the new method from the formatters in types and ensure the
   generated code matches previous code.
 - remove/disable all legacy helper method generation.
-
-Notes:
-
-- there can be more than one helper for a given formatter and
-  family. Example: types needs both IO and types helpers.
-- conversely a helper can have more than one owning formatter (io
-  helper has types and io formatters).
-- helper's is enabled is similar to includes provision: we need access
-  to the yarn object to determine if the helper is enabled.
 
 *** Add validation for helper families                                :story:
 
