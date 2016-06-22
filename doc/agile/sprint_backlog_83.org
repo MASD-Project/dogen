@@ -12,35 +12,37 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-22 Wed 20:49]
+#+CAPTION: Clock summary at [2016-06-22 Wed 22:31]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *24:53* |       |      | 100.0 |
+| *Total time*                                                                | *25:50* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 24:53   |       |      | 100.0 |
-| Active                                                                      |         | 24:53 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:50 |  11.4 |
-| STARTED Manual updates and blog posts                                       |         |       | 0:44 |   2.9 |
+| Stories                                                                     | 25:50   |       |      | 100.0 |
+| Active                                                                      |         | 25:50 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:50 |  11.0 |
+| STARTED Manual updates and blog posts                                       |         |       | 0:53 |   3.4 |
 | COMPLETED Refactor helper settings                                          |         |       | 0:35 |   2.3 |
-| COMPLETED Add properties for helpers                                        |         |       | 1:35 |   6.4 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   5.6 |
-| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   3.3 |
-| COMPLETED Rename helper instances                                           |         |       | 0:37 |   2.5 |
-| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   4.7 |
-| COMPLETED Rename qualified to id                                            |         |       | 0:51 |   3.4 |
-| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   3.1 |
-| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   5.2 |
-| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   3.4 |
-| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |   8.4 |
-| COMPLETED Rename =name_tree='s parent                                       |         |       | 0:16 |   1.1 |
-| COMPLETED Compute yarn property related information                         |         |       | 2:17 |   9.2 |
-| COMPLETED Remove redundancy in properties' repositories                     |         |       | 0:22 |   1.5 |
-| COMPLETED Create a top-level type to aggregate properties and helpers       |         |       | 1:42 |   6.8 |
+| COMPLETED Add properties for helpers                                        |         |       | 1:35 |   6.1 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   5.4 |
+| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   3.2 |
+| COMPLETED Rename helper instances                                           |         |       | 0:37 |   2.4 |
+| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   4.5 |
+| COMPLETED Rename qualified to id                                            |         |       | 0:51 |   3.3 |
+| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   3.0 |
+| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   5.0 |
+| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   3.3 |
+| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |   8.1 |
+| COMPLETED Rename =name_tree='s parent                                       |         |       | 0:16 |   1.0 |
+| COMPLETED Compute yarn property related information                         |         |       | 2:17 |   8.8 |
+| COMPLETED Remove redundancy in properties' repositories                     |         |       | 0:22 |   1.4 |
+| COMPLETED Create a top-level type to aggregate properties and helpers       |         |       | 1:42 |   6.6 |
 | COMPLETED Refactor helper descriptor                                        |         |       | 0:23 |   1.5 |
-| COMPLETED Add an helper method interface                                    |         |       | 1:03 |   4.2 |
-| COMPLETED Remove encoded from yarn's name tree                              |         |       | 1:24 |   5.6 |
-| STARTED Implement types helper methods with new helper infrastructure       |         |       | 1:50 |   7.4 |
+| COMPLETED Add an helper method interface                                    |         |       | 1:03 |   4.1 |
+| COMPLETED Remove encoded from yarn's name tree                              |         |       | 1:24 |   5.4 |
+| COMPLETED Add support for helpers bound to multiple formatters.             |         |       | 0:41 |   2.6 |
+| STARTED Add class info to is enabled in formatter helper interface          |         |       | 0:07 |   0.5 |
+| STARTED Implement types helper methods with new helper infrastructure       |         |       | 1:50 |   7.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -57,6 +59,7 @@
 Updates to sprint and product backlog.
 
 *** STARTED Manual updates and blog posts                             :story:
+    CLOCK: [2016-06-22 Wed 22:22]--[2016-06-22 Wed 22:31] =>  0:09
     CLOCK: [2016-06-21 Tue 20:46]--[2016-06-21 Tue 21:30] =>  0:44
 
 Time taken with blog posts and updates to the manual.
@@ -553,7 +556,8 @@ cases:
 - conversely a helper can have more than one owning formatter (io
   helper has types and io formatters).
 
-*** Add class info to is enabled in formatter helper interface        :story:
+*** STARTED Add class info to is enabled in formatter helper interface :story:
+    CLOCK: [2016-06-22 Wed 22:14]--[2016-06-22 Wed 22:21] =>  0:07
 
 In order to determine if a helper is enabled or not we need to have
 access to the yarn type. Since those are not yet available we need
