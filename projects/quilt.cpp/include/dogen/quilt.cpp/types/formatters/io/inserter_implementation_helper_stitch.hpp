@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <ostream>
 #include "dogen/quilt.cpp/types/properties/class_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 

@@ -12,39 +12,39 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-23 Thu 19:22]
+#+CAPTION: Clock summary at [2016-06-23 Thu 20:37]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *27:42* |       |      | 100.0 |
+| *Total time*                                                                | *28:09* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 27:42   |       |      | 100.0 |
-| Active                                                                      |         | 27:42 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:55 |  10.5 |
-| STARTED Manual updates and blog posts                                       |         |       | 0:53 |   3.2 |
+| Stories                                                                     | 28:09   |       |      | 100.0 |
+| Active                                                                      |         | 28:09 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:55 |  10.4 |
+| STARTED Manual updates and blog posts                                       |         |       | 0:53 |   3.1 |
 | COMPLETED Refactor helper settings                                          |         |       | 0:35 |   2.1 |
-| COMPLETED Add properties for helpers                                        |         |       | 1:35 |   5.7 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   5.0 |
+| COMPLETED Add properties for helpers                                        |         |       | 1:35 |   5.6 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   4.9 |
 | COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   3.0 |
 | COMPLETED Rename helper instances                                           |         |       | 0:37 |   2.2 |
-| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   4.2 |
-| COMPLETED Rename qualified to id                                            |         |       | 0:51 |   3.1 |
+| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   4.1 |
+| COMPLETED Rename qualified to id                                            |         |       | 0:51 |   3.0 |
 | COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   2.8 |
-| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   4.7 |
-| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   3.1 |
-| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |   7.5 |
-| COMPLETED Rename =name_tree='s parent                                       |         |       | 0:16 |   1.0 |
-| COMPLETED Compute yarn property related information                         |         |       | 2:17 |   8.2 |
+| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   4.6 |
+| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   3.0 |
+| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |   7.4 |
+| COMPLETED Rename =name_tree='s parent                                       |         |       | 0:16 |   0.9 |
+| COMPLETED Compute yarn property related information                         |         |       | 2:17 |   8.1 |
 | COMPLETED Remove redundancy in properties' repositories                     |         |       | 0:22 |   1.3 |
-| COMPLETED Create a top-level type to aggregate properties and helpers       |         |       | 1:42 |   6.1 |
+| COMPLETED Create a top-level type to aggregate properties and helpers       |         |       | 1:42 |   6.0 |
 | COMPLETED Refactor helper descriptor                                        |         |       | 0:23 |   1.4 |
-| COMPLETED Add an helper method interface                                    |         |       | 1:03 |   3.8 |
-| COMPLETED Remove encoded from yarn's name tree                              |         |       | 1:24 |   5.1 |
-| COMPLETED Add support for helpers bound to multiple formatters.             |         |       | 0:41 |   2.5 |
+| COMPLETED Add an helper method interface                                    |         |       | 1:03 |   3.7 |
+| COMPLETED Remove encoded from yarn's name tree                              |         |       | 1:24 |   5.0 |
+| COMPLETED Add support for helpers bound to multiple formatters.             |         |       | 0:41 |   2.4 |
 | COMPLETED Add class info to is enabled in formatter helper interface        |         |       | 0:29 |   1.7 |
-| COMPLETED Fix issues with build in laptop                                   |         |       | 0:48 |   2.9 |
+| COMPLETED Fix issues with build in laptop                                   |         |       | 0:48 |   2.8 |
 | COMPLETED Remove helper name from formatter helper interface                |         |       | 0:08 |   0.5 |
-| STARTED Implement types helper methods with new helper infrastructure       |         |       | 2:19 |   8.4 |
+| STARTED Implement types helper methods with new helper infrastructure       |         |       | 2:46 |   9.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -593,6 +593,7 @@ to determine what its implementation should be. So take the easy way
 out and remove it.
 
 *** STARTED Implement types helper methods with new helper infrastructure :story:
+    CLOCK: [2016-06-23 Thu 19:23]--[2016-06-23 Thu 19:50] =>  0:27
     CLOCK: [2016-06-23 Thu 08:22]--[2016-06-23 Thu 08:51] =>  0:29
     CLOCK: [2016-06-22 Wed 15:47]--[2016-06-22 Wed 16:16] =>  0:29
     CLOCK: [2016-06-22 Wed 15:30]--[2016-06-22 Wed 15:46] =>  0:16
@@ -602,6 +603,14 @@ out and remove it.
 - call the new method from the formatters in types and ensure the
   generated code matches previous code.
 - remove/disable all legacy helper method generation.
+
+Problems:
+
+- we do not have a "streaming for type" function in assistant. We need
+  to figure out how to obtain this data from the helper.
+- we do not have a name tree so we do not know what the key and value
+  names are for associative containers. We probably need to add the
+  name tree to the helper descripttor.
 
 *** Type-bound helpers and generic helpers                            :story:
 

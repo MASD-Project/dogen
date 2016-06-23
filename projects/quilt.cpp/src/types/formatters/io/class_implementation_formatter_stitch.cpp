@@ -20,7 +20,6 @@
  */
 #include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp"
-#include "dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/class_implementation_formatter_stitch.hpp"
 
 namespace dogen {

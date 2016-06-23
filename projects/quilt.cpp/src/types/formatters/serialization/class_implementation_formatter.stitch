@@ -3,7 +3,6 @@
 <#@ modeline_group_name=emacs #>
 <#@ stream_variable_name=a.stream() #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/serialization/class_implementation_formatter_stitch.hpp" #>
-<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp" #>
 <#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::serialization #>
 <#+
