@@ -11868,7 +11868,7 @@ for a given C++ entity.#</dia:string>
         <dia:point val="407.803,125.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="407.741,125.439;421.151,129.399"/>
+        <dia:rectangle val="407.742,125.439;421.151,129.399"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31122,7 +31122,7 @@ main, or from another initialiser.#</dia:string>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="115.565,2.03721"/>
-        <dia:point val="115.566,-3.9166"/>
+        <dia:point val="115.565,-3.9166"/>
         <dia:point val="121.138,-3.9166"/>
         <dia:point val="121.138,-9.46763"/>
       </dia:attribute>
@@ -33976,7 +33976,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="375,129"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="374.95,128.95;400.575,138.25"/>
+        <dia:rectangle val="374.95,128.95;400.575,137.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="375,129"/>
@@ -33985,7 +33985,7 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="25.524999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="9.1999999999999993"/>
+        <dia:real val="8.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#formatter_helper_interface#</dia:string>
@@ -34216,36 +34216,6 @@ main, or from another initialiser.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#helper_name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="stereotype">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="true"/>
-          </dia:attribute>
-          <dia:attribute name="inheritance_type">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="query">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="parameters"/>
-        </dia:composite>
-        <dia:composite type="umloperation">
-          <dia:attribute name="name">
             <dia:string>#is_enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
@@ -34292,10 +34262,10 @@ main, or from another initialiser.#</dia:string>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#owner#</dia:string>
+                <dia:string>#in_inheritance#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const properties::class_info&amp;#</dia:string>
+                <dia:string>#const bool#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
