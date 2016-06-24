@@ -41,4 +41,4 @@ before_build:
   - cmd: cmake ../.. -DCMAKE_BUILD_TYPE=%configuration% -G "%generator%"
 
 build_script:
-    - cmd: cmake --build . --config "%configuration%"
+    - cmd: cmake --build . --config "%configuration%" --project knitter
