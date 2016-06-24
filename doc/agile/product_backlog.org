@@ -5284,43 +5284,6 @@ Yet another way seems to be creating a script to do coverage, as per
 
 Another example from [[https://github.com/boostorg/dll/blob/develop/.travis.yml][Boost.Dll]].
 
-*** Get Mingw build to compile code                                   :story:
-
-We've added the initial support to MinGW on Appveyor:
-
-- [[http://help.appveyor.com/discussions/questions/372-build-setup-for-a-c-program][Build setup for a C program]]
-- [[https://github.com/imazen/libpng/blob/master/appveyor.yml][libpng appveyor.yml]]
-- [[https://www.appveyor.com/updates/2015/05/30][Appveyor adds support for MinGW]]
-- [[http://altrepo.eu/matyapiro31/mingw-w64-thrift/blob/master/appveyor.yml][mingw-w64-thrift]]
-
-However the build is now failing with:
-
-: cmake ../.. -DCMAKE_BUILD_TYPE=%configuration% -G "%generator%"
-: CMake Error at C:/Program Files (x86)/CMake/share/cmake-3.4/Modules/CMakeMinGWFindMake.cmake:22 (message):
-:   sh.exe was found in your PATH, here:
-:
-:   C:/Program Files/Git/usr/bin/sh.exe
-:
-:   For MinGW make to work correctly sh.exe must NOT be in your path.
-:
-:   Run cmake from a shell that does not have sh.exe in your PATH.
-:
-:   If you want to use a UNIX shell, then use MSYS Makefiles.
-:
-: Call Stack (most recent call first):
-:   CMakeLists.txt:25 (project)
-:
-:
-: CMake Error: CMAKE_C_COMPILER not set, after EnableLanguage
-: CMake Error: CMAKE_CXX_COMPILER not set, after EnableLanguage
-: -- Configuring incomplete, errors occurred!
-
-We have attempted to remove Git from path as per these instructions:
-
-- [[https://github.com/jibsen/brieflz/blob/0c6fb73984f11e697dfaade5cdc5e291c1655c67/appveyor.yml][Removing Git's sh from the path]]
-
-But it did not resolve the error above.
-
 *** Get OSX build to compile code                                     :story:
 
 We've added the initial support for OSX. However, it still needs a lot

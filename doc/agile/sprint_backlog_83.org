@@ -593,7 +593,8 @@ many to many change (between helpers and formatters) its not so easy
 to determine what its implementation should be. So take the easy way
 out and remove it.
 
-*** Fix Windows build errors                                           :epic:
+*** STARTED Fix a number of Windows build errors                       :epic:
+    CLOCK: [2016-06-24 Fri 15:02]--[2016-06-24 Fri 15:43] =>  0:51
 
 This epic contains all the known errors in the windows build. We
 should create stories for each error as we fix them.
@@ -743,6 +744,44 @@ on Linux.
 :   C:\projects\dogen\projects\yarn\src\test\mock_intermediate_model_factory.cpp(536): note: type is 'int'
 : C:\projects\dogen\projects\yarn\src\test\mock_intermediate_model_factory.cpp(540): error C2027: use of undefined type 'dogen::yarn::enumerator' [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
 :   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/enumerator_fwd.hpp(31): note: see declaration of 'dogen::yarn::enumerator'
+
+*** STARTED Fix Mingw build's warning                                 :story:
+    CLOCK: [2016-06-24 Fri 15:44]--[2016-06-24 Fri 15:54] =>  0:10
+
+We've added the initial support to MinGW on Appveyor:
+
+- [[http://help.appveyor.com/discussions/questions/372-build-setup-for-a-c-program][Build setup for a C program]]
+- [[https://github.com/imazen/libpng/blob/master/appveyor.yml][libpng appveyor.yml]]
+- [[https://www.appveyor.com/updates/2015/05/30][Appveyor adds support for MinGW]]
+- [[http://altrepo.eu/matyapiro31/mingw-w64-thrift/blob/master/appveyor.yml][mingw-w64-thrift]]
+
+However the build is now failing with:
+
+: cmake ../.. -DCMAKE_BUILD_TYPE=%configuration% -G "%generator%"
+: CMake Error at C:/Program Files (x86)/CMake/share/cmake-3.4/Modules/CMakeMinGWFindMake.cmake:22 (message):
+:   sh.exe was found in your PATH, here:
+:
+:   C:/Program Files/Git/usr/bin/sh.exe
+:
+:   For MinGW make to work correctly sh.exe must NOT be in your path.
+:
+:   Run cmake from a shell that does not have sh.exe in your PATH.
+:
+:   If you want to use a UNIX shell, then use MSYS Makefiles.
+:
+: Call Stack (most recent call first):
+:   CMakeLists.txt:25 (project)
+:
+:
+: CMake Error: CMAKE_C_COMPILER not set, after EnableLanguage
+: CMake Error: CMAKE_CXX_COMPILER not set, after EnableLanguage
+: -- Configuring incomplete, errors occurred!
+
+We have attempted to remove Git from path as per these instructions:
+
+- [[https://github.com/jibsen/brieflz/blob/0c6fb73984f11e697dfaade5cdc5e291c1655c67/appveyor.yml][Removing Git's sh from the path]]
+
+But it did not resolve the error above.
 
 *** STARTED Implement types helper methods with new helper infrastructure :story:
     CLOCK: [2016-06-23 Thu 19:23]--[2016-06-23 Thu 19:50] =>  0:27
