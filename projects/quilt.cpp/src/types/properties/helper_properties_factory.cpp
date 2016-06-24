@@ -106,6 +106,7 @@ boost::optional<helper_descriptor> helper_properties_factory::make(
     const auto p2(get_identifiable_and_qualified(nt));
     r.name_tree_identifiable(p2.first);
     r.name_tree_qualified(p2.second);
+    r.name_tree(nt);
 
     hp.descriptor(r);
     BOOST_LOG_SEV(lg, debug) << "Helper properties: " << hp;

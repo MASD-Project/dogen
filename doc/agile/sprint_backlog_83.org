@@ -12,39 +12,41 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-24 Fri 13:20]
+#+CAPTION: Clock summary at [2016-06-24 Fri 21:35]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *28:16* |       |      | 100.0 |
+| *Total time*                                                                | *29:33* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 28:16   |       |      | 100.0 |
-| Active                                                                      |         | 28:16 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 3:02 |  10.7 |
-| STARTED Manual updates and blog posts                                       |         |       | 0:53 |   3.1 |
-| COMPLETED Refactor helper settings                                          |         |       | 0:35 |   2.1 |
-| COMPLETED Add properties for helpers                                        |         |       | 1:35 |   5.6 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   4.9 |
-| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   2.9 |
-| COMPLETED Rename helper instances                                           |         |       | 0:37 |   2.2 |
-| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   4.1 |
-| COMPLETED Rename qualified to id                                            |         |       | 0:51 |   3.0 |
-| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   2.8 |
-| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   4.6 |
-| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   3.0 |
-| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |   7.4 |
+| Stories                                                                     | 29:33   |       |      | 100.0 |
+| Active                                                                      |         | 29:33 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 3:02 |  10.3 |
+| STARTED Manual updates and blog posts                                       |         |       | 0:53 |   3.0 |
+| COMPLETED Refactor helper settings                                          |         |       | 0:35 |   2.0 |
+| COMPLETED Add properties for helpers                                        |         |       | 1:35 |   5.4 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   4.7 |
+| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   2.8 |
+| COMPLETED Rename helper instances                                           |         |       | 0:37 |   2.1 |
+| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   3.9 |
+| COMPLETED Rename qualified to id                                            |         |       | 0:51 |   2.9 |
+| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   2.7 |
+| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   4.4 |
+| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   2.9 |
+| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |   7.1 |
 | COMPLETED Rename =name_tree='s parent                                       |         |       | 0:16 |   0.9 |
-| COMPLETED Compute yarn property related information                         |         |       | 2:17 |   8.1 |
-| COMPLETED Remove redundancy in properties' repositories                     |         |       | 0:22 |   1.3 |
-| COMPLETED Create a top-level type to aggregate properties and helpers       |         |       | 1:42 |   6.0 |
-| COMPLETED Refactor helper descriptor                                        |         |       | 0:23 |   1.4 |
-| COMPLETED Add an helper method interface                                    |         |       | 1:03 |   3.7 |
-| COMPLETED Remove encoded from yarn's name tree                              |         |       | 1:24 |   5.0 |
-| COMPLETED Add support for helpers bound to multiple formatters.             |         |       | 0:41 |   2.4 |
-| COMPLETED Add class info to is enabled in formatter helper interface        |         |       | 0:29 |   1.7 |
-| COMPLETED Fix issues with build in laptop                                   |         |       | 0:48 |   2.8 |
+| COMPLETED Compute yarn property related information                         |         |       | 2:17 |   7.7 |
+| COMPLETED Remove redundancy in properties' repositories                     |         |       | 0:22 |   1.2 |
+| COMPLETED Create a top-level type to aggregate properties and helpers       |         |       | 1:42 |   5.8 |
+| COMPLETED Refactor helper descriptor                                        |         |       | 0:23 |   1.3 |
+| COMPLETED Add an helper method interface                                    |         |       | 1:03 |   3.6 |
+| COMPLETED Remove encoded from yarn's name tree                              |         |       | 1:24 |   4.7 |
+| COMPLETED Add support for helpers bound to multiple formatters.             |         |       | 0:41 |   2.3 |
+| COMPLETED Add class info to is enabled in formatter helper interface        |         |       | 0:29 |   1.6 |
+| COMPLETED Fix issues with build in laptop                                   |         |       | 0:48 |   2.7 |
 | COMPLETED Remove helper name from formatter helper interface                |         |       | 0:08 |   0.5 |
-| STARTED Implement types helper methods with new helper infrastructure       |         |       | 2:46 |   9.8 |
+| COMPLETED Fix a number of Windows build errors                              |         |       | 0:41 |   2.3 |
+| COMPLETED Fix Mingw build's warning                                         |         |       | 0:10 |   0.6 |
+| STARTED Implement types helper methods with new helper infrastructure       |         |       | 3:12 |  10.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -593,7 +595,8 @@ many to many change (between helpers and formatters) its not so easy
 to determine what its implementation should be. So take the easy way
 out and remove it.
 
-*** STARTED Fix a number of Windows build errors                       :epic:
+*** COMPLETED Fix a number of Windows build errors                     :epic:
+    CLOSED: [2016-06-24 Fri 21:07]
     CLOCK: [2016-06-24 Fri 15:02]--[2016-06-24 Fri 15:43] =>  0:51
 
 This epic contains all the known errors in the windows build. We
@@ -745,7 +748,8 @@ on Linux.
 : C:\projects\dogen\projects\yarn\src\test\mock_intermediate_model_factory.cpp(540): error C2027: use of undefined type 'dogen::yarn::enumerator' [C:\projects\dogen\build\output\projects\yarn\src\yarn.vcxproj]
 :   C:\projects\dogen\projects\yarn\include\dogen/yarn/types/enumerator_fwd.hpp(31): note: see declaration of 'dogen::yarn::enumerator'
 
-*** STARTED Fix Mingw build's warning                                 :story:
+*** COMPLETED Fix Mingw build's warning                               :story:
+    CLOSED: [2016-06-24 Fri 21:07]
     CLOCK: [2016-06-24 Fri 15:44]--[2016-06-24 Fri 15:54] =>  0:10
 
 We've added the initial support to MinGW on Appveyor:
@@ -784,6 +788,7 @@ We have attempted to remove Git from path as per these instructions:
 But it did not resolve the error above.
 
 *** STARTED Implement types helper methods with new helper infrastructure :story:
+    CLOCK: [2016-06-24 Fri 21:12]--[2016-06-24 Fri 21:35] =>  0:23
     CLOCK: [2016-06-24 Fri 15:55]--[2016-06-24 Fri 15:58] =>  0:03
     CLOCK: [2016-06-23 Thu 19:23]--[2016-06-23 Thu 19:50] =>  0:27
     CLOCK: [2016-06-23 Thu 08:22]--[2016-06-23 Thu 08:51] =>  0:29
@@ -803,6 +808,11 @@ Problems:
 - we do not have a name tree so we do not know what the key and value
   names are for associative containers. We probably need to add the
   name tree to the helper descripttor.
+
+*** Build boost for MinGW                                             :story:
+
+At present our MinGW build is borked because we do not have a boost
+build. Create one and add it to DropBox or Conan.
 
 *** Type-bound helpers and generic helpers                            :story:
 
