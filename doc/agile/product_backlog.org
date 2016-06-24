@@ -5124,6 +5124,14 @@ is, what then? We can't throw.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
+*** Add support for coverity analysis                                 :story:
+
+We've created a project and added the badge but we have not yet setup
+travis for this.
+
+- [[https://scan.coverity.com/projects/domaindrivenconsulting-dogen/builds/new?tab%3Dtravis_ci][Automate Analysis with Travis CI]]
+- [[https://github.com/d-led/picojson_serializer/blob/master/.travis.yml][example .travis.yml]]
+
 *** Link against boost dynamic libraries                              :story:
 
 At present we are statically linking against Boost just to make our
