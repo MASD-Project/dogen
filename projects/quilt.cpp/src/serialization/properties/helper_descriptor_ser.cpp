@@ -29,6 +29,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/yarn/serialization/name_tree_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/helper_descriptor_ser.hpp"
 
 namespace boost {
@@ -43,6 +44,7 @@ void save(Archive& ar,
     ar << make_nvp("name_identifiable", v.name_identifiable_);
     ar << make_nvp("name_tree_qualified", v.name_tree_qualified_);
     ar << make_nvp("name_tree_identifiable", v.name_tree_identifiable_);
+    ar << make_nvp("name_tree", v.name_tree_);
 }
 
 template<typename Archive>
@@ -54,6 +56,7 @@ void load(Archive& ar,
     ar >> make_nvp("name_identifiable", v.name_identifiable_);
     ar >> make_nvp("name_tree_qualified", v.name_tree_qualified_);
     ar >> make_nvp("name_tree_identifiable", v.name_tree_identifiable_);
+    ar >> make_nvp("name_tree", v.name_tree_);
 }
 
 } }

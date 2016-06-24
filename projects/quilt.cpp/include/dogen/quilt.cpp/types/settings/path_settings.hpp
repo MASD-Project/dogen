@@ -58,10 +58,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const path_settings& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::settings::path_settings& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, path_settings& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::settings::path_settings& v, unsigned int version);
 
 public:
     dogen::quilt::cpp::formatters::file_types file_type() const;

@@ -55,10 +55,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const element_properties& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::properties::element_properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, element_properties& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::properties::element_properties& v, unsigned int version);
 
 public:
     const std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties>& formatter_properties() const;

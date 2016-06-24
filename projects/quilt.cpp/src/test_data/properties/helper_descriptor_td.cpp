@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/yarn/test_data/name_tree_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/helper_descriptor_td.hpp"
 
 namespace {
@@ -37,6 +38,11 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
+dogen::yarn::name_tree
+create_dogen_yarn_name_tree(const unsigned int position) {
+    return dogen::yarn::name_tree_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -53,6 +59,7 @@ populate(const unsigned int position, result_type& v) {
     v.name_identifiable(create_std_string(position + 2));
     v.name_tree_qualified(create_std_string(position + 3));
     v.name_tree_identifiable(create_std_string(position + 4));
+    v.name_tree(create_dogen_yarn_name_tree(position + 5));
 }
 
 helper_descriptor_generator::result_type

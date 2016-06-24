@@ -57,10 +57,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const formatter_properties& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::properties::formatter_properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, formatter_properties& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::properties::formatter_properties& v, unsigned int version);
 
 public:
     bool enabled() const;

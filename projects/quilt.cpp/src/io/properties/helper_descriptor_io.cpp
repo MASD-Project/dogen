@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen/yarn/io/name_tree_io.hpp"
 #include "dogen/quilt.cpp/io/properties/helper_descriptor_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -55,7 +56,8 @@ std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
       << "\"name_qualified\": " << "\"" << tidy_up_string(v.name_qualified()) << "\"" << ", "
       << "\"name_identifiable\": " << "\"" << tidy_up_string(v.name_identifiable()) << "\"" << ", "
       << "\"name_tree_qualified\": " << "\"" << tidy_up_string(v.name_tree_qualified()) << "\"" << ", "
-      << "\"name_tree_identifiable\": " << "\"" << tidy_up_string(v.name_tree_identifiable()) << "\""
+      << "\"name_tree_identifiable\": " << "\"" << tidy_up_string(v.name_tree_identifiable()) << "\"" << ", "
+      << "\"name_tree\": " << v.name_tree()
       << " }";
     return(s);
 }

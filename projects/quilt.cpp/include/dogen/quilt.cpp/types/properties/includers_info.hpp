@@ -55,12 +55,14 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const includers_info& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::properties::includers_info& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, includers_info& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::properties::includers_info& v, unsigned int version);
 
 public:
+    using formattable::accept;
+
     virtual void accept(const formattable_visitor& v) const override {
         v.visit(*this);
     }

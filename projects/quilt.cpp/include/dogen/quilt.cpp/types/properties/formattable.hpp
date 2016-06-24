@@ -55,10 +55,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const formattable& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::properties::formattable& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, formattable& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::properties::formattable& v, unsigned int version);
 
 public:
     virtual void accept(const formattable_visitor& v) const = 0;

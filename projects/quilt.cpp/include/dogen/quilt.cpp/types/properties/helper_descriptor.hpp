@@ -28,6 +28,7 @@
 #include <list>
 #include <string>
 #include <algorithm>
+#include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/quilt.cpp/serialization/properties/helper_descriptor_fwd_ser.hpp"
 
 namespace dogen {
@@ -48,14 +49,15 @@ public:
         const std::string& name_qualified,
         const std::string& name_identifiable,
         const std::string& name_tree_qualified,
-        const std::string& name_tree_identifiable);
+        const std::string& name_tree_identifiable,
+        const dogen::yarn::name_tree& name_tree);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const helper_descriptor& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::properties::helper_descriptor& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, helper_descriptor& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::properties::helper_descriptor& v, unsigned int version);
 
 public:
     const std::list<std::string>& namespaces() const;
@@ -83,6 +85,11 @@ public:
     void name_tree_identifiable(const std::string& v);
     void name_tree_identifiable(const std::string&& v);
 
+    const dogen::yarn::name_tree& name_tree() const;
+    dogen::yarn::name_tree& name_tree();
+    void name_tree(const dogen::yarn::name_tree& v);
+    void name_tree(const dogen::yarn::name_tree&& v);
+
 public:
     bool operator==(const helper_descriptor& rhs) const;
     bool operator!=(const helper_descriptor& rhs) const {
@@ -99,6 +106,7 @@ private:
     std::string name_identifiable_;
     std::string name_tree_qualified_;
     std::string name_tree_identifiable_;
+    dogen::yarn::name_tree name_tree_;
 };
 
 } } } }

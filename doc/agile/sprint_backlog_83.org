@@ -784,6 +784,7 @@ We have attempted to remove Git from path as per these instructions:
 But it did not resolve the error above.
 
 *** STARTED Implement types helper methods with new helper infrastructure :story:
+    CLOCK: [2016-06-24 Fri 15:55]--[2016-06-24 Fri 15:58] =>  0:03
     CLOCK: [2016-06-23 Thu 19:23]--[2016-06-23 Thu 19:50] =>  0:27
     CLOCK: [2016-06-23 Thu 08:22]--[2016-06-23 Thu 08:51] =>  0:29
     CLOCK: [2016-06-22 Wed 15:47]--[2016-06-22 Wed 16:16] =>  0:29

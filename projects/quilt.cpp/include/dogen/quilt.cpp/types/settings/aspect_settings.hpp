@@ -49,10 +49,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const aspect_settings& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, aspect_settings& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
 
 public:
     bool disable_complete_constructor() const;

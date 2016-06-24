@@ -49,10 +49,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const inclusion_directives_repository& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::properties::inclusion_directives_repository& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, inclusion_directives_repository& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::properties::inclusion_directives_repository& v, unsigned int version);
 
 public:
     const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& by_name() const;
