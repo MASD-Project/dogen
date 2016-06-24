@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE knitter_spec
 #include <iostream>
 #include <boost/test/included/unit_test.hpp>
