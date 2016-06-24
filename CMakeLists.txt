@@ -194,8 +194,7 @@ execute_process(COMMAND ${GIT_COMMAND} rev-list -n 1 HEAD
 
 # commit count
 execute_process(
-    COMMAND ${GIT_COMMAND} rev-list master
-    COMMAND wc -l
+    COMMAND ${GIT_COMMAND} rev-list master --count
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     ERROR_VARIABLE git_error
     OUTPUT_VARIABLE GIT_COMMIT_COUNT
