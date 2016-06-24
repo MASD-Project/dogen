@@ -57,7 +57,7 @@ Entity xml_deserialize(boost::filesystem::path path) {
     boost::filesystem::ifstream input_stream(path);
     boost::archive::xml_iarchive input_archive(input_stream);
     Entity entity;
-    register_types(input_archive);
+    ::register_types(input_archive);
     input_archive >> BOOST_SERIALIZATION_NVP(entity);
     BOOST_LOG_SEV(lg, debug) << "Read file.";
     BOOST_LOG_SEV(lg, debug) << entity;
@@ -77,7 +77,7 @@ void xml_serialize(boost::filesystem::path path, Entity entity) {
 
     boost::filesystem::ofstream output_stream(path);
     boost::archive::xml_oarchive input_archive(output_stream);
-    register_types(input_archive);
+    ::register_types(input_archive);
     input_archive << BOOST_SERIALIZATION_NVP(entity);
     BOOST_LOG_SEV(lg, debug) << "Created file.";
 }

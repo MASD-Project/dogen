@@ -70,7 +70,7 @@ private:
         std::ostringstream os;
         {
             OutputArchive oa(os);
-            register_types<OutputArchive>(oa);
+            ::register_types<OutputArchive>(oa);
             oa << BOOST_SERIALIZATION_NVP(a);
         }
 
@@ -79,7 +79,7 @@ private:
         std::istringstream is(os.str());
         {
             InputArchive ia(is);
-            register_types<InputArchive>(ia);
+            ::register_types<InputArchive>(ia);
             ia >> BOOST_SERIALIZATION_NVP(b);
         }
         BOOST_LOG_SEV(lg, debug) << "after load: " << jsonify(b);
