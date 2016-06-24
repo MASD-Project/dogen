@@ -126,10 +126,10 @@ a.stream() << std::endl;
             if (a.is_serialization_enabled()) {
 a.stream() << "private:" << std::endl;
 a.stream() << "    template<typename Archive>" << std::endl;
-a.stream() << "    friend void boost::serialization::save(Archive& ar, const " << c.name() << "& v, unsigned int version);" << std::endl;
+a.stream() << "    friend void boost::serialization::save(Archive& ar, const " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    template<typename Archive>" << std::endl;
-a.stream() << "    friend void boost::serialization::load(Archive& ar, " << c.name() << "& v, unsigned int version);" << std::endl;
+a.stream() << "    friend void boost::serialization::load(Archive& ar, " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
 a.stream() << std::endl;
             }
 

@@ -46,10 +46,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const class_a& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::test_models::boost_model::class_a& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, class_a& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::test_models::boost_model::class_a& v, unsigned int version);
 
 public:
     unsigned int prop_0() const;

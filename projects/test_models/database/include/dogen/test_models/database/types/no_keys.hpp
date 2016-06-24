@@ -55,10 +55,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const no_keys& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::test_models::database::no_keys& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, no_keys& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::test_models::database::no_keys& v, unsigned int version);
 
 public:
     int prop_0() const;

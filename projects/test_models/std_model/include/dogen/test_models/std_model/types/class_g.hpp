@@ -55,10 +55,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const class_g& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::test_models::std_model::class_g& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, class_g& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::test_models::std_model::class_g& v, unsigned int version);
 
 public:
     const std::unordered_map<dogen::test_models::std_model::class_a, std::vector<dogen::test_models::std_model::pkg1::class_c> >& prop_0() const;

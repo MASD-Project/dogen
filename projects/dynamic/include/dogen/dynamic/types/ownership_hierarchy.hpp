@@ -55,10 +55,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const ownership_hierarchy& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::dynamic::ownership_hierarchy& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, ownership_hierarchy& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::dynamic::ownership_hierarchy& v, unsigned int version);
 
 public:
     /**

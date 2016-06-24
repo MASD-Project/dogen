@@ -45,10 +45,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const line& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::stitch::line& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, line& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::stitch::line& v, unsigned int version);
 
 public:
     const std::list<dogen::stitch::block>& blocks() const;

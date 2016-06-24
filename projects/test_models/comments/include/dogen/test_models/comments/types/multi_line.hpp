@@ -48,10 +48,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const multi_line& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::test_models::comments::multi_line& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, multi_line& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::test_models::comments::multi_line& v, unsigned int version);
 
 public:
     bool operator==(const multi_line& rhs) const;

@@ -77,10 +77,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const intermediate_model& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::yarn::intermediate_model& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, intermediate_model& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::yarn::intermediate_model& v, unsigned int version);
 
 public:
     /**

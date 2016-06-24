@@ -49,10 +49,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const parent& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::test_models::trivial_inheritance::pkg1::parent& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, parent& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::test_models::trivial_inheritance::pkg1::parent& v, unsigned int version);
 
 public:
     virtual void to_stream(std::ostream& s) const;

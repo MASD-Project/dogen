@@ -51,10 +51,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const stitching_options& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::config::stitching_options& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, stitching_options& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::config::stitching_options& v, unsigned int version);
 
 public:
     bool verbose() const;

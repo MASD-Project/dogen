@@ -51,10 +51,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const refinement_concept_model& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::test_models::stereotypes::refinement_concept_model& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, refinement_concept_model& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::test_models::stereotypes::refinement_concept_model& v, unsigned int version);
 
 public:
     /**

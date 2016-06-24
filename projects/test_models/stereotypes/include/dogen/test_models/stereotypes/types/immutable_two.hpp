@@ -50,10 +50,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const immutable_two& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::test_models::stereotypes::immutable_two& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, immutable_two& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::test_models::stereotypes::immutable_two& v, unsigned int version);
 
 public:
     bool prop_0() const;

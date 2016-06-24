@@ -62,10 +62,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const module& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::yarn::module& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, module& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::yarn::module& v, unsigned int version);
 
 public:
     using element::accept;

@@ -45,10 +45,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const base& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::test_models::trivial_inheritance::base& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, base& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::test_models::trivial_inheritance::base& v, unsigned int version);
 
 public:
     virtual void accept(const base_visitor& v) const = 0;

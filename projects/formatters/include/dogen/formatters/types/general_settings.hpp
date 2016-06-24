@@ -51,10 +51,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const general_settings& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::formatters::general_settings& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, general_settings& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::formatters::general_settings& v, unsigned int version);
 
 public:
     /**

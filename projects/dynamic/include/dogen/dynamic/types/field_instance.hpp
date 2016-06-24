@@ -48,10 +48,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const field_instance& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::dynamic::field_instance& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, field_instance& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::dynamic::field_instance& v, unsigned int version);
 
 public:
     const boost::shared_ptr<dogen::dynamic::value>& value() const;

@@ -48,10 +48,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const repository& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::formatters::repository& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, repository& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::formatters::repository& v, unsigned int version);
 
 public:
     const std::unordered_map<std::string, dogen::formatters::modeline_group>& modeline_groups() const;

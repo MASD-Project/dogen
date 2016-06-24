@@ -50,10 +50,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const settings_bundle& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::stitch::settings_bundle& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, settings_bundle& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::stitch::settings_bundle& v, unsigned int version);
 
 public:
     const boost::optional<dogen::formatters::general_settings>& general_settings() const;

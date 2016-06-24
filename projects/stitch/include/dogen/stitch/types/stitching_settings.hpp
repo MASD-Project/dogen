@@ -55,10 +55,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const stitching_settings& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::stitch::stitching_settings& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, stitching_settings& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::stitch::stitching_settings& v, unsigned int version);
 
 public:
     const std::string& stream_variable_name() const;

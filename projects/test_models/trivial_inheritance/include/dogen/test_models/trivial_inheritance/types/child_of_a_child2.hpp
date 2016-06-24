@@ -52,10 +52,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const child_of_a_child2& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::test_models::trivial_inheritance::child_of_a_child2& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, child_of_a_child2& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::test_models::trivial_inheritance::child_of_a_child2& v, unsigned int version);
 
 public:
     void to_stream(std::ostream& s) const override;

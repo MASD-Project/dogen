@@ -145,10 +145,10 @@ public:
 #>
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const <#= c.name() #>& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const <#= c.qualified_name() #>& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, <#= c.name() #>& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, <#= c.qualified_name() #>& v, unsigned int version);
 
 <#+
             }

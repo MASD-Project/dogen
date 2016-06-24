@@ -54,10 +54,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const class_e& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::test_models::std_model::class_e& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, class_e& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::test_models::std_model::class_e& v, unsigned int version);
 
 public:
     const std::deque<std::string>& prop_0() const;

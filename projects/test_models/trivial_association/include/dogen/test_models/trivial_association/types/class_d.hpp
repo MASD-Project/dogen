@@ -42,10 +42,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const class_d& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::test_models::trivial_association::class_d& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, class_d& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::test_models::trivial_association::class_d& v, unsigned int version);
 
 public:
     bool operator==(const class_d& rhs) const;
