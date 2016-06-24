@@ -5543,6 +5543,8 @@ It would be nice to have syntax highlighting for stitch templates. We
 have a [[https://github.com/mcraveiro/cunene/blob/master/lisp/other/utils/t4-mode.el][mumamo-based version]] in cunene - originally done for t4 - but
 which is rather unusable.
 
+See also [[https://github.com/fxbois/web-mode][web-mode]].
+
 *** Add new c++ warnings to compilation                               :story:
 
 - =-Wunused-private-field=: Seems like this warning is not part of
