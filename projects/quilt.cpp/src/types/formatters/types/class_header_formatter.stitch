@@ -168,6 +168,8 @@ public:
             } else if (c.is_root_parent_visitable() && !c.is_parent()) {
 #>
 public:
+    using <#= c.root_parent_name() #>::accept;
+
     virtual void accept(const <#= c.root_parent_name() #>_visitor& v) const override {
         v.visit(*this);
     }

@@ -55,6 +55,8 @@ private:
     friend void boost::serialization::load(Archive& ar, descendant2& v, unsigned int version);
 
 public:
+    using base::accept;
+
     virtual void accept(const base_visitor& v) const override {
         v.visit(*this);
     }

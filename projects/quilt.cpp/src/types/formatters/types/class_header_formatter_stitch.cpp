@@ -145,6 +145,8 @@ a.stream() << "    virtual void accept(" << c.name() << "_visitor& v) = 0;" << s
 a.stream() << std::endl;
             } else if (c.is_root_parent_visitable() && !c.is_parent()) {
 a.stream() << "public:" << std::endl;
+a.stream() << "    using " << c.root_parent_name() << "::accept;" << std::endl;
+a.stream() << std::endl;
 a.stream() << "    virtual void accept(const " << c.root_parent_name() << "_visitor& v) const override {" << std::endl;
 a.stream() << "        v.visit(*this);" << std::endl;
 a.stream() << "    }" << std::endl;
