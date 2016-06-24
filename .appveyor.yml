@@ -31,8 +31,9 @@ install:
 before_build:
   # Workaround for CMake not wanting sh.exe on PATH for MinGW
   - cmd: echo %PATH%
-  - cmd: set PATH=%PATH:C:\Program Files (x86)\Git\bin;=%
+  - cmd: set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
   - cmd: set PATH=C:\MinGW\bin;%PATH%
+  - cmd: echo %PATH%
   - cmd: cd build
   - cmd: mkdir output
   - cmd: cd output
