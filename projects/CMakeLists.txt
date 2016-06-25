@@ -141,6 +141,17 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
         set(CMAKE_SHARED_LINKER_FLAGS
             "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-enable-stdcall-fixup")
     endif()
+
+elseif(MSVC)
+    if (${MSVC_VERSION} GREATER 1399) # 1400+ => VC2005+
+        # cannot use incremental rebuild
+        string(REPLACE "/Gm" "" CMAKE_C_FLAGS_DEBUG   ${CMAKE_C_FLAGS_DEBUG})
+        string(REPLACE "/Gm" "" CMAKE_C_FLAGS_RELEASE ${CMAKE_C_FLAGS_RELEASE})
+        string(REPLACE "/Gm" "" CMAKE_CXX_FLAGS_DEBUG   ${CMAKE_CXX_FLAGS_DEBUG})
+        string(REPLACE "/Gm" "" CMAKE_CXX_FLAGS_RELEASE ${CMAKE_CXX_FLAGS_RELEASE})
+        add_definitions_debug("/MP")
+        add_definitions_release("/MP")
+    endif()
 endif()
 
 # parameters for boost tests
