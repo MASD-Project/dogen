@@ -53,10 +53,6 @@ std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::properties::helper_descriptor\"" << ", "
       << "\"namespaces\": " << v.namespaces() << ", "
-      << "\"name_qualified\": " << "\"" << tidy_up_string(v.name_qualified()) << "\"" << ", "
-      << "\"name_identifiable\": " << "\"" << tidy_up_string(v.name_identifiable()) << "\"" << ", "
-      << "\"name_tree_qualified\": " << "\"" << tidy_up_string(v.name_tree_qualified()) << "\"" << ", "
-      << "\"name_tree_identifiable\": " << "\"" << tidy_up_string(v.name_tree_identifiable()) << "\"" << ", "
       << "\"name_tree\": " << v.name_tree()
       << " }";
     return(s);

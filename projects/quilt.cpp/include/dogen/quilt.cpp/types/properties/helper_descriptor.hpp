@@ -46,10 +46,6 @@ public:
 public:
     helper_descriptor(
         const std::list<std::string>& namespaces,
-        const std::string& name_qualified,
-        const std::string& name_identifiable,
-        const std::string& name_tree_qualified,
-        const std::string& name_tree_identifiable,
         const dogen::yarn::name_tree& name_tree);
 
 private:
@@ -64,26 +60,6 @@ public:
     std::list<std::string>& namespaces();
     void namespaces(const std::list<std::string>& v);
     void namespaces(const std::list<std::string>&& v);
-
-    const std::string& name_qualified() const;
-    std::string& name_qualified();
-    void name_qualified(const std::string& v);
-    void name_qualified(const std::string&& v);
-
-    const std::string& name_identifiable() const;
-    std::string& name_identifiable();
-    void name_identifiable(const std::string& v);
-    void name_identifiable(const std::string&& v);
-
-    const std::string& name_tree_qualified() const;
-    std::string& name_tree_qualified();
-    void name_tree_qualified(const std::string& v);
-    void name_tree_qualified(const std::string&& v);
-
-    const std::string& name_tree_identifiable() const;
-    std::string& name_tree_identifiable();
-    void name_tree_identifiable(const std::string& v);
-    void name_tree_identifiable(const std::string&& v);
 
     const dogen::yarn::name_tree& name_tree() const;
     dogen::yarn::name_tree& name_tree();
@@ -102,10 +78,6 @@ public:
 
 private:
     std::list<std::string> namespaces_;
-    std::string name_qualified_;
-    std::string name_identifiable_;
-    std::string name_tree_qualified_;
-    std::string name_tree_identifiable_;
     dogen::yarn::name_tree name_tree_;
 };
 

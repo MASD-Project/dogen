@@ -60,9 +60,10 @@ format(assistant& a, const properties::helper_properties& hp) const {
     {
         const auto d(hp.descriptor());
         auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
+        const auto qn(a.get_qualified_name(d.name_tree()));
 a.stream() << std::endl;
-a.stream() << "inline bool operator==(const " << d.name_tree_qualified() << "& lhs," << std::endl;
-a.stream() << "const " << d.name_tree_qualified() << "& rhs) {" << std::endl;
+a.stream() << "inline bool operator==(const " << qn << "& lhs," << std::endl;
+a.stream() << "const " << qn << "& rhs) {" << std::endl;
 a.stream() << "    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;

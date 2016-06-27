@@ -33,26 +33,12 @@ using namespace dogen::utility::log;
 static logger lg(
     logger_factory("quilt.cpp.properties.helper_properties_factory"));
 
-const std::string qn_missing("Could not find qualified name for language.");
-
 }
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace properties {
-
-template<typename IdentifiableAndQualified>
-inline std::pair<std::string, std::string>
-get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
-    const auto i(iaq.qualified().find(yarn::languages::cpp));
-    if (i == iaq.qualified().end()) {
-        BOOST_LOG_SEV(lg, error) << qn_missing << yarn::languages::cpp;
-        BOOST_THROW_EXCEPTION(building_error(qn_missing));
-    }
-
-    return std::make_pair(iaq.identifiable(), i->second);
-}
 
 helper_properties_factory::helper_properties_factory(
     const settings::helper_settings_repository& hsrp) : helper_settings_(hsrp) {
@@ -98,14 +84,6 @@ boost::optional<helper_descriptor> helper_properties_factory::make(
     helper_descriptor r;
     properties::name_builder b;
     r.namespaces(b.namespace_list(nt.current()));
-
-    const auto p1(get_identifiable_and_qualified(nt.current()));
-    r.name_identifiable(p1.first);
-    r.name_qualified(p1.second);
-
-    const auto p2(get_identifiable_and_qualified(nt));
-    r.name_tree_identifiable(p2.first);
-    r.name_tree_qualified(p2.second);
     r.name_tree(nt);
 
     hp.descriptor(r);
@@ -136,7 +114,7 @@ make(const std::list<yarn::attribute>& attributes) const {
 
     std::unordered_set<std::string> done;
     for (const auto& i : properties) {
-        const auto in(i.descriptor().name_tree_identifiable());
+        const auto in(i.descriptor().name_tree().identifiable());
         if (done.find(in) != done.end()) {
             BOOST_LOG_SEV(lg, debug) << "Name tree already processed: " << in;
             continue;

@@ -48,10 +48,6 @@ std::size_t helper_descriptor_hasher::hash(const helper_descriptor& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_list_std_string(v.namespaces()));
-    combine(seed, v.name_qualified());
-    combine(seed, v.name_identifiable());
-    combine(seed, v.name_tree_qualified());
-    combine(seed, v.name_tree_identifiable());
     combine(seed, v.name_tree());
 
     return seed;

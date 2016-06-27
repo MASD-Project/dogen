@@ -40,10 +40,6 @@ void save(Archive& ar,
     const dogen::quilt::cpp::properties::helper_descriptor& v,
     const unsigned int /*version*/) {
     ar << make_nvp("namespaces", v.namespaces_);
-    ar << make_nvp("name_qualified", v.name_qualified_);
-    ar << make_nvp("name_identifiable", v.name_identifiable_);
-    ar << make_nvp("name_tree_qualified", v.name_tree_qualified_);
-    ar << make_nvp("name_tree_identifiable", v.name_tree_identifiable_);
     ar << make_nvp("name_tree", v.name_tree_);
 }
 
@@ -52,10 +48,6 @@ void load(Archive& ar,
     dogen::quilt::cpp::properties::helper_descriptor& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("namespaces", v.namespaces_);
-    ar >> make_nvp("name_qualified", v.name_qualified_);
-    ar >> make_nvp("name_identifiable", v.name_identifiable_);
-    ar >> make_nvp("name_tree_qualified", v.name_tree_qualified_);
-    ar >> make_nvp("name_tree_identifiable", v.name_tree_identifiable_);
     ar >> make_nvp("name_tree", v.name_tree_);
 }
 

@@ -55,11 +55,7 @@ helper_descriptor_generator::helper_descriptor_generator() : position_(0) { }
 void helper_descriptor_generator::
 populate(const unsigned int position, result_type& v) {
     v.namespaces(create_std_list_std_string(position + 0));
-    v.name_qualified(create_std_string(position + 1));
-    v.name_identifiable(create_std_string(position + 2));
-    v.name_tree_qualified(create_std_string(position + 3));
-    v.name_tree_identifiable(create_std_string(position + 4));
-    v.name_tree(create_dogen_yarn_name_tree(position + 5));
+    v.name_tree(create_dogen_yarn_name_tree(position + 1));
 }
 
 helper_descriptor_generator::result_type

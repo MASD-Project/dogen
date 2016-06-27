@@ -40,10 +40,11 @@ format(assistant& a, const properties::helper_properties& hp) const {
     {
         const auto d(hp.descriptor());
         auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
+        const auto qn(a.get_qualified_name(d.name_tree()));
 #>
 
-inline bool operator==(const <#= d.name_tree_qualified() #>& lhs,
-const <#= d.name_tree_qualified() #>& rhs) {
+inline bool operator==(const <#= qn #>& lhs,
+const <#= qn #>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
