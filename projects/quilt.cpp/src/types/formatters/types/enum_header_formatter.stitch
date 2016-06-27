@@ -20,7 +20,7 @@ dogen::formatters::file enum_header_formatter_stitch(
 <#+
             a.comment(e.documentation());
 #>
-enum class <#= e.name().simple() #> : <#= a.make_qualified_name(e.underlying_type()) #> {
+enum class <#= e.name().simple() #> : <#= a.get_qualified_name(e.underlying_type()) #> {
 <#+
             dogen::formatters::sequence_formatter sf(e.enumerators().size());
             for (const auto& en : e.enumerators()) {

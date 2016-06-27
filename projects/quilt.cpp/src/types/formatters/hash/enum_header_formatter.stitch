@@ -17,9 +17,9 @@ dogen::formatters::file enum_header_formatter_stitch(
 namespace std {
 
 template<>
-struct hash<<#= a.make_qualified_name(e.name()) #>> {
+struct hash<<#= a.get_qualified_name(e.name()) #>> {
 public:
-    size_t operator()(const <#= a.make_qualified_name(e.name()) #>& v) const {
+    size_t operator()(const <#= a.get_qualified_name(e.name()) #>& v) const {
         return std::hash<unsigned int>()(static_cast<unsigned int>(v));
     }
 };

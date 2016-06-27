@@ -33,7 +33,7 @@ dogen::formatters::file enum_header_formatter_stitch(
         auto sbf(a.make_scoped_boilerplate_formatter());
 a.stream() << std::endl;
 a.stream() << "template<class Archive>" << std::endl;
-a.stream() << "void serialize(Archive& ar, " << a.make_qualified_name(e.name()) << "& v, unsigned int /*version*/){" << std::endl;
+a.stream() << "void serialize(Archive& ar, " << a.get_qualified_name(e.name()) << "& v, unsigned int /*version*/){" << std::endl;
         if (!a.is_xml_serialization_disabled()) {
 a.stream() << "    using boost::serialization::make_nvp;" << std::endl;
 a.stream() << "    ar & make_nvp(\"" << e.name().simple() << "\", v);" << std::endl;

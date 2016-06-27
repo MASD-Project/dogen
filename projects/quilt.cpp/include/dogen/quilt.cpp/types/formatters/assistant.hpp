@@ -82,9 +82,12 @@ public:
         const properties::property_info& p);
 
     /**
-     * @brief Creates a qualified name
+     * @brief Obtains the qualified name
      */
-    std::string make_qualified_name(const yarn::name& n) const;
+    /**@{*/
+    std::string get_qualified_name(const yarn::name& n) const;
+    std::string get_qualified_name(const yarn::name_tree& nt) const;
+    /**@}*/
 
 private:
     void ensure_formatter_properties_are_present() const;

@@ -22,7 +22,7 @@ public:
     <#= e.name().simple() #>_generator();
 
 public:
-    typedef <#= a.make_qualified_name(e.name()) #> result_type;
+    typedef <#= a.get_qualified_name(e.name()) #> result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

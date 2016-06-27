@@ -31,13 +31,14 @@ public:
 #>
 
 <#+
-                const auto doc("Accept visits for type " + a.make_qualified_name(t));
+                const auto qn(a.get_qualified_name(t));
+                const auto doc("Accept visits for type " + qn);
                 a.comment_start_method_group(doc);
 #>
-    virtual void visit(const <#= a.make_qualified_name(t) #>&) const { }
-    virtual void visit(const <#= a.make_qualified_name(t) #>&) { }
-    virtual void visit(<#= a.make_qualified_name(t) #>&) const { }
-    virtual void visit(<#= a.make_qualified_name(t) #>&) { }
+    virtual void visit(const <#= qn #>&) const { }
+    virtual void visit(const <#= qn #>&) { }
+    virtual void visit(<#= qn #>&) const { }
+    virtual void visit(<#= qn #>&) { }
 <#+
                 a.comment_end_method_group(doc);
                 is_first = false;

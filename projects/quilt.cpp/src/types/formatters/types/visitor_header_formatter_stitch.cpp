@@ -45,12 +45,13 @@ a.stream() << "public:" << std::endl;
             for (const auto& t : v.visits()) {
                 if (!is_first)
 a.stream() << std::endl;
-                const auto doc("Accept visits for type " + a.make_qualified_name(t));
+                const auto qn(a.get_qualified_name(t));
+                const auto doc("Accept visits for type " + qn);
                 a.comment_start_method_group(doc);
-a.stream() << "    virtual void visit(const " << a.make_qualified_name(t) << "&) const { }" << std::endl;
-a.stream() << "    virtual void visit(const " << a.make_qualified_name(t) << "&) { }" << std::endl;
-a.stream() << "    virtual void visit(" << a.make_qualified_name(t) << "&) const { }" << std::endl;
-a.stream() << "    virtual void visit(" << a.make_qualified_name(t) << "&) { }" << std::endl;
+a.stream() << "    virtual void visit(const " << qn << "&) const { }" << std::endl;
+a.stream() << "    virtual void visit(const " << qn << "&) { }" << std::endl;
+a.stream() << "    virtual void visit(" << qn << "&) const { }" << std::endl;
+a.stream() << "    virtual void visit(" << qn << "&) { }" << std::endl;
                 a.comment_end_method_group(doc);
                 is_first = false;
             }

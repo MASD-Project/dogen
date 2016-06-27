@@ -41,7 +41,7 @@ a.stream() << "public:" << std::endl;
 a.stream() << "    " << e.name().simple() << "_generator();" << std::endl;
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
-a.stream() << "    typedef " << a.make_qualified_name(e.name()) << " result_type;" << std::endl;
+a.stream() << "    typedef " << a.get_qualified_name(e.name()) << " result_type;" << std::endl;
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
 a.stream() << "    static void populate(const unsigned int position, result_type& v);" << std::endl;

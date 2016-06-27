@@ -25,6 +25,7 @@
 #include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/formatters/types/comment_formatter.hpp"
 #include "dogen/formatters/types/annotation_formatter.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
 #include "dogen/quilt.cpp/types/properties/name_builder.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
@@ -66,6 +67,7 @@ const std::string formatter_properties_missing(
 const std::string unexpected_opaque_settings(
     "Unexpectd opaque settings type.");
 const std::string family_not_found("Family not found: ");
+const std::string qn_missing("Could not find qualified name for language.");
 
 }
 
@@ -73,6 +75,18 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
+
+template<typename IdentifiableAndQualified>
+inline std::pair<std::string, std::string>
+get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
+    const auto i(iaq.qualified().find(yarn::languages::cpp));
+    if (i == iaq.qualified().end()) {
+        BOOST_LOG_SEV(lg, error) << qn_missing << yarn::languages::cpp;
+        BOOST_THROW_EXCEPTION(formatting_error(qn_missing));
+    }
+
+    return std::make_pair(iaq.identifiable(), i->second);
+}
 
 assistant::assistant(const context& ctx,
     const dynamic::ownership_hierarchy& oh, const formatters::file_types ft) :
@@ -108,12 +122,14 @@ make_setter_return_type(const std::string& containing_type_name,
     return s.str();
 }
 
-std::string assistant::make_qualified_name(const yarn::name& n) const {
-    properties::name_builder b;
-    auto ns(b.namespace_list(n));
-    ns.push_back(n.simple());
-    const auto r(boost::join(ns, namespace_separator));
-    return r;
+std::string assistant::get_qualified_name(const yarn::name& n) const {
+    const auto pair(get_identifiable_and_qualified(n));
+    return pair.second;
+}
+
+std::string assistant::get_qualified_name(const yarn::name_tree& nt) const {
+    const auto pair(get_identifiable_and_qualified(nt));
+    return pair.second;
 }
 
 void assistant::ensure_formatter_properties_are_present() const {
