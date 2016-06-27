@@ -794,7 +794,7 @@ Tasks:
 - change formatter interfaces to return =boost::optional<file>=
 - change all formatters.
 
-*** Container details in JSON dump                                    :story:
+*** Improve container details in JSON dump                            :story:
 
 #+begin_quote
 *Story*: As a dogen user, I would like to know how many elements
@@ -802,7 +802,36 @@ containers have so that I don't have to count it manually.
 #+end_quote
 
 It would be nice to have the container type and size in the JSON
-output.
+output. In addition, it seems we are not outputting all containers
+correctly. For example, for associative containers we have:
+
+:  "elements": [
+:    [
+:      {
+:        "__type__": "key",
+:        "data": "<std><unordered_map>"
+:      },
+:      {
+:        "__type__": "value",
+:        "data": {
+:          "__type__": "boost::shared_ptr",
+
+We should really be outputting the container type, as well as the key
+and value types:
+
+:  "elements": {
+:     "__type__": "std::unordered_map",
+:     "count": 10,
+:     "entries": [
+:         {
+:             "__type__": "std::pair",
+:             "first": "<std><unordered_map>", ==> NOTE: just a string
+:             "second": {
+:                 "__type__": "boost::shared_ptr",
+: ...
+
+And so forth. The only problem with this approach is with simple
+types. If we have a key
 
 *** Do not include algorithm if swap is disabled                      :story:
 
