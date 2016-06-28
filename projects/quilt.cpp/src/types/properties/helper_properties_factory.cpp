@@ -57,8 +57,9 @@ get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
 }
 
 helper_properties_factory::helper_properties_factory(
-    const settings::helper_settings_repository& hsrp) : helper_settings_(hsrp) {
-}
+    const std::unordered_set<std::string>& primitive_ids,
+    const settings::helper_settings_repository& hsrp)
+    : primitive_ids_(primitive_ids), helper_settings_(hsrp) { }
 
 boost::optional<helper_descriptor>
 helper_properties_factory::make(
@@ -85,13 +86,16 @@ helper_properties_factory::make(
     properties::name_builder b;
     r.namespaces(b.namespace_list(nt.current()));
 
+    const auto j(primitive_ids_.find(id));
+    r.is_primitive(j != primitive_ids_.end());
+
     /*
      * Child name trees may not have helper settings (as they may not
      * need helpers). We still need descriptors for them though, even
      * with blank settings. This is so we can build the direct
      * descendants.
      */
-    if (i != hsbn.end()) {
+    if (requires_helper) {
         r.settings(i->second);
         BOOST_LOG_SEV(lg, debug) << "Adding settings for: " << id;
     }

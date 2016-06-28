@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <unordered_set>
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
@@ -40,7 +41,8 @@ namespace properties {
 
 class helper_properties_factory {
 public:
-    explicit helper_properties_factory(
+    helper_properties_factory(
+        const std::unordered_set<std::string>& primitive_ids,
         const settings::helper_settings_repository& hsrp);
 
 private:
@@ -53,6 +55,7 @@ public:
     make(const std::list<yarn::attribute>& attributes) const;
 
 private:
+    const std::unordered_set<std::string>& primitive_ids_;
     const settings::helper_settings_repository& helper_settings_;
 };
 

@@ -19,9 +19,12 @@
  *
  */
 #include <list>
+#include <unordered_set>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/attribute.hpp"
+#include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/quilt.cpp/types/properties/building_error.hpp"
@@ -45,6 +48,32 @@ namespace cpp {
 namespace properties {
 
 namespace {
+
+class primitve_ids_generator : public yarn::element_visitor {
+private:
+    std::unordered_set<std::string> result_;
+
+private:
+    template<typename Nameable>
+    void insert(const Nameable& n) {
+        result_.insert(n.name().id());
+    }
+
+public:
+    using yarn::element_visitor::visit;
+    void visit(const dogen::yarn::primitive& p) { insert(p); }
+    void visit(const dogen::yarn::enumeration& e) { insert(e); }
+
+public:
+    const std::unordered_set<std::string>& result() const { return result_; }
+
+public:
+    void operator()(const std::pair<std::string,
+        boost::shared_ptr<dogen::yarn::element> >& pair) const {
+        const auto& e(*pair.second);
+        e.accept(*this);
+    }
+};
 
 class generator final : public yarn::element_visitor {
 public:
@@ -92,7 +121,11 @@ helper_properties_repository_factory::make(const yarn::model& m,
 
     BOOST_LOG_SEV(lg, debug) << "Started creating helper instances.";
 
-    const helper_properties_factory f(hsrp);
+    primitve_ids_generator pig;
+    for (const auto& pair : m.elements())
+        pig(pair);
+
+    const helper_properties_factory f(pig.result(), hsrp);
     generator g(f);
     for (const auto& pair : m.elements()) {
         const auto& e(*pair.second);
