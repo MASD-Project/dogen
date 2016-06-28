@@ -130,7 +130,7 @@ if(CMAKE_SIZEOF_VOID_P EQUAL 8)
 endif()
 
 set(cpp_runtime_libs "")
-if (WIN32)
+if (MINGW)
     set (cpp_runtime_libs
         ${cpp_runtime_libs} e:/mingw/bin/LIBGCC_S_DW2-1.DLL)
     set (cpp_runtime_libs

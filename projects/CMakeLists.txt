@@ -145,10 +145,11 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
 elseif(MSVC)
     if (${MSVC_VERSION} GREATER 1399) # 1400+ => VC2005+
         # cannot use incremental rebuild
-        string(REPLACE "/Gm" "" CMAKE_C_FLAGS_DEBUG   ${CMAKE_C_FLAGS_DEBUG})
+        string(REPLACE "/Gm" "" CMAKE_C_FLAGS_DEBUG ${CMAKE_C_FLAGS_DEBUG})
         string(REPLACE "/Gm" "" CMAKE_C_FLAGS_RELEASE ${CMAKE_C_FLAGS_RELEASE})
-        string(REPLACE "/Gm" "" CMAKE_CXX_FLAGS_DEBUG   ${CMAKE_CXX_FLAGS_DEBUG})
-        string(REPLACE "/Gm" "" CMAKE_CXX_FLAGS_RELEASE ${CMAKE_CXX_FLAGS_RELEASE})
+        string(REPLACE "/Gm" "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
+        string(REPLACE "/Gm" "" CMAKE_CXX_FLAGS_RELEASE
+          ${CMAKE_CXX_FLAGS_RELEASE})
         set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
     endif()
 endif()
