@@ -12518,17 +12518,17 @@ are not modules, such as attributes, inner classes, etc.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-57.56,-12.3"/>
+        <dia:point val="-57.56,-10.7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-58.31,-13.15;-43.0003,-11.45"/>
+        <dia:rectangle val="-58.31,-13.15;-43.0003,-9.85"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-57.56,-12.3"/>
-        <dia:point val="-49.9551,-12.3"/>
+        <dia:point val="-57.56,-10.7"/>
+        <dia:point val="-49.9551,-10.7"/>
         <dia:point val="-49.9551,-12.4"/>
         <dia:point val="-43.0503,-12.4"/>
       </dia:attribute>
@@ -12547,7 +12547,7 @@ are not modules, such as attributes, inner classes, etc.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O44" connection="11"/>
+        <dia:connection handle="0" to="O44" connection="15"/>
         <dia:connection handle="1" to="O98" connection="16"/>
       </dia:connections>
     </dia:object>
