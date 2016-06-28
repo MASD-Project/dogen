@@ -236,7 +236,7 @@ public:
      * @brief Returns the correct streaming invocation for the
      * supplied type.
      */
-    std::string streaming_for_type(const properties::helper_descriptor& hp,
+    std::string streaming_for_type(const properties::helper_descriptor& hd,
         const std::string& s) const;
 
     /**

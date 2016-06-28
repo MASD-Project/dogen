@@ -25,6 +25,7 @@
 #include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/formatters/types/comment_formatter.hpp"
 #include "dogen/formatters/types/annotation_formatter.hpp"
+#include "dogen/formatters/types/utility_formatter.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
 #include "dogen/quilt.cpp/types/properties/name_builder.hpp"
@@ -481,9 +482,31 @@ void assistant::add_helper_methods(const bool in_inheritance) {
     }
 }
 
-std::string assistant::streaming_for_type(
-    const properties::helper_descriptor& /*hp*/,
-    const std::string& /*s*/) const {
+std::string assistant::
+streaming_for_type(const properties::helper_descriptor& hd,
+    const std::string& s) const {
+
+    const auto sg(hd.settings());
+    if (!sg) {
+        BOOST_LOG_SEV(lg, error) << empty_settings;
+        BOOST_THROW_EXCEPTION(formatting_error(empty_settings));
+    }
+
+    std::ostringstream ss;
+    dogen::formatters::utility_formatter uf(ss);
+    if (sg->remove_unprintable_characters())
+        uf.insert_streamed("tidy_up_string(" + s + ")");
+    else if (!sg->string_conversion_method().empty()) {
+        // FIXME: hack!
+        std::string s1(s);
+        const auto i(s1.find('*'));
+        if (i != std::string::npos)
+            s1 = "(" + s + ")";
+        uf.insert_streamed(s1 + "." + sg->string_conversion_method());
+    } else if (sg->requires_quoting())
+        uf.insert_streamed(s);
+    else
+        uf.insert(s);
 
     std::string r;
     return r;

@@ -18,6 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/string_helper_stitch.hpp"
 
 namespace dogen {
@@ -25,6 +28,43 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 namespace io {
+
+std::string string_helper::family() const {
+    static std::string r("SmartPointer");
+    return r;
+}
+
+std::list<std::string> string_helper::owning_formatters() const {
+    static auto r(std::list<std::string> {
+        traits::class_implementation_formatter_name()
+    });
+    return r;
+}
+
+bool string_helper::requires_explicit_call() const {
+    return false;
+}
+
+std::string string_helper::function_name() const {
+    static std::string r("operator==");
+    return r;
+}
+
+bool string_helper::
+is_enabled(const assistant& /*a*/, const bool /*in_inheritance*/) const {
+    return true;
+}
+
+void string_helper::
+format(assistant& a, const properties::helper_properties& /*hp*/) const {
+a.stream() << "inline std::string tidy_up_string(std::string s) {" << std::endl;
+a.stream() << "    boost::replace_all(s, \"\\r\\n\", \"<new_line>\");" << std::endl;
+a.stream() << "    boost::replace_all(s, \"\\n\", \"<new_line>\");" << std::endl;
+a.stream() << "    boost::replace_all(s, \"\\\"\", \"<quote>\");" << std::endl;
+a.stream() << "    return s;" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+}
 
 void string_helper_stitch(
     nested_type_formatting_assistant& a,

@@ -18,6 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/ptree_helper_stitch.hpp"
 
 namespace dogen {
@@ -25,6 +28,55 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 namespace io {
+
+std::string ptree_helper::family() const {
+    static std::string r("SmartPointer");
+    return r;
+}
+
+std::list<std::string> ptree_helper::owning_formatters() const {
+    static auto r(std::list<std::string> {
+        traits::class_implementation_formatter_name()
+    });
+    return r;
+}
+
+bool ptree_helper::requires_explicit_call() const {
+    return false;
+}
+
+std::string ptree_helper::function_name() const {
+    static std::string r("operator==");
+    return r;
+}
+
+bool ptree_helper::
+is_enabled(const assistant& /*a*/, const bool /*in_inheritance*/) const {
+    return true;
+}
+
+void ptree_helper::
+format(assistant& a, const properties::helper_properties& hp) const {
+    {
+        const auto d(hp.current());
+        const auto nt_qn(d.name_tree_qualified());
+        auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
+a.stream() << std::endl;
+a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << nt_qn << "& v) {" << std::endl;
+a.stream() << "    std::ostringstream ss;" << std::endl;
+a.stream() << "    boost::property_tree::write_json(ss, v);" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    std::string content(ss.str());" << std::endl;
+a.stream() << "    boost::replace_all(content, \"\\r\\n\", \"\");" << std::endl;
+a.stream() << "    boost::replace_all(content, \"\\n\", \"\");" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    s << content;" << std::endl;
+a.stream() << "    return s;" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+    }
+a.stream() << std::endl;
+}
 
 void ptree_helper_stitch(
     nested_type_formatting_assistant& a,
