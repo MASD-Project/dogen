@@ -835,6 +835,7 @@ final understanding is now:
 With this structure we should be able to satisfy all use cases so far.
 
 *** STARTED Implement IO helper methods with new helper infrastructure :story:
+    CLOCK: [2016-06-28 Tue 22:22]
     CLOCK: [2016-06-28 Tue 21:57]--[2016-06-28 Tue 22:21] =>  0:24
     CLOCK: [2016-06-28 Tue 21:49]--[2016-06-28 Tue 21:56] =>  0:07
     CLOCK: [2016-06-28 Tue 20:46]--[2016-06-28 Tue 21:48] =>  1:02
@@ -849,6 +850,10 @@ Problems:
 - we do not have a name tree so we do not know what the key and value
   names are for associative containers. We probably need to add the
   name tree to the helper descriptor.
+- =string_conversion_method= cannot be implemented as is;we need it
+  for all properties, not just in the context of helpers. This seems
+  to imply we need a way to access this information directly from the
+  property. It will need some thinking.
 
 *** Implement qualified name efficiently                              :story:
 
@@ -915,6 +920,27 @@ supported types and add the includes to the meta-data; regenerate and
 see what breaks. It could be related to the ordering of template
 functions or some such problem. If so we need to document this in
 manual. We should also do a quick search in backlog for this.
+
+*** Character member variables are not tidied up on io                :story:
+
+At present there is no code to convert non-printable chars into
+something acceptable in JSON. We probably never noticed this before
+because test data generates printable chars. Code generated is as
+follows (all primitives model):
+
+: << "\"char_property\": " << "\"" << v.char_property() << "\"" << ", "
+
+We need a "tidy-up char" function to handle this properly.
+
+*** Lists of strings are not properly tidied up on io                 :story:
+
+In the log file, when we dump include dependencies we see invalid
+JSON:
+
+: [ "<iosfwd>", ""dogen/sml/types/merger.hpp"" ]
+
+This implies we are not calling =tidy_up_string=. This can be tested
+by creating a container of =filesystem::path=.
 
 *** Fix Windows build timeout                                         :story:
 

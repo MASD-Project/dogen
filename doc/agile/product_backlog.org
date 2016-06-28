@@ -706,15 +706,6 @@ Once references are supplied as meta-data, we could conceivably create
 a loop in CMake to generates all of the knitting targets based on the
 contents of the diagrams directory.
 
-*** Lists of strings are not properly tidied up on io                 :story:
-
-In the log file, when we dump include dependencies we see invalid
-JSON:
-
-: [ "<iosfwd>", ""dogen/sml/types/merger.hpp"" ]
-
-This implies we are not calling =tidy_up_string=.
-
 *** Duplicate fields in JSON result in non-intuitive errors           :story:
 
 By mistake we added the same field twice in JSON:
