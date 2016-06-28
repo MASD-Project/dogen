@@ -221,7 +221,7 @@ public:
 
 private:
     std::list<std::shared_ptr<formatters::formatter_helper_interface>>
-        get_helpers_for(const properties::helper_properties& hp) const;
+    get_helpers_for_formatter(const properties::helper_properties& hp) const;
 
 public:
     /**

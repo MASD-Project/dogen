@@ -12,19 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-28 Tue 17:28]
+#+CAPTION: Clock summary at [2016-06-28 Tue 17:36]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *34:04* |       |      | 100.0 |
+| *Total time*                                                                | *34:11* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 34:04   |       |      | 100.0 |
-| Active                                                                      |         | 34:04 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 3:42 |  10.9 |
+| Stories                                                                     | 34:11   |       |      | 100.0 |
+| Active                                                                      |         | 34:11 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 3:42 |  10.8 |
 | STARTED Manual updates and blog posts                                       |         |       | 0:53 |   2.6 |
 | COMPLETED Refactor helper settings                                          |         |       | 0:35 |   1.7 |
 | COMPLETED Add properties for helpers                                        |         |       | 1:35 |   4.6 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   4.1 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   4.0 |
 | COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   2.4 |
 | COMPLETED Rename helper instances                                           |         |       | 0:37 |   1.8 |
 | COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   3.4 |
@@ -48,7 +48,7 @@
 | COMPLETED Fix Mingw build's warning                                         |         |       | 0:10 |   0.5 |
 | COMPLETED Implement types helper methods with new helper infrastructure     |         |       | 3:12 |   9.4 |
 | COMPLETED Move identifiable and qualified to assistant                      |         |       | 0:32 |   1.6 |
-| COMPLETED Refactor helper properties yet again                              |         |       | 2:49 |   8.3 |
+| COMPLETED Refactor helper properties yet again                              |         |       | 2:56 |   8.6 |
 | STARTED Implement IO helper methods with new helper infrastructure          |         |       | 0:30 |   1.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -818,6 +818,7 @@ the machinery across to the assistant.
 
 *** COMPLETED Refactor helper properties yet again                    :story:
     CLOSED: [2016-06-28 Tue 17:28]
+    CLOCK: [2016-06-28 Tue 17:29]--[2016-06-28 Tue 17:36] =>  0:07
     CLOCK: [2016-06-28 Tue 15:39]--[2016-06-28 Tue 17:28] =>  1:49
     CLOCK: [2016-06-28 Tue 15:01]--[2016-06-28 Tue 15:39] =>  0:38
     CLOCK: [2016-06-27 Mon 17:23]--[2016-06-27 Mon 17:45] =>  0:22

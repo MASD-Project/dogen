@@ -402,6 +402,60 @@ void assistant::add_helper_methods(const properties::class_info& c) {
     }
 }
 
+std::list<std::shared_ptr<formatters::formatter_helper_interface>> assistant::
+get_helpers_for_formatter(const properties::helper_properties& hp) const {
+    /*
+     * Helper properties must always have settings, otherwise
+     * there is no point to their existence.
+     */
+    const auto s(hp.current().settings());
+    if (!s) {
+        BOOST_LOG_SEV(lg, error) << empty_settings;
+        BOOST_THROW_EXCEPTION(formatting_error(empty_settings));
+    }
+
+    /*
+     * Family cannot be empty as that is not a valid family.
+     */
+    const auto family(s->family());
+    if(family.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_family;
+        BOOST_THROW_EXCEPTION(formatting_error(empty_family));
+    }
+
+    /*
+     * A family should have at least one helper registered, but
+     * for now we are letting it through.
+     * FIXME: throw.
+     */
+    const auto i(context_.helpers().find(family));
+    if (i == context_.helpers().end()) {
+        BOOST_LOG_SEV(lg, debug) << "Could not find helpers for family: "
+                                 << family;
+        return std::list<
+            std::shared_ptr<formatters::formatter_helper_interface>
+            >();
+    }
+    BOOST_LOG_SEV(lg, debug) << "Found helpers for family: " << family;
+
+    /*
+     * Not all formatters need help, so its fine not to have a
+     * helper registered against a particular formatter.
+     */
+    const auto j(i->second.find(ownership_hierarchy_.formatter_name()));
+    if (j == i->second.end()) {
+        BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
+                                 << ownership_hierarchy_.formatter_name();
+        return std::list<
+            std::shared_ptr<formatters::formatter_helper_interface>
+            >();
+    }
+    BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
+                             << ownership_hierarchy_.formatter_name();
+
+    return j->second;
+}
+
 void assistant::add_helper_methods(const bool in_inheritance) {
     if (context_.element_properties().helper_properties().empty()) {
         // FIXME: supply target name as an argument and print its ID
@@ -411,56 +465,13 @@ void assistant::add_helper_methods(const bool in_inheritance) {
     }
 
     for (const auto& hp : context_.element_properties().helper_properties()) {
-        /*
-         * Helper properties must always have settings, otherwise
-         * there is no point to their existence.
-         */
-        const auto s(hp.current().settings());
-        if (!s) {
-            BOOST_LOG_SEV(lg, error) << empty_settings;
-            BOOST_THROW_EXCEPTION(formatting_error(empty_settings));
-        }
-
-        /*
-         * Family cannot be empty as that is not a valid family.
-         */
-        const auto family(s->family());
-        if(family.empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_family;
-            BOOST_THROW_EXCEPTION(formatting_error(empty_family));
-        }
-
-        /*
-         * A family should have at least one helper registered, but
-         * for now we are letting it through.
-         * FIXME: throw.
-         */
-        const auto i(context_.helpers().find(family));
-        if (i == context_.helpers().end()) {
-            BOOST_LOG_SEV(lg, debug) << "Could not find helpers for family: "
-                                     << family;
-            continue;
-        }
-        BOOST_LOG_SEV(lg, debug) << "Found helpers for family: " << family;
-
-        /*
-         * Not all formatters need help, so its fine not to have a
-         * helper registered against a particular formatter.
-         */
-        const auto j(i->second.find(ownership_hierarchy_.formatter_name()));
-        if (j == i->second.end()) {
-            BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
-                                     << ownership_hierarchy_.formatter_name();
-            continue;
-        }
-        BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
-                                 << ownership_hierarchy_.formatter_name();
+        const auto helpers(get_helpers_for_formatter(hp));
 
         /*
          * Check to see if the helper is enabled, given the system's
          * current configuration. If enabled, format it.
          */
-        for (const auto& h : j->second) {
+        for (const auto& h : helpers) {
             if (!h->is_enabled(*this, in_inheritance)) {
                 BOOST_LOG_SEV(lg, debug) << "Helper is not enabled.";
                 continue;
