@@ -30,7 +30,7 @@ namespace formatters {
 namespace io {
 
 std::string variant_helper::family() const {
-    static std::string r("SmartPointer");
+    static std::string r("Variant");
     return r;
 }
 

@@ -31,7 +31,7 @@ namespace formatters {
 namespace io {
 
 std::string associative_container_helper::family() const {
-    static std::string r("SmartPointer");
+    static std::string r("AssociativeContainer");
     return r;
 }
 

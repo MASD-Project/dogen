@@ -30,7 +30,7 @@ namespace formatters {
 namespace io {
 
 std::string pair_helper::family() const {
-    static std::string r("SmartPointer");
+    static std::string r("Pair");
     return r;
 }
 
