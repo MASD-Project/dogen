@@ -35,7 +35,7 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
-class variant_helper_stitch : public formatter_helper_interface {
+class variant_helper : public formatter_helper_interface {
 public:
     std::string family() const;
     std::list<std::string> owning_formatters() const;
