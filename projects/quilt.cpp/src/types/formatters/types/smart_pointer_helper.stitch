@@ -5,6 +5,7 @@
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/smart_pointer_helper_stitch.hpp" #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/properties/helper_properties.hpp" #>
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::types #>
 <#+
 

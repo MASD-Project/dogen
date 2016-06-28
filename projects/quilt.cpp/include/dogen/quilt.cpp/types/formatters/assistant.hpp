@@ -45,6 +45,7 @@
 #include "dogen/quilt.cpp/types/formatters/file_types.hpp"
 #include "dogen/quilt.cpp/types/properties/class_info.hpp"
 #include "dogen/quilt.cpp/types/properties/property_info.hpp"
+#include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/nested_type_formatting_assistant.hpp"
 
 namespace dogen {
@@ -230,6 +231,13 @@ public:
      */
     void add_helper_methods(const properties::class_info& c);
     void add_helper_methods(const bool in_inheritance = false);
+
+    /**
+     * @brief Returns the correct streaming invocation for the
+     * supplied type.
+     */
+    std::string streaming_for_type(const properties::helper_descriptor& hp,
+        const std::string& s) const;
 
     /**
      * @brief Returns true if the type can be hashed without requiring a
