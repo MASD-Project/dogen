@@ -907,6 +907,15 @@ see what breaks. It could be related to the ordering of template
 functions or some such problem. If so we need to document this in
 manual. We should also do a quick search in backlog for this.
 
+*** Fix Windows build timeout                                         :story:
+
+At present the windows build is taking over 1h and its only building
+the knitter target. We need to think of ways to reduce the build
+time. Things to try:
+
+- remove all of the hashing etc for the types we don't need to hash.
+- get rid of the warnings for boost.
+
 *** Build boost for MinGW                                             :story:
 
 At present our MinGW build is borked because we do not have a boost
