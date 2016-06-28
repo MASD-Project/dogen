@@ -219,6 +219,10 @@ public:
      */
     std::string comment_inline(const std::string& c) const;
 
+private:
+    std::list<std::shared_ptr<formatters::formatter_helper_interface>>
+        get_helpers_for(const properties::helper_properties& hp) const;
+
 public:
     /**
      * @brief Creates any helper methods that may be required for this

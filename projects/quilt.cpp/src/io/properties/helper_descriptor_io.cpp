@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/name_tree_io.hpp"
+#include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
 #include "dogen/quilt.cpp/io/properties/helper_descriptor_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -44,6 +44,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::quilt::cpp::settings::helper_settings>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace quilt {
 namespace cpp {
@@ -53,7 +68,11 @@ std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::properties::helper_descriptor\"" << ", "
       << "\"namespaces\": " << v.namespaces() << ", "
-      << "\"name_tree\": " << v.name_tree()
+      << "\"name_identifiable\": " << "\"" << tidy_up_string(v.name_identifiable()) << "\"" << ", "
+      << "\"name_qualified\": " << "\"" << tidy_up_string(v.name_qualified()) << "\"" << ", "
+      << "\"name_tree_qualified\": " << "\"" << tidy_up_string(v.name_tree_qualified()) << "\"" << ", "
+      << "\"name_tree_identifiable\": " << "\"" << tidy_up_string(v.name_tree_identifiable()) << "\"" << ", "
+      << "\"settings\": " << v.settings()
       << " }";
     return(s);
 }

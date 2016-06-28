@@ -19,7 +19,6 @@
  *
  */
 #include <ostream>
-#include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
 #include "dogen/quilt.cpp/io/properties/helper_descriptor_io.hpp"
 #include "dogen/quilt.cpp/io/properties/helper_properties_io.hpp"
 
@@ -45,9 +44,8 @@ namespace properties {
 std::ostream& operator<<(std::ostream& s, const helper_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::properties::helper_properties\"" << ", "
-      << "\"descriptor\": " << v.descriptor() << ", "
-      << "\"associated_helpers\": " << v.associated_helpers() << ", "
-      << "\"settings\": " << v.settings()
+      << "\"current\": " << v.current() << ", "
+      << "\"direct_descendants\": " << v.direct_descendants()
       << " }";
     return(s);
 }

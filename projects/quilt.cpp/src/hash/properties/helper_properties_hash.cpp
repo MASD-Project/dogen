@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/settings/helper_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/helper_descriptor_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/helper_properties_hash.hpp"
 
@@ -48,9 +47,8 @@ namespace properties {
 std::size_t helper_properties_hasher::hash(const helper_properties& v) {
     std::size_t seed(0);
 
-    combine(seed, v.descriptor());
-    combine(seed, hash_std_list_dogen_quilt_cpp_properties_helper_descriptor(v.associated_helpers()));
-    combine(seed, v.settings());
+    combine(seed, v.current());
+    combine(seed, hash_std_list_dogen_quilt_cpp_properties_helper_descriptor(v.direct_descendants()));
 
     return seed;
 }

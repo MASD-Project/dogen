@@ -45,7 +45,7 @@ public:
 
 private:
     boost::optional<helper_descriptor>
-    make(const yarn::name_tree& nt,
+    make(const yarn::name_tree& nt, const bool is_top_level,
         std::list<helper_properties>& properties) const;
 
 public:

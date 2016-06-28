@@ -27,7 +27,6 @@
 
 #include <list>
 #include <algorithm>
-#include "dogen/quilt.cpp/types/settings/helper_settings.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_descriptor.hpp"
 #include "dogen/quilt.cpp/serialization/properties/helper_properties_fwd_ser.hpp"
 
@@ -45,9 +44,8 @@ public:
 
 public:
     helper_properties(
-        const dogen::quilt::cpp::properties::helper_descriptor& descriptor,
-        const std::list<dogen::quilt::cpp::properties::helper_descriptor>& associated_helpers,
-        const dogen::quilt::cpp::settings::helper_settings& settings);
+        const dogen::quilt::cpp::properties::helper_descriptor& current,
+        const std::list<dogen::quilt::cpp::properties::helper_descriptor>& direct_descendants);
 
 private:
     template<typename Archive>
@@ -57,25 +55,15 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::properties::helper_properties& v, unsigned int version);
 
 public:
-    const dogen::quilt::cpp::properties::helper_descriptor& descriptor() const;
-    dogen::quilt::cpp::properties::helper_descriptor& descriptor();
-    void descriptor(const dogen::quilt::cpp::properties::helper_descriptor& v);
-    void descriptor(const dogen::quilt::cpp::properties::helper_descriptor&& v);
+    const dogen::quilt::cpp::properties::helper_descriptor& current() const;
+    dogen::quilt::cpp::properties::helper_descriptor& current();
+    void current(const dogen::quilt::cpp::properties::helper_descriptor& v);
+    void current(const dogen::quilt::cpp::properties::helper_descriptor&& v);
 
-    const std::list<dogen::quilt::cpp::properties::helper_descriptor>& associated_helpers() const;
-    std::list<dogen::quilt::cpp::properties::helper_descriptor>& associated_helpers();
-    void associated_helpers(const std::list<dogen::quilt::cpp::properties::helper_descriptor>& v);
-    void associated_helpers(const std::list<dogen::quilt::cpp::properties::helper_descriptor>&& v);
-
-    /**
-     * @brief Settings for this helper
-     */
-    /**@{*/
-    const dogen::quilt::cpp::settings::helper_settings& settings() const;
-    dogen::quilt::cpp::settings::helper_settings& settings();
-    void settings(const dogen::quilt::cpp::settings::helper_settings& v);
-    void settings(const dogen::quilt::cpp::settings::helper_settings&& v);
-    /**@}*/
+    const std::list<dogen::quilt::cpp::properties::helper_descriptor>& direct_descendants() const;
+    std::list<dogen::quilt::cpp::properties::helper_descriptor>& direct_descendants();
+    void direct_descendants(const std::list<dogen::quilt::cpp::properties::helper_descriptor>& v);
+    void direct_descendants(const std::list<dogen::quilt::cpp::properties::helper_descriptor>&& v);
 
 public:
     bool operator==(const helper_properties& rhs) const;
@@ -88,9 +76,8 @@ public:
     helper_properties& operator=(helper_properties other);
 
 private:
-    dogen::quilt::cpp::properties::helper_descriptor descriptor_;
-    std::list<dogen::quilt::cpp::properties::helper_descriptor> associated_helpers_;
-    dogen::quilt::cpp::settings::helper_settings settings_;
+    dogen::quilt::cpp::properties::helper_descriptor current_;
+    std::list<dogen::quilt::cpp::properties::helper_descriptor> direct_descendants_;
 };
 
 } } } }

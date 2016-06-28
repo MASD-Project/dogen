@@ -26,24 +26,20 @@ namespace cpp {
 namespace properties {
 
 helper_properties::helper_properties(
-    const dogen::quilt::cpp::properties::helper_descriptor& descriptor,
-    const std::list<dogen::quilt::cpp::properties::helper_descriptor>& associated_helpers,
-    const dogen::quilt::cpp::settings::helper_settings& settings)
-    : descriptor_(descriptor),
-      associated_helpers_(associated_helpers),
-      settings_(settings) { }
+    const dogen::quilt::cpp::properties::helper_descriptor& current,
+    const std::list<dogen::quilt::cpp::properties::helper_descriptor>& direct_descendants)
+    : current_(current),
+      direct_descendants_(direct_descendants) { }
 
 void helper_properties::swap(helper_properties& other) noexcept {
     using std::swap;
-    swap(descriptor_, other.descriptor_);
-    swap(associated_helpers_, other.associated_helpers_);
-    swap(settings_, other.settings_);
+    swap(current_, other.current_);
+    swap(direct_descendants_, other.direct_descendants_);
 }
 
 bool helper_properties::operator==(const helper_properties& rhs) const {
-    return descriptor_ == rhs.descriptor_ &&
-        associated_helpers_ == rhs.associated_helpers_ &&
-        settings_ == rhs.settings_;
+    return current_ == rhs.current_ &&
+        direct_descendants_ == rhs.direct_descendants_;
 }
 
 helper_properties& helper_properties::operator=(helper_properties other) {
@@ -52,52 +48,36 @@ helper_properties& helper_properties::operator=(helper_properties other) {
     return *this;
 }
 
-const dogen::quilt::cpp::properties::helper_descriptor& helper_properties::descriptor() const {
-    return descriptor_;
+const dogen::quilt::cpp::properties::helper_descriptor& helper_properties::current() const {
+    return current_;
 }
 
-dogen::quilt::cpp::properties::helper_descriptor& helper_properties::descriptor() {
-    return descriptor_;
+dogen::quilt::cpp::properties::helper_descriptor& helper_properties::current() {
+    return current_;
 }
 
-void helper_properties::descriptor(const dogen::quilt::cpp::properties::helper_descriptor& v) {
-    descriptor_ = v;
+void helper_properties::current(const dogen::quilt::cpp::properties::helper_descriptor& v) {
+    current_ = v;
 }
 
-void helper_properties::descriptor(const dogen::quilt::cpp::properties::helper_descriptor&& v) {
-    descriptor_ = std::move(v);
+void helper_properties::current(const dogen::quilt::cpp::properties::helper_descriptor&& v) {
+    current_ = std::move(v);
 }
 
-const std::list<dogen::quilt::cpp::properties::helper_descriptor>& helper_properties::associated_helpers() const {
-    return associated_helpers_;
+const std::list<dogen::quilt::cpp::properties::helper_descriptor>& helper_properties::direct_descendants() const {
+    return direct_descendants_;
 }
 
-std::list<dogen::quilt::cpp::properties::helper_descriptor>& helper_properties::associated_helpers() {
-    return associated_helpers_;
+std::list<dogen::quilt::cpp::properties::helper_descriptor>& helper_properties::direct_descendants() {
+    return direct_descendants_;
 }
 
-void helper_properties::associated_helpers(const std::list<dogen::quilt::cpp::properties::helper_descriptor>& v) {
-    associated_helpers_ = v;
+void helper_properties::direct_descendants(const std::list<dogen::quilt::cpp::properties::helper_descriptor>& v) {
+    direct_descendants_ = v;
 }
 
-void helper_properties::associated_helpers(const std::list<dogen::quilt::cpp::properties::helper_descriptor>&& v) {
-    associated_helpers_ = std::move(v);
-}
-
-const dogen::quilt::cpp::settings::helper_settings& helper_properties::settings() const {
-    return settings_;
-}
-
-dogen::quilt::cpp::settings::helper_settings& helper_properties::settings() {
-    return settings_;
-}
-
-void helper_properties::settings(const dogen::quilt::cpp::settings::helper_settings& v) {
-    settings_ = v;
-}
-
-void helper_properties::settings(const dogen::quilt::cpp::settings::helper_settings&& v) {
-    settings_ = std::move(v);
+void helper_properties::direct_descendants(const std::list<dogen::quilt::cpp::properties::helper_descriptor>&& v) {
+    direct_descendants_ = std::move(v);
 }
 
 } } } }

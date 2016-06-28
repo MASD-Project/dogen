@@ -68,6 +68,9 @@ const std::string unexpected_opaque_settings(
     "Unexpectd opaque settings type.");
 const std::string family_not_found("Family not found: ");
 const std::string qn_missing("Could not find qualified name for language.");
+const std::string empty_settings("Helper properties must have settings.");
+const std::string empty_family("Family cannot be empty.");
+const std::string helpless_family("No registered helpers found for family: ");
 
 }
 
@@ -408,15 +411,42 @@ void assistant::add_helper_methods(const bool in_inheritance) {
     }
 
     for (const auto& hp : context_.element_properties().helper_properties()) {
-        const auto i(context_.helpers().find(hp.settings().family()));
+        /*
+         * Helper properties must always have settings, otherwise
+         * there is no point to their existence.
+         */
+        const auto s(hp.current().settings());
+        if (!s) {
+            BOOST_LOG_SEV(lg, error) << empty_settings;
+            BOOST_THROW_EXCEPTION(formatting_error(empty_settings));
+        }
+
+        /*
+         * Family cannot be empty as that is not a valid family.
+         */
+        const auto family(s->family());
+        if(family.empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_family;
+            BOOST_THROW_EXCEPTION(formatting_error(empty_family));
+        }
+
+        /*
+         * A family should have at least one helper registered, but
+         * for now we are letting it through.
+         * FIXME: throw.
+         */
+        const auto i(context_.helpers().find(family));
         if (i == context_.helpers().end()) {
             BOOST_LOG_SEV(lg, debug) << "Could not find helpers for family: "
-                                     << hp.settings().family();
+                                     << family;
             continue;
         }
-        BOOST_LOG_SEV(lg, debug) << "Found helpers for family: "
-                                 << hp.settings().family();
+        BOOST_LOG_SEV(lg, debug) << "Found helpers for family: " << family;
 
+        /*
+         * Not all formatters need help, so its fine not to have a
+         * helper registered against a particular formatter.
+         */
         const auto j(i->second.find(ownership_hierarchy_.formatter_name()));
         if (j == i->second.end()) {
             BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
@@ -426,6 +456,10 @@ void assistant::add_helper_methods(const bool in_inheritance) {
         BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
                                  << ownership_hierarchy_.formatter_name();
 
+        /*
+         * Check to see if the helper is enabled, given the system's
+         * current configuration. If enabled, format it.
+         */
         for (const auto& h : j->second) {
             if (!h->is_enabled(*this, in_inheritance)) {
                 BOOST_LOG_SEV(lg, debug) << "Helper is not enabled.";

@@ -28,7 +28,8 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include "dogen/yarn/types/name_tree.hpp"
+#include <boost/optional.hpp>
+#include "dogen/quilt.cpp/types/settings/helper_settings.hpp"
 #include "dogen/quilt.cpp/serialization/properties/helper_descriptor_fwd_ser.hpp"
 
 namespace dogen {
@@ -40,13 +41,19 @@ class helper_descriptor final {
 public:
     helper_descriptor() = default;
     helper_descriptor(const helper_descriptor&) = default;
-    helper_descriptor(helper_descriptor&&) = default;
     ~helper_descriptor() = default;
+
+public:
+    helper_descriptor(helper_descriptor&& rhs);
 
 public:
     helper_descriptor(
         const std::list<std::string>& namespaces,
-        const dogen::yarn::name_tree& name_tree);
+        const std::string& name_identifiable,
+        const std::string& name_qualified,
+        const std::string& name_tree_qualified,
+        const std::string& name_tree_identifiable,
+        const boost::optional<dogen::quilt::cpp::settings::helper_settings>& settings);
 
 private:
     template<typename Archive>
@@ -61,10 +68,30 @@ public:
     void namespaces(const std::list<std::string>& v);
     void namespaces(const std::list<std::string>&& v);
 
-    const dogen::yarn::name_tree& name_tree() const;
-    dogen::yarn::name_tree& name_tree();
-    void name_tree(const dogen::yarn::name_tree& v);
-    void name_tree(const dogen::yarn::name_tree&& v);
+    const std::string& name_identifiable() const;
+    std::string& name_identifiable();
+    void name_identifiable(const std::string& v);
+    void name_identifiable(const std::string&& v);
+
+    const std::string& name_qualified() const;
+    std::string& name_qualified();
+    void name_qualified(const std::string& v);
+    void name_qualified(const std::string&& v);
+
+    const std::string& name_tree_qualified() const;
+    std::string& name_tree_qualified();
+    void name_tree_qualified(const std::string& v);
+    void name_tree_qualified(const std::string&& v);
+
+    const std::string& name_tree_identifiable() const;
+    std::string& name_tree_identifiable();
+    void name_tree_identifiable(const std::string& v);
+    void name_tree_identifiable(const std::string&& v);
+
+    const boost::optional<dogen::quilt::cpp::settings::helper_settings>& settings() const;
+    boost::optional<dogen::quilt::cpp::settings::helper_settings>& settings();
+    void settings(const boost::optional<dogen::quilt::cpp::settings::helper_settings>& v);
+    void settings(const boost::optional<dogen::quilt::cpp::settings::helper_settings>&& v);
 
 public:
     bool operator==(const helper_descriptor& rhs) const;
@@ -78,7 +105,11 @@ public:
 
 private:
     std::list<std::string> namespaces_;
-    dogen::yarn::name_tree name_tree_;
+    std::string name_identifiable_;
+    std::string name_qualified_;
+    std::string name_tree_qualified_;
+    std::string name_tree_identifiable_;
+    boost::optional<dogen::quilt::cpp::settings::helper_settings> settings_;
 };
 
 } } } }

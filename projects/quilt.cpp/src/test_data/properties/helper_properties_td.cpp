@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/test_data/settings/helper_settings_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/helper_descriptor_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/helper_properties_td.hpp"
 
@@ -37,11 +36,6 @@ std::list<dogen::quilt::cpp::properties::helper_descriptor> create_std_list_doge
     return r;
 }
 
-dogen::quilt::cpp::settings::helper_settings
-create_dogen_quilt_cpp_settings_helper_settings(const unsigned int position) {
-    return dogen::quilt::cpp::settings::helper_settings_generator::create(position);
-}
-
 }
 
 namespace dogen {
@@ -53,9 +47,8 @@ helper_properties_generator::helper_properties_generator() : position_(0) { }
 
 void helper_properties_generator::
 populate(const unsigned int position, result_type& v) {
-    v.descriptor(create_dogen_quilt_cpp_properties_helper_descriptor(position + 0));
-    v.associated_helpers(create_std_list_dogen_quilt_cpp_properties_helper_descriptor(position + 1));
-    v.settings(create_dogen_quilt_cpp_settings_helper_settings(position + 2));
+    v.current(create_dogen_quilt_cpp_properties_helper_descriptor(position + 0));
+    v.direct_descendants(create_std_list_dogen_quilt_cpp_properties_helper_descriptor(position + 1));
 }
 
 helper_properties_generator::result_type

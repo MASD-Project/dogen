@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/name_tree_hash.hpp"
+#include "dogen/quilt.cpp/hash/settings/helper_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/helper_descriptor_hash.hpp"
 
 namespace {
@@ -37,6 +37,16 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     return seed;
 }
 
+inline std::size_t hash_boost_optional_dogen_quilt_cpp_settings_helper_settings(const boost::optional<dogen::quilt::cpp::settings::helper_settings>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -48,7 +58,11 @@ std::size_t helper_descriptor_hasher::hash(const helper_descriptor& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_list_std_string(v.namespaces()));
-    combine(seed, v.name_tree());
+    combine(seed, v.name_identifiable());
+    combine(seed, v.name_qualified());
+    combine(seed, v.name_tree_qualified());
+    combine(seed, v.name_tree_identifiable());
+    combine(seed, hash_boost_optional_dogen_quilt_cpp_settings_helper_settings(v.settings()));
 
     return seed;
 }
