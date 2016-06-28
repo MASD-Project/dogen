@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
 #include "dogen/quilt.cpp/io/properties/helper_descriptor_io.hpp"
@@ -65,6 +66,12 @@ namespace cpp {
 namespace properties {
 
 std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::properties::helper_descriptor\"" << ", "
       << "\"namespaces\": " << v.namespaces() << ", "
@@ -72,7 +79,8 @@ std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
       << "\"name_qualified\": " << "\"" << tidy_up_string(v.name_qualified()) << "\"" << ", "
       << "\"name_tree_qualified\": " << "\"" << tidy_up_string(v.name_tree_qualified()) << "\"" << ", "
       << "\"name_tree_identifiable\": " << "\"" << tidy_up_string(v.name_tree_identifiable()) << "\"" << ", "
-      << "\"settings\": " << v.settings()
+      << "\"settings\": " << v.settings() << ", "
+      << "\"is_primitive\": " << v.is_primitive()
       << " }";
     return(s);
 }

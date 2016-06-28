@@ -39,9 +39,11 @@ namespace properties {
 
 class helper_descriptor final {
 public:
-    helper_descriptor() = default;
     helper_descriptor(const helper_descriptor&) = default;
     ~helper_descriptor() = default;
+
+public:
+    helper_descriptor();
 
 public:
     helper_descriptor(helper_descriptor&& rhs);
@@ -53,7 +55,8 @@ public:
         const std::string& name_qualified,
         const std::string& name_tree_qualified,
         const std::string& name_tree_identifiable,
-        const boost::optional<dogen::quilt::cpp::settings::helper_settings>& settings);
+        const boost::optional<dogen::quilt::cpp::settings::helper_settings>& settings,
+        const bool is_primitive);
 
 private:
     template<typename Archive>
@@ -93,6 +96,9 @@ public:
     void settings(const boost::optional<dogen::quilt::cpp::settings::helper_settings>& v);
     void settings(const boost::optional<dogen::quilt::cpp::settings::helper_settings>&& v);
 
+    bool is_primitive() const;
+    void is_primitive(const bool v);
+
 public:
     bool operator==(const helper_descriptor& rhs) const;
     bool operator!=(const helper_descriptor& rhs) const {
@@ -110,6 +116,7 @@ private:
     std::string name_tree_qualified_;
     std::string name_tree_identifiable_;
     boost::optional<dogen::quilt::cpp::settings::helper_settings> settings_;
+    bool is_primitive_;
 };
 
 } } } }

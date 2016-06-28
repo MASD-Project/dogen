@@ -50,6 +50,10 @@ create_boost_optional_dogen_quilt_cpp_settings_helper_settings(unsigned int posi
     return r;
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 }
 
 namespace dogen {
@@ -67,6 +71,7 @@ populate(const unsigned int position, result_type& v) {
     v.name_tree_qualified(create_std_string(position + 3));
     v.name_tree_identifiable(create_std_string(position + 4));
     v.settings(create_boost_optional_dogen_quilt_cpp_settings_helper_settings(position + 5));
+    v.is_primitive(create_bool(position + 6));
 }
 
 helper_descriptor_generator::result_type

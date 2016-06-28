@@ -25,13 +25,17 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
+helper_descriptor::helper_descriptor()
+    : is_primitive_(static_cast<bool>(0)) { }
+
 helper_descriptor::helper_descriptor(helper_descriptor&& rhs)
     : namespaces_(std::move(rhs.namespaces_)),
       name_identifiable_(std::move(rhs.name_identifiable_)),
       name_qualified_(std::move(rhs.name_qualified_)),
       name_tree_qualified_(std::move(rhs.name_tree_qualified_)),
       name_tree_identifiable_(std::move(rhs.name_tree_identifiable_)),
-      settings_(std::move(rhs.settings_)) { }
+      settings_(std::move(rhs.settings_)),
+      is_primitive_(std::move(rhs.is_primitive_)) { }
 
 helper_descriptor::helper_descriptor(
     const std::list<std::string>& namespaces,
@@ -39,13 +43,15 @@ helper_descriptor::helper_descriptor(
     const std::string& name_qualified,
     const std::string& name_tree_qualified,
     const std::string& name_tree_identifiable,
-    const boost::optional<dogen::quilt::cpp::settings::helper_settings>& settings)
+    const boost::optional<dogen::quilt::cpp::settings::helper_settings>& settings,
+    const bool is_primitive)
     : namespaces_(namespaces),
       name_identifiable_(name_identifiable),
       name_qualified_(name_qualified),
       name_tree_qualified_(name_tree_qualified),
       name_tree_identifiable_(name_tree_identifiable),
-      settings_(settings) { }
+      settings_(settings),
+      is_primitive_(is_primitive) { }
 
 void helper_descriptor::swap(helper_descriptor& other) noexcept {
     using std::swap;
@@ -55,6 +61,7 @@ void helper_descriptor::swap(helper_descriptor& other) noexcept {
     swap(name_tree_qualified_, other.name_tree_qualified_);
     swap(name_tree_identifiable_, other.name_tree_identifiable_);
     swap(settings_, other.settings_);
+    swap(is_primitive_, other.is_primitive_);
 }
 
 bool helper_descriptor::operator==(const helper_descriptor& rhs) const {
@@ -63,7 +70,8 @@ bool helper_descriptor::operator==(const helper_descriptor& rhs) const {
         name_qualified_ == rhs.name_qualified_ &&
         name_tree_qualified_ == rhs.name_tree_qualified_ &&
         name_tree_identifiable_ == rhs.name_tree_identifiable_ &&
-        settings_ == rhs.settings_;
+        settings_ == rhs.settings_ &&
+        is_primitive_ == rhs.is_primitive_;
 }
 
 helper_descriptor& helper_descriptor::operator=(helper_descriptor other) {
@@ -166,6 +174,14 @@ void helper_descriptor::settings(const boost::optional<dogen::quilt::cpp::settin
 
 void helper_descriptor::settings(const boost::optional<dogen::quilt::cpp::settings::helper_settings>&& v) {
     settings_ = std::move(v);
+}
+
+bool helper_descriptor::is_primitive() const {
+    return is_primitive_;
+}
+
+void helper_descriptor::is_primitive(const bool v) {
+    is_primitive_ = v;
 }
 
 } } } }

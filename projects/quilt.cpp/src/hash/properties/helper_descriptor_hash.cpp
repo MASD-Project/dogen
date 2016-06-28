@@ -63,6 +63,7 @@ std::size_t helper_descriptor_hasher::hash(const helper_descriptor& v) {
     combine(seed, v.name_tree_qualified());
     combine(seed, v.name_tree_identifiable());
     combine(seed, hash_boost_optional_dogen_quilt_cpp_settings_helper_settings(v.settings()));
+    combine(seed, v.is_primitive());
 
     return seed;
 }
