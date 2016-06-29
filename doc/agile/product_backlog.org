@@ -11,6 +11,57 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider renaming general settings                                :story:
+
+A while ago we came up with this name for the settings of the generic
+formatter model. This is the model with basic infrastructure to be
+reused by the more specialised formatters. However, now that we have
+many (many) settings classes, general settings may not be the most
+appropriate name. We need to look a bit more deeply into the role of
+this class and see if a better name is not available.
+
+We could call it preamble settings because all settings are related to
+the file preamble; annoyingly, we also generate a post-amble from
+it. There doesn't seem to be any good names for the pair (preamble,
+post-amble). In networking this would be called frame markers perhaps.
+
+Now that we are not using =meta_data= any more, perhaps we could
+re-purpose it for this (=meta_data_settings=). In a way, preambles and
+post-ambles are meta-data, as opposed to the real file
+contents. Having said that, one could say the same about any kind of
+comments.
+
+We could also use [[http://www1.appstate.edu/~yaleread/typographichierarchy.pdf][typography terminology]]: headers and footers.
+
+Now that we have subsidiary settings and principal settings do we need
+the rename? We should consider "universal settings" maybe.
+
+In addition, the convention is now that "settings" mean a strongly
+typed representation of =dynamic= data; general "settings" are not
+settings in this sense. However, we do need a class to model settings
+properly (i.e. to mirror dynamic exactly, without any
+transformations).
+
+In truth, =annotation= is probably sufficient - or perhaps
+=annotation_properties=. It could then have an =enabled= property to
+replace =generate_preamble=. This is more accurate due to the
+preamble/postamble setup explained above. In this setup, we'd have
+=annotation_settings= to map to dynamic data, with an annotation
+settings factory which reads these off of dynamic object; then, an
+annotation factory to generate annotations. Finally, we can introduce
+the annotation formatter to generate the portion of boilerplate
+related to just the annotation. Boilerplate formatter collaborates
+with annotation formatter.
+
+More ideas on this: are these not just "file settings"? After all the
+meta-data it contains relates to file-level properties. As =file= is
+an entity defined in =formatters= this fits the bill nicely. We still
+have to deal with the dilemma described above (these "settings" are
+not all directly read out of meta-data). We should then call these
+"file properties". We need to then refactor the code so that there is
+a file settings class that is an exact match of what is read out of
+dynamic and is then used as input to generate the file properties.
+
 *** Recursive structures result in crashes                            :story:
 
 If one defines a tree node with a parent and children (such as =node=
@@ -613,48 +664,6 @@ facet depends on the hash facet if the user decides to add a
 =std::unordered_map= of a user defined type to another user defined
 type. We need to make sure we take these run-time dependencies into
 account too.
-
-*** Consider renaming general settings                                :story:
-
-A while ago we came up with this name for the settings of the generic
-formatter model. This is the model with basic infrastructure to be
-reused by the more specialised formatters. However, now that we have
-many (many) settings classes, general settings may not be the most
-appropriate name. We need to look a bit more deeply into the role of
-this class and see if a better name is not available.
-
-We could call it preamble settings because all settings are related to
-the file preamble; annoyingly, we also generate a post-amble from
-it. There doesn't seem to be any good names for the pair (preamble,
-post-amble). In networking this would be called frame markers perhaps.
-
-Now that we are not using =meta_data= any more, perhaps we could
-re-purpose it for this (=meta_data_settings=). In a way, preambles and
-post-ambles are meta-data, as opposed to the real file
-contents. Having said that, one could say the same about any kind of
-comments.
-
-We could also use [[http://www1.appstate.edu/~yaleread/typographichierarchy.pdf][typography terminology]]: headers and footers.
-
-Now that we have subsidiary settings and principal settings do we need
-the rename? We should consider "universal settings" maybe.
-
-In addition, the convention is now that "settings" mean a strongly
-typed representation of =dynamic= data; general "settings" are not
-settings in this sense. However, we do need a class to model settings
-properly (i.e. to mirror dynamic exactly, without any
-transformations).
-
-In truth, =annotation= is probably sufficient - or perhaps
-=annotation_properties=. It could then have an =enabled= property to
-replace =generate_preamble=. This is more accurate due to the
-preamble/postamble setup explained above. In this setup, we'd have
-=annotation_settings= to map to dynamic data, with an annotation
-settings factory which reads these off of dynamic object; then, an
-annotation factory to generate annotations. Finally, we can introduce
-the annotation formatter to generate the portion of boilerplate
-related to just the annotation. Boilerplate formatter collaborates
-with annotation formatter.
 
 *** Consider renaming formatter groups and model groups to sets       :story:
 
