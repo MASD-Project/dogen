@@ -191,7 +191,7 @@
     {
         "name" : {
             "simple" : "requires_manual_default_constructor",
-            "qualified" : "quilt.cpp.type.requires_manual_default_constructor"
+            "qualified" : "quilt.cpp.element.requires_manual_default_constructor"
         },
         "ownership_hierarchy" : {
             "model_name" : "quilt.cpp"
@@ -204,7 +204,7 @@
     {
         "name" : {
             "simple" : "requires_manual_move_constructor",
-            "qualified" : "quilt.cpp.type.requires_manual_move_constructor"
+            "qualified" : "quilt.cpp.element.requires_manual_move_constructor"
         },
         "ownership_hierarchy" : {
             "model_name" : "quilt.cpp"
@@ -217,7 +217,7 @@
     {
         "name" : {
             "simple" : "disable_complete_constructor",
-            "qualified" : "quilt.cpp.disable_complete_constructor"
+            "qualified" : "quilt.cpp.element.disable_complete_constructor"
         },
         "ownership_hierarchy" : {
             "model_name" : "quilt.cpp"
@@ -230,7 +230,7 @@
     {
         "name" : {
             "simple" : "disable_xml_serialization",
-            "qualified" : "quilt.cpp.disable_xml_serialization"
+            "qualified" : "quilt.cpp.element.disable_xml_serialization"
         },
         "ownership_hierarchy" : {
             "model_name" : "quilt.cpp"
@@ -269,7 +269,7 @@
     {
         "name" : {
             "simple" : "string_conversion_method",
-            "qualified" : "quilt.cpp.helper.string_conversion_method"
+            "qualified" : "quilt.cpp.element.string_conversion_method"
         },
         "ownership_hierarchy" : {
             "model_name" : "quilt.cpp"

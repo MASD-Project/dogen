@@ -70,12 +70,12 @@ std::string traits::inclusion_dependency() {
 }
 
 std::string traits::disable_complete_constructor() {
-    static std::string r("quilt.cpp.disable_complete_constructor");
+    static std::string r("quilt.cpp.element.disable_complete_constructor");
     return r;
 }
 
 std::string traits::disable_xml_serialization() {
-    static std::string r("quilt.cpp.disable_xml_serialization");
+    static std::string r("quilt.cpp.element.disable_xml_serialization");
     return r;
 }
 
@@ -115,7 +115,7 @@ std::string traits::cpp::helper::family() {
 }
 
 std::string traits::cpp::helper::string_conversion_method() {
-    static std::string r("quilt.cpp.helper.string_conversion_method");
+    static std::string r("quilt.cpp.element.string_conversion_method");
     return r;
 }
 

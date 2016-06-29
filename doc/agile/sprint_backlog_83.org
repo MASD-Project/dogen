@@ -844,6 +844,7 @@ With this structure we should be able to satisfy all use cases so far.
 We seem to have an unused class in dynamic: =aggregator=. Remove it if so.
 
 *** STARTED Rename aspect settings to element settings                :story:
+    CLOCK: [2016-06-29 Wed 15:41]
     CLOCK: [2016-06-29 Wed 15:02]--[2016-06-29 Wed 15:40] =>  0:38
 
 We need to pile up other type related settings which are not related
@@ -895,6 +896,15 @@ Problems:
   for all properties, not just in the context of helpers. This seems
   to imply we need a way to access this information directly from the
   property. It will need some thinking.
+
+*** Group the file related fields under a prefix                      :story:
+
+Now we have =element= as a prefix, it probably makes sense to also
+group the fields that are related to file names, paths etc. These
+could be under =file= or perhaps =paths=? Examples:
+
+- =quilt.cpp.file.include_directory_name=
+- =quilt.cpp.source_directory_name=
 
 *** Implement qualified name efficiently                              :story:
 
