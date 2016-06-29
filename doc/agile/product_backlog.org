@@ -5928,6 +5928,40 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Add support for element renaming                                  :story:
+
+This story is still in its early days. We could probably create a
+simple tool that renames types. There are several things we may want
+to achieve from this:
+
+- dia updating tool that receives new and old name and updates the
+  diagram. This makes renames easier because we keep missing places
+  where types are used.
+- dogen support: with access to new name and old name we can now
+  rename files which are not code generated. This avoids the usual
+  loss of work, git reverts etc.
+
+The problem we have is that if we do not update the diagram
+automatically, the rename is not that useful. However, updating the
+diagram is not entirely trivial. We probably could record XPaths
+against elements and then use those XPaths to update the XML
+tree. This would be a multi-step process:
+
+- first we'd generate the final Yarn model;
+- then use the old ID to locate the element to rename and all of its
+  usages;
+- then update the XML based on the XPaths obtained from the renamed
+  elements and save it to file (maybe as =.new=?).
+- we can then reload the yarn model from the new and generate from
+  there.
+
+- *Automatic Renames*
+
+This could be potentially done automatically if we could access say
+the existing version of the diagram and the new version; we could load
+both models and then do a diff. This could be a bit dangerous though
+if there are other changes, etc.
+
 *** Feature toggles and code generation                               :story:
 
 This article by Fowler has some interesting ideas:
