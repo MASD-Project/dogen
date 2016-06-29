@@ -872,10 +872,135 @@ Tasks:
   avoids confusion with =types= facet.
 - add =string_conversion_method= field.
 
-*** Add string conversion method support to context                   :story:
+*** COMPLETED Thoughts on the overall design for settings             :story:
+    CLOSED: [2016-06-29 Wed 17:32]
+    CLOCK: [2016-06-29 Wed 16:23]--[2016-06-29 Wed 17:32] =>  1:09
 
-We need to preprocess the global settings bundle, extract the string
+We need to pre-process the global settings bundle, extract the string
 conversion methods and add those to the context.
+
+Actually the more one thinks about this the more obvious it seems that
+most of the properties that are under helper settings are actually
+element settings. These are not specific to the helper at all (we will
+use them from the inserter formatter for example). We need to move
+these properties across and then extend context as required. We should
+create a "global element repository" container.
+
+A lot of the confusion arises because we are modeling different things
+under the same name:
+
+- the definition and instantiation of a helper; e.g. whether a type
+  has a helper method associated with it or not. For these we can have
+  the usual 1-1 mapping.
+- the configuration of the streaming invocation for a type. For these
+  we need a global container of these "IO settings".
+
+With this simple change of perspective, it all now makes sense:
+
+- bundle is in reality "element settings"; that is to say, all
+  settings at the element level that will be passed directly into
+  formatting (e.g. without any post-processing). It is the
+  mirror-image of "element properties".
+- general settings are really file properties; the configuration of
+  how a file will be formatted, produced from post-processing "file
+  settings". Thus they should be moved from bundle into element
+  properties. File properties belong here because we have one file per
+  element.
+- we need the "IO settings" as described above. "IO settings" needs an
+  "IO settings repository" which is passed in to context. These are
+  global settings, per ID.
+- helper settings are just family; the rest are IO settings. We can
+  just have a field for this in helper properties, which also makes it
+  cleaner. Now we can move the family into helper properties where it
+  is mandatory, and remove it from the descriptor.
+- streaming for type uses IO settings and should probably be called
+  "IO invocation for type". It is called with an ID; we look up the
+  corresponding settings in the global IO settings container.
+
+*** Rename element settings back to aspect settings                   :story:
+
+As per design story, we incorrectly added non-aspect attributes to
+this class. Remove them and rename the class.
+
+*** Rename bundle to element settings                                 :story:
+
+As per design story, these are really the settings that belong to the
+element. Rename and deal with the fallout.
+
+*** Create a IO settings class                                        :story:
+
+Add a class to model all of the settings required to produce the io
+invocation, create a repository for it and associated factory and
+finally add the repository to the context.
+
+*** Implement streaming for type in terms of IO settings              :story:
+
+- rename it o "IO invocation for type".
+- call it with an ID; look up the corresponding IO settings in the global
+  IO settings container from context.
+- remove all other streaming for type implementations and use the new
+  one in the legacy formatters.
+
+*** Refactor general settings                                         :story:
+
+Tasks:
+
+- create a file settings class that reflects dynamic (and nothing
+  more). Create an associated factory, repository etc.
+- rename the existing general settings to file properties. Make the
+  factory use the file settings to produce the properties.
+- move general settings from the bundle into element properties.
+
+*Previous Understanding*
+
+A while ago we came up with this name for the settings of the generic
+formatter model. This is the model with basic infrastructure to be
+reused by the more specialised formatters. However, now that we have
+many (many) settings classes, general settings may not be the most
+appropriate name. We need to look a bit more deeply into the role of
+this class and see if a better name is not available.
+
+We could call it preamble settings because all settings are related to
+the file preamble; annoyingly, we also generate a post-amble from
+it. There doesn't seem to be any good names for the pair (preamble,
+post-amble). In networking this would be called frame markers perhaps.
+
+Now that we are not using =meta_data= any more, perhaps we could
+re-purpose it for this (=meta_data_settings=). In a way, preambles and
+post-ambles are meta-data, as opposed to the real file
+contents. Having said that, one could say the same about any kind of
+comments.
+
+We could also use [[http://www1.appstate.edu/~yaleread/typographichierarchy.pdf][typography terminology]]: headers and footers.
+
+Now that we have subsidiary settings and principal settings do we need
+the rename? We should consider "universal settings" maybe.
+
+In addition, the convention is now that "settings" mean a strongly
+typed representation of =dynamic= data; general "settings" are not
+settings in this sense. However, we do need a class to model settings
+properly (i.e. to mirror dynamic exactly, without any
+transformations).
+
+In truth, =annotation= is probably sufficient - or perhaps
+=annotation_properties=. It could then have an =enabled= property to
+replace =generate_preamble=. This is more accurate due to the
+preamble/postamble setup explained above. In this setup, we'd have
+=annotation_settings= to map to dynamic data, with an annotation
+settings factory which reads these off of dynamic object; then, an
+annotation factory to generate annotations. Finally, we can introduce
+the annotation formatter to generate the portion of boilerplate
+related to just the annotation. Boilerplate formatter collaborates
+with annotation formatter.
+
+More ideas on this: are these not just "file settings"? After all the
+meta-data it contains relates to file-level properties. As =file= is
+an entity defined in =formatters= this fits the bill nicely. We still
+have to deal with the dilemma described above (these "settings" are
+not all directly read out of meta-data). We should then call these
+"file properties". We need to then refactor the code so that there is
+a file settings class that is an exact match of what is read out of
+dynamic and is then used as input to generate the file properties.
 
 *** STARTED Implement IO helper methods with new helper infrastructure :story:
     CLOCK: [2016-06-29 Wed 14:10]--[2016-06-29 Wed 14:36] =>  0:26
