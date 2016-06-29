@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/test_data/settings/aspect_settings_td.hpp"
+#include "dogen/quilt.cpp/test_data/settings/element_settings_td.hpp"
 
 namespace {
 
@@ -33,30 +33,30 @@ namespace quilt {
 namespace cpp {
 namespace settings {
 
-aspect_settings_generator::aspect_settings_generator() : position_(0) { }
+element_settings_generator::element_settings_generator() : position_(0) { }
 
-void aspect_settings_generator::
+void element_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.disable_complete_constructor(create_bool(position + 0));
     v.disable_xml_serialization(create_bool(position + 1));
 }
 
-aspect_settings_generator::result_type
-aspect_settings_generator::create(const unsigned int position) {
-    aspect_settings r;
-    aspect_settings_generator::populate(position, r);
+element_settings_generator::result_type
+element_settings_generator::create(const unsigned int position) {
+    element_settings r;
+    element_settings_generator::populate(position, r);
     return r;
 }
 
-aspect_settings_generator::result_type*
-aspect_settings_generator::create_ptr(const unsigned int position) {
-    aspect_settings* p = new aspect_settings();
-    aspect_settings_generator::populate(position, *p);
+element_settings_generator::result_type*
+element_settings_generator::create_ptr(const unsigned int position) {
+    element_settings* p = new element_settings();
+    element_settings_generator::populate(position, *p);
     return p;
 }
 
-aspect_settings_generator::result_type
-aspect_settings_generator::operator()() {
+element_settings_generator::result_type
+element_settings_generator::operator()() {
     return create(position_++);
 }
 

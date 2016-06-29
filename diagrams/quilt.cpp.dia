@@ -12571,10 +12571,10 @@ for a given C++ entity.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#aspect_settings#</dia:string>
+            <dia:string>#element_settings#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#settings::aspect_settings#</dia:string>
+            <dia:string>#settings::element_settings#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -28012,7 +28012,7 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#aspect_settings#</dia:string>
+        <dia:string>#element_settings#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -28158,19 +28158,19 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="161,146"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="160.95,145.95;184.65,151.25"/>
+        <dia:rectangle val="160.95,145.95;185.035,151.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="161,146"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.600000000000001"/>
+        <dia:real val="23.984999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#aspect_settings_factory#</dia:string>
+        <dia:string>#element_settings_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -28260,7 +28260,7 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#aspect_settings_factory#</dia:string>
+            <dia:string>#element_settings_factory#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -28331,7 +28331,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#settings::aspect_settings#</dia:string>
+            <dia:string>#settings::element_settings#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -28419,7 +28419,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="201,134.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="172.75,133.45;201.75,146.8"/>
+        <dia:rectangle val="172.942,133.45;201.75,146.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -28427,8 +28427,8 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="201,134.2"/>
         <dia:point val="201,141"/>
-        <dia:point val="172.8,141"/>
-        <dia:point val="172.8,146"/>
+        <dia:point val="172.993,141"/>
+        <dia:point val="172.993,146"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -28487,17 +28487,17 @@ main, or from another initialiser.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="172.8,151.249"/>
+        <dia:point val="172.993,151.249"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="172.05,150.499;182.2,162.8"/>
+        <dia:rectangle val="172.243,150.499;182.2,162.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="172.8,151.249"/>
-        <dia:point val="172.8,158"/>
+        <dia:point val="172.993,151.249"/>
+        <dia:point val="172.993,158"/>
         <dia:point val="182,158"/>
         <dia:point val="182,162"/>
       </dia:attribute>

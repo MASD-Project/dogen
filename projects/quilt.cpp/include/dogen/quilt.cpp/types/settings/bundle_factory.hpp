@@ -36,7 +36,7 @@
 #include "dogen/formatters/types/general_settings.hpp"
 #include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/bundle.hpp"
-#include "dogen/quilt.cpp/types/settings/aspect_settings.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
 
@@ -64,9 +64,9 @@ private:
     create_general_settings(const dynamic::object& o) const;
 
     /**
-     * @brief Create the aspect settings.
+     * @brief Create the element settings.
      */
-    aspect_settings create_aspect_settings(const dynamic::object& o) const;
+    element_settings create_element_settings(const dynamic::object& o) const;
 
     /**
      * @brief Generates the opaque settings.

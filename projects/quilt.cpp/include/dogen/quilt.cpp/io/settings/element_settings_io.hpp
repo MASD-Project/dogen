@@ -18,19 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_SETTINGS_ASPECT_SETTINGS_FACTORY_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_SETTINGS_ASPECT_SETTINGS_FACTORY_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_IO_SETTINGS_ELEMENT_SETTINGS_IO_HPP
+#define DOGEN_QUILT_CPP_IO_SETTINGS_ELEMENT_SETTINGS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
+
+#include <iosfwd>
+#include "dogen/quilt.cpp/types/settings/element_settings.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace settings {
 
-class aspect_settings_factory;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::quilt::cpp::settings::element_settings& v);
 
 } } } }
 

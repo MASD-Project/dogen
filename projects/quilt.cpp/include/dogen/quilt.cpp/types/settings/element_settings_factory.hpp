@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_ASPECT_SETTINGS_FACTORY_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_ASPECT_SETTINGS_FACTORY_HPP
+#ifndef DOGEN_CPP_TYPES_SETTINGS_ELEMENT_SETTINGS_FACTORY_HPP
+#define DOGEN_CPP_TYPES_SETTINGS_ELEMENT_SETTINGS_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,7 +31,7 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/settings/aspect_settings.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -39,11 +39,11 @@ namespace cpp {
 namespace settings {
 
 /**
- * @brief Creates the aspect settings.
+ * @brief Creates the element settings.
  */
-class aspect_settings_factory {
+class element_settings_factory {
 public:
-    aspect_settings_factory(const dynamic::repository& rp,
+    element_settings_factory(const dynamic::repository& rp,
         const dynamic::object& root_object);
 
 private:
@@ -89,15 +89,15 @@ private:
 
 public:
     /**
-     * @brief Produces the aspect settings.
+     * @brief Produces the element settings.
      */
-    aspect_settings make(const dynamic::object& o) const;
+    element_settings make(const dynamic::object& o) const;
 
     /**
-     * @brief Produce the aspect settings based on root object
+     * @brief Produce the element settings based on root object
      * contents.
      */
-    aspect_settings make() const;
+    element_settings make() const;
 
 private:
     const field_definitions field_definitions_;
