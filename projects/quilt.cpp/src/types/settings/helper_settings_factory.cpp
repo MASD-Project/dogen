@@ -38,9 +38,6 @@ helper_settings_factory::make_field_definitions(const dynamic::repository& rp) {
     const auto hf(traits::cpp::helper::family());
     r.family = s.select_field_by_name(hf);
 
-    const auto scm(traits::cpp::helper::string_conversion_method());
-    r.string_conversion_method = s.select_field_by_name(scm);
-
     const auto rq(traits::cpp::helper::requires_quoting());
     r.requires_quoting = s.select_field_by_name(rq);
 
@@ -57,12 +54,12 @@ void helper_settings_factory::
 throw_if_dependent_fields_are_present(const dynamic::field_selector& fs) const {
     const auto& fd(field_definitions_);
     const bool dependent_fields_present(
-        fs.has_field(fd.string_conversion_method) ||
         fs.has_field(fd.requires_quoting) ||
         fs.has_field(fd.remove_unprintable_characters) ||
         fs.has_field(fd.requires_dereferencing));
 
     if (dependent_fields_present) {
+        // FIXME: throw
     }
 }
 
@@ -78,8 +75,6 @@ boost::optional<helper_settings> helper_settings_factory::make(const dynamic::ob
     }
 
     r.family(fs.get_text_content(fd.family));
-
-    const auto scm(fs.get_text_content_or_default(fd.string_conversion_method));
     r.requires_quoting(fs.get_boolean_content_or_default(fd.requires_quoting));
 
     const auto rup(fd.remove_unprintable_characters);

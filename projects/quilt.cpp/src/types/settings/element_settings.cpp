@@ -31,19 +31,23 @@ element_settings::element_settings()
 
 element_settings::element_settings(
     const bool disable_complete_constructor,
-    const bool disable_xml_serialization)
+    const bool disable_xml_serialization,
+    const std::string& string_conversion_method)
     : disable_complete_constructor_(disable_complete_constructor),
-      disable_xml_serialization_(disable_xml_serialization) { }
+      disable_xml_serialization_(disable_xml_serialization),
+      string_conversion_method_(string_conversion_method) { }
 
 void element_settings::swap(element_settings& other) noexcept {
     using std::swap;
     swap(disable_complete_constructor_, other.disable_complete_constructor_);
     swap(disable_xml_serialization_, other.disable_xml_serialization_);
+    swap(string_conversion_method_, other.string_conversion_method_);
 }
 
 bool element_settings::operator==(const element_settings& rhs) const {
     return disable_complete_constructor_ == rhs.disable_complete_constructor_ &&
-        disable_xml_serialization_ == rhs.disable_xml_serialization_;
+        disable_xml_serialization_ == rhs.disable_xml_serialization_ &&
+        string_conversion_method_ == rhs.string_conversion_method_;
 }
 
 element_settings& element_settings::operator=(element_settings other) {
@@ -66,6 +70,22 @@ bool element_settings::disable_xml_serialization() const {
 
 void element_settings::disable_xml_serialization(const bool v) {
     disable_xml_serialization_ = v;
+}
+
+const std::string& element_settings::string_conversion_method() const {
+    return string_conversion_method_;
+}
+
+std::string& element_settings::string_conversion_method() {
+    return string_conversion_method_;
+}
+
+void element_settings::string_conversion_method(const std::string& v) {
+    string_conversion_method_ = v;
+}
+
+void element_settings::string_conversion_method(const std::string&& v) {
+    string_conversion_method_ = std::move(v);
 }
 
 } } } }

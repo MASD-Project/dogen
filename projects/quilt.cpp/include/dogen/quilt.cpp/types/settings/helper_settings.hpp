@@ -49,7 +49,6 @@ public:
 public:
     helper_settings(
         const std::string& family,
-        const std::string& string_conversion_method,
         const bool requires_quoting,
         const bool remove_unprintable_characters,
         const bool requires_dereferencing);
@@ -72,11 +71,6 @@ public:
     void family(const std::string&& v);
     /**@}*/
 
-    const std::string& string_conversion_method() const;
-    std::string& string_conversion_method();
-    void string_conversion_method(const std::string& v);
-    void string_conversion_method(const std::string&& v);
-
     bool requires_quoting() const;
     void requires_quoting(const bool v);
 
@@ -98,7 +92,6 @@ public:
 
 private:
     std::string family_;
-    std::string string_conversion_method_;
     bool requires_quoting_;
     bool remove_unprintable_characters_;
     bool requires_dereferencing_;

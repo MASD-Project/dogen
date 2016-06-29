@@ -18,12 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/quilt.cpp/test_data/settings/element_settings_td.hpp"
 
 namespace {
 
 bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
+}
+
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
 }
 
 }
@@ -39,6 +46,7 @@ void element_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.disable_complete_constructor(create_bool(position + 0));
     v.disable_xml_serialization(create_bool(position + 1));
+    v.string_conversion_method(create_std_string(position + 2));
 }
 
 element_settings_generator::result_type

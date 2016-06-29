@@ -45,7 +45,6 @@ std::ostream& operator<<(std::ostream& s, const helper_settings& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::settings::helper_settings\"" << ", "
       << "\"family\": " << "\"" << tidy_up_string(v.family()) << "\"" << ", "
-      << "\"string_conversion_method\": " << "\"" << tidy_up_string(v.string_conversion_method()) << "\"" << ", "
       << "\"requires_quoting\": " << v.requires_quoting() << ", "
       << "\"remove_unprintable_characters\": " << v.remove_unprintable_characters() << ", "
       << "\"requires_dereferencing\": " << v.requires_dereferencing()

@@ -496,14 +496,14 @@ streaming_for_type(const properties::helper_descriptor& hd,
     dogen::formatters::utility_formatter uf(ss);
     if (sg->remove_unprintable_characters())
         uf.insert_streamed("tidy_up_string(" + s + ")");
-    else if (!sg->string_conversion_method().empty()) {
+    /*else if (!sg->string_conversion_method().empty()) {
         // FIXME: hack!
         std::string s1(s);
         const auto i(s1.find('*'));
         if (i != std::string::npos)
             s1 = "(" + s + ")";
         uf.insert_streamed(s1 + "." + sg->string_conversion_method());
-    } else if (sg->requires_quoting())
+        } */else if (sg->requires_quoting())
         uf.insert_streamed(s);
     else
         uf.insert(s);

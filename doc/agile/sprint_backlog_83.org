@@ -843,8 +843,10 @@ With this structure we should be able to satisfy all use cases so far.
 
 We seem to have an unused class in dynamic: =aggregator=. Remove it if so.
 
-*** STARTED Rename aspect settings to element settings                :story:
-    CLOCK: [2016-06-29 Wed 15:41]
+*** COMPLETED Rename aspect settings to element settings              :story:
+    CLOSED: [2016-06-29 Wed 16:22]
+    CLOCK: [2016-06-29 Wed 16:05]--[2016-06-29 Wed 16:22] =>  0:17
+    CLOCK: [2016-06-29 Wed 15:41]--[2016-06-29 Wed 16:04] =>  0:23
     CLOCK: [2016-06-29 Wed 15:02]--[2016-06-29 Wed 15:40] =>  0:38
 
 We need to pile up other type related settings which are not related

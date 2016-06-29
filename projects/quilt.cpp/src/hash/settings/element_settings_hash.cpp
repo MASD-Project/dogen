@@ -40,6 +40,7 @@ std::size_t element_settings_hasher::hash(const element_settings& v) {
 
     combine(seed, v.disable_complete_constructor());
     combine(seed, v.disable_xml_serialization());
+    combine(seed, v.string_conversion_method());
 
     return seed;
 }

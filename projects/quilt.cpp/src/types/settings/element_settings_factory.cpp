@@ -20,7 +20,6 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/settings/building_error.hpp"
@@ -57,6 +56,9 @@ make_field_definitions(const dynamic::repository& rp) const {
     const auto& xs(traits::disable_xml_serialization());
     r.disable_xml_serialization = s.select_field_by_name(xs);
 
+    const auto scm(traits::cpp::helper::string_conversion_method());
+    r.string_conversion_method = s.select_field_by_name(scm);
+
     return r;
 }
 
@@ -74,10 +76,10 @@ make_root_object_field_values(const field_definitions& fd,
 }
 
 bool element_settings_factory::
-obtain_field_value(const dynamic::field_definition& fd,
-    const bool root_object_value, const dynamic::object& o) const {
+obtain_field_value(const dynamic::field_selector& fs,
+    const dynamic::field_definition& fd,
+    const bool root_object_value) const {
 
-    const dynamic::field_selector fs(o);
     if (fs.has_field(fd))
         return fs.get_boolean_content(fd);
 
@@ -87,13 +89,19 @@ obtain_field_value(const dynamic::field_definition& fd,
 element_settings
 element_settings_factory::make(const dynamic::object& o) const {
     element_settings r;
+
+    const dynamic::field_selector fs(o);
     r.disable_complete_constructor(
-        obtain_field_value(field_definitions_.disable_complete_constructor,
-            field_values_.disable_complete_constructor, o));
+        obtain_field_value(fs, field_definitions_.disable_complete_constructor,
+            field_values_.disable_complete_constructor));
 
     r.disable_xml_serialization(
-        obtain_field_value(field_definitions_.disable_xml_serialization,
-            field_values_.disable_xml_serialization, o));
+        obtain_field_value(fs, field_definitions_.disable_xml_serialization,
+            field_values_.disable_xml_serialization));
+
+    r.string_conversion_method(
+        fs.get_text_content_or_default(
+            field_definitions_.string_conversion_method));
 
     return r;
 }

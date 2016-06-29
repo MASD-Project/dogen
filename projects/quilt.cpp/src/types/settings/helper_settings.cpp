@@ -32,12 +32,10 @@ helper_settings::helper_settings()
 
 helper_settings::helper_settings(
     const std::string& family,
-    const std::string& string_conversion_method,
     const bool requires_quoting,
     const bool remove_unprintable_characters,
     const bool requires_dereferencing)
     : family_(family),
-      string_conversion_method_(string_conversion_method),
       requires_quoting_(requires_quoting),
       remove_unprintable_characters_(remove_unprintable_characters),
       requires_dereferencing_(requires_dereferencing) { }
@@ -45,7 +43,6 @@ helper_settings::helper_settings(
 void helper_settings::swap(helper_settings& other) noexcept {
     using std::swap;
     swap(family_, other.family_);
-    swap(string_conversion_method_, other.string_conversion_method_);
     swap(requires_quoting_, other.requires_quoting_);
     swap(remove_unprintable_characters_, other.remove_unprintable_characters_);
     swap(requires_dereferencing_, other.requires_dereferencing_);
@@ -53,7 +50,6 @@ void helper_settings::swap(helper_settings& other) noexcept {
 
 bool helper_settings::operator==(const helper_settings& rhs) const {
     return family_ == rhs.family_ &&
-        string_conversion_method_ == rhs.string_conversion_method_ &&
         requires_quoting_ == rhs.requires_quoting_ &&
         remove_unprintable_characters_ == rhs.remove_unprintable_characters_ &&
         requires_dereferencing_ == rhs.requires_dereferencing_;
@@ -79,22 +75,6 @@ void helper_settings::family(const std::string& v) {
 
 void helper_settings::family(const std::string&& v) {
     family_ = std::move(v);
-}
-
-const std::string& helper_settings::string_conversion_method() const {
-    return string_conversion_method_;
-}
-
-std::string& helper_settings::string_conversion_method() {
-    return string_conversion_method_;
-}
-
-void helper_settings::string_conversion_method(const std::string& v) {
-    string_conversion_method_ = v;
-}
-
-void helper_settings::string_conversion_method(const std::string&& v) {
-    string_conversion_method_ = std::move(v);
 }
 
 bool helper_settings::requires_quoting() const {

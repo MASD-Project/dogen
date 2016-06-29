@@ -29,6 +29,7 @@
 #include <unordered_map>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings.hpp"
@@ -53,6 +54,7 @@ private:
     struct field_definitions {
         dynamic::field_definition disable_complete_constructor;
         dynamic::field_definition disable_xml_serialization;
+        dynamic::field_definition string_conversion_method;
     };
 
     /**
@@ -83,9 +85,9 @@ private:
      * @brief Obtains the value of the supplied field. If not
      * available, uses the supplied root value.
      */
-    bool obtain_field_value(const dynamic::field_definition& fd,
-        const bool root_value,
-        const dynamic::object& o) const;
+    bool obtain_field_value(const dynamic::field_selector& fs,
+        const dynamic::field_definition& fd,
+        const bool root_value) const;
 
 public:
     /**
