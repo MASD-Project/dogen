@@ -512,7 +512,6 @@ streaming_for_type(const properties::helper_descriptor& hd,
     return r;
 }
 
-
 bool assistant::requires_hashing_helper_method(
     const properties::nested_type_info& t) const {
     return nested_type_formatting_assistant::

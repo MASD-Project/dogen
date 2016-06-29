@@ -32,7 +32,6 @@
 #include "dogen/dynamic/types/boolean.hpp"
 #include "dogen/dynamic/types/dynamic.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
-#include "dogen/dynamic/types/aggregator.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/scope_types.hpp"
 #include "dogen/dynamic/types/value_types.hpp"
