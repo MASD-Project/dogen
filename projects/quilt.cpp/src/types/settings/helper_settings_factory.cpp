@@ -63,7 +63,8 @@ throw_if_dependent_fields_are_present(const dynamic::field_selector& fs) const {
     }
 }
 
-boost::optional<helper_settings> helper_settings_factory::make(const dynamic::object& o) const {
+boost::optional<helper_settings>
+helper_settings_factory::make(const dynamic::object& o) const {
     helper_settings r;
     const auto& fd(field_definitions_);
     const dynamic::field_selector fs(o);
