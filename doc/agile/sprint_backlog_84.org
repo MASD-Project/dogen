@@ -33,6 +33,19 @@ Updates to sprint and product backlog.
 
 Time taken with blog posts and updates to the manual.
 
+*** COMPLETED Try to fix tag build issues                             :story:
+    CLOSED: [2016-07-04 Mon 21:03]
+    CLOCK: [2016-07-04 Mon 20:30]--[2016-07-04 Mon 21:02] =>  0:32
+
+For some reason we are getting failures when building the tag:
+
+: CMake Error at CMakeLists.txt:203 (string):
+:  string sub-command STRIP requires two arguments.
+
+For some reason the git commit count command is failing on a tag. At
+any rate, we do not seem to need the strip, so the easy fix for now is
+to remove it.
+
 *** Rename element settings back to aspect settings                   :story:
 
 As per design story, we incorrectly added non-aspect attributes to
