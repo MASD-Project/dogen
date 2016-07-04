@@ -12,16 +12,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-04 Mon 22:12]
+#+CAPTION: Clock summary at [2016-07-04 Mon 22:54]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *1:45* |      |      | 100.0 |
+| *Total time*                                                                | *2:25* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 1:45   |      |      | 100.0 |
-| Active                                                                      |        | 1:45 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:17 |  16.2 |
-| COMPLETED Try to fix tag build issues                                       |        |      | 1:28 |  83.8 |
+| Stories                                                                     | 2:25   |      |      | 100.0 |
+| Active                                                                      |        | 2:25 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:17 |  11.7 |
+| COMPLETED Try to fix tag build issues                                       |        |      | 1:28 |  60.7 |
+| STARTED Refactor general settings                                           |        |      | 0:40 |  27.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -63,31 +64,8 @@ instead:
 
 We were already doing this for the hash of the top-commit.
 
-*** Rename element settings back to aspect settings                   :story:
-
-As per design story, we incorrectly added non-aspect attributes to
-this class. Remove them and rename the class.
-
-*** Rename bundle to element settings                                 :story:
-
-As per design story, these are really the settings that belong to the
-element. Rename and deal with the fallout.
-
-*** Create a IO settings class                                        :story:
-
-Add a class to model all of the settings required to produce the io
-invocation, create a repository for it and associated factory and
-finally add the repository to the context.
-
-*** Implement streaming for type in terms of IO settings              :story:
-
-- rename it o "IO invocation for type".
-- call it with an ID; look up the corresponding IO settings in the global
-  IO settings container from context.
-- remove all other streaming for type implementations and use the new
-  one in the legacy formatters.
-
-*** Refactor general settings                                         :story:
+*** STARTED Refactor general settings                                 :story:
+    CLOCK: [2016-07-04 Mon 22:13]--[2016-07-04 Mon 22:53] =>  0:40
 
 Tasks:
 
@@ -147,6 +125,30 @@ not all directly read out of meta-data). We should then call these
 "file properties". We need to then refactor the code so that there is
 a file settings class that is an exact match of what is read out of
 dynamic and is then used as input to generate the file properties.
+
+*** Rename element settings back to aspect settings                   :story:
+
+As per design story, we incorrectly added non-aspect attributes to
+this class. Remove them and rename the class.
+
+*** Rename bundle to element settings                                 :story:
+
+As per design story, these are really the settings that belong to the
+element. Rename and deal with the fallout.
+
+*** Create a IO settings class                                        :story:
+
+Add a class to model all of the settings required to produce the io
+invocation, create a repository for it and associated factory and
+finally add the repository to the context.
+
+*** Implement streaming for type in terms of IO settings              :story:
+
+- rename it o "IO invocation for type".
+- call it with an ID; look up the corresponding IO settings in the global
+  IO settings container from context.
+- remove all other streaming for type implementations and use the new
+  one in the legacy formatters.
 
 *** Group the file related fields under a prefix                      :story:
 

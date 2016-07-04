@@ -32,6 +32,7 @@
 #include "dogen/formatters/test_data/annotation_td.hpp"
 #include "dogen/formatters/test_data/repository_td.hpp"
 #include "dogen/formatters/test_data/quote_types_td.hpp"
+#include "dogen/formatters/test_data/file_settings_td.hpp"
 #include "dogen/formatters/test_data/spacing_types_td.hpp"
 #include "dogen/formatters/test_data/comment_styles_td.hpp"
 #include "dogen/formatters/test_data/modeline_field_td.hpp"

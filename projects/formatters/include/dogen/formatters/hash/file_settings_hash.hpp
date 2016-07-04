@@ -18,27 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_HASH_ALL_HASH_HPP
-#define DOGEN_FORMATTERS_HASH_ALL_HASH_HPP
+#ifndef DOGEN_FORMATTERS_HASH_FILE_SETTINGS_HASH_HPP
+#define DOGEN_FORMATTERS_HASH_FILE_SETTINGS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/formatters/hash/file_hash.hpp"
-#include "dogen/formatters/hash/editors_hash.hpp"
-#include "dogen/formatters/hash/licence_hash.hpp"
-#include "dogen/formatters/hash/modeline_hash.hpp"
-#include "dogen/formatters/hash/annotation_hash.hpp"
-#include "dogen/formatters/hash/repository_hash.hpp"
-#include "dogen/formatters/hash/quote_types_hash.hpp"
-#include "dogen/formatters/hash/file_settings_hash.hpp"
-#include "dogen/formatters/hash/spacing_types_hash.hpp"
-#include "dogen/formatters/hash/comment_styles_hash.hpp"
-#include "dogen/formatters/hash/modeline_field_hash.hpp"
-#include "dogen/formatters/hash/modeline_group_hash.hpp"
-#include "dogen/formatters/hash/general_settings_hash.hpp"
-#include "dogen/formatters/hash/modeline_locations_hash.hpp"
-#include "dogen/formatters/hash/infix_configuration_hash.hpp"
+#include <functional>
+#include "dogen/formatters/types/file_settings.hpp"
 
+namespace dogen {
+namespace formatters {
+
+struct file_settings_hasher {
+public:
+    static std::size_t hash(const file_settings& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+struct hash<dogen::formatters::file_settings> {
+public:
+    size_t operator()(const dogen::formatters::file_settings& v) const {
+        return dogen::formatters::file_settings_hasher::hash(v);
+    }
+};
+
+}
 #endif

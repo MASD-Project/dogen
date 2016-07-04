@@ -18,27 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_HASH_ALL_HASH_HPP
-#define DOGEN_FORMATTERS_HASH_ALL_HASH_HPP
+#ifndef DOGEN_FORMATTERS_TEST_DATA_FILE_SETTINGS_TD_HPP
+#define DOGEN_FORMATTERS_TEST_DATA_FILE_SETTINGS_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/formatters/hash/file_hash.hpp"
-#include "dogen/formatters/hash/editors_hash.hpp"
-#include "dogen/formatters/hash/licence_hash.hpp"
-#include "dogen/formatters/hash/modeline_hash.hpp"
-#include "dogen/formatters/hash/annotation_hash.hpp"
-#include "dogen/formatters/hash/repository_hash.hpp"
-#include "dogen/formatters/hash/quote_types_hash.hpp"
-#include "dogen/formatters/hash/file_settings_hash.hpp"
-#include "dogen/formatters/hash/spacing_types_hash.hpp"
-#include "dogen/formatters/hash/comment_styles_hash.hpp"
-#include "dogen/formatters/hash/modeline_field_hash.hpp"
-#include "dogen/formatters/hash/modeline_group_hash.hpp"
-#include "dogen/formatters/hash/general_settings_hash.hpp"
-#include "dogen/formatters/hash/modeline_locations_hash.hpp"
-#include "dogen/formatters/hash/infix_configuration_hash.hpp"
+#include "dogen/formatters/types/file_settings.hpp"
+
+namespace dogen {
+namespace formatters {
+
+class file_settings_generator {
+public:
+    file_settings_generator();
+
+public:
+    typedef dogen::formatters::file_settings result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} }
 
 #endif

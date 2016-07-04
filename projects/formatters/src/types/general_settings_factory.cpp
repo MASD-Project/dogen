@@ -213,5 +213,4 @@ general_settings_factory::make(const std::string& modeline_name,
     return general_settings(gp, a);
 }
 
-
 } }

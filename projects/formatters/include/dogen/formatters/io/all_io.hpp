@@ -32,6 +32,7 @@
 #include "dogen/formatters/io/annotation_io.hpp"
 #include "dogen/formatters/io/repository_io.hpp"
 #include "dogen/formatters/io/quote_types_io.hpp"
+#include "dogen/formatters/io/file_settings_io.hpp"
 #include "dogen/formatters/io/spacing_types_io.hpp"
 #include "dogen/formatters/io/comment_styles_io.hpp"
 #include "dogen/formatters/io/modeline_field_io.hpp"
