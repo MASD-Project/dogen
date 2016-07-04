@@ -12,50 +12,52 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-06-29 Wed 15:40]
+#+CAPTION: Clock summary at [2016-07-04 Mon 20:19]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *38:02* |       |      | 100.0 |
+| *Total time*                                                                | *39:51* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 38:02   |       |      | 100.0 |
-| Active                                                                      |         | 38:02 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 3:57 |  10.4 |
-| STARTED Manual updates and blog posts                                       |         |       | 0:53 |   2.3 |
+| Stories                                                                     | 39:51   |       |      | 100.0 |
+| Active                                                                      |         | 39:51 |      | 100.0 |
+| COMPLETED Sprint and product backlog grooming                               |         |       | 3:57 |   9.9 |
+| COMPLETED Manual updates and blog posts                                     |         |       | 0:53 |   2.2 |
 | COMPLETED Refactor helper settings                                          |         |       | 0:35 |   1.5 |
-| COMPLETED Add properties for helpers                                        |         |       | 1:35 |   4.2 |
-| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   3.6 |
-| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   2.2 |
-| COMPLETED Rename helper instances                                           |         |       | 0:37 |   1.6 |
-| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   3.1 |
-| COMPLETED Rename qualified to id                                            |         |       | 0:51 |   2.2 |
-| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   2.1 |
-| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   3.4 |
-| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   2.2 |
-| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |   5.5 |
+| COMPLETED Add properties for helpers                                        |         |       | 1:35 |   4.0 |
+| COMPLETED Consider renaming =yarn::property= to attribute                   |         |       | 1:23 |   3.5 |
+| COMPLETED Rename formattables to properties                                 |         |       | 0:50 |   2.1 |
+| COMPLETED Rename helper instances                                           |         |       | 0:37 |   1.5 |
+| COMPLETED Tidy-up pretty printer                                            |         |       | 1:10 |   2.9 |
+| COMPLETED Rename qualified to id                                            |         |       | 0:51 |   2.1 |
+| COMPLETED Rename unparsed type  in name tree                                |         |       | 0:47 |   2.0 |
+| COMPLETED Add a builder-like API to pretty printer                          |         |       | 1:18 |   3.3 |
+| COMPLETED Implement automatic model name detection in name builder          |         |       | 0:51 |   2.1 |
+| COMPLETED Populate qualified and identifiable name                          |         |       | 2:05 |   5.2 |
 | COMPLETED Rename =name_tree='s parent                                       |         |       | 0:16 |   0.7 |
-| COMPLETED Compute yarn property related information                         |         |       | 2:17 |   6.0 |
-| COMPLETED Remove redundancy in properties' repositories                     |         |       | 0:22 |   1.0 |
-| COMPLETED Create a top-level type to aggregate properties and helpers       |         |       | 1:42 |   4.5 |
+| COMPLETED Compute yarn property related information                         |         |       | 2:17 |   5.7 |
+| COMPLETED Remove redundancy in properties' repositories                     |         |       | 0:22 |   0.9 |
+| COMPLETED Create a top-level type to aggregate properties and helpers       |         |       | 1:42 |   4.3 |
 | COMPLETED Refactor helper descriptor                                        |         |       | 0:23 |   1.0 |
-| COMPLETED Add an helper method interface                                    |         |       | 1:03 |   2.8 |
-| COMPLETED Remove encoded from yarn's name tree                              |         |       | 1:24 |   3.7 |
-| COMPLETED Add support for helpers bound to multiple formatters.             |         |       | 0:41 |   1.8 |
-| COMPLETED Add class info to is enabled in formatter helper interface        |         |       | 0:29 |   1.3 |
-| COMPLETED Fix issues with build in laptop                                   |         |       | 0:48 |   2.1 |
-| COMPLETED Remove helper name from formatter helper interface                |         |       | 0:08 |   0.4 |
-| COMPLETED Fix a number of Windows build errors                              |         |       | 0:41 |   1.8 |
+| COMPLETED Add an helper method interface                                    |         |       | 1:03 |   2.6 |
+| COMPLETED Remove encoded from yarn's name tree                              |         |       | 1:24 |   3.5 |
+| COMPLETED Add support for helpers bound to multiple formatters.             |         |       | 0:41 |   1.7 |
+| COMPLETED Add class info to is enabled in formatter helper interface        |         |       | 0:29 |   1.2 |
+| COMPLETED Fix issues with build in laptop                                   |         |       | 0:48 |   2.0 |
+| COMPLETED Remove helper name from formatter helper interface                |         |       | 0:08 |   0.3 |
+| COMPLETED Fix a number of Windows build errors                              |         |       | 0:41 |   1.7 |
 | COMPLETED Fix Mingw build's warning                                         |         |       | 0:10 |   0.4 |
-| COMPLETED Implement types helper methods with new helper infrastructure     |         |       | 3:12 |   8.4 |
-| COMPLETED Move identifiable and qualified to assistant                      |         |       | 0:32 |   1.4 |
-| COMPLETED Refactor helper properties yet again                              |         |       | 2:56 |   7.7 |
+| COMPLETED Implement types helper methods with new helper infrastructure     |         |       | 3:12 |   8.0 |
+| COMPLETED Move identifiable and qualified to assistant                      |         |       | 0:32 |   1.3 |
+| COMPLETED Refactor helper properties yet again                              |         |       | 2:56 |   7.4 |
 | COMPLETED Remove =aggregator= in dynamic                                    |         |       | 0:07 |   0.3 |
-| STARTED Rename aspect settings to element settings                          |         |       | 0:38 |   1.7 |
-| STARTED Implement IO helper methods with new helper infrastructure          |         |       | 3:21 |   8.8 |
+| COMPLETED Rename aspect settings to element settings                        |         |       | 1:18 |   3.3 |
+| COMPLETED Thoughts on the overall design for settings                       |         |       | 1:09 |   2.9 |
+| POSTPONED Implement IO helper methods with new helper infrastructure        |         |       | 3:21 |   8.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2016-07-04 Mon 20:18]
     CLOCK: [2016-06-29 Wed 14:37]--[2016-06-29 Wed 14:52] =>  0:15
     CLOCK: [2016-06-27 Mon 15:35]--[2016-06-27 Mon 16:15] =>  0:40
     CLOCK: [2016-06-24 Fri 13:10]--[2016-06-24 Fri 13:17] =>  0:07
@@ -71,7 +73,8 @@
 
 Updates to sprint and product backlog.
 
-*** STARTED Manual updates and blog posts                             :story:
+*** COMPLETED Manual updates and blog posts                           :story:
+    CLOSED: [2016-07-04 Mon 20:18]
     CLOCK: [2016-06-22 Wed 22:22]--[2016-06-22 Wed 22:31] =>  0:09
     CLOCK: [2016-06-21 Tue 20:46]--[2016-06-21 Tue 21:30] =>  0:44
 
@@ -917,92 +920,8 @@ With this simple change of perspective, it all now makes sense:
   "IO invocation for type". It is called with an ID; we look up the
   corresponding settings in the global IO settings container.
 
-*** Rename element settings back to aspect settings                   :story:
-
-As per design story, we incorrectly added non-aspect attributes to
-this class. Remove them and rename the class.
-
-*** Rename bundle to element settings                                 :story:
-
-As per design story, these are really the settings that belong to the
-element. Rename and deal with the fallout.
-
-*** Create a IO settings class                                        :story:
-
-Add a class to model all of the settings required to produce the io
-invocation, create a repository for it and associated factory and
-finally add the repository to the context.
-
-*** Implement streaming for type in terms of IO settings              :story:
-
-- rename it o "IO invocation for type".
-- call it with an ID; look up the corresponding IO settings in the global
-  IO settings container from context.
-- remove all other streaming for type implementations and use the new
-  one in the legacy formatters.
-
-*** Refactor general settings                                         :story:
-
-Tasks:
-
-- create a file settings class that reflects dynamic (and nothing
-  more). Create an associated factory, repository etc.
-- rename the existing general settings to file properties. Make the
-  factory use the file settings to produce the properties.
-- move general settings from the bundle into element properties.
-
-*Previous Understanding*
-
-A while ago we came up with this name for the settings of the generic
-formatter model. This is the model with basic infrastructure to be
-reused by the more specialised formatters. However, now that we have
-many (many) settings classes, general settings may not be the most
-appropriate name. We need to look a bit more deeply into the role of
-this class and see if a better name is not available.
-
-We could call it preamble settings because all settings are related to
-the file preamble; annoyingly, we also generate a post-amble from
-it. There doesn't seem to be any good names for the pair (preamble,
-post-amble). In networking this would be called frame markers perhaps.
-
-Now that we are not using =meta_data= any more, perhaps we could
-re-purpose it for this (=meta_data_settings=). In a way, preambles and
-post-ambles are meta-data, as opposed to the real file
-contents. Having said that, one could say the same about any kind of
-comments.
-
-We could also use [[http://www1.appstate.edu/~yaleread/typographichierarchy.pdf][typography terminology]]: headers and footers.
-
-Now that we have subsidiary settings and principal settings do we need
-the rename? We should consider "universal settings" maybe.
-
-In addition, the convention is now that "settings" mean a strongly
-typed representation of =dynamic= data; general "settings" are not
-settings in this sense. However, we do need a class to model settings
-properly (i.e. to mirror dynamic exactly, without any
-transformations).
-
-In truth, =annotation= is probably sufficient - or perhaps
-=annotation_properties=. It could then have an =enabled= property to
-replace =generate_preamble=. This is more accurate due to the
-preamble/postamble setup explained above. In this setup, we'd have
-=annotation_settings= to map to dynamic data, with an annotation
-settings factory which reads these off of dynamic object; then, an
-annotation factory to generate annotations. Finally, we can introduce
-the annotation formatter to generate the portion of boilerplate
-related to just the annotation. Boilerplate formatter collaborates
-with annotation formatter.
-
-More ideas on this: are these not just "file settings"? After all the
-meta-data it contains relates to file-level properties. As =file= is
-an entity defined in =formatters= this fits the bill nicely. We still
-have to deal with the dilemma described above (these "settings" are
-not all directly read out of meta-data). We should then call these
-"file properties". We need to then refactor the code so that there is
-a file settings class that is an exact match of what is read out of
-dynamic and is then used as input to generate the file properties.
-
-*** STARTED Implement IO helper methods with new helper infrastructure :story:
+*** POSTPONED Implement IO helper methods with new helper infrastructure :story:
+    CLOSED: [2016-07-04 Mon 20:18]
     CLOCK: [2016-06-29 Wed 14:10]--[2016-06-29 Wed 14:36] =>  0:26
     CLOCK: [2016-06-28 Tue 22:22]--[2016-06-28 Tue 23:01] =>  0:39
     CLOCK: [2016-06-28 Tue 21:57]--[2016-06-28 Tue 22:21] =>  0:24
@@ -1023,328 +942,6 @@ Problems:
   for all properties, not just in the context of helpers. This seems
   to imply we need a way to access this information directly from the
   property. It will need some thinking.
-
-*** Group the file related fields under a prefix                      :story:
-
-Now we have =element= as a prefix, it probably makes sense to also
-group the fields that are related to file names, paths etc. These
-could be under =file= or perhaps =paths=? Examples:
-
-- =quilt.cpp.file.include_directory_name=
-- =quilt.cpp.source_directory_name=
-
-*** Implement qualified name efficiently                              :story:
-
-We used a =std::map= to store qualified names. In practice, we don't
-need something this expensive.
-
-- instead of mapping names to languages, we could map them to
-  "styles". There are only a few "styles" across all programming
-  languages (e.g. =.= separated, =::= separated and so on).
-- we can also create an array of these styles. We know up front how
-  many styles there are.
-- finally we can create a enumeration to access the array. At present
-  this is not possible because we cannot disable invalid, nor is it
-  possible to move it to a different position (e.g. last). Also we
-  will have to static cast the enum to access the int, which is not
-  very pretty.
-
-Once all of this is done we can simply do, at O(1):
-
-: name.qualified[static_cast<unsigned int>(styles::double_colon_separated_style)]
-
-We can prettify it a bit: [[http://stackoverflow.com/questions/8357240/how-to-automatically-convert-strongly-typed-enum-into-int][How to automatically convert strongly typed
-enum into int?]]
-
-: template <typename E>
-: constexpr typename std::underlying_type<E>::type to_underlying(E e) {
-:     return static_cast<typename std::underlying_type<E>::type>(e);
-: }
-:
-: std::cout << foo(to_underlying(b::B2)) << std::endl;
-
-Giving us:
-
-: name.qualified[to_underlying(styles::double_colon_separated_style)]
-
-*** Create utility methods for =__type__= etc                         :story:
-
-At present we've hard-coded the field name for =__type__= and so forth
-in each formatter. This is not ideal. Create a simple utility method
-that returns it and update all formatters to use it instead. List of
-hard-coded things:
-
-- =__type__=
-- =<empty>=
-- =data=
-- =value=
-- =memory=
-- string helper variables: =<new_line>=, =<quote>=
-- =tidy_up_string=
-
-*** Why do we need helpers and io for some types?                     :story:
-
-At present we have helper support for maps, sets, pairs etc. We also
-seem to have utility support for these. Originally the idea was that
-we needed utility so that users could have a map of dogen types and
-still have streaming support. This is useful. However, what is
-slightly less clear is why we don't just use the utility methods
-inside the IO subsystem to output these types, but instead use
-helpers. We should try doing that and see what breaks, there may be a
-reasons for this.
-
-In theory we just have to remove the helpers in IO for utility
-supported types and add the includes to the meta-data; regenerate and
-see what breaks. It could be related to the ordering of template
-functions or some such problem. If so we need to document this in
-manual. We should also do a quick search in backlog for this.
-
-*** Character member variables are not tidied up on io                :story:
-
-At present there is no code to convert non-printable chars into
-something acceptable in JSON. We probably never noticed this before
-because test data generates printable chars. Code generated is as
-follows (all primitives model):
-
-: << "\"char_property\": " << "\"" << v.char_property() << "\"" << ", "
-
-We need a "tidy-up char" function to handle this properly.
-
-*** Lists of strings are not properly tidied up on io                 :story:
-
-In the log file, when we dump include dependencies we see invalid
-JSON:
-
-: [ "<iosfwd>", ""dogen/sml/types/merger.hpp"" ]
-
-This implies we are not calling =tidy_up_string=. This can be tested
-by creating a container of =filesystem::path=.
-
-*** Fix Windows build timeout                                         :story:
-
-At present the windows build is taking over 1h and its only building
-the knitter target. We need to think of ways to reduce the build
-time. Things to try:
-
-- remove all of the hashing etc for the types we don't need to hash.
-- get rid of the warnings for boost.
-
-*** Build boost for MinGW                                             :story:
-
-At present our MinGW build is borked because we do not have a boost
-build. Create one and add it to DropBox or Conan.
-
-*** Type-bound helpers and generic helpers                            :story:
-
-Not all helpers are bound to a type. We have the case of inserter
-helper in io which is used by main formatters directly. We need to
-make this distinction in the manual.
-
-*** Check which properties need to loop through the entire model      :story:
-
-In certain cases such as helpers we probably don't need to go through
-all types; only the target types matter. Ensure we are not processing
-other types for no reason.
-
-*** Add validation for helper families                                :story:
-
-At present we are checking that the name tree has the expected number
-of type arguments:
-
-:    const auto children(t.children());
-:    if (children.size() != 1) {
-:        BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
-:        BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
-:    }
-:    smart_pointer_helper_stitch(fa, t);
-
-In the future with dynamic helpers we will remove these checks. In
-order to implement them we need to declare the type families up front
-in a JSON file, with a name and number of type arguments. When
-constructing the type helpers, we can check the name tree to make sure
-the number of type arguments is correct.
-
-*** Update assistant to use new helper information                    :story:
-
-Once all the pieces are in place, the assistant can then use the
-element properties to find out which helpers are required for each
-type; call those helpers and populate the file with the generate
-code. We can remove all previous helper support.
-
-*** Create a settings class for the "requires" settings               :story:
-
-We need to populate these in a settings workflow of some kind.
-
-*** Consider caching "all modules" in location                        :story:
-
-At present we are adding the module lists together to build the
-qualified name; location could have a "all modules" list that
-concatenates external, model and internal modules. We should look at
-performance before doing this change though.
-
-*** Consider reducing the number of qname lookups in cpp model        :story:
-
-At present we are still using =yarn::name= in a lot of repositories in
-quilt. We already had one go in moving to id's but there are still
-quite a few left. Investigate to see if there are more that can be
-moved.
-
-*** Implement formattables in terms of yarn types                     :epic:
-
-At present formattables are just a shadow copy of yarn types plus
-additional =cpp= specific types. In practice:
-
-- for the types that are shadow copies, we could have helper utilities
-  that do the translation on the fly (e.g. for names).
-- for additional information which cannot be translated, we could have
-  containers indexed by qualified name and query those just before we
-  call the transformer. This is the case with formatter properties. We
-  need something similar to house "type properties" such as
-  =requires_stream_manipulators=. These could be moved into aspect
-  settings.
-- for types that do not exist in yarn, we could inherit from element;
-  this is the case for registrar, forward declarations, cmakelists and
-  odb options. Note that with this we are now saying that element
-  space contains anything which can be modeled, regardless of if they
-  are part of the programming language type system, or build system,
-  etc. This is not ideal, but its not a problem just yet. We could
-  update the factory to generate these types and then take a copy of
-  the model and inject them in it.
-
-*** Add support for selectively disabling helpers on a family         :story:
-
-At present when a type belongs to a helper family it must provide all
-helpers across all facets. This means that we can't support the cases
-where a helper is required for one facet for one type but not for
-others. For example, we cannot create a family for =Dereferenceable=
-including both smart pointers and optionals because optional does not
-need a helper for =types=.
-
-One solution for this is to allow disabling the helper for a given
-type on a given facet. However, our templating mechanism in dynamic is
-not able to cope with this use case. Changes required:
-
-- add a "component" to ownership hierarchy. This would be "helper" in
-  our case. We should also set "type" which has been hacked via the
-  qualified name.
-- create a supported/enabled field with a component of helper and a
-  facet template. We could change this to formatter template if
-  required in the future.
-- merge the families of optional and smart pointer into
-  =Dereferenceable=.
-- disable the helper for types for optional.
-- update the helper settings to read this new field.
-- enabled method now checks the helper properties.
-
-*** Remove nested type info                                           :story:
-
-Once all of the infrastructure is in place, we should not need this
-class any more. Remove code from transformer and remove object types
-and anything else that was used to dispatch based on type.
-
-*** Rename methods parsing name trees                                 :story:
-
-We have a variety of names for the methods parsing name trees
-recursively. The best one seems to be =walk_name_tree=. We should use
-this name consistently.
-
-*** Initialise formatters in the formatter's translation unit         :story:
-
-At present we are initialising the formatters in each of the facet
-initialisers. However, it makes more sense to initialise them on the
-translation unit for each formatter. This will also make life easier
-when we move to a mustache world where there may not be a formatter
-header file at all.
-
-*** Consider using indices rather than associative containers         :story:
-
-Once we generate the final model the model becomes constant; this
-means we can easily assign an [[https://en.wikipedia.org/wiki/Ordinal_number][ordinal number]] to each model
-element. These could be arranged so that we always start with
-generatable types first; this way we always generate dense
-containers - there are some cases where we need both generatable types
-and non-generatable types; in other cases we just need generatable
-types; we never need just non-generatable types. We also need to know
-the position of the first non-generatable type (or alternatively, the
-size of the generatable types set).
-
-Once we have this, we can start creating vectors with a fixed size
-(either total number of elements or just size of generatable
-types). We can also make it so that each name has an id which is the
-ordinal (another model post-processing activity). Actually we should
-call it "type index" or some other name because its a transient
-id. This means both properties and settings require no lookups at all
-since all positions are known beforehand (except in cases where the
-key of the associative container must be the =yarn::name= because we
-use it for processing).
-
-In theory, a similar approach can be done for formatters too. We know
-upfront what the ordinal number is for each formatter because they are
-all registered before we start processing. If formatters obtained
-their ordinal number at registration, wherever we are using a map of
-formatter name to a resource, we could use a fixed-size
-vector. However, formatters may be sparse in many cases (if not all
-cases?). For example, we do not have formatter properties for all
-formatters for every =yarn::name= because many (most) formatters don't
-make sense for every yarn type. Thus this is less applicable, at least
-for formatter properties. We need to look carefully at all use cases
-and see if there is any place where this approach is applicable.
-
-*** Handle "special includes" correctly                               :story:
-
-We did a quick hack to handle "special includes": we simply "detected"
-them in include builder and then did the appropriate action in each of
-the include providers. In order to make this work dynamically, we need
-somehow to have "associated includes" on a per type basis. For
-example:
-
-- type =x= requires include =y= in formatter =f=.
-
-This can easily be achieved via an "additional inclusion directive"
-which is a container. For example:
-
-:        "extensions" : {
-:                "quilt.cpp.helper.family" : "Dereferenceable",
-:                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/weak_ptr.hpp>",
-
-Could have:
-
-:                "quilt.cpp.types.class_header_formatter.additional_inclusion_directive" : "<some_include.hpp>",
-
-If multiple are provided then they are all added. This highlights an
-important point: we need a way to inject type specific includes from a
-formatter. It makes no sense to declare all of these up front in a
-library since we do not know what all possible formatters are, nor
-what requirements they may have for inclusion. At the same time,
-formatters cannot be expected to declare types. The solution is to be
-able to "inject" these dependencies from a JSON file associated with
-the formatter. We could supply the qualified name and the properties
-to inject. This problem can be solved later on - create a separate
-story for this.
-
-*** Registrar in serialisation is not stable sorted                   :story:
-
-We seem to have a traffic light diff on =registrar_ser.cpp=:
-
-: -    dogen::config::register_types(ar);
-:      dogen::quilt::cpp::register_types(ar);
-:      dogen::yarn::register_types(ar);
-: +    dogen::config::register_types(ar);
-
-This is probably a lack of a stable sort in model dependencies.
-
-*** Support only specific attributes for certain facets               :story:
-
-Whenever an object has a unique identifier, it may make sense to make
-use of it for:
-
-- hashing
-- equality
-- less than
-
-And so forth. For example, names and name trees don't really require
-comparing the entire state of the object. We need a way to mark
-properties against each facet in the meta-data.
 
 ** Deprecated
 *** CANCELLED Investigate slow down                                   :story:
