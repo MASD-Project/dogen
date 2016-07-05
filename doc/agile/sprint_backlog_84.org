@@ -164,6 +164,10 @@ enable it in the YML file.
 
 Try just copying the code from [[https://github.com/JoakimSoderberg/coveralls-cmake][coveralls-cmake]]
 
+See also:
+
+- [[https://github.com/SpinWaveGenie/SpinWaveGenie/blob/master/libSpinWaveGenie/CMakeLists.txt][SpinWaveGenie's support for Coveralls]]
+
 **** Direct use of Coveralls failed
 
 We had to remove coveralls:
