@@ -12,18 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-05 Tue 20:22]
+#+CAPTION: Clock summary at [2016-07-05 Tue 21:10]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *4:18* |      |      | 100.0 |
+| *Total time*                                                                | *4:28* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 4:18   |      |      | 100.0 |
-| Active                                                                      |        | 4:18 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:17 |   6.6 |
-| COMPLETED Try to fix tag build issues                                       |        |      | 1:28 |  34.1 |
-| STARTED Refactor general settings                                           |        |      | 1:16 |  29.5 |
-| STARTED Enable build type on travis                                         |        |      | 1:17 |  29.8 |
+| Stories                                                                     | 4:28   |      |      | 100.0 |
+| Active                                                                      |        | 4:28 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:17 |   6.3 |
+| COMPLETED Try to fix tag build issues                                       |        |      | 1:28 |  32.8 |
+| COMPLETED Enable build type on travis                                       |        |      | 1:17 |  28.7 |
+| STARTED Create a debug build for clang in travis                            |        |      | 0:10 |   3.7 |
+| STARTED Refactor general settings                                           |        |      | 1:16 |  28.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -64,6 +65,31 @@ instead:
 : git rev-list --count HEAD
 
 We were already doing this for the hash of the top-commit.
+
+*** COMPLETED Enable build type on travis                             :story:
+    CLOSED: [2016-07-05 Tue 21:10]
+    CLOCK: [2016-07-05 Tue 20:17]--[2016-07-05 Tue 20:22] =>  0:05
+    CLOCK: [2016-07-05 Tue 19:04]--[2016-07-05 Tue 20:16] =>  1:12
+
+Using =BUILD_TYPE= seems to disable the stage folder in travis -
+though it works locally. We probably shouldn't use the stage folder
+since its not a CMake idiom.
+
+The other thing to notice is that we do not have a =make_directory=
+for these folders anywhere in the code base. Its not clear how it has
+been working so far.
+
+- generate the folders if they do not exist;
+- remove =WITH_DEBUG=.
+
+*** STARTED Create a debug build for clang in travis                  :story:
+    CLOCK: [2016-07-05 Tue 21:00]--[2016-07-05 Tue 21:10] =>  0:10
+
+In order to enable code coverage we need to have a debug build. For
+this we need to setup travis with a build matrix, with two build types
+for clang (debug and release).
+
+Example YML: [[https://github.com/Microsoft/GSL/blob/master/.travis.yml][GSL]]
 
 *** STARTED Refactor general settings                                 :story:
     CLOCK: [2016-07-04 Mon 22:54]--[2016-07-04 Mon 23:30] =>  0:36
@@ -127,21 +153,6 @@ not all directly read out of meta-data). We should then call these
 "file properties". We need to then refactor the code so that there is
 a file settings class that is an exact match of what is read out of
 dynamic and is then used as input to generate the file properties.
-
-*** STARTED Enable build type on travis                               :story:
-    CLOCK: [2016-07-05 Tue 20:17]--[2016-07-05 Tue 20:22] =>  0:05
-    CLOCK: [2016-07-05 Tue 19:04]--[2016-07-05 Tue 20:16] =>  1:12
-
-Using =BUILD_TYPE= seems to disable the stage folder in travis -
-though it works locally. We probably shouldn't use the stage folder
-since its not a CMake idiom.
-
-The other thing to notice is that we do not have a =make_directory=
-for these folders anywhere in the code base. Its not clear how it has
-been working so far.
-
-- generate the folders if they do not exist;
-- remove =WITH_DEBUG=.
 
 *** Add support for coveralls                                         :story:
 
@@ -217,20 +228,6 @@ Yet another way seems to be creating a script to do coverage, as per
 [[https://github.com/BoostGSoC13/boost.afio][boost.afio]] [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/.travis.yml][travis.yml]]. The script is available [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/test/update_coveralls.sh][here]].
 
 Another example from [[https://github.com/boostorg/dll/blob/develop/.travis.yml][Boost.Dll]].
-
-*** Create a debug build for clang in travis                          :story:
-
-In order to enable code coverage we need to have a debug build. For
-this we need to setup travis with a build matrix, with two build types
-for clang (debug and release).
-
-Example YML: [[https://github.com/Microsoft/GSL/blob/master/.travis.yml][GSL]]
-
-We almost made this work, but now we have a problem: using BUILD_TYPE
-seems to disable the stage folder in travis (though it works
-locally). We probably shouldn't use the stage folder since its not a
-CMake idiom.
-
 *** Rename element settings back to aspect settings                   :story:
 
 As per design story, we incorrectly added non-aspect attributes to

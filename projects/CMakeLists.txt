@@ -95,13 +95,6 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
     # make string constants const char*
     set(warning_flags "${warning_flags} -Wwrite-strings")
 
-    # debug flags
-    if(WITH_DEBUG)
-        set(optimisation_flags "-g -O0")
-    else()
-        set(optimisation_flags "-O3")
-    endif()
-
     if(WITH_PROFILING)
         # enable code profiling options
         set(profiling_flags "-fprofile-arcs -ftest-coverage")

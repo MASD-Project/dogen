@@ -37,7 +37,6 @@ endif()
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/build/cmake)
 
 # options
-option(WITH_DEBUG "Build the project with debug symbols" off)
 option(WITH_DOXYGEN "Build the project documentation" off)
 option(WITH_LATEX "Build all LaTeX documents. Requires pdflatex and beamer." off)
 option(WITH_PROFILING "Build the project with profiling support" off)
@@ -105,7 +104,7 @@ endif()
 
 # profiling
 if(WITH_PROFILING)
-    if(WITH_DEBUG)
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
         message(STATUS "Profiling enabled...")
     else()
         message(STATUS "Ignoring attempt to enable profiling without debug...")
@@ -263,7 +262,7 @@ set(DOGEN_VERSION "${DOGEN_VERSION}.${DOGEN_MINOR_VERSION}")
 set(DOGEN_VERSION "${DOGEN_VERSION}.${DOGEN_PATCH_VERSION}")
 
 # debug
-if(WITH_DEBUG)
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     message(STATUS "Building WITH DEBUG symbols...")
     set(DOGEN_VERSION "${DOGEN_VERSION}d")
 else()
