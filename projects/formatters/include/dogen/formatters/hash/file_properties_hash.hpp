@@ -18,27 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "dogen/formatters/io/annotation_io.hpp"
-#include "dogen/formatters/io/general_settings_io.hpp"
+#ifndef DOGEN_FORMATTERS_HASH_FILE_PROPERTIES_HASH_HPP
+#define DOGEN_FORMATTERS_HASH_FILE_PROPERTIES_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/formatters/types/file_properties.hpp"
 
 namespace dogen {
 namespace formatters {
 
-std::ostream& operator<<(std::ostream& s, const general_settings& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
-    s << " { "
-      << "\"__type__\": " << "\"dogen::formatters::general_settings\"" << ", "
-      << "\"generate_preamble\": " << v.generate_preamble() << ", "
-      << "\"annotation\": " << v.annotation()
-      << " }";
-    return(s);
-}
+struct file_properties_hasher {
+public:
+    static std::size_t hash(const file_properties& v);
+};
 
 } }
+
+namespace std {
+
+template<>
+struct hash<dogen::formatters::file_properties> {
+public:
+    size_t operator()(const dogen::formatters::file_properties& v) const {
+        return dogen::formatters::file_properties_hasher::hash(v);
+    }
+};
+
+}
+#endif

@@ -132,7 +132,7 @@ unsigned int i0;
 stream_ << "This is line numnber: 0" << std::endl;
 )");
 
-const std::string with_general_settings(R"(/* -*- a_field: a_value -*-
+const std::string with_file_properties(R"(/* -*- a_field: a_value -*-
  *
  * this is a marker
  *
@@ -423,17 +423,17 @@ BOOST_AUTO_TEST_CASE(complex_structure_results_in_expected_template) {
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
 
-BOOST_AUTO_TEST_CASE(general_settings_result_in_expected_template) {
-    SETUP_TEST_LOG_SOURCE("general_settings_result_in_expected_template");
+BOOST_AUTO_TEST_CASE(file_properties_result_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("file_properties_result_in_expected_template");
 
-    const auto tt(factory.make_with_general_settings());
+    const auto tt(factory.make_with_file_properties());
     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
     const auto actual(r.content());
-    const auto expected(with_general_settings);
+    const auto expected(with_file_properties);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
 

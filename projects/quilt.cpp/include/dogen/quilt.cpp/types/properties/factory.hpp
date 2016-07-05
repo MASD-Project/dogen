@@ -30,7 +30,7 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/config/types/cpp_options.hpp"
-#include "dogen/formatters/types/general_settings_factory.hpp"
+#include "dogen/formatters/types/file_properties_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
@@ -78,7 +78,7 @@ public:
     std::forward_list<std::shared_ptr<formattable> > make_includers(
         const config::cpp_options& opts,
         const dynamic::object& root_object,
-        const dogen::formatters::general_settings_factory& gsf,
+        const dogen::formatters::file_properties_factory& fpf,
         settings::bundle_repository& brp,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const path_derivatives_repository& pdrp,
@@ -90,7 +90,7 @@ public:
     std::forward_list<std::shared_ptr<formattable> > make_cmakelists(
         const config::cpp_options& opts,
         const dynamic::object& root_object,
-        const dogen::formatters::general_settings_factory& gsf,
+        const dogen::formatters::file_properties_factory& fpf,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const formatter_properties_repository& fprp,
         const yarn::model& m) const;
@@ -98,7 +98,7 @@ public:
     std::shared_ptr<formattable> make_odb_options(
         const config::cpp_options& opts,
         const dynamic::object& root_object,
-        const dogen::formatters::general_settings_factory& gsf,
+        const dogen::formatters::file_properties_factory& fpf,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const formatter_properties_repository& fprp,
         const yarn::model& m) const;

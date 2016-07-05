@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/formatters/io/general_settings_io.hpp"
+#include "dogen/formatters/io/file_properties_io.hpp"
 #include "dogen/quilt.cpp/io/properties/formattable_io.hpp"
 #include "dogen/quilt.cpp/io/properties/cmakelists_info_io.hpp"
 

@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/general_settings_hash.hpp"
+#include "dogen/formatters/hash/file_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/formattable_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/odb_options_info_hash.hpp"
 
@@ -36,7 +36,7 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_formatters_general_settings(const boost::optional<dogen::formatters::general_settings>& v) {
+inline std::size_t hash_boost_optional_dogen_formatters_file_properties(const boost::optional<dogen::formatters::file_properties>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -63,7 +63,7 @@ std::size_t odb_options_info_hasher::hash(const odb_options_info& v) {
     combine(seed, hash_boost_filesystem_path(v.file_path()));
     combine(seed, v.file_name());
     combine(seed, v.odb_folder());
-    combine(seed, hash_boost_optional_dogen_formatters_general_settings(v.general_settings()));
+    combine(seed, hash_boost_optional_dogen_formatters_file_properties(v.file_properties()));
 
     return seed;
 }

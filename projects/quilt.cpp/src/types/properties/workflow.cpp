@@ -139,7 +139,7 @@ workflow::from_transformer_activity(const yarn::model& m) const {
 std::forward_list<std::shared_ptr<properties::formattable> >
 workflow::from_factory_activity(const config::cpp_options& opts,
     const dynamic::object& root_object,
-    const dogen::formatters::general_settings_factory& gsf,
+    const dogen::formatters::file_properties_factory& fpf,
     settings::bundle_repository& brp,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const properties::path_derivatives_repository& pdrp,
@@ -156,11 +156,11 @@ workflow::from_factory_activity(const config::cpp_options& opts,
         r.push_front(ri);
 
     r.splice_after(r.before_begin(),
-        f.make_includers(opts, ro, gsf, brp, ps, pdrp, formatters, fprp, m));
+        f.make_includers(opts, ro, fpf, brp, ps, pdrp, formatters, fprp, m));
     r.splice_after(r.before_begin(),
-        f.make_cmakelists(opts, ro, gsf, ps, fprp, m));
+        f.make_cmakelists(opts, ro, fpf, ps, fprp, m));
 
-    const auto oi(f.make_odb_options(opts, ro, gsf, ps, fprp, m));
+    const auto oi(f.make_odb_options(opts, ro, fpf, ps, fprp, m));
     if (oi)
         r.push_front(oi);
 
@@ -183,7 +183,7 @@ std::pair<
 workflow::execute(const config::cpp_options& opts,
     const dynamic::repository& rp,
     const dynamic::object& root_object,
-    const dogen::formatters::general_settings_factory& gsf,
+    const dogen::formatters::file_properties_factory& fpf,
     const formatters::container& fc,
     settings::bundle_repository& brp,
     const yarn::model& m) const {
@@ -198,7 +198,7 @@ workflow::execute(const config::cpp_options& opts,
 
     auto formattables(from_transformer_activity(m));
     formattables.splice_after(formattables.before_begin(),
-        from_factory_activity(opts, ro, gsf, brp, ps, pdrp, fprp, fc, m));
+        from_factory_activity(opts, ro, fpf, brp, ps, pdrp, fprp, fc, m));
     BOOST_LOG_SEV(lg, debug) << "Formattables: " << formattables;
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";

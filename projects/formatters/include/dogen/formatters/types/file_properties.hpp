@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_GENERAL_SETTINGS_HPP
-#define DOGEN_FORMATTERS_TYPES_GENERAL_SETTINGS_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_FILE_PROPERTIES_HPP
+#define DOGEN_FORMATTERS_TYPES_FILE_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,34 +27,34 @@
 
 #include <algorithm>
 #include "dogen/formatters/types/annotation.hpp"
-#include "dogen/formatters/serialization/general_settings_fwd_ser.hpp"
+#include "dogen/formatters/serialization/file_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace formatters {
 
 /**
- * @brief Collection of generic settings used by all formatters.
+ * @brief Properties pertaining to a file and common to all formatters.
  */
-class general_settings final {
+class file_properties final {
 public:
-    general_settings(const general_settings&) = default;
-    general_settings(general_settings&&) = default;
-    ~general_settings() = default;
+    file_properties(const file_properties&) = default;
+    file_properties(file_properties&&) = default;
+    ~file_properties() = default;
 
 public:
-    general_settings();
+    file_properties();
 
 public:
-    general_settings(
+    file_properties(
         const bool generate_preamble,
         const dogen::formatters::annotation& annotation);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::formatters::general_settings& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::formatters::file_properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::formatters::general_settings& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::formatters::file_properties& v, unsigned int version);
 
 public:
     /**
@@ -76,14 +76,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const general_settings& rhs) const;
-    bool operator!=(const general_settings& rhs) const {
+    bool operator==(const file_properties& rhs) const;
+    bool operator!=(const file_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(general_settings& other) noexcept;
-    general_settings& operator=(general_settings other);
+    void swap(file_properties& other) noexcept;
+    file_properties& operator=(file_properties other);
 
 private:
     bool generate_preamble_;
@@ -96,8 +96,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::formatters::general_settings& lhs,
-    dogen::formatters::general_settings& rhs) {
+    dogen::formatters::file_properties& lhs,
+    dogen::formatters::file_properties& rhs) {
     lhs.swap(rhs);
 }
 

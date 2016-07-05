@@ -30,7 +30,7 @@
 #include <forward_list>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/formatters/types/general_settings_factory.hpp"
+#include "dogen/formatters/types/file_properties_factory.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
@@ -100,7 +100,7 @@ private:
     std::forward_list<std::shared_ptr<properties::formattable> >
     from_factory_activity(const config::cpp_options& opts,
         const dynamic::object& root_object,
-        const dogen::formatters::general_settings_factory& gsf,
+        const dogen::formatters::file_properties_factory& fpf,
         settings::bundle_repository& brp,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const properties::path_derivatives_repository& pdrp,
@@ -124,7 +124,7 @@ public:
     execute(const config::cpp_options& opts,
         const dynamic::repository& drp,
         const dynamic::object& root_object,
-        const dogen::formatters::general_settings_factory& gsf,
+        const dogen::formatters::file_properties_factory& fpf,
         const formatters::container& fc,
         settings::bundle_repository& brp,
         const yarn::model& m) const;

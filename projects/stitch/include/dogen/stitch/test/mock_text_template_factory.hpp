@@ -214,10 +214,10 @@ public:
     text_template make_complex_structure() const;
 
     /**
-     * @brief Populate general settings in the template. Also includes
+     * @brief Populate file properties in the template. Also includes
      * a single line of text.
      */
-    text_template make_with_general_settings() const;
+    text_template make_with_file_properties() const;
 
     /**
      * @brief Populate containing namespace in the text template.

@@ -24,23 +24,23 @@ namespace dogen {
 namespace stitch {
 
 settings_bundle::settings_bundle(settings_bundle&& rhs)
-    : general_settings_(std::move(rhs.general_settings_)),
+    : file_properties_(std::move(rhs.file_properties_)),
       stitching_settings_(std::move(rhs.stitching_settings_)) { }
 
 settings_bundle::settings_bundle(
-    const boost::optional<dogen::formatters::general_settings>& general_settings,
+    const boost::optional<dogen::formatters::file_properties>& file_properties,
     const dogen::stitch::stitching_settings& stitching_settings)
-    : general_settings_(general_settings),
+    : file_properties_(file_properties),
       stitching_settings_(stitching_settings) { }
 
 void settings_bundle::swap(settings_bundle& other) noexcept {
     using std::swap;
-    swap(general_settings_, other.general_settings_);
+    swap(file_properties_, other.file_properties_);
     swap(stitching_settings_, other.stitching_settings_);
 }
 
 bool settings_bundle::operator==(const settings_bundle& rhs) const {
-    return general_settings_ == rhs.general_settings_ &&
+    return file_properties_ == rhs.file_properties_ &&
         stitching_settings_ == rhs.stitching_settings_;
 }
 
@@ -50,20 +50,20 @@ settings_bundle& settings_bundle::operator=(settings_bundle other) {
     return *this;
 }
 
-const boost::optional<dogen::formatters::general_settings>& settings_bundle::general_settings() const {
-    return general_settings_;
+const boost::optional<dogen::formatters::file_properties>& settings_bundle::file_properties() const {
+    return file_properties_;
 }
 
-boost::optional<dogen::formatters::general_settings>& settings_bundle::general_settings() {
-    return general_settings_;
+boost::optional<dogen::formatters::file_properties>& settings_bundle::file_properties() {
+    return file_properties_;
 }
 
-void settings_bundle::general_settings(const boost::optional<dogen::formatters::general_settings>& v) {
-    general_settings_ = v;
+void settings_bundle::file_properties(const boost::optional<dogen::formatters::file_properties>& v) {
+    file_properties_ = v;
 }
 
-void settings_bundle::general_settings(const boost::optional<dogen::formatters::general_settings>&& v) {
-    general_settings_ = std::move(v);
+void settings_bundle::file_properties(const boost::optional<dogen::formatters::file_properties>&& v) {
+    file_properties_ = std::move(v);
 }
 
 const dogen::stitch::stitching_settings& settings_bundle::stitching_settings() const {

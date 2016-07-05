@@ -18,24 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_SERIALIZATION_GENERAL_SETTINGS_FWD_SER_HPP
-#define DOGEN_FORMATTERS_SERIALIZATION_GENERAL_SETTINGS_FWD_SER_HPP
+#include <ostream>
+#include <boost/io/ios_state.hpp>
+#include "dogen/formatters/io/annotation_io.hpp"
+#include "dogen/formatters/io/file_properties_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace formatters {
 
-#include "dogen/formatters/types/general_settings_fwd.hpp"
+std::ostream& operator<<(std::ostream& s, const file_properties& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
 
-namespace boost {
-namespace serialization {
-
-template<class Archive>
-void save(Archive& ar, const dogen::formatters::general_settings& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::formatters::general_settings& v, unsigned int version);
+    s << " { "
+      << "\"__type__\": " << "\"dogen::formatters::file_properties\"" << ", "
+      << "\"generate_preamble\": " << v.generate_preamble() << ", "
+      << "\"annotation\": " << v.annotation()
+      << " }";
+    return(s);
+}
 
 } }
-
-#endif

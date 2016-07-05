@@ -37,7 +37,7 @@
 #include "dogen/formatters/io/comment_styles_io.hpp"
 #include "dogen/formatters/io/modeline_field_io.hpp"
 #include "dogen/formatters/io/modeline_group_io.hpp"
-#include "dogen/formatters/io/general_settings_io.hpp"
+#include "dogen/formatters/io/file_properties_io.hpp"
 #include "dogen/formatters/io/modeline_locations_io.hpp"
 #include "dogen/formatters/io/infix_configuration_io.hpp"
 

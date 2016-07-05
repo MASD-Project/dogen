@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/formatters/io/general_settings_io.hpp"
+#include "dogen/formatters/io/file_properties_io.hpp"
 #include "dogen/quilt.cpp/io/properties/formattable_io.hpp"
 #include "dogen/quilt.cpp/types/properties/odb_options_info.hpp"
 
@@ -33,7 +33,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::general_settings>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::file_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -59,7 +59,7 @@ odb_options_info::odb_options_info(odb_options_info&& rhs)
       file_path_(std::move(rhs.file_path_)),
       file_name_(std::move(rhs.file_name_)),
       odb_folder_(std::move(rhs.odb_folder_)),
-      general_settings_(std::move(rhs.general_settings_)) { }
+      file_properties_(std::move(rhs.file_properties_)) { }
 
 odb_options_info::odb_options_info(
     const std::string& identity,
@@ -70,7 +70,7 @@ odb_options_info::odb_options_info(
     const boost::filesystem::path& file_path,
     const std::string& file_name,
     const std::string& odb_folder,
-    const boost::optional<dogen::formatters::general_settings>& general_settings)
+    const boost::optional<dogen::formatters::file_properties>& file_properties)
     : dogen::quilt::cpp::properties::formattable(
       identity,
       origin_type,
@@ -80,7 +80,7 @@ odb_options_info::odb_options_info(
       file_path_(file_path),
       file_name_(file_name),
       odb_folder_(odb_folder),
-      general_settings_(general_settings) { }
+      file_properties_(file_properties) { }
 
 void odb_options_info::to_stream(std::ostream& s) const {
     s << " { "
@@ -93,7 +93,7 @@ void odb_options_info::to_stream(std::ostream& s) const {
       << "\"file_path\": " << "\"" << file_path_.generic_string() << "\"" << ", "
       << "\"file_name\": " << "\"" << tidy_up_string(file_name_) << "\"" << ", "
       << "\"odb_folder\": " << "\"" << tidy_up_string(odb_folder_) << "\"" << ", "
-      << "\"general_settings\": " << general_settings_
+      << "\"file_properties\": " << file_properties_
       << " }";
 }
 
@@ -106,7 +106,7 @@ void odb_options_info::swap(odb_options_info& other) noexcept {
     swap(file_path_, other.file_path_);
     swap(file_name_, other.file_name_);
     swap(odb_folder_, other.odb_folder_);
-    swap(general_settings_, other.general_settings_);
+    swap(file_properties_, other.file_properties_);
 }
 
 bool odb_options_info::equals(const dogen::quilt::cpp::properties::formattable& other) const {
@@ -122,7 +122,7 @@ bool odb_options_info::operator==(const odb_options_info& rhs) const {
         file_path_ == rhs.file_path_ &&
         file_name_ == rhs.file_name_ &&
         odb_folder_ == rhs.odb_folder_ &&
-        general_settings_ == rhs.general_settings_;
+        file_properties_ == rhs.file_properties_;
 }
 
 odb_options_info& odb_options_info::operator=(odb_options_info other) {
@@ -211,20 +211,20 @@ void odb_options_info::odb_folder(const std::string&& v) {
     odb_folder_ = std::move(v);
 }
 
-const boost::optional<dogen::formatters::general_settings>& odb_options_info::general_settings() const {
-    return general_settings_;
+const boost::optional<dogen::formatters::file_properties>& odb_options_info::file_properties() const {
+    return file_properties_;
 }
 
-boost::optional<dogen::formatters::general_settings>& odb_options_info::general_settings() {
-    return general_settings_;
+boost::optional<dogen::formatters::file_properties>& odb_options_info::file_properties() {
+    return file_properties_;
 }
 
-void odb_options_info::general_settings(const boost::optional<dogen::formatters::general_settings>& v) {
-    general_settings_ = v;
+void odb_options_info::file_properties(const boost::optional<dogen::formatters::file_properties>& v) {
+    file_properties_ = v;
 }
 
-void odb_options_info::general_settings(const boost::optional<dogen::formatters::general_settings>&& v) {
-    general_settings_ = std::move(v);
+void odb_options_info::file_properties(const boost::optional<dogen::formatters::file_properties>&& v) {
+    file_properties_ = std::move(v);
 }
 
 } } } }

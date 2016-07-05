@@ -18,58 +18,58 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/general_settings.hpp"
+#include "dogen/formatters/types/file_properties.hpp"
 
 namespace dogen {
 namespace formatters {
 
-general_settings::general_settings()
+file_properties::file_properties()
     : generate_preamble_(static_cast<bool>(0)) { }
 
-general_settings::general_settings(
+file_properties::file_properties(
     const bool generate_preamble,
     const dogen::formatters::annotation& annotation)
     : generate_preamble_(generate_preamble),
       annotation_(annotation) { }
 
-void general_settings::swap(general_settings& other) noexcept {
+void file_properties::swap(file_properties& other) noexcept {
     using std::swap;
     swap(generate_preamble_, other.generate_preamble_);
     swap(annotation_, other.annotation_);
 }
 
-bool general_settings::operator==(const general_settings& rhs) const {
+bool file_properties::operator==(const file_properties& rhs) const {
     return generate_preamble_ == rhs.generate_preamble_ &&
         annotation_ == rhs.annotation_;
 }
 
-general_settings& general_settings::operator=(general_settings other) {
+file_properties& file_properties::operator=(file_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool general_settings::generate_preamble() const {
+bool file_properties::generate_preamble() const {
     return generate_preamble_;
 }
 
-void general_settings::generate_preamble(const bool v) {
+void file_properties::generate_preamble(const bool v) {
     generate_preamble_ = v;
 }
 
-const dogen::formatters::annotation& general_settings::annotation() const {
+const dogen::formatters::annotation& file_properties::annotation() const {
     return annotation_;
 }
 
-dogen::formatters::annotation& general_settings::annotation() {
+dogen::formatters::annotation& file_properties::annotation() {
     return annotation_;
 }
 
-void general_settings::annotation(const dogen::formatters::annotation& v) {
+void file_properties::annotation(const dogen::formatters::annotation& v) {
     annotation_ = v;
 }
 
-void general_settings::annotation(const dogen::formatters::annotation&& v) {
+void file_properties::annotation(const dogen::formatters::annotation&& v) {
     annotation_ = std::move(v);
 }
 

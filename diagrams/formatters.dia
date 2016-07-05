@@ -3758,13 +3758,13 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#general_settings#</dia:string>
+        <dia:string>#file_properties#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Collection of generic settings used by all formatters.#</dia:string>
+        <dia:string>#Properties pertaining to a file and common to all formatters.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4779,7 +4779,7 @@ then make use of it.
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#general_settings_factory#</dia:string>
+        <dia:string>#file_properties_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -4875,7 +4875,7 @@ then make use of it.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#general_settings#</dia:string>
+            <dia:string>#file_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5498,7 +5498,7 @@ then make use of it.
         <dia:point val="116.14,-52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="111.938,-61.65;116.89,-51.2"/>
+        <dia:rectangle val="111.937,-61.65;116.89,-51.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8779,13 +8779,13 @@ then make use of it.
         <dia:point val="114,-23"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="113.95,-23.05;144.965,-13.15"/>
+        <dia:rectangle val="113.95,-23.05;144.58,-13.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="114,-23"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.914999999999999"/>
+        <dia:real val="30.530000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.8000000000000007"/>
@@ -8903,10 +8903,10 @@ then make use of it.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#general_settings_#</dia:string>
+            <dia:string>#file_properties_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;formatters::general_settings&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;formatters::file_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9020,10 +9020,10 @@ then make use of it.
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#gs#</dia:string>
+                <dia:string>#fp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::optional&lt;formatters::general_settings&gt;#</dia:string>
+                <dia:string>#boost::optional&lt;formatters::file_properties&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9642,17 +9642,17 @@ then make use of it.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="129.458,-23"/>
+        <dia:point val="129.265,-23"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.09,-27.75;130.208,-22.2"/>
+        <dia:rectangle val="99.09,-27.75;130.015,-22.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="129.458,-23"/>
-        <dia:point val="129.458,-27"/>
+        <dia:point val="129.265,-23"/>
+        <dia:point val="129.265,-27"/>
         <dia:point val="99.14,-27"/>
         <dia:point val="99.14,-23"/>
       </dia:attribute>
@@ -11465,7 +11465,7 @@ than one element.#</dia:string>
         <dia:point val="103.57,-48.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="75.67,-49.15;104.32,-38.2"/>
+        <dia:rectangle val="75.67,-49.15;104.32,-38.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11536,7 +11536,7 @@ than one element.#</dia:string>
         <dia:point val="91,-52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="79.81,-67.05;91.75,-50.4"/>
+        <dia:rectangle val="79.81,-67.05;91.75,-51.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

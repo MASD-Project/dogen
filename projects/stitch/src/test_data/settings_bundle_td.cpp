@@ -20,19 +20,19 @@
  */
 #include "dogen/stitch/test_data/settings_bundle_td.hpp"
 #include "dogen/stitch/test_data/stitching_settings_td.hpp"
-#include "dogen/formatters/test_data/general_settings_td.hpp"
+#include "dogen/formatters/test_data/file_properties_td.hpp"
 
 namespace {
 
-dogen::formatters::general_settings
-create_dogen_formatters_general_settings(const unsigned int position) {
-    return dogen::formatters::general_settings_generator::create(position);
+dogen::formatters::file_properties
+create_dogen_formatters_file_properties(const unsigned int position) {
+    return dogen::formatters::file_properties_generator::create(position);
 }
 
-boost::optional<dogen::formatters::general_settings>
-create_boost_optional_dogen_formatters_general_settings(unsigned int position) {
-    boost::optional<dogen::formatters::general_settings> r(
-        create_dogen_formatters_general_settings(position));
+boost::optional<dogen::formatters::file_properties>
+create_boost_optional_dogen_formatters_file_properties(unsigned int position) {
+    boost::optional<dogen::formatters::file_properties> r(
+        create_dogen_formatters_file_properties(position));
     return r;
 }
 
@@ -50,7 +50,7 @@ settings_bundle_generator::settings_bundle_generator() : position_(0) { }
 
 void settings_bundle_generator::
 populate(const unsigned int position, result_type& v) {
-    v.general_settings(create_boost_optional_dogen_formatters_general_settings(position + 0));
+    v.file_properties(create_boost_optional_dogen_formatters_file_properties(position + 0));
     v.stitching_settings(create_dogen_stitch_stitching_settings(position + 1));
 }
 

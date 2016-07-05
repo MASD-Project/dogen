@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/general_settings_factory.hpp"
+#include "dogen/formatters/types/file_properties_factory.hpp"
 #include "dogen/stitch/types/stitching_settings_factory.hpp"
 #include "dogen/stitch/types/settings_bundle_factory.hpp"
 
@@ -37,10 +37,10 @@ settings_bundle_factory(const dynamic::repository& dynamic_repository,
     : dynamic_repository_(dynamic_repository),
       formatters_repository_(formatters_repository) {}
 
-boost::optional<formatters::general_settings> settings_bundle_factory::
-make_general_settings(const dynamic::object& o) const {
-    using dogen::formatters::general_settings_factory;
-    general_settings_factory f(formatters_repository_);
+boost::optional<formatters::file_properties> settings_bundle_factory::
+make_file_properties(const dynamic::object& o) const {
+    using dogen::formatters::file_properties_factory;
+    file_properties_factory f(formatters_repository_);
     return f.make(cpp_modeline_name, o);
 }
 
@@ -53,7 +53,7 @@ make_stitching_settings(const dynamic::object& o) const {
 settings_bundle
 settings_bundle_factory::make(const dynamic::object& o) const {
     settings_bundle r;
-    r.general_settings(make_general_settings(o));
+    r.file_properties(make_file_properties(o));
     r.stitching_settings(make_stitching_settings(o));
     return r;
 }

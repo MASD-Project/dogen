@@ -30,7 +30,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/utility/serialization/path.hpp"
-#include "dogen/formatters/serialization/general_settings_ser.hpp"
+#include "dogen/formatters/serialization/file_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/formattable_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/cmakelists_info_ser.hpp"
 
@@ -53,7 +53,7 @@ void save(Archive& ar,
     ar << make_nvp("file_name", v.file_name_);
     ar << make_nvp("source_file_path", v.source_file_path_.generic_string());
     ar << make_nvp("include_file_path", v.include_file_path_.generic_string());
-    ar << make_nvp("general_settings", v.general_settings_);
+    ar << make_nvp("file_properties", v.file_properties_);
     ar << make_nvp("odb_folder", v.odb_folder_);
     ar << make_nvp("odb_enabled", v.odb_enabled_);
 }
@@ -76,7 +76,7 @@ void load(Archive& ar,
     std::string include_file_path_tmp;
     ar >> make_nvp("include_file_path", include_file_path_tmp);
     v.include_file_path_ = include_file_path_tmp;
-    ar >> make_nvp("general_settings", v.general_settings_);
+    ar >> make_nvp("file_properties", v.file_properties_);
     ar >> make_nvp("odb_folder", v.odb_folder_);
     ar >> make_nvp("odb_enabled", v.odb_enabled_);
 }

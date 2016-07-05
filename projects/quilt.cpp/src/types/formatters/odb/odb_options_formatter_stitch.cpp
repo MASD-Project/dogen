@@ -32,7 +32,7 @@ dogen::formatters::file odb_options_formatter_stitch(
     assistant& a, const properties::odb_options_info& i) {
 
     {
-        a.make_annotation_preamble(i.general_settings());
+        a.make_annotation_preamble(i.file_properties());
 a.stream() << "# enable C++11. FIXME: causes ODB crash in options file." << std::endl;
 a.stream() << "# --std c++11" << std::endl;
 a.stream() << std::endl;

@@ -41,14 +41,14 @@ namespace settings {
 
 bundle_factory::bundle_factory(const dynamic::repository& rp,
     const dynamic::object& root_object,
-    const dogen::formatters::general_settings_factory& gsf,
+    const dogen::formatters::file_properties_factory& fpf,
     const opaque_settings_builder& osb) :
     dynamic_repository_(rp), root_object_(root_object),
-    general_settings_factory_(gsf), opaque_settings_builder_(osb) { }
+    file_properties_factory_(fpf), opaque_settings_builder_(osb) { }
 
-dogen::formatters::general_settings bundle_factory::
-create_general_settings(const dynamic::object& o) const {
-    return general_settings_factory_.make(cpp_modeline_name, o);
+dogen::formatters::file_properties bundle_factory::
+create_file_properties(const dynamic::object& o) const {
+    return file_properties_factory_.make(cpp_modeline_name, o);
 }
 
 element_settings bundle_factory::
@@ -66,7 +66,7 @@ std::unordered_map<
 
 bundle bundle_factory::make(const dynamic::object& o) const {
     bundle r;
-    r.general_settings(create_general_settings(o));
+    r.file_properties(create_file_properties(o));
     r.opaque_settings(create_opaque_settings(o));
     r.element_settings(create_element_settings(o));
     return r;
@@ -74,7 +74,7 @@ bundle bundle_factory::make(const dynamic::object& o) const {
 
 bundle bundle_factory::make() const {
     bundle r;
-    r.general_settings(create_general_settings(root_object_));
+    r.file_properties(create_file_properties(root_object_));
 
     element_settings_factory f(dynamic_repository_, root_object_);
     r.element_settings(f.make());

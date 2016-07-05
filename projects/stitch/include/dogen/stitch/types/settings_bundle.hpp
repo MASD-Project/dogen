@@ -28,7 +28,7 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include "dogen/stitch/types/stitching_settings.hpp"
-#include "dogen/formatters/types/general_settings.hpp"
+#include "dogen/formatters/types/file_properties.hpp"
 #include "dogen/stitch/serialization/settings_bundle_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,7 +45,7 @@ public:
 
 public:
     settings_bundle(
-        const boost::optional<dogen::formatters::general_settings>& general_settings,
+        const boost::optional<dogen::formatters::file_properties>& file_properties,
         const dogen::stitch::stitching_settings& stitching_settings);
 
 private:
@@ -56,10 +56,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::stitch::settings_bundle& v, unsigned int version);
 
 public:
-    const boost::optional<dogen::formatters::general_settings>& general_settings() const;
-    boost::optional<dogen::formatters::general_settings>& general_settings();
-    void general_settings(const boost::optional<dogen::formatters::general_settings>& v);
-    void general_settings(const boost::optional<dogen::formatters::general_settings>&& v);
+    const boost::optional<dogen::formatters::file_properties>& file_properties() const;
+    boost::optional<dogen::formatters::file_properties>& file_properties();
+    void file_properties(const boost::optional<dogen::formatters::file_properties>& v);
+    void file_properties(const boost::optional<dogen::formatters::file_properties>&& v);
 
     const dogen::stitch::stitching_settings& stitching_settings() const;
     dogen::stitch::stitching_settings& stitching_settings();
@@ -77,7 +77,7 @@ public:
     settings_bundle& operator=(settings_bundle other);
 
 private:
-    boost::optional<dogen::formatters::general_settings> general_settings_;
+    boost::optional<dogen::formatters::file_properties> file_properties_;
     dogen::stitch::stitching_settings stitching_settings_;
 };
 

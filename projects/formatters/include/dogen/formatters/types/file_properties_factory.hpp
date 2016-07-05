@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_GENERAL_SETTINGS_FACTORY_HPP
-#define DOGEN_FORMATTERS_TYPES_GENERAL_SETTINGS_FACTORY_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_FILE_PROPERTIES_FACTORY_HPP
+#define DOGEN_FORMATTERS_TYPES_FILE_PROPERTIES_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include "dogen/dynamic/types/object.hpp"
-#include "dogen/formatters/types/general_settings.hpp"
+#include "dogen/formatters/types/file_properties.hpp"
 #include "dogen/formatters/types/modeline_group.hpp"
 #include "dogen/formatters/types/licence.hpp"
 #include "dogen/formatters/types/repository.hpp"
@@ -39,31 +39,31 @@ namespace dogen {
 namespace formatters {
 
 /**
- * @brief Creates the general settings by extracting information from
- * meta-data.
+ * @brief Creates the file properties by extracting information from
+ * meta-data and then post-processing it.
  */
-class general_settings_factory {
+class file_properties_factory {
 public:
-    general_settings_factory() = delete;
-    general_settings_factory(const general_settings_factory&) = default;
-    general_settings_factory(general_settings_factory&&) = default;
-    ~general_settings_factory() = default;
+    file_properties_factory() = delete;
+    file_properties_factory(const file_properties_factory&) = default;
+    file_properties_factory(file_properties_factory&&) = default;
+    ~file_properties_factory() = default;
 
 public:
     /**
-     * @brief Initialise a new general settings factory.
+     * @brief Initialise a new file properties factory.
      *
      * @param rp where to look up reference data.
      */
-    explicit general_settings_factory(const repository& rp);
+    explicit file_properties_factory(const repository& rp);
 
     /**
-     * @brief Initialise a new general settings factory.
+     * @brief Initialise a new file properties factory.
      *
      * @param rp where to look up reference data.
      * @param fallback object to use to construct defaults, if any.
      */
-    general_settings_factory(const repository& rp,
+    file_properties_factory(const repository& rp,
         const dynamic::object& fallback);
 
 private:
@@ -134,9 +134,9 @@ private:
 
 public:
     /**
-     * @brief Generates general settings from the dynamic object.
+     * @brief Generates file properties from the dynamic object.
      */
-    general_settings make(const std::string& modeline_name,
+    file_properties make(const std::string& modeline_name,
         const dynamic::object& o) const;
 
 private:

@@ -71,10 +71,10 @@ dogen::formatters::repository workflow::create_formatters_repository(
     return hw.hydrate(dirs);
 }
 
-dogen::formatters::general_settings_factory workflow::
-create_general_settings_factory(const dogen::formatters::repository& frp,
+dogen::formatters::file_properties_factory workflow::
+create_file_properties_factory(const dogen::formatters::repository& frp,
     const dynamic::object& root_object) const {
-    dogen::formatters::general_settings_factory r(frp, root_object);
+    dogen::formatters::file_properties_factory r(frp, root_object);
     return r;
 }
 
@@ -88,11 +88,11 @@ create_opaque_settings_builder(const dynamic::repository& rp) const {
 
 settings::bundle_repository workflow::create_bundle_repository(
     const dynamic::repository& rp, const dynamic::object& root_object,
-    const dogen::formatters::general_settings_factory& gsf,
+    const dogen::formatters::file_properties_factory& fpf,
     const settings::opaque_settings_builder& osb,
     const yarn::model& m) const {
     settings::bundle_repository_factory f;
-    return f.make(rp, root_object, gsf, osb, m);
+    return f.make(rp, root_object, fpf, osb, m);
 }
 
 std::pair<
@@ -103,13 +103,13 @@ workflow::create_properties_activty(
     const config::cpp_options& opts,
     const dynamic::repository& srp,
     const dynamic::object& root_object,
-    const dogen::formatters::general_settings_factory& gsf,
+    const dogen::formatters::file_properties_factory& fpf,
     const formatters::container& fc,
     settings::bundle_repository& brp,
     const yarn::model& m) const {
 
     properties::workflow fw;
-    return fw.execute(opts, srp, root_object, gsf, fc, brp, m);
+    return fw.execute(opts, srp, root_object, fpf, fc, brp, m);
 }
 
 std::forward_list<boost::shared_ptr<yarn::element> >
@@ -171,16 +171,16 @@ workflow::generate(const config::knitting_options& ko,
     const auto frp(create_formatters_repository(dirs));
 
     const auto ro(obtain_root_object(m));
-    const auto gsf(create_general_settings_factory(frp, ro));
+    const auto fpf(create_file_properties_factory(frp, ro));
 
     const auto osb(create_opaque_settings_builder(rp));
-    auto brp(create_bundle_repository(rp, ro, gsf, osb, m));
+    auto brp(create_bundle_repository(rp, ro, fpf, osb, m));
 
     formatters::workflow::registrar().validate();
     const auto& fc(formatters::workflow::registrar().formatter_container());
 
     const auto& kcpp(ko.cpp());
-    const auto pair(create_properties_activty(kcpp, rp, ro, gsf, fc, brp, m));
+    const auto pair(create_properties_activty(kcpp, rp, ro, fpf, fc, brp, m));
     auto r(format_activty(brp, pair.first, pair.second));
 
     const auto elements(obtain_enriched_yarn_model_activity(m));

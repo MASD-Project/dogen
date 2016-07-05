@@ -36,31 +36,31 @@ namespace cpp {
 namespace settings {
 
 bundle::bundle(bundle&& rhs)
-    : general_settings_(std::move(rhs.general_settings_)),
+    : file_properties_(std::move(rhs.file_properties_)),
       element_settings_(std::move(rhs.element_settings_)),
       opaque_settings_(std::move(rhs.opaque_settings_)),
       opaque_settings_for_property_(std::move(rhs.opaque_settings_for_property_)) { }
 
 bundle::bundle(
-    const boost::optional<dogen::formatters::general_settings>& general_settings,
+    const boost::optional<dogen::formatters::file_properties>& file_properties,
     const dogen::quilt::cpp::settings::element_settings& element_settings,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& opaque_settings,
     const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > >& opaque_settings_for_property)
-    : general_settings_(general_settings),
+    : file_properties_(file_properties),
       element_settings_(element_settings),
       opaque_settings_(opaque_settings),
       opaque_settings_for_property_(opaque_settings_for_property) { }
 
 void bundle::swap(bundle& other) noexcept {
     using std::swap;
-    swap(general_settings_, other.general_settings_);
+    swap(file_properties_, other.file_properties_);
     swap(element_settings_, other.element_settings_);
     swap(opaque_settings_, other.opaque_settings_);
     swap(opaque_settings_for_property_, other.opaque_settings_for_property_);
 }
 
 bool bundle::operator==(const bundle& rhs) const {
-    return general_settings_ == rhs.general_settings_ &&
+    return file_properties_ == rhs.file_properties_ &&
         element_settings_ == rhs.element_settings_ &&
         opaque_settings_ == rhs.opaque_settings_ &&
         opaque_settings_for_property_ == rhs.opaque_settings_for_property_;
@@ -72,20 +72,20 @@ bundle& bundle::operator=(bundle other) {
     return *this;
 }
 
-const boost::optional<dogen::formatters::general_settings>& bundle::general_settings() const {
-    return general_settings_;
+const boost::optional<dogen::formatters::file_properties>& bundle::file_properties() const {
+    return file_properties_;
 }
 
-boost::optional<dogen::formatters::general_settings>& bundle::general_settings() {
-    return general_settings_;
+boost::optional<dogen::formatters::file_properties>& bundle::file_properties() {
+    return file_properties_;
 }
 
-void bundle::general_settings(const boost::optional<dogen::formatters::general_settings>& v) {
-    general_settings_ = v;
+void bundle::file_properties(const boost::optional<dogen::formatters::file_properties>& v) {
+    file_properties_ = v;
 }
 
-void bundle::general_settings(const boost::optional<dogen::formatters::general_settings>&& v) {
-    general_settings_ = std::move(v);
+void bundle::file_properties(const boost::optional<dogen::formatters::file_properties>&& v) {
+    file_properties_ = std::move(v);
 }
 
 const dogen::quilt::cpp::settings::element_settings& bundle::element_settings() const {

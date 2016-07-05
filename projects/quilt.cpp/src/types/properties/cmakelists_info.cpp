@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/formatters/io/general_settings_io.hpp"
+#include "dogen/formatters/io/file_properties_io.hpp"
 #include "dogen/quilt.cpp/io/properties/formattable_io.hpp"
 #include "dogen/quilt.cpp/types/properties/cmakelists_info.hpp"
 
@@ -34,7 +34,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::general_settings>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::file_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -64,7 +64,7 @@ cmakelists_info::cmakelists_info(cmakelists_info&& rhs)
       file_name_(std::move(rhs.file_name_)),
       source_file_path_(std::move(rhs.source_file_path_)),
       include_file_path_(std::move(rhs.include_file_path_)),
-      general_settings_(std::move(rhs.general_settings_)),
+      file_properties_(std::move(rhs.file_properties_)),
       odb_folder_(std::move(rhs.odb_folder_)),
       odb_enabled_(std::move(rhs.odb_enabled_)) { }
 
@@ -78,7 +78,7 @@ cmakelists_info::cmakelists_info(
     const std::string& file_name,
     const boost::filesystem::path& source_file_path,
     const boost::filesystem::path& include_file_path,
-    const boost::optional<dogen::formatters::general_settings>& general_settings,
+    const boost::optional<dogen::formatters::file_properties>& file_properties,
     const std::string& odb_folder,
     const bool odb_enabled)
     : dogen::quilt::cpp::properties::formattable(
@@ -91,7 +91,7 @@ cmakelists_info::cmakelists_info(
       file_name_(file_name),
       source_file_path_(source_file_path),
       include_file_path_(include_file_path),
-      general_settings_(general_settings),
+      file_properties_(file_properties),
       odb_folder_(odb_folder),
       odb_enabled_(odb_enabled) { }
 
@@ -113,7 +113,7 @@ void cmakelists_info::to_stream(std::ostream& s) const {
       << "\"file_name\": " << "\"" << tidy_up_string(file_name_) << "\"" << ", "
       << "\"source_file_path\": " << "\"" << source_file_path_.generic_string() << "\"" << ", "
       << "\"include_file_path\": " << "\"" << include_file_path_.generic_string() << "\"" << ", "
-      << "\"general_settings\": " << general_settings_ << ", "
+      << "\"file_properties\": " << file_properties_ << ", "
       << "\"odb_folder\": " << "\"" << tidy_up_string(odb_folder_) << "\"" << ", "
       << "\"odb_enabled\": " << odb_enabled_
       << " }";
@@ -129,7 +129,7 @@ void cmakelists_info::swap(cmakelists_info& other) noexcept {
     swap(file_name_, other.file_name_);
     swap(source_file_path_, other.source_file_path_);
     swap(include_file_path_, other.include_file_path_);
-    swap(general_settings_, other.general_settings_);
+    swap(file_properties_, other.file_properties_);
     swap(odb_folder_, other.odb_folder_);
     swap(odb_enabled_, other.odb_enabled_);
 }
@@ -148,7 +148,7 @@ bool cmakelists_info::operator==(const cmakelists_info& rhs) const {
         file_name_ == rhs.file_name_ &&
         source_file_path_ == rhs.source_file_path_ &&
         include_file_path_ == rhs.include_file_path_ &&
-        general_settings_ == rhs.general_settings_ &&
+        file_properties_ == rhs.file_properties_ &&
         odb_folder_ == rhs.odb_folder_ &&
         odb_enabled_ == rhs.odb_enabled_;
 }
@@ -255,20 +255,20 @@ void cmakelists_info::include_file_path(const boost::filesystem::path&& v) {
     include_file_path_ = std::move(v);
 }
 
-const boost::optional<dogen::formatters::general_settings>& cmakelists_info::general_settings() const {
-    return general_settings_;
+const boost::optional<dogen::formatters::file_properties>& cmakelists_info::file_properties() const {
+    return file_properties_;
 }
 
-boost::optional<dogen::formatters::general_settings>& cmakelists_info::general_settings() {
-    return general_settings_;
+boost::optional<dogen::formatters::file_properties>& cmakelists_info::file_properties() {
+    return file_properties_;
 }
 
-void cmakelists_info::general_settings(const boost::optional<dogen::formatters::general_settings>& v) {
-    general_settings_ = v;
+void cmakelists_info::file_properties(const boost::optional<dogen::formatters::file_properties>& v) {
+    file_properties_ = v;
 }
 
-void cmakelists_info::general_settings(const boost::optional<dogen::formatters::general_settings>&& v) {
-    general_settings_ = std::move(v);
+void cmakelists_info::file_properties(const boost::optional<dogen::formatters::file_properties>&& v) {
+    file_properties_ = std::move(v);
 }
 
 const std::string& cmakelists_info::odb_folder() const {

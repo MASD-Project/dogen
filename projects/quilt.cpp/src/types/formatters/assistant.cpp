@@ -232,7 +232,7 @@ dogen::formatters::cpp::scoped_boilerplate_formatter
 assistant::make_scoped_boilerplate_formatter() {
     ensure_formatter_properties_are_present();
     const auto& fp(*formatter_properties_);
-    const auto gs(context_.bundle().general_settings());
+    const auto gs(context_.bundle().file_properties());
     return dogen::formatters::cpp::scoped_boilerplate_formatter(
         stream(), gs, fp.inclusion_dependencies(),
         fp.header_guard() ? *fp.header_guard() : empty);
@@ -251,13 +251,13 @@ make_nested_type_formatting_assistant() {
 }
 
 void assistant::make_annotation_preamble(
-    const boost::optional<dogen::formatters::general_settings> gs) {
-    if (!gs)
+    const boost::optional<dogen::formatters::file_properties> fp) {
+    if (!fp)
         return;
 
     dogen::formatters::annotation_formatter af;
     af.format_preamble(stream(), dogen::formatters::comment_styles::shell_style,
-        (*gs).annotation());
+        (*fp).annotation());
 }
 
 dogen::formatters::file assistant::

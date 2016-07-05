@@ -180,12 +180,6 @@ add_custom_target(knit_${target}
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*/test/.*
-    --ignore-files-matching-regex .*/file_formatter_interface_io.hpp
-    --ignore-files-matching-regex .*/repository_io.hpp
-    --ignore-files-matching-regex .*/transformer_interface_io.hpp
-    --ignore-files-matching-regex .*/file_formatter_interface_io.cpp
-    --ignore-files-matching-regex .*/repository_io.cpp
-    --ignore-files-matching-regex .*/transformer_interface_io.cpp
     --verbose
     --delete-extra-files)
 

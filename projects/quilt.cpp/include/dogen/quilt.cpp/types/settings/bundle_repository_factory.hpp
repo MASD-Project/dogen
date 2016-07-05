@@ -30,7 +30,7 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
-#include "dogen/formatters/types/general_settings_factory.hpp"
+#include "dogen/formatters/types/file_properties_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
 
 namespace dogen {
@@ -48,7 +48,7 @@ public:
      */
     bundle_repository make(const dynamic::repository& rp,
         const dynamic::object& root_object,
-        const dogen::formatters::general_settings_factory& gsf,
+        const dogen::formatters::file_properties_factory& fpf,
         const opaque_settings_builder& osb,
         const yarn::model& m) const;
 };

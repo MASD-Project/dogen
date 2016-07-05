@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/formatters/test_data/general_settings_td.hpp"
+#include "dogen/formatters/test_data/file_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/formattable_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/cmakelists_info_td.hpp"
 
@@ -38,15 +38,15 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::formatters::general_settings
-create_dogen_formatters_general_settings(const unsigned int position) {
-    return dogen::formatters::general_settings_generator::create(position);
+dogen::formatters::file_properties
+create_dogen_formatters_file_properties(const unsigned int position) {
+    return dogen::formatters::file_properties_generator::create(position);
 }
 
-boost::optional<dogen::formatters::general_settings>
-create_boost_optional_dogen_formatters_general_settings(unsigned int position) {
-    boost::optional<dogen::formatters::general_settings> r(
-        create_dogen_formatters_general_settings(position));
+boost::optional<dogen::formatters::file_properties>
+create_boost_optional_dogen_formatters_file_properties(unsigned int position) {
+    boost::optional<dogen::formatters::file_properties> r(
+        create_dogen_formatters_file_properties(position));
     return r;
 }
 
@@ -72,7 +72,7 @@ populate(const unsigned int position, result_type& v) {
     v.file_name(create_std_string(position + 3));
     v.source_file_path(create_boost_filesystem_path(position + 4));
     v.include_file_path(create_boost_filesystem_path(position + 5));
-    v.general_settings(create_boost_optional_dogen_formatters_general_settings(position + 6));
+    v.file_properties(create_boost_optional_dogen_formatters_file_properties(position + 6));
     v.odb_folder(create_std_string(position + 7));
     v.odb_enabled(create_bool(position + 8));
 }

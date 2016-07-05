@@ -38,7 +38,7 @@
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/properties/formattable.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
-#include "dogen/formatters/types/general_settings_factory.hpp"
+#include "dogen/formatters/types/file_properties_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
 
 #include "dogen/yarn/types/model.hpp"
@@ -75,7 +75,7 @@ private:
     /**
      * @brief Create the general settings factory.
      */
-    dogen::formatters::general_settings_factory create_general_settings_factory(
+    dogen::formatters::file_properties_factory create_file_properties_factory(
         const dogen::formatters::repository& frp,
         const dynamic::object& root_object) const;
 
@@ -90,7 +90,7 @@ private:
      */
     settings::bundle_repository create_bundle_repository(
         const dynamic::repository& rp, const dynamic::object& root_object,
-        const dogen::formatters::general_settings_factory& gsf,
+        const dogen::formatters::file_properties_factory& fpf,
         const settings::opaque_settings_builder& osb,
         const yarn::model& m) const;
 
@@ -104,7 +104,7 @@ private:
     create_properties_activty(const config::cpp_options& opts,
         const dynamic::repository& srp,
         const dynamic::object& root_object,
-        const dogen::formatters::general_settings_factory& gsf,
+        const dogen::formatters::file_properties_factory& fpf,
         const formatters::container& fc,
         settings::bundle_repository& brp,
         const yarn::model& m) const;

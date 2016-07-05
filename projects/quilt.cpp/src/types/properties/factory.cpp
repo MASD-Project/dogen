@@ -297,7 +297,7 @@ std::forward_list<std::shared_ptr<formattable> > factory::
 make_includers(
     const config::cpp_options& opts,
     const dynamic::object& root_object,
-    const dogen::formatters::general_settings_factory& gsf,
+    const dogen::formatters::file_properties_factory& fpf,
     settings::bundle_repository& brp,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const path_derivatives_repository& pdrp,
@@ -399,8 +399,8 @@ make_includers(
     std::forward_list<std::shared_ptr<formattable> > r;
     auto inc(std::make_shared<includers_info>());
     inc->id(n.id());
-    const auto gs(gsf.make(cpp_modeline_name, root_object));
-    brp.by_id()[inc->id()].general_settings(gs);
+    const auto fp(fpf.make(cpp_modeline_name, root_object));
+    brp.by_id()[inc->id()].file_properties(fp);
 
     for(const auto& pair : includes_by_facet_name) {
         const auto& facet_name(pair.first);
@@ -430,7 +430,7 @@ make_includers(
 std::forward_list<std::shared_ptr<formattable> > factory::
 make_cmakelists(const config::cpp_options& opts,
     const dynamic::object& root_object,
-    const dogen::formatters::general_settings_factory& gsf,
+    const dogen::formatters::file_properties_factory& fpf,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
     const yarn::model& m) const
@@ -449,8 +449,8 @@ make_cmakelists(const config::cpp_options& opts,
     cm->model_name(mn);
     cm->file_name(cmakelists_name);
 
-    const auto gs(gsf.make(cmake_modeline_name, root_object));
-    cm->general_settings(gs);
+    const auto fp(fpf.make(cmake_modeline_name, root_object));
+    cm->file_properties(fp);
 
     if (!m.name().location().external_modules().empty())
         cm->product_name(m.name().location().external_modules().front());
@@ -492,7 +492,7 @@ make_cmakelists(const config::cpp_options& opts,
 std::shared_ptr<formattable>
 factory::make_odb_options(const config::cpp_options& opts,
     const dynamic::object& root_object,
-    const dogen::formatters::general_settings_factory& gsf,
+    const dogen::formatters::file_properties_factory& fpf,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
     const yarn::model& m) const {
@@ -513,8 +513,8 @@ factory::make_odb_options(const config::cpp_options& opts,
     const auto mn(join(m.name().location().model_modules(), underscore));
     r->model_name(mn);
 
-    const auto gs(gsf.make(odb_modeline_name, root_object));
-    r->general_settings(gs);
+    const auto fp(fpf.make(odb_modeline_name, root_object));
+    r->file_properties(fp);
 
     const auto i(ps.find(ch_fn));
     if (i == ps.end()) {
@@ -525,14 +525,13 @@ factory::make_odb_options(const config::cpp_options& opts,
     }
     r->odb_folder(i->second.facet_directory());
 
-    boost::filesystem::path fp;
-    fp = opts.project_directory_path();
-    for (const auto& p : m.name().location().model_modules())
-        fp /= p;
+    boost::filesystem::path file_path(opts.project_directory_path());
+    for (const auto& module : m.name().location().model_modules())
+        file_path /= module;
 
-    fp /= i->second.source_directory_name();
-    fp /= odb_options_name;
-    r->file_path(fp);
+    file_path /= i->second.source_directory_name();
+    file_path /= odb_options_name;
+    r->file_path(file_path);
 
     const auto epp(m.name().location().external_modules());
     if (!epp.empty())

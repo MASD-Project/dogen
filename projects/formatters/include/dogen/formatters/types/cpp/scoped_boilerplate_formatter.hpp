@@ -29,7 +29,7 @@
 #include <iosfwd>
 #include <string>
 #include <boost/optional.hpp>
-#include "dogen/formatters/types/general_settings.hpp"
+#include "dogen/formatters/types/file_properties.hpp"
 #include "dogen/formatters/types/cpp/boilerplate_formatter.hpp"
 
 namespace dogen {
@@ -43,7 +43,7 @@ class scoped_boilerplate_formatter {
 public:
     scoped_boilerplate_formatter(
         std::ostream& s,
-        const boost::optional<general_settings>& gs,
+        const boost::optional<file_properties>& fp,
         const std::list<std::string>& inclusion_dependencies,
         const std::string& header_guard);
 
@@ -51,7 +51,7 @@ public:
 
 private:
     std::ostream& stream_;
-    const boost::optional<general_settings> general_settings_;
+    const boost::optional<file_properties> file_properties_;
     const std::list<std::string> inclusion_dependencies_;
     const std::string header_guard_;
     const dogen::formatters::cpp::boilerplate_formatter formatter_;

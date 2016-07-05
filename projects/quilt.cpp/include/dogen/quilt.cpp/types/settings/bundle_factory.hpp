@@ -33,8 +33,8 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/formatters/types/general_settings.hpp"
-#include "dogen/formatters/types/general_settings_factory.hpp"
+#include "dogen/formatters/types/file_properties.hpp"
+#include "dogen/formatters/types/file_properties_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/bundle.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings.hpp"
@@ -53,15 +53,15 @@ class bundle_factory final {
 public:
     bundle_factory(const dynamic::repository& rp,
         const dynamic::object& root_object,
-        const dogen::formatters::general_settings_factory& gsf,
+        const dogen::formatters::file_properties_factory& gsf,
         const opaque_settings_builder& osb);
 
 private:
     /**
      * @brief Create the general settings.
      */
-    dogen::formatters::general_settings
-    create_general_settings(const dynamic::object& o) const;
+    dogen::formatters::file_properties
+    create_file_properties(const dynamic::object& o) const;
 
     /**
      * @brief Create the element settings.
@@ -88,8 +88,8 @@ public:
 private:
     const dynamic::repository& dynamic_repository_;
     const dynamic::object& root_object_;
-    const dogen::formatters::general_settings_factory&
-    general_settings_factory_;
+    const dogen::formatters::file_properties_factory&
+    file_properties_factory_;
     const opaque_settings_builder& opaque_settings_builder_;
 };
 

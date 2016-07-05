@@ -26,12 +26,12 @@
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/types/code_generation_marker_factory.hpp"
 #include "dogen/formatters/types/building_error.hpp"
-#include "dogen/formatters/types/general_settings_factory.hpp"
+#include "dogen/formatters/types/file_properties_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("formatters.general_settings_factory"));
+auto lg(logger_factory("formatters.file_properties_factory"));
 
 const std::string missing_context_ptr("Context pointer is null");
 const std::string licence_not_found("Licence not found: ");
@@ -43,10 +43,10 @@ const std::string modeline_not_found("Modeline not found: ");
 namespace dogen {
 namespace formatters {
 
-general_settings_factory::general_settings_factory(const repository& rp)
+file_properties_factory::file_properties_factory(const repository& rp)
     : repository_(rp) { }
 
-general_settings_factory::general_settings_factory(const repository& rp,
+file_properties_factory::file_properties_factory(const repository& rp,
     const dynamic::object& fallback)
     : repository_(rp),
       default_licence_text_(extract_licence_text(fallback)),
@@ -55,7 +55,7 @@ general_settings_factory::general_settings_factory(const repository& rp,
       default_marker_(extract_marker(fallback)),
       default_generate_preamble_(extract_generate_preamble(fallback)) { }
 
-boost::optional<std::string> general_settings_factory::
+boost::optional<std::string> file_properties_factory::
 extract_licence_text(const dynamic::object& o) const {
     using namespace dynamic;
     const field_selector fs(o);
@@ -71,7 +71,7 @@ extract_licence_text(const dynamic::object& o) const {
     return i->second;
 }
 
-boost::optional<std::list<std::string> > general_settings_factory::
+boost::optional<std::list<std::string> > file_properties_factory::
 extract_copyright_notices(const dynamic::object& o) const {
     using namespace dynamic;
     const field_selector fs(o);
@@ -82,7 +82,7 @@ extract_copyright_notices(const dynamic::object& o) const {
     return fs.get_text_collection_content(traits::copyright_notices());
 }
 
-boost::optional<licence> general_settings_factory::
+boost::optional<licence> file_properties_factory::
 extract_licence(const dynamic::object& o) const {
     const auto overriden_licence_text(extract_licence_text(o));
     const auto overriden_copyright_notices(extract_copyright_notices(o));
@@ -106,7 +106,7 @@ extract_licence(const dynamic::object& o) const {
     return r;
 }
 
-boost::optional<modeline_group> general_settings_factory::
+boost::optional<modeline_group> file_properties_factory::
 extract_modeline_group(const dynamic::object& o) const {
     using namespace dynamic;
     const field_selector fs(o);
@@ -122,7 +122,7 @@ extract_modeline_group(const dynamic::object& o) const {
     return i->second;
 }
 
-modeline general_settings_factory::get_modeline_from_group(
+modeline file_properties_factory::get_modeline_from_group(
     const std::string& modeline_name, const modeline_group& mg) const {
     const auto i(mg.modelines().find(modeline_name));
     if (i == mg.modelines().end()) {
@@ -133,7 +133,7 @@ modeline general_settings_factory::get_modeline_from_group(
     return i->second;
 }
 
-boost::optional<modeline> general_settings_factory::
+boost::optional<modeline> file_properties_factory::
 extract_modeline(const std::string& modeline_name,
     const dynamic::object& o) const {
 
@@ -149,7 +149,7 @@ extract_modeline(const std::string& modeline_name,
     return get_modeline_from_group(modeline_name, *default_modeline_group_);
 }
 
-boost::optional<std::string> general_settings_factory::
+boost::optional<std::string> file_properties_factory::
 extract_marker(const dynamic::object& o) const {
     using namespace dynamic;
     using cgm = traits::code_generation_marker;
@@ -169,7 +169,7 @@ extract_marker(const dynamic::object& o) const {
     return f.make();
 }
 
-std::string general_settings_factory::
+std::string file_properties_factory::
 extract_marker_or_default(const dynamic::object& o) const {
     const auto overridden_marker(extract_marker(o));
     if (overridden_marker)
@@ -180,7 +180,7 @@ extract_marker_or_default(const dynamic::object& o) const {
     return std::string();
 }
 
-boost::optional<bool> general_settings_factory::
+boost::optional<bool> file_properties_factory::
 extract_generate_preamble(const dynamic::object& o) const {
     using namespace dynamic;
     const field_selector fs(o);
@@ -190,7 +190,7 @@ extract_generate_preamble(const dynamic::object& o) const {
     return fs.get_boolean_content(traits::generate_preamble());
 }
 
-bool general_settings_factory::
+bool file_properties_factory::
 extract_generate_preamble_or_default(const dynamic::object& o) const {
     const auto overriden_generate_preamble(extract_generate_preamble(o));
     if (!overriden_generate_preamble && !default_generate_preamble_)
@@ -202,15 +202,15 @@ extract_generate_preamble_or_default(const dynamic::object& o) const {
         return *default_generate_preamble_;
 }
 
-general_settings
-general_settings_factory::make(const std::string& modeline_name,
+file_properties
+file_properties_factory::make(const std::string& modeline_name,
     const dynamic::object& o) const {
     const auto modeline(extract_modeline(modeline_name, o));
     const auto licence(extract_licence(o));
     const auto marker(extract_marker_or_default(o));
     const annotation a(modeline, licence, marker);
     const bool gp(extract_generate_preamble_or_default(o));
-    return general_settings(gp, a);
+    return file_properties(gp, a);
 }
 
 } }

@@ -31,7 +31,7 @@ dogen::formatters::file source_cmakelists_formatter_stitch(
     assistant& a, const properties::cmakelists_info& s) {
 
     {
-        a.make_annotation_preamble(s.general_settings());
+        a.make_annotation_preamble(s.file_properties());
         const std::string mn(s.model_name());
 a.stream() << "set(files \"\")" << std::endl;
 a.stream() << "file(GLOB_RECURSE files RELATIVE" << std::endl;

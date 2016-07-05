@@ -187,7 +187,7 @@ public:
      * @brief Creates the preamble.
      */
     void make_annotation_preamble(
-        const boost::optional<dogen::formatters::general_settings> gs);
+        const boost::optional<dogen::formatters::file_properties> gs);
 
     /**
      * @brief Generates a file with the current contents of the

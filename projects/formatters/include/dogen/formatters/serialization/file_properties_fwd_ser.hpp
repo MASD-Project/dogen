@@ -18,17 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_GENERAL_SETTINGS_FWD_HPP
-#define DOGEN_FORMATTERS_TYPES_GENERAL_SETTINGS_FWD_HPP
+#ifndef DOGEN_FORMATTERS_SERIALIZATION_FILE_PROPERTIES_FWD_SER_HPP
+#define DOGEN_FORMATTERS_SERIALIZATION_FILE_PROPERTIES_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace formatters {
+#include "dogen/formatters/types/file_properties_fwd.hpp"
 
-class general_settings;
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::formatters::file_properties& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::formatters::file_properties& v, unsigned int version);
 
 } }
 

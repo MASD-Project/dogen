@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/formatters/test_data/annotation_td.hpp"
-#include "dogen/formatters/test_data/general_settings_td.hpp"
+#include "dogen/formatters/test_data/file_properties_td.hpp"
 
 namespace {
 
@@ -37,30 +37,30 @@ create_dogen_formatters_annotation(const unsigned int position) {
 namespace dogen {
 namespace formatters {
 
-general_settings_generator::general_settings_generator() : position_(0) { }
+file_properties_generator::file_properties_generator() : position_(0) { }
 
-void general_settings_generator::
+void file_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.generate_preamble(create_bool(position + 0));
     v.annotation(create_dogen_formatters_annotation(position + 1));
 }
 
-general_settings_generator::result_type
-general_settings_generator::create(const unsigned int position) {
-    general_settings r;
-    general_settings_generator::populate(position, r);
+file_properties_generator::result_type
+file_properties_generator::create(const unsigned int position) {
+    file_properties r;
+    file_properties_generator::populate(position, r);
     return r;
 }
 
-general_settings_generator::result_type*
-general_settings_generator::create_ptr(const unsigned int position) {
-    general_settings* p = new general_settings();
-    general_settings_generator::populate(position, *p);
+file_properties_generator::result_type*
+file_properties_generator::create_ptr(const unsigned int position) {
+    file_properties* p = new file_properties();
+    file_properties_generator::populate(position, *p);
     return p;
 }
 
-general_settings_generator::result_type
-general_settings_generator::operator()() {
+file_properties_generator::result_type
+file_properties_generator::operator()() {
     return create(position_++);
 }
 

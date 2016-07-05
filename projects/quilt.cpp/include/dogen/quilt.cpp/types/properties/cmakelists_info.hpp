@@ -30,7 +30,7 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/formatters/types/general_settings.hpp"
+#include "dogen/formatters/types/file_properties.hpp"
 #include "dogen/quilt.cpp/types/properties/formattable.hpp"
 #include "dogen/quilt.cpp/serialization/properties/cmakelists_info_fwd_ser.hpp"
 
@@ -65,7 +65,7 @@ public:
         const std::string& file_name,
         const boost::filesystem::path& source_file_path,
         const boost::filesystem::path& include_file_path,
-        const boost::optional<dogen::formatters::general_settings>& general_settings,
+        const boost::optional<dogen::formatters::file_properties>& file_properties,
         const std::string& odb_folder,
         const bool odb_enabled);
 
@@ -149,10 +149,10 @@ public:
     void include_file_path(const boost::filesystem::path& v);
     void include_file_path(const boost::filesystem::path&& v);
 
-    const boost::optional<dogen::formatters::general_settings>& general_settings() const;
-    boost::optional<dogen::formatters::general_settings>& general_settings();
-    void general_settings(const boost::optional<dogen::formatters::general_settings>& v);
-    void general_settings(const boost::optional<dogen::formatters::general_settings>&& v);
+    const boost::optional<dogen::formatters::file_properties>& file_properties() const;
+    boost::optional<dogen::formatters::file_properties>& file_properties();
+    void file_properties(const boost::optional<dogen::formatters::file_properties>& v);
+    void file_properties(const boost::optional<dogen::formatters::file_properties>&& v);
 
     const std::string& odb_folder() const;
     std::string& odb_folder();
@@ -182,7 +182,7 @@ private:
     std::string file_name_;
     boost::filesystem::path source_file_path_;
     boost::filesystem::path include_file_path_;
-    boost::optional<dogen::formatters::general_settings> general_settings_;
+    boost::optional<dogen::formatters::file_properties> file_properties_;
     std::string odb_folder_;
     bool odb_enabled_;
 };

@@ -18,35 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_HASH_GENERAL_SETTINGS_HASH_HPP
-#define DOGEN_FORMATTERS_HASH_GENERAL_SETTINGS_HASH_HPP
+#include "dogen/formatters/hash/annotation_hash.hpp"
+#include "dogen/formatters/hash/file_properties_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include <functional>
-#include "dogen/formatters/types/general_settings.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace formatters {
 
-struct general_settings_hasher {
-public:
-    static std::size_t hash(const general_settings& v);
-};
+std::size_t file_properties_hasher::hash(const file_properties& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.generate_preamble());
+    combine(seed, v.annotation());
+
+    return seed;
+}
 
 } }
-
-namespace std {
-
-template<>
-struct hash<dogen::formatters::general_settings> {
-public:
-    size_t operator()(const dogen::formatters::general_settings& v) const {
-        return dogen::formatters::general_settings_hasher::hash(v);
-    }
-};
-
-}
-#endif
