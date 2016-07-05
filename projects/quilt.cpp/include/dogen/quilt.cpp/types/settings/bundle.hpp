@@ -28,9 +28,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "dogen/formatters/types/file_properties.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_fwd.hpp"
 #include "dogen/quilt.cpp/serialization/settings/bundle_fwd_ser.hpp"
@@ -44,14 +42,11 @@ class bundle final {
 public:
     bundle() = default;
     bundle(const bundle&) = default;
+    bundle(bundle&&) = default;
     ~bundle() = default;
 
 public:
-    bundle(bundle&& rhs);
-
-public:
     bundle(
-        const boost::optional<dogen::formatters::file_properties>& file_properties,
         const dogen::quilt::cpp::settings::element_settings& element_settings,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& opaque_settings,
         const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > >& opaque_settings_for_property);
@@ -64,11 +59,6 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::settings::bundle& v, unsigned int version);
 
 public:
-    const boost::optional<dogen::formatters::file_properties>& file_properties() const;
-    boost::optional<dogen::formatters::file_properties>& file_properties();
-    void file_properties(const boost::optional<dogen::formatters::file_properties>& v);
-    void file_properties(const boost::optional<dogen::formatters::file_properties>&& v);
-
     const dogen::quilt::cpp::settings::element_settings& element_settings() const;
     dogen::quilt::cpp::settings::element_settings& element_settings();
     void element_settings(const dogen::quilt::cpp::settings::element_settings& v);
@@ -95,7 +85,6 @@ public:
     bundle& operator=(bundle other);
 
 private:
-    boost::optional<dogen::formatters::file_properties> file_properties_;
     dogen::quilt::cpp::settings::element_settings element_settings_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > opaque_settings_;
     std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > > opaque_settings_for_property_;

@@ -21,24 +21,8 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/quilt.cpp/io/settings/bundle_io.hpp"
-#include "dogen/formatters/io/file_properties_io.hpp"
 #include "dogen/quilt.cpp/io/settings/opaque_settings_io.hpp"
 #include "dogen/quilt.cpp/io/settings/element_settings_io.hpp"
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::file_properties>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -107,7 +91,6 @@ namespace settings {
 std::ostream& operator<<(std::ostream& s, const bundle& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::settings::bundle\"" << ", "
-      << "\"file_properties\": " << v.file_properties() << ", "
       << "\"element_settings\": " << v.element_settings() << ", "
       << "\"opaque_settings\": " << v.opaque_settings() << ", "
       << "\"opaque_settings_for_property\": " << v.opaque_settings_for_property()

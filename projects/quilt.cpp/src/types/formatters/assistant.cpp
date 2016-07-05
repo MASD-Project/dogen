@@ -231,11 +231,11 @@ void assistant::validate() const {
 dogen::formatters::cpp::scoped_boilerplate_formatter
 assistant::make_scoped_boilerplate_formatter() {
     ensure_formatter_properties_are_present();
-    const auto& fp(*formatter_properties_);
-    const auto gs(context_.bundle().file_properties());
+    const auto& fmtp(*formatter_properties_);
+    const auto fp(context_.element_properties().file_properties());
     return dogen::formatters::cpp::scoped_boilerplate_formatter(
-        stream(), gs, fp.inclusion_dependencies(),
-        fp.header_guard() ? *fp.header_guard() : empty);
+        stream(), fp, fmtp.inclusion_dependencies(),
+        fmtp.header_guard() ? *(fmtp.header_guard()) : empty);
 }
 
 dogen::formatters::cpp::scoped_namespace_formatter

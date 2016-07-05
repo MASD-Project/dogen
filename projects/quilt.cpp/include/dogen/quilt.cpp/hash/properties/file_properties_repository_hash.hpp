@@ -18,39 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_BUNDLE_REPOSITORY_FACTORY_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_BUNDLE_REPOSITORY_FACTORY_HPP
+#ifndef DOGEN_QUILT_CPP_HASH_PROPERTIES_FILE_PROPERTIES_REPOSITORY_HASH_HPP
+#define DOGEN_QUILT_CPP_HASH_PROPERTIES_FILE_PROPERTIES_REPOSITORY_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <unordered_map>
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
-#include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
+#include <functional>
+#include "dogen/quilt.cpp/types/properties/file_properties_repository.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace settings {
+namespace properties {
 
-/**
- * @brief Creates the bundle repository.
- */
-class bundle_repository_factory {
+struct file_properties_repository_hasher {
 public:
-    /**
-     * @brief Create the bundle repository.
-     */
-    bundle_repository make(const dynamic::repository& rp,
-        const dynamic::object& root_object,
-        const opaque_settings_builder& osb,
-        const yarn::model& m) const;
+    static std::size_t hash(const file_properties_repository& v);
 };
 
 } } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::quilt::cpp::properties::file_properties_repository> {
+public:
+    size_t operator()(const dogen::quilt::cpp::properties::file_properties_repository& v) const {
+        return dogen::quilt::cpp::properties::file_properties_repository_hasher::hash(v);
+    }
+};
+
+}
 #endif

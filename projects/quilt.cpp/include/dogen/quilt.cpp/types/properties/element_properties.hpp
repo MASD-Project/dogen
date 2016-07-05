@@ -29,6 +29,8 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
+#include <boost/optional.hpp>
+#include "dogen/formatters/types/file_properties.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/properties/formatter_properties.hpp"
 #include "dogen/quilt.cpp/serialization/properties/element_properties_fwd_ser.hpp"
@@ -45,11 +47,14 @@ class element_properties final {
 public:
     element_properties() = default;
     element_properties(const element_properties&) = default;
-    element_properties(element_properties&&) = default;
     ~element_properties() = default;
 
 public:
+    element_properties(element_properties&& rhs);
+
+public:
     element_properties(
+        const boost::optional<dogen::formatters::file_properties>& file_properties,
         const std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties>& formatter_properties,
         const std::list<dogen::quilt::cpp::properties::helper_properties>& helper_properties);
 
@@ -61,6 +66,11 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::properties::element_properties& v, unsigned int version);
 
 public:
+    const boost::optional<dogen::formatters::file_properties>& file_properties() const;
+    boost::optional<dogen::formatters::file_properties>& file_properties();
+    void file_properties(const boost::optional<dogen::formatters::file_properties>& v);
+    void file_properties(const boost::optional<dogen::formatters::file_properties>&& v);
+
     const std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties>& formatter_properties() const;
     std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties>& formatter_properties();
     void formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties>& v);
@@ -82,6 +92,7 @@ public:
     element_properties& operator=(element_properties other);
 
 private:
+    boost::optional<dogen::formatters::file_properties> file_properties_;
     std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> formatter_properties_;
     std::list<dogen::quilt::cpp::properties::helper_properties> helper_properties_;
 };

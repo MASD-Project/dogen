@@ -19,11 +19,24 @@
  *
  */
 #include <sstream>
+#include "dogen/formatters/test_data/file_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/helper_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/element_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/formatter_properties_td.hpp"
 
 namespace {
+
+dogen::formatters::file_properties
+create_dogen_formatters_file_properties(const unsigned int position) {
+    return dogen::formatters::file_properties_generator::create(position);
+}
+
+boost::optional<dogen::formatters::file_properties>
+create_boost_optional_dogen_formatters_file_properties(unsigned int position) {
+    boost::optional<dogen::formatters::file_properties> r(
+        create_dogen_formatters_file_properties(position));
+    return r;
+}
 
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
@@ -68,8 +81,9 @@ element_properties_generator::element_properties_generator() : position_(0) { }
 
 void element_properties_generator::
 populate(const unsigned int position, result_type& v) {
-    v.formatter_properties(create_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties(position + 0));
-    v.helper_properties(create_std_list_dogen_quilt_cpp_properties_helper_properties(position + 1));
+    v.file_properties(create_boost_optional_dogen_formatters_file_properties(position + 0));
+    v.formatter_properties(create_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties(position + 1));
+    v.helper_properties(create_std_list_dogen_quilt_cpp_properties_helper_properties(position + 2));
 }
 
 element_properties_generator::result_type

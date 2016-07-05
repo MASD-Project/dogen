@@ -121,13 +121,12 @@ private:
 
 bundle_repository bundle_repository_factory::
 make(const dynamic::repository& rp, const dynamic::object& root_object,
-    const dogen::formatters::file_properties_factory& fpf,
     const opaque_settings_builder& osb,
     const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating settings bundle repository.";
 
-    const bundle_factory f(rp, root_object, fpf, osb);
+    const bundle_factory f(rp, root_object, osb);
     generator g(f, osb);
     for (const auto& pair : m.elements()) {
         const auto& e(*pair.second);

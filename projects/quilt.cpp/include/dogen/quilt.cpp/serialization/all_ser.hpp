@@ -54,6 +54,7 @@
 #include "dogen/quilt.cpp/serialization/settings/directory_names_settings_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/helper_settings_repository_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/forward_declarations_info_ser.hpp"
+#include "dogen/quilt.cpp/serialization/properties/file_properties_repository_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/inclusion_directive_settings_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/path_derivatives_repository_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/inclusion_directives_settings_ser.hpp"

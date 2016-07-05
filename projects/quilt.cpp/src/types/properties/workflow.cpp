@@ -156,7 +156,7 @@ workflow::from_factory_activity(const config::cpp_options& opts,
         r.push_front(ri);
 
     r.splice_after(r.before_begin(),
-        f.make_includers(opts, ro, fpf, brp, ps, pdrp, formatters, fprp, m));
+        f.make_includers(opts, ps, pdrp, formatters, fprp, m));
     r.splice_after(r.before_begin(),
         f.make_cmakelists(opts, ro, fpf, ps, fprp, m));
 
@@ -169,11 +169,13 @@ workflow::from_factory_activity(const config::cpp_options& opts,
 }
 
 element_properties_repository workflow::create_element_properties(
+    const dynamic::object& root_object,
+    const dogen::formatters::file_properties_factory& fpf,
     const settings::helper_settings_repository& hsrp,
     const formatter_properties_repository& fprp,
     const yarn::model& m) const {
     element_properties_repository_factory f;
-    return f.make(hsrp, fprp, m);
+    return f.make(root_object, fpf, hsrp, fprp, m);
 }
 
 std::pair<
@@ -203,7 +205,7 @@ workflow::execute(const config::cpp_options& opts,
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
 
-    const auto eprp(create_element_properties(hsrp, fprp, m));
+    const auto eprp(create_element_properties(ro, fpf, hsrp, fprp, m));
     return std::make_pair(eprp, formattables);
 }
 

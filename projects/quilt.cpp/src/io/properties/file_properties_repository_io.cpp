@@ -21,24 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/formatters/io/file_properties_io.hpp"
-#include "dogen/quilt.cpp/io/properties/helper_properties_io.hpp"
-#include "dogen/quilt.cpp/io/properties/element_properties_io.hpp"
-#include "dogen/quilt.cpp/io/properties/formatter_properties_io.hpp"
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::file_properties>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
+#include "dogen/quilt.cpp/io/properties/file_properties_repository_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -49,7 +32,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::formatters::file_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -65,31 +48,15 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::quilt::cpp::properties::helper_properties>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace properties {
 
-std::ostream& operator<<(std::ostream& s, const element_properties& v) {
+std::ostream& operator<<(std::ostream& s, const file_properties_repository& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::properties::element_properties\"" << ", "
-      << "\"file_properties\": " << v.file_properties() << ", "
-      << "\"formatter_properties\": " << v.formatter_properties() << ", "
-      << "\"helper_properties\": " << v.helper_properties()
+      << "\"__type__\": " << "\"dogen::quilt::cpp::properties::file_properties_repository\"" << ", "
+      << "\"by_id\": " << v.by_id()
       << " }";
     return(s);
 }

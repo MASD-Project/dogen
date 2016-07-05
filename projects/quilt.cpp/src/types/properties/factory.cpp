@@ -296,9 +296,6 @@ std::shared_ptr<formattable> factory::make_registrar_info(
 std::forward_list<std::shared_ptr<formattable> > factory::
 make_includers(
     const config::cpp_options& opts,
-    const dynamic::object& root_object,
-    const dogen::formatters::file_properties_factory& fpf,
-    settings::bundle_repository& brp,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const path_derivatives_repository& pdrp,
     const std::forward_list<
@@ -399,8 +396,6 @@ make_includers(
     std::forward_list<std::shared_ptr<formattable> > r;
     auto inc(std::make_shared<includers_info>());
     inc->id(n.id());
-    const auto fp(fpf.make(cpp_modeline_name, root_object));
-    brp.by_id()[inc->id()].file_properties(fp);
 
     for(const auto& pair : includes_by_facet_name) {
         const auto& facet_name(pair.first);

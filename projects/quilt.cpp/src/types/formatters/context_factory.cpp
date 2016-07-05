@@ -30,8 +30,6 @@ static logger lg(logger_factory("quit.cpp.formatters.context_factory"));
 
 const std::string formatter_properties_not_found(
     "Could not find properties for formatter: ");
-const std::string bundle_not_found(
-    "Could not find settings bundle for: ");
 
 }
 
@@ -80,8 +78,9 @@ bundle_for_id(const std::string& n) const {
     const auto& b(bundle_.by_id());
     const auto i(b.find(n));
     if (i == b.end()) {
-        BOOST_LOG_SEV(lg, error) << bundle_not_found << n;
-        BOOST_THROW_EXCEPTION(workflow_error(bundle_not_found + n));
+        // FIXME: we will return empty bundles due to the hackery we
+        // are doing at the moment in factory.
+        return empty_bundle_;
     }
     return i->second;
 }

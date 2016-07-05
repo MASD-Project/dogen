@@ -18,39 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_BUNDLE_REPOSITORY_FACTORY_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_BUNDLE_REPOSITORY_FACTORY_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_PROPERTIES_FILE_PROPERTIES_REPOSITORY_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_PROPERTIES_FILE_PROPERTIES_REPOSITORY_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <unordered_map>
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
-#include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/quilt.cpp/types/properties/file_properties_repository.hpp"
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
-namespace settings {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::properties::file_properties_repository)
+namespace boost {
+namespace serialization {
 
-/**
- * @brief Creates the bundle repository.
- */
-class bundle_repository_factory {
-public:
-    /**
-     * @brief Create the bundle repository.
-     */
-    bundle_repository make(const dynamic::repository& rp,
-        const dynamic::object& root_object,
-        const opaque_settings_builder& osb,
-        const yarn::model& m) const;
-};
+template<typename Archive>
+void save(Archive& ar, const dogen::quilt::cpp::properties::file_properties_repository& v, unsigned int version);
 
-} } } }
+template<typename Archive>
+void load(Archive& ar, dogen::quilt::cpp::properties::file_properties_repository& v, unsigned int version);
+
+} }
 
 #endif

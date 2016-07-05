@@ -90,7 +90,6 @@ private:
      */
     settings::bundle_repository create_bundle_repository(
         const dynamic::repository& rp, const dynamic::object& root_object,
-        const dogen::formatters::file_properties_factory& fpf,
         const settings::opaque_settings_builder& osb,
         const yarn::model& m) const;
 

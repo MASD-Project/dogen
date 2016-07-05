@@ -25,20 +25,29 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
+element_properties::element_properties(element_properties&& rhs)
+    : file_properties_(std::move(rhs.file_properties_)),
+      formatter_properties_(std::move(rhs.formatter_properties_)),
+      helper_properties_(std::move(rhs.helper_properties_)) { }
+
 element_properties::element_properties(
+    const boost::optional<dogen::formatters::file_properties>& file_properties,
     const std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties>& formatter_properties,
     const std::list<dogen::quilt::cpp::properties::helper_properties>& helper_properties)
-    : formatter_properties_(formatter_properties),
+    : file_properties_(file_properties),
+      formatter_properties_(formatter_properties),
       helper_properties_(helper_properties) { }
 
 void element_properties::swap(element_properties& other) noexcept {
     using std::swap;
+    swap(file_properties_, other.file_properties_);
     swap(formatter_properties_, other.formatter_properties_);
     swap(helper_properties_, other.helper_properties_);
 }
 
 bool element_properties::operator==(const element_properties& rhs) const {
-    return formatter_properties_ == rhs.formatter_properties_ &&
+    return file_properties_ == rhs.file_properties_ &&
+        formatter_properties_ == rhs.formatter_properties_ &&
         helper_properties_ == rhs.helper_properties_;
 }
 
@@ -46,6 +55,22 @@ element_properties& element_properties::operator=(element_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const boost::optional<dogen::formatters::file_properties>& element_properties::file_properties() const {
+    return file_properties_;
+}
+
+boost::optional<dogen::formatters::file_properties>& element_properties::file_properties() {
+    return file_properties_;
+}
+
+void element_properties::file_properties(const boost::optional<dogen::formatters::file_properties>& v) {
+    file_properties_ = v;
+}
+
+void element_properties::file_properties(const boost::optional<dogen::formatters::file_properties>&& v) {
+    file_properties_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties>& element_properties::formatter_properties() const {

@@ -88,11 +88,10 @@ create_opaque_settings_builder(const dynamic::repository& rp) const {
 
 settings::bundle_repository workflow::create_bundle_repository(
     const dynamic::repository& rp, const dynamic::object& root_object,
-    const dogen::formatters::file_properties_factory& fpf,
     const settings::opaque_settings_builder& osb,
     const yarn::model& m) const {
     settings::bundle_repository_factory f;
-    return f.make(rp, root_object, fpf, osb, m);
+    return f.make(rp, root_object, osb, m);
 }
 
 std::pair<
@@ -174,7 +173,7 @@ workflow::generate(const config::knitting_options& ko,
     const auto fpf(create_file_properties_factory(frp, ro));
 
     const auto osb(create_opaque_settings_builder(rp));
-    auto brp(create_bundle_repository(rp, ro, fpf, osb, m));
+    auto brp(create_bundle_repository(rp, ro, osb, m));
 
     formatters::workflow::registrar().validate();
     const auto& fc(formatters::workflow::registrar().formatter_container());

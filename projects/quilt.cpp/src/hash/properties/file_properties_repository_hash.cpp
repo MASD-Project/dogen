@@ -19,9 +19,7 @@
  *
  */
 #include "dogen/formatters/hash/file_properties_hash.hpp"
-#include "dogen/quilt.cpp/hash/properties/helper_properties_hash.hpp"
-#include "dogen/quilt.cpp/hash/properties/element_properties_hash.hpp"
-#include "dogen/quilt.cpp/hash/properties/formatter_properties_hash.hpp"
+#include "dogen/quilt.cpp/hash/properties/file_properties_repository_hash.hpp"
 
 namespace {
 
@@ -31,29 +29,11 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_dogen_formatters_file_properties(const boost::optional<dogen::formatters::file_properties>& v) {
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties(const std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_formatters_file_properties(const std::unordered_map<std::string, dogen::formatters::file_properties>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
         combine(seed, i.second);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_list_dogen_quilt_cpp_properties_helper_properties(const std::list<dogen::quilt::cpp::properties::helper_properties>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
     }
     return seed;
 }
@@ -65,13 +45,10 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-std::size_t element_properties_hasher::hash(const element_properties& v) {
+std::size_t file_properties_repository_hasher::hash(const file_properties_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_boost_optional_dogen_formatters_file_properties(v.file_properties()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties(v.formatter_properties()));
-    combine(seed, hash_std_list_dogen_quilt_cpp_properties_helper_properties(v.helper_properties()));
-
+    combine(seed, hash_std_unordered_map_std_string_dogen_formatters_file_properties(v.by_id()));
     return seed;
 }
 

@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/quilt.cpp/hash/settings/bundle_hash.hpp"
-#include "dogen/formatters/hash/file_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/opaque_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/element_settings_hash.hpp"
 
@@ -29,16 +28,6 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_boost_optional_dogen_formatters_file_properties(const boost::optional<dogen::formatters::file_properties>& v) {
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
 }
 
 inline std::size_t hash_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings(const boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings>& v) {
@@ -75,7 +64,6 @@ namespace settings {
 std::size_t bundle_hasher::hash(const bundle& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_boost_optional_dogen_formatters_file_properties(v.file_properties()));
     combine(seed, v.element_settings());
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings_(v.opaque_settings()));
     combine(seed, hash_std_unordered_map_std_string_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings__(v.opaque_settings_for_property()));

@@ -25,11 +25,13 @@
 #include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/formatters/serialization/file_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/helper_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/element_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/formatter_properties_ser.hpp"
@@ -41,6 +43,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::properties::element_properties& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("file_properties", v.file_properties_);
     ar << make_nvp("formatter_properties", v.formatter_properties_);
     ar << make_nvp("helper_properties", v.helper_properties_);
 }
@@ -49,6 +52,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::properties::element_properties& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("file_properties", v.file_properties_);
     ar >> make_nvp("formatter_properties", v.formatter_properties_);
     ar >> make_nvp("helper_properties", v.helper_properties_);
 }

@@ -109,6 +109,8 @@ private:
         const yarn::model& m) const;
 
     element_properties_repository create_element_properties(
+        const dynamic::object& root_object,
+        const dogen::formatters::file_properties_factory& fpf,
         const settings::helper_settings_repository& hsrp,
         const formatter_properties_repository& fprp,
         const yarn::model& m) const;

@@ -53,6 +53,7 @@
 #include "dogen/quilt.cpp/io/settings/directory_names_settings_io.hpp"
 #include "dogen/quilt.cpp/io/settings/helper_settings_repository_io.hpp"
 #include "dogen/quilt.cpp/io/properties/forward_declarations_info_io.hpp"
+#include "dogen/quilt.cpp/io/properties/file_properties_repository_io.hpp"
 #include "dogen/quilt.cpp/io/settings/inclusion_directive_settings_io.hpp"
 #include "dogen/quilt.cpp/io/properties/path_derivatives_repository_io.hpp"
 #include "dogen/quilt.cpp/io/settings/inclusion_directives_settings_io.hpp"

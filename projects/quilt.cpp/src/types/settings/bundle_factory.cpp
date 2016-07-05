@@ -30,8 +30,6 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.settings.bundle_factory"));
 
-const std::string cpp_modeline_name("cpp");
-
 }
 
 namespace dogen {
@@ -41,15 +39,9 @@ namespace settings {
 
 bundle_factory::bundle_factory(const dynamic::repository& rp,
     const dynamic::object& root_object,
-    const dogen::formatters::file_properties_factory& fpf,
     const opaque_settings_builder& osb) :
     dynamic_repository_(rp), root_object_(root_object),
-    file_properties_factory_(fpf), opaque_settings_builder_(osb) { }
-
-dogen::formatters::file_properties bundle_factory::
-create_file_properties(const dynamic::object& o) const {
-    return file_properties_factory_.make(cpp_modeline_name, o);
-}
+    opaque_settings_builder_(osb) { }
 
 element_settings bundle_factory::
 create_element_settings(const dynamic::object& o) const {
@@ -66,7 +58,6 @@ std::unordered_map<
 
 bundle bundle_factory::make(const dynamic::object& o) const {
     bundle r;
-    r.file_properties(create_file_properties(o));
     r.opaque_settings(create_opaque_settings(o));
     r.element_settings(create_element_settings(o));
     return r;
@@ -74,8 +65,6 @@ bundle bundle_factory::make(const dynamic::object& o) const {
 
 bundle bundle_factory::make() const {
     bundle r;
-    r.file_properties(create_file_properties(root_object_));
-
     element_settings_factory f(dynamic_repository_, root_object_);
     r.element_settings(f.make());
     return r;

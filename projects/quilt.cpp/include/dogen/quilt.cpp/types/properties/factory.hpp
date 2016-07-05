@@ -77,9 +77,6 @@ public:
 
     std::forward_list<std::shared_ptr<formattable> > make_includers(
         const config::cpp_options& opts,
-        const dynamic::object& root_object,
-        const dogen::formatters::file_properties_factory& fpf,
-        settings::bundle_repository& brp,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const path_derivatives_repository& pdrp,
         const std::forward_list<
