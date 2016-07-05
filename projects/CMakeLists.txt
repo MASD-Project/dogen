@@ -82,10 +82,6 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
     # treat warnings as errors
     set(warning_flags "${warning_flags} -Werror")
 
-    # definition shadows another
-    # FIXME: causes too many problems.
-    # set(warning_flags "${warning_flags} -Wshadow")
-
     # do not issue warnings for system headers
     set(warning_flags "${warning_flags} -Wno-system-headers")
 
@@ -105,7 +101,8 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
             set(profiling_flags "${profiling_flags} -Qunused-arguments")
 
             set(profiling_flags "${profiling_flags} --coverage")
-            set(profiling_flags "${profiling_flags} -Xclang -coverage-cfg-checksum")
+            set(profiling_flags
+                "${profiling_flags} -Xclang -coverage-cfg-checksum")
             set(profiling_flags
                 "${profiling_flags} -Xclang -coverage-no-function-names-in-data")
 
@@ -147,7 +144,7 @@ elseif(MSVC)
         string(REPLACE "/Gm" "" CMAKE_C_FLAGS_RELEASE ${CMAKE_C_FLAGS_RELEASE})
         string(REPLACE "/Gm" "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
         string(REPLACE "/Gm" "" CMAKE_CXX_FLAGS_RELEASE
-          ${CMAKE_CXX_FLAGS_RELEASE})
+            ${CMAKE_CXX_FLAGS_RELEASE})
         set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
     endif()
 endif()

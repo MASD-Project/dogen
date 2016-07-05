@@ -1,34 +1,37 @@
-#+title: Sprint Backlog 83
+#+title: Sprint Backlog 84
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: STARTED | COMPLETED CANCELLED POSTPONED
 #+tags: { story(s) spike(p) }
 
 * Mission Statement
 
-- implement helper methods dynamically for as many facets as possible.
+- complete the properties refactoring across all models;
+- finish implementing IO helpers.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-05 Tue 21:10]
+#+CAPTION: Clock summary at [2016-07-05 Tue 21:26]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *4:28* |      |      | 100.0 |
+| *Total time*                                                                | *4:42* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 4:28   |      |      | 100.0 |
-| Active                                                                      |        | 4:28 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:17 |   6.3 |
-| COMPLETED Try to fix tag build issues                                       |        |      | 1:28 |  32.8 |
-| COMPLETED Enable build type on travis                                       |        |      | 1:17 |  28.7 |
-| STARTED Create a debug build for clang in travis                            |        |      | 0:10 |   3.7 |
-| STARTED Refactor general settings                                           |        |      | 1:16 |  28.4 |
+| Stories                                                                     | 4:42   |      |      | 100.0 |
+| Active                                                                      |        | 4:42 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:31 |  11.0 |
+| COMPLETED Try to fix tag build issues                                       |        |      | 1:28 |  31.2 |
+| COMPLETED Enable build type on travis                                       |        |      | 1:17 |  27.3 |
+| STARTED Create a debug build for clang in travis                            |        |      | 0:10 |   3.5 |
+| STARTED Refactor general settings                                           |        |      | 1:16 |  27.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-07-05 Tue 21:22]--[2016-07-05 Tue 21:26] =>  0:04
+    CLOCK: [2016-07-05 Tue 21:11]--[2016-07-05 Tue 21:21] =>  0:10
     CLOCK: [2016-07-04 Mon 20:05]--[2016-07-04 Mon 20:22] =>  0:17
 
 Updates to sprint and product backlog.
@@ -361,20 +364,6 @@ JSON:
 
 This implies we are not calling =tidy_up_string=. This can be tested
 by creating a container of =filesystem::path=.
-
-*** Fix Windows build timeout                                         :story:
-
-At present the windows build is taking over 1h and its only building
-the knitter target. We need to think of ways to reduce the build
-time. Things to try:
-
-- remove all of the hashing etc for the types we don't need to hash.
-- get rid of the warnings for boost.
-
-*** Build boost for MinGW                                             :story:
-
-At present our MinGW build is borked because we do not have a boost
-build. Create one and add it to DropBox or Conan.
 
 *** Type-bound helpers and generic helpers                            :story:
 

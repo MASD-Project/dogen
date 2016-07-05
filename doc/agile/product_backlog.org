@@ -2761,6 +2761,23 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+*** Consider enabling =-Wshadow=                                      :story:
+
+We make use of shadowing on occasion so maybe this is why we disabled
+this warning. Enable it and check to see what breaks.
+
+:    # definition shadows another
+:    # FIXME: causes too many problems.
+:    # set(warning_flags "${warning_flags} -Wshadow")
+
+*** Enable =maybe-uninitialized= warning                              :story:
+
+This warning caused build breaks. The main problem seems to come from
+boost variants using model types, which then rely on the variant's
+swap function. This uses the move constructor. For some reason, the
+compiler does not think the default move constructor is initialising
+the member variables correctly. Not obvious why that would be.
+
 *** Consider supporting non-boost exceptions                          :story:
 
 It should be fairly trivial to disable the use of boost exception when
@@ -5101,6 +5118,21 @@ is, what then? We can't throw.
 
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
+
+
+*** Fix Windows build timeout                                         :story:
+
+At present the windows build is taking over 1h and its only building
+the knitter target. We need to think of ways to reduce the build
+time. Things to try:
+
+- remove all of the hashing etc for the types we don't need to hash.
+- get rid of the warnings for boost.
+
+*** Build boost for MinGW                                             :story:
+
+At present our MinGW build is borked because we do not have a boost
+build. Create one and add it to DropBox or Conan.
 
 *** Add support for coverity analysis                                 :story:
 
