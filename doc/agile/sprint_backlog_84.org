@@ -13,23 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-05 Tue 21:26]
+#+CAPTION: Clock summary at [2016-07-05 Tue 21:47]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *4:42* |      |      | 100.0 |
+| *Total time*                                                                | *5:02* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 4:42   |      |      | 100.0 |
-| Active                                                                      |        | 4:42 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:31 |  11.0 |
-| COMPLETED Try to fix tag build issues                                       |        |      | 1:28 |  31.2 |
-| COMPLETED Enable build type on travis                                       |        |      | 1:17 |  27.3 |
-| STARTED Create a debug build for clang in travis                            |        |      | 0:10 |   3.5 |
-| STARTED Refactor general settings                                           |        |      | 1:16 |  27.0 |
+| Stories                                                                     | 5:02   |      |      | 100.0 |
+| Active                                                                      |        | 5:02 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:51 |  16.9 |
+| COMPLETED Try to fix tag build issues                                       |        |      | 1:28 |  29.1 |
+| COMPLETED Enable build type on travis                                       |        |      | 1:17 |  25.5 |
+| STARTED Create a debug build for clang in travis                            |        |      | 0:10 |   3.3 |
+| STARTED Refactor general settings                                           |        |      | 1:16 |  25.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-07-05 Tue 21:27]--[2016-07-05 Tue 21:47] =>  0:20
     CLOCK: [2016-07-05 Tue 21:22]--[2016-07-05 Tue 21:26] =>  0:04
     CLOCK: [2016-07-05 Tue 21:11]--[2016-07-05 Tue 21:21] =>  0:10
     CLOCK: [2016-07-04 Mon 20:05]--[2016-07-04 Mon 20:22] =>  0:17
@@ -166,6 +167,7 @@ Try just copying the code from [[https://github.com/JoakimSoderberg/coveralls-cm
 
 See also:
 
+- [[https://github.com/JoakimSoderberg/coveralls-cmake-example/blob/master/CMakeLists.txt][example use of coveralls-cmake]]
 - [[https://github.com/SpinWaveGenie/SpinWaveGenie/blob/master/libSpinWaveGenie/CMakeLists.txt][SpinWaveGenie's support for Coveralls]]
 
 **** Direct use of Coveralls failed
