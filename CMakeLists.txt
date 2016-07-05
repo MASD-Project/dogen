@@ -149,20 +149,21 @@ file(GLOB_RECURSE all_dia_test_models ABSOLUTE
 # setup git
 #
 find_program(GIT_COMMAND NAMES git)
-if(NOT DEFINED GIT_COMMAND)
+if(GIT_COMMAND)
+    message(STATUS "Found git (${GIT_COMMAND})...")
+else()
     message(FATAL_ERROR "git not found.")
 endif()
-message(STATUS "Found git (${GIT_COMMAND})...")
 
 #
 # setup pdflatex
 #
 find_program(PDFLATEX_COMMAND NAMES pdflatex)
-if(NOT DEFINED PDFLATEX_COMMAND)
+if(PDFLATEX_COMMAND)
+    message(STATUS "Found pdflatex (${PDFLATEX_COMMAND})...")
+else()
     message(STATUS "pdflatex not found, disabling latex documents.")
     set(WITH_LATEX "off")
-else()
-    message(STATUS "Found pdflatex (${PDFLATEX_COMMAND})...")
 endif()
 
 if(WITH_LATEX)
@@ -175,12 +176,12 @@ endif()
 # setup jq, for JSON validation.
 #
 find_program(JQ_COMMAND NAMES jq)
-if(NOT DEFINED JQ_COMMAND)
-    message(STATUS "jq not found, disabling JSON validation.")
-    set(WITH_JSON_VALIDATION "off")
-else()
+if(JQ_COMMAND)
     message(STATUS "Found jq (${JQ_COMMAND})...")
     add_custom_target(validate_all_json)
+else()
+    message(STATUS "jq not found, disabling JSON validation.")
+    set(WITH_JSON_VALIDATION "off")
 endif()
 
 # hash of the top commit
