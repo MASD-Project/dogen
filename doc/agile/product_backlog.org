@@ -5120,6 +5120,22 @@ Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
 
+*** Consider adding support for clang-tidy                            :story:
+
+As [[http://clang.llvm.org/extra/clang-tidy/][per docs]]:
+
+#+begin_quote
+clang-tidy is a clang-based C++ “linter” tool. Its purpose is to
+provide an extensible framework for diagnosing and fixing typical
+programming errors, like style violations, interface misuse, or bugs
+that can be deduced via static analysis. clang-tidy is modular and
+provides a convenient interface for writing new checks.
+#+end_quote
+
+See also:
+
+- [[https://github.com/polysquare/clang-tidy-target-cmake][clang-tidy-target-cmake]]
+
 *** Fix Windows build timeout                                         :story:
 
 At present the windows build is taking over 1h and its only building
