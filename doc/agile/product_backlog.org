@@ -5120,6 +5120,16 @@ Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
 
+*** Mine =common-universal-cmake= for ideas                            :epic:
+
+This project seems interesting:
+
+- [[https://github.com/polysquare/common-universal-cmake][common-universal-cmake]]
+
+They seem to have added support for conan, appveyor, etc in an
+extensible way. We need to figure out if anything can be nicked for
+our infrastructure.
+
 *** Consider adding support for clang-tidy                            :story:
 
 As [[http://clang.llvm.org/extra/clang-tidy/][per docs]]:
