@@ -56,11 +56,8 @@ script:
   - cd ${GIT_REPO}/build
   - mkdir output
   - cd output
-  # FIXME: removed -DCMAKE_BUILD_TYPE=${BUILD_TYPE} as it causes the build to break
-  - CMAKE_INCLUDE_PATH=/tmp/dogen_deps/dogen_deps_gcc_5.3_linux_amd64/include CMAKE_LIBRARY_PATH=/tmp/dogen_deps/dogen_deps_gcc_5.3_linux_amd64/lib cmake ${GIT_REPO} -G Ninja # -DWITH_MINIMAL_PACKAGING=on
+  - CMAKE_INCLUDE_PATH=/tmp/dogen_deps/dogen_deps_gcc_5.3_linux_amd64/include CMAKE_LIBRARY_PATH=/tmp/dogen_deps/dogen_deps_gcc_5.3_linux_amd64/lib cmake ${GIT_REPO} -G Ninja -DCMAKE_BUILD_TYPE=${BUILD_TYPE} # -DWITH_MINIMAL_PACKAGING=on
   - ninja -j2 package run_all_specs
-  # packaging disabled because we do not have boost 1.60.
-  # - make -j2 package run_all_specs
   # - sudo dpkg -i stage/pkg/dogen_*_amd64-applications.deb
   # - cd /tmp
   # - /usr/bin/dogen_knitter --version

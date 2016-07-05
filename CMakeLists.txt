@@ -1,4 +1,4 @@
-# -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
+# -*- mode: cmake; cmake-tab-width: 4; indent-tabs-mode: nil -*-
 #
 # Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
 #
@@ -208,15 +208,46 @@ execute_process(
 # site (for ctest)
 site_name(DOGEN_SITE)
 
-# staging directory
+# setup staging directory
 set(stage_dir ${PROJECT_BINARY_DIR}/stage)
+if(NOT EXISTS "${stage_dir}")
+    make_directory("${stage_dir}")
+endif()
+
 set(stage_bin_dir ${stage_dir}/bin)
+if(NOT EXISTS "${stage_bin_dir}")
+    make_directory("${stage_bin_dir}")
+endif()
+
 set(stage_pkg_dir ${stage_dir}/pkg)
+if(NOT EXISTS "${stage_pkg_dir}")
+    make_directory("${stage_pkg_dir}")
+endif()
+
 set(stage_lib_dir ${stage_dir}/lib)
+if(NOT EXISTS "${stage_lib_dir}")
+    make_directory("${stage_lib_dir}")
+endif()
+
 set(stage_inc_dir ${stage_dir}/include)
+if(NOT EXISTS "${stage_inc_dir}")
+    make_directory("${stage_inc_dir}")
+endif()
+
 set(stage_test_data_dir ${stage_dir}/test_data)
+if(NOT EXISTS "${stage_test_data_dir}")
+    make_directory("${stage_test_data_dir}")
+endif()
+
 set(stage_doc_dir ${stage_dir}/doc)
+if(NOT EXISTS "${stage_doc_dir}")
+    make_directory("${stage_doc_dir}")
+endif()
+
 set(stage_doxygen_dir ${stage_dir}/doxygen)
+if(NOT EXISTS "${stage_doxygen_dir}")
+    make_directory("${stage_doxygen_dir}")
+endif()
 
 # ensure cmake dumps binaries in the right places
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${stage_bin_dir})

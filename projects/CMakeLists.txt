@@ -65,6 +65,9 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
     # enable as many warnings as possible
     set(warning_flags "-Wall -Wextra")
 
+    # FIXME: causing problems with variants and move constructors.
+    set(warning_flags "${warning_flags} -Wno-maybe-uninitialized")
+
     if (CMAKE_COMPILER_IS_CLANGXX)
         # disable mismatched tags as there are STL inconsistencies that
         # make it a bit useless.
