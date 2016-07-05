@@ -1,0 +1,66 @@
+#+title: Nerd Food: Interesting...
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+Time to flush all those tabs again. Some interesting stuff I bumped
+into recently-ish.
+
+* Finance, Economics, Politics
+
+- [[https://medium.com/@abarisser/bitcoin-is-a-language-best-spoken-by-machines-92614a1ee299#.drqx6cgve][Bitcoin is a Language Best Spoken by Machines]]: interesting take on
+  BTC, focusing more on the programmatic aspects of it rather than the
+  "social revolution". Think IoT meets money. In the light of the
+  Ethereum problems, it sounds somewhat scary, but interesting
+  nonetheless.
+
+* Startups et al.
+
+- [[http://blog.samaltman.com/employee-equity][Employee Equity]]: interesting thoughts on fair ways to distribute
+  equity with employees.
+- [[https://blog.stackoverflow.com/2016/02/why-stack-overflow-doesnt-care-about-ad-blockers/][Why Stack Overflow Doesn’t Care About Ad Blockers]]: Very interesting
+  take on ads and ad blockers. Totally agree - if they were actually
+  mildly useful no one would use ad blockers. After reading the
+  article I did a comparison between SO with ads and SO without ads
+  and the truth is - their ads are not perfect, but they are certainly
+  miles better than most sites. Ad blocker is off for SO from now on -
+  at least they are trying.
+- [[https://open.buffer.com/no-office/][After Growing to 50 People, We’re Ditching the Office Completely:
+  Here’s Why]]: Not quite sure this works for all companies, but their
+  arguments are certainly worth considering. I quite like the
+  refreshing honesty about numbers and how office costs relate to
+  other fixed costs. Pretty useful exercise for all start-ups, the
+  entire thing - even if you don't agree with remoting for all.
+- [[https://medium.learningbyshipping.com/why-the-heck-can-t-we-change-our-product-d88533b5bc2d#.5xt5zt1mg][Why The Heck Can’t We Change Our Product?]]: This is one of those
+  articles that resonates with _sooo_ many people - especially those
+  of us not working for start-ups. Not being able to release "quickly"
+  (for whatever definition of quickly you use at your shop) its such a
+  spanner in the works. Great thoughts on the subject.
+- [[https://bothsidesofthetable.com/the-one-video-every-silicon-valley-investor-should-watch-62478c203583#.aakoehrb9][The One Video Every Silicon Valley Investor Should Watch]]: Michael
+  Johnson is one of my greatest heroes both on and off the court. His
+  business ventures are inspiring to a whole generation of people,
+  particularly as a beacon of hope to those poor and disenfranchised.
+
+* General Coding
+
+- [[https://www.youtube.com/watch?v%3DkcCgtTIsdMQ&feature%3Dyoutu.be][Docker Swarm and Kubernetes - David Gageot]]: Good presentation on the
+  technologies that all the cool kids are using these days. Quite like
+  the fact he demo's it from his machine rather than the cloud, with
+  exactly the same setup. Swarm looks cool...
+- [[https://www.infoq.com/presentations/Patterns-for-the-People][Patterns for the People]]: As usual, you just can't go wrong with a
+  Henney presentation. His - always interesting - take on Patterns.
+
+* Databases
+
+* C++
+
+* Layperson Science
+
+- [[https://aeon.co/essays/how-and-why-exactly-did-consciousness-become-a-problem][I feel therefore I am]]: For those of us meandering through the brain,
+  consciousness is always an enigma. This is a sprawlingly
+  philosophical tour of the subject.
+- [[http://www.fastcodesign.com/3055867/ais-biggest-danger-is-so-subtle-you-might-not-even-notice-it?utm_content%3Dbufferdb07d&utm_medium%3Dsocial&utm_source%3Dfacebook.com&utm_campaign%3Dbuffer][AI's Biggest Danger Is So Subtle, You Might Not Even Notice It]]: More
+  darkness surrounding AI; is it going to be totally pervasive and
+  somewhat invisible? To some extent, the points of this article could
+  all be made with "plain" technology - who could find a road without
+  a smart phone these days? Not quite sure its a clear-cut case.
+
+* Other
