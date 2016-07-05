@@ -5120,6 +5120,16 @@ Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
 
+*** Consider adding profiling support via build type                  :story:
+
+At present we used a dogen specific variable for profiling:
+=WITH_PROFILING=. However, we could extend the cmake build type
+mechanism with a =Profiling= build type.
+
+See:
+
+- [[https://github.com/Milkyway-at-home/milkywayathome_client/blob/master/cmake_modules/Profiling.cmake][milkywayathome_client's profiling for CMake]]
+
 *** Mine =common-universal-cmake= for ideas                            :epic:
 
 This project seems interesting:
