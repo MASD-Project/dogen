@@ -6,7 +6,7 @@ branches:
 
 environment:
   matrix:
-    - generator: "MinGW Makefiles"
+    # - generator: "MinGW Makefiles"
     - generator: "Visual Studio 14 2015 Win64"
 
 configuration:
