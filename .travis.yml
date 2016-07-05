@@ -34,12 +34,12 @@ matrix:
     - os: linux
       compiler: clang
       env: BUILD_TYPE=Release
-    # - os: linux
-    #   compiler: gcc
-    #   env: BUILD_TYPE=Debug
-    # - os: linux
-    #   compiler: clang
-    #   env: BUILD_TYPE=Debug
+    - os: linux
+      compiler: gcc
+      env: BUILD_TYPE=Debug
+    - os: linux
+      compiler: clang
+      env: BUILD_TYPE=Debug
 
 addons:
   apt:
