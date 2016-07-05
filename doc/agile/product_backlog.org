@@ -11,6 +11,16 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Fix cmake emacs variable for tab width                            :story:
+
+We need to replace uses of =tab-width= in cmake files with
+=cmake-tab-width=, as explained here:
+
+[[http://stackoverflow.com/questions/25751408/controlling-the-indent-offset-for-cmake-in-emacs][Controlling the indent/offset for CMake in emacs]]
+
+We need to do this for both code generated and manually generated
+files.
+
 *** Recursive structures result in crashes                            :story:
 
 If one defines a tree node with a parent and children (such as =node=
