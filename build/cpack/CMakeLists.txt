@@ -265,7 +265,7 @@ elseif(UNIX)
         if (CMAKE_COMPILER_IS_CLANGXX)
             set(deps "${deps}, llvm-3.1-dev (>= 3.1.0)")
         endif()
-        set(deps "${deps}, ${boost_deps}")
+        # set(deps "${deps}, ${boost_deps}")
 
         set(CPACK_DEBIAN_PACKAGE_DEPENDS ${deps})
         string(TOLOWER
