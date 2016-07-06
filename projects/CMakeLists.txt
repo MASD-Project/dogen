@@ -37,7 +37,7 @@ macro(add_boost_tests test_module)
             string(REPLACE "spec/" "" test_suite ${test_suite})
 
             set(spec_cmd
-                ${stage_bin_dir}/dogen_${test_module}_spec)
+                ${stage_bin_dir}/dogen.${test_module}.spec)
             add_test(${test_module}/${test_suite}/${test_name}
                 ${CMAKE_COMMAND} -E chdir ${stage_bin_dir}
                 ${spec_cmd} --run_test=${test_suite}/${test_name})
@@ -174,6 +174,8 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/stitcher/include
     )
 
+set(COVERALLS_SRC "")
+
 #
 # add all other projects
 #
@@ -205,6 +207,11 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitch/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitch/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitcher/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitcher/spec)
+
+if(WITH_COVERALLS)
+    set(COVERAGE_SRCS "${COVERALLS_SRC}")
+    coveralls_setup("${COVERAGE_SRCS}" ON "${PROJECT_SOURCE_DIR}/build/cmake")
+endif()
 
 # test models
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_models)
