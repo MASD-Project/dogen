@@ -66,7 +66,7 @@ BOOST_AUTO_TEST_CASE(class_in_a_package_diagram_results_in_expected_objects) {
 }
 
 /*
-BOOST_AUTO_TEST_CASE(compressed_diagram_results_in_expected_objects) {
+BOOST_IGNORE_AUTO_TEST_CASE(compressed_diagram_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("compressed_diagram_results_in_expected_objects");
     using dogen::utility::test_data::yarn_dia;
     const auto input(yarn_dia::input_compressed_dia());
