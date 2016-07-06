@@ -13,25 +13,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-06 Wed 00:40]
+#+CAPTION: Clock summary at [2016-07-06 Wed 18:35]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *7:50* |      |      | 100.0 |
+| *Total time*                                                                | *8:23* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 7:50   |      |      | 100.0 |
-| Active                                                                      |        | 7:50 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:51 |  10.9 |
-| STARTED Manual updates and blog posts                                       |        |      | 0:37 |   7.9 |
-| COMPLETED Try to fix tag build issues                                       |        |      | 1:28 |  18.7 |
-| COMPLETED Enable build type on travis                                       |        |      | 1:17 |  16.4 |
-| STARTED Simplify local builds on emacs                                      |        |      | 0:20 |   4.3 |
-| STARTED Create a debug build for clang in travis                            |        |      | 0:10 |   2.1 |
-| STARTED Refactor general settings                                           |        |      | 3:07 |  39.8 |
+| Stories                                                                     | 8:23   |      |      | 100.0 |
+| Active                                                                      |        | 8:23 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:55 |  10.9 |
+| STARTED Manual updates and blog posts                                       |        |      | 0:37 |   7.4 |
+| COMPLETED Try to fix tag build issues                                       |        |      | 1:28 |  17.5 |
+| COMPLETED Enable build type on travis                                       |        |      | 1:17 |  15.3 |
+| COMPLETED Add initial support for coveralls                                 |        |      | 0:29 |   5.8 |
+| COMPLETED Simplify local builds on emacs                                    |        |      | 0:20 |   4.0 |
+| STARTED Create a debug build for clang in travis                            |        |      | 0:10 |   2.0 |
+| STARTED Refactor general settings                                           |        |      | 3:07 |  37.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-07-06 Wed 18:31]--[2016-07-06 Wed 18:35] =>  0:04
     CLOCK: [2016-07-05 Tue 21:27]--[2016-07-05 Tue 21:47] =>  0:20
     CLOCK: [2016-07-05 Tue 21:22]--[2016-07-05 Tue 21:26] =>  0:04
     CLOCK: [2016-07-05 Tue 21:11]--[2016-07-05 Tue 21:21] =>  0:10
@@ -89,7 +91,105 @@ been working so far.
 - generate the folders if they do not exist;
 - remove =WITH_DEBUG=.
 
-*** STARTED Simplify local builds on emacs                            :story:
+*** COMPLETED Add initial support for coveralls                       :story:
+    CLOSED: [2016-07-06 Wed 18:01]
+    CLOCK: [2016-07-06 Wed 18:01]--[2016-07-06 Wed 18:30] =>  0:29
+
+Seems like all we need to do to have code coverage from travis is to
+enable it in the YML file.
+
+Try just copying the code from [[https://github.com/JoakimSoderberg/coveralls-cmake][coveralls-cmake]]
+
+- we are generating far too much output. We need to keep it quieter or
+  we will break travis.
+- we are not filtering out non-project files from initial
+  processing. There must be a gcov option to ignore files.
+
+: Process: /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc-5/Debug/projects/quilt/spec/CMakeFiles/quilt.spec.dir/main.cpp.gcda
+: ------------------------------------------------------------------------------
+: File '../../../../projects/quilt/spec/main.cpp'
+: Lines executed:62.50% of 8
+: Creating '^#^#^#^#projects#quilt#spec#main.cpp.gcov'
+:
+: File '/usr/local/personal/include/boost/smart_ptr/detail/sp_counted_impl.hpp'
+: Lines executed:60.00% of 20
+: Creating '#usr#local#personal#include#boost#smart_ptr#detail#sp_counted_impl.hpp.gcov'
+
+See also:
+
+- [[https://github.com/JoakimSoderberg/coveralls-cmake-example/blob/master/CMakeLists.txt][example use of coveralls-cmake]]
+- [[https://github.com/SpinWaveGenie/SpinWaveGenie/blob/master/libSpinWaveGenie/CMakeLists.txt][SpinWaveGenie's support for Coveralls]]
+
+**** Direct use of Coveralls failed
+
+We had to remove coveralls:
+
+: - coveralls --gcov "$GCOV" --gcov-options '\-lp' -e /usr
+
+This was generating over 10 MB of logging so the build got terminated.
+
+We also add to remove debug builds:
+
+: -DWITH_DEBUG=on -DWITH_PROFILING=on
+
+We were getting a lot of internal compiler errors:
+
+: FAILED: /usr/bin/g++-4.9   -DBOOST_ALL_DYN_LINK -g -O0 -Wall -Wextra -pedantic -Werror -Wno-system-headers -Woverloaded-virtual -Wwrite-strings -fprofile-arcs -ftest-coverage -std=c++11 -frtti -fvisibility-inlines-hidden -fvisibility=default -isystem /usr/include/libxml2 -Istage/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/dia/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/dia_to_sml/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/frontend/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/backend/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/sml/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/config/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/cpp/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/cpp_formatters/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/sml_to_cpp/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/formatters/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/utility/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/knit/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/knitter/include -MMD -MT projects/sml_to_cpp/src/CMakeFiles/sml_to_cpp.dir/types/transformer.cpp.o -MF "projects/sml_to_cpp/src/CMakeFiles/sml_to_cpp.dir/types/transformer.cpp.o.d" -o projects/sml_to_cpp/src/CMakeFiles/sml_to_cpp.dir/types/transformer.cpp.o -c /home/travis/build/DomainDrivenConsulting/dogen/projects/sml_to_cpp/src/types/transformer.cpp
+: g++-4.9: internal compiler error: Killed (program cc1plus)
+: Please submit a full bug report,
+: with preprocessed source if appropriate.
+: See <file:///usr/share/doc/gcc-4.9/README.Bugs> for instructions.
+
+Finally note also that we must add coverage _after_ the script
+executes or else we risk doing coverage whilst the build is taking
+place. Hopefully this is the reason for these errors:
+
+: /home/travis/build/DomainDrivenConsulting/output/projects/test_models/class_without_attributes/src/CMakeFiles/class_without_attributes.dir/io/package_1/class_1_io.cpp.gcda:cannot open data file, assuming not executed
+: File '/usr/include/c++/4.9/bits/basic_ios.h'
+: No executable lines
+
+We should read up on the [[http://docs.travis-ci.com/user/build-lifecycle/][life-cycle]] properly.
+
+**** Travis Examples
+
+Seems like all we need to do to have code coverage from travis is to
+enable it in the YML file. We should look into copying it from the
+[[https://github.com/apolukhin/Boost.DLL][Boost.DLL]] [[https://raw.githubusercontent.com/apolukhin/Boost.DLL/master/.travis.yml][example]]. We also need to enable coverage on all builds,
+separately from nightlies. The key parts appear to be these:
+
+:  - ../../../b2 cxxflags="--coverage -std=$CXX_STANDARD" linkflags="--coverage"
+
+and
+
+: after_success:
+:    - find ../../../bin.v2/ -name "*.gcda" -exec cp "{}" ./ \;
+:    - find ../../../bin.v2/ -name "*.gcno" -exec cp "{}" ./ \;
+:    - sudo apt-get install -qq python-yaml lcov
+:    - lcov --directory ./ --base-directory ./ --capture --output-file coverage.info
+:    - lcov --remove coverage.info '/usr*' '*/filesystem*' '*/container*' '*/core/*' '*/exception/*' '*/intrusive/*' '*/smart_ptr/*' '*/move/*' '*/fusion/*' '*/io/*' '*/function/*' '*/iterator/*' '*/preprocessor/*' '*/system/*' '*/boost/test/*' '*/boost/detail/*' '*/utility/*' '*/dll/example/*' '*/dll/test/*' '*/pe_info.hpp' '*/macho_info.hpp' -o coverage.info
+:    - gem install coveralls-lcov
+:    - cd .. && coveralls-lcov test/coverage.info
+
+Another way seems to be using gcov, as per [[https://github.com/fabianschuiki/Maxwell][Maxwell]] [[https://raw.githubusercontent.com/fabianschuiki/Maxwell/master/.travis.yml][travis.yml]]:
+
+: - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.8; export CXX="g++-4.8" CC="gcc-4.8" GCOV="gcov-4.8"; fi
+:  - sudo pip install cpp-coveralls
+
+and
+
+: script:
+:  - export CTEST_OUTPUT_ON_FAILURE=1
+:  - cmake -DCMAKE_BUILD_TYPE=gcov . && make && make test
+: after_success:
+:  - coveralls --gcov "$GCOV" --gcov-options '\-lp' -e CMakeFiles -E ".*/test/.*" -E ".*/mock/.*" -e maxwell/gen -e language -e thirdparty -e maxwell/ast/nodes -e maxwell/driver/gramdiag.c -e maxwell/driver/Parser.cpp -e maxwell/driver/Parser.hpp -e maxwell/driver/Scanner.cpp -e maxwell/driver/position.hh -e maxwell/driver/stack.hh -e maxwell/driver/location.hh
+
+Yet another way seems to be creating a script to do coverage, as per
+[[https://github.com/BoostGSoC13/boost.afio][boost.afio]] [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/.travis.yml][travis.yml]]. The script is available [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/test/update_coveralls.sh][here]].
+
+Another example from [[https://github.com/boostorg/dll/blob/develop/.travis.yml][Boost.Dll]].
+
+*** COMPLETED Simplify local builds on emacs                          :story:
+    CLOSED: [2016-07-06 Wed 18:32]
     CLOCK: [2016-07-06 Wed 00:20]--[2016-07-06 Wed 00:40] =>  0:20
 
 With the move to build type, local builds on emacs are getting more
@@ -111,6 +211,12 @@ Create a simple bash script with a couple of parameters:
 - clang or gcc
 - debug or release
 - cmake dir
+
+Usage:
+
+: COVERALLS=1
+: /home/marco/Development/DomainDrivenConsulting/dogen/build/scripts/build.linux.sh
+: Debug gcc /usr/local/personal
 
 *** STARTED Create a debug build for clang in travis                  :story:
     CLOCK: [2016-07-05 Tue 21:00]--[2016-07-05 Tue 21:10] =>  0:10
@@ -194,86 +300,6 @@ At present we have hard-coded the file properties (old general
 settings) to be read from the root object only. In an ideal world, we
 should be able to override some of these such as the copyrights. It
 may not make sense to be able to override them all though.
-
-*** Add support for coveralls                                         :story:
-
-Seems like all we need to do to have code coverage from travis is to
-enable it in the YML file.
-
-Try just copying the code from [[https://github.com/JoakimSoderberg/coveralls-cmake][coveralls-cmake]]
-
-See also:
-
-- [[https://github.com/JoakimSoderberg/coveralls-cmake-example/blob/master/CMakeLists.txt][example use of coveralls-cmake]]
-- [[https://github.com/SpinWaveGenie/SpinWaveGenie/blob/master/libSpinWaveGenie/CMakeLists.txt][SpinWaveGenie's support for Coveralls]]
-
-**** Direct use of Coveralls failed
-
-We had to remove coveralls:
-
-: - coveralls --gcov "$GCOV" --gcov-options '\-lp' -e /usr
-
-This was generating over 10 MB of logging so the build got terminated.
-
-We also add to remove debug builds:
-
-: -DWITH_DEBUG=on -DWITH_PROFILING=on
-
-We were getting a lot of internal compiler errors:
-
-: FAILED: /usr/bin/g++-4.9   -DBOOST_ALL_DYN_LINK -g -O0 -Wall -Wextra -pedantic -Werror -Wno-system-headers -Woverloaded-virtual -Wwrite-strings -fprofile-arcs -ftest-coverage -std=c++11 -frtti -fvisibility-inlines-hidden -fvisibility=default -isystem /usr/include/libxml2 -Istage/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/dia/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/dia_to_sml/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/frontend/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/backend/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/sml/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/config/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/cpp/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/cpp_formatters/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/sml_to_cpp/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/formatters/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/utility/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/knit/include -I/home/travis/build/DomainDrivenConsulting/dogen/projects/knitter/include -MMD -MT projects/sml_to_cpp/src/CMakeFiles/sml_to_cpp.dir/types/transformer.cpp.o -MF "projects/sml_to_cpp/src/CMakeFiles/sml_to_cpp.dir/types/transformer.cpp.o.d" -o projects/sml_to_cpp/src/CMakeFiles/sml_to_cpp.dir/types/transformer.cpp.o -c /home/travis/build/DomainDrivenConsulting/dogen/projects/sml_to_cpp/src/types/transformer.cpp
-: g++-4.9: internal compiler error: Killed (program cc1plus)
-: Please submit a full bug report,
-: with preprocessed source if appropriate.
-: See <file:///usr/share/doc/gcc-4.9/README.Bugs> for instructions.
-
-Finally note also that we must add coverage _after_ the script
-executes or else we risk doing coverage whilst the build is taking
-place. Hopefully this is the reason for these errors:
-
-: /home/travis/build/DomainDrivenConsulting/output/projects/test_models/class_without_attributes/src/CMakeFiles/class_without_attributes.dir/io/package_1/class_1_io.cpp.gcda:cannot open data file, assuming not executed
-: File '/usr/include/c++/4.9/bits/basic_ios.h'
-: No executable lines
-
-We should read up on the [[http://docs.travis-ci.com/user/build-lifecycle/][life-cycle]] properly.
-
-**** Travis Examples
-
-Seems like all we need to do to have code coverage from travis is to
-enable it in the YML file. We should look into copying it from the
-[[https://github.com/apolukhin/Boost.DLL][Boost.DLL]] [[https://raw.githubusercontent.com/apolukhin/Boost.DLL/master/.travis.yml][example]]. We also need to enable coverage on all builds,
-separately from nightlies. The key parts appear to be these:
-
-:  - ../../../b2 cxxflags="--coverage -std=$CXX_STANDARD" linkflags="--coverage"
-
-and
-
-: after_success:
-:    - find ../../../bin.v2/ -name "*.gcda" -exec cp "{}" ./ \;
-:    - find ../../../bin.v2/ -name "*.gcno" -exec cp "{}" ./ \;
-:    - sudo apt-get install -qq python-yaml lcov
-:    - lcov --directory ./ --base-directory ./ --capture --output-file coverage.info
-:    - lcov --remove coverage.info '/usr*' '*/filesystem*' '*/container*' '*/core/*' '*/exception/*' '*/intrusive/*' '*/smart_ptr/*' '*/move/*' '*/fusion/*' '*/io/*' '*/function/*' '*/iterator/*' '*/preprocessor/*' '*/system/*' '*/boost/test/*' '*/boost/detail/*' '*/utility/*' '*/dll/example/*' '*/dll/test/*' '*/pe_info.hpp' '*/macho_info.hpp' -o coverage.info
-:    - gem install coveralls-lcov
-:    - cd .. && coveralls-lcov test/coverage.info
-
-Another way seems to be using gcov, as per [[https://github.com/fabianschuiki/Maxwell][Maxwell]] [[https://raw.githubusercontent.com/fabianschuiki/Maxwell/master/.travis.yml][travis.yml]]:
-
-: - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.8; export CXX="g++-4.8" CC="gcc-4.8" GCOV="gcov-4.8"; fi
-:  - sudo pip install cpp-coveralls
-
-and
-
-: script:
-:  - export CTEST_OUTPUT_ON_FAILURE=1
-:  - cmake -DCMAKE_BUILD_TYPE=gcov . && make && make test
-: after_success:
-:  - coveralls --gcov "$GCOV" --gcov-options '\-lp' -e CMakeFiles -E ".*/test/.*" -E ".*/mock/.*" -e maxwell/gen -e language -e thirdparty -e maxwell/ast/nodes -e maxwell/driver/gramdiag.c -e maxwell/driver/Parser.cpp -e maxwell/driver/Parser.hpp -e maxwell/driver/Scanner.cpp -e maxwell/driver/position.hh -e maxwell/driver/stack.hh -e maxwell/driver/location.hh
-
-Yet another way seems to be creating a script to do coverage, as per
-[[https://github.com/BoostGSoC13/boost.afio][boost.afio]] [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/.travis.yml][travis.yml]]. The script is available [[https://raw.githubusercontent.com/BoostGSoC13/boost.afio/master/test/update_coveralls.sh][here]].
-
-Another example from [[https://github.com/boostorg/dll/blob/develop/.travis.yml][Boost.Dll]].
 *** Rename element settings back to aspect settings                   :story:
 
 As per design story, we incorrectly added non-aspect attributes to
@@ -289,6 +315,12 @@ element. Rename and deal with the fallout.
 Add a class to model all of the settings required to produce the io
 invocation, create a repository for it and associated factory and
 finally add the repository to the context.
+
+*** Detect knitter and disable code generation accordingly            :story:
+
+At present you can try to build the codegen knitting targets even
+before you built knitter. We should make them conditional on detecting
+=knitter=. We just need to make sure this is not cached by CMake.
 
 *** Implement streaming for type in terms of IO settings              :story:
 
