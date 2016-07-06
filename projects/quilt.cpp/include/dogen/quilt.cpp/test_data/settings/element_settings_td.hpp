@@ -18,38 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/settings/bundle_hash.hpp"
-#include "dogen/quilt.cpp/hash/settings/bundle_repository_hash.hpp"
+#ifndef DOGEN_QUILT_CPP_TEST_DATA_SETTINGS_ELEMENT_SETTINGS_TD_HPP
+#define DOGEN_QUILT_CPP_TEST_DATA_SETTINGS_ELEMENT_SETTINGS_TD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_settings_bundle(const std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
-}
+#include "dogen/quilt.cpp/types/settings/element_settings.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace settings {
 
-std::size_t bundle_repository_hasher::hash(const bundle_repository& v) {
-    std::size_t seed(0);
+class element_settings_generator {
+public:
+    element_settings_generator();
 
-    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_settings_bundle(v.by_id()));
-    return seed;
-}
+public:
+    typedef dogen::quilt::cpp::settings::element_settings result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } } } }
+
+#endif

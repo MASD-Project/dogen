@@ -31,8 +31,6 @@ static logger lg(logger_factory("quit.cpp.formatters.workflow"));
 
 const std::string formatter_properties_not_found(
     "Could not find properties for formatter: ");
-const std::string bundle_not_found(
-    "Could not find settings bundle for: ");
 
 }
 

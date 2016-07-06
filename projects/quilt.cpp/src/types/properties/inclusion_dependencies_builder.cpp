@@ -56,10 +56,10 @@ namespace properties {
 
 inclusion_dependencies_builder::
 inclusion_dependencies_builder(const enablement_repository& erp,
-    const settings::bundle_repository& brp,
+    const settings::element_settings_repository& esrp,
     const inclusion_directives_repository& idrp)
     : enablement_repository_(erp),
-      bundle_repository_(brp),
+      element_settings_repository_(esrp),
       directives_repository_(idrp) { }
 
 boost::optional<std::string>
@@ -142,7 +142,7 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
 
 settings::aspect_settings inclusion_dependencies_builder::
 get_aspect_settings(const yarn::name& n) const {
-    const auto& bn(bundle_repository_.by_id());
+    const auto& bn(element_settings_repository_.by_id());
     const auto i(bn.find(n.id()));
     if (i == bn.end()) {
         BOOST_LOG_SEV(lg, error) << name_not_found << n.id();

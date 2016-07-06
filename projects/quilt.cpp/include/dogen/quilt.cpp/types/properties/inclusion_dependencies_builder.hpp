@@ -30,7 +30,7 @@
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/enablement_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_directives_repository.hpp"
 
@@ -66,7 +66,7 @@ public:
 public:
     inclusion_dependencies_builder(
         const enablement_repository& erp,
-        const settings::bundle_repository& brp,
+        const settings::element_settings_repository& esrp,
         const inclusion_directives_repository& idrp);
 
 private:
@@ -94,7 +94,7 @@ public:
     /**
      * @brief Returns the element settings for the supplied name.
      *
-     * @pre name must exist in the settings bundle repository.
+     * @pre name must exist in the element settings repository.
      */
     settings::aspect_settings get_aspect_settings(const yarn::name& n) const;
 
@@ -126,7 +126,7 @@ public:
 
 private:
     const enablement_repository& enablement_repository_;
-    const settings::bundle_repository& bundle_repository_;
+    const settings::element_settings_repository& element_settings_repository_;
     const inclusion_directives_repository& directives_repository_;
     std::list<std::string> inclusion_dependencies_;
 };

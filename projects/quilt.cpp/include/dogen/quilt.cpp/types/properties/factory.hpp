@@ -32,7 +32,7 @@
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/formatters/types/file_properties_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
-#include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/properties/registrar_info.hpp"
 #include "dogen/quilt.cpp/types/properties/includers_info.hpp"
@@ -70,7 +70,7 @@ private:
 public:
     std::shared_ptr<formattable> make_registrar_info(
         const config::cpp_options& opts,
-        const settings::bundle_repository& brp,
+        const settings::element_settings_repository& esrp,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         formatter_properties_repository& fprp,
         const yarn::model& m) const;

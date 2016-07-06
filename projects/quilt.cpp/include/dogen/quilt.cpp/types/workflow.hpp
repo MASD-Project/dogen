@@ -34,13 +34,12 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/quilt/types/backend_interface.hpp"
-#include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/properties/formattable.hpp"
-#include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
 #include "dogen/formatters/types/file_properties_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
-
+#include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 
 namespace dogen {
@@ -73,7 +72,7 @@ private:
         const std::forward_list<boost::filesystem::path>& dirs) const;
 
     /**
-     * @brief Create the general settings factory.
+     * @brief Create the file properties factory.
      */
     dogen::formatters::file_properties_factory create_file_properties_factory(
         const dogen::formatters::repository& frp,
@@ -86,9 +85,9 @@ private:
         create_opaque_settings_builder(const dynamic::repository& rp) const;
 
     /**
-     * @brief Create the bundle repository
+     * @brief Create the element settings repository
      */
-    settings::bundle_repository create_bundle_repository(
+    settings::element_settings_repository create_element_settings_repository(
         const dynamic::repository& rp, const dynamic::object& root_object,
         const settings::opaque_settings_builder& osb,
         const yarn::model& m) const;
@@ -105,7 +104,7 @@ private:
         const dynamic::object& root_object,
         const dogen::formatters::file_properties_factory& fpf,
         const formatters::container& fc,
-        settings::bundle_repository& brp,
+        settings::element_settings_repository& esrp,
         const yarn::model& m) const;
 
     /**
@@ -118,7 +117,7 @@ private:
      * @brief Create the files.
      */
     std::forward_list<dogen::formatters::file>
-    format_activty(const settings::bundle_repository& brp,
+    format_activty(const settings::element_settings_repository& esrp,
         const properties::element_properties_repository& eprp,
         const std::forward_list<
         std::shared_ptr<properties::formattable>
@@ -128,7 +127,7 @@ private:
      * @brief Create the files.
      */
     std::forward_list<dogen::formatters::file>
-    format_yarn_activity(const settings::bundle_repository& brp,
+    format_yarn_activity(const settings::element_settings_repository& esrp,
         const properties::element_properties_repository& eprp,
         const std::forward_list<
         boost::shared_ptr<yarn::element> >& elements) const;

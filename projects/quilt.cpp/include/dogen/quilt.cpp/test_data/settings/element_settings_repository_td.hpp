@@ -18,26 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TEST_DATA_SETTINGS_BUNDLE_TD_HPP
-#define DOGEN_QUILT_CPP_TEST_DATA_SETTINGS_BUNDLE_TD_HPP
+#ifndef DOGEN_QUILT_CPP_TEST_DATA_SETTINGS_ELEMENT_SETTINGS_REPOSITORY_TD_HPP
+#define DOGEN_QUILT_CPP_TEST_DATA_SETTINGS_ELEMENT_SETTINGS_REPOSITORY_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/settings/bundle.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace settings {
 
-class bundle_generator {
+class element_settings_repository_generator {
 public:
-    bundle_generator();
+    element_settings_repository_generator();
 
 public:
-    typedef dogen::quilt::cpp::settings::bundle result_type;
+    typedef dogen::quilt::cpp::settings::element_settings_repository result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

@@ -18,19 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_SETTINGS_BUNDLE_FACTORY_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_SETTINGS_BUNDLE_FACTORY_FWD_HPP
+#ifndef DOGEN_CPP_TYPES_SETTINGS_ELEMENT_SETTINGS_REPOSITORY_FACTORY_HPP
+#define DOGEN_CPP_TYPES_SETTINGS_ELEMENT_SETTINGS_REPOSITORY_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
+
+#include <unordered_map>
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/yarn/types/model.hpp"
+#include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace settings {
 
-class bundle_factory;
+/**
+ * @brief Creates the element settings repository.
+ */
+class element_settings_repository_factory {
+public:
+    /**
+     * @brief Create the element settings repository.
+     */
+    element_settings_repository make(const dynamic::repository& rp,
+        const dynamic::object& root_object,
+        const opaque_settings_builder& osb,
+        const yarn::model& m) const;
+};
 
 } } } }
 

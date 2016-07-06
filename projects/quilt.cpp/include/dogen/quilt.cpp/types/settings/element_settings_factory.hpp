@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_BUNDLE_FACTORY_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_BUNDLE_FACTORY_HPP
+#ifndef DOGEN_CPP_TYPES_SETTINGS_ELEMENT_SETTINGS_FACTORY_HPP
+#define DOGEN_CPP_TYPES_SETTINGS_ELEMENT_SETTINGS_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,9 +33,9 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/quilt.cpp/types/settings/bundle.hpp"
 #include "dogen/quilt.cpp/types/settings/aspect_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
 
 
@@ -45,11 +45,11 @@ namespace cpp {
 namespace settings {
 
 /**
- * @brief Produces a bundle of settings.
+ * @brief Produces the element settings.
  */
-class bundle_factory final {
+class element_settings_factory final {
 public:
-    bundle_factory(const dynamic::repository& rp,
+    element_settings_factory(const dynamic::repository& rp,
         const dynamic::object& root_object,
         const opaque_settings_builder& osb);
 
@@ -67,14 +67,14 @@ private:
 
 public:
     /**
-     * @brief Produces the settings bundle.
+     * @brief Produces the element settings.
      */
-    bundle make(const dynamic::object& o) const;
+    element_settings make(const dynamic::object& o) const;
 
     /**
      * @brief Hack to produce registrar settings.
      */
-    bundle make() const;
+    element_settings make() const;
 
 private:
     const dynamic::repository& dynamic_repository_;

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_SETTINGS_BUNDLE_HPP
-#define DOGEN_QUILT_CPP_TYPES_SETTINGS_BUNDLE_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_SETTINGS_ELEMENT_SETTINGS_HPP
+#define DOGEN_QUILT_CPP_TYPES_SETTINGS_ELEMENT_SETTINGS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,32 +31,32 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen/quilt.cpp/types/settings/aspect_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_fwd.hpp"
-#include "dogen/quilt.cpp/serialization/settings/bundle_fwd_ser.hpp"
+#include "dogen/quilt.cpp/serialization/settings/element_settings_fwd_ser.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace settings {
 
-class bundle final {
+class element_settings final {
 public:
-    bundle() = default;
-    bundle(const bundle&) = default;
-    bundle(bundle&&) = default;
-    ~bundle() = default;
+    element_settings() = default;
+    element_settings(const element_settings&) = default;
+    element_settings(element_settings&&) = default;
+    ~element_settings() = default;
 
 public:
-    bundle(
+    element_settings(
         const dogen::quilt::cpp::settings::aspect_settings& aspect_settings,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& opaque_settings,
         const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > >& opaque_settings_for_property);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::settings::bundle& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::settings::element_settings& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::settings::bundle& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::settings::element_settings& v, unsigned int version);
 
 public:
     const dogen::quilt::cpp::settings::aspect_settings& aspect_settings() const;
@@ -75,14 +75,14 @@ public:
     void opaque_settings_for_property(const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > >&& v);
 
 public:
-    bool operator==(const bundle& rhs) const;
-    bool operator!=(const bundle& rhs) const {
+    bool operator==(const element_settings& rhs) const;
+    bool operator!=(const element_settings& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(bundle& other) noexcept;
-    bundle& operator=(bundle other);
+    void swap(element_settings& other) noexcept;
+    element_settings& operator=(element_settings other);
 
 private:
     dogen::quilt::cpp::settings::aspect_settings aspect_settings_;
@@ -96,8 +96,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::quilt::cpp::settings::bundle& lhs,
-    dogen::quilt::cpp::settings::bundle& rhs) {
+    dogen::quilt::cpp::settings::element_settings& lhs,
+    dogen::quilt::cpp::settings::element_settings& rhs) {
     lhs.swap(rhs);
 }
 

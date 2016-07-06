@@ -18,39 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_BUNDLE_REPOSITORY_FACTORY_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_BUNDLE_REPOSITORY_FACTORY_HPP
+#ifndef DOGEN_QUILT_CPP_HASH_SETTINGS_ELEMENT_SETTINGS_HASH_HPP
+#define DOGEN_QUILT_CPP_HASH_SETTINGS_ELEMENT_SETTINGS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <unordered_map>
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
-#include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
+#include <functional>
+#include "dogen/quilt.cpp/types/settings/element_settings.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace settings {
 
-/**
- * @brief Creates the bundle repository.
- */
-class bundle_repository_factory {
+struct element_settings_hasher {
 public:
-    /**
-     * @brief Create the bundle repository.
-     */
-    bundle_repository make(const dynamic::repository& rp,
-        const dynamic::object& root_object,
-        const opaque_settings_builder& osb,
-        const yarn::model& m) const;
+    static std::size_t hash(const element_settings& v);
 };
 
 } } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::quilt::cpp::settings::element_settings> {
+public:
+    size_t operator()(const dogen::quilt::cpp::settings::element_settings& v) const {
+        return dogen::quilt::cpp::settings::element_settings_hasher::hash(v);
+    }
+};
+
+}
 #endif

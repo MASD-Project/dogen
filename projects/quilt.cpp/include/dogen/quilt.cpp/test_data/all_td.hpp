@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/test_data/settings/bundle_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/entity_td.hpp"
 #include "dogen/quilt.cpp/test_data/formatters/file_types_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/class_info_td.hpp"
@@ -40,8 +39,8 @@
 #include "dogen/quilt.cpp/test_data/settings/opaque_settings_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/includers_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/registrar_info_td.hpp"
+#include "dogen/quilt.cpp/test_data/settings/element_settings_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/cmakelists_info_td.hpp"
-#include "dogen/quilt.cpp/test_data/settings/bundle_repository_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/nested_type_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/odb_options_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/path_derivatives_td.hpp"
@@ -53,6 +52,7 @@
 #include "dogen/quilt.cpp/test_data/settings/directory_names_settings_td.hpp"
 #include "dogen/quilt.cpp/test_data/settings/helper_settings_repository_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/forward_declarations_info_td.hpp"
+#include "dogen/quilt.cpp/test_data/settings/element_settings_repository_td.hpp"
 #include "dogen/quilt.cpp/test_data/settings/inclusion_directive_settings_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/path_derivatives_repository_td.hpp"
 #include "dogen/quilt.cpp/test_data/settings/inclusion_directives_settings_td.hpp"

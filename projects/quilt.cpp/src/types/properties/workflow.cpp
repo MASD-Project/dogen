@@ -112,13 +112,13 @@ create_path_derivatives_repository(const config::cpp_options& opts,
 formatter_properties_repository workflow::
 create_formatter_properties(const dynamic::repository& rp,
     const dynamic::object& root_object,
-    const settings::bundle_repository& brp,
+    const settings::element_settings_repository& esrp,
     const path_derivatives_repository& pdrp,
     const formatters::container& fc,
     const yarn::model& m) const {
 
     formatter_properties_repository_factory f;
-    return f.make(rp, root_object, brp, pdrp, fc, m);
+    return f.make(rp, root_object, esrp, pdrp, fc, m);
 }
 
 std::forward_list<std::shared_ptr<properties::formattable> >
@@ -140,7 +140,7 @@ std::forward_list<std::shared_ptr<properties::formattable> >
 workflow::from_factory_activity(const config::cpp_options& opts,
     const dynamic::object& root_object,
     const dogen::formatters::file_properties_factory& fpf,
-    settings::bundle_repository& brp,
+    settings::element_settings_repository& esrp,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const properties::path_derivatives_repository& pdrp,
     formatter_properties_repository& fprp,
@@ -151,7 +151,7 @@ workflow::from_factory_activity(const config::cpp_options& opts,
     std::forward_list<std::shared_ptr<properties::formattable> > r;
     factory f;
     const auto& ro(root_object);
-    const auto ri(f.make_registrar_info(opts, brp, ps, fprp, m));
+    const auto ri(f.make_registrar_info(opts, esrp, ps, fprp, m));
     if (ri)
         r.push_front(ri);
 
@@ -187,7 +187,7 @@ workflow::execute(const config::cpp_options& opts,
     const dynamic::object& root_object,
     const dogen::formatters::file_properties_factory& fpf,
     const formatters::container& fc,
-    settings::bundle_repository& brp,
+    settings::element_settings_repository& esrp,
     const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started creating properties.";
 
@@ -196,11 +196,11 @@ workflow::execute(const config::cpp_options& opts,
     const auto pdrp(create_path_derivatives_repository(opts, ps, m));
 
     const auto hsrp(create_helper_settings_repository(rp, m));
-    auto fprp(create_formatter_properties(rp, ro, brp, pdrp, fc, m));
+    auto fprp(create_formatter_properties(rp, ro, esrp, pdrp, fc, m));
 
     auto formattables(from_transformer_activity(m));
     formattables.splice_after(formattables.before_begin(),
-        from_factory_activity(opts, ro, fpf, brp, ps, pdrp, fprp, fc, m));
+        from_factory_activity(opts, ro, fpf, esrp, ps, pdrp, fprp, fc, m));
     BOOST_LOG_SEV(lg, debug) << "Formattables: " << formattables;
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";

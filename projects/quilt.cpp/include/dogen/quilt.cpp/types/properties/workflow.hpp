@@ -34,7 +34,7 @@
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
-#include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/properties/formattable.hpp"
@@ -81,7 +81,7 @@ private:
     formatter_properties_repository
     create_formatter_properties(const dynamic::repository& rp,
         const dynamic::object& root_object,
-        const settings::bundle_repository& brp,
+        const settings::element_settings_repository& esrp,
         const path_derivatives_repository& pdrp,
         const formatters::container& fc,
         const yarn::model& m) const;
@@ -101,7 +101,7 @@ private:
     from_factory_activity(const config::cpp_options& opts,
         const dynamic::object& root_object,
         const dogen::formatters::file_properties_factory& fpf,
-        settings::bundle_repository& brp,
+        settings::element_settings_repository& esrp,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const properties::path_derivatives_repository& pdrp,
         formatter_properties_repository& fprp,
@@ -128,7 +128,7 @@ public:
         const dynamic::object& root_object,
         const dogen::formatters::file_properties_factory& fpf,
         const formatters::container& fc,
-        settings::bundle_repository& brp,
+        settings::element_settings_repository& esrp,
         const yarn::model& m) const;
 };
 

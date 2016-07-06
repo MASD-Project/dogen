@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/settings/bundle_io.hpp"
 #include "dogen/quilt.cpp/io/settings/aspect_settings_io.hpp"
 #include "dogen/quilt.cpp/io/settings/opaque_settings_io.hpp"
+#include "dogen/quilt.cpp/io/settings/element_settings_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -88,9 +88,9 @@ namespace quilt {
 namespace cpp {
 namespace settings {
 
-std::ostream& operator<<(std::ostream& s, const bundle& v) {
+std::ostream& operator<<(std::ostream& s, const element_settings& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::settings::bundle\"" << ", "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::settings::element_settings\"" << ", "
       << "\"aspect_settings\": " << v.aspect_settings() << ", "
       << "\"opaque_settings\": " << v.opaque_settings() << ", "
       << "\"opaque_settings_for_property\": " << v.opaque_settings_for_property()

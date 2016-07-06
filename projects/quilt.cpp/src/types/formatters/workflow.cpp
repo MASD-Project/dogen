@@ -43,8 +43,6 @@ static logger lg(logger_factory("quit.cpp.formatters.workflow"));
 
 const std::string formatter_properties_not_found(
     "Could not find properties for formatter: ");
-const std::string bundle_not_found(
-    "Could not find settings bundle for: ");
 
 }
 
@@ -224,12 +222,12 @@ cpp::formatters::registrar& workflow::registrar() {
 }
 
 std::forward_list<dogen::formatters::file>
-workflow::execute(const settings::bundle_repository& brp,
+workflow::execute(const settings::element_settings_repository& esrp,
     const properties::element_properties_repository& eprp,
     const std::forward_list<
     std::shared_ptr<properties::formattable> >& f) const {
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
-    context_factory factory(brp, eprp, registrar().formatter_helpers());
+    context_factory factory(esrp, eprp, registrar().formatter_helpers());
     dispatcher d(factory, registrar().formatter_container());
     for (const auto sp : f)
         d.format(*sp);
@@ -245,7 +243,7 @@ workflow::execute(const settings::bundle_repository& brp,
 }
 
 std::forward_list<dogen::formatters::file>
-workflow::execute(const settings::bundle_repository& brp,
+workflow::execute(const settings::element_settings_repository& esrp,
     const properties::element_properties_repository& eprp,
     const std::forward_list<
     boost::shared_ptr<yarn::element> >& elements) const {
@@ -253,7 +251,7 @@ workflow::execute(const settings::bundle_repository& brp,
     BOOST_LOG_SEV(lg, debug) << "Starting workflow - yarn version.";
 
     std::forward_list<dogen::formatters::file> r;
-    context_factory factory(brp, eprp, registrar().formatter_helpers());
+    context_factory factory(esrp, eprp, registrar().formatter_helpers());
     element_formatter ef(factory, registrar().formatter_container());
     for (const auto e : elements) {
         BOOST_LOG_SEV(lg, warn) << "Processing element: " << e->name().id();

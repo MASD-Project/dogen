@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_builder.hpp"
 
 namespace dogen {
@@ -40,7 +40,7 @@ class inclusion_dependencies_builder_factory final {
 public:
     inclusion_dependencies_builder_factory(
         const enablement_repository& erp,
-        const settings::bundle_repository& brp,
+        const settings::element_settings_repository& esrp,
         const inclusion_directives_repository& idrp);
 
 public:
@@ -51,7 +51,7 @@ public:
 
 private:
     const enablement_repository& enablement_repository_;
-    const settings::bundle_repository& bundle_repository_;
+    const settings::element_settings_repository& element_settings_repository_;
     const inclusion_directives_repository& directives_repository_;
 };
 

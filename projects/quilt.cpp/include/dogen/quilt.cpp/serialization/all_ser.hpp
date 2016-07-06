@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/quilt.cpp/serialization/registrar_ser.hpp"
-#include "dogen/quilt.cpp/serialization/settings/bundle_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/entity_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formatters/file_types_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/class_info_ser.hpp"
@@ -41,8 +40,8 @@
 #include "dogen/quilt.cpp/serialization/settings/opaque_settings_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/includers_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/registrar_info_ser.hpp"
+#include "dogen/quilt.cpp/serialization/settings/element_settings_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/cmakelists_info_ser.hpp"
-#include "dogen/quilt.cpp/serialization/settings/bundle_repository_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/nested_type_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/odb_options_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/path_derivatives_ser.hpp"
@@ -54,6 +53,7 @@
 #include "dogen/quilt.cpp/serialization/settings/directory_names_settings_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/helper_settings_repository_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/forward_declarations_info_ser.hpp"
+#include "dogen/quilt.cpp/serialization/settings/element_settings_repository_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/inclusion_directive_settings_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/path_derivatives_repository_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/inclusion_directives_settings_ser.hpp"

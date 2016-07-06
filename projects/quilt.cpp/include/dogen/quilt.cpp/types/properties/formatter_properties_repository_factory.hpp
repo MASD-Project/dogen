@@ -33,7 +33,7 @@
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
-#include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/properties/registrar.hpp"
 #include "dogen/quilt.cpp/types/properties/enablement_repository.hpp"
@@ -113,7 +113,7 @@ public:
     formatter_properties_repository make(
         const dynamic::repository& srp,
         const dynamic::object& root_object,
-        const settings::bundle_repository& brp,
+        const settings::element_settings_repository& esrp,
         const path_derivatives_repository& pdrp,
         const formatters::container& fc,
         const yarn::model& m) const;

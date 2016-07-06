@@ -27,16 +27,16 @@ namespace properties {
 
 inclusion_dependencies_builder_factory::inclusion_dependencies_builder_factory(
     const enablement_repository& erp,
-    const settings::bundle_repository& brp,
+    const settings::element_settings_repository& esrp,
     const inclusion_directives_repository& idrp)
-    : enablement_repository_(erp), bundle_repository_(brp),
+    : enablement_repository_(erp), element_settings_repository_(esrp),
       directives_repository_(idrp) { }
 
 inclusion_dependencies_builder inclusion_dependencies_builder_factory::
 make() const {
     return inclusion_dependencies_builder(
         enablement_repository_,
-        bundle_repository_,
+        element_settings_repository_,
         directives_repository_);
 }
 

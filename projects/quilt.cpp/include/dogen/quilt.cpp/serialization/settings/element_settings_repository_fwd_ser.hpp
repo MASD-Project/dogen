@@ -18,25 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_BUNDLE_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_BUNDLE_SER_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_ELEMENT_SETTINGS_REPOSITORY_FWD_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_ELEMENT_SETTINGS_REPOSITORY_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/quilt.cpp/types/settings/bundle.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings_repository_fwd.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::settings::bundle)
 namespace boost {
 namespace serialization {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::quilt::cpp::settings::bundle& v, unsigned int version);
+template<class Archive>
+void save(Archive& ar, const dogen::quilt::cpp::settings::element_settings_repository& v, unsigned int version);
 
-template<typename Archive>
-void load(Archive& ar, dogen::quilt::cpp::settings::bundle& v, unsigned int version);
+template<class Archive>
+void load(Archive& ar, dogen::quilt::cpp::settings::element_settings_repository& v, unsigned int version);
 
 } }
 

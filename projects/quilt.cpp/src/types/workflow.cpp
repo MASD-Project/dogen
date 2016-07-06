@@ -27,7 +27,7 @@
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/properties/workflow.hpp"
 #include "dogen/quilt.cpp/types/settings/directory_names_settings_factory.hpp"
-#include "dogen/quilt.cpp/types/settings/bundle_repository_factory.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/workflow.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
 #include "dogen/quilt.cpp/types/workflow.hpp"
@@ -86,11 +86,11 @@ create_opaque_settings_builder(const dynamic::repository& rp) const {
     return r;
 }
 
-settings::bundle_repository workflow::create_bundle_repository(
+settings::element_settings_repository workflow::create_element_settings_repository(
     const dynamic::repository& rp, const dynamic::object& root_object,
     const settings::opaque_settings_builder& osb,
     const yarn::model& m) const {
-    settings::bundle_repository_factory f;
+    settings::element_settings_repository_factory f;
     return f.make(rp, root_object, osb, m);
 }
 
@@ -104,11 +104,11 @@ workflow::create_properties_activty(
     const dynamic::object& root_object,
     const dogen::formatters::file_properties_factory& fpf,
     const formatters::container& fc,
-    settings::bundle_repository& brp,
+    settings::element_settings_repository& esrp,
     const yarn::model& m) const {
 
     properties::workflow fw;
-    return fw.execute(opts, srp, root_object, fpf, fc, brp, m);
+    return fw.execute(opts, srp, root_object, fpf, fc, esrp, m);
 }
 
 std::forward_list<boost::shared_ptr<yarn::element> >
@@ -118,22 +118,22 @@ workflow::obtain_enriched_yarn_model_activity(const yarn::model& m) const {
 }
 
 std::forward_list<dogen::formatters::file>
-workflow::format_activty(const settings::bundle_repository& brp,
+workflow::format_activty(const settings::element_settings_repository& esrp,
     const properties::element_properties_repository& eprp,
     const std::forward_list<
     std::shared_ptr<properties::formattable>
     >& f) const {
     formatters::workflow w;
-    return w.execute(brp, eprp, f);
+    return w.execute(esrp, eprp, f);
 }
 
 std::forward_list<dogen::formatters::file> workflow::
-format_yarn_activity(const settings::bundle_repository& brp,
+format_yarn_activity(const settings::element_settings_repository& esrp,
     const properties::element_properties_repository& eprp,
     const std::forward_list<
     boost::shared_ptr<yarn::element> >& elements) const {
     formatters::workflow w;
-    return w.execute(brp, eprp, elements);
+    return w.execute(esrp, eprp, elements);
 }
 
 std::string workflow::name() const {
@@ -173,17 +173,17 @@ workflow::generate(const config::knitting_options& ko,
     const auto fpf(create_file_properties_factory(frp, ro));
 
     const auto osb(create_opaque_settings_builder(rp));
-    auto brp(create_bundle_repository(rp, ro, osb, m));
+    auto esrp(create_element_settings_repository(rp, ro, osb, m));
 
     formatters::workflow::registrar().validate();
     const auto& fc(formatters::workflow::registrar().formatter_container());
 
     const auto& kcpp(ko.cpp());
-    const auto pair(create_properties_activty(kcpp, rp, ro, fpf, fc, brp, m));
-    auto r(format_activty(brp, pair.first, pair.second));
+    const auto pair(create_properties_activty(kcpp, rp, ro, fpf, fc, esrp, m));
+    auto r(format_activty(esrp, pair.first, pair.second));
 
     const auto elements(obtain_enriched_yarn_model_activity(m));
-    auto ye(format_yarn_activity(brp, pair.first, elements));
+    auto ye(format_yarn_activity(esrp, pair.first, elements));
     r.splice_after(r.before_begin(), ye);
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";

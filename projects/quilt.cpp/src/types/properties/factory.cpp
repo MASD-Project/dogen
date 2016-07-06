@@ -55,8 +55,8 @@ const std::string cmakelists_name("CMakeLists.txt");
 const std::string odb_options_name("options.odb");
 const std::string settings_not_found_for_formatter(
     "Settings not found for formatter: ");
-const std::string bundle_not_found_for_name(
-    "Settings bundle not found for name: ");
+const std::string element_settings_not_found_for_name(
+    "Element settings not found for name: ");
 const std::string derivatives_not_found_for_formatter(
     "Path derivatives not found for formatter: ");
 const std::string properties_not_found(
@@ -216,7 +216,7 @@ bool factory::is_enabled(const formatter_properties_repository& fprp,
 
 std::shared_ptr<formattable> factory::make_registrar_info(
     const config::cpp_options& opts,
-    const settings::bundle_repository& brp,
+    const settings::element_settings_repository& esrp,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     formatter_properties_repository& fprp,
     const yarn::model& m) const {
@@ -229,11 +229,12 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     r->namespaces(b.namespace_list(n));
     r->id(n.id());
 
-    const auto i(brp.by_id().find(n.id()));
-    if (i == brp.by_id().end()) {
+    const auto i(esrp.by_id().find(n.id()));
+    if (i == esrp.by_id().end()) {
         const auto id(n.id());
-        BOOST_LOG_SEV(lg, error) << bundle_not_found_for_name << id;
-        BOOST_THROW_EXCEPTION(building_error(bundle_not_found_for_name + id));
+        BOOST_LOG_SEV(lg, error) << element_settings_not_found_for_name << id;
+        BOOST_THROW_EXCEPTION(
+            building_error(element_settings_not_found_for_name + id));
     }
 
     for (const auto& pair : m.references()) {

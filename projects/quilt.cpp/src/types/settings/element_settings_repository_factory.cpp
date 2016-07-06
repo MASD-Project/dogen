@@ -29,16 +29,16 @@
 #include "dogen/yarn/types/exception.hpp"
 #include "dogen/yarn/types/visitor.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
-#include "dogen/quilt.cpp/io/settings/bundle_repository_io.hpp"
-#include "dogen/quilt.cpp/types/settings/bundle_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/building_error.hpp"
-#include "dogen/quilt.cpp/types/settings/bundle_repository_factory.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings_factory.hpp"
+#include "dogen/quilt.cpp/io/settings/element_settings_repository_io.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings_repository_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(
-        "quilt.cpp.settings.bundle_repository_factory"));
+        "quilt.cpp.settings.element_settings_repository_factory"));
 
 const std::string registrar_name("registrar");
 const std::string duplicate_name("Duplicate name: ");
@@ -53,15 +53,16 @@ namespace settings {
 namespace {
 
 /**
- * @brief Generates settings bundles for all elements.
+ * @brief Generates the element_settings.
  */
 class generator final : public yarn::element_visitor {
 public:
-    generator(const bundle_factory& f, const opaque_settings_builder& osb)
+    generator(const element_settings_factory& f,
+        const opaque_settings_builder& osb)
         : factory_(f), opaque_settings_builder_(osb) {}
 
 private:
-    void insert(const yarn::name& n, const settings::bundle& b) {
+    void insert(const yarn::name& n, const settings::element_settings& b) {
         const auto pair(std::make_pair(n.id(), b));
         const auto res(result_.by_id().insert(pair));
         if (!res.second) {
@@ -109,24 +110,24 @@ public:
     void visit(const dogen::yarn::visitor& v) { generate(v); }
 
 public:
-    const bundle_repository& result() const { return result_; }
+    const element_settings_repository& result() const { return result_; }
 
 private:
-    const bundle_factory& factory_;
+    const element_settings_factory& factory_;
     const opaque_settings_builder& opaque_settings_builder_;
-    bundle_repository result_;
+    element_settings_repository result_;
 };
 
 }
 
-bundle_repository bundle_repository_factory::
+element_settings_repository element_settings_repository_factory::
 make(const dynamic::repository& rp, const dynamic::object& root_object,
     const opaque_settings_builder& osb,
     const yarn::model& m) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Creating settings bundle repository.";
+    BOOST_LOG_SEV(lg, debug) << "Creating element settings repository.";
 
-    const bundle_factory f(rp, root_object, osb);
+    const element_settings_factory f(rp, root_object, osb);
     generator g(f, osb);
     for (const auto& pair : m.elements()) {
         const auto& e(*pair.second);
@@ -145,7 +146,7 @@ make(const dynamic::repository& rp, const dynamic::object& root_object,
         BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished creating settings bundle repository."
+    BOOST_LOG_SEV(lg, debug) << "Finished creating element settings repository."
                              << r;
     return r;
 }

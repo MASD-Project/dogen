@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/io/settings/bundle_io.hpp"
 #include "dogen/quilt.cpp/io/properties/entity_io.hpp"
 #include "dogen/quilt.cpp/io/formatters/file_types_io.hpp"
 #include "dogen/quilt.cpp/io/properties/class_info_io.hpp"
@@ -40,8 +39,8 @@
 #include "dogen/quilt.cpp/io/settings/opaque_settings_io.hpp"
 #include "dogen/quilt.cpp/io/properties/includers_info_io.hpp"
 #include "dogen/quilt.cpp/io/properties/registrar_info_io.hpp"
+#include "dogen/quilt.cpp/io/settings/element_settings_io.hpp"
 #include "dogen/quilt.cpp/io/properties/cmakelists_info_io.hpp"
-#include "dogen/quilt.cpp/io/settings/bundle_repository_io.hpp"
 #include "dogen/quilt.cpp/io/properties/nested_type_info_io.hpp"
 #include "dogen/quilt.cpp/io/properties/odb_options_info_io.hpp"
 #include "dogen/quilt.cpp/io/properties/path_derivatives_io.hpp"
@@ -53,6 +52,7 @@
 #include "dogen/quilt.cpp/io/settings/directory_names_settings_io.hpp"
 #include "dogen/quilt.cpp/io/settings/helper_settings_repository_io.hpp"
 #include "dogen/quilt.cpp/io/properties/forward_declarations_info_io.hpp"
+#include "dogen/quilt.cpp/io/settings/element_settings_repository_io.hpp"
 #include "dogen/quilt.cpp/io/settings/inclusion_directive_settings_io.hpp"
 #include "dogen/quilt.cpp/io/properties/path_derivatives_repository_io.hpp"
 #include "dogen/quilt.cpp/io/settings/inclusion_directives_settings_io.hpp"

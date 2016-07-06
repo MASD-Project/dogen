@@ -202,11 +202,13 @@ bool assistant::is_test_data_enabled() const {
 }
 
 bool assistant::is_complete_constructor_disabled() const {
-    return context_.bundle().aspect_settings().disable_complete_constructor();
+    const auto& es(context_.element_settings());
+    return es.aspect_settings().disable_complete_constructor();
 }
 
 bool assistant::is_xml_serialization_disabled() const {
-    return context_.bundle().aspect_settings().disable_xml_serialization();
+    const auto& es(context_.element_settings());
+    return es.aspect_settings().disable_xml_serialization();
 }
 
 void assistant::validate() const {
@@ -537,14 +539,15 @@ get_odb_settings(const std::unordered_map<std::string,
 
 boost::shared_ptr<settings::odb_settings>
 assistant::get_odb_settings() const {
-    const auto& os(context_.bundle().opaque_settings());
+    const auto& os(context_.element_settings().opaque_settings());
     return get_odb_settings(os);
 }
 
 boost::shared_ptr<settings::odb_settings> assistant::
 get_odb_settings(const std::string& property_id) const {
 
-    const auto& osfp(context_.bundle().opaque_settings_for_property());
+    const auto& es(context_.element_settings());
+    const auto& osfp(es.opaque_settings_for_property());
     const auto i(osfp.find(property_id));
     if (i == osfp.end())
         return boost::shared_ptr<settings::odb_settings>();

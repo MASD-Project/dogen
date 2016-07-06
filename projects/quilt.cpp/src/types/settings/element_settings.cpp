@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/settings/bundle.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings.hpp"
 
 namespace boost {
 
@@ -35,7 +35,7 @@ namespace quilt {
 namespace cpp {
 namespace settings {
 
-bundle::bundle(
+element_settings::element_settings(
     const dogen::quilt::cpp::settings::aspect_settings& aspect_settings,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& opaque_settings,
     const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > >& opaque_settings_for_property)
@@ -43,70 +43,70 @@ bundle::bundle(
       opaque_settings_(opaque_settings),
       opaque_settings_for_property_(opaque_settings_for_property) { }
 
-void bundle::swap(bundle& other) noexcept {
+void element_settings::swap(element_settings& other) noexcept {
     using std::swap;
     swap(aspect_settings_, other.aspect_settings_);
     swap(opaque_settings_, other.opaque_settings_);
     swap(opaque_settings_for_property_, other.opaque_settings_for_property_);
 }
 
-bool bundle::operator==(const bundle& rhs) const {
+bool element_settings::operator==(const element_settings& rhs) const {
     return aspect_settings_ == rhs.aspect_settings_ &&
         opaque_settings_ == rhs.opaque_settings_ &&
         opaque_settings_for_property_ == rhs.opaque_settings_for_property_;
 }
 
-bundle& bundle::operator=(bundle other) {
+element_settings& element_settings::operator=(element_settings other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const dogen::quilt::cpp::settings::aspect_settings& bundle::aspect_settings() const {
+const dogen::quilt::cpp::settings::aspect_settings& element_settings::aspect_settings() const {
     return aspect_settings_;
 }
 
-dogen::quilt::cpp::settings::aspect_settings& bundle::aspect_settings() {
+dogen::quilt::cpp::settings::aspect_settings& element_settings::aspect_settings() {
     return aspect_settings_;
 }
 
-void bundle::aspect_settings(const dogen::quilt::cpp::settings::aspect_settings& v) {
+void element_settings::aspect_settings(const dogen::quilt::cpp::settings::aspect_settings& v) {
     aspect_settings_ = v;
 }
 
-void bundle::aspect_settings(const dogen::quilt::cpp::settings::aspect_settings&& v) {
+void element_settings::aspect_settings(const dogen::quilt::cpp::settings::aspect_settings&& v) {
     aspect_settings_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& bundle::opaque_settings() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& element_settings::opaque_settings() const {
     return opaque_settings_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& bundle::opaque_settings() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& element_settings::opaque_settings() {
     return opaque_settings_;
 }
 
-void bundle::opaque_settings(const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& v) {
+void element_settings::opaque_settings(const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& v) {
     opaque_settings_ = v;
 }
 
-void bundle::opaque_settings(const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >&& v) {
+void element_settings::opaque_settings(const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >&& v) {
     opaque_settings_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > >& bundle::opaque_settings_for_property() const {
+const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > >& element_settings::opaque_settings_for_property() const {
     return opaque_settings_for_property_;
 }
 
-std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > >& bundle::opaque_settings_for_property() {
+std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > >& element_settings::opaque_settings_for_property() {
     return opaque_settings_for_property_;
 }
 
-void bundle::opaque_settings_for_property(const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > >& v) {
+void element_settings::opaque_settings_for_property(const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > >& v) {
     opaque_settings_for_property_ = v;
 }
 
-void bundle::opaque_settings_for_property(const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > >&& v) {
+void element_settings::opaque_settings_for_property(const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > >&& v) {
     opaque_settings_for_property_ = std::move(v);
 }
 

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/settings/bundle_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/aspect_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/opaque_settings_hash.hpp"
+#include "dogen/quilt.cpp/hash/settings/element_settings_hash.hpp"
 
 namespace {
 
@@ -61,7 +61,7 @@ namespace quilt {
 namespace cpp {
 namespace settings {
 
-std::size_t bundle_hasher::hash(const bundle& v) {
+std::size_t element_settings_hasher::hash(const element_settings& v) {
     std::size_t seed(0);
 
     combine(seed, v.aspect_settings());

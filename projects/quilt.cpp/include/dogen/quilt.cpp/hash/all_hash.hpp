@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/hash/settings/bundle_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/entity_hash.hpp"
 #include "dogen/quilt.cpp/hash/formatters/file_types_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/class_info_hash.hpp"
@@ -40,8 +39,8 @@
 #include "dogen/quilt.cpp/hash/settings/opaque_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/includers_info_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/registrar_info_hash.hpp"
+#include "dogen/quilt.cpp/hash/settings/element_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/cmakelists_info_hash.hpp"
-#include "dogen/quilt.cpp/hash/settings/bundle_repository_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/nested_type_info_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/odb_options_info_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/path_derivatives_hash.hpp"
@@ -53,6 +52,7 @@
 #include "dogen/quilt.cpp/hash/settings/directory_names_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/helper_settings_repository_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/forward_declarations_info_hash.hpp"
+#include "dogen/quilt.cpp/hash/settings/element_settings_repository_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/inclusion_directive_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/path_derivatives_repository_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/inclusion_directives_settings_hash.hpp"

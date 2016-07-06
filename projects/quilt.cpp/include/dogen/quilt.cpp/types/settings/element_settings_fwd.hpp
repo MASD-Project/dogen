@@ -18,37 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_HASH_SETTINGS_BUNDLE_HASH_HPP
-#define DOGEN_QUILT_CPP_HASH_SETTINGS_BUNDLE_HASH_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_SETTINGS_ELEMENT_SETTINGS_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_SETTINGS_ELEMENT_SETTINGS_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
-
-#include <functional>
-#include "dogen/quilt.cpp/types/settings/bundle.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace settings {
 
-struct bundle_hasher {
-public:
-    static std::size_t hash(const bundle& v);
-};
+class element_settings;
 
 } } } }
 
-namespace std {
-
-template<>
-struct hash<dogen::quilt::cpp::settings::bundle> {
-public:
-    size_t operator()(const dogen::quilt::cpp::settings::bundle& v) const {
-        return dogen::quilt::cpp::settings::bundle_hasher::hash(v);
-    }
-};
-
-}
 #endif

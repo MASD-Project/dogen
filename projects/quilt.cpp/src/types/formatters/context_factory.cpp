@@ -38,7 +38,8 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-const settings::bundle context_factory::empty_bundle_ = settings::bundle();
+const settings::element_settings
+context_factory::empty_element_settings_ = settings::element_settings();
 const properties::element_properties
 context_factory::empty_element_properties_ = properties::element_properties();
 const std::unordered_map<
@@ -53,13 +54,15 @@ const std::unordered_map<
         std::string,
         std::list<std::shared_ptr<formatter_helper_interface>>>>();
 
-context_factory::context_factory(const settings::bundle_repository& brp,
+context_factory::context_factory(
+    const settings::element_settings_repository& esrp,
     const properties::element_properties_repository& eprp,
     const std::unordered_map<
     std::string, std::unordered_map<
     std::string,
     std::list<std::shared_ptr<formatter_helper_interface>>>>& helpers)
-    : bundle_(brp), element_properties_(eprp), formatter_helpers_(helpers) {}
+    : element_settings_(esrp), element_properties_(eprp),
+      formatter_helpers_(helpers) {}
 
 const properties::element_properties& context_factory::
 properties_for_id(const std::string& n) const {
@@ -73,25 +76,26 @@ properties_for_id(const std::string& n) const {
     return i->second;
 }
 
-const settings::bundle& context_factory::
-bundle_for_id(const std::string& n) const {
-    const auto& b(bundle_.by_id());
+const settings::element_settings& context_factory::
+element_settings_for_id(const std::string& n) const {
+    const auto& b(element_settings_.by_id());
     const auto i(b.find(n));
     if (i == b.end()) {
-        // FIXME: we will return empty bundles due to the hackery we
+        // FIXME: we will return empty element_settingss due to the hackery we
         // are doing at the moment in factory.
-        return empty_bundle_;
+        return empty_element_settings_;
     }
     return i->second;
 }
 
 context context_factory::make_empty_context() const {
-    return context(empty_bundle_, empty_element_properties_, empty_helpers_);
+    return context(empty_element_settings_, empty_element_properties_,
+        empty_helpers_);
 }
 
 context context_factory::make(const std::string& id) const {
     const auto& ep(properties_for_id(id));
-    const auto& b(bundle_for_id(id));
+    const auto& b(element_settings_for_id(id));
     return context(b, ep, formatter_helpers_);
 }
 

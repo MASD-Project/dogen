@@ -118,7 +118,7 @@ formatter_properties_repository_factory::create_formatter_properties(
 
 formatter_properties_repository formatter_properties_repository_factory::
 make(const dynamic::repository& srp, const dynamic::object& root_object,
-    const settings::bundle_repository& brp,
+    const settings::element_settings_repository& esrp,
     const path_derivatives_repository& pdrp, const formatters::container& fc,
     const yarn::model& m) const {
 
@@ -129,7 +129,7 @@ make(const dynamic::repository& srp, const dynamic::object& root_object,
     registrar rg;
     initialise_registrar(fc, rg);
     const auto pc(rg.container());
-    const inclusion_dependencies_builder_factory bf(erp, brp, idrp);
+    const inclusion_dependencies_builder_factory bf(erp, esrp, idrp);
     const auto dprp(create_inclusion_dependencies_repository(bf, pc, m));
 
     const auto mfd(merge(pdrp, dprp, erp));

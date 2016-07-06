@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/settings/bundle_io.hpp"
-#include "dogen/quilt.cpp/io/settings/bundle_repository_io.hpp"
+#include "dogen/quilt.cpp/io/settings/element_settings_io.hpp"
+#include "dogen/quilt.cpp/io/settings/element_settings_repository_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -32,7 +32,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::settings::element_settings>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -53,9 +53,9 @@ namespace quilt {
 namespace cpp {
 namespace settings {
 
-std::ostream& operator<<(std::ostream& s, const bundle_repository& v) {
+std::ostream& operator<<(std::ostream& s, const element_settings_repository& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::settings::bundle_repository\"" << ", "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::settings::element_settings_repository\"" << ", "
       << "\"by_id\": " << v.by_id()
       << " }";
     return(s);

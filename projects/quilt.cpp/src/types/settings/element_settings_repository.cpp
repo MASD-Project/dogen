@@ -18,44 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace settings {
 
-bundle_repository::bundle_repository(const std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle>& by_id)
+element_settings_repository::element_settings_repository(const std::unordered_map<std::string, dogen::quilt::cpp::settings::element_settings>& by_id)
     : by_id_(by_id) { }
 
-void bundle_repository::swap(bundle_repository& other) noexcept {
+void element_settings_repository::swap(element_settings_repository& other) noexcept {
     using std::swap;
     swap(by_id_, other.by_id_);
 }
 
-bool bundle_repository::operator==(const bundle_repository& rhs) const {
+bool element_settings_repository::operator==(const element_settings_repository& rhs) const {
     return by_id_ == rhs.by_id_;
 }
 
-bundle_repository& bundle_repository::operator=(bundle_repository other) {
+element_settings_repository& element_settings_repository::operator=(element_settings_repository other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle>& bundle_repository::by_id() const {
+const std::unordered_map<std::string, dogen::quilt::cpp::settings::element_settings>& element_settings_repository::by_id() const {
     return by_id_;
 }
 
-std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle>& bundle_repository::by_id() {
+std::unordered_map<std::string, dogen::quilt::cpp::settings::element_settings>& element_settings_repository::by_id() {
     return by_id_;
 }
 
-void bundle_repository::by_id(const std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle>& v) {
+void element_settings_repository::by_id(const std::unordered_map<std::string, dogen::quilt::cpp::settings::element_settings>& v) {
     by_id_ = v;
 }
 
-void bundle_repository::by_id(const std::unordered_map<std::string, dogen::quilt::cpp::settings::bundle>&& v) {
+void element_settings_repository::by_id(const std::unordered_map<std::string, dogen::quilt::cpp::settings::element_settings>&& v) {
     by_id_ = std::move(v);
 }
 

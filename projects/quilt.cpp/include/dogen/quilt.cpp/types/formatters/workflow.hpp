@@ -33,7 +33,7 @@
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/types/properties/formattable.hpp"
-#include "dogen/quilt.cpp/types/settings/bundle_repository.hpp"
+#include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar.hpp"
 #include "dogen/quilt.cpp/types/formatters/context_factory.hpp"
@@ -60,13 +60,13 @@ public:
      * representations.
      */
     std::forward_list<dogen::formatters::file>
-    execute(const settings::bundle_repository& brp,
+    execute(const settings::element_settings_repository& esrp,
         const properties::element_properties_repository& eprp,
         const std::forward_list<
         std::shared_ptr<properties::formattable> >& f) const;
 
     std::forward_list<dogen::formatters::file>
-    execute(const settings::bundle_repository& brp,
+    execute(const settings::element_settings_repository& esrp,
         const properties::element_properties_repository& eprp,
         const std::forward_list<
         boost::shared_ptr<yarn::element> >& elements) const;
