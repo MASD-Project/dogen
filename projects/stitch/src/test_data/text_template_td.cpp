@@ -20,14 +20,14 @@
  */
 #include "dogen/stitch/test_data/line_td.hpp"
 #include "dogen/dynamic/test_data/object_td.hpp"
+#include "dogen/stitch/test_data/properties_td.hpp"
 #include "dogen/stitch/test_data/text_template_td.hpp"
-#include "dogen/stitch/test_data/settings_bundle_td.hpp"
 
 namespace {
 
-dogen::stitch::settings_bundle
-create_dogen_stitch_settings_bundle(const unsigned int position) {
-    return dogen::stitch::settings_bundle_generator::create(position);
+dogen::stitch::properties
+create_dogen_stitch_properties(const unsigned int position) {
+    return dogen::stitch::properties_generator::create(position);
 }
 
 dogen::dynamic::object
@@ -57,7 +57,7 @@ text_template_generator::text_template_generator() : position_(0) { }
 
 void text_template_generator::
 populate(const unsigned int position, result_type& v) {
-    v.settings(create_dogen_stitch_settings_bundle(position + 0));
+    v.properties(create_dogen_stitch_properties(position + 0));
     v.extensions(create_dogen_dynamic_object(position + 1));
     v.lines(create_std_list_dogen_stitch_line(position + 2));
 }

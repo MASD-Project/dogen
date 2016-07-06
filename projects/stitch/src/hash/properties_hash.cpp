@@ -18,22 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/stitch/io/settings_bundle_io.hpp"
-#include "dogen/stitch/io/stitching_settings_io.hpp"
-#include "dogen/formatters/io/file_properties_io.hpp"
+#include "dogen/stitch/hash/properties_hash.hpp"
+#include "dogen/stitch/hash/stitching_settings_hash.hpp"
+#include "dogen/formatters/hash/file_properties_hash.hpp"
 
-namespace boost {
+namespace {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::file_properties>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
 
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
+inline std::size_t hash_boost_optional_dogen_formatters_file_properties(const boost::optional<dogen::formatters::file_properties>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
 }
 
 }
@@ -41,13 +45,13 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::fo
 namespace dogen {
 namespace stitch {
 
-std::ostream& operator<<(std::ostream& s, const settings_bundle& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::stitch::settings_bundle\"" << ", "
-      << "\"file_properties\": " << v.file_properties() << ", "
-      << "\"stitching_settings\": " << v.stitching_settings()
-      << " }";
-    return(s);
+std::size_t properties_hasher::hash(const properties& v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_boost_optional_dogen_formatters_file_properties(v.file_properties()));
+    combine(seed, v.stitching_settings());
+
+    return seed;
 }
 
 } }

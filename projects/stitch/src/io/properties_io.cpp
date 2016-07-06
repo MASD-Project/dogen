@@ -18,26 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_SERIALIZATION_SETTINGS_BUNDLE_SER_HPP
-#define DOGEN_STITCH_SERIALIZATION_SETTINGS_BUNDLE_SER_HPP
+#include <ostream>
+#include "dogen/stitch/io/properties_io.hpp"
+#include "dogen/stitch/io/stitching_settings_io.hpp"
+#include "dogen/formatters/io/file_properties_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <boost/serialization/split_free.hpp>
-#include "dogen/stitch/types/settings_bundle.hpp"
-
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::stitch::settings_bundle)
 namespace boost {
-namespace serialization {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::stitch::settings_bundle& v, unsigned int version);
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::file_properties>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
-template<typename Archive>
-void load(Archive& ar, dogen::stitch::settings_bundle& v, unsigned int version);
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace dogen {
+namespace stitch {
+
+std::ostream& operator<<(std::ostream& s, const properties& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::stitch::properties\"" << ", "
+      << "\"file_properties\": " << v.file_properties() << ", "
+      << "\"stitching_settings\": " << v.stitching_settings()
+      << " }";
+    return(s);
+}
 
 } }
-
-#endif

@@ -18,23 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_SERIALIZATION_SETTINGS_BUNDLE_FWD_SER_HPP
-#define DOGEN_STITCH_SERIALIZATION_SETTINGS_BUNDLE_FWD_SER_HPP
+#ifndef DOGEN_STITCH_SERIALIZATION_PROPERTIES_SER_HPP
+#define DOGEN_STITCH_SERIALIZATION_PROPERTIES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/stitch/types/settings_bundle_fwd.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/stitch/types/properties.hpp"
 
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::stitch::properties)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-void save(Archive& ar, const dogen::stitch::settings_bundle& v, unsigned int version);
+template<typename Archive>
+void save(Archive& ar, const dogen::stitch::properties& v, unsigned int version);
 
-template<class Archive>
-void load(Archive& ar, dogen::stitch::settings_bundle& v, unsigned int version);
+template<typename Archive>
+void load(Archive& ar, dogen::stitch::properties& v, unsigned int version);
 
 } }
 

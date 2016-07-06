@@ -18,35 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_HASH_SETTINGS_BUNDLE_HASH_HPP
-#define DOGEN_STITCH_HASH_SETTINGS_BUNDLE_HASH_HPP
+#ifndef DOGEN_STITCH_SERIALIZATION_PROPERTIES_FWD_SER_HPP
+#define DOGEN_STITCH_SERIALIZATION_PROPERTIES_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/stitch/types/settings_bundle.hpp"
+#include "dogen/stitch/types/properties_fwd.hpp"
 
-namespace dogen {
-namespace stitch {
+namespace boost {
+namespace serialization {
 
-struct settings_bundle_hasher {
-public:
-    static std::size_t hash(const settings_bundle& v);
-};
+template<class Archive>
+void save(Archive& ar, const dogen::stitch::properties& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::stitch::properties& v, unsigned int version);
 
 } }
 
-namespace std {
-
-template<>
-struct hash<dogen::stitch::settings_bundle> {
-public:
-    size_t operator()(const dogen::stitch::settings_bundle& v) const {
-        return dogen::stitch::settings_bundle_hasher::hash(v);
-    }
-};
-
-}
 #endif

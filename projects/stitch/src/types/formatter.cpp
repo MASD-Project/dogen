@@ -141,7 +141,7 @@ dynamic::ownership_hierarchy formatter::ownership_hierarchy() const {
 dogen::formatters::file formatter::format(const text_template& tt) const {
     BOOST_LOG_SEV(lg, debug) << "Formatting template.";
 
-    const auto& ss(tt.settings().stitching_settings());
+    const auto& ss(tt.properties().stitching_settings());
     const auto stream_variable_name(ss.stream_variable_name());
     if (stream_variable_name.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_stream_name;
@@ -152,7 +152,7 @@ dogen::formatters::file formatter::format(const text_template& tt) const {
     {
         const auto& id(ss.inclusion_dependencies());
         dogen::formatters::cpp::scoped_boilerplate_formatter
-            sbf(s, tt.settings().file_properties(), id, empty_header_guard);
+            sbf(s, tt.properties().file_properties(), id, empty_header_guard);
 
         dogen::formatters::cpp::scoped_namespace_formatter snf(
             s, ss.containing_namespaces(), false/*create_anonymous_namespace*/,
@@ -171,8 +171,8 @@ dogen::formatters::file formatter::format(const text_template& tt) const {
 
     dogen::formatters::file r;
     r.content(s.str());
-    if (tt.settings().stitching_settings().output_path())
-        r.path(*tt.settings().stitching_settings().output_path());
+    if (tt.properties().stitching_settings().output_path())
+        r.path(*tt.properties().stitching_settings().output_path());
 
     BOOST_LOG_SEV(lg, debug) << "Formatted template.";
 

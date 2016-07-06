@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_TYPES_SETTINGS_BUNDLE_FACTORY_HPP
-#define DOGEN_STITCH_TYPES_SETTINGS_BUNDLE_FACTORY_HPP
+#ifndef DOGEN_STITCH_TYPES_PROPERTIES_FACTORY_HPP
+#define DOGEN_STITCH_TYPES_PROPERTIES_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,8 +30,8 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/file_properties.hpp"
-#include "dogen/stitch/types/settings_bundle.hpp"
 #include "dogen/stitch/types/stitching_settings.hpp"
+#include "dogen/stitch/types/properties.hpp"
 
 namespace dogen {
 namespace stitch {
@@ -39,9 +39,9 @@ namespace stitch {
 /**
  * @brief Creates the settings bundle.
  */
-class settings_bundle_factory {
+class properties_factory {
 public:
-    settings_bundle_factory(
+    properties_factory(
         const dynamic::repository& dynamic_repository,
         const dogen::formatters::repository& formatters_repository);
 
@@ -62,7 +62,7 @@ public:
     /**
      * @brief Create the settings bundle.
      */
-    settings_bundle make(const dynamic::object& o) const;
+    properties make(const dynamic::object& o) const;
 
 private:
     const dynamic::repository& dynamic_repository_;

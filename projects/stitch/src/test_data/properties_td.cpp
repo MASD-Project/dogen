@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/test_data/settings_bundle_td.hpp"
+#include "dogen/stitch/test_data/properties_td.hpp"
 #include "dogen/stitch/test_data/stitching_settings_td.hpp"
 #include "dogen/formatters/test_data/file_properties_td.hpp"
 
@@ -46,30 +46,30 @@ create_dogen_stitch_stitching_settings(const unsigned int position) {
 namespace dogen {
 namespace stitch {
 
-settings_bundle_generator::settings_bundle_generator() : position_(0) { }
+properties_generator::properties_generator() : position_(0) { }
 
-void settings_bundle_generator::
+void properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.file_properties(create_boost_optional_dogen_formatters_file_properties(position + 0));
     v.stitching_settings(create_dogen_stitch_stitching_settings(position + 1));
 }
 
-settings_bundle_generator::result_type
-settings_bundle_generator::create(const unsigned int position) {
-    settings_bundle r;
-    settings_bundle_generator::populate(position, r);
+properties_generator::result_type
+properties_generator::create(const unsigned int position) {
+    properties r;
+    properties_generator::populate(position, r);
     return r;
 }
 
-settings_bundle_generator::result_type*
-settings_bundle_generator::create_ptr(const unsigned int position) {
-    settings_bundle* p = new settings_bundle();
-    settings_bundle_generator::populate(position, *p);
+properties_generator::result_type*
+properties_generator::create_ptr(const unsigned int position) {
+    properties* p = new properties();
+    properties_generator::populate(position, *p);
     return p;
 }
 
-settings_bundle_generator::result_type
-settings_bundle_generator::operator()() {
+properties_generator::result_type
+properties_generator::operator()() {
     return create(position_++);
 }
 

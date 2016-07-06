@@ -48,7 +48,7 @@ make_text_template_with_trivial_settings() const {
     s.stream_variable_name(stream_variable_name);
 
     text_template r;
-    r.settings().stitching_settings(s);
+    r.properties().stitching_settings(s);
     return r;
 }
 
@@ -310,7 +310,7 @@ text_template mock_text_template_factory::make_with_file_properties() const {
     const auto fp(factory_.make_file_properties());
 
     text_template r(make_text_template_with_trivial_settings());
-    r.settings().file_properties(fp);
+    r.properties().file_properties(fp);
     r.lines(make_text_block_only_lines());
     return r;
 }
@@ -318,7 +318,7 @@ text_template mock_text_template_factory::make_with_file_properties() const {
 text_template
 mock_text_template_factory::make_with_containing_namespace() const {
     text_template r(make_text_template_with_trivial_settings());
-    auto& cn(r.settings().stitching_settings().containing_namespaces());
+    auto& cn(r.properties().stitching_settings().containing_namespaces());
     cn.push_back("first");
     cn.push_back("second");
     r.lines(make_text_block_only_lines());

@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_IO_SETTINGS_BUNDLE_IO_HPP
-#define DOGEN_STITCH_IO_SETTINGS_BUNDLE_IO_HPP
+#ifndef DOGEN_STITCH_IO_PROPERTIES_IO_HPP
+#define DOGEN_STITCH_IO_PROPERTIES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen/stitch/types/settings_bundle.hpp"
+#include "dogen/stitch/types/properties.hpp"
 
 namespace dogen {
 namespace stitch {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::stitch::settings_bundle& v);
+     const dogen::stitch::properties& v);
 
 } }
 

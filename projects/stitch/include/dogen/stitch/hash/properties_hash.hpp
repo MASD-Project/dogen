@@ -18,18 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_TYPES_SETTINGS_BUNDLE_FWD_HPP
-#define DOGEN_STITCH_TYPES_SETTINGS_BUNDLE_FWD_HPP
+#ifndef DOGEN_STITCH_HASH_PROPERTIES_HASH_HPP
+#define DOGEN_STITCH_HASH_PROPERTIES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <functional>
+#include "dogen/stitch/types/properties.hpp"
+
 namespace dogen {
 namespace stitch {
 
-class settings_bundle;
+struct properties_hasher {
+public:
+    static std::size_t hash(const properties& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::stitch::properties> {
+public:
+    size_t operator()(const dogen::stitch::properties& v) const {
+        return dogen::stitch::properties_hasher::hash(v);
+    }
+};
+
+}
 #endif

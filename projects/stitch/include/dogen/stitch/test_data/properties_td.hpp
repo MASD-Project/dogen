@@ -18,40 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/hash/settings_bundle_hash.hpp"
-#include "dogen/stitch/hash/stitching_settings_hash.hpp"
-#include "dogen/formatters/hash/file_properties_hash.hpp"
+#ifndef DOGEN_STITCH_TEST_DATA_PROPERTIES_TD_HPP
+#define DOGEN_STITCH_TEST_DATA_PROPERTIES_TD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_boost_optional_dogen_formatters_file_properties(const boost::optional<dogen::formatters::file_properties>& v) {
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
-}
-
-}
+#include "dogen/stitch/types/properties.hpp"
 
 namespace dogen {
 namespace stitch {
 
-std::size_t settings_bundle_hasher::hash(const settings_bundle& v) {
-    std::size_t seed(0);
+class properties_generator {
+public:
+    properties_generator();
 
-    combine(seed, hash_boost_optional_dogen_formatters_file_properties(v.file_properties()));
-    combine(seed, v.stitching_settings());
+public:
+    typedef dogen::stitch::properties result_type;
 
-    return seed;
-}
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
+
+#endif

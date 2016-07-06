@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_TYPES_SETTINGS_BUNDLE_HPP
-#define DOGEN_STITCH_TYPES_SETTINGS_BUNDLE_HPP
+#ifndef DOGEN_STITCH_TYPES_PROPERTIES_HPP
+#define DOGEN_STITCH_TYPES_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,31 +29,31 @@
 #include <boost/optional.hpp>
 #include "dogen/stitch/types/stitching_settings.hpp"
 #include "dogen/formatters/types/file_properties.hpp"
-#include "dogen/stitch/serialization/settings_bundle_fwd_ser.hpp"
+#include "dogen/stitch/serialization/properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace stitch {
 
-class settings_bundle final {
+class properties final {
 public:
-    settings_bundle() = default;
-    settings_bundle(const settings_bundle&) = default;
-    ~settings_bundle() = default;
+    properties() = default;
+    properties(const properties&) = default;
+    ~properties() = default;
 
 public:
-    settings_bundle(settings_bundle&& rhs);
+    properties(properties&& rhs);
 
 public:
-    settings_bundle(
+    properties(
         const boost::optional<dogen::formatters::file_properties>& file_properties,
         const dogen::stitch::stitching_settings& stitching_settings);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::stitch::settings_bundle& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::stitch::properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::stitch::settings_bundle& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::stitch::properties& v, unsigned int version);
 
 public:
     const boost::optional<dogen::formatters::file_properties>& file_properties() const;
@@ -67,14 +67,14 @@ public:
     void stitching_settings(const dogen::stitch::stitching_settings&& v);
 
 public:
-    bool operator==(const settings_bundle& rhs) const;
-    bool operator!=(const settings_bundle& rhs) const {
+    bool operator==(const properties& rhs) const;
+    bool operator!=(const properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(settings_bundle& other) noexcept;
-    settings_bundle& operator=(settings_bundle other);
+    void swap(properties& other) noexcept;
+    properties& operator=(properties other);
 
 private:
     boost::optional<dogen::formatters::file_properties> file_properties_;
@@ -87,8 +87,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::stitch::settings_bundle& lhs,
-    dogen::stitch::settings_bundle& rhs) {
+    dogen::stitch::properties& lhs,
+    dogen::stitch::properties& rhs) {
     lhs.swap(rhs);
 }
 
