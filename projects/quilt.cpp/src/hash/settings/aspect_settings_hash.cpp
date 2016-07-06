@@ -18,25 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_IO_SETTINGS_ELEMENT_SETTINGS_IO_HPP
-#define DOGEN_QUILT_CPP_IO_SETTINGS_ELEMENT_SETTINGS_IO_HPP
+#include "dogen/quilt.cpp/hash/settings/aspect_settings_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include <iosfwd>
-#include "dogen/quilt.cpp/types/settings/element_settings.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace settings {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::quilt::cpp::settings::element_settings& v);
+std::size_t aspect_settings_hasher::hash(const aspect_settings& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.disable_complete_constructor());
+    combine(seed, v.disable_xml_serialization());
+
+    return seed;
+}
 
 } } } }
-
-#endif

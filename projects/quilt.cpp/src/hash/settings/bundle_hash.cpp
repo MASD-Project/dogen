@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/quilt.cpp/hash/settings/bundle_hash.hpp"
+#include "dogen/quilt.cpp/hash/settings/aspect_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/opaque_settings_hash.hpp"
-#include "dogen/quilt.cpp/hash/settings/element_settings_hash.hpp"
 
 namespace {
 
@@ -64,7 +64,7 @@ namespace settings {
 std::size_t bundle_hasher::hash(const bundle& v) {
     std::size_t seed(0);
 
-    combine(seed, v.element_settings());
+    combine(seed, v.aspect_settings());
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings_(v.opaque_settings()));
     combine(seed, hash_std_unordered_map_std_string_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings__(v.opaque_settings_for_property()));
 

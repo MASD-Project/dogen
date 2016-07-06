@@ -18,26 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_PROPERTIES_FILE_PROPERTIES_REPOSITORY_FACTORY_HPP
-#define DOGEN_QUILT_CPP_TYPES_PROPERTIES_FILE_PROPERTIES_REPOSITORY_FACTORY_HPP
+#ifndef DOGEN_QUILT_CPP_IO_SETTINGS_ASPECT_SETTINGS_IO_HPP
+#define DOGEN_QUILT_CPP_IO_SETTINGS_ASPECT_SETTINGS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/quilt.cpp/types/properties/file_properties_repository.hpp"
+#include <iosfwd>
+#include "dogen/quilt.cpp/types/settings/aspect_settings.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace properties {
+namespace settings {
 
-class file_properties_repository_factory {
-public:
-    file_properties_repository make(const yarn::model& m) const;
-
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::quilt::cpp::settings::aspect_settings& v);
 
 } } } }
 

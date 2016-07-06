@@ -23,12 +23,12 @@
 #include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/settings/building_error.hpp"
-#include "dogen/quilt.cpp/types/settings/element_settings_factory.hpp"
+#include "dogen/quilt.cpp/types/settings/aspect_settings_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quilt.cpp.settings.element_settings_factory"));
+static logger lg(logger_factory("quilt.cpp.settings.aspect_settings_factory"));
 
 const std::string empty_formatter_name("Formatter name is empty.");
 
@@ -39,13 +39,13 @@ namespace quilt {
 namespace cpp {
 namespace settings {
 
-element_settings_factory::element_settings_factory(const dynamic::repository& rp,
+aspect_settings_factory::aspect_settings_factory(const dynamic::repository& rp,
     const dynamic::object& root_object)
     : field_definitions_(make_field_definitions(rp)),
       field_values_(
           make_root_object_field_values(field_definitions_, root_object)) {}
 
-element_settings_factory::field_definitions element_settings_factory::
+aspect_settings_factory::field_definitions aspect_settings_factory::
 make_field_definitions(const dynamic::repository& rp) const {
 
     field_definitions r;
@@ -56,13 +56,10 @@ make_field_definitions(const dynamic::repository& rp) const {
     const auto& xs(traits::disable_xml_serialization());
     r.disable_xml_serialization = s.select_field_by_name(xs);
 
-    const auto scm(traits::cpp::helper::string_conversion_method());
-    r.string_conversion_method = s.select_field_by_name(scm);
-
     return r;
 }
 
-element_settings_factory::root_object_field_values element_settings_factory::
+aspect_settings_factory::root_object_field_values aspect_settings_factory::
 make_root_object_field_values(const field_definitions& fd,
     const dynamic::object& root_object) const {
 
@@ -75,7 +72,7 @@ make_root_object_field_values(const field_definitions& fd,
     return r;
 }
 
-bool element_settings_factory::
+bool aspect_settings_factory::
 obtain_field_value(const dynamic::field_selector& fs,
     const dynamic::field_definition& fd,
     const bool root_object_value) const {
@@ -86,9 +83,9 @@ obtain_field_value(const dynamic::field_selector& fs,
     return root_object_value;
 }
 
-element_settings
-element_settings_factory::make(const dynamic::object& o) const {
-    element_settings r;
+aspect_settings
+aspect_settings_factory::make(const dynamic::object& o) const {
+    aspect_settings r;
 
     const dynamic::field_selector fs(o);
     r.disable_complete_constructor(
@@ -99,15 +96,11 @@ element_settings_factory::make(const dynamic::object& o) const {
         obtain_field_value(fs, field_definitions_.disable_xml_serialization,
             field_values_.disable_xml_serialization));
 
-    r.string_conversion_method(
-        fs.get_text_content_or_default(
-            field_definitions_.string_conversion_method));
-
     return r;
 }
 
-element_settings element_settings_factory::make() const {
-    element_settings r;
+aspect_settings aspect_settings_factory::make() const {
+    aspect_settings r;
     r.disable_complete_constructor(field_values_.disable_complete_constructor);
     r.disable_xml_serialization(field_values_.disable_xml_serialization);
     return r;

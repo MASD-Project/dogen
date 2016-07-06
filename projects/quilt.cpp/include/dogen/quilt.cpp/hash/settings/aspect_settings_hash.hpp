@@ -18,20 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_PROPERTIES_FILE_PROPERTIES_REPOSITORY_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_PROPERTIES_FILE_PROPERTIES_REPOSITORY_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_HASH_SETTINGS_ASPECT_SETTINGS_HASH_HPP
+#define DOGEN_QUILT_CPP_HASH_SETTINGS_ASPECT_SETTINGS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <functional>
+#include "dogen/quilt.cpp/types/settings/aspect_settings.hpp"
+
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace properties {
+namespace settings {
 
-class file_properties_repository;
+struct aspect_settings_hasher {
+public:
+    static std::size_t hash(const aspect_settings& v);
+};
 
 } } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::quilt::cpp::settings::aspect_settings> {
+public:
+    size_t operator()(const dogen::quilt::cpp::settings::aspect_settings& v) const {
+        return dogen::quilt::cpp::settings::aspect_settings_hasher::hash(v);
+    }
+};
+
+}
 #endif

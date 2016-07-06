@@ -20,14 +20,14 @@
  */
 #include <sstream>
 #include "dogen/quilt.cpp/test_data/settings/bundle_td.hpp"
+#include "dogen/quilt.cpp/test_data/settings/aspect_settings_td.hpp"
 #include "dogen/quilt.cpp/test_data/settings/opaque_settings_td.hpp"
-#include "dogen/quilt.cpp/test_data/settings/element_settings_td.hpp"
 
 namespace {
 
-dogen::quilt::cpp::settings::element_settings
-create_dogen_quilt_cpp_settings_element_settings(const unsigned int position) {
-    return dogen::quilt::cpp::settings::element_settings_generator::create(position);
+dogen::quilt::cpp::settings::aspect_settings
+create_dogen_quilt_cpp_settings_aspect_settings(const unsigned int position) {
+    return dogen::quilt::cpp::settings::aspect_settings_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -75,7 +75,7 @@ bundle_generator::bundle_generator() : position_(0) { }
 
 void bundle_generator::
 populate(const unsigned int position, result_type& v) {
-    v.element_settings(create_dogen_quilt_cpp_settings_element_settings(position + 0));
+    v.aspect_settings(create_dogen_quilt_cpp_settings_aspect_settings(position + 0));
     v.opaque_settings(create_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings_(position + 1));
     v.opaque_settings_for_property(create_std_unordered_map_std_string_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings__(position + 2));
 }

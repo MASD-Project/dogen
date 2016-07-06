@@ -18,38 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/file_properties_hash.hpp"
-#include "dogen/quilt.cpp/hash/properties/file_properties_repository_hash.hpp"
+#ifndef DOGEN_QUILT_CPP_TYPES_SETTINGS_ASPECT_SETTINGS_FACTORY_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_SETTINGS_ASPECT_SETTINGS_FACTORY_FWD_HPP
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_unordered_map_std_string_dogen_formatters_file_properties(const std::unordered_map<std::string, dogen::formatters::file_properties>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace properties {
+namespace settings {
 
-std::size_t file_properties_repository_hasher::hash(const file_properties_repository& v) {
-    std::size_t seed(0);
-
-    combine(seed, hash_std_unordered_map_std_string_dogen_formatters_file_properties(v.by_id()));
-    return seed;
-}
+class aspect_settings_factory;
 
 } } } }
+
+#endif
