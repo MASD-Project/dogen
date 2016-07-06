@@ -1,4 +1,4 @@
-# -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
+# -*- mode: cmake; cmake-tab-width: 4; indent-tabs-mode: nil -*-
 #
 # Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
 #
@@ -18,7 +18,8 @@
 # MA 02110-1301, USA.
 #
 set(name "knitter")
-set(binary_name "dogen.${name}.spec")
+set(spec_name "${name}.spec")
+set(binary_name "dogen.${spec_name}")
 set(spec_files "")
 file(GLOB_RECURSE spec_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
@@ -43,11 +44,11 @@ foreach(cpp_file ${all_files})
     set(ignore_file false)
 endforeach()
 
-add_executable(${name}_spec ${spec_files} ${executable_files})
+add_executable(${spec_name} ${spec_files} ${executable_files})
 
-set_target_properties(${name}_spec PROPERTIES OUTPUT_NAME ${binary_name})
+set_target_properties(${spec_name} PROPERTIES OUTPUT_NAME ${binary_name})
 
-target_link_libraries(${name}_spec
+target_link_libraries(${spec_name}
     knit
     utility
     config
@@ -59,12 +60,12 @@ target_link_libraries(${name}_spec
 
 set(command ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
 
-add_custom_target(run_${name}_spec
+add_custom_target(run_${spec_name}
     COMMAND ${command}
     WORKING_DIRECTORY ${stage_bin_dir}
-    DEPENDS ${name}_spec)
-add_dependencies(run_all_specs run_${name}_spec)
+    DEPENDS ${spec_name})
+add_dependencies(run_all_specs run_${spec_name})
 
 add_boost_tests(${name} ${spec_files})
 
-install(TARGETS ${name}_spec RUNTIME DESTINATION bin COMPONENT tests)
+install(TARGETS ${spec_name} RUNTIME DESTINATION bin COMPONENT tests)

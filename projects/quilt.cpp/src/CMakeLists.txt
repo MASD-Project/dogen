@@ -1,4 +1,4 @@
-# -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
+# -*- mode: cmake; cmake-tab-width: 4; indent-tabs-mode: nil -*-
 #
 # Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
 #
@@ -17,7 +17,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(name "quilt_cpp")
+set(name "quilt.cpp")
+set(binary_name "dogen.${name}")
 set(files "")
 file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
@@ -26,8 +27,9 @@ file(GLOB_RECURSE files RELATIVE
 add_library(${name} STATIC ${files})
 target_link_libraries(${name} formatters quilt ${Boost_LIBRARIES})
 
-set_target_properties(${name} PROPERTIES
-    OUTPUT_NAME dogen.quilt.cpp)
+set_target_properties(${name} PROPERTIES OUTPUT_NAME ${binary_name})
+set_target_properties(${name}
+    PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
 
 add_custom_target(stitch_${name}
     COMMENT "Stitching Quilt C++ model" VERBATIM

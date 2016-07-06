@@ -1,4 +1,4 @@
-# -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
+# -*- mode: cmake; cmake-tab-width: 4; indent-tabs-mode: nil -*-
 #
 # Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
 #
@@ -18,16 +18,21 @@
 # MA 02110-1301, USA.
 #
 set(name "dia")
+set(binary_name "dogen.${name}")
 set(files "")
 file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
+if(WITH_COVERALLS)
+    set(COVERALLS_SRC "${COVERALLS_SRC} ${files}" PARENT_SCOPE)
+endif()
+
 add_library(${name} STATIC ${files})
-set_target_properties(${name} PROPERTIES OUTPUT_NAME dogen.${name})
+set_target_properties(${name} PROPERTIES OUTPUT_NAME ${binary_name})
 set_target_properties(${name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
 
 target_link_libraries(${name} ${Boost_LIBRARIES})
 
-install(TARGETS dia ARCHIVE DESTINATION lib COMPONENT libraries)
+install(TARGETS ${name} ARCHIVE DESTINATION lib COMPONENT libraries)
