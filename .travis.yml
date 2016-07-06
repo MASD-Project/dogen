@@ -30,16 +30,16 @@ matrix:
     #   env: BUILD_TYPE=Release
     - os: linux
       compiler: gcc
-      env: BUILD_TYPE=Release DEPLOY="1"
+      env: BUILD_TYPE=Release DEPLOY="1" COMPILER="gcc"
     - os: linux
       compiler: clang
-      env: BUILD_TYPE=Release
+      env: BUILD_TYPE=Release COMPILER="clang"
     - os: linux
       compiler: gcc
-      env: BUILD_TYPE=Debug
+      env: BUILD_TYPE=Debug COMPILER="gcc"
     - os: linux
       compiler: clang
-      env: BUILD_TYPE=Debug
+      env: BUILD_TYPE=Debug COMPILER="clang"
 
 addons:
   apt:
@@ -52,16 +52,13 @@ install:
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then export PATH=$PATH:~/conan; fi
 
 script:
-  - export GIT_REPO="`pwd`"
-  - cd ${GIT_REPO}/build
-  - mkdir output
-  - cd output
-  - CMAKE_INCLUDE_PATH=/tmp/dogen_deps/dogen_deps_gcc_5.3_linux_amd64/include CMAKE_LIBRARY_PATH=/tmp/dogen_deps/dogen_deps_gcc_5.3_linux_amd64/lib cmake ${GIT_REPO} -G Ninja -DCMAKE_BUILD_TYPE=${BUILD_TYPE} # -DWITH_MINIMAL_PACKAGING=on
-  - ninja -j2 package run_all_specs
+  - export PROJECT="`pwd`"
+  - export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_gcc_5.3_linux_amd64"
+  - export TARGET="package run_all_specs"
+  - ${PROJECT}/build/scripts/build.linux.sh ${BUILD_TYPE} ${COMPILER} ${THIRD_PARTY} ${TARGET}
   - sudo dpkg -i stage/pkg/dogen_*_amd64-applications.deb
   - cd /tmp
   - /usr/bin/dogen.knitter --version
-  - cd ${GIT_REPO}
 
 notifications:
   email:
