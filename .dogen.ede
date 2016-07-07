@@ -5,4 +5,4 @@
   :name "Dogen Project"
   :version "0.0.1"
   :file (expand-file-name ".dogen.ede")
-  :compdb-file (expand-file-name "build/output/gcc-5/compile_commands.json")))
+  :compdb-file (expand-file-name "build/output/gcc-5/Release/compile_commands.json")))
