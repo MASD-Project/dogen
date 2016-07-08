@@ -51,56 +51,37 @@ make_field_definitions(const dynamic::repository& rp) const {
     return r;
 }
 
-boost::optional<file_settings> file_settings_factory::
-make(const dynamic::object& o) const {
+file_settings file_settings_factory::make(const dynamic::object& o) const {
     const dynamic::field_selector fs(o);
 
     file_settings r;
-    bool has_file_settings(false);
     const auto& cn(field_definitions_.copyright_notice);
-    if (fs.has_field(cn)) {
+    if (fs.has_field(cn))
         r.copyright_notices(fs.get_text_collection_content(cn));
-        has_file_settings = true;
-    }
 
     const auto& ln(field_definitions_.licence_name);
-    if (fs.has_field(ln)) {
+    if (fs.has_field(ln))
         r.licence_name(fs.get_text_content(ln));
-        has_file_settings = true;
-    }
 
     const auto& mlgn(field_definitions_.modeline_group_name);
-    if (fs.has_field(mlgn)) {
+    if (fs.has_field(mlgn))
         r.modeline_group_name(fs.get_text_content(mlgn));
-        has_file_settings = true;
-    }
 
     const auto& gp(field_definitions_.generate_preamble);
-    if (fs.has_field(gp)) {
+    if (fs.has_field(gp))
         r.generate_preamble(fs.get_boolean_content(gp));
-        has_file_settings = true;
-    }
 
     const auto madt(field_definitions_.marker_add_date_time);
-    if (fs.has_field(madt)) {
+    if (fs.has_field(madt))
         r.marker_add_date_time(fs.get_boolean_content(madt));
-        has_file_settings = true;
-    }
 
     const auto maw(field_definitions_.marker_add_warning);
-    if (fs.has_field(maw)) {
+    if (fs.has_field(maw))
         r.marker_add_date_time(fs.get_boolean_content(maw));
-        has_file_settings = true;
-    }
 
     const auto msg(field_definitions_.marker_message);
-    if (fs.has_field(msg)) {
+    if (fs.has_field(msg))
         r.marker_message(fs.get_text_content(msg));
-        has_file_settings = true;
-    }
-
-    if (!has_file_settings)
-        return boost::optional<file_settings>();
 
     return r;
 }

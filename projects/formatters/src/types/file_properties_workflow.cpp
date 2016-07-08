@@ -18,44 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/traits.hpp"
+#include "dogen/formatters/types/file_properties_workflow.hpp"
 
 namespace dogen {
 namespace formatters {
 
-std::string traits::copyright_notices() {
-    static std::string r("copyright_notice");
-    return r;
+file_properties_workflow::file_properties_workflow(
+    const dynamic::repository& drp,
+    const repository& rp)
+    : settings_factory_(drp), properties_factory_(rp) { }
+
+file_properties_workflow::file_properties_workflow(
+    const dynamic::repository& drp, const repository& rp,
+    const dynamic::object& fallback)
+    : settings_factory_(drp),
+      properties_factory_(rp, settings_factory_.make(fallback)) { }
+
+file_properties file_properties_workflow::
+execute(const std::string& modeline_name) const {
+    const auto fs = file_settings();
+    return properties_factory_.make(modeline_name, fs);
 }
 
-std::string traits::licence_name() {
-    static std::string r("licence_name");
-    return r;
-}
-
-std::string traits::modeline_group_name() {
-    static std::string r("modeline_group_name");
-    return r;
-}
-
-std::string traits::generate_preamble() {
-    static std::string r("code_generation_marker.generate_preamble");
-    return r;
-}
-
-std::string traits::code_generation_marker::add_date_time() {
-    static std::string r("code_generation_marker.add_date_time");
-    return r;
-}
-
-std::string traits::code_generation_marker::add_warning() {
-    static std::string r("code_generation_marker.add_warning");
-    return r;
-}
-
-std::string traits::code_generation_marker::message() {
-    static std::string r("code_generation_marker.message");
-    return r;
+file_properties file_properties_workflow::execute(
+    const std::string& modeline_name, const dynamic::object& o) const {
+    const auto fs(settings_factory_.make(o));
+    return properties_factory_.make(modeline_name, fs);
 }
 
 } }

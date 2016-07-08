@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-06 Wed 23:01]
-| <75>                                                                        |        |      |      |       |
-| Headline                                                                    | Time   |      |      |     % |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *9:56* |      |      | 100.0 |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 9:56   |      |      | 100.0 |
-| Active                                                                      |        | 9:56 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:55 |   9.2 |
-| STARTED Manual updates and blog posts                                       |        |      | 0:37 |   6.2 |
-| COMPLETED Try to fix tag build issues                                       |        |      | 1:28 |  14.8 |
-| COMPLETED Enable build type on travis                                       |        |      | 1:17 |  12.9 |
-| COMPLETED Add initial support for coveralls                                 |        |      | 0:29 |   4.9 |
-| COMPLETED Simplify local builds on emacs                                    |        |      | 0:20 |   3.4 |
-| COMPLETED Create a debug build for clang in travis                          |        |      | 0:10 |   1.7 |
-| COMPLETED Rename element settings back to aspect settings                   |        |      | 0:50 |   8.4 |
-| COMPLETED Rename bundle to element settings                                 |        |      | 0:27 |   4.5 |
-| COMPLETED Rename bundle in stitch to properties                             |        |      | 0:16 |   2.7 |
-| STARTED Refactor general settings                                           |        |      | 3:07 |  31.4 |
+#+CAPTION: Clock summary at [2016-07-08 Fri 22:57]
+| <75>                                                                        |         |       |      |       |
+| Headline                                                                    | Time    |       |      |     % |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                                                | *12:39* |       |      | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                                     | 12:39   |       |      | 100.0 |
+| Active                                                                      |         | 12:39 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:55 |   7.2 |
+| STARTED Manual updates and blog posts                                       |         |       | 0:37 |   4.9 |
+| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |  11.6 |
+| COMPLETED Enable build type on travis                                       |         |       | 1:17 |  10.1 |
+| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   3.8 |
+| COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   2.6 |
+| COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   1.3 |
+| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   6.6 |
+| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   3.6 |
+| COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   2.1 |
+| COMPLETED Refactor general settings                                         |         |       | 5:50 |  46.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -252,7 +252,11 @@ element. Rename and deal with the fallout.
 In keeping with the properties/settings refactor, ensure stitch is
 using these terms with the same meanings as everyone else.
 
-*** STARTED Refactor general settings                                 :story:
+*** COMPLETED Refactor general settings                               :story:
+    CLOSED: [2016-07-08 Fri 22:57]
+    CLOCK: [2016-07-08 Fri 21:45]--[2016-07-08 Fri 22:57] =>  1:12
+    CLOCK: [2016-07-07 Thu 20:18]--[2016-07-07 Thu 21:02] =>  0:44
+    CLOCK: [2016-07-07 Thu 07:53]--[2016-07-07 Thu 08:40] =>  0:47
     CLOCK: [2016-07-06 Wed 00:13]--[2016-07-06 Wed 00:20] =>  0:07
     CLOCK: [2016-07-06 Wed 00:06]--[2016-07-06 Wed 00:12] =>  0:06
     CLOCK: [2016-07-05 Tue 23:16]--[2016-07-06 Wed 00:05] =>  0:49
@@ -319,6 +323,21 @@ not all directly read out of meta-data). We should then call these
 a file settings class that is an exact match of what is read out of
 dynamic and is then used as input to generate the file properties.
 *
+
+*** Consider renaming specs to tests                                  :story:
+
+We started using the terminology specs to mean specifications because
+our unit tests follow the ideas outlined by Kevlin Henney. However, we
+could easily use tests and still carry most of the meaning without
+confusing every other developer. This would require:
+
+- rename top-level =spec= folder to =tests=
+- rename targets to =_tests=, e.g. =run_sml_tests=
+- rename all test suites to =_tests=
+- update the automatic detection of boost tests to use the new
+  post-fix.
+- we should also use =_tests= on the test suite name so we can do
+  =using XYZ= without name clashes.
 
 *** Add support for file properties overrides                         :story:
 

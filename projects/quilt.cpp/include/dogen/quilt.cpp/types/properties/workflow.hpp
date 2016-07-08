@@ -30,7 +30,7 @@
 #include <forward_list>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/formatters/types/file_properties_factory.hpp"
+#include "dogen/formatters/types/file_properties_workflow.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
@@ -57,7 +57,7 @@ private:
      * @brief Creates the path settings.
      */
     std::unordered_map<std::string, settings::path_settings>
-    create_path_settings_activity(const dynamic::repository& rp,
+    create_path_settings_activity(const dynamic::repository& drp,
         const dynamic::object& root_object,
         const formatters::container& fc) const;
 
@@ -65,7 +65,7 @@ private:
      * @brief Create the helper settings repository.
      */
     settings::helper_settings_repository create_helper_settings_repository(
-        const dynamic::repository& rp, const yarn::model& m) const;
+        const dynamic::repository& drp, const yarn::model& m) const;
 
     /**
      * @brief Create the path derivatives repository.
@@ -79,7 +79,7 @@ private:
      * @brief Creates the formatter properties.
      */
     formatter_properties_repository
-    create_formatter_properties(const dynamic::repository& rp,
+    create_formatter_properties(const dynamic::repository& drp,
         const dynamic::object& root_object,
         const settings::element_settings_repository& esrp,
         const path_derivatives_repository& pdrp,
@@ -99,8 +99,7 @@ private:
      */
     std::forward_list<std::shared_ptr<properties::formattable> >
     from_factory_activity(const config::cpp_options& opts,
-        const dynamic::object& root_object,
-        const dogen::formatters::file_properties_factory& fpf,
+        const dogen::formatters::file_properties_workflow& fpwf,
         settings::element_settings_repository& esrp,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const properties::path_derivatives_repository& pdrp,
@@ -109,8 +108,7 @@ private:
         const yarn::model& m) const;
 
     element_properties_repository create_element_properties(
-        const dynamic::object& root_object,
-        const dogen::formatters::file_properties_factory& fpf,
+        const dogen::formatters::file_properties_workflow& fpwf,
         const settings::helper_settings_repository& hsrp,
         const formatter_properties_repository& fprp,
         const yarn::model& m) const;
@@ -126,7 +124,7 @@ public:
     execute(const config::cpp_options& opts,
         const dynamic::repository& drp,
         const dynamic::object& root_object,
-        const dogen::formatters::file_properties_factory& fpf,
+        const dogen::formatters::file_properties_workflow& fpwf,
         const formatters::container& fc,
         settings::element_settings_repository& esrp,
         const yarn::model& m) const;

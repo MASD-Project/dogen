@@ -62,6 +62,7 @@
 #include "dogen/formatters/types/cpp/namespace_formatter.hpp"
 #include "dogen/formatters/types/file_properties_factory.hpp"
 #include "dogen/formatters/types/modeline_group_hydrator.hpp"
+#include "dogen/formatters/types/file_properties_workflow.hpp"
 #include "dogen/formatters/types/cpp/boilerplate_formatter.hpp"
 #include "dogen/formatters/types/cpp/header_guard_formatter.hpp"
 #include "dogen/formatters/types/code_generation_marker_factory.hpp"

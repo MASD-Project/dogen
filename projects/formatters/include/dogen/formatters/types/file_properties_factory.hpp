@@ -26,14 +26,12 @@
 #endif
 
 #include <string>
-#include <forward_list>
-#include <unordered_map>
 #include <boost/optional.hpp>
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/formatters/types/file_properties.hpp"
-#include "dogen/formatters/types/modeline_group.hpp"
 #include "dogen/formatters/types/licence.hpp"
 #include "dogen/formatters/types/repository.hpp"
+#include "dogen/formatters/types/modeline_group.hpp"
+#include "dogen/formatters/types/file_settings.hpp"
+#include "dogen/formatters/types/file_properties.hpp"
 
 namespace dogen {
 namespace formatters {
@@ -50,46 +48,27 @@ public:
     ~file_properties_factory() = default;
 
 public:
-    /**
-     * @brief Initialise a new file properties factory.
-     *
-     * @param rp where to look up reference data.
-     */
     explicit file_properties_factory(const repository& rp);
-
-    /**
-     * @brief Initialise a new file properties factory.
-     *
-     * @param rp where to look up reference data.
-     * @param fallback object to use to construct defaults, if any.
-     */
     file_properties_factory(const repository& rp,
-        const dynamic::object& fallback);
+        const file_settings& fallback);
 
 private:
     /**
-     * @brief Extracts the licence text from the dynamic object.
+     * @brief Obtains the licence text.
      */
     boost::optional<std::string>
-    extract_licence_text(const dynamic::object& o) const;
+    get_licence_text(const file_settings& fs) const;
 
     /**
-     * @brief Extracts the copyright notices from the dynamic object.
+     * @brief Obtains a licence.
      */
-    boost::optional<std::list<std::string>>
-    extract_copyright_notices(const dynamic::object& o) const;
+    boost::optional<licence> get_licence(const file_settings& fs) const;
 
     /**
-     * @brief Extracts a licence from the dynamic object.
-     */
-    boost::optional<licence>
-    extract_licence(const dynamic::object& o) const;
-
-    /**
-     * @brief Extracts the modeline group name from the dynamic object.
+     * @brief Obtains the modeline group name.
      */
     boost::optional<modeline_group>
-    extract_modeline_group(const dynamic::object& o) const;
+    get_modeline_group(const file_settings& fs) const;
 
     /**
      * @brief Returns the modeline for the supplied modeline name.
@@ -100,44 +79,35 @@ private:
         const modeline_group& mg) const;
 
     /**
-     * @brief Extracts a modeline the dynamic object.
+     * @brief Obtains the modeline given a modeline name.
      */
     boost::optional<modeline>
-    extract_modeline(const std::string& modeline_name,
-        const dynamic::object& o) const;
+    get_modeline(const std::string& modeline_name,
+        const file_settings& fs) const;
 
     /**
-     * @brief Extracts a code generation marker the dynamic object.
+     * @brief Obtains a code generation marker.
      */
-    boost::optional<std::string>
-    extract_marker(const dynamic::object& o) const;
+    boost::optional<std::string> get_marker(const file_settings& fs) const;
 
     /**
-     * @brief Extracts the marker from the supplied dynamic object; if
-     * none is found, uses the default marker.
+     * @brief Obtains the marker from the file settings; if none is
+     * found, uses the default.
      */
-    std::string
-    extract_marker_or_default(const dynamic::object& o) const;
+    std::string get_marker_or_default(const file_settings& fs) const;
 
     /**
-     * @brief Extracts the generate preamble field.
-     */
-    boost::optional<bool>
-    extract_generate_preamble(const dynamic::object& o) const;
-
-    /**
-     * @brief Extracts the generate preamble; if none is found, uses
+     * @brief Obtains the generate preamble; if none is found, uses
      * the default value.
      */
-    bool extract_generate_preamble_or_default(
-        const dynamic::object& o) const;
+    bool get_generate_preamble_or_default(const file_settings& fs) const;
 
 public:
     /**
-     * @brief Generates file properties from the dynamic object.
+     * @brief Generates the file properties.
      */
-    file_properties make(const std::string& modeline_name,
-        const dynamic::object& o) const;
+    file_properties
+    make(const std::string& modeline_name, const file_settings& fs) const;
 
 private:
     const repository& repository_;

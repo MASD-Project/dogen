@@ -2625,23 +2625,6 @@ but our tests expect:
 
 This must be part of a refactoring that wasn't completed properly.
 
-*** Consider renaming specs to tests                                  :story:
-
-We started using the terminology specs to mean specifications because
-our unit tests follow the ideas outlined by Kevlin Henney. However, we
-could easily use tests and still carry most of the meaning without
-confusing every other developer. This would require:
-
-- rename top-level =spec= folder to =tests=
-- rename targets to =_tests=, e.g. =run_sml_tests=
-- rename all test suites to =_tests=
-- update the automatic detection of boost tests to use the new
-  post-fix.
-- we should also use =_tests= on the test suite name so we can do
-  =using XYZ= without name clashes.
-
-We should wait until we move to catch before we do this rename.
-
 *** Shared pointers to primitive types                                :story:
 
 At present we do not support shared pointers to primitive types. This

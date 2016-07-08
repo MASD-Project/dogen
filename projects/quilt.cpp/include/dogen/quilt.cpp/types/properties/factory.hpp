@@ -30,7 +30,7 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/config/types/cpp_options.hpp"
-#include "dogen/formatters/types/file_properties_factory.hpp"
+#include "dogen/formatters/types/file_properties_workflow.hpp"
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
@@ -86,16 +86,14 @@ public:
 
     std::forward_list<std::shared_ptr<formattable> > make_cmakelists(
         const config::cpp_options& opts,
-        const dynamic::object& root_object,
-        const dogen::formatters::file_properties_factory& fpf,
+        const dogen::formatters::file_properties_workflow& fpwf,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const formatter_properties_repository& fprp,
         const yarn::model& m) const;
 
     std::shared_ptr<formattable> make_odb_options(
         const config::cpp_options& opts,
-        const dynamic::object& root_object,
-        const dogen::formatters::file_properties_factory& fpf,
+        const dogen::formatters::file_properties_workflow& fpwf,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const formatter_properties_repository& fprp,
         const yarn::model& m) const;

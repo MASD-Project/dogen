@@ -71,27 +71,29 @@ dogen::formatters::repository workflow::create_formatters_repository(
     return hw.hydrate(dirs);
 }
 
-dogen::formatters::file_properties_factory workflow::
-create_file_properties_factory(const dogen::formatters::repository& frp,
+dogen::formatters::file_properties_workflow
+workflow::create_file_properties_workflow(const dynamic::repository& drp,
+    const dogen::formatters::repository& frp,
     const dynamic::object& root_object) const {
-    dogen::formatters::file_properties_factory r(frp, root_object);
+    dogen::formatters::file_properties_workflow r(drp, frp, root_object);
     return r;
 }
 
 settings::opaque_settings_builder workflow::
-create_opaque_settings_builder(const dynamic::repository& rp) const {
+create_opaque_settings_builder(const dynamic::repository& drp) const {
     settings::opaque_settings_builder r;
-    r.setup(rp);
+    r.setup(drp);
     r.validate();
     return r;
 }
 
-settings::element_settings_repository workflow::create_element_settings_repository(
-    const dynamic::repository& rp, const dynamic::object& root_object,
+settings::element_settings_repository
+workflow::create_element_settings_repository(
+    const dynamic::repository& drp, const dynamic::object& root_object,
     const settings::opaque_settings_builder& osb,
     const yarn::model& m) const {
     settings::element_settings_repository_factory f;
-    return f.make(rp, root_object, osb, m);
+    return f.make(drp, root_object, osb, m);
 }
 
 std::pair<
@@ -102,13 +104,13 @@ workflow::create_properties_activty(
     const config::cpp_options& opts,
     const dynamic::repository& srp,
     const dynamic::object& root_object,
-    const dogen::formatters::file_properties_factory& fpf,
+    const dogen::formatters::file_properties_workflow& fpwf,
     const formatters::container& fc,
     settings::element_settings_repository& esrp,
     const yarn::model& m) const {
 
     properties::workflow fw;
-    return fw.execute(opts, srp, root_object, fpf, fc, esrp, m);
+    return fw.execute(opts, srp, root_object, fpwf, fc, esrp, m);
 }
 
 std::forward_list<boost::shared_ptr<yarn::element> >
@@ -123,8 +125,8 @@ workflow::format_activty(const settings::element_settings_repository& esrp,
     const std::forward_list<
     std::shared_ptr<properties::formattable>
     >& f) const {
-    formatters::workflow w;
-    return w.execute(esrp, eprp, f);
+    formatters::workflow wf;
+    return wf.execute(esrp, eprp, f);
 }
 
 std::forward_list<dogen::formatters::file> workflow::
@@ -132,8 +134,8 @@ format_yarn_activity(const settings::element_settings_repository& esrp,
     const properties::element_properties_repository& eprp,
     const std::forward_list<
     boost::shared_ptr<yarn::element> >& elements) const {
-    formatters::workflow w;
-    return w.execute(esrp, eprp, elements);
+    formatters::workflow wf;
+    return wf.execute(esrp, eprp, elements);
 }
 
 std::string workflow::name() const {
@@ -161,7 +163,7 @@ workflow::ownership_hierarchy() const {
 
 std::forward_list<dogen::formatters::file>
 workflow::generate(const config::knitting_options& ko,
-    const dynamic::repository& rp,
+    const dynamic::repository& drp,
     const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
@@ -170,16 +172,16 @@ workflow::generate(const config::knitting_options& ko,
     const auto frp(create_formatters_repository(dirs));
 
     const auto ro(obtain_root_object(m));
-    const auto fpf(create_file_properties_factory(frp, ro));
+    const auto fpwf(create_file_properties_workflow(drp, frp, ro));
 
-    const auto osb(create_opaque_settings_builder(rp));
-    auto esrp(create_element_settings_repository(rp, ro, osb, m));
+    const auto osb(create_opaque_settings_builder(drp));
+    auto esrp(create_element_settings_repository(drp, ro, osb, m));
 
     formatters::workflow::registrar().validate();
     const auto& fc(formatters::workflow::registrar().formatter_container());
 
     const auto& kcpp(ko.cpp());
-    const auto pair(create_properties_activty(kcpp, rp, ro, fpf, fc, esrp, m));
+    const auto pair(create_properties_activty(kcpp, drp, ro, fpwf, fc, esrp, m));
     auto r(format_activty(esrp, pair.first, pair.second));
 
     const auto elements(obtain_enriched_yarn_model_activity(m));

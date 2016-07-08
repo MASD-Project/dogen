@@ -39,13 +39,6 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-dogen::formatters::file_properties
-element_properties_repository_factory::
-create_file_properties(const dynamic::object& o,
-    const dogen::formatters::file_properties_factory& fpf) const {
-    return fpf.make(cpp_modeline_name, o);
-}
-
 helper_properties_repository element_properties_repository_factory::
 create_helper_properties(const settings::helper_settings_repository& hsrp,
     const yarn::model& m) const {
@@ -72,14 +65,12 @@ element_properties_repository element_properties_repository_factory::merge(
 }
 
 element_properties_repository element_properties_repository_factory::make(
-    const dynamic::object& root_object,
-    const dogen::formatters::file_properties_factory& fpf,
+    const dogen::formatters::file_properties_workflow& fpwf,
     const settings::helper_settings_repository& hsrp,
     const formatter_properties_repository& fprp,
     const yarn::model& m) const {
 
-    const auto fp(create_file_properties(root_object, fpf));
-
+    const auto fp(fpwf.execute(cpp_modeline_name));
     const auto hprp(create_helper_properties(hsrp, m));
     const auto r(merge(fp, hprp, fprp));
     BOOST_LOG_SEV(lg, debug) << "Finished computing element properties:" << r;

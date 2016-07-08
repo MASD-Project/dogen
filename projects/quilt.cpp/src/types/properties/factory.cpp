@@ -425,8 +425,7 @@ make_includers(
 
 std::forward_list<std::shared_ptr<formattable> > factory::
 make_cmakelists(const config::cpp_options& opts,
-    const dynamic::object& root_object,
-    const dogen::formatters::file_properties_factory& fpf,
+    const dogen::formatters::file_properties_workflow& fpwf,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
     const yarn::model& m) const
@@ -445,7 +444,7 @@ make_cmakelists(const config::cpp_options& opts,
     cm->model_name(mn);
     cm->file_name(cmakelists_name);
 
-    const auto fp(fpf.make(cmake_modeline_name, root_object));
+    const auto fp(fpwf.execute(cmake_modeline_name));
     cm->file_properties(fp);
 
     if (!m.name().location().external_modules().empty())
@@ -487,8 +486,7 @@ make_cmakelists(const config::cpp_options& opts,
 
 std::shared_ptr<formattable>
 factory::make_odb_options(const config::cpp_options& opts,
-    const dynamic::object& root_object,
-    const dogen::formatters::file_properties_factory& fpf,
+    const dogen::formatters::file_properties_workflow& fpwf,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
     const yarn::model& m) const {
@@ -509,7 +507,7 @@ factory::make_odb_options(const config::cpp_options& opts,
     const auto mn(join(m.name().location().model_modules(), underscore));
     r->model_name(mn);
 
-    const auto fp(fpf.make(odb_modeline_name, root_object));
+    const auto fp(fpwf.execute(odb_modeline_name));
     r->file_properties(fp);
 
     const auto i(ps.find(ch_fn));

@@ -83,22 +83,22 @@ private:
 }
 
 std::unordered_map<std::string, settings::path_settings>
-workflow::create_path_settings_activity(const dynamic::repository& rp,
+workflow::create_path_settings_activity(const dynamic::repository& drp,
     const dynamic::object& root_object,
     const formatters::container& fc) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating path settings for root object.";
-    settings::path_settings_factory f(rp, fc.all_external_formatters());
+    settings::path_settings_factory f(drp, fc.all_external_formatters());
     const auto r(f.make(root_object));
     BOOST_LOG_SEV(lg, debug) << "Created path settings for root object.";
     return r;
 }
 
 settings::helper_settings_repository workflow::
-create_helper_settings_repository(const dynamic::repository& rp,
+create_helper_settings_repository(const dynamic::repository& drp,
     const yarn::model& m) const {
     settings::helper_settings_repository_factory f;
-    return f.make(rp, m);
+    return f.make(drp, m);
 }
 
 path_derivatives_repository workflow::
@@ -110,7 +110,7 @@ create_path_derivatives_repository(const config::cpp_options& opts,
 }
 
 formatter_properties_repository workflow::
-create_formatter_properties(const dynamic::repository& rp,
+create_formatter_properties(const dynamic::repository& drp,
     const dynamic::object& root_object,
     const settings::element_settings_repository& esrp,
     const path_derivatives_repository& pdrp,
@@ -118,7 +118,7 @@ create_formatter_properties(const dynamic::repository& rp,
     const yarn::model& m) const {
 
     formatter_properties_repository_factory f;
-    return f.make(rp, root_object, esrp, pdrp, fc, m);
+    return f.make(drp, root_object, esrp, pdrp, fc, m);
 }
 
 std::forward_list<std::shared_ptr<properties::formattable> >
@@ -138,8 +138,7 @@ workflow::from_transformer_activity(const yarn::model& m) const {
 
 std::forward_list<std::shared_ptr<properties::formattable> >
 workflow::from_factory_activity(const config::cpp_options& opts,
-    const dynamic::object& root_object,
-    const dogen::formatters::file_properties_factory& fpf,
+    const dogen::formatters::file_properties_workflow& fpwf,
     settings::element_settings_repository& esrp,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const properties::path_derivatives_repository& pdrp,
@@ -150,7 +149,6 @@ workflow::from_factory_activity(const config::cpp_options& opts,
     const auto& formatters(fc.all_formatters());
     std::forward_list<std::shared_ptr<properties::formattable> > r;
     factory f;
-    const auto& ro(root_object);
     const auto ri(f.make_registrar_info(opts, esrp, ps, fprp, m));
     if (ri)
         r.push_front(ri);
@@ -158,9 +156,9 @@ workflow::from_factory_activity(const config::cpp_options& opts,
     r.splice_after(r.before_begin(),
         f.make_includers(opts, ps, pdrp, formatters, fprp, m));
     r.splice_after(r.before_begin(),
-        f.make_cmakelists(opts, ro, fpf, ps, fprp, m));
+        f.make_cmakelists(opts, fpwf, ps, fprp, m));
 
-    const auto oi(f.make_odb_options(opts, ro, fpf, ps, fprp, m));
+    const auto oi(f.make_odb_options(opts, fpwf, ps, fprp, m));
     if (oi)
         r.push_front(oi);
 
@@ -169,13 +167,12 @@ workflow::from_factory_activity(const config::cpp_options& opts,
 }
 
 element_properties_repository workflow::create_element_properties(
-    const dynamic::object& root_object,
-    const dogen::formatters::file_properties_factory& fpf,
+     const dogen::formatters::file_properties_workflow& fpwf,
     const settings::helper_settings_repository& hsrp,
     const formatter_properties_repository& fprp,
     const yarn::model& m) const {
     element_properties_repository_factory f;
-    return f.make(root_object, fpf, hsrp, fprp, m);
+    return f.make(fpwf, hsrp, fprp, m);
 }
 
 std::pair<
@@ -185,7 +182,7 @@ std::pair<
 workflow::execute(const config::cpp_options& opts,
     const dynamic::repository& rp,
     const dynamic::object& root_object,
-    const dogen::formatters::file_properties_factory& fpf,
+    const dogen::formatters::file_properties_workflow& fpwf,
     const formatters::container& fc,
     settings::element_settings_repository& esrp,
     const yarn::model& m) const {
@@ -200,12 +197,12 @@ workflow::execute(const config::cpp_options& opts,
 
     auto formattables(from_transformer_activity(m));
     formattables.splice_after(formattables.before_begin(),
-        from_factory_activity(opts, ro, fpf, esrp, ps, pdrp, fprp, fc, m));
+        from_factory_activity(opts, fpwf, esrp, ps, pdrp, fprp, fc, m));
     BOOST_LOG_SEV(lg, debug) << "Formattables: " << formattables;
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
 
-    const auto eprp(create_element_properties(ro, fpf, hsrp, fprp, m));
+    const auto eprp(create_element_properties(fpwf, hsrp, fprp, m));
     return std::make_pair(eprp, formattables);
 }
 

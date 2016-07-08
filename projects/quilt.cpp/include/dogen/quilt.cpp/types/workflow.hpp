@@ -36,7 +36,7 @@
 #include "dogen/quilt/types/backend_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/properties/formattable.hpp"
-#include "dogen/formatters/types/file_properties_factory.hpp"
+#include "dogen/formatters/types/file_properties_workflow.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
@@ -72,10 +72,10 @@ private:
         const std::forward_list<boost::filesystem::path>& dirs) const;
 
     /**
-     * @brief Create the file properties factory.
+     * @brief Create the file properties workflow.
      */
-    dogen::formatters::file_properties_factory create_file_properties_factory(
-        const dogen::formatters::repository& frp,
+    dogen::formatters::file_properties_workflow create_file_properties_workflow(
+        const dynamic::repository& drp, const dogen::formatters::repository& frp,
         const dynamic::object& root_object) const;
 
     /**
@@ -88,7 +88,7 @@ private:
      * @brief Create the element settings repository
      */
     settings::element_settings_repository create_element_settings_repository(
-        const dynamic::repository& rp, const dynamic::object& root_object,
+        const dynamic::repository& drp, const dynamic::object& root_object,
         const settings::opaque_settings_builder& osb,
         const yarn::model& m) const;
 
@@ -102,7 +102,7 @@ private:
     create_properties_activty(const config::cpp_options& opts,
         const dynamic::repository& srp,
         const dynamic::object& root_object,
-        const dogen::formatters::file_properties_factory& fpf,
+        const dogen::formatters::file_properties_workflow& fpwf,
         const formatters::container& fc,
         settings::element_settings_repository& esrp,
         const yarn::model& m) const;
@@ -137,7 +137,7 @@ public:
 
     std::forward_list<boost::filesystem::path>
     managed_directories(const config::knitting_options& ko,
-        const dynamic::repository& rp,
+        const dynamic::repository& drp,
         const yarn::model& m) const override;
 
     std::forward_list<dynamic::ownership_hierarchy>
@@ -145,7 +145,7 @@ public:
 
     std::forward_list<dogen::formatters::file> generate(
         const config::knitting_options& ko,
-        const dynamic::repository& rp,
+        const dynamic::repository& drp,
         const yarn::model& m) const override;
 };
 

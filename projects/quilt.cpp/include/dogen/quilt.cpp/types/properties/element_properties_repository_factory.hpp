@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/yarn/types/model.hpp"
-#include "dogen/formatters/types/file_properties_factory.hpp"
+#include "dogen/formatters/types/file_properties_workflow.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/formatter_properties_repository.hpp"
@@ -39,10 +39,6 @@ namespace properties {
 
 class element_properties_repository_factory {
 private:
-    dogen::formatters::file_properties
-    create_file_properties(const dynamic::object& o,
-        const dogen::formatters::file_properties_factory& fpf) const;
-
     helper_properties_repository create_helper_properties(
         const settings::helper_settings_repository& hsrp,
         const yarn::model& m) const;
@@ -54,8 +50,7 @@ private:
 
 public:
     element_properties_repository make(
-        const dynamic::object& root_object,
-        const dogen::formatters::file_properties_factory& fpf,
+        const dogen::formatters::file_properties_workflow& fpwf,
         const settings::helper_settings_repository& hsrp,
         const formatter_properties_repository& fprp,
         const yarn::model& m) const;

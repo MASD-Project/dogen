@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <boost/optional.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
@@ -35,7 +34,7 @@ namespace dogen {
 namespace formatters {
 
 class file_settings_factory {
-private:
+public:
     explicit file_settings_factory(const dynamic::repository& rp);
 
 private:
@@ -53,7 +52,7 @@ private:
     make_field_definitions(const dynamic::repository& rp) const;
 
 public:
-    boost::optional<file_settings> make(const dynamic::object& o) const;
+    file_settings make(const dynamic::object& o) const;
 
 private:
     const field_definitions field_definitions_;
