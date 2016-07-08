@@ -27,7 +27,7 @@ add_custom_target(knit_${target}
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
-    --ignore-files-matching-regex .*/spec/.*
+    --ignore-files-matching-regex .*/tests/.*
     --verbose
     --delete-extra-files)
 if(use_latest_knitter)
@@ -45,7 +45,7 @@ add_custom_target(knit_${target}
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/spec/.*
+    --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
     --verbose
     --delete-extra-files)
@@ -64,7 +64,7 @@ add_custom_target(knit_${target}
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
-    --ignore-files-matching-regex .*/spec/.*
+    --ignore-files-matching-regex .*/tests/.*
     --verbose
     --delete-extra-files)
 if(use_latest_knitter)
@@ -82,7 +82,7 @@ add_custom_target(knit_${target}
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
-    --ignore-files-matching-regex .*/spec/.*
+    --ignore-files-matching-regex .*/tests/.*
     --verbose
     --delete-extra-files)
 if(use_latest_knitter)
@@ -103,7 +103,7 @@ add_custom_target(knit_${target}
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/spec/.*
+    --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*stitch
     --ignore-files-matching-regex .*_stitch.hpp
     --ignore-files-matching-regex .*_stitch.cpp
@@ -124,7 +124,7 @@ add_custom_target(knit_${target}
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
-    --ignore-files-matching-regex .*/spec/.*
+    --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*sql
     --ignore-files-matching-regex .*-odb.*
     --verbose
@@ -146,7 +146,7 @@ add_custom_target(knit_${target}
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/spec/.*
+    --ignore-files-matching-regex .*/tests/.*
     --verbose
     --delete-extra-files)
 if(use_latest_knitter)
@@ -165,7 +165,7 @@ add_custom_target(knit_${target}
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/spec/.*
+    --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
     --verbose
     --delete-extra-files)
@@ -183,7 +183,7 @@ add_custom_target(knit_${target}
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/spec/.*
+    --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
     --verbose
     --delete-extra-files)
@@ -206,7 +206,7 @@ add_custom_target(knit_${target}
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/spec/.*
+    --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
     --verbose
     --delete-extra-files)
@@ -224,7 +224,7 @@ add_custom_target(knit_${target}
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/spec/.*
+    --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
     --verbose
     --delete-extra-files)
@@ -244,7 +244,7 @@ add_custom_target(knit_${target}
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/spec/.*
+    --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
     --verbose
     --delete-extra-files)

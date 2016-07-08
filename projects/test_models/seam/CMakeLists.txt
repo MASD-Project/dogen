@@ -65,4 +65,4 @@ add_custom_target(${target_name}
 add_dependencies(clean_test_models ${target_name})
 message(STATUS "Processed model: ${model_name}")
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/spec)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)

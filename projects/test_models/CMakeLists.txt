@@ -92,7 +92,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/comments)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enumeration)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/exception)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stereotypes)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_model_sanitizer/spec)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_model_sanitizer/tests)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/seam)
 
 # targets for each test model

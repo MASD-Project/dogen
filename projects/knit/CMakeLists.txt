@@ -17,9 +17,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/spec)
-
 install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
     DESTINATION include/
