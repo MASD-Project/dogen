@@ -46,8 +46,6 @@ namespace {
 
 const std::string empty;
 const std::string comma(",");
-const std::string more_information(
-    "Try `dogen.knitter --help' for more information.");
 const std::string at_least_one_argument(
     "Expected at least one argument for reference");
 const std::string at_most_two_arguments(
@@ -228,10 +226,8 @@ config::input_options program_options_parser::transform_input_options(
     const boost::program_options::variables_map& vm) const {
     config::input_options r;
 
-    if (!vm.count(target_arg)) {
-        BOOST_THROW_EXCEPTION(
-            parser_validation_error(missing_target + more_information));
-    }
+    if (!vm.count(target_arg))
+        BOOST_THROW_EXCEPTION(parser_validation_error(missing_target));
 
     const auto s(vm[target_arg].as<std::string>());
     r.target(make_input(s));

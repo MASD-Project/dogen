@@ -35,7 +35,8 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("knitter"));
 const std::string log_file_prefix("log/dogen.knitter.");
-const std::string get_help("Use --help option to see usage instructions.");
+const std::string more_information(
+    "Try `dogen.knitter --help' for more information.");
 const std::string knitter_product("Dogen Knitter v" DOGEN_VERSION);
 const std::string usage_error_msg("Usage error: ");
 const std::string fatal_error_msg("Fatal Error: " );
@@ -162,7 +163,8 @@ int workflow::execute(const int argc, const char* argv[]) {
          * Log known not to be initialised as we are still parsing
          * command line options.
          */
-        std::cerr << usage_error_msg << e.what() << std::endl;
+        std::cerr << usage_error_msg << e.what() << std::endl
+                  << more_information << std::endl;
         return 1;
     } catch (const std::exception& e) {
         report_exception(e);
