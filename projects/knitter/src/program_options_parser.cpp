@@ -35,24 +35,24 @@
 #include "dogen/knitter/parser_validation_error.hpp"
 #include "dogen/knitter/program_options_parser.hpp"
 
-// Note on logging: we are NOT logging any of the exceptions to the
-// log in this file. This is by design. The logger is only initialised
-// after the options have been parsed; were we to log prior to this,
-// we would dump all the messages into the console. The output is very
-// confusing users that are accustomed to normal console applications.
-
+/*
+ * Note on logging: we are NOT logging any of the exceptions to the
+ * log in this file. This is by design. The logger is only initialised
+ * after the options have been parsed; were we to log prior to this,
+ * we would dump all the messages into the console. The output is very
+ * confusing users that are accustomed to normal console applications.
+ */
 namespace {
 
 const std::string empty;
 const std::string comma(",");
 const std::string more_information(
-    "Try `dogen_knitter --help' for more information.");
+    "Try `dogen.knitter --help' for more information.");
 const std::string at_least_one_argument(
     "Expected at least one argument for reference");
 const std::string at_most_two_arguments(
     "Expected only at most two arguments for reference");
 const std::string missing_target("Mandatory parameter target is missing. ");
-
 
 const std::string help_arg("help");
 const std::string version_arg("version");
