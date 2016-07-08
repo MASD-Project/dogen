@@ -54,9 +54,9 @@ const std::string test_suite("swap_tests");
 using namespace dogen::formatters;
 using namespace dogen::utility::test;
 
-BOOST_AUTO_TEST_SUITE(swap)
+BOOST_AUTO_TEST_SUITE(swap_tests)
 
-BOOST_AUTO_TEST_CASE(validate_swap_tests) {
+BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_swap");
 
     test_swap<licence_generator>();

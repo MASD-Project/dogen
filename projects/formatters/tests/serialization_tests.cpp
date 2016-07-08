@@ -66,9 +66,9 @@ const std::string test_suite("serialization_tests");
 using namespace dogen::formatters;
 using namespace dogen::utility::test;
 
-BOOST_AUTO_TEST_SUITE(serialization)
+BOOST_AUTO_TEST_SUITE(serialization_tests)
 
-BOOST_AUTO_TEST_CASE(validate_serialization_tests) {
+BOOST_AUTO_TEST_CASE(validate_serialization) {
     SETUP_TEST_LOG("validate_serialization");
 
     roundtrip_type<licence_generator>();

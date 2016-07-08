@@ -54,9 +54,9 @@ const std::string test_suite("io_tests");
 using namespace dogen::formatters;
 using namespace dogen::utility::test;
 
-BOOST_AUTO_TEST_SUITE(io)
+BOOST_AUTO_TEST_SUITE(io_tests)
 
-BOOST_AUTO_TEST_CASE(validate_io_tests) {
+BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
 
     test_io<licence_generator>();

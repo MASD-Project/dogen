@@ -33,8 +33,8 @@ macro(add_boost_tests test_module)
             string(REPLACE "(" "" test_name ${test_name})
             string(REPLACE ")" "" test_name ${test_name})
 
-            string(REPLACE "_tests.cpp" "" test_suite ${cpp_file})
-            string(REPLACE "tests/" "" test_suite ${test_suite})
+            string(REPLACE "_tests.cpp" "_tests" test_suite ${cpp_file})
+            # string(REPLACE "tests/" "" test_suite ${test_suite})
 
             set(tests_cmd
                 ${stage_bin_dir}/dogen.${test_module}.tests)
