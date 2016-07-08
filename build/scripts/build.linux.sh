@@ -96,5 +96,4 @@ fi
 #
 echo "* Starting build."
 cd ${build_type_dir}
-cmake ${product_dir} -G Ninja ${cmake_defines}
-ninja -j5 ${target}
+cmake ${product_dir} -G Ninja ${cmake_defines} && ninja -j5 ${target}
