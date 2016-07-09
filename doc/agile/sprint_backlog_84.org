@@ -13,26 +13,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-09 Sat 00:23]
+#+CAPTION: Clock summary at [2016-07-09 Sat 18:52]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *14:03* |       |      | 100.0 |
+| *Total time*                                                                | *14:31* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 14:03   |       |      | 100.0 |
-| Active                                                                      |         | 14:03 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:55 |   6.5 |
-| STARTED Manual updates and blog posts                                       |         |       | 0:37 |   4.4 |
-| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |  10.4 |
-| COMPLETED Enable build type on travis                                       |         |       | 1:17 |   9.1 |
-| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   3.4 |
-| COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   2.4 |
-| COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   1.2 |
-| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   5.9 |
-| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   3.2 |
-| COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.9 |
-| COMPLETED Refactor general settings                                         |         |       | 5:50 |  41.5 |
-| COMPLETED Consider renaming specs to tests                                  |         |       | 1:24 |  10.0 |
+| Stories                                                                     | 14:31   |       |      | 100.0 |
+| Active                                                                      |         | 14:31 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:55 |   6.3 |
+| STARTED Manual updates and blog posts                                       |         |       | 0:37 |   4.2 |
+| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |  10.1 |
+| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   8.8 |
+| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   3.3 |
+| COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   2.3 |
+| COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   1.1 |
+| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   5.7 |
+| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   3.1 |
+| COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.8 |
+| COMPLETED Refactor general settings                                         |         |       | 5:50 |  40.2 |
+| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   9.6 |
+| STARTED Create a IO settings class                                          |         |       | 0:28 |   3.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -79,7 +80,7 @@ instead:
 
 We were already doing this for the hash of the top-commit.
 
-*** COMPLETED Enable build type on travis                             :story:
+*** COMPLETED Enable =BUILD_TYPE= on travis                           :story:
     CLOSED: [2016-07-05 Tue 21:10]
     CLOCK: [2016-07-05 Tue 20:17]--[2016-07-05 Tue 20:22] =>  0:05
     CLOCK: [2016-07-05 Tue 19:04]--[2016-07-05 Tue 20:16] =>  1:12
@@ -325,7 +326,7 @@ a file settings class that is an exact match of what is read out of
 dynamic and is then used as input to generate the file properties.
 *
 
-*** COMPLETED Consider renaming specs to tests                        :story:
+*** COMPLETED Rename specs to tests                                   :story:
     CLOSED: [2016-07-09 Sat 00:09]
     CLOCK: [2016-07-09 Sat 00:10]--[2016-07-09 Sat 00:23] =>  0:13
     CLOCK: [2016-07-08 Fri 22:58]--[2016-07-09 Sat 00:09] =>  1:11
@@ -343,24 +344,13 @@ confusing every other developer. This would require:
 - we should also use =_tests= on the test suite name so we can do
   =using XYZ= without name clashes.
 
-*** Add support for file properties overrides                         :story:
-
-At present we have hard-coded the file properties (old general
-settings) to be read from the root object only. In an ideal world, we
-should be able to override some of these such as the copyrights. It
-may not make sense to be able to override them all though.
-
-*** Create a IO settings class                                        :story:
+*** STARTED Create a IO settings class                                :story:
+    CLOCK: [2016-07-09 Sat 18:51]--[2016-07-09 Sat 18:52] =>  0:01
+    CLOCK: [2016-07-09 Sat 18:13]--[2016-07-09 Sat 18:40] =>  0:27
 
 Add a class to model all of the settings required to produce the io
 invocation, create a repository for it and associated factory and
 finally add the repository to the context.
-
-*** Detect knitter and disable code generation accordingly            :story:
-
-At present you can try to build the codegen knitting targets even
-before you built knitter. We should make them conditional on detecting
-=knitter=. We just need to make sure this is not cached by CMake.
 
 *** Implement streaming for type in terms of IO settings              :story:
 
@@ -369,6 +359,26 @@ before you built knitter. We should make them conditional on detecting
   IO settings container from context.
 - remove all other streaming for type implementations and use the new
   one in the legacy formatters.
+
+*** Implement IO helper methods with new helper infrastructure        :story:
+
+Problems:
+
+- we do not have a "streaming for type" function in assistant. We need
+  to figure out how to obtain this data from the helper.
+- we do not have a name tree so we do not know what the key and value
+  names are for associative containers. We probably need to add the
+  name tree to the helper descriptor.
+- =string_conversion_method= cannot be implemented as is;we need it
+  for all properties, not just in the context of helpers. This seems
+  to imply we need a way to access this information directly from the
+  property. It will need some thinking.
+
+*** Detect knitter and disable code generation accordingly            :story:
+
+At present you can try to build the codegen knitting targets even
+before you built knitter. We should make them conditional on detecting
+=knitter=. We just need to make sure this is not cached by CMake.
 
 *** Group the file related fields under a prefix                      :story:
 
@@ -428,6 +438,13 @@ hard-coded things:
 - string helper variables: =<new_line>=, =<quote>=
 - =tidy_up_string=
 
+*** Add support for file properties overrides                         :story:
+
+At present we have hard-coded the file properties (old general
+settings) to be read from the root object only. In an ideal world, we
+should be able to override some of these such as the copyrights. It
+may not make sense to be able to override them all though.
+
 *** Why do we need helpers and io for some types?                     :story:
 
 At present we have helper support for maps, sets, pairs etc. We also
@@ -455,20 +472,6 @@ follows (all primitives model):
 : << "\"char_property\": " << "\"" << v.char_property() << "\"" << ", "
 
 We need a "tidy-up char" function to handle this properly.
-
-*** Implement IO helper methods with new helper infrastructure        :story:
-
-Problems:
-
-- we do not have a "streaming for type" function in assistant. We need
-  to figure out how to obtain this data from the helper.
-- we do not have a name tree so we do not know what the key and value
-  names are for associative containers. We probably need to add the
-  name tree to the helper descriptor.
-- =string_conversion_method= cannot be implemented as is;we need it
-  for all properties, not just in the context of helpers. This seems
-  to imply we need a way to access this information directly from the
-  property. It will need some thinking.
 
 *** Lists of strings are not properly tidied up on io                 :story:
 
