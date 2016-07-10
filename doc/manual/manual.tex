@@ -240,19 +240,6 @@ The following web resources are available:
 
 \epigraph{Malembe, Malembe.}{Angola proverb}
 
-\lettrine{L}{ike many} a Free and Open Source Software project, Dogen
-too started with a cursory knowledge of the field it ended up
-covering\footnote{In fact, one could even say that Dogen's development
-  \emph{itself} has been a tool in gaining knowledge in this
-  field.}. Several years of reading and researching revealed an
-incredibly wealthy area in terms of theory, as well as a number of
-successful engineering projects based on those theories. Thus it
-became important to understand these in order to frame ideas from the
-right conceptual lens, and also to figure out where Dogen stood with
-regards to these other tools and projects. This part attempts to
-distil the knowledge gained in this process, focusing only on the most
-significant ingredients.
-
 Unfortunately, these topics are not the most approachable. This is
 both due to their unfamiliarity~--- most developers do not spend a lot
 of time contemplating these matters on their day to day jobs~--- as
@@ -286,13 +273,54 @@ aspects around its development.
   physicist knows that light and Maxwell's equations are one and the
   same.}{Emanuel Derman}
 
-\lettrine{L}{ike many} a
+\lettrine{L}{ike many} a Free and Open Source Software project, Dogen
+too started with only a cursory knowledge of the field it ended up
+covering\footnote{In fact, one could even say that Dogen's development
+  \emph{itself} has been a tool in gaining knowledge in this
+  field.}. Several years of reading and researching revealed an
+incredibly wealthy area in terms of theory, as well as a number of
+successful engineering projects based on those theories. Thus it
+became important to have some kind of fundamental understanding in
+order to frame ideas from the right conceptual lens, and also to
+figure out where Dogen stood with regards to these other tools and
+projects. But soon, a second problem emerged: too much theory, too
+many papers and too many tools. The practitioner~--- as opposed to the
+academic~--- can ill afford to do a thorough literature review before
+starting to engineer a solution. Some kind of balance must be struck
+between the two. Fortunately, it was at this point that the book
+\emph{Model Driven Software Development}\cite{2004model} was found,
+and it is the topic of this chapter.
 
-Seems like the Model-Driven field already contains a lot of very
-useful definitions in this space. Read mainly the book but also the
-papers and figure out what they can do to help us find a way around
-the domain.
+This book is very important to anyone interested in code generation
+for two reasons. First, it distils the major developments in the
+field, providing an overview of the different trade-offs available. In
+effect, it is a ready-made literature review for the
+practitioner. Secondly~---- and more importantly for our purposes~---
+it provides us with a well-defined ubiquitous language that allows us
+to discuss the domain. Clearly, it would be a futile exercise to try
+to summarise a \emph{tour de force} such as \cite{2004Model} book in a
+few pages. We shall instead use it to tease out a minimum set of
+concepts required in order to describe Dogen.
 
+The first and foremost concept is that of a \emph{model}.
+
+\section{Models}
+
+Programming is the art of refining abstractions. It is the
+programmer's job to create a set of constructs that represent concepts
+found in the problem domain; and to get those concepts to cooperate
+successfully in producing work that is defined as useful by something
+or someone~--- that is, to solve a \emph{problem} in the problem
+domain. Together, this collection of concepts \emph{models} the
+problem domain because it is a representation of a subset of the
+problem domain inside of the computer. One may even further qualify it
+as a ``special'' kind of model~--- a \emph{domain model}. \emph{Domain
+  modeling} is then the activity of identifying a set of \emph{domain
+  types} that describe the domain in question via their properties,
+relationships and behaviours.
+
+
+FIXME: change this into a bibliography for the chapter/
 %% **** Links of books and papers to read
 
 %% - [[http://www.voelter.de/data/books/mdsd-en.pdf][Model-Driven Software Development]]
@@ -307,7 +335,6 @@ the domain.
 %% - [[http://essay.utwente.nl/57286/1/scriptie_Overbeek.pdf][Meta Object Facility (MOF): investigation of the state of the art]]
 %% - [[http://www2.informatik.hu-berlin.de/sam/lehre/MDA-UML/UML-Infra-03-09-15.pdf][UML 2.0 Infrastructure Specification]]
 
-%% **** Useful terms and definitions from the book
 
 - *Model-based development*: the traditional kind of software
   development, where developers create UML diagrams to represent the
@@ -675,18 +702,7 @@ regular developers: the world of \emph{meta}.
 \section{On Models and Modeling}
 
 Before we go too much further, it is important to clarify what is
-meant by a model. After all, programming is the art of refining
-abstractions. It is the programmer's job to create a set of constructs
-that represent concepts found in the problem domain; and to get those
-concepts to cooperate successfully in producing work that is defined
-as useful by something or someone~--- that is, to solve a
-\emph{problem} in the problem domain. Together, this collection of
-concepts \emph{models} the problem domain because it is a
-representation of a subset of the problem domain inside of the
-computer. One may even further qualify it as a ``special'' kind of
-model~--- a \emph{domain model}. \emph{Domain modeling} is then the
-activity of identifying a set of \emph{domain types} that describe the
-domain in question via their properties, relationships and behaviours.
+meant by a model. After all,
 
 Whilst all of this may seem pretty obvious, it is a terrain rife for
 misconceptions. First, in a strict sense, all models are ``domain

@@ -13,27 +13,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-09 Sat 18:52]
+#+CAPTION: Clock summary at [2016-07-09 Sat 23:40]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *14:31* |       |      | 100.0 |
+| *Total time*                                                                | *15:02* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 14:31   |       |      | 100.0 |
-| Active                                                                      |         | 14:31 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:55 |   6.3 |
-| STARTED Manual updates and blog posts                                       |         |       | 0:37 |   4.2 |
-| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |  10.1 |
-| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   8.8 |
-| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   3.3 |
-| COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   2.3 |
+| Stories                                                                     | 15:02   |       |      | 100.0 |
+| Active                                                                      |         | 15:02 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:55 |   6.1 |
+| STARTED Manual updates and blog posts                                       |         |       | 1:08 |   7.5 |
+| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   9.8 |
+| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   8.5 |
+| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   3.2 |
+| COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   2.2 |
 | COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   1.1 |
-| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   5.7 |
-| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   3.1 |
+| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   5.5 |
+| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   3.0 |
 | COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.8 |
-| COMPLETED Refactor general settings                                         |         |       | 5:50 |  40.2 |
-| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   9.6 |
-| STARTED Create a IO settings class                                          |         |       | 0:28 |   3.2 |
+| COMPLETED Refactor general settings                                         |         |       | 5:50 |  38.8 |
+| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   9.3 |
+| STARTED Create a IO settings class                                          |         |       | 0:28 |   3.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -47,6 +47,9 @@
 Updates to sprint and product backlog.
 
 *** STARTED Manual updates and blog posts                             :story:
+    CLOCK: [2016-07-09 Sat 23:43]--[2016-07-09 Sat 23:56] =>  0:13
+    CLOCK: [2016-07-09 Sat 23:21]--[2016-07-09 Sat 23:40] =>  0:19
+    CLOCK: [2016-07-09 Sat 18:53]--[2016-07-09 Sat 19:05] =>  0:12
     CLOCK: [2016-07-05 Tue 21:48]--[2016-07-05 Tue 22:25] =>  0:37
 
 Time taken with blog posts and updates to the manual.
