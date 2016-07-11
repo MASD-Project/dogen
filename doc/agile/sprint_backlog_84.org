@@ -347,9 +347,8 @@ confusing every other developer. This would require:
 - we should also use =_tests= on the test suite name so we can do
   =using XYZ= without name clashes.
 
-*** STARTED Create a IO settings class                                :story:
-    CLOCK: [2016-07-11 Mon 22:00]--[2016-07-11 Mon 22:14] =>  0:14
-    CLOCK: [2016-07-11 Mon 21:47]--[2016-07-11 Mon 21:59] =>  0:12
+*** COMPLETED Create a IO settings class                              :story:
+    CLOSED: [2016-07-11 Mon 22:21]
     CLOCK: [2016-07-11 Mon 21:22]--[2016-07-11 Mon 21:46] =>  0:24
     CLOCK: [2016-07-11 Mon 21:14]--[2016-07-11 Mon 21:21] =>  0:07
     CLOCK: [2016-07-11 Mon 20:45]--[2016-07-11 Mon 21:01] =>  0:16
@@ -360,9 +359,13 @@ Add a class to model all of the settings required to produce the io
 invocation, create a repository for it and associated factory and
 finally add the repository to the context.
 
-*** Implement streaming for type in terms of IO settings              :story:
+*** STARTED Implement streaming for type in terms of IO settings      :story:
+    CLOCK: [2016-07-11 Mon 22:16]--[2016-07-11 Mon 22:21] =>  0:05
+    CLOCK: [2016-07-11 Mon 22:00]--[2016-07-11 Mon 22:14] =>  0:14
+    CLOCK: [2016-07-11 Mon 21:47]--[2016-07-11 Mon 21:59] =>  0:12
 
-- rename it o "IO invocation for type".
+- rename it o "IO invocation for type". Actually lets use IO for the
+  facet and streaming for the aspect.
 - call it with an ID; look up the corresponding IO settings in the global
   IO settings container from context.
 - remove all other streaming for type implementations and use the new

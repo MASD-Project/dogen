@@ -31,6 +31,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/quilt.cpp/serialization/settings/helper_settings_ser.hpp"
+#include "dogen/quilt.cpp/serialization/settings/streaming_settings_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/helper_descriptor_ser.hpp"
 
 namespace boost {
@@ -46,6 +47,7 @@ void save(Archive& ar,
     ar << make_nvp("name_tree_qualified", v.name_tree_qualified_);
     ar << make_nvp("name_tree_identifiable", v.name_tree_identifiable_);
     ar << make_nvp("helper_settings", v.helper_settings_);
+    ar << make_nvp("streaming_settings", v.streaming_settings_);
     ar << make_nvp("is_primitive", v.is_primitive_);
 }
 
@@ -59,6 +61,7 @@ void load(Archive& ar,
     ar >> make_nvp("name_tree_qualified", v.name_tree_qualified_);
     ar >> make_nvp("name_tree_identifiable", v.name_tree_identifiable_);
     ar >> make_nvp("helper_settings", v.helper_settings_);
+    ar >> make_nvp("streaming_settings", v.streaming_settings_);
     ar >> make_nvp("is_primitive", v.is_primitive_);
 }
 

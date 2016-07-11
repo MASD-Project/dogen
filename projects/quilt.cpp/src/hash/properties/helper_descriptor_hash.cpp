@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/quilt.cpp/hash/settings/helper_settings_hash.hpp"
+#include "dogen/quilt.cpp/hash/settings/streaming_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/helper_descriptor_hash.hpp"
 
 namespace {
@@ -47,6 +48,16 @@ inline std::size_t hash_boost_optional_dogen_quilt_cpp_settings_helper_settings(
     return seed;
 }
 
+inline std::size_t hash_boost_optional_dogen_quilt_cpp_settings_streaming_settings(const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -63,6 +74,7 @@ std::size_t helper_descriptor_hasher::hash(const helper_descriptor& v) {
     combine(seed, v.name_tree_qualified());
     combine(seed, v.name_tree_identifiable());
     combine(seed, hash_boost_optional_dogen_quilt_cpp_settings_helper_settings(v.helper_settings()));
+    combine(seed, hash_boost_optional_dogen_quilt_cpp_settings_streaming_settings(v.streaming_settings()));
     combine(seed, v.is_primitive());
 
     return seed;

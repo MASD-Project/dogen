@@ -30,6 +30,7 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include "dogen/quilt.cpp/types/settings/helper_settings.hpp"
+#include "dogen/quilt.cpp/types/settings/streaming_settings.hpp"
 #include "dogen/quilt.cpp/serialization/properties/helper_descriptor_fwd_ser.hpp"
 
 namespace dogen {
@@ -56,6 +57,7 @@ public:
         const std::string& name_tree_qualified,
         const std::string& name_tree_identifiable,
         const boost::optional<dogen::quilt::cpp::settings::helper_settings>& helper_settings,
+        const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& streaming_settings,
         const bool is_primitive);
 
 private:
@@ -96,6 +98,11 @@ public:
     void helper_settings(const boost::optional<dogen::quilt::cpp::settings::helper_settings>& v);
     void helper_settings(const boost::optional<dogen::quilt::cpp::settings::helper_settings>&& v);
 
+    const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& streaming_settings() const;
+    boost::optional<dogen::quilt::cpp::settings::streaming_settings>& streaming_settings();
+    void streaming_settings(const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& v);
+    void streaming_settings(const boost::optional<dogen::quilt::cpp::settings::streaming_settings>&& v);
+
     bool is_primitive() const;
     void is_primitive(const bool v);
 
@@ -116,6 +123,7 @@ private:
     std::string name_tree_qualified_;
     std::string name_tree_identifiable_;
     boost::optional<dogen::quilt::cpp::settings::helper_settings> helper_settings_;
+    boost::optional<dogen::quilt::cpp::settings::streaming_settings> streaming_settings_;
     bool is_primitive_;
 };
 

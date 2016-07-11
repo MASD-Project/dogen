@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include "dogen/quilt.cpp/test_data/settings/helper_settings_td.hpp"
+#include "dogen/quilt.cpp/test_data/settings/streaming_settings_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/helper_descriptor_td.hpp"
 
 namespace {
@@ -50,6 +51,18 @@ create_boost_optional_dogen_quilt_cpp_settings_helper_settings(unsigned int posi
     return r;
 }
 
+dogen::quilt::cpp::settings::streaming_settings
+create_dogen_quilt_cpp_settings_streaming_settings(const unsigned int position) {
+    return dogen::quilt::cpp::settings::streaming_settings_generator::create(position);
+}
+
+boost::optional<dogen::quilt::cpp::settings::streaming_settings>
+create_boost_optional_dogen_quilt_cpp_settings_streaming_settings(unsigned int position) {
+    boost::optional<dogen::quilt::cpp::settings::streaming_settings> r(
+        create_dogen_quilt_cpp_settings_streaming_settings(position));
+    return r;
+}
+
 bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
@@ -71,7 +84,8 @@ populate(const unsigned int position, result_type& v) {
     v.name_tree_qualified(create_std_string(position + 3));
     v.name_tree_identifiable(create_std_string(position + 4));
     v.helper_settings(create_boost_optional_dogen_quilt_cpp_settings_helper_settings(position + 5));
-    v.is_primitive(create_bool(position + 6));
+    v.streaming_settings(create_boost_optional_dogen_quilt_cpp_settings_streaming_settings(position + 6));
+    v.is_primitive(create_bool(position + 7));
 }
 
 helper_descriptor_generator::result_type

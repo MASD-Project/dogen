@@ -22,6 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
+#include "dogen/quilt.cpp/io/settings/streaming_settings_io.hpp"
 #include "dogen/quilt.cpp/io/properties/helper_descriptor_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -60,6 +61,21 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::qu
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace quilt {
 namespace cpp {
@@ -80,6 +96,7 @@ std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
       << "\"name_tree_qualified\": " << "\"" << tidy_up_string(v.name_tree_qualified()) << "\"" << ", "
       << "\"name_tree_identifiable\": " << "\"" << tidy_up_string(v.name_tree_identifiable()) << "\"" << ", "
       << "\"helper_settings\": " << v.helper_settings() << ", "
+      << "\"streaming_settings\": " << v.streaming_settings() << ", "
       << "\"is_primitive\": " << v.is_primitive()
       << " }";
     return(s);

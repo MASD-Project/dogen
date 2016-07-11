@@ -35,6 +35,7 @@ helper_descriptor::helper_descriptor(helper_descriptor&& rhs)
       name_tree_qualified_(std::move(rhs.name_tree_qualified_)),
       name_tree_identifiable_(std::move(rhs.name_tree_identifiable_)),
       helper_settings_(std::move(rhs.helper_settings_)),
+      streaming_settings_(std::move(rhs.streaming_settings_)),
       is_primitive_(std::move(rhs.is_primitive_)) { }
 
 helper_descriptor::helper_descriptor(
@@ -44,6 +45,7 @@ helper_descriptor::helper_descriptor(
     const std::string& name_tree_qualified,
     const std::string& name_tree_identifiable,
     const boost::optional<dogen::quilt::cpp::settings::helper_settings>& helper_settings,
+    const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& streaming_settings,
     const bool is_primitive)
     : namespaces_(namespaces),
       name_identifiable_(name_identifiable),
@@ -51,6 +53,7 @@ helper_descriptor::helper_descriptor(
       name_tree_qualified_(name_tree_qualified),
       name_tree_identifiable_(name_tree_identifiable),
       helper_settings_(helper_settings),
+      streaming_settings_(streaming_settings),
       is_primitive_(is_primitive) { }
 
 void helper_descriptor::swap(helper_descriptor& other) noexcept {
@@ -61,6 +64,7 @@ void helper_descriptor::swap(helper_descriptor& other) noexcept {
     swap(name_tree_qualified_, other.name_tree_qualified_);
     swap(name_tree_identifiable_, other.name_tree_identifiable_);
     swap(helper_settings_, other.helper_settings_);
+    swap(streaming_settings_, other.streaming_settings_);
     swap(is_primitive_, other.is_primitive_);
 }
 
@@ -71,6 +75,7 @@ bool helper_descriptor::operator==(const helper_descriptor& rhs) const {
         name_tree_qualified_ == rhs.name_tree_qualified_ &&
         name_tree_identifiable_ == rhs.name_tree_identifiable_ &&
         helper_settings_ == rhs.helper_settings_ &&
+        streaming_settings_ == rhs.streaming_settings_ &&
         is_primitive_ == rhs.is_primitive_;
 }
 
@@ -174,6 +179,22 @@ void helper_descriptor::helper_settings(const boost::optional<dogen::quilt::cpp:
 
 void helper_descriptor::helper_settings(const boost::optional<dogen::quilt::cpp::settings::helper_settings>&& v) {
     helper_settings_ = std::move(v);
+}
+
+const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& helper_descriptor::streaming_settings() const {
+    return streaming_settings_;
+}
+
+boost::optional<dogen::quilt::cpp::settings::streaming_settings>& helper_descriptor::streaming_settings() {
+    return streaming_settings_;
+}
+
+void helper_descriptor::streaming_settings(const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& v) {
+    streaming_settings_ = v;
+}
+
+void helper_descriptor::streaming_settings(const boost::optional<dogen::quilt::cpp::settings::streaming_settings>&& v) {
+    streaming_settings_ = std::move(v);
 }
 
 bool helper_descriptor::is_primitive() const {
