@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/settings/helper_settings_hash.hpp"
+#include "dogen/quilt.cpp/hash/settings/streaming_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/streaming_settings_repository_hash.hpp"
 
 namespace {
@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_settings_helper_settings(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_settings_streaming_settings(const std::unordered_map<std::string, dogen::quilt::cpp::settings::streaming_settings>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -48,7 +48,7 @@ namespace settings {
 std::size_t streaming_settings_repository_hasher::hash(const streaming_settings_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_settings_helper_settings(v.by_id()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_settings_streaming_settings(v.by_id()));
     return seed;
 }
 

@@ -28,7 +28,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/quilt.cpp/types/settings/helper_settings.hpp"
+#include "dogen/quilt.cpp/types/settings/streaming_settings.hpp"
 #include "dogen/quilt.cpp/serialization/settings/streaming_settings_repository_fwd_ser.hpp"
 
 namespace dogen {
@@ -44,7 +44,7 @@ public:
     ~streaming_settings_repository() = default;
 
 public:
-    explicit streaming_settings_repository(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& by_id);
+    explicit streaming_settings_repository(const std::unordered_map<std::string, dogen::quilt::cpp::settings::streaming_settings>& by_id);
 
 private:
     template<typename Archive>
@@ -54,10 +54,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::settings::streaming_settings_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& by_id() const;
-    std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& by_id();
-    void by_id(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& v);
-    void by_id(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>&& v);
+    const std::unordered_map<std::string, dogen::quilt::cpp::settings::streaming_settings>& by_id() const;
+    std::unordered_map<std::string, dogen::quilt::cpp::settings::streaming_settings>& by_id();
+    void by_id(const std::unordered_map<std::string, dogen::quilt::cpp::settings::streaming_settings>& v);
+    void by_id(const std::unordered_map<std::string, dogen::quilt::cpp::settings::streaming_settings>&& v);
 
 public:
     bool operator==(const streaming_settings_repository& rhs) const;
@@ -70,7 +70,7 @@ public:
     streaming_settings_repository& operator=(streaming_settings_repository other);
 
 private:
-    std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings> by_id_;
+    std::unordered_map<std::string, dogen::quilt::cpp::settings::streaming_settings> by_id_;
 };
 
 } } } }

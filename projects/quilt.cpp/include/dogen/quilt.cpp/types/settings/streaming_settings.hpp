@@ -45,10 +45,10 @@ public:
 
 public:
     streaming_settings(
-        const std::string& string_conversion_method,
         const bool requires_quoting,
-        const bool remove_unprintable_characters,
-        const bool requires_dereferencing);
+        const bool requires_dereferencing,
+        const std::string& string_conversion_method,
+        const bool remove_unprintable_characters);
 
 private:
     template<typename Archive>
@@ -58,19 +58,19 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::settings::streaming_settings& v, unsigned int version);
 
 public:
+    bool requires_quoting() const;
+    void requires_quoting(const bool v);
+
+    bool requires_dereferencing() const;
+    void requires_dereferencing(const bool v);
+
     const std::string& string_conversion_method() const;
     std::string& string_conversion_method();
     void string_conversion_method(const std::string& v);
     void string_conversion_method(const std::string&& v);
 
-    bool requires_quoting() const;
-    void requires_quoting(const bool v);
-
     bool remove_unprintable_characters() const;
     void remove_unprintable_characters(const bool v);
-
-    bool requires_dereferencing() const;
-    void requires_dereferencing(const bool v);
 
 public:
     bool operator==(const streaming_settings& rhs) const;
@@ -83,10 +83,10 @@ public:
     streaming_settings& operator=(streaming_settings other);
 
 private:
-    std::string string_conversion_method_;
     bool requires_quoting_;
-    bool remove_unprintable_characters_;
     bool requires_dereferencing_;
+    std::string string_conversion_method_;
+    bool remove_unprintable_characters_;
 };
 
 } } } }

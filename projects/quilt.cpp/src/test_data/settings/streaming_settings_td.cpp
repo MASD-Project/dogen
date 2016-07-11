@@ -23,14 +23,14 @@
 
 namespace {
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
     return s.str();
-}
-
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
 }
 
 }
@@ -44,10 +44,10 @@ streaming_settings_generator::streaming_settings_generator() : position_(0) { }
 
 void streaming_settings_generator::
 populate(const unsigned int position, result_type& v) {
-    v.string_conversion_method(create_std_string(position + 0));
-    v.requires_quoting(create_bool(position + 1));
-    v.remove_unprintable_characters(create_bool(position + 2));
-    v.requires_dereferencing(create_bool(position + 3));
+    v.requires_quoting(create_bool(position + 0));
+    v.requires_dereferencing(create_bool(position + 1));
+    v.string_conversion_method(create_std_string(position + 2));
+    v.remove_unprintable_characters(create_bool(position + 3));
 }
 
 streaming_settings_generator::result_type

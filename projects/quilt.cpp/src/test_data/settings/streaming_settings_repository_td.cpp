@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/quilt.cpp/test_data/settings/helper_settings_td.hpp"
+#include "dogen/quilt.cpp/test_data/settings/streaming_settings_td.hpp"
 #include "dogen/quilt.cpp/test_data/settings/streaming_settings_repository_td.hpp"
 
 namespace {
@@ -30,15 +30,15 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::quilt::cpp::settings::helper_settings
-create_dogen_quilt_cpp_settings_helper_settings(const unsigned int position) {
-    return dogen::quilt::cpp::settings::helper_settings_generator::create(position);
+dogen::quilt::cpp::settings::streaming_settings
+create_dogen_quilt_cpp_settings_streaming_settings(const unsigned int position) {
+    return dogen::quilt::cpp::settings::streaming_settings_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings> create_std_unordered_map_std_string_dogen_quilt_cpp_settings_helper_settings(unsigned int position) {
-    std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings> r;
+std::unordered_map<std::string, dogen::quilt::cpp::settings::streaming_settings> create_std_unordered_map_std_string_dogen_quilt_cpp_settings_streaming_settings(unsigned int position) {
+    std::unordered_map<std::string, dogen::quilt::cpp::settings::streaming_settings> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_settings_helper_settings(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_settings_streaming_settings(position + i)));
     }
     return r;
 }
@@ -54,7 +54,7 @@ streaming_settings_repository_generator::streaming_settings_repository_generator
 
 void streaming_settings_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.by_id(create_std_unordered_map_std_string_dogen_quilt_cpp_settings_helper_settings(position + 0));
+    v.by_id(create_std_unordered_map_std_string_dogen_quilt_cpp_settings_streaming_settings(position + 0));
 }
 
 streaming_settings_repository_generator::result_type

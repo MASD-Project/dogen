@@ -25,7 +25,7 @@ namespace quilt {
 namespace cpp {
 namespace settings {
 
-streaming_settings_repository::streaming_settings_repository(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& by_id)
+streaming_settings_repository::streaming_settings_repository(const std::unordered_map<std::string, dogen::quilt::cpp::settings::streaming_settings>& by_id)
     : by_id_(by_id) { }
 
 void streaming_settings_repository::swap(streaming_settings_repository& other) noexcept {
@@ -43,19 +43,19 @@ streaming_settings_repository& streaming_settings_repository::operator=(streamin
     return *this;
 }
 
-const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& streaming_settings_repository::by_id() const {
+const std::unordered_map<std::string, dogen::quilt::cpp::settings::streaming_settings>& streaming_settings_repository::by_id() const {
     return by_id_;
 }
 
-std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& streaming_settings_repository::by_id() {
+std::unordered_map<std::string, dogen::quilt::cpp::settings::streaming_settings>& streaming_settings_repository::by_id() {
     return by_id_;
 }
 
-void streaming_settings_repository::by_id(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>& v) {
+void streaming_settings_repository::by_id(const std::unordered_map<std::string, dogen::quilt::cpp::settings::streaming_settings>& v) {
     by_id_ = v;
 }
 
-void streaming_settings_repository::by_id(const std::unordered_map<std::string, dogen::quilt::cpp::settings::helper_settings>&& v) {
+void streaming_settings_repository::by_id(const std::unordered_map<std::string, dogen::quilt::cpp::settings::streaming_settings>&& v) {
     by_id_ = std::move(v);
 }
 

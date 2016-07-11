@@ -38,10 +38,10 @@ namespace settings {
 std::size_t streaming_settings_hasher::hash(const streaming_settings& v) {
     std::size_t seed(0);
 
-    combine(seed, v.string_conversion_method());
     combine(seed, v.requires_quoting());
-    combine(seed, v.remove_unprintable_characters());
     combine(seed, v.requires_dereferencing());
+    combine(seed, v.string_conversion_method());
+    combine(seed, v.remove_unprintable_characters());
 
     return seed;
 }
