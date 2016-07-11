@@ -13,27 +13,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-09 Sat 23:40]
+#+CAPTION: Clock summary at [2016-07-11 Mon 21:21]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *15:02* |       |      | 100.0 |
+| *Total time*                                                                | *15:38* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 15:02   |       |      | 100.0 |
-| Active                                                                      |         | 15:02 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:55 |   6.1 |
-| STARTED Manual updates and blog posts                                       |         |       | 1:08 |   7.5 |
-| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   9.8 |
-| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   8.5 |
-| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   3.2 |
-| COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   2.2 |
+| Stories                                                                     | 15:38   |       |      | 100.0 |
+| Active                                                                      |         | 15:38 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:55 |   5.9 |
+| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   8.6 |
+| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   9.4 |
+| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   8.2 |
+| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   3.1 |
+| COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   2.1 |
 | COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   1.1 |
-| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   5.5 |
-| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   3.0 |
-| COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.8 |
-| COMPLETED Refactor general settings                                         |         |       | 5:50 |  38.8 |
-| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   9.3 |
-| STARTED Create a IO settings class                                          |         |       | 0:28 |   3.1 |
+| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   5.3 |
+| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   2.9 |
+| COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.7 |
+| COMPLETED Refactor general settings                                         |         |       | 5:50 |  37.3 |
+| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   9.0 |
+| STARTED Create a IO settings class                                          |         |       | 0:51 |   5.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -348,6 +348,8 @@ confusing every other developer. This would require:
   =using XYZ= without name clashes.
 
 *** STARTED Create a IO settings class                                :story:
+    CLOCK: [2016-07-11 Mon 21:14]--[2016-07-11 Mon 21:21] =>  0:07
+    CLOCK: [2016-07-11 Mon 20:45]--[2016-07-11 Mon 21:01] =>  0:16
     CLOCK: [2016-07-09 Sat 18:51]--[2016-07-09 Sat 18:52] =>  0:01
     CLOCK: [2016-07-09 Sat 18:13]--[2016-07-09 Sat 18:40] =>  0:27
 
