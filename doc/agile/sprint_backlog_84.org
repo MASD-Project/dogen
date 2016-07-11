@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-11 Mon 23:09]
+#+CAPTION: Clock summary at [2016-07-11 Mon 23:16]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *17:20* |       |      | 100.0 |
+| *Total time*                                                                | *17:26* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 17:20   |       |      | 100.0 |
-| Active                                                                      |         | 17:20 |      | 100.0 |
+| Stories                                                                     | 17:26   |       |      | 100.0 |
+| Active                                                                      |         | 17:26 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:55 |   5.3 |
-| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   7.8 |
-| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   8.5 |
+| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   7.7 |
+| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   8.4 |
 | COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   7.4 |
 | COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   2.8 |
 | COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   1.9 |
@@ -31,10 +31,10 @@
 | COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   4.8 |
 | COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   2.6 |
 | COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.5 |
-| COMPLETED Refactor general settings                                         |         |       | 5:50 |  33.7 |
-| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   8.1 |
+| COMPLETED Refactor general settings                                         |         |       | 5:50 |  33.5 |
+| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   8.0 |
 | COMPLETED Create a IO settings class                                        |         |       | 1:15 |   7.2 |
-| STARTED Implement streaming for type in terms of IO settings                |         |       | 1:18 |   7.5 |
+| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   8.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -360,7 +360,9 @@ Add a class to model all of the settings required to produce the io
 invocation, create a repository for it and associated factory and
 finally add the repository to the context.
 
-*** STARTED Implement streaming for type in terms of IO settings      :story:
+*** COMPLETED Implement streaming for type in terms of IO settings    :story:
+    CLOSED: [2016-07-11 Mon 23:16]
+    CLOCK: [2016-07-11 Mon 23:10]--[2016-07-11 Mon 23:16] =>  0:06
     CLOCK: [2016-07-11 Mon 22:22]--[2016-07-11 Mon 23:09] =>  0:47
     CLOCK: [2016-07-11 Mon 22:16]--[2016-07-11 Mon 22:21] =>  0:05
     CLOCK: [2016-07-11 Mon 22:00]--[2016-07-11 Mon 22:14] =>  0:14

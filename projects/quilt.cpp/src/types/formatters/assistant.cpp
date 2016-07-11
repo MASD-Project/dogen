@@ -486,29 +486,27 @@ void assistant::add_helper_methods(const bool in_inheritance) {
 
 std::string assistant::
 streaming_for_type(const properties::helper_descriptor& hd,
-    const std::string& /*s*/) const {
+    const std::string& s) const {
 
-    const auto sg(hd.helper_settings());
-    if (!sg) {
-        BOOST_LOG_SEV(lg, error) << empty_settings;
-        BOOST_THROW_EXCEPTION(formatting_error(empty_settings));
-    }
+    const auto ss(hd.streaming_settings());
+    if (!ss)
+        return std::string();
 
-    // std::ostringstream ss;
-    // dogen::formatters::utility_formatter uf(ss);
-    // if (sg->remove_unprintable_characters())
-    //     uf.insert_streamed("tidy_up_string(" + s + ")");
-    // else if (!sg->string_conversion_method().empty()) {
-    //     // FIXME: hack!
-    //     std::string s1(s);
-    //     const auto i(s1.find('*'));
-    //     if (i != std::string::npos)
-    //         s1 = "(" + s + ")";
-    //     uf.insert_streamed(s1 + "." + sg->string_conversion_method());
-    // } else if (sg->requires_quoting())
-    //     uf.insert_streamed(s);
-    // else
-    //     uf.insert(s);
+    std::ostringstream stream;
+    dogen::formatters::utility_formatter uf(stream);
+    if (ss->remove_unprintable_characters())
+        uf.insert_streamed("tidy_up_string(" + s + ")");
+    else if (!ss->string_conversion_method().empty()) {
+        // FIXME: hack!
+        std::string s1(s);
+        const auto i(s1.find('*'));
+        if (i != std::string::npos)
+            s1 = "(" + s + ")";
+        uf.insert_streamed(s1 + "." + ss->string_conversion_method());
+    } else if (ss->requires_quoting())
+        uf.insert_streamed(s);
+    else
+        uf.insert(s);
 
     std::string r;
     return r;
