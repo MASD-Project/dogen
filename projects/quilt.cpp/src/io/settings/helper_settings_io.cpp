@@ -19,7 +19,6 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
 
@@ -36,18 +35,9 @@ namespace cpp {
 namespace settings {
 
 std::ostream& operator<<(std::ostream& s, const helper_settings& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::settings::helper_settings\"" << ", "
-      << "\"family\": " << "\"" << tidy_up_string(v.family()) << "\"" << ", "
-      << "\"requires_quoting\": " << v.requires_quoting() << ", "
-      << "\"remove_unprintable_characters\": " << v.remove_unprintable_characters() << ", "
-      << "\"requires_dereferencing\": " << v.requires_dereferencing()
+      << "\"family\": " << "\"" << tidy_up_string(v.family()) << "\""
       << " }";
     return(s);
 }

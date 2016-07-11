@@ -13,27 +13,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-11 Mon 21:46]
+#+CAPTION: Clock summary at [2016-07-11 Mon 21:59]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *16:02* |       |      | 100.0 |
+| *Total time*                                                                | *16:14* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 16:02   |       |      | 100.0 |
-| Active                                                                      |         | 16:02 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:55 |   5.7 |
-| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   8.4 |
-| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   9.1 |
-| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   8.0 |
+| Stories                                                                     | 16:14   |       |      | 100.0 |
+| Active                                                                      |         | 16:14 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:55 |   5.6 |
+| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   8.3 |
+| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   9.0 |
+| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   7.9 |
 | COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   3.0 |
 | COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   2.1 |
 | COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   1.0 |
-| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   5.2 |
+| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   5.1 |
 | COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   2.8 |
-| COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.7 |
-| COMPLETED Refactor general settings                                         |         |       | 5:50 |  36.4 |
-| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   8.7 |
-| STARTED Create a IO settings class                                          |         |       | 1:15 |   7.8 |
+| COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.6 |
+| COMPLETED Refactor general settings                                         |         |       | 5:50 |  35.9 |
+| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   8.6 |
+| STARTED Create a IO settings class                                          |         |       | 1:27 |   8.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -348,6 +348,7 @@ confusing every other developer. This would require:
   =using XYZ= without name clashes.
 
 *** STARTED Create a IO settings class                                :story:
+    CLOCK: [2016-07-11 Mon 21:47]--[2016-07-11 Mon 21:59] =>  0:12
     CLOCK: [2016-07-11 Mon 21:22]--[2016-07-11 Mon 21:46] =>  0:24
     CLOCK: [2016-07-11 Mon 21:14]--[2016-07-11 Mon 21:21] =>  0:07
     CLOCK: [2016-07-11 Mon 20:45]--[2016-07-11 Mon 21:01] =>  0:16

@@ -38,9 +38,6 @@ void save(Archive& ar,
     const dogen::quilt::cpp::settings::helper_settings& v,
     const unsigned int /*version*/) {
     ar << make_nvp("family", v.family_);
-    ar << make_nvp("requires_quoting", v.requires_quoting_);
-    ar << make_nvp("remove_unprintable_characters", v.remove_unprintable_characters_);
-    ar << make_nvp("requires_dereferencing", v.requires_dereferencing_);
 }
 
 template<typename Archive>
@@ -48,9 +45,6 @@ void load(Archive& ar,
     dogen::quilt::cpp::settings::helper_settings& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("family", v.family_);
-    ar >> make_nvp("requires_quoting", v.requires_quoting_);
-    ar >> make_nvp("remove_unprintable_characters", v.remove_unprintable_characters_);
-    ar >> make_nvp("requires_dereferencing", v.requires_dereferencing_);
 }
 
 } }

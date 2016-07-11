@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/quilt.cpp/types/traits.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/quilt.cpp/types/settings/streaming_settings_factory.hpp"
 

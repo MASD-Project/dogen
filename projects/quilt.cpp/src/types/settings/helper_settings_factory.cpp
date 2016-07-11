@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/quilt.cpp/types/traits.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_factory.hpp"
 
@@ -38,29 +39,7 @@ helper_settings_factory::make_field_definitions(const dynamic::repository& rp) {
     const auto hf(traits::cpp::helper::family());
     r.family = s.select_field_by_name(hf);
 
-    const auto rq(traits::cpp::helper::requires_quoting());
-    r.requires_quoting = s.select_field_by_name(rq);
-
-    const auto ruc(traits::cpp::helper::remove_unprintable_characters());
-    r.remove_unprintable_characters = s.select_field_by_name(ruc);
-
-    const auto rd(traits::cpp::helper::requires_dereferencing());
-    r.requires_dereferencing = s.select_field_by_name(rd);
-
     return r;
-}
-
-void helper_settings_factory::
-throw_if_dependent_fields_are_present(const dynamic::field_selector& fs) const {
-    const auto& fd(field_definitions_);
-    const bool dependent_fields_present(
-        fs.has_field(fd.requires_quoting) ||
-        fs.has_field(fd.remove_unprintable_characters) ||
-        fs.has_field(fd.requires_dereferencing));
-
-    if (dependent_fields_present) {
-        // FIXME: throw
-    }
 }
 
 boost::optional<helper_settings>
@@ -68,21 +47,11 @@ helper_settings_factory::make(const dynamic::object& o) const {
     helper_settings r;
     const auto& fd(field_definitions_);
     const dynamic::field_selector fs(o);
-    const bool has_family_field(fs.has_field(fd.family));
 
-    if (!has_family_field) {
-        throw_if_dependent_fields_are_present(fs);
+    if (!fs.has_field(fd.family))
         return boost::optional<helper_settings>();
-    }
 
     r.family(fs.get_text_content(fd.family));
-    r.requires_quoting(fs.get_boolean_content_or_default(fd.requires_quoting));
-
-    const auto rup(fd.remove_unprintable_characters);
-    r.remove_unprintable_characters(fs.get_boolean_content_or_default(rup));
-
-    const auto rd(fs.get_boolean_content_or_default(fd.requires_dereferencing));
-    r.requires_dereferencing(rd);
 
     return r;
 }

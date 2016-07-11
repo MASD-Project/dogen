@@ -29,10 +29,6 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
-}
-
 }
 
 namespace dogen {
@@ -45,9 +41,6 @@ helper_settings_generator::helper_settings_generator() : position_(0) { }
 void helper_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.family(create_std_string(position + 0));
-    v.requires_quoting(create_bool(position + 1));
-    v.remove_unprintable_characters(create_bool(position + 2));
-    v.requires_dereferencing(create_bool(position + 3));
 }
 
 helper_settings_generator::result_type

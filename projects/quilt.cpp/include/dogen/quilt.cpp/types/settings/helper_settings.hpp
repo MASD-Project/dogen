@@ -39,19 +39,13 @@ namespace settings {
  */
 class helper_settings final {
 public:
+    helper_settings() = default;
     helper_settings(const helper_settings&) = default;
     helper_settings(helper_settings&&) = default;
     ~helper_settings() = default;
 
 public:
-    helper_settings();
-
-public:
-    helper_settings(
-        const std::string& family,
-        const bool requires_quoting,
-        const bool remove_unprintable_characters,
-        const bool requires_dereferencing);
+    explicit helper_settings(const std::string& family);
 
 private:
     template<typename Archive>
@@ -71,15 +65,6 @@ public:
     void family(const std::string&& v);
     /**@}*/
 
-    bool requires_quoting() const;
-    void requires_quoting(const bool v);
-
-    bool remove_unprintable_characters() const;
-    void remove_unprintable_characters(const bool v);
-
-    bool requires_dereferencing() const;
-    void requires_dereferencing(const bool v);
-
 public:
     bool operator==(const helper_settings& rhs) const;
     bool operator!=(const helper_settings& rhs) const {
@@ -92,9 +77,6 @@ public:
 
 private:
     std::string family_;
-    bool requires_quoting_;
-    bool remove_unprintable_characters_;
-    bool requires_dereferencing_;
 };
 
 } } } }

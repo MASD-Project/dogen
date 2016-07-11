@@ -28,7 +28,6 @@
 #include <boost/optional.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings.hpp"
 
@@ -44,16 +43,9 @@ public:
 private:
     struct field_definitions {
         dynamic::field_definition family;
-        dynamic::field_definition requires_quoting;
-        dynamic::field_definition remove_unprintable_characters;
-        dynamic::field_definition requires_dereferencing;
     };
 
     field_definitions make_field_definitions(const dynamic::repository& rp);
-
-private:
-    void throw_if_dependent_fields_are_present(
-        const dynamic::field_selector& fs) const;
 
 public:
     boost::optional<helper_settings> make(const dynamic::object& o) const;
