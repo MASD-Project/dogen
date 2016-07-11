@@ -348,7 +348,7 @@ get_helpers_for_formatter(const properties::helper_properties& hp) const {
      * Helper properties must always have settings, otherwise
      * there is no point to their existence.
      */
-    const auto s(hp.current().settings());
+    const auto s(hp.current().helper_settings());
     if (!s) {
         BOOST_LOG_SEV(lg, error) << empty_settings;
         BOOST_THROW_EXCEPTION(formatting_error(empty_settings));
@@ -488,7 +488,7 @@ std::string assistant::
 streaming_for_type(const properties::helper_descriptor& hd,
     const std::string& /*s*/) const {
 
-    const auto sg(hd.settings());
+    const auto sg(hd.helper_settings());
     if (!sg) {
         BOOST_LOG_SEV(lg, error) << empty_settings;
         BOOST_THROW_EXCEPTION(formatting_error(empty_settings));

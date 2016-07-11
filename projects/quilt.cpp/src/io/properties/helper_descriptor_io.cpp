@@ -79,7 +79,7 @@ std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
       << "\"name_qualified\": " << "\"" << tidy_up_string(v.name_qualified()) << "\"" << ", "
       << "\"name_tree_qualified\": " << "\"" << tidy_up_string(v.name_tree_qualified()) << "\"" << ", "
       << "\"name_tree_identifiable\": " << "\"" << tidy_up_string(v.name_tree_identifiable()) << "\"" << ", "
-      << "\"settings\": " << v.settings() << ", "
+      << "\"helper_settings\": " << v.helper_settings() << ", "
       << "\"is_primitive\": " << v.is_primitive()
       << " }";
     return(s);

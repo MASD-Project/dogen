@@ -45,7 +45,7 @@ void save(Archive& ar,
     ar << make_nvp("name_qualified", v.name_qualified_);
     ar << make_nvp("name_tree_qualified", v.name_tree_qualified_);
     ar << make_nvp("name_tree_identifiable", v.name_tree_identifiable_);
-    ar << make_nvp("settings", v.settings_);
+    ar << make_nvp("helper_settings", v.helper_settings_);
     ar << make_nvp("is_primitive", v.is_primitive_);
 }
 
@@ -58,7 +58,7 @@ void load(Archive& ar,
     ar >> make_nvp("name_qualified", v.name_qualified_);
     ar >> make_nvp("name_tree_qualified", v.name_tree_qualified_);
     ar >> make_nvp("name_tree_identifiable", v.name_tree_identifiable_);
-    ar >> make_nvp("settings", v.settings_);
+    ar >> make_nvp("helper_settings", v.helper_settings_);
     ar >> make_nvp("is_primitive", v.is_primitive_);
 }
 

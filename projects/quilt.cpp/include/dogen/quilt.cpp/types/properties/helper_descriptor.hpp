@@ -55,7 +55,7 @@ public:
         const std::string& name_qualified,
         const std::string& name_tree_qualified,
         const std::string& name_tree_identifiable,
-        const boost::optional<dogen::quilt::cpp::settings::helper_settings>& settings,
+        const boost::optional<dogen::quilt::cpp::settings::helper_settings>& helper_settings,
         const bool is_primitive);
 
 private:
@@ -91,10 +91,10 @@ public:
     void name_tree_identifiable(const std::string& v);
     void name_tree_identifiable(const std::string&& v);
 
-    const boost::optional<dogen::quilt::cpp::settings::helper_settings>& settings() const;
-    boost::optional<dogen::quilt::cpp::settings::helper_settings>& settings();
-    void settings(const boost::optional<dogen::quilt::cpp::settings::helper_settings>& v);
-    void settings(const boost::optional<dogen::quilt::cpp::settings::helper_settings>&& v);
+    const boost::optional<dogen::quilt::cpp::settings::helper_settings>& helper_settings() const;
+    boost::optional<dogen::quilt::cpp::settings::helper_settings>& helper_settings();
+    void helper_settings(const boost::optional<dogen::quilt::cpp::settings::helper_settings>& v);
+    void helper_settings(const boost::optional<dogen::quilt::cpp::settings::helper_settings>&& v);
 
     bool is_primitive() const;
     void is_primitive(const bool v);
@@ -115,7 +115,7 @@ private:
     std::string name_qualified_;
     std::string name_tree_qualified_;
     std::string name_tree_identifiable_;
-    boost::optional<dogen::quilt::cpp::settings::helper_settings> settings_;
+    boost::optional<dogen::quilt::cpp::settings::helper_settings> helper_settings_;
     bool is_primitive_;
 };
 

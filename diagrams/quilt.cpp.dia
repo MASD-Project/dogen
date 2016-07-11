@@ -35758,13 +35758,13 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="370,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="369.95,51.95;390.955,59.65"/>
+        <dia:rectangle val="369.95,51.95;393.65,59.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="370,52"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.905000000000001"/>
+        <dia:real val="23.600000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.5999999999999996"/>
@@ -35974,7 +35974,7 @@ main, or from another initialiser.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#settings#</dia:string>
+            <dia:string>#helper_settings#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::optional&lt;settings::helper_settings&gt;#</dia:string>
@@ -36297,7 +36297,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="398,55.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="380.402,54.85;398.75,63.05"/>
+        <dia:rectangle val="381.75,54.85;398.75,63.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36305,8 +36305,8 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="398,55.6"/>
         <dia:point val="398,63"/>
-        <dia:point val="380.452,63"/>
-        <dia:point val="380.452,59.6"/>
+        <dia:point val="381.8,63"/>
+        <dia:point val="381.8,59.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

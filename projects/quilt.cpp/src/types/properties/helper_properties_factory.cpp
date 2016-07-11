@@ -96,7 +96,7 @@ helper_properties_factory::make(
      * descendants.
      */
     if (requires_helper) {
-        r.settings(i->second);
+        r.helper_settings(i->second);
         BOOST_LOG_SEV(lg, debug) << "Adding settings for: " << id;
     }
 
@@ -149,8 +149,8 @@ helper_properties_factory::make(
 
     /*
      * Only add the helper property if we requre it. This is only
-     * applicable to child name trees, really, since we've already
-     * check for this at the top-level.
+     * applicable to child name trees as we are recursively called,
+     * since we've already check for this at entry.
      */
     if (requires_helper)
         properties.push_back(hp);
