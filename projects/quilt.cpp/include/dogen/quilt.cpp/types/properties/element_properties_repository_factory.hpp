@@ -28,6 +28,7 @@
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/formatters/types/file_properties_workflow.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/formatter_properties_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
@@ -41,6 +42,7 @@ class element_properties_repository_factory {
 private:
     helper_properties_repository create_helper_properties(
         const settings::helper_settings_repository& hsrp,
+        const settings::streaming_settings_repository& ssrp,
         const yarn::model& m) const;
 
     element_properties_repository merge(
@@ -52,6 +54,7 @@ public:
     element_properties_repository make(
         const dogen::formatters::file_properties_workflow& fpwf,
         const settings::helper_settings_repository& hsrp,
+        const settings::streaming_settings_repository& ssrp,
         const formatter_properties_repository& fprp,
         const yarn::model& m) const;
 };

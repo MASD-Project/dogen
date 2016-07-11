@@ -36,6 +36,7 @@
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/properties/formattable.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository.hpp"
@@ -66,6 +67,13 @@ private:
      */
     settings::helper_settings_repository create_helper_settings_repository(
         const dynamic::repository& drp, const yarn::model& m) const;
+
+    /**
+     * @brief Create the streaming settings repository.
+     */
+    settings::streaming_settings_repository
+    create_streaming_settings_repository(const dynamic::repository& drp,
+        const yarn::model& m) const;
 
     /**
      * @brief Create the path derivatives repository.
@@ -110,6 +118,7 @@ private:
     element_properties_repository create_element_properties(
         const dogen::formatters::file_properties_workflow& fpwf,
         const settings::helper_settings_repository& hsrp,
+        const settings::streaming_settings_repository& ssrp,
         const formatter_properties_repository& fprp,
         const yarn::model& m) const;
 

@@ -58,8 +58,33 @@ get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
 
 helper_properties_factory::helper_properties_factory(
     const std::unordered_set<std::string>& primitive_ids,
-    const settings::helper_settings_repository& hsrp)
-    : primitive_ids_(primitive_ids), helper_settings_(hsrp) { }
+    const settings::helper_settings_repository& hsrp,
+    const settings::streaming_settings_repository& ss)
+    : primitive_ids_(primitive_ids), helper_settings_(hsrp),
+      streaming_settings_(ss) { }
+
+boost::optional<settings::helper_settings> helper_properties_factory::
+helper_settings_for_id(const std::string& id) const {
+    const auto i(helper_settings_.by_id().find(id));
+    if (i == helper_settings_.by_id().end())
+        return boost::optional<settings::helper_settings>();
+
+    return i->second;
+}
+
+bool helper_properties_factory::is_primitive(const std::string& id) const {
+    const auto i(primitive_ids_.find(id));
+    return i != primitive_ids_.end();
+}
+
+boost::optional<settings::streaming_settings> helper_properties_factory::
+streaming_settings_for_id(const std::string& id) const {
+    const auto i(streaming_settings_.by_id().find(id));
+    if (i == streaming_settings_.by_id().end())
+        return boost::optional<settings::streaming_settings>();
+
+    return i->second;
+}
 
 boost::optional<helper_descriptor>
 helper_properties_factory::make(
@@ -73,9 +98,9 @@ helper_properties_factory::make(
      * type that requires a helper. If not, we can safely ignore the
      * whole attribute.
      */
-    const auto& hsbn(helper_settings_.by_id());
-    const auto i(hsbn.find(id));
-    const auto requires_helper(i != hsbn.end());
+    const auto hs(helper_settings_for_id(id));
+    const bool requires_helper(hs);
+
     if (is_top_level && !requires_helper) {
         BOOST_LOG_SEV(lg, debug) << "No helper settings for type: "
                                  << id << ". Ignoring attribute.";
@@ -85,9 +110,17 @@ helper_properties_factory::make(
     helper_descriptor r;
     properties::name_builder b;
     r.namespaces(b.namespace_list(nt.current()));
+    r.is_primitive(is_primitive(id));
 
-    const auto j(primitive_ids_.find(id));
-    r.is_primitive(j != primitive_ids_.end());
+    /*
+     * Note: we log conditionally for both settings to make
+     * troubleshooting slightly easier.
+     */
+    const auto ss(streaming_settings_for_id(id));
+    if (ss) {
+        r.streaming_settings(ss);
+        BOOST_LOG_SEV(lg, debug) << "Adding streaming settings for: " << id;
+    }
 
     /*
      * Child name trees may not have helper settings (as they may not
@@ -96,8 +129,8 @@ helper_properties_factory::make(
      * descendants.
      */
     if (requires_helper) {
-        r.helper_settings(i->second);
-        BOOST_LOG_SEV(lg, debug) << "Adding settings for: " << id;
+        r.helper_settings(hs);
+        BOOST_LOG_SEV(lg, debug) << "Adding helper settings for: " << id;
     }
 
     const auto p1(get_identifiable_and_qualified(nt.current()));

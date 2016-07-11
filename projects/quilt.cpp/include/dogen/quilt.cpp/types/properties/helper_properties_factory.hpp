@@ -33,6 +33,7 @@
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -43,7 +44,17 @@ class helper_properties_factory {
 public:
     helper_properties_factory(
         const std::unordered_set<std::string>& primitive_ids,
-        const settings::helper_settings_repository& hsrp);
+        const settings::helper_settings_repository& hsrp,
+        const settings::streaming_settings_repository& ssrp);
+
+private:
+    boost::optional<settings::helper_settings>
+    helper_settings_for_id(const std::string& id) const;
+
+    bool is_primitive(const std::string& id) const;
+
+    boost::optional<settings::streaming_settings>
+    streaming_settings_for_id(const std::string& id) const;
 
 private:
     boost::optional<helper_descriptor>
@@ -57,6 +68,7 @@ public:
 private:
     const std::unordered_set<std::string>& primitive_ids_;
     const settings::helper_settings_repository& helper_settings_;
+    const settings::streaming_settings_repository& streaming_settings_;
 };
 
 } } } }

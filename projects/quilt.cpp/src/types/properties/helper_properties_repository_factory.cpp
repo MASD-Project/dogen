@@ -117,7 +117,8 @@ private:
 
 helper_properties_repository
 helper_properties_repository_factory::make(const yarn::model& m,
-    const settings::helper_settings_repository& hsrp) const {
+    const settings::helper_settings_repository& hsrp,
+    const settings::streaming_settings_repository& ssrp) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating helper instances.";
 
@@ -125,7 +126,7 @@ helper_properties_repository_factory::make(const yarn::model& m,
     for (const auto& pair : m.elements())
         pig(pair);
 
-    const helper_properties_factory f(pig.result(), hsrp);
+    const helper_properties_factory f(pig.result(), hsrp, ssrp);
     generator g(f);
     for (const auto& pair : m.elements()) {
         const auto& e(*pair.second);

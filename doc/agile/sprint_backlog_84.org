@@ -13,27 +13,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-11 Mon 22:14]
+#+CAPTION: Clock summary at [2016-07-11 Mon 23:09]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *16:28* |       |      | 100.0 |
+| *Total time*                                                                | *17:20* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 16:28   |       |      | 100.0 |
-| Active                                                                      |         | 16:28 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:55 |   5.6 |
-| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   8.2 |
-| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   8.9 |
-| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   7.8 |
-| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   2.9 |
-| COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   2.0 |
+| Stories                                                                     | 17:20   |       |      | 100.0 |
+| Active                                                                      |         | 17:20 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:55 |   5.3 |
+| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   7.8 |
+| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   8.5 |
+| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   7.4 |
+| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   2.8 |
+| COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   1.9 |
 | COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   1.0 |
-| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   5.1 |
-| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   2.7 |
-| COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.6 |
-| COMPLETED Refactor general settings                                         |         |       | 5:50 |  35.4 |
-| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   8.5 |
-| STARTED Create a IO settings class                                          |         |       | 1:41 |  10.2 |
+| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   4.8 |
+| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   2.6 |
+| COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.5 |
+| COMPLETED Refactor general settings                                         |         |       | 5:50 |  33.7 |
+| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   8.1 |
+| COMPLETED Create a IO settings class                                        |         |       | 1:15 |   7.2 |
+| STARTED Implement streaming for type in terms of IO settings                |         |       | 1:18 |   7.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -360,6 +361,7 @@ invocation, create a repository for it and associated factory and
 finally add the repository to the context.
 
 *** STARTED Implement streaming for type in terms of IO settings      :story:
+    CLOCK: [2016-07-11 Mon 22:22]--[2016-07-11 Mon 23:09] =>  0:47
     CLOCK: [2016-07-11 Mon 22:16]--[2016-07-11 Mon 22:21] =>  0:05
     CLOCK: [2016-07-11 Mon 22:00]--[2016-07-11 Mon 22:14] =>  0:14
     CLOCK: [2016-07-11 Mon 21:47]--[2016-07-11 Mon 21:59] =>  0:12

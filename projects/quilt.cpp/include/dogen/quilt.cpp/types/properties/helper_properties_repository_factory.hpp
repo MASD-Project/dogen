@@ -27,6 +27,7 @@
 
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties_repository.hpp"
 
 namespace dogen {
@@ -37,7 +38,8 @@ namespace properties {
 class helper_properties_repository_factory {
 public:
     helper_properties_repository make(const yarn::model& m,
-        const settings::helper_settings_repository& hsrp) const;
+        const settings::helper_settings_repository& hsrp,
+        const settings::streaming_settings_repository& ssrp) const;
 };
 
 } } } }
