@@ -13,28 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-11 Mon 23:16]
+#+CAPTION: Clock summary at [2016-07-12 Tue 07:41]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *17:26* |       |      | 100.0 |
+| *Total time*                                                                | *17:41* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 17:26   |       |      | 100.0 |
-| Active                                                                      |         | 17:26 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:55 |   5.3 |
-| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   7.7 |
-| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   8.4 |
-| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   7.4 |
-| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   2.8 |
+| Stories                                                                     | 17:41   |       |      | 100.0 |
+| Active                                                                      |         | 17:41 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:55 |   5.2 |
+| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   7.6 |
+| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   8.3 |
+| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   7.3 |
+| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   2.7 |
 | COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   1.9 |
-| COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   1.0 |
-| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   4.8 |
-| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   2.6 |
+| COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   0.9 |
+| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   4.7 |
+| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   2.5 |
 | COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.5 |
-| COMPLETED Refactor general settings                                         |         |       | 5:50 |  33.5 |
-| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   8.0 |
-| COMPLETED Create a IO settings class                                        |         |       | 1:15 |   7.2 |
-| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   8.0 |
+| COMPLETED Refactor general settings                                         |         |       | 5:50 |  33.0 |
+| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   7.9 |
+| COMPLETED Create a IO settings class                                        |         |       | 1:15 |   7.1 |
+| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   7.9 |
+| STARTED Implement IO helper methods with new helper infrastructure          |         |       | 0:15 |   1.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -375,7 +376,8 @@ finally add the repository to the context.
 - remove all other streaming for type implementations and use the new
   one in the legacy formatters.
 
-*** Implement IO helper methods with new helper infrastructure        :story:
+*** STARTED Implement IO helper methods with new helper infrastructure :story:
+    CLOCK: [2016-07-12 Tue 07:26]--[2016-07-12 Tue 07:41] =>  0:15
 
 Problems:
 

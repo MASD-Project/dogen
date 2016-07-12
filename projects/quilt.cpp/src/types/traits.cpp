@@ -115,22 +115,22 @@ std::string traits::cpp::helper::family() {
 }
 
 std::string traits::cpp::helper::string_conversion_method() {
-    static std::string r("quilt.cpp.element.string_conversion_method");
+    static std::string r("quilt.cpp.streaming.string_conversion_method");
     return r;
 }
 
 std::string traits::cpp::helper::requires_quoting() {
-    static std::string r("quilt.cpp.helper.requires_quoting");
+    static std::string r("quilt.cpp.streaming.requires_quoting");
     return r;
 }
 
 std::string traits::cpp::helper::remove_unprintable_characters() {
-    static std::string r("quilt.cpp.helper.remove_unprintable_characters");
+    static std::string r("quilt.cpp.streaming.remove_unprintable_characters");
     return r;
 }
 
 std::string traits::cpp::helper::requires_dereferencing() {
-    static std::string r("quilt.cpp.helper.requires_dereferencing");
+    static std::string r("quilt.cpp.streaming.requires_dereferencing");
     return r;
 }
 
