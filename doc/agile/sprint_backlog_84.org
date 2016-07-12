@@ -13,28 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-12 Tue 07:41]
+#+CAPTION: Clock summary at [2016-07-12 Tue 13:30]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *17:41* |       |      | 100.0 |
+| *Total time*                                                                | *18:19* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 17:41   |       |      | 100.0 |
-| Active                                                                      |         | 17:41 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:55 |   5.2 |
-| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   7.6 |
-| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   8.3 |
-| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   7.3 |
-| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   2.7 |
-| COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   1.9 |
+| Stories                                                                     | 18:19   |       |      | 100.0 |
+| Active                                                                      |         | 18:19 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:55 |   5.0 |
+| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   7.4 |
+| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   8.0 |
+| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   7.0 |
+| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   2.6 |
+| COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   1.8 |
 | COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   0.9 |
-| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   4.7 |
+| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   4.5 |
 | COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   2.5 |
 | COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.5 |
-| COMPLETED Refactor general settings                                         |         |       | 5:50 |  33.0 |
-| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   7.9 |
-| COMPLETED Create a IO settings class                                        |         |       | 1:15 |   7.1 |
-| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   7.9 |
+| COMPLETED Refactor general settings                                         |         |       | 5:50 |  31.8 |
+| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   7.6 |
+| COMPLETED Create a IO settings class                                        |         |       | 1:15 |   6.8 |
+| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   7.6 |
+| STARTED Enable IO helpers for types                                         |         |       | 0:38 |   3.5 |
 | STARTED Implement IO helper methods with new helper infrastructure          |         |       | 0:15 |   1.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -376,6 +377,28 @@ finally add the repository to the context.
 - remove all other streaming for type implementations and use the new
   one in the legacy formatters.
 
+*** STARTED Enable IO helpers for types                               :story:
+    CLOCK: [2016-07-12 Tue 13:14]--[2016-07-12 Tue 13:30] =>  0:16
+    CLOCK: [2016-07-12 Tue 07:53]--[2016-07-12 Tue 08:05] =>  0:12
+    CLOCK: [2016-07-12 Tue 07:42]--[2016-07-12 Tue 07:52] =>  0:10
+
+Originally we did a quick hack to allow us to wrap things up with
+types: we used both the legacy helper methods infrastructure (for IO)
+and the new helper methods infrastructure (for types). This was
+required to allow us to implement the basic infrastructure in IO. Now
+we need to remove the legacy aspect of the IO helper methods usage in
+types.
+
+- implement is enabled on all IO formatters
+- register all IO formatters against both IO and types
+- remove calls to legacy helper methods
+- problem: how do we know if we are in inheritance from assistant? In
+  the future we can add a flag into the =yarn::object=; when we are
+  consuming yarn types in formatters, this flag is passed in to the
+  enabled method. For now we can check the class info and compute in
+  inheritance. Actually we can add the flag now and propagate it to
+  class info so that in future the changes are smaller.
+
 *** STARTED Implement IO helper methods with new helper infrastructure :story:
     CLOCK: [2016-07-12 Tue 07:26]--[2016-07-12 Tue 07:41] =>  0:15
 
@@ -529,6 +552,8 @@ order to implement them we need to declare the type families up front
 in a JSON file, with a name and number of type arguments. When
 constructing the type helpers, we can check the name tree to make sure
 the number of type arguments is correct.
+
+This can be done as a helper setting (number of type arguments?).
 
 *** Update assistant to use new helper information                    :story:
 
