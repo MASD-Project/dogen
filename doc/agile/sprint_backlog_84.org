@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-12 Tue 23:21]
+#+CAPTION: Clock summary at [2016-07-12 Tue 23:26]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *21:48* |       |      | 100.0 |
+| *Total time*                                                                | *21:51* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 21:48   |       |      | 100.0 |
-| Active                                                                      |         | 21:48 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:26 |  11.2 |
+| Stories                                                                     | 21:51   |       |      | 100.0 |
+| Active                                                                      |         | 21:51 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:26 |  11.1 |
 | STARTED Manual updates and blog posts                                       |         |       | 1:21 |   6.2 |
 | COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   6.7 |
 | COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   5.9 |
@@ -31,10 +31,11 @@
 | COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   3.8 |
 | COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   2.1 |
 | COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.2 |
-| COMPLETED Refactor general settings                                         |         |       | 5:50 |  26.8 |
+| COMPLETED Refactor general settings                                         |         |       | 5:50 |  26.7 |
 | COMPLETED Rename specs to tests                                             |         |       | 1:24 |   6.4 |
 | COMPLETED Create a IO settings class                                        |         |       | 1:15 |   5.7 |
 | COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   6.4 |
+| COMPLETED Usage of rev-list in version causes problems                      |         |       | 0:03 |   0.2 |
 | STARTED Enable IO helpers for types                                         |         |       | 2:36 |  11.9 |
 | STARTED Implement IO helper methods with new helper infrastructure          |         |       | 0:15 |   1.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
@@ -470,6 +471,65 @@ locally). We probably shouldn't use the stage folder since its not a
 CMake idiom.
 
 This is a requirement for code coverage.
+
+*** COMPLETED Usage of rev-list in version causes problems            :story:
+    CLOSED: [2016-07-12 Tue 23:25]
+    CLOCK: [2016-07-12 Tue 23:22]--[2016-07-12 Tue 23:25] =>  0:03
+
+We have bumped into a number of problems with the versioning scheme
+that keeps track of the current commit in master (see below). Remove
+this scheme.
+
+*Previous Understanding*
+
+Now we are using travis, we have found problems with the way we are
+using the number of git commits to assign versions. The problem stems
+from the git clone command:
+
+:  git clone --depth=50 --branch=master git://github.com/DomainDrivenConsulting/dogen.git DomainDrivenConsulting/dogen
+
+This means we are always at version 50/51:
+
+: -- Product version: 0.56.51
+
+This is in addition to the problems we had with tagging (where we have
+to manually stamp the version) and branching (where we are using the
+number of commits in master rather than the branch). We need a better
+solution than using rev-list for this.
+
+Perhaps we should just abandon the approach of putting the commit
+number in the version; we haven't found a single case where this makes
+life easier. We could only have the major version, then sprint (which
+is reset back to zero for every major version) and then patch-level
+which is used only in cases where we release patches. The key
+requirement here is that, given a build, we should be able to identify
+which commit it comes from. We probably don't want to add it to the
+version / help / etc because this forces spurious rebuilds for no
+reason every time one commits. We could add it to some package file.
+
+Merged Stories:
+
+*Consider tagging the git branch in version*
+
+At present we make use of rev-list to determine the minor
+version. However, this is always off of master, which means that if
+you have a few more commits on your integration branch you will end up
+with a build that lies. We should consider:
+
+- adding the git commit SHA to the build, perhaps comments.
+- adding the branch to the build, perhaps comments.
+- rev-listing the current branch rather than always master.
+
+*Version number relies on latest commit in master*
+
+When trying to build off of a tag, we noticed that the version number
+is always of the latest commit in master. This means that trying to
+generate packages for tag =v0.50.2410= results in packages with a
+version after that like say =v0.50.2415=. We should look at the
+current commit in master rather than the latest one.
+
+The current workaround is to manually sett the minor version just
+before closing the sprint and then reset it back.
 
 *** STARTED Enable IO helpers for types                               :story:
     CLOCK: [2016-07-12 Tue 22:23]--[2016-07-12 Tue 23:21] =>  0:58

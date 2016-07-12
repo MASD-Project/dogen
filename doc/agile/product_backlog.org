@@ -5708,57 +5708,6 @@ Error:
 
 We solved this for now by just uploading the application packages.
 
-*** Usage of rev-list in version causes problems                      :story:
-
-Now we are using travis, we have found problems with the way we are
-using the number of git commits to assign versions. The problem stems
-from the git clone command:
-
-:  git clone --depth=50 --branch=master git://github.com/DomainDrivenConsulting/dogen.git DomainDrivenConsulting/dogen
-
-This means we are always at version 50/51:
-
-: -- Product version: 0.56.51
-
-This is in addition to the problems we had with tagging (where we have
-to manually stamp the version) and branching (where we are using the
-number of commits in master rather than the branch). We need a better
-solution than using rev-list for this.
-
-Perhaps we should just abandon the approach of putting the commit
-number in the version; we haven't found a single case where this makes
-life easier. We could only have the major version, then sprint (which
-is reset back to zero for every major version) and then patch-level
-which is used only in cases where we release patches. The key
-requirement here is that, given a build, we should be able to identify
-which commit it comes from. We probably don't want to add it to the
-version / help / etc because this forces spurious rebuilds for no
-reason every time one commits. We could add it to some package file.
-
-Merged Stories:
-
-*Consider tagging the git branch in version*
-
-At present we make use of rev-list to determine the minor
-version. However, this is always off of master, which means that if
-you have a few more commits on your integration branch you will end up
-with a build that lies. We should consider:
-
-- adding the git commit SHA to the build, perhaps comments.
-- adding the branch to the build, perhaps comments.
-- rev-listing the current branch rather than always master.
-
-*Version number relies on latest commit in master*
-
-When trying to build off of a tag, we noticed that the version number
-is always of the latest commit in master. This means that trying to
-generate packages for tag =v0.50.2410= results in packages with a
-version after that like say =v0.50.2415=. We should look at the
-current commit in master rather than the latest one.
-
-The current workaround is to manually sett the minor version just
-before closing the sprint and then reset it back.
-
 *** Consider hosting documentation in read the docs                   :story:
 
 We should consider hosting the documentation here:
