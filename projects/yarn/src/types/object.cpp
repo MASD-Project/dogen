@@ -84,7 +84,8 @@ object::object()
       is_visitable_(static_cast<bool>(0)),
       is_root_parent_visitable_(static_cast<bool>(0)),
       object_type_(static_cast<dogen::yarn::object_types>(0)),
-      provides_opaqueness_(static_cast<bool>(0)) { }
+      provides_opaqueness_(static_cast<bool>(0)),
+      in_inheritance_relationship_(static_cast<bool>(0)) { }
 
 object::object(
     const std::string& documentation,
@@ -114,7 +115,8 @@ object::object(
     const dogen::yarn::object_types object_type,
     const std::list<dogen::yarn::name>& modeled_concepts,
     const std::list<dogen::yarn::name>& associative_container_keys,
-    const bool provides_opaqueness)
+    const bool provides_opaqueness,
+    const bool in_inheritance_relationship)
     : dogen::yarn::element(
       documentation,
       extensions,
@@ -143,7 +145,8 @@ object::object(
       object_type_(object_type),
       modeled_concepts_(modeled_concepts),
       associative_container_keys_(associative_container_keys),
-      provides_opaqueness_(provides_opaqueness) { }
+      provides_opaqueness_(provides_opaqueness),
+      in_inheritance_relationship_(in_inheritance_relationship) { }
 
 void object::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -176,7 +179,8 @@ void object::to_stream(std::ostream& s) const {
       << "\"object_type\": " << object_type_ << ", "
       << "\"modeled_concepts\": " << modeled_concepts_ << ", "
       << "\"associative_container_keys\": " << associative_container_keys_ << ", "
-      << "\"provides_opaqueness\": " << provides_opaqueness_
+      << "\"provides_opaqueness\": " << provides_opaqueness_ << ", "
+      << "\"in_inheritance_relationship\": " << in_inheritance_relationship_
       << " }";
 }
 
@@ -204,6 +208,7 @@ void object::swap(object& other) noexcept {
     swap(modeled_concepts_, other.modeled_concepts_);
     swap(associative_container_keys_, other.associative_container_keys_);
     swap(provides_opaqueness_, other.provides_opaqueness_);
+    swap(in_inheritance_relationship_, other.in_inheritance_relationship_);
 }
 
 bool object::equals(const dogen::yarn::element& other) const {
@@ -233,7 +238,8 @@ bool object::operator==(const object& rhs) const {
         object_type_ == rhs.object_type_ &&
         modeled_concepts_ == rhs.modeled_concepts_ &&
         associative_container_keys_ == rhs.associative_container_keys_ &&
-        provides_opaqueness_ == rhs.provides_opaqueness_;
+        provides_opaqueness_ == rhs.provides_opaqueness_ &&
+        in_inheritance_relationship_ == rhs.in_inheritance_relationship_;
 }
 
 object& object::operator=(object other) {
@@ -488,6 +494,14 @@ bool object::provides_opaqueness() const {
 
 void object::provides_opaqueness(const bool v) {
     provides_opaqueness_ = v;
+}
+
+bool object::in_inheritance_relationship() const {
+    return in_inheritance_relationship_;
+}
+
+void object::in_inheritance_relationship(const bool v) {
+    in_inheritance_relationship_ = v;
 }
 
 } }

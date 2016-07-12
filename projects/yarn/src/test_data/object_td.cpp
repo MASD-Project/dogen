@@ -99,6 +99,7 @@ populate(const unsigned int position, result_type& v) {
     v.modeled_concepts(create_std_list_dogen_yarn_name(position + 17));
     v.associative_container_keys(create_std_list_dogen_yarn_name(position + 18));
     v.provides_opaqueness(create_bool(position + 19));
+    v.in_inheritance_relationship(create_bool(position + 20));
 }
 
 object_generator::result_type

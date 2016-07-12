@@ -450,6 +450,7 @@
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
 			</second>
 		</item>
 		<item>
@@ -636,6 +637,7 @@
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
 			</second>
 		</item>
 	</objects>

@@ -115,8 +115,7 @@ obtain_details(const intermediate_model& m) const {
     generalization_details r;
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
-        BOOST_LOG_SEV(lg, debug) << "Processing type: "
-                                 << o.name().id();
+        BOOST_LOG_SEV(lg, debug) << "Processing type: " << o.name().id();
 
         if (!is_leaf(o))
             continue;
@@ -142,11 +141,18 @@ populate(const generalization_details& d, intermediate_model& m) const {
 
         auto& o(i->second);
         o.leaves(pair.second);
+
+        // Sort the leaves to ensure stability.
         o.leaves().sort();
 
         for (const auto& leaf : pair.second) {
-            if (leaf.location().model_modules() ==
-                m.name().location().model_modules())
+            /*
+             * If the leaf name belongs to the target model, add it to
+             * the model's list of leaves. Ignore non-target leaves.
+             */
+            const auto& ll(leaf.location());
+            const auto& ml(m.name().location());
+            if (ll.model_modules() == ml.model_modules())
                 m.leaves().insert(leaf);
         }
     }
@@ -160,10 +166,19 @@ populate(const generalization_details& d, intermediate_model& m) const {
         }
 
         auto& o(i->second);
+
+        /*
+         * All types that are in an inheritance relationship have a
+         * root parent in the details container, including the root
+         * parent itself.
+         */
+        o.in_inheritance_relationship(true);
+
         if (!o.is_child()) {
-            /* Top-level types have themselves as the original parent
-             * of the container just to make our life easier, so we
-             * have to ignore them here.
+            /*
+             * If we have a parent but we are not a child, we must be
+             * the root parent. Do not propagate the recursive
+             * relationship between the root parent and itself.
              */
             BOOST_LOG_SEV(lg, debug) << "Type has parents but is not a child: "
                                      << n.id();
@@ -178,6 +193,8 @@ populate(const generalization_details& d, intermediate_model& m) const {
                 BOOST_LOG_SEV(lg, error) << object_not_found << id;
                 BOOST_THROW_EXCEPTION(indexing_error(object_not_found + id));
             }
+
+            // FIXME: we are in effect assuming a single parent here.
             o.is_root_parent_visitable(j->second.is_visitable());
         }
     }

@@ -401,6 +401,7 @@ third line with &quot;quote&quot;
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
 			</second>
 		</item>
 		<item>
@@ -748,6 +749,7 @@ a second line
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
 			</second>
 		</item>
 	</objects>
