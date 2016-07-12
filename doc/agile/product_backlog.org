@@ -2724,26 +2724,6 @@ makefile if there are no implementation files generated.
 At present we are depending on the domain header but it seems we could
 depend only on the forward declarations.
 
-*** Sanity check packages automatically                                :epic:
-
-Create a set of ruby scripts that validate packages:
-
-- sanity check that package installed correctly, e.g. check for a few
-  key files.
-- run sanity tests, e.g. create a dogen model and validate the results
-- run uninstaller and sanity check that files are gone
-  - this should actually be a build agent so we can see that deployment
-    is green. We should create a deployment CMake script that does this.
-- build package and drop them on a well known location;
-- Create a batch script that polls this location for new packages;
-  when one is found run package installer.
-- we should create a set of VMs that are specific for testing - the
-  test environments. One per OS. These are clean builds with nothing
-  on them. To start off with they may contain postgres so we can
-  connect locally.
-
-We had some initial support for this in commit ba54859.
-
 *** Property types are always fully qualified                         :story:
 
 When we code generate non-primitive properties we always fully qualify
@@ -4781,7 +4761,7 @@ enumeration groups. Out of the box we have:
 Users could then add implementation specific properties to create
 other groups if needed.
 
-*** Add support for user supplied test data sets                      :story:
+*** Add support for user supplied test data sets            :reviewing:story:
 
 #+begin_quote
 *Story*: As a dogen user, I want to make use of test data without
@@ -4790,7 +4770,7 @@ having to manually add code for it.
 
 *New understanding*:
 
-we need to create a test data sets model. it should have an
+We need to create a test data sets model. it should have an
 enumeration for all of the available test data sets, and an
 enumeration for the valid file formats. we should be able to pass in a
 pair of file formats (input, actual/expected) and out should come a
@@ -4876,7 +4856,7 @@ for STL containers. Or we could actually specify the template
 parameters as "type arguments" just like we do with operations and
 properties (preferred). The parser would then use this info.
 
-*** Add support for =std::function= in services                       :story:
+*** Add support for =std::function=                                   :story:
 
 #+begin_quote
 *Story*: As a dogen user, I want to make use of =std::function= so
@@ -4948,7 +4928,7 @@ and mark them as ignore until we can find a spirit expert to help out.
 primitives so that I can model my domain more accurately.
 #+end_quote
 
-It would be nice to be able to add a default value in dia and have it
+It would be nice to be able to add a default value in Dia and have it
 set on the default constructor, if the type is a primitive or a
 =std::string=.
 
@@ -4970,6 +4950,9 @@ interface, marking all methods as pure virtual, override, etc. We
 would want to distinguish this from the abstract base class case,
 because we may want to add one or more concrete methods to the ABC.
 
+We need support for operations for this to work. We also need support
+for pointers, references and const.
+
 *** Use error codes in exceptions                                     :story:
 
 Avoid breaking tests every time the exception text changes by creating
@@ -4990,7 +4973,12 @@ machinery of creating an exception with the right code, message etc?
 it could also be responsible for appending more content to an existing
 exception so that we'd have the tags all in one place.
 
-*** Option to diff generated code                                     :story:
+Alternatively we could have each exception define the supported error
+codes. This would allow us to code generate them. The only problem is
+if multiple exceptions share an error code, but this should probably
+not happen?
+
+*** Dry-run option to just diff with existing generated code           :epic:
 
 #+begin_quote
 *Story*: As a dogen user, I want to know what has changed with the
@@ -5013,25 +5001,35 @@ We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutoria
 enumerations so that I model my domain accurately.
 #+end_quote
 
-At present our enumerations always use unsigned int as the underlying
-type. It should be possible to override that from dia. We could do
-this by supplying a type via dynamic extensions.
+We've updated the =hardware= model with a "default enumeration value"
+field. This allows us to dynamically determine which primitive to use
+as the type of enumerations. However:
 
-In addition, we are hard-coding this at present in C++. In a
-cross-language world, we should dynamically detect the default
-enumeration type. This is not quite as trivial as it seems (what would
-happen if we loaded multiple programming languages?). Supporting this
-properly may require adding a programming language to the model.
+- we didn't follow it through in the formatters; we are hard-coding
+  this at present in C++. In a cross-language world, we should
+  dynamically detect the default enumeration type. This is not quite
+  as trivial as it seems (what would happen if we loaded multiple
+  programming languages?). Supporting this properly may require adding
+  a programming language to the model.
+- it is not possible to override this from JSON/Dia. We could do this
+  by supplying a type via dynamic extensions.
 
 *** Add support for configurable enumeration values                   :story:
 
 At present we generate the enumeration value as part of the
-transformation process in =dia_to_sml=. This is not ideal:
+transformation process in =yarn.dia=, based on the relative position
+of the enumerator. This is not ideal:
 
 - it won't work for JSON;
 - it does not allow users to supply their own values;
 - it does not allow users to disable enumeration values altogether and
   rely on language defaults instead.
+
+We could:
+
+- move it to =yarn= so that JSON and Dia share the same code;
+- add meta-data for users to supply their own values;
+- add meta-data to disable setting the enumerator value altogether.
 
 *** Exception classes should allow inheritance                        :story:
 
@@ -5052,7 +5050,7 @@ When we do this we need to split relatable into "associatable" and
 
 #+begin_quote
 *Story*: As a dogen user, I would like to define properties as
- protected so that I only expose them to derived types.
+protected so that I only expose them to derived types.
 #+end_quote
 
 We need to distinguish between public and protected attributes when in
@@ -5097,6 +5095,9 @@ all the needed attributes; in many cases we are being lazy and logging
 one message but throwing a less informative one. This should really be
 captured in the exception type.
 
+We should probably support some meta-data to enable/disable this
+behaviour, in case someone wants real attributes in an exception.
+
 *** Ensure an error info tag is not set already before we set it      :story:
 
 Now that we will start making use of error info tags in anger, one
@@ -5111,6 +5112,20 @@ is, what then? We can't throw.
 
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
+
+*** Add scripts to sanity check packages                               :epic:
+
+Create a set of scripts that validate packages:
+
+- install packages on all supported platforms.
+- sanity check that package installed correctly, e.g. check for a few
+  key files.
+- run sanity tests, e.g. create a dogen model and validate the results
+- run uninstaller and sanity check that files are gone
+  - this should actually be a build agent so we can see that deployment
+    is green. We should create a deployment CMake script that does this.
+
+We had some initial support for this in commit ba54859.
 
 *** Finish setting up coveralls                                       :story:
 
@@ -5148,32 +5163,6 @@ See:
 
 - [[https://github.com/Milkyway-at-home/milkywayathome_client/blob/master/cmake_modules/Profiling.cmake][milkywayathome_client's profiling for CMake]]
 
-*** Mine =common-universal-cmake= for ideas                            :epic:
-
-This project seems interesting:
-
-- [[https://github.com/polysquare/common-universal-cmake][common-universal-cmake]]
-
-They seem to have added support for conan, appveyor, etc in an
-extensible way. We need to figure out if anything can be nicked for
-our infrastructure.
-
-*** Consider adding support for clang-tidy                            :story:
-
-As [[http://clang.llvm.org/extra/clang-tidy/][per docs]]:
-
-#+begin_quote
-clang-tidy is a clang-based C++ “linter” tool. Its purpose is to
-provide an extensible framework for diagnosing and fixing typical
-programming errors, like style violations, interface misuse, or bugs
-that can be deduced via static analysis. clang-tidy is modular and
-provides a convenient interface for writing new checks.
-#+end_quote
-
-See also:
-
-- [[https://github.com/polysquare/clang-tidy-target-cmake][clang-tidy-target-cmake]]
-
 *** Fix Windows build timeout                                         :story:
 
 At present the windows build is taking over 1h and its only building
@@ -5195,6 +5184,8 @@ travis for this.
 
 - [[https://scan.coverity.com/projects/domaindrivenconsulting-dogen/builds/new?tab%3Dtravis_ci][Automate Analysis with Travis CI]]
 - [[https://github.com/d-led/picojson_serializer/blob/master/.travis.yml][example .travis.yml]]
+
+We should upload a build whenever we tag a release.
 
 *** Link against boost dynamic libraries                              :story:
 
@@ -5226,6 +5217,10 @@ probably should go back to dynamic linking. Removed code:
 
 See also main CMakeLists.txt around =6b837334c3247bee2f6be8099cd5288a284fa36c=.
 
+Or is the best practice that the user should choose how to link
+against boost in the same way it chooses to generate static or dynamic
+libraries internally for Dogen?
+
 *** Add support for bintray                                           :story:
 
 There is a new web application that interfaces with GitHub:
@@ -5247,29 +5242,6 @@ CDash has bitrotted and is no longer working.
 - we need to get the build green on the Windows agent again.
 - we need to get the linux agent up and running again.
 
-*** Add doxygen build in travis using GitHub pages                    :story:
-
-It seems is pretty straightforward to add a doxygen build to travis:
-
-- [[http://blog.gockelhut.com/2014/09/automatic-documentation-publishing-with.html][Automatic Documentation Publishing with GitHub and TravisCI]]
-
-See also [[https://github.com/tgockel/nginxconfig/blob/master/config/publish-doxygen][this script]].
-
-*** Create a debug build for clang in travis                          :story:
-
-In order to enable code coverage we need to have a debug build. For
-this we need to setup travis with a build matrix, with two build types
-for clang (debug and release).
-
-Example YML: [[https://github.com/Microsoft/GSL/blob/master/.travis.yml][GSL]]
-
-We almost made this work, but now we have a problem: using BUILD_TYPE
-seems to disable the stage folder in travis (though it works
-locally). We probably shouldn't use the stage folder since its not a
-CMake idiom.
-
-This is a requirement for code coverage.
-
 *** Get OSX build to compile code                                     :story:
 
 We've added the initial support for OSX. However, it still needs a lot
@@ -5277,13 +5249,15 @@ of work:
 
 - we can't install the conan package because we don't know how to
   install pkg files. We should raise a ticket on conan for this.
+- Alternatively we could build boost ourselves and upload it to
+  DropBox.
 
 Notes:
 
 - [[http://www.mactech.com/articles/mactech/Vol.26/26.02/TheFlatPackage/index.html][The Flat Package]]
 - [[https://docs.travis-ci.com/user/multi-os/][Matrix with multiple OSs]]
 
-*** Assorted improvements to CMake files                              :story:
+*** Assorted improvements to CMake files                               :epic:
 
 It seems we are not using proper CMake idioms to pick up compiler
 features, as explained here:
@@ -5316,7 +5290,7 @@ Notes:
   support to our builds, but as a result, the binaries moved from
   =stage/bin= to =bin=. There is no obvious explanation for this.
 - remove =STATIC= on all libraries and let users specify which linkage
-  to use.
+  to use. We already have a story to capture this work.
 - remove the stage folder and use the traditional CMake
   directories. This will also fix the problems we have with
   BUILD_TYPE.
@@ -5334,62 +5308,6 @@ When we moved the test models into =test_models= the target name did
 not change. It should have changed to:
 
 : dogen_test_models_all_primitives
-
-*** Emblems for appveyor and for version                              :story:
-
-The [[https://github.com/no1msd/mstch][mstch]] project seems to have great emblems for appveyor - you can
-actually distinguish it from travis - and also an emblem for the
-current project version. See if we can apply it to Dogen.
-
-*** Compile dogen in Windows using Visual Studio 2015                 :story:
-
-*New Understanding*
-
-We now have an [[https://ci.appveyor.com/project/mcraveiro/dogen/history][AppVeyor build for windows]] with Conan support. We just
-need to work through the errors.
-
-*Previous Understanding*
-
-Using our "SoC" resources, we need to setup a Dogen development
-environment on Windows using VS 2015. We need to also create a blog
-post about it.
-
-Issues:
-
-- is polymorphic in instrinsics for microsoft, remove comment. see
-  patch in github.
-- update find boost with MSVC version
-- add string to enum io
-- update exception classes: remove default in base constructor, and
-  add explicit to base and derived as well as by ref.
-
-File with instructions:
-
-0. cd c:\DEVELOPEMENT\output
-1. (only once - as admin) update version of msvc in cmake C:\Program
-  Files (x86)\CMake\share\cmake-3.3\Modules\FindBoost.cmake
-  look for msvc-140 and update it to msvc-150
-2. set CMAKE_INCLUDE_PATH=C:\boost\include;C:\DEVELOPEMENT\libxml2-2.7.8.win32\include
-   set CMAKE_LIBRARY_PATH=C:\boost\lib;C:\DEVELOPEMENT\libxml2-2.7.8.win32\lib
-3. cmake ..\dogen -G "Visual Studio 14 2015" -Wno-dev (CONFIGURATION COMMAND)
-
-if you need to re-run: delete the cache:
-
-del CMakeCache.txt
-
-4. msbuild dogen.sln /t:config
-
-5.msbuild dogen.sln /t:dia /fileLogger   => used to create log for
-  errors- called msbuild.log in output directory
-
-Links:
-
-- [[http://dominoc925.blogspot.co.uk/2013/04/how-i-build-boost-for-64-bit-windows.html][How I build Boost for 64 bit Windows]]
-- [[https://svn.boost.org/trac/boost/ticket/11449][C++11 - is_polymorphic doesn't work with final-ed class in MSVC.]]
-- [[https://github.com/boostorg/type_traits/blob/04a8a9ecc2b02b7334a4b3f0459a5f62b855cc68/include/boost/type_traits/intrinsics.hpp][type_traits/include/boost/type_traits/intrinsics.hpp]]
-- [[http://stackoverflow.com/questions/20800166/cmake-compile-with-mt-instead-of-md][CMake - compile with /MT instead of /MD]]
-- [[http://www.cmake.org/cmake/help/v3.1/manual/cmake-generators.7.html][CMake Generators]]
-- [[http://choorucode.com/2014/06/06/how-to-build-boost-for-visual-studio-2013/][How to build Boost for Visual Studio 2013]]
 
 *** Check that custom targets in CMake have correct dependencies      :story:
 
@@ -5415,13 +5333,39 @@ enabling warnings for all undocumented code. We also need to figure
 out how to mark code as ignored (for example serialisation helpers,
 etc won't require documentation).
 
-*** Clean up WinSock definition in CMakeLists                         :story:
+*** Add WinSock definition in CMakeLists for ODB support              :story:
 
 We did a crude implementation of finding WinSock just to get windows
 to build. There should be a FindWinSock somewhere. If not create one.
 
 Do we need this anymore? we probably need it for linking the database
 model, but we should check - maybe ODB has some magic around this.
+
+Actually this was commented out in code so removed it. Was:
+
+: # WinSock (for database)
+: # if (WIN32)
+: #     find_library(WSOCK_LIB NAMES wsock32 DOC "The winsock library")
+: #     if(WSOCK_LIB)
+: #         list(APPEND CMAKE_REQUIRED_LIBRARIES wsock32)
+: #     else()
+: #         message(FATAL_ERROR "winsock not found.")
+: #     endif()
+:
+: #     find_library(WSOCK2_LIB NAMES ws2_32 DOC "The winsock 2 library")
+: #     if(WSOCK2_LIB)
+: #         list(APPEND CMAKE_REQUIRED_LIBRARIES ws2_32)
+: #     else()
+: #         message(FATAL_ERROR "winsock2 not found.")
+: #     endif()
+:
+: #     find_library(MSWSOCK_LIB NAMES mswsock DOC "The winsock 2 library")
+: #     if(MSWSOCK_LIB)
+: #         list(APPEND CMAKE_REQUIRED_LIBRARIES mswsock)
+: #     else()
+: #         message(FATAL_ERROR "mswsock not found.")
+: #     endif()
+: # endif()
 
 *** Support for cmake components and groups                           :story:
 
@@ -5434,7 +5378,7 @@ We recently added support for creating multiple packages from a single
 source tree. We need generated models to have a new top-level cmake file:
 
 : add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
-: add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/spec)
+: add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
 :
 : install(
 :     DIRECTORY include/
@@ -5487,7 +5431,7 @@ These can be replaced with:
 
 :        file(REMOVE_RECURSE ${stage_test_data_dir}/${dir}/expected)
 :        file(COPY ${curdir}/${dir} DESTINATION ${stage_dir}/test_data)
-:         file(MAKE_DIRECTORY ${stage_test_data_dir}/${dir}/actual)
+:        file(MAKE_DIRECTORY ${stage_test_data_dir}/${dir}/actual)
 
 etc.
 
@@ -5502,18 +5446,8 @@ we are not checking to see if it exists:
 :            WORKING_DIRECTORY ${stage_bin_dir})
 :        add_dependencies(diff_dataset ${target_name})
 
-We need to detect it and only add this targets if diff has been found.
-
-*** Create a ebook and dead-tree book for the manual                  :story:
-
-We should probably start by creating a simple ebook first and then
-explore the dead-tree options such as [[http://www.lulu.com][Lulu]]. We should also see what
-Luigi did for [[https://leanpub.com/implementingquantlib/][QuantLib]].
-
-*** Investigate adding polymode support for stitch templates          :story:
-
-We need a way to visualise stitch templates that is a bit more
-readable than fundamental mode. One option is [[https://github.com/vspinu/polymode/tree/master/modes][polymode]].
+We need to detect it and only add this targets if diff has been
+found. We probably should look for a =FindDiff.cmake= script.
 
 *** Consider creating an Emacs mode for stitch                        :story:
 
@@ -5523,11 +5457,12 @@ which is rather unusable.
 
 See also [[https://github.com/fxbois/web-mode][web-mode]].
 
-*** Add new c++ warnings to compilation                               :story:
+Merged stories:
 
-- =-Wunused-private-field=: Seems like this warning is not part of
-  =-Wall=
-- =-Winconsistent-missing-override=: new clang warning, probably 3.6.
+*Investigate adding polymode support for stitch templates*
+
+We need a way to visualise stitch templates that is a bit more
+readable than fundamental mode. One option is [[https://github.com/vspinu/polymode/tree/master/modes][polymode]].
 
 *** Installable package names should follow a well-known convention   :story:
 
@@ -5543,7 +5478,7 @@ There are some known limitations in package naming:
 
 - [[http://public.kitware.com/Bug/view.php?id%3D12997][0012997: Provide a more flexible way to name package produced by CPack]]
 
-*** Build shared objects instead of dynamic libraries                 :story:
+*** Allow user to choose whether to build shared or static libraries  :story:
 
 #+begin_quote
 *Story*: As a dogen user, I want to generate models as shared objects
@@ -5562,6 +5497,11 @@ We probably need a dogen command line option to determine what to
 build so that users are not forced to always build static / shared
 libraries. We should make sure one of the tests is using a static
 library to make sure this scenario doesn't get borked.
+
+Actually we need to figure out how to pass this as a parameter into
+CMake to let the user configure how the libraries are generated
+(static or dynamic). Look for a best practices presentation on CMake
+that talks about this.
 
 *** Migrate from Boost Test to Catch                                  :story:
 
@@ -5590,41 +5530,52 @@ should consider making it explicit.
 The best approach may be to move all unit tests to [[https://github.com/philsquared/Catch][Catch]], since it
 natively supports GWT.
 
-*** Version number relies on latest commit in master                  :story:
-
-When trying to build off of a tag, we noticed that the version number
-is always of the latest commit in master. This means that trying to
-generate packages for tag =v0.50.2410= results in packages with a
-version after that like say =v0.50.2415=. We should look at the
-current commit in master rather than the latest one.
-
-The current workaround is to manually sett the minor version just
-before closing the sprint and then reset it back.
-
-*** Enable package sanity tests for Linux                              :epic:
+*** Enable package installation tests for Linux                        :epic:
 
 Now that we will be using docker, we could create a simple =systemd=
 ctest script that runs as root in a docker container:
 
-- it monitors the GDrive location for files that match a given regular
-  expression (e.g. we need to make sure we match the bitness and the
-  platform)
-- if it finds one, it installs it and runs sanity scripts.
+- build package and drop them on a well known location;
+- Create a batch script that polls this location for new packages;
+  when one is found run package installer. Looks for files that match
+  a given regular expression (e.g. we need to make sure we match the
+  bitness and the platform)
+- if it finds one, it installs it and runs sanity scripts (see story
+  for sanity scripts).
 - it then uninstalls it and makes sure the docker image is identical
   to how we started (however that is done in docker)
+
+*** Add support for uploading packages in cloud storage               :story:
+
+We need to upload the packages created by each build to a public
+Google Drive (GDrive) location or to DropBox
+
+- Google drive folder created [[https://drive.google.com/folderview?id%3D0B4sIAJ9bC4XecFBOTE1LZEpINUE&usp%3Dsharing][here]].
+- See [[https://developers.google.com/drive/quickstart-ruby][this article]].
+- [[http://stackoverflow.com/questions/15798141/create-folder-in-google-drive-with-google-drive-ruby-gem][Create folders]] to represent the different types of uploads:
+  =tag_x.y.z=, =last=, =previous=. maybe we should only have latest
+  and tag as this would require no complex logic: if tag create new
+  folder, if latest, delete then create.
+
+We are uploading the tag packages to GitHub already, but ideally we
+should test all packages for all commits.
 
 *** Consider moving dia diagrams to their own project                 :story:
 
 We originally create a diagrams top-level directory for all of the
 diagrams that generate dogen models. However it may make more sense to
 have the diagrams closer to the project they generate; for example a
-folder within the project. Also, the name "diagrams" is a bit
-misleading. These are not just diagrams, they are also the dogen
-input. We need a name that is a bit more meaningful.
+folder within the project. The downside of this approach is that we
+now have to make references across projects; we could use relative
+paths for this but the targets will still look verbose.
 
-The downside of this approach is that we now have to make references
-across projects; we could use relative paths for this but the targets
-will still look verbose.
+*** Consider renaming =diagrams= to =models=                          :story:
+
+The name "diagrams" is a bit misleading. These are not just diagrams,
+they are specifically Dogen inputs. We need a name that is a bit more
+meaningful. For example, if we start creating models in JSON, it would
+render the directory name meaningless. We should call the directory
+=models=.
 
 *** Add Travis support for 32-bits                                    :story:
 
@@ -5655,16 +5606,19 @@ Doxygen documentation there. This should be done from Travis:
 
 Example from RapidJSON available [[https://github.com/miloyip/rapidjson/blob/master/travis-doxygen.sh][here]].
 
-*** Consider tagging the git branch in version                        :story:
+This can be done by adding a build to the matrix with a
+=DOCUMENTATION= env variable. When this is on, the travis build builds
+and deploys documentation. We should only do this when tagging.
 
-At present we make use of rev-list to determine the minor
-version. However, this is always off of master, which means that if
-you have a few more commits on your integration branch you will end up
-with a build that lies. We should consider:
+Merged Stories:
 
-- adding the git commit SHA to the build, perhaps comments.
-- adding the branch to the build, perhaps comments.
-- rev-listing the current branch rather than always master.
+*Add doxygen build in travis using GitHub pages*
+
+It seems is pretty straightforward to add a doxygen build to travis:
+
+- [[http://blog.gockelhut.com/2014/09/automatic-documentation-publishing-with.html][Automatic Documentation Publishing with GitHub and TravisCI]]
+
+See also [[https://github.com/tgockel/nginxconfig/blob/master/config/publish-doxygen][this script]].
 
 *** Add vagrant and docker support                                    :story:
 
@@ -5684,20 +5638,12 @@ Emacs support:
 
 https://llvm.org/svn/llvm-project/cfe/trunk/tools/clang-format/clang-format.el
 
-*** Investigate NeoVim's emblems                                      :story:
+*** Consider adding an emblem for clang's analysis checks             :story:
 
-They appear to have emblems for issues, connected to waffle as well as
-clang's analysis checks:
+NeoVim appears to have emblems for waffle as well as clang's analysis
+checks:
 
 https://github.com/neovim/neovim
-
-*** Consider adding issues emblem                                     :story:
-
-Boost.DI seems to have a new emblem for issues:
-
-https://github.com/krzysztof-jusiak/di
-
-In the future, this may be useful if users submit issues.
 
 *** Consider adding NuGet support                                     :story:
 
@@ -5710,14 +5656,6 @@ It also comes with a couple of useful emblems:
 https://github.com/Reactive-Extensions/RxCpp
 
 We should push both the C++ libraries as well as the dogen binary.
-
-*** Investigate the emblems used by Bit7z                             :story:
-
-This project uses emblems for version, platform and compiler:
-
-https://github.com/rikyoz/Bit7z
-
-This may or may not be useful to dogen.
 
 *** Travis deployment of tags fails                                   :story:
 
@@ -5768,6 +5706,8 @@ Error:
 :     from /home/travis/.rvm/gems/ruby-1.9.3-p550/bin/dpl:23:in `<main>'
 : failed to deploy
 
+We solved this for now by just uploading the application packages.
+
 *** Usage of rev-list in version causes problems                      :story:
 
 Now we are using travis, we have found problems with the way we are
@@ -5784,6 +5724,40 @@ This is in addition to the problems we had with tagging (where we have
 to manually stamp the version) and branching (where we are using the
 number of commits in master rather than the branch). We need a better
 solution than using rev-list for this.
+
+Perhaps we should just abandon the approach of putting the commit
+number in the version; we haven't found a single case where this makes
+life easier. We could only have the major version, then sprint (which
+is reset back to zero for every major version) and then patch-level
+which is used only in cases where we release patches. The key
+requirement here is that, given a build, we should be able to identify
+which commit it comes from. We probably don't want to add it to the
+version / help / etc because this forces spurious rebuilds for no
+reason every time one commits. We could add it to some package file.
+
+Merged Stories:
+
+*Consider tagging the git branch in version*
+
+At present we make use of rev-list to determine the minor
+version. However, this is always off of master, which means that if
+you have a few more commits on your integration branch you will end up
+with a build that lies. We should consider:
+
+- adding the git commit SHA to the build, perhaps comments.
+- adding the branch to the build, perhaps comments.
+- rev-listing the current branch rather than always master.
+
+*Version number relies on latest commit in master*
+
+When trying to build off of a tag, we noticed that the version number
+is always of the latest commit in master. This means that trying to
+generate packages for tag =v0.50.2410= results in packages with a
+version after that like say =v0.50.2415=. We should look at the
+current commit in master rather than the latest one.
+
+The current workaround is to manually sett the minor version just
+before closing the sprint and then reset it back.
 
 *** Consider hosting documentation in read the docs                   :story:
 
@@ -5803,34 +5777,11 @@ program so that I don't have to figure it all out by myself.
 We need to start creating a series of quick videos demoing dogen. The
 script for the first video of the series is as follows:
 
-- download packages from Google Drive and install them.
+- download packages from GitHub and install them.
 - obtain the hello world model from git.
 - generate the hello world model.
 - create a hello world main with make files and compile it.
 - give a quick overview of the available facilities.
-
-*** Write next interesting instalment in blog                         :story:
-
-We have a number of links backlogged and we need to offload them in an
-"interesting..." post.
-
-*** Write blog post on reflexive programming                          :story:
-
-Basic idea is that domain expertise tightens the agile circle,
-allowing for much faster progress. Check Soros definition of
-reflexive.
-
-*** Add support for automatic upload packages into GDrive             :story:
-
-We need to upload the packages created by the build to a public Google
-Drive (GDrive) location.
-
-- Google drive folder created [[https://drive.google.com/folderview?id%3D0B4sIAJ9bC4XecFBOTE1LZEpINUE&usp%3Dsharing][here]].
-- See [[https://developers.google.com/drive/quickstart-ruby][this article]].
-- [[http://stackoverflow.com/questions/15798141/create-folder-in-google-drive-with-google-drive-ruby-gem][Create folders]] to represent the different types of uploads:
-  =tag_x.y.z=, =last=, =previous=. maybe we should only have latest
-  and tag as this would require no complex logic: if tag create new
-  folder, if latest, delete then create.
 
 *** Add a CMake module for git                                        :story:
 
@@ -5839,9 +5790,25 @@ not doing it right. It appears there is a CMake script for it:
 
 - [[%20http://gnuradio.org/redmine/projects/gnuradio/repository/revisions/accb9f2fe8fd8f6a1e114adac5b15304b0e0012d/entry/cmake/Modules/FindGit.cmake][FindGIT.cmake]]
 
+*** Consider adding support for clang-tidy                            :story:
+
+As [[http://clang.llvm.org/extra/clang-tidy/][per docs]]:
+
+#+begin_quote
+clang-tidy is a clang-based C++ “linter” tool. Its purpose is to
+provide an extensible framework for diagnosing and fixing typical
+programming errors, like style violations, interface misuse, or bugs
+that can be deduced via static analysis. clang-tidy is modular and
+provides a convenient interface for writing new checks.
+#+end_quote
+
+See also:
+
+- [[https://github.com/polysquare/clang-tidy-target-cmake][clang-tidy-target-cmake]]
+
 *** Add support for the =scan-build= static analyser                  :story:
 
-scan-build is a command line utility that enables a user to run the
+=scan-build= is a command line utility that enables a user to run the
 static analyzer over their codebase as part of performing a regular
 build.
 
@@ -5867,7 +5834,7 @@ This seems like another interest dynamic analysis tool:
 
 Seems like CPPCheck has a different take on dynamic analysis when
 compared to Valgrind. We should look into how hard it is to integrate
-it with CTest.
+it with CTest, Travis, etc.
 
 Links:
 
@@ -5911,20 +5878,11 @@ the existing version of the diagram and the new version; we could load
 both models and then do a diff. This could be a bit dangerous though
 if there are other changes, etc.
 
-*** Feature toggles and code generation                               :story:
-
-This article by Fowler has some interesting ideas:
-
-[[http://martinfowler.com/articles/feature-toggles.html][Feature Toggles]]
-
-It is not clear how it applies to code generation, if at all. This
-story is to bookmark the article so we can mine it later for ideas.
-
 *** Generate formatter interfaces                                     :story:
 
-For some trivial types such as formatter interfaces, formatter
-container, registrar and so on, it should be relatively trivial to
-generate them; we need:
+It should be possible to generate some trivial types such as formatter
+interfaces, formatter container, registrar and so on. For this we
+need:
 
 - a mustache type template;
 - a set of fields from yarn types to be exposed to mustache;
@@ -5952,12 +5910,12 @@ Notes:
   augment the include list with additional includes. However, we may
   not even need to be aware of this.
 
-*** Generate spec skeleton                                            :story:
+*** Generate tests skeleton                                           :story:
 
 When we create a dogen project for the first time, we should be able
-to, optionally, add the spec directory with skeleton code and a sample
-spec. If the directory already exists (or if the option is off) we do
-nothing.
+to, optionally, add the tests directory with skeleton code and a
+sample test. If the directory already exists (or if the option is off)
+we do nothing.
 
 *** Allow generating executables from dogen                           :story:
 
@@ -5988,6 +5946,10 @@ these. The aim would be to replace config.
 
 For models such as these, the dia representation is just overhead. It
 would be great if we could do it using just JSON.
+
+Actually even better would be if we could have a text file in docopt
+format and parse it and then use it to generate the code described
+above.
 
 *** Create a tool to generate product skeletons                       :story:
 
@@ -6053,45 +6015,21 @@ Notes:
 
 - [[https://github.com/elbeno/skeleton][Skeleton]]: project to generate c++ project skeletons.
 
-*** Unmaintained emblem                                               :story:
-
-If we ever reach a point where Dogen is complete according to the
-vision, we should add this emblem:
-
-http://unmaintained.tech/
-
-*** Easy addition of facets and formatters                            :story:
+*** Easy addition of facets and formatters                             :epic:
 
 The ideal state of the world is one where:
 
 - the facet directory contains a small JSON file with the fields
   specific to a facet, including defaults, etc.
 - the facet directory is made up of a number of stitch templates and
-  their expansion into c++.
+  their expansion into c++ (e.g. no separation of template and
+  formatter).
 - the backend model has an entity marked as =Stitch= or =Stitchable=
   and linked to a stitch meta-template. Ideally one should be able to
   create a concept for it so that we can define these properties only
   once.
 - the template should have all of the parameters required such as
   types of variables.
-
-*** Keep track of sewing terms allocation                   :reviewing:story:
-
-This story just keeps track of how we are using the different sewing
-terms in Dogen. We are only tracking terms which are not yet
-incorporated into the product. It also keeps track of ideas that have
-not yet allocated a term.
-
-| Term   | Meaning | Dogen usage                                               |
-|--------+---------+-----------------------------------------------------------|
-| weave  |         | Reserved for AOP support?                                 |
-| [[https://en.wikipedia.org/wiki/Glossary_of_sewing_terms#D][dart]]   |         | Will be used for the skeleton generator tool              |
-| [[https://en.wikipedia.org/wiki/Yoke_(clothing)][yoke]]   |         |                                                           |
-| tailor |         | Format converter. e.g. Dia to JSON, etc.                  |
-| jersey |         | Code generation service.                                  |
-| hem    |         | HTTP Wrapper around jersey.                               |
-| twine  |         | Tool to infer model from XML/JSON/CSV instance documents. |
-|        |         | Tool to infer model from SQL database schemas.            |
 
 *** Overuse of =std::set=, =std::map=, etc                            :story:
 
@@ -7995,3 +7933,63 @@ Notes:
   (changing makefile manually and then reverting the change).
 - there should be a way of passing in the database name as an
   environment variable into the CMake
+** Other Stories
+
+Stories we just don't quite know where to bucket them.
+
+*** Unmaintained emblem                                               :story:
+
+If we ever reach a point where Dogen is complete according to the
+vision, we should add this emblem:
+
+http://unmaintained.tech/
+
+*** Keep track of sewing terms allocation                              :epic:
+
+This story just keeps track of how we are using the different sewing
+terms in Dogen. We are only tracking terms which are not yet
+incorporated into the product. It also keeps track of ideas that have
+not yet allocated a term.
+
+| Term   | Meaning | Dogen usage                                               |
+|--------+---------+-----------------------------------------------------------|
+| weave  |         | Reserved for AOP support?                                 |
+| [[https://en.wikipedia.org/wiki/Glossary_of_sewing_terms#D][dart]]   |         | Will be used for the skeleton generator tool.             |
+| [[https://en.wikipedia.org/wiki/Yoke_(clothing)][yoke]]   |         |                                                           |
+| tailor |         | Format converter. e.g. Dia to JSON, etc.                  |
+| jersey |         | Code generation service.                                  |
+| hem    |         | HTTP Wrapper around jersey.                               |
+| twine  |         | Tool to infer model from XML/JSON/CSV instance documents. |
+|        |         | Tool to infer model from SQL database schemas.            |
+
+*** Feature toggles and code generation                               :story:
+
+This article by Fowler has some interesting ideas:
+
+[[http://martinfowler.com/articles/feature-toggles.html][Feature Toggles]]
+
+It is not clear how it applies to code generation, if at all. This
+story is to bookmark the article so we can mine it later for ideas.
+*** Write blog post on reflexive programming                          :story:
+
+Basic idea is that domain expertise tightens the agile circle,
+allowing for much faster progress. Check Soros definition of
+reflexive.
+
+*** Investigate the emblems used by Bit7z                             :story:
+
+This project uses emblems for version, platform and compiler:
+
+https://github.com/rikyoz/Bit7z
+
+This may or may not be useful to dogen.
+
+*** Mine =common-universal-cmake= for ideas                            :epic:
+
+This project seems interesting:
+
+- [[https://github.com/polysquare/common-universal-cmake][common-universal-cmake]]
+
+They seem to have added support for conan, appveyor, etc in an
+extensible way. We need to figure out if anything can be nicked for
+our infrastructure.

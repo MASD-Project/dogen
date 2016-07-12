@@ -13,34 +13,37 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-12 Tue 13:30]
+#+CAPTION: Clock summary at [2016-07-12 Tue 16:10]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *18:19* |       |      | 100.0 |
+| *Total time*                                                                | *18:39* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 18:19   |       |      | 100.0 |
-| Active                                                                      |         | 18:19 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:55 |   5.0 |
-| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   7.4 |
-| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   8.0 |
-| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   7.0 |
+| Stories                                                                     | 18:39   |       |      | 100.0 |
+| Active                                                                      |         | 18:39 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:15 |   6.7 |
+| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   7.2 |
+| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   7.9 |
+| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   6.9 |
 | COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   2.6 |
 | COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   1.8 |
 | COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   0.9 |
 | COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   4.5 |
-| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   2.5 |
-| COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.5 |
-| COMPLETED Refactor general settings                                         |         |       | 5:50 |  31.8 |
-| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   7.6 |
-| COMPLETED Create a IO settings class                                        |         |       | 1:15 |   6.8 |
-| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   7.6 |
-| STARTED Enable IO helpers for types                                         |         |       | 0:38 |   3.5 |
-| STARTED Implement IO helper methods with new helper infrastructure          |         |       | 0:15 |   1.4 |
+| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   2.4 |
+| COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.4 |
+| COMPLETED Refactor general settings                                         |         |       | 5:50 |  31.3 |
+| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   7.5 |
+| COMPLETED Create a IO settings class                                        |         |       | 1:15 |   6.7 |
+| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   7.5 |
+| STARTED Enable IO helpers for types                                         |         |       | 0:38 |   3.4 |
+| STARTED Implement IO helper methods with new helper infrastructure          |         |       | 0:15 |   1.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-07-12 Tue 17:47]--[2016-07-12 Tue 18:37] =>  0:50
+    CLOCK: [2016-07-12 Tue 17:25]--[2016-07-12 Tue 17:46] =>  0:21
+    CLOCK: [2016-07-12 Tue 15:50]--[2016-07-12 Tue 16:10] =>  0:20
     CLOCK: [2016-07-06 Wed 18:31]--[2016-07-06 Wed 18:35] =>  0:04
     CLOCK: [2016-07-05 Tue 21:27]--[2016-07-05 Tue 21:47] =>  0:20
     CLOCK: [2016-07-05 Tue 21:22]--[2016-07-05 Tue 21:26] =>  0:04
@@ -377,6 +380,97 @@ finally add the repository to the context.
 - remove all other streaming for type implementations and use the new
   one in the legacy formatters.
 
+*** COMPLETED Consider adding issues emblem                           :story:
+    CLOSED: [2016-07-12 Tue 17:42]
+
+*Rationale*: Done a few sprints ago.
+
+Boost.DI seems to have a new emblem for issues:
+
+https://github.com/krzysztof-jusiak/di
+
+In the future, this may be useful if users submit issues.
+
+*** COMPLETED Compile dogen in Windows using Visual Studio 2015       :story:
+    CLOSED: [2016-07-12 Tue 18:11]
+
+*Rationale*: Completed in the previous sprint.
+
+*New Understanding*
+
+We now have an [[https://ci.appveyor.com/project/mcraveiro/dogen/history][AppVeyor build for windows]] with Conan support. We just
+need to work through the errors.
+
+*Previous Understanding*
+
+Using our "SoC" resources, we need to setup a Dogen development
+environment on Windows using VS 2015. We need to also create a blog
+post about it.
+
+Issues:
+
+- is polymorphic in instrinsics for microsoft, remove comment. see
+  patch in github.
+- update find boost with MSVC version
+- add string to enum io
+- update exception classes: remove default in base constructor, and
+  add explicit to base and derived as well as by ref.
+
+File with instructions:
+
+0. cd c:\DEVELOPEMENT\output
+1. (only once - as admin) update version of msvc in cmake C:\Program
+  Files (x86)\CMake\share\cmake-3.3\Modules\FindBoost.cmake
+  look for msvc-140 and update it to msvc-150
+2. set CMAKE_INCLUDE_PATH=C:\boost\include;C:\DEVELOPEMENT\libxml2-2.7.8.win32\include
+   set CMAKE_LIBRARY_PATH=C:\boost\lib;C:\DEVELOPEMENT\libxml2-2.7.8.win32\lib
+3. cmake ..\dogen -G "Visual Studio 14 2015" -Wno-dev (CONFIGURATION COMMAND)
+
+if you need to re-run: delete the cache:
+
+del CMakeCache.txt
+
+4. msbuild dogen.sln /t:config
+
+5.msbuild dogen.sln /t:dia /fileLogger   => used to create log for
+  errors- called msbuild.log in output directory
+
+Links:
+
+- [[http://dominoc925.blogspot.co.uk/2013/04/how-i-build-boost-for-64-bit-windows.html][How I build Boost for 64 bit Windows]]
+- [[https://svn.boost.org/trac/boost/ticket/11449][C++11 - is_polymorphic doesn't work with final-ed class in MSVC.]]
+- [[https://github.com/boostorg/type_traits/blob/04a8a9ecc2b02b7334a4b3f0459a5f62b855cc68/include/boost/type_traits/intrinsics.hpp][type_traits/include/boost/type_traits/intrinsics.hpp]]
+- [[http://stackoverflow.com/questions/20800166/cmake-compile-with-mt-instead-of-md][CMake - compile with /MT instead of /MD]]
+- [[http://www.cmake.org/cmake/help/v3.1/manual/cmake-generators.7.html][CMake Generators]]
+- [[http://choorucode.com/2014/06/06/how-to-build-boost-for-visual-studio-2013/][How to build Boost for Visual Studio 2013]]
+
+*** COMPLETED Emblems for appveyor and for version                    :story:
+    CLOSED: [2016-07-12 Tue 18:12]
+
+*Rationale*: We've implemented this already.
+
+The [[https://github.com/no1msd/mstch][mstch]] project seems to have great emblems for appveyor - you can
+actually distinguish it from travis - and also an emblem for the
+current project version. See if we can apply it to Dogen.
+
+*** COMPLETED Create a debug build for clang in travis                :story:
+    CLOSED: [2016-07-12 Tue 18:16]
+
+*Rationale*: Implemented in the previous sprint.
+
+In order to enable code coverage we need to have a debug build. For
+this we need to setup travis with a build matrix, with two build types
+for clang (debug and release).
+
+Example YML: [[https://github.com/Microsoft/GSL/blob/master/.travis.yml][GSL]]
+
+We almost made this work, but now we have a problem: using BUILD_TYPE
+seems to disable the stage folder in travis (though it works
+locally). We probably shouldn't use the stage folder since its not a
+CMake idiom.
+
+This is a requirement for code coverage.
+
 *** STARTED Enable IO helpers for types                               :story:
     CLOCK: [2016-07-12 Tue 13:14]--[2016-07-12 Tue 13:30] =>  0:16
     CLOCK: [2016-07-12 Tue 07:53]--[2016-07-12 Tue 08:05] =>  0:12
@@ -413,6 +507,12 @@ Problems:
   for all properties, not just in the context of helpers. This seems
   to imply we need a way to access this information directly from the
   property. It will need some thinking.
+
+*** Add new c++ warnings to compilation                               :story:
+
+- =-Wunused-private-field=: Seems like this warning is not part of
+  =-Wall=
+- =-Winconsistent-missing-override=: new clang warning, probably 3.6.
 
 *** Detect knitter and disable code generation accordingly            :story:
 
@@ -738,3 +838,21 @@ comparing the entire state of the object. We need a way to mark
 properties against each facet in the meta-data.
 
 ** Deprecated
+
+*** CANCELLED Write next interesting instalment in blog               :story:
+    CLOSED: [2016-07-12 Tue 17:33]
+
+*Rationale*: Not much of a point of having "interesting" related
+stories in backlog.
+
+We have a number of links backlogged and we need to offload them in an
+"interesting..." post.
+*** CANCELLED Create a ebook and dead-tree book for the manual        :story:
+    CLOSED: [2016-07-12 Tue 18:07]
+
+*Rationale*: this story does not add any value. We need to write the
+manual and then worry about this.
+
+We should probably start by creating a simple ebook first and then
+explore the dead-tree options such as [[http://www.lulu.com][Lulu]]. We should also see what
+Luigi did for [[https://leanpub.com/implementingquantlib/][QuantLib]].

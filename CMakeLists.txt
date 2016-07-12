@@ -127,30 +127,6 @@ if(WITH_COVERALLS)
     endif()
 endif()
 
-# WinSock (for database)
-# if (WIN32)
-#     find_library(WSOCK_LIB NAMES wsock32 DOC "The winsock library")
-#     if(WSOCK_LIB)
-#         list(APPEND CMAKE_REQUIRED_LIBRARIES wsock32)
-#     else()
-#         message(FATAL_ERROR "winsock not found.")
-#     endif()
-
-#     find_library(WSOCK2_LIB NAMES ws2_32 DOC "The winsock 2 library")
-#     if(WSOCK2_LIB)
-#         list(APPEND CMAKE_REQUIRED_LIBRARIES ws2_32)
-#     else()
-#         message(FATAL_ERROR "winsock2 not found.")
-#     endif()
-
-#     find_library(MSWSOCK_LIB NAMES mswsock DOC "The winsock 2 library")
-#     if(MSWSOCK_LIB)
-#         list(APPEND CMAKE_REQUIRED_LIBRARIES mswsock)
-#     else()
-#         message(FATAL_ERROR "mswsock not found.")
-#     endif()
-# endif()
-
 #
 # Test models
 #
