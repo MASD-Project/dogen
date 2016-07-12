@@ -62,6 +62,8 @@ element_properties_repository element_properties_repository_factory::merge(
         if (i != hprp.by_id().end())
             ep.helper_properties(i->second);
     }
+
+    // FIXME: check that there are no helper properties left
     return r;
 }
 
