@@ -90,7 +90,8 @@ class_info::class_info()
       is_immutable_(static_cast<bool>(0)),
       is_root_parent_visitable_(static_cast<bool>(0)),
       generation_type_(static_cast<dogen::yarn::generation_types>(0)),
-      is_final_(static_cast<bool>(0)) { }
+      is_final_(static_cast<bool>(0)),
+      in_inheritance_relationship_(static_cast<bool>(0)) { }
 
 class_info::class_info(
     const std::string& identity,
@@ -114,7 +115,8 @@ class_info::class_info(
     const bool is_immutable,
     const bool is_root_parent_visitable,
     const dogen::yarn::generation_types generation_type,
-    const bool is_final)
+    const bool is_final,
+    const bool in_inheritance_relationship)
     : dogen::quilt::cpp::properties::entity(
       identity,
       origin_type,
@@ -137,7 +139,8 @@ class_info::class_info(
       is_immutable_(is_immutable),
       is_root_parent_visitable_(is_root_parent_visitable),
       generation_type_(generation_type),
-      is_final_(is_final) { }
+      is_final_(is_final),
+      in_inheritance_relationship_(in_inheritance_relationship) { }
 
 void class_info::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -165,7 +168,8 @@ void class_info::to_stream(std::ostream& s) const {
       << "\"is_immutable\": " << is_immutable_ << ", "
       << "\"is_root_parent_visitable\": " << is_root_parent_visitable_ << ", "
       << "\"generation_type\": " << generation_type_ << ", "
-      << "\"is_final\": " << is_final_
+      << "\"is_final\": " << is_final_ << ", "
+      << "\"in_inheritance_relationship\": " << in_inheritance_relationship_
       << " }";
 }
 
@@ -188,6 +192,7 @@ void class_info::swap(class_info& other) noexcept {
     swap(is_root_parent_visitable_, other.is_root_parent_visitable_);
     swap(generation_type_, other.generation_type_);
     swap(is_final_, other.is_final_);
+    swap(in_inheritance_relationship_, other.in_inheritance_relationship_);
 }
 
 bool class_info::equals(const dogen::quilt::cpp::properties::formattable& other) const {
@@ -212,7 +217,8 @@ bool class_info::operator==(const class_info& rhs) const {
         is_immutable_ == rhs.is_immutable_ &&
         is_root_parent_visitable_ == rhs.is_root_parent_visitable_ &&
         generation_type_ == rhs.generation_type_ &&
-        is_final_ == rhs.is_final_;
+        is_final_ == rhs.is_final_ &&
+        in_inheritance_relationship_ == rhs.in_inheritance_relationship_;
 }
 
 class_info& class_info::operator=(class_info other) {
@@ -387,6 +393,14 @@ bool class_info::is_final() const {
 
 void class_info::is_final(const bool v) {
     is_final_ = v;
+}
+
+bool class_info::in_inheritance_relationship() const {
+    return in_inheritance_relationship_;
+}
+
+void class_info::in_inheritance_relationship(const bool v) {
+    in_inheritance_relationship_ = v;
 }
 
 } } } }

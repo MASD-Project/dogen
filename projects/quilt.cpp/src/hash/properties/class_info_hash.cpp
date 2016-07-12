@@ -83,6 +83,7 @@ std::size_t class_info_hasher::hash(const class_info& v) {
     combine(seed, v.is_root_parent_visitable());
     combine(seed, v.generation_type());
     combine(seed, v.is_final());
+    combine(seed, v.in_inheritance_relationship());
 
     return seed;
 }

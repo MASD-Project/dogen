@@ -347,6 +347,7 @@ transformer::to_class_info(const yarn::object& o) const {
     r->is_parent(o.is_parent());
     r->is_final(o.is_final());
     r->generation_type(o.generation_type());
+    r->in_inheritance_relationship(o.in_inheritance_relationship());
 
     name_builder b;
     for (const auto& n : o.parents()) {

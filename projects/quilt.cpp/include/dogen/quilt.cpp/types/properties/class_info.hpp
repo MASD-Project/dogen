@@ -76,7 +76,8 @@ public:
         const bool is_immutable,
         const bool is_root_parent_visitable,
         const dogen::yarn::generation_types generation_type,
-        const bool is_final);
+        const bool is_final,
+        const bool in_inheritance_relationship);
 
 private:
     template<typename Archive>
@@ -243,6 +244,9 @@ public:
     bool is_final() const;
     void is_final(const bool v);
 
+    bool in_inheritance_relationship() const;
+    void in_inheritance_relationship(const bool v);
+
 public:
     bool operator==(const class_info& rhs) const;
     bool operator!=(const class_info& rhs) const {
@@ -272,6 +276,7 @@ private:
     bool is_root_parent_visitable_;
     dogen::yarn::generation_types generation_type_;
     bool is_final_;
+    bool in_inheritance_relationship_;
 };
 
 } } } }

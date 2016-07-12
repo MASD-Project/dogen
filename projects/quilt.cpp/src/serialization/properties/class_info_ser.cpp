@@ -63,6 +63,7 @@ void save(Archive& ar,
     ar << make_nvp("is_root_parent_visitable", v.is_root_parent_visitable_);
     ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("is_final", v.is_final_);
+    ar << make_nvp("in_inheritance_relationship", v.in_inheritance_relationship_);
 }
 
 template<typename Archive>
@@ -86,6 +87,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_root_parent_visitable", v.is_root_parent_visitable_);
     ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("is_final", v.is_final_);
+    ar >> make_nvp("in_inheritance_relationship", v.in_inheritance_relationship_);
 }
 
 } }

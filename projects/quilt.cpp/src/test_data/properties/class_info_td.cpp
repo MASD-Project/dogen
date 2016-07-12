@@ -103,6 +103,7 @@ populate(const unsigned int position, result_type& v) {
     v.is_root_parent_visitable(create_bool(position + 12));
     v.generation_type(create_dogen_yarn_generation_types(position + 13));
     v.is_final(create_bool(position + 14));
+    v.in_inheritance_relationship(create_bool(position + 15));
 }
 
 class_info_generator::result_type
