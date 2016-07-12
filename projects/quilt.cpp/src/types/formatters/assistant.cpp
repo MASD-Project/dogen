@@ -403,8 +403,7 @@ void assistant::add_helper_methods(const properties::class_info& c) {
     const auto cifn(tt::class_implementation_formatter_name());
     const auto fn(ownership_hierarchy_.formatter_name());
     const bool is_types_class_implementation(fn == cifn);
-    const bool in_inheritance(c.is_parent() || !c.parents().empty());
-    const bool requires_io(is_io_enabled() && in_inheritance);
+    const bool requires_io(is_io_enabled() && c.in_inheritance_relationship());
 
     if (is_types_class_implementation && requires_io) {
         BOOST_LOG_SEV(lg, debug) << "Creating io helper methods in types.";
@@ -419,7 +418,7 @@ void assistant::add_helper_methods(const properties::class_info& c) {
     using iot = formatters::io::traits;
     const auto io_ci_fn(iot::class_implementation_formatter_name());
     const bool is_io_class_implementation(fn == io_ci_fn);
-    if (is_io_class_implementation && !in_inheritance) {
+    if (is_io_class_implementation && !c.in_inheritance_relationship()) {
         BOOST_LOG_SEV(lg, debug) << "Creating io helper methods.";
         io::helper_methods_formatter f(c.properties());
         f.format(stream());
