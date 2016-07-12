@@ -168,17 +168,19 @@ populate(const generalization_details& d, intermediate_model& m) const {
         auto& o(i->second);
 
         /*
-         * All types that are in an inheritance relationship have a
-         * root parent in the details container, including the root
-         * parent itself.
+         * Mark all types that are in an inheritance relationship,
+         * either as a parent or as a child.
          */
-        o.in_inheritance_relationship(true);
+        o.in_inheritance_relationship(o.is_parent() || o.is_child());
 
         if (!o.is_child()) {
             /*
-             * If we have a parent but we are not a child, we must be
-             * the root parent. Do not propagate the recursive
-             * relationship between the root parent and itself.
+             * All types that are in an inheritance relationship have
+             * a root parent in the details container, including the
+             * root parent itself. If we have a parent but we are not
+             * a child, we must be the root parent. Do not propagate
+             * the recursive relationship between the root parent and
+             * itself.
              */
             BOOST_LOG_SEV(lg, debug) << "Type has parents but is not a child: "
                                      << n.id();

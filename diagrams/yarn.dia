@@ -4548,7 +4548,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="-41,78"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-41.05,77.95;-23.51,84.85"/>
+        <dia:rectangle val="-41.05,77.95;-23.51,84.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-41,78"/>
@@ -4557,7 +4557,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:real val="17.440000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#object#</dia:string>
@@ -4733,29 +4733,6 @@ decided instead to use the word object.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, this type provides opaqueness to any type parameters it may have.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#in_inheritance_relationship#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#True if the object is related to at least one other object as a parent or a child.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6967,16 +6944,16 @@ etc.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-32.28,84.8"/>
+        <dia:point val="-32.28,84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-33.03,84.05;-23.545,94.8"/>
+        <dia:rectangle val="-33.03,83.25;-23.545,94.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-32.28,84.8"/>
+        <dia:point val="-32.28,84"/>
         <dia:point val="-32.28,89"/>
         <dia:point val="-23.745,89"/>
         <dia:point val="-23.745,94"/>
@@ -16871,16 +16848,16 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-174,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-174.05,-15.05;-161.9,-7.35"/>
+        <dia:rectangle val="-174.05,-15.05;-160.36,-6.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-174,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="13.59"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.6000000000000005"/>
+        <dia:real val="8.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#Generalisable#</dia:string>
@@ -17108,6 +17085,29 @@ This is used to break cycles where required.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#in_inheritance_relationship#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#True if the object is related to at least one other object as a parent or a child.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -17268,17 +17268,17 @@ This is used to break cycles where required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O138">
       <dia:attribute name="obj_pos">
-        <dia:point val="-167.975,-7.4"/>
+        <dia:point val="-167.205,-6.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-173.657,-7.45;-167.125,14.05"/>
+        <dia:rectangle val="-173.657,-6.65;-166.355,14.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-167.975,-7.4"/>
-        <dia:point val="-167.975,9"/>
+        <dia:point val="-167.205,-6.6"/>
+        <dia:point val="-167.205,9"/>
         <dia:point val="-173.607,9"/>
         <dia:point val="-173.607,14"/>
       </dia:attribute>

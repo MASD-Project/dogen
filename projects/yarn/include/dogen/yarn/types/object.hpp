@@ -78,6 +78,7 @@ public:
         const std::list<dogen::yarn::name>& root_parents,
         const std::list<dogen::yarn::name>& parents,
         const std::list<dogen::yarn::name>& leaves,
+        const bool in_inheritance_relationship,
         const std::list<dogen::yarn::name>& transparent_associations,
         const std::list<dogen::yarn::name>& opaque_associations,
         const bool is_visitable,
@@ -86,8 +87,7 @@ public:
         const dogen::yarn::object_types object_type,
         const std::list<dogen::yarn::name>& modeled_concepts,
         const std::list<dogen::yarn::name>& associative_container_keys,
-        const bool provides_opaqueness,
-        const bool in_inheritance_relationship);
+        const bool provides_opaqueness);
 
 private:
     template<typename Archive>
@@ -229,6 +229,14 @@ public:
     /**@}*/
 
     /**
+     * @brief True if the object is related to at least one other object as a parent or a child.
+     */
+    /**@{*/
+    bool in_inheritance_relationship() const;
+    void in_inheritance_relationship(const bool v);
+    /**@}*/
+
+    /**
      * @brief Elements that are involved in aggregation or composition relationships.
      */
     /**@{*/
@@ -317,14 +325,6 @@ public:
     void provides_opaqueness(const bool v);
     /**@}*/
 
-    /**
-     * @brief True if the object is related to at least one other object as a parent or a child.
-     */
-    /**@{*/
-    bool in_inheritance_relationship() const;
-    void in_inheritance_relationship(const bool v);
-    /**@}*/
-
 public:
     bool operator==(const object& rhs) const;
     bool operator!=(const object& rhs) const {
@@ -350,6 +350,7 @@ private:
     std::list<dogen::yarn::name> root_parents_;
     std::list<dogen::yarn::name> parents_;
     std::list<dogen::yarn::name> leaves_;
+    bool in_inheritance_relationship_;
     std::list<dogen::yarn::name> transparent_associations_;
     std::list<dogen::yarn::name> opaque_associations_;
     bool is_visitable_;
@@ -359,7 +360,6 @@ private:
     std::list<dogen::yarn::name> modeled_concepts_;
     std::list<dogen::yarn::name> associative_container_keys_;
     bool provides_opaqueness_;
-    bool in_inheritance_relationship_;
 };
 
 } }

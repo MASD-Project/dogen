@@ -377,6 +377,7 @@ third line with &quot;quote&quot;
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -401,7 +402,6 @@ third line with &quot;quote&quot;
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<in_inheritance_relationship>0</in_inheritance_relationship>
 			</second>
 		</item>
 		<item>
@@ -725,6 +725,7 @@ a second line
 					<count>0</count>
 					<item_version>0</item_version>
 				</leaves>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -749,7 +750,6 @@ a second line
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
-				<in_inheritance_relationship>0</in_inheritance_relationship>
 			</second>
 		</item>
 	</objects>
