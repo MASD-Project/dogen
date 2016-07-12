@@ -36,6 +36,10 @@ std::list<dogen::quilt::cpp::properties::helper_descriptor> create_std_list_doge
     return r;
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 }
 
 namespace dogen {
@@ -49,6 +53,7 @@ void helper_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.current(create_dogen_quilt_cpp_properties_helper_descriptor(position + 0));
     v.direct_descendants(create_std_list_dogen_quilt_cpp_properties_helper_descriptor(position + 1));
+    v.in_inheritance_relationship(create_bool(position + 2));
 }
 
 helper_properties_generator::result_type

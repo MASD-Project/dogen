@@ -36113,7 +36113,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="388.842,36.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="388.092,36.05;411.193,52.8"/>
+        <dia:rectangle val="388.092,36.05;411.192,52.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36149,7 +36149,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="399,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="398.95,51.95;423.035,55.65"/>
+        <dia:rectangle val="398.95,51.95;423.035,56.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="399,52"/>
@@ -36158,7 +36158,7 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="23.984999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#helper_properties#</dia:string>
@@ -36294,6 +36294,29 @@ main, or from another initialiser.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#in_inheritance_relationship#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -36340,16 +36363,16 @@ main, or from another initialiser.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="399,55.6"/>
+        <dia:point val="399,56.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="380.905,54.85;399.75,63.05"/>
+        <dia:rectangle val="380.905,55.65;399.75,63.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="399,55.6"/>
+        <dia:point val="399,56.4"/>
         <dia:point val="399,63"/>
         <dia:point val="380.955,63"/>
         <dia:point val="380.955,60.4"/>
@@ -36944,7 +36967,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="445.345,57.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="422.935,55.55;446.095,63.05"/>
+        <dia:rectangle val="422.935,56.35;446.095,63.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36953,7 +36976,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="445.345,57.2"/>
         <dia:point val="445.345,63"/>
         <dia:point val="422.985,63"/>
-        <dia:point val="422.985,55.6"/>
+        <dia:point val="422.985,56.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -37404,7 +37427,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="374.19,80"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="373.44,55.55;411.193,80.8"/>
+        <dia:rectangle val="373.44,56.35;411.192,80.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -37413,7 +37436,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="374.19,80"/>
         <dia:point val="374.19,70"/>
         <dia:point val="410.993,70"/>
-        <dia:point val="410.993,55.6"/>
+        <dia:point val="410.993,56.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

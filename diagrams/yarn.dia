@@ -16845,13 +16845,13 @@ This is used to break cycles where required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O135">
       <dia:attribute name="obj_pos">
-        <dia:point val="-174,-15"/>
+        <dia:point val="-175,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-174.05,-15.05;-160.36,-6.55"/>
+        <dia:rectangle val="-175.05,-15.05;-161.36,-6.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-174,-15"/>
+        <dia:point val="-175,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>
@@ -17268,17 +17268,17 @@ This is used to break cycles where required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O138">
       <dia:attribute name="obj_pos">
-        <dia:point val="-167.205,-6.6"/>
+        <dia:point val="-168.205,-6.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-173.657,-6.65;-166.355,14.05"/>
+        <dia:rectangle val="-173.657,-6.65;-167.355,14.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-167.205,-6.6"/>
-        <dia:point val="-167.205,9"/>
+        <dia:point val="-168.205,-6.6"/>
+        <dia:point val="-168.205,9"/>
         <dia:point val="-173.607,9"/>
         <dia:point val="-173.607,14"/>
       </dia:attribute>

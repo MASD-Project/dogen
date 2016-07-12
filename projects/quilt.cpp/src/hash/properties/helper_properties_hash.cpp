@@ -49,6 +49,7 @@ std::size_t helper_properties_hasher::hash(const helper_properties& v) {
 
     combine(seed, v.current());
     combine(seed, hash_std_list_dogen_quilt_cpp_properties_helper_descriptor(v.direct_descendants()));
+    combine(seed, v.in_inheritance_relationship());
 
     return seed;
 }

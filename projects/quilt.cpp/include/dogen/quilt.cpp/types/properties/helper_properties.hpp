@@ -37,15 +37,18 @@ namespace properties {
 
 class helper_properties final {
 public:
-    helper_properties() = default;
     helper_properties(const helper_properties&) = default;
     helper_properties(helper_properties&&) = default;
     ~helper_properties() = default;
 
 public:
+    helper_properties();
+
+public:
     helper_properties(
         const dogen::quilt::cpp::properties::helper_descriptor& current,
-        const std::list<dogen::quilt::cpp::properties::helper_descriptor>& direct_descendants);
+        const std::list<dogen::quilt::cpp::properties::helper_descriptor>& direct_descendants,
+        const bool in_inheritance_relationship);
 
 private:
     template<typename Archive>
@@ -65,6 +68,9 @@ public:
     void direct_descendants(const std::list<dogen::quilt::cpp::properties::helper_descriptor>& v);
     void direct_descendants(const std::list<dogen::quilt::cpp::properties::helper_descriptor>&& v);
 
+    bool in_inheritance_relationship() const;
+    void in_inheritance_relationship(const bool v);
+
 public:
     bool operator==(const helper_properties& rhs) const;
     bool operator!=(const helper_properties& rhs) const {
@@ -78,6 +84,7 @@ public:
 private:
     dogen::quilt::cpp::properties::helper_descriptor current_;
     std::list<dogen::quilt::cpp::properties::helper_descriptor> direct_descendants_;
+    bool in_inheritance_relationship_;
 };
 
 } } } }

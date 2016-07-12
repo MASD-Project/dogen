@@ -25,21 +25,28 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
+helper_properties::helper_properties()
+    : in_inheritance_relationship_(static_cast<bool>(0)) { }
+
 helper_properties::helper_properties(
     const dogen::quilt::cpp::properties::helper_descriptor& current,
-    const std::list<dogen::quilt::cpp::properties::helper_descriptor>& direct_descendants)
+    const std::list<dogen::quilt::cpp::properties::helper_descriptor>& direct_descendants,
+    const bool in_inheritance_relationship)
     : current_(current),
-      direct_descendants_(direct_descendants) { }
+      direct_descendants_(direct_descendants),
+      in_inheritance_relationship_(in_inheritance_relationship) { }
 
 void helper_properties::swap(helper_properties& other) noexcept {
     using std::swap;
     swap(current_, other.current_);
     swap(direct_descendants_, other.direct_descendants_);
+    swap(in_inheritance_relationship_, other.in_inheritance_relationship_);
 }
 
 bool helper_properties::operator==(const helper_properties& rhs) const {
     return current_ == rhs.current_ &&
-        direct_descendants_ == rhs.direct_descendants_;
+        direct_descendants_ == rhs.direct_descendants_ &&
+        in_inheritance_relationship_ == rhs.in_inheritance_relationship_;
 }
 
 helper_properties& helper_properties::operator=(helper_properties other) {
@@ -78,6 +85,14 @@ void helper_properties::direct_descendants(const std::list<dogen::quilt::cpp::pr
 
 void helper_properties::direct_descendants(const std::list<dogen::quilt::cpp::properties::helper_descriptor>&& v) {
     direct_descendants_ = std::move(v);
+}
+
+bool helper_properties::in_inheritance_relationship() const {
+    return in_inheritance_relationship_;
+}
+
+void helper_properties::in_inheritance_relationship(const bool v) {
+    in_inheritance_relationship_ = v;
 }
 
 } } } }

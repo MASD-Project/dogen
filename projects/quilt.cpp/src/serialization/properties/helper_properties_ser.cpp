@@ -40,6 +40,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("current", v.current_);
     ar << make_nvp("direct_descendants", v.direct_descendants_);
+    ar << make_nvp("in_inheritance_relationship", v.in_inheritance_relationship_);
 }
 
 template<typename Archive>
@@ -48,6 +49,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("current", v.current_);
     ar >> make_nvp("direct_descendants", v.direct_descendants_);
+    ar >> make_nvp("in_inheritance_relationship", v.in_inheritance_relationship_);
 }
 
 } }
