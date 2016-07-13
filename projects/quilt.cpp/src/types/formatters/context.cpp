@@ -29,7 +29,7 @@ context::context(
     const settings::element_settings& element_settings,
     const properties::element_properties& element_properties,
     const std::unordered_map<std::string, std::unordered_map<std::string,
-    std::list<std::shared_ptr<formatter_helper_interface>>>>& helpers)
+    std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers)
     : element_settings_(element_settings),
       element_properties_(element_properties),
       helpers_(helpers) { }
@@ -45,7 +45,7 @@ const properties::element_properties& context::element_properties() const {
 const std::unordered_map<
     std::string,
     std::unordered_map<
-        std::string, std::list<std::shared_ptr<formatter_helper_interface>>>>&
+        std::string, std::list<std::shared_ptr<helper_formatter_interface>>>>&
 context::helpers() const {
     return helpers_;
 }

@@ -44,7 +44,7 @@ namespace properties {
 void formatter_properties_repository_factory::initialise_registrar(
     const formatters::container& c, registrar& rg) const {
     BOOST_LOG_SEV(lg, debug) << "Started registering all providers.";
-    for (const auto f : c.all_formatters()) {
+    for (const auto f : c.all_file_formatters()) {
         BOOST_LOG_SEV(lg, debug) << "Registered: "
                                  << f->ownership_hierarchy().formatter_name();
         f->register_inclusion_dependencies_provider(rg);

@@ -28,14 +28,14 @@
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
 
-class enum_formatter_interface : public formatter_interface {
+class enum_formatter_interface : public file_formatter_interface {
 public:
     enum_formatter_interface() = default;
     enum_formatter_interface(const enum_formatter_interface&) = delete;

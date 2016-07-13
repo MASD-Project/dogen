@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
-#include "dogen/quilt.cpp/types/formatters/formatter_helper_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/enum_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/class_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/visitor_formatter_interface.hpp"
@@ -62,11 +62,11 @@ private:
      * @brief Perform common registration.
      */
     void common_registration(
-        std::shared_ptr<formatters::formatter_interface> f);
+        std::shared_ptr<formatters::file_formatter_interface> f);
 
 public:
     void register_formatter_helper(
-        std::shared_ptr<formatter_helper_interface> fh);
+        std::shared_ptr<helper_formatter_interface> fh);
 
 public:
     /**
@@ -140,7 +140,7 @@ public:
         std::string,
         std::unordered_map<std::string,
                            std::list<
-                               std::shared_ptr<formatter_helper_interface>>>>&
+                               std::shared_ptr<helper_formatter_interface>>>>&
     formatter_helpers() const;
 
 private:
@@ -149,7 +149,7 @@ private:
         std::string,
         std::unordered_map<std::string,
                            std::list<
-                               std::shared_ptr<formatter_helper_interface>>>>
+                               std::shared_ptr<helper_formatter_interface>>>>
     formatter_helpers_;
     std::forward_list<dynamic::ownership_hierarchy> ownership_hierarchy_;
 };

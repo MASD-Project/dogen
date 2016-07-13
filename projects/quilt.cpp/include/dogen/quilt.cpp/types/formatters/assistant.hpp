@@ -229,8 +229,8 @@ public:
     std::string comment_inline(const std::string& c) const;
 
 private:
-    std::list<std::shared_ptr<formatters::formatter_helper_interface>>
-    get_helpers_for_formatter(const properties::helper_properties& hp) const;
+    std::list<std::shared_ptr<formatters::helper_formatter_interface>>
+    get_helpers(const properties::helper_properties& hp) const;
 
 public:
     /**

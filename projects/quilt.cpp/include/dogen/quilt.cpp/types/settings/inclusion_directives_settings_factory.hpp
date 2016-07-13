@@ -31,7 +31,6 @@
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
-#include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/settings/inclusion_directives_settings.hpp"
 

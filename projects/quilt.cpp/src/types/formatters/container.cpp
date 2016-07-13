@@ -83,19 +83,19 @@ const std::forward_list<
     return includers_formatters_;
 }
 
-const std::forward_list<std::shared_ptr<formatters::formatter_interface>>&
-container::all_formatters() const {
-    return all_formatters_;
+const std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>&
+container::all_file_formatters() const {
+    return all_file_formatters_;
 }
 
-const std::forward_list<std::shared_ptr<formatters::formatter_interface>>&
-container::all_internal_formatters() const {
-    return all_internal_formatters_;
+const std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>&
+container::all_internal_file_formatters() const {
+    return all_internal_file_formatters_;
 }
 
-const std::forward_list<std::shared_ptr<formatters::formatter_interface>>&
-container::all_external_formatters() const {
-    return all_external_formatters_;
+const std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>&
+container::all_external_file_formatters() const {
+    return all_external_file_formatters_;
 }
 
 } } } }

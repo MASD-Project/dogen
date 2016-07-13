@@ -33,7 +33,7 @@
 #include "dogen/formatters/types/file_properties_workflow.hpp"
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
-#include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/properties/registrar_info.hpp"
 #include "dogen/quilt.cpp/types/properties/includers_info.hpp"
 #include "dogen/quilt.cpp/types/properties/cmakelists_info.hpp"
@@ -80,7 +80,7 @@ public:
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const path_derivatives_repository& pdrp,
         const std::forward_list<
-        std::shared_ptr<formatters::formatter_interface>>& formatters,
+        std::shared_ptr<formatters::file_formatter_interface>>& formatters,
         formatter_properties_repository& fprp,
         const yarn::model& m) const;
 

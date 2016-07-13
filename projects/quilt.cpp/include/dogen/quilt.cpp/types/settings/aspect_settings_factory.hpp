@@ -31,7 +31,6 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
-#include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/settings/aspect_settings.hpp"
 
 namespace dogen {

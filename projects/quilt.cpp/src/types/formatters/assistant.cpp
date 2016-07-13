@@ -342,8 +342,8 @@ std::string assistant::comment_inline(const std::string& c) const {
     return s.str();
 }
 
-std::list<std::shared_ptr<formatters::formatter_helper_interface>> assistant::
-get_helpers_for_formatter(const properties::helper_properties& hp) const {
+std::list<std::shared_ptr<formatters::helper_formatter_interface>>
+assistant::get_helpers(const properties::helper_properties& hp) const {
     /*
      * Helper properties must always have settings, otherwise
      * there is no point to their existence.
@@ -373,7 +373,7 @@ get_helpers_for_formatter(const properties::helper_properties& hp) const {
         BOOST_LOG_SEV(lg, debug) << "Could not find helpers for family: "
                                  << family;
         return std::list<
-            std::shared_ptr<formatters::formatter_helper_interface>
+            std::shared_ptr<formatters::helper_formatter_interface>
             >();
     }
     BOOST_LOG_SEV(lg, debug) << "Found helpers for family: " << family;
@@ -387,7 +387,7 @@ get_helpers_for_formatter(const properties::helper_properties& hp) const {
         BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
                                  << ownership_hierarchy_.formatter_name();
         return std::list<
-            std::shared_ptr<formatters::formatter_helper_interface>
+            std::shared_ptr<formatters::helper_formatter_interface>
             >();
     }
     BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
@@ -497,7 +497,7 @@ void assistant::add_helper_methods() {
     }
 
     for (const auto& hp : context_.element_properties().helper_properties()) {
-        const auto helpers(get_helpers_for_formatter(hp));
+        const auto helpers(get_helpers(hp));
 
         /*
          * Check to see if the helper is enabled, given the system's

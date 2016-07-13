@@ -13,30 +13,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-13 Wed 22:11]
+#+CAPTION: Clock summary at [2016-07-13 Wed 23:19]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *23:56* |       |      | 100.0 |
+| *Total time*                                                                | *24:59* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 23:56   |       |      | 100.0 |
-| Active                                                                      |         | 23:56 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:26 |  10.2 |
-| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   5.6 |
-| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   6.1 |
-| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   5.4 |
-| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   2.0 |
-| COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   1.4 |
+| Stories                                                                     | 24:59   |       |      | 100.0 |
+| Active                                                                      |         | 24:59 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:26 |   9.7 |
+| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   5.4 |
+| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   5.9 |
+| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   5.1 |
+| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   1.9 |
+| COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   1.3 |
 | COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   0.7 |
-| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   3.5 |
-| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   1.9 |
+| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   3.3 |
+| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   1.8 |
 | COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.1 |
-| COMPLETED Refactor general settings                                         |         |       | 5:50 |  24.4 |
-| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   5.8 |
-| COMPLETED Create a IO settings class                                        |         |       | 1:15 |   5.2 |
-| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   5.8 |
+| COMPLETED Refactor general settings                                         |         |       | 5:50 |  23.3 |
+| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   5.6 |
+| COMPLETED Create a IO settings class                                        |         |       | 1:15 |   5.0 |
+| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   5.6 |
 | COMPLETED Usage of rev-list in version causes problems                      |         |       | 0:03 |   0.2 |
-| STARTED Enable IO helpers for types                                         |         |       | 4:41 |  19.6 |
+| CANCELLED Consider not running initialisers in a static context             |         |       | 0:10 |   0.7 |
+| COMPLETED Refactor formatter interfaces                                     |         |       | 0:36 |   2.4 |
+| STARTED Move formatter helpers into formatter container                     |         |       | 0:04 |   0.3 |
+| STARTED Enable IO helpers for types                                         |         |       | 4:54 |  19.6 |
 | STARTED Implement IO helper methods with new helper infrastructure          |         |       | 0:15 |   1.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -531,7 +534,50 @@ current commit in master rather than the latest one.
 The current workaround is to manually sett the minor version just
 before closing the sprint and then reset it back.
 
+*** CANCELLED Consider not running initialisers in a static context   :story:
+    CLOSED: [2016-07-13 Wed 22:35]
+    CLOCK: [2016-07-13 Wed 22:25]--[2016-07-13 Wed 22:35] =>  0:10
+
+*Rationale*: Since the objective of this exercise is just to log
+registered types, we can just implement some IO for this.
+
+There is no particular reason to trigger initialisation in a static
+context. See what happens if we move it to normal execution. This
+means we can log registrations.
+
+Actually we are initialising in a regular function, but we are doing
+it before logging is available. Try reordering this.
+
+This is not so easy for the tests: each test has its own log file and
+so the log initialisation is done on a test by test basis; however,
+static state can only be initialised once. We could have a flag ("do
+not log"?) and pass that through to the initialisers, but then things
+start to get a bit too messy.
+
+*** COMPLETED Refactor formatter interfaces                           :story:
+    CLOSED: [2016-07-13 Wed 23:19]
+    CLOCK: [2016-07-13 Wed 22:43]--[2016-07-13 Wed 23:19] =>  0:36
+
+There are two kinds of formatters:
+
+- file formatters: generate a whole file.
+- helper formatters: generate the helper aspect.
+
+Rename the interfaces accordingly and update diagram.
+
+*** STARTED Move formatter helpers into formatter container           :story:
+    CLOCK: [2016-07-13 Wed 22:37]--[2016-07-13 Wed 22:41] =>  0:04
+
+For some reason we placed them directly under the registrar. Move them
+to the container.
+
+*** Add IO to formatter container                                     :story:
+
+We need some kind of JSON dump of the formatter container telling us
+what types have been registered.
+
 *** STARTED Enable IO helpers for types                               :story:
+    CLOCK: [2016-07-13 Wed 22:11]--[2016-07-13 Wed 22:24] =>  0:13
     CLOCK: [2016-07-13 Wed 21:43]--[2016-07-13 Wed 22:11] =>  0:28
     CLOCK: [2016-07-13 Wed 18:46]--[2016-07-13 Wed 19:15] =>  0:29
     CLOCK: [2016-07-13 Wed 18:25]--[2016-07-13 Wed 18:45] =>  0:17

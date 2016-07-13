@@ -300,7 +300,7 @@ make_includers(
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const path_derivatives_repository& pdrp,
     const std::forward_list<
-    std::shared_ptr<formatters::formatter_interface>>& formatters,
+    std::shared_ptr<formatters::file_formatter_interface>>& formatters,
     formatter_properties_repository& fprp,
     const yarn::model& m) const {
 

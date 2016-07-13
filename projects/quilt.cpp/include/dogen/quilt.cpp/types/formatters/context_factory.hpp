@@ -43,7 +43,7 @@ public:
         const std::unordered_map<
         std::string, std::unordered_map<
         std::string,
-        std::list<std::shared_ptr<formatter_helper_interface>>>>& helpers);
+        std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers);
 
 private:
     const properties::element_properties&
@@ -63,7 +63,7 @@ private:
         std::unordered_map<
             std::string,
             std::list<
-                std::shared_ptr<formatter_helper_interface>>>> empty_helpers_;
+                std::shared_ptr<helper_formatter_interface>>>> empty_helpers_;
     static const properties::element_properties empty_element_properties_;
     const settings::element_settings_repository& element_settings_;
     const properties::element_properties_repository& element_properties_;
@@ -71,7 +71,7 @@ private:
         std::string,
         std::unordered_map<std::string,
                            std::list<
-                               std::shared_ptr<formatter_helper_interface>>>>&
+                               std::shared_ptr<helper_formatter_interface>>>>&
         formatter_helpers_;
 };
 

@@ -28,7 +28,7 @@
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/class_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/enum_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/visitor_formatter_interface.hpp"
@@ -137,22 +137,28 @@ public:
 
 public:
     /**
-     * @brief Returns all available formatters.
+     * @brief Returns all available file formatters.
      */
-    const std::forward_list<std::shared_ptr<formatters::formatter_interface>>&
-    all_formatters() const;
+    const std::forward_list<
+        std::shared_ptr<formatters::file_formatter_interface>
+    >&
+    all_file_formatters() const;
+
+    /**
+     * @brief Returns all internal file formatters.
+     */
+    const std::forward_list<
+        std::shared_ptr<formatters::file_formatter_interface>
+    >&
+    all_internal_file_formatters() const;
 
     /**
      * @brief Returns all internal formatters.
      */
-    const std::forward_list<std::shared_ptr<formatters::formatter_interface>>&
-        all_internal_formatters() const;
-
-    /**
-     * @brief Returns all internal formatters.
-     */
-    const std::forward_list<std::shared_ptr<formatters::formatter_interface>>&
-        all_external_formatters() const;
+    const std::forward_list<
+        std::shared_ptr<formatters::file_formatter_interface>
+    >&
+    all_external_file_formatters() const;
 
 private:
     std::forward_list<std::shared_ptr<formatters::class_formatter_interface>>
@@ -180,12 +186,12 @@ private:
     std::forward_list<std::shared_ptr<
         formatters::includers_formatter_interface> >
     includers_formatters_;
-    std::forward_list<std::shared_ptr<formatters::formatter_interface>>
-        all_formatters_;
-    std::forward_list<std::shared_ptr<formatters::formatter_interface>>
-        all_internal_formatters_;
-    std::forward_list<std::shared_ptr<formatters::formatter_interface>>
-        all_external_formatters_;
+    std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>
+        all_file_formatters_;
+    std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>
+        all_internal_file_formatters_;
+    std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>
+        all_external_file_formatters_;
 };
 
 } } } }

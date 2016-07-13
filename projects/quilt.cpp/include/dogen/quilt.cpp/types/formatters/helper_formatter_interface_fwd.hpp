@@ -18,13 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formatters/formatter_helper_interface.hpp"
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_HELPER_FORMATTER_INTERFACE_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_HELPER_FORMATTER_INTERFACE_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
 
-formatter_helper_interface::~formatter_helper_interface() noexcept { }
+class helper_formatter_interface;
 
 } } } }
+
+#endif

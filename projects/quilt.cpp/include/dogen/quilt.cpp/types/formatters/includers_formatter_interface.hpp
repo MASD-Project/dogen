@@ -28,14 +28,14 @@
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/properties/includers_info.hpp"
-#include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
 
-class includers_formatter_interface : public formatter_interface {
+class includers_formatter_interface : public file_formatter_interface {
 public:
     includers_formatter_interface() = default;
     includers_formatter_interface(

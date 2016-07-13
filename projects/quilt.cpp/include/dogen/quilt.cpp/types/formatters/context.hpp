@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include "dogen/quilt.cpp/types/settings/element_settings.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties.hpp"
-#include "dogen/quilt.cpp/types/formatters/formatter_helper_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -47,7 +47,7 @@ public:
         const settings::element_settings& element_settings,
         const properties::element_properties& element_properties,
         const std::unordered_map<std::string, std::unordered_map<std::string,
-        std::list<std::shared_ptr<formatter_helper_interface>>>>& helpers);
+        std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers);
 
 public:
     const settings::element_settings& element_settings() const;
@@ -56,7 +56,7 @@ public:
         std::string,
         std::unordered_map<
             std::string,
-            std::list<std::shared_ptr<formatter_helper_interface>>>>&
+            std::list<std::shared_ptr<helper_formatter_interface>>>>&
         helpers() const;
 
 private:
@@ -66,7 +66,7 @@ private:
         std::string,
         std::unordered_map<
             std::string, std::list<
-                             std::shared_ptr<formatter_helper_interface>>>>&
+                             std::shared_ptr<helper_formatter_interface>>>>&
     helpers_;
 };
 

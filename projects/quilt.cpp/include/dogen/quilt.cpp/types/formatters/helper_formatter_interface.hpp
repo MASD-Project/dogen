@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_FORMATTER_HELPER_INTERFACE_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_FORMATTER_HELPER_INTERFACE_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_HELPER_FORMATTER_INTERFACE_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_HELPER_FORMATTER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,12 +36,12 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-class formatter_helper_interface {
+class helper_formatter_interface {
 public:
-    formatter_helper_interface() = default;
-    formatter_helper_interface(const formatter_helper_interface&) = delete;
-    formatter_helper_interface(formatter_helper_interface&&) = default;
-    virtual ~formatter_helper_interface() noexcept = 0;
+    helper_formatter_interface() = default;
+    helper_formatter_interface(const helper_formatter_interface&) = delete;
+    helper_formatter_interface(helper_formatter_interface&&) = default;
+    virtual ~helper_formatter_interface() noexcept = 0;
 
 public:
     virtual std::string family() const = 0;

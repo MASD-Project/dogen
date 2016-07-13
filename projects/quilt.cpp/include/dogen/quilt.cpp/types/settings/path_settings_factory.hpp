@@ -35,7 +35,7 @@
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_types.hpp"
-#include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -49,7 +49,7 @@ class path_settings_factory {
 public:
     path_settings_factory(const dynamic::repository& rp,
         const std::forward_list<
-        std::shared_ptr<formatters::formatter_interface>>& formatters);
+        std::shared_ptr<formatters::file_formatter_interface>>& formatters);
 
 private:
     /**
@@ -94,7 +94,7 @@ private:
      */
     field_definitions make_field_definitions(
         const dynamic::repository& rp,
-        const formatters::formatter_interface& f) const;
+        const formatters::file_formatter_interface& f) const;
 
     /**
      * @brief Generates all of the formatter , using the
@@ -103,7 +103,8 @@ private:
     std::unordered_map<std::string, field_definitions>
     make_field_definitions(const dynamic::repository& rp,
         const std::forward_list<
-        std::shared_ptr<formatters::formatter_interface>>& formatters) const;
+            std::shared_ptr<formatters::file_formatter_interface>
+        >& formatters) const;
 
 private:
     /**

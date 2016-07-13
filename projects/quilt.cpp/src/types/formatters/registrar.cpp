@@ -77,14 +77,14 @@ void registrar::validate() const {
             registrar_error(no_forward_declarations_formatters));
     }
 
-    if (fc.all_formatters().empty()) {
+    if (fc.all_file_formatters().empty()) {
         BOOST_LOG_SEV(lg, error) << no_all_formatters;
         BOOST_THROW_EXCEPTION(registrar_error(no_all_formatters));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
     BOOST_LOG_SEV(lg, debug) << "Found a total of "
-                             << size(fc.all_formatters())
+                             << size(fc.all_file_formatters())
                              << " registered formatter(s).";
 
     log_container_sizes("class formatters", fc.class_formatters());
@@ -107,18 +107,18 @@ void registrar::validate() const {
 }
 
 void registrar::
-common_registration(std::shared_ptr<formatters::formatter_interface> f) {
+common_registration(std::shared_ptr<formatters::file_formatter_interface> f) {
     ownership_hierarchy_.push_front(f->ownership_hierarchy());
-    formatter_container_.all_formatters_.push_front(f);
+    formatter_container_.all_file_formatters_.push_front(f);
     using ot = properties::origin_types;
     if (f->formattable_origin_type() == ot::internal)
-        formatter_container_.all_internal_formatters_.push_front(f);
+        formatter_container_.all_internal_file_formatters_.push_front(f);
     else if (f->formattable_origin_type() == ot::external)
-        formatter_container_.all_external_formatters_.push_front(f);
+        formatter_container_.all_external_file_formatters_.push_front(f);
 }
 
 void registrar::register_formatter_helper(
-    std::shared_ptr<formatter_helper_interface> fh) {
+    std::shared_ptr<helper_formatter_interface> fh) {
 
     // note: not logging by design
     if (!fh)
@@ -242,7 +242,7 @@ const std::unordered_map<
     std::string, std::unordered_map<
                      std::string,
                      std::list<
-                         std::shared_ptr<formatter_helper_interface>>>>&
+                         std::shared_ptr<helper_formatter_interface>>>>&
 registrar::formatter_helpers() const {
     return formatter_helpers_;
 }

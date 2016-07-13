@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_FORMATTER_INTERFACE_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_FILE_FORMATTER_INTERFACE_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_FILE_FORMATTER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,12 +36,12 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-class formatter_interface {
+class file_formatter_interface {
 public:
-    formatter_interface() = default;
-    formatter_interface(const formatter_interface&) = delete;
-    formatter_interface(formatter_interface&&) = default;
-    virtual ~formatter_interface() noexcept = 0;
+    file_formatter_interface() = default;
+    file_formatter_interface(const file_formatter_interface&) = delete;
+    file_formatter_interface(file_formatter_interface&&) = default;
+    virtual ~file_formatter_interface() noexcept = 0;
 
 public:
     /**

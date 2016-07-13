@@ -26,7 +26,7 @@
 #endif
 
 #include <ostream>
-#include "dogen/quilt.cpp/types/formatters/formatter_helper_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -34,7 +34,7 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-class smart_pointer_helper : public formatter_helper_interface {
+class smart_pointer_helper : public helper_formatter_interface {
 public:
     std::string family() const;
     std::list<std::string> owning_formatters() const;

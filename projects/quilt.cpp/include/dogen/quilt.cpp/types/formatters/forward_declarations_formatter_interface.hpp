@@ -28,14 +28,15 @@
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/properties/forward_declarations_info.hpp"
-#include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
 
-class forward_declarations_formatter_interface : public formatter_interface {
+class forward_declarations_formatter_interface
+    : public file_formatter_interface {
 public:
     forward_declarations_formatter_interface() = default;
     forward_declarations_formatter_interface(

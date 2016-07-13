@@ -46,13 +46,13 @@ const std::unordered_map<
     std::string,
     std::unordered_map<
         std::string,
-        std::list<std::shared_ptr<formatter_helper_interface>>>>
+        std::list<std::shared_ptr<helper_formatter_interface>>>>
     context_factory::
     empty_helpers_ = std::unordered_map<
     std::string,
     std::unordered_map<
         std::string,
-        std::list<std::shared_ptr<formatter_helper_interface>>>>();
+        std::list<std::shared_ptr<helper_formatter_interface>>>>();
 
 context_factory::context_factory(
     const settings::element_settings_repository& esrp,
@@ -60,7 +60,7 @@ context_factory::context_factory(
     const std::unordered_map<
     std::string, std::unordered_map<
     std::string,
-    std::list<std::shared_ptr<formatter_helper_interface>>>>& helpers)
+    std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers)
     : element_settings_(esrp), element_properties_(eprp),
       formatter_helpers_(helpers) {}
 

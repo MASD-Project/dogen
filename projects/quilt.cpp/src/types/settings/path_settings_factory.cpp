@@ -43,7 +43,7 @@ namespace settings {
 path_settings_factory::
 path_settings_factory(const dynamic::repository& rp,
     const std::forward_list<
-    std::shared_ptr<formatters::formatter_interface>>& formatters)
+    std::shared_ptr<formatters::file_formatter_interface>>& formatters)
     : field_definitions_(make_field_definitions(rp, formatters)) { }
 
 void path_settings_factory::setup_top_level_fields(
@@ -90,7 +90,7 @@ void path_settings_factory::setup_formatter_fields(
 path_settings_factory::field_definitions
 path_settings_factory::make_field_definitions(
     const dynamic::repository& rp,
-    const formatters::formatter_interface& f) const {
+    const formatters::file_formatter_interface& f) const {
 
     field_definitions r;
     r.file_type = f.file_type();
@@ -107,7 +107,7 @@ std::unordered_map<std::string, path_settings_factory::field_definitions>
 path_settings_factory::make_field_definitions(
     const dynamic::repository& rp,
     const std::forward_list<
-    std::shared_ptr<formatters::formatter_interface>>& formatters) const {
+    std::shared_ptr<formatters::file_formatter_interface>>& formatters) const {
     std::unordered_map<std::string, field_definitions> r;
 
     for (const auto f : formatters) {

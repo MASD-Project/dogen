@@ -28,14 +28,14 @@
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/yarn/types/visitor.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/formatters/formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
 
-class visitor_formatter_interface : public formatter_interface {
+class visitor_formatter_interface : public file_formatter_interface {
 public:
     visitor_formatter_interface() = default;
     visitor_formatter_interface(const visitor_formatter_interface&) = delete;
