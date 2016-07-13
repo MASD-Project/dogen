@@ -98,4 +98,13 @@ container::all_external_file_formatters() const {
     return all_external_file_formatters_;
 }
 
+const std::unordered_map<
+    std::string, std::unordered_map<
+                     std::string,
+                     std::list<
+                         std::shared_ptr<helper_formatter_interface>>>>&
+    container::helper_formatters() const {
+    return helper_formatters_;
+}
+
 } } } }

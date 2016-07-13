@@ -100,7 +100,7 @@ void registrar::validate() const {
     log_container_sizes("Includers formatters", fc.includers_formatters());
 
     BOOST_LOG_SEV(lg, debug) << "Registered formatter helpers: "
-                             << formatter_helpers_.size();
+                             << formatter_container_.helper_formatters().size();
 
     BOOST_LOG_SEV(lg, debug) << "Ownership hierarchy: "
                              << ownership_hierarchy_;
@@ -124,7 +124,7 @@ void registrar::register_formatter_helper(
     if (!fh)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter_helper));
 
-    auto& f(formatter_helpers_[fh->family()]);
+    auto& f(formatter_container_.helper_formatters_[fh->family()]);
     for (const auto& of : fh->owning_formatters())
         f[of].push_back(fh);
 }
@@ -244,7 +244,7 @@ const std::unordered_map<
                      std::list<
                          std::shared_ptr<helper_formatter_interface>>>>&
 registrar::formatter_helpers() const {
-    return formatter_helpers_;
+    return formatter_container_.helper_formatters();
 }
 
 } } } }

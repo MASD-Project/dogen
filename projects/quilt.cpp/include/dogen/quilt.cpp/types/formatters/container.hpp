@@ -39,6 +39,7 @@
 #include "dogen/quilt.cpp/types/formatters/registrar_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/includers_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/forward_declarations_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -160,6 +161,14 @@ public:
     >&
     all_external_file_formatters() const;
 
+public:
+    const std::unordered_map<
+    std::string,
+    std::unordered_map<std::string,
+                       std::list<
+                           std::shared_ptr<helper_formatter_interface>>>>&
+        helper_formatters() const;
+
 private:
     std::forward_list<std::shared_ptr<formatters::class_formatter_interface>>
     class_formatters_;
@@ -192,6 +201,12 @@ private:
         all_internal_file_formatters_;
     std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>
         all_external_file_formatters_;
+    std::unordered_map<
+        std::string,
+        std::unordered_map<std::string,
+                           std::list<
+                               std::shared_ptr<helper_formatter_interface>>>>
+        helper_formatters_;
 };
 
 } } } }

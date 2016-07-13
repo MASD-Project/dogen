@@ -145,12 +145,6 @@ public:
 
 private:
     container formatter_container_;
-    std::unordered_map<
-        std::string,
-        std::unordered_map<std::string,
-                           std::list<
-                               std::shared_ptr<helper_formatter_interface>>>>
-    formatter_helpers_;
     std::forward_list<dynamic::ownership_hierarchy> ownership_hierarchy_;
 };
 
