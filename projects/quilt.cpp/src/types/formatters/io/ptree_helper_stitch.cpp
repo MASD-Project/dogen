@@ -50,9 +50,9 @@ std::string ptree_helper::function_name() const {
     return r;
 }
 
-bool ptree_helper::is_enabled(const assistant& /*a*/,
-    const properties::helper_properties& /*hp*/) const {
-    return true;
+bool ptree_helper::is_enabled(const assistant& a,
+    const properties::helper_properties& hp) const {
+    return a.is_streaming_enabled(hp);
 }
 
 void ptree_helper::

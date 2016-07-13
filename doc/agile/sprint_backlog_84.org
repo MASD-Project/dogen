@@ -13,31 +13,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-13 Wed 19:14]
+#+CAPTION: Clock summary at [2016-07-13 Wed 22:11]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *23:28* |       |      | 100.0 |
+| *Total time*                                                                | *23:56* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 23:28   |       |      | 100.0 |
-| Active                                                                      |         | 23:28 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:26 |  10.4 |
-| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   5.8 |
-| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   6.2 |
-| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   5.5 |
-| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   2.1 |
+| Stories                                                                     | 23:56   |       |      | 100.0 |
+| Active                                                                      |         | 23:56 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:26 |  10.2 |
+| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   5.6 |
+| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   6.1 |
+| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   5.4 |
+| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   2.0 |
 | COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   1.4 |
 | COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   0.7 |
-| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   3.6 |
+| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   3.5 |
 | COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   1.9 |
 | COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.1 |
-| COMPLETED Refactor general settings                                         |         |       | 5:50 |  24.9 |
-| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   6.0 |
-| COMPLETED Create a IO settings class                                        |         |       | 1:15 |   5.3 |
-| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   6.0 |
+| COMPLETED Refactor general settings                                         |         |       | 5:50 |  24.4 |
+| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   5.8 |
+| COMPLETED Create a IO settings class                                        |         |       | 1:15 |   5.2 |
+| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   5.8 |
 | COMPLETED Usage of rev-list in version causes problems                      |         |       | 0:03 |   0.2 |
-| STARTED Enable IO helpers for types                                         |         |       | 4:13 |  18.0 |
-| STARTED Implement IO helper methods with new helper infrastructure          |         |       | 0:15 |   1.1 |
+| STARTED Enable IO helpers for types                                         |         |       | 4:41 |  19.6 |
+| STARTED Implement IO helper methods with new helper infrastructure          |         |       | 0:15 |   1.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -532,6 +532,7 @@ The current workaround is to manually sett the minor version just
 before closing the sprint and then reset it back.
 
 *** STARTED Enable IO helpers for types                               :story:
+    CLOCK: [2016-07-13 Wed 21:43]--[2016-07-13 Wed 22:11] =>  0:28
     CLOCK: [2016-07-13 Wed 18:46]--[2016-07-13 Wed 19:15] =>  0:29
     CLOCK: [2016-07-13 Wed 18:25]--[2016-07-13 Wed 18:45] =>  0:17
     CLOCK: [2016-07-13 Wed 07:51]--[2016-07-13 Wed 08:39] =>  0:48

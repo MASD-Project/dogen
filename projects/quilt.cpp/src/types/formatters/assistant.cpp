@@ -396,8 +396,29 @@ get_helpers_for_formatter(const properties::helper_properties& hp) const {
     return j->second;
 }
 
+bool assistant::is_io() const {
+    const auto fn(ownership_hierarchy_.facet_name());
+    return formatters::io::traits::facet_name()  == fn;
+}
+
 bool assistant::
-is_streaming_enabled_in_types(const properties::helper_properties& hp) const {
+is_streaming_enabled(const properties::helper_properties& hp) const {
+    /*
+     * If the IO facet is globally disabled, we don't need streaming.
+     */
+    if (!is_io_enabled())
+        return false;
+
+    /*
+     * If we are in the IO facet, we'll always need streaming.
+     */
+    if (is_io())
+        return true;
+
+    /*
+     * If we are in the types class implementation and we are in an
+     * inheritance relationship, we'll need streaming.
+     */
     using tt = formatters::types::traits;
     const auto cifn(tt::class_implementation_formatter_name());
     const auto fn(ownership_hierarchy_.formatter_name());

@@ -30,9 +30,9 @@ std::string smart_pointer_helper::function_name() const {
     return r;
 }
 
-bool smart_pointer_helper::is_enabled(const assistant& /*a*/,
-const properties::helper_properties& /*hp*/) const {
-    return true;
+bool smart_pointer_helper::is_enabled(const assistant& a,
+const properties::helper_properties& hp) const {
+    return a.is_streaming_enabled(hp);
 }
 
 void smart_pointer_helper::

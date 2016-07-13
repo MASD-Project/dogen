@@ -131,7 +131,7 @@ public:
     bool is_serialization_enabled() const;
 
     /**
-     * @brief Returns true if io is enabled.
+     * @brief Returns true if io is enabled globally.
      */
     bool is_io_enabled() const;
 
@@ -157,12 +157,13 @@ public:
      */
     bool is_xml_serialization_disabled() const;
 
+    bool is_io() const;
+
     /**
      * @brief Returns true if the types facet is required to support
-     * streaming.
+     * streaming or if we are in io facet.
      */
-    bool is_streaming_enabled_in_types(
-        const properties::helper_properties& hp) const;
+    bool is_streaming_enabled(const properties::helper_properties& hp) const;
 
 public:
     /**
