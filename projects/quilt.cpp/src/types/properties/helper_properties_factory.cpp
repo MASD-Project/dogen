@@ -25,6 +25,7 @@
 #include "dogen/quilt.cpp/types/properties/name_builder.hpp"
 #include "dogen/quilt.cpp/types/properties/building_error.hpp"
 #include "dogen/quilt.cpp/io/properties/helper_properties_io.hpp"
+#include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties_factory.hpp"
 
 namespace {
@@ -34,6 +35,8 @@ static logger lg(
     logger_factory("quilt.cpp.properties.helper_properties_factory"));
 
 const std::string qn_missing("Could not find qualified name for language.");
+const std::string empty_identifiable(
+    "Identifiable was not generated correctly and is empty.");
 const std::string descriptor_expected(
     "Child name tree has no associated helper descriptor");
 
@@ -66,9 +69,13 @@ helper_properties_factory::helper_properties_factory(
 boost::optional<settings::helper_settings> helper_properties_factory::
 helper_settings_for_id(const std::string& id) const {
     const auto i(helper_settings_.by_id().find(id));
-    if (i == helper_settings_.by_id().end())
+    if (i == helper_settings_.by_id().end()) {
+        BOOST_LOG_SEV(lg, debug) << "No helper settings for type: " << id;
         return boost::optional<settings::helper_settings>();
+    }
 
+    BOOST_LOG_SEV(lg, debug) << "Found helper settings for type: " << id
+                             << ". Settings: " << i->second;
     return i->second;
 }
 
@@ -87,7 +94,7 @@ streaming_settings_for_id(const std::string& id) const {
 }
 
 boost::optional<helper_descriptor>
-helper_properties_factory::make(
+helper_properties_factory::make(const bool in_inheritance_relationship,
     const yarn::name_tree& nt, const bool is_top_level,
     std::list<helper_properties>& properties) const {
     const auto id(nt.current().id());
@@ -102,7 +109,7 @@ helper_properties_factory::make(
     const bool requires_helper(hs);
 
     if (is_top_level && !requires_helper) {
-        BOOST_LOG_SEV(lg, debug) << "No helper settings for type: "
+        BOOST_LOG_SEV(lg, debug) << "Helper not required for type: "
                                  << id << ". Ignoring attribute.";
         return boost::optional<helper_descriptor>();
     }
@@ -144,6 +151,9 @@ helper_properties_factory::make(
     helper_properties hp;
     hp.current(r);
 
+    const auto iir(in_inheritance_relationship);
+    hp.in_inheritance_relationship(iir);
+
     /*
      * Note that we are processing the children even though the parent
      * may not require a helper. This is overcaution and may even be
@@ -158,10 +168,16 @@ helper_properties_factory::make(
          * descendants (and just the direct descendants, not its
          * children). If we have a child, we must have a descriptor.
          */
-        const auto dd(make(c, false /*is_top_level*/, properties));
+        const auto dd(make(iir, c, false /*is_top_level*/, properties));
         if (!dd) {
             BOOST_LOG_SEV(lg, error) << descriptor_expected;
             BOOST_THROW_EXCEPTION(building_error(descriptor_expected));
+        }
+
+        const auto ident(dd->name_tree_identifiable());
+        if (ident.empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_identifiable;
+            BOOST_THROW_EXCEPTION(building_error(empty_identifiable));
         }
 
         /*
@@ -169,7 +185,6 @@ helper_properties_factory::make(
          * tree once, even for children. This means that a pair of two
          * strings should collapse to just one helper for string.
          */
-        const auto ident(dd->name_tree_identifiable());
         if (done.find(ident) != done.end()) {
             BOOST_LOG_SEV(lg, debug) << "Name tree already processed: "
                                      << ident;
@@ -192,7 +207,8 @@ helper_properties_factory::make(
 }
 
 std::list<helper_properties> helper_properties_factory::
-make(const std::list<yarn::attribute>& attributes) const {
+make(const bool in_inheritance_relationship,
+    const std::list<yarn::attribute>& attributes) const {
     if (attributes.empty()) {
         BOOST_LOG_SEV(lg, debug) << "No properties found.";
         return std::list<helper_properties>();
@@ -200,8 +216,10 @@ make(const std::list<yarn::attribute>& attributes) const {
 
     BOOST_LOG_SEV(lg, debug) << "Properties found: " << attributes.size();
     std::list<helper_properties> properties;
-    for (const auto a : attributes)
-        make(a.parsed_type(), true/*is_top_level*/, properties);
+    for (const auto a : attributes) {
+        const auto iir(in_inheritance_relationship);
+        make(iir, a.parsed_type(), true/*is_top_level*/, properties);
+    }
 
     std::list<helper_properties> r;
     if (properties.empty()) {
@@ -212,6 +230,11 @@ make(const std::list<yarn::attribute>& attributes) const {
     std::unordered_set<std::string> done;
     for (const auto& i : properties) {
         const auto ident(i.current().name_tree_identifiable());
+        if (ident.empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_identifiable;
+            BOOST_THROW_EXCEPTION(building_error(empty_identifiable));
+        }
+
         if (done.find(ident) != done.end()) {
             BOOST_LOG_SEV(lg, debug) << "Name tree already processed: "
                                      << ident;

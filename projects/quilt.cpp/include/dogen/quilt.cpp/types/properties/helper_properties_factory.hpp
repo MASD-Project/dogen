@@ -58,12 +58,13 @@ private:
 
 private:
     boost::optional<helper_descriptor>
-    make(const yarn::name_tree& nt, const bool is_top_level,
-        std::list<helper_properties>& properties) const;
+    make(const bool in_inheritance_relationship, const yarn::name_tree& nt,
+        const bool is_top_level, std::list<helper_properties>& properties) const;
 
 public:
     std::list<helper_properties>
-    make(const std::list<yarn::attribute>& attributes) const;
+    make(const bool in_inheritance_relationship,
+        const std::list<yarn::attribute>& attributes) const;
 
 private:
     const std::unordered_set<std::string>& primitive_ids_;

@@ -26,7 +26,6 @@
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/concept.hpp"
 #include "dogen/quilt.cpp/types/properties/building_error.hpp"
 #include "dogen/quilt.cpp/io/properties/helper_properties_repository_io.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties_factory.hpp"
@@ -79,31 +78,9 @@ class generator final : public yarn::element_visitor {
 public:
     explicit generator(const helper_properties_factory& f) : factory_(f) {}
 
-private:
-    template<typename YarnStateful>
-    void generate(const YarnStateful& s) {
-        if (s.generation_type() == yarn::generation_types::no_generation)
-            return;
-
-        const auto id(s.name().id());
-        BOOST_LOG_SEV(lg, debug) << "Creating helper instances for" << id;
-
-
-        const auto hi(factory_.make(s.local_attributes()));
-        const auto pair(std::make_pair(id, hi));
-        auto& hibn(result_.by_id());
-        const auto res(hibn.insert(pair));
-        if (!res.second) {
-            BOOST_LOG_SEV(lg, error) << duplicate_name << id;
-            BOOST_THROW_EXCEPTION(building_error(duplicate_name + id));
-        }
-        BOOST_LOG_SEV(lg, debug) << "Done creating helper instances for" << id;
-    }
-
 public:
     using yarn::element_visitor::visit;
-    void visit(const dogen::yarn::concept& c) { generate(c); }
-    void visit(const dogen::yarn::object& o) { generate(o); }
+    void visit(const dogen::yarn::object& o);
 
 public:
     const helper_properties_repository& result() const { return result_; }
@@ -113,6 +90,24 @@ private:
     helper_properties_repository result_;
 };
 
+void generator::visit(const dogen::yarn::object& o) {
+    if (o.generation_type() == yarn::generation_types::no_generation)
+        return;
+
+    const auto id(o.name().id());
+    BOOST_LOG_SEV(lg, debug) << "Creating helper instances for" << id;
+
+    const auto iir(o.in_inheritance_relationship());
+    const auto hp(factory_.make(iir, o.local_attributes()));
+    const auto pair(std::make_pair(id, hp));
+    auto& hpbn(result_.by_id());
+    if (!hpbn.insert(pair).second) {
+        BOOST_LOG_SEV(lg, error) << duplicate_name << id;
+        BOOST_THROW_EXCEPTION(building_error(duplicate_name + id));
+    }
+    BOOST_LOG_SEV(lg, debug) << "Done creating helper instances for" << id;
+}
+
 }
 
 helper_properties_repository
@@ -120,7 +115,7 @@ helper_properties_repository_factory::make(const yarn::model& m,
     const settings::helper_settings_repository& hsrp,
     const settings::streaming_settings_repository& ssrp) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Started creating helper instances.";
+    BOOST_LOG_SEV(lg, debug) << "Started creating helper repository.";
 
     primitve_ids_generator pig;
     for (const auto& pair : m.elements())
@@ -133,7 +128,7 @@ helper_properties_repository_factory::make(const yarn::model& m,
         e.accept(g);
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished creating helper instances:"
+    BOOST_LOG_SEV(lg, debug) << "Finished creating helper repository:"
                              << g.result();
     return g.result();
 }
