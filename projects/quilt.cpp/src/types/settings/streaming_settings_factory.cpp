@@ -38,16 +38,16 @@ make_field_definitions(const dynamic::repository& rp) {
     field_definitions r;
 
     const dynamic::repository_selector s(rp);
-    const auto scm(traits::cpp::helper::string_conversion_method());
+    const auto scm(traits::cpp::streaming::string_conversion_method());
     r.string_conversion_method = s.select_field_by_name(scm);
 
-    const auto rq(traits::cpp::helper::requires_quoting());
+    const auto rq(traits::cpp::streaming::requires_quoting());
     r.requires_quoting = s.select_field_by_name(rq);
 
-    const auto ruc(traits::cpp::helper::remove_unprintable_characters());
+    const auto ruc(traits::cpp::streaming::remove_unprintable_characters());
     r.remove_unprintable_characters = s.select_field_by_name(ruc);
 
-    const auto rd(traits::cpp::helper::requires_dereferencing());
+    const auto rd(traits::cpp::streaming::requires_dereferencing());
     r.requires_dereferencing = s.select_field_by_name(rd);
 
     return r;

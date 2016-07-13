@@ -127,7 +127,9 @@ struct traits {
              * @brief Family of the helper methods.
              */
             static std::string family();
+        };
 
+        struct streaming {
             /**
              * @brief Method to convert object to a string, if any.
              */
