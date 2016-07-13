@@ -38,7 +38,7 @@ namespace settings {
 
 streaming_settings_repository streaming_settings_repository_factory::
 make(const dynamic::repository& rp, const yarn::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Started making helper settings.";
+    BOOST_LOG_SEV(lg, debug) << "Started making streaming settings.";
 
     streaming_settings_repository r;
     streaming_settings_factory f(rp);
@@ -50,7 +50,7 @@ make(const dynamic::repository& rp, const yarn::model& m) const {
 
         r.by_id()[e.name().id()] = *ss;
     }
-    BOOST_LOG_SEV(lg, debug) << "Finished making helper settings" << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished making streaming settings" << r;
     return r;
 }
 
