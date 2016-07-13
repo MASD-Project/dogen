@@ -86,7 +86,7 @@ infix_configuration& sequence_formatter::postfix_configuration() {
 std::string sequence_formatter::prefix() const {
     log_current_state();
     const auto r(value_for_position(prefix_configuration_));
-    BOOST_LOG_SEV(lg, debug) << "about to return: " << r;
+    BOOST_LOG_SEV(lg, trace) << "about to return: " << r;
     return r;
 }
 
@@ -107,20 +107,20 @@ unsigned int sequence_formatter::current_position() const {
 }
 
 void sequence_formatter::log_current_state() const {
-    BOOST_LOG_SEV(lg, debug) << "Position: " << position_
+    BOOST_LOG_SEV(lg, trace) << "Position: " << position_
                              << " element separator: " << element_separator_
                              << " is first: " << is_first()
                              << " is last: " << is_last()
                              << " is single: " << is_single();
 
-    BOOST_LOG_SEV(lg, debug) << "Prefix configuration: "
+    BOOST_LOG_SEV(lg, trace) << "Prefix configuration: "
                              << prefix_configuration_;
-    BOOST_LOG_SEV(lg, debug) << "Value for prefix position: "
+    BOOST_LOG_SEV(lg, trace) << "Value for prefix position: "
                              << value_for_position(prefix_configuration_);
 
-    BOOST_LOG_SEV(lg, debug) << "Postfix configuration: "
+    BOOST_LOG_SEV(lg, trace) << "Postfix configuration: "
                              << postfix_configuration_;
-    BOOST_LOG_SEV(lg, debug) << "Value for postfix position: "
+    BOOST_LOG_SEV(lg, trace) << "Value for postfix position: "
                              << value_for_position(postfix_configuration_);
 }
 
