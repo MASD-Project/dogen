@@ -100,10 +100,9 @@ void registrar::validate() const {
     log_container_sizes("Includers formatters", fc.includers_formatters());
 
     BOOST_LOG_SEV(lg, debug) << "Registered formatter helpers: "
-                             << formatter_container_.helper_formatters().size();
+                             << fc.helper_formatters().size();
 
-    BOOST_LOG_SEV(lg, debug) << "Ownership hierarchy: "
-                             << ownership_hierarchy_;
+    BOOST_LOG_SEV(lg, debug) << "Ownership hierarchy: " << ownership_hierarchy_;
 }
 
 void registrar::
