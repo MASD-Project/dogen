@@ -396,6 +396,15 @@ get_helpers_for_formatter(const properties::helper_properties& hp) const {
     return j->second;
 }
 
+bool assistant::
+is_streaming_enabled_in_types(const properties::helper_properties& hp) const {
+    using tt = formatters::types::traits;
+    const auto cifn(tt::class_implementation_formatter_name());
+    const auto fn(ownership_hierarchy_.formatter_name());
+    bool in_types_class_implementation(fn == cifn);
+    return in_types_class_implementation && hp.in_inheritance_relationship();
+}
+
 void assistant::add_helper_methods(const properties::class_info& c) {
     BOOST_LOG_SEV(lg, debug) << "Processing entity: " << c.name();
 
@@ -458,7 +467,7 @@ void assistant::add_helper_methods(const properties::class_info& c) {
     }
 }
 
-void assistant::add_helper_methods(const bool in_inheritance) {
+void assistant::add_helper_methods() {
     if (context_.element_properties().helper_properties().empty()) {
         // FIXME: supply target name as an argument and print its ID
         // FIXME: here. This needs to wait until we start using yarn
@@ -474,7 +483,7 @@ void assistant::add_helper_methods(const bool in_inheritance) {
          * current configuration. If enabled, format it.
          */
         for (const auto& h : helpers) {
-            if (!h->is_enabled(*this, in_inheritance)) {
+            if (!h->is_enabled(*this, hp)) {
                 BOOST_LOG_SEV(lg, debug) << "Helper is not enabled.";
                 continue;
             }

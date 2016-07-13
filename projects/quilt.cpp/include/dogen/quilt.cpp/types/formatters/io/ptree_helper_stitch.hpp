@@ -41,7 +41,8 @@ public:
     std::list<std::string> owning_formatters() const;
     bool requires_explicit_call() const;
     std::string function_name() const;
-    bool is_enabled(const assistant& a, const bool in_inheritance) const;
+    bool is_enabled(const assistant& a,
+        const properties::helper_properties& hp) const;
     void format(assistant& a, const properties::helper_properties& hp) const;
 };
 

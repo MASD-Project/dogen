@@ -157,6 +157,13 @@ public:
      */
     bool is_xml_serialization_disabled() const;
 
+    /**
+     * @brief Returns true if the types facet is required to support
+     * streaming.
+     */
+    bool is_streaming_enabled_in_types(
+        const properties::helper_properties& hp) const;
+
 public:
     /**
      * @brief Ensures all expected settings are available and set to
@@ -230,7 +237,7 @@ public:
      * formatter.
      */
     void add_helper_methods(const properties::class_info& c);
-    void add_helper_methods(const bool in_inheritance = false);
+    void add_helper_methods();
 
     /**
      * @brief Returns the correct streaming invocation for the

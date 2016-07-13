@@ -34,8 +34,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         a.add_helper_methods(c);
-        const bool in_inheritance(c.is_parent() || !c.parents().empty());
-        a.add_helper_methods(in_inheritance);
+        a.add_helper_methods();
 
         {
             auto snf(a.make_scoped_namespace_formatter(c.namespaces()));

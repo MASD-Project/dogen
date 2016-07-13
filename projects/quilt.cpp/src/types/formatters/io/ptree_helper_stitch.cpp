@@ -50,8 +50,8 @@ std::string ptree_helper::function_name() const {
     return r;
 }
 
-bool ptree_helper::
-is_enabled(const assistant& /*a*/, const bool /*in_inheritance*/) const {
+bool ptree_helper::is_enabled(const assistant& /*a*/,
+    const properties::helper_properties& /*hp*/) const {
     return true;
 }
 
