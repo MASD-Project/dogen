@@ -121,10 +121,11 @@ void workflow::report_exception_common() const {
 }
 
 void workflow::report_exception(const std::exception& e) const {
-    /* we must catch by std::exception and cast the boost
-     * exception here; if we were to catch boost exception, we
-     * would not have access to the what() method and thus could
-     * not provide a user-friendly message to the console.
+    /*
+     * We must catch by std::exception and cast the boost exception
+     * here; if we were to catch boost exception, we would not have
+     * access to the what() method and thus could not provide a
+     * user-friendly message to the console.
      */
     const auto be(dynamic_cast<const boost::exception* const>(&e));
     if (be && can_log_) {
@@ -145,7 +146,8 @@ int workflow::execute(const int argc, const char* argv[]) {
     try {
         const auto o(generate_knitting_options_activity(argc, argv));
 
-        /* can only happen if the options are valid but do not
+        /*
+         * Can only happen if the options are valid but do not
          * require any action.
          */
         if (!o)
@@ -156,7 +158,8 @@ int workflow::execute(const int argc, const char* argv[]) {
         initialise_logging_activity(s);
         knit_activity(s);
     } catch (const knitter::parser_validation_error& e) {
-        /* log known not to be initialised as we are still parsing
+        /*
+         * Log known not to be initialised as we are still parsing
          * command line options.
          */
         std::cerr << usage_error_msg << e.what() << std::endl;

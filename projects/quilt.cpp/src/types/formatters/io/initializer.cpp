@@ -24,6 +24,16 @@
 #include "dogen/quilt.cpp/types/formatters/io/class_implementation_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/enum_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/enum_implementation_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/io/smart_pointer_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/io/associative_container_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/io/optional_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/io/pair_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/io/ptree_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/io/sequence_container_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/io/smart_pointer_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/io/string_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/io/variant_helper_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/initializer.hpp"
 
 namespace dogen {
@@ -38,6 +48,15 @@ void initializer::initialize(registrar& rg) {
     initialise_formatter<class_implementation_formatter>(rg);
     initialise_formatter<enum_header_formatter>(rg);
     initialise_formatter<enum_implementation_formatter>(rg);
+    initialise_formatter_helper<smart_pointer_helper>(rg);
+    initialise_formatter_helper<associative_container_helper>(rg);
+    initialise_formatter_helper<optional_helper>(rg);
+    initialise_formatter_helper<pair_helper>(rg);
+    initialise_formatter_helper<ptree_helper>(rg);
+    initialise_formatter_helper<sequence_container_helper>(rg);
+    initialise_formatter_helper<smart_pointer_helper>(rg);
+    initialise_formatter_helper<string_helper>(rg);
+    initialise_formatter_helper<variant_helper>(rg);
 }
 
 } } } } }

@@ -97,7 +97,7 @@ void registrar::validate() const {
     log_container_sizes("odb options formatters", fc.odb_options_formatters());
     log_container_sizes("cmakelists formatters", fc.cmakelists_formatters());
     log_container_sizes("registrar formatters", fc.registrar_formatters());
-    log_container_sizes("Includers formatters", fc.includers_formatters());
+    log_container_sizes("includers formatters", fc.includers_formatters());
 
     BOOST_LOG_SEV(lg, debug) << "Registered formatter helpers: "
                              << fc.helper_formatters().size();
