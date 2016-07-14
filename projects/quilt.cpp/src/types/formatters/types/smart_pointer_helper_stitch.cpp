@@ -29,6 +29,12 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
+std::string smart_pointer_helper::id() const {
+    static auto r(std::string("<") + traits::facet_name() + std::string(">") +
+        std::string("<") + helper_name() + std::string(">"));
+    return r;
+}
+
 std::string smart_pointer_helper::family() const {
     static std::string r("SmartPointer");
     return r;
@@ -48,6 +54,11 @@ bool smart_pointer_helper::requires_explicit_call() const {
 
 std::string smart_pointer_helper::function_name() const {
     static std::string r("operator==");
+    return r;
+}
+
+std::string smart_pointer_helper::helper_name() const {
+    static std::string r("smart_pointer_helper");
     return r;
 }
 

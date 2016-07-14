@@ -29,6 +29,12 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
+std::string pair_helper::id() const {
+    static auto r(std::string("<") + traits::facet_name() + std::string(">") +
+        std::string("<") + helper_name() + std::string(">"));
+    return r;
+}
+
 std::string pair_helper::family() const {
     static std::string r("Pair");
     return r;
@@ -47,6 +53,11 @@ bool pair_helper::requires_explicit_call() const {
 
 std::string pair_helper::function_name() const {
     static std::string r("operator==");
+    return r;
+}
+
+std::string pair_helper::helper_name() const {
+    static std::string r("pair_helper");
     return r;
 }
 

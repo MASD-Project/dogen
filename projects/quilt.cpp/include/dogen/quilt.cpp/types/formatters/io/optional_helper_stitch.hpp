@@ -37,10 +37,12 @@ namespace io {
 
 class optional_helper : public helper_formatter_interface {
 public:
+    std::string id() const;
     std::string family() const;
     std::list<std::string> owning_formatters() const;
     bool requires_explicit_call() const;
     std::string function_name() const;
+    std::string helper_name() const;
     bool is_enabled(const assistant& a,
         const properties::helper_properties& hp) const;
     void format(assistant& a, const properties::helper_properties& hp) const;

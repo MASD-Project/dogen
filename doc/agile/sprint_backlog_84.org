@@ -13,37 +13,37 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-14 Thu 21:50]
+#+CAPTION: Clock summary at [2016-07-14 Thu 22:27]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *26:42* |       |      | 100.0 |
+| *Total time*                                                                | *27:18* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 26:42   |       |      | 100.0 |
-| Active                                                                      |         | 26:42 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:26 |   9.1 |
-| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   5.1 |
-| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   5.5 |
-| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   4.8 |
+| Stories                                                                     | 27:18   |       |      | 100.0 |
+| Active                                                                      |         | 27:18 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:26 |   8.9 |
+| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   4.9 |
+| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   5.4 |
+| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   4.7 |
 | COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   1.8 |
 | COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   1.2 |
 | COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   0.6 |
 | COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   3.1 |
-| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   1.7 |
+| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   1.6 |
 | COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.0 |
-| COMPLETED Refactor general settings                                         |         |       | 5:50 |  21.8 |
-| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   5.2 |
-| COMPLETED Create a IO settings class                                        |         |       | 1:15 |   4.7 |
-| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   5.2 |
+| COMPLETED Refactor general settings                                         |         |       | 5:50 |  21.4 |
+| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   5.1 |
+| COMPLETED Create a IO settings class                                        |         |       | 1:15 |   4.6 |
+| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   5.1 |
 | COMPLETED Usage of rev-list in version causes problems                      |         |       | 0:03 |   0.2 |
 | CANCELLED Consider not running initialisers in a static context             |         |       | 0:10 |   0.6 |
 | COMPLETED Refactor formatter interfaces                                     |         |       | 0:36 |   2.2 |
 | COMPLETED Move formatter helpers into formatter container                   |         |       | 0:13 |   0.8 |
 | COMPLETED Add aliases for commonly used targets                             |         |       | 0:02 |   0.1 |
 | COMPLETED Add a pretty printer for ownership hierarchy                      |         |       | 0:13 |   0.8 |
-| STARTED Add formatter id to file and helper formatter                       |         |       | 0:44 |   2.7 |
-| STARTED Add IO to formatter container                                       |         |       | 0:35 |   2.2 |
-| STARTED Enable IO helpers for types                                         |         |       | 4:54 |  18.4 |
+| COMPLETED Add formatter id to file and helper formatters                    |         |       | 1:20 |   4.9 |
+| STARTED Add IO to formatter container                                       |         |       | 0:35 |   2.1 |
+| STARTED Enable IO helpers for types                                         |         |       | 4:54 |  17.9 |
 | STARTED Implement IO helper methods with new helper infrastructure          |         |       | 0:15 |   0.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -595,7 +595,9 @@ We could probably do with aliases such as:
 We need a standard way of converting the ownership hierarchy into a
 string representation. Add a simple pretty printer for it.
 
-*** STARTED Add formatter id to file and helper formatter             :story:
+*** COMPLETED Add formatter id to file and helper formatters          :story:
+    CLOSED: [2016-07-14 Thu 22:27]
+    CLOCK: [2016-07-14 Thu 21:51]--[2016-07-14 Thu 22:27] =>  0:36
     CLOCK: [2016-07-14 Thu 21:06]--[2016-07-14 Thu 21:50] =>  0:44
 
 We need to be able to identify formatters for logging purposes.
@@ -643,6 +645,9 @@ types.
   enabled method. For now we can check the class info and compute in
   inheritance. Actually we can add the flag now and propagate it to
   class info so that in future the changes are smaller.
+- helpers should not know of their owning formatters - this should be
+  done as part of registration.
+- helper's id is facet + helper name.
 
 *** STARTED Implement IO helper methods with new helper infrastructure :story:
     CLOCK: [2016-07-12 Tue 07:26]--[2016-07-12 Tue 07:41] =>  0:15
