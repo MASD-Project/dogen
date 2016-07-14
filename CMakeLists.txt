@@ -340,6 +340,18 @@ add_dependencies(knit_and_stitch knit_all)
 add_dependencies(knit_and_stitch stitch_all)
 
 #
+# target aliases
+#
+add_custom_target(rat)
+add_custom_target(kas)
+add_custom_target(ka)
+add_custom_target(sa)
+add_dependencies(rat run_all_tests)
+add_dependencies(kas knit_and_stitch)
+add_dependencies(ka knit_all)
+add_dependencies(sa stitch_all)
+
+#
 # include all sub directories
 #
 add_subdirectory(${CMAKE_SOURCE_DIR}/build)
