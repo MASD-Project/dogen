@@ -45,6 +45,11 @@ public:
 
 public:
     /**
+     * @brief Unique identifier for the formatter.
+     */
+    virtual std::string id() const = 0;
+
+    /**
      * @brief Ownership hierarchy for this formatter
      */
     virtual dynamic::ownership_hierarchy ownership_hierarchy() const = 0;

@@ -19,6 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include "dogen/dynamic/types/pretty_printer.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
@@ -68,6 +69,11 @@ provider::provide(const properties::inclusion_dependencies_builder_factory& f,
 
 std::string enum_implementation_formatter::static_formatter_name() {
     return traits::enum_implementation_formatter_name();
+}
+
+std::string enum_implementation_formatter::id() const {
+    static auto r(dynamic::pretty_printer::print(ownership_hierarchy()));
+    return r;
 }
 
 dynamic::ownership_hierarchy enum_implementation_formatter::

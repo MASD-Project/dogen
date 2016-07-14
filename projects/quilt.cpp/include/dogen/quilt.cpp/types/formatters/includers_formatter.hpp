@@ -37,6 +37,8 @@ public:
     explicit includers_formatter(const std::string& facet_name);
 
 public:
+    std::string id() const override;
+
     dynamic::ownership_hierarchy ownership_hierarchy() const override;
 
     file_types file_type() const override;

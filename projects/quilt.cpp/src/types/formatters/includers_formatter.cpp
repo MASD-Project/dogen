@@ -19,6 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include "dogen/dynamic/types/pretty_printer.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/includers_formatter_stitch.hpp"
@@ -68,6 +69,11 @@ includers_formatter::includers_formatter(const std::string& facet_name)
     : ownership_hierarchy_(formatters::traits::model_name(), facet_name,
         traits::includers_formatter_name(facet_name),
         formatters::traits::header_formatter_group_name()) { }
+
+std::string includers_formatter::id() const {
+    static auto r(dynamic::pretty_printer::print(ownership_hierarchy()));
+    return r;
+}
 
 dynamic::ownership_hierarchy
 includers_formatter::ownership_hierarchy() const {

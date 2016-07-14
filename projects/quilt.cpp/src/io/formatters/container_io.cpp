@@ -42,7 +42,6 @@ to_stream(std::ostream& stream, const std::string& key,
     return stream;
 }
 
-
 std::ostream& operator<<(std::ostream& s, const container& /*c*/) {
     s << "{ " << "\"__type__\": " << "\"container\", ";
 

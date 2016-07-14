@@ -19,6 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include "dogen/dynamic/types/pretty_printer.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/traits.hpp"
@@ -55,6 +56,11 @@ provider::provide(const properties::inclusion_dependencies_builder_factory& f,
 
 std::string provider::formatter_name() const {
     return class_header_formatter::static_formatter_name();
+}
+
+std::string class_header_formatter::id() const {
+    static auto r(dynamic::pretty_printer::print(ownership_hierarchy()));
+    return r;
 }
 
 std::string class_header_formatter::static_formatter_name() {

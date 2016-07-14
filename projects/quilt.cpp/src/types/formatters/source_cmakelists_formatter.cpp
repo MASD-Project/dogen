@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/dynamic/types/pretty_printer.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/source_cmakelists_formatter_stitch.hpp"
@@ -36,6 +37,11 @@ namespace formatters {
 
 std::string source_cmakelists_formatter::static_formatter_name() {
     return traits::source_cmakelists_formatter_name();
+}
+
+std::string source_cmakelists_formatter::id() const {
+    static auto r(dynamic::pretty_printer::print(ownership_hierarchy()));
+    return r;
 }
 
 dynamic::ownership_hierarchy source_cmakelists_formatter::

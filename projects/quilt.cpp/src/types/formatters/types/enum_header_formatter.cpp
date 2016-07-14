@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/dynamic/types/pretty_printer.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
@@ -34,6 +35,11 @@ namespace types {
 
 std::string enum_header_formatter::static_formatter_name() {
     return traits::enum_header_formatter_name();
+}
+
+std::string enum_header_formatter::id() const {
+    static auto r(dynamic::pretty_printer::print(ownership_hierarchy()));
+    return r;
 }
 
 dynamic::ownership_hierarchy enum_header_formatter::

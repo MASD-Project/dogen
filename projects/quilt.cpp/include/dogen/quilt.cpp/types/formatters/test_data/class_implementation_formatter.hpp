@@ -38,32 +38,34 @@ namespace test_data {
  * @brief Creates the C++ test data representation for a class.
  */
 class class_implementation_formatter final : public class_formatter_interface {
- public:
-  class_implementation_formatter() = default;
-  class_implementation_formatter(
-    const class_implementation_formatter&) = delete;
-  class_implementation_formatter(
-    class_implementation_formatter&&) = default;
-  ~class_implementation_formatter() noexcept = default;
+public:
+    class_implementation_formatter() = default;
+    class_implementation_formatter(
+        const class_implementation_formatter&) = delete;
+    class_implementation_formatter(
+        class_implementation_formatter&&) = default;
+    ~class_implementation_formatter() noexcept = default;
 
- public:
-  /**
-   * @brief Returns the formatter name.
-   */
-  static std::string static_formatter_name();
+public:
+    /**
+     * @brief Returns the formatter name.
+     */
+    static std::string static_formatter_name();
 
- public:
-  dynamic::ownership_hierarchy ownership_hierarchy() const override;
+public:
+    std::string id() const override;
 
-  file_types file_type() const override;
+    dynamic::ownership_hierarchy ownership_hierarchy() const override;
 
-  properties::origin_types formattable_origin_type() const override;
+    file_types file_type() const override;
 
-  void register_inclusion_dependencies_provider(
-    properties::registrar& rg) const override;
+    properties::origin_types formattable_origin_type() const override;
 
-  dogen::formatters::file format(const context& ctx,
-      const properties::class_info& c) const override;
+    void register_inclusion_dependencies_provider(
+        properties::registrar& rg) const override;
+
+    dogen::formatters::file format(const context& ctx,
+        const properties::class_info& c) const override;
 };
 
 } } } } }

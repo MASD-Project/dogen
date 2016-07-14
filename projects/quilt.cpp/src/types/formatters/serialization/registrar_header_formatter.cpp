@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/quilt.cpp/types/traits.hpp"
+#include "dogen/dynamic/types/pretty_printer.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/registrar_header_formatter_stitch.hpp"
@@ -32,6 +33,11 @@ namespace serialization {
 
 std::string registrar_header_formatter::static_formatter_name() {
     return traits::registrar_header_formatter_name();
+}
+
+std::string registrar_header_formatter::id() const {
+    static auto r(dynamic::pretty_printer::print(ownership_hierarchy()));
+    return r;
 }
 
 dynamic::ownership_hierarchy

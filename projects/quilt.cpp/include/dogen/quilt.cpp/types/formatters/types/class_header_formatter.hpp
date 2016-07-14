@@ -51,6 +51,8 @@ public:
     static std::string static_formatter_name();
 
 public:
+    std::string id() const override;
+
     dynamic::ownership_hierarchy ownership_hierarchy() const override;
 
     file_types file_type() const override;
