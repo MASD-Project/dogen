@@ -36,16 +36,16 @@ to_stream(std::ostream& stream, const std::string& key,
 
     for(auto i(value.begin()); i != value.end(); ++i) {
         if (i != value.begin()) stream << ", ";
-        stream <<  "\"" << "\": ";
+        stream <<  "\"" << (*i)->id() << "\"";
     }
     stream << " ]";
     return stream;
 }
 
-std::ostream& operator<<(std::ostream& s, const container& /*c*/) {
-    s << "{ " << "\"__type__\": " << "\"container\", ";
-
-
+std::ostream& operator<<(std::ostream& s, const container& c) {
+    s << "{ " << "\"__type__\": "
+      << "\"dogen::quilt::cpp::formatters::container\", ";
+    to_stream(s, "class_formatters", c.class_formatters());
     s << " }";
     return s;
 }

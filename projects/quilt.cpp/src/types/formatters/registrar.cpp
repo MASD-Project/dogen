@@ -22,6 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/dynamic/io/ownership_hierarchy_io.hpp"
+#include "dogen/quilt.cpp/io/formatters/container_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar.hpp"
 
@@ -82,7 +83,8 @@ void registrar::validate() const {
         BOOST_THROW_EXCEPTION(registrar_error(no_all_formatters));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
+    BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state. Container: "
+                             << fc;
     BOOST_LOG_SEV(lg, debug) << "Found a total of "
                              << size(fc.all_file_formatters())
                              << " registered formatter(s).";

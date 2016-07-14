@@ -22,7 +22,6 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/types/pretty_printer.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
@@ -87,7 +86,7 @@ std::string forward_declarations_formatter::static_formatter_name() {
 }
 
 std::string forward_declarations_formatter::id() const {
-    static auto r(dynamic::pretty_printer::print(ownership_hierarchy()));
+    static auto r(ownership_hierarchy().formatter_name());
     return r;
 }
 

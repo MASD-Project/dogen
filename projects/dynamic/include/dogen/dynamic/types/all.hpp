@@ -42,7 +42,6 @@
 #include "dogen/dynamic/types/building_error.hpp"
 #include "dogen/dynamic/types/field_instance.hpp"
 #include "dogen/dynamic/types/field_selector.hpp"
-#include "dogen/dynamic/types/pretty_printer.hpp"
 #include "dogen/dynamic/types/workflow_error.hpp"
 #include "dogen/dynamic/types/hydration_error.hpp"
 #include "dogen/dynamic/types/selection_error.hpp"
