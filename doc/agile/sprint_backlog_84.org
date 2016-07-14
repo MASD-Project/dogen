@@ -13,37 +13,37 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-14 Thu 22:45]
+#+CAPTION: Clock summary at [2016-07-14 Thu 23:12]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *27:36* |       |      | 100.0 |
+| *Total time*                                                                | *28:02* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 27:36   |       |      | 100.0 |
-| Active                                                                      |         | 27:36 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:26 |   8.8 |
-| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   4.9 |
-| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   5.3 |
+| Stories                                                                     | 28:02   |       |      | 100.0 |
+| Active                                                                      |         | 28:02 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:26 |   8.7 |
+| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   4.8 |
+| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   5.2 |
 | COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   4.6 |
-| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   1.8 |
+| COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   1.7 |
 | COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   1.2 |
 | COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   0.6 |
 | COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   3.0 |
 | COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   1.6 |
 | COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.0 |
-| COMPLETED Refactor general settings                                         |         |       | 5:50 |  21.1 |
-| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   5.1 |
+| COMPLETED Refactor general settings                                         |         |       | 5:50 |  20.8 |
+| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   5.0 |
 | COMPLETED Create a IO settings class                                        |         |       | 1:15 |   4.5 |
-| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   5.1 |
+| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   5.0 |
 | COMPLETED Usage of rev-list in version causes problems                      |         |       | 0:03 |   0.2 |
 | CANCELLED Consider not running initialisers in a static context             |         |       | 0:10 |   0.6 |
-| COMPLETED Refactor formatter interfaces                                     |         |       | 0:36 |   2.2 |
+| COMPLETED Refactor formatter interfaces                                     |         |       | 0:36 |   2.1 |
 | COMPLETED Move formatter helpers into formatter container                   |         |       | 0:13 |   0.8 |
 | COMPLETED Add aliases for commonly used targets                             |         |       | 0:02 |   0.1 |
 | CANCELLED Add a pretty printer for ownership hierarchy                      |         |       | 0:13 |   0.8 |
 | COMPLETED Add formatter id to file and helper formatters                    |         |       | 1:20 |   4.8 |
-| STARTED Add IO to formatter container                                       |         |       | 0:53 |   3.2 |
-| STARTED Enable IO helpers for types                                         |         |       | 4:54 |  17.8 |
+| COMPLETED Add IO to formatter container                                     |         |       | 1:19 |   4.7 |
+| STARTED Enable IO helpers for types                                         |         |       | 4:54 |  17.5 |
 | STARTED Implement IO helper methods with new helper infrastructure          |         |       | 0:15 |   0.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -605,7 +605,9 @@ string representation. Add a simple pretty printer for it.
 
 We need to be able to identify formatters for logging purposes.
 
-*** STARTED Add IO to formatter container                             :story:
+*** COMPLETED Add IO to formatter container                           :story:
+    CLOSED: [2016-07-14 Thu 23:07]
+    CLOCK: [2016-07-14 Thu 22:46]--[2016-07-14 Thu 23:12] =>  0:26
     CLOCK: [2016-07-14 Thu 22:27]--[2016-07-14 Thu 22:45] =>  0:18
     CLOCK: [2016-07-14 Thu 20:32]--[2016-07-14 Thu 20:49] =>  0:17
     CLOCK: [2016-07-13 Wed 23:31]--[2016-07-13 Wed 23:49] =>  0:18

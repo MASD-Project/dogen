@@ -45,26 +45,6 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-template<class Container>
-unsigned long size(const Container& c) {
-    return std::distance(c.begin(), c.end());
-}
-
-template<class Container>
-void log_container_sizes(
-    const std::string& formatter_type, const Container& c) {
-    const auto sz(size(c));
-    if (sz == 0) {
-        BOOST_LOG_SEV(lg, warn) << "Registered formatters for '"
-                                << formatter_type << "': "
-                                << sz;
-    } else {
-        BOOST_LOG_SEV(lg, debug) << "Registered formatters for '"
-                                 << formatter_type << "': "
-                                 << sz;
-    }
-}
-
 void registrar::validate() const {
     const auto& fc(formatter_container_);
     if (fc.class_formatters().empty()) {
@@ -85,25 +65,6 @@ void registrar::validate() const {
 
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state. Container: "
                              << fc;
-    BOOST_LOG_SEV(lg, debug) << "Found a total of "
-                             << size(fc.all_file_formatters())
-                             << " registered formatter(s).";
-
-    log_container_sizes("class formatters", fc.class_formatters());
-    log_container_sizes("enum formatters", fc.enum_formatters());
-    log_container_sizes("exception formatters", fc.exception_formatters());
-    log_container_sizes("namespace formatters", fc.namespace_formatters());
-    log_container_sizes("visitor formatters", fc.visitor_formatters());
-    log_container_sizes("forward declarations formatters",
-        fc.forward_declarations_formatters());
-    log_container_sizes("odb options formatters", fc.odb_options_formatters());
-    log_container_sizes("cmakelists formatters", fc.cmakelists_formatters());
-    log_container_sizes("registrar formatters", fc.registrar_formatters());
-    log_container_sizes("includers formatters", fc.includers_formatters());
-
-    BOOST_LOG_SEV(lg, debug) << "Registered formatter helpers: "
-                             << fc.helper_formatters().size();
-
     BOOST_LOG_SEV(lg, debug) << "Ownership hierarchy: " << ownership_hierarchy_;
 }
 

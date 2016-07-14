@@ -29,23 +29,64 @@ namespace cpp {
 namespace formatters {
 
 template<typename Containee>
-inline std::ostream&
-to_stream(std::ostream& stream, const std::string& key,
+inline std::ostream& to_stream(std::ostream& s, const std::string& key,
     const std::forward_list<Containee>& value) {
-    stream << "\"" << key << "\": " << "[ ";
+    s << "\"" << key << "\": " << "[ ";
 
     for(auto i(value.begin()); i != value.end(); ++i) {
-        if (i != value.begin()) stream << ", ";
-        stream <<  "\"" << (*i)->id() << "\"";
+        if (i != value.begin()) s << ", ";
+        s <<  "\"" << (*i)->id() << "\"";
     }
-    stream << " ]";
-    return stream;
+    s << " ], ";
+    return s;
 }
+
+inline std::ostream& to_stream(std::ostream& s,
+    const std::unordered_map<std::string, std::unordered_map<std::string,
+    std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers) {
+    s << "\"helper_formatters\": " << "[ ";
+
+    for(auto i(helpers.begin()); i != helpers.end(); ++i) {
+        if (i != helpers.begin()) s << ", ";
+        s <<  "{ \"" << i->first << "\":" << "[ ";
+        for(auto j(i->second.begin()); j != i->second.end(); ++j) {
+            if (j != i->second.begin()) s << ", ";
+            s <<  "{ \"" << j->first << "\":" << "[ ";
+            for(auto k(j->second.begin()); k != j->second.end(); ++k) {
+                if (k != j->second.begin()) s << ", ";
+                s <<  "\"" << (*k)->id() << "\"";
+            }
+            s << "] }";
+        }
+        s << "] }";
+
+    }
+    s << " ]";
+    return s;
+}
+
 
 std::ostream& operator<<(std::ostream& s, const container& c) {
     s << "{ " << "\"__type__\": "
       << "\"dogen::quilt::cpp::formatters::container\", ";
     to_stream(s, "class_formatters", c.class_formatters());
+    to_stream(s, "enum_formatters", c.enum_formatters());
+    to_stream(s, "exception_formatters", c.exception_formatters());
+    to_stream(s, "namespace_formatters", c.namespace_formatters());
+    to_stream(s, "visitor_formatters", c.visitor_formatters());
+    to_stream(s, "forward_declarations_formatters",
+        c.forward_declarations_formatters());
+    to_stream(s, "odb_options_formatters", c.odb_options_formatters());
+    to_stream(s, "cmakelists_formatters", c.cmakelists_formatters());
+    to_stream(s, "registrar_formatters", c.registrar_formatters());
+    to_stream(s, "includers_formatters", c.includers_formatters());
+    to_stream(s, "all_file_formatters", c.all_file_formatters());
+    to_stream(s, "all_internal_file_formatters",
+        c.all_internal_file_formatters());
+    to_stream(s, "all_external_file_formatters",
+        c.all_external_file_formatters());
+
+    to_stream(s, c.helper_formatters());
     s << " }";
     return s;
 }
