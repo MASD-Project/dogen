@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-14 Thu 23:12]
+#+CAPTION: Clock summary at [2016-07-14 Thu 23:16]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *28:02* |       |      | 100.0 |
+| *Total time*                                                                | *28:05* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 28:02   |       |      | 100.0 |
-| Active                                                                      |         | 28:02 |      | 100.0 |
+| Stories                                                                     | 28:05   |       |      | 100.0 |
+| Active                                                                      |         | 28:05 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:26 |   8.7 |
 | STARTED Manual updates and blog posts                                       |         |       | 1:21 |   4.8 |
 | COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   5.2 |
@@ -30,7 +30,7 @@
 | COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   0.6 |
 | COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   3.0 |
 | COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   1.6 |
-| COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   1.0 |
+| COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   0.9 |
 | COMPLETED Refactor general settings                                         |         |       | 5:50 |  20.8 |
 | COMPLETED Rename specs to tests                                             |         |       | 1:24 |   5.0 |
 | COMPLETED Create a IO settings class                                        |         |       | 1:15 |   4.5 |
@@ -41,9 +41,9 @@
 | COMPLETED Move formatter helpers into formatter container                   |         |       | 0:13 |   0.8 |
 | COMPLETED Add aliases for commonly used targets                             |         |       | 0:02 |   0.1 |
 | CANCELLED Add a pretty printer for ownership hierarchy                      |         |       | 0:13 |   0.8 |
-| COMPLETED Add formatter id to file and helper formatters                    |         |       | 1:20 |   4.8 |
+| COMPLETED Add formatter id to file and helper formatters                    |         |       | 1:20 |   4.7 |
 | COMPLETED Add IO to formatter container                                     |         |       | 1:19 |   4.7 |
-| STARTED Enable IO helpers for types                                         |         |       | 4:54 |  17.5 |
+| STARTED Enable IO helpers for types                                         |         |       | 4:57 |  17.6 |
 | STARTED Implement IO helper methods with new helper infrastructure          |         |       | 0:15 |   0.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -623,6 +623,7 @@ what types have been registered.
 - use these methods in new container IO code.
 
 *** STARTED Enable IO helpers for types                               :story:
+    CLOCK: [2016-07-14 Thu 23:13]--[2016-07-14 Thu 23:16] =>  0:03
     CLOCK: [2016-07-13 Wed 22:11]--[2016-07-13 Wed 22:24] =>  0:13
     CLOCK: [2016-07-13 Wed 21:43]--[2016-07-13 Wed 22:11] =>  0:28
     CLOCK: [2016-07-13 Wed 18:46]--[2016-07-13 Wed 19:15] =>  0:29

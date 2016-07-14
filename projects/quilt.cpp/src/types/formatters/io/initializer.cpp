@@ -54,7 +54,6 @@ void initializer::initialize(registrar& rg) {
     initialise_formatter_helper<pair_helper>(rg);
     initialise_formatter_helper<ptree_helper>(rg);
     initialise_formatter_helper<sequence_container_helper>(rg);
-    initialise_formatter_helper<smart_pointer_helper>(rg);
     initialise_formatter_helper<string_helper>(rg);
     initialise_formatter_helper<variant_helper>(rg);
 }
