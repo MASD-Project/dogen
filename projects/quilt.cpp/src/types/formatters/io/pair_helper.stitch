@@ -74,30 +74,4 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
 
 <#+
 }
-
-void pair_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-
-    {
-        auto snf(a.make_scoped_namespace_formatter(t.namespaces()));
-        const auto first(t.children().front());
-        const auto second(t.children().back());
-#>
-
-inline std::ostream& operator<<(std::ostream& s, const <#= t.complete_name() #>& v) {
-    s << "{ " << "\"__type__\": " << "\"<#= t.name() #>\"" << ", ";
-
-    s << "\"first\": " << <#= a.streaming_for_type(first, "v.first") #> << ", ";
-    s << "\"second\": " << <#= a.streaming_for_type(second, "v.second") #>;
-    s << " }";
-    return s;
-}
-
-<#+
-    }
-#>
-
-<#+
-}
 #>

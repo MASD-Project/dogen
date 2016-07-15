@@ -60,18 +60,4 @@ inline std::string tidy_up_string(std::string s) {
 
 <#+
 }
-
-void string_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& /*t*/) {
-#>
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
-
-<#+
-}
 #>

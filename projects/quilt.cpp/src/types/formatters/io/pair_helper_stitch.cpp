@@ -90,26 +90,4 @@ a.stream() << std::endl;
     }
 a.stream() << std::endl;
 }
-
-void pair_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-
-    {
-        auto snf(a.make_scoped_namespace_formatter(t.namespaces()));
-        const auto first(t.children().front());
-        const auto second(t.children().back());
-a.stream() << std::endl;
-a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << t.complete_name() << "& v) {" << std::endl;
-a.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << t.name() << "\\\"\" << \", \";" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    s << \"\\\"first\\\": \" << " << a.streaming_for_type(first, "v.first") << " << \", \";" << std::endl;
-a.stream() << "    s << \"\\\"second\\\": \" << " << a.streaming_for_type(second, "v.second") << ";" << std::endl;
-a.stream() << "    s << \" }\";" << std::endl;
-a.stream() << "    return s;" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-    }
-a.stream() << std::endl;
-}
 } } } } }

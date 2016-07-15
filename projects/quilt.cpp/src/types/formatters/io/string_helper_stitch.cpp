@@ -78,16 +78,4 @@ a.stream() << "    return s;" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
 }
-
-void string_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& /*t*/) {
-a.stream() << "inline std::string tidy_up_string(std::string s) {" << std::endl;
-a.stream() << "    boost::replace_all(s, \"\\r\\n\", \"<new_line>\");" << std::endl;
-a.stream() << "    boost::replace_all(s, \"\\n\", \"<new_line>\");" << std::endl;
-a.stream() << "    boost::replace_all(s, \"\\\"\", \"<quote>\");" << std::endl;
-a.stream() << "    return s;" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-}
 } } } } }

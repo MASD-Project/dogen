@@ -80,35 +80,4 @@ inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
 
 <#+
 }
-
-void associative_container_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-
-    {
-        auto snf(a.make_scoped_namespace_formatter(t.namespaces()));
-        const auto key(t.children().front());
-        const auto value(t.children().back());
-#>
-
-inline std::ostream& operator<<(std::ostream& s, const <#= t.complete_name() #>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << <#= a.streaming_for_type(key, "i->first") #>;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << <#= a.streaming_for_type(value, "i->second") #>;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-<#+
-    }
-#>
-
-<#+
-}
 #>

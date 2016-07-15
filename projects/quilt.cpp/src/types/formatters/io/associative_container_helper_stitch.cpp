@@ -96,31 +96,4 @@ a.stream() << std::endl;
     }
 a.stream() << std::endl;
 }
-
-void associative_container_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-
-    {
-        auto snf(a.make_scoped_namespace_formatter(t.namespaces()));
-        const auto key(t.children().front());
-        const auto value(t.children().back());
-a.stream() << std::endl;
-a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << t.complete_name() << "& v) {" << std::endl;
-a.stream() << "    s << \"[\";" << std::endl;
-a.stream() << "    for (auto i(v.begin()); i != v.end(); ++i) {" << std::endl;
-a.stream() << "        if (i != v.begin()) s << \", \";" << std::endl;
-a.stream() << "        s << \"[ { \" << \"\\\"__type__\\\": \" << \"\\\"key\\\"\" << \", \" << \"\\\"data\\\": \";" << std::endl;
-a.stream() << "        s << " << a.streaming_for_type(key, "i->first") << ";" << std::endl;
-a.stream() << "        s << \" }, { \" << \"\\\"__type__\\\": \" << \"\\\"value\\\"\" << \", \" << \"\\\"data\\\": \";" << std::endl;
-a.stream() << "        s << " << a.streaming_for_type(value, "i->second") << ";" << std::endl;
-a.stream() << "        s << \" } ]\";" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << "    s << \" ] \";" << std::endl;
-a.stream() << "    return s;" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-    }
-a.stream() << std::endl;
-}
 } } } } }

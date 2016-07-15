@@ -92,28 +92,4 @@ a.stream() << std::endl;
     }
 a.stream() << std::endl;
 }
-
-void smart_pointer_helper_stitch(
-    formatters::nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-
-    {
-        auto snf(a.make_scoped_namespace_formatter(t.namespaces()));
-        const auto containee(t.children().front());
-a.stream() << std::endl;
-a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << t.complete_name() << "& v) {" << std::endl;
-a.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << t.name() << "\\\"\" << \", \"" << std::endl;
-a.stream() << "      << \"\\\"memory\\\": \" << \"\\\"\" << static_cast<void*>(v.get()) << \"\\\"\" << \", \";" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    if (v)" << std::endl;
-a.stream() << "        s << \"\\\"data\\\": \" << " << a.streaming_for_type(containee, "*v") << ";" << std::endl;
-a.stream() << "    else" << std::endl;
-a.stream() << "        s << \"\\\"data\\\": \"\"\\\"<empty>\\\"\";" << std::endl;
-a.stream() << "    s << \" }\";" << std::endl;
-a.stream() << "    return s;" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-    }
-a.stream() << std::endl;
-}
 } } } } }

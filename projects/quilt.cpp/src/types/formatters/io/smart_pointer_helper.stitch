@@ -76,32 +76,4 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
 
 <#+
 }
-
-void smart_pointer_helper_stitch(
-    formatters::nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-
-    {
-        auto snf(a.make_scoped_namespace_formatter(t.namespaces()));
-        const auto containee(t.children().front());
-#>
-
-inline std::ostream& operator<<(std::ostream& s, const <#= t.complete_name() #>& v) {
-    s << "{ " << "\"__type__\": " << "\"<#= t.name() #>\"" << ", "
-      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << <#= a.streaming_for_type(containee, "*v") #>;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-<#+
-    }
-#>
-
-<#+
-}
 #>
