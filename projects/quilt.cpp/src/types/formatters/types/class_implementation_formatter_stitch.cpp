@@ -33,7 +33,6 @@ dogen::formatters::file class_implementation_formatter_stitch(
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
-        a.add_helper_methods(c);
         a.add_helper_methods();
 
         {

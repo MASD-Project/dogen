@@ -430,8 +430,6 @@ is_streaming_enabled(const properties::helper_properties& hp) const {
 void assistant::add_helper_methods(const properties::class_info& c) {
     BOOST_LOG_SEV(lg, debug) << "Processing entity: " << c.name();
 
-    using tt = formatters::types::traits;
-    const auto cifn(tt::class_implementation_formatter_name());
     const auto fn(ownership_hierarchy_.formatter_name());
 
     using iot = formatters::io::traits;
