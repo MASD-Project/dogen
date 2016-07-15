@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/pair_helper_stitch.hpp"
 
 namespace dogen {
@@ -25,6 +26,48 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 namespace hash {
+
+std::string pair_helper::id() const {
+    static auto r(std::string("<") + traits::facet_name() + std::string(">") +
+        std::string("<") + helper_name() + std::string(">"));
+    return r;
+}
+
+std::string pair_helper::family() const {
+    static std::string r("AssociativeContainer");
+    return r;
+}
+
+std::list<std::string>
+pair_helper::owning_formatters() const {
+    static auto r(std::list<std::string> {
+        hash::traits::class_implementation_formatter_name()
+    });
+    return r;
+}
+
+bool pair_helper::requires_explicit_call() const {
+    return false;
+}
+
+std::string pair_helper::function_name() const {
+    static std::string r("operator==");
+    return r;
+}
+
+std::string pair_helper::helper_name() const {
+    static std::string r("pair_helper");
+    return r;
+}
+
+bool pair_helper::is_enabled(const assistant& /*a*/,
+    const properties::helper_properties& /*hp*/) const {
+    return true;
+}
+
+void pair_helper::
+format(assistant& /*a*/, const properties::helper_properties& /*hp*/) const {
+}
 
 void pair_helper_stitch(
     nested_type_formatting_assistant& a,

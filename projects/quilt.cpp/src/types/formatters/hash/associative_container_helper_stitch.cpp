@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/quilt.cpp/types/formatters/hash/associative_container_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 
 namespace dogen {
@@ -26,6 +27,48 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 namespace hash {
+
+std::string associative_container_helper::id() const {
+    static auto r(std::string("<") + traits::facet_name() + std::string(">") +
+        std::string("<") + helper_name() + std::string(">"));
+    return r;
+}
+
+std::string associative_container_helper::family() const {
+    static std::string r("AssociativeContainer");
+    return r;
+}
+
+std::list<std::string>
+associative_container_helper::owning_formatters() const {
+    static auto r(std::list<std::string> {
+        hash::traits::class_implementation_formatter_name()
+    });
+    return r;
+}
+
+bool associative_container_helper::requires_explicit_call() const {
+    return false;
+}
+
+std::string associative_container_helper::function_name() const {
+    static std::string r("operator==");
+    return r;
+}
+
+std::string associative_container_helper::helper_name() const {
+    static std::string r("associative_container_helper");
+    return r;
+}
+
+bool associative_container_helper::is_enabled(const assistant& /*a*/,
+    const properties::helper_properties& /*hp*/) const {
+    return true;
+}
+
+void associative_container_helper::
+format(assistant& /*a*/, const properties::helper_properties& /*hp*/) const {
+}
 
 void associative_container_helper_stitch(
     nested_type_formatting_assistant& a,
