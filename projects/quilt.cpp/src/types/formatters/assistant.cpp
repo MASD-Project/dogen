@@ -27,6 +27,7 @@
 #include "dogen/formatters/types/annotation_formatter.hpp"
 #include "dogen/formatters/types/utility_formatter.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/quilt.cpp/io/settings/streaming_settings_io.hpp"
 #include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
 #include "dogen/quilt.cpp/types/properties/name_builder.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
@@ -432,18 +433,6 @@ void assistant::add_helper_methods(const properties::class_info& c) {
     using tt = formatters::types::traits;
     const auto cifn(tt::class_implementation_formatter_name());
     const auto fn(ownership_hierarchy_.formatter_name());
-    const bool is_types_class_implementation(fn == cifn);
-    const bool requires_io(is_io_enabled() && c.in_inheritance_relationship());
-
-    if (is_types_class_implementation && requires_io) {
-        BOOST_LOG_SEV(lg, debug) << "Creating io helper methods in types.";
-        io::helper_methods_formatter f(c.properties());
-        f.format(stream());
-    } else
-        BOOST_LOG_SEV(lg, debug) << "Helper methods for types io not required."
-                                 << " is types class implementation: '"
-                                 << is_types_class_implementation
-                                 << "' requires io: '" << requires_io << "'";
 
     using iot = formatters::io::traits;
     const auto io_ci_fn(iot::class_implementation_formatter_name());
@@ -519,10 +508,11 @@ streaming_for_type(const properties::helper_descriptor& hd,
 
     const auto ss(hd.streaming_settings());
     if (!ss)
-        return std::string();
+        return s;
 
     std::ostringstream stream;
     dogen::formatters::utility_formatter uf(stream);
+    BOOST_LOG_SEV(lg, debug) << "Settings for streaming for type: " << *ss;
     if (ss->remove_unprintable_characters())
         uf.insert_streamed("tidy_up_string(" + s + ")");
     else if (!ss->string_conversion_method().empty()) {
@@ -537,8 +527,7 @@ streaming_for_type(const properties::helper_descriptor& hd,
     else
         uf.insert(s);
 
-    std::string r;
-    return r;
+    return stream.str();
 }
 
 bool assistant::requires_hashing_helper_method(

@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/sequence_container_helper_stitch.hpp"
@@ -42,7 +43,8 @@ std::string sequence_container_helper::family() const {
 
 std::list<std::string> sequence_container_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
-        traits::class_implementation_formatter_name()
+        io::traits::class_implementation_formatter_name(),
+        types::traits::class_implementation_formatter_name()
     });
     return r;
 }
@@ -78,7 +80,7 @@ a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << nt_qn
 a.stream() << "    s << \"[ \";" << std::endl;
 a.stream() << "    for (auto i(v.begin()); i != v.end(); ++i) {" << std::endl;
 a.stream() << "        if (i != v.begin()) s << \", \";" << std::endl;
-a.stream() << "        s << " << a.streaming_for_type(containee, "(*i)") << ";" << std::endl;
+a.stream() << "        s << " << a.streaming_for_type(containee, "*i") << ";" << std::endl;
 a.stream() << "    }" << std::endl;
 a.stream() << "    s << \"] \";" << std::endl;
 a.stream() << "    return s;" << std::endl;

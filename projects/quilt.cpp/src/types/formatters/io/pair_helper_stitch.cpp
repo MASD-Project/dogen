@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/pair_helper_stitch.hpp"
@@ -42,7 +43,8 @@ std::string pair_helper::family() const {
 
 std::list<std::string> pair_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
-        traits::class_implementation_formatter_name()
+        io::traits::class_implementation_formatter_name(),
+        types::traits::class_implementation_formatter_name()
     });
     return r;
 }

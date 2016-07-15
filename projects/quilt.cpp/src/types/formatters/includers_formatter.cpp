@@ -70,8 +70,7 @@ includers_formatter::includers_formatter(const std::string& facet_name)
         formatters::traits::header_formatter_group_name()) { }
 
 std::string includers_formatter::id() const {
-    static auto r(ownership_hierarchy().formatter_name());
-    return r;
+    return ownership_hierarchy().formatter_name();
 }
 
 dynamic::ownership_hierarchy

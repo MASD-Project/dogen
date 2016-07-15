@@ -13,37 +13,38 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-14 Thu 23:16]
+#+CAPTION: Clock summary at [2016-07-15 Fri 20:38]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *28:05* |       |      | 100.0 |
+| *Total time*                                                                | *29:06* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 28:05   |       |      | 100.0 |
-| Active                                                                      |         | 28:05 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:26 |   8.7 |
-| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   4.8 |
-| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   5.2 |
-| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   4.6 |
+| Stories                                                                     | 29:06   |       |      | 100.0 |
+| Active                                                                      |         | 29:06 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:26 |   8.4 |
+| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   4.6 |
+| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   5.0 |
+| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   4.4 |
 | COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   1.7 |
-| COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   1.2 |
+| COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   1.1 |
 | COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   0.6 |
-| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   3.0 |
-| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   1.6 |
+| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   2.9 |
+| COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   1.5 |
 | COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   0.9 |
-| COMPLETED Refactor general settings                                         |         |       | 5:50 |  20.8 |
-| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   5.0 |
-| COMPLETED Create a IO settings class                                        |         |       | 1:15 |   4.5 |
-| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   5.0 |
+| COMPLETED Refactor general settings                                         |         |       | 5:50 |  20.0 |
+| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   4.8 |
+| COMPLETED Create a IO settings class                                        |         |       | 1:15 |   4.3 |
+| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   4.8 |
 | COMPLETED Usage of rev-list in version causes problems                      |         |       | 0:03 |   0.2 |
 | CANCELLED Consider not running initialisers in a static context             |         |       | 0:10 |   0.6 |
 | COMPLETED Refactor formatter interfaces                                     |         |       | 0:36 |   2.1 |
-| COMPLETED Move formatter helpers into formatter container                   |         |       | 0:13 |   0.8 |
+| COMPLETED Move formatter helpers into formatter container                   |         |       | 0:13 |   0.7 |
 | COMPLETED Add aliases for commonly used targets                             |         |       | 0:02 |   0.1 |
-| CANCELLED Add a pretty printer for ownership hierarchy                      |         |       | 0:13 |   0.8 |
-| COMPLETED Add formatter id to file and helper formatters                    |         |       | 1:20 |   4.7 |
-| COMPLETED Add IO to formatter container                                     |         |       | 1:19 |   4.7 |
-| STARTED Enable IO helpers for types                                         |         |       | 4:57 |  17.6 |
+| CANCELLED Add a pretty printer for ownership hierarchy                      |         |       | 0:13 |   0.7 |
+| COMPLETED Add formatter id to file and helper formatters                    |         |       | 1:20 |   4.6 |
+| COMPLETED Add IO to formatter container                                     |         |       | 1:19 |   4.5 |
+| COMPLETED Includers formatter id is incorrect                               |         |       | 0:07 |   0.4 |
+| COMPLETED Enable IO helpers for types                                       |         |       | 5:51 |  20.1 |
 | STARTED Implement IO helper methods with new helper infrastructure          |         |       | 0:15 |   0.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -622,7 +623,29 @@ what types have been registered.
   using utility.
 - use these methods in new container IO code.
 
-*** STARTED Enable IO helpers for types                               :story:
+*** COMPLETED Includers formatter id is incorrect                     :story:
+    CLOSED: [2016-07-15 Fri 20:33]
+    CLOCK: [2016-07-15 Fri 19:33]--[2016-07-15 Fri 19:40] =>  0:07
+
+At present the id of the includers formatter is:
+
+:  "includers_formatters": [
+:    "quilt.cpp.serialization.includers_formatter",
+:    "quilt.cpp.serialization.includers_formatter",
+:    "quilt.cpp.serialization.includers_formatter",
+:    "quilt.cpp.serialization.includers_formatter",
+:    "quilt.cpp.serialization.includers_formatter",
+:    "quilt.cpp.serialization.includers_formatter"
+:  ],
+
+We need somehow know what facet it was registered again. Also, why is
+the default facet hard-coded to =serialization=.
+
+Id was using a static string incorrectly.
+
+*** COMPLETED Enable IO helpers for types                             :story:
+    CLOSED: [2016-07-15 Fri 20:35]
+    CLOCK: [2016-07-15 Fri 19:41]--[2016-07-15 Fri 20:35] =>  0:54
     CLOCK: [2016-07-14 Thu 23:13]--[2016-07-14 Thu 23:16] =>  0:03
     CLOCK: [2016-07-13 Wed 22:11]--[2016-07-13 Wed 22:24] =>  0:13
     CLOCK: [2016-07-13 Wed 21:43]--[2016-07-13 Wed 22:11] =>  0:28
@@ -670,6 +693,13 @@ Problems:
   for all properties, not just in the context of helpers. This seems
   to imply we need a way to access this information directly from the
   property. It will need some thinking.
+
+*** Add tests to inheritance test model                               :story:
+
+We should make sure types' use of IO kicks in via the inheritance test
+model. For this we need a base class with associative containers, etc
+and a derived class.
+
 
 *** Add new c++ warnings to compilation                               :story:
 

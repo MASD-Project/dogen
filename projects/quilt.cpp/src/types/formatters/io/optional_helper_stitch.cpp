@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/optional_helper_stitch.hpp"
@@ -42,7 +43,8 @@ std::string optional_helper::family() const {
 
 std::list<std::string> optional_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
-        traits::class_implementation_formatter_name()
+        io::traits::class_implementation_formatter_name(),
+        types::traits::class_implementation_formatter_name()
     });
     return r;
 }
@@ -79,7 +81,7 @@ a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << nt_qn
 a.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << n_qn << "\\\"\" << \", \";" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    if (v)" << std::endl;
-a.stream() << "        s << \"\\\"data\\\": \" << " << a.streaming_for_type(containee, "(*v)") << ";" << std::endl;
+a.stream() << "        s << \"\\\"data\\\": \" << " << a.streaming_for_type(containee, "*v") << ";" << std::endl;
 a.stream() << "    else" << std::endl;
 a.stream() << "        s << \"\\\"data\\\": \"\"\\\"<empty>\\\"\";" << std::endl;
 a.stream() << "    s << \" }\";" << std::endl;

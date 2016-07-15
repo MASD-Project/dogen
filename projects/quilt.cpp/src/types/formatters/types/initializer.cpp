@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/quilt.cpp/types/formatters/includers_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/includers_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/class_header_formatter.hpp"
