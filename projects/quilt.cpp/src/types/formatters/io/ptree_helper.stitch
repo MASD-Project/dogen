@@ -17,7 +17,7 @@ std::string ptree_helper::id() const {
 }
 
 std::string ptree_helper::family() const {
-    static std::string r("PTree");
+    static std::string r("BoostPTree");
     return r;
 }
 

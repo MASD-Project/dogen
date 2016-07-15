@@ -19,7 +19,8 @@
             "in_global_module" : true,
             "extensions" : {
                 "quilt.cpp.helper.family" : "Character",
-                "quilt.cpp.streaming.remove_unprintable_characters" : true,
+                "quilt.cpp.streaming.remove_unprintable_characters" : false,
+                "quilt.cpp.streaming.requires_quoting" : true,
                 "quilt.cpp.inclusion_required" : false,
                 "quilt.cpp.element.requires_manual_default_constructor" : true
             }
@@ -30,7 +31,8 @@
             "in_global_module" : true,
             "extensions" : {
                 "quilt.cpp.helper.family" : "Character",
-                "quilt.cpp.streaming.remove_unprintable_characters" : true,
+                "quilt.cpp.streaming.remove_unprintable_characters" : false,
+                "quilt.cpp.streaming.requires_quoting" : true,
                 "quilt.cpp.inclusion_required" : false,
                 "quilt.cpp.element.requires_manual_default_constructor" : true
             }

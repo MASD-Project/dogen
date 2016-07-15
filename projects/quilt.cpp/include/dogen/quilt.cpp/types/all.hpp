@@ -123,7 +123,6 @@
 #include "dogen/quilt.cpp/types/formatters/odb/class_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/settings/inclusion_directive_settings.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/class_header_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/io/helper_methods_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/source_cmakelists_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/enum_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/visitor_formatter_interface.hpp"

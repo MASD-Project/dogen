@@ -37,7 +37,6 @@
 #include "dogen/quilt.cpp/types/formatters/test_data/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
-#include "dogen/quilt.cpp/types/formatters/io/helper_methods_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/helper_methods_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/helper_methods_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
@@ -411,9 +410,10 @@ is_streaming_enabled(const properties::helper_properties& hp) const {
         return false;
 
     /*
-     * If we are in the IO facet, we'll always need streaming.
+     * If we are in the IO facet, and we are not in an inheritance
+     * relationship we need streaming.
      */
-    if (is_io())
+    if (is_io() && !hp.in_inheritance_relationship())
         return true;
 
     /*
@@ -431,19 +431,6 @@ void assistant::add_helper_methods(const properties::class_info& c) {
     BOOST_LOG_SEV(lg, debug) << "Processing entity: " << c.name();
 
     const auto fn(ownership_hierarchy_.formatter_name());
-
-    using iot = formatters::io::traits;
-    const auto io_ci_fn(iot::class_implementation_formatter_name());
-    const bool is_io_class_implementation(fn == io_ci_fn);
-    if (is_io_class_implementation && !c.in_inheritance_relationship()) {
-        BOOST_LOG_SEV(lg, debug) << "Creating io helper methods.";
-        io::helper_methods_formatter f(c.properties());
-        f.format(stream());
-    } else
-        BOOST_LOG_SEV(lg, debug) << "Helper methods for io not required."
-                                 << " is io class implementation: '"
-                                 << is_io_class_implementation << "'";
-
     using ht = formatters::hash::traits;
     const auto h_ci_fn(ht::class_implementation_formatter_name());
     const bool is_hash_class_implementation(fn == h_ci_fn);

@@ -128,6 +128,7 @@
             ],
             "extensions" : {
                 "quilt.cpp.helper.family" : "BoostDate",
+                "quilt.cpp.streaming.requires_quoting" : true,
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/date_time/gregorian/gregorian_types.hpp>",
                 "quilt.cpp.io.class_header_formatter.inclusion_directive" : "<boost/date_time/gregorian/gregorian.hpp>",
                 "quilt.cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/date_time/gregorian/gregorian.hpp>",
@@ -145,6 +146,7 @@
             ],
             "extensions" : {
                 "quilt.cpp.helper.family" : "BoostPTime",
+                "quilt.cpp.streaming.requires_quoting" : true,
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/posix_time_types.hpp>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/time_serialize.hpp>",
                 "quilt.cpp.io.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/posix_time.hpp>",
@@ -162,6 +164,7 @@
             ],
             "extensions" : {
                 "quilt.cpp.helper.family" : "BoostTimeDuration",
+                "quilt.cpp.streaming.requires_quoting" : true,
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/posix_time_types.hpp>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/time_serialize.hpp>",
                 "quilt.cpp.io.class_header_formatter.inclusion_directive" : "<boost/date_time/posix_time/posix_time.hpp>",

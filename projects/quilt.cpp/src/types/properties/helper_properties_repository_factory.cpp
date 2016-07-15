@@ -21,6 +21,7 @@
 #include <list>
 #include <unordered_set>
 #include <boost/throw_exception.hpp>
+#include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/primitive.hpp"
@@ -68,7 +69,7 @@ public:
 
 public:
     void operator()(const std::pair<std::string,
-        boost::shared_ptr<dogen::yarn::element> >& pair) const {
+        boost::shared_ptr<dogen::yarn::element> >& pair) {
         const auto& e(*pair.second);
         e.accept(*this);
     }
@@ -120,6 +121,8 @@ helper_properties_repository_factory::make(const yarn::model& m,
     primitve_ids_generator pig;
     for (const auto& pair : m.elements())
         pig(pair);
+
+    BOOST_LOG_SEV(lg, debug) << "Primitive IDs: " << pig.result();
 
     const helper_properties_factory f(pig.result(), hsrp, ssrp);
     generator g(f);

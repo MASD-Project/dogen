@@ -202,7 +202,7 @@
             "simple_name" : "set",
             "object_type" : "associative_container",
             "extensions" : {
-                "quilt.cpp.helper.family" : "AssociativeContainer",
+                "quilt.cpp.helper.family" : "SequenceContainer",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<set>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/set.hpp>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -216,7 +216,7 @@
             "simple_name" : "multiset",
             "object_type" : "associative_container",
             "extensions" : {
-                "quilt.cpp.helper.family" : "AssociativeContainer",
+                "quilt.cpp.helper.family" : "SequenceContainer",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<multiset>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/multiset.hpp>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
@@ -230,7 +230,7 @@
             "simple_name" : "unordered_set",
             "object_type" : "associative_container",
             "extensions" : {
-                "quilt.cpp.helper.family" : "AssociativeContainer",
+                "quilt.cpp.helper.family" : "SequenceContainer",
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<unordered_set>",
                 "quilt.cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/unordered_set.hpp>",
                 "quilt.cpp.hash.class_header_formatter.inclusion_required" : false,
