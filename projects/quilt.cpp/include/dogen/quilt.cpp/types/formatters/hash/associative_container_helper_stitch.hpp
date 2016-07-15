@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/nested_type_formatting_assistant.hpp"
 #include "dogen/quilt.cpp/types/properties/nested_type_info.hpp"
 
@@ -33,6 +34,19 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 namespace hash {
+
+class associative_container_helper : public helper_formatter_interface {
+public:
+    std::string id() const;
+    std::string family() const;
+    std::list<std::string> owning_formatters() const;
+    bool requires_explicit_call() const;
+    std::string function_name() const;
+    std::string helper_name() const;
+    bool is_enabled(const assistant& a,
+        const properties::helper_properties& hp) const;
+    void format(assistant& a, const properties::helper_properties& hp) const;
+};
 
 void associative_container_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
