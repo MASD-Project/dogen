@@ -17,9 +17,7 @@ platform:
   - x64
 
 install:
-    - cmd: choco install cmake -y
-    - cmd: choco upgrade cmake -y
-    - cmd: cmake --version
+    - cinst cmake
 
     # conan
     - cmd: echo "Downloading conan..."
