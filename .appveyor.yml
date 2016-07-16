@@ -16,6 +16,8 @@ configuration:
 platform:
   - x64
 
+clone_depth: 5
+
 install:
     - cinst cmake
 
