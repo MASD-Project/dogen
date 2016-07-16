@@ -13,41 +13,41 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-16 Sat 23:54]
+#+CAPTION: Clock summary at [2016-07-17 Sun 00:12]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *30:44* |       |      | 100.0 |
+| *Total time*                                                                | *31:01* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 30:44   |       |      | 100.0 |
-| Active                                                                      |         | 30:44 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:26 |   7.9 |
+| Stories                                                                     | 31:01   |       |      | 100.0 |
+| Active                                                                      |         | 31:01 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:26 |   7.8 |
 | STARTED Manual updates and blog posts                                       |         |       | 1:21 |   4.4 |
-| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   4.8 |
-| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   4.2 |
+| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   4.7 |
+| COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   4.1 |
 | COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   1.6 |
 | COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   1.1 |
 | COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   0.5 |
 | COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   2.7 |
 | COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   1.5 |
 | COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   0.9 |
-| COMPLETED Refactor general settings                                         |         |       | 5:50 |  19.0 |
-| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   4.6 |
-| COMPLETED Create a IO settings class                                        |         |       | 1:15 |   4.1 |
-| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   4.6 |
+| COMPLETED Refactor general settings                                         |         |       | 5:50 |  18.8 |
+| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   4.5 |
+| COMPLETED Create a IO settings class                                        |         |       | 1:15 |   4.0 |
+| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   4.5 |
 | COMPLETED Usage of rev-list in version causes problems                      |         |       | 0:03 |   0.2 |
 | CANCELLED Consider not running initialisers in a static context             |         |       | 0:10 |   0.5 |
-| COMPLETED Refactor formatter interfaces                                     |         |       | 0:36 |   2.0 |
+| COMPLETED Refactor formatter interfaces                                     |         |       | 0:36 |   1.9 |
 | COMPLETED Move formatter helpers into formatter container                   |         |       | 0:13 |   0.7 |
 | COMPLETED Add aliases for commonly used targets                             |         |       | 0:02 |   0.1 |
 | CANCELLED Add a pretty printer for ownership hierarchy                      |         |       | 0:13 |   0.7 |
 | COMPLETED Add formatter id to file and helper formatters                    |         |       | 1:20 |   4.3 |
-| COMPLETED Add IO to formatter container                                     |         |       | 1:19 |   4.3 |
+| COMPLETED Add IO to formatter container                                     |         |       | 1:19 |   4.2 |
 | COMPLETED Includers formatter id is incorrect                               |         |       | 0:07 |   0.4 |
-| COMPLETED Enable IO helpers for types                                       |         |       | 5:51 |  19.0 |
+| COMPLETED Enable IO helpers for types                                       |         |       | 5:51 |  18.9 |
 | COMPLETED Implement IO helper methods with new helper infrastructure        |         |       | 1:03 |   3.4 |
 | COMPLETED Fix cmake installations problems on windows build                 |         |       | 0:24 |   1.3 |
-| STARTED Implement hashing using dynamic helpers                             |         |       | 0:26 |   1.4 |
+| STARTED Implement hashing using dynamic helpers                             |         |       | 0:43 |   2.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -763,10 +763,18 @@ strange thing is that we don't seem to have changed anything:
 To just get things going again, downgraded back to CMake 3.4.
 
 *** STARTED Implement hashing using dynamic helpers                   :story:
+    CLOCK: [2016-07-16 Sat 23:55]--[2016-07-17 Sun 00:12] =>  0:17
     CLOCK: [2016-07-15 Fri 22:06]--[2016-07-15 Fri 22:23] =>  0:17
     CLOCK: [2016-07-15 Fri 21:25]--[2016-07-15 Fri 21:34] =>  0:09
 
 Update formatters in hash to use new helpers.
+
+- =requires_hashing_helper_method=: is there a hashing helper for type
+  t? We can tell if the type requires helpers, but this is across all
+  facets, so we don't know if this is for hashing or not. But for a
+  given family, the helpers register against a owning formatter. If a
+  type exists for that owning formatter then a helper is required. We
+  could add an attribute to properties that is computed based on this.
 
 *** Add tests to inheritance test model                               :story:
 

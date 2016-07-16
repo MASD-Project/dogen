@@ -58,7 +58,8 @@ public:
         const std::string& name_tree_identifiable,
         const boost::optional<dogen::quilt::cpp::settings::helper_settings>& helper_settings,
         const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& streaming_settings,
-        const bool is_primitive);
+        const bool is_primitive,
+        const bool requires_hashing_helper);
 
 private:
     template<typename Archive>
@@ -106,6 +107,9 @@ public:
     bool is_primitive() const;
     void is_primitive(const bool v);
 
+    bool requires_hashing_helper() const;
+    void requires_hashing_helper(const bool v);
+
 public:
     bool operator==(const helper_descriptor& rhs) const;
     bool operator!=(const helper_descriptor& rhs) const {
@@ -125,6 +129,7 @@ private:
     boost::optional<dogen::quilt::cpp::settings::helper_settings> helper_settings_;
     boost::optional<dogen::quilt::cpp::settings::streaming_settings> streaming_settings_;
     bool is_primitive_;
+    bool requires_hashing_helper_;
 };
 
 } } } }

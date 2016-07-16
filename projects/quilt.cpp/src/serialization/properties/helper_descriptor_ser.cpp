@@ -49,6 +49,7 @@ void save(Archive& ar,
     ar << make_nvp("helper_settings", v.helper_settings_);
     ar << make_nvp("streaming_settings", v.streaming_settings_);
     ar << make_nvp("is_primitive", v.is_primitive_);
+    ar << make_nvp("requires_hashing_helper", v.requires_hashing_helper_);
 }
 
 template<typename Archive>
@@ -63,6 +64,7 @@ void load(Archive& ar,
     ar >> make_nvp("helper_settings", v.helper_settings_);
     ar >> make_nvp("streaming_settings", v.streaming_settings_);
     ar >> make_nvp("is_primitive", v.is_primitive_);
+    ar >> make_nvp("requires_hashing_helper", v.requires_hashing_helper_);
 }
 
 } }

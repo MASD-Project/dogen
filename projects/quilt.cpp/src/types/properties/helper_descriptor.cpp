@@ -26,7 +26,8 @@ namespace cpp {
 namespace properties {
 
 helper_descriptor::helper_descriptor()
-    : is_primitive_(static_cast<bool>(0)) { }
+    : is_primitive_(static_cast<bool>(0)),
+      requires_hashing_helper_(static_cast<bool>(0)) { }
 
 helper_descriptor::helper_descriptor(helper_descriptor&& rhs)
     : namespaces_(std::move(rhs.namespaces_)),
@@ -36,7 +37,8 @@ helper_descriptor::helper_descriptor(helper_descriptor&& rhs)
       name_tree_identifiable_(std::move(rhs.name_tree_identifiable_)),
       helper_settings_(std::move(rhs.helper_settings_)),
       streaming_settings_(std::move(rhs.streaming_settings_)),
-      is_primitive_(std::move(rhs.is_primitive_)) { }
+      is_primitive_(std::move(rhs.is_primitive_)),
+      requires_hashing_helper_(std::move(rhs.requires_hashing_helper_)) { }
 
 helper_descriptor::helper_descriptor(
     const std::list<std::string>& namespaces,
@@ -46,7 +48,8 @@ helper_descriptor::helper_descriptor(
     const std::string& name_tree_identifiable,
     const boost::optional<dogen::quilt::cpp::settings::helper_settings>& helper_settings,
     const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& streaming_settings,
-    const bool is_primitive)
+    const bool is_primitive,
+    const bool requires_hashing_helper)
     : namespaces_(namespaces),
       name_identifiable_(name_identifiable),
       name_qualified_(name_qualified),
@@ -54,7 +57,8 @@ helper_descriptor::helper_descriptor(
       name_tree_identifiable_(name_tree_identifiable),
       helper_settings_(helper_settings),
       streaming_settings_(streaming_settings),
-      is_primitive_(is_primitive) { }
+      is_primitive_(is_primitive),
+      requires_hashing_helper_(requires_hashing_helper) { }
 
 void helper_descriptor::swap(helper_descriptor& other) noexcept {
     using std::swap;
@@ -66,6 +70,7 @@ void helper_descriptor::swap(helper_descriptor& other) noexcept {
     swap(helper_settings_, other.helper_settings_);
     swap(streaming_settings_, other.streaming_settings_);
     swap(is_primitive_, other.is_primitive_);
+    swap(requires_hashing_helper_, other.requires_hashing_helper_);
 }
 
 bool helper_descriptor::operator==(const helper_descriptor& rhs) const {
@@ -76,7 +81,8 @@ bool helper_descriptor::operator==(const helper_descriptor& rhs) const {
         name_tree_identifiable_ == rhs.name_tree_identifiable_ &&
         helper_settings_ == rhs.helper_settings_ &&
         streaming_settings_ == rhs.streaming_settings_ &&
-        is_primitive_ == rhs.is_primitive_;
+        is_primitive_ == rhs.is_primitive_ &&
+        requires_hashing_helper_ == rhs.requires_hashing_helper_;
 }
 
 helper_descriptor& helper_descriptor::operator=(helper_descriptor other) {
@@ -203,6 +209,14 @@ bool helper_descriptor::is_primitive() const {
 
 void helper_descriptor::is_primitive(const bool v) {
     is_primitive_ = v;
+}
+
+bool helper_descriptor::requires_hashing_helper() const {
+    return requires_hashing_helper_;
+}
+
+void helper_descriptor::requires_hashing_helper(const bool v) {
+    requires_hashing_helper_ = v;
 }
 
 } } } }
