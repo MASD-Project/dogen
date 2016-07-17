@@ -30,10 +30,8 @@ install:
 
 before_build:
   # Workaround for CMake not wanting sh.exe on PATH for MinGW
-  - cmd: echo %PATH%
   - cmd: set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
   - cmd: set PATH=C:\MinGW\bin;%PATH%
-  - cmd: echo %PATH%
   - cmd: cd build
   - cmd: mkdir output
   - cmd: cd output
@@ -41,7 +39,9 @@ before_build:
   - cmd: cmake ../.. -DCMAKE_BUILD_TYPE=%configuration% -G "%generator%"
 
 build_script:
-    - cmd: cmake --build . --config "%configuration%"
+    - cmd: if "%configuration%"=="Release" cmake --build . --config "%configuration%"
+    - cmd: if "%configuration%"=="Debug" cmake --build . --config "%configuration%" -s compiler.runtime=MDd
+    - cmd: cmake --build . --config "%configuration%" --target run_all_tests
 
 notifications:
   - provider: Webhook
