@@ -148,7 +148,7 @@ helper_properties_repository_factory::make(
     const auto fff(facets_for_family(fc));
     BOOST_LOG_SEV(lg, debug) << "Facets for family: " << fff;
 
-    const helper_properties_factory f(pig.result(), hsrp, ssrp);
+    const helper_properties_factory f(pig.result(), fff, hsrp, ssrp);
     generator g(f);
     for (const auto& pair : m.elements()) {
         const auto& e(*pair.second);

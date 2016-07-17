@@ -22,6 +22,7 @@
 #include <unordered_set>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/quilt.cpp/types/properties/name_builder.hpp"
 #include "dogen/quilt.cpp/types/properties/building_error.hpp"
 #include "dogen/quilt.cpp/io/properties/helper_properties_io.hpp"
@@ -61,10 +62,30 @@ get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
 
 helper_properties_factory::helper_properties_factory(
     const std::unordered_set<std::string>& primitive_ids,
+    const std::unordered_map<std::string, std::unordered_set<std::string>>&
+    facets_for_family,
     const settings::helper_settings_repository& hsrp,
     const settings::streaming_settings_repository& ss)
-    : primitive_ids_(primitive_ids), helper_settings_(hsrp),
-      streaming_settings_(ss) { }
+    : primitive_ids_(primitive_ids), facets_for_family_(facets_for_family),
+      helper_settings_(hsrp), streaming_settings_(ss) { }
+
+bool helper_properties_factory::
+requires_hashing_helper(const std::string& family) const {
+    /*
+     * If there is no entry on the container for this family, we
+     * don't need a helper for hashing.
+     */
+    const auto i(facets_for_family_.find(family));
+    if (i == facets_for_family_.end())
+        return false;
+
+    /*
+     * If the hash facet is not present in the helpers for this family
+     * then the family does not require hashing support.
+     */
+    const auto j(i->second.find(formatters::hash::traits::facet_name()));
+    return j != i->second.end();
+}
 
 boost::optional<settings::helper_settings> helper_properties_factory::
 helper_settings_for_id(const std::string& id) const {
@@ -138,6 +159,8 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
     if (requires_helper) {
         r.helper_settings(hs);
         BOOST_LOG_SEV(lg, debug) << "Adding helper settings for: " << id;
+
+        r.requires_hashing_helper(requires_hashing_helper(hs->family()));
     }
 
     const auto p1(get_identifiable_and_qualified(nt.current()));

@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <unordered_map>
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/attribute.hpp"
@@ -44,10 +45,14 @@ class helper_properties_factory {
 public:
     helper_properties_factory(
         const std::unordered_set<std::string>& primitive_ids,
+        const std::unordered_map<std::string, std::unordered_set<std::string>>&
+        facets_for_family,
         const settings::helper_settings_repository& hsrp,
         const settings::streaming_settings_repository& ssrp);
 
 private:
+    bool requires_hashing_helper(const std::string& family) const;
+
     boost::optional<settings::helper_settings>
     helper_settings_for_id(const std::string& id) const;
 
@@ -68,6 +73,8 @@ public:
 
 private:
     const std::unordered_set<std::string>& primitive_ids_;
+    const std::unordered_map<std::string, std::unordered_set<std::string>>&
+        facets_for_family_;
     const settings::helper_settings_repository& helper_settings_;
     const settings::streaming_settings_repository& streaming_settings_;
 };
