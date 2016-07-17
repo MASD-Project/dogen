@@ -47,6 +47,7 @@ public:
     virtual std::string id() const = 0;
     virtual std::string family() const = 0;
     virtual std::list<std::string> owning_formatters() const = 0;
+    virtual std::list<std::string> owning_facets() const = 0;
     virtual bool requires_explicit_call() const = 0;
     virtual std::string function_name() const = 0;
     virtual std::string helper_name() const = 0;

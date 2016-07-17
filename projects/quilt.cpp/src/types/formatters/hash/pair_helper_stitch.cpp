@@ -46,6 +46,14 @@ pair_helper::owning_formatters() const {
     return r;
 }
 
+std::list<std::string>
+pair_helper::owning_facets() const {
+    static auto r(std::list<std::string> {
+        hash::traits::facet_name()
+    });
+    return r;
+}
+
 bool pair_helper::requires_explicit_call() const {
     return false;
 }

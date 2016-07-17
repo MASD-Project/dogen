@@ -38,15 +38,17 @@ namespace hash {
 
 class date_helper : public helper_formatter_interface {
 public:
-    std::string id() const;
-    std::string family() const;
-    std::list<std::string> owning_formatters() const;
-    bool requires_explicit_call() const;
-    std::string function_name() const;
-    std::string helper_name() const;
+    std::string id() const override;
+    std::string family() const override;
+    std::list<std::string> owning_formatters() const override;
+    std::list<std::string> owning_facets() const override;
+    bool requires_explicit_call() const override;
+    std::string function_name() const override;
+    std::string helper_name() const override;
     bool is_enabled(const assistant& a,
-        const properties::helper_properties& hp) const;
-    void format(assistant& a, const properties::helper_properties& hp) const;
+        const properties::helper_properties& hp) const override;
+    void format(assistant& a,
+        const properties::helper_properties& hp) const override;
 };
 
 void date_helper_stitch(
