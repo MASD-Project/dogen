@@ -42,7 +42,7 @@ before_build:
 build_script:
   # FIXME: different levels of borkage atm.
   - cmd: if "%configuration%"=="Release" cmake --build . --config "%configuration%"
-  - cmd: if "%configuration%"=="Debug"  cmake --build . --config "%configuration%" knit
+  - cmd: if "%configuration%"=="Debug"  cmake --build . --config "%configuration%" --target knit
   # - cmd: cmake --build . --config "%configuration%" --target run_all_tests
 
 notifications:
