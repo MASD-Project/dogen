@@ -36,7 +36,6 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.name_builder"));
 
-
 const std::string dot(".");
 const std::string empty_type_name("Type name is empty.");
 const std::string empty_model_name("Model name is empty.");

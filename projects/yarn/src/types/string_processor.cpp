@@ -19,9 +19,13 @@
  *
  */
 #include <boost/algorithm/string.hpp>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/string_processor.hpp"
 
 namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.string_processor"));
 
 const std::string empty;
 const std::string comma(",");
@@ -38,6 +42,7 @@ namespace yarn {
 
 std::string string_processor::to_identifiable(const std::string& s) const {
     std::string r(s);
+    BOOST_LOG_SEV(lg, trace) << "Before processing: " << r;
 
     boost::replace_all(r, scope_operator, separator);
     boost::replace_all(r, less_than, separator);
@@ -48,6 +53,7 @@ std::string string_processor::to_identifiable(const std::string& s) const {
 
     boost::replace_all(r, space, separator);
 
+    BOOST_LOG_SEV(lg, trace) << "After processing: " << r;
     return r;
 }
 
