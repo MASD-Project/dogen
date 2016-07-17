@@ -18,8 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/ptree_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -75,7 +77,21 @@ bool ptree_helper::is_enabled(const assistant& /*a*/,
 }
 
 void ptree_helper::
-format(assistant& /*a*/, const properties::helper_properties& /*hp*/) const {
+format(assistant& a, const properties::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+a.stream() << std::endl;
+a.stream() << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
+a.stream() << "    std::size_t seed(0);" << std::endl;
+a.stream() << "    for (const auto& node : v) {" << std::endl;
+a.stream() << "        combine(seed, node.first);" << std::endl;
+a.stream() << "        combine(seed, node.second.data());" << std::endl;
+a.stream() << "        combine(seed, hash_" << ident << "(node.second));" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    return seed;" << std::endl;
+a.stream() << "}" << std::endl;
 }
 
 void ptree_helper_stitch(

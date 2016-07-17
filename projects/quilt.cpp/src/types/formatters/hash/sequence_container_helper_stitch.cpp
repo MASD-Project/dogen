@@ -18,8 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/sequence_container_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -75,7 +77,22 @@ bool sequence_container_helper::is_enabled(const assistant& /*a*/,
 }
 
 void sequence_container_helper::
-format(assistant& /*a*/, const properties::helper_properties& /*hp*/) const {
+format(assistant& a, const properties::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+    const auto containee(hp.direct_descendants().front());
+a.stream() << std::endl;
+a.stream() << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
+a.stream() << "    std::size_t seed(0);" << std::endl;
+a.stream() << "    for (const auto i : v) {" << std::endl;
+    if (!containee.requires_hashing_helper())
+a.stream() << "        combine(seed, i);" << std::endl;
+    else
+a.stream() << "        combine(seed, hash_" << containee.name_tree_identifiable() << "(i));" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << "    return seed;" << std::endl;
+a.stream() << "}" << std::endl;
 }
 
 void sequence_container_helper_stitch(

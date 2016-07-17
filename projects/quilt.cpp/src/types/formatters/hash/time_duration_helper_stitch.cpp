@@ -18,8 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/time_duration_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -75,7 +77,18 @@ bool time_duration_helper::is_enabled(const assistant& /*a*/,
 }
 
 void time_duration_helper::
-format(assistant& /*a*/, const properties::helper_properties& /*hp*/) const {
+format(assistant& a, const properties::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+    const auto key(hp.direct_descendants().front());
+    const auto value(hp.direct_descendants().back());
+a.stream() << std::endl;
+a.stream() << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
+a.stream() << "    std::size_t seed(0);" << std::endl;
+a.stream() << "    seed = static_cast<std::size_t>(v.total_seconds());" << std::endl;
+a.stream() << "    return seed;" << std::endl;
+a.stream() << "}" << std::endl;
 }
 
 void time_duration_helper_stitch(
