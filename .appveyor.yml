@@ -36,7 +36,7 @@ before_build:
   - cmd: mkdir output
   - cmd: cd output
   - cmd: if "%configuration%"=="Release" conan install ../.. --file=.conanfile.txt
-  - cmd: if "%configuration%"=="Debug" conan install ../.. --file=.conanfile.txt -s compiler.runtime=MDd
+  - cmd: if "%configuration%"=="Debug" conan install ../.. --file=.conanfile.txt -s compiler="Visual Studio" -s compiler.version=14 -s arch=x86 -s build_type=Debug -s compiler.runtime=MDd
   - cmd: cmake ../.. -DCMAKE_BUILD_TYPE=%configuration% -G "%generator%"
 
 build_script:
