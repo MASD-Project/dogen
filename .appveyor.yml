@@ -35,12 +35,12 @@ before_build:
   - cmd: cd build
   - cmd: mkdir output
   - cmd: cd output
-  - cmd: conan install ../.. --file=.conanfile.txt
+  - cmd: if "%configuration%"=="Release" conan install ../.. --file=.conanfile.txt
+  - cmd: if "%configuration%"=="Debug" conan install ../.. --file=.conanfile.txt -s compiler.runtime=MDd
   - cmd: cmake ../.. -DCMAKE_BUILD_TYPE=%configuration% -G "%generator%"
 
 build_script:
-    - cmd: if "%configuration%"=="Release" cmake --build . --config "%configuration%"
-    - cmd: if "%configuration%"=="Debug" cmake --build . --config "%configuration%" -s compiler.runtime=MDd
+    - cmd: cmake --build . --config "%configuration%"
     - cmd: cmake --build . --config "%configuration%" --target run_all_tests
 
 notifications:
