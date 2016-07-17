@@ -26,7 +26,6 @@
 #include "dogen/quilt.cpp/types/formatters/io/enum_implementation_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/smart_pointer_helper_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/associative_container_helper_stitch.hpp"
-#include "dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/optional_helper_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/pair_helper_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/ptree_helper_stitch.hpp"

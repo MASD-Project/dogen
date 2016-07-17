@@ -23,6 +23,17 @@
 #include "dogen/quilt.cpp/types/formatters/hash/class_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/class_implementation_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/enum_header_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/hash/associative_container_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/hash/date_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/hash/optional_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/hash/pair_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/hash/path_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/hash/ptime_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/hash/ptree_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/hash/sequence_container_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/hash/smart_pointer_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/hash/time_duration_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/hash/variant_helper_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/initializer.hpp"
 
 namespace dogen {
@@ -36,6 +47,18 @@ void initializer::initialize(registrar& rg) {
     initialise_formatter<class_header_formatter>(rg);
     initialise_formatter<class_implementation_formatter>(rg);
     initialise_formatter<enum_header_formatter>(rg);
+    initialise_formatter_helper<smart_pointer_helper>(rg);
+    initialise_formatter_helper<associative_container_helper>(rg);
+    initialise_formatter_helper<date_helper>(rg);
+    initialise_formatter_helper<optional_helper>(rg);
+    initialise_formatter_helper<pair_helper>(rg);
+    initialise_formatter_helper<path_helper>(rg);
+    initialise_formatter_helper<ptime_helper>(rg);
+    initialise_formatter_helper<ptree_helper>(rg);
+    initialise_formatter_helper<sequence_container_helper>(rg);
+    initialise_formatter_helper<smart_pointer_helper>(rg);
+    initialise_formatter_helper<time_duration_helper>(rg);
+    initialise_formatter_helper<variant_helper>(rg);
 }
 
 } } } } }
