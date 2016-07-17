@@ -5163,15 +5163,6 @@ See:
 
 - [[https://github.com/Milkyway-at-home/milkywayathome_client/blob/master/cmake_modules/Profiling.cmake][milkywayathome_client's profiling for CMake]]
 
-*** Fix Windows build timeout                                         :story:
-
-At present the windows build is taking over 1h and its only building
-the knitter target. We need to think of ways to reduce the build
-time. Things to try:
-
-- remove all of the hashing etc for the types we don't need to hash.
-- get rid of the warnings for boost.
-
 *** Build boost for MinGW                                             :story:
 
 At present our MinGW build is borked because we do not have a boost
