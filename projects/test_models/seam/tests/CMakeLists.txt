@@ -18,7 +18,8 @@
 # MA 02110-1301, USA.
 #
 set(name "seam")
-set(binary_name "dogen.${name}.tests")
+set(tests_name "${name}.tests")
+set(binary_name "dogen.${tests_name}")
 set(files "")
 file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
@@ -29,21 +30,21 @@ file(GLOB_RECURSE stitch_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/../src/*.cpp")
 
-add_executable(${name}_tests ${files} ${stitch_files})
-set_target_properties(${name}_tests PROPERTIES OUTPUT_NAME ${binary_name})
+add_executable(${tests_name} ${files} ${stitch_files})
+set_target_properties(${tests_name} PROPERTIES OUTPUT_NAME ${binary_name})
 
-target_link_libraries(${name}_tests
+target_link_libraries(${tests_name}
     utility
     ${Boost_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 
-set(command ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
+set(command $<TARGET_FILE:${tests_name}> ${boost_test_parameters})
 
-add_custom_target(run_${name}_tests
+add_custom_target(run_${tests_name}
     COMMAND ${command}
     WORKING_DIRECTORY ${stage_bin_dir}
-    DEPENDS ${name}_tests)
-add_dependencies(run_all_tests run_${name}_tests)
+    DEPENDS ${tests_name})
+add_dependencies(run_all_tests run_${tests_name})
 
 add_boost_tests(${name} ${files})
-install(TARGETS ${name}_tests RUNTIME DESTINATION bin COMPONENT tests)
+install(TARGETS ${tests_name} RUNTIME DESTINATION bin COMPONENT tests)

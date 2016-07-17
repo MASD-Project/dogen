@@ -13,42 +13,43 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-17 Sun 01:51]
+#+CAPTION: Clock summary at [2016-07-17 Sun 08:53]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *32:36* |       |      | 100.0 |
+| *Total time*                                                                | *32:59* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 32:36   |       |      | 100.0 |
-| Active                                                                      |         | 32:36 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:26 |   7.5 |
+| Stories                                                                     | 32:59   |       |      | 100.0 |
+| Active                                                                      |         | 32:59 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:26 |   7.4 |
 | STARTED Manual updates and blog posts                                       |         |       | 1:21 |   4.1 |
-| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   4.5 |
+| COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   4.4 |
 | COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   3.9 |
 | COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   1.5 |
 | COMPLETED Simplify local builds on emacs                                    |         |       | 0:20 |   1.0 |
 | COMPLETED Create a debug build for clang in travis                          |         |       | 0:10 |   0.5 |
-| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   2.6 |
+| COMPLETED Rename element settings back to aspect settings                   |         |       | 0:50 |   2.5 |
 | COMPLETED Rename bundle to element settings                                 |         |       | 0:27 |   1.4 |
 | COMPLETED Rename bundle in stitch to properties                             |         |       | 0:16 |   0.8 |
-| COMPLETED Refactor general settings                                         |         |       | 5:50 |  17.9 |
-| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   4.3 |
+| COMPLETED Refactor general settings                                         |         |       | 5:50 |  17.7 |
+| COMPLETED Rename specs to tests                                             |         |       | 1:24 |   4.2 |
 | COMPLETED Create a IO settings class                                        |         |       | 1:15 |   3.8 |
-| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   4.3 |
+| COMPLETED Implement streaming for type in terms of IO settings              |         |       | 1:24 |   4.2 |
 | COMPLETED Usage of rev-list in version causes problems                      |         |       | 0:03 |   0.2 |
 | CANCELLED Consider not running initialisers in a static context             |         |       | 0:10 |   0.5 |
 | COMPLETED Refactor formatter interfaces                                     |         |       | 0:36 |   1.8 |
 | COMPLETED Move formatter helpers into formatter container                   |         |       | 0:13 |   0.7 |
 | COMPLETED Add aliases for commonly used targets                             |         |       | 0:02 |   0.1 |
 | CANCELLED Add a pretty printer for ownership hierarchy                      |         |       | 0:13 |   0.7 |
-| COMPLETED Add formatter id to file and helper formatters                    |         |       | 1:20 |   4.1 |
+| COMPLETED Add formatter id to file and helper formatters                    |         |       | 1:20 |   4.0 |
 | COMPLETED Add IO to formatter container                                     |         |       | 1:19 |   4.0 |
 | COMPLETED Includers formatter id is incorrect                               |         |       | 0:07 |   0.4 |
-| COMPLETED Enable IO helpers for types                                       |         |       | 5:51 |  17.9 |
+| COMPLETED Enable IO helpers for types                                       |         |       | 5:51 |  17.7 |
 | COMPLETED Implement IO helper methods with new helper infrastructure        |         |       | 1:03 |   3.2 |
 | COMPLETED Fix cmake installations problems on windows build                 |         |       | 0:24 |   1.2 |
-| COMPLETED Fix Windows linking errors for debug builds                       |         |       | 0:48 |   2.5 |
-| STARTED Implement hashing using dynamic helpers                             |         |       | 1:30 |   4.6 |
+| COMPLETED Fix Windows linking errors for debug builds                       |         |       | 0:48 |   2.4 |
+| COMPLETED Windows build fails to find tests                                 |         |       | 0:23 |   1.2 |
+| STARTED Implement hashing using dynamic helpers                             |         |       | 1:30 |   4.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -799,6 +800,22 @@ automatically use the correct run-time ([[http://conanio.readthedocs.io/en/lates
 : In the case above, it is important to specify the runtime MDd to be compatible with the Debug version we are requesting.
 
 Basically we need to add =-s compiler.runtime=MDd= for debug builds.
+
+*** COMPLETED Windows build fails to find tests                       :story:
+    CLOSED: [2016-07-17 Sun 08:53]
+    CLOCK: [2016-07-17 Sun 08:30]--[2016-07-17 Sun 08:53] =>  0:23
+
+Appveyor now works for debug and release build targets, but fails when
+running the tests:
+
+: [00:26:57]   'C:\projects\dogen\build\output\stage\bin\dogen.yarn.tests'
+: is not recognized as an internal or external command,
+: [00:26:57]   operable program or batch file.
+
+This is probably because we are missing the =.exe= extension. Try
+using CMake's =TARGET_FILE= instead as explained here:
+
+[[http://cmake.3232098.n2.nabble.com/How-to-get-target-binary-name-td7580456.html][How to get target binary name?]]
 
 *** STARTED Implement hashing using dynamic helpers                   :story:
     CLOCK: [2016-07-17 Sun 00:39]--[2016-07-17 Sun 01:00] =>  0:47

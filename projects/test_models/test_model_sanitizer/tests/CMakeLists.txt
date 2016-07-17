@@ -77,7 +77,7 @@ target_link_libraries(${tests_name}
 
 # FIXME: link against database if feature is on?
 
-set(command ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
+set(command $<TARGET_FILE:${tests_name}> ${boost_test_parameters})
 
 add_custom_target(run_${tests_name}
     COMMAND ${command}

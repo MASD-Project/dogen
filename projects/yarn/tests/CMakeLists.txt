@@ -36,7 +36,7 @@ target_link_libraries(${tests_name}
     ${CMAKE_REQUIRED_LIBRARIES}
     ${Boost_LIBRARIES})
 
-set(command ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
+set(command $<TARGET_FILE:${tests_name}> ${boost_test_parameters})
 
 add_custom_target(run_${tests_name}
     COMMAND ${command}

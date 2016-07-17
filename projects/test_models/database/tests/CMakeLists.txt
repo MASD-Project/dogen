@@ -37,10 +37,10 @@ target_link_libraries(database_tests
     ${PQXX_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 
-set(database_tests_cmd ${stage_bin_dir}/${binary_name} ${boost_test_parameters})
+set(command $<TARGET_FILE:${tests_name}> ${boost_test_parameters})
 
 add_custom_target(run_database_tests
-    COMMAND ${database_tests_cmd}
+    COMMAND ${command}
     WORKING_DIRECTORY ${stage_bin_dir}
     DEPENDS database_tests)
 add_dependencies(run_all_testss run_database_tests)
