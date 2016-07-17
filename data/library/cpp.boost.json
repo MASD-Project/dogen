@@ -110,6 +110,7 @@
                 "filesystem"
             ],
             "extensions" : {
+                "quilt.cpp.helper.family" : "BoostPath",
                 "quilt.cpp.streaming.string_conversion_method" : "generic_string()",
                 "quilt.cpp.element.requires_manual_move_constructor" : true,
                 "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/filesystem/path.hpp>",
