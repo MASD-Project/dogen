@@ -25,7 +25,11 @@
 #pragma once
 #endif
 
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
 #include "dogen/yarn/types/model.hpp"
+#include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties_repository.hpp"
@@ -36,10 +40,16 @@ namespace cpp {
 namespace properties {
 
 class helper_properties_repository_factory {
+private:
+    std::unordered_map<std::string, std::unordered_set<std::string>>
+    facets_for_family(const formatters::container& fc) const;
+
 public:
-    helper_properties_repository make(const yarn::model& m,
+    helper_properties_repository make(
         const settings::helper_settings_repository& hsrp,
-        const settings::streaming_settings_repository& ssrp) const;
+        const settings::streaming_settings_repository& ssrp,
+        const formatters::container& fc,
+        const yarn::model& m) const;
 };
 
 } } } }

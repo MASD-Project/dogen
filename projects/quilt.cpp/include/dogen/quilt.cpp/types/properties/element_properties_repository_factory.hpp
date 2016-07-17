@@ -25,8 +25,9 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/model.hpp"
 #include "dogen/formatters/types/file_properties_workflow.hpp"
+#include "dogen/yarn/types/model.hpp"
+#include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties_repository.hpp"
@@ -43,6 +44,7 @@ private:
     helper_properties_repository create_helper_properties(
         const settings::helper_settings_repository& hsrp,
         const settings::streaming_settings_repository& ssrp,
+        const formatters::container& fc,
         const yarn::model& m) const;
 
     element_properties_repository merge(
@@ -55,6 +57,7 @@ public:
         const dogen::formatters::file_properties_workflow& fpwf,
         const settings::helper_settings_repository& hsrp,
         const settings::streaming_settings_repository& ssrp,
+        const formatters::container& fc,
         const formatter_properties_repository& fprp,
         const yarn::model& m) const;
 };

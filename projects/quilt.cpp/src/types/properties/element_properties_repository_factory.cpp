@@ -42,9 +42,9 @@ namespace properties {
 helper_properties_repository element_properties_repository_factory::
 create_helper_properties(const settings::helper_settings_repository& hsrp,
     const settings::streaming_settings_repository& ssrp,
-    const yarn::model& m) const {
+    const formatters::container& fc, const yarn::model& m) const {
     helper_properties_repository_factory f;
-    return f.make(m, hsrp, ssrp);
+    return f.make(hsrp, ssrp, fc, m);
 }
 
 element_properties_repository element_properties_repository_factory::merge(
@@ -71,11 +71,12 @@ element_properties_repository element_properties_repository_factory::make(
     const dogen::formatters::file_properties_workflow& fpwf,
     const settings::helper_settings_repository& hsrp,
     const settings::streaming_settings_repository& ssrp,
+    const formatters::container& fc,
     const formatter_properties_repository& fprp,
     const yarn::model& m) const {
 
     const auto fp(fpwf.execute(cpp_modeline_name));
-    const auto hprp(create_helper_properties(hsrp, ssrp, m));
+    const auto hprp(create_helper_properties(hsrp, ssrp, fc, m));
     const auto r(merge(fp, hprp, fprp));
     BOOST_LOG_SEV(lg, debug) << "Finished computing element properties:" << r;
     return r;

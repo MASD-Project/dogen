@@ -19,8 +19,8 @@
  *
  */
 #include <list>
-#include <unordered_set>
 #include <boost/throw_exception.hpp>
+#include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/attribute.hpp"
@@ -111,10 +111,31 @@ void generator::visit(const dogen::yarn::object& o) {
 
 }
 
+std::unordered_map<std::string, std::unordered_set<std::string>>
+helper_properties_repository_factory::
+facets_for_family(const formatters::container& fc) const {
+    std::unordered_map<std::string, std::unordered_set<std::string>> r;
+
+    /*
+     * Unpack the helper formatter container to generate a mapping of
+     * helper family to facet. The container has helpers by family, by
+     * owning file formatter.
+     */
+    for (const auto& families_pair : fc.helper_formatters())
+        for (const auto& file_formatter_pair : families_pair.second)
+            for (const auto& hf : file_formatter_pair.second)
+                for (const auto& f : hf->owning_facets())
+                    r[hf->family()].insert(f);
+
+    return r;
+}
+
 helper_properties_repository
-helper_properties_repository_factory::make(const yarn::model& m,
+helper_properties_repository_factory::make(
     const settings::helper_settings_repository& hsrp,
-    const settings::streaming_settings_repository& ssrp) const {
+    const settings::streaming_settings_repository& ssrp,
+    const formatters::container& fc,
+    const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating helper repository.";
 
@@ -123,6 +144,9 @@ helper_properties_repository_factory::make(const yarn::model& m,
         pig(pair);
 
     BOOST_LOG_SEV(lg, debug) << "Primitive IDs: " << pig.result();
+
+    const auto fff(facets_for_family(fc));
+    BOOST_LOG_SEV(lg, debug) << "Facets for family: " << fff;
 
     const helper_properties_factory f(pig.result(), hsrp, ssrp);
     generator g(f);

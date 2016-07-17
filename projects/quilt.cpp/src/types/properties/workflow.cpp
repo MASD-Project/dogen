@@ -178,10 +178,11 @@ element_properties_repository workflow::create_element_properties(
     const dogen::formatters::file_properties_workflow& fpwf,
     const settings::helper_settings_repository& hsrp,
     const settings::streaming_settings_repository& ssrp,
+    const formatters::container& fc,
     const formatter_properties_repository& fprp,
     const yarn::model& m) const {
     element_properties_repository_factory f;
-    return f.make(fpwf, hsrp, ssrp, fprp, m);
+    return f.make(fpwf, hsrp, ssrp, fc, fprp, m);
 }
 
 std::pair<
@@ -211,7 +212,7 @@ workflow::execute(const config::cpp_options& opts,
 
     const auto hsrp(create_helper_settings_repository(rp, m));
     const auto ssrp(create_streaming_settings_repository(rp, m));
-    const auto eprp(create_element_properties(fpwf, hsrp, ssrp, fprp, m));
+    const auto eprp(create_element_properties(fpwf, hsrp, ssrp, fc, fprp, m));
     return std::make_pair(eprp, formattables);
 }
 

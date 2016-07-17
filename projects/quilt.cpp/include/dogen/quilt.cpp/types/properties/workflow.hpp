@@ -119,6 +119,7 @@ private:
         const dogen::formatters::file_properties_workflow& fpwf,
         const settings::helper_settings_repository& hsrp,
         const settings::streaming_settings_repository& ssrp,
+        const formatters::container& fc,
         const formatter_properties_repository& fprp,
         const yarn::model& m) const;
 
