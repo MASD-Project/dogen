@@ -5113,6 +5113,15 @@ is, what then? We can't throw.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
+*** Reduce build times to avoid timeouts                              :story:
+
+At present we get random build time violations on travis due to builds
+taking longer than 50 mins. We need to think of ways to reduce the
+build time. Things to try:
+
+- remove all of the hashing etc for the types we don't need to hash.
+- get rid of the warnings for boost.
+
 *** Add scripts to sanity check packages                               :epic:
 
 Create a set of scripts that validate packages:
