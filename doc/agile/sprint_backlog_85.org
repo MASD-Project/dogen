@@ -1,0 +1,146 @@
+#+title: Sprint Backlog 85
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) }
+
+* Mission Statement
+
+- finish implementing hashing and test data helpers.
+- remove nested type info.
+- implement class info formatters in terms of yarn types.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2016-07-19 Tue 21:04]
+| <75>                                                                        |        |      |      |       |
+| Headline                                                                    | Time   |      |      |     % |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                                                | *0:22* |      |      | 100.0 |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| Stories                                                                     | 0:22   |      |      | 100.0 |
+| Active                                                                      |        | 0:22 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:22 | 100.0 |
+#+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-07-19 Tue 20:30]--[2016-07-19 Tue 20:52] =>  0:22
+
+Updates to sprint and product backlog.
+
+*** Manual updates and blog posts                                     :story:
+
+Time taken with blog posts and updates to the manual.
+
+*** Implement hashing using dynamic helpers                           :story:
+
+Update formatters in hash to use new helpers.
+
+- =requires_hashing_helper_method=: is there a hashing helper for type
+  t? We can tell if the type requires helpers, but this is across all
+  facets, so we don't know if this is for hashing or not. But for a
+  given family, the helpers register against a owning formatter. If a
+  type exists for that owning formatter then a helper is required. We
+  could add an attribute to properties that is computed based on this.
+
+*** Type-bound helpers and generic helpers                            :story:
+
+Not all helpers are bound to a type. We have the case of inserter
+helper in io which is used by main formatters directly. We need to
+make this distinction in the manual.
+
+*** Check which properties need to loop through the entire model      :story:
+
+In certain cases such as helpers we probably don't need to go through
+all types; only the target types matter. Ensure we are not processing
+other types for no reason.
+
+*** Add validation for helper families                                :story:
+
+At present we are checking that the name tree has the expected number
+of type arguments:
+
+:    const auto children(t.children());
+:    if (children.size() != 1) {
+:        BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
+:        BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
+:    }
+:    smart_pointer_helper_stitch(fa, t);
+
+In the future with dynamic helpers we will remove these checks. In
+order to implement them we need to declare the type families up front
+in a JSON file, with a name and number of type arguments. When
+constructing the type helpers, we can check the name tree to make sure
+the number of type arguments is correct.
+
+This can be done as a helper setting (number of type arguments?).
+
+*** Update assistant to use new helper information                    :story:
+
+Once all the pieces are in place, the assistant can then use the
+element properties to find out which helpers are required for each
+type; call those helpers and populate the file with the generate
+code. We can remove all previous helper support.
+
+*** Create a settings class for the "requires" settings               :story:
+
+We need to populate these in a settings workflow of some kind.
+
+*** Implement formattables in terms of yarn types                     :epic:
+
+At present formattables are just a shadow copy of yarn types plus
+additional =cpp= specific types. In practice:
+
+- for the types that are shadow copies, we could have helper utilities
+  that do the translation on the fly (e.g. for names).
+- for additional information which cannot be translated, we could have
+  containers indexed by qualified name and query those just before we
+  call the transformer. This is the case with formatter properties. We
+  need something similar to house "type properties" such as
+  =requires_stream_manipulators=. These could be moved into aspect
+  settings.
+- for types that do not exist in yarn, we could inherit from element;
+  this is the case for registrar, forward declarations, cmakelists and
+  odb options. Note that with this we are now saying that element
+  space contains anything which can be modeled, regardless of if they
+  are part of the programming language type system, or build system,
+  etc. This is not ideal, but its not a problem just yet. We could
+  update the factory to generate these types and then take a copy of
+  the model and inject them in it.
+
+*** Remove nested type info                                           :story:
+
+Once all of the infrastructure is in place, we should not need this
+class any more. Remove code from transformer and remove object types
+and anything else that was used to dispatch based on type.
+
+*** Initialise formatters in the formatter's translation unit         :story:
+
+At present we are initialising the formatters in each of the facet
+initialisers. However, it makes more sense to initialise them on the
+translation unit for each formatter. This will also make life easier
+when we move to a mustache world where there may not be a formatter
+header file at all.
+
+** Deprecated
+
+*** CANCELLED Write next interesting instalment in blog               :story:
+    CLOSED: [2016-07-12 Tue 17:33]
+
+*Rationale*: Not much of a point of having "interesting" related
+stories in backlog.
+
+We have a number of links backlogged and we need to offload them in an
+"interesting..." post.
+*** CANCELLED Create a ebook and dead-tree book for the manual        :story:
+    CLOSED: [2016-07-12 Tue 18:07]
+
+*Rationale*: this story does not add any value. We need to write the
+manual and then worry about this.
+
+We should probably start by creating a simple ebook first and then
+explore the dead-tree options such as [[http://www.lulu.com][Lulu]]. We should also see what
+Luigi did for [[https://leanpub.com/implementingquantlib/][QuantLib]].
