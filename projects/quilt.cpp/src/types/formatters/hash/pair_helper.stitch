@@ -16,7 +16,7 @@ std::string pair_helper::id() const {
 }
 
 std::string pair_helper::family() const {
-    static std::string r("AssociativeContainer");
+    static std::string r("Pair");
     return r;
 }
 

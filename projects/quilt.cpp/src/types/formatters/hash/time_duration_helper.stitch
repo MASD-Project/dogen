@@ -17,7 +17,7 @@ std::string time_duration_helper::id() const {
 }
 
 std::string time_duration_helper::family() const {
-    static std::string r("AssociativeContainer");
+    static std::string r("BoostTimeDuration");
     return r;
 }
 

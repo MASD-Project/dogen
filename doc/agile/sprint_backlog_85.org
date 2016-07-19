@@ -14,15 +14,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-19 Tue 21:04]
+#+CAPTION: Clock summary at [2016-07-19 Tue 22:28]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:22* |      |      | 100.0 |
+| *Total time*                                                                | *1:57* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:22   |      |      | 100.0 |
-| Active                                                                      |        | 0:22 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:22 | 100.0 |
+| Stories                                                                     | 1:57   |      |      | 100.0 |
+| Active                                                                      |        | 1:57 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:22 |  18.8 |
+| STARTED Implement hashing using dynamic helpers                             |        |      | 1:35 |  81.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -35,7 +36,8 @@ Updates to sprint and product backlog.
 
 Time taken with blog posts and updates to the manual.
 
-*** Implement hashing using dynamic helpers                           :story:
+*** STARTED Implement hashing using dynamic helpers                   :story:
+    CLOCK: [2016-07-19 Tue 20:53]--[2016-07-19 Tue 22:28] =>  1:35
 
 Update formatters in hash to use new helpers.
 
@@ -45,6 +47,15 @@ Update formatters in hash to use new helpers.
   given family, the helpers register against a owning formatter. If a
   type exists for that owning formatter then a helper is required. We
   could add an attribute to properties that is computed based on this.
+
+*** Dump container of files in formatter workflow                     :story:
+
+At present we are polluting the log file with lots of entries for each
+file name in formatter's workflow. Ideally we want a single entry with
+a container of file names. The problem is, if we dump the entire
+container we will also get the file contents. But if we create a
+temporary container we will have to pay the cost even though log level
+may not be enabled.
 
 *** Type-bound helpers and generic helpers                            :story:
 

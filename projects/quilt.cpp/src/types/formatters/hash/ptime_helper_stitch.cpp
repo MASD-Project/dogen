@@ -36,7 +36,7 @@ std::string ptime_helper::id() const {
 }
 
 std::string ptime_helper::family() const {
-    static std::string r("AssociativeContainer");
+    static std::string r("BoostPTime");
     return r;
 }
 

@@ -17,7 +17,7 @@ std::string ptree_helper::id() const {
 }
 
 std::string ptree_helper::family() const {
-    static std::string r("AssociativeContainer");
+    static std::string r("BoostPTree");
     return r;
 }
 

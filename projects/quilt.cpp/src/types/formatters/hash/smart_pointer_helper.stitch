@@ -17,7 +17,7 @@ std::string smart_pointer_helper::id() const {
 }
 
 std::string smart_pointer_helper::family() const {
-    static std::string r("AssociativeContainer");
+    static std::string r("SmartPointer");
     return r;
 }
 

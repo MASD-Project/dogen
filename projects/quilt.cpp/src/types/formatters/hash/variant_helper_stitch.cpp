@@ -37,7 +37,7 @@ std::string variant_helper::id() const {
 }
 
 std::string variant_helper::family() const {
-    static std::string r("AssociativeContainer");
+    static std::string r("BoostVariant");
     return r;
 }
 
