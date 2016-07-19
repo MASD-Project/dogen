@@ -89,17 +89,4 @@ a.stream() << "    seed = static_cast<std::size_t>(d.total_seconds());" << std::
 a.stream() << "    return seed;" << std::endl;
 a.stream() << "}" << std::endl;
 }
-
-void ptime_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-a.stream() << std::endl;
-a.stream() << "inline std::size_t hash_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
-a.stream() << "    std::size_t seed(0);" << std::endl;
-a.stream() << "    const boost::posix_time::ptime epoch(boost::gregorian::date(1970, 1, 1));" << std::endl;
-a.stream() << "    boost::posix_time::time_duration d(v - epoch);" << std::endl;
-a.stream() << "    seed = static_cast<std::size_t>(d.total_seconds());" << std::endl;
-a.stream() << "    return seed;" << std::endl;
-a.stream() << "}" << std::endl;
-}
 } } } } }

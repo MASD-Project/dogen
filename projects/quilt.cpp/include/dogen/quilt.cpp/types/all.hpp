@@ -136,7 +136,6 @@
 #include "dogen/quilt.cpp/types/properties/helper_properties_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_directives_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/exception_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/hash/helper_methods_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/includers_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/namespace_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar_formatter_interface.hpp"

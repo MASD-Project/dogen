@@ -42,7 +42,7 @@ a.stream() << "    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2
 a.stream() << "}" << std::endl;
         }
 
-        a.add_helper_methods(c);
+        a.add_helper_methods();
 a.stream() << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;

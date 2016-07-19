@@ -70,17 +70,4 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 }
 <#+
 }
-
-void time_duration_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-#>
-
-inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
-    std::size_t seed(0);
-    seed = static_cast<std::size_t>(v.total_seconds());
-    return seed;
-}
-<#+
-}
 #>

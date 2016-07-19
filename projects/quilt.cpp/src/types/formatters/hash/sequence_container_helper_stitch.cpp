@@ -94,22 +94,4 @@ a.stream() << "    }" << std::endl;
 a.stream() << "    return seed;" << std::endl;
 a.stream() << "}" << std::endl;
 }
-
-void sequence_container_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-
-    const auto containee(t.children().front());
-a.stream() << std::endl;
-a.stream() << "inline std::size_t hash_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
-a.stream() << "    std::size_t seed(0);" << std::endl;
-a.stream() << "    for (const auto i : v) {" << std::endl;
-    if (!a.requires_hashing_helper_method(containee))
-a.stream() << "        combine(seed, i);" << std::endl;
-    else
-a.stream() << "        combine(seed, hash_" << containee.complete_identifiable_name() << "(i));" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << "    return seed;" << std::endl;
-a.stream() << "}" << std::endl;
-}
 } } } } }

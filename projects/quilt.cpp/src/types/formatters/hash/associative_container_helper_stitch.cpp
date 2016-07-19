@@ -100,28 +100,4 @@ a.stream() << "    }" << std::endl;
 a.stream() << "    return seed;" << std::endl;
 a.stream() << "}" << std::endl;
 }
-
-void associative_container_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-
-    const auto key(t.children().front());
-    const auto value(t.children().back());
-a.stream() << std::endl;
-a.stream() << "inline std::size_t hash_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
-a.stream() << "    std::size_t seed(0);" << std::endl;
-a.stream() << "    for (const auto i : v) {" << std::endl;
-    if (!a.requires_hashing_helper_method(key))
-a.stream() << "        combine(seed, i.first);" << std::endl;
-    else
-a.stream() << "        combine(seed, hash_" << key.complete_identifiable_name() << "(i.first));" << std::endl;
-
-    if (!a.requires_hashing_helper_method(value))
-a.stream() << "        combine(seed, i.second);" << std::endl;
-    else
-a.stream() << "        combine(seed, hash_" << value.complete_identifiable_name() << "(i.second));" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << "    return seed;" << std::endl;
-a.stream() << "}" << std::endl;
-}
 } } } } }

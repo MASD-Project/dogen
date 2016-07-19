@@ -38,7 +38,6 @@
 #include "dogen/quilt.cpp/types/formatters/test_data/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
-#include "dogen/quilt.cpp/types/formatters/hash/helper_methods_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/helper_methods_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
@@ -432,21 +431,6 @@ void assistant::add_helper_methods(const properties::class_info& c) {
     BOOST_LOG_SEV(lg, debug) << "Processing entity: " << c.name();
 
     const auto fn(ownership_hierarchy_.formatter_name());
-    using ht = formatters::hash::traits;
-    const auto h_ci_fn(ht::class_implementation_formatter_name());
-    const bool is_hash_class_implementation(fn == h_ci_fn);
-    const bool requires_hash(is_hash_enabled());
-
-    if (is_hash_class_implementation && requires_hash) {
-        BOOST_LOG_SEV(lg, debug) << "Creating hash helper methods.";
-        hash::helper_methods_formatter f(c.properties());
-        f.format(stream());
-    } else {
-        BOOST_LOG_SEV(lg, debug) << "Hash helper methods not required."
-                                 << " is hash class implementation: '"
-                                 << is_hash_class_implementation << "'";
-    }
-
     using tdt = formatters::test_data::traits;
     const auto td_ci_fn(tdt::class_implementation_formatter_name());
     const bool is_test_data_class_implementation(fn == td_ci_fn);

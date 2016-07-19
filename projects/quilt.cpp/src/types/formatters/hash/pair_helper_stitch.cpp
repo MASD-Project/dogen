@@ -99,27 +99,4 @@ a.stream() << "    combine(seed, hash_" << second.name_tree_identifiable() << "(
 a.stream() << "    return seed;" << std::endl;
 a.stream() << "}" << std::endl;
 }
-
-void pair_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-
-    const auto first(t.children().front());
-    const auto second(t.children().back());
-a.stream() << std::endl;
-a.stream() << "inline std::size_t hash_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
-a.stream() << "    std::size_t seed(0);" << std::endl;
-a.stream() << std::endl;
-    if (!a.requires_hashing_helper_method(first))
-a.stream() << "    combine(seed, v.first);" << std::endl;
-    else
-a.stream() << "    combine(seed, hash_" << first.complete_identifiable_name() << "(v.first));" << std::endl;
-
-    if (!a.requires_hashing_helper_method(second))
-a.stream() << "    combine(seed, v.second);" << std::endl;
-    else
-a.stream() << "    combine(seed, hash_" << second.complete_identifiable_name() << "(v.second));" << std::endl;
-a.stream() << "    return seed;" << std::endl;
-a.stream() << "}" << std::endl;
-}
 } } } } }

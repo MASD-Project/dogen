@@ -89,37 +89,4 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 }
 <#+
 }
-
-void pair_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-
-    const auto first(t.children().front());
-    const auto second(t.children().back());
-#>
-
-inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
-    std::size_t seed(0);
-
-<#+
-    if (!a.requires_hashing_helper_method(first))
-#>
-    combine(seed, v.first);
-<#+
-    else
-#>
-    combine(seed, hash_<#= first.complete_identifiable_name() #>(v.first));
-<#+
-
-    if (!a.requires_hashing_helper_method(second))
-#>
-    combine(seed, v.second);
-<#+
-    else
-#>
-    combine(seed, hash_<#= second.complete_identifiable_name() #>(v.second));
-    return seed;
-}
-<#+
-}
 #>

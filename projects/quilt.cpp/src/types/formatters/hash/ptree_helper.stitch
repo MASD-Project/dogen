@@ -75,22 +75,4 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 }
 <#+
 }
-
-void ptree_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-#>
-
-inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
-    std::size_t seed(0);
-    for (const auto& node : v) {
-        combine(seed, node.first);
-        combine(seed, node.second.data());
-        combine(seed, hash_<#= t.complete_identifiable_name() #>(node.second));
-    }
-
-    return seed;
-}
-<#+
-}
 #>

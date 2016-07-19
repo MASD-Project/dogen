@@ -14,16 +14,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-19 Tue 23:30]
+#+CAPTION: Clock summary at [2016-07-20 Wed 00:08]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:58* |      |      | 100.0 |
+| *Total time*                                                                | *3:15* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:58   |      |      | 100.0 |
-| Active                                                                      |        | 2:58 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:22 |  12.4 |
-| STARTED Implement hashing using dynamic helpers                             |        |      | 2:36 |  87.6 |
+| Stories                                                                     | 3:15   |      |      | 100.0 |
+| Active                                                                      |        | 3:15 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:22 |  11.3 |
+| COMPLETED Implement hashing using dynamic helpers                           |        |      | 2:53 |  88.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -36,7 +36,9 @@ Updates to sprint and product backlog.
 
 Time taken with blog posts and updates to the manual.
 
-*** STARTED Implement hashing using dynamic helpers                   :story:
+*** COMPLETED Implement hashing using dynamic helpers                 :story:
+    CLOSED: [2016-07-20 Wed 00:08]
+    CLOCK: [2016-07-19 Tue 23:57]--[2016-07-20 Wed 00:08] =>  0:11
     CLOCK: [2016-07-19 Tue 23:50]--[2016-07-19 Tue 23:56] =>  0:06
     CLOCK: [2016-07-19 Tue 22:29]--[2016-07-19 Tue 23:30] =>  1:01
     CLOCK: [2016-07-19 Tue 20:53]--[2016-07-19 Tue 22:28] =>  1:35
