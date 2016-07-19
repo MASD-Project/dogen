@@ -37,7 +37,7 @@ create_boost_shared_ptr_dogen_test_models_boost_model_class_a(unsigned int posit
     return r;
 }
 
-std::vector<boost::shared_ptr<dogen::test_models::boost_model::class_a> > create_std_vector_boost_shared_ptr_dogen_test_models_boost_model_class_a_(unsigned int position) {
+std::vector<boost::shared_ptr<dogen::test_models::boost_model::class_a> > create_std_vector_boost_shared_ptr_dogen_test_models_boost_model_class_a(unsigned int position) {
     std::vector<boost::shared_ptr<dogen::test_models::boost_model::class_a> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_boost_shared_ptr_dogen_test_models_boost_model_class_a(position + i));
@@ -49,7 +49,7 @@ int create_int(const unsigned int position) {
     return position;
 }
 
-std::unordered_map<int, boost::shared_ptr<dogen::test_models::boost_model::class_a> > create_std_unordered_map_int_boost_shared_ptr_dogen_test_models_boost_model_class_a_(unsigned int position) {
+std::unordered_map<int, boost::shared_ptr<dogen::test_models::boost_model::class_a> > create_std_unordered_map_int_boost_shared_ptr_dogen_test_models_boost_model_class_a(unsigned int position) {
     std::unordered_map<int, boost::shared_ptr<dogen::test_models::boost_model::class_a> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_int(position + i), create_boost_shared_ptr_dogen_test_models_boost_model_class_a(position + i)));
@@ -81,7 +81,7 @@ create_boost_shared_ptr_dogen_test_models_boost_model_class_base(unsigned int po
     return r;
 }
 
-std::vector<boost::shared_ptr<dogen::test_models::boost_model::class_base> > create_std_vector_boost_shared_ptr_dogen_test_models_boost_model_class_base_(unsigned int position) {
+std::vector<boost::shared_ptr<dogen::test_models::boost_model::class_base> > create_std_vector_boost_shared_ptr_dogen_test_models_boost_model_class_base(unsigned int position) {
     std::vector<boost::shared_ptr<dogen::test_models::boost_model::class_base> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_boost_shared_ptr_dogen_test_models_boost_model_class_base(position + i));
@@ -105,11 +105,11 @@ class_b_generator::class_b_generator() : position_(0) { }
 void class_b_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_boost_shared_ptr_dogen_test_models_boost_model_class_a(position + 0));
-    v.prop_1(create_std_vector_boost_shared_ptr_dogen_test_models_boost_model_class_a_(position + 1));
-    v.prop_2(create_std_unordered_map_int_boost_shared_ptr_dogen_test_models_boost_model_class_a_(position + 2));
+    v.prop_1(create_std_vector_boost_shared_ptr_dogen_test_models_boost_model_class_a(position + 1));
+    v.prop_2(create_std_unordered_map_int_boost_shared_ptr_dogen_test_models_boost_model_class_a(position + 2));
     v.prop_3(create_boost_shared_ptr_dogen_test_models_boost_model_pkg1_class_c(position + 3));
     v.prop_4(create_boost_shared_ptr_dogen_test_models_boost_model_class_base(position + 4));
-    v.prop_5(create_std_vector_boost_shared_ptr_dogen_test_models_boost_model_class_base_(position + 5));
+    v.prop_5(create_std_vector_boost_shared_ptr_dogen_test_models_boost_model_class_base(position + 5));
     v.prop_6(create_dogen_test_models_boost_model_pkg1_class_c(position + 6));
 }
 

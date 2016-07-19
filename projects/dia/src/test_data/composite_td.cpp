@@ -42,7 +42,7 @@ create_boost_shared_ptr_dogen_dia_attribute(unsigned int position) {
     return r;
 }
 
-std::vector<boost::shared_ptr<dogen::dia::attribute> > create_std_vector_boost_shared_ptr_dogen_dia_attribute_(unsigned int position) {
+std::vector<boost::shared_ptr<dogen::dia::attribute> > create_std_vector_boost_shared_ptr_dogen_dia_attribute(unsigned int position) {
     std::vector<boost::shared_ptr<dogen::dia::attribute> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_boost_shared_ptr_dogen_dia_attribute(position + i));
@@ -72,7 +72,7 @@ composite_generator::composite_generator() : position_(0) { }
 void composite_generator::
 populate(const unsigned int position, result_type& v) {
     v.type(create_std_string(position + 0));
-    v.value(create_std_vector_boost_shared_ptr_dogen_dia_attribute_(position + 1));
+    v.value(create_std_vector_boost_shared_ptr_dogen_dia_attribute(position + 1));
     v.inner_composite(create_boost_shared_ptr_dogen_dia_composite(position + 2));
 }
 

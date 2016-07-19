@@ -62,7 +62,7 @@ inline std::size_t hash_std_vector_unsigned_int(const std::vector<unsigned int>&
     return seed;
 }
 
-inline std::size_t hash_std_vector_std_vector_unsigned_int_(const std::vector<std::vector<unsigned int> >& v) {
+inline std::size_t hash_std_vector_std_vector_unsigned_int(const std::vector<std::vector<unsigned int> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_std_vector_unsigned_int(i));
@@ -84,7 +84,7 @@ std::size_t class_b_hasher::hash(const class_b& v) {
     combine(seed, hash_std_vector_dogen_test_models_std_model_pkg1_class_c(v.prop_2()));
     combine(seed, hash_std_vector_unsigned_int(v.prop_3()));
     combine(seed, hash_std_vector_dogen_test_models_std_model_class_a(v.prop_4()));
-    combine(seed, hash_std_vector_std_vector_unsigned_int_(v.prop_5()));
+    combine(seed, hash_std_vector_std_vector_unsigned_int(v.prop_5()));
 
     return seed;
 }

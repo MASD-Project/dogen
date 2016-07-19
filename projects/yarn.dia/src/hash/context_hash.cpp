@@ -38,7 +38,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_list_std_string_(const std::unordered_map<std::string, std::list<std::string> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_std_list_std_string(const std::unordered_map<std::string, std::list<std::string> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -73,7 +73,7 @@ namespace dia {
 std::size_t context_hasher::hash(const context& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_std_list_std_string_(v.child_id_to_parent_ids()));
+    combine(seed, hash_std_unordered_map_std_string_std_list_std_string(v.child_id_to_parent_ids()));
     combine(seed, hash_std_unordered_set_std_string(v.parent_ids()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_name(v.id_to_name()));
     combine(seed, v.model());

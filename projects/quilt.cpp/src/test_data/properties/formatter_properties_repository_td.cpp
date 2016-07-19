@@ -43,7 +43,7 @@ std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_propert
     return r;
 }
 
-std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> > create_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties_(unsigned int position) {
+std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> > create_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties(unsigned int position) {
     std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_std_string(position + i), create_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties(position + i)));
@@ -62,7 +62,7 @@ formatter_properties_repository_generator::formatter_properties_repository_gener
 
 void formatter_properties_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.by_id(create_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties_(position + 0));
+    v.by_id(create_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties(position + 0));
 }
 
 formatter_properties_repository_generator::result_type

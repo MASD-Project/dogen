@@ -47,7 +47,7 @@ std::unordered_map<std::string, bool> create_std_unordered_map_std_string_bool(u
     return r;
 }
 
-std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> > create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_bool_(unsigned int position) {
+std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> > create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_bool(unsigned int position) {
     std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_std_unordered_map_std_string_bool(position + i)));
@@ -66,7 +66,7 @@ enablement_repository_generator::enablement_repository_generator() : position_(0
 
 void enablement_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.by_name(create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_bool_(position + 0));
+    v.by_name(create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_bool(position + 0));
 }
 
 enablement_repository_generator::result_type

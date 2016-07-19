@@ -43,7 +43,7 @@ std::list<dogen::quilt::cpp::properties::helper_properties> create_std_list_doge
     return r;
 }
 
-std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> > create_std_unordered_map_std_string_std_list_dogen_quilt_cpp_properties_helper_properties_(unsigned int position) {
+std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> > create_std_unordered_map_std_string_std_list_dogen_quilt_cpp_properties_helper_properties(unsigned int position) {
     std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_std_string(position + i), create_std_list_dogen_quilt_cpp_properties_helper_properties(position + i)));
@@ -62,7 +62,7 @@ helper_properties_repository_generator::helper_properties_repository_generator()
 
 void helper_properties_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.by_id(create_std_unordered_map_std_string_std_list_dogen_quilt_cpp_properties_helper_properties_(position + 0));
+    v.by_id(create_std_unordered_map_std_string_std_list_dogen_quilt_cpp_properties_helper_properties(position + 0));
 }
 
 helper_properties_repository_generator::result_type

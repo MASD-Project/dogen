@@ -37,6 +37,7 @@ Updates to sprint and product backlog.
 Time taken with blog posts and updates to the manual.
 
 *** STARTED Implement hashing using dynamic helpers                   :story:
+    CLOCK: [2016-07-19 Tue 23:50]--[2016-07-19 Tue 23:56] =>  0:06
     CLOCK: [2016-07-19 Tue 22:29]--[2016-07-19 Tue 23:30] =>  1:01
     CLOCK: [2016-07-19 Tue 20:53]--[2016-07-19 Tue 22:28] =>  1:35
 

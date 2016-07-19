@@ -77,7 +77,7 @@ std::list<unsigned int> create_std_list_unsigned_int(unsigned int position) {
     return r;
 }
 
-std::list<std::list<unsigned int> > create_std_list_std_list_unsigned_int_(unsigned int position) {
+std::list<std::list<unsigned int> > create_std_list_std_list_unsigned_int(unsigned int position) {
     std::list<std::list<unsigned int> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_std_list_unsigned_int(position + i));
@@ -100,7 +100,7 @@ populate(const unsigned int position, result_type& v) {
     v.prop_2(create_std_list_dogen_test_models_std_model_pkg1_class_c(position + 2));
     v.prop_3(create_std_list_unsigned_int(position + 3));
     v.prop_4(create_std_list_dogen_test_models_std_model_class_a(position + 4));
-    v.prop_5(create_std_list_std_list_unsigned_int_(position + 5));
+    v.prop_5(create_std_list_std_list_unsigned_int(position + 5));
 }
 
 class_d_generator::result_type

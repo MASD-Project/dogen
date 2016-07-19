@@ -35,7 +35,7 @@ inline std::size_t hash_boost_shared_ptr_dogen_yarn_node(const boost::shared_ptr
     return seed;
 }
 
-inline std::size_t hash_std_list_boost_shared_ptr_dogen_yarn_node_(const std::list<boost::shared_ptr<dogen::yarn::node> >& v) {
+inline std::size_t hash_std_list_boost_shared_ptr_dogen_yarn_node(const std::list<boost::shared_ptr<dogen::yarn::node> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_boost_shared_ptr_dogen_yarn_node(i));
@@ -53,7 +53,7 @@ std::size_t node_hasher::hash(const node& v) {
 
     combine(seed, hash_boost_shared_ptr_dogen_yarn_node(v.parent()));
     combine(seed, v.data());
-    combine(seed, hash_std_list_boost_shared_ptr_dogen_yarn_node_(v.children()));
+    combine(seed, hash_std_list_boost_shared_ptr_dogen_yarn_node(v.children()));
 
     return seed;
 }

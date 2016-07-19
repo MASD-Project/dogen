@@ -43,7 +43,7 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
-std::unordered_map<std::string, std::list<std::string> > create_std_unordered_map_std_string_std_list_std_string_(unsigned int position) {
+std::unordered_map<std::string, std::list<std::string> > create_std_unordered_map_std_string_std_list_std_string(unsigned int position) {
     std::unordered_map<std::string, std::list<std::string> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_std_string(position + i), create_std_list_std_string(position + i)));
@@ -51,10 +51,10 @@ std::unordered_map<std::string, std::list<std::string> > create_std_unordered_ma
     return r;
 }
 
-std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > > create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_list_std_string__(unsigned int position) {
+std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > > create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_list_std_string(unsigned int position) {
     std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_std_unordered_map_std_string_std_list_std_string_(position + i)));
+        r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_std_unordered_map_std_string_std_list_std_string(position + i)));
     }
     return r;
 }
@@ -70,7 +70,7 @@ inclusion_dependencies_repository_generator::inclusion_dependencies_repository_g
 
 void inclusion_dependencies_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.by_name(create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_list_std_string__(position + 0));
+    v.by_name(create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_list_std_string(position + 0));
 }
 
 inclusion_dependencies_repository_generator::result_type

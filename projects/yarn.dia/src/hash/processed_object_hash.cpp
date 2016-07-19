@@ -39,7 +39,7 @@ inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::stri
     return seed;
 }
 
-inline std::size_t hash_boost_optional_std_pair_std_string_std_string_(const boost::optional<std::pair<std::string, std::string> >& v) {
+inline std::size_t hash_boost_optional_std_pair_std_string_std_string(const boost::optional<std::pair<std::string, std::string> >& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -72,7 +72,7 @@ std::size_t processed_object_hasher::hash(const processed_object& v) {
     combine(seed, v.stereotype());
     combine(seed, v.comment());
     combine(seed, v.child_node_id());
-    combine(seed, hash_boost_optional_std_pair_std_string_std_string_(v.connection()));
+    combine(seed, hash_boost_optional_std_pair_std_string_std_string(v.connection()));
     combine(seed, hash_std_list_dogen_yarn_dia_processed_attribute(v.attributes()));
 
     return seed;

@@ -49,7 +49,7 @@ std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives>
     return r;
 }
 
-std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> > create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_dogen_quilt_cpp_properties_path_derivatives_(unsigned int position) {
+std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> > create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_dogen_quilt_cpp_properties_path_derivatives(unsigned int position) {
     std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_std_unordered_map_std_string_dogen_quilt_cpp_properties_path_derivatives(position + i)));
@@ -68,7 +68,7 @@ path_derivatives_repository_generator::path_derivatives_repository_generator() :
 
 void path_derivatives_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.by_name(create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_dogen_quilt_cpp_properties_path_derivatives_(position + 0));
+    v.by_name(create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_dogen_quilt_cpp_properties_path_derivatives(position + 0));
 }
 
 path_derivatives_repository_generator::result_type

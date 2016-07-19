@@ -35,7 +35,7 @@ inline std::size_t hash_boost_shared_ptr_dogen_dia_attribute(const boost::shared
     return seed;
 }
 
-inline std::size_t hash_std_vector_boost_shared_ptr_dogen_dia_attribute_(const std::vector<boost::shared_ptr<dogen::dia::attribute> >& v) {
+inline std::size_t hash_std_vector_boost_shared_ptr_dogen_dia_attribute(const std::vector<boost::shared_ptr<dogen::dia::attribute> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_boost_shared_ptr_dogen_dia_attribute(i));
@@ -58,7 +58,7 @@ std::size_t composite_hasher::hash(const composite& v) {
     std::size_t seed(0);
 
     combine(seed, v.type());
-    combine(seed, hash_std_vector_boost_shared_ptr_dogen_dia_attribute_(v.value()));
+    combine(seed, hash_std_vector_boost_shared_ptr_dogen_dia_attribute(v.value()));
     combine(seed, hash_boost_shared_ptr_dogen_dia_composite(v.inner_composite()));
 
     return seed;

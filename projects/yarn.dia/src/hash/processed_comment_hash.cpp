@@ -36,7 +36,7 @@ inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::stri
     return seed;
 }
 
-inline std::size_t hash_std_list_std_pair_std_string_std_string_(const std::list<std::pair<std::string, std::string> >& v) {
+inline std::size_t hash_std_list_std_pair_std_string_std_string(const std::list<std::pair<std::string, std::string> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_std_pair_std_string_std_string(i));
@@ -54,7 +54,7 @@ std::size_t processed_comment_hasher::hash(const processed_comment& v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());
-    combine(seed, hash_std_list_std_pair_std_string_std_string_(v.key_value_pairs()));
+    combine(seed, hash_std_list_std_pair_std_string_std_string(v.key_value_pairs()));
     combine(seed, v.applicable_to_parent_object());
     combine(seed, v.original_content());
 

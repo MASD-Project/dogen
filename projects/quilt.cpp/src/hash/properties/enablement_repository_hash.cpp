@@ -38,7 +38,7 @@ inline std::size_t hash_std_unordered_map_std_string_bool(const std::unordered_m
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_bool_(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& v) {
+inline std::size_t hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_bool(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, bool> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -57,7 +57,7 @@ namespace properties {
 std::size_t enablement_repository_hasher::hash(const enablement_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_bool_(v.by_name()));
+    combine(seed, hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_bool(v.by_name()));
     return seed;
 }
 

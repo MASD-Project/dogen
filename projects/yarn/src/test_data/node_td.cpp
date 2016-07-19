@@ -40,7 +40,7 @@ create_dogen_yarn_name(const unsigned int position) {
     return dogen::yarn::name_generator::create(position);
 }
 
-std::list<boost::shared_ptr<dogen::yarn::node> > create_std_list_boost_shared_ptr_dogen_yarn_node_(unsigned int position) {
+std::list<boost::shared_ptr<dogen::yarn::node> > create_std_list_boost_shared_ptr_dogen_yarn_node(unsigned int position) {
     std::list<boost::shared_ptr<dogen::yarn::node> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_boost_shared_ptr_dogen_yarn_node(position + i));
@@ -59,7 +59,7 @@ void node_generator::
 populate(const unsigned int position, result_type& v) {
     v.parent(create_boost_shared_ptr_dogen_yarn_node(position + 0));
     v.data(create_dogen_yarn_name(position + 1));
-    v.children(create_std_list_boost_shared_ptr_dogen_yarn_node_(position + 2));
+    v.children(create_std_list_boost_shared_ptr_dogen_yarn_node(position + 2));
 }
 
 node_generator::result_type

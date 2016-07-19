@@ -108,10 +108,11 @@ std::string name_builder::identifiable_name(const std::string& n) const {
     std::string r(n);
 
     boost::replace_all(r, scope_operator, separator);
-    boost::replace_all(r, space, separator);
-    boost::replace_all(r, comma, empty);
     boost::replace_all(r, less_than, separator);
     boost::replace_all(r, more_than, empty);
+    boost::replace_all(r, comma, empty);
+    boost::trim(r);
+    boost::replace_all(r, space, separator);
 
     return r;
 }

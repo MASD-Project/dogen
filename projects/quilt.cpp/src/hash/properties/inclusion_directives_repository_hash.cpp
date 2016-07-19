@@ -38,7 +38,7 @@ inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unord
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_string_(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& v) {
+inline std::size_t hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_string(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -57,7 +57,7 @@ namespace properties {
 std::size_t inclusion_directives_repository_hasher::hash(const inclusion_directives_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_string_(v.by_name()));
+    combine(seed, hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_string(v.by_name()));
     return seed;
 }
 

@@ -37,7 +37,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_list_std_string_(const std::unordered_map<std::string, std::list<std::string> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_std_list_std_string(const std::unordered_map<std::string, std::list<std::string> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -46,11 +46,11 @@ inline std::size_t hash_std_unordered_map_std_string_std_list_std_string_(const 
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_list_std_string__(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >& v) {
+inline std::size_t hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_list_std_string(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::list<std::string> > >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_std_unordered_map_std_string_std_list_std_string_(i.second));
+        combine(seed, hash_std_unordered_map_std_string_std_list_std_string(i.second));
     }
     return seed;
 }
@@ -65,7 +65,7 @@ namespace properties {
 std::size_t inclusion_dependencies_repository_hasher::hash(const inclusion_dependencies_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_list_std_string__(v.by_name()));
+    combine(seed, hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_list_std_string(v.by_name()));
     return seed;
 }
 

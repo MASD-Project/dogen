@@ -51,7 +51,7 @@ std::unordered_map<std::string, dogen::dynamic::field_definition> create_std_uno
     return r;
 }
 
-std::unordered_map<std::string, std::list<dogen::dynamic::field_definition> > create_std_unordered_map_std_string_std_list_dogen_dynamic_field_definition_(unsigned int position) {
+std::unordered_map<std::string, std::list<dogen::dynamic::field_definition> > create_std_unordered_map_std_string_std_list_dogen_dynamic_field_definition(unsigned int position) {
     std::unordered_map<std::string, std::list<dogen::dynamic::field_definition> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_std_string(position + i), create_std_list_dogen_dynamic_field_definition(position + i)));
@@ -70,9 +70,9 @@ void repository_generator::
 populate(const unsigned int position, result_type& v) {
     v.all_field_definitions(create_std_list_dogen_dynamic_field_definition(position + 0));
     v.field_definitions_by_name(create_std_unordered_map_std_string_dogen_dynamic_field_definition(position + 1));
-    v.field_definitions_by_facet_name(create_std_unordered_map_std_string_std_list_dogen_dynamic_field_definition_(position + 2));
-    v.field_definitions_by_formatter_name(create_std_unordered_map_std_string_std_list_dogen_dynamic_field_definition_(position + 3));
-    v.field_definitions_by_model_name(create_std_unordered_map_std_string_std_list_dogen_dynamic_field_definition_(position + 4));
+    v.field_definitions_by_facet_name(create_std_unordered_map_std_string_std_list_dogen_dynamic_field_definition(position + 2));
+    v.field_definitions_by_formatter_name(create_std_unordered_map_std_string_std_list_dogen_dynamic_field_definition(position + 3));
+    v.field_definitions_by_model_name(create_std_unordered_map_std_string_std_list_dogen_dynamic_field_definition(position + 4));
 }
 
 repository_generator::result_type

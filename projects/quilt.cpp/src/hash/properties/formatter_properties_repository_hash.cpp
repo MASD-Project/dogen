@@ -38,7 +38,7 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_properties_
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties_(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -57,7 +57,7 @@ namespace properties {
 std::size_t formatter_properties_repository_hasher::hash(const formatter_properties_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties_(v.by_id()));
+    combine(seed, hash_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties(v.by_id()));
     return seed;
 }
 

@@ -72,7 +72,7 @@ inline std::size_t hash_boost_variant_int_dogen_test_models_boost_model_class_de
     return vis.hash;
 }
 
-inline std::size_t hash_std_vector_boost_variant_int_dogen_test_models_boost_model_class_derived_double_(const std::vector<boost::variant<int, dogen::test_models::boost_model::class_derived, double> >& v) {
+inline std::size_t hash_std_vector_boost_variant_int_dogen_test_models_boost_model_class_derived_double(const std::vector<boost::variant<int, dogen::test_models::boost_model::class_derived, double> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_boost_variant_int_dogen_test_models_boost_model_class_derived_double(i));
@@ -114,7 +114,7 @@ std::size_t class_e_hasher::hash(const class_e& v) {
 
     combine(seed, hash_boost_variant_int_double(v.prop_0()));
     combine(seed, hash_boost_variant_int_dogen_test_models_boost_model_class_derived_double(v.prop_1()));
-    combine(seed, hash_std_vector_boost_variant_int_dogen_test_models_boost_model_class_derived_double_(v.prop_2()));
+    combine(seed, hash_std_vector_boost_variant_int_dogen_test_models_boost_model_class_derived_double(v.prop_2()));
     combine(seed, hash_boost_variant_int_std_string_char(v.prop_3()));
 
     return seed;

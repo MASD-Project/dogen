@@ -39,7 +39,7 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_properties_
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_dogen_quilt_cpp_properties_path_derivatives_(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >& v) {
+inline std::size_t hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_dogen_quilt_cpp_properties_path_derivatives(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, dogen::quilt::cpp::properties::path_derivatives> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -58,7 +58,7 @@ namespace properties {
 std::size_t path_derivatives_repository_hasher::hash(const path_derivatives_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_dogen_quilt_cpp_properties_path_derivatives_(v.by_name()));
+    combine(seed, hash_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_dogen_quilt_cpp_properties_path_derivatives(v.by_name()));
     return seed;
 }
 

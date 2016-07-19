@@ -39,7 +39,7 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
-std::unordered_map<std::string, std::list<std::string> > create_std_unordered_map_std_string_std_list_std_string_(unsigned int position) {
+std::unordered_map<std::string, std::list<std::string> > create_std_unordered_map_std_string_std_list_std_string(unsigned int position) {
     std::unordered_map<std::string, std::list<std::string> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_std_string(position + i), create_std_list_std_string(position + i)));
@@ -83,7 +83,7 @@ context_generator::context_generator() : position_(0) { }
 
 void context_generator::
 populate(const unsigned int position, result_type& v) {
-    v.child_id_to_parent_ids(create_std_unordered_map_std_string_std_list_std_string_(position + 0));
+    v.child_id_to_parent_ids(create_std_unordered_map_std_string_std_list_std_string(position + 0));
     v.parent_ids(create_std_unordered_set_std_string(position + 1));
     v.id_to_name(create_std_unordered_map_std_string_dogen_yarn_name(position + 2));
     v.model(create_dogen_yarn_intermediate_model(position + 3));

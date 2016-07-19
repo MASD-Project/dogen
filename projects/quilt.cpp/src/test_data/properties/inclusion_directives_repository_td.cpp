@@ -43,7 +43,7 @@ std::unordered_map<std::string, std::string> create_std_unordered_map_std_string
     return r;
 }
 
-std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> > create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_string_(unsigned int position) {
+std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> > create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_string(unsigned int position) {
     std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_std_unordered_map_std_string_std_string(position + i)));
@@ -62,7 +62,7 @@ inclusion_directives_repository_generator::inclusion_directives_repository_gener
 
 void inclusion_directives_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.by_name(create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_string_(position + 0));
+    v.by_name(create_std_unordered_map_dogen_yarn_name_std_unordered_map_std_string_std_string(position + 0));
 }
 
 inclusion_directives_repository_generator::result_type

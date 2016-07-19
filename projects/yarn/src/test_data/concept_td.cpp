@@ -43,7 +43,7 @@ create_dogen_yarn_name(const unsigned int position) {
     return dogen::yarn::name_generator::create(position);
 }
 
-std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::attribute> > create_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_attribute_(unsigned int position) {
+std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::attribute> > create_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_attribute(unsigned int position) {
     std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::attribute> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_std_list_dogen_yarn_attribute(position + i)));
@@ -75,7 +75,7 @@ populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
     v.all_attributes(create_std_list_dogen_yarn_attribute(position + 0));
     v.local_attributes(create_std_list_dogen_yarn_attribute(position + 1));
-    v.inherited_attributes(create_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_attribute_(position + 2));
+    v.inherited_attributes(create_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_attribute(position + 2));
     v.is_immutable(create_bool(position + 3));
     v.is_fluent(create_bool(position + 4));
     v.refines(create_std_list_dogen_yarn_name(position + 5));

@@ -36,7 +36,7 @@ inline std::size_t hash_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_setting
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings_(const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings(const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -45,11 +45,11 @@ inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_quil
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings__(const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > >& v) {
+inline std::size_t hash_std_unordered_map_std_string_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings(const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings_(i.second));
+        combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings(i.second));
     }
     return seed;
 }
@@ -65,8 +65,8 @@ std::size_t element_settings_hasher::hash(const element_settings& v) {
     std::size_t seed(0);
 
     combine(seed, v.aspect_settings());
-    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings_(v.opaque_settings()));
-    combine(seed, hash_std_unordered_map_std_string_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings__(v.opaque_settings_for_property()));
+    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings(v.opaque_settings()));
+    combine(seed, hash_std_unordered_map_std_string_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings(v.opaque_settings_for_property()));
 
     return seed;
 }

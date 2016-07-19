@@ -43,7 +43,7 @@ std::vector<dogen::test_models::std_model::pkg1::class_c> create_std_vector_doge
     return r;
 }
 
-std::unordered_map<dogen::test_models::std_model::class_a, std::vector<dogen::test_models::std_model::pkg1::class_c> > create_std_unordered_map_dogen_test_models_std_model_class_a_std_vector_dogen_test_models_std_model_pkg1_class_c_(unsigned int position) {
+std::unordered_map<dogen::test_models::std_model::class_a, std::vector<dogen::test_models::std_model::pkg1::class_c> > create_std_unordered_map_dogen_test_models_std_model_class_a_std_vector_dogen_test_models_std_model_pkg1_class_c(unsigned int position) {
     std::unordered_map<dogen::test_models::std_model::class_a, std::vector<dogen::test_models::std_model::pkg1::class_c> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_test_models_std_model_class_a(position + i), create_std_vector_dogen_test_models_std_model_pkg1_class_c(position + i)));
@@ -59,7 +59,7 @@ std::list<dogen::test_models::std_model::class_a> create_std_list_dogen_test_mod
     return r;
 }
 
-std::unordered_map<dogen::test_models::std_model::pkg1::class_c, std::list<dogen::test_models::std_model::class_a> > create_std_unordered_map_dogen_test_models_std_model_pkg1_class_c_std_list_dogen_test_models_std_model_class_a_(unsigned int position) {
+std::unordered_map<dogen::test_models::std_model::pkg1::class_c, std::list<dogen::test_models::std_model::class_a> > create_std_unordered_map_dogen_test_models_std_model_pkg1_class_c_std_list_dogen_test_models_std_model_class_a(unsigned int position) {
     std::unordered_map<dogen::test_models::std_model::pkg1::class_c, std::list<dogen::test_models::std_model::class_a> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_dogen_test_models_std_model_pkg1_class_c(position + i), create_std_list_dogen_test_models_std_model_class_a(position + i)));
@@ -91,8 +91,8 @@ class_g_generator::class_g_generator() : position_(0) { }
 
 void class_g_generator::
 populate(const unsigned int position, result_type& v) {
-    v.prop_0(create_std_unordered_map_dogen_test_models_std_model_class_a_std_vector_dogen_test_models_std_model_pkg1_class_c_(position + 0));
-    v.prop_1(create_std_unordered_map_dogen_test_models_std_model_pkg1_class_c_std_list_dogen_test_models_std_model_class_a_(position + 1));
+    v.prop_0(create_std_unordered_map_dogen_test_models_std_model_class_a_std_vector_dogen_test_models_std_model_pkg1_class_c(position + 0));
+    v.prop_1(create_std_unordered_map_dogen_test_models_std_model_pkg1_class_c_std_list_dogen_test_models_std_model_class_a(position + 1));
     v.prop_2(create_std_unordered_map_std_string_dogen_test_models_std_model_class_a(position + 2));
 }
 

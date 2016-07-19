@@ -63,7 +63,7 @@ create_boost_variant_int_dogen_test_models_boost_model_class_derived_double(unsi
     return r;
 }
 
-std::vector<boost::variant<int, dogen::test_models::boost_model::class_derived, double> > create_std_vector_boost_variant_int_dogen_test_models_boost_model_class_derived_double_(unsigned int position) {
+std::vector<boost::variant<int, dogen::test_models::boost_model::class_derived, double> > create_std_vector_boost_variant_int_dogen_test_models_boost_model_class_derived_double(unsigned int position) {
     std::vector<boost::variant<int, dogen::test_models::boost_model::class_derived, double> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_boost_variant_int_dogen_test_models_boost_model_class_derived_double(position + i));
@@ -107,7 +107,7 @@ void class_e_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_boost_variant_int_double(position + 0));
     v.prop_1(create_boost_variant_int_dogen_test_models_boost_model_class_derived_double(position + 1));
-    v.prop_2(create_std_vector_boost_variant_int_dogen_test_models_boost_model_class_derived_double_(position + 2));
+    v.prop_2(create_std_vector_boost_variant_int_dogen_test_models_boost_model_class_derived_double(position + 2));
     v.prop_3(create_boost_variant_int_std_string_char(position + 3));
 }
 

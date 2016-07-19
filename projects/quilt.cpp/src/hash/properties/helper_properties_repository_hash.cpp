@@ -37,7 +37,7 @@ inline std::size_t hash_std_list_dogen_quilt_cpp_properties_helper_properties(co
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_list_dogen_quilt_cpp_properties_helper_properties_(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_std_list_dogen_quilt_cpp_properties_helper_properties(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::helper_properties> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -56,7 +56,7 @@ namespace properties {
 std::size_t helper_properties_repository_hasher::hash(const helper_properties_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_quilt_cpp_properties_helper_properties_(v.by_id()));
+    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_quilt_cpp_properties_helper_properties(v.by_id()));
     return seed;
 }
 

@@ -48,7 +48,7 @@ create_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings(unsigned int po
     return r;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > create_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings_(unsigned int position) {
+std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > create_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings(unsigned int position) {
     std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings(position + i)));
@@ -56,10 +56,10 @@ std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::o
     return r;
 }
 
-std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > > create_std_unordered_map_std_string_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings__(unsigned int position) {
+std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > > create_std_unordered_map_std_string_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings(unsigned int position) {
     std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings_(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings(position + i)));
     }
     return r;
 }
@@ -76,8 +76,8 @@ element_settings_generator::element_settings_generator() : position_(0) { }
 void element_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.aspect_settings(create_dogen_quilt_cpp_settings_aspect_settings(position + 0));
-    v.opaque_settings(create_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings_(position + 1));
-    v.opaque_settings_for_property(create_std_unordered_map_std_string_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings__(position + 2));
+    v.opaque_settings(create_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings(position + 1));
+    v.opaque_settings_for_property(create_std_unordered_map_std_string_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings(position + 2));
 }
 
 element_settings_generator::result_type

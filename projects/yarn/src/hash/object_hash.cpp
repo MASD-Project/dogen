@@ -40,7 +40,7 @@ inline std::size_t hash_std_list_dogen_yarn_attribute(const std::list<dogen::yar
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_attribute_(const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::attribute> >& v) {
+inline std::size_t hash_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_attribute(const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::attribute> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -69,7 +69,7 @@ std::size_t object_hasher::hash(const object& v) {
 
     combine(seed, hash_std_list_dogen_yarn_attribute(v.all_attributes()));
     combine(seed, hash_std_list_dogen_yarn_attribute(v.local_attributes()));
-    combine(seed, hash_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_attribute_(v.inherited_attributes()));
+    combine(seed, hash_std_unordered_map_dogen_yarn_name_std_list_dogen_yarn_attribute(v.inherited_attributes()));
     combine(seed, v.is_immutable());
     combine(seed, v.is_fluent());
     combine(seed, v.is_parent());

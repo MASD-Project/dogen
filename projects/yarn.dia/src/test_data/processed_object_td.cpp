@@ -51,7 +51,7 @@ create_std_pair_std_string_std_string(unsigned int position) {
 }
 
 boost::optional<std::pair<std::string, std::string> >
-create_boost_optional_std_pair_std_string_std_string_(unsigned int position) {
+create_boost_optional_std_pair_std_string_std_string(unsigned int position) {
     boost::optional<std::pair<std::string, std::string> > r(
         create_std_pair_std_string_std_string(position));
     return r;
@@ -86,7 +86,7 @@ populate(const unsigned int position, result_type& v) {
     v.stereotype(create_std_string(position + 3));
     v.comment(create_dogen_yarn_dia_processed_comment(position + 4));
     v.child_node_id(create_std_string(position + 5));
-    v.connection(create_boost_optional_std_pair_std_string_std_string_(position + 6));
+    v.connection(create_boost_optional_std_pair_std_string_std_string(position + 6));
     v.attributes(create_std_list_dogen_yarn_dia_processed_attribute(position + 7));
 }
 
