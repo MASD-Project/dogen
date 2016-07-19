@@ -13,7 +13,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-17 Sun 22:24]
+#+CAPTION: Clock summary at [2016-07-19 Tue 20:50]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
@@ -21,8 +21,8 @@
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
 | Stories                                                                     | 36:28   |       |      | 100.0 |
 | Active                                                                      |         | 36:28 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:36 |   7.1 |
-| STARTED Manual updates and blog posts                                       |         |       | 1:21 |   3.7 |
+| COMPLETED Sprint and product backlog grooming                               |         |       | 2:36 |   7.1 |
+| COMPLETED Manual updates and blog posts                                     |         |       | 1:21 |   3.7 |
 | COMPLETED Try to fix tag build issues                                       |         |       | 1:28 |   4.0 |
 | COMPLETED Enable =BUILD_TYPE= on travis                                     |         |       | 1:17 |   3.5 |
 | COMPLETED Add initial support for coveralls                                 |         |       | 0:29 |   1.3 |
@@ -50,11 +50,12 @@
 | COMPLETED Fix Windows linking errors for debug builds                       |         |       | 0:48 |   2.2 |
 | COMPLETED Windows build fails to find tests                                 |         |       | 0:23 |   1.1 |
 | COMPLETED Document windows failures and get build green                     |         |       | 0:30 |   1.4 |
-| STARTED Implement hashing using dynamic helpers                             |         |       | 4:19 |  11.8 |
+| POSTPONED Implement hashing using dynamic helpers                           |         |       | 4:19 |  11.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2016-07-19 Tue 20:50]
     CLOCK: [2016-07-17 Sun 17:20]--[2016-07-17 Sun 17:30] =>  0:10
     CLOCK: [2016-07-12 Tue 17:47]--[2016-07-12 Tue 18:37] =>  0:50
     CLOCK: [2016-07-12 Tue 17:25]--[2016-07-12 Tue 17:46] =>  0:21
@@ -67,7 +68,8 @@
 
 Updates to sprint and product backlog.
 
-*** STARTED Manual updates and blog posts                             :story:
+*** COMPLETED Manual updates and blog posts                           :story:
+    CLOSED: [2016-07-19 Tue 20:50]
     CLOCK: [2016-07-09 Sat 23:43]--[2016-07-09 Sat 23:56] =>  0:13
     CLOCK: [2016-07-09 Sat 23:21]--[2016-07-09 Sat 23:40] =>  0:19
     CLOCK: [2016-07-09 Sat 18:53]--[2016-07-09 Sat 19:05] =>  0:12
@@ -828,7 +830,8 @@ so we can address them in the future. We also need to get the build
 green again by whatever means; if the build is red we won't notice any
 regressions.
 
-*** STARTED Implement hashing using dynamic helpers                   :story:
+*** POSTPONED Implement hashing using dynamic helpers                 :story:
+    CLOSED: [2016-07-19 Tue 20:50]
     CLOCK: [2016-07-17 Sun 21:31]--[2016-07-17 Sun 22:24] =>  0:53
     CLOCK: [2016-07-17 Sun 19:14]--[2016-07-17 Sun 19:30] =>  0:16
     CLOCK: [2016-07-17 Sun 18:34]--[2016-07-17 Sun 19:13] =>  0:39
@@ -848,488 +851,6 @@ Update formatters in hash to use new helpers.
   given family, the helpers register against a owning formatter. If a
   type exists for that owning formatter then a helper is required. We
   could add an attribute to properties that is computed based on this.
-
-*** Windows build release test failures                               :epic:
-
-Dia tests:
-
-: [00:27:30] C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets(171,5): error MSB6006: "cmd.exe" exited with code -1073741515. [C:\projects\dogen\build\output\projects\dia\tests\run_dia.tests.vcxproj]
-
-Dia hydrator tests:
-
-: [00:27:31] unknown location : fatal error : in "modeline_group_hydrator_tests/hydrating_emacs_modeline_group_results_in_expected_modelines": class std::runtime_error: Error during test [C:\projects\dogen\build\output\projects\formatters\tests\run_formatters.tests.vcx
-: [00:27:31] proj]
-: [00:27:31]   C:\projects\dogen\projects\formatters\tests\modeline_group_hydrator_tests.cpp(142): last checkpoint: hydrating_emacs_modeline_group_results_in_expected_modelines
-: [00:27:31]
-: [00:27:31]   *** 1 failure is detected in the test module "formatters_tests"
-
-Knit:
-
-: [00:27:35] C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets(171,5): error MSB6006: "cmd.exe" exited with code -1073741515. [C:\projects\dogen\build\output\projects\knit\tests\run_knit.tests.vcxproj]
-: [00:27:35] Done Building Project "C:\projects\dogen\build\output\projects\knit\tests\run_knit.tests.vcxproj" (default targets) -- FAILED.
-
-Stitch:
-: [00:27:36]   C:\projects\dogen\projects\utility\src\test_data\validating_resolver.cpp(39): Throw in function class boost::filesystem::path __cdecl dogen::utility::test_data::validating_resolver::resolve(class boost::filesystem::path)
-: [00:27:36]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::utility::filesystem::file_not_found>
-: [00:27:36]   std::exception::what: File not found: C:\projects\dogen\build\output\bin\../test_data\stitch/input/simple_template.stitch
-: [00:27:36] unknown location : fatal error : in "workflow_tests/simple_template_results_in_expected_output": class std::runtime_error: Error during test [C:\projects\dogen\build\output\projects\stitch\tests\run_stitch.tests.vcxproj]
-: [00:27:36]   C:\projects\dogen\projects\stitch\tests\workflow_tests.cpp(48): last checkpoint: simple_template_results_in_expected_output
-: [00:27:36]
-: [00:27:36]   C:\projects\dogen\projects\utility\src\test_data\validating_resolver.cpp(39): Throw in function class boost::filesystem::path __cdecl dogen::utility::test_data::validating_resolver::resolve(class boost::filesystem::path)
-: [00:27:36]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::utility::filesystem::file_not_found>
-: [00:27:36]   std::exception::what: File not found: C:\projects\dogen\build\output\bin\../test_data\stitch/input/complex_template.stitch
-: [00:27:36]
-: [00:27:36]   C:\projects\dogen\projects\utility\src\test_data\validating_resolver.cpp(39): Throw in function class boost::filesystem::path __cdecl dogen::utility::test_data::validating_resolver::resolve(class boost::filesystem::path)
-: [00:27:36]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::utility::filesystem::file_not_found>
-: [00:27:36]   std::exception::what: File not found: C:\projects\dogen\build\output\bin\../test_data\stitch/input/empty_template.stitch
-: [00:27:36]
-: [00:27:36]   *** 3 failures are detected in the test module "stitch_tests"
-<snip>
-
-Test model sanitizer:
-
-: [00:27:39]   CMake does not need to re-run because C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\CMakeFiles\generate.stamp is up-to-date.
-: [00:27:39]   Running 127 test cases...
-: [00:27:39] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "std_model_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\run_test_model_sanitizer.tests.vcxproj]
-: [00:27:39] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "std_model_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\run_te
-: [00:27:39] st_model_sanitizer.tests.vcxproj]
-: [00:27:40]
-: [00:27:40]   *** 2 failures are detected in the test module "test_model_sanitizer_tests"
-
-Yarn.dia:
-
-: [00:27:42]   C:\projects\dogen\projects\utility\src\test_data\validating_resolver.cpp(39): Throw in function class boost::filesystem::path __cdecl dogen::utility::test_data::validating_resolver::resolve(class boost::filesystem::path)
-: [00:27:42]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::utility::filesystem::file_not_found>
-: [00:27:42]   std::exception::what: File not found: C:\projects\dogen\build\output\bin\../test_data\yarn.dia/expected/class_in_a_package.diaxml
-: [00:27:42] unknown location : fatal error : in "workflow_tests/class_in_a_package_dia_transforms_into_expected_yarn": class std::runtime_error: Error during test [C:\projects\dogen\build\output\projects\yarn.dia\tests\run_yarn.dia.tests.vcxproj]
-: [00:27:42]   C:\projects\dogen\projects\yarn.dia\tests\workflow_tests.cpp(85): last checkpoint: class_in_a_package_dia_transforms_into_expected_yarn
-
-Yarn.Json
-
-: [00:27:42]   Building Custom Rule C:/projects/dogen/projects/yarn.json/tests/CMakeLists.txt
-: [00:27:42]   CMake does not need to re-run because C:\projects\dogen\build\output\projects\yarn.json\tests\CMakeFiles\generate.stamp is up-to-date.
-: [00:27:42]   Running 12 test cases...
-: [00:27:42]
-: [00:27:42]   C:\projects\dogen\projects\yarn.json\src\types\hydrator.cpp(251): Throw in function class dogen::yarn::intermediate_model __cdecl dogen::yarn::json::hydrator::hydrate(class std::basic_istream<char,struct std::char_traits<char> > &) const
-: [00:27:42]   Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::yarn::json::hydration_error>
-: [00:27:42]   std::exception::what: Failed to parse JSON file<unspecified file>(1): expected value
-: [00:27:42] unknown location : fatal error : in "hydrator_tests/cpp_std_model_hydrates_into_expected_model": class std::runtime_error: Error during test [C:\projects\dogen\build\output\projects\yarn.json\tests\run_yarn.json.tests.vcxproj]
-: [00:27:42]   C:\projects\dogen\projects\yarn.json\tests\hydrator_tests.cpp(386): last checkpoint: cpp_std_model_hydrates_into_expected_model
-
-Yarn:
-
-: [00:27:42] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "hashing_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\yarn\tests\run_yarn.tests.vcxproj]
-: [00:27:42] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "hashing_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\yarn\tests\run_yarn.tests.vcxproj]
-: [00:27:42] C:/projects/dogen/projects/utility/include/dogen/utility/test/hash_tester.hpp(57): error : in "hashing_tests/validate_hashing": check hasher(a) == hasher(b) has failed [C:\projects\dogen\build\output\projects\yarn\tests\run_yarn.tests.vcxproj]
-: [00:27:44]
-: [00:27:44]   *** 3 failures are detected in the test module "yarn_tests"
-
-*** Windows build debug failures                                      :epic:
-
-The windows debug build fails to link with the following errors:
-
-: C:\projects\dogen\build\output\projects\config\tests\config.tests.vcxproj" (default target) (14) ->
-: (Link target) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\config\tests\config.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\dia\tests\dia.tests.vcxproj" (default target) (17) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\dia\tests\dia.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\dynamic\tests\dynamic.tests.vcxproj" (default target) (21) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\dynamic\tests\dynamic.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\formatters\tests\formatters.tests.vcxproj" (default target) (29) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\formatters\tests\formatters.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\knit\tests\knit.tests.vcxproj" (default target) (36) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\knit\tests\knit.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\knitter\src\knitter.vcxproj" (default target) (37) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\knitter\src\knitter.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\knitter\tests\knitter.tests.vcxproj" (default target) (38) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\knitter\tests\knitter.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\quilt.cpp\tests\quilt.cpp.tests.vcxproj" (default target) (39) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\quilt.cpp\tests\quilt.cpp.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\quilt\tests\quilt.tests.vcxproj" (default target) (40) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(default_attribute_names.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\quilt\tests\quilt.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\test_models\seam\tests\seam.tests.vcxproj" (default target) (41) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(core.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\test_models\seam\tests\seam.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\stitch\tests\stitch.tests.vcxproj" (default target) (46) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\stitch\tests\stitch.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\stitcher\src\stitcher.vcxproj" (default target) (47) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\stitcher\src\stitcher.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\stitcher\tests\stitcher.tests.vcxproj" (default target) (48) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\stitcher\tests\stitcher.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\test_model_sanitizer.tests.vcxproj" (default target) (49) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\test_models\test_model_sanitizer\tests\test_model_sanitizer.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\utility\tests\utility.tests.vcxproj" (default target) (53) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\utility\tests\utility.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\yarn.dia\tests\yarn.dia.tests.vcxproj" (default target) (54) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\yarn.dia\tests\yarn.dia.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\yarn.json\tests\yarn.json.tests.vcxproj" (default target) (55) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\yarn.json\tests\yarn.json.tests.vcxproj]
-: "C:\projects\dogen\build\output\ALL_BUILD.vcxproj" (default target) (1) ->
-: "C:\projects\dogen\build\output\projects\yarn\tests\yarn.tests.vcxproj" (default target) (56) ->
-:   libboost_log-vc140-mt-gd-1_60.lib(unhandled_exception_count.obj) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64' [C:\projects\dogen\build\output\projects\yarn\tests\yarn.tests.vcxproj]
-:     910 Warning(s)
-:     18 Error(s)
-
-This appears to be a mixing of 32-bit and 64-bit settings somewhere in
-the boost tests, according to SO:
-
-[[http://stackoverflow.com/questions/3563756/fatal-error-lnk1112-module-machine-type-x64-conflicts-with-target-machine-typ][fatal error LNK1112: module machine type 'x64' conflicts with target
-machine type 'X86']]
-
-Debug build is back down to =knit= target again.
-
-*** Add tests to inheritance test model                               :story:
-
-We should make sure types' use of IO kicks in via the inheritance test
-model. For this we need a base class with associative containers, etc
-and a derived class.
-
-*** Add new c++ warnings to compilation                               :story:
-
-- =-Wunused-private-field=: Seems like this warning is not part of
-  =-Wall=
-- =-Winconsistent-missing-override=: new clang warning, probably 3.6.
-
-*** Detect knitter and disable code generation accordingly            :story:
-
-At present you can try to build the codegen knitting targets even
-before you built knitter. We should make them conditional on detecting
-=knitter=. We just need to make sure this is not cached by CMake.
-
-*** Group the file related fields under a prefix                      :story:
-
-Now we have =element= as a prefix, it probably makes sense to also
-group the fields that are related to file names, paths etc. These
-could be under =file= or perhaps =paths=? Examples:
-
-- =quilt.cpp.file.include_directory_name=
-- =quilt.cpp.source_directory_name=
-
-*** Implement qualified name efficiently                              :story:
-
-We used a =std::map= to store qualified names. In practice, we don't
-need something this expensive.
-
-- instead of mapping names to languages, we could map them to
-  "styles". There are only a few "styles" across all programming
-  languages (e.g. =.= separated, =::= separated and so on).
-- we can also create an array of these styles. We know up front how
-  many styles there are.
-- finally we can create a enumeration to access the array. At present
-  this is not possible because we cannot disable invalid, nor is it
-  possible to move it to a different position (e.g. last). Also we
-  will have to static cast the enum to access the int, which is not
-  very pretty.
-
-Once all of this is done we can simply do, at O(1):
-
-: name.qualified[static_cast<unsigned int>(styles::double_colon_separated_style)]
-
-We can prettify it a bit: [[http://stackoverflow.com/questions/8357240/how-to-automatically-convert-strongly-typed-enum-into-int][How to automatically convert strongly typed
-enum into int?]]
-
-: template <typename E>
-: constexpr typename std::underlying_type<E>::type to_underlying(E e) {
-:     return static_cast<typename std::underlying_type<E>::type>(e);
-: }
-:
-: std::cout << foo(to_underlying(b::B2)) << std::endl;
-
-Giving us:
-
-: name.qualified[to_underlying(styles::double_colon_separated_style)]
-
-*** Create utility methods for =__type__= etc                         :story:
-
-At present we've hard-coded the field name for =__type__= and so forth
-in each formatter. This is not ideal. Create a simple utility method
-that returns it and update all formatters to use it instead. List of
-hard-coded things:
-
-- =__type__=
-- =<empty>=
-- =data=
-- =value=
-- =memory=
-- string helper variables: =<new_line>=, =<quote>=
-- =tidy_up_string=
-
-*** Add support for file properties overrides                         :story:
-
-At present we have hard-coded the file properties (old general
-settings) to be read from the root object only. In an ideal world, we
-should be able to override some of these such as the copyrights. It
-may not make sense to be able to override them all though.
-
-*** Why do we need helpers and io for some types?                     :story:
-
-At present we have helper support for maps, sets, pairs etc. We also
-seem to have utility support for these. Originally the idea was that
-we needed utility so that users could have a map of dogen types and
-still have streaming support. This is useful. However, what is
-slightly less clear is why we don't just use the utility methods
-inside the IO subsystem to output these types, but instead use
-helpers. We should try doing that and see what breaks, there may be a
-reasons for this.
-
-In theory we just have to remove the helpers in IO for utility
-supported types and add the includes to the meta-data; regenerate and
-see what breaks. It could be related to the ordering of template
-functions or some such problem. If so we need to document this in
-manual. We should also do a quick search in backlog for this.
-
-*** Character member variables are not tidied up on io                :story:
-
-At present there is no code to convert non-printable chars into
-something acceptable in JSON. We probably never noticed this before
-because test data generates printable chars. Code generated is as
-follows (all primitives model):
-
-: << "\"char_property\": " << "\"" << v.char_property() << "\"" << ", "
-
-We need a "tidy-up char" function to handle this properly.
-
-For now we've hacked this and set =remove_unprintable_characters= to
-false to keep backwards compatibility with legacy.
-
-*** Lists of strings are not properly tidied up on io                 :story:
-
-In the log file, when we dump include dependencies we see invalid
-JSON:
-
-: [ "<iosfwd>", ""dogen/sml/types/merger.hpp"" ]
-
-This implies we are not calling =tidy_up_string=. This can be tested
-by creating a container of =filesystem::path=.
-
-*** Type-bound helpers and generic helpers                            :story:
-
-Not all helpers are bound to a type. We have the case of inserter
-helper in io which is used by main formatters directly. We need to
-make this distinction in the manual.
-
-*** Check which properties need to loop through the entire model      :story:
-
-In certain cases such as helpers we probably don't need to go through
-all types; only the target types matter. Ensure we are not processing
-other types for no reason.
-
-*** Add validation for helper families                                :story:
-
-At present we are checking that the name tree has the expected number
-of type arguments:
-
-:    const auto children(t.children());
-:    if (children.size() != 1) {
-:        BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
-:        BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
-:    }
-:    smart_pointer_helper_stitch(fa, t);
-
-In the future with dynamic helpers we will remove these checks. In
-order to implement them we need to declare the type families up front
-in a JSON file, with a name and number of type arguments. When
-constructing the type helpers, we can check the name tree to make sure
-the number of type arguments is correct.
-
-This can be done as a helper setting (number of type arguments?).
-
-*** Update assistant to use new helper information                    :story:
-
-Once all the pieces are in place, the assistant can then use the
-element properties to find out which helpers are required for each
-type; call those helpers and populate the file with the generate
-code. We can remove all previous helper support.
-
-*** Create a settings class for the "requires" settings               :story:
-
-We need to populate these in a settings workflow of some kind.
-
-*** Consider caching "all modules" in location                        :story:
-
-At present we are adding the module lists together to build the
-qualified name; location could have a "all modules" list that
-concatenates external, model and internal modules. We should look at
-performance before doing this change though.
-
-*** Consider reducing the number of qname lookups in cpp model        :story:
-
-At present we are still using =yarn::name= in a lot of repositories in
-quilt. We already had one go in moving to id's but there are still
-quite a few left. Investigate to see if there are more that can be
-moved.
-
-*** Implement formattables in terms of yarn types                     :epic:
-
-At present formattables are just a shadow copy of yarn types plus
-additional =cpp= specific types. In practice:
-
-- for the types that are shadow copies, we could have helper utilities
-  that do the translation on the fly (e.g. for names).
-- for additional information which cannot be translated, we could have
-  containers indexed by qualified name and query those just before we
-  call the transformer. This is the case with formatter properties. We
-  need something similar to house "type properties" such as
-  =requires_stream_manipulators=. These could be moved into aspect
-  settings.
-- for types that do not exist in yarn, we could inherit from element;
-  this is the case for registrar, forward declarations, cmakelists and
-  odb options. Note that with this we are now saying that element
-  space contains anything which can be modeled, regardless of if they
-  are part of the programming language type system, or build system,
-  etc. This is not ideal, but its not a problem just yet. We could
-  update the factory to generate these types and then take a copy of
-  the model and inject them in it.
-
-*** Add support for selectively disabling helpers on a family         :story:
-
-At present when a type belongs to a helper family it must provide all
-helpers across all facets. This means that we can't support the cases
-where a helper is required for one facet for one type but not for
-others. For example, we cannot create a family for =Dereferenceable=
-including both smart pointers and optionals because optional does not
-need a helper for =types=.
-
-One solution for this is to allow disabling the helper for a given
-type on a given facet. However, our templating mechanism in dynamic is
-not able to cope with this use case. Changes required:
-
-- add a "component" to ownership hierarchy. This would be "helper" in
-  our case. We should also set "type" which has been hacked via the
-  qualified name.
-- create a supported/enabled field with a component of helper and a
-  facet template. We could change this to formatter template if
-  required in the future.
-- merge the families of optional and smart pointer into
-  =Dereferenceable=.
-- disable the helper for types for optional.
-- update the helper settings to read this new field.
-- enabled method now checks the helper properties.
-
-*** Remove nested type info                                           :story:
-
-Once all of the infrastructure is in place, we should not need this
-class any more. Remove code from transformer and remove object types
-and anything else that was used to dispatch based on type.
-
-*** Rename methods parsing name trees                                 :story:
-
-We have a variety of names for the methods parsing name trees
-recursively. The best one seems to be =walk_name_tree=. We should use
-this name consistently.
-
-*** Initialise formatters in the formatter's translation unit         :story:
-
-At present we are initialising the formatters in each of the facet
-initialisers. However, it makes more sense to initialise them on the
-translation unit for each formatter. This will also make life easier
-when we move to a mustache world where there may not be a formatter
-header file at all.
-
-*** Consider using indices rather than associative containers         :story:
-
-Once we generate the final model the model becomes constant; this
-means we can easily assign an [[https://en.wikipedia.org/wiki/Ordinal_number][ordinal number]] to each model
-element. These could be arranged so that we always start with
-generatable types first; this way we always generate dense
-containers - there are some cases where we need both generatable types
-and non-generatable types; in other cases we just need generatable
-types; we never need just non-generatable types. We also need to know
-the position of the first non-generatable type (or alternatively, the
-size of the generatable types set).
-
-Once we have this, we can start creating vectors with a fixed size
-(either total number of elements or just size of generatable
-types). We can also make it so that each name has an id which is the
-ordinal (another model post-processing activity). Actually we should
-call it "type index" or some other name because its a transient
-id. This means both properties and settings require no lookups at all
-since all positions are known beforehand (except in cases where the
-key of the associative container must be the =yarn::name= because we
-use it for processing).
-
-In theory, a similar approach can be done for formatters too. We know
-upfront what the ordinal number is for each formatter because they are
-all registered before we start processing. If formatters obtained
-their ordinal number at registration, wherever we are using a map of
-formatter name to a resource, we could use a fixed-size
-vector. However, formatters may be sparse in many cases (if not all
-cases?). For example, we do not have formatter properties for all
-formatters for every =yarn::name= because many (most) formatters don't
-make sense for every yarn type. Thus this is less applicable, at least
-for formatter properties. We need to look carefully at all use cases
-and see if there is any place where this approach is applicable.
-
-*** Handle "special includes" correctly                               :story:
-
-We did a quick hack to handle "special includes": we simply "detected"
-them in include builder and then did the appropriate action in each of
-the include providers. In order to make this work dynamically, we need
-somehow to have "associated includes" on a per type basis. For
-example:
-
-- type =x= requires include =y= in formatter =f=.
-
-This can easily be achieved via an "additional inclusion directive"
-which is a container. For example:
-
-:        "extensions" : {
-:                "quilt.cpp.helper.family" : "Dereferenceable",
-:                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/weak_ptr.hpp>",
-
-Could have:
-
-:                "quilt.cpp.types.class_header_formatter.additional_inclusion_directive" : "<some_include.hpp>",
-
-If multiple are provided then they are all added. This highlights an
-important point: we need a way to inject type specific includes from a
-formatter. It makes no sense to declare all of these up front in a
-library since we do not know what all possible formatters are, nor
-what requirements they may have for inclusion. At the same time,
-formatters cannot be expected to declare types. The solution is to be
-able to "inject" these dependencies from a JSON file associated with
-the formatter. We could supply the qualified name and the properties
-to inject. This problem can be solved later on - create a separate
-story for this.
-
-*** Registrar in serialisation is not stable sorted                   :story:
-
-We seem to have a traffic light diff on =registrar_ser.cpp=:
-
-: -    dogen::config::register_types(ar);
-:      dogen::quilt::cpp::register_types(ar);
-:      dogen::yarn::register_types(ar);
-: +    dogen::config::register_types(ar);
-
-This is probably a lack of a stable sort in model dependencies.
-
-*** Support only specific attributes for certain facets               :story:
-
-Whenever an object has a unique identifier, it may make sense to make
-use of it for:
-
-- hashing
-- equality
-- less than
-
-And so forth. For example, names and name trees don't really require
-comparing the entire state of the object. We need a way to mark
-properties against each facet in the meta-data.
 
 ** Deprecated
 
