@@ -214,11 +214,11 @@ std::list<field_definition> json_hydrator::read_stream(std::istream& s) const {
 }
 
 std::list<field_definition> json_hydrator::hydrate(std::istream& s) const {
-    BOOST_LOG_SEV(lg, debug) << "Parsing JSON stream.";
+    BOOST_LOG_SEV(lg, trace) << "Parsing JSON stream.";
     using namespace boost::property_tree;
     try {
         auto r(read_stream(s));
-        BOOST_LOG_SEV(lg, debug) << "Parsed JSON stream successfully.";
+        BOOST_LOG_SEV(lg, trace) << "Parsed JSON stream successfully.";
         return r;
     } catch (const json_parser_error& e) {
         BOOST_LOG_SEV(lg, error) << invalid_json_file << ": " << e.what();

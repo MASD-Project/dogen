@@ -71,7 +71,8 @@ instantiator::instantiator(const std::forward_list<ownership_hierarchy>& oh)
     : ownership_hierarchy_(oh),
       facet_names_by_model_name_(obtain_facet_names_by_model_name(oh)) {
 
-    BOOST_LOG_SEV(lg, debug) << "Initialised. Ownership hierarchy: " << oh;
+    BOOST_LOG_SEV(lg, debug) << "Initialised.";
+    BOOST_LOG_SEV(lg, trace) << "Ownership hierarchy: " << oh;
     BOOST_LOG_SEV(lg, debug) << "Facet names by model: "
                              << facet_names_by_model_name_;
 }

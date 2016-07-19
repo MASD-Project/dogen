@@ -22,8 +22,10 @@
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/algorithm/string/predicate.hpp>
+#include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/file.hpp"
+#include "dogen/formatters/io/file_io.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
 
 namespace {
@@ -63,12 +65,12 @@ bool filesystem_writer::content_changed(const file& f) const {
     const std::string existing_content(read_file_content(f.path()));
 
     if (existing_content == f.content()) {
-        BOOST_LOG_SEV(lg, debug) << "File contents have not changed, "
+        BOOST_LOG_SEV(lg, trace) << "File contents have not changed, "
                                  << "and force write is false so not writing.";
         return false;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "File contents have changed, need to write";
+    BOOST_LOG_SEV(lg, trace) << "File contents have changed, need to write";
     return true;
 }
 
@@ -80,14 +82,14 @@ void filesystem_writer::create_directories(
 
     using boost::filesystem::create_directories;
     const bool created(create_directories(dir));
-    BOOST_LOG_SEV(lg, debug) << (created ? created_dir_message :
+    BOOST_LOG_SEV(lg, trace) << (created ? created_dir_message :
         using_dir_message) << dir.generic_string();
 }
 
 void filesystem_writer::write_empty_file(const formatters::file& f) const {
     const auto gs(f.path().generic_string());
     if (boost::filesystem::exists(f.path())) {
-        BOOST_LOG_SEV(lg, debug) << "File has no content so no writing: " << gs;
+        BOOST_LOG_SEV(lg, trace) << "File has no content so no writing: " << gs;
         return;
     }
 
@@ -103,7 +105,6 @@ void filesystem_writer::write_empty_file(const formatters::file& f) const {
 
     return;
 }
-
 
 void filesystem_writer::write(const formatters::file& f) const {
     const auto gs(f.path().generic_string());
@@ -125,16 +126,20 @@ void filesystem_writer::write(const formatters::file& f) const {
     if (content_changed(f)) {
         BOOST_LOG_SEV(lg, debug) << "File contents have changed.";
         write_file_content(f.path(), f.content());
-        BOOST_LOG_SEV(lg, debug) << "Wrote file: " << gs;
+        BOOST_LOG_SEV(lg, trace) << "Wrote file: " << gs;
     } else {
-        BOOST_LOG_SEV(lg, debug) << "File contents have not changed, "
+        BOOST_LOG_SEV(lg, trace) << "File contents have not changed, "
                                  << "and force write is false so not writing.";
     }
+    BOOST_LOG_SEV(lg, debug) << "Processed file: " << gs;
 }
 
 void filesystem_writer::write(const std::forward_list<file>& files) const {
+    BOOST_LOG_SEV(lg, info) << "Writing files: " << files;
     for (const auto& f : files)
         write(f);
+
+    BOOST_LOG_SEV(lg, info) << "Finished writing files: " << files;
 }
 
 } }

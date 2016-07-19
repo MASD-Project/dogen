@@ -37,9 +37,9 @@ namespace dynamic {
 
 std::list<field_definition> hydration_workflow::
 hydrate(const std::forward_list<boost::filesystem::path>& dirs) const {
-    BOOST_LOG_SEV(lg, debug) << "Finding all files in: " << dirs;
+    BOOST_LOG_SEV(lg, info) << "Finding all files in: " << dirs;
     const auto files(dogen::utility::filesystem::find_files(dirs));
-    BOOST_LOG_SEV(lg, debug) << "Files found: " << files;
+    BOOST_LOG_SEV(lg, info) << "Files found: " << files;
 
     json_hydrator jh;
     std::list<field_definition> r;
@@ -47,7 +47,7 @@ hydrate(const std::forward_list<boost::filesystem::path>& dirs) const {
         auto fds(jh.hydrate(f));
         r.splice(r.end(), fds);
     }
-    BOOST_LOG_SEV(lg, debug) << "Finished hydrating all files.";
+    BOOST_LOG_SEV(lg, info) << "Finished hydrating all files.";
     return r;
 }
 

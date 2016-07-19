@@ -76,14 +76,14 @@ repository repository_workflow::create_repository_activity(
 repository repository_workflow::execute(
     const std::forward_list<ownership_hierarchy>& oh,
     const std::forward_list<boost::filesystem::path>& dirs) const {
-    BOOST_LOG_SEV(lg, debug) << "Generating repository.";
-    BOOST_LOG_SEV(lg, debug) << "Ownership hierarchy: " << oh;
+    BOOST_LOG_SEV(lg, info) << "Generating repository.";
+    BOOST_LOG_SEV(lg, info) << "Ownership hierarchy: " << oh;
 
     const auto original(hydrate_directories_activity(dirs));
     const auto instantiated(instantiate_templates_activity(oh, original));
     const auto r(create_repository_activity(instantiated));
 
-    BOOST_LOG_SEV(lg, debug) << "Generated repository: " << r;
+    BOOST_LOG_SEV(lg, info) << "Generated repository: " << r;
     return r;
 }
 

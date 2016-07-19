@@ -179,7 +179,7 @@ void workflow::write_files_activity(
 
 void workflow::execute() const {
     BOOST_LOG_SEV(lg, info) << "Starting.";
-    BOOST_LOG_SEV(lg, debug) << "Knitting options: " << knitting_options_;
+    BOOST_LOG_SEV(lg, info) << "Knitting options: " << knitting_options_;
 
     try {
         const auto oh(obtain_ownership_hierarchy_activity());
