@@ -19,7 +19,6 @@
  *
  */
 #include <utility>
-#include <unordered_set>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
@@ -48,16 +47,14 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-template<typename IdentifiableAndQualified>
-inline std::pair<std::string, std::string>
-get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
+template<typename Qualified>
+inline std::string get_qualified(const Qualified& iaq) {
     const auto i(iaq.qualified().find(yarn::languages::cpp));
     if (i == iaq.qualified().end()) {
         BOOST_LOG_SEV(lg, error) << qn_missing << yarn::languages::cpp;
         BOOST_THROW_EXCEPTION(building_error(qn_missing));
     }
-
-    return std::make_pair(iaq.identifiable(), i->second);
+    return i->second;
 }
 
 helper_properties_factory::helper_properties_factory(
@@ -117,6 +114,7 @@ streaming_settings_for_id(const std::string& id) const {
 boost::optional<helper_descriptor>
 helper_properties_factory::make(const bool in_inheritance_relationship,
     const yarn::name_tree& nt, const bool is_top_level,
+    std::unordered_set<std::string>& done,
     std::list<helper_properties>& properties) const {
     const auto id(nt.current().id());
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
@@ -163,13 +161,10 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
         r.requires_hashing_helper(requires_hashing_helper(hs->family()));
     }
 
-    const auto p1(get_identifiable_and_qualified(nt.current()));
-    r.name_identifiable(p1.first);
-    r.name_qualified(p1.second);
-
-    const auto p2(get_identifiable_and_qualified(nt));
-    r.name_tree_identifiable(p2.first);
-    r.name_tree_qualified(p2.second);
+    r.name_identifiable(nt.current().identifiable());
+    r.name_qualified(get_qualified(nt.current()));
+    r.name_tree_identifiable(nt.identifiable());
+    r.name_tree_qualified(get_qualified(nt));
 
     helper_properties hp;
     hp.current(r);
@@ -179,19 +174,18 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
 
     /*
      * Note that we are processing the children even though the parent
-     * may not require a helper. This is overcaution and may even be
+     * may not require a helper. This is over-caution and may even be
      * wrong. We are basically saying that in a name tree, there may
      * be nodes which do not require helpers followed by nodes that
      * do.
      */
-    std::unordered_set<std::string> done;
     for (const auto c : nt.children()) {
         /*
          * We need to remember the descriptors of the direct
          * descendants (and just the direct descendants, not its
          * children). If we have a child, we must have a descriptor.
          */
-        const auto dd(make(iir, c, false /*is_top_level*/, properties));
+        const auto dd(make(iir, c, false /*is_top_level*/, done, properties));
         if (!dd) {
             BOOST_LOG_SEV(lg, error) << descriptor_expected;
             BOOST_THROW_EXCEPTION(building_error(descriptor_expected));
@@ -202,18 +196,6 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
             BOOST_LOG_SEV(lg, error) << empty_identifiable;
             BOOST_THROW_EXCEPTION(building_error(empty_identifiable));
         }
-
-        /*
-         * We want to make sure we only process each distinct name
-         * tree once, even for children. This means that a pair of two
-         * strings should collapse to just one helper for string.
-         */
-        if (done.find(ident) != done.end()) {
-            BOOST_LOG_SEV(lg, debug) << "Name tree already processed: "
-                                     << ident;
-            continue;
-        }
-        done.insert(ident);
         hp.direct_descendants().push_back(*dd);
     }
     BOOST_LOG_SEV(lg, debug) << "Helper properties: " << hp;
@@ -223,9 +205,30 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
      * applicable to child name trees as we are recursively called,
      * since we've already check for this at entry.
      */
-    if (requires_helper)
-        properties.push_back(hp);
+    if (requires_helper) {
+        /*
+         * Ensure we have not yet created a helper for this name
+         * tree. Note that we must still do the processing above in
+         * order to ensure the direct descendants are computed, even
+         * though the helper itself may not be required. As an
+         * example, take the case of a map of string to string. We
+         * need the helper for the map to have two direct descendants
+         * (one per string), but we do not want to generate two helper
+         * methods for the strings.
+         */
+        const auto ident(nt.identifiable());
+        if (ident.empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_identifiable;
+            BOOST_THROW_EXCEPTION(building_error(empty_identifiable));
+        }
 
+        if (done.find(ident) == done.end())
+            properties.push_back(hp);
+        else {
+            BOOST_LOG_SEV(lg, debug) << "Name tree already processed: "
+                                     << ident;
+        }
+    }
     return r;
 }
 
@@ -239,9 +242,10 @@ make(const bool in_inheritance_relationship,
 
     BOOST_LOG_SEV(lg, debug) << "Properties found: " << attributes.size();
     std::list<helper_properties> properties;
+    std::unordered_set<std::string> done;
     for (const auto a : attributes) {
         const auto iir(in_inheritance_relationship);
-        make(iir, a.parsed_type(), true/*is_top_level*/, properties);
+        make(iir, a.parsed_type(), true/*is_top_level*/, done, properties);
     }
 
     std::list<helper_properties> r;
@@ -250,7 +254,6 @@ make(const bool in_inheritance_relationship,
         return r;
     }
 
-    std::unordered_set<std::string> done;
     for (const auto& i : properties) {
         const auto ident(i.current().name_tree_identifiable());
         if (ident.empty()) {
