@@ -47,7 +47,6 @@ void initializer::initialize(registrar& rg) {
     initialise_formatter<class_header_formatter>(rg);
     initialise_formatter<class_implementation_formatter>(rg);
     initialise_formatter<enum_header_formatter>(rg);
-    initialise_formatter_helper<smart_pointer_helper>(rg);
     initialise_formatter_helper<associative_container_helper>(rg);
     initialise_formatter_helper<date_helper>(rg);
     initialise_formatter_helper<optional_helper>(rg);

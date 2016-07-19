@@ -29,6 +29,7 @@
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/quilt.cpp/io/settings/streaming_settings_io.hpp"
 #include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
+#include "dogen/quilt.cpp/io/properties/helper_properties_io.hpp"
 #include "dogen/quilt.cpp/types/properties/name_builder.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
@@ -471,6 +472,7 @@ void assistant::add_helper_methods() {
     }
 
     for (const auto& hp : context_.element_properties().helper_properties()) {
+        BOOST_LOG_SEV(lg, debug) << "Helper properties" << hp;
         const auto helpers(get_helpers(hp));
 
         /*
@@ -482,6 +484,8 @@ void assistant::add_helper_methods() {
                 BOOST_LOG_SEV(lg, debug) << "Helper is not enabled.";
                 continue;
             }
+
+            BOOST_LOG_SEV(lg, debug) << "Formatting with helper" << h->id();
             h->format(*this, hp);
         }
     }

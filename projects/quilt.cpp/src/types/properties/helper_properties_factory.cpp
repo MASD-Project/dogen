@@ -222,9 +222,10 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
             BOOST_THROW_EXCEPTION(building_error(empty_identifiable));
         }
 
-        if (done.find(ident) == done.end())
+        if (done.find(ident) == done.end()) {
             properties.push_back(hp);
-        else {
+            done.insert(ident);
+        } else {
             BOOST_LOG_SEV(lg, debug) << "Name tree already processed: "
                                      << ident;
         }
@@ -241,34 +242,15 @@ make(const bool in_inheritance_relationship,
     }
 
     BOOST_LOG_SEV(lg, debug) << "Properties found: " << attributes.size();
-    std::list<helper_properties> properties;
+    std::list<helper_properties> r;
     std::unordered_set<std::string> done;
     for (const auto a : attributes) {
         const auto iir(in_inheritance_relationship);
-        make(iir, a.parsed_type(), true/*is_top_level*/, done, properties);
+        make(iir, a.parsed_type(), true/*is_top_level*/, done, r);
     }
 
-    std::list<helper_properties> r;
-    if (properties.empty()) {
+    if (r.empty())
         BOOST_LOG_SEV(lg, debug) << "No helper properties found.";
-        return r;
-    }
-
-    for (const auto& i : properties) {
-        const auto ident(i.current().name_tree_identifiable());
-        if (ident.empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_identifiable;
-            BOOST_THROW_EXCEPTION(building_error(empty_identifiable));
-        }
-
-        if (done.find(ident) != done.end()) {
-            BOOST_LOG_SEV(lg, debug) << "Name tree already processed: "
-                                     << ident;
-            continue;
-        }
-        done.insert(ident);
-        r.push_back(i);
-    }
 
     return r;
 }
