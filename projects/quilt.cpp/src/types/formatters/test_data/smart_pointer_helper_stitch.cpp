@@ -77,7 +77,18 @@ std::string smart_pointer_helper::helper_name() const {
 }
 
 void smart_pointer_helper::
-format(assistant& /*a*/, const properties::helper_properties& /*hp*/) const {
+format(assistant& a, const properties::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+    const auto containee(hp.direct_descendants().front());
+a.stream() << std::endl;
+a.stream() << qn << std::endl;
+a.stream() << "create_" << ident << "(unsigned int position) {" << std::endl;
+a.stream() << "    " << qn << " r(" << std::endl;
+a.stream() << "        create_" << containee.name_tree_identifiable() << "_ptr(position));" << std::endl;
+a.stream() << "    return r;" << std::endl;
+a.stream() << "}" << std::endl;
 }
 
 void smart_pointer_helper_stitch(

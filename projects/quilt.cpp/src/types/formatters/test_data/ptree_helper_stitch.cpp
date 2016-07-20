@@ -77,7 +77,20 @@ std::string ptree_helper::helper_name() const {
 }
 
 void ptree_helper::
-format(assistant& /*a*/, const properties::helper_properties& /*hp*/) const {
+format(assistant& a, const properties::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+a.stream() << std::endl;
+a.stream() << qn << std::endl;
+a.stream() << "create_" << ident << "(const unsigned int position) {" << std::endl;
+a.stream() << "    using boost::property_tree::ptree;" << std::endl;
+a.stream() << "    ptree c;" << std::endl;
+a.stream() << "    c.put(\"key_2\", position);" << std::endl;
+a.stream() << "    ptree r;" << std::endl;
+a.stream() << "    r.push_back(ptree::value_type(\"key_1\", c));" << std::endl;
+a.stream() << "    return r;" << std::endl;
+a.stream() << "}" << std::endl;
 }
 
 void ptree_helper_stitch(

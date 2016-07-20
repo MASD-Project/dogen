@@ -76,7 +76,21 @@ std::string ptime_helper::helper_name() const {
 }
 
 void ptime_helper::
-format(assistant& /*a*/, const properties::helper_properties& /*hp*/) const {
+format(assistant& a, const properties::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+a.stream() << std::endl;
+a.stream() << qn << std::endl;
+a.stream() << "create_" << ident << "(const unsigned int position) {" << std::endl;
+a.stream() << "    unsigned int day((position + 1) % 27);" << std::endl;
+a.stream() << "    using boost::gregorian::date;" << std::endl;
+a.stream() << "    using boost::posix_time::ptime;" << std::endl;
+a.stream() << "    using boost::posix_time::time_duration;" << std::endl;
+a.stream() << "    date d(2002, 2, day);" << std::endl;
+a.stream() << "    ptime r(d, time_duration(1,2,3));" << std::endl;
+a.stream() << "    return r;" << std::endl;
+a.stream() << "}" << std::endl;
 }
 
 void ptime_helper_stitch(

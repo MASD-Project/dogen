@@ -76,7 +76,20 @@ std::string pair_helper::helper_name() const {
 }
 
 void pair_helper::
-format(assistant& /*a*/, const properties::helper_properties& /*hp*/) const {
+format(assistant& a, const properties::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+    const auto first(hp.direct_descendants().front());
+    const auto second(hp.direct_descendants().back());
+a.stream() << std::endl;
+a.stream() << qn << std::endl;
+a.stream() << "create_" << ident << "(unsigned int position) {" << std::endl;
+a.stream() << "    " << qn << " r(" << std::endl;
+a.stream() << "        create_" << first.name_tree_identifiable() << "(position)," << std::endl;
+a.stream() << "        create_" << second.name_tree_identifiable() << "(position));" << std::endl;
+a.stream() << "    return r;" << std::endl;
+a.stream() << "}" << std::endl;
 }
 
 void pair_helper_stitch(

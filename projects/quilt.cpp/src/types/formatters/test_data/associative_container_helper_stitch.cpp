@@ -77,7 +77,25 @@ std::string associative_container_helper::helper_name() const {
 }
 
 void associative_container_helper::
-format(assistant& /*a*/, const properties::helper_properties& /*hp*/) const {
+format(assistant& a, const properties::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+a.stream() << std::endl;
+a.stream() << qn << " create_" << ident << "(unsigned int position) {" << std::endl;
+a.stream() << "    " << qn << " r;" << std::endl;
+a.stream() << "    for (unsigned int i(0); i < 4; ++i) {" << std::endl;
+    if (hp.direct_descendants().size() == 1) {
+        const auto containee(hp.direct_descendants().front());
+a.stream() << "        r.insert(create_" << containee.name_tree_identifiable() << "(position + i));" << std::endl;
+    } else if (hp.direct_descendants().size() == 2) {
+        const auto key(hp.direct_descendants().front());
+        const auto value(hp.direct_descendants().back());
+a.stream() << "        r.insert(std::make_pair(create_" << key.name_tree_identifiable() << "(position + i), create_" << value.name_tree_identifiable() << "(position + i)));" << std::endl;
+    }
+a.stream() << "    }" << std::endl;
+a.stream() << "    return r;" << std::endl;
+a.stream() << "}" << std::endl;
 }
 
 void associative_container_helper_stitch(

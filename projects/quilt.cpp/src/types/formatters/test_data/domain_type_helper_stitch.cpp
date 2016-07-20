@@ -77,7 +77,30 @@ std::string domain_type_helper::helper_name() const {
 }
 
 void domain_type_helper::
-format(assistant& /*a*/, const properties::helper_properties& /*hp*/) const {
+format(assistant& a, const properties::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+    const bool is_pointer(false);
+    const bool is_recursive(false);
+
+    if (is_recursive) {
+a.stream() << std::endl;
+a.stream() << qn << (is_pointer ? "*" : "") << std::endl;
+a.stream() << "create_" << ident << (is_pointer ? "_ptr" : "") << "(const unsigned int) {" << std::endl;
+        if (is_pointer) {
+a.stream() << "    return nullptr;" << std::endl;
+        } else {
+a.stream() << "    return " << qn << "();" << std::endl;
+        }
+a.stream() << "}" << std::endl;
+    } else {
+a.stream() << std::endl;
+a.stream() << qn << (is_pointer ? "*" : "") << std::endl;
+a.stream() << "create_" << ident << (is_pointer ? "_ptr" : "") << "(const unsigned int position) {" << std::endl;
+a.stream() << "    return " << qn << "_generator::create" << (is_pointer ? "_ptr" : "") << "(position);" << std::endl;
+a.stream() << "}" << std::endl;
+    }
 }
 
 void domain_type_helper_stitch(

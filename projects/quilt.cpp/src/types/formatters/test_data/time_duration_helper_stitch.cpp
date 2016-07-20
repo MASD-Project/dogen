@@ -77,7 +77,18 @@ std::string time_duration_helper::helper_name() const {
 }
 
 void time_duration_helper::
-format(assistant& /*a*/, const properties::helper_properties& /*hp*/) const {
+format(assistant& a, const properties::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+a.stream() << std::endl;
+a.stream() << qn << std::endl;
+a.stream() << "create_" << ident << "(const unsigned int position) {" << std::endl;
+a.stream() << "    unsigned int hour(position % 55);" << std::endl;
+a.stream() << "    using boost::posix_time::time_duration;" << std::endl;
+a.stream() << "    time_duration r(hour, 2, 3);" << std::endl;
+a.stream() << "    return r;" << std::endl;
+a.stream() << "}" << std::endl;
 }
 
 void time_duration_helper_stitch(

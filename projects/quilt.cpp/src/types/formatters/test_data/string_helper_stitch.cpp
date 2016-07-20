@@ -78,7 +78,13 @@ std::string string_helper::helper_name() const {
 }
 
 void string_helper::
-format(assistant& /*a*/, const properties::helper_properties& /*hp*/) const {
+format(assistant& a, const properties::helper_properties& /*hp*/) const {
+a.stream() << std::endl;
+a.stream() << "std::string create_std_string(const unsigned int position) {" << std::endl;
+a.stream() << "    std::ostringstream s;" << std::endl;
+a.stream() << "    s << \"a_string_\" << position;" << std::endl;
+a.stream() << "    return s.str();" << std::endl;
+a.stream() << "}" << std::endl;
 }
 
 void string_helper_stitch(

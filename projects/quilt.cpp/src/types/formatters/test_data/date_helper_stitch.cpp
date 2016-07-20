@@ -76,7 +76,17 @@ std::string date_helper::helper_name() const {
 }
 
 void date_helper::
-format(assistant& /*a*/, const properties::helper_properties& /*hp*/) const {
+format(assistant& a, const properties::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+a.stream() << std::endl;
+a.stream() << qn << std::endl;
+a.stream() << "create_" << ident << "(const unsigned int position) {" << std::endl;
+a.stream() << "    unsigned int day((position + 1) % 27);" << std::endl;
+a.stream() << "    boost::gregorian::date r(2002, 2, day);" << std::endl;
+a.stream() << "    return r;" << std::endl;
+a.stream() << "}" << std::endl;
 }
 
 void date_helper_stitch(

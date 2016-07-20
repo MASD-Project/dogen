@@ -77,7 +77,11 @@ std::string bool_helper::helper_name() const {
 }
 
 void bool_helper::
-format(assistant& /*a*/, const properties::helper_properties& /*hp*/) const {
+format(assistant& a, const properties::helper_properties& /*hp*/) const {
+a.stream() << std::endl;
+a.stream() << "bool create_bool(const unsigned int position) {" << std::endl;
+a.stream() << "    return (position % 2) == 0;" << std::endl;
+a.stream() << "}" << std::endl;
 }
 
 void bool_helper_stitch(

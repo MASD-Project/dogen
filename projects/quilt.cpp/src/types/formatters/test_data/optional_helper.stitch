@@ -56,7 +56,20 @@ std::string optional_helper::helper_name() const {
 }
 
 void optional_helper::
-format(assistant& /*a*/, const properties::helper_properties& /*hp*/) const {
+format(assistant& a, const properties::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+    const auto containee(hp.direct_descendants().front());
+#>
+
+<#= qn #>
+create_<#= ident #>(unsigned int position) {
+    <#= qn #> r(
+        create_<#= containee.name_tree_identifiable() #>(position));
+    return r;
+}
+<#+
 }
 
 void optional_helper_stitch(
