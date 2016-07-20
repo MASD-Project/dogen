@@ -6,28 +6,30 @@
 * Mission Statement
 
 - finish implementing hashing and test data helpers.
-- remove nested type info.
-- implement class info formatters in terms of yarn types.
+- start implementing class info formatters in terms of yarn types.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-20 Wed 00:08]
+#+CAPTION: Clock summary at [2016-07-20 Wed 17:55]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *3:15* |      |      | 100.0 |
+| *Total time*                                                                | *5:07* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 3:15   |      |      | 100.0 |
-| Active                                                                      |        | 3:15 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:22 |  11.3 |
-| COMPLETED Implement hashing using dynamic helpers                           |        |      | 2:53 |  88.7 |
+| Stories                                                                     | 5:07   |      |      | 100.0 |
+| Active                                                                      |        | 5:07 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:39 |  12.7 |
+| COMPLETED Implement hashing using dynamic helpers                           |        |      | 2:53 |  56.4 |
+| COMPLETED Analysis on pointers and type parameters                          |        |      | 0:37 |  12.1 |
+| STARTED Implement test data using dynamic helpers                           |        |      | 0:58 |  18.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-07-20 Wed 17:38]--[2016-07-20 Wed 17:55] =>  0:17
     CLOCK: [2016-07-19 Tue 20:30]--[2016-07-19 Tue 20:52] =>  0:22
 
 Updates to sprint and product backlog.
@@ -51,6 +53,129 @@ Update formatters in hash to use new helpers.
   given family, the helpers register against a owning formatter. If a
   type exists for that owning formatter then a helper is required. We
   could add an attribute to properties that is computed based on this.
+
+*** COMPLETED Analysis on pointers and type parameters                :story:
+    CLOSED: [2016-07-20 Wed 17:37]
+    CLOCK: [2016-07-20 Wed 17:00]--[2016-07-20 Wed 17:37] =>  0:37
+
+Originally we created opaque and transparent relationships as a way to
+figure out which types can be forward-declared. We then added
+=are_children_opaque= to the name tree so that we could figure out
+which type of relationship to use. But:
+
+- we never marked types as =are_children_opaque=.
+- transparent and opaque are "weird" terms.
+
+What we were looking for was the general (in the "category" sense) way
+of classifying types such that we could infer which ones could be
+forward declared. Another way of looking at this is to classify types
+in terms of memory allocation: heap, stack or both. In the vast
+majority of cases, allocation is determined by looking at the name
+tree. But in some cases, allocation is determined by the containing
+type - i.e. smart pointers allocate on the heap.
+
+- we could add type parameters to the objects.
+- type parameters could have a stack or heap location.
+
+So what can we say about a type (see [[https://www.sgi.com/tech/stl/table_of_contents.html][SGL container concepts]]):
+
+- is it a container
+- forward container
+- reversible container
+- random access container
+- fixed size, size
+- variable sized
+- sequence
+- associative container
+- unique associative container, multiple associative container
+- pair associative container, simple associative container
+- sorted associative container
+- hashed associative container
+
+Actually containerisation and generics are somewhat orthogonal: a type
+can be a container and not have type parameters; a type can have type
+parameters and not be a container (in the STL concept sense). So we
+can reduce our focus to the type parameter side. We can have a class
+=type_parameterisation_properties=, which has the following
+attributes:
+
+- number of parameters (0 by default)
+- parameters are allocated in heap?
+
+This still sounds extremely hacky. The key difference between a shared
+pointer and say a list of pointers is this: the underlying type is
+always in the heap for a shared pointer, whereas for a list, it is
+dependent on the type parameter. Also, in the specific case of yarn,
+we are only worried about cases where there are type parameters, so
+the right place to put this detail is with the type parameter
+information.
+
+In conclusion: add type parameter properties.
+
+*** Add type parameters support to yarn                               :story:
+
+- add enum type parameterisation styles: none, variable, fixed.
+- add type parameter settings class with fields: type parameterisation
+  styles, number of type parameters and type parameters always in
+  heap.
+- add type parameter settings factory which reads type parameters from
+  meta-data.
+- create a method to obtain all id's of types with type
+  parameters. Supply that container to the factory generating name
+  trees.
+- in the factory, validate that types in a name tree have the expected
+  number of type parameters.
+- in the factory, if "type parameters always in heap" for a type, set
+  are children opaque.
+- add a "is pointer" attribute to helpers.
+- set it to true if the parent has "are children opaque" set to true.
+
+*** Implement is circular dependency correctly                        :story:
+
+At present we are marking the top-level type as circular dependency if
+it or any of its children have a reference to the owning type. This is
+not useful. What we need is for the actual name tree that causes the
+cycle to be marked so that when we are creating the helper we can set
+a flag in the helper. This flag could also be "is circular
+dependency".
+
+*** STARTED Implement test data using dynamic helpers                 :story:
+    CLOCK: [2016-07-20 Wed 15:50]--[2016-07-20 Wed 16:20] =>  0:30
+    CLOCK: [2016-07-20 Wed 13:41]--[2016-07-20 Wed 14:09] =>  0:28
+
+Update formatters in test data to use new helpers.
+
+- for test data we need to introduce the notion of "fallback
+  helpers". If a type has no helper, look for a fallback helper for a
+  given formatter. If that exists, use it.
+- for composite types: detect composition when creating the name trees
+  in yarn. Mark the type as composite. Actually, composite is the
+  wrong name. We should call it "recursive type" (a type defined in
+  terms of itself).
+- we need to detect types that are contained in pointers so that we
+  generate the helpers accordingly.
+- for pointers we already have =are_children_opaque=. We just need to
+  populate this correctly.
+- we can merge composite with domain, we just need a flag "generate
+  with default values" or "generate with values". The nested type info
+  could record type recursion at the point where it happens.
+
+*** Update types formatters to use =yarn::object=                     :story:
+
+Replace class info in types formatters with yarn's object.
+
+*** Clean-up helper terminology                                       :story:
+
+The name "helper" was never really thought out. It makes little
+sense - anything can be a helper. In addition, we have helpers that do
+not behave in the same manner (inserter vs every other helper). We
+need to come up with a good vocabulary around this.
+
+- static aspects: those that are baked in to the file formatter.
+- dynamic aspects: those that are inserted in to the file formatter at
+  run time.
+- type-dependent dynamic aspects: those that are connected to the
+  types used in the file formatter.
 
 *** Dump container of files in formatter workflow                     :story:
 
@@ -92,6 +217,16 @@ constructing the type helpers, we can check the name tree to make sure
 the number of type arguments is correct.
 
 This can be done as a helper setting (number of type arguments?).
+
+Actually this is a core yarn property. So:
+
+- add number of type arguments to object;
+- read this as a dynamic field;
+- during validation, check that all name trees that instantiate this
+  object have the expected number of type arguments.
+- in order to cope with cases such as variant we also need some kind
+  of enum, e.g. type parameterisation: none, variable, fixed. if
+  fixed, then number of type parameters must be non-zero.
 
 *** Update assistant to use new helper information                    :story:
 
