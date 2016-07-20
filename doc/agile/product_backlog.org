@@ -4751,6 +4751,12 @@ too. We may want to create concepts for internal purposes but have no
 need to actually express it in code. This could be suppressed via
 meta-data.
 
+*** Add documentation for concepts                                    :story:
+
+It seems it is possible to document a concept in doxygen:
+
+[[http://stackoverflow.com/questions/10087171/documenting-a-c-concept-using-doxygen][Documenting a C++ concept using doxygen?]]
+
 *** Add support for object cloning                                    :story:
 
 #+begin_quote
