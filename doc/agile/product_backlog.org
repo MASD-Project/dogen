@@ -8382,3 +8382,8 @@ This project seems interesting:
 They seem to have added support for conan, appveyor, etc in an
 extensible way. We need to figure out if anything can be nicked for
 our infrastructure.
+*** Read A Concept Design for the STL                                 :story:
+
+It seems this paper has a lot of useful information for meta-modeling:
+
+[[http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3351.pdf][A Concept Design for the STL]]
