@@ -140,6 +140,8 @@ a flag in the helper. This flag could also be "is circular
 dependency".
 
 *** STARTED Implement test data using dynamic helpers                 :story:
+    CLOCK: [2016-07-20 Wed 18:14]--[2016-07-20 Wed 18:21] =>  0:07
+    CLOCK: [2016-07-20 Wed 17:56]--[2016-07-20 Wed 18:13] =>  0:17
     CLOCK: [2016-07-20 Wed 15:50]--[2016-07-20 Wed 16:20] =>  0:30
     CLOCK: [2016-07-20 Wed 13:41]--[2016-07-20 Wed 14:09] =>  0:28
 
