@@ -24,6 +24,22 @@
 #include "dogen/quilt.cpp/types/formatters/test_data/class_implementation_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/enum_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/enum_implementation_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/associative_container_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/bool_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/char_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/date_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/domain_type_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/int_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/optional_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/pair_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/path_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/ptime_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/ptree_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/sequence_container_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/smart_pointer_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/string_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/time_duration_helper_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/variant_helper_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/initializer.hpp"
 
 namespace dogen {
@@ -38,6 +54,22 @@ void initializer::initialize(registrar& rg) {
     initialise_formatter<class_implementation_formatter>(rg);
     initialise_formatter<enum_header_formatter>(rg);
     initialise_formatter<enum_implementation_formatter>(rg);
+    initialise_formatter_helper<associative_container_helper>(rg);
+    initialise_formatter_helper<bool_helper>(rg);
+    initialise_formatter_helper<char_helper>(rg);
+    initialise_formatter_helper<date_helper>(rg);
+    initialise_formatter_helper<domain_type_helper>(rg);
+    initialise_formatter_helper<int_helper>(rg);
+    initialise_formatter_helper<optional_helper>(rg);
+    initialise_formatter_helper<pair_helper>(rg);
+    initialise_formatter_helper<path_helper>(rg);
+    initialise_formatter_helper<ptime_helper>(rg);
+    initialise_formatter_helper<ptree_helper>(rg);
+    initialise_formatter_helper<sequence_container_helper>(rg);
+    initialise_formatter_helper<smart_pointer_helper>(rg);
+    initialise_formatter_helper<string_helper>(rg);
+    initialise_formatter_helper<time_duration_helper>(rg);
+    initialise_formatter_helper<variant_helper>(rg);
 }
 
 } } } } }

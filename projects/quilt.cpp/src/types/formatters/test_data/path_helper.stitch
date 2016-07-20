@@ -16,7 +16,7 @@ std::string path_helper::id() const {
 }
 
 std::string path_helper::family() const {
-    static std::string r("Path");
+    static std::string r("BoostPath");
     return r;
 }
 
