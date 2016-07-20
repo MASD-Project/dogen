@@ -37,7 +37,7 @@ std::string domain_type_helper::id() const {
 }
 
 std::string domain_type_helper::family() const {
-    static std::string r("Char");
+    static std::string r("Fallback");
     return r;
 }
 
