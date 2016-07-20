@@ -859,6 +859,11 @@ this is a long comment
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings class_id="42" tracking_level="0" version="0">
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -872,12 +877,12 @@ this is a long comment
 			</second>
 		</item>
 	</objects>
-	<exceptions class_id="42" tracking_level="0" version="0">
+	<exceptions class_id="43" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<visitors class_id="43" tracking_level="0" version="0">
+	<visitors class_id="44" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>

@@ -18,21 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/object_io.hpp"
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/yarn/io/attribute_io.hpp"
-#include "dogen/yarn/io/object_types_io.hpp"
-#include "dogen/yarn/io/type_parameter_settings_io.hpp"
+#ifndef DOGEN_YARN_TEST_DATA_TYPE_PARAMETERISATION_STYLES_TD_HPP
+#define DOGEN_YARN_TEST_DATA_TYPE_PARAMETERISATION_STYLES_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/yarn/types/type_parameterisation_styles.hpp"
 
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const object& v) {
-    v.to_stream(s);
-    return(s);
-}
+class type_parameterisation_styles_generator {
+public:
+    type_parameterisation_styles_generator();
+
+public:
+    typedef dogen::yarn::type_parameterisation_styles result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
 
 } }
+
+#endif

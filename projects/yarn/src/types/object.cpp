@@ -25,6 +25,7 @@
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
+#include "dogen/yarn/io/type_parameter_settings_io.hpp"
 
 namespace std {
 
@@ -113,6 +114,7 @@ object::object(
     const bool is_visitable,
     const bool is_root_parent_visitable,
     const std::list<dogen::yarn::name>& visitable_by,
+    const dogen::yarn::type_parameter_settings& type_parameter_settings,
     const dogen::yarn::object_types object_type,
     const std::list<dogen::yarn::name>& modeled_concepts,
     const std::list<dogen::yarn::name>& associative_container_keys,
@@ -143,6 +145,7 @@ object::object(
       is_visitable_(is_visitable),
       is_root_parent_visitable_(is_root_parent_visitable),
       visitable_by_(visitable_by),
+      type_parameter_settings_(type_parameter_settings),
       object_type_(object_type),
       modeled_concepts_(modeled_concepts),
       associative_container_keys_(associative_container_keys),
@@ -177,6 +180,7 @@ void object::to_stream(std::ostream& s) const {
       << "\"is_visitable\": " << is_visitable_ << ", "
       << "\"is_root_parent_visitable\": " << is_root_parent_visitable_ << ", "
       << "\"visitable_by\": " << visitable_by_ << ", "
+      << "\"type_parameter_settings\": " << type_parameter_settings_ << ", "
       << "\"object_type\": " << object_type_ << ", "
       << "\"modeled_concepts\": " << modeled_concepts_ << ", "
       << "\"associative_container_keys\": " << associative_container_keys_ << ", "
@@ -205,6 +209,7 @@ void object::swap(object& other) noexcept {
     swap(is_visitable_, other.is_visitable_);
     swap(is_root_parent_visitable_, other.is_root_parent_visitable_);
     swap(visitable_by_, other.visitable_by_);
+    swap(type_parameter_settings_, other.type_parameter_settings_);
     swap(object_type_, other.object_type_);
     swap(modeled_concepts_, other.modeled_concepts_);
     swap(associative_container_keys_, other.associative_container_keys_);
@@ -236,6 +241,7 @@ bool object::operator==(const object& rhs) const {
         is_visitable_ == rhs.is_visitable_ &&
         is_root_parent_visitable_ == rhs.is_root_parent_visitable_ &&
         visitable_by_ == rhs.visitable_by_ &&
+        type_parameter_settings_ == rhs.type_parameter_settings_ &&
         object_type_ == rhs.object_type_ &&
         modeled_concepts_ == rhs.modeled_concepts_ &&
         associative_container_keys_ == rhs.associative_container_keys_ &&
@@ -454,6 +460,22 @@ void object::visitable_by(const std::list<dogen::yarn::name>& v) {
 
 void object::visitable_by(const std::list<dogen::yarn::name>&& v) {
     visitable_by_ = std::move(v);
+}
+
+const dogen::yarn::type_parameter_settings& object::type_parameter_settings() const {
+    return type_parameter_settings_;
+}
+
+dogen::yarn::type_parameter_settings& object::type_parameter_settings() {
+    return type_parameter_settings_;
+}
+
+void object::type_parameter_settings(const dogen::yarn::type_parameter_settings& v) {
+    type_parameter_settings_ = v;
+}
+
+void object::type_parameter_settings(const dogen::yarn::type_parameter_settings&& v) {
+    type_parameter_settings_ = std::move(v);
 }
 
 dogen::yarn::object_types object::object_type() const {

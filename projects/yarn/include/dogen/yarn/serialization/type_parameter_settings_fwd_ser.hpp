@@ -18,21 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/object_io.hpp"
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/yarn/io/attribute_io.hpp"
-#include "dogen/yarn/io/object_types_io.hpp"
-#include "dogen/yarn/io/type_parameter_settings_io.hpp"
+#ifndef DOGEN_YARN_SERIALIZATION_TYPE_PARAMETER_SETTINGS_FWD_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_TYPE_PARAMETER_SETTINGS_FWD_SER_HPP
 
-namespace dogen {
-namespace yarn {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const object& v) {
-    v.to_stream(s);
-    return(s);
-}
+#include "dogen/yarn/types/type_parameter_settings_fwd.hpp"
+
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::yarn::type_parameter_settings& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::yarn::type_parameter_settings& v, unsigned int version);
 
 } }
+
+#endif

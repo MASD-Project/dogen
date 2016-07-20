@@ -20,18 +20,25 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/object_io.hpp"
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/yarn/io/attribute_io.hpp"
-#include "dogen/yarn/io/object_types_io.hpp"
 #include "dogen/yarn/io/type_parameter_settings_io.hpp"
+#include "dogen/yarn/io/type_parameterisation_styles_io.hpp"
 
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const object& v) {
-    v.to_stream(s);
+std::ostream& operator<<(std::ostream& s, const type_parameter_settings& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::yarn::type_parameter_settings\"" << ", "
+      << "\"style\": " << v.style() << ", "
+      << "\"count\": " << v.count() << ", "
+      << "\"always_in_heap\": " << v.always_in_heap()
+      << " }";
     return(s);
 }
 

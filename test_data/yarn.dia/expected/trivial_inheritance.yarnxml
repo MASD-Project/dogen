@@ -505,6 +505,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings class_id="36" tracking_level="0" version="0">
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -574,7 +579,7 @@ in the context of inheritance.
 				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
-					<item class_id="36" tracking_level="0" version="0">
+					<item class_id="37" tracking_level="0" version="0">
 						<documentation></documentation>
 						<extensions>
 							<fields>
@@ -614,7 +619,7 @@ in the context of inheritance.
 							<identifiable>trivial_inheritance_pkg1_child_prop_1</identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
-						<parsed_type class_id="37" tracking_level="0" version="0">
+						<parsed_type class_id="38" tracking_level="0" version="0">
 							<current>
 								<id></id>
 								<simple></simple>
@@ -639,7 +644,7 @@ in the context of inheritance.
 								</location>
 								<identifiable></identifiable>
 							</current>
-							<children class_id="38" tracking_level="0" version="0">
+							<children class_id="39" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -722,6 +727,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -828,6 +838,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -1015,6 +1030,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -1202,6 +1222,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -1308,6 +1333,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -1495,6 +1525,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -1630,6 +1665,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -1844,6 +1884,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -2029,6 +2074,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -2246,6 +2296,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -2381,6 +2436,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -2566,6 +2626,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -2780,6 +2845,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -2886,6 +2956,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>1</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -3100,6 +3175,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -3316,6 +3396,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -3422,6 +3507,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>1</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -3636,6 +3726,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -3771,6 +3866,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -3906,6 +4006,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -4120,6 +4225,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -4336,6 +4446,11 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -4349,12 +4464,12 @@ in the context of inheritance.
 			</second>
 		</item>
 	</objects>
-	<exceptions class_id="39" tracking_level="0" version="0">
+	<exceptions class_id="40" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<visitors class_id="40" tracking_level="0" version="0">
+	<visitors class_id="41" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>

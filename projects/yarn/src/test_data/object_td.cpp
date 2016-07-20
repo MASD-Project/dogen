@@ -23,6 +23,7 @@
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/attribute_td.hpp"
 #include "dogen/yarn/test_data/object_types_td.hpp"
+#include "dogen/yarn/test_data/type_parameter_settings_td.hpp"
 
 namespace {
 
@@ -64,6 +65,11 @@ std::list<dogen::yarn::name> create_std_list_dogen_yarn_name(unsigned int positi
     return r;
 }
 
+dogen::yarn::type_parameter_settings
+create_dogen_yarn_type_parameter_settings(const unsigned int position) {
+    return dogen::yarn::type_parameter_settings_generator::create(position);
+}
+
 dogen::yarn::object_types
 create_dogen_yarn_object_types(const unsigned int position) {
     return dogen::yarn::object_types_generator::create(position);
@@ -96,10 +102,11 @@ populate(const unsigned int position, result_type& v) {
     v.is_visitable(create_bool(position + 14));
     v.is_root_parent_visitable(create_bool(position + 15));
     v.visitable_by(create_std_list_dogen_yarn_name(position + 16));
-    v.object_type(create_dogen_yarn_object_types(position + 17));
-    v.modeled_concepts(create_std_list_dogen_yarn_name(position + 18));
-    v.associative_container_keys(create_std_list_dogen_yarn_name(position + 19));
-    v.provides_opaqueness(create_bool(position + 20));
+    v.type_parameter_settings(create_dogen_yarn_type_parameter_settings(position + 17));
+    v.object_type(create_dogen_yarn_object_types(position + 18));
+    v.modeled_concepts(create_std_list_dogen_yarn_name(position + 19));
+    v.associative_container_keys(create_std_list_dogen_yarn_name(position + 20));
+    v.provides_opaqueness(create_bool(position + 21));
 }
 
 object_generator::result_type

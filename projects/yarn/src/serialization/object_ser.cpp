@@ -34,6 +34,7 @@
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/attribute_ser.hpp"
 #include "dogen/yarn/serialization/object_types_ser.hpp"
+#include "dogen/yarn/serialization/type_parameter_settings_ser.hpp"
 
 BOOST_CLASS_TRACKING(
     dogen::yarn::object,
@@ -65,6 +66,7 @@ void save(Archive& ar,
     ar << make_nvp("is_visitable", v.is_visitable_);
     ar << make_nvp("is_root_parent_visitable", v.is_root_parent_visitable_);
     ar << make_nvp("visitable_by", v.visitable_by_);
+    ar << make_nvp("type_parameter_settings", v.type_parameter_settings_);
     ar << make_nvp("object_type", v.object_type_);
     ar << make_nvp("modeled_concepts", v.modeled_concepts_);
     ar << make_nvp("associative_container_keys", v.associative_container_keys_);
@@ -94,6 +96,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_visitable", v.is_visitable_);
     ar >> make_nvp("is_root_parent_visitable", v.is_root_parent_visitable_);
     ar >> make_nvp("visitable_by", v.visitable_by_);
+    ar >> make_nvp("type_parameter_settings", v.type_parameter_settings_);
     ar >> make_nvp("object_type", v.object_type_);
     ar >> make_nvp("modeled_concepts", v.modeled_concepts_);
     ar >> make_nvp("associative_container_keys", v.associative_container_keys_);

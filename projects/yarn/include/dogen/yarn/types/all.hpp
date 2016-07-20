@@ -84,5 +84,8 @@
 #include "dogen/yarn/types/attributes_expander.hpp"
 #include "dogen/yarn/types/transformation_error.hpp"
 #include "dogen/yarn/types/generalization_indexer.hpp"
+#include "dogen/yarn/types/type_parameter_settings.hpp"
+#include "dogen/yarn/types/type_parameterisation_styles.hpp"
+#include "dogen/yarn/types/type_parameter_settings_factory.hpp"
 
 #endif

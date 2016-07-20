@@ -35,6 +35,7 @@
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/object_types.hpp"
 #include "dogen/yarn/serialization/object_fwd_ser.hpp"
+#include "dogen/yarn/types/type_parameter_settings.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -84,6 +85,7 @@ public:
         const bool is_visitable,
         const bool is_root_parent_visitable,
         const std::list<dogen::yarn::name>& visitable_by,
+        const dogen::yarn::type_parameter_settings& type_parameter_settings,
         const dogen::yarn::object_types object_type,
         const std::list<dogen::yarn::name>& modeled_concepts,
         const std::list<dogen::yarn::name>& associative_container_keys,
@@ -289,6 +291,11 @@ public:
     void visitable_by(const std::list<dogen::yarn::name>&& v);
     /**@}*/
 
+    const dogen::yarn::type_parameter_settings& type_parameter_settings() const;
+    dogen::yarn::type_parameter_settings& type_parameter_settings();
+    void type_parameter_settings(const dogen::yarn::type_parameter_settings& v);
+    void type_parameter_settings(const dogen::yarn::type_parameter_settings&& v);
+
     /**
      * @brief What kind of object is this.
      */
@@ -356,6 +363,7 @@ private:
     bool is_visitable_;
     bool is_root_parent_visitable_;
     std::list<dogen::yarn::name> visitable_by_;
+    dogen::yarn::type_parameter_settings type_parameter_settings_;
     dogen::yarn::object_types object_type_;
     std::list<dogen::yarn::name> modeled_concepts_;
     std::list<dogen::yarn::name> associative_container_keys_;

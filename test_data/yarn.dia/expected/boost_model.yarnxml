@@ -384,6 +384,11 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings class_id="39" tracking_level="0" version="0">
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -569,6 +574,11 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -783,6 +793,11 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -1050,6 +1065,11 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -1235,6 +1255,11 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -1894,6 +1919,11 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -2316,6 +2346,11 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -2659,6 +2694,11 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>1</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -3081,6 +3121,11 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -3661,6 +3706,11 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -3925,6 +3975,11 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
+				<type_parameter_settings>
+					<style>0</style>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameter_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>
@@ -3938,12 +3993,12 @@
 			</second>
 		</item>
 	</objects>
-	<exceptions class_id="39" tracking_level="0" version="0">
+	<exceptions class_id="40" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<visitors class_id="40" tracking_level="0" version="0">
+	<visitors class_id="41" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>

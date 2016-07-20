@@ -18,21 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/object_io.hpp"
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/yarn/io/attribute_io.hpp"
-#include "dogen/yarn/io/object_types_io.hpp"
-#include "dogen/yarn/io/type_parameter_settings_io.hpp"
+#include "dogen/yarn/hash/type_parameter_settings_hash.hpp"
+#include "dogen/yarn/hash/type_parameterisation_styles_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const object& v) {
-    v.to_stream(s);
-    return(s);
+std::size_t type_parameter_settings_hasher::hash(const type_parameter_settings& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.style());
+    combine(seed, v.count());
+    combine(seed, v.always_in_heap());
+
+    return seed;
 }
 
 } }
