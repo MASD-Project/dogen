@@ -571,7 +571,7 @@ C++ pointers, references and so on.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, the presence of parent name causes a circular dependency.#</dia:string>
+            <dia:string>#If true, the presence of the current name causes a circular dependency.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

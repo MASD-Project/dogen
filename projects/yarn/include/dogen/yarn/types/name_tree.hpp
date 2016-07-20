@@ -105,7 +105,7 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, the presence of parent name causes a circular dependency.
+     * @brief If true, the presence of the current name causes a circular dependency.
      */
     /**@{*/
     bool is_circular_dependency() const;
