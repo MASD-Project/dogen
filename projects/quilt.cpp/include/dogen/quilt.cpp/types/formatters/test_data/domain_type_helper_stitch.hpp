@@ -35,7 +35,7 @@ namespace cpp {
 namespace formatters {
 namespace test_data {
 
-class domain_helper : public helper_formatter_interface {
+class domain_type_helper : public helper_formatter_interface {
 public:
     std::string id() const override;
     std::string family() const override;

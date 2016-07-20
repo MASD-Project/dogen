@@ -4,8 +4,61 @@
 <#@ stream_variable_name=a.stream() #>
 <#@ inclusion_dependency="dogen/formatters/types/cpp/scoped_namespace_formatter.hpp" #>
 <#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/test_data/int_helper_stitch.hpp" #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/formatters/test_data/traits.hpp" #>
+<#@ inclusion_dependency="dogen/quilt.cpp/types/properties/helper_properties.hpp" #>
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::test_data #>
 <#+
+
+std::string int_helper::id() const {
+    static auto r(std::string("<") + traits::facet_name() + std::string(">") +
+        std::string("<") + helper_name() + std::string(">"));
+    return r;
+}
+
+std::string int_helper::family() const {
+    static std::string r("Int");
+    return r;
+}
+
+std::list<std::string>
+int_helper::owning_formatters() const {
+    static auto r(std::list<std::string> {
+        test_data::traits::class_implementation_formatter_name()
+    });
+    return r;
+}
+
+std::list<std::string>
+int_helper::owning_facets() const {
+    static auto r(std::list<std::string> {
+        test_data::traits::facet_name()
+    });
+    return r;
+}
+
+bool int_helper::requires_explicit_call() const {
+    return false;
+}
+
+bool int_helper::is_enabled(const assistant& a,
+    const properties::helper_properties& hp) const {
+    return a.is_streaming_enabled(hp);
+}
+
+std::string int_helper::function_name() const {
+    static std::string r("operator==");
+    return r;
+}
+
+std::string int_helper::helper_name() const {
+    static std::string r("int_helper");
+    return r;
+}
+
+void int_helper::
+format(assistant& /*a*/, const properties::helper_properties& /*hp*/) const {
+}
 
 void int_helper_stitch(
     nested_type_formatting_assistant& a,
