@@ -35,7 +35,7 @@ namespace cpp {
 namespace formatters {
 namespace test_data {
 
-class time_duration_helper_helper : public helper_formatter_interface {
+class time_duration_helper : public helper_formatter_interface {
 public:
     std::string id() const override;
     std::string family() const override;

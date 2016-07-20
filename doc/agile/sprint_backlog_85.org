@@ -13,18 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-20 Wed 19:14]
+#+CAPTION: Clock summary at [2016-07-20 Wed 21:56]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *6:04* |      |      | 100.0 |
+| *Total time*                                                                | *6:19* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 6:04   |      |      | 100.0 |
-| Active                                                                      |        | 6:04 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:39 |  10.7 |
-| COMPLETED Implement hashing using dynamic helpers                           |        |      | 2:53 |  47.5 |
-| COMPLETED Analysis on pointers and type parameters                          |        |      | 0:37 |  10.2 |
-| STARTED Implement test data using dynamic helpers                           |        |      | 1:55 |  31.6 |
+| Stories                                                                     | 6:19   |      |      | 100.0 |
+| Active                                                                      |        | 6:19 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:39 |  10.3 |
+| COMPLETED Implement hashing using dynamic helpers                           |        |      | 2:53 |  45.6 |
+| COMPLETED Analysis on pointers and type parameters                          |        |      | 0:37 |   9.8 |
+| STARTED Implement test data using dynamic helpers                           |        |      | 2:10 |  34.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -149,6 +149,7 @@ Check to see if we are using the following helper properties:
 If not, remove them.
 
 *** STARTED Implement test data using dynamic helpers                 :story:
+    CLOCK: [2016-07-20 Wed 21:41]--[2016-07-20 Wed 21:56] =>  0:15
     CLOCK: [2016-07-20 Wed 19:10]--[2016-07-20 Wed 19:14] =>  0:04
     CLOCK: [2016-07-20 Wed 18:40]--[2016-07-20 Wed 19:09] =>  0:29
     CLOCK: [2016-07-20 Wed 18:14]--[2016-07-20 Wed 18:21] =>  0:07

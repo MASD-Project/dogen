@@ -18,6 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
+#include "dogen/quilt.cpp/types/formatters/test_data/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/time_duration_helper_stitch.hpp"
 
 namespace dogen {
@@ -25,6 +28,57 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 namespace test_data {
+
+
+std::string time_duration_helper::id() const {
+    static auto r(std::string("<") + traits::facet_name() + std::string(">") +
+        std::string("<") + helper_name() + std::string(">"));
+    return r;
+}
+
+std::string time_duration_helper::family() const {
+    static std::string r("BoostTimeDuration");
+    return r;
+}
+
+std::list<std::string>
+time_duration_helper::owning_formatters() const {
+    static auto r(std::list<std::string> {
+        test_data::traits::class_implementation_formatter_name()
+    });
+    return r;
+}
+
+std::list<std::string>
+time_duration_helper::owning_facets() const {
+    static auto r(std::list<std::string> {
+        test_data::traits::facet_name()
+    });
+    return r;
+}
+
+bool time_duration_helper::requires_explicit_call() const {
+    return false;
+}
+
+bool time_duration_helper::is_enabled(const assistant& a,
+    const properties::helper_properties& hp) const {
+    return a.is_streaming_enabled(hp);
+}
+
+std::string time_duration_helper::function_name() const {
+    static std::string r("operator==");
+    return r;
+}
+
+std::string time_duration_helper::helper_name() const {
+    static std::string r("time_duration_helper");
+    return r;
+}
+
+void time_duration_helper::
+format(assistant& /*a*/, const properties::helper_properties& /*hp*/) const {
+}
 
 void time_duration_helper_stitch(
     nested_type_formatting_assistant& a,
