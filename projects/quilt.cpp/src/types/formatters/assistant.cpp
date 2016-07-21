@@ -344,8 +344,10 @@ std::string assistant::comment_inline(const std::string& c) const {
 std::list<std::shared_ptr<formatters::helper_formatter_interface>>
 assistant::get_helpers(const properties::helper_properties& hp) const {
     /*
-     * Helper properties must always have settings, otherwise
-     * there is no point to their existence.
+     * Helper properties' _current_ must always have settings,
+     * otherwise there is no point to their existence (these settings
+     * give rise to a helper). Note that helper properties' direct
+     * descendants may or may not have helper settings.
      */
     const auto s(hp.current().helper_settings());
     if (!s) {
@@ -380,9 +382,9 @@ assistant::get_helpers(const properties::helper_properties& hp) const {
             std::shared_ptr<formatters::helper_formatter_interface>
             >();
     }
+
     BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
                              << ownership_hierarchy_.formatter_name();
-
     return j->second;
 }
 
