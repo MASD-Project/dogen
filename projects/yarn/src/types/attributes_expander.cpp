@@ -32,17 +32,23 @@ auto lg(logger_factory("yarn.attributes_expander"));
 namespace dogen {
 namespace yarn {
 
-bool attributes_expander::
-is_circular_dependency(const name& owner, const name_tree& nn) const {
+void attributes_expander::
+mark_circular_dependencies(const name& owner, name_tree& nt) const {
 
-    if (owner == nn.current())
-        return true;
+    if (owner == nt.current())
+        nt.is_circular_dependency(true);
 
-    for (const auto& c : nn.children()) {
-        if (is_circular_dependency(owner, c))
-            return true;
+    for (auto& c : nt.children())
+        mark_circular_dependencies(owner, c);
+}
+
+void attributes_expander::update_attributes(const name_tree_parser& ntp,
+    const name& n, std::list<attribute>& la) const {
+    for (auto& p : la) {
+        auto nt(ntp.parse(p.unparsed_type()));
+        mark_circular_dependencies(n, nt);
+        p.parsed_type(nt);
     }
-    return false;
 }
 
 std::unordered_set<std::string> attributes_expander::
@@ -81,11 +87,15 @@ void attributes_expander::expand(intermediate_model& m) const {
     const auto tlmn(obtain_top_level_module_names(m));
     const name_tree_parser ntp(tlmn, m.name().location());
 
-    for (auto& pair : m.objects())
-        update_attributes(ntp, pair.second);
+    for (auto& pair : m.objects()) {
+        auto& o(pair.second);
+        update_attributes(ntp, o.name(), o.local_attributes());
+    }
 
-    for (auto& pair : m.concepts())
-        update_attributes(ntp, pair.second);
+    for (auto& pair : m.concepts()) {
+        auto& c(pair.second);
+        update_attributes(ntp, c.name(), c.local_attributes());
+    }
 }
 
 } }

@@ -13,20 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-21 Thu 22:51]
+#+CAPTION: Clock summary at [2016-07-21 Thu 23:05]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *9:33* |      |      | 100.0 |
+| *Total time*                                                                | *9:46* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 9:33   |      |      | 100.0 |
-| Active                                                                      |        | 9:33 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:39 |   6.8 |
-| COMPLETED Implement hashing using dynamic helpers                           |        |      | 2:53 |  30.2 |
-| COMPLETED Analysis on pointers and type parameters                          |        |      | 0:37 |   6.5 |
-| COMPLETED Add support for numbers in dynamic                                |        |      | 0:32 |   5.6 |
-| COMPLETED Add type parameters support to yarn                               |        |      | 1:56 |  20.2 |
-| STARTED Implement test data using dynamic helpers                           |        |      | 2:56 |  30.7 |
+| Stories                                                                     | 9:46   |      |      | 100.0 |
+| Active                                                                      |        | 9:46 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:39 |   6.7 |
+| COMPLETED Implement hashing using dynamic helpers                           |        |      | 2:53 |  29.5 |
+| COMPLETED Analysis on pointers and type parameters                          |        |      | 0:37 |   6.3 |
+| COMPLETED Add support for numbers in dynamic                                |        |      | 0:32 |   5.5 |
+| COMPLETED Add type parameters support to yarn                               |        |      | 1:56 |  19.8 |
+| COMPLETED Implement is circular dependency correctly                        |        |      | 0:13 |   2.2 |
+| STARTED Implement test data using dynamic helpers                           |        |      | 2:56 |  30.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -148,7 +149,9 @@ numeric support in dynamic. Add all required infrastructure.
 - set it to true if the parent has "are children opaque" set to true.
 - update library to use new tags.
 
-*** Implement is circular dependency correctly                        :story:
+*** COMPLETED Implement is circular dependency correctly              :story:
+    CLOSED: [2016-07-21 Thu 23:05]
+    CLOCK: [2016-07-21 Thu 22:52]--[2016-07-21 Thu 23:05] =>  0:13
 
 At present we are marking the top-level type as circular dependency if
 it or any of its children have a reference to the owning type. This is
