@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/test_data/type_parameter_settings_td.hpp"
+#include "dogen/yarn/test_data/type_parameters_settings_td.hpp"
 #include "dogen/yarn/test_data/type_parameterisation_styles_td.hpp"
 
 namespace {
@@ -41,31 +41,31 @@ bool create_bool(const unsigned int position) {
 namespace dogen {
 namespace yarn {
 
-type_parameter_settings_generator::type_parameter_settings_generator() : position_(0) { }
+type_parameters_settings_generator::type_parameters_settings_generator() : position_(0) { }
 
-void type_parameter_settings_generator::
+void type_parameters_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.style(create_dogen_yarn_type_parameterisation_styles(position + 0));
     v.count(create_unsigned_int(position + 1));
     v.always_in_heap(create_bool(position + 2));
 }
 
-type_parameter_settings_generator::result_type
-type_parameter_settings_generator::create(const unsigned int position) {
-    type_parameter_settings r;
-    type_parameter_settings_generator::populate(position, r);
+type_parameters_settings_generator::result_type
+type_parameters_settings_generator::create(const unsigned int position) {
+    type_parameters_settings r;
+    type_parameters_settings_generator::populate(position, r);
     return r;
 }
 
-type_parameter_settings_generator::result_type*
-type_parameter_settings_generator::create_ptr(const unsigned int position) {
-    type_parameter_settings* p = new type_parameter_settings();
-    type_parameter_settings_generator::populate(position, *p);
+type_parameters_settings_generator::result_type*
+type_parameters_settings_generator::create_ptr(const unsigned int position) {
+    type_parameters_settings* p = new type_parameters_settings();
+    type_parameters_settings_generator::populate(position, *p);
     return p;
 }
 
-type_parameter_settings_generator::result_type
-type_parameter_settings_generator::operator()() {
+type_parameters_settings_generator::result_type
+type_parameters_settings_generator::operator()() {
     return create(position_++);
 }
 

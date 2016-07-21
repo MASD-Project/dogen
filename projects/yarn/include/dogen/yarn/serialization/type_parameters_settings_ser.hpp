@@ -18,25 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_TYPE_PARAMETER_SETTINGS_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_TYPE_PARAMETER_SETTINGS_SER_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_TYPE_PARAMETERS_SETTINGS_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_TYPE_PARAMETERS_SETTINGS_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/yarn/types/type_parameter_settings.hpp"
+#include "dogen/yarn/types/type_parameters_settings.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::type_parameter_settings)
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::type_parameters_settings)
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar, const dogen::yarn::type_parameter_settings& v, unsigned int version);
+void save(Archive& ar, const dogen::yarn::type_parameters_settings& v, unsigned int version);
 
 template<typename Archive>
-void load(Archive& ar, dogen::yarn::type_parameter_settings& v, unsigned int version);
+void load(Archive& ar, dogen::yarn::type_parameters_settings& v, unsigned int version);
 
 } }
 

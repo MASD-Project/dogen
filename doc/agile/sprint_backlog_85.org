@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-20 Wed 23:03]
+#+CAPTION: Clock summary at [2016-07-21 Thu 07:11]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *7:23* |      |      | 100.0 |
+| *Total time*                                                                | *7:35* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 7:23   |      |      | 100.0 |
-| Active                                                                      |        | 7:23 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:39 |   8.8 |
-| COMPLETED Implement hashing using dynamic helpers                           |        |      | 2:53 |  39.1 |
-| COMPLETED Analysis on pointers and type parameters                          |        |      | 0:37 |   8.4 |
-| STARTED Add type parameters support to yarn                                 |        |      | 0:18 |   4.1 |
-| STARTED Implement test data using dynamic helpers                           |        |      | 2:56 |  39.7 |
+| Stories                                                                     | 7:35   |      |      | 100.0 |
+| Active                                                                      |        | 7:35 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:39 |   8.6 |
+| COMPLETED Implement hashing using dynamic helpers                           |        |      | 2:53 |  38.0 |
+| COMPLETED Analysis on pointers and type parameters                          |        |      | 0:37 |   8.1 |
+| STARTED Add type parameters support to yarn                                 |        |      | 0:30 |   6.6 |
+| STARTED Implement test data using dynamic helpers                           |        |      | 2:56 |  38.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -114,6 +114,7 @@ information.
 In conclusion: add type parameter properties.
 
 *** STARTED Add type parameters support to yarn                       :story:
+    CLOCK: [2016-07-21 Thu 06:59]--[2016-07-21 Thu 07:11] =>  0:12
     CLOCK: [2016-07-20 Wed 23:01]--[2016-07-20 Wed 23:05] =>  0:04
     CLOCK: [2016-07-20 Wed 22:46]--[2016-07-20 Wed 23:00] =>  0:14
 

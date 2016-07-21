@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TYPE_PARAMETER_SETTINGS_HPP
-#define DOGEN_YARN_TYPES_TYPE_PARAMETER_SETTINGS_HPP
+#ifndef DOGEN_YARN_TYPES_TYPE_PARAMETERS_SETTINGS_HPP
+#define DOGEN_YARN_TYPES_TYPE_PARAMETERS_SETTINGS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,32 +27,32 @@
 
 #include <algorithm>
 #include "dogen/yarn/types/type_parameterisation_styles.hpp"
-#include "dogen/yarn/serialization/type_parameter_settings_fwd_ser.hpp"
+#include "dogen/yarn/serialization/type_parameters_settings_fwd_ser.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class type_parameter_settings final {
+class type_parameters_settings final {
 public:
-    type_parameter_settings(const type_parameter_settings&) = default;
-    type_parameter_settings(type_parameter_settings&&) = default;
-    ~type_parameter_settings() = default;
+    type_parameters_settings(const type_parameters_settings&) = default;
+    type_parameters_settings(type_parameters_settings&&) = default;
+    ~type_parameters_settings() = default;
 
 public:
-    type_parameter_settings();
+    type_parameters_settings();
 
 public:
-    type_parameter_settings(
+    type_parameters_settings(
         const dogen::yarn::type_parameterisation_styles style,
         const unsigned int count,
         const bool always_in_heap);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::yarn::type_parameter_settings& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::yarn::type_parameters_settings& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::yarn::type_parameter_settings& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::yarn::type_parameters_settings& v, unsigned int version);
 
 public:
     dogen::yarn::type_parameterisation_styles style() const;
@@ -65,14 +65,14 @@ public:
     void always_in_heap(const bool v);
 
 public:
-    bool operator==(const type_parameter_settings& rhs) const;
-    bool operator!=(const type_parameter_settings& rhs) const {
+    bool operator==(const type_parameters_settings& rhs) const;
+    bool operator!=(const type_parameters_settings& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(type_parameter_settings& other) noexcept;
-    type_parameter_settings& operator=(type_parameter_settings other);
+    void swap(type_parameters_settings& other) noexcept;
+    type_parameters_settings& operator=(type_parameters_settings other);
 
 private:
     dogen::yarn::type_parameterisation_styles style_;
@@ -86,8 +86,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::yarn::type_parameter_settings& lhs,
-    dogen::yarn::type_parameter_settings& rhs) {
+    dogen::yarn::type_parameters_settings& lhs,
+    dogen::yarn::type_parameters_settings& rhs) {
     lhs.swap(rhs);
 }
 

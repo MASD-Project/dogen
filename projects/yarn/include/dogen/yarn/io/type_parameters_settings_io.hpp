@@ -18,35 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TEST_DATA_TYPE_PARAMETER_SETTINGS_TD_HPP
-#define DOGEN_YARN_TEST_DATA_TYPE_PARAMETER_SETTINGS_TD_HPP
+#ifndef DOGEN_YARN_IO_TYPE_PARAMETERS_SETTINGS_IO_HPP
+#define DOGEN_YARN_IO_TYPE_PARAMETERS_SETTINGS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/type_parameter_settings.hpp"
+#include <iosfwd>
+#include "dogen/yarn/types/type_parameters_settings.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class type_parameter_settings_generator {
-public:
-    type_parameter_settings_generator();
-
-public:
-    typedef dogen::yarn::type_parameter_settings result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::yarn::type_parameters_settings& v);
 
 } }
 

@@ -18,23 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_IO_TYPE_PARAMETER_SETTINGS_IO_HPP
-#define DOGEN_YARN_IO_TYPE_PARAMETER_SETTINGS_IO_HPP
+#ifndef DOGEN_YARN_HASH_TYPE_PARAMETERS_SETTINGS_HASH_HPP
+#define DOGEN_YARN_HASH_TYPE_PARAMETERS_SETTINGS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/yarn/types/type_parameter_settings.hpp"
+#include <functional>
+#include "dogen/yarn/types/type_parameters_settings.hpp"
 
 namespace dogen {
 namespace yarn {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::yarn::type_parameter_settings& v);
+struct type_parameters_settings_hasher {
+public:
+    static std::size_t hash(const type_parameters_settings& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::yarn::type_parameters_settings> {
+public:
+    size_t operator()(const dogen::yarn::type_parameters_settings& v) const {
+        return dogen::yarn::type_parameters_settings_hasher::hash(v);
+    }
+};
+
+}
 #endif

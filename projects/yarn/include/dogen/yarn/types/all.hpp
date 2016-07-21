@@ -32,6 +32,7 @@
 #include "dogen/yarn/types/merger.hpp"
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/visitor.hpp"
@@ -84,8 +85,8 @@
 #include "dogen/yarn/types/attributes_expander.hpp"
 #include "dogen/yarn/types/transformation_error.hpp"
 #include "dogen/yarn/types/generalization_indexer.hpp"
-#include "dogen/yarn/types/type_parameter_settings.hpp"
+#include "dogen/yarn/types/type_parameters_settings.hpp"
 #include "dogen/yarn/types/type_parameterisation_styles.hpp"
-#include "dogen/yarn/types/type_parameter_settings_factory.hpp"
+#include "dogen/yarn/types/type_parameters_settings_factory.hpp"
 
 #endif

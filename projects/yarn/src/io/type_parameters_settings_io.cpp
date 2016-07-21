@@ -18,24 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_TYPE_PARAMETER_SETTINGS_FWD_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_TYPE_PARAMETER_SETTINGS_FWD_SER_HPP
+#include <ostream>
+#include <boost/io/ios_state.hpp>
+#include "dogen/yarn/io/type_parameters_settings_io.hpp"
+#include "dogen/yarn/io/type_parameterisation_styles_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace yarn {
 
-#include "dogen/yarn/types/type_parameter_settings_fwd.hpp"
+std::ostream& operator<<(std::ostream& s, const type_parameters_settings& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
 
-namespace boost {
-namespace serialization {
-
-template<class Archive>
-void save(Archive& ar, const dogen::yarn::type_parameter_settings& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::yarn::type_parameter_settings& v, unsigned int version);
+    s << " { "
+      << "\"__type__\": " << "\"dogen::yarn::type_parameters_settings\"" << ", "
+      << "\"style\": " << v.style() << ", "
+      << "\"count\": " << v.count() << ", "
+      << "\"always_in_heap\": " << v.always_in_heap()
+      << " }";
+    return(s);
+}
 
 } }
-
-#endif

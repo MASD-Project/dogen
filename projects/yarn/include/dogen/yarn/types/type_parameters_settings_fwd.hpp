@@ -18,30 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/type_parameter_settings_hash.hpp"
-#include "dogen/yarn/hash/type_parameterisation_styles_hash.hpp"
+#ifndef DOGEN_YARN_TYPES_TYPE_PARAMETERS_SETTINGS_FWD_HPP
+#define DOGEN_YARN_TYPES_TYPE_PARAMETERS_SETTINGS_FWD_HPP
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace yarn {
 
-std::size_t type_parameter_settings_hasher::hash(const type_parameter_settings& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.style());
-    combine(seed, v.count());
-    combine(seed, v.always_in_heap());
-
-    return seed;
-}
+class type_parameters_settings;
 
 } }
+
+#endif
