@@ -11,6 +11,16 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider adding enumerations in dynamic                           :story:
+
+This story is bound to already exist in backlog so do another
+search. The idea is that we should be able to define a field and all
+of its valid values. For extra bonus points, we should be able to
+assign an enumeration and get the string conversion done
+automatically; for example by having a string to enum code generated,
+and supplying that function as a type parameter into dynamic. Then
+dynamic's field selector would create the instances of the enumeration.
+
 *** Consider using indices rather than associative containers         :story:
 
 Once we generate the final model the model becomes constant; this
