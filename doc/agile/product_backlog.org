@@ -1701,7 +1701,10 @@ could take on this responsibility - or we could create some kind of
 *** Add field definition description                                  :story:
 
 It would be useful to have a description of the purpose of the field
-so that we could print it to the command line.
+so that we could print it to the command line. We could simply add a
+JSON attribute to the field called description to start off with. But
+ideally we need a command line argument to dump all fields and their
+descriptions so that users know what's available.
 
 *** Rename ODB parameters                                             :story:
 
