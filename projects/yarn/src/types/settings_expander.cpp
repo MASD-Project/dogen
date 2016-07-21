@@ -18,36 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/modules_expander.hpp"
-#include "dogen/yarn/types/attributes_expander.hpp"
+#include "dogen/yarn/types/type_parameters_settings_factory.hpp"
 #include "dogen/yarn/types/settings_expander.hpp"
-#include "dogen/yarn/types/expander.hpp"
 
 namespace dogen {
 namespace yarn {
 
-expander::expander(const dynamic::repository& drp)
-    : dynamic_repository_(drp) { }
+settings_expander::settings_expander(const dynamic::repository& drp)
+    : factory_(drp) { }
 
-void expander::expand_modules(intermediate_model& m) const {
-    modules_expander e;
-    e.expand(m);
+
+void settings_expander::update_settings(object& o) const {
+    const auto settings(factory_.make(o.extensions()));
+    o.type_parameters_settings(settings);
 }
 
-void expander::expand_attributes(intermediate_model& m) const {
-    attributes_expander e;
-    e.expand(m);
-}
-
-void expander::expand_settings(intermediate_model& m) const {
-    settings_expander e(dynamic_repository_);
-    e.expand(m);
-}
-
-void expander::expand(intermediate_model& m) const {
-    expand_modules(m);
-    expand_attributes(m);
-    expand_settings(m);
+void settings_expander::expand(intermediate_model& m) const {
+    for (auto& pair : m.objects())
+        update_settings(pair.second);
 }
 
 } }

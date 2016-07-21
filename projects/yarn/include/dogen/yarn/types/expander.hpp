@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen/dynamic/types/repository.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
@@ -35,6 +36,9 @@ namespace yarn {
  *  intermediate model.
  */
 class expander {
+public:
+    explicit expander(const dynamic::repository& drp);
+
 private:
     /**
      * @brief Performs a module expansion on the model.
@@ -46,11 +50,19 @@ private:
      */
     void expand_attributes(intermediate_model& m) const;
 
+    /**
+     * @brief Performs a settings expansion on the model.
+     */
+    void expand_settings(intermediate_model& m) const;
+
 public:
     /**
      * @brief Executes the workflow.
      */
     void expand(intermediate_model& m) const;
+
+private:
+    const dynamic::repository& dynamic_repository_;
 };
 
 } }

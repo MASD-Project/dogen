@@ -49,16 +49,19 @@ type_parameters_settings_factory::make_field_definitions(
 }
 
 type_parameters_settings type_parameters_settings_factory::
-make(const dynamic::object& /*o*/) const {
+make(const dynamic::object& o) const {
     type_parameters_settings r;
-    /*const dynamic::field_selector fs(o);
-    r.variable_number_of_parameters(
-        if (fs.has_field(fd))
-            return fs.get_boolean_content(fd);
+    const dynamic::field_selector fs(o);
 
-        );
-    r.count();
-    r.always_in_heap();*/
+    const auto& vnp(field_definitions_.variable_number_of_parameters);
+    r.variable_number_of_parameters(fs.get_boolean_content_or_default(vnp));
+
+    const auto& tpc(field_definitions_.type_parameters_count);
+    r.count(fs.get_number_content_or_default(tpc));
+
+    const auto& aih(field_definitions_.type_parameters_always_in_heap);
+    r.always_in_heap(fs.get_boolean_content_or_default(aih));
+
     return r;
 }
 

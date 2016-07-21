@@ -40,13 +40,14 @@ private:
      * @brief Obtains all intermediate models.
      */
     std::list<intermediate_model> obtain_intermediate_models_activity(
-        const dynamic::repository& rp,
+        const dynamic::repository& drp,
         const std::list<input_descriptor>& id) const;
 
     /**
      * @brief Executes the expansion workflow.
      */
     void expand_intermediate_models_activity(
+        const dynamic::repository& drp,
         std::list<intermediate_model>& m) const;
 
     /**
@@ -63,7 +64,7 @@ private:
         const intermediate_model& m) const;
 
 public:
-    model execute(const dynamic::repository& rp,
+    model execute(const dynamic::repository& drp,
         const std::list<input_descriptor>& id) const;
 };
 

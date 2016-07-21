@@ -76,6 +76,7 @@
 #include "dogen/yarn/types/string_processor.hpp"
 #include "dogen/yarn/types/frontend_workflow.hpp"
 #include "dogen/yarn/types/name_tree_builder.hpp"
+#include "dogen/yarn/types/settings_expander.hpp"
 #include "dogen/yarn/types/attributes_indexer.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/yarn/types/frontend_interface.hpp"

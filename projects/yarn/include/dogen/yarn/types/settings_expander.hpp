@@ -18,36 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/modules_expander.hpp"
-#include "dogen/yarn/types/attributes_expander.hpp"
-#include "dogen/yarn/types/settings_expander.hpp"
-#include "dogen/yarn/types/expander.hpp"
+#ifndef DOGEN_YARN_TYPES_SETTINGS_EXPANDER_HPP
+#define DOGEN_YARN_TYPES_SETTINGS_EXPANDER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/yarn/types/type_parameters_settings_factory.hpp"
+#include "dogen/yarn/types/type_parameters_settings.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 
-expander::expander(const dynamic::repository& drp)
-    : dynamic_repository_(drp) { }
+class settings_expander {
+public:
+    explicit settings_expander(const dynamic::repository& drp);
 
-void expander::expand_modules(intermediate_model& m) const {
-    modules_expander e;
-    e.expand(m);
-}
+private:
+    void update_settings(object& o) const;
 
-void expander::expand_attributes(intermediate_model& m) const {
-    attributes_expander e;
-    e.expand(m);
-}
+public:
+    void expand(intermediate_model& m) const;
 
-void expander::expand_settings(intermediate_model& m) const {
-    settings_expander e(dynamic_repository_);
-    e.expand(m);
-}
-
-void expander::expand(intermediate_model& m) const {
-    expand_modules(m);
-    expand_attributes(m);
-    expand_settings(m);
-}
+private:
+    const type_parameters_settings_factory factory_;
+};
 
 } }
+
+#endif
