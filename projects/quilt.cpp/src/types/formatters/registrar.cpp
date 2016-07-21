@@ -36,6 +36,7 @@ const std::string no_class_formatters("No class formatters provided.");
 const std::string no_forward_declarations_formatters(
     "No forward declarations formatters provided.");
 const std::string null_formatter("Formatter supplied is null");
+const std::string empty_family("Family cannot be empty.");
 const std::string null_formatter_helper("Formatter helper supplied is null");
 
 }
@@ -85,6 +86,9 @@ void registrar::register_formatter_helper(
     // note: not logging by design
     if (!fh)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter_helper));
+
+    if(fh->family().empty())
+        BOOST_THROW_EXCEPTION(registrar_error(empty_family));
 
     auto& f(formatter_container_.helper_formatters_[fh->family()]);
     for (const auto& of : fh->owning_formatters())

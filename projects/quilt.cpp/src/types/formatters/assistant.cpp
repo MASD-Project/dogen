@@ -70,7 +70,6 @@ const std::string unexpected_opaque_settings(
 const std::string family_not_found("Family not found: ");
 const std::string qn_missing("Could not find qualified name for language.");
 const std::string empty_settings("Helper properties must have settings.");
-const std::string empty_family("Family cannot be empty.");
 const std::string helpless_family("No registered helpers found for family: ");
 
 }
@@ -355,28 +354,19 @@ assistant::get_helpers(const properties::helper_properties& hp) const {
     }
 
     /*
-     * Family cannot be empty as that is not a valid family.
-     */
-    const auto family(s->family());
-    if(family.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_family;
-        BOOST_THROW_EXCEPTION(formatting_error(empty_family));
-    }
-
-    /*
      * A family should have at least one helper registered, but
      * for now we are letting it through.
      * FIXME: throw.
      */
-    const auto i(context_.helpers().find(family));
+    const auto i(context_.helpers().find(s->family()));
     if (i == context_.helpers().end()) {
         BOOST_LOG_SEV(lg, debug) << "Could not find helpers for family: "
-                                 << family;
+                                 << s->family();
         return std::list<
             std::shared_ptr<formatters::helper_formatter_interface>
             >();
     }
-    BOOST_LOG_SEV(lg, debug) << "Found helpers for family: " << family;
+    BOOST_LOG_SEV(lg, debug) << "Found helpers for family: " << s->family();
 
     /*
      * Not all formatters need help, so its fine not to have a
