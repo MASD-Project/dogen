@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen/yarn/types/type_parameterisation_styles.hpp"
 #include "dogen/yarn/serialization/type_parameters_settings_fwd_ser.hpp"
 
 namespace dogen {
@@ -43,7 +42,7 @@ public:
 
 public:
     type_parameters_settings(
-        const dogen::yarn::type_parameterisation_styles style,
+        const bool variable_number_of_parameters,
         const unsigned int count,
         const bool always_in_heap);
 
@@ -55,8 +54,8 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::yarn::type_parameters_settings& v, unsigned int version);
 
 public:
-    dogen::yarn::type_parameterisation_styles style() const;
-    void style(const dogen::yarn::type_parameterisation_styles v);
+    bool variable_number_of_parameters() const;
+    void variable_number_of_parameters(const bool v);
 
     unsigned int count() const;
     void count(const unsigned int v);
@@ -75,7 +74,7 @@ public:
     type_parameters_settings& operator=(type_parameters_settings other);
 
 private:
-    dogen::yarn::type_parameterisation_styles style_;
+    bool variable_number_of_parameters_;
     unsigned int count_;
     bool always_in_heap_;
 };

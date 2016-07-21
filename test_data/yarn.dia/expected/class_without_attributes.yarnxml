@@ -306,11 +306,11 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</visitable_by>
-				<type_parameter_settings class_id="36" tracking_level="0" version="0">
-					<style>0</style>
+				<type_parameters_settings class_id="36" tracking_level="0" version="0">
+					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
-				</type_parameter_settings>
+				</type_parameters_settings>
 				<object_type>2</object_type>
 				<modeled_concepts>
 					<count>0</count>

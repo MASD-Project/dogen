@@ -48,6 +48,5 @@
 #include "dogen/yarn/hash/input_descriptor_hash.hpp"
 #include "dogen/yarn/hash/intermediate_model_hash.hpp"
 #include "dogen/yarn/hash/type_parameters_settings_hash.hpp"
-#include "dogen/yarn/hash/type_parameterisation_styles_hash.hpp"
 
 #endif

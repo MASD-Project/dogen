@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/yarn/hash/type_parameters_settings_hash.hpp"
-#include "dogen/yarn/hash/type_parameterisation_styles_hash.hpp"
 
 namespace {
 
@@ -37,7 +36,7 @@ namespace yarn {
 std::size_t type_parameters_settings_hasher::hash(const type_parameters_settings& v) {
     std::size_t seed(0);
 
-    combine(seed, v.style());
+    combine(seed, v.variable_number_of_parameters());
     combine(seed, v.count());
     combine(seed, v.always_in_heap());
 

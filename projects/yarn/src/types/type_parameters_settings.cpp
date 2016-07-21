@@ -24,27 +24,27 @@ namespace dogen {
 namespace yarn {
 
 type_parameters_settings::type_parameters_settings()
-    : style_(static_cast<dogen::yarn::type_parameterisation_styles>(0)),
+    : variable_number_of_parameters_(static_cast<bool>(0)),
       count_(static_cast<unsigned int>(0)),
       always_in_heap_(static_cast<bool>(0)) { }
 
 type_parameters_settings::type_parameters_settings(
-    const dogen::yarn::type_parameterisation_styles style,
+    const bool variable_number_of_parameters,
     const unsigned int count,
     const bool always_in_heap)
-    : style_(style),
+    : variable_number_of_parameters_(variable_number_of_parameters),
       count_(count),
       always_in_heap_(always_in_heap) { }
 
 void type_parameters_settings::swap(type_parameters_settings& other) noexcept {
     using std::swap;
-    swap(style_, other.style_);
+    swap(variable_number_of_parameters_, other.variable_number_of_parameters_);
     swap(count_, other.count_);
     swap(always_in_heap_, other.always_in_heap_);
 }
 
 bool type_parameters_settings::operator==(const type_parameters_settings& rhs) const {
-    return style_ == rhs.style_ &&
+    return variable_number_of_parameters_ == rhs.variable_number_of_parameters_ &&
         count_ == rhs.count_ &&
         always_in_heap_ == rhs.always_in_heap_;
 }
@@ -55,12 +55,12 @@ type_parameters_settings& type_parameters_settings::operator=(type_parameters_se
     return *this;
 }
 
-dogen::yarn::type_parameterisation_styles type_parameters_settings::style() const {
-    return style_;
+bool type_parameters_settings::variable_number_of_parameters() const {
+    return variable_number_of_parameters_;
 }
 
-void type_parameters_settings::style(const dogen::yarn::type_parameterisation_styles v) {
-    style_ = v;
+void type_parameters_settings::variable_number_of_parameters(const bool v) {
+    variable_number_of_parameters_ = v;
 }
 
 unsigned int type_parameters_settings::count() const {

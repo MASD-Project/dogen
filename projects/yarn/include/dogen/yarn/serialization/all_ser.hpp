@@ -49,6 +49,5 @@
 #include "dogen/yarn/serialization/input_descriptor_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_ser.hpp"
 #include "dogen/yarn/serialization/type_parameters_settings_ser.hpp"
-#include "dogen/yarn/serialization/type_parameterisation_styles_ser.hpp"
 
 #endif

@@ -21,7 +21,6 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include "dogen/yarn/io/type_parameters_settings_io.hpp"
-#include "dogen/yarn/io/type_parameterisation_styles_io.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -35,7 +34,7 @@ std::ostream& operator<<(std::ostream& s, const type_parameters_settings& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::type_parameters_settings\"" << ", "
-      << "\"style\": " << v.style() << ", "
+      << "\"variable_number_of_parameters\": " << v.variable_number_of_parameters() << ", "
       << "\"count\": " << v.count() << ", "
       << "\"always_in_heap\": " << v.always_in_heap()
       << " }";

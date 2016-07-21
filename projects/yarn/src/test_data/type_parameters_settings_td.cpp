@@ -19,21 +19,15 @@
  *
  */
 #include "dogen/yarn/test_data/type_parameters_settings_td.hpp"
-#include "dogen/yarn/test_data/type_parameterisation_styles_td.hpp"
 
 namespace {
 
-dogen::yarn::type_parameterisation_styles
-create_dogen_yarn_type_parameterisation_styles(const unsigned int position) {
-    return dogen::yarn::type_parameterisation_styles_generator::create(position);
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
 }
 
 unsigned int create_unsigned_int(const unsigned int position) {
     return static_cast<unsigned int>(position);
-}
-
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
 }
 
 }
@@ -45,7 +39,7 @@ type_parameters_settings_generator::type_parameters_settings_generator() : posit
 
 void type_parameters_settings_generator::
 populate(const unsigned int position, result_type& v) {
-    v.style(create_dogen_yarn_type_parameterisation_styles(position + 0));
+    v.variable_number_of_parameters(create_bool(position + 0));
     v.count(create_unsigned_int(position + 1));
     v.always_in_heap(create_bool(position + 2));
 }

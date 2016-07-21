@@ -48,6 +48,5 @@
 #include "dogen/yarn/io/input_descriptor_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/io/type_parameters_settings_io.hpp"
-#include "dogen/yarn/io/type_parameterisation_styles_io.hpp"
 
 #endif

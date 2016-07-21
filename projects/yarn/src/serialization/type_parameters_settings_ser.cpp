@@ -28,7 +28,6 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/type_parameters_settings_ser.hpp"
-#include "dogen/yarn/serialization/type_parameterisation_styles_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -37,7 +36,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::type_parameters_settings& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("style", v.style_);
+    ar << make_nvp("variable_number_of_parameters", v.variable_number_of_parameters_);
     ar << make_nvp("count", v.count_);
     ar << make_nvp("always_in_heap", v.always_in_heap_);
 }
@@ -46,7 +45,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::type_parameters_settings& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("style", v.style_);
+    ar >> make_nvp("variable_number_of_parameters", v.variable_number_of_parameters_);
     ar >> make_nvp("count", v.count_);
     ar >> make_nvp("always_in_heap", v.always_in_heap_);
 }
