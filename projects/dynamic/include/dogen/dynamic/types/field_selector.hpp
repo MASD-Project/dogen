@@ -159,6 +159,35 @@ public:
      */
     bool get_boolean_content_or_default(const field_definition& fd) const;
 
+    /**
+     * @brief Returns the content for the field, assuming it is a
+     * numeric field.
+     *
+     * @pre Field value type must be numeric.
+     */
+    static int get_number_content(const value& v);
+
+    /**
+     * @brief Returns the content for the field, assuming it is a
+     * numeric field.
+     *
+     * @pre has_field must be true.
+     * @pre Field value type must be numeric.
+     */
+    /**@{*/
+    int get_number_content(const std::string& qualified_field_name) const;
+    int get_number_content(const field_definition& fd) const;
+    /**@}*/
+
+    /**
+     * @brief Returns the content for the field, assuming it is a
+     * numeric field.
+     *
+     * If the field does not exist, returns the default value.
+     *
+     * @pre field definition must have a default value.
+     */
+    int get_number_content_or_default(const field_definition& fd) const;
 
 private:
     const object& object_;

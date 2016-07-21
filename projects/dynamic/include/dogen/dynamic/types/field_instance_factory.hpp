@@ -96,6 +96,14 @@ public:
     field_instance make_boolean(const bool v) const;
     /**@}*/
 
+    /**
+     * @brief Makes a field instance with a number value.
+     */
+    /**@{*/
+    field_instance make_number(const std::string& v) const;
+    field_instance make_number(const bool v) const;
+    /**@}*/
+
 private:
     const value_factory value_factory_;
 };

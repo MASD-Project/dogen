@@ -28,6 +28,7 @@
 #include "dogen/dynamic/hash/name_hash.hpp"
 #include "dogen/dynamic/hash/text_hash.hpp"
 #include "dogen/dynamic/hash/value_hash.hpp"
+#include "dogen/dynamic/hash/number_hash.hpp"
 #include "dogen/dynamic/hash/object_hash.hpp"
 #include "dogen/dynamic/hash/boolean_hash.hpp"
 #include "dogen/dynamic/hash/repository_hash.hpp"

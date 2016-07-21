@@ -28,6 +28,7 @@
 #include "dogen/dynamic/test_data/name_td.hpp"
 #include "dogen/dynamic/test_data/text_td.hpp"
 #include "dogen/dynamic/test_data/value_td.hpp"
+#include "dogen/dynamic/test_data/number_td.hpp"
 #include "dogen/dynamic/test_data/object_td.hpp"
 #include "dogen/dynamic/test_data/boolean_td.hpp"
 #include "dogen/dynamic/test_data/repository_td.hpp"

@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/types/text.hpp"
+#include "dogen/dynamic/types/number.hpp"
 #include "dogen/dynamic/types/boolean.hpp"
 #include "dogen/dynamic/types/text_collection.hpp"
 #include "dogen/dynamic/types/selection_error.hpp"
@@ -35,6 +36,7 @@ auto lg(logger_factory("dynamic.field_selector"));
 const std::string field_not_found("Field not found: ");
 const std::string unexpected_value_type("Unexpected value type.");
 const std::string field("Field: ");
+const std::string not_number_field("Field does not have numeric content: ");
 const std::string not_boolean_field("Field does not have boolean content: ");
 const std::string not_text_field("Field does not have text content: ");
 const std::string not_text_collection_field(
@@ -221,6 +223,51 @@ get_boolean_content_or_default(const field_definition& fd) const {
     } catch(boost::exception& e) {
         const auto n(fd.name().qualified());
         BOOST_LOG_SEV(lg, error) << not_boolean_field << n
+                                 << " (field's default value)";
+        e << extension_error_info(field + n);
+        throw;
+    }
+}
+
+int field_selector::get_number_content(const value& v) {
+    try {
+        const auto& b(dynamic_cast<const number&>(v));
+        return b.content();
+    } catch(const std::bad_cast& e) {
+        BOOST_LOG_SEV(lg, error) << unexpected_value_type;
+        BOOST_THROW_EXCEPTION(selection_error(unexpected_value_type));
+    }
+}
+
+int field_selector::
+get_number_content(const std::string& qualified_field_name) const {
+    const auto& f(get_field(qualified_field_name));
+    const auto& v(*f.value());
+    try {
+        return get_number_content(v);
+    } catch(boost::exception& e) {
+        BOOST_LOG_SEV(lg, error) << not_number_field << qualified_field_name;
+        e << extension_error_info(field + qualified_field_name);
+        throw;
+    }
+}
+
+int field_selector::get_number_content(const field_definition& fd) const {
+    return get_number_content(fd.name().qualified());
+}
+
+int field_selector::
+get_number_content_or_default(const field_definition& fd) const {
+    if (has_field(fd))
+        return get_number_content(fd);
+
+    ensure_default_value(fd);
+
+    try {
+        return get_number_content(*fd.default_value());
+    } catch(boost::exception& e) {
+        const auto n(fd.name().qualified());
+        BOOST_LOG_SEV(lg, error) << not_number_field << n
                                  << " (field's default value)";
         e << extension_error_info(field + n);
         throw;

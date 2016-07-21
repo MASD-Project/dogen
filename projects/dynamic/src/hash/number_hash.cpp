@@ -18,28 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/test_data/text_td.hpp"
-#include "dogen/dynamic/test_data/value_td.hpp"
-#include "dogen/dynamic/test_data/number_td.hpp"
-#include "dogen/dynamic/test_data/boolean_td.hpp"
-#include "dogen/dynamic/test_data/text_collection_td.hpp"
+#include "dogen/dynamic/hash/value_hash.hpp"
+#include "dogen/dynamic/hash/number_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace dynamic {
 
-void value_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
-}
+std::size_t number_hasher::hash(const number& v) {
+    std::size_t seed(0);
 
-value_generator::result_type*
-value_generator::create_ptr(const unsigned int position) {
-    if ((position % 3) == 0)
-        return dogen::dynamic::number_generator::create_ptr(position);
-    if ((position % 3) == 1)
-        return dogen::dynamic::text_generator::create_ptr(position);
-    if ((position % 3) == 2)
-        return dogen::dynamic::text_collection_generator::create_ptr(position);
-    return dogen::dynamic::boolean_generator::create_ptr(position);
+    combine(seed, dynamic_cast<const dogen::dynamic::value&>(v));
+
+    combine(seed, v.content());
+    return seed;
 }
 
 } }

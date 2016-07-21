@@ -28,6 +28,7 @@
 #include "dogen/dynamic/io/name_io.hpp"
 #include "dogen/dynamic/io/text_io.hpp"
 #include "dogen/dynamic/io/value_io.hpp"
+#include "dogen/dynamic/io/number_io.hpp"
 #include "dogen/dynamic/io/object_io.hpp"
 #include "dogen/dynamic/io/boolean_io.hpp"
 #include "dogen/dynamic/io/repository_io.hpp"

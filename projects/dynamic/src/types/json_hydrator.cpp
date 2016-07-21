@@ -143,6 +143,7 @@ boost::shared_ptr<value> json_hydrator::create_value(const value_types vt,
     switch (vt) {
     case value_types::text: return f.make_text(v);
     case value_types::boolean: return f.make_boolean(v);
+    case value_types::number: return f.make_number(v);
     default:
         BOOST_LOG_SEV(lg, error) << invalid_value_type << "'" << vt << "'";
         BOOST_THROW_EXCEPTION(hydration_error(invalid_value_type +

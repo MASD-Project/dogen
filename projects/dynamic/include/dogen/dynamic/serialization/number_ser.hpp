@@ -18,28 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/test_data/text_td.hpp"
-#include "dogen/dynamic/test_data/value_td.hpp"
-#include "dogen/dynamic/test_data/number_td.hpp"
-#include "dogen/dynamic/test_data/boolean_td.hpp"
-#include "dogen/dynamic/test_data/text_collection_td.hpp"
+#ifndef DOGEN_DYNAMIC_SERIALIZATION_NUMBER_SER_HPP
+#define DOGEN_DYNAMIC_SERIALIZATION_NUMBER_SER_HPP
 
-namespace dogen {
-namespace dynamic {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-void value_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
+#include <boost/serialization/split_free.hpp>
+#include <boost/type_traits/is_virtual_base_of.hpp>
+#include "dogen/dynamic/types/number.hpp"
+
+namespace boost {
+
+template<>struct
+is_virtual_base_of<
+    dogen::dynamic::value,
+    dogen::dynamic::number
+> : public mpl::true_ {};
+
 }
 
-value_generator::result_type*
-value_generator::create_ptr(const unsigned int position) {
-    if ((position % 3) == 0)
-        return dogen::dynamic::number_generator::create_ptr(position);
-    if ((position % 3) == 1)
-        return dogen::dynamic::text_generator::create_ptr(position);
-    if ((position % 3) == 2)
-        return dogen::dynamic::text_collection_generator::create_ptr(position);
-    return dogen::dynamic::boolean_generator::create_ptr(position);
-}
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::dynamic::number)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::dynamic::number& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::dynamic::number& v, unsigned int version);
 
 } }
+
+#endif

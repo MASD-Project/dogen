@@ -24,6 +24,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/io/value_types_io.hpp"
 #include "dogen/dynamic/types/text.hpp"
+#include "dogen/dynamic/types/number.hpp"
 #include "dogen/dynamic/types/boolean.hpp"
 #include "dogen/dynamic/types/building_error.hpp"
 #include "dogen/dynamic/types/text_collection.hpp"
@@ -80,6 +81,10 @@ field_instance field_instance_factory::make(const field_definition& fd,
         ensure_at_most_one_element(v);
         r.value(value_factory_.make_boolean(v.front()));
         break;
+    case value_types::number:
+        ensure_at_most_one_element(v);
+        r.value(value_factory_.make_number(v.front()));
+        break;
 
     default:
         BOOST_LOG_SEV(lg, error) << value_type_not_supported << fd.value_type();
@@ -114,6 +119,15 @@ make_boolean(const std::string& v) const {
 
 field_instance field_instance_factory::make_boolean(const bool v) const {
     return field_instance(value_factory_.make_boolean(v));
+}
+
+field_instance field_instance_factory::
+make_number(const std::string& v) const {
+    return field_instance(value_factory_.make_number(v));
+}
+
+field_instance field_instance_factory::make_number(const bool v) const {
+    return field_instance(value_factory_.make_number(v));
 }
 
 } }

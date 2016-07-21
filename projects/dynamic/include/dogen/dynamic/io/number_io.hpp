@@ -18,28 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/test_data/text_td.hpp"
-#include "dogen/dynamic/test_data/value_td.hpp"
-#include "dogen/dynamic/test_data/number_td.hpp"
-#include "dogen/dynamic/test_data/boolean_td.hpp"
-#include "dogen/dynamic/test_data/text_collection_td.hpp"
+#ifndef DOGEN_DYNAMIC_IO_NUMBER_IO_HPP
+#define DOGEN_DYNAMIC_IO_NUMBER_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/dynamic/types/number.hpp"
 
 namespace dogen {
 namespace dynamic {
 
-void value_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
-}
-
-value_generator::result_type*
-value_generator::create_ptr(const unsigned int position) {
-    if ((position % 3) == 0)
-        return dogen::dynamic::number_generator::create_ptr(position);
-    if ((position % 3) == 1)
-        return dogen::dynamic::text_generator::create_ptr(position);
-    if ((position % 3) == 2)
-        return dogen::dynamic::text_collection_generator::create_ptr(position);
-    return dogen::dynamic::boolean_generator::create_ptr(position);
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::dynamic::number& v);
 
 } }
+
+#endif

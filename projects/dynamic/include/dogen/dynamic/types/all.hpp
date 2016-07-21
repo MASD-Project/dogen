@@ -28,6 +28,7 @@
 #include "dogen/dynamic/types/name.hpp"
 #include "dogen/dynamic/types/text.hpp"
 #include "dogen/dynamic/types/value.hpp"
+#include "dogen/dynamic/types/number.hpp"
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/boolean.hpp"
 #include "dogen/dynamic/types/dynamic.hpp"

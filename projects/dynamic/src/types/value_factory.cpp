@@ -27,6 +27,7 @@
 #include "dogen/dynamic/types/text.hpp"
 #include "dogen/dynamic/types/text_collection.hpp"
 #include "dogen/dynamic/types/boolean.hpp"
+#include "dogen/dynamic/types/number.hpp"
 #include "dogen/dynamic/types/value_factory.hpp"
 
 namespace {
@@ -99,6 +100,15 @@ value_factory::make_boolean(const std::string& v) const {
 
 boost::shared_ptr<value> value_factory::make_boolean(const bool v) const {
     return boost::make_shared<boolean>(v);
+}
+
+boost::shared_ptr<value>
+value_factory::make_number(const std::string& v) const {
+    return boost::make_shared<number>(to_int(v));
+}
+
+boost::shared_ptr<value> value_factory::make_number(const int v) const {
+    return boost::make_shared<number>(v);
 }
 
 } }

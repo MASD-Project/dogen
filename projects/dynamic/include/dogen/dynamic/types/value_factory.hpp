@@ -71,6 +71,14 @@ public:
     boost::shared_ptr<value> make_boolean(const std::string& v) const;
     boost::shared_ptr<value> make_boolean(const bool v) const;
     /**@}*/
+
+    /**
+     * @brief Creates a stand alone numeric value.
+     */
+    /**@{*/
+    boost::shared_ptr<value> make_number(const std::string& v) const;
+    boost::shared_ptr<value> make_number(const int v) const;
+    /**@}*/
 };
 
 } }

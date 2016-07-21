@@ -18,28 +18,45 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/test_data/text_td.hpp"
 #include "dogen/dynamic/test_data/value_td.hpp"
 #include "dogen/dynamic/test_data/number_td.hpp"
-#include "dogen/dynamic/test_data/boolean_td.hpp"
-#include "dogen/dynamic/test_data/text_collection_td.hpp"
+
+namespace {
+
+int create_int(const unsigned int position) {
+    return position;
+}
+
+}
 
 namespace dogen {
 namespace dynamic {
 
-void value_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
+number_generator::number_generator() : position_(0) { }
+
+void number_generator::
+populate(const unsigned int position, result_type& v) {
+    dogen::dynamic::value_generator::populate(position, v);
+    v.content(create_int(position + 0));
 }
 
-value_generator::result_type*
-value_generator::create_ptr(const unsigned int position) {
-    if ((position % 3) == 0)
-        return dogen::dynamic::number_generator::create_ptr(position);
-    if ((position % 3) == 1)
-        return dogen::dynamic::text_generator::create_ptr(position);
-    if ((position % 3) == 2)
-        return dogen::dynamic::text_collection_generator::create_ptr(position);
-    return dogen::dynamic::boolean_generator::create_ptr(position);
+number_generator::result_type
+number_generator::create(const unsigned int position) {
+    number r;
+    number_generator::populate(position, r);
+    return r;
+}
+
+number_generator::result_type*
+number_generator::create_ptr(const unsigned int position) {
+    number* p = new number();
+    number_generator::populate(position, *p);
+    return p;
+}
+
+number_generator::result_type
+number_generator::operator()() {
+    return create(position_++);
 }
 
 } }
