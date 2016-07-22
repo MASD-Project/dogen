@@ -59,7 +59,9 @@ public:
         const boost::optional<dogen::quilt::cpp::settings::helper_settings>& helper_settings,
         const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& streaming_settings,
         const bool is_primitive,
-        const bool requires_hashing_helper);
+        const bool requires_hashing_helper,
+        const bool is_circular_dependency,
+        const bool is_pointer);
 
 private:
     template<typename Archive>
@@ -110,6 +112,12 @@ public:
     bool requires_hashing_helper() const;
     void requires_hashing_helper(const bool v);
 
+    bool is_circular_dependency() const;
+    void is_circular_dependency(const bool v);
+
+    bool is_pointer() const;
+    void is_pointer(const bool v);
+
 public:
     bool operator==(const helper_descriptor& rhs) const;
     bool operator!=(const helper_descriptor& rhs) const {
@@ -130,6 +138,8 @@ private:
     boost::optional<dogen::quilt::cpp::settings::streaming_settings> streaming_settings_;
     bool is_primitive_;
     bool requires_hashing_helper_;
+    bool is_circular_dependency_;
+    bool is_pointer_;
 };
 
 } } } }

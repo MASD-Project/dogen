@@ -87,6 +87,8 @@ populate(const unsigned int position, result_type& v) {
     v.streaming_settings(create_boost_optional_dogen_quilt_cpp_settings_streaming_settings(position + 6));
     v.is_primitive(create_bool(position + 7));
     v.requires_hashing_helper(create_bool(position + 8));
+    v.is_circular_dependency(create_bool(position + 9));
+    v.is_pointer(create_bool(position + 10));
 }
 
 helper_descriptor_generator::result_type

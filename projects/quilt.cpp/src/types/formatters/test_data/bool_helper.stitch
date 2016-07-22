@@ -17,7 +17,7 @@ std::string bool_helper::id() const {
 }
 
 std::string bool_helper::family() const {
-    static std::string r("Bool");
+    static std::string r("Boolean");
     return r;
 }
 
@@ -41,9 +41,9 @@ bool bool_helper::requires_explicit_call() const {
     return false;
 }
 
-bool bool_helper::is_enabled(const assistant& a,
-    const properties::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
+bool bool_helper::is_enabled(const assistant& /*a*/,
+    const properties::helper_properties& /*hp*/) const {
+    return true;
 }
 
 std::string bool_helper::function_name() const {

@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-22 Fri 21:41]
+#+CAPTION: Clock summary at [2016-07-22 Fri 22:06]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *10:49* |       |      | 100.0 |
+| *Total time*                                                                | *11:12* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 10:49   |       |      | 100.0 |
-| Active                                                                      |         | 10:49 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:39 |   6.0 |
-| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  26.7 |
-| COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   5.7 |
-| COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   4.9 |
-| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |  17.9 |
-| COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   2.0 |
-| STARTED Implement "fallback" helpers                                        |         |       | 1:03 |   9.7 |
-| STARTED Implement test data using dynamic helpers                           |         |       | 2:56 |  27.1 |
+| Stories                                                                     | 11:12   |       |      | 100.0 |
+| Active                                                                      |         | 11:12 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:39 |   5.8 |
+| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  25.7 |
+| COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   5.5 |
+| COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   4.8 |
+| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |  17.3 |
+| COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   1.9 |
+| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   9.4 |
+| STARTED Implement test data using dynamic helpers                           |         |       | 3:19 |  29.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -161,7 +161,8 @@ cycle to be marked so that when we are creating the helper we can set
 a flag in the helper. This flag could also be "is circular
 dependency".
 
-*** STARTED Implement "fallback" helpers                              :story:
+*** COMPLETED Implement "fallback" helpers                            :story:
+    CLOSED: [2016-07-22 Fri 21:43]
     CLOCK: [2016-07-22 Fri 20:58]--[2016-07-22 Fri 21:40] =>  0:42
     CLOCK: [2016-07-21 Thu 23:24]--[2016-07-21 Thu 23:29] =>  0:05
     CLOCK: [2016-07-21 Thu 23:07]--[2016-07-21 Thu 23:23] =>  0:16
@@ -190,6 +191,7 @@ not ideal because it means we will now create helpers for _all_ types
 in a name tree. But it should work.
 
 *** STARTED Implement test data using dynamic helpers                 :story:
+    CLOCK: [2016-07-22 Fri 21:43]--[2016-07-22 Fri 22:06] =>  0:23
     CLOCK: [2016-07-20 Wed 22:31]--[2016-07-20 Wed 22:44] =>  0:13
     CLOCK: [2016-07-20 Wed 21:57]--[2016-07-20 Wed 22:30] =>  0:33
     CLOCK: [2016-07-20 Wed 21:41]--[2016-07-20 Wed 21:56] =>  0:15
@@ -216,6 +218,7 @@ Update formatters in test data to use new helpers.
 - we can merge composite with domain, we just need a flag "generate
   with default values" or "generate with values". The nested type info
   could record type recursion at the point where it happens.
+- rename int, char, bool.
 
 *** Model should contain set of primitive id's                        :story:
 

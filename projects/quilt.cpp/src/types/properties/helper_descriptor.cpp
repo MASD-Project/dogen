@@ -27,7 +27,9 @@ namespace properties {
 
 helper_descriptor::helper_descriptor()
     : is_primitive_(static_cast<bool>(0)),
-      requires_hashing_helper_(static_cast<bool>(0)) { }
+      requires_hashing_helper_(static_cast<bool>(0)),
+      is_circular_dependency_(static_cast<bool>(0)),
+      is_pointer_(static_cast<bool>(0)) { }
 
 helper_descriptor::helper_descriptor(helper_descriptor&& rhs)
     : namespaces_(std::move(rhs.namespaces_)),
@@ -38,7 +40,9 @@ helper_descriptor::helper_descriptor(helper_descriptor&& rhs)
       helper_settings_(std::move(rhs.helper_settings_)),
       streaming_settings_(std::move(rhs.streaming_settings_)),
       is_primitive_(std::move(rhs.is_primitive_)),
-      requires_hashing_helper_(std::move(rhs.requires_hashing_helper_)) { }
+      requires_hashing_helper_(std::move(rhs.requires_hashing_helper_)),
+      is_circular_dependency_(std::move(rhs.is_circular_dependency_)),
+      is_pointer_(std::move(rhs.is_pointer_)) { }
 
 helper_descriptor::helper_descriptor(
     const std::list<std::string>& namespaces,
@@ -49,7 +53,9 @@ helper_descriptor::helper_descriptor(
     const boost::optional<dogen::quilt::cpp::settings::helper_settings>& helper_settings,
     const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& streaming_settings,
     const bool is_primitive,
-    const bool requires_hashing_helper)
+    const bool requires_hashing_helper,
+    const bool is_circular_dependency,
+    const bool is_pointer)
     : namespaces_(namespaces),
       name_identifiable_(name_identifiable),
       name_qualified_(name_qualified),
@@ -58,7 +64,9 @@ helper_descriptor::helper_descriptor(
       helper_settings_(helper_settings),
       streaming_settings_(streaming_settings),
       is_primitive_(is_primitive),
-      requires_hashing_helper_(requires_hashing_helper) { }
+      requires_hashing_helper_(requires_hashing_helper),
+      is_circular_dependency_(is_circular_dependency),
+      is_pointer_(is_pointer) { }
 
 void helper_descriptor::swap(helper_descriptor& other) noexcept {
     using std::swap;
@@ -71,6 +79,8 @@ void helper_descriptor::swap(helper_descriptor& other) noexcept {
     swap(streaming_settings_, other.streaming_settings_);
     swap(is_primitive_, other.is_primitive_);
     swap(requires_hashing_helper_, other.requires_hashing_helper_);
+    swap(is_circular_dependency_, other.is_circular_dependency_);
+    swap(is_pointer_, other.is_pointer_);
 }
 
 bool helper_descriptor::operator==(const helper_descriptor& rhs) const {
@@ -82,7 +92,9 @@ bool helper_descriptor::operator==(const helper_descriptor& rhs) const {
         helper_settings_ == rhs.helper_settings_ &&
         streaming_settings_ == rhs.streaming_settings_ &&
         is_primitive_ == rhs.is_primitive_ &&
-        requires_hashing_helper_ == rhs.requires_hashing_helper_;
+        requires_hashing_helper_ == rhs.requires_hashing_helper_ &&
+        is_circular_dependency_ == rhs.is_circular_dependency_ &&
+        is_pointer_ == rhs.is_pointer_;
 }
 
 helper_descriptor& helper_descriptor::operator=(helper_descriptor other) {
@@ -217,6 +229,22 @@ bool helper_descriptor::requires_hashing_helper() const {
 
 void helper_descriptor::requires_hashing_helper(const bool v) {
     requires_hashing_helper_ = v;
+}
+
+bool helper_descriptor::is_circular_dependency() const {
+    return is_circular_dependency_;
+}
+
+void helper_descriptor::is_circular_dependency(const bool v) {
+    is_circular_dependency_ = v;
+}
+
+bool helper_descriptor::is_pointer() const {
+    return is_pointer_;
+}
+
+void helper_descriptor::is_pointer(const bool v) {
+    is_pointer_ = v;
 }
 
 } } } }

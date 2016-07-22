@@ -41,9 +41,9 @@ bool ptree_helper::requires_explicit_call() const {
     return false;
 }
 
-bool ptree_helper::is_enabled(const assistant& a,
-    const properties::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
+bool ptree_helper::is_enabled(const assistant& /*a*/,
+    const properties::helper_properties& /*hp*/) const {
+    return true;
 }
 
 std::string ptree_helper::function_name() const {

@@ -17,7 +17,7 @@ std::string char_helper::id() const {
 }
 
 std::string char_helper::family() const {
-    static std::string r("Char");
+    static std::string r("Character");
     return r;
 }
 
@@ -46,9 +46,9 @@ std::string char_helper::function_name() const {
     return r;
 }
 
-bool char_helper::is_enabled(const assistant& a,
-    const properties::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
+bool char_helper::is_enabled(const assistant& /*a*/,
+    const properties::helper_properties& /*hp*/) const {
+    return true;
 }
 
 std::string char_helper::helper_name() const {

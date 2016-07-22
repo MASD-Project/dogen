@@ -77,6 +77,8 @@ std::size_t helper_descriptor_hasher::hash(const helper_descriptor& v) {
     combine(seed, hash_boost_optional_dogen_quilt_cpp_settings_streaming_settings(v.streaming_settings()));
     combine(seed, v.is_primitive());
     combine(seed, v.requires_hashing_helper());
+    combine(seed, v.is_circular_dependency());
+    combine(seed, v.is_pointer());
 
     return seed;
 }

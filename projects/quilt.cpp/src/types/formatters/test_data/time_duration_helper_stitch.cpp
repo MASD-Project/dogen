@@ -61,9 +61,9 @@ bool time_duration_helper::requires_explicit_call() const {
     return false;
 }
 
-bool time_duration_helper::is_enabled(const assistant& a,
-    const properties::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
+bool time_duration_helper::is_enabled(const assistant& /*a*/,
+    const properties::helper_properties& /*hp*/) const {
+    return true;
 }
 
 std::string time_duration_helper::function_name() const {

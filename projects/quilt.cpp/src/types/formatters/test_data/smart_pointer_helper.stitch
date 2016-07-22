@@ -41,9 +41,9 @@ bool smart_pointer_helper::requires_explicit_call() const {
     return false;
 }
 
-bool smart_pointer_helper::is_enabled(const assistant& a,
-    const properties::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
+bool smart_pointer_helper::is_enabled(const assistant& /*a*/,
+    const properties::helper_properties& /*hp*/) const {
+    return true;
 }
 
 std::string smart_pointer_helper::function_name() const {

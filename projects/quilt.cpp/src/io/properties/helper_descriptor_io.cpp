@@ -98,7 +98,9 @@ std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
       << "\"helper_settings\": " << v.helper_settings() << ", "
       << "\"streaming_settings\": " << v.streaming_settings() << ", "
       << "\"is_primitive\": " << v.is_primitive() << ", "
-      << "\"requires_hashing_helper\": " << v.requires_hashing_helper()
+      << "\"requires_hashing_helper\": " << v.requires_hashing_helper() << ", "
+      << "\"is_circular_dependency\": " << v.is_circular_dependency() << ", "
+      << "\"is_pointer\": " << v.is_pointer()
       << " }";
     return(s);
 }

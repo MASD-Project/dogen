@@ -165,6 +165,8 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
     r.name_qualified(get_qualified(nt.current()));
     r.name_tree_identifiable(nt.identifiable());
     r.name_tree_qualified(get_qualified(nt));
+    r.is_circular_dependency(nt.is_circular_dependency());
+    r.is_pointer(nt.are_children_opaque());
 
     helper_properties hp;
     hp.current(r);

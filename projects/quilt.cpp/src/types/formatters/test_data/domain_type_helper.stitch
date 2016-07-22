@@ -41,9 +41,9 @@ bool domain_type_helper::requires_explicit_call() const {
     return false;
 }
 
-bool domain_type_helper::is_enabled(const assistant& a,
-    const properties::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
+bool domain_type_helper::is_enabled(const assistant& /*a*/,
+    const properties::helper_properties& /*hp*/) const {
+    return true;
 }
 
 std::string domain_type_helper::function_name() const {
@@ -61,8 +61,8 @@ format(assistant& a, const properties::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
-    const bool is_pointer(false);
-    const bool is_recursive(false);
+    const bool is_pointer(d.is_pointer());
+    const bool is_recursive(d.is_circular_dependency());
 
     if (is_recursive) {
 #>

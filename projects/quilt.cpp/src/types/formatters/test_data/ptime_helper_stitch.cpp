@@ -60,9 +60,9 @@ bool ptime_helper::requires_explicit_call() const {
     return false;
 }
 
-bool ptime_helper::is_enabled(const assistant& a,
-    const properties::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
+bool ptime_helper::is_enabled(const assistant& /*a*/,
+    const properties::helper_properties& /*hp*/) const {
+    return true;
 }
 
 std::string ptime_helper::function_name() const {

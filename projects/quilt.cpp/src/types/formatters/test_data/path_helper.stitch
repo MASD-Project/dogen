@@ -45,9 +45,9 @@ std::string path_helper::function_name() const {
     return r;
 }
 
-bool path_helper::is_enabled(const assistant& a,
-    const properties::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
+bool path_helper::is_enabled(const assistant& /*a*/,
+    const properties::helper_properties& /*hp*/) const {
+    return true;
 }
 
 std::string path_helper::helper_name() const {

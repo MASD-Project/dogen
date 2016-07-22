@@ -60,9 +60,9 @@ bool sequence_container_helper::requires_explicit_call() const {
     return false;
 }
 
-bool sequence_container_helper::is_enabled(const assistant& a,
-    const properties::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
+bool sequence_container_helper::is_enabled(const assistant& /*a*/,
+    const properties::helper_properties& /*hp*/) const {
+    return true;
 }
 
 std::string sequence_container_helper::function_name() const {

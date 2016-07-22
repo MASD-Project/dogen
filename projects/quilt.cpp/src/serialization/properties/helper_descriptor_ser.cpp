@@ -50,6 +50,8 @@ void save(Archive& ar,
     ar << make_nvp("streaming_settings", v.streaming_settings_);
     ar << make_nvp("is_primitive", v.is_primitive_);
     ar << make_nvp("requires_hashing_helper", v.requires_hashing_helper_);
+    ar << make_nvp("is_circular_dependency", v.is_circular_dependency_);
+    ar << make_nvp("is_pointer", v.is_pointer_);
 }
 
 template<typename Archive>
@@ -65,6 +67,8 @@ void load(Archive& ar,
     ar >> make_nvp("streaming_settings", v.streaming_settings_);
     ar >> make_nvp("is_primitive", v.is_primitive_);
     ar >> make_nvp("requires_hashing_helper", v.requires_hashing_helper_);
+    ar >> make_nvp("is_circular_dependency", v.is_circular_dependency_);
+    ar >> make_nvp("is_pointer", v.is_pointer_);
 }
 
 } }
