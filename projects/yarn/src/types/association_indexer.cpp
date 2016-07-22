@@ -61,25 +61,23 @@ void association_indexer::remove_duplicates(std::list<name>& names,
                              << names.size();
 }
 
-void association_indexer::walk_name_tree(const intermediate_model& m,
-    object& o, const name_tree& nt, bool& is_opaque) const {
+void association_indexer::walk_name_tree(
+    const intermediate_model& m, object& o, const name_tree& nt,
+    const bool inherit_opaqueness_from_parent) const {
+
     const auto n(nt.current());
-    if (is_opaque)
+    if (inherit_opaqueness_from_parent)
         o.opaque_associations().push_back(n);
     else
         o.transparent_associations().push_back(n);
 
     const auto i(m.primitives().find(n.id()));
-    if (i != m.primitives().end()) {
-        is_opaque = false;
+    if (i != m.primitives().end())
         return;
-    }
 
     const auto j(m.enumerations().find(n.id()));
-    if (j != m.enumerations().end()) {
-        is_opaque = false;
+    if (j != m.enumerations().end())
         return;
-    }
 
     const auto k(m.objects().find(n.id()));
     if (k == m.objects().end()) {
@@ -87,9 +85,8 @@ void association_indexer::walk_name_tree(const intermediate_model& m,
         BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n.id()));
     }
 
-    is_opaque = k->second.object_type() == object_types::smart_pointer;
-
-    /* if the parent type is an associative container, the first child
+    /*
+     * if the parent type is an associative container, the first child
      * type will represent the key of the associative container and
      * the second type will be its value. We need to remember the
      * keys.
@@ -100,7 +97,7 @@ void association_indexer::walk_name_tree(const intermediate_model& m,
         if (is_first && k->second.object_type() == ac)
             o.associative_container_keys().push_back(c.current());
 
-        walk_name_tree(m, o, c, is_opaque);
+        walk_name_tree(m, o, c, nt.are_children_opaque());
         is_first = false;
     }
 }
@@ -110,9 +107,8 @@ index_object(const intermediate_model& m, object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().id();
 
     for (const auto& p : o.local_attributes()) {
-        const auto nt(p.parsed_type());
-        bool is_opaque(nt.are_children_opaque());
-        walk_name_tree(m, o, nt, is_opaque);
+        const auto& nt(p.parsed_type());
+        walk_name_tree(m, o, nt, false/*inherit_opaqueness_from_parent*/);
     }
 
     std::unordered_set<name> transparent_associations;

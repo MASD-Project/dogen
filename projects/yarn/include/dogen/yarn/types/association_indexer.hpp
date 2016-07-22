@@ -76,7 +76,7 @@ private:
      * it goes along.
      */
     void walk_name_tree(const intermediate_model& m, object& o,
-        const name_tree& nt, bool& is_opaque) const;
+        const name_tree& nt, const bool inherit_opaqueness_from_parent) const;
 
 private:
     /**

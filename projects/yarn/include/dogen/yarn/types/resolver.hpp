@@ -47,9 +47,16 @@ namespace yarn {
 class resolver {
 private:
     bool is_primitive(const intermediate_model& m, const name& n) const;
-    bool is_enumeration(const intermediate_model& m, const name& n) const;
     bool is_object(const intermediate_model& m, const name& n) const;
     bool is_concept(const intermediate_model& m, const name& n) const;
+
+private:
+    struct indexed_ids {
+        std::unordered_set<std::string> always_in_heap;
+        std::unordered_set<std::string> referable_by_attributes;
+    };
+
+    indexed_ids index(const intermediate_model& m) const;
 
 private:
     /**
@@ -58,26 +65,29 @@ private:
     name obtain_default_enumeration_type(const intermediate_model& m) const;
 
     /**
-     * @brief Returns true if the name is in the model, false
-     * otherwise.
+     * @brief Returns true if the name is in the model and can be
+     * referred to from an attribute, false otherwise.
      */
-    bool is_name_in_model(const intermediate_model& m, const name& n) const;
+    bool is_name_referable(const indexed_ids& idx, const name& n) const;
 
     /**
      * @brief Resolves a partially formed name into a full name.
      */
-    name resolve_partial_type(const intermediate_model& m, const name& n) const;
+    name resolve_partial_type(const intermediate_model& m,
+        const indexed_ids& idx, const name& n) const;
 
     /**
      * @brief Resolves all references contained in a name tree.
      */
-    void resolve_partial_type(const intermediate_model& m, name_tree& nt) const;
+    void resolve_partial_type(const intermediate_model& m,
+        const indexed_ids& idx, name_tree& nt) const;
 
     /**
      * @brief Resolves all references to types in the supplied attributes.
      */
     void resolve_attributes(const intermediate_model& m,
-        const name& owner, std::list<attribute>& attributes) const;
+        const name& owner, const indexed_ids& idx,
+        std::list<attribute>& attributes) const;
 
     /**
      * @brief Validates the inheritance graph for the object.
@@ -99,12 +109,12 @@ private:
     /**
      * @brief Resolve all concepts.
      */
-    void resolve_concepts(intermediate_model& m) const;
+    void resolve_concepts(const indexed_ids& idx, intermediate_model& m) const;
 
     /**
      * @brief Resolve all objects.
      */
-    void resolve_objects(intermediate_model& m) const;
+    void resolve_objects(const indexed_ids& idx, intermediate_model& m) const;
 
     /**
      * @brief Resolve all enumerations.

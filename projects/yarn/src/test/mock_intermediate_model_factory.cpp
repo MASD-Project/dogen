@@ -122,6 +122,7 @@ mock_name_tree_shared_ptr(const dogen::yarn::name& n) {
     dogen::yarn::name_tree r;
     dogen::yarn::name_factory nf;
     r.current(nf.build_element_name("boost", "shared_ptr"));
+    r.are_children_opaque(true);
 
     dogen::yarn::name_tree c;
     c.current(n);
