@@ -42,17 +42,10 @@ helper_settings_factory::make_field_definitions(const dynamic::repository& rp) {
     return r;
 }
 
-boost::optional<helper_settings>
-helper_settings_factory::make(const dynamic::object& o) const {
+helper_settings helper_settings_factory::make(const dynamic::object& o) const {
     helper_settings r;
-    const auto& fd(field_definitions_);
     const dynamic::field_selector fs(o);
-
-    if (!fs.has_field(fd.family))
-        return boost::optional<helper_settings>();
-
-    r.family(fs.get_text_content(fd.family));
-
+    r.family(fs.get_text_content_or_default(field_definitions_.family));
     return r;
 }
 

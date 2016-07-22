@@ -264,7 +264,7 @@
         "value_type" : "text",
         "definition_type" : "instance",
         "scope" : "entity",
-        "default_value" : ""
+        "default_value" : "Default"
     },
     {
         "name" : {

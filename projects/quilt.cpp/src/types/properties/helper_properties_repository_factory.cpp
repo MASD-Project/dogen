@@ -100,9 +100,13 @@ void generator::visit(const dogen::yarn::object& o) {
 
     const auto iir(o.in_inheritance_relationship());
     const auto hp(factory_.make(iir, o.local_attributes()));
+
+    if (hp.empty())
+        return;
+
     const auto pair(std::make_pair(id, hp));
-    auto& hpbn(result_.by_id());
-    if (!hpbn.insert(pair).second) {
+    auto& bid(result_.by_id());
+    if (!bid.insert(pair).second) {
         BOOST_LOG_SEV(lg, error) << duplicate_name << id;
         BOOST_THROW_EXCEPTION(building_error(duplicate_name + id));
     }
@@ -155,7 +159,7 @@ helper_properties_repository_factory::make(
         e.accept(g);
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished creating helper repository:"
+    BOOST_LOG_SEV(lg, debug) << "Finished creating helper repository: "
                              << g.result();
     return g.result();
 }

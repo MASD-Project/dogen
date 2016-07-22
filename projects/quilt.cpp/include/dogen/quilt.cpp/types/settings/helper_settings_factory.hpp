@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <boost/optional.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
@@ -48,7 +47,7 @@ private:
     field_definitions make_field_definitions(const dynamic::repository& rp);
 
 public:
-    boost::optional<helper_settings> make(const dynamic::object& o) const;
+    helper_settings make(const dynamic::object& o) const;
 
 private:
     const field_definitions field_definitions_;

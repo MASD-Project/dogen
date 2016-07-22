@@ -45,12 +45,9 @@ make(const dynamic::repository& rp, const yarn::model& m) const {
     for (const auto& pair : m.elements()) {
         const auto& e(*pair.second);
         const auto hs(f.make(e.extensions()));
-        if (!hs)
-            continue;
-
-        r.by_id()[e.name().id()] = *hs;
+            r.by_id()[e.name().id()] = hs;
     }
-    BOOST_LOG_SEV(lg, debug) << "Finished making helper settings" << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished making helper settings: " << r;
     return r;
 }
 

@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-21 Thu 23:29]
+#+CAPTION: Clock summary at [2016-07-22 Fri 21:41]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *10:07* |       |      | 100.0 |
+| *Total time*                                                                | *10:49* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 10:07   |       |      | 100.0 |
-| Active                                                                      |         | 10:07 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:39 |   6.4 |
-| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  28.5 |
-| COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   6.1 |
-| COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   5.3 |
-| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |  19.1 |
-| COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   2.1 |
-| STARTED Implement "fallback" helpers                                        |         |       | 0:21 |   3.5 |
-| STARTED Implement test data using dynamic helpers                           |         |       | 2:56 |  29.0 |
+| Stories                                                                     | 10:49   |       |      | 100.0 |
+| Active                                                                      |         | 10:49 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:39 |   6.0 |
+| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  26.7 |
+| COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   5.7 |
+| COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   4.9 |
+| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |  17.9 |
+| COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   2.0 |
+| STARTED Implement "fallback" helpers                                        |         |       | 1:03 |   9.7 |
+| STARTED Implement test data using dynamic helpers                           |         |       | 2:56 |  27.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -162,10 +162,11 @@ a flag in the helper. This flag could also be "is circular
 dependency".
 
 *** STARTED Implement "fallback" helpers                              :story:
+    CLOCK: [2016-07-22 Fri 20:58]--[2016-07-22 Fri 21:40] =>  0:42
     CLOCK: [2016-07-21 Thu 23:24]--[2016-07-21 Thu 23:29] =>  0:05
     CLOCK: [2016-07-21 Thu 23:07]--[2016-07-21 Thu 23:23] =>  0:16
 
-Tor test data we need to introduce the notion of "fallback helpers":
+For test data we need to introduce the notion of "fallback helpers":
 if a type has no helper, look for a fallback helper for a given
 formatter. If that exists, use it.
 
@@ -183,6 +184,10 @@ type had a helper assistant in the first place. But the notion of
 fallbacks implies that no helper assistant existed - or that we must
 always set the helper assistant to fallback, meaning all types will
 need helper assistants.
+
+This can be achieved by using a default value for the family. It is
+not ideal because it means we will now create helpers for _all_ types
+in a name tree. But it should work.
 
 *** STARTED Implement test data using dynamic helpers                 :story:
     CLOCK: [2016-07-20 Wed 22:31]--[2016-07-20 Wed 22:44] =>  0:13
@@ -211,6 +216,21 @@ Update formatters in test data to use new helpers.
 - we can merge composite with domain, we just need a flag "generate
   with default values" or "generate with values". The nested type info
   could record type recursion at the point where it happens.
+
+*** Model should contain set of primitive id's                        :story:
+
+We are computing the set of all primitive id's in quilt but this
+should really be part of yarn.
+
+*** Check generation type before dispatching element                  :story:
+
+At present we are doing this check in =visit=:
+
+:     if (o.generation_type() == yarn::generation_types::no_generation)
+:        return;
+
+If we did it before the =visit= call we'd save the cost of
+dispatching.
 
 *** Add test with smart pointer in base class                         :story:
 
