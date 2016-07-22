@@ -85,8 +85,10 @@ format(assistant& a, const properties::helper_properties& hp) const {
         const auto d(hp.current());
         const auto qn(d.name_tree_qualified());
         auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
-        const auto key(hp.direct_descendants().front());
-        const auto value(hp.direct_descendants().back());
+
+        if (hp.direct_descendants().size() == 2) {
+            const auto key(hp.direct_descendants().front());
+            const auto value(hp.direct_descendants().back());
 a.stream() << std::endl;
 a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << qn << "& v) {" << std::endl;
 a.stream() << "    s << \"[\";" << std::endl;
@@ -102,6 +104,20 @@ a.stream() << "    s << \" ] \";" << std::endl;
 a.stream() << "    return s;" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
+        } else {
+        const auto containee(hp.direct_descendants().front());
+a.stream() << std::endl;
+a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << qn << "& v) {" << std::endl;
+a.stream() << "    s << \"[ \";" << std::endl;
+a.stream() << "    for (auto i(v.begin()); i != v.end(); ++i) {" << std::endl;
+a.stream() << "        if (i != v.begin()) s << \", \";" << std::endl;
+a.stream() << "        s << " << a.streaming_for_type(containee, "*i") << ";" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << "    s << \"] \";" << std::endl;
+a.stream() << "    return s;" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+        }
     }
 a.stream() << std::endl;
 }

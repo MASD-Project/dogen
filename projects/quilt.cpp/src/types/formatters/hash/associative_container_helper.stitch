@@ -61,33 +61,55 @@ format(assistant& a, const properties::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
-    const auto key(hp.direct_descendants().front());
-    const auto value(hp.direct_descendants().back());
+
+    if (hp.direct_descendants().size() == 2) {
+        const auto key(hp.direct_descendants().front());
+        const auto value(hp.direct_descendants().back());
 #>
 
 inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
 <#+
-    if (!key.requires_hashing_helper())
+        if (!key.requires_hashing_helper())
 #>
         combine(seed, i.first);
 <#+
-    else
+        else
 #>
         combine(seed, hash_<#= key.name_tree_identifiable() #>(i.first));
 <#+
 
-    if (!(value.requires_hashing_helper()))
+        if (!(value.requires_hashing_helper()))
 #>
         combine(seed, i.second);
 <#+
-    else
+        else
 #>
         combine(seed, hash_<#= value.name_tree_identifiable() #>(i.second));
     }
     return seed;
 }
 <#+
+    } else {
+        const auto containee(hp.direct_descendants().front());
+#>
+
+inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+<#+
+    if (!containee.requires_hashing_helper())
+#>
+        combine(seed, i);
+<#+
+    else
+#>
+        combine(seed, hash_<#= containee.name_tree_identifiable() #>(i));
+    }
+    return seed;
+}
+<#+
+    }
 }
 #>

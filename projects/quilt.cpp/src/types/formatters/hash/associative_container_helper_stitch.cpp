@@ -81,23 +81,39 @@ format(assistant& a, const properties::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
-    const auto key(hp.direct_descendants().front());
-    const auto value(hp.direct_descendants().back());
+
+    if (hp.direct_descendants().size() == 2) {
+        const auto key(hp.direct_descendants().front());
+        const auto value(hp.direct_descendants().back());
 a.stream() << std::endl;
 a.stream() << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
 a.stream() << "    std::size_t seed(0);" << std::endl;
 a.stream() << "    for (const auto i : v) {" << std::endl;
-    if (!key.requires_hashing_helper())
+        if (!key.requires_hashing_helper())
 a.stream() << "        combine(seed, i.first);" << std::endl;
-    else
+        else
 a.stream() << "        combine(seed, hash_" << key.name_tree_identifiable() << "(i.first));" << std::endl;
 
-    if (!(value.requires_hashing_helper()))
+        if (!(value.requires_hashing_helper()))
 a.stream() << "        combine(seed, i.second);" << std::endl;
-    else
+        else
 a.stream() << "        combine(seed, hash_" << value.name_tree_identifiable() << "(i.second));" << std::endl;
 a.stream() << "    }" << std::endl;
 a.stream() << "    return seed;" << std::endl;
 a.stream() << "}" << std::endl;
+    } else {
+        const auto containee(hp.direct_descendants().front());
+a.stream() << std::endl;
+a.stream() << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
+a.stream() << "    std::size_t seed(0);" << std::endl;
+a.stream() << "    for (const auto i : v) {" << std::endl;
+    if (!containee.requires_hashing_helper())
+a.stream() << "        combine(seed, i);" << std::endl;
+    else
+a.stream() << "        combine(seed, hash_" << containee.name_tree_identifiable() << "(i));" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << "    return seed;" << std::endl;
+a.stream() << "}" << std::endl;
+    }
 }
 } } } } }

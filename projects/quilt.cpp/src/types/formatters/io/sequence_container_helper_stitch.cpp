@@ -80,11 +80,11 @@ void sequence_container_helper::
 format(assistant& a, const properties::helper_properties& hp) const {
     {
         const auto d(hp.current());
-        const auto nt_qn(d.name_tree_qualified());
-        const auto containee(hp.direct_descendants().front());
+        const auto qn(d.name_tree_qualified());
         auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
+        const auto containee(hp.direct_descendants().front());
 a.stream() << std::endl;
-a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << nt_qn << "& v) {" << std::endl;
+a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << qn << "& v) {" << std::endl;
 a.stream() << "    s << \"[ \";" << std::endl;
 a.stream() << "    for (auto i(v.begin()); i != v.end(); ++i) {" << std::endl;
 a.stream() << "        if (i != v.begin()) s << \", \";" << std::endl;

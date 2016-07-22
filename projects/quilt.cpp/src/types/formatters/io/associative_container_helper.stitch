@@ -65,8 +65,10 @@ format(assistant& a, const properties::helper_properties& hp) const {
         const auto d(hp.current());
         const auto qn(d.name_tree_qualified());
         auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
-        const auto key(hp.direct_descendants().front());
-        const auto value(hp.direct_descendants().back());
+
+        if (hp.direct_descendants().size() == 2) {
+            const auto key(hp.direct_descendants().front());
+            const auto value(hp.direct_descendants().back());
 #>
 
 inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
@@ -84,6 +86,22 @@ inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
 }
 
 <#+
+        } else {
+        const auto containee(hp.direct_descendants().front());
+#>
+
+inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << <#= a.streaming_for_type(containee, "*i") #>;
+    }
+    s << "] ";
+    return s;
+}
+
+<#+
+        }
     }
 #>
 

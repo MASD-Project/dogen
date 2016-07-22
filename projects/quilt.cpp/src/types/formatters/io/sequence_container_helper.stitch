@@ -60,12 +60,12 @@ void sequence_container_helper::
 format(assistant& a, const properties::helper_properties& hp) const {
     {
         const auto d(hp.current());
-        const auto nt_qn(d.name_tree_qualified());
-        const auto containee(hp.direct_descendants().front());
+        const auto qn(d.name_tree_qualified());
         auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
+        const auto containee(hp.direct_descendants().front());
 #>
 
-inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
+inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
