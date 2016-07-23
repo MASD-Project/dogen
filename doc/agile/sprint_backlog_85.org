@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-22 Fri 23:33]
+#+CAPTION: Clock summary at [2016-07-23 Sat 01:16]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *12:38* |       |      | 100.0 |
+| *Total time*                                                                | *14:18* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 12:38   |       |      | 100.0 |
-| Active                                                                      |         | 12:38 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:39 |   5.1 |
-| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  22.8 |
-| COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   4.9 |
-| COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   4.2 |
-| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |  15.3 |
-| COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   1.7 |
-| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   8.3 |
-| STARTED Implement test data using dynamic helpers                           |         |       | 4:45 |  37.6 |
+| Stories                                                                     | 14:18   |       |      | 100.0 |
+| Active                                                                      |         | 14:18 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:39 |   4.5 |
+| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  20.2 |
+| COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   4.3 |
+| COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   3.7 |
+| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |  13.5 |
+| COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   1.5 |
+| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   7.3 |
+| STARTED Implement test data using dynamic helpers                           |         |       | 6:25 |  44.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -191,6 +191,7 @@ not ideal because it means we will now create helpers for _all_ types
 in a name tree. But it should work.
 
 *** STARTED Implement test data using dynamic helpers                 :story:
+    CLOCK: [2016-07-23 Sat 00:01]--[2016-07-23 Sat 01:15] =>  1:14
     CLOCK: [2016-07-22 Fri 23:34]--[2016-07-23 Sat 00:00] =>  0:26
     CLOCK: [2016-07-22 Fri 22:07]--[2016-07-22 Fri 23:33] =>  1:26
     CLOCK: [2016-07-22 Fri 21:43]--[2016-07-22 Fri 22:06] =>  0:23
@@ -221,6 +222,9 @@ Update formatters in test data to use new helpers.
   with default values" or "generate with values". The nested type info
   could record type recursion at the point where it happens.
 - rename int, char, bool.
+- for whatever reason =dogen::test_models::boost_model::pkg1::class_c=
+  is not coming out for test data. We can clearly see in the logs that
+  the helper has been setup correctly but no output comes out.
 
 *** =always_in_heap= is not a very good name                          :story:
 
