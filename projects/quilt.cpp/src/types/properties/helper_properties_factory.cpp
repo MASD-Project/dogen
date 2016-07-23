@@ -113,8 +113,8 @@ streaming_settings_for_id(const std::string& id) const {
 
 boost::optional<helper_descriptor>
 helper_properties_factory::make(const bool in_inheritance_relationship,
-    const yarn::name_tree& nt, const bool is_top_level,
-    std::unordered_set<std::string>& done,
+    const bool inherit_opaqueness_from_parent, const yarn::name_tree& nt,
+    const bool is_top_level, std::unordered_set<std::string>& done,
     std::list<helper_properties>& properties) const {
     const auto id(nt.current().id());
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
@@ -166,7 +166,7 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
     r.name_tree_identifiable(nt.identifiable());
     r.name_tree_qualified(get_qualified(nt));
     r.is_circular_dependency(nt.is_circular_dependency());
-    r.is_pointer(nt.are_children_opaque());
+    r.is_pointer(inherit_opaqueness_from_parent);
 
     helper_properties hp;
     hp.current(r);
@@ -187,7 +187,9 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
          * descendants (and just the direct descendants, not its
          * children). If we have a child, we must have a descriptor.
          */
-        const auto dd(make(iir, c, false /*is_top_level*/, done, properties));
+        const auto aco(nt.are_children_opaque());
+        const auto is_top_level(false);
+        const auto dd(make(iir, aco, c, is_top_level, done, properties));
         if (!dd) {
             BOOST_LOG_SEV(lg, error) << descriptor_expected;
             BOOST_THROW_EXCEPTION(building_error(descriptor_expected));
@@ -247,8 +249,9 @@ make(const bool in_inheritance_relationship,
     std::list<helper_properties> r;
     std::unordered_set<std::string> done;
     for (const auto a : attributes) {
-        const auto iir(in_inheritance_relationship);
-        make(iir, a.parsed_type(), true/*is_top_level*/, done, r);
+        make(in_inheritance_relationship,
+            false/*inherit_opaqueness_from_parent*/,
+            a.parsed_type(), false/*is_top_level*/, done, r);
     }
 
     if (r.empty())

@@ -113,7 +113,7 @@ void forward_declarations_formatter::register_inclusion_dependencies_provider(
 dogen::formatters::file forward_declarations_formatter::
 format(const context& ctx,
     const properties::forward_declarations_info& fd) const {
-    assistant a(ctx, ownership_hierarchy(), file_type());
+    assistant a(ctx, ownership_hierarchy(), file_type(), fd.id());
     const auto r(forward_declarations_formatter_stitch(a, fd));
     return r;
 }

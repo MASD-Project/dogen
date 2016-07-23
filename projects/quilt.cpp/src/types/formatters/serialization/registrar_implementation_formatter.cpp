@@ -134,7 +134,7 @@ register_inclusion_dependencies_provider(
 
 dogen::formatters::file registrar_implementation_formatter::
 format(const context& ctx, const properties::registrar_info& ri) const {
-    assistant a(ctx, ownership_hierarchy(), file_type());
+    assistant a(ctx, ownership_hierarchy(), file_type(), ri.id());
     const auto r(registrar_implementation_formatter_stitch(a, ri));
     return r;
 }

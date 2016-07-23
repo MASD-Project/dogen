@@ -96,7 +96,7 @@ void generator::visit(const dogen::yarn::object& o) {
         return;
 
     const auto id(o.name().id());
-    BOOST_LOG_SEV(lg, debug) << "Creating helper instances for" << id;
+    BOOST_LOG_SEV(lg, debug) << "Creating helper instances for: " << id;
 
     const auto iir(o.in_inheritance_relationship());
     const auto hp(factory_.make(iir, o.local_attributes()));
@@ -110,7 +110,7 @@ void generator::visit(const dogen::yarn::object& o) {
         BOOST_LOG_SEV(lg, error) << duplicate_name << id;
         BOOST_THROW_EXCEPTION(building_error(duplicate_name + id));
     }
-    BOOST_LOG_SEV(lg, debug) << "Done creating helper instances for" << id;
+    BOOST_LOG_SEV(lg, debug) << "Done creating helper instances for: " << id;
 }
 
 }

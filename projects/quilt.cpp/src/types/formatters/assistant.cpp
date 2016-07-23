@@ -92,10 +92,14 @@ get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
 }
 
 assistant::assistant(const context& ctx,
-    const dynamic::ownership_hierarchy& oh, const formatters::file_types ft) :
+    const dynamic::ownership_hierarchy& oh, const formatters::file_types ft,
+    const std::string& id) :
     context_(ctx),
     formatter_properties_(obtain_formatter_properties(oh.formatter_name())),
     ownership_hierarchy_(oh), file_type_(ft) {
+
+    BOOST_LOG_SEV(lg, debug) << "Processing element: " << id
+                             << " using: " << oh.formatter_name();
 
     dogen::formatters::indent_filter::push(filtering_stream_, 4);
     filtering_stream_.push(stream_);
@@ -448,7 +452,7 @@ void assistant::add_helper_methods() {
     }
 
     for (const auto& hp : context_.element_properties().helper_properties()) {
-        BOOST_LOG_SEV(lg, debug) << "Helper properties" << hp;
+        BOOST_LOG_SEV(lg, debug) << "Helper properties: " << hp;
         const auto helpers(get_helpers(hp));
 
         /*
@@ -457,11 +461,11 @@ void assistant::add_helper_methods() {
          */
         for (const auto& h : helpers) {
             if (!h->is_enabled(*this, hp)) {
-                BOOST_LOG_SEV(lg, debug) << "Helper is not enabled.";
+                BOOST_LOG_SEV(lg, debug) << "Helper is not enabled." << h->id();
                 continue;
             }
 
-            BOOST_LOG_SEV(lg, debug) << "Formatting with helper" << h->id();
+            BOOST_LOG_SEV(lg, debug) << "Formatting with helper: " << h->id();
             h->format(*this, hp);
         }
     }

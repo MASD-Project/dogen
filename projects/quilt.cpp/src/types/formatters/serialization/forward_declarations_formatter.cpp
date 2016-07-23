@@ -121,7 +121,7 @@ format(const context& ctx,
     if (fd.is_enum() || fd.is_exception())
         return dogen::formatters::file();
 
-    assistant a(ctx, ownership_hierarchy(), file_type());
+    assistant a(ctx, ownership_hierarchy(), file_type(), fd.id());
     const auto r(forward_declarations_formatter_stitch(a, fd));
     return r;
 }

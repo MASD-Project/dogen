@@ -64,7 +64,7 @@ void namespace_header_formatter::register_inclusion_dependencies_provider(
 
 dogen::formatters::file namespace_header_formatter::
 format(const context& ctx, const yarn::module& m) const {
-    assistant a(ctx, ownership_hierarchy(), file_type());
+    assistant a(ctx, ownership_hierarchy(), file_type(), m.name().id());
     const auto r(namespace_header_formatter_stitch(a, m));
     return r;
 }

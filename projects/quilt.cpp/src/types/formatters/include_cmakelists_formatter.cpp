@@ -66,7 +66,7 @@ void include_cmakelists_formatter::register_inclusion_dependencies_provider(
 
 dogen::formatters::file include_cmakelists_formatter::
 format(const context& ctx, const properties::cmakelists_info& c) const {
-    assistant a(ctx, ownership_hierarchy(), file_type());
+    assistant a(ctx, ownership_hierarchy(), file_type(), c.id());
     const auto r(include_cmakelists_formatter_stitch(a, c));
     return r;
 }

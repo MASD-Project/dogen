@@ -98,7 +98,7 @@ void exception_header_formatter::register_inclusion_dependencies_provider(
 
 dogen::formatters::file exception_header_formatter::
 format(const context& ctx, const yarn::exception& e) const {
-    assistant a(ctx, ownership_hierarchy(), file_type());
+    assistant a(ctx, ownership_hierarchy(), file_type(), e.name().id());
     const auto r(exception_header_formatter_stitch(a, e));
     return r;
 }

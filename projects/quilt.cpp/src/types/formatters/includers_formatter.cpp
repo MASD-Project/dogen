@@ -96,7 +96,7 @@ void includers_formatter::register_inclusion_dependencies_provider(
 dogen::formatters::file
 includers_formatter::format(const context& ctx,
     const properties::includers_info& i) const {
-    assistant a(ctx, ownership_hierarchy(), file_type());
+    assistant a(ctx, ownership_hierarchy(), file_type(), i.id());
     const auto r(includers_formatter_stitch(a, i));
     return r;
 }

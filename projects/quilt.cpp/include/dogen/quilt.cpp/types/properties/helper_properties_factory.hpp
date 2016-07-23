@@ -63,7 +63,9 @@ private:
 
 private:
     boost::optional<helper_descriptor>
-    make(const bool in_inheritance_relationship, const yarn::name_tree& nt,
+    make(const bool in_inheritance_relationship,
+        const bool inherit_opaqueness_from_parent,
+        const yarn::name_tree& nt,
         const bool is_top_level, std::unordered_set<std::string>& done,
         std::list<helper_properties>& properties) const;
 

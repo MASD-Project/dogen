@@ -103,7 +103,7 @@ void visitor_header_formatter::register_inclusion_dependencies_provider(
 
 dogen::formatters::file visitor_header_formatter::
 format(const context& ctx, const yarn::visitor& v) const {
-    assistant a(ctx, ownership_hierarchy(), file_type());
+    assistant a(ctx, ownership_hierarchy(), file_type(), v.name().id());
     const auto r(visitor_header_formatter_stitch(a, v));
     return r;
 }

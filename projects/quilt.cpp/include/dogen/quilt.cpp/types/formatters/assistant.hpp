@@ -59,7 +59,7 @@ namespace formatters {
 class assistant final {
 public:
     assistant(const context& ctx, const dynamic::ownership_hierarchy& oh,
-        const formatters::file_types ft);
+        const formatters::file_types ft, const std::string& id);
 
 public:
     /**
