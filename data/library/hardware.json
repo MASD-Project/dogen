@@ -10,7 +10,7 @@
             "extensions" : {
                 "quilt.cpp.helper.family" : "Boolean",
                 "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.element.requires_manual_default_constructor" : true
+                "quilt.cpp.aspect.requires_manual_default_constructor" : true
             }
         },
         {
@@ -22,7 +22,7 @@
                 "quilt.cpp.streaming.remove_unprintable_characters" : false,
                 "quilt.cpp.streaming.requires_quoting" : true,
                 "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.element.requires_manual_default_constructor" : true
+                "quilt.cpp.aspect.requires_manual_default_constructor" : true
             }
         },
         {
@@ -34,7 +34,7 @@
                 "quilt.cpp.streaming.remove_unprintable_characters" : false,
                 "quilt.cpp.streaming.requires_quoting" : true,
                 "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.element.requires_manual_default_constructor" : true
+                "quilt.cpp.aspect.requires_manual_default_constructor" : true
             }
         },
         {
@@ -44,7 +44,7 @@
             "extensions" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.element.requires_manual_default_constructor" : true
+                "quilt.cpp.aspect.requires_manual_default_constructor" : true
             }
         },
         {
@@ -55,7 +55,7 @@
             "extensions" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.element.requires_manual_default_constructor" : true
+                "quilt.cpp.aspect.requires_manual_default_constructor" : true
             }
         },
         {
@@ -65,7 +65,7 @@
             "extensions" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.element.requires_manual_default_constructor" : true
+                "quilt.cpp.aspect.requires_manual_default_constructor" : true
             }
         },
         {
@@ -75,7 +75,7 @@
             "extensions" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.element.requires_manual_default_constructor" : true
+                "quilt.cpp.aspect.requires_manual_default_constructor" : true
             }
         },
         {
@@ -85,7 +85,7 @@
             "extensions" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.element.requires_manual_default_constructor" : true
+                "quilt.cpp.aspect.requires_manual_default_constructor" : true
             }
         },
         {
@@ -95,7 +95,7 @@
             "extensions" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.element.requires_manual_default_constructor" : true
+                "quilt.cpp.aspect.requires_manual_default_constructor" : true
             }
         },
         {
@@ -105,7 +105,7 @@
             "extensions" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.element.requires_manual_default_constructor" : true
+                "quilt.cpp.aspect.requires_manual_default_constructor" : true
             }
         },
         {
@@ -115,7 +115,7 @@
             "extensions" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.element.requires_manual_default_constructor" : true
+                "quilt.cpp.aspect.requires_manual_default_constructor" : true
             }
         },
         {
@@ -125,7 +125,7 @@
             "extensions" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.element.requires_manual_default_constructor" : true
+                "quilt.cpp.aspect.requires_manual_default_constructor" : true
             }
         },
         {
@@ -135,7 +135,7 @@
             "extensions" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.element.requires_manual_default_constructor" : true
+                "quilt.cpp.aspect.requires_manual_default_constructor" : true
             }
         },
         {
@@ -145,7 +145,7 @@
             "extensions" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
-                "quilt.cpp.element.requires_manual_default_constructor" : true
+                "quilt.cpp.aspect.requires_manual_default_constructor" : true
             }
         }
     ]

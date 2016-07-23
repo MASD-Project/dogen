@@ -49,12 +49,23 @@ aspect_settings_factory::field_definitions aspect_settings_factory::
 make_field_definitions(const dynamic::repository& rp) const {
 
     field_definitions r;
-    const dynamic::repository_selector s(rp);
-    const auto& cc(traits::disable_complete_constructor());
-    r.disable_complete_constructor = s.select_field_by_name(cc);
+    const dynamic::repository_selector rs(rp);
+    typedef traits::cpp::aspect aspect;
 
-    const auto& xs(traits::disable_xml_serialization());
-    r.disable_xml_serialization = s.select_field_by_name(xs);
+    const auto& cc(aspect::disable_complete_constructor());
+    r.disable_complete_constructor = rs.select_field_by_name(cc);
+
+    const auto& xs(aspect::disable_xml_serialization());
+    r.disable_xml_serialization = rs.select_field_by_name(xs);
+
+    const auto& rmdc(aspect::requires_manual_default_constructor());
+    r.requires_manual_default_constructor = rs.select_field_by_name(rmdc);
+
+    const auto& rmmc(aspect::requires_manual_move_constructor());
+    r.requires_manual_move_constructor = rs.select_field_by_name(rmmc);
+
+    const auto& rsm(aspect::requires_stream_manipulators());
+    r.requires_stream_manipulators = rs.select_field_by_name(rsm);
 
     return r;
 }
@@ -88,13 +99,28 @@ aspect_settings_factory::make(const dynamic::object& o) const {
     aspect_settings r;
 
     const dynamic::field_selector fs(o);
+    const auto& fd(field_definitions_);
+    const auto& fv(field_values_);
+
     r.disable_complete_constructor(
-        obtain_field_value(fs, field_definitions_.disable_complete_constructor,
-            field_values_.disable_complete_constructor));
+        obtain_field_value(fs, fd.disable_complete_constructor,
+            fv.disable_complete_constructor));
 
     r.disable_xml_serialization(
-        obtain_field_value(fs, field_definitions_.disable_xml_serialization,
-            field_values_.disable_xml_serialization));
+        obtain_field_value(fs, fd.disable_xml_serialization,
+            fv.disable_xml_serialization));
+
+    r.requires_manual_default_constructor(
+        fs.get_boolean_content_or_default(
+            fd.requires_manual_default_constructor));
+
+    r.requires_manual_move_constructor(
+        fs.get_boolean_content_or_default(
+            fd.requires_manual_move_constructor));
+
+    r.requires_stream_manipulators(
+        fs.get_boolean_content_or_default(
+            fd.requires_stream_manipulators));
 
     return r;
 }

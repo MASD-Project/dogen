@@ -81,16 +81,6 @@ struct traits {
      */
     static std::string inclusion_required();
 
-    /**
-     * @brief Disables the generation of the complete constructor.
-     */
-    static std::string disable_complete_constructor();
-
-    /**
-     * @brief Disables XML support in boost serialisation.
-     */
-    static std::string disable_xml_serialization();
-
     struct cpp {
         /**
          * @brief Is inclusion required for all formatters.
@@ -149,6 +139,34 @@ struct traits {
              * @brief If true, the type must be dereferenced.
              */
             static std::string requires_dereferencing();
+        };
+
+        struct aspect {
+            /**
+             * @brief Disables the generation of the complete constructor.
+             */
+            static std::string disable_complete_constructor();
+
+            /**
+             * @brief Disables XML support in boost serialisation.
+             */
+            static std::string disable_xml_serialization();
+
+            /**
+             * @brief If true, the type needs to be manually constructed.
+             */
+            static std::string requires_manual_default_constructor();
+
+            /**
+             * @brief If true, the type needs to be manually moved.
+             */
+            static std::string requires_manual_move_constructor();
+
+            /**
+             * @brief If true, the stream manipulators need to be setup for
+             * this type.
+             */
+            static std::string requires_stream_manipulators();
         };
     };
 };

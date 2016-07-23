@@ -39,7 +39,7 @@ namespace cpp {
 namespace settings {
 
 /**
- * @brief Creates the element settings.
+ * @brief Creates the aspect settings.
  */
 class aspect_settings_factory {
 public:
@@ -53,6 +53,9 @@ private:
     struct field_definitions {
         dynamic::field_definition disable_complete_constructor;
         dynamic::field_definition disable_xml_serialization;
+        dynamic::field_definition requires_manual_default_constructor;
+        dynamic::field_definition requires_manual_move_constructor;
+        dynamic::field_definition requires_stream_manipulators;
     };
 
     /**
@@ -89,12 +92,12 @@ private:
 
 public:
     /**
-     * @brief Produces the element settings.
+     * @brief Produces the aspect settings.
      */
     aspect_settings make(const dynamic::object& o) const;
 
     /**
-     * @brief Produce the element settings based on root object
+     * @brief Produce the aspect settings based on root object
      * contents.
      */
     aspect_settings make() const;

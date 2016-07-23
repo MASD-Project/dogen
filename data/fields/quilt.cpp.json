@@ -190,34 +190,8 @@
     },
     {
         "name" : {
-            "simple" : "requires_manual_default_constructor",
-            "qualified" : "quilt.cpp.element.requires_manual_default_constructor"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "entity",
-        "default_value" : false
-    },
-    {
-        "name" : {
-            "simple" : "requires_manual_move_constructor",
-            "qualified" : "quilt.cpp.element.requires_manual_move_constructor"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "quilt.cpp"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "entity",
-        "default_value" : false
-    },
-    {
-        "name" : {
             "simple" : "disable_complete_constructor",
-            "qualified" : "quilt.cpp.element.disable_complete_constructor"
+            "qualified" : "quilt.cpp.aspect.disable_complete_constructor"
         },
         "ownership_hierarchy" : {
             "model_name" : "quilt.cpp"
@@ -230,7 +204,7 @@
     {
         "name" : {
             "simple" : "disable_xml_serialization",
-            "qualified" : "quilt.cpp.element.disable_xml_serialization"
+            "qualified" : "quilt.cpp.aspect.disable_xml_serialization"
         },
         "ownership_hierarchy" : {
             "model_name" : "quilt.cpp"
@@ -238,6 +212,45 @@
         "value_type" : "boolean",
         "definition_type" : "instance",
         "scope" : "root_module",
+        "default_value" : false
+    },
+    {
+        "name" : {
+            "simple" : "requires_manual_default_constructor",
+            "qualified" : "quilt.cpp.aspect.requires_manual_default_constructor"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "quilt.cpp"
+        },
+        "value_type" : "boolean",
+        "definition_type" : "instance",
+        "scope" : "entity",
+        "default_value" : false
+    },
+    {
+        "name" : {
+            "simple" : "requires_manual_move_constructor",
+            "qualified" : "quilt.cpp.aspect.requires_manual_move_constructor"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "quilt.cpp"
+        },
+        "value_type" : "boolean",
+        "definition_type" : "instance",
+        "scope" : "entity",
+        "default_value" : false
+    },
+    {
+        "name" : {
+            "simple" : "requires_stream_manipulators",
+            "qualified" : "quilt.cpp.aspect.requires_stream_manipulators"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "quilt.cpp"
+        },
+        "value_type" : "boolean",
+        "definition_type" : "instance",
+        "scope" : "entity",
         "default_value" : false
     },
     {

@@ -69,16 +69,6 @@ std::string traits::inclusion_dependency() {
     return r;
 }
 
-std::string traits::disable_complete_constructor() {
-    static std::string r("quilt.cpp.element.disable_complete_constructor");
-    return r;
-}
-
-std::string traits::disable_xml_serialization() {
-    static std::string r("quilt.cpp.element.disable_xml_serialization");
-    return r;
-}
-
 std::string traits::cpp::inclusion_required() {
     static std::string r("quilt.cpp.inclusion_required");
     return r;
@@ -131,6 +121,32 @@ std::string traits::cpp::streaming::remove_unprintable_characters() {
 
 std::string traits::cpp::streaming::requires_dereferencing() {
     static std::string r("quilt.cpp.streaming.requires_dereferencing");
+    return r;
+}
+
+std::string traits::cpp::aspect::disable_complete_constructor() {
+    static std::string r("quilt.cpp.aspect.disable_complete_constructor");
+    return r;
+}
+
+std::string traits::cpp::aspect::disable_xml_serialization() {
+    static std::string r("quilt.cpp.aspect.disable_xml_serialization");
+    return r;
+}
+
+std::string traits::cpp::aspect::requires_manual_default_constructor() {
+    static std::string r(
+        "quilt.cpp.aspect.requires_manual_default_constructor");
+    return r;
+}
+
+std::string traits::cpp::aspect::requires_manual_move_constructor() {
+    static std::string r("quilt.cpp.aspect.requires_manual_move_constructor");
+    return r;
+}
+
+std::string traits::cpp::aspect::requires_stream_manipulators() {
+    static std::string r("quilt.cpp.aspect.requires_stream_manipulators");
     return r;
 }
 
