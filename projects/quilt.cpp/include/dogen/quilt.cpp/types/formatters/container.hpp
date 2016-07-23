@@ -30,6 +30,7 @@
 #include <unordered_map>
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/class_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/new_class_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/enum_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/visitor_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/exception_formatter_interface.hpp"
@@ -63,6 +64,14 @@ public:
         std::shared_ptr<formatters::class_formatter_interface>
     >&
     class_formatters() const;
+
+    /**
+     * @brief Returns all available class formatters (new).
+     */
+    const std::forward_list<
+        std::shared_ptr<formatters::new_class_formatter_interface>
+        >&
+    new_class_formatters() const;
 
     /**
      * @brief Returns all available enum formatters.
@@ -172,6 +181,8 @@ public:
 private:
     std::forward_list<std::shared_ptr<formatters::class_formatter_interface>>
     class_formatters_;
+    std::forward_list<std::shared_ptr<formatters::new_class_formatter_interface>>
+    new_class_formatters_;
     std::forward_list<std::shared_ptr<formatters::enum_formatter_interface>>
     enum_formatters_;
     std::forward_list<std::shared_ptr<

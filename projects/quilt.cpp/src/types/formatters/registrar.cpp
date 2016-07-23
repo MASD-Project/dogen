@@ -106,6 +106,16 @@ void registrar::register_formatter(
 }
 
 void registrar::register_formatter(
+    std::shared_ptr<new_class_formatter_interface> f) {
+    // note: not logging by design
+    if (!f)
+        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
+
+    formatter_container_.new_class_formatters_.push_front(f);
+    common_registration(f);
+}
+
+void registrar::register_formatter(
     std::shared_ptr<enum_formatter_interface> f) {
     // note: not logging by design
     if (!f)

@@ -138,6 +138,7 @@
 #include "dogen/quilt.cpp/types/formatters/exception_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/includers_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/namespace_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/new_class_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/enablement_repository_factory.hpp"
