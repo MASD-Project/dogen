@@ -86,7 +86,7 @@ a.stream() << std::endl;
 a.stream() << qn << std::endl;
 a.stream() << "create_" << ident << "(unsigned int position) {" << std::endl;
 a.stream() << "    " << qn << " r(" << std::endl;
-a.stream() << "        create_" << containee.name_tree_identifiable() << "_ptr(position));" << std::endl;
+a.stream() << "        create_" << containee.name_tree_identifiable() << "(position));" << std::endl;
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
 }

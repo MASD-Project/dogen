@@ -34,7 +34,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
         auto sbf(a.make_scoped_boilerplate_formatter());
         if (!c.properties().empty()) {
 a.stream() << "namespace {" << std::endl;
-        a.add_helper_methods(c);
+        a.add_helper_methods();
 a.stream() << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;

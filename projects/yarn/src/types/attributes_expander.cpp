@@ -32,21 +32,10 @@ auto lg(logger_factory("yarn.attributes_expander"));
 namespace dogen {
 namespace yarn {
 
-void attributes_expander::
-mark_circular_dependencies(const name& owner, name_tree& nt) const {
-
-    if (owner == nt.current())
-        nt.is_circular_dependency(true);
-
-    for (auto& c : nt.children())
-        mark_circular_dependencies(owner, c);
-}
-
 void attributes_expander::update_attributes(const name_tree_parser& ntp,
-    const name& n, std::list<attribute>& la) const {
+    std::list<attribute>& la) const {
     for (auto& p : la) {
         auto nt(ntp.parse(p.unparsed_type()));
-        mark_circular_dependencies(n, nt);
         p.parsed_type(nt);
     }
 }
@@ -89,12 +78,12 @@ void attributes_expander::expand(intermediate_model& m) const {
 
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
-        update_attributes(ntp, o.name(), o.local_attributes());
+        update_attributes(ntp, o.local_attributes());
     }
 
     for (auto& pair : m.concepts()) {
         auto& c(pair.second);
-        update_attributes(ntp, c.name(), c.local_attributes());
+        update_attributes(ntp, c.local_attributes());
     }
 }
 

@@ -80,7 +80,7 @@ private:
      * @brief Resolves all references contained in a name tree.
      */
     void resolve_partial_type(const intermediate_model& m,
-        const indexed_ids& idx, name_tree& nt) const;
+        const indexed_ids& idx, const name& owner, name_tree& nt) const;
 
     /**
      * @brief Resolves all references to types in the supplied attributes.

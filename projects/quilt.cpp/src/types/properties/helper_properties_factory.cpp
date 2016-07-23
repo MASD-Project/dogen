@@ -167,6 +167,8 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
     r.name_tree_qualified(get_qualified(nt));
     r.is_circular_dependency(nt.is_circular_dependency());
     r.is_pointer(inherit_opaqueness_from_parent);
+    if (inherit_opaqueness_from_parent)
+        r.name_tree_identifiable().append("_ptr");
 
     helper_properties hp;
     hp.current(r);
@@ -219,8 +221,13 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
          * need the helper for the map to have two direct descendants
          * (one per string), but we do not want to generate two helper
          * methods for the strings.
+         *
+         * Note also we are using the return type's identifiable
+         * rather than the input name tree's identifiable. This is
+         * because we may have augmented it (e.g. the is pointer use
+         * case).
          */
-        const auto ident(nt.identifiable());
+        const auto ident(r.name_tree_identifiable());
         if (ident.empty()) {
             BOOST_LOG_SEV(lg, error) << empty_identifiable;
             BOOST_THROW_EXCEPTION(building_error(empty_identifiable));

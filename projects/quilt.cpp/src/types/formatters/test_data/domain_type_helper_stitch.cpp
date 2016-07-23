@@ -87,7 +87,7 @@ format(assistant& a, const properties::helper_properties& hp) const {
     if (is_recursive) {
 a.stream() << std::endl;
 a.stream() << qn << (is_pointer ? "*" : "") << std::endl;
-a.stream() << "create_" << ident << (is_pointer ? "_ptr" : "") << "(const unsigned int) {" << std::endl;
+a.stream() << "create_" << ident << "(const unsigned int) {" << std::endl;
         if (is_pointer) {
 a.stream() << "    return nullptr;" << std::endl;
         } else {
@@ -97,7 +97,7 @@ a.stream() << "}" << std::endl;
     } else {
 a.stream() << std::endl;
 a.stream() << qn << (is_pointer ? "*" : "") << std::endl;
-a.stream() << "create_" << ident << (is_pointer ? "_ptr" : "") << "(const unsigned int position) {" << std::endl;
+a.stream() << "create_" << ident << "(const unsigned int position) {" << std::endl;
 a.stream() << "    return " << qn << "_generator::create" << (is_pointer ? "_ptr" : "") << "(position);" << std::endl;
 a.stream() << "}" << std::endl;
     }

@@ -68,7 +68,7 @@ format(assistant& a, const properties::helper_properties& hp) const {
 #>
 
 <#= qn #><#= (is_pointer ? "*" : "") #>
-create_<#= ident #><#= (is_pointer ? "_ptr" : "") #>(const unsigned int) {
+create_<#= ident #>(const unsigned int) {
 <#+
         if (is_pointer) {
 #>
@@ -86,7 +86,7 @@ create_<#= ident #><#= (is_pointer ? "_ptr" : "") #>(const unsigned int) {
 #>
 
 <#= qn #><#= (is_pointer ? "*" : "") #>
-create_<#= ident #><#= (is_pointer ? "_ptr" : "") #>(const unsigned int position) {
+create_<#= ident #>(const unsigned int position) {
     return <#= qn #>_generator::create<#= (is_pointer ? "_ptr" : "") #>(position);
 }
 <#+

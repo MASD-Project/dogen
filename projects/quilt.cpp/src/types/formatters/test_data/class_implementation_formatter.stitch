@@ -16,7 +16,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
 #>
 namespace {
 <#+
-        a.add_helper_methods(c);
+        a.add_helper_methods();
 #>
 
 }

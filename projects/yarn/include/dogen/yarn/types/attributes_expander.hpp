@@ -40,19 +40,10 @@ namespace yarn {
 class attributes_expander {
 private:
     /**
-     * @brief Marks the supplied name tree as circular if its current
-     * name results in a circular reference back to @e owner.
-     *
-     * The same process is performed recursively to the name tree's
-     * children.
-     */
-    void mark_circular_dependencies(const name& owner,  name_tree& nt) const;
-
-    /**
      * @brief Update all attributes in the supplied element.
      */
     void update_attributes(const name_tree_parser& ntp,
-        const name& n, std::list<attribute>& la) const;
+        std::list<attribute>& la) const;
 
 private:
     /**

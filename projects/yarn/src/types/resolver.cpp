@@ -211,7 +211,7 @@ name resolver::resolve_partial_type(const intermediate_model& m,
 }
 
 void resolver::resolve_partial_type(const intermediate_model& m,
-    const indexed_ids& idx, name_tree& nt) const {
+    const indexed_ids& idx, const name& owner, name_tree& nt) const {
     const name n(resolve_partial_type(m, idx, nt.current()));
     nt.current(n);
 
@@ -221,8 +221,20 @@ void resolver::resolve_partial_type(const intermediate_model& m,
     pretty_printer pp(separators::double_colons);
     pp.add(obtain_qualified(n));
 
+    /*
+     * Strictly speaking this is not directly related to
+     * resolution. However, we can only find circular dependencies
+     * after we have resolved all names and since we're already here
+     * might as well mark them.
+     */
+    if (owner == nt.current()) {
+        nt.is_circular_dependency(true);
+        BOOST_LOG_SEV(lg, debug) << "Found circular dependency. Owner: "
+                                 << owner.id();
+    }
+
     for (auto& c : nt.children()) {
-        resolve_partial_type(m, idx, c);
+        resolve_partial_type(m, idx, owner, c);
         pp.add_child(obtain_qualified(c));
     }
 
@@ -238,7 +250,7 @@ void resolver::resolve_attributes(const intermediate_model& m,
     std::list<attribute>& attributes) const {
     for (auto& a : attributes) {
         try {
-            resolve_partial_type(m, idx, a.parsed_type());
+            resolve_partial_type(m, idx, owner, a.parsed_type());
             BOOST_LOG_SEV(lg, debug) << "Resolved attribute: " << a.name().id();
         } catch (boost::exception& e) {
             std::ostringstream s;

@@ -67,7 +67,7 @@ format(assistant& a, const properties::helper_properties& hp) const {
 <#= qn #>
 create_<#= ident #>(unsigned int position) {
     <#= qn #> r(
-        create_<#= containee.name_tree_identifiable() #>_ptr(position));
+        create_<#= containee.name_tree_identifiable() #>(position));
     return r;
 }
 <#+
