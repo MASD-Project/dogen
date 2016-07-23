@@ -160,7 +160,6 @@
 #include "dogen/quilt.cpp/types/formatters/io/class_implementation_formatter.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_repository_factory.hpp"
-#include "dogen/quilt.cpp/types/formatters/test_data/helper_methods_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/class_implementation_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/enum_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository_factory.hpp"

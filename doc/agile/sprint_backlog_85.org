@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-23 Sat 09:03]
+#+CAPTION: Clock summary at [2016-07-23 Sat 09:07]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *14:56* |       |      | 100.0 |
+| *Total time*                                                                | *14:59* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 14:56   |       |      | 100.0 |
-| Active                                                                      |         | 14:56 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:39 |   4.4 |
-| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  19.3 |
+| Stories                                                                     | 14:59   |       |      | 100.0 |
+| Active                                                                      |         | 14:59 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:39 |   4.3 |
+| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  19.2 |
 | COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   4.1 |
 | COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   3.6 |
 | COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |  12.9 |
-| COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   1.5 |
+| COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   1.4 |
 | COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   7.0 |
-| STARTED Implement test data using dynamic helpers                           |         |       | 7:03 |  47.2 |
+| STARTED Implement test data using dynamic helpers                           |         |       | 7:06 |  47.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -191,6 +191,7 @@ not ideal because it means we will now create helpers for _all_ types
 in a name tree. But it should work.
 
 *** STARTED Implement test data using dynamic helpers                 :story:
+    CLOCK: [2016-07-23 Sat 09:05]--[2016-07-23 Sat 09:08] =>  0:03
     CLOCK: [2016-07-23 Sat 08:45]--[2016-07-23 Sat 09:04] =>  0:19
     CLOCK: [2016-07-23 Sat 08:25]--[2016-07-23 Sat 08:44] =>  0:19
     CLOCK: [2016-07-23 Sat 00:01]--[2016-07-23 Sat 01:15] =>  1:14

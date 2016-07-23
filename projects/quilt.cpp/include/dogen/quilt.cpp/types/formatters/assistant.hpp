@@ -237,7 +237,6 @@ public:
      * @brief Creates any helper methods that may be required for this
      * formatter.
      */
-    void add_helper_methods(const properties::class_info& c);
     void add_helper_methods();
 
     /**

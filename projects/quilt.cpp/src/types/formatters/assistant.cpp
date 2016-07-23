@@ -38,7 +38,6 @@
 #include "dogen/quilt.cpp/types/formatters/test_data/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
-#include "dogen/quilt.cpp/types/formatters/test_data/helper_methods_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace {
@@ -421,26 +420,6 @@ is_streaming_enabled(const properties::helper_properties& hp) const {
     const auto fn(ownership_hierarchy_.formatter_name());
     bool in_types_class_implementation(fn == cifn);
     return in_types_class_implementation && hp.in_inheritance_relationship();
-}
-
-void assistant::add_helper_methods(const properties::class_info& c) {
-    BOOST_LOG_SEV(lg, debug) << "Processing entity: " << c.name();
-
-    const auto fn(ownership_hierarchy_.formatter_name());
-    using tdt = formatters::test_data::traits;
-    const auto td_ci_fn(tdt::class_implementation_formatter_name());
-    const bool is_test_data_class_implementation(fn == td_ci_fn);
-    const bool requires_test_data(is_test_data_enabled());
-
-    if (is_test_data_class_implementation && requires_test_data) {
-        BOOST_LOG_SEV(lg, debug) << "Creating test data helper methods.";
-        test_data::helper_methods_formatter f(c.name(), c.properties());
-        f.format(stream());
-    } else {
-        BOOST_LOG_SEV(lg, debug) << "Test data helper methods not required."
-                                 << " is test data class implementation: '"
-                                 << is_test_data_class_implementation << "' ";
-    }
 }
 
 void assistant::add_helper_methods() {
