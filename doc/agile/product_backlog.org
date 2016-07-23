@@ -325,6 +325,10 @@ We should make sure types' use of IO kicks in via the inheritance test
 model. For this we need a base class with associative containers, etc
 and a derived class.
 
+*** Add tests to association model                                    :story:
+
+We need a test for composition / recursion.
+
 *** Add new c++ warnings to compilation                               :story:
 
 - =-Wunused-private-field=: Seems like this warning is not part of
