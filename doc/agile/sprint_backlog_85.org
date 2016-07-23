@@ -232,9 +232,22 @@ Update formatters in test data to use new helpers.
   is not coming out for test data. We can clearly see in the logs that
   the helper has been setup correctly but no output comes out.
 
-*** Implement types in terms of =yarn::object=                        :story:
+*** STARTED Implement types in terms of =yarn::object=                :story:
+    CLOCK: [2016-07-23 Sat 15:10]--[2016-07-23 Sat 15:27] =>  0:17
 
 Time to have a go at moving the type's class templates to yarn types.
+
+- we need to enable some side-by-side infrastructure so we can
+  refactor the class info formatters one at the time, without breaking
+  the existing code generation. Create a set of classes
+  =new_class_formatter= for the new code.
+
+*** Run tests that are passing on windows                             :story:
+
+At present we have a release build on windows but we are not running
+any tests. This is because some of the tests are failing at the
+moment. We should run all test suites that are green to ensure we
+don't regress without noticing.
 
 *** =always_in_heap= is not a very good name                          :story:
 
