@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/formatters/hash/file_properties_hash.hpp"
+#include "dogen/quilt.cpp/hash/properties/aspect_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/helper_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/element_properties_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/formatter_properties_hash.hpp"
@@ -71,6 +72,7 @@ std::size_t element_properties_hasher::hash(const element_properties& v) {
     combine(seed, hash_boost_optional_dogen_formatters_file_properties(v.file_properties()));
     combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties(v.formatter_properties()));
     combine(seed, hash_std_list_dogen_quilt_cpp_properties_helper_properties(v.helper_properties()));
+    combine(seed, v.aspect_properties());
 
     return seed;
 }

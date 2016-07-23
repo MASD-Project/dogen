@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include "dogen/formatters/test_data/file_properties_td.hpp"
+#include "dogen/quilt.cpp/test_data/properties/aspect_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/helper_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/element_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/formatter_properties_td.hpp"
@@ -70,6 +71,11 @@ std::list<dogen::quilt::cpp::properties::helper_properties> create_std_list_doge
     return r;
 }
 
+dogen::quilt::cpp::properties::aspect_properties
+create_dogen_quilt_cpp_properties_aspect_properties(const unsigned int position) {
+    return dogen::quilt::cpp::properties::aspect_properties_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -84,6 +90,7 @@ populate(const unsigned int position, result_type& v) {
     v.file_properties(create_boost_optional_dogen_formatters_file_properties(position + 0));
     v.formatter_properties(create_std_unordered_map_std_string_dogen_quilt_cpp_properties_formatter_properties(position + 1));
     v.helper_properties(create_std_list_dogen_quilt_cpp_properties_helper_properties(position + 2));
+    v.aspect_properties(create_dogen_quilt_cpp_properties_aspect_properties(position + 3));
 }
 
 element_properties_generator::result_type

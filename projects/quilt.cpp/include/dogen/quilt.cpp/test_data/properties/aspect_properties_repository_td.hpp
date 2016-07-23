@@ -18,33 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/settings/aspect_settings_hash.hpp"
+#ifndef DOGEN_QUILT_CPP_TEST_DATA_PROPERTIES_ASPECT_PROPERTIES_REPOSITORY_TD_HPP
+#define DOGEN_QUILT_CPP_TEST_DATA_PROPERTIES_ASPECT_PROPERTIES_REPOSITORY_TD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include "dogen/quilt.cpp/types/properties/aspect_properties_repository.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace settings {
+namespace properties {
 
-std::size_t aspect_settings_hasher::hash(const aspect_settings& v) {
-    std::size_t seed(0);
+class aspect_properties_repository_generator {
+public:
+    aspect_properties_repository_generator();
 
-    combine(seed, v.disable_complete_constructor());
-    combine(seed, v.disable_xml_serialization());
-    combine(seed, v.requires_manual_default_constructor());
-    combine(seed, v.requires_manual_move_constructor());
-    combine(seed, v.requires_stream_manipulators());
+public:
+    typedef dogen::quilt::cpp::properties::aspect_properties_repository result_type;
 
-    return seed;
-}
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } } } }
+
+#endif

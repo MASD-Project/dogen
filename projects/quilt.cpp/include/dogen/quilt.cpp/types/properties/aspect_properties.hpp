@@ -18,32 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_SETTINGS_ASPECT_SETTINGS_HPP
-#define DOGEN_QUILT_CPP_TYPES_SETTINGS_ASPECT_SETTINGS_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_PROPERTIES_ASPECT_PROPERTIES_HPP
+#define DOGEN_QUILT_CPP_TYPES_PROPERTIES_ASPECT_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
-#include "dogen/quilt.cpp/serialization/settings/aspect_settings_fwd_ser.hpp"
+#include "dogen/quilt.cpp/serialization/properties/aspect_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace settings {
+namespace properties {
 
-class aspect_settings final {
+class aspect_properties final {
 public:
-    aspect_settings(const aspect_settings&) = default;
-    aspect_settings(aspect_settings&&) = default;
-    ~aspect_settings() = default;
-
-public:
-    aspect_settings();
+    aspect_properties(const aspect_properties&) = default;
+    aspect_properties(aspect_properties&&) = default;
+    ~aspect_properties() = default;
 
 public:
-    aspect_settings(
+    aspect_properties();
+
+public:
+    aspect_properties(
         const bool disable_complete_constructor,
         const bool disable_xml_serialization,
         const bool requires_manual_default_constructor,
@@ -52,10 +52,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::properties::aspect_properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::properties::aspect_properties& v, unsigned int version);
 
 public:
     bool disable_complete_constructor() const;
@@ -74,14 +74,14 @@ public:
     void requires_stream_manipulators(const bool v);
 
 public:
-    bool operator==(const aspect_settings& rhs) const;
-    bool operator!=(const aspect_settings& rhs) const {
+    bool operator==(const aspect_properties& rhs) const;
+    bool operator!=(const aspect_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(aspect_settings& other) noexcept;
-    aspect_settings& operator=(aspect_settings other);
+    void swap(aspect_properties& other) noexcept;
+    aspect_properties& operator=(aspect_properties other);
 
 private:
     bool disable_complete_constructor_;
@@ -97,8 +97,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::quilt::cpp::settings::aspect_settings& lhs,
-    dogen::quilt::cpp::settings::aspect_settings& rhs) {
+    dogen::quilt::cpp::properties::aspect_properties& lhs,
+    dogen::quilt::cpp::properties::aspect_properties& rhs) {
     lhs.swap(rhs);
 }
 

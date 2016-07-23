@@ -32,6 +32,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/formatters/serialization/file_properties_ser.hpp"
+#include "dogen/quilt.cpp/serialization/properties/aspect_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/helper_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/element_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/formatter_properties_ser.hpp"
@@ -46,6 +47,7 @@ void save(Archive& ar,
     ar << make_nvp("file_properties", v.file_properties_);
     ar << make_nvp("formatter_properties", v.formatter_properties_);
     ar << make_nvp("helper_properties", v.helper_properties_);
+    ar << make_nvp("aspect_properties", v.aspect_properties_);
 }
 
 template<typename Archive>
@@ -55,6 +57,7 @@ void load(Archive& ar,
     ar >> make_nvp("file_properties", v.file_properties_);
     ar >> make_nvp("formatter_properties", v.formatter_properties_);
     ar >> make_nvp("helper_properties", v.helper_properties_);
+    ar >> make_nvp("aspect_properties", v.aspect_properties_);
 }
 
 } }

@@ -31,6 +31,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include "dogen/formatters/types/file_properties.hpp"
+#include "dogen/quilt.cpp/types/properties/aspect_properties.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/properties/formatter_properties.hpp"
 #include "dogen/quilt.cpp/serialization/properties/element_properties_fwd_ser.hpp"
@@ -56,7 +57,8 @@ public:
     element_properties(
         const boost::optional<dogen::formatters::file_properties>& file_properties,
         const std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties>& formatter_properties,
-        const std::list<dogen::quilt::cpp::properties::helper_properties>& helper_properties);
+        const std::list<dogen::quilt::cpp::properties::helper_properties>& helper_properties,
+        const dogen::quilt::cpp::properties::aspect_properties& aspect_properties);
 
 private:
     template<typename Archive>
@@ -81,6 +83,11 @@ public:
     void helper_properties(const std::list<dogen::quilt::cpp::properties::helper_properties>& v);
     void helper_properties(const std::list<dogen::quilt::cpp::properties::helper_properties>&& v);
 
+    const dogen::quilt::cpp::properties::aspect_properties& aspect_properties() const;
+    dogen::quilt::cpp::properties::aspect_properties& aspect_properties();
+    void aspect_properties(const dogen::quilt::cpp::properties::aspect_properties& v);
+    void aspect_properties(const dogen::quilt::cpp::properties::aspect_properties&& v);
+
 public:
     bool operator==(const element_properties& rhs) const;
     bool operator!=(const element_properties& rhs) const {
@@ -95,6 +102,7 @@ private:
     boost::optional<dogen::formatters::file_properties> file_properties_;
     std::unordered_map<std::string, dogen::quilt::cpp::properties::formatter_properties> formatter_properties_;
     std::list<dogen::quilt::cpp::properties::helper_properties> helper_properties_;
+    dogen::quilt::cpp::properties::aspect_properties aspect_properties_;
 };
 
 } } } }

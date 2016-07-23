@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/settings/aspect_settings_hash.hpp"
+#include "dogen/quilt.cpp/hash/properties/aspect_properties_hash.hpp"
 
 namespace {
 
@@ -33,9 +33,9 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace settings {
+namespace properties {
 
-std::size_t aspect_settings_hasher::hash(const aspect_settings& v) {
+std::size_t aspect_properties_hasher::hash(const aspect_properties& v) {
     std::size_t seed(0);
 
     combine(seed, v.disable_complete_constructor());

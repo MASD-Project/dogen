@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/formatters/io/file_properties_io.hpp"
+#include "dogen/quilt.cpp/io/properties/aspect_properties_io.hpp"
 #include "dogen/quilt.cpp/io/properties/helper_properties_io.hpp"
 #include "dogen/quilt.cpp/io/properties/element_properties_io.hpp"
 #include "dogen/quilt.cpp/io/properties/formatter_properties_io.hpp"
@@ -89,7 +90,8 @@ std::ostream& operator<<(std::ostream& s, const element_properties& v) {
       << "\"__type__\": " << "\"dogen::quilt::cpp::properties::element_properties\"" << ", "
       << "\"file_properties\": " << v.file_properties() << ", "
       << "\"formatter_properties\": " << v.formatter_properties() << ", "
-      << "\"helper_properties\": " << v.helper_properties()
+      << "\"helper_properties\": " << v.helper_properties() << ", "
+      << "\"aspect_properties\": " << v.aspect_properties()
       << " }";
     return(s);
 }

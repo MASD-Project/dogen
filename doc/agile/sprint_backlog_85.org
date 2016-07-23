@@ -13,23 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-23 Sat 21:55]
+#+CAPTION: Clock summary at [2016-07-23 Sat 22:53]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *15:34* |       |      | 100.0 |
+| *Total time*                                                                | *16:31* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 15:34   |       |      | 100.0 |
-| Active                                                                      |         | 15:34 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:43 |   4.6 |
-| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  18.5 |
-| COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   4.0 |
-| COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   3.4 |
-| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |  12.4 |
-| COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   1.4 |
-| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   6.7 |
-| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  46.4 |
-| STARTED Implement types in terms of =yarn::object=                          |         |       | 0:24 |   2.6 |
+| Stories                                                                     | 16:31   |       |      | 100.0 |
+| Active                                                                      |         | 16:31 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:43 |   4.3 |
+| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  17.5 |
+| COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   3.7 |
+| COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   3.2 |
+| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |  11.7 |
+| COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   1.3 |
+| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   6.4 |
+| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  43.7 |
+| STARTED Add aspect properties infrastructure                                |         |       | 0:33 |   3.3 |
+| STARTED Implement types in terms of =yarn::object=                          |         |       | 0:48 |   4.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -233,7 +234,20 @@ Update formatters in test data to use new helpers.
   is not coming out for test data. We can clearly see in the logs that
   the helper has been setup correctly but no output comes out.
 
+*** STARTED Add aspect properties infrastructure                      :story:
+    CLOCK: [2016-07-23 Sat 22:20]--[2016-07-23 Sat 22:53] =>  0:33
+
+- we need to add missing aspect settings to existing settings classes,
+  with fields etc. We also need to mark types accordingly.
+- create aspect property classes to handle post processing of
+  settings. This only requires looking at direct descendants as per
+  [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_66.org#analyse-the-correct-way-of-implementing-the-formattables-workflow][prior analysis]] on sprint 66, with the exception of stream
+  manipulators.
+- add aspect properties to element properties.
+- add accessors to assistant.
+
 *** STARTED Implement types in terms of =yarn::object=                :story:
+    CLOCK: [2016-07-23 Sat 21:55]--[2016-07-23 Sat 22:19] =>  0:24
     CLOCK: [2016-07-23 Sat 21:47]--[2016-07-23 Sat 21:54] =>  0:07
     CLOCK: [2016-07-23 Sat 15:10]--[2016-07-23 Sat 15:27] =>  0:17
 
@@ -244,12 +258,28 @@ Time to have a go at moving the type's class templates to yarn types.
   the existing code generation. Create a set of classes
   =new_class_formatter= for the new code.
 
+*** Consider renaming settings to annotations                         :story:
+
+Whilst its pretty clear now that settings are a strongly-typed
+representation of the meta-data and properties are the post-processed
+version, the names "settings" and "properties" still sound far too
+similar. It would be nicer to have something more meta-data-like for
+settings such as annotations. Read up the past discussions on
+naming. One possible reason not to use annotations was because we used
+it already in the formatters model. Perhaps that could be renamed to
+something else, freeing up the name?
+
 *** Run tests that are passing on windows                             :story:
 
 At present we have a release build on windows but we are not running
 any tests. This is because some of the tests are failing at the
 moment. We should run all test suites that are green to ensure we
 don't regress without noticing.
+
+*** Add "namespaces" to name                                          :story:
+
+Name should have a flat class with all namespaces in yarn, instead of
+generating it on every formatter.
 
 *** =always_in_heap= is not a very good name                          :story:
 

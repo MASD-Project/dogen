@@ -27,14 +27,14 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/quilt.cpp/serialization/settings/aspect_settings_ser.hpp"
+#include "dogen/quilt.cpp/serialization/properties/aspect_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::quilt::cpp::settings::aspect_settings& v,
+    const dogen::quilt::cpp::properties::aspect_properties& v,
     const unsigned int /*version*/) {
     ar << make_nvp("disable_complete_constructor", v.disable_complete_constructor_);
     ar << make_nvp("disable_xml_serialization", v.disable_xml_serialization_);
@@ -45,7 +45,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::quilt::cpp::settings::aspect_settings& v,
+    dogen::quilt::cpp::properties::aspect_properties& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("disable_complete_constructor", v.disable_complete_constructor_);
     ar >> make_nvp("disable_xml_serialization", v.disable_xml_serialization_);
@@ -59,16 +59,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::quilt::cpp::properties::aspect_properties& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::quilt::cpp::properties::aspect_properties& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::quilt::cpp::properties::aspect_properties& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::quilt::cpp::properties::aspect_properties& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::quilt::cpp::properties::aspect_properties& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::quilt::cpp::properties::aspect_properties& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::quilt::cpp::properties::aspect_properties& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::quilt::cpp::properties::aspect_properties& v, unsigned int version);
 
 } }

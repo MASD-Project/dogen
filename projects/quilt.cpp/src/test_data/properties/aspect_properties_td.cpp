@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/test_data/settings/aspect_settings_td.hpp"
+#include "dogen/quilt.cpp/test_data/properties/aspect_properties_td.hpp"
 
 namespace {
 
@@ -31,11 +31,11 @@ bool create_bool(const unsigned int position) {
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace settings {
+namespace properties {
 
-aspect_settings_generator::aspect_settings_generator() : position_(0) { }
+aspect_properties_generator::aspect_properties_generator() : position_(0) { }
 
-void aspect_settings_generator::
+void aspect_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.disable_complete_constructor(create_bool(position + 0));
     v.disable_xml_serialization(create_bool(position + 1));
@@ -44,22 +44,22 @@ populate(const unsigned int position, result_type& v) {
     v.requires_stream_manipulators(create_bool(position + 4));
 }
 
-aspect_settings_generator::result_type
-aspect_settings_generator::create(const unsigned int position) {
-    aspect_settings r;
-    aspect_settings_generator::populate(position, r);
+aspect_properties_generator::result_type
+aspect_properties_generator::create(const unsigned int position) {
+    aspect_properties r;
+    aspect_properties_generator::populate(position, r);
     return r;
 }
 
-aspect_settings_generator::result_type*
-aspect_settings_generator::create_ptr(const unsigned int position) {
-    aspect_settings* p = new aspect_settings();
-    aspect_settings_generator::populate(position, *p);
+aspect_properties_generator::result_type*
+aspect_properties_generator::create_ptr(const unsigned int position) {
+    aspect_properties* p = new aspect_properties();
+    aspect_properties_generator::populate(position, *p);
     return p;
 }
 
-aspect_settings_generator::result_type
-aspect_settings_generator::operator()() {
+aspect_properties_generator::result_type
+aspect_properties_generator::operator()() {
     return create(position_++);
 }
 

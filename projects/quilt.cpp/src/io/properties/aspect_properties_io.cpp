@@ -20,14 +20,14 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen/quilt.cpp/io/settings/aspect_settings_io.hpp"
+#include "dogen/quilt.cpp/io/properties/aspect_properties_io.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace settings {
+namespace properties {
 
-std::ostream& operator<<(std::ostream& s, const aspect_settings& v) {
+std::ostream& operator<<(std::ostream& s, const aspect_properties& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -35,7 +35,7 @@ std::ostream& operator<<(std::ostream& s, const aspect_settings& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::settings::aspect_settings\"" << ", "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::properties::aspect_properties\"" << ", "
       << "\"disable_complete_constructor\": " << v.disable_complete_constructor() << ", "
       << "\"disable_xml_serialization\": " << v.disable_xml_serialization() << ", "
       << "\"requires_manual_default_constructor\": " << v.requires_manual_default_constructor() << ", "

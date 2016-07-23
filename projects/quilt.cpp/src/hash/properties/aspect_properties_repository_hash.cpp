@@ -18,7 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/settings/aspect_settings_hash.hpp"
+#include "dogen/quilt.cpp/hash/properties/aspect_properties_hash.hpp"
+#include "dogen/quilt.cpp/hash/properties/aspect_properties_repository_hash.hpp"
 
 namespace {
 
@@ -28,22 +29,34 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_std_list_dogen_quilt_cpp_properties_aspect_properties(const std::list<dogen::quilt::cpp::properties::aspect_properties>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_unordered_map_std_string_std_list_dogen_quilt_cpp_properties_aspect_properties(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::aspect_properties> >& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, hash_std_list_dogen_quilt_cpp_properties_aspect_properties(i.second));
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace settings {
+namespace properties {
 
-std::size_t aspect_settings_hasher::hash(const aspect_settings& v) {
+std::size_t aspect_properties_repository_hasher::hash(const aspect_properties_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, v.disable_complete_constructor());
-    combine(seed, v.disable_xml_serialization());
-    combine(seed, v.requires_manual_default_constructor());
-    combine(seed, v.requires_manual_move_constructor());
-    combine(seed, v.requires_stream_manipulators());
-
+    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_quilt_cpp_properties_aspect_properties(v.by_id()));
     return seed;
 }
 
