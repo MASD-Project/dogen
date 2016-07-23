@@ -13,28 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-23 Sat 22:53]
+#+CAPTION: Clock summary at [2016-07-23 Sat 23:24]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *16:31* |       |      | 100.0 |
+| *Total time*                                                                | *16:55* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 16:31   |       |      | 100.0 |
-| Active                                                                      |         | 16:31 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:43 |   4.3 |
-| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  17.5 |
-| COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   3.7 |
+| Stories                                                                     | 16:55   |       |      | 100.0 |
+| Active                                                                      |         | 16:55 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:56 |   5.5 |
+| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  17.0 |
+| COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   3.6 |
 | COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   3.2 |
-| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |  11.7 |
+| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |  11.4 |
 | COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   1.3 |
-| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   6.4 |
-| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  43.7 |
-| STARTED Add aspect properties infrastructure                                |         |       | 0:33 |   3.3 |
-| STARTED Implement types in terms of =yarn::object=                          |         |       | 0:48 |   4.8 |
+| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   6.2 |
+| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  42.7 |
+| STARTED Add aspect properties infrastructure                                |         |       | 0:44 |   4.3 |
+| STARTED Implement types in terms of =yarn::object=                          |         |       | 0:48 |   4.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-07-23 Sat 23:11]--[2016-07-23 Sat 23:24] =>  0:13
     CLOCK: [2016-07-23 Sat 09:17]--[2016-07-23 Sat 09:21] =>  0:04
     CLOCK: [2016-07-20 Wed 17:38]--[2016-07-20 Wed 17:55] =>  0:17
     CLOCK: [2016-07-19 Tue 20:30]--[2016-07-19 Tue 20:52] =>  0:22
@@ -234,7 +235,15 @@ Update formatters in test data to use new helpers.
   is not coming out for test data. We can clearly see in the logs that
   the helper has been setup correctly but no output comes out.
 
+*** COMPLETED Create a settings class for the "requires" settings     :story:
+    CLOSED: [2016-07-23 Sat 23:14]
+
+*Rationale*: done as part of aspect properties work.
+
+We need to populate these in a settings workflow of some kind.
+
 *** STARTED Add aspect properties infrastructure                      :story:
+    CLOCK: [2016-07-23 Sat 22:59]--[2016-07-23 Sat 23:10] =>  0:11
     CLOCK: [2016-07-23 Sat 22:20]--[2016-07-23 Sat 22:53] =>  0:33
 
 - we need to add missing aspect settings to existing settings classes,
@@ -268,6 +277,19 @@ settings such as annotations. Read up the past discussions on
 naming. One possible reason not to use annotations was because we used
 it already in the formatters model. Perhaps that could be renamed to
 something else, freeing up the name?
+
+*** Consider creating a single top-level settings class               :story:
+
+Since settings are nothing but meta-data, we should be able to read
+them all in one go. Further: we should be able to compute up front the
+inputs (root object, all other objects; sliced from the model) and the
+size of the outputs (vector of settings). It would be a totally
+parallelisable task. This also means we only need a single repository
+by id for all settings.
+
+This repository is then the input for the property workflow. Because
+properties follow a dependency graph, we would still need to compute
+them in some kind of order.
 
 *** Run tests that are passing on windows                             :story:
 
@@ -418,10 +440,6 @@ Once all the pieces are in place, the assistant can then use the
 element properties to find out which helpers are required for each
 type; call those helpers and populate the file with the generate
 code. We can remove all previous helper support.
-
-*** Create a settings class for the "requires" settings               :story:
-
-We need to populate these in a settings workflow of some kind.
 
 *** Implement formattables in terms of yarn types                     :epic:
 
