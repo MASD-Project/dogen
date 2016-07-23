@@ -92,17 +92,4 @@ create_<#= ident #>(const unsigned int position) {
 <#+
     }
 }
-
-void domain_type_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t,
-    const bool as_pointer) {
-#>
-
-<#= t.complete_name() #><#= (as_pointer ? "*" : "") #>
-create_<#= t.complete_identifiable_name() #><#= (as_pointer ? "_ptr" : "") #>(const unsigned int position) {
-    return <#= t.complete_name() #>_generator::create<#= (as_pointer ? "_ptr" : "") #>(position);
-}
-<#+
-}
 #>

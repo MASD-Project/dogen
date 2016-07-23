@@ -88,16 +88,4 @@ a.stream() << "    s << \"/a/path/number_\" << position;" << std::endl;
 a.stream() << "    return " << qn << "(s.str());" << std::endl;
 a.stream() << "}" << std::endl;
 }
-
-void path_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-a.stream() << std::endl;
-a.stream() << t.complete_name() << std::endl;
-a.stream() << "create_" << t.complete_identifiable_name() << "(const unsigned int position) {" << std::endl;
-a.stream() << "    std::ostringstream s;" << std::endl;
-a.stream() << "    s << \"/a/path/number_\" << position;" << std::endl;
-a.stream() << "    return " << t.name() << "(s.str());" << std::endl;
-a.stream() << "}" << std::endl;
-}
 } } } } }

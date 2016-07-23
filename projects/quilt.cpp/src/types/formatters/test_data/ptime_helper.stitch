@@ -74,22 +74,4 @@ create_<#= ident #>(const unsigned int position) {
 }
 <#+
 }
-
-void ptime_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-#>
-
-<#= t.complete_name() #>
-create_<#= t.complete_identifiable_name() #>(const unsigned int position) {
-    unsigned int day((position + 1) % 27);
-    using boost::gregorian::date;
-    using boost::posix_time::ptime;
-    using boost::posix_time::time_duration;
-    date d(2002, 2, day);
-    ptime r(d, time_duration(1,2,3));
-    return r;
-}
-<#+
-}
 #>

@@ -91,20 +91,4 @@ a.stream() << "        create_" << second.name_tree_identifiable() << "(position
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
 }
-
-void pair_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-
-    const auto first(t.children().front());
-    const auto second(t.children().back());
-a.stream() << std::endl;
-a.stream() << t.complete_name() << std::endl;
-a.stream() << "create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
-a.stream() << "    " << t.complete_name() << " r(" << std::endl;
-a.stream() << "        create_" << first.complete_identifiable_name() << "(position)," << std::endl;
-a.stream() << "        create_" << second.complete_identifiable_name() << "(position));" << std::endl;
-a.stream() << "    return r;" << std::endl;
-a.stream() << "}" << std::endl;
-}
 } } } } }

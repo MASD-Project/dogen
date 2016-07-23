@@ -90,19 +90,4 @@ a.stream() << "    }" << std::endl;
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
 }
-
-void sequence_container_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-
-    const auto containee(t.children().front());
-a.stream() << std::endl;
-a.stream() << t.complete_name() << " create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
-a.stream() << "    " << t.complete_name() << " r;" << std::endl;
-a.stream() << "    for (unsigned int i(0); i < 4; ++i) {" << std::endl;
-a.stream() << "        r.push_back(create_" << containee.complete_identifiable_name() << "(position + i));" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << "    return r;" << std::endl;
-a.stream() << "}" << std::endl;
-}
 } } } } }

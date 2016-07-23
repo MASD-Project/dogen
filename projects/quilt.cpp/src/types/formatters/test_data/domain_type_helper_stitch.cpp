@@ -102,15 +102,4 @@ a.stream() << "    return " << qn << "_generator::create" << (is_pointer ? "_ptr
 a.stream() << "}" << std::endl;
     }
 }
-
-void domain_type_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t,
-    const bool as_pointer) {
-a.stream() << std::endl;
-a.stream() << t.complete_name() << (as_pointer ? "*" : "") << std::endl;
-a.stream() << "create_" << t.complete_identifiable_name() << (as_pointer ? "_ptr" : "") << "(const unsigned int position) {" << std::endl;
-a.stream() << "    return " << t.complete_name() << "_generator::create" << (as_pointer ? "_ptr" : "") << "(position);" << std::endl;
-a.stream() << "}" << std::endl;
-}
 } } } } }

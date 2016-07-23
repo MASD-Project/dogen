@@ -70,18 +70,4 @@ create_<#= ident #>(const unsigned int position) {
 }
 <#+
 }
-
-void path_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-#>
-
-<#= t.complete_name() #>
-create_<#= t.complete_identifiable_name() #>(const unsigned int position) {
-    std::ostringstream s;
-    s << "/a/path/number_" << position;
-    return <#= t.name() #>(s.str());
-}
-<#+
-}
 #>

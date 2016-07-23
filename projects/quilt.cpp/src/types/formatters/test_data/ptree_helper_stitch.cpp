@@ -92,19 +92,4 @@ a.stream() << "    r.push_back(ptree::value_type(\"key_1\", c));" << std::endl;
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
 }
-
-void ptree_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-a.stream() << std::endl;
-a.stream() << t.complete_name() << std::endl;
-a.stream() << "create_" << t.complete_identifiable_name() << "(const unsigned int position) {" << std::endl;
-a.stream() << "    using boost::property_tree::ptree;" << std::endl;
-a.stream() << "    ptree c;" << std::endl;
-a.stream() << "    c.put(\"key_2\", position);" << std::endl;
-a.stream() << "    ptree r;" << std::endl;
-a.stream() << "    r.push_back(ptree::value_type(\"key_1\", c));" << std::endl;
-a.stream() << "    return r;" << std::endl;
-a.stream() << "}" << std::endl;
-}
 } } } } }

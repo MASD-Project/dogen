@@ -72,19 +72,4 @@ create_<#= ident #>(const unsigned int position) {
 }
 <#+
 }
-
-void time_duration_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-#>
-
-<#= t.complete_name() #>
-create_<#= t.complete_identifiable_name() #>(const unsigned int position) {
-    unsigned int hour(position % 55);
-    using boost::posix_time::time_duration;
-    time_duration r(hour, 2, 3);
-    return r;
-}
-<#+
-}
 #>

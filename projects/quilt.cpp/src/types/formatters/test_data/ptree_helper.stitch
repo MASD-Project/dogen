@@ -74,21 +74,4 @@ create_<#= ident #>(const unsigned int position) {
 }
 <#+
 }
-
-void ptree_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-#>
-
-<#= t.complete_name() #>
-create_<#= t.complete_identifiable_name() #>(const unsigned int position) {
-    using boost::property_tree::ptree;
-    ptree c;
-    c.put("key_2", position);
-    ptree r;
-    r.push_back(ptree::value_type("key_1", c));
-    return r;
-}
-<#+
-}
 #>

@@ -90,17 +90,4 @@ a.stream() << "    time_duration r(hour, 2, 3);" << std::endl;
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
 }
-
-void time_duration_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-a.stream() << std::endl;
-a.stream() << t.complete_name() << std::endl;
-a.stream() << "create_" << t.complete_identifiable_name() << "(const unsigned int position) {" << std::endl;
-a.stream() << "    unsigned int hour(position % 55);" << std::endl;
-a.stream() << "    using boost::posix_time::time_duration;" << std::endl;
-a.stream() << "    time_duration r(hour, 2, 3);" << std::endl;
-a.stream() << "    return r;" << std::endl;
-a.stream() << "}" << std::endl;
-}
 } } } } }

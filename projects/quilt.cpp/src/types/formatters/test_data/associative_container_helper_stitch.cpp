@@ -97,25 +97,4 @@ a.stream() << "    }" << std::endl;
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
 }
-
-void associative_container_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-a.stream() << std::endl;
-a.stream() << t.complete_name() << " create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
-a.stream() << "    " << t.complete_name() << " r;" << std::endl;
-a.stream() << "    for (unsigned int i(0); i < 4; ++i) {" << std::endl;
-    if (t.children().size() == 1) {
-        const auto containee(t.children().front());
-a.stream() << "        r.insert(create_" << containee.complete_identifiable_name() << "(position + i));" << std::endl;
-    } else if (t.children().size() == 2) {
-        const auto key(t.children().front());
-        const auto value(t.children().back());
-
-a.stream() << "        r.insert(std::make_pair(create_" << key.complete_identifiable_name() << "(position + i), create_" << value.complete_identifiable_name() << "(position + i)));" << std::endl;
-    }
-a.stream() << "    }" << std::endl;
-a.stream() << "    return r;" << std::endl;
-a.stream() << "}" << std::endl;
-}
 } } } } }

@@ -101,28 +101,4 @@ a.stream() << std::endl;
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
 }
-
-void variant_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-a.stream() << std::endl;
-a.stream() << t.complete_name() << std::endl;
-a.stream() << "create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
-a.stream() << "    " << t.complete_name() << " r;" << std::endl;
-a.stream() << std::endl;
-    unsigned int i(0);
-    for (const auto& c : t.children()) {
-        if (i == 0)
-a.stream() << "    if (position == 0 || ((position % " << t.children().size() << ") == 0))" << std::endl;
-        else if (i == 1)
-a.stream() << "    else if (position == 1 || ((position % " << t.children().size() + 1 << ") == 0))" << std::endl;
-        else
-a.stream() << "    else if ((position % " << i << ") == 0)" << std::endl;
-a.stream() << "        r = create_" << c.complete_identifiable_name() << "(position);" << std::endl;
-        ++i;
-    }
-a.stream() << std::endl;
-a.stream() << "    return r;" << std::endl;
-a.stream() << "}" << std::endl;
-}
 } } } } }

@@ -91,38 +91,4 @@ create_<#= ident #>(unsigned int position) {
 }
 <#+
 }
-
-void variant_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-#>
-
-<#= t.complete_name() #>
-create_<#= t.complete_identifiable_name() #>(unsigned int position) {
-    <#= t.complete_name() #> r;
-
-<#+
-    unsigned int i(0);
-    for (const auto& c : t.children()) {
-        if (i == 0)
-#>
-    if (position == 0 || ((position % <#= t.children().size() #>) == 0))
-<#+
-        else if (i == 1)
-#>
-    else if (position == 1 || ((position % <#= t.children().size() + 1 #>) == 0))
-<#+
-        else
-#>
-    else if ((position % <#= i #>) == 0)
-        r = create_<#= c.complete_identifiable_name() #>(position);
-<#+
-        ++i;
-    }
-#>
-
-    return r;
-}
-<#+
-}
 #>

@@ -26,8 +26,6 @@
 #endif
 
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/properties/nested_type_info.hpp"
-#include "dogen/quilt.cpp/types/formatters/nested_type_formatting_assistant.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -49,10 +47,6 @@ public:
     void format(assistant& a,
         const properties::helper_properties& hp) const override;
 };
-
-void smart_pointer_helper_stitch(
-    formatters::nested_type_formatting_assistant& fa,
-    const properties::nested_type_info& t);
 
 } } } } }
 

@@ -76,22 +76,4 @@ format(assistant& a, const properties::helper_properties& hp) const {
 }
 <#+
 }
-
-void int_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-#>
-
-<#= t.name() #> create_<#= t.identifiable_name() #>(const unsigned int position) {
-<#+
-    if (t.name() == "int")
-#>
-    return position;
-<#+
-    else
-#>
-    return static_cast<<#= t.name() #>>(position);
-}
-<#+
-}
 #>

@@ -85,33 +85,4 @@ format(assistant& a, const properties::helper_properties& hp) const {
 }
 <#+
 }
-
-void associative_container_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-#>
-
-<#= t.complete_name() #> create_<#= t.complete_identifiable_name() #>(unsigned int position) {
-    <#= t.complete_name() #> r;
-    for (unsigned int i(0); i < 4; ++i) {
-<#+
-    if (t.children().size() == 1) {
-        const auto containee(t.children().front());
-#>
-        r.insert(create_<#= containee.complete_identifiable_name() #>(position + i));
-<#+
-    } else if (t.children().size() == 2) {
-        const auto key(t.children().front());
-        const auto value(t.children().back());
-
-#>
-        r.insert(std::make_pair(create_<#= key.complete_identifiable_name() #>(position + i), create_<#= value.complete_identifiable_name() #>(position + i)));
-<#+
-    }
-#>
-    }
-    return r;
-}
-<#+
-}
 #>

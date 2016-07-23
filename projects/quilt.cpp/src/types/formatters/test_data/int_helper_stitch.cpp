@@ -90,16 +90,4 @@ a.stream() << "    return position;" << std::endl;
 a.stream() << "    return static_cast<" << qn << ">(position);" << std::endl;
 a.stream() << "}" << std::endl;
 }
-
-void int_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-a.stream() << std::endl;
-a.stream() << t.name() << " create_" << t.identifiable_name() << "(const unsigned int position) {" << std::endl;
-    if (t.name() == "int")
-a.stream() << "    return position;" << std::endl;
-    else
-a.stream() << "    return static_cast<" << t.name() << ">(position);" << std::endl;
-a.stream() << "}" << std::endl;
-}
 } } } } }

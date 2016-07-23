@@ -86,15 +86,4 @@ a.stream() << "    s << \"a_string_\" << position;" << std::endl;
 a.stream() << "    return s.str();" << std::endl;
 a.stream() << "}" << std::endl;
 }
-
-void string_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& /*t*/) {
-a.stream() << std::endl;
-a.stream() << "std::string create_std_string(const unsigned int position) {" << std::endl;
-a.stream() << "    std::ostringstream s;" << std::endl;
-a.stream() << "    s << \"a_string_\" << position;" << std::endl;
-a.stream() << "    return s.str();" << std::endl;
-a.stream() << "}" << std::endl;
-}
 } } } } }

@@ -71,20 +71,4 @@ create_<#= ident #>(unsigned int position) {
 }
 <#+
 }
-
-void optional_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-
-    const auto containee(t.children().front());
-#>
-
-<#= t.complete_name() #>
-create_<#= t.complete_identifiable_name() #>(unsigned int position) {
-    <#= t.complete_name() #> r(
-        create_<#= containee.complete_identifiable_name() #>(position));
-    return r;
-}
-<#+
-}
 #>

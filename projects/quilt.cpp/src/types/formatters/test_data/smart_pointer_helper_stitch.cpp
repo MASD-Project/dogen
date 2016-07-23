@@ -90,17 +90,4 @@ a.stream() << "        create_" << containee.name_tree_identifiable() << "(posit
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
 }
-
-void smart_pointer_helper_stitch(
-    nested_type_formatting_assistant& a,
-    const properties::nested_type_info& t) {
-    const auto containee(t.children().front());
-a.stream() << std::endl;
-a.stream() << t.complete_name() << std::endl;
-a.stream() << "create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
-a.stream() << "    " << t.complete_name() << " r(" << std::endl;
-a.stream() << "        create_" << containee.complete_identifiable_name() << "_ptr(position));" << std::endl;
-a.stream() << "    return r;" << std::endl;
-a.stream() << "}" << std::endl;
-}
 } } } } }
