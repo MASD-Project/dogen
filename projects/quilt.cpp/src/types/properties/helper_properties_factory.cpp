@@ -233,8 +233,8 @@ make(const bool in_inheritance_relationship,
     std::unordered_set<std::string> done;
     for (const auto a : attributes) {
         const auto& nt(a.parsed_type());
-        make(in_inheritance_relationship,
-            false/*inherit_opaqueness_from_parent*/, nt, done, r);
+        const bool opaqueness_from_parent(false);
+        make(in_inheritance_relationship, opaqueness_from_parent, nt, done, r);
     }
 
     if (r.empty())
