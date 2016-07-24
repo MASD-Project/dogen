@@ -35920,7 +35920,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#helper_settings#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;settings::helper_settings&gt;#</dia:string>
+            <dia:string>#settings::helper_settings#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

@@ -38,16 +38,6 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_quilt_cpp_settings_helper_settings(const boost::optional<dogen::quilt::cpp::settings::helper_settings>& v) {
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
-}
-
 inline std::size_t hash_boost_optional_dogen_quilt_cpp_settings_streaming_settings(const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& v) {
     std::size_t seed(0);
 
@@ -73,7 +63,7 @@ std::size_t helper_descriptor_hasher::hash(const helper_descriptor& v) {
     combine(seed, v.name_qualified());
     combine(seed, v.name_tree_qualified());
     combine(seed, v.name_tree_identifiable());
-    combine(seed, hash_boost_optional_dogen_quilt_cpp_settings_helper_settings(v.helper_settings()));
+    combine(seed, v.helper_settings());
     combine(seed, hash_boost_optional_dogen_quilt_cpp_settings_streaming_settings(v.streaming_settings()));
     combine(seed, v.is_primitive());
     combine(seed, v.requires_hashing_helper());

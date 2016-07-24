@@ -39,6 +39,7 @@ const std::string empty_identifiable(
     "Identifiable was not generated correctly and is empty.");
 const std::string descriptor_expected(
     "Child name tree has no associated helper descriptor");
+const std::string missing_helper_settings("Helper settings not found for: ");
 
 }
 
@@ -84,12 +85,12 @@ requires_hashing_helper(const std::string& family) const {
     return j != i->second.end();
 }
 
-boost::optional<settings::helper_settings> helper_properties_factory::
+settings::helper_settings helper_properties_factory::
 helper_settings_for_id(const std::string& id) const {
     const auto i(helper_settings_.by_id().find(id));
     if (i == helper_settings_.by_id().end()) {
-        BOOST_LOG_SEV(lg, debug) << "No helper settings for type: " << id;
-        return boost::optional<settings::helper_settings>();
+        BOOST_LOG_SEV(lg, debug) << missing_helper_settings << id;
+        BOOST_THROW_EXCEPTION(building_error(missing_helper_settings + id));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Found helper settings for type: " << id
@@ -114,24 +115,10 @@ streaming_settings_for_id(const std::string& id) const {
 boost::optional<helper_descriptor>
 helper_properties_factory::make(const bool in_inheritance_relationship,
     const bool inherit_opaqueness_from_parent, const yarn::name_tree& nt,
-    const bool is_top_level, std::unordered_set<std::string>& done,
+    std::unordered_set<std::string>& done,
     std::list<helper_properties>& properties) const {
     const auto id(nt.current().id());
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
-
-    /*
-     * Top-level name trees should only be processed if they have a
-     * type that requires a helper. If not, we can safely ignore the
-     * whole attribute.
-     */
-    const auto hs(helper_settings_for_id(id));
-    const bool requires_helper(hs);
-
-    if (is_top_level && !requires_helper) {
-        BOOST_LOG_SEV(lg, debug) << "Helper not required for type: "
-                                 << id << ". Ignoring attribute.";
-        return boost::optional<helper_descriptor>();
-    }
 
     helper_descriptor r;
     properties::name_builder b;
@@ -148,18 +135,10 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
         BOOST_LOG_SEV(lg, debug) << "Adding streaming settings for: " << id;
     }
 
-    /*
-     * Child name trees may not have helper settings (as they may not
-     * need helpers). We still need descriptors for them though, even
-     * with blank settings. This is so we can build the direct
-     * descendants.
-     */
-    if (requires_helper) {
-        r.helper_settings(hs);
-        BOOST_LOG_SEV(lg, debug) << "Adding helper settings for: " << id;
-
-        r.requires_hashing_helper(requires_hashing_helper(hs->family()));
-    }
+    const auto hs(helper_settings_for_id(id));
+    r.helper_settings(hs);
+    r.requires_hashing_helper(requires_hashing_helper(hs.family()));
+    BOOST_LOG_SEV(lg, debug) << "Adding helper settings for: " << id;
 
     r.name_identifiable(nt.current().identifiable());
     r.name_qualified(get_qualified(nt.current()));
@@ -167,7 +146,12 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
     r.name_tree_qualified(get_qualified(nt));
     r.is_circular_dependency(nt.is_circular_dependency());
     r.is_pointer(inherit_opaqueness_from_parent);
-    if (inherit_opaqueness_from_parent)
+
+    /*
+     * Ensure we have different helpers for pointer and non-pointer
+     * support.
+     */
+    if (r.is_pointer())
         r.name_tree_identifiable().append("_ptr");
 
     helper_properties hp;
@@ -190,8 +174,7 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
          * children). If we have a child, we must have a descriptor.
          */
         const auto aco(nt.are_children_opaque());
-        const auto is_top_level(false);
-        const auto dd(make(iir, aco, c, is_top_level, done, properties));
+        const auto dd(make(iir, aco, c, done, properties));
         if (!dd) {
             BOOST_LOG_SEV(lg, error) << descriptor_expected;
             BOOST_THROW_EXCEPTION(building_error(descriptor_expected));
@@ -207,39 +190,32 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
     BOOST_LOG_SEV(lg, debug) << "Helper properties: " << hp;
 
     /*
-     * Only add the helper property if we requre it. This is only
-     * applicable to child name trees as we are recursively called,
-     * since we've already check for this at entry.
+     * Ensure we have not yet created a helper for this name
+     * tree. Note that we must still do the processing above in
+     * order to ensure the direct descendants are computed, even
+     * though the helper itself may not be required. As an
+     * example, take the case of a map of string to string. We
+     * need the helper for the map to have two direct descendants
+     * (one per string), but we do not want to generate two helper
+     * methods for the strings.
+     *
+     * Note also we are using the return type's identifiable
+     * rather than the input name tree's identifiable. This is
+     * because we may have augmented it (e.g. the is pointer use
+     * case).
      */
-    if (requires_helper) {
-        /*
-         * Ensure we have not yet created a helper for this name
-         * tree. Note that we must still do the processing above in
-         * order to ensure the direct descendants are computed, even
-         * though the helper itself may not be required. As an
-         * example, take the case of a map of string to string. We
-         * need the helper for the map to have two direct descendants
-         * (one per string), but we do not want to generate two helper
-         * methods for the strings.
-         *
-         * Note also we are using the return type's identifiable
-         * rather than the input name tree's identifiable. This is
-         * because we may have augmented it (e.g. the is pointer use
-         * case).
-         */
-        const auto ident(r.name_tree_identifiable());
-        if (ident.empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_identifiable;
-            BOOST_THROW_EXCEPTION(building_error(empty_identifiable));
-        }
+    const auto ident(r.name_tree_identifiable());
+    if (ident.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_identifiable;
+        BOOST_THROW_EXCEPTION(building_error(empty_identifiable));
+    }
 
-        if (done.find(ident) == done.end()) {
-            properties.push_back(hp);
-            done.insert(ident);
-        } else {
-            BOOST_LOG_SEV(lg, debug) << "Name tree already processed: "
-                                     << ident;
-        }
+    if (done.find(ident) == done.end()) {
+        properties.push_back(hp);
+        done.insert(ident);
+    } else {
+        BOOST_LOG_SEV(lg, debug) << "Name tree already processed: "
+                                 << ident;
     }
     return r;
 }
@@ -256,9 +232,9 @@ make(const bool in_inheritance_relationship,
     std::list<helper_properties> r;
     std::unordered_set<std::string> done;
     for (const auto a : attributes) {
+        const auto& nt(a.parsed_type());
         make(in_inheritance_relationship,
-            false/*inherit_opaqueness_from_parent*/,
-            a.parsed_type(), false/*is_top_level*/, done, r);
+            false/*inherit_opaqueness_from_parent*/, nt, done, r);
     }
 
     if (r.empty())

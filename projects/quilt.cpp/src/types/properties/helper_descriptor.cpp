@@ -50,7 +50,7 @@ helper_descriptor::helper_descriptor(
     const std::string& name_qualified,
     const std::string& name_tree_qualified,
     const std::string& name_tree_identifiable,
-    const boost::optional<dogen::quilt::cpp::settings::helper_settings>& helper_settings,
+    const dogen::quilt::cpp::settings::helper_settings& helper_settings,
     const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& streaming_settings,
     const bool is_primitive,
     const bool requires_hashing_helper,
@@ -183,19 +183,19 @@ void helper_descriptor::name_tree_identifiable(const std::string&& v) {
     name_tree_identifiable_ = std::move(v);
 }
 
-const boost::optional<dogen::quilt::cpp::settings::helper_settings>& helper_descriptor::helper_settings() const {
+const dogen::quilt::cpp::settings::helper_settings& helper_descriptor::helper_settings() const {
     return helper_settings_;
 }
 
-boost::optional<dogen::quilt::cpp::settings::helper_settings>& helper_descriptor::helper_settings() {
+dogen::quilt::cpp::settings::helper_settings& helper_descriptor::helper_settings() {
     return helper_settings_;
 }
 
-void helper_descriptor::helper_settings(const boost::optional<dogen::quilt::cpp::settings::helper_settings>& v) {
+void helper_descriptor::helper_settings(const dogen::quilt::cpp::settings::helper_settings& v) {
     helper_settings_ = v;
 }
 
-void helper_descriptor::helper_settings(const boost::optional<dogen::quilt::cpp::settings::helper_settings>&& v) {
+void helper_descriptor::helper_settings(const dogen::quilt::cpp::settings::helper_settings&& v) {
     helper_settings_ = std::move(v);
 }
 

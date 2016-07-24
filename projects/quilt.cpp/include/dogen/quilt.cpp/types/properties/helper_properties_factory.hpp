@@ -53,7 +53,7 @@ public:
 private:
     bool requires_hashing_helper(const std::string& family) const;
 
-    boost::optional<settings::helper_settings>
+    settings::helper_settings
     helper_settings_for_id(const std::string& id) const;
 
     bool is_primitive(const std::string& id) const;
@@ -65,8 +65,7 @@ private:
     boost::optional<helper_descriptor>
     make(const bool in_inheritance_relationship,
         const bool inherit_opaqueness_from_parent,
-        const yarn::name_tree& nt,
-        const bool is_top_level, std::unordered_set<std::string>& done,
+        const yarn::name_tree& nt, std::unordered_set<std::string>& done,
         std::list<helper_properties>& properties) const;
 
 public:

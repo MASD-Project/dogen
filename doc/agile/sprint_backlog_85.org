@@ -13,24 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-24 Sun 00:25]
+#+CAPTION: Clock summary at [2016-07-24 Sun 23:04]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *17:29* |       |      | 100.0 |
+| *Total time*                                                                | *17:51* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 17:29   |       |      | 100.0 |
-| Active                                                                      |         | 17:29 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:56 |   5.3 |
-| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  16.5 |
+| Stories                                                                     | 17:51   |       |      | 100.0 |
+| Active                                                                      |         | 17:51 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:56 |   5.2 |
+| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  16.2 |
 | COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   3.5 |
-| COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   3.1 |
-| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |  11.1 |
+| COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   3.0 |
+| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |  10.8 |
 | COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   1.2 |
-| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   6.0 |
-| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  41.3 |
-| STARTED Add aspect properties infrastructure                                |         |       | 1:18 |   7.4 |
-| STARTED Implement types in terms of =yarn::object=                          |         |       | 0:48 |   4.6 |
+| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   5.9 |
+| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  40.4 |
+| COMPLETED Remove optionality from helper settings                           |         |       | 0:22 |   2.1 |
+| STARTED Add aspect properties infrastructure                                |         |       | 1:18 |   7.3 |
+| STARTED Implement types in terms of =yarn::object=                          |         |       | 0:48 |   4.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -241,6 +242,15 @@ Update formatters in test data to use new helpers.
 *Rationale*: done as part of aspect properties work.
 
 We need to populate these in a settings workflow of some kind.
+
+*** COMPLETED Remove optionality from helper settings
+    CLOSED: [2016-07-24 Sun 23:03]
+    CLOCK: [2016-07-24 Sun 22:40]--[2016-07-24 Sun 23:02] =>  0:22
+
+When we implemented fallback / default settings, it ceased to make
+sense to have optionality on helper settings; we are now always
+providing some kind of helpers. Remove all of the optionality we left
+behind.
 
 *** STARTED Add aspect properties infrastructure                      :story:
     CLOCK: [2016-07-23 Sat 23:50]--[2016-07-24 Sun 00:24] =>  0:34

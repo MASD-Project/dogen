@@ -44,13 +44,6 @@ create_dogen_quilt_cpp_settings_helper_settings(const unsigned int position) {
     return dogen::quilt::cpp::settings::helper_settings_generator::create(position);
 }
 
-boost::optional<dogen::quilt::cpp::settings::helper_settings>
-create_boost_optional_dogen_quilt_cpp_settings_helper_settings(unsigned int position) {
-    boost::optional<dogen::quilt::cpp::settings::helper_settings> r(
-        create_dogen_quilt_cpp_settings_helper_settings(position));
-    return r;
-}
-
 dogen::quilt::cpp::settings::streaming_settings
 create_dogen_quilt_cpp_settings_streaming_settings(const unsigned int position) {
     return dogen::quilt::cpp::settings::streaming_settings_generator::create(position);
@@ -83,7 +76,7 @@ populate(const unsigned int position, result_type& v) {
     v.name_qualified(create_std_string(position + 2));
     v.name_tree_qualified(create_std_string(position + 3));
     v.name_tree_identifiable(create_std_string(position + 4));
-    v.helper_settings(create_boost_optional_dogen_quilt_cpp_settings_helper_settings(position + 5));
+    v.helper_settings(create_dogen_quilt_cpp_settings_helper_settings(position + 5));
     v.streaming_settings(create_boost_optional_dogen_quilt_cpp_settings_streaming_settings(position + 6));
     v.is_primitive(create_bool(position + 7));
     v.requires_hashing_helper(create_bool(position + 8));

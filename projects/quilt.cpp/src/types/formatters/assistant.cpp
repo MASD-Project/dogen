@@ -67,6 +67,7 @@ const std::string formatter_properties_missing(
 const std::string unexpected_opaque_settings(
     "Unexpectd opaque settings type.");
 const std::string family_not_found("Family not found: ");
+const std::string no_helpers_for_family("No helpers found for family: ");
 const std::string qn_missing("Could not find qualified name for language.");
 const std::string empty_settings("Helper properties must have settings.");
 const std::string helpless_family("No registered helpers found for family: ");
@@ -346,49 +347,34 @@ std::string assistant::comment_inline(const std::string& c) const {
 
 std::list<std::shared_ptr<formatters::helper_formatter_interface>>
 assistant::get_helpers(const properties::helper_properties& hp) const {
-    /*
-     * Helper properties' _current_ must always have settings,
-     * otherwise there is no point to their existence (these settings
-     * give rise to a helper). Note that helper properties' direct
-     * descendants may or may not have helper settings.
-     */
     const auto s(hp.current().helper_settings());
-    if (!s) {
-        BOOST_LOG_SEV(lg, error) << empty_settings;
-        BOOST_THROW_EXCEPTION(formatting_error(empty_settings));
-    }
 
     /*
-     * A family should have at least one helper registered, but
-     * for now we are letting it through.
-     * FIXME: throw.
+     * A family must have at least one helper registered. This is a
+     * good way to detect spurious families in data files.
      */
-    const auto i(context_.helpers().find(s->family()));
+    const auto fam(s.family());
+    const auto i(context_.helpers().find(fam));
     if (i == context_.helpers().end()) {
-        BOOST_LOG_SEV(lg, debug) << "Could not find helpers for family: "
-                                 << s->family();
-        return std::list<
-            std::shared_ptr<formatters::helper_formatter_interface>
-            >();
+        BOOST_LOG_SEV(lg, error) << no_helpers_for_family << fam;
+        BOOST_THROW_EXCEPTION(formatting_error(no_helpers_for_family + fam));
     }
-    BOOST_LOG_SEV(lg, debug) << "Found helpers for family: " << s->family();
+    BOOST_LOG_SEV(lg, debug) << "Found helpers for family: " << fam;
 
     /*
      * Not all formatters need help, so its fine not to have a
      * helper registered against a particular formatter.
      */
     const auto j(i->second.find(ownership_hierarchy_.formatter_name()));
-    if (j == i->second.end()) {
-        BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
+    if (j != i->second.end()) {
+        BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
                                  << ownership_hierarchy_.formatter_name();
-        return std::list<
-            std::shared_ptr<formatters::helper_formatter_interface>
-            >();
+        return j->second;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
+    BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
                              << ownership_hierarchy_.formatter_name();
-    return j->second;
+    return std::list<std::shared_ptr<formatters::helper_formatter_interface>>();
 }
 
 bool assistant::is_io() const {

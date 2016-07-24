@@ -56,7 +56,7 @@ public:
         const std::string& name_qualified,
         const std::string& name_tree_qualified,
         const std::string& name_tree_identifiable,
-        const boost::optional<dogen::quilt::cpp::settings::helper_settings>& helper_settings,
+        const dogen::quilt::cpp::settings::helper_settings& helper_settings,
         const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& streaming_settings,
         const bool is_primitive,
         const bool requires_hashing_helper,
@@ -96,10 +96,10 @@ public:
     void name_tree_identifiable(const std::string& v);
     void name_tree_identifiable(const std::string&& v);
 
-    const boost::optional<dogen::quilt::cpp::settings::helper_settings>& helper_settings() const;
-    boost::optional<dogen::quilt::cpp::settings::helper_settings>& helper_settings();
-    void helper_settings(const boost::optional<dogen::quilt::cpp::settings::helper_settings>& v);
-    void helper_settings(const boost::optional<dogen::quilt::cpp::settings::helper_settings>&& v);
+    const dogen::quilt::cpp::settings::helper_settings& helper_settings() const;
+    dogen::quilt::cpp::settings::helper_settings& helper_settings();
+    void helper_settings(const dogen::quilt::cpp::settings::helper_settings& v);
+    void helper_settings(const dogen::quilt::cpp::settings::helper_settings&& v);
 
     const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& streaming_settings() const;
     boost::optional<dogen::quilt::cpp::settings::streaming_settings>& streaming_settings();
@@ -134,7 +134,7 @@ private:
     std::string name_qualified_;
     std::string name_tree_qualified_;
     std::string name_tree_identifiable_;
-    boost::optional<dogen::quilt::cpp::settings::helper_settings> helper_settings_;
+    dogen::quilt::cpp::settings::helper_settings helper_settings_;
     boost::optional<dogen::quilt::cpp::settings::streaming_settings> streaming_settings_;
     bool is_primitive_;
     bool requires_hashing_helper_;
