@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-24 Sun 23:04]
+#+CAPTION: Clock summary at [2016-07-24 Sun 23:27]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *17:51* |       |      | 100.0 |
+| *Total time*                                                                | *18:24* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 17:51   |       |      | 100.0 |
-| Active                                                                      |         | 17:51 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:56 |   5.2 |
-| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  16.2 |
-| COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   3.5 |
-| COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   3.0 |
-| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |  10.8 |
+| Stories                                                                     | 18:24   |       |      | 100.0 |
+| Active                                                                      |         | 18:24 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:56 |   5.1 |
+| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  15.7 |
+| COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   3.4 |
+| COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   2.9 |
+| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |  10.5 |
 | COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   1.2 |
-| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   5.9 |
-| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  40.4 |
-| COMPLETED Remove optionality from helper settings                           |         |       | 0:22 |   2.1 |
-| STARTED Add aspect properties infrastructure                                |         |       | 1:18 |   7.3 |
-| STARTED Implement types in terms of =yarn::object=                          |         |       | 0:48 |   4.5 |
+| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   5.7 |
+| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  39.2 |
+| COMPLETED Remove optionality from helper settings                           |         |       | 0:22 |   2.0 |
+| STARTED Add aspect properties infrastructure                                |         |       | 1:51 |  10.1 |
+| STARTED Implement types in terms of =yarn::object=                          |         |       | 0:48 |   4.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -253,6 +253,8 @@ providing some kind of helpers. Remove all of the optionality we left
 behind.
 
 *** STARTED Add aspect properties infrastructure                      :story:
+    CLOCK: [2016-07-24 Sun 23:04]--[2016-07-24 Sun 23:27] =>  0:23
+    CLOCK: [2016-07-24 Sun 22:30]--[2016-07-24 Sun 22:40] =>  0:10
     CLOCK: [2016-07-23 Sat 23:50]--[2016-07-24 Sun 00:24] =>  0:34
     CLOCK: [2016-07-23 Sat 22:59]--[2016-07-23 Sat 23:10] =>  0:11
     CLOCK: [2016-07-23 Sat 22:20]--[2016-07-23 Sat 22:53] =>  0:33
@@ -265,6 +267,13 @@ behind.
   manipulators.
 - add aspect properties to element properties.
 - add accessors to assistant.
+- problem: we were lazy and tried to merge two different forms of
+  aspect settings into one class: those that are merely optional, and
+  belong to the element we want to format (disabble complete
+  constructor, xml serialisation, etc); and those that belong to the
+  helper types (requires manual move constructor, etc). The problem is
+  this won't work since we will not have element settings for all
+  these types. We actually need two classes to represent this data.
 
 *** STARTED Implement types in terms of =yarn::object=                :story:
     CLOCK: [2016-07-23 Sat 21:55]--[2016-07-23 Sat 22:19] =>  0:24
