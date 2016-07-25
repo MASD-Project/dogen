@@ -204,16 +204,6 @@ bool assistant::is_test_data_enabled() const {
     return is_formatter_enabled(traits::class_header_formatter_name());
 }
 
-bool assistant::is_complete_constructor_disabled() const {
-    const auto& es(context_.element_settings());
-    return es.aspect_settings().disable_complete_constructor();
-}
-
-bool assistant::is_xml_serialization_disabled() const {
-    const auto& es(context_.element_settings());
-    return es.aspect_settings().disable_xml_serialization();
-}
-
 void assistant::validate() const {
     if (!formatter_properties_)
         return;

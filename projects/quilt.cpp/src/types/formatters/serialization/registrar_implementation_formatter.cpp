@@ -75,10 +75,9 @@ provider::provide(const properties::inclusion_dependencies_builder_factory& f,
     builder.add(ic::boost::archive::polymorphic_iarchive());
     builder.add(ic::boost::archive::polymorphic_oarchive());
 
-    if (!as.disable_xml_serialization()) {
-        builder.add(ic::boost::archive::xml_iarchive());
-        builder.add(ic::boost::archive::xml_oarchive());
-    }
+    // XML serialisation
+    builder.add(ic::boost::archive::xml_iarchive());
+    builder.add(ic::boost::archive::xml_oarchive());
 
     const auto ch_fn(traits::class_header_formatter_name());
     for (const auto& l : m.leaves())

@@ -84,12 +84,6 @@ using dogen::knit::workflow_error;
 
 BOOST_AUTO_TEST_SUITE(workflow_tests)
 
-BOOST_AUTO_TEST_CASE(disable_full_ctor_generates_expected_code) {
-    SETUP_TEST_LOG("disable_full_ctor_generates_expected_code");
-    const auto target(yarn_dia::input_disable_full_ctor_dia());
-    BOOST_CHECK(generate_and_diff(target));
-}
-
 BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
     SETUP_TEST_LOG("disable_facet_folders_generates_expected_code");
     const auto target(yarn_dia::input_disable_facet_folders_dia());
@@ -194,7 +188,7 @@ BOOST_AUTO_TEST_CASE(classes_without_package_model_generates_expected_code) {
 }
 
 /*
-BOOST_IGNORE_AUTO_TEST_CASE(compressed_model_generates_expected_code) {
+BOOST_AUTO_TEST_CASE(compressed_model_generates_expected_code) {
     SETUP_TEST_LOG("compressed_model_generates_expected_code");
     const auto target(yarn_dia::input_compressed_dia());
     BOOST_CHECK(generate_and_diff(target));

@@ -37,11 +37,9 @@ aspect_settings_generator::aspect_settings_generator() : position_(0) { }
 
 void aspect_settings_generator::
 populate(const unsigned int position, result_type& v) {
-    v.disable_complete_constructor(create_bool(position + 0));
-    v.disable_xml_serialization(create_bool(position + 1));
-    v.requires_manual_default_constructor(create_bool(position + 2));
-    v.requires_manual_move_constructor(create_bool(position + 3));
-    v.requires_stream_manipulators(create_bool(position + 4));
+    v.requires_manual_default_constructor(create_bool(position + 0));
+    v.requires_manual_move_constructor(create_bool(position + 1));
+    v.requires_stream_manipulators(create_bool(position + 2));
 }
 
 aspect_settings_generator::result_type

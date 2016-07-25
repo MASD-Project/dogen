@@ -102,7 +102,7 @@ a.stream() << std::endl;
             /*
              * Manually generated complete constructor.
              */
-            if (!a.is_complete_constructor_disabled() && !c.all_properties().empty()) {
+            if (!c.all_properties().empty()) {
 a.stream() << "public:" << std::endl;
                 const auto prop_count(c.all_properties().size());
                 if (prop_count == 1) {

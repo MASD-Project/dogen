@@ -92,7 +92,7 @@ a.stream() << "    " << sf.prefix() << a.make_member_variable_name(p) << "(std::
             /*
              * Complete constructor.
              */
-            if (!a.is_complete_constructor_disabled() && !c.all_properties().empty()) {
+            if (!c.all_properties().empty()) {
                 const auto prop_count(c.all_properties().size());
                 if (prop_count == 1) {
                      const auto p(*c.all_properties().begin());

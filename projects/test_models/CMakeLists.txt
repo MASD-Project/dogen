@@ -29,7 +29,6 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/test_models/class_without_package/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/stand_alone_class/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/compressed/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/disable_full_ctor/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/disable_facet_folders/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/disable_cmakelists/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/enable_facet_domain/include
@@ -77,7 +76,6 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/class_without_attributes)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/class_without_package)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stand_alone_class)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/compressed)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/disable_full_ctor)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/disable_facet_folders)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_domain)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_hash)

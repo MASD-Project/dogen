@@ -146,17 +146,9 @@ public:
     bool is_test_data_enabled() const;
 
     /**
-     * @brief Returns true if the complete constructor is disabled,
-     * false otherwise.
+     * @brief Returns true if the current formatter belongs to the io
+     * facet.
      */
-    bool is_complete_constructor_disabled() const;
-
-    /**
-     * @brief Returns true if XML serialization is disabled, false
-     * otherwise.
-     */
-    bool is_xml_serialization_disabled() const;
-
     bool is_io() const;
 
     /**

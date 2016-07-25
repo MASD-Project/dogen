@@ -13,25 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-24 Sun 23:34]
+#+CAPTION: Clock summary at [2016-07-25 Mon 21:57]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *18:30* |       |      | 100.0 |
+| *Total time*                                                                | *19:18* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 18:30   |       |      | 100.0 |
-| Active                                                                      |         | 18:30 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:02 |   5.6 |
-| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  15.6 |
-| COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   3.3 |
-| COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   2.9 |
-| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |  10.5 |
-| COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   1.2 |
-| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   5.7 |
-| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  39.0 |
-| COMPLETED Remove optionality from helper settings                           |         |       | 0:22 |   2.0 |
-| STARTED Add aspect properties infrastructure                                |         |       | 1:51 |  10.0 |
-| STARTED Implement types in terms of =yarn::object=                          |         |       | 0:48 |   4.3 |
+| Stories                                                                     | 19:18   |       |      | 100.0 |
+| Active                                                                      |         | 19:18 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:02 |   5.4 |
+| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  14.9 |
+| COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   3.2 |
+| COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   2.8 |
+| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |  10.0 |
+| COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   1.1 |
+| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   5.4 |
+| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  37.4 |
+| COMPLETED Remove optionality from helper settings                           |         |       | 0:22 |   1.9 |
+| COMPLETED Remove unused aspect settings                                     |         |       | 0:31 |   2.7 |
+| STARTED Add aspect properties infrastructure                                |         |       | 2:08 |  11.1 |
+| STARTED Implement types in terms of =yarn::object=                          |         |       | 0:48 |   4.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -253,7 +254,20 @@ sense to have optionality on helper settings; we are now always
 providing some kind of helpers. Remove all of the optionality we left
 behind.
 
+*** COMPLETED Remove unused aspect settings                           :story:
+    CLOSED: [2016-07-25 Mon 21:57]
+    CLOCK: [2016-07-25 Mon 21:26]--[2016-07-25 Mon 21:57] =>  0:31
+
+We don't really have strong use cases for these:
+
+- =disable_complete_constructor=
+- =disable_xml_serialization=
+
+We can always add them if required in the future, but at present they
+are adding additional complexity for no obvious gain.
+
 *** STARTED Add aspect properties infrastructure                      :story:
+    CLOCK: [2016-07-25 Mon 21:08]--[2016-07-25 Mon 21:25] =>  0:17
     CLOCK: [2016-07-24 Sun 23:04]--[2016-07-24 Sun 23:27] =>  0:23
     CLOCK: [2016-07-24 Sun 22:30]--[2016-07-24 Sun 22:40] =>  0:10
     CLOCK: [2016-07-23 Sat 23:50]--[2016-07-24 Sun 00:24] =>  0:34
@@ -275,6 +289,10 @@ behind.
   helper types (requires manual move constructor, etc). The problem is
   this won't work since we will not have element settings for all
   these types. We actually need two classes to represent this data.
+- another way to look at this is: do we really need all of these
+  features? we could probably get away with always generating XML
+  support and complete constructors. If there is a requirement, we can
+  revisit.
 
 *** STARTED Implement types in terms of =yarn::object=                :story:
     CLOCK: [2016-07-23 Sat 21:55]--[2016-07-23 Sat 22:19] =>  0:24

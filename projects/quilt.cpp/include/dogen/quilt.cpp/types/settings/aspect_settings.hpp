@@ -44,8 +44,6 @@ public:
 
 public:
     aspect_settings(
-        const bool disable_complete_constructor,
-        const bool disable_xml_serialization,
         const bool requires_manual_default_constructor,
         const bool requires_manual_move_constructor,
         const bool requires_stream_manipulators);
@@ -58,12 +56,6 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::settings::aspect_settings& v, unsigned int version);
 
 public:
-    bool disable_complete_constructor() const;
-    void disable_complete_constructor(const bool v);
-
-    bool disable_xml_serialization() const;
-    void disable_xml_serialization(const bool v);
-
     bool requires_manual_default_constructor() const;
     void requires_manual_default_constructor(const bool v);
 
@@ -84,8 +76,6 @@ public:
     aspect_settings& operator=(aspect_settings other);
 
 private:
-    bool disable_complete_constructor_;
-    bool disable_xml_serialization_;
     bool requires_manual_default_constructor_;
     bool requires_manual_move_constructor_;
     bool requires_stream_manipulators_;

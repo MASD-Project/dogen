@@ -51,14 +51,10 @@ template void register_types(boost::archive::text_iarchive&<#= arg_name #>);
 template void register_types(boost::archive::binary_oarchive&<#= arg_name #>);
 template void register_types(boost::archive::binary_iarchive&<#= arg_name #>);
 
-<#+
-            if (!a.is_xml_serialization_disabled()) {
-#>
 template void register_types(boost::archive::xml_oarchive&<#= arg_name #>);
 template void register_types(boost::archive::xml_iarchive&<#= arg_name #>);
 
 <#+
-            }
         } // snf
     } // sbf
     return a.make_file();

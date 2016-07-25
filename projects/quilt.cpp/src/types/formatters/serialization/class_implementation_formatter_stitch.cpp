@@ -55,18 +55,12 @@ a.stream() << "void save(Archive& " << (has_properties_or_parents ? "ar" : "/*ar
 a.stream() << "    const " << c.qualified_name() << "& " << (has_properties_or_parents ? "v" : "/*v*/") << "," << std::endl;
 a.stream() << "    const unsigned int /*version*/) {" << std::endl;
         for (const auto p : c.parents()) {
-            if (a.is_xml_serialization_disabled())
-a.stream() << "    ar << base_object<" << p.qualified_name() << ">(v);" << std::endl;
-            else
 a.stream() << "    ar << make_nvp(\"" << p.name() << "\", base_object<" << p.qualified_name() << ">(v));" << std::endl;
         }
 
         if (has_properties && has_parents)
 a.stream() << std::endl;
         for (const auto p : c.properties()) {
-            if (a.is_xml_serialization_disabled())
-a.stream() << "    ar << " << a.make_member_variable_name(p) << (p.type().is_filesystem_path() ? ".generic_string()" : "") << ";" << std::endl;
-            else
 a.stream() << "    ar << make_nvp(\"" << p.name() << "\", v." << a.make_member_variable_name(p) << (p.type().is_filesystem_path() ? ".generic_string()" : "") << ");" << std::endl;
         }
 a.stream() << "}" << std::endl;
@@ -79,9 +73,6 @@ a.stream() << "void load(Archive& " << (has_properties_or_parents ? "ar," : "/*a
 a.stream() << "    " << c.qualified_name() << "& " << (has_properties_or_parents ? "v" : "/*v*/") << "," << std::endl;
 a.stream() << "    const unsigned int /*version*/) {" << std::endl;
         for (const auto p : c.parents()) {
-            if (a.is_xml_serialization_disabled())
-a.stream() << "    ar >> \"" << p.name() << "\", base_object<" << p.qualified_name() << ">(v);" << std::endl;
-            else
 a.stream() << "    ar >> make_nvp(\"" << p.name() << "\", base_object<" << p.qualified_name() << ">(v));" << std::endl;
             if (has_properties && has_parents)
 a.stream() << std::endl;
@@ -90,15 +81,9 @@ a.stream() << std::endl;
         for (const auto p : c.properties()) {
             if (p.type().is_filesystem_path()) {
 a.stream() << "    std::string " << p.name() << "_tmp;" << std::endl;
-                if (a.is_xml_serialization_disabled())
-a.stream() << "    ar >> " << p.name() << "_tmp;" << std::endl;
-                else
 a.stream() << "    ar >> make_nvp(\"" << p.name() << "\", " << p.name() << "_tmp);" << std::endl;
 a.stream() << "    v." << a.make_member_variable_name(p) << " = " << p.name() << "_tmp;" << std::endl;
             } else {
-                if (a.is_xml_serialization_disabled())
-a.stream() << "    ar >> " << p.name() << ";" << std::endl;
-                else
 a.stream() << "    ar >> make_nvp(\"" << p.name() << "\", v." << a.make_member_variable_name(p) << ");" << std::endl;
             }
         }
@@ -118,11 +103,9 @@ a.stream() << std::endl;
 a.stream() << "template void save(archive::binary_oarchive& ar, const " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
 a.stream() << "template void load(archive::binary_iarchive& ar, " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
 a.stream() << std::endl;
-        if (!a.is_xml_serialization_disabled()) {
 a.stream() << "template void save(archive::xml_oarchive& ar, const " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
 a.stream() << "template void load(archive::xml_iarchive& ar, " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
 a.stream() << std::endl;
-        }
 a.stream() << "} }" << std::endl;
     } // sbf
     return a.make_file();

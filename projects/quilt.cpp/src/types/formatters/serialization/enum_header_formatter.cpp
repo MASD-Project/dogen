@@ -59,8 +59,9 @@ provider::provide(const properties::inclusion_dependencies_builder_factory& f,
 
     using ic = inclusion_constants;
     const auto as(builder.get_aspect_settings(e.name()));
-    if (!as.disable_xml_serialization())
-        builder.add(ic::boost::serialization::nvp());
+
+    // XML serialisation
+    builder.add(ic::boost::serialization::nvp());
 
     return builder.build();
 }

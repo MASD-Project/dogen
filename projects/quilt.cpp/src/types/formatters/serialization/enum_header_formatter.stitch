@@ -15,18 +15,8 @@ dogen::formatters::file enum_header_formatter_stitch(
 
 template<class Archive>
 void serialize(Archive& ar, <#= a.get_qualified_name(e.name()) #>& v, unsigned int /*version*/){
-<#+
-        if (!a.is_xml_serialization_disabled()) {
-#>
     using boost::serialization::make_nvp;
     ar & make_nvp("<#= e.name().simple() #>", v);
-<#+
-        } else {
-#>
-    ar & v;
-<#+
-        }
-#>
 }
 
 <#+

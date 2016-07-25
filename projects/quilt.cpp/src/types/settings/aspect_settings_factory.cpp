@@ -39,11 +39,8 @@ namespace quilt {
 namespace cpp {
 namespace settings {
 
-aspect_settings_factory::aspect_settings_factory(const dynamic::repository& rp,
-    const dynamic::object& root_object)
-    : field_definitions_(make_field_definitions(rp)),
-      field_values_(
-          make_root_object_field_values(field_definitions_, root_object)) {}
+aspect_settings_factory::aspect_settings_factory(const dynamic::repository& rp)
+    : field_definitions_(make_field_definitions(rp)) {}
 
 aspect_settings_factory::field_definitions aspect_settings_factory::
 make_field_definitions(const dynamic::repository& rp) const {
@@ -51,12 +48,6 @@ make_field_definitions(const dynamic::repository& rp) const {
     field_definitions r;
     const dynamic::repository_selector rs(rp);
     typedef traits::cpp::aspect aspect;
-
-    const auto& cc(aspect::disable_complete_constructor());
-    r.disable_complete_constructor = rs.select_field_by_name(cc);
-
-    const auto& xs(aspect::disable_xml_serialization());
-    r.disable_xml_serialization = rs.select_field_by_name(xs);
 
     const auto& rmdc(aspect::requires_manual_default_constructor());
     r.requires_manual_default_constructor = rs.select_field_by_name(rmdc);
@@ -70,45 +61,12 @@ make_field_definitions(const dynamic::repository& rp) const {
     return r;
 }
 
-aspect_settings_factory::root_object_field_values aspect_settings_factory::
-make_root_object_field_values(const field_definitions& fd,
-    const dynamic::object& root_object) const {
-
-    root_object_field_values r;
-    const dynamic::field_selector fs(root_object);
-    r.disable_complete_constructor = fs.get_boolean_content_or_default(
-        fd.disable_complete_constructor);
-    r.disable_xml_serialization = fs.get_boolean_content_or_default(
-        fd.disable_xml_serialization);
-    return r;
-}
-
-bool aspect_settings_factory::
-obtain_field_value(const dynamic::field_selector& fs,
-    const dynamic::field_definition& fd,
-    const bool root_object_value) const {
-
-    if (fs.has_field(fd))
-        return fs.get_boolean_content(fd);
-
-    return root_object_value;
-}
-
 aspect_settings
 aspect_settings_factory::make(const dynamic::object& o) const {
     aspect_settings r;
 
     const dynamic::field_selector fs(o);
     const auto& fd(field_definitions_);
-    const auto& fv(field_values_);
-
-    r.disable_complete_constructor(
-        obtain_field_value(fs, fd.disable_complete_constructor,
-            fv.disable_complete_constructor));
-
-    r.disable_xml_serialization(
-        obtain_field_value(fs, fd.disable_xml_serialization,
-            fv.disable_xml_serialization));
 
     r.requires_manual_default_constructor(
         fs.get_boolean_content_or_default(
@@ -127,8 +85,6 @@ aspect_settings_factory::make(const dynamic::object& o) const {
 
 aspect_settings aspect_settings_factory::make() const {
     aspect_settings r;
-    r.disable_complete_constructor(field_values_.disable_complete_constructor);
-    r.disable_xml_serialization(field_values_.disable_xml_serialization);
     return r;
 }
 

@@ -36,8 +36,6 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::settings::aspect_settings& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("disable_complete_constructor", v.disable_complete_constructor_);
-    ar << make_nvp("disable_xml_serialization", v.disable_xml_serialization_);
     ar << make_nvp("requires_manual_default_constructor", v.requires_manual_default_constructor_);
     ar << make_nvp("requires_manual_move_constructor", v.requires_manual_move_constructor_);
     ar << make_nvp("requires_stream_manipulators", v.requires_stream_manipulators_);
@@ -47,8 +45,6 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::settings::aspect_settings& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("disable_complete_constructor", v.disable_complete_constructor_);
-    ar >> make_nvp("disable_xml_serialization", v.disable_xml_serialization_);
     ar >> make_nvp("requires_manual_default_constructor", v.requires_manual_default_constructor_);
     ar >> make_nvp("requires_manual_move_constructor", v.requires_manual_move_constructor_);
     ar >> make_nvp("requires_stream_manipulators", v.requires_stream_manipulators_);

@@ -62,11 +62,9 @@ a.stream() << std::endl;
 a.stream() << "template void register_types(boost::archive::binary_oarchive&" << arg_name << ");" << std::endl;
 a.stream() << "template void register_types(boost::archive::binary_iarchive&" << arg_name << ");" << std::endl;
 a.stream() << std::endl;
-            if (!a.is_xml_serialization_disabled()) {
 a.stream() << "template void register_types(boost::archive::xml_oarchive&" << arg_name << ");" << std::endl;
 a.stream() << "template void register_types(boost::archive::xml_iarchive&" << arg_name << ");" << std::endl;
 a.stream() << std::endl;
-            }
         } // snf
     } // sbf
     return a.make_file();

@@ -46,7 +46,7 @@ element_settings_factory::element_settings_factory(
 
 aspect_settings element_settings_factory::
 create_aspect_settings(const dynamic::object& o) const {
-    aspect_settings_factory f(dynamic_repository_, root_object_);
+    aspect_settings_factory f(dynamic_repository_);
     return f.make(o);
 }
 
@@ -69,7 +69,7 @@ element_settings_factory::make(const dynamic::object& o) const {
 
 element_settings element_settings_factory::make() const {
     element_settings r;
-    aspect_settings_factory f(dynamic_repository_, root_object_);
+    aspect_settings_factory f(dynamic_repository_);
     r.aspect_settings(f.make());
     return r;
 }

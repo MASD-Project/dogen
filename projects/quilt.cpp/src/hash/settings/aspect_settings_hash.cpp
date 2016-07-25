@@ -38,8 +38,6 @@ namespace settings {
 std::size_t aspect_settings_hasher::hash(const aspect_settings& v) {
     std::size_t seed(0);
 
-    combine(seed, v.disable_complete_constructor());
-    combine(seed, v.disable_xml_serialization());
     combine(seed, v.requires_manual_default_constructor());
     combine(seed, v.requires_manual_move_constructor());
     combine(seed, v.requires_stream_manipulators());

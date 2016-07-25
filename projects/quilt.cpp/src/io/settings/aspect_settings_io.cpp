@@ -36,8 +36,6 @@ std::ostream& operator<<(std::ostream& s, const aspect_settings& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::settings::aspect_settings\"" << ", "
-      << "\"disable_complete_constructor\": " << v.disable_complete_constructor() << ", "
-      << "\"disable_xml_serialization\": " << v.disable_xml_serialization() << ", "
       << "\"requires_manual_default_constructor\": " << v.requires_manual_default_constructor() << ", "
       << "\"requires_manual_move_constructor\": " << v.requires_manual_move_constructor() << ", "
       << "\"requires_stream_manipulators\": " << v.requires_stream_manipulators()

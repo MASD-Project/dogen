@@ -67,11 +67,10 @@ provider::provide(const properties::inclusion_dependencies_builder_factory& f,
     builder.add(ic::boost::archive::polymorphic_iarchive());
     builder.add(ic::boost::archive::polymorphic_oarchive());
 
-    if (!as.disable_xml_serialization()) {
-        builder.add(ic::boost::serialization::nvp());
-        builder.add(ic::boost::archive::xml_iarchive());
-        builder.add(ic::boost::archive::xml_oarchive());
-    }
+    // XML serialisation
+    builder.add(ic::boost::serialization::nvp());
+    builder.add(ic::boost::archive::xml_iarchive());
+    builder.add(ic::boost::archive::xml_oarchive());
 
     builder.add(o.transparent_associations(), ch_fn);
     builder.add(o.opaque_associations(), ch_fn);

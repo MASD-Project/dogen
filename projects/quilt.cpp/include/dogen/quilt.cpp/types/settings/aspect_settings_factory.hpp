@@ -43,16 +43,13 @@ namespace settings {
  */
 class aspect_settings_factory {
 public:
-    aspect_settings_factory(const dynamic::repository& rp,
-        const dynamic::object& root_object);
+    explicit aspect_settings_factory(const dynamic::repository& rp);
 
 private:
     /**
      * @brief All field definitions we require.
      */
     struct field_definitions {
-        dynamic::field_definition disable_complete_constructor;
-        dynamic::field_definition disable_xml_serialization;
         dynamic::field_definition requires_manual_default_constructor;
         dynamic::field_definition requires_manual_move_constructor;
         dynamic::field_definition requires_stream_manipulators;
@@ -63,32 +60,6 @@ private:
      */
     field_definitions make_field_definitions(
         const dynamic::repository& rp) const;
-
-private:
-    /**
-     * @brief Values for the fields in the root object.
-     */
-    struct root_object_field_values {
-        bool disable_complete_constructor;
-        bool disable_xml_serialization;
-    };
-
-    /**
-     * @brief Reads the values for all relevant fields in the root
-     * object.
-     */
-    root_object_field_values
-    make_root_object_field_values(const field_definitions& fd,
-        const dynamic::object& root_object) const;
-
-private:
-    /**
-     * @brief Obtains the value of the supplied field. If not
-     * available, uses the supplied root value.
-     */
-    bool obtain_field_value(const dynamic::field_selector& fs,
-        const dynamic::field_definition& fd,
-        const bool root_value) const;
 
 public:
     /**
@@ -104,7 +75,6 @@ public:
 
 private:
     const field_definitions field_definitions_;
-    const root_object_field_values field_values_;
 };
 
 } } } }
