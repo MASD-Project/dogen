@@ -49,7 +49,6 @@ namespace settings {
 class element_settings_factory final {
 public:
     element_settings_factory(const dynamic::repository& rp,
-        const dynamic::object& root_object,
         const opaque_settings_builder& osb);
 
 private:
@@ -65,14 +64,8 @@ public:
      */
     element_settings make(const dynamic::object& o) const;
 
-    /**
-     * @brief Hack to produce registrar settings.
-     */
-    element_settings make() const;
-
 private:
     const dynamic::repository& dynamic_repository_;
-    const dynamic::object& root_object_;
     const opaque_settings_builder& opaque_settings_builder_;
 };
 

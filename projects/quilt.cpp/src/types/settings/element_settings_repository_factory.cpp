@@ -121,13 +121,12 @@ private:
 }
 
 element_settings_repository element_settings_repository_factory::
-make(const dynamic::repository& rp, const dynamic::object& root_object,
-    const opaque_settings_builder& osb,
+make(const dynamic::repository& rp, const opaque_settings_builder& osb,
     const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating element settings repository.";
 
-    const element_settings_factory f(rp, root_object, osb);
+    const element_settings_factory f(rp, osb);
     generator g(f, osb);
     for (const auto& pair : m.elements()) {
         const auto& e(*pair.second);
@@ -138,7 +137,7 @@ make(const dynamic::repository& rp, const dynamic::object& root_object,
     // FIXME: hack to handle registars.
     yarn::name_factory nf;
     const auto n(nf.build_element_in_model(m.name(), registrar_name));
-    const auto pair(std::make_pair(n.id(), f.make()));
+    const auto pair(std::make_pair(n.id(), element_settings()));
     auto& deps(r.by_id());
     const auto res(deps.insert(pair));
     if (!res.second) {

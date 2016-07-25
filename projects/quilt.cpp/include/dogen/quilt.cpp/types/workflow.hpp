@@ -82,13 +82,13 @@ private:
      * @brief Creates the opaque settings builder.
      */
     settings::opaque_settings_builder
-        create_opaque_settings_builder(const dynamic::repository& rp) const;
+    create_opaque_settings_builder(const dynamic::repository& rp) const;
 
     /**
      * @brief Create the element settings repository
      */
-    settings::element_settings_repository create_element_settings_repository(
-        const dynamic::repository& drp, const dynamic::object& root_object,
+    settings::element_settings_repository
+    create_element_settings_repository(const dynamic::repository& drp,
         const settings::opaque_settings_builder& osb,
         const yarn::model& m) const;
 
