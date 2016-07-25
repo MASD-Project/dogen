@@ -35,7 +35,9 @@
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/settings/aspect_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/settings/aspect_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/properties/formattable.hpp"
@@ -67,6 +69,13 @@ private:
      */
     settings::helper_settings_repository create_helper_settings_repository(
         const dynamic::repository& drp, const yarn::model& m) const;
+
+    /**
+     * @brief Create the aspect settings repository
+     */
+    settings::aspect_settings_repository
+    create_aspect_settings_repository(const dynamic::repository& drp,
+        const yarn::model& m) const;
 
     /**
      * @brief Create the streaming settings repository.
@@ -115,9 +124,10 @@ private:
         const formatters::container& fc,
         const yarn::model& m) const;
 
-    element_properties_repository create_element_properties(
+    element_properties_repository create_element_properties_repository(
         const dogen::formatters::file_properties_workflow& fpwf,
         const settings::helper_settings_repository& hsrp,
+        const settings::aspect_settings_repository& asrp,
         const settings::streaming_settings_repository& ssrp,
         const formatters::container& fc,
         const formatter_properties_repository& fprp,

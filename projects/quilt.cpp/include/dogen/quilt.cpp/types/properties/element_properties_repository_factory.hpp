@@ -29,8 +29,10 @@
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/settings/aspect_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties_repository.hpp"
+#include "dogen/quilt.cpp/types/properties/aspect_properties_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/formatter_properties_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
 
@@ -47,15 +49,21 @@ private:
         const formatters::container& fc,
         const yarn::model& m) const;
 
+    aspect_properties_repository create_aspect_properties(
+        const settings::aspect_settings_repository& asrp,
+        const yarn::model& m) const;
+
     element_properties_repository merge(
         const dogen::formatters::file_properties& fp,
         const helper_properties_repository& hprp,
+        const aspect_properties_repository& asrp,
         const formatter_properties_repository& fprp) const;
 
 public:
     element_properties_repository make(
         const dogen::formatters::file_properties_workflow& fpwf,
         const settings::helper_settings_repository& hsrp,
+        const settings::aspect_settings_repository& asrp,
         const settings::streaming_settings_repository& ssrp,
         const formatters::container& fc,
         const formatter_properties_repository& fprp,

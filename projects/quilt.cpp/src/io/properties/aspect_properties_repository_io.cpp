@@ -32,21 +32,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::quilt::cpp::properties::aspect_properties>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::aspect_properties> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::properties::aspect_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

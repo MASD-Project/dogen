@@ -27,6 +27,7 @@
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/settings/path_settings_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository_factory.hpp"
+#include "dogen/quilt.cpp/types/settings/aspect_settings_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/streaming_settings_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/factory.hpp"
 #include "dogen/quilt.cpp/types/properties/transformer.hpp"
@@ -102,6 +103,13 @@ create_helper_settings_repository(const dynamic::repository& drp,
     return f.make(drp, m);
 }
 
+settings::aspect_settings_repository
+workflow::create_aspect_settings_repository(
+    const dynamic::repository& drp, const yarn::model& m) const {
+    settings::aspect_settings_repository_factory f;
+    return f.make(drp, m);
+}
+
 settings::streaming_settings_repository workflow::
 create_streaming_settings_repository(const dynamic::repository& drp,
     const yarn::model& m) const {
@@ -174,15 +182,16 @@ workflow::from_factory_activity(const config::cpp_options& opts,
     return r;
 }
 
-element_properties_repository workflow::create_element_properties(
+element_properties_repository workflow::create_element_properties_repository(
     const dogen::formatters::file_properties_workflow& fpwf,
     const settings::helper_settings_repository& hsrp,
+    const settings::aspect_settings_repository& asrp,
     const settings::streaming_settings_repository& ssrp,
     const formatters::container& fc,
     const formatter_properties_repository& fprp,
     const yarn::model& m) const {
     element_properties_repository_factory f;
-    return f.make(fpwf, hsrp, ssrp, fc, fprp, m);
+    return f.make(fpwf, hsrp, asrp, ssrp, fc, fprp, m);
 }
 
 std::pair<
@@ -190,7 +199,7 @@ std::pair<
     std::forward_list<std::shared_ptr<properties::formattable> >
 >
 workflow::execute(const config::cpp_options& opts,
-    const dynamic::repository& rp,
+    const dynamic::repository& drp,
     const dynamic::object& root_object,
     const dogen::formatters::file_properties_workflow& fpwf,
     const formatters::container& fc,
@@ -199,9 +208,9 @@ workflow::execute(const config::cpp_options& opts,
     BOOST_LOG_SEV(lg, debug) << "Started creating properties.";
 
     const auto& ro(root_object);
-    const auto ps(create_path_settings_activity(rp, ro, fc));
+    const auto ps(create_path_settings_activity(drp, ro, fc));
     const auto pdrp(create_path_derivatives_repository(opts, ps, m));
-    auto fprp(create_formatter_properties(rp, ro, esrp, pdrp, fc, m));
+    auto fprp(create_formatter_properties(drp, ro, esrp, pdrp, fc, m));
 
     auto formattables(from_transformer_activity(m));
     formattables.splice_after(formattables.before_begin(),
@@ -210,9 +219,11 @@ workflow::execute(const config::cpp_options& opts,
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
 
-    const auto hsrp(create_helper_settings_repository(rp, m));
-    const auto ssrp(create_streaming_settings_repository(rp, m));
-    const auto eprp(create_element_properties(fpwf, hsrp, ssrp, fc, fprp, m));
+    const auto hsrp(create_helper_settings_repository(drp, m));
+    const auto asrp(create_aspect_settings_repository(drp, m));
+    const auto ssrp(create_streaming_settings_repository(drp, m));
+    const auto eprp(create_element_properties_repository(
+            fpwf, hsrp, asrp, ssrp, fc, fprp, m));
     return std::make_pair(eprp, formattables);
 }
 

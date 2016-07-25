@@ -19,6 +19,7 @@
  *
  */
 #include <list>
+#include <utility>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
@@ -27,6 +28,7 @@
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/properties/building_error.hpp"
 #include "dogen/quilt.cpp/io/properties/helper_properties_repository_io.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties_factory.hpp"

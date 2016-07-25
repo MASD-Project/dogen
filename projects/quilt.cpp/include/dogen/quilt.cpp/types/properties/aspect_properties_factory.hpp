@@ -26,14 +26,11 @@
 #endif
 
 #include <list>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/quilt.cpp/types/properties/aspect_properties.hpp"
-#include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
+#include "dogen/quilt.cpp/types/settings/aspect_settings_repository.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -41,6 +38,19 @@ namespace cpp {
 namespace properties {
 
 class aspect_properties_factory {
+public:
+    explicit aspect_properties_factory(
+        const settings::aspect_settings_repository& asrp);
+
+private:
+    void compute_properties(const yarn::name_tree& nt,
+        const bool is_top_level, aspect_properties& ap) const;
+
+public:
+    aspect_properties make(const std::list<yarn::attribute>& attributes) const;
+
+private:
+    const settings::aspect_settings_repository& repository_;
 };
 
 } } } }

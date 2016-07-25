@@ -39,7 +39,6 @@
 #include "dogen/formatters/types/file_properties_workflow.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
-#include "dogen/quilt.cpp/types/settings/aspect_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 
@@ -84,13 +83,6 @@ private:
      */
     settings::opaque_settings_builder
     create_opaque_settings_builder(const dynamic::repository& rp) const;
-
-    /**
-     * @brief Create the aspect settings repository
-     */
-    settings::aspect_settings_repository
-        create_aspect_settings_repository(const dynamic::repository& drp,
-            const yarn::model& m) const;
 
     /**
      * @brief Create the element settings repository

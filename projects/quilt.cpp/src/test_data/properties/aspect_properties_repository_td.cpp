@@ -35,18 +35,10 @@ create_dogen_quilt_cpp_properties_aspect_properties(const unsigned int position)
     return dogen::quilt::cpp::properties::aspect_properties_generator::create(position);
 }
 
-std::list<dogen::quilt::cpp::properties::aspect_properties> create_std_list_dogen_quilt_cpp_properties_aspect_properties(unsigned int position) {
-    std::list<dogen::quilt::cpp::properties::aspect_properties> r;
+std::unordered_map<std::string, dogen::quilt::cpp::properties::aspect_properties> create_std_unordered_map_std_string_dogen_quilt_cpp_properties_aspect_properties(unsigned int position) {
+    std::unordered_map<std::string, dogen::quilt::cpp::properties::aspect_properties> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_quilt_cpp_properties_aspect_properties(position + i));
-    }
-    return r;
-}
-
-std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::aspect_properties> > create_std_unordered_map_std_string_std_list_dogen_quilt_cpp_properties_aspect_properties(unsigned int position) {
-    std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::aspect_properties> > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_list_dogen_quilt_cpp_properties_aspect_properties(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_quilt_cpp_properties_aspect_properties(position + i)));
     }
     return r;
 }
@@ -62,7 +54,7 @@ aspect_properties_repository_generator::aspect_properties_repository_generator()
 
 void aspect_properties_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.by_id(create_std_unordered_map_std_string_std_list_dogen_quilt_cpp_properties_aspect_properties(position + 0));
+    v.by_id(create_std_unordered_map_std_string_dogen_quilt_cpp_properties_aspect_properties(position + 0));
 }
 
 aspect_properties_repository_generator::result_type

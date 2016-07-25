@@ -19,9 +19,9 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/quilt.cpp/io/properties/element_properties_repository_io.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties_repository_factory.hpp"
+#include "dogen/quilt.cpp/types/properties/aspect_properties_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties_repository_factory.hpp"
 
 namespace {
@@ -47,29 +47,42 @@ create_helper_properties(const settings::helper_settings_repository& hsrp,
     return f.make(hsrp, ssrp, fc, m);
 }
 
+aspect_properties_repository element_properties_repository_factory::
+create_aspect_properties(const settings::aspect_settings_repository& asrp,
+    const yarn::model& m) const {
+    aspect_properties_repository_factory f;
+    return f.make(asrp, m);
+}
+
 element_properties_repository element_properties_repository_factory::merge(
     const dogen::formatters::file_properties& fp,
     const helper_properties_repository& hprp,
+    const aspect_properties_repository& asrp,
     const formatter_properties_repository& fprp) const {
 
     element_properties_repository r;
     for(const auto& pair : fprp.by_id()) {
-        element_properties& ep(r.by_id()[pair.first]);
+        auto& ep(r.by_id()[pair.first]);
         ep.file_properties(fp);
         ep.formatter_properties(pair.second);
 
         const auto i(hprp.by_id().find(pair.first));
         if (i != hprp.by_id().end())
             ep.helper_properties(i->second);
+
+        const auto j(asrp.by_id().find(pair.first));
+        if (j != asrp.by_id().end())
+            ep.aspect_properties(j->second);
     }
 
-    // FIXME: check that there are no helper properties left
+    // FIXME: check that there are no helper or aspect properties left
     return r;
 }
 
 element_properties_repository element_properties_repository_factory::make(
     const dogen::formatters::file_properties_workflow& fpwf,
     const settings::helper_settings_repository& hsrp,
+    const settings::aspect_settings_repository& asrp,
     const settings::streaming_settings_repository& ssrp,
     const formatters::container& fc,
     const formatter_properties_repository& fprp,
@@ -77,7 +90,8 @@ element_properties_repository element_properties_repository_factory::make(
 
     const auto fp(fpwf.execute(cpp_modeline_name));
     const auto hprp(create_helper_properties(hsrp, ssrp, fc, m));
-    const auto r(merge(fp, hprp, fprp));
+    const auto aprp(create_aspect_properties(asrp, m));
+    const auto r(merge(fp, hprp, aprp, fprp));
     BOOST_LOG_SEV(lg, debug) << "Finished computing element properties:" << r;
     return r;
 }

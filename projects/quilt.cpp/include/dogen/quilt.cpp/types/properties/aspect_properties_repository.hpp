@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
 #include <algorithm>
 #include <unordered_map>
@@ -45,7 +44,7 @@ public:
     ~aspect_properties_repository() = default;
 
 public:
-    explicit aspect_properties_repository(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::aspect_properties> >& by_id);
+    explicit aspect_properties_repository(const std::unordered_map<std::string, dogen::quilt::cpp::properties::aspect_properties>& by_id);
 
 private:
     template<typename Archive>
@@ -55,10 +54,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::properties::aspect_properties_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::aspect_properties> >& by_id() const;
-    std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::aspect_properties> >& by_id();
-    void by_id(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::aspect_properties> >& v);
-    void by_id(const std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::aspect_properties> >&& v);
+    const std::unordered_map<std::string, dogen::quilt::cpp::properties::aspect_properties>& by_id() const;
+    std::unordered_map<std::string, dogen::quilt::cpp::properties::aspect_properties>& by_id();
+    void by_id(const std::unordered_map<std::string, dogen::quilt::cpp::properties::aspect_properties>& v);
+    void by_id(const std::unordered_map<std::string, dogen::quilt::cpp::properties::aspect_properties>&& v);
 
 public:
     bool operator==(const aspect_properties_repository& rhs) const;
@@ -71,7 +70,7 @@ public:
     aspect_properties_repository& operator=(aspect_properties_repository other);
 
 private:
-    std::unordered_map<std::string, std::list<dogen::quilt::cpp::properties::aspect_properties> > by_id_;
+    std::unordered_map<std::string, dogen::quilt::cpp::properties::aspect_properties> by_id_;
 };
 
 } } } }

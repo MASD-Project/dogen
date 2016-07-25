@@ -88,13 +88,6 @@ create_opaque_settings_builder(const dynamic::repository& drp) const {
     return r;
 }
 
-settings::aspect_settings_repository
-workflow::create_aspect_settings_repository(
-    const dynamic::repository& drp, const yarn::model& m) const {
-    settings::aspect_settings_repository_factory f;
-    return f.make(drp, m);
-}
-
 settings::element_settings_repository
 workflow::create_element_settings_repository(
     const dynamic::repository& drp, const settings::opaque_settings_builder& osb,
@@ -183,7 +176,6 @@ workflow::generate(const config::knitting_options& ko,
 
     const auto osb(create_opaque_settings_builder(drp));
     auto esrp(create_element_settings_repository(drp, osb, m));
-    auto asrp(create_aspect_settings_repository(drp, m));
 
     formatters::workflow::registrar().validate();
     const auto& fc(formatters::workflow::registrar().formatter_container());
