@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/settings/aspect_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/opaque_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/element_settings_hash.hpp"
 
@@ -64,7 +63,6 @@ namespace settings {
 std::size_t element_settings_hasher::hash(const element_settings& v) {
     std::size_t seed(0);
 
-    combine(seed, v.aspect_settings());
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings(v.opaque_settings()));
     combine(seed, hash_std_unordered_map_std_string_std_unordered_map_std_string_boost_shared_ptr_dogen_quilt_cpp_settings_opaque_settings(v.opaque_settings_for_property()));
 

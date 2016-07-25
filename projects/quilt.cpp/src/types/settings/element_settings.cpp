@@ -36,23 +36,19 @@ namespace cpp {
 namespace settings {
 
 element_settings::element_settings(
-    const dogen::quilt::cpp::settings::aspect_settings& aspect_settings,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& opaque_settings,
     const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > >& opaque_settings_for_property)
-    : aspect_settings_(aspect_settings),
-      opaque_settings_(opaque_settings),
+    : opaque_settings_(opaque_settings),
       opaque_settings_for_property_(opaque_settings_for_property) { }
 
 void element_settings::swap(element_settings& other) noexcept {
     using std::swap;
-    swap(aspect_settings_, other.aspect_settings_);
     swap(opaque_settings_, other.opaque_settings_);
     swap(opaque_settings_for_property_, other.opaque_settings_for_property_);
 }
 
 bool element_settings::operator==(const element_settings& rhs) const {
-    return aspect_settings_ == rhs.aspect_settings_ &&
-        opaque_settings_ == rhs.opaque_settings_ &&
+    return opaque_settings_ == rhs.opaque_settings_ &&
         opaque_settings_for_property_ == rhs.opaque_settings_for_property_;
 }
 
@@ -60,22 +56,6 @@ element_settings& element_settings::operator=(element_settings other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const dogen::quilt::cpp::settings::aspect_settings& element_settings::aspect_settings() const {
-    return aspect_settings_;
-}
-
-dogen::quilt::cpp::settings::aspect_settings& element_settings::aspect_settings() {
-    return aspect_settings_;
-}
-
-void element_settings::aspect_settings(const dogen::quilt::cpp::settings::aspect_settings& v) {
-    aspect_settings_ = v;
-}
-
-void element_settings::aspect_settings(const dogen::quilt::cpp::settings::aspect_settings&& v) {
-    aspect_settings_ = std::move(v);
 }
 
 const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& element_settings::opaque_settings() const {

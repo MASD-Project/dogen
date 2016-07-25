@@ -33,7 +33,6 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/quilt.cpp/types/settings/aspect_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
@@ -54,11 +53,6 @@ public:
         const opaque_settings_builder& osb);
 
 private:
-    /**
-     * @brief Create the element settings.
-     */
-    aspect_settings create_aspect_settings(const dynamic::object& o) const;
-
     /**
      * @brief Generates the opaque settings.
      */

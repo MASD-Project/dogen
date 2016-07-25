@@ -18,7 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/properties/aspect_properties_hash.hpp"
+#include "dogen/quilt.cpp/hash/settings/aspect_settings_hash.hpp"
+#include "dogen/quilt.cpp/hash/settings/aspect_settings_repository_hash.hpp"
 
 namespace {
 
@@ -28,20 +29,26 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_settings_aspect_settings(const std::unordered_map<std::string, dogen::quilt::cpp::settings::aspect_settings>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace properties {
+namespace settings {
 
-std::size_t aspect_properties_hasher::hash(const aspect_properties& v) {
+std::size_t aspect_settings_repository_hasher::hash(const aspect_settings_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, v.requires_manual_default_constructor());
-    combine(seed, v.requires_manual_move_constructor());
-    combine(seed, v.requires_stream_manipulators());
-
+    combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_settings_aspect_settings(v.by_id()));
     return seed;
 }
 

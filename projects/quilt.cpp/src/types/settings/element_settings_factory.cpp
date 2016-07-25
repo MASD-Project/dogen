@@ -22,7 +22,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
-#include "dogen/quilt.cpp/types/settings/aspect_settings_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_factory.hpp"
 
 namespace {
@@ -44,12 +43,6 @@ element_settings_factory::element_settings_factory(
     dynamic_repository_(rp), root_object_(root_object),
     opaque_settings_builder_(osb) { }
 
-aspect_settings element_settings_factory::
-create_aspect_settings(const dynamic::object& o) const {
-    aspect_settings_factory f(dynamic_repository_);
-    return f.make(o);
-}
-
 std::unordered_map<
     std::string,
     boost::shared_ptr<opaque_settings>
@@ -63,14 +56,11 @@ element_settings
 element_settings_factory::make(const dynamic::object& o) const {
     element_settings r;
     r.opaque_settings(create_opaque_settings(o));
-    r.aspect_settings(create_aspect_settings(o));
     return r;
 }
 
 element_settings element_settings_factory::make() const {
     element_settings r;
-    aspect_settings_factory f(dynamic_repository_);
-    r.aspect_settings(f.make());
     return r;
 }
 

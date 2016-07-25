@@ -52,6 +52,7 @@
 #include "dogen/quilt.cpp/io/properties/formatter_properties_io.hpp"
 #include "dogen/quilt.cpp/io/properties/enablement_repository_io.hpp"
 #include "dogen/quilt.cpp/io/settings/directory_names_settings_io.hpp"
+#include "dogen/quilt.cpp/io/settings/aspect_settings_repository_io.hpp"
 #include "dogen/quilt.cpp/io/settings/helper_settings_repository_io.hpp"
 #include "dogen/quilt.cpp/io/properties/forward_declarations_info_io.hpp"
 #include "dogen/quilt.cpp/io/settings/element_settings_repository_io.hpp"

@@ -18,31 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/properties/aspect_properties_hash.hpp"
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_ASPECT_SETTINGS_REPOSITORY_FWD_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_SETTINGS_ASPECT_SETTINGS_REPOSITORY_FWD_SER_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
+#include "dogen/quilt.cpp/types/settings/aspect_settings_repository_fwd.hpp"
 
-}
+namespace boost {
+namespace serialization {
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
-namespace properties {
+template<class Archive>
+void save(Archive& ar, const dogen::quilt::cpp::settings::aspect_settings_repository& v, unsigned int version);
 
-std::size_t aspect_properties_hasher::hash(const aspect_properties& v) {
-    std::size_t seed(0);
+template<class Archive>
+void load(Archive& ar, dogen::quilt::cpp::settings::aspect_settings_repository& v, unsigned int version);
 
-    combine(seed, v.requires_manual_default_constructor());
-    combine(seed, v.requires_manual_move_constructor());
-    combine(seed, v.requires_stream_manipulators());
+} }
 
-    return seed;
-}
-
-} } } }
+#endif

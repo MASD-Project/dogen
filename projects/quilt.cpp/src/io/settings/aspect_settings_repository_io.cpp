@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/settings/opaque_settings_io.hpp"
-#include "dogen/quilt.cpp/io/settings/element_settings_io.hpp"
+#include "dogen/quilt.cpp/io/settings/aspect_settings_io.hpp"
+#include "dogen/quilt.cpp/io/settings/aspect_settings_repository_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,43 +30,9 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
-      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
-
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::settings::aspect_settings>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -87,11 +53,10 @@ namespace quilt {
 namespace cpp {
 namespace settings {
 
-std::ostream& operator<<(std::ostream& s, const element_settings& v) {
+std::ostream& operator<<(std::ostream& s, const aspect_settings_repository& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::settings::element_settings\"" << ", "
-      << "\"opaque_settings\": " << v.opaque_settings() << ", "
-      << "\"opaque_settings_for_property\": " << v.opaque_settings_for_property()
+      << "\"__type__\": " << "\"dogen::quilt::cpp::settings::aspect_settings_repository\"" << ", "
+      << "\"by_id\": " << v.by_id()
       << " }";
     return(s);
 }

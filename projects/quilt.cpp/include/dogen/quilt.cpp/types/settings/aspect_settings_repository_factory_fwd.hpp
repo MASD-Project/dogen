@@ -18,31 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/properties/aspect_properties_hash.hpp"
+#ifndef DOGEN_QUILT_CPP_TYPES_SETTINGS_ASPECT_SETTINGS_REPOSITORY_FACTORY_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_SETTINGS_ASPECT_SETTINGS_REPOSITORY_FACTORY_FWD_HPP
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace properties {
+namespace settings {
 
-std::size_t aspect_properties_hasher::hash(const aspect_properties& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.requires_manual_default_constructor());
-    combine(seed, v.requires_manual_move_constructor());
-    combine(seed, v.requires_stream_manipulators());
-
-    return seed;
-}
+class aspect_settings_repository_factory;
 
 } } } }
+
+#endif

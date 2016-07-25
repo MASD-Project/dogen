@@ -83,9 +83,4 @@ aspect_settings_factory::make(const dynamic::object& o) const {
     return r;
 }
 
-aspect_settings aspect_settings_factory::make() const {
-    aspect_settings r;
-    return r;
-}
-
 } } } }

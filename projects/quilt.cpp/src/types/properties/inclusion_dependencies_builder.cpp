@@ -140,17 +140,6 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
     return r;
 }
 
-settings::aspect_settings inclusion_dependencies_builder::
-get_aspect_settings(const yarn::name& n) const {
-    const auto& bn(element_settings_repository_.by_id());
-    const auto i(bn.find(n.id()));
-    if (i == bn.end()) {
-        BOOST_LOG_SEV(lg, error) << name_not_found << n.id();
-        BOOST_THROW_EXCEPTION(building_error(name_not_found + n.id()));
-    }
-    return i->second.aspect_settings();
-}
-
 void inclusion_dependencies_builder::
 add(const std::string& inclusion_directive) {
     if (inclusion_directive.empty()) {

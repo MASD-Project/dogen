@@ -29,7 +29,6 @@
 #include <algorithm>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
-#include "dogen/quilt.cpp/types/settings/aspect_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_fwd.hpp"
 #include "dogen/quilt.cpp/serialization/settings/element_settings_fwd_ser.hpp"
 
@@ -47,7 +46,6 @@ public:
 
 public:
     element_settings(
-        const dogen::quilt::cpp::settings::aspect_settings& aspect_settings,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& opaque_settings,
         const std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > >& opaque_settings_for_property);
 
@@ -59,11 +57,6 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::settings::element_settings& v, unsigned int version);
 
 public:
-    const dogen::quilt::cpp::settings::aspect_settings& aspect_settings() const;
-    dogen::quilt::cpp::settings::aspect_settings& aspect_settings();
-    void aspect_settings(const dogen::quilt::cpp::settings::aspect_settings& v);
-    void aspect_settings(const dogen::quilt::cpp::settings::aspect_settings&& v);
-
     const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& opaque_settings() const;
     std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& opaque_settings();
     void opaque_settings(const std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> >& v);
@@ -85,7 +78,6 @@ public:
     element_settings& operator=(element_settings other);
 
 private:
-    dogen::quilt::cpp::settings::aspect_settings aspect_settings_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > opaque_settings_;
     std::unordered_map<std::string, std::unordered_map<std::string, boost::shared_ptr<dogen::quilt::cpp::settings::opaque_settings> > > opaque_settings_for_property_;
 };

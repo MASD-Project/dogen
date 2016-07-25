@@ -52,6 +52,7 @@
 #include "dogen/quilt.cpp/test_data/properties/formatter_properties_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/enablement_repository_td.hpp"
 #include "dogen/quilt.cpp/test_data/settings/directory_names_settings_td.hpp"
+#include "dogen/quilt.cpp/test_data/settings/aspect_settings_repository_td.hpp"
 #include "dogen/quilt.cpp/test_data/settings/helper_settings_repository_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/forward_declarations_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/settings/element_settings_repository_td.hpp"

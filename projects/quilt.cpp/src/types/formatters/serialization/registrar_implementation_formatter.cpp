@@ -66,8 +66,6 @@ provider::provide(const properties::inclusion_dependencies_builder_factory& f,
     builder.add(n, rh_fn);
 
     using ic = inclusion_constants;
-    const auto as(builder.get_aspect_settings(n));
-
     builder.add(ic::boost::archive::text_iarchive());
     builder.add(ic::boost::archive::text_oarchive());
     builder.add(ic::boost::archive::binary_iarchive());

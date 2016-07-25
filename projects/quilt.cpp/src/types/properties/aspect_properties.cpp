@@ -26,37 +26,27 @@ namespace cpp {
 namespace properties {
 
 aspect_properties::aspect_properties()
-    : disable_complete_constructor_(static_cast<bool>(0)),
-      disable_xml_serialization_(static_cast<bool>(0)),
-      requires_manual_default_constructor_(static_cast<bool>(0)),
+    : requires_manual_default_constructor_(static_cast<bool>(0)),
       requires_manual_move_constructor_(static_cast<bool>(0)),
       requires_stream_manipulators_(static_cast<bool>(0)) { }
 
 aspect_properties::aspect_properties(
-    const bool disable_complete_constructor,
-    const bool disable_xml_serialization,
     const bool requires_manual_default_constructor,
     const bool requires_manual_move_constructor,
     const bool requires_stream_manipulators)
-    : disable_complete_constructor_(disable_complete_constructor),
-      disable_xml_serialization_(disable_xml_serialization),
-      requires_manual_default_constructor_(requires_manual_default_constructor),
+    : requires_manual_default_constructor_(requires_manual_default_constructor),
       requires_manual_move_constructor_(requires_manual_move_constructor),
       requires_stream_manipulators_(requires_stream_manipulators) { }
 
 void aspect_properties::swap(aspect_properties& other) noexcept {
     using std::swap;
-    swap(disable_complete_constructor_, other.disable_complete_constructor_);
-    swap(disable_xml_serialization_, other.disable_xml_serialization_);
     swap(requires_manual_default_constructor_, other.requires_manual_default_constructor_);
     swap(requires_manual_move_constructor_, other.requires_manual_move_constructor_);
     swap(requires_stream_manipulators_, other.requires_stream_manipulators_);
 }
 
 bool aspect_properties::operator==(const aspect_properties& rhs) const {
-    return disable_complete_constructor_ == rhs.disable_complete_constructor_ &&
-        disable_xml_serialization_ == rhs.disable_xml_serialization_ &&
-        requires_manual_default_constructor_ == rhs.requires_manual_default_constructor_ &&
+    return requires_manual_default_constructor_ == rhs.requires_manual_default_constructor_ &&
         requires_manual_move_constructor_ == rhs.requires_manual_move_constructor_ &&
         requires_stream_manipulators_ == rhs.requires_stream_manipulators_;
 }
@@ -65,22 +55,6 @@ aspect_properties& aspect_properties::operator=(aspect_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-bool aspect_properties::disable_complete_constructor() const {
-    return disable_complete_constructor_;
-}
-
-void aspect_properties::disable_complete_constructor(const bool v) {
-    disable_complete_constructor_ = v;
-}
-
-bool aspect_properties::disable_xml_serialization() const {
-    return disable_xml_serialization_;
-}
-
-void aspect_properties::disable_xml_serialization(const bool v) {
-    disable_xml_serialization_ = v;
 }
 
 bool aspect_properties::requires_manual_default_constructor() const {

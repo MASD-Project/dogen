@@ -56,13 +56,7 @@ provider::provide(const properties::inclusion_dependencies_builder_factory& f,
 
     auto builder(f.make());
     builder.add(e.name(), types::traits::enum_header_formatter_name());
-
-    using ic = inclusion_constants;
-    const auto as(builder.get_aspect_settings(e.name()));
-
-    // XML serialisation
-    builder.add(ic::boost::serialization::nvp());
-
+    builder.add(inclusion_constants::boost::serialization::nvp());
     return builder.build();
 }
 
