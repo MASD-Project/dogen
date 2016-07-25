@@ -25,8 +25,7 @@
 #pragma once
 #endif
 
-#include <string>
-#include <unordered_map>
+#include <boost/optional.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/field_selector.hpp"
@@ -65,7 +64,7 @@ public:
     /**
      * @brief Produces the aspect settings.
      */
-    aspect_settings make(const dynamic::object& o) const;
+    boost::optional<aspect_settings> make(const dynamic::object& o) const;
 
 private:
     const field_definitions field_definitions_;
