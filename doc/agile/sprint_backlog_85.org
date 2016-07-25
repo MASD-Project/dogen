@@ -13,25 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-25 Mon 21:57]
+#+CAPTION: Clock summary at [2016-07-25 Mon 22:01]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *19:18* |       |      | 100.0 |
+| *Total time*                                                                | *19:21* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 19:18   |       |      | 100.0 |
-| Active                                                                      |         | 19:18 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:02 |   5.4 |
+| Stories                                                                     | 19:21   |       |      | 100.0 |
+| Active                                                                      |         | 19:21 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:02 |   5.3 |
 | COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  14.9 |
 | COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   3.2 |
 | COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   2.8 |
 | COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |  10.0 |
 | COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   1.1 |
 | COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   5.4 |
-| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  37.4 |
+| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  37.3 |
 | COMPLETED Remove optionality from helper settings                           |         |       | 0:22 |   1.9 |
 | COMPLETED Remove unused aspect settings                                     |         |       | 0:31 |   2.7 |
-| STARTED Add aspect properties infrastructure                                |         |       | 2:08 |  11.1 |
+| COMPLETED Reactivate compressed tests                                       |         |       | 0:03 |   0.3 |
+| STARTED Add aspect properties infrastructure                                |         |       | 2:08 |  11.0 |
 | STARTED Implement types in terms of =yarn::object=                          |         |       | 0:48 |   4.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -245,7 +246,7 @@ Update formatters in test data to use new helpers.
 
 We need to populate these in a settings workflow of some kind.
 
-*** COMPLETED Remove optionality from helper settings
+*** COMPLETED Remove optionality from helper settings                 :story:
     CLOSED: [2016-07-24 Sun 23:03]
     CLOCK: [2016-07-24 Sun 22:40]--[2016-07-24 Sun 23:02] =>  0:22
 
@@ -265,6 +266,15 @@ We don't really have strong use cases for these:
 
 We can always add them if required in the future, but at present they
 are adding additional complexity for no obvious gain.
+
+Removed with commit 709429a.
+
+*** COMPLETED Reactivate compressed tests                             :story:
+    CLOSED: [2016-07-25 Mon 22:01]
+    CLOCK: [2016-07-25 Mon 21:58]--[2016-07-25 Mon 22:01] =>  0:03
+
+We disabled the compressed model tests at some point in the past. Not
+quite sure why. Reactivate it.
 
 *** STARTED Add aspect properties infrastructure                      :story:
     CLOCK: [2016-07-25 Mon 21:08]--[2016-07-25 Mon 21:25] =>  0:17

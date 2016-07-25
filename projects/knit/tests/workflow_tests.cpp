@@ -187,13 +187,12 @@ BOOST_AUTO_TEST_CASE(classes_without_package_model_generates_expected_code) {
     BOOST_CHECK(generate_and_diff(target));
 }
 
-/*
 BOOST_AUTO_TEST_CASE(compressed_model_generates_expected_code) {
     SETUP_TEST_LOG("compressed_model_generates_expected_code");
     const auto target(yarn_dia::input_compressed_dia());
     BOOST_CHECK(generate_and_diff(target));
 }
-*/
+
 BOOST_AUTO_TEST_CASE(two_layers_with_objects_model_generates_expected_code) {
     SETUP_TEST_LOG("two_layers_with_objects_model_generates_expected_code");
     const auto target(yarn_dia::input_two_layers_with_objects_dia());
