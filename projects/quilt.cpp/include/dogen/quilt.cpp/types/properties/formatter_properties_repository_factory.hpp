@@ -113,7 +113,6 @@ public:
     formatter_properties_repository make(
         const dynamic::repository& srp,
         const dynamic::object& root_object,
-        const settings::element_settings_repository& esrp,
         const path_derivatives_repository& pdrp,
         const formatters::container& fc,
         const yarn::model& m) const;

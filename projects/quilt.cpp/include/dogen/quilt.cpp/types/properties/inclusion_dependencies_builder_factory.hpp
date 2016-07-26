@@ -40,7 +40,6 @@ class inclusion_dependencies_builder_factory final {
 public:
     inclusion_dependencies_builder_factory(
         const enablement_repository& erp,
-        const settings::element_settings_repository& esrp,
         const inclusion_directives_repository& idrp);
 
 public:
@@ -51,7 +50,6 @@ public:
 
 private:
     const enablement_repository& enablement_repository_;
-    const settings::element_settings_repository& element_settings_repository_;
     const inclusion_directives_repository& directives_repository_;
 };
 

@@ -56,10 +56,8 @@ namespace properties {
 
 inclusion_dependencies_builder::
 inclusion_dependencies_builder(const enablement_repository& erp,
-    const settings::element_settings_repository& esrp,
     const inclusion_directives_repository& idrp)
     : enablement_repository_(erp),
-      element_settings_repository_(esrp),
       directives_repository_(idrp) { }
 
 boost::optional<std::string>

@@ -128,13 +128,12 @@ create_path_derivatives_repository(const config::cpp_options& opts,
 formatter_properties_repository workflow::
 create_formatter_properties(const dynamic::repository& drp,
     const dynamic::object& root_object,
-    const settings::element_settings_repository& esrp,
     const path_derivatives_repository& pdrp,
     const formatters::container& fc,
     const yarn::model& m) const {
 
     formatter_properties_repository_factory f;
-    return f.make(drp, root_object, esrp, pdrp, fc, m);
+    return f.make(drp, root_object, pdrp, fc, m);
 }
 
 std::forward_list<std::shared_ptr<properties::formattable> >
@@ -210,7 +209,7 @@ workflow::execute(const config::cpp_options& opts,
     const auto& ro(root_object);
     const auto ps(create_path_settings_activity(drp, ro, fc));
     const auto pdrp(create_path_derivatives_repository(opts, ps, m));
-    auto fprp(create_formatter_properties(drp, ro, esrp, pdrp, fc, m));
+    auto fprp(create_formatter_properties(drp, ro, pdrp, fc, m));
 
     auto formattables(from_transformer_activity(m));
     formattables.splice_after(formattables.before_begin(),

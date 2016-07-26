@@ -66,7 +66,6 @@ public:
 public:
     inclusion_dependencies_builder(
         const enablement_repository& erp,
-        const settings::element_settings_repository& esrp,
         const inclusion_directives_repository& idrp);
 
 private:
@@ -119,7 +118,6 @@ public:
 
 private:
     const enablement_repository& enablement_repository_;
-    const settings::element_settings_repository& element_settings_repository_;
     const inclusion_directives_repository& directives_repository_;
     std::list<std::string> inclusion_dependencies_;
 };

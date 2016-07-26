@@ -27,17 +27,13 @@ namespace properties {
 
 inclusion_dependencies_builder_factory::inclusion_dependencies_builder_factory(
     const enablement_repository& erp,
-    const settings::element_settings_repository& esrp,
     const inclusion_directives_repository& idrp)
-    : enablement_repository_(erp), element_settings_repository_(esrp),
-      directives_repository_(idrp) { }
+    : enablement_repository_(erp), directives_repository_(idrp) {}
 
 inclusion_dependencies_builder inclusion_dependencies_builder_factory::
 make() const {
     return inclusion_dependencies_builder(
-        enablement_repository_,
-        element_settings_repository_,
-        directives_repository_);
+        enablement_repository_, directives_repository_);
 }
 
 } } } }
