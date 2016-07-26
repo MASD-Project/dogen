@@ -83,6 +83,16 @@ bool resolver::is_primitive(const intermediate_model& m, const name& n) const {
     return false;
 }
 
+bool
+resolver::is_enumeration(const intermediate_model& m, const name& n) const {
+    auto i(m.enumerations().find(n.id()));
+    if (i != m.enumerations().end()) {
+        BOOST_LOG_SEV(lg, debug) << "Name belongs to an enumeration in model.";
+        return true;
+    }
+    return false;
+}
+
 bool resolver::is_object(const intermediate_model& m, const name& n) const {
     auto i(m.objects().find(n.id()));
     if (i != m.objects().end()) {
@@ -214,6 +224,7 @@ void resolver::resolve_partial_type(const intermediate_model& m,
     const indexed_ids& idx, const name& owner, name_tree& nt) const {
     const name n(resolve_partial_type(m, idx, nt.current()));
     nt.current(n);
+    nt.is_current_simple_type(is_enumeration(m, n) || is_primitive(m, n));
 
     const auto i(idx.always_in_heap.find(n.id()));
     nt.are_children_opaque(i != idx.always_in_heap.end());

@@ -47,6 +47,7 @@ void save(Archive& ar,
     ar << make_nvp("is_circular_dependency", v.is_circular_dependency_);
     ar << make_nvp("qualified", v.qualified_);
     ar << make_nvp("identifiable", v.identifiable_);
+    ar << make_nvp("is_current_simple_type", v.is_current_simple_type_);
 }
 
 template<typename Archive>
@@ -59,6 +60,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_circular_dependency", v.is_circular_dependency_);
     ar >> make_nvp("qualified", v.qualified_);
     ar >> make_nvp("identifiable", v.identifiable_);
+    ar >> make_nvp("is_current_simple_type", v.is_current_simple_type_);
 }
 
 } }

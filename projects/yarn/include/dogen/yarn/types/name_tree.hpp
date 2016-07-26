@@ -62,7 +62,8 @@ public:
         const bool are_children_opaque,
         const bool is_circular_dependency,
         const std::map<dogen::yarn::languages, std::string>& qualified,
-        const std::string& identifiable);
+        const std::string& identifiable,
+        const bool is_current_simple_type);
 
 private:
     template<typename Archive>
@@ -133,6 +134,14 @@ public:
     void identifiable(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Returns true if @e current is a simple type such as a primitive or an enumeration.
+     */
+    /**@{*/
+    bool is_current_simple_type() const;
+    void is_current_simple_type(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const name_tree& rhs) const;
     bool operator!=(const name_tree& rhs) const {
@@ -150,6 +159,7 @@ private:
     bool is_circular_dependency_;
     std::map<dogen::yarn::languages, std::string> qualified_;
     std::string identifiable_;
+    bool is_current_simple_type_;
 };
 
 } }

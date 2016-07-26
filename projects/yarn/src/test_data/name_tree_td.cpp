@@ -81,6 +81,7 @@ populate(const unsigned int position, result_type& v) {
     v.is_circular_dependency(create_bool(position + 3));
     v.qualified(create_std_map_dogen_yarn_languages_std_string(position + 4));
     v.identifiable(create_std_string(position + 5));
+    v.is_current_simple_type(create_bool(position + 6));
 }
 
 name_tree_generator::result_type
