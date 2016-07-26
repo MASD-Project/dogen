@@ -90,10 +90,9 @@ create_opaque_settings_builder(const dynamic::repository& drp) const {
 
 settings::element_settings_repository
 workflow::create_element_settings_repository(
-    const dynamic::repository& drp, const settings::opaque_settings_builder& osb,
-    const yarn::model& m) const {
+    const settings::opaque_settings_builder& osb, const yarn::model& m) const {
     settings::element_settings_repository_factory f;
-    return f.make(drp, osb, m);
+    return f.make(osb, m);
 }
 
 std::pair<
@@ -175,7 +174,7 @@ workflow::generate(const config::knitting_options& ko,
     const auto fpwf(create_file_properties_workflow(drp, frp, ro));
 
     const auto osb(create_opaque_settings_builder(drp));
-    auto esrp(create_element_settings_repository(drp, osb, m));
+    auto esrp(create_element_settings_repository(osb, m));
 
     formatters::workflow::registrar().validate();
     const auto& fc(formatters::workflow::registrar().formatter_container());

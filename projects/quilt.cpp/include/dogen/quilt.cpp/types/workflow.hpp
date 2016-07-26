@@ -88,7 +88,7 @@ private:
      * @brief Create the element settings repository
      */
     settings::element_settings_repository
-    create_element_settings_repository(const dynamic::repository& drp,
+    create_element_settings_repository(
         const settings::opaque_settings_builder& osb,
         const yarn::model& m) const;
 

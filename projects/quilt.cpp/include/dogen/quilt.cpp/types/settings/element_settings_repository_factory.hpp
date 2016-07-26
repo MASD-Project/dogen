@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/dynamic/types/repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
@@ -43,8 +42,7 @@ public:
     /**
      * @brief Create the element settings repository.
      */
-    element_settings_repository make(const dynamic::repository& rp,
-        const opaque_settings_builder& osb,
+    element_settings_repository make(const opaque_settings_builder& osb,
         const yarn::model& m) const;
 };
 

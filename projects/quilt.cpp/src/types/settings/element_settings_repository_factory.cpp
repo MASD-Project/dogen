@@ -121,12 +121,11 @@ private:
 }
 
 element_settings_repository element_settings_repository_factory::
-make(const dynamic::repository& rp, const opaque_settings_builder& osb,
-    const yarn::model& m) const {
+make(const opaque_settings_builder& osb, const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating element settings repository.";
 
-    const element_settings_factory f(rp, osb);
+    const element_settings_factory f(osb);
     generator g(f, osb);
     for (const auto& pair : m.elements()) {
         const auto& e(*pair.second);

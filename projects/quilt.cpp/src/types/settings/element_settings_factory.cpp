@@ -36,10 +36,9 @@ namespace quilt {
 namespace cpp {
 namespace settings {
 
-element_settings_factory::element_settings_factory(
-    const dynamic::repository& rp,
-    const opaque_settings_builder& osb) :
-    dynamic_repository_(rp), opaque_settings_builder_(osb) { }
+element_settings_factory::
+element_settings_factory(const opaque_settings_builder& osb)
+    : opaque_settings_builder_(osb) {}
 
 std::unordered_map<
     std::string,

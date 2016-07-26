@@ -48,8 +48,7 @@ namespace settings {
  */
 class element_settings_factory final {
 public:
-    element_settings_factory(const dynamic::repository& rp,
-        const opaque_settings_builder& osb);
+    explicit element_settings_factory(const opaque_settings_builder& osb);
 
 private:
     /**
@@ -65,7 +64,6 @@ public:
     element_settings make(const dynamic::object& o) const;
 
 private:
-    const dynamic::repository& dynamic_repository_;
     const opaque_settings_builder& opaque_settings_builder_;
 };
 
