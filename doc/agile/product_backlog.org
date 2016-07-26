@@ -6278,6 +6278,13 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Consider using the fmt library instead of iostreams               :story:
+
+It would be interesting to benchmark dogen using iostreams vs dogen
+using the fmt library:
+
+https://github.com/fmtlib/fmt
+
 *** Add support for element renaming                                  :story:
 
 This story is still in its early days. We could probably create a
