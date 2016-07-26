@@ -120,7 +120,9 @@ public:
     void visit(const dogen::yarn::enumeration& e) override {
         format(container_.enum_formatters(), e);
     }
-    void visit(const dogen::yarn::object& /*o*/) override {}
+    void visit(const dogen::yarn::object& /*o*/) override {
+        // format(container_.new_class_formatters(), o);
+    }
     void visit(const dogen::yarn::exception& e) override {
         format(container_.exception_formatters(), e);
     }

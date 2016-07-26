@@ -35,6 +35,7 @@
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
@@ -68,11 +69,14 @@ public:
      */
     static std::string
     make_final_keyword_text(const properties::class_info& c);
+    static std::string
+    make_final_keyword_text(const yarn::object& o);
 
     /**
      * @brief Returns the by-ref to use given the property.
      */
     static std::string make_by_ref_text(const properties::property_info& p);
+    static std::string make_by_ref_text(const yarn::attribute& attr);
 
     /**
      * @brief Makes the return type of a setter, taking into account
@@ -81,6 +85,9 @@ public:
     static std::string
     make_setter_return_type(const std::string& containing_type_name,
         const properties::property_info& p);
+    static std::string
+    make_setter_return_type(const std::string& containing_type_name,
+        const yarn::attribute& attr);
 
     /**
      * @brief Obtains the qualified name
@@ -107,11 +114,16 @@ private:
     bool is_formatter_enabled(const std::string& formatter_name) const;
 
 public:
+    bool requires_manual_default_constructor() const;
+    bool requires_manual_move_constructor() const;
+
+public:
     /**
      * @brief Returns the property as a member variable.
      */
     std::string make_member_variable_name(
         const properties::property_info& p) const;
+    std::string make_member_variable_name(const yarn::attribute& attr) const;
 
     /**
      * @brief Returns the property as a getter.
