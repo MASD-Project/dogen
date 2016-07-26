@@ -11,6 +11,12 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** "current" is not the best of names in name tree                   :story:
+
+We need to find a slightly more meaningful name for the "current" name
+on the name tree. It was just about alright and then we went and
+introduced =is_current_simple_type=, which is unintelligible.
+
 *** Code generation of dynamic instances                              :story:
 
 We seem to have a pretty well established usage pattern for dynamic,
