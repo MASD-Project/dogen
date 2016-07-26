@@ -8378,6 +8378,15 @@ Notes:
 
 Stories we just don't quite know where to bucket them.
 
+*** Mine MongoDB Smasher for test data ideas                          :story:
+
+There is a project to generate large data sets for MongoDB:
+
+https://github.com/duckie/mongo_smasher
+
+We should have a look at their feature set and see if any of the
+features make sense for dogen.
+
 *** Unmaintained emblem                                               :story:
 
 If we ever reach a point where Dogen is complete according to the
