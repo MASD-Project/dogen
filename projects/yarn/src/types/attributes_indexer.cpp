@@ -55,7 +55,8 @@ object& attributes_indexer::find_object(const name& n, intermediate_model& m) {
     return i->second;
 }
 
-concept& attributes_indexer::find_concept(const name& n, intermediate_model& m) {
+concept& attributes_indexer::
+find_concept(const name& n, intermediate_model& m) {
     const auto& id(n.id());
     auto i(m.concepts().find(id));
     if (i == m.concepts().end()) {
@@ -66,12 +67,12 @@ concept& attributes_indexer::find_concept(const name& n, intermediate_model& m) 
 }
 
 void attributes_indexer::index_object(object& o, intermediate_model& m,
-    std::unordered_set<name>& processed_names) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().id();
+    std::unordered_set<std::string>& processed_ids) {
+    const auto id(o.name().id());
+    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << id;
 
-    if (processed_names.find(o.name()) != processed_names.end()) {
-        BOOST_LOG_SEV(lg, debug) << "Object already processed: "
-                                 << o.name().id();
+    if (processed_ids.find(id) != processed_ids.end()) {
+        BOOST_LOG_SEV(lg, debug) << "Object already processed: " << id;
         return;
     }
 
@@ -93,7 +94,7 @@ void attributes_indexer::index_object(object& o, intermediate_model& m,
 
     for (const auto& n : o.parents()) {
         auto& parent(find_object(n, m));
-        index_object(parent, m, processed_names);
+        index_object(parent, m, processed_ids);
 
         if (!parent.all_attributes().empty()) {
             const auto& pn(parent.name());
@@ -108,30 +109,30 @@ void attributes_indexer::index_object(object& o, intermediate_model& m,
     o.all_attributes().insert(o.all_attributes().end(),
         o.local_attributes().begin(), o.local_attributes().end());
 
-    processed_names.insert(o.name());
+    processed_ids.insert(id);
 }
 
 void attributes_indexer::index_objects(intermediate_model& m) {
     BOOST_LOG_SEV(lg, debug) << "Indexing objects: " << m.objects().size();
 
-    std::unordered_set<name> processed_names;
+    std::unordered_set<std::string> processed_ids;
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
 
         if (o.generation_type() == generation_types::no_generation)
             continue;
 
-        index_object(o, m, processed_names);
+        index_object(o, m, processed_ids);
     }
 }
 
 void attributes_indexer::index_concept(concept& c, intermediate_model& m,
-    std::unordered_set<name>& processed_names) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing concept: " << c.name().id();
+    std::unordered_set<std::string>& processed_ids) {
+    const auto id(c.name().id());
+    BOOST_LOG_SEV(lg, debug) << "Indexing concept: " << id;
 
-    if (processed_names.find(c.name()) != processed_names.end()) {
-        BOOST_LOG_SEV(lg, debug) << "Object already processed:"
-                                 << c.name().id();
+    if (processed_ids.find(c.name().id()) != processed_ids.end()) {
+        BOOST_LOG_SEV(lg, debug) << "Object already processed:" << id;
         return;
     }
 
@@ -140,7 +141,7 @@ void attributes_indexer::index_concept(concept& c, intermediate_model& m,
 
     for (const auto& n : c.refines()) {
         auto& parent(find_concept(n, m));
-        index_concept(parent, m, processed_names);
+        index_concept(parent, m, processed_ids);
 
         c.inherited_attributes().insert(
             std::make_pair(parent.name(), parent.local_attributes()));
@@ -148,20 +149,20 @@ void attributes_indexer::index_concept(concept& c, intermediate_model& m,
         c.all_attributes().insert(c.all_attributes().end(),
             parent.local_attributes().begin(), parent.local_attributes().end());
     }
-    processed_names.insert(c.name());
+    processed_ids.insert(id);
 }
 
 void attributes_indexer::index_concepts(intermediate_model& m) {
     BOOST_LOG_SEV(lg, debug) << "Indexing concepts: " << m.concepts().size();
 
-    std::unordered_set<name> processed_names;
+    std::unordered_set<std::string> processed_ids;
     for (auto& pair : m.concepts()) {
         auto& c(pair.second);
 
         if (c.generation_type() == generation_types::no_generation)
             continue;
 
-        index_concept(c, m, processed_names);
+        index_concept(c, m, processed_ids);
     }
 }
 

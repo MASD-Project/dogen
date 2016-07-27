@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <list>
+#include <string>
 #include <unordered_set>
 #include "dogen/yarn/types/intermediate_model.hpp"
 
@@ -118,7 +118,7 @@ private:
      * @brief Indexes a specific object.
      */
     void index_object(object& o, intermediate_model& m,
-        std::unordered_set<name>& processed_names);
+        std::unordered_set<std::string>& processed_ids);
 
     /**
      * @brief Indexes all objects in the model.
@@ -129,7 +129,7 @@ private:
      * @brief Populates index information in a concept.
      */
     void index_concept(concept& c, intermediate_model& m,
-        std::unordered_set<name>& processed_names);
+        std::unordered_set<std::string>& processed_ids);
 
     /**
      * @brief Indexes all concepts in the model.
