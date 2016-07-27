@@ -35,6 +35,9 @@ void aspect_properties_factory::compute_properties(const yarn::name_tree& nt,
     for (const auto& c : nt.children())
         compute_properties(c, false/*is_top_level*/, ap);
 
+    if (is_top_level && nt.is_current_simple_type())
+        ap.requires_manual_default_constructor(true);
+
     const auto i(repository_.by_id().find(nt.current().id()));
     if (i == repository_.by_id().end())
         return;
