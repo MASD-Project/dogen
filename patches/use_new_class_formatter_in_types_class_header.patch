@@ -74,7 +74,7 @@ index 98fa38c..ce3629c 100644
  }
  
 diff --git a/projects/quilt.cpp/src/types/formatters/types/class_header_formatter.stitch b/projects/quilt.cpp/src/types/formatters/types/class_header_formatter.stitch
-index 3632e16..a9fd1ac 100644
+index 3632e16..84d0f34 100644
 --- a/projects/quilt.cpp/src/types/formatters/types/class_header_formatter.stitch
 +++ b/projects/quilt.cpp/src/types/formatters/types/class_header_formatter.stitch
 @@ -7,30 +7,35 @@
@@ -223,7 +223,7 @@ index 3632e16..a9fd1ac 100644
 +                    const auto attr(*o.all_attributes().begin());
  #>
 -    explicit <#= c.name() #>(const <#= p.type().complete_name() #><#= a.make_by_ref_text(p) #> <#= p.name() #>);
-+    explicit <#= sn #>(const <#= attr.unparsed_type() #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #>);
++    explicit <#= sn #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #>);
  <#+
                  } else {
  #>
@@ -237,7 +237,7 @@ index 3632e16..a9fd1ac 100644
 +                    for (const auto& attr : o.all_attributes()) {
  #>
 -        const <#= p.type().complete_name() #><#= a.make_by_ref_text(p) #> <#= p.name() #><#= sf.postfix() #>
-+        const <#= attr.unparsed_type() #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #><#= sf.postfix() #>
++        const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #><#= sf.postfix() #>
  <#+
                          sf.next();
                      }
@@ -336,7 +336,7 @@ index 3632e16..a9fd1ac 100644
 +                    if (attr.parsed_type().is_current_simple_type()) {
  #>
 -    <#= p.type().complete_name() #> <#= p.name() #>() const;
-+    <#= attr.unparsed_type() #> <#= attr.name().simple() #>() const;
++    <#= a.get_qualified_name(attr.parsed_type()) #> <#= attr.name().simple() #>() const;
  <#+
 -                        if (p.is_immutable()) {
 +                        if (attr.is_immutable()) {
@@ -347,12 +347,12 @@ index 3632e16..a9fd1ac 100644
                          }
  #>
 -    <#= a.make_setter_return_type(c.name(), p) #> <#= p.name() #>(const <#= p.type().complete_name() #><#= a.make_by_ref_text(p) #> v);
-+    <#= a.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= attr.unparsed_type() #><#= a.make_by_ref_text(attr) #> v);
++    <#= a.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> v);
  <#+
                      } else {
  #>
 -    const <#= p.type().complete_name() #>& <#= p.name() #>() const;
-+    const <#= attr.unparsed_type() #>& <#= attr.name().simple() #>() const;
++    const <#= a.get_qualified_name(attr.parsed_type()) #>& <#= attr.name().simple() #>() const;
  <#+
 -                        if (p.is_immutable()) {
 +                        if (attr.is_immutable()) {
@@ -365,9 +365,9 @@ index 3632e16..a9fd1ac 100644
 -    <#= p.type().complete_name() #><#= a.make_by_ref_text(p) #> <#= p.name() #>();
 -    <#= a.make_setter_return_type(c.name(), p) #> <#= p.name() #>(const <#= p.type().complete_name() #><#= a.make_by_ref_text(p) #> v);
 -    <#= a.make_setter_return_type(c.name(), p) #> <#= p.name() #>(const <#= p.type().complete_name() #>&& v);
-+    <#= attr.unparsed_type() #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #>();
-+    <#= a.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= attr.unparsed_type() #><#= a.make_by_ref_text(attr) #> v);
-+    <#= a.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= attr.unparsed_type() #>&& v);
++    <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #>();
++    <#= a.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> v);
++    <#= a.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #>&& v);
  <#+
                      }
 -                    a.comment_end_method_group(p.documentation(), !p.is_immutable());
@@ -465,7 +465,7 @@ index 3632e16..a9fd1ac 100644
 +                for (const auto& attr : o.local_attributes()) {
  #>
 -    <#= p.type().complete_name() #> <#= a.make_member_variable_name(p) #>;
-+    <#= attr.unparsed_type() #> <#= a.make_member_variable_name(attr) #>;
++    <#= a.get_qualified_name(attr.parsed_type()) #> <#= a.make_member_variable_name(attr) #>;
  <#+
                  }
              }
@@ -520,7 +520,7 @@ index 3632e16..a9fd1ac 100644
  
  <#+
 diff --git a/projects/quilt.cpp/src/types/formatters/types/class_header_formatter_stitch.cpp b/projects/quilt.cpp/src/types/formatters/types/class_header_formatter_stitch.cpp
-index 9200aa2..b2cedc8 100644
+index 9200aa2..843b23c 100644
 --- a/projects/quilt.cpp/src/types/formatters/types/class_header_formatter_stitch.cpp
 +++ b/projects/quilt.cpp/src/types/formatters/types/class_header_formatter_stitch.cpp
 @@ -27,23 +27,28 @@ namespace cpp {
@@ -642,7 +642,7 @@ index 9200aa2..b2cedc8 100644
 +                const auto attr_count(o.all_attributes().size());
 +                if (attr_count == 1) {
 +                    const auto attr(*o.all_attributes().begin());
-+a.stream() << "    explicit " << sn << "(const " << attr.unparsed_type() << a.make_by_ref_text(attr) << " " << attr.name().simple() << ");" << std::endl;
++a.stream() << "    explicit " << sn << "(const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " " << attr.name().simple() << ");" << std::endl;
                  } else {
 -a.stream() << "    " << c.name() << "(" << std::endl;
 -                    dogen::formatters::sequence_formatter sf(prop_count);
@@ -652,7 +652,7 @@ index 9200aa2..b2cedc8 100644
 -                    for (const auto& p : c.all_properties()) {
 -a.stream() << "        const " << p.type().complete_name() << a.make_by_ref_text(p) << " " << p.name() << sf.postfix() << std::endl;
 +                    for (const auto& attr : o.all_attributes()) {
-+a.stream() << "        const " << attr.unparsed_type() << a.make_by_ref_text(attr) << " " << attr.name().simple() << sf.postfix() << std::endl;
++a.stream() << "        const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " " << attr.name().simple() << sf.postfix() << std::endl;
                          sf.next();
                      }
                  }
@@ -743,17 +743,17 @@ index 9200aa2..b2cedc8 100644
 -a.stream() << "    " << p.type().complete_name() << " " << p.name() << "() const;" << std::endl;
 -                        if (p.is_immutable()) {
 +                    if (attr.parsed_type().is_current_simple_type()) {
-+a.stream() << "    " << attr.unparsed_type() << " " << attr.name().simple() << "() const;" << std::endl;
++a.stream() << "    " << a.get_qualified_name(attr.parsed_type()) << " " << attr.name().simple() << "() const;" << std::endl;
 +                        if (attr.is_immutable()) {
  a.stream() << std::endl;
                              continue;
                          }
 -a.stream() << "    " << a.make_setter_return_type(c.name(), p) << " " << p.name() << "(const " << p.type().complete_name() << a.make_by_ref_text(p) << " v);" << std::endl;
-+a.stream() << "    " << a.make_setter_return_type(sn, attr) << " " << attr.name().simple() << "(const " << attr.unparsed_type() << a.make_by_ref_text(attr) << " v);" << std::endl;
++a.stream() << "    " << a.make_setter_return_type(sn, attr) << " " << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " v);" << std::endl;
                      } else {
 -a.stream() << "    const " << p.type().complete_name() << "& " << p.name() << "() const;" << std::endl;
 -                        if (p.is_immutable()) {
-+a.stream() << "    const " << attr.unparsed_type() << "& " << attr.name().simple() << "() const;" << std::endl;
++a.stream() << "    const " << a.get_qualified_name(attr.parsed_type()) << "& " << attr.name().simple() << "() const;" << std::endl;
 +                        if (attr.is_immutable()) {
  a.stream() << std::endl;
                              continue;
@@ -761,9 +761,9 @@ index 9200aa2..b2cedc8 100644
 -a.stream() << "    " << p.type().complete_name() << a.make_by_ref_text(p) << " " << p.name() << "();" << std::endl;
 -a.stream() << "    " << a.make_setter_return_type(c.name(), p) << " " << p.name() << "(const " << p.type().complete_name() << a.make_by_ref_text(p) << " v);" << std::endl;
 -a.stream() << "    " << a.make_setter_return_type(c.name(), p) << " " << p.name() << "(const " << p.type().complete_name() << "&& v);" << std::endl;
-+a.stream() << "    " << attr.unparsed_type() << a.make_by_ref_text(attr) << " " << attr.name().simple() << "();" << std::endl;
-+a.stream() << "    " << a.make_setter_return_type(sn, attr) << " " << attr.name().simple() << "(const " << attr.unparsed_type() << a.make_by_ref_text(attr) << " v);" << std::endl;
-+a.stream() << "    " << a.make_setter_return_type(sn, attr) << " " << attr.name().simple() << "(const " << attr.unparsed_type() << "&& v);" << std::endl;
++a.stream() << "    " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " " << attr.name().simple() << "();" << std::endl;
++a.stream() << "    " << a.make_setter_return_type(sn, attr) << " " << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " v);" << std::endl;
++a.stream() << "    " << a.make_setter_return_type(sn, attr) << " " << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << "&& v);" << std::endl;
                      }
 -                    a.comment_end_method_group(p.documentation(), !p.is_immutable());
 +                    a.comment_end_method_group(attr.documentation(), !attr.is_immutable());
@@ -841,7 +841,7 @@ index 9200aa2..b2cedc8 100644
 -                for (const auto& p : c.properties()) {
 -a.stream() << "    " << p.type().complete_name() << " " << a.make_member_variable_name(p) << ";" << std::endl;
 +                for (const auto& attr : o.local_attributes()) {
-+a.stream() << "    " << attr.unparsed_type() << " " << a.make_member_variable_name(attr) << ";" << std::endl;
++a.stream() << "    " << a.get_qualified_name(attr.parsed_type()) << " " << a.make_member_variable_name(attr) << ";" << std::endl;
                  }
              }
  a.stream() << "};" << std::endl;
