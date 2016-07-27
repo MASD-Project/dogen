@@ -117,7 +117,7 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
     helper_descriptor r;
     properties::name_builder b;
     r.namespaces(b.namespace_list(nt.current()));
-    r.is_primitive(nt.is_current_simple_type());
+    r.is_simple_type(nt.is_current_simple_type());
 
     /*
      * Note: we log conditionally for both settings to make

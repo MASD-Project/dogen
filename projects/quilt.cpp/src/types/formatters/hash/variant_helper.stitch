@@ -70,7 +70,7 @@ struct <#= ident #>_visitor : public boost::static_visitor<> {
 <#+
     for (const auto& dd : hp.direct_descendants()) {
 #>
-    void operator()(const <#= dd.name_qualified() #><#= (dd.is_primitive() ? "" : "&") #> v) const {
+    void operator()(const <#= dd.name_qualified() #><#= (dd.is_simple_type() ? "" : "&") #> v) const {
 <#+
         if (!dd.requires_hashing_helper())
 #>

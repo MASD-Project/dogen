@@ -48,7 +48,7 @@ void save(Archive& ar,
     ar << make_nvp("name_tree_identifiable", v.name_tree_identifiable_);
     ar << make_nvp("helper_settings", v.helper_settings_);
     ar << make_nvp("streaming_settings", v.streaming_settings_);
-    ar << make_nvp("is_primitive", v.is_primitive_);
+    ar << make_nvp("is_simple_type", v.is_simple_type_);
     ar << make_nvp("requires_hashing_helper", v.requires_hashing_helper_);
     ar << make_nvp("is_circular_dependency", v.is_circular_dependency_);
     ar << make_nvp("is_pointer", v.is_pointer_);
@@ -65,7 +65,7 @@ void load(Archive& ar,
     ar >> make_nvp("name_tree_identifiable", v.name_tree_identifiable_);
     ar >> make_nvp("helper_settings", v.helper_settings_);
     ar >> make_nvp("streaming_settings", v.streaming_settings_);
-    ar >> make_nvp("is_primitive", v.is_primitive_);
+    ar >> make_nvp("is_simple_type", v.is_simple_type_);
     ar >> make_nvp("requires_hashing_helper", v.requires_hashing_helper_);
     ar >> make_nvp("is_circular_dependency", v.is_circular_dependency_);
     ar >> make_nvp("is_pointer", v.is_pointer_);

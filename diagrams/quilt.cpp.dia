@@ -28750,7 +28750,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="148.917,134.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="148.167,133.45;167.347,146.75"/>
+        <dia:rectangle val="148.167,133.45;167.348,146.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -35752,7 +35752,7 @@ main, or from another initialiser.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#is_primitive#</dia:string>
+            <dia:string>#is_simple_type#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
@@ -40325,7 +40325,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="110.415,163"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="109.665,151.15;120.2,164.6"/>
+        <dia:rectangle val="109.665,151.15;120.2,163.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -40397,7 +40397,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="110.415,166.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="109.665,165.85;119.2,179.6"/>
+        <dia:rectangle val="109.665,165.85;119.2,178.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -40469,7 +40469,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="144.91,178"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="144.16,167.35;153.535,179.6"/>
+        <dia:rectangle val="144.16,167.35;153.535,178.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

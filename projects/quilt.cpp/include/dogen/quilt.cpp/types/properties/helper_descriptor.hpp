@@ -58,7 +58,7 @@ public:
         const std::string& name_tree_identifiable,
         const dogen::quilt::cpp::settings::helper_settings& helper_settings,
         const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& streaming_settings,
-        const bool is_primitive,
+        const bool is_simple_type,
         const bool requires_hashing_helper,
         const bool is_circular_dependency,
         const bool is_pointer);
@@ -106,8 +106,8 @@ public:
     void streaming_settings(const boost::optional<dogen::quilt::cpp::settings::streaming_settings>& v);
     void streaming_settings(const boost::optional<dogen::quilt::cpp::settings::streaming_settings>&& v);
 
-    bool is_primitive() const;
-    void is_primitive(const bool v);
+    bool is_simple_type() const;
+    void is_simple_type(const bool v);
 
     bool requires_hashing_helper() const;
     void requires_hashing_helper(const bool v);
@@ -136,7 +136,7 @@ private:
     std::string name_tree_identifiable_;
     dogen::quilt::cpp::settings::helper_settings helper_settings_;
     boost::optional<dogen::quilt::cpp::settings::streaming_settings> streaming_settings_;
-    bool is_primitive_;
+    bool is_simple_type_;
     bool requires_hashing_helper_;
     bool is_circular_dependency_;
     bool is_pointer_;

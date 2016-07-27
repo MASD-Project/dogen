@@ -76,9 +76,9 @@ struct <#= d.name_tree_identifiable() #>_visitor : public boost::static_visitor<
         for (const auto& dd : hp.direct_descendants()) {
 #>
 
-    void operator()(const <#= dd.name_qualified() #><#= (dd.is_primitive() ? "" : "&") #> v) const {
+    void operator()(const <#= dd.name_qualified() #><#= (dd.is_simple_type() ? "" : "&") #> v) const {
 <#+
-            if (dd.is_primitive()) {
+            if (dd.is_simple_type()) {
 #>
         stream_ << "{ " << "\"__type__\": " << "\"<#= dd.name_qualified() #>\"" << ", ";
         stream_ << "\"value\": ";

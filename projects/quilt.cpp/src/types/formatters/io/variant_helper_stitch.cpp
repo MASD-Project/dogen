@@ -93,8 +93,8 @@ a.stream() << std::endl;
 a.stream() << "    ~" << d.name_tree_identifiable() << "_visitor() { stream_ << \" }\"; }" << std::endl;
         for (const auto& dd : hp.direct_descendants()) {
 a.stream() << std::endl;
-a.stream() << "    void operator()(const " << dd.name_qualified() << (dd.is_primitive() ? "" : "&") << " v) const {" << std::endl;
-            if (dd.is_primitive()) {
+a.stream() << "    void operator()(const " << dd.name_qualified() << (dd.is_simple_type() ? "" : "&") << " v) const {" << std::endl;
+            if (dd.is_simple_type()) {
 a.stream() << "        stream_ << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << dd.name_qualified() << "\\\"\" << \", \";" << std::endl;
 a.stream() << "        stream_ << \"\\\"value\\\": \";" << std::endl;
 a.stream() << "        stream_ << " << a.streaming_for_type(dd, "v") << ";" << std::endl;

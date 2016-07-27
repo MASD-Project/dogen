@@ -78,7 +78,7 @@ populate(const unsigned int position, result_type& v) {
     v.name_tree_identifiable(create_std_string(position + 4));
     v.helper_settings(create_dogen_quilt_cpp_settings_helper_settings(position + 5));
     v.streaming_settings(create_boost_optional_dogen_quilt_cpp_settings_streaming_settings(position + 6));
-    v.is_primitive(create_bool(position + 7));
+    v.is_simple_type(create_bool(position + 7));
     v.requires_hashing_helper(create_bool(position + 8));
     v.is_circular_dependency(create_bool(position + 9));
     v.is_pointer(create_bool(position + 10));

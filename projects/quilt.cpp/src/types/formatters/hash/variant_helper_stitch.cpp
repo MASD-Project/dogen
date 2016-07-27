@@ -87,7 +87,7 @@ a.stream() << std::endl;
 a.stream() << "struct " << ident << "_visitor : public boost::static_visitor<> {" << std::endl;
 a.stream() << "    " << ident << "_visitor() : hash(0) {}" << std::endl;
     for (const auto& dd : hp.direct_descendants()) {
-a.stream() << "    void operator()(const " << dd.name_qualified() << (dd.is_primitive() ? "" : "&") << " v) const {" << std::endl;
+a.stream() << "    void operator()(const " << dd.name_qualified() << (dd.is_simple_type() ? "" : "&") << " v) const {" << std::endl;
         if (!dd.requires_hashing_helper())
 a.stream() << "        combine(hash, v);" << std::endl;
         else
