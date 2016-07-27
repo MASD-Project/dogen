@@ -77,6 +77,12 @@ private:
 
         auto file(f.format(ctx, e));
 
+        // FIXME: hack to handle services
+        if (e.generation_type() == yarn::generation_types::partial_generation) {
+            BOOST_LOG_SEV(lg, debug) << "Emptying out content.";
+            file.content().clear();
+        }
+
         files_.push_front(file);
         if (!file.overwrite()) {
             BOOST_LOG_SEV(lg, debug) << "Filename: "
@@ -120,8 +126,8 @@ public:
     void visit(const dogen::yarn::enumeration& e) override {
         format(container_.enum_formatters(), e);
     }
-    void visit(const dogen::yarn::object& /*o*/) override {
-        // format(container_.new_class_formatters(), o);
+    void visit(const dogen::yarn::object& o) override {
+        format(container_.new_class_formatters(), o);
     }
     void visit(const dogen::yarn::exception& e) override {
         format(container_.exception_formatters(), e);
