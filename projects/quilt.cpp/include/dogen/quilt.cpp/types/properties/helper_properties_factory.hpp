@@ -44,7 +44,6 @@ namespace properties {
 class helper_properties_factory {
 public:
     helper_properties_factory(
-        const std::unordered_set<std::string>& primitive_ids,
         const std::unordered_map<std::string, std::unordered_set<std::string>>&
         facets_for_family,
         const settings::helper_settings_repository& hsrp,
@@ -55,8 +54,6 @@ private:
 
     settings::helper_settings
     helper_settings_for_id(const std::string& id) const;
-
-    bool is_primitive(const std::string& id) const;
 
     boost::optional<settings::streaming_settings>
     streaming_settings_for_id(const std::string& id) const;
@@ -74,7 +71,6 @@ public:
         const std::list<yarn::attribute>& attributes) const;
 
 private:
-    const std::unordered_set<std::string>& primitive_ids_;
     const std::unordered_map<std::string, std::unordered_set<std::string>>&
         facets_for_family_;
     const settings::helper_settings_repository& helper_settings_;

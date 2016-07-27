@@ -59,13 +59,12 @@ inline std::string get_qualified(const Qualified& iaq) {
 }
 
 helper_properties_factory::helper_properties_factory(
-    const std::unordered_set<std::string>& primitive_ids,
     const std::unordered_map<std::string, std::unordered_set<std::string>>&
     facets_for_family,
     const settings::helper_settings_repository& hsrp,
     const settings::streaming_settings_repository& ss)
-    : primitive_ids_(primitive_ids), facets_for_family_(facets_for_family),
-      helper_settings_(hsrp), streaming_settings_(ss) { }
+    : facets_for_family_(facets_for_family), helper_settings_(hsrp),
+      streaming_settings_(ss) { }
 
 bool helper_properties_factory::
 requires_hashing_helper(const std::string& family) const {
@@ -98,11 +97,6 @@ helper_settings_for_id(const std::string& id) const {
     return i->second;
 }
 
-bool helper_properties_factory::is_primitive(const std::string& id) const {
-    const auto i(primitive_ids_.find(id));
-    return i != primitive_ids_.end();
-}
-
 boost::optional<settings::streaming_settings> helper_properties_factory::
 streaming_settings_for_id(const std::string& id) const {
     const auto i(streaming_settings_.by_id().find(id));
@@ -123,7 +117,7 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
     helper_descriptor r;
     properties::name_builder b;
     r.namespaces(b.namespace_list(nt.current()));
-    r.is_primitive(is_primitive(id));
+    r.is_primitive(nt.is_current_simple_type());
 
     /*
      * Note: we log conditionally for both settings to make

@@ -51,32 +51,6 @@ namespace properties {
 
 namespace {
 
-class primitve_ids_generator : public yarn::element_visitor {
-private:
-    std::unordered_set<std::string> result_;
-
-private:
-    template<typename Nameable>
-    void insert(const Nameable& n) {
-        result_.insert(n.name().id());
-    }
-
-public:
-    using yarn::element_visitor::visit;
-    void visit(const dogen::yarn::primitive& p) { insert(p); }
-    void visit(const dogen::yarn::enumeration& e) { insert(e); }
-
-public:
-    const std::unordered_set<std::string>& result() const { return result_; }
-
-public:
-    void operator()(const std::pair<std::string,
-        boost::shared_ptr<dogen::yarn::element> >& pair) {
-        const auto& e(*pair.second);
-        e.accept(*this);
-    }
-};
-
 class generator final : public yarn::element_visitor {
 public:
     explicit generator(const helper_properties_factory& f) : factory_(f) {}
@@ -145,16 +119,10 @@ helper_properties_repository_factory::make(
 
     BOOST_LOG_SEV(lg, debug) << "Started creating helper repository.";
 
-    primitve_ids_generator pig;
-    for (const auto& pair : m.elements())
-        pig(pair);
-
-    BOOST_LOG_SEV(lg, debug) << "Primitive IDs: " << pig.result();
-
     const auto fff(facets_for_family(fc));
     BOOST_LOG_SEV(lg, debug) << "Facets for family: " << fff;
 
-    const helper_properties_factory f(pig.result(), fff, hsrp, ssrp);
+    const helper_properties_factory f(fff, hsrp, ssrp);
     generator g(f);
     for (const auto& pair : m.elements()) {
         const auto& e(*pair.second);
