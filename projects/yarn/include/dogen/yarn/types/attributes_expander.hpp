@@ -42,7 +42,7 @@ private:
     /**
      * @brief Update all attributes in the supplied element.
      */
-    void update_attributes(const name_tree_parser& ntp,
+    void update_attributes(const name_tree_parser& ntp, const bool is_fluent,
         std::list<attribute>& la) const;
 
 private:

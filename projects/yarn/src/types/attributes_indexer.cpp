@@ -89,9 +89,26 @@ void attributes_indexer::index_object(object& o, intermediate_model& m,
         concept_attributes.insert(concept_attributes.end(), p.begin(), p.end());
     }
 
+    /*
+     * If we are a fluent object, we need to mark all properties we've
+     * inherited via concepts as fluent. All of the properties we own
+     * directly have already been marked as fluent during attribute
+     * expansion, but we couldn't do the same to concept owned
+     * properties.
+     */
+    if (o.is_fluent()) {
+        for(auto& attr : concept_attributes)
+            attr.is_fluent(true);
+    }
+
     o.local_attributes().insert(o.local_attributes().begin(),
         concept_attributes.begin(), concept_attributes.end());
 
+    /*
+     * Now handle all of the inherited properties. We insert our
+     * parent properties first on our all attributes container by
+     * design; local attributes are last.
+     */
     for (const auto& n : o.parents()) {
         auto& parent(find_object(n, m));
         index_object(parent, m, processed_ids);
