@@ -90,7 +90,6 @@ aspect_properties_repository aspect_properties_repository_factory::make(
     BOOST_LOG_SEV(lg, debug) << "Started creating aspect properties"
                              << " repository.";
 
-    aspect_properties_repository r;
     const aspect_properties_factory f(asrp);
     generator g(f);
     for (const auto& pair : m.elements()) {
@@ -100,7 +99,7 @@ aspect_properties_repository aspect_properties_repository_factory::make(
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating aspect properties"
                              << " repository: " << g.result();
-    return r;
+    return g.result();
 }
 
 } } } }

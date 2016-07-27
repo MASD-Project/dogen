@@ -18,9 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/quilt.cpp/types/properties/building_error.hpp"
 #include "dogen/quilt.cpp/io/properties/element_properties_repository_io.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties_repository_factory.hpp"
+#include "dogen/quilt.cpp/io/properties/aspect_properties_repository_io.hpp"
 #include "dogen/quilt.cpp/types/properties/aspect_properties_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties_repository_factory.hpp"
 
@@ -62,17 +65,28 @@ element_properties_repository element_properties_repository_factory::merge(
 
     element_properties_repository r;
     for(const auto& pair : fprp.by_id()) {
-        auto& ep(r.by_id()[pair.first]);
+        const auto& id(pair.first);
+        auto& ep(r.by_id()[id]);
         ep.file_properties(fp);
         ep.formatter_properties(pair.second);
 
-        const auto i(hprp.by_id().find(pair.first));
-        if (i != hprp.by_id().end())
+        const auto i(hprp.by_id().find(id));
+        if (i != hprp.by_id().end()) {
             ep.helper_properties(i->second);
+            BOOST_LOG_SEV(lg, trace) << "Found helper properties for: " << id;
+        } else {
+            BOOST_LOG_SEV(lg, trace) << "Did not find helper properties for: "
+                                     << id;
+        }
 
-        const auto j(asrp.by_id().find(pair.first));
-        if (j != asrp.by_id().end())
+        const auto j(asrp.by_id().find(id));
+        if (j != asrp.by_id().end()) {
             ep.aspect_properties(j->second);
+            BOOST_LOG_SEV(lg, trace) << "Found aspect settings for: " << id;
+        } else {
+            BOOST_LOG_SEV(lg, trace) << "Did not find aspect settings for: "
+                                     << id;
+        }
     }
 
     // FIXME: check that there are no helper or aspect properties left
