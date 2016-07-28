@@ -11,6 +11,14 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add top-level module names to yarn                                :story:
+
+In a couple of places we are computing the top-level modules. We
+should just compute it once and have this as part of the yarn model.
+
+Look for stories related to "model module" in case we have covered
+this already.
+
 *** "current" is not the best of names in name tree                   :story:
 
 We need to find a slightly more meaningful name for the "current" name
