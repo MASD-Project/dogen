@@ -27,6 +27,9 @@ introduced =is_current_simple_type=, which is unintelligible.
 
 *** Code generation of dynamic instances                              :story:
 
+Note: this story probably should wait until we rename settings to
+annotations.
+
 We seem to have a pretty well established usage pattern for dynamic,
 so it may be a candidate for code generation. All we need is:
 
@@ -44,8 +47,9 @@ so it may be a candidate for code generation. All we need is:
 - the injection of the settings factory class is a bit more
   complicated; we need to mark the object as a settings factory. At
   present we have object types, but it was supposed to be removed
-  after a refactoring. In addition, settings factory may also need to
-  take in some parameters such as facet/formatter.
+  after a refactoring. Actually we just need to create a new kind of
+  element (=dynamic_settings_factory=?). In addition, settings factory
+  may also need to take in some parameters such as facet/formatter.
 - a stitch template that generates the settings factory.
 - a stitch template that registers the dynamic field definition;
   instead of JSON we can just generate c++ code to perform the
