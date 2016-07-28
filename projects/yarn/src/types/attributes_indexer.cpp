@@ -90,15 +90,17 @@ void attributes_indexer::index_object(object& o, intermediate_model& m,
     }
 
     /*
-     * If we are a fluent object, we need to mark all properties we've
-     * inherited via concepts as fluent. All of the properties we own
-     * directly have already been marked as fluent during attribute
+     * If we are a fluent or an immutable object, we need to mark all
+     * properties we've inherited via concepts. All of the properties
+     * we own directly have already been marked during attribute
      * expansion, but we couldn't do the same to concept owned
-     * properties.
+     * properties until they were indexed.
      */
-    if (o.is_fluent()) {
-        for(auto& attr : concept_attributes)
-            attr.is_fluent(true);
+    if (o.is_fluent() || o.is_immutable()) {
+        for(auto& attr : concept_attributes) {
+            attr.is_fluent(o.is_fluent());
+            attr.is_immutable(o.is_immutable());
+        }
     }
 
     o.local_attributes().insert(o.local_attributes().begin(),

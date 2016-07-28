@@ -13,35 +13,36 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-27 Wed 20:16]
+#+CAPTION: Clock summary at [2016-07-28 Thu 08:05]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *25:18* |       |      | 100.0 |
+| *Total time*                                                                | *25:47* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 25:18   |       |      | 100.0 |
-| Active                                                                      |         | 25:18 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:21 |   5.3 |
-| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  11.4 |
+| Stories                                                                     | 25:47   |       |      | 100.0 |
+| Active                                                                      |         | 25:47 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:32 |   5.9 |
+| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  11.2 |
 | COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   2.4 |
 | COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   2.1 |
-| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |   7.6 |
-| COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   0.9 |
-| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   4.2 |
-| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  28.5 |
+| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |   7.5 |
+| COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   0.8 |
+| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   4.1 |
+| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  28.0 |
 | COMPLETED Remove optionality from helper settings                           |         |       | 0:22 |   1.4 |
 | COMPLETED Remove unused aspect settings                                     |         |       | 0:31 |   2.0 |
 | COMPLETED Reactivate compressed tests                                       |         |       | 0:03 |   0.2 |
-| COMPLETED Add aspect properties infrastructure                              |         |       | 3:40 |  14.5 |
-| COMPLETED Mark name trees with simple types                                 |         |       | 0:19 |   1.3 |
+| COMPLETED Add aspect properties infrastructure                              |         |       | 3:40 |  14.2 |
+| COMPLETED Mark name trees with simple types                                 |         |       | 0:19 |   1.2 |
 | COMPLETED Use id in attributes indexer instead of name                      |         |       | 0:08 |   0.5 |
 | COMPLETED Remove primitive id generation in helpers                         |         |       | 0:23 |   1.5 |
 | COMPLETED Populate attribute's is fluent correctly in yarn                  |         |       | 0:12 |   0.8 |
-| STARTED Implement types in terms of =yarn::object=                          |         |       | 3:52 |  15.3 |
+| STARTED Implement types in terms of =yarn::object=                          |         |       | 4:10 |  16.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-07-28 Thu 07:46]--[2016-07-28 Thu 07:57] =>  0:11
     CLOCK: [2016-07-26 Tue 22:10]--[2016-07-26 Tue 22:29] =>  0:19
     CLOCK: [2016-07-24 Sun 23:28]--[2016-07-24 Sun 23:34] =>  0:06
     CLOCK: [2016-07-23 Sat 23:11]--[2016-07-23 Sat 23:24] =>  0:13
@@ -344,6 +345,8 @@ this.
 At present we are not setting is fluent on yarn properties. Fix this.
 
 *** STARTED Implement types in terms of =yarn::object=                :story:
+    CLOCK: [2016-07-28 Thu 07:57]--[2016-07-28 Thu 08:05] =>  0:08
+    CLOCK: [2016-07-28 Thu 07:36]--[2016-07-28 Thu 07:46] =>  0:10
     CLOCK: [2016-07-27 Wed 19:15]--[2016-07-27 Wed 19:28] =>  0:13
     CLOCK: [2016-07-27 Wed 18:18]--[2016-07-27 Wed 19:00] =>  0:42
     CLOCK: [2016-07-27 Wed 18:15]--[2016-07-27 Wed 18:18] =>  0:03

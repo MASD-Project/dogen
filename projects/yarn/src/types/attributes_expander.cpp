@@ -32,12 +32,14 @@ auto lg(logger_factory("yarn.attributes_expander"));
 namespace dogen {
 namespace yarn {
 
-void attributes_expander::update_attributes(const name_tree_parser& ntp,
-    const bool is_fluent, std::list<attribute>& la) const {
-    for (auto& p : la) {
-        auto nt(ntp.parse(p.unparsed_type()));
-        p.parsed_type(nt);
-        p.is_fluent(is_fluent);
+void attributes_expander::
+update_attributes(const name_tree_parser& ntp, const bool is_fluent,
+    const bool is_immutable, std::list<attribute>& attrs) const {
+    for (auto& attr : attrs) {
+        auto nt(ntp.parse(attr.unparsed_type()));
+        attr.parsed_type(nt);
+        attr.is_fluent(is_fluent);
+        attr.is_immutable(is_immutable);
     }
 }
 
@@ -79,12 +81,16 @@ void attributes_expander::expand(intermediate_model& m) const {
 
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
-        update_attributes(ntp, o.is_fluent(), o.local_attributes());
+        const bool fl(o.is_fluent());
+        const bool im(o.is_immutable());
+        update_attributes(ntp, fl, im, o.local_attributes());
     }
 
     for (auto& pair : m.concepts()) {
         auto& c(pair.second);
-        update_attributes(ntp, false/*is_fluent*/, c.local_attributes());
+        const bool fl(false);
+        const bool im(false);
+        update_attributes(ntp, fl, im, c.local_attributes());
     }
 }
 
