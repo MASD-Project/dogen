@@ -30,10 +30,22 @@ introduced =is_current_simple_type=, which is unintelligible.
 We seem to have a pretty well established usage pattern for dynamic,
 so it may be a candidate for code generation. All we need is:
 
-- a stereotype to mark a class as dynamic;
-- the injection of the settings class in yarn and possibly the
-  injection of the settings factory class too; we need some way of
-  knowing its a settings factory.
+- a stereotype to mark a class as dynamic; the attributes of the class
+  are dynamic fields, and their types must be one of the valid values
+  for dynamic fields. The default value is used for the field's
+  default value. Qualified name, ownership hierarchy, definition type,
+  scope, etc are supplied as meta-data.
+- stereotype name should be something like =DynamicFieldGroup=.
+- the injection of the settings class is done by looking at the
+  =DynamicFieldGroup= class and mapping the dynamic types to C++
+  types. Note: this mapping should be dynamic too so that we can use
+  it for other languages. We just need a meta-data tag for this, like
+  we do with default enum value.
+- the injection of the settings factory class is a bit more
+  complicated; we need to mark the object as a settings factory. At
+  present we have object types, but it was supposed to be removed
+  after a refactoring. In addition, settings factory may also need to
+  take in some parameters such as facet/formatter.
 - a stitch template that generates the settings factory.
 - a stitch template that registers the dynamic field definition;
   instead of JSON we can just generate c++ code to perform the
