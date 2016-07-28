@@ -125,11 +125,10 @@ void class_header_formatter::register_inclusion_dependencies_provider(
     rg.register_provider(boost::make_shared<provider>());
 }
 
-dogen::formatters::file
-class_header_formatter::format(const context& ctx,
-    const properties::class_info& c) const {
-    assistant a(ctx, ownership_hierarchy(), file_type(), c.id());
-    const auto r(class_header_formatter_stitch(a, c));
+dogen::formatters::file class_header_formatter::
+format(const context& ctx, const yarn::object& o) const {
+    assistant a(ctx, ownership_hierarchy(), file_type(), o.name().id());
+    const auto r(class_header_formatter_stitch(a, o));
     return r;
 }
 
