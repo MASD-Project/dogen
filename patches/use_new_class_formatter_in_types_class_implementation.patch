@@ -1,8 +1,70 @@
+diff --git a/diagrams/yarn.dia b/diagrams/yarn.dia
+index 7199a7a..7073ab9 100644
+--- a/diagrams/yarn.dia
++++ b/diagrams/yarn.dia
+@@ -20492,7 +20492,7 @@ space.#</dia:string>
+         <dia:point val="115.025,-1.04983"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="114.275,-11.45;116.38,-0.249829"/>
++        <dia:rectangle val="114.275,-11.45;116.38,0.550171"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
 diff --git a/doc/agile/sprint_backlog_85.org b/doc/agile/sprint_backlog_85.org
-index d35ef6e..86e9046 100644
+index d35ef6e..3b5f7f0 100644
 --- a/doc/agile/sprint_backlog_85.org
 +++ b/doc/agile/sprint_backlog_85.org
-@@ -344,7 +344,7 @@ this.
+@@ -13,31 +13,32 @@
+ ** Active
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+-#+CAPTION: Clock summary at [2016-07-28 Thu 08:10]
++#+CAPTION: Clock summary at [2016-07-29 Fri 22:43]
+ | <75>                                                                        |         |       |      |       |
+ | Headline                                                                    | Time    |       |      |     % |
+ |-----------------------------------------------------------------------------+---------+-------+------+-------|
+-| *Total time*                                                                | *25:51* |       |      | 100.0 |
++| *Total time*                                                                | *27:03* |       |      | 100.0 |
+ |-----------------------------------------------------------------------------+---------+-------+------+-------|
+-| Stories                                                                     | 25:51   |       |      | 100.0 |
+-| Active                                                                      |         | 25:51 |      | 100.0 |
+-| STARTED Sprint and product backlog grooming                                 |         |       | 1:32 |   5.9 |
+-| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  11.2 |
+-| COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   2.4 |
+-| COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   2.1 |
+-| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |   7.5 |
++| Stories                                                                     | 27:03   |       |      | 100.0 |
++| Active                                                                      |         | 27:03 |      | 100.0 |
++| STARTED Sprint and product backlog grooming                                 |         |       | 1:32 |   5.7 |
++| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  10.7 |
++| COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   2.3 |
++| COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   2.0 |
++| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |   7.1 |
+ | COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   0.8 |
+-| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   4.1 |
+-| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  27.9 |
++| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   3.9 |
++| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  26.7 |
+ | COMPLETED Remove optionality from helper settings                           |         |       | 0:22 |   1.4 |
+-| COMPLETED Remove unused aspect settings                                     |         |       | 0:31 |   2.0 |
++| COMPLETED Remove unused aspect settings                                     |         |       | 0:31 |   1.9 |
+ | COMPLETED Reactivate compressed tests                                       |         |       | 0:03 |   0.2 |
+-| COMPLETED Add aspect properties infrastructure                              |         |       | 3:40 |  14.2 |
++| COMPLETED Add aspect properties infrastructure                              |         |       | 3:40 |  13.6 |
+ | COMPLETED Mark name trees with simple types                                 |         |       | 0:19 |   1.2 |
+ | COMPLETED Use id in attributes indexer instead of name                      |         |       | 0:08 |   0.5 |
+-| COMPLETED Remove primitive id generation in helpers                         |         |       | 0:23 |   1.5 |
+-| COMPLETED Populate attribute's is fluent correctly in yarn                  |         |       | 0:12 |   0.8 |
+-| COMPLETED Implement class header types in terms of =yarn::object=           |         |       | 4:14 |  16.4 |
++| COMPLETED Remove primitive id generation in helpers                         |         |       | 0:23 |   1.4 |
++| COMPLETED Populate attribute's is fluent correctly in yarn                  |         |       | 0:12 |   0.7 |
++| COMPLETED Implement type' class header in terms of =yarn::object=           |         |       | 4:14 |  15.7 |
++| STARTED Implement types' class implementation in terms of =yarn::object=    |         |       | 1:12 |   4.4 |
+ #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+ #+end:
+ 
+@@ -344,7 +345,7 @@ this.
  
  At present we are not setting is fluent on yarn properties. Fix this.
  
@@ -11,7 +73,7 @@ index d35ef6e..86e9046 100644
      CLOSED: [2016-07-28 Thu 08:10]
      CLOCK: [2016-07-28 Thu 08:06]--[2016-07-28 Thu 08:10] =>  0:04
      CLOCK: [2016-07-28 Thu 07:57]--[2016-07-28 Thu 08:05] =>  0:08
-@@ -362,7 +362,8 @@ At present we are not setting is fluent on yarn properties. Fix this.
+@@ -362,7 +363,8 @@ At present we are not setting is fluent on yarn properties. Fix this.
      CLOCK: [2016-07-23 Sat 21:47]--[2016-07-23 Sat 21:54] =>  0:07
      CLOCK: [2016-07-23 Sat 15:10]--[2016-07-23 Sat 15:27] =>  0:17
  
@@ -21,11 +83,12 @@ index d35ef6e..86e9046 100644
  
  - we need to enable some side-by-side infrastructure so we can
    refactor the class info formatters one at the time, without breaking
-@@ -376,6 +377,11 @@ Time to have a go at moving the type's class templates to yarn types.
+@@ -376,6 +378,12 @@ Time to have a go at moving the type's class templates to yarn types.
  - "is primitive" in helper is the same as "is simple type". update
    helper to match. Remove primitive id generation.
  
 +*** STARTED Implement types' class implementation in terms of =yarn::object= :story:
++    CLOCK: [2016-07-29 Fri 21:31]--[2016-07-29 Fri 22:43] =>  1:12
 +
 +Move type's class implementation stitch template from class info to
 +yarn object.
@@ -33,6 +96,48 @@ index d35ef6e..86e9046 100644
  *** Element properties includes non-target types                      :story:
  
  We seem to be generating a lot of element properties and formatter
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/assistant.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/assistant.hpp
+index d89888c..1a1fd25 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/assistant.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/assistant.hpp
+@@ -116,6 +116,7 @@ private:
+ public:
+     bool requires_manual_default_constructor() const;
+     bool requires_manual_move_constructor() const;
++    bool requires_stream_manipulators() const;
+ 
+ public:
+     /**
+@@ -130,6 +131,7 @@ public:
+      */
+     std::string make_getter_setter_name(
+         const properties::property_info& p) const;
++    std::string make_getter_setter_name(const yarn::attribute& attr) const;
+ 
+     /**
+      * @brief returns the c++ namespaces for the name.
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp
+index c8e2dbb..5534ec8 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp
+@@ -25,6 +25,7 @@
+ #pragma once
+ #endif
+ 
++#include "dogen/yarn/types/object.hpp"
+ #include "dogen/quilt.cpp/types/properties/class_info.hpp"
+ #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
+ 
+@@ -35,6 +36,9 @@ namespace formatters {
+ namespace io {
+ 
+ void inserter_implementation_helper_stitch(
++    assistant& a, const yarn::object& o, const bool inside_class);
++
++void inserter_implementation_helper_stitch(
+     assistant& a, const properties::class_info& ci,
+     const bool inside_class);
+ 
 diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/class_implementation_formatter.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/class_implementation_formatter.hpp
 index 46d9a6d..ceb4638 100644
 --- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/types/class_implementation_formatter.hpp
@@ -88,6 +193,194 @@ index b439fb2..07b1e34 100644
  
  } } } } }
  
+diff --git a/projects/quilt.cpp/src/types/formatters/assistant.cpp b/projects/quilt.cpp/src/types/formatters/assistant.cpp
+index d181c38..33427a7 100644
+--- a/projects/quilt.cpp/src/types/formatters/assistant.cpp
++++ b/projects/quilt.cpp/src/types/formatters/assistant.cpp
+@@ -194,6 +194,11 @@ std::string assistant::make_getter_setter_name(
+     return p.name();
+ }
+ 
++std::string assistant::
++make_getter_setter_name(const yarn::attribute& attr) const {
++    return attr.name().simple();
++}
++
+ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
+     properties::name_builder b;
+     return b.namespace_list(n);
+@@ -221,6 +226,11 @@ bool assistant::requires_manual_move_constructor() const {
+     return ap.requires_manual_move_constructor();
+ }
+ 
++bool assistant::requires_stream_manipulators() const {
++    const auto& ap(context_.element_properties().aspect_properties());
++    return ap.requires_stream_manipulators();
++}
++
+ bool assistant::is_serialization_enabled() const {
+     using formatters::serialization::traits;
+     return is_formatter_enabled(traits::class_header_formatter_name());
+diff --git a/projects/quilt.cpp/src/types/formatters/io/inserter_implementation_helper.stitch b/projects/quilt.cpp/src/types/formatters/io/inserter_implementation_helper.stitch
+index 6a5cb9a..068b381 100644
+--- a/projects/quilt.cpp/src/types/formatters/io/inserter_implementation_helper.stitch
++++ b/projects/quilt.cpp/src/types/formatters/io/inserter_implementation_helper.stitch
+@@ -65,7 +65,81 @@ void inserter_implementation_helper_stitch(
+     }
+ 
+     if (!no_parents_and_no_properties) {
+-        if (!c.properties().empty())
++        if (!c.local_attributes().empty())
++#>
++      << " }";
++<#+
++        else
++#>
++    s << " }";
++<#+
++    }
++
++    if (!inside_class)
++#>
++    return(s);
++<#+
++}
++
++void inserter_implementation_helper_stitch(
++    assistant& a, const yarn::object& o, const bool inside_class) {
++
++    const auto qn(a.get_qualified_name(o.name()));
++
++    if (a.requires_stream_manipulators()) {
++#>
++    boost::io::ios_flags_saver ifs(s);
++    s.setf(std::ios_base::boolalpha);
++    s.setf(std::ios::fixed, std::ios::floatfield);
++    s.precision(6);
++    s.setf(std::ios::showpoint);
++
++<#+
++    }
++
++    const bool no_parents_and_no_attributes(o.parents().empty() &&
++        o.all_attributes().empty());
++#>
++    s << " { "
++      << "\"__type__\": " << "\"<#= qn #>\""<#= (no_parents_and_no_attributes ? " << \" }\";" : " << \", \"") #>
++<#+
++
++    dogen::formatters::sequence_formatter sf(o.parents().size());
++    sf.prefix_configuration().first("  << ").not_first("s << ");
++    sf.element_separator("");
++    for (const auto pn : o.parents()) {
++#>
++    <#= sf.prefix() #>"\"__parent_<#= sf.current_position() #>__\": "<#= sf.postfix() #>;
++    <#= pn.simple() #>::to_stream(s);
++<#+
++        sf.next();
++    }
++
++    sf.reset(o.local_attributes().size());
++
++    if (!o.parents().empty())
++        sf.prefix_configuration().first("s << \", \"\n      ");
++    else
++        sf.prefix_configuration().first("  ");
++    sf.prefix_configuration().not_first("  ");
++    sf.postfix_configuration().not_last(" << \", \"");
++    sf.element_separator("");
++
++    for (const auto attr : o.local_attributes()) {
++        std::string variable_name;
++        if (inside_class)
++            variable_name = a.make_member_variable_name(attr);
++        else
++            variable_name = "v." + a.make_getter_setter_name(attr) + "()";
++
++#>
++    <#= sf.prefix() #><< "\"<#= attr.parsed_type().current().simple() #>\": " << <#= a.streaming_for_type(attr.parsed_type().current(), variable_name) #><#= sf.postfix() #>
++<#+
++        sf.next();
++    }
++
++    if (!no_parents_and_no_attributes) {
++        if (!o.all_attributes().empty())
+ #>
+       << " }";
+ <#+
+diff --git a/projects/quilt.cpp/src/types/formatters/io/inserter_implementation_helper_stitch.cpp b/projects/quilt.cpp/src/types/formatters/io/inserter_implementation_helper_stitch.cpp
+index 3c01836..53abc8c 100644
+--- a/projects/quilt.cpp/src/types/formatters/io/inserter_implementation_helper_stitch.cpp
++++ b/projects/quilt.cpp/src/types/formatters/io/inserter_implementation_helper_stitch.cpp
+@@ -77,7 +77,67 @@ a.stream() << "    " << sf.prefix() << "<< \"\\\"" << p.name() << "\\\": \" << "
+     }
+ 
+     if (!no_parents_and_no_properties) {
+-        if (!c.properties().empty())
++        if (!o.local_attributes().empty())
++a.stream() << "      << \" }\";" << std::endl;
++        else
++a.stream() << "    s << \" }\";" << std::endl;
++    }
++
++    if (!inside_class)
++a.stream() << "    return(s);" << std::endl;
++}
++
++void inserter_implementation_helper_stitch(
++    assistant& a, const yarn::object& o, const bool inside_class) {
++
++    const auto qn(a.get_qualified_name(o.name()));
++
++    if (a.requires_stream_manipulators()) {
++a.stream() << "    boost::io::ios_flags_saver ifs(s);" << std::endl;
++a.stream() << "    s.setf(std::ios_base::boolalpha);" << std::endl;
++a.stream() << "    s.setf(std::ios::fixed, std::ios::floatfield);" << std::endl;
++a.stream() << "    s.precision(6);" << std::endl;
++a.stream() << "    s.setf(std::ios::showpoint);" << std::endl;
++a.stream() << std::endl;
++    }
++
++    const bool no_parents_and_no_attributes(o.parents().empty() &&
++        o.all_attributes().empty());
++a.stream() << "    s << \" { \"" << std::endl;
++a.stream() << "      << \"\\\"__type__\\\": \" << \"\\\"" << qn << "\\\"\"" << (no_parents_and_no_attributes ? " << \" }\";" : " << \", \"") << std::endl;
++
++    dogen::formatters::sequence_formatter sf(o.parents().size());
++    sf.prefix_configuration().first("  << ").not_first("s << ");
++    sf.element_separator("");
++    for (const auto pn : o.parents()) {
++a.stream() << "    " << sf.prefix() << "\"\\\"__parent_" << sf.current_position() << "__\\\": \"" << sf.postfix() << ";" << std::endl;
++a.stream() << "    " << pn.simple() << "::to_stream(s);" << std::endl;
++        sf.next();
++    }
++
++    sf.reset(o.properties().size());
++
++    if (!o.parents().empty())
++        sf.prefix_configuration().first("s << \", \"\n      ");
++    else
++        sf.prefix_configuration().first("  ");
++    sf.prefix_configuration().not_first("  ");
++    sf.postfix_configuration().not_last(" << \", \"");
++    sf.element_separator("");
++
++    for (const auto attr : o.local_attributes()) {
++        std::string variable_name;
++        if (inside_class)
++            variable_name = a.make_member_variable_name(attr);
++        else
++            variable_name = "v." + a.make_getter_setter_name(attr) + "()";
++
++a.stream() << "    " << sf.prefix() << "<< \"\\\"" << attr.parsed_type().current().simple() << "\\\": \" << " << a.streaming_for_type(attr.parsed_type().current(), variable_name) << sf.postfix() << std::endl;
++        sf.next();
++    }
++
++    if (!no_parents_and_no_attributes) {
++        if (!o.all_attributes().empty())
+ a.stream() << "      << \" }\";" << std::endl;
+         else
+ a.stream() << "    s << \" }\";" << std::endl;
 diff --git a/projects/quilt.cpp/src/types/formatters/types/class_implementation_formatter.cpp b/projects/quilt.cpp/src/types/formatters/types/class_implementation_formatter.cpp
 index 70d75bc..f5b5f2c 100644
 --- a/projects/quilt.cpp/src/types/formatters/types/class_implementation_formatter.cpp
@@ -106,7 +399,7 @@ index 70d75bc..f5b5f2c 100644
  }
  
 diff --git a/projects/quilt.cpp/src/types/formatters/types/class_implementation_formatter.stitch b/projects/quilt.cpp/src/types/formatters/types/class_implementation_formatter.stitch
-index 7e90af0..4098de7 100644
+index 7e90af0..37dc836 100644
 --- a/projects/quilt.cpp/src/types/formatters/types/class_implementation_formatter.stitch
 +++ b/projects/quilt.cpp/src/types/formatters/types/class_implementation_formatter.stitch
 @@ -9,36 +9,39 @@
@@ -157,7 +450,7 @@ index 7e90af0..4098de7 100644
                         << ">(0))";
  
                      is_first = false;
-@@ -53,17 +56,17 @@ dogen::formatters::file class_implementation_formatter_stitch(
+@@ -53,27 +56,28 @@ dogen::formatters::file class_implementation_formatter_stitch(
              /*
               * Move constructor.
               */
@@ -175,7 +468,675 @@ index 7e90af0..4098de7 100644
                  sf.prefix_configuration().first(": ").not_first("  ");
                  sf.postfix_configuration().last(" { }");
 -                for (const auto p : c.parents()) {
-+                for (const auto p : o.parents()) {
++                for (const auto pn : o.parents()) {
++                    const auto pqn(a.get_qualified_name(pn));
  #>
-     <#= sf.prefix() #><#= p.qualified_name() #>(
-         std::forward<<#= p.qualified_name() #>>(rhs))<#= sf.postfix() #>
+-    <#= sf.prefix() #><#= p.qualified_name() #>(
+-        std::forward<<#= p.qualified_name() #>>(rhs))<#= sf.postfix() #>
++    <#= sf.prefix() #><#= pqn #>(
++        std::forward<<#= pqn #>>(rhs))<#= sf.postfix() #>
+ <#+
+                     sf.next();
+                 }
+ 
+-                for (const auto p : c.properties()) {
++                for (const auto attr : o.all_attributes()) {
+ #>
+-    <#= sf.prefix() #><#= a.make_member_variable_name(p) #>(std::move(rhs.<#= a.make_member_variable_name(p) #>))<#= sf.postfix() #>
++    <#= sf.prefix() #><#= a.make_member_variable_name(attr) #>(std::move(rhs.<#= a.make_member_variable_name(attr) #>))<#= sf.postfix() #>
+ <#+
+                     sf.next();
+                 }
+@@ -82,57 +86,58 @@ dogen::formatters::file class_implementation_formatter_stitch(
+             /*
+              * Complete constructor.
+              */
+-            if (!c.all_properties().empty()) {
+-                const auto prop_count(c.all_properties().size());
+-                if (prop_count == 1) {
+-                     const auto p(*c.all_properties().begin());
++            if (!o.all_attributes().empty()) {
++                const auto attr_count(o.all_attributes().size());
++                if (attr_count == 1) {
++                     const auto attr(*o.all_attributes().begin());
+ #>
+ 
+-<#= c.name() #>::<#= c.name() #>(const <#= p.type().complete_name() #><#= a.make_by_ref_text(p) #> <#= p.name() #>)
++<#= sn #>::<#= sn #>(const <#= qn #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #>)
+ <#+
+                 } else {
+ #>
+ 
+-<#= c.name() #>::<#= c.name() #>(
++<#= sn #>::<#= sn #>(
+ <#+
+ 
+-                    dogen::formatters::sequence_formatter sf(prop_count);
++                    dogen::formatters::sequence_formatter sf(attr_count);
+                     sf.postfix_configuration().last(")");
+-                    for (const auto p : c.all_properties()) {
++                    for (const auto attr : o.all_attributes()) {
+ #>
+-    const <#= p.type().complete_name() #><#= a.make_by_ref_text(p) #> <#= p.name() #><#= sf.postfix() #>
++    const <#= qn #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #><#= sf.postfix() #>
+ <#+
+                         sf.next();
+                     }
+                 }
+ 
+-                int sequence_size(c.properties().size() + c.parents().size());
+-                for (const auto p : c.parents())
+-                    sequence_size += (p.properties().size() > 1 ?
+-                        p.properties().size() : 0);
++                int sequence_size(o.all_attributes().size() + o.parents().size());
++                for (const auto pn : o.parents())
++                    sequence_size += (o.all_attributes().size() > 1 ?
++                        o.all_attributes().size() : 0);
+ 
+                 dogen::formatters::sequence_formatter sf(sequence_size);
+-                sf.prefix_configuration().first(": ").not_first("  ");
+                 sf.postfix_configuration().last(" { }");
+-                for (const auto p : c.parents()) {
+-                    if (p.properties().size() <= 1) {
++                sf.prefix_configuration().first(": ").not_first("  ");
++                for (const auto pair : o.inherited_attributes()) {
++                    const auto pqn(a.get_qualified_name(pair.first));
++                    if (o.all_attributes().size() <= 1) {
+ #>
+-    <#= sf.prefix() #><#= p.qualified_name() #>(<#= (p.properties().empty() ? "" : p.properties().front().name()) #>)<#= sf.postfix() #>
++    <#= sf.prefix() #><#= pqn #>(<#= (o.all_attributes().empty() ? "" : o.all_attributes().front().name().simple()) #>)<#= sf.postfix() #>
+ <#+
+                         sf.next();
+                     } else {
+ #>
+-    <#= sf.prefix() #><#= p.qualified_name() #>(<#= sf.postfix(true/*skip*/) #>
++    <#= sf.prefix() #><#= pqn #>(<#= sf.postfix(true/*skip*/) #>
+ <#+
+                         sf.next();
+-                        dogen::formatters::sequence_formatter sf2(p.properties().size());
++                        dogen::formatters::sequence_formatter sf2(o.local_attributes().size());
+                         sf2.element_separator("");
+ 
+                         sf2.prefix_configuration().first("  ").not_first("  ");
+                         sf2.postfix_configuration().last(")");
+-                        for (const auto prop : p.properties()) {
++                        for (const auto attr : pair.second) {
+ #>
+-    <#= sf2.prefix() #><#= prop.name() #><#= sf2.postfix() #><#= sf.postfix() #>
++    <#= sf2.prefix() #><#= attr.name().simple() #><#= sf2.postfix() #><#= sf.postfix() #>
+ <#+
+                             sf2.next();
+                             sf.next();
+@@ -140,9 +145,9 @@ dogen::formatters::file class_implementation_formatter_stitch(
+                     }
+                 }
+ 
+-                for (const auto p : c.properties()) {
++                for (const auto attr : o.local_attributes()) {
+ #>
+-    <#= sf.prefix() #><#= a.make_member_variable_name(p) #>(<#= p.name() #>)<#= sf.postfix() #>
++    <#= sf.prefix() #><#= a.make_member_variable_name(attr) #>(<#= attr.name().simple() #>)<#= sf.postfix() #>
+ <#+
+                     sf.next();
+                 }
+@@ -152,12 +157,12 @@ dogen::formatters::file class_implementation_formatter_stitch(
+              * Streaming
+              */
+             if (a.is_io_enabled()) {
+-                if (c.is_parent() || !c.parents().empty()) {
++                if (o.in_inheritance_relationship()) {
+ #>
+ 
+-void <#= c.name() #>::to_stream(std::ostream& s) const {
++void <#= sn #>::to_stream(std::ostream& s) const {
+ <#+
+-                io::inserter_implementation_helper_stitch(a, c, true/*inside_class*/);
++                // io::inserter_implementation_helper_stitch(a, o, true/*inside_class*/);
+ #>
+ }
+ <#+
+@@ -167,28 +172,28 @@ void <#= c.name() #>::to_stream(std::ostream& s) const {
+             /*
+              * Swap
+              */
+-            if (!c.is_immutable() && (!c.all_properties().empty() || c.is_parent())) {
+-                const bool empty(c.all_properties().empty() && c.parents().empty());
++            if (!o.is_immutable() && (!o.all_attributes().empty() || o.is_parent())) {
++                const bool empty(o.all_attributes().empty() && o.parents().empty());
+ #>
+ 
+-void <#= c.name() #>::swap(<#= c.name() #>&<#= (empty ? "" : " other") #>) noexcept {
++void <#= sn #>::swap(<#= sn #>&<#= (empty ? "" : " other") #>) noexcept {
+ <#+
+-               if (!c.parents().empty()) {
+-                    for (const auto p : c.parents())
++               if (!o.parents().empty()) {
++                    for (const auto pn : o.parents())
+ #>
+-    <#= p.name() #>::swap(other);
++    <#= pn.simple() #>::swap(other);
+ 
+ <#+
+ 
+                }
+ 
+-               if (!c.properties().empty()) {
++               if (!o.local_attributes().empty()) {
+ #>
+     using std::swap;
+ <#+
+-                   for (const auto p : c.properties())
++                   for (const auto attr : o.local_attributes())
+ #>
+-    swap(<#= a.make_member_variable_name(p) #>, other.<#= a.make_member_variable_name(p) #>);
++    swap(<#= a.make_member_variable_name(attr) #>, other.<#= a.make_member_variable_name(attr) #>);
+ <#+
+                }
+ #>
+@@ -199,11 +204,12 @@ void <#= c.name() #>::swap(<#= c.name() #>&<#= (empty ? "" : " other") #>) noexc
+             /*
+              * Equals method
+              */
+-            if (!c.is_parent() && !c.parents().empty()) {
++            if (!o.is_parent() && !o.parents().empty()) {
++                const auto rpn(o.root_parents().front());
+ #>
+ 
+-bool <#= c.name() #>::equals(const <#= c.root_parent_name_qualified() #>& other) const {
+-    const <#= c.name() #>* const p(dynamic_cast<const <#= c.name() #>* const>(&other));
++bool <#= sn #>::equals(const <#= a.get_qualified_name(rpn) #>& other) const {
++    const <#= sn #>* const p(dynamic_cast<const <#= sn #>* const>(&other));
+     if (!p) return false;
+     return *this == *p;
+ }
+@@ -214,46 +220,46 @@ bool <#= c.name() #>::equals(const <#= c.root_parent_name_qualified() #>& other)
+              * Equals operator
+              */
+             std::string method_name;
+-            if (c.is_parent())
++            if (o.is_parent())
+                 method_name = "compare";
+             else
+                 method_name = "operator==";
+ #>
+ 
+-bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_properties().empty() ? "/*rhs*/" : "rhs") #>) const {
++bool <#= sn #>::<#= method_name #>(const <#= sn #>& <#= (o.all_attributes().empty() ? "/*rhs*/" : "rhs") #>) const {
+ <#+
+ 
+-            if (c.all_properties().empty())
++            if (o.all_attributes().empty())
+ #>
+     return true;
+ <#+
+             else {
+-                dogen::formatters::sequence_formatter sf(c.parents().size());
++                dogen::formatters::sequence_formatter sf(o.parents().size());
+                 sf.element_separator("");
+                 sf.prefix_configuration().first("return ").not_first("    ");
+                 sf.postfix_configuration().not_last(" &&");
+-                if (c.properties().empty())
++                if (o.local_attributes().empty())
+                     sf.postfix_configuration().last(";");
+                 else
+                     sf.postfix_configuration().last(" &&");
+ 
+-                for (const auto p : c.parents()) {
++                for (const auto pn : o.parents()) {
+ #>
+-    <#= sf.prefix() #><#= p.name() #>::compare(rhs)<#= sf.postfix() #>
++    <#= sf.prefix() #><#= pn.simple() #>::compare(rhs)<#= sf.postfix() #>
+ <#+
+                     sf.next();
+                 }
+-                sf.reset(c.properties().size());
++                sf.reset(o.local_attributes().size());
+                 sf.element_separator("");
+-                if (c.parents().empty())
++                if (o.parents().empty())
+                    sf.prefix_configuration().first("return ");
+                 else
+                    sf.prefix_configuration().first("    ");
+                 sf.prefix_configuration().not_first("    ");
+                 sf.postfix_configuration().last(";").not_last(" &&");
+-                for (const auto p : c.properties()) {
++                for (const auto attr : o.local_attributes()) {
+ #>
+-    <#= sf.prefix() #><#= a.make_member_variable_name(p) #> == rhs.<#= a.make_member_variable_name(p) #><#= sf.postfix() #>
++    <#= sf.prefix() #><#= a.make_member_variable_name(attr) #> == rhs.<#= a.make_member_variable_name(attr) #><#= sf.postfix() #>
+ <#+
+                     sf.next();
+                 }
+@@ -265,10 +271,10 @@ bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_prope
+             /*
+              * Assignment
+              */
+-            if (!c.all_properties().empty() && !c.is_parent() && !c.is_immutable()) {
++            if (!o.all_attributes().empty() && !o.is_parent() && !o.is_immutable()) {
+ #>
+ 
+-<#= c.name() #>& <#= c.name() #>::operator=(<#= c.name() #> other) {
++<#= sn #>& <#= sn #>::operator=(<#= sn #> other) {
+     using std::swap;
+     swap(*this, other);
+     return *this;
+@@ -279,21 +285,21 @@ bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_prope
+             /*
+              * Getters and setters
+              */
+-             for (const auto p : c.properties()) {
+-                 if (p.type().is_primitive() || p.type().is_enumeration()) {
++             for (const auto attr : o.local_attributes()) {
++                 if (attr.parsed_type().is_current_simple_type()) {
+ #>
+ 
+-<#= p.type().complete_name() #> <#= c.name() #>::<#= p.name() #>() const {
+-    return <#= a.make_member_variable_name(p) #>;
++<#= a.get_qualified_name(attr.parsed_type()) #> <#= sn #>::<#= attr.name().simple() #>() const {
++    return <#= a.make_member_variable_name(attr) #>;
+ }
+ <#+
+-                    if (!c.is_immutable()) {
++                    if (!o.is_immutable()) {
+ #>
+ 
+-<#= (p.is_fluent() ? c.name() + "&" : "void") #> <#= c.name() #>::<#= p.name() #>(const <#= p.type().complete_name() #> v) {
+-    <#= a.make_member_variable_name(p) #> = v;
++<#= (attr.is_fluent() ? sn + "&" : "void") #> <#= sn #>::<#= sn #>(const <#= a.get_qualified_name(attr.parsed_type()) #> v) {
++    <#= a.make_member_variable_name(attr) #> = v;
+ <#+
+-                        if (p.is_fluent()) {
++                        if (attr.is_fluent()) {
+ #>
+     return *this;
+ <#+
+@@ -305,21 +311,21 @@ bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_prope
+                 } else {
+ #>
+ 
+-const <#= p.type().complete_name() #>& <#= c.name() #>::<#= p.name() #>() const {
+-    return <#= a.make_member_variable_name(p) #>;
++const <#= a.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= sn #>() const {
++    return <#= a.make_member_variable_name(attr) #>;
+ }
+ <#+
+-                    if (!c.is_immutable()) {
++                    if (!o.is_immutable()) {
+ #>
+ 
+-<#= p.type().complete_name() #>& <#= c.name() #>::<#= p.name() #>() {
+-    return <#= a.make_member_variable_name(p) #>;
++<#= a.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= sn #>() {
++    return <#= a.make_member_variable_name(attr) #>;
+ }
+ 
+-<#= (p.is_fluent() ? c.name() + "&" : "void") #> <#= c.name() #>::<#= p.name() #>(const <#= p.type().complete_name() #>& v) {
+-    <#= a.make_member_variable_name(p) #> = v;
++<#= (o.is_fluent() ? sn + "&" : "void") #> <#= sn #>::<#= sn #>(const <#= a.get_qualified_name(attr.parsed_type()) #>& v) {
++    <#= a.make_member_variable_name(attr) #> = v;
+ <#+
+-                        if (p.is_fluent()) {
++                        if (o.is_fluent()) {
+ #>
+     return *this;
+ <#+
+@@ -327,10 +333,10 @@ const <#= p.type().complete_name() #>& <#= c.name() #>::<#= p.name() #>() const
+ #>
+ }
+ 
+-<#= (p.is_fluent() ? c.name() + "&" : "void") #> <#= c.name() #>::<#= p.name() #>(const <#= p.type().complete_name() #>&& v) {
+-    <#= a.make_member_variable_name(p) #> = std::move(v);
++<#= (o.is_fluent() ? sn + "&" : "void") #> <#= sn #>::<#= sn #>(const <#= a.get_qualified_name(attr.parsed_type()) #>&& v) {
++    <#= a.make_member_variable_name(attr) #> = std::move(v);
+ <#+
+-                        if (p.is_fluent()) {
++                        if (o.is_fluent()) {
+ #>
+     return *this;
+ <#+
+diff --git a/projects/quilt.cpp/src/types/formatters/types/class_implementation_formatter_stitch.cpp b/projects/quilt.cpp/src/types/formatters/types/class_implementation_formatter_stitch.cpp
+index cdb9e49..cf3e37d 100644
+--- a/projects/quilt.cpp/src/types/formatters/types/class_implementation_formatter_stitch.cpp
++++ b/projects/quilt.cpp/src/types/formatters/types/class_implementation_formatter_stitch.cpp
+@@ -29,34 +29,37 @@ namespace formatters {
+ namespace types {
+ 
+ dogen::formatters::file class_implementation_formatter_stitch(
+-    assistant& a, const properties::class_info& c) {
++    assistant& a, const yarn::object& o) {
+ 
+     {
++        const auto sn(o.name().simple());
++        const auto qn(a.get_qualified_name(o.name()));
+         auto sbf(a.make_scoped_boilerplate_formatter());
+         a.add_helper_methods();
+ 
+         {
+-            auto snf(a.make_scoped_namespace_formatter(c.namespaces()));
++            const auto ns(a.make_namespaces(o.name()));
++            auto snf(a.make_scoped_namespace_formatter(ns));
+ 
+             /*
+              * Default constructor.
+              */
+-            if (c.requires_manual_default_constructor()) {
++            if (a.requires_manual_default_constructor()) {
+ a.stream() << std::endl;
+-a.stream() << c.name() << "::" << c.name() << "()" << std::endl;
++a.stream() << sn << "::" << sn << "()" << std::endl;
+                 // FIXME: this was just too hard to hack with a sequence.
+                 // FIXME: indentation is all off too.
+                 std::ostringstream ss;
+                 bool is_first(true);
+-                for (const auto p : c.properties()) {
+-                    if (!p.type().is_primitive() && !p.type().is_enumeration())
++                for (const auto attr : o.all_attributes()) {
++                    if (!attr.parsed_type().is_current_simple_type())
+                         continue;
+ 
+                     if (!is_first)
+                         ss << "," << std::endl << "      ";
+ 
+-                    ss << a.make_member_variable_name(p)
+-                       << "(static_cast<" << p.type().complete_name()
++                    ss << a.make_member_variable_name(attr)
++                       << "(static_cast<" << a.get_qualified_name(attr.parsed_type())
+                        << ">(0))";
+ 
+                     is_first = false;
+@@ -69,22 +72,23 @@ a.stream() << "    : " << out << std::endl;
+             /*
+              * Move constructor.
+              */
+-            if (c.requires_manual_move_constructor()) {
++            if (a.requires_manual_move_constructor()) {
+ a.stream() << std::endl;
+-a.stream() << c.name() << "::" << c.name() << "(" << c.name() << "&& rhs)" << std::endl;
+-                unsigned int size(c.parents().size() + c.properties().size());
++a.stream() << sn << "::" << sn << "(" << sn << "&& rhs)" << std::endl;
++                unsigned int size(o.parents().size() + o.all_attributes().size());
+ 
+                 dogen::formatters::sequence_formatter sf(size);
+                 sf.prefix_configuration().first(": ").not_first("  ");
+                 sf.postfix_configuration().last(" { }");
+-                for (const auto p : c.parents()) {
+-a.stream() << "    " << sf.prefix() << p.qualified_name() << "(" << std::endl;
+-a.stream() << "        std::forward<" << p.qualified_name() << ">(rhs))" << sf.postfix() << std::endl;
++                for (const auto pn : o.parents()) {
++                    const auto pqn(a.get_qualified_name(pn));
++a.stream() << "    " << sf.prefix() << pqn << "(" << std::endl;
++a.stream() << "        std::forward<" << pqn << ">(rhs))" << sf.postfix() << std::endl;
+                     sf.next();
+                 }
+ 
+-                for (const auto p : c.properties()) {
+-a.stream() << "    " << sf.prefix() << a.make_member_variable_name(p) << "(std::move(rhs." << a.make_member_variable_name(p) << "))" << sf.postfix() << std::endl;
++                for (const auto attr : o.all_attributes()) {
++a.stream() << "    " << sf.prefix() << a.make_member_variable_name(attr) << "(std::move(rhs." << a.make_member_variable_name(attr) << "))" << sf.postfix() << std::endl;
+                     sf.next();
+                 }
+             }
+@@ -92,54 +96,55 @@ a.stream() << "    " << sf.prefix() << a.make_member_variable_name(p) << "(std::
+             /*
+              * Complete constructor.
+              */
+-            if (!c.all_properties().empty()) {
+-                const auto prop_count(c.all_properties().size());
+-                if (prop_count == 1) {
+-                     const auto p(*c.all_properties().begin());
++            if (!o.all_attributes().empty()) {
++                const auto attr_count(o.all_attributes().size());
++                if (attr_count == 1) {
++                     const auto attr(*o.all_attributes().begin());
+ a.stream() << std::endl;
+-a.stream() << c.name() << "::" << c.name() << "(const " << p.type().complete_name() << a.make_by_ref_text(p) << " " << p.name() << ")" << std::endl;
++a.stream() << sn << "::" << sn << "(const " << qn << a.make_by_ref_text(attr) << " " << attr.name().simple() << ")" << std::endl;
+                 } else {
+ a.stream() << std::endl;
+-a.stream() << c.name() << "::" << c.name() << "(" << std::endl;
++a.stream() << sn << "::" << sn << "(" << std::endl;
+ 
+-                    dogen::formatters::sequence_formatter sf(prop_count);
++                    dogen::formatters::sequence_formatter sf(attr_count);
+                     sf.postfix_configuration().last(")");
+-                    for (const auto p : c.all_properties()) {
+-a.stream() << "    const " << p.type().complete_name() << a.make_by_ref_text(p) << " " << p.name() << sf.postfix() << std::endl;
++                    for (const auto attr : o.all_attributes()) {
++a.stream() << "    const " << qn << a.make_by_ref_text(attr) << " " << attr.name().simple() << sf.postfix() << std::endl;
+                         sf.next();
+                     }
+                 }
+ 
+-                int sequence_size(c.properties().size() + c.parents().size());
+-                for (const auto p : c.parents())
+-                    sequence_size += (p.properties().size() > 1 ?
+-                        p.properties().size() : 0);
++                int sequence_size(o.all_attributes().size() + o.parents().size());
++                for (const auto pn : o.parents())
++                    sequence_size += (o.all_attributes().size() > 1 ?
++                        o.all_attributes().size() : 0);
+ 
+                 dogen::formatters::sequence_formatter sf(sequence_size);
+-                sf.prefix_configuration().first(": ").not_first("  ");
+                 sf.postfix_configuration().last(" { }");
+-                for (const auto p : c.parents()) {
+-                    if (p.properties().size() <= 1) {
+-a.stream() << "    " << sf.prefix() << p.qualified_name() << "(" << (p.properties().empty() ? "" : p.properties().front().name()) << ")" << sf.postfix() << std::endl;
++                sf.prefix_configuration().first(": ").not_first("  ");
++                for (const auto pair : o.inherited_attributes()) {
++                    const auto pqn(a.get_qualified_name(pair.first));
++                    if (o.all_attributes().size() <= 1) {
++a.stream() << "    " << sf.prefix() << pqn << "(" << (o.all_attributes().empty() ? "" : o.all_attributes().front().name().simple()) << ")" << sf.postfix() << std::endl;
+                         sf.next();
+                     } else {
+-a.stream() << "    " << sf.prefix() << p.qualified_name() << "(" << sf.postfix(true/*skip*/) << std::endl;
++a.stream() << "    " << sf.prefix() << pqn << "(" << sf.postfix(true/*skip*/) << std::endl;
+                         sf.next();
+-                        dogen::formatters::sequence_formatter sf2(p.properties().size());
++                        dogen::formatters::sequence_formatter sf2(o.local_attributes().size());
+                         sf2.element_separator("");
+ 
+                         sf2.prefix_configuration().first("  ").not_first("  ");
+                         sf2.postfix_configuration().last(")");
+-                        for (const auto prop : p.properties()) {
+-a.stream() << "    " << sf2.prefix() << prop.name() << sf2.postfix() << sf.postfix() << std::endl;
++                        for (const auto attr : pair.second) {
++a.stream() << "    " << sf2.prefix() << attr.name().simple() << sf2.postfix() << sf.postfix() << std::endl;
+                             sf2.next();
+                             sf.next();
+                         }
+                     }
+                 }
+ 
+-                for (const auto p : c.properties()) {
+-a.stream() << "    " << sf.prefix() << a.make_member_variable_name(p) << "(" << p.name() << ")" << sf.postfix() << std::endl;
++                for (const auto attr : o.local_attributes()) {
++a.stream() << "    " << sf.prefix() << a.make_member_variable_name(attr) << "(" << attr.name().simple() << ")" << sf.postfix() << std::endl;
+                     sf.next();
+                 }
+             }
+@@ -148,10 +153,10 @@ a.stream() << "    " << sf.prefix() << a.make_member_variable_name(p) << "(" <<
+              * Streaming
+              */
+             if (a.is_io_enabled()) {
+-                if (c.is_parent() || !c.parents().empty()) {
++                if (o.in_inheritance_relationship()) {
+ a.stream() << std::endl;
+-a.stream() << "void " << c.name() << "::to_stream(std::ostream& s) const {" << std::endl;
+-                io::inserter_implementation_helper_stitch(a, c, true/*inside_class*/);
++a.stream() << "void " << sn << "::to_stream(std::ostream& s) const {" << std::endl;
++                // io::inserter_implementation_helper_stitch(a, o, true/*inside_class*/);
+ a.stream() << "}" << std::endl;
+                 }
+             }
+@@ -159,21 +164,21 @@ a.stream() << "}" << std::endl;
+             /*
+              * Swap
+              */
+-            if (!c.is_immutable() && (!c.all_properties().empty() || c.is_parent())) {
+-                const bool empty(c.all_properties().empty() && c.parents().empty());
++            if (!o.is_immutable() && (!o.all_attributes().empty() || o.is_parent())) {
++                const bool empty(o.all_attributes().empty() && o.parents().empty());
+ a.stream() << std::endl;
+-a.stream() << "void " << c.name() << "::swap(" << c.name() << "&" << (empty ? "" : " other") << ") noexcept {" << std::endl;
+-               if (!c.parents().empty()) {
+-                    for (const auto p : c.parents())
+-a.stream() << "    " << p.name() << "::swap(other);" << std::endl;
++a.stream() << "void " << sn << "::swap(" << sn << "&" << (empty ? "" : " other") << ") noexcept {" << std::endl;
++               if (!o.parents().empty()) {
++                    for (const auto pn : o.parents())
++a.stream() << "    " << pn.simple() << "::swap(other);" << std::endl;
+ a.stream() << std::endl;
+ 
+                }
+ 
+-               if (!c.properties().empty()) {
++               if (!o.local_attributes().empty()) {
+ a.stream() << "    using std::swap;" << std::endl;
+-                   for (const auto p : c.properties())
+-a.stream() << "    swap(" << a.make_member_variable_name(p) << ", other." << a.make_member_variable_name(p) << ");" << std::endl;
++                   for (const auto attr : o.local_attributes())
++a.stream() << "    swap(" << a.make_member_variable_name(attr) << ", other." << a.make_member_variable_name(attr) << ");" << std::endl;
+                }
+ a.stream() << "}" << std::endl;
+             }
+@@ -181,10 +186,11 @@ a.stream() << "}" << std::endl;
+             /*
+              * Equals method
+              */
+-            if (!c.is_parent() && !c.parents().empty()) {
++            if (!o.is_parent() && !o.parents().empty()) {
++                const auto rpn(o.root_parents().front());
+ a.stream() << std::endl;
+-a.stream() << "bool " << c.name() << "::equals(const " << c.root_parent_name_qualified() << "& other) const {" << std::endl;
+-a.stream() << "    const " << c.name() << "* const p(dynamic_cast<const " << c.name() << "* const>(&other));" << std::endl;
++a.stream() << "bool " << sn << "::equals(const " << a.get_qualified_name(rpn) << "& other) const {" << std::endl;
++a.stream() << "    const " << sn << "* const p(dynamic_cast<const " << sn << "* const>(&other));" << std::endl;
+ a.stream() << "    if (!p) return false;" << std::endl;
+ a.stream() << "    return *this == *p;" << std::endl;
+ a.stream() << "}" << std::endl;
+@@ -194,39 +200,39 @@ a.stream() << "}" << std::endl;
+              * Equals operator
+              */
+             std::string method_name;
+-            if (c.is_parent())
++            if (o.is_parent())
+                 method_name = "compare";
+             else
+                 method_name = "operator==";
+ a.stream() << std::endl;
+-a.stream() << "bool " << c.name() << "::" << method_name << "(const " << c.name() << "& " << (c.all_properties().empty() ? "/*rhs*/" : "rhs") << ") const {" << std::endl;
++a.stream() << "bool " << sn << "::" << method_name << "(const " << sn << "& " << (o.all_attributes().empty() ? "/*rhs*/" : "rhs") << ") const {" << std::endl;
+ 
+-            if (c.all_properties().empty())
++            if (o.all_attributes().empty())
+ a.stream() << "    return true;" << std::endl;
+             else {
+-                dogen::formatters::sequence_formatter sf(c.parents().size());
++                dogen::formatters::sequence_formatter sf(o.parents().size());
+                 sf.element_separator("");
+                 sf.prefix_configuration().first("return ").not_first("    ");
+                 sf.postfix_configuration().not_last(" &&");
+-                if (c.properties().empty())
++                if (o.local_attributes().empty())
+                     sf.postfix_configuration().last(";");
+                 else
+                     sf.postfix_configuration().last(" &&");
+ 
+-                for (const auto p : c.parents()) {
+-a.stream() << "    " << sf.prefix() << p.name() << "::compare(rhs)" << sf.postfix() << std::endl;
++                for (const auto pn : o.parents()) {
++a.stream() << "    " << sf.prefix() << pn.simple() << "::compare(rhs)" << sf.postfix() << std::endl;
+                     sf.next();
+                 }
+-                sf.reset(c.properties().size());
++                sf.reset(o.local_attributes().size());
+                 sf.element_separator("");
+-                if (c.parents().empty())
++                if (o.parents().empty())
+                    sf.prefix_configuration().first("return ");
+                 else
+                    sf.prefix_configuration().first("    ");
+                 sf.prefix_configuration().not_first("    ");
+                 sf.postfix_configuration().last(";").not_last(" &&");
+-                for (const auto p : c.properties()) {
+-a.stream() << "    " << sf.prefix() << a.make_member_variable_name(p) << " == rhs." << a.make_member_variable_name(p) << sf.postfix() << std::endl;
++                for (const auto attr : o.local_attributes()) {
++a.stream() << "    " << sf.prefix() << a.make_member_variable_name(attr) << " == rhs." << a.make_member_variable_name(attr) << sf.postfix() << std::endl;
+                     sf.next();
+                 }
+             }
+@@ -235,9 +241,9 @@ a.stream() << "}" << std::endl;
+             /*
+              * Assignment
+              */
+-            if (!c.all_properties().empty() && !c.is_parent() && !c.is_immutable()) {
++            if (!o.all_attributes().empty() && !o.is_parent() && !o.is_immutable()) {
+ a.stream() << std::endl;
+-a.stream() << c.name() << "& " << c.name() << "::operator=(" << c.name() << " other) {" << std::endl;
++a.stream() << sn << "& " << sn << "::operator=(" << sn << " other) {" << std::endl;
+ a.stream() << "    using std::swap;" << std::endl;
+ a.stream() << "    swap(*this, other);" << std::endl;
+ a.stream() << "    return *this;" << std::endl;
+@@ -247,42 +253,42 @@ a.stream() << "}" << std::endl;
+             /*
+              * Getters and setters
+              */
+-             for (const auto p : c.properties()) {
+-                 if (p.type().is_primitive() || p.type().is_enumeration()) {
++             for (const auto attr : o.local_attributes()) {
++                 if (attr.parsed_type().is_current_simple_type()) {
+ a.stream() << std::endl;
+-a.stream() << p.type().complete_name() << " " << c.name() << "::" << p.name() << "() const {" << std::endl;
+-a.stream() << "    return " << a.make_member_variable_name(p) << ";" << std::endl;
++a.stream() << a.get_qualified_name(attr.parsed_type()) << " " << sn << "::" << attr.name().simple() << "() const {" << std::endl;
++a.stream() << "    return " << a.make_member_variable_name(attr) << ";" << std::endl;
+ a.stream() << "}" << std::endl;
+-                    if (!c.is_immutable()) {
++                    if (!o.is_immutable()) {
+ a.stream() << std::endl;
+-a.stream() << (p.is_fluent() ? c.name() + "&" : "void") << " " << c.name() << "::" << p.name() << "(const " << p.type().complete_name() << " v) {" << std::endl;
+-a.stream() << "    " << a.make_member_variable_name(p) << " = v;" << std::endl;
+-                        if (p.is_fluent()) {
++a.stream() << (attr.is_fluent() ? sn + "&" : "void") << " " << sn << "::" << sn << "(const " << a.get_qualified_name(attr.parsed_type()) << " v) {" << std::endl;
++a.stream() << "    " << a.make_member_variable_name(attr) << " = v;" << std::endl;
++                        if (attr.is_fluent()) {
+ a.stream() << "    return *this;" << std::endl;
+                         }
+ a.stream() << "}" << std::endl;
+                     }
+                 } else {
+ a.stream() << std::endl;
+-a.stream() << "const " << p.type().complete_name() << "& " << c.name() << "::" << p.name() << "() const {" << std::endl;
+-a.stream() << "    return " << a.make_member_variable_name(p) << ";" << std::endl;
++a.stream() << "const " << a.get_qualified_name(attr.parsed_type()) << "& " << sn << "::" << sn << "() const {" << std::endl;
++a.stream() << "    return " << a.make_member_variable_name(attr) << ";" << std::endl;
+ a.stream() << "}" << std::endl;
+-                    if (!c.is_immutable()) {
++                    if (!o.is_immutable()) {
+ a.stream() << std::endl;
+-a.stream() << p.type().complete_name() << "& " << c.name() << "::" << p.name() << "() {" << std::endl;
+-a.stream() << "    return " << a.make_member_variable_name(p) << ";" << std::endl;
++a.stream() << a.get_qualified_name(attr.parsed_type()) << "& " << sn << "::" << sn << "() {" << std::endl;
++a.stream() << "    return " << a.make_member_variable_name(attr) << ";" << std::endl;
+ a.stream() << "}" << std::endl;
+ a.stream() << std::endl;
+-a.stream() << (p.is_fluent() ? c.name() + "&" : "void") << " " << c.name() << "::" << p.name() << "(const " << p.type().complete_name() << "& v) {" << std::endl;
+-a.stream() << "    " << a.make_member_variable_name(p) << " = v;" << std::endl;
+-                        if (p.is_fluent()) {
++a.stream() << (o.is_fluent() ? sn + "&" : "void") << " " << sn << "::" << sn << "(const " << a.get_qualified_name(attr.parsed_type()) << "& v) {" << std::endl;
++a.stream() << "    " << a.make_member_variable_name(attr) << " = v;" << std::endl;
++                        if (o.is_fluent()) {
+ a.stream() << "    return *this;" << std::endl;
+                         }
+ a.stream() << "}" << std::endl;
+ a.stream() << std::endl;
+-a.stream() << (p.is_fluent() ? c.name() + "&" : "void") << " " << c.name() << "::" << p.name() << "(const " << p.type().complete_name() << "&& v) {" << std::endl;
+-a.stream() << "    " << a.make_member_variable_name(p) << " = std::move(v);" << std::endl;
+-                        if (p.is_fluent()) {
++a.stream() << (o.is_fluent() ? sn + "&" : "void") << " " << sn << "::" << sn << "(const " << a.get_qualified_name(attr.parsed_type()) << "&& v) {" << std::endl;
++a.stream() << "    " << a.make_member_variable_name(attr) << " = std::move(v);" << std::endl;
++                        if (o.is_fluent()) {
+ a.stream() << "    return *this;" << std::endl;
+                         }
+ a.stream() << "}" << std::endl;
