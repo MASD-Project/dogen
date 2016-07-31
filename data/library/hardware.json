@@ -10,6 +10,7 @@
             "extensions" : {
                 "quilt.cpp.helper.family" : "Boolean",
                 "quilt.cpp.inclusion_required" : false,
+                "quilt.cpp.aspect.requires_stream_manipulators" : true,
                 "quilt.cpp.aspect.requires_manual_default_constructor" : true
             }
         },
@@ -135,6 +136,7 @@
             "extensions" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
+                "quilt.cpp.aspect.requires_stream_manipulators" : true,
                 "quilt.cpp.aspect.requires_manual_default_constructor" : true
             }
         },
@@ -145,6 +147,7 @@
             "extensions" : {
                 "quilt.cpp.helper.family" : "Number",
                 "quilt.cpp.inclusion_required" : false,
+                "quilt.cpp.aspect.requires_stream_manipulators" : true,
                 "quilt.cpp.aspect.requires_manual_default_constructor" : true
             }
         }

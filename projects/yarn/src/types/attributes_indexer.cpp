@@ -115,14 +115,20 @@ void attributes_indexer::index_object(object& o, intermediate_model& m,
         auto& parent(find_object(n, m));
         index_object(parent, m, processed_ids);
 
-        if (!parent.all_attributes().empty()) {
-            const auto& pn(parent.name());
-            const auto pair(std::make_pair(pn, parent.all_attributes()));
-            o.inherited_attributes().insert(pair);
-        }
+        /*
+         * Note that we insert the parent and its attributes
+         * _regardless_ of whether it has any attributes or not into
+         * the inherited attributes container.
+         */
+        const auto& pn(parent.name());
+        const auto& pattrs(parent.all_attributes());
+        o.inherited_attributes().insert(std::make_pair(pn, pattrs));
 
-        const auto p(parent.all_attributes());
-        o.all_attributes().insert(o.all_attributes().end(), p.begin(), p.end());
+        if (pattrs.empty())
+            continue;
+
+        auto& attrs(o.all_attributes());
+        attrs.insert(attrs.end(), pattrs.begin(), pattrs.end());
     }
 
     o.all_attributes().insert(o.all_attributes().end(),

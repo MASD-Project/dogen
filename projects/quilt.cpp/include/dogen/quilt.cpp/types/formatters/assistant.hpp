@@ -238,6 +238,9 @@ private:
     std::list<std::shared_ptr<formatters::helper_formatter_interface>>
     get_helpers(const properties::helper_properties& hp) const;
 
+    std::string streaming_for_type(const settings::streaming_settings& ss,
+        const std::string& s) const;
+
 public:
     /**
      * @brief Creates any helper methods that may be required for this
@@ -249,8 +252,12 @@ public:
      * @brief Returns the correct streaming invocation for the
      * supplied type.
      */
+    /**@{*/
     std::string streaming_for_type(const properties::helper_descriptor& hd,
         const std::string& s) const;
+    std::string streaming_for_type(const yarn::name& n,
+        const std::string& s) const;
+    /**@}*/
 
     /**
      * @brief Returns true if the type can be hashed without requiring a

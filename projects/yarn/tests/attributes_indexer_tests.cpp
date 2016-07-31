@@ -46,8 +46,9 @@ using dogen::yarn::test::mock_intermediate_model_factory;
  * @brief We require the concepts to have been indexed or else we
  * won't work.
  */
-const mock_intermediate_model_factory::flags flags(false/*tagged*/, false/*resolved*/,
-    false/*merged*/, true/*concepts_indexed*/, false/*attributes_indexed*/);
+const mock_intermediate_model_factory::flags
+flags(false/*tagged*/, false/*resolved*/, false/*merged*/,
+    true/*concepts_indexed*/, false/*attributes_indexed*/);
 const mock_intermediate_model_factory factory(flags);
 
 template<typename Stateful>
@@ -341,11 +342,17 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
     }
 }
 
-BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_model_concepts_is_untouched_by_attributes_indexer) {
-    SETUP_TEST_LOG_SOURCE("model_with_single_parent_that_does_not_model_concepts_is_untouched_by_attributes_indexer");
+BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_model_concepts_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("model_with_single_parent_that_does_not_model_concepts_results_in_expected_indices");
 
     auto a(factory.object_with_parent_in_the_same_model());
-    const auto e(factory.object_with_parent_in_the_same_model());
+    auto e(factory.object_with_parent_in_the_same_model());
+    for (auto& pair : e.objects()) {
+        auto& o(pair.second);
+        for (const auto& p : o.parents())
+            o.inherited_attributes()[p];
+    }
+
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
     BOOST_REQUIRE(a.objects().size() == 2);
@@ -357,11 +364,17 @@ BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_model_concepts_is_un
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_concepts_and_has_no_attributes_is_untouched_by_attributes_indexer) {
-    SETUP_TEST_LOG_SOURCE("model_with_third_degree_inheritance_that_does_not_model_concepts_and_has_no_attributes_is_untouched_by_attributes_indexer");
+BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_concepts_and_has_no_attributes_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("model_with_third_degree_inheritance_that_does_not_model_concepts_and_has_no_attributes_results_in_expected_indices");
 
     auto a(factory.object_with_third_degree_parent_in_same_model());
-    const auto e(factory.object_with_third_degree_parent_in_same_model());
+    auto e(factory.object_with_third_degree_parent_in_same_model());
+    for (auto& pair : e.objects()) {
+        auto& o(pair.second);
+        for (const auto& p : o.parents())
+            o.inherited_attributes()[p];
+    }
+
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
     BOOST_REQUIRE(a.objects().size() == 4);

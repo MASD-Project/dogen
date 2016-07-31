@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/formatters/types/file.hpp"
-#include "dogen/quilt.cpp/types/properties/class_info.hpp"
+#include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {
@@ -35,8 +35,8 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-dogen::formatters::file class_implementation_formatter_stitch(
-    assistant& a, const properties::class_info& fd);
+dogen::formatters::file
+class_implementation_formatter_stitch(assistant& a, const yarn::object& o);
 
 } } } } }
 

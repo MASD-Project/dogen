@@ -473,6 +473,40 @@ void assistant::add_helper_methods() {
     }
 }
 
+std::string assistant::streaming_for_type(
+    const settings::streaming_settings& ss, const std::string& s) const {
+
+    std::ostringstream stream;
+    dogen::formatters::utility_formatter uf(stream);
+    BOOST_LOG_SEV(lg, debug) << "Settings for streaming for type: " << ss;
+    if (ss.remove_unprintable_characters())
+        uf.insert_streamed("tidy_up_string(" + s + ")");
+    else if (!ss.string_conversion_method().empty()) {
+        // FIXME: hack!
+        std::string s1(s);
+        const auto i(s1.find('*'));
+        if (i != std::string::npos)
+            s1 = "(" + s + ")";
+        uf.insert_streamed(s1 + "." + ss.string_conversion_method());
+    } else if (ss.requires_quoting())
+        uf.insert_streamed(s);
+    else
+        uf.insert(s);
+
+    return stream.str();
+}
+
+std::string assistant::streaming_for_type(const yarn::name& n,
+    const std::string& s) const {
+
+    const auto ssbid(context_.streaming_settings_repository().by_id());
+    const auto i(ssbid.find(n.id()));
+    if (i == ssbid.end())
+        return s;
+
+    return streaming_for_type(i->second, s);
+}
+
 std::string assistant::
 streaming_for_type(const properties::helper_descriptor& hd,
     const std::string& s) const {
@@ -481,24 +515,7 @@ streaming_for_type(const properties::helper_descriptor& hd,
     if (!ss)
         return s;
 
-    std::ostringstream stream;
-    dogen::formatters::utility_formatter uf(stream);
-    BOOST_LOG_SEV(lg, debug) << "Settings for streaming for type: " << *ss;
-    if (ss->remove_unprintable_characters())
-        uf.insert_streamed("tidy_up_string(" + s + ")");
-    else if (!ss->string_conversion_method().empty()) {
-        // FIXME: hack!
-        std::string s1(s);
-        const auto i(s1.find('*'));
-        if (i != std::string::npos)
-            s1 = "(" + s + ")";
-        uf.insert_streamed(s1 + "." + ss->string_conversion_method());
-    } else if (ss->requires_quoting())
-        uf.insert_streamed(s);
-    else
-        uf.insert(s);
-
-    return stream.str();
+    return streaming_for_type(*ss, s);
 }
 
 bool assistant::requires_hashing_helper_method(

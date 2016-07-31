@@ -86,4 +86,64 @@ a.stream() << "    s << \" }\";" << std::endl;
     if (!inside_class)
 a.stream() << "    return(s);" << std::endl;
 }
+
+void inserter_implementation_helper_stitch(
+    assistant& a, const yarn::object& o, const bool inside_class) {
+
+    const auto qn(a.get_qualified_name(o.name()));
+
+    if (a.requires_stream_manipulators()) {
+a.stream() << "    boost::io::ios_flags_saver ifs(s);" << std::endl;
+a.stream() << "    s.setf(std::ios_base::boolalpha);" << std::endl;
+a.stream() << "    s.setf(std::ios::fixed, std::ios::floatfield);" << std::endl;
+a.stream() << "    s.precision(6);" << std::endl;
+a.stream() << "    s.setf(std::ios::showpoint);" << std::endl;
+a.stream() << std::endl;
+    }
+
+    const bool no_parents_and_no_attributes(o.parents().empty() &&
+        o.all_attributes().empty());
+a.stream() << "    s << \" { \"" << std::endl;
+a.stream() << "      << \"\\\"__type__\\\": \" << \"\\\"" << qn << "\\\"\"" << (no_parents_and_no_attributes ? " << \" }\";" : " << \", \"") << std::endl;
+
+    dogen::formatters::sequence_formatter sf(o.parents().size());
+    sf.prefix_configuration().first("  << ").not_first("s << ");
+    sf.element_separator("");
+    for (const auto pn : o.parents()) {
+a.stream() << "    " << sf.prefix() << "\"\\\"__parent_" << sf.current_position() << "__\\\": \"" << sf.postfix() << ";" << std::endl;
+a.stream() << "    " << pn.simple() << "::to_stream(s);" << std::endl;
+        sf.next();
+    }
+
+    sf.reset(o.local_attributes().size());
+
+    if (!o.parents().empty())
+        sf.prefix_configuration().first("s << \", \"\n      ");
+    else
+        sf.prefix_configuration().first("  ");
+    sf.prefix_configuration().not_first("  ");
+    sf.postfix_configuration().not_last(" << \", \"");
+    sf.element_separator("");
+
+    for (const auto attr : o.local_attributes()) {
+        std::string variable_name;
+        if (inside_class)
+            variable_name = a.make_member_variable_name(attr);
+        else
+            variable_name = "v." + a.make_getter_setter_name(attr) + "()";
+
+a.stream() << "    " << sf.prefix() << "<< \"\\\"" << attr.name().simple() << "\\\": \" << " << a.streaming_for_type(attr.parsed_type().current(), variable_name) << sf.postfix() << std::endl;
+        sf.next();
+    }
+
+    if (!no_parents_and_no_attributes) {
+        if (!o.local_attributes().empty())
+a.stream() << "      << \" }\";" << std::endl;
+        else
+a.stream() << "    s << \" }\";" << std::endl;
+    }
+
+    if (!inside_class)
+a.stream() << "    return(s);" << std::endl;
+}
 } } } } }

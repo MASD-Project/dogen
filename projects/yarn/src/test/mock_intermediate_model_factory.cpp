@@ -282,12 +282,15 @@ void parent_to_child(const bool attributes_indexed,
     parent.is_parent(true);
     child.is_child(true);
 
-    if (attributes_indexed && !parent.all_attributes().empty()) {
-        child.inherited_attributes().insert(std::make_pair(
-                parent.name(), parent.all_attributes()));
+    if (attributes_indexed) {
+        const auto pair(
+            std::make_pair(parent.name(), parent.all_attributes()));
+        child.inherited_attributes().insert(pair);
 
-        child.all_attributes().insert(child.all_attributes().end(),
-            parent.all_attributes().begin(), parent.all_attributes().end());
+        if (!parent.all_attributes().empty()) {
+            child.all_attributes().insert(child.all_attributes().end(),
+                parent.all_attributes().begin(), parent.all_attributes().end());
+        }
     }
 }
 
