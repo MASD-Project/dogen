@@ -28,17 +28,18 @@ namespace formatters {
 namespace io {
 
 dogen::formatters::file class_header_formatter_stitch(
-    assistant& a, const properties::class_info& c) {
+    assistant& a, const yarn::object& o) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(c.namespaces()));
-
+            const auto ns(a.make_namespaces(o.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto qn(a.get_qualified_name(o.name()));
 a.stream() << std::endl;
 a.stream() << "std::ostream&" << std::endl;
 a.stream() << "operator<<(std::ostream& s," << std::endl;
-a.stream() << "     const " << c.qualified_name() << "& v);" << std::endl;
+a.stream() << "     const " << qn << "& v);" << std::endl;
 a.stream() << std::endl;
         } // snf
 a.stream() << std::endl;
