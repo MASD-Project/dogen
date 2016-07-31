@@ -28,13 +28,13 @@ namespace formatters {
 namespace hash {
 
 dogen::formatters::file class_implementation_formatter_stitch(
-    assistant& a, const properties::class_info& c) {
+    assistant& a, const yarn::object& o) {
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
 a.stream() << std::endl;
 a.stream() << "namespace {" << std::endl;
 a.stream() << std::endl;
-        if (!c.properties().empty() || !c.parents().empty()) {
+        if (!o.local_attributes().empty() || !o.parents().empty()) {
 a.stream() << "template <typename HashableType>" << std::endl;
 a.stream() << "inline void combine(std::size_t& seed, const HashableType& value) {" << std::endl;
 a.stream() << "    std::hash<HashableType> hasher;" << std::endl;
@@ -47,27 +47,32 @@ a.stream() << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
         {
-            auto snf(a.make_scoped_namespace_formatter(c.namespaces()));
-a.stream() << std::endl;
-a.stream() << "std::size_t " << c.name() << "_hasher::hash(const " << c.name() << "&" << ((c.properties().empty() && c.parents().empty()) ? "" : " v") << ") {" << std::endl;
-a.stream() << "    std::size_t seed(0);" << std::endl;
-            if (!c.parents().empty()) {
-a.stream() << std::endl;
-                for (const auto p : c.parents())
-a.stream() << "    combine(seed, dynamic_cast<const " << p.qualified_name() << "&>(v));" << std::endl;
+            const auto ns(a.make_namespaces(o.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto sn(o.name().simple());
+            const auto qn(a.get_qualified_name(o.name()));
 
+a.stream() << std::endl;
+a.stream() << "std::size_t " << sn << "_hasher::hash(const " << sn << "&" << ((o.local_attributes().empty() && o.parents().empty()) ? "" : " v") << ") {" << std::endl;
+a.stream() << "    std::size_t seed(0);" << std::endl;
+            if (!o.parents().empty()) {
+a.stream() << std::endl;
+                for (const auto& pn : o.parents()) {
+                    const auto pqn(a.get_qualified_name(pn));
+a.stream() << "    combine(seed, dynamic_cast<const " << pqn << "&>(v));" << std::endl;
+                }
             }
 
-            if (!c.properties().empty()) {
+            if (!o.local_attributes().empty()) {
 a.stream() << std::endl;
-                for (const auto p : c.properties()) {
-                    if (a.requires_hashing_helper_method(p.type()))
-a.stream() << "    combine(seed, hash_" << p.type().complete_identifiable_name() << "(v." << p.name() << "()));" << std::endl;
+                for (const auto attr : o.local_attributes()) {
+                    if (a.requires_hashing_helper_method(attr))
+a.stream() << "    combine(seed, hash_" << attr.parsed_type().identifiable() << "(v." << attr.name().simple() << "()));" << std::endl;
                     else
-a.stream() << "    combine(seed, v." << p.name() << "()" << (p.type().is_date() ? ".modjulian_day()" : "") << ");" << std::endl;
+a.stream() << "    combine(seed, v." << attr.name().simple() << "());" << std::endl;
                 }
 
-                if (c.properties().size() > 1)
+                if (o.local_attributes().size() > 1)
 a.stream() << std::endl;
             }
 a.stream() << "    return seed;" << std::endl;

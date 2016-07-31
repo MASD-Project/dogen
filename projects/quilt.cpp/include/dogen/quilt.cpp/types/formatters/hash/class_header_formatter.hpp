@@ -52,8 +52,8 @@ public:
     void register_inclusion_dependencies_provider(
         properties::registrar& rg) const override;
 
-    dogen::formatters::file format(const context& ctx,
-        const yarn::object& o) const override;
+    dogen::formatters::file
+    format(const context& ctx, const yarn::object& o) const override;
 };
 
 } } } } }

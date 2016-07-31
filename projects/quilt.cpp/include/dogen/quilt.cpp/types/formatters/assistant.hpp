@@ -265,6 +265,7 @@ public:
      */
     bool requires_hashing_helper_method(
         const properties::nested_type_info& t) const;
+    bool requires_hashing_helper_method(const yarn::attribute& attr) const;
 
 private:
     /**

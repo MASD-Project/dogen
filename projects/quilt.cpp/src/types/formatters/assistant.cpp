@@ -524,6 +524,20 @@ bool assistant::requires_hashing_helper_method(
         requires_hashing_helper_method(t);
 }
 
+bool assistant::
+requires_hashing_helper_method(const yarn::attribute& attr) const {
+    for (const auto& hp : context_.element_properties().helper_properties()) {
+        const auto ident(attr.parsed_type().identifiable());
+        const auto& desc(hp.current());
+        if (ident != desc.name_tree_identifiable())
+            continue;
+
+        if (desc.requires_hashing_helper())
+            return true;
+    }
+    return false;
+}
+
 boost::shared_ptr<settings::odb_settings> assistant::
 get_odb_settings(const std::unordered_map<std::string,
     boost::shared_ptr<quilt::cpp::settings::opaque_settings>
