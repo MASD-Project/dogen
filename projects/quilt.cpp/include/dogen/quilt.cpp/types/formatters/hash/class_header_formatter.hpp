@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/formatters/class_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/new_class_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -33,7 +33,7 @@ namespace cpp {
 namespace formatters {
 namespace hash {
 
-class class_header_formatter final : public class_formatter_interface {
+class class_header_formatter final : public new_class_formatter_interface {
 public:
     /**
      * @brief Returns the formatter name.
@@ -53,7 +53,7 @@ public:
         properties::registrar& rg) const override;
 
     dogen::formatters::file format(const context& ctx,
-        const properties::class_info& c) const override;
+        const yarn::object& o) const override;
 };
 
 } } } } }

@@ -28,16 +28,20 @@ namespace formatters {
 namespace hash {
 
 dogen::formatters::file class_header_formatter_stitch(
-    assistant& a, const properties::class_info& c) {
+    assistant& a, const yarn::object& o) {
 
+    const auto sn(o.name().simple());
+    const auto qn(a.get_qualified_name(o.name()));
     {
+   
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(c.namespaces()));
+            const auto ns(a.make_namespaces(o.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
-a.stream() << "struct " << c.name() << "_hasher {" << std::endl;
+a.stream() << "struct " << sn << "_hasher {" << std::endl;
 a.stream() << "public:" << std::endl;
-a.stream() << "    static std::size_t hash(const " << c.name() << "& v);" << std::endl;
+a.stream() << "    static std::size_t hash(const " << sn << "& v);" << std::endl;
 a.stream() << "};" << std::endl;
 a.stream() << std::endl;
         } // snf
@@ -45,10 +49,10 @@ a.stream() << std::endl;
 a.stream() << "namespace std {" << std::endl;
 a.stream() << std::endl;
 a.stream() << "template<>" << std::endl;
-a.stream() << "struct hash<" << c.qualified_name() << "> {" << std::endl;
+a.stream() << "struct hash<" << qn << "> {" << std::endl;
 a.stream() << "public:" << std::endl;
-a.stream() << "    size_t operator()(const " << c.qualified_name() << "& v) const {" << std::endl;
-a.stream() << "        return " << c.qualified_name() << "_hasher::hash(v);" << std::endl;
+a.stream() << "    size_t operator()(const " << qn << "& v) const {" << std::endl;
+a.stream() << "        return " << qn << "_hasher::hash(v);" << std::endl;
 a.stream() << "    }" << std::endl;
 a.stream() << "};" << std::endl;
 a.stream() << std::endl;
