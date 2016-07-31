@@ -13,34 +13,35 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-31 Sun 21:54]
+#+CAPTION: Clock summary at [2016-07-31 Sun 22:14]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *31:08* |       |      | 100.0 |
+| *Total time*                                                                | *31:27* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 31:08   |       |      | 100.0 |
-| Active                                                                      |         | 31:08 |      | 100.0 |
+| Stories                                                                     | 31:27   |       |      | 100.0 |
+| Active                                                                      |         | 31:27 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:32 |   4.9 |
-| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |   9.3 |
+| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |   9.2 |
 | COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   2.0 |
 | COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   1.7 |
-| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |   6.2 |
+| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |   6.1 |
 | COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   0.7 |
-| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   3.4 |
-| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  23.2 |
+| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   3.3 |
+| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  22.9 |
 | COMPLETED Remove optionality from helper settings                           |         |       | 0:22 |   1.2 |
-| COMPLETED Remove unused aspect settings                                     |         |       | 0:31 |   1.7 |
+| COMPLETED Remove unused aspect settings                                     |         |       | 0:31 |   1.6 |
 | COMPLETED Reactivate compressed tests                                       |         |       | 0:03 |   0.2 |
-| COMPLETED Add aspect properties infrastructure                              |         |       | 3:40 |  11.8 |
+| COMPLETED Add aspect properties infrastructure                              |         |       | 3:40 |  11.7 |
 | COMPLETED Mark name trees with simple types                                 |         |       | 0:19 |   1.0 |
 | COMPLETED Use id in attributes indexer instead of name                      |         |       | 0:08 |   0.4 |
 | COMPLETED Remove primitive id generation in helpers                         |         |       | 0:23 |   1.2 |
 | COMPLETED Populate attribute's is fluent correctly in yarn                  |         |       | 0:12 |   0.6 |
-| COMPLETED Implement type' class header in terms of =yarn::object=           |         |       | 4:14 |  13.6 |
-| COMPLETED Add streaming settings to context                                 |         |       | 0:48 |   2.6 |
-| COMPLETED Implement types' class implementation in terms of =yarn::object=  |         |       | 4:16 |  13.7 |
+| COMPLETED Implement type' class header in terms of =yarn::object=           |         |       | 4:14 |  13.5 |
+| COMPLETED Add streaming settings to context                                 |         |       | 0:48 |   2.5 |
+| COMPLETED Implement types' class implementation in terms of =yarn::object=  |         |       | 4:16 |  13.6 |
 | COMPLETED Implement io's header in terms of =yarn::object=                  |         |       | 0:13 |   0.7 |
+| COMPLETED Implement io's header in terms of =yarn::object=                  |         |       | 0:19 |   1.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -405,6 +406,13 @@ yarn object.
 *** COMPLETED Implement io's header in terms of =yarn::object=        :story:
     CLOSED: [2016-07-31 Sun 21:54]
     CLOCK: [2016-07-31 Sun 21:40]--[2016-07-31 Sun 21:53] =>  0:13
+
+Move io class header stitch template from class info to yarn object.
+
+*** COMPLETED Implement io's header in terms of =yarn::object=        :story:
+    CLOSED: [2016-07-31 Sun 22:14]
+    CLOCK: [2016-07-31 Sun 22:11]--[2016-07-31 Sun 22:14] =>  0:03
+    CLOCK: [2016-07-31 Sun 21:54]--[2016-07-31 Sun 22:10] =>  0:16
 
 Move io class header stitch template from class info to yarn object.
 

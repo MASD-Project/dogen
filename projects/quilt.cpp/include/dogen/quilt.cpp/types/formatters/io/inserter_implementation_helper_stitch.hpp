@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/quilt.cpp/types/properties/class_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {
@@ -37,10 +36,6 @@ namespace io {
 
 void inserter_implementation_helper_stitch(
     assistant& a, const yarn::object& o, const bool inside_class);
-
-void inserter_implementation_helper_stitch(
-    assistant& a, const properties::class_info& ci,
-    const bool inside_class);
 
 } } } } }
 
