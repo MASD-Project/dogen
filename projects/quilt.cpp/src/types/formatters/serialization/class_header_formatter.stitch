@@ -8,19 +8,21 @@
 <#+
 
 dogen::formatters::file class_header_formatter_stitch(
-    assistant& a, const properties::class_info& c) {
+    assistant& a, const yarn::object& o) {
     {
+        const auto qn(a.get_qualified_name(o.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
 
-        if (!c.is_parent() && !c.parents().empty()) {
-            for (const auto p : c.parents()) {
+        if (!o.is_parent() && !o.parents().empty()) {
+            for (const auto pn : o.parents()) {
+                const auto pqn(a.get_qualified_name(pn));
 #>
 namespace boost {
 
 template<>struct
 is_virtual_base_of<
-    <#= p.qualified_name() #>,
-    <#= c.qualified_name() #>
+    <#= pqn #>,
+    <#= qn #>
 > : public mpl::true_ {};
 
 }
@@ -29,11 +31,11 @@ is_virtual_base_of<
         }
 #>
 
-BOOST_SERIALIZATION_SPLIT_FREE(<#= c.qualified_name() #>)
+BOOST_SERIALIZATION_SPLIT_FREE(<#= qn #>)
 <#+
-        if (c.is_parent()) {
+        if (o.is_parent()) {
 #>
-BOOST_SERIALIZATION_ASSUME_ABSTRACT(<#= c.qualified_name() #>)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(<#= qn #>)
 
 <#+
         }
@@ -42,10 +44,10 @@ namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar, const <#= c.qualified_name() #>& v, unsigned int version);
+void save(Archive& ar, const <#= qn #>& v, unsigned int version);
 
 template<typename Archive>
-void load(Archive& ar, <#= c.qualified_name() #>& v, unsigned int version);
+void load(Archive& ar, <#= qn #>& v, unsigned int version);
 
 } }
 

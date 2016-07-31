@@ -28,37 +28,39 @@ namespace formatters {
 namespace serialization {
 
 dogen::formatters::file class_header_formatter_stitch(
-    assistant& a, const properties::class_info& c) {
+    assistant& a, const yarn::object& o) {
     {
+        const auto qn(a.get_qualified_name(o.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
 
-        if (!c.is_parent() && !c.parents().empty()) {
-            for (const auto p : c.parents()) {
+        if (!o.is_parent() && !o.parents().empty()) {
+            for (const auto pn : o.parents()) {
+                const auto pqn(a.get_qualified_name(pn));
 a.stream() << "namespace boost {" << std::endl;
 a.stream() << std::endl;
 a.stream() << "template<>struct" << std::endl;
 a.stream() << "is_virtual_base_of<" << std::endl;
-a.stream() << "    " << p.qualified_name() << "," << std::endl;
-a.stream() << "    " << c.qualified_name() << std::endl;
+a.stream() << "    " << pqn << "," << std::endl;
+a.stream() << "    " << qn << std::endl;
 a.stream() << "> : public mpl::true_ {};" << std::endl;
 a.stream() << std::endl;
 a.stream() << "}" << std::endl;
             }
         }
 a.stream() << std::endl;
-a.stream() << "BOOST_SERIALIZATION_SPLIT_FREE(" << c.qualified_name() << ")" << std::endl;
-        if (c.is_parent()) {
-a.stream() << "BOOST_SERIALIZATION_ASSUME_ABSTRACT(" << c.qualified_name() << ")" << std::endl;
+a.stream() << "BOOST_SERIALIZATION_SPLIT_FREE(" << qn << ")" << std::endl;
+        if (o.is_parent()) {
+a.stream() << "BOOST_SERIALIZATION_ASSUME_ABSTRACT(" << qn << ")" << std::endl;
 a.stream() << std::endl;
         }
 a.stream() << "namespace boost {" << std::endl;
 a.stream() << "namespace serialization {" << std::endl;
 a.stream() << std::endl;
 a.stream() << "template<typename Archive>" << std::endl;
-a.stream() << "void save(Archive& ar, const " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
+a.stream() << "void save(Archive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
 a.stream() << std::endl;
 a.stream() << "template<typename Archive>" << std::endl;
-a.stream() << "void load(Archive& ar, " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
+a.stream() << "void load(Archive& ar, " << qn << "& v, unsigned int version);" << std::endl;
 a.stream() << std::endl;
 a.stream() << "} }" << std::endl;
 a.stream() << std::endl;
