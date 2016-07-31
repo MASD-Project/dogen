@@ -448,6 +448,16 @@ Problems:
 Move serialisation class header stitch template from class info to
 yarn object.
 
+*** STARTED Implement serialisation's header in terms of =yarn::object= :story:
+    CLOCK: [2016-07-31 Sun 23:09]--[2016-07-31 Sun 23:17] =>  0:08
+
+Move serialisation class header stitch template from class info to
+yarn object.
+
+Problems:
+
+- we've hacked filesystem path. We need to create a helper for it.
+
 *** Element properties includes non-target types                      :story:
 
 We seem to be generating a lot of element properties and formatter
