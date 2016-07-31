@@ -1,0 +1,135 @@
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/serialization/class_implementation_formatter.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/serialization/class_implementation_formatter.hpp
+index ccfc333..0cbd334 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/serialization/class_implementation_formatter.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/serialization/class_implementation_formatter.hpp
+@@ -26,7 +26,7 @@
+ #endif
+ 
+ #include <string>
+-#include "dogen/quilt.cpp/types/formatters/class_formatter_interface.hpp"
++#include "dogen/quilt.cpp/types/formatters/new_class_formatter_interface.hpp"
+ 
+ namespace dogen {
+ namespace quilt {
+@@ -37,7 +37,8 @@ namespace serialization {
+ /**
+  * @brief Creates the C++ serialisation representation for a class.
+  */
+-class class_implementation_formatter final : public class_formatter_interface {
++class class_implementation_formatter final
++    : public new_class_formatter_interface {
+ public:
+     class_implementation_formatter() = default;
+     class_implementation_formatter(
+@@ -64,8 +65,8 @@ public:
+     void register_inclusion_dependencies_provider(
+         properties::registrar& rg) const override;
+ 
+-    dogen::formatters::file format(const context& ctx,
+-        const properties::class_info& c) const override;
++    dogen::formatters::file
++    format(const context& ctx, const yarn::object& o) const override;
+ };
+ 
+ } } } } }
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/serialization/class_implementation_formatter_stitch.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/serialization/class_implementation_formatter_stitch.hpp
+index 63e843f..afc3320 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/serialization/class_implementation_formatter_stitch.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/serialization/class_implementation_formatter_stitch.hpp
+@@ -26,7 +26,7 @@
+ #endif
+ 
+ #include "dogen/formatters/types/file.hpp"
+-#include "dogen/quilt.cpp/types/properties/class_info.hpp"
++#include "dogen/yarn/types/object.hpp"
+ #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
+ 
+ namespace dogen {
+@@ -35,8 +35,8 @@ namespace cpp {
+ namespace formatters {
+ namespace serialization {
+ 
+-dogen::formatters::file class_implementation_formatter_stitch(
+-    assistant& a, const properties::class_info& fd);
++dogen::formatters::file
++class_implementation_formatter_stitch(assistant& a, const yarn::object& o);
+ 
+ } } } } }
+ 
+diff --git a/projects/quilt.cpp/src/types/formatters/serialization/class_implementation_formatter.cpp b/projects/quilt.cpp/src/types/formatters/serialization/class_implementation_formatter.cpp
+index f68b2a2..d8e0cac 100644
+--- a/projects/quilt.cpp/src/types/formatters/serialization/class_implementation_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/serialization/class_implementation_formatter.cpp
+@@ -120,9 +120,9 @@ void class_implementation_formatter::register_inclusion_dependencies_provider(
+ }
+ 
+ dogen::formatters::file class_implementation_formatter::
+-format(const context& ctx, const properties::class_info& c) const {
+-    assistant a(ctx, ownership_hierarchy(), file_type(), c.id());
+-    const auto r(class_implementation_formatter_stitch(a, c));
++format(const context& ctx, const yarn::object& o) const {
++    assistant a(ctx, ownership_hierarchy(), file_type(), o.name().id());
++    const auto r(class_implementation_formatter_stitch(a, o));
+     return r;
+ }
+ 
+diff --git a/projects/quilt.cpp/src/types/formatters/serialization/class_implementation_formatter.stitch b/projects/quilt.cpp/src/types/formatters/serialization/class_implementation_formatter.stitch
+index 64e7239..ec3e221 100644
+--- a/projects/quilt.cpp/src/types/formatters/serialization/class_implementation_formatter.stitch
++++ b/projects/quilt.cpp/src/types/formatters/serialization/class_implementation_formatter.stitch
+@@ -8,19 +8,20 @@
+ <#+
+ 
+ dogen::formatters::file class_implementation_formatter_stitch(
+-    assistant& a, const properties::class_info& c) {
++    assistant& a, const yarn::object& o) {
+ 
+     {
+         auto sbf(a.make_scoped_boilerplate_formatter());
+-        const bool has_properties(!c.properties().empty());
+-        const bool has_parents(!c.parents().empty());
+-        const bool has_properties_or_parents(has_properties || has_parents);
++        const auto qn(a.get_qualified_name(o.name()));
++        const bool has_attributes(!o.local_attributes().empty());
++        const bool has_parents(!o.parents().empty());
++        const bool has_attributes_or_parents(has_attributes || has_parents);
+ 
+-        if (c.is_parent() || !c.parents().empty()) {
++        if (o.is_parent() || !o.parents().empty()) {
+ #>
+ 
+ BOOST_CLASS_TRACKING(
+-    <#= c.qualified_name() #>,
++    <#= qn #>,
+     boost::serialization::track_selectively)
+ <#+
+         }
+@@ -37,12 +38,13 @@ namespace serialization {
+ 
+ template<typename Archive>
+ void save(Archive& <#= (has_properties_or_parents ? "ar" : "/*ar*/") #>,
+-    const <#= c.qualified_name() #>& <#= (has_properties_or_parents ? "v" : "/*v*/") #>,
++    const <#= qn #>& <#= (has_properties_or_parents ? "v" : "/*v*/") #>,
+     const unsigned int /*version*/) {
+ <#+
+-        for (const auto p : c.parents()) {
++        for (const auto pn : o.parents()) {
++            const auto pqn(a.get_qualified_name(pn));
+ #>
+-    ar << make_nvp("<#= p.name() #>", base_object<<#= p.qualified_name() #>>(v));
++    ar << make_nvp("<#= pn.simple() #>", base_object<<#= pqn #>>(v));
+ <#+
+         }
+ 
+@@ -50,9 +52,9 @@ void save(Archive& <#= (has_properties_or_parents ? "ar" : "/*ar*/") #>,
+ #>
+ 
+ <#+
+-        for (const auto p : c.properties()) {
++        for (const auto attr : o.local_attributes()) {
+ #>
+-    ar << make_nvp("<#= p.name() #>", v.<#= a.make_member_variable_name(p) #><#= (p.type().is_filesystem_path() ? ".generic_string()" : "") #>);
++    ar << make_nvp("<#= attr.name().simple() #>", v.<#= a.make_member_variable_name(attr) #><#= (p.type().is_filesystem_path() ? ".generic_string()" : "") #>);
+ <#+
+         }
+ #>
