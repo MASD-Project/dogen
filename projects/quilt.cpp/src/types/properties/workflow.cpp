@@ -28,7 +28,6 @@
 #include "dogen/quilt.cpp/types/settings/path_settings_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/aspect_settings_repository_factory.hpp"
-#include "dogen/quilt.cpp/types/settings/streaming_settings_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/factory.hpp"
 #include "dogen/quilt.cpp/types/properties/transformer.hpp"
 #include "dogen/quilt.cpp/io/properties/formattable_io.hpp"
@@ -107,13 +106,6 @@ settings::aspect_settings_repository
 workflow::create_aspect_settings_repository(
     const dynamic::repository& drp, const yarn::model& m) const {
     settings::aspect_settings_repository_factory f;
-    return f.make(drp, m);
-}
-
-settings::streaming_settings_repository workflow::
-create_streaming_settings_repository(const dynamic::repository& drp,
-    const yarn::model& m) const {
-    settings::streaming_settings_repository_factory f;
     return f.make(drp, m);
 }
 
@@ -202,6 +194,7 @@ workflow::execute(const config::cpp_options& opts,
     const dynamic::object& root_object,
     const dogen::formatters::file_properties_workflow& fpwf,
     const formatters::container& fc,
+    const settings::streaming_settings_repository& ssrp,
     settings::element_settings_repository& esrp,
     const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started creating properties.";
@@ -220,7 +213,6 @@ workflow::execute(const config::cpp_options& opts,
 
     const auto hsrp(create_helper_settings_repository(drp, m));
     const auto asrp(create_aspect_settings_repository(drp, m));
-    const auto ssrp(create_streaming_settings_repository(drp, m));
     const auto eprp(create_element_properties_repository(
             fpwf, hsrp, asrp, ssrp, fc, fprp, m));
     return std::make_pair(eprp, formattables);

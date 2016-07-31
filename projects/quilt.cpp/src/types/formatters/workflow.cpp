@@ -222,12 +222,13 @@ cpp::formatters::registrar& workflow::registrar() {
 }
 
 std::forward_list<dogen::formatters::file>
-workflow::execute(const settings::element_settings_repository& esrp,
+workflow::execute(const settings::streaming_settings_repository& ssrp,
+    const settings::element_settings_repository& esrp,
     const properties::element_properties_repository& eprp,
     const std::forward_list<
     std::shared_ptr<properties::formattable> >& f) const {
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
-    context_factory factory(esrp, eprp, registrar().formatter_helpers());
+    context_factory factory(ssrp, esrp, eprp, registrar().formatter_helpers());
     dispatcher d(factory, registrar().formatter_container());
     for (const auto sp : f)
         d.format(*sp);
@@ -243,7 +244,8 @@ workflow::execute(const settings::element_settings_repository& esrp,
 }
 
 std::forward_list<dogen::formatters::file>
-workflow::execute(const settings::element_settings_repository& esrp,
+workflow::execute(const settings::streaming_settings_repository& ssrp,
+    const settings::element_settings_repository& esrp,
     const properties::element_properties_repository& eprp,
     const std::forward_list<
     boost::shared_ptr<yarn::element> >& elements) const {
@@ -251,7 +253,7 @@ workflow::execute(const settings::element_settings_repository& esrp,
     BOOST_LOG_SEV(lg, info) << "Starting workflow - yarn version.";
 
     std::forward_list<dogen::formatters::file> r;
-    context_factory factory(esrp, eprp, registrar().formatter_helpers());
+    context_factory factory(ssrp, esrp, eprp, registrar().formatter_helpers());
     element_formatter ef(factory, registrar().formatter_container());
     for (const auto e : elements) {
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << e->name().id();

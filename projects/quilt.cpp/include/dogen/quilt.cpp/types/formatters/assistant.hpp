@@ -116,6 +116,7 @@ private:
 public:
     bool requires_manual_default_constructor() const;
     bool requires_manual_move_constructor() const;
+    bool requires_stream_manipulators() const;
 
 public:
     /**
@@ -130,6 +131,7 @@ public:
      */
     std::string make_getter_setter_name(
         const properties::property_info& p) const;
+    std::string make_getter_setter_name(const yarn::attribute& attr) const;
 
     /**
      * @brief returns the c++ namespaces for the name.

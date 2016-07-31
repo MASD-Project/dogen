@@ -38,6 +38,9 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
+const settings::streaming_settings_repository
+context_factory::empty_streaming_settings_repository_ =
+    settings::streaming_settings_repository();
 const settings::element_settings
 context_factory::empty_element_settings_ = settings::element_settings();
 const properties::element_properties
@@ -55,17 +58,18 @@ const std::unordered_map<
         std::list<std::shared_ptr<helper_formatter_interface>>>>();
 
 context_factory::context_factory(
+    const settings::streaming_settings_repository& ssrp,
     const settings::element_settings_repository& esrp,
     const properties::element_properties_repository& eprp,
     const std::unordered_map<
     std::string, std::unordered_map<
     std::string,
     std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers)
-    : element_settings_(esrp), element_properties_(eprp),
-      formatter_helpers_(helpers) {}
+    : streaming_settings_repository_(ssrp), element_settings_(esrp),
+      element_properties_(eprp), formatter_helpers_(helpers) {}
 
 const properties::element_properties& context_factory::
-properties_for_id(const std::string& n) const {
+element_properties_for_id(const std::string& n) const {
     const auto& fp(element_properties_.by_id());
     const auto i(fp.find(n));
     if (i == fp.end()) {
@@ -89,14 +93,15 @@ element_settings_for_id(const std::string& n) const {
 }
 
 context context_factory::make_empty_context() const {
-    return context(empty_element_settings_, empty_element_properties_,
-        empty_helpers_);
+    return context(empty_streaming_settings_repository_,
+        empty_element_settings_, empty_element_properties_, empty_helpers_);
 }
 
 context context_factory::make(const std::string& id) const {
-    const auto& ep(properties_for_id(id));
-    const auto& b(element_settings_for_id(id));
-    return context(b, ep, formatter_helpers_);
+    const auto& ep(element_properties_for_id(id));
+    const auto& es(element_settings_for_id(id));
+    const auto& ssrp(streaming_settings_repository_);
+    return context(ssrp, es, ep, formatter_helpers_);
 }
 
 } } } }

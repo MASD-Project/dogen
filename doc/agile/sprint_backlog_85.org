@@ -13,31 +13,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-07-28 Thu 08:10]
+#+CAPTION: Clock summary at [2016-07-29 Fri 22:43]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *25:51* |       |      | 100.0 |
+| *Total time*                                                                | *27:03* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 25:51   |       |      | 100.0 |
-| Active                                                                      |         | 25:51 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:32 |   5.9 |
-| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  11.2 |
-| COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   2.4 |
-| COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   2.1 |
-| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |   7.5 |
+| Stories                                                                     | 27:03   |       |      | 100.0 |
+| Active                                                                      |         | 27:03 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:32 |   5.7 |
+| COMPLETED Implement hashing using dynamic helpers                           |         |       | 2:53 |  10.7 |
+| COMPLETED Analysis on pointers and type parameters                          |         |       | 0:37 |   2.3 |
+| COMPLETED Add support for numbers in dynamic                                |         |       | 0:32 |   2.0 |
+| COMPLETED Add type parameters support to yarn                               |         |       | 1:56 |   7.1 |
 | COMPLETED Implement is circular dependency correctly                        |         |       | 0:13 |   0.8 |
-| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   4.1 |
-| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  27.9 |
+| COMPLETED Implement "fallback" helpers                                      |         |       | 1:03 |   3.9 |
+| COMPLETED Implement test data using dynamic helpers                         |         |       | 7:13 |  26.7 |
 | COMPLETED Remove optionality from helper settings                           |         |       | 0:22 |   1.4 |
-| COMPLETED Remove unused aspect settings                                     |         |       | 0:31 |   2.0 |
+| COMPLETED Remove unused aspect settings                                     |         |       | 0:31 |   1.9 |
 | COMPLETED Reactivate compressed tests                                       |         |       | 0:03 |   0.2 |
-| COMPLETED Add aspect properties infrastructure                              |         |       | 3:40 |  14.2 |
+| COMPLETED Add aspect properties infrastructure                              |         |       | 3:40 |  13.6 |
 | COMPLETED Mark name trees with simple types                                 |         |       | 0:19 |   1.2 |
 | COMPLETED Use id in attributes indexer instead of name                      |         |       | 0:08 |   0.5 |
-| COMPLETED Remove primitive id generation in helpers                         |         |       | 0:23 |   1.5 |
-| COMPLETED Populate attribute's is fluent correctly in yarn                  |         |       | 0:12 |   0.8 |
-| COMPLETED Implement class header types in terms of =yarn::object=           |         |       | 4:14 |  16.4 |
+| COMPLETED Remove primitive id generation in helpers                         |         |       | 0:23 |   1.4 |
+| COMPLETED Populate attribute's is fluent correctly in yarn                  |         |       | 0:12 |   0.7 |
+| COMPLETED Implement type' class header in terms of =yarn::object=           |         |       | 4:14 |  15.7 |
+| STARTED Implement types' class implementation in terms of =yarn::object=    |         |       | 1:12 |   4.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -344,7 +345,7 @@ this.
 
 At present we are not setting is fluent on yarn properties. Fix this.
 
-*** COMPLETED Implement class header types in terms of =yarn::object= :story:
+*** COMPLETED Implement type' class header in terms of =yarn::object= :story:
     CLOSED: [2016-07-28 Thu 08:10]
     CLOCK: [2016-07-28 Thu 08:06]--[2016-07-28 Thu 08:10] =>  0:04
     CLOCK: [2016-07-28 Thu 07:57]--[2016-07-28 Thu 08:05] =>  0:08
@@ -362,7 +363,8 @@ At present we are not setting is fluent on yarn properties. Fix this.
     CLOCK: [2016-07-23 Sat 21:47]--[2016-07-23 Sat 21:54] =>  0:07
     CLOCK: [2016-07-23 Sat 15:10]--[2016-07-23 Sat 15:27] =>  0:17
 
-Time to have a go at moving the type's class templates to yarn types.
+Time to have a go at moving the type's class header stitch template
+from class info to yarn types.
 
 - we need to enable some side-by-side infrastructure so we can
   refactor the class info formatters one at the time, without breaking
@@ -375,6 +377,24 @@ Time to have a go at moving the type's class templates to yarn types.
   because these are generated types. We need to infer this.
 - "is primitive" in helper is the same as "is simple type". update
   helper to match. Remove primitive id generation.
+
+*** COMPLETED Add streaming settings to context                       :story:
+    CLOSED: [2016-07-31 Sun 17:56]
+    CLOCK: [2016-07-31 Sun 17:21]--[2016-07-31 Sun 17:56] =>  0:35
+    CLOCK: [2016-07-31 Sun 16:55]--[2016-07-31 Sun 17:05] =>  0:26
+    CLOCK: [2016-07-31 Sun 16:52]--[2016-07-31 Sun 16:55] =>  0:03
+
+In order to implement the inserter operator formatter we need to
+obtain the streaming settings. At present these are only used to
+produce the helper properties. We need to expose the main repository
+of streaming settings into the formatting context.
+
+*** STARTED Implement types' class implementation in terms of =yarn::object= :story:
+    CLOCK: [2016-07-31 Sun 16:29]--[2016-07-31 Sun 16:51] =>  0:22
+    CLOCK: [2016-07-29 Fri 21:31]--[2016-07-29 Fri 22:43] =>  1:12
+
+Move type's class implementation stitch template from class info to
+yarn object.
 
 *** Element properties includes non-target types                      :story:
 

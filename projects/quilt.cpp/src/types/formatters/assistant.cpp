@@ -194,6 +194,11 @@ std::string assistant::make_getter_setter_name(
     return p.name();
 }
 
+std::string assistant::
+make_getter_setter_name(const yarn::attribute& attr) const {
+    return attr.name().simple();
+}
+
 std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
     properties::name_builder b;
     return b.namespace_list(n);
@@ -219,6 +224,11 @@ bool assistant::requires_manual_default_constructor() const {
 bool assistant::requires_manual_move_constructor() const {
     const auto& ap(context_.element_properties().aspect_properties());
     return ap.requires_manual_move_constructor();
+}
+
+bool assistant::requires_stream_manipulators() const {
+    const auto& ap(context_.element_properties().aspect_properties());
+    return ap.requires_stream_manipulators();
 }
 
 bool assistant::is_serialization_enabled() const {

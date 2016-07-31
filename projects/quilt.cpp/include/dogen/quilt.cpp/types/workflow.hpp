@@ -38,6 +38,7 @@
 #include "dogen/quilt.cpp/types/properties/formattable.hpp"
 #include "dogen/formatters/types/file_properties_workflow.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
+#include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
 #include "dogen/yarn/types/model.hpp"
@@ -85,6 +86,13 @@ private:
     create_opaque_settings_builder(const dynamic::repository& rp) const;
 
     /**
+     * @brief Create the streaming settings repository.
+     */
+    settings::streaming_settings_repository
+        create_streaming_settings_repository(const dynamic::repository& drp,
+            const yarn::model& m) const;
+
+    /**
      * @brief Create the element settings repository
      */
     settings::element_settings_repository
@@ -99,11 +107,12 @@ private:
         properties::element_properties_repository,
         std::forward_list<std::shared_ptr<properties::formattable> >
     >
-    create_properties_activty(const config::cpp_options& opts,
+    create_properties(const config::cpp_options& opts,
         const dynamic::repository& srp,
         const dynamic::object& root_object,
         const dogen::formatters::file_properties_workflow& fpwf,
         const formatters::container& fc,
+        const settings::streaming_settings_repository& ssrp,
         settings::element_settings_repository& esrp,
         const yarn::model& m) const;
 
@@ -111,13 +120,14 @@ private:
      * @brief Obtains the enriched version of the yarn model.
      */
     std::forward_list<boost::shared_ptr<yarn::element> >
-    obtain_enriched_yarn_model_activity(const yarn::model& m) const;
+    obtain_enriched_yarn_model(const yarn::model& m) const;
 
     /**
      * @brief Create the files.
      */
     std::forward_list<dogen::formatters::file>
-    format_activty(const settings::element_settings_repository& esrp,
+    format(const settings::streaming_settings_repository& ssrp,
+        const settings::element_settings_repository& esrp,
         const properties::element_properties_repository& eprp,
         const std::forward_list<
         std::shared_ptr<properties::formattable>
@@ -127,7 +137,8 @@ private:
      * @brief Create the files.
      */
     std::forward_list<dogen::formatters::file>
-    format_yarn_activity(const settings::element_settings_repository& esrp,
+    format_yarn(const settings::streaming_settings_repository& ssrp,
+        const settings::element_settings_repository& esrp,
         const properties::element_properties_repository& eprp,
         const std::forward_list<
         boost::shared_ptr<yarn::element> >& elements) const;

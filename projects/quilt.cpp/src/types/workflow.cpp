@@ -28,6 +28,7 @@
 #include "dogen/quilt.cpp/types/properties/workflow.hpp"
 #include "dogen/quilt.cpp/types/settings/directory_names_settings_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/aspect_settings_repository_factory.hpp"
+#include "dogen/quilt.cpp/types/settings/streaming_settings_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/workflow.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
@@ -88,6 +89,13 @@ create_opaque_settings_builder(const dynamic::repository& drp) const {
     return r;
 }
 
+settings::streaming_settings_repository workflow::
+create_streaming_settings_repository(const dynamic::repository& drp,
+    const yarn::model& m) const {
+    settings::streaming_settings_repository_factory f;
+    return f.make(drp, m);
+}
+
 settings::element_settings_repository
 workflow::create_element_settings_repository(
     const settings::opaque_settings_builder& osb, const yarn::model& m) const {
@@ -99,42 +107,45 @@ std::pair<
     properties::element_properties_repository,
     std::forward_list<std::shared_ptr<properties::formattable> >
 >
-workflow::create_properties_activty(
+workflow::create_properties(
     const config::cpp_options& opts,
     const dynamic::repository& srp,
     const dynamic::object& root_object,
     const dogen::formatters::file_properties_workflow& fpwf,
     const formatters::container& fc,
+    const settings::streaming_settings_repository& ssrp,
     settings::element_settings_repository& esrp,
     const yarn::model& m) const {
 
     properties::workflow fw;
-    return fw.execute(opts, srp, root_object, fpwf, fc, esrp, m);
+    return fw.execute(opts, srp, root_object, fpwf, fc, ssrp, esrp, m);
 }
 
 std::forward_list<boost::shared_ptr<yarn::element> >
-workflow::obtain_enriched_yarn_model_activity(const yarn::model& m) const {
+workflow::obtain_enriched_yarn_model(const yarn::model& m) const {
     fabric::workflow w;
     return w.execute(m);
 }
 
 std::forward_list<dogen::formatters::file>
-workflow::format_activty(const settings::element_settings_repository& esrp,
+workflow::format(const settings::streaming_settings_repository& ssrp,
+    const settings::element_settings_repository& esrp,
     const properties::element_properties_repository& eprp,
     const std::forward_list<
     std::shared_ptr<properties::formattable>
     >& f) const {
     formatters::workflow wf;
-    return wf.execute(esrp, eprp, f);
+    return wf.execute(ssrp, esrp, eprp, f);
 }
 
 std::forward_list<dogen::formatters::file> workflow::
-format_yarn_activity(const settings::element_settings_repository& esrp,
+format_yarn(const settings::streaming_settings_repository& ssrp,
+    const settings::element_settings_repository& esrp,
     const properties::element_properties_repository& eprp,
     const std::forward_list<
     boost::shared_ptr<yarn::element> >& elements) const {
     formatters::workflow wf;
-    return wf.execute(esrp, eprp, elements);
+    return wf.execute(ssrp, esrp, eprp, elements);
 }
 
 std::string workflow::name() const {
@@ -175,16 +186,17 @@ workflow::generate(const config::knitting_options& ko,
 
     const auto osb(create_opaque_settings_builder(drp));
     auto esrp(create_element_settings_repository(osb, m));
+    auto ssrp(create_streaming_settings_repository(drp, m));
 
     formatters::workflow::registrar().validate();
     const auto& fc(formatters::workflow::registrar().formatter_container());
 
     const auto& cpp(ko.cpp());
-    const auto pair(create_properties_activty(cpp, drp, ro, fpwf, fc, esrp, m));
-    auto r(format_activty(esrp, pair.first, pair.second));
+    const auto pair(create_properties(cpp, drp, ro, fpwf, fc, ssrp, esrp, m));
+    auto r(format(ssrp, esrp, pair.first, pair.second));
 
-    const auto elements(obtain_enriched_yarn_model_activity(m));
-    auto ye(format_yarn_activity(esrp, pair.first, elements));
+    const auto elements(obtain_enriched_yarn_model(m));
+    auto ye(format_yarn(ssrp, esrp, pair.first, elements));
     r.splice_after(r.before_begin(), ye);
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";

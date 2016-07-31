@@ -20492,7 +20492,7 @@ space.#</dia:string>
         <dia:point val="115.025,-1.04983"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="114.275,-11.45;116.38,-0.249829"/>
+        <dia:rectangle val="114.275,-11.45;116.38,0.550171"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

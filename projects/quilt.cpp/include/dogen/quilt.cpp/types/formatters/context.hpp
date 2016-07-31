@@ -30,6 +30,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen/quilt.cpp/types/settings/element_settings.hpp"
+#include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 
@@ -44,12 +45,15 @@ namespace formatters {
 class context final {
 public:
     context(
+        const settings::streaming_settings_repository& ssrp,
         const settings::element_settings& element_settings,
         const properties::element_properties& element_properties,
         const std::unordered_map<std::string, std::unordered_map<std::string,
         std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers);
 
 public:
+    const settings::streaming_settings_repository&
+    streaming_settings_repository() const;
     const settings::element_settings& element_settings() const;
     const properties::element_properties& element_properties() const;
     const std::unordered_map<
@@ -60,6 +64,8 @@ public:
         helpers() const;
 
 private:
+    const settings::streaming_settings_repository&
+    streaming_settings_repository_;
     const settings::element_settings& element_settings_;
     const properties::element_properties& element_properties_;
     const std::unordered_map<
