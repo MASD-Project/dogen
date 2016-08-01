@@ -1,0 +1,288 @@
+#+title: Sprint Backlog 86
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) }
+
+* Mission Statement
+
+- finish implementing class info formatters in terms of yarn types.
+- remove class info and associated infrastructure.
+- start working on remaining formattables.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2016-08-01 Mon 19:19]
+| <75>                                                                        |        |      |      |       |
+| Headline                                                                    | Time   |      |      |     % |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                                                | *0:09* |      |      | 100.0 |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| Stories                                                                     | 0:09   |      |      | 100.0 |
+| Active                                                                      |        | 0:09 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:09 | 100.0 |
+#+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-08-01 Mon 19:10]--[2016-08-01 Mon 19:19] =>  0:09
+
+Updates to sprint and product backlog.
+
+*** Manual updates and blog posts                                     :story:
+
+Time taken with blog posts and updates to the manual.
+
+*** Implement serialisation's header in terms of =yarn::object=       :story:
+
+Move serialisation class header stitch template from class info to
+yarn object.
+
+Problems:
+
+- we've hacked filesystem path. We need to create a helper for it.
+
+*** Element properties includes non-target types                      :story:
+
+We seem to be generating a lot of element properties and formatter
+properties as well. We should only be generating these for the target
+model.
+
+*** Consider renaming settings to annotations                         :story:
+
+Whilst its pretty clear now that settings are a strongly-typed
+representation of the meta-data and properties are the post-processed
+version, the names "settings" and "properties" still sound far too
+similar. It would be nicer to have something more meta-data-like for
+settings such as annotations. Read up the past discussions on
+naming. One possible reason not to use annotations was because we used
+it already in the formatters model. Perhaps that could be renamed to
+something else, freeing up the name?
+
+*** Consider creating a single top-level settings class               :story:
+
+Since settings are nothing but meta-data, we should be able to read
+them all in one go. Further: we should be able to compute up front the
+inputs (root object, all other objects; sliced from the model) and the
+size of the outputs (vector of settings). It would be a totally
+parallelisable task. This also means we only need a single repository
+by id for all settings.
+
+This repository is then the input for the property workflow. Because
+properties follow a dependency graph, we would still need to compute
+them in some kind of order.
+
+Actually, this is not entirely true: for all elements in the target
+model we will have a single top-level class with all settings (or
+almost all, since some settings only make sense to the root object
+such as directory settings). However, for the reference models we will
+have less settings. We should probably do some taxonomy work here and
+try to figure out what categories of settings we have.
+
+*** Run tests that are passing on windows                             :story:
+
+At present we have a release build on windows but we are not running
+any tests. This is because some of the tests are failing at the
+moment. We should run all test suites that are green to ensure we
+don't regress without noticing.
+
+*** Add "namespaces" to name                                          :story:
+
+Name should have a flat class with all namespaces in yarn, instead of
+generating it on every formatter.
+
+*** =always_in_heap= is not a very good name                          :story:
+
+What the name is trying to say is: I have a type parameter and that
+type parameter is always allocated in the heap. But it does not quite
+convey that at all - it seems like the type itself is always in heap
+the way we use it in resolver.
+
+*** Model should contain set of primitive id's                        :story:
+
+We are computing the set of all primitive id's in quilt but this
+should really be part of yarn.
+
+*** Check generation type before dispatching element                  :story:
+
+At present we are doing this check in =visit=:
+
+:     if (o.generation_type() == yarn::generation_types::no_generation)
+:        return;
+
+If we did it before the =visit= call we'd save the cost of
+dispatching.
+
+*** Add test with smart pointer in base class                         :story:
+
+At present we have the following helper formatters registered against
+SmartPointer:
+
+:      {
+:        "quilt.cpp.types.class_implementation_formatter": [
+:          "<quilt.cpp.types><smart_pointer_helper>",
+:          "<quilt.cpp.io><smart_pointer_helper>"
+:        ]
+:      }
+
+This should have caused something to break. It didn't because we don't
+seem to have a test case with a smart pointer on the base class. This
+raises the interesting point: do we ever need more than one helper for
+a given family and a given file formatter? If so, we should change it
+from a list to a single shared pointer.
+
+Interestingly, for AssociativeContainer we have:
+
+:    "AssociativeContainer": [
+:      {
+:        "quilt.cpp.types.class_implementation_formatter": [
+:          "<quilt.cpp.io><associative_container_helper>"
+:        ]
+:      },
+:      {
+:        "quilt.cpp.io.class_implementation_formatter": [
+:          "<quilt.cpp.io><associative_container_helper>"
+:        ]
+:      },
+
+*** Update types formatters to use =yarn::object=                      :epic:
+
+Replace class info in types formatters with yarn's object.
+
+*** Clean-up helper terminology                                       :story:
+
+The name "helper" was never really thought out. It makes little
+sense - anything can be a helper. In addition, we have helpers that do
+not behave in the same manner (inserter vs every other helper). We
+need to come up with a good vocabulary around this.
+
+- static aspects: those that are baked in to the file formatter.
+- dynamic aspects: those that are inserted in to the file formatter at
+  run time.
+- type-dependent dynamic aspects: those that are connected to the
+  types used in the file formatter.
+
+*** Dump container of files in formatter workflow                     :story:
+
+At present we are polluting the log file with lots of entries for each
+file name in formatter's workflow. Ideally we want a single entry with
+a container of file names. The problem is, if we dump the entire
+container we will also get the file contents. But if we create a
+temporary container we will have to pay the cost even though log level
+may not be enabled.
+
+*** Type-bound helpers and generic helpers                            :story:
+
+Not all helpers are bound to a type. We have the case of inserter
+helper in io which is used by main formatters directly. We need to
+make this distinction in the manual.
+
+*** Check which properties need to loop through the entire model      :story:
+
+In certain cases such as helpers we probably don't need to go through
+all types; only the target types matter. Ensure we are not processing
+other types for no reason.
+
+*** Add validation for helper families                                :story:
+
+At present we are checking that the name tree has the expected number
+of type arguments:
+
+:    const auto children(t.children());
+:    if (children.size() != 1) {
+:        BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
+:        BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
+:    }
+:    smart_pointer_helper_stitch(fa, t);
+
+In the future with dynamic helpers we will remove these checks. In
+order to implement them we need to declare the type families up front
+in a JSON file, with a name and number of type arguments. When
+constructing the type helpers, we can check the name tree to make sure
+the number of type arguments is correct.
+
+This can be done as a helper setting (number of type arguments?).
+
+Actually this is a core yarn property. So:
+
+- add number of type arguments to object;
+- read this as a dynamic field;
+- during validation, check that all name trees that instantiate this
+  object have the expected number of type arguments.
+- in order to cope with cases such as variant we also need some kind
+  of enum, e.g. type parameterisation: none, variable, fixed. if
+  fixed, then number of type parameters must be non-zero.
+
+*** Remove =requires_explicit_call= and =function_name=               :story:
+
+Check to see if we are using the following helper properties:
+
+- =requires_explicit_call=
+- =function_name=
+
+If not, remove them.
+
+*** Update assistant to use new helper information                    :story:
+
+Once all the pieces are in place, the assistant can then use the
+element properties to find out which helpers are required for each
+type; call those helpers and populate the file with the generate
+code. We can remove all previous helper support.
+
+*** Implement formattables in terms of yarn types                     :epic:
+
+At present formattables are just a shadow copy of yarn types plus
+additional =cpp= specific types. In practice:
+
+- for the types that are shadow copies, we could have helper utilities
+  that do the translation on the fly (e.g. for names).
+- for additional information which cannot be translated, we could have
+  containers indexed by qualified name and query those just before we
+  call the transformer. This is the case with formatter properties. We
+  need something similar to house "type properties" such as
+  =requires_stream_manipulators=. These could be moved into aspect
+  settings.
+- for types that do not exist in yarn, we could inherit from element;
+  this is the case for registrar, forward declarations, cmakelists and
+  odb options. Note that with this we are now saying that element
+  space contains anything which can be modeled, regardless of if they
+  are part of the programming language type system, or build system,
+  etc. This is not ideal, but its not a problem just yet. We could
+  update the factory to generate these types and then take a copy of
+  the model and inject them in it.
+
+*** Remove nested type info                                           :story:
+
+Once all of the infrastructure is in place, we should not need this
+class any more. Remove code from transformer and remove object types
+and anything else that was used to dispatch based on type.
+
+*** Initialise formatters in the formatter's translation unit         :story:
+
+At present we are initialising the formatters in each of the facet
+initialisers. However, it makes more sense to initialise them on the
+translation unit for each formatter. This will also make life easier
+when we move to a mustache world where there may not be a formatter
+header file at all.
+
+** Deprecated
+
+*** CANCELLED Write next interesting instalment in blog               :story:
+    CLOSED: [2016-07-12 Tue 17:33]
+
+*Rationale*: Not much of a point of having "interesting" related
+stories in backlog.
+
+We have a number of links backlogged and we need to offload them in an
+"interesting..." post.
+*** CANCELLED Create a ebook and dead-tree book for the manual        :story:
+    CLOSED: [2016-07-12 Tue 18:07]
+
+*Rationale*: this story does not add any value. We need to write the
+manual and then worry about this.
+
+We should probably start by creating a simple ebook first and then
+explore the dead-tree options such as [[http://www.lulu.com][Lulu]]. We should also see what
+Luigi did for [[https://leanpub.com/implementingquantlib/][QuantLib]].
