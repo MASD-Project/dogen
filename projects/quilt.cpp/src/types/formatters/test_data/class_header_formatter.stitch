@@ -7,30 +7,32 @@
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::test_data #>
 <#+
 
-dogen::formatters::file class_header_formatter_stitch(
-    assistant& a, const properties::class_info& c) {
+dogen::formatters::file
+class_header_formatter_stitch(assistant& a, const yarn::object& o) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(c.namespaces()));
-
+            const auto sn(o.name().simple());
+            const auto qn(a.get_qualified_name(o.name()));
+            const auto ns(a.make_namespaces(o.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 #>
 
-class <#= c.name() #>_generator {
+class <#= sn #>_generator {
 public:
-    <#= c.name() #>_generator();
+    <#= sn #>_generator();
 
 public:
-    typedef <#= c.qualified_name() #> result_type;
+    typedef <#= qn #> result_type;
 
 public:
 <#+
-            if (!c.is_immutable())
+            if (!o.is_immutable())
 #>
     static void populate(const unsigned int position, result_type& v);
 <#+
-            if (!c.is_parent()) {
+            if (!o.is_parent()) {
 #>
     static result_type create(const unsigned int position);
     result_type operator()();

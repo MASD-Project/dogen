@@ -27,26 +27,28 @@ namespace cpp {
 namespace formatters {
 namespace test_data {
 
-dogen::formatters::file class_header_formatter_stitch(
-    assistant& a, const properties::class_info& c) {
+dogen::formatters::file
+class_header_formatter_stitch(assistant& a, const yarn::object& o) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(c.namespaces()));
-
+            const auto sn(o.name().simple());
+            const auto qn(a.get_qualified_name(o.name()));
+            const auto ns(a.make_namespaces(o.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
-a.stream() << "class " << c.name() << "_generator {" << std::endl;
+a.stream() << "class " << sn << "_generator {" << std::endl;
 a.stream() << "public:" << std::endl;
-a.stream() << "    " << c.name() << "_generator();" << std::endl;
+a.stream() << "    " << sn << "_generator();" << std::endl;
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
-a.stream() << "    typedef " << c.qualified_name() << " result_type;" << std::endl;
+a.stream() << "    typedef " << qn << " result_type;" << std::endl;
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
-            if (!c.is_immutable())
+            if (!o.is_immutable())
 a.stream() << "    static void populate(const unsigned int position, result_type& v);" << std::endl;
-            if (!c.is_parent()) {
+            if (!o.is_parent()) {
 a.stream() << "    static result_type create(const unsigned int position);" << std::endl;
 a.stream() << "    result_type operator()();" << std::endl;
 a.stream() << std::endl;
