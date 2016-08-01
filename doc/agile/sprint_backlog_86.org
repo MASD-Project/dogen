@@ -14,17 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-08-01 Mon 20:34]
+#+CAPTION: Clock summary at [2016-08-01 Mon 20:53]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *1:21* |      |      | 100.0 |
+| *Total time*                                                                | *1:38* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 1:21   |      |      | 100.0 |
-| Active                                                                      |        | 1:21 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:09 |  11.1 |
-| COMPLETED Implement boost path's serialisation via a helper                 |        |      | 0:40 |  49.4 |
-| COMPLETED Implement serialisation's implementation in terms of =yarn::object= |        |      | 0:32 |  39.5 |
+| Stories                                                                     | 1:38   |      |      | 100.0 |
+| Active                                                                      |        | 1:38 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:09 |   9.2 |
+| COMPLETED Implement boost path's serialisation via a helper                 |        |      | 0:40 |  40.8 |
+| COMPLETED Implement serialisation's implementation in terms of =yarn::object= |        |      | 0:32 |  32.7 |
+| COMPLETED Implement odb's header in terms of =yarn::object=                 |        |      | 0:17 |  17.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -61,6 +62,13 @@ Problems:
   into utility; so, alternatively, we could use this but we'd then
   add a dependency on utility to all models. In the absence of
   =needle=, this is not ideal.
+
+*** COMPLETED Implement odb's header in terms of =yarn::object=       :story:
+    CLOSED: [2016-08-01 Mon 20:53]
+    CLOCK: [2016-08-01 Mon 20:35]--[2016-08-01 Mon 20:52] =>  0:17
+
+Move serialisation class header stitch template from class info to
+yarn object.
 
 *** Consider automatic injection of helpers                           :story:
 

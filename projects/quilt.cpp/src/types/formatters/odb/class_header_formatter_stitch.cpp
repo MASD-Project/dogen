@@ -27,10 +27,12 @@ namespace cpp {
 namespace formatters {
 namespace odb {
 
-dogen::formatters::file class_header_formatter_stitch(
-    assistant& a, const properties::class_info& c) {
+dogen::formatters::file
+class_header_formatter_stitch(assistant& a, const yarn::object& o) {
 
     {
+        const auto sn(o.name().simple());
+        const auto qn(a.get_qualified_name(o.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
         const auto odbs(a.get_odb_settings());
         if (!odbs || odbs->pragmas().empty()) {
@@ -38,24 +40,24 @@ a.stream() << "// class has no ODB pragmas defined." << std::endl;
 a.stream() << std::endl;
         } else {
             {
-                auto snf(a.make_scoped_namespace_formatter(c.namespaces()));
-
+                const auto ns(a.make_namespaces(o.name()));
+                auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
 a.stream() << "#ifdef ODB_COMPILER" << std::endl;
 a.stream() << std::endl;
                 const std::string odb_key("odb_pragma");
                 for (const auto& pg : odbs->pragmas())
-a.stream() << "#pragma db object(" << c.name() << ") " << pg << std::endl;
+a.stream() << "#pragma db object(" << sn << ") " << pg << std::endl;
 
                 bool is_first(true);
-                for (const auto p : c.properties()) {
-                    const auto podbs(a.get_odb_settings(p.id()));
+                for (const auto& attr : o.local_attributes()) {
+                    const auto podbs(a.get_odb_settings(attr.name().id()));
                     if (podbs) {
                         for (const auto pg : podbs->pragmas()) {
                             if (is_first)
 a.stream() << std::endl;
                             is_first = false;
-a.stream() << "#pragma db member(" << c.name() << "::" << a.make_member_variable_name(p) << ") " << pg << std::endl;
+a.stream() << "#pragma db member(" << sn << "::" << a.make_member_variable_name(attr) << ") " << pg << std::endl;
                         }
                     }
                 }

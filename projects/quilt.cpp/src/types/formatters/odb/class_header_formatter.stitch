@@ -7,10 +7,12 @@
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::odb #>
 <#+
 
-dogen::formatters::file class_header_formatter_stitch(
-    assistant& a, const properties::class_info& c) {
+dogen::formatters::file
+class_header_formatter_stitch(assistant& a, const yarn::object& o) {
 
     {
+        const auto sn(o.name().simple());
+        const auto qn(a.get_qualified_name(o.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
         const auto odbs(a.get_odb_settings());
         if (!odbs || odbs->pragmas().empty()) {
@@ -20,8 +22,8 @@ dogen::formatters::file class_header_formatter_stitch(
 <#+
         } else {
             {
-                auto snf(a.make_scoped_namespace_formatter(c.namespaces()));
-
+                const auto ns(a.make_namespaces(o.name()));
+                auto snf(a.make_scoped_namespace_formatter(ns));
 #>
 
 #ifdef ODB_COMPILER
@@ -30,12 +32,12 @@ dogen::formatters::file class_header_formatter_stitch(
                 const std::string odb_key("odb_pragma");
                 for (const auto& pg : odbs->pragmas())
 #>
-#pragma db object(<#= c.name() #>) <#= pg #>
+#pragma db object(<#= sn #>) <#= pg #>
 <#+
 
                 bool is_first(true);
-                for (const auto p : c.properties()) {
-                    const auto podbs(a.get_odb_settings(p.id()));
+                for (const auto& attr : o.local_attributes()) {
+                    const auto podbs(a.get_odb_settings(attr.name().id()));
                     if (podbs) {
                         for (const auto pg : podbs->pragmas()) {
                             if (is_first)
@@ -44,7 +46,7 @@ dogen::formatters::file class_header_formatter_stitch(
 <#+
                             is_first = false;
 #>
-#pragma db member(<#= c.name() #>::<#= a.make_member_variable_name(p) #>) <#= pg #>
+#pragma db member(<#= sn #>::<#= a.make_member_variable_name(attr) #>) <#= pg #>
 <#+
                         }
                     }
