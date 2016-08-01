@@ -7,12 +7,14 @@
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::test_data #>
 <#+
 
-dogen::formatters::file class_implementation_formatter_stitch(
-    assistant& a, const properties::class_info& c) {
+dogen::formatters::file
+class_implementation_formatter_stitch(assistant& a, const yarn::object& o) {
 
     {
+        const auto sn(o.name().simple());
+        const auto qn(a.get_qualified_name(o.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
-        if (!c.properties().empty()) {
+        if (!o.local_attributes().empty()) {
 #>
 namespace {
 <#+
@@ -25,47 +27,48 @@ namespace {
         }
 
         {
-            auto snf(a.make_scoped_namespace_formatter(c.namespaces()));
-
+            const auto ns(a.make_namespaces(o.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 
             /*
              * Default constructor.
              */
-            if (!c.is_parent()) {
+            if (!o.is_parent()) {
 #>
 
-<#= c.name() #>_generator::<#= c.name() #>_generator() : position_(0) { }
+<#= sn #>_generator::<#= sn #>_generator() : position_(0) { }
 <#+
             }
 
             /*
              * Populate method.
              */
-            if (!c.is_immutable()) {
-                bool no_args(c.properties().empty() && c.parents().empty());
+            if (!o.is_immutable()) {
+                bool no_args(o.local_attributes().empty() && o.parents().empty());
                 if (no_args) {
 #>
 
-void <#= c.name() #>_generator::
+void <#= sn #>_generator::
 populate(const unsigned int /*position*/, result_type& /*v*/) {
 <#+
                 } else {
 #>
 
-void <#= c.name() #>_generator::
+void <#= sn #>_generator::
 populate(const unsigned int position, result_type& v) {
 <#+
                 }
 
-                for (const auto p : c.parents()) {
+                for (const auto pn : o.parents()) {
+                    const auto pqn(a.get_qualified_name(pn));
 #>
-    <#= p.qualified_name() #>_generator::populate(position, v);
+    <#= pqn #>_generator::populate(position, v);
 <#+
                 }
                 unsigned int i(0);
-                for (const auto p : c.properties()) {
+                for (const auto attr : o.local_attributes()) {
 #>
-    v.<#= p.name() #>(create_<#= p.type().complete_identifiable_name() #>(position + <#= i #>));
+    v.<#= attr.name().simple() #>(create_<#= attr.parsed_type().identifiable() #>(position + <#= i #>));
 <#+
                     ++i;
                 }
@@ -77,27 +80,27 @@ populate(const unsigned int position, result_type& v) {
             /*
              * Create method.
              */
-            if (!c.is_parent()) {
-                 const bool no_arg(c.all_properties().empty());
+            if (!o.is_parent()) {
+                 const bool no_arg(o.all_attributes().empty());
 #>
 
-<#= c.name() #>_generator::result_type
-<#= c.name() #>_generator::create(const unsigned int<#= (no_arg ? "/*position*/" : " position") #>) {
+<#= sn #>_generator::result_type
+<#= sn #>_generator::create(const unsigned int<#= (no_arg ? "/*position*/" : " position") #>) {
 <#+
-                if (c.is_immutable()) {
+                if (o.is_immutable()) {
 #>
-    return <#= c.name() #>(
+    return <#= sn #>(
 <#+
                     // FIXME: hack
-                    if (c.properties().empty())
+                    if (o.local_attributes().empty())
 #>
 
 <#+
                     else {
-                        dogen::formatters::sequence_formatter sf(c.properties().size());
-                        for (const auto p : c.properties()) {
+                        dogen::formatters::sequence_formatter sf(o.local_attributes().size());
+                        for (const auto attr : o.local_attributes()) {
 #>
-        create_<#=  p.type().complete_identifiable_name() #>(position + <#= sf.current_position() #>)<#= sf.postfix() #>
+        create_<#= attr.parsed_type().identifiable() #>(position + <#= sf.current_position() #>)<#= sf.postfix() #>
 <#+
                             sf.next();
                         }
@@ -107,11 +110,11 @@ populate(const unsigned int position, result_type& v) {
 <#+
                 } else {
 #>
-    <#= c.name() #> r;
+    <#= sn #> r;
 <#+
-                    if (!c.all_properties().empty())
+                    if (!o.all_attributes().empty())
 #>
-    <#= c.name() #>_generator::populate(position, r);
+    <#= sn #>_generator::populate(position, r);
     return r;
 <#+
                 }
@@ -125,35 +128,35 @@ populate(const unsigned int position, result_type& v) {
              */
 #>
 
-<#= c.name() #>_generator::result_type*
-<#= c.name() #>_generator::create_ptr(const unsigned int position) {
+<#= sn #>_generator::result_type*
+<#= sn #>_generator::create_ptr(const unsigned int position) {
 <#+
-            if (c.leaves().empty()) {
-                if (c.is_immutable())
+            if (o.leaves().empty()) {
+                if (o.is_immutable())
 #>
-    return new <#= c.name() #>(create(position));
+    return new <#= sn #>(create(position));
 <#+
                 else {
 #>
-    <#= c.name() #>* p = new <#= c.name() #>();
-    <#= c.name() #>_generator::populate(position, *p);
+    <#= sn #>* p = new <#= sn #>();
+    <#= sn #>_generator::populate(position, *p);
     return p;
 <#+
                 }
             } else {
-                auto leaves(c.leaves());
+                auto leaves(o.leaves());
                 const auto front(leaves.front());
                 leaves.pop_front();
                 unsigned int i(0);
                 unsigned int total(leaves.size());
-                for (const auto l : leaves) {
+                for (const auto& l : leaves) {
 #>
     if ((position % <#= total #>) == <#= i++ #>)
-        return <#= l #>_generator::create_ptr(position);
+        return <#= a.get_qualified_name(l) #>_generator::create_ptr(position);
 <#+
                 }
 #>
-    return <#= front #>_generator::create_ptr(position);
+    return <#= a.get_qualified_name(front) #>_generator::create_ptr(position);
 <#+
             }
 #>
@@ -162,11 +165,11 @@ populate(const unsigned int position, result_type& v) {
             /*
              * Function operator
              */
-             if (!c.is_parent()) {
+             if (!o.is_parent()) {
 #>
 
-<#= c.name() #>_generator::result_type
-<#= c.name() #>_generator::operator()() {
+<#= sn #>_generator::result_type
+<#= sn #>_generator::operator()() {
     return create(position_++);
 }
 <#+

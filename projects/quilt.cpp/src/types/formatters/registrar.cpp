@@ -48,7 +48,7 @@ namespace formatters {
 
 void registrar::validate() const {
     const auto& fc(formatter_container_);
-    if (fc.class_formatters().empty()) {
+    if (fc.new_class_formatters().empty()) {
         BOOST_LOG_SEV(lg, error) << no_class_formatters;
         BOOST_THROW_EXCEPTION(registrar_error(no_class_formatters));
     }
