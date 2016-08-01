@@ -45,9 +45,8 @@ streaming_settings_generator::streaming_settings_generator() : position_(0) { }
 void streaming_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.requires_quoting(create_bool(position + 0));
-    v.requires_dereferencing(create_bool(position + 1));
-    v.string_conversion_method(create_std_string(position + 2));
-    v.remove_unprintable_characters(create_bool(position + 3));
+    v.string_conversion_method(create_std_string(position + 1));
+    v.remove_unprintable_characters(create_bool(position + 2));
 }
 
 streaming_settings_generator::result_type

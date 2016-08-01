@@ -45,7 +45,6 @@ std::ostream& operator<<(std::ostream& s, const streaming_settings& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::settings::streaming_settings\"" << ", "
       << "\"requires_quoting\": " << v.requires_quoting() << ", "
-      << "\"requires_dereferencing\": " << v.requires_dereferencing() << ", "
       << "\"string_conversion_method\": " << "\"" << tidy_up_string(v.string_conversion_method()) << "\"" << ", "
       << "\"remove_unprintable_characters\": " << v.remove_unprintable_characters()
       << " }";

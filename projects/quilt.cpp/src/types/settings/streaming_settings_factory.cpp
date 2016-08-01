@@ -47,9 +47,6 @@ make_field_definitions(const dynamic::repository& rp) {
     const auto ruc(traits::cpp::streaming::remove_unprintable_characters());
     r.remove_unprintable_characters = s.select_field_by_name(ruc);
 
-    const auto rd(traits::cpp::streaming::requires_dereferencing());
-    r.requires_dereferencing = s.select_field_by_name(rd);
-
     return r;
 }
 
@@ -64,12 +61,6 @@ streaming_settings_factory::make(const dynamic::object& o) const {
     if (fs.has_field(rq)) {
         has_settings = true;
         r.requires_quoting(fs.get_boolean_content_or_default(rq));
-    }
-
-    const auto& rd(fd.requires_dereferencing);
-    if (fs.has_field(rd)) {
-        has_settings = true;
-        r.requires_dereferencing(fs.get_boolean_content_or_default(rd));
     }
 
     const auto& scm(fd.string_conversion_method);

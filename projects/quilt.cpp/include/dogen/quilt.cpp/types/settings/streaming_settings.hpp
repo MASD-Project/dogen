@@ -46,7 +46,6 @@ public:
 public:
     streaming_settings(
         const bool requires_quoting,
-        const bool requires_dereferencing,
         const std::string& string_conversion_method,
         const bool remove_unprintable_characters);
 
@@ -60,9 +59,6 @@ private:
 public:
     bool requires_quoting() const;
     void requires_quoting(const bool v);
-
-    bool requires_dereferencing() const;
-    void requires_dereferencing(const bool v);
 
     const std::string& string_conversion_method() const;
     std::string& string_conversion_method();
@@ -84,7 +80,6 @@ public:
 
 private:
     bool requires_quoting_;
-    bool requires_dereferencing_;
     std::string string_conversion_method_;
     bool remove_unprintable_characters_;
 };

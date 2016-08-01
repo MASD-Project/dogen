@@ -38,7 +38,6 @@ void save(Archive& ar,
     const dogen::quilt::cpp::settings::streaming_settings& v,
     const unsigned int /*version*/) {
     ar << make_nvp("requires_quoting", v.requires_quoting_);
-    ar << make_nvp("requires_dereferencing", v.requires_dereferencing_);
     ar << make_nvp("string_conversion_method", v.string_conversion_method_);
     ar << make_nvp("remove_unprintable_characters", v.remove_unprintable_characters_);
 }
@@ -48,7 +47,6 @@ void load(Archive& ar,
     dogen::quilt::cpp::settings::streaming_settings& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("requires_quoting", v.requires_quoting_);
-    ar >> make_nvp("requires_dereferencing", v.requires_dereferencing_);
     ar >> make_nvp("string_conversion_method", v.string_conversion_method_);
     ar >> make_nvp("remove_unprintable_characters", v.remove_unprintable_characters_);
 }

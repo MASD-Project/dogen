@@ -43,7 +43,6 @@ public:
 private:
     struct field_definitions {
         dynamic::field_definition requires_quoting;
-        dynamic::field_definition requires_dereferencing;
         dynamic::field_definition string_conversion_method;
         dynamic::field_definition remove_unprintable_characters;
     };
