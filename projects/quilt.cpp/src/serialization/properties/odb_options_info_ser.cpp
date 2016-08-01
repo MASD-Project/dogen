@@ -72,7 +72,7 @@ void save(Archive& ar,
 
     ar << make_nvp("model_name", v.model_name_);
     ar << make_nvp("product_name", v.product_name_);
-    ar << make_nvp("file_path", v.file_path_.generic_string());
+    ar << make_nvp("file_path", v.file_path_);
     ar << make_nvp("file_name", v.file_name_);
     ar << make_nvp("odb_folder", v.odb_folder_);
     ar << make_nvp("file_properties", v.file_properties_);
@@ -86,9 +86,7 @@ void load(Archive& ar,
 
     ar >> make_nvp("model_name", v.model_name_);
     ar >> make_nvp("product_name", v.product_name_);
-    std::string file_path_tmp;
-    ar >> make_nvp("file_path", file_path_tmp);
-    v.file_path_ = file_path_tmp;
+    ar >> make_nvp("file_path", v.file_path_);
     ar >> make_nvp("file_name", v.file_name_);
     ar >> make_nvp("odb_folder", v.odb_folder_);
     ar >> make_nvp("file_properties", v.file_properties_);

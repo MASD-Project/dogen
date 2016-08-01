@@ -70,12 +70,12 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("formattable", base_object<dogen::quilt::cpp::properties::formattable>(v));
 
-    ar << make_nvp("file_path", v.file_path_.generic_string());
+    ar << make_nvp("file_path", v.file_path_);
     ar << make_nvp("model_name", v.model_name_);
     ar << make_nvp("product_name", v.product_name_);
     ar << make_nvp("file_name", v.file_name_);
-    ar << make_nvp("source_file_path", v.source_file_path_.generic_string());
-    ar << make_nvp("include_file_path", v.include_file_path_.generic_string());
+    ar << make_nvp("source_file_path", v.source_file_path_);
+    ar << make_nvp("include_file_path", v.include_file_path_);
     ar << make_nvp("file_properties", v.file_properties_);
     ar << make_nvp("odb_folder", v.odb_folder_);
     ar << make_nvp("odb_enabled", v.odb_enabled_);
@@ -87,18 +87,12 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("formattable", base_object<dogen::quilt::cpp::properties::formattable>(v));
 
-    std::string file_path_tmp;
-    ar >> make_nvp("file_path", file_path_tmp);
-    v.file_path_ = file_path_tmp;
+    ar >> make_nvp("file_path", v.file_path_);
     ar >> make_nvp("model_name", v.model_name_);
     ar >> make_nvp("product_name", v.product_name_);
     ar >> make_nvp("file_name", v.file_name_);
-    std::string source_file_path_tmp;
-    ar >> make_nvp("source_file_path", source_file_path_tmp);
-    v.source_file_path_ = source_file_path_tmp;
-    std::string include_file_path_tmp;
-    ar >> make_nvp("include_file_path", include_file_path_tmp);
-    v.include_file_path_ = include_file_path_tmp;
+    ar >> make_nvp("source_file_path", v.source_file_path_);
+    ar >> make_nvp("include_file_path", v.include_file_path_);
     ar >> make_nvp("file_properties", v.file_properties_);
     ar >> make_nvp("odb_folder", v.odb_folder_);
     ar >> make_nvp("odb_enabled", v.odb_enabled_);

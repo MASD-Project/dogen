@@ -54,7 +54,7 @@ void save(Archive& <#= (has_properties_or_parents ? "ar" : "/*ar*/") #>,
 <#+
         for (const auto p : c.properties()) {
 #>
-    ar << make_nvp("<#= p.name() #>", v.<#= a.make_member_variable_name(p) #><#= (p.type().is_filesystem_path() ? ".generic_string()" : "") #>);
+    ar << make_nvp("<#= p.name() #>", v.<#= a.make_member_variable_name(p) #>);
 <#+
         }
 #>
@@ -81,17 +81,9 @@ void load(Archive& <#= (has_properties_or_parents ? "ar," : "/*ar*/,") #>
         }
 
         for (const auto p : c.properties()) {
-            if (p.type().is_filesystem_path()) {
-#>
-    std::string <#= p.name() #>_tmp;
-    ar >> make_nvp("<#= p.name() #>", <#= p.name() #>_tmp);
-    v.<#= a.make_member_variable_name(p) #> = <#= p.name() #>_tmp;
-<#+
-            } else {
 #>
     ar >> make_nvp("<#= p.name() #>", v.<#= a.make_member_variable_name(p) #>);
 <#+
-            }
         }
 #>
 }

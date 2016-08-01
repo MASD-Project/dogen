@@ -67,7 +67,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("move_ctor_base", base_object<dogen::test_models::trivial_inheritance::move_ctor_base>(v));
 
-    ar << make_nvp("prop_1", v.prop_1_.generic_string());
+    ar << make_nvp("prop_1", v.prop_1_);
 }
 
 template<typename Archive>
@@ -76,9 +76,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("move_ctor_base", base_object<dogen::test_models::trivial_inheritance::move_ctor_base>(v));
 
-    std::string prop_1_tmp;
-    ar >> make_nvp("prop_1", prop_1_tmp);
-    v.prop_1_ = prop_1_tmp;
+    ar >> make_nvp("prop_1", v.prop_1_);
 }
 
 } }

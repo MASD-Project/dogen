@@ -61,7 +61,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::formatters::file& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("path", v.path_.generic_string());
+    ar << make_nvp("path", v.path_);
     ar << make_nvp("content", v.content_);
     ar << make_nvp("overwrite", v.overwrite_);
 }
@@ -70,9 +70,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::formatters::file& v,
     const unsigned int /*version*/) {
-    std::string path_tmp;
-    ar >> make_nvp("path", path_tmp);
-    v.path_ = path_tmp;
+    ar >> make_nvp("path", v.path_);
     ar >> make_nvp("content", v.content_);
     ar >> make_nvp("overwrite", v.overwrite_);
 }

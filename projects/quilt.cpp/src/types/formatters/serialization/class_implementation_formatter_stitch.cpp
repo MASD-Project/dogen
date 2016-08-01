@@ -63,7 +63,7 @@ a.stream() << "    ar << make_nvp(\"" << p.name() << "\", base_object<" << p.qua
         if (has_properties && has_parents)
 a.stream() << std::endl;
         for (const auto p : c.properties()) {
-a.stream() << "    ar << make_nvp(\"" << p.name() << "\", v." << a.make_member_variable_name(p) << (p.type().is_filesystem_path() ? ".generic_string()" : "") << ");" << std::endl;
+a.stream() << "    ar << make_nvp(\"" << p.name() << "\", v." << a.make_member_variable_name(p) << ");" << std::endl;
         }
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
@@ -81,13 +81,7 @@ a.stream() << std::endl;
         }
 
         for (const auto p : c.properties()) {
-            if (p.type().is_filesystem_path()) {
-a.stream() << "    std::string " << p.name() << "_tmp;" << std::endl;
-a.stream() << "    ar >> make_nvp(\"" << p.name() << "\", " << p.name() << "_tmp);" << std::endl;
-a.stream() << "    v." << a.make_member_variable_name(p) << " = " << p.name() << "_tmp;" << std::endl;
-            } else {
 a.stream() << "    ar >> make_nvp(\"" << p.name() << "\", v." << a.make_member_variable_name(p) << ");" << std::endl;
-            }
         }
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;

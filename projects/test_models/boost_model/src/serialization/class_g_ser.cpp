@@ -61,7 +61,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::test_models::boost_model::class_g& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("prop_0", v.prop_0_.generic_string());
+    ar << make_nvp("prop_0", v.prop_0_);
     ar << make_nvp("prop_1", v.prop_1_);
 }
 
@@ -69,9 +69,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::test_models::boost_model::class_g& v,
     const unsigned int /*version*/) {
-    std::string prop_0_tmp;
-    ar >> make_nvp("prop_0", prop_0_tmp);
-    v.prop_0_ = prop_0_tmp;
+    ar >> make_nvp("prop_0", v.prop_0_);
     ar >> make_nvp("prop_1", v.prop_1_);
 }
 

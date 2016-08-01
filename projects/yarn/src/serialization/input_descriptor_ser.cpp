@@ -61,7 +61,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::input_descriptor& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("path", v.path_.generic_string());
+    ar << make_nvp("path", v.path_);
     ar << make_nvp("external_modules", v.external_modules_);
     ar << make_nvp("is_target", v.is_target_);
 }
@@ -70,9 +70,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::input_descriptor& v,
     const unsigned int /*version*/) {
-    std::string path_tmp;
-    ar >> make_nvp("path", path_tmp);
-    v.path_ = path_tmp;
+    ar >> make_nvp("path", v.path_);
     ar >> make_nvp("external_modules", v.external_modules_);
     ar >> make_nvp("is_target", v.is_target_);
 }
