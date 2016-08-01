@@ -24,7 +24,6 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/quilt.cpp/io/properties/formatter_properties_io.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
-#include "dogen/quilt.cpp/types/properties/class_info.hpp"
 #include "dogen/quilt.cpp/types/properties/includers_info.hpp"
 #include "dogen/quilt.cpp/types/properties/registrar_info.hpp"
 #include "dogen/quilt.cpp/types/properties/cmakelists_info.hpp"

@@ -41,8 +41,6 @@
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/quilt.cpp/types/properties/entity.hpp"
 #include "dogen/quilt.cpp/types/properties/formattable.hpp"
-#include "dogen/quilt.cpp/types/properties/class_info.hpp"
-#include "dogen/quilt.cpp/types/properties/property_info.hpp"
 #include "dogen/quilt.cpp/types/properties/forward_declarations_info.hpp"
 
 namespace dogen {
@@ -71,41 +69,6 @@ private:
         const std::string& documentation, entity& e) const;
 
 private:
-    /**
-     * @brief Transforms the Yarn nested name into a nested type info.
-     */
-    void to_nested_type_info(const yarn::name_tree& nt,
-        nested_type_info& nti, std::string& complete_name,
-        bool& requires_stream_manipulators) const;
-
-    /**
-     * @brief Transforms an Yarn attribute into a property info.
-     *
-     * The four Boolean values on the tuple work as follows:
-     *
-     * @li position 1: if true, the attribute has a top-level primitive
-     * type.
-     *
-     * @li position 2: if true, the attribute requires stream
-     * manipulators.
-     *
-     * @li position 3: if true, the attribute invalidates the compiler
-     * generated move constructor.
-     *
-     * @li position 4: if true, the attribute invalidates the compiler
-     * generated default constructor.
-     */
-    std::tuple<property_info, bool, bool, bool>
-    to_property_info(const yarn::attribute a, const bool is_immutable,
-        const bool is_fluent) const;
-
-    /**
-     * @brief Transform a Yarn object into a class info.
-     *
-     * @param ao object to transform.
-     */
-    std::shared_ptr<class_info> to_class_info(const yarn::object& o) const;
-
     /**
      * @brief Creates a forward declaration for the object.
      */

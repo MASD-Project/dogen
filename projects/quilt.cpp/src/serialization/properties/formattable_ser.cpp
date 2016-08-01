@@ -28,7 +28,6 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/quilt.cpp/serialization/properties/class_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/formattable_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/origin_types_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/includers_info_ser.hpp"

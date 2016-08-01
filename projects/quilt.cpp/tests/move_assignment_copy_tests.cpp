@@ -41,12 +41,8 @@ BOOST_AUTO_TEST_SUITE(move_assignment_copy_tests)
 BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     SETUP_TEST_LOG("validate_move_assignment_copy");
 
-    test_move_assignment_copy<properties::class_info_generator>();
     test_move_assignment_copy<properties::cmakelists_info_generator>();
-    test_move_assignment_copy<properties::nested_type_info_generator>();
     test_move_assignment_copy<properties::odb_options_info_generator>();
-    test_move_assignment_copy<properties::parent_info_generator>();
-    test_move_assignment_copy<properties::property_info_generator>();
     test_move_assignment_copy<properties::registrar_info_generator>();
 }
 

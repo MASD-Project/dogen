@@ -41,12 +41,8 @@ BOOST_AUTO_TEST_SUITE(equality_tests)
 BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
 
-    test_equality<properties::class_info_generator>();
     test_equality<properties::cmakelists_info_generator>();
-    test_equality<properties::nested_type_info_generator>();
     test_equality<properties::odb_options_info_generator>();
-    test_equality<properties::parent_info_generator>();
-    test_equality<properties::property_info_generator>();
     test_equality<properties::registrar_info_generator>();
 }
 

@@ -41,12 +41,8 @@ BOOST_AUTO_TEST_SUITE(swap_tests)
 BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_swap");
 
-    test_swap<properties::class_info_generator>();
     test_swap<properties::cmakelists_info_generator>();
-    test_swap<properties::nested_type_info_generator>();
     test_swap<properties::odb_options_info_generator>();
-    test_swap<properties::parent_info_generator>();
-    test_swap<properties::property_info_generator>();
     test_swap<properties::registrar_info_generator>();
 }
 

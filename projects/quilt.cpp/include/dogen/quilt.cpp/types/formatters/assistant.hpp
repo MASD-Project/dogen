@@ -44,8 +44,6 @@
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/properties/entity.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_types.hpp"
-#include "dogen/quilt.cpp/types/properties/class_info.hpp"
-#include "dogen/quilt.cpp/types/properties/property_info.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
 
 namespace dogen {
@@ -67,23 +65,17 @@ public:
      * final keyword. If non-empty, includes a trailing space.
      */
     static std::string
-    make_final_keyword_text(const properties::class_info& c);
-    static std::string
     make_final_keyword_text(const yarn::object& o);
 
     /**
      * @brief Returns the by-ref to use given the property.
      */
-    static std::string make_by_ref_text(const properties::property_info& p);
     static std::string make_by_ref_text(const yarn::attribute& attr);
 
     /**
      * @brief Makes the return type of a setter, taking into account
      * fluency.
      */
-    static std::string
-    make_setter_return_type(const std::string& containing_type_name,
-        const properties::property_info& p);
     static std::string
     make_setter_return_type(const std::string& containing_type_name,
         const yarn::attribute& attr);
@@ -121,15 +113,11 @@ public:
     /**
      * @brief Returns the property as a member variable.
      */
-    std::string make_member_variable_name(
-        const properties::property_info& p) const;
     std::string make_member_variable_name(const yarn::attribute& attr) const;
 
     /**
      * @brief Returns the property as a getter.
      */
-    std::string make_getter_setter_name(
-        const properties::property_info& p) const;
     std::string make_getter_setter_name(const yarn::attribute& attr) const;
 
     /**

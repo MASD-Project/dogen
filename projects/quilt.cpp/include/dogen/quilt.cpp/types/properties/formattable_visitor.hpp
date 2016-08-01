@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/properties/class_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/properties/includers_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/properties/registrar_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/properties/cmakelists_info_fwd.hpp"
@@ -45,16 +44,6 @@ public:
     virtual ~formattable_visitor() noexcept = 0;
 
 public:
-    /**
-     * @brief Accept visits for type dogen::quilt::cpp::properties::class_info
-     */
-    /**@{*/
-    virtual void visit(const dogen::quilt::cpp::properties::class_info&) const { }
-    virtual void visit(const dogen::quilt::cpp::properties::class_info&) { }
-    virtual void visit(dogen::quilt::cpp::properties::class_info&) const { }
-    virtual void visit(dogen::quilt::cpp::properties::class_info&) { }
-    /**@}*/
-
     /**
      * @brief Accept visits for type dogen::quilt::cpp::properties::cmakelists_info
      */

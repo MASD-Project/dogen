@@ -107,36 +107,13 @@ assistant::assistant(const context& ctx,
 }
 
 std::string assistant::
-make_final_keyword_text(const properties::class_info& c) {
-    return c.is_final() ? final_keyword_text : empty;
-}
-
-std::string assistant::
 make_final_keyword_text(const yarn::object& o) {
     return o.is_final() ? final_keyword_text : empty;
 }
 
 std::string assistant::
-make_by_ref_text(const properties::property_info& p) {
-    return (p.type().is_primitive() || p.type().is_enumeration()) ?
-        empty : by_ref_text;
-}
-
-std::string assistant::
 make_by_ref_text(const yarn::attribute& attr) {
     return attr.parsed_type().is_current_simple_type() ? empty : by_ref_text;
-}
-
-std::string assistant::
-make_setter_return_type(const std::string& containing_type_name,
-    const properties::property_info& p) {
-    std::ostringstream s;
-    if (p.is_fluent())
-        s << containing_type_name << by_ref_text;
-    else
-        s << void_keyword_text;
-
-    return s.str();
 }
 
 std::string assistant::
@@ -180,18 +157,8 @@ obtain_formatter_properties(const std::string& formatter_name) const {
 }
 
 std::string assistant::
-make_member_variable_name(const properties::property_info& p) const {
-    return p.name() + member_variable_postfix;
-}
-
-std::string assistant::
 make_member_variable_name(const yarn::attribute& attr) const {
     return attr.name().simple() + member_variable_postfix;
-}
-
-std::string assistant::make_getter_setter_name(
-    const properties::property_info& p) const {
-    return p.name();
 }
 
 std::string assistant::
