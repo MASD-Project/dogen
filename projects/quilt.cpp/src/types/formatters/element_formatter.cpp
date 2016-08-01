@@ -127,7 +127,7 @@ public:
         format(container_.enum_formatters(), e);
     }
     void visit(const dogen::yarn::object& o) override {
-        format(container_.new_class_formatters(), o);
+        format(container_.class_formatters(), o);
     }
     void visit(const dogen::yarn::exception& e) override {
         format(container_.exception_formatters(), e);

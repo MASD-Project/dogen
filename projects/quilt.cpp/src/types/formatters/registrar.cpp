@@ -48,7 +48,7 @@ namespace formatters {
 
 void registrar::validate() const {
     const auto& fc(formatter_container_);
-    if (fc.new_class_formatters().empty()) {
+    if (fc.class_formatters().empty()) {
         BOOST_LOG_SEV(lg, error) << no_class_formatters;
         BOOST_THROW_EXCEPTION(registrar_error(no_class_formatters));
     }
@@ -95,13 +95,13 @@ void registrar::register_formatter_helper(
         f[of].push_back(fh);
 }
 
-void registrar::register_formatter(
-    std::shared_ptr<new_class_formatter_interface> f) {
+void registrar::
+register_formatter(std::shared_ptr<class_formatter_interface> f) {
     // note: not logging by design
     if (!f)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
-    formatter_container_.new_class_formatters_.push_front(f);
+    formatter_container_.class_formatters_.push_front(f);
     common_registration(f);
 }
 

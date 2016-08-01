@@ -8222,7 +8222,7 @@ facet of the C++ language.
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::shared_ptr&lt;formatters::new_class_formatter_interface&gt;#</dia:string>
+                <dia:string>#std::shared_ptr&lt;formatters::class_formatter_interface&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9954,10 +9954,10 @@ facet of the C++ language.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#new_class_formatters#</dia:string>
+            <dia:string>#class_formatters#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;std::shared_ptr&lt;formatters::new_class_formatter_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;std::shared_ptr&lt;formatters::class_formatter_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -12684,16 +12684,16 @@ Must be valid according to the rules for C++ names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O104">
       <dia:attribute name="obj_pos">
-        <dia:point val="510,133"/>
+        <dia:point val="526,133"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="509.95,132.95;525.195,135.55"/>
+        <dia:rectangle val="525.95,132.95;541.195,135.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="510,133"/>
+        <dia:point val="526,133"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.145"/>
@@ -12723,7 +12723,7 @@ registry of all available formatters.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="510.35,134.245"/>
+            <dia:point val="526.35,134.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -12737,16 +12737,16 @@ registry of all available formatters.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O105">
       <dia:attribute name="obj_pos">
-        <dia:point val="525.145,134.25"/>
+        <dia:point val="541.145,134.25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="525.093,134.198;547.069,135.702"/>
+        <dia:rectangle val="541.087,134.192;547.12,135.703"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="525.145,134.25"/>
+        <dia:point val="541.145,134.25"/>
         <dia:point val="547,135.3"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
@@ -12762,7 +12762,7 @@ registry of all available formatters.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="536.072,135.275"/>
+        <dia:point val="544.072,135.275"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O104" connection="4"/>
@@ -36193,7 +36193,7 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#new_class_formatter_interface#</dia:string>
+        <dia:string>#class_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>

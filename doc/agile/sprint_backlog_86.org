@@ -14,21 +14,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-08-01 Mon 22:13]
+#+CAPTION: Clock summary at [2016-08-01 Mon 22:24]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:27* |      |      | 100.0 |
+| *Total time*                                                                | *2:37* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:27   |      |      | 100.0 |
-| Active                                                                      |        | 2:27 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:09 |   6.1 |
-| COMPLETED Implement boost path's serialisation via a helper                 |        |      | 0:40 |  27.2 |
-| COMPLETED Implement serialisation's implementation in terms of =yarn::object= |        |      | 0:32 |  21.8 |
-| COMPLETED Implement odb's header in terms of =yarn::object=                 |        |      | 0:17 |  11.6 |
-| COMPLETED Implement test data's header in terms of =yarn::object=           |        |      | 0:11 |   7.5 |
-| COMPLETED Implement test data's implementation in terms of =yarn::object=   |        |      | 0:14 |   9.5 |
-| STARTED Remove all of class info infrastructure                             |        |      | 0:24 |  16.3 |
+| Stories                                                                     | 2:37   |      |      | 100.0 |
+| Active                                                                      |        | 2:37 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:09 |   5.7 |
+| COMPLETED Implement boost path's serialisation via a helper                 |        |      | 0:40 |  25.5 |
+| COMPLETED Implement serialisation's implementation in terms of =yarn::object= |        |      | 0:32 |  20.4 |
+| COMPLETED Implement odb's header in terms of =yarn::object=                 |        |      | 0:17 |  10.8 |
+| COMPLETED Implement test data's header in terms of =yarn::object=           |        |      | 0:11 |   7.0 |
+| COMPLETED Implement test data's implementation in terms of =yarn::object=   |        |      | 0:14 |   8.9 |
+| COMPLETED Remove all of class info infrastructure                           |        |      | 0:34 |  21.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -86,7 +86,9 @@ object.
 Move test data class implementation stitch template from class info to
 yarn object.
 
-*** STARTED Remove all of class info infrastructure                   :story:
+*** COMPLETED Remove all of class info infrastructure                 :story:
+    CLOSED: [2016-08-01 Mon 22:24]
+    CLOCK: [2016-08-01 Mon 22:14]--[2016-08-01 Mon 22:24] =>  0:10
     CLOCK: [2016-08-01 Mon 21:59]--[2016-08-01 Mon 22:13] =>  0:14
     CLOCK: [2016-08-01 Mon 21:54]--[2016-08-01 Mon 21:58] =>  0:04
     CLOCK: [2016-08-01 Mon 21:47]--[2016-08-01 Mon 21:53] =>  0:06

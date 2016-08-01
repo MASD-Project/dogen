@@ -26,10 +26,10 @@ namespace cpp {
 namespace formatters {
 
 const std::forward_list<
-    std::shared_ptr<formatters::new_class_formatter_interface>
+    std::shared_ptr<formatters::class_formatter_interface>
 >&
-container::new_class_formatters() const {
-    return new_class_formatters_;
+container::class_formatters() const {
+    return class_formatters_;
 }
 
 const std::forward_list<std::shared_ptr<formatters::enum_formatter_interface>>&
