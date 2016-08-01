@@ -37,6 +37,29 @@ namespace boost {
 namespace serialization {
 
 template<typename Archive>
+inline void save(Archive& ar,
+    const boost::filesystem::path& p,
+    const unsigned int /*version*/) {
+    std::string s;
+    s = p.generic_string();
+    ar & boost::serialization::make_nvp("path", s);
+}
+
+template<typename Archive>
+inline void load(Archive& ar,
+    boost::filesystem::path& p,
+    const unsigned int /*version*/) {
+    std::string s;
+    ar & boost::serialization::make_nvp("path", s);
+    p = s;
+}
+
+} }
+
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::properties::formatter_properties& v,
     const unsigned int /*version*/) {

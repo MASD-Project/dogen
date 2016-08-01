@@ -31,6 +31,29 @@
 #include "dogen/test_models/trivial_inheritance/serialization/move_ctor_base_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/move_ctor_descendant_ser.hpp"
 
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+inline void save(Archive& ar,
+    const boost::filesystem::path& p,
+    const unsigned int /*version*/) {
+    std::string s;
+    s = p.generic_string();
+    ar & boost::serialization::make_nvp("path", s);
+}
+
+template<typename Archive>
+inline void load(Archive& ar,
+    boost::filesystem::path& p,
+    const unsigned int /*version*/) {
+    std::string s;
+    ar & boost::serialization::make_nvp("path", s);
+    p = s;
+}
+
+} }
+
 BOOST_CLASS_TRACKING(
     dogen::test_models::trivial_inheritance::move_ctor_descendant,
     boost::serialization::track_selectively)

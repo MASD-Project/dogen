@@ -14,15 +14,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-08-01 Mon 19:19]
+#+CAPTION: Clock summary at [2016-08-01 Mon 20:22]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:09* |      |      | 100.0 |
+| *Total time*                                                                | *1:09* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:09   |      |      | 100.0 |
-| Active                                                                      |        | 0:09 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:09 | 100.0 |
+| Stories                                                                     | 1:09   |      |      | 100.0 |
+| Active                                                                      |        | 1:09 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:09 |  13.0 |
+| STARTED Implement boost path's serialisation via a helper                   |        |      | 0:33 |  47.8 |
+| STARTED Implement serialisation's header in terms of =yarn::object=         |        |      | 0:27 |  39.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -35,14 +37,39 @@ Updates to sprint and product backlog.
 
 Time taken with blog posts and updates to the manual.
 
-*** Implement serialisation's header in terms of =yarn::object=       :story:
+*** STARTED Implement boost path's serialisation via a helper         :story:
+    CLOCK: [2016-08-01 Mon 19:47]--[2016-08-01 Mon 20:20] =>  0:33
+
+At present we have hacked the serialisation template with code
+specific to boost path. Replace it with a dynamic helper.
+
+*** STARTED Implement serialisation's header in terms of =yarn::object= :story:
+    CLOCK: [2016-08-01 Mon 19:20]--[2016-08-01 Mon 19:47] =>  0:27
 
 Move serialisation class header stitch template from class info to
 yarn object.
 
 Problems:
 
-- we've hacked filesystem path. We need to create a helper for it.
+- we've hacked filesystem path. We need to create a helper for
+  it. This will be the first time we need to generate a helper with
+  templates. There is an [[http://lists.boost.org/Archives/boost/2008/09/142550.php][out-of-tree patch]] for this which we copied
+  into utility; so, alternatively, we could use this but we'd then
+  add a dependency on utility to all models. In the absence of
+  =needle=, this is not ideal.
+
+*** Consider automatic injection of helpers                           :story:
+
+At present we are manually calling:
+
+: a.add_helper_methods();
+
+On each of the class implementation formatters in order to inject
+helpers. This is fine for existing cases, but its a bit less obvious
+when adding the first helper to an existing template: one does not
+quite know why the helper is not coming through without
+investigating. One possible solution is to make the helper generation
+more "mandatory". Its not entirely obvious how this would work.
 
 *** Element properties includes non-target types                      :story:
 
