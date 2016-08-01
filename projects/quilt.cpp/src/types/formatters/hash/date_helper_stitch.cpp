@@ -56,15 +56,6 @@ date_helper::owning_facets() const {
     return r;
 }
 
-bool date_helper::requires_explicit_call() const {
-    return false;
-}
-
-std::string date_helper::function_name() const {
-    static std::string r("operator==");
-    return r;
-}
-
 std::string date_helper::helper_name() const {
     static std::string r("date_helper");
     return r;

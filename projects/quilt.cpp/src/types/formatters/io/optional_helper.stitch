@@ -37,15 +37,6 @@ std::list<std::string> optional_helper::owning_facets() const {
     return r;
 }
 
-bool optional_helper::requires_explicit_call() const {
-    return false;
-}
-
-std::string optional_helper::function_name() const {
-    static std::string r("operator==");
-    return r;
-}
-
 std::string optional_helper::helper_name() const {
     static std::string r("optional_helper");
     return r;

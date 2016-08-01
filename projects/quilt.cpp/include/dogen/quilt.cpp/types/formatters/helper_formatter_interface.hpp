@@ -48,8 +48,6 @@ public:
     virtual std::string family() const = 0;
     virtual std::list<std::string> owning_formatters() const = 0;
     virtual std::list<std::string> owning_facets() const = 0;
-    virtual bool requires_explicit_call() const = 0;
-    virtual std::string function_name() const = 0;
     virtual std::string helper_name() const = 0;
     virtual bool is_enabled(const assistant& a,
         const properties::helper_properties& hp) const = 0;

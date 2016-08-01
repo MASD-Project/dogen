@@ -56,18 +56,9 @@ variant_helper::owning_facets() const {
     return r;
 }
 
-bool variant_helper::requires_explicit_call() const {
-    return false;
-}
-
 bool variant_helper::is_enabled(const assistant& /*a*/,
     const properties::helper_properties& /*hp*/) const {
     return true;
-}
-
-std::string variant_helper::function_name() const {
-    static std::string r("operator==");
-    return r;
 }
 
 std::string variant_helper::helper_name() const {

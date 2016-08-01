@@ -57,15 +57,6 @@ variant_helper::owning_facets() const {
     return r;
 }
 
-bool variant_helper::requires_explicit_call() const {
-    return false;
-}
-
-std::string variant_helper::function_name() const {
-    static std::string r("operator==");
-    return r;
-}
-
 std::string variant_helper::helper_name() const {
     static std::string r("variant_helper");
     return r;

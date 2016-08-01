@@ -56,18 +56,9 @@ pair_helper::owning_facets() const {
     return r;
 }
 
-bool pair_helper::requires_explicit_call() const {
-    return false;
-}
-
 bool pair_helper::is_enabled(const assistant& /*a*/,
     const properties::helper_properties& /*hp*/) const {
     return true;
-}
-
-std::string pair_helper::function_name() const {
-    static std::string r("operator==");
-    return r;
 }
 
 std::string pair_helper::helper_name() const {

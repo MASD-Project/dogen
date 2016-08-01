@@ -57,15 +57,6 @@ time_duration_helper::owning_facets() const {
     return r;
 }
 
-bool time_duration_helper::requires_explicit_call() const {
-    return false;
-}
-
-std::string time_duration_helper::function_name() const {
-    static std::string r("operator==");
-    return r;
-}
-
 std::string time_duration_helper::helper_name() const {
     static std::string r("time_duration_helper");
     return r;

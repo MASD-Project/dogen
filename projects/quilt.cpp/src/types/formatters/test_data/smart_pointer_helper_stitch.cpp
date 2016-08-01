@@ -57,18 +57,9 @@ smart_pointer_helper::owning_facets() const {
     return r;
 }
 
-bool smart_pointer_helper::requires_explicit_call() const {
-    return false;
-}
-
 bool smart_pointer_helper::is_enabled(const assistant& /*a*/,
     const properties::helper_properties& /*hp*/) const {
     return true;
-}
-
-std::string smart_pointer_helper::function_name() const {
-    static std::string r("operator==");
-    return r;
 }
 
 std::string smart_pointer_helper::helper_name() const {

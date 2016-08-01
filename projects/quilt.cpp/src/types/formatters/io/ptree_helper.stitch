@@ -37,15 +37,6 @@ std::list<std::string> ptree_helper::owning_facets() const {
     return r;
 }
 
-bool ptree_helper::requires_explicit_call() const {
-    return false;
-}
-
-std::string ptree_helper::function_name() const {
-    static std::string r("operator==");
-    return r;
-}
-
 std::string ptree_helper::helper_name() const {
     static std::string r("ptree_helper");
     return r;

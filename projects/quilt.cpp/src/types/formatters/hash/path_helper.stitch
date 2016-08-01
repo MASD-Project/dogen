@@ -37,15 +37,6 @@ path_helper::owning_facets() const {
     return r;
 }
 
-bool path_helper::requires_explicit_call() const {
-    return false;
-}
-
-std::string path_helper::function_name() const {
-    static std::string r("operator==");
-    return r;
-}
-
 std::string path_helper::helper_name() const {
     static std::string r("path_helper");
     return r;

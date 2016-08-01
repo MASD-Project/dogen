@@ -37,18 +37,9 @@ int_helper::owning_facets() const {
     return r;
 }
 
-bool int_helper::requires_explicit_call() const {
-    return false;
-}
-
 bool int_helper::is_enabled(const assistant& /*a*/,
     const properties::helper_properties& /*hp*/) const {
     return true;
-}
-
-std::string int_helper::function_name() const {
-    static std::string r("operator==");
-    return r;
 }
 
 std::string int_helper::helper_name() const {

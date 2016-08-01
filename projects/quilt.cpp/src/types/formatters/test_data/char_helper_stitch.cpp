@@ -57,15 +57,6 @@ char_helper::owning_facets() const {
     return r;
 }
 
-bool char_helper::requires_explicit_call() const {
-    return false;
-}
-
-std::string char_helper::function_name() const {
-    static std::string r("operator==");
-    return r;
-}
-
 bool char_helper::is_enabled(const assistant& /*a*/,
     const properties::helper_properties& /*hp*/) const {
     return true;

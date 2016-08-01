@@ -56,15 +56,6 @@ ptime_helper::owning_facets() const {
     return r;
 }
 
-bool ptime_helper::requires_explicit_call() const {
-    return false;
-}
-
-std::string ptime_helper::function_name() const {
-    static std::string r("operator==");
-    return r;
-}
-
 std::string ptime_helper::helper_name() const {
     static std::string r("ptime_helper");
     return r;

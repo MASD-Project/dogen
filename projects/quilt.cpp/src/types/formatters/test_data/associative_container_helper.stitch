@@ -37,15 +37,6 @@ associative_container_helper::owning_facets() const {
     return r;
 }
 
-bool associative_container_helper::requires_explicit_call() const {
-    return false;
-}
-
-std::string associative_container_helper::function_name() const {
-    static std::string r("operator==");
-    return r;
-}
-
 bool associative_container_helper::is_enabled(const assistant& /*a*/,
     const properties::helper_properties& /*hp*/) const {
     return true;

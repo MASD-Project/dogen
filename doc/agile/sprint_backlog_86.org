@@ -14,21 +14,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-08-01 Mon 22:24]
+#+CAPTION: Clock summary at [2016-08-01 Mon 22:41]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:37* |      |      | 100.0 |
+| *Total time*                                                                | *2:50* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:37   |      |      | 100.0 |
-| Active                                                                      |        | 2:37 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:09 |   5.7 |
-| COMPLETED Implement boost path's serialisation via a helper                 |        |      | 0:40 |  25.5 |
-| COMPLETED Implement serialisation's implementation in terms of =yarn::object= |        |      | 0:32 |  20.4 |
-| COMPLETED Implement odb's header in terms of =yarn::object=                 |        |      | 0:17 |  10.8 |
-| COMPLETED Implement test data's header in terms of =yarn::object=           |        |      | 0:11 |   7.0 |
-| COMPLETED Implement test data's implementation in terms of =yarn::object=   |        |      | 0:14 |   8.9 |
-| COMPLETED Remove all of class info infrastructure                           |        |      | 0:34 |  21.7 |
+| Stories                                                                     | 2:50   |      |      | 100.0 |
+| Active                                                                      |        | 2:50 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:09 |   5.3 |
+| COMPLETED Implement boost path's serialisation via a helper                 |        |      | 0:40 |  23.5 |
+| COMPLETED Implement serialisation's implementation in terms of =yarn::object= |        |      | 0:32 |  18.8 |
+| COMPLETED Implement odb's header in terms of =yarn::object=                 |        |      | 0:17 |  10.0 |
+| COMPLETED Implement test data's header in terms of =yarn::object=           |        |      | 0:11 |   6.5 |
+| COMPLETED Implement test data's implementation in terms of =yarn::object=   |        |      | 0:14 |   8.2 |
+| COMPLETED Remove all of class info infrastructure                           |        |      | 0:34 |  20.0 |
+| STARTED Remove unused helper related properties                             |        |      | 0:13 |   7.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -97,6 +98,44 @@ yarn object.
 - remove class info and associated classes;
 - remove references in transformer;
 - drop the "new" prefix on the interfaces.
+
+*** COMPLETED Remove nested type info                                 :story:
+    CLOSED: [2016-08-01 Mon 22:25]
+
+*Rationale*: Closed as part of other stories.
+
+Once all of the infrastructure is in place, we should not need this
+class any more. Remove code from transformer and remove object types
+and anything else that was used to dispatch based on type.
+
+*** COMPLETED Update assistant to use new helper information          :story:
+    CLOSED: [2016-08-01 Mon 22:26]
+
+*Rationale*: Closed as part of other stories.
+
+Once all the pieces are in place, the assistant can then use the
+element properties to find out which helpers are required for each
+type; call those helpers and populate the file with the generate
+code. We can remove all previous helper support.
+
+*** COMPLETED Update types formatters to use =yarn::object=            :epic:
+    CLOSED: [2016-08-01 Mon 22:26]
+
+*Rationale*: Closed as part of other stories.
+
+Replace class info in types formatters with yarn's object.
+
+*** STARTED Remove unused helper related properties                   :story:
+    CLOCK: [2016-08-01 Mon 22:27]--[2016-08-01 Mon 22:40] =>  0:13
+
+Check to see if we are using the following helper properties:
+
+- =requires_explicit_call=
+- =function_name=
+- string conversion method
+- requires dereferencing
+
+If not, remove them.
 
 *** Consider automatic injection of helpers                           :story:
 
@@ -214,10 +253,6 @@ Interestingly, for AssociativeContainer we have:
 :        ]
 :      },
 
-*** Update types formatters to use =yarn::object=                      :epic:
-
-Replace class info in types formatters with yarn's object.
-
 *** Clean-up helper terminology                                       :story:
 
 The name "helper" was never really thought out. It makes little
@@ -282,22 +317,6 @@ Actually this is a core yarn property. So:
   of enum, e.g. type parameterisation: none, variable, fixed. if
   fixed, then number of type parameters must be non-zero.
 
-*** Remove =requires_explicit_call= and =function_name=               :story:
-
-Check to see if we are using the following helper properties:
-
-- =requires_explicit_call=
-- =function_name=
-
-If not, remove them.
-
-*** Update assistant to use new helper information                    :story:
-
-Once all the pieces are in place, the assistant can then use the
-element properties to find out which helpers are required for each
-type; call those helpers and populate the file with the generate
-code. We can remove all previous helper support.
-
 *** Implement formattables in terms of yarn types                     :epic:
 
 At present formattables are just a shadow copy of yarn types plus
@@ -319,12 +338,6 @@ additional =cpp= specific types. In practice:
   etc. This is not ideal, but its not a problem just yet. We could
   update the factory to generate these types and then take a copy of
   the model and inject them in it.
-
-*** Remove nested type info                                           :story:
-
-Once all of the infrastructure is in place, we should not need this
-class any more. Remove code from transformer and remove object types
-and anything else that was used to dispatch based on type.
 
 *** Initialise formatters in the formatter's translation unit         :story:
 
