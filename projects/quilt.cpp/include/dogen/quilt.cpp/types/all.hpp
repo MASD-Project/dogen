@@ -112,7 +112,6 @@
 #include "dogen/quilt.cpp/types/settings/aspect_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/streaming_settings_factory.hpp"
-#include "dogen/quilt.cpp/types/formatters/class_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/class_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/enum_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/odb_options_formatter.hpp"

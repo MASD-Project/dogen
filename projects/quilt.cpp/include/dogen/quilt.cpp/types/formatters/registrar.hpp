@@ -33,7 +33,6 @@
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/enum_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/class_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/new_class_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/visitor_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/namespace_formatter_interface.hpp"
@@ -72,11 +71,6 @@ public:
 public:
     /**
      * @brief Registers a class formatter.
-     */
-    void register_formatter(std::shared_ptr<class_formatter_interface> f);
-
-    /**
-     * @brief Registers a class formatter (new).
      */
     void register_formatter(std::shared_ptr<new_class_formatter_interface> f);
 

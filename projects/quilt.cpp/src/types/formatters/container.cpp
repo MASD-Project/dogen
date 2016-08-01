@@ -25,11 +25,6 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-const std::forward_list<std::shared_ptr<formatters::class_formatter_interface>>&
-container::class_formatters() const {
-    return class_formatters_;
-}
-
 const std::forward_list<
     std::shared_ptr<formatters::new_class_formatter_interface>
 >&

@@ -148,7 +148,6 @@ private:
 
 public:
     using formattable_visitor::visit;
-    void visit(const properties::class_info& c) override;
     void visit(const properties::forward_declarations_info& fd) override;
     void visit(const properties::registrar_info& r) override;
     void visit(const properties::cmakelists_info& c) override;
@@ -176,13 +175,6 @@ private:
 
 dispatcher::dispatcher(const context_factory& f, const container& c)
     : factory_(f), container_(c) { }
-
-void dispatcher::visit(const properties::class_info& c) {
-    const bool empty_out_content(
-        c.generation_type() == yarn::generation_types::partial_generation);
-    for (const auto f : container_.class_formatters())
-        format_entity(*f, c, empty_out_content);
-}
 
 void dispatcher::visit(const properties::forward_declarations_info& fd) {
     format_entity(container_.forward_declarations_formatters(), fd);
