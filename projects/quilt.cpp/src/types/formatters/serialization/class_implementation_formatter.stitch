@@ -8,21 +8,22 @@
 <#+
 
 dogen::formatters::file class_implementation_formatter_stitch(
-    assistant& a, const properties::class_info& c) {
+    assistant& a, const yarn::object& o) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         a.add_helper_methods();
 
-        const bool has_properties(!c.properties().empty());
-        const bool has_parents(!c.parents().empty());
-        const bool has_properties_or_parents(has_properties || has_parents);
+        const auto qn(a.get_qualified_name(o.name()));
+        const bool has_attributes(!o.local_attributes().empty());
+        const bool has_parents(!o.parents().empty());
+        const bool has_attributes_or_parents(has_attributes || has_parents);
 
-        if (c.is_parent() || !c.parents().empty()) {
+        if (o.is_parent() || !o.parents().empty()) {
 #>
 
 BOOST_CLASS_TRACKING(
-    <#= c.qualified_name() #>,
+    <#= qn #>,
     boost::serialization::track_selectively)
 <#+
         }
@@ -38,23 +39,24 @@ namespace serialization {
 #>
 
 template<typename Archive>
-void save(Archive& <#= (has_properties_or_parents ? "ar" : "/*ar*/") #>,
-    const <#= c.qualified_name() #>& <#= (has_properties_or_parents ? "v" : "/*v*/") #>,
+void save(Archive& <#= (has_attributes_or_parents ? "ar" : "/*ar*/") #>,
+    const <#= qn #>& <#= (has_attributes_or_parents ? "v" : "/*v*/") #>,
     const unsigned int /*version*/) {
 <#+
-        for (const auto p : c.parents()) {
+        for (const auto pn : o.parents()) {
+            const auto pqn(a.get_qualified_name(pn));
 #>
-    ar << make_nvp("<#= p.name() #>", base_object<<#= p.qualified_name() #>>(v));
+    ar << make_nvp("<#= pn.simple() #>", base_object<<#= pqn #>>(v));
 <#+
         }
 
-        if (has_properties && has_parents)
+        if (has_attributes && has_parents)
 #>
 
 <#+
-        for (const auto p : c.properties()) {
+        for (const auto attr : o.local_attributes()) {
 #>
-    ar << make_nvp("<#= p.name() #>", v.<#= a.make_member_variable_name(p) #>);
+    ar << make_nvp("<#= attr.name().simple() #>", v.<#= a.make_member_variable_name(attr) #>);
 <#+
         }
 #>
@@ -66,23 +68,24 @@ void save(Archive& <#= (has_properties_or_parents ? "ar" : "/*ar*/") #>,
          */
 #>
 template<typename Archive>
-void load(Archive& <#= (has_properties_or_parents ? "ar," : "/*ar*/,") #>
-    <#= c.qualified_name() #>& <#= (has_properties_or_parents ? "v" : "/*v*/") #>,
+void load(Archive& <#= (has_attributes_or_parents ? "ar," : "/*ar*/,") #>
+    <#= qn #>& <#= (has_attributes_or_parents ? "v" : "/*v*/") #>,
     const unsigned int /*version*/) {
 <#+
-        for (const auto p : c.parents()) {
+        for (const auto pn : o.parents()) {
+            const auto pqn(a.get_qualified_name(pn));
 #>
-    ar >> make_nvp("<#= p.name() #>", base_object<<#= p.qualified_name() #>>(v));
+    ar >> make_nvp("<#= pn.simple() #>", base_object<<#= pqn #>>(v));
 <#+
-            if (has_properties && has_parents)
+            if (has_attributes && has_parents)
 #>
 
 <#+
         }
 
-        for (const auto p : c.properties()) {
+        for (const auto attr : o.local_attributes()) {
 #>
-    ar >> make_nvp("<#= p.name() #>", v.<#= a.make_member_variable_name(p) #>);
+    ar >> make_nvp("<#= attr.name().simple() #>", v.<#= a.make_member_variable_name(attr) #>);
 <#+
         }
 #>
@@ -93,17 +96,17 @@ void load(Archive& <#= (has_properties_or_parents ? "ar," : "/*ar*/,") #>
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const <#= c.qualified_name() #>& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, <#= c.qualified_name() #>& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const <#= qn #>& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, <#= qn #>& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const <#= c.qualified_name() #>& v, unsigned int version);
-template void load(archive::text_iarchive& ar, <#= c.qualified_name() #>& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const <#= qn #>& v, unsigned int version);
+template void load(archive::text_iarchive& ar, <#= qn #>& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const <#= c.qualified_name() #>& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, <#= c.qualified_name() #>& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const <#= qn #>& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, <#= qn #>& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const <#= c.qualified_name() #>& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, <#= c.qualified_name() #>& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const <#= qn #>& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, <#= qn #>& v, unsigned int version);
 
 } }
 <#+

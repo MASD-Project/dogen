@@ -28,20 +28,21 @@ namespace formatters {
 namespace serialization {
 
 dogen::formatters::file class_implementation_formatter_stitch(
-    assistant& a, const properties::class_info& c) {
+    assistant& a, const yarn::object& o) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         a.add_helper_methods();
 
-        const bool has_properties(!c.properties().empty());
-        const bool has_parents(!c.parents().empty());
-        const bool has_properties_or_parents(has_properties || has_parents);
+        const auto qn(a.get_qualified_name(o.name()));
+        const bool has_attributes(!o.local_attributes().empty());
+        const bool has_parents(!o.parents().empty());
+        const bool has_attributes_or_parents(has_attributes || has_parents);
 
-        if (c.is_parent() || !c.parents().empty()) {
+        if (o.is_parent() || !o.parents().empty()) {
 a.stream() << std::endl;
 a.stream() << "BOOST_CLASS_TRACKING(" << std::endl;
-a.stream() << "    " << c.qualified_name() << "," << std::endl;
+a.stream() << "    " << qn << "," << std::endl;
 a.stream() << "    boost::serialization::track_selectively)" << std::endl;
         }
 a.stream() << std::endl;
@@ -53,17 +54,18 @@ a.stream() << "namespace serialization {" << std::endl;
          */
 a.stream() << std::endl;
 a.stream() << "template<typename Archive>" << std::endl;
-a.stream() << "void save(Archive& " << (has_properties_or_parents ? "ar" : "/*ar*/") << "," << std::endl;
-a.stream() << "    const " << c.qualified_name() << "& " << (has_properties_or_parents ? "v" : "/*v*/") << "," << std::endl;
+a.stream() << "void save(Archive& " << (has_attributes_or_parents ? "ar" : "/*ar*/") << "," << std::endl;
+a.stream() << "    const " << qn << "& " << (has_attributes_or_parents ? "v" : "/*v*/") << "," << std::endl;
 a.stream() << "    const unsigned int /*version*/) {" << std::endl;
-        for (const auto p : c.parents()) {
-a.stream() << "    ar << make_nvp(\"" << p.name() << "\", base_object<" << p.qualified_name() << ">(v));" << std::endl;
+        for (const auto pn : o.parents()) {
+            const auto pqn(a.get_qualified_name(pn));
+a.stream() << "    ar << make_nvp(\"" << pn.simple() << "\", base_object<" << pqn << ">(v));" << std::endl;
         }
 
-        if (has_properties && has_parents)
+        if (has_attributes && has_parents)
 a.stream() << std::endl;
-        for (const auto p : c.properties()) {
-a.stream() << "    ar << make_nvp(\"" << p.name() << "\", v." << a.make_member_variable_name(p) << ");" << std::endl;
+        for (const auto attr : o.local_attributes()) {
+a.stream() << "    ar << make_nvp(\"" << attr.name().simple() << "\", v." << a.make_member_variable_name(attr) << ");" << std::endl;
         }
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
@@ -71,17 +73,18 @@ a.stream() << std::endl;
          * Load function
          */
 a.stream() << "template<typename Archive>" << std::endl;
-a.stream() << "void load(Archive& " << (has_properties_or_parents ? "ar," : "/*ar*/,") << std::endl;
-a.stream() << "    " << c.qualified_name() << "& " << (has_properties_or_parents ? "v" : "/*v*/") << "," << std::endl;
+a.stream() << "void load(Archive& " << (has_attributes_or_parents ? "ar," : "/*ar*/,") << std::endl;
+a.stream() << "    " << qn << "& " << (has_attributes_or_parents ? "v" : "/*v*/") << "," << std::endl;
 a.stream() << "    const unsigned int /*version*/) {" << std::endl;
-        for (const auto p : c.parents()) {
-a.stream() << "    ar >> make_nvp(\"" << p.name() << "\", base_object<" << p.qualified_name() << ">(v));" << std::endl;
-            if (has_properties && has_parents)
+        for (const auto pn : o.parents()) {
+            const auto pqn(a.get_qualified_name(pn));
+a.stream() << "    ar >> make_nvp(\"" << pn.simple() << "\", base_object<" << pqn << ">(v));" << std::endl;
+            if (has_attributes && has_parents)
 a.stream() << std::endl;
         }
 
-        for (const auto p : c.properties()) {
-a.stream() << "    ar >> make_nvp(\"" << p.name() << "\", v." << a.make_member_variable_name(p) << ");" << std::endl;
+        for (const auto attr : o.local_attributes()) {
+a.stream() << "    ar >> make_nvp(\"" << attr.name().simple() << "\", v." << a.make_member_variable_name(attr) << ");" << std::endl;
         }
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
@@ -90,17 +93,17 @@ a.stream() << std::endl;
 a.stream() << "namespace boost {" << std::endl;
 a.stream() << "namespace serialization {" << std::endl;
 a.stream() << std::endl;
-a.stream() << "template void save(archive::polymorphic_oarchive& ar, const " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
-a.stream() << "template void load(archive::polymorphic_iarchive& ar, " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
+a.stream() << "template void save(archive::polymorphic_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+a.stream() << "template void load(archive::polymorphic_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
 a.stream() << std::endl;
-a.stream() << "template void save(archive::text_oarchive& ar, const " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
-a.stream() << "template void load(archive::text_iarchive& ar, " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
+a.stream() << "template void save(archive::text_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+a.stream() << "template void load(archive::text_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
 a.stream() << std::endl;
-a.stream() << "template void save(archive::binary_oarchive& ar, const " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
-a.stream() << "template void load(archive::binary_iarchive& ar, " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
+a.stream() << "template void save(archive::binary_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+a.stream() << "template void load(archive::binary_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
 a.stream() << std::endl;
-a.stream() << "template void save(archive::xml_oarchive& ar, const " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
-a.stream() << "template void load(archive::xml_iarchive& ar, " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
+a.stream() << "template void save(archive::xml_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+a.stream() << "template void load(archive::xml_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
 a.stream() << std::endl;
 a.stream() << "} }" << std::endl;
     } // sbf

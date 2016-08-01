@@ -14,17 +14,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-08-01 Mon 20:28]
+#+CAPTION: Clock summary at [2016-08-01 Mon 20:34]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *1:16* |      |      | 100.0 |
+| *Total time*                                                                | *1:21* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 1:16   |      |      | 100.0 |
-| Active                                                                      |        | 1:16 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:09 |  11.8 |
-| COMPLETED Implement boost path's serialisation via a helper                 |        |      | 0:40 |  52.6 |
-| STARTED Implement serialisation's header in terms of =yarn::object=         |        |      | 0:27 |  35.5 |
+| Stories                                                                     | 1:21   |      |      | 100.0 |
+| Active                                                                      |        | 1:21 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:09 |  11.1 |
+| COMPLETED Implement boost path's serialisation via a helper                 |        |      | 0:40 |  49.4 |
+| COMPLETED Implement serialisation's implementation in terms of =yarn::object= |        |      | 0:32 |  39.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -45,7 +45,9 @@ Time taken with blog posts and updates to the manual.
 At present we have hacked the serialisation template with code
 specific to boost path. Replace it with a dynamic helper.
 
-*** STARTED Implement serialisation's header in terms of =yarn::object= :story:
+*** COMPLETED Implement serialisation's implementation in terms of =yarn::object= :story:
+    CLOSED: [2016-08-01 Mon 20:34]
+    CLOCK: [2016-08-01 Mon 20:29]--[2016-08-01 Mon 20:34] =>  0:05
     CLOCK: [2016-08-01 Mon 19:20]--[2016-08-01 Mon 19:47] =>  0:27
 
 Move serialisation class header stitch template from class info to
