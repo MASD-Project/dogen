@@ -47,7 +47,6 @@
 #include "dogen/quilt.cpp/types/properties/class_info.hpp"
 #include "dogen/quilt.cpp/types/properties/property_info.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
-#include "dogen/quilt.cpp/types/formatters/nested_type_formatting_assistant.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -191,13 +190,6 @@ public:
     make_scoped_namespace_formatter(const std::list<std::string>& ns);
 
     /**
-     * @brief Creates a nested type formatting assistant, latched on
-     * the properties. Requires entity to be a class info.
-     */
-    nested_type_formatting_assistant
-    make_nested_type_formatting_assistant();
-
-    /**
      * @brief Creates the preamble.
      */
     void make_annotation_preamble(
@@ -263,8 +255,6 @@ public:
      * @brief Returns true if the type can be hashed without requiring a
      * helper method.
      */
-    bool requires_hashing_helper_method(
-        const properties::nested_type_info& t) const;
     bool requires_hashing_helper_method(const yarn::attribute& attr) const;
 
 private:

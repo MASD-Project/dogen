@@ -287,11 +287,6 @@ assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
         true/*add_new_line*/);
 }
 
-nested_type_formatting_assistant assistant::
-make_nested_type_formatting_assistant() {
-    return nested_type_formatting_assistant(stream());
-}
-
 void assistant::make_annotation_preamble(
     const boost::optional<dogen::formatters::file_properties> fp) {
     if (!fp)
@@ -516,12 +511,6 @@ streaming_for_type(const properties::helper_descriptor& hd,
         return s;
 
     return streaming_for_type(*ss, s);
-}
-
-bool assistant::requires_hashing_helper_method(
-    const properties::nested_type_info& t) const {
-    return nested_type_formatting_assistant::
-        requires_hashing_helper_method(t);
 }
 
 bool assistant::

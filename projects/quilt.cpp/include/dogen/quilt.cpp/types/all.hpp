@@ -156,7 +156,6 @@
 #include "dogen/quilt.cpp/types/properties/inclusion_directives_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_factory_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/enum_implementation_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/nested_type_formatting_assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/class_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/exception_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/namespace_header_formatter.hpp"

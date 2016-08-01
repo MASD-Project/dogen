@@ -87,6 +87,7 @@ Move test data class implementation stitch template from class info to
 yarn object.
 
 *** STARTED Remove all of class info infrastructure                   :story:
+    CLOCK: [2016-08-01 Mon 21:54]--[2016-08-01 Mon 21:58] =>  0:04
     CLOCK: [2016-08-01 Mon 21:47]--[2016-08-01 Mon 21:53] =>  0:06
 
 - remove previous interface, container support, registration;
