@@ -34,6 +34,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-08-02 Tue 16:49]--[2016-08-02 Tue 17:32] =>  0:43
     CLOCK: [2016-08-01 Mon 19:10]--[2016-08-01 Mon 19:19] =>  0:09
 
 Updates to sprint and product backlog.
@@ -139,6 +140,100 @@ Check to see if we are using the following helper properties:
 - requires dereferencing
 
 If not, remove them.
+
+*** COMPLETED Remove intermediate fields from dynamic                 :story:
+    CLOSED: [2016-08-02 Tue 17:00]
+
+*Rationale*: This was addressed already.
+
+With the previous approach we had fields in dynamic that were
+generated within dogen; we now should only have fields that are set
+from the outside world. Remove all of the fields that are not supposed
+to be settable from the outside world. At present this just file path.
+
+*** Consider renaming formatters                                      :story:
+
+After reading the [[http://martinfowler.com/eaaDev/PresentationModel.html][Presentation Model]] pattern a bit more carefully, it
+seems it provides a good approach for formatters. If one thinks of the
+file as the view, then the formatters are the presenters and the model
+representing all presentation logic (e.g. =cpp=) is the presentation
+model. We could:
+
+- create a top-level folder called =presentation=;
+- rename =formatters= to =core= and move it to =presentation=;
+- move =cpp= to =presentation=;
+- in =cpp=:
+  - rename =formattables= to =presentables=;
+  - rename =formatters= to =presenters=;
+- in this light, =backend= is really the "meta-workflow" for all
+  possible presentations. It should really live under presentation. It
+  would make more sense to merge it with =core=, if it were not that
+  core contains all sorts of loose bits that are useful only in the
+  guts of presentation. We could call it =orchestration= or some such
+  name. Or we could leave it as =presentation::backends=.
+- move =file= to =backends=. We don't really want external clients to
+  have to know about =core= just to obtain a single type. Also,
+  backends shouldn't really have any dependencies.
+- grep for formatting, formattables, formatter, format, etc. and
+  ensure all usages have been replaced with present*.
+
+We should wait until the "great refactoring" is done so that we do not
+have to rename the legacy models too.
+
+*Merged with duplicate*
+
+These are not really formatters; not sure what the right name should
+be though; templates?
+
+*** Consider renaming includers                                       :story:
+
+Its very confusing to have header files that include lots of other
+header files called "includers". There is too much overloading. We
+should consider calling them "master header files" as per Schaling
+terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
+
+*** Analysis work on handling varying levels of formatter optionality :story:
+
+In some cases the formatter may decide that it does not need to create
+a file. The only use case we have is the =namespace_info= where if
+there is no documentation one does not want to create a formatter. At
+present we filter out empty namespaces in the formatters' workflow,
+but this is not very clean because it now means the workflow needs to
+know about the formatter's logic.
+
+This would also make things cleaner for the services hack where we do
+not want to generate services for now. Actually not quite; for
+services we still need to generate skeletons. There are three cases:
+a) nothing should be generated, in which case we should filter these
+elements before hand b) something should be generated, but we may not
+actually overwrite the existing file and c) generate and write,
+regardless.
+
+Note that we do not need to change the stitch templates for this; the
+decision is done before we call the template.
+
+Tasks:
+
+- change formatter interfaces to return =boost::optional<file>=
+- change all formatters.
+
+*** Consider removing the overwrite flag in =formatters::file=        :story:
+
+Investigate if the overwrite flag makes sense in file; it seems we
+only use it in two scenarios: force overwrite requested by user or
+file contents have changed, both of which can be done in the
+file_writer.
+
+Actually this flag is needed. It is required to handle the case where
+we do not code-generate files, unless they do not exist. For example,
+for service headers and implementation we should create the files, but
+then subsequently not touch them. The overwrite flag should be set to
+false. We need to figure out how to implement this and remove the
+hacks around file writing.
+
+For now we have abused this flag to allow legacy files overrides of
+the new world formatters. This is just until we move totally to new
+world though.
 
 *** Consider automatic injection of helpers                           :story:
 
@@ -352,20 +447,18 @@ header file at all.
 
 ** Deprecated
 
-*** CANCELLED Write next interesting instalment in blog               :story:
-    CLOSED: [2016-07-12 Tue 17:33]
+*** CANCELLED Add tests for cpp's =name_builder=                      :story:
+    CLOSED: [2016-08-02 Tue 17:24]
 
-*Rationale*: Not much of a point of having "interesting" related
-stories in backlog.
+*Rationale*: Name builder is deprecated. We should do all this work in
+yarn now.
 
-We have a number of links backlogged and we need to offload them in an
-"interesting..." post.
-*** CANCELLED Create a ebook and dead-tree book for the manual        :story:
-    CLOSED: [2016-07-12 Tue 18:07]
+Name builder is responsible for converting a nested qualified name
+into a C++ representation. We need some basic tests around this class
+with different composition scenarios.
+*** CANCELLED System models set meta-type to =invalid=                :story:
+    CLOSED: [2016-08-02 Tue 17:27]
 
-*Rationale*: this story does not add any value. We need to write the
-manual and then worry about this.
+*Rationale*: we don't have a meta-type any longer.
 
-We should probably start by creating a simple ebook first and then
-explore the dead-tree options such as [[http://www.lulu.com][Lulu]]. We should also see what
-Luigi did for [[https://leanpub.com/implementingquantlib/][QuantLib]].
+Something is not quite right on the resolution logic.

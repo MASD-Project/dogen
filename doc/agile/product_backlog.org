@@ -11,6 +11,520 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Indent stitch output using clang format                           :story:
+
+We need to indent the output coming out of stitch as it is not
+suitable for reading as-is.
+
+This article has a good example of how to consume clang, but
+unfortunately its not about indenting:
+
+- [[https://bbannier.github.io/blog/2015/05/02/Writing-a-basic-clang-static-analysis-check.html][Writing a basic clang static analysis check]]
+- [[http://zed0.co.uk/clang-format-configurator/][clang-format configurator]]
+- [[http://clangformat.com/][online clang format]] - older site
+
+*** Use clang format in knit                                          :story:
+
+We need to indent the output coming out of knit. At present our stitch
+templates are super-complex purely because we are trying to get the
+indentation right. In most cases we don't. We need to:
+
+- remove indent filter and any other indentation "helpers"
+- update all templates to output everything as simply as possible, in
+  one long line if need be. We may still need to use sequence helper
+  but hopefully for very trivial cases.
+- plug in clang format at the end of the knit pipeline, using either a
+  default set of options or a user supplied set of options (via a
+  command line parameter).
+
+Merged with other story:
+
+We should generate un-indented c++ code and then rely on clang-format
+to do the indentation. We can allow users to supply their own
+configurations and supply those to clang. This can be done via the
+meta-data, or if there is a well defined file for clang, we could use
+it instead.
+
+Note that using clang to manage indentation will make things a lot
+slower. Note also that clang supports Java and may in future support
+C#. See [[http://clang.llvm.org/docs/LibFormat.html][LibFormat]].
+
+Another option is to create fallback modes. The preferred indenter for
+a given language (say c++) may not exist for another language (say
+c#); for these we use a dogen created indenter that is very basic. It
+may support some of the configuration parameters supplied for the
+clang indenter. The key thing is that we take away indenting from the
+formaters - they become flat - and then we always apply the indenter;
+either a clang based one or a simplified one. Either way, the code
+should live in formatters and make use of the language-specific
+folders as required.
+
+*** Formatters need different =enabled= defaults                      :story:
+
+We should be able to disable some formatters such as forward
+declarations. Some users may not require them. We can do this using
+dynamic extensions. We can either implement it in the backend or make
+all the formatters return an =std::optional<dogen::formatters::file>=
+and internally look for a =enabled= trait.
+
+We need to be able to distinguish "optional" formatters - those that
+can be disabled - and "mandatory" formatters - those that cannot. If a
+user requests the disabling of a mandatory formatter, we must
+throw. This must be handled in enabler.
+
+This story was merged with a previous one: Parameter to disable cpp
+file.
+
+#+begin_quote
+*Story*: As a dogen user, I want to disable cpp files so that I don't
+generate files with dummy content when I'm not using them.
+#+end_quote
+
+It would be really useful to define a implementation specific
+parameter which disables the generation of a cpp file for a
+service. This would stop us from having to create noddy translation
+units with dummy functions just to avoid having to define exclusion
+regexes.
+
+In some cases we may need a "enable by usage". For example,
+it would be great to be able to enable forward declarations only for
+those types for which we required them. Same with hash. We can detect
+this by looking at the generated include dependencies. However,
+because the include dependency only has a directive, we cannot tell
+which formatter it belonged to. This would require some augmenting of
+the directive to record the "origination" formatter.
+
+*** Consider using a proper JSON library                              :story:
+
+We could use a full-blow JSON parser rather than the property tree
+one. One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
+
+Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
+
+Actually there is a project comparing JSON libraries:
+
+[[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]
+
+One interesting library is [[https://github.com/dropbox/json11][Json11]].
+
+When we implement this we should first provide support for JSON with
+roundtripping tests and only then change io to be implemented in terms
+of JSON. These should be two totally separate stories.
+
+For the previous attempt to integrate RapidJson see this commit:
+
+b2cce41 * third party: remove includes and rapid json
+
+Merged stories:
+
+Add support for JSON serialisation
+
+We should have proper JSON serialisation support, for both reading and
+writing. We can then implement IO in terms of JSON.
+
+*Raw JSON vs cooked JSON*
+
+If we do implement customisable JSON serialisation, we should still
+use the raw format in streaming. We need a way to disable the cooked
+JSON internally. We should also re-implement streaming in terms of
+this JSON mode.
+
+*** Supply model references via meta-data rather than command line    :story:
+
+It doesn't make any sense to have model dependencies in the command
+line. After all, the model cannot be interpreted without them. A
+better way to do this would be to split this functionality into two:
+
+- command line supplies "import directories", that is, directories
+  to search when looking for models. By default the system directory
+  is already in the path.
+- model supplies "import statements". The problem here is that we need
+  to also supply the file name of the model. We could perhaps omit the
+  extension and then load all files that match (e.g. =.dia=, =.json=,
+  etc). If more than one matches we should error. Actually we should
+  just supply the full filename, as well as keep the current notation
+  for the external project path.
+
+This is also a nice way to avoid loading system models unnecessary;
+users still need to declare the models they depend on, regardless if
+system or user.
+
+Each model should also supply the external module path as meta-data.
+
+Merged stories
+
+*External module path and references as meta-data*
+
+It actually does not make a lot of sense to allow users to supply
+external module paths and references as command line options. This is
+because the model will fail to build unless we provide the correct
+ones; these are not configurable items in this sense. The project
+path, etc are - and so should remain command line options.
+
+We need to move these two into the meta-data. This would also mean we
+no longer need to pass in external module paths for references, which
+is much cleaner.
+
+*** Identifier parser has hard-coded primitives                       :story:
+
+Instead of using the hardware model, we have hard-coded all of the
+primitives. In addition, there are some primitives which are C++
+specific (=wchar_t=), as well as others which are only valid in
+certain cases such as =void=. This needs a bit of thinking.
+
+We could look for all primitives in the global namespace. Or we could
+have a tag in the types that describes them in a way that we can
+filter: =hardware_type= flag? The problem is that we need the
+identifier parser in order to load models and we need the loaded
+models in order to locate these types.
+
+One solution for this problem is to move the properties expansion to
+later on after the front end workflow has finished executing. Once we
+have a merged model we can then easily take the primitives container
+and inject that into the identifier parser. The only slight problem is
+that we need to know of the top-level modules for a given model in
+order to use the identifier parser. This means we need to expand
+unparsed types before merging. There is a circular dependency here.
+
+We somehow need a first pass to obtain all the primitives and a second
+pass to parse.
+
+*** Remove =service= stereotype                                       :story:
+
+This really just means non-generatable, or do not generate. We already
+have a stereotype for this. Remove =service= and any other stereotype
+which is not being used such as =value_object= etc.
+
+Actually, non-generatable is not a stereotype really. We should
+instead have some meta-data that can affect generation:
+
+- do not generate: do nothing at all. For references only. If a file
+  exists with this file name, it will be deleted as part of
+  housekeeping.
+- generate blank file if it doesn't exist: we don't even want a
+  template.
+- generate with content if it doesn't exist, do not touch otherwise:
+  what we call services at the moment. Generate a "template" that then
+  gets filled in manually.
+- generate and merge: merge the contents of the generated file with
+  the current contents in the file system. When we support merging.
+- generate and overwrite: generate the file and overwrite whatever
+  exists in the file system.
+
+This could be called "generation policy".
+
+The second behaviour we get for free with services is that we disable
+all facets except for types. A few points:
+
+- we may want to have io, serialisation, etc. This is not possible at
+  present. If a state of a service is made up of supported types, we
+  could even use existing code generation.
+- in order for this to be implemented correctly we need to hook in to
+  the enablement management somehow. In addition, it seems each facet
+  can have its own generation policy. For example we may want to
+  manually create types but automatically generate io.
+- the best way to handle this may be to setup "enablement profiles"
+  that the user can hook up to. For example we could have a "default"
+  profile that enables all facets (or uses facet defaults), a second
+  "service" profile that enables types with partial generation and io
+  with full generation and so on. We probably also need "generation
+  profiles" to go with "enablement profiles".
+
+*** Refactor code around model origination                            :story:
+
+- remove origin types and generation types, replacing it with just a
+  boolean for is target. Actually we need something like:
+  proxy_reference, non_proxy_reference, target. We also need a good
+  name for this enumeration.
+- at present we are using origin type to determine whether to create a
+  registrar, etc in cpp model. There is no other use case for
+  this. This is done in several places due to the bad handling of C++
+  specific types. Grep for =references= in =cpp= to find all
+  locations. We could split references into two (dogen, non-dogen). Or
+  references could have a origin type too.
+- we should also replace has generatable types with something more
+  like "target model has types" or "is target model empty". The idea
+  we are trying to capture is that the target model contained at least
+  one type. This could be set by the merger when it processes the
+  target model.
+
+*Previous Understanding*
+
+In the past we added a number of knobs around generation, all with
+their own problems:
+
+- =origin_types=: was the model/type created by the user or the
+  system. in reality this means did the model come from Dia or
+  JSON. this is confusing as the user can also add JSON files (their
+  own model library) and in the future the user can use JSON
+  exclusively without needed Dia at all.
+- =generation_types=: if the model is target, all types are to be
+  generated /unless/ they are not properly supported, in which case
+  they are to be "partially" generated (as is the case with
+  services). This is a formatter decision and yarn should not know
+  anything about it. Actually this is not quite true; users may want
+  to stop generation.
+
+These can be replaced by a single enumeration that indicates if the
+type/model is target or not.
+
+This work should be integrated with the model types story.
+
+Merged stories:
+
+*Split references into dogen and non-dogen models*
+
+If we had two containers of references, one for dogen models and
+another one for non-dogen models - which we could give a nice name, to
+imply its foreign origin - we could then use the dogen references for
+registrar, etc. This is a replacement for the origin type.
+
+We need a good name for these. Candidates:
+
+- proxy model: represents something that exists in the outside
+  world. e.g. =is_proxy=.
+
+*** Update copyright notices                                          :story:
+
+We need to update all notices to reflect personal ownership until DDC
+was formed, and then ownership by DDC.
+
+- first update to personal ownership has been done, but we need to
+  test if multiple copyright entries is properly supported.
+
+*** Implement all formatter interfaces                                :story:
+
+We still have a couple of skeleton interfaces:
+
+- primitve
+- concepts
+
+*** Do not compute inclusion directives for system models             :story:
+
+It seems we are computing inclusion directives and other path
+derivatives for system models:
+
+: {
+:   "__type__": "dogen::cpp::expansion::path_derivatives",
+:   "file_path": "/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../test_data/all_primitives/actual/std/include/std/serialization/unique_ptr_fwd_ser.hpp",
+:   "header_guard": "STD_SERIALIZATION_UNIQUE_PTR_FWD_SER_HPP",
+:   "inclusion_directive": "<quote>std/serialization/unique_ptr_fwd_ser.hpp<quote>"
+: }
+
+This comes out of the workflow, so we possibly are then ignoring it
+for the non-target types. So:
+
+- can we avoid computing these altogether?
+- are we ignoring it?
+
+Actually this is the usual problem with the "origin" of the type. We
+need a way to determine if this type needs computations or not. We
+need to create a story to clean up the =origin_type= and
+=generation_type= and then we can make use of it to determine if we
+need to compute inclusion, path etc or not.
+
+*** Consider renaming registrar in boost serialisation                :story:
+
+At present we have a registrar formatter that does the boost
+serialisation work. However, the name =registrar= is a bit too
+generic; we may for example add formatters for static registrars. We
+should rename this formatter to something more meaningful. Also the
+name registrar is already well understood to mean static registrar.
+
+This is a big problem now that we cannot add a type with the name
+registrar to the main model as it clashes with the serialisation
+registrar.
+
+We could simply name it serialisation registrar or some such name that
+is very unlikely to clash. We should then have a validation rule that
+stops users from defining types with that name.
+
+We need to go through all of the renamed registrars and fix them.
+
+Another option is to allow users to supply a name via meta-data to
+avoid name clashes. We could error when the user has defined a type.
+
+Actually, since the clash is only internal - the names we are
+generating on the fly are clashing with the user defined names - we
+should probably have a "postfix" that can be added in case of
+clashes. The generated code will not cause problems, its just the
+formattables pipeline.
+
+*** Duplicate fields in JSON result in non-intuitive errors           :story:
+
+By mistake we added the same field twice in JSON:
+
+:            "extensions" : {
+:                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree.hpp>",
+:                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree_serialization.hpp>",
+:                "cpp.io.class_header_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
+:                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
+:                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
+:                "cpp.hash.class_header_formatter.inclusion_required" : false
+
+The resulting error message was not particularly helpful:
+
+: 2015-06-17 13:56:06.658500 [DEBUG] [sml.json_hydrator] Processing type: <boost><property_tree><ptree>
+: 2015-06-17 13:56:06.658519 [ERROR] [dynamic.field_instance_factory] Expected at most one element
+
+*** Formatters with duplicate names result in non-intuitive errors    :story:
+
+We added two formatters to io with the same name by mistake and the
+resulting error was not particularly enlightening:
+
+: std::exception::what: Qualified name defined more than once: cpp.io.enum_header_formatter.inclusion_required
+
+We should have a very early on validation to ensure formatters have
+distinct names.
+
+Merged stories:
+
+*Check for duplicate formatter names in formatter registrar*
+
+At present it is possible to register a formatter name more than
+once. Registrar should keep track of the names and throw if the name
+is duplicated.
+
+*** Consider adding =fileset= to formatters                           :story:
+
+We are using collections of files quite a bit, and it makes sense to
+create an abstraction for it such as a =fileset=. However, for this to
+work properly we need to add at least one basic behaviours: the
+ability to merge two file sets. Or else we will end up having to
+unpack the files, then merging them, then creating a new fileset.
+
+Problem is, we either create the fileset as a non-generatable type -
+not ideal - or we create it as generatable and need to add this as a
+free function. We need to wait until dogen has support for merging
+code generation.
+
+*** Tidy-up master include generation                                 :story:
+
+At present we have one humongous hack in the factory to generate the
+master includers. How to do this properly:
+
+- wait until we start using yarn types.
+- loop through the yarn model instead of the path derivatives.
+- use a visitor to dispatch the types.
+- do not filter out services?
+- filter registrars etc based on type dispatching.
+
+*** Make JSON yarn a fully supported frontend                          :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to be able to write my domain models
+in JSON since I don't have any need for UML visualisation.
+#+end_quote
+
+At present we are using an yarn JSON format to supply Dogen the system
+libraries. However, there is nothing stopping us from having a
+full-blown JSON frontend useful for code generation. For this we need:
+
+- flag to state if its a target model or not;
+- ability to supply external module path;
+- ability to supply all of the missing information for yarn types
+  (properties for object, stereotypes, enumerations, etc).
+
+In order to test this we could generate a model from both Dia and JSON
+and make sure we arrive at the same yarn.
+
+As part of this work we probably need to create a new stage in the yarn
+pipeline where we populate:
+
+- inheritance related properties (is_parent, leaves, is_final)
+
+We need to look at the dia to sml transformer and see what it is doing
+that is also required by JSON and move it to yarn.
+
+We should have a look at the Boost Fusion approach:
+
+- [[http://jrruethe.github.io/blog/2015/05/21/boost-fusion-json-serializer/][Boost Fusion JSON Serialiser]]
+
+*** Integration of stitch and dogen                                   :story:
+
+Now that we have implemented stitch and proved it works (more or
+less), we need to think how we can make using stitch from dogen
+easier. At present there is not integration at all:
+
+- users need to create regexes to ensure dogen does not trample on
+  stitch files:
+
+:    --ignore-files-matching-regex .*stitch
+:    --ignore-files-matching-regex .*_stitch.hpp
+:    --ignore-files-matching-regex .*_stitch.cpp
+
+- users need to manually create a header file for each stitch
+  template.
+- users need to create stitch targets and run them to ensure the
+  templates have been expanded. This means its possible to get dogen
+  and stitch out of sync (but for now not a big problem).
+
+In the ideal world, when we knit a model it would be nice if it could
+also stitch as required. This could be achieved as follows:
+
+- Create a meta-data tag that tells dogen a type has an associated
+  stitch template with it.
+- Create =cpp= types that represent the stitch header and
+  implementation.
+- Transformer needs to look for the meta-data tag and instantiate the
+  =cpp= types.
+- Create a =cpp= formatter for the header, as per regular
+  formatters. The slight challenge here is that the formatter needs to
+  be instantiable across facets, which we do not support at the
+  moment.
+- Create a cpp formatter for the implementation which instantiates
+  stitch with the template and uses it to create a file. Same
+  challenge as with the header.
+
+*Previous Understanding*
+
+- stitch can still be integrated with dogen. We could use meta-data to
+  link a formatter (well, any class that needs stitch really, but at
+  present just a formatter) with a stitch template. For example, a
+  =class_header_formatter= could have a "is stitchable" flag set to
+  on. This would then mean that dogen would look for a
+  =class_header_formatter.stitch= file in the same directory as the
+  CPP file. It would then use that to create a
+  =class_header_formatter_stitch.cpp= file. It would also
+  ignore/generate a =class_header_formatter_stitch.hpp= file and
+  automatically add it to the inclusion dependencies of
+  =class_header_formatter.cpp=. These are injected into stitch as we
+  instantiate the template since stitch supports meta-data (we do need
+  a way to inject the meta-data from dogen into the meta-data in the
+  template; perhaps a kvp container passed in to the stitch workflow
+  which could then be handed over to the parser). All these files are
+  automatically added to the list of "exceptions" for housekeeping so
+  that they do not get deleted. However, stitch would not know
+  anything at all about any of this; this is all knitter's
+  functionality. The problem is at present we haven't got a good place
+  to perform the stitching as part of knitter's workflows. Perhaps as
+  part of the expansion, we could set a number of stitch fields which
+  would then be picked up by some knit-specific workflow classes.
+
+*** Rename hash and serialization facets                              :story:
+
+We originally called our support for =std::hash= just =hash= and our
+support for =boost::serialization= just =serialization=. The problem
+is:
+
+- we may want to also support =boost::hash=.
+- we may want to support other serialisation types.
+
+We should rename these. Perhaps:
+
+- =std_hash=
+- =boost_serialization=: a tad verbose, but quite explicit.
+
+*** Do not copy models in merger                                      :story:
+
+At present we are adding the partial models into the merger by copying
+them into an associative container. It would be nicer to avoid the
+copying as it adds no value. This should wait until we have a way to
+get performance numbers out.
+
+In fact do we even need to have a two step process? Can we not add and
+merge as we go along.
+
 *** Add top-level module names to yarn                                :story:
 
 In a couple of places we are computing the top-level modules. We
@@ -60,16 +574,6 @@ the majority of cases, we have traits just to access the fields. But
 there are a few cases where we use traits for other purposes such as
 formatter naming.
 
-*** Consider adding enumerations in dynamic                           :story:
-
-This story is bound to already exist in backlog so do another
-search. The idea is that we should be able to define a field and all
-of its valid values. For extra bonus points, we should be able to
-assign an enumeration and get the string conversion done
-automatically; for example by having a string to enum code generated,
-and supplying that function as a type parameter into dynamic. Then
-dynamic's field selector would create the instances of the enumeration.
-
 *** Consider using indices rather than associative containers         :story:
 
 Once we generate the final model the model becomes constant; this
@@ -104,7 +608,7 @@ make sense for every yarn type. Thus this is less applicable, at least
 for formatter properties. We need to look carefully at all use cases
 and see if there is any place where this approach is applicable.
 
-*** Handle "special includes" correctly                               :story:
+*** Handle "special includes" correctly                     :reviewing:story:
 
 We did a quick hack to handle "special includes": we simply "detected"
 them in include builder and then did the appropriate action in each of
@@ -560,47 +1064,6 @@ At present we are writing files with names like:
 
 : dogen.stitcher...log
 
-*** Remove =service= stereotype                                       :story:
-
-This really just means non-generatable, or do not generate. We already
-have a stereotype for this. Remove =service= and any other stereotype
-which is not being used such as =value_object= etc.
-
-Actually, non-generatable is not a stereotype really. We should
-instead have some meta-data that can affect generation:
-
-- do not generate: do nothing at all. For references only. If a file
-  exists with this file name, it will be deleted as part of
-  housekeeping.
-- generate blank file if it doesn't exist: we don't even want a
-  template.
-- generate with content if it doesn't exist, do not touch otherwise:
-  what we call services at the moment. Generate a "template" that then
-  gets filled in manually.
-- generate and merge: merge the contents of the generated file with
-  the current contents in the file system. When we support merging.
-- generate and overwrite: generate the file and overwrite whatever
-  exists in the file system.
-
-This could be called "generation policy".
-
-The second behaviour we get for free with services is that we disable
-all facets except for types. A few points:
-
-- we may want to have io, serialisation, etc. This is not possible at
-  present. If a state of a service is made up of supported types, we
-  could even use existing code generation.
-- in order for this to be implemented correctly we need to hook in to
-  the enablement management somehow. In addition, it seems each facet
-  can have its own generation policy. For example we may want to
-  manually create types but automatically generate io.
-- the best way to handle this may be to setup "enablement profiles"
-  that the user can hook up to. For example we could have a "default"
-  profile that enables all facets (or uses facet defaults), a second
-  "service" profile that enables types with partial generation and io
-  with full generation and so on. We probably also need "generation
-  profiles" to go with "enablement profiles".
-
 *** ODB options file is generated to incorrect location               :story:
 
 Models with composite names seem to have their ODB options file
@@ -644,60 +1107,6 @@ should be added to the registrar or not. In =generalisation_indexer=:
 One way would be to check if serialisation is enabled for that type
 and if not, skip the type.
 
-*** Refactor code around model origination                            :story:
-
-- remove origin types and generation types, replacing it with just a
-  boolean for is target. Actually we need something like:
-  proxy_reference, non_proxy_reference, target. We also need a good
-  name for this enumeration.
-- at present we are using origin type to determine whether to create a
-  registrar, etc in cpp model. There is no other use case for
-  this. This is done in several places due to the bad handling of C++
-  specific types. Grep for =references= in =cpp= to find all
-  locations. We could split references into two (dogen, non-dogen). Or
-  references could have a origin type too.
-- we should also replace has generatable types with something more
-  like "target model has types" or "is target model empty". The idea
-  we are trying to capture is that the target model contained at least
-  one type. This could be set by the merger when it processes the
-  target model.
-
-*Previous Understanding*
-
-In the past we added a number of knobs around generation, all with
-their own problems:
-
-- =origin_types=: was the model/type created by the user or the
-  system. in reality this means did the model come from Dia or
-  JSON. this is confusing as the user can also add JSON files (their
-  own model library) and in the future the user can use JSON
-  exclusively without needed Dia at all.
-- =generation_types=: if the model is target, all types are to be
-  generated /unless/ they are not properly supported, in which case
-  they are to be "partially" generated (as is the case with
-  services). This is a formatter decision and yarn should not know
-  anything about it. Actually this is not quite true; users may want
-  to stop generation.
-
-These can be replaced by a single enumeration that indicates if the
-type/model is target or not.
-
-This work should be integrated with the model types story.
-
-Merged stories:
-
-*Split references into dogen and non-dogen models*
-
-If we had two containers of references, one for dogen models and
-another one for non-dogen models - which we could give a nice name, to
-imply its foreign origin - we could then use the dogen references for
-registrar, etc. This is a replacement for the origin type.
-
-We need a good name for these. Candidates:
-
-- proxy model: represents something that exists in the outside
-  world. e.g. =is_proxy=.
-
 *** Helper methods should have their own includes                     :story:
 
 When a formatter relies on the helper methods, we have a problem: we
@@ -728,14 +1137,6 @@ At present its only possible to specify a single copyright holder. It
 should be handled the same was as odb parameters, but because that is
 done with a massive hack, we are not going to extend the hack to
 copyright holders.
-
-*** Update copyright notices                                          :story:
-
-We need to update all notices to reflect personal ownership until DDC
-was formed, and then ownership by DDC.
-
-- first update to personal ownership has been done, but we need to
-  test if multiple copyright entries is properly supported.
 
 *** Filter out unused types from final model                          :story:
 
@@ -980,68 +1381,10 @@ Update:
 - inclusion dependencies factory
 - provider container
 
-*** Implement all formatter interfaces                                :story:
-
-We still have a couple of skeleton interfaces:
-
-- primitve
-- concepts
-
-*** Do not compute inclusion directives for system models             :story:
-
-It seems we are computing inclusion directives and other path
-derivatives for system models:
-
-: {
-:   "__type__": "dogen::cpp::expansion::path_derivatives",
-:   "file_path": "/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../test_data/all_primitives/actual/std/include/std/serialization/unique_ptr_fwd_ser.hpp",
-:   "header_guard": "STD_SERIALIZATION_UNIQUE_PTR_FWD_SER_HPP",
-:   "inclusion_directive": "<quote>std/serialization/unique_ptr_fwd_ser.hpp<quote>"
-: }
-
-This comes out of the workflow, so we possibly are then ignoring it
-for the non-target types. So:
-
-- can we avoid computing these altogether?
-- are we ignoring it?
-
-Actually this is the usual problem with the "origin" of the type. We
-need a way to determine if this type needs computations or not. We
-need to create a story to clean up the =origin_type= and
-=generation_type= and then we can make use of it to determine if we
-need to compute inclusion, path etc or not.
-
 *** Header guard in formatters should be optional                     :story:
 
 At present we are relying on empty header guards to determine what to
 do in boilerplate. We should use boost optional.
-
-*** Consider renaming registrar in boost serialisation                :story:
-
-At present we have a registrar formatter that does the boost
-serialisation work. However, the name =registrar= is a bit too
-generic; we may for example add formatters for static registrars. We
-should rename this formatter to something more meaningful. Also the
-name registrar is already well understood to mean static registrar.
-
-This is a big problem now that we cannot add a type with the name
-registrar to the main model as it clashes with the serialisation
-registrar.
-
-We could simply name it serialisation registrar or some such name that
-is very unlikely to clash. We should then have a validation rule that
-stops users from defining types with that name.
-
-We need to go through all of the renamed registrars and fix them.
-
-Another option is to allow users to supply a name via meta-data to
-avoid name clashes. We could error when the user has defined a type.
-
-Actually, since the clash is only internal - the names we are
-generating on the fly are clashing with the user defined names - we
-should probably have a "postfix" that can be added in case of
-clashes. The generated code will not cause problems, its just the
-formattables pipeline.
 
 *** Create more "utility" members for formatters                      :story:
 
@@ -1055,30 +1398,6 @@ to stem from. For example:
 
 could be replaced with =has_swap=, or perhaps even =has_public_swap= /
 =has_protected_swap=.
-
-*** Identifier parser has hard-coded primitives                       :story:
-
-Instead of using the hardware model, we have hard-coded all of the
-primitives. In addition, there are some primitives which are C++
-specific (=wchar_t=), as well as others which are only valid in
-certain cases such as =void=. This needs a bit of thinking.
-
-We could look for all primitives in the global namespace. Or we could
-have a tag in the types that describes them in a way that we can
-filter: =hardware_type= flag? The problem is that we need the
-identifier parser in order to load models and we need the loaded
-models in order to locate these types.
-
-One solution for this problem is to move the properties expansion to
-later on after the front end workflow has finished executing. Once we
-have a merged model we can then easily take the primitives container
-and inject that into the identifier parser. The only slight problem is
-that we need to know of the top-level modules for a given model in
-order to use the identifier parser. This means we need to expand
-unparsed types before merging. There is a circular dependency here.
-
-We somehow need a first pass to obtain all the primitives and a second
-pass to parse.
 
 *** Use pointer container in registrars                               :story:
 
@@ -1094,13 +1413,6 @@ places. Most of these exist because of hacks but it still seems that
 it needs to be done in more than one place. We should consider
 something like we had in =sml_to_cpp::locator= that is initialised
 with the path settings and can then be used to create paths.
-
-*** Remove intermediate fields from dynamic                           :story:
-
-With the previous approach we had fields in dynamic that were
-generated within dogen; we now should only have fields that are set
-from the outside world. Remove all of the fields that are not supposed
-to be settable from the outside world. At present this just file path.
 
 *** Add support for formatter and facet dependencies                  :story:
 
@@ -1129,82 +1441,11 @@ where we are using "group" we probably mean "set" since there is no
 associated operation with the set; it is merely a way of gathering
 elements.
 
-*** Supply model references via meta-data rather than command line    :story:
-
-It doesn't make any sense to have model dependencies in the command
-line. After all, the model cannot be interpreted without them. A
-better way to do this would be to split this functionality into two:
-
-- command line supplies "import directories", that is, directories
-  to search when looking for models. By default the system directory
-  is already in the path.
-- model supplies "import statements". The problem here is that we need
-  to also supply the file name of the model. We could perhaps omit the
-  extension and then load all files that match (e.g. =.dia=, =.json=,
-  etc). If more than one matches we should error. Actually we should
-  just supply the full filename, as well as keep the current notation
-  for the external project path.
-
-This is also a nice way to avoid loading system models unnecessary;
-users still need to declare the models they depend on, regardless if
-system or user.
-
-Each model should also supply the external module path as meta-data.
-
-Merged stories
-
-*External module path and references as meta-data*
-
-It actually does not make a lot of sense to allow users to supply
-external module paths and references as command line options. This is
-because the model will fail to build unless we provide the correct
-ones; these are not configurable items in this sense. The project
-path, etc are - and so should remain command line options.
-
-We need to move these two into the meta-data. This would also mean we
-no longer need to pass in external module paths for references, which
-is much cleaner.
-
 *** Consider generating the diagram targets from files in directory   :story:
 
 Once references are supplied as meta-data, we could conceivably create
 a loop in CMake to generates all of the knitting targets based on the
 contents of the diagrams directory.
-
-*** Duplicate fields in JSON result in non-intuitive errors           :story:
-
-By mistake we added the same field twice in JSON:
-
-:            "extensions" : {
-:                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree.hpp>",
-:                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree_serialization.hpp>",
-:                "cpp.io.class_header_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
-:                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
-:                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
-:                "cpp.hash.class_header_formatter.inclusion_required" : false
-
-The resulting error message was not particularly helpful:
-
-: 2015-06-17 13:56:06.658500 [DEBUG] [sml.json_hydrator] Processing type: <boost><property_tree><ptree>
-: 2015-06-17 13:56:06.658519 [ERROR] [dynamic.field_instance_factory] Expected at most one element
-
-*** Formatters with duplicate names result in non-intuitive errors    :story:
-
-We added two formatters to io with the same name by mistake and the
-resulting error was not particularly enlightening:
-
-: std::exception::what: Qualified name defined more than once: cpp.io.enum_header_formatter.inclusion_required
-
-We should have a very early on validation to ensure formatters have
-distinct names.
-
-Merged stories:
-
-*Check for duplicate formatter names in formatter registrar*
-
-At present it is possible to register a formatter name more than
-once. Registrar should keep track of the names and throw if the name
-is duplicated.
 
 *** Top-level "inclusion required" should be "tribool"                :story:
 
@@ -1229,26 +1470,6 @@ meta-data. The only way would be to convert the top-level
 
 We need to figure out how to implement this. For now we are manually
 adding flags.
-
-*** Formatters should return an optional file                         :story:
-
-In some cases the formatter may decide that it does not need to create
-a file. The only use case we have is the =namespace_info= where if
-there is no documentation one does not want to create a formatter. At
-present we filter out empty namespaces in the formatters' workflow,
-but this is not very clean because it now means the workflow needs to
-know about the formatter's logic.
-
-This would also make things cleaner for the services hack where we do
-not want to generate services for now.
-
-Note that we do not need to change the stitch templates for this; the
-decision is done before we call the template.
-
-Tasks:
-
-- change formatter interfaces to return =boost::optional<file>=
-- change all formatters.
 
 *** Improve container details in JSON dump                            :story:
 
@@ -1300,41 +1521,6 @@ with:
 
 As per stitch template.
 
-*** Formatters need different =enabled= defaults                      :story:
-
-We should be able to disable some formatters such as forward
-declarations. Some users may not require them. We can do this using
-dynamic extensions. We can either implement it in the backend or make
-all the formatters return an =std::optional<dogen::formatters::file>=
-and internally look for a =enabled= trait.
-
-We need to be able to distinguish "optional" formatters - those that
-can be disabled - and "mandatory" formatters - those that cannot. If a
-user requests the disabling of a mandatory formatter, we must
-throw. This must be handled in enabler.
-
-This story was merged with a previous one: Parameter to disable cpp
-file.
-
-#+begin_quote
-*Story*: As a dogen user, I want to disable cpp files so that I don't
-generate files with dummy content when I'm not using them.
-#+end_quote
-
-It would be really useful to define a implementation specific
-parameter which disables the generation of a cpp file for a
-service. This would stop us from having to create noddy translation
-units with dummy functions just to avoid having to define exclusion
-regexes.
-
-In some cases we may need a "enable by usage". For example,
-it would be great to be able to enable forward declarations only for
-those types for which we required them. Same with hash. We can detect
-this by looking at the generated include dependencies. However,
-because the include dependency only has a directive, we cannot tell
-which formatter it belonged to. This would require some augmenting of
-the directive to record the "origination" formatter.
-
 *** Create the =needle= library                                       :story:
 
 We need to create a library with support code that is used by the
@@ -1345,41 +1531,6 @@ using templates.
 For the previous attempt to create the needle library see this commit:
 
 feb4750 * integration needle: remove project and includes
-
-*** Consider using a proper JSON library                              :story:
-
-We could use a full-blow JSON parser rather than the property tree
-one. One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
-
-Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
-
-Actually there is a project comparing JSON libraries:
-
-[[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]
-
-One interesting library is [[https://github.com/dropbox/json11][Json11]].
-
-When we implement this we should first provide support for JSON with
-roundtripping tests and only then change io to be implemented in terms
-of JSON. These should be two totally separate stories.
-
-For the previous attempt to integrate RapidJson see this commit:
-
-b2cce41 * third party: remove includes and rapid json
-
-Merged stories:
-
-Add support for JSON serialisation
-
-We should have proper JSON serialisation support, for both reading and
-writing. We can then implement IO in terms of JSON.
-
-*Raw JSON vs cooked JSON*
-
-If we do implement customisable JSON serialisation, we should still
-use the raw format in streaming. We need a way to disable the cooked
-JSON internally. We should also re-implement streaming in terms of
-this JSON mode.
 
 *** Consider changing fields where "qualified name" is not qualified  :story:
 
@@ -1538,72 +1689,6 @@ story in backlog.
 :      utility_.open_scope();
 :      {
 
-*** Consider removing the overwrite flag in =formatters::file=        :story:
-
-Investigate if the overwrite flag makes sense in file; it seems we
-only use it in two scenarios: force overwrite requested by user or
-file contents have changed, both of which can be done in the
-file_writer.
-
-Actually this flag is needed. It is required to handle the case where
-we do not code-generate files, unless they do not exist. For example,
-for service headers and implementation we should create the files, but
-then subsequently not touch them. The overwrite flag should be set to
-false. We need to figure out how to implement this and remove the
-hacks around file writing.
-
-For now we have abused this flag to allow legacy files overrides of
-the new world formatters. This is just until we move totally to new
-world though.
-
-*** Indent stitch output using clang format                           :story:
-
-We need to indent the output coming out of stitch as it is not
-suitable for reading as-is.
-
-This article has a good example of how to consume clang, but
-unfortunately its not about indenting:
-
-- [[https://bbannier.github.io/blog/2015/05/02/Writing-a-basic-clang-static-analysis-check.html][Writing a basic clang static analysis check]]
-- [[http://zed0.co.uk/clang-format-configurator/][clang-format configurator]]
-- [[http://clangformat.com/][online clang format]] - older site
-
-*** Use clang format in knit                                          :story:
-
-We need to indent the output coming out of knit. At present our stitch
-templates are super-complex purely because we are trying to get the
-indentation right. In most cases we don't. We need to:
-
-- remove indent filter and any other indentation "helpers"
-- update all templates to output everything as simply as possible, in
-  one long line if need be. We may still need to use sequence helper
-  but hopefully for very trivial cases.
-- plug in clang format at the end of the knit pipeline, using either a
-  default set of options or a user supplied set of options (via a
-  command line parameter).
-
-Merged with other story:
-
-We should generate un-indented c++ code and then rely on clang-format
-to do the indentation. We can allow users to supply their own
-configurations and supply those to clang. This can be done via the
-meta-data, or if there is a well defined file for clang, we could use
-it instead.
-
-Note that using clang to manage indentation will make things a lot
-slower. Note also that clang supports Java and may in future support
-C#. See [[http://clang.llvm.org/docs/LibFormat.html][LibFormat]].
-
-Another option is to create fallback modes. The preferred indenter for
-a given language (say c++) may not exist for another language (say
-c#); for these we use a dogen created indenter that is very basic. It
-may support some of the configuration parameters supplied for the
-clang indenter. The key thing is that we take away indenting from the
-formaters - they become flat - and then we always apply the indenter;
-either a clang based one or a simplified one. Either way, the code
-should live in formatters and make use of the language-specific
-folders as required.
-
 *** Rename sequence formatter                                         :story:
 
 The =sequence_formatter= is actually not a formatter, but a helper or
@@ -1718,6 +1803,18 @@ Some other tidbits:
   applied in the order provided by the user, with the exception of
   root.
 
+*** Consider adding support for formatter tagging                     :story:
+
+At present there is a presumption that if a formatter belongs to say
+=types= it cannot belong to any other facet. This means facets are
+used purely for hierarchical purposes. However, in certain cases it
+may make sense to "tag" or "label" formatters. For example, we may
+need to know of all header or implementation files; or of all build
+files, or of all files that belong to the main class, and so
+forth. For this tags are more appropriate. We have started to hack
+things slightly (such as =file_types=) but a generic solution for this
+would be preferable.
+
 *** Read =generate_preamble= from dynamic object                      :story:
 
 We need to generate the field definitions and update the general
@@ -1796,6 +1893,30 @@ The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
 
+*** Consider adding enumerations in dynamic                           :story:
+
+This story is bound to already exist in backlog so do another
+search. The idea is that we should be able to define a field and all
+of its valid values. For extra bonus points, we should be able to
+assign an enumeration and get the string conversion done
+automatically; for example by having a string to enum code generated,
+and supplying that function as a type parameter into dynamic. Then
+dynamic's field selector would create the instances of the enumeration.
+
+Previous stories:
+
+*Create a domain field definitions*
+
+In addition to default values, it should be possible to supply a list
+of possible values for a field definition - a domain. When processing
+the values we can then check that it is part of the domain and if not
+throw. This is required for the include types and for the family
+types. At present this is only applicable to string fields.
+
+In this sense, =boolean= is just a special case where the list is know
+up front. We should re-implement =boolean= this way. Possibly even add
+synonyms (e.g. =true=, =false=, =0=, =1=)?
+
 *** Consider allowing renaming of "internal" types                    :story:
 
 Users may want to change the =_visitor= postfix for visitors or the
@@ -1833,24 +1954,6 @@ Originally we used the =*_info= types in the canned tests, but these
 are all about to be removed. We need to hunt for types in the
 =quilt::cpp= model and add those to the canned tests.
 
-*** Consider renaming includers                                       :story:
-
-Its very confusing to have header files that include lots of other
-header files called "includers". There is too much overloading. We
-should consider calling them "master header files" as per Schaling
-terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
-
-*** Tidy-up master include generation                                 :story:
-
-At present we have one humongous hack in the factory to generate the
-master includers. How to do this properly:
-
-- wait until we start using yarn types.
-- loop through the yarn model instead of the path derivatives.
-- use a visitor to dispatch the types.
-- do not filter out services?
-- filter registrars etc based on type dispatching.
-
 *** Create a UML profile to formalise yarn concepts                    :epic:
 
 Profile should include the hashable, etc changes.
@@ -1873,19 +1976,6 @@ See also [[http://www.uml-diagrams.org/][The Unified Modeling Language]] for a m
 treatment.
 
 See [[http://www-01.ibm.com/support/knowledgecenter/SS5JSH_9.1.2/com.ibm.xtools.transform.uml2.cpp.doc/topics/rucppprofile.html][Stereotypes of the UML-to-C++ transformation profile]] for ideas.
-
-*** Consider adding =fileset= to formatters                           :story:
-
-We are using collections of files quite a bit, and it makes sense to
-create an abstraction for it such as a =fileset=. However, for this to
-work properly we need to add at least one basic behaviours: the
-ability to merge two file sets. Or else we will end up having to
-unpack the files, then merging them, then creating a new fileset.
-
-Problem is, we either create the fileset as a non-generatable type -
-not ideal - or we create it as generatable and need to add this as a
-free function. We need to wait until dogen has support for merging
-code generation.
 
 *** Add support for Language Agnostic Models (LAM)                    :story:
 
@@ -1931,37 +2021,6 @@ between languages. This could be done as follows:
 FIXME: we believed this story was already backloged but could not find
 it on a quick search. Do a more thorough search.
 
-*** Make JSON yarn a fully supported frontend                          :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to be able to write my domain models
-in JSON since I don't have any need for UML visualisation.
-#+end_quote
-
-At present we are using an yarn JSON format to supply Dogen the system
-libraries. However, there is nothing stopping us from having a
-full-blown JSON frontend useful for code generation. For this we need:
-
-- flag to state if its a target model or not;
-- ability to supply external module path;
-- ability to supply all of the missing information for yarn types
-  (properties for object, stereotypes, enumerations, etc).
-
-In order to test this we could generate a model from both Dia and JSON
-and make sure we arrive at the same yarn.
-
-As part of this work we probably need to create a new stage in the yarn
-pipeline where we populate:
-
-- inheritance related properties (is_parent, leaves, is_final)
-
-We need to look at the dia to sml transformer and see what it is doing
-that is also required by JSON and move it to yarn.
-
-We should have a look at the Boost Fusion approach:
-
-- [[http://jrruethe.github.io/blog/2015/05/21/boost-fusion-json-serializer/][Boost Fusion JSON Serialiser]]
-
 *** Protect against double-initialisation                             :story:
 
 We need to look into static initialisation and make sure the code can
@@ -1975,67 +2034,6 @@ into the initialisers. At present we are calling the static methods
 directly. This is not ideal, because just like with singletons, we are
 hiding the dependencies. We should really pass the registrars in the
 initialise function so we can see the dependencies at the top-level.
-
-*** Integration of stitch and dogen                                   :story:
-
-Now that we have implemented stitch and proved it works (more or
-less), we need to think how we can make using stitch from dogen
-easier. At present there is not integration at all:
-
-- users need to create regexes to ensure dogen does not trample on
-  stitch files:
-
-:    --ignore-files-matching-regex .*stitch
-:    --ignore-files-matching-regex .*_stitch.hpp
-:    --ignore-files-matching-regex .*_stitch.cpp
-
-- users need to manually create a header file for each stitch
-  template.
-- users need to create stitch targets and run them to ensure the
-  templates have been expanded. This means its possible to get dogen
-  and stitch out of sync (but for now not a big problem).
-
-In the ideal world, when we knit a model it would be nice if it could
-also stitch as required. This could be achieved as follows:
-
-- Create a meta-data tag that tells dogen a type has an associated
-  stitch template with it.
-- Create =cpp= types that represent the stitch header and
-  implementation.
-- Transformer needs to look for the meta-data tag and instantiate the
-  =cpp= types.
-- Create a =cpp= formatter for the header, as per regular
-  formatters. The slight challenge here is that the formatter needs to
-  be instantiable across facets, which we do not support at the
-  moment.
-- Create a cpp formatter for the implementation which instantiates
-  stitch with the template and uses it to create a file. Same
-  challenge as with the header.
-
-*Previous Understanding*
-
-- stitch can still be integrated with dogen. We could use meta-data to
-  link a formatter (well, any class that needs stitch really, but at
-  present just a formatter) with a stitch template. For example, a
-  =class_header_formatter= could have a "is stitchable" flag set to
-  on. This would then mean that dogen would look for a
-  =class_header_formatter.stitch= file in the same directory as the
-  CPP file. It would then use that to create a
-  =class_header_formatter_stitch.cpp= file. It would also
-  ignore/generate a =class_header_formatter_stitch.hpp= file and
-  automatically add it to the inclusion dependencies of
-  =class_header_formatter.cpp=. These are injected into stitch as we
-  instantiate the template since stitch supports meta-data (we do need
-  a way to inject the meta-data from dogen into the meta-data in the
-  template; perhaps a kvp container passed in to the stitch workflow
-  which could then be handed over to the parser). All these files are
-  automatically added to the list of "exceptions" for housekeeping so
-  that they do not get deleted. However, stitch would not know
-  anything at all about any of this; this is all knitter's
-  functionality. The problem is at present we haven't got a good place
-  to perform the stitching as part of knitter's workflows. Perhaps as
-  part of the expansion, we could set a number of stitch fields which
-  would then be picked up by some knit-specific workflow classes.
 
 *** Path derivatives factory generates all possible includes          :story:
 
@@ -2109,18 +2107,6 @@ a check there.
 The name builder is just a factory so make the name reflect it.
 
 Actually, we don't just build names either.
-
-*** Create a domain field definitions                                 :story:
-
-In addition to default values, it should be possible to supply a list
-of possible values for a field definition - a domain. When processing
-the values we can then check that it is part of the domain and if not
-throw. This is required for the include types and for the family
-types. At present this is only applicable to string fields.
-
-In this sense, =boolean= is just a special case where the list is know
-up front. We should re-implement =boolean= this way. Possibly even add
-synonyms (e.g. =true=, =false=, =0=, =1=)?
 
 *** Hydrators provide no context when errors occur                    :story:
 
@@ -2478,12 +2464,6 @@ Presumably the errors are not fatal as code generation still
 works. Investigate the errors and tidy-up the log. Since the errors
 are not fatal we should at least downgrade them to warnings.
 
-*** Add tests for cpp's =name_builder=                                :story:
-
-Name builder is responsible for converting a nested qualified name
-into a C++ representation. We need some basic tests around this class
-with different composition scenarios.
-
 *** Add tests for =general_settings_factory=                          :story:
 
 Tests:
@@ -2493,20 +2473,6 @@ Tests:
 - empty marker
 - different marker for two objects
 - consider moving generate preamble into annotation
-
-*** Rename hash and serialization facets                              :story:
-
-We originally called our support for =std::hash= just =hash= and our
-support for =boost::serialization= just =serialization=. The problem
-is:
-
-- we may want to also support =boost::hash=.
-- we may want to support other serialisation types.
-
-We should rename these. Perhaps:
-
-- =std_hash=
-- =boost_serialization=: a tad verbose, but quite explicit.
 
 *** Feature models should always be tested by knit                     :epic:
 
@@ -2597,40 +2563,6 @@ PROFILE. Not sure what priority it would be at.
 We should also be able to get a command-line report, e.g. =--profile=
 would show all the timings for all the components.
 
-*** Consider renaming formatters                                      :story:
-
-After reading the [[http://martinfowler.com/eaaDev/PresentationModel.html][Presentation Model]] pattern a bit more carefully, it
-seems it provides a good approach for formatters. If one thinks of the
-file as the view, then the formatters are the presenters and the model
-representing all presentation logic (e.g. =cpp=) is the presentation
-model. We could:
-
-- create a top-level folder called =presentation=;
-- rename =formatters= to =core= and move it to =presentation=;
-- move =cpp= to =presentation=;
-- in =cpp=:
-  - rename =formattables= to =presentables=;
-  - rename =formatters= to =presenters=;
-- in this light, =backend= is really the "meta-workflow" for all
-  possible presentations. It should really live under presentation. It
-  would make more sense to merge it with =core=, if it were not that
-  core contains all sorts of loose bits that are useful only in the
-  guts of presentation. We could call it =orchestration= or some such
-  name. Or we could leave it as =presentation::backends=.
-- move =file= to =backends=. We don't really want external clients to
-  have to know about =core= just to obtain a single type. Also,
-  backends shouldn't really have any dependencies.
-- grep for formatting, formattables, formatter, format, etc. and
-  ensure all usages have been replaced with present*.
-
-We should wait until the "great refactoring" is done so that we do not
-have to rename the legacy models too.
-
-*Merged with duplicate*
-
-These are not really formatters; not sure what the right name should
-be though; templates?
-
 *** Canned tests rely on copy constructors rather than cloning        :story:
 
 If an object has pointers, the canned tests will not perform a deep
@@ -2706,10 +2638,6 @@ We need a =is_floating_point_like= method to be able to distinguish
 between them, and then the associated changes in the generators to
 create floating point numbers.
 
-*** System models set meta-type to =invalid=                          :story:
-
-Something is not quite right on the resolution logic
-
 *** Create different kinds of master header files                     :story:
 
 #+begin_quote
@@ -2737,13 +2665,6 @@ master header files:
 *Story*: As a dogen user, I want to create master header files for
 user defined sets of files so that I don't have to do it manually.
 #+end_quote
-
-*** Do not copy models in merger                                      :story:
-
-At present we are adding the partial models into the merger by copying
-them into an associative container. It would be nicer to avoid the
-copying as it adds no value. This should wait until we have a way to
-get performance numbers out.
 
 *** Adding linking libraries is not handled                           :story:
 
