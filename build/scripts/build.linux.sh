@@ -27,16 +27,16 @@ shift
 if [[ "x${compiler}" = "x" ]]; then
     compiler="gcc";
     echo "* Compiler: ${compiler} (default)"
-else
+    export CC=gcc-6
+    export CXX=g++-6
+elif [ "${compiler}" = "gcc" ]; then
     echo "* Compiler: ${compiler}"
-fi
-
-if [ "${compiler}" = "gcc" ]; then
-    export CC=gcc-5
-    export CXX=g++-5
+    export CC=gcc-6
+    export CXX=g++-6
 elif [ "${compiler}" = "clang" ]; then
-    export CC=clang-3.7
-    export CXX=clang++-3.7
+    echo "* Compiler: ${compiler}"
+    export CC=clang-3.8
+    export CXX=clang++-3.8
 else
     echo "* Unrecognised compiler: ${compiler}"
     exit
