@@ -88,3 +88,13 @@ deploy:
     tags: true
     branch: master
     condition: "${DEPLOY} = 1"
+
+deploy:
+  provider: bintray
+  file: "build/scripts/bintray.json"
+  user: mcraveiro
+  key:
+    secure: IrFRrzzMnnFzj2s2hYctnvMjTf7HRe5uQVPcioAjbuNrxXX5XYmRH6ce8osxoRhcpQYS9ppCmrt8VbRBB57piWS3yKfM6WftDrmNQil7XwqowKAKm/VuX6K5psjJHRCYoNUAovwvfLmaLIWvVd+I+NkU48EXvflClXx13Qp8GtU=
+  on:
+    branch: master
+    condition: "${DEPLOY} = 1"
