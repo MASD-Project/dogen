@@ -18,8 +18,8 @@ fi
 
 # g++
 if [ "$CXX" = "g++" ]; then
-    sudo apt-get install -qq g++-5
-    export CXX="g++-5" CC="gcc-5" GCOV="gcov-5"
+    sudo apt-get install -qq g++-6
+    export CXX="g++-6" CC="gcc-6" GCOV="gcov-6"
 fi
 
 # ninja
