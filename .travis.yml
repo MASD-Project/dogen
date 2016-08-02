@@ -73,6 +73,7 @@ notifications:
   webhooks:
     urls:
       - https://webhooks.gitter.im/e/db7439afa782608b5654
+      - https://buildtimetrend.herokuapp.com/travis
     on_success: always
     on_failure: always
 
