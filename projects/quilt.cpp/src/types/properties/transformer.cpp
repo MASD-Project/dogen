@@ -49,8 +49,6 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-transformer::transformer(const yarn::model& m) :  model_(m) {}
-
 void transformer::
 populate_formattable_properties(const yarn::name& n, formattable& f) const {
     f.identity(n.id());

@@ -132,7 +132,7 @@ std::forward_list<std::shared_ptr<properties::formattable> >
 workflow::from_transformer_activity(const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming properties.";
 
-    const transformer t(m);
+    transformer t;
     generator g(t);
     for (const auto& pair : m.elements()) {
         const auto& e(*pair.second);

@@ -52,9 +52,6 @@ namespace properties {
  * @brief Transforms an Yarn type into its corresponding C++ type.
  */
 class transformer {
-public:
-    explicit transformer(const yarn::model& m);
-
 private:
     /**
      * @brief Populates all properties at the properties base class level.
@@ -105,9 +102,6 @@ public:
      */
     std::forward_list<std::shared_ptr<formattable> >
     transform(const yarn::exception& e) const;
-
-private:
-    const yarn::model& model_;
 };
 
 } } } }
