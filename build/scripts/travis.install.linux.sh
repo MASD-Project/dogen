@@ -11,9 +11,9 @@ if [ "$CXX" == "clang++" ]; then
     sudo apt-get update -qq
 
     # clang 3.8
-    sudo apt-get install --allow-unauthenticated -qq clang-3.8
-    which clang-3.8
-    export CXX="clang++-3.8" CC="clang-3.8"
+    sudo apt-get install --allow-unauthenticated -qq clang-3.7
+    which clang-3.7
+    export CXX="clang++-3.7" CC="clang-3.7"
 fi
 
 # g++
