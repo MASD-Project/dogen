@@ -87,6 +87,7 @@ private:
         for (const auto& pair : source) {
             const auto& k(pair.first);
             const auto& v(pair.second);
+            // FIXME: we should move this check to validator.
             check_name(model_name, k, v.name(), v.in_global_module());
             destination.insert(pair);
         }
@@ -96,8 +97,6 @@ private:
     /**
      * @brief Ensure there is consistency between model name, key and
      * value.
-     *
-     * @note should be moved to validator.
      */
     void check_name(const name& model_name, const std::string& key,
         const name& value, const bool in_global_namespace) const;

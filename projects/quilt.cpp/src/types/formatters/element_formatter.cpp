@@ -116,6 +116,8 @@ public:
 public:
     using yarn::element_visitor::visit;
     void visit(const dogen::yarn::module& m) override {
+        // FIXME: hack. We should remove these from the pipeline
+        // earlier.
         if (m.documentation().empty())
             return;
 
