@@ -62,6 +62,7 @@ script:
   - sudo dpkg -i stage/pkg/dogen_*_amd64-applications.deb
   - cd /tmp
   - /usr/bin/dogen.knitter --version
+  - cd ${PROJECT}
 
 notifications:
   email:

@@ -5651,20 +5651,6 @@ Or is the best practice that the user should choose how to link
 against boost in the same way it chooses to generate static or dynamic
 libraries internally for Dogen?
 
-*** Add support for bintray                                           :story:
-
-There is a new web application that interfaces with GitHub:
-[[https://bintray.com/][bintray]].
-
-Notes:
-
-- an account was created [[https://bintray.com/mcraveiro][linked to GitHub]].
-- it supports the uploads of [[https://bintray.com/mcraveiro/deb][debs]].
-- [[https://bintray.com/docs/usermanual/uploads/uploads_howdoiuploadmystufftobintray.html][How Do I Upload My Stuff to Bintray?]]
-- [[https://github.com/tim-janik/beast][Beast]] project [[https://raw.githubusercontent.com/tim-janik/beast/master/README.md][README]] with emblems
-- Beast [[https://github.com/tim-janik/beast/blob/master/.travis.yml][travis.yml]]
-- [[https://github.com/tim-janik/rapicorn/blob/master/citool.sh.][citool.sh]] script from [[https://github.com/tim-janik/rapicorn][Rapicorn]] project and their [[https://raw.githubusercontent.com/tim-janik/rapicorn/master/README.md][README]].
-
 *** Resurrect CDash agents                                            :story:
 
 CDash has bitrotted and is no longer working.
