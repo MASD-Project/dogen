@@ -12,9 +12,8 @@
         "licenses": ["GPL3"],
         "labels": ["code generation"],
         "public_download_numbers": true,
-        "public_stats": true,
+        "public_stats": true
     },
-
     "version": {
         "name": "0.85.0",
         "desc": "Sprint 85",
@@ -25,7 +24,7 @@
 
     "files":
         [
-            {"includePattern": "build/output/Release/stage/pkg/*.deb" },
+            { "includePattern": "build/output/Release/stage/pkg/*.deb" }
         ],
     "publish": true
 }
