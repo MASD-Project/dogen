@@ -568,6 +568,12 @@ so it may be a candidate for code generation. All we need is:
 - a stitch template that registers the dynamic field definition;
   instead of JSON we can just generate c++ code to perform the
   injection.
+- we could also generate the repository and in most cases the
+  repository factory. The only case where this breaks down is when we
+  need to look at properties too.
+- we should have a number of knobs to control generation: a) generate
+  field injection b) generate settings factory c) generate repository
+  d) generate repository factory.
 
 We also need to merge the traits class directly into the factory. In
 the majority of cases, we have traits just to access the fields. But
@@ -1845,14 +1851,6 @@ At present we use the following form:
 
 We need to use the new naming style =cpp.odb.pragma=. We also need to
 rename the opaque_parameters to reflect ODB specific data.
-
-*** Rename =dia.comment=                                              :story:
-
-This field hasn't got a sensible name. We need to continue thinking
-about the right name for this - as we have already started doing with
-processed comment; =applicable_to_parent_object= is not quite the
-right name but it is moving on the right direction. Once we settle on
-a good name we need to rename all usages of =dia.comment=.
 
 *** Improve support for modules in JSON                               :story:
 
@@ -3518,43 +3516,6 @@ if thee is just one line, as is the case with enumerations, we do not
 want to add any new lines. This is because the stitch template will
 add new lines so we end up with too many of them.
 
-*** Consider adding support for inheritance via meta-data             :story:
-
-In certain cases it may not be possible to add all inheritance
-relationships in a diagram; this is the case with =formatters= in
-=cpp=. There are just too many classes implementing the
-=formatter_interface= and the diagram would become too messy if we
-added generalisation relationships for them all. This would also be
-the case with inheritance for exceptions.
-
-We got away with it because we are not generating these types, but one
-can imagine having the same problem with generatable types. It would
-be nice if one could add a meta-data parameter to the class to convey
-inheritance information, like so:
-
-: #DOGEN dia.parent=x.y.z
-
-The notation for the parent as well as the name of the tag need to be
-thought through.
-
-This means we can also inherit across models. See Allow cross model
-inheritance.
-
-*Bad Ideas*
-
-One very interesting way of doing this is via stereotypes. We could
-extend the meta-model with a stereotype called =TypeReference=. We
-would need support for qualified names as well, so for instance in
-model =a= one could declare a class called =b::c= with =TypeReference=
-and that would tell Dogen that this is not a new declaration of =c=
-but a reference to an existing declaration in model =a=. This would
-also make it clear from a UML perspective that inheritance is being
-used. The class =b::c= in model =a= would be empty.
-
-This is not a very good idea as it will just cause confusion and it
-will require machinery to place the type in the right point in element
-space..
-
 *** Consider adding a start and end dogen variable block in dia       :story:
 
 At present we defined a special market to find dogen kvp's in dia's
@@ -3981,16 +3942,6 @@ directory. This is not an easy undertaking because:
 
 We should create =production= and =test= sub-directories for diagrams.
 
-*** Include forward declaration in visitable types                    :story:
-
-There doesn't seem to be any good reason to include the full visitor
-header in visitable types - we should be able to get away with
-including only the forward declaration for the visitor.
-
-This is actually fairly important because every time we change the
-visitor template, we end up rebuilding 350-odd files for no
-reason. This wouldn't happen if we were using forward declarations.
-
 *** Investigate the integration of =boost::log= with throw exception  :story:
 
 At present we write a lot of code like this:
@@ -4294,35 +4245,6 @@ to add some constants at the namespace level. This is not possible
 with the current setup.
 
 This is related to merging multiple types in a single formatter.
-
-*** Allow cross model inheritance                                     :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to inherit types from existing models
-so that I can extend them.
-#+end_quote
-
-At present we can only inherit within the same model. This is a
-limitation of how to express inheritance in a Dia diagram - either the
-parent is part of that diagram or it is not, and if it's not we have
-no way of connecting the generalisation relationship to it.
-
-Having said that, it would actually be quite simple to allow cross
-model inheritance by using dynamic extensions:
-
-- create a field that forces a type to behave like a parent,
-  regardless of whether there are any children or not;
-- create a field that contains a qualified name of a parent,
-  regardless of whether it's in this model or not;
-- change the transformer to convert these fields into yarn inheritance
-  relationships.
-
-There may be some fallout in places where we assume that the
-descendents are all in this model such as serialisation, visitors.
-
-Now that we have =is_final= in yarn, we should check when adding cross
-model inheritance that the type we have inherited from is not
-final. This may just be part of the validator's work.
 
 *** Add support for inner classes                                     :story:
 
@@ -6849,6 +6771,11 @@ to create an interface, with multiple implementations:
 Users can then inherit from these visitors where appropriate
 (e.g. negative and default visitors). Each of these would have their
 own formatter.
+
+Actually we don't necessarily need visitor interfaces, but we need
+some knobs to control the kind of visitor we generate. We should also
+have a way to control the number of visitable methods generated (const
+visitor, mutable visitor etc).
 
 *** Add targets to output manual in downloadable formats              :story:
 

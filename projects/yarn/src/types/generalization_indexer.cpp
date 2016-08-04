@@ -142,7 +142,9 @@ populate(const generalization_details& d, intermediate_model& m) const {
         auto& o(i->second);
         o.leaves(pair.second);
 
-        // Sort the leaves to ensure stability.
+        /*
+         * Sort the leaves to ensure stability.
+         */
         o.leaves().sort();
 
         for (const auto& leaf : pair.second) {
