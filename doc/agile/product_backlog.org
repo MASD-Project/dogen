@@ -2889,13 +2889,6 @@ we need to disable CMake generation and do it by hand. However:
   model level. Also, references provide sufficient information to link
   against other dogen models.
 
-*** Consider not creating unversioned keys for single property        :story:
-
-If a key is made up of a single property, its a bit nonsensical to
-create an unversioned key. We should only generate the versioned
-key. However, it does make life easier. Wait for real world use cases
-to decide.
-
 *** Detect invalid child nodes in dia diagram                         :story:
 
 #+begin_quote
@@ -4896,7 +4889,7 @@ that I don't have to do this manually.
 We should have a clone method which copy constructs all non-pointer
 types, and then creates new objects for pointer types.
 
-*** Consider adding support for keys                                  :story:
+*** Consider adding support for keys                                   :epic:
 
 We had originally added some half-baked support for key
 generation. The basic idea is that users could mark certain properties
@@ -4910,6 +4903,21 @@ in the future.
 This was removed in 4ed3fbd.
 
 Merged stories:
+
+*Definition of Identity Attribute*
+
+:    {
+:        "name" : {
+:            "simple" : "identity_attribute",
+:            "qualified" : "yarn.dia.identity_attribute"
+:        },
+:        "ownership_hierarchy" : {
+:            "model_name" : "yarn.dia"
+:        },
+:        "value_type" : "boolean",
+:        "definition_type" : "instance",
+:        "scope" : "property"
+:    }
 
 *Create a =key_extractor= service*
 
@@ -4939,6 +4947,13 @@ cases.
 It is not possible to use global cast operators so we need to
 introduce a dependency between versioned and unversioned keys in order
 for this to work.
+
+*Consider not creating unversioned keys for single property*
+
+If a key is made up of a single property, its a bit nonsensical to
+create an unversioned key. We should only generate the versioned
+key. However, it does make life easier. Wait for real world use cases
+to decide.
 
 *** Add versioning support                                            :story:
 
