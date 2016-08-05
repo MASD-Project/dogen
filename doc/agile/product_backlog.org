@@ -2079,6 +2079,28 @@ The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
 
+*** Using default value with text collection throws                   :story:
+
+We don't support default values with text collection, but if the user
+tries to use it, the error that comes out is not particularly helpful:
+
+: Invalid or unsupported value type:
+: { "__type__": "value_types", "value": "text_collection" }
+
+This is because we attempt to instantiate the field value in the
+hydrator, but there is no support for text collection there:
+
+: 2016-08-05 08:10:03.749580 [ERROR] [knitter] Error: ../../../../projects/dynamic/src/types/json_hydrator.cpp(150): Throw in function boost::shared_ptr<dogen::dynamic::value> dogen::dynamic::json_hydrator::create_value(dogen::dynamic::value_types, const string&) const
+: Dynamic exception type: boost::exception_detail::clone_impl<dogen::dynamic::hydration_error>
+: std::exception::what: Invalid or unsupported value type: { "__type__": "value_types", "value": "text_collection" }
+: [tag_workflow*] = Code generation failure.
+
+The right thing to do is to throw a more sensible exception such as
+"default value is not supported for text collections".
+
+Once we have a use case for default values in text collections we
+should add it.
+
 *** Consider adding enumerations in dynamic                           :story:
 
 This story is bound to already exist in backlog so do another
