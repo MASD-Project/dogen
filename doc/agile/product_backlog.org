@@ -4919,6 +4919,10 @@ Merged stories:
 :        "scope" : "property"
 :    }
 
+This was removed in commit =5e80256=:
+
+yarn.dia: remove support for identity attribute
+
 *Create a =key_extractor= service*
 
 We need a way to automatically extract a key for a =keyed_entity=.
