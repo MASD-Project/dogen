@@ -10,17 +10,5 @@
         "value_type" : "boolean",
         "definition_type" : "instance",
         "scope" : "not_applicable"
-    },
-    {
-        "name" : {
-            "simple" : "identity_attribute",
-            "qualified" : "yarn.dia.identity_attribute"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "yarn.dia"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "property"
     }
 ]

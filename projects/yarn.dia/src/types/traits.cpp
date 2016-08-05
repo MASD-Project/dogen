@@ -29,9 +29,4 @@ std::string traits::comment() {
     return r;
 }
 
-std::string traits::identity_attribute() {
-    static std::string r("yarn.dia.identity_attribute");
-    return r;
-}
-
 } } }

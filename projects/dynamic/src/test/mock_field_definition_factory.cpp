@@ -68,23 +68,10 @@ field_definition mock_field_definition_factory::create_comment() const {
     return r;
 }
 
-field_definition mock_field_definition_factory::
-create_identity_attribute() const {
-    field_definition r;
-    r.name().simple("identity_attribute");
-    r.name().qualified("yarn.dia.identity_attribute");
-    r.ownership_hierarchy().model_name("yarn.dia");
-    r.value_type(value_types::text);
-    r.definition_type(field_definition_types::instance);
-    r.scope(scope_types::property);
-    return r;
-}
-
 std::list<field_definition> mock_field_definition_factory::
 make_canned_field_definitions() const {
     std::list<field_definition> r;
     r.push_back(create_comment());
-    r.push_back(create_identity_attribute());
     r.push_back(licence_name());
     r.push_back(copyright_notice());
     r.push_back(containing_namespaces());

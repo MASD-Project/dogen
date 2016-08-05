@@ -3020,20 +3020,9 @@
 						<documentation></documentation>
 						<extensions>
 							<fields>
-								<count>1</count>
-								<bucket_count>2</bucket_count>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
-								<item>
-									<first>yarn.dia.identity_attribute</first>
-									<second>
-										<value>
-											<px class_id_reference="2" object_id="_12">
-												<value></value>
-												<content>true</content>
-											</px>
-										</value>
-									</second>
-								</item>
 							</fields>
 						</extensions>
 						<name>
@@ -3245,7 +3234,7 @@
 		</item>
 		<item>
 			<first>&lt;std_model&gt;&lt;class_e&gt;</first>
-			<second object_id="_13">
+			<second object_id="_12">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -3836,7 +3825,7 @@
 		</item>
 		<item>
 			<first>&lt;std_model&gt;&lt;class_h&gt;</first>
-			<second object_id="_14">
+			<second object_id="_13">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -4107,7 +4096,7 @@
 		</item>
 		<item>
 			<first>&lt;std_model&gt;&lt;class_f&gt;</first>
-			<second object_id="_15">
+			<second object_id="_14">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -4458,7 +4447,7 @@
 		</item>
 		<item>
 			<first>&lt;std_model&gt;&lt;some_service&gt;</first>
-			<second object_id="_16">
+			<second object_id="_15">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -4889,7 +4878,7 @@
 		</item>
 		<item>
 			<first>&lt;std_model&gt;&lt;class_g&gt;</first>
-			<second object_id="_17">
+			<second object_id="_16">
 				<element>
 					<documentation></documentation>
 					<extensions>
@@ -5240,7 +5229,7 @@
 		</item>
 		<item>
 			<first>&lt;std_model&gt;&lt;derived&gt;</first>
-			<second object_id="_18">
+			<second object_id="_17">
 				<element>
 					<documentation></documentation>
 					<extensions>

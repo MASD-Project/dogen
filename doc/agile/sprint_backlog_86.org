@@ -154,11 +154,21 @@ generated within dogen; we now should only have fields that are set
 from the outside world. Remove all of the fields that are not supposed
 to be settable from the outside world. At present this just file path.
 
+*** COMPLETED Remove support for identity attribute                   :story:
+    CLOSED: [2016-08-05 Fri 07:56]
+    CLOCK: [2016-08-05 Fri 07:55]--[2016-08-05 Fri 07:56] =>  0:01
+    CLOCK: [2016-08-05 Fri 07:36]--[2016-08-05 Fri 07:55] =>  0:19
+
+Seems like when we removed keys, we left this behind. Remove it
+completely and add link to commit on product backlog.
+
 *** STARTED Add support for bintray                                   :story:
     CLOCK: [2016-08-02 Tue 14:25]--[2016-08-02 Tue 15:33] =>  1:08
 
 There is a new web application that interfaces with GitHub:
 [[https://bintray.com/][bintray]].
+
+- add JSON validation to bintray deployment descriptor.
 
 Notes:
 
@@ -192,7 +202,7 @@ thought through.
 This means we can also inherit across models. See Allow cross model
 inheritance.
 
-Tasks:
+gTasks:
 
 - add new fields;
 - add machinery to read in field in yarn's generalisation indexer;

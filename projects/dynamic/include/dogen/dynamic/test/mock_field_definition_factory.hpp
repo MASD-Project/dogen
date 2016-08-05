@@ -54,11 +54,6 @@ private:
      */
     field_definition create_comment() const;
 
-    /**
-     * @brief Create the identity attribute field.
-     */
-    field_definition create_identity_attribute() const;
-
 public:
     /**
      * @brief Creates a set of canned field definitions, needed for

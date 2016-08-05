@@ -41,11 +41,6 @@ struct traits {
      * the meta-type's documentation.
      */
     static std::string comment();
-
-    /**
-     * @brief Attribute that provides this entity its identity.
-     */
-    static std::string identity_attribute();
 };
 
 } } }

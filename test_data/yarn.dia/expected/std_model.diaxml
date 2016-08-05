@@ -858,7 +858,7 @@
 														<item>
 															<which>6</which>
 															<value>
-																<value>##DOGEN yarn.dia.identity_attribute=true#</value>
+																<value>##</value>
 															</value>
 														</item>
 													</values>
@@ -12833,7 +12833,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>0.95,-16.05;29.285,-11.05</value>
+										<value>0.95,-16.05;36.215,-11.85</value>
 									</value>
 								</item>
 							</values>
@@ -12879,7 +12879,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>28.235000000000003</value>
+										<value>35.164999999999999</value>
 									</value>
 								</item>
 							</values>
@@ -12892,7 +12892,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>4.8999999999999995</value>
+										<value>4.0999999999999996</value>
 									</value>
 								</item>
 							</values>
