@@ -652,7 +652,7 @@ the majority of cases, we have traits just to access the fields. But
 there are a few cases where we use traits for other purposes such as
 formatter naming.
 
-*** Consider using indices rather than associative containers         :story:
+*** Consider using indices rather than associative containers          :epic:
 
 Once we generate the final model the model becomes constant; this
 means we can easily assign an [[https://en.wikipedia.org/wiki/Ordinal_number][ordinal number]] to each model
@@ -684,7 +684,18 @@ cases?). For example, we do not have formatter properties for all
 formatters for every =yarn::name= because many (most) formatters don't
 make sense for every yarn type. Thus this is less applicable, at least
 for formatter properties. We need to look carefully at all use cases
-and see if there is any place where this approach is applicable.
+and see if there is any place where this approach is applicable. It is
+probably going to be more useful for formatters than elements.
+
+Tasks:
+
+- in resolver, assign element indices and update property names with
+  them.
+- change final model to have a vector of size maximum index (a
+  property of the intermediate model).
+- in the final model generation, for each type, look at its index and
+  populate the slot accordingly.
+- update quilt to use the indices where possible.
 
 *** Handle "special includes" correctly                     :reviewing:story:
 
