@@ -11,6 +11,13 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add support for inlining                                          :story:
+
+We should be able to set a model-wide property that tells dogen to
+generate inline methods for properties. We could be more flexible and
+allow inlining at class level or just for a single property. We don't
+have any use cases for these at present.
+
 *** Strong type aliasing                                              :story:
 
 One extremely useful feature would be to create "aliases" for types
