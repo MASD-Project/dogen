@@ -2761,6 +2761,9 @@ PROFILE. Not sure what priority it would be at.
 We should also be able to get a command-line report, e.g. =--profile=
 would show all the timings for all the components.
 
+It should also be possible to support some kind of uploading of
+metrics to a metrics server with a database etc.
+
 *** Canned tests rely on copy constructors rather than cloning        :story:
 
 If an object has pointers, the canned tests will not perform a deep
