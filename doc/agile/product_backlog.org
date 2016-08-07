@@ -11,6 +11,78 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Computation of enablement values                                   :epic:
+
+Note: this story is still *very* sketchy.
+
+At present we have a very simple way of determining what formatters
+are enabled: if a facet has been enabled by the user then all
+formatters on that facet are enabled. This is a good starting point
+but results in a lot of manual work:
+
+- if we add a type which does not support all facets, we will generate
+  invalid code. Users should be able to mark which facets are
+  supported and then the graph of dependencies should do the right
+  thing, propagating the disabled status.
+- we are enabling all formatters in a facet. For hashing and forward
+  declarations, it would make more sense to have a "dependency based
+  enablement": if we determine that someone in the model needs that
+  feature, we enable it, if not its disabled. Users can always
+  override this and force it to be globally enabled.
+- if a user creates a "service", all facets other than types are
+  disabled. Ideally we should be able to define "enablement profiles"
+  and then set an element's enablement profile. Each enablement
+  profile is made up of a set of enabled facets. They could be
+  supplied as a KVP. In fairness we probably just need "types and io"
+  or "default".
+
+One way to think of this problem is to imagine a matrix for each
+element in element space. Each matrix is two-dimensional: one
+dimension is the facets and the other are "dependent elements". These
+are effectively made up of all attributes for each element, with a
+name tree expansion. Each value of the matrix can either be 0
+(disabled), 1 (enabled) or 2 (not computable). Not computable is a
+hack to cope with cycles in the graph of dependencies.
+
+Each value is computed by looking up an element's matrix and looking
+for zeros. If there is one or more zero against a facet, the element's
+value for that facet is zero. If there is a two we need to do a
+two-pass whereby we first compute the matrix ignoring all the two's;
+then, for each cycle we create a list of all the elements on that path
+and the pair of elements that causes the cycle. We then compute the
+enablement for this pair with a simple table (OR the computed
+enablement values). We then traverse the cycle in reverse, updating
+the twos to real values.
+
+We could start with one large matrix with rows by element and columns
+by feature. All values on this matrix are set to 1. We would then
+multiply it against the global enablement matrix. We would then
+multiply it by the local enablement matrix, for each element. We would
+then compute the dependency matrices for all elements only taking into
+account facets that are still enabled. We need to find the linear
+algebra operation that takes a column with zeros and ones and returns
+one if all rows are one and zero otherwise.
+
+This produces the enabled facets. We then need to worry about the
+formatters. There are a few sources of information:
+
+- the facet enablement.
+- the user local or global decision for that formatter.
+- some kind of default formatter property (e.g. disabled by default).
+- dependencies.
+
+For these we need to create a "get dependencies" method in
+each formatter which returns dependent formatters. For example, the
+visitor formatter depends on the forward declarations formatter. This
+is a static dependency. The more complex case is where there are
+dynamic dependencies. For example, if hashing is detected for a given
+type, we then need to enable the hashing facet for the containee. We
+should probably hard-code this scenario for now.
+
+We may want to make these computations disableable. For example: a)
+all: no computation, everything is enabled b) all supported: all that
+is supported is enabled c) by dependencies.
+
 *** Indent stitch output using clang format                           :story:
 
 We need to indent the output coming out of stitch as it is not
