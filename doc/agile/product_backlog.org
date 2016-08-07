@@ -4519,7 +4519,21 @@ The next logical step would be to code-generate the static
 initialisers too. For this we would have to be aware of all types to
 register in a given model (perhaps by looking at inheritance across
 models) and for each of these generate the appropriate initialiser
-code. This is more tricky but it would be really useful.
+code. This is more tricky but it would be really useful. Actually
+given the templatisation of formatters, this is not useful any longer.
+
+Tasks:
+
+- create a registrar type in yarn and associated stereotype.
+- add keys to link types to a yarn type. This should be generic so
+  that we can use it for other model elements. We could either do it
+  the hard (static) way where we manually list the types, or in a more
+  dynamic way by providing a base class and letting yarn determine all
+  of the descendants.
+- add formatter interfaces and a stitch template for registrar.
+
+Note: the sample principles probably apply for code generating the
+container.
 
 *** Load system models intelligently                                   :epic:
 
