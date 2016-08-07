@@ -2130,8 +2130,20 @@ between languages. This could be done as follows:
 - JSON: similar approach to XML, minus the schema.
 - POF: use the coherence libraries to dump the models into POF.
 
-FIXME: we believed this story was already backloged but could not find
-it on a quick search. Do a more thorough search.
+Tasks:
+
+- create the LAM model with a set of basic types.
+- add a set of mapping fields into yarn: =yarn.mapping.csharp=, etc
+  and populate the types with entries for each supported language.
+- create a notion of mapping of intermediate models into
+  languages. The input is the merged intermediate model and the output
+  is N models one per language. We also need a way to associate
+  backends with languages. Each model is sent down to its backend.
+- note that reverse mapping is possible: we should be able to
+  associate a type on a given language with it's lam type. This means
+  that, given a model in say C#, we could reconstruct a yarn lam model
+  (or tell the user about the list of failures to map). This should be
+  logged as a separate story.
 
 *** Protect against double-initialisation                             :story:
 
