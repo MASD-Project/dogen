@@ -14,28 +14,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-08-04 Thu 22:59]
+#+CAPTION: Clock summary at [2016-08-07 Sun 17:34]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *5:55* |      |      | 100.0 |
+| *Total time*                                                                | *8:19* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 5:55   |      |      | 100.0 |
-| Active                                                                      |        | 5:55 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:52 |  14.6 |
-| COMPLETED Implement boost path's serialisation via a helper                 |        |      | 0:40 |  11.3 |
-| COMPLETED Implement serialisation's implementation in terms of =yarn::object= |        |      | 0:32 |   9.0 |
-| COMPLETED Implement odb's header in terms of =yarn::object=                 |        |      | 0:17 |   4.8 |
-| COMPLETED Implement test data's header in terms of =yarn::object=           |        |      | 0:11 |   3.1 |
-| COMPLETED Implement test data's implementation in terms of =yarn::object=   |        |      | 0:14 |   3.9 |
-| COMPLETED Remove all of class info infrastructure                           |        |      | 0:34 |   9.6 |
-| COMPLETED Remove unused helper related properties                           |        |      | 0:32 |   9.0 |
-| STARTED Add support for bintray                                             |        |      | 1:08 |  19.2 |
-| STARTED Consider adding support for inheritance via meta-data               |        |      | 0:55 |  15.5 |
+| Stories                                                                     | 8:19   |      |      | 100.0 |
+| Active                                                                      |        | 8:19 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 3:16 |  39.3 |
+| COMPLETED Implement boost path's serialisation via a helper                 |        |      | 0:40 |   8.0 |
+| COMPLETED Implement serialisation's implementation in terms of =yarn::object= |        |      | 0:32 |   6.4 |
+| COMPLETED Implement odb's header in terms of =yarn::object=                 |        |      | 0:17 |   3.4 |
+| COMPLETED Implement test data's header in terms of =yarn::object=           |        |      | 0:11 |   2.2 |
+| COMPLETED Implement test data's implementation in terms of =yarn::object=   |        |      | 0:14 |   2.8 |
+| COMPLETED Remove all of class info infrastructure                           |        |      | 0:34 |   6.8 |
+| COMPLETED Remove unused helper related properties                           |        |      | 0:32 |   6.4 |
+| STARTED Add support for bintray                                             |        |      | 1:08 |  13.6 |
+| STARTED Consider adding support for inheritance via meta-data               |        |      | 0:55 |  11.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-08-07 Sun 15:10]--[2016-08-07 Sun 17:34] =>  2:24
     CLOCK: [2016-08-02 Tue 16:49]--[2016-08-02 Tue 17:32] =>  0:43
     CLOCK: [2016-08-01 Mon 19:10]--[2016-08-01 Mon 19:19] =>  0:09
 
@@ -152,6 +153,11 @@ With the previous approach we had fields in dynamic that were
 generated within dogen; we now should only have fields that are set
 from the outside world. Remove all of the fields that are not supposed
 to be settable from the outside world. At present this just file path.
+
+*** Remove =optional<list>=                                           :story:
+
+We should not really be using optional<list>. The empty list is
+sufficient for this.
 
 *** STARTED Add support for bintray                                   :story:
     CLOCK: [2016-08-02 Tue 14:25]--[2016-08-02 Tue 15:33] =>  1:08
