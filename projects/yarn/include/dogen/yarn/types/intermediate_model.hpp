@@ -85,7 +85,6 @@ private:
 public:
     /**
      * @brief Fully qualified name.
-     *
      */
     /**@{*/
     const dogen::yarn::name& name() const;

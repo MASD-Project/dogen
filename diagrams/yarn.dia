@@ -617,7 +617,7 @@ C++ pointers, references and so on.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Representation of the named tree that can usable as an identifier across all 
+            <dia:string>#Representation of the named tree that can usable as an identifier across all
 supported languages.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -3214,9 +3214,7 @@ all types in the merged intermediate model.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Fully qualified name.
-
-#DOGEN yarn.dia.identity_attribute=true#</dia:string>
+            <dia:string>#Fully qualified name.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
