@@ -180,6 +180,8 @@ Notes:
 - [[https://github.com/tim-janik/rapicorn/blob/master/citool.sh.][citool.sh]] script from [[https://github.com/tim-janik/rapicorn][Rapicorn]] project and their [[https://raw.githubusercontent.com/tim-janik/rapicorn/master/README.md][README]].
 
 *** STARTED Consider adding support for inheritance via meta-data     :story:
+    CLOCK: [2016-08-09 Tue 22:01]--[2016-08-09 Tue 22:16] =>  0:15
+    CLOCK: [2016-08-05 Fri 07:56]--[2016-08-05 Fri 08:23] =>  0:27
     CLOCK: [2016-08-04 Thu 22:04]--[2016-08-04 Thu 22:59] =>  0:55
 
 In certain cases it may not be possible to add all inheritance

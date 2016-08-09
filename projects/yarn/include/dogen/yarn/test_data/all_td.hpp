@@ -47,6 +47,7 @@
 #include "dogen/yarn/test_data/generation_types_td.hpp"
 #include "dogen/yarn/test_data/input_descriptor_td.hpp"
 #include "dogen/yarn/test_data/intermediate_model_td.hpp"
+#include "dogen/yarn/test_data/generalization_settings_td.hpp"
 #include "dogen/yarn/test_data/type_parameters_settings_td.hpp"
 
 #endif
