@@ -154,11 +154,6 @@ generated within dogen; we now should only have fields that are set
 from the outside world. Remove all of the fields that are not supposed
 to be settable from the outside world. At present this just file path.
 
-*** Remove =optional<list>=                                           :story:
-
-We should not really be using optional<list>. The empty list is
-sufficient for this.
-
 *** STARTED Add support for bintray                                   :story:
     CLOCK: [2016-08-02 Tue 14:25]--[2016-08-02 Tue 15:33] =>  1:08
 
@@ -217,7 +212,24 @@ used. The class =b::c= in model =a= would be empty.
 
 This is not a very good idea as it will just cause confusion and it
 will require machinery to place the type in the right point in element
-space..
+space.
+
+*** STARTED Add support for visitor inheritance                       :story:
+    CLOCK: [2016-08-07 Sun 19:01]--[2016-08-07 Sun 19:32] =>  0:31
+
+We need to detect when we inherit from a visitable type across models
+and generate a "local visitor" for that model.
+
+- add parent of optional name to visitor.
+- when we are injecting the visitor, we need to bucket leaves by model
+  first. Then we need to generate one visitor per bucket.
+- if we inherit from a
+- we need to populate visitable by in this bucketed way as well.
+- all leaves that belong to external models must be placed in the same
+  location on that model. Throw if not.
+- update include generation to take visitor parent into account.
+- update visitor template to detect external visitation and inherit
+  accordingly.
 
 *** Allow cross model inheritance                                     :story:
 
@@ -261,6 +273,11 @@ including only the forward declaration for the visitor.
 This is actually fairly important because every time we change the
 visitor template, we end up rebuilding 350-odd files for no
 reason. This wouldn't happen if we were using forward declarations.
+
+*** Remove =optional<list>=                                           :story:
+
+We should not really be using optional<list>. The empty list is
+sufficient for this.
 
 *** Consider renaming formatters                                      :story:
 
