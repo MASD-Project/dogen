@@ -37,5 +37,30 @@
         "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : false
+    },
+    {
+        "name" : {
+            "simple" : "is_final",
+            "qualified" : "yarn.generalization.is_final"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "yarn"
+        },
+        "value_type" : "boolean",
+        "definition_type" : "instance",
+        "scope" : "entity",
+        "default_value" : false
+    },
+    {
+        "name" : {
+            "simple" : "parents",
+            "qualified" : "yarn.generalization.parents"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "yarn"
+        },
+        "value_type" : "text_collection",
+        "definition_type" : "instance",
+        "scope" : "entity"
     }
 ]
