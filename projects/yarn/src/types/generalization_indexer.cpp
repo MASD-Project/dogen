@@ -56,7 +56,7 @@ bool generalization_indexer::is_leaf(const object& o) const {
     const bool is_service(o.object_type() == uds);
     if (o.is_parent() || !o.is_child() || is_service) {
         BOOST_LOG_SEV(lg, debug)
-            << "Type is not in a generalization relationship."
+            << "Type is not a generalisation leaf. "
             << " is parent: " << o.is_parent()
             << " is child: " << o.is_child()
             << " is service: " << is_service;
