@@ -36,21 +36,11 @@ namespace {
 auto lg(logger_factory("yarn.injector"));
 
 const std::string empty;
-const std::string merged("merged_");
-const std::string xml_extension(".xml");
-const std::string text_extension(".txt");
-const std::string binary_extension(".bin");
 const std::string visitor_name("visitor");
-const std::string extract_name("extract");
-const std::string uint_name("unsigned int");
-const std::string id_name("id");
-const std::string version_name("version");
 const std::string visitor_argument_name("v");
-const std::string extractor_argument_name("e");
 const std::string visitor_doc("Visitor for ");
 const std::string visit_operation_doc("Accept visits for type ");
 const std::string global_module_doc("Module that represents the global scope.");
-const std::string empty_identity("Identity must have at least one attribute: ");
 const std::string duplicate_name(
     "Attempt to add object with a name that already exists in model: ");
 const std::string zero_leaves("Type marked as visitable but has no leaves: ");
