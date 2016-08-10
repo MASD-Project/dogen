@@ -5477,14 +5477,23 @@ get converted into enumerations so that I can adapt it to my
 requirements.
 #+end_quote
 
-It should be possible to pass in one or more string values as implementation
-specific parameters that tells dogen what valid values an enumerator
-can have. We can then generate a from string method that does the
-appropriate conversions.
+It should be possible to pass in one or more string values as model
+specific parameters that tell Dogen what valid values a user defined
+enumerator can have. We can then generate a "from string" a method
+that does the appropriate conversions.
 
-These should be passed in as dynamic extensions. At present
+These values should be passed in as dynamic extensions. At present
 enumerators do not have dynamic extensions support so we need to add
-it too (e.g. add the concept to them).
+it too.
+
+Note that the inverse use case is also valid: one may want to map an
+enumerator to one or more strings (e.g. "to string"). As with "from
+string", a set of dynamic extensions could be use to supply the
+mapping. Ideally, one enumerator should map to a single string but it
+is conceivable there are other use cases (context sensitive
+mappings). Note that it is not necessarily the case that the mapping
+is bidirectional - i.e. "to string" is not required to be the inverse
+function of "from string" and vice-versa.
 
 *** Enumeration string dumps could be configurable                    :story:
 
