@@ -426,6 +426,8 @@ it. If we do it this way we need to wait for the generatable clean up.
   boolean for is target. Actually we need something like:
   proxy_reference, non_proxy_reference, target. We also need a good
   name for this enumeration.
+- add a model-level flag: is empty. It is true if there are no model
+  elements. has_generatable_types is then is_target && !is_empty.
 - at present we are using origin type to determine whether to create a
   registrar, etc in cpp model. There is no other use case for
   this. This is done in several places due to the bad handling of C++
