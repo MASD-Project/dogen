@@ -7,7 +7,6 @@
 [![Gitter](https://badges.gitter.im/join chat.svg)](https://gitter.im/domaindrivenconsulting/dogen?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Coverity](https://img.shields.io/coverity/scan/9268.svg)](https://scan.coverity.com/projects/domaindrivenconsulting-dogen)
 [![Build Time](https://buildtimetrend.herokuapp.com/badge/domaindrivenconsulting/dogen/latest)](https://buildtimetrend.herokuapp.com/dashboard/domaindrivenconsulting/dogen)
-[![Buildtime trend](https://buildtimetrend.herokuapp.com/badge/<USER/PROJECT>/latest)](https://buildtimetrend.herokuapp.com/dashboard/<USER/PROJECT>/)
 
 # Dogen
 
