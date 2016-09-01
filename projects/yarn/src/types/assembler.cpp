@@ -133,14 +133,16 @@ assemble(const std::list<intermediate_model>& models) const {
 
     auto r(create_merged_model_activity(models));
 
-    /* We must index generalisation relationships before we inject
+    /*
+     * We must index generalisation relationships before we inject
      * system elements because we need to know about leaves before we
      * can generate visitors.
      */
     index_generalizations_activity(r);
     inject_system_elements_activity(r);
 
-    /* Resolution must be done after system elements have been
+    /*
+     * Resolution must be done after system elements have been
      * injected or else it will fail to find any references to those
      * elements.
      */
@@ -148,8 +150,10 @@ assemble(const std::list<intermediate_model>& models) const {
     index_concepts_activity(r);
     index_attributes_activity(r);
 
-    /* We must index associations after attributes have been indexed
-     * as it relies on the various attribute containers being populated.
+    /*
+     * We must index associations after attributes have been indexed
+     * as it relies on the various attribute containers being
+     * populated.
      */
     index_associations_activity(r);
     update_model_generability_activity(r);

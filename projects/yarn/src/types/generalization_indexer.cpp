@@ -114,9 +114,10 @@ obtain_details(const intermediate_model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Obtaining leaves.";
     generalization_details r;
     for (auto& pair : m.objects()) {
-        auto& o(pair.second);
-        BOOST_LOG_SEV(lg, debug) << "Processing type: " << o.name().id();
+        const auto& id(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
+        auto& o(pair.second);
         if (!is_leaf(o))
             continue;
 

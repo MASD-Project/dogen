@@ -365,7 +365,7 @@ void transformer::to_concept(const processed_object& o, const profile& p) {
             const auto j(context_.id_to_name().find(concept_id));
             if (j == context_.id_to_name().end()) {
                 BOOST_LOG_SEV(lg, error) << "Object has a parent but "
-                                         << " there is no Name mapping."
+                                         << " there is no name mapping."
                                          << " Child ID: '" << o.id()
                                          << "' Parent ID: '" << concept_id
                                          << "'";
