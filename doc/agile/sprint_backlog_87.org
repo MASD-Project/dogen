@@ -12,16 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-01 Thu 21:13]
+#+CAPTION: Clock summary at [2016-09-01 Thu 23:13]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *1:08* |      |      | 100.0 |
+| *Total time*                                                                | *3:06* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 1:08   |      |      | 100.0 |
-| Active                                                                      |        | 1:08 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:19 |  27.9 |
-| COMPLETED Move readme to markdown                                           |        |      | 0:49 |  72.1 |
+| Stories                                                                     | 3:06   |      |      | 100.0 |
+| Active                                                                      |        | 3:06 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:19 |  10.2 |
+| COMPLETED Move readme to markdown                                           |        |      | 0:49 |  26.3 |
+| STARTED Yarn naming tidy-update                                             |        |      | 0:52 |  28.0 |
+| STARTED Consider adding support for inheritance via meta-data               |        |      | 1:06 |  35.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -29,6 +31,10 @@
     CLOCK: [2016-09-01 Thu 18:01]--[2016-09-01 Thu 18:20] =>  0:19
 
 Updates to sprint and product backlog.
+
+*** Manual updates and blog posts                                     :story:
+
+Time taken with blog posts and updates to the manual.
 
 *** COMPLETED Move readme to markdown                                 :story:
     CLOSED: [2016-09-01 Thu 18:53]
@@ -40,43 +46,65 @@ Updates to sprint and product backlog.
 We are reaching the limits of what we can do with org-mode for the
 README file. We should just bite the bullet and move to markdown.
 
-*** Manual updates and blog posts                                     :story:
+*** STARTED Yarn naming tidy-update                                   :story:
+    CLOCK: [2016-09-01 Thu 22:21]--[2016-09-01 Thu 23:13] =>  0:52
 
-Time taken with blog posts and updates to the manual.
+Originally we created a clear distinction between expanders and
+indexers. In truth these are not particularly good names since
+indexers actually "expand" the objects they touch, adding missing
+data. We could call them all expanders, but then this just highlights
+the fact that something is not quite right with naming.
 
-*** Add support for bintray                                           :story:
+In practice, we have:
 
-There is a new web application that interfaces with GitHub:
-[[https://bintray.com/][bintray]].
+- a set of classes that act on the model before it is merged (and the
+  workflow that binds them);
+- the merging;
+- a set of classes that act on the model after it is merged (and the
+  workflow that binds them);
+- the top-level workflow that joins these.
 
-- add JSON validation to bintray deployment descriptor.
+We should:
 
-Notes:
+- rename all of these types to "processor". Not a great name, but at
+  least it lies less than indexer and expander.
+- rename the workflows to =pre_merge_workflow= and
+  =post_merge_workflow=.
+- rename input descriptor to just descriptor.
+- rename =frontend_workflow= to =descriptor_processor= and add it to
+  the pre-merge workflow.
+- implement the main workflow in terms of these sub-workflows.
 
-- an account was created [[https://bintray.com/mcraveiro][linked to GitHub]].
-- it supports the uploads of [[https://bintray.com/mcraveiro/deb][debs]].
-- [[https://bintray.com/docs/usermanual/uploads/uploads_howdoiuploadmystufftobintray.html][How Do I Upload My Stuff to Bintray?]]
-- [[https://github.com/tim-janik/beast][Beast]] project [[https://raw.githubusercontent.com/tim-janik/beast/master/README.md][README]] with emblems
-- Beast [[https://github.com/tim-janik/beast/blob/master/.travis.yml][travis.yml]]
-- [[https://github.com/tim-janik/rapicorn/blob/master/citool.sh.][citool.sh]] script from [[https://github.com/tim-janik/rapicorn][Rapicorn]] project and their [[https://raw.githubusercontent.com/tim-janik/rapicorn/master/README.md][README]].
+*** Generalisation tidy-up                                            :story:
 
-*** Consider adding support for inheritance via meta-data             :story:
+Since we are touching some of the older generalisation code, we should
+take this opportunity to do a few clean-ups:
+
+- add a is leaf property.
+- compute is parent and is child in yarn.
+- move validation code from =yarn.dia= into yarn. We don't have a
+  validator yet, so maybe it can go into the indexers.
+- update element should make use of the element base class.
+- merge to value object with to service.
+
+*** STARTED Consider adding support for inheritance via meta-data     :story:
+    CLOCK: [2016-09-01 Thu 21:14]--[2016-09-01 Thu 22:20] =>  1:06
 
 In certain cases it may not be possible to add all inheritance
 relationships in a diagram; this is the case with =formatters= in
 =cpp=. There are just too many classes implementing the
 =formatter_interface= and the diagram would become too messy if we
 added generalisation relationships for them all. This would also be
-the case with inheritance for exceptions.
+the case with inheritance for exceptions in a lot of cases.
 
-We got away with it because we are not generating these types, but one
-can imagine having the same problem with generatable types. It would
-be nice if one could add a meta-data parameter to the class to convey
-inheritance information, like so:
+We got away with it so far because we are not generating formatter
+interfaces, but one can imagine having the same problem with
+generatable types. It would be nice if one could add a meta-data
+parameter to the class to convey inheritance information, like so:
 
-: #DOGEN yarn.dia.parent=x.y.z
+: #DOGEN yarn.parent=x.y.z
 
-The notation for the parent as well as the name of the tag need to be
+The notation for the parent as well as the name of the tag needs to be
 thought through.
 
 This means we can also inherit across models. See Allow cross model
@@ -86,6 +114,8 @@ Tasks:
 
 - add new fields;
 - add machinery to read in field in yarn's generalisation indexer;
+  actually this is a bit of a hack. It makes more sense to do this
+  during settings expansion.
 - add test in trivial inheritance.
 - use fields in quilt.cpp's formatters.
 
@@ -103,6 +133,22 @@ used. The class =b::c= in model =a= would be empty.
 This is not a very good idea as it will just cause confusion and it
 will require machinery to place the type in the right point in element
 space.
+
+*** Add support for bintray                                           :story:
+
+There is a new web application that interfaces with GitHub:
+[[https://bintray.com/][bintray]].
+
+- add JSON validation to bintray deployment descriptor.
+
+Notes:
+
+- an account was created [[https://bintray.com/mcraveiro][linked to GitHub]].
+- it supports the uploads of [[https://bintray.com/mcraveiro/deb][debs]].
+- [[https://bintray.com/docs/usermanual/uploads/uploads_howdoiuploadmystufftobintray.html][How Do I Upload My Stuff to Bintray?]]
+- [[https://github.com/tim-janik/beast][Beast]] project [[https://raw.githubusercontent.com/tim-janik/beast/master/README.md][README]] with emblems
+- Beast [[https://github.com/tim-janik/beast/blob/master/.travis.yml][travis.yml]]
+- [[https://github.com/tim-janik/rapicorn/blob/master/citool.sh.][citool.sh]] script from [[https://github.com/tim-janik/rapicorn][Rapicorn]] project and their [[https://raw.githubusercontent.com/tim-janik/rapicorn/master/README.md][README]].
 
 *** Add support for visitor inheritance                               :story:
 
