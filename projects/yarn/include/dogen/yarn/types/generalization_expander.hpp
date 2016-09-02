@@ -27,6 +27,7 @@
 
 #include <list>
 #include <unordered_map>
+#include <unordered_set>
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/name.hpp"
 
@@ -42,6 +43,7 @@ private:
     struct generalization_details {
         std::unordered_map<std::string, std::list<name> > leaves;
         std::unordered_map<std::string, std::list<name> > root_parents;
+        std::unordered_set<std::string> parents;
     };
 
 private:

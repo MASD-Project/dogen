@@ -51,15 +51,11 @@ inline bool operator<(const name& lhs, const name& rhs) {
 }
 
 bool generalization_expander::is_leaf(const object& o) const {
-    // FIXME: massive hack. must not add leafs for services.
-    const auto uds(object_types::user_defined_service);
-    const bool is_service(o.object_type() == uds);
-    if (o.is_parent() || !o.is_child() || is_service) {
+    if (o.is_parent() || !o.is_child()) {
         BOOST_LOG_SEV(lg, debug)
             << "Type is not a generalisation leaf. "
             << " is parent: " << o.is_parent()
-            << " is child: " << o.is_child()
-            << " is service: " << is_service;
+            << " is child: " << o.is_child();
         return false;
     }
     return true;
@@ -141,6 +137,14 @@ populate(const generalization_details& d, intermediate_model& m) const {
         }
 
         auto& o(i->second);
+
+        // FIXME: massive hack. must not add leaves for services.
+        const auto uds(object_types::user_defined_service);
+        if (o.object_type() == uds) {
+            BOOST_LOG_SEV(lg, debug) << "Filtering out leaves for type: "
+                                     << o.name().id();
+            continue;
+        }
         o.leaves(pair.second);
 
         /*
