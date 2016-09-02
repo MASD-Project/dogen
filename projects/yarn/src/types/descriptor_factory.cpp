@@ -1,2 +1,113 @@
-// dummy function to suppress ranlib warnings
-void descriptor_factory() { }
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/filesystem/file.hpp"
+#include "dogen/yarn/io/descriptor_io.hpp"
+#include "dogen/yarn/types/building_error.hpp"
+#include "dogen/yarn/types/descriptor_factory.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.descriptor_factory"));
+
+}
+
+namespace dogen {
+namespace yarn {
+
+std::list<descriptor> descriptor_factory::from_directories(
+    const std::list<boost::filesystem::path>& dirs) const {
+
+    BOOST_LOG_SEV(lg, debug) << "Creating descriptors for library models.";
+    std::list<descriptor> r;
+    for (const auto& dir : dirs) {
+        BOOST_LOG_SEV(lg, trace) << "Directory: " << dir.generic_string();
+
+        using namespace dogen::utility::filesystem;
+        const auto files(find_files(dir));
+        BOOST_LOG_SEV(lg, trace) << "Found " << files.size()
+                                 << " paths to library models.";
+
+        for (const auto& f: files) {
+            BOOST_LOG_SEV(lg, trace) << "Library model: " << f.generic_string();
+            const auto extension(f.extension().string());
+
+            descriptor d;
+            d.path(f);
+            d.is_target(false);
+            d.extension(extension);
+
+            r.push_back(d);
+        }
+    }
+    BOOST_LOG_SEV(lg, debug) << "Created descriptors for library models: " << r;
+    return r;
+}
+
+std::list<descriptor> descriptor_factory::
+from_references(const std::list<config::input>& refs) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating descriptors for reference models.";
+    BOOST_LOG_SEV(lg, debug) << "Found " << refs.size() << " reference models.";
+
+    std::list<descriptor> r;
+    for (const auto ref: refs) {
+        BOOST_LOG_SEV(lg, trace) << "Reference model: "
+                                 << ref.path().generic_string();
+
+        descriptor d;
+        d.path(ref.path());
+        d.external_modules(ref.external_modules());
+        d.is_target(false);
+        r.push_back(d);
+    }
+    BOOST_LOG_SEV(lg, debug) << "Created descriptors for reference models: "
+                             << r;
+    return r;
+}
+
+descriptor descriptor_factory::from_target(const config::input& tg) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating descriptor for target model.";
+
+    descriptor r;
+    r.path(tg.path());
+    r.is_target(true);
+    r.external_modules(tg.external_modules());
+    BOOST_LOG_SEV(lg, trace) << "Added target model: " << r.path();
+    BOOST_LOG_SEV(lg, debug) << "Created descriptor for target model: " << r;
+    return r;
+}
+
+std::list<descriptor> descriptor_factory::
+make(const std::list<boost::filesystem::path>& dirs,
+    const config::input_options& io) const {
+
+    auto r(from_directories(dirs));
+    // x.splice( x.end(), x, iter );
+    // auto refs(from_references(io.references()));
+    // r.splice(r.end(), r.begin(), r.end());
+    r.push_back(from_target(io.target()));
+    return r;
+}
+
+} }

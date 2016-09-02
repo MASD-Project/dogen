@@ -58,6 +58,7 @@ In =yarn.dia=:
 - merge to value object with to service.
 
 *** STARTED Move file instantiation code into yarn                    :story:
+    CLOCK: [2016-09-02 Fri 11:01]--[2016-09-02 Fri 12:00] =>  0:59
     CLOCK: [2016-09-02 Fri 09:32]--[2016-09-02 Fri 09:47] =>  0:15
     CLOCK: [2016-09-02 Fri 08:35]--[2016-09-02 Fri 09:10] =>  0:35
 
@@ -67,7 +68,6 @@ directories and file paths and does the instantiation. We should then
 make use of this class in the yarn workflow. All the code is under
 =obtain_input_descriptors_activity=. It must be trivial to figure out
 where we are in the pipeline by looking at the log file.
-
 
 *** STARTED Yarn naming tidy-update                                   :story:
     CLOCK: [2016-09-01 Thu 22:21]--[2016-09-01 Thu 23:13] =>  0:52

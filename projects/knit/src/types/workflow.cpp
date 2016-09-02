@@ -130,7 +130,6 @@ workflow::obtain_descriptors_activity() const {
     r.push_back(target);
     BOOST_LOG_SEV(lg, debug) << "Added target model: "
                              << input_options.target().path();
-
     return r;
 }
 
