@@ -29,7 +29,6 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/config/types/input_options.hpp"
-#include "dogen/yarn/types/descriptor.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/model.hpp"
 
@@ -39,36 +38,24 @@ namespace yarn {
 class workflow {
 private:
     /**
-     * @brief Obtain the model descriptors.
+     * @brief Obtains all intermediate models.
      */
-    std::list<descriptor> obtain_descriptors_activity(
+    std::list<intermediate_model> obtain_intermediate_models(
+        const dynamic::repository& drp,
         const std::list<boost::filesystem::path>& dirs,
         const config::input_options& io) const;
 
     /**
-     * @brief Obtains all intermediate models.
-     */
-    std::list<intermediate_model> obtain_intermediate_models_activity(
-        const dynamic::repository& drp, const std::list<descriptor>& d) const;
-
-    /**
-     * @brief Executes the expansion workflow.
-     */
-    void expand_intermediate_models_activity(
-        const dynamic::repository& drp,
-        std::list<intermediate_model>& m) const;
-
-    /**
      * @brief Executes the assembling workflow.
      */
-    intermediate_model assemble_intermediate_models_activity(
-        const std::list<intermediate_model>& m) const;
+    intermediate_model assemble_intermediate_models(
+        const std::list<intermediate_model>& im) const;
 
     /**
      * @brief Transforms the intermediate model to the final
      * representation.
      */
-    model transform_intermediate_model_activity(
+    model transform_intermediate_model(
         const intermediate_model& m) const;
 
 public:

@@ -10,36 +10,46 @@
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
+ * GNU General Public License for more details. *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_EXPANDER_HPP
-#define DOGEN_YARN_TYPES_EXPANDER_HPP
+#ifndef DOGEN_YARN_TYPES_PRE_MERGE_WORKFLOW_HPP
+#define DOGEN_YARN_TYPES_PRE_MERGE_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include "dogen/dynamic/types/repository.hpp"
+#include "dogen/config/types/input_options.hpp"
+#include "dogen/yarn/types/descriptor.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 
 /**
- *  @brief Performs the expansion sub-workflow on a frontend generated
- *  intermediate model.
+ *  @brief Performs the pre-merge sub-workflow.
  */
-class expander {
-public:
-    explicit expander(const dynamic::repository& drp);
-
+class pre_merge_workflow {
 private:
+    /**
+     * @brief Obtain the model descriptors.
+     */
+    std::list<descriptor> obtain_descriptors(
+        const std::list<boost::filesystem::path>& dirs,
+        const config::input_options& io) const;
+
+    /**
+     * @brief Obtains all intermediate models.
+     */
+    std::list<intermediate_model> obtain_intermediate_models(
+        const dynamic::repository& drp, const std::list<descriptor>& d) const;
+
     /**
      * @brief Performs a module expansion on the model.
      */
@@ -53,16 +63,16 @@ private:
     /**
      * @brief Performs a settings expansion on the model.
      */
-    void expand_settings(intermediate_model& m) const;
+    void expand_settings(const dynamic::repository& drp,
+        intermediate_model& m) const;
 
 public:
     /**
      * @brief Executes the workflow.
      */
-    void expand(intermediate_model& m) const;
-
-private:
-    const dynamic::repository& dynamic_repository_;
+    std::list<intermediate_model> execute(const dynamic::repository& drp,
+        const std::list<boost::filesystem::path>& dirs,
+        const config::input_options& io) const;
 };
 
 } }
