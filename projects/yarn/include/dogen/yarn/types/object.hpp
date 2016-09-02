@@ -75,6 +75,7 @@ public:
         const bool is_fluent,
         const bool is_parent,
         const bool is_child,
+        const bool is_leaf,
         const bool is_final,
         const std::list<dogen::yarn::name>& root_parents,
         const std::list<dogen::yarn::name>& parents,
@@ -190,6 +191,14 @@ public:
     /**@{*/
     bool is_child() const;
     void is_child(const bool v);
+    /**@}*/
+
+    /**
+     * @brief True if the type has a parent but no children.
+     */
+    /**@{*/
+    bool is_leaf() const;
+    void is_leaf(const bool v);
     /**@}*/
 
     /**
@@ -353,6 +362,7 @@ private:
     bool is_fluent_;
     bool is_parent_;
     bool is_child_;
+    bool is_leaf_;
     bool is_final_;
     std::list<dogen::yarn::name> root_parents_;
     std::list<dogen::yarn::name> parents_;

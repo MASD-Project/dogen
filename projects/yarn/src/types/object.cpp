@@ -81,6 +81,7 @@ object::object()
       is_fluent_(static_cast<bool>(0)),
       is_parent_(static_cast<bool>(0)),
       is_child_(static_cast<bool>(0)),
+      is_leaf_(static_cast<bool>(0)),
       is_final_(static_cast<bool>(0)),
       in_inheritance_relationship_(static_cast<bool>(0)),
       is_visitable_(static_cast<bool>(0)),
@@ -104,6 +105,7 @@ object::object(
     const bool is_fluent,
     const bool is_parent,
     const bool is_child,
+    const bool is_leaf,
     const bool is_final,
     const std::list<dogen::yarn::name>& root_parents,
     const std::list<dogen::yarn::name>& parents,
@@ -135,6 +137,7 @@ object::object(
       is_fluent_(is_fluent),
       is_parent_(is_parent),
       is_child_(is_child),
+      is_leaf_(is_leaf),
       is_final_(is_final),
       root_parents_(root_parents),
       parents_(parents),
@@ -170,6 +173,7 @@ void object::to_stream(std::ostream& s) const {
       << "\"is_fluent\": " << is_fluent_ << ", "
       << "\"is_parent\": " << is_parent_ << ", "
       << "\"is_child\": " << is_child_ << ", "
+      << "\"is_leaf\": " << is_leaf_ << ", "
       << "\"is_final\": " << is_final_ << ", "
       << "\"root_parents\": " << root_parents_ << ", "
       << "\"parents\": " << parents_ << ", "
@@ -199,6 +203,7 @@ void object::swap(object& other) noexcept {
     swap(is_fluent_, other.is_fluent_);
     swap(is_parent_, other.is_parent_);
     swap(is_child_, other.is_child_);
+    swap(is_leaf_, other.is_leaf_);
     swap(is_final_, other.is_final_);
     swap(root_parents_, other.root_parents_);
     swap(parents_, other.parents_);
@@ -231,6 +236,7 @@ bool object::operator==(const object& rhs) const {
         is_fluent_ == rhs.is_fluent_ &&
         is_parent_ == rhs.is_parent_ &&
         is_child_ == rhs.is_child_ &&
+        is_leaf_ == rhs.is_leaf_ &&
         is_final_ == rhs.is_final_ &&
         root_parents_ == rhs.root_parents_ &&
         parents_ == rhs.parents_ &&
@@ -332,6 +338,14 @@ bool object::is_child() const {
 
 void object::is_child(const bool v) {
     is_child_ = v;
+}
+
+bool object::is_leaf() const {
+    return is_leaf_;
+}
+
+void object::is_leaf(const bool v) {
+    is_leaf_ = v;
 }
 
 bool object::is_final() const {

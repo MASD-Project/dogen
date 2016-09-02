@@ -75,6 +75,7 @@ std::size_t object_hasher::hash(const object& v) {
     combine(seed, v.is_fluent());
     combine(seed, v.is_parent());
     combine(seed, v.is_child());
+    combine(seed, v.is_leaf());
     combine(seed, v.is_final());
     combine(seed, hash_std_list_dogen_yarn_name(v.root_parents()));
     combine(seed, hash_std_list_dogen_yarn_name(v.parents()));

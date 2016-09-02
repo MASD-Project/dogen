@@ -56,6 +56,7 @@ void save(Archive& ar,
     ar << make_nvp("is_fluent", v.is_fluent_);
     ar << make_nvp("is_parent", v.is_parent_);
     ar << make_nvp("is_child", v.is_child_);
+    ar << make_nvp("is_leaf", v.is_leaf_);
     ar << make_nvp("is_final", v.is_final_);
     ar << make_nvp("root_parents", v.root_parents_);
     ar << make_nvp("parents", v.parents_);
@@ -86,6 +87,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_fluent", v.is_fluent_);
     ar >> make_nvp("is_parent", v.is_parent_);
     ar >> make_nvp("is_child", v.is_child_);
+    ar >> make_nvp("is_leaf", v.is_leaf_);
     ar >> make_nvp("is_final", v.is_final_);
     ar >> make_nvp("root_parents", v.root_parents_);
     ar >> make_nvp("parents", v.parents_);
