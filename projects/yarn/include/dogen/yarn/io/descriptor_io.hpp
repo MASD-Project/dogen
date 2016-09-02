@@ -18,25 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_INPUT_DESCRIPTOR_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_INPUT_DESCRIPTOR_SER_HPP
+#ifndef DOGEN_YARN_IO_DESCRIPTOR_IO_HPP
+#define DOGEN_YARN_IO_DESCRIPTOR_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/yarn/types/input_descriptor.hpp"
+#include <iosfwd>
+#include "dogen/yarn/types/descriptor.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::input_descriptor)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace yarn {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::yarn::input_descriptor& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::yarn::input_descriptor& v, unsigned int version);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::yarn::descriptor& v);
 
 } }
 

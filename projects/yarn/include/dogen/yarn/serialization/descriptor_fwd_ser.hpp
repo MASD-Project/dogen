@@ -18,35 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/input_descriptor_hash.hpp"
+#ifndef DOGEN_YARN_SERIALIZATION_DESCRIPTOR_FWD_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_DESCRIPTOR_FWD_SER_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
+#include "dogen/yarn/types/descriptor_fwd.hpp"
 
-inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
-    std::size_t seed(0);
-    combine(seed, v.generic_string());
-    return seed;
-}
+namespace boost {
+namespace serialization {
 
-}
+template<class Archive>
+void save(Archive& ar, const dogen::yarn::descriptor& v, unsigned int version);
 
-namespace dogen {
-namespace yarn {
-
-std::size_t input_descriptor_hasher::hash(const input_descriptor& v) {
-    std::size_t seed(0);
-
-    combine(seed, hash_boost_filesystem_path(v.path()));
-    combine(seed, v.external_modules());
-    combine(seed, v.is_target());
-
-    return seed;
-}
+template<class Archive>
+void load(Archive& ar, dogen::yarn::descriptor& v, unsigned int version);
 
 } }
+
+#endif

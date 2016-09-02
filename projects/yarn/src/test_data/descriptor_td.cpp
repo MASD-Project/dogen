@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/input_descriptor_td.hpp"
+#include "dogen/yarn/test_data/descriptor_td.hpp"
 
 namespace {
 
@@ -45,31 +45,32 @@ bool create_bool(const unsigned int position) {
 namespace dogen {
 namespace yarn {
 
-input_descriptor_generator::input_descriptor_generator() : position_(0) { }
+descriptor_generator::descriptor_generator() : position_(0) { }
 
-void input_descriptor_generator::
+void descriptor_generator::
 populate(const unsigned int position, result_type& v) {
     v.path(create_boost_filesystem_path(position + 0));
-    v.external_modules(create_std_string(position + 1));
-    v.is_target(create_bool(position + 2));
+    v.extension(create_std_string(position + 1));
+    v.external_modules(create_std_string(position + 2));
+    v.is_target(create_bool(position + 3));
 }
 
-input_descriptor_generator::result_type
-input_descriptor_generator::create(const unsigned int position) {
-    input_descriptor r;
-    input_descriptor_generator::populate(position, r);
+descriptor_generator::result_type
+descriptor_generator::create(const unsigned int position) {
+    descriptor r;
+    descriptor_generator::populate(position, r);
     return r;
 }
 
-input_descriptor_generator::result_type*
-input_descriptor_generator::create_ptr(const unsigned int position) {
-    input_descriptor* p = new input_descriptor();
-    input_descriptor_generator::populate(position, *p);
+descriptor_generator::result_type*
+descriptor_generator::create_ptr(const unsigned int position) {
+    descriptor* p = new descriptor();
+    descriptor_generator::populate(position, *p);
     return p;
 }
 
-input_descriptor_generator::result_type
-input_descriptor_generator::operator()() {
+descriptor_generator::result_type
+descriptor_generator::operator()() {
     return create(position_++);
 }
 

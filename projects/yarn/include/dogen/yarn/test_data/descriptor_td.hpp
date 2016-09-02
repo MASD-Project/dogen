@@ -18,35 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_HASH_INPUT_DESCRIPTOR_HASH_HPP
-#define DOGEN_YARN_HASH_INPUT_DESCRIPTOR_HASH_HPP
+#ifndef DOGEN_YARN_TEST_DATA_DESCRIPTOR_TD_HPP
+#define DOGEN_YARN_TEST_DATA_DESCRIPTOR_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/yarn/types/input_descriptor.hpp"
+#include "dogen/yarn/types/descriptor.hpp"
 
 namespace dogen {
 namespace yarn {
 
-struct input_descriptor_hasher {
+class descriptor_generator {
 public:
-    static std::size_t hash(const input_descriptor& v);
+    descriptor_generator();
+
+public:
+    typedef dogen::yarn::descriptor result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } }
 
-namespace std {
-
-template<>
-struct hash<dogen::yarn::input_descriptor> {
-public:
-    size_t operator()(const dogen::yarn::input_descriptor& v) const {
-        return dogen::yarn::input_descriptor_hasher::hash(v);
-    }
-};
-
-}
 #endif

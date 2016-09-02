@@ -32,7 +32,7 @@
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"
 #include "dogen/yarn/types/frontend_interface.hpp"
-#include "dogen/yarn/types/input_descriptor.hpp"
+#include "dogen/yarn/types/descriptor.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -53,21 +53,21 @@ public:
 
 private:
     /**
-     * @brief Given an input descriptor, obtains the associated
-     * intermediate model.
+     * @brief Given a descriptor, obtains the associated intermediate
+     * model.
      */
-    intermediate_model obtain_model(const input_descriptor& d) const;
+    intermediate_model obtain_model(const descriptor& d) const;
 
 public:
     /**
-     * @brief Process all of the inputs into intermediate models,
+     * @brief Process all of the descriptors into intermediate models,
      * using the appropriate frontends.
      *
      * @pre All supplied descriptors must be supported by the
      * registered frontends.
      */
-    std::list<intermediate_model> execute(
-        const std::list<input_descriptor>& descriptors);
+    std::list<intermediate_model>
+    execute(const std::list<descriptor>& descriptors);
 
 private:
     static std::shared_ptr<frontend_registrar> registrar_;

@@ -28,7 +28,6 @@ using namespace dogen::utility::log;
 namespace {
 
 const std::string id("yarn.json.frontend");
-const std::list<std::string> extensions({ ".json" });
 auto lg(logger_factory(id));
 const std::string empty;
 
@@ -45,11 +44,12 @@ std::string frontend::id() const {
 }
 
 std::list<std::string> frontend::supported_extensions() const {
-    return ::extensions;
+    static const std::list<std::string> extensions({ ".json" });
+    return extensions;
 }
 
-yarn::intermediate_model frontend::execute(const dynamic::workflow& w,
-    const yarn::input_descriptor& d) {
+yarn::intermediate_model frontend::
+execute(const dynamic::workflow& w, const yarn::descriptor& d) {
     yarn::json::hydrator h(w);
     return h.hydrate(d.path());
 }

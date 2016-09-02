@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/input_descriptor_io.hpp"
+#include "dogen/yarn/io/descriptor_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -33,7 +33,7 @@ inline std::string tidy_up_string(std::string s) {
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const input_descriptor& v) {
+std::ostream& operator<<(std::ostream& s, const descriptor& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -41,8 +41,9 @@ std::ostream& operator<<(std::ostream& s, const input_descriptor& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::input_descriptor\"" << ", "
+      << "\"__type__\": " << "\"dogen::yarn::descriptor\"" << ", "
       << "\"path\": " << "\"" << v.path().generic_string() << "\"" << ", "
+      << "\"extension\": " << "\"" << tidy_up_string(v.extension()) << "\"" << ", "
       << "\"external_modules\": " << "\"" << tidy_up_string(v.external_modules()) << "\"" << ", "
       << "\"is_target\": " << v.is_target()
       << " }";

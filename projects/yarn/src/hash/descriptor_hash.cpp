@@ -18,36 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TEST_DATA_INPUT_DESCRIPTOR_TD_HPP
-#define DOGEN_YARN_TEST_DATA_INPUT_DESCRIPTOR_TD_HPP
+#include "dogen/yarn/hash/descriptor_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include "dogen/yarn/types/input_descriptor.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace yarn {
 
-class input_descriptor_generator {
-public:
-    input_descriptor_generator();
+std::size_t descriptor_hasher::hash(const descriptor& v) {
+    std::size_t seed(0);
 
-public:
-    typedef dogen::yarn::input_descriptor result_type;
+    combine(seed, hash_boost_filesystem_path(v.path()));
+    combine(seed, v.extension());
+    combine(seed, v.external_modules());
+    combine(seed, v.is_target());
 
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+    return seed;
+}
 
 } }
-
-#endif

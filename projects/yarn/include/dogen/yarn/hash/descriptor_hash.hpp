@@ -18,34 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_JSON_TYPES_FRONTEND_HPP
-#define DOGEN_YARN_JSON_TYPES_FRONTEND_HPP
+#ifndef DOGEN_YARN_HASH_DESCRIPTOR_HASH_HPP
+#define DOGEN_YARN_HASH_DESCRIPTOR_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/frontend_interface.hpp"
+#include <functional>
+#include "dogen/yarn/types/descriptor.hpp"
 
 namespace dogen {
 namespace yarn {
-namespace json {
 
-/**
- * @brief Generates an intermediate yarn model from a JSON file with a
- * yarn format.
- */
-class frontend final : public yarn::frontend_interface {
+struct descriptor_hasher {
 public:
-    virtual ~frontend() noexcept;
-
-public:
-    std::string id() const override;
-    std::list<std::string> supported_extensions() const override;
-    yarn::intermediate_model execute(const dynamic::workflow& w,
-        const yarn::descriptor& d) override;
+    static std::size_t hash(const descriptor& v);
 };
 
-} } }
+} }
 
+namespace std {
+
+template<>
+struct hash<dogen::yarn::descriptor> {
+public:
+    size_t operator()(const dogen::yarn::descriptor& v) const {
+        return dogen::yarn::descriptor_hasher::hash(v);
+    }
+};
+
+}
 #endif

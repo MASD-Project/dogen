@@ -18,23 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_INPUT_DESCRIPTOR_FWD_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_INPUT_DESCRIPTOR_FWD_SER_HPP
+#ifndef DOGEN_YARN_TYPES_DESCRIPTOR_FACTORY_FWD_HPP
+#define DOGEN_YARN_TYPES_DESCRIPTOR_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/input_descriptor_fwd.hpp"
+namespace dogen {
+namespace yarn {
 
-namespace boost {
-namespace serialization {
-
-template<class Archive>
-void save(Archive& ar, const dogen::yarn::input_descriptor& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::yarn::input_descriptor& v, unsigned int version);
+class descriptor_factory;
 
 } }
 

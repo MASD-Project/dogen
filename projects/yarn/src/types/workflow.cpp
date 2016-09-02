@@ -37,10 +37,9 @@ namespace dogen {
 namespace yarn {
 
 std::list<intermediate_model> workflow::obtain_intermediate_models_activity(
-    const dynamic::repository& drp,
-    const std::list<input_descriptor>& id) const {
+    const dynamic::repository& drp, const std::list<descriptor>& d) const {
     frontend_workflow w(drp);
-    return w.execute(id);
+    return w.execute(d);
 }
 
 void workflow::expand_intermediate_models_activity(
@@ -63,9 +62,9 @@ model workflow::transform_intermediate_model_activity(
     return t.transform(m);
 }
 
-model workflow::execute(const dynamic::repository& drp,
-    const std::list<input_descriptor>& id) const {
-    auto im(obtain_intermediate_models_activity(drp, id));
+model workflow::
+execute(const dynamic::repository& drp, const std::list<descriptor>& d) const {
+    auto im(obtain_intermediate_models_activity(drp, d));
     expand_intermediate_models_activity(drp, im);
     const auto m(assemble_intermediate_models_activity(im));
     const auto r(transform_intermediate_model_activity(m));

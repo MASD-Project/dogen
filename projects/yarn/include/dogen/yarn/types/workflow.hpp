@@ -27,7 +27,7 @@
 
 #include <list>
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/yarn/types/input_descriptor.hpp"
+#include "dogen/yarn/types/descriptor.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/model.hpp"
 
@@ -40,8 +40,7 @@ private:
      * @brief Obtains all intermediate models.
      */
     std::list<intermediate_model> obtain_intermediate_models_activity(
-        const dynamic::repository& drp,
-        const std::list<input_descriptor>& id) const;
+        const dynamic::repository& drp, const std::list<descriptor>& d) const;
 
     /**
      * @brief Executes the expansion workflow.
@@ -65,7 +64,7 @@ private:
 
 public:
     model execute(const dynamic::repository& drp,
-        const std::list<input_descriptor>& id) const;
+        const std::list<descriptor>& d) const;
 };
 
 } }

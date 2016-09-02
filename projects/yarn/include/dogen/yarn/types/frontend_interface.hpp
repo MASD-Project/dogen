@@ -28,14 +28,14 @@
 #include <list>
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/input_descriptor.hpp"
+#include "dogen/yarn/types/descriptor.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 
 namespace dogen {
 namespace yarn {
 
 /**
- * @brief Reads an intermediate model from an input descriptor.
+ * @brief Reads an intermediate model from a descriptor.
  */
 class frontend_interface {
 public:
@@ -57,14 +57,14 @@ public:
     virtual std::list<std::string> supported_extensions() const = 0;
 
     /**
-     * @brief Reads the contents of the input descriptor and
-     * transforms it into an intermediate model.
+     * @brief Reads the contents of the descriptor and transforms it
+     * into an intermediate model.
      *
      * @note Method is non-const by design at the moment as some
      * frontends have state.
      */
     virtual intermediate_model execute(const dynamic::workflow& w,
-        const input_descriptor& d) = 0;
+        const descriptor& d) = 0;
 };
 
 } }

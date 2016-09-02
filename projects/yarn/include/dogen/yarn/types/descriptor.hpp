@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_INPUT_DESCRIPTOR_HPP
-#define DOGEN_YARN_TYPES_INPUT_DESCRIPTOR_HPP
+#ifndef DOGEN_YARN_TYPES_DESCRIPTOR_HPP
+#define DOGEN_YARN_TYPES_DESCRIPTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,37 +28,38 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen/yarn/serialization/input_descriptor_fwd_ser.hpp"
+#include "dogen/yarn/serialization/descriptor_fwd_ser.hpp"
 
 namespace dogen {
 namespace yarn {
 
 /**
- * @brief Describes an input to process.
+ * @brief Describes the location of a model input.
  */
-class input_descriptor final {
+class descriptor final {
 public:
-    input_descriptor(const input_descriptor&) = default;
-    ~input_descriptor() = default;
+    descriptor(const descriptor&) = default;
+    ~descriptor() = default;
 
 public:
-    input_descriptor();
+    descriptor();
 
 public:
-    input_descriptor(input_descriptor&& rhs);
+    descriptor(descriptor&& rhs);
 
 public:
-    input_descriptor(
+    descriptor(
         const boost::filesystem::path& path,
+        const std::string& extension,
         const std::string& external_modules,
         const bool is_target);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::yarn::input_descriptor& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::yarn::descriptor& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::yarn::input_descriptor& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::yarn::descriptor& v, unsigned int version);
 
 public:
     /**
@@ -70,6 +71,11 @@ public:
     void path(const boost::filesystem::path& v);
     void path(const boost::filesystem::path&& v);
     /**@}*/
+
+    const std::string& extension() const;
+    std::string& extension();
+    void extension(const std::string& v);
+    void extension(const std::string&& v);
 
     /**
      * @brief External modules which contain the model, delimited by "::".
@@ -90,17 +96,18 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const input_descriptor& rhs) const;
-    bool operator!=(const input_descriptor& rhs) const {
+    bool operator==(const descriptor& rhs) const;
+    bool operator!=(const descriptor& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(input_descriptor& other) noexcept;
-    input_descriptor& operator=(input_descriptor other);
+    void swap(descriptor& other) noexcept;
+    descriptor& operator=(descriptor other);
 
 private:
     boost::filesystem::path path_;
+    std::string extension_;
     std::string external_modules_;
     bool is_target_;
 };
@@ -111,8 +118,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::yarn::input_descriptor& lhs,
-    dogen::yarn::input_descriptor& rhs) {
+    dogen::yarn::descriptor& lhs,
+    dogen::yarn::descriptor& rhs) {
     lhs.swap(rhs);
 }
 

@@ -34,7 +34,7 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/yarn/types/model.hpp"
-#include "dogen/yarn/types/input_descriptor.hpp"
+#include "dogen/yarn/types/descriptor.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/formatters/types/file_writer_interface.hpp"
 
@@ -103,17 +103,15 @@ private:
         const std::forward_list<dynamic::ownership_hierarchy>& oh) const;
 
     /**
-     * @brief Create a list of all input descriptors.
+     * @brief Create a list of all descriptors.
      */
-    std::list<yarn::input_descriptor>
-    obtain_input_descriptors_activity() const;
+    std::list<yarn::descriptor> obtain_descriptors_activity() const;
 
     /**
      * @brief Obtain the yarn model.
      */
-    yarn::model obtain_yarn_model_activity(
-        const dynamic::repository& rp,
-        const std::list<yarn::input_descriptor>& id) const;
+    yarn::model obtain_yarn_model_activity(const dynamic::repository& rp,
+        const std::list<yarn::descriptor>& d) const;
 
     /**
      * @brief Performs a housekeeping run for the supplied directories.
