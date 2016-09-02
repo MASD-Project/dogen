@@ -20,25 +20,16 @@ class_header_formatter_stitch(assistant& a, const yarn::object& o) {
 
 <#+
             a.comment(o.documentation());
-            if (o.parents().empty()) {
+            if (!o.parent()) {
 #>
 class <#= sn #> <#= a.make_final_keyword_text(o) #>{
 <#+
-            } else if (o.parents().size() == 1) {
-                const auto& pn(o.parents().front());
+            } else {
+                const auto& pn(*o.parent());
                 const auto pqn(a.get_qualified_name(pn));
 #>
 class <#= sn #> <#= a.make_final_keyword_text(o) #>: public <#= pqn #> {
 <#+
-            } else {
-                dogen::formatters::sequence_formatter sf(o.parents().size());
-                for (const auto pn : o.parents()) {
-                    const auto pqn(a.get_qualified_name(pn));
-#>
-    public <#= pqn #><#= sf.postfix() #>
-<#+
-                    sf.next();
-                }
             }
 #>
 public:
@@ -173,7 +164,7 @@ public:
 <#+
             } else if (o.is_root_parent_visitable() && !o.is_parent()) {
                 const auto vsn(o.visitable_by().front().simple());
-                const auto rpsn(o.root_parents().front().simple());
+                const auto rpsn(o.root_parent()->simple());
 #>
 public:
     using <#= rpsn #>::accept;
@@ -207,7 +198,7 @@ public:
     virtual void to_stream(std::ostream& s) const;
 
 <#+
-                } else if (!o.parents().empty()) {
+                } else if (o.parent()) {
 #>
 public:
     void to_stream(std::ostream& s) const override;
@@ -292,12 +283,12 @@ public:
     virtual bool equals(const <#= sn #>& other) const = 0;
 <#+
                 } else if (o.is_parent()) {
-                    const auto rpn(o.root_parents().front());
+                    const auto rpn(*o.root_parent());
 #>
     virtual bool equals(const <#= a.get_qualified_name(rpn) #>& other) const = 0;
 <#+
-                } else if (!o.parents().empty()) {
-                    const auto rpn(o.root_parents().front());
+                } else if (o.root_parent()) {
+                    const auto rpn(*o.root_parent());
 #>
     bool equals(const <#= a.get_qualified_name(rpn) #>& other) const override;
 <#+

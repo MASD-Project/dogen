@@ -57,6 +57,13 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
+boost::optional<dogen::yarn::name>
+create_boost_optional_dogen_yarn_name(unsigned int position) {
+    boost::optional<dogen::yarn::name> r(
+        create_dogen_yarn_name(position));
+    return r;
+}
+
 std::list<dogen::yarn::name> create_std_list_dogen_yarn_name(unsigned int position) {
     std::list<dogen::yarn::name> r;
     for (unsigned int i(0); i < 4; ++i) {
@@ -94,8 +101,8 @@ populate(const unsigned int position, result_type& v) {
     v.is_child(create_bool(position + 6));
     v.is_leaf(create_bool(position + 7));
     v.is_final(create_bool(position + 8));
-    v.root_parents(create_std_list_dogen_yarn_name(position + 9));
-    v.parents(create_std_list_dogen_yarn_name(position + 10));
+    v.root_parent(create_boost_optional_dogen_yarn_name(position + 9));
+    v.parent(create_boost_optional_dogen_yarn_name(position + 10));
     v.leaves(create_std_list_dogen_yarn_name(position + 11));
     v.in_inheritance_relationship(create_bool(position + 12));
     v.transparent_associations(create_std_list_dogen_yarn_name(position + 13));

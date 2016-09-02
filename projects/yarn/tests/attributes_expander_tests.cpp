@@ -349,8 +349,8 @@ BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_model_concepts_resul
     auto e(factory.object_with_parent_in_the_same_model());
     for (auto& pair : e.objects()) {
         auto& o(pair.second);
-        for (const auto& p : o.parents())
-            o.inherited_attributes()[p];
+        if (o.parent())
+            o.inherited_attributes()[*o.parent()];
     }
 
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << a;
@@ -371,8 +371,8 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
     auto e(factory.object_with_third_degree_parent_in_same_model());
     for (auto& pair : e.objects()) {
         auto& o(pair.second);
-        for (const auto& p : o.parents())
-            o.inherited_attributes()[p];
+        if (o.parent())
+            o.inherited_attributes()[*o.parent()];
     }
 
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << a;

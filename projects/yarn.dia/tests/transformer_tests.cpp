@@ -957,11 +957,11 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
         const auto& n(o.name());
 
         if (is_type_one(n)) {
-            BOOST_CHECK(o.parents().empty());
-            BOOST_CHECK(o.root_parents().empty());
+            BOOST_CHECK(!o.parent());
+            BOOST_CHECK(!o.root_parent());
         } else if (is_type_two(n)) {
-            BOOST_REQUIRE(o.parents().size() == 1);
-            BOOST_CHECK(is_type_one(o.parents().front()));
+            BOOST_REQUIRE(o.parent());
+            BOOST_CHECK(is_type_one(*o.parent()));
         } else {
             BOOST_LOG_SEV(lg, error) << "Unexpected type name: " << n.id();
             BOOST_FAIL("Unexpected type name");

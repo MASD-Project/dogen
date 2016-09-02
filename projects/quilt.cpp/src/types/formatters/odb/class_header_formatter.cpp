@@ -61,7 +61,7 @@ provider::provide(const properties::inclusion_dependencies_builder_factory& f,
     const auto self_fn(class_header_formatter::static_formatter_name());
     builder.add(o.transparent_associations(), self_fn);
     builder.add(o.opaque_associations(), self_fn);
-    builder.add(o.parents(), self_fn);
+    builder.add(o.parent(), self_fn);
     return builder.build();
 }
 

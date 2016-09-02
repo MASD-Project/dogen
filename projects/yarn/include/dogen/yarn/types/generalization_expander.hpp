@@ -28,6 +28,7 @@
 #include <list>
 #include <unordered_map>
 #include <unordered_set>
+#include <boost/optional.hpp>
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/name.hpp"
 
@@ -42,7 +43,7 @@ private:
      */
     struct generalization_details {
         std::unordered_map<std::string, std::list<name> > leaves;
-        std::unordered_map<std::string, std::list<name> > root_parents;
+        std::unordered_map<std::string, boost::optional<name> > root_parents;
         std::unordered_set<std::string> parents;
     };
 
@@ -59,7 +60,7 @@ private:
      *
      * @return Root parents of the tree we are recursing into.
      */
-    std::list<name> recurse_generalization(const intermediate_model& im,
+    boost::optional<name> recurse_generalization(const intermediate_model& im,
         const yarn::name& leaf, const yarn::object& o,
         generalization_details& d) const;
 

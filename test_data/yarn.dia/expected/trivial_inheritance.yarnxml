@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
-<boost_serialization signature="serialization::archive" version="14">
+<boost_serialization signature="serialization::archive" version="13">
 <entity class_id="11" tracking_level="0" version="0">
 	<name class_id="12" tracking_level="0" version="0">
 		<id>&lt;trivial_inheritance&gt;</id>
@@ -450,14 +450,13 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>1</is_final>
-				<root_parents>
-					<count>0</count>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>1</initialized>
 					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
+					<value>
 						<id>&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;</id>
 						<simple>move_ctor_base</simple>
 						<qualified>
@@ -485,8 +484,8 @@ in the context of inheritance.
 							<element></element>
 						</location>
 						<identifiable>trivial_inheritance_move_ctor_base</identifiable>
-					</item>
-				</parents>
+					</value>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -673,14 +672,13 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>1</is_final>
-				<root_parents>
-					<count>0</count>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>1</initialized>
 					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
+					<value>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg1&gt;&lt;parent&gt;</id>
 						<simple>parent</simple>
 						<qualified>
@@ -709,8 +707,8 @@ in the context of inheritance.
 							<element></element>
 						</location>
 						<identifiable>trivial_inheritance_pkg1_parent</identifiable>
-					</item>
-				</parents>
+					</value>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -815,14 +813,12 @@ in the context of inheritance.
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parents>
-					<count>0</count>
-					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>0</count>
-					<item_version>0</item_version>
-				</parents>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>0</initialized>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1009,14 +1005,12 @@ in the context of inheritance.
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parents>
-					<count>0</count>
-					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>0</count>
-					<item_version>0</item_version>
-				</parents>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>0</initialized>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1203,14 +1197,12 @@ in the context of inheritance.
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parents>
-					<count>0</count>
-					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>0</count>
-					<item_version>0</item_version>
-				</parents>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>0</initialized>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1315,14 +1307,12 @@ in the context of inheritance.
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parents>
-					<count>0</count>
-					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>0</count>
-					<item_version>0</item_version>
-				</parents>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>0</initialized>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1509,14 +1499,12 @@ in the context of inheritance.
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parents>
-					<count>0</count>
-					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>0</count>
-					<item_version>0</item_version>
-				</parents>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>0</initialized>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1621,14 +1609,13 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>1</is_final>
-				<root_parents>
-					<count>0</count>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>1</initialized>
 					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
+					<value>
 						<id>&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;</id>
 						<simple>parent_with_members</simple>
 						<qualified>
@@ -1656,8 +1643,8 @@ in the context of inheritance.
 							<element></element>
 						</location>
 						<identifiable>trivial_inheritance_parent_with_members</identifiable>
-					</item>
-				</parents>
+					</value>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1842,14 +1829,13 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parents>
-					<count>0</count>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>1</initialized>
 					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
+					<value>
 						<id>&lt;trivial_inheritance&gt;&lt;parent_with_members&gt;</id>
 						<simple>parent_with_members</simple>
 						<qualified>
@@ -1877,8 +1863,8 @@ in the context of inheritance.
 							<element></element>
 						</location>
 						<identifiable>trivial_inheritance_parent_with_members</identifiable>
-					</item>
-				</parents>
+					</value>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2063,14 +2049,12 @@ in the context of inheritance.
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parents>
-					<count>0</count>
-					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>0</count>
-					<item_version>0</item_version>
-				</parents>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>0</initialized>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2257,14 +2241,13 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>1</is_final>
-				<root_parents>
-					<count>0</count>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>1</initialized>
 					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
+					<value>
 						<id>&lt;trivial_inheritance&gt;&lt;pkg2&gt;&lt;parent&gt;</id>
 						<simple>parent</simple>
 						<qualified>
@@ -2293,8 +2276,8 @@ in the context of inheritance.
 							<element></element>
 						</location>
 						<identifiable>trivial_inheritance_pkg2_parent</identifiable>
-					</item>
-				</parents>
+					</value>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2399,14 +2382,13 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>1</is_final>
-				<root_parents>
-					<count>0</count>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>1</initialized>
 					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
+					<value>
 						<id>&lt;trivial_inheritance&gt;&lt;parent_without_members&gt;</id>
 						<simple>parent_without_members</simple>
 						<qualified>
@@ -2434,8 +2416,8 @@ in the context of inheritance.
 							<element></element>
 						</location>
 						<identifiable>trivial_inheritance_parent_without_members</identifiable>
-					</item>
-				</parents>
+					</value>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2620,14 +2602,12 @@ in the context of inheritance.
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parents>
-					<count>0</count>
-					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>0</count>
-					<item_version>0</item_version>
-				</parents>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>0</initialized>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2812,14 +2792,13 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>1</is_final>
-				<root_parents>
-					<count>0</count>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>1</initialized>
 					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
+					<value>
 						<id>&lt;trivial_inheritance&gt;&lt;parent_without_members&gt;</id>
 						<simple>parent_without_members</simple>
 						<qualified>
@@ -2847,8 +2826,8 @@ in the context of inheritance.
 							<element></element>
 						</location>
 						<identifiable>trivial_inheritance_parent_without_members</identifiable>
-					</item>
-				</parents>
+					</value>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2953,14 +2932,12 @@ in the context of inheritance.
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>1</is_final>
-				<root_parents>
-					<count>0</count>
-					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>0</count>
-					<item_version>0</item_version>
-				</parents>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>0</initialized>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3145,14 +3122,13 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>1</is_final>
-				<root_parents>
-					<count>0</count>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>1</initialized>
 					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
+					<value>
 						<id>&lt;trivial_inheritance&gt;&lt;base&gt;</id>
 						<simple>base</simple>
 						<qualified>
@@ -3180,8 +3156,8 @@ in the context of inheritance.
 							<element></element>
 						</location>
 						<identifiable>trivial_inheritance_base</identifiable>
-					</item>
-				</parents>
+					</value>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3368,14 +3344,13 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>1</is_final>
-				<root_parents>
-					<count>0</count>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>1</initialized>
 					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
+					<value>
 						<id>&lt;trivial_inheritance&gt;&lt;parent_outside&gt;</id>
 						<simple>parent_outside</simple>
 						<qualified>
@@ -3403,8 +3378,8 @@ in the context of inheritance.
 							<element></element>
 						</location>
 						<identifiable>trivial_inheritance_parent_outside</identifiable>
-					</item>
-				</parents>
+					</value>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3509,14 +3484,12 @@ in the context of inheritance.
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>1</is_final>
-				<root_parents>
-					<count>0</count>
-					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>0</count>
-					<item_version>0</item_version>
-				</parents>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>0</initialized>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3701,14 +3674,13 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>1</is_final>
-				<root_parents>
-					<count>0</count>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>1</initialized>
 					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
+					<value>
 						<id>&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;</id>
 						<simple>third_child_with_members</simple>
 						<qualified>
@@ -3736,8 +3708,8 @@ in the context of inheritance.
 							<element></element>
 						</location>
 						<identifiable>trivial_inheritance_third_child_with_members</identifiable>
-					</item>
-				</parents>
+					</value>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3842,14 +3814,13 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
-				<root_parents>
-					<count>0</count>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>1</initialized>
 					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
+					<value>
 						<id>&lt;trivial_inheritance&gt;&lt;base&gt;</id>
 						<simple>base</simple>
 						<qualified>
@@ -3877,8 +3848,8 @@ in the context of inheritance.
 							<element></element>
 						</location>
 						<identifiable>trivial_inheritance_base</identifiable>
-					</item>
-				</parents>
+					</value>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3983,14 +3954,13 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>1</is_final>
-				<root_parents>
-					<count>0</count>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>1</initialized>
 					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
+					<value>
 						<id>&lt;trivial_inheritance&gt;&lt;third_child_with_members&gt;</id>
 						<simple>third_child_with_members</simple>
 						<qualified>
@@ -4018,8 +3988,8 @@ in the context of inheritance.
 							<element></element>
 						</location>
 						<identifiable>trivial_inheritance_third_child_with_members</identifiable>
-					</item>
-				</parents>
+					</value>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -4204,14 +4174,13 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>1</is_final>
-				<root_parents>
-					<count>0</count>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>1</initialized>
 					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
+					<value>
 						<id>&lt;trivial_inheritance&gt;&lt;descendant1&gt;</id>
 						<simple>descendant1</simple>
 						<qualified>
@@ -4239,8 +4208,8 @@ in the context of inheritance.
 							<element></element>
 						</location>
 						<identifiable>trivial_inheritance_descendant1</identifiable>
-					</item>
-				</parents>
+					</value>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -4427,14 +4396,13 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>1</is_final>
-				<root_parents>
-					<count>0</count>
+				<root_parent>
+					<initialized>0</initialized>
+				</root_parent>
+				<parent>
+					<initialized>1</initialized>
 					<item_version>0</item_version>
-				</root_parents>
-				<parents>
-					<count>1</count>
-					<item_version>0</item_version>
-					<item>
+					<value>
 						<id>&lt;trivial_inheritance&gt;&lt;move_ctor_base&gt;</id>
 						<simple>move_ctor_base</simple>
 						<qualified>
@@ -4462,8 +4430,8 @@ in the context of inheritance.
 							<element></element>
 						</location>
 						<identifiable>trivial_inheritance_move_ctor_base</identifiable>
-					</item>
-				</parents>
+					</value>
+				</parent>
 				<leaves>
 					<count>0</count>
 					<item_version>0</item_version>

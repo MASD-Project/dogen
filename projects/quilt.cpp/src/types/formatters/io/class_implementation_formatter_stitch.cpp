@@ -40,11 +40,11 @@ dogen::formatters::file class_implementation_formatter_stitch(
             auto snf(a.make_scoped_namespace_formatter(ns));
             const auto sn(o.name().simple());
             const auto qn(a.get_qualified_name(o.name()));
-            const bool no_arg(!o.is_parent() && o.parents().empty() &&
+            const bool no_arg(!o.is_parent() && !o.parent() &&
                 o.local_attributes().empty());
 a.stream() << std::endl;
 a.stream() << "std::ostream& operator<<(std::ostream& s, const " << sn << "&" << (no_arg ? "" : " v") << ") {" << std::endl;
-            if (o.is_parent() || !o.parents().empty()) {
+            if (o.is_parent() || o.parent()) {
 a.stream() << "    v.to_stream(s);" << std::endl;
 a.stream() << "    return(s);" << std::endl;
             } else

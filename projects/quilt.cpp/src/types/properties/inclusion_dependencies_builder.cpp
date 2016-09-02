@@ -157,6 +157,15 @@ add(const yarn::name& n, const std::string& formatter_name) {
         add(*id);
 }
 
+void inclusion_dependencies_builder::add(const boost::optional<yarn::name>& n,
+    const std::string& formatter_name) {
+
+    if (!n)
+        return;
+
+    add(*n, formatter_name);
+}
+
 void inclusion_dependencies_builder::
 add(const std::list<yarn::name>& names, const std::string& formatter_name) {
     for (const auto& n : names)

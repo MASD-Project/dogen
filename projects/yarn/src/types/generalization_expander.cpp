@@ -22,6 +22,7 @@
 #include <list>
 #include <boost/lexical_cast.hpp>
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/optional_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
@@ -38,7 +39,7 @@ const std::string child_with_no_parents(
     "Object is child but has no parents. Child: ");
 const std::string parent_not_found("Could not find parent: ");
 const std::string object_not_found("Could not find object: ");
-const std::string child_with_no_root_parent(
+const std::string child_without_root_parent(
     "Object is child but has no root parent. Child: ");
 
 }
@@ -61,48 +62,43 @@ bool generalization_expander::is_leaf(const object& o) const {
     return true;
 }
 
-std::list<name> generalization_expander::
+boost::optional<name> generalization_expander::
 recurse_generalization(const intermediate_model& im, const name& leaf,
     const object& o, generalization_details& d) const {
 
     if (!o.is_child())
-        return std::list<name> { o.name() };
+        return o.name();
 
-    if (o.parents().empty()) {
+    if (!o.parent()) {
         const auto id(o.name().id());
         BOOST_LOG_SEV(lg, error) << child_with_no_parents << id;
         BOOST_THROW_EXCEPTION(expansion_error(child_with_no_parents + id));
     }
 
-    std::list<name> root_parents;
-    for (const auto& parent : o.parents()) {
-        auto j(im.objects().find(parent.id()));
-        if (j == im.objects().end()) {
-            const auto id(parent.id());
-            BOOST_LOG_SEV(lg, error) << parent_not_found << id;
-            BOOST_THROW_EXCEPTION(expansion_error(parent_not_found + id));
-        }
-
-        const auto op(recurse_generalization(im, leaf, j->second, d));
-        if (op.empty()) {
-            const auto id(parent.id());
-            BOOST_LOG_SEV(lg, error) << child_with_no_root_parent << id;
-            BOOST_THROW_EXCEPTION(
-                expansion_error(child_with_no_root_parent + id));
-        }
-
-        for (const auto n : op)
-            root_parents.push_back(n);
-
-        d.root_parents[parent.id()] = op;
-        BOOST_LOG_SEV(lg, debug) << "Type: " << parent.id()
-                                 << " has original parents: " << op;
-
-        d.leaves[parent.id()].push_back(leaf);
-        BOOST_LOG_SEV(lg, debug) << "Type is a leaf of: " << parent.id();
+    const auto& parent(*o.parent());
+    auto j(im.objects().find(parent.id()));
+    if (j == im.objects().end()) {
+        const auto id(parent.id());
+        BOOST_LOG_SEV(lg, error) << parent_not_found << id;
+        BOOST_THROW_EXCEPTION(expansion_error(parent_not_found + id));
     }
-    d.root_parents[o.name().id()] = root_parents;
-    return root_parents;
+
+    const auto rp(recurse_generalization(im, leaf, j->second, d));
+    if (!rp) {
+        const auto id(parent.id());
+        BOOST_LOG_SEV(lg, error) << child_without_root_parent << id;
+        BOOST_THROW_EXCEPTION(expansion_error(child_without_root_parent + id));
+    }
+
+    d.root_parents[parent.id()] = rp;
+    BOOST_LOG_SEV(lg, debug) << "Type: " << parent.id()
+                             << " has original parents: " << *rp;
+
+    d.leaves[parent.id()].push_back(leaf);
+    BOOST_LOG_SEV(lg, debug) << "Type is a leaf of: " << parent.id();
+
+    d.root_parents[o.name().id()] = rp;
+    return rp;
 }
 
 generalization_expander::generalization_details generalization_expander::
@@ -194,16 +190,15 @@ populate(const generalization_details& d, intermediate_model& m) const {
             continue;
         }
 
-        o.root_parents(pair.second);
-        for (const auto& opn : pair.second) {
+        o.root_parent(pair.second);
+        if (o.root_parent()) {
+            const auto& opn(*o.root_parent());
             const auto j(m.objects().find(opn.id()));
             if (j == m.objects().end()) {
                 const auto id(opn.id());
                 BOOST_LOG_SEV(lg, error) << object_not_found << id;
                 BOOST_THROW_EXCEPTION(expansion_error(object_not_found + id));
             }
-
-            // FIXME: we are assuming a single parent here.
             o.is_root_parent_visitable(j->second.is_visitable());
         }
     }

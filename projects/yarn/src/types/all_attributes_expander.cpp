@@ -112,7 +112,8 @@ void all_attributes_expander::expand_object(object& o, intermediate_model& im,
      * parent properties first on our all attributes container by
      * design; local attributes are last.
      */
-    for (const auto& n : o.parents()) {
+    if (o.parent()) {
+        const auto& n(*o.parent());
         auto& parent(find_object(n, im));
         expand_object(parent, im, processed_ids);
 
@@ -125,11 +126,10 @@ void all_attributes_expander::expand_object(object& o, intermediate_model& im,
         const auto& pattrs(parent.all_attributes());
         o.inherited_attributes().insert(std::make_pair(pn, pattrs));
 
-        if (pattrs.empty())
-            continue;
-
-        auto& attrs(o.all_attributes());
-        attrs.insert(attrs.end(), pattrs.begin(), pattrs.end());
+        if (!pattrs.empty()) {
+            auto& attrs(o.all_attributes());
+            attrs.insert(attrs.end(), pattrs.begin(), pattrs.end());
+        }
     }
 
     o.all_attributes().insert(o.all_attributes().end(),

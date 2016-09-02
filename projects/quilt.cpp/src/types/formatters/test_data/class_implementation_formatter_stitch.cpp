@@ -58,7 +58,7 @@ a.stream() << sn << "_generator::" << sn << "_generator() : position_(0) { }" <<
              * Populate method.
              */
             if (!o.is_immutable()) {
-                bool no_args(o.local_attributes().empty() && o.parents().empty());
+                bool no_args(o.local_attributes().empty() && !o.parent());
                 if (no_args) {
 a.stream() << std::endl;
 a.stream() << "void " << sn << "_generator::" << std::endl;
@@ -69,7 +69,8 @@ a.stream() << "void " << sn << "_generator::" << std::endl;
 a.stream() << "populate(const unsigned int position, result_type& v) {" << std::endl;
                 }
 
-                for (const auto pn : o.parents()) {
+                if (o.parent()) {
+                    const auto& pn(*o.parent());
                     const auto pqn(a.get_qualified_name(pn));
 a.stream() << "    " << pqn << "_generator::populate(position, v);" << std::endl;
                 }

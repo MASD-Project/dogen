@@ -34,7 +34,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
 a.stream() << std::endl;
 a.stream() << "namespace {" << std::endl;
 a.stream() << std::endl;
-        if (!o.local_attributes().empty() || !o.parents().empty()) {
+        if (!o.local_attributes().empty() || o.parent()) {
 a.stream() << "template <typename HashableType>" << std::endl;
 a.stream() << "inline void combine(std::size_t& seed, const HashableType& value) {" << std::endl;
 a.stream() << "    std::hash<HashableType> hasher;" << std::endl;
@@ -53,14 +53,13 @@ a.stream() << std::endl;
             const auto qn(a.get_qualified_name(o.name()));
 
 a.stream() << std::endl;
-a.stream() << "std::size_t " << sn << "_hasher::hash(const " << sn << "&" << ((o.local_attributes().empty() && o.parents().empty()) ? "" : " v") << ") {" << std::endl;
+a.stream() << "std::size_t " << sn << "_hasher::hash(const " << sn << "&" << ((o.local_attributes().empty() && !o.parent()) ? "" : " v") << ") {" << std::endl;
 a.stream() << "    std::size_t seed(0);" << std::endl;
-            if (!o.parents().empty()) {
+            if (o.parent()) {
 a.stream() << std::endl;
-                for (const auto& pn : o.parents()) {
-                    const auto pqn(a.get_qualified_name(pn));
+                const auto& pn(*o.parent());
+                const auto pqn(a.get_qualified_name(pn));
 a.stream() << "    combine(seed, dynamic_cast<const " << pqn << "&>(v));" << std::endl;
-                }
             }
 
             if (!o.local_attributes().empty()) {

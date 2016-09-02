@@ -33,9 +33,9 @@ dogen::formatters::file class_header_formatter_stitch(
         const auto qn(a.get_qualified_name(o.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
 
-        if (!o.is_parent() && !o.parents().empty()) {
-            for (const auto pn : o.parents()) {
-                const auto pqn(a.get_qualified_name(pn));
+        if (!o.is_parent() && o.parent()) {
+            const auto& pn(*o.parent());
+            const auto pqn(a.get_qualified_name(pn));
 a.stream() << "namespace boost {" << std::endl;
 a.stream() << std::endl;
 a.stream() << "template<>struct" << std::endl;
@@ -45,7 +45,6 @@ a.stream() << "    " << qn << std::endl;
 a.stream() << "> : public mpl::true_ {};" << std::endl;
 a.stream() << std::endl;
 a.stream() << "}" << std::endl;
-            }
         }
 a.stream() << std::endl;
 a.stream() << "BOOST_SERIALIZATION_SPLIT_FREE(" << qn << ")" << std::endl;

@@ -16,7 +16,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
 namespace {
 
 <#+
-        if (!o.local_attributes().empty() || !o.parents().empty()) {
+        if (!o.local_attributes().empty() || o.parent()) {
 #>
 template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
@@ -40,19 +40,18 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 #>
 
-std::size_t <#= sn #>_hasher::hash(const <#= sn #>&<#= ((o.local_attributes().empty() && o.parents().empty()) ? "" : " v") #>) {
+std::size_t <#= sn #>_hasher::hash(const <#= sn #>&<#= ((o.local_attributes().empty() && !o.parent()) ? "" : " v") #>) {
     std::size_t seed(0);
 <#+
-            if (!o.parents().empty()) {
+            if (o.parent()) {
 #>
 
 <#+
-                for (const auto& pn : o.parents()) {
-                    const auto pqn(a.get_qualified_name(pn));
+                const auto& pn(*o.parent());
+                const auto pqn(a.get_qualified_name(pn));
 #>
     combine(seed, dynamic_cast<const <#= pqn #>&>(v));
 <#+
-                }
             }
 
             if (!o.local_attributes().empty()) {

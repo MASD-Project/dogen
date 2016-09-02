@@ -79,7 +79,7 @@ provider::provide(const properties::inclusion_dependencies_builder_factory& f,
     const auto fwd_fn(traits::forward_declarations_formatter_name());
     builder.add(o.transparent_associations(), self_fn);
     builder.add(o.opaque_associations(), fwd_fn);
-    builder.add(o.parents(), self_fn);
+    builder.add(o.parent(), self_fn);
 
     using hash = formatters::hash::traits;
     const auto hash_fn(hash::traits::class_header_formatter_name());

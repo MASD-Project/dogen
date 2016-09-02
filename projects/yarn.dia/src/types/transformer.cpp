@@ -256,7 +256,7 @@ void transformer::to_object(const processed_object& po, const profile& p,
                                  << o.name().id() << " as "
                                  << j->second.id();
         o.is_child(true);
-        o.parents().push_back(j->second);
+        o.parent(j->second);
     } else {
         BOOST_LOG_SEV(lg, debug) << "Object has no parent: "
                                  << o.name().id();

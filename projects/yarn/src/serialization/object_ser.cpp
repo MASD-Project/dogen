@@ -24,6 +24,7 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/unordered_map.hpp>
@@ -58,8 +59,8 @@ void save(Archive& ar,
     ar << make_nvp("is_child", v.is_child_);
     ar << make_nvp("is_leaf", v.is_leaf_);
     ar << make_nvp("is_final", v.is_final_);
-    ar << make_nvp("root_parents", v.root_parents_);
-    ar << make_nvp("parents", v.parents_);
+    ar << make_nvp("root_parent", v.root_parent_);
+    ar << make_nvp("parent", v.parent_);
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("in_inheritance_relationship", v.in_inheritance_relationship_);
     ar << make_nvp("transparent_associations", v.transparent_associations_);
@@ -89,8 +90,8 @@ void load(Archive& ar,
     ar >> make_nvp("is_child", v.is_child_);
     ar >> make_nvp("is_leaf", v.is_leaf_);
     ar >> make_nvp("is_final", v.is_final_);
-    ar >> make_nvp("root_parents", v.root_parents_);
-    ar >> make_nvp("parents", v.parents_);
+    ar >> make_nvp("root_parent", v.root_parent_);
+    ar >> make_nvp("parent", v.parent_);
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("in_inheritance_relationship", v.in_inheritance_relationship_);
     ar >> make_nvp("transparent_associations", v.transparent_associations_);

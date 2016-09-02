@@ -29,6 +29,7 @@
 #include <iosfwd>
 #include <algorithm>
 #include <unordered_map>
+#include <boost/optional.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/hash/name_hash.hpp"
@@ -51,12 +52,14 @@ namespace yarn {
 class object final : public dogen::yarn::element {
 public:
     object(const object&) = default;
-    object(object&&) = default;
 
 public:
     object();
 
     virtual ~object() noexcept { }
+
+public:
+    object(object&& rhs);
 
 public:
     object(
@@ -77,8 +80,8 @@ public:
         const bool is_child,
         const bool is_leaf,
         const bool is_final,
-        const std::list<dogen::yarn::name>& root_parents,
-        const std::list<dogen::yarn::name>& parents,
+        const boost::optional<dogen::yarn::name>& root_parent,
+        const boost::optional<dogen::yarn::name>& parent,
         const std::list<dogen::yarn::name>& leaves,
         const bool in_inheritance_relationship,
         const std::list<dogen::yarn::name>& transparent_associations,
@@ -210,23 +213,23 @@ public:
     /**@}*/
 
     /**
-     * @brief Types at the root of the inheritance hierarchy.
+     * @brief Top-most parent at the root of the inheritance hierarchy, if any.
      */
     /**@{*/
-    const std::list<dogen::yarn::name>& root_parents() const;
-    std::list<dogen::yarn::name>& root_parents();
-    void root_parents(const std::list<dogen::yarn::name>& v);
-    void root_parents(const std::list<dogen::yarn::name>&& v);
+    const boost::optional<dogen::yarn::name>& root_parent() const;
+    boost::optional<dogen::yarn::name>& root_parent();
+    void root_parent(const boost::optional<dogen::yarn::name>& v);
+    void root_parent(const boost::optional<dogen::yarn::name>&& v);
     /**@}*/
 
     /**
-     * @brief Elements that are direct parents of this element.
+     * @brief Direct parent of this element, if any.
      */
     /**@{*/
-    const std::list<dogen::yarn::name>& parents() const;
-    std::list<dogen::yarn::name>& parents();
-    void parents(const std::list<dogen::yarn::name>& v);
-    void parents(const std::list<dogen::yarn::name>&& v);
+    const boost::optional<dogen::yarn::name>& parent() const;
+    boost::optional<dogen::yarn::name>& parent();
+    void parent(const boost::optional<dogen::yarn::name>& v);
+    void parent(const boost::optional<dogen::yarn::name>&& v);
     /**@}*/
 
     /**
@@ -364,8 +367,8 @@ private:
     bool is_child_;
     bool is_leaf_;
     bool is_final_;
-    std::list<dogen::yarn::name> root_parents_;
-    std::list<dogen::yarn::name> parents_;
+    boost::optional<dogen::yarn::name> root_parent_;
+    boost::optional<dogen::yarn::name> parent_;
     std::list<dogen::yarn::name> leaves_;
     bool in_inheritance_relationship_;
     std::list<dogen::yarn::name> transparent_associations_;

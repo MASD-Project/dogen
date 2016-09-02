@@ -100,7 +100,11 @@ public:
      * @brief Adds the inclusion directive for the supplied formatter
      * name and name.
      */
+    /**@{*/
     void add(const yarn::name& n, const std::string& formatter_name);
+    void add(const boost::optional<yarn::name>& n,
+        const std::string& formatter_name);
+    /**@}*/
 
     /**
      * @brief Adds the inclusion directives for the supplied

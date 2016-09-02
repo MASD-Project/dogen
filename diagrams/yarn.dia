@@ -16407,13 +16407,13 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-175,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-175.05,-15.05;-161.36,-5.75"/>
+        <dia:rectangle val="-175.05,-15.05;-160.975,-5.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-175,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="13.975"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.2000000000000011"/>
@@ -16600,16 +16600,16 @@ This is used to break cycles where required.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#root_parents#</dia:string>
+            <dia:string>#root_parent#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;name&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Types at the root of the inheritance hierarchy.#</dia:string>
+            <dia:string>#Top-most parent at the root of the inheritance hierarchy, if any.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16623,16 +16623,16 @@ This is used to break cycles where required.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#parents#</dia:string>
+            <dia:string>#parent#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;name&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Elements that are direct parents of this element.#</dia:string>
+            <dia:string>#Direct parent of this element, if any.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16850,17 +16850,17 @@ This is used to break cycles where required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O131">
       <dia:attribute name="obj_pos">
-        <dia:point val="-168.205,-5.8"/>
+        <dia:point val="-168.012,-5.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-173.657,-5.85;-167.355,14.05"/>
+        <dia:rectangle val="-173.657,-5.85;-167.162,14.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-168.205,-5.8"/>
-        <dia:point val="-168.205,9"/>
+        <dia:point val="-168.012,-5.8"/>
+        <dia:point val="-168.012,9"/>
         <dia:point val="-173.607,9"/>
         <dia:point val="-173.607,14"/>
       </dia:attribute>

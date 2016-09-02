@@ -16,10 +16,10 @@ dogen::formatters::file class_implementation_formatter_stitch(
 
         const auto qn(a.get_qualified_name(o.name()));
         const bool has_attributes(!o.local_attributes().empty());
-        const bool has_parents(!o.parents().empty());
-        const bool has_attributes_or_parents(has_attributes || has_parents);
+        const bool has_parent(o.parent());
+        const bool has_attributes_or_parent(has_attributes || has_parent);
 
-        if (o.is_parent() || !o.parents().empty()) {
+        if (o.is_parent() || o.parent()) {
 #>
 
 BOOST_CLASS_TRACKING(
@@ -39,18 +39,19 @@ namespace serialization {
 #>
 
 template<typename Archive>
-void save(Archive& <#= (has_attributes_or_parents ? "ar" : "/*ar*/") #>,
-    const <#= qn #>& <#= (has_attributes_or_parents ? "v" : "/*v*/") #>,
+void save(Archive& <#= (has_attributes_or_parent ? "ar" : "/*ar*/") #>,
+    const <#= qn #>& <#= (has_attributes_or_parent ? "v" : "/*v*/") #>,
     const unsigned int /*version*/) {
 <#+
-        for (const auto pn : o.parents()) {
+        if (o.parent()) {
+            const auto& pn(*o.parent());
             const auto pqn(a.get_qualified_name(pn));
 #>
     ar << make_nvp("<#= pn.simple() #>", base_object<<#= pqn #>>(v));
 <#+
         }
 
-        if (has_attributes && has_parents)
+        if (has_attributes && has_parent)
 #>
 
 <#+
@@ -68,16 +69,17 @@ void save(Archive& <#= (has_attributes_or_parents ? "ar" : "/*ar*/") #>,
          */
 #>
 template<typename Archive>
-void load(Archive& <#= (has_attributes_or_parents ? "ar," : "/*ar*/,") #>
-    <#= qn #>& <#= (has_attributes_or_parents ? "v" : "/*v*/") #>,
+void load(Archive& <#= (has_attributes_or_parent ? "ar," : "/*ar*/,") #>
+    <#= qn #>& <#= (has_attributes_or_parent ? "v" : "/*v*/") #>,
     const unsigned int /*version*/) {
 <#+
-        for (const auto pn : o.parents()) {
+        if (o.parent()) {
+            const auto& pn(*o.parent());
             const auto pqn(a.get_qualified_name(pn));
 #>
     ar >> make_nvp("<#= pn.simple() #>", base_object<<#= pqn #>>(v));
 <#+
-            if (has_attributes && has_parents)
+            if (has_attributes && has_parent)
 #>
 
 <#+

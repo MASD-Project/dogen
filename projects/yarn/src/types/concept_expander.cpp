@@ -131,11 +131,11 @@ void concept_expander::expand_object(object& o, intermediate_model& im,
 
     /*
      * First handle the simpler case of objects that do not have a
-     * parent - i.e. those who are not children.
+     * parent.
      */
-    if (!o.is_child()) {
+    if (!o.parent()) {
         o.modeled_concepts(expanded_refines);
-        BOOST_LOG_SEV(lg, debug) << "Object has no parents, using reduced set.";
+        BOOST_LOG_SEV(lg, debug) << "Object has no parent, using reduced set.";
         return;
     }
 
@@ -143,22 +143,19 @@ void concept_expander::expand_object(object& o, intermediate_model& im,
      * If an object does have a parent, we must then find out all of
      * the concepts that our parents model.
      */
-    BOOST_LOG_SEV(lg, debug) << "Object has parents, computing set difference.";
+    BOOST_LOG_SEV(lg, debug) << "Object has a parent, computing set difference.";
 
     std::set<name> our_concepts;
     our_concepts.insert(expanded_refines.begin(), expanded_refines.end());
 
     std::set<name> their_concepts;
-    for (const auto& n : o.parents()) {
-        auto& parent(find_object(n, im));
-        expand_object(parent, im, processed_names);
+    const auto& n(*o.parent());
+    auto& parent(find_object(n, im));
+    expand_object(parent, im, processed_names);
 
-        const auto& mc(parent.modeled_concepts());
-        if (mc.empty())
-            continue;
-
+    const auto& mc(parent.modeled_concepts());
+    if (!mc.empty())
         their_concepts.insert(mc.begin(), mc.end());
-    }
 
     /*
      * We want to only model concepts which have not yet been modeled

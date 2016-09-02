@@ -72,7 +72,7 @@ provider::provide(const properties::inclusion_dependencies_builder_factory& f,
 
     builder.add(o.transparent_associations(), ch_fn);
     builder.add(o.opaque_associations(), ch_fn);
-    builder.add(o.parents(), ch_fn);
+    builder.add(o.parent(), ch_fn);
     builder.add(o.leaves(), ch_fn);
 
     const auto si(builder.make_special_includes(o));

@@ -13,9 +13,9 @@ dogen::formatters::file class_header_formatter_stitch(
         const auto qn(a.get_qualified_name(o.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
 
-        if (!o.is_parent() && !o.parents().empty()) {
-            for (const auto pn : o.parents()) {
-                const auto pqn(a.get_qualified_name(pn));
+        if (!o.is_parent() && o.parent()) {
+            const auto& pn(*o.parent());
+            const auto pqn(a.get_qualified_name(pn));
 #>
 namespace boost {
 
@@ -27,7 +27,6 @@ is_virtual_base_of<
 
 }
 <#+
-            }
         }
 #>
 

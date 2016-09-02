@@ -276,32 +276,30 @@ void resolver::resolve_attributes(const intermediate_model& m,
 
 void resolver::validate_inheritance_graph(const intermediate_model& m,
     const object& o) const {
-    if (o.parents().empty())
+    if (!o.parent())
         return;
 
-    for (const auto& pn : o.parents()) {
-        if (!is_object(m, pn)) {
-            std::ostringstream s;
-            s << orphan_object << ": " << o.name().id()
-              << ". parent: " << pn.id();
+    const auto& pn(*o.parent());
+    if (!is_object(m, pn)) {
+        std::ostringstream s;
+        s << orphan_object << ": " << o.name().id()
+          << ". parent: " << pn.id();
 
-            BOOST_LOG_SEV(lg, error) << s.str();
-            BOOST_THROW_EXCEPTION(resolution_error(s.str()));
-        }
+        BOOST_LOG_SEV(lg, error) << s.str();
+        BOOST_THROW_EXCEPTION(resolution_error(s.str()));
     }
 
-    if (o.root_parents().empty())
+    if (!o.root_parent())
         return;
 
-    for (const auto& pn : o.root_parents()) {
-        if (!is_object(m, pn)) {
-            std::ostringstream s;
-            s << orphan_object << ": " << o.name().id()
-              << ". original parent: " << pn.id();
+    const auto& rp(*o.root_parent());
+    if (!is_object(m, rp)) {
+        std::ostringstream s;
+        s << orphan_object << ": " << o.name().id()
+          << ". Root parent: " << rp.id();
 
-            BOOST_LOG_SEV(lg, error) << s.str();
-            BOOST_THROW_EXCEPTION(resolution_error(s.str()));
-        }
+        BOOST_LOG_SEV(lg, error) << s.str();
+        BOOST_THROW_EXCEPTION(resolution_error(s.str()));
     }
 }
 
