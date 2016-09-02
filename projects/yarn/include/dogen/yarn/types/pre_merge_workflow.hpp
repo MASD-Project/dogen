@@ -56,9 +56,9 @@ private:
     void expand_modules(intermediate_model& m) const;
 
     /**
-     * @brief Performs an attribute expansion on the model.
+     * @brief Performs a local attribute expansion on the model.
      */
-    void expand_attributes(intermediate_model& m) const;
+    void expand_local_attributes(intermediate_model& m) const;
 
     /**
      * @brief Performs a settings expansion on the model.

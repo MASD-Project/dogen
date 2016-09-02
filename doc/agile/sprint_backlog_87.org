@@ -73,6 +73,7 @@ make use of this class in the yarn workflow. All the code is under
 where we are in the pipeline by looking at the log file.
 
 *** STARTED Yarn naming tidy-up                                       :story:
+    CLOCK: [2016-09-02 Fri 14:52]--[2016-09-02 Fri 15:21] =>  0:29
     CLOCK: [2016-09-02 Fri 14:16]--[2016-09-02 Fri 14:51] =>  0:35
     CLOCK: [2016-09-02 Fri 13:53]--[2016-09-02 Fri 14:15] =>  0:22
     CLOCK: [2016-09-02 Fri 13:42]--[2016-09-02 Fri 13:52] =>  0:10
@@ -98,13 +99,16 @@ In practice, we have:
 We should:
 
 - rename all of these types to "processor". Not a great name, but at
-  least it lies less than indexer and expander.
+  least it lies less than indexer and expander. Actually between
+  processor and expander there is probably little gain. Rename all to
+  expander.
 - rename the workflows to =pre_merge_workflow= and
   =post_merge_workflow=.
 - rename input descriptor to just descriptor.
 - rename =frontend_workflow= to =descriptor_processor= and add it to
   the pre-merge workflow.
 - implement the main workflow in terms of these sub-workflows.
+- move frontend registrar to workflow.
 
 *** Generalisation tidy-up                                            :story:
 

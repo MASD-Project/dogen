@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/yarn/types/modules_expander.hpp"
-#include "dogen/yarn/types/attributes_expander.hpp"
+#include "dogen/yarn/types/local_attributes_expander.hpp"
 #include "dogen/yarn/types/settings_expander.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
 #include "dogen/yarn/types/intermediate_model_factory.hpp"
@@ -47,8 +47,8 @@ void pre_merge_workflow::expand_modules(intermediate_model& m) const {
     e.expand(m);
 }
 
-void pre_merge_workflow::expand_attributes(intermediate_model& m) const {
-    attributes_expander e;
+void pre_merge_workflow::expand_local_attributes(intermediate_model& m) const {
+    local_attributes_expander e;
     e.expand(m);
 }
 
@@ -67,7 +67,7 @@ pre_merge_workflow::execute(const dynamic::repository& drp,
     auto r(obtain_intermediate_models(drp, d));
     for (auto& im: r) {
         expand_modules(im);
-        expand_attributes(im);
+        expand_local_attributes(im);
         expand_settings(drp, im);
     }
     return r;

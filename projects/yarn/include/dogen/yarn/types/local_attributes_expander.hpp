@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_ATTRIBUTES_EXPANDER_HPP
-#define DOGEN_YARN_TYPES_ATTRIBUTES_EXPANDER_HPP
+#ifndef DOGEN_YARN_TYPES_LOCAL_ATTRIBUTES_EXPANDER_HPP
+#define DOGEN_YARN_TYPES_LOCAL_ATTRIBUTES_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,10 +34,10 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Performs the expansion of all attributes in the supplied
- * model.
+ * @brief Performs the expansion of all local attributes in the
+ * supplied model.
  */
-class attributes_expander {
+class local_attributes_expander {
 private:
     /**
      * @brief Update all attributes in the supplied element.
