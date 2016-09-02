@@ -51,7 +51,7 @@ generalization_settings_generator::generalization_settings_generator() : positio
 void generalization_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.is_final(create_bool(position + 0));
-    v.parent(create_std_list_std_string(position + 1));
+    v.parents(create_std_list_std_string(position + 1));
 }
 
 generalization_settings_generator::result_type

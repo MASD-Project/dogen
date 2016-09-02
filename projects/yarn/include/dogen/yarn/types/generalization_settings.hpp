@@ -45,7 +45,7 @@ public:
 public:
     generalization_settings(
         const bool is_final,
-        const std::list<std::string>& parent);
+        const std::list<std::string>& parents);
 
 private:
     template<typename Archive>
@@ -58,10 +58,10 @@ public:
     bool is_final() const;
     void is_final(const bool v);
 
-    const std::list<std::string>& parent() const;
-    std::list<std::string>& parent();
-    void parent(const std::list<std::string>& v);
-    void parent(const std::list<std::string>&& v);
+    const std::list<std::string>& parents() const;
+    std::list<std::string>& parents();
+    void parents(const std::list<std::string>& v);
+    void parents(const std::list<std::string>&& v);
 
 public:
     bool operator==(const generalization_settings& rhs) const;
@@ -75,7 +75,7 @@ public:
 
 private:
     bool is_final_;
-    std::list<std::string> parent_;
+    std::list<std::string> parents_;
 };
 
 } }

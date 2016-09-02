@@ -57,7 +57,7 @@ std::ostream& operator<<(std::ostream& s, const generalization_settings& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::generalization_settings\"" << ", "
       << "\"is_final\": " << v.is_final() << ", "
-      << "\"parent\": " << v.parent()
+      << "\"parents\": " << v.parents()
       << " }";
     return(s);
 }

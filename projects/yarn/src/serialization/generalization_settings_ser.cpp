@@ -39,7 +39,7 @@ void save(Archive& ar,
     const dogen::yarn::generalization_settings& v,
     const unsigned int /*version*/) {
     ar << make_nvp("is_final", v.is_final_);
-    ar << make_nvp("parent", v.parent_);
+    ar << make_nvp("parents", v.parents_);
 }
 
 template<typename Archive>
@@ -47,7 +47,7 @@ void load(Archive& ar,
     dogen::yarn::generalization_settings& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("is_final", v.is_final_);
-    ar >> make_nvp("parent", v.parent_);
+    ar >> make_nvp("parents", v.parents_);
 }
 
 } }

@@ -45,7 +45,7 @@ std::size_t generalization_settings_hasher::hash(const generalization_settings& 
     std::size_t seed(0);
 
     combine(seed, v.is_final());
-    combine(seed, hash_std_list_std_string(v.parent()));
+    combine(seed, hash_std_list_std_string(v.parents()));
 
     return seed;
 }
