@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_ASSEMBLER_HPP
-#define DOGEN_YARN_TYPES_ASSEMBLER_HPP
+#ifndef DOGEN_YARN_TYPES_POST_MERGE_WORKFLOW_HPP
+#define DOGEN_YARN_TYPES_POST_MERGE_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,27 +34,10 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Responsible for performing the assembly of an intermediate
- * yarn model.
- *
- * @section yarn_assembler_0 Requirements
- *
- * The intermediate models supplied as input are expected to have
- * already been through the expansion workflow. This is done to avoid
- * having to copy and modify these models.
- *
- * @section yarn_assembler_1 Workflow description
- *
- * Assembly is defined as a workflow that starts with a set of
- * intermediate models produced by the frontends, merges them into the
- * @merged intermediate model and then applies a series of operations
- * to the merged intermediate model to produce the final result. The
- * sequence in which the operations are done is important and is
- * dependent on the requirements of the classes responsible for those
- * operations.
- *
+ * @brief Responsible for performing all the tasks after the merging
+ * of the models has taken place.
  */
-class assembler {
+class post_merge_workflow {
 private:
     /**
      * @brief Returns true if the element is generatable, false
@@ -70,56 +53,46 @@ private:
 
 private:
     /**
-     * @brief Create the merged intermediate model.
-     */
-    intermediate_model create_merged_model_activity(
-        const std::list<intermediate_model>& models) const;
-
-    /**
      * @brief Inject system-generated elements.
      */
-    void inject_system_elements_activity(
-        intermediate_model& merged_model) const;
+    void inject_system_elements(intermediate_model& im) const;
 
     /**
-     * @brief Ensures all references to elements point to elements in
-     * the merged model.
+     * @brief Ensures all references point to elements in the model.
      */
-    void resolve_element_references_activity(
-        intermediate_model& merged_model) const;
+    void resolve_element_references(intermediate_model& im) const;
 
     /**
      * @brief Index all generalization relationships.
      */
-    void index_generalizations_activity(intermediate_model& merged_model) const;
+    void index_generalizations(intermediate_model& im) const;
 
     /**
      * @brief Index all concepts.
      */
-    void index_concepts_activity(intermediate_model& merged_model) const;
+    void index_concepts(intermediate_model& im) const;
 
     /**
      * @brief Index all attributes.
      */
-    void index_attributes_activity(intermediate_model& merged_model) const;
+    void index_attributes(intermediate_model& im) const;
 
     /**
      * @brief Index all associations.
      */
-    void index_associations_activity(intermediate_model& merged_model) const;
+    void index_associations(intermediate_model& im) const;
 
     /**
      * @brief Determines if the type has generatable types or not and
      * updates the flag accordingly.
      */
-    void update_model_generability_activity(
-        intermediate_model& merged_model) const;
+    void update_model_generability(intermediate_model& im) const;
 
 public:
     /**
-     * @brief Executes the assembly workflow.
+     * @brief Executes the post-merge workflow.
      */
-    intermediate_model assemble(const std::list<intermediate_model>& m) const;
+    void execute(intermediate_model& im) const;
 };
 
 } }

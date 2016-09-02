@@ -21,55 +21,55 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/merger.hpp"
 #include "dogen/yarn/types/injector.hpp"
 #include "dogen/yarn/types/resolver.hpp"
 #include "dogen/yarn/types/concept_indexer.hpp"
 #include "dogen/yarn/types/attributes_indexer.hpp"
 #include "dogen/yarn/types/association_indexer.hpp"
 #include "dogen/yarn/types/generalization_indexer.hpp"
-#include "dogen/yarn/types/assembler.hpp"
+#include "dogen/yarn/types/post_merge_workflow.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("yarn.assembler"));
+auto lg(logger_factory("yarn.post_merge_workflow"));
 
 }
 
 namespace dogen {
 namespace yarn {
 
-bool assembler::is_generatable(const element& e) const {
+bool post_merge_workflow::is_generatable(const element& e) const {
     const auto gt(e.generation_type());
     return
         gt == generation_types::full_generation ||
         gt == generation_types::partial_generation;
 }
 
-bool assembler::has_generatable_types(const intermediate_model& m) const {
-    for (const auto pair : m.objects()) {
+bool post_merge_workflow::
+has_generatable_types(const intermediate_model& im) const {
+    for (const auto pair : im.objects()) {
         if (is_generatable(pair.second))
             return true;
     }
 
-    for (const auto pair : m.enumerations()) {
+    for (const auto pair : im.enumerations()) {
         if (is_generatable(pair.second))
             return true;
     }
 
-    for (const auto pair : m.enumerations()) {
+    for (const auto pair : im.enumerations()) {
         if (is_generatable(pair.second))
             return true;
     }
 
-    for (const auto pair : m.primitives()) {
+    for (const auto pair : im.primitives()) {
         if (is_generatable(pair.second))
             return true;
     }
 
-    for (const auto pair : m.concepts()) {
+    for (const auto pair : im.concepts()) {
         if (is_generatable(pair.second))
             return true;
     }
@@ -77,95 +77,71 @@ bool assembler::has_generatable_types(const intermediate_model& m) const {
     return false;
 }
 
-intermediate_model assembler::create_merged_model_activity(
-    const std::list<intermediate_model>& models) const {
-    merger mg;
-    for (const auto& m : models)
-        mg.add(m);
-
-    return mg.merge();
-}
-
-void assembler::
-inject_system_elements_activity(intermediate_model& merged_model) const {
+void post_merge_workflow::inject_system_elements(intermediate_model& im) const {
     injector i;
-    i.inject(merged_model);
+    i.inject(im);
 }
 
-void assembler::
-resolve_element_references_activity(intermediate_model& merged_model) const {
+void post_merge_workflow::
+resolve_element_references(intermediate_model& im) const {
     resolver rs;
-    rs.resolve(merged_model);
+    rs.resolve(im);
 }
 
-void assembler::
-index_generalizations_activity(intermediate_model& merged_model) const {
+void post_merge_workflow::index_generalizations(intermediate_model& im) const {
     generalization_indexer idx;
-    idx.index(merged_model);
+    idx.index(im);
 }
 
-void assembler::
-index_concepts_activity(intermediate_model& merged_model) const {
+void post_merge_workflow::index_concepts(intermediate_model& im) const {
     concept_indexer idx;
-    idx.index(merged_model);
+    idx.index(im);
 }
 
-void assembler::
-index_attributes_activity(intermediate_model& merged_model) const {
+void post_merge_workflow::index_attributes(intermediate_model& im) const {
     attributes_indexer idx;
-    idx.index(merged_model);
+    idx.index(im);
 }
 
-void assembler::
-index_associations_activity(intermediate_model& merged_model) const {
+void post_merge_workflow::index_associations(intermediate_model& im) const {
     association_indexer idx;
-    idx.index(merged_model);
+    idx.index(im);
 }
 
-void assembler::
-update_model_generability_activity(intermediate_model& merged_model) const {
-    merged_model.has_generatable_types(has_generatable_types(merged_model));
+void post_merge_workflow::
+update_model_generability(intermediate_model& im) const {
+    im.has_generatable_types(has_generatable_types(im));
 }
 
-intermediate_model assembler::
-assemble(const std::list<intermediate_model>& models) const {
-    BOOST_LOG_SEV(lg, debug) << "Starting model assembly.";
-
-    auto r(create_merged_model_activity(models));
+void post_merge_workflow::execute(intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
 
     /*
      * We must index generalisation relationships before we inject
      * system elements because we need to know about leaves before we
      * can generate visitors.
      */
-    index_generalizations_activity(r);
-    inject_system_elements_activity(r);
+    index_generalizations(im);
+    inject_system_elements(im);
 
     /*
      * Resolution must be done after system elements have been
      * injected or else it will fail to find any references to those
      * elements.
      */
-    resolve_element_references_activity(r);
-    index_concepts_activity(r);
-    index_attributes_activity(r);
+    resolve_element_references(im);
+    index_concepts(im);
+    index_attributes(im);
 
     /*
      * We must index associations after attributes have been indexed
      * as it relies on the various attribute containers being
      * populated.
      */
-    index_associations_activity(r);
-    update_model_generability_activity(r);
+    index_associations(im);
+    update_model_generability(im);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished assembling model.";
-    BOOST_LOG_SEV(lg, debug) << "Totals: objects: " << r.objects().size()
-                             << " modules: " << r.modules().size()
-                             << " concepts: " << r.concepts().size()
-                             << " enumerations: " << r.enumerations().size()
-                             << " primitives: " << r.primitives().size();
-
-    return r;
+    BOOST_LOG_SEV(lg, debug) << "Finished workflow.";
 }
 
 } }

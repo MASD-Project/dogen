@@ -46,10 +46,15 @@ private:
         const config::input_options& io) const;
 
     /**
-     * @brief Executes the assembling workflow.
+     * @brief Creates the merged intermediate model.
      */
-    intermediate_model assemble_intermediate_models(
+    intermediate_model merge_intermediate_models(
         const std::list<intermediate_model>& im) const;
+
+    /**
+     * @brief Executes the post-processing.
+     */
+    void post_process_merged_intermediate_model(intermediate_model& im) const;
 
     /**
      * @brief Transforms the intermediate model to the final

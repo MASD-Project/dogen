@@ -20,8 +20,9 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/model_io.hpp"
+#include "dogen/yarn/types/merger.hpp"
 #include "dogen/yarn/types/pre_merge_workflow.hpp"
-#include "dogen/yarn/types/assembler.hpp"
+#include "dogen/yarn/types/post_merge_workflow.hpp"
 #include "dogen/yarn/types/transformer.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
 #include "dogen/yarn/types/pre_merge_workflow.hpp"
@@ -45,10 +46,26 @@ obtain_intermediate_models(const dynamic::repository& drp,
     return w.execute(drp, dirs, io);
 }
 
-intermediate_model workflow::assemble_intermediate_models(
-    const std::list<intermediate_model>& im) const {
-    assembler a;
-    return a.assemble(im);
+intermediate_model workflow::
+merge_intermediate_models(const std::list<intermediate_model>& im) const {
+    merger mg;
+    for (const auto& m : im)
+        mg.add(m);
+
+    const auto r(mg.merge());
+
+    BOOST_LOG_SEV(lg, debug) << "Totals: objects: " << r.objects().size()
+                             << " modules: " << r.modules().size()
+                             << " concepts: " << r.concepts().size()
+                             << " enumerations: " << r.enumerations().size()
+                             << " primitives: " << r.primitives().size();
+    return r;
+}
+
+void workflow::post_process_merged_intermediate_model(
+    intermediate_model& im) const {
+    post_merge_workflow w;
+    return w.execute(im);
 }
 
 model workflow::transform_intermediate_model(
@@ -62,8 +79,9 @@ model workflow::execute(const dynamic::repository& drp,
     const config::input_options& io) const {
 
     const auto im(obtain_intermediate_models(drp, dirs, io));
-    const auto m(assemble_intermediate_models(im));
-    const auto r(transform_intermediate_model(m));
+    auto mim(merge_intermediate_models(im));
+    post_process_merged_intermediate_model(mim);
+    const auto r(transform_intermediate_model(mim));
 
     BOOST_LOG_SEV(lg, debug) << "Final model: " << r;
     return r;
