@@ -25,7 +25,7 @@ namespace config {
 
 input_options::input_options(
     const dogen::config::input& target,
-    const std::vector<dogen::config::input>& references)
+    const std::list<dogen::config::input>& references)
     : target_(target),
       references_(references) { }
 
@@ -62,19 +62,19 @@ void input_options::target(const dogen::config::input&& v) {
     target_ = std::move(v);
 }
 
-const std::vector<dogen::config::input>& input_options::references() const {
+const std::list<dogen::config::input>& input_options::references() const {
     return references_;
 }
 
-std::vector<dogen::config::input>& input_options::references() {
+std::list<dogen::config::input>& input_options::references() {
     return references_;
 }
 
-void input_options::references(const std::vector<dogen::config::input>& v) {
+void input_options::references(const std::list<dogen::config::input>& v) {
     references_ = v;
 }
 
-void input_options::references(const std::vector<dogen::config::input>&& v) {
+void input_options::references(const std::list<dogen::config::input>&& v) {
     references_ = std::move(v);
 }
 

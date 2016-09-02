@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_vector_dogen_config_input(const std::vector<dogen::config::input>& v) {
+inline std::size_t hash_std_list_dogen_config_input(const std::list<dogen::config::input>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -46,7 +46,7 @@ std::size_t input_options_hasher::hash(const input_options& v) {
     std::size_t seed(0);
 
     combine(seed, v.target());
-    combine(seed, hash_std_vector_dogen_config_input(v.references()));
+    combine(seed, hash_std_list_dogen_config_input(v.references()));
 
     return seed;
 }

@@ -338,13 +338,13 @@ Implies project splitting is off.#</dia:string>
         <dia:point val="-37,-16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-37.05,-16.05;-24.515,-12.35"/>
+        <dia:rectangle val="-37.05,-16.05;-25.285,-12.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-37,-16"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.434999999999999"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -465,7 +465,7 @@ Implies project splitting is off.#</dia:string>
             <dia:string>#references#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::vector&lt;input&gt;#</dia:string>
+            <dia:string>#std::list&lt;input&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1074,7 +1074,7 @@ with existing file.#</dia:string>
         <dia:point val="-25.1558,-26.8833"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-30.8325,-27.6333;-24.4058,-15.2"/>
+        <dia:rectangle val="-31.2175,-27.6333;-24.4058,-15.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1082,8 +1082,8 @@ with existing file.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-25.1558,-26.8833"/>
         <dia:point val="-25.1558,-21"/>
-        <dia:point val="-30.7825,-21"/>
-        <dia:point val="-30.7825,-16"/>
+        <dia:point val="-31.1675,-21"/>
+        <dia:point val="-31.1675,-16"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1284,17 +1284,17 @@ with existing file.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-30.7825,-12.4"/>
+        <dia:point val="-31.1675,-12.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-31.5325,-13.15;-18.775,-1.2"/>
+        <dia:rectangle val="-31.9175,-13.15;-18.775,-1.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-30.7825,-12.4"/>
-        <dia:point val="-30.7825,-6"/>
+        <dia:point val="-31.1675,-12.4"/>
+        <dia:point val="-31.1675,-6"/>
         <dia:point val="-18.975,-6"/>
         <dia:point val="-18.975,-2"/>
       </dia:attribute>

@@ -28,8 +28,8 @@ create_dogen_config_input(const unsigned int position) {
     return dogen::config::input_generator::create(position);
 }
 
-std::vector<dogen::config::input> create_std_vector_dogen_config_input(unsigned int position) {
-    std::vector<dogen::config::input> r;
+std::list<dogen::config::input> create_std_list_dogen_config_input(unsigned int position) {
+    std::list<dogen::config::input> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_config_input(position + i));
     }
@@ -46,7 +46,7 @@ input_options_generator::input_options_generator() : position_(0) { }
 void input_options_generator::
 populate(const unsigned int position, result_type& v) {
     v.target(create_dogen_config_input(position + 0));
-    v.references(create_std_vector_dogen_config_input(position + 1));
+    v.references(create_std_list_dogen_config_input(position + 1));
 }
 
 input_options_generator::result_type

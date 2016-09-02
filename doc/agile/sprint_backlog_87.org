@@ -12,20 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-02 Fri 09:47]
+#+CAPTION: Clock summary at [2016-09-02 Fri 12:11]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *4:25* |      |      | 100.0 |
+| *Total time*                                                                | *5:34* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 4:25   |      |      | 100.0 |
-| Active                                                                      |        | 4:25 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:19 |   7.2 |
-| COMPLETED Move readme to markdown                                           |        |      | 0:49 |  18.5 |
-| COMPLETED Use =element= base class in  =update_element=                     |        |      | 0:29 |  10.9 |
-| STARTED Move file instantiation code into yarn                              |        |      | 0:50 |  18.9 |
-| STARTED Yarn naming tidy-update                                             |        |      | 0:52 |  19.6 |
-| STARTED Consider adding support for inheritance via meta-data               |        |      | 1:06 |  24.9 |
+| Stories                                                                     | 5:34   |      |      | 100.0 |
+| Active                                                                      |        | 5:34 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:19 |   5.7 |
+| COMPLETED Move readme to markdown                                           |        |      | 0:49 |  14.7 |
+| COMPLETED Use =element= base class in  =update_element=                     |        |      | 0:29 |   8.7 |
+| STARTED Move file instantiation code into yarn                              |        |      | 1:59 |  35.6 |
+| STARTED Yarn naming tidy-update                                             |        |      | 0:52 |  15.6 |
+| STARTED Consider adding support for inheritance via meta-data               |        |      | 1:06 |  19.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -58,6 +58,7 @@ In =yarn.dia=:
 - merge to value object with to service.
 
 *** STARTED Move file instantiation code into yarn                    :story:
+    CLOCK: [2016-09-02 Fri 12:01]--[2016-09-02 Fri 12:11] =>  0:10
     CLOCK: [2016-09-02 Fri 11:01]--[2016-09-02 Fri 12:00] =>  0:59
     CLOCK: [2016-09-02 Fri 09:32]--[2016-09-02 Fri 09:47] =>  0:15
     CLOCK: [2016-09-02 Fri 08:35]--[2016-09-02 Fri 09:10] =>  0:35

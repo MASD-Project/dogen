@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <vector>
+#include <list>
 #include <algorithm>
 #include "dogen/config/types/input.hpp"
 #include "dogen/config/serialization/input_options_fwd_ser.hpp"
@@ -46,7 +46,7 @@ public:
 public:
     input_options(
         const dogen::config::input& target,
-        const std::vector<dogen::config::input>& references);
+        const std::list<dogen::config::input>& references);
 
 private:
     template<typename Archive>
@@ -70,10 +70,10 @@ public:
      * @brief All external models in which this model depends.
      */
     /**@{*/
-    const std::vector<dogen::config::input>& references() const;
-    std::vector<dogen::config::input>& references();
-    void references(const std::vector<dogen::config::input>& v);
-    void references(const std::vector<dogen::config::input>&& v);
+    const std::list<dogen::config::input>& references() const;
+    std::list<dogen::config::input>& references();
+    void references(const std::list<dogen::config::input>& v);
+    void references(const std::list<dogen::config::input>&& v);
     /**@}*/
 
 public:
@@ -88,7 +88,7 @@ public:
 
 private:
     dogen::config::input target_;
-    std::vector<dogen::config::input> references_;
+    std::list<dogen::config::input> references_;
 };
 
 } }

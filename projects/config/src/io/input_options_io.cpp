@@ -24,7 +24,7 @@
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::config::input>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::config::input>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

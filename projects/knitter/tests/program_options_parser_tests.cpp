@@ -237,13 +237,12 @@ BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_options) {
 
     const auto io(ko.input());
     BOOST_CHECK(io.target().path().string() == target_value_arg);
-    BOOST_CHECK(io.target().external_modules() ==
-        external_modules_value_arg);
+    BOOST_CHECK(io.target().external_modules() == external_modules_value_arg);
 
     const auto refs(io.references());
     BOOST_REQUIRE(refs.size() == 2);
-    BOOST_CHECK(refs[0].path().string() == reference_value_1_arg);
-    BOOST_CHECK(refs[1].path().string() == reference_value_2_arg);
+    BOOST_CHECK(refs.front().path().string() == reference_value_1_arg);
+    BOOST_CHECK(refs.back().path().string() == reference_value_2_arg);
 }
 
 BOOST_AUTO_TEST_CASE(supplying_modules_for_references_results_in_correct_modules) {
@@ -264,12 +263,13 @@ BOOST_AUTO_TEST_CASE(supplying_modules_for_references_results_in_correct_modules
     const auto refs(io.references());
     BOOST_REQUIRE(refs.size() == 2);
 
-    BOOST_CHECK(refs[0].path().string() == reference_value_3_diagram);
-    BOOST_CHECK(
-        refs[0].external_modules() == reference_value_3_modules);
-    BOOST_CHECK(refs[1].path().string() == reference_value_4_diagram);
-    BOOST_CHECK(
-        refs[1].external_modules() == reference_value_4_modules);
+    const auto& first(refs.front());
+    BOOST_CHECK(first.path().string() == reference_value_3_diagram);
+    BOOST_CHECK(first.external_modules() == reference_value_3_modules);
+
+    const auto second(refs.back());
+    BOOST_CHECK(second.path().string() == reference_value_4_diagram);
+    BOOST_CHECK(second.external_modules() == reference_value_4_modules);
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_modeling_options_other_than_target_results_in_expected_options) {
