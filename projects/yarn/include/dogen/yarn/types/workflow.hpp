@@ -29,6 +29,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/config/types/input_options.hpp"
+#include "dogen/yarn/types/frontend_registrar.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/model.hpp"
 
@@ -36,7 +37,19 @@ namespace dogen {
 namespace yarn {
 
 class workflow {
+public:
+    workflow();
+
+public:
+    /**
+     * @brief Returns the registrar. If it has not yet been
+     * initialised, initialises it.
+     */
+    static frontend_registrar& registrar();
+
 private:
+    void validate() const;
+
     /**
      * @brief Obtains all intermediate models.
      */
@@ -67,7 +80,21 @@ public:
     model execute(const dynamic::repository& drp,
         const std::list<boost::filesystem::path>& dirs,
         const config::input_options& io) const;
+
+private:
+    static std::shared_ptr<frontend_registrar> registrar_;
 };
+
+/*
+ * Helper method to register frontends.
+ */
+template<typename Frontend>
+inline void register_frontend() {
+    auto fe(std::make_shared<Frontend>());
+    auto& rg(workflow::registrar());
+    for (const auto& e : fe->supported_extensions())
+        rg.register_frontend_against_extension(e, fe);
+}
 
 } }
 

@@ -42,16 +42,6 @@ namespace yarn {
  */
 class intermediate_model_factory {
 public:
-    intermediate_model_factory();
-
-public:
-    /**
-     * @brief Returns the registrar. If it has not yet been
-     * initialised, initialises it.
-     */
-    static frontend_registrar& registrar();
-
-public:
     /**
      * @brief Process all of the descriptors into intermediate models,
      * using the appropriate frontends.
@@ -61,22 +51,9 @@ public:
      */
     std::list<intermediate_model>
     execute(const dynamic::repository& drp,
+        frontend_registrar& rg,
         const std::list<descriptor>& descriptors);
-
-private:
-    static std::shared_ptr<frontend_registrar> registrar_;
 };
-
-/*
- * Helper method to register frontends.
- */
-template<typename Frontend>
-inline void register_frontend() {
-    auto s(std::make_shared<Frontend>());
-    auto& rg(intermediate_model_factory::registrar());
-    for (const auto& e : s->supported_extensions())
-        rg.register_frontend_against_extension(e, s);
-}
 
 } }
 

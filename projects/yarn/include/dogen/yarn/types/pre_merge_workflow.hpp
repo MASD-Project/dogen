@@ -27,6 +27,7 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/config/types/input_options.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
+#include "dogen/yarn/types/frontend_registrar.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
@@ -48,23 +49,24 @@ private:
      * @brief Obtains all intermediate models.
      */
     std::list<intermediate_model> obtain_intermediate_models(
-        const dynamic::repository& drp, const std::list<descriptor>& d) const;
+        const dynamic::repository& drp, frontend_registrar& rg,
+        const std::list<descriptor>& d) const;
 
     /**
      * @brief Performs a module expansion on the model.
      */
-    void expand_modules(intermediate_model& m) const;
+    void expand_modules(intermediate_model& im) const;
 
     /**
      * @brief Performs a local attribute expansion on the model.
      */
-    void expand_local_attributes(intermediate_model& m) const;
+    void expand_local_attributes(intermediate_model& im) const;
 
     /**
      * @brief Performs a settings expansion on the model.
      */
     void expand_settings(const dynamic::repository& drp,
-        intermediate_model& m) const;
+        intermediate_model& im) const;
 
 public:
     /**
@@ -72,7 +74,8 @@ public:
      */
     std::list<intermediate_model> execute(const dynamic::repository& drp,
         const std::list<boost::filesystem::path>& dirs,
-        const config::input_options& io) const;
+        const config::input_options& io,
+        frontend_registrar& rg) const;
 };
 
 } }

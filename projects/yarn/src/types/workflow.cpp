@@ -38,12 +38,40 @@ static logger lg(logger_factory("yarn.workflow"));
 namespace dogen {
 namespace yarn {
 
+std::shared_ptr<frontend_registrar> workflow::registrar_;
+
+workflow::workflow() {
+    validate();
+}
+
+frontend_registrar& workflow::registrar() {
+    if (!registrar_)
+        registrar_ = std::make_shared<frontend_registrar>();
+
+    return *registrar_;
+}
+
+void workflow::validate() const {
+    BOOST_LOG_SEV(lg, debug) << "Validating registrar.";
+    registrar().validate();
+    BOOST_LOG_SEV(lg, debug) << "Found "
+                             << registrar().frontends_by_extension().size()
+                             << " registered frontends. Details: ";
+
+    for (const auto& pair : registrar().frontends_by_extension()) {
+        BOOST_LOG_SEV(lg, debug) << "extension: '" << pair.first << "' "
+                                 << "id: '" << pair.second->id() << "'";
+    }
+    BOOST_LOG_SEV(lg, debug) << "Finished validating registrar. ";
+}
+
+
 std::list<intermediate_model> workflow::
 obtain_intermediate_models(const dynamic::repository& drp,
     const std::list<boost::filesystem::path>& dirs,
     const config::input_options& io) const {
     pre_merge_workflow w;
-    return w.execute(drp, dirs, io);
+    return w.execute(drp, dirs, io, registrar());
 }
 
 intermediate_model workflow::

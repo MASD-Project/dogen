@@ -36,41 +36,18 @@ static logger lg(logger_factory("yarn.intermediate_model_factory"));
 namespace dogen {
 namespace yarn {
 
-std::shared_ptr<frontend_registrar> intermediate_model_factory::registrar_;
-
-intermediate_model_factory::
-intermediate_model_factory() {
-    BOOST_LOG_SEV(lg, debug) << "Initialising.";
-    registrar().validate();
-    BOOST_LOG_SEV(lg, debug) << "Found "
-                             << registrar().frontends_by_extension().size()
-                             << " registered frontends. Details: ";
-
-    for (const auto& pair : registrar().frontends_by_extension()) {
-        BOOST_LOG_SEV(lg, debug) << "extension: '" << pair.first << "' "
-                                 << "id: '" << pair.second->id() << "'";
-    }
-    BOOST_LOG_SEV(lg, debug) << "Finished initialising. ";
-}
-
-frontend_registrar& intermediate_model_factory::registrar() {
-    if (!registrar_)
-        registrar_ = std::make_shared<frontend_registrar>();
-
-    return *registrar_;
-}
-
 std::list<intermediate_model>
 intermediate_model_factory::execute(const dynamic::repository& drp,
+    frontend_registrar& rg,
     const std::list<descriptor>& descriptors) {
     BOOST_LOG_SEV(lg, debug) << "Creating intermediate models. "
                              << "Descriptors: " << descriptors;
 
-    const dynamic::workflow dw(drp);
+    const dynamic::workflow w(drp);
     std::list<intermediate_model> r;
     for (const auto& d : descriptors) {
-        auto& f(registrar().frontend_for_extension(d.extension()));
-        r.push_back(f.execute(dw, d));
+        auto& f(rg.frontend_for_extension(d.extension()));
+        r.push_back(f.execute(w, d));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Created intermediate models. Total: "

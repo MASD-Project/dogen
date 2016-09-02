@@ -37,9 +37,10 @@ obtain_descriptors(const std::list<boost::filesystem::path>& dirs,
 
 std::list<intermediate_model> pre_merge_workflow::
 obtain_intermediate_models(
-    const dynamic::repository& drp, const std::list<descriptor>& d) const {
+    const dynamic::repository& drp, frontend_registrar& rg,
+    const std::list<descriptor>& d) const {
     intermediate_model_factory f;
-    return f.execute(drp, d);
+    return f.execute(drp, rg, d);
 }
 
 void pre_merge_workflow::expand_modules(intermediate_model& m) const {
@@ -61,10 +62,11 @@ expand_settings(const dynamic::repository& drp, intermediate_model& m) const {
 std::list<intermediate_model>
 pre_merge_workflow::execute(const dynamic::repository& drp,
     const std::list<boost::filesystem::path>& dirs,
-    const config::input_options& io) const {
+    const config::input_options& io,
+    frontend_registrar& rg) const {
 
     const auto d(obtain_descriptors(dirs, io));
-    auto r(obtain_intermediate_models(drp, d));
+    auto r(obtain_intermediate_models(drp, rg, d));
     for (auto& im: r) {
         expand_modules(im);
         expand_local_attributes(im);
