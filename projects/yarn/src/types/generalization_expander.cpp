@@ -98,14 +98,14 @@ recurse_generalization(const intermediate_model& im, const name& leaf,
         for (const auto n : op)
             root_parents.push_back(n);
 
-        d.root_parents[parent] = op;
+        d.root_parents[parent.id()] = op;
         BOOST_LOG_SEV(lg, debug) << "Type: " << parent.id()
                                  << " has original parents: " << op;
 
-        d.leaves[parent].push_back(leaf);
+        d.leaves[parent.id()].push_back(leaf);
         BOOST_LOG_SEV(lg, debug) << "Type is a leaf of: " << parent.id();
     }
-    d.root_parents[o.name()] = root_parents;
+    d.root_parents[o.name().id()] = root_parents;
     return root_parents;
 }
 
@@ -133,11 +133,11 @@ obtain_details(const intermediate_model& m) const {
 void generalization_expander::
 populate(const generalization_details& d, intermediate_model& m) const {
     for (const auto& pair : d.leaves) {
-        const auto& n(pair.first);
-        auto i(m.objects().find(n.id()));
+        const auto& id(pair.first);
+        auto i(m.objects().find(id));
         if (i == m.objects().end()) {
-            BOOST_LOG_SEV(lg, error) << object_not_found << n.id();
-            BOOST_THROW_EXCEPTION(expansion_error(object_not_found + n.id()));
+            BOOST_LOG_SEV(lg, error) << object_not_found << id;
+            BOOST_THROW_EXCEPTION(expansion_error(object_not_found + id));
         }
 
         auto& o(i->second);
@@ -161,11 +161,11 @@ populate(const generalization_details& d, intermediate_model& m) const {
     }
 
     for (const auto& pair : d.root_parents) {
-        const auto& n(pair.first);
-        auto i(m.objects().find(n.id()));
+        const auto& id(pair.first);
+        auto i(m.objects().find(id));
         if (i == m.objects().end()) {
-            BOOST_LOG_SEV(lg, error) << object_not_found << n.id();
-            BOOST_THROW_EXCEPTION(expansion_error(object_not_found + n.id()));
+            BOOST_LOG_SEV(lg, error) << object_not_found << id;
+            BOOST_THROW_EXCEPTION(expansion_error(object_not_found + id));
         }
 
         auto& o(i->second);
@@ -186,7 +186,7 @@ populate(const generalization_details& d, intermediate_model& m) const {
              * itself.
              */
             BOOST_LOG_SEV(lg, debug) << "Type has parents but is not a child: "
-                                     << n.id();
+                                     << id;
             continue;
         }
 

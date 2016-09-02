@@ -29,7 +29,6 @@
 #include <unordered_map>
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/hash/name_hash.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -41,8 +40,8 @@ private:
      * in.
      */
     struct generalization_details {
-        std::unordered_map<name, std::list<name> > leaves;
-        std::unordered_map<name, std::list<name> > root_parents;
+        std::unordered_map<std::string, std::list<name> > leaves;
+        std::unordered_map<std::string, std::list<name> > root_parents;
     };
 
 private:

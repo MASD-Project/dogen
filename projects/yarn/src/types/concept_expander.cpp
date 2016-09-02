@@ -110,7 +110,8 @@ void concept_expander::expand_object(object& o, intermediate_model& im,
         return;
     }
 
-    /* For each of the concepts that we model, perform an expansion
+    /*
+     * For each of the concepts that we model, perform an expansion
      * including their parents and so on. We can rely on the concepts'
      * @e refines container for this.
      */
@@ -122,13 +123,15 @@ void concept_expander::expand_object(object& o, intermediate_model& im,
             c.refines().begin(), c.refines().end());
     }
 
-    /* since the expanded list may include duplicates, we must first
+    /*
+     * Since the expanded list may include duplicates, we must first
      * remove those.
      */
     remove_duplicates(expanded_refines);
 
-    /* If an object has a parent, we must then find out all of the
-     * concepts that our parents are modeling.
+    /*
+     * First handle the simpler case of objects that do not have a
+     * parent - i.e. those who are not children.
      */
     if (!o.is_child()) {
         o.modeled_concepts(expanded_refines);
@@ -136,6 +139,10 @@ void concept_expander::expand_object(object& o, intermediate_model& im,
         return;
     }
 
+    /*
+     * If an object does have a parent, we must then find out all of
+     * the concepts that our parents model.
+     */
     BOOST_LOG_SEV(lg, debug) << "Object has parents, computing set difference.";
 
     std::set<name> our_concepts;
@@ -153,7 +160,8 @@ void concept_expander::expand_object(object& o, intermediate_model& im,
         their_concepts.insert(mc.begin(), mc.end());
     }
 
-    /* we want to only model concepts which have not yet been modeled
+    /*
+     * We want to only model concepts which have not yet been modeled
      * by any of our parents.
      */
     std::set<name> result;
@@ -161,8 +169,9 @@ void concept_expander::expand_object(object& o, intermediate_model& im,
         their_concepts.begin(), their_concepts.end(),
         std::inserter(result, result.end()));
 
-    /* reinsert all of the modeled concepts which are part of the set
-     * difference. we do this instead of just using the set difference
+    /*
+     * Reinsert all of the modeled concepts which are part of the set
+     * difference. We do this instead of just using the set difference
      * directly to preserve order.
      */
     o.modeled_concepts().clear();

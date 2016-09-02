@@ -13107,13 +13107,13 @@ are not modules, such as attributes, inner classes, etc.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O103">
       <dia:attribute name="obj_pos">
-        <dia:point val="91,-34"/>
+        <dia:point val="35,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="90.95,-34.05;98.8375,-30.95"/>
+        <dia:rectangle val="34.95,-15.05;42.8375,-11.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="91,-34"/>
+        <dia:point val="35,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.7874999999999996"/>
@@ -16406,7 +16406,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-175,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-175.05,-15.05;-161.36,-6.55"/>
+        <dia:rectangle val="-175.05,-15.05;-161.36,-5.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-175,-15"/>
@@ -16415,7 +16415,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:real val="13.59"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.4000000000000004"/>
+        <dia:real val="9.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#Generalizable#</dia:string>
@@ -16540,6 +16540,29 @@ This is used to break cycles where required.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, the element has at least one parent.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_leaf#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#True if the type has a parent but no children.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16826,16 +16849,16 @@ This is used to break cycles where required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O131">
       <dia:attribute name="obj_pos">
-        <dia:point val="-168.205,-6.6"/>
+        <dia:point val="-168.205,-5.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-173.657,-6.65;-167.355,14.05"/>
+        <dia:rectangle val="-173.657,-5.85;-167.355,14.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-168.205,-6.6"/>
+        <dia:point val="-168.205,-5.8"/>
         <dia:point val="-168.205,9"/>
         <dia:point val="-173.607,9"/>
         <dia:point val="-173.607,14"/>
