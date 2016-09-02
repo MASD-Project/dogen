@@ -20,7 +20,6 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/model_io.hpp"
-#include "dogen/yarn/types/frontend_workflow.hpp"
 #include "dogen/yarn/types/pre_merge_workflow.hpp"
 #include "dogen/yarn/types/assembler.hpp"
 #include "dogen/yarn/types/transformer.hpp"

@@ -22,7 +22,7 @@
 #include "dogen/yarn/types/attributes_expander.hpp"
 #include "dogen/yarn/types/settings_expander.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
-#include "dogen/yarn/types/frontend_workflow.hpp"
+#include "dogen/yarn/types/intermediate_model_factory.hpp"
 #include "dogen/yarn/types/pre_merge_workflow.hpp"
 
 namespace dogen {
@@ -38,8 +38,8 @@ obtain_descriptors(const std::list<boost::filesystem::path>& dirs,
 std::list<intermediate_model> pre_merge_workflow::
 obtain_intermediate_models(
     const dynamic::repository& drp, const std::list<descriptor>& d) const {
-    frontend_workflow w(drp);
-    return w.execute(d);
+    intermediate_model_factory f;
+    return f.execute(drp, d);
 }
 
 void pre_merge_workflow::expand_modules(intermediate_model& m) const {

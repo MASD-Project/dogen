@@ -10699,7 +10699,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:real val="8.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#frontend_workflow#</dia:string>
+        <dia:string>#intermediate_model_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>

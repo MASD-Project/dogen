@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_FRONTEND_WORKFLOW_HPP
-#define DOGEN_YARN_TYPES_FRONTEND_WORKFLOW_HPP
+#ifndef DOGEN_YARN_TYPES_INTERMEDIATE_MODEL_FACTORY_HPP
+#define DOGEN_YARN_TYPES_INTERMEDIATE_MODEL_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -38,11 +38,11 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Manages the entire frontend workflow.
+ * @brief Generates intermediate models from descriptors.
  */
-class frontend_workflow {
+class intermediate_model_factory {
 public:
-    explicit frontend_workflow(const dynamic::repository& rp);
+    intermediate_model_factory();
 
 public:
     /**
@@ -50,13 +50,6 @@ public:
      * initialised, initialises it.
      */
     static frontend_registrar& registrar();
-
-private:
-    /**
-     * @brief Given a descriptor, obtains the associated intermediate
-     * model.
-     */
-    intermediate_model obtain_model(const descriptor& d) const;
 
 public:
     /**
@@ -67,20 +60,20 @@ public:
      * registered frontends.
      */
     std::list<intermediate_model>
-    execute(const std::list<descriptor>& descriptors);
+    execute(const dynamic::repository& drp,
+        const std::list<descriptor>& descriptors);
 
 private:
     static std::shared_ptr<frontend_registrar> registrar_;
-    const dynamic::workflow dynamic_workflow_;
 };
 
 /*
- * Helper method to register the frontend.
+ * Helper method to register frontends.
  */
 template<typename Frontend>
 inline void register_frontend() {
     auto s(std::make_shared<Frontend>());
-    auto& rg(frontend_workflow::registrar());
+    auto& rg(intermediate_model_factory::registrar());
     for (const auto& e : s->supported_extensions())
         rg.register_frontend_against_extension(e, s);
 }

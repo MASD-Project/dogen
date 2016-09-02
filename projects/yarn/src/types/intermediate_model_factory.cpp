@@ -24,23 +24,22 @@
 #include "dogen/yarn/types/persister.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/io/descriptor_io.hpp"
-#include "dogen/yarn/types/frontend_workflow.hpp"
+#include "dogen/yarn/types/intermediate_model_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.frontend_workflow"));
+static logger lg(logger_factory("yarn.intermediate_model_factory"));
 
 }
 
 namespace dogen {
 namespace yarn {
 
-std::shared_ptr<frontend_registrar> frontend_workflow::registrar_;
+std::shared_ptr<frontend_registrar> intermediate_model_factory::registrar_;
 
-frontend_workflow::frontend_workflow(const dynamic::repository& rp)
-    : dynamic_workflow_(rp) {
-
+intermediate_model_factory::
+intermediate_model_factory() {
     BOOST_LOG_SEV(lg, debug) << "Initialising.";
     registrar().validate();
     BOOST_LOG_SEV(lg, debug) << "Found "
@@ -54,30 +53,28 @@ frontend_workflow::frontend_workflow(const dynamic::repository& rp)
     BOOST_LOG_SEV(lg, debug) << "Finished initialising. ";
 }
 
-frontend_registrar& frontend_workflow::registrar() {
+frontend_registrar& intermediate_model_factory::registrar() {
     if (!registrar_)
         registrar_ = std::make_shared<frontend_registrar>();
 
     return *registrar_;
 }
 
-intermediate_model frontend_workflow::
-obtain_model(const descriptor& d) const {
-    const auto extension(d.path().extension().string());
-    auto& f(registrar().frontend_for_extension(extension));
-    return f.execute(dynamic_workflow_, d);
-}
-
 std::list<intermediate_model>
-frontend_workflow::execute(const std::list<descriptor>& descriptors) {
-    BOOST_LOG_SEV(lg, debug) << "Started executing. "
+intermediate_model_factory::execute(const dynamic::repository& drp,
+    const std::list<descriptor>& descriptors) {
+    BOOST_LOG_SEV(lg, debug) << "Creating intermediate models. "
                              << "Descriptors: " << descriptors;
 
+    const dynamic::workflow dw(drp);
     std::list<intermediate_model> r;
-    for (const auto& d : descriptors)
-        r.push_back(obtain_model(d));
+    for (const auto& d : descriptors) {
+        auto& f(registrar().frontend_for_extension(d.extension()));
+        r.push_back(f.execute(dw, d));
+    }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished executing.";
+    BOOST_LOG_SEV(lg, debug) << "Created intermediate models. Total: "
+                             << r.size();
     return r;
 }
 

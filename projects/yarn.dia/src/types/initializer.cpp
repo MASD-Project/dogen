@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/frontend_workflow.hpp"
+#include "dogen/yarn/types/intermediate_model_factory.hpp"
 #include "dogen/yarn.dia/types/frontend.hpp"
 #include "dogen/yarn.dia/types/initializer.hpp"
 

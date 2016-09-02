@@ -51,13 +51,11 @@ std::list<descriptor> descriptor_factory::from_directories(
 
         for (const auto& f: files) {
             BOOST_LOG_SEV(lg, trace) << "Library model: " << f.generic_string();
-            const auto extension(f.extension().string());
 
             descriptor d;
             d.path(f);
             d.is_target(false);
-            d.extension(extension);
-
+            d.extension(f.extension().string());
             r.push_back(d);
         }
     }
@@ -79,6 +77,7 @@ from_references(const std::list<config::input>& refs) const {
         d.path(ref.path());
         d.external_modules(ref.external_modules());
         d.is_target(false);
+        d.extension(ref.path().extension().string());
         r.push_back(d);
     }
     BOOST_LOG_SEV(lg, debug) << "Created descriptors for reference models: "
@@ -93,6 +92,8 @@ descriptor descriptor_factory::from_target(const config::input& tg) const {
     r.path(tg.path());
     r.is_target(true);
     r.external_modules(tg.external_modules());
+    r.extension(tg.path().extension().string());
+
     BOOST_LOG_SEV(lg, trace) << "Added target model: " << r.path();
     BOOST_LOG_SEV(lg, debug) << "Created descriptor for target model: " << r;
     return r;
