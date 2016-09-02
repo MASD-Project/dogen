@@ -30,6 +30,7 @@
 #include "dogen/dia/types/object.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/dynamic/types/scope_types.hpp"
+#include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processed_attribute.hpp"
@@ -135,37 +136,8 @@ private:
      * the profile. Also adds element's name to the containing
      * module, if any.
      */
-    template<typename Element>
-    void update_element(Element& e, const processed_object& o,
-        const profile& p) {
-        e.generation_type(generation_type(p));
-        e.origin_type(yarn::origin_types::user);
-
-        const auto pkg_id(o.child_node_id());
-        if (!pkg_id.empty()) {
-            auto& module(module_for_id(pkg_id));
-            e.name(to_name(o.name(), module.name()));
-        } else {
-            // type belongs to the synthetic module for the model;
-            // do not add it to the name.
-            e.name(to_name(o.name()));
-        }
-
-        context_.id_to_name().insert(std::make_pair(o.id(), e.name()));
-
-        e.documentation(o.comment().documentation());
-
-        const auto& kvps(o.comment().key_value_pairs());
-        const auto scope(dynamic::scope_types::entity);
-        e.extensions(dynamic_workflow_.execute(scope, kvps));
-    }
-
-    /**
-     * @brief Update the yarn abstract object using the processed
-     * object and the profile.
-     */
-    void update_object(yarn::object& o, const processed_object& po,
-        const profile& p);
+    void update_element(const processed_object& o, const profile& p,
+        yarn::element& e);
 
 private:
     /**
@@ -181,25 +153,15 @@ private:
 
     /**
      * @brief Converts Dia a object containing a UML class with a
-     * stereotype of service to a yarn service.
+     * stereotype of value object or service to a yarn object.
      *
-     * @param o the Dia UML class containing an enumeration.
-     * @param p profile of the object.
-     *
-     * @pre profile must have the service flag set.
-     */
-    void to_service(const processed_object& o, const profile& p);
-
-    /**
-     * @brief Converts Dia a object containing a UML class with a
-     * stereotype of value object to a yarn service.
-     *
-     * @param o the Dia UML class containing a value object.
+     * @param o the Dia UML class containing a value object or service.
      * @param p profile of the object.
      *
      * @pre profile must have the value object flag set.
      */
-    void to_value_object(const processed_object& o, const profile& p);
+    void to_object(const processed_object& po, const profile& p,
+        const yarn::object_types ot);
 
     /**
      * @brief Converts a object containing a class into an enumeration.

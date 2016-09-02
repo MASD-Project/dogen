@@ -178,9 +178,42 @@ yarn::enumerator transformer::to_enumerator(const processed_attribute& a,
     return r;
 }
 
-void transformer::
-update_object(yarn::object& o, const processed_object& po, const profile& p) {
-    update_element(o, po, p);
+void transformer::update_element(const processed_object& o, const profile& p,
+    yarn::element& e) {
+
+    e.generation_type(generation_type(p));
+    e.origin_type(yarn::origin_types::user);
+
+    const auto package_id(o.child_node_id());
+    bool is_in_package(!package_id.empty());
+    if (is_in_package) {
+        /*
+         * Create the element name taking into account the
+         * packages the element is contained in.
+         */
+        const auto& module(module_for_id(package_id));
+        e.name(to_name(o.name(), module.name()));
+    } else {
+        /*
+         * Type is a top-level type - e.g. belongs to the
+         * synthetic module for the model; do not add this
+         * dependency to the name.
+         */
+        e.name(to_name(o.name()));
+    }
+
+    context_.id_to_name().insert(std::make_pair(o.id(), e.name()));
+    e.documentation(o.comment().documentation());
+
+    const auto& kvps(o.comment().key_value_pairs());
+    const auto scope(dynamic::scope_types::entity);
+    e.extensions(dynamic_workflow_.execute(scope, kvps));
+}
+
+void transformer::to_object(const processed_object& po, const profile& p,
+    const yarn::object_types ot) {
+    yarn::object o;
+    update_element(po, p, o);
 
     o.is_fluent(p.is_fluent());
     o.is_visitable(p.is_visitable());
@@ -237,48 +270,33 @@ update_object(yarn::object& o, const processed_object& po, const profile& p) {
     o.is_immutable(p.is_immutable());
     if ((o.is_parent() || o.is_child()) && p.is_immutable())  {
         BOOST_LOG_SEV(lg, error) << immutabilty_with_inheritance
-                                 << o.name().simple();
+                                 << o.name().id();
 
         BOOST_THROW_EXCEPTION(
             transformation_error(immutabilty_with_inheritance +
-                o.name().simple()));
+                o.name().id()));
     }
+
+
+    o.object_type(ot);
+    auto& objects(context_.model().objects());
+    objects.insert(std::make_pair(o.name().id(), o));
 }
 
 void transformer::to_exception(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an exception: " << o.id();
 
     yarn::exception e;
-    update_element(e, o, p);
+    update_element(o, p, e);
 
     auto& exceptions(context_.model().exceptions());
     exceptions.insert(std::make_pair(e.name().id(), e));
 }
 
-void transformer::to_service(const processed_object& o, const profile& p) {
-    BOOST_LOG_SEV(lg, debug) << "Object is a service: " << o.id();
-
-    yarn::object s;
-    s.object_type(yarn::object_types::user_defined_service);
-    update_object(s, o, p);
-    auto& objects(context_.model().objects());
-    objects.insert(std::make_pair(s.name().id(), s));
-}
-
-void transformer::to_value_object(const processed_object& o, const profile& p) {
-    BOOST_LOG_SEV(lg, debug) << "Object is a value object: " << o.id();
-
-    yarn::object vo;
-    update_object(vo, o, p);
-    vo.object_type(yarn::object_types::user_defined_value_object);
-    auto& objects(context_.model().objects());
-    objects.insert(std::make_pair(vo.name().id(), vo));
-}
-
 void transformer::to_enumeration(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an enumeration: " << o.id();
     yarn::enumeration e;
-    update_element(e, o, p);
+    update_element(o, p, e);
 
     dogen::yarn::enumerator invalid;
     invalid.name("invalid");
@@ -311,7 +329,7 @@ void transformer::to_module(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is a module: " << o.id();
 
     yarn::module m;
-    update_element(m, o, p);
+    update_element(o, p, m);
     auto& modules(context_.model().modules());
     modules.insert(std::make_pair(m.name().id(), m));
 }
@@ -328,6 +346,7 @@ void transformer::from_note(const processed_object& o) {
     const auto& documentation(o.comment().documentation());
     const auto& kvps(o.comment().key_value_pairs());
     const auto& model(context_.model());
+
     using dynamic::scope_types;
     if (o.child_node_id().empty()) {
         auto& module(module_for_name(model.name()));
@@ -347,7 +366,7 @@ void transformer::from_note(const processed_object& o) {
 
 void transformer::to_concept(const processed_object& o, const profile& p) {
     yarn::concept c;
-    update_element(c, o, p);
+    update_element(o, p, c);
 
     for (const auto& prop : o.attributes())
         c.local_attributes().push_back(to_attribute(c.name(), prop));
@@ -404,9 +423,9 @@ void transformer::dispatch(const processed_object& o, const profile& p) {
     else if (p.is_exception())
         to_exception(o, p);
     else if (p.is_service())
-        to_service(o, p);
+        to_object(o, p, yarn::object_types::user_defined_service);
     else
-        to_value_object(o, p);
+        to_object(o, p, yarn::object_types::user_defined_value_object);
 }
 
 void transformer::transform(const processed_object& o, const profile& p) {
