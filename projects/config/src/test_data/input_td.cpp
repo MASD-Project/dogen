@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/config/test_data/input_descriptor_td.hpp"
+#include "dogen/config/test_data/input_td.hpp"
 
 namespace {
 
@@ -36,40 +36,35 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
-}
-
 }
 
 namespace dogen {
 namespace config {
 
-input_descriptor_generator::input_descriptor_generator() : position_(0) { }
+input_generator::input_generator() : position_(0) { }
 
-void input_descriptor_generator::
+void input_generator::
 populate(const unsigned int position, result_type& v) {
     v.path(create_boost_filesystem_path(position + 0));
     v.external_modules(create_std_string(position + 1));
-    v.is_target(create_bool(position + 2));
 }
 
-input_descriptor_generator::result_type
-input_descriptor_generator::create(const unsigned int position) {
-    input_descriptor r;
-    input_descriptor_generator::populate(position, r);
+input_generator::result_type
+input_generator::create(const unsigned int position) {
+    input r;
+    input_generator::populate(position, r);
     return r;
 }
 
-input_descriptor_generator::result_type*
-input_descriptor_generator::create_ptr(const unsigned int position) {
-    input_descriptor* p = new input_descriptor();
-    input_descriptor_generator::populate(position, *p);
+input_generator::result_type*
+input_generator::create_ptr(const unsigned int position) {
+    input* p = new input();
+    input_generator::populate(position, *p);
     return p;
 }
 
-input_descriptor_generator::result_type
-input_descriptor_generator::operator()() {
+input_generator::result_type
+input_generator::operator()() {
     return create(position_++);
 }
 

@@ -49,12 +49,12 @@ input_options mock_options_factory::make_input_options(
     const boost::filesystem::path& target,
     const std::string& modules) {
 
-    input_descriptor id;
-    id.external_modules(modules);
-    id.path(target);
+    input in;
+    in.external_modules(modules);
+    in.path(target);
 
     input_options r;
-    r.target(id);
+    r.target(in);
     return r;
 }
 

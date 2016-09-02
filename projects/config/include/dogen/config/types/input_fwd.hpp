@@ -18,34 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/config/io/input_io.hpp"
-#include "dogen/config/io/input_options_io.hpp"
+#ifndef DOGEN_CONFIG_TYPES_INPUT_FWD_HPP
+#define DOGEN_CONFIG_TYPES_INPUT_FWD_HPP
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::config::input>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace config {
 
-std::ostream& operator<<(std::ostream& s, const input_options& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::config::input_options\"" << ", "
-      << "\"target\": " << v.target() << ", "
-      << "\"references\": " << v.references()
-      << " }";
-    return(s);
-}
+class input;
 
 } }
+
+#endif

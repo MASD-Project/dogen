@@ -27,7 +27,7 @@
 
 #include <vector>
 #include <algorithm>
-#include "dogen/config/types/input_descriptor.hpp"
+#include "dogen/config/types/input.hpp"
 #include "dogen/config/serialization/input_options_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,8 +45,8 @@ public:
 
 public:
     input_options(
-        const dogen::config::input_descriptor& target,
-        const std::vector<dogen::config::input_descriptor>& references);
+        const dogen::config::input& target,
+        const std::vector<dogen::config::input>& references);
 
 private:
     template<typename Archive>
@@ -57,24 +57,23 @@ private:
 
 public:
     /**
-     * @brief Path to the Dia diagram that contains the model to
-     *  generate.
+     * @brief Path to the Dia diagram that contains the model to generate.
      */
     /**@{*/
-    const dogen::config::input_descriptor& target() const;
-    dogen::config::input_descriptor& target();
-    void target(const dogen::config::input_descriptor& v);
-    void target(const dogen::config::input_descriptor&& v);
+    const dogen::config::input& target() const;
+    dogen::config::input& target();
+    void target(const dogen::config::input& v);
+    void target(const dogen::config::input&& v);
     /**@}*/
 
     /**
      * @brief All external models in which this model depends.
      */
     /**@{*/
-    const std::vector<dogen::config::input_descriptor>& references() const;
-    std::vector<dogen::config::input_descriptor>& references();
-    void references(const std::vector<dogen::config::input_descriptor>& v);
-    void references(const std::vector<dogen::config::input_descriptor>&& v);
+    const std::vector<dogen::config::input>& references() const;
+    std::vector<dogen::config::input>& references();
+    void references(const std::vector<dogen::config::input>& v);
+    void references(const std::vector<dogen::config::input>&& v);
     /**@}*/
 
 public:
@@ -88,8 +87,8 @@ public:
     input_options& operator=(input_options other);
 
 private:
-    dogen::config::input_descriptor target_;
-    std::vector<dogen::config::input_descriptor> references_;
+    dogen::config::input target_;
+    std::vector<dogen::config::input> references_;
 };
 
 } }

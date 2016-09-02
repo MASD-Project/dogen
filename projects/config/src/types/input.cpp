@@ -18,84 +18,68 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/config/types/input_descriptor.hpp"
+#include "dogen/config/types/input.hpp"
 
 namespace dogen {
 namespace config {
 
-input_descriptor::input_descriptor()
-    : is_target_(static_cast<bool>(0)) { }
-
-input_descriptor::input_descriptor(input_descriptor&& rhs)
+input::input(input&& rhs)
     : path_(std::move(rhs.path_)),
-      external_modules_(std::move(rhs.external_modules_)),
-      is_target_(std::move(rhs.is_target_)) { }
+      external_modules_(std::move(rhs.external_modules_)) { }
 
-input_descriptor::input_descriptor(
+input::input(
     const boost::filesystem::path& path,
-    const std::string& external_modules,
-    const bool is_target)
+    const std::string& external_modules)
     : path_(path),
-      external_modules_(external_modules),
-      is_target_(is_target) { }
+      external_modules_(external_modules) { }
 
-void input_descriptor::swap(input_descriptor& other) noexcept {
+void input::swap(input& other) noexcept {
     using std::swap;
     swap(path_, other.path_);
     swap(external_modules_, other.external_modules_);
-    swap(is_target_, other.is_target_);
 }
 
-bool input_descriptor::operator==(const input_descriptor& rhs) const {
+bool input::operator==(const input& rhs) const {
     return path_ == rhs.path_ &&
-        external_modules_ == rhs.external_modules_ &&
-        is_target_ == rhs.is_target_;
+        external_modules_ == rhs.external_modules_;
 }
 
-input_descriptor& input_descriptor::operator=(input_descriptor other) {
+input& input::operator=(input other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const boost::filesystem::path& input_descriptor::path() const {
+const boost::filesystem::path& input::path() const {
     return path_;
 }
 
-boost::filesystem::path& input_descriptor::path() {
+boost::filesystem::path& input::path() {
     return path_;
 }
 
-void input_descriptor::path(const boost::filesystem::path& v) {
+void input::path(const boost::filesystem::path& v) {
     path_ = v;
 }
 
-void input_descriptor::path(const boost::filesystem::path&& v) {
+void input::path(const boost::filesystem::path&& v) {
     path_ = std::move(v);
 }
 
-const std::string& input_descriptor::external_modules() const {
+const std::string& input::external_modules() const {
     return external_modules_;
 }
 
-std::string& input_descriptor::external_modules() {
+std::string& input::external_modules() {
     return external_modules_;
 }
 
-void input_descriptor::external_modules(const std::string& v) {
+void input::external_modules(const std::string& v) {
     external_modules_ = v;
 }
 
-void input_descriptor::external_modules(const std::string&& v) {
+void input::external_modules(const std::string&& v) {
     external_modules_ = std::move(v);
-}
-
-bool input_descriptor::is_target() const {
-    return is_target_;
-}
-
-void input_descriptor::is_target(const bool v) {
-    is_target_ = v;
 }
 
 } }

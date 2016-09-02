@@ -44,7 +44,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<cpp_options_generator>();
     test_swap<input_options_generator>();
     test_swap<output_options_generator>();
-    test_swap<input_descriptor_generator>();
+    test_swap<input_generator>();
     test_swap<knitting_options_generator>();
 }
 

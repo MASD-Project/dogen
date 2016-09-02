@@ -18,35 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/config/hash/input_descriptor_hash.hpp"
+#ifndef DOGEN_CONFIG_TEST_DATA_INPUT_TD_HPP
+#define DOGEN_CONFIG_TEST_DATA_INPUT_TD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
-    std::size_t seed(0);
-    combine(seed, v.generic_string());
-    return seed;
-}
-
-}
+#include "dogen/config/types/input.hpp"
 
 namespace dogen {
 namespace config {
 
-std::size_t input_descriptor_hasher::hash(const input_descriptor& v) {
-    std::size_t seed(0);
+class input_generator {
+public:
+    input_generator();
 
-    combine(seed, hash_boost_filesystem_path(v.path()));
-    combine(seed, v.external_modules());
-    combine(seed, v.is_target());
+public:
+    typedef dogen::config::input result_type;
 
-    return seed;
-}
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
+
+#endif

@@ -1199,15 +1199,6 @@ well known container. This is the case with the element formatter.
 This also reduces the number of splices done by the calling code. All
 the logging should be done in the element formatter as well.
 
-*** Move file instantiation code into yarn                            :story:
-
-At present =knit::workflow= handles the generation of the input
-descriptors. We should create a class in =yarn= that takes a set of
-directories and file paths and does the instantiation. We should then
-make use of this class in the yarn workflow. All the code is under
-=obtain_input_descriptors_activity=. It must be trivial to figure out
-where we are in the pipeline by looking at the log file.
-
 *** Add logging to all top-level workflow activities                  :story:
 
 We need to make sure the log file is narrating a story. For this we

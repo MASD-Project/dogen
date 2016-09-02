@@ -85,8 +85,7 @@ program_options_parser::program_options_parser(program_options_parser&& rhs)
       help_function_(std::move(rhs.help_function_)),
       version_function_(std::move(rhs.version_function_)) { }
 
-config::input_descriptor program_options_parser::make_input_descriptor(
-    const std::string& s, const bool is_target) const {
+config::input program_options_parser::make_input(const std::string& s) const {
 
     std::vector<std::string> tokens;
     boost::split(tokens, s, boost::is_any_of(comma));
@@ -97,8 +96,7 @@ config::input_descriptor program_options_parser::make_input_descriptor(
     if (tokens.size() > 2)
         BOOST_THROW_EXCEPTION(parser_validation_error(at_most_two_arguments));
 
-    config::input_descriptor r;
-    r.is_target(is_target);
+    config::input r;
     r.path(tokens[0]);
     if (tokens.size() > 1)
         r.external_modules(tokens[1]);
@@ -236,14 +234,14 @@ config::input_options program_options_parser::transform_input_options(
     }
 
     const auto s(vm[target_arg].as<std::string>());
-    r.target(make_input_descriptor(s, true/*is_target*/));
+    r.target(make_input(s));
 
     if (!vm.count(reference_arg))
         return r;
 
     typedef std::vector<std::string> argument_type;
     for (const auto ref : vm[reference_arg].as<argument_type>())
-        r.references().push_back(make_input_descriptor(ref));
+        r.references().push_back(make_input(ref));
 
     return r;
 }

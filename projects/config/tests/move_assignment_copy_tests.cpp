@@ -44,7 +44,7 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<cpp_options_generator>();
     test_move_assignment_copy<input_options_generator>();
     test_move_assignment_copy<output_options_generator>();
-    test_move_assignment_copy<input_descriptor_generator>();
+    test_move_assignment_copy<input_generator>();
     test_move_assignment_copy<knitting_options_generator>();
 }
 

@@ -18,36 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CONFIG_TEST_DATA_INPUT_DESCRIPTOR_TD_HPP
-#define DOGEN_CONFIG_TEST_DATA_INPUT_DESCRIPTOR_TD_HPP
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen/config/io/input_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/config/types/input_descriptor.hpp"
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace config {
 
-class input_descriptor_generator {
-public:
-    input_descriptor_generator();
-
-public:
-    typedef dogen::config::input_descriptor result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+std::ostream& operator<<(std::ostream& s, const input& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::config::input\"" << ", "
+      << "\"path\": " << "\"" << v.path().generic_string() << "\"" << ", "
+      << "\"external_modules\": " << "\"" << tidy_up_string(v.external_modules()) << "\""
+      << " }";
+    return(s);
+}
 
 } }
-
-#endif

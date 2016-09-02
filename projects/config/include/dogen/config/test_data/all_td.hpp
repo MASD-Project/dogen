@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
+#include "dogen/config/test_data/input_td.hpp"
 #include "dogen/config/test_data/cpp_options_td.hpp"
 #include "dogen/config/test_data/input_options_td.hpp"
 #include "dogen/config/test_data/output_options_td.hpp"
-#include "dogen/config/test_data/input_descriptor_td.hpp"
 #include "dogen/config/test_data/knitting_options_td.hpp"
 #include "dogen/config/test_data/stitching_options_td.hpp"
 

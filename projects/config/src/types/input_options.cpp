@@ -24,8 +24,8 @@ namespace dogen {
 namespace config {
 
 input_options::input_options(
-    const dogen::config::input_descriptor& target,
-    const std::vector<dogen::config::input_descriptor>& references)
+    const dogen::config::input& target,
+    const std::vector<dogen::config::input>& references)
     : target_(target),
       references_(references) { }
 
@@ -46,35 +46,35 @@ input_options& input_options::operator=(input_options other) {
     return *this;
 }
 
-const dogen::config::input_descriptor& input_options::target() const {
+const dogen::config::input& input_options::target() const {
     return target_;
 }
 
-dogen::config::input_descriptor& input_options::target() {
+dogen::config::input& input_options::target() {
     return target_;
 }
 
-void input_options::target(const dogen::config::input_descriptor& v) {
+void input_options::target(const dogen::config::input& v) {
     target_ = v;
 }
 
-void input_options::target(const dogen::config::input_descriptor&& v) {
+void input_options::target(const dogen::config::input&& v) {
     target_ = std::move(v);
 }
 
-const std::vector<dogen::config::input_descriptor>& input_options::references() const {
+const std::vector<dogen::config::input>& input_options::references() const {
     return references_;
 }
 
-std::vector<dogen::config::input_descriptor>& input_options::references() {
+std::vector<dogen::config::input>& input_options::references() {
     return references_;
 }
 
-void input_options::references(const std::vector<dogen::config::input_descriptor>& v) {
+void input_options::references(const std::vector<dogen::config::input>& v) {
     references_ = v;
 }
 
-void input_options::references(const std::vector<dogen::config::input_descriptor>&& v) {
+void input_options::references(const std::vector<dogen::config::input>&& v) {
     references_ = std::move(v);
 }
 

@@ -28,8 +28,8 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/config/serialization/input_ser.hpp"
 #include "dogen/config/serialization/input_options_ser.hpp"
-#include "dogen/config/serialization/input_descriptor_ser.hpp"
 
 namespace boost {
 namespace serialization {

@@ -25,11 +25,11 @@
 #pragma once
 #endif
 
+#include "dogen/config/serialization/input_ser.hpp"
 #include "dogen/config/serialization/registrar_ser.hpp"
 #include "dogen/config/serialization/cpp_options_ser.hpp"
 #include "dogen/config/serialization/input_options_ser.hpp"
 #include "dogen/config/serialization/output_options_ser.hpp"
-#include "dogen/config/serialization/input_descriptor_ser.hpp"
 #include "dogen/config/serialization/knitting_options_ser.hpp"
 #include "dogen/config/serialization/stitching_options_ser.hpp"
 

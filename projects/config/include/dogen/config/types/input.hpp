@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CONFIG_TYPES_INPUT_DESCRIPTOR_HPP
-#define DOGEN_CONFIG_TYPES_INPUT_DESCRIPTOR_HPP
+#ifndef DOGEN_CONFIG_TYPES_INPUT_HPP
+#define DOGEN_CONFIG_TYPES_INPUT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen/config/serialization/input_descriptor_fwd_ser.hpp"
+#include "dogen/config/serialization/input_fwd_ser.hpp"
 
 namespace dogen {
 namespace config {
@@ -36,29 +36,26 @@ namespace config {
 /**
  * @brief Reference to a model to load.
  */
-class input_descriptor final {
+class input final {
 public:
-    input_descriptor(const input_descriptor&) = default;
-    ~input_descriptor() = default;
+    input() = default;
+    input(const input&) = default;
+    ~input() = default;
 
 public:
-    input_descriptor();
+    input(input&& rhs);
 
 public:
-    input_descriptor(input_descriptor&& rhs);
-
-public:
-    input_descriptor(
+    input(
         const boost::filesystem::path& path,
-        const std::string& external_modules,
-        const bool is_target);
+        const std::string& external_modules);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::config::input_descriptor& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::config::input& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::config::input_descriptor& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::config::input& v, unsigned int version);
 
 public:
     /**
@@ -81,28 +78,19 @@ public:
     void external_modules(const std::string&& v);
     /**@}*/
 
-    /**
-     * @brief If true, the input contains the target model.
-     */
-    /**@{*/
-    bool is_target() const;
-    void is_target(const bool v);
-    /**@}*/
-
 public:
-    bool operator==(const input_descriptor& rhs) const;
-    bool operator!=(const input_descriptor& rhs) const {
+    bool operator==(const input& rhs) const;
+    bool operator!=(const input& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(input_descriptor& other) noexcept;
-    input_descriptor& operator=(input_descriptor other);
+    void swap(input& other) noexcept;
+    input& operator=(input other);
 
 private:
     boost::filesystem::path path_;
     std::string external_modules_;
-    bool is_target_;
 };
 
 } }
@@ -111,8 +99,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::config::input_descriptor& lhs,
-    dogen::config::input_descriptor& rhs) {
+    dogen::config::input& lhs,
+    dogen::config::input& rhs) {
     lhs.swap(rhs);
 }
 

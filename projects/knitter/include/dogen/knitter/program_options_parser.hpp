@@ -51,8 +51,7 @@ public:
     program_options_parser(program_options_parser&& rhs);
 
 private:
-    config::input_descriptor make_input_descriptor(
-        const std::string& s, const bool is_target = false) const;
+    config::input make_input(const std::string& s) const;
 
 private:
     typedef boost::program_options::options_description options_description;

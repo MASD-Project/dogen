@@ -25,11 +25,11 @@
 #pragma once
 #endif
 
+#include "dogen/config/types/input.hpp"
 #include "dogen/config/types/config.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/config/types/input_options.hpp"
 #include "dogen/config/types/output_options.hpp"
-#include "dogen/config/types/input_descriptor.hpp"
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/config/types/validation_error.hpp"
 #include "dogen/config/types/stitching_options.hpp"

@@ -18,23 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CONFIG_SERIALIZATION_INPUT_DESCRIPTOR_FWD_SER_HPP
-#define DOGEN_CONFIG_SERIALIZATION_INPUT_DESCRIPTOR_FWD_SER_HPP
+#ifndef DOGEN_CONFIG_IO_INPUT_IO_HPP
+#define DOGEN_CONFIG_IO_INPUT_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/config/types/input_descriptor_fwd.hpp"
+#include <iosfwd>
+#include "dogen/config/types/input.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace config {
 
-template<class Archive>
-void save(Archive& ar, const dogen::config::input_descriptor& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::config::input_descriptor& v, unsigned int version);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::config::input& v);
 
 } }
 

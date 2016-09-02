@@ -18,22 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CONFIG_IO_INPUT_DESCRIPTOR_IO_HPP
-#define DOGEN_CONFIG_IO_INPUT_DESCRIPTOR_IO_HPP
+#ifndef DOGEN_CONFIG_SERIALIZATION_INPUT_SER_HPP
+#define DOGEN_CONFIG_SERIALIZATION_INPUT_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/config/types/input_descriptor.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/config/types/input.hpp"
 
-namespace dogen {
-namespace config {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::config::input)
+namespace boost {
+namespace serialization {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::config::input_descriptor& v);
+template<typename Archive>
+void save(Archive& ar, const dogen::config::input& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::config::input& v, unsigned int version);
 
 } }
 
