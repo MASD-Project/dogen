@@ -103,9 +103,7 @@ make(const std::list<boost::filesystem::path>& dirs,
     const config::input_options& io) const {
 
     auto r(from_directories(dirs));
-    // x.splice( x.end(), x, iter );
-    // auto refs(from_references(io.references()));
-    // r.splice(r.end(), r.begin(), r.end());
+    r.splice(r.end(), from_references(io.references()));
     r.push_back(from_target(io.target()));
     return r;
 }

@@ -57,7 +57,9 @@ In =yarn.dia=:
 - update element should make use of the element base class.
 - merge to value object with to service.
 
-*** STARTED Move file instantiation code into yarn                    :story:
+*** COMPLETED Move file instantiation code into yarn                  :story:
+    CLOSED: [2016-09-02 Fri 12:35]
+    CLOCK: [2016-09-02 Fri 12:12]--[2016-09-02 Fri 12:35] =>  0:23
     CLOCK: [2016-09-02 Fri 12:01]--[2016-09-02 Fri 12:11] =>  0:10
     CLOCK: [2016-09-02 Fri 11:01]--[2016-09-02 Fri 12:00] =>  0:59
     CLOCK: [2016-09-02 Fri 09:32]--[2016-09-02 Fri 09:47] =>  0:15

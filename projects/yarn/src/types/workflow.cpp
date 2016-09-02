@@ -24,6 +24,7 @@
 #include "dogen/yarn/types/expander.hpp"
 #include "dogen/yarn/types/assembler.hpp"
 #include "dogen/yarn/types/transformer.hpp"
+#include "dogen/yarn/types/descriptor_factory.hpp"
 #include "dogen/yarn/types/workflow.hpp"
 
 namespace {
@@ -35,6 +36,14 @@ static logger lg(logger_factory("yarn.workflow"));
 
 namespace dogen {
 namespace yarn {
+
+std::list<descriptor> workflow::obtain_descriptors_activity(
+    const std::list<boost::filesystem::path>& dirs,
+    const config::input_options& io) const {
+
+    descriptor_factory f;
+    return f.make(dirs, io);
+}
 
 std::list<intermediate_model> workflow::obtain_intermediate_models_activity(
     const dynamic::repository& drp, const std::list<descriptor>& d) const {
@@ -62,8 +71,11 @@ model workflow::transform_intermediate_model_activity(
     return t.transform(m);
 }
 
-model workflow::
-execute(const dynamic::repository& drp, const std::list<descriptor>& d) const {
+model workflow::execute(const dynamic::repository& drp,
+    const std::list<boost::filesystem::path>& dirs,
+    const config::input_options& io) const {
+
+    const auto d(obtain_descriptors_activity(dirs, io));
     auto im(obtain_intermediate_models_activity(drp, d));
     expand_intermediate_models_activity(drp, im);
     const auto m(assemble_intermediate_models_activity(im));

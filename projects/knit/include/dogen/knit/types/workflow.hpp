@@ -103,15 +103,9 @@ private:
         const std::forward_list<dynamic::ownership_hierarchy>& oh) const;
 
     /**
-     * @brief Create a list of all descriptors.
-     */
-    std::list<yarn::descriptor> obtain_descriptors_activity() const;
-
-    /**
      * @brief Obtain the yarn model.
      */
-    yarn::model obtain_yarn_model_activity(const dynamic::repository& rp,
-        const std::list<yarn::descriptor>& d) const;
+    yarn::model obtain_yarn_model_activity(const dynamic::repository& rp) const;
 
     /**
      * @brief Performs a housekeeping run for the supplied directories.

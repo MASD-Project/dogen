@@ -89,54 +89,16 @@ dynamic::repository workflow::setup_dynamic_repository_activity(
     return w.execute(oh, std::forward_list<boost::filesystem::path> { dir });
 }
 
-std::list<yarn::descriptor>
-workflow::obtain_descriptors_activity() const {
-    std::list<yarn::descriptor> r;
+yarn::model workflow::
+obtain_yarn_model_activity(const dynamic::repository& rp) const {
+
     using namespace dogen::utility::filesystem;
     const auto dir(data_files_directory() / library_dir);
+    std::list<boost::filesystem::path> dirs({dir});
 
-    const auto files(find_files(dir));
-    BOOST_LOG_SEV(lg, debug) << "Found " << files.size()
-                             << " paths to library models.";
-
-    for (const auto& f : files) {
-        BOOST_LOG_SEV(lg, debug) << "Library model: " << f.filename();
-        yarn::descriptor id;
-        id.path(f);
-        id.is_target(false);
-        r.push_back(id);
-    }
-    BOOST_LOG_SEV(lg, debug) << "Done creating paths to library models.";
-
-    const auto input_options(knitting_options_.input());
-    BOOST_LOG_SEV(lg, debug) << "Found " << input_options.references().size()
-                             << " paths to reference models.";
-
-    for (const auto ref : input_options.references()) {
-        BOOST_LOG_SEV(lg, debug) << "Reference model: "
-                                 << ref.path().filename();
-        yarn::descriptor id;
-        id.path(ref.path());
-        id.external_modules(ref.external_modules());
-        id.is_target(false);
-        r.push_back(id);
-    }
-    BOOST_LOG_SEV(lg, debug) << "Done creating paths to reference models.";
-
-    yarn::descriptor target;
-    target.path(input_options.target().path());
-    target.is_target(true);
-    target.external_modules(input_options.target().external_modules());
-    r.push_back(target);
-    BOOST_LOG_SEV(lg, debug) << "Added target model: "
-                             << input_options.target().path();
-    return r;
-}
-
-yarn::model workflow::obtain_yarn_model_activity(
-    const dynamic::repository& rp, const std::list<yarn::descriptor>& d) const {
-    const auto w = yarn::workflow();
-    return w.execute(rp, d);
+    yarn::workflow w;
+    const auto io(knitting_options_.input());
+    return w.execute(rp, dirs, io);
 }
 
 void workflow::perform_housekeeping_activity(
@@ -182,8 +144,7 @@ void workflow::execute() const {
     try {
         const auto oh(obtain_ownership_hierarchy_activity());
         const auto rp(setup_dynamic_repository_activity(oh));
-        const auto d(obtain_descriptors_activity());
-        const auto m(obtain_yarn_model_activity(rp, d));
+        const auto m(obtain_yarn_model_activity(rp));
 
         if (!m.has_generatable_types()) {
             BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
