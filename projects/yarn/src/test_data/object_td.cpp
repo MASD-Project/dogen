@@ -109,7 +109,7 @@ populate(const unsigned int position, result_type& v) {
     v.opaque_associations(create_std_list_dogen_yarn_name(position + 14));
     v.is_visitable(create_bool(position + 15));
     v.is_root_parent_visitable(create_bool(position + 16));
-    v.visitable_by(create_std_list_dogen_yarn_name(position + 17));
+    v.visitable_by(create_boost_optional_dogen_yarn_name(position + 17));
     v.type_parameters_settings(create_dogen_yarn_type_parameters_settings(position + 18));
     v.object_type(create_dogen_yarn_object_types(position + 19));
     v.modeled_concepts(create_std_list_dogen_yarn_name(position + 20));

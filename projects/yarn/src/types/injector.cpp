@@ -102,7 +102,7 @@ create_visitor(const object& o, const std::list<name>& leaves) const {
 void injector::inject_visitable_by(object& root, const std::list<name>& leaves,
     const name& visitor, intermediate_model& m) const {
 
-    root.visitable_by().push_back(visitor);
+    root.visitable_by(visitor);
 
     for (const auto& l : leaves) {
         auto i(m.objects().find(l.id()));
@@ -112,7 +112,7 @@ void injector::inject_visitable_by(object& root, const std::list<name>& leaves,
         }
 
         auto& leaf(i->second);
-        leaf.visitable_by().push_back(visitor);
+        leaf.visitable_by(visitor);
     }
 }
 

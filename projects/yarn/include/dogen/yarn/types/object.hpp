@@ -88,7 +88,7 @@ public:
         const std::list<dogen::yarn::name>& opaque_associations,
         const bool is_visitable,
         const bool is_root_parent_visitable,
-        const std::list<dogen::yarn::name>& visitable_by,
+        const boost::optional<dogen::yarn::name>& visitable_by,
         const dogen::yarn::type_parameters_settings& type_parameters_settings,
         const dogen::yarn::object_types object_type,
         const std::list<dogen::yarn::name>& modeled_concepts,
@@ -294,13 +294,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Elements that visit current type.
+     * @brief Elements that visit the current element, if any.
      */
     /**@{*/
-    const std::list<dogen::yarn::name>& visitable_by() const;
-    std::list<dogen::yarn::name>& visitable_by();
-    void visitable_by(const std::list<dogen::yarn::name>& v);
-    void visitable_by(const std::list<dogen::yarn::name>&& v);
+    const boost::optional<dogen::yarn::name>& visitable_by() const;
+    boost::optional<dogen::yarn::name>& visitable_by();
+    void visitable_by(const boost::optional<dogen::yarn::name>& v);
+    void visitable_by(const boost::optional<dogen::yarn::name>&& v);
     /**@}*/
 
     const dogen::yarn::type_parameters_settings& type_parameters_settings() const;
@@ -375,7 +375,7 @@ private:
     std::list<dogen::yarn::name> opaque_associations_;
     bool is_visitable_;
     bool is_root_parent_visitable_;
-    std::list<dogen::yarn::name> visitable_by_;
+    boost::optional<dogen::yarn::name> visitable_by_;
     dogen::yarn::type_parameters_settings type_parameters_settings_;
     dogen::yarn::object_types object_type_;
     std::list<dogen::yarn::name> modeled_concepts_;

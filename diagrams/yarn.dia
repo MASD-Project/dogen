@@ -16063,13 +16063,13 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:point val="-197,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-197.05,-15.05;-184.515,-9.75"/>
+        <dia:rectangle val="-197.05,-15.05;-182.59,-9.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-197,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.434999999999999"/>
+        <dia:real val="14.359999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -16217,13 +16217,13 @@ Set to false if no parent exists, or if the parent is not visitable. #</dia:stri
             <dia:string>#visitable_by#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;name&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Elements that visit current type.#</dia:string>
+            <dia:string>#Elements that visit the current element, if any.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16932,17 +16932,17 @@ This is used to break cycles where required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O133">
       <dia:attribute name="obj_pos">
-        <dia:point val="-190.782,-9.8"/>
+        <dia:point val="-189.82,-9.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-191.632,-9.85;-173.557,14.0004"/>
+        <dia:rectangle val="-190.67,-9.85;-173.557,14.0004"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-190.782,-9.8"/>
-        <dia:point val="-190.782,9"/>
+        <dia:point val="-189.82,-9.8"/>
+        <dia:point val="-189.82,9"/>
         <dia:point val="-173.607,9"/>
         <dia:point val="-173.607,13.9504"/>
       </dia:attribute>

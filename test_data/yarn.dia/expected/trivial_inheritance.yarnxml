@@ -502,8 +502,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings class_id="37" tracking_level="0" version="0">
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -725,8 +724,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -835,8 +833,7 @@ in the context of inheritance.
 				<is_visitable>1</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -1027,8 +1024,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -1219,8 +1215,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -1329,8 +1324,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -1521,8 +1515,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -1661,8 +1654,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -1881,8 +1873,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -2071,8 +2062,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -2294,8 +2284,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -2434,8 +2423,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -2624,8 +2612,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -2844,8 +2831,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -2954,8 +2940,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -3174,8 +3159,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -3396,8 +3380,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -3506,8 +3489,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -3726,8 +3708,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -3866,8 +3847,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -4006,8 +3986,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -4226,8 +4205,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
@@ -4448,8 +4426,7 @@ in the context of inheritance.
 				<is_visitable>0</is_visitable>
 				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
-					<count>0</count>
-					<item_version>0</item_version>
+					<initialized>0</initialized>
 				</visitable_by>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>

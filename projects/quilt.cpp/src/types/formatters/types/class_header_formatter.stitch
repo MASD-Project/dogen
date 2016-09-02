@@ -152,8 +152,8 @@ private:
             /*
              * Visitation.
              */
-            if (o.is_visitable()) {
-                const auto vsn(o.visitable_by().front().simple());
+            if (o.is_visitable() && o.visitable_by()) {
+                const auto vsn(o.visitable_by()->simple());
 #>
 public:
     virtual void accept(const <#= vsn #>& v) const = 0;
@@ -162,8 +162,8 @@ public:
     virtual void accept(<#= vsn #>& v) = 0;
 
 <#+
-            } else if (o.is_root_parent_visitable() && !o.is_parent()) {
-                const auto vsn(o.visitable_by().front().simple());
+            } else if (o.is_root_parent_visitable() && !o.is_parent() && o.visitable_by()) {
+                const auto vsn(o.visitable_by()->simple());
                 const auto rpsn(o.root_parent()->simple());
 #>
 public:

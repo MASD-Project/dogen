@@ -157,7 +157,7 @@ object::object(
     const std::list<dogen::yarn::name>& opaque_associations,
     const bool is_visitable,
     const bool is_root_parent_visitable,
-    const std::list<dogen::yarn::name>& visitable_by,
+    const boost::optional<dogen::yarn::name>& visitable_by,
     const dogen::yarn::type_parameters_settings& type_parameters_settings,
     const dogen::yarn::object_types object_type,
     const std::list<dogen::yarn::name>& modeled_concepts,
@@ -502,19 +502,19 @@ void object::is_root_parent_visitable(const bool v) {
     is_root_parent_visitable_ = v;
 }
 
-const std::list<dogen::yarn::name>& object::visitable_by() const {
+const boost::optional<dogen::yarn::name>& object::visitable_by() const {
     return visitable_by_;
 }
 
-std::list<dogen::yarn::name>& object::visitable_by() {
+boost::optional<dogen::yarn::name>& object::visitable_by() {
     return visitable_by_;
 }
 
-void object::visitable_by(const std::list<dogen::yarn::name>& v) {
+void object::visitable_by(const boost::optional<dogen::yarn::name>& v) {
     visitable_by_ = v;
 }
 
-void object::visitable_by(const std::list<dogen::yarn::name>&& v) {
+void object::visitable_by(const boost::optional<dogen::yarn::name>&& v) {
     visitable_by_ = std::move(v);
 }
 
