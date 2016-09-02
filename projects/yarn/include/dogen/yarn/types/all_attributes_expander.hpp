@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_ATTRIBUTES_INDEXER_HPP
-#define DOGEN_YARN_TYPES_ATTRIBUTES_INDEXER_HPP
+#ifndef DOGEN_YARN_TYPES_ALL_ATTRIBUTES_EXPANDER_HPP
+#define DOGEN_YARN_TYPES_ALL_ATTRIBUTES_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,18 +33,17 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Information indexer that specialises in indexing
- * attributes across the model.
+ * @brief Information expander that specialises in indexing attributes
+ * across the model.
  *
- * @section yarn_attributes_indexer_0 Model requirements
+ * @section yarn_all_attributes_expander_0 Model requirements
  *
- * The attribute indexer expects to receive a partial model such as
- * ones coming straight out of Dia to Yarn transformation. The
- * indexing of concepts is expected to have taken place.
+ * The expansion of local attributes and of concepts is expected to
+ * have taken place.
  *
- * @section yarn_attributes_indexer_1 Types of attributes
+ * @section yarn_all_attributes_expander_1 Types of attributes
  *
- * There are three sets of attributes the indexer is interested in:
+ * There are three sets of attributes the expander is interested in:
  *
  * @li local attributes;
  * @li inherited attributes;
@@ -52,14 +51,14 @@ namespace yarn {
  *
  * Lets cover each of these in more details.
  *
- * @subsection yarn_attributes_indexer_11 Local attributes
+ * @subsection yarn_all_attributes_expander_11 Local attributes
  *
- * On a natural, pre-indexed state, local attributes encompass only
- * the attributes defined on the class directly. The indexer behaves
+ * On a natural, pre-expanded state, local attributes encompass only
+ * the attributes defined on the class directly. The expander behaves
  * differently depending on whether it is indexing an object or a
  * concept.
  *
- * For objects, the job of the indexer is to expand the local
+ * For objects, the job of the expander is to expand the local
  * attributes to include all attributes obtained by modeling
  * concepts. This is because we treat them no differently from
  * attributes defined in the class for purposes of code generation. As
@@ -79,7 +78,7 @@ namespace yarn {
  * objects. When concepts get expressed in source code, all we require
  * is the set of all attributes for that concept (see below).
  *
- * @subsection yarn_attributes_indexer_12 Inherited attributes
+ * @subsection yarn_all_attributes_expander_12 Inherited attributes
  *
  * These provide an easy way to look-up which attributes one has
  * inherited and from whom. For objects, the inherited attributes are
@@ -90,7 +89,7 @@ namespace yarn {
  * still index them by, arbitrarily, adding all the local attributes
  * of the parent. However, we still haven't found a good use for them.
  *
- * @subsection yarn_attributes_indexer_13 All attributes
+ * @subsection yarn_all_attributes_expander_13 All attributes
  *
  * The "all attribute" set contains every single attribute. It is the
  * sum all the local attributes with all of the inherited
@@ -98,49 +97,46 @@ namespace yarn {
  * concepts it is effectively the full interface of the concept.
  *
  */
-class attributes_indexer {
-public:
-    virtual ~attributes_indexer() noexcept { }
-
+class all_attributes_expander {
 private:
     /**
      * @brief Returns the object with the given name, or throws.
      */
-    object& find_object(const name& n, intermediate_model& m);
+    object& find_object(const name& n, intermediate_model& im);
 
     /**
      * @brief Returns the concept with the given name, or throws.
      */
-    concept& find_concept(const name& n, intermediate_model& m);
+    concept& find_concept(const name& n, intermediate_model& im);
 
 private:
     /**
-     * @brief Indexes a specific object.
+     * @brief Expands a specific object.
      */
-    void index_object(object& o, intermediate_model& m,
+    void expand_object(object& o, intermediate_model& im,
         std::unordered_set<std::string>& processed_ids);
 
     /**
-     * @brief Indexes all objects in the model.
+     * @brief Expands all objects in the model.
      */
-    void index_objects(intermediate_model& m);
+    void expand_objects(intermediate_model& im);
 
     /**
      * @brief Populates index information in a concept.
      */
-    void index_concept(concept& c, intermediate_model& m,
+    void expand_concept(concept& c, intermediate_model& im,
         std::unordered_set<std::string>& processed_ids);
 
     /**
      * @brief Indexes all concepts in the model.
      */
-    void index_concepts(intermediate_model& m);
+    void expand_concepts(intermediate_model& im);
 
 public:
     /**
      * @brief Indexes the supplied model.
      */
-    void index(intermediate_model& m);
+    void expand(intermediate_model& im);
 };
 
 } }

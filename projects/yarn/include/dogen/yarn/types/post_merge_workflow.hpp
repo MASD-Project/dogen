@@ -63,24 +63,24 @@ private:
     void resolve_element_references(intermediate_model& im) const;
 
     /**
-     * @brief Index all generalization relationships.
+     * @brief Expand all generalization relationships.
      */
-    void index_generalizations(intermediate_model& im) const;
+    void expand_generalizations(intermediate_model& im) const;
 
     /**
-     * @brief Index all concepts.
+     * @brief Expand all concepts.
      */
-    void index_concepts(intermediate_model& im) const;
+    void expand_concepts(intermediate_model& im) const;
 
     /**
-     * @brief Index all attributes.
+     * @brief Expand all attributes.
      */
-    void index_attributes(intermediate_model& im) const;
+    void expand_attributes(intermediate_model& im) const;
 
     /**
-     * @brief Index all associations.
+     * @brief Expand all associations.
      */
-    void index_associations(intermediate_model& im) const;
+    void expand_associations(intermediate_model& im) const;
 
     /**
      * @brief Determines if the type has generatable types or not and

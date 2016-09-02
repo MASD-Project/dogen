@@ -73,6 +73,8 @@ make use of this class in the yarn workflow. All the code is under
 where we are in the pipeline by looking at the log file.
 
 *** STARTED Yarn naming tidy-up                                       :story:
+    CLOCK: [2016-09-02 Fri 16:30]--[2016-09-02 Fri 16:56] =>  0:26
+    CLOCK: [2016-09-02 Fri 15:22]--[2016-09-02 Fri 16:00] =>  1:25
     CLOCK: [2016-09-02 Fri 14:52]--[2016-09-02 Fri 15:21] =>  0:29
     CLOCK: [2016-09-02 Fri 14:16]--[2016-09-02 Fri 14:51] =>  0:35
     CLOCK: [2016-09-02 Fri 13:53]--[2016-09-02 Fri 14:15] =>  0:22

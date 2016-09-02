@@ -18,20 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_INDEXING_ERROR_FWD_HPP
-#define DOGEN_YARN_TYPES_INDEXING_ERROR_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_ASSOCIATION_EXPANDER_FWD_HPP
+#define DOGEN_YARN_TYPES_ASSOCIATION_EXPANDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <boost/exception/info.hpp>
-
 namespace dogen {
 namespace yarn {
 
-class indexing_error;
+class association_expander;
 
 } }
 

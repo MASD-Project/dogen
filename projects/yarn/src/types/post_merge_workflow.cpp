@@ -23,10 +23,10 @@
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/injector.hpp"
 #include "dogen/yarn/types/resolver.hpp"
-#include "dogen/yarn/types/concept_indexer.hpp"
-#include "dogen/yarn/types/attributes_indexer.hpp"
-#include "dogen/yarn/types/association_indexer.hpp"
-#include "dogen/yarn/types/generalization_indexer.hpp"
+#include "dogen/yarn/types/concept_expander.hpp"
+#include "dogen/yarn/types/all_attributes_expander.hpp"
+#include "dogen/yarn/types/association_expander.hpp"
+#include "dogen/yarn/types/generalization_expander.hpp"
 #include "dogen/yarn/types/post_merge_workflow.hpp"
 
 using namespace dogen::utility::log;
@@ -88,24 +88,24 @@ resolve_element_references(intermediate_model& im) const {
     rs.resolve(im);
 }
 
-void post_merge_workflow::index_generalizations(intermediate_model& im) const {
-    generalization_indexer idx;
-    idx.index(im);
+void post_merge_workflow::expand_generalizations(intermediate_model& im) const {
+    generalization_expander ex;
+    ex.expand(im);
 }
 
-void post_merge_workflow::index_concepts(intermediate_model& im) const {
-    concept_indexer idx;
-    idx.index(im);
+void post_merge_workflow::expand_concepts(intermediate_model& im) const {
+    concept_expander ex;
+    ex.expand(im);
 }
 
-void post_merge_workflow::index_attributes(intermediate_model& im) const {
-    attributes_indexer idx;
-    idx.index(im);
+void post_merge_workflow::expand_attributes(intermediate_model& im) const {
+    all_attributes_expander ex;
+    ex.expand(im);
 }
 
-void post_merge_workflow::index_associations(intermediate_model& im) const {
-    association_indexer idx;
-    idx.index(im);
+void post_merge_workflow::expand_associations(intermediate_model& im) const {
+    association_expander ex;
+    ex.expand(im);
 }
 
 void post_merge_workflow::
@@ -117,11 +117,11 @@ void post_merge_workflow::execute(intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
 
     /*
-     * We must index generalisation relationships before we inject
+     * We must expand generalisation relationships before we inject
      * system elements because we need to know about leaves before we
      * can generate visitors.
      */
-    index_generalizations(im);
+    expand_generalizations(im);
     inject_system_elements(im);
 
     /*
@@ -130,15 +130,15 @@ void post_merge_workflow::execute(intermediate_model& im) const {
      * elements.
      */
     resolve_element_references(im);
-    index_concepts(im);
-    index_attributes(im);
+    expand_concepts(im);
+    expand_attributes(im);
 
     /*
-     * We must index associations after attributes have been indexed
+     * We must expand associations after attributes have been expanded
      * as it relies on the various attribute containers being
      * populated.
      */
-    index_associations(im);
+    expand_associations(im);
     update_model_generability(im);
 
     BOOST_LOG_SEV(lg, debug) << "Finished workflow.";

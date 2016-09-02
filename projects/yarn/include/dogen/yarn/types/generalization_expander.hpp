@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_GENERALIZATION_INDEXER_HPP
-#define DOGEN_YARN_TYPES_GENERALIZATION_INDEXER_HPP
+#ifndef DOGEN_YARN_TYPES_GENERALIZATION_EXPANDER_HPP
+#define DOGEN_YARN_TYPES_GENERALIZATION_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,7 +34,7 @@
 namespace dogen {
 namespace yarn {
 
-class generalization_indexer {
+class generalization_expander {
 private:
     /**
      * @brief Details of generalization relationships we're interested
@@ -58,7 +58,7 @@ private:
      *
      * @return Root parents of the tree we are recursing into.
      */
-    std::list<name> recurse_generalization(const intermediate_model& m,
+    std::list<name> recurse_generalization(const intermediate_model& im,
         const yarn::name& leaf, const yarn::object& o,
         generalization_details& d) const;
 
@@ -66,18 +66,19 @@ private:
      * @brief Obtains all of the details of the generalization
      * relationships.
      */
-    generalization_details obtain_details(const intermediate_model& m) const;
+    generalization_details obtain_details(const intermediate_model& im) const;
 
     /**
      * @brief Populates properties related to generalization.
      */
-    void populate(const generalization_details& d, intermediate_model& m) const;
+    void populate(const generalization_details& d,
+        intermediate_model& im) const;
 
 public:
     /**
-     * @brief Indexes the generalisation relationships for this model.
+     * @brief Expands the generalization relationships for this model.
      */
-    void index(intermediate_model& m) const;
+    void expand(intermediate_model& im) const;
 };
 
 } }

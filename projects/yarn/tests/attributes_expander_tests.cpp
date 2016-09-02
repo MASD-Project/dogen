@@ -28,14 +28,14 @@
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/io/object_io.hpp"
-#include "dogen/yarn/types/indexing_error.hpp"
+#include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
-#include "dogen/yarn/types/attributes_indexer.hpp"
+#include "dogen/yarn/types/all_attributes_expander.hpp"
 
 namespace {
 
 const std::string test_module("yarn");
-const std::string test_suite("attributes_indexer_tests");
+const std::string test_suite("attributes_expander_tests");
 
 const std::string concept_not_found("Concept not found");
 const std::string object_not_found("Object not found in model");
@@ -88,38 +88,38 @@ bool has_duplicate_attribute_names(const Stateful& s,
 }
 
 using dogen::utility::test::contains_checker;
-using dogen::yarn::indexing_error;
+using dogen::yarn::expansion_error;
 using dogen::utility::test::asserter;
 using object_types = dogen::yarn::test::mock_intermediate_model_factory::
 object_types;
 using attribute_types = dogen::yarn::test::mock_intermediate_model_factory::
 attribute_types;
 
-BOOST_AUTO_TEST_SUITE(attributes_indexer_tests)
+BOOST_AUTO_TEST_SUITE(attributes_expander_tests)
 
-BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_attributes_indexer) {
-    SETUP_TEST_LOG_SOURCE("empty_model_is_untouched_by_attributes_indexer");
+BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_attributes_expander) {
+    SETUP_TEST_LOG_SOURCE("empty_model_is_untouched_by_attributes_expander");
 
     auto a(factory.make_empty_model());
     const auto e(factory.make_empty_model());
-    BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
+    BOOST_LOG_SEV(lg, debug) << "before expansion: " << a;
 
-    dogen::yarn::attributes_indexer i;
-    i.index(a);
-    BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
+    dogen::yarn::all_attributes_expander ex;
+    ex.expand(a);
+    BOOST_LOG_SEV(lg, debug) << "after expansion: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_attributes_indexer) {
-    SETUP_TEST_LOG_SOURCE("model_with_single_type_and_no_attributes_is_untouched_by_attributes_indexer");
+BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_attributes_expander) {
+    SETUP_TEST_LOG_SOURCE("model_with_single_type_and_no_attributes_is_untouched_by_attributes_expander");
 
     auto a(factory.make_single_type_model());
     const auto e(factory.make_single_type_model());
-    BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
+    BOOST_LOG_SEV(lg, debug) << "before expansion: " << a;
 
-    dogen::yarn::attributes_indexer idx;
-    idx.index(a);
-    BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
+    dogen::yarn::all_attributes_expander ex;
+    ex.expand(a);
+    BOOST_LOG_SEV(lg, debug) << "after expansion: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
@@ -128,11 +128,11 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_results_in_expected_indices)
 
     auto m(factory.object_with_attribute(object_types::value_object,
             attribute_types::unsigned_int));
-    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+    BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
-    dogen::yarn::attributes_indexer idx;
-    idx.index(m);
-    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+    dogen::yarn::all_attributes_expander ex;
+    ex.expand(m);
+    BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
 
     BOOST_REQUIRE(m.objects().size() == 1);
 
@@ -145,10 +145,10 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("model_with_single_concept_results_in_expected_indices");
 
     auto m(factory.make_single_concept_model());
-    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
-    dogen::yarn::attributes_indexer idx;
-    idx.index(m);
-    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+    BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
+    dogen::yarn::all_attributes_expander ex;
+    ex.expand(m);
+    BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
 
     BOOST_REQUIRE(m.concepts().size() == 1);
     const auto& c(m.concepts().begin()->second);
@@ -173,11 +173,11 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
     SETUP_TEST_LOG_SOURCE("model_with_one_level_of_concept_inheritance_results_in_expected_indices");
 
     auto m(factory.make_first_degree_concepts_model());
-    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+    BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
-    dogen::yarn::attributes_indexer idx;
-    idx.index(m);
-    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+    dogen::yarn::all_attributes_expander ex;
+    ex.expand(m);
+    BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
 
     for (const auto& pair : m.concepts()) {
         const auto& c(pair.second);
@@ -224,11 +224,11 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
     SETUP_TEST_LOG_SOURCE("model_with_two_levels_of_concept_inheritance_results_in_expected_indices");
 
     auto m(factory.make_second_degree_concepts_model());
-    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+    BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
-    dogen::yarn::attributes_indexer idx;
-    idx.index(m);
-    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+    dogen::yarn::all_attributes_expander ex;
+    ex.expand(m);
+    BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
 
     BOOST_REQUIRE(m.concepts().size() == 3);
     for (const auto& pair : m.concepts()) {
@@ -290,11 +290,11 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
     SETUP_TEST_LOG_SOURCE("model_with_diamond_concept_inheritance_results_in_expected_indices");
 
     auto m(factory.make_diamond_inheritance_concepts_model());
-    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+    BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
-    dogen::yarn::attributes_indexer idx;
-    idx.index(m);
-    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+    dogen::yarn::all_attributes_expander ex;
+    ex.expand(m);
+    BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
     BOOST_CHECK(m.concepts().size() == 4);
     for (const auto& pair : m.concepts()) {
         const auto& c(pair.second);
@@ -353,14 +353,14 @@ BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_model_concepts_resul
             o.inherited_attributes()[p];
     }
 
-    BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
+    BOOST_LOG_SEV(lg, debug) << "before expansion: " << a;
 
     BOOST_REQUIRE(a.objects().size() == 2);
     BOOST_REQUIRE(a.concepts().empty());
 
-    dogen::yarn::attributes_indexer idx;
-    idx.index(a);
-    BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
+    dogen::yarn::all_attributes_expander ex;
+    ex.expand(a);
+    BOOST_LOG_SEV(lg, debug) << "after expansion: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
@@ -375,14 +375,14 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
             o.inherited_attributes()[p];
     }
 
-    BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
+    BOOST_LOG_SEV(lg, debug) << "before expansion: " << a;
 
     BOOST_REQUIRE(a.objects().size() == 4);
     BOOST_REQUIRE(a.concepts().empty());
 
-    dogen::yarn::attributes_indexer idx;
-    idx.index(a);
-    BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
+    dogen::yarn::all_attributes_expander ex;
+    ex.expand(a);
+    BOOST_LOG_SEV(lg, debug) << "after expansion: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
@@ -391,14 +391,14 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
 
     auto m(factory.object_with_third_degree_parent_in_same_model(
             true/*has_attribute*/));
-    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+    BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
     BOOST_REQUIRE(m.objects().size() == 4);
     BOOST_REQUIRE(m.concepts().empty());
 
-    dogen::yarn::attributes_indexer idx;
-    idx.index(m);
-    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+    dogen::yarn::all_attributes_expander ex;
+    ex.expand(m);
+    BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
     BOOST_REQUIRE(m.objects().size() == 4);
     for (const auto& pair : m.objects()) {
         const auto& o(pair.second);
@@ -436,15 +436,15 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
     }
 }
 
-BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_untouched_by_attributes_indexer) {
-    SETUP_TEST_LOG_SOURCE("model_containing_object_with_parent_that_models_concept_is_untouched_by_attributes_indexer");
+BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_untouched_by_attributes_expander) {
+    SETUP_TEST_LOG_SOURCE("model_containing_object_with_parent_that_models_concept_is_untouched_by_attributes_expander");
 
     auto m(factory.make_object_with_parent_that_models_concept());
-    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+    BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
-    dogen::yarn::attributes_indexer idx;
-    idx.index(m);
-    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+    dogen::yarn::all_attributes_expander ex;
+    ex.expand(m);
+    BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
 
     BOOST_CHECK(m.concepts().size() == 1);
     for (const auto& pair : m.concepts()) {
@@ -484,11 +484,11 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
     SETUP_TEST_LOG_SOURCE("model_with_containing_object_with_parent_that_models_a_refined_concept_results_in_expected_indices");
 
     auto m(factory.make_object_with_parent_that_models_a_refined_concept());
-    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+    BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
-    dogen::yarn::attributes_indexer idx;
-    idx.index(m);
-    BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+    dogen::yarn::all_attributes_expander ex;
+    ex.expand(m);
+    BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
 
     BOOST_CHECK(m.concepts().size() == 2);
     for (const auto& pair : m.concepts()) {
@@ -538,36 +538,33 @@ BOOST_AUTO_TEST_CASE(model_with_concept_that_refines_missing_concept_throws) {
     SETUP_TEST_LOG_SOURCE("model_with_concept_that_refines_missing_concept_throws");
 
     auto m(factory.make_concept_that_refines_missing_concept());
-    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+    BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
-    dogen::yarn::attributes_indexer i;
-    using dogen::yarn::indexing_error;
-    contains_checker<indexing_error> c(concept_not_found);
-    BOOST_CHECK_EXCEPTION(i.index(m), indexing_error, c);
+    dogen::yarn::all_attributes_expander ex;
+    contains_checker<expansion_error> c(concept_not_found);
+    BOOST_CHECK_EXCEPTION(ex.expand(m), expansion_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
     SETUP_TEST_LOG_SOURCE("model_with_object_that_models_missing_concept_throws");
 
     auto m(factory.make_object_that_models_missing_concept());
-    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+    BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
-    dogen::yarn::attributes_indexer i;
-    using dogen::yarn::indexing_error;
-    contains_checker<indexing_error> c(concept_not_found);
-    BOOST_CHECK_EXCEPTION(i.index(m), indexing_error, c);
+    dogen::yarn::all_attributes_expander ex;
+    contains_checker<expansion_error> c(concept_not_found);
+    BOOST_CHECK_EXCEPTION(ex.expand(m),expansion_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
     SETUP_TEST_LOG_SOURCE("model_object_that_models_concept_with_missing_parent");
 
     auto m(factory.make_object_that_models_concept_with_missing_parent());
-    BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+    BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
-    dogen::yarn::attributes_indexer i;
-    using dogen::yarn::indexing_error;
-    contains_checker<indexing_error> c(object_not_found);
-    BOOST_CHECK_EXCEPTION(i.index(m), indexing_error, c);
+    dogen::yarn::all_attributes_expander ex;
+    contains_checker<expansion_error> c(object_not_found);
+    BOOST_CHECK_EXCEPTION(ex.expand(m),expansion_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -26,14 +26,14 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/indexing_error.hpp"
-#include "dogen/yarn/types/attributes_indexer.hpp"
+#include "dogen/yarn/types/expansion_error.hpp"
+#include "dogen/yarn/types/all_attributes_expander.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("yarn.attributes_indexer"));
+auto lg(logger_factory("yarn.all_attributes_expander"));
 
 const std::string relationship_not_found(
     "Could not find relationship in object. Details: ");
@@ -45,31 +45,32 @@ const std::string concept_not_found("Concept not found in concept container: ");
 namespace dogen {
 namespace yarn {
 
-object& attributes_indexer::find_object(const name& n, intermediate_model& m) {
+object& all_attributes_expander::
+find_object(const name& n, intermediate_model& im) {
     const auto id(n.id());
-    auto i(m.objects().find(id));
-    if (i == m.objects().end()) {
+    auto i(im.objects().find(id));
+    if (i == im.objects().end()) {
         BOOST_LOG_SEV(lg, error) << object_not_found << id;
-        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + id));
+        BOOST_THROW_EXCEPTION(expansion_error(object_not_found + id));
     }
     return i->second;
 }
 
-concept& attributes_indexer::
-find_concept(const name& n, intermediate_model& m) {
+concept& all_attributes_expander::
+find_concept(const name& n, intermediate_model& im) {
     const auto& id(n.id());
-    auto i(m.concepts().find(id));
-    if (i == m.concepts().end()) {
+    auto i(im.concepts().find(id));
+    if (i == im.concepts().end()) {
         BOOST_LOG_SEV(lg, error) << concept_not_found << id;
-        BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + id));
+        BOOST_THROW_EXCEPTION(expansion_error(concept_not_found + id));
     }
     return i->second;
 }
 
-void attributes_indexer::index_object(object& o, intermediate_model& m,
+void all_attributes_expander::expand_object(object& o, intermediate_model& im,
     std::unordered_set<std::string>& processed_ids) {
     const auto id(o.name().id());
-    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << id;
+    BOOST_LOG_SEV(lg, debug) << "Expanding object: " << id;
 
     if (processed_ids.find(id) != processed_ids.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed: " << id;
@@ -84,7 +85,7 @@ void attributes_indexer::index_object(object& o, intermediate_model& m,
      */
     std::list<attribute> concept_attributes;
     for (const auto& n : o.modeled_concepts()) {
-        auto& c(find_concept(n, m));
+        auto& c(find_concept(n, im));
         const auto& p(c.local_attributes());
         concept_attributes.insert(concept_attributes.end(), p.begin(), p.end());
     }
@@ -112,8 +113,8 @@ void attributes_indexer::index_object(object& o, intermediate_model& m,
      * design; local attributes are last.
      */
     for (const auto& n : o.parents()) {
-        auto& parent(find_object(n, m));
-        index_object(parent, m, processed_ids);
+        auto& parent(find_object(n, im));
+        expand_object(parent, im, processed_ids);
 
         /*
          * Note that we insert the parent and its attributes
@@ -137,24 +138,24 @@ void attributes_indexer::index_object(object& o, intermediate_model& m,
     processed_ids.insert(id);
 }
 
-void attributes_indexer::index_objects(intermediate_model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing objects: " << m.objects().size();
+void all_attributes_expander::expand_objects(intermediate_model& im) {
+    BOOST_LOG_SEV(lg, debug) << "Expanding objects: " << im.objects().size();
 
     std::unordered_set<std::string> processed_ids;
-    for (auto& pair : m.objects()) {
+    for (auto& pair : im.objects()) {
         auto& o(pair.second);
 
         if (o.generation_type() == generation_types::no_generation)
             continue;
 
-        index_object(o, m, processed_ids);
+        expand_object(o, im, processed_ids);
     }
 }
 
-void attributes_indexer::index_concept(concept& c, intermediate_model& m,
+void all_attributes_expander::expand_concept(concept& c, intermediate_model& im,
     std::unordered_set<std::string>& processed_ids) {
     const auto id(c.name().id());
-    BOOST_LOG_SEV(lg, debug) << "Indexing concept: " << id;
+    BOOST_LOG_SEV(lg, debug) << "Expanding concept: " << id;
 
     if (processed_ids.find(c.name().id()) != processed_ids.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed:" << id;
@@ -165,8 +166,8 @@ void attributes_indexer::index_concept(concept& c, intermediate_model& m,
         c.local_attributes().begin(), c.local_attributes().end());
 
     for (const auto& n : c.refines()) {
-        auto& parent(find_concept(n, m));
-        index_concept(parent, m, processed_ids);
+        auto& parent(find_concept(n, im));
+        expand_concept(parent, im, processed_ids);
 
         c.inherited_attributes().insert(
             std::make_pair(parent.name(), parent.local_attributes()));
@@ -177,23 +178,23 @@ void attributes_indexer::index_concept(concept& c, intermediate_model& m,
     processed_ids.insert(id);
 }
 
-void attributes_indexer::index_concepts(intermediate_model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing concepts: " << m.concepts().size();
+void all_attributes_expander::expand_concepts(intermediate_model& im) {
+    BOOST_LOG_SEV(lg, debug) << "Expanding concepts: " << im.concepts().size();
 
     std::unordered_set<std::string> processed_ids;
-    for (auto& pair : m.concepts()) {
+    for (auto& pair : im.concepts()) {
         auto& c(pair.second);
 
         if (c.generation_type() == generation_types::no_generation)
             continue;
 
-        index_concept(c, m, processed_ids);
+        expand_concept(c, im, processed_ids);
     }
 }
 
-void attributes_indexer::index(intermediate_model& m) {
-    index_concepts(m);
-    index_objects(m);
+void all_attributes_expander::expand(intermediate_model& im) {
+    expand_concepts(im);
+    expand_objects(im);
 }
 
 } }

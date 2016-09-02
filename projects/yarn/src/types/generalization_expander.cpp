@@ -25,14 +25,14 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/indexing_error.hpp"
+#include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/types/generalization_indexer.hpp"
+#include "dogen/yarn/types/generalization_expander.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.generalization_indexer"));
+auto lg(logger_factory("yarn.generalization_expander"));
 
 const std::string child_with_no_parents(
     "Object is child but has no parents. Child: ");
@@ -50,7 +50,7 @@ inline bool operator<(const name& lhs, const name& rhs) {
     return lhs.id() < rhs.id();
 }
 
-bool generalization_indexer::is_leaf(const object& o) const {
+bool generalization_expander::is_leaf(const object& o) const {
     // FIXME: massive hack. must not add leafs for services.
     const auto uds(object_types::user_defined_service);
     const bool is_service(o.object_type() == uds);
@@ -65,8 +65,8 @@ bool generalization_indexer::is_leaf(const object& o) const {
     return true;
 }
 
-std::list<name> generalization_indexer::
-recurse_generalization(const intermediate_model& m, const name& leaf,
+std::list<name> generalization_expander::
+recurse_generalization(const intermediate_model& im, const name& leaf,
     const object& o, generalization_details& d) const {
 
     if (!o.is_child())
@@ -75,24 +75,24 @@ recurse_generalization(const intermediate_model& m, const name& leaf,
     if (o.parents().empty()) {
         const auto id(o.name().id());
         BOOST_LOG_SEV(lg, error) << child_with_no_parents << id;
-        BOOST_THROW_EXCEPTION(indexing_error(child_with_no_parents + id));
+        BOOST_THROW_EXCEPTION(expansion_error(child_with_no_parents + id));
     }
 
     std::list<name> root_parents;
     for (const auto& parent : o.parents()) {
-        auto j(m.objects().find(parent.id()));
-        if (j == m.objects().end()) {
+        auto j(im.objects().find(parent.id()));
+        if (j == im.objects().end()) {
             const auto id(parent.id());
             BOOST_LOG_SEV(lg, error) << parent_not_found << id;
-            BOOST_THROW_EXCEPTION(indexing_error(parent_not_found + id));
+            BOOST_THROW_EXCEPTION(expansion_error(parent_not_found + id));
         }
 
-        const auto op(recurse_generalization(m, leaf, j->second, d));
+        const auto op(recurse_generalization(im, leaf, j->second, d));
         if (op.empty()) {
             const auto id(parent.id());
             BOOST_LOG_SEV(lg, error) << child_with_no_root_parent << id;
             BOOST_THROW_EXCEPTION(
-                indexing_error(child_with_no_root_parent + id));
+                expansion_error(child_with_no_root_parent + id));
         }
 
         for (const auto n : op)
@@ -109,7 +109,7 @@ recurse_generalization(const intermediate_model& m, const name& leaf,
     return root_parents;
 }
 
-generalization_indexer::generalization_details generalization_indexer::
+generalization_expander::generalization_details generalization_expander::
 obtain_details(const intermediate_model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Obtaining leaves.";
     generalization_details r;
@@ -130,14 +130,14 @@ obtain_details(const intermediate_model& m) const {
     return r;
 }
 
-void generalization_indexer::
+void generalization_expander::
 populate(const generalization_details& d, intermediate_model& m) const {
     for (const auto& pair : d.leaves) {
         const auto& n(pair.first);
         auto i(m.objects().find(n.id()));
         if (i == m.objects().end()) {
             BOOST_LOG_SEV(lg, error) << object_not_found << n.id();
-            BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n.id()));
+            BOOST_THROW_EXCEPTION(expansion_error(object_not_found + n.id()));
         }
 
         auto& o(i->second);
@@ -165,7 +165,7 @@ populate(const generalization_details& d, intermediate_model& m) const {
         auto i(m.objects().find(n.id()));
         if (i == m.objects().end()) {
             BOOST_LOG_SEV(lg, error) << object_not_found << n.id();
-            BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n.id()));
+            BOOST_THROW_EXCEPTION(expansion_error(object_not_found + n.id()));
         }
 
         auto& o(i->second);
@@ -196,18 +196,18 @@ populate(const generalization_details& d, intermediate_model& m) const {
             if (j == m.objects().end()) {
                 const auto id(opn.id());
                 BOOST_LOG_SEV(lg, error) << object_not_found << id;
-                BOOST_THROW_EXCEPTION(indexing_error(object_not_found + id));
+                BOOST_THROW_EXCEPTION(expansion_error(object_not_found + id));
             }
 
-            // FIXME: we are in effect assuming a single parent here.
+            // FIXME: we are assuming a single parent here.
             o.is_root_parent_visitable(j->second.is_visitable());
         }
     }
 }
 
-void generalization_indexer::index(intermediate_model& m) const {
-    const auto d(obtain_details(m));
-    populate(d, m);
+void generalization_expander::expand(intermediate_model& im) const {
+    const auto d(obtain_details(im));
+    populate(d, im);
 }
 
 } }

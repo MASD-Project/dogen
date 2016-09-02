@@ -26,14 +26,14 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/indexing_error.hpp"
-#include "dogen/yarn/types/concept_indexer.hpp"
+#include "dogen/yarn/types/expansion_error.hpp"
+#include "dogen/yarn/types/concept_expander.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("yarn.concept_indexer"));
+auto lg(logger_factory("yarn.concept_expander"));
 
 const std::string relationship_not_found(
     "Could not find relationship in object. Details: ");
@@ -55,27 +55,25 @@ inline bool operator<(const name& lhs, const name& rhs) {
     return lhs.id() < rhs.id();
 }
 
-object& concept_indexer::find_object(const name& n, intermediate_model& m) {
-    auto i(m.objects().find(n.id()));
-    if (i == m.objects().end()) {
+object& concept_expander::find_object(const name& n, intermediate_model& im) {
+    auto i(im.objects().find(n.id()));
+    if (i == im.objects().end()) {
         BOOST_LOG_SEV(lg, error) << object_not_found << n.id();
-        BOOST_THROW_EXCEPTION(
-            indexing_error(object_not_found +  n.id()));
+        BOOST_THROW_EXCEPTION(expansion_error(object_not_found +  n.id()));
     }
     return i->second;
 }
 
-concept& concept_indexer::find_concept(const name& n, intermediate_model& m) {
-    auto i(m.concepts().find(n.id()));
-    if (i == m.concepts().end()) {
+concept& concept_expander::find_concept(const name& n, intermediate_model& im) {
+    auto i(im.concepts().find(n.id()));
+    if (i == im.concepts().end()) {
         BOOST_LOG_SEV(lg, error) << concept_not_found << n.id();
-        BOOST_THROW_EXCEPTION(
-            indexing_error(concept_not_found + n.id()));
+        BOOST_THROW_EXCEPTION(expansion_error(concept_not_found + n.id()));
     }
     return i->second;
 }
 
-void concept_indexer::remove_duplicates(std::list<name>& names) const {
+void concept_expander::remove_duplicates(std::list<name>& names) const {
     std::unordered_set<name> processed;
 
     BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
@@ -97,9 +95,9 @@ void concept_indexer::remove_duplicates(std::list<name>& names) const {
                              << names.size();
 }
 
-void concept_indexer::index_object(object& o, intermediate_model& m,
+void concept_expander::expand_object(object& o, intermediate_model& im,
     std::unordered_set<name>& processed_names) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Expanding object: " << o.name().id();
 
     if (processed_names.find(o.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed.";
@@ -118,7 +116,7 @@ void concept_indexer::index_object(object& o, intermediate_model& m,
      */
     std::list<name> expanded_refines;
     for (auto& n : o.modeled_concepts()) {
-        auto& c(find_concept(n, m));
+        auto& c(find_concept(n, im));
         expanded_refines.push_back(n);
         expanded_refines.insert(expanded_refines.end(),
             c.refines().begin(), c.refines().end());
@@ -145,8 +143,8 @@ void concept_indexer::index_object(object& o, intermediate_model& m,
 
     std::set<name> their_concepts;
     for (const auto& n : o.parents()) {
-        auto& parent(find_object(n, m));
-        index_object(parent, m, processed_names);
+        auto& parent(find_object(n, im));
+        expand_object(parent, im, processed_names);
 
         const auto& mc(parent.modeled_concepts());
         if (mc.empty())
@@ -175,23 +173,23 @@ void concept_indexer::index_object(object& o, intermediate_model& m,
     BOOST_LOG_SEV(lg, debug) << "Finished indexing object.";
 }
 
-void concept_indexer::index_objects(intermediate_model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing objects: " << m.objects().size();
+void concept_expander::expand_objects(intermediate_model& im) {
+    BOOST_LOG_SEV(lg, debug) << "Expanding objects: " << im.objects().size();
 
     std::unordered_set<name> processed_names;
-    for (auto& pair : m.objects()) {
+    for (auto& pair : im.objects()) {
         auto& o(pair.second);
 
         if (o.generation_type() == generation_types::no_generation)
             continue;
 
-        index_object(o, m, processed_names);
+        expand_object(o, im, processed_names);
     }
 }
 
-void concept_indexer::index_concept(concept& c, intermediate_model& m,
+void concept_expander::expand_concept(concept& c, intermediate_model& im,
     std::unordered_set<name>& processed_names) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing concept: " << c.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Expand concept: " << c.name().id();
 
     if (processed_names.find(c.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Concept already processed.";
@@ -206,8 +204,8 @@ void concept_indexer::index_concept(concept& c, intermediate_model& m,
 
     std::list<name> expanded_refines;
     for (auto& n : c.refines()) {
-        auto& parent(find_concept(n, m));
-        index_concept(parent, m, processed_names);
+        auto& parent(find_concept(n, im));
+        expand_concept(parent, im, processed_names);
         expanded_refines.push_back(n);
         expanded_refines.insert(expanded_refines.end(),
             parent.refines().begin(), parent.refines().end());
@@ -219,23 +217,23 @@ void concept_indexer::index_concept(concept& c, intermediate_model& m,
     processed_names.insert(c.name());
 }
 
-void concept_indexer::index_concepts(intermediate_model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing concepts: " << m.concepts().size();
+void concept_expander::expand_concepts(intermediate_model& im) {
+    BOOST_LOG_SEV(lg, debug) << "Indexing concepts: " << im.concepts().size();
 
     std::unordered_set<name> processed_names;
-    for (auto& pair : m.concepts()) {
+    for (auto& pair : im.concepts()) {
         auto& c(pair.second);
 
         if (c.generation_type() == generation_types::no_generation)
             continue;
 
-        index_concept(c, m, processed_names);
+        expand_concept(c, im, processed_names);
     }
 }
 
-void concept_indexer::index(intermediate_model& m) {
-    index_concepts(m);
-    index_objects(m);
+void concept_expander::expand(intermediate_model& im) {
+    expand_concepts(im);
+    expand_objects(im);
 }
 
 } }

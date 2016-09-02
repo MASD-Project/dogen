@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_CONCEPT_INDEXER_HPP
-#define DOGEN_YARN_TYPES_CONCEPT_INDEXER_HPP
+#ifndef DOGEN_YARN_TYPES_CONCEPT_EXPANDER_HPP
+#define DOGEN_YARN_TYPES_CONCEPT_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,23 +33,23 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Information indexer that specialises in indexing
+ * @brief Information expander that specialises in indexing
  * concept-related relationships across the model.
  *
- * @section yarn_concept_indexer_0 Model requirements
+ * @section yarn_concept_expander_0 Model requirements
  *
- * The concept indexer expects to receive a merged intermediate model,
+ * The concept expander expects to receive a merged intermediate model,
  * but in practice it makes no requirements in terms of any
  * pre-processing.
  *
- * @section yarn_attribute_indexer_1 Indexing Process
+ * @section yarn_concept_exapnder_1 Expansion Process
  *
- * The concept indexer only touches two types of model elements:
+ * The concept expander only touches two types of model elements:
  * concepts and objects. This is because these are the only two
- * elements involved in relationships that involve concepts. Each of
+ * elements involved in relationships that deal with concepts. Each of
  * these are processed differently.
  *
- * @subsection yarn_concept_indexer_1 First stage: indexing concepts
+ * @subsection yarn_concept_expander_11 First stage: expanding concepts
   *
  * The concept indexer starts by processing all concepts. Each concept
  * goes through two steps: @e expansion and @e reduction. Expansion is
@@ -68,15 +68,15 @@ namespace yarn {
  * avoid having the code generation move (potentially dramatically)
  * every time any alteration is done to the concept hierarchy.
  *
- * @subsection yarn_concept_indexer_2 Second stage: indexing objects
+ * @subsection yarn_concept_expander_12 Second stage: expand objects
  *
- * The concept indexer is also responsible for updating the modeled
+ * The concept expander is also responsible for updating the modeled
  * concepts in an object - if any exist. Thus only objects that are
  * part of such relationships are affected. For example a child which
  * does not model any concepts is not affected, even if its parent
  * does model concepts.
  *
- * Note that object indexing must be done after the concept indexing
+ * Note that object expansion must be done after the concept expansion
  * described above as it depends on it.
  *
  * For objects which do not have parents, the operation is simple: for
@@ -94,17 +94,17 @@ namespace yarn {
  * exist in R but not in S.
  *
  */
-class concept_indexer {
+class concept_expander {
 private:
     /**
      * @brief Returns the object with the given name, or throws.
      */
-    object& find_object(const name& n, intermediate_model& m);
+    object& find_object(const name& n, intermediate_model& im);
 
     /**
      * @brief Returns the concept with the given name, or throws.
      */
-    concept& find_concept(const name& n, intermediate_model& m);
+    concept& find_concept(const name& n, intermediate_model& im);
 
     /**
      * @brief Removes duplicate names, preserving the original order
@@ -114,32 +114,32 @@ private:
 
 private:
     /**
-     * @brief Indexes a specific object.
+     * @brief Expands a specific object.
      */
-    void index_object(object& o, intermediate_model& m,
+    void expand_object(object& o, intermediate_model& im,
         std::unordered_set<name>& processed_names);
 
     /**
-     * @brief Indexes all objects in the model.
+     * @brief Expands all objects in the model.
      */
-    void index_objects(intermediate_model& m);
+    void expand_objects(intermediate_model& im);
 
     /**
-     * @brief Populates index information in a concept.
+     * @brief Expands a concept.
      */
-    void index_concept(concept& c, intermediate_model& m,
+    void expand_concept(concept& c, intermediate_model& im,
         std::unordered_set<name>& processed_names);
 
     /**
-     * @brief Indexes all concepts in the model.
+     * @brief Expands all concepts in the model.
      */
-    void index_concepts(intermediate_model& m);
+    void expand_concepts(intermediate_model& im);
 
 public:
     /**
      * @brief Indexes the supplied model.
      */
-    void index(intermediate_model& m);
+    void expand(intermediate_model& im);
 };
 
 } }

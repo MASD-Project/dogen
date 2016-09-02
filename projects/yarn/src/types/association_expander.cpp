@@ -23,14 +23,14 @@
 #include <boost/lexical_cast.hpp>
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/indexing_error.hpp"
+#include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/types/association_indexer.hpp"
+#include "dogen/yarn/types/association_expander.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.association_indexer"));
+auto lg(logger_factory("yarn.association_expander"));
 
 const std::string object_not_found("Object not found in object container: ");
 
@@ -39,7 +39,7 @@ const std::string object_not_found("Object not found in object container: ");
 namespace dogen {
 namespace yarn {
 
-void association_indexer::remove_duplicates(std::list<name>& names,
+void association_expander::remove_duplicates(std::list<name>& names,
     std::unordered_set<name> processed) const {
     BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
                              << names.size() << ". Processed starts with size: "
@@ -61,8 +61,8 @@ void association_indexer::remove_duplicates(std::list<name>& names,
                              << names.size();
 }
 
-void association_indexer::walk_name_tree(
-    const intermediate_model& m, object& o, const name_tree& nt,
+void association_expander::walk_name_tree(
+    const intermediate_model& im, object& o, const name_tree& nt,
     const bool inherit_opaqueness_from_parent) const {
 
     const auto n(nt.current());
@@ -71,18 +71,18 @@ void association_indexer::walk_name_tree(
     else
         o.transparent_associations().push_back(n);
 
-    const auto i(m.primitives().find(n.id()));
-    if (i != m.primitives().end())
+    const auto i(im.primitives().find(n.id()));
+    if (i != im.primitives().end())
         return;
 
-    const auto j(m.enumerations().find(n.id()));
-    if (j != m.enumerations().end())
+    const auto j(im.enumerations().find(n.id()));
+    if (j != im.enumerations().end())
         return;
 
-    const auto k(m.objects().find(n.id()));
-    if (k == m.objects().end()) {
+    const auto k(im.objects().find(n.id()));
+    if (k == im.objects().end()) {
         BOOST_LOG_SEV(lg, error) << object_not_found << n.id();
-        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n.id()));
+        BOOST_THROW_EXCEPTION(expansion_error(object_not_found + n.id()));
     }
 
     /*
@@ -97,18 +97,18 @@ void association_indexer::walk_name_tree(
         if (is_first && k->second.object_type() == ac)
             o.associative_container_keys().push_back(c.current());
 
-        walk_name_tree(m, o, c, nt.are_children_opaque());
+        walk_name_tree(im, o, c, nt.are_children_opaque());
         is_first = false;
     }
 }
 
-void association_indexer::
-index_object(const intermediate_model& m, object& o) const {
-    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().id();
+void association_expander::
+expand_object(const intermediate_model& im, object& o) const {
+    BOOST_LOG_SEV(lg, debug) << "Expand object: " << o.name().id();
 
     for (const auto& p : o.local_attributes()) {
         const auto& nt(p.parsed_type());
-        walk_name_tree(m, o, nt, false/*inherit_opaqueness_from_parent*/);
+        walk_name_tree(im, o, nt, false/*inherit_opaqueness_from_parent*/);
     }
 
     std::unordered_set<name> transparent_associations;
@@ -129,19 +129,19 @@ index_object(const intermediate_model& m, object& o) const {
         remove_duplicates(o.associative_container_keys());
 }
 
-void association_indexer::index(intermediate_model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Indexing objects. Total objects: "
-                             << m.objects().size();
+void association_expander::expand(intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Expanding objects. Total objects: "
+                             << im.objects().size();
 
-    for (auto& pair : m.objects()) {
+    for (auto& pair : im.objects()) {
         auto& o(pair.second);
 
         if (o.generation_type() == generation_types::no_generation)
             continue;
 
-        index_object(m, o);
+        expand_object(im, o);
     }
-    BOOST_LOG_SEV(lg, debug) << "Finished indexing objects.";
+    BOOST_LOG_SEV(lg, debug) << "Finished expanding objects.";
 }
 
 } }

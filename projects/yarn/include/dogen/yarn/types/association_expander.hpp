@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_ASSOCIATION_INDEXER_HPP
-#define DOGEN_YARN_TYPES_ASSOCIATION_INDEXER_HPP
+#ifndef DOGEN_YARN_TYPES_ASSOCIATION_EXPANDER_HPP
+#define DOGEN_YARN_TYPES_ASSOCIATION_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,16 +36,16 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Information indexer that specialises in indexing
+ * @brief Information expander that specialises in indexing
  * associations for objects.
  *
- * @section yarn_association_indexer_0 Requirements
+ * @section yarn_association_expander_0 Requirements
  *
- * The indexing of attributes is expected to have taken place.
+ * The expansion of local attributes is expected to have taken place.
  *
  * @section yarn_attribute_indexer_1 Indexing Process
  *
- * The indexer goes through all attributes in objects and, for every
+ * The expander goes through all attributes in objects and, for every
  * name tree, unpacks all the associations implied by their presence.
  *
  * Associations are of two types: @e regular or @e weak. This
@@ -57,7 +57,7 @@ namespace yarn {
  * that the type is used via pointer and as such a forward declaration
  * may suffice.
  */
-class association_indexer {
+class association_expander {
 private:
     /**
      * @brief Removes duplicate names, preserving the original order
@@ -75,20 +75,20 @@ private:
      * @brief Walks through the name tree, picking up associations as
      * it goes along.
      */
-    void walk_name_tree(const intermediate_model& m, object& o,
+    void walk_name_tree(const intermediate_model& im, object& o,
         const name_tree& nt, const bool inherit_opaqueness_from_parent) const;
 
 private:
     /**
-     * @brief Indexes a specific object.
+     * @brief Expands a specific object.
      */
-    void index_object(const intermediate_model& m, object& o) const;
+    void expand_object(const intermediate_model& im, object& o) const;
 
 public:
     /**
-     * @brief Indexes all association relationships.
+     * @brief Expands all association relationships.
      */
-    void index(intermediate_model& m) const;
+    void expand(intermediate_model& im) const;
 };
 
 } }
