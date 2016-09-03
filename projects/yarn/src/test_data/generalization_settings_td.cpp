@@ -33,14 +33,6 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-std::list<std::string> create_std_list_std_string(unsigned int position) {
-    std::list<std::string> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_string(position + i));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -51,7 +43,7 @@ generalization_settings_generator::generalization_settings_generator() : positio
 void generalization_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.is_final(create_bool(position + 0));
-    v.parents(create_std_list_std_string(position + 1));
+    v.parent(create_std_string(position + 1));
 }
 
 generalization_settings_generator::result_type

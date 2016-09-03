@@ -28,19 +28,19 @@ generalization_settings::generalization_settings()
 
 generalization_settings::generalization_settings(
     const bool is_final,
-    const std::list<std::string>& parents)
+    const std::string& parent)
     : is_final_(is_final),
-      parents_(parents) { }
+      parent_(parent) { }
 
 void generalization_settings::swap(generalization_settings& other) noexcept {
     using std::swap;
     swap(is_final_, other.is_final_);
-    swap(parents_, other.parents_);
+    swap(parent_, other.parent_);
 }
 
 bool generalization_settings::operator==(const generalization_settings& rhs) const {
     return is_final_ == rhs.is_final_ &&
-        parents_ == rhs.parents_;
+        parent_ == rhs.parent_;
 }
 
 generalization_settings& generalization_settings::operator=(generalization_settings other) {
@@ -57,20 +57,20 @@ void generalization_settings::is_final(const bool v) {
     is_final_ = v;
 }
 
-const std::list<std::string>& generalization_settings::parents() const {
-    return parents_;
+const std::string& generalization_settings::parent() const {
+    return parent_;
 }
 
-std::list<std::string>& generalization_settings::parents() {
-    return parents_;
+std::string& generalization_settings::parent() {
+    return parent_;
 }
 
-void generalization_settings::parents(const std::list<std::string>& v) {
-    parents_ = v;
+void generalization_settings::parent(const std::string& v) {
+    parent_ = v;
 }
 
-void generalization_settings::parents(const std::list<std::string>&& v) {
-    parents_ = std::move(v);
+void generalization_settings::parent(const std::string&& v) {
+    parent_ = std::move(v);
 }
 
 } }

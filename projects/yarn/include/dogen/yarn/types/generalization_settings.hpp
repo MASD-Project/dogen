@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
 #include <algorithm>
 #include "dogen/yarn/serialization/generalization_settings_fwd_ser.hpp"
@@ -45,7 +44,7 @@ public:
 public:
     generalization_settings(
         const bool is_final,
-        const std::list<std::string>& parents);
+        const std::string& parent);
 
 private:
     template<typename Archive>
@@ -58,10 +57,10 @@ public:
     bool is_final() const;
     void is_final(const bool v);
 
-    const std::list<std::string>& parents() const;
-    std::list<std::string>& parents();
-    void parents(const std::list<std::string>& v);
-    void parents(const std::list<std::string>&& v);
+    const std::string& parent() const;
+    std::string& parent();
+    void parent(const std::string& v);
+    void parent(const std::string&& v);
 
 public:
     bool operator==(const generalization_settings& rhs) const;
@@ -75,7 +74,7 @@ public:
 
 private:
     bool is_final_;
-    std::list<std::string> parents_;
+    std::string parent_;
 };
 
 } }

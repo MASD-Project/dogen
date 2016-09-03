@@ -25,6 +25,7 @@
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
+#include "dogen/yarn/io/generalization_settings_io.hpp"
 #include "dogen/yarn/io/type_parameters_settings_io.hpp"
 
 namespace dogen {

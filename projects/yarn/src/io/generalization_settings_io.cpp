@@ -30,20 +30,6 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace yarn {
 
@@ -57,7 +43,7 @@ std::ostream& operator<<(std::ostream& s, const generalization_settings& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::generalization_settings\"" << ", "
       << "\"is_final\": " << v.is_final() << ", "
-      << "\"parents\": " << v.parents()
+      << "\"parent\": " << "\"" << tidy_up_string(v.parent()) << "\""
       << " }";
     return(s);
 }

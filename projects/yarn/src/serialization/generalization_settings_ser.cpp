@@ -19,7 +19,6 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/string.hpp>
@@ -39,7 +38,7 @@ void save(Archive& ar,
     const dogen::yarn::generalization_settings& v,
     const unsigned int /*version*/) {
     ar << make_nvp("is_final", v.is_final_);
-    ar << make_nvp("parents", v.parents_);
+    ar << make_nvp("parent", v.parent_);
 }
 
 template<typename Archive>
@@ -47,7 +46,7 @@ void load(Archive& ar,
     dogen::yarn::generalization_settings& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("is_final", v.is_final_);
-    ar >> make_nvp("parents", v.parents_);
+    ar >> make_nvp("parent", v.parent_);
 }
 
 } }

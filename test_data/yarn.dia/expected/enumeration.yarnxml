@@ -847,6 +847,10 @@ this is a long comment
 					<item_version>0</item_version>
 				</leaves>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
+				<generalization_settings class_id="43" tracking_level="0" version="0">
+					<is_final>0</is_final>
+					<parent></parent>
+				</generalization_settings>
 				<transparent_associations>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -860,7 +864,7 @@ this is a long comment
 				<visitable_by>
 					<initialized>0</initialized>
 				</visitable_by>
-				<type_parameters_settings class_id="43" tracking_level="0" version="0">
+				<type_parameters_settings class_id="44" tracking_level="0" version="0">
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
@@ -878,12 +882,12 @@ this is a long comment
 			</second>
 		</item>
 	</objects>
-	<exceptions class_id="44" tracking_level="0" version="0">
+	<exceptions class_id="45" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<visitors class_id="45" tracking_level="0" version="0">
+	<visitors class_id="46" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
