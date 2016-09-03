@@ -12,21 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-03 Sat 23:41]
+#+CAPTION: Clock summary at [2016-09-03 Sat 23:54]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *14:31* |       |      | 100.0 |
+| *Total time*                                                                | *14:42* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 14:31   |       |      | 100.0 |
-| Active                                                                      |         | 14:31 |      | 100.0 |
+| Stories                                                                     | 14:42   |       |      | 100.0 |
+| Active                                                                      |         | 14:42 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:19 |   2.2 |
 | COMPLETED Move readme to markdown                                           |         |       | 0:49 |   5.6 |
 | COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   3.3 |
-| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |  16.3 |
-| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  29.7 |
-| STARTED Generalisation tidy-up                                              |         |       | 5:07 |  35.2 |
-| STARTED Consider adding support for inheritance via meta-data               |         |       | 1:06 |   7.6 |
+| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |  16.1 |
+| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  29.4 |
+| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  34.8 |
+| STARTED Consider adding support for inheritance via meta-data               |         |       | 1:17 |   8.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -115,7 +115,8 @@ We should:
 - implement the main workflow in terms of these sub-workflows.
 - move frontend registrar to workflow.
 
-*** STARTED Generalisation tidy-up                                    :story:
+*** COMPLETED Generalisation tidy-up                                  :story:
+    CLOSED: [2016-09-03 Sat 23:43]
     CLOCK: [2016-09-03 Sat 23:31]--[2016-09-03 Sat 23:41] =>  0:10
     CLOCK: [2016-09-03 Sat 23:24]--[2016-09-03 Sat 23:30] =>  0:06
     CLOCK: [2016-09-03 Sat 23:20]--[2016-09-03 Sat 23:23] =>  0:03
@@ -158,6 +159,7 @@ Notes:
   needs to be looked at.
 
 *** STARTED Consider adding support for inheritance via meta-data     :story:
+    CLOCK: [2016-09-03 Sat 23:42]--[2016-09-03 Sat 23:53] =>  0:11
     CLOCK: [2016-09-01 Thu 21:14]--[2016-09-01 Thu 22:20] =>  1:06
 
 In certain cases it may not be possible to add all inheritance
@@ -204,38 +206,6 @@ This is not a very good idea as it will just cause confusion and it
 will require machinery to place the type in the right point in element
 space.
 
-*** Add support for bintray                                           :story:
-
-There is a new web application that interfaces with GitHub:
-[[https://bintray.com/][bintray]].
-
-- add JSON validation to bintray deployment descriptor.
-
-Notes:
-
-- an account was created [[https://bintray.com/mcraveiro][linked to GitHub]].
-- it supports the uploads of [[https://bintray.com/mcraveiro/deb][debs]].
-- [[https://bintray.com/docs/usermanual/uploads/uploads_howdoiuploadmystufftobintray.html][How Do I Upload My Stuff to Bintray?]]
-- [[https://github.com/tim-janik/beast][Beast]] project [[https://raw.githubusercontent.com/tim-janik/beast/master/README.md][README]] with emblems
-- Beast [[https://github.com/tim-janik/beast/blob/master/.travis.yml][travis.yml]]
-- [[https://github.com/tim-janik/rapicorn/blob/master/citool.sh.][citool.sh]] script from [[https://github.com/tim-janik/rapicorn][Rapicorn]] project and their [[https://raw.githubusercontent.com/tim-janik/rapicorn/master/README.md][README]].
-
-*** Add support for visitor inheritance                               :story:
-
-We need to detect when we inherit from a visitable type across models
-and generate a "local visitor" for that model.
-
-- add parent of optional name to visitor.
-- when we are injecting the visitor, we need to bucket leaves by model
-  first. Then we need to generate one visitor per bucket.
-- if we inherit from a
-- we need to populate visitable by in this bucketed way as well.
-- all leaves that belong to external models must be placed in the same
-  location on that model. Throw if not.
-- update include generation to take visitor parent into account.
-- update visitor template to detect external visitation and inherit
-  accordingly.
-
 *** Allow cross model inheritance                                     :story:
 
 #+begin_quote
@@ -268,6 +238,44 @@ final. This may just be part of the validator's work.
 
 We should also generate "augmented" visitors automatically with the
 new types.
+
+The biggest problem with this is name resolution. Up to now this
+hadn't been a problem because we could rely on the parent name being
+resolvable. However, once we add cross-model inheritance, the parent
+name is no longer resolvable directly (unless we stipulate that the
+external module path must be the same for all models).
+
+*** Add support for bintray                                           :story:
+
+There is a new web application that interfaces with GitHub:
+[[https://bintray.com/][bintray]].
+
+- add JSON validation to bintray deployment descriptor.
+
+Notes:
+
+- an account was created [[https://bintray.com/mcraveiro][linked to GitHub]].
+- it supports the uploads of [[https://bintray.com/mcraveiro/deb][debs]].
+- [[https://bintray.com/docs/usermanual/uploads/uploads_howdoiuploadmystufftobintray.html][How Do I Upload My Stuff to Bintray?]]
+- [[https://github.com/tim-janik/beast][Beast]] project [[https://raw.githubusercontent.com/tim-janik/beast/master/README.md][README]] with emblems
+- Beast [[https://github.com/tim-janik/beast/blob/master/.travis.yml][travis.yml]]
+- [[https://github.com/tim-janik/rapicorn/blob/master/citool.sh.][citool.sh]] script from [[https://github.com/tim-janik/rapicorn][Rapicorn]] project and their [[https://raw.githubusercontent.com/tim-janik/rapicorn/master/README.md][README]].
+
+*** Add support for visitor inheritance                               :story:
+
+We need to detect when we inherit from a visitable type across models
+and generate a "local visitor" for that model.
+
+- add parent of optional name to visitor.
+- when we are injecting the visitor, we need to bucket leaves by model
+  first. Then we need to generate one visitor per bucket.
+- if we inherit from a
+- we need to populate visitable by in this bucketed way as well.
+- all leaves that belong to external models must be placed in the same
+  location on that model. Throw if not.
+- update include generation to take visitor parent into account.
+- update visitor template to detect external visitation and inherit
+  accordingly.
 
 *** Include forward declaration in visitable types                    :story:
 
