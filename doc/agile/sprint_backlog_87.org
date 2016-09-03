@@ -12,21 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-03 Sat 00:03]
+#+CAPTION: Clock summary at [2016-09-03 Sat 22:44]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *12:02* |       |      | 100.0 |
+| *Total time*                                                                | *13:41* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 12:02   |       |      | 100.0 |
-| Active                                                                      |         | 12:02 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:19 |   2.6 |
-| COMPLETED Move readme to markdown                                           |         |       | 0:49 |   6.8 |
-| COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   4.0 |
-| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |  19.7 |
-| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  35.9 |
-| STARTED Generalisation tidy-up                                              |         |       | 2:38 |  21.9 |
-| STARTED Consider adding support for inheritance via meta-data               |         |       | 1:06 |   9.1 |
+| Stories                                                                     | 13:41   |       |      | 100.0 |
+| Active                                                                      |         | 13:41 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:19 |   2.3 |
+| COMPLETED Move readme to markdown                                           |         |       | 0:49 |   6.0 |
+| COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   3.5 |
+| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |  17.3 |
+| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  31.5 |
+| STARTED Generalisation tidy-up                                              |         |       | 4:17 |  31.3 |
+| STARTED Consider adding support for inheritance via meta-data               |         |       | 1:06 |   8.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -116,6 +116,7 @@ We should:
 - move frontend registrar to workflow.
 
 *** STARTED Generalisation tidy-up                                    :story:
+    CLOCK: [2016-09-03 Sat 21:05]--[2016-09-03 Sat 22:44] =>  1:39
     CLOCK: [2016-09-02 Fri 23:52]--[2016-09-03 Sat 00:03] =>  0:11
     CLOCK: [2016-09-02 Fri 22:20]--[2016-09-02 Fri 23:51] =>  1:31
     CLOCK: [2016-09-02 Fri 22:02]--[2016-09-02 Fri 22:19] =>  0:17
@@ -129,6 +130,19 @@ take this opportunity to do a few clean-ups:
 - compute is parent and is child in yarn.
 - move validation code from =yarn.dia= into yarn. We don't have a
   validator yet, so maybe it can go into the indexers.
+
+Rework generalisation code:
+
+- first pass: store parents.
+- second pass:
+  - set is child if has parent.
+  - if in parent map set is parent.
+  - if is child and not is parent, set is leaf.
+  - if is leaf, recurse to find original parent - do not recurse if
+    original parent already set. if is leaf, add leaves to container
+    against original parent.
+  - set in_inheritance_relationship.
+- third pass: populate leaves
 
 *** STARTED Consider adding support for inheritance via meta-data     :story:
     CLOCK: [2016-09-01 Thu 21:14]--[2016-09-01 Thu 22:20] =>  1:06
