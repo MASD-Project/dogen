@@ -18,15 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include <set>
-#include <list>
-#include <boost/lexical_cast.hpp>
-#include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/optional_io.hpp"
-#include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
@@ -36,12 +30,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.generalization_expander"));
 
-const std::string child_with_no_parents(
-    "Object is child but has no parents. Child: ");
 const std::string parent_not_found("Could not find parent: ");
-const std::string object_not_found("Could not find object: ");
-const std::string child_without_root_parent(
-    "Object is child but has no root parent. Child: ");
 
 }
 
