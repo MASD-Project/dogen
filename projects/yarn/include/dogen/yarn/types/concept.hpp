@@ -77,7 +77,6 @@ public:
         const bool is_immutable,
         const bool is_fluent,
         const std::list<dogen::yarn::name>& refines,
-        const bool is_parent,
         const bool is_child);
 
 private:
@@ -180,16 +179,6 @@ public:
     /**@}*/
 
     /**
-     * @brief True if this concept is the parent of one or more concepts, false otherwise.
-     *
-     * Parents are concepts that are refined by other concepts.
-     */
-    /**@{*/
-    bool is_parent() const;
-    void is_parent(const bool v);
-    /**@}*/
-
-    /**
      * @brief If true, the concept has at least one parent.
      *
      * Children are concepts that refine at least one other concept.
@@ -219,7 +208,6 @@ private:
     bool is_immutable_;
     bool is_fluent_;
     std::list<dogen::yarn::name> refines_;
-    bool is_parent_;
     bool is_child_;
 };
 

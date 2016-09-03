@@ -79,8 +79,7 @@ populate(const unsigned int position, result_type& v) {
     v.is_immutable(create_bool(position + 3));
     v.is_fluent(create_bool(position + 4));
     v.refines(create_std_list_dogen_yarn_name(position + 5));
-    v.is_parent(create_bool(position + 6));
-    v.is_child(create_bool(position + 7));
+    v.is_child(create_bool(position + 6));
 }
 
 concept_generator::result_type

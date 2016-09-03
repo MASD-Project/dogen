@@ -396,8 +396,6 @@ void transformer::to_concept(const processed_object& o, const profile& p) {
         }
     }
 
-    const auto j(context_.parent_ids().find(o.id()));
-    c.is_parent(j != context_.parent_ids().end());
     auto& concepts(context_.model().concepts());
     concepts.insert(std::make_pair(c.name().id(), c));
 }

@@ -77,7 +77,6 @@ namespace yarn {
 concept::concept()
     : is_immutable_(static_cast<bool>(0)),
       is_fluent_(static_cast<bool>(0)),
-      is_parent_(static_cast<bool>(0)),
       is_child_(static_cast<bool>(0)) { }
 
 concept::concept(
@@ -95,7 +94,6 @@ concept::concept(
     const bool is_immutable,
     const bool is_fluent,
     const std::list<dogen::yarn::name>& refines,
-    const bool is_parent,
     const bool is_child)
     : dogen::yarn::element(
       documentation,
@@ -112,7 +110,6 @@ concept::concept(
       is_immutable_(is_immutable),
       is_fluent_(is_fluent),
       refines_(refines),
-      is_parent_(is_parent),
       is_child_(is_child) { }
 
 void concept::to_stream(std::ostream& s) const {
@@ -133,7 +130,6 @@ void concept::to_stream(std::ostream& s) const {
       << "\"is_immutable\": " << is_immutable_ << ", "
       << "\"is_fluent\": " << is_fluent_ << ", "
       << "\"refines\": " << refines_ << ", "
-      << "\"is_parent\": " << is_parent_ << ", "
       << "\"is_child\": " << is_child_
       << " }";
 }
@@ -148,7 +144,6 @@ void concept::swap(concept& other) noexcept {
     swap(is_immutable_, other.is_immutable_);
     swap(is_fluent_, other.is_fluent_);
     swap(refines_, other.refines_);
-    swap(is_parent_, other.is_parent_);
     swap(is_child_, other.is_child_);
 }
 
@@ -166,7 +161,6 @@ bool concept::operator==(const concept& rhs) const {
         is_immutable_ == rhs.is_immutable_ &&
         is_fluent_ == rhs.is_fluent_ &&
         refines_ == rhs.refines_ &&
-        is_parent_ == rhs.is_parent_ &&
         is_child_ == rhs.is_child_;
 }
 
@@ -254,14 +248,6 @@ void concept::refines(const std::list<dogen::yarn::name>& v) {
 
 void concept::refines(const std::list<dogen::yarn::name>&& v) {
     refines_ = std::move(v);
-}
-
-bool concept::is_parent() const {
-    return is_parent_;
-}
-
-void concept::is_parent(const bool v) {
-    is_parent_ = v;
 }
 
 bool concept::is_child() const {

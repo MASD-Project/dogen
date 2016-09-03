@@ -72,7 +72,6 @@ std::size_t concept_hasher::hash(const concept& v) {
     combine(seed, v.is_immutable());
     combine(seed, v.is_fluent());
     combine(seed, hash_std_list_dogen_yarn_name(v.refines()));
-    combine(seed, v.is_parent());
     combine(seed, v.is_child());
 
     return seed;

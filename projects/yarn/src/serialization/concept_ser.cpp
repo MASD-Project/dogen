@@ -53,7 +53,6 @@ void save(Archive& ar,
     ar << make_nvp("is_immutable", v.is_immutable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
     ar << make_nvp("refines", v.refines_);
-    ar << make_nvp("is_parent", v.is_parent_);
     ar << make_nvp("is_child", v.is_child_);
 }
 
@@ -69,7 +68,6 @@ void load(Archive& ar,
     ar >> make_nvp("is_immutable", v.is_immutable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
     ar >> make_nvp("refines", v.refines_);
-    ar >> make_nvp("is_parent", v.is_parent_);
     ar >> make_nvp("is_child", v.is_child_);
 }
 
