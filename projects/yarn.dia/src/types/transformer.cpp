@@ -262,21 +262,8 @@ void transformer::to_object(const processed_object& po, const profile& p,
                                  << o.name().id();
     }
 
-    const auto j(context_.parent_ids().find(po.id()));
-    o.is_parent(j != context_.parent_ids().end());
-    o.is_final(!o.is_parent());
     context_.id_to_name().insert(std::make_pair(po.id(), o.name()));
-
     o.is_immutable(p.is_immutable());
-    if ((o.is_parent() || o.is_child()) && p.is_immutable())  {
-        BOOST_LOG_SEV(lg, error) << immutabilty_with_inheritance
-                                 << o.name().id();
-
-        BOOST_THROW_EXCEPTION(
-            transformation_error(immutabilty_with_inheritance +
-                o.name().id()));
-    }
-
 
     o.object_type(ot);
     auto& objects(context_.model().objects());

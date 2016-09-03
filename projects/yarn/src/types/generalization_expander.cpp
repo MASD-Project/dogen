@@ -145,6 +145,9 @@ void generalization_expander::populate_generalizable_properties(
          const auto i(parent_ids.find(id));
          o.is_parent(i != parent_ids.end());
 
+         // FIXME: for now until we handle final properly.
+         o.is_final(!o.is_parent());
+
          /*
           * We are in an inheritance (generalisation) relationship if
           * we are either a parent or a child (or both).

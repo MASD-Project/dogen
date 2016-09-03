@@ -358,7 +358,7 @@
 				<is_parent>0</is_parent>
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
-				<is_final>1</is_final>
+				<is_final>0</is_final>
 				<root_parent>
 					<initialized>0</initialized>
 				</root_parent>
@@ -547,7 +547,7 @@
 				<is_parent>0</is_parent>
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
-				<is_final>1</is_final>
+				<is_final>0</is_final>
 				<root_parent>
 					<initialized>0</initialized>
 				</root_parent>
@@ -736,7 +736,7 @@
 				<is_parent>0</is_parent>
 				<is_child>1</is_child>
 				<is_leaf>0</is_leaf>
-				<is_final>1</is_final>
+				<is_final>0</is_final>
 				<root_parent>
 					<initialized>0</initialized>
 				</root_parent>
@@ -1038,7 +1038,7 @@
 				<is_parent>0</is_parent>
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
-				<is_final>1</is_final>
+				<is_final>0</is_final>
 				<root_parent>
 					<initialized>0</initialized>
 				</root_parent>
@@ -1224,7 +1224,7 @@
 				</inherited_attributes>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
-				<is_parent>1</is_parent>
+				<is_parent>0</is_parent>
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
@@ -1896,7 +1896,7 @@
 				<is_parent>0</is_parent>
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
-				<is_final>1</is_final>
+				<is_final>0</is_final>
 				<root_parent>
 					<initialized>0</initialized>
 				</root_parent>
@@ -2325,7 +2325,7 @@
 				<is_parent>0</is_parent>
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
-				<is_final>1</is_final>
+				<is_final>0</is_final>
 				<root_parent>
 					<initialized>0</initialized>
 				</root_parent>
@@ -2674,7 +2674,7 @@
 				<is_parent>0</is_parent>
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
-				<is_final>1</is_final>
+				<is_final>0</is_final>
 				<root_parent>
 					<initialized>0</initialized>
 				</root_parent>
@@ -3103,7 +3103,7 @@
 				<is_parent>0</is_parent>
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
-				<is_final>1</is_final>
+				<is_final>0</is_final>
 				<root_parent>
 					<initialized>0</initialized>
 				</root_parent>
@@ -3692,7 +3692,7 @@
 				<is_parent>0</is_parent>
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
-				<is_final>1</is_final>
+				<is_final>0</is_final>
 				<root_parent>
 					<initialized>0</initialized>
 				</root_parent>
@@ -3961,7 +3961,7 @@
 				<is_parent>0</is_parent>
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
-				<is_final>1</is_final>
+				<is_final>0</is_final>
 				<root_parent>
 					<initialized>0</initialized>
 				</root_parent>

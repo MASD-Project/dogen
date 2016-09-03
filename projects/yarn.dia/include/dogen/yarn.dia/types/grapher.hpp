@@ -158,13 +158,6 @@ public:
      */
     const child_id_to_parent_ids_type& child_id_to_parent_ids() const;
 
-    /**
-     * @brief Returns the child to parent relationships.
-     *
-     * @pre The graph must have already been generated.
-     */
-    const std::unordered_set<std::string>& parent_ids() const;
-
 private:
     bool generated_;
     graph_type graph_;
@@ -172,7 +165,6 @@ private:
     id_to_vertex_type orphanage_;
     vertex_descriptor_type root_vertex_;
     child_id_to_parent_ids_type child_id_to_parent_ids_;
-    std::unordered_set<std::string> parent_ids_;
     std::unordered_set<std::string> connected_ids_;
 };
 

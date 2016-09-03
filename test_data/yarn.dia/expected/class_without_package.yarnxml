@@ -303,7 +303,7 @@
 				<is_parent>0</is_parent>
 				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
-				<is_final>1</is_final>
+				<is_final>0</is_final>
 				<root_parent>
 					<initialized>0</initialized>
 				</root_parent>

@@ -28,7 +28,6 @@
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/unordered_map.hpp>
-#include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
@@ -43,7 +42,6 @@ void save(Archive& ar,
     const dogen::yarn::dia::context& v,
     const unsigned int /*version*/) {
     ar << make_nvp("child_id_to_parent_ids", v.child_id_to_parent_ids_);
-    ar << make_nvp("parent_ids", v.parent_ids_);
     ar << make_nvp("id_to_name", v.id_to_name_);
     ar << make_nvp("model", v.model_);
 }
@@ -53,7 +51,6 @@ void load(Archive& ar,
     dogen::yarn::dia::context& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("child_id_to_parent_ids", v.child_id_to_parent_ids_);
-    ar >> make_nvp("parent_ids", v.parent_ids_);
     ar >> make_nvp("id_to_name", v.id_to_name_);
     ar >> make_nvp("model", v.model_);
 }

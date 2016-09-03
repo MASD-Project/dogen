@@ -26,25 +26,21 @@ namespace dia {
 
 context::context(
     const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids,
-    const std::unordered_set<std::string>& parent_ids,
     const std::unordered_map<std::string, dogen::yarn::name>& id_to_name,
     const dogen::yarn::intermediate_model& model)
     : child_id_to_parent_ids_(child_id_to_parent_ids),
-      parent_ids_(parent_ids),
       id_to_name_(id_to_name),
       model_(model) { }
 
 void context::swap(context& other) noexcept {
     using std::swap;
     swap(child_id_to_parent_ids_, other.child_id_to_parent_ids_);
-    swap(parent_ids_, other.parent_ids_);
     swap(id_to_name_, other.id_to_name_);
     swap(model_, other.model_);
 }
 
 bool context::operator==(const context& rhs) const {
     return child_id_to_parent_ids_ == rhs.child_id_to_parent_ids_ &&
-        parent_ids_ == rhs.parent_ids_ &&
         id_to_name_ == rhs.id_to_name_ &&
         model_ == rhs.model_;
 }
@@ -69,22 +65,6 @@ void context::child_id_to_parent_ids(const std::unordered_map<std::string, std::
 
 void context::child_id_to_parent_ids(const std::unordered_map<std::string, std::list<std::string> >&& v) {
     child_id_to_parent_ids_ = std::move(v);
-}
-
-const std::unordered_set<std::string>& context::parent_ids() const {
-    return parent_ids_;
-}
-
-std::unordered_set<std::string>& context::parent_ids() {
-    return parent_ids_;
-}
-
-void context::parent_ids(const std::unordered_set<std::string>& v) {
-    parent_ids_ = v;
-}
-
-void context::parent_ids(const std::unordered_set<std::string>&& v) {
-    parent_ids_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::yarn::name>& context::id_to_name() const {

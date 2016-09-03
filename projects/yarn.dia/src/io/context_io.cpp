@@ -65,20 +65,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::name>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -103,7 +89,6 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::dia::context\"" << ", "
       << "\"child_id_to_parent_ids\": " << v.child_id_to_parent_ids() << ", "
-      << "\"parent_ids\": " << v.parent_ids() << ", "
       << "\"id_to_name\": " << v.id_to_name() << ", "
       << "\"model\": " << v.model()
       << " }";

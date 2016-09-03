@@ -29,7 +29,6 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include <unordered_set>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn.dia/serialization/context_fwd_ser.hpp"
@@ -51,7 +50,6 @@ public:
 public:
     context(
         const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids,
-        const std::unordered_set<std::string>& parent_ids,
         const std::unordered_map<std::string, dogen::yarn::name>& id_to_name,
         const dogen::yarn::intermediate_model& model);
 
@@ -71,16 +69,6 @@ public:
     std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids();
     void child_id_to_parent_ids(const std::unordered_map<std::string, std::list<std::string> >& v);
     void child_id_to_parent_ids(const std::unordered_map<std::string, std::list<std::string> >&& v);
-    /**@}*/
-
-    /**
-     * @brief All dia object IDs of classes that are parents in a generalisation.
-     */
-    /**@{*/
-    const std::unordered_set<std::string>& parent_ids() const;
-    std::unordered_set<std::string>& parent_ids();
-    void parent_ids(const std::unordered_set<std::string>& v);
-    void parent_ids(const std::unordered_set<std::string>&& v);
     /**@}*/
 
     /**
@@ -115,7 +103,6 @@ public:
 
 private:
     std::unordered_map<std::string, std::list<std::string> > child_id_to_parent_ids_;
-    std::unordered_set<std::string> parent_ids_;
     std::unordered_map<std::string, dogen::yarn::name> id_to_name_;
     dogen::yarn::intermediate_model model_;
 };

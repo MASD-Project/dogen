@@ -171,7 +171,6 @@ void grapher::process_connections(const processed_object& o) {
 
     const auto parent_vertex(vertex_for_id(parent_id));
     const auto child_vertex(vertex_for_id(child_id));
-    parent_ids_.insert(parent_id);
     connected_ids_.insert(parent_id);
     boost::add_edge(child_vertex, parent_vertex, graph_);
     BOOST_LOG_SEV(lg, debug) << "Created edge between '" << child_id
@@ -230,11 +229,6 @@ const grapher::child_id_to_parent_ids_type& grapher::
 child_id_to_parent_ids() const {
     require_generated();
     return child_id_to_parent_ids_;
-}
-
-const std::unordered_set<std::string>& grapher::parent_ids() const {
-    require_generated();
-    return parent_ids_;
 }
 
 void grapher::generate() {

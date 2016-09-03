@@ -47,14 +47,6 @@ std::unordered_map<std::string, std::list<std::string> > create_std_unordered_ma
     return r;
 }
 
-std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int position) {
-    std::unordered_set<std::string> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(create_std_string(position + i));
-    }
-    return r;
-}
-
 dogen::yarn::name
 create_dogen_yarn_name(const unsigned int position) {
     return dogen::yarn::name_generator::create(position);
@@ -84,9 +76,8 @@ context_generator::context_generator() : position_(0) { }
 void context_generator::
 populate(const unsigned int position, result_type& v) {
     v.child_id_to_parent_ids(create_std_unordered_map_std_string_std_list_std_string(position + 0));
-    v.parent_ids(create_std_unordered_set_std_string(position + 1));
-    v.id_to_name(create_std_unordered_map_std_string_dogen_yarn_name(position + 2));
-    v.model(create_dogen_yarn_intermediate_model(position + 3));
+    v.id_to_name(create_std_unordered_map_std_string_dogen_yarn_name(position + 1));
+    v.model(create_dogen_yarn_intermediate_model(position + 2));
 }
 
 context_generator::result_type

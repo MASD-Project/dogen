@@ -94,7 +94,6 @@ generate_graph_activity(const dogen::dia::diagram& diagram) {
 
     g.generate();
     context_.child_id_to_parent_ids(g.child_id_to_parent_ids());
-    context_.parent_ids(g.parent_ids());
     return g.graph();
 }
 

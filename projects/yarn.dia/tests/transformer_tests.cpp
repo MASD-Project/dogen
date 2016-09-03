@@ -120,18 +120,6 @@ void transform(dogen::yarn::dia::context& c,
         t.transform(po, mock_profile(po));
 }
 
-void transform(dogen::yarn::dia::context& c,
-    const dogen::yarn::dia::processed_object& po,
-    const dogen::yarn::dia::profile& p) {
-
-    using namespace dogen::dynamic::test;
-    mock_repository_factory rf;
-    const auto rp(rf.make());
-    const auto w(mock_workflow_factory::non_validating_workflow(rp));
-    dogen::yarn::dia::transformer t(w, c);
-    t.transform(po, p);
-}
-
 }
 
 using dogen::utility::test::contains_checker;
@@ -907,32 +895,6 @@ BOOST_AUTO_TEST_CASE(empty_uml_note_inside_package_does_nothing) {
     }
 }
 
-BOOST_AUTO_TEST_CASE(inheritance_with_immutability_throws) {
-    SETUP_TEST_LOG_SOURCE("inheritance_with_immutability_throws");
-    auto c(mock_context(model_name));
-
-    const auto po(mock_processed_object_factory::make_generalization());
-    const auto con(po[0].connection());
-    BOOST_REQUIRE(con);
-    const auto parents = std::list<std::string> { con->first };
-    c.child_id_to_parent_ids().insert(std::make_pair(con->second, parents));
-
-    transform(c, {po[1]});
-
-    auto po1(po[2]);
-    po1.stereotype(immutable_stereotype);
-    const auto op1(mock_profile(po1));
-    contains_checker<transformation_error> cc(immutability_inheritance);
-    BOOST_CHECK_EXCEPTION(transform(c, po1, op1), transformation_error, cc);
-
-    c.child_id_to_parent_ids().clear();
-    c.parent_ids().insert(con->first);
-    auto po2(po[1]);
-    po2.stereotype(immutable_stereotype);
-    const auto op2(mock_profile(po2));
-    BOOST_CHECK_EXCEPTION(transform(c, po2, op2), transformation_error, cc);
-}
-
 BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_inheritance_results_in_expected_object");
 
@@ -942,7 +904,6 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
     BOOST_REQUIRE(con);
     const auto parents = std::list<std::string> { con->first };
     c.child_id_to_parent_ids().insert(std::make_pair(con->second, parents));
-    c.parent_ids().insert(con->first);
 
     transform(c, {po[1], po[2]});
     BOOST_LOG_SEV(lg, debug) << "context: " << c;
