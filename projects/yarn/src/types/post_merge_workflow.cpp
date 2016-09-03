@@ -90,7 +90,7 @@ resolve_element_references(intermediate_model& im) const {
 
 void post_merge_workflow::expand_generalizations(intermediate_model& im) const {
     generalization_expander ex;
-    ex.expand(im);
+    ex.expand_new(im);
 }
 
 void post_merge_workflow::expand_concepts(intermediate_model& im) const {
