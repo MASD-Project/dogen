@@ -25,10 +25,7 @@
 #pragma once
 #endif
 
-#include <list>
-#include <unordered_map>
 #include <unordered_set>
-#include <boost/optional.hpp>
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/name.hpp"
 
@@ -51,52 +48,6 @@ private:
     void sort_leaves(intermediate_model& im) const;
 
 public:
-    void expand_new(intermediate_model& im) const;
-
-private:
-    /**
-     * @brief Details of generalization relationships we're interested
-     * in.
-     */
-    struct generalization_details {
-        std::unordered_map<std::string, std::list<name> > leaves;
-        std::unordered_map<std::string, boost::optional<name> > root_parents;
-        std::unordered_set<std::string> parents;
-    };
-
-private:
-    /**
-     * @brief Returns true if type is a leaf type in an inheritance
-     * tree.
-     */
-    bool is_leaf(const yarn::object& o) const;
-
-private:
-    /**
-     * @brief Populates the leaves container recursively.
-     *
-     * @return Root parents of the tree we are recursing into.
-     */
-    boost::optional<name> recurse_generalization(const intermediate_model& im,
-        const yarn::name& leaf, const yarn::object& o,
-        generalization_details& d) const;
-
-    /**
-     * @brief Obtains all of the details of the generalization
-     * relationships.
-     */
-    generalization_details obtain_details(const intermediate_model& im) const;
-
-    /**
-     * @brief Populates properties related to generalization.
-     */
-    void populate(const generalization_details& d,
-        intermediate_model& im) const;
-
-public:
-    /**
-     * @brief Expands the generalization relationships for this model.
-     */
     void expand(intermediate_model& im) const;
 };
 

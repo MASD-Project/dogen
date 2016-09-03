@@ -81,7 +81,6 @@ void generalization_expander::populate_properties_up_the_generalization_tree(
                                  << o.name().id();
     }
 
-
     /*
      * Add the leaf to all nodes of the tree except for the leaf node
      * itself.
@@ -182,168 +181,10 @@ void generalization_expander::sort_leaves(intermediate_model& im) const {
     }
 }
 
-void generalization_expander::expand_new(intermediate_model& im) const {
+void generalization_expander::expand(intermediate_model& im) const {
     const auto parent_ids(obtain_parent_ids(im));
     populate_generalizable_properties(parent_ids, im);
     sort_leaves(im);
-}
-
-bool generalization_expander::is_leaf(const object& o) const {
-    if (o.is_parent() || !o.is_child()) {
-        BOOST_LOG_SEV(lg, debug)
-            << "Type is not a generalisation leaf. "
-            << " is parent: " << o.is_parent()
-            << " is child: " << o.is_child();
-        return false;
-    }
-    return true;
-}
-
-boost::optional<name> generalization_expander::
-recurse_generalization(const intermediate_model& im, const name& leaf,
-    const object& o, generalization_details& d) const {
-
-    if (!o.is_child())
-        return o.name();
-
-    if (!o.parent()) {
-        const auto id(o.name().id());
-        BOOST_LOG_SEV(lg, error) << child_with_no_parents << id;
-        BOOST_THROW_EXCEPTION(expansion_error(child_with_no_parents + id));
-    }
-
-    const auto& parent(*o.parent());
-    auto j(im.objects().find(parent.id()));
-    if (j == im.objects().end()) {
-        const auto id(parent.id());
-        BOOST_LOG_SEV(lg, error) << parent_not_found << id;
-        BOOST_THROW_EXCEPTION(expansion_error(parent_not_found + id));
-    }
-
-    const auto rp(recurse_generalization(im, leaf, j->second, d));
-    if (!rp) {
-        const auto id(parent.id());
-        BOOST_LOG_SEV(lg, error) << child_without_root_parent << id;
-        BOOST_THROW_EXCEPTION(expansion_error(child_without_root_parent + id));
-    }
-
-    d.root_parents[parent.id()] = rp;
-    BOOST_LOG_SEV(lg, debug) << "Type: " << parent.id()
-                             << " has original parents: " << *rp;
-
-    d.leaves[parent.id()].push_back(leaf);
-    BOOST_LOG_SEV(lg, debug) << "Type is a leaf of: " << parent.id();
-
-    d.root_parents[o.name().id()] = rp;
-    return rp;
-}
-
-generalization_expander::generalization_details generalization_expander::
-obtain_details(const intermediate_model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Obtaining leaves.";
-    generalization_details r;
-    for (auto& pair : m.objects()) {
-        const auto& id(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
-
-        auto& o(pair.second);
-        if (!is_leaf(o))
-            continue;
-
-        recurse_generalization(m, o.name(), o, r);
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Leaves: " << r.leaves;
-    BOOST_LOG_SEV(lg, debug) << "Original parents: " << r.root_parents;
-    BOOST_LOG_SEV(lg, debug) << "Finished obtaining details.";
-    return r;
-}
-
-void generalization_expander::
-populate(const generalization_details& d, intermediate_model& m) const {
-    for (const auto& pair : d.leaves) {
-        const auto& id(pair.first);
-        auto i(m.objects().find(id));
-        if (i == m.objects().end()) {
-            BOOST_LOG_SEV(lg, error) << object_not_found << id;
-            BOOST_THROW_EXCEPTION(expansion_error(object_not_found + id));
-        }
-
-        auto& o(i->second);
-
-        // FIXME: massive hack. must not add leaves for services.
-        const auto uds(object_types::user_defined_service);
-        if (o.object_type() == uds) {
-            BOOST_LOG_SEV(lg, debug) << "Filtering out leaves for type: "
-                                     << o.name().id();
-            continue;
-        }
-        o.leaves(pair.second);
-
-        /*
-         * Sort the leaves to ensure stability.
-         */
-        o.leaves().sort();
-
-        for (const auto& leaf : pair.second) {
-            /*
-             * If the leaf name belongs to the target model, add it to
-             * the model's list of leaves. Ignore non-target leaves.
-             */
-            const auto& ll(leaf.location());
-            const auto& ml(m.name().location());
-            if (ll.model_modules() == ml.model_modules())
-                m.leaves().insert(leaf);
-        }
-    }
-
-    for (const auto& pair : d.root_parents) {
-        const auto& id(pair.first);
-        auto i(m.objects().find(id));
-        if (i == m.objects().end()) {
-            BOOST_LOG_SEV(lg, error) << object_not_found << id;
-            BOOST_THROW_EXCEPTION(expansion_error(object_not_found + id));
-        }
-
-        auto& o(i->second);
-
-        /*
-         * Mark all types that are in an inheritance relationship,
-         * either as a parent or as a child.
-         */
-        o.in_inheritance_relationship(o.is_parent() || o.is_child());
-
-        if (!o.is_child()) {
-            /*
-             * All types that are in an inheritance relationship have
-             * a root parent in the details container, including the
-             * root parent itself. If we have a parent but we are not
-             * a child, we must be the root parent. Do not propagate
-             * the recursive relationship between the root parent and
-             * itself.
-             */
-            BOOST_LOG_SEV(lg, debug) << "Type has parents but is not a child: "
-                                     << id;
-            continue;
-        }
-
-        o.root_parent(pair.second);
-        if (o.root_parent()) {
-            const auto& opn(*o.root_parent());
-            const auto j(m.objects().find(opn.id()));
-            if (j == m.objects().end()) {
-                const auto id(opn.id());
-                BOOST_LOG_SEV(lg, error) << object_not_found << id;
-                BOOST_THROW_EXCEPTION(expansion_error(object_not_found + id));
-            }
-            o.is_root_parent_visitable(j->second.is_visitable());
-        }
-    }
-}
-
-void generalization_expander::expand(intermediate_model& im) const {
-    const auto d(obtain_details(im));
-    populate(d, im);
 }
 
 } }
