@@ -21,6 +21,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/indexer.hpp"
 #include "dogen/yarn/types/injector.hpp"
 #include "dogen/yarn/types/resolver.hpp"
 #include "dogen/yarn/types/concept_expander.hpp"
@@ -77,6 +78,11 @@ has_generatable_types(const intermediate_model& im) const {
     return false;
 }
 
+void post_merge_workflow::create_indices(intermediate_model& im) const {
+    indexer idx;
+    idx.index(im);
+}
+
 void post_merge_workflow::inject_system_elements(intermediate_model& im) const {
     injector i;
     i.inject(im);
@@ -115,6 +121,11 @@ update_model_generability(intermediate_model& im) const {
 
 void post_merge_workflow::execute(intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
+
+    /*
+     * Create all indices first as its needed by generalisation.
+     */
+    create_indices(im);
 
     /*
      * We must expand generalisation relationships before we inject

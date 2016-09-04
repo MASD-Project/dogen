@@ -53,6 +53,11 @@ private:
 
 private:
     /**
+     * @brief Create indices.
+     */
+    void create_indices(intermediate_model& im) const;
+
+    /**
      * @brief Inject system-generated elements.
      */
     void inject_system_elements(intermediate_model& im) const;
