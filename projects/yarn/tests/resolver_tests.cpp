@@ -27,6 +27,7 @@
 #include "dogen/yarn/types/merging_error.hpp"
 #include "dogen/yarn/types/resolution_error.hpp"
 #include "dogen/yarn/types/merger.hpp"
+#include "dogen/yarn/types/indexer.hpp"
 #include "dogen/yarn/types/resolver.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/io/attribute_io.hpp"
@@ -48,11 +49,14 @@ using dogen::yarn::test::mock_intermediate_model_factory;
  * FIXME: all attributes have model name set and need to be manually
  * unset.
  *
+ * FIXME: we followed the anti-pattern of merger with indexer. Ideally
+ * the factory should generate an indexed model.
+ *
  * Flag was added but does nothing yet.
  */
 const mock_intermediate_model_factory::flags flags(false/*tagged*/,
-    false/*resolved*/, true/*merged*/, false/*concepts_indexed*/,
-    false/*attributes_indexed*/);
+    false/*resolved*/, true/*merged*/, false/*concepts_expanded*/,
+    false/*attributes_expanded*/);
 
 const mock_intermediate_model_factory factory(flags);
 
@@ -87,6 +91,9 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
             t.id(t.simple());
         }
     }
+    dogen::yarn::indexer idx;
+    idx.index(m);
+
     const auto original(m);
     BOOST_LOG_SEV(lg, debug) << "original: " << original;
 
@@ -129,6 +136,9 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_different_model_results_in_su
     BOOST_CHECK(combined.objects().size() == 2);
     BOOST_CHECK(combined.primitives().empty());
 
+    dogen::yarn::indexer idx;
+    idx.index(combined);
+
     dogen::yarn::resolver rs;
     rs.resolve(combined);
 
@@ -144,7 +154,8 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_different_model_results_in_su
             const auto& prop(o.local_attributes().front());
             BOOST_LOG_SEV(lg, debug) << "attribute: " << prop;
 
-            BOOST_CHECK(factory.is_type_name_n(1, prop.parsed_type().current()));
+            BOOST_CHECK(
+                factory.is_type_name_n(1, prop.parsed_type().current()));
             BOOST_CHECK(factory.is_model_n(1, prop.parsed_type().current()));
             BOOST_CHECK(o.object_type() ==
                 dogen::yarn::object_types::user_defined_value_object);

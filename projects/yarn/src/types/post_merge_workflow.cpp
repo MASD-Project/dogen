@@ -123,7 +123,9 @@ void post_merge_workflow::execute(intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
 
     /*
-     * Create all indices first as its needed by generalisation.
+     * Create all indices first as its needed by generalisation. Note
+     * that this means injected types are not part of indices, which
+     * is not ideal - but for now, its not a major problem.
      */
     create_indices(im);
 

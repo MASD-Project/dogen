@@ -27,6 +27,7 @@
 
 #include <list>
 #include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/indices.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/concept.hpp"
 
@@ -46,56 +47,46 @@ namespace yarn {
  */
 class resolver {
 private:
-    bool is_primitive(const intermediate_model& m, const name& n) const;
-    bool is_object(const intermediate_model& m, const name& n) const;
-    bool is_enumeration(const intermediate_model& m, const name& n) const;
-    bool is_concept(const intermediate_model& m, const name& n) const;
-
-private:
-    struct indexed_ids {
-        std::unordered_set<std::string> always_in_heap;
-        std::unordered_set<std::string> referable_by_attributes;
-    };
-
-    indexed_ids index(const intermediate_model& m) const;
+    bool is_primitive(const intermediate_model& im, const name& n) const;
+    bool is_object(const intermediate_model& im, const name& n) const;
+    bool is_enumeration(const intermediate_model& im, const name& n) const;
+    bool is_concept(const intermediate_model& im, const name& n) const;
 
 private:
     /**
      * @brief Returns the default enumeration type.
      */
-    name obtain_default_enumeration_type(const intermediate_model& m) const;
+    name obtain_default_enumeration_type(const intermediate_model& im) const;
 
     /**
      * @brief Returns true if the name is in the model and can be
      * referred to from an attribute, false otherwise.
      */
-    bool is_name_referable(const indexed_ids& idx, const name& n) const;
+    bool is_name_referable(const indices& idx, const name& n) const;
 
     /**
      * @brief Resolves a partially formed name into a full name.
      */
-    name resolve_partial_type(const intermediate_model& m,
-        const indexed_ids& idx, const name& n) const;
+    name resolve_partial_type(const intermediate_model& im, const name& n) const;
 
     /**
      * @brief Resolves all references contained in a name tree.
      */
-    void resolve_partial_type(const intermediate_model& m,
-        const indexed_ids& idx, const name& owner, name_tree& nt) const;
+    void resolve_partial_type(const intermediate_model& im, const name& owner,
+        name_tree& nt) const;
 
     /**
      * @brief Resolves all references to types in the supplied attributes.
      */
-    void resolve_attributes(const intermediate_model& m,
-        const name& owner, const indexed_ids& idx,
-        std::list<attribute>& attributes) const;
+    void resolve_attributes(const intermediate_model& im,
+        const name& owner, std::list<attribute>& attributes) const;
 
     /**
      * @brief Validates the inheritance graph for the object.
      *
      * @note should really be moved to validator.
      */
-    void validate_inheritance_graph(const intermediate_model& m,
+    void validate_inheritance_graph(const intermediate_model& im,
         const object& o) const;
 
     /**
@@ -104,23 +95,23 @@ private:
      *
      * @note should really be moved to validator.
      */
-    void validate_refinements(const intermediate_model& m,
+    void validate_refinements(const intermediate_model& im,
         const concept& c) const;
 
     /**
      * @brief Resolve all concepts.
      */
-    void resolve_concepts(const indexed_ids& idx, intermediate_model& m) const;
+    void resolve_concepts(intermediate_model& im) const;
 
     /**
      * @brief Resolve all objects.
      */
-    void resolve_objects(const indexed_ids& idx, intermediate_model& m) const;
+    void resolve_objects(intermediate_model& im) const;
 
     /**
      * @brief Resolve all enumerations.
      */
-    void resolve_enumerations(intermediate_model& m) const;
+    void resolve_enumerations(intermediate_model& im) const;
 
 public:
     /**
@@ -128,7 +119,7 @@ public:
      *
      * @pre Resolution has not been performed yet.
      */
-    void resolve(intermediate_model& m) const;
+    void resolve(intermediate_model& im) const;
 };
 
 } }

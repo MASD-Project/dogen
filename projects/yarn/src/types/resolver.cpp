@@ -74,9 +74,9 @@ inline std::string obtain_qualified(const Qualifiable& q) {
     return i->second;
 }
 
-bool resolver::is_primitive(const intermediate_model& m, const name& n) const {
-    auto i(m.primitives().find(n.id()));
-    if (i != m.primitives().end()) {
+bool resolver::is_primitive(const intermediate_model& im, const name& n) const {
+    auto i(im.primitives().find(n.id()));
+    if (i != im.primitives().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to a primitive in model.";
         return true;
     }
@@ -84,56 +84,38 @@ bool resolver::is_primitive(const intermediate_model& m, const name& n) const {
 }
 
 bool
-resolver::is_enumeration(const intermediate_model& m, const name& n) const {
-    auto i(m.enumerations().find(n.id()));
-    if (i != m.enumerations().end()) {
+resolver::is_enumeration(const intermediate_model& im, const name& n) const {
+    auto i(im.enumerations().find(n.id()));
+    if (i != im.enumerations().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to an enumeration in model.";
         return true;
     }
     return false;
 }
 
-bool resolver::is_object(const intermediate_model& m, const name& n) const {
-    auto i(m.objects().find(n.id()));
-    if (i != m.objects().end()) {
+bool resolver::is_object(const intermediate_model& im, const name& n) const {
+    auto i(im.objects().find(n.id()));
+    if (i != im.objects().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to an object in model.";
         return true;
     }
     return false;
 }
 
-bool resolver:: is_concept(const intermediate_model& m, const name& n) const {
-    auto i(m.concepts().find(n.id()));
-    if (i != m.concepts().end()) {
+bool resolver:: is_concept(const intermediate_model& im, const name& n) const {
+    auto i(im.concepts().find(n.id()));
+    if (i != im.concepts().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to a concept in model.";
         return true;
     }
     return false;
 }
 
-resolver::indexed_ids resolver::index(const intermediate_model& m) const {
-    indexed_ids r;
-    for (const auto& pair : m.primitives())
-        r.referable_by_attributes.insert(pair.first);
-
-    for (const auto& pair : m.enumerations())
-        r.referable_by_attributes.insert(pair.first);
-
-    for (const auto& pair : m.objects()) {
-        r.referable_by_attributes.insert(pair.first);
-        if (pair.second.type_parameters_settings().always_in_heap())
-            r.always_in_heap.insert(pair.first);
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Always in heap: " << r.always_in_heap;
-    return r;
-}
-
 name resolver::
-obtain_default_enumeration_type(const intermediate_model& m) const {
+obtain_default_enumeration_type(const intermediate_model& im) const {
     name r;
     bool found(false);
-    for (const auto& pair : m.primitives()) {
+    for (const auto& pair : im.primitives()) {
         const auto p(pair.second);
         if (p.is_default_enumeration_type()) {
             BOOST_LOG_SEV(lg, debug) << "Found default enumeration name type:"
@@ -158,26 +140,26 @@ obtain_default_enumeration_type(const intermediate_model& m) const {
     return r;
 }
 
-bool resolver::is_name_referable(const indexed_ids& idx, const name& n) const {
+bool resolver::is_name_referable(const indices& idx, const name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Checking to see if name is referable:" << n;
 
-    const auto i(idx.referable_by_attributes.find(n.id()));
-    if (i != idx.referable_by_attributes.end())
+    const auto i(idx.elements_referable_by_attributes().find(n.id()));
+    if (i != idx.elements_referable_by_attributes().end())
         return true;
 
     BOOST_LOG_SEV(lg, debug) << "Name not found in model or its not referable.";
     return false;
 }
 
-name resolver::resolve_partial_type(const intermediate_model& m,
-    const indexed_ids& idx, const name& n) const {
+name resolver::
+resolve_partial_type(const intermediate_model& im, const name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Resolving type:" << n.id();
 
     /*
      * First try the type as it was read originally. This caters for
      * types placed in the global module.
      */
-    if (is_name_referable(idx, n))
+    if (is_name_referable(im.indices(), n))
         return n;
 
     /*
@@ -187,10 +169,10 @@ name resolver::resolve_partial_type(const intermediate_model& m,
      */
     name_factory nf;
     {
-        const auto r(nf.build_combined_element_name(m.name(), n,
+        const auto r(nf.build_combined_element_name(im.name(), n,
                 true/*populate_model_name_if_blank*/));
 
-        if (is_name_referable(idx, r))
+        if (is_name_referable(im.indices(), r))
             return r;
     }
 
@@ -198,10 +180,10 @@ name resolver::resolve_partial_type(const intermediate_model& m,
      * Now handle the case where the type belongs to a reference, but
      * is missing the external module path.
      */
-    for (const auto& pair : m.references()) {
+    for (const auto& pair : im.references()) {
         const auto r(nf.build_combined_element_name(pair.first, n));
 
-        if (is_name_referable(idx, r))
+        if (is_name_referable(im.indices(), r))
             return r;
     }
 
@@ -210,9 +192,9 @@ name resolver::resolve_partial_type(const intermediate_model& m,
      * same name as a reference model.
      */
     {
-        auto r(nf.build_promoted_module_name(m.name(), n));
+        auto r(nf.build_promoted_module_name(im.name(), n));
         BOOST_LOG_SEV(lg, error) << r;
-        if (is_name_referable(idx, r))
+        if (is_name_referable(im.indices(), r))
             return r;
     }
 
@@ -220,14 +202,14 @@ name resolver::resolve_partial_type(const intermediate_model& m,
     BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.id()));
 }
 
-void resolver::resolve_partial_type(const intermediate_model& m,
-    const indexed_ids& idx, const name& owner, name_tree& nt) const {
-    const name n(resolve_partial_type(m, idx, nt.current()));
+void resolver::resolve_partial_type(const intermediate_model& im,
+    const name& owner, name_tree& nt) const {
+    const name n(resolve_partial_type(im, nt.current()));
     nt.current(n);
-    nt.is_current_simple_type(is_enumeration(m, n) || is_primitive(m, n));
+    nt.is_current_simple_type(is_enumeration(im, n) || is_primitive(im, n));
 
-    const auto i(idx.always_in_heap.find(n.id()));
-    nt.are_children_opaque(i != idx.always_in_heap.end());
+    const auto i(im.indices().objects_always_in_heap().find(n.id()));
+    nt.are_children_opaque(i != im.indices().objects_always_in_heap().end());
 
     pretty_printer pp(separators::double_colons);
     pp.add(obtain_qualified(n));
@@ -245,7 +227,7 @@ void resolver::resolve_partial_type(const intermediate_model& m,
     }
 
     for (auto& c : nt.children()) {
-        resolve_partial_type(m, idx, owner, c);
+        resolve_partial_type(im, owner, c);
         pp.add_child(obtain_qualified(c));
     }
 
@@ -256,12 +238,11 @@ void resolver::resolve_partial_type(const intermediate_model& m,
     nt.identifiable(sp.to_identifiable(cpp_qn));
 }
 
-void resolver::resolve_attributes(const intermediate_model& m,
-    const name& owner, const indexed_ids& idx,
-    std::list<attribute>& attributes) const {
+void resolver::resolve_attributes(const intermediate_model& im,
+    const name& owner, std::list<attribute>& attributes) const {
     for (auto& a : attributes) {
         try {
-            resolve_partial_type(m, idx, owner, a.parsed_type());
+            resolve_partial_type(im, owner, a.parsed_type());
             BOOST_LOG_SEV(lg, debug) << "Resolved attribute: " << a.name().id();
         } catch (boost::exception& e) {
             std::ostringstream s;
@@ -274,13 +255,13 @@ void resolver::resolve_attributes(const intermediate_model& m,
     }
 }
 
-void resolver::validate_inheritance_graph(const intermediate_model& m,
+void resolver::validate_inheritance_graph(const intermediate_model& im,
     const object& o) const {
     if (!o.parent())
         return;
 
     const auto& pn(*o.parent());
-    if (!is_object(m, pn)) {
+    if (!is_object(im, pn)) {
         std::ostringstream s;
         s << orphan_object << ": " << o.name().id()
           << ". parent: " << pn.id();
@@ -293,7 +274,7 @@ void resolver::validate_inheritance_graph(const intermediate_model& m,
         return;
 
     const auto& rp(*o.root_parent());
-    if (!is_object(m, rp)) {
+    if (!is_object(im, rp)) {
         std::ostringstream s;
         s << orphan_object << ": " << o.name().id()
           << ". Root parent: " << rp.id();
@@ -303,10 +284,10 @@ void resolver::validate_inheritance_graph(const intermediate_model& m,
     }
 }
 
-void resolver::validate_refinements(const intermediate_model& m,
+void resolver::validate_refinements(const intermediate_model& im,
     const concept& c) const {
     for (const auto& n : c.refines()) {
-        if (!is_concept(m, n)) {
+        if (!is_concept(im, n)) {
             std::ostringstream stream;
             stream << orphan_concept << ". concept: "
                    << c.name().id()
@@ -319,50 +300,50 @@ void resolver::validate_refinements(const intermediate_model& m,
 }
 
 void resolver::
-resolve_concepts(const indexed_ids& idx, intermediate_model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Concepts: " << m.concepts().size();
+resolve_concepts(intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Concepts: " << im.concepts().size();
 
-    for (auto& pair : m.concepts()) {
+    for (auto& pair : im.concepts()) {
         concept& c(pair.second);
 
         if (c.generation_type() == generation_types::no_generation)
             continue;
 
         BOOST_LOG_SEV(lg, debug) << "Resolving: " << c.name().id();
-        resolve_attributes(m, c.name(), idx, c.local_attributes());
-        validate_refinements(m, c);
+        resolve_attributes(im, c.name(), c.local_attributes());
+        validate_refinements(im, c);
     }
 }
 
 void resolver::
-resolve_objects(const indexed_ids& idx, intermediate_model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Objects: " << m.objects().size();
+resolve_objects(intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Objects: " << im.objects().size();
 
-    for (auto& pair : m.objects()) {
+    for (auto& pair : im.objects()) {
         auto& o(pair.second);
 
         if (o.generation_type() == generation_types::no_generation)
             continue;
 
         BOOST_LOG_SEV(lg, debug) << "Resolving: " << o.name().id();
-        validate_inheritance_graph(m, o);
-        resolve_attributes(m, o.name(), idx, o.local_attributes());
+        validate_inheritance_graph(im, o);
+        resolve_attributes(im, o.name(), o.local_attributes());
     }
 }
 
-void resolver::resolve_enumerations(intermediate_model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Enumerations: " << m.enumerations().size();
+void resolver::resolve_enumerations(intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Enumerations: " << im.enumerations().size();
 
     /*
      * If no enumerations exist, we can just exit. This means we can
      * still support models that have no dependencies, provided they
      * do not use enumerations.
      */
-    if (m.enumerations().empty())
+    if (im.enumerations().empty())
         return;
 
-    const auto det(obtain_default_enumeration_type(m));
-    for (auto& pair : m.enumerations()) {
+    const auto det(obtain_default_enumeration_type(im));
+    for (auto& pair : im.enumerations()) {
         auto& e(pair.second);
 
         if (e.generation_type() == generation_types::no_generation)
@@ -377,7 +358,7 @@ void resolver::resolve_enumerations(intermediate_model& m) const {
             BOOST_LOG_SEV(lg, debug) << "Defaulting enumeration to type: "
                                      << det.id();
             e.underlying_type(det);
-        } else if (!is_primitive(m, ut)) {
+        } else if (!is_primitive(im, ut)) {
             BOOST_LOG_SEV(lg, error) << invalid_default << ut.id();
             BOOST_THROW_EXCEPTION(resolution_error(
                     invalid_default + ut.id()));
@@ -385,11 +366,10 @@ void resolver::resolve_enumerations(intermediate_model& m) const {
     }
 }
 
-void resolver::resolve(intermediate_model& m) const {
-    auto idx(index(m));
-    resolve_concepts(idx, m);
-    resolve_objects(idx, m);
-    resolve_enumerations(m);
+void resolver::resolve(intermediate_model& im) const {
+    resolve_concepts(im);
+    resolve_objects(im);
+    resolve_enumerations(im);
 }
 
 } }

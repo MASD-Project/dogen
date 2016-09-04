@@ -12,22 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-04 Sun 22:31]
+#+CAPTION: Clock summary at [2016-09-04 Sun 23:26]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *16:02* |       |      | 100.0 |
+| *Total time*                                                                | *16:55* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 16:02   |       |      | 100.0 |
-| Active                                                                      |         | 16:02 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:19 |   2.0 |
-| COMPLETED Move readme to markdown                                           |         |       | 0:49 |   5.1 |
-| COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   3.0 |
-| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |  14.8 |
-| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  26.9 |
-| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  31.9 |
-| STARTED Create an indexer for resolution data                               |         |       | 1:15 |   7.8 |
-| STARTED Consider adding support for inheritance via meta-data               |         |       | 1:22 |   8.5 |
+| Stories                                                                     | 16:55   |       |      | 100.0 |
+| Active                                                                      |         | 16:55 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:19 |   1.9 |
+| COMPLETED Move readme to markdown                                           |         |       | 0:49 |   4.8 |
+| COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   2.9 |
+| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |  14.0 |
+| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  25.5 |
+| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  30.2 |
+| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   9.7 |
+| STARTED Create a name parser                                                |         |       | 0:30 |   3.0 |
+| STARTED Consider adding support for inheritance via meta-data               |         |       | 1:22 |   8.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -159,7 +160,9 @@ Notes:
   stabilise order. However, at present we are sorting the lists. This
   needs to be looked at.
 
-*** STARTED Create an indexer for resolution data                     :story:
+*** COMPLETED Create an indexer for resolution data                   :story:
+    CLOSED: [2016-09-04 Sun 22:55]
+    CLOCK: [2016-09-04 Sun 22:32]--[2016-09-04 Sun 22:55] =>  0:23
     CLOCK: [2016-09-04 Sun 22:24]--[2016-09-04 Sun 22:31] =>  0:07
     CLOCK: [2016-09-04 Sun 21:45]--[2016-09-04 Sun 21:55] =>  0:10
     CLOCK: [2016-09-04 Sun 21:25]--[2016-09-04 Sun 21:44] =>  0:19
@@ -173,6 +176,36 @@ done by an indexer. We could make this the first step post-merge. We
 should probably only cache indices that are reused across expanders.
 
 indices
+
+*** STARTED Create a name parser                                      :story:
+    CLOCK: [2016-09-04 Sun 22:56]--[2016-09-04 Sun 23:26] =>  0:30
+
+We need the ability to take in a scope delimited string and convert it
+into a name. We could use the name tree parser for this but its
+overkill. We need to split out the name building functionality from
+the name tree builder as we need to reuse it. We probably should add
+an API to name builder that takes in a list of strings and performs
+the heuristics done in name tree builder.
+
+Tasks:
+
+- move top-level model names to indices, and make use of new index.
+- move code in finish_current_node to name builder and make use of
+  name builder in name tree builder. Function takes in an intermediate
+  model and a list of strings.
+
+Actually this approach won't work. The problem is this: A defines type
+a, b in B inherits from a, c in C inherits from b; target is C. In
+this case, we will not resolve type =a= correctly in cases where we
+rely on top-level module names. This is because we have already merged
+the model. For this to work we would have to use the name builder
+prior to merging. This could be done maybe by renaming
+=local_attributes_expander= to =parsing_expander= (?) or something
+equally generic, and ensuring meta-data expansion takes place
+beforehand. This approach would mean we would have the same level of
+support for parent names as we have for attributes, which is
+encouraging since attributes support cross-model references without a
+problem.
 
 *** STARTED Consider adding support for inheritance via meta-data     :story:
     CLOCK: [2016-09-03 Sat 23:54]--[2016-09-03 Sat 23:59] =>  0:05
