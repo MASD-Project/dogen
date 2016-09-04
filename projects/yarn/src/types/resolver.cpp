@@ -353,7 +353,8 @@ resolve_objects(const indexed_ids& idx, intermediate_model& m) const {
 void resolver::resolve_enumerations(intermediate_model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Enumerations: " << m.enumerations().size();
 
-    /* if no enumerations exist, we can just exit. This means we can
+    /*
+     * If no enumerations exist, we can just exit. This means we can
      * still support models that have no dependencies, provided they
      * do not use enumerations.
      */
