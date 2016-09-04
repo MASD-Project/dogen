@@ -44,7 +44,8 @@ intermediate_model::intermediate_model(
     const std::unordered_map<std::string, dogen::yarn::exception>& exceptions,
     const std::unordered_map<std::string, dogen::yarn::visitor>& visitors,
     const bool is_target,
-    const bool has_generatable_types)
+    const bool has_generatable_types,
+    const dogen::yarn::indices& indices)
     : name_(name),
       origin_type_(origin_type),
       original_model_name_(original_model_name),
@@ -59,7 +60,8 @@ intermediate_model::intermediate_model(
       exceptions_(exceptions),
       visitors_(visitors),
       is_target_(is_target),
-      has_generatable_types_(has_generatable_types) { }
+      has_generatable_types_(has_generatable_types),
+      indices_(indices) { }
 
 void intermediate_model::swap(intermediate_model& other) noexcept {
     using std::swap;
@@ -78,6 +80,7 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
     swap(visitors_, other.visitors_);
     swap(is_target_, other.is_target_);
     swap(has_generatable_types_, other.has_generatable_types_);
+    swap(indices_, other.indices_);
 }
 
 bool intermediate_model::operator==(const intermediate_model& rhs) const {
@@ -95,7 +98,8 @@ bool intermediate_model::operator==(const intermediate_model& rhs) const {
         exceptions_ == rhs.exceptions_ &&
         visitors_ == rhs.visitors_ &&
         is_target_ == rhs.is_target_ &&
-        has_generatable_types_ == rhs.has_generatable_types_;
+        has_generatable_types_ == rhs.has_generatable_types_ &&
+        indices_ == rhs.indices_;
 }
 
 intermediate_model& intermediate_model::operator=(intermediate_model other) {
@@ -310,6 +314,22 @@ bool intermediate_model::has_generatable_types() const {
 
 void intermediate_model::has_generatable_types(const bool v) {
     has_generatable_types_ = v;
+}
+
+const dogen::yarn::indices& intermediate_model::indices() const {
+    return indices_;
+}
+
+dogen::yarn::indices& intermediate_model::indices() {
+    return indices_;
+}
+
+void intermediate_model::indices(const dogen::yarn::indices& v) {
+    indices_ = v;
+}
+
+void intermediate_model::indices(const dogen::yarn::indices&& v) {
+    indices_ = std::move(v);
 }
 
 } }

@@ -23,6 +23,7 @@
 #include "dogen/yarn/test_data/module_td.hpp"
 #include "dogen/yarn/test_data/object_td.hpp"
 #include "dogen/yarn/test_data/concept_td.hpp"
+#include "dogen/yarn/test_data/indices_td.hpp"
 #include "dogen/yarn/test_data/visitor_td.hpp"
 #include "dogen/yarn/test_data/exception_td.hpp"
 #include "dogen/yarn/test_data/primitive_td.hpp"
@@ -165,6 +166,11 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
+dogen::yarn::indices
+create_dogen_yarn_indices(const unsigned int position) {
+    return dogen::yarn::indices_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -189,6 +195,7 @@ populate(const unsigned int position, result_type& v) {
     v.visitors(create_std_unordered_map_std_string_dogen_yarn_visitor(position + 12));
     v.is_target(create_bool(position + 13));
     v.has_generatable_types(create_bool(position + 14));
+    v.indices(create_dogen_yarn_indices(position + 15));
 }
 
 intermediate_model_generator::result_type

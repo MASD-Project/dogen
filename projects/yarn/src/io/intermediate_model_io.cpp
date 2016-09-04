@@ -25,6 +25,7 @@
 #include "dogen/yarn/io/module_io.hpp"
 #include "dogen/yarn/io/object_io.hpp"
 #include "dogen/yarn/io/concept_io.hpp"
+#include "dogen/yarn/io/indices_io.hpp"
 #include "dogen/yarn/io/visitor_io.hpp"
 #include "dogen/yarn/io/exception_io.hpp"
 #include "dogen/yarn/io/primitive_io.hpp"
@@ -224,7 +225,8 @@ std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
       << "\"exceptions\": " << v.exceptions() << ", "
       << "\"visitors\": " << v.visitors() << ", "
       << "\"is_target\": " << v.is_target() << ", "
-      << "\"has_generatable_types\": " << v.has_generatable_types()
+      << "\"has_generatable_types\": " << v.has_generatable_types() << ", "
+      << "\"indices\": " << v.indices()
       << " }";
     return(s);
 }

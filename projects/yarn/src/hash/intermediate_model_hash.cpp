@@ -22,6 +22,7 @@
 #include "dogen/yarn/hash/module_hash.hpp"
 #include "dogen/yarn/hash/object_hash.hpp"
 #include "dogen/yarn/hash/concept_hash.hpp"
+#include "dogen/yarn/hash/indices_hash.hpp"
 #include "dogen/yarn/hash/visitor_hash.hpp"
 #include "dogen/yarn/hash/exception_hash.hpp"
 #include "dogen/yarn/hash/primitive_hash.hpp"
@@ -141,6 +142,7 @@ std::size_t intermediate_model_hasher::hash(const intermediate_model& v) {
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_visitor(v.visitors()));
     combine(seed, v.is_target());
     combine(seed, v.has_generatable_types());
+    combine(seed, v.indices());
 
     return seed;
 }

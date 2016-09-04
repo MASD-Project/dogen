@@ -33,6 +33,7 @@
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/concept.hpp"
+#include "dogen/yarn/types/indices.hpp"
 #include "dogen/yarn/types/visitor.hpp"
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/types/exception.hpp"
@@ -73,7 +74,8 @@ public:
         const std::unordered_map<std::string, dogen::yarn::exception>& exceptions,
         const std::unordered_map<std::string, dogen::yarn::visitor>& visitors,
         const bool is_target,
-        const bool has_generatable_types);
+        const bool has_generatable_types,
+        const dogen::yarn::indices& indices);
 
 private:
     template<typename Archive>
@@ -227,6 +229,11 @@ public:
     void has_generatable_types(const bool v);
     /**@}*/
 
+    const dogen::yarn::indices& indices() const;
+    dogen::yarn::indices& indices();
+    void indices(const dogen::yarn::indices& v);
+    void indices(const dogen::yarn::indices&& v);
+
 public:
     bool operator==(const intermediate_model& rhs) const;
     bool operator!=(const intermediate_model& rhs) const {
@@ -253,6 +260,7 @@ private:
     std::unordered_map<std::string, dogen::yarn::visitor> visitors_;
     bool is_target_;
     bool has_generatable_types_;
+    dogen::yarn::indices indices_;
 };
 
 } }
