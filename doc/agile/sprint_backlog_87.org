@@ -12,28 +12,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-05 Mon 21:59]
+#+CAPTION: Clock summary at [2016-09-05 Mon 22:40]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *19:43* |       |      | 100.0 |
+| *Total time*                                                                | *20:23* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 19:43   |       |      | 100.0 |
-| Active                                                                      |         | 19:43 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:19 |   1.6 |
-| COMPLETED Move readme to markdown                                           |         |       | 0:49 |   4.1 |
-| COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   2.5 |
-| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |  12.0 |
-| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  21.9 |
-| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  26.0 |
-| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   8.3 |
-| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   9.9 |
-| STARTED Create a name parser                                                |         |       | 1:21 |   6.8 |
-| STARTED Consider adding support for inheritance via meta-data               |         |       | 1:22 |   6.9 |
+| Stories                                                                     | 20:23   |       |      | 100.0 |
+| Active                                                                      |         | 20:23 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:52 |   4.3 |
+| COMPLETED Move readme to markdown                                           |         |       | 0:49 |   4.0 |
+| COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   2.4 |
+| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |  11.6 |
+| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  21.2 |
+| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  25.1 |
+| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   8.0 |
+| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   9.6 |
+| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   7.2 |
+| STARTED Consider adding support for inheritance via meta-data               |         |       | 1:22 |   6.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-09-05 Mon 22:00]--[2016-09-05 Mon 22:33] =>  0:33
     CLOCK: [2016-09-01 Thu 18:01]--[2016-09-01 Thu 18:20] =>  0:19
 
 Updates to sprint and product backlog.
@@ -188,7 +189,9 @@ indices
 - objectives: get windows at the same level as linux, all tests
   passing, documentation, easy build experience.
 
-*** STARTED Create a name parser                                      :story:
+*** COMPLETED Extend name builder with required functionality         :story:
+    CLOSED: [2016-09-05 Mon 22:40]
+    CLOCK: [2016-09-05 Mon 22:33]--[2016-09-05 Mon 22:40] =>  0:07
     CLOCK: [2016-09-05 Mon 21:47]--[2016-09-05 Mon 21:59] =>  0:12
     CLOCK: [2016-09-05 Mon 21:35]--[2016-09-05 Mon 21:46] =>  0:11
     CLOCK: [2016-09-05 Mon 21:06]--[2016-09-05 Mon 21:34] =>  0:28
@@ -232,7 +235,10 @@ Tasks:
   level modules and a list of strings and returns a name.
 - create a =name_parser= that splits a string based on a separator and
   then calls name builder. For now hard-code the splitter to the scope
-  operator =::=.
+  operator =::=. Actually, since we are already doing some basic
+  splitting for the model name method (in =name_builder=) we should
+  hijack the class some more and support a splitting build method
+  directly. One less class to add.
 
 *** STARTED Consider adding support for inheritance via meta-data     :story:
     CLOCK: [2016-09-03 Sat 23:54]--[2016-09-03 Sat 23:59] =>  0:05

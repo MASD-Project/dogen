@@ -37,6 +37,7 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.name_builder"));
 
 const std::string dot(".");
+const std::string scope("::");
 const std::string empty_type_name("Type name is empty.");
 const std::string empty_model_name("Model name is empty.");
 const std::string empty_internal_modules("Internal modules are empty.");
@@ -229,6 +230,15 @@ name name_builder::build(const yarn::location& model_location,
         names.clear(); // consume internal modules
     }
     return b.build();
+}
+
+name name_builder::build(const yarn::location& model_location,
+    const std::unordered_set<std::string>& top_level_modules,
+    const std::string& names) {
+
+    using utility::string::splitter;
+    const auto names_as_list(splitter::split_scoped(names, scope));
+    return build(model_location, top_level_modules, names_as_list);
 }
 
 } }
