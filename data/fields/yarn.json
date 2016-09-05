@@ -48,18 +48,17 @@
         },
         "value_type" : "boolean",
         "definition_type" : "instance",
-        "scope" : "entity",
-        "default_value" : false
+        "scope" : "entity"
     },
     {
         "name" : {
-            "simple" : "parents",
-            "qualified" : "yarn.generalization.parents"
+            "simple" : "parent",
+            "qualified" : "yarn.generalization.parent"
         },
         "ownership_hierarchy" : {
             "model_name" : "yarn"
         },
-        "value_type" : "text_collection",
+        "value_type" : "text",
         "definition_type" : "instance",
         "scope" : "entity"
     }
