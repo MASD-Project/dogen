@@ -4143,7 +4143,7 @@ the whole of serialisation optional or
 =cpp.boost_serialization.main_header= to make the header optional. Not
 sure if the latter has any use.
 
-*** Add a configuration class to yarn mock factory                     :story:
+*** Add a configuration class to yarn mock factory                    :story:
 
 Every time we need to extend the mock factory we are finding we need
 to modify every single function. This is particularly painful due to
@@ -4156,6 +4156,18 @@ required and pass that configuration to each function.
 We did add the flags to the constructor, but it would be better if we
 could pass in the configuration for each method invocation rather than
 for the entire factory.
+
+*** Add support for cross-model concept refinement                    :story:
+
+We've implemented support for cross-model inheritance in sprint 87 but
+we did not cover concepts. Most of the approach is the same, but
+unfortunately we can't just reuse it.
+
+Tasks:
+
+- we need a refines field which is a text collection.
+- we need refinement settings, factory etc.
+- update parsing expander.
 
 *** Concepts cannot be placed inside of packages                      :story:
 
