@@ -4423,6 +4423,19 @@ become very readable.
 These stories are good candidates for the subsequent release. This
 release will be all about adding new features.
 
+*** Concepts, immutability and fluency                                :story:
+
+At present we allow the object to determine if any attributes obtained
+from modeling a concept are immutable and/or fluent. This seemed
+logical at the time, but its actually not a good idea: this means that
+two objects modeling a concept may not actually implement the same
+interface, thus meaning that they are not really modeling the
+concept.
+
+Instead if this cleverness, users should be allowed to mark the
+concept itself as immutable/fluent and we should simply throw if there
+is an incompatibility between concept and object.
+
 *** Improve handling of defaulting for enumeration types              :story:
 
 At present we check for a primitive market as the default type for
