@@ -47,8 +47,8 @@ private:
     /**
      * @brief Parses all attributes in the supplied element.
      */
-    void parse_attributes(const name_tree_parser& ntp, const bool is_fluent,
-        const bool is_immutable, std::list<attribute>& attrs) const;
+    void parse_attributes(const name_tree_parser& ntp,
+        std::list<attribute>& attrs) const;
 
     /**
      * @brief Parses all attributes in the supplied model.

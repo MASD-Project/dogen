@@ -32,14 +32,11 @@ auto lg(logger_factory("yarn.parsing_expander"));
 namespace dogen {
 namespace yarn {
 
-void parsing_expander::
-parse_attributes(const name_tree_parser& ntp, const bool is_fluent,
-    const bool is_immutable, std::list<attribute>& attrs) const {
+void parsing_expander::parse_attributes(const name_tree_parser& ntp,
+    std::list<attribute>& attrs) const {
     for (auto& attr : attrs) {
         auto nt(ntp.parse(attr.unparsed_type()));
         attr.parsed_type(nt);
-        attr.is_fluent(is_fluent);
-        attr.is_immutable(is_immutable);
     }
 }
 
@@ -81,16 +78,12 @@ void parsing_expander::expand(intermediate_model& m) const {
 
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
-        const bool fl(o.is_fluent());
-        const bool im(o.is_immutable());
-        parse_attributes(ntp, fl, im, o.local_attributes());
+        parse_attributes(ntp, o.local_attributes());
     }
 
     for (auto& pair : m.concepts()) {
         auto& c(pair.second);
-        const bool fl(false);
-        const bool im(false);
-        parse_attributes(ntp, fl, im, c.local_attributes());
+        parse_attributes(ntp, c.local_attributes());
     }
 }
 

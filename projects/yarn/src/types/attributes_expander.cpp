@@ -78,10 +78,20 @@ void attributes_expander::expand_object(object& o, intermediate_model& im,
     }
 
     /*
-     * We first grab all of the concept attributes in one go, and them
-     * add them to the local attributes at the beginning. The idea is
-     * to keep changes from rippling through, but there is no evidence
-     * that this order is more effective than other alternatives.
+     * Setup fluency and immutability on all local attributes.
+     */
+    if (o.is_fluent() || o.is_immutable()) {
+        for (auto& attr : o.local_attributes()) {
+            attr.is_fluent(o.is_fluent());
+            attr.is_immutable(o.is_immutable());
+        }
+    }
+
+    /*
+     * Grab all of the concept attributes in one go, and them add them
+     * to the local attributes at the beginning. The idea is to keep
+     * changes from rippling through, but there is no evidence that
+     * this order is more effective than other alternatives.
      */
     std::list<attribute> concept_attributes;
     for (const auto& n : o.modeled_concepts()) {
@@ -92,10 +102,10 @@ void attributes_expander::expand_object(object& o, intermediate_model& im,
 
     /*
      * If we are a fluent or an immutable object, we need to mark all
-     * properties we've inherited via concepts. All of the properties
-     * we own directly have already been marked during attribute
-     * expansion, but we couldn't do the same to concept owned
-     * properties until they were indexed.
+     * properties we've inherited via concepts - these have values
+     * that are specific to the object modeling the concept. This is
+     * actually a bit of a problem because this means we are modeling
+     * different concepts.
      */
     if (o.is_fluent() || o.is_immutable()) {
         for(auto& attr : concept_attributes) {
