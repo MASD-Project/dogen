@@ -146,6 +146,10 @@ elseif(MSVC)
         string(REPLACE "/Gm" "" CMAKE_CXX_FLAGS_RELEASE
             ${CMAKE_CXX_FLAGS_RELEASE})
         set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
+
+        # workaround for C1128: number of sections exceeded object
+        # file format limit.
+        set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj")
     endif()
 endif()
 
