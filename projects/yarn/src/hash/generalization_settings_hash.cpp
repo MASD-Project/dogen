@@ -28,6 +28,26 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_boost_optional_bool(const boost::optional<bool>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
+inline std::size_t hash_boost_optional_std_string(const boost::optional<std::string>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -36,8 +56,8 @@ namespace yarn {
 std::size_t generalization_settings_hasher::hash(const generalization_settings& v) {
     std::size_t seed(0);
 
-    combine(seed, v.is_final());
-    combine(seed, v.parent());
+    combine(seed, hash_boost_optional_bool(v.is_final()));
+    combine(seed, hash_boost_optional_std_string(v.parent()));
 
     return seed;
 }

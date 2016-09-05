@@ -20275,13 +20275,13 @@ that belong to the yarn model.#</dia:string>
         <dia:point val="-170,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-170.05,37.95;-158.88,41.65"/>
+        <dia:rectangle val="-170.05,37.95;-155.205,41.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-170,38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.07"/>
+        <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -20379,7 +20379,7 @@ that belong to the yarn model.#</dia:string>
             <dia:string>#is_final#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
+            <dia:string>#boost::optional&lt;bool&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -20402,7 +20402,7 @@ that belong to the yarn model.#</dia:string>
             <dia:string>#parent#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#boost::optional&lt;std::string&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -20675,7 +20675,7 @@ that belong to the yarn model.#</dia:string>
         <dia:point val="-134.43,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-164.515,33.25;-133.68,38.8"/>
+        <dia:rectangle val="-162.678,33.25;-133.68,38.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20683,8 +20683,8 @@ that belong to the yarn model.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-134.43,38"/>
         <dia:point val="-134.43,34"/>
-        <dia:point val="-164.465,34"/>
-        <dia:point val="-164.465,38"/>
+        <dia:point val="-162.627,34"/>
+        <dia:point val="-162.627,38"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

@@ -27,6 +27,7 @@
 
 #include <string>
 #include <algorithm>
+#include <boost/optional.hpp>
 #include "dogen/yarn/serialization/generalization_settings_fwd_ser.hpp"
 
 namespace dogen {
@@ -34,17 +35,17 @@ namespace yarn {
 
 class generalization_settings final {
 public:
+    generalization_settings() = default;
     generalization_settings(const generalization_settings&) = default;
-    generalization_settings(generalization_settings&&) = default;
     ~generalization_settings() = default;
 
 public:
-    generalization_settings();
+    generalization_settings(generalization_settings&& rhs);
 
 public:
     generalization_settings(
-        const bool is_final,
-        const std::string& parent);
+        const boost::optional<bool>& is_final,
+        const boost::optional<std::string>& parent);
 
 private:
     template<typename Archive>
@@ -54,13 +55,15 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::yarn::generalization_settings& v, unsigned int version);
 
 public:
-    bool is_final() const;
-    void is_final(const bool v);
+    const boost::optional<bool>& is_final() const;
+    boost::optional<bool>& is_final();
+    void is_final(const boost::optional<bool>& v);
+    void is_final(const boost::optional<bool>&& v);
 
-    const std::string& parent() const;
-    std::string& parent();
-    void parent(const std::string& v);
-    void parent(const std::string&& v);
+    const boost::optional<std::string>& parent() const;
+    boost::optional<std::string>& parent();
+    void parent(const boost::optional<std::string>& v);
+    void parent(const boost::optional<std::string>&& v);
 
 public:
     bool operator==(const generalization_settings& rhs) const;
@@ -73,8 +76,8 @@ public:
     generalization_settings& operator=(generalization_settings other);
 
 private:
-    bool is_final_;
-    std::string parent_;
+    boost::optional<bool> is_final_;
+    boost::optional<std::string> parent_;
 };
 
 } }

@@ -23,11 +23,41 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/generalization_settings_io.hpp"
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<bool>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
     boost::replace_all(s, "\n", "<new_line>");
     boost::replace_all(s, "\"", "<quote>");
     return s;
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<std::string>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << "\"" << tidy_up_string(*v) << "\"";
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
 }
 
 namespace dogen {
@@ -43,7 +73,7 @@ std::ostream& operator<<(std::ostream& s, const generalization_settings& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::generalization_settings\"" << ", "
       << "\"is_final\": " << v.is_final() << ", "
-      << "\"parent\": " << "\"" << tidy_up_string(v.parent()) << "\""
+      << "\"parent\": " << v.parent()
       << " }";
     return(s);
 }

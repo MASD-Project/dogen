@@ -23,12 +23,13 @@
 namespace dogen {
 namespace yarn {
 
-generalization_settings::generalization_settings()
-    : is_final_(static_cast<bool>(0)) { }
+generalization_settings::generalization_settings(generalization_settings&& rhs)
+    : is_final_(std::move(rhs.is_final_)),
+      parent_(std::move(rhs.parent_)) { }
 
 generalization_settings::generalization_settings(
-    const bool is_final,
-    const std::string& parent)
+    const boost::optional<bool>& is_final,
+    const boost::optional<std::string>& parent)
     : is_final_(is_final),
       parent_(parent) { }
 
@@ -49,27 +50,35 @@ generalization_settings& generalization_settings::operator=(generalization_setti
     return *this;
 }
 
-bool generalization_settings::is_final() const {
+const boost::optional<bool>& generalization_settings::is_final() const {
     return is_final_;
 }
 
-void generalization_settings::is_final(const bool v) {
+boost::optional<bool>& generalization_settings::is_final() {
+    return is_final_;
+}
+
+void generalization_settings::is_final(const boost::optional<bool>& v) {
     is_final_ = v;
 }
 
-const std::string& generalization_settings::parent() const {
+void generalization_settings::is_final(const boost::optional<bool>&& v) {
+    is_final_ = std::move(v);
+}
+
+const boost::optional<std::string>& generalization_settings::parent() const {
     return parent_;
 }
 
-std::string& generalization_settings::parent() {
+boost::optional<std::string>& generalization_settings::parent() {
     return parent_;
 }
 
-void generalization_settings::parent(const std::string& v) {
+void generalization_settings::parent(const boost::optional<std::string>& v) {
     parent_ = v;
 }
 
-void generalization_settings::parent(const std::string&& v) {
+void generalization_settings::parent(const boost::optional<std::string>&& v) {
     parent_ = std::move(v);
 }
 
