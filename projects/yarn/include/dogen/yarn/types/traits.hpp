@@ -30,11 +30,17 @@
 namespace dogen {
 namespace yarn {
 
-class traits {
-public:
-    static std::string variable_number_of_parameters();
-    static std::string type_parameters_count();
-    static std::string type_parameters_always_in_heap();
+struct traits {
+    struct type_parameters {
+        static std::string variable_number_of_parameters();
+        static std::string type_parameters_count();
+        static std::string type_parameters_always_in_heap();
+    };
+
+    struct generalization {
+        static std::string is_final();
+        static std::string parent();
+    };
 };
 
 } }

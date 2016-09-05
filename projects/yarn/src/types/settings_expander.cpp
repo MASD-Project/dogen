@@ -19,23 +19,36 @@
  *
  */
 #include "dogen/yarn/types/type_parameters_settings_factory.hpp"
+#include "dogen/yarn/types/generalization_settings_factory.hpp"
+#include "dogen/yarn/types/generalization_settings.hpp"
+#include "dogen/yarn/types/type_parameters_settings.hpp"
 #include "dogen/yarn/types/settings_expander.hpp"
 
 namespace dogen {
 namespace yarn {
 
 settings_expander::settings_expander(const dynamic::repository& drp)
-    : factory_(drp) { }
+    : dynamic_repository_(drp) { }
 
 
-void settings_expander::update_settings(object& o) const {
-    const auto settings(factory_.make(o.extensions()));
-    o.type_parameters_settings(settings);
+void settings_expander::expand_type_settings(object& o) const {
+    type_parameters_settings_factory f(dynamic_repository_);
+    const auto s(f.make(o.extensions()));
+    o.type_parameters_settings(s);
+}
+
+void settings_expander::expand_generalization_settings(object& o) const {
+    generalization_settings_factory f(dynamic_repository_);
+    const auto s(f.make(o.extensions()));
+    o.generalization_settings(s);
 }
 
 void settings_expander::expand(intermediate_model& m) const {
-    for (auto& pair : m.objects())
-        update_settings(pair.second);
+    for (auto& pair : m.objects()) {
+        auto& o(pair.second);
+        expand_type_settings(o);
+        expand_generalization_settings(o);
+    }
 }
 
 } }

@@ -23,18 +23,28 @@
 namespace dogen {
 namespace yarn {
 
-std::string traits::variable_number_of_parameters() {
+std::string traits::type_parameters::variable_number_of_parameters() {
     static std::string r("yarn.type_parameters.variable_number_of_parameters");
     return r;
 }
 
-std::string traits::type_parameters_count() {
+std::string traits::type_parameters::type_parameters_count() {
     static std::string r("yarn.type_parameters.count");
     return r;
 }
 
-std::string traits::type_parameters_always_in_heap() {
+std::string traits::type_parameters::type_parameters_always_in_heap() {
     static std::string r("yarn.type_parameters.always_in_heap");
+    return r;
+}
+
+std::string traits::generalization::is_final() {
+    static std::string r("yarn.generalization.is_final");
+    return r;
+}
+
+std::string traits::generalization::parent() {
+    static std::string r("yarn.generalization.parent");
     return r;
 }
 

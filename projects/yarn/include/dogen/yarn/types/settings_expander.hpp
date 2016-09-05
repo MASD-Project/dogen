@@ -27,8 +27,6 @@
 
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/yarn/types/type_parameters_settings_factory.hpp"
-#include "dogen/yarn/types/type_parameters_settings.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
@@ -39,13 +37,14 @@ public:
     explicit settings_expander(const dynamic::repository& drp);
 
 private:
-    void update_settings(object& o) const;
+    void expand_type_settings(object& o) const;
+    void expand_generalization_settings(object& o) const;
 
 public:
     void expand(intermediate_model& m) const;
 
 private:
-    const type_parameters_settings_factory factory_;
+    const dynamic::repository& dynamic_repository_;
 };
 
 } }

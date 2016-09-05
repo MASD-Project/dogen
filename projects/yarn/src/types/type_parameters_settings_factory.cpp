@@ -36,13 +36,13 @@ type_parameters_settings_factory::make_field_definitions(
 
     field_definitions r;
     const dynamic::repository_selector s(rp);
-    const auto& vnp(traits::variable_number_of_parameters());
+    const auto& vnp(traits::type_parameters::variable_number_of_parameters());
     r.variable_number_of_parameters = s.select_field_by_name(vnp);
 
-    const auto& tpc(traits::type_parameters_count());
+    const auto& tpc(traits::type_parameters::type_parameters_count());
     r.type_parameters_count = s.select_field_by_name(tpc);
 
-    const auto& aih(traits::type_parameters_always_in_heap());
+    const auto& aih(traits::type_parameters::type_parameters_always_in_heap());
     r.type_parameters_always_in_heap = s.select_field_by_name(aih);
 
     return r;
