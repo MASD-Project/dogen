@@ -20,20 +20,20 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
-#include "dogen/yarn/types/local_attributes_expander.hpp"
+#include "dogen/yarn/types/parsing_expander.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.local_attributes_expander"));
+auto lg(logger_factory("yarn.parsing_expander"));
 
 }
 
 namespace dogen {
 namespace yarn {
 
-void local_attributes_expander::
-update_attributes(const name_tree_parser& ntp, const bool is_fluent,
+void parsing_expander::
+parse_attributes(const name_tree_parser& ntp, const bool is_fluent,
     const bool is_immutable, std::list<attribute>& attrs) const {
     for (auto& attr : attrs) {
         auto nt(ntp.parse(attr.unparsed_type()));
@@ -43,7 +43,7 @@ update_attributes(const name_tree_parser& ntp, const bool is_fluent,
     }
 }
 
-std::unordered_set<std::string> local_attributes_expander::
+std::unordered_set<std::string> parsing_expander::
 obtain_top_level_module_names(const intermediate_model& m) const {
     std::unordered_set<std::string> r;
     BOOST_LOG_SEV(lg, debug) << "Obtaining top-level modules for: "
@@ -75,7 +75,7 @@ obtain_top_level_module_names(const intermediate_model& m) const {
     return r;
 }
 
-void local_attributes_expander::expand(intermediate_model& m) const {
+void parsing_expander::expand(intermediate_model& m) const {
     const auto tlmn(obtain_top_level_module_names(m));
     const name_tree_parser ntp(tlmn, m.name().location());
 
@@ -83,14 +83,14 @@ void local_attributes_expander::expand(intermediate_model& m) const {
         auto& o(pair.second);
         const bool fl(o.is_fluent());
         const bool im(o.is_immutable());
-        update_attributes(ntp, fl, im, o.local_attributes());
+        parse_attributes(ntp, fl, im, o.local_attributes());
     }
 
     for (auto& pair : m.concepts()) {
         auto& c(pair.second);
         const bool fl(false);
         const bool im(false);
-        update_attributes(ntp, fl, im, c.local_attributes());
+        parse_attributes(ntp, fl, im, c.local_attributes());
     }
 }
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_LOCAL_ATTRIBUTES_EXPANDER_HPP
-#define DOGEN_YARN_TYPES_LOCAL_ATTRIBUTES_EXPANDER_HPP
+#ifndef DOGEN_YARN_TYPES_PARSING_EXPANDER_HPP
+#define DOGEN_YARN_TYPES_PARSING_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,16 +34,26 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Performs the expansion of all local attributes in the
- * supplied model.
+ * @brief Expands all encoded representations that require parsing
+ * into their parsed form.
+ *
+ * As an example, all local attributes have unparsed types - strings
+ * following a well defined notation - that need to be parsed into
+ * name trees. All such forms of encoding are processed by this
+ * expander.
  */
-class local_attributes_expander {
+class parsing_expander {
 private:
     /**
-     * @brief Update all attributes in the supplied element.
+     * @brief Parses all attributes in the supplied element.
      */
-    void update_attributes(const name_tree_parser& ntp, const bool is_fluent,
+    void parse_attributes(const name_tree_parser& ntp, const bool is_fluent,
         const bool is_immutable, std::list<attribute>& attrs) const;
+
+    /**
+     * @brief Parses all attributes in the supplied model.
+     */
+    void parse_all_attributes(intermediate_model& m) const;
 
 private:
     /**
