@@ -27,13 +27,13 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
-#include "dogen/yarn/types/all_attributes_expander.hpp"
+#include "dogen/yarn/types/attributes_expander.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("yarn.all_attributes_expander"));
+auto lg(logger_factory("yarn.attributes_expander"));
 
 const std::string relationship_not_found(
     "Could not find relationship in object. Details: ");
@@ -45,7 +45,7 @@ const std::string concept_not_found("Concept not found in concept container: ");
 namespace dogen {
 namespace yarn {
 
-object& all_attributes_expander::
+object& attributes_expander::
 find_object(const name& n, intermediate_model& im) {
     const auto id(n.id());
     auto i(im.objects().find(id));
@@ -56,7 +56,7 @@ find_object(const name& n, intermediate_model& im) {
     return i->second;
 }
 
-concept& all_attributes_expander::
+concept& attributes_expander::
 find_concept(const name& n, intermediate_model& im) {
     const auto& id(n.id());
     auto i(im.concepts().find(id));
@@ -67,7 +67,7 @@ find_concept(const name& n, intermediate_model& im) {
     return i->second;
 }
 
-void all_attributes_expander::expand_object(object& o, intermediate_model& im,
+void attributes_expander::expand_object(object& o, intermediate_model& im,
     std::unordered_set<std::string>& processed_ids) {
     const auto id(o.name().id());
     BOOST_LOG_SEV(lg, debug) << "Expanding object: " << id;
@@ -138,7 +138,7 @@ void all_attributes_expander::expand_object(object& o, intermediate_model& im,
     processed_ids.insert(id);
 }
 
-void all_attributes_expander::expand_objects(intermediate_model& im) {
+void attributes_expander::expand_objects(intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding objects: " << im.objects().size();
 
     std::unordered_set<std::string> processed_ids;
@@ -152,7 +152,7 @@ void all_attributes_expander::expand_objects(intermediate_model& im) {
     }
 }
 
-void all_attributes_expander::expand_concept(concept& c, intermediate_model& im,
+void attributes_expander::expand_concept(concept& c, intermediate_model& im,
     std::unordered_set<std::string>& processed_ids) {
     const auto id(c.name().id());
     BOOST_LOG_SEV(lg, debug) << "Expanding concept: " << id;
@@ -178,7 +178,7 @@ void all_attributes_expander::expand_concept(concept& c, intermediate_model& im,
     processed_ids.insert(id);
 }
 
-void all_attributes_expander::expand_concepts(intermediate_model& im) {
+void attributes_expander::expand_concepts(intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding concepts: " << im.concepts().size();
 
     std::unordered_set<std::string> processed_ids;
@@ -192,7 +192,7 @@ void all_attributes_expander::expand_concepts(intermediate_model& im) {
     }
 }
 
-void all_attributes_expander::expand(intermediate_model& im) {
+void attributes_expander::expand(intermediate_model& im) {
     expand_concepts(im);
     expand_objects(im);
 }

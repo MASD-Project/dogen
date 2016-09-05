@@ -12,24 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-05 Mon 21:34]
+#+CAPTION: Clock summary at [2016-09-05 Mon 21:46]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *19:20* |       |      | 100.0 |
+| *Total time*                                                                | *19:31* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 19:20   |       |      | 100.0 |
-| Active                                                                      |         | 19:20 |      | 100.0 |
+| Stories                                                                     | 19:31   |       |      | 100.0 |
+| Active                                                                      |         | 19:31 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:19 |   1.6 |
 | COMPLETED Move readme to markdown                                           |         |       | 0:49 |   4.2 |
 | COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   2.5 |
-| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |  12.2 |
-| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  22.3 |
-| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  26.5 |
+| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |  12.1 |
+| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  22.1 |
+| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  26.2 |
 | COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   8.4 |
-| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |  10.1 |
-| STARTED Create a name parser                                                |         |       | 0:58 |   5.0 |
-| STARTED Consider adding support for inheritance via meta-data               |         |       | 1:22 |   7.1 |
+| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |  10.0 |
+| STARTED Create a name parser                                                |         |       | 1:09 |   5.9 |
+| STARTED Consider adding support for inheritance via meta-data               |         |       | 1:22 |   7.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -189,6 +189,7 @@ indices
   passing, documentation, easy build experience.
 
 *** STARTED Create a name parser                                      :story:
+    CLOCK: [2016-09-05 Mon 21:35]--[2016-09-05 Mon 21:46] =>  0:11
     CLOCK: [2016-09-05 Mon 21:06]--[2016-09-05 Mon 21:34] =>  0:28
     CLOCK: [2016-09-04 Sun 22:56]--[2016-09-04 Sun 23:26] =>  0:30
 
@@ -222,9 +223,9 @@ problem.
 Tasks:
 
 - rename =local_attributes_expander= to =parsing_expander=
+- rename =all_attributes_expander= to =attributes_expander=
 - move handling of fluency and immutability to the attributes
   expander.
-- rename =all_attributes_expander= to =attributes_expander=
 - move code in =finish_current_node= to name builder and make use of
   name builder in name tree builder. Function takes in model name, top
   level modules and a list of strings and returns a name.

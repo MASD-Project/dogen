@@ -6159,7 +6159,7 @@ expansion.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#all_attributes_expander#</dia:string>
+        <dia:string>#attributes_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>

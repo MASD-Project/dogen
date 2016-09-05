@@ -30,7 +30,7 @@
 #include "dogen/yarn/io/object_io.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
-#include "dogen/yarn/types/all_attributes_expander.hpp"
+#include "dogen/yarn/types/attributes_expander.hpp"
 
 namespace {
 
@@ -104,7 +104,7 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_attributes_expander) {
     const auto e(factory.make_empty_model());
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << a;
 
-    dogen::yarn::all_attributes_expander ex;
+    dogen::yarn::attributes_expander ex;
     ex.expand(a);
     BOOST_LOG_SEV(lg, debug) << "after expansion: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
@@ -117,7 +117,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_at
     const auto e(factory.make_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << a;
 
-    dogen::yarn::all_attributes_expander ex;
+    dogen::yarn::attributes_expander ex;
     ex.expand(a);
     BOOST_LOG_SEV(lg, debug) << "after expansion: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
@@ -130,7 +130,7 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_results_in_expected_indices)
             attribute_types::unsigned_int));
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
-    dogen::yarn::all_attributes_expander ex;
+    dogen::yarn::attributes_expander ex;
     ex.expand(m);
     BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
 
@@ -146,7 +146,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_results_in_expected_indices) {
 
     auto m(factory.make_single_concept_model());
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
-    dogen::yarn::all_attributes_expander ex;
+    dogen::yarn::attributes_expander ex;
     ex.expand(m);
     BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
 
@@ -175,7 +175,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
     auto m(factory.make_first_degree_concepts_model());
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
-    dogen::yarn::all_attributes_expander ex;
+    dogen::yarn::attributes_expander ex;
     ex.expand(m);
     BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
 
@@ -226,7 +226,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
     auto m(factory.make_second_degree_concepts_model());
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
-    dogen::yarn::all_attributes_expander ex;
+    dogen::yarn::attributes_expander ex;
     ex.expand(m);
     BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
 
@@ -292,7 +292,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
     auto m(factory.make_diamond_inheritance_concepts_model());
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
-    dogen::yarn::all_attributes_expander ex;
+    dogen::yarn::attributes_expander ex;
     ex.expand(m);
     BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
     BOOST_CHECK(m.concepts().size() == 4);
@@ -358,7 +358,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_model_concepts_resul
     BOOST_REQUIRE(a.objects().size() == 2);
     BOOST_REQUIRE(a.concepts().empty());
 
-    dogen::yarn::all_attributes_expander ex;
+    dogen::yarn::attributes_expander ex;
     ex.expand(a);
     BOOST_LOG_SEV(lg, debug) << "after expansion: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
@@ -380,7 +380,7 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
     BOOST_REQUIRE(a.objects().size() == 4);
     BOOST_REQUIRE(a.concepts().empty());
 
-    dogen::yarn::all_attributes_expander ex;
+    dogen::yarn::attributes_expander ex;
     ex.expand(a);
     BOOST_LOG_SEV(lg, debug) << "after expansion: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
@@ -396,7 +396,7 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
     BOOST_REQUIRE(m.objects().size() == 4);
     BOOST_REQUIRE(m.concepts().empty());
 
-    dogen::yarn::all_attributes_expander ex;
+    dogen::yarn::attributes_expander ex;
     ex.expand(m);
     BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
     BOOST_REQUIRE(m.objects().size() == 4);
@@ -442,7 +442,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
     auto m(factory.make_object_with_parent_that_models_concept());
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
-    dogen::yarn::all_attributes_expander ex;
+    dogen::yarn::attributes_expander ex;
     ex.expand(m);
     BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
 
@@ -486,7 +486,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
     auto m(factory.make_object_with_parent_that_models_a_refined_concept());
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
-    dogen::yarn::all_attributes_expander ex;
+    dogen::yarn::attributes_expander ex;
     ex.expand(m);
     BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
 
@@ -540,7 +540,7 @@ BOOST_AUTO_TEST_CASE(model_with_concept_that_refines_missing_concept_throws) {
     auto m(factory.make_concept_that_refines_missing_concept());
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
-    dogen::yarn::all_attributes_expander ex;
+    dogen::yarn::attributes_expander ex;
     contains_checker<expansion_error> c(concept_not_found);
     BOOST_CHECK_EXCEPTION(ex.expand(m), expansion_error, c);
 }
@@ -551,7 +551,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
     auto m(factory.make_object_that_models_missing_concept());
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
-    dogen::yarn::all_attributes_expander ex;
+    dogen::yarn::attributes_expander ex;
     contains_checker<expansion_error> c(concept_not_found);
     BOOST_CHECK_EXCEPTION(ex.expand(m),expansion_error, c);
 }
@@ -562,7 +562,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
     auto m(factory.make_object_that_models_concept_with_missing_parent());
     BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
 
-    dogen::yarn::all_attributes_expander ex;
+    dogen::yarn::attributes_expander ex;
     contains_checker<expansion_error> c(object_not_found);
     BOOST_CHECK_EXCEPTION(ex.expand(m),expansion_error, c);
 }

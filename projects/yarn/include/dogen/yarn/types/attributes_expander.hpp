@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_ALL_ATTRIBUTES_EXPANDER_HPP
-#define DOGEN_YARN_TYPES_ALL_ATTRIBUTES_EXPANDER_HPP
+#ifndef DOGEN_YARN_TYPES_ATTRIBUTES_EXPANDER_HPP
+#define DOGEN_YARN_TYPES_ATTRIBUTES_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,15 +33,15 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Information expander that specialises in indexing attributes
- * across the model.
+ * @brief Information expander that specialises in expanding
+ * attributes across the model.
  *
- * @section yarn_all_attributes_expander_0 Model requirements
+ * @section yarn_attributes_expander_0 Model requirements
  *
- * The expansion of local attributes and of concepts is expected to
- * have taken place.
+ * The basic expansion of local attributes and of concepts is expected
+ * to have taken place.
  *
- * @section yarn_all_attributes_expander_1 Types of attributes
+ * @section yarn_attributes_expander_1 Types of attributes
  *
  * There are three sets of attributes the expander is interested in:
  *
@@ -51,7 +51,7 @@ namespace yarn {
  *
  * Lets cover each of these in more details.
  *
- * @subsection yarn_all_attributes_expander_11 Local attributes
+ * @subsection yarn_attributes_expander_11 Local attributes
  *
  * On a natural, pre-expanded state, local attributes encompass only
  * the attributes defined on the class directly. The expander behaves
@@ -78,7 +78,7 @@ namespace yarn {
  * objects. When concepts get expressed in source code, all we require
  * is the set of all attributes for that concept (see below).
  *
- * @subsection yarn_all_attributes_expander_12 Inherited attributes
+ * @subsection yarn_attributes_expander_12 Inherited attributes
  *
  * These provide an easy way to look-up which attributes one has
  * inherited and from whom. For objects, the inherited attributes are
@@ -89,7 +89,7 @@ namespace yarn {
  * still index them by, arbitrarily, adding all the local attributes
  * of the parent. However, we still haven't found a good use for them.
  *
- * @subsection yarn_all_attributes_expander_13 All attributes
+ * @subsection yarn_attributes_expander_13 All attributes
  *
  * The "all attribute" set contains every single attribute. It is the
  * sum all the local attributes with all of the inherited
@@ -97,7 +97,7 @@ namespace yarn {
  * concepts it is effectively the full interface of the concept.
  *
  */
-class all_attributes_expander {
+class attributes_expander {
 private:
     /**
      * @brief Returns the object with the given name, or throws.

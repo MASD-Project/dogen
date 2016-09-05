@@ -25,7 +25,7 @@
 #include "dogen/yarn/types/injector.hpp"
 #include "dogen/yarn/types/resolver.hpp"
 #include "dogen/yarn/types/concept_expander.hpp"
-#include "dogen/yarn/types/all_attributes_expander.hpp"
+#include "dogen/yarn/types/attributes_expander.hpp"
 #include "dogen/yarn/types/association_expander.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
 #include "dogen/yarn/types/post_merge_workflow.hpp"
@@ -105,7 +105,7 @@ void post_merge_workflow::expand_concepts(intermediate_model& im) const {
 }
 
 void post_merge_workflow::expand_attributes(intermediate_model& im) const {
-    all_attributes_expander ex;
+    attributes_expander ex;
     ex.expand(im);
 }
 
