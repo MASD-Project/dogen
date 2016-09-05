@@ -82,59 +82,9 @@ void name_tree_builder::finish_current_node() {
     if (names_.empty())
         return;
 
-    name_builder b;
-
-    /*
-     * If we have a single name, we are either referencing a type
-     * defined in the global namespace (possibly in a different
-     * model), or a type defined at the top-level in this model. As we
-     * cannot tell the difference, we must fill in just the simple
-     * name and let the resolver handle it properly later on.
-     */
-    const auto front(names_.front());
-    if (names_.size() == 1) {
-        b.simple_name(front);
-        current_->data(b.build());
-        names_.clear();
-        BOOST_LOG_SEV(lg, debug) << "Simple name: " << front;
-        return;
-    }
-
-    /*
-     * Check to see if the first name matches a top-level module in
-     * this model. If it does, we must be referencing a type in a
-     * module in the current model. If it does not, we are referencing
-     * a type on a different model, and this is the foreign model
-     * name.
-     */
-    const auto i(top_level_modules_.find(front));
-    if (i != top_level_modules_.end()) {
-        b.model_name(model_location_);
-        BOOST_LOG_SEV(lg, debug) << "Found module in current model: " << front;
-    } else {
-        BOOST_LOG_SEV(lg, debug) << "Foreign model name: " << front;
-        b.model_name(front);
-        names_.pop_front(); // consume the foreign model name.
-    }
-
-    /*
-     * The back of the list must now be the type's simple name.
-     */
-    const auto back(names_.back());
-    b.simple_name(back);
-    BOOST_LOG_SEV(lg, debug) << "Simple name: " << back;
-    names_.pop_back(); // consume the simple name
-
-    if (!names_.empty()) {
-        /*
-         * Whatever is left, if anything, must be a path to non-top-level
-         * modules defined within the model.
-         */
-        b.internal_modules(names_);
-        BOOST_LOG_SEV(lg, debug) << "Internal modules: " << names_;
-        names_.clear(); // consume internal modules
-    }
-    current_->data(b.build());
+    const auto& ml(model_location_);
+    current_->data(name_builder::build(ml, top_level_modules_, names_));
+    names_.clear();
 }
 
 void name_tree_builder::start_children() {

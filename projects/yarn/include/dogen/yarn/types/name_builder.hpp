@@ -27,6 +27,8 @@
 
 #include <list>
 #include <string>
+#include <unordered_set>
+#include "dogen/yarn/types/location.hpp"
 #include "dogen/yarn/types/name.hpp"
 
 namespace dogen {
@@ -65,6 +67,19 @@ public:
 
 public:
     name build();
+
+public:
+    /**
+     * @brief One shot-builder method that, given a list of names,
+     * performs some heuristics to build a vaguely plausible name.
+     *
+     * @param model_location Location of the model containing the name.
+     * @param top_level_modules Top-level modules of that model.
+     * @param names List of names. By copy non-const by design.
+     */
+    static name build(const yarn::location& model_location,
+        const std::unordered_set<std::string>& top_level_modules,
+        std::list<std::string> names);
 
 private:
     const bool model_name_mode_;
