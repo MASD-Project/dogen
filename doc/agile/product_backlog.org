@@ -4539,15 +4539,6 @@ to determine if the inner class is public or private.
 
 We just need a use case for where inner classes would be useful.
 
-*** Add support for user defined final types                          :story:
-
-At some point we started talking about the possibility of having types
-defined as final by the user, via dynamic extensions. This was to be
-done using =dia.is_final=. We never did implement it properly.
-
-- define attribute in dia to sml
-- use it to update =is_final= in sml
-
 *** Consider adding support for inline hashing                         :epic:
 
 At present we have an entire facet for hashing. However, it is

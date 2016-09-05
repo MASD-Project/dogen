@@ -27,7 +27,6 @@
 
 #include <string>
 #include "dogen/yarn/types/name_tree.hpp"
-#include "dogen/yarn/types/name_tree_parser.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
@@ -45,23 +44,26 @@ namespace yarn {
 class parsing_expander {
 private:
     /**
-     * @brief Parses all attributes in the supplied element.
-     */
-    void parse_attributes(const name_tree_parser& ntp,
-        std::list<attribute>& attrs) const;
-
-    /**
-     * @brief Parses all attributes in the supplied model.
-     */
-    void parse_all_attributes(intermediate_model& m) const;
-
-private:
-    /**
      * @brief Returns all of the top-level modules in the supplied
      * model.
      */
     std::unordered_set<std::string>
-    obtain_top_level_module_names(const intermediate_model& m) const;
+    obtain_top_level_modules(const intermediate_model& m) const;
+
+private:
+    /**
+     * @brief Parses all attributes in the supplied attribute list..
+     */
+    void parse_attributes(const location& model_location,
+        const std::unordered_set<std::string>& top_level_modules,
+        std::list<attribute>& attrs) const;
+
+    /**
+     * @brief Parses parent name in the supplied object.
+     */
+    void parse_parent(const location& model_location,
+        const std::unordered_set<std::string>& top_level_modules,
+        object& o) const;
 
 public:
     /**

@@ -31,6 +31,8 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.generalization_expander"));
 
 const std::string parent_not_found("Could not find parent: ");
+const std::string incompatible_is_final(
+    "Attempt to force is final on a type with children: ");
 
 }
 
@@ -145,8 +147,24 @@ void generalization_expander::populate_generalizable_properties(
          const auto i(parent_ids.find(id));
          o.is_parent(i != parent_ids.end());
 
-         // FIXME: for now until we handle final properly.
-         o.is_final(!o.is_parent());
+         /*
+          * Handle the case where the user decided to override final.
+          */
+         if (o.generalization_settings().is_final()) {
+             const auto is_final(*o.generalization_settings().is_final());
+             if (is_final && o.is_parent()) {
+                 BOOST_LOG_SEV(lg, error) << incompatible_is_final << id;
+                 BOOST_THROW_EXCEPTION(
+                     expansion_error(incompatible_is_final + id));
+             }
+             o.is_final(is_final);
+         } else {
+             /*
+              * By default we setup all childless types and leaf types
+              * as final, unless the user tells us otherwise.
+              */
+             o.is_final(!o.is_parent());
+         }
 
          /*
           * We are in an inheritance (generalisation) relationship if
