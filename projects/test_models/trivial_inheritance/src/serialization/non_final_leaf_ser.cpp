@@ -27,13 +27,11 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/test_models/trivial_inheritance/serialization/base_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/descendant1_ser.hpp"
-#include "dogen/test_models/trivial_inheritance/serialization/descendant3_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/non_final_leaf_ser.hpp"
 
 BOOST_CLASS_TRACKING(
-    dogen::test_models::trivial_inheritance::descendant1,
+    dogen::test_models::trivial_inheritance::non_final_leaf,
     boost::serialization::track_selectively)
 
 namespace boost {
@@ -41,16 +39,20 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::test_models::trivial_inheritance::descendant1& v,
+    const dogen::test_models::trivial_inheritance::non_final_leaf& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("base", base_object<dogen::test_models::trivial_inheritance::base>(v));
+    ar << make_nvp("descendant1", base_object<dogen::test_models::trivial_inheritance::descendant1>(v));
+
+    ar << make_nvp("prop_0", v.prop_0_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::test_models::trivial_inheritance::descendant1& v,
+    dogen::test_models::trivial_inheritance::non_final_leaf& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("base", base_object<dogen::test_models::trivial_inheritance::base>(v));
+    ar >> make_nvp("descendant1", base_object<dogen::test_models::trivial_inheritance::descendant1>(v));
+
+    ar >> make_nvp("prop_0", v.prop_0_);
 }
 
 } }
@@ -58,16 +60,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::test_models::trivial_inheritance::descendant1& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::test_models::trivial_inheritance::descendant1& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::test_models::trivial_inheritance::non_final_leaf& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::test_models::trivial_inheritance::non_final_leaf& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::test_models::trivial_inheritance::descendant1& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::test_models::trivial_inheritance::descendant1& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::test_models::trivial_inheritance::non_final_leaf& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::test_models::trivial_inheritance::non_final_leaf& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::test_models::trivial_inheritance::descendant1& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::test_models::trivial_inheritance::descendant1& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::test_models::trivial_inheritance::non_final_leaf& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::test_models::trivial_inheritance::non_final_leaf& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::test_models::trivial_inheritance::descendant1& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::test_models::trivial_inheritance::descendant1& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::test_models::trivial_inheritance::non_final_leaf& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::test_models::trivial_inheritance::non_final_leaf& v, unsigned int version);
 
 } }

@@ -27,6 +27,7 @@
 
 #include "dogen/test_models/trivial_inheritance/types/descendant2_fwd.hpp"
 #include "dogen/test_models/trivial_inheritance/types/descendant3_fwd.hpp"
+#include "dogen/test_models/trivial_inheritance/types/non_final_leaf_fwd.hpp"
 
 namespace dogen {
 namespace test_models {
@@ -58,6 +59,16 @@ public:
     virtual void visit(const dogen::test_models::trivial_inheritance::descendant3&) { }
     virtual void visit(dogen::test_models::trivial_inheritance::descendant3&) const { }
     virtual void visit(dogen::test_models::trivial_inheritance::descendant3&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::test_models::trivial_inheritance::non_final_leaf
+     */
+    /**@{*/
+    virtual void visit(const dogen::test_models::trivial_inheritance::non_final_leaf&) const { }
+    virtual void visit(const dogen::test_models::trivial_inheritance::non_final_leaf&) { }
+    virtual void visit(dogen::test_models::trivial_inheritance::non_final_leaf&) const { }
+    virtual void visit(dogen::test_models::trivial_inheritance::non_final_leaf&) { }
     /**@}*/
 };
 

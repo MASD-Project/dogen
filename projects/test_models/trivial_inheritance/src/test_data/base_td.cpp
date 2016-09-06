@@ -21,6 +21,7 @@
 #include "dogen/test_models/trivial_inheritance/test_data/base_td.hpp"
 #include "dogen/test_models/trivial_inheritance/test_data/descendant2_td.hpp"
 #include "dogen/test_models/trivial_inheritance/test_data/descendant3_td.hpp"
+#include "dogen/test_models/trivial_inheritance/test_data/non_final_leaf_td.hpp"
 
 namespace dogen {
 namespace test_models {
@@ -32,8 +33,10 @@ populate(const unsigned int /*position*/, result_type& /*v*/) {
 
 base_generator::result_type*
 base_generator::create_ptr(const unsigned int position) {
-    if ((position % 1) == 0)
+    if ((position % 2) == 0)
         return dogen::test_models::trivial_inheritance::descendant3_generator::create_ptr(position);
+    if ((position % 2) == 1)
+        return dogen::test_models::trivial_inheritance::non_final_leaf_generator::create_ptr(position);
     return dogen::test_models::trivial_inheritance::descendant2_generator::create_ptr(position);
 }
 

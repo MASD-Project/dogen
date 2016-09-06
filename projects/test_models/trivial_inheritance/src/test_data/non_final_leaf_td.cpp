@@ -18,25 +18,46 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/trivial_inheritance/test_data/base_td.hpp"
 #include "dogen/test_models/trivial_inheritance/test_data/descendant1_td.hpp"
-#include "dogen/test_models/trivial_inheritance/test_data/descendant3_td.hpp"
 #include "dogen/test_models/trivial_inheritance/test_data/non_final_leaf_td.hpp"
+
+namespace {
+
+int create_int(const unsigned int position) {
+    return position;
+}
+
+}
 
 namespace dogen {
 namespace test_models {
 namespace trivial_inheritance {
 
-void descendant1_generator::
+non_final_leaf_generator::non_final_leaf_generator() : position_(0) { }
+
+void non_final_leaf_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::test_models::trivial_inheritance::base_generator::populate(position, v);
+    dogen::test_models::trivial_inheritance::descendant1_generator::populate(position, v);
+    v.prop_0(create_int(position + 0));
 }
 
-descendant1_generator::result_type*
-descendant1_generator::create_ptr(const unsigned int position) {
-    if ((position % 1) == 0)
-        return dogen::test_models::trivial_inheritance::non_final_leaf_generator::create_ptr(position);
-    return dogen::test_models::trivial_inheritance::descendant3_generator::create_ptr(position);
+non_final_leaf_generator::result_type
+non_final_leaf_generator::create(const unsigned int position) {
+    non_final_leaf r;
+    non_final_leaf_generator::populate(position, r);
+    return r;
+}
+
+non_final_leaf_generator::result_type*
+non_final_leaf_generator::create_ptr(const unsigned int position) {
+    non_final_leaf* p = new non_final_leaf();
+    non_final_leaf_generator::populate(position, *p);
+    return p;
+}
+
+non_final_leaf_generator::result_type
+non_final_leaf_generator::operator()() {
+    return create(position_++);
 }
 
 } } }

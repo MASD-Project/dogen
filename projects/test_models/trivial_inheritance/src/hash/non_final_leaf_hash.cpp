@@ -18,25 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/trivial_inheritance/test_data/base_td.hpp"
-#include "dogen/test_models/trivial_inheritance/test_data/descendant1_td.hpp"
-#include "dogen/test_models/trivial_inheritance/test_data/descendant3_td.hpp"
-#include "dogen/test_models/trivial_inheritance/test_data/non_final_leaf_td.hpp"
+#include "dogen/test_models/trivial_inheritance/hash/descendant1_hash.hpp"
+#include "dogen/test_models/trivial_inheritance/hash/non_final_leaf_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace test_models {
 namespace trivial_inheritance {
 
-void descendant1_generator::
-populate(const unsigned int position, result_type& v) {
-    dogen::test_models::trivial_inheritance::base_generator::populate(position, v);
-}
+std::size_t non_final_leaf_hasher::hash(const non_final_leaf& v) {
+    std::size_t seed(0);
 
-descendant1_generator::result_type*
-descendant1_generator::create_ptr(const unsigned int position) {
-    if ((position % 1) == 0)
-        return dogen::test_models::trivial_inheritance::non_final_leaf_generator::create_ptr(position);
-    return dogen::test_models::trivial_inheritance::descendant3_generator::create_ptr(position);
+    combine(seed, dynamic_cast<const dogen::test_models::trivial_inheritance::descendant1&>(v));
+
+    combine(seed, v.prop_0());
+    return seed;
 }
 
 } } }

@@ -18,25 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/trivial_inheritance/test_data/base_td.hpp"
-#include "dogen/test_models/trivial_inheritance/test_data/descendant1_td.hpp"
-#include "dogen/test_models/trivial_inheritance/test_data/descendant3_td.hpp"
-#include "dogen/test_models/trivial_inheritance/test_data/non_final_leaf_td.hpp"
+#ifndef DOGEN_TEST_MODELS_TRIVIAL_INHERITANCE_TYPES_NON_FINAL_ORPHAN_FWD_HPP
+#define DOGEN_TEST_MODELS_TRIVIAL_INHERITANCE_TYPES_NON_FINAL_ORPHAN_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace test_models {
 namespace trivial_inheritance {
 
-void descendant1_generator::
-populate(const unsigned int position, result_type& v) {
-    dogen::test_models::trivial_inheritance::base_generator::populate(position, v);
-}
-
-descendant1_generator::result_type*
-descendant1_generator::create_ptr(const unsigned int position) {
-    if ((position % 1) == 0)
-        return dogen::test_models::trivial_inheritance::non_final_leaf_generator::create_ptr(position);
-    return dogen::test_models::trivial_inheritance::descendant3_generator::create_ptr(position);
-}
+class non_final_orphan;
 
 } } }
+
+#endif

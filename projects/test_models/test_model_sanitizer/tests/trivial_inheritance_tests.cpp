@@ -113,6 +113,8 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<pkg1::child_via_settings_generator>();
     test_equality<pkg3::child_via_settings_generator>();
     test_equality<pkg4::child_via_settings_generator>();
+    test_equality<non_final_leaf_generator>();
+    test_equality<non_final_orphan_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
@@ -130,6 +132,8 @@ BOOST_AUTO_TEST_CASE(validate_serialisation) {
     roundtrip_type<pkg1::child_via_settings_generator>();
     roundtrip_type<pkg3::child_via_settings_generator>();
     roundtrip_type<pkg4::child_via_settings_generator>();
+    roundtrip_type<non_final_leaf_generator>();
+    roundtrip_type<non_final_orphan_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {
@@ -147,6 +151,8 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<pkg1::child_via_settings_generator>();
     test_hashing<pkg3::child_via_settings_generator>();
     test_hashing<pkg4::child_via_settings_generator>();
+    test_hashing<non_final_leaf_generator>();
+    test_hashing<non_final_orphan_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
@@ -164,6 +170,8 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<pkg1::child_via_settings_generator>();
     test_swap<pkg3::child_via_settings_generator>();
     test_swap<pkg4::child_via_settings_generator>();
+    test_swap<non_final_leaf_generator>();
+    test_swap<non_final_orphan_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_io) {
@@ -181,6 +189,8 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<pkg1::child_via_settings_generator>();
     test_io<pkg3::child_via_settings_generator>();
     test_io<pkg4::child_via_settings_generator>();
+    test_io<non_final_leaf_generator>();
+    test_io<non_final_orphan_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
@@ -199,6 +209,8 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<pkg1::child_via_settings_generator>();
     test_move_assignment_copy<pkg3::child_via_settings_generator>();
     test_move_assignment_copy<pkg4::child_via_settings_generator>();
+    test_move_assignment_copy<non_final_leaf_generator>();
+    test_move_assignment_copy<non_final_orphan_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(visitor_dispatches_to_the_correct_classes) {

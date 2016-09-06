@@ -18,25 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/trivial_inheritance/test_data/base_td.hpp"
-#include "dogen/test_models/trivial_inheritance/test_data/descendant1_td.hpp"
-#include "dogen/test_models/trivial_inheritance/test_data/descendant3_td.hpp"
-#include "dogen/test_models/trivial_inheritance/test_data/non_final_leaf_td.hpp"
+#include "dogen/test_models/trivial_inheritance/types/non_final_orphan.hpp"
 
 namespace dogen {
 namespace test_models {
 namespace trivial_inheritance {
 
-void descendant1_generator::
-populate(const unsigned int position, result_type& v) {
-    dogen::test_models::trivial_inheritance::base_generator::populate(position, v);
+non_final_orphan::non_final_orphan()
+    : prop_0_(static_cast<int>(0)) { }
+
+non_final_orphan::non_final_orphan(const int prop_0)
+    : prop_0_(prop_0) { }
+
+void non_final_orphan::swap(non_final_orphan& other) noexcept {
+    using std::swap;
+    swap(prop_0_, other.prop_0_);
 }
 
-descendant1_generator::result_type*
-descendant1_generator::create_ptr(const unsigned int position) {
-    if ((position % 1) == 0)
-        return dogen::test_models::trivial_inheritance::non_final_leaf_generator::create_ptr(position);
-    return dogen::test_models::trivial_inheritance::descendant3_generator::create_ptr(position);
+bool non_final_orphan::operator==(const non_final_orphan& rhs) const {
+    return prop_0_ == rhs.prop_0_;
+}
+
+non_final_orphan& non_final_orphan::operator=(non_final_orphan other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+int non_final_orphan::prop_0() const {
+    return prop_0_;
+}
+
+void non_final_orphan::prop_0(const int v) {
+    prop_0_ = v;
 }
 
 } } }

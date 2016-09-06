@@ -31,6 +31,7 @@
 #include "dogen/test_models/trivial_inheritance/serialization/pkg4/child_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/descendant2_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/descendant3_ser.hpp"
+#include "dogen/test_models/trivial_inheritance/serialization/non_final_leaf_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/child_of_a_child1_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/child_of_a_child2_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/child_via_settings_ser.hpp"
@@ -58,6 +59,7 @@ void register_types(Archive& ar) {
     ar.template register_type<dogen::test_models::trivial_inheritance::descendant3>();
     ar.template register_type<dogen::test_models::trivial_inheritance::move_ctor_descendant>();
     ar.template register_type<dogen::test_models::trivial_inheritance::move_ctor_empty_descendant>();
+    ar.template register_type<dogen::test_models::trivial_inheritance::non_final_leaf>();
     ar.template register_type<dogen::test_models::trivial_inheritance::pkg1::child>();
     ar.template register_type<dogen::test_models::trivial_inheritance::pkg1::child_via_settings>();
     ar.template register_type<dogen::test_models::trivial_inheritance::pkg3::child>();
