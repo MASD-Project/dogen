@@ -2075,6 +2075,16 @@ The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
 
+*** Consider making fully generated files read-only                   :story:
+
+We could add emacs/vi tags to make fully generated files read-only -
+as opposed to partially generated files such as services, which are
+expected to be modified by the user. Example:
+
+: /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 buffer-read-only: t -*-
+
+There must be a vi equivalent.
+
 *** Using default value with text collection throws                   :story:
 
 We don't support default values with text collection, but if the user
