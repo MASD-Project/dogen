@@ -20,6 +20,7 @@
  */
 #include "dogen/test_models/trivial_inheritance/test_data/child_of_a_child1_td.hpp"
 #include "dogen/test_models/trivial_inheritance/test_data/child_of_a_child2_td.hpp"
+#include "dogen/test_models/trivial_inheritance/test_data/child_via_settings_td.hpp"
 #include "dogen/test_models/trivial_inheritance/test_data/parent_with_members_td.hpp"
 #include "dogen/test_models/trivial_inheritance/test_data/second_child_without_members_td.hpp"
 
@@ -42,9 +43,11 @@ populate(const unsigned int position, result_type& v) {
 
 parent_with_members_generator::result_type*
 parent_with_members_generator::create_ptr(const unsigned int position) {
-    if ((position % 2) == 0)
+    if ((position % 3) == 0)
         return dogen::test_models::trivial_inheritance::child_of_a_child2_generator::create_ptr(position);
-    if ((position % 2) == 1)
+    if ((position % 3) == 1)
+        return dogen::test_models::trivial_inheritance::child_via_settings_generator::create_ptr(position);
+    if ((position % 3) == 2)
         return dogen::test_models::trivial_inheritance::second_child_without_members_generator::create_ptr(position);
     return dogen::test_models::trivial_inheritance::child_of_a_child1_generator::create_ptr(position);
 }

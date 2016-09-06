@@ -29,6 +29,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/test_models/trivial_inheritance/serialization/pkg1/child_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/pkg1/parent_ser.hpp"
+#include "dogen/test_models/trivial_inheritance/serialization/pkg1/child_via_settings_ser.hpp"
 
 BOOST_CLASS_TRACKING(
     dogen::test_models::trivial_inheritance::pkg1::parent,

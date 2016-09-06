@@ -152,7 +152,7 @@ bool resolver::is_name_referable(const indices& idx, const name& n) const {
 }
 
 name resolver::
-resolve_partial_type(const intermediate_model& im, const name& n) const {
+resolve_name(const intermediate_model& im, const name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Resolving type:" << n.id();
 
     /*
@@ -202,9 +202,9 @@ resolve_partial_type(const intermediate_model& im, const name& n) const {
     BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.id()));
 }
 
-void resolver::resolve_partial_type(const intermediate_model& im,
+void resolver::resolve_name_tree(const intermediate_model& im,
     const name& owner, name_tree& nt) const {
-    const name n(resolve_partial_type(im, nt.current()));
+    const name n(resolve_name(im, nt.current()));
     nt.current(n);
     nt.is_current_simple_type(is_enumeration(im, n) || is_primitive(im, n));
 
@@ -227,7 +227,7 @@ void resolver::resolve_partial_type(const intermediate_model& im,
     }
 
     for (auto& c : nt.children()) {
-        resolve_partial_type(im, owner, c);
+        resolve_name_tree(im, owner, c);
         pp.add_child(obtain_qualified(c));
     }
 
@@ -242,7 +242,7 @@ void resolver::resolve_attributes(const intermediate_model& im,
     const name& owner, std::list<attribute>& attributes) const {
     for (auto& a : attributes) {
         try {
-            resolve_partial_type(im, owner, a.parsed_type());
+            resolve_name_tree(im, owner, a.parsed_type());
             BOOST_LOG_SEV(lg, debug) << "Resolved attribute: " << a.name().id();
         } catch (boost::exception& e) {
             std::ostringstream s;
@@ -370,6 +370,10 @@ void resolver::resolve(intermediate_model& im) const {
     resolve_concepts(im);
     resolve_objects(im);
     resolve_enumerations(im);
+}
+
+name resolver::resolve(const intermediate_model& im, const name& n) const {
+    return resolve_name(im, n);
 }
 
 } }

@@ -33,9 +33,13 @@
 #include "dogen/test_models/trivial_inheritance/serialization/descendant3_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/child_of_a_child1_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/child_of_a_child2_ser.hpp"
+#include "dogen/test_models/trivial_inheritance/serialization/child_via_settings_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/child_with_members_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/move_ctor_descendant_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/child_without_members_ser.hpp"
+#include "dogen/test_models/trivial_inheritance/serialization/pkg1/child_via_settings_ser.hpp"
+#include "dogen/test_models/trivial_inheritance/serialization/pkg3/child_via_settings_ser.hpp"
+#include "dogen/test_models/trivial_inheritance/serialization/pkg4/child_via_settings_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/move_ctor_empty_descendant_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/second_child_without_members_ser.hpp"
 
@@ -47,6 +51,7 @@ template<typename Archive>
 void register_types(Archive& ar) {
     ar.template register_type<dogen::test_models::trivial_inheritance::child_of_a_child1>();
     ar.template register_type<dogen::test_models::trivial_inheritance::child_of_a_child2>();
+    ar.template register_type<dogen::test_models::trivial_inheritance::child_via_settings>();
     ar.template register_type<dogen::test_models::trivial_inheritance::child_with_members>();
     ar.template register_type<dogen::test_models::trivial_inheritance::child_without_members>();
     ar.template register_type<dogen::test_models::trivial_inheritance::descendant2>();
@@ -54,8 +59,11 @@ void register_types(Archive& ar) {
     ar.template register_type<dogen::test_models::trivial_inheritance::move_ctor_descendant>();
     ar.template register_type<dogen::test_models::trivial_inheritance::move_ctor_empty_descendant>();
     ar.template register_type<dogen::test_models::trivial_inheritance::pkg1::child>();
+    ar.template register_type<dogen::test_models::trivial_inheritance::pkg1::child_via_settings>();
     ar.template register_type<dogen::test_models::trivial_inheritance::pkg3::child>();
+    ar.template register_type<dogen::test_models::trivial_inheritance::pkg3::child_via_settings>();
     ar.template register_type<dogen::test_models::trivial_inheritance::pkg4::child>();
+    ar.template register_type<dogen::test_models::trivial_inheritance::pkg4::child_via_settings>();
     ar.template register_type<dogen::test_models::trivial_inheritance::second_child_without_members>();
 }
 

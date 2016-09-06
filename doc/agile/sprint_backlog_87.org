@@ -12,24 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-05 Mon 23:45]
+#+CAPTION: Clock summary at [2016-09-06 Tue 09:23]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *21:24* |       |      | 100.0 |
+| *Total time*                                                                | *22:35* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 21:24   |       |      | 100.0 |
-| Active                                                                      |         | 21:24 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:52 |   4.0 |
-| COMPLETED Move readme to markdown                                           |         |       | 0:49 |   3.8 |
-| COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   2.3 |
-| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |  11.1 |
-| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  20.2 |
-| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  23.9 |
-| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   7.6 |
-| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   9.1 |
-| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   6.9 |
-| STARTED Consider adding support for inheritance via meta-data               |         |       | 2:23 |  11.1 |
+| Stories                                                                     | 22:35   |       |      | 100.0 |
+| Active                                                                      |         | 22:35 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:52 |   3.8 |
+| COMPLETED Move readme to markdown                                           |         |       | 0:49 |   3.6 |
+| COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   2.1 |
+| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |  10.5 |
+| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  19.1 |
+| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  22.7 |
+| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   7.2 |
+| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   8.6 |
+| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   6.5 |
+| STARTED Consider adding support for inheritance via meta-data               |         |       | 3:34 |  15.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -253,6 +253,8 @@ done using =dia.is_final=. We never did implement it properly.
 - use it to update =is_final= in sml
 
 *** STARTED Consider adding support for inheritance via meta-data     :story:
+    CLOCK: [2016-09-06 Tue 09:17]--[2016-09-06 Tue 09:23] =>  0:06
+    CLOCK: [2016-09-06 Tue 08:11]--[2016-09-06 Tue 09:16] =>  1:05
     CLOCK: [2016-09-05 Mon 23:17]--[2016-09-05 Mon 23:46] =>  0:29
     CLOCK: [2016-09-05 Mon 23:13]--[2016-09-05 Mon 23:16] =>  0:03
     CLOCK: [2016-09-05 Mon 22:57]--[2016-09-05 Mon 23:12] =>  0:15

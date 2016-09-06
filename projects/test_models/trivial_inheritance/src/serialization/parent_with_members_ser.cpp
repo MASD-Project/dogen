@@ -29,6 +29,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/test_models/trivial_inheritance/serialization/child_of_a_child1_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/child_of_a_child2_ser.hpp"
+#include "dogen/test_models/trivial_inheritance/serialization/child_via_settings_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/parent_with_members_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/second_child_without_members_ser.hpp"
 

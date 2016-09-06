@@ -67,12 +67,12 @@ private:
     /**
      * @brief Resolves a partially formed name into a full name.
      */
-    name resolve_partial_type(const intermediate_model& im, const name& n) const;
+    name resolve_name(const intermediate_model& im, const name& n) const;
 
     /**
      * @brief Resolves all references contained in a name tree.
      */
-    void resolve_partial_type(const intermediate_model& im, const name& owner,
+    void resolve_name_tree(const intermediate_model& im, const name& owner,
         name_tree& nt) const;
 
     /**
@@ -116,10 +116,13 @@ private:
 public:
     /**
      * @brief Resolve all references to types within model.
-     *
-     * @pre Resolution has not been performed yet.
      */
     void resolve(intermediate_model& im) const;
+
+    /**
+     * @brief Resolves the name against the supplied model.
+     */
+    name resolve(const intermediate_model& im, const name& n) const;
 };
 
 } }

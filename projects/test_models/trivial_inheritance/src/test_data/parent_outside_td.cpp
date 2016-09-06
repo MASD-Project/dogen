@@ -20,6 +20,7 @@
  */
 #include "dogen/test_models/trivial_inheritance/test_data/pkg4/child_td.hpp"
 #include "dogen/test_models/trivial_inheritance/test_data/parent_outside_td.hpp"
+#include "dogen/test_models/trivial_inheritance/test_data/pkg4/child_via_settings_td.hpp"
 
 namespace {
 
@@ -40,6 +41,8 @@ populate(const unsigned int position, result_type& v) {
 
 parent_outside_generator::result_type*
 parent_outside_generator::create_ptr(const unsigned int position) {
+    if ((position % 1) == 0)
+        return dogen::test_models::trivial_inheritance::pkg4::child_via_settings_generator::create_ptr(position);
     return dogen::test_models::trivial_inheritance::pkg4::child_generator::create_ptr(position);
 }
 

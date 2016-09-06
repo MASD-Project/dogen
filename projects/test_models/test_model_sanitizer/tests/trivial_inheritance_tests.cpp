@@ -109,6 +109,10 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<pkg4::child_generator>();
     test_equality<move_ctor_descendant_generator>();
     test_equality<move_ctor_empty_descendant_generator>();
+    test_equality<child_via_settings_generator>();
+    test_equality<pkg1::child_via_settings_generator>();
+    test_equality<pkg3::child_via_settings_generator>();
+    test_equality<pkg4::child_via_settings_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
@@ -122,6 +126,10 @@ BOOST_AUTO_TEST_CASE(validate_serialisation) {
     roundtrip_type<pkg4::child_generator>();
     roundtrip_type<move_ctor_descendant_generator>();
     roundtrip_type<move_ctor_empty_descendant_generator>();
+    roundtrip_type<child_via_settings_generator>();
+    roundtrip_type<pkg1::child_via_settings_generator>();
+    roundtrip_type<pkg3::child_via_settings_generator>();
+    roundtrip_type<pkg4::child_via_settings_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {
@@ -135,6 +143,10 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<pkg4::child_generator>();
     test_hashing<move_ctor_descendant_generator>();
     test_hashing<move_ctor_empty_descendant_generator>();
+    test_hashing<child_via_settings_generator>();
+    test_hashing<pkg1::child_via_settings_generator>();
+    test_hashing<pkg3::child_via_settings_generator>();
+    test_hashing<pkg4::child_via_settings_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
@@ -148,6 +160,10 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<pkg4::child_generator>();
     test_swap<move_ctor_descendant_generator>();
     test_swap<move_ctor_empty_descendant_generator>();
+    test_swap<child_via_settings_generator>();
+    test_swap<pkg1::child_via_settings_generator>();
+    test_swap<pkg3::child_via_settings_generator>();
+    test_swap<pkg4::child_via_settings_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_io) {
@@ -161,6 +177,10 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<pkg4::child_generator>();
     test_io<move_ctor_descendant_generator>();
     test_io<move_ctor_empty_descendant_generator>();
+    test_io<child_via_settings_generator>();
+    test_io<pkg1::child_via_settings_generator>();
+    test_io<pkg3::child_via_settings_generator>();
+    test_io<pkg4::child_via_settings_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
@@ -175,6 +195,10 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<pkg4::child_generator>();
     test_move_assignment_copy<move_ctor_descendant_generator>();
     test_move_assignment_copy<move_ctor_empty_descendant_generator>();
+    test_move_assignment_copy<child_via_settings_generator>();
+    test_move_assignment_copy<pkg1::child_via_settings_generator>();
+    test_move_assignment_copy<pkg3::child_via_settings_generator>();
+    test_move_assignment_copy<pkg4::child_via_settings_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(visitor_dispatches_to_the_correct_classes) {

@@ -21,6 +21,7 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/optional_io.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/resolver.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
@@ -130,15 +131,28 @@ void generalization_expander::populate_properties_up_the_generalization_tree(
 void generalization_expander::populate_generalizable_properties(
     const std::unordered_set<std::string>& parent_ids,
     intermediate_model& im) const {
+    resolver rs;
 
     for (auto& pair : im.objects()) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
+        auto& o(pair.second);
+
         /*
-         * We are a child if we have a parent.
+         * Resolve the name of the parent. This is required because it
+         * may have been supplied via settings, and as such, it may
+         * not be complete. We can't wait for the resolution step
+         * because there is a circular dependency (resolution needs
+         * injection and injection needs generalization, which needs
+         * resolution).
          */
-         auto& o(pair.second);
+        if (o.parent())
+            o.parent(rs.resolve(im, *o.parent()));
+
+        /*
+         * We are a child if we have a parent (double-bang by design).
+         */
          o.is_child(!!o.parent());
 
          /*
