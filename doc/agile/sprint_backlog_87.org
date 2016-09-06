@@ -12,24 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-06 Tue 10:48]
+#+CAPTION: Clock summary at [2016-09-06 Tue 12:12]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *23:56* |       |      | 100.0 |
+| *Total time*                                                                | *25:19* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 23:56   |       |      | 100.0 |
-| Active                                                                      |         | 23:56 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:52 |   3.6 |
-| COMPLETED Move readme to markdown                                           |         |       | 0:49 |   3.4 |
-| COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   2.0 |
-| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   9.9 |
-| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  18.0 |
-| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  21.4 |
-| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   6.8 |
-| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   8.1 |
-| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   6.1 |
-| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  20.5 |
+| Stories                                                                     | 25:19   |       |      | 100.0 |
+| Active                                                                      |         | 25:19 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:52 |   3.4 |
+| COMPLETED Move readme to markdown                                           |         |       | 0:49 |   3.2 |
+| COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   1.9 |
+| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   9.3 |
+| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  17.1 |
+| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  20.2 |
+| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   6.5 |
+| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   7.7 |
+| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   5.8 |
+| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  19.4 |
+| CANCELLED Pick-up Boost 1.61 from Debian Testing                            |         |       | 1:23 |   5.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -311,6 +312,24 @@ used. The class =b::c= in model =a= would be empty.
 This is not a very good idea as it will just cause confusion and it
 will require machinery to place the type in the right point in element
 space.
+
+*** CANCELLED Pick-up Boost 1.61 from Debian Testing                  :story:
+    CLOSED: [2016-09-06 Tue 11:45]
+    CLOCK: [2016-09-06 Tue 11:45]--[2016-09-06 Tue 12:12] =>  0:27
+    CLOCK: [2016-09-06 Tue 10:49]--[2016-09-06 Tue 11:45] =>  0:56
+
+At present we have a locally compiled boost because Debian Testing was
+stuck on an old version for a long time. However, it seems Boost 1.61
+is now out. We should try using this instead of our local Boost.
+
+Boost 1.61 in Debian Testing still has problems with adjacency
+list. It seems this is fixed in trunk, so maybe it will be fixed on
+1.62. We will wait for this rather than manually patching debian
+packages, etc.
+
+Mail sent to mailing list to clarify the situation:
+
+[[http://lists.boost.org/boost-users/2016/09/86527.php][{Boost-users} {boost}{graph} Support for C++11 on adjacency list]]
 
 *** Allow cross model inheritance                                     :story:
 
