@@ -153,8 +153,6 @@ bool resolver::is_name_referable(const indices& idx, const name& n) const {
 
 name resolver::
 resolve_name(const intermediate_model& im, const name& n) const {
-    BOOST_LOG_SEV(lg, debug) << "Resolving type:" << n.id();
-
     /*
      * First try the type as it was read originally. This caters for
      * types placed in the global module.
@@ -193,7 +191,6 @@ resolve_name(const intermediate_model& im, const name& n) const {
      */
     {
         auto r(nf.build_promoted_module_name(im.name(), n));
-        BOOST_LOG_SEV(lg, error) << r;
         if (is_name_referable(im.indices(), r))
             return r;
     }
@@ -205,6 +202,9 @@ resolve_name(const intermediate_model& im, const name& n) const {
 void resolver::resolve_name_tree(const intermediate_model& im,
     const name& owner, name_tree& nt) const {
     const name n(resolve_name(im, nt.current()));
+
+    BOOST_LOG_SEV(lg, debug) << "Resolved name: " << nt.current().id()
+                             << " to: " << n.id();
     nt.current(n);
     nt.is_current_simple_type(is_enumeration(im, n) || is_primitive(im, n));
 
@@ -373,7 +373,10 @@ void resolver::resolve(intermediate_model& im) const {
 }
 
 name resolver::resolve(const intermediate_model& im, const name& n) const {
-    return resolve_name(im, n);
+    const auto r(resolve_name(im, n));
+    BOOST_LOG_SEV(lg, debug) << "Resolved name: " << n.id()
+                             << " to: " << r.id();
+    return r;
 }
 
 } }
