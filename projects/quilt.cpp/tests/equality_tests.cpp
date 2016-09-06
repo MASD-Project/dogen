@@ -23,6 +23,7 @@
 #include "dogen/utility/test/canned_tests.hpp"
 #include "dogen/quilt.cpp/types/all.hpp"
 #include "dogen/quilt.cpp/io/all_io.hpp"
+#include "dogen/yarn/io/element_io.hpp"
 #include "dogen/quilt.cpp/test_data/all_td.hpp"
 
 namespace {
@@ -44,6 +45,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<properties::cmakelists_info_generator>();
     test_equality<properties::odb_options_info_generator>();
     test_equality<properties::registrar_info_generator>();
+    test_equality<fabric::registrar_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

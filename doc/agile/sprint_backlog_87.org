@@ -12,26 +12,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-06 Tue 20:37]
+#+CAPTION: Clock summary at [2016-09-06 Tue 21:14]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *25:53* |       |      | 100.0 |
+| *Total time*                                                                | *26:28* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 25:53   |       |      | 100.0 |
-| Active                                                                      |         | 25:53 |      | 100.0 |
+| Stories                                                                     | 26:28   |       |      | 100.0 |
+| Active                                                                      |         | 26:28 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:52 |   3.3 |
-| COMPLETED Move readme to markdown                                           |         |       | 0:49 |   3.2 |
-| COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   1.9 |
-| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   9.1 |
-| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  16.7 |
-| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  19.8 |
-| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   6.3 |
-| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   7.5 |
-| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   5.7 |
-| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  19.0 |
-| CANCELLED Pick-up Boost 1.61 from Debian Testing                            |         |       | 1:23 |   5.3 |
-| COMPLETED Allow cross model inheritance                                     |         |       | 0:34 |   2.2 |
+| COMPLETED Move readme to markdown                                           |         |       | 0:49 |   3.1 |
+| COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   1.8 |
+| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   8.9 |
+| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  16.3 |
+| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  19.3 |
+| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   6.2 |
+| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   7.4 |
+| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   5.5 |
+| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  18.6 |
+| CANCELLED Pick-up Boost 1.61 from Debian Testing                            |         |       | 1:23 |   5.2 |
+| COMPLETED Allow cross model inheritance                                     |         |       | 1:09 |   4.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -334,6 +334,8 @@ Mail sent to mailing list to clarify the situation:
 
 *** COMPLETED Allow cross model inheritance                           :story:
     CLOSED: [2016-09-06 Tue 20:37]
+    CLOCK: [2016-09-06 Tue 21:05]--[2016-09-06 Tue 21:14] =>  0:09
+    CLOCK: [2016-09-06 Tue 20:38]--[2016-09-06 Tue 21:04] =>  0:26
     CLOCK: [2016-09-06 Tue 20:30]--[2016-09-06 Tue 20:37] =>  0:07
     CLOCK: [2016-09-06 Tue 20:02]--[2016-09-06 Tue 20:29] =>  0:27
 

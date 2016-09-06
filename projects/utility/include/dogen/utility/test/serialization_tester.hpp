@@ -26,6 +26,7 @@
 #endif
 
 #include <sstream>
+#include <boost/shared_ptr.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -41,6 +42,35 @@ template<typename Archive> void register_types(Archive& ar);
 namespace dogen {
 namespace utility {
 namespace test {
+
+template<typename T>
+void check(const T& a, const T& b) {
+    BOOST_CHECK(a == b);
+}
+
+template<typename T>
+void check(const boost::shared_ptr<T>& a, const boost::shared_ptr<T>& b) {
+    BOOST_CHECK(*a == *b);
+}
+
+template<typename T>
+void dump(dogen::utility::log::logger& lg, const T& a, const std::string& msg) {
+    using dogen::utility::streaming::jsonify;
+    using namespace dogen::utility::log;
+    BOOST_LOG_SEV(lg, debug) << msg << jsonify(a);
+}
+
+template<typename T>
+void dump(dogen::utility::log::logger& lg, const boost::shared_ptr<T>& a,
+    const std::string& msg) {
+
+    if (!a) {
+        using namespace dogen::utility::log;
+        BOOST_LOG_SEV(lg, debug) << msg << "<empty>";
+        return;
+    }
+    dump(lg, *a, msg);
+}
 
 /**
  * @brief Provides a series of canned tests for serialisation of
@@ -66,7 +96,7 @@ private:
         using dogen::utility::streaming::jsonify;
         using namespace dogen::utility::log;
         logger lg(logger_factory("utility.test.serialization_tester"));
-        BOOST_LOG_SEV(lg, debug) << "original: " << jsonify(a);
+        dump(lg, a, "original: ");
         std::ostringstream os;
         {
             OutputArchive oa(os);
@@ -75,15 +105,15 @@ private:
         }
 
         entity_type b = entity_type();
-        BOOST_LOG_SEV(lg, debug) << "before load: " << jsonify(b);
+        dump(lg, b, "before load: ");
         std::istringstream is(os.str());
         {
             InputArchive ia(is);
             ::register_types<InputArchive>(ia);
             ia >> BOOST_SERIALIZATION_NVP(b);
         }
-        BOOST_LOG_SEV(lg, debug) << "after load: " << jsonify(b);
-        BOOST_CHECK(a == b);
+        dump(lg, b, "after load: ");
+        check(a, b);
         log_if_test_has_failed();
     }
 
@@ -128,16 +158,6 @@ public:
         xml_roundtrip_produces_the_same_entity(a);
         text_roundtrip_produces_the_same_entity(a);
         binary_roundtrip_produces_the_same_entity(a);
-    }
-
-    /**
-     * @deprecated Legacy method to be removed.
-     */
-    static void
-    roundtrips_of_the_same_type_produce_the_same_entity(const Entity& a) {
-        using namespace boost::archive;
-        roundtrip_produces_the_same_entity<text_iarchive, text_oarchive>(a);
-        roundtrip_produces_the_same_entity<binary_iarchive, binary_oarchive>(a);
     }
 };
 

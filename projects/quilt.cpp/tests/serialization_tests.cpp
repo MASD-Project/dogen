@@ -19,8 +19,11 @@
  *
  */
 #include <boost/test/unit_test.hpp>
+#include <boost/serialization/shared_ptr.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
+#include "dogen/yarn/serialization/element_ser.hpp"
+#include "dogen/yarn/io/element_io.hpp"
 #include "dogen/quilt.cpp/types/all.hpp"
 #include "dogen/quilt.cpp/io/all_io.hpp"
 #include "dogen/quilt.cpp/test_data/all_td.hpp"
@@ -50,6 +53,15 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     roundtrip_type<properties::cmakelists_info_generator>();
     roundtrip_type<properties::odb_options_info_generator>();
     roundtrip_type<properties::registrar_info_generator>();
+    roundtrip_type<fabric::registrar_generator>();
+
+    boost::shared_ptr<dogen::yarn::element> el(
+        fabric::registrar_generator::create_ptr(2));
+
+    dogen::utility::test::serialization_tester<
+        boost::shared_ptr<dogen::yarn::element>
+        >::
+        all_roundtrips_produce_the_same_entity(el);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

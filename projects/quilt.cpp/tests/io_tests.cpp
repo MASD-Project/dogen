@@ -44,6 +44,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<properties::cmakelists_info_generator>();
     test_io<properties::odb_options_info_generator>();
     test_io<properties::registrar_info_generator>();
+    test_io<fabric::registrar_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

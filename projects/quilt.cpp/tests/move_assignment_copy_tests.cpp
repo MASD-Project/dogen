@@ -44,6 +44,7 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<properties::cmakelists_info_generator>();
     test_move_assignment_copy<properties::odb_options_info_generator>();
     test_move_assignment_copy<properties::registrar_info_generator>();
+    test_move_assignment_copy<fabric::registrar_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()
