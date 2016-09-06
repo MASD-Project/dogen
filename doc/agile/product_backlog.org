@@ -2489,6 +2489,10 @@ e.g.: =p::a=. Failure to do so results in an error:
 : std::exception::what: Object has property with undefined type: registrar
 : [P12tag_workflow] = Code generation failure.
 
+This should be fairly trivial to implement: all we need to do is to
+add =owner= to =resolve_name= in =resolver= and add an extra
+resolution step that uses the owner's location.
+
 *** Handling of unsupported dia objects                               :story:
 
 #+begin_quote
