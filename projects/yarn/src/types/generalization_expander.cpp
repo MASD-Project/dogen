@@ -44,21 +44,33 @@ inline bool operator<(const name& lhs, const name& rhs) {
     return lhs.id() < rhs.id();
 }
 
-std::unordered_set<std::string>
-generalization_expander::obtain_parent_ids(const intermediate_model& im) const {
-    BOOST_LOG_SEV(lg, debug) << "Obtaining parent ids.";
+std::unordered_set<std::string> generalization_expander::
+update_and_collect_parent_ids(intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Updating and collecting parent ids.";
+
+    resolver rs;
     std::unordered_set<std::string> r;
-    for (const auto& pair : im.objects()) {
+    for (auto& pair : im.objects()) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
-        const auto& o(pair.second);
+        auto& o(pair.second);
         if (!o.parent())
             continue;
 
+        /*
+         * Resolve the name of the parent. This is required because it
+         * may have been supplied via settings, and as such, it may
+         * not be complete. We can't wait for the resolution step
+         * because there is a circular dependency (resolution needs
+         * injection and injection needs generalization, which needs
+         * resolution).
+         */
+        o.parent(rs.resolve(im, *o.parent()));
         r.insert(o.parent()->id());
     }
-    BOOST_LOG_SEV(lg, debug) << "Finished obtaining parent ids: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished updating and collecting parent ids: "
+                             << r;
     return r;
 }
 
@@ -131,24 +143,12 @@ void generalization_expander::populate_properties_up_the_generalization_tree(
 void generalization_expander::populate_generalizable_properties(
     const std::unordered_set<std::string>& parent_ids,
     intermediate_model& im) const {
-    resolver rs;
 
     for (auto& pair : im.objects()) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
         auto& o(pair.second);
-
-        /*
-         * Resolve the name of the parent. This is required because it
-         * may have been supplied via settings, and as such, it may
-         * not be complete. We can't wait for the resolution step
-         * because there is a circular dependency (resolution needs
-         * injection and injection needs generalization, which needs
-         * resolution).
-         */
-        if (o.parent())
-            o.parent(rs.resolve(im, *o.parent()));
 
         /*
          * We are a child if we have a parent (double-bang by design).
@@ -206,7 +206,7 @@ void generalization_expander::sort_leaves(intermediate_model& im) const {
 }
 
 void generalization_expander::expand(intermediate_model& im) const {
-    const auto parent_ids(obtain_parent_ids(im));
+    const auto parent_ids(update_and_collect_parent_ids(im));
     populate_generalizable_properties(parent_ids, im);
     sort_leaves(im);
 }

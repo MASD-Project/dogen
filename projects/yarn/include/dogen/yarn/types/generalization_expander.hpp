@@ -36,7 +36,7 @@ namespace yarn {
 class generalization_expander {
 private:
     std::unordered_set<std::string>
-    obtain_parent_ids(const intermediate_model& im) const;
+    update_and_collect_parent_ids(intermediate_model& im) const;
 
     void populate_properties_up_the_generalization_tree(
         const yarn::name& leaf, intermediate_model& im,
