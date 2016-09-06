@@ -26,6 +26,8 @@
 #endif
 
 #include <list>
+#include <unordered_map>
+#include "dogen/yarn/hash/location_hash.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
@@ -56,6 +58,9 @@ private:
      */
     module create_global_module() const;
 
+    std::unordered_map<location, std::list<name> >
+    bucket_leaves_by_location(const std::list<name>& leaves) const;
+
     /**
      * @brief Create a visitor for the object o.
      *
@@ -64,26 +69,26 @@ private:
      *
      * @pre leaves must not be empty.
      */
-    visitor create_visitor(const object& o,
-        const std::list<name>& leaves) const;
+    visitor create_visitor(const object& o, const location& l,
+        const generation_types gt, const std::list<name>& leaves) const;
 
     /**
      * @brief Injects an accept operation for the given visitor, to
      * the supplied object and all its leaves.
      */
-    void inject_visitable_by(object& root, const std::list<name>& leaves,
-        const name& visitor, intermediate_model& m) const;
+    void inject_visitable_by(const std::list<name>& leaves,
+        const name& visitor, intermediate_model& im) const;
 
     /**
      * @brief Injects visitors for objects that require them.
      */
-    void inject_visitors(intermediate_model& m);
+    void inject_visitors(intermediate_model& im);
 
     /**
      * @brief Injects the global module, and makes all modules that do
      * not have a containing namespace be contained by it.
      */
-    void inject_global_module(intermediate_model& m);
+    void inject_global_module(intermediate_model& im);
 
 public:
 
@@ -92,7 +97,7 @@ public:
      *
      * @param m Yarn model to operate on.
      */
-    void inject(intermediate_model& m);
+    void inject(intermediate_model& im);
 };
 
 } }
