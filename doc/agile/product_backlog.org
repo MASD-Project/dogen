@@ -3058,8 +3058,10 @@ models:
   model.
 - the qnames of all types as keys are consistent with the values.
 - type_name is non-empty; cannot be blank or a variable name
-- type name must not exist on any model
-- parent names and original parent names must exist in current model.
+- type name must not exist on any model: basically detect duplicate
+  element names. At present we simply silently drop duplicates.
+- parent names and original parent names must exist in current model
+  (resolver?)
 - leaves exist in current model.
 - entity must have at least one key attribute.
 - non entity must not have key attributes (value, service)
