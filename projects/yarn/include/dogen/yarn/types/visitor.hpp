@@ -28,6 +28,7 @@
 #include <list>
 #include <iosfwd>
 #include <algorithm>
+#include <boost/optional.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/serialization/visitor_fwd_ser.hpp"
@@ -42,9 +43,11 @@ class visitor final : public dogen::yarn::element {
 public:
     visitor() = default;
     visitor(const visitor&) = default;
-    visitor(visitor&&) = default;
 
     virtual ~visitor() noexcept { }
+
+public:
+    visitor(visitor&& rhs);
 
 public:
     visitor(
@@ -56,7 +59,8 @@ public:
         const std::string& original_model_name,
         const boost::optional<dogen::yarn::name>& contained_by,
         const bool in_global_module,
-        const std::list<dogen::yarn::name>& visits);
+        const std::list<dogen::yarn::name>& visits,
+        const boost::optional<dogen::yarn::name>& parent);
 
 private:
     template<typename Archive>
@@ -98,6 +102,11 @@ public:
     void visits(const std::list<dogen::yarn::name>&& v);
     /**@}*/
 
+    const boost::optional<dogen::yarn::name>& parent() const;
+    boost::optional<dogen::yarn::name>& parent();
+    void parent(const boost::optional<dogen::yarn::name>& v);
+    void parent(const boost::optional<dogen::yarn::name>&& v);
+
 public:
     bool operator==(const visitor& rhs) const;
     bool operator!=(const visitor& rhs) const {
@@ -113,6 +122,7 @@ public:
 
 private:
     std::list<dogen::yarn::name> visits_;
+    boost::optional<dogen::yarn::name> parent_;
 };
 
 } }

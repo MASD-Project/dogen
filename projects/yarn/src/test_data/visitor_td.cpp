@@ -37,6 +37,13 @@ std::list<dogen::yarn::name> create_std_list_dogen_yarn_name(unsigned int positi
     return r;
 }
 
+boost::optional<dogen::yarn::name>
+create_boost_optional_dogen_yarn_name(unsigned int position) {
+    boost::optional<dogen::yarn::name> r(
+        create_dogen_yarn_name(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -48,6 +55,7 @@ void visitor_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
     v.visits(create_std_list_dogen_yarn_name(position + 0));
+    v.parent(create_boost_optional_dogen_yarn_name(position + 1));
 }
 
 visitor_generator::result_type

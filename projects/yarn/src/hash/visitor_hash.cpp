@@ -38,6 +38,16 @@ inline std::size_t hash_std_list_dogen_yarn_name(const std::list<dogen::yarn::na
     return seed;
 }
 
+inline std::size_t hash_boost_optional_dogen_yarn_name(const boost::optional<dogen::yarn::name>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -49,6 +59,8 @@ std::size_t visitor_hasher::hash(const visitor& v) {
     combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
 
     combine(seed, hash_std_list_dogen_yarn_name(v.visits()));
+    combine(seed, hash_boost_optional_dogen_yarn_name(v.parent()));
+
     return seed;
 }
 

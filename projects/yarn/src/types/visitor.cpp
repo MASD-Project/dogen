@@ -37,8 +37,29 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::na
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::name>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace yarn {
+
+visitor::visitor(visitor&& rhs)
+    : dogen::yarn::element(
+        std::forward<dogen::yarn::element>(rhs)),
+      visits_(std::move(rhs.visits_)),
+      parent_(std::move(rhs.parent_)) { }
 
 visitor::visitor(
     const std::string& documentation,
@@ -49,7 +70,8 @@ visitor::visitor(
     const std::string& original_model_name,
     const boost::optional<dogen::yarn::name>& contained_by,
     const bool in_global_module,
-    const std::list<dogen::yarn::name>& visits)
+    const std::list<dogen::yarn::name>& visits,
+    const boost::optional<dogen::yarn::name>& parent)
     : dogen::yarn::element(
       documentation,
       extensions,
@@ -59,7 +81,8 @@ visitor::visitor(
       original_model_name,
       contained_by,
       in_global_module),
-      visits_(visits) { }
+      visits_(visits),
+      parent_(parent) { }
 
 void visitor::to_stream(std::ostream& s) const {
     s << " { "
@@ -67,7 +90,8 @@ void visitor::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     element::to_stream(s);
     s << ", "
-      << "\"visits\": " << visits_
+      << "\"visits\": " << visits_ << ", "
+      << "\"parent\": " << parent_
       << " }";
 }
 
@@ -76,6 +100,7 @@ void visitor::swap(visitor& other) noexcept {
 
     using std::swap;
     swap(visits_, other.visits_);
+    swap(parent_, other.parent_);
 }
 
 bool visitor::equals(const dogen::yarn::element& other) const {
@@ -86,7 +111,8 @@ bool visitor::equals(const dogen::yarn::element& other) const {
 
 bool visitor::operator==(const visitor& rhs) const {
     return element::compare(rhs) &&
-        visits_ == rhs.visits_;
+        visits_ == rhs.visits_ &&
+        parent_ == rhs.parent_;
 }
 
 visitor& visitor::operator=(visitor other) {
@@ -109,6 +135,22 @@ void visitor::visits(const std::list<dogen::yarn::name>& v) {
 
 void visitor::visits(const std::list<dogen::yarn::name>&& v) {
     visits_ = std::move(v);
+}
+
+const boost::optional<dogen::yarn::name>& visitor::parent() const {
+    return parent_;
+}
+
+boost::optional<dogen::yarn::name>& visitor::parent() {
+    return parent_;
+}
+
+void visitor::parent(const boost::optional<dogen::yarn::name>& v) {
+    parent_ = v;
+}
+
+void visitor::parent(const boost::optional<dogen::yarn::name>&& v) {
+    parent_ = std::move(v);
 }
 
 } }

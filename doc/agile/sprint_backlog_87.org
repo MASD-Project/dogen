@@ -12,26 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-06 Tue 21:14]
+#+CAPTION: Clock summary at [2016-09-06 Tue 21:32]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *26:28* |       |      | 100.0 |
+| *Total time*                                                                | *26:45* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 26:28   |       |      | 100.0 |
-| Active                                                                      |         | 26:28 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:52 |   3.3 |
+| Stories                                                                     | 26:45   |       |      | 100.0 |
+| Active                                                                      |         | 26:45 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:52 |   3.2 |
 | COMPLETED Move readme to markdown                                           |         |       | 0:49 |   3.1 |
 | COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   1.8 |
-| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   8.9 |
-| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  16.3 |
-| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  19.3 |
-| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   6.2 |
-| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   7.4 |
+| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   8.8 |
+| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  16.1 |
+| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  19.1 |
+| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   6.1 |
+| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   7.3 |
 | COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   5.5 |
-| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  18.6 |
+| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  18.4 |
 | CANCELLED Pick-up Boost 1.61 from Debian Testing                            |         |       | 1:23 |   5.2 |
 | COMPLETED Allow cross model inheritance                                     |         |       | 1:09 |   4.3 |
+| STARTED Add support for visitor inheritance                                 |         |       | 0:17 |   1.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -383,7 +384,8 @@ resolvable. However, once we add cross-model inheritance, the parent
 name is no longer resolvable directly (unless we stipulate that the
 external module path must be the same for all models).
 
-*** Add support for visitor inheritance                               :story:
+*** STARTED Add support for visitor inheritance                       :story:
+    CLOCK: [2016-09-06 Tue 21:15]--[2016-09-06 Tue 21:32] =>  0:17
 
 We need to detect when we inherit from a visitable type across models
 and generate a "local visitor" for that model.
@@ -391,7 +393,6 @@ and generate a "local visitor" for that model.
 - add parent of optional name to visitor.
 - when we are injecting the visitor, we need to bucket leaves by model
   first. Then we need to generate one visitor per bucket.
-- if we inherit from a
 - we need to populate visitable by in this bucketed way as well.
 - all leaves that belong to external models must be placed in the same
   location on that model. Throw if not.

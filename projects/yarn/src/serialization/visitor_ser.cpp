@@ -24,6 +24,7 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
@@ -46,6 +47,7 @@ void save(Archive& ar,
     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
 
     ar << make_nvp("visits", v.visits_);
+    ar << make_nvp("parent", v.parent_);
 }
 
 template<typename Archive>
@@ -55,6 +57,7 @@ void load(Archive& ar,
     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
 
     ar >> make_nvp("visits", v.visits_);
+    ar >> make_nvp("parent", v.parent_);
 }
 
 } }
