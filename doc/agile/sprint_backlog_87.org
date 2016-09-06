@@ -12,25 +12,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-06 Tue 12:12]
+#+CAPTION: Clock summary at [2016-09-06 Tue 20:37]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *25:19* |       |      | 100.0 |
+| *Total time*                                                                | *25:53* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 25:19   |       |      | 100.0 |
-| Active                                                                      |         | 25:19 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:52 |   3.4 |
+| Stories                                                                     | 25:53   |       |      | 100.0 |
+| Active                                                                      |         | 25:53 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:52 |   3.3 |
 | COMPLETED Move readme to markdown                                           |         |       | 0:49 |   3.2 |
 | COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   1.9 |
-| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   9.3 |
-| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  17.1 |
-| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  20.2 |
-| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   6.5 |
-| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   7.7 |
-| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   5.8 |
-| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  19.4 |
-| CANCELLED Pick-up Boost 1.61 from Debian Testing                            |         |       | 1:23 |   5.5 |
+| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   9.1 |
+| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  16.7 |
+| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  19.8 |
+| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   6.3 |
+| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   7.5 |
+| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   5.7 |
+| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  19.0 |
+| CANCELLED Pick-up Boost 1.61 from Debian Testing                            |         |       | 1:23 |   5.3 |
+| COMPLETED Allow cross model inheritance                                     |         |       | 0:34 |   2.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -331,7 +332,10 @@ Mail sent to mailing list to clarify the situation:
 
 [[http://lists.boost.org/boost-users/2016/09/86527.php][{Boost-users} {boost}{graph} Support for C++11 on adjacency list]]
 
-*** Allow cross model inheritance                                     :story:
+*** COMPLETED Allow cross model inheritance                           :story:
+    CLOSED: [2016-09-06 Tue 20:37]
+    CLOCK: [2016-09-06 Tue 20:30]--[2016-09-06 Tue 20:37] =>  0:07
+    CLOCK: [2016-09-06 Tue 20:02]--[2016-09-06 Tue 20:29] =>  0:27
 
 #+begin_quote
 *Story*: As a dogen user, I want to inherit types from existing models
@@ -342,6 +346,13 @@ At present we can only inherit within the same model. This is a
 limitation of how to express inheritance in a Dia diagram - either the
 parent is part of that diagram or it is not, and if it's not we have
 no way of connecting the generalisation relationship to it.
+
+The bulk of the work has already been done with inheritance via
+meta-data. This story is about testing cross-model inheritance and
+fixing where required. It does not include the visitor work (see other
+story below).
+
+*Previous Understanding*
 
 Having said that, it would actually be quite simple to allow cross
 model inheritance by using dynamic extensions:
@@ -370,22 +381,6 @@ resolvable. However, once we add cross-model inheritance, the parent
 name is no longer resolvable directly (unless we stipulate that the
 external module path must be the same for all models).
 
-*** Add support for bintray                                           :story:
-
-There is a new web application that interfaces with GitHub:
-[[https://bintray.com/][bintray]].
-
-- add JSON validation to bintray deployment descriptor.
-
-Notes:
-
-- an account was created [[https://bintray.com/mcraveiro][linked to GitHub]].
-- it supports the uploads of [[https://bintray.com/mcraveiro/deb][debs]].
-- [[https://bintray.com/docs/usermanual/uploads/uploads_howdoiuploadmystufftobintray.html][How Do I Upload My Stuff to Bintray?]]
-- [[https://github.com/tim-janik/beast][Beast]] project [[https://raw.githubusercontent.com/tim-janik/beast/master/README.md][README]] with emblems
-- Beast [[https://github.com/tim-janik/beast/blob/master/.travis.yml][travis.yml]]
-- [[https://github.com/tim-janik/rapicorn/blob/master/citool.sh.][citool.sh]] script from [[https://github.com/tim-janik/rapicorn][Rapicorn]] project and their [[https://raw.githubusercontent.com/tim-janik/rapicorn/master/README.md][README]].
-
 *** Add support for visitor inheritance                               :story:
 
 We need to detect when we inherit from a visitable type across models
@@ -401,6 +396,27 @@ and generate a "local visitor" for that model.
 - update include generation to take visitor parent into account.
 - update visitor template to detect external visitation and inherit
   accordingly.
+
+*** Add language-specific element injection                           :story:
+
+We need to create a factory that adds =quilt.cpp= specific elements
+into the yarn model.
+
+*** Add support for bintray                                           :story:
+
+There is a new web application that interfaces with GitHub:
+[[https://bintray.com/][bintray]].
+
+- add JSON validation to bintray deployment descriptor.
+
+Notes:
+
+- an account was created [[https://bintray.com/mcraveiro][linked to GitHub]].
+- it supports the uploads of [[https://bintray.com/mcraveiro/deb][debs]].
+- [[https://bintray.com/docs/usermanual/uploads/uploads_howdoiuploadmystufftobintray.html][How Do I Upload My Stuff to Bintray?]]
+- [[https://github.com/tim-janik/beast][Beast]] project [[https://raw.githubusercontent.com/tim-janik/beast/master/README.md][README]] with emblems
+- Beast [[https://github.com/tim-janik/beast/blob/master/.travis.yml][travis.yml]]
+- [[https://github.com/tim-janik/rapicorn/blob/master/citool.sh.][citool.sh]] script from [[https://github.com/tim-janik/rapicorn][Rapicorn]] project and their [[https://raw.githubusercontent.com/tim-janik/rapicorn/master/README.md][README]].
 
 *** Include forward declaration in visitable types                    :story:
 

@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/quilt.cpp/serialization/registrar_ser.hpp"
+#include "dogen/quilt.cpp/serialization/fabric/registrar_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/entity_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formatters/file_types_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/odb_settings_ser.hpp"
