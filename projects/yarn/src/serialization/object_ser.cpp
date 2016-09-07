@@ -37,7 +37,6 @@
 #include "dogen/yarn/serialization/attribute_ser.hpp"
 #include "dogen/yarn/serialization/stereotypes_ser.hpp"
 #include "dogen/yarn/serialization/object_types_ser.hpp"
-#include "dogen/yarn/serialization/visitation_types_ser.hpp"
 #include "dogen/yarn/serialization/generalization_settings_ser.hpp"
 #include "dogen/yarn/serialization/type_parameters_settings_ser.hpp"
 
@@ -70,10 +69,10 @@ void save(Archive& ar,
     ar << make_nvp("generalization_settings", v.generalization_settings_);
     ar << make_nvp("transparent_associations", v.transparent_associations_);
     ar << make_nvp("opaque_associations", v.opaque_associations_);
-    ar << make_nvp("visitable_by", v.visitable_by_);
-    ar << make_nvp("visitation_type", v.visitation_type_);
-    ar << make_nvp("visitor_base", v.visitor_base_);
-    ar << make_nvp("visitor_derived", v.visitor_derived_);
+    ar << make_nvp("base_visitor", v.base_visitor_);
+    ar << make_nvp("derived_visitor", v.derived_visitor_);
+    ar << make_nvp("is_visitation_root", v.is_visitation_root_);
+    ar << make_nvp("is_visitation_leaf", v.is_visitation_leaf_);
     ar << make_nvp("type_parameters_settings", v.type_parameters_settings_);
     ar << make_nvp("object_type", v.object_type_);
     ar << make_nvp("modeled_concepts", v.modeled_concepts_);
@@ -104,10 +103,10 @@ void load(Archive& ar,
     ar >> make_nvp("generalization_settings", v.generalization_settings_);
     ar >> make_nvp("transparent_associations", v.transparent_associations_);
     ar >> make_nvp("opaque_associations", v.opaque_associations_);
-    ar >> make_nvp("visitable_by", v.visitable_by_);
-    ar >> make_nvp("visitation_type", v.visitation_type_);
-    ar >> make_nvp("visitor_base", v.visitor_base_);
-    ar >> make_nvp("visitor_derived", v.visitor_derived_);
+    ar >> make_nvp("base_visitor", v.base_visitor_);
+    ar >> make_nvp("derived_visitor", v.derived_visitor_);
+    ar >> make_nvp("is_visitation_root", v.is_visitation_root_);
+    ar >> make_nvp("is_visitation_leaf", v.is_visitation_leaf_);
     ar >> make_nvp("type_parameters_settings", v.type_parameters_settings_);
     ar >> make_nvp("object_type", v.object_type_);
     ar >> make_nvp("modeled_concepts", v.modeled_concepts_);

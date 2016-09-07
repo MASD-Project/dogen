@@ -53,10 +53,13 @@ namespace yarn {
  */
 class injector {
 private:
-    /**
-     * @brief Creates the module to represent the global namespace.
-     */
-    module create_global_module() const;
+    struct visitor_details {
+        visitor_details(const name& b) : base(b) { }
+        visitor_details(const name& b, const name& d) : base(b), derived(d) { }
+
+        name base;
+        boost::optional<name> derived;
+    };
 
     std::unordered_map<location, std::list<name> >
     bucket_leaves_by_location(const std::list<name>& leaves) const;
@@ -78,13 +81,19 @@ private:
      * @brief Injects an accept operation for the given visitor, to
      * the supplied object and all its leaves.
      */
-    void inject_visitable_by(const std::list<name>& leaves,
-        const visitor& v, intermediate_model& im) const;
+    void update_visited_leaves(const std::list<name>& leaves,
+        const visitor_details& vd, intermediate_model& im) const;
 
     /**
      * @brief Injects visitors for objects that require them.
      */
     void inject_visitors(intermediate_model& im);
+
+private:
+    /**
+     * @brief Creates the module to represent the global namespace.
+     */
+    module create_global_module() const;
 
     /**
      * @brief Injects the global module, and makes all modules that do

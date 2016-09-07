@@ -24,7 +24,6 @@
 #include "dogen/yarn/test_data/attribute_td.hpp"
 #include "dogen/yarn/test_data/stereotypes_td.hpp"
 #include "dogen/yarn/test_data/object_types_td.hpp"
-#include "dogen/yarn/test_data/visitation_types_td.hpp"
 #include "dogen/yarn/test_data/generalization_settings_td.hpp"
 #include "dogen/yarn/test_data/type_parameters_settings_td.hpp"
 
@@ -80,11 +79,6 @@ create_dogen_yarn_generalization_settings(const unsigned int position) {
     return dogen::yarn::generalization_settings_generator::create(position);
 }
 
-dogen::yarn::visitation_types
-create_dogen_yarn_visitation_types(const unsigned int position) {
-    return dogen::yarn::visitation_types_generator::create(position);
-}
-
 dogen::yarn::type_parameters_settings
 create_dogen_yarn_type_parameters_settings(const unsigned int position) {
     return dogen::yarn::type_parameters_settings_generator::create(position);
@@ -134,10 +128,10 @@ populate(const unsigned int position, result_type& v) {
     v.generalization_settings(create_dogen_yarn_generalization_settings(position + 13));
     v.transparent_associations(create_std_list_dogen_yarn_name(position + 14));
     v.opaque_associations(create_std_list_dogen_yarn_name(position + 15));
-    v.visitable_by(create_boost_optional_dogen_yarn_name(position + 16));
-    v.visitation_type(create_dogen_yarn_visitation_types(position + 17));
-    v.visitor_base(create_boost_optional_dogen_yarn_name(position + 18));
-    v.visitor_derived(create_boost_optional_dogen_yarn_name(position + 19));
+    v.base_visitor(create_boost_optional_dogen_yarn_name(position + 16));
+    v.derived_visitor(create_boost_optional_dogen_yarn_name(position + 17));
+    v.is_visitation_root(create_bool(position + 18));
+    v.is_visitation_leaf(create_bool(position + 19));
     v.type_parameters_settings(create_dogen_yarn_type_parameters_settings(position + 20));
     v.object_type(create_dogen_yarn_object_types(position + 21));
     v.modeled_concepts(create_std_list_dogen_yarn_name(position + 22));

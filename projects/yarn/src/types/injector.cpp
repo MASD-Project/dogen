@@ -49,29 +49,12 @@ const std::string leaves_not_found("Could not find leaves for: ");
 const std::string model_already_has_global_module(
     "Found a global module in model: ");
 const std::string no_visitees("Visitor is not visiting any types: ");
+const std::string visitable_child("Children cannot be marked as visitable: ");
 
 }
 
 namespace dogen {
 namespace yarn {
-
-template<typename AssociativeContainerOfContainable>
-inline void add_containing_module_to_non_contained_entities(
-    const name& container_name, AssociativeContainerOfContainable& c) {
-    for (auto& pair : c) {
-        auto& s(pair.second);
-        if (!s.contained_by())
-            s.contained_by(container_name);
-    }
-}
-
-module injector::create_global_module() const {
-    module r;
-    r.generation_type(generation_types::no_generation);
-    r.origin_type(origin_types::system);
-    r.documentation(global_module_doc);
-    return r;
-}
 
 std::unordered_map<location, std::list<name> > injector::
 bucket_leaves_by_location(const std::list<name>& leaves) const {
@@ -110,10 +93,9 @@ visitor injector::create_visitor(const object& o, const location& l,
 }
 
 void injector::
-inject_visitable_by(const std::list<name>& leaves, const visitor& v,
+update_visited_leaves(const std::list<name>& leaves, const visitor_details& vd,
     intermediate_model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Injecting visitable by for: "
-                             << v.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Updating leaves for: " << vd.base.id();
 
     for (const auto& l : leaves) {
         auto i(m.objects().find(l.id()));
@@ -122,16 +104,13 @@ inject_visitable_by(const std::list<name>& leaves, const visitor& v,
             BOOST_THROW_EXCEPTION(injection_error(leaf_not_found + l.id()));
         }
 
-        auto vt(visitation_types::visitation_child_parent_visitor);
-        if (v.parent())
-            vt = visitation_types::visitation_child_descendant_visitor;
-
         auto& o(i->second);
-        o.visitation_type(vt);
-        o.visitable_by(v.name());
+        o.is_visitation_leaf(true);
+        o.base_visitor(vd.base);
+        o.derived_visitor(vd.derived);
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished injecting visitable by.";
+    BOOST_LOG_SEV(lg, debug) << "Finished updating leaves.";
 }
 
 void injector::
@@ -155,13 +134,23 @@ void injector::inject_visitors(intermediate_model& im) {
         auto& o(pair.second);
 
         /*
-         * We only care about the visitation roots - e.g. the
-         * top-level classes marked as visitable. All other visitation
-         * statuses are set by us (other than not visitable, of
-         * course).
+         * We only process types marked with the visitable
+         * stereotype. All other can be safely ignored.
          */
-        if (o.visitation_type() != visitation_types::visitation_root)
+        const auto i(o.stereotypes().find(yarn::stereotypes::visitable));
+        const bool has_visitable_stereotype(i == o.stereotypes().end());
+        if (has_visitable_stereotype)
             continue;
+
+        /*
+         * The visitable stereotype can only be applied to the root of
+         * an inheritance tree - it's an error otherwise.
+         */
+        const auto id(o.name().id());
+        if (o.is_child()) {
+            BOOST_LOG_SEV(lg, error) << visitable_child << id;
+            BOOST_THROW_EXCEPTION(injection_error(visitable_child + id));
+        }
 
         BOOST_LOG_SEV(lg, debug) << "Found visitation root: " << o.name().id();
 
@@ -174,7 +163,6 @@ void injector::inject_visitors(intermediate_model& im) {
          * different models.
          */
         if (o.leaves().empty()) {
-            const auto id(o.name().id());
             BOOST_LOG_SEV(lg, error) << zero_leaves << id;
             BOOST_THROW_EXCEPTION(injection_error(zero_leaves + id));
         }
@@ -191,31 +179,34 @@ void injector::inject_visitors(intermediate_model& im) {
          * same location as the root parent.
          */
         auto bucketed_leaves(bucket_leaves_by_location(o.leaves()));
-        auto i(bucketed_leaves.find(o.name().location()));
-        if (i == bucketed_leaves.end()) {
+        auto j(bucketed_leaves.find(o.name().location()));
+        if (j == bucketed_leaves.end()) {
             const auto id(o.name().id());
             BOOST_LOG_SEV(lg, error) << leaves_not_found << id;
             BOOST_THROW_EXCEPTION(injection_error(leaves_not_found + id));
         }
 
         BOOST_LOG_SEV(lg, debug) << "Found bucketed leaves. Total: "
-                                 << i->second.size();
+                                 << j->second.size();
 
         /*
-         * Now we need to create the parent visitor. This always maps
+         * Now we need to create the base visitor. This always maps
          * to the root parent of the inheritance tree.
          */
-        const auto& pvl(i->second);
+        const auto& bvl(j->second);
         const auto& loc(o.name().location());
 
         /*
-         * Preserve the generation type from the root object.
+         * Preserve the generation type from the root object and
+         * generate the visitor base.
          */
         auto gt(o.generation_type());
-        const auto pv(create_visitor(o, loc, gt, pvl));
-        o.visitable_by(pv.name());
-        inject_visitable_by(pvl, pv, im);
-        add_visitor_to_model(pv, im);
+        const auto bv(create_visitor(o, loc, gt, bvl));
+        const auto bvn(bv.name());
+        o.is_visitation_root(true);
+        o.base_visitor(bvn);
+        update_visited_leaves(bvl, visitor_details(bvn), im);
+        add_visitor_to_model(bv, im);
 
         /*
          * If there is only one bucket of leaves then that refers to
@@ -229,7 +220,7 @@ void injector::inject_visitors(intermediate_model& im) {
          * There are other buckets, so first we need to remove the
          * bucket we've already processed.
          */
-        bucketed_leaves.erase(i->first);
+        bucketed_leaves.erase(j->first);
 
         /*
          * Now we need to create the descendant visitors, one per
@@ -243,21 +234,43 @@ void injector::inject_visitors(intermediate_model& im) {
              * the generation type correctly or else it will not come
              * out.
              */
-            const auto& bn(pair.first);
+            const auto& dv_location(pair.first);
             gt = generation_types::no_generation;
-            const auto mm(im.name().location().model_modules());
-            const bool in_target_model(mm == bn.model_modules());
+            const auto immm(im.name().location().model_modules());
+            const bool in_target_model(immm == dv_location.model_modules());
             if (in_target_model)
                 gt = generation_types::full_generation;
 
+            /*
+             * Generate the visitor derived and update its leaves.
+             */
             const auto& bl(pair.second);
-            auto dv(create_visitor(o, bn, gt, bl));
-            dv.parent(pv.name());
-            inject_visitable_by(bl, dv, im);
+            auto dv(create_visitor(o, dv_location, gt, bl));
+            const auto dvn(dv.name());
+            dv.parent(bvn);
+            update_visited_leaves(bl, visitor_details(bvn, dvn), im);
             add_visitor_to_model(dv, im);
         }
     }
     BOOST_LOG_SEV(lg, debug) << "Done injecting visitors.";
+}
+
+template<typename AssociativeContainerOfContainable>
+inline void add_containing_module_to_non_contained_entities(
+    const name& container_name, AssociativeContainerOfContainable& c) {
+    for (auto& pair : c) {
+        auto& s(pair.second);
+        if (!s.contained_by())
+            s.contained_by(container_name);
+    }
+}
+
+module injector::create_global_module() const {
+    module r;
+    r.generation_type(generation_types::no_generation);
+    r.origin_type(origin_types::system);
+    r.documentation(global_module_doc);
+    return r;
 }
 
 void injector::inject_global_module(intermediate_model& im) {

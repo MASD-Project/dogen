@@ -48,7 +48,6 @@
 #include "dogen/yarn/io/object_types_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
 #include "dogen/yarn/io/generation_types_io.hpp"
-#include "dogen/yarn/io/visitation_types_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/io/generalization_settings_io.hpp"
 #include "dogen/yarn/io/type_parameters_settings_io.hpp"

@@ -586,16 +586,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings class_id="43" tracking_level="0" version="0">
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -795,16 +793,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -1004,16 +1000,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -1213,16 +1207,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -1371,16 +1363,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -1611,16 +1601,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -1738,16 +1726,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>2</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -1764,9 +1750,10 @@ in the context of inheritance.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<stereotypes>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
+					<count>1</count>
+					<bucket_count>2</bucket_count>
 					<item_version>0</item_version>
+					<item>1</item>
 				</stereotypes>
 			</second>
 		</item>
@@ -1945,16 +1932,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -2152,16 +2137,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -2361,16 +2344,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -2570,16 +2551,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -2697,16 +2676,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -2906,16 +2883,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -3063,16 +3038,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -3300,16 +3273,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -3507,16 +3478,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -3747,16 +3716,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -3904,16 +3871,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -4111,16 +4076,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -4348,16 +4311,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -4475,16 +4436,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -4712,16 +4671,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -4951,16 +4908,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -5078,16 +5033,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -5315,16 +5268,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -5472,16 +5423,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -5629,16 +5578,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -5866,16 +5813,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -6105,16 +6050,14 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<visitable_by>
+				<base_visitor>
 					<initialized>0</initialized>
-				</visitable_by>
-				<visitation_type>1</visitation_type>
-				<visitor_base>
+				</base_visitor>
+				<derived_visitor>
 					<initialized>0</initialized>
-				</visitor_base>
-				<visitor_derived>
-					<initialized>0</initialized>
-				</visitor_derived>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>

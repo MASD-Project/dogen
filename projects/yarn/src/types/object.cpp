@@ -26,7 +26,6 @@
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/io/stereotypes_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
-#include "dogen/yarn/io/visitation_types_io.hpp"
 #include "dogen/yarn/io/generalization_settings_io.hpp"
 #include "dogen/yarn/io/type_parameters_settings_io.hpp"
 
@@ -116,7 +115,8 @@ object::object()
       is_leaf_(static_cast<bool>(0)),
       is_final_(static_cast<bool>(0)),
       in_inheritance_relationship_(static_cast<bool>(0)),
-      visitation_type_(static_cast<dogen::yarn::visitation_types>(0)),
+      is_visitation_root_(static_cast<bool>(0)),
+      is_visitation_leaf_(static_cast<bool>(0)),
       object_type_(static_cast<dogen::yarn::object_types>(0)),
       provides_opaqueness_(static_cast<bool>(0)) { }
 
@@ -139,10 +139,10 @@ object::object(object&& rhs)
       generalization_settings_(std::move(rhs.generalization_settings_)),
       transparent_associations_(std::move(rhs.transparent_associations_)),
       opaque_associations_(std::move(rhs.opaque_associations_)),
-      visitable_by_(std::move(rhs.visitable_by_)),
-      visitation_type_(std::move(rhs.visitation_type_)),
-      visitor_base_(std::move(rhs.visitor_base_)),
-      visitor_derived_(std::move(rhs.visitor_derived_)),
+      base_visitor_(std::move(rhs.base_visitor_)),
+      derived_visitor_(std::move(rhs.derived_visitor_)),
+      is_visitation_root_(std::move(rhs.is_visitation_root_)),
+      is_visitation_leaf_(std::move(rhs.is_visitation_leaf_)),
       type_parameters_settings_(std::move(rhs.type_parameters_settings_)),
       object_type_(std::move(rhs.object_type_)),
       modeled_concepts_(std::move(rhs.modeled_concepts_)),
@@ -175,10 +175,10 @@ object::object(
     const dogen::yarn::generalization_settings& generalization_settings,
     const std::list<dogen::yarn::name>& transparent_associations,
     const std::list<dogen::yarn::name>& opaque_associations,
-    const boost::optional<dogen::yarn::name>& visitable_by,
-    const dogen::yarn::visitation_types visitation_type,
-    const boost::optional<dogen::yarn::name>& visitor_base,
-    const boost::optional<dogen::yarn::name>& visitor_derived,
+    const boost::optional<dogen::yarn::name>& base_visitor,
+    const boost::optional<dogen::yarn::name>& derived_visitor,
+    const bool is_visitation_root,
+    const bool is_visitation_leaf,
     const dogen::yarn::type_parameters_settings& type_parameters_settings,
     const dogen::yarn::object_types object_type,
     const std::list<dogen::yarn::name>& modeled_concepts,
@@ -210,10 +210,10 @@ object::object(
       generalization_settings_(generalization_settings),
       transparent_associations_(transparent_associations),
       opaque_associations_(opaque_associations),
-      visitable_by_(visitable_by),
-      visitation_type_(visitation_type),
-      visitor_base_(visitor_base),
-      visitor_derived_(visitor_derived),
+      base_visitor_(base_visitor),
+      derived_visitor_(derived_visitor),
+      is_visitation_root_(is_visitation_root),
+      is_visitation_leaf_(is_visitation_leaf),
       type_parameters_settings_(type_parameters_settings),
       object_type_(object_type),
       modeled_concepts_(modeled_concepts),
@@ -249,10 +249,10 @@ void object::to_stream(std::ostream& s) const {
       << "\"generalization_settings\": " << generalization_settings_ << ", "
       << "\"transparent_associations\": " << transparent_associations_ << ", "
       << "\"opaque_associations\": " << opaque_associations_ << ", "
-      << "\"visitable_by\": " << visitable_by_ << ", "
-      << "\"visitation_type\": " << visitation_type_ << ", "
-      << "\"visitor_base\": " << visitor_base_ << ", "
-      << "\"visitor_derived\": " << visitor_derived_ << ", "
+      << "\"base_visitor\": " << base_visitor_ << ", "
+      << "\"derived_visitor\": " << derived_visitor_ << ", "
+      << "\"is_visitation_root\": " << is_visitation_root_ << ", "
+      << "\"is_visitation_leaf\": " << is_visitation_leaf_ << ", "
       << "\"type_parameters_settings\": " << type_parameters_settings_ << ", "
       << "\"object_type\": " << object_type_ << ", "
       << "\"modeled_concepts\": " << modeled_concepts_ << ", "
@@ -282,10 +282,10 @@ void object::swap(object& other) noexcept {
     swap(generalization_settings_, other.generalization_settings_);
     swap(transparent_associations_, other.transparent_associations_);
     swap(opaque_associations_, other.opaque_associations_);
-    swap(visitable_by_, other.visitable_by_);
-    swap(visitation_type_, other.visitation_type_);
-    swap(visitor_base_, other.visitor_base_);
-    swap(visitor_derived_, other.visitor_derived_);
+    swap(base_visitor_, other.base_visitor_);
+    swap(derived_visitor_, other.derived_visitor_);
+    swap(is_visitation_root_, other.is_visitation_root_);
+    swap(is_visitation_leaf_, other.is_visitation_leaf_);
     swap(type_parameters_settings_, other.type_parameters_settings_);
     swap(object_type_, other.object_type_);
     swap(modeled_concepts_, other.modeled_concepts_);
@@ -318,10 +318,10 @@ bool object::operator==(const object& rhs) const {
         generalization_settings_ == rhs.generalization_settings_ &&
         transparent_associations_ == rhs.transparent_associations_ &&
         opaque_associations_ == rhs.opaque_associations_ &&
-        visitable_by_ == rhs.visitable_by_ &&
-        visitation_type_ == rhs.visitation_type_ &&
-        visitor_base_ == rhs.visitor_base_ &&
-        visitor_derived_ == rhs.visitor_derived_ &&
+        base_visitor_ == rhs.base_visitor_ &&
+        derived_visitor_ == rhs.derived_visitor_ &&
+        is_visitation_root_ == rhs.is_visitation_root_ &&
+        is_visitation_leaf_ == rhs.is_visitation_leaf_ &&
         type_parameters_settings_ == rhs.type_parameters_settings_ &&
         object_type_ == rhs.object_type_ &&
         modeled_concepts_ == rhs.modeled_concepts_ &&
@@ -536,60 +536,52 @@ void object::opaque_associations(const std::list<dogen::yarn::name>&& v) {
     opaque_associations_ = std::move(v);
 }
 
-const boost::optional<dogen::yarn::name>& object::visitable_by() const {
-    return visitable_by_;
+const boost::optional<dogen::yarn::name>& object::base_visitor() const {
+    return base_visitor_;
 }
 
-boost::optional<dogen::yarn::name>& object::visitable_by() {
-    return visitable_by_;
+boost::optional<dogen::yarn::name>& object::base_visitor() {
+    return base_visitor_;
 }
 
-void object::visitable_by(const boost::optional<dogen::yarn::name>& v) {
-    visitable_by_ = v;
+void object::base_visitor(const boost::optional<dogen::yarn::name>& v) {
+    base_visitor_ = v;
 }
 
-void object::visitable_by(const boost::optional<dogen::yarn::name>&& v) {
-    visitable_by_ = std::move(v);
+void object::base_visitor(const boost::optional<dogen::yarn::name>&& v) {
+    base_visitor_ = std::move(v);
 }
 
-dogen::yarn::visitation_types object::visitation_type() const {
-    return visitation_type_;
+const boost::optional<dogen::yarn::name>& object::derived_visitor() const {
+    return derived_visitor_;
 }
 
-void object::visitation_type(const dogen::yarn::visitation_types v) {
-    visitation_type_ = v;
+boost::optional<dogen::yarn::name>& object::derived_visitor() {
+    return derived_visitor_;
 }
 
-const boost::optional<dogen::yarn::name>& object::visitor_base() const {
-    return visitor_base_;
+void object::derived_visitor(const boost::optional<dogen::yarn::name>& v) {
+    derived_visitor_ = v;
 }
 
-boost::optional<dogen::yarn::name>& object::visitor_base() {
-    return visitor_base_;
+void object::derived_visitor(const boost::optional<dogen::yarn::name>&& v) {
+    derived_visitor_ = std::move(v);
 }
 
-void object::visitor_base(const boost::optional<dogen::yarn::name>& v) {
-    visitor_base_ = v;
+bool object::is_visitation_root() const {
+    return is_visitation_root_;
 }
 
-void object::visitor_base(const boost::optional<dogen::yarn::name>&& v) {
-    visitor_base_ = std::move(v);
+void object::is_visitation_root(const bool v) {
+    is_visitation_root_ = v;
 }
 
-const boost::optional<dogen::yarn::name>& object::visitor_derived() const {
-    return visitor_derived_;
+bool object::is_visitation_leaf() const {
+    return is_visitation_leaf_;
 }
 
-boost::optional<dogen::yarn::name>& object::visitor_derived() {
-    return visitor_derived_;
-}
-
-void object::visitor_derived(const boost::optional<dogen::yarn::name>& v) {
-    visitor_derived_ = v;
-}
-
-void object::visitor_derived(const boost::optional<dogen::yarn::name>&& v) {
-    visitor_derived_ = std::move(v);
+void object::is_visitation_leaf(const bool v) {
+    is_visitation_leaf_ = v;
 }
 
 const dogen::yarn::type_parameters_settings& object::type_parameters_settings() const {

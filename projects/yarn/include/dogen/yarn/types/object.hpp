@@ -39,7 +39,6 @@
 #include "dogen/yarn/types/object_types.hpp"
 #include "dogen/yarn/hash/stereotypes_hash.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
-#include "dogen/yarn/types/visitation_types.hpp"
 #include "dogen/yarn/serialization/object_fwd_ser.hpp"
 #include "dogen/yarn/types/generalization_settings.hpp"
 #include "dogen/yarn/types/type_parameters_settings.hpp"
@@ -93,10 +92,10 @@ public:
         const dogen::yarn::generalization_settings& generalization_settings,
         const std::list<dogen::yarn::name>& transparent_associations,
         const std::list<dogen::yarn::name>& opaque_associations,
-        const boost::optional<dogen::yarn::name>& visitable_by,
-        const dogen::yarn::visitation_types visitation_type,
-        const boost::optional<dogen::yarn::name>& visitor_base,
-        const boost::optional<dogen::yarn::name>& visitor_derived,
+        const boost::optional<dogen::yarn::name>& base_visitor,
+        const boost::optional<dogen::yarn::name>& derived_visitor,
+        const bool is_visitation_root,
+        const bool is_visitation_leaf,
         const dogen::yarn::type_parameters_settings& type_parameters_settings,
         const dogen::yarn::object_types object_type,
         const std::list<dogen::yarn::name>& modeled_concepts,
@@ -288,42 +287,30 @@ public:
     /**@}*/
 
     /**
-     * @brief Elements that visit the current element, if any.
-     */
-    /**@{*/
-    const boost::optional<dogen::yarn::name>& visitable_by() const;
-    boost::optional<dogen::yarn::name>& visitable_by();
-    void visitable_by(const boost::optional<dogen::yarn::name>& v);
-    void visitable_by(const boost::optional<dogen::yarn::name>&& v);
-    /**@}*/
-
-    /**
-     * @brief What kind of visitation strategy to apply to this element.
-     */
-    /**@{*/
-    dogen::yarn::visitation_types visitation_type() const;
-    void visitation_type(const dogen::yarn::visitation_types v);
-    /**@}*/
-
-    /**
      * @brief Base class of the visitor that visits the current element, if any.
      */
     /**@{*/
-    const boost::optional<dogen::yarn::name>& visitor_base() const;
-    boost::optional<dogen::yarn::name>& visitor_base();
-    void visitor_base(const boost::optional<dogen::yarn::name>& v);
-    void visitor_base(const boost::optional<dogen::yarn::name>&& v);
+    const boost::optional<dogen::yarn::name>& base_visitor() const;
+    boost::optional<dogen::yarn::name>& base_visitor();
+    void base_visitor(const boost::optional<dogen::yarn::name>& v);
+    void base_visitor(const boost::optional<dogen::yarn::name>&& v);
     /**@}*/
 
     /**
      * @brief Derived class of the visitor that visits the current element, if any.
      */
     /**@{*/
-    const boost::optional<dogen::yarn::name>& visitor_derived() const;
-    boost::optional<dogen::yarn::name>& visitor_derived();
-    void visitor_derived(const boost::optional<dogen::yarn::name>& v);
-    void visitor_derived(const boost::optional<dogen::yarn::name>&& v);
+    const boost::optional<dogen::yarn::name>& derived_visitor() const;
+    boost::optional<dogen::yarn::name>& derived_visitor();
+    void derived_visitor(const boost::optional<dogen::yarn::name>& v);
+    void derived_visitor(const boost::optional<dogen::yarn::name>&& v);
     /**@}*/
+
+    bool is_visitation_root() const;
+    void is_visitation_root(const bool v);
+
+    bool is_visitation_leaf() const;
+    void is_visitation_leaf(const bool v);
 
     const dogen::yarn::type_parameters_settings& type_parameters_settings() const;
     dogen::yarn::type_parameters_settings& type_parameters_settings();
@@ -401,10 +388,10 @@ private:
     dogen::yarn::generalization_settings generalization_settings_;
     std::list<dogen::yarn::name> transparent_associations_;
     std::list<dogen::yarn::name> opaque_associations_;
-    boost::optional<dogen::yarn::name> visitable_by_;
-    dogen::yarn::visitation_types visitation_type_;
-    boost::optional<dogen::yarn::name> visitor_base_;
-    boost::optional<dogen::yarn::name> visitor_derived_;
+    boost::optional<dogen::yarn::name> base_visitor_;
+    boost::optional<dogen::yarn::name> derived_visitor_;
+    bool is_visitation_root_;
+    bool is_visitation_leaf_;
     dogen::yarn::type_parameters_settings type_parameters_settings_;
     dogen::yarn::object_types object_type_;
     std::list<dogen::yarn::name> modeled_concepts_;

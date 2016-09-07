@@ -217,9 +217,7 @@ void transformer::to_object(const processed_object& po, const profile& p,
 
     o.is_fluent(p.is_fluent());
     if (p.is_visitable())
-        o.visitation_type(yarn::visitation_types::visitation_root);
-    else
-        o.visitation_type(yarn::visitation_types::not_visitable);
+        o.stereotypes().insert(yarn::stereotypes::visitable);
 
     for (const auto us : p.unknown_stereotypes()) {
         const auto n(to_name(us));

@@ -134,22 +134,16 @@ a.stream() << std::endl;
             /*
              * Visitation.
              */
-            using vt = yarn::visitation_types;
-            const bool is_visitation_root(o.visitation_type() == vt::visitation_root);
-            const bool is_visitation_child(
-                o.visitation_type() == vt::visitation_child_parent_visitor ||
-                o.visitation_type() == vt::visitation_child_descendant_visitor);
-
-            if (is_visitation_root && o.visitable_by()) {
-                const auto vsn(o.visitable_by()->simple());
+            if (o.is_visitation_root()) {
+                const auto vsn(o.base_visitor()->simple());
 a.stream() << "public:" << std::endl;
 a.stream() << "    virtual void accept(const " << vsn << "& v) const = 0;" << std::endl;
 a.stream() << "    virtual void accept(" << vsn << "& v) const = 0;" << std::endl;
 a.stream() << "    virtual void accept(const " << vsn << "& v) = 0;" << std::endl;
 a.stream() << "    virtual void accept(" << vsn << "& v) = 0;" << std::endl;
 a.stream() << std::endl;
-            } else if (is_visitation_child && o.visitable_by()) {
-                const auto vsn(o.visitable_by()->simple());
+            } else if (o.is_visitation_leaf()) {
+                const auto vsn(o.base_visitor()->simple());
                 const auto rpsn(o.root_parent()->simple());
 a.stream() << "public:" << std::endl;
 a.stream() << "    using " << rpsn << "::accept;" << std::endl;
