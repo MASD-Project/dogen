@@ -24,6 +24,7 @@
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/attribute_io.hpp"
+#include "dogen/yarn/io/stereotypes_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
 #include "dogen/yarn/io/visitation_types_io.hpp"
 #include "dogen/yarn/io/generalization_settings_io.hpp"
@@ -90,6 +91,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::na
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::yarn::stereotypes>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace yarn {
 
@@ -130,7 +145,8 @@ object::object(object&& rhs)
       object_type_(std::move(rhs.object_type_)),
       modeled_concepts_(std::move(rhs.modeled_concepts_)),
       associative_container_keys_(std::move(rhs.associative_container_keys_)),
-      provides_opaqueness_(std::move(rhs.provides_opaqueness_)) { }
+      provides_opaqueness_(std::move(rhs.provides_opaqueness_)),
+      stereotypes_(std::move(rhs.stereotypes_)) { }
 
 object::object(
     const std::string& documentation,
@@ -163,7 +179,8 @@ object::object(
     const dogen::yarn::object_types object_type,
     const std::list<dogen::yarn::name>& modeled_concepts,
     const std::list<dogen::yarn::name>& associative_container_keys,
-    const bool provides_opaqueness)
+    const bool provides_opaqueness,
+    const std::unordered_set<dogen::yarn::stereotypes>& stereotypes)
     : dogen::yarn::element(
       documentation,
       extensions,
@@ -195,7 +212,8 @@ object::object(
       object_type_(object_type),
       modeled_concepts_(modeled_concepts),
       associative_container_keys_(associative_container_keys),
-      provides_opaqueness_(provides_opaqueness) { }
+      provides_opaqueness_(provides_opaqueness),
+      stereotypes_(stereotypes) { }
 
 void object::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -231,7 +249,8 @@ void object::to_stream(std::ostream& s) const {
       << "\"object_type\": " << object_type_ << ", "
       << "\"modeled_concepts\": " << modeled_concepts_ << ", "
       << "\"associative_container_keys\": " << associative_container_keys_ << ", "
-      << "\"provides_opaqueness\": " << provides_opaqueness_
+      << "\"provides_opaqueness\": " << provides_opaqueness_ << ", "
+      << "\"stereotypes\": " << stereotypes_
       << " }";
 }
 
@@ -262,6 +281,7 @@ void object::swap(object& other) noexcept {
     swap(modeled_concepts_, other.modeled_concepts_);
     swap(associative_container_keys_, other.associative_container_keys_);
     swap(provides_opaqueness_, other.provides_opaqueness_);
+    swap(stereotypes_, other.stereotypes_);
 }
 
 bool object::equals(const dogen::yarn::element& other) const {
@@ -294,7 +314,8 @@ bool object::operator==(const object& rhs) const {
         object_type_ == rhs.object_type_ &&
         modeled_concepts_ == rhs.modeled_concepts_ &&
         associative_container_keys_ == rhs.associative_container_keys_ &&
-        provides_opaqueness_ == rhs.provides_opaqueness_;
+        provides_opaqueness_ == rhs.provides_opaqueness_ &&
+        stereotypes_ == rhs.stereotypes_;
 }
 
 object& object::operator=(object other) {
@@ -589,6 +610,22 @@ bool object::provides_opaqueness() const {
 
 void object::provides_opaqueness(const bool v) {
     provides_opaqueness_ = v;
+}
+
+const std::unordered_set<dogen::yarn::stereotypes>& object::stereotypes() const {
+    return stereotypes_;
+}
+
+std::unordered_set<dogen::yarn::stereotypes>& object::stereotypes() {
+    return stereotypes_;
+}
+
+void object::stereotypes(const std::unordered_set<dogen::yarn::stereotypes>& v) {
+    stereotypes_ = v;
+}
+
+void object::stereotypes(const std::unordered_set<dogen::yarn::stereotypes>&& v) {
+    stereotypes_ = std::move(v);
 }
 
 } }

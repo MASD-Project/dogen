@@ -44,6 +44,7 @@
 #include "dogen/yarn/io/enumerator_io.hpp"
 #include "dogen/yarn/io/separators_io.hpp"
 #include "dogen/yarn/io/enumeration_io.hpp"
+#include "dogen/yarn/io/stereotypes_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
 #include "dogen/yarn/io/generation_types_io.hpp"

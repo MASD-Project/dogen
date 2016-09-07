@@ -29,12 +29,15 @@
 #include <iosfwd>
 #include <algorithm>
 #include <unordered_map>
+#include <unordered_set>
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/types/attribute.hpp"
+#include "dogen/yarn/types/stereotypes.hpp"
 #include "dogen/yarn/types/object_types.hpp"
+#include "dogen/yarn/hash/stereotypes_hash.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/yarn/types/visitation_types.hpp"
 #include "dogen/yarn/serialization/object_fwd_ser.hpp"
@@ -96,7 +99,8 @@ public:
         const dogen::yarn::object_types object_type,
         const std::list<dogen::yarn::name>& modeled_concepts,
         const std::list<dogen::yarn::name>& associative_container_keys,
-        const bool provides_opaqueness);
+        const bool provides_opaqueness,
+        const std::unordered_set<dogen::yarn::stereotypes>& stereotypes);
 
 private:
     template<typename Archive>
@@ -340,6 +344,11 @@ public:
     void provides_opaqueness(const bool v);
     /**@}*/
 
+    const std::unordered_set<dogen::yarn::stereotypes>& stereotypes() const;
+    std::unordered_set<dogen::yarn::stereotypes>& stereotypes();
+    void stereotypes(const std::unordered_set<dogen::yarn::stereotypes>& v);
+    void stereotypes(const std::unordered_set<dogen::yarn::stereotypes>&& v);
+
 public:
     bool operator==(const object& rhs) const;
     bool operator!=(const object& rhs) const {
@@ -377,6 +386,7 @@ private:
     std::list<dogen::yarn::name> modeled_concepts_;
     std::list<dogen::yarn::name> associative_container_keys_;
     bool provides_opaqueness_;
+    std::unordered_set<dogen::yarn::stereotypes> stereotypes_;
 };
 
 } }

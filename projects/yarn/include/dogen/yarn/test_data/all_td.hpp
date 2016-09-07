@@ -44,6 +44,7 @@
 #include "dogen/yarn/test_data/enumerator_td.hpp"
 #include "dogen/yarn/test_data/separators_td.hpp"
 #include "dogen/yarn/test_data/enumeration_td.hpp"
+#include "dogen/yarn/test_data/stereotypes_td.hpp"
 #include "dogen/yarn/test_data/object_types_td.hpp"
 #include "dogen/yarn/test_data/origin_types_td.hpp"
 #include "dogen/yarn/test_data/generation_types_td.hpp"

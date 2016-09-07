@@ -965,6 +965,11 @@
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
+				<stereotypes class_id="44" tracking_level="0" version="0">
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -1244,6 +1249,11 @@
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
+				<stereotypes>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -1440,6 +1450,11 @@
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
+				<stereotypes>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -1796,6 +1811,11 @@
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
+				<stereotypes>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -2392,6 +2412,11 @@
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
+				<stereotypes>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -2988,6 +3013,11 @@
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
+				<stereotypes>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -3265,6 +3295,11 @@
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
+				<stereotypes>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -3861,6 +3896,11 @@
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
+				<stereotypes>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -4137,6 +4177,11 @@
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
+				<stereotypes>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -4493,6 +4538,11 @@
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
+				<stereotypes>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -4929,6 +4979,11 @@
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
+				<stereotypes>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -5285,6 +5340,11 @@
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
+				<stereotypes>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</stereotypes>
 			</second>
 		</item>
 		<item>
@@ -5432,7 +5492,7 @@
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<is_parent>0</is_parent>
-				<is_child>1</is_child>
+				<is_child>0</is_child>
 				<is_leaf>0</is_leaf>
 				<is_final>0</is_final>
 				<root_parent>
@@ -5511,23 +5571,28 @@
 					<item_version>0</item_version>
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
+				<stereotypes>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</stereotypes>
 			</second>
 		</item>
 	</objects>
-	<exceptions class_id="44" tracking_level="0" version="0">
+	<exceptions class_id="45" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<visitors class_id="45" tracking_level="0" version="0">
+	<visitors class_id="46" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</visitors>
 	<is_target>1</is_target>
 	<has_generatable_types>0</has_generatable_types>
-	<indices class_id="46" tracking_level="0" version="0">
-		<objects_always_in_heap class_id="47" tracking_level="0" version="0">
+	<indices class_id="47" tracking_level="0" version="0">
+		<objects_always_in_heap class_id="48" tracking_level="0" version="0">
 			<count>0</count>
 			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>

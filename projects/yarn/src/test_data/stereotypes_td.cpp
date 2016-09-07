@@ -18,24 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/object_io.hpp"
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/yarn/io/attribute_io.hpp"
-#include "dogen/yarn/io/stereotypes_io.hpp"
-#include "dogen/yarn/io/object_types_io.hpp"
-#include "dogen/yarn/io/visitation_types_io.hpp"
-#include "dogen/yarn/io/generalization_settings_io.hpp"
-#include "dogen/yarn/io/type_parameters_settings_io.hpp"
+#include "dogen/yarn/test_data/stereotypes_td.hpp"
 
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const object& v) {
-    v.to_stream(s);
-    return(s);
+stereotypes_generator::stereotypes_generator() : position_(0) { }
+void stereotypes_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<stereotypes>(position % 2);
+}
+
+stereotypes_generator::result_type
+stereotypes_generator::create(const unsigned int  position) {
+    result_type r;
+    stereotypes_generator::populate(position, r);
+    return r;
+}
+
+stereotypes_generator::result_type
+stereotypes_generator::operator()() {
+    return create(position_++);
 }
 
 } }
