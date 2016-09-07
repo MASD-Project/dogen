@@ -102,9 +102,8 @@ visitor injector::create_visitor(const object& o, const location& l,
         BOOST_THROW_EXCEPTION(injection_error(no_visitees + n.id()));
     }
 
-    for (const auto& l : leaves) {
+    for (const auto& l : leaves)
         r.visits().push_back(l);
-    }
 
     BOOST_LOG_SEV(lg, debug) << "Created visitor: " << n.id();
     return r;
@@ -113,6 +112,8 @@ visitor injector::create_visitor(const object& o, const location& l,
 void injector::
 inject_visitable_by(const std::list<name>& leaves, const visitor& v,
     intermediate_model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Injecting visitable by for: "
+                             << v.name().id();
 
     for (const auto& l : leaves) {
         auto i(m.objects().find(l.id()));
@@ -129,6 +130,8 @@ inject_visitable_by(const std::list<name>& leaves, const visitor& v,
         o.visitation_type(vt);
         o.visitable_by(v.name());
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished injecting visitable by.";
 }
 
 void injector::
@@ -146,7 +149,7 @@ add_visitor_to_model(const visitor& v, intermediate_model& im) const {
 }
 
 void injector::inject_visitors(intermediate_model& im) {
-    BOOST_LOG_SEV(lg, debug) << "Injecting visitors.";
+    BOOST_LOG_SEV(lg, debug) << "Injecting visitors for: " << im.name().id();
 
     for (auto& pair : im.objects()) {
         auto& o(pair.second);
@@ -159,6 +162,8 @@ void injector::inject_visitors(intermediate_model& im) {
          */
         if (o.visitation_type() != visitation_types::visitation_root)
             continue;
+
+        BOOST_LOG_SEV(lg, debug) << "Found visitation root: " << o.name().id();
 
         /*
          * Visitable types must have at least one leaf. We probably
@@ -193,6 +198,9 @@ void injector::inject_visitors(intermediate_model& im) {
             BOOST_THROW_EXCEPTION(injection_error(leaves_not_found + id));
         }
 
+        BOOST_LOG_SEV(lg, debug) << "Found bucketed leaves. Total: "
+                                 << i->second.size();
+
         /*
          * Now we need to create the parent visitor. This always maps
          * to the root parent of the inheritance tree.
@@ -215,7 +223,7 @@ void injector::inject_visitors(intermediate_model& im) {
          * is nothing else to do.
          */
         if (bucketed_leaves.size() == 1)
-            return;
+            continue;
 
         /*
          * There are other buckets, so first we need to remove the
@@ -253,8 +261,10 @@ void injector::inject_visitors(intermediate_model& im) {
 }
 
 void injector::inject_global_module(intermediate_model& im) {
-    const auto gm(create_global_module());
+    BOOST_LOG_SEV(lg, debug) << "Injecting global module for: "
+                             << im.name().id();
 
+    const auto gm(create_global_module());
     const auto gmn(gm.name());
     const auto i(im.modules().find(gmn.id()));
     if (i != im.modules().end()) {
@@ -272,11 +282,17 @@ void injector::inject_global_module(intermediate_model& im) {
     add_containing_module_to_non_contained_entities(gmn, im.objects());
     add_containing_module_to_non_contained_entities(gmn, im.exceptions());
     add_containing_module_to_non_contained_entities(gmn, im.visitors());
+
+    BOOST_LOG_SEV(lg, debug) << "Done injecting global module";
 }
 
 void injector::inject(intermediate_model& im) {
+    BOOST_LOG_SEV(lg, debug) << "Running on: " << im.name().id();
+
     inject_visitors(im);
     inject_global_module(im);
+
+    BOOST_LOG_SEV(lg, debug) << "Finished running";
 }
 
 } }
