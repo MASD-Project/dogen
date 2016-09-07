@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include <algorithm>
-#include "dogen/test_models/trivial_inheritance/types/base_visitor.hpp"
+#include "dogen/test_models/trivial_inheritance/types/base_visitor_fwd.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/base_fwd_ser.hpp"
 
 namespace dogen {

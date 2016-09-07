@@ -74,6 +74,13 @@ void transformer::populate_entity_properties(const yarn::name& n,
 }
 
 std::shared_ptr<forward_declarations_info> transformer::
+to_forward_declarations_info(const yarn::visitor& v) const {
+    auto r(std::make_shared<forward_declarations_info>());
+    populate_entity_properties(v.name(), v.documentation(), *r);
+    return r;
+}
+
+std::shared_ptr<forward_declarations_info> transformer::
 to_forward_declarations_info(const yarn::object& o) const {
     auto r(std::make_shared<forward_declarations_info>());
     populate_entity_properties(o.name(), o.documentation(), *r);
@@ -94,6 +101,13 @@ to_forward_declarations_info(const yarn::enumeration& e) const {
     populate_entity_properties(e.name(), e.documentation(), *r);
     r->is_enum(true);
     r->enum_type("unsigned int"); // FIXME
+    return r;
+}
+
+std::forward_list<std::shared_ptr<formattable> >
+transformer::transform(const yarn::visitor& v) const {
+    std::forward_list<std::shared_ptr<formattable> > r;
+    r.push_front(to_forward_declarations_info(v));
     return r;
 }
 

@@ -68,6 +68,7 @@ private:
 
 public:
     using yarn::element_visitor::visit;
+    void visit(const dogen::yarn::visitor& v) { transform(v); }
     void visit(const dogen::yarn::enumeration& e) { transform(e); }
     void visit(const dogen::yarn::object& o) { transform(o); }
     void visit(const dogen::yarn::exception& e) { transform(e); }

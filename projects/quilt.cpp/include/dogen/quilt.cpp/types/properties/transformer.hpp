@@ -38,6 +38,7 @@
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/exception.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/types/visitor.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/quilt.cpp/types/properties/entity.hpp"
 #include "dogen/quilt.cpp/types/properties/formattable.hpp"
@@ -67,6 +68,12 @@ private:
 
 private:
     /**
+     * @brief Creates a forward declaration for the visitor.
+     */
+    std::shared_ptr<forward_declarations_info>
+    to_forward_declarations_info(const yarn::visitor& v) const;
+
+    /**
      * @brief Creates a forward declaration for the object.
      */
     std::shared_ptr<forward_declarations_info>
@@ -85,6 +92,12 @@ private:
     to_forward_declarations_info(const yarn::enumeration& e) const;
 
 public:
+    /**
+     * @brief Transform an Yarn visitor into a C++ entity.
+     */
+    std::forward_list<std::shared_ptr<formattable> >
+    transform(const yarn::visitor& v) const;
+
     /**
      * @brief Transform an Yarn enumeration into a C++ entity.
      */
