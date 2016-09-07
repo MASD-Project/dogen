@@ -28,6 +28,7 @@
 #include <iosfwd>
 #include <algorithm>
 #include "dogen/dynamic/types/value.hpp"
+#include "dogen/dynamic/types/value_visitor.hpp"
 #include "dogen/dynamic/serialization/boolean_fwd_ser.hpp"
 
 namespace dogen {

@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include "dogen/quilt.cpp/types/properties/origin_types.hpp"
-#include "dogen/quilt.cpp/types/properties/formattable_visitor.hpp"
+#include "dogen/quilt.cpp/types/properties/formattable_visitor_fwd.hpp"
 #include "dogen/quilt.cpp/serialization/properties/formattable_fwd_ser.hpp"
 
 namespace dogen {

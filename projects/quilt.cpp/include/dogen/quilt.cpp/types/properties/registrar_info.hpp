@@ -30,6 +30,7 @@
 #include <string>
 #include <algorithm>
 #include "dogen/quilt.cpp/types/properties/entity.hpp"
+#include "dogen/quilt.cpp/types/properties/formattable_visitor.hpp"
 #include "dogen/quilt.cpp/serialization/properties/registrar_info_fwd_ser.hpp"
 
 namespace dogen {

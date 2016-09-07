@@ -32,6 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/formatters/types/file_properties.hpp"
 #include "dogen/quilt.cpp/types/properties/formattable.hpp"
+#include "dogen/quilt.cpp/types/properties/formattable_visitor.hpp"
 #include "dogen/quilt.cpp/serialization/properties/odb_options_info_fwd_ser.hpp"
 
 namespace dogen {

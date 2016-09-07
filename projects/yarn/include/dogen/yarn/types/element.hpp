@@ -32,8 +32,8 @@
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
-#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/yarn/types/generation_types.hpp"
+#include "dogen/yarn/types/element_visitor_fwd.hpp"
 #include "dogen/yarn/serialization/element_fwd_ser.hpp"
 
 namespace dogen {

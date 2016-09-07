@@ -30,6 +30,7 @@
 #include <string>
 #include <algorithm>
 #include "dogen/dynamic/types/value.hpp"
+#include "dogen/dynamic/types/value_visitor.hpp"
 #include "dogen/dynamic/serialization/text_collection_fwd_ser.hpp"
 
 namespace dogen {

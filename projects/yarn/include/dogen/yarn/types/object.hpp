@@ -35,6 +35,7 @@
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/object_types.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/yarn/serialization/object_fwd_ser.hpp"
 #include "dogen/yarn/types/generalization_settings.hpp"
 #include "dogen/yarn/types/type_parameters_settings.hpp"

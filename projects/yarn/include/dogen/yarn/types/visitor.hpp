@@ -31,6 +31,7 @@
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/yarn/serialization/visitor_fwd_ser.hpp"
 
 namespace dogen {

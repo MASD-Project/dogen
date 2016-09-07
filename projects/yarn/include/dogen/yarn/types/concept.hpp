@@ -33,6 +33,7 @@
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/types/attribute.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/yarn/serialization/concept_fwd_ser.hpp"
 
 namespace dogen {
