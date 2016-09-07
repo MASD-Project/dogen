@@ -30,6 +30,8 @@
 #include <string>
 #include <algorithm>
 #include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
+#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/registrar_fwd_ser.hpp"
 
 namespace dogen {
@@ -58,22 +60,34 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::fabric::registrar& v, unsigned int version);
 
 public:
-    using yarn::element::accept;
+    using dogen::yarn::element::accept;
 
-    virtual void accept(const yarn::element_visitor& /*v*/) const override {
-        // v.visit(*this);
+    virtual void accept(const dogen::yarn::element_visitor& v) const override {
+        typedef const element_visitor* derived_ptr;
+        const auto dv(dynamic_cast<derived_ptr>(&v));
+        if (dv)
+            dv->visit(*this);
     }
 
-    virtual void accept(yarn::element_visitor& /*v*/) const override {
-        // v.visit(*this);
+    virtual void accept(dogen::yarn::element_visitor& v) const override {
+        typedef element_visitor* derived_ptr;
+        const auto dv(dynamic_cast<derived_ptr>(&v));
+        if (dv)
+            dv->visit(*this);
     }
 
-    virtual void accept(const yarn::element_visitor& /*v*/) override {
-        // v.visit(*this);
+    virtual void accept(const dogen::yarn::element_visitor& v) override {
+        typedef const element_visitor* derived_ptr;
+        const auto dv(dynamic_cast<derived_ptr>(&v));
+        if (dv)
+            dv->visit(*this);
     }
 
-    virtual void accept(yarn::element_visitor& /*v*/) override {
-        // v.visit(*this);
+    virtual void accept(dogen::yarn::element_visitor& v) override {
+        typedef element_visitor* derived_ptr;
+        const auto dv(dynamic_cast<derived_ptr>(&v));
+        if (dv)
+            dv->visit(*this);
     }
 
 public:

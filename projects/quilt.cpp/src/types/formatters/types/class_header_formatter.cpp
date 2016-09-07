@@ -104,6 +104,9 @@ provider::provide(const properties::inclusion_dependencies_builder_factory& f,
              * descendant includes the parent.
              */
             builder.add(*o.base_visitor(), self_fn);
+
+            if (o.derived_visitor())
+                builder.add(*o.derived_visitor(), self_fn);
         }
     }
     return builder.build();
