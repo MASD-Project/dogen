@@ -163,7 +163,8 @@ void injector::inject_visitors(intermediate_model& im) {
                     pair.first.model_modules())
                     gt = generation_types::full_generation;
 
-                const auto v(create_visitor(o, pair.first, gt, pair.second));
+                auto v(create_visitor(o, pair.first, gt, pair.second));
+                v.parent(parent_visitor.name());
                 inject_visitable_by(pair.second, v.name(), im);
                 visitors.push_back(v);
             }

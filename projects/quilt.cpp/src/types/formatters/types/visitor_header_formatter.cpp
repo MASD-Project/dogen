@@ -58,12 +58,13 @@ provider::provide(const properties::inclusion_dependencies_builder_factory& f,
     const yarn::visitor& v) const {
 
     auto builder(f.make());
-    if (v.visits().empty())
-        return boost::optional<std::list<std::string> >();
-
     const auto fwd_fn(traits::forward_declarations_formatter_name());
     builder.add(v.visits(), fwd_fn);
 
+    if (v.parent()) {
+        const auto ch_fn(traits::class_header_formatter_name());
+        builder.add(*v.parent(), ch_fn);
+    }
     return builder.build();
 }
 

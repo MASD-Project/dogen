@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_fwd.hpp"
 
 namespace dogen {
@@ -35,11 +36,13 @@ namespace fabric {
 /**
  * @brief Visitor for element
  */
-class element_visitor {
+class element_visitor : public dogen::yarn::element_visitor {
 public:
     virtual ~element_visitor() noexcept = 0;
 
 public:
+    using dogen::yarn::element_visitor::visit;
+
     /**
      * @brief Accept visits for type dogen::quilt::cpp::fabric::registrar
      */

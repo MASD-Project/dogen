@@ -36,11 +36,24 @@ dogen::formatters::file visitor_header_formatter_stitch(
             auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
             a.comment(v.documentation());
+            if (!v.parent())
 a.stream() << "class " << v.name().simple() << " {" << std::endl;
+            else {
+                const auto& pn(*v.parent());
+                const auto pqn(a.get_qualified_name(pn));
+a.stream() << "class " << v.name().simple() << " : public " << pqn << " {" << std::endl;
+            }
 a.stream() << "public:" << std::endl;
 a.stream() << "    virtual ~" << v.name().simple() << "() noexcept = 0;" << std::endl;
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
+            if (v.parent()) {
+                const auto& pn(*v.parent());
+                const auto pqn(a.get_qualified_name(pn));            
+a.stream() << "    using " << pqn << "::visit;" << std::endl;
+a.stream() << std::endl;
+            }
+
             bool is_first(true);
             for (const auto& t : v.visits()) {
                 if (!is_first)
