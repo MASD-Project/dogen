@@ -18,23 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/object_io.hpp"
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/yarn/io/attribute_io.hpp"
-#include "dogen/yarn/io/object_types_io.hpp"
-#include "dogen/yarn/io/visitation_types_io.hpp"
-#include "dogen/yarn/io/generalization_settings_io.hpp"
-#include "dogen/yarn/io/type_parameters_settings_io.hpp"
+#include "dogen/yarn/test_data/visitation_types_td.hpp"
 
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const object& v) {
-    v.to_stream(s);
-    return(s);
+visitation_types_generator::visitation_types_generator() : position_(0) { }
+void visitation_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<visitation_types>(position % 5);
+}
+
+visitation_types_generator::result_type
+visitation_types_generator::create(const unsigned int  position) {
+    result_type r;
+    visitation_types_generator::populate(position, r);
+    return r;
+}
+
+visitation_types_generator::result_type
+visitation_types_generator::operator()() {
+    return create(position_++);
 }
 
 } }

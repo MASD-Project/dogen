@@ -18,23 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
+#include <string>
 #include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/object_io.hpp"
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/yarn/io/attribute_io.hpp"
-#include "dogen/yarn/io/object_types_io.hpp"
+#include <stdexcept>
 #include "dogen/yarn/io/visitation_types_io.hpp"
-#include "dogen/yarn/io/generalization_settings_io.hpp"
-#include "dogen/yarn/io/type_parameters_settings_io.hpp"
 
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const object& v) {
-    v.to_stream(s);
-    return(s);
+std::ostream& operator<<(std::ostream& s, const visitation_types& v) {
+    s << "{ " << "\"__type__\": " << "\"visitation_types\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case visitation_types::invalid:
+        attr = "\"invalid\"";
+        break;
+    case visitation_types::not_visitable:
+        attr = "\"not_visitable\"";
+        break;
+    case visitation_types::visitation_root:
+        attr = "\"visitation_root\"";
+        break;
+    case visitation_types::visitation_child_parent_visitor:
+        attr = "\"visitation_child_parent_visitor\"";
+        break;
+    case visitation_types::visitation_child_descendant_visitor:
+        attr = "\"visitation_child_descendant_visitor\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for visitation_types");
+    }
+    s << attr << " }";
+    return s;
 }
 
 } }

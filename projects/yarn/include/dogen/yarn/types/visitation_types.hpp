@@ -18,23 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/object_io.hpp"
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/yarn/io/attribute_io.hpp"
-#include "dogen/yarn/io/object_types_io.hpp"
-#include "dogen/yarn/io/visitation_types_io.hpp"
-#include "dogen/yarn/io/generalization_settings_io.hpp"
-#include "dogen/yarn/io/type_parameters_settings_io.hpp"
+#ifndef DOGEN_YARN_TYPES_VISITATION_TYPES_HPP
+#define DOGEN_YARN_TYPES_VISITATION_TYPES_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const object& v) {
-    v.to_stream(s);
-    return(s);
-}
+enum class visitation_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    not_visitable = 1, ///< Element is not part of a visitation relationship.
+    visitation_root = 2, ///< Element is the top-most element in a generalisation relationship and is visitable.
+    visitation_child_parent_visitor = 3, ///< Element is not the top-most element in a generalisation relationship, where the///< root is visitable.
+    visitation_child_descendant_visitor = 4 ///< Element is not the top-most element in a generalisation relationship, where the///< root is visitable and the visitor uses inheritance.
+};
 
 } }
+
+#endif

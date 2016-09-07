@@ -36,6 +36,7 @@
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/object_types.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
+#include "dogen/yarn/types/visitation_types.hpp"
 #include "dogen/yarn/serialization/object_fwd_ser.hpp"
 #include "dogen/yarn/types/generalization_settings.hpp"
 #include "dogen/yarn/types/type_parameters_settings.hpp"
@@ -92,6 +93,7 @@ public:
         const bool is_visitable,
         const bool is_root_parent_visitable,
         const boost::optional<dogen::yarn::name>& visitable_by,
+        const dogen::yarn::visitation_types visitation_type,
         const dogen::yarn::type_parameters_settings& type_parameters_settings,
         const dogen::yarn::object_types object_type,
         const std::list<dogen::yarn::name>& modeled_concepts,
@@ -311,6 +313,14 @@ public:
     void visitable_by(const boost::optional<dogen::yarn::name>&& v);
     /**@}*/
 
+    /**
+     * @brief What kind of visitation strategy to apply to this element.
+     */
+    /**@{*/
+    dogen::yarn::visitation_types visitation_type() const;
+    void visitation_type(const dogen::yarn::visitation_types v);
+    /**@}*/
+
     const dogen::yarn::type_parameters_settings& type_parameters_settings() const;
     dogen::yarn::type_parameters_settings& type_parameters_settings();
     void type_parameters_settings(const dogen::yarn::type_parameters_settings& v);
@@ -385,6 +395,7 @@ private:
     bool is_visitable_;
     bool is_root_parent_visitable_;
     boost::optional<dogen::yarn::name> visitable_by_;
+    dogen::yarn::visitation_types visitation_type_;
     dogen::yarn::type_parameters_settings type_parameters_settings_;
     dogen::yarn::object_types object_type_;
     std::list<dogen::yarn::name> modeled_concepts_;

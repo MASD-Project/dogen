@@ -391,6 +391,7 @@
 				<visitable_by>
 					<initialized>0</initialized>
 				</visitable_by>
+				<visitation_type>0</visitation_type>
 				<type_parameters_settings class_id="43" tracking_level="0" version="0">
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>

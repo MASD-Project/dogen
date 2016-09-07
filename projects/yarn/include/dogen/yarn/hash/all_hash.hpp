@@ -47,6 +47,7 @@
 #include "dogen/yarn/hash/object_types_hash.hpp"
 #include "dogen/yarn/hash/origin_types_hash.hpp"
 #include "dogen/yarn/hash/generation_types_hash.hpp"
+#include "dogen/yarn/hash/visitation_types_hash.hpp"
 #include "dogen/yarn/hash/intermediate_model_hash.hpp"
 #include "dogen/yarn/hash/generalization_settings_hash.hpp"
 #include "dogen/yarn/hash/type_parameters_settings_hash.hpp"

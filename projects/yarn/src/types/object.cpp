@@ -25,6 +25,7 @@
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
+#include "dogen/yarn/io/visitation_types_io.hpp"
 #include "dogen/yarn/io/generalization_settings_io.hpp"
 #include "dogen/yarn/io/type_parameters_settings_io.hpp"
 
@@ -102,6 +103,7 @@ object::object()
       in_inheritance_relationship_(static_cast<bool>(0)),
       is_visitable_(static_cast<bool>(0)),
       is_root_parent_visitable_(static_cast<bool>(0)),
+      visitation_type_(static_cast<dogen::yarn::visitation_types>(0)),
       object_type_(static_cast<dogen::yarn::object_types>(0)),
       provides_opaqueness_(static_cast<bool>(0)) { }
 
@@ -127,6 +129,7 @@ object::object(object&& rhs)
       is_visitable_(std::move(rhs.is_visitable_)),
       is_root_parent_visitable_(std::move(rhs.is_root_parent_visitable_)),
       visitable_by_(std::move(rhs.visitable_by_)),
+      visitation_type_(std::move(rhs.visitation_type_)),
       type_parameters_settings_(std::move(rhs.type_parameters_settings_)),
       object_type_(std::move(rhs.object_type_)),
       modeled_concepts_(std::move(rhs.modeled_concepts_)),
@@ -161,6 +164,7 @@ object::object(
     const bool is_visitable,
     const bool is_root_parent_visitable,
     const boost::optional<dogen::yarn::name>& visitable_by,
+    const dogen::yarn::visitation_types visitation_type,
     const dogen::yarn::type_parameters_settings& type_parameters_settings,
     const dogen::yarn::object_types object_type,
     const std::list<dogen::yarn::name>& modeled_concepts,
@@ -194,6 +198,7 @@ object::object(
       is_visitable_(is_visitable),
       is_root_parent_visitable_(is_root_parent_visitable),
       visitable_by_(visitable_by),
+      visitation_type_(visitation_type),
       type_parameters_settings_(type_parameters_settings),
       object_type_(object_type),
       modeled_concepts_(modeled_concepts),
@@ -231,6 +236,7 @@ void object::to_stream(std::ostream& s) const {
       << "\"is_visitable\": " << is_visitable_ << ", "
       << "\"is_root_parent_visitable\": " << is_root_parent_visitable_ << ", "
       << "\"visitable_by\": " << visitable_by_ << ", "
+      << "\"visitation_type\": " << visitation_type_ << ", "
       << "\"type_parameters_settings\": " << type_parameters_settings_ << ", "
       << "\"object_type\": " << object_type_ << ", "
       << "\"modeled_concepts\": " << modeled_concepts_ << ", "
@@ -262,6 +268,7 @@ void object::swap(object& other) noexcept {
     swap(is_visitable_, other.is_visitable_);
     swap(is_root_parent_visitable_, other.is_root_parent_visitable_);
     swap(visitable_by_, other.visitable_by_);
+    swap(visitation_type_, other.visitation_type_);
     swap(type_parameters_settings_, other.type_parameters_settings_);
     swap(object_type_, other.object_type_);
     swap(modeled_concepts_, other.modeled_concepts_);
@@ -296,6 +303,7 @@ bool object::operator==(const object& rhs) const {
         is_visitable_ == rhs.is_visitable_ &&
         is_root_parent_visitable_ == rhs.is_root_parent_visitable_ &&
         visitable_by_ == rhs.visitable_by_ &&
+        visitation_type_ == rhs.visitation_type_ &&
         type_parameters_settings_ == rhs.type_parameters_settings_ &&
         object_type_ == rhs.object_type_ &&
         modeled_concepts_ == rhs.modeled_concepts_ &&
@@ -539,6 +547,14 @@ void object::visitable_by(const boost::optional<dogen::yarn::name>& v) {
 
 void object::visitable_by(const boost::optional<dogen::yarn::name>&& v) {
     visitable_by_ = std::move(v);
+}
+
+dogen::yarn::visitation_types object::visitation_type() const {
+    return visitation_type_;
+}
+
+void object::visitation_type(const dogen::yarn::visitation_types v) {
+    visitation_type_ = v;
 }
 
 const dogen::yarn::type_parameters_settings& object::type_parameters_settings() const {
