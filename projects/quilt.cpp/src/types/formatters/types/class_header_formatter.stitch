@@ -152,7 +152,13 @@ private:
             /*
              * Visitation.
              */
-            if (o.is_visitable() && o.visitable_by()) {
+            using vt = yarn::visitation_types;
+            const bool is_visitation_root(o.visitation_type() == vt::visitation_root);
+            const bool is_visitation_child(
+                o.visitation_type() == vt::visitation_child_parent_visitor ||
+                o.visitation_type() == vt::visitation_child_descendant_visitor);
+
+            if (is_visitation_root && o.visitable_by()) {
                 const auto vsn(o.visitable_by()->simple());
 #>
 public:
@@ -162,7 +168,7 @@ public:
     virtual void accept(<#= vsn #>& v) = 0;
 
 <#+
-            } else if (o.is_root_parent_visitable() && !o.is_parent() && o.visitable_by()) {
+            } else if (is_visitation_child && o.visitable_by()) {
                 const auto vsn(o.visitable_by()->simple());
                 const auto rpsn(o.root_parent()->simple());
 #>

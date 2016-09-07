@@ -122,13 +122,12 @@ void generalization_expander::populate_properties_up_the_generalization_tree(
     auto& parent(j->second);
     populate_properties_up_the_generalization_tree(leaf, im, parent);
 
-    /*
-     * If our parent does not have a parent then it is our root
-     * parent.
-     */
     if (!parent.parent()) {
+        /*
+         * If our parent does not have a parent then it is our root
+         * parent.
+         */
         o.root_parent(parent.name());
-        o.is_root_parent_visitable(parent.is_visitable());
     } else {
         /*
          * On all other cases, inherit the root parent properties for
@@ -136,7 +135,6 @@ void generalization_expander::populate_properties_up_the_generalization_tree(
          * root parent as per above.
          */
         o.root_parent(parent.root_parent());
-        o.is_root_parent_visitable(parent.is_root_parent_visitable());
     }
 }
 

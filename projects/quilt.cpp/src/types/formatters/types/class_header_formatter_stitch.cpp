@@ -134,7 +134,13 @@ a.stream() << std::endl;
             /*
              * Visitation.
              */
-            if (o.is_visitable() && o.visitable_by()) {
+            using vt = yarn::visitation_types;
+            const bool is_visitation_root(o.visitation_type() == vt::visitation_root);
+            const bool is_visitation_child(
+                o.visitation_type() == vt::visitation_child_parent_visitor ||
+                o.visitation_type() == vt::visitation_child_descendant_visitor);
+
+            if (is_visitation_root && o.visitable_by()) {
                 const auto vsn(o.visitable_by()->simple());
 a.stream() << "public:" << std::endl;
 a.stream() << "    virtual void accept(const " << vsn << "& v) const = 0;" << std::endl;
@@ -142,7 +148,7 @@ a.stream() << "    virtual void accept(" << vsn << "& v) const = 0;" << std::end
 a.stream() << "    virtual void accept(const " << vsn << "& v) = 0;" << std::endl;
 a.stream() << "    virtual void accept(" << vsn << "& v) = 0;" << std::endl;
 a.stream() << std::endl;
-            } else if (o.is_root_parent_visitable() && !o.is_parent() && o.visitable_by()) {
+            } else if (is_visitation_child && o.visitable_by()) {
                 const auto vsn(o.visitable_by()->simple());
                 const auto rpsn(o.root_parent()->simple());
 a.stream() << "public:" << std::endl;

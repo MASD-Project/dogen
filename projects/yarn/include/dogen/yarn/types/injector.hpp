@@ -61,6 +61,8 @@ private:
     std::unordered_map<location, std::list<name> >
     bucket_leaves_by_location(const std::list<name>& leaves) const;
 
+    void add_visitor_to_model(const visitor& v, intermediate_model& im) const;
+
     /**
      * @brief Create a visitor for the object o.
      *
@@ -77,7 +79,7 @@ private:
      * the supplied object and all its leaves.
      */
     void inject_visitable_by(const std::list<name>& leaves,
-        const name& visitor, intermediate_model& im) const;
+        const visitor& v, intermediate_model& im) const;
 
     /**
      * @brief Injects visitors for objects that require them.

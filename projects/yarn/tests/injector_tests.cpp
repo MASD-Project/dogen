@@ -85,7 +85,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
     auto m(factory.make_single_type_model());
     BOOST_REQUIRE(m.objects().size() == 1);
     auto& ob(m.objects().begin()->second);
-    ob.is_visitable(true);
+    ob.visitation_type(dogen::yarn::visitation_types::visitation_root);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     dogen::yarn::injector i;
@@ -103,7 +103,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
         if (factory.is_type_name_n(1, n)) {
             auto& o(pair.second);
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
-            o.is_visitable(true);
+            o.visitation_type(dogen::yarn::visitation_types::visitation_root);
         }
     }
     BOOST_LOG_SEV(lg, debug) << "before: " << m;
