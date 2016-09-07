@@ -24,6 +24,7 @@
 #include "dogen/formatters/io/file_properties_io.hpp"
 #include "dogen/quilt.cpp/io/properties/formattable_io.hpp"
 #include "dogen/quilt.cpp/types/properties/cmakelists_info.hpp"
+#include "dogen/quilt.cpp/types/properties/formattable_visitor.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -94,6 +95,23 @@ cmakelists_info::cmakelists_info(
       file_properties_(file_properties),
       odb_folder_(odb_folder),
       odb_enabled_(odb_enabled) { }
+
+void cmakelists_info::accept(const formattable_visitor& v) const {
+    v.visit(*this);
+}
+
+void cmakelists_info::accept(formattable_visitor& v) const {
+    v.visit(*this);
+    }
+
+void cmakelists_info::accept(const formattable_visitor& v) {
+    v.visit(*this);
+}
+
+void cmakelists_info::accept(formattable_visitor& v) {
+    v.visit(*this);
+}
+
 
 void cmakelists_info::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);

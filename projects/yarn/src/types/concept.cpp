@@ -24,6 +24,7 @@
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/io/attribute_io.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 
 namespace std {
 
@@ -111,6 +112,23 @@ concept::concept(
       is_fluent_(is_fluent),
       refines_(refines),
       is_child_(is_child) { }
+
+void concept::accept(const element_visitor& v) const {
+    v.visit(*this);
+}
+
+void concept::accept(element_visitor& v) const {
+    v.visit(*this);
+    }
+
+void concept::accept(const element_visitor& v) {
+    v.visit(*this);
+}
+
+void concept::accept(element_visitor& v) {
+    v.visit(*this);
+}
+
 
 void concept::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);

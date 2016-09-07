@@ -155,10 +155,10 @@ a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
 a.stream() << "    using " << rpn << "::accept;" << std::endl;
 a.stream() << std::endl;
-a.stream() << "    virtual void accept(const " << bvn << "& v) const;" << std::endl;
-a.stream() << "    virtual void accept(" << bvn << "& v) const;" << std::endl;
-a.stream() << "    virtual void accept(const " << bvn << "& v);" << std::endl;
-a.stream() << "    virtual void accept(" << bvn << "& v);" << std::endl;
+a.stream() << "    virtual void accept(const " << bvn << "& v) const override;" << std::endl;
+a.stream() << "    virtual void accept(" << bvn << "& v) const override;" << std::endl;
+a.stream() << "    virtual void accept(const " << bvn << "& v) override;" << std::endl;
+a.stream() << "    virtual void accept(" << bvn << "& v) override;" << std::endl;
             }
 
             /*

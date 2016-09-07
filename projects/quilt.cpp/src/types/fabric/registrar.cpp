@@ -22,6 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
+#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -55,6 +56,35 @@ registrar::registrar(
     : dogen::yarn::element(),
       leaves_(leaves),
       model_dependencies_(model_dependencies) { }
+
+void registrar::accept(const dogen::yarn::element_visitor& v) const {
+    typedef const element_visitor* derived_ptr;
+    const auto dv(dynamic_cast<derived_ptr>(&v));
+    if (dv)
+        dv->visit(*this);
+}
+
+void registrar::accept(dogen::yarn::element_visitor& v) const {
+    typedef element_visitor* derived_ptr;
+    const auto dv(dynamic_cast<derived_ptr>(&v));
+    if (dv)
+        dv->visit(*this);
+    }
+
+void registrar::accept(const dogen::yarn::element_visitor& v) {
+    typedef const element_visitor* derived_ptr;
+    const auto dv(dynamic_cast<derived_ptr>(&v));
+    if (dv)
+        dv->visit(*this);
+}
+
+void registrar::accept(dogen::yarn::element_visitor& v) {
+    typedef element_visitor* derived_ptr;
+    const auto dv(dynamic_cast<derived_ptr>(&v));
+    if (dv)
+        dv->visit(*this);
+}
+
 
 void registrar::to_stream(std::ostream& s) const {
     s << " { "

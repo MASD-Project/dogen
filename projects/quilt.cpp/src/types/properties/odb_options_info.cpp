@@ -23,6 +23,7 @@
 #include "dogen/formatters/io/file_properties_io.hpp"
 #include "dogen/quilt.cpp/io/properties/formattable_io.hpp"
 #include "dogen/quilt.cpp/types/properties/odb_options_info.hpp"
+#include "dogen/quilt.cpp/types/properties/formattable_visitor.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -81,6 +82,23 @@ odb_options_info::odb_options_info(
       file_name_(file_name),
       odb_folder_(odb_folder),
       file_properties_(file_properties) { }
+
+void odb_options_info::accept(const formattable_visitor& v) const {
+    v.visit(*this);
+}
+
+void odb_options_info::accept(formattable_visitor& v) const {
+    v.visit(*this);
+    }
+
+void odb_options_info::accept(const formattable_visitor& v) {
+    v.visit(*this);
+}
+
+void odb_options_info::accept(formattable_visitor& v) {
+    v.visit(*this);
+}
+
 
 void odb_options_info::to_stream(std::ostream& s) const {
     s << " { "

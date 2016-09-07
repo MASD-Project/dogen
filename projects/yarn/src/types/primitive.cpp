@@ -22,6 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -49,6 +50,23 @@ primitive::primitive(
       contained_by,
       in_global_module),
       is_default_enumeration_type_(is_default_enumeration_type) { }
+
+void primitive::accept(const element_visitor& v) const {
+    v.visit(*this);
+}
+
+void primitive::accept(element_visitor& v) const {
+    v.visit(*this);
+    }
+
+void primitive::accept(const element_visitor& v) {
+    v.visit(*this);
+}
+
+void primitive::accept(element_visitor& v) {
+    v.visit(*this);
+}
+
 
 void primitive::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);

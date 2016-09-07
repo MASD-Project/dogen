@@ -38,7 +38,7 @@
 #include "dogen/yarn/types/stereotypes.hpp"
 #include "dogen/yarn/types/object_types.hpp"
 #include "dogen/yarn/hash/stereotypes_hash.hpp"
-#include "dogen/yarn/types/element_visitor.hpp"
+#include "dogen/yarn/types/element_visitor_fwd.hpp"
 #include "dogen/yarn/serialization/object_fwd_ser.hpp"
 #include "dogen/yarn/types/generalization_settings.hpp"
 #include "dogen/yarn/types/type_parameters_settings.hpp"
@@ -113,22 +113,10 @@ private:
 public:
     using element::accept;
 
-    virtual void accept(const element_visitor& v) const override {
-        v.visit(*this);
-    }
-
-    virtual void accept(element_visitor& v) const override {
-        v.visit(*this);
-    }
-
-    virtual void accept(const element_visitor& v) override {
-        v.visit(*this);
-    }
-
-    virtual void accept(element_visitor& v) override {
-        v.visit(*this);
-    }
-
+    virtual void accept(const element_visitor& v) const override;
+    virtual void accept(element_visitor& v) const override;
+    virtual void accept(const element_visitor& v) override;
+    virtual void accept(element_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 

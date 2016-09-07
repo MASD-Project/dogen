@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include "dogen/dynamic/types/value.hpp"
-#include "dogen/dynamic/types/value_visitor.hpp"
+#include "dogen/dynamic/types/value_visitor_fwd.hpp"
 #include "dogen/dynamic/serialization/text_fwd_ser.hpp"
 
 namespace dogen {
@@ -59,22 +59,10 @@ private:
 public:
     using value::accept;
 
-    virtual void accept(const value_visitor& v) const override {
-        v.visit(*this);
-    }
-
-    virtual void accept(value_visitor& v) const override {
-        v.visit(*this);
-    }
-
-    virtual void accept(const value_visitor& v) override {
-        v.visit(*this);
-    }
-
-    virtual void accept(value_visitor& v) override {
-        v.visit(*this);
-    }
-
+    virtual void accept(const value_visitor& v) const override;
+    virtual void accept(value_visitor& v) const override;
+    virtual void accept(const value_visitor& v) override;
+    virtual void accept(value_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 

@@ -32,7 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/formatters/types/file_properties.hpp"
 #include "dogen/quilt.cpp/types/properties/formattable.hpp"
-#include "dogen/quilt.cpp/types/properties/formattable_visitor.hpp"
+#include "dogen/quilt.cpp/types/properties/formattable_visitor_fwd.hpp"
 #include "dogen/quilt.cpp/serialization/properties/odb_options_info_fwd_ser.hpp"
 
 namespace dogen {
@@ -75,22 +75,10 @@ private:
 public:
     using formattable::accept;
 
-    virtual void accept(const formattable_visitor& v) const override {
-        v.visit(*this);
-    }
-
-    virtual void accept(formattable_visitor& v) const override {
-        v.visit(*this);
-    }
-
-    virtual void accept(const formattable_visitor& v) override {
-        v.visit(*this);
-    }
-
-    virtual void accept(formattable_visitor& v) override {
-        v.visit(*this);
-    }
-
+    virtual void accept(const formattable_visitor& v) const override;
+    virtual void accept(formattable_visitor& v) const override;
+    virtual void accept(const formattable_visitor& v) override;
+    virtual void accept(formattable_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 

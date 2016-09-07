@@ -23,6 +23,7 @@
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/enumerator_io.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 
 namespace std {
 
@@ -63,6 +64,23 @@ enumeration::enumeration(
       in_global_module),
       underlying_type_(underlying_type),
       enumerators_(enumerators) { }
+
+void enumeration::accept(const element_visitor& v) const {
+    v.visit(*this);
+}
+
+void enumeration::accept(element_visitor& v) const {
+    v.visit(*this);
+    }
+
+void enumeration::accept(const element_visitor& v) {
+    v.visit(*this);
+}
+
+void enumeration::accept(element_visitor& v) {
+    v.visit(*this);
+}
+
 
 void enumeration::to_stream(std::ostream& s) const {
     s << " { "

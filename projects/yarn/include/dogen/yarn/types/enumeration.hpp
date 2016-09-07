@@ -31,7 +31,7 @@
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/enumerator.hpp"
-#include "dogen/yarn/types/element_visitor.hpp"
+#include "dogen/yarn/types/element_visitor_fwd.hpp"
 #include "dogen/yarn/serialization/enumeration_fwd_ser.hpp"
 
 namespace dogen {
@@ -72,22 +72,10 @@ private:
 public:
     using element::accept;
 
-    virtual void accept(const element_visitor& v) const override {
-        v.visit(*this);
-    }
-
-    virtual void accept(element_visitor& v) const override {
-        v.visit(*this);
-    }
-
-    virtual void accept(const element_visitor& v) override {
-        v.visit(*this);
-    }
-
-    virtual void accept(element_visitor& v) override {
-        v.visit(*this);
-    }
-
+    virtual void accept(const element_visitor& v) const override;
+    virtual void accept(element_visitor& v) const override;
+    virtual void accept(const element_visitor& v) override;
+    virtual void accept(element_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 

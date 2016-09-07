@@ -22,6 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/quilt.cpp/io/properties/entity_io.hpp"
 #include "dogen/quilt.cpp/types/properties/registrar_info.hpp"
+#include "dogen/quilt.cpp/types/properties/formattable_visitor.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -69,6 +70,23 @@ registrar_info::registrar_info(
       namespaces),
       leaves_(leaves),
       model_dependencies_(model_dependencies) { }
+
+void registrar_info::accept(const formattable_visitor& v) const {
+    v.visit(*this);
+}
+
+void registrar_info::accept(formattable_visitor& v) const {
+    v.visit(*this);
+    }
+
+void registrar_info::accept(const formattable_visitor& v) {
+    v.visit(*this);
+}
+
+void registrar_info::accept(formattable_visitor& v) {
+    v.visit(*this);
+}
+
 
 void registrar_info::to_stream(std::ostream& s) const {
     s << " { "

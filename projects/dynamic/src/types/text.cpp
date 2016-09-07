@@ -22,6 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/dynamic/types/text.hpp"
 #include "dogen/dynamic/io/value_io.hpp"
+#include "dogen/dynamic/types/value_visitor.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -36,6 +37,23 @@ namespace dynamic {
 text::text(const std::string& content)
     : dogen::dynamic::value(),
       content_(content) { }
+
+void text::accept(const value_visitor& v) const {
+    v.visit(*this);
+}
+
+void text::accept(value_visitor& v) const {
+    v.visit(*this);
+    }
+
+void text::accept(const value_visitor& v) {
+    v.visit(*this);
+}
+
+void text::accept(value_visitor& v) {
+    v.visit(*this);
+}
+
 
 void text::to_stream(std::ostream& s) const {
     s << " { "

@@ -22,6 +22,7 @@
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/io/element_io.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 
 namespace std {
 
@@ -60,6 +61,23 @@ module::module(
       contained_by,
       in_global_module),
       members_(members) { }
+
+void module::accept(const element_visitor& v) const {
+    v.visit(*this);
+}
+
+void module::accept(element_visitor& v) const {
+    v.visit(*this);
+    }
+
+void module::accept(const element_visitor& v) {
+    v.visit(*this);
+}
+
+void module::accept(element_visitor& v) {
+    v.visit(*this);
+}
+
 
 void module::to_stream(std::ostream& s) const {
     s << " { "

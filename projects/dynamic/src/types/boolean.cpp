@@ -22,6 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include "dogen/dynamic/io/value_io.hpp"
 #include "dogen/dynamic/types/boolean.hpp"
+#include "dogen/dynamic/types/value_visitor.hpp"
 
 namespace dogen {
 namespace dynamic {
@@ -32,6 +33,23 @@ boolean::boolean()
 boolean::boolean(const bool content)
     : dogen::dynamic::value(),
       content_(content) { }
+
+void boolean::accept(const value_visitor& v) const {
+    v.visit(*this);
+}
+
+void boolean::accept(value_visitor& v) const {
+    v.visit(*this);
+    }
+
+void boolean::accept(const value_visitor& v) {
+    v.visit(*this);
+}
+
+void boolean::accept(value_visitor& v) {
+    v.visit(*this);
+}
+
 
 void boolean::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);

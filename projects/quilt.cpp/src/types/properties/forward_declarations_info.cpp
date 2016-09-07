@@ -22,6 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/quilt.cpp/io/properties/entity_io.hpp"
+#include "dogen/quilt.cpp/types/properties/formattable_visitor.hpp"
 #include "dogen/quilt.cpp/types/properties/forward_declarations_info.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -62,6 +63,23 @@ forward_declarations_info::forward_declarations_info(
       is_enum_(is_enum),
       enum_type_(enum_type),
       is_exception_(is_exception) { }
+
+void forward_declarations_info::accept(const formattable_visitor& v) const {
+    v.visit(*this);
+}
+
+void forward_declarations_info::accept(formattable_visitor& v) const {
+    v.visit(*this);
+    }
+
+void forward_declarations_info::accept(const formattable_visitor& v) {
+    v.visit(*this);
+}
+
+void forward_declarations_info::accept(formattable_visitor& v) {
+    v.visit(*this);
+}
+
 
 void forward_declarations_info::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);

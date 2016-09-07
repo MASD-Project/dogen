@@ -176,10 +176,10 @@ public:
 public:
     using <#= rpn #>::accept;
 
-    virtual void accept(const <#= bvn #>& v) const;
-    virtual void accept(<#= bvn #>& v) const;
-    virtual void accept(const <#= bvn #>& v);
-    virtual void accept(<#= bvn #>& v);
+    virtual void accept(const <#= bvn #>& v) const override;
+    virtual void accept(<#= bvn #>& v) const override;
+    virtual void accept(const <#= bvn #>& v) override;
+    virtual void accept(<#= bvn #>& v) override;
 <#+
             }
 

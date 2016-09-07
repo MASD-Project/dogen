@@ -30,7 +30,7 @@
 #include <string>
 #include <algorithm>
 #include "dogen/quilt.cpp/types/properties/entity.hpp"
-#include "dogen/quilt.cpp/types/properties/formattable_visitor.hpp"
+#include "dogen/quilt.cpp/types/properties/formattable_visitor_fwd.hpp"
 #include "dogen/quilt.cpp/serialization/properties/registrar_info_fwd_ser.hpp"
 
 namespace dogen {
@@ -71,22 +71,10 @@ private:
 public:
     using formattable::accept;
 
-    virtual void accept(const formattable_visitor& v) const override {
-        v.visit(*this);
-    }
-
-    virtual void accept(formattable_visitor& v) const override {
-        v.visit(*this);
-    }
-
-    virtual void accept(const formattable_visitor& v) override {
-        v.visit(*this);
-    }
-
-    virtual void accept(formattable_visitor& v) override {
-        v.visit(*this);
-    }
-
+    virtual void accept(const formattable_visitor& v) const override;
+    virtual void accept(formattable_visitor& v) const override;
+    virtual void accept(const formattable_visitor& v) override;
+    virtual void accept(formattable_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 

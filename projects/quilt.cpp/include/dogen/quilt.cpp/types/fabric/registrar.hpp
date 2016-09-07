@@ -30,8 +30,7 @@
 #include <string>
 #include <algorithm>
 #include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/element_visitor.hpp"
-#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
+#include "dogen/yarn/types/element_visitor_fwd.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/registrar_fwd_ser.hpp"
 
 namespace dogen {
@@ -62,34 +61,10 @@ private:
 public:
     using dogen::yarn::element::accept;
 
-    virtual void accept(const dogen::yarn::element_visitor& v) const override {
-        typedef const element_visitor* derived_ptr;
-        const auto dv(dynamic_cast<derived_ptr>(&v));
-        if (dv)
-            dv->visit(*this);
-    }
-
-    virtual void accept(dogen::yarn::element_visitor& v) const override {
-        typedef element_visitor* derived_ptr;
-        const auto dv(dynamic_cast<derived_ptr>(&v));
-        if (dv)
-            dv->visit(*this);
-    }
-
-    virtual void accept(const dogen::yarn::element_visitor& v) override {
-        typedef const element_visitor* derived_ptr;
-        const auto dv(dynamic_cast<derived_ptr>(&v));
-        if (dv)
-            dv->visit(*this);
-    }
-
-    virtual void accept(dogen::yarn::element_visitor& v) override {
-        typedef element_visitor* derived_ptr;
-        const auto dv(dynamic_cast<derived_ptr>(&v));
-        if (dv)
-            dv->visit(*this);
-    }
-
+    virtual void accept(const dogen::yarn::element_visitor& v) const override;
+    virtual void accept(dogen::yarn::element_visitor& v) const override;
+    virtual void accept(const dogen::yarn::element_visitor& v) override;
+    virtual void accept(dogen::yarn::element_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 

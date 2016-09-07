@@ -21,6 +21,7 @@
 #include <ostream>
 #include "dogen/dynamic/io/value_io.hpp"
 #include "dogen/dynamic/types/number.hpp"
+#include "dogen/dynamic/types/value_visitor.hpp"
 
 namespace dogen {
 namespace dynamic {
@@ -31,6 +32,23 @@ number::number()
 number::number(const int content)
     : dogen::dynamic::value(),
       content_(content) { }
+
+void number::accept(const value_visitor& v) const {
+    v.visit(*this);
+}
+
+void number::accept(value_visitor& v) const {
+    v.visit(*this);
+    }
+
+void number::accept(const value_visitor& v) {
+    v.visit(*this);
+}
+
+void number::accept(value_visitor& v) {
+    v.visit(*this);
+}
+
 
 void number::to_stream(std::ostream& s) const {
     s << " { "

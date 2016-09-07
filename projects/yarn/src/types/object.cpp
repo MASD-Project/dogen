@@ -26,6 +26,7 @@
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/io/stereotypes_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/yarn/io/generalization_settings_io.hpp"
 #include "dogen/yarn/io/type_parameters_settings_io.hpp"
 
@@ -220,6 +221,23 @@ object::object(
       associative_container_keys_(associative_container_keys),
       provides_opaqueness_(provides_opaqueness),
       stereotypes_(stereotypes) { }
+
+void object::accept(const element_visitor& v) const {
+    v.visit(*this);
+}
+
+void object::accept(element_visitor& v) const {
+    v.visit(*this);
+    }
+
+void object::accept(const element_visitor& v) {
+    v.visit(*this);
+}
+
+void object::accept(element_visitor& v) {
+    v.visit(*this);
+}
+
 
 void object::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);

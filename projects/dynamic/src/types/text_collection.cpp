@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/dynamic/io/value_io.hpp"
+#include "dogen/dynamic/types/value_visitor.hpp"
 #include "dogen/dynamic/types/text_collection.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -50,6 +51,23 @@ namespace dynamic {
 text_collection::text_collection(const std::list<std::string>& content)
     : dogen::dynamic::value(),
       content_(content) { }
+
+void text_collection::accept(const value_visitor& v) const {
+    v.visit(*this);
+}
+
+void text_collection::accept(value_visitor& v) const {
+    v.visit(*this);
+    }
+
+void text_collection::accept(const value_visitor& v) {
+    v.visit(*this);
+}
+
+void text_collection::accept(value_visitor& v) {
+    v.visit(*this);
+}
+
 
 void text_collection::to_stream(std::ostream& s) const {
     s << " { "

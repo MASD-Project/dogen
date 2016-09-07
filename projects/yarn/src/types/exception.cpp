@@ -21,6 +21,7 @@
 #include <ostream>
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/types/exception.hpp"
+#include "dogen/yarn/types/element_visitor.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -43,6 +44,23 @@ exception::exception(
       original_model_name,
       contained_by,
       in_global_module) { }
+
+void exception::accept(const element_visitor& v) const {
+    v.visit(*this);
+}
+
+void exception::accept(element_visitor& v) const {
+    v.visit(*this);
+    }
+
+void exception::accept(const element_visitor& v) {
+    v.visit(*this);
+}
+
+void exception::accept(element_visitor& v) {
+    v.visit(*this);
+}
+
 
 void exception::to_stream(std::ostream& s) const {
     s << " { "

@@ -58,10 +58,10 @@ private:
 public:
     using base::accept;
 
-    virtual void accept(const base_visitor& v) const;
-    virtual void accept(base_visitor& v) const;
-    virtual void accept(const base_visitor& v);
-    virtual void accept(base_visitor& v);
+    virtual void accept(const base_visitor& v) const override;
+    virtual void accept(base_visitor& v) const override;
+    virtual void accept(const base_visitor& v) override;
+    virtual void accept(base_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 

@@ -21,6 +21,7 @@
 #include <ostream>
 #include "dogen/quilt.cpp/io/properties/entity_io.hpp"
 #include "dogen/quilt.cpp/types/properties/includers_info.hpp"
+#include "dogen/quilt.cpp/types/properties/formattable_visitor.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -43,6 +44,23 @@ includers_info::includers_info(
       qualified_name,
       documentation,
       namespaces) { }
+
+void includers_info::accept(const formattable_visitor& v) const {
+    v.visit(*this);
+}
+
+void includers_info::accept(formattable_visitor& v) const {
+    v.visit(*this);
+    }
+
+void includers_info::accept(const formattable_visitor& v) {
+    v.visit(*this);
+}
+
+void includers_info::accept(formattable_visitor& v) {
+    v.visit(*this);
+}
+
 
 void includers_info::to_stream(std::ostream& s) const {
     s << " { "
