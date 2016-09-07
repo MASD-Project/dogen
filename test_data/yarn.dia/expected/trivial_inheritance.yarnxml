@@ -590,6 +590,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings class_id="43" tracking_level="0" version="0">
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -793,6 +799,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -996,6 +1008,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -1199,6 +1217,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -1351,6 +1375,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -1585,6 +1615,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -1706,6 +1742,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>2</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -1907,6 +1949,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -2108,6 +2156,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -2311,6 +2365,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -2514,6 +2574,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -2635,6 +2701,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -2838,6 +2910,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -2989,6 +3067,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -3220,6 +3304,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -3421,6 +3511,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -3655,6 +3751,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -3806,6 +3908,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -4007,6 +4115,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -4238,6 +4352,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -4359,6 +4479,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -4590,6 +4716,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -4823,6 +4955,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -4944,6 +5082,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -5175,6 +5319,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -5326,6 +5476,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -5477,6 +5633,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -5708,6 +5870,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
@@ -5941,6 +6109,12 @@ in the context of inheritance.
 					<initialized>0</initialized>
 				</visitable_by>
 				<visitation_type>1</visitation_type>
+				<visitor_base>
+					<initialized>0</initialized>
+				</visitor_base>
+				<visitor_derived>
+					<initialized>0</initialized>
+				</visitor_derived>
 				<type_parameters_settings>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>

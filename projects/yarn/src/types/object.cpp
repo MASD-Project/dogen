@@ -141,6 +141,8 @@ object::object(object&& rhs)
       opaque_associations_(std::move(rhs.opaque_associations_)),
       visitable_by_(std::move(rhs.visitable_by_)),
       visitation_type_(std::move(rhs.visitation_type_)),
+      visitor_base_(std::move(rhs.visitor_base_)),
+      visitor_derived_(std::move(rhs.visitor_derived_)),
       type_parameters_settings_(std::move(rhs.type_parameters_settings_)),
       object_type_(std::move(rhs.object_type_)),
       modeled_concepts_(std::move(rhs.modeled_concepts_)),
@@ -175,6 +177,8 @@ object::object(
     const std::list<dogen::yarn::name>& opaque_associations,
     const boost::optional<dogen::yarn::name>& visitable_by,
     const dogen::yarn::visitation_types visitation_type,
+    const boost::optional<dogen::yarn::name>& visitor_base,
+    const boost::optional<dogen::yarn::name>& visitor_derived,
     const dogen::yarn::type_parameters_settings& type_parameters_settings,
     const dogen::yarn::object_types object_type,
     const std::list<dogen::yarn::name>& modeled_concepts,
@@ -208,6 +212,8 @@ object::object(
       opaque_associations_(opaque_associations),
       visitable_by_(visitable_by),
       visitation_type_(visitation_type),
+      visitor_base_(visitor_base),
+      visitor_derived_(visitor_derived),
       type_parameters_settings_(type_parameters_settings),
       object_type_(object_type),
       modeled_concepts_(modeled_concepts),
@@ -245,6 +251,8 @@ void object::to_stream(std::ostream& s) const {
       << "\"opaque_associations\": " << opaque_associations_ << ", "
       << "\"visitable_by\": " << visitable_by_ << ", "
       << "\"visitation_type\": " << visitation_type_ << ", "
+      << "\"visitor_base\": " << visitor_base_ << ", "
+      << "\"visitor_derived\": " << visitor_derived_ << ", "
       << "\"type_parameters_settings\": " << type_parameters_settings_ << ", "
       << "\"object_type\": " << object_type_ << ", "
       << "\"modeled_concepts\": " << modeled_concepts_ << ", "
@@ -276,6 +284,8 @@ void object::swap(object& other) noexcept {
     swap(opaque_associations_, other.opaque_associations_);
     swap(visitable_by_, other.visitable_by_);
     swap(visitation_type_, other.visitation_type_);
+    swap(visitor_base_, other.visitor_base_);
+    swap(visitor_derived_, other.visitor_derived_);
     swap(type_parameters_settings_, other.type_parameters_settings_);
     swap(object_type_, other.object_type_);
     swap(modeled_concepts_, other.modeled_concepts_);
@@ -310,6 +320,8 @@ bool object::operator==(const object& rhs) const {
         opaque_associations_ == rhs.opaque_associations_ &&
         visitable_by_ == rhs.visitable_by_ &&
         visitation_type_ == rhs.visitation_type_ &&
+        visitor_base_ == rhs.visitor_base_ &&
+        visitor_derived_ == rhs.visitor_derived_ &&
         type_parameters_settings_ == rhs.type_parameters_settings_ &&
         object_type_ == rhs.object_type_ &&
         modeled_concepts_ == rhs.modeled_concepts_ &&
@@ -546,6 +558,38 @@ dogen::yarn::visitation_types object::visitation_type() const {
 
 void object::visitation_type(const dogen::yarn::visitation_types v) {
     visitation_type_ = v;
+}
+
+const boost::optional<dogen::yarn::name>& object::visitor_base() const {
+    return visitor_base_;
+}
+
+boost::optional<dogen::yarn::name>& object::visitor_base() {
+    return visitor_base_;
+}
+
+void object::visitor_base(const boost::optional<dogen::yarn::name>& v) {
+    visitor_base_ = v;
+}
+
+void object::visitor_base(const boost::optional<dogen::yarn::name>&& v) {
+    visitor_base_ = std::move(v);
+}
+
+const boost::optional<dogen::yarn::name>& object::visitor_derived() const {
+    return visitor_derived_;
+}
+
+boost::optional<dogen::yarn::name>& object::visitor_derived() {
+    return visitor_derived_;
+}
+
+void object::visitor_derived(const boost::optional<dogen::yarn::name>& v) {
+    visitor_derived_ = v;
+}
+
+void object::visitor_derived(const boost::optional<dogen::yarn::name>&& v) {
+    visitor_derived_ = std::move(v);
 }
 
 const dogen::yarn::type_parameters_settings& object::type_parameters_settings() const {

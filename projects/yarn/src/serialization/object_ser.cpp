@@ -72,6 +72,8 @@ void save(Archive& ar,
     ar << make_nvp("opaque_associations", v.opaque_associations_);
     ar << make_nvp("visitable_by", v.visitable_by_);
     ar << make_nvp("visitation_type", v.visitation_type_);
+    ar << make_nvp("visitor_base", v.visitor_base_);
+    ar << make_nvp("visitor_derived", v.visitor_derived_);
     ar << make_nvp("type_parameters_settings", v.type_parameters_settings_);
     ar << make_nvp("object_type", v.object_type_);
     ar << make_nvp("modeled_concepts", v.modeled_concepts_);
@@ -104,6 +106,8 @@ void load(Archive& ar,
     ar >> make_nvp("opaque_associations", v.opaque_associations_);
     ar >> make_nvp("visitable_by", v.visitable_by_);
     ar >> make_nvp("visitation_type", v.visitation_type_);
+    ar >> make_nvp("visitor_base", v.visitor_base_);
+    ar >> make_nvp("visitor_derived", v.visitor_derived_);
     ar >> make_nvp("type_parameters_settings", v.type_parameters_settings_);
     ar >> make_nvp("object_type", v.object_type_);
     ar >> make_nvp("modeled_concepts", v.modeled_concepts_);

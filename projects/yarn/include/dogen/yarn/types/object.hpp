@@ -95,6 +95,8 @@ public:
         const std::list<dogen::yarn::name>& opaque_associations,
         const boost::optional<dogen::yarn::name>& visitable_by,
         const dogen::yarn::visitation_types visitation_type,
+        const boost::optional<dogen::yarn::name>& visitor_base,
+        const boost::optional<dogen::yarn::name>& visitor_derived,
         const dogen::yarn::type_parameters_settings& type_parameters_settings,
         const dogen::yarn::object_types object_type,
         const std::list<dogen::yarn::name>& modeled_concepts,
@@ -303,6 +305,26 @@ public:
     void visitation_type(const dogen::yarn::visitation_types v);
     /**@}*/
 
+    /**
+     * @brief Base class of the visitor that visits the current element, if any.
+     */
+    /**@{*/
+    const boost::optional<dogen::yarn::name>& visitor_base() const;
+    boost::optional<dogen::yarn::name>& visitor_base();
+    void visitor_base(const boost::optional<dogen::yarn::name>& v);
+    void visitor_base(const boost::optional<dogen::yarn::name>&& v);
+    /**@}*/
+
+    /**
+     * @brief Derived class of the visitor that visits the current element, if any.
+     */
+    /**@{*/
+    const boost::optional<dogen::yarn::name>& visitor_derived() const;
+    boost::optional<dogen::yarn::name>& visitor_derived();
+    void visitor_derived(const boost::optional<dogen::yarn::name>& v);
+    void visitor_derived(const boost::optional<dogen::yarn::name>&& v);
+    /**@}*/
+
     const dogen::yarn::type_parameters_settings& type_parameters_settings() const;
     dogen::yarn::type_parameters_settings& type_parameters_settings();
     void type_parameters_settings(const dogen::yarn::type_parameters_settings& v);
@@ -381,6 +403,8 @@ private:
     std::list<dogen::yarn::name> opaque_associations_;
     boost::optional<dogen::yarn::name> visitable_by_;
     dogen::yarn::visitation_types visitation_type_;
+    boost::optional<dogen::yarn::name> visitor_base_;
+    boost::optional<dogen::yarn::name> visitor_derived_;
     dogen::yarn::type_parameters_settings type_parameters_settings_;
     dogen::yarn::object_types object_type_;
     std::list<dogen::yarn::name> modeled_concepts_;

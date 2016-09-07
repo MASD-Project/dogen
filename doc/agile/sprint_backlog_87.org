@@ -12,27 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-07 Wed 21:01]
+#+CAPTION: Clock summary at [2016-09-07 Wed 21:13]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *32:05* |       |      | 100.0 |
+| *Total time*                                                                | *32:16* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 32:05   |       |      | 100.0 |
-| Active                                                                      |         | 32:05 |      | 100.0 |
+| Stories                                                                     | 32:16   |       |      | 100.0 |
+| Active                                                                      |         | 32:16 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:52 |   2.7 |
 | COMPLETED Move readme to markdown                                           |         |       | 0:49 |   2.5 |
 | COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   1.5 |
-| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   7.4 |
-| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  13.5 |
+| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   7.3 |
+| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  13.4 |
 | COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  15.9 |
 | COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   5.1 |
-| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   6.1 |
-| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   4.6 |
-| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  15.3 |
+| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   6.0 |
+| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   4.5 |
+| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  15.2 |
 | CANCELLED Pick-up Boost 1.61 from Debian Testing                            |         |       | 1:23 |   4.3 |
 | COMPLETED Allow cross model inheritance                                     |         |       | 1:09 |   3.6 |
-| STARTED Add support for visitor inheritance                                 |         |       | 5:37 |  17.5 |
+| STARTED Add support for visitor inheritance                                 |         |       | 5:48 |  18.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -385,6 +385,7 @@ name is no longer resolvable directly (unless we stipulate that the
 external module path must be the same for all models).
 
 *** STARTED Add support for visitor inheritance                       :story:
+    CLOCK: [2016-09-07 Wed 21:02]--[2016-09-07 Wed 21:13] =>  0:11
     CLOCK: [2016-09-07 Wed 20:39]--[2016-09-07 Wed 21:01] =>  0:22
     CLOCK: [2016-09-07 Wed 20:02]--[2016-09-07 Wed 20:38] =>  0:36
     CLOCK: [2016-09-07 Wed 18:01]--[2016-09-07 Wed 18:06] =>  0:05
