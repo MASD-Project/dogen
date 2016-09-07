@@ -157,6 +157,94 @@ dogen::formatters::file class_implementation_formatter_stitch(
             }
 
             /*
+             * Visitation.
+             */
+            if (o.is_visitation_leaf()) {
+                std::string bvn;
+                std::string dvn;
+                std::string rpn;
+                if (o.derived_visitor()) {
+                    bvn = a.get_qualified_name(*o.base_visitor());
+                    dvn = o.derived_visitor()->simple();
+                    rpn = a.get_qualified_name(*o.root_parent());
+                } else {
+                    bvn = o.base_visitor()->simple();
+                    rpn = o.root_parent()->simple();
+                }
+#>
+
+void <#= sn #>::accept(const <#= bvn #>& v) const {
+<#+
+                if (o.derived_visitor()) {
+#>
+    typedef const <#= dvn #>* derived_ptr;
+    const auto dv(dynamic_cast<derived_ptr>(&v));
+    if (dv)
+        dv->visit(*this);
+<#+
+                } else {
+#>
+    v.visit(*this);
+<#+
+                }
+#>
+}
+
+void <#= sn #>::accept(<#= bvn #>& v) const {
+<#+
+                if (o.derived_visitor()) {
+#>
+    typedef <#= dvn #>* derived_ptr;
+    const auto dv(dynamic_cast<derived_ptr>(&v));
+    if (dv)
+        dv->visit(*this);
+<#+
+                } else {
+#>
+    v.visit(*this);
+<#+
+                }
+#>
+    }
+
+void <#= sn #>::accept(const <#= bvn #>& v) {
+<#+
+                if (o.derived_visitor()) {
+#>
+    typedef const <#= dvn #>* derived_ptr;
+    const auto dv(dynamic_cast<derived_ptr>(&v));
+    if (dv)
+        dv->visit(*this);
+<#+
+                } else {
+#>
+    v.visit(*this);
+<#+
+                }
+#>
+}
+
+void <#= sn #>::accept(<#= bvn #>& v) {
+<#+
+                if (o.derived_visitor()) {
+#>
+    typedef <#= dvn #>* derived_ptr;
+    const auto dv(dynamic_cast<derived_ptr>(&v));
+    if (dv)
+        dv->visit(*this);
+<#+
+                } else {
+#>
+    v.visit(*this);
+<#+
+                }
+#>
+}
+
+<#+
+            }
+
+            /*
              * Streaming
              */
             if (a.is_io_enabled()) {

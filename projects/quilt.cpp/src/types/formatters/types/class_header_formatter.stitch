@@ -164,11 +164,9 @@ public:
 <#+
             } else if (o.is_visitation_leaf()) {
                 std::string bvn;
-                std::string dvn;
                 std::string rpn;
                 if (o.derived_visitor()) {
                     bvn = a.get_qualified_name(*o.base_visitor());
-                    dvn = o.derived_visitor()->simple();
                     rpn = a.get_qualified_name(*o.root_parent());
                 } else {
                     bvn = o.base_visitor()->simple();
@@ -178,74 +176,10 @@ public:
 public:
     using <#= rpn #>::accept;
 
-    virtual void accept(const <#= bvn #>& v) const override {
-<#+
-                if (o.derived_visitor()) {
-#>
-        typedef const <#= dvn #>* derived_ptr;
-        const auto dv(dynamic_cast<derived_ptr>(&v));
-        if (dv)
-            dv->visit(*this);
-<#+
-                } else {
-#>
-        v.visit(*this);
-<#+
-                }
-#>
-    }
-
-    virtual void accept(<#= bvn #>& v) const override {
-<#+
-                if (o.derived_visitor()) {
-#>
-        typedef <#= dvn #>* derived_ptr;
-        const auto dv(dynamic_cast<derived_ptr>(&v));
-        if (dv)
-            dv->visit(*this);
-<#+
-                } else {
-#>
-        v.visit(*this);
-<#+
-                }
-#>
-    }
-
-    virtual void accept(const <#= bvn #>& v) override {
-<#+
-                if (o.derived_visitor()) {
-#>
-        typedef const <#= dvn #>* derived_ptr;
-        const auto dv(dynamic_cast<derived_ptr>(&v));
-        if (dv)
-            dv->visit(*this);
-<#+
-                } else {
-#>
-        v.visit(*this);
-<#+
-                }
-#>
-    }
-
-    virtual void accept(<#= bvn #>& v) override {
-<#+
-                if (o.derived_visitor()) {
-#>
-        typedef <#= dvn #>* derived_ptr;
-        const auto dv(dynamic_cast<derived_ptr>(&v));
-        if (dv)
-            dv->visit(*this);
-<#+
-                } else {
-#>
-        v.visit(*this);
-<#+
-                }
-#>
-    }
-
+    virtual void accept(const <#= bvn #>& v) const;
+    virtual void accept(<#= bvn #>& v) const;
+    virtual void accept(const <#= bvn #>& v);
+    virtual void accept(<#= bvn #>& v);
 <#+
             }
 

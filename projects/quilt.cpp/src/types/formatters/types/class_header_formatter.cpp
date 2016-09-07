@@ -86,28 +86,13 @@ provider::provide(const properties::inclusion_dependencies_builder_factory& f,
     const auto hash_fn(hash::traits::class_header_formatter_name());
     builder.add(o.associative_container_keys(), hash_fn);
 
-    if (o.is_visitation_root()) {
+    if (o.is_visitation_root() || o.is_visitation_leaf()) {
         /*
-         * For the root parent we can just do a forward declaration of
-         * the visitor since we use it on pure virtual functions.
+         * On the header files we only care about the base visitor for
+         * all visitation cases; as such we can get away with a
+         * forward declaration.
          */
         builder.add(*o.base_visitor(), fwd_fn);
-    } else {
-        if (o.is_visitation_leaf()) {
-            /*
-             * For leaves with a visitable root parent, we need to
-             * include the visitor itself as we call methods on
-             * it. Note that for visitor inheritance, this will result
-             * on us including the visitor's descendant rather than
-             * the visitor parent; as it happens, the code needs
-             * both. This is the right thing to do because the
-             * descendant includes the parent.
-             */
-            builder.add(*o.base_visitor(), self_fn);
-
-            if (o.derived_visitor())
-                builder.add(*o.derived_visitor(), self_fn);
-        }
     }
     return builder.build();
 }

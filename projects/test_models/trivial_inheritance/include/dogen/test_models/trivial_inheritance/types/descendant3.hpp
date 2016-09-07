@@ -28,7 +28,7 @@
 #include <iosfwd>
 #include <algorithm>
 #include "dogen/test_models/trivial_inheritance/types/descendant1.hpp"
-#include "dogen/test_models/trivial_inheritance/types/base_visitor.hpp"
+#include "dogen/test_models/trivial_inheritance/types/base_visitor_fwd.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/descendant3_fwd_ser.hpp"
 
 namespace dogen {
@@ -58,22 +58,10 @@ private:
 public:
     using base::accept;
 
-    virtual void accept(const base_visitor& v) const override {
-        v.visit(*this);
-    }
-
-    virtual void accept(base_visitor& v) const override {
-        v.visit(*this);
-    }
-
-    virtual void accept(const base_visitor& v) override {
-        v.visit(*this);
-    }
-
-    virtual void accept(base_visitor& v) override {
-        v.visit(*this);
-    }
-
+    virtual void accept(const base_visitor& v) const;
+    virtual void accept(base_visitor& v) const;
+    virtual void accept(const base_visitor& v);
+    virtual void accept(base_visitor& v);
 public:
     void to_stream(std::ostream& s) const override;
 

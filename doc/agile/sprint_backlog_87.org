@@ -12,27 +12,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-07 Wed 22:59]
+#+CAPTION: Clock summary at [2016-09-07 Wed 23:20]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *33:55* |       |      | 100.0 |
+| *Total time*                                                                | *34:19* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 33:55   |       |      | 100.0 |
-| Active                                                                      |         | 33:55 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:52 |   2.6 |
+| Stories                                                                     | 34:19   |       |      | 100.0 |
+| Active                                                                      |         | 34:19 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:52 |   2.5 |
 | COMPLETED Move readme to markdown                                           |         |       | 0:49 |   2.4 |
 | COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   1.4 |
-| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   7.0 |
-| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  12.7 |
-| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  15.1 |
+| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   6.9 |
+| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  12.6 |
+| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  14.9 |
 | COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   4.8 |
 | COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   5.7 |
 | COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   4.3 |
-| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  14.5 |
-| CANCELLED Pick-up Boost 1.61 from Debian Testing                            |         |       | 1:23 |   4.1 |
+| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  14.3 |
+| CANCELLED Pick-up Boost 1.61 from Debian Testing                            |         |       | 1:23 |   4.0 |
 | COMPLETED Allow cross model inheritance                                     |         |       | 1:09 |   3.4 |
-| COMPLETED Add support for visitor inheritance                               |         |       | 7:27 |  22.0 |
+| COMPLETED Add support for visitor inheritance                               |         |       | 7:27 |  21.7 |
+| COMPLETED Move visitor =accept= methods to cpp file                         |         |       | 0:24 |   1.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -436,7 +437,9 @@ This is actually fairly important because every time we change the
 visitor template, we end up rebuilding 350-odd files for no
 reason. This wouldn't happen if we were using forward declarations.
 
-*** Move visitor =accept= methods to cpp file                         :story:
+*** COMPLETED Move visitor =accept= methods to cpp file               :story:
+    CLOSED: [2016-09-07 Wed 23:20]
+    CLOCK: [2016-09-07 Wed 22:56]--[2016-09-07 Wed 23:20] =>  0:24
 
 At present we are declaring the visitor =accept= methods inline purely
 because it was easier to code generate that way. But it makes little

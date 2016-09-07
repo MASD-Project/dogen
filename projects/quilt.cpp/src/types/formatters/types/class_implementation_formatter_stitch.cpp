@@ -153,6 +153,68 @@ a.stream() << "    " << sf.prefix() << a.make_member_variable_name(attr) << "(" 
             }
 
             /*
+             * Visitation.
+             */
+            if (o.is_visitation_leaf()) {
+                std::string bvn;
+                std::string dvn;
+                std::string rpn;
+                if (o.derived_visitor()) {
+                    bvn = a.get_qualified_name(*o.base_visitor());
+                    dvn = o.derived_visitor()->simple();
+                    rpn = a.get_qualified_name(*o.root_parent());
+                } else {
+                    bvn = o.base_visitor()->simple();
+                    rpn = o.root_parent()->simple();
+                }
+a.stream() << std::endl;
+a.stream() << "void " << sn << "::accept(const " << bvn << "& v) const {" << std::endl;
+                if (o.derived_visitor()) {
+a.stream() << "    typedef const " << dvn << "* derived_ptr;" << std::endl;
+a.stream() << "    const auto dv(dynamic_cast<derived_ptr>(&v));" << std::endl;
+a.stream() << "    if (dv)" << std::endl;
+a.stream() << "        dv->visit(*this);" << std::endl;
+                } else {
+a.stream() << "    v.visit(*this);" << std::endl;
+                }
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "void " << sn << "::accept(" << bvn << "& v) const {" << std::endl;
+                if (o.derived_visitor()) {
+a.stream() << "    typedef " << dvn << "* derived_ptr;" << std::endl;
+a.stream() << "    const auto dv(dynamic_cast<derived_ptr>(&v));" << std::endl;
+a.stream() << "    if (dv)" << std::endl;
+a.stream() << "        dv->visit(*this);" << std::endl;
+                } else {
+a.stream() << "    v.visit(*this);" << std::endl;
+                }
+a.stream() << "    }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "void " << sn << "::accept(const " << bvn << "& v) {" << std::endl;
+                if (o.derived_visitor()) {
+a.stream() << "    typedef const " << dvn << "* derived_ptr;" << std::endl;
+a.stream() << "    const auto dv(dynamic_cast<derived_ptr>(&v));" << std::endl;
+a.stream() << "    if (dv)" << std::endl;
+a.stream() << "        dv->visit(*this);" << std::endl;
+                } else {
+a.stream() << "    v.visit(*this);" << std::endl;
+                }
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "void " << sn << "::accept(" << bvn << "& v) {" << std::endl;
+                if (o.derived_visitor()) {
+a.stream() << "    typedef " << dvn << "* derived_ptr;" << std::endl;
+a.stream() << "    const auto dv(dynamic_cast<derived_ptr>(&v));" << std::endl;
+a.stream() << "    if (dv)" << std::endl;
+a.stream() << "        dv->visit(*this);" << std::endl;
+                } else {
+a.stream() << "    v.visit(*this);" << std::endl;
+                }
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+            }
+
+            /*
              * Streaming
              */
             if (a.is_io_enabled()) {

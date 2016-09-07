@@ -144,11 +144,9 @@ a.stream() << "    virtual void accept(" << vsn << "& v) = 0;" << std::endl;
 a.stream() << std::endl;
             } else if (o.is_visitation_leaf()) {
                 std::string bvn;
-                std::string dvn;
                 std::string rpn;
                 if (o.derived_visitor()) {
                     bvn = a.get_qualified_name(*o.base_visitor());
-                    dvn = o.derived_visitor()->simple();
                     rpn = a.get_qualified_name(*o.root_parent());
                 } else {
                     bvn = o.base_visitor()->simple();
@@ -157,50 +155,10 @@ a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
 a.stream() << "    using " << rpn << "::accept;" << std::endl;
 a.stream() << std::endl;
-a.stream() << "    virtual void accept(const " << bvn << "& v) const override {" << std::endl;
-                if (o.derived_visitor()) {
-a.stream() << "        typedef const " << dvn << "* derived_ptr;" << std::endl;
-a.stream() << "        const auto dv(dynamic_cast<derived_ptr>(&v));" << std::endl;
-a.stream() << "        if (dv)" << std::endl;
-a.stream() << "            dv->visit(*this);" << std::endl;
-                } else {
-a.stream() << "        v.visit(*this);" << std::endl;
-                }
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    virtual void accept(" << bvn << "& v) const override {" << std::endl;
-                if (o.derived_visitor()) {
-a.stream() << "        typedef " << dvn << "* derived_ptr;" << std::endl;
-a.stream() << "        const auto dv(dynamic_cast<derived_ptr>(&v));" << std::endl;
-a.stream() << "        if (dv)" << std::endl;
-a.stream() << "            dv->visit(*this);" << std::endl;
-                } else {
-a.stream() << "        v.visit(*this);" << std::endl;
-                }
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    virtual void accept(const " << bvn << "& v) override {" << std::endl;
-                if (o.derived_visitor()) {
-a.stream() << "        typedef const " << dvn << "* derived_ptr;" << std::endl;
-a.stream() << "        const auto dv(dynamic_cast<derived_ptr>(&v));" << std::endl;
-a.stream() << "        if (dv)" << std::endl;
-a.stream() << "            dv->visit(*this);" << std::endl;
-                } else {
-a.stream() << "        v.visit(*this);" << std::endl;
-                }
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    virtual void accept(" << bvn << "& v) override {" << std::endl;
-                if (o.derived_visitor()) {
-a.stream() << "        typedef " << dvn << "* derived_ptr;" << std::endl;
-a.stream() << "        const auto dv(dynamic_cast<derived_ptr>(&v));" << std::endl;
-a.stream() << "        if (dv)" << std::endl;
-a.stream() << "            dv->visit(*this);" << std::endl;
-                } else {
-a.stream() << "        v.visit(*this);" << std::endl;
-                }
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
+a.stream() << "    virtual void accept(const " << bvn << "& v) const;" << std::endl;
+a.stream() << "    virtual void accept(" << bvn << "& v) const;" << std::endl;
+a.stream() << "    virtual void accept(const " << bvn << "& v);" << std::endl;
+a.stream() << "    virtual void accept(" << bvn << "& v);" << std::endl;
             }
 
             /*

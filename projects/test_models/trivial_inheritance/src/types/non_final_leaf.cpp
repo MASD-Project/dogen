@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include "dogen/test_models/trivial_inheritance/io/descendant1_io.hpp"
+#include "dogen/test_models/trivial_inheritance/types/base_visitor.hpp"
 #include "dogen/test_models/trivial_inheritance/types/non_final_leaf.hpp"
 
 namespace dogen {
@@ -32,6 +33,23 @@ non_final_leaf::non_final_leaf()
 non_final_leaf::non_final_leaf(const int prop_0)
     : dogen::test_models::trivial_inheritance::descendant1(),
       prop_0_(prop_0) { }
+
+void non_final_leaf::accept(const base_visitor& v) const {
+    v.visit(*this);
+}
+
+void non_final_leaf::accept(base_visitor& v) const {
+    v.visit(*this);
+    }
+
+void non_final_leaf::accept(const base_visitor& v) {
+    v.visit(*this);
+}
+
+void non_final_leaf::accept(base_visitor& v) {
+    v.visit(*this);
+}
+
 
 void non_final_leaf::to_stream(std::ostream& s) const {
     s << " { "

@@ -22,6 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include "dogen/test_models/trivial_inheritance/io/descendant1_io.hpp"
 #include "dogen/test_models/trivial_inheritance/types/descendant3.hpp"
+#include "dogen/test_models/trivial_inheritance/types/base_visitor.hpp"
 
 namespace dogen {
 namespace test_models {
@@ -33,6 +34,23 @@ descendant3::descendant3()
 descendant3::descendant3(const bool prop_0)
     : dogen::test_models::trivial_inheritance::descendant1(),
       prop_0_(prop_0) { }
+
+void descendant3::accept(const base_visitor& v) const {
+    v.visit(*this);
+}
+
+void descendant3::accept(base_visitor& v) const {
+    v.visit(*this);
+    }
+
+void descendant3::accept(const base_visitor& v) {
+    v.visit(*this);
+}
+
+void descendant3::accept(base_visitor& v) {
+    v.visit(*this);
+}
+
 
 void descendant3::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);

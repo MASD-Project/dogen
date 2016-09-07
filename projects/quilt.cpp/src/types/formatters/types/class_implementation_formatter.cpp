@@ -96,6 +96,18 @@ provider::provide(const properties::inclusion_dependencies_builder_factory& f,
     builder.add(o.opaque_associations(), io_fn);
     builder.add(o.parent(), io_fn);
 
+    if (o.is_visitation_leaf()) {
+        /*
+         * Only leaves have a visitation implementation. Note that we
+         * don't bother including the base if we are already including
+         * the derived visitor.
+         */
+        if (o.derived_visitor())
+            builder.add(*o.derived_visitor(), ch_fn);
+        else
+            builder.add(*o.base_visitor(), ch_fn);
+    }
+
     return builder.build();
 }
 
