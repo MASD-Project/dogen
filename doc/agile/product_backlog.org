@@ -11,6 +11,19 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Incorrect generation of forward declarations for all facets       :story:
+
+Up to know we generated forward declarations for all facets for all
+types that needed a =types= forward declaration. This was not a
+problem for enumerations, objects, exceptions and so forth because
+they were all serialisable. However with the introduction of visitor
+forward declarations, we are now generating an invalid serialisation
+forward declaration (because visitors are not serialisable). We need
+to find a way to determine when to generate a forward declaration for
+a facet. This could be done via enablement, but we don't want to do
+too much hard-coding (e.g. if visitor then disable serialisation
+facet, etc).
+
 *** Generate formatter interfaces                                      :epic:
 
 We should create another template language, in addition to stitch:
