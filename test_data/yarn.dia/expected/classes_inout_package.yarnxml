@@ -386,8 +386,6 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<is_visitable>0</is_visitable>
-				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
 					<initialized>0</initialized>
 				</visitable_by>
@@ -586,8 +584,6 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</opaque_associations>
-				<is_visitable>0</is_visitable>
-				<is_root_parent_visitable>0</is_root_parent_visitable>
 				<visitable_by>
 					<initialized>0</initialized>
 				</visitable_by>

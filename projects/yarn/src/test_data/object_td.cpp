@@ -120,15 +120,13 @@ populate(const unsigned int position, result_type& v) {
     v.generalization_settings(create_dogen_yarn_generalization_settings(position + 13));
     v.transparent_associations(create_std_list_dogen_yarn_name(position + 14));
     v.opaque_associations(create_std_list_dogen_yarn_name(position + 15));
-    v.is_visitable(create_bool(position + 16));
-    v.is_root_parent_visitable(create_bool(position + 17));
-    v.visitable_by(create_boost_optional_dogen_yarn_name(position + 18));
-    v.visitation_type(create_dogen_yarn_visitation_types(position + 19));
-    v.type_parameters_settings(create_dogen_yarn_type_parameters_settings(position + 20));
-    v.object_type(create_dogen_yarn_object_types(position + 21));
-    v.modeled_concepts(create_std_list_dogen_yarn_name(position + 22));
-    v.associative_container_keys(create_std_list_dogen_yarn_name(position + 23));
-    v.provides_opaqueness(create_bool(position + 24));
+    v.visitable_by(create_boost_optional_dogen_yarn_name(position + 16));
+    v.visitation_type(create_dogen_yarn_visitation_types(position + 17));
+    v.type_parameters_settings(create_dogen_yarn_type_parameters_settings(position + 18));
+    v.object_type(create_dogen_yarn_object_types(position + 19));
+    v.modeled_concepts(create_std_list_dogen_yarn_name(position + 20));
+    v.associative_container_keys(create_std_list_dogen_yarn_name(position + 21));
+    v.provides_opaqueness(create_bool(position + 22));
 }
 
 object_generator::result_type

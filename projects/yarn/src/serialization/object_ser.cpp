@@ -68,8 +68,6 @@ void save(Archive& ar,
     ar << make_nvp("generalization_settings", v.generalization_settings_);
     ar << make_nvp("transparent_associations", v.transparent_associations_);
     ar << make_nvp("opaque_associations", v.opaque_associations_);
-    ar << make_nvp("is_visitable", v.is_visitable_);
-    ar << make_nvp("is_root_parent_visitable", v.is_root_parent_visitable_);
     ar << make_nvp("visitable_by", v.visitable_by_);
     ar << make_nvp("visitation_type", v.visitation_type_);
     ar << make_nvp("type_parameters_settings", v.type_parameters_settings_);
@@ -101,8 +99,6 @@ void load(Archive& ar,
     ar >> make_nvp("generalization_settings", v.generalization_settings_);
     ar >> make_nvp("transparent_associations", v.transparent_associations_);
     ar >> make_nvp("opaque_associations", v.opaque_associations_);
-    ar >> make_nvp("is_visitable", v.is_visitable_);
-    ar >> make_nvp("is_root_parent_visitable", v.is_root_parent_visitable_);
     ar >> make_nvp("visitable_by", v.visitable_by_);
     ar >> make_nvp("visitation_type", v.visitation_type_);
     ar >> make_nvp("type_parameters_settings", v.type_parameters_settings_);

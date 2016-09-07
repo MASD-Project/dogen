@@ -101,8 +101,6 @@ object::object()
       is_leaf_(static_cast<bool>(0)),
       is_final_(static_cast<bool>(0)),
       in_inheritance_relationship_(static_cast<bool>(0)),
-      is_visitable_(static_cast<bool>(0)),
-      is_root_parent_visitable_(static_cast<bool>(0)),
       visitation_type_(static_cast<dogen::yarn::visitation_types>(0)),
       object_type_(static_cast<dogen::yarn::object_types>(0)),
       provides_opaqueness_(static_cast<bool>(0)) { }
@@ -126,8 +124,6 @@ object::object(object&& rhs)
       generalization_settings_(std::move(rhs.generalization_settings_)),
       transparent_associations_(std::move(rhs.transparent_associations_)),
       opaque_associations_(std::move(rhs.opaque_associations_)),
-      is_visitable_(std::move(rhs.is_visitable_)),
-      is_root_parent_visitable_(std::move(rhs.is_root_parent_visitable_)),
       visitable_by_(std::move(rhs.visitable_by_)),
       visitation_type_(std::move(rhs.visitation_type_)),
       type_parameters_settings_(std::move(rhs.type_parameters_settings_)),
@@ -161,8 +157,6 @@ object::object(
     const dogen::yarn::generalization_settings& generalization_settings,
     const std::list<dogen::yarn::name>& transparent_associations,
     const std::list<dogen::yarn::name>& opaque_associations,
-    const bool is_visitable,
-    const bool is_root_parent_visitable,
     const boost::optional<dogen::yarn::name>& visitable_by,
     const dogen::yarn::visitation_types visitation_type,
     const dogen::yarn::type_parameters_settings& type_parameters_settings,
@@ -195,8 +189,6 @@ object::object(
       generalization_settings_(generalization_settings),
       transparent_associations_(transparent_associations),
       opaque_associations_(opaque_associations),
-      is_visitable_(is_visitable),
-      is_root_parent_visitable_(is_root_parent_visitable),
       visitable_by_(visitable_by),
       visitation_type_(visitation_type),
       type_parameters_settings_(type_parameters_settings),
@@ -233,8 +225,6 @@ void object::to_stream(std::ostream& s) const {
       << "\"generalization_settings\": " << generalization_settings_ << ", "
       << "\"transparent_associations\": " << transparent_associations_ << ", "
       << "\"opaque_associations\": " << opaque_associations_ << ", "
-      << "\"is_visitable\": " << is_visitable_ << ", "
-      << "\"is_root_parent_visitable\": " << is_root_parent_visitable_ << ", "
       << "\"visitable_by\": " << visitable_by_ << ", "
       << "\"visitation_type\": " << visitation_type_ << ", "
       << "\"type_parameters_settings\": " << type_parameters_settings_ << ", "
@@ -265,8 +255,6 @@ void object::swap(object& other) noexcept {
     swap(generalization_settings_, other.generalization_settings_);
     swap(transparent_associations_, other.transparent_associations_);
     swap(opaque_associations_, other.opaque_associations_);
-    swap(is_visitable_, other.is_visitable_);
-    swap(is_root_parent_visitable_, other.is_root_parent_visitable_);
     swap(visitable_by_, other.visitable_by_);
     swap(visitation_type_, other.visitation_type_);
     swap(type_parameters_settings_, other.type_parameters_settings_);
@@ -300,8 +288,6 @@ bool object::operator==(const object& rhs) const {
         generalization_settings_ == rhs.generalization_settings_ &&
         transparent_associations_ == rhs.transparent_associations_ &&
         opaque_associations_ == rhs.opaque_associations_ &&
-        is_visitable_ == rhs.is_visitable_ &&
-        is_root_parent_visitable_ == rhs.is_root_parent_visitable_ &&
         visitable_by_ == rhs.visitable_by_ &&
         visitation_type_ == rhs.visitation_type_ &&
         type_parameters_settings_ == rhs.type_parameters_settings_ &&
@@ -515,22 +501,6 @@ void object::opaque_associations(const std::list<dogen::yarn::name>& v) {
 
 void object::opaque_associations(const std::list<dogen::yarn::name>&& v) {
     opaque_associations_ = std::move(v);
-}
-
-bool object::is_visitable() const {
-    return is_visitable_;
-}
-
-void object::is_visitable(const bool v) {
-    is_visitable_ = v;
-}
-
-bool object::is_root_parent_visitable() const {
-    return is_root_parent_visitable_;
-}
-
-void object::is_root_parent_visitable(const bool v) {
-    is_root_parent_visitable_ = v;
 }
 
 const boost::optional<dogen::yarn::name>& object::visitable_by() const {

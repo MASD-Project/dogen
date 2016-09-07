@@ -90,8 +90,6 @@ public:
         const dogen::yarn::generalization_settings& generalization_settings,
         const std::list<dogen::yarn::name>& transparent_associations,
         const std::list<dogen::yarn::name>& opaque_associations,
-        const bool is_visitable,
-        const bool is_root_parent_visitable,
         const boost::optional<dogen::yarn::name>& visitable_by,
         const dogen::yarn::visitation_types visitation_type,
         const dogen::yarn::type_parameters_settings& type_parameters_settings,
@@ -284,26 +282,6 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, a visitor is to be generated for this element and its descendants.
-     *
-     * Only applicable if is_parent is true.
-     */
-    /**@{*/
-    bool is_visitable() const;
-    void is_visitable(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Is the root parent of this element a visitable element?
-     *
-     * Set to false if no parent exists, or if the parent is not visitable.
-     */
-    /**@{*/
-    bool is_root_parent_visitable() const;
-    void is_root_parent_visitable(const bool v);
-    /**@}*/
-
-    /**
      * @brief Elements that visit the current element, if any.
      */
     /**@{*/
@@ -392,8 +370,6 @@ private:
     dogen::yarn::generalization_settings generalization_settings_;
     std::list<dogen::yarn::name> transparent_associations_;
     std::list<dogen::yarn::name> opaque_associations_;
-    bool is_visitable_;
-    bool is_root_parent_visitable_;
     boost::optional<dogen::yarn::name> visitable_by_;
     dogen::yarn::visitation_types visitation_type_;
     dogen::yarn::type_parameters_settings type_parameters_settings_;

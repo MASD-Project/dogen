@@ -16013,7 +16013,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:point val="-197,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-197.05,-15.05;-182.59,-8.95"/>
+        <dia:rectangle val="-197.05,-15.05;-182.59,-10.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-197,-15"/>
@@ -16022,7 +16022,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:real val="14.359999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#Visitable#</dia:string>
@@ -16112,56 +16112,6 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#is_visitable#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, a visitor is to be generated for this element and its descendants.
-
-Only applicable if is_parent is true.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#is_root_parent_visitable#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Is the root parent of this element a visitable element?
-
-Set to false if no parent exists, or if the parent is not visitable. #</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#visitable_by#</dia:string>
@@ -16928,16 +16878,16 @@ This is used to break cycles where required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O133">
       <dia:attribute name="obj_pos">
-        <dia:point val="-189.82,-9"/>
+        <dia:point val="-189.82,-10.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-190.67,-9.05;-173.557,14.0004"/>
+        <dia:rectangle val="-190.67,-10.65;-173.557,14.0004"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-189.82,-9"/>
+        <dia:point val="-189.82,-10.6"/>
         <dia:point val="-189.82,9"/>
         <dia:point val="-173.607,9"/>
         <dia:point val="-173.607,13.9504"/>
@@ -22662,7 +22612,7 @@ root is visitable and the visitor uses inheritance.#</dia:string>
         <dia:point val="-189.82,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-190.57,-25.05;-183.62,-13.4"/>
+        <dia:rectangle val="-190.57,-25.05;-183.62,-14.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

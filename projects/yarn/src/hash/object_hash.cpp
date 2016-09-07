@@ -96,8 +96,6 @@ std::size_t object_hasher::hash(const object& v) {
     combine(seed, v.generalization_settings());
     combine(seed, hash_std_list_dogen_yarn_name(v.transparent_associations()));
     combine(seed, hash_std_list_dogen_yarn_name(v.opaque_associations()));
-    combine(seed, v.is_visitable());
-    combine(seed, v.is_root_parent_visitable());
     combine(seed, hash_boost_optional_dogen_yarn_name(v.visitable_by()));
     combine(seed, v.visitation_type());
     combine(seed, v.type_parameters_settings());
