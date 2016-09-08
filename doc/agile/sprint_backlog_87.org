@@ -520,6 +520,8 @@ Tasks:
   injectors.
 
 *** STARTED Add language-specific element injection                   :story:
+    CLOCK: [2016-09-08 Thu 11:37]--[2016-09-08 Thu 11:43] =>  0:06
+    CLOCK: [2016-09-08 Thu 11:33]--[2016-09-08 Thu 11:36] =>  0:03
     CLOCK: [2016-09-08 Thu 11:14]--[2016-09-08 Thu 11:32] =>  0:18
 
 We need to create a factory that adds =quilt.cpp= specific elements
@@ -528,7 +530,11 @@ into the yarn model.
 Tasks:
 
 - delete fabric workflow and flatten model in main workflow.
-- rename fabric to yarn.
+- rename fabric to yarn: actually this results in a huge number of
+  naming errors all across properties. We'd have to fully qualify all
+  uses of the name yarn in order for this to work (which is what we
+  did for formatters). The biggest problem comes from the includers
+  (=all.hpp=). We need to keep fabric.
 - add forward declarations.
 - add injector interface that injects forward declarations.
 

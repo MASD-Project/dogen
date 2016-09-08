@@ -39,6 +39,7 @@
 #include "dogen/quilt.cpp/io/properties/registrar_info_io.hpp"
 #include "dogen/quilt.cpp/io/settings/element_settings_io.hpp"
 #include "dogen/quilt.cpp/io/properties/cmakelists_info_io.hpp"
+#include "dogen/quilt.cpp/io/fabric/forward_declarations_io.hpp"
 #include "dogen/quilt.cpp/io/properties/odb_options_info_io.hpp"
 #include "dogen/quilt.cpp/io/properties/path_derivatives_io.hpp"
 #include "dogen/quilt.cpp/io/settings/streaming_settings_io.hpp"

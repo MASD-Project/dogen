@@ -35,6 +35,7 @@
 #include "dogen/quilt.cpp/serialization/properties/includers_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/registrar_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/cmakelists_info_ser.hpp"
+#include "dogen/quilt.cpp/serialization/fabric/forward_declarations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/odb_options_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/forward_declarations_info_ser.hpp"
 
@@ -49,6 +50,7 @@ void register_types(Archive& ar) {
     dogen::dynamic::register_types(ar);
     dogen::yarn::register_types(ar);
 
+    ar.template register_type<dogen::quilt::cpp::fabric::forward_declarations>();
     ar.template register_type<dogen::quilt::cpp::fabric::registrar>();
     ar.template register_type<dogen::quilt::cpp::properties::cmakelists_info>();
     ar.template register_type<dogen::quilt::cpp::properties::forward_declarations_info>();

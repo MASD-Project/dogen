@@ -39,6 +39,7 @@
 #include "dogen/quilt.cpp/test_data/properties/registrar_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/settings/element_settings_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/cmakelists_info_td.hpp"
+#include "dogen/quilt.cpp/test_data/fabric/forward_declarations_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/odb_options_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/path_derivatives_td.hpp"
 #include "dogen/quilt.cpp/test_data/settings/streaming_settings_td.hpp"

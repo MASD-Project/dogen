@@ -27,6 +27,7 @@
 
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_fwd.hpp"
+#include "dogen/quilt.cpp/types/fabric/forward_declarations_fwd.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -42,6 +43,16 @@ public:
 
 public:
     using dogen::yarn::element_visitor::visit;
+
+    /**
+     * @brief Accept visits for type dogen::quilt::cpp::fabric::forward_declarations
+     */
+    /**@{*/
+    virtual void visit(const dogen::quilt::cpp::fabric::forward_declarations&) const { }
+    virtual void visit(const dogen::quilt::cpp::fabric::forward_declarations&) { }
+    virtual void visit(dogen::quilt::cpp::fabric::forward_declarations&) const { }
+    virtual void visit(dogen::quilt::cpp::fabric::forward_declarations&) { }
+    /**@}*/
 
     /**
      * @brief Accept visits for type dogen::quilt::cpp::fabric::registrar
