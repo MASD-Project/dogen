@@ -18,14 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include <memory>
-#include <functional>
-#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
-#include "dogen/yarn/types/injection_error.hpp"
+#include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/stereotypes_expander.hpp"
 
@@ -78,7 +75,7 @@ visitor stereotypes_expander::create_visitor(const object& o, const location& l,
 
     if (leaves.empty()) {
         BOOST_LOG_SEV(lg, error) << no_visitees << n.id();
-        BOOST_THROW_EXCEPTION(injection_error(no_visitees + n.id()));
+        BOOST_THROW_EXCEPTION(expansion_error(no_visitees + n.id()));
     }
 
     for (const auto& l : leaves)
@@ -97,7 +94,7 @@ update_visited_leaves(const std::list<name>& leaves, const visitor_details& vd,
         auto i(m.objects().find(l.id()));
         if (i == m.objects().end()) {
             BOOST_LOG_SEV(lg, error) << leaf_not_found << l.id();
-            BOOST_THROW_EXCEPTION(injection_error(leaf_not_found + l.id()));
+            BOOST_THROW_EXCEPTION(expansion_error(leaf_not_found + l.id()));
         }
 
         auto& o(i->second);
@@ -118,13 +115,13 @@ add_visitor_to_model(const visitor& v, intermediate_model& im) const {
     if (!i.second) {
         const auto id(v.name().id());
         BOOST_LOG_SEV(lg, error) << duplicate_name << id;
-        BOOST_THROW_EXCEPTION(injection_error(duplicate_name + id));
+        BOOST_THROW_EXCEPTION(expansion_error(duplicate_name + id));
     }
     BOOST_LOG_SEV(lg, debug) << "Added visitor: " << v.name().id();
 }
 
 void stereotypes_expander::expand_visitable(intermediate_model& im) {
-    BOOST_LOG_SEV(lg, debug) << "Injecting visitors for: " << im.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Expanding visitable for: " << im.name().id();
 
     for (auto& pair : im.objects()) {
         auto& o(pair.second);
@@ -145,7 +142,7 @@ void stereotypes_expander::expand_visitable(intermediate_model& im) {
         const auto id(o.name().id());
         if (o.is_child()) {
             BOOST_LOG_SEV(lg, error) << visitable_child << id;
-            BOOST_THROW_EXCEPTION(injection_error(visitable_child + id));
+            BOOST_THROW_EXCEPTION(expansion_error(visitable_child + id));
         }
 
         BOOST_LOG_SEV(lg, debug) << "Found visitation root: " << o.name().id();
@@ -160,7 +157,7 @@ void stereotypes_expander::expand_visitable(intermediate_model& im) {
          */
         if (o.leaves().empty()) {
             BOOST_LOG_SEV(lg, error) << zero_leaves << id;
-            BOOST_THROW_EXCEPTION(injection_error(zero_leaves + id));
+            BOOST_THROW_EXCEPTION(expansion_error(zero_leaves + id));
         }
 
         /*
@@ -179,7 +176,7 @@ void stereotypes_expander::expand_visitable(intermediate_model& im) {
         if (j == bucketed_leaves.end()) {
             const auto id(o.name().id());
             BOOST_LOG_SEV(lg, error) << leaves_not_found << id;
-            BOOST_THROW_EXCEPTION(injection_error(leaves_not_found + id));
+            BOOST_THROW_EXCEPTION(expansion_error(leaves_not_found + id));
         }
 
         BOOST_LOG_SEV(lg, debug) << "Found bucketed leaves. Total: "

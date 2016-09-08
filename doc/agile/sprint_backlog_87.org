@@ -12,30 +12,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-08 Thu 09:49]
+#+CAPTION: Clock summary at [2016-09-08 Thu 10:07]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *36:07* |       |      | 100.0 |
+| *Total time*                                                                | *36:24* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 36:07   |       |      | 100.0 |
-| Active                                                                      |         | 36:07 |      | 100.0 |
+| Stories                                                                     | 36:24   |       |      | 100.0 |
+| Active                                                                      |         | 36:24 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:52 |   2.4 |
-| COMPLETED Move readme to markdown                                           |         |       | 0:49 |   2.3 |
+| COMPLETED Move readme to markdown                                           |         |       | 0:49 |   2.2 |
 | COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   1.3 |
-| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   6.6 |
-| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  12.0 |
-| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  14.2 |
+| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   6.5 |
+| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  11.9 |
+| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  14.1 |
 | COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   4.5 |
 | COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   5.4 |
-| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   4.1 |
-| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  13.6 |
+| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   4.0 |
+| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  13.5 |
 | CANCELLED Pick-up Boost 1.61 from Debian Testing                            |         |       | 1:23 |   3.8 |
 | COMPLETED Allow cross model inheritance                                     |         |       | 1:09 |   3.2 |
-| COMPLETED Add support for visitor inheritance                               |         |       | 7:27 |  20.6 |
+| COMPLETED Add support for visitor inheritance                               |         |       | 7:27 |  20.5 |
 | COMPLETED Move visitor =accept= methods to cpp file                         |         |       | 0:41 |   1.9 |
 | COMPLETED Analysis work on implementing remaining yarn types                |         |       | 0:52 |   2.4 |
-| STARTED Split injector into separate classes                                |         |       | 0:39 |   1.8 |
+| STARTED Split injector into separate classes                                |         |       | 0:56 |   2.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -488,6 +488,7 @@ Tasks:
 - move model flattening from fabric workflow to main workflow.
 
 *** STARTED Split injector into separate classes                      :story:
+    CLOCK: [2016-09-08 Thu 09:50]--[2016-09-08 Thu 10:07] =>  0:17
     CLOCK: [2016-09-08 Thu 09:38]--[2016-09-08 Thu 09:49] =>  0:11
     CLOCK: [2016-09-08 Thu 09:33]--[2016-09-08 Thu 09:37] =>  0:04
     CLOCK: [2016-09-08 Thu 09:08]--[2016-09-08 Thu 09:32] =>  0:24

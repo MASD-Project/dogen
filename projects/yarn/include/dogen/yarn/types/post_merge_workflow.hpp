@@ -63,9 +63,9 @@ private:
     void expand_stereotypes(intermediate_model& im) const;
 
     /**
-     * @brief Inject system-generated elements.
+     * @brief Expand element containment.
      */
-    void inject_system_elements(intermediate_model& im) const;
+    void expand_containment(intermediate_model& im) const;
 
     /**
      * @brief Ensures all references point to elements in the model.

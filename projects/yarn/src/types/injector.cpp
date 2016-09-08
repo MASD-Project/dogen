@@ -18,14 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include <memory>
-#include <functional>
-#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/name_builder.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/injection_error.hpp"
 #include "dogen/yarn/types/injector.hpp"
 
@@ -35,64 +29,13 @@ namespace {
 
 auto lg(logger_factory("yarn.injector"));
 
-const std::string global_module_doc("Module that represents the global scope.");
-const std::string model_already_has_global_module(
-    "Found a global module in model: ");
-
 }
 
 namespace dogen {
 namespace yarn {
 
-template<typename AssociativeContainerOfContainable>
-inline void add_containing_module_to_non_contained_entities(
-    const name& container_name, AssociativeContainerOfContainable& c) {
-    for (auto& pair : c) {
-        auto& s(pair.second);
-        if (!s.contained_by())
-            s.contained_by(container_name);
-    }
-}
-
-module injector::create_global_module() const {
-    module r;
-    r.generation_type(generation_types::no_generation);
-    r.origin_type(origin_types::system);
-    r.documentation(global_module_doc);
-    return r;
-}
-
-void injector::inject_global_module(intermediate_model& im) {
-    BOOST_LOG_SEV(lg, debug) << "Injecting global module for: "
-                             << im.name().id();
-
-    const auto gm(create_global_module());
-    const auto gmn(gm.name());
-    const auto i(im.modules().find(gmn.id()));
-    if (i != im.modules().end()) {
-        const auto id(im.name().id());
-        BOOST_LOG_SEV(lg, error) << model_already_has_global_module << id;
-        BOOST_THROW_EXCEPTION(
-            injection_error(model_already_has_global_module + id));
-    }
-    im.modules().insert(std::make_pair(gmn.id(), gm));
-
-    add_containing_module_to_non_contained_entities(gmn, im.modules());
-    add_containing_module_to_non_contained_entities(gmn, im.concepts());
-    add_containing_module_to_non_contained_entities(gmn, im.primitives());
-    add_containing_module_to_non_contained_entities(gmn, im.enumerations());
-    add_containing_module_to_non_contained_entities(gmn, im.objects());
-    add_containing_module_to_non_contained_entities(gmn, im.exceptions());
-    add_containing_module_to_non_contained_entities(gmn, im.visitors());
-
-    BOOST_LOG_SEV(lg, debug) << "Done injecting global module";
-}
-
 void injector::inject(intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Running on: " << im.name().id();
-
-    inject_global_module(im);
-
     BOOST_LOG_SEV(lg, debug) << "Finished running";
 }
 

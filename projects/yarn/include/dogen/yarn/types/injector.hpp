@@ -31,25 +31,7 @@ namespace dogen {
 namespace yarn {
 
 class injector {
-private:
-    /**
-     * @brief Creates the module to represent the global namespace.
-     */
-    module create_global_module() const;
-
-    /**
-     * @brief Injects the global module, and makes all modules that do
-     * not have a containing namespace be contained by it.
-     */
-    void inject_global_module(intermediate_model& im);
-
 public:
-
-    /**
-     * @brief Inject system defined types into the intermediate model.
-     *
-     * @param m Yarn model to operate on.
-     */
     void inject(intermediate_model& im);
 };
 

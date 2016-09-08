@@ -28,7 +28,7 @@
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/io/object_io.hpp"
-#include "dogen/yarn/types/injection_error.hpp"
+#include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
 #include "dogen/yarn/types/stereotypes_expander.hpp"
 
@@ -49,7 +49,7 @@ const std::string no_leaves("Type marked as visitable but has no leaves");
 }
 
 using dogen::utility::test::contains_checker;
-using dogen::yarn::injection_error;
+using dogen::yarn::expansion_error;
 using dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(stereotypes_expander_tests)
@@ -89,8 +89,8 @@ BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     dogen::yarn::stereotypes_expander ex;
-    contains_checker<injection_error> c(no_leaves);
-    BOOST_CHECK_EXCEPTION(ex.expand(m), injection_error, c);
+    contains_checker<expansion_error> c(no_leaves);
+    BOOST_CHECK_EXCEPTION(ex.expand(m), expansion_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {

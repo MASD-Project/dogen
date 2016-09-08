@@ -22,10 +22,10 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/indexer.hpp"
-#include "dogen/yarn/types/injector.hpp"
 #include "dogen/yarn/types/resolver.hpp"
 #include "dogen/yarn/types/concept_expander.hpp"
 #include "dogen/yarn/types/stereotypes_expander.hpp"
+#include "dogen/yarn/types/containment_expander.hpp"
 #include "dogen/yarn/types/attributes_expander.hpp"
 #include "dogen/yarn/types/association_expander.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
@@ -84,13 +84,13 @@ void post_merge_workflow::create_indices(intermediate_model& im) const {
     idx.index(im);
 }
 
-void post_merge_workflow::inject_system_elements(intermediate_model& im) const {
-    injector i;
-    i.inject(im);
-}
-
 void post_merge_workflow::expand_stereotypes(intermediate_model& im) const {
     stereotypes_expander ex;
+    ex.expand(im);
+}
+
+void post_merge_workflow::expand_containment(intermediate_model& im) const {
+    containment_expander ex;
     ex.expand(im);
 }
 
@@ -142,7 +142,7 @@ void post_merge_workflow::execute(intermediate_model& im) const {
      */
     expand_generalizations(im);
     expand_stereotypes(im);
-    inject_system_elements(im);
+    expand_containment(im);
 
     /*
      * Resolution must be done after system elements have been
