@@ -58,6 +58,11 @@ private:
     void create_indices(intermediate_model& im) const;
 
     /**
+     * @brief Expand all stereotypes used in model.
+     */
+    void expand_stereotypes(intermediate_model& im) const;
+
+    /**
      * @brief Inject system-generated elements.
      */
     void inject_system_elements(intermediate_model& im) const;

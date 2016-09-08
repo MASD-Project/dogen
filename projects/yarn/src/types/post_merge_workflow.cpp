@@ -25,6 +25,7 @@
 #include "dogen/yarn/types/injector.hpp"
 #include "dogen/yarn/types/resolver.hpp"
 #include "dogen/yarn/types/concept_expander.hpp"
+#include "dogen/yarn/types/stereotypes_expander.hpp"
 #include "dogen/yarn/types/attributes_expander.hpp"
 #include "dogen/yarn/types/association_expander.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
@@ -88,6 +89,11 @@ void post_merge_workflow::inject_system_elements(intermediate_model& im) const {
     i.inject(im);
 }
 
+void post_merge_workflow::expand_stereotypes(intermediate_model& im) const {
+    stereotypes_expander ex;
+    ex.expand(im);
+}
+
 void post_merge_workflow::
 resolve_element_references(intermediate_model& im) const {
     resolver rs;
@@ -130,11 +136,12 @@ void post_merge_workflow::execute(intermediate_model& im) const {
     create_indices(im);
 
     /*
-     * We must expand generalisation relationships before we inject
-     * system elements because we need to know about leaves before we
-     * can generate visitors.
+     * We must expand generalisation relationships before we expand
+     * stereotypes because we need to know about leaves before we can
+     * generate visitors.
      */
     expand_generalizations(im);
+    expand_stereotypes(im);
     inject_system_elements(im);
 
     /*

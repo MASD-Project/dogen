@@ -25,70 +25,12 @@
 #pragma once
 #endif
 
-#include <list>
-#include <unordered_map>
-#include "dogen/yarn/hash/location_hash.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 
-/**
- * @brief Injects types into an intermediate model.
- *
- * Injector is responsible for analysing all of the types defined by
- * the user and deciding:
- *
- * @li whether to augment that type; that is, due to the configuration
- * of that type, we may need to add additional attributes to the
- * type.
- *
- * @li whether to create supporting types that enhance the current
- * type. This is the case with the generation of visitors, etc.
- *
- * Note: we have taken the simplistic approach of looping over the
- * object collection as many times as required, to keep the logic
- * simple. We should probably optimise this at some point.
- *
- */
 class injector {
-private:
-    struct visitor_details {
-        visitor_details(const name& b) : base(b) { }
-        visitor_details(const name& b, const name& d) : base(b), derived(d) { }
-
-        name base;
-        boost::optional<name> derived;
-    };
-
-    std::unordered_map<location, std::list<name> >
-    bucket_leaves_by_location(const std::list<name>& leaves) const;
-
-    void add_visitor_to_model(const visitor& v, intermediate_model& im) const;
-
-    /**
-     * @brief Create a visitor for the object o.
-     *
-     * @param o visitable object
-     * @param leaves cached leaves to avoid look-up.
-     *
-     * @pre leaves must not be empty.
-     */
-    visitor create_visitor(const object& o, const location& l,
-        const generation_types gt, const std::list<name>& leaves) const;
-
-    /**
-     * @brief Injects an accept operation for the given visitor, to
-     * the supplied object and all its leaves.
-     */
-    void update_visited_leaves(const std::list<name>& leaves,
-        const visitor_details& vd, intermediate_model& im) const;
-
-    /**
-     * @brief Injects visitors for objects that require them.
-     */
-    void inject_visitors(intermediate_model& im);
-
 private:
     /**
      * @brief Creates the module to represent the global namespace.

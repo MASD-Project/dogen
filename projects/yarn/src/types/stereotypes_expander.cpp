@@ -35,7 +35,6 @@ namespace {
 
 auto lg(logger_factory("yarn.stereotypes_expander"));
 
-const std::string empty;
 const std::string visitor_name("visitor");
 const std::string visitor_argument_name("v");
 const std::string visitor_doc("Visitor for ");
