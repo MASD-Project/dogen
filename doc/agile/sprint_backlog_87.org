@@ -12,28 +12,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-07 Wed 23:39]
+#+CAPTION: Clock summary at [2016-09-08 Thu 09:32]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *34:36* |       |      | 100.0 |
+| *Total time*                                                                | *35:52* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 34:36   |       |      | 100.0 |
-| Active                                                                      |         | 34:36 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:52 |   2.5 |
-| COMPLETED Move readme to markdown                                           |         |       | 0:49 |   2.4 |
-| COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   1.4 |
-| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   6.8 |
-| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  12.5 |
-| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  14.8 |
-| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   4.7 |
-| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   5.6 |
-| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   4.2 |
-| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  14.2 |
-| CANCELLED Pick-up Boost 1.61 from Debian Testing                            |         |       | 1:23 |   4.0 |
-| COMPLETED Allow cross model inheritance                                     |         |       | 1:09 |   3.3 |
-| COMPLETED Add support for visitor inheritance                               |         |       | 7:27 |  21.5 |
-| COMPLETED Move visitor =accept= methods to cpp file                         |         |       | 0:41 |   2.0 |
+| Stories                                                                     | 35:52   |       |      | 100.0 |
+| Active                                                                      |         | 35:52 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:52 |   2.4 |
+| COMPLETED Move readme to markdown                                           |         |       | 0:49 |   2.3 |
+| COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   1.3 |
+| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   6.6 |
+| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  12.0 |
+| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  14.3 |
+| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   4.6 |
+| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   5.4 |
+| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   4.1 |
+| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  13.7 |
+| CANCELLED Pick-up Boost 1.61 from Debian Testing                            |         |       | 1:23 |   3.9 |
+| COMPLETED Allow cross model inheritance                                     |         |       | 1:09 |   3.2 |
+| COMPLETED Add support for visitor inheritance                               |         |       | 7:27 |  20.8 |
+| COMPLETED Move visitor =accept= methods to cpp file                         |         |       | 0:41 |   1.9 |
+| COMPLETED Analysis work on implementing remaining yarn types                |         |       | 0:52 |   2.4 |
+| STARTED Split injector into separate classes                                |         |       | 0:24 |   1.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -448,6 +450,52 @@ because it was easier to code generate that way. But it makes little
 sense to inline virtual methods, and we are paying the cost of large
 rebuilds whenever the visitor changes, for no good reason. Move these
 methods to the implementation.
+
+*** COMPLETED Analysis work on implementing remaining yarn types      :story:
+    CLOSED: [2016-09-08 Thu 09:07]
+    CLOCK: [2016-09-08 Thu 08:15]--[2016-09-08 Thu 09:07] =>  0:52
+
+Types left:
+
+- forward declarations: these are generated off of a yarn model by
+  transformer. Do not require any work in =quilt.cpp=.
+- registrar: generated in factory. Does not seem to require anything
+  else other than the yarn model.
+- includers: created in factory at the moment. Can be generated at the
+  start from a clean yarn model. However, we need to change the
+  properties logic for every type such that they register themselves
+  against the correct includer.
+- cmakelists: created in factory. Great deal of hackery to determine
+  the source and include directories and the ODB folder. Ideally
+  these should be part of properties somehow.
+- odb_options: created in factory. Great deal of hackery; most
+  information should be in properties rather than in this class.
+
+In conclusion, there is no reason (as far as =quilt.cpp= goes) we
+can't create a "injector interface" and allow backends to register
+their injectors; this means these types would then go through the
+remaining yarn workflow. We don't have a use case for this at present
+but it seems like the right thing to do.
+
+Tasks:
+
+- split injector into stereotypes expander and containement expander.
+- create a new injector that takes in injection sources. These
+  register against the main workflow.
+- add injection to model after transformation.
+- rename fabric to yarn and implement the =quilt.cpp= injection
+  source.
+- move model flattening from fabric workflow to main workflow.
+
+*** STARTED Split injector into separate classes                      :story:
+    CLOCK: [2016-09-08 Thu 09:08]--[2016-09-08 Thu 09:32] =>  0:24
+
+We need to free up the name injector. Split it into:
+
+- stereotypes expander: visitor work at present;
+- containement expander: global module work.
+
+Leave injector as an empty class.
 
 *** Add language-specific element injection                           :story:
 

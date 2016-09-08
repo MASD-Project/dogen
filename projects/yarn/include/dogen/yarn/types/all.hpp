@@ -87,6 +87,7 @@
 #include "dogen/yarn/types/attributes_expander.hpp"
 #include "dogen/yarn/types/post_merge_workflow.hpp"
 #include "dogen/yarn/types/association_expander.hpp"
+#include "dogen/yarn/types/stereotypes_expander.hpp"
 #include "dogen/yarn/types/transformation_error.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
 #include "dogen/yarn/types/generalization_settings.hpp"
