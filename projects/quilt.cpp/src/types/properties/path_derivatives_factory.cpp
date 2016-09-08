@@ -68,7 +68,8 @@ make_inclusion_path(const settings::path_settings& ps,
 
     boost::filesystem::path r;
 
-    /* Header files require both the external module path and the
+    /*
+     * Header files require both the external module path and the
      * model module path in the file name path.
      */
     if (ps.file_type() == formatters::file_types::cpp_header) {
@@ -79,17 +80,21 @@ make_inclusion_path(const settings::path_settings& ps,
         r /= boost::algorithm::join(mmp, dot);
     }
 
-    /* If there is a facet directory, and it is configured to
+    /*
+     * If there is a facet directory, and it is configured to
      * contribute to the file name path, add it.
      */
     if (!ps.facet_directory().empty() && !ps.disable_facet_directories())
         r /= ps.facet_directory();
 
-    // Add the module path of the modules internal to this model.
+    /*
+     * Add the module path of the modules internal to this model.
+     */
     for (const auto& m : n.location().internal_modules())
         r /= m;
 
-    /* Modules other than the model module contribute their simple
+    /*
+     * Modules other than the model module contribute their simple
      * names to the directories.
      */
     if (n != model_.name()) {
@@ -98,7 +103,9 @@ make_inclusion_path(const settings::path_settings& ps,
             r /= n.simple();
     }
 
-    // handle the file name.
+    /*
+     * Handle the file name.
+     */
     std::ostringstream stream;
     stream << n.simple();
 
