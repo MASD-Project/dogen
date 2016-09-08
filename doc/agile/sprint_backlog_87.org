@@ -12,36 +12,38 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-08 Thu 11:58]
+#+CAPTION: Clock summary at [2016-09-08 Thu 21:26]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *38:07* |       |      | 100.0 |
+| *Total time*                                                                | *39:22* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 38:07   |       |      | 100.0 |
-| Active                                                                      |         | 38:07 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:52 |   2.3 |
+| Stories                                                                     | 39:22   |       |      | 100.0 |
+| Active                                                                      |         | 39:22 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:55 |   2.3 |
 | COMPLETED Move readme to markdown                                           |         |       | 0:49 |   2.1 |
-| COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   1.3 |
-| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   6.2 |
-| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  11.3 |
-| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  13.4 |
-| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   4.3 |
-| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   5.1 |
-| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   3.8 |
-| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  12.9 |
-| CANCELLED Pick-up Boost 1.61 from Debian Testing                            |         |       | 1:23 |   3.6 |
-| COMPLETED Allow cross model inheritance                                     |         |       | 1:09 |   3.0 |
-| COMPLETED Add support for visitor inheritance                               |         |       | 7:27 |  19.5 |
-| COMPLETED Move visitor =accept= methods to cpp file                         |         |       | 0:41 |   1.8 |
-| COMPLETED Analysis work on implementing remaining yarn types                |         |       | 0:52 |   2.3 |
+| COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   1.2 |
+| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   6.0 |
+| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  11.0 |
+| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  13.0 |
+| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   4.1 |
+| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   5.0 |
+| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   3.7 |
+| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  12.5 |
+| CANCELLED Pick-up Boost 1.61 from Debian Testing                            |         |       | 1:23 |   3.5 |
+| COMPLETED Allow cross model inheritance                                     |         |       | 1:09 |   2.9 |
+| COMPLETED Add support for visitor inheritance                               |         |       | 7:27 |  18.9 |
+| COMPLETED Move visitor =accept= methods to cpp file                         |         |       | 0:41 |   1.7 |
+| COMPLETED Analysis work on implementing remaining yarn types                |         |       | 0:52 |   2.2 |
 | COMPLETED Split injector into separate classes                              |         |       | 0:56 |   2.4 |
-| COMPLETED Add injector interface and registrar                              |         |       | 1:02 |   2.7 |
-| STARTED Add language-specific element injection                             |         |       | 0:41 |   1.8 |
+| COMPLETED Add injector interface and registrar                              |         |       | 1:02 |   2.6 |
+| COMPLETED Analysis: supporting multiple elements for one id                 |         |       | 1:12 |   3.0 |
+| COMPLETED Add language-specific element injection                           |         |       | 0:41 |   1.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-09-08 Thu 21:23]--[2016-09-08 Thu 21:26] =>  0:03
     CLOCK: [2016-09-05 Mon 22:00]--[2016-09-05 Mon 22:33] =>  0:33
     CLOCK: [2016-09-01 Thu 18:01]--[2016-09-01 Thu 18:20] =>  0:19
 
@@ -519,7 +521,46 @@ Tasks:
 - supply registrar to injection expander. Expander goes through all
   injectors.
 
-*** STARTED Add language-specific element injection                   :story:
+*** COMPLETED Analysis: supporting multiple elements for one id       :story:
+    CLOSED: [2016-09-08 Thu 21:22]
+    CLOCK: [2016-09-08 Thu 21:01]--[2016-09-08 Thu 21:22] =>  0:21
+    CLOCK: [2016-09-08 Thu 20:09]--[2016-09-08 Thu 21:00] =>  0:51
+
+Up to now we defined an id of an element to map to a single element;
+this was a key axiom of yarn's conceptual model. However, we've hit a
+limitation with forward declarations: a forward declaration introduces
+a second modeling element for the same id. If we were to use a
+different id then the properties generation (and the formatter) would
+be incorrect. We could of course try to supply the existing modeling
+element to the formatters that generate forward declarations. The
+problem with this approach is that we just want a single formatter for
+all forward declarations rather than one per element type (visitor,
+object, etc). This has not been a problem up to now because, where
+multiple formatters exist for the same modeling element (and facet),
+they actually require all the data on the modeling element
+(e.g. header/implementation).
+
+We could update yarn's conceptual model like so: an entity has a
+unique identity in modeling space. An entity can map to multiple
+representations in modeling space, called elements. An elements can
+map to multiple representations in formatting space via the different
+formatting functions (a formatting function maps an element to a
+file).
+
+As it happens we could simply change the model's container to a list
+instead of a map, allowing multiple elements to map to the same
+id. This will just break a couple of use cases:
+
+- factory for includer generation; this is just due to the hacks we
+  put in.
+- path derivatives factory: we are trying to figure out if a name is a
+  model name. We could add an index to the model for this.
+
+With this approach we don't need to make this change too visible as it
+is likely to just cause confusion.
+
+*** COMPLETED Add language-specific element injection                 :story:
+    CLOSED: [2016-09-08 Thu 21:22]
     CLOCK: [2016-09-08 Thu 11:44]--[2016-09-08 Thu 11:58] =>  0:14
     CLOCK: [2016-09-08 Thu 11:37]--[2016-09-08 Thu 11:43] =>  0:06
     CLOCK: [2016-09-08 Thu 11:33]--[2016-09-08 Thu 11:36] =>  0:03
@@ -538,6 +579,29 @@ Tasks:
   (=all.hpp=). We need to keep fabric.
 - add forward declarations.
 - add injector interface that injects forward declarations.
+
+*** Implement includers in fabric                                     :story:
+
+We need to get rid of the hack in factory and implement these
+correctly. We should take the opportunity and review all the includer
+stories in backlog.
+
+*** Use a list in model rather than a map                             :story:
+
+Tasks:
+
+- add index for modules to allow path derivatives to figure out the
+  modules.
+- update yarn model and remove flattening in =quilt.cpp=.
+- update all visitors in =quilt.cpp=.
+
+*** Implement forward declarations in fabric                          :story:
+
+Tasks:
+
+- visit the elements and generate forward declarations as per
+  transformer.
+- add interfaces for new element and update template.
 
 *** Add support for bintray                                           :story:
 
