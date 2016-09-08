@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <memory>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/model_io.hpp"
 #include "dogen/yarn/types/merger.hpp"
@@ -38,31 +39,31 @@ static logger lg(logger_factory("yarn.workflow"));
 namespace dogen {
 namespace yarn {
 
-std::shared_ptr<frontend_registrar> workflow::registrar_;
+std::shared_ptr<frontend_registrar> workflow::frontend_registrar_;
+std::shared_ptr<injector_registrar> workflow::injector_registrar_;
 
 workflow::workflow() {
     validate();
 }
 
-frontend_registrar& workflow::registrar() {
-    if (!registrar_)
-        registrar_ = std::make_shared<frontend_registrar>();
+frontend_registrar& workflow::frontend_registrar_internal() {
+    if (!frontend_registrar_)
+        frontend_registrar_ = std::make_shared<yarn::frontend_registrar>();
 
-    return *registrar_;
+    return *frontend_registrar_;
+}
+
+injector_registrar& workflow::injector_registrar_internal() {
+    if (!injector_registrar_)
+        injector_registrar_ = std::make_shared<yarn::injector_registrar>();
+
+    return *injector_registrar_;
 }
 
 void workflow::validate() const {
-    BOOST_LOG_SEV(lg, debug) << "Validating registrar.";
-    registrar().validate();
-    BOOST_LOG_SEV(lg, debug) << "Found "
-                             << registrar().frontends_by_extension().size()
-                             << " registered frontends. Details: ";
-
-    for (const auto& pair : registrar().frontends_by_extension()) {
-        BOOST_LOG_SEV(lg, debug) << "extension: '" << pair.first << "' "
-                                 << "id: '" << pair.second->id() << "'";
-    }
-    BOOST_LOG_SEV(lg, debug) << "Finished validating registrar. ";
+    BOOST_LOG_SEV(lg, debug) << "Validating registrars.";
+    frontend_registrar_internal().validate();
+    BOOST_LOG_SEV(lg, debug) << "Finished validating registrars. ";
 }
 
 
@@ -71,7 +72,7 @@ obtain_intermediate_models(const dynamic::repository& drp,
     const std::list<boost::filesystem::path>& dirs,
     const config::input_options& io) const {
     pre_merge_workflow w;
-    return w.execute(drp, dirs, io, registrar());
+    return w.execute(drp, dirs, io, frontend_registrar_internal());
 }
 
 intermediate_model workflow::

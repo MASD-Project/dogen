@@ -52,6 +52,15 @@ void frontend_registrar::validate() const {
         BOOST_THROW_EXCEPTION(registrar_error(no_frontends));
     }
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
+
+    BOOST_LOG_SEV(lg, debug) << "Found "
+                             << frontends_by_extension_.size()
+                             << " registered frontends. Details: ";
+
+    for (const auto& pair : frontends_by_extension_) {
+        BOOST_LOG_SEV(lg, debug) << "extension: '" << pair.first << "' "
+                                 << "id: '" << pair.second->id() << "'";
+    }
 }
 
 void frontend_registrar::
