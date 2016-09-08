@@ -1458,7 +1458,7 @@ combines them into an intermediate merged model.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#inject#</dia:string>
+            <dia:string>#expand#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -2061,17 +2061,17 @@ and to build it.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="10.435,-15"/>
+        <dia:point val="6.435,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.685,-19.75;23.7462,-14.2"/>
+        <dia:rectangle val="5.685,-19.75;23.7462,-14.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="10.435,-15"/>
-        <dia:point val="10.435,-19"/>
+        <dia:point val="6.435,-15"/>
+        <dia:point val="6.435,-19"/>
         <dia:point val="23.5463,-19"/>
         <dia:point val="23.5463,-15.0502"/>
       </dia:attribute>
@@ -23061,13 +23061,13 @@ that belong to the yarn model.#</dia:string>
         <dia:point val="-2,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-2.05,-15.05;10.485,-10.55"/>
+        <dia:rectangle val="-2.05,-15.05;6.485,-10.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-2,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.434999999999999"/>
+        <dia:real val="8.4349999999999987"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -23222,10 +23222,10 @@ that belong to the yarn model.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#im#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#intermediate_model&amp;#</dia:string>
+                <dia:string>#model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -23286,7 +23286,7 @@ that belong to the yarn model.#</dia:string>
         <dia:point val="-3.2,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-3.95,-10.6001;4.4175,0.6"/>
+        <dia:rectangle val="-3.95,-10.6001;2.4175,0.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23294,8 +23294,8 @@ that belong to the yarn model.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-3.2,-1"/>
         <dia:point val="-3.2,-6"/>
-        <dia:point val="4.2175,-6"/>
-        <dia:point val="4.2175,-10.5501"/>
+        <dia:point val="2.2175,-6"/>
+        <dia:point val="2.2175,-10.5501"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

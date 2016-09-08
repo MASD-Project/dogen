@@ -48,7 +48,8 @@ register_injector(std::shared_ptr<const injector_interface> inj) {
 void injector_registrar::validate() const {
     if (injectors_.empty()) {
         BOOST_LOG_SEV(lg, debug) << no_injectors;
-        BOOST_THROW_EXCEPTION(registrar_error(no_injectors));
+        // FIXME:
+        // BOOST_THROW_EXCEPTION(registrar_error(no_injectors));
     }
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 

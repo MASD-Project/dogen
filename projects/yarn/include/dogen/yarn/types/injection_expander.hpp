@@ -25,14 +25,15 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/injector_registrar.hpp"
 
 namespace dogen {
 namespace yarn {
 
 class injection_expander {
 public:
-    void inject(intermediate_model& im);
+    void expand(const injector_registrar& rg, model& m);
 };
 
 } }

@@ -22,7 +22,7 @@
 #define DOGEN_YARN_TYPES_INJECTOR_INTERFACE_HPP
 
 #include <string>
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/model.hpp"
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -40,7 +40,7 @@ public:
 
 public:
     virtual const std::string id() const = 0;
-    virtual void inject(const intermediate_model& im) const = 0;
+    virtual void inject(const model& m) const = 0;
 };
 
 } }
