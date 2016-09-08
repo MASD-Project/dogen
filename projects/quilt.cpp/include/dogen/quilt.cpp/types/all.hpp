@@ -30,7 +30,6 @@
 #include "dogen/quilt.cpp/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/initializer.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
-#include "dogen/quilt.cpp/types/fabric/workflow.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/properties/entity.hpp"

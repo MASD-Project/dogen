@@ -117,10 +117,10 @@ private:
         const yarn::model& m) const;
 
     /**
-     * @brief Obtains the enriched version of the yarn model.
+     * @brief Flattens the model into a list.
      */
     std::forward_list<boost::shared_ptr<yarn::element> >
-    obtain_enriched_yarn_model(const yarn::model& m) const;
+    extract_elements_as_list(const yarn::model& m) const;
 
     /**
      * @brief Create the files.

@@ -30,7 +30,6 @@
 #include "dogen/quilt.cpp/types/settings/aspect_settings_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/streaming_settings_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_repository_factory.hpp"
-#include "dogen/quilt.cpp/types/fabric/workflow.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
 #include "dogen/quilt.cpp/types/workflow.hpp"
 
@@ -122,9 +121,15 @@ workflow::create_properties(
 }
 
 std::forward_list<boost::shared_ptr<yarn::element> >
-workflow::obtain_enriched_yarn_model(const yarn::model& m) const {
-    fabric::workflow w;
-    return w.execute(m);
+workflow::extract_elements_as_list(const yarn::model& m) const {
+    std::forward_list<boost::shared_ptr<yarn::element> > r;
+
+    for (const auto& pair : m.elements()) {
+        const auto e(pair.second);
+        if (e->generation_type() != yarn::generation_types::no_generation)
+            r.push_front(e);
+    }
+    return r;
 }
 
 std::forward_list<dogen::formatters::file>
@@ -195,7 +200,7 @@ workflow::generate(const config::knitting_options& ko,
     const auto pair(create_properties(cpp, drp, ro, fpwf, fc, ssrp, esrp, m));
     auto r(format(ssrp, esrp, pair.first, pair.second));
 
-    const auto elements(obtain_enriched_yarn_model(m));
+    const auto elements(extract_elements_as_list(m));
     auto ye(format_yarn(ssrp, esrp, pair.first, elements));
     r.splice_after(r.before_begin(), ye);
 

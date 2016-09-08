@@ -12,31 +12,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-08 Thu 11:11]
+#+CAPTION: Clock summary at [2016-09-08 Thu 11:33]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *37:24* |       |      | 100.0 |
+| *Total time*                                                                | *37:44* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 37:24   |       |      | 100.0 |
-| Active                                                                      |         | 37:24 |      | 100.0 |
+| Stories                                                                     | 37:44   |       |      | 100.0 |
+| Active                                                                      |         | 37:44 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:52 |   2.3 |
 | COMPLETED Move readme to markdown                                           |         |       | 0:49 |   2.2 |
 | COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   1.3 |
 | COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   6.3 |
-| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  11.5 |
-| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  13.7 |
-| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   4.4 |
+| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |  11.4 |
+| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  13.6 |
+| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   4.3 |
 | COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   5.2 |
 | COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   3.9 |
-| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  13.1 |
+| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |  13.0 |
 | CANCELLED Pick-up Boost 1.61 from Debian Testing                            |         |       | 1:23 |   3.7 |
-| COMPLETED Allow cross model inheritance                                     |         |       | 1:09 |   3.1 |
-| COMPLETED Add support for visitor inheritance                               |         |       | 7:27 |  19.9 |
+| COMPLETED Allow cross model inheritance                                     |         |       | 1:09 |   3.0 |
+| COMPLETED Add support for visitor inheritance                               |         |       | 7:27 |  19.7 |
 | COMPLETED Move visitor =accept= methods to cpp file                         |         |       | 0:41 |   1.8 |
 | COMPLETED Analysis work on implementing remaining yarn types                |         |       | 0:52 |   2.3 |
 | COMPLETED Split injector into separate classes                              |         |       | 0:56 |   2.5 |
-| STARTED Add injector interface and registrar                                |         |       | 1:00 |   2.7 |
+| COMPLETED Add injector interface and registrar                              |         |       | 1:02 |   2.7 |
+| STARTED Add language-specific element injection                             |         |       | 0:18 |   0.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -502,7 +503,9 @@ We need to free up the name injector. Split it into:
 
 Leave injector as an empty class.
 
-*** STARTED Add injector interface and registrar                      :story:
+*** COMPLETED Add injector interface and registrar                    :story:
+    CLOSED: [2016-09-08 Thu 11:14]
+    CLOCK: [2016-09-08 Thu 11:12]--[2016-09-08 Thu 11:14] =>  0:02
     CLOCK: [2016-09-08 Thu 11:02]--[2016-09-08 Thu 11:11] =>  0:09
     CLOCK: [2016-09-08 Thu 10:28]--[2016-09-08 Thu 11:01] =>  0:33
     CLOCK: [2016-09-08 Thu 10:23]--[2016-09-08 Thu 10:27] =>  0:04
@@ -516,10 +519,18 @@ Tasks:
 - supply registrar to injection expander. Expander goes through all
   injectors.
 
-*** Add language-specific element injection                           :story:
+*** STARTED Add language-specific element injection                   :story:
+    CLOCK: [2016-09-08 Thu 11:14]--[2016-09-08 Thu 11:32] =>  0:18
 
 We need to create a factory that adds =quilt.cpp= specific elements
 into the yarn model.
+
+Tasks:
+
+- delete fabric workflow and flatten model in main workflow.
+- rename fabric to yarn.
+- add forward declarations.
+- add injector interface that injects forward declarations.
 
 *** Add support for bintray                                           :story:
 
