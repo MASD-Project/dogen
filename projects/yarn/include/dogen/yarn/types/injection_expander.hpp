@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_INJECTOR_HPP
-#define DOGEN_YARN_TYPES_INJECTOR_HPP
+#ifndef DOGEN_YARN_TYPES_INJECTION_EXPANDER_HPP
+#define DOGEN_YARN_TYPES_INJECTION_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 namespace dogen {
 namespace yarn {
 
-class injector {
+class injection_expander {
 public:
     void inject(intermediate_model& im);
 };

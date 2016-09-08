@@ -21,20 +21,20 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/injection_error.hpp"
-#include "dogen/yarn/types/injector.hpp"
+#include "dogen/yarn/types/injection_expander.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("yarn.injector"));
+auto lg(logger_factory("yarn.injection_expander"));
 
 }
 
 namespace dogen {
 namespace yarn {
 
-void injector::inject(intermediate_model& im) {
+void injection_expander::inject(intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Running on: " << im.name().id();
     BOOST_LOG_SEV(lg, debug) << "Finished running";
 }
