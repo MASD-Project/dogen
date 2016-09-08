@@ -39,7 +39,7 @@ public:
     virtual ~injector_interface() noexcept = 0;
 
 public:
-    virtual const std::string id() const = 0;
+    virtual std::string id() const = 0;
     virtual void inject(const model& m) const = 0;
 };
 

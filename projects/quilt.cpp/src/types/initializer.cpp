@@ -23,6 +23,7 @@
 #include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
 #include "dogen/quilt.cpp/types/settings/initializer.hpp"
 #include "dogen/quilt.cpp/types/formatters/initializer.hpp"
+#include "dogen/quilt.cpp/types/fabric/initializer.hpp"
 #include "dogen/quilt.cpp/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/initializer.hpp"
 
@@ -35,6 +36,7 @@ void initializer::initialize() {
     settings::initializer::initialize(
         settings::opaque_settings_builder::registrar());
     quilt::workflow::registrar().register_backend(std::make_shared<workflow>());
+    fabric::initializer::initialize();
 }
 
 } } }
