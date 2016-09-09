@@ -28,6 +28,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/dia/serialization/registrar_ser.hpp"
 #include "dogen/yarn/serialization/registrar_ser.hpp"
+#include "dogen/yarn.dia/serialization/registrar_ser.hpp"
 
 namespace dogen {
 namespace yarn {

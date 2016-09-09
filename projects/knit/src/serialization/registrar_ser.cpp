@@ -26,6 +26,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/knit/serialization/registrar_ser.hpp"
 #include "dogen/yarn/serialization/registrar_ser.hpp"
 #include "dogen/config/serialization/registrar_ser.hpp"
 #include "dogen/quilt.cpp/serialization/registrar_ser.hpp"

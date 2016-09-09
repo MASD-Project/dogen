@@ -67,8 +67,9 @@ registrar_factory::build(const yarn::model& m) const {
             continue;
 
         const auto ref(pair.first);
-        r.push_back(build(ref));
-        rg->model_dependencies().push_back(ref);
+        const auto ref_rg(build(ref));
+        r.push_back(ref_rg);
+        rg->model_dependencies().push_back(ref_rg->name());
     }
 
     r.push_back(rg);

@@ -29,6 +29,7 @@
 #include "dogen/dynamic/serialization/text_ser.hpp"
 #include "dogen/dynamic/serialization/number_ser.hpp"
 #include "dogen/dynamic/serialization/boolean_ser.hpp"
+#include "dogen/dynamic/serialization/registrar_ser.hpp"
 #include "dogen/dynamic/serialization/text_collection_ser.hpp"
 
 namespace dogen {

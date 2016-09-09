@@ -32,6 +32,7 @@
 #include "dogen/yarn/serialization/visitor_ser.hpp"
 #include "dogen/yarn/serialization/exception_ser.hpp"
 #include "dogen/yarn/serialization/primitive_ser.hpp"
+#include "dogen/yarn/serialization/registrar_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/dynamic/serialization/registrar_ser.hpp"
 

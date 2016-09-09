@@ -29,6 +29,7 @@
 #include "dogen/yarn/serialization/registrar_ser.hpp"
 #include "dogen/config/serialization/registrar_ser.hpp"
 #include "dogen/dynamic/serialization/registrar_ser.hpp"
+#include "dogen/quilt.cpp/serialization/registrar_ser.hpp"
 #include "dogen/formatters/serialization/registrar_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/registrar_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/master_header_ser.hpp"
