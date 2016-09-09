@@ -1204,7 +1204,7 @@ seems like the least bad approach.
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::class_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::object_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1935,7 +1935,7 @@ seems like the least bad approach.
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::class_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::object_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2046,7 +2046,7 @@ seems like the least bad approach.
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::class_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::object_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2151,7 +2151,7 @@ seems like the least bad approach.
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_formatter_interface#</dia:string>
+        <dia:string>#enumeration_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -2328,7 +2328,7 @@ seems like the least bad approach.
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#namespace_formatter_interface#</dia:string>
+        <dia:string>#module_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -3335,7 +3335,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::enum_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::enumeration_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3446,7 +3446,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::namespace_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::module_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4022,7 +4022,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::class_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::object_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4133,7 +4133,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::enum_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::enumeration_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4283,7 +4283,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::class_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::object_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4394,7 +4394,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::class_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::object_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4505,7 +4505,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::enum_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::enumeration_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4616,7 +4616,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::enum_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::enumeration_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4766,7 +4766,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::class_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::object_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4877,7 +4877,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::class_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::object_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5138,7 +5138,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::class_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::object_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5249,7 +5249,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::class_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::object_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5360,7 +5360,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::enum_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::enumeration_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5471,7 +5471,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::enum_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::enumeration_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5621,7 +5621,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::class_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::object_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -7985,7 +7985,7 @@ facet of the C++ language.
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::shared_ptr&lt;formatters::class_formatter_interface&gt;#</dia:string>
+                <dia:string>#std::shared_ptr&lt;formatters::object_formatter_interface&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8081,7 +8081,7 @@ facet of the C++ language.
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::shared_ptr&lt;formatters::enum_formatter_interface&gt;#</dia:string>
+                <dia:string>#std::shared_ptr&lt;formatters::enumeration_formatter_interface&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8177,7 +8177,7 @@ facet of the C++ language.
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::shared_ptr&lt;formatters::namespace_formatter_interface&gt;#</dia:string>
+                <dia:string>#std::shared_ptr&lt;formatters::module_formatter_interface&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9444,7 +9444,7 @@ facet of the C++ language.
             <dia:string>#enum_formatters#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;std::shared_ptr&lt;formatters::enum_formatter_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;std::shared_ptr&lt;formatters::enumeration_formatter_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9490,7 +9490,7 @@ facet of the C++ language.
             <dia:string>#namespace_formatters#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;std::shared_ptr&lt;formatters::namespace_formatter_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;std::shared_ptr&lt;formatters::module_formatter_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9720,7 +9720,7 @@ facet of the C++ language.
             <dia:string>#class_formatters#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;std::shared_ptr&lt;formatters::class_formatter_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;std::shared_ptr&lt;formatters::object_formatter_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -29285,7 +29285,7 @@ main, or from another initialiser.#</dia:string>
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::enum_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::enumeration_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -29396,7 +29396,7 @@ main, or from another initialiser.#</dia:string>
         <dia:string>#service#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=formatters::enum_formatter_interface#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=formatters::enumeration_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -35660,7 +35660,7 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_formatter_interface#</dia:string>
+        <dia:string>#object_formatter_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>

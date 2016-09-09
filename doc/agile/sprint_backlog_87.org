@@ -659,13 +659,8 @@ header files called "includers". There is too much overloading. We
 should consider calling them "master header files" as per Schaling
 terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
 
-*** Remove =formattable_origin_type=                                  :story:
-
-We seem to distinguish between "internal" and "external"
-formattables. This probably won't make sense after the injection
-refactor.
-
-*** Quilt's formatter names are incorrect                             :story:
+*** STARTED Quilt's formatter names are incorrect                     :story:
+    CLOCK: [2016-09-09 Fri 21:29]--[2016-09-09 Fri 21:54] =>  0:25
 
 Originally we had named the formatter interfaces after the quilt types
 (class, enum, etc). After the change to use yarn types, we forgot to
@@ -687,6 +682,12 @@ Tasks:
 - visit the elements and generate forward declarations as per
   transformer.
 - add interfaces for new element and update template.
+
+*** Remove =formattable_origin_type=                                  :story:
+
+We seem to distinguish between "internal" and "external"
+formattables. This probably won't make sense after the injection
+refactor.
 
 *** Path derivatives factory generates all possible includes          :story:
 

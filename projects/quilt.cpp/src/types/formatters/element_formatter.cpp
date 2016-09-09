@@ -121,13 +121,13 @@ public:
         if (m.documentation().empty())
             return;
 
-        format(container_.namespace_formatters(), m);
+        format(container_.module_formatters(), m);
     }
     void visit(const yarn::enumeration& e) override {
-        format(container_.enum_formatters(), e);
+        format(container_.enumeration_formatters(), e);
     }
     void visit(const yarn::object& o) override {
-        format(container_.class_formatters(), o);
+        format(container_.object_formatters(), o);
     }
     void visit(const yarn::exception& e) override {
         format(container_.exception_formatters(), e);

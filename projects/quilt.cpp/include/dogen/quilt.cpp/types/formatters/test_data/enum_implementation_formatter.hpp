@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/quilt.cpp/types/formatters/enum_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/enumeration_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -38,7 +38,7 @@ namespace test_data {
  * @brief Creates the test data implementation representation for an
  * enumeration.
  */
-class enum_implementation_formatter : public enum_formatter_interface {
+class enum_implementation_formatter : public enumeration_formatter_interface {
 public:
     enum_implementation_formatter() = default;
     enum_implementation_formatter(

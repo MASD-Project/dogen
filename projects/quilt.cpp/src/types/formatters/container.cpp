@@ -26,15 +26,16 @@ namespace cpp {
 namespace formatters {
 
 const std::forward_list<
-    std::shared_ptr<formatters::class_formatter_interface>
+    std::shared_ptr<formatters::object_formatter_interface>
 >&
-container::class_formatters() const {
-    return class_formatters_;
+container::object_formatters() const {
+    return object_formatters_;
 }
 
-const std::forward_list<std::shared_ptr<formatters::enum_formatter_interface>>&
-container::enum_formatters() const {
-    return enum_formatters_;
+const std::forward_list<
+    std::shared_ptr<formatters::enumeration_formatter_interface>>&
+container::enumeration_formatters() const {
+    return enumeration_formatters_;
 }
 
 const std::forward_list<std::shared_ptr<
@@ -44,9 +45,9 @@ container::exception_formatters() const {
 }
 
 const std::forward_list<std::shared_ptr<
-    formatters::namespace_formatter_interface>>&
-container::namespace_formatters() const {
-    return namespace_formatters_;
+    formatters::module_formatter_interface>>&
+container::module_formatters() const {
+    return module_formatters_;
 }
 
 const std::forward_list<std::shared_ptr<

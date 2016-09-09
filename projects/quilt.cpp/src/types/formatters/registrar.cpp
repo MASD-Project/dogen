@@ -32,7 +32,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.formatters.registrar"));
 
 const std::string no_all_formatters("All formatters container is empty.");
-const std::string no_class_formatters("No class formatters provided.");
+const std::string no_object_formatters("No object formatters provided.");
 const std::string no_forward_declarations_formatters(
     "No forward declarations formatters provided.");
 const std::string null_formatter("Formatter supplied is null");
@@ -48,9 +48,9 @@ namespace formatters {
 
 void registrar::validate() const {
     const auto& fc(formatter_container_);
-    if (fc.class_formatters().empty()) {
-        BOOST_LOG_SEV(lg, error) << no_class_formatters;
-        BOOST_THROW_EXCEPTION(registrar_error(no_class_formatters));
+    if (fc.object_formatters().empty()) {
+        BOOST_LOG_SEV(lg, error) << no_object_formatters;
+        BOOST_THROW_EXCEPTION(registrar_error(no_object_formatters));
     }
 
     if (fc.forward_declarations_formatters().empty()) {
@@ -96,22 +96,22 @@ void registrar::register_formatter_helper(
 }
 
 void registrar::
-register_formatter(std::shared_ptr<class_formatter_interface> f) {
+register_formatter(std::shared_ptr<object_formatter_interface> f) {
     // note: not logging by design
     if (!f)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
-    formatter_container_.class_formatters_.push_front(f);
+    formatter_container_.object_formatters_.push_front(f);
     common_registration(f);
 }
 
 void registrar::register_formatter(
-    std::shared_ptr<enum_formatter_interface> f) {
+    std::shared_ptr<enumeration_formatter_interface> f) {
     // note: not logging by design
     if (!f)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
-    formatter_container_.enum_formatters_.push_front(f);
+    formatter_container_.enumeration_formatters_.push_front(f);
     common_registration(f);
 }
 
@@ -126,12 +126,12 @@ void registrar::register_formatter(
 }
 
 void registrar::register_formatter(
-    std::shared_ptr<namespace_formatter_interface> f) {
+    std::shared_ptr<module_formatter_interface> f) {
     // note: not logging by design
     if (!f)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
-    formatter_container_.namespace_formatters_.push_front(f);
+    formatter_container_.module_formatters_.push_front(f);
     common_registration(f);
 }
 

@@ -69,9 +69,10 @@ inline std::ostream& to_stream(std::ostream& s,
 std::ostream& operator<<(std::ostream& s, const container& c) {
     s << "{ " << "\"__type__\": "
       << "\"dogen::quilt::cpp::formatters::container\", ";
-    to_stream(s, "enum_formatters", c.enum_formatters());
+    to_stream(s, "object_formatters", c.object_formatters());
+    to_stream(s, "enumeration_formatters", c.enumeration_formatters());
     to_stream(s, "exception_formatters", c.exception_formatters());
-    to_stream(s, "namespace_formatters", c.namespace_formatters());
+    to_stream(s, "module_formatters", c.module_formatters());
     to_stream(s, "visitor_formatters", c.visitor_formatters());
     to_stream(s, "forward_declarations_formatters",
         c.forward_declarations_formatters());

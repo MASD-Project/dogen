@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/quilt.cpp/types/formatters/namespace_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/module_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -34,7 +34,7 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-class namespace_header_formatter final : public namespace_formatter_interface {
+class namespace_header_formatter final : public module_formatter_interface {
 public:
     namespace_header_formatter() = default;
     namespace_header_formatter(const namespace_header_formatter&) = delete;

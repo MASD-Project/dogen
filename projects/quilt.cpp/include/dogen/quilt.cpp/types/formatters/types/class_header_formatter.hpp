@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/quilt.cpp/types/formatters/class_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/object_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -37,7 +37,7 @@ namespace types {
 /**
  * @brief Creates the C++ domain representation for a class.
  */
-class class_header_formatter final : public class_formatter_interface {
+class class_header_formatter final : public object_formatter_interface {
 public:
     class_header_formatter() = default;
     class_header_formatter(const class_header_formatter&) = delete;

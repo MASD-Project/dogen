@@ -29,11 +29,11 @@
 #include <forward_list>
 #include <unordered_map>
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/class_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/enum_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/object_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/enumeration_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/visitor_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/exception_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/namespace_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/module_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb_options_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/cmakelists_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar_formatter_interface.hpp"
@@ -57,23 +57,23 @@ private:
 
 public:
     /**
-     * @brief Returns all available class formatters.
+     * @brief Returns all available object formatters.
      */
     const std::forward_list<
-        std::shared_ptr<formatters::class_formatter_interface>
+        std::shared_ptr<formatters::object_formatter_interface>
         >&
-    class_formatters() const;
+    object_formatters() const;
 
     /**
-     * @brief Returns all available enum formatters.
+     * @brief Returns all available enumeration formatters.
      */
     const std::forward_list<
-        std::shared_ptr<formatters::enum_formatter_interface>
+        std::shared_ptr<formatters::enumeration_formatter_interface>
         >&
-    enum_formatters() const;
+    enumeration_formatters() const;
 
     /**
-     * @brief Returns all available enum formatters.
+     * @brief Returns all available exception formatters.
      */
     const std::forward_list<
         std::shared_ptr<formatters::exception_formatter_interface>
@@ -81,12 +81,12 @@ public:
     exception_formatters() const;
 
     /**
-     * @brief Returns all available namespace formatters.
+     * @brief Returns all available module formatters.
      */
     const std::forward_list<
-        std::shared_ptr<formatters::namespace_formatter_interface>
+        std::shared_ptr<formatters::module_formatter_interface>
         >&
-    namespace_formatters() const;
+    module_formatters() const;
 
     /**
      * @brief Returns all available namespace formatters.
@@ -170,14 +170,16 @@ public:
         helper_formatters() const;
 
 private:
-    std::forward_list<std::shared_ptr<formatters::class_formatter_interface>>
-    class_formatters_;
-    std::forward_list<std::shared_ptr<formatters::enum_formatter_interface>>
-    enum_formatters_;
+    std::forward_list<std::shared_ptr<formatters::object_formatter_interface>>
+    object_formatters_;
+    std::forward_list<std::shared_ptr<
+                          formatters::enumeration_formatter_interface>
+                      >
+    enumeration_formatters_;
     std::forward_list<std::shared_ptr<
         formatters::exception_formatter_interface>> exception_formatters_;
     std::forward_list<std::shared_ptr<
-        formatters::namespace_formatter_interface>> namespace_formatters_;
+        formatters::module_formatter_interface>> module_formatters_;
     std::forward_list<std::shared_ptr<
         formatters::visitor_formatter_interface>> visitor_formatters_;
     std::forward_list<std::shared_ptr<

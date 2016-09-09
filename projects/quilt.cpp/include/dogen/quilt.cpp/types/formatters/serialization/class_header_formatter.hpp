@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/formatters/class_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/object_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -33,7 +33,7 @@ namespace cpp {
 namespace formatters {
 namespace serialization {
 
-class class_header_formatter final : public class_formatter_interface {
+class class_header_formatter final : public object_formatter_interface {
 public:
     /**
      * @brief Returns the formatter name.

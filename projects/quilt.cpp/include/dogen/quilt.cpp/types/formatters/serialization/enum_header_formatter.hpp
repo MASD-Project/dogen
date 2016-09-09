@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/formatters/enum_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/enumeration_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -33,7 +33,7 @@ namespace cpp {
 namespace formatters {
 namespace serialization {
 
-class enum_header_formatter : public enum_formatter_interface {
+class enum_header_formatter : public enumeration_formatter_interface {
 public:
     enum_header_formatter() = default;
     enum_header_formatter(const enum_header_formatter&) = delete;

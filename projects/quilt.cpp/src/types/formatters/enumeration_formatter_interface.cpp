@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formatters/namespace_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/enumeration_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
 
-namespace_formatter_interface::~namespace_formatter_interface() noexcept { }
+enumeration_formatter_interface::~enumeration_formatter_interface() noexcept { }
 
 } } } }

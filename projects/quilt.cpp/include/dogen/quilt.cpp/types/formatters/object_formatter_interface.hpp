@@ -18,13 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formatters/class_formatter_interface.hpp"
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_OBJECT_FORMATTER_INTERFACE_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_OBJECT_FORMATTER_INTERFACE_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/quilt.cpp/types/formatters/context.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
 
-class_formatter_interface::~class_formatter_interface() noexcept { }
+class object_formatter_interface : public file_formatter_interface {
+public:
+    object_formatter_interface() = default;
+    object_formatter_interface(const object_formatter_interface&) = delete;
+    object_formatter_interface(object_formatter_interface&&) = default;
+    virtual ~object_formatter_interface() noexcept = 0;
+
+public:
+    /**
+     * @brief Generate a c++ representation for the type.
+     */
+    virtual dogen::formatters::file
+    format(const context& ctx, const yarn::object& o) const = 0;
+};
 
 } } } }
+
+#endif

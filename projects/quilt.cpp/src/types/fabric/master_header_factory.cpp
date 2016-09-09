@@ -52,14 +52,15 @@ class generator final : public element_visitor {
 private:
     struct header_formatters_container {
         std::forward_list<
-            std::shared_ptr<formatters::class_formatter_interface>>
-        class_formatters;
-        std::forward_list<std::shared_ptr<formatters::enum_formatter_interface>>
-        enum_formatters;
+            std::shared_ptr<formatters::object_formatter_interface>>
+        object_formatters;
+        std::forward_list<std::shared_ptr<
+            formatters::enumeration_formatter_interface>>
+        enumeration_formatters;
         std::forward_list<std::shared_ptr<
             formatters::exception_formatter_interface>> exception_formatters;
         std::forward_list<std::shared_ptr<
-            formatters::namespace_formatter_interface>> namespace_formatters;
+            formatters::module_formatter_interface>> module_formatters;
         std::forward_list<std::shared_ptr<
             formatters::visitor_formatter_interface>> visitor_formatters;
     };
@@ -96,10 +97,11 @@ private:
     header_formatters_container
     create_container(const formatters::container& fc) {
         header_formatters_container r;
-        r.class_formatters = filter_formatters(fc.class_formatters());
-        r.enum_formatters = filter_formatters(fc.enum_formatters());
+        r.object_formatters = filter_formatters(fc.object_formatters());
+        r.enumeration_formatters = filter_formatters(
+            fc.enumeration_formatters());
         r.exception_formatters = filter_formatters(fc.exception_formatters());
-        r.namespace_formatters = filter_formatters(fc.namespace_formatters());
+        r.module_formatters = filter_formatters(fc.module_formatters());
         r.visitor_formatters = filter_formatters(fc.visitor_formatters());
         return r;
     }
@@ -123,11 +125,11 @@ public:
     }
 
     void visit(const dogen::yarn::enumeration& e) override  {
-        process_element(container_.enum_formatters, e);
+        process_element(container_.enumeration_formatters, e);
     }
 
     void visit(const dogen::yarn::object& o) override {
-        process_element(container_.class_formatters, o);
+        process_element(container_.object_formatters, o);
     }
 
     void visit(const dogen::yarn::exception& e) override {
@@ -136,7 +138,7 @@ public:
 
     void visit(const dogen::yarn::module& m) override {
         if (!m.documentation().empty())
-            process_element(container_.exception_formatters, m);
+            process_element(container_.module_formatters, m);
     }
 
 public:

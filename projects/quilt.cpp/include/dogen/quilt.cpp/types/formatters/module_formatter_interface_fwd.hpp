@@ -18,37 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_ENUM_FORMATTER_INTERFACE_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_ENUM_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_MODULE_FORMATTER_INTERFACE_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_MODULE_FORMATTER_INTERFACE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
-
-#include "dogen/formatters/types/file.hpp"
-#include "dogen/yarn/types/enumeration.hpp"
-#include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
 
-class enum_formatter_interface : public file_formatter_interface {
-public:
-    enum_formatter_interface() = default;
-    enum_formatter_interface(const enum_formatter_interface&) = delete;
-    enum_formatter_interface(enum_formatter_interface&&) = default;
-    virtual ~enum_formatter_interface() noexcept = 0;
-
-public:
-    /**
-     * @brief Generate a c++ representation for the type.
-     */
-    virtual dogen::formatters::file
-    format(const context& ctx, const yarn::enumeration& e) const = 0;
-};
+class module_formatter_interface;
 
 } } } }
 
