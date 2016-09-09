@@ -25,6 +25,7 @@
 #include "dogen/yarn/io/all_io.hpp"
 #include "dogen/yarn/test_data/all_td.hpp"
 #include "dogen/yarn/serialization/all_ser.hpp"
+#include "dogen/yarn/serialization/registrar_ser.hpp"
 
 template<typename Archive> void register_types(Archive& ar) {
     dogen::yarn::register_types<Archive>(ar);

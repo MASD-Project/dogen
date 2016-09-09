@@ -38,7 +38,6 @@
 #include "dogen/dia/serialization/attribute_ser.hpp"
 #include "dogen/dia/serialization/composite_ser.hpp"
 #include "dogen/dia/serialization/rectangle_ser.hpp"
-#include "dogen/dia/serialization/registrar_ser.hpp"
 #include "dogen/dia/serialization/child_node_ser.hpp"
 #include "dogen/dia/serialization/connection_ser.hpp"
 #include "dogen/dia/serialization/enumeration_ser.hpp"

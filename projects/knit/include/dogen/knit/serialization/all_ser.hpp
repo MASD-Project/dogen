@@ -25,6 +25,4 @@
 #pragma once
 #endif
 
-#include "dogen/knit/serialization/registrar_ser.hpp"
-
 #endif

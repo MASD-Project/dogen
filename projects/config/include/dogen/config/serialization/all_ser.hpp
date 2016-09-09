@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/config/serialization/input_ser.hpp"
-#include "dogen/config/serialization/registrar_ser.hpp"
 #include "dogen/config/serialization/cpp_options_ser.hpp"
 #include "dogen/config/serialization/input_options_ser.hpp"
 #include "dogen/config/serialization/output_options_ser.hpp"

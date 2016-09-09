@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/serialization/registrar_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/registrar_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/entity_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/master_header_ser.hpp"

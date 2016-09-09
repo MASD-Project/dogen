@@ -40,7 +40,6 @@
 #include "dogen/yarn/serialization/languages_ser.hpp"
 #include "dogen/yarn/serialization/name_tree_ser.hpp"
 #include "dogen/yarn/serialization/primitive_ser.hpp"
-#include "dogen/yarn/serialization/registrar_ser.hpp"
 #include "dogen/yarn/serialization/descriptor_ser.hpp"
 #include "dogen/yarn/serialization/enumerator_ser.hpp"
 #include "dogen/yarn/serialization/separators_ser.hpp"

@@ -27,7 +27,6 @@
 
 #include "dogen/stitch/serialization/line_ser.hpp"
 #include "dogen/stitch/serialization/block_ser.hpp"
-#include "dogen/stitch/serialization/registrar_ser.hpp"
 #include "dogen/stitch/serialization/properties_ser.hpp"
 #include "dogen/stitch/serialization/block_types_ser.hpp"
 #include "dogen/stitch/serialization/text_template_ser.hpp"

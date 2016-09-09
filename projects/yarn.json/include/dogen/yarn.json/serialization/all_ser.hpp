@@ -25,6 +25,4 @@
 #pragma once
 #endif
 
-#include "dogen/yarn.json/serialization/registrar_ser.hpp"
-
 #endif

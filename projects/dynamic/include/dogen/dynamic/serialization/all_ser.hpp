@@ -31,7 +31,6 @@
 #include "dogen/dynamic/serialization/number_ser.hpp"
 #include "dogen/dynamic/serialization/object_ser.hpp"
 #include "dogen/dynamic/serialization/boolean_ser.hpp"
-#include "dogen/dynamic/serialization/registrar_ser.hpp"
 #include "dogen/dynamic/serialization/repository_ser.hpp"
 #include "dogen/dynamic/serialization/scope_types_ser.hpp"
 #include "dogen/dynamic/serialization/value_types_ser.hpp"
