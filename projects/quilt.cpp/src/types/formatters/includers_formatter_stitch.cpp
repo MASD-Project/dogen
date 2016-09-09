@@ -27,7 +27,7 @@ namespace cpp {
 namespace formatters {
 
 dogen::formatters::file includers_formatter_stitch(
-    assistant& a, const properties::includers_info& /*i*/) {
+    assistant& a, const fabric::master_header& /*mh*/) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());

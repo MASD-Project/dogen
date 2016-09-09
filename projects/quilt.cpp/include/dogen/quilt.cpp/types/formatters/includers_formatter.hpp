@@ -49,7 +49,7 @@ public:
         properties::registrar& rg) const override;
 
     dogen::formatters::file format(const context& ctx,
-        const properties::includers_info& i) const override;
+        const fabric::master_header& mh) const override;
 
 public:
     const dynamic::ownership_hierarchy ownership_hierarchy_;

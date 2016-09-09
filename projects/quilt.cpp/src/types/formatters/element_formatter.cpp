@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/element_visitor.hpp"
+#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/element_formatter.hpp"
 
@@ -41,7 +41,7 @@ namespace formatters {
 
 namespace {
 
-class dispatcher : public yarn::element_visitor  {
+class dispatcher : public fabric::element_visitor  {
 public:
     dispatcher(const context_factory& f, const container& c) :
         factory_(f), container_(c) {}
@@ -114,28 +114,29 @@ public:
     }
 
 public:
-    using yarn::element_visitor::visit;
+    using fabric::element_visitor::visit;
     void visit(const dogen::yarn::module& m) override {
         // FIXME: hack. We should remove these from the pipeline
-        // earlier.
+        // earlier or make the return optional.
         if (m.documentation().empty())
             return;
 
         format(container_.namespace_formatters(), m);
     }
-    void visit(const dogen::yarn::concept& /*c*/) override {}
-    void visit(const dogen::yarn::primitive& /*p*/) override {}
-    void visit(const dogen::yarn::enumeration& e) override {
+    void visit(const yarn::enumeration& e) override {
         format(container_.enum_formatters(), e);
     }
-    void visit(const dogen::yarn::object& o) override {
+    void visit(const yarn::object& o) override {
         format(container_.class_formatters(), o);
     }
-    void visit(const dogen::yarn::exception& e) override {
+    void visit(const yarn::exception& e) override {
         format(container_.exception_formatters(), e);
     }
-    void visit(const dogen::yarn::visitor& v) override {
+    void visit(const yarn::visitor& v) override {
         format(container_.visitor_formatters(), v);
+    }
+    void visit(const fabric::master_header& mh) override {
+        format(container_.includers_formatters(), mh);
     }
 
 private:

@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/formatters/types/file.hpp"
-#include "dogen/quilt.cpp/types/properties/includers_info.hpp"
+#include "dogen/quilt.cpp/types/fabric/master_header.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {
@@ -34,8 +34,8 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-dogen::formatters::file includers_formatter_stitch(
-    assistant& a, const properties::includers_info& i);
+dogen::formatters::file
+includers_formatter_stitch(assistant& a, const fabric::master_header& mh);
 
 } } } }
 

@@ -151,7 +151,6 @@ public:
     void visit(const properties::registrar_info& r) override;
     void visit(const properties::cmakelists_info& c) override;
     void visit(const properties::odb_options_info& o) override;
-    void visit(const properties::includers_info& o) override;
 
 public:
     /**
@@ -189,10 +188,6 @@ void dispatcher::visit(const properties::cmakelists_info& c) {
 
 void dispatcher::visit(const properties::odb_options_info& o) {
     format(container_.odb_options_formatters(), o);
-}
-
-void dispatcher::visit(const properties::includers_info& i) {
-    format_entity(container_.includers_formatters(), i);
 }
 
 void dispatcher::format(const properties::formattable& f) {
