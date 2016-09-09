@@ -149,20 +149,15 @@ workflow::from_factory_activity(const config::cpp_options& opts,
     const dogen::formatters::file_properties_workflow& fpwf,
     settings::element_settings_repository& esrp,
     const std::unordered_map<std::string, settings::path_settings>& ps,
-    const properties::path_derivatives_repository& pdrp,
     formatter_properties_repository& fprp,
-    const formatters::container& fc,
     const yarn::model& m) const {
 
-    const auto& formatters(fc.all_file_formatters());
     std::forward_list<std::shared_ptr<properties::formattable> > r;
     factory f;
     const auto ri(f.make_registrar_info(opts, esrp, ps, fprp, m));
     if (ri)
         r.push_front(ri);
 
-    r.splice_after(r.before_begin(),
-        f.make_includers(opts, ps, pdrp, formatters, fprp, m));
     r.splice_after(r.before_begin(),
         f.make_cmakelists(opts, fpwf, ps, fprp, m));
 
@@ -207,7 +202,7 @@ workflow::execute(const config::cpp_options& opts,
 
     auto formattables(from_transformer_activity(m));
     formattables.splice_after(formattables.before_begin(),
-        from_factory_activity(opts, fpwf, esrp, ps, pdrp, fprp, fc, m));
+        from_factory_activity(opts, fpwf, esrp, ps, fprp, m));
     BOOST_LOG_SEV(lg, debug) << "Formattables: " << formattables;
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";

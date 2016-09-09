@@ -36,7 +36,6 @@
 #include "dogen/quilt.cpp/hash/settings/aspect_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/helper_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/opaque_settings_hash.hpp"
-#include "dogen/quilt.cpp/hash/properties/includers_info_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/registrar_info_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/element_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/cmakelists_info_hash.hpp"

@@ -111,9 +111,7 @@ private:
         const dogen::formatters::file_properties_workflow& fpwf,
         settings::element_settings_repository& esrp,
         const std::unordered_map<std::string, settings::path_settings>& ps,
-        const properties::path_derivatives_repository& pdrp,
         formatter_properties_repository& fprp,
-        const formatters::container& fc,
         const yarn::model& m) const;
 
     element_properties_repository create_element_properties_repository(

@@ -31,7 +31,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/quilt.cpp/serialization/properties/entity_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/formattable_ser.hpp"
-#include "dogen/quilt.cpp/serialization/properties/includers_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/registrar_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/forward_declarations_info_ser.hpp"
 

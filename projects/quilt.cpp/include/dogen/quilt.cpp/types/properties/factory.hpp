@@ -35,7 +35,6 @@
 #include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/properties/registrar_info.hpp"
-#include "dogen/quilt.cpp/types/properties/includers_info.hpp"
 #include "dogen/quilt.cpp/types/properties/cmakelists_info.hpp"
 #include "dogen/quilt.cpp/types/properties/odb_options_info.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository.hpp"
@@ -72,15 +71,6 @@ public:
         const config::cpp_options& opts,
         const settings::element_settings_repository& esrp,
         const std::unordered_map<std::string, settings::path_settings>& ps,
-        formatter_properties_repository& fprp,
-        const yarn::model& m) const;
-
-    std::forward_list<std::shared_ptr<formattable> > make_includers(
-        const config::cpp_options& opts,
-        const std::unordered_map<std::string, settings::path_settings>& ps,
-        const path_derivatives_repository& pdrp,
-        const std::forward_list<
-        std::shared_ptr<formatters::file_formatter_interface>>& formatters,
         formatter_properties_repository& fprp,
         const yarn::model& m) const;
 

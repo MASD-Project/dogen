@@ -32,7 +32,6 @@
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/quilt.cpp/io/properties/includers_info_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
@@ -50,7 +49,6 @@ static logger lg(logger_factory("quilt.cpp.formatters.factory"));
 
 const std::string namespace_separator("::");
 const std::string registrar_name("registrar");
-const std::string includers_name("all");
 const std::string cmakelists_name("CMakeLists.txt");
 const std::string odb_options_name("options.odb");
 const std::string settings_not_found_for_formatter(
@@ -67,57 +65,11 @@ const std::string cmake_modeline_name("cmake");
 const std::string odb_modeline_name("odb");
 const std::string cpp_modeline_name("cpp");
 
-const char angle_bracket('<');
 const std::string underscore("_");
 const std::string boost_name("boost");
 const std::string boost_serialization_gregorian("greg_serialize.hpp");
 
 const std::string empty_include_directive("Include directive is empty.");
-
-bool include_directive_comparer(
-    const std::string& lhs, const std::string& rhs) {
-    if (lhs.empty() || rhs.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_include_directive;
-        using dogen::quilt::cpp::properties::building_error;
-        BOOST_THROW_EXCEPTION(building_error(empty_include_directive));
-    }
-
-    const bool lhs_has_angle_brackets(lhs[0] == angle_bracket);
-    const bool rhs_has_angle_brackets(rhs[0] == angle_bracket);
-
-    if (lhs_has_angle_brackets && !rhs_has_angle_brackets)
-        return true;
-
-    if (!lhs_has_angle_brackets && rhs_has_angle_brackets)
-        return false;
-
-    if (lhs_has_angle_brackets && rhs_has_angle_brackets) {
-        const auto npos(std::string::npos);
-        const bool lhs_is_boost(lhs.find_first_of(boost_name) != npos);
-        const bool rhs_is_boost(rhs.find_first_of(boost_name) != npos);
-        if (!lhs_is_boost && rhs_is_boost)
-            return false;
-
-        if (lhs_is_boost && !rhs_is_boost)
-            return true;
-
-        // FIXME: hacks for headers that must be last
-        const bool lhs_is_gregorian(
-            lhs.find_first_of(boost_serialization_gregorian) != npos);
-        const bool rhs_is_gregorian(
-            rhs.find_first_of(boost_serialization_gregorian) != npos);
-        if (lhs_is_gregorian && !rhs_is_gregorian)
-            return true;
-
-        if (!lhs_is_gregorian && rhs_is_gregorian)
-            return false;
-    }
-
-    if (lhs.size() != rhs.size())
-        return lhs.size() < rhs.size();
-
-    return lhs < rhs;
-}
 
 }
 
@@ -291,135 +243,6 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     fprp.by_id()[r->id()][ri_fn] = fp2;
 
     BOOST_LOG_SEV(lg, debug) << "Made registrar: " << n.id();
-    return r;
-}
-
-std::forward_list<std::shared_ptr<formattable> > factory::
-make_includers(
-    const config::cpp_options& opts,
-    const std::unordered_map<std::string, settings::path_settings>& ps,
-    const path_derivatives_repository& pdrp,
-    const std::forward_list<
-    std::shared_ptr<formatters::file_formatter_interface>>& formatters,
-    formatter_properties_repository& fprp,
-    const yarn::model& m) const {
-
-    const auto n(create_name(m.name(), includers_name));
-    BOOST_LOG_SEV(lg, debug) << "Making includers: " << n.id();
-
-    std::unordered_map<std::string, std::list<std::string> >
-        includes_by_formatter_name;
-
-    const auto mmp(m.name().location().model_modules());
-    const auto registrar_n(create_name(m.name(), registrar_name));
-    for (const auto& n_pair : pdrp.by_name()) {
-        const auto n(n_pair.first);
-
-        if (n.location().model_modules() != mmp)
-            continue;
-
-        if (n.location().model_modules().empty() && n.simple().empty())
-            continue;
-
-        if (is<yarn::concept>(m, n))
-            continue;
-
-        if (is<yarn::primitive>(m, n))
-            continue;
-
-        for (const auto& fmt_pair : n_pair.second) {
-            const auto fn(fmt_pair.first);
-            const auto pd(fmt_pair.second);
-
-            if (boost::contains(fn, "forward_declarations_formatter"))
-                continue;
-
-            const auto is_types(boost::starts_with(fn, "quilt.cpp.types."));
-            if (!is_types) {
-                if (is<yarn::visitor>(m, n))
-                    continue;
-
-                if (is<yarn::exception>(m, n))
-                    continue;
-
-                if (is<yarn::module>(m, n))
-                    continue;
-
-                const auto j(m.elements().find(n.id()));
-                if (j  != m.elements().end() && is<yarn::object>(j->second)) {
-                    const auto& o(convert<yarn::object>(*j->second));
-                    const auto ot(o.object_type());
-                    using yarn::object_types;
-                    if (ot != object_types::user_defined_value_object)
-                        continue;
-                }
-            } else {
-                const auto i(m.elements().find(n.id()));
-                if (i != m.elements().end()) {
-                    const bool is_module(is<yarn::module>(i->second));
-                    if (is_module && i->second->documentation().empty())
-                        continue;
-                }
-            }
-
-            if (n == registrar_n && !boost::contains(fn, "serialization"))
-                continue;
-
-            const auto id(pd.inclusion_directive());
-            if (id)
-                includes_by_formatter_name[fn].push_back(*id);
-        }
-    }
-
-    std::unordered_map<std::string, std::list<std::string> >
-        includes_by_facet_name;
-    for(const auto f : formatters) {
-        const auto& oh(f->ownership_hierarchy());
-        if (oh.formatter_name().empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_formatter_name;
-            BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
-        }
-
-        if (f->file_type() != formatters::file_types::cpp_header)
-            continue;
-
-        const auto i(includes_by_formatter_name.find(oh.formatter_name()));
-        auto& ifn(includes_by_facet_name[oh.facet_name()]);
-        if (i != includes_by_formatter_name.end())
-            ifn.splice(ifn.begin(), i->second);
-    }
-
-    for(auto& pair : includes_by_facet_name) {
-        pair.second.sort(include_directive_comparer);
-        pair.second.unique();
-    }
-
-    std::forward_list<std::shared_ptr<formattable> > r;
-    auto inc(std::make_shared<includers_info>());
-    inc->id(n.id());
-
-    for(const auto& pair : includes_by_facet_name) {
-        const auto& facet_name(pair.first);
-
-        using namespace formatters;
-        const auto ch_fn(traits::class_header_formatter_name(facet_name));
-        const auto ifn(traits::includers_formatter_name(facet_name));
-        const auto cloned_ps(clone_path_settings(ps, ch_fn, ifn));
-        const auto pd(create_path_derivatives(opts, m, cloned_ps, n, ifn));
-
-        formatter_properties p;
-        p.file_path(pd.file_path());
-        p.header_guard(pd.header_guard());
-        p.enabled(is_enabled(fprp, m.name(), ch_fn));
-        p.inclusion_dependencies(pair.second);
-
-        // fprp.by_id()[inc->id()][ifn] = p;
-    }
-    r.push_front(inc);
-    BOOST_LOG_SEV(lg, debug) << "Includer: " << *inc;
-
-    BOOST_LOG_SEV(lg, debug) << "Made includers: " << n.id();
-
     return r;
 }
 
