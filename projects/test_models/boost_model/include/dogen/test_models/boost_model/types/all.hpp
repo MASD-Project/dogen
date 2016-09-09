@@ -34,6 +34,7 @@
 #include "dogen/test_models/boost_model/types/class_h.hpp"
 #include "dogen/test_models/boost_model/types/class_base.hpp"
 #include "dogen/test_models/boost_model/types/pkg1/class_c.hpp"
+#include "dogen/test_models/boost_model/types/some_service.hpp"
 #include "dogen/test_models/boost_model/types/class_derived.hpp"
 
 #endif

@@ -127,10 +127,7 @@ public:
     }
 
     void visit(const dogen::yarn::object& o) override {
-        using yarn::object_types;
-        const auto ot(o.object_type());
-        if (ot == object_types::user_defined_value_object)
-            process_element(container_.class_formatters, o);
+        process_element(container_.class_formatters, o);
     }
 
     void visit(const dogen::yarn::exception& e) override {
