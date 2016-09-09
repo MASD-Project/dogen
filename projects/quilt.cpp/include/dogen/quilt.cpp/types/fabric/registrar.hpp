@@ -27,8 +27,8 @@
 
 #include <list>
 #include <iosfwd>
-#include <string>
 #include <algorithm>
+#include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/element_visitor_fwd.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/registrar_fwd_ser.hpp"
@@ -48,8 +48,8 @@ public:
 
 public:
     registrar(
-        const std::list<std::string>& leaves,
-        const std::list<std::string>& model_dependencies);
+        const std::list<dogen::yarn::name>& leaves,
+        const std::list<dogen::yarn::name>& model_dependencies);
 
 private:
     template<typename Archive>
@@ -73,20 +73,20 @@ public:
      * @brief List of all concrete classes which are part of an inheritance tree.
      */
     /**@{*/
-    const std::list<std::string>& leaves() const;
-    std::list<std::string>& leaves();
-    void leaves(const std::list<std::string>& v);
-    void leaves(const std::list<std::string>&& v);
+    const std::list<dogen::yarn::name>& leaves() const;
+    std::list<dogen::yarn::name>& leaves();
+    void leaves(const std::list<dogen::yarn::name>& v);
+    void leaves(const std::list<dogen::yarn::name>&& v);
     /**@}*/
 
     /**
      * @brief List of all models which the model depends on.
      */
     /**@{*/
-    const std::list<std::string>& model_dependencies() const;
-    std::list<std::string>& model_dependencies();
-    void model_dependencies(const std::list<std::string>& v);
-    void model_dependencies(const std::list<std::string>&& v);
+    const std::list<dogen::yarn::name>& model_dependencies() const;
+    std::list<dogen::yarn::name>& model_dependencies();
+    void model_dependencies(const std::list<dogen::yarn::name>& v);
+    void model_dependencies(const std::list<dogen::yarn::name>&& v);
     /**@}*/
 
 public:
@@ -103,8 +103,8 @@ public:
     registrar& operator=(registrar other);
 
 private:
-    std::list<std::string> leaves_;
-    std::list<std::string> model_dependencies_;
+    std::list<dogen::yarn::name> leaves_;
+    std::list<dogen::yarn::name> model_dependencies_;
 };
 
 } } } }

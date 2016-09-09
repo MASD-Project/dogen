@@ -18,22 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
+#include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/quilt.cpp/test_data/fabric/registrar_td.hpp"
 
 namespace {
 
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
+dogen::yarn::name
+create_dogen_yarn_name(const unsigned int position) {
+    return dogen::yarn::name_generator::create(position);
 }
 
-std::list<std::string> create_std_list_std_string(unsigned int position) {
-    std::list<std::string> r;
+std::list<dogen::yarn::name> create_std_list_dogen_yarn_name(unsigned int position) {
+    std::list<dogen::yarn::name> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_string(position + i));
+        r.push_back(create_dogen_yarn_name(position + i));
     }
     return r;
 }
@@ -50,8 +49,8 @@ registrar_generator::registrar_generator() : position_(0) { }
 void registrar_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
-    v.leaves(create_std_list_std_string(position + 0));
-    v.model_dependencies(create_std_list_std_string(position + 1));
+    v.leaves(create_std_list_dogen_yarn_name(position + 0));
+    v.model_dependencies(create_std_list_dogen_yarn_name(position + 1));
 }
 
 registrar_generator::result_type

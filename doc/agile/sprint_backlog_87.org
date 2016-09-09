@@ -670,6 +670,11 @@ Originally we had named the formatter interfaces after the quilt types
 (class, enum, etc). After the change to use yarn types, we forgot to
 update the formatter names to match the yarn types.
 
+*** STARTED Implement registrar in fabric                             :story:
+    CLOCK: [2016-09-09 Fri 22:10]--[2016-09-09 Fri 22:56] =>  0:46
+
+We need to move registrar info into fabric.
+
 *** Use a list in model rather than a map                             :story:
 
 Tasks:

@@ -18,19 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/quilt.cpp/io/fabric/registrar_io.hpp"
+#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_REGISTRAR_FACTORY_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FABRIC_REGISTRAR_FACTORY_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
 
-std::ostream& operator<<(std::ostream& s, const registrar& v) {
-    v.to_stream(s);
-    return(s);
-}
+class registrar_factory;
 
 } } } }
+
+#endif

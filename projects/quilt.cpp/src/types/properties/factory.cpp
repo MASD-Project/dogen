@@ -78,32 +78,6 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-template<typename YarnConcreteElement>
-inline const YarnConcreteElement& convert(const yarn::element& e) {
-    auto ptr(dynamic_cast<YarnConcreteElement const*>(&e));
-    if (!ptr) {
-        const auto id(e.name().id());
-        BOOST_LOG_SEV(lg, error) << cast_failure << id;
-        BOOST_THROW_EXCEPTION(building_error(cast_failure + id));
-    }
-    return *ptr;
-}
-
-template<typename YarnConcreteElement>
-inline bool is(const boost::shared_ptr<yarn::element> e) {
-    auto ptr(boost::dynamic_pointer_cast<YarnConcreteElement>(e));
-    return ptr != nullptr;
-}
-
-template<typename YarnConcreteElement>
-inline bool is(const yarn::model& m, const yarn::name& n) {
-    const auto i(m.elements().find(n.id()));
-    if (i == m.elements().end())
-        return false;
-
-    return is<YarnConcreteElement>(i->second);
-}
-
 std::unordered_map<std::string, settings::path_settings>
 factory::clone_path_settings(
     const std::unordered_map<std::string, settings::path_settings>& source,
