@@ -18,10 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formatters/includers_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/includers_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/master_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/class_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/class_implementation_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/enum_header_formatter.hpp"
@@ -39,7 +37,7 @@ namespace formatters {
 namespace types {
 
 void initializer::initialize(registrar& rg) {
-    initialise_formatter<includers_formatter>(rg, traits::facet_name());
+    initialise_formatter<master_header_formatter>(rg, traits::facet_name());
     initialise_formatter<class_header_formatter>(rg);
     initialise_formatter<class_implementation_formatter>(rg);
     initialise_formatter<enum_header_formatter>(rg);

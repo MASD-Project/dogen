@@ -39,7 +39,7 @@
 #include "dogen/quilt.cpp/types/formatters/odb_options_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/cmakelists_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/includers_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/master_header_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/forward_declarations_formatter_interface.hpp"
 
 namespace dogen {
@@ -119,10 +119,10 @@ public:
         std::shared_ptr<registrar_formatter_interface> f);
 
     /**
-     * @brief Registers an includers formatter.
+     * @brief Registers an master header formatter.
      */
     void register_formatter(
-        std::shared_ptr<includers_formatter_interface> f);
+        std::shared_ptr<master_header_formatter_interface> f);
 
 public:
     /**

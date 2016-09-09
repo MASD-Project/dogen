@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/includers_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/master_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/class_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/class_implementation_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/enum_header_formatter.hpp"
@@ -42,7 +42,7 @@ namespace formatters {
 namespace io {
 
 void initializer::initialize(registrar& rg) {
-    initialise_formatter<includers_formatter>(rg, traits::facet_name());
+    initialise_formatter<master_header_formatter>(rg, traits::facet_name());
     initialise_formatter<class_header_formatter>(rg);
     initialise_formatter<class_implementation_formatter>(rg);
     initialise_formatter<enum_header_formatter>(rg);

@@ -186,12 +186,12 @@ void registrar::register_formatter(
 }
 
 void registrar::register_formatter(
-    std::shared_ptr<includers_formatter_interface> f) {
+    std::shared_ptr<master_header_formatter_interface> f) {
     // note: not logging by design
     if (!f)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
-    formatter_container_.includers_formatters_.push_front(f);
+    formatter_container_.master_header_formatters_.push_front(f);
     common_registration(f);
 }
 

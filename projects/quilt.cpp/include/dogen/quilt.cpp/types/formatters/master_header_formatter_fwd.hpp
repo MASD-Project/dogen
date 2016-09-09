@@ -18,42 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_INCLUDERS_FORMATTER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_INCLUDERS_FORMATTER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_MASTER_HEADER_FORMATTER_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_MASTER_HEADER_FORMATTER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
-
-#include "dogen/quilt.cpp/types/formatters/includers_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
 
-class includers_formatter final : public includers_formatter_interface {
-public:
-    explicit includers_formatter(const std::string& facet_name);
-
-public:
-    std::string id() const override;
-
-    dynamic::ownership_hierarchy ownership_hierarchy() const override;
-
-    file_types file_type() const override;
-
-    properties::origin_types formattable_origin_type() const override;
-
-    void register_inclusion_dependencies_provider(
-        properties::registrar& rg) const override;
-
-    dogen::formatters::file format(const context& ctx,
-        const fabric::master_header& mh) const override;
-
-public:
-    const dynamic::ownership_hierarchy ownership_hierarchy_;
-};
+class master_header_formatter;
 
 } } } }
 

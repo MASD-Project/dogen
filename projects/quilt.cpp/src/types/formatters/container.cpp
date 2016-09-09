@@ -81,9 +81,9 @@ const std::forward_list<
 }
 
 const std::forward_list<
-    std::shared_ptr<formatters::includers_formatter_interface>
-    >& container::includers_formatters() const {
-    return includers_formatters_;
+    std::shared_ptr<formatters::master_header_formatter_interface>
+    >& container::master_header_formatters() const {
+    return master_header_formatters_;
 }
 
 const std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>&

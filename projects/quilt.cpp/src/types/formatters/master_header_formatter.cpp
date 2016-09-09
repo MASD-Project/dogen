@@ -22,8 +22,8 @@
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
-#include "dogen/quilt.cpp/types/formatters/includers_formatter_stitch.hpp"
-#include "dogen/quilt.cpp/types/formatters/includers_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/master_header_formatter_stitch.hpp"
+#include "dogen/quilt.cpp/types/formatters/master_header_formatter.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -76,30 +76,30 @@ std::string provider::formatter_name() const {
 
 }
 
-includers_formatter::includers_formatter(const std::string& facet_name)
+master_header_formatter::master_header_formatter(const std::string& facet_name)
     : ownership_hierarchy_(formatters::traits::model_name(), facet_name,
-        traits::includers_formatter_name(facet_name),
+        traits::master_header_formatter_name(facet_name),
         formatters::traits::header_formatter_group_name()) { }
 
-std::string includers_formatter::id() const {
+std::string master_header_formatter::id() const {
     return ownership_hierarchy().formatter_name();
 }
 
 dynamic::ownership_hierarchy
-includers_formatter::ownership_hierarchy() const {
+master_header_formatter::ownership_hierarchy() const {
     return ownership_hierarchy_;
 }
 
-file_types includers_formatter::file_type() const {
+file_types master_header_formatter::file_type() const {
     return file_types::cpp_header;
 }
 
-properties::origin_types includers_formatter::
+properties::origin_types master_header_formatter::
 formattable_origin_type() const {
     return properties::origin_types::external;
 }
 
-void includers_formatter::register_inclusion_dependencies_provider(
+void master_header_formatter::register_inclusion_dependencies_provider(
     properties::registrar& rg) const {
     const auto fn(ownership_hierarchy_.facet_name());
     const auto fmtn(ownership_hierarchy_.formatter_name());
@@ -107,10 +107,10 @@ void includers_formatter::register_inclusion_dependencies_provider(
 }
 
 dogen::formatters::file
-includers_formatter::format(const context& ctx,
+master_header_formatter::format(const context& ctx,
     const fabric::master_header& mh) const {
     assistant a(ctx, ownership_hierarchy(), file_type(), mh.name().id());
-    const auto r(includers_formatter_stitch(a, mh));
+    const auto r(master_header_formatter_stitch(a, mh));
     return r;
 }
 

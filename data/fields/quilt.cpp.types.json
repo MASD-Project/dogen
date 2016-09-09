@@ -150,12 +150,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "quilt.cpp.types.includers_formatter.postfix"
+            "qualified" : "quilt.cpp.types.master_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
             "model_name" : "quilt.cpp",
             "facet_name" : "quilt.cpp.types",
-            "formatter_name" : "quilt.cpp.types.includers_formatter"
+            "formatter_name" : "quilt.cpp.types.master_header_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",

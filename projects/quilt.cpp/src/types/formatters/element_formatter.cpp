@@ -136,7 +136,7 @@ public:
         format(container_.visitor_formatters(), v);
     }
     void visit(const fabric::master_header& mh) override {
-        format(container_.includers_formatters(), mh);
+        format(container_.master_header_formatters(), mh);
     }
 
 private:

@@ -75,12 +75,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "quilt.cpp.odb.includers_formatter.postfix"
+            "qualified" : "quilt.cpp.odb.master_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
             "model_name" : "quilt.cpp",
             "facet_name" : "quilt.cpp.odb",
-            "formatter_name" : "quilt.cpp.odb.includers_formatter"
+            "formatter_name" : "quilt.cpp.odb.master_header_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",

@@ -18,19 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_INCLUDERS_FORMATTER_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_INCLUDERS_FORMATTER_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_MASTER_HEADER_FORMATTER_INTERFACE_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_MASTER_HEADER_FORMATTER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
+
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/quilt.cpp/types/formatters/context.hpp"
+#include "dogen/quilt.cpp/types/fabric/master_header.hpp"
+#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
 
-class includers_formatter;
+class master_header_formatter_interface : public file_formatter_interface {
+public:
+    master_header_formatter_interface() = default;
+    master_header_formatter_interface(
+        const master_header_formatter_interface&) = delete;
+    master_header_formatter_interface(
+        master_header_formatter_interface&&) = default;
+    virtual ~master_header_formatter_interface() noexcept = 0;
+
+public:
+    /**
+     * @brief Generate the master header file.
+     */
+    virtual dogen::formatters::file
+    format(const context& ctx, const fabric::master_header& mh) const = 0;
+};
 
 } } } }
 

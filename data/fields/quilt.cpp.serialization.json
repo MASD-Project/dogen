@@ -120,12 +120,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "quilt.cpp.serialization.includers_formatter.postfix"
+            "qualified" : "quilt.cpp.serialization.master_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
             "model_name" : "quilt.cpp",
             "facet_name" : "quilt.cpp.serialization",
-            "formatter_name" : "quilt.cpp.serialization.includers_formatter"
+            "formatter_name" : "quilt.cpp.serialization.master_header_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",

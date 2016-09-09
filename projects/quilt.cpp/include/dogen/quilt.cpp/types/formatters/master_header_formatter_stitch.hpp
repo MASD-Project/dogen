@@ -18,13 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formatters/includers_formatter_interface.hpp"
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_MASTER_HEADER_FORMATTER_STITCH_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_MASTER_HEADER_FORMATTER_STITCH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/quilt.cpp/types/fabric/master_header.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
 
-includers_formatter_interface::~includers_formatter_interface() noexcept { }
+dogen::formatters::file
+master_header_formatter_stitch(assistant& a, const fabric::master_header& mh);
 
 } } } }
+
+#endif

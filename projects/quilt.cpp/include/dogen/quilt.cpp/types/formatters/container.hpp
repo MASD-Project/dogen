@@ -37,7 +37,7 @@
 #include "dogen/quilt.cpp/types/formatters/odb_options_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/cmakelists_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/includers_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/master_header_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/forward_declarations_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 
@@ -129,12 +129,12 @@ public:
     registrar_formatters() const;
 
     /**
-     * @brief Returns all available includers formatters.
+     * @brief Returns all available master header formatters.
      */
     const std::forward_list<
-        std::shared_ptr<formatters::includers_formatter_interface>
+        std::shared_ptr<formatters::master_header_formatter_interface>
         >&
-    includers_formatters() const;
+    master_header_formatters() const;
 
 public:
     /**
@@ -195,8 +195,8 @@ private:
         formatters::registrar_formatter_interface> >
     registrar_formatters_;
     std::forward_list<std::shared_ptr<
-        formatters::includers_formatter_interface> >
-    includers_formatters_;
+        formatters::master_header_formatter_interface> >
+    master_header_formatters_;
     std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>
         all_file_formatters_;
     std::forward_list<std::shared_ptr<formatters::file_formatter_interface>>

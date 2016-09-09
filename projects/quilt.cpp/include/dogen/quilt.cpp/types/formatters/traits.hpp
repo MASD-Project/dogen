@@ -49,9 +49,10 @@ struct traits {
     static std::string implementation_formatter_group_name();
 
     /**
-     * @brief Name of the includers formatter.
+     * @brief Name of the master header formatter for a given facet.
      */
-    static std::string includers_formatter_name(const std::string& facet_name);
+    static std::string master_header_formatter_name(
+        const std::string& facet_name);
 
     static std::string include_cmakelists_formatter_name();
     static std::string source_cmakelists_formatter_name();

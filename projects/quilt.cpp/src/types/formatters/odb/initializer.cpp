@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/includers_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/master_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/class_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/enum_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/odb_options_formatter.hpp"
@@ -32,7 +32,7 @@ namespace formatters {
 namespace odb {
 
 void initializer::initialize(registrar& rg) {
-    initialise_formatter<includers_formatter>(rg, traits::facet_name());
+    initialise_formatter<master_header_formatter>(rg, traits::facet_name());
     initialise_formatter<class_header_formatter>(rg);
     initialise_formatter<enum_header_formatter>(rg);
     initialise_formatter<odb_options_formatter>(rg);

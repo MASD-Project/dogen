@@ -18,37 +18,41 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_INCLUDERS_FORMATTER_INTERFACE_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_INCLUDERS_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_MASTER_HEADER_FORMATTER_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_MASTER_HEADER_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/formatters/types/file.hpp"
-#include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/fabric/master_header.hpp"
-#include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
+#include "dogen/quilt.cpp/types/formatters/master_header_formatter_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
 
-class includers_formatter_interface : public file_formatter_interface {
+class master_header_formatter final : public master_header_formatter_interface {
 public:
-    includers_formatter_interface() = default;
-    includers_formatter_interface(
-        const includers_formatter_interface&) = delete;
-    includers_formatter_interface(includers_formatter_interface&&) = default;
-    virtual ~includers_formatter_interface() noexcept = 0;
+    explicit master_header_formatter(const std::string& facet_name);
 
 public:
-    /**
-     * @brief Generate the includers file.
-     */
-    virtual dogen::formatters::file
-    format(const context& ctx, const fabric::master_header& mh) const = 0;
+    std::string id() const override;
+
+    dynamic::ownership_hierarchy ownership_hierarchy() const override;
+
+    file_types file_type() const override;
+
+    properties::origin_types formattable_origin_type() const override;
+
+    void register_inclusion_dependencies_provider(
+        properties::registrar& rg) const override;
+
+    dogen::formatters::file format(const context& ctx,
+        const fabric::master_header& mh) const override;
+
+public:
+    const dynamic::ownership_hierarchy ownership_hierarchy_;
 };
 
 } } } }

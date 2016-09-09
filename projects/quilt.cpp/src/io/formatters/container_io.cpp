@@ -79,7 +79,7 @@ std::ostream& operator<<(std::ostream& s, const container& c) {
     to_stream(s, "odb_options_formatters", c.odb_options_formatters());
     to_stream(s, "cmakelists_formatters", c.cmakelists_formatters());
     to_stream(s, "registrar_formatters", c.registrar_formatters());
-    to_stream(s, "includers_formatters", c.includers_formatters());
+    to_stream(s, "master_header_formatters", c.master_header_formatters());
     to_stream(s, "all_file_formatters", c.all_file_formatters());
     to_stream(s, "all_internal_file_formatters",
         c.all_internal_file_formatters());
