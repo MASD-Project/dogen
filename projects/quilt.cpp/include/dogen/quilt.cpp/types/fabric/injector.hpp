@@ -40,10 +40,15 @@ public:
     virtual ~injector() noexcept;
 
 private:
-    void inject(const std::list<boost::shared_ptr<yarn::element>>& e,
+    void add_element(const boost::shared_ptr<yarn::element>& e,
+        yarn::model& m) const;
+
+    void add_elements(
+        const std::list<boost::shared_ptr<yarn::element>>& elements,
         yarn::model& m) const;
 
 private:
+    void inject_registrar(yarn::model& m) const;
     void inject_master_headers(yarn::model& m) const;
 
 public:
