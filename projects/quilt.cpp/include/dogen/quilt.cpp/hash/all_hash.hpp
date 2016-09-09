@@ -27,6 +27,7 @@
 
 #include "dogen/quilt.cpp/hash/fabric/registrar_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/entity_hash.hpp"
+#include "dogen/quilt.cpp/hash/fabric/master_header_hash.hpp"
 #include "dogen/quilt.cpp/hash/formatters/file_types_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/odb_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/formattable_hash.hpp"
