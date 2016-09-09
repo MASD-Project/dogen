@@ -32,6 +32,7 @@
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/exception.hpp"
 #include "dogen/yarn/types/visitor.hpp"
+#include "dogen/quilt.cpp/types/fabric/master_header.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_provider_interface.hpp"
 
 namespace dogen {
@@ -39,7 +40,12 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-class container {
+class registrar;
+
+class container final {
+private:
+    friend class registrar;
+
 public:
     const std::forward_list<
         boost::shared_ptr<
@@ -48,26 +54,12 @@ public:
         >&
     object_providers() const;
 
-    std::forward_list<
-        boost::shared_ptr<
-            inclusion_dependencies_provider_interface<yarn::object>
-            >
-        >&
-    object_providers();
-
     const std::forward_list<
         boost::shared_ptr<
             inclusion_dependencies_provider_interface<yarn::enumeration>
             >
         >&
     enumeration_providers() const;
-
-    std::forward_list<
-        boost::shared_ptr<
-            inclusion_dependencies_provider_interface<yarn::enumeration>
-            >
-        >&
-    enumeration_providers();
 
     const std::forward_list<
         boost::shared_ptr<
@@ -76,26 +68,12 @@ public:
         >&
     exception_providers() const;
 
-    std::forward_list<
-        boost::shared_ptr<
-            inclusion_dependencies_provider_interface<yarn::exception>
-            >
-        >&
-    exception_providers();
-
     const std::forward_list<
         boost::shared_ptr<
             inclusion_dependencies_provider_interface<yarn::visitor>
             >
         >&
     visitor_providers() const;
-
-    std::forward_list<
-        boost::shared_ptr<
-            inclusion_dependencies_provider_interface<yarn::visitor>
-            >
-        >&
-    visitor_providers();
 
     const std::forward_list<
         boost::shared_ptr<
@@ -104,12 +82,12 @@ public:
         >&
     model_providers() const;
 
-    std::forward_list<
+    const std::forward_list<
         boost::shared_ptr<
-            inclusion_dependencies_provider_interface<yarn::model>
+            inclusion_dependencies_provider_interface<fabric::master_header>
             >
         >&
-    model_providers();
+    master_header_providers() const;
 
 private:
     std::forward_list<
@@ -137,6 +115,11 @@ private:
             inclusion_dependencies_provider_interface<yarn::model>
             >
     > model_providers_;
+    std::forward_list<
+        boost::shared_ptr<
+            inclusion_dependencies_provider_interface<fabric::master_header>
+            >
+    > master_header_providers_;
 };
 
 } } } }

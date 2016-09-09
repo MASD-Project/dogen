@@ -130,7 +130,7 @@ generate(const inclusion_dependencies_builder_factory& f,
 
 inclusion_dependencies_factory::inclusion_dependencies_factory(
     const inclusion_dependencies_builder_factory& f, const container& c)
-    : factory_(f), provider_container_(c) {}
+    : factory_(f), container_(c) {}
 
 std::unordered_map<std::string, std::list<std::string> >
 inclusion_dependencies_factory::make(const yarn::module& /*m*/) const {
@@ -152,27 +152,32 @@ inclusion_dependencies_factory::make(const yarn::primitive& /*p*/) const {
 
 std::unordered_map<std::string, std::list<std::string> >
 inclusion_dependencies_factory::make(const yarn::enumeration& e) const {
-    return generate(factory_, provider_container_.enumeration_providers(), e);
+    return generate(factory_, container_.enumeration_providers(), e);
 }
 
 std::unordered_map<std::string, std::list<std::string> >
 inclusion_dependencies_factory::make(const yarn::object& o) const {
-    return generate(factory_, provider_container_.object_providers(), o);
+    return generate(factory_, container_.object_providers(), o);
 }
 
 std::unordered_map<std::string, std::list<std::string> >
 inclusion_dependencies_factory::make(const yarn::exception& e) const {
-    return generate(factory_, provider_container_.exception_providers(), e);
+    return generate(factory_, container_.exception_providers(), e);
 }
 
 std::unordered_map<std::string, std::list<std::string> >
 inclusion_dependencies_factory::make(const yarn::visitor& v) const {
-    return generate(factory_, provider_container_.visitor_providers(), v);
+    return generate(factory_, container_.visitor_providers(), v);
 }
 
 std::unordered_map<std::string, std::list<std::string> >
 inclusion_dependencies_factory::make(const yarn::model& m) const {
-    return generate(factory_, provider_container_.model_providers(), m);
+    return generate(factory_, container_.model_providers(), m);
+}
+
+std::unordered_map<std::string, std::list<std::string> >
+inclusion_dependencies_factory::make(const fabric::master_header& mh) const {
+    return generate(factory_, container_.master_header_providers(), mh);
 }
 
 } } } }

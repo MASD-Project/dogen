@@ -34,30 +34,12 @@ container::object_providers() const {
     return object_providers_;
 }
 
-std::forward_list<
-    boost::shared_ptr<
-        inclusion_dependencies_provider_interface<yarn::object>
-        >
-    >&
-container::object_providers() {
-    return object_providers_;
-}
-
 const std::forward_list<
     boost::shared_ptr<
         inclusion_dependencies_provider_interface<yarn::enumeration>
         >
     >&
 container::enumeration_providers() const {
-    return enumeration_providers_;
-}
-
-std::forward_list<
-    boost::shared_ptr<
-        inclusion_dependencies_provider_interface<yarn::enumeration>
-        >
-    >&
-container::enumeration_providers() {
     return enumeration_providers_;
 }
 
@@ -70,30 +52,12 @@ container::exception_providers() const {
     return exception_providers_;
 }
 
-std::forward_list<
-    boost::shared_ptr<
-        inclusion_dependencies_provider_interface<yarn::exception>
-        >
-    >&
-container::exception_providers() {
-    return exception_providers_;
-}
-
 const std::forward_list<
     boost::shared_ptr<
         inclusion_dependencies_provider_interface<yarn::visitor>
         >
     >&
 container::visitor_providers() const {
-    return visitor_providers_;
-}
-
-std::forward_list<
-    boost::shared_ptr<
-        inclusion_dependencies_provider_interface<yarn::visitor>
-        >
-    >&
-container::visitor_providers() {
     return visitor_providers_;
 }
 
@@ -106,13 +70,13 @@ container::model_providers() const {
     return model_providers_;
 }
 
-std::forward_list<
+const std::forward_list<
     boost::shared_ptr<
-        inclusion_dependencies_provider_interface<yarn::model>
+        inclusion_dependencies_provider_interface<fabric::master_header>
         >
     >&
-container::model_providers() {
-    return model_providers_;
+container::master_header_providers() const {
+    return master_header_providers_;
 }
 
 } } } }

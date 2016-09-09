@@ -19,6 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include "dogen/quilt.cpp/types/fabric/master_header.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/includers_formatter_stitch.hpp"
@@ -32,29 +33,40 @@ namespace formatters {
 namespace {
 
 class provider final : public properties::
-        inclusion_dependencies_provider_interface<yarn::object> {
+        inclusion_dependencies_provider_interface<fabric::master_header> {
 public:
-    explicit provider(const std::string& formatter_name);
+    provider(const std::string& facet_name, const std::string& formatter_name);
 
 public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
         provide(const properties::inclusion_dependencies_builder_factory& f,
-            const yarn::object& o) const override;
+            const fabric::master_header& mh) const override;
 
 private:
+    const std::string facet_name_;
     const std::string formatter_name_;
 };
 
-provider::provider(const std::string& formatter_name)
-    : formatter_name_(formatter_name) { }
+provider::
+provider(const std::string& facet_name, const std::string& formatter_name)
+    : facet_name_(facet_name), formatter_name_(formatter_name) { }
 
 boost::optional<std::list<std::string> >
 provider::provide(const properties::inclusion_dependencies_builder_factory& f,
-    const yarn::object& /*o*/) const {
+    const fabric::master_header& mh) const {
+
+    const auto i(mh.inclusion_by_facet().find(facet_name_));
+    if (i == mh.inclusion_by_facet().end())
+        return boost::optional<std::list<std::string>>();
 
     auto builder(f.make());
+    for (const auto& pair : i->second) {
+        const auto& fmtn(pair.first);
+        const auto& names(pair.second);
+        builder.add(names, fmtn);
+    }
     return builder.build();
 }
 
@@ -89,8 +101,9 @@ formattable_origin_type() const {
 
 void includers_formatter::register_inclusion_dependencies_provider(
     properties::registrar& rg) const {
-    rg.register_provider(
-        boost::make_shared<provider>(ownership_hierarchy_.formatter_name()));
+    const auto fn(ownership_hierarchy_.facet_name());
+    const auto fmtn(ownership_hierarchy_.formatter_name());
+    rg.register_provider(boost::make_shared<provider>(fn, fmtn));
 }
 
 dogen::formatters::file

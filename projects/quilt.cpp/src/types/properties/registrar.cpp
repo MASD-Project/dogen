@@ -28,6 +28,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.properties.registrar"));
 
+const std::string null_provider("Provider cannot be null.");
 const std::string empty_formatter_name("Formatter name is empty.");
 
 }
@@ -37,6 +38,21 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
+template<typename Element>
+inline void validate(boost::shared_ptr<
+        inclusion_dependencies_provider_interface<Element>
+    > p) {
+    if (!p) {
+        BOOST_LOG_SEV(lg, error) << null_provider;
+        BOOST_THROW_EXCEPTION(registrar_error(null_provider));
+    }
+
+    if (p->formatter_name().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_formatter_name;
+        BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
+    }
+}
+
 const properties::container& registrar::container() const {
     return container_;
 }
@@ -44,56 +60,43 @@ const properties::container& registrar::container() const {
 void registrar::register_provider(boost::shared_ptr<
     inclusion_dependencies_provider_interface<yarn::object>
     > p) {
-
-    if (p->formatter_name().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_formatter_name;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
-    }
-    container_.object_providers().push_front(p);
+    validate(p);
+    container_.object_providers_.push_front(p);
 }
 
 void registrar::register_provider(boost::shared_ptr<
     inclusion_dependencies_provider_interface<yarn::enumeration>
     > p) {
-
-    if (p->formatter_name().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_formatter_name;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
-    }
-    container_.enumeration_providers().push_front(p);
+    validate(p);
+    container_.enumeration_providers_.push_front(p);
 }
 
 void registrar::register_provider(boost::shared_ptr<
     inclusion_dependencies_provider_interface<yarn::exception>
     > p) {
-
-    if (p->formatter_name().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_formatter_name;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
-    }
-    container_.exception_providers().push_front(p);
+    validate(p);
+    container_.exception_providers_.push_front(p);
 }
 
 void registrar::register_provider(boost::shared_ptr<
     inclusion_dependencies_provider_interface<yarn::visitor>
     > p) {
-
-    if (p->formatter_name().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_formatter_name;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
-    }
-    container_.visitor_providers().push_front(p);
+    validate(p);
+    container_.visitor_providers_.push_front(p);
 }
 
 void registrar::register_provider(boost::shared_ptr<
     inclusion_dependencies_provider_interface<yarn::model>
     > p) {
+    validate(p);
+    container_.model_providers_.push_front(p);
+}
 
-    if (p->formatter_name().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_formatter_name;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
-    }
-    container_.model_providers().push_front(p);
+void registrar::register_provider(boost::shared_ptr<
+    inclusion_dependencies_provider_interface<fabric::master_header>
+    > p) {
+    validate(p);
+    container_.master_header_providers_.push_front(p);
 }
 
 } } } }

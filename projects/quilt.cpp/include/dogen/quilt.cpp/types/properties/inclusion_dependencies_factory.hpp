@@ -36,6 +36,7 @@
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/quilt.cpp/types/properties/container.hpp"
+#include "dogen/quilt.cpp/types/fabric/master_header.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_directives_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_builder_factory.hpp"
 
@@ -100,9 +101,15 @@ public:
     std::unordered_map<std::string, std::list<std::string> >
     make(const yarn::model& m) const;
 
+    /**
+     * @brief Makes inclusion dependencies for a master header.
+     */
+    std::unordered_map<std::string, std::list<std::string> >
+    make(const fabric::master_header& mh) const;
+
 private:
     const inclusion_dependencies_builder_factory& factory_;
-    const container& provider_container_;
+    const container& container_;
 };
 
 } } } }

@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/element_visitor.hpp"
+#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/properties/building_error.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_factory.hpp"
 #include "dogen/quilt.cpp/io/properties/inclusion_dependencies_repository_io.hpp"
@@ -48,7 +48,7 @@ namespace {
 /**
  * @brief Generates all inclusion dependencies.
  */
-class generator final : public yarn::element_visitor {
+class generator final : public fabric::element_visitor {
 public:
     explicit generator(const inclusion_dependencies_factory& f) : factory_(f) {}
 
@@ -86,14 +86,15 @@ private:
     }
 
 public:
-    using yarn::element_visitor::visit;
-    void visit(const dogen::yarn::module& m) { generate(m); }
-    void visit(const dogen::yarn::concept& c) { generate(c); }
-    void visit(const dogen::yarn::primitive& p) { generate(p); }
-    void visit(const dogen::yarn::enumeration& e) { generate(e); }
-    void visit(const dogen::yarn::object& o) { generate(o); }
-    void visit(const dogen::yarn::exception& e) { generate(e); }
-    void visit(const dogen::yarn::visitor& v) { generate(v); }
+    using fabric::element_visitor::visit;
+    void visit(const yarn::module& m) override { generate(m); }
+    void visit(const yarn::concept& c) override { generate(c); }
+    void visit(const yarn::primitive& p) override { generate(p); }
+    void visit(const yarn::enumeration& e) override { generate(e); }
+    void visit(const yarn::object& o) override { generate(o); }
+    void visit(const yarn::exception& e) override { generate(e); }
+    void visit(const yarn::visitor& v) override { generate(v); }
+    void visit(const fabric::master_header& mh) override { generate(mh); }
 
 public:
     const inclusion_dependencies_repository& result() const { return result_; }
