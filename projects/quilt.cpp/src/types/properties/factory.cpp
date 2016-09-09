@@ -141,10 +141,10 @@ bool factory::is_enabled(const formatter_properties_repository& fprp,
 }
 
 std::shared_ptr<formattable> factory::make_registrar_info(
-    const config::cpp_options& opts,
+    const config::cpp_options& /*opts*/,
     const settings::element_settings_repository& esrp,
-    const std::unordered_map<std::string, settings::path_settings>& ps,
-    formatter_properties_repository& fprp,
+    const std::unordered_map<std::string, settings::path_settings>& /*ps*/,
+    formatter_properties_repository& /*fprp*/,
     const yarn::model& m) const {
 
     const auto n(create_name(m.name(), registrar_name));
@@ -178,7 +178,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     for (const auto& l : m.leaves())
         r->leaves().push_back(b.qualified_name(l));
     r->leaves().sort();
-
+/*
     const auto lambda([&](const std::string& src, const std::string& dst) {
             const auto cloned_ps(clone_path_settings(ps, src, dst));
             const auto pd(create_path_derivatives(opts, m, cloned_ps, n, dst));
@@ -215,7 +215,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     }
     fp2.inclusion_dependencies(k->second.inclusion_dependencies());
     fprp.by_id()[r->id()][ri_fn] = fp2;
-
+*/
     BOOST_LOG_SEV(lg, debug) << "Made registrar: " << n.id();
     return r;
 }

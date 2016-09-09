@@ -54,7 +54,7 @@ file_types registrar_header_formatter::file_type() const {
 
 properties::origin_types
 registrar_header_formatter::formattable_origin_type() const {
-    return properties::origin_types::internal;
+    return properties::origin_types::external;
 }
 
 void registrar_header_formatter::register_inclusion_dependencies_provider(

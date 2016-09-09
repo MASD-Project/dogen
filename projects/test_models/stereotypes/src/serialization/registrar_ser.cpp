@@ -26,6 +26,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/test_models/stereotypes/serialization/registrar_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/further_refined_ser.hpp"
 
 namespace dogen {

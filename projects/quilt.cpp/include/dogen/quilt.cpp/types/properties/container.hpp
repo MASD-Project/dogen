@@ -27,12 +27,12 @@
 
 #include <forward_list>
 #include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/exception.hpp"
 #include "dogen/yarn/types/visitor.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
+#include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_provider_interface.hpp"
 
 namespace dogen {
@@ -77,10 +77,10 @@ public:
 
     const std::forward_list<
         boost::shared_ptr<
-            inclusion_dependencies_provider_interface<yarn::model>
+            inclusion_dependencies_provider_interface<fabric::registrar>
             >
         >&
-    model_providers() const;
+    registrar_providers() const;
 
     const std::forward_list<
         boost::shared_ptr<
@@ -112,9 +112,9 @@ private:
     > visitor_providers_;
     std::forward_list<
         boost::shared_ptr<
-            inclusion_dependencies_provider_interface<yarn::model>
+            inclusion_dependencies_provider_interface<fabric::registrar>
             >
-    > model_providers_;
+    > registrar_providers_;
     std::forward_list<
         boost::shared_ptr<
             inclusion_dependencies_provider_interface<fabric::master_header>

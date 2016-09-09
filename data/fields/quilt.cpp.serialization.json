@@ -85,7 +85,7 @@
         "value_type" : "text",
         "definition_type" : "instance",
         "scope" : "root_module",
-        "default_value" : "fwd"
+        "default_value" : ""
     },
     {
         "name" : {
@@ -100,7 +100,7 @@
         "value_type" : "text",
         "definition_type" : "instance",
         "scope" : "root_module",
-        "default_value" : "fwd"
+        "default_value" : ""
     },
     {
         "name" : {

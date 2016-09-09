@@ -26,11 +26,11 @@
 #endif
 
 #include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/exception.hpp"
 #include "dogen/yarn/types/visitor.hpp"
+#include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/quilt.cpp/types/properties/container.hpp"
@@ -61,7 +61,7 @@ public:
         > p);
 
     void register_provider(boost::shared_ptr<
-        inclusion_dependencies_provider_interface<yarn::model>
+        inclusion_dependencies_provider_interface<fabric::registrar>
         > p);
 
     void register_provider(boost::shared_ptr<

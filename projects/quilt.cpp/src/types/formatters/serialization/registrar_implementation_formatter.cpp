@@ -19,18 +19,14 @@
  *
  */
 #include <boost/make_shared.hpp>
-#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
+#include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/registrar_implementation_formatter_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/registrar_implementation_formatter.hpp"
-
-namespace {
-    const std::string registrar_name("registrar");
-}
 
 namespace dogen {
 namespace quilt {
@@ -41,13 +37,13 @@ namespace serialization {
 namespace {
 
 class provider final : public properties::
-        inclusion_dependencies_provider_interface<yarn::model> {
+        inclusion_dependencies_provider_interface<fabric::registrar> {
 public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
     provide(const properties::inclusion_dependencies_builder_factory& f,
-        const yarn::model& m) const override;
+        const fabric::registrar& rg) const override;
 };
 
 std::string provider::formatter_name() const {
@@ -56,14 +52,11 @@ std::string provider::formatter_name() const {
 
 boost::optional<std::list<std::string> >
 provider::provide(const properties::inclusion_dependencies_builder_factory& f,
-    const yarn::model& m) const {
-
-    yarn::name_factory nf;
-    const auto n(nf.build_element_in_model(m.name(), registrar_name));
+    const fabric::registrar& rg) const {
 
     auto builder(f.make());
     const auto rh_fn(traits::registrar_header_formatter_name());
-    builder.add(n, rh_fn);
+    builder.add(rg.name(), rh_fn);
 
     using ic = inclusion_constants;
     builder.add(ic::boost::archive::text_iarchive());
@@ -78,19 +71,8 @@ provider::provide(const properties::inclusion_dependencies_builder_factory& f,
     builder.add(ic::boost::archive::xml_oarchive());
 
     const auto ch_fn(traits::class_header_formatter_name());
-    for (const auto& l : m.leaves())
-        builder.add(l, ch_fn);
-
-    for (const auto& pair : m.references()) {
-        const auto origin_type(pair.second);
-        if (origin_type == yarn::origin_types::system)
-            continue;
-
-        const auto ref(pair.first);
-        yarn::name_factory nf;
-        const auto n(nf.build_element_in_model(ref, registrar_name));
-        builder.add(n, ch_fn);
-    }
+    builder.add(rg.leaves(), ch_fn);
+    builder.add(rg.model_dependencies(), ch_fn);
     return builder.build();
 }
 
@@ -120,7 +102,7 @@ file_types registrar_implementation_formatter::file_type() const {
 
 properties::origin_types
 registrar_implementation_formatter::formattable_origin_type() const {
-    return properties::origin_types::internal;
+    return properties::origin_types::external;
 }
 
 void registrar_implementation_formatter::

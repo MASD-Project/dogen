@@ -20,7 +20,6 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
@@ -28,7 +27,8 @@
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/exception.hpp"
 #include "dogen/yarn/types/visitor.hpp"
-#include "dogen/yarn/types/element_visitor.hpp"
+#include "dogen/quilt.cpp/types/fabric/registrar.hpp"
+#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/settings/building_error.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_factory.hpp"
 #include "dogen/quilt.cpp/io/settings/element_settings_repository_io.hpp"
@@ -40,7 +40,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "quilt.cpp.settings.element_settings_repository_factory"));
 
-const std::string registrar_name("registrar");
 const std::string duplicate_name("Duplicate name: ");
 
 }
@@ -53,9 +52,9 @@ namespace settings {
 namespace {
 
 /**
- * @brief Generates the element_settings.
+ * @brief Generates the element settings.
  */
-class generator final : public yarn::element_visitor {
+class generator final : public fabric::element_visitor {
 public:
     generator(const element_settings_factory& f,
         const opaque_settings_builder& osb)
@@ -100,7 +99,7 @@ private:
     }
 
 public:
-    using yarn::element_visitor::visit;
+    using fabric::element_visitor::visit;
     void visit(const yarn::module& m) override { generate(m); }
     void visit(const yarn::concept& c) override { generate_stateful(c); }
     void visit(const yarn::primitive& p) override { generate(p); }
@@ -108,6 +107,7 @@ public:
     void visit(const yarn::object& o) override { generate_stateful(o); }
     void visit(const yarn::exception& e) override { generate(e); }
     void visit(const yarn::visitor& v) override { generate(v); }
+    void visit(const fabric::registrar& rg) override { generate(rg); }
 
 public:
     const element_settings_repository& result() const { return result_; }
@@ -132,18 +132,6 @@ make(const opaque_settings_builder& osb, const yarn::model& m) const {
         e.accept(g);
     }
     auto r(g.result());
-
-    // FIXME: hack to handle registars.
-    yarn::name_factory nf;
-    const auto n(nf.build_element_in_model(m.name(), registrar_name));
-    const auto pair(std::make_pair(n.id(), element_settings()));
-    auto& deps(r.by_id());
-    const auto res(deps.insert(pair));
-    if (!res.second) {
-        BOOST_LOG_SEV(lg, error) << duplicate_name << n.id();
-        BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
-    }
-
     BOOST_LOG_SEV(lg, debug) << "Finished creating element settings repository."
                              << r;
     return r;

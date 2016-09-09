@@ -86,10 +86,10 @@ void registrar::register_provider(boost::shared_ptr<
 }
 
 void registrar::register_provider(boost::shared_ptr<
-    inclusion_dependencies_provider_interface<yarn::model>
+    inclusion_dependencies_provider_interface<fabric::registrar>
     > p) {
     validate(p);
-    container_.model_providers_.push_front(p);
+    container_.registrar_providers_.push_front(p);
 }
 
 void registrar::register_provider(boost::shared_ptr<

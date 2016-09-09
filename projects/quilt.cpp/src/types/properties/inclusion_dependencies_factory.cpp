@@ -171,8 +171,8 @@ inclusion_dependencies_factory::make(const yarn::visitor& v) const {
 }
 
 std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const yarn::model& m) const {
-    return generate(factory_, container_.model_providers(), m);
+inclusion_dependencies_factory::make(const fabric::registrar& rg) const {
+    return generate(factory_, container_.registrar_providers(), rg);
 }
 
 std::unordered_map<std::string, std::list<std::string> >

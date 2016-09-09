@@ -20,7 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/quilt.cpp/types/fabric/registrar.hpp"
+#include "dogen/quilt.cpp/types/fabric/master_header.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/properties/building_error.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_factory.hpp"
@@ -33,7 +34,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "quilt.cpp.properties.inclusion_dependencies_repository_factory"));
 
-const std::string registrar_name("registrar");
 const std::string duplicate_name("Duplicate name: ");
 
 }
@@ -95,6 +95,7 @@ public:
     void visit(const yarn::exception& e) override { generate(e); }
     void visit(const yarn::visitor& v) override { generate(v); }
     void visit(const fabric::master_header& mh) override { generate(mh); }
+    void visit(const fabric::registrar& rg) override { generate(rg); }
 
 public:
     const inclusion_dependencies_repository& result() const { return result_; }
@@ -118,10 +119,6 @@ make(const inclusion_dependencies_builder_factory& bf, const container& c,
         const auto& e(*pair.second);
         e.accept(g);
     }
-
-    yarn::name_factory nf;
-    const auto n(nf.build_element_in_model(m.name(), registrar_name));
-    g.generate(m, n);
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies:"
                              << g.result();

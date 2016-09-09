@@ -29,13 +29,13 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/quilt.cpp/types/properties/container.hpp"
+#include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_directives_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_builder_factory.hpp"
@@ -96,10 +96,10 @@ public:
     make(const yarn::visitor& v) const;
 
     /**
-     * @brief Makes inclusion dependencies for a model.
+     * @brief Makes inclusion dependencies for a registrar.
      */
     std::unordered_map<std::string, std::list<std::string> >
-    make(const yarn::model& m) const;
+    make(const fabric::registrar& rg) const;
 
     /**
      * @brief Makes inclusion dependencies for a master header.

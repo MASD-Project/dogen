@@ -27,11 +27,12 @@
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
+#include "dogen/quilt.cpp/types/fabric/registrar.hpp"
+#include "dogen/quilt.cpp/types/fabric/master_header.hpp"
+#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/io/properties/enablement_repository_io.hpp"
 #include "dogen/quilt.cpp/io/properties/global_enablement_properties_io.hpp"
-#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/properties/enablement_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/enablement_repository_factory.hpp"
 
@@ -41,7 +42,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "quilt.cpp.properties.enablement_repository_factory"));
 
-const std::string registrar_name("registrar");
 const std::string duplicate_name("Duplicate name: ");
 const std::string model_module_not_found("Model module not found for model: ");
 
@@ -70,7 +70,6 @@ private:
 
 public:
     using fabric::element_visitor::visit;
-    void visit(const fabric::master_header& mh) override { generate(mh); }
     void visit(const yarn::module& m) override { generate(m); }
     void visit(const yarn::concept& c) override { generate(c); }
     void visit(const yarn::primitive& p) override { generate(p); }
@@ -82,6 +81,8 @@ public:
     }
     void visit(const dogen::yarn::exception& e) override { generate(e); }
     void visit(const dogen::yarn::visitor& v) override { generate(v); }
+    void visit(const fabric::master_header& mh) override { generate(mh); }
+    void visit(const fabric::registrar& rg) override { generate(rg); }
 
 public:
     const enablement_repository& result() const { return result_; }
@@ -159,22 +160,6 @@ enablement_repository enablement_repository_factory::make(
         e.accept(g);
     }
     auto r(g.result());
-
-    yarn::name_factory nf;
-    const auto n(nf.build_element_in_model(m.name(), registrar_name));
-    const auto e(f.make(root_object));
-    r.by_name()[n] = e;
-
-    for (const auto& pair : m.references()) {
-        const auto origin_type(pair.second);
-        if (origin_type == yarn::origin_types::system)
-            continue;
-
-        const auto ref(pair.first);
-        yarn::name_factory nf;
-        const auto n(nf.build_element_in_model(ref, registrar_name));
-        r.by_name()[n] = e;
-    }
 
     BOOST_LOG_SEV(lg, debug) << "Finished computing enablement:" << r;
     return r;

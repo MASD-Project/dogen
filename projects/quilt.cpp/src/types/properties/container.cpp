@@ -63,11 +63,11 @@ container::visitor_providers() const {
 
 const std::forward_list<
     boost::shared_ptr<
-        inclusion_dependencies_provider_interface<yarn::model>
+        inclusion_dependencies_provider_interface<fabric::registrar>
         >
     >&
-container::model_providers() const {
-    return model_providers_;
+container::registrar_providers() const {
+    return registrar_providers_;
 }
 
 const std::forward_list<
