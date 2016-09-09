@@ -32,6 +32,10 @@ Notes:
 We should not really be using optional<list>. The empty list is
 sufficient for this.
 
+Uses:
+
+- include provider.
+
 *** Consider renaming formatters                                      :story:
 
 After reading the [[http://martinfowler.com/eaaDev/PresentationModel.html][Presentation Model]] pattern a bit more carefully, it
