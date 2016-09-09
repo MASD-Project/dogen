@@ -44,18 +44,18 @@ std::list<dogen::yarn::name> create_std_list_dogen_yarn_name(unsigned int positi
     return r;
 }
 
-std::pair<std::string, std::list<dogen::yarn::name> >
-create_std_pair_std_string_std_list_dogen_yarn_name(unsigned int position) {
-    std::pair<std::string, std::list<dogen::yarn::name> > r(
-        create_std_string(position),
-        create_std_list_dogen_yarn_name(position));
+std::unordered_map<std::string, std::list<dogen::yarn::name> > create_std_unordered_map_std_string_std_list_dogen_yarn_name(unsigned int position) {
+    std::unordered_map<std::string, std::list<dogen::yarn::name> > r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_std_list_dogen_yarn_name(position + i)));
+    }
     return r;
 }
 
-std::unordered_map<std::string, std::pair<std::string, std::list<dogen::yarn::name> > > create_std_unordered_map_std_string_std_pair_std_string_std_list_dogen_yarn_name(unsigned int position) {
-    std::unordered_map<std::string, std::pair<std::string, std::list<dogen::yarn::name> > > r;
+std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > > create_std_unordered_map_std_string_std_unordered_map_std_string_std_list_dogen_yarn_name(unsigned int position) {
+    std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_pair_std_string_std_list_dogen_yarn_name(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_std_unordered_map_std_string_std_list_dogen_yarn_name(position + i)));
     }
     return r;
 }
@@ -72,7 +72,7 @@ master_header_generator::master_header_generator() : position_(0) { }
 void master_header_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
-    v.inclusion_by_facet(create_std_unordered_map_std_string_std_pair_std_string_std_list_dogen_yarn_name(position + 0));
+    v.inclusion_by_facet(create_std_unordered_map_std_string_std_unordered_map_std_string_std_list_dogen_yarn_name(position + 0));
 }
 
 master_header_generator::result_type

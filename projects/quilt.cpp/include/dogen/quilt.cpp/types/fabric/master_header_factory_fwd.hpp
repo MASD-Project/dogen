@@ -18,31 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_INJECTOR_INTERFACE_HPP
-#define DOGEN_YARN_TYPES_INJECTOR_INTERFACE_HPP
-
-#include <string>
-#include "dogen/yarn/types/model.hpp"
+#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_MASTER_HEADER_FACTORY_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FABRIC_MASTER_HEADER_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 namespace dogen {
-namespace yarn {
+namespace quilt {
+namespace cpp {
+namespace fabric {
 
-class injector_interface {
-public:
-    injector_interface() = default;
-    injector_interface(const injector_interface&) = delete;
-    injector_interface(injector_interface&&) = default;
-    virtual ~injector_interface() noexcept = 0;
+class master_header_factory;
 
-public:
-    virtual std::string id() const = 0;
-    virtual void inject(model& m) const = 0;
-};
-
-} }
+} } } }
 
 #endif

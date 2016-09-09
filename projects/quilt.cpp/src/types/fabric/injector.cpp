@@ -18,7 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/injection_error.hpp"
+#include "dogen/quilt.cpp/types/formatters/workflow.hpp"
+#include "dogen/quilt.cpp/types/fabric/master_header_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/injector.hpp"
+
+namespace {
+
+const std::string id("quilt.cpp.fabric.injector");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(id));
+
+const std::string duplicate_qualified_name("Duplicate qualified name: ");
+
+}
 
 namespace dogen {
 namespace quilt {
@@ -28,12 +44,26 @@ namespace fabric {
 injector::~injector() noexcept {}
 
 std::string injector::id() const {
-    static std::string r("quilt.cpp.injector");
-    return r;
+    return ::id;
 }
 
-void injector::inject(const yarn::model& /*m*/) const {
+void injector::inject_master_headers(yarn::model& m) const {
+    const auto& rg(formatters::workflow::registrar());
+    const auto& fc(rg.formatter_container());
+    master_header_factory f;
+    const auto e(f.build(fc, m));
 
+    const auto id(e->name().id());
+    const auto pair(m.elements().insert(std::make_pair(id, e)));
+    if (!pair.second) {
+        using yarn::injection_error;
+        BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << id;
+        BOOST_THROW_EXCEPTION(injection_error(duplicate_qualified_name + id));
+    }
+}
+
+void injector::inject(yarn::model& m) const {
+    inject_master_headers(m);
 }
 
 } } } }

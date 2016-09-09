@@ -38,19 +38,20 @@ inline std::size_t hash_std_list_dogen_yarn_name(const std::list<dogen::yarn::na
     return seed;
 }
 
-inline std::size_t hash_std_pair_std_string_std_list_dogen_yarn_name(const std::pair<std::string, std::list<dogen::yarn::name> >& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.first);
-    combine(seed, hash_std_list_dogen_yarn_name(v.second));
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_std_pair_std_string_std_list_dogen_yarn_name(const std::unordered_map<std::string, std::pair<std::string, std::list<dogen::yarn::name> > >& v) {
+inline std::size_t hash_std_unordered_map_std_string_std_list_dogen_yarn_name(const std::unordered_map<std::string, std::list<dogen::yarn::name> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_std_pair_std_string_std_list_dogen_yarn_name(i.second));
+        combine(seed, hash_std_list_dogen_yarn_name(i.second));
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_unordered_map_std_string_std_unordered_map_std_string_std_list_dogen_yarn_name(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, hash_std_unordered_map_std_string_std_list_dogen_yarn_name(i.second));
     }
     return seed;
 }
@@ -67,7 +68,7 @@ std::size_t master_header_hasher::hash(const master_header& v) {
 
     combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
 
-    combine(seed, hash_std_unordered_map_std_string_std_pair_std_string_std_list_dogen_yarn_name(v.inclusion_by_facet()));
+    combine(seed, hash_std_unordered_map_std_string_std_unordered_map_std_string_std_list_dogen_yarn_name(v.inclusion_by_facet()));
     return seed;
 }
 

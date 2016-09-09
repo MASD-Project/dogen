@@ -28,7 +28,6 @@
 #include <list>
 #include <iosfwd>
 #include <string>
-#include <utility>
 #include <algorithm>
 #include <unordered_map>
 #include "dogen/yarn/types/name.hpp"
@@ -50,7 +49,7 @@ public:
     virtual ~master_header() noexcept { }
 
 public:
-    explicit master_header(const std::unordered_map<std::string, std::pair<std::string, std::list<dogen::yarn::name> > >& inclusion_by_facet);
+    explicit master_header(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& inclusion_by_facet);
 
 private:
     template<typename Archive>
@@ -70,10 +69,10 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const std::unordered_map<std::string, std::pair<std::string, std::list<dogen::yarn::name> > >& inclusion_by_facet() const;
-    std::unordered_map<std::string, std::pair<std::string, std::list<dogen::yarn::name> > >& inclusion_by_facet();
-    void inclusion_by_facet(const std::unordered_map<std::string, std::pair<std::string, std::list<dogen::yarn::name> > >& v);
-    void inclusion_by_facet(const std::unordered_map<std::string, std::pair<std::string, std::list<dogen::yarn::name> > >&& v);
+    const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& inclusion_by_facet() const;
+    std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& inclusion_by_facet();
+    void inclusion_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& v);
+    void inclusion_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >&& v);
 
 public:
     bool operator==(const master_header& rhs) const;
@@ -89,7 +88,7 @@ public:
     master_header& operator=(master_header other);
 
 private:
-    std::unordered_map<std::string, std::pair<std::string, std::list<dogen::yarn::name> > > inclusion_by_facet_;
+    std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > > inclusion_by_facet_;
 };
 
 } } } }

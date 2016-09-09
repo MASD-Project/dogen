@@ -84,6 +84,7 @@
 #include "dogen/quilt.cpp/types/properties/odb_options_info.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives.hpp"
 #include "dogen/quilt.cpp/types/settings/streaming_settings.hpp"
+#include "dogen/quilt.cpp/types/fabric/master_header_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/element_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/initializer.hpp"
 #include "dogen/quilt.cpp/types/properties/aspect_properties.hpp"

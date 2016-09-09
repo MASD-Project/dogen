@@ -25,6 +25,9 @@
 #pragma once
 #endif
 
+#include <list>
+#include <boost/shared_ptr.hpp>
+#include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/injector_interface.hpp"
 
 namespace dogen {
@@ -36,9 +39,16 @@ class injector : public yarn::injector_interface {
 public:
     virtual ~injector() noexcept;
 
+private:
+    void inject(const std::list<boost::shared_ptr<yarn::element>>& e,
+        yarn::model& m) const;
+
+private:
+    void inject_master_headers(yarn::model& m) const;
+
 public:
-    std::string id() const;
-    void inject(const yarn::model& m) const;
+    std::string id() const override;
+    void inject(yarn::model& m) const override;
 };
 
 } } } }

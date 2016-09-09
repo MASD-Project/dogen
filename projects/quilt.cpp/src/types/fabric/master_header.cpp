@@ -48,12 +48,17 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::na
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::list<dogen::yarn::name> >& v) {
-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
-
-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
-    s << "\"second\": " << v.second;
-    s << " }";
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<dogen::yarn::name> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
     return s;
 }
 
@@ -61,7 +66,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, st
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::pair<std::string, std::list<dogen::yarn::name> > >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -82,7 +87,7 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-master_header::master_header(const std::unordered_map<std::string, std::pair<std::string, std::list<dogen::yarn::name> > >& inclusion_by_facet)
+master_header::master_header(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& inclusion_by_facet)
     : dogen::yarn::element(),
       inclusion_by_facet_(inclusion_by_facet) { }
 
@@ -149,19 +154,19 @@ master_header& master_header::operator=(master_header other) {
     return *this;
 }
 
-const std::unordered_map<std::string, std::pair<std::string, std::list<dogen::yarn::name> > >& master_header::inclusion_by_facet() const {
+const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& master_header::inclusion_by_facet() const {
     return inclusion_by_facet_;
 }
 
-std::unordered_map<std::string, std::pair<std::string, std::list<dogen::yarn::name> > >& master_header::inclusion_by_facet() {
+std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& master_header::inclusion_by_facet() {
     return inclusion_by_facet_;
 }
 
-void master_header::inclusion_by_facet(const std::unordered_map<std::string, std::pair<std::string, std::list<dogen::yarn::name> > >& v) {
+void master_header::inclusion_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& v) {
     inclusion_by_facet_ = v;
 }
 
-void master_header::inclusion_by_facet(const std::unordered_map<std::string, std::pair<std::string, std::list<dogen::yarn::name> > >&& v) {
+void master_header::inclusion_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >&& v) {
     inclusion_by_facet_ = std::move(v);
 }
 
