@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/test_models/trivial_inheritance/serialization/base_ser.hpp"
-#include "dogen/test_models/trivial_inheritance/serialization/registrar_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/pkg1/child_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/pkg3/child_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/pkg4/child_ser.hpp"

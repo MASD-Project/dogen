@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/test_models/enable_facet_serialization/serialization/registrar_ser.hpp"
 #include "dogen/test_models/enable_facet_serialization/serialization/package1/first_class_ser.hpp"
 
 #endif

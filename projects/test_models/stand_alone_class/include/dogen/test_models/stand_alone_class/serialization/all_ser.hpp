@@ -26,6 +26,5 @@
 #endif
 
 #include "dogen/test_models/stand_alone_class/serialization/class_1_ser.hpp"
-#include "dogen/test_models/stand_alone_class/serialization/registrar_ser.hpp"
 
 #endif

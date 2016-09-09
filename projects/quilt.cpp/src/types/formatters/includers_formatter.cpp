@@ -96,7 +96,7 @@ file_types includers_formatter::file_type() const {
 
 properties::origin_types includers_formatter::
 formattable_origin_type() const {
-    return properties::origin_types::internal;
+    return properties::origin_types::external;
 }
 
 void includers_formatter::register_inclusion_dependencies_provider(

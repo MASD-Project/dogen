@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/test_models/comments/serialization/one_line_ser.hpp"
-#include "dogen/test_models/comments/serialization/registrar_ser.hpp"
 #include "dogen/test_models/comments/serialization/multi_line_ser.hpp"
 
 #endif

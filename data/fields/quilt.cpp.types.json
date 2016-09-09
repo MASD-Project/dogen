@@ -146,5 +146,20 @@
         "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : "fwd"
+    },
+    {
+        "name" : {
+            "simple" : "postfix",
+            "qualified" : "quilt.cpp.types.includers_formatter.postfix"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.types",
+            "formatter_name" : "quilt.cpp.types.includers_formatter"
+        },
+        "value_type" : "text",
+        "definition_type" : "instance",
+        "scope" : "root_module",
+        "default_value" : ""
     }
 ]

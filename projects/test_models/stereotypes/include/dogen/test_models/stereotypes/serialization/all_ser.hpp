@@ -27,7 +27,6 @@
 
 #include "dogen/test_models/stereotypes/serialization/value_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/fluent_ser.hpp"
-#include "dogen/test_models/stereotypes/serialization/registrar_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/some_type_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/immutable_two_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/immutable_four_ser.hpp"

@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/test_models/compressed/serialization/registrar_ser.hpp"
 #include "dogen/test_models/compressed/serialization/package1/first_class_ser.hpp"
 
 #endif

@@ -27,8 +27,8 @@
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/properties/building_error.hpp"
+#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/io/properties/path_derivatives_repository_io.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository_factory.hpp"
@@ -54,7 +54,7 @@ namespace {
 /**
  * @brief Generates all path derivatives.
  */
-class generator final : public yarn::element_visitor {
+class generator final : public fabric::element_visitor {
 public:
     generator(const path_derivatives_factory& f) : factory_(f) { }
 
@@ -66,14 +66,17 @@ public:
     void generate(const yarn::name& n);
 
 public:
-    using yarn::element_visitor::visit;
-    void visit(const dogen::yarn::module& m) { generate(m.name()); }
-    void visit(const dogen::yarn::concept& c) { generate(c.name()); }
-    void visit(const dogen::yarn::primitive& p) { generate(p.name()); }
-    void visit(const dogen::yarn::enumeration& e) { generate(e.name()); }
-    void visit(const dogen::yarn::object& o) { generate(o.name()); }
-    void visit(const dogen::yarn::exception& e) { generate(e.name()); }
-    void visit(const dogen::yarn::visitor& v) { generate(v.name()); }
+    using fabric::element_visitor::visit;
+    void visit(const yarn::module& m) override { generate(m.name()); }
+    void visit(const yarn::concept& c) override { generate(c.name()); }
+    void visit(const yarn::primitive& p) override { generate(p.name()); }
+    void visit(const yarn::enumeration& e) override { generate(e.name()); }
+    void visit(const yarn::object& o) override { generate(o.name()); }
+    void visit(const yarn::exception& e) override { generate(e.name()); }
+    void visit(const yarn::visitor& v) override { generate(v.name()); }
+    void visit(const fabric::master_header& mh) override {
+        generate(mh.name());
+    }
 
 public:
     const path_derivatives_repository & result() const { return result_; }

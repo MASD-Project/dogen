@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/test_models/trivial_inheritance/types/base.hpp"
-#include "dogen/test_models/trivial_inheritance/types/service.hpp"
 #include "dogen/test_models/trivial_inheritance/types/pkg1/child.hpp"
 #include "dogen/test_models/trivial_inheritance/types/pkg3/child.hpp"
 #include "dogen/test_models/trivial_inheritance/types/pkg4/child.hpp"
@@ -42,7 +41,6 @@
 #include "dogen/test_models/trivial_inheritance/types/non_final_orphan.hpp"
 #include "dogen/test_models/trivial_inheritance/types/child_of_a_child1.hpp"
 #include "dogen/test_models/trivial_inheritance/types/child_of_a_child2.hpp"
-#include "dogen/test_models/trivial_inheritance/types/service_interface.hpp"
 #include "dogen/test_models/trivial_inheritance/types/child_via_settings.hpp"
 #include "dogen/test_models/trivial_inheritance/types/child_with_members.hpp"
 #include "dogen/test_models/trivial_inheritance/types/parent_with_members.hpp"

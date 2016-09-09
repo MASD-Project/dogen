@@ -119,10 +119,6 @@ helper_properties_factory::make(const bool in_inheritance_relationship,
     r.namespaces(b.namespace_list(nt.current()));
     r.is_simple_type(nt.is_current_simple_type());
 
-    /*
-     * Note: we log conditionally for both settings to make
-     * troubleshooting slightly easier.
-     */
     const auto ss(streaming_settings_for_id(id));
     if (ss) {
         r.streaming_settings(ss);

@@ -74,6 +74,21 @@
     },
     {
         "name" : {
+            "simple" : "postfix",
+            "qualified" : "quilt.cpp.odb.includers_formatter.postfix"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "quilt.cpp",
+            "facet_name" : "quilt.cpp.odb",
+            "formatter_name" : "quilt.cpp.odb.includers_formatter"
+        },
+        "value_type" : "text",
+        "definition_type" : "instance",
+        "scope" : "root_module",
+        "default_value" : ""
+    },
+    {
+        "name" : {
             "simple" : "odb_pragma",
             "qualified" : "odb_pragma"
         },

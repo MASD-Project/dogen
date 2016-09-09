@@ -101,13 +101,13 @@ private:
 
 public:
     using yarn::element_visitor::visit;
-    void visit(const dogen::yarn::module& m) { generate(m); }
-    void visit(const dogen::yarn::concept& c) { generate_stateful(c); }
-    void visit(const dogen::yarn::primitive& p) { generate(p); }
-    void visit(const dogen::yarn::enumeration& e) { generate(e); }
-    void visit(const dogen::yarn::object& o) { generate_stateful(o); }
-    void visit(const dogen::yarn::exception& e) { generate(e); }
-    void visit(const dogen::yarn::visitor& v) { generate(v); }
+    void visit(const yarn::module& m) override { generate(m); }
+    void visit(const yarn::concept& c) override { generate_stateful(c); }
+    void visit(const yarn::primitive& p) override { generate(p); }
+    void visit(const yarn::enumeration& e) override { generate(e); }
+    void visit(const yarn::object& o) override { generate_stateful(o); }
+    void visit(const yarn::exception& e) override { generate(e); }
+    void visit(const yarn::visitor& v) override { generate(v); }
 
 public:
     const element_settings_repository& result() const { return result_; }

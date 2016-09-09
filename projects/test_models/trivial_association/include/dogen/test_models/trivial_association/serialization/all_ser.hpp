@@ -29,6 +29,5 @@
 #include "dogen/test_models/trivial_association/serialization/class_b_ser.hpp"
 #include "dogen/test_models/trivial_association/serialization/class_c_ser.hpp"
 #include "dogen/test_models/trivial_association/serialization/class_d_ser.hpp"
-#include "dogen/test_models/trivial_association/serialization/registrar_ser.hpp"
 
 #endif

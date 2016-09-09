@@ -27,7 +27,6 @@
 
 #include "dogen/test_models/stereotypes/types/value.hpp"
 #include "dogen/test_models/stereotypes/types/fluent.hpp"
-#include "dogen/test_models/stereotypes/types/service.hpp"
 #include "dogen/test_models/stereotypes/types/some_type.hpp"
 #include "dogen/test_models/stereotypes/types/stereotypes.hpp"
 #include "dogen/test_models/stereotypes/types/immutable_two.hpp"

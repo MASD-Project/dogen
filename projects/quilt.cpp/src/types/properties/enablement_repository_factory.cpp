@@ -27,11 +27,11 @@
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
-#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/io/properties/enablement_repository_io.hpp"
 #include "dogen/quilt.cpp/io/properties/global_enablement_properties_io.hpp"
+#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/properties/enablement_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/enablement_repository_factory.hpp"
 
@@ -57,7 +57,7 @@ namespace {
 /**
  * @brief Generates all inclusion dependencies.
  */
-class generator final : public yarn::element_visitor {
+class generator final : public fabric::element_visitor {
 public:
     explicit generator(const enablement_factory& f) : factory_(f) {}
 
@@ -69,18 +69,19 @@ private:
     }
 
 public:
-    using yarn::element_visitor::visit;
-    void visit(const dogen::yarn::module& m) { generate(m); }
-    void visit(const dogen::yarn::concept& c) { generate(c); }
-    void visit(const dogen::yarn::primitive& p) { generate(p); }
-    void visit(const dogen::yarn::enumeration& e) { generate(e); }
-    void visit(const dogen::yarn::object& o) {
+    using fabric::element_visitor::visit;
+    void visit(const fabric::master_header& mh) override { generate(mh); }
+    void visit(const yarn::module& m) override { generate(m); }
+    void visit(const yarn::concept& c) override { generate(c); }
+    void visit(const yarn::primitive& p) override { generate(p); }
+    void visit(const yarn::enumeration& e) override { generate(e); }
+    void visit(const yarn::object& o) override {
         const auto is_service(o.object_type() ==
             yarn::object_types::user_defined_service);
         generate(o, is_service);
     }
-    void visit(const dogen::yarn::exception& e) { generate(e); }
-    void visit(const dogen::yarn::visitor& v) { generate(v); }
+    void visit(const dogen::yarn::exception& e) override { generate(e); }
+    void visit(const dogen::yarn::visitor& v) override { generate(v); }
 
 public:
     const enablement_repository& result() const { return result_; }

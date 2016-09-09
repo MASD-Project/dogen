@@ -26,6 +26,5 @@
 #endif
 
 #include "dogen/test_models/all_primitives/serialization/a_class_ser.hpp"
-#include "dogen/test_models/all_primitives/serialization/registrar_ser.hpp"
 
 #endif

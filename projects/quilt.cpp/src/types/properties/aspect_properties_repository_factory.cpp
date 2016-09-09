@@ -40,7 +40,6 @@ const std::string duplicate_name("Duplicate name: ");
 
 }
 
-
 namespace dogen {
 namespace quilt {
 namespace cpp {
@@ -54,7 +53,7 @@ public:
 
 public:
     using yarn::element_visitor::visit;
-    void visit(const dogen::yarn::object& o);
+    void visit(const dogen::yarn::object& o) override;
 
 public:
     const aspect_properties_repository& result() const { return result_; }
