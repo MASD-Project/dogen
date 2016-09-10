@@ -52,6 +52,7 @@ std::size_t registrar_hasher::hash(const registrar& v) {
 
     combine(seed, hash_std_list_dogen_yarn_name(v.leaves()));
     combine(seed, hash_std_list_dogen_yarn_name(v.model_dependencies()));
+    combine(seed, hash_std_list_dogen_yarn_name(v.registrar_dependencies()));
 
     return seed;
 }

@@ -113,7 +113,6 @@ private:
         const dogen::formatters::file_properties_workflow& fpwf,
         const formatters::container& fc,
         const settings::streaming_settings_repository& ssrp,
-        settings::element_settings_repository& esrp,
         const yarn::model& m) const;
 
     /**

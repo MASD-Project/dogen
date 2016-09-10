@@ -51,6 +51,7 @@ populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
     v.leaves(create_std_list_dogen_yarn_name(position + 0));
     v.model_dependencies(create_std_list_dogen_yarn_name(position + 1));
+    v.registrar_dependencies(create_std_list_dogen_yarn_name(position + 2));
 }
 
 registrar_generator::result_type

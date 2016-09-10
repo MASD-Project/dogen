@@ -44,7 +44,6 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
 
     test_hashing<properties::cmakelists_info_generator>();
     test_hashing<properties::odb_options_info_generator>();
-    test_hashing<properties::registrar_info_generator>();
     test_hashing<fabric::registrar_generator>();
  }
 

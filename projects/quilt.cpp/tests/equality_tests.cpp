@@ -44,7 +44,6 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
 
     test_equality<properties::cmakelists_info_generator>();
     test_equality<properties::odb_options_info_generator>();
-    test_equality<properties::registrar_info_generator>();
     test_equality<fabric::registrar_generator>();
 }
 

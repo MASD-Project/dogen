@@ -52,7 +52,6 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
 
     roundtrip_type<properties::cmakelists_info_generator>();
     roundtrip_type<properties::odb_options_info_generator>();
-    roundtrip_type<properties::registrar_info_generator>();
     roundtrip_type<fabric::registrar_generator>();
 
     boost::shared_ptr<dogen::yarn::element> el(

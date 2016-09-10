@@ -48,7 +48,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.formatters.factory"));
 
 const std::string namespace_separator("::");
-const std::string registrar_name("registrar");
 const std::string cmakelists_name("CMakeLists.txt");
 const std::string odb_options_name("options.odb");
 const std::string settings_not_found_for_formatter(
@@ -138,86 +137,6 @@ bool factory::is_enabled(const formatter_properties_repository& fprp,
                 settings_not_found_for_formatter + formatter_name));
     }
     return j->second.enabled();
-}
-
-std::shared_ptr<formattable> factory::make_registrar_info(
-    const config::cpp_options& /*opts*/,
-    const settings::element_settings_repository& esrp,
-    const std::unordered_map<std::string, settings::path_settings>& /*ps*/,
-    formatter_properties_repository& /*fprp*/,
-    const yarn::model& m) const {
-
-    const auto n(create_name(m.name(), registrar_name));
-    BOOST_LOG_SEV(lg, debug) << "Making registrar: " << n.id();
-
-    name_builder b;
-    auto r(std::make_shared<registrar_info>());
-    r->namespaces(b.namespace_list(n));
-    r->id(n.id());
-
-    const auto i(esrp.by_id().find(n.id()));
-    if (i == esrp.by_id().end()) {
-        const auto id(n.id());
-        BOOST_LOG_SEV(lg, error) << element_settings_not_found_for_name << id;
-        BOOST_THROW_EXCEPTION(
-            building_error(element_settings_not_found_for_name + id));
-    }
-
-    for (const auto& pair : m.references()) {
-        if (pair.second != yarn::origin_types::system) {
-            /* we want the model name to contribute to the list of
-             * namespaces so we must disable model name detection.
-             */
-            const bool detect_model_name(false);
-            const auto l(b.namespace_list(pair.first, detect_model_name));
-            const auto s(boost::algorithm::join(l, namespace_separator));
-            r->model_dependencies().push_back(s);
-        }
-    }
-
-    for (const auto& l : m.leaves())
-        r->leaves().push_back(b.qualified_name(l));
-    r->leaves().sort();
-/*
-    const auto lambda([&](const std::string& src, const std::string& dst) {
-            const auto cloned_ps(clone_path_settings(ps, src, dst));
-            const auto pd(create_path_derivatives(opts, m, cloned_ps, n, dst));
-
-            formatter_properties r;
-            r.file_path(pd.file_path());
-            r.header_guard(pd.header_guard());
-            r.enabled(is_enabled(fprp, m.name(), src));
-            return r;
-        });
-
-    using formatters::serialization::traits;
-    const auto ch_fn(traits::class_header_formatter_name());
-    const auto rh_fn(traits::registrar_header_formatter_name());
-    const auto fp1(lambda(ch_fn, rh_fn));
-    fprp.by_id()[r->id()][rh_fn] = fp1;
-
-    const auto ci_fn(traits::class_implementation_formatter_name());
-    const auto ri_fn(traits::registrar_implementation_formatter_name());
-    auto fp2(lambda(ci_fn, ri_fn));
-
-    const auto j(fprp.by_id().find(n.id()));
-    if (j == fprp.by_id().end()) {
-        const auto id(n.id());
-        BOOST_LOG_SEV(lg, error) << properties_not_found << id;
-        BOOST_THROW_EXCEPTION(building_error(properties_not_found + id));
-    }
-
-    const auto k(j->second.find(ri_fn));
-    if (k == j->second.end()) {
-        BOOST_LOG_SEV(lg, error) << settings_not_found_for_formatter << ri_fn;
-        BOOST_THROW_EXCEPTION(building_error(
-                settings_not_found_for_formatter + ri_fn));
-    }
-    fp2.inclusion_dependencies(k->second.inclusion_dependencies());
-    fprp.by_id()[r->id()][ri_fn] = fp2;
-*/
-    BOOST_LOG_SEV(lg, debug) << "Made registrar: " << n.id();
-    return r;
 }
 
 std::forward_list<std::shared_ptr<formattable> > factory::

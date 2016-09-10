@@ -34,7 +34,6 @@
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/properties/registrar_info.hpp"
 #include "dogen/quilt.cpp/types/properties/cmakelists_info.hpp"
 #include "dogen/quilt.cpp/types/properties/odb_options_info.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository.hpp"
@@ -67,13 +66,6 @@ private:
         const yarn::name& n, const std::string& formatter_name) const;
 
 public:
-    std::shared_ptr<formattable> make_registrar_info(
-        const config::cpp_options& opts,
-        const settings::element_settings_repository& esrp,
-        const std::unordered_map<std::string, settings::path_settings>& ps,
-        formatter_properties_repository& fprp,
-        const yarn::model& m) const;
-
     std::forward_list<std::shared_ptr<formattable> > make_cmakelists(
         const config::cpp_options& opts,
         const dogen::formatters::file_properties_workflow& fpwf,

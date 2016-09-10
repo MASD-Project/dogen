@@ -109,7 +109,6 @@ private:
     std::forward_list<std::shared_ptr<properties::formattable> >
     from_factory_activity(const config::cpp_options& opts,
         const dogen::formatters::file_properties_workflow& fpwf,
-        settings::element_settings_repository& esrp,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         formatter_properties_repository& fprp,
         const yarn::model& m) const;
@@ -137,7 +136,6 @@ public:
         const dogen::formatters::file_properties_workflow& fpwf,
         const formatters::container& fc,
         const settings::streaming_settings_repository& ssrp,
-        settings::element_settings_repository& esrp,
         const yarn::model& m) const;
 };
 

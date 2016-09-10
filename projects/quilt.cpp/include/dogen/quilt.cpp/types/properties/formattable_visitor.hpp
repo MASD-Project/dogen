@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/properties/registrar_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/properties/cmakelists_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/properties/odb_options_info_fwd.hpp"
 #include "dogen/quilt.cpp/types/properties/forward_declarations_info_fwd.hpp"
@@ -71,16 +70,6 @@ public:
     virtual void visit(const dogen::quilt::cpp::properties::odb_options_info&) { }
     virtual void visit(dogen::quilt::cpp::properties::odb_options_info&) const { }
     virtual void visit(dogen::quilt::cpp::properties::odb_options_info&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::quilt::cpp::properties::registrar_info
-     */
-    /**@{*/
-    virtual void visit(const dogen::quilt::cpp::properties::registrar_info&) const { }
-    virtual void visit(const dogen::quilt::cpp::properties::registrar_info&) { }
-    virtual void visit(dogen::quilt::cpp::properties::registrar_info&) const { }
-    virtual void visit(dogen::quilt::cpp::properties::registrar_info&) { }
     /**@}*/
 };
 

@@ -45,10 +45,12 @@ namespace fabric {
 
 registrar::registrar(
     const std::list<dogen::yarn::name>& leaves,
-    const std::list<dogen::yarn::name>& model_dependencies)
+    const std::list<dogen::yarn::name>& model_dependencies,
+    const std::list<dogen::yarn::name>& registrar_dependencies)
     : dogen::yarn::element(),
       leaves_(leaves),
-      model_dependencies_(model_dependencies) { }
+      model_dependencies_(model_dependencies),
+      registrar_dependencies_(registrar_dependencies) { }
 
 void registrar::accept(const dogen::yarn::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
@@ -86,7 +88,8 @@ void registrar::to_stream(std::ostream& s) const {
     element::to_stream(s);
     s << ", "
       << "\"leaves\": " << leaves_ << ", "
-      << "\"model_dependencies\": " << model_dependencies_
+      << "\"model_dependencies\": " << model_dependencies_ << ", "
+      << "\"registrar_dependencies\": " << registrar_dependencies_
       << " }";
 }
 
@@ -96,6 +99,7 @@ void registrar::swap(registrar& other) noexcept {
     using std::swap;
     swap(leaves_, other.leaves_);
     swap(model_dependencies_, other.model_dependencies_);
+    swap(registrar_dependencies_, other.registrar_dependencies_);
 }
 
 bool registrar::equals(const dogen::yarn::element& other) const {
@@ -107,7 +111,8 @@ bool registrar::equals(const dogen::yarn::element& other) const {
 bool registrar::operator==(const registrar& rhs) const {
     return element::compare(rhs) &&
         leaves_ == rhs.leaves_ &&
-        model_dependencies_ == rhs.model_dependencies_;
+        model_dependencies_ == rhs.model_dependencies_ &&
+        registrar_dependencies_ == rhs.registrar_dependencies_;
 }
 
 registrar& registrar::operator=(registrar other) {
@@ -146,6 +151,22 @@ void registrar::model_dependencies(const std::list<dogen::yarn::name>& v) {
 
 void registrar::model_dependencies(const std::list<dogen::yarn::name>&& v) {
     model_dependencies_ = std::move(v);
+}
+
+const std::list<dogen::yarn::name>& registrar::registrar_dependencies() const {
+    return registrar_dependencies_;
+}
+
+std::list<dogen::yarn::name>& registrar::registrar_dependencies() {
+    return registrar_dependencies_;
+}
+
+void registrar::registrar_dependencies(const std::list<dogen::yarn::name>& v) {
+    registrar_dependencies_ = v;
+}
+
+void registrar::registrar_dependencies(const std::list<dogen::yarn::name>&& v) {
+    registrar_dependencies_ = std::move(v);
 }
 
 } } } }

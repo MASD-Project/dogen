@@ -113,11 +113,10 @@ workflow::create_properties(
     const dogen::formatters::file_properties_workflow& fpwf,
     const formatters::container& fc,
     const settings::streaming_settings_repository& ssrp,
-    settings::element_settings_repository& esrp,
     const yarn::model& m) const {
 
     properties::workflow fw;
-    return fw.execute(opts, srp, root_object, fpwf, fc, ssrp, esrp, m);
+    return fw.execute(opts, srp, root_object, fpwf, fc, ssrp, m);
 }
 
 std::forward_list<boost::shared_ptr<yarn::element> >
@@ -197,7 +196,7 @@ workflow::generate(const config::knitting_options& ko,
     const auto& fc(formatters::workflow::registrar().formatter_container());
 
     const auto& cpp(ko.cpp());
-    const auto pair(create_properties(cpp, drp, ro, fpwf, fc, ssrp, esrp, m));
+    const auto pair(create_properties(cpp, drp, ro, fpwf, fc, ssrp, m));
     auto r(format(ssrp, esrp, pair.first, pair.second));
 
     const auto elements(extract_elements_as_list(m));

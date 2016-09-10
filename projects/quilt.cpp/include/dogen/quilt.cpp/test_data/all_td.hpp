@@ -36,7 +36,6 @@
 #include "dogen/quilt.cpp/test_data/settings/aspect_settings_td.hpp"
 #include "dogen/quilt.cpp/test_data/settings/helper_settings_td.hpp"
 #include "dogen/quilt.cpp/test_data/settings/opaque_settings_td.hpp"
-#include "dogen/quilt.cpp/test_data/properties/registrar_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/settings/element_settings_td.hpp"
 #include "dogen/quilt.cpp/test_data/properties/cmakelists_info_td.hpp"
 #include "dogen/quilt.cpp/test_data/fabric/forward_declarations_td.hpp"

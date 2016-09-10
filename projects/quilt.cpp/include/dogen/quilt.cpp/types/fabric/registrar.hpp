@@ -49,7 +49,8 @@ public:
 public:
     registrar(
         const std::list<dogen::yarn::name>& leaves,
-        const std::list<dogen::yarn::name>& model_dependencies);
+        const std::list<dogen::yarn::name>& model_dependencies,
+        const std::list<dogen::yarn::name>& registrar_dependencies);
 
 private:
     template<typename Archive>
@@ -89,6 +90,16 @@ public:
     void model_dependencies(const std::list<dogen::yarn::name>&& v);
     /**@}*/
 
+    /**
+     * @brief Registrars on other models this registrar depends on.
+     */
+    /**@{*/
+    const std::list<dogen::yarn::name>& registrar_dependencies() const;
+    std::list<dogen::yarn::name>& registrar_dependencies();
+    void registrar_dependencies(const std::list<dogen::yarn::name>& v);
+    void registrar_dependencies(const std::list<dogen::yarn::name>&& v);
+    /**@}*/
+
 public:
     bool operator==(const registrar& rhs) const;
     bool operator!=(const registrar& rhs) const {
@@ -105,6 +116,7 @@ public:
 private:
     std::list<dogen::yarn::name> leaves_;
     std::list<dogen::yarn::name> model_dependencies_;
+    std::list<dogen::yarn::name> registrar_dependencies_;
 };
 
 } } } }

@@ -36,7 +36,6 @@
 #include "dogen/quilt.cpp/io/settings/aspect_settings_io.hpp"
 #include "dogen/quilt.cpp/io/settings/helper_settings_io.hpp"
 #include "dogen/quilt.cpp/io/settings/opaque_settings_io.hpp"
-#include "dogen/quilt.cpp/io/properties/registrar_info_io.hpp"
 #include "dogen/quilt.cpp/io/settings/element_settings_io.hpp"
 #include "dogen/quilt.cpp/io/properties/cmakelists_info_io.hpp"
 #include "dogen/quilt.cpp/io/fabric/forward_declarations_io.hpp"

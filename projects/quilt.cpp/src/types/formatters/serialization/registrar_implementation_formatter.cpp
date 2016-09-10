@@ -72,7 +72,7 @@ provider::provide(const properties::inclusion_dependencies_builder_factory& f,
 
     const auto ch_fn(traits::class_header_formatter_name());
     builder.add(rg.leaves(), ch_fn);
-    builder.add(rg.model_dependencies(), ch_fn);
+    builder.add(rg.registrar_dependencies(), ch_fn);
     return builder.build();
 }
 

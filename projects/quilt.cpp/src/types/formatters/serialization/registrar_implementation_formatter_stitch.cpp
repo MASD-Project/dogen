@@ -44,7 +44,7 @@ a.stream() << std::endl;
 a.stream() << "template<typename Archive>" << std::endl;
 a.stream() << "void register_types(Archive&" << arg_name << ") {" << std::endl;
             if (has_types) {
-                for (const auto d : deps) {
+                for (const auto& d : deps) {
                     const auto dqn(a.get_qualified_name(d));
 a.stream() << "    " << dqn << "::register_types(ar);" << std::endl;
                 }

@@ -69,7 +69,6 @@
 #include "dogen/quilt.cpp/types/formatters/building_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/initializer.hpp"
 #include "dogen/quilt.cpp/types/properties/building_error.hpp"
-#include "dogen/quilt.cpp/types/properties/registrar_info.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings.hpp"
 #include "dogen/quilt.cpp/types/formatters/context_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/initializer.hpp"

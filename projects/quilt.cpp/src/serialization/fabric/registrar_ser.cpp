@@ -47,6 +47,7 @@ void save(Archive& ar,
 
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("model_dependencies", v.model_dependencies_);
+    ar << make_nvp("registrar_dependencies", v.registrar_dependencies_);
 }
 
 template<typename Archive>
@@ -57,6 +58,7 @@ void load(Archive& ar,
 
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("model_dependencies", v.model_dependencies_);
+    ar >> make_nvp("registrar_dependencies", v.registrar_dependencies_);
 }
 
 } }
