@@ -18,7 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::yarn::element>& lhs,
+const boost::shared_ptr<dogen::yarn::element>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
 
 namespace dogen {
 namespace yarn {
@@ -43,6 +53,7 @@ intermediate_model::intermediate_model(
     const std::unordered_map<std::string, dogen::yarn::object>& objects,
     const std::unordered_map<std::string, dogen::yarn::exception>& exceptions,
     const std::unordered_map<std::string, dogen::yarn::visitor>& visitors,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& injected_elements,
     const bool is_target,
     const bool has_generatable_types,
     const dogen::yarn::indices& indices)
@@ -59,6 +70,7 @@ intermediate_model::intermediate_model(
       objects_(objects),
       exceptions_(exceptions),
       visitors_(visitors),
+      injected_elements_(injected_elements),
       is_target_(is_target),
       has_generatable_types_(has_generatable_types),
       indices_(indices) { }
@@ -78,6 +90,7 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
     swap(objects_, other.objects_);
     swap(exceptions_, other.exceptions_);
     swap(visitors_, other.visitors_);
+    swap(injected_elements_, other.injected_elements_);
     swap(is_target_, other.is_target_);
     swap(has_generatable_types_, other.has_generatable_types_);
     swap(indices_, other.indices_);
@@ -97,6 +110,7 @@ bool intermediate_model::operator==(const intermediate_model& rhs) const {
         objects_ == rhs.objects_ &&
         exceptions_ == rhs.exceptions_ &&
         visitors_ == rhs.visitors_ &&
+        injected_elements_ == rhs.injected_elements_ &&
         is_target_ == rhs.is_target_ &&
         has_generatable_types_ == rhs.has_generatable_types_ &&
         indices_ == rhs.indices_;
@@ -298,6 +312,22 @@ void intermediate_model::visitors(const std::unordered_map<std::string, dogen::y
 
 void intermediate_model::visitors(const std::unordered_map<std::string, dogen::yarn::visitor>&& v) {
     visitors_ = std::move(v);
+}
+
+const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& intermediate_model::injected_elements() const {
+    return injected_elements_;
+}
+
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& intermediate_model::injected_elements() {
+    return injected_elements_;
+}
+
+void intermediate_model::injected_elements(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& v) {
+    injected_elements_ = v;
+}
+
+void intermediate_model::injected_elements(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >&& v) {
+    injected_elements_ = std::move(v);
 }
 
 bool intermediate_model::is_target() const {

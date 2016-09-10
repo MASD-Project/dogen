@@ -26,6 +26,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/shared_ptr.hpp>
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
@@ -34,6 +35,7 @@
 #include "dogen/yarn/serialization/module_ser.hpp"
 #include "dogen/yarn/serialization/object_ser.hpp"
 #include "dogen/yarn/serialization/concept_ser.hpp"
+#include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/indices_ser.hpp"
 #include "dogen/yarn/serialization/visitor_ser.hpp"
 #include "dogen/yarn/serialization/exception_ser.hpp"
@@ -63,6 +65,7 @@ void save(Archive& ar,
     ar << make_nvp("objects", v.objects_);
     ar << make_nvp("exceptions", v.exceptions_);
     ar << make_nvp("visitors", v.visitors_);
+    ar << make_nvp("injected_elements", v.injected_elements_);
     ar << make_nvp("is_target", v.is_target_);
     ar << make_nvp("has_generatable_types", v.has_generatable_types_);
     ar << make_nvp("indices", v.indices_);
@@ -85,6 +88,7 @@ void load(Archive& ar,
     ar >> make_nvp("objects", v.objects_);
     ar >> make_nvp("exceptions", v.exceptions_);
     ar >> make_nvp("visitors", v.visitors_);
+    ar >> make_nvp("injected_elements", v.injected_elements_);
     ar >> make_nvp("is_target", v.is_target_);
     ar >> make_nvp("has_generatable_types", v.has_generatable_types_);
     ar >> make_nvp("indices", v.indices_);

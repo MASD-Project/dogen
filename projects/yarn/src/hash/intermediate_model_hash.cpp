@@ -22,6 +22,7 @@
 #include "dogen/yarn/hash/module_hash.hpp"
 #include "dogen/yarn/hash/object_hash.hpp"
 #include "dogen/yarn/hash/concept_hash.hpp"
+#include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/yarn/hash/indices_hash.hpp"
 #include "dogen/yarn/hash/visitor_hash.hpp"
 #include "dogen/yarn/hash/exception_hash.hpp"
@@ -119,6 +120,21 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_visitor(const st
     return seed;
 }
 
+inline std::size_t hash_boost_shared_ptr_dogen_yarn_element(const boost::shared_ptr<dogen::yarn::element>& v) {
+    std::size_t seed(0);
+    combine(seed, *v);
+    return seed;
+}
+
+inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, hash_boost_shared_ptr_dogen_yarn_element(i.second));
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -140,6 +156,7 @@ std::size_t intermediate_model_hasher::hash(const intermediate_model& v) {
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_object(v.objects()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_exception(v.exceptions()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_visitor(v.visitors()));
+    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(v.injected_elements()));
     combine(seed, v.is_target());
     combine(seed, v.has_generatable_types());
     combine(seed, v.indices());

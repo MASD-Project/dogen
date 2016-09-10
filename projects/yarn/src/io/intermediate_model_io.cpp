@@ -25,6 +25,7 @@
 #include "dogen/yarn/io/module_io.hpp"
 #include "dogen/yarn/io/object_io.hpp"
 #include "dogen/yarn/io/concept_io.hpp"
+#include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/indices_io.hpp"
 #include "dogen/yarn/io/visitor_io.hpp"
 #include "dogen/yarn/io/exception_io.hpp"
@@ -199,6 +200,40 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::yarn::element>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace yarn {
 
@@ -224,6 +259,7 @@ std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
       << "\"objects\": " << v.objects() << ", "
       << "\"exceptions\": " << v.exceptions() << ", "
       << "\"visitors\": " << v.visitors() << ", "
+      << "\"injected_elements\": " << v.injected_elements() << ", "
       << "\"is_target\": " << v.is_target() << ", "
       << "\"has_generatable_types\": " << v.has_generatable_types() << ", "
       << "\"indices\": " << v.indices()

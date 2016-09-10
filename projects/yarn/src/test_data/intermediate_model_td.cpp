@@ -23,6 +23,7 @@
 #include "dogen/yarn/test_data/module_td.hpp"
 #include "dogen/yarn/test_data/object_td.hpp"
 #include "dogen/yarn/test_data/concept_td.hpp"
+#include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/indices_td.hpp"
 #include "dogen/yarn/test_data/visitor_td.hpp"
 #include "dogen/yarn/test_data/exception_td.hpp"
@@ -162,6 +163,26 @@ std::unordered_map<std::string, dogen::yarn::visitor> create_std_unordered_map_s
     return r;
 }
 
+dogen::yarn::element*
+create_dogen_yarn_element_ptr(const unsigned int position) {
+    return dogen::yarn::element_generator::create_ptr(position);
+}
+
+boost::shared_ptr<dogen::yarn::element>
+create_boost_shared_ptr_dogen_yarn_element(unsigned int position) {
+    boost::shared_ptr<dogen::yarn::element> r(
+        create_dogen_yarn_element_ptr(position));
+    return r;
+}
+
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> > create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(unsigned int position) {
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> > r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_dogen_yarn_element(position + i)));
+    }
+    return r;
+}
+
 bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
@@ -193,9 +214,10 @@ populate(const unsigned int position, result_type& v) {
     v.objects(create_std_unordered_map_std_string_dogen_yarn_object(position + 10));
     v.exceptions(create_std_unordered_map_std_string_dogen_yarn_exception(position + 11));
     v.visitors(create_std_unordered_map_std_string_dogen_yarn_visitor(position + 12));
-    v.is_target(create_bool(position + 13));
-    v.has_generatable_types(create_bool(position + 14));
-    v.indices(create_dogen_yarn_indices(position + 15));
+    v.injected_elements(create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(position + 13));
+    v.is_target(create_bool(position + 14));
+    v.has_generatable_types(create_bool(position + 15));
+    v.indices(create_dogen_yarn_indices(position + 16));
 }
 
 intermediate_model_generator::result_type

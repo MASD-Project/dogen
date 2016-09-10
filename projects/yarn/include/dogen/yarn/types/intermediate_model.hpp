@@ -29,6 +29,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
+#include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/object.hpp"
@@ -38,6 +39,7 @@
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/types/exception.hpp"
 #include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/element_fwd.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
 #include "dogen/yarn/types/generation_types.hpp"
@@ -73,6 +75,7 @@ public:
         const std::unordered_map<std::string, dogen::yarn::object>& objects,
         const std::unordered_map<std::string, dogen::yarn::exception>& exceptions,
         const std::unordered_map<std::string, dogen::yarn::visitor>& visitors,
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& injected_elements,
         const bool is_target,
         const bool has_generatable_types,
         const dogen::yarn::indices& indices);
@@ -213,6 +216,11 @@ public:
     void visitors(const std::unordered_map<std::string, dogen::yarn::visitor>&& v);
     /**@}*/
 
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& injected_elements() const;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& injected_elements();
+    void injected_elements(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& v);
+    void injected_elements(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >&& v);
+
     /**
      * @brief If true, this intermediate model is the target model.
      */
@@ -258,6 +266,7 @@ private:
     std::unordered_map<std::string, dogen::yarn::object> objects_;
     std::unordered_map<std::string, dogen::yarn::exception> exceptions_;
     std::unordered_map<std::string, dogen::yarn::visitor> visitors_;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> > injected_elements_;
     bool is_target_;
     bool has_generatable_types_;
     dogen::yarn::indices indices_;
