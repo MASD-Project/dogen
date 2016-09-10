@@ -41,7 +41,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(id));
 
 const std::string dot(".");
-const std::string model_module_not_found("Model module not found for model: ");
 
 }
 
@@ -50,21 +49,6 @@ namespace quilt {
 namespace cpp {
 
 workflow::~workflow() noexcept { }
-
-dynamic::object workflow::obtain_root_object(
-    const yarn::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Obtaining model's root object.";
-
-    const auto i(m.elements().find(m.name().id()));
-    if (i == m.elements().end()) {
-        const auto id(m.name().id());
-        BOOST_LOG_SEV(lg, error) << model_module_not_found << id;
-        BOOST_THROW_EXCEPTION(workflow_error(model_module_not_found + id));
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Obtained model's root object.";
-    return i->second->extensions();
-}
 
 dogen::formatters::repository workflow::create_formatters_repository(
     const std::forward_list<boost::filesystem::path>& dirs) const {
@@ -120,11 +104,13 @@ workflow::create_properties(
 }
 
 std::forward_list<boost::shared_ptr<yarn::element> >
-workflow::extract_elements_as_list(const yarn::model& m) const {
+workflow::extract_generatable_elements(const yarn::model& m) const {
     std::forward_list<boost::shared_ptr<yarn::element> > r;
 
+    // for (const auto& e : m.elements()) {
     for (const auto& pair : m.elements()) {
         const auto e(pair.second);
+
         if (e->generation_type() != yarn::generation_types::no_generation)
             r.push_front(e);
     }
@@ -159,7 +145,7 @@ std::string workflow::name() const {
 std::forward_list<boost::filesystem::path>
 workflow::managed_directories(const config::knitting_options& ko,
     const dynamic::repository& rp, const yarn::model& m) const {
-    const auto ro(obtain_root_object(m));
+    const auto ro(m.root_module().extensions());
     settings::directory_names_settings_factory f(rp);
     const auto dn(f.make(ro));
     const auto& mm(m.name().location().model_modules());
@@ -185,7 +171,7 @@ workflow::generate(const config::knitting_options& ko,
     const auto dirs(std::forward_list<boost::filesystem::path> { dir });
     const auto frp(create_formatters_repository(dirs));
 
-    const auto ro(obtain_root_object(m));
+    const auto ro(m.root_module().extensions());
     const auto fpwf(create_file_properties_workflow(drp, frp, ro));
 
     const auto osb(create_opaque_settings_builder(drp));
@@ -199,7 +185,7 @@ workflow::generate(const config::knitting_options& ko,
     const auto pair(create_properties(cpp, drp, ro, fpwf, fc, ssrp, m));
     auto r(format(ssrp, esrp, pair.first, pair.second));
 
-    const auto elements(extract_elements_as_list(m));
+    const auto elements(extract_generatable_elements(m));
     auto ye(format_yarn(ssrp, esrp, pair.first, elements));
     r.splice_after(r.before_begin(), ye);
 

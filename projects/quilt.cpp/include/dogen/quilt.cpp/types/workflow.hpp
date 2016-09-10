@@ -61,12 +61,6 @@ public:
 
 private:
     /**
-     * @brief Returns the root object.
-     */
-    dynamic::object obtain_root_object(const yarn::model& m) const;
-
-private:
-    /**
      * @brief Creates the formatters' repository.
      */
     dogen::formatters::repository create_formatters_repository(
@@ -116,10 +110,10 @@ private:
         const yarn::model& m) const;
 
     /**
-     * @brief Flattens the model into a list.
+     * @brief Returns only the generatable elements.
      */
     std::forward_list<boost::shared_ptr<yarn::element> >
-    extract_elements_as_list(const yarn::model& m) const;
+    extract_generatable_elements(const yarn::model& m) const;
 
     /**
      * @brief Create the files.
