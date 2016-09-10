@@ -135,8 +135,8 @@ workflow::from_transformer_activity(const yarn::model& m) const {
 
     transformer t;
     generator g(t);
-    for (const auto& pair : m.elements()) {
-        const auto& e(*pair.second);
+    for (const auto& ptr : m.elements()) {
+        const auto& e(*ptr);
         e.accept(g);
     }
 

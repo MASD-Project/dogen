@@ -106,11 +106,12 @@ path_derivatives_repository path_derivatives_repository_factory::make(
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
     const path_derivatives_factory f(opts, m, ps);
     generator g(f);
-    for (const auto& pair : m.elements()) {
-        const auto& e(*pair.second);
+    for (const auto& ptr : m.elements()) {
+        const auto& e(*ptr);
         e.accept(g);
     }
     const auto r(g.result());
+
     BOOST_LOG_SEV(lg, debug) << "Finished workflow. Result: " << r;
 
     return r;

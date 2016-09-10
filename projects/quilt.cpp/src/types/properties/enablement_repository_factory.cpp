@@ -155,8 +155,8 @@ enablement_repository enablement_repository_factory::make(
     const auto gep(obtain_global_properties(fd, root_object));
     const enablement_factory f(rp, fc, gep);
     generator g(f);
-    for (const auto& pair : m.elements()) {
-        const auto& e(*pair.second);
+    for (const auto& ptr : m.elements()) {
+        const auto& e(*ptr);
         e.accept(g);
     }
     auto r(g.result());

@@ -127,11 +127,12 @@ make(const opaque_settings_builder& osb, const yarn::model& m) const {
 
     const element_settings_factory f(osb);
     generator g(f, osb);
-    for (const auto& pair : m.elements()) {
-        const auto& e(*pair.second);
+    for (const auto& ptr : m.elements()) {
+        const auto& e(*ptr);
         e.accept(g);
     }
     auto r(g.result());
+
     BOOST_LOG_SEV(lg, debug) << "Finished creating element settings repository."
                              << r;
     return r;

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <unordered_set>
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
@@ -47,12 +48,14 @@ public:
 private:
     void add(boost::shared_ptr<element> e) {
         const auto id(e->name().id());
-        const auto r(result_.elements().insert(std::make_pair(id, e)));
-        if (!r.second) {
+        const auto i(processed_ids_.find(id));
+        if (i != processed_ids_.end()) {
             BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << id;
             BOOST_THROW_EXCEPTION(
                 transformation_error(duplicate_qualified_name + id));
         }
+        processed_ids_.insert(id);
+        result_.elements().push_back(e);
     }
 
     template<typename Element>
@@ -79,6 +82,7 @@ public:
 
 private:
     model& result_;
+    std::unordered_set<std::string> processed_ids_;
 };
 
 }

@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
 #include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/model_td.hpp"
 #include "dogen/yarn/test_data/module_td.hpp"
@@ -29,12 +28,6 @@ namespace {
 dogen::yarn::name
 create_dogen_yarn_name(const unsigned int position) {
     return dogen::yarn::name_generator::create(position);
-}
-
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
 }
 
 dogen::yarn::element*
@@ -49,10 +42,10 @@ create_boost_shared_ptr_dogen_yarn_element(unsigned int position) {
     return r;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> > create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(unsigned int position) {
-    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> > r;
+std::list<boost::shared_ptr<dogen::yarn::element> > create_std_list_boost_shared_ptr_dogen_yarn_element(unsigned int position) {
+    std::list<boost::shared_ptr<dogen::yarn::element> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_dogen_yarn_element(position + i)));
+        r.push_back(create_boost_shared_ptr_dogen_yarn_element(position + i));
     }
     return r;
 }
@@ -76,7 +69,7 @@ model_generator::model_generator() : position_(0) { }
 void model_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_yarn_name(position + 0));
-    v.elements(create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(position + 1));
+    v.elements(create_std_list_boost_shared_ptr_dogen_yarn_element(position + 1));
     v.root_module(create_dogen_yarn_module(position + 2));
     v.has_generatable_types(create_bool(position + 3));
 }

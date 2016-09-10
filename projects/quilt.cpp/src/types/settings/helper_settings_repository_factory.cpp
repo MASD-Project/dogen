@@ -42,8 +42,8 @@ make(const dynamic::repository& rp, const yarn::model& m) const {
 
     helper_settings_repository r;
     helper_settings_factory f(rp);
-    for (const auto& pair : m.elements()) {
-        const auto& e(*pair.second);
+    for (const auto& ptr : m.elements()) {
+        const auto& e(*ptr);
         const auto hs(f.make(e.extensions()));
             r.by_id()[e.name().id()] = hs;
     }

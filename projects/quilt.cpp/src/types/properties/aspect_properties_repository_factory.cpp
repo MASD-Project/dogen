@@ -91,8 +91,8 @@ aspect_properties_repository aspect_properties_repository_factory::make(
 
     const aspect_properties_factory f(asrp);
     generator g(f);
-    for (const auto& pair : m.elements()) {
-        const auto& e(*pair.second);
+    for (const auto& ptr : m.elements()) {
+        const auto& e(*ptr);
         e.accept(g);
     }
 

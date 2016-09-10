@@ -124,8 +124,8 @@ helper_properties_repository_factory::make(
 
     const helper_properties_factory f(fff, hsrp, ssrp);
     generator g(f);
-    for (const auto& pair : m.elements()) {
-        const auto& e(*pair.second);
+    for (const auto& ptr : m.elements()) {
+        const auto& e(*ptr);
         e.accept(g);
     }
 

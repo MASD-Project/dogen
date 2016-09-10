@@ -42,8 +42,8 @@ make(const dynamic::repository& rp, const yarn::model& m) const {
 
     streaming_settings_repository r;
     streaming_settings_factory f(rp);
-    for (const auto& pair : m.elements()) {
-        const auto& e(*pair.second);
+    for (const auto& ptr : m.elements()) {
+        const auto& e(*ptr);
         const auto ss(f.make(e.extensions()));
         if (!ss)
             continue;

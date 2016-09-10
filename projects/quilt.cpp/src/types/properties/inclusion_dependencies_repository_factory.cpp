@@ -115,8 +115,8 @@ make(const inclusion_dependencies_builder_factory& bf, const container& c,
 
     const inclusion_dependencies_factory idf(bf, c);
     generator g(idf);
-    for (const auto& pair : m.elements()) {
-        const auto& e(*pair.second);
+    for (const auto& ptr : m.elements()) {
+        const auto& e(*ptr);
         e.accept(g);
     }
 

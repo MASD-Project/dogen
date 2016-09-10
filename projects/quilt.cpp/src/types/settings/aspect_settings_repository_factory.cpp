@@ -101,11 +101,12 @@ make(const dynamic::repository& rp, const yarn::model& m) const {
 
     const aspect_settings_factory f(rp);
     generator g(f);
-    for (const auto& pair : m.elements()) {
-        const auto& e(*pair.second);
+    for (const auto& ptr : m.elements()) {
+        const auto& e(*ptr);
         e.accept(g);
     }
     auto r(g.result());
+
     BOOST_LOG_SEV(lg, debug) << "Finished creating aspect settings repository."
                              << r;
     return r;

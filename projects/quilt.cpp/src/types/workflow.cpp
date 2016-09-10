@@ -107,10 +107,7 @@ std::forward_list<boost::shared_ptr<yarn::element> >
 workflow::extract_generatable_elements(const yarn::model& m) const {
     std::forward_list<boost::shared_ptr<yarn::element> > r;
 
-    // for (const auto& e : m.elements()) {
-    for (const auto& pair : m.elements()) {
-        const auto e(pair.second);
-
+    for (const auto& e : m.elements()) {
         if (e->generation_type() != yarn::generation_types::no_generation)
             r.push_front(e);
     }

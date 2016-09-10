@@ -75,8 +75,8 @@ path_derivatives_factory::path_derivatives_factory(
 std::unordered_set<std::string> path_derivatives_factory::
 module_ids(const yarn::model& m) const {
     module_id_collector c;
-    for (const auto& pair : m.elements()) {
-        const auto& e(*pair.second);
+    for (const auto& ptr : m.elements()) {
+        const auto& e(*ptr);
         e.accept(c);
     }
     return c.result();

@@ -13444,16 +13444,16 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O107">
       <dia:attribute name="obj_pos">
-        <dia:point val="-14,50"/>
+        <dia:point val="-9,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.05,49.95;13.5,55.25"/>
+        <dia:rectangle val="-9.05,49.95;10.03,55.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-14,50"/>
+        <dia:point val="-9,50"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.449999999999999"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -13551,7 +13551,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
             <dia:string>#elements#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;element&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;boost::shared_ptr&lt;element&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13734,7 +13734,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:point val="29.8,38.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-0.325,37.65;30.55,50.8"/>
+        <dia:rectangle val="0.44,37.65;30.55,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13742,8 +13742,8 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
       <dia:attribute name="orth_points">
         <dia:point val="29.8,38.4"/>
         <dia:point val="29.8,44"/>
-        <dia:point val="-0.275,44"/>
-        <dia:point val="-0.275,50"/>
+        <dia:point val="0.49,44"/>
+        <dia:point val="0.49,50"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -13802,17 +13802,17 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-14,55.2"/>
+        <dia:point val="-9,55.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.75,54.45;-0.315,66.8"/>
+        <dia:rectangle val="-9.75,54.45;-0.315,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-14,55.2"/>
-        <dia:point val="-14,61"/>
+        <dia:point val="-9,55.2"/>
+        <dia:point val="-9,61"/>
         <dia:point val="-0.515,61"/>
         <dia:point val="-0.515,66"/>
       </dia:attribute>
@@ -14518,7 +14518,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:point val="25,53.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.4,52.85;25.75,61.05"/>
+        <dia:rectangle val="9.93,52.85;25.75,61.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14526,8 +14526,8 @@ Leaves are types concrete types which have a parent.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="25,53.6"/>
         <dia:point val="25,61"/>
-        <dia:point val="13.45,61"/>
-        <dia:point val="13.45,55.2"/>
+        <dia:point val="9.98,61"/>
+        <dia:point val="9.98,55.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -23192,7 +23192,7 @@ that belong to the yarn model.#</dia:string>
         <dia:point val="140.6,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="139.85,3.35;160.417,13.8"/>
+        <dia:rectangle val="139.85,3.35;160.418,13.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23523,7 +23523,7 @@ that belong to the yarn model.#</dia:string>
         <dia:point val="122.22,4.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="116.95,3.45;122.97,14.6"/>
+        <dia:rectangle val="116.95,3.45;122.97,13.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
