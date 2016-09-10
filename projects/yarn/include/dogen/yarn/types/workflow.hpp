@@ -85,11 +85,6 @@ private:
      */
     model transform_intermediate_model(const intermediate_model& im) const;
 
-    /**
-     * @brief Injects any external types into the model.
-     */
-    void inject_model(model& m) const;
-
 public:
     model execute(const dynamic::repository& drp,
         const std::list<boost::filesystem::path>& dirs,

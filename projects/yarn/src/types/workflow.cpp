@@ -25,7 +25,6 @@
 #include "dogen/yarn/types/pre_merge_workflow.hpp"
 #include "dogen/yarn/types/post_merge_workflow.hpp"
 #include "dogen/yarn/types/transformer.hpp"
-#include "dogen/yarn/types/injection_expander.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
 #include "dogen/yarn/types/pre_merge_workflow.hpp"
 #include "dogen/yarn/types/workflow.hpp"
@@ -96,18 +95,13 @@ merge_intermediate_models(const std::list<intermediate_model>& im) const {
 void workflow::post_process_merged_intermediate_model(
     intermediate_model& im) const {
     post_merge_workflow w;
-    return w.execute(im);
+    return w.execute(injector_registrar_internal(), im);
 }
 
 model workflow::transform_intermediate_model(
     const intermediate_model& im) const {
     transformer t;
     return t.transform(im);
-}
-
-void workflow::inject_model(model& m) const {
-    injection_expander ex;
-    ex.expand(injector_registrar_internal(), m);
 }
 
 model workflow::execute(const dynamic::repository& drp,
@@ -118,7 +112,6 @@ model workflow::execute(const dynamic::repository& drp,
     auto mim(merge_intermediate_models(im));
     post_process_merged_intermediate_model(mim);
     auto r(transform_intermediate_model(mim));
-    inject_model(r);
 
     BOOST_LOG_SEV(lg, debug) << "Final model: " << r;
     return r;

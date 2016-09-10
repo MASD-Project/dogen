@@ -34,7 +34,8 @@ auto lg(logger_factory("yarn.injection_expander"));
 namespace dogen {
 namespace yarn {
 
-void injection_expander::expand(const injector_registrar& rg, model& m) {
+void injection_expander::
+expand(const injector_registrar& rg, intermediate_model& m) {
 
     BOOST_LOG_SEV(lg, debug) << "Performing injection expansion on: "
                              << m.name().id();

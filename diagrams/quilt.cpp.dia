@@ -37470,13 +37470,13 @@ main, or from another initialiser.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O296">
       <dia:attribute name="obj_pos">
-        <dia:point val="542,32"/>
+        <dia:point val="550,32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="541.95,31.95;552.082,36.45"/>
+        <dia:rectangle val="549.95,31.95;560.082,36.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="542,32"/>
+        <dia:point val="550,32"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.032500000000001"/>
@@ -37655,13 +37655,13 @@ an enumeration, false otherwise.#</dia:string>
         <dia:point val="527,19"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="526.95,18.95;536.405,22.65"/>
+        <dia:rectangle val="526.95,18.95;541.795,22.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="527,19"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.3550000000000004"/>
+        <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -37786,10 +37786,10 @@ an enumeration, false otherwise.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#m#</dia:string>
+                <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#yarn::model&amp;#</dia:string>
+                <dia:string>#yarn::intermediate_model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -37920,19 +37920,19 @@ an enumeration, false otherwise.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="536.355,22.6"/>
+        <dia:point val="541.745,22.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="535.605,21.85;547.216,32.8"/>
+        <dia:rectangle val="540.995,21.85;555.216,32.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="536.355,22.6"/>
-        <dia:point val="536.355,28"/>
-        <dia:point val="547.016,28"/>
-        <dia:point val="547.016,32"/>
+        <dia:point val="541.745,22.6"/>
+        <dia:point val="541.745,28"/>
+        <dia:point val="555.016,28"/>
+        <dia:point val="555.016,32"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -38137,7 +38137,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:point val="551.753,19"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="531.627,13.25;552.503,19.8"/>
+        <dia:rectangle val="534.322,13.25;552.503,19.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -38145,8 +38145,8 @@ an enumeration, false otherwise.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="551.753,19"/>
         <dia:point val="551.753,14"/>
-        <dia:point val="531.678,14"/>
-        <dia:point val="531.678,19"/>
+        <dia:point val="534.372,14"/>
+        <dia:point val="534.372,19"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -38169,13 +38169,13 @@ an enumeration, false otherwise.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O302">
       <dia:attribute name="obj_pos">
-        <dia:point val="513,41"/>
+        <dia:point val="518,41"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="512.95,40.95;555.13,43.85"/>
+        <dia:rectangle val="517.95,40.95;560.13,43.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="513,41"/>
+        <dia:point val="518,41"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="42.079999999999998"/>
@@ -38340,19 +38340,19 @@ an enumeration, false otherwise.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="531.678,22.6"/>
+        <dia:point val="534.372,22.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="530.928,21.85;534.24,41.8"/>
+        <dia:rectangle val="533.622,21.85;539.24,41.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="531.678,22.6"/>
-        <dia:point val="531.678,28"/>
-        <dia:point val="534.04,28"/>
-        <dia:point val="534.04,41"/>
+        <dia:point val="534.372,22.6"/>
+        <dia:point val="534.372,28"/>
+        <dia:point val="539.04,28"/>
+        <dia:point val="539.04,41"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -38379,13 +38379,13 @@ an enumeration, false otherwise.#</dia:string>
         <dia:point val="514,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="513.95,53.95;537.265,58.45"/>
+        <dia:rectangle val="513.95,53.95;541.5,58.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="514,54"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.215"/>
+        <dia:real val="27.449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -38527,10 +38527,10 @@ an enumeration, false otherwise.#</dia:string>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#m#</dia:string>
+                <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#yarn::model&amp;#</dia:string>
+                <dia:string>#yarn::intermediate_model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -38589,19 +38589,19 @@ an enumeration, false otherwise.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="525.607,54"/>
+        <dia:point val="527.725,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="524.857,43.75;534.24,54.8"/>
+        <dia:rectangle val="526.975,43.75;539.24,54.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="525.607,54"/>
-        <dia:point val="525.607,48.55"/>
-        <dia:point val="534.04,48.55"/>
-        <dia:point val="534.04,43.8"/>
+        <dia:point val="527.725,54"/>
+        <dia:point val="527.725,48.55"/>
+        <dia:point val="539.04,48.55"/>
+        <dia:point val="539.04,43.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -38627,13 +38627,13 @@ an enumeration, false otherwise.#</dia:string>
         <dia:point val="481,41"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="480.95,40.95;507.345,44.65"/>
+        <dia:rectangle val="480.95,40.95;512.735,44.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="481,41"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.294999999999998"/>
+        <dia:real val="31.685000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -38758,10 +38758,10 @@ an enumeration, false otherwise.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#m#</dia:string>
+                <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const model&amp;#</dia:string>
+                <dia:string>#const intermediate_model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -38820,17 +38820,17 @@ an enumeration, false otherwise.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="494.147,41"/>
+        <dia:point val="496.842,41"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="493.397,36.35;510.305,42.6"/>
+        <dia:rectangle val="496.092,36.35;510.305,42.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="494.147,41"/>
-        <dia:point val="494.147,38.35"/>
+        <dia:point val="496.842,41"/>
+        <dia:point val="496.842,38.35"/>
         <dia:point val="510.105,38.35"/>
         <dia:point val="510.105,36.4"/>
       </dia:attribute>

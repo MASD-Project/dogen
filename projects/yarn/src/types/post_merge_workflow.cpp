@@ -29,6 +29,7 @@
 #include "dogen/yarn/types/attributes_expander.hpp"
 #include "dogen/yarn/types/association_expander.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
+#include "dogen/yarn/types/injection_expander.hpp"
 #include "dogen/yarn/types/post_merge_workflow.hpp"
 
 using namespace dogen::utility::log;
@@ -125,7 +126,14 @@ update_model_generability(intermediate_model& im) const {
     im.has_generatable_types(has_generatable_types(im));
 }
 
-void post_merge_workflow::execute(intermediate_model& im) const {
+void post_merge_workflow::inject_model(const injector_registrar& rg,
+    intermediate_model& im) const {
+    injection_expander ex;
+    ex.expand(rg, im);
+}
+
+void post_merge_workflow::
+execute(const injector_registrar& rg, intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
 
     /*
@@ -160,6 +168,7 @@ void post_merge_workflow::execute(intermediate_model& im) const {
      */
     expand_associations(im);
     update_model_generability(im);
+    inject_model(rg, im);
 
     BOOST_LOG_SEV(lg, debug) << "Finished workflow.";
 }

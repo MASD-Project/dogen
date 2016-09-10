@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 
@@ -37,8 +37,8 @@ namespace fabric {
 
 class master_header_factory {
 public:
-    boost::shared_ptr<yarn::element>
-    build(const formatters::container& fc, const yarn::model& m) const;
+    boost::shared_ptr<yarn::element> build(const formatters::container& fc,
+        const yarn::intermediate_model& im) const;
 };
 
 } } } }

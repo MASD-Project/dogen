@@ -32,11 +32,11 @@ namespace yarn {
 
 class modules_expander {
 private:
-    void create_missing_modules(intermediate_model& m) const;
-    void expand_containing_module(intermediate_model& m) const;
+    void create_missing_modules(intermediate_model& im) const;
+    void expand_containing_module(intermediate_model& im) const;
 
 public:
-    void expand(intermediate_model& m) const;
+    void expand(intermediate_model& im) const;
 };
 
 } }

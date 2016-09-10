@@ -49,12 +49,12 @@ build(const yarn::name& model_name) const {
 }
 
 std::list<boost::shared_ptr<yarn::element>>
-registrar_factory::build(const yarn::model& m) const {
+registrar_factory::build(const yarn::intermediate_model& im) const {
     std::list<boost::shared_ptr<yarn::element>> r;
 
-    auto rg(build(m.name()));
+    auto rg(build(im.name()));
     rg->generation_type(yarn::generation_types::full_generation);
-    for (const auto& l : m.leaves())
+    for (const auto& l : im.leaves())
         rg->leaves().push_back(l);
 
     const auto lambda([](const yarn::name& a, const yarn::name& b) {
@@ -62,7 +62,7 @@ registrar_factory::build(const yarn::model& m) const {
         });
     rg->leaves().sort(lambda);
 
-    for (const auto& pair : m.references()) {
+    for (const auto& pair : im.references()) {
         const auto origin_type(pair.second);
         if (origin_type == yarn::origin_types::system)
             continue;

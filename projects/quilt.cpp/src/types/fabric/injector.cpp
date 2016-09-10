@@ -49,9 +49,9 @@ std::string injector::id() const {
 }
 
 void injector::add_element(const boost::shared_ptr<yarn::element>& e,
-    yarn::model& m) const {
+    yarn::intermediate_model& im) const {
     const auto id(e->name().id());
-    const auto pair(m.elements().insert(std::make_pair(id, e)));
+    const auto pair(im.injected_elements().insert(std::make_pair(id, e)));
     if (!pair.second) {
         using yarn::injection_error;
         BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << id;
@@ -61,28 +61,28 @@ void injector::add_element(const boost::shared_ptr<yarn::element>& e,
 
 void injector::
 add_elements(const std::list<boost::shared_ptr<yarn::element>>& elements,
-    yarn::model& m) const {
+    yarn::intermediate_model& im) const {
     for (auto& e : elements)
-        add_element(e, m);
+        add_element(e, im);
 }
 
-void injector::inject_registrar(yarn::model& m) const {
+void injector::inject_registrar(yarn::intermediate_model& im) const {
     registrar_factory f;
-    const auto elements(f.build(m));
-    add_elements(elements, m);
+    const auto elements(f.build(im));
+    add_elements(elements, im);
 }
 
-void injector::inject_master_headers(yarn::model& m) const {
+void injector::inject_master_headers(yarn::intermediate_model& im) const {
     const auto& rg(formatters::workflow::registrar());
     const auto& fc(rg.formatter_container());
     master_header_factory f;
-    const auto e(f.build(fc, m));
-    add_element(e, m);
+    const auto e(f.build(fc, im));
+    add_element(e, im);
 }
 
-void injector::inject(yarn::model& m) const {
-    inject_registrar(m);
-    inject_master_headers(m);
+void injector::inject(yarn::intermediate_model& im) const {
+    inject_registrar(im);
+    inject_master_headers(im);
 }
 
 } } } }

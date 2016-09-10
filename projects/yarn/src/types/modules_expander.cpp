@@ -47,13 +47,13 @@ private:
     void process(const name& n);
 
 public:
-    void operator()(dogen::yarn::module& m) { process(m.name()); }
-    void operator()(dogen::yarn::concept& c) { process(c.name()); }
-    void operator()(dogen::yarn::primitive& p) { process(p.name()); }
-    void operator()(dogen::yarn::enumeration& e) { process(e.name()); }
-    void operator()(dogen::yarn::object& o) { process(o.name()); }
-    void operator()(dogen::yarn::exception& e) { process(e.name()); }
-    void operator()(dogen::yarn::visitor& v) { process(v.name()); }
+    void operator()(yarn::module& m) { process(m.name()); }
+    void operator()(yarn::concept& c) { process(c.name()); }
+    void operator()(yarn::primitive& p) { process(p.name()); }
+    void operator()(yarn::enumeration& e) { process(e.name()); }
+    void operator()(yarn::object& o) { process(o.name()); }
+    void operator()(yarn::exception& e) { process(e.name()); }
+    void operator()(yarn::visitor& v) { process(v.name()); }
 
 public:
     const std::unordered_map<std::string, std::list<std::string>>&
@@ -80,20 +80,20 @@ const std::unordered_map<std::string, std::list<std::string>>&
 
 class updater {
 public:
-    updater(intermediate_model& m) : model_(m) { }
+    updater(intermediate_model& im) : model_(im) { }
 
 private:
     boost::optional<name> containing_module(const name& n);
     void update(element& e);
 
 public:
-    void operator()(dogen::yarn::module& m) { update(m); }
-    void operator()(dogen::yarn::concept& c) { update(c); }
-    void operator()(dogen::yarn::primitive& p) { update(p); }
-    void operator()(dogen::yarn::enumeration& e) { update(e); }
-    void operator()(dogen::yarn::object& o) { update(o); }
-    void operator()(dogen::yarn::exception& e) { update(e); }
-    void operator()(dogen::yarn::visitor& v) { update(v); }
+    void operator()(yarn::module& m) { update(m); }
+    void operator()(yarn::concept& c) { update(c); }
+    void operator()(yarn::primitive& p) { update(p); }
+    void operator()(yarn::enumeration& e) { update(e); }
+    void operator()(yarn::object& o) { update(o); }
+    void operator()(yarn::exception& e) { update(e); }
+    void operator()(yarn::visitor& v) { update(v); }
 
 public:
     intermediate_model& model_;
@@ -184,33 +184,33 @@ void updater::update(element& e) {
 
 }
 
-void modules_expander::create_missing_modules(intermediate_model& m) const {
+void modules_expander::create_missing_modules(intermediate_model& im) const {
     internal_modules_builder b;
-    yarn::elements_traversal(m, b);
+    yarn::elements_traversal(im, b);
 
     for (const auto& pair : b.result()) {
         yarn::name_factory f;
         const auto& ipp(pair.second);
-        const auto n(f.build_module_name(m.name(), ipp));
-        const auto i(m.modules().find(n.id()));
-        if (i == m.modules().end()) {
+        const auto n(f.build_module_name(im.name(), ipp));
+        const auto i(im.modules().find(n.id()));
+        if (i == im.modules().end()) {
             yarn::module mod;
             mod.name(n);
-            mod.origin_type(m.origin_type());
-            mod.generation_type(m.generation_type());
-            m.modules().insert(std::make_pair(n.id(), mod));
+            mod.origin_type(im.origin_type());
+            mod.generation_type(im.generation_type());
+            im.modules().insert(std::make_pair(n.id(), mod));
         }
     }
 }
 
-void modules_expander::expand_containing_module(intermediate_model& m) const {
-    updater g(m);
-    yarn::elements_traversal(m, g);
+void modules_expander::expand_containing_module(intermediate_model& im) const {
+    updater g(im);
+    yarn::elements_traversal(im, g);
 }
 
-void modules_expander::expand(intermediate_model& m) const {
-    create_missing_modules(m);
-    expand_containing_module(m);
+void modules_expander::expand(intermediate_model& im) const {
+    create_missing_modules(im);
+    expand_containing_module(im);
 }
 
 } }

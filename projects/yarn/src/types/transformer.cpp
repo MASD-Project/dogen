@@ -45,11 +45,9 @@ public:
     explicit generator(model& m) : result_(m) { }
 
 private:
-    template<typename Element>
-    void generate(const Element& e) {
-        const auto id(e.name().id());
-        const auto ptr(boost::make_shared<Element>(e));
-        const auto r(result_.elements().insert(std::make_pair(id, ptr)));
+    void add(boost::shared_ptr<element> e) {
+        const auto id(e->name().id());
+        const auto r(result_.elements().insert(std::make_pair(id, e)));
         if (!r.second) {
             BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << id;
             BOOST_THROW_EXCEPTION(
@@ -57,14 +55,24 @@ private:
         }
     }
 
+    template<typename Element>
+    void generate(const Element& e) { add(boost::make_shared<Element>(e)); }
+
 public:
-    void operator()(const dogen::yarn::module& m) { generate(m); }
-    void operator()(const dogen::yarn::concept& c) { generate(c); }
-    void operator()(const dogen::yarn::primitive& p) { generate(p); }
-    void operator()(const dogen::yarn::enumeration& e) { generate(e); }
-    void operator()(const dogen::yarn::object& o) { generate(o); }
-    void operator()(const dogen::yarn::exception& e) { generate(e); }
-    void operator()(const dogen::yarn::visitor& v) { generate(v); }
+    void operator()(const yarn::module& m) { generate(m); }
+    void operator()(const yarn::concept& c) { generate(c); }
+    void operator()(const yarn::primitive& p) { generate(p); }
+    void operator()(const yarn::enumeration& e) { generate(e); }
+    void operator()(const yarn::object& o) { generate(o); }
+    void operator()(const yarn::exception& e) { generate(e); }
+    void operator()(const yarn::visitor& v) { generate(v); }
+
+public:
+    void add_injected_elements(
+        const std::unordered_map<std::string, boost::shared_ptr<element>>& ie) {
+        for (const auto& pair : ie)
+            add(pair.second);
+    }
 
 public:
     const model& result() const { return result_; }
@@ -75,23 +83,24 @@ private:
 
 }
 
-model transformer::transform(const intermediate_model& m) const {
-    const auto i(m.modules().find(m.name().id()));
-    if (i == m.modules().end()) {
-        const auto id(m.name().id());
+model transformer::transform(const intermediate_model& im) const {
+    const auto i(im.modules().find(im.name().id()));
+    if (i == im.modules().end()) {
+        const auto id(im.name().id());
         BOOST_LOG_SEV(lg, error) << missing_root_module << id;
         BOOST_THROW_EXCEPTION(transformation_error(missing_root_module + id));
     }
 
     model r;
-    r.name(m.name());
+    r.name(im.name());
     r.root_module(i->second);
-    r.leaves(m.leaves());
-    r.references(m.references());
-    r.has_generatable_types(m.has_generatable_types());
+    r.leaves(im.leaves());
+    r.references(im.references());
+    r.has_generatable_types(im.has_generatable_types());
 
     generator g(r);
-    yarn::elements_traversal(m, g);
+    yarn::elements_traversal(im, g);
+    g.add_injected_elements(im.injected_elements());
 
     return r;
 }

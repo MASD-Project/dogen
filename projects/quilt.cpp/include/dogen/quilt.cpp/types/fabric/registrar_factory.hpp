@@ -27,7 +27,7 @@
 
 #include <list>
 #include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_fwd.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
@@ -44,7 +44,7 @@ private:
 
 public:
     std::list<boost::shared_ptr<yarn::element>>
-    build(const yarn::model& m) const;
+    build(const yarn::intermediate_model& im) const;
 };
 
 } } } }

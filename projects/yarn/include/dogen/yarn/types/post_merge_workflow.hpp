@@ -28,6 +28,7 @@
 #include <list>
 #include <utility>
 #include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/injector_registrar.hpp"
 #include "dogen/yarn/types/element.hpp"
 
 namespace dogen {
@@ -98,11 +99,17 @@ private:
      */
     void update_model_generability(intermediate_model& im) const;
 
+    /**
+     * @brief Injects any external types into the model.
+     */
+    void inject_model(const injector_registrar& rg,
+        intermediate_model& im) const;
+
 public:
     /**
      * @brief Executes the post-merge workflow.
      */
-    void execute(intermediate_model& im) const;
+    void execute(const injector_registrar& rg, intermediate_model& im) const;
 };
 
 } }

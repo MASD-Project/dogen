@@ -41,19 +41,19 @@ public:
 
 private:
     void add_element(const boost::shared_ptr<yarn::element>& e,
-        yarn::model& m) const;
+        yarn::intermediate_model& im) const;
 
     void add_elements(
         const std::list<boost::shared_ptr<yarn::element>>& elements,
-        yarn::model& m) const;
+        yarn::intermediate_model& im) const;
 
 private:
-    void inject_registrar(yarn::model& m) const;
-    void inject_master_headers(yarn::model& m) const;
+    void inject_registrar(yarn::intermediate_model& im) const;
+    void inject_master_headers(yarn::intermediate_model& im) const;
 
 public:
     std::string id() const override;
-    void inject(yarn::model& m) const override;
+    void inject(yarn::intermediate_model& im) const override;
 };
 
 } } } }

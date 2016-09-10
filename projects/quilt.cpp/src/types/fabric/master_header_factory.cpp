@@ -23,12 +23,13 @@
 #include <boost/make_shared.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/exception.hpp"
 #include "dogen/yarn/types/visitor.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
+#include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header_factory.hpp"
 
@@ -48,7 +49,7 @@ namespace fabric {
 
 namespace {
 
-class generator final : public element_visitor {
+class generator final {
 private:
     struct header_formatters_container {
         std::forward_list<
@@ -119,25 +120,31 @@ private:
     }
 
 public:
-    using element_visitor::visit;
-    void visit(const dogen::yarn::visitor& v) override {
-        process_element(container_.visitor_formatters, v);
+    void operator()(const yarn::concept&) {}
+    void operator()(const yarn::primitive&) {}
+    void operator()(const dogen::yarn::visitor& v) {
+        if (v.generation_type() != yarn::generation_types::no_generation)
+            process_element(container_.visitor_formatters, v);
     }
 
-    void visit(const dogen::yarn::enumeration& e) override  {
-        process_element(container_.enumeration_formatters, e);
+    void operator()(const yarn::enumeration& e) {
+        if (e.generation_type() != yarn::generation_types::no_generation)
+            process_element(container_.enumeration_formatters, e);
     }
 
-    void visit(const dogen::yarn::object& o) override {
-        process_element(container_.object_formatters, o);
+    void operator()(const yarn::object& o) {
+        if (o.generation_type() != yarn::generation_types::no_generation)
+            process_element(container_.object_formatters, o);
     }
 
-    void visit(const dogen::yarn::exception& e) override {
-        process_element(container_.exception_formatters, e);
+    void operator()(const yarn::exception& e) {
+        if (e.generation_type() != yarn::generation_types::no_generation)
+            process_element(container_.exception_formatters, e);
     }
 
-    void visit(const dogen::yarn::module& m) override {
-        if (!m.documentation().empty())
+    void operator()(const yarn::module& m) {
+        if (m.generation_type() != yarn::generation_types::no_generation &&
+            !m.documentation().empty())
             process_element(container_.module_formatters, m);
     }
 
@@ -151,15 +158,11 @@ private:
 
 }
 
-boost::shared_ptr<yarn::element> master_header_factory::
-build(const formatters::container& fc, const yarn::model& m) const {
-    generator g(m.name(), fc);
-    for (const auto& pair : m.elements()) {
-        const auto& e(*pair.second);
-        if (e.generation_type() == yarn::generation_types::no_generation)
-            continue;
-        e.accept(g);
-    }
+boost::shared_ptr<yarn::element>
+master_header_factory::build(const formatters::container& fc,
+    const yarn::intermediate_model& im) const {
+    generator g(im.name(), fc);
+    yarn::elements_traversal(im, g);
     return g.result();
 }
 
