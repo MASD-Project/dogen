@@ -53,7 +53,7 @@ public:
 
 public:
     using yarn::element_visitor::visit;
-    void visit(const dogen::yarn::object& o) override;
+    void visit(const yarn::object& o) override;
 
 public:
     const aspect_properties_repository& result() const { return result_; }

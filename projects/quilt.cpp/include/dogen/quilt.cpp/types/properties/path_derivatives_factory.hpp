@@ -51,6 +51,11 @@ public:
 
 private:
     /**
+     * @brief Retrieves the ids of all the modules in the model.
+     */
+    std::unordered_set<std::string> module_ids(const yarn::model& m) const;
+
+    /**
      * @brief Builds a relative path from the top-level include
      * directory for the supplied qualified name.
      */
@@ -88,6 +93,7 @@ private:
     const yarn::model& model_;
     const std::unordered_map<std::string, settings::path_settings>&
     path_settings_;
+    const std::unordered_set<std::string> module_ids_;
 };
 
 } } } }

@@ -12,36 +12,37 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-10 Sat 14:52]
+#+CAPTION: Clock summary at [2016-09-10 Sat 15:14]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *49:42* |       |      | 100.0 |
+| *Total time*                                                                | *50:03* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 49:42   |       |      | 100.0 |
-| Active                                                                      |         | 49:42 |      | 100.0 |
+| Stories                                                                     | 50:03   |       |      | 100.0 |
+| Active                                                                      |         | 50:03 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:57 |   1.9 |
 | COMPLETED Move readme to markdown                                           |         |       | 0:49 |   1.6 |
 | COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   1.0 |
-| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   4.8 |
-| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |   8.7 |
-| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  10.3 |
+| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   4.7 |
+| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |   8.6 |
+| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |  10.2 |
 | COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   3.3 |
 | COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   3.9 |
-| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   3.0 |
-| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |   9.9 |
+| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   2.9 |
+| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |   9.8 |
 | CANCELLED Pick-up Boost 1.61 from Debian Testing                            |         |       | 1:23 |   2.8 |
 | COMPLETED Allow cross model inheritance                                     |         |       | 1:09 |   2.3 |
-| COMPLETED Add support for visitor inheritance                               |         |       | 7:27 |  15.0 |
+| COMPLETED Add support for visitor inheritance                               |         |       | 7:27 |  14.9 |
 | COMPLETED Move visitor =accept= methods to cpp file                         |         |       | 0:41 |   1.4 |
 | COMPLETED Analysis work on implementing remaining yarn types                |         |       | 0:52 |   1.7 |
 | COMPLETED Split injector into separate classes                              |         |       | 0:56 |   1.9 |
 | COMPLETED Add injector interface and registrar                              |         |       | 1:02 |   2.1 |
 | COMPLETED Analysis: supporting multiple elements for one id                 |         |       | 1:12 |   2.4 |
 | COMPLETED Add language-specific element injection                           |         |       | 0:41 |   1.4 |
-| COMPLETED Implement includers in fabric                                     |         |       | 6:10 |  12.4 |
+| COMPLETED Implement includers in fabric                                     |         |       | 6:10 |  12.3 |
 | COMPLETED Quilt's formatter names are incorrect                             |         |       | 0:41 |   1.4 |
 | COMPLETED Implement registrar in fabric                                     |         |       | 3:27 |   6.9 |
+| STARTED Use a list in model rather than a map                               |         |       | 0:21 |   0.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -683,19 +684,22 @@ update the formatter names to match the yarn types.
 
 We need to move registrar info into fabric.
 
-*** Add test model sanitizer to test models target                    :story:
-
-At present if we build test models we don't seem to build the
-sanitizer.
-
-*** Use a list in model rather than a map                             :story:
+*** STARTED Use a list in model rather than a map                     :story:
+    CLOCK: [2016-09-10 Sat 14:53]--[2016-09-10 Sat 15:14] =>  0:21
 
 Tasks:
 
 - add index for modules to allow path derivatives to figure out the
-  modules.
-- update yarn model and remove flattening in =quilt.cpp=.
+  modules. Actually since no one else is using this, we should just
+  compute it on the fly for this class.
+- update yarn model and remove flattening in =quilt.cpp=. Although we
+  are also filtering with the flattening.
 - update all visitors in =quilt.cpp=.
+
+*** Add test model sanitizer to test models target                    :story:
+
+At present if we build test models we don't seem to build the
+sanitizer.
 
 *** Implement forward declarations in fabric                          :story:
 
