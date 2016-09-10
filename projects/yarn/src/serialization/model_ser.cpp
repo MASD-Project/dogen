@@ -28,14 +28,12 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/shared_ptr.hpp>
 #include <boost/serialization/unordered_map.hpp>
-#include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/yarn/serialization/model_ser.hpp"
 #include "dogen/yarn/serialization/module_ser.hpp"
 #include "dogen/yarn/serialization/element_ser.hpp"
-#include "dogen/yarn/serialization/origin_types_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -46,8 +44,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
     ar << make_nvp("elements", v.elements_);
-    ar << make_nvp("references", v.references_);
-    ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("root_module", v.root_module_);
     ar << make_nvp("has_generatable_types", v.has_generatable_types_);
 }
@@ -58,8 +54,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("elements", v.elements_);
-    ar >> make_nvp("references", v.references_);
-    ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("root_module", v.root_module_);
     ar >> make_nvp("has_generatable_types", v.has_generatable_types_);
 }

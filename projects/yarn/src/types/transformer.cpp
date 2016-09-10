@@ -94,8 +94,6 @@ model transformer::transform(const intermediate_model& im) const {
     model r;
     r.name(im.name());
     r.root_module(i->second);
-    r.leaves(im.leaves());
-    r.references(im.references());
     r.has_generatable_types(im.has_generatable_types());
 
     generator g(r);

@@ -26,7 +26,6 @@
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/building_error.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/io/properties/path_derivatives_repository_io.hpp"
@@ -39,7 +38,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "quilt.cpp.properties.path_derivatives_repository_factory"));
 
-const std::string registrar_name("registrar");
 const std::string duplicate_name("Duplicate name: ");
 
 }
@@ -58,7 +56,7 @@ class generator final : public fabric::element_visitor {
 public:
     generator(const path_derivatives_factory& f) : factory_(f) { }
 
-public:
+private:
     /**
      * @brief Generates all of the path derivatives for the formatters
      * and qualified name.
@@ -74,6 +72,7 @@ public:
     void visit(const yarn::object& o) override { generate(o.name()); }
     void visit(const yarn::exception& e) override { generate(e.name()); }
     void visit(const yarn::visitor& v) override { generate(v.name()); }
+    void visit(const fabric::registrar& rg) override { generate(rg.name()); }
     void visit(const fabric::master_header& mh) override {
         generate(mh.name());
     }
@@ -111,21 +110,6 @@ path_derivatives_repository path_derivatives_repository_factory::make(
         const auto& e(*pair.second);
         e.accept(g);
     }
-
-    yarn::name_factory nf;
-    const auto n(nf.build_element_in_model(m.name(), registrar_name));
-    g.generate(n);
-
-    for (const auto& pair : m.references()) {
-        const auto origin_type(pair.second);
-        if (origin_type == yarn::origin_types::system)
-            continue;
-
-        const auto ref(pair.first);
-        const auto n(nf.build_element_in_model(ref, registrar_name));
-        g.generate(n);
-    }
-
     const auto r(g.result());
     BOOST_LOG_SEV(lg, debug) << "Finished workflow. Result: " << r;
 

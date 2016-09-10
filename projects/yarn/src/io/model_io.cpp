@@ -25,7 +25,6 @@
 #include "dogen/yarn/io/model_io.hpp"
 #include "dogen/yarn/io/module_io.hpp"
 #include "dogen/yarn/io/element_io.hpp"
-#include "dogen/yarn/io/origin_types_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -68,38 +67,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::yarn::name>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace yarn {
 
@@ -114,8 +81,6 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"__type__\": " << "\"dogen::yarn::model\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"elements\": " << v.elements() << ", "
-      << "\"references\": " << v.references() << ", "
-      << "\"leaves\": " << v.leaves() << ", "
       << "\"root_module\": " << v.root_module() << ", "
       << "\"has_generatable_types\": " << v.has_generatable_types()
       << " }";

@@ -39,14 +39,10 @@ model::model()
 model::model(
     const dogen::yarn::name& name,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& elements,
-    const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& references,
-    const std::unordered_set<dogen::yarn::name>& leaves,
     const dogen::yarn::module& root_module,
     const bool has_generatable_types)
     : name_(name),
       elements_(elements),
-      references_(references),
-      leaves_(leaves),
       root_module_(root_module),
       has_generatable_types_(has_generatable_types) { }
 
@@ -54,8 +50,6 @@ void model::swap(model& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(elements_, other.elements_);
-    swap(references_, other.references_);
-    swap(leaves_, other.leaves_);
     swap(root_module_, other.root_module_);
     swap(has_generatable_types_, other.has_generatable_types_);
 }
@@ -63,8 +57,6 @@ void model::swap(model& other) noexcept {
 bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
         elements_ == rhs.elements_ &&
-        references_ == rhs.references_ &&
-        leaves_ == rhs.leaves_ &&
         root_module_ == rhs.root_module_ &&
         has_generatable_types_ == rhs.has_generatable_types_;
 }
@@ -105,38 +97,6 @@ void model::elements(const std::unordered_map<std::string, boost::shared_ptr<dog
 
 void model::elements(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >&& v) {
     elements_ = std::move(v);
-}
-
-const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& model::references() const {
-    return references_;
-}
-
-std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& model::references() {
-    return references_;
-}
-
-void model::references(const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& v) {
-    references_ = v;
-}
-
-void model::references(const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>&& v) {
-    references_ = std::move(v);
-}
-
-const std::unordered_set<dogen::yarn::name>& model::leaves() const {
-    return leaves_;
-}
-
-std::unordered_set<dogen::yarn::name>& model::leaves() {
-    return leaves_;
-}
-
-void model::leaves(const std::unordered_set<dogen::yarn::name>& v) {
-    leaves_ = v;
-}
-
-void model::leaves(const std::unordered_set<dogen::yarn::name>&& v) {
-    leaves_ = std::move(v);
 }
 
 const dogen::yarn::module& model::root_module() const {

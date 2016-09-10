@@ -22,7 +22,6 @@
 #include "dogen/yarn/hash/model_hash.hpp"
 #include "dogen/yarn/hash/module_hash.hpp"
 #include "dogen/yarn/hash/element_hash.hpp"
-#include "dogen/yarn/hash/origin_types_hash.hpp"
 
 namespace {
 
@@ -47,23 +46,6 @@ inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_set_dogen_yarn_name(const std::unordered_set<dogen::yarn::name>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -74,8 +56,6 @@ std::size_t model_hasher::hash(const model& v) {
 
     combine(seed, v.name());
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(v.elements()));
-    combine(seed, hash_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(v.references()));
-    combine(seed, hash_std_unordered_set_dogen_yarn_name(v.leaves()));
     combine(seed, v.root_module());
     combine(seed, v.has_generatable_types());
 

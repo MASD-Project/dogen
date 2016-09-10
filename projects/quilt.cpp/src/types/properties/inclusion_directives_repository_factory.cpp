@@ -28,8 +28,7 @@
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/module.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/element_visitor.hpp"
+#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/properties/building_error.hpp"
 #include "dogen/quilt.cpp/io/properties/inclusion_directives_repository_io.hpp"
 #include "dogen/quilt.cpp/types/settings/inclusion_directives_settings_factory.hpp"
@@ -42,7 +41,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "quilt.cpp.properties.inclusion_directives_repository_factory"));
 
-const std::string registrar_name("registrar");
 const std::string duplicate_name("Duplicate name: ");
 
 }
@@ -57,11 +55,11 @@ namespace {
 /**
  * @brief Generates all inclusion directives.
  */
-class generator final : public yarn::element_visitor {
+class generator final : public fabric::element_visitor {
 public:
     generator(const inclusion_directives_factory& f) : factory_(f) { }
 
-public:
+private:
     void generate(const dynamic::object& o, const yarn::name& n) {
         const auto id(factory_.make(o, n));
         if (!id)
@@ -87,14 +85,16 @@ private:
     }
 
 public:
-    using yarn::element_visitor::visit;
-    void visit(const dogen::yarn::module& m) { generate(m); }
-    void visit(const dogen::yarn::concept& c) { generate(c); }
-    void visit(const dogen::yarn::primitive& p) { generate(p); }
-    void visit(const dogen::yarn::enumeration& e) { generate(e); }
-    void visit(const dogen::yarn::object& o) { generate(o); }
-    void visit(const dogen::yarn::exception& e) { generate(e); }
-    void visit(const dogen::yarn::visitor& v) { generate(v); }
+    using fabric::element_visitor::visit;
+    void visit(const yarn::module& m) override { generate(m); }
+    void visit(const yarn::concept& c) override { generate(c); }
+    void visit(const yarn::primitive& p) override { generate(p); }
+    void visit(const yarn::enumeration& e) override { generate(e); }
+    void visit(const yarn::object& o) override { generate(o); }
+    void visit(const yarn::exception& e) override { generate(e); }
+    void visit(const yarn::visitor& v) override { generate(v); }
+    void visit(const fabric::registrar& rg) override { generate(rg); }
+    void visit(const fabric::master_header& mh) override { generate(mh); }
 
 public:
     const inclusion_directives_repository& result() const { return result_; }
@@ -121,20 +121,6 @@ inclusion_directives_repository inclusion_directives_repository_factory::make(
         e.accept(g);
     }
 
-    yarn::name_factory nf;
-    const auto n(nf.build_element_in_model(m.name(), registrar_name));
-    const auto o = dynamic::object();
-    g.generate(o, n);
-
-    for (const auto& pair : m.references()) {
-        const auto origin_type(pair.second);
-        if (origin_type == yarn::origin_types::system)
-            continue;
-
-        const auto ref(pair.first);
-        const auto n(nf.build_element_in_model(ref, registrar_name));
-        g.generate(o, n);
-    }
     const auto r(g.result());
 
     BOOST_LOG_SEV(lg, debug) << "Finished inclusion directives repository:"

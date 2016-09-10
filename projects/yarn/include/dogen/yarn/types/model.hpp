@@ -28,13 +28,10 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include <unordered_set>
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/module.hpp"
-#include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/types/element_fwd.hpp"
-#include "dogen/yarn/types/origin_types.hpp"
 #include "dogen/yarn/serialization/model_fwd_ser.hpp"
 
 namespace dogen {
@@ -56,8 +53,6 @@ public:
     model(
         const dogen::yarn::name& name,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& elements,
-        const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& references,
-        const std::unordered_set<dogen::yarn::name>& leaves,
         const dogen::yarn::module& root_module,
         const bool has_generatable_types);
 
@@ -83,28 +78,6 @@ public:
     std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& elements();
     void elements(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& v);
     void elements(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >&& v);
-
-    /**
-     * @brief All other models that this model depended on, mapped to their origin.
-     */
-    /**@{*/
-    const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& references() const;
-    std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& references();
-    void references(const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>& v);
-    void references(const std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types>&& v);
-    /**@}*/
-
-    /**
-     * @brief All leaf types in this model.
-     *
-     * Leaves are types concrete types which have a parent.
-     */
-    /**@{*/
-    const std::unordered_set<dogen::yarn::name>& leaves() const;
-    std::unordered_set<dogen::yarn::name>& leaves();
-    void leaves(const std::unordered_set<dogen::yarn::name>& v);
-    void leaves(const std::unordered_set<dogen::yarn::name>&& v);
-    /**@}*/
 
     /**
      * @brief The module that represents the model.
@@ -137,8 +110,6 @@ public:
 private:
     dogen::yarn::name name_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> > elements_;
-    std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types> references_;
-    std::unordered_set<dogen::yarn::name> leaves_;
     dogen::yarn::module root_module_;
     bool has_generatable_types_;
 };

@@ -23,7 +23,6 @@
 #include "dogen/yarn/test_data/model_td.hpp"
 #include "dogen/yarn/test_data/module_td.hpp"
 #include "dogen/yarn/test_data/element_td.hpp"
-#include "dogen/yarn/test_data/origin_types_td.hpp"
 
 namespace {
 
@@ -58,27 +57,6 @@ std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> > create
     return r;
 }
 
-dogen::yarn::origin_types
-create_dogen_yarn_origin_types(const unsigned int position) {
-    return dogen::yarn::origin_types_generator::create(position);
-}
-
-std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types> create_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(unsigned int position) {
-    std::unordered_map<dogen::yarn::name, dogen::yarn::origin_types> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_yarn_name(position + i), create_dogen_yarn_origin_types(position + i)));
-    }
-    return r;
-}
-
-std::unordered_set<dogen::yarn::name> create_std_unordered_set_dogen_yarn_name(unsigned int position) {
-    std::unordered_set<dogen::yarn::name> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(create_dogen_yarn_name(position + i));
-    }
-    return r;
-}
-
 dogen::yarn::module
 create_dogen_yarn_module(const unsigned int position) {
     return dogen::yarn::module_generator::create(position);
@@ -99,10 +77,8 @@ void model_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_yarn_name(position + 0));
     v.elements(create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(position + 1));
-    v.references(create_std_unordered_map_dogen_yarn_name_dogen_yarn_origin_types(position + 2));
-    v.leaves(create_std_unordered_set_dogen_yarn_name(position + 3));
-    v.root_module(create_dogen_yarn_module(position + 4));
-    v.has_generatable_types(create_bool(position + 5));
+    v.root_module(create_dogen_yarn_module(position + 2));
+    v.has_generatable_types(create_bool(position + 3));
 }
 
 model_generator::result_type
