@@ -26,8 +26,8 @@
 #endif
 
 #include "dogen/formatters/types/file.hpp"
+#include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/properties/registrar_info.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
@@ -48,7 +48,7 @@ public:
      * @brief Generate a c++ representation for the registrar.
      */
     virtual dogen::formatters::file
-    format(const context& ctx, const properties::registrar_info& c) const = 0;
+    format(const context& ctx, const fabric::registrar& rg) const = 0;
 };
 
 } } } }

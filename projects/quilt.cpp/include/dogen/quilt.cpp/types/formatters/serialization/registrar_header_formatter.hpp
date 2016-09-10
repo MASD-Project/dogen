@@ -53,7 +53,7 @@ public:
         properties::registrar& rg) const override;
 
     dogen::formatters::file format(const context& ctx,
-        const properties::registrar_info& c) const override;
+        const fabric::registrar& rg) const override;
 };
 
 } } } } }

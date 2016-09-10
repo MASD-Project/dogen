@@ -29,12 +29,12 @@ namespace formatters {
 namespace serialization {
 
 dogen::formatters::file registrar_header_formatter_stitch(
-    assistant& a, const properties::registrar_info& ri) {
-
+    assistant& a, const fabric::registrar& rg) {
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(ri.namespaces()));
+            const auto ns(a.make_namespaces(rg.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
 a.stream() << "template<typename Archive>" << std::endl;
 a.stream() << "void register_types(Archive& ar);" << std::endl;

@@ -135,6 +135,9 @@ public:
     void visit(const yarn::visitor& v) override {
         format(container_.visitor_formatters(), v);
     }
+    void visit(const fabric::registrar& rg) override {
+        format(container_.registrar_formatters(), rg);
+    }
     void visit(const fabric::master_header& mh) override {
         format(container_.master_header_formatters(), mh);
     }

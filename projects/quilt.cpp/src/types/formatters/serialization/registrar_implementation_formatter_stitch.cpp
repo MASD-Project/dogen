@@ -29,27 +29,32 @@ namespace formatters {
 namespace serialization {
 
 dogen::formatters::file registrar_implementation_formatter_stitch(
-    assistant& a, const properties::registrar_info& ri) {
+    assistant& a, const fabric::registrar& rg) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(ri.namespaces()));
-            const auto deps(ri.model_dependencies());
-            const auto leaves(ri.leaves());
+            const auto ns(a.make_namespaces(rg.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto deps(rg.model_dependencies());
+            const auto leaves(rg.leaves());
             const bool has_types(!deps.empty() || !leaves.empty());
             const std::string arg_name(has_types ? " ar" : "");
 a.stream() << std::endl;
 a.stream() << "template<typename Archive>" << std::endl;
 a.stream() << "void register_types(Archive&" << arg_name << ") {" << std::endl;
             if (has_types) {
-                for (const auto d : deps)
-a.stream() << "    " << d << "::register_types(ar);" << std::endl;
+                for (const auto d : deps) {
+                    const auto dqn(a.get_qualified_name(d));
+a.stream() << "    " << dqn << "::register_types(ar);" << std::endl;
+                }
+
                 if (!deps.empty() && !leaves.empty())
 a.stream() << std::endl;
-                for (const auto l : leaves)
-a.stream() << "    ar.template register_type<" << l << ">();" << std::endl;
-
+                for (const auto l : leaves) {
+                    const auto lqn(a.get_qualified_name(l));
+a.stream() << "    ar.template register_type<" << lqn << ">();" << std::endl;
+                }
             }
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;

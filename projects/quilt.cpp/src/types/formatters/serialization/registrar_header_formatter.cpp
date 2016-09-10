@@ -61,9 +61,9 @@ void registrar_header_formatter::register_inclusion_dependencies_provider(
     properties::registrar& /*rg*/) const { }
 
 dogen::formatters::file registrar_header_formatter::
-format(const context& ctx, const properties::registrar_info& ri) const {
-    assistant a(ctx, ownership_hierarchy(), file_type(), ri.id());
-    const auto r(registrar_header_formatter_stitch(a, ri));
+format(const context& ctx, const fabric::registrar& rg) const {
+    assistant a(ctx, ownership_hierarchy(), file_type(), rg.name().id());
+    const auto r(registrar_header_formatter_stitch(a, rg));
     return r;
 }
 

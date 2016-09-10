@@ -147,7 +147,6 @@ private:
 public:
     using formattable_visitor::visit;
     void visit(const properties::forward_declarations_info& fd) override;
-    void visit(const properties::registrar_info& r) override;
     void visit(const properties::cmakelists_info& c) override;
     void visit(const properties::odb_options_info& o) override;
 
@@ -175,10 +174,6 @@ dispatcher::dispatcher(const context_factory& f, const container& c)
 
 void dispatcher::visit(const properties::forward_declarations_info& fd) {
     format_entity(container_.forward_declarations_formatters(), fd);
-}
-
-void dispatcher::visit(const properties::registrar_info& r) {
-    format_entity(container_.registrar_formatters(), r);
 }
 
 void dispatcher::visit(const properties::cmakelists_info& c) {

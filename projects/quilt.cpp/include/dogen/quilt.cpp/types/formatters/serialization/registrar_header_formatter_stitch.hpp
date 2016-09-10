@@ -27,8 +27,8 @@
 
 #include <ostream>
 #include <boost/optional.hpp>
+#include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
-#include "dogen/quilt.cpp/types/properties/registrar_info.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -37,7 +37,7 @@ namespace formatters {
 namespace serialization {
 
 dogen::formatters::file  registrar_header_formatter_stitch(
-    assistant& a, const properties::registrar_info& ri);
+    assistant& a, const fabric::registrar& rg);
 
 } } } } }
 

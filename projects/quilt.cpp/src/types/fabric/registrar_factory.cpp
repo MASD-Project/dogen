@@ -57,7 +57,7 @@ registrar_factory::build(const yarn::model& m) const {
         rg->leaves().push_back(l);
 
     const auto lambda([](const yarn::name& a, const yarn::name& b) {
-            return a.id() > b.id();
+            return a.id() < b.id();
         });
     rg->leaves().sort(lambda);
 
