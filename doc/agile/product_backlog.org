@@ -1844,12 +1844,18 @@ to stem from. For example:
 could be replaced with =has_swap=, or perhaps even =has_public_swap= /
 =has_protected_swap=.
 
-*** Use pointer container in registrars                               :story:
+*** Use pointer container                                             :story:
 
-At present we are using shared pointers on all registrars. This makes
-no sense as the pointer ownership is clear (the registrar owns the
-pointer). We should use a boost pointer container and pass references
-around, via reference wrapper where required.
+We should look for cases where we can simplify things using pointer
+containers. Two use cases spring to mind:
+
+- at present we are using shared pointers on all registrars. This
+  makes no sense as the pointer ownership is clear (the registrar owns
+  the pointer). We should use a boost pointer container and pass
+  references around, via reference wrapper where required.
+- model has a container of shared pointer of element. We don't really
+  need the shared pointer abilities; once allocated these are pretty
+  const.
 
 *** Consider creating a "locator" like class for path management      :story:
 
