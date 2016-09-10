@@ -166,12 +166,12 @@ ownership_hierarchy json_hydrator::
 read_ownership_hierarchy(const boost::property_tree::ptree& pt) const {
     ownership_hierarchy r;
 
-    r.model_name(pt.get<std::string>(
-            ownership_hierarchy_model_name_key, empty));
-    r.facet_name(pt.get<std::string>(
-            ownership_hierarchy_facet_name_key, empty));
-    r.formatter_name(pt.get<std::string>(
-            ownership_hierarchy_formatter_name_key, empty));
+    r.model_name(
+        pt.get<std::string>(ownership_hierarchy_model_name_key, empty));
+    r.facet_name(
+        pt.get<std::string>(ownership_hierarchy_facet_name_key, empty));
+    r.formatter_name(
+        pt.get<std::string>(ownership_hierarchy_formatter_name_key, empty));
 
     return r;
 }
