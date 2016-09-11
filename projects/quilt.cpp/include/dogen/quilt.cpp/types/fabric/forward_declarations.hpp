@@ -26,8 +26,8 @@
 #endif
 
 #include <iosfwd>
-#include <string>
 #include <algorithm>
+#include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/element_visitor_fwd.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/forward_declarations_fwd_ser.hpp"
@@ -59,7 +59,7 @@ public:
         const bool in_global_module,
         const bool is_element_extension,
         const bool is_enum,
-        const std::string& enum_type,
+        const dogen::yarn::name& underlying_type,
         const bool is_exception);
 
 private:
@@ -93,10 +93,10 @@ public:
      * @brief The underlying type of the enumeration, if we are an enum forward declaration.
      */
     /**@{*/
-    const std::string& enum_type() const;
-    std::string& enum_type();
-    void enum_type(const std::string& v);
-    void enum_type(const std::string&& v);
+    const dogen::yarn::name& underlying_type() const;
+    dogen::yarn::name& underlying_type();
+    void underlying_type(const dogen::yarn::name& v);
+    void underlying_type(const dogen::yarn::name&& v);
     /**@}*/
 
     bool is_exception() const;
@@ -117,7 +117,7 @@ public:
 
 private:
     bool is_enum_;
-    std::string enum_type_;
+    dogen::yarn::name underlying_type_;
     bool is_exception_;
 };
 

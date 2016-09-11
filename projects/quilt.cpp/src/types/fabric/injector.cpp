@@ -24,6 +24,7 @@
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header_factory.hpp"
+#include "dogen/quilt.cpp/types/fabric/forward_declarations_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/injector.hpp"
 
 namespace {
@@ -78,6 +79,12 @@ void injector::inject_master_headers(yarn::intermediate_model& im) const {
     master_header_factory f;
     const auto e(f.build(fc, im));
     add_element(e, im);
+}
+
+void injector::inject_forward_declarations(yarn::intermediate_model& im) const {
+    forward_declarations_factory f;
+    const auto e(f.build(im));
+    add_elements(e, im);
 }
 
 void injector::inject(yarn::intermediate_model& im) const {

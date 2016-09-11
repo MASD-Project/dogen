@@ -18,20 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/quilt.cpp/io/fabric/forward_declarations_io.hpp"
+#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_FORWARD_DECLARATIONS_FACTORY_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FABRIC_FORWARD_DECLARATIONS_FACTORY_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
 
-std::ostream& operator<<(std::ostream& s, const forward_declarations& v) {
-    v.to_stream(s);
-    return(s);
-}
+class forward_declarations_factory;
 
 } } } }
+
+#endif

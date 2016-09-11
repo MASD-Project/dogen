@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/quilt.cpp/hash/fabric/forward_declarations_hash.hpp"
 
@@ -42,7 +43,7 @@ std::size_t forward_declarations_hasher::hash(const forward_declarations& v) {
     combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
 
     combine(seed, v.is_enum());
-    combine(seed, v.enum_type());
+    combine(seed, v.underlying_type());
     combine(seed, v.is_exception());
 
     return seed;

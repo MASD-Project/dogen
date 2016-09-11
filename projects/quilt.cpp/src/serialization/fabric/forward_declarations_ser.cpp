@@ -21,13 +21,13 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/forward_declarations_ser.hpp"
 
@@ -45,7 +45,7 @@ void save(Archive& ar,
     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
 
     ar << make_nvp("is_enum", v.is_enum_);
-    ar << make_nvp("enum_type", v.enum_type_);
+    ar << make_nvp("underlying_type", v.underlying_type_);
     ar << make_nvp("is_exception", v.is_exception_);
 }
 
@@ -56,7 +56,7 @@ void load(Archive& ar,
     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
 
     ar >> make_nvp("is_enum", v.is_enum_);
-    ar >> make_nvp("enum_type", v.enum_type_);
+    ar >> make_nvp("underlying_type", v.underlying_type_);
     ar >> make_nvp("is_exception", v.is_exception_);
 }
 

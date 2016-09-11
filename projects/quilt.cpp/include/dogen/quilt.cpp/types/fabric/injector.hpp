@@ -50,6 +50,7 @@ private:
 private:
     void inject_registrar(yarn::intermediate_model& im) const;
     void inject_master_headers(yarn::intermediate_model& im) const;
+    void inject_forward_declarations(yarn::intermediate_model& im) const;
 
 public:
     std::string id() const override;

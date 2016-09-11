@@ -106,6 +106,7 @@
 #include "dogen/quilt.cpp/types/settings/directory_names_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/master_header_formatter.hpp"
+#include "dogen/quilt.cpp/types/fabric/forward_declarations_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/enum_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_factory.hpp"

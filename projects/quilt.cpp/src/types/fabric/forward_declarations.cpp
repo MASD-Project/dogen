@@ -20,17 +20,10 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
+#include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
 
 namespace dogen {
 namespace quilt {
@@ -52,7 +45,7 @@ forward_declarations::forward_declarations(
     const bool in_global_module,
     const bool is_element_extension,
     const bool is_enum,
-    const std::string& enum_type,
+    const dogen::yarn::name& underlying_type,
     const bool is_exception)
     : dogen::yarn::element(
       documentation,
@@ -65,7 +58,7 @@ forward_declarations::forward_declarations(
       in_global_module,
       is_element_extension),
       is_enum_(is_enum),
-      enum_type_(enum_type),
+      underlying_type_(underlying_type),
       is_exception_(is_exception) { }
 
 void forward_declarations::accept(const dogen::yarn::element_visitor& v) const {
@@ -110,7 +103,7 @@ void forward_declarations::to_stream(std::ostream& s) const {
     element::to_stream(s);
     s << ", "
       << "\"is_enum\": " << is_enum_ << ", "
-      << "\"enum_type\": " << "\"" << tidy_up_string(enum_type_) << "\"" << ", "
+      << "\"underlying_type\": " << underlying_type_ << ", "
       << "\"is_exception\": " << is_exception_
       << " }";
 }
@@ -120,7 +113,7 @@ void forward_declarations::swap(forward_declarations& other) noexcept {
 
     using std::swap;
     swap(is_enum_, other.is_enum_);
-    swap(enum_type_, other.enum_type_);
+    swap(underlying_type_, other.underlying_type_);
     swap(is_exception_, other.is_exception_);
 }
 
@@ -133,7 +126,7 @@ bool forward_declarations::equals(const dogen::yarn::element& other) const {
 bool forward_declarations::operator==(const forward_declarations& rhs) const {
     return element::compare(rhs) &&
         is_enum_ == rhs.is_enum_ &&
-        enum_type_ == rhs.enum_type_ &&
+        underlying_type_ == rhs.underlying_type_ &&
         is_exception_ == rhs.is_exception_;
 }
 
@@ -151,20 +144,20 @@ void forward_declarations::is_enum(const bool v) {
     is_enum_ = v;
 }
 
-const std::string& forward_declarations::enum_type() const {
-    return enum_type_;
+const dogen::yarn::name& forward_declarations::underlying_type() const {
+    return underlying_type_;
 }
 
-std::string& forward_declarations::enum_type() {
-    return enum_type_;
+dogen::yarn::name& forward_declarations::underlying_type() {
+    return underlying_type_;
 }
 
-void forward_declarations::enum_type(const std::string& v) {
-    enum_type_ = v;
+void forward_declarations::underlying_type(const dogen::yarn::name& v) {
+    underlying_type_ = v;
 }
 
-void forward_declarations::enum_type(const std::string&& v) {
-    enum_type_ = std::move(v);
+void forward_declarations::underlying_type(const dogen::yarn::name&& v) {
+    underlying_type_ = std::move(v);
 }
 
 bool forward_declarations::is_exception() const {
