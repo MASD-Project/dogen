@@ -87,9 +87,7 @@ void containment_expander::inject_global_module(intermediate_model& im) {
 
 void containment_expander::expand(intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding containment for: " << im.name().id();
-
     inject_global_module(im);
-
     BOOST_LOG_SEV(lg, debug) << "Finished expanding containment.";
 }
 

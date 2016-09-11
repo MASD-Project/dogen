@@ -250,9 +250,7 @@ void stereotypes_expander::expand_visitable(intermediate_model& im) {
 
 void stereotypes_expander::expand(intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << im.name().id();
-
     expand_visitable(im);
-
     BOOST_LOG_SEV(lg, debug) << "Finished expanding stereotypes";
 }
 

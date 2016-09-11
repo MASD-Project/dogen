@@ -135,10 +135,6 @@ void association_expander::expand(intermediate_model& im) const {
 
     for (auto& pair : im.objects()) {
         auto& o(pair.second);
-
-        if (o.generation_type() == generation_types::no_generation)
-            continue;
-
         expand_object(im, o);
     }
     BOOST_LOG_SEV(lg, debug) << "Finished expanding objects.";

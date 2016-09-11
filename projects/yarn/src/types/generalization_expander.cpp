@@ -66,7 +66,7 @@ update_and_collect_parent_ids(intermediate_model& im) const {
          * injection and injection needs generalization, which needs
          * resolution).
          */
-        o.parent(rs.resolve(im, *o.parent()));
+        o.parent(rs.resolve(im, o.name(), *o.parent()));
         r.insert(o.parent()->id());
     }
     BOOST_LOG_SEV(lg, debug) << "Finished updating and collecting parent ids: "

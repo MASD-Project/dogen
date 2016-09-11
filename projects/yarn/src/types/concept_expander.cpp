@@ -185,10 +185,6 @@ void concept_expander::expand_objects(intermediate_model& im) {
     std::unordered_set<name> processed_names;
     for (auto& pair : im.objects()) {
         auto& o(pair.second);
-
-        if (o.generation_type() == generation_types::no_generation)
-            continue;
-
         expand_object(o, im, processed_names);
     }
 }
@@ -229,10 +225,6 @@ void concept_expander::expand_concepts(intermediate_model& im) {
     std::unordered_set<name> processed_names;
     for (auto& pair : im.concepts()) {
         auto& c(pair.second);
-
-        if (c.generation_type() == generation_types::no_generation)
-            continue;
-
         expand_concept(c, im, processed_names);
     }
 }

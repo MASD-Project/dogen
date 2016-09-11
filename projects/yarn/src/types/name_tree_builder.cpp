@@ -40,7 +40,6 @@ using namespace dogen::utility::log;
 namespace {
 
 auto lg(logger_factory("yarn.name_tree_builder"));
-const std::string qn_missing("Could not find qualified name for language.");
 
 }
 

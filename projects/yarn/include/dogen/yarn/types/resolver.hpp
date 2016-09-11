@@ -67,7 +67,8 @@ private:
     /**
      * @brief Resolves a partially formed name into a full name.
      */
-    name resolve_name(const intermediate_model& im, const name& n) const;
+    name resolve_name(const intermediate_model& im, const name& context,
+        const name& n) const;
 
     /**
      * @brief Resolves all references contained in a name tree.
@@ -122,7 +123,8 @@ public:
     /**
      * @brief Resolves the name against the supplied model.
      */
-    name resolve(const intermediate_model& im, const name& n) const;
+    name resolve(const intermediate_model& im, const name& context,
+        const name& n) const;
 };
 
 } }

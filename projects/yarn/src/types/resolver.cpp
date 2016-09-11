@@ -152,26 +152,46 @@ bool resolver::is_name_referable(const indices& idx, const name& n) const {
 }
 
 name resolver::
-resolve_name(const intermediate_model& im, const name& n) const {
-    /*
+resolve_name(const intermediate_model& im, const name& context,
+    const name& n) const {
+
+    BOOST_LOG_SEV(lg, debug) << "Resolving name: " << n.id();
+    BOOST_LOG_SEV(lg, debug) << "Initial state: " << n;
+     /*
      * First try the type as it was read originally. This caters for
      * types placed in the global module.
      */
-    if (is_name_referable(im.indices(), n))
+    BOOST_LOG_SEV(lg, debug) << "Resolving as is.";
+    if (is_name_referable(im.indices(), n)) {
+        BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
         return n;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Resolution failed.";
 
     /*
      * Then handle the case of the type belonging to the current
-     * model. It either has no model name at all, or it has a model
+     * context. It either has no model name at all, or it has a model
      * name but no external module path. We cater for both cases.
+     *
+     * Note that at present we expect names to have the internal
+     * module path set. This means that if you are inside of a package
+     * P and you want to refer to another type T inside of P, you need
+     * to qualify it: T::P. It should however by trivial to expand the
+     * code below to simply copy the internal module path and to
+     * recurse it up all the way to the top.
      */
+    BOOST_LOG_SEV(lg, debug) << "Resolving using context: " << context;
     name_factory nf;
     {
-        const auto r(nf.build_combined_element_name(im.name(), n,
+        const auto r(nf.build_combined_element_name(context, n,
                 true/*populate_model_name_if_blank*/));
 
-        if (is_name_referable(im.indices(), r))
+        if (is_name_referable(im.indices(), r)) {
+            BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
             return r;
+        }
+        BOOST_LOG_SEV(lg, debug) << "Resolution failed.";
     }
 
     /*
@@ -179,10 +199,15 @@ resolve_name(const intermediate_model& im, const name& n) const {
      * is missing the external module path.
      */
     for (const auto& pair : im.references()) {
-        const auto r(nf.build_combined_element_name(pair.first, n));
+        const auto& ref(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Resolving using reference: " << ref;
+        const auto r(nf.build_combined_element_name(ref, n));
 
-        if (is_name_referable(im.indices(), r))
+        if (is_name_referable(im.indices(), r)) {
+            BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
             return r;
+        }
+        BOOST_LOG_SEV(lg, debug) << "Resolution failed.";
     }
 
     /*
@@ -190,9 +215,13 @@ resolve_name(const intermediate_model& im, const name& n) const {
      * same name as a reference model.
      */
     {
+        BOOST_LOG_SEV(lg, debug) << "Resolving as package with model name.";
         auto r(nf.build_promoted_module_name(im.name(), n));
-        if (is_name_referable(im.indices(), r))
+        if (is_name_referable(im.indices(), r)) {
+            BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
             return r;
+        }
+        BOOST_LOG_SEV(lg, debug) << "Resolution failed.";
     }
 
     BOOST_LOG_SEV(lg, error) << undefined_type << n.id();
@@ -201,7 +230,7 @@ resolve_name(const intermediate_model& im, const name& n) const {
 
 void resolver::resolve_name_tree(const intermediate_model& im,
     const name& owner, name_tree& nt) const {
-    const name n(resolve_name(im, nt.current()));
+    const name n(resolve_name(im, owner, nt.current()));
 
     BOOST_LOG_SEV(lg, debug) << "Resolved name: " << nt.current().id()
                              << " to: " << n.id();
@@ -306,9 +335,6 @@ resolve_concepts(intermediate_model& im) const {
     for (auto& pair : im.concepts()) {
         concept& c(pair.second);
 
-        if (c.generation_type() == generation_types::no_generation)
-            continue;
-
         BOOST_LOG_SEV(lg, debug) << "Resolving: " << c.name().id();
         resolve_attributes(im, c.name(), c.local_attributes());
         validate_refinements(im, c);
@@ -321,9 +347,6 @@ resolve_objects(intermediate_model& im) const {
 
     for (auto& pair : im.objects()) {
         auto& o(pair.second);
-
-        if (o.generation_type() == generation_types::no_generation)
-            continue;
 
         BOOST_LOG_SEV(lg, debug) << "Resolving: " << o.name().id();
         validate_inheritance_graph(im, o);
@@ -345,9 +368,6 @@ void resolver::resolve_enumerations(intermediate_model& im) const {
     const auto det(obtain_default_enumeration_type(im));
     for (auto& pair : im.enumerations()) {
         auto& e(pair.second);
-
-        if (e.generation_type() == generation_types::no_generation)
-            continue;
 
         BOOST_LOG_SEV(lg, debug) << "Resolving: " << e.name().id();
 
@@ -372,8 +392,9 @@ void resolver::resolve(intermediate_model& im) const {
     resolve_enumerations(im);
 }
 
-name resolver::resolve(const intermediate_model& im, const name& n) const {
-    const auto r(resolve_name(im, n));
+name resolver::resolve(const intermediate_model& im, const name& context,
+    const name& n) const {
+    const auto r(resolve_name(im, context, n));
     BOOST_LOG_SEV(lg, debug) << "Resolved name: " << n.id()
                              << " to: " << r.id();
     return r;

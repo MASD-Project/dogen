@@ -12,39 +12,40 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-11 Sun 09:41]
+#+CAPTION: Clock summary at [2016-09-11 Sun 14:10]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *53:52* |       |      | 100.0 |
+| *Total time*                                                                | *57:27* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 53:52   |       |      | 100.0 |
-| Active                                                                      |         | 53:52 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:25 |   2.6 |
-| COMPLETED Move readme to markdown                                           |         |       | 0:49 |   1.5 |
-| COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   0.9 |
-| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   4.4 |
-| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |   8.0 |
-| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |   9.5 |
-| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   3.0 |
-| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   3.6 |
-| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   2.7 |
-| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |   9.1 |
-| CANCELLED Pick-up Boost 1.61 from Debian Testing                            |         |       | 1:23 |   2.6 |
-| COMPLETED Allow cross model inheritance                                     |         |       | 1:09 |   2.1 |
-| COMPLETED Add support for visitor inheritance                               |         |       | 7:27 |  13.8 |
-| COMPLETED Move visitor =accept= methods to cpp file                         |         |       | 0:41 |   1.3 |
-| COMPLETED Analysis work on implementing remaining yarn types                |         |       | 0:52 |   1.6 |
-| COMPLETED Split injector into separate classes                              |         |       | 0:56 |   1.7 |
-| COMPLETED Add injector interface and registrar                              |         |       | 1:02 |   1.9 |
-| COMPLETED Analysis: supporting multiple elements for one id                 |         |       | 1:12 |   2.2 |
-| COMPLETED Add language-specific element injection                           |         |       | 0:41 |   1.3 |
-| COMPLETED Implement includers in fabric                                     |         |       | 6:10 |  11.4 |
-| COMPLETED Quilt's formatter names are incorrect                             |         |       | 0:41 |   1.3 |
-| COMPLETED Implement registrar in fabric                                     |         |       | 3:27 |   6.4 |
-| COMPLETED Move injection to intermediate model                              |         |       | 1:30 |   2.8 |
-| COMPLETED Use a list in model rather than a map                             |         |       | 1:38 |   3.0 |
-| STARTED Introduce the notion of composite elements                          |         |       | 0:34 |   1.1 |
+| Stories                                                                     | 57:27   |       |      | 100.0 |
+| Active                                                                      |         | 57:27 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:25 |   2.5 |
+| COMPLETED Move readme to markdown                                           |         |       | 0:49 |   1.4 |
+| COMPLETED Use =element= base class in  =update_element=                     |         |       | 0:29 |   0.8 |
+| COMPLETED Move file instantiation code into yarn                            |         |       | 2:22 |   4.1 |
+| COMPLETED Yarn naming tidy-up                                               |         |       | 4:19 |   7.5 |
+| COMPLETED Generalisation tidy-up                                            |         |       | 5:07 |   8.9 |
+| COMPLETED Create an indexer for resolution data                             |         |       | 1:38 |   2.8 |
+| COMPLETED First chat with IS about current state of dogen                   |         |       | 1:57 |   3.4 |
+| COMPLETED Extend name builder with required functionality                   |         |       | 1:28 |   2.6 |
+| COMPLETED Consider adding support for inheritance via meta-data             |         |       | 4:55 |   8.6 |
+| CANCELLED Pick-up Boost 1.61 from Debian Testing                            |         |       | 1:23 |   2.4 |
+| COMPLETED Allow cross model inheritance                                     |         |       | 1:09 |   2.0 |
+| COMPLETED Add support for visitor inheritance                               |         |       | 7:27 |  13.0 |
+| COMPLETED Move visitor =accept= methods to cpp file                         |         |       | 0:41 |   1.2 |
+| COMPLETED Analysis work on implementing remaining yarn types                |         |       | 0:52 |   1.5 |
+| COMPLETED Split injector into separate classes                              |         |       | 0:56 |   1.6 |
+| COMPLETED Add injector interface and registrar                              |         |       | 1:02 |   1.8 |
+| COMPLETED Analysis: supporting multiple elements for one id                 |         |       | 1:12 |   2.1 |
+| COMPLETED Add language-specific element injection                           |         |       | 0:41 |   1.2 |
+| COMPLETED Implement includers in fabric                                     |         |       | 6:10 |  10.7 |
+| COMPLETED Quilt's formatter names are incorrect                             |         |       | 0:41 |   1.2 |
+| COMPLETED Implement registrar in fabric                                     |         |       | 3:27 |   6.0 |
+| COMPLETED Move injection to intermediate model                              |         |       | 1:30 |   2.6 |
+| COMPLETED Use a list in model rather than a map                             |         |       | 1:38 |   2.8 |
+| COMPLETED Track down =quilt.cpp= generation bug                             |         |       | 3:35 |   6.2 |
+| STARTED Introduce the notion of composite elements                          |         |       | 0:34 |   1.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -731,6 +732,104 @@ Tasks:
 - update yarn model and remove flattening in =quilt.cpp=. Although we
   are also filtering with the flattening.
 - update all visitors in =quilt.cpp=.
+
+*** COMPLETED Track down =quilt.cpp= generation bug                   :story:
+    CLOSED: [2016-09-11 Sun 14:04]
+    CLOCK: [2016-09-11 Sun 14:05]--[2016-09-11 Sun 14:10] =>  0:05
+    CLOCK: [2016-09-11 Sun 13:55]--[2016-09-11 Sun 14:04] =>  0:09
+    CLOCK: [2016-09-11 Sun 12:54]--[2016-09-11 Sun 13:54] =>  1:00
+    CLOCK: [2016-09-11 Sun 11:54]--[2016-09-11 Sun 12:05] =>  0:11
+    CLOCK: [2016-09-11 Sun 11:23]--[2016-09-11 Sun 11:53] =>  0:30
+    CLOCK: [2016-09-11 Sun 09:42]--[2016-09-11 Sun 11:22] =>  1:40
+
+Once we introduced element's new flag, =quilt.cpp= stopped
+generating. This is due to an error in assistant:
+
+: 2016-09-11 09:45:53.763003 [ERROR] [quilt.cpp.formatters.assistant] Could not find qualified name for language.{ "__type__": "languages", "value": "cpp" }
+
+The problem seems to be that we are not generating the name tree's
+qualified name for non-target models. This is somehow a side-effect of
+allowing cross-model inheritance. What is not clear is why all other
+properties of element, obtained via concept refinement are not a
+problem.
+
+The root problem was that cross model references was not implemented
+properly. Due to the fact that a lot of the yarn pipeline was only
+processing the target model, we never did expand attributes inherited
+from other models correctly. This meant that the complete constructor
+was slicing types by calling the default constructor and not allowing
+users to supply base class properties:
+
+: master_header::master_header(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& inclusion_by_facet)
+:    : dogen::yarn::element(),
+:      inclusion_by_facet_(inclusion_by_facet) { }
+
+However, this was good enough for the tests and all code generation
+cases we had, so we didn't notice it.
+
+Once we introduced a property at the element level, this partial
+processing became a problem. This is because:
+
+- the local properties container of the parent located in an external
+  model was populated with the new property, as local properties do
+  not require additional yarn processing (i.e. irrespective of
+  external or target model they are always populated);
+- the descendant type thus obtained the parent's property via target
+  model attribute expansion;
+- however, the property did not go through resolution since it
+  belonged to an external model.
+
+The quick hack solution is to process all types including those from
+external models on the entire yarn pipeline and to fix the resolver to
+take into account the source of the attribute. This appears to
+increase the amount of work done in the yarn pipeline quite a bit.
+
+Finger in the air measurements:
+
+*Before*
+
+RAT:
+
+11:31:23 - 11:31:42: 19
+11:32:00 - 11:32:18: 18
+11:32:31 - 11:32:49: 18
+
+Knit tests:
+
+11:33:07 - 11:33:25: 18
+11:33:34 - 11:33:51: 17
+11:34:01 - 11:34:19: 18
+
+Knit all:
+
+11:34:32 - 11:34:42: 10
+11:35:03 - 11:35:12: 9
+11:35:26 - 11:35:36: 10
+
+*After*
+
+RAT:
+
+13:59:50 - 13:59:56: 6
+14:00:17 - 14:00:23: 6
+14:00:49 - 14:00:55: 6
+
+Knit tests:
+
+14:01:32 - 14:01:38: 6
+14:01:58 - 14:02:03: 5
+14:02:13 - 14:02:19: 6
+
+Knit all:
+
+14:02:33 - 14:02:37: 4
+14:02:59 - 14:03:03: 4
+14:03:15 - 14:03:20: 5
+
+This is extremely puzzling and counter-intuitive: we are (or should
+be) doing a lot more work now, but the performance went up
+dramatically. However, all tests pass and all models are generated
+correctly so we won't spend time investigating this.
 
 *** STARTED Introduce the notion of composite elements                :story:
     CLOCK: [2016-09-10 Sat 23:25]--[2016-09-10 Sat 23:26] =>  0:01

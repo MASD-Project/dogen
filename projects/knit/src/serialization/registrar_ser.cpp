@@ -29,15 +29,19 @@
 #include "dogen/knit/serialization/registrar_ser.hpp"
 #include "dogen/yarn/serialization/registrar_ser.hpp"
 #include "dogen/config/serialization/registrar_ser.hpp"
+#include "dogen/dynamic/serialization/registrar_ser.hpp"
 #include "dogen/quilt.cpp/serialization/registrar_ser.hpp"
+#include "dogen/formatters/serialization/registrar_ser.hpp"
 
 namespace dogen {
 namespace knit {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    dogen::config::register_types(ar);
+    dogen::dynamic::register_types(ar);
+    dogen::formatters::register_types(ar);
     dogen::yarn::register_types(ar);
+    dogen::config::register_types(ar);
     dogen::quilt::cpp::register_types(ar);
 }
 

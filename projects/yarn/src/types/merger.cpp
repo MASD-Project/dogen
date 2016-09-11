@@ -176,6 +176,8 @@ intermediate_model merger::merge() {
     update_references();
     merge_models();
     has_merged_ = true;
+
+    BOOST_LOG_SEV(lg, info) << "Merged model: " << merged_model_;
     return merged_model_;
 }
 
