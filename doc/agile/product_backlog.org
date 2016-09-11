@@ -2336,6 +2336,15 @@ The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
 
+*** Property types are always fully qualified                         :story:
+
+When we code generate non-primitive properties we always fully qualify
+them even if they are on the same namespace as the containing
+type. This should be easy to fix by extending the resolver to take in
+the internal module path of the context. We could even recurse up the
+internal module path, allowing for references to types in containing
+modules.
+
 *** Consider making fully generated files read-only                   :story:
 
 We could add emacs/vi tags to make fully generated files read-only -
@@ -3610,11 +3619,6 @@ makefile if there are no implementation files generated.
 
 At present we are depending on the domain header but it seems we could
 depend only on the forward declarations.
-
-*** Property types are always fully qualified                         :story:
-
-When we code generate non-primitive properties we always fully qualify
-them even if they are on the same namespace as the containing type.
 
 ** Maybe in current major release
 
