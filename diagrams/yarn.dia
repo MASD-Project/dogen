@@ -3996,17 +3996,17 @@ It is not required for any other purpose.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O36">
       <dia:attribute name="obj_pos">
-        <dia:point val="-0.5525,69.6"/>
+        <dia:point val="-0.515,69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-1.4025,69.55;38.845,78.05"/>
+        <dia:rectangle val="-1.365,68.95;38.845,78.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-0.5525,69.6"/>
-        <dia:point val="-0.5525,73"/>
+        <dia:point val="-0.515,69"/>
+        <dia:point val="-0.515,73"/>
         <dia:point val="38.795,73"/>
         <dia:point val="38.795,78"/>
       </dia:attribute>
@@ -4427,17 +4427,17 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O40">
       <dia:attribute name="obj_pos">
-        <dia:point val="-0.5525,69.6"/>
+        <dia:point val="-0.515,69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-1.4025,69.55;5.4225,78.05"/>
+        <dia:rectangle val="-1.365,68.95;5.4225,78.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-0.5525,69.6"/>
-        <dia:point val="-0.5525,73"/>
+        <dia:point val="-0.515,69"/>
+        <dia:point val="-0.515,73"/>
         <dia:point val="5.3725,73"/>
         <dia:point val="5.3725,78"/>
       </dia:attribute>
@@ -4468,17 +4468,17 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O41">
       <dia:attribute name="obj_pos">
-        <dia:point val="-0.5525,69.6"/>
+        <dia:point val="-0.515,69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-33.1375,69.55;0.2975,78.05"/>
+        <dia:rectangle val="-33.1375,68.95;0.335,78.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-0.5525,69.6"/>
-        <dia:point val="-0.5525,73"/>
+        <dia:point val="-0.515,69"/>
+        <dia:point val="-0.515,73"/>
         <dia:point val="-33.0875,73"/>
         <dia:point val="-33.0875,78"/>
       </dia:attribute>
@@ -12966,19 +12966,19 @@ are not modules, such as attributes, inner classes, etc.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O103">
       <dia:attribute name="obj_pos">
-        <dia:point val="-6,66"/>
+        <dia:point val="-5,66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-6.05,65.95;4.945,69.65"/>
+        <dia:rectangle val="-5.05,65.95;4.02,69.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-6,66"/>
+        <dia:point val="-5,66"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.895"/>
+        <dia:real val="8.9700000000000006"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#element#</dia:string>
@@ -13071,31 +13071,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#is_element_extension#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, this element extends another element with the same id.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-      </dia:attribute>
+      <dia:attribute name="attributes"/>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -13104,17 +13080,17 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O104">
       <dia:attribute name="obj_pos">
-        <dia:point val="-0.5525,69.6"/>
+        <dia:point val="-0.515,69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-1.4025,69.55;25.1125,94.05"/>
+        <dia:rectangle val="-1.365,68.95;25.1125,94.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-0.5525,69.6"/>
-        <dia:point val="-0.5525,73"/>
+        <dia:point val="-0.515,69"/>
+        <dia:point val="-0.515,73"/>
         <dia:point val="25.0625,73"/>
         <dia:point val="25.0625,94"/>
       </dia:attribute>
@@ -13145,17 +13121,17 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O105">
       <dia:attribute name="obj_pos">
-        <dia:point val="-0.5525,69.6"/>
+        <dia:point val="-0.515,69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.9875,69.55;0.2975,78.05"/>
+        <dia:rectangle val="-13.9875,68.95;0.335,78.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-0.5525,69.6"/>
-        <dia:point val="-0.5525,73"/>
+        <dia:point val="-0.515,69"/>
+        <dia:point val="-0.515,73"/>
         <dia:point val="-13.9375,73"/>
         <dia:point val="-13.9375,78"/>
       </dia:attribute>
@@ -13829,7 +13805,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:point val="-9,55.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-9.75,54.45;-0.3525,66.8"/>
+        <dia:rectangle val="-9.75,54.45;-0.315,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13837,8 +13813,8 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
       <dia:attribute name="orth_points">
         <dia:point val="-9,55.2"/>
         <dia:point val="-9,61"/>
-        <dia:point val="-0.5525,61"/>
-        <dia:point val="-0.5525,66"/>
+        <dia:point val="-0.515,61"/>
+        <dia:point val="-0.515,66"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -17141,17 +17117,17 @@ This is used to break cycles where required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O135">
       <dia:attribute name="obj_pos">
-        <dia:point val="-0.5525,69.6497"/>
+        <dia:point val="-0.515,69.0502"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-4.025,69.5997;0.2975,94.05"/>
+        <dia:rectangle val="-4.025,69.0002;0.335,94.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-0.5525,69.6497"/>
-        <dia:point val="-0.5525,73"/>
+        <dia:point val="-0.515,69.0502"/>
+        <dia:point val="-0.515,73"/>
         <dia:point val="-3.975,73"/>
         <dia:point val="-3.975,94"/>
       </dia:attribute>
@@ -17176,23 +17152,23 @@ This is used to break cycles where required.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O103" connection="10"/>
+        <dia:connection handle="0" to="O103" connection="8"/>
         <dia:connection handle="1" to="O133" connection="1"/>
       </dia:connections>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O136">
       <dia:attribute name="obj_pos">
-        <dia:point val="-0.5525,69.6"/>
+        <dia:point val="-0.515,69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-1.4025,69.55;19.5125,78.05"/>
+        <dia:rectangle val="-1.365,68.95;19.5125,78.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-0.5525,69.6"/>
-        <dia:point val="-0.5525,73"/>
+        <dia:point val="-0.515,69"/>
+        <dia:point val="-0.515,73"/>
         <dia:point val="19.4625,73"/>
         <dia:point val="19.4625,78"/>
       </dia:attribute>
@@ -17340,7 +17316,7 @@ relationships.#</dia:string>
           <dia:attribute name="string">
             <dia:string>#Expands the all strings that require parsing -
 such as the unparsed type in local attributes -
-into a parsed format - such as name trees - 
+into a parsed format - such as name trees -
 across all elements in the model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
