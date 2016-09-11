@@ -54,24 +54,6 @@ public:
     std::list<std::string>
     namespace_list(const yarn::name& n,
         const bool detect_model_name = true) const;
-
-    /**
-     * @brief Flat representation of the qualified name.
-     */
-    std::string qualified_name(const yarn::name& n) const;
-
-    /**
-     * @brief Returns a complete name representation of the nested
-     * qualified name.
-     */
-    void complete_name(const yarn::name_tree& nt,
-        std::string& complete_name) const;
-
-    /**
-     * @brief Returns a string representation of the name supplied
-     * that can be used as a c++ identifier.
-     */
-    std::string identifiable_name(const std::string& n) const;
 };
 
 } } } }
