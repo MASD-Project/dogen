@@ -97,13 +97,6 @@ private:
 
     /**
      * @brief Generates all of the properties that are sourced from
-     * the transformer.
-     */
-    std::forward_list<std::shared_ptr<properties::formattable> >
-    from_transformer_activity(const yarn::model& m) const;
-
-    /**
-     * @brief Generates all of the properties that are sourced from
      * the factory.
      */
     std::forward_list<std::shared_ptr<properties::formattable> >

@@ -29,7 +29,6 @@
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/aspect_settings_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/factory.hpp"
-#include "dogen/quilt.cpp/types/properties/transformer.hpp"
 #include "dogen/quilt.cpp/io/properties/formattable_io.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties_repository_factory.hpp"
@@ -47,42 +46,6 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace properties {
-
-namespace {
-
-/**
- * @brief Generates the properties.
- */
-class generator final : public yarn::element_visitor {
-public:
-    explicit generator(const transformer& t) : transformer_(t) { }
-
-private:
-    template<typename Transformable>
-    void transform(const Transformable& t) {
-        if (t.generation_type() != yarn::generation_types::no_generation) {
-            auto f(transformer_.transform(t));
-            result_.splice_after(result_.before_begin(), f);
-        }
-    }
-
-public:
-    using yarn::element_visitor::visit;
-    void visit(const dogen::yarn::visitor& v) { transform(v); }
-    void visit(const dogen::yarn::enumeration& e) { transform(e); }
-    void visit(const dogen::yarn::object& o) { transform(o); }
-    void visit(const dogen::yarn::exception& e) { transform(e); }
-
-public:
-    const std::forward_list<std::shared_ptr<properties::formattable> >&
-    result() { return result_; }
-
-private:
-    std::forward_list<std::shared_ptr<properties::formattable> > result_;
-    const transformer& transformer_;
-};
-
-}
 
 std::unordered_map<std::string, settings::path_settings>
 workflow::create_path_settings_activity(const dynamic::repository& drp,
@@ -127,21 +90,6 @@ create_formatter_properties(const dynamic::repository& drp,
 
     formatter_properties_repository_factory f;
     return f.make(drp, root_object, pdrp, fc, m);
-}
-
-std::forward_list<std::shared_ptr<properties::formattable> >
-workflow::from_transformer_activity(const yarn::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming properties.";
-
-    transformer t;
-    generator g(t);
-    for (const auto& ptr : m.elements()) {
-        const auto& e(*ptr);
-        e.accept(g);
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Finished transforming properties.";
-    return g.result();
 }
 
 std::forward_list<std::shared_ptr<properties::formattable> >
@@ -195,11 +143,8 @@ workflow::execute(const config::cpp_options& opts,
     const auto pdrp(create_path_derivatives_repository(opts, ps, m));
     auto fprp(create_formatter_properties(drp, ro, pdrp, fc, m));
 
-    auto formattables(from_transformer_activity(m));
-    formattables.splice_after(formattables.before_begin(),
-        from_factory_activity(opts, fpwf, ps, fprp, m));
+    const auto formattables(from_factory_activity(opts, fpwf, ps, fprp, m));
     BOOST_LOG_SEV(lg, debug) << "Formattables: " << formattables;
-
     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
 
     const auto hsrp(create_helper_settings_repository(drp, m));

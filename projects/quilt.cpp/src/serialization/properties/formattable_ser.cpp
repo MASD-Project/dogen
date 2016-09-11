@@ -32,7 +32,6 @@
 #include "dogen/quilt.cpp/serialization/properties/origin_types_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/cmakelists_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/odb_options_info_ser.hpp"
-#include "dogen/quilt.cpp/serialization/properties/forward_declarations_info_ser.hpp"
 
 BOOST_CLASS_TRACKING(
     dogen::quilt::cpp::properties::formattable,

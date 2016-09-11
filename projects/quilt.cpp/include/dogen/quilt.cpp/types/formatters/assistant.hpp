@@ -42,7 +42,6 @@
 #include "dogen/quilt.cpp/types/settings/odb_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/properties/entity.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_types.hpp"
 #include "dogen/quilt.cpp/types/properties/helper_properties.hpp"
 

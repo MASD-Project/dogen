@@ -26,7 +26,6 @@
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/properties/cmakelists_info.hpp"
 #include "dogen/quilt.cpp/types/properties/odb_options_info.hpp"
-#include "dogen/quilt.cpp/types/properties/forward_declarations_info.hpp"
 #include "dogen/quilt.cpp/types/properties/formattable_visitor.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"

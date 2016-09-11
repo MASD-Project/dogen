@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/quilt.cpp/hash/fabric/registrar_hash.hpp"
-#include "dogen/quilt.cpp/hash/properties/entity_hash.hpp"
 #include "dogen/quilt.cpp/hash/fabric/master_header_hash.hpp"
 #include "dogen/quilt.cpp/hash/formatters/file_types_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/odb_settings_hash.hpp"
@@ -51,7 +50,6 @@
 #include "dogen/quilt.cpp/hash/settings/directory_names_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/aspect_settings_repository_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/helper_settings_repository_hash.hpp"
-#include "dogen/quilt.cpp/hash/properties/forward_declarations_info_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/element_settings_repository_hash.hpp"
 #include "dogen/quilt.cpp/hash/settings/inclusion_directive_settings_hash.hpp"
 #include "dogen/quilt.cpp/hash/properties/path_derivatives_repository_hash.hpp"

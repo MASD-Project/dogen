@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/quilt.cpp/serialization/fabric/registrar_ser.hpp"
-#include "dogen/quilt.cpp/serialization/properties/entity_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/master_header_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formatters/file_types_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/odb_settings_ser.hpp"
@@ -51,7 +50,6 @@
 #include "dogen/quilt.cpp/serialization/settings/directory_names_settings_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/aspect_settings_repository_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/helper_settings_repository_ser.hpp"
-#include "dogen/quilt.cpp/serialization/properties/forward_declarations_info_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/element_settings_repository_ser.hpp"
 #include "dogen/quilt.cpp/serialization/settings/inclusion_directive_settings_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/path_derivatives_repository_ser.hpp"
