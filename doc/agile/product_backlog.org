@@ -3391,42 +3391,6 @@ Existing validation code:
 :     BOOST_CHECK_EXCEPTION(transform(c, po2, op2), transformation_error, cc);
 : }
 
-*** Provide contextual error messages during validation               :story:
-
-As per the validator story, we need to ensure the model we are
-processing is valid. However, the validator must provide contextual
-validation error messages:
-
-: error 1: properties must have a non-null name
-: in model 'my_model' (Dia ID: O0)
-: in object 'my_object (Dia ID: O0)
-: property 'my_property' has empty name.
-
-We should also try to make this compatible with compiler errors so
-that we can go to the file where the error occurred:
-
-: file.dia:5:10: properties must have a non-null name
-
-For this to work we need to label everything with a file, column and
-line. We can't call this class a =location= since we already use that
-name for positions in model space. We could probably call it
-=source_location= like [[http://clang.llvm.org/doxygen/classclang_1_1SourceLocation.htlm][clang does]]. We can use [[https://developer.apple.com/library/prerelease/content/documentation/Darwin/Reference/usr_APIs/tree/index.html][XML_GET_LINE]] to get
-information about the line number of dia documents. We need something
-similar for JSON.
-
-The context should be provided using Boost Exception diagnostics and
-dumped into =std::cerr= at the very top.
-
-Merged stories:
-
-*Improve file importer errors*
-
-It would be nice if one could know the file, line and column where an
-error has occurred when importing any imported file. Even for Dia,
-this would make troubleshooting much easier. We need to add some
-information to the meta-model to keep track of the source of the
-types: file, line start, line end perhaps.
-
 *** Add warning support for validation                                :story:
 
 Once we implement a validator, we will soon run into warnings: cases
@@ -3456,14 +3420,6 @@ code generation, e.g. =--validate= or something along those lines.
 
 We are interested in performing the parsing. This would be useful for
 example for a flymake mode in emacs.
-
-*** Vistor is only supported at the base class level                  :story:
-
-Due to implementation constraints, we only support visitable at the
-base class level. Add an exception if users attempt to use visitable
-stereotype in a class that has parents.
-
-Note: is this true? We are using derived visitable in C++ model.
 
 *** Add a property for the model name as dynamic extensions           :story:
 
@@ -3682,6 +3638,76 @@ swap function. This uses the move constructor. For some reason, the
 compiler does not think the default move constructor is initialising
 the member variables correctly. Not obvious why that would be.
 
+*** Improving use of exceptions                                        :epic:
+
+Exceptions in dogen are not providing enough contextual
+information. The problem is that we just see the information available
+at the throw site, not the context regarding the processing
+pipeline. Boost exception has the required tooling for this, but we
+are not making use of it correctly. Ideally we need to know:
+
+- model currently being processed
+- element
+- attribute
+- name tree
+- name in name tree
+- phase in the yarn pipeline (e.g. injection, etc)
+- phase in the quilt.cpp pipeline (e.g. building properties,
+  formatting, etc).
+- file and line where the element was defined in the frontend.
+
+Not all of these make sense at the same time. What would be ideal is:
+
+- create a base exception for each model with all the attributes we
+  need to capture.
+- add support for automatic generation of Boost Exception tags for
+  each attribute.
+- add support for exception logging via IO.
+- change all throw paths to fill in the attributes by catching
+  exceptions and augmenting them. This seems quite involved
+  overall. In some cases, we probably just need to locate a few select
+  entry points (pipeline etc), but for others such as attributes etc
+  this will be hard.
+- log the exception only at the final catch point. We no longer need
+  to log at throw because the catch will have all the information (and
+  more).
+
+Merged stories:
+
+*Provide contextual error messages during validation*
+
+As per the validator story, we need to ensure the model we are
+processing is valid. However, the validator must provide contextual
+validation error messages:
+
+: error 1: properties must have a non-null name
+: in model 'my_model' (Dia ID: O0)
+: in object 'my_object (Dia ID: O0)
+: property 'my_property' has empty name.
+
+We should also try to make this compatible with compiler errors so
+that we can go to the file where the error occurred:
+
+: file.dia:5:10: properties must have a non-null name
+
+For this to work we need to label everything with a file, column and
+line. We can't call this class a =location= since we already use that
+name for positions in model space. We could probably call it
+=source_location= like [[http://clang.llvm.org/doxygen/classclang_1_1SourceLocation.htlm][clang does]]. We can use [[https://developer.apple.com/library/prerelease/content/documentation/Darwin/Reference/usr_APIs/tree/index.html][XML_GET_LINE]] to get
+information about the line number of dia documents. We need something
+similar for JSON.
+
+The context should be provided using Boost Exception diagnostics and
+dumped into =std::cerr= at the very top.
+
+*Improve file importer errors*
+
+It would be nice if one could know the file, line and column where an
+error has occurred when importing any imported file. Even for Dia,
+this would make troubleshooting much easier. We need to add some
+information to the meta-model to keep track of the source of the
+types: file, line start, line end perhaps.
+
 *** Consider supporting non-boost exceptions                          :story:
 
 It should be fairly trivial to disable the use of boost exception when
@@ -3694,6 +3720,89 @@ For models that interface with other models, it may make sense to have
 an exception class that is derived from a user defined class. We could
 easily support an exception base class supplied via meta-data. The
 user would have to expose the type via JSON.
+
+*** Serialisable and ioable exceptions                                 :epic:
+
+#+begin_quote
+*Story*: As a dogen user, I want to send exceptions across the wire so
+that I can report errors to remote users. I also want to dump
+exceptions to the log file.
+#+end_quote
+
+At present we only generate the types facet for exceptions. However,
+there is nothing stopping us from adding serialisation support for
+exceptions. This would be useful for example for services to convey
+errors on the remote end point. The same logic applies to io.
+
+This should be fairly straightforward since exceptions are simple
+types. We haven't got a use case for it yet though.
+
+*** Use error codes in exceptions                                     :story:
+
+Avoid breaking tests every time the exception text changes by creating
+a error code property in kitanda exceptions.
+
+After some investigation it was found that boost already supports this
+approach in =system=, as per [[http://en.highscore.de/cpp/boost/errorhandling.html][boost book]]. We could define a new
+category per model and then create an enumeration of all error codes
+in dia, for which the values would be the strings to use for the
+error. The user could then create an exception and pass in the error
+code in the constructor.
+
+We should also make use of string tables to define all the error
+messages.
+
+Could we just have an exception factory that handles all of the
+machinery of creating an exception with the right code, message etc?
+it could also be responsible for appending more content to an existing
+exception so that we'd have the tags all in one place.
+
+Alternatively we could have each exception define the supported error
+codes. This would allow us to code generate them. The only problem is
+if multiple exceptions share an error code, but this should probably
+not happen?
+
+*** Investigate the integration of =boost::log= with throw exception  :story:
+
+At present we write a lot of code like this:
+
+: BOOST_LOG_SEV(lg, error) << object_not_found << qn;
+: BOOST_THROW_EXCEPTION(indexing_error(object_not_found +
+:     boost::lexical_cast<std::string>(qn)));
+
+This is to ensure we log the fact that an exception occurred to make
+debugging problems easier. However, it leads to a lot of duplicated
+code. We need to figure out a way of simplifying this, most likely
+through a macro.
+
+Actually an even easier way would be to generate IO for exceptions; we
+could simply create the exception, populate all data values, dump it
+to the log file and then throw the exception.
+
+*** Ensure an error info tag is not set already before we set it      :story:
+
+Now that we will start making use of error info tags in anger, one
+problem we have spotted is that some times we reset the same tag:
+i.e. when an exception has been thrown, we do not want to set the same
+tag multiple times because it overwrites it. There should be a way to
+either allow multiple bits of information to be associated with the
+same tag, or a way to check if the tag has been already set. But if it
+is, what then? We can't throw.
+
+*** Exception classes should allow inheritance                        :story:
+
+#+begin_quote
+*Story*: As a dogen user, I need to generate object graphs for my
+exception classes so that I can model my domain better.
+#+end_quote
+
+We need to have a form of inheriting from a base exception for a given
+model. We also need to be able to inherit from other exceptions in a
+model. At present exceptions are not objects so the dependency graph
+support is not there.
+
+When we do this we need to split relatable into "associatable" and
+"generalisable" and get exceptions to model generalisable.
 
 *** Consider computing hashes only once for immutable types           :story:
 
@@ -4462,19 +4571,6 @@ directory. This is not an easy undertaking because:
   across
 
 We should create =production= and =test= sub-directories for diagrams.
-
-*** Investigate the integration of =boost::log= with throw exception  :story:
-
-At present we write a lot of code like this:
-
-: BOOST_LOG_SEV(lg, error) << object_not_found << qn;
-: BOOST_THROW_EXCEPTION(indexing_error(object_not_found +
-:     boost::lexical_cast<std::string>(qn)));
-
-This is to ensure we log the fact that an exception occurred to make
-debugging problems easier. However, it leads to a lot of duplicated
-code. We need to figure out a way of simplifying this, most likely
-through a macro.
 
 *** Make test data generator more configurable                        :story:
 
@@ -5879,31 +5975,6 @@ because we may want to add one or more concrete methods to the ABC.
 We need support for operations for this to work. We also need support
 for pointers, references and const.
 
-*** Use error codes in exceptions                                     :story:
-
-Avoid breaking tests every time the exception text changes by creating
-a error code property in kitanda exceptions.
-
-After some investigation it was found that boost already supports this
-approach in =system=, as per [[http://en.highscore.de/cpp/boost/errorhandling.html][boost book]]. We could define a new
-category per model and then create an enumeration of all error codes
-in dia, for which the values would be the strings to use for the
-error. The user could then create an exception and pass in the error
-code in the constructor.
-
-We should also make use of string tables to define all the error
-messages.
-
-Could we just have an exception factory that handles all of the
-machinery of creating an exception with the right code, message etc?
-it could also be responsible for appending more content to an existing
-exception so that we'd have the tags all in one place.
-
-Alternatively we could have each exception define the supported error
-codes. This would allow us to code generate them. The only problem is
-if multiple exceptions share an error code, but this should probably
-not happen?
-
 *** Dry-run option to just diff with existing generated code           :epic:
 
 #+begin_quote
@@ -5957,21 +6028,6 @@ We could:
 - add meta-data for users to supply their own values;
 - add meta-data to disable setting the enumerator value altogether.
 
-*** Exception classes should allow inheritance                        :story:
-
-#+begin_quote
-*Story*: As a dogen user, I need to generate object graphs for my
-exception classes so that I can model my domain better.
-#+end_quote
-
-We need to have a form of inheriting from a base exception for a given
-model. We also need to be able to inherit from other exceptions in a
-model. At present exceptions are not objects so the dependency graph
-support is not there.
-
-When we do this we need to split relatable into "associatable" and
-"generalisable" and get exceptions to model generalisable.
-
 *** Add support for private and protected attributes                  :story:
 
 #+begin_quote
@@ -5987,14 +6043,6 @@ extensions. This is not yet supported by C++, but one can envision a
 time where it will be possible to extend the code generated classes
 with manually crafted code; these extensions may have access to
 protected/private state, thus allowing for encapsulation.
-
-*** Shared pointers as keys in associative containers                 :story:
-
-This is not supported; it would require generating the
-hashing/comparison infrastructure for shared pointers. Further, as it
-has been pointed out, keys should be immutable; having pointers as
-keys opens the doors to all sorts of problems. We need to throw an
-error at model building time if an user tries to do this.
 
 *** Add support for error info augmenting of exceptions               :story:
 
@@ -6024,15 +6072,13 @@ captured in the exception type.
 We should probably support some meta-data to enable/disable this
 behaviour, in case someone wants real attributes in an exception.
 
-*** Ensure an error info tag is not set already before we set it      :story:
+*** Shared pointers as keys in associative containers                 :story:
 
-Now that we will start making use of error info tags in anger, one
-problem we have spotted is that some times we reset the same tag:
-i.e. when an exception has been thrown, we do not want to set the same
-tag multiple times because it overwrites it. There should be a way to
-either allow multiple bits of information to be associated with the
-same tag, or a way to check if the tag has been already set. But if it
-is, what then? We can't throw.
+This is not supported; it would require generating the
+hashing/comparison infrastructure for shared pointers. Further, as it
+has been pointed out, keys should be immutable; having pointers as
+keys opens the doors to all sorts of problems. We need to throw an
+error at model building time if an user tries to do this.
 
 ** Tooling, infrastructure, blog posts, etc.
 
@@ -7348,22 +7394,6 @@ we could automatically generate its mock in a mock facet and allow
 users to supply lambdas for the expectations.
 
 This will require proper operations support.
-
-*** Serialisable and ioable exceptions                                 :epic:
-
-#+begin_quote
-*Story*: As a dogen user, I want to send exceptions across the wire so
-that I can report errors to remote users. I also want to dump
-exceptions to the log file.
-#+end_quote
-
-At present we only generate the types facet for exceptions. However,
-there is nothing stopping us from adding serialisation support for
-exceptions. This would be useful for example for services to convey
-errors on the remote end point. The same logic applies to io.
-
-This should be fairly straightforward since exceptions are simple
-types. We haven't got a use case for it yet though.
 
 *** Consider representing namespaces in file names rather than directories :story:
 
