@@ -27,7 +27,7 @@
 
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/properties/forward_declarations_info.hpp"
+#include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 
 namespace dogen {
@@ -47,11 +47,10 @@ public:
 
 public:
     /**
-     * @brief Generate a c++ representation for the type.
+     * @brief Generates a forward declaration for the type.
      */
-    virtual dogen::formatters::file
-    format(const context& ctx,
-        const properties::forward_declarations_info& fd) const = 0;
+    virtual dogen::formatters::file format(const context& ctx,
+        const fabric::forward_declarations& fd) const = 0;
 };
 
 } } } }

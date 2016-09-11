@@ -50,6 +50,8 @@ build(const yarn::name& model_name) const {
 
 std::list<boost::shared_ptr<yarn::element>>
 registrar_factory::build(const yarn::intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Generating registrars.";
+
     std::list<boost::shared_ptr<yarn::element>> r;
 
     auto rg(build(im.name()));
@@ -77,6 +79,7 @@ registrar_factory::build(const yarn::intermediate_model& im) const {
     }
 
     r.push_back(rg);
+    BOOST_LOG_SEV(lg, debug) << "Generated registrars: " << r.size();
     return r;
 }
 

@@ -6,23 +6,24 @@
 <#@ containing_namespaces=dogen::quilt::cpp::formatters::types #>
 <#+
 dogen::formatters::file forward_declarations_formatter_stitch(
-    assistant& a, const properties::forward_declarations_info& fd) {
+    assistant& a, const fabric::forward_declarations& fd) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(fd.namespaces()));
+            const auto ns(a.make_namespaces(fd.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 
             if (fd.is_enum()) {
 #>
 
-enum class <#= fd.name() #> : <#= fd.enum_type() #>;
+enum class <#= fd.name().simple() #> : <#= fd.underlying_type().simple() #>;
 
 <#+
             } else {
 #>
 
-class <#= fd.name() #>;
+class <#= fd.name().simple() #>;
 
 <#+
             }

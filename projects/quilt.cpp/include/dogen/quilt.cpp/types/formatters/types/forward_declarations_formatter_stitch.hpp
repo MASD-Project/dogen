@@ -27,7 +27,7 @@
 
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
-#include "dogen/quilt.cpp/types/properties/forward_declarations_info.hpp"
+#include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -35,9 +35,8 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-dogen::formatters::file
-forward_declarations_formatter_stitch(
-    assistant& a, const properties::forward_declarations_info& fd);
+dogen::formatters::file forward_declarations_formatter_stitch(
+    assistant& a, const fabric::forward_declarations& fd);
 
 } } } } }
 

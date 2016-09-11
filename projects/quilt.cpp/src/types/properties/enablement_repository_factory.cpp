@@ -54,9 +54,6 @@ namespace properties {
 
 namespace {
 
-/**
- * @brief Generates all inclusion dependencies.
- */
 class generator final : public fabric::element_visitor {
 public:
     explicit generator(const enablement_factory& f) : factory_(f) {}
@@ -81,8 +78,8 @@ public:
     }
     void visit(const dogen::yarn::exception& e) override { generate(e); }
     void visit(const dogen::yarn::visitor& v) override { generate(v); }
-    void visit(const fabric::master_header& mh) override { generate(mh); }
     void visit(const fabric::registrar& rg) override { generate(rg); }
+    void visit(const fabric::master_header& mh) override { generate(mh); }
 
 public:
     const enablement_repository& result() const { return result_; }

@@ -19,9 +19,18 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations_factory.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(
+        "quit.cpp.fabric.forward_declarations_factory"));
+
+}
 
 namespace dogen {
 namespace quilt {
@@ -33,6 +42,8 @@ private:
     boost::shared_ptr<forward_declarations> create(const yarn::name& n) const {
         auto r(boost::make_shared<forward_declarations>());
         r->name(n);
+        r->generation_type(yarn::generation_types::full_generation);
+        r->is_element_extension(true);
         return r;
     }
 
@@ -54,10 +65,10 @@ public:
     void operator()(const yarn::enumeration& e) {
         if (e.generation_type() == yarn::generation_types::no_generation)
             return;
-        const auto fwd(create(e.name()));
-        fwd->is_enum(true);
-        fwd->underlying_type(e.underlying_type());
-        result_.push_back(fwd);
+        const auto fd(create(e.name()));
+        fd->is_enum(true);
+        fd->underlying_type(e.underlying_type());
+        result_.push_back(fd);
     }
 
     void operator()(const yarn::object& o) {
@@ -71,7 +82,9 @@ public:
         if (e.generation_type() == yarn::generation_types::no_generation)
             return;
 
-        result_.push_back(create(e.name()));
+        const auto fd(create(e.name()));
+        fd->is_exception(true);
+        result_.push_back(fd);
     }
 
 private:
@@ -80,9 +93,14 @@ private:
 
 std::list<boost::shared_ptr<yarn::element>> forward_declarations_factory::
 build(const yarn::intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Generating forward declarations.";
+
     generator g;
     yarn::elements_traversal(im, g);
-    return g.result();
+    const auto r(g.result());
+
+    BOOST_LOG_SEV(lg, debug) << "Generated forward declarations: " << r.size();
+    return r;
 }
 
 } } } }

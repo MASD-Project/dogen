@@ -29,19 +29,20 @@ namespace formatters {
 namespace serialization {
 
 dogen::formatters::file forward_declarations_formatter_stitch(
-    assistant& a, const properties::forward_declarations_info& fd) {
+    assistant& a, const fabric::forward_declarations& fd) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
+        const auto qn(a.get_qualified_name(fd.name()));
 a.stream() << std::endl;
 a.stream() << "namespace boost {" << std::endl;
 a.stream() << "namespace serialization {" << std::endl;
 a.stream() << std::endl;
 a.stream() << "template<class Archive>" << std::endl;
-a.stream() << "void save(Archive& ar, const " << fd.qualified_name() << "& v, unsigned int version);" << std::endl;
+a.stream() << "void save(Archive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
 a.stream() << std::endl;
 a.stream() << "template<class Archive>" << std::endl;
-a.stream() << "void load(Archive& ar, " << fd.qualified_name() << "& v, unsigned int version);" << std::endl;
+a.stream() << "void load(Archive& ar, " << qn << "& v, unsigned int version);" << std::endl;
 a.stream() << std::endl;
 a.stream() << "} }" << std::endl;
 a.stream() << std::endl;

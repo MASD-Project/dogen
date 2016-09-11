@@ -27,7 +27,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quit.cpp.formatters.workflow"));
+static logger lg(logger_factory("quit.cpp.formatters.element_formatter"));
 
 const std::string formatter_properties_not_found(
     "Could not find properties for formatter: ");
@@ -140,6 +140,9 @@ public:
     }
     void visit(const fabric::master_header& mh) override {
         format(container_.master_header_formatters(), mh);
+    }
+    void visit(const fabric::forward_declarations& fd) override {
+        format(container_.forward_declarations_formatters(), fd);
     }
 
 private:

@@ -53,9 +53,8 @@ public:
     void register_inclusion_dependencies_provider(
         properties::registrar& rg) const override;
 
-    dogen::formatters::file
-    format(const context& ctx,
-        const properties::forward_declarations_info& fd) const override;
+    dogen::formatters::file format(const context& ctx,
+        const fabric::forward_declarations& fd) const override;
 };
 
 } } } } }

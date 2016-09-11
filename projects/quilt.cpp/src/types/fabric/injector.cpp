@@ -90,6 +90,7 @@ void injector::inject_forward_declarations(yarn::intermediate_model& im) const {
 void injector::inject(yarn::intermediate_model& im) const {
     inject_registrar(im);
     inject_master_headers(im);
+    inject_forward_declarations(im);
 }
 
 } } } }

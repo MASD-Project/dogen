@@ -161,9 +161,14 @@ private:
 boost::shared_ptr<yarn::element>
 master_header_factory::build(const formatters::container& fc,
     const yarn::intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Generating the master header.";
+
     generator g(im.name(), fc);
     yarn::elements_traversal(im, g);
-    return g.result();
+    const auto r(g.result());
+
+    BOOST_LOG_SEV(lg, debug) << "Generated the master header.";
+    return r;
 }
 
 } } } }

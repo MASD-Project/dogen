@@ -26,20 +26,21 @@ namespace cpp {
 namespace formatters {
 namespace types {
 dogen::formatters::file forward_declarations_formatter_stitch(
-    assistant& a, const properties::forward_declarations_info& fd) {
+    assistant& a, const fabric::forward_declarations& fd) {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter());
         {
-            auto snf(a.make_scoped_namespace_formatter(fd.namespaces()));
+            const auto ns(a.make_namespaces(fd.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
 
             if (fd.is_enum()) {
 a.stream() << std::endl;
-a.stream() << "enum class " << fd.name() << " : " << fd.enum_type() << ";" << std::endl;
+a.stream() << "enum class " << fd.name().simple() << " : " << fd.underlying_type().simple() << ";" << std::endl;
 a.stream() << std::endl;
             } else {
 a.stream() << std::endl;
-a.stream() << "class " << fd.name() << ";" << std::endl;
+a.stream() << "class " << fd.name().simple() << ";" << std::endl;
 a.stream() << std::endl;
             }
         } // snf
