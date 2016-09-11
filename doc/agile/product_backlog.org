@@ -1166,6 +1166,14 @@ qualified name; location could have a "all modules" list that
 concatenates external, model and internal modules. We should look at
 performance before doing this change though.
 
+We are also using this information in =quilt.cpp= via the name builder
+(this is the only reason it cannot be removed). Adding it to the
+name/location is a bit painful since we use it in a lot of places, but
+we have other options:
+
+- create a service to do the merging and do it on the fly
+- add a method to nameable with the flat module list.
+
 *** Consider reducing the number of qname lookups in cpp model        :story:
 
 At present we are still using =yarn::name= in a lot of repositories in
