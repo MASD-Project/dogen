@@ -34,7 +34,8 @@ exception::exception(
     const dogen::yarn::origin_types origin_type,
     const std::string& original_model_name,
     const boost::optional<dogen::yarn::name>& contained_by,
-    const bool in_global_module)
+    const bool in_global_module,
+    const bool is_element_extension)
     : dogen::yarn::element(
       documentation,
       extensions,
@@ -43,7 +44,8 @@ exception::exception(
       origin_type,
       original_model_name,
       contained_by,
-      in_global_module) { }
+      in_global_module,
+      is_element_extension) { }
 
 void exception::accept(const element_visitor& v) const {
     v.visit(*this);

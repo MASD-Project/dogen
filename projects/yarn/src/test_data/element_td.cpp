@@ -86,6 +86,7 @@ populate(const unsigned int position, result_type& v) {
     v.original_model_name(create_std_string(position + 5));
     v.contained_by(create_boost_optional_dogen_yarn_name(position + 6));
     v.in_global_module(create_bool(position + 7));
+    v.is_element_extension(create_bool(position + 8));
 }
 
 element_generator::result_type*

@@ -39,6 +39,7 @@ primitive::primitive(
     const std::string& original_model_name,
     const boost::optional<dogen::yarn::name>& contained_by,
     const bool in_global_module,
+    const bool is_element_extension,
     const bool is_default_enumeration_type)
     : dogen::yarn::element(
       documentation,
@@ -48,7 +49,8 @@ primitive::primitive(
       origin_type,
       original_model_name,
       contained_by,
-      in_global_module),
+      in_global_module,
+      is_element_extension),
       is_default_enumeration_type_(is_default_enumeration_type) { }
 
 void primitive::accept(const element_visitor& v) const {

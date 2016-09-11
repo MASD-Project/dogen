@@ -96,6 +96,7 @@
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<members class_id="25" tracking_level="0" version="0">
 					<count>0</count>
@@ -189,6 +190,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<members>
 					<count>0</count>
@@ -244,6 +246,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<members>
 					<count>0</count>
@@ -299,6 +302,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<members>
 					<count>0</count>
@@ -354,6 +358,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<members>
 					<count>0</count>
@@ -429,6 +434,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes class_id="35" tracking_level="0" version="0">
 					<count>0</count>
@@ -665,6 +671,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -872,6 +879,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -1079,6 +1087,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -1286,6 +1295,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -1442,6 +1452,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -1679,6 +1690,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -1805,6 +1817,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -2010,6 +2023,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -2216,6 +2230,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -2423,6 +2438,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -2629,6 +2645,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -2755,6 +2772,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -2961,6 +2979,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -3116,6 +3135,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -3351,6 +3371,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -3557,6 +3578,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -3794,6 +3816,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -3949,6 +3972,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -4154,6 +4178,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -4389,6 +4414,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -4514,6 +4540,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -4750,6 +4777,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -4986,6 +5014,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -5111,6 +5140,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -5346,6 +5376,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -5501,6 +5532,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -5656,6 +5688,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -5892,6 +5925,7 @@ in the context of inheritance.
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<is_element_extension>0</is_element_extension>
 				</element>
 				<all_attributes>
 					<count>0</count>

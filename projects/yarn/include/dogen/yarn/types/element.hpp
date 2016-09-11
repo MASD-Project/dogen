@@ -67,7 +67,8 @@ public:
         const dogen::yarn::origin_types origin_type,
         const std::string& original_model_name,
         const boost::optional<dogen::yarn::name>& contained_by,
-        const bool in_global_module);
+        const bool in_global_module,
+        const bool is_element_extension);
 
 private:
     template<typename Archive>
@@ -164,6 +165,14 @@ public:
     void in_global_module(const bool v);
     /**@}*/
 
+    /**
+     * @brief If true, this element extends another element with the same id.
+     */
+    /**@{*/
+    bool is_element_extension() const;
+    void is_element_extension(const bool v);
+    /**@}*/
+
 protected:
     bool compare(const element& rhs) const;
 public:
@@ -181,6 +190,7 @@ private:
     std::string original_model_name_;
     boost::optional<dogen::yarn::name> contained_by_;
     bool in_global_module_;
+    bool is_element_extension_;
 };
 
 inline element::~element() noexcept { }

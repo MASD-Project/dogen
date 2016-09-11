@@ -50,6 +50,7 @@ forward_declarations::forward_declarations(
     const std::string& original_model_name,
     const boost::optional<dogen::yarn::name>& contained_by,
     const bool in_global_module,
+    const bool is_element_extension,
     const bool is_enum,
     const std::string& enum_type,
     const bool is_exception)
@@ -61,7 +62,8 @@ forward_declarations::forward_declarations(
       origin_type,
       original_model_name,
       contained_by,
-      in_global_module),
+      in_global_module,
+      is_element_extension),
       is_enum_(is_enum),
       enum_type_(enum_type),
       is_exception_(is_exception) { }

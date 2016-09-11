@@ -57,6 +57,7 @@ public:
         const std::string& original_model_name,
         const boost::optional<dogen::yarn::name>& contained_by,
         const bool in_global_module,
+        const bool is_element_extension,
         const bool is_enum,
         const std::string& enum_type,
         const bool is_exception);

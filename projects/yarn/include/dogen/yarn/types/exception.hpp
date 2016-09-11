@@ -54,7 +54,8 @@ public:
         const dogen::yarn::origin_types origin_type,
         const std::string& original_model_name,
         const boost::optional<dogen::yarn::name>& contained_by,
-        const bool in_global_module);
+        const bool in_global_module,
+        const bool is_element_extension);
 
 private:
     template<typename Archive>

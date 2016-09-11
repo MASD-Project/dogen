@@ -58,6 +58,7 @@ public:
         const std::string& original_model_name,
         const boost::optional<dogen::yarn::name>& contained_by,
         const bool in_global_module,
+        const bool is_element_extension,
         const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& inclusion_by_facet);
 
 private:

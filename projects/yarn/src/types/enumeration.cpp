@@ -51,6 +51,7 @@ enumeration::enumeration(
     const std::string& original_model_name,
     const boost::optional<dogen::yarn::name>& contained_by,
     const bool in_global_module,
+    const bool is_element_extension,
     const dogen::yarn::name& underlying_type,
     const std::vector<dogen::yarn::enumerator>& enumerators)
     : dogen::yarn::element(
@@ -61,7 +62,8 @@ enumeration::enumeration(
       origin_type,
       original_model_name,
       contained_by,
-      in_global_module),
+      in_global_module,
+      is_element_extension),
       underlying_type_(underlying_type),
       enumerators_(enumerators) { }
 

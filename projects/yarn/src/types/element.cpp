@@ -55,7 +55,8 @@ namespace yarn {
 element::element()
     : generation_type_(static_cast<dogen::yarn::generation_types>(0)),
       origin_type_(static_cast<dogen::yarn::origin_types>(0)),
-      in_global_module_(static_cast<bool>(0)) { }
+      in_global_module_(static_cast<bool>(0)),
+      is_element_extension_(static_cast<bool>(0)) { }
 
 element::element(element&& rhs)
     : documentation_(std::move(rhs.documentation_)),
@@ -65,7 +66,8 @@ element::element(element&& rhs)
       origin_type_(std::move(rhs.origin_type_)),
       original_model_name_(std::move(rhs.original_model_name_)),
       contained_by_(std::move(rhs.contained_by_)),
-      in_global_module_(std::move(rhs.in_global_module_)) { }
+      in_global_module_(std::move(rhs.in_global_module_)),
+      is_element_extension_(std::move(rhs.is_element_extension_)) { }
 
 element::element(
     const std::string& documentation,
@@ -75,7 +77,8 @@ element::element(
     const dogen::yarn::origin_types origin_type,
     const std::string& original_model_name,
     const boost::optional<dogen::yarn::name>& contained_by,
-    const bool in_global_module)
+    const bool in_global_module,
+    const bool is_element_extension)
     : documentation_(documentation),
       extensions_(extensions),
       name_(name),
@@ -83,7 +86,8 @@ element::element(
       origin_type_(origin_type),
       original_model_name_(original_model_name),
       contained_by_(contained_by),
-      in_global_module_(in_global_module) { }
+      in_global_module_(in_global_module),
+      is_element_extension_(is_element_extension) { }
 
 void element::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -101,7 +105,8 @@ void element::to_stream(std::ostream& s) const {
       << "\"origin_type\": " << origin_type_ << ", "
       << "\"original_model_name\": " << "\"" << tidy_up_string(original_model_name_) << "\"" << ", "
       << "\"contained_by\": " << contained_by_ << ", "
-      << "\"in_global_module\": " << in_global_module_
+      << "\"in_global_module\": " << in_global_module_ << ", "
+      << "\"is_element_extension\": " << is_element_extension_
       << " }";
 }
 
@@ -115,6 +120,7 @@ void element::swap(element& other) noexcept {
     swap(original_model_name_, other.original_model_name_);
     swap(contained_by_, other.contained_by_);
     swap(in_global_module_, other.in_global_module_);
+    swap(is_element_extension_, other.is_element_extension_);
 }
 
 bool element::compare(const element& rhs) const {
@@ -125,7 +131,8 @@ bool element::compare(const element& rhs) const {
         origin_type_ == rhs.origin_type_ &&
         original_model_name_ == rhs.original_model_name_ &&
         contained_by_ == rhs.contained_by_ &&
-        in_global_module_ == rhs.in_global_module_;
+        in_global_module_ == rhs.in_global_module_ &&
+        is_element_extension_ == rhs.is_element_extension_;
 }
 
 const std::string& element::documentation() const {
@@ -230,6 +237,14 @@ bool element::in_global_module() const {
 
 void element::in_global_module(const bool v) {
     in_global_module_ = v;
+}
+
+bool element::is_element_extension() const {
+    return is_element_extension_;
+}
+
+void element::is_element_extension(const bool v) {
+    is_element_extension_ = v;
 }
 
 } }
