@@ -44,10 +44,26 @@ namespace cpp {
 namespace fabric {
 
 registrar::registrar(
+    const std::string& documentation,
+    const dogen::dynamic::object& extensions,
+    const dogen::yarn::name& name,
+    const dogen::yarn::generation_types generation_type,
+    const dogen::yarn::origin_types origin_type,
+    const std::string& original_model_name,
+    const boost::optional<dogen::yarn::name>& contained_by,
+    const bool in_global_module,
     const std::list<dogen::yarn::name>& leaves,
     const std::list<dogen::yarn::name>& model_dependencies,
     const std::list<dogen::yarn::name>& registrar_dependencies)
-    : dogen::yarn::element(),
+    : dogen::yarn::element(
+      documentation,
+      extensions,
+      name,
+      generation_type,
+      origin_type,
+      original_model_name,
+      contained_by,
+      in_global_module),
       leaves_(leaves),
       model_dependencies_(model_dependencies),
       registrar_dependencies_(registrar_dependencies) { }

@@ -87,8 +87,25 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-master_header::master_header(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& inclusion_by_facet)
-    : dogen::yarn::element(),
+master_header::master_header(
+    const std::string& documentation,
+    const dogen::dynamic::object& extensions,
+    const dogen::yarn::name& name,
+    const dogen::yarn::generation_types generation_type,
+    const dogen::yarn::origin_types origin_type,
+    const std::string& original_model_name,
+    const boost::optional<dogen::yarn::name>& contained_by,
+    const bool in_global_module,
+    const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& inclusion_by_facet)
+    : dogen::yarn::element(
+      documentation,
+      extensions,
+      name,
+      generation_type,
+      origin_type,
+      original_model_name,
+      contained_by,
+      in_global_module),
       inclusion_by_facet_(inclusion_by_facet) { }
 
 void master_header::accept(const dogen::yarn::element_visitor& v) const {

@@ -48,6 +48,14 @@ public:
 
 public:
     registrar(
+        const std::string& documentation,
+        const dogen::dynamic::object& extensions,
+        const dogen::yarn::name& name,
+        const dogen::yarn::generation_types generation_type,
+        const dogen::yarn::origin_types origin_type,
+        const std::string& original_model_name,
+        const boost::optional<dogen::yarn::name>& contained_by,
+        const bool in_global_module,
         const std::list<dogen::yarn::name>& leaves,
         const std::list<dogen::yarn::name>& model_dependencies,
         const std::list<dogen::yarn::name>& registrar_dependencies);

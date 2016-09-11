@@ -49,7 +49,16 @@ public:
     virtual ~master_header() noexcept { }
 
 public:
-    explicit master_header(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& inclusion_by_facet);
+    master_header(
+        const std::string& documentation,
+        const dogen::dynamic::object& extensions,
+        const dogen::yarn::name& name,
+        const dogen::yarn::generation_types generation_type,
+        const dogen::yarn::origin_types origin_type,
+        const std::string& original_model_name,
+        const boost::optional<dogen::yarn::name>& contained_by,
+        const bool in_global_module,
+        const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& inclusion_by_facet);
 
 private:
     template<typename Archive>

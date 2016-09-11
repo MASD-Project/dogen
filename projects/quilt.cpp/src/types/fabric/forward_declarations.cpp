@@ -42,10 +42,26 @@ forward_declarations::forward_declarations()
       is_exception_(static_cast<bool>(0)) { }
 
 forward_declarations::forward_declarations(
+    const std::string& documentation,
+    const dogen::dynamic::object& extensions,
+    const dogen::yarn::name& name,
+    const dogen::yarn::generation_types generation_type,
+    const dogen::yarn::origin_types origin_type,
+    const std::string& original_model_name,
+    const boost::optional<dogen::yarn::name>& contained_by,
+    const bool in_global_module,
     const bool is_enum,
     const std::string& enum_type,
     const bool is_exception)
-    : dogen::yarn::element(),
+    : dogen::yarn::element(
+      documentation,
+      extensions,
+      name,
+      generation_type,
+      origin_type,
+      original_model_name,
+      contained_by,
+      in_global_module),
       is_enum_(is_enum),
       enum_type_(enum_type),
       is_exception_(is_exception) { }
