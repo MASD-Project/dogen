@@ -6797,12 +6797,16 @@ tree. This would be a multi-step process:
 - we can then reload the yarn model from the new and generate from
   there.
 
-- *Automatic Renames*
+*Automatic Renames*
 
 This could be potentially done automatically if we could access say
 the existing version of the diagram and the new version; we could load
 both models and then do a diff. This could be a bit dangerous though
 if there are other changes, etc.
+
+*Attribute Renames*
+
+Another useful use case, is the renaming of attributes.
 
 *** Generate tests skeleton                                           :story:
 
