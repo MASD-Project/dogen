@@ -27,49 +27,6 @@ Notes:
 - Beast [[https://github.com/tim-janik/beast/blob/master/.travis.yml][travis.yml]]
 - [[https://github.com/tim-janik/rapicorn/blob/master/citool.sh.][citool.sh]] script from [[https://github.com/tim-janik/rapicorn][Rapicorn]] project and their [[https://raw.githubusercontent.com/tim-janik/rapicorn/master/README.md][README]].
 
-*** Remove =optional<list>=                                           :story:
-
-We should not really be using optional<list>. The empty list is
-sufficient for this.
-
-Uses:
-
-- include provider.
-
-*** Consider renaming formatters                                      :story:
-
-After reading the [[http://martinfowler.com/eaaDev/PresentationModel.html][Presentation Model]] pattern a bit more carefully, it
-seems it provides a good approach for formatters. If one thinks of the
-file as the view, then the formatters are the presenters and the model
-representing all presentation logic (e.g. =cpp=) is the presentation
-model. We could:
-
-- create a top-level folder called =presentation=;
-- rename =formatters= to =core= and move it to =presentation=;
-- move =cpp= to =presentation=;
-- in =cpp=:
-  - rename =formattables= to =presentables=;
-  - rename =formatters= to =presenters=;
-- in this light, =backend= is really the "meta-workflow" for all
-  possible presentations. It should really live under presentation. It
-  would make more sense to merge it with =core=, if it were not that
-  core contains all sorts of loose bits that are useful only in the
-  guts of presentation. We could call it =orchestration= or some such
-  name. Or we could leave it as =presentation::backends=.
-- move =file= to =backends=. We don't really want external clients to
-  have to know about =core= just to obtain a single type. Also,
-  backends shouldn't really have any dependencies.
-- grep for formatting, formattables, formatter, format, etc. and
-  ensure all usages have been replaced with present*.
-
-We should wait until the "great refactoring" is done so that we do not
-have to rename the legacy models too.
-
-*Merged with duplicate*
-
-These are not really formatters; not sure what the right name should
-be though; templates?
-
 *** Analysis work on handling varying levels of formatter optionality :story:
 
 In some cases the formatter may decide that it does not need to create
@@ -95,24 +52,6 @@ Tasks:
 - change formatter interfaces to return =boost::optional<file>=
 - change all formatters.
 
-*** Consider removing the overwrite flag in =formatters::file=        :story:
-
-Investigate if the overwrite flag makes sense in file; it seems we
-only use it in two scenarios: force overwrite requested by user or
-file contents have changed, both of which can be done in the
-file_writer.
-
-Actually this flag is needed. It is required to handle the case where
-we do not code-generate files, unless they do not exist. For example,
-for service headers and implementation we should create the files, but
-then subsequently not touch them. The overwrite flag should be set to
-false. We need to figure out how to implement this and remove the
-hacks around file writing.
-
-For now we have abused this flag to allow legacy files overrides of
-the new world formatters. This is just until we move totally to new
-world though.
-
 *** Consider automatic injection of helpers                           :story:
 
 At present we are manually calling:
@@ -125,23 +64,6 @@ when adding the first helper to an existing template: one does not
 quite know why the helper is not coming through without
 investigating. One possible solution is to make the helper generation
 more "mandatory". Its not entirely obvious how this would work.
-
-*** Element properties includes non-target types                      :story:
-
-We seem to be generating a lot of element properties and formatter
-properties as well. We should only be generating these for the target
-model.
-
-*** Consider renaming settings to annotations                         :story:
-
-Whilst its pretty clear now that settings are a strongly-typed
-representation of the meta-data and properties are the post-processed
-version, the names "settings" and "properties" still sound far too
-similar. It would be nicer to have something more meta-data-like for
-settings such as annotations. Read up the past discussions on
-naming. One possible reason not to use annotations was because we used
-it already in the formatters model. Perhaps that could be renamed to
-something else, freeing up the name?
 
 *** Consider creating a single top-level settings class               :story:
 
@@ -162,18 +84,6 @@ almost all, since some settings only make sense to the root object
 such as directory settings). However, for the reference models we will
 have less settings. We should probably do some taxonomy work here and
 try to figure out what categories of settings we have.
-
-*** Run tests that are passing on windows                             :story:
-
-At present we have a release build on windows but we are not running
-any tests. This is because some of the tests are failing at the
-moment. We should run all test suites that are green to ensure we
-don't regress without noticing.
-
-*** Add "namespaces" to name                                          :story:
-
-Name should have a flat class with all namespaces in yarn, instead of
-generating it on every formatter.
 
 *** =always_in_heap= is not a very good name                          :story:
 
@@ -258,6 +168,14 @@ In certain cases such as helpers we probably don't need to go through
 all types; only the target types matter. Ensure we are not processing
 other types for no reason.
 
+Merged stories:
+
+*Element properties includes non-target types*
+
+We seem to be generating a lot of element properties and formatter
+properties as well. We should only be generating these for the target
+model.
+
 *** Add validation for helper families                                :story:
 
 At present we are checking that the name tree has the expected number
@@ -288,14 +206,6 @@ Actually this is a core yarn property. So:
   of enum, e.g. type parameterisation: none, variable, fixed. if
   fixed, then number of type parameters must be non-zero.
 
-*** Initialise formatters in the formatter's translation unit         :story:
-
-At present we are initialising the formatters in each of the facet
-initialisers. However, it makes more sense to initialise them on the
-translation unit for each formatter. This will also make life easier
-when we move to a mustache world where there may not be a formatter
-header file at all.
-
 *** Incorrect generation of forward declarations for all facets       :story:
 
 Up to know we generated forward declarations for all facets for all
@@ -309,110 +219,12 @@ a facet. This could be done via enablement, but we don't want to do
 too much hard-coding (e.g. if visitor then disable serialisation
 facet, etc).
 
-*** Generate formatter interfaces                                      :epic:
-
-We should create another template language, in addition to stitch:
-"wale". Wale is a very simple language that has templates that just do
-token replacement. The tokens must have a special format:
-={{{TOKEN}}}=. We receive a map of keys to values and do a blind
-replacement to the keys on the wale document.
-
-This links to stitch as follows:
-
-- create a single file implementation of a formatter. It will
-  implement both the provider interface and the appropriate formatter
-  interface. It will call the stitch method to start off with. There
-  are no headers, just cpp. It does the formatter registration.
-- add support in stitch for "named sections": its possible to start a
-  section and assign it a name. A stitch template will have two
-  sections: inclusion provision and formatting.
-- add support in stitch for "wale variables". These are just kvp's
-  defined at the top:
-
-: <#@ wale.variable="formatter_name=abcd" #>
-
-  wale variables and sections are converted into a kvp container for
-  wale input. Examples: facet, formatter name, etc.
-- convert the formatter code into a wale template, adding wale
-  variables as required.
-- update stitch to detect wale usage and to call wale in those
-  cases. This could be done by supplying a wale template:
-
-: <#@ wale.template="abcd.wale" #>
-
-- note that wale could be useful outside of stitch, for example for
-  dart: we could wale-lise utility and then instantiate it for a given
-  project.
-
-*Previous Understanding*
-
-It should be possible to generate some trivial types such as formatter
-interfaces, formatter container, registrar and so on. For this we
-need:
-
-- a mustache type template;
-- a set of fields from yarn types to be exposed to mustache;
-- a list of types to iterate through.
-
-Once we got this we could instantiate the templates. To integrate this
-with knit we would need some way of specifying which types the
-iteration would be over. We could mark a specific type with a given
-stereotype, and then supply say the base class ("all leaf descendants
-of xyz"). Dogen would then locate the descendants and for each call
-the template.
-
-For registrar and container its a bit trickier because we want a
-collection of types in one go.
-
-We also need a way to keep these templates away from the main (user
-visible) code, since they are useful only for dogen.
-
-See also [[https://github.com/cierelabs/boostache/tree/develop][boostache]].
-
-Notes:
-
-- we will need some "special" tags for copyright, includes
-  etc. Includes will be particularly special because we need to
-  augment the include list with additional includes. However, we may
-  not even need to be aware of this.
-
 *** Add support for inlining                                          :story:
 
 We should be able to set a model-wide property that tells dogen to
 generate inline methods for properties. We could be more flexible and
 allow inlining at class level or just for a single property. We don't
 have any use cases for these at present.
-
-*** Strong type aliasing                                              :story:
-
-One extremely useful feature would be to create "aliases" for types
-which could be implemented as strongly-typed aliases where there is
-language support. The gist of the problem is as described in here:
-
-[[http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3515.pdf][Toward Opaque Typedefs for C++1Y]]
-
-This is also similar to the problem space of boost dimensions,
-although their problem is more generic. The gist of it is that one
-should be able to "conceptually" sub-class primitives such as int and
-even types such as string and have the code generator create some
-representation of that type that has the desired properties (including
-a "to underlying" function). These types would not be interchangeable
-with their aliased types. For example, if we define a "book id" as an
-unsigned int, it should not be interchangeable with unsigned
-int. Potentially it should also not have certain int abilities such as
-adding/multiplication and so forth.
-
-Links:
-
-- [[http://www.boost.org/doc/libs/1_37_0/boost/strong_typedef.hpp][Boost Strong Typedef]]
-- [[http://stackoverflow.com/questions/23726038/how-can-i-create-a-new-primitive-type-using-c11-style-strong-typedefs][How can I create a new primitive type using C++11 style strong
-  typedefs?]]
-- [[http://stackoverflow.com/questions/28916627/strong-typedefs][Strong typedefs]]
-- [[http://programmers.stackexchange.com/questions/243154/c-strongly-typed-typedef][C++ strongly typed typedef]]
-
-Note: the other stories in the backlog about typedefs are just about
-the C++ feature, not this extension to it. Hence we called it "type
-aliasing" to avoid confusion.
 
 *** Computation of enablement values                                   :epic:
 
@@ -603,42 +415,6 @@ If we do implement customisable JSON serialisation, we should still
 use the raw format in streaming. We need a way to disable the cooked
 JSON internally. We should also re-implement streaming in terms of
 this JSON mode.
-
-*** Supply model references via meta-data rather than command line    :story:
-
-It doesn't make any sense to have model dependencies in the command
-line. After all, the model cannot be interpreted without them. A
-better way to do this would be to split this functionality into two:
-
-- command line supplies "import directories", that is, directories
-  to search when looking for models. By default the system directory
-  is already in the path.
-- model supplies "import statements". The problem here is that we need
-  to also supply the file name of the model. We could perhaps omit the
-  extension and then load all files that match (e.g. =.dia=, =.json=,
-  etc). If more than one matches we should error. Actually we should
-  just supply the full filename, as well as keep the current notation
-  for the external project path.
-
-This is also a nice way to avoid loading system models unnecessary;
-users still need to declare the models they depend on, regardless if
-system or user.
-
-Each model should also supply the external module path as meta-data.
-
-Merged stories
-
-*External module path and references as meta-data*
-
-It actually does not make a lot of sense to allow users to supply
-external module paths and references as command line options. This is
-because the model will fail to build unless we provide the correct
-ones; these are not configurable items in this sense. The project
-path, etc are - and so should remain command line options.
-
-We need to move these two into the meta-data. This would also mean we
-no longer need to pass in external module paths for references, which
-is much cleaner.
 
 *** Identifier parser has hard-coded primitives                       :story:
 
@@ -1173,6 +949,13 @@ we have other options:
 
 - create a service to do the merging and do it on the fly
 - add a method to nameable with the flat module list.
+
+Merged stories:
+
+*Add "namespaces" to name*
+
+Name should have a flat class with all namespaces in yarn, instead of
+generating it on every formatter.
 
 *** Consider reducing the number of qname lookups in cpp model        :story:
 
@@ -4801,6 +4584,37 @@ become very readable.
 
 These stories are good candidates for the subsequent release. This
 release will be all about adding new features.
+
+*** Strong type aliasing                                              :story:
+
+One extremely useful feature would be to create "aliases" for types
+which could be implemented as strongly-typed aliases where there is
+language support. The gist of the problem is as described in here:
+
+[[http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3515.pdf][Toward Opaque Typedefs for C++1Y]]
+
+This is also similar to the problem space of boost dimensions,
+although their problem is more generic. The gist of it is that one
+should be able to "conceptually" sub-class primitives such as int and
+even types such as string and have the code generator create some
+representation of that type that has the desired properties (including
+a "to underlying" function). These types would not be interchangeable
+with their aliased types. For example, if we define a "book id" as an
+unsigned int, it should not be interchangeable with unsigned
+int. Potentially it should also not have certain int abilities such as
+adding/multiplication and so forth.
+
+Links:
+
+- [[http://www.boost.org/doc/libs/1_37_0/boost/strong_typedef.hpp][Boost Strong Typedef]]
+- [[http://stackoverflow.com/questions/23726038/how-can-i-create-a-new-primitive-type-using-c11-style-strong-typedefs][How can I create a new primitive type using C++11 style strong
+  typedefs?]]
+- [[http://stackoverflow.com/questions/28916627/strong-typedefs][Strong typedefs]]
+- [[http://programmers.stackexchange.com/questions/243154/c-strongly-typed-typedef][C++ strongly typed typedef]]
+
+Note: the other stories in the backlog about typedefs are just about
+the C++ feature, not this extension to it. Hence we called it "type
+aliasing" to avoid confusion.
 
 *** Concepts, immutability and fluency                                :story:
 
