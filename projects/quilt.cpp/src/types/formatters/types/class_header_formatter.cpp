@@ -59,7 +59,6 @@ provider::provide(const properties::inclusion_dependencies_builder_factory& f,
 
     auto builder(f.make());
 
-    // FIXME: if immutable there is no swap.
     // algorithm: domain headers need it for the swap function.
     builder.add(inclusion_constants::std::algorithm());
 

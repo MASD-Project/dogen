@@ -35,6 +35,10 @@ namespace properties {
 
 /**
  * @brief Creates inclusion dependencies builders.
+ *
+ * This factory exists to avoid having to supply an inclusion
+ * dependencies builder as non-const, and to avoid having some kind of
+ * reset method for its state.
  */
 class inclusion_dependencies_builder_factory final {
 public:

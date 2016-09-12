@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include <unordered_set>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/config/types/cpp_options.hpp"
