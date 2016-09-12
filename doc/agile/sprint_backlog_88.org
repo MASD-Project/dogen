@@ -14,25 +14,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-12 Mon 12:25]
+#+CAPTION: Clock summary at [2016-09-12 Mon 22:03]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *4:00* |      |      | 100.0 |
+| *Total time*                                                                | *6:41* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 4:00   |      |      | 100.0 |
-| Active                                                                      |        | 4:00 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:13 |  30.4 |
-| COMPLETED Fix chocolatey warning                                            |        |      | 0:08 |   3.3 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |  11.2 |
-| COMPLETED Analysis on current state of file path generation                 |        |      | 0:57 |  23.8 |
-| STARTED Remove formattable origin type                                      |        |      | 0:16 |   6.7 |
-| STARTED Refactor path derivatives factory for usage in formatters           |        |      | 0:35 |  14.6 |
-| STARTED Move file path generation to formatters                             |        |      | 0:24 |  10.0 |
+| Stories                                                                     | 6:41   |      |      | 100.0 |
+| Active                                                                      |        | 6:41 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:19 |  19.7 |
+| COMPLETED Fix chocolatey warning                                            |        |      | 0:08 |   2.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |   6.7 |
+| COMPLETED Analysis on current state of file path generation                 |        |      | 0:57 |  14.2 |
+| CANCELLED Remove inclusion dependencies builder factory                     |        |      | 0:14 |   3.5 |
+| COMPLETED Analysis on formatters, elements and extensibility                |        |      | 1:18 |  19.5 |
+| STARTED Refactor path derivatives factory for usage in formatters           |        |      | 0:54 |  13.5 |
+| STARTED Move file path generation to formatters                             |        |      | 0:24 |   6.0 |
+| STARTED Path derivatives factory generates all possible includes            |        |      | 0:44 |  11.0 |
+| STARTED Remove formattable origin type                                      |        |      | 0:16 |   4.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-09-12 Mon 21:57]--[2016-09-12 Mon 22:03] =>  0:06
     CLOCK: [2016-09-12 Mon 12:23]--[2016-09-12 Mon 12:26] =>  0:03
     CLOCK: [2016-09-12 Mon 10:40]--[2016-09-12 Mon 11:02] =>  0:22
     CLOCK: [2016-09-12 Mon 09:28]--[2016-09-12 Mon 09:41] =>  0:13
@@ -147,21 +151,71 @@ elements in modeling space, not just c++ headers and implementation.
 To cater for the elements which do not map to a facet we should
 introduce the concept of the empty facet in the conceptual model.
 
-*** STARTED Remove formattable origin type                            :story:
-    CLOCK: [2016-09-12 Mon 11:11]--[2016-09-12 Mon 11:20] =>  0:09
-    CLOCK: [2016-09-12 Mon 11:03]--[2016-09-12 Mon 11:10] =>  0:07
+*** CANCELLED Remove inclusion dependencies builder factory           :story:
+    CLOSED: [2016-09-12 Mon 19:08]
+    CLOCK: [2016-09-12 Mon 18:54]--[2016-09-12 Mon 19:08] =>  0:14
 
-This should not be in use any longer so remove it. Actually this
-cannot be done until we handle cmakelists and odb options via
-fabric. This is because path settings will not be computed correctly.
+Its not entirely clear why we need a factory to instantiate a builder
+when the factory does very little other than forward arguments. Try
+removing it and see what breaks.
 
-Tasks:
+Actually the reason why is that without a factory we'd have to pass in
+the builder by non-const ref since the builder needs to mutate its
+state in order to build. Added documentation for this.
 
-- remove enumeration
-- remove container of internal and external formatters in formatter
-  container.
+*** COMPLETED Analysis on formatters, elements and extensibility      :story:
+    CLOSED: [2016-09-12 Mon 21:47]
+    CLOCK: [2016-09-12 Mon 21:15]--[2016-09-12 Mon 21:47] =>  0:32
+    CLOCK: [2016-09-12 Mon 20:27]--[2016-09-12 Mon 20:32] =>  0:05
+    CLOCK: [2016-09-12 Mon 19:45]--[2016-09-12 Mon 20:26] =>  0:41
+
+At present if one adds a new formatter dynamically which formats a new
+(injected) modeling type, it will either be totally ignored by dogen
+or it will break (still to be proved which). This is because we use a
+container of formatters mapping to well defined modeling elements; we
+loop through those to format. The modeling elements must be defined on
+either yarn or quilt.cpp - not by the user.
+
+This approaches has advantages such as avoiding having to dispatch
+both the element and the formatter but it seems a bit of a problem
+that we cannot add formatters with new modeling types due to this.
+
+For this use case to work we would need to somehow be able to resolve
+the element type to a concrete type, and then be able to get all the
+formatters and include providers etc for that concrete element. We
+could start creating maps by [[http://en.cppreference.com/w/cpp/types/type_index][type index]] (see example below). All the
+consumer of derived elements would register themselves against that
+type id. When called, they can statically or dynamically cast the
+element to the expected type. Using formatters an example:
+
+- get rid of formatters container and have a simple list of
+  formatters.
+- at registration time, register against the derived element's type
+  id/index.
+- change model to have a map of type id to element instead of a list.
+- during formatting, for each element request all formatters for that
+  type id.
+
+Actually perhaps we should look at this slightly differently: the
+extensibility points are not around modeling elements but around
+formatters. The system is not designed to allow users to add new
+element types; this would mean, for example, that the computations
+around properties would have to also be extensbile and so
+forth. However, given a fixed set of modeling elements, users can
+freely add new formatters (belonging to new or existing facets). If we
+declare these to be the extensibility points, then we no longer have
+problems with hard-coding.
+
+Papers and assorted links read:
+
+- [[http://sebox.cs.iupui.edu/PDF/visitor-survey-2013.pdf][A Survey Report of Enhancements to the Visitor Software Design
+  Pattern]]
+- [[http://www.cs.loyola.edu/~binkley/722/src/visitors/doc/p270-visser.pdf][Visitor Combination and Traversal Control]]
+- [[http://www.stroustrup.com/multimethods.pdf][Open Multi-Methods for C++]]
+- [[http://codereview.stackexchange.com/questions/84176/proper-use-of-type-info-in-relation-to-mapping-components-to-a-type][Proper use of type_info in relation to mapping components to a type]]
 
 *** STARTED Refactor path derivatives factory for usage in formatters :story:
+    CLOCK: [2016-09-12 Mon 18:35]--[2016-09-12 Mon 18:54] =>  0:19
     CLOCK: [2016-09-12 Mon 11:26]--[2016-09-12 Mon 12:01] =>  0:35
 
 At present the path derivatives factory is designed to generate paths
@@ -200,6 +254,9 @@ We could create the following methods:
   path derivatives for the c++ implementation.
 - make project level item: cmakelists at project level.
 - make source level item: cmakelists at source level.
+
+We should consider caching parts of the path that are const for all
+elements.
 
 Tasks:
 
@@ -243,15 +300,86 @@ At present we are choosing the C++ extension based on the file type:
 It would make more sense to have a formatter group - e.g. header or
 implementation - and to associate the extension with the group.
 
-*** Move =cmakelists_info= to fabric                                  :story:
+*** STARTED Path derivatives factory generates all possible includes  :story:
+    CLOCK: [2016-09-12 Mon 21:48]--[2016-09-12 Mon 21:56] =>  0:08
+    CLOCK: [2016-09-12 Mon 19:09]--[2016-09-12 Mon 19:45] =>  0:36
 
-Add the generation of CMakeLists to fabric and remove the legacy
-formattable.
+At present we are generating all possible includes for all
+formatters. The problem is that we do not have a way to map a yarn type
+to a set of  C++ formatters, so to make our life easier we simply
+generate them all. This has another (lucky) side-effect: when we are
+doing the includes, we do not know what formatter the qname belongs to
+so we just default to the class header formatter. As it happens this
+is not a problem (as explained [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_68.org#inclusion-relies-on-knowing-sml-to-cpp-mapping][here]]).
 
-*** Move =odb_options_info= to fabric                                 :story:
+We need a proper solution for this:
 
-Add the generation of ODB options to fabric and remove the legacy
-formattable.
+- only generate includes for the formatters that need them;
+- find a way to look for the right formatter given a qname.
+
+This last bit requires a bit of thinking. From a certain angle, we
+don't particularly care about formatters - we are simply asking for
+"the types header for this type" or the "serialisation header for this
+type". It seems we need a higher level concept that formatters can
+belong to (similar to the formatter groups). This concept should allow
+one and only one formatter to exist for a given qname - we can't have
+both an enumeration header and a class header.
+
+Actually the solution for this is quite simple:
+
+- start by mapping elements to facets and formatters: for a given id
+  and a given facet, there is a formatter responsible for providing
+  the header file. This could be done in the builder factory at
+  construction. The map must have a pair of (header, forward
+  declaration).
+- change builder to take in a facet name rather than a formatter name
+  and a flag to indicate whether to use forward declarations or
+  not. For each addition, resolve the formatter name and then use the
+  formatter name to resolve the path settings (or alternatively map
+  them all at the start).
+
+This is not ideal because sometimes we do want to supply a specific
+formatter (forward declarations, visitor). What we need is some kind
+of resolver, used where necessary. For a given facet and element id,
+it returns its main header.
+
+This could be achieved in exactly the same fashion as we did for
+includes: we register types against a parameterised interface, which
+is implemented by the formatter. We could even rename
+=inclusion_dependencies_provider_interface= to just
+=provider_interface= and then have two methods:
+
+- =provide_inclusion_dependencies=
+- =provide_path_derivatives=
+
+This would fit in nicely with the refactor where providers are
+statically registered against the workflow.
+
+*** STARTED Remove formattable origin type                            :story:
+    CLOCK: [2016-09-12 Mon 11:11]--[2016-09-12 Mon 11:20] =>  0:09
+    CLOCK: [2016-09-12 Mon 11:03]--[2016-09-12 Mon 11:10] =>  0:07
+
+This should not be in use any longer so remove it. Actually this
+cannot be done until we handle cmakelists and odb options via
+fabric. This is because path settings will not be computed correctly.
+
+Tasks:
+
+- remove enumeration
+- remove container of internal and external formatters in formatter
+  container.
+
+*** Refactor =inclusion_dependencies_provider_interface=              :story:
+
+We need to generalise this interface to cope with path derivatives.
+
+Tasks:
+
+- rename to =provider_interface=
+- add containers for all elements, including injected ones.
+- add methods:
+  - =provide_inclusion_dependencies=
+  - =provide_path_derivatives=
 
 *** Move registration of inclusion dependencies to initialiser        :story:
 
@@ -265,9 +393,21 @@ provider too.
 
 Tasks:
 
+- add provider support directly to the formatters instead of another
+  class and remove registration from formatter interface.
 - add a static registrar for the include providers in workflow.
-- change initialiser to register the include providers.
-- remove registration from formatter interface.
+- change initialiser to register the include providers from the same
+  shared pointer.
+
+*** Move =cmakelists_info= to fabric                                  :story:
+
+Add the generation of CMakeLists to fabric and remove the legacy
+formattable.
+
+*** Move =odb_options_info= to fabric                                 :story:
+
+Add the generation of ODB options to fabric and remove the legacy
+formattable.
 
 *** Add a file formatter interface to formatters                      :story:
 
