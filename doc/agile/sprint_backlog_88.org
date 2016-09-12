@@ -14,22 +14,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-12 Mon 10:40]
+#+CAPTION: Clock summary at [2016-09-12 Mon 11:02]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:20* |      |      | 100.0 |
+| *Total time*                                                                | *2:42* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:20   |      |      | 100.0 |
-| Active                                                                      |        | 2:20 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:48 |  34.3 |
-| COMPLETED Fix chocolatey warning                                            |        |      | 0:08 |   5.7 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |  19.3 |
-| COMPLETED Analysis on current state of file path generation                 |        |      | 0:57 |  40.7 |
+| Stories                                                                     | 2:42   |      |      | 100.0 |
+| Active                                                                      |        | 2:42 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:10 |  43.2 |
+| COMPLETED Fix chocolatey warning                                            |        |      | 0:08 |   4.9 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |  16.7 |
+| COMPLETED Analysis on current state of file path generation                 |        |      | 0:57 |  35.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-09-12 Mon 10:40]--[2016-09-12 Mon 11:02] =>  0:22
     CLOCK: [2016-09-12 Mon 09:28]--[2016-09-12 Mon 09:41] =>  0:13
     CLOCK: [2016-09-12 Mon 09:10]--[2016-09-12 Mon 09:20] =>  0:10
     CLOCK: [2016-09-12 Mon 08:15]--[2016-09-12 Mon 08:40] =>  0:25
@@ -139,6 +140,33 @@ settings as we are doing now, but then supply them to the
 formatters. We should also compute the path derivatives for all
 elements in modeling space, not just c++ headers and implementation.
 
+*** Move file path generation to formatters                           :story:
+
+Tasks:
+
+- create a helper class that knows how to generate paths for headers,
+  implementation etc.
+- add a method in the formatter interface that takes in the options,
+  path settings, model name, element name and generates the path
+  derivatives for the formatter.
+- update the path derivatives factory to take in the formatters'
+  container; look up the formatter and generate the path derivatives.
+- remove =file_types=.
+
+Merged stories:
+
+*File extension is hard-coded against file type*
+
+At present we are choosing the C++ extension based on the file type:
+
+:    if (ps.file_type() == formatters::file_types::cpp_header)
+:       stream << dot << ps.header_file_extension();
+:    else if (ps.file_type() == formatters::file_types::cpp_implementation)
+:        stream << dot << ps.implementation_file_extension();
+
+It would make more sense to have a formatter group - e.g. header or
+implementation - and to associate the extension with the group.
+
 *** Move =cmakelists_info= to fabric                                  :story:
 
 Add the generation of CMakeLists to fabric and remove the legacy
@@ -148,6 +176,64 @@ formattable.
 
 Add the generation of ODB options to fabric and remove the legacy
 formattable.
+
+*** Move registration of inclusion dependencies to initialiser        :story:
+
+At present we are iterating through the formatters list in properties
+and manually registering all include providers via the interface. This
+is not ideal because the formatter interface needs to know of include
+providers, meaning we can't move it away from =quilt.cpp=.
+
+When we register a formatter we should also register the include
+provider too.
+
+Tasks:
+
+- add a static registrar for the include providers in workflow.
+- change initialiser to register the include providers.
+- remove registration from formatter interface.
+
+*** Add a file formatter interface to formatters                      :story:
+
+It probably makes sense to have a top-level interface for file
+formatting in the formatters model. At present we have a lot of
+=quilt.cpp= specific things in there. Maybe we should just extract the
+common attributes and use them to create the generic interface.
+
+*** Formatters with duplicate names result in non-intuitive errors    :story:
+
+We added two formatters to io with the same name by mistake and the
+resulting error was not particularly enlightening:
+
+: std::exception::what: Qualified name defined more than once: cpp.io.enum_header_formatter.inclusion_required
+
+We should have a very early on validation to ensure formatters have
+distinct names.
+
+Merged stories:
+
+*Check for duplicate formatter names in formatter registrar*
+
+At present it is possible to register a formatter name more than
+once. Registrar should keep track of the names and throw if the name
+is duplicated.
+
+*** Implement all formatter interfaces                                :story:
+
+We still have a couple of skeleton interfaces:
+
+- primitve
+- concepts
+
+*** Remove formattable origin type                                    :story:
+
+This should not be in use any longer so remove it.
+
+Tasks:
+
+- remove enumeration
+- remove container of internal and external formatters in formatter
+  container.
 
 *** Document the conceptual model                                     :story:
 
