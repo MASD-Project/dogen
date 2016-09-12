@@ -14,18 +14,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-12 Mon 11:02]
+#+CAPTION: Clock summary at [2016-09-12 Mon 12:22]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:42* |      |      | 100.0 |
+| *Total time*                                                                | *3:57* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:42   |      |      | 100.0 |
-| Active                                                                      |        | 2:42 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:10 |  43.2 |
-| COMPLETED Fix chocolatey warning                                            |        |      | 0:08 |   4.9 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |  16.7 |
-| COMPLETED Analysis on current state of file path generation                 |        |      | 0:57 |  35.2 |
+| Stories                                                                     | 3:57   |      |      | 100.0 |
+| Active                                                                      |        | 3:57 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:10 |  29.5 |
+| COMPLETED Fix chocolatey warning                                            |        |      | 0:08 |   3.4 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |  11.4 |
+| COMPLETED Analysis on current state of file path generation                 |        |      | 0:57 |  24.1 |
+| STARTED Remove formattable origin type                                      |        |      | 0:16 |   6.8 |
+| STARTED Refactor path derivatives factory for usage in formatters           |        |      | 0:35 |  14.8 |
+| STARTED Move file path generation to formatters                             |        |      | 0:24 |  10.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -140,6 +143,9 @@ settings as we are doing now, but then supply them to the
 formatters. We should also compute the path derivatives for all
 elements in modeling space, not just c++ headers and implementation.
 
+To cater for the elements which do not map to a facet we should
+introduce the concept of the empty facet in the conceptual model.
+
 *** STARTED Remove formattable origin type                            :story:
     CLOCK: [2016-09-12 Mon 11:11]--[2016-09-12 Mon 11:20] =>  0:09
     CLOCK: [2016-09-12 Mon 11:03]--[2016-09-12 Mon 11:10] =>  0:07
@@ -154,7 +160,54 @@ Tasks:
 - remove container of internal and external formatters in formatter
   container.
 
-*** Move file path generation to formatters                           :story:
+*** STARTED Refactor path derivatives factory for usage in formatters :story:
+    CLOCK: [2016-09-12 Mon 11:26]--[2016-09-12 Mon 12:01] =>  0:35
+
+At present the path derivatives factory is designed to generate paths
+internally. In an ideal world, it should be used by the formatters to
+generate paths. Generate an API for this.
+
+Use cases:
+
+- c++ header file in include.
+- c++ implementation file in src.
+- cmakelists at project level.
+- cmakelists, odb options at src level.
+
+Kinds of paths:
+
+- elements in facets: relative facet path? facet path? common to src
+  and include.
+- include path: relative facet path plus external and model
+  modules. Include only.
+- full path: made up of the base (project directory and model module)
+  plus either nothing (project level items) or a directory (source or
+  include) plus the relative facet path or the include path.
+
+We could create the following methods:
+
+- make full path: takes in the relative path (either a relative facet
+  path or the include path), the directory (either empty, source or
+  include). Produces a full path.
+- make facet path: takes in a name, an extension and the path settings
+  and produces the facet path.
+- make include path: takes in a name, a file extension and the path
+  settings; calls make facet path and augments the result.
+- make cpp header: calls above functions to generate the path
+  derivatives for the c++ header. Takes in a name, formatter name,
+- make cpp implementation: calls above functions to generate the
+  path derivatives for the c++ implementation.
+- make project level item: cmakelists at project level.
+- make source level item: cmakelists at source level.
+
+Tasks:
+
+- refactor factory to use the API defined above for the current use
+  cases.
+
+*** STARTED Move file path generation to formatters                   :story:
+    CLOCK: [2016-09-12 Mon 12:02]--[2016-09-12 Mon 12:22] =>  0:20
+    CLOCK: [2016-09-12 Mon 11:21]--[2016-09-12 Mon 11:25] =>  0:04
 
 Tasks:
 
@@ -163,8 +216,16 @@ Tasks:
 - add a method in the formatter interface that takes in the options,
   path settings, model name, element name and generates the path
   derivatives for the formatter.
-- update the path derivatives factory to take in the formatters'
-  container; look up the formatter and generate the path derivatives.
+- update the path derivatives repository factory to take in the
+  formatters' container. When making, create a container with a pair
+  of formatter and path settings. Then, for each element, loop through
+  the pairs; call the formatter with the element name and path
+  settings to generate the path derivatives. Continue the anti-pattern
+  of generating a path derivatives set that is the cross-product of
+  all elements and formatters even though we know this is not right
+  (backlogged as "Path derivatives factory generates all possible
+  includes").
+- remove visitation in path derivatives repository factory.
 - remove =file_types=.
 
 Merged stories:
@@ -384,29 +445,6 @@ sanitizer.
 We seem to distinguish between "internal" and "external"
 formattables. This probably won't make sense after the injection
 refactor.
-
-*** Path derivatives factory generates all possible includes          :story:
-
-At present we are generating all possible includes for all
-formatters. The problem is that we do not have a way to map a yarn type
-to a set of  C++ formatters, so to make our life easier we simply
-generate them all. This has another (lucky) side-effect: when we are
-doing the includes, we do not know what formatter the qname belongs to
-so we just default to the class header formatter. As it happens this
-is not a problem (as explained [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_68.org#inclusion-relies-on-knowing-sml-to-cpp-mapping][here]]).
-
-We need a proper solution for this:
-
-- only generate includes for the formatters that need them;
-- find a way to look for the right formatter given a qname.
-
-This last bit requires a bit of thinking. From a certain angle, we
-don't particularly care about formatters - we are simply asking for
-"the domain header for this type" or the "serialisation header for
-this type". It seems we need a higher level concept that formatters
-can belong to (similar to the formatter groups). This concept should
-allow one and only one formatter to exist for a given qname - we can't
-have both an enumeration header and a class header.
 
 *** Model should contain set of primitive id's                        :story:
 
