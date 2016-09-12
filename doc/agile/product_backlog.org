@@ -27,6 +27,10 @@ Notes:
 - Beast [[https://github.com/tim-janik/beast/blob/master/.travis.yml][travis.yml]]
 - [[https://github.com/tim-janik/rapicorn/blob/master/citool.sh.][citool.sh]] script from [[https://github.com/tim-janik/rapicorn][Rapicorn]] project and their [[https://raw.githubusercontent.com/tim-janik/rapicorn/master/README.md][README]].
 
+At present we are getting the following error:
+
+: Skipping a deployment with the bintray provider because this branch is not permitted
+
 *** Analysis work on handling varying levels of formatter optionality :story:
 
 In some cases the formatter may decide that it does not need to create
