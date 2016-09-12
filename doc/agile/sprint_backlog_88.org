@@ -140,6 +140,20 @@ settings as we are doing now, but then supply them to the
 formatters. We should also compute the path derivatives for all
 elements in modeling space, not just c++ headers and implementation.
 
+*** STARTED Remove formattable origin type                            :story:
+    CLOCK: [2016-09-12 Mon 11:11]--[2016-09-12 Mon 11:20] =>  0:09
+    CLOCK: [2016-09-12 Mon 11:03]--[2016-09-12 Mon 11:10] =>  0:07
+
+This should not be in use any longer so remove it. Actually this
+cannot be done until we handle cmakelists and odb options via
+fabric. This is because path settings will not be computed correctly.
+
+Tasks:
+
+- remove enumeration
+- remove container of internal and external formatters in formatter
+  container.
+
 *** Move file path generation to formatters                           :story:
 
 Tasks:
@@ -224,16 +238,6 @@ We still have a couple of skeleton interfaces:
 
 - primitve
 - concepts
-
-*** Remove formattable origin type                                    :story:
-
-This should not be in use any longer so remove it.
-
-Tasks:
-
-- remove enumeration
-- remove container of internal and external formatters in formatter
-  container.
 
 *** Document the conceptual model                                     :story:
 
