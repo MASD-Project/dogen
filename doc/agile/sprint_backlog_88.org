@@ -14,23 +14,46 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-12 Mon 08:41]
+#+CAPTION: Clock summary at [2016-09-12 Mon 09:09]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:25* |      |      | 100.0 |
+| *Total time*                                                                | *0:52* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:25   |      |      | 100.0 |
-| Active                                                                      |        | 0:25 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:25 | 100.0 |
+| Stories                                                                     | 0:52   |      |      | 100.0 |
+| Active                                                                      |        | 0:52 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:25 |  48.1 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |  51.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     CLOCK: [2016-09-12 Mon 08:15]--[2016-09-12 Mon 08:40] =>  0:25
 
-
 Updates to sprint and product backlog.
+
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2016-09-12 Mon 08:55]
+    CLOCK: [2016-09-12 Mon 08:56]--[2016-09-12 Mon 09:09] =>  0:13
+    CLOCK: [2016-09-12 Mon 08:41]--[2016-09-12 Mon 08:55] =>  0:14
+
+We should really start adding some kind of text with the
+release. GitHub supports release notes so we should use them.
+
+Text:
+
+#+begin_src markdown
+Dogen v0.87.0, "Cambongue"
+==========================
+
+This release is still mainly focused on internal refactorings of both the yarn and quilt.cpp models, but added a couple of user visible features:
+
+- **Support for cross-model inheritance**: it is now possible to inherit types from referenced models. In addition, if the parent type was visitable, an "augmented" visitor is generated that takes into account the new derived types.
+- **Performance improvements**: due to the changes required for cross-model inheritance, the overall performance of the code generator has gone up a bit; finger in the air measurements reveal its taking 60-50% of the time to generate the dogen models.
+- **Visitor's accept methods have been moved to the cpp file**: in the past, adding a new descendant to a visitable parent resulted in large rebuilds because the parent included the visitor and the visitor had to change to accommodate the new descendant. Thus, all code that depended on the parent would get rebuilt. To avoid this, the accept methods have now been moved to the cpp file, resulting in smaller builds. We are also now using forward declarations in the visitor.
+
+For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_87.org).
+#+end_src
 
 *** Vistor is only supported at the base class level                  :story:
 
