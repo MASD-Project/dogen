@@ -14,17 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-12 Mon 09:41]
+#+CAPTION: Clock summary at [2016-09-12 Mon 10:40]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *1:23* |      |      | 100.0 |
+| *Total time*                                                                | *2:20* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 1:23   |      |      | 100.0 |
-| Active                                                                      |        | 1:23 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:48 |  57.8 |
-| COMPLETED Fix chocolatey warning                                            |        |      | 0:08 |   9.6 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |  32.5 |
+| Stories                                                                     | 2:20   |      |      | 100.0 |
+| Active                                                                      |        | 2:20 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:48 |  34.3 |
+| COMPLETED Fix chocolatey warning                                            |        |      | 0:08 |   5.7 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |  19.3 |
+| COMPLETED Analysis on current state of file path generation                 |        |      | 0:57 |  40.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -76,6 +77,67 @@ This release is still mainly focused on internal refactorings of both the yarn a
 
 For more details see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_87.org).
 #+end_src
+
+*** COMPLETED Analysis on current state of file path generation       :story:
+    CLOSED: [2016-09-12 Mon 10:39]
+    CLOCK: [2016-09-12 Mon 09:42]--[2016-09-12 Mon 10:39] =>  0:57
+
+File path generation is closely related to the conceptual model of
+formatting.
+
+One of the problems we've had with CMakeLists is that they don't
+really follow the established structure. Up to now the conceptual
+model for formatters had the notion of facets; each facet could map to
+its own folder. All facets were thought of as conceptual entities at
+the same hierarchical level. However, this breaks down with
+CMakeLists:
+
+- we have one at the top of the project, containing the install
+  instructions for the include files; it may also include the ODB
+  targets.
+- we have another in =src=, with the details of the target.
+- we should probably also have a final one under =tests=, but we are
+  not generating it at present. Or perhaps the whole of tests is just
+  material for dart with simpler templates.
+
+A similar situation occurs with ODB and its =options.odb= file, placed
+under =src=.
+
+One possible update to the formatters conceptual model is this: a
+facet may be composed of facets and/or formatting functions. Projects
+all have a "root" facet called the "project facet". That is then made
+up of the "source" and "include" facets, which are then made up of the
+traditional facets (e.g. types, serialisation and so on). The problem
+with this approach is that, at present, source/include are orthogonal
+to the facets - i.e. a formatter belongs to say types, but it does not
+belong to =src=. We infer =src= from the fact that the formatter is a
+=cpp_header= or =cpp_implmentation= (which in itself is wrong).
+
+Another approach is to think of the formatting functions as living in
+a space (formatting function space), each with their own unique
+id. The id maps to a list of strings, which is the path to the
+formatting function in formatting function space. Lets call this the
+"formatter path". The formatter path must be unique. The formatter
+path is then mapped to a filesystem path when the formatting function
+is applied to an element from modeling space. Each formatter must know
+its formatter path, albeit they can rely on some top-level helpers
+since there are only two or three kinds of paths.
+
+One important consideration is that the formatter path is a function
+that takes in:
+
+- options (project, source and include directories);
+- model name: model modules, external modules.
+- facet directory.
+
+Actually this is not the right way to look at this. The formatter path
+should be static for all models since formatting functions live in
+formatting function space and these are not sensitive to the model the
+user is supplying. However, file paths are. Thus we just need to get
+the formatters to compute the file paths. We should obtain the path
+settings as we are doing now, but then supply them to the
+formatters. We should also compute the path derivatives for all
+elements in modeling space, not just c++ headers and implementation.
 
 *** Move =cmakelists_info= to fabric                                  :story:
 
