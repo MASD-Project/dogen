@@ -1740,7 +1740,8 @@ with:
 
 : if ((!c.all_properties().empty() || c.is_parent()) && !c.is_immutable()) {
 
-As per stitch template.
+As per stitch template. We should probably add a "is swappable" flag
+at the yarn level for this.
 
 *** Create the =needle= library                                       :story:
 
