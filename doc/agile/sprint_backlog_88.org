@@ -1,0 +1,136 @@
+#+title: Sprint Backlog 88
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) }
+
+* Mission Statement
+
+- finish working on remaining formattables.
+- document the conceptual model.
+- implement wale and rewrite formatters in terms of wale templates.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2016-09-12 Mon 08:41]
+| <75>                                                                        |        |      |      |       |
+| Headline                                                                    | Time   |      |      |     % |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                                                | *0:25* |      |      | 100.0 |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| Stories                                                                     | 0:25   |      |      | 100.0 |
+| Active                                                                      |        | 0:25 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:25 | 100.0 |
+#+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-09-12 Mon 08:15]--[2016-09-12 Mon 08:40] =>  0:25
+
+
+Updates to sprint and product backlog.
+
+*** Vistor is only supported at the base class level                  :story:
+
+Due to implementation constraints, we only support visitable at the
+base class level. Add an exception if users attempt to use visitable
+stereotype in a class that has parents.
+
+Note: is this true? We are using derived visitable in C++ model.
+
+*** Add test model sanitizer to test models target                    :story:
+
+At present if we build test models we don't seem to build the
+sanitizer.
+
+*** Remove =formattable_origin_type=                                  :story:
+
+We seem to distinguish between "internal" and "external"
+formattables. This probably won't make sense after the injection
+refactor.
+
+*** Path derivatives factory generates all possible includes          :story:
+
+At present we are generating all possible includes for all
+formatters. The problem is that we do not have a way to map a yarn type
+to a set of  C++ formatters, so to make our life easier we simply
+generate them all. This has another (lucky) side-effect: when we are
+doing the includes, we do not know what formatter the qname belongs to
+so we just default to the class header formatter. As it happens this
+is not a problem (as explained [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_68.org#inclusion-relies-on-knowing-sml-to-cpp-mapping][here]]).
+
+We need a proper solution for this:
+
+- only generate includes for the formatters that need them;
+- find a way to look for the right formatter given a qname.
+
+This last bit requires a bit of thinking. From a certain angle, we
+don't particularly care about formatters - we are simply asking for
+"the domain header for this type" or the "serialisation header for
+this type". It seems we need a higher level concept that formatters
+can belong to (similar to the formatter groups). This concept should
+allow one and only one formatter to exist for a given qname - we can't
+have both an enumeration header and a class header.
+
+*** Model should contain set of primitive id's                        :story:
+
+We are computing the set of all primitive id's in quilt but this
+should really be part of yarn.
+
+*** Implement formattables in terms of yarn types                     :epic:
+
+At present formattables are just a shadow copy of yarn types plus
+additional =cpp= specific types. In practice:
+
+- for the types that are shadow copies, we could have helper utilities
+  that do the translation on the fly (e.g. for names).
+- for additional information which cannot be translated, we could have
+  containers indexed by qualified name and query those just before we
+  call the transformer. This is the case with formatter properties. We
+  need something similar to house "type properties" such as
+  =requires_stream_manipulators=. These could be moved into aspect
+  settings.
+- for types that do not exist in yarn, we could inherit from element;
+  this is the case for registrar, forward declarations, cmakelists and
+  odb options. Note that with this we are now saying that element
+  space contains anything which can be modeled, regardless of if they
+  are part of the programming language type system, or build system,
+  etc. This is not ideal, but its not a problem just yet. We could
+  update the factory to generate these types and then take a copy of
+  the model and inject them in it.
+
+*** Handle "special includes" correctly                              ::story:
+
+We did a quick hack to handle "special includes": we simply "detected"
+them in include builder and then did the appropriate action in each of
+the include providers. In order to make this work dynamically, we need
+somehow to have "associated includes" on a per type basis. For
+example:
+
+- type =x= requires include =y= in formatter =f=.
+
+This can easily be achieved via an "additional inclusion directive"
+which is a container. For example:
+
+:        "extensions" : {
+:                "quilt.cpp.helper.family" : "Dereferenceable",
+:                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/weak_ptr.hpp>",
+
+Could have:
+
+:                "quilt.cpp.types.class_header_formatter.additional_inclusion_directive" : "<some_include.hpp>",
+
+If multiple are provided then they are all added. This highlights an
+important point: we need a way to inject type specific includes from a
+formatter. It makes no sense to declare all of these up front in a
+library since we do not know what all possible formatters are, nor
+what requirements they may have for inclusion. At the same time,
+formatters cannot be expected to declare types. The solution is to be
+able to "inject" these dependencies from a JSON file associated with
+the formatter. We could supply the qualified name and the properties
+to inject. This problem can be solved later on - create a separate
+story for this.
+
+** Deprecated
