@@ -34,8 +34,8 @@ namespace cpp {
 namespace formatters {
 
 void initializer::initialize(registrar& rg) {
-    initialise_formatter<include_cmakelists_formatter>(rg);
-    initialise_formatter<source_cmakelists_formatter>(rg);
+    register_formatter<include_cmakelists_formatter>(rg);
+    register_formatter<source_cmakelists_formatter>(rg);
 
     types::initializer::initialize(rg);
     hash::initializer::initialize(rg);

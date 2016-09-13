@@ -49,27 +49,27 @@ namespace formatters {
 namespace test_data {
 
 void initializer::initialize(registrar& rg) {
-    initialise_formatter<master_header_formatter>(rg, traits::facet_name());
-    initialise_formatter<class_header_formatter>(rg);
-    initialise_formatter<class_implementation_formatter>(rg);
-    initialise_formatter<enum_header_formatter>(rg);
-    initialise_formatter<enum_implementation_formatter>(rg);
-    initialise_formatter_helper<associative_container_helper>(rg);
-    initialise_formatter_helper<bool_helper>(rg);
-    initialise_formatter_helper<char_helper>(rg);
-    initialise_formatter_helper<date_helper>(rg);
-    initialise_formatter_helper<domain_type_helper>(rg);
-    initialise_formatter_helper<int_helper>(rg);
-    initialise_formatter_helper<optional_helper>(rg);
-    initialise_formatter_helper<pair_helper>(rg);
-    initialise_formatter_helper<path_helper>(rg);
-    initialise_formatter_helper<ptime_helper>(rg);
-    initialise_formatter_helper<ptree_helper>(rg);
-    initialise_formatter_helper<sequence_container_helper>(rg);
-    initialise_formatter_helper<smart_pointer_helper>(rg);
-    initialise_formatter_helper<string_helper>(rg);
-    initialise_formatter_helper<time_duration_helper>(rg);
-    initialise_formatter_helper<variant_helper>(rg);
+    register_formatter<master_header_formatter>(rg, traits::facet_name());
+    register_formatter<class_header_formatter>(rg);
+    register_formatter<class_implementation_formatter>(rg);
+    register_formatter<enum_header_formatter>(rg);
+    register_formatter<enum_implementation_formatter>(rg);
+    register_formatter_helper<associative_container_helper>(rg);
+    register_formatter_helper<bool_helper>(rg);
+    register_formatter_helper<char_helper>(rg);
+    register_formatter_helper<date_helper>(rg);
+    register_formatter_helper<domain_type_helper>(rg);
+    register_formatter_helper<int_helper>(rg);
+    register_formatter_helper<optional_helper>(rg);
+    register_formatter_helper<pair_helper>(rg);
+    register_formatter_helper<path_helper>(rg);
+    register_formatter_helper<ptime_helper>(rg);
+    register_formatter_helper<ptree_helper>(rg);
+    register_formatter_helper<sequence_container_helper>(rg);
+    register_formatter_helper<smart_pointer_helper>(rg);
+    register_formatter_helper<string_helper>(rg);
+    register_formatter_helper<time_duration_helper>(rg);
+    register_formatter_helper<variant_helper>(rg);
 }
 
 } } } } }

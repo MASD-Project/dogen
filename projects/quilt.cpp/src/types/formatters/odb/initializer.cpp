@@ -32,10 +32,10 @@ namespace formatters {
 namespace odb {
 
 void initializer::initialize(registrar& rg) {
-    initialise_formatter<master_header_formatter>(rg, traits::facet_name());
-    initialise_formatter<class_header_formatter>(rg);
-    initialise_formatter<enum_header_formatter>(rg);
-    initialise_formatter<odb_options_formatter>(rg);
+    register_formatter<master_header_formatter>(rg, traits::facet_name());
+    register_formatter<class_header_formatter>(rg);
+    register_formatter<enum_header_formatter>(rg);
+    register_formatter<odb_options_formatter>(rg);
 }
 
 } } } } }

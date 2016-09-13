@@ -36,14 +36,14 @@ namespace formatters {
 namespace serialization {
 
 void initializer::initialize(registrar& rg) {
-    initialise_formatter<master_header_formatter>(rg, traits::facet_name());
-    initialise_formatter<class_header_formatter>(rg);
-    initialise_formatter<class_implementation_formatter>(rg);
-    initialise_formatter<enum_header_formatter>(rg);
-    initialise_formatter<registrar_header_formatter>(rg);
-    initialise_formatter<registrar_implementation_formatter>(rg);
-    initialise_formatter<forward_declarations_formatter>(rg);
-    initialise_formatter_helper<path_helper>(rg);
+    register_formatter<master_header_formatter>(rg, traits::facet_name());
+    register_formatter<class_header_formatter>(rg);
+    register_formatter<class_implementation_formatter>(rg);
+    register_formatter<enum_header_formatter>(rg);
+    register_formatter<registrar_header_formatter>(rg);
+    register_formatter<registrar_implementation_formatter>(rg);
+    register_formatter<forward_declarations_formatter>(rg);
+    register_formatter_helper<path_helper>(rg);
 }
 
 } } } } }

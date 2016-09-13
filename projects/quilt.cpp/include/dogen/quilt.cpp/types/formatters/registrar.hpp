@@ -149,19 +149,19 @@ private:
 };
 
 template<typename Formatter>
-inline void initialise_formatter(registrar& rg) {
+inline void register_formatter(registrar& rg) {
     const auto f(std::make_shared<Formatter>());
     rg.register_formatter(f);
 }
 
 template<typename Formatter>
-inline void initialise_formatter(registrar& rg, const std::string& facet_name) {
+inline void register_formatter(registrar& rg, const std::string& facet_name) {
     const auto f(std::make_shared<Formatter>(facet_name));
     rg.register_formatter(f);
 }
 
 template<typename Formatter>
-inline void initialise_formatter_helper(registrar& rg) {
+inline void register_formatter_helper(registrar& rg) {
     const auto f(std::make_shared<Formatter>());
     rg.register_formatter_helper(f);
 }
