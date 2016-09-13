@@ -67,6 +67,14 @@ private:
     properties::container container_;
 };
 
+/*
+ * Helper method to register providers.
+ */
+template<typename T>
+inline void register_provider(registrar& rg, const T& t) {
+    t.register_inclusion_dependencies_provider(rg);
+}
+
 } } } }
 
 #endif

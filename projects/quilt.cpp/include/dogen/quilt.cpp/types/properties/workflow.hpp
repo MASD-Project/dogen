@@ -33,6 +33,7 @@
 #include "dogen/formatters/types/file_properties_workflow.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/yarn/types/model.hpp"
+#include "dogen/quilt.cpp/types/properties/registrar.hpp"
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/aspect_settings_repository.hpp"
@@ -55,6 +56,13 @@ namespace properties {
  * Yarn elements.
  */
 class workflow {
+public:
+    /**
+     * @brief Returns the registrar. If it has not yet been
+     * initialised, initialises it.
+     */
+    static properties::registrar& registrar();
+
 private:
     /**
      * @brief Creates the path settings.
@@ -130,6 +138,9 @@ public:
         const formatters::container& fc,
         const settings::streaming_settings_repository& ssrp,
         const yarn::model& m) const;
+
+private:
+    static std::shared_ptr<properties::registrar> registrar_;
 };
 
 } } } }

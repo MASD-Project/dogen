@@ -47,6 +47,15 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
+std::shared_ptr<properties::registrar> workflow::registrar_;
+
+properties::registrar& workflow::registrar() {
+    if (!registrar_)
+        registrar_ = std::make_shared<properties::registrar>();
+
+    return *registrar_;
+}
+
 std::unordered_map<std::string, settings::path_settings>
 workflow::create_path_settings_activity(const dynamic::repository& drp,
     const dynamic::object& root_object,

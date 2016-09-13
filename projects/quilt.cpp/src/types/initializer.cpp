@@ -21,10 +21,12 @@
 #include "dogen/yarn/types/workflow.hpp"
 #include "dogen/quilt/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
+#include "dogen/quilt.cpp/types/properties/workflow.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
 #include "dogen/quilt.cpp/types/settings/initializer.hpp"
 #include "dogen/quilt.cpp/types/formatters/initializer.hpp"
 #include "dogen/quilt.cpp/types/fabric/initializer.hpp"
+#include "dogen/quilt.cpp/types/properties/registrar.hpp"
 #include "dogen/quilt.cpp/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/initializer.hpp"
 
@@ -32,10 +34,18 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 
+void initialize_providers(const formatters::registrar& fmt_rg) {
+    auto& prop_rg(properties::workflow::registrar());
+    const auto c(fmt_rg.formatter_container());
+    for (const auto& f : c.all_file_formatters())
+        f->register_inclusion_dependencies_provider(prop_rg);
+}
+
 void initializer::initialize() {
     using settings::opaque_settings_builder;
     settings::initializer::initialize(opaque_settings_builder::registrar());
     formatters::initializer::initialize(formatters::workflow::registrar());
+    initialize_providers(formatters::workflow::registrar());
     fabric::initializer::initialize(yarn::workflow::injector_registrar());
     quilt::register_backend<workflow>(quilt::workflow::registrar());
 }
