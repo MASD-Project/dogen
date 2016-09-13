@@ -302,6 +302,46 @@ We may want to make these computations disableable. For example: a)
 all: no computation, everything is enabled b) all supported: all that
 is supported is enabled c) by dependencies.
 
+Requested help from FB. Core of the email:
+
+#+begin_quote
+Lets start with the simple case. Let G be a DAG. For each vertex of G
+there is an associated vector over a field F. Now I would say F is
+GF(2), which suits my needs (as you will see below). The objective is
+to compute, for each vertex, the value of its associated vector, as
+follows:
+
+- first we go through the vertices in any order and setup its initial
+  values according to a predetermined heuristic. Different nodes will
+  have different values, and the heuristic has no dependency on G.
+- then we iterate through G using DFS. If a vertex has no children
+  then the final value of its vertex is the initial value. If a vertex
+  has children, the value of its vector is obtained by multiplying the
+  initial value against the values of the vectors of its child
+  vertices. Multiplication under GF(2) is just a logical AND which is
+  great for my purposes.
+
+Just to make sure I'm explaining my self correctly, lets look at it in
+layperson's terms: if a vertex has a 1 at position zero of its vector,
+and all of its children also have a 1 at position zero, then the final
+value for position zero will be 1. If there is a 0 anywhere at
+position zero then the value is 0. So far so good, this works as
+expected.
+
+However! The problem is, G is actually not always a DAG. Sometimes
+there may be cycles, which are detectable during DFS. My question is:
+is there anything I can do to still perform this heuristic (or some
+approximation of it) with a graph that has cycles? For example:
+
+- record the path to the cycle and perform several passes. This seems
+  to breakdown when there are several cycles because I seem to hit
+  some kind of recursive problem.
+- ignore the cycle. Of course, the problem with this approach is that
+  if there was a zero at either side of the cycle, I would be
+  incorrectly computing the node, but maybe that's the best one can
+  do?
+#+end_quote
+
 *** Indent stitch output using clang format                           :story:
 
 We need to indent the output coming out of stitch as it is not
