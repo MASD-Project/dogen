@@ -38,7 +38,10 @@ namespace properties {
  *
  * This factory exists to avoid having to supply an inclusion
  * dependencies builder as non-const, and to avoid having some kind of
- * reset method for its state.
+ * reset method for its state. It is also useful so that we don't have
+ * to pass around all of the parameters needed to construct it, we can
+ * create it at a high-level and then just pass the factory around.
+ *
  */
 class inclusion_dependencies_builder_factory final {
 public:

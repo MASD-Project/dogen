@@ -27,6 +27,9 @@
 
 #include <forward_list>
 #include <boost/shared_ptr.hpp>
+#include "dogen/yarn/types/module.hpp"
+#include "dogen/yarn/types/concept.hpp"
+#include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/exception.hpp"
@@ -47,6 +50,18 @@ private:
     friend class registrar;
 
 public:
+    const std::forward_list<
+        boost::shared_ptr<provider_interface<yarn::module>>
+    >& module_providers() const;
+
+    const std::forward_list<
+        boost::shared_ptr<provider_interface<yarn::concept>>
+    >& concept_providers() const;
+
+    const std::forward_list<
+        boost::shared_ptr<provider_interface<yarn::primitive>>
+    >& primitive_providers() const;
+
     const std::forward_list<
         boost::shared_ptr<provider_interface<yarn::object>>
     >& object_providers() const;
@@ -73,6 +88,12 @@ public:
     master_header_providers() const;
 
 private:
+    std::forward_list<boost::shared_ptr<provider_interface<yarn::module>>>
+    module_providers_;
+    std::forward_list<boost::shared_ptr<provider_interface<yarn::concept>>>
+    concept_providers_;
+    std::forward_list<boost::shared_ptr<provider_interface<yarn::primitive>>>
+    primitive_providers_;
     std::forward_list<boost::shared_ptr<provider_interface<yarn::object>>>
     object_providers_;
     std::forward_list<boost::shared_ptr<provider_interface<yarn::enumeration>>>

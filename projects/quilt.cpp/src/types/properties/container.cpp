@@ -25,6 +25,21 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
+const std::forward_list<boost::shared_ptr<provider_interface<yarn::module>>>&
+container::module_providers() const {
+    return module_providers_;
+}
+
+const std::forward_list<boost::shared_ptr<provider_interface<yarn::concept>>>&
+container::concept_providers() const {
+    return concept_providers_;
+}
+
+const std::forward_list<boost::shared_ptr<provider_interface<yarn::primitive>>>&
+container::primitive_providers() const {
+    return primitive_providers_;
+}
+
 const std::forward_list<boost::shared_ptr<provider_interface<yarn::object>>>&
 container::object_providers() const {
     return object_providers_;

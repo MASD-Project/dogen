@@ -32,7 +32,7 @@
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/settings/path_settings.hpp"
-#include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/properties/registrar.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository.hpp"
 
 namespace dogen {
@@ -50,7 +50,7 @@ public:
      */
     path_derivatives_repository make(const config::cpp_options& opts,
         const std::unordered_map<std::string, settings::path_settings>& ps,
-        const yarn::model& m) const;
+        const registrar& rg, const yarn::model& m) const;
 };
 
 } } } }

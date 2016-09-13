@@ -87,7 +87,7 @@ create_path_derivatives_repository(const config::cpp_options& opts,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const yarn::model& m) const {
     path_derivatives_repository_factory f;
-    return f.make(opts, ps, m);
+    return f.make(opts, ps, registrar(), m);
 }
 
 formatter_properties_repository workflow::

@@ -52,8 +52,7 @@ class generator final : public fabric::element_visitor {
 public:
     explicit generator(const inclusion_dependencies_factory& f) : factory_(f) {}
 
-public:
-    // FIXME: this function is public as a hack because of registrar.
+private:
     template<typename YarnEntity>
     void generate(const YarnEntity& e, const yarn::name& n) {
         const auto id(factory_.make(e));

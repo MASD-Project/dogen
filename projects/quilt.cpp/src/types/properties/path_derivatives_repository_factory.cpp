@@ -54,58 +54,92 @@ namespace {
  */
 class generator final : public fabric::element_visitor {
 public:
-    generator(const path_derivatives_factory& f) : factory_(f) { }
+    generator(const container& c, const path_derivatives_factory& f)
+        : container_(c), factory_(f) { }
 
 private:
     /**
      * @brief Generates all of the path derivatives for the formatters
      * and qualified name.
      */
-    void generate(const yarn::name& n);
+    template<typename YarnEntity>
+    void generate(const std::forward_list<
+        boost::shared_ptr<provider_interface<YarnEntity>>>& providers,
+        const yarn::name& n) {
+
+        BOOST_LOG_SEV(lg, debug) << "Processing name: " << n;
+        auto& pd(result_.by_name());
+        const auto pair(pd.insert(std::make_pair(n, factory_.make(n))));
+        const bool inserted(pair.second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_name << n.id();
+            BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
+        }
+
+        for (const auto& p : providers) {
+            BOOST_LOG_SEV(lg, debug) << "Provider: "
+                                     << p->formatter_name();
+        }
+    }
 
 public:
     using fabric::element_visitor::visit;
-    void visit(const yarn::module& m) override { generate(m.name()); }
-    void visit(const yarn::concept& c) override { generate(c.name()); }
-    void visit(const yarn::primitive& p) override { generate(p.name()); }
-    void visit(const yarn::enumeration& e) override { generate(e.name()); }
-    void visit(const yarn::object& o) override { generate(o.name()); }
-    void visit(const yarn::exception& e) override { generate(e.name()); }
-    void visit(const yarn::visitor& v) override { generate(v.name()); }
-    void visit(const fabric::registrar& rg) override { generate(rg.name()); }
+    void visit(const yarn::module& m) override {
+        generate(container_.module_providers(), m.name());
+    }
+
+    void visit(const yarn::concept& c) override {
+        generate(container_.concept_providers(), c.name());
+    }
+
+    void visit(const yarn::primitive& p) override {
+        generate(container_.primitive_providers(), p.name());
+    }
+
+    void visit(const yarn::enumeration& e) override {
+        generate(container_.enumeration_providers(), e.name());
+    }
+
+    void visit(const yarn::object& o) override {
+        generate(container_.object_providers(), o.name());
+    }
+
+    void visit(const yarn::exception& e) override {
+        generate(container_.exception_providers(), e.name());
+    }
+
+    void visit(const yarn::visitor& v) override {
+        generate(container_.visitor_providers(), v.name());
+    }
+
+    void visit(const fabric::registrar& rg) override {
+        generate(container_.registrar_providers(), rg.name());
+    }
+
     void visit(const fabric::master_header& mh) override {
-        generate(mh.name());
+        generate(container_.master_header_providers(), mh.name());
     }
 
 public:
     const path_derivatives_repository & result() const { return result_; }
 
 private:
+    const container& container_;
     const path_derivatives_factory& factory_;
     path_derivatives_repository result_;
 };
 
-void generator::generate(const yarn::name& n) {
-    BOOST_LOG_SEV(lg, debug) << "Processing name: " << n;
-    auto& pd(result_.by_name());
-    const auto pair(pd.insert(std::make_pair(n, factory_.make(n))));
-    const bool inserted(pair.second);
-    if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_name << n.id();
-        BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
-    }
-}
 
 }
 
 path_derivatives_repository path_derivatives_repository_factory::make(
     const config::cpp_options& opts,
     const std::unordered_map<std::string, settings::path_settings>& ps,
-    const yarn::model& m) const {
+    const registrar& rg, const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
     const path_derivatives_factory f(opts, m, ps);
-    generator g(f);
+    generator g(rg.container(), f);
     for (const auto& ptr : m.elements()) {
         const auto& e(*ptr);
         e.accept(g);
