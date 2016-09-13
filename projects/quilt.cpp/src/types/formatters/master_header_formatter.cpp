@@ -44,6 +44,10 @@ public:
         const properties::inclusion_dependencies_builder_factory& f,
             const fabric::master_header& mh) const override;
 
+    properties::path_derivatives provide_path_derivatives(
+        const properties::path_derivatives_factory& f,
+        const yarn::name& n) const override;
+
 private:
     const std::string facet_name_;
     const std::string formatter_name_;
@@ -68,6 +72,13 @@ std::list<std::string> provider::provide_inclusion_dependencies(
         builder.add(names, fmtn);
     }
     return builder.build();
+}
+
+properties::path_derivatives provider::provide_path_derivatives(
+    const properties::path_derivatives_factory& /*f*/,
+    const yarn::name& /*n*/) const {
+    properties::path_derivatives r;
+    return r;
 }
 
 std::string provider::formatter_name() const {

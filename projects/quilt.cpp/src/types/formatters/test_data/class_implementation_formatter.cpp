@@ -21,7 +21,6 @@
 #include <boost/make_shared.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/quilt.cpp/types/properties/provider_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
@@ -53,6 +52,10 @@ public:
     std::list<std::string> provide_inclusion_dependencies(
         const properties::inclusion_dependencies_builder_factory& f,
         const yarn::object& o) const override;
+
+    properties::path_derivatives provide_path_derivatives(
+        const properties::path_derivatives_factory& f,
+        const yarn::name& n) const override;
 };
 
 std::string provider::formatter_name() const {
@@ -76,6 +79,13 @@ std::list<std::string> provider::provide_inclusion_dependencies(
     builder.add(o.leaves(), ch_fn);
 
     return builder.build();
+}
+
+properties::path_derivatives provider::provide_path_derivatives(
+    const properties::path_derivatives_factory& /*f*/,
+    const yarn::name& /*n*/) const {
+    properties::path_derivatives r;
+    return r;
 }
 
 }

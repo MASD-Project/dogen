@@ -30,6 +30,9 @@
 #include <utility>
 #include <unordered_map>
 #include <unordered_set>
+#include "dogen/yarn/types/name.hpp"
+#include "dogen/quilt.cpp/types/properties/path_derivatives.hpp"
+#include "dogen/quilt.cpp/types/properties/path_derivatives_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_builder_factory.hpp"
 
 namespace dogen {
@@ -61,6 +64,12 @@ public:
     virtual std::list<std::string> provide_inclusion_dependencies(
         const inclusion_dependencies_builder_factory& f,
         const Element& e) const = 0;
+
+    /**
+     * @brief Provide the path derivatives.
+     */
+    virtual path_derivatives provide_path_derivatives(
+        const path_derivatives_factory& f, const yarn::name& n) const = 0;
 };
 
 template<typename Element>

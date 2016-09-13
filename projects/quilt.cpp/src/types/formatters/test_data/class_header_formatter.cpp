@@ -41,7 +41,15 @@ class provider final : public properties::provider_interface<yarn::object> {
     std::list<std::string> provide_inclusion_dependencies(
         const properties::inclusion_dependencies_builder_factory& f,
         const yarn::object& o) const override;
+
+    properties::path_derivatives provide_path_derivatives(
+        const properties::path_derivatives_factory& f,
+        const yarn::name& n) const override;
 };
+
+std::string provider::formatter_name() const {
+    return class_header_formatter::static_formatter_name();
+}
 
 std::list<std::string> provider::provide_inclusion_dependencies(
     const properties::inclusion_dependencies_builder_factory& f,
@@ -52,8 +60,11 @@ std::list<std::string> provider::provide_inclusion_dependencies(
     return builder.build();
 }
 
-std::string provider::formatter_name() const {
-    return class_header_formatter::static_formatter_name();
+properties::path_derivatives provider::provide_path_derivatives(
+    const properties::path_derivatives_factory& /*f*/,
+    const yarn::name& /*n*/) const {
+    properties::path_derivatives r;
+    return r;
 }
 
 std::string class_header_formatter::id() const {

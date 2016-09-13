@@ -36682,13 +36682,13 @@ an enumeration, false otherwise.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O287">
       <dia:attribute name="obj_pos">
-        <dia:point val="518,41"/>
+        <dia:point val="518,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="517.95,40.95;560.13,43.85"/>
+        <dia:rectangle val="517.95,44.95;560.13,47.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="518,41"/>
+        <dia:point val="518,45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="42.079999999999998"/>
@@ -36856,7 +36856,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:point val="537.372,22.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="536.622,21.85;539.24,41.8"/>
+        <dia:rectangle val="536.622,21.85;539.24,45.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36865,7 +36865,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:point val="537.372,22.6"/>
         <dia:point val="537.372,28"/>
         <dia:point val="539.04,28"/>
-        <dia:point val="539.04,41"/>
+        <dia:point val="539.04,45"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -36889,13 +36889,13 @@ an enumeration, false otherwise.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O289">
       <dia:attribute name="obj_pos">
-        <dia:point val="514,54"/>
+        <dia:point val="514,58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="513.95,53.95;541.5,58.45"/>
+        <dia:rectangle val="513.95,57.95;541.5,62.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="514,54"/>
+        <dia:point val="514,58"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.449999999999999"/>
@@ -37102,19 +37102,19 @@ an enumeration, false otherwise.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="527.725,54"/>
+        <dia:point val="527.725,58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="526.975,43.75;539.24,54.8"/>
+        <dia:rectangle val="526.975,47.75;539.24,58.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="527.725,54"/>
-        <dia:point val="527.725,48.55"/>
-        <dia:point val="539.04,48.55"/>
-        <dia:point val="539.04,43.8"/>
+        <dia:point val="527.725,58"/>
+        <dia:point val="527.725,53"/>
+        <dia:point val="539.04,53"/>
+        <dia:point val="539.04,47.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -37122,7 +37122,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:enum val="1"/>
       </dia:attribute>
       <dia:attribute name="orth_autoroute">
-        <dia:boolean val="true"/>
+        <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -37137,13 +37137,13 @@ an enumeration, false otherwise.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O291">
       <dia:attribute name="obj_pos">
-        <dia:point val="481,41"/>
+        <dia:point val="481,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="480.95,40.95;512.735,44.65"/>
+        <dia:rectangle val="480.95,44.95;512.735,48.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="481,41"/>
+        <dia:point val="481,45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="31.685000000000002"/>
@@ -37333,18 +37333,18 @@ an enumeration, false otherwise.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="496.842,41"/>
+        <dia:point val="496.842,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="496.092,36.35;518.305,41.8"/>
+        <dia:rectangle val="496.092,36.35;518.305,45.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
+        <dia:point val="496.842,45"/>
         <dia:point val="496.842,41"/>
-        <dia:point val="496.842,38.35"/>
-        <dia:point val="518.105,38.35"/>
+        <dia:point val="518.105,41"/>
         <dia:point val="518.105,36.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -37353,7 +37353,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:enum val="1"/>
       </dia:attribute>
       <dia:attribute name="orth_autoroute">
-        <dia:boolean val="true"/>
+        <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -37369,13 +37369,13 @@ an enumeration, false otherwise.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O293">
       <dia:attribute name="obj_pos">
-        <dia:point val="566,41"/>
+        <dia:point val="566,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="565.95,40.95;597.735,44.65"/>
+        <dia:rectangle val="565.95,44.95;597.735,48.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="566,41"/>
+        <dia:point val="566,45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="31.685000000000002"/>
@@ -37568,16 +37568,16 @@ an enumeration, false otherwise.#</dia:string>
         <dia:point val="561.64,36.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="561.59,36.35;582.592,41.8"/>
+        <dia:rectangle val="561.59,36.35;582.592,45.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="561.64,36.4"/>
-        <dia:point val="561.64,38.35"/>
-        <dia:point val="581.842,38.35"/>
+        <dia:point val="561.64,41"/>
         <dia:point val="581.842,41"/>
+        <dia:point val="581.842,45"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -37585,7 +37585,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:enum val="1"/>
       </dia:attribute>
       <dia:attribute name="orth_autoroute">
-        <dia:boolean val="true"/>
+        <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>

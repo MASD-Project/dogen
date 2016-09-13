@@ -28,6 +28,7 @@
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/quilt.cpp/types/properties/building_error.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
+#include "dogen/quilt.cpp/io/properties/path_derivatives_io.hpp"
 #include "dogen/quilt.cpp/io/properties/path_derivatives_repository_io.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository_factory.hpp"
@@ -79,6 +80,9 @@ private:
         for (const auto& p : providers) {
             BOOST_LOG_SEV(lg, debug) << "Provider: "
                                      << p->formatter_name();
+            const auto pd(p->provide_path_derivatives(factory_, n));
+            BOOST_LOG_SEV(lg, debug) << "New Path derivatives: " << pd
+                                     << "Old path derivatives: " << pair.second;
         }
     }
 
@@ -128,7 +132,6 @@ private:
     const path_derivatives_factory& factory_;
     path_derivatives_repository result_;
 };
-
 
 }
 

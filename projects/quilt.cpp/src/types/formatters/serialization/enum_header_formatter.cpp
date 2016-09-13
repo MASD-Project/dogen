@@ -44,6 +44,10 @@ public:
     std::list<std::string> provide_inclusion_dependencies(
         const properties::inclusion_dependencies_builder_factory& f,
         const yarn::enumeration& e) const override;
+
+    properties::path_derivatives provide_path_derivatives(
+        const properties::path_derivatives_factory& f,
+        const yarn::name& n) const override;
 };
 
 std::string provider::formatter_name() const {
@@ -58,6 +62,13 @@ std::list<std::string> provider::provide_inclusion_dependencies(
     builder.add(e.name(), types::traits::enum_header_formatter_name());
     builder.add(inclusion_constants::boost::serialization::nvp());
     return builder.build();
+}
+
+properties::path_derivatives provider::provide_path_derivatives(
+    const properties::path_derivatives_factory& /*f*/,
+    const yarn::name& /*n*/) const {
+    properties::path_derivatives r;
+    return r;
 }
 
 }
