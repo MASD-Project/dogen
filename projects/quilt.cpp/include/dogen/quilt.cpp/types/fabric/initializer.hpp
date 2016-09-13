@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/yarn/types/injector_registrar.hpp"
+
 namespace dogen {
 namespace quilt {
 namespace cpp {
@@ -32,7 +34,7 @@ namespace fabric {
 
 class initializer {
 public:
-    static void initialize();
+    static void initialize(yarn::injector_registrar& rg);
 };
 
 } } } }

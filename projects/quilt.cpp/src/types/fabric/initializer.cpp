@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/fabric/injector.hpp"
 #include "dogen/quilt.cpp/types/fabric/initializer.hpp"
 
@@ -27,8 +26,8 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-void initializer::initialize() {
-    yarn::register_injector<injector>();
+void initializer::initialize(yarn::injector_registrar& rg) {
+    yarn::register_injector<injector>(rg);
 }
 
 } } } }

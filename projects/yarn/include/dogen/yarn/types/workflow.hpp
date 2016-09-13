@@ -41,21 +41,18 @@ class workflow {
 public:
     workflow();
 
-private:
-    template<typename Injector> friend void register_injector();
-    template<typename Injector> friend void register_frontend();
-
+public:
     /**
-     * @brief Returns the frontend registrar. If it has not yet been
+    p * @brief Returns the frontend registrar. If it has not yet been
      * initialised, initialises it.
      */
-    static frontend_registrar& frontend_registrar_internal();
+    static yarn::frontend_registrar& frontend_registrar();
 
     /**
      * @brief Returns the injector registrar. If it has not yet been
      * initialised, initialises it.
      */
-    static injector_registrar& injector_registrar_internal();
+    static yarn::injector_registrar& injector_registrar();
 
 private:
     void validate() const;
@@ -94,27 +91,6 @@ private:
     static std::shared_ptr<yarn::frontend_registrar> frontend_registrar_;
     static std::shared_ptr<yarn::injector_registrar> injector_registrar_;
 };
-
-/*
- * Helper method to register frontends.
- */
-template<typename Frontend>
-inline void register_frontend() {
-    auto fe(std::make_shared<Frontend>());
-    auto& rg(workflow::frontend_registrar_internal());
-    for (const auto& e : fe->supported_extensions())
-        rg.register_frontend_against_extension(e, fe);
-}
-
-/*
- * Helper method to register injectors.
- */
-template<typename Injector>
-inline void register_injector() {
-    auto inj(std::make_shared<Injector>());
-    auto& rg(workflow::injector_registrar_internal());
-    rg.register_injector(inj);
-}
 
 } }
 

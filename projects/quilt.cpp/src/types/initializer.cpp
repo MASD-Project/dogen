@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/types/workflow.hpp"
 #include "dogen/quilt/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
@@ -32,11 +33,11 @@ namespace quilt {
 namespace cpp {
 
 void initializer::initialize() {
+    using settings::opaque_settings_builder;
+    settings::initializer::initialize(opaque_settings_builder::registrar());
     formatters::initializer::initialize(formatters::workflow::registrar());
-    settings::initializer::initialize(
-        settings::opaque_settings_builder::registrar());
-    quilt::workflow::registrar().register_backend(std::make_shared<workflow>());
-    fabric::initializer::initialize();
+    fabric::initializer::initialize(yarn::workflow::injector_registrar());
+    quilt::register_backend<workflow>(quilt::workflow::registrar());
 }
 
 } } }

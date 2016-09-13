@@ -27,7 +27,7 @@ namespace yarn {
 namespace json {
 
 void initializer::initialize() {
-    yarn::register_frontend<frontend>();
+    yarn::register_frontend<frontend>(yarn::workflow::frontend_registrar());
 }
 
 } } }

@@ -44,6 +44,15 @@ private:
     std::list<std::shared_ptr<const injector_interface>> injectors_;
 };
 
+/*
+ * Helper method to register injectors.
+ */
+template<typename Injector>
+inline void register_injector(injector_registrar& rg) {
+    auto inj(std::make_shared<Injector>());
+    rg.register_injector(inj);
+}
+
 } }
 
 #endif

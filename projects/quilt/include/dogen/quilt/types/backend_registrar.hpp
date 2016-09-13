@@ -57,6 +57,15 @@ private:
     std::forward_list<std::shared_ptr<backend_interface> > backends_;
 };
 
+/*
+ * Helper method to register backends.
+ */
+template<typename Backend>
+inline void register_backend(backend_registrar& rg) {
+    auto be(std::make_shared<Backend>());
+    rg.register_backend(be);
+}
+
 } }
 
 #endif

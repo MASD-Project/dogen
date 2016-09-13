@@ -73,6 +73,17 @@ private:
     frontends_by_extension_;
 };
 
+
+/*
+ * Helper method to register frontends.
+ */
+template<typename Frontend>
+inline void register_frontend(frontend_registrar& rg) {
+    auto fe(std::make_shared<Frontend>());
+    for (const auto& e : fe->supported_extensions())
+        rg.register_frontend_against_extension(e, fe);
+}
+
 } }
 
 #endif

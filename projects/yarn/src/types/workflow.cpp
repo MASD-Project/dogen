@@ -46,14 +46,14 @@ workflow::workflow() {
     validate();
 }
 
-frontend_registrar& workflow::frontend_registrar_internal() {
+yarn::frontend_registrar& workflow::frontend_registrar() {
     if (!frontend_registrar_)
         frontend_registrar_ = std::make_shared<yarn::frontend_registrar>();
 
     return *frontend_registrar_;
 }
 
-injector_registrar& workflow::injector_registrar_internal() {
+yarn::injector_registrar& workflow::injector_registrar() {
     if (!injector_registrar_)
         injector_registrar_ = std::make_shared<yarn::injector_registrar>();
 
@@ -62,8 +62,8 @@ injector_registrar& workflow::injector_registrar_internal() {
 
 void workflow::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Validating registrars.";
-    frontend_registrar_internal().validate();
-    injector_registrar_internal().validate();
+    frontend_registrar().validate();
+    injector_registrar().validate();
     BOOST_LOG_SEV(lg, debug) << "Finished validating registrars. ";
 }
 
@@ -73,7 +73,7 @@ obtain_intermediate_models(const dynamic::repository& drp,
     const std::list<boost::filesystem::path>& dirs,
     const config::input_options& io) const {
     pre_merge_workflow w;
-    return w.execute(drp, dirs, io, frontend_registrar_internal());
+    return w.execute(drp, dirs, io, frontend_registrar());
 }
 
 intermediate_model workflow::
@@ -95,7 +95,7 @@ merge_intermediate_models(const std::list<intermediate_model>& im) const {
 void workflow::post_process_merged_intermediate_model(
     intermediate_model& im) const {
     post_merge_workflow w;
-    return w.execute(injector_registrar_internal(), im);
+    return w.execute(injector_registrar(), im);
 }
 
 model workflow::transform_intermediate_model(
