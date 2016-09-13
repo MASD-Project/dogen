@@ -70,8 +70,9 @@ private:
 
         BOOST_LOG_SEV(lg, debug) << "Processing name: " << n;
         auto& pd(result_.by_name());
-        const auto pair(pd.insert(std::make_pair(n, factory_.make(n))));
-        const bool inserted(pair.second);
+        const auto pair(std::make_pair(n, factory_.make(n)));
+        const auto result(pd.insert(pair));
+        const bool inserted(result.second);
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_name << n.id();
             BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
@@ -80,9 +81,15 @@ private:
         for (const auto& p : providers) {
             BOOST_LOG_SEV(lg, debug) << "Provider: "
                                      << p->formatter_name();
+            const auto i(pair.second.find(p->formatter_name()));
+            if (i != pair.second.end()) {
+                BOOST_LOG_SEV(lg, debug) << "Old path derivatives: "
+                                         << i->second;
+            }
+
             const auto pd(p->provide_path_derivatives(factory_, n));
-            BOOST_LOG_SEV(lg, debug) << "New Path derivatives: " << pd
-                                     << "Old path derivatives: " << pair.second;
+            BOOST_LOG_SEV(lg, debug) << "New Path derivatives: " << pd;
+
         }
     }
 
@@ -140,7 +147,7 @@ path_derivatives_repository path_derivatives_repository_factory::make(
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const registrar& rg, const yarn::model& m) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
+    BOOST_LOG_SEV(lg, debug) << "Generating path derivatives repository.";
     const path_derivatives_factory f(opts, m, ps);
     generator g(rg.container(), f);
     for (const auto& ptr : m.elements()) {
@@ -149,8 +156,8 @@ path_derivatives_repository path_derivatives_repository_factory::make(
     }
     const auto r(g.result());
 
-    BOOST_LOG_SEV(lg, debug) << "Finished workflow. Result: " << r;
-
+    BOOST_LOG_SEV(lg, debug) << "Finished generating path derivatives"
+                             << " repository. Result: " << r;
     return r;
 }
 
