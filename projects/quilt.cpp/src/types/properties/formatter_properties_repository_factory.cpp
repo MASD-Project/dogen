@@ -41,17 +41,6 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-void formatter_properties_repository_factory::initialise_registrar(
-    const formatters::container& c, registrar& rg) const {
-    BOOST_LOG_SEV(lg, debug) << "Started registering all providers.";
-    for (const auto f : c.all_file_formatters()) {
-        BOOST_LOG_SEV(lg, debug) << "Registered: "
-                                 << f->ownership_hierarchy().formatter_name();
-        f->register_inclusion_dependencies_provider(rg);
-    }
-    BOOST_LOG_SEV(lg, debug) << "Finished registering all providers.";
-}
-
 inclusion_directives_repository formatter_properties_repository_factory::
 create_inclusion_directives_repository(
     const dynamic::repository& srp,
@@ -118,15 +107,13 @@ formatter_properties_repository_factory::create_formatter_properties(
 
 formatter_properties_repository formatter_properties_repository_factory::
 make(const dynamic::repository& srp, const dynamic::object& root_object,
-    const path_derivatives_repository& pdrp, const formatters::container& fc,
-    const yarn::model& m) const {
+    const path_derivatives_repository& pdrp, const registrar& rg,
+    const formatters::container& fc, const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Building formatter properties repository.";
     const auto idrp(create_inclusion_directives_repository(srp, fc, pdrp, m));
     const auto erp(create_enablement_repository(srp, root_object, fc, m));
 
-    registrar rg;
-    initialise_registrar(fc, rg);
     const auto pc(rg.container());
     const inclusion_dependencies_builder_factory bf(erp, idrp);
     const auto dprp(create_inclusion_dependencies_repository(bf, pc, m));

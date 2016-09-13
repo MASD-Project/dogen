@@ -14,25 +14,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-13 Tue 11:05]
+#+CAPTION: Clock summary at [2016-09-13 Tue 12:01]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *8:59* |      |      | 100.0 |
+| *Total time*                                                                | *9:50* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 8:59   |      |      | 100.0 |
-| Active                                                                      |        | 8:59 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:19 |  14.7 |
-| COMPLETED Fix chocolatey warning                                            |        |      | 0:08 |   1.5 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |   5.0 |
-| COMPLETED Analysis on current state of file path generation                 |        |      | 0:57 |  10.6 |
-| CANCELLED Remove inclusion dependencies builder factory                     |        |      | 0:14 |   2.6 |
-| COMPLETED Analysis on formatters, elements and extensibility                |        |      | 1:18 |  14.5 |
-| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |        |      | 1:12 |  13.4 |
-| STARTED Refactor path derivatives factory for usage in formatters           |        |      | 2:00 |  22.3 |
-| STARTED Move file path generation to formatters                             |        |      | 0:24 |   4.5 |
-| STARTED Path derivatives factory generates all possible includes            |        |      | 0:44 |   8.2 |
-| STARTED Remove formattable origin type                                      |        |      | 0:16 |   3.0 |
+| Stories                                                                     | 9:50   |      |      | 100.0 |
+| Active                                                                      |        | 9:50 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:19 |  13.4 |
+| COMPLETED Fix chocolatey warning                                            |        |      | 0:08 |   1.4 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |   4.6 |
+| COMPLETED Analysis on current state of file path generation                 |        |      | 0:57 |   9.7 |
+| CANCELLED Remove inclusion dependencies builder factory                     |        |      | 0:14 |   2.4 |
+| COMPLETED Analysis on formatters, elements and extensibility                |        |      | 1:18 |  13.2 |
+| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |        |      | 1:12 |  12.2 |
+| STARTED Refactor path derivatives factory for usage in formatters           |        |      | 2:51 |  29.0 |
+| STARTED Move file path generation to formatters                             |        |      | 0:24 |   4.1 |
+| STARTED Path derivatives factory generates all possible includes            |        |      | 0:44 |   7.5 |
+| STARTED Remove formattable origin type                                      |        |      | 0:16 |   2.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -231,6 +231,7 @@ Tasks:
     implement it.
 
 *** STARTED Refactor path derivatives factory for usage in formatters :story:
+    CLOCK: [2016-09-13 Tue 11:38]--[2016-09-13 Tue 11:59] =>  0:21
     CLOCK: [2016-09-13 Tue 11:26]--[2016-09-13 Tue 11:37] =>  0:11
     CLOCK: [2016-09-13 Tue 11:06]--[2016-09-13 Tue 11:25] =>  0:19
     CLOCK: [2016-09-13 Tue 10:36]--[2016-09-13 Tue 11:05] =>  0:29
@@ -693,6 +694,15 @@ path, etc are - and so should remain command line options.
 We need to move these two into the meta-data. This would also mean we
 no longer need to pass in external module paths for references, which
 is much cleaner.
+
+*** Allow logging during initialisation                               :story:
+
+At present we assume the log has not been initialised during
+initialisation. The only reason for this is with unit testing because
+each test initialises the log differently. However, one simple way
+around this is to have a log file for the entire test suite and
+separate log files for each test as we have now. Initialisation
+logging would go in this main file.
 
 ** Deprecated
 *** CANCELLED Consider renaming formatters                            :story:

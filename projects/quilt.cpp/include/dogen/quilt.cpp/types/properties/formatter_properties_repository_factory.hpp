@@ -62,14 +62,6 @@ private:
 
 private:
     /**
-     * @brief Initialises the registrar with all the providers sourced
-     * from the formatters container.
-     */
-    void initialise_registrar(const formatters::container& c,
-        registrar& rg) const;
-
-private:
-    /**
      * @brief Create the inclusion directives repository.
      */
     inclusion_directives_repository create_inclusion_directives_repository(
@@ -114,6 +106,7 @@ public:
         const dynamic::repository& srp,
         const dynamic::object& root_object,
         const path_derivatives_repository& pdrp,
+        const registrar& rg,
         const formatters::container& fc,
         const yarn::model& m) const;
 };

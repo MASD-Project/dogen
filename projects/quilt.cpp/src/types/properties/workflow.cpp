@@ -98,7 +98,7 @@ create_formatter_properties(const dynamic::repository& drp,
     const yarn::model& m) const {
 
     formatter_properties_repository_factory f;
-    return f.make(drp, root_object, pdrp, fc, m);
+    return f.make(drp, root_object, pdrp, registrar(), fc, m);
 }
 
 std::forward_list<std::shared_ptr<properties::formattable> >
