@@ -32,16 +32,16 @@ namespace formatters {
 
 namespace {
 
-class provider final : public properties::
-        inclusion_dependencies_provider_interface<fabric::master_header> {
+class provider final :
+        public properties::provider_interface<fabric::master_header> {
 public:
     provider(const std::string& facet_name, const std::string& formatter_name);
 
 public:
     std::string formatter_name() const override;
 
-    boost::optional<std::list<std::string> >
-        provide(const properties::inclusion_dependencies_builder_factory& f,
+    std::list<std::string> provide_inclusion_dependencies(
+        const properties::inclusion_dependencies_builder_factory& f,
             const fabric::master_header& mh) const override;
 
 private:
@@ -53,13 +53,13 @@ provider::
 provider(const std::string& facet_name, const std::string& formatter_name)
     : facet_name_(facet_name), formatter_name_(formatter_name) { }
 
-boost::optional<std::list<std::string> >
-provider::provide(const properties::inclusion_dependencies_builder_factory& f,
+std::list<std::string> provider::provide_inclusion_dependencies(
+    const properties::inclusion_dependencies_builder_factory& f,
     const fabric::master_header& mh) const {
 
     const auto i(mh.inclusion_by_facet().find(facet_name_));
     if (i == mh.inclusion_by_facet().end())
-        return boost::optional<std::list<std::string>>();
+        return std::list<std::string>();
 
     auto builder(f.make());
     for (const auto& pair : i->second) {

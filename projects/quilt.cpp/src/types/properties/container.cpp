@@ -25,56 +25,38 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-const std::forward_list<
-    boost::shared_ptr<
-        inclusion_dependencies_provider_interface<yarn::object>
-        >
-    >&
+const std::forward_list<boost::shared_ptr<provider_interface<yarn::object>>>&
 container::object_providers() const {
     return object_providers_;
 }
 
 const std::forward_list<
-    boost::shared_ptr<
-        inclusion_dependencies_provider_interface<yarn::enumeration>
-        >
-    >&
+    boost::shared_ptr<provider_interface<yarn::enumeration>>
+>&
 container::enumeration_providers() const {
     return enumeration_providers_;
 }
 
-const std::forward_list<
-    boost::shared_ptr<
-        inclusion_dependencies_provider_interface<yarn::exception>
-        >
-    >&
+const std::forward_list<boost::shared_ptr<provider_interface<yarn::exception>>>&
 container::exception_providers() const {
     return exception_providers_;
 }
 
-const std::forward_list<
-    boost::shared_ptr<
-        inclusion_dependencies_provider_interface<yarn::visitor>
-        >
-    >&
+const std::forward_list<boost::shared_ptr<provider_interface<yarn::visitor>>>&
 container::visitor_providers() const {
     return visitor_providers_;
 }
 
 const std::forward_list<
-    boost::shared_ptr<
-        inclusion_dependencies_provider_interface<fabric::registrar>
-        >
-    >&
+    boost::shared_ptr<provider_interface<fabric::registrar>>
+>&
 container::registrar_providers() const {
     return registrar_providers_;
 }
 
 const std::forward_list<
-    boost::shared_ptr<
-        inclusion_dependencies_provider_interface<fabric::master_header>
-        >
-    >&
+    boost::shared_ptr<provider_interface<fabric::master_header>>
+>&
 container::master_header_providers() const {
     return master_header_providers_;
 }

@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/properties/inclusion_dependencies_provider_interface.hpp"
+#include "dogen/quilt.cpp/types/properties/provider_interface.hpp"
 
 namespace dogen {
 namespace quilt {

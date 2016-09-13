@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_PROPERTIES_INCLUSION_DEPENDENCIES_PROVIDER_INTERFACE_HPP
-#define DOGEN_QUILT_CPP_TYPES_PROPERTIES_INCLUSION_DEPENDENCIES_PROVIDER_INTERFACE_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_PROPERTIES_PROVIDER_INTERFACE_HPP
+#define DOGEN_QUILT_CPP_TYPES_PROPERTIES_PROVIDER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,6 @@
 #include <utility>
 #include <unordered_map>
 #include <unordered_set>
-#include <boost/optional.hpp>
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_builder_factory.hpp"
 
 namespace dogen {
@@ -42,14 +41,12 @@ namespace properties {
  * @brief Provides all inclusion dependencies for a given Yarn element.
  */
 template<typename Element>
-class inclusion_dependencies_provider_interface {
+class provider_interface {
 public:
-    inclusion_dependencies_provider_interface() = default;
-    inclusion_dependencies_provider_interface(
-        const inclusion_dependencies_provider_interface&) = delete;
-    inclusion_dependencies_provider_interface(
-        inclusion_dependencies_provider_interface&&) = default;
-    virtual ~inclusion_dependencies_provider_interface() noexcept = 0;
+    provider_interface() = default;
+    provider_interface(const provider_interface&) = delete;
+    provider_interface(provider_interface&&) = default;
+    virtual ~provider_interface() noexcept = 0;
 
 public:
     /**
@@ -61,14 +58,13 @@ public:
     /**
      * @brief Provide the inclusion dependencies.
      */
-    virtual boost::optional<std::list<std::string> >
-    provide(const inclusion_dependencies_builder_factory& f,
+    virtual std::list<std::string> provide_inclusion_dependencies(
+        const inclusion_dependencies_builder_factory& f,
         const Element& e) const = 0;
 };
 
 template<typename Element>
-inclusion_dependencies_provider_interface<Element>::
-~inclusion_dependencies_provider_interface() noexcept { }
+provider_interface<Element>::~provider_interface() noexcept { }
 
 } } } }
 

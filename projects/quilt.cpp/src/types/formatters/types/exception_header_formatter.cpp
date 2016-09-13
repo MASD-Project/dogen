@@ -20,7 +20,6 @@
  */
 #include <boost/make_shared.hpp>
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/quilt.cpp/types/properties/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
@@ -39,13 +38,13 @@ namespace types {
 
 namespace {
 
-class provider final : public properties::
-        inclusion_dependencies_provider_interface<yarn::exception> {
+class provider final :
+        public properties::provider_interface<yarn::exception> {
 public:
     std::string formatter_name() const override;
 
-    boost::optional<std::list<std::string> >
-        provide(const properties::inclusion_dependencies_builder_factory& f,
+    std::list<std::string> provide_inclusion_dependencies(
+        const properties::inclusion_dependencies_builder_factory& f,
         const yarn::exception& o) const override;
 };
 
@@ -53,8 +52,8 @@ std::string provider::formatter_name() const {
     return exception_header_formatter::static_formatter_name();
 }
 
-boost::optional<std::list<std::string> >
-provider::provide(const properties::inclusion_dependencies_builder_factory& f,
+std::list<std::string> provider::provide_inclusion_dependencies(
+    const properties::inclusion_dependencies_builder_factory& f,
     const yarn::exception& /*e*/) const {
     auto builder(f.make());
     builder.add(inclusion_constants::std::string());

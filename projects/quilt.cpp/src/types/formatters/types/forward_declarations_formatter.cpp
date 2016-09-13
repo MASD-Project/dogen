@@ -23,7 +23,6 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/quilt.cpp/types/properties/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_builder.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
@@ -51,13 +50,13 @@ namespace types {
 
 namespace {
 
-class provider final : public properties::
-        inclusion_dependencies_provider_interface<yarn::exception> {
+class provider final :
+        public properties::provider_interface<yarn::exception> {
 public:
     std::string formatter_name() const override;
 
-    boost::optional<std::list<std::string> >
-    provide(const properties::inclusion_dependencies_builder_factory& f,
+    std::list<std::string> provide_inclusion_dependencies(
+        const properties::inclusion_dependencies_builder_factory& f,
         const yarn::exception& e) const override;
 };
 
@@ -65,8 +64,8 @@ std::string provider::formatter_name() const {
     return forward_declarations_formatter::static_formatter_name();
 }
 
-boost::optional<std::list<std::string> >
-provider::provide(const properties::inclusion_dependencies_builder_factory& f,
+std::list<std::string> provider::provide_inclusion_dependencies(
+    const properties::inclusion_dependencies_builder_factory& f,
     const yarn::exception& /*e*/) const {
 
     const auto self_fn(forward_declarations_formatter::static_formatter_name());

@@ -35,13 +35,13 @@ namespace serialization {
 
 namespace {
 
-class provider final : public properties::
-        inclusion_dependencies_provider_interface<yarn::object> {
+class provider final :
+        public properties::provider_interface<yarn::object> {
 public:
     std::string formatter_name() const override;
 
-    boost::optional<std::list<std::string> >
-        provide(const properties::inclusion_dependencies_builder_factory& f,
+    std::list<std::string> provide_inclusion_dependencies(
+        const properties::inclusion_dependencies_builder_factory& f,
         const yarn::object& o) const override;
 };
 
@@ -49,8 +49,8 @@ std::string provider::formatter_name() const {
     return class_implementation_formatter::static_formatter_name();
 }
 
-boost::optional<std::list<std::string> >
-provider::provide(const properties::inclusion_dependencies_builder_factory& f,
+std::list<std::string> provider::provide_inclusion_dependencies(
+    const properties::inclusion_dependencies_builder_factory& f,
     const yarn::object& o) const {
 
     auto builder(f.make());

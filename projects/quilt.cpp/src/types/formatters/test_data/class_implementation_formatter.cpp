@@ -21,7 +21,7 @@
 #include <boost/make_shared.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/quilt.cpp/types/properties/inclusion_dependencies_provider_interface.hpp"
+#include "dogen/quilt.cpp/types/properties/provider_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
@@ -46,13 +46,12 @@ namespace test_data {
 
 namespace {
 
-class provider final : public properties::
-        inclusion_dependencies_provider_interface<yarn::object> {
+class provider final : public properties::provider_interface<yarn::object> {
 public:
     std::string formatter_name() const override;
 
-    boost::optional<std::list<std::string> >
-        provide(const properties::inclusion_dependencies_builder_factory& f,
+    std::list<std::string> provide_inclusion_dependencies(
+        const properties::inclusion_dependencies_builder_factory& f,
         const yarn::object& o) const override;
 };
 
@@ -60,8 +59,8 @@ std::string provider::formatter_name() const {
     return class_implementation_formatter::static_formatter_name();
 }
 
-boost::optional<std::list<std::string> >
-provider::provide(const properties::inclusion_dependencies_builder_factory& f,
+std::list<std::string> provider::provide_inclusion_dependencies(
+    const properties::inclusion_dependencies_builder_factory& f,
     const yarn::object& o) const {
     auto builder(f.make());
     const auto ch_fn(traits::class_header_formatter_name());

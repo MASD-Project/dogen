@@ -36,13 +36,13 @@ namespace serialization {
 
 namespace {
 
-class provider final : public properties::
-        inclusion_dependencies_provider_interface<fabric::registrar> {
+class provider final :
+        public properties::provider_interface<fabric::registrar> {
 public:
     std::string formatter_name() const override;
 
-    boost::optional<std::list<std::string> >
-    provide(const properties::inclusion_dependencies_builder_factory& f,
+    std::list<std::string> provide_inclusion_dependencies(
+        const properties::inclusion_dependencies_builder_factory& f,
         const fabric::registrar& rg) const override;
 };
 
@@ -50,8 +50,8 @@ std::string provider::formatter_name() const {
     return registrar_implementation_formatter::static_formatter_name();
 }
 
-boost::optional<std::list<std::string> >
-provider::provide(const properties::inclusion_dependencies_builder_factory& f,
+std::list<std::string> provider::provide_inclusion_dependencies(
+    const properties::inclusion_dependencies_builder_factory& f,
     const fabric::registrar& rg) const {
 
     auto builder(f.make());

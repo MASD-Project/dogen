@@ -92,11 +92,8 @@ namespace properties {
 template<typename YarnEntity>
 std::unordered_map<std::string, std::list<std::string> >
 generate(const inclusion_dependencies_builder_factory& f,
-    std::forward_list<
-        boost::shared_ptr<
-            inclusion_dependencies_provider_interface<YarnEntity>
-            >
-        > providers, const YarnEntity& e) {
+    const std::forward_list<boost::shared_ptr<provider_interface<YarnEntity>>>&
+    providers, const YarnEntity& e) {
 
     const auto id(e.name().id());
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies for: " << id;
@@ -104,21 +101,21 @@ generate(const inclusion_dependencies_builder_factory& f,
     std::unordered_map<std::string, std::list<std::string> > r;
     for (const auto p : providers) {
         BOOST_LOG_SEV(lg, debug) << "Providing for: " << p->formatter_name();
-        auto ideps(p->provide(f, e));
+        auto deps(p->provide_inclusion_dependencies(f, e));
 
-        if (!ideps)
+        if (deps.empty())
             continue;
 
-        ideps->sort(include_directive_comparer);
-        ideps->unique();
-        const auto id_pair(std::make_pair(p->formatter_name(), *ideps));
+        deps.sort(include_directive_comparer);
+        deps.unique();
+        const auto id_pair(std::make_pair(p->formatter_name(), deps));
         const bool inserted(r.insert(id_pair).second);
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_formatter_name
                                      << p->formatter_name()
                                      << " for type: " << id;
-            BOOST_THROW_EXCEPTION(building_error(duplicate_formatter_name +
-                    p->formatter_name()));
+            BOOST_THROW_EXCEPTION(
+                building_error(duplicate_formatter_name + p->formatter_name()));
         }
     }
 

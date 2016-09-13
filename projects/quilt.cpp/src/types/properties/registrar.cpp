@@ -39,9 +39,7 @@ namespace cpp {
 namespace properties {
 
 template<typename Element>
-inline void validate(boost::shared_ptr<
-        inclusion_dependencies_provider_interface<Element>
-    > p) {
+inline void validate(boost::shared_ptr<provider_interface<Element>> p) {
     if (!p) {
         BOOST_LOG_SEV(lg, error) << null_provider;
         BOOST_THROW_EXCEPTION(registrar_error(null_provider));
@@ -57,44 +55,38 @@ const properties::container& registrar::container() const {
     return container_;
 }
 
-void registrar::register_provider(boost::shared_ptr<
-    inclusion_dependencies_provider_interface<yarn::object>
-    > p) {
+void registrar::register_provider(
+    boost::shared_ptr<provider_interface<yarn::object>> p) {
     validate(p);
     container_.object_providers_.push_front(p);
 }
 
-void registrar::register_provider(boost::shared_ptr<
-    inclusion_dependencies_provider_interface<yarn::enumeration>
-    > p) {
+void registrar::register_provider(
+    boost::shared_ptr<provider_interface<yarn::enumeration>> p) {
     validate(p);
     container_.enumeration_providers_.push_front(p);
 }
 
-void registrar::register_provider(boost::shared_ptr<
-    inclusion_dependencies_provider_interface<yarn::exception>
-    > p) {
+void registrar::register_provider(
+    boost::shared_ptr<provider_interface<yarn::exception>> p) {
     validate(p);
     container_.exception_providers_.push_front(p);
 }
 
-void registrar::register_provider(boost::shared_ptr<
-    inclusion_dependencies_provider_interface<yarn::visitor>
-    > p) {
+void registrar::register_provider(
+    boost::shared_ptr<provider_interface<yarn::visitor>> p) {
     validate(p);
     container_.visitor_providers_.push_front(p);
 }
 
-void registrar::register_provider(boost::shared_ptr<
-    inclusion_dependencies_provider_interface<fabric::registrar>
-    > p) {
+void registrar::register_provider(
+    boost::shared_ptr<provider_interface<fabric::registrar>> p) {
     validate(p);
     container_.registrar_providers_.push_front(p);
 }
 
-void registrar::register_provider(boost::shared_ptr<
-    inclusion_dependencies_provider_interface<fabric::master_header>
-    > p) {
+void registrar::register_provider(
+    boost::shared_ptr<provider_interface<fabric::master_header>> p) {
     validate(p);
     container_.master_header_providers_.push_front(p);
 }

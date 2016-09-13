@@ -32,7 +32,7 @@
 #include "dogen/yarn/types/visitor.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
-#include "dogen/quilt.cpp/types/properties/inclusion_dependencies_provider_interface.hpp"
+#include "dogen/quilt.cpp/types/properties/provider_interface.hpp"
 #include "dogen/quilt.cpp/types/properties/container.hpp"
 
 namespace dogen {
@@ -45,28 +45,23 @@ public:
     const properties::container& container() const;
 
 public:
-    void register_provider(boost::shared_ptr<
-        inclusion_dependencies_provider_interface<yarn::object>
-        > p);
-    void register_provider(boost::shared_ptr<
-        inclusion_dependencies_provider_interface<yarn::enumeration>
-        > p);
+    void register_provider(
+        boost::shared_ptr<provider_interface<yarn::object>> p);
 
-    void register_provider(boost::shared_ptr<
-        inclusion_dependencies_provider_interface<yarn::exception>
-        > p);
+    void register_provider(
+        boost::shared_ptr<provider_interface<yarn::enumeration>> p);
 
-    void register_provider(boost::shared_ptr<
-        inclusion_dependencies_provider_interface<yarn::visitor>
-        > p);
+    void register_provider(
+        boost::shared_ptr<provider_interface<yarn::exception>> p);
 
-    void register_provider(boost::shared_ptr<
-        inclusion_dependencies_provider_interface<fabric::registrar>
-        > p);
+    void register_provider(
+        boost::shared_ptr<provider_interface<yarn::visitor>> p);
 
-    void register_provider(boost::shared_ptr<
-        inclusion_dependencies_provider_interface<fabric::master_header>
-        > p);
+    void register_provider(
+        boost::shared_ptr<provider_interface<fabric::registrar>> p);
+
+    void register_provider(
+        boost::shared_ptr<provider_interface<fabric::master_header>> p);
 
 private:
     properties::container container_;

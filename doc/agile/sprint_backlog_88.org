@@ -14,24 +14,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-12 Mon 22:03]
+#+CAPTION: Clock summary at [2016-09-13 Tue 09:57]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *6:41* |      |      | 100.0 |
+| *Total time*                                                                | *7:53* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 6:41   |      |      | 100.0 |
-| Active                                                                      |        | 6:41 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:19 |  19.7 |
-| COMPLETED Fix chocolatey warning                                            |        |      | 0:08 |   2.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |   6.7 |
-| COMPLETED Analysis on current state of file path generation                 |        |      | 0:57 |  14.2 |
-| CANCELLED Remove inclusion dependencies builder factory                     |        |      | 0:14 |   3.5 |
-| COMPLETED Analysis on formatters, elements and extensibility                |        |      | 1:18 |  19.5 |
-| STARTED Refactor path derivatives factory for usage in formatters           |        |      | 0:54 |  13.5 |
-| STARTED Move file path generation to formatters                             |        |      | 0:24 |   6.0 |
-| STARTED Path derivatives factory generates all possible includes            |        |      | 0:44 |  11.0 |
-| STARTED Remove formattable origin type                                      |        |      | 0:16 |   4.0 |
+| Stories                                                                     | 7:53   |      |      | 100.0 |
+| Active                                                                      |        | 7:53 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:19 |  16.7 |
+| COMPLETED Fix chocolatey warning                                            |        |      | 0:08 |   1.7 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:27 |   5.7 |
+| COMPLETED Analysis on current state of file path generation                 |        |      | 0:57 |  12.1 |
+| CANCELLED Remove inclusion dependencies builder factory                     |        |      | 0:14 |   3.0 |
+| COMPLETED Analysis on formatters, elements and extensibility                |        |      | 1:18 |  16.5 |
+| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |        |      | 1:12 |  15.2 |
+| STARTED Refactor path derivatives factory for usage in formatters           |        |      | 0:54 |  11.4 |
+| STARTED Move file path generation to formatters                             |        |      | 0:24 |   5.1 |
+| STARTED Path derivatives factory generates all possible includes            |        |      | 0:44 |   9.3 |
+| STARTED Remove formattable origin type                                      |        |      | 0:16 |   3.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -214,6 +215,21 @@ Papers and assorted links read:
 - [[http://www.stroustrup.com/multimethods.pdf][Open Multi-Methods for C++]]
 - [[http://codereview.stackexchange.com/questions/84176/proper-use-of-type-info-in-relation-to-mapping-components-to-a-type][Proper use of type_info in relation to mapping components to a type]]
 
+*** COMPLETED Refactor =inclusion_dependencies_provider_interface=    :story:
+    CLOSED: [2016-09-13 Tue 09:57]
+    CLOCK: [2016-09-13 Tue 08:45]--[2016-09-13 Tue 09:57] =>  1:12
+
+We need to generalise this interface to cope with path derivatives.
+
+Tasks:
+
+- rename to =provider_interface=
+- add containers for all elements, including injected ones.
+- add methods:
+  - =provide_inclusion_dependencies=
+  - =provide_path_derivatives=: actually lets add this when we
+    implement it.
+
 *** STARTED Refactor path derivatives factory for usage in formatters :story:
     CLOCK: [2016-09-12 Mon 18:35]--[2016-09-12 Mon 18:54] =>  0:19
     CLOCK: [2016-09-12 Mon 11:26]--[2016-09-12 Mon 12:01] =>  0:35
@@ -369,18 +385,6 @@ Tasks:
 - remove container of internal and external formatters in formatter
   container.
 
-*** Refactor =inclusion_dependencies_provider_interface=              :story:
-
-We need to generalise this interface to cope with path derivatives.
-
-Tasks:
-
-- rename to =provider_interface=
-- add containers for all elements, including injected ones.
-- add methods:
-  - =provide_inclusion_dependencies=
-  - =provide_path_derivatives=
-
 *** Move registration of inclusion dependencies to initialiser        :story:
 
 At present we are iterating through the formatters list in properties
@@ -530,7 +534,7 @@ sufficient for this.
 
 Uses:
 
-- include provider.
+- include provider. Fixed with other story.
 
 *** Run tests that are passing on windows                             :story:
 

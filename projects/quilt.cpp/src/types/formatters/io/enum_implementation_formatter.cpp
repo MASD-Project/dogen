@@ -36,22 +36,22 @@ namespace io {
 
 namespace {
 
-class provider final : public properties::
-        inclusion_dependencies_provider_interface<yarn::enumeration> {
+class provider final :
+        public properties::provider_interface<yarn::enumeration> {
 public:
     std::string formatter_name() const override;
 
-    boost::optional<std::list<std::string> >
-        provide(const properties::inclusion_dependencies_builder_factory& f,
-            const yarn::enumeration& o) const override;
+    std::list<std::string> provide_inclusion_dependencies(
+        const properties::inclusion_dependencies_builder_factory& f,
+        const yarn::enumeration& o) const override;
 };
 
 std::string provider::formatter_name() const {
     return enum_implementation_formatter::static_formatter_name();
 }
 
-boost::optional<std::list<std::string> >
-provider::provide(const properties::inclusion_dependencies_builder_factory& f,
+std::list<std::string> provider::provide_inclusion_dependencies(
+    const properties::inclusion_dependencies_builder_factory& f,
     const yarn::enumeration& o) const {
     auto builder(f.make());
 
