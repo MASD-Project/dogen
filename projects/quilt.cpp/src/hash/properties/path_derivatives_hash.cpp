@@ -34,16 +34,6 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
     return seed;
 }
 
-inline std::size_t hash_boost_optional_std_string(const boost::optional<std::string>& v) {
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -55,8 +45,8 @@ std::size_t path_derivatives_hasher::hash(const path_derivatives& v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_filesystem_path(v.file_path()));
-    combine(seed, hash_boost_optional_std_string(v.header_guard()));
-    combine(seed, hash_boost_optional_std_string(v.inclusion_directive()));
+    combine(seed, v.header_guard());
+    combine(seed, v.inclusion_directive());
 
     return seed;
 }

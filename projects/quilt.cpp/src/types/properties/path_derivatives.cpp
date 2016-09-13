@@ -32,8 +32,8 @@ path_derivatives::path_derivatives(path_derivatives&& rhs)
 
 path_derivatives::path_derivatives(
     const boost::filesystem::path& file_path,
-    const boost::optional<std::string>& header_guard,
-    const boost::optional<std::string>& inclusion_directive)
+    const std::string& header_guard,
+    const std::string& inclusion_directive)
     : file_path_(file_path),
       header_guard_(header_guard),
       inclusion_directive_(inclusion_directive) { }
@@ -73,35 +73,35 @@ void path_derivatives::file_path(const boost::filesystem::path&& v) {
     file_path_ = std::move(v);
 }
 
-const boost::optional<std::string>& path_derivatives::header_guard() const {
+const std::string& path_derivatives::header_guard() const {
     return header_guard_;
 }
 
-boost::optional<std::string>& path_derivatives::header_guard() {
+std::string& path_derivatives::header_guard() {
     return header_guard_;
 }
 
-void path_derivatives::header_guard(const boost::optional<std::string>& v) {
+void path_derivatives::header_guard(const std::string& v) {
     header_guard_ = v;
 }
 
-void path_derivatives::header_guard(const boost::optional<std::string>&& v) {
+void path_derivatives::header_guard(const std::string&& v) {
     header_guard_ = std::move(v);
 }
 
-const boost::optional<std::string>& path_derivatives::inclusion_directive() const {
+const std::string& path_derivatives::inclusion_directive() const {
     return inclusion_directive_;
 }
 
-boost::optional<std::string>& path_derivatives::inclusion_directive() {
+std::string& path_derivatives::inclusion_directive() {
     return inclusion_directive_;
 }
 
-void path_derivatives::inclusion_directive(const boost::optional<std::string>& v) {
+void path_derivatives::inclusion_directive(const std::string& v) {
     inclusion_directive_ = v;
 }
 
-void path_derivatives::inclusion_directive(const boost::optional<std::string>&& v) {
+void path_derivatives::inclusion_directive(const std::string&& v) {
     inclusion_directive_ = std::move(v);
 }
 

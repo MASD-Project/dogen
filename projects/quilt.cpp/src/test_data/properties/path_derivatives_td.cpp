@@ -36,13 +36,6 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-boost::optional<std::string>
-create_boost_optional_std_string(unsigned int position) {
-    boost::optional<std::string> r(
-        create_std_string(position));
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -55,8 +48,8 @@ path_derivatives_generator::path_derivatives_generator() : position_(0) { }
 void path_derivatives_generator::
 populate(const unsigned int position, result_type& v) {
     v.file_path(create_boost_filesystem_path(position + 0));
-    v.header_guard(create_boost_optional_std_string(position + 1));
-    v.inclusion_directive(create_boost_optional_std_string(position + 2));
+    v.header_guard(create_std_string(position + 1));
+    v.inclusion_directive(create_std_string(position + 2));
 }
 
 path_derivatives_generator::result_type
