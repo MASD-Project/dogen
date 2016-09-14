@@ -65,10 +65,9 @@ std::list<std::string> provider::provide_inclusion_dependencies(
     // algorithm: domain headers need it for the swap function.
     builder.add(inclusion_constants::std::algorithm());
 
-    const auto io_fctn(formatters::io::traits::facet_name());
-    const auto self_fn(class_header_formatter::static_formatter_name());
+    const auto io_fn(formatters::io::traits::class_header_formatter_name());
     const bool in_inheritance(o.is_parent() || o.is_child());
-    const bool io_enabled(builder.is_enabled(o.name(), self_fn));
+    const bool io_enabled(builder.is_enabled(o.name(), io_fn));
     const bool requires_io(io_enabled && in_inheritance);
 
     const auto ios(inclusion_constants::std::iosfwd());
@@ -79,6 +78,7 @@ std::list<std::string> provider::provide_inclusion_dependencies(
     const auto ser_fwd_fn(ser::forward_declarations_formatter_name());
     builder.add(o.name(), ser_fwd_fn);
 
+    const auto self_fn(class_header_formatter::static_formatter_name());
     const auto fwd_fn(traits::forward_declarations_formatter_name());
     builder.add(o.transparent_associations(), self_fn);
     builder.add(o.opaque_associations(), fwd_fn);

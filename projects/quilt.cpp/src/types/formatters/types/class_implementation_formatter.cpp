@@ -69,16 +69,14 @@ std::list<std::string> provider::provide_inclusion_dependencies(
     const properties::inclusion_dependencies_builder_factory& f,
     const yarn::object& o) const {
     auto builder(f.make());
+
     const auto ch_fn(traits::class_header_formatter_name());
     builder.add(o.name(), ch_fn);
-
     builder.add(o.opaque_associations(), ch_fn);
 
-    const auto io_fctn(formatters::io::traits::facet_name());
-    const auto self_fn(class_implementation_formatter::static_formatter_name());
-
+    const auto io_fn(formatters::io::traits::class_header_formatter_name());
     const bool in_inheritance(o.is_parent() || o.is_child());
-    const bool io_enabled(builder.is_enabled(o.name(), self_fn));
+    const bool io_enabled(builder.is_enabled(o.name(), io_fn));
     const bool requires_io(io_enabled && in_inheritance);
 
     if (!requires_io)
@@ -94,7 +92,6 @@ std::list<std::string> provider::provide_inclusion_dependencies(
     if (si.has_std_string)
         builder.add(inclusion_constants::boost::algorithm::string());
 
-    const auto io_fn(formatters::io::traits::class_header_formatter_name());
     builder.add(o.transparent_associations(), io_fn);
     builder.add(o.opaque_associations(), io_fn);
     builder.add(o.parent(), io_fn);
