@@ -42,6 +42,10 @@ namespace properties {
 
 /**
  * @brief Creates the inclusion directives for a given Yarn entity.
+ *
+ * We generate one inclusion directive per formatter that requires
+ * it. The inclusion directive is used by types who include another
+ * type, in a C++ include statement.
  */
 class inclusion_directives_factory {
 public:
