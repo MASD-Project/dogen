@@ -64,9 +64,9 @@ std::list<std::string> provider::provide_inclusion_dependencies(
 }
 
 properties::path_derivatives provider::provide_path_derivatives(
-    const properties::path_derivatives_factory& /*f*/,
-    const yarn::name& /*n*/) const {
-    properties::path_derivatives r;
+    const properties::path_derivatives_factory& f,
+    const yarn::name& n) const {
+    const auto r(f.make_cpp_header(n, formatter_name()));
     return r;
 }
 
