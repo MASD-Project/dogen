@@ -232,7 +232,9 @@ Tasks:
   - =provide_path_derivatives=: actually lets add this when we
     implement it.
 
-*** STARTED Investigate broken windows builds                         :story:
+*** COMPLETED Investigate broken windows builds                       :story:
+    CLOSED: [2016-09-14 Wed 09:37]
+    CLOCK: [2016-09-14 Wed 09:21]--[2016-09-14 Wed 09:37] =>  0:16
     CLOCK: [2016-09-14 Wed 08:05]--[2016-09-14 Wed 08:21] =>  0:16
 
 Opened issue with Conan [[https://github.com/conan-io/conan/issues/481][#481]]:
@@ -265,7 +267,11 @@ Marco
 https://ci.appveyor.com/project/mcraveiro/dogen/build/2.2.363/job/m98mj8nl1sf26xg4 for Release
 #+end_src
 
+Solved with the workaround proposed by memsharded, documented in ticket.
+
 *** STARTED Refactor path derivatives factory for usage in formatters :story:
+    CLOCK: [2016-09-14 Wed 09:38]
+    CLOCK: [2016-09-14 Wed 08:40]--[2016-09-14 Wed 09:20] =>  0:40
     CLOCK: [2016-09-13 Tue 12:00]--[2016-09-13 Tue 12:24] =>  0:24
     CLOCK: [2016-09-13 Tue 11:38]--[2016-09-13 Tue 11:59] =>  0:21
     CLOCK: [2016-09-13 Tue 11:26]--[2016-09-13 Tue 11:37] =>  0:11
@@ -306,7 +312,7 @@ We could create the following methods:
 - make include path: takes in a name, a file extension and the path
   settings; calls make facet path and augments the result.
 - make cpp header: calls above functions to generate the path
-  derivatives for the c++ header. Takes in a name, formatter name,
+  derivatives for the c++ header. Takes in a name, formatter name.
 - make cpp implementation: calls above functions to generate the
   path derivatives for the c++ implementation.
 - make project level item: cmakelists at project level.

@@ -82,6 +82,14 @@ private:
      */
     std::string to_header_guard_name(const boost::filesystem::path& p) const;
 
+private:
+    /**
+     * @brief Returns the absolute path to the project folder.
+     */
+    boost::filesystem::path make_project_path(
+        const config::cpp_options& opts,
+        const yarn::name& model_name) const;
+
 public:
     /**
      * @brief Generate path derivatives.
@@ -90,11 +98,11 @@ public:
     make(const yarn::name& n) const;
 
 private:
-    const config::cpp_options& options_;
-    const yarn::model& model_;
+    const yarn::name& model_name_;
     const std::unordered_map<std::string, settings::path_settings>&
     path_settings_;
     const std::unordered_set<std::string> module_ids_;
+    const boost::filesystem::path project_path_;
 };
 
 } } } }

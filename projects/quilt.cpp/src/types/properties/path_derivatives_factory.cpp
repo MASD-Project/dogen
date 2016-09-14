@@ -68,8 +68,8 @@ private:
 path_derivatives_factory::path_derivatives_factory(
     const config::cpp_options& opts, const yarn::model& m,
     const std::unordered_map<std::string, settings::path_settings>& ps)
-    : options_(opts), model_(m), path_settings_(ps),
-      module_ids_(module_ids(m)) { }
+    : model_name_(m.name()), path_settings_(ps), module_ids_(module_ids(m)),
+      project_path_(make_project_path(opts, m.name())) {}
 
 std::unordered_set<std::string> path_derivatives_factory::
 module_ids(const yarn::model& m) const {
@@ -117,7 +117,7 @@ make_inclusion_path(const settings::path_settings& ps,
      * Modules other than the model module contribute their simple
      * names to the directories.
      */
-    if (n != model_.name()) {
+    if (n != model_name_) {
         const auto i(module_ids_.find(n.id()));
         if (i != module_ids_.end())
             r /= n.simple();
@@ -152,20 +152,15 @@ make_file_path(const settings::path_settings& ps,
     const yarn::name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Creating file path for: " << n.id();
 
-    boost::filesystem::path r;
+    boost::filesystem::path r(project_path_);
 
     const auto ft(ps.file_type());
-    const auto& mmp(n.location().model_modules());
     switch (ft) {
     case formatters::file_types::cpp_header:
-        r = options_.project_directory_path();
-        r /= boost::algorithm::join(mmp, dot);
         r /= ps.include_directory_name();
         break;
 
     case formatters::file_types::cpp_implementation:
-        r = options_.project_directory_path();
-        r /= boost::algorithm::join(mmp, dot);
         r /= ps.source_directory_name();
         break;
 
@@ -200,6 +195,17 @@ to_header_guard_name(const boost::filesystem::path& p) const {
         is_first = false;
     }
     return ss.str();
+}
+
+boost::filesystem::path path_derivatives_factory::make_project_path(
+    const config::cpp_options& opts,
+    const yarn::name& model_name) const {
+
+    boost::filesystem::path r;
+    const auto& mmp(model_name.location().model_modules());
+    r = opts.project_directory_path();
+    r /= boost::algorithm::join(mmp, dot);
+    return r;
 }
 
 std::unordered_map<std::string, path_derivatives>
