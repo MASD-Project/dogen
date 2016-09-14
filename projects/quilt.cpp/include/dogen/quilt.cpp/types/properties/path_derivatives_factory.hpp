@@ -90,7 +90,28 @@ private:
         const config::cpp_options& opts,
         const yarn::name& model_name) const;
 
+    /**
+     * @brief Generates the facet path segment of a file path.
+     *
+     * The facet path segment is the same for both include and source
+     * folders; it starts at the facet and includes the file name.
+     */
+    boost::filesystem::path make_facet_path(const settings::path_settings& ps,
+        const std::string& extension, const yarn::name& n) const;
+
+    /**
+     * @brief Builds a relative path from the top-level include
+     * directory for the supplied qualified name.
+     */
+    boost::filesystem::path make_inclusion_path_new(
+        const settings::path_settings& ps,
+        const std::string& extension,
+        const yarn::name& n) const;
+
 public:
+    path_derivatives make_cpp_header(const yarn::name& n,
+        const std::string& formatter_name) const;
+
     /**
      * @brief Generate path derivatives.
      */

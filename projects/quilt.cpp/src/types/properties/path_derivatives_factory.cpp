@@ -208,6 +208,100 @@ boost::filesystem::path path_derivatives_factory::make_project_path(
     return r;
 }
 
+boost::filesystem::path path_derivatives_factory::
+make_facet_path(const settings::path_settings& ps, const std::string& extension,
+    const yarn::name& n) const {
+    BOOST_LOG_SEV(lg, debug) << "Making facet path for: " << n.id();
+
+    boost::filesystem::path r;
+
+    /*
+     * If there is a facet directory, and it is configured to
+     * contribute to the file name path, add it.
+     */
+    if (!ps.facet_directory().empty() && !ps.disable_facet_directories())
+        r /= ps.facet_directory();
+
+    /*
+     * Add the module path of the modules internal to this model.
+     */
+    for (const auto& m : n.location().internal_modules())
+        r /= m;
+
+    /*
+     * Modules other than the model module contribute their simple
+     * names to the directories.
+     */
+    if (n != model_name_) {
+        const auto i(module_ids_.find(n.id()));
+        if (i != module_ids_.end())
+            r /= n.simple();
+    }
+
+    /*
+     * Handle the file name.
+     */
+    std::ostringstream stream;
+    stream << n.simple();
+
+    if (!ps.formatter_postfix().empty())
+        stream << underscore << ps.formatter_postfix();
+
+    if (!ps.facet_postfix().empty())
+        stream << underscore << ps.facet_postfix();
+
+    stream << dot << extension;
+    r /= stream.str();
+
+    BOOST_LOG_SEV(lg, debug) << "Done making the facet path. Result: " << r;
+    return r;
+}
+
+boost::filesystem::path path_derivatives_factory::make_inclusion_path_new(
+    const settings::path_settings& ps,
+    const std::string& extension,
+    const yarn::name& n) const {
+
+    boost::filesystem::path r;
+
+    /*
+     * Header files require both the external module path and the
+     * model module path in the file name path.
+     */
+    for (const auto& m : n.location().external_modules())
+        r /= m;
+
+    const auto& mmp(n.location().model_modules());
+    r /= boost::algorithm::join(mmp, dot);
+    r /= make_facet_path(ps, extension, n);
+    return r;
+}
+
+path_derivatives path_derivatives_factory::make_cpp_header(const yarn::name& n,
+    const std::string& formatter_name) const {
+
+    const auto i(path_settings_.find(formatter_name));
+    if (i == path_settings_.end()) {
+        BOOST_LOG_SEV(lg, error) << missing_path_settings;
+        BOOST_THROW_EXCEPTION(building_error(missing_path_settings));
+    }
+
+    const auto& ps(i->second);
+    const auto extension(ps.header_file_extension());
+    const auto inclusion_path(make_inclusion_path_new(ps, extension, n));
+
+    path_derivatives r;
+    r.inclusion_directive(to_inclusion_directive(inclusion_path));
+    r.header_guard(to_header_guard_name(inclusion_path));
+
+    auto file_path(project_path_);
+    file_path /= ps.include_directory_name();
+    file_path /= inclusion_path;
+    r.file_path(file_path);
+
+    return r;
+}
+
 std::unordered_map<std::string, path_derivatives>
 path_derivatives_factory::make(const yarn::name& n) const {
     std::unordered_map<std::string, path_derivatives> r;
@@ -219,15 +313,13 @@ path_derivatives_factory::make(const yarn::name& n) const {
         }
 
         const auto& s(pair.second);
-        const auto inclusion_path(make_inclusion_path(s, n));
-
         path_derivatives pd;
-        const auto file_path(make_file_path(s, inclusion_path, n));
-        pd.file_path(file_path);
-
         if (s.file_type() == formatters::file_types::cpp_header) {
-            pd.inclusion_directive(to_inclusion_directive(inclusion_path));
-            pd.header_guard(to_header_guard_name(inclusion_path));
+            pd = make_cpp_header(n, pair.first);
+        } else {
+            const auto inclusion_path(make_inclusion_path(s, n));
+            const auto file_path(make_file_path(s, inclusion_path, n));
+            pd.file_path(file_path);
         }
 
         r[pair.first] = pd;

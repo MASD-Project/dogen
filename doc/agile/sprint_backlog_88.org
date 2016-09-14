@@ -270,7 +270,8 @@ https://ci.appveyor.com/project/mcraveiro/dogen/build/2.2.363/job/m98mj8nl1sf26x
 Solved with the workaround proposed by memsharded, documented in ticket.
 
 *** STARTED Refactor path derivatives factory for usage in formatters :story:
-    CLOCK: [2016-09-14 Wed 09:38]
+    CLOCK: [2016-09-14 Wed 09:51]--[2016-09-14 Wed 10:14] =>  0:23
+    CLOCK: [2016-09-14 Wed 09:38]--[2016-09-14 Wed 09:51] =>  0:13
     CLOCK: [2016-09-14 Wed 08:40]--[2016-09-14 Wed 09:20] =>  0:40
     CLOCK: [2016-09-13 Tue 12:00]--[2016-09-13 Tue 12:24] =>  0:24
     CLOCK: [2016-09-13 Tue 11:38]--[2016-09-13 Tue 11:59] =>  0:21
