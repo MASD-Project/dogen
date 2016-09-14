@@ -81,6 +81,17 @@ module_ids(const yarn::model& m) const {
     return c.result();
 }
 
+const settings::path_settings& path_derivatives_factory::
+path_settings_for_formatter(const std::string& formatter_name) const {
+    const auto i(path_settings_.find(formatter_name));
+    if (i == path_settings_.end()) {
+        BOOST_LOG_SEV(lg, error) << missing_path_settings;
+        BOOST_THROW_EXCEPTION(building_error(missing_path_settings));
+    }
+
+    return i->second;
+}
+
 boost::filesystem::path path_derivatives_factory::
 make_inclusion_path(const settings::path_settings& ps,
     const yarn::name& n) const {
@@ -279,14 +290,7 @@ boost::filesystem::path path_derivatives_factory::make_inclusion_path_new(
 
 path_derivatives path_derivatives_factory::make_cpp_header(const yarn::name& n,
     const std::string& formatter_name) const {
-
-    const auto i(path_settings_.find(formatter_name));
-    if (i == path_settings_.end()) {
-        BOOST_LOG_SEV(lg, error) << missing_path_settings;
-        BOOST_THROW_EXCEPTION(building_error(missing_path_settings));
-    }
-
-    const auto& ps(i->second);
+    const auto& ps(path_settings_for_formatter(formatter_name));
     const auto extension(ps.header_file_extension());
     const auto inclusion_path(make_inclusion_path_new(ps, extension, n));
 
@@ -297,6 +301,21 @@ path_derivatives path_derivatives_factory::make_cpp_header(const yarn::name& n,
     auto file_path(project_path_);
     file_path /= ps.include_directory_name();
     file_path /= inclusion_path;
+    r.file_path(file_path);
+
+    return r;
+}
+
+path_derivatives path_derivatives_factory::make_cpp_implementation(
+    const yarn::name& n, const std::string& formatter_name) const {
+    const auto& ps(path_settings_for_formatter(formatter_name));
+    const auto extension(ps.implementation_file_extension());
+    const auto facet_path(make_facet_path(ps, extension, n));
+
+    path_derivatives r;
+    auto file_path(project_path_);
+    file_path /= ps.source_directory_name();
+    file_path /= facet_path;
     r.file_path(file_path);
 
     return r;
@@ -314,12 +333,16 @@ path_derivatives_factory::make(const yarn::name& n) const {
 
         const auto& s(pair.second);
         path_derivatives pd;
-        if (s.file_type() == formatters::file_types::cpp_header) {
+        using formatters::file_types;
+        const auto ft(s.file_type());
+        if (ft == file_types::cpp_header)
             pd = make_cpp_header(n, pair.first);
-        } else {
-            const auto inclusion_path(make_inclusion_path(s, n));
-            const auto file_path(make_file_path(s, inclusion_path, n));
-            pd.file_path(file_path);
+        else if (ft == file_types::cpp_implementation)
+            pd = make_cpp_implementation(n, pair.first);
+        else {
+            BOOST_LOG_SEV(lg, error) << unsupported_file_type << ft;
+            BOOST_THROW_EXCEPTION(building_error(unsupported_file_type +
+                    boost::lexical_cast<std::string>(ft)));
         }
 
         r[pair.first] = pd;

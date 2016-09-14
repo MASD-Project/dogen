@@ -56,6 +56,15 @@ private:
      */
     std::unordered_set<std::string> module_ids(const yarn::model& m) const;
 
+private:
+    /**
+     * @brief Given a formatter name, returns its path settings.
+     *
+     * @pre Formatter must have path settings.
+     */
+    const settings::path_settings& path_settings_for_formatter(
+        const std::string& formatter_name) const;
+
     /**
      * @brief Builds a relative path from the top-level include
      * directory for the supplied qualified name.
@@ -109,7 +118,16 @@ private:
         const yarn::name& n) const;
 
 public:
+    /**
+     * @brief Generate path derivatives for C++ headers.
+     */
     path_derivatives make_cpp_header(const yarn::name& n,
+        const std::string& formatter_name) const;
+
+    /**
+     * @brief Generate path derivatives for C++ implementation files.
+     */
+    path_derivatives make_cpp_implementation(const yarn::name& n,
         const std::string& formatter_name) const;
 
     /**
