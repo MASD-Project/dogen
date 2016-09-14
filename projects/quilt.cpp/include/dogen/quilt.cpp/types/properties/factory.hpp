@@ -55,13 +55,6 @@ private:
     yarn::name create_name(const yarn::name& model_name,
         const std::string& simple_name) const;
 
-    path_derivatives create_path_derivatives(
-        const config::cpp_options& opts,
-        const yarn::model& m,
-        const std::unordered_map<std::string, settings::path_settings>& ps,
-        const yarn::name& n,
-        const std::string& formatter_name) const;
-
     bool is_enabled(const formatter_properties_repository& fprp,
         const yarn::name& n, const std::string& formatter_name) const;
 

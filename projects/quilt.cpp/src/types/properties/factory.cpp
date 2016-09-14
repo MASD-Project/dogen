@@ -102,24 +102,6 @@ yarn::name factory::create_name(const yarn::name& model_name,
     return nf.build_element_in_model(model_name, simple_name);
 }
 
-path_derivatives factory::create_path_derivatives(
-    const config::cpp_options& opts, const yarn::model& m,
-    const std::unordered_map<std::string, settings::path_settings>& ps,
-    const yarn::name& n,
-    const std::string& formatter_name) const {
-
-    path_derivatives_factory pdf(opts, m, ps);
-    const auto pd(pdf.make(n));
-    const auto i(pd.find(formatter_name));
-    if (i == pd.end()) {
-        BOOST_LOG_SEV(lg, error) << derivatives_not_found_for_formatter
-                                 << formatter_name;
-        BOOST_THROW_EXCEPTION(building_error(
-                derivatives_not_found_for_formatter + formatter_name));
-    }
-    return i->second;
-}
-
 bool factory::is_enabled(const formatter_properties_repository& fprp,
     const yarn::name& n, const std::string& formatter_name) const {
 

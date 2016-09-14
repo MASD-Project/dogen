@@ -66,21 +66,6 @@ private:
         const std::string& formatter_name) const;
 
     /**
-     * @brief Builds a relative path from the top-level include
-     * directory for the supplied qualified name.
-     */
-    boost::filesystem::path make_inclusion_path(
-        const settings::path_settings& ps, const yarn::name& n) const;
-
-    /**
-     * @brief Builds an absolute path for the supplied qualified name.
-     */
-    boost::filesystem::path make_file_path(
-        const settings::path_settings& ps,
-        const boost::filesystem::path& inclusion_path,
-        const yarn::name& n) const;
-
-    /**
      * @brief Converts a relative path to an inclusion directive.
      */
     std::string to_inclusion_directive(const boost::filesystem::path& p) const;
@@ -112,7 +97,7 @@ private:
      * @brief Builds a relative path from the top-level include
      * directory for the supplied qualified name.
      */
-    boost::filesystem::path make_inclusion_path_new(
+    boost::filesystem::path make_inclusion_path(
         const settings::path_settings& ps,
         const std::string& extension,
         const yarn::name& n) const;

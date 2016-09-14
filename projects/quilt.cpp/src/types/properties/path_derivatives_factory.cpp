@@ -92,101 +92,6 @@ path_settings_for_formatter(const std::string& formatter_name) const {
     return i->second;
 }
 
-boost::filesystem::path path_derivatives_factory::
-make_inclusion_path(const settings::path_settings& ps,
-    const yarn::name& n) const {
-    BOOST_LOG_SEV(lg, debug) << "Making inclusion path for: " << n.id();
-
-    boost::filesystem::path r;
-
-    /*
-     * Header files require both the external module path and the
-     * model module path in the file name path.
-     */
-    if (ps.file_type() == formatters::file_types::cpp_header) {
-        for (const auto& m : n.location().external_modules())
-            r /= m;
-
-        const auto& mmp(n.location().model_modules());
-        r /= boost::algorithm::join(mmp, dot);
-    }
-
-    /*
-     * If there is a facet directory, and it is configured to
-     * contribute to the file name path, add it.
-     */
-    if (!ps.facet_directory().empty() && !ps.disable_facet_directories())
-        r /= ps.facet_directory();
-
-    /*
-     * Add the module path of the modules internal to this model.
-     */
-    for (const auto& m : n.location().internal_modules())
-        r /= m;
-
-    /*
-     * Modules other than the model module contribute their simple
-     * names to the directories.
-     */
-    if (n != model_name_) {
-        const auto i(module_ids_.find(n.id()));
-        if (i != module_ids_.end())
-            r /= n.simple();
-    }
-
-    /*
-     * Handle the file name.
-     */
-    std::ostringstream stream;
-    stream << n.simple();
-
-    if (!ps.formatter_postfix().empty())
-        stream << underscore << ps.formatter_postfix();
-
-    if (!ps.facet_postfix().empty())
-        stream << underscore << ps.facet_postfix();
-
-    if (ps.file_type() == formatters::file_types::cpp_header)
-        stream << dot << ps.header_file_extension();
-    else if (ps.file_type() == formatters::file_types::cpp_implementation)
-        stream << dot << ps.implementation_file_extension();
-
-    r /= stream.str();
-
-    BOOST_LOG_SEV(lg, debug) << "Done making the inclusion path. Result: " << r;
-    return r;
-}
-
-boost::filesystem::path path_derivatives_factory::
-make_file_path(const settings::path_settings& ps,
-    const boost::filesystem::path& inclusion_path,
-    const yarn::name& n) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating file path for: " << n.id();
-
-    boost::filesystem::path r(project_path_);
-
-    const auto ft(ps.file_type());
-    switch (ft) {
-    case formatters::file_types::cpp_header:
-        r /= ps.include_directory_name();
-        break;
-
-    case formatters::file_types::cpp_implementation:
-        r /= ps.source_directory_name();
-        break;
-
-    default:
-        BOOST_LOG_SEV(lg, error) << unsupported_file_type << ft;
-        BOOST_THROW_EXCEPTION(building_error(unsupported_file_type +
-                boost::lexical_cast<std::string>(ft)));
-    }
-
-    r /= inclusion_path;
-
-    BOOST_LOG_SEV(lg, debug) << "Done creating file path. Result: " << r;
-    return r;
-}
-
 std::string path_derivatives_factory::
 to_inclusion_directive(const boost::filesystem::path& p) const {
     std::ostringstream ss;
@@ -268,7 +173,7 @@ make_facet_path(const settings::path_settings& ps, const std::string& extension,
     return r;
 }
 
-boost::filesystem::path path_derivatives_factory::make_inclusion_path_new(
+boost::filesystem::path path_derivatives_factory::make_inclusion_path(
     const settings::path_settings& ps,
     const std::string& extension,
     const yarn::name& n) const {
@@ -292,7 +197,7 @@ path_derivatives path_derivatives_factory::make_cpp_header(const yarn::name& n,
     const std::string& formatter_name) const {
     const auto& ps(path_settings_for_formatter(formatter_name));
     const auto extension(ps.header_file_extension());
-    const auto inclusion_path(make_inclusion_path_new(ps, extension, n));
+    const auto inclusion_path(make_inclusion_path(ps, extension, n));
 
     path_derivatives r;
     r.inclusion_directive(to_inclusion_directive(inclusion_path));
