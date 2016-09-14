@@ -14,24 +14,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-13 Tue 22:27]
+#+CAPTION: Clock summary at [2016-09-14 Wed 08:22]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *12:29* |       |      | 100.0 |
+| *Total time*                                                                | *12:45* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 12:29   |       |      | 100.0 |
-| Active                                                                      |         | 12:29 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:00 |  16.0 |
-| COMPLETED Fix chocolatey warning                                            |         |       | 0:08 |   1.1 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:27 |   3.6 |
-| COMPLETED Analysis on current state of file path generation                 |         |       | 0:57 |   7.6 |
-| CANCELLED Remove inclusion dependencies builder factory                     |         |       | 0:14 |   1.9 |
-| COMPLETED Analysis on formatters, elements and extensibility                |         |       | 1:18 |  10.4 |
-| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       | 1:12 |   9.6 |
-| STARTED Refactor path derivatives factory for usage in formatters           |         |       | 3:15 |  26.0 |
-| STARTED Move file path generation to formatters                             |         |       | 1:58 |  15.8 |
-| STARTED Path derivatives factory generates all possible includes            |         |       | 0:44 |   5.9 |
+| Stories                                                                     | 12:45   |       |      | 100.0 |
+| Active                                                                      |         | 12:45 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:00 |  15.7 |
+| COMPLETED Fix chocolatey warning                                            |         |       | 0:08 |   1.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:27 |   3.5 |
+| COMPLETED Analysis on current state of file path generation                 |         |       | 0:57 |   7.5 |
+| CANCELLED Remove inclusion dependencies builder factory                     |         |       | 0:14 |   1.8 |
+| COMPLETED Analysis on formatters, elements and extensibility                |         |       | 1:18 |  10.2 |
+| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       | 1:12 |   9.4 |
+| STARTED Investigate broken windows builds                                   |         |       | 0:16 |   2.1 |
+| STARTED Refactor path derivatives factory for usage in formatters           |         |       | 3:15 |  25.5 |
+| STARTED Move file path generation to formatters                             |         |       | 1:58 |  15.4 |
+| STARTED Path derivatives factory generates all possible includes            |         |       | 0:44 |   5.8 |
 | STARTED Remove formattable origin type                                      |         |       | 0:16 |   2.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -230,6 +231,39 @@ Tasks:
   - =provide_inclusion_dependencies=
   - =provide_path_derivatives=: actually lets add this when we
     implement it.
+
+*** STARTED Investigate broken windows builds                         :story:
+    CLOCK: [2016-09-14 Wed 08:05]--[2016-09-14 Wed 08:21] =>  0:16
+
+Opened issue with Conan [[https://github.com/conan-io/conan/issues/481][#481]]:
+
+#+begin_src markdown
+Hi guys,
+
+My dogen windows builds started failing since last night[1] with the following error:
+
+```
+echo "Downloading conan..."
+"Downloading conan..."
+wget http://downloads.conan.io/latest_windows -OutFile conan_installer.exe
+conan_installer.exe /VERYSILENT
+set PATH=%PATH%;C:\Program Files (x86)\Conan\conan
+conan --version
+Error loading Python DLL: C:\Program Files (x86)\Conan\conan\python27.dll (error code 14001)
+Command exited with code -1
+```
+
+Any ideas what could be causing this? I've done a couple just to check if its an environmental problem, to no avail. [2],[3]
+
+Cheers
+
+Marco
+
+[1] https://ci.appveyor.com/project/mcraveiro/dogen/build/2.2.361/job/yglufvdim4xa19bi for Debug and https://ci.appveyor.com/project/mcraveiro/dogen/build/2.2.361/job/wqukii4wcspel7cm for Release
+[2] https://ci.appveyor.com/project/mcraveiro/dogen/build/2.2.361/job/yglufvdim4xa19bi for Debug and https://ci.appveyor.com/project/mcraveiro/dogen/build/2.2.361/job/wqukii4wcspel7cm for Release
+[3] https://ci.appveyor.com/project/mcraveiro/dogen/build/2.2.363/job/m2a76xq0qe8qkvou for Debug and
+https://ci.appveyor.com/project/mcraveiro/dogen/build/2.2.363/job/m98mj8nl1sf26xg4 for Release
+#+end_src
 
 *** STARTED Refactor path derivatives factory for usage in formatters :story:
     CLOCK: [2016-09-13 Tue 12:00]--[2016-09-13 Tue 12:24] =>  0:24
