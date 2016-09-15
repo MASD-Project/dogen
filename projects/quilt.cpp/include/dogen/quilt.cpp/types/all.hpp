@@ -36,6 +36,7 @@
 #include "dogen/quilt.cpp/types/fabric/initializer.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/properties/factory.hpp"
+#include "dogen/quilt.cpp/types/properties/locator.hpp"
 #include "dogen/quilt.cpp/types/settings/registrar.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/properties/workflow.hpp"

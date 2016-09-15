@@ -39,6 +39,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-09-15 Thu 08:48]--[2016-09-15 Thu 09:01] =>  0:13
     CLOCK: [2016-09-13 Tue 20:09]--[2016-09-13 Tue 20:50] =>  0:41
     CLOCK: [2016-09-12 Mon 21:57]--[2016-09-12 Mon 22:03] =>  0:06
     CLOCK: [2016-09-12 Mon 12:23]--[2016-09-12 Mon 12:26] =>  0:03
@@ -458,7 +459,10 @@ Use cases:
   also computing the file path and header guard.
 - target model types need all three.
 
-*** STARTED Analysis on inclusion derivatives and path derivatives    :story:
+*** COMPLETED Analysis on inclusion derivatives and path derivatives  :story:
+    CLOSED: [2016-09-15 Thu 08:48]
+    CLOCK: [2016-09-15 Thu 08:38]--[2016-09-15 Thu 08:47] =>  0:09
+    CLOCK: [2016-09-15 Thu 08:23]--[2016-09-15 Thu 08:38] =>  0:15
     CLOCK: [2016-09-14 Wed 21:09]--[2016-09-14 Wed 21:49] =>  0:40
 
 Originally we did an artificial separation between path derivatives
@@ -507,6 +511,57 @@ Ideas:
 - formatter properties should just iterate through the generatable
   types and pick up their properties. We are generating a lot more
   formatter properties than needed at the moment.
+
+Final thoughts on this: the above is still to complicated. Instead:
+
+- lets remove inclusion path from path derivatives and perform it
+  directly in inclusion directives. This means regenerating the path
+  and having to supply providers and so on.
+- add flags to formatters interface and group them by flags. This is
+  only required for inclusion directives.
+
+*** COMPLETED Consider creating a "locator" like class for path management :story:
+    CLOSED: [2016-09-15 Thu 09:37]
+
+*Rationale*: done as part of the path directives refactor.
+
+At present we are using path settings to compute paths in several
+places. Most of these exist because of hacks but it still seems that
+it needs to be done in more than one place. We should consider
+something like we had in =sml_to_cpp::locator= that is initialised
+with the path settings and can then be used to create paths.
+
+*** STARTED Split path factory from provider factory                  :story:
+    CLOCK: [2016-09-15 Thu 09:01]--[2016-09-15 Thu 09:59] =>  0:58
+
+Tasks:
+
+- create a path factory class that takes on all the responsibilities
+  related to paths from path derivatives factory - basically all
+  methods except header guard generation. Call this class locator to
+  avoid confusion (too many classes with "path" in the name).
+- generate the factory in the properties workflow and supply it to the
+  repository factory.
+- update provider interface to use factory.
+- Remove path derivatives factory and implement the remaining logic
+  directly in the repository factory, including header guard
+  generation.
+
+*** Use providers when building inclusion directives                  :story:
+
+Tasks:
+
+- supply providers to inclusion directives repository factory instead
+  of path derivatives;
+- compute the inclusion directive on the fly.
+- remove inclusion directive from path settings.
+- remove inclusion directive factory; perform all the work in the
+  repository factory.
+
+*** Do not merge containers for formatter properties                  :story:
+
+We only need to generate the formatter properties for elements in the
+target model. Start from those instead of merging.
 
 *** STARTED Remove formattable origin type                            :story:
     CLOCK: [2016-09-12 Mon 11:11]--[2016-09-12 Mon 11:20] =>  0:09

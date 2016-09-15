@@ -1667,14 +1667,6 @@ containers. Two use cases spring to mind:
   need the shared pointer abilities; once allocated these are pretty
   const.
 
-*** Consider creating a "locator" like class for path management      :story:
-
-At present we are using path settings to compute paths in several
-places. Most of these exist because of hacks but it still seems that
-it needs to be done in more than one place. We should consider
-something like we had in =sml_to_cpp::locator= that is initialised
-with the path settings and can then be used to create paths.
-
 *** Add support for formatter and facet dependencies                  :story:
 
 Once we are finished with the refactoring of the C++ model, we should
