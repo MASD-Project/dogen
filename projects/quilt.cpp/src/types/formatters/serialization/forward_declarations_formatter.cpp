@@ -20,8 +20,6 @@
  */
 #include <sstream>
 #include <boost/make_shared.hpp>
-#include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_builder.hpp"
@@ -32,15 +30,6 @@
 #include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/forward_declarations_formatter_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/forward_declarations_formatter.hpp"
-
-namespace {
-
-using namespace dogen::utility::log;
-using namespace dogen::quilt::cpp::formatters::serialization;
-static logger
-lg(logger_factory(forward_declarations_formatter::static_formatter_name()));
-
-}
 
 namespace dogen {
 namespace quilt {
@@ -59,8 +48,12 @@ public:
         const properties::inclusion_dependencies_builder_factory& f,
         const yarn::object& o) const override;
 
-    properties::path_derivatives provide_path_derivatives(
-        const properties::path_derivatives_factory& f,
+    properties::inclusion_path_support inclusion_path_support() const override;
+
+    boost::filesystem::path provide_inclusion_path(const properties::locator& l,
+        const yarn::name& n) const override;
+
+    boost::filesystem::path provide_full_path(const properties::locator& l,
         const yarn::name& n) const override;
 };
 
@@ -82,11 +75,20 @@ std::list<std::string> provider::provide_inclusion_dependencies(
     return builder.build();
 }
 
-properties::path_derivatives provider::provide_path_derivatives(
-    const properties::path_derivatives_factory& f,
+properties::inclusion_path_support provider::inclusion_path_support() const {
+return properties::inclusion_path_support::regular;
+}
+
+boost::filesystem::path
+provider::provide_inclusion_path(const properties::locator& l,
     const yarn::name& n) const {
-    const auto r(f.make_cpp_header(n, formatter_name()));
-    return r;
+    return l.make_inclusion_path_for_cpp_header(n, formatter_name());
+}
+
+boost::filesystem::path
+provider::provide_full_path(const properties::locator& l,
+    const yarn::name& n) const {
+    return l.make_full_path_for_cpp_header(n, formatter_name());
 }
 
 }

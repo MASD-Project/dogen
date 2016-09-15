@@ -45,8 +45,12 @@ public:
             const properties::inclusion_dependencies_builder_factory& f,
             const yarn::enumeration& e) const override;
 
-    properties::path_derivatives provide_path_derivatives(
-        const properties::path_derivatives_factory& f,
+    properties::inclusion_path_support inclusion_path_support() const override;
+
+    boost::filesystem::path provide_inclusion_path(const properties::locator& l,
+        const yarn::name& n) const override;
+
+    boost::filesystem::path provide_full_path(const properties::locator& l,
         const yarn::name& n) const override;
 };
 
@@ -64,11 +68,20 @@ std::list<std::string> provider::provide_inclusion_dependencies(
     return builder.build();
 }
 
-properties::path_derivatives provider::provide_path_derivatives(
-    const properties::path_derivatives_factory& f,
+properties::inclusion_path_support provider::inclusion_path_support() const {
+    return properties::inclusion_path_support::is_default;
+}
+
+boost::filesystem::path
+provider::provide_inclusion_path(const properties::locator& l,
     const yarn::name& n) const {
-    const auto r(f.make_cpp_header(n, formatter_name()));
-    return r;
+    return l.make_inclusion_path_for_cpp_header(n, formatter_name());
+}
+
+boost::filesystem::path
+provider::provide_full_path(const properties::locator& l,
+    const yarn::name& n) const {
+    return l.make_full_path_for_cpp_header(n, formatter_name());
 }
 
 }

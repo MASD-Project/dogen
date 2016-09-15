@@ -102,6 +102,7 @@
 #include "dogen/quilt.cpp/types/settings/aspect_settings_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
+#include "dogen/quilt.cpp/types/properties/inclusion_path_support.hpp"
 #include "dogen/quilt.cpp/types/settings/directory_names_settings.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/master_header_formatter.hpp"

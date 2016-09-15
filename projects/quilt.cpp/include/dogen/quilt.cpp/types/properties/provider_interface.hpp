@@ -30,9 +30,10 @@
 #include <utility>
 #include <unordered_map>
 #include <unordered_set>
+#include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/quilt.cpp/types/properties/path_derivatives.hpp"
-#include "dogen/quilt.cpp/types/properties/path_derivatives_factory.hpp"
+#include "dogen/quilt.cpp/types/properties/locator.hpp"
+#include "dogen/quilt.cpp/types/properties/inclusion_path_support.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_builder_factory.hpp"
 
 namespace dogen {
@@ -66,10 +67,22 @@ public:
         const Element& e) const = 0;
 
     /**
-     * @brief Provide the path derivatives.
+     * @brief Returns true if the provider supports inclusion.
      */
-    virtual path_derivatives provide_path_derivatives(
-        const path_derivatives_factory& f, const yarn::name& n) const = 0;
+    virtual properties::inclusion_path_support
+    inclusion_path_support() const = 0;
+
+    /**
+     * @brief Provide the inclusion path.
+     */
+    virtual boost::filesystem::path provide_inclusion_path(const locator& l,
+        const yarn::name& n) const = 0;
+
+    /**
+     * @brief Provide the full path.
+     */
+    virtual boost::filesystem::path provide_full_path(const locator& l,
+        const yarn::name& n) const = 0;
 };
 
 template<typename Element>

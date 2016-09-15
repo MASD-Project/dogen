@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/primitive.hpp"
@@ -39,6 +40,12 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "quilt.cpp.properties.path_derivatives_repository_factory"));
 
+const std::string empty;
+const std::string underscore("_");
+const std::string double_quote("\"");
+const std::string dot(".");
+const std::string separator("_");
+
 const std::string duplicate_name("Duplicate name: ");
 
 }
@@ -56,10 +63,15 @@ namespace {
 class generator final : public fabric::element_visitor {
 public:
     generator(const container& c, const path_derivatives_factory& f,
-        const locator& /*l*/)
-        : container_(c), factory_(f) { }
+        const locator& l) : container_(c), factory_(f), locator_(l) { }
 
 private:
+    /**
+     * @brief Converts a relative path to a header file into a C++
+     * header guard name.
+     */
+    std::string to_header_guard_name(const boost::filesystem::path& p) const;
+
     /**
      * @brief Generates all of the path derivatives for the formatters
      * and qualified name.
@@ -82,15 +94,21 @@ private:
         for (const auto& p : providers) {
             BOOST_LOG_SEV(lg, debug) << "Provider: "
                                      << p->formatter_name();
+
+            path_derivatives pd;
+            pd.file_path(p->provide_full_path(locator_, n));
+            const auto ns(inclusion_path_support::not_supported);
+            if (p->inclusion_path_support() != ns) {
+                const auto ip(p->provide_inclusion_path(locator_, n));
+                pd.header_guard(to_header_guard_name(ip));
+            }
+            BOOST_LOG_SEV(lg, debug) << "New Path derivatives: " << pd;
+
             const auto i(pair.second.find(p->formatter_name()));
             if (i != pair.second.end()) {
                 BOOST_LOG_SEV(lg, debug) << "Old path derivatives: "
                                          << i->second;
             }
-
-            const auto pd(p->provide_path_derivatives(factory_, n));
-            BOOST_LOG_SEV(lg, debug) << "New Path derivatives: " << pd;
-
         }
     }
 
@@ -138,8 +156,22 @@ public:
 private:
     const container& container_;
     const path_derivatives_factory& factory_;
+    const locator& locator_;
     path_derivatives_repository result_;
 };
+
+std::string generator::to_header_guard_name(const boost::filesystem::path& p) const {
+    bool is_first(true);
+    std::ostringstream ss;
+    for (const auto& token : p) {
+        std::string s(token.string());
+        boost::replace_all(s, dot, separator);
+        boost::to_upper(s);
+        ss << (is_first ? empty : separator) << s;
+        is_first = false;
+    }
+    return ss.str();
+}
 
 }
 

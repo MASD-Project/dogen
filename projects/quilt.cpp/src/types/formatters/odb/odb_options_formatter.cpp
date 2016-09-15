@@ -19,14 +19,27 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
+#include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/odb_options_formatter_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/odb_options_formatter.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger
+lg(logger_factory("quilt.cpp.formatters.odb.odb_options_formatter"));
+
+const std::string not_supported("Inclusion path is not supported: ");
+
+}
 
 namespace dogen {
 namespace quilt {
@@ -44,8 +57,12 @@ public:
         const properties::inclusion_dependencies_builder_factory& f,
         const yarn::object& o) const override;
 
-    properties::path_derivatives provide_path_derivatives(
-        const properties::path_derivatives_factory& f,
+    properties::inclusion_path_support inclusion_path_support() const override;
+
+    boost::filesystem::path provide_inclusion_path(const properties::locator& l,
+        const yarn::name& n) const override;
+
+    boost::filesystem::path provide_full_path(const properties::locator& l,
         const yarn::name& n) const override;
 };
 
@@ -62,11 +79,25 @@ std::list<std::string> provider::provide_inclusion_dependencies(
     return builder.build();
 }
 
-properties::path_derivatives provider::provide_path_derivatives(
-    const properties::path_derivatives_factory& /*f*/,
+properties::inclusion_path_support provider::inclusion_path_support() const {
+    return properties::inclusion_path_support::not_supported;
+}
+
+boost::filesystem::path
+provider::provide_inclusion_path(const properties::locator& /*l*/,
+    const yarn::name& n) const {
+
+    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+}
+
+boost::filesystem::path
+provider::provide_full_path(const properties::locator& /*l*/,
     const yarn::name& /*n*/) const {
-    properties::path_derivatives r;
+    // FIXME:
+    boost::filesystem::path r;
     return r;
+    // return l.make_full_path_for_cpp_implementation(n, formatter_name());
 }
 
 }

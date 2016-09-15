@@ -19,14 +19,28 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
+#include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
+#include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
-#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/enum_implementation_formatter_stitch.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/enum_implementation_formatter.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+using namespace dogen::quilt::cpp::formatters::test_data;
+static logger lg(
+    logger_factory(enum_implementation_formatter::static_formatter_name()));
+
+const std::string not_supported("Inclusion path is not supported: ");
+
+}
 
 namespace dogen {
 namespace quilt {
@@ -45,8 +59,12 @@ public:
         const properties::inclusion_dependencies_builder_factory& f,
         const yarn::enumeration& e) const override;
 
-    properties::path_derivatives provide_path_derivatives(
-        const properties::path_derivatives_factory& f,
+    properties::inclusion_path_support inclusion_path_support() const override;
+
+    boost::filesystem::path provide_inclusion_path(const properties::locator& l,
+        const yarn::name& n) const override;
+
+    boost::filesystem::path provide_full_path(const properties::locator& l,
         const yarn::name& n) const override;
 };
 
@@ -58,18 +76,29 @@ std::list<std::string>
 provider::provide_inclusion_dependencies(
     const properties::inclusion_dependencies_builder_factory& f,
     const yarn::enumeration& o) const {
-  auto builder(f.make());
+    auto builder(f.make());
 
-  const auto ch_fn(traits::class_header_formatter_name());
-  builder.add(o.name(), ch_fn);
-  return builder.build();
+    const auto ch_fn(traits::class_header_formatter_name());
+    builder.add(o.name(), ch_fn);
+    return builder.build();
 }
 
-properties::path_derivatives provider::provide_path_derivatives(
-    const properties::path_derivatives_factory& f,
+properties::inclusion_path_support provider::inclusion_path_support() const {
+    return properties::inclusion_path_support::not_supported;
+}
+
+boost::filesystem::path
+provider::provide_inclusion_path(const properties::locator& /*l*/,
     const yarn::name& n) const {
-    const auto r(f.make_cpp_implementation(n, formatter_name()));
-    return r;
+
+    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+}
+
+boost::filesystem::path
+provider::provide_full_path(const properties::locator& l,
+    const yarn::name& n) const {
+    return l.make_full_path_for_cpp_implementation(n, formatter_name());
 }
 
 }
