@@ -1,0 +1,2076 @@
+diff --git a/diagrams/quilt.cpp.dia b/diagrams/quilt.cpp.dia
+index 2067e21..f66d238 100644
+--- a/diagrams/quilt.cpp.dia
++++ b/diagrams/quilt.cpp.dia
+@@ -15829,7 +15829,7 @@ main, or from another initialiser.#</dia:string>
+         <dia:point val="308,-13.9166"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="307.95,-14.6666;347.46,-4.6666"/>
++        <dia:rectangle val="307.95,-14.6666;347.46,-3.8666"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="308,-13.9166"/>
+@@ -15838,7 +15838,7 @@ main, or from another initialiser.#</dia:string>
+         <dia:real val="35.920000000000002"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="9.1999999999999993"/>
++        <dia:real val="10"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+         <dia:string>#provider_interface#</dia:string>
+@@ -15931,6 +15931,36 @@ main, or from another initialiser.#</dia:string>
+       <dia:attribute name="operations">
+         <dia:composite type="umloperation">
+           <dia:attribute name="name">
++            <dia:string>#facet_name#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="stereotype">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::string#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="true"/>
++          </dia:attribute>
++          <dia:attribute name="inheritance_type">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="query">
++            <dia:boolean val="true"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="parameters"/>
++        </dia:composite>
++        <dia:composite type="umloperation">
++          <dia:attribute name="name">
+             <dia:string>#formatter_name#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="stereotype">
+@@ -16071,10 +16101,10 @@ main, or from another initialiser.#</dia:string>
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
++            <dia:boolean val="true"/>
+           </dia:attribute>
+           <dia:attribute name="inheritance_type">
+-            <dia:enum val="2"/>
++            <dia:enum val="0"/>
+           </dia:attribute>
+           <dia:attribute name="query">
+             <dia:boolean val="false"/>
+@@ -16136,10 +16166,10 @@ main, or from another initialiser.#</dia:string>
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
++            <dia:boolean val="true"/>
+           </dia:attribute>
+           <dia:attribute name="inheritance_type">
+-            <dia:enum val="2"/>
++            <dia:enum val="0"/>
+           </dia:attribute>
+           <dia:attribute name="query">
+             <dia:boolean val="false"/>
+@@ -16689,7 +16719,7 @@ main, or from another initialiser.#</dia:string>
+         <dia:point val="356,-36.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="343.87,-37.35;356.75,-10.0166"/>
++        <dia:rectangle val="343.87,-37.35;356.75,-9.2166"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -16698,7 +16728,7 @@ main, or from another initialiser.#</dia:string>
+         <dia:point val="356,-36.6"/>
+         <dia:point val="356,-11"/>
+         <dia:point val="343.92,-11"/>
+-        <dia:point val="343.92,-10.8166"/>
++        <dia:point val="343.92,-10.0166"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -16716,7 +16746,7 @@ main, or from another initialiser.#</dia:string>
+       </dia:attribute>
+       <dia:connections>
+         <dia:connection handle="0" to="O128" connection="5"/>
+-        <dia:connection handle="1" to="O127" connection="9"/>
++        <dia:connection handle="1" to="O127" connection="11"/>
+       </dia:connections>
+       <dia:childnode parent="O0"/>
+     </dia:object>
+@@ -18190,16 +18220,16 @@ main, or from another initialiser.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="343.92,-8.4166"/>
++        <dia:point val="343.92,-7.6166"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="343.17,-21.05;362.881,-7.6166"/>
++        <dia:rectangle val="343.17,-21.05;362.881,-6.8166"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="343.92,-8.4166"/>
++        <dia:point val="343.92,-7.6166"/>
+         <dia:point val="343.92,-9"/>
+         <dia:point val="362.681,-9"/>
+         <dia:point val="362.681,-21"/>
+@@ -18219,7 +18249,7 @@ main, or from another initialiser.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O127" connection="13"/>
++        <dia:connection handle="0" to="O127" connection="15"/>
+         <dia:connection handle="1" to="O137" connection="6"/>
+       </dia:connections>
+       <dia:childnode parent="O0"/>
+@@ -37889,16 +37919,16 @@ an enumeration, false otherwise.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="308,-4.7166"/>
++        <dia:point val="308,-3.9166"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="307.25,-5.4666;328.315,3.8"/>
++        <dia:rectangle val="307.25,-4.6666;328.315,3.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="308,-4.7166"/>
++        <dia:point val="308,-3.9166"/>
+         <dia:point val="308,-1"/>
+         <dia:point val="328.115,-1"/>
+         <dia:point val="328.115,3"/>
+@@ -38036,7 +38066,7 @@ an enumeration, false otherwise.#</dia:string>
+         <dia:point val="277.45,-12.9"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="276.7,-13.65;308.05,-9.9666"/>
++        <dia:rectangle val="276.7,-13.65;308.05,-9.1666"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -38044,8 +38074,8 @@ an enumeration, false otherwise.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="277.45,-12.9"/>
+         <dia:point val="284,-12.9"/>
+-        <dia:point val="284,-10.8166"/>
+-        <dia:point val="308,-10.8166"/>
++        <dia:point val="284,-10.0166"/>
++        <dia:point val="308,-10.0166"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="0"/>
+@@ -38063,7 +38093,7 @@ an enumeration, false otherwise.#</dia:string>
+       </dia:attribute>
+       <dia:connections>
+         <dia:connection handle="0" to="O126" connection="4"/>
+-        <dia:connection handle="1" to="O127" connection="8"/>
++        <dia:connection handle="1" to="O127" connection="10"/>
+       </dia:connections>
+       <dia:childnode parent="O0"/>
+     </dia:object>
+@@ -38410,7 +38440,7 @@ and element.#</dia:string>
+         <dia:point val="371.459,-8.8"/>
+         <dia:point val="371.459,-1"/>
+         <dia:point val="343.92,-1"/>
+-        <dia:point val="343.92,-4.7166"/>
++        <dia:point val="343.92,-3.9166"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+diff --git a/doc/agile/sprint_backlog_88.org b/doc/agile/sprint_backlog_88.org
+index b24ef7b..291471a 100644
+--- a/doc/agile/sprint_backlog_88.org
++++ b/doc/agile/sprint_backlog_88.org
+@@ -14,29 +14,29 @@
+ ** Active
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+-#+CAPTION: Clock summary at [2016-09-15 Thu 12:01]
++#+CAPTION: Clock summary at [2016-09-15 Thu 17:01]
+ | <75>                                                                        |         |       |      |       |
+ | Headline                                                                    | Time    |       |      |     % |
+ |-----------------------------------------------------------------------------+---------+-------+------+-------|
+-| *Total time*                                                                | *21:36* |       |      | 100.0 |
++| *Total time*                                                                | *26:44* |       |      | 100.0 |
+ |-----------------------------------------------------------------------------+---------+-------+------+-------|
+-| Stories                                                                     | 21:36   |       |      | 100.0 |
+-| Active                                                                      |         | 21:36 |      | 100.0 |
+-| STARTED Sprint and product backlog grooming                                 |         |       | 2:13 |  10.3 |
+-| COMPLETED Fix chocolatey warning                                            |         |       | 0:08 |   0.6 |
+-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:27 |   2.1 |
+-| COMPLETED Analysis on current state of file path generation                 |         |       | 0:57 |   4.4 |
+-| CANCELLED Remove inclusion dependencies builder factory                     |         |       | 0:14 |   1.1 |
+-| COMPLETED Analysis on formatters, elements and extensibility                |         |       | 1:18 |   6.0 |
+-| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       | 1:12 |   5.6 |
+-| COMPLETED Investigate broken windows builds                                 |         |       | 0:32 |   2.5 |
+-| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       | 5:14 |  24.2 |
+-| COMPLETED Move file path generation to formatters                           |         |       | 1:58 |   9.1 |
+-| CANCELLED Path derivatives factory generates all possible includes          |         |       | 3:07 |  14.4 |
+-| COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       | 1:04 |   4.9 |
+-| COMPLETED Split path factory from provider factory                          |         |       | 2:32 |  11.7 |
+-| STARTED Use providers when building inclusion directives                    |         |       | 0:24 |   1.9 |
+-| STARTED Remove formattable origin type                                      |         |       | 0:16 |   1.2 |
++| Stories                                                                     | 26:44   |       |      | 100.0 |
++| Active                                                                      |         | 26:44 |      | 100.0 |
++| STARTED Sprint and product backlog grooming                                 |         |       | 2:13 |   8.3 |
++| COMPLETED Fix chocolatey warning                                            |         |       | 0:08 |   0.5 |
++| COMPLETED Edit release notes for previous sprint                            |         |       | 0:27 |   1.7 |
++| COMPLETED Analysis on current state of file path generation                 |         |       | 0:57 |   3.6 |
++| CANCELLED Remove inclusion dependencies builder factory                     |         |       | 0:14 |   0.9 |
++| COMPLETED Analysis on formatters, elements and extensibility                |         |       | 1:18 |   4.9 |
++| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       | 1:12 |   4.5 |
++| COMPLETED Investigate broken windows builds                                 |         |       | 0:32 |   2.0 |
++| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       | 5:14 |  19.6 |
++| COMPLETED Move file path generation to formatters                           |         |       | 1:58 |   7.4 |
++| CANCELLED Path derivatives factory generates all possible includes          |         |       | 3:07 |  11.7 |
++| COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       | 1:04 |   4.0 |
++| COMPLETED Split path factory from provider factory                          |         |       | 2:32 |   9.5 |
++| STARTED Use providers when building inclusion directives                    |         |       | 5:32 |  20.7 |
++| STARTED Remove formattable origin type                                      |         |       | 0:16 |   1.0 |
+ #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+ #+end:
+ 
+@@ -554,6 +554,8 @@ Tasks:
+   generation.
+ 
+ *** STARTED Use providers when building inclusion directives          :story:
++    CLOCK: [2016-09-15 Thu 13:20]--[2016-09-15 Thu 17:01] =>  3:41
++    CLOCK: [2016-09-15 Thu 13:32]--[2016-09-15 Thu 14:59] =>  1:27
+     CLOCK: [2016-09-15 Thu 11:36]--[2016-09-15 Thu 12:00] =>  0:24
+ 
+ Its difficult to do incremental changes here. The inclusion directives
+@@ -573,6 +575,14 @@ factory needs to:
+ Once we do this, all includes will break. We then need to go through
+ all formatters and set the includes to the facets as required.
+ 
++    std::string facet_name() const override;
++
++
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
++
+ Tasks:
+ 
+ - supply providers to inclusion directives repository factory instead
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/container.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/container.hpp
+index 38492e6..dccc64a 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/container.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/container.hpp
+@@ -36,6 +36,7 @@
+ #include "dogen/yarn/types/visitor.hpp"
+ #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
+ #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
++#include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
+ #include "dogen/quilt.cpp/types/properties/provider_interface.hpp"
+ 
+ namespace dogen {
+@@ -43,50 +44,92 @@ namespace quilt {
+ namespace cpp {
+ namespace properties {
+ 
+-class registrar;
+-
+ class container final {
+-private:
+-    friend class registrar;
+-
+ public:
+     const std::forward_list<
+         boost::shared_ptr<provider_interface<yarn::module>>
+     >& module_providers() const;
+ 
++    std::forward_list<
++        boost::shared_ptr<provider_interface<yarn::module>>
++    >& module_providers();
++
+     const std::forward_list<
+         boost::shared_ptr<provider_interface<yarn::concept>>
+     >& concept_providers() const;
+ 
++    std::forward_list<
++        boost::shared_ptr<provider_interface<yarn::concept>>
++    >& concept_providers();
++
+     const std::forward_list<
+         boost::shared_ptr<provider_interface<yarn::primitive>>
+     >& primitive_providers() const;
+ 
++    std::forward_list<
++        boost::shared_ptr<provider_interface<yarn::primitive>>
++    >& primitive_providers();
++
+     const std::forward_list<
+         boost::shared_ptr<provider_interface<yarn::object>>
+     >& object_providers() const;
+ 
++    std::forward_list<
++        boost::shared_ptr<provider_interface<yarn::object>>
++    >& object_providers();
++
+     const std::forward_list<
+         boost::shared_ptr<provider_interface<yarn::enumeration>>
+     >& enumeration_providers() const;
+ 
++    std::forward_list<
++        boost::shared_ptr<provider_interface<yarn::enumeration>>
++    >& enumeration_providers();
++
+     const std::forward_list<
+         boost::shared_ptr<provider_interface<yarn::exception>>
+     >& exception_providers() const;
+ 
++    std::forward_list<
++        boost::shared_ptr<provider_interface<yarn::exception>>
++    >& exception_providers();
++
+     const std::forward_list<
+         boost::shared_ptr<provider_interface<yarn::visitor>>
+     >& visitor_providers() const;
+ 
++    std::forward_list<
++        boost::shared_ptr<provider_interface<yarn::visitor>>
++    >& visitor_providers();
++
+     const std::forward_list<
+         boost::shared_ptr<provider_interface<fabric::registrar>>
+     >& registrar_providers() const;
+ 
++    std::forward_list<
++        boost::shared_ptr<provider_interface<fabric::registrar>>
++    >& registrar_providers();
++
+     const std::forward_list<
+         boost::shared_ptr<provider_interface<fabric::master_header>>
+     >&
+     master_header_providers() const;
+ 
++    std::forward_list<
++        boost::shared_ptr<provider_interface<fabric::master_header>>
++    >&
++    master_header_providers();
++
++    const std::forward_list<
++        boost::shared_ptr<provider_interface<fabric::forward_declarations>>
++        >&
++    forward_declarations_providers() const;
++
++    std::forward_list<
++        boost::shared_ptr<provider_interface<fabric::forward_declarations>>
++        >&
++    forward_declarations_providers();
++
+ private:
+     std::forward_list<boost::shared_ptr<provider_interface<yarn::module>>>
+     module_providers_;
+@@ -107,6 +150,9 @@ private:
+     std::forward_list<
+         boost::shared_ptr<provider_interface<fabric::master_header>>>
+     master_header_providers_;
++    std::forward_list<
++        boost::shared_ptr<provider_interface<fabric::forward_declarations>>>
++    forward_declarations_providers_;
+ };
+ 
+ } } } }
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/formatter_properties_repository_factory.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/formatter_properties_repository_factory.hpp
+index 19403d0..4c09b4c 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/formatter_properties_repository_factory.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/formatter_properties_repository_factory.hpp
+@@ -36,6 +36,7 @@
+ #include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
+ #include "dogen/quilt.cpp/types/formatters/container.hpp"
+ #include "dogen/quilt.cpp/types/properties/registrar.hpp"
++#include "dogen/quilt.cpp/types/properties/locator.hpp"
+ #include "dogen/quilt.cpp/types/properties/enablement_repository.hpp"
+ #include "dogen/quilt.cpp/types/properties/path_derivatives_repository.hpp"
+ #include "dogen/quilt.cpp/types/properties/formatter_properties_repository.hpp"
+@@ -67,7 +68,7 @@ private:
+     inclusion_directives_repository create_inclusion_directives_repository(
+         const dynamic::repository& srp,
+         const formatters::container& fc,
+-        const path_derivatives_repository& pdrp,
++        const registrar& rg, const locator& l,
+         const yarn::model& m) const;
+ 
+     /**
+@@ -106,7 +107,7 @@ public:
+         const dynamic::repository& srp,
+         const dynamic::object& root_object,
+         const path_derivatives_repository& pdrp,
+-        const registrar& rg,
++        const registrar& rg, const locator& l,
+         const formatters::container& fc,
+         const yarn::model& m) const;
+ };
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/inclusion_directives_repository_factory.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/inclusion_directives_repository_factory.hpp
+index 4c9979a..39ec73a 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/inclusion_directives_repository_factory.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/inclusion_directives_repository_factory.hpp
+@@ -30,6 +30,8 @@
+ #include "dogen/dynamic/types/repository.hpp"
+ #include "dogen/yarn/types/model.hpp"
+ #include "dogen/quilt.cpp/types/formatters/container.hpp"
++#include "dogen/quilt.cpp/types/properties/locator.hpp"
++#include "dogen/quilt.cpp/types/properties/registrar.hpp"
+ #include "dogen/quilt.cpp/types/properties/path_derivatives_repository.hpp"
+ #include "dogen/quilt.cpp/types/properties/inclusion_directives_repository.hpp"
+ 
+@@ -47,9 +49,9 @@ public:
+      * @brief Create the inclusion directives for an Yarn model.
+      */
+     inclusion_directives_repository make(
+-        const dynamic::repository& srp,
++        const dynamic::repository& drp,
+         const formatters::container& fc,
+-        const path_derivatives_repository& pdrp,
++        const registrar& rg, const locator& l,
+         const yarn::model& m) const;
+ };
+ 
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/provider_interface.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/provider_interface.hpp
+index 28c3bb2..c3fb9a0 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/provider_interface.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/provider_interface.hpp
+@@ -54,6 +54,12 @@ public:
+ 
+ public:
+     /**
++     * @brief Facet of the formatter for which we are providing the
++     * dependencies.
++     */
++    virtual std::string facet_name() const = 0;
++
++    /**
+      * @brief Name of the formatter for which we are providing the
+      * dependencies.
+      */
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/registrar.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/registrar.hpp
+index a590dd2..a06362e 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/registrar.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/registrar.hpp
+@@ -32,6 +32,7 @@
+ #include "dogen/yarn/types/visitor.hpp"
+ #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
+ #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
++#include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
+ #include "dogen/quilt.cpp/types/properties/provider_interface.hpp"
+ #include "dogen/quilt.cpp/types/properties/container.hpp"
+ 
+@@ -63,6 +64,9 @@ public:
+     void register_provider(
+         boost::shared_ptr<provider_interface<fabric::master_header>> p);
+ 
++    void register_provider(
++        boost::shared_ptr<provider_interface<fabric::forward_declarations>> p);
++
+ private:
+     properties::container container_;
+ };
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/workflow.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/workflow.hpp
+index 1bc68b4..ec6c8e9 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/workflow.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/workflow.hpp
+@@ -102,6 +102,7 @@ private:
+     create_formatter_properties(const dynamic::repository& drp,
+         const dynamic::object& root_object,
+         const path_derivatives_repository& pdrp,
++        const locator& l,
+         const formatters::container& fc,
+         const yarn::model& m) const;
+ 
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/settings/inclusion_directives_settings_factory.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/settings/inclusion_directives_settings_factory.hpp
+index e7b6755..592619c 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/settings/inclusion_directives_settings_factory.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/settings/inclusion_directives_settings_factory.hpp
+@@ -110,6 +110,12 @@ public:
+      */
+     inclusion_directives_settings make(const dynamic::object& o) const;
+ 
++
++    bool make_top_level_inclusion_required(const dynamic::object& o) const;
++
++    inclusion_directive_settings make_inclusion_directive_settings(
++        const std::string& formatter_name, const dynamic::object& o) const;
++
+ private:
+     const std::unordered_map<std::string, field_definitions> field_definitions_;
+     dynamic::field_definition inclusion_required_;
+diff --git a/projects/quilt.cpp/src/types/formatters/hash/class_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/hash/class_header_formatter.cpp
+index 8a2bf3d..282970e 100644
+--- a/projects/quilt.cpp/src/types/formatters/hash/class_header_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/hash/class_header_formatter.cpp
+@@ -36,6 +36,7 @@ namespace hash {
+ 
+ class provider final : public properties::provider_interface<yarn::object> {
+  public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -57,7 +58,7 @@ std::list<std::string> provider::provide_inclusion_dependencies(
+ 
+     auto builder(f.make());
+     builder.add(inclusion_constants::std::functional());
+-    builder.add(o.name(), types::traits::class_header_formatter_name());
++    builder.add(o.name(), types::traits::facet_name());
+ 
+     return builder.build();
+ }
+@@ -78,6 +79,10 @@ provider::provide_full_path(const properties::locator& l,
+     return l.make_full_path_for_cpp_header(n, formatter_name());
+ }
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return class_header_formatter::static_formatter_name();
+ }
+diff --git a/projects/quilt.cpp/src/types/formatters/hash/class_implementation_formatter.cpp b/projects/quilt.cpp/src/types/formatters/hash/class_implementation_formatter.cpp
+index 7bdcd8e..303b7b6 100644
+--- a/projects/quilt.cpp/src/types/formatters/hash/class_implementation_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/hash/class_implementation_formatter.cpp
+@@ -52,6 +52,7 @@ namespace {
+ 
+ class provider final : public properties::provider_interface<yarn::object> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -67,6 +68,10 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return class_implementation_formatter::static_formatter_name();
+ }
+@@ -75,16 +80,15 @@ std::list<std::string> provider::provide_inclusion_dependencies(
+     const properties::inclusion_dependencies_builder_factory& f,
+     const yarn::object& o) const {
+     auto builder(f.make());
+-    const auto ch_fn(traits::class_header_formatter_name());
+-    builder.add(o.name(), ch_fn);
++    builder.add(o.name(), traits::facet_name());
+ 
+     const auto si(builder.make_special_includes(o));
+     if (si.has_variant)
+         builder.add(inclusion_constants::boost::visitor::apply_visitor());
+ 
+-    builder.add(o.transparent_associations(), ch_fn);
+-    builder.add(o.opaque_associations(), ch_fn);
+-    builder.add(o.parent(), ch_fn);
++    builder.add(o.transparent_associations(), traits::facet_name());
++    builder.add(o.opaque_associations(), traits::facet_name());
++    builder.add(o.parent(), traits::facet_name());
+ 
+     return builder.build();
+ }
+diff --git a/projects/quilt.cpp/src/types/formatters/hash/enum_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/hash/enum_header_formatter.cpp
+index 3d1b821..3fa1637 100644
+--- a/projects/quilt.cpp/src/types/formatters/hash/enum_header_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/hash/enum_header_formatter.cpp
+@@ -39,6 +39,7 @@ namespace {
+ class provider final :
+         public properties::provider_interface<yarn::enumeration> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -54,6 +55,10 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return enum_header_formatter::static_formatter_name();
+ }
+@@ -64,9 +69,7 @@ std::list<std::string> provider::provide_inclusion_dependencies(
+     auto builder(f.make());
+ 
+     builder.add(inclusion_constants::std::functional());
+-
+-    const auto ch_fn(types::traits::class_header_formatter_name());
+-    builder.add(e.name(), ch_fn);
++    builder.add(e.name(), traits::facet_name());
+     return builder.build();
+ }
+ 
+diff --git a/projects/quilt.cpp/src/types/formatters/io/class_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/io/class_header_formatter.cpp
+index f72a5cd..815cb2a 100644
+--- a/projects/quilt.cpp/src/types/formatters/io/class_header_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/io/class_header_formatter.cpp
+@@ -38,6 +38,7 @@ namespace {
+ 
+ class provider final : public properties::provider_interface<yarn::object> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -53,6 +54,10 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return class_header_formatter::static_formatter_name();
+ }
+@@ -65,8 +70,7 @@ std::list<std::string> provider::provide_inclusion_dependencies(
+     builder.add(inclusion_constants::std::iosfwd());
+ 
+     using types = formatters::types::traits;
+-    const auto ch_fn(types::class_header_formatter_name());
+-    builder.add(o.name(), ch_fn);
++    builder.add(o.name(), types::traits::facet_name());
+ 
+     return builder.build();
+ }
+diff --git a/projects/quilt.cpp/src/types/formatters/io/class_implementation_formatter.cpp b/projects/quilt.cpp/src/types/formatters/io/class_implementation_formatter.cpp
+index 0a64f0c..d447615 100644
+--- a/projects/quilt.cpp/src/types/formatters/io/class_implementation_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/io/class_implementation_formatter.cpp
+@@ -53,6 +53,7 @@ namespace {
+ 
+ class provider final : public properties::provider_interface<yarn::object> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -68,6 +69,10 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return class_implementation_formatter::static_formatter_name();
+ }
+@@ -106,10 +111,9 @@ std::list<std::string> provider::provide_inclusion_dependencies(
+     if (si.has_variant)
+         builder.add(inclusion_constants::boost::visitor::apply_visitor());
+ 
+-    const auto io_fn(formatters::io::traits::class_header_formatter_name());
+-    builder.add(o.transparent_associations(), io_fn);
+-    builder.add(o.opaque_associations(), io_fn);
+-    builder.add(o.parent(), io_fn);
++    builder.add(o.transparent_associations(), io_fctn);
++    builder.add(o.opaque_associations(), io_fctn);
++    builder.add(o.parent(), io_fctn);
+ 
+     return builder.build();
+ }
+diff --git a/projects/quilt.cpp/src/types/formatters/io/enum_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/io/enum_header_formatter.cpp
+index f44d399..1aa3425 100644
+--- a/projects/quilt.cpp/src/types/formatters/io/enum_header_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/io/enum_header_formatter.cpp
+@@ -39,6 +39,7 @@ namespace {
+ class provider final :
+         public properties::provider_interface<yarn::enumeration> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -54,6 +55,10 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return enum_header_formatter::static_formatter_name();
+ }
+@@ -65,8 +70,8 @@ std::list<std::string> provider::provide_inclusion_dependencies(
+ 
+     builder.add(inclusion_constants::std::iosfwd());
+ 
+-    const auto ch_fn(types::traits::class_header_formatter_name());
+-    builder.add(e.name(), ch_fn);
++    const auto eh_fn(types::traits::enum_header_formatter_name());
++    builder.add(e.name(), eh_fn);
+     return builder.build();
+ }
+ 
+diff --git a/projects/quilt.cpp/src/types/formatters/io/enum_implementation_formatter.cpp b/projects/quilt.cpp/src/types/formatters/io/enum_implementation_formatter.cpp
+index 07b857a..a5a7dfd 100644
+--- a/projects/quilt.cpp/src/types/formatters/io/enum_implementation_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/io/enum_implementation_formatter.cpp
+@@ -53,6 +53,7 @@ namespace {
+ class provider final :
+         public properties::provider_interface<yarn::enumeration> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -68,6 +69,10 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return enum_implementation_formatter::static_formatter_name();
+ }
+@@ -81,8 +86,8 @@ std::list<std::string> provider::provide_inclusion_dependencies(
+     builder.add(inclusion_constants::std::stdexcept());
+     builder.add(inclusion_constants::std::string());
+ 
+-    const auto ch_fn(traits::class_header_formatter_name());
+-    builder.add(e.name(), ch_fn);
++    const auto eh_fn(traits::enum_header_formatter_name());
++    builder.add(e.name(), eh_fn);
+     return builder.build();
+ }
+ 
+diff --git a/projects/quilt.cpp/src/types/formatters/master_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/master_header_formatter.cpp
+index 228398d..a254a4c 100644
+--- a/projects/quilt.cpp/src/types/formatters/master_header_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/master_header_formatter.cpp
+@@ -38,6 +38,7 @@ public:
+     provider(const std::string& facet_name, const std::string& formatter_name);
+ 
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -94,6 +95,10 @@ provider::provide_full_path(const properties::locator& l,
+     return l.make_full_path_for_cpp_header(n, formatter_name());
+ }
+ 
++std::string provider::facet_name() const {
++    return facet_name_;
++}
++
+ std::string provider::formatter_name() const {
+     return formatter_name_;
+ }
+diff --git a/projects/quilt.cpp/src/types/formatters/odb/class_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/odb/class_header_formatter.cpp
+index 7a123f4..4621972 100644
+--- a/projects/quilt.cpp/src/types/formatters/odb/class_header_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/odb/class_header_formatter.cpp
+@@ -38,6 +38,7 @@ namespace {
+ 
+ class provider final : public properties::provider_interface<yarn::object> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -53,6 +54,10 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return class_header_formatter::static_formatter_name();
+ }
+@@ -63,11 +68,12 @@ std::list<std::string> provider::provide_inclusion_dependencies(
+ 
+     auto builder(f.make());
+     builder.add(o.name(), types::traits::class_header_formatter_name());
++    builder.add(o.transparent_associations(), traits::facet_name());
++    builder.add(o.opaque_associations(), traits::facet_name());
+ 
+     const auto self_fn(class_header_formatter::static_formatter_name());
+-    builder.add(o.transparent_associations(), self_fn);
+-    builder.add(o.opaque_associations(), self_fn);
+     builder.add(o.parent(), self_fn);
++
+     return builder.build();
+ }
+ 
+diff --git a/projects/quilt.cpp/src/types/formatters/odb/enum_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/odb/enum_header_formatter.cpp
+index a3c2c00..f7b0301 100644
+--- a/projects/quilt.cpp/src/types/formatters/odb/enum_header_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/odb/enum_header_formatter.cpp
+@@ -39,6 +39,7 @@ namespace {
+ class provider final :
+         public properties::provider_interface<yarn::enumeration> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -54,6 +55,10 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return enum_header_formatter::static_formatter_name();
+ }
+@@ -63,7 +68,7 @@ std::list<std::string> provider::provide_inclusion_dependencies(
+     const yarn::enumeration& e) const {
+ 
+     auto builder(f.make());
+-    builder.add(e.name(), types::traits::class_header_formatter_name());
++    builder.add(e.name(), types::traits::enum_header_formatter_name());
+     return builder.build();
+ }
+ 
+diff --git a/projects/quilt.cpp/src/types/formatters/odb/odb_options_formatter.cpp b/projects/quilt.cpp/src/types/formatters/odb/odb_options_formatter.cpp
+index 1099ecd..ca5379b 100644
+--- a/projects/quilt.cpp/src/types/formatters/odb/odb_options_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/odb/odb_options_formatter.cpp
+@@ -51,6 +51,7 @@ namespace {
+ 
+ class provider final : public properties::provider_interface<yarn::object> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -66,16 +67,19 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return odb_options_formatter::static_formatter_name();
+ }
+ 
+ std::list<std::string> provider::provide_inclusion_dependencies(
+     const properties::inclusion_dependencies_builder_factory& f,
+-    const yarn::object& o) const {
++    const yarn::object& /*o*/) const {
+ 
+     auto builder(f.make());
+-    builder.add(o.name(), types::traits::class_header_formatter_name());
+     return builder.build();
+ }
+ 
+diff --git a/projects/quilt.cpp/src/types/formatters/serialization/class_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/serialization/class_header_formatter.cpp
+index 032e167..cfea70f 100644
+--- a/projects/quilt.cpp/src/types/formatters/serialization/class_header_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/serialization/class_header_formatter.cpp
+@@ -39,6 +39,7 @@ namespace {
+ class provider final :
+         public properties::provider_interface<yarn::object> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -54,6 +55,10 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return class_header_formatter::static_formatter_name();
+ }
+diff --git a/projects/quilt.cpp/src/types/formatters/serialization/class_implementation_formatter.cpp b/projects/quilt.cpp/src/types/formatters/serialization/class_implementation_formatter.cpp
+index 965ea94..97aa6e1 100644
+--- a/projects/quilt.cpp/src/types/formatters/serialization/class_implementation_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/serialization/class_implementation_formatter.cpp
+@@ -52,6 +52,7 @@ namespace {
+ class provider final :
+         public properties::provider_interface<yarn::object> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -67,6 +68,11 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return class_implementation_formatter::static_formatter_name();
+ }
+@@ -92,10 +98,10 @@ std::list<std::string> provider::provide_inclusion_dependencies(
+     builder.add(ic::boost::archive::xml_iarchive());
+     builder.add(ic::boost::archive::xml_oarchive());
+ 
+-    builder.add(o.transparent_associations(), ch_fn);
+-    builder.add(o.opaque_associations(), ch_fn);
+-    builder.add(o.parent(), ch_fn);
+-    builder.add(o.leaves(), ch_fn);
++    builder.add(o.transparent_associations(), traits::facet_name());
++    builder.add(o.opaque_associations(), traits::facet_name());
++    builder.add(o.parent(), traits::facet_name());
++    builder.add(o.leaves(), traits::facet_name());
+ 
+     const auto si(builder.make_special_includes(o));
+     if (si.has_date)
+diff --git a/projects/quilt.cpp/src/types/formatters/serialization/enum_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/serialization/enum_header_formatter.cpp
+index 2cfa03d..492e997 100644
+--- a/projects/quilt.cpp/src/types/formatters/serialization/enum_header_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/serialization/enum_header_formatter.cpp
+@@ -39,6 +39,7 @@ namespace {
+ class provider final :
+         public properties::provider_interface<yarn::enumeration> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -54,6 +55,10 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return enum_header_formatter::static_formatter_name();
+ }
+diff --git a/projects/quilt.cpp/src/types/formatters/serialization/forward_declarations_formatter.cpp b/projects/quilt.cpp/src/types/formatters/serialization/forward_declarations_formatter.cpp
+index b4f0389..03520f6 100644
+--- a/projects/quilt.cpp/src/types/formatters/serialization/forward_declarations_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/serialization/forward_declarations_formatter.cpp
+@@ -40,13 +40,14 @@ namespace serialization {
+ namespace {
+ 
+ class provider :
+-        public properties::provider_interface<yarn::object> {
++        public properties::provider_interface<fabric::forward_declarations> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+         const properties::inclusion_dependencies_builder_factory& f,
+-        const yarn::object& o) const override;
++        const fabric::forward_declarations& fd) const override;
+ 
+     properties::inclusion_path_support inclusion_path_support() const override;
+ 
+@@ -57,20 +58,23 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return forward_declarations_formatter::static_formatter_name();
+ }
+ 
+ std::list<std::string> provider::provide_inclusion_dependencies(
+     const properties::inclusion_dependencies_builder_factory& f,
+-    const yarn::object& o) const {
++    const fabric::forward_declarations& fd) const {
+ 
+-    const auto self_fn(forward_declarations_formatter::static_formatter_name());
+     auto builder(f.make());
+ 
+     using tp = formatters::types::traits;
+     const auto tp_fn(tp::forward_declarations_formatter_name());
+-    builder.add(o.name(), tp_fn);
++    builder.add(fd.name(), tp_fn);
+ 
+     return builder.build();
+ }
+diff --git a/projects/quilt.cpp/src/types/formatters/serialization/registrar_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/serialization/registrar_header_formatter.cpp
+index 6a8370a..e1bd1d0 100644
+--- a/projects/quilt.cpp/src/types/formatters/serialization/registrar_header_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/serialization/registrar_header_formatter.cpp
+@@ -18,6 +18,7 @@
+  * MA 02110-1301, USA.
+  *
+  */
++#include <boost/make_shared.hpp>
+ #include "dogen/quilt.cpp/types/traits.hpp"
+ #include "dogen/quilt.cpp/types/formatters/traits.hpp"
+ #include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
+@@ -30,6 +31,61 @@ namespace cpp {
+ namespace formatters {
+ namespace serialization {
+ 
++namespace {
++
++class provider final :
++        public properties::provider_interface<fabric::registrar> {
++public:
++    std::string facet_name() const override;
++    std::string formatter_name() const override;
++
++    std::list<std::string> provide_inclusion_dependencies(
++        const properties::inclusion_dependencies_builder_factory& f,
++        const fabric::registrar& rg) const override;
++
++    properties::inclusion_path_support inclusion_path_support() const override;
++
++    boost::filesystem::path provide_inclusion_path(const properties::locator& l,
++        const yarn::name& n) const override;
++
++    boost::filesystem::path provide_full_path(const properties::locator& l,
++        const yarn::name& n) const override;
++};
++
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
++std::string provider::formatter_name() const {
++    return registrar_header_formatter::static_formatter_name();
++}
++
++std::list<std::string> provider::provide_inclusion_dependencies(
++    const properties::inclusion_dependencies_builder_factory& f,
++    const fabric::registrar& /*rg*/) const {
++
++    auto builder(f.make());
++    return builder.build();
++}
++
++properties::inclusion_path_support provider::inclusion_path_support() const {
++    return properties::inclusion_path_support::is_default;
++}
++
++boost::filesystem::path
++provider::provide_inclusion_path(const properties::locator& l,
++    const yarn::name& n) const {
++    return l.make_inclusion_path_for_cpp_header(n, formatter_name());
++}
++
++boost::filesystem::path
++provider::provide_full_path(const properties::locator& l,
++    const yarn::name& n) const {
++    return l.make_full_path_for_cpp_header(n, formatter_name());
++}
++
++}
++
+ std::string registrar_header_formatter::static_formatter_name() {
+     return traits::registrar_header_formatter_name();
+ }
+@@ -58,7 +114,9 @@ registrar_header_formatter::formattable_origin_type() const {
+ }
+ 
+ void registrar_header_formatter::register_inclusion_dependencies_provider(
+-    properties::registrar& /*rg*/) const { }
++    properties::registrar& rg) const {
++    rg.register_provider(boost::make_shared<provider>());
++}
+ 
+ dogen::formatters::file registrar_header_formatter::
+ format(const context& ctx, const fabric::registrar& rg) const {
+diff --git a/projects/quilt.cpp/src/types/formatters/serialization/registrar_implementation_formatter.cpp b/projects/quilt.cpp/src/types/formatters/serialization/registrar_implementation_formatter.cpp
+index ddc1c38..366de16 100644
+--- a/projects/quilt.cpp/src/types/formatters/serialization/registrar_implementation_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/serialization/registrar_implementation_formatter.cpp
+@@ -53,6 +53,7 @@ namespace {
+ class provider final :
+         public properties::provider_interface<fabric::registrar> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -68,6 +69,10 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return registrar_implementation_formatter::static_formatter_name();
+ }
+@@ -94,7 +99,7 @@ std::list<std::string> provider::provide_inclusion_dependencies(
+ 
+     const auto ch_fn(traits::class_header_formatter_name());
+     builder.add(rg.leaves(), ch_fn);
+-    builder.add(rg.registrar_dependencies(), ch_fn);
++    builder.add(rg.registrar_dependencies(), traits::facet_name());
+     return builder.build();
+ }
+ 
+diff --git a/projects/quilt.cpp/src/types/formatters/test_data/class_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/test_data/class_header_formatter.cpp
+index 23f5dfa..4206c65 100644
+--- a/projects/quilt.cpp/src/types/formatters/test_data/class_header_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/test_data/class_header_formatter.cpp
+@@ -36,6 +36,7 @@ namespace test_data {
+ 
+ class provider final : public properties::provider_interface<yarn::object> {
+  public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -51,6 +52,10 @@ class provider final : public properties::provider_interface<yarn::object> {
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return class_header_formatter::static_formatter_name();
+ }
+diff --git a/projects/quilt.cpp/src/types/formatters/test_data/class_implementation_formatter.cpp b/projects/quilt.cpp/src/types/formatters/test_data/class_implementation_formatter.cpp
+index ae9000e..3e4817b 100644
+--- a/projects/quilt.cpp/src/types/formatters/test_data/class_implementation_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/test_data/class_implementation_formatter.cpp
+@@ -52,6 +52,7 @@ namespace {
+ 
+ class provider final : public properties::provider_interface<yarn::object> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -67,6 +68,10 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return class_implementation_formatter::static_formatter_name();
+ }
+@@ -82,10 +87,10 @@ std::list<std::string> provider::provide_inclusion_dependencies(
+     if (si.has_path || si.has_std_string)
+         builder.add(inclusion_constants::std::sstream());
+ 
+-    builder.add(o.transparent_associations(), ch_fn);
+-    builder.add(o.opaque_associations(), ch_fn);
+-    builder.add(o.parent(), ch_fn);
+-    builder.add(o.leaves(), ch_fn);
++    builder.add(o.transparent_associations(), traits::facet_name());
++    builder.add(o.opaque_associations(), traits::facet_name());
++    builder.add(o.parent(), traits::facet_name());
++    builder.add(o.leaves(), traits::facet_name());
+ 
+     return builder.build();
+ }
+diff --git a/projects/quilt.cpp/src/types/formatters/test_data/enum_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/test_data/enum_header_formatter.cpp
+index 4de2c86..6ec5424 100644
+--- a/projects/quilt.cpp/src/types/formatters/test_data/enum_header_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/test_data/enum_header_formatter.cpp
+@@ -39,6 +39,7 @@ namespace {
+ class provider final :
+         public properties::provider_interface<yarn::enumeration> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -54,6 +55,10 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return enum_header_formatter::static_formatter_name();
+ }
+@@ -63,8 +68,8 @@ std::list<std::string> provider::provide_inclusion_dependencies(
+     const yarn::enumeration& e) const {
+     auto builder(f.make());
+ 
+-    const auto ch_fn(types::traits::class_header_formatter_name());
+-    builder.add(e.name(), ch_fn);
++    const auto eh_fn(types::traits::enum_header_formatter_name());
++    builder.add(e.name(), eh_fn);
+     return builder.build();
+ }
+ 
+diff --git a/projects/quilt.cpp/src/types/formatters/test_data/enum_implementation_formatter.cpp b/projects/quilt.cpp/src/types/formatters/test_data/enum_implementation_formatter.cpp
+index 3804027..7bbeacf 100644
+--- a/projects/quilt.cpp/src/types/formatters/test_data/enum_implementation_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/test_data/enum_implementation_formatter.cpp
+@@ -53,6 +53,7 @@ namespace {
+ class provider final :
+         public properties::provider_interface<yarn::enumeration> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -68,6 +69,10 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return enum_implementation_formatter::static_formatter_name();
+ }
+@@ -78,8 +83,8 @@ provider::provide_inclusion_dependencies(
+     const yarn::enumeration& o) const {
+     auto builder(f.make());
+ 
+-    const auto ch_fn(traits::class_header_formatter_name());
+-    builder.add(o.name(), ch_fn);
++    const auto eh_fn(traits::enum_header_formatter_name());
++    builder.add(o.name(), eh_fn);
+     return builder.build();
+ }
+ 
+diff --git a/projects/quilt.cpp/src/types/formatters/types/class_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/types/class_header_formatter.cpp
+index c6bd3e4..587717b 100644
+--- a/projects/quilt.cpp/src/types/formatters/types/class_header_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/types/class_header_formatter.cpp
+@@ -41,6 +41,7 @@ namespace {
+ class provider final :
+         public properties::provider_interface<yarn::object> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -56,6 +57,10 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return class_header_formatter::static_formatter_name();
+ }
+@@ -84,13 +89,12 @@ std::list<std::string> provider::provide_inclusion_dependencies(
+ 
+     const auto self_fn(class_header_formatter::static_formatter_name());
+     const auto fwd_fn(traits::forward_declarations_formatter_name());
+-    builder.add(o.transparent_associations(), self_fn);
++    builder.add(o.transparent_associations(), traits::facet_name());
+     builder.add(o.opaque_associations(), fwd_fn);
+     builder.add(o.parent(), self_fn);
+ 
+     using hash = formatters::hash::traits;
+-    const auto hash_fn(hash::traits::class_header_formatter_name());
+-    builder.add(o.associative_container_keys(), hash_fn);
++    builder.add(o.associative_container_keys(), hash::traits::facet_name());
+ 
+     if (o.is_visitation_root() || o.is_visitation_leaf()) {
+         /*
+diff --git a/projects/quilt.cpp/src/types/formatters/types/class_implementation_formatter.cpp b/projects/quilt.cpp/src/types/formatters/types/class_implementation_formatter.cpp
+index 531b56b..fc414f9 100644
+--- a/projects/quilt.cpp/src/types/formatters/types/class_implementation_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/types/class_implementation_formatter.cpp
+@@ -53,6 +53,7 @@ namespace {
+ class provider final :
+         public properties::provider_interface<yarn::object> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -68,6 +69,10 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return class_implementation_formatter::static_formatter_name();
+ }
+@@ -99,9 +104,9 @@ std::list<std::string> provider::provide_inclusion_dependencies(
+     if (si.has_std_string)
+         builder.add(inclusion_constants::boost::algorithm::string());
+ 
+-    builder.add(o.transparent_associations(), io_fn);
+-    builder.add(o.opaque_associations(), io_fn);
+-    builder.add(o.parent(), io_fn);
++    builder.add(o.transparent_associations(), io::traits::facet_name());
++    builder.add(o.opaque_associations(), io::traits::facet_name());
++    builder.add(o.parent(), io::traits::facet_name());
+ 
+     if (o.is_visitation_leaf()) {
+         /*
+@@ -109,10 +114,11 @@ std::list<std::string> provider::provide_inclusion_dependencies(
+          * don't bother including the base if we are already including
+          * the derived visitor.
+          */
++        const auto v_fn(traits::visitor_header_formatter_name());
+         if (o.derived_visitor())
+-            builder.add(*o.derived_visitor(), ch_fn);
++            builder.add(*o.derived_visitor(), v_fn);
+         else
+-            builder.add(*o.base_visitor(), ch_fn);
++            builder.add(*o.base_visitor(), v_fn);
+     }
+ 
+     return builder.build();
+diff --git a/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.cpp
+index 370c484..220d8af 100644
+--- a/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/types/exception_header_formatter.cpp
+@@ -41,6 +41,7 @@ namespace {
+ class provider final :
+         public properties::provider_interface<yarn::exception> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -56,6 +57,10 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return exception_header_formatter::static_formatter_name();
+ }
+diff --git a/projects/quilt.cpp/src/types/formatters/types/forward_declarations_formatter.cpp b/projects/quilt.cpp/src/types/formatters/types/forward_declarations_formatter.cpp
+index a3c9d49..0ad84f3 100644
+--- a/projects/quilt.cpp/src/types/formatters/types/forward_declarations_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/types/forward_declarations_formatter.cpp
+@@ -51,13 +51,14 @@ namespace types {
+ namespace {
+ 
+ class provider final :
+-        public properties::provider_interface<yarn::exception> {
++        public properties::provider_interface<fabric::forward_declarations> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+         const properties::inclusion_dependencies_builder_factory& f,
+-        const yarn::exception& e) const override;
++        const fabric::forward_declarations& fd) const override;
+ 
+     properties::inclusion_path_support inclusion_path_support() const override;
+ 
+@@ -68,13 +69,17 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return forward_declarations_formatter::static_formatter_name();
+ }
+ 
+ std::list<std::string> provider::provide_inclusion_dependencies(
+     const properties::inclusion_dependencies_builder_factory& f,
+-    const yarn::exception& /*e*/) const {
++    const fabric::forward_declarations& /*fd*/) const {
+ 
+     const auto self_fn(forward_declarations_formatter::static_formatter_name());
+     auto builder(f.make());
+diff --git a/projects/quilt.cpp/src/types/formatters/types/visitor_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/types/visitor_header_formatter.cpp
+index c86ca1c..95ca484 100644
+--- a/projects/quilt.cpp/src/types/formatters/types/visitor_header_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/types/visitor_header_formatter.cpp
+@@ -41,6 +41,7 @@ namespace {
+ class provider final :
+         public properties::provider_interface<yarn::visitor> {
+ public:
++    std::string facet_name() const override;
+     std::string formatter_name() const override;
+ 
+     std::list<std::string> provide_inclusion_dependencies(
+@@ -56,6 +57,10 @@ public:
+         const yarn::name& n) const override;
+ };
+ 
++std::string provider::facet_name() const {
++    return traits::facet_name();
++}
++
+ std::string provider::formatter_name() const {
+     return visitor_header_formatter::static_formatter_name();
+ }
+@@ -69,8 +74,8 @@ std::list<std::string> provider::provide_inclusion_dependencies(
+     builder.add(v.visits(), fwd_fn);
+ 
+     if (v.parent()) {
+-        const auto ch_fn(traits::class_header_formatter_name());
+-        builder.add(*v.parent(), ch_fn);
++        const auto v_fn(traits::visitor_header_formatter_name());
++        builder.add(*v.parent(), v_fn);
+     }
+     return builder.build();
+ }
+diff --git a/projects/quilt.cpp/src/types/properties/container.cpp b/projects/quilt.cpp/src/types/properties/container.cpp
+index 03d5bbb..9271790 100644
+--- a/projects/quilt.cpp/src/types/properties/container.cpp
++++ b/projects/quilt.cpp/src/types/properties/container.cpp
+@@ -30,21 +30,41 @@ container::module_providers() const {
+     return module_providers_;
+ }
+ 
++std::forward_list<boost::shared_ptr<provider_interface<yarn::module>>>&
++container::module_providers() {
++    return module_providers_;
++}
++
+ const std::forward_list<boost::shared_ptr<provider_interface<yarn::concept>>>&
+ container::concept_providers() const {
+     return concept_providers_;
+ }
+ 
++std::forward_list<boost::shared_ptr<provider_interface<yarn::concept>>>&
++container::concept_providers() {
++    return concept_providers_;
++}
++
+ const std::forward_list<boost::shared_ptr<provider_interface<yarn::primitive>>>&
+ container::primitive_providers() const {
+     return primitive_providers_;
+ }
+ 
++std::forward_list<boost::shared_ptr<provider_interface<yarn::primitive>>>&
++container::primitive_providers() {
++    return primitive_providers_;
++}
++
+ const std::forward_list<boost::shared_ptr<provider_interface<yarn::object>>>&
+ container::object_providers() const {
+     return object_providers_;
+ }
+ 
++std::forward_list<boost::shared_ptr<provider_interface<yarn::object>>>&
++container::object_providers() {
++    return object_providers_;
++}
++
+ const std::forward_list<
+     boost::shared_ptr<provider_interface<yarn::enumeration>>
+ >&
+@@ -52,16 +72,33 @@ container::enumeration_providers() const {
+     return enumeration_providers_;
+ }
+ 
++std::forward_list<
++    boost::shared_ptr<provider_interface<yarn::enumeration>>
++>&
++container::enumeration_providers() {
++    return enumeration_providers_;
++}
++
+ const std::forward_list<boost::shared_ptr<provider_interface<yarn::exception>>>&
+ container::exception_providers() const {
+     return exception_providers_;
+ }
+ 
++std::forward_list<boost::shared_ptr<provider_interface<yarn::exception>>>&
++    container::exception_providers() {
++    return exception_providers_;
++}
++
+ const std::forward_list<boost::shared_ptr<provider_interface<yarn::visitor>>>&
+ container::visitor_providers() const {
+     return visitor_providers_;
+ }
+ 
++std::forward_list<boost::shared_ptr<provider_interface<yarn::visitor>>>&
++    container::visitor_providers() {
++    return visitor_providers_;
++}
++
+ const std::forward_list<
+     boost::shared_ptr<provider_interface<fabric::registrar>>
+ >&
+@@ -69,6 +106,13 @@ container::registrar_providers() const {
+     return registrar_providers_;
+ }
+ 
++std::forward_list<
++    boost::shared_ptr<provider_interface<fabric::registrar>>
++>&
++container::registrar_providers() {
++    return registrar_providers_;
++}
++
+ const std::forward_list<
+     boost::shared_ptr<provider_interface<fabric::master_header>>
+ >&
+@@ -76,4 +120,25 @@ container::master_header_providers() const {
+     return master_header_providers_;
+ }
+ 
++std::forward_list<
++    boost::shared_ptr<provider_interface<fabric::master_header>>
++>&
++container::master_header_providers() {
++    return master_header_providers_;
++}
++
++const std::forward_list<
++    boost::shared_ptr<provider_interface<fabric::forward_declarations>>
++    >&
++container::forward_declarations_providers() const {
++    return forward_declarations_providers_;
++}
++
++std::forward_list<
++    boost::shared_ptr<provider_interface<fabric::forward_declarations>>
++    >&
++container::forward_declarations_providers() {
++    return forward_declarations_providers_;
++}
++
+ } } } }
+diff --git a/projects/quilt.cpp/src/types/properties/formatter_properties_repository_factory.cpp b/projects/quilt.cpp/src/types/properties/formatter_properties_repository_factory.cpp
+index ecab2c3..0809146 100644
+--- a/projects/quilt.cpp/src/types/properties/formatter_properties_repository_factory.cpp
++++ b/projects/quilt.cpp/src/types/properties/formatter_properties_repository_factory.cpp
+@@ -45,10 +45,10 @@ inclusion_directives_repository formatter_properties_repository_factory::
+ create_inclusion_directives_repository(
+     const dynamic::repository& srp,
+     const formatters::container& fc,
+-    const path_derivatives_repository& pdrp,
++    const registrar& rg, const locator& l,
+     const yarn::model& m) const {
+     inclusion_directives_repository_factory f;
+-    return f.make(srp, fc, pdrp, m);
++    return f.make(srp, fc, rg, l, m);
+ }
+ 
+ inclusion_dependencies_repository formatter_properties_repository_factory::
+@@ -107,11 +107,12 @@ formatter_properties_repository_factory::create_formatter_properties(
+ 
+ formatter_properties_repository formatter_properties_repository_factory::
+ make(const dynamic::repository& srp, const dynamic::object& root_object,
+-    const path_derivatives_repository& pdrp, const registrar& rg,
++    const path_derivatives_repository& pdrp,
++    const registrar& rg, const locator& l,
+     const formatters::container& fc, const yarn::model& m) const {
+ 
+     BOOST_LOG_SEV(lg, debug) << "Building formatter properties repository.";
+-    const auto idrp(create_inclusion_directives_repository(srp, fc, pdrp, m));
++    const auto idrp(create_inclusion_directives_repository(srp, fc, rg, l, m));
+     const auto erp(create_enablement_repository(srp, root_object, fc, m));
+ 
+     const auto pc(rg.container());
+diff --git a/projects/quilt.cpp/src/types/properties/inclusion_dependencies_builder.cpp b/projects/quilt.cpp/src/types/properties/inclusion_dependencies_builder.cpp
+index 1bc28ca..2007df1 100644
+--- a/projects/quilt.cpp/src/types/properties/inclusion_dependencies_builder.cpp
++++ b/projects/quilt.cpp/src/types/properties/inclusion_dependencies_builder.cpp
+@@ -124,9 +124,13 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
+ 
+     const auto j(i->second.find(formatter_name));
+     if (j == i->second.end()) {
+-        BOOST_LOG_SEV(lg, error) << formatter_name_not_found << formatter_name;
+-        BOOST_THROW_EXCEPTION(
+-            building_error(formatter_name_not_found + formatter_name));
++        BOOST_LOG_SEV(lg, error) << formatter_name_not_found << formatter_name
++                                 << " element id: " << n.id();
++
++        // FIXME: hack
++        return true;
++        // BOOST_THROW_EXCEPTION(
++        //     building_error(formatter_name_not_found + formatter_name));
+     }
+ 
+     const bool r(j->second);
+diff --git a/projects/quilt.cpp/src/types/properties/inclusion_directives_repository_factory.cpp b/projects/quilt.cpp/src/types/properties/inclusion_directives_repository_factory.cpp
+index 949ae6b..d8472f3 100644
+--- a/projects/quilt.cpp/src/types/properties/inclusion_directives_repository_factory.cpp
++++ b/projects/quilt.cpp/src/types/properties/inclusion_directives_repository_factory.cpp
+@@ -41,7 +41,9 @@ using namespace dogen::utility::log;
+ static logger lg(logger_factory(
+         "quilt.cpp.properties.inclusion_directives_repository_factory"));
+ 
++const std::string double_quote("\"");
+ const std::string duplicate_name("Duplicate name: ");
++const std::string empty_include_directive("Include directive is empty.");
+ 
+ }
+ 
+@@ -57,65 +59,267 @@ namespace {
+  */
+ class generator final : public fabric::element_visitor {
+ public:
+-    generator(const inclusion_directives_factory& f) : factory_(f) { }
++    generator(const container& c, const locator& l,
++        const settings::inclusion_directives_settings_factory& f)
++        : container_(obtain_relevant_providers(c)), locator_(l), factory_(f) { }
+ 
+ private:
+-    void generate(const dynamic::object& o, const yarn::name& n) {
+-        const auto id(factory_.make(o, n));
+-        if (!id)
+-            return;
+-
+-        auto& id_n(result_.by_name());
+-        const auto pair(id_n.insert(std::make_pair(n.id(), *id)));
+-        if (pair.second)
+-            return;
++    /**
++     * @brief Filter out providers that do not support inclusion
++     * paths.
++     *
++     * Not all formatters support inclusion path. We are only
++     * interested in those which do.
++     */
++    container obtain_relevant_providers(const container& c) const;
+ 
+-        BOOST_LOG_SEV(lg, error) << duplicate_name << n.id();
+-        BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
+-    }
++    /**
++     * @brief Inserts the inclusion directive.
++     */
++    void insert_inclusion_directive(const std::string& id,
++        const std::string& formatter_name, const std::string& directive);
+ 
+-private:
+     /**
+-     * @brief Generates all of the inclusion dependencies for the
+-     * formatters and name.
++     * @brief Converts a relative path to an inclusion directive.
+      */
+-    template<typename ExtensibleAndNameable>
+-    void generate(const ExtensibleAndNameable& e) {
+-        generate(e.extensions(), e.name());
++    std::string to_inclusion_directive(const boost::filesystem::path& p) const;
++
++private:
++    template<typename YarnEntity>
++    void generate(const std::forward_list<
++        boost::shared_ptr<provider_interface<YarnEntity>>>& providers,
++        const YarnEntity& e) {
++        /*
++         * First we extract the configuration for the generation of
++         * include directives for this element. Note that we generate
++         * this setting for _all elements_ even if the user did not
++         * specify any meta-data (we do so via defaults).
++         *
++         * The question we are asking is: "does this element require
++         * any inclusion directives at all, across all facets?". Not
++         * all elements do; for example bool, int and so on don't
++         * require any inclusions at all across all facets. If the
++         * user did not override this, we default it to true because
++         * normally elements require inclusion.
++         */
++        const auto& o(e.extensions());
++        const bool required(factory_.make_top_level_inclusion_required(o));
++        if (!required)
++            return;
++
++        /*
++         * Now we start working at the formatter level.
++         */
++        const auto& n(e.name());
++        const auto id(n.id());
++        for (const auto& p : providers) {
++            const auto fmt_n(p->formatter_name());
++
++            /*
++             * Does the type require an inclusion directive for this
++             * specific formatter? Some types require inclusion
++             * directives for some formatters, but not for others. For
++             * example, we may need an include for serialising a
++             * std::list, but in test data we make use of helpers and
++             * thus do not require an include.
++             *
++             * Again, we default this to true.
++             */
++            const auto s(factory_.make_inclusion_directive_settings(fmt_n, o));
++            if (!s.inclusion_required()) {
++                BOOST_LOG_SEV(lg, debug) << "Inclusion directive not required. "
++                                         << "Type: " << id
++                                         << " formatter: " << fmt_n;
++                continue;
++            }
++
++            /*
++             * Do the settings provide a "hard-coded" inclusion directive?
++             * That is, the type had an hard-coded incantation for its
++             * include. This is the case for system models such as boost, std
++             * etc where we can't compute the inclusion directive.
++             */
++            std::string directive;
++            if (s.inclusion_directive())
++                directive = *s.inclusion_directive();
++            else {
++                /*
++                 * Finally, we have no alternative but to compute the
++                 * inclusion directive.
++                 */
++                const auto path(p->provide_inclusion_path(locator_, n));
++                directive = to_inclusion_directive(path);
++            }
++            insert_inclusion_directive(id, fmt_n, directive);
++
++            /*
++             * If the provider is also the default for this facet and
++             * element, we need to register it against the facet
++             * too. Note that, for a given element type on a given
++             * facet, there can only be one default - or else we'll
++             * throw.
++             */
++            const auto def(inclusion_path_support::is_default);
++            const auto fct_n(p->facet_name());
++            if (p->inclusion_path_support() == def)
++                insert_inclusion_directive(id, fct_n, directive);
++        }
+     }
+ 
+ public:
+     using fabric::element_visitor::visit;
+-    void visit(const yarn::module& m) override { generate(m); }
+-    void visit(const yarn::concept& c) override { generate(c); }
+-    void visit(const yarn::primitive& p) override { generate(p); }
+-    void visit(const yarn::enumeration& e) override { generate(e); }
+-    void visit(const yarn::object& o) override { generate(o); }
+-    void visit(const yarn::exception& e) override { generate(e); }
+-    void visit(const yarn::visitor& v) override { generate(v); }
+-    void visit(const fabric::registrar& rg) override { generate(rg); }
+-    void visit(const fabric::master_header& mh) override { generate(mh); }
++    void visit(const yarn::module& m) override {
++        generate(container_.module_providers(), m);
++    }
++
++    void visit(const yarn::concept& c) override {
++        generate(container_.concept_providers(), c);
++    }
++
++    void visit(const yarn::primitive& p) override {
++        generate(container_.primitive_providers(), p);
++    }
++
++    void visit(const yarn::enumeration& e) override {
++        generate(container_.enumeration_providers(), e);
++    }
++
++    void visit(const yarn::object& o) override {
++        generate(container_.object_providers(), o);
++    }
++
++    void visit(const yarn::exception& e) override {
++        generate(container_.exception_providers(), e);
++    }
++
++    void visit(const yarn::visitor& v) override {
++        generate(container_.visitor_providers(), v);
++    }
++
++    void visit(const fabric::registrar& rg) override {
++        generate(container_.registrar_providers(), rg);
++    }
++
++    void visit(const fabric::master_header& mh) override {
++        generate(container_.master_header_providers(), mh);
++    }
++
++    void visit(const fabric::forward_declarations& fd) override {
++        generate(container_.forward_declarations_providers(), fd);
++    }
+ 
+ public:
+     const inclusion_directives_repository& result() const { return result_; }
+ 
+ private:
+-    const inclusion_directives_factory& factory_;
++    const container container_;
++    const locator& locator_;
++    const settings::inclusion_directives_settings_factory factory_;
+     inclusion_directives_repository result_;
+ };
+ 
++container generator::obtain_relevant_providers(const container& c) const {
++    container r;
++
++    const auto ns(inclusion_path_support::not_supported);
++
++    for (auto p : c.module_providers()) {
++        if (p->inclusion_path_support() == ns)
++            continue;
++        r.module_providers().push_front(p);
++    }
++
++    for (auto p : c.concept_providers()) {
++        if (p->inclusion_path_support() == ns)
++            continue;
++        r.concept_providers().push_front(p);
++    }
++
++    for (auto p : c.primitive_providers()) {
++        if (p->inclusion_path_support() == ns)
++            continue;
++        r.primitive_providers().push_front(p);
++    }
++
++    for (auto p : c.object_providers()) {
++        if (p->inclusion_path_support() == ns)
++            continue;
++        r.object_providers().push_front(p);
++    }
++
++    for (auto p : c.enumeration_providers()) {
++        if (p->inclusion_path_support() == ns)
++            continue;
++        r.enumeration_providers().push_front(p);
++    }
++
++    for (auto p : c.exception_providers()) {
++        if (p->inclusion_path_support() == ns)
++            continue;
++        r.exception_providers().push_front(p);
++    }
++
++    for (auto p : c.visitor_providers()) {
++        if (p->inclusion_path_support() == ns)
++            continue;
++        r.visitor_providers().push_front(p);
++    }
++
++    for (auto p : c.registrar_providers()) {
++        if (p->inclusion_path_support() == ns)
++            continue;
++        r.registrar_providers().push_front(p);
++    }
++
++    for (auto p : c.master_header_providers()) {
++        if (p->inclusion_path_support() == ns)
++            continue;
++        r.master_header_providers().push_front(p);
++    }
++
++    return r;
++}
++
++void generator::insert_inclusion_directive(const std::string& id,
++    const std::string& formatter_name, const std::string& directive) {
++
++    if (directive.empty()) {
++        std::ostringstream s;
++        s << empty_include_directive << formatter_name << " for type: " << id;
++
++        const auto msg(s.str());
++        BOOST_LOG_SEV(lg, error) << msg;
++        BOOST_THROW_EXCEPTION(building_error(msg));
++    }
++
++    const auto fn_dir(std::make_pair(formatter_name, directive));
++    const auto pair(result_.by_name()[id].insert(fn_dir));
++    if (pair.second)
++        return;
++
++    BOOST_LOG_SEV(lg, error) << duplicate_name << id;
++    BOOST_THROW_EXCEPTION(building_error(duplicate_name + id));
++}
++
++std::string generator::
++to_inclusion_directive(const boost::filesystem::path& p) const {
++    std::ostringstream ss;
++    ss << double_quote << p.generic_string() << double_quote;
++    return ss.str();
++}
++
+ }
+ 
+ inclusion_directives_repository inclusion_directives_repository_factory::make(
+-    const dynamic::repository& srp,
++    const dynamic::repository& drp,
+     const formatters::container& fc,
+-    const path_derivatives_repository& pdrp,
++    const registrar& rg, const locator& l,
+     const yarn::model& m) const {
+ 
+     BOOST_LOG_SEV(lg, debug) << "Making inclusion directives repository.";
+ 
+-    const inclusion_directives_factory f(srp, fc, pdrp);
+-    generator g(f);
++    const settings::inclusion_directives_settings_factory f(drp, fc);
++    generator g(rg.container(), l, f);
+     for (const auto& ptr : m.elements()) {
+         const auto& e(*ptr);
+         e.accept(g);
+diff --git a/projects/quilt.cpp/src/types/properties/registrar.cpp b/projects/quilt.cpp/src/types/properties/registrar.cpp
+index 9febb76..a335ec7 100644
+--- a/projects/quilt.cpp/src/types/properties/registrar.cpp
++++ b/projects/quilt.cpp/src/types/properties/registrar.cpp
+@@ -58,37 +58,43 @@ const properties::container& registrar::container() const {
+ void registrar::register_provider(
+     boost::shared_ptr<provider_interface<yarn::object>> p) {
+     validate(p);
+-    container_.object_providers_.push_front(p);
++    container_.object_providers().push_front(p);
+ }
+ 
+ void registrar::register_provider(
+     boost::shared_ptr<provider_interface<yarn::enumeration>> p) {
+     validate(p);
+-    container_.enumeration_providers_.push_front(p);
++    container_.enumeration_providers().push_front(p);
+ }
+ 
+ void registrar::register_provider(
+     boost::shared_ptr<provider_interface<yarn::exception>> p) {
+     validate(p);
+-    container_.exception_providers_.push_front(p);
++    container_.exception_providers().push_front(p);
+ }
+ 
+ void registrar::register_provider(
+     boost::shared_ptr<provider_interface<yarn::visitor>> p) {
+     validate(p);
+-    container_.visitor_providers_.push_front(p);
++    container_.visitor_providers().push_front(p);
+ }
+ 
+ void registrar::register_provider(
+     boost::shared_ptr<provider_interface<fabric::registrar>> p) {
+     validate(p);
+-    container_.registrar_providers_.push_front(p);
++    container_.registrar_providers().push_front(p);
+ }
+ 
+ void registrar::register_provider(
+     boost::shared_ptr<provider_interface<fabric::master_header>> p) {
+     validate(p);
+-    container_.master_header_providers_.push_front(p);
++    container_.master_header_providers().push_front(p);
++}
++
++void registrar::register_provider(
++    boost::shared_ptr<provider_interface<fabric::forward_declarations>> p) {
++    validate(p);
++    container_.forward_declarations_providers().push_front(p);
+ }
+ 
+ } } } }
+diff --git a/projects/quilt.cpp/src/types/properties/workflow.cpp b/projects/quilt.cpp/src/types/properties/workflow.cpp
+index b3ebffa..6a34895 100644
+--- a/projects/quilt.cpp/src/types/properties/workflow.cpp
++++ b/projects/quilt.cpp/src/types/properties/workflow.cpp
+@@ -95,11 +95,12 @@ formatter_properties_repository workflow::
+ create_formatter_properties(const dynamic::repository& drp,
+     const dynamic::object& root_object,
+     const path_derivatives_repository& pdrp,
++    const locator& l,
+     const formatters::container& fc,
+     const yarn::model& m) const {
+ 
+     formatter_properties_repository_factory f;
+-    return f.make(drp, root_object, pdrp, registrar(), fc, m);
++    return f.make(drp, root_object, pdrp, registrar(), l, fc, m);
+ }
+ 
+ std::forward_list<std::shared_ptr<properties::formattable> >
+@@ -152,7 +153,7 @@ workflow::execute(const config::cpp_options& opts,
+     const auto ps(create_path_settings(drp, ro, fc));
+     const locator l(opts, m, ps);
+     const auto pdrp(create_path_derivatives_repository(opts, ps, l, m));
+-    auto fprp(create_formatter_properties(drp, ro, pdrp, fc, m));
++    auto fprp(create_formatter_properties(drp, ro, pdrp, l, fc, m));
+ 
+     const auto formattables(from_factory(opts, fpwf, ps, fprp, m));
+     BOOST_LOG_SEV(lg, debug) << "Formattables: " << formattables;
+diff --git a/projects/quilt.cpp/src/types/settings/inclusion_directives_settings_factory.cpp b/projects/quilt.cpp/src/types/settings/inclusion_directives_settings_factory.cpp
+index 464d93e..e356ba7 100644
+--- a/projects/quilt.cpp/src/types/settings/inclusion_directives_settings_factory.cpp
++++ b/projects/quilt.cpp/src/types/settings/inclusion_directives_settings_factory.cpp
+@@ -33,6 +33,7 @@ static logger lg(logger_factory(
+         "quilt.cpp.settings.inclusion_directives_settings_factory"));
+ 
+ const std::string empty_formatter_name("Formatter name is empty.");
++const std::string missing_formatter_name("Formatter name not found: ");
+ 
+ }
+ 
+@@ -150,4 +151,35 @@ inclusion_directives_settings inclusion_directives_settings_factory::make(
+     return r;
+ }
+ 
++bool inclusion_directives_settings_factory::
++make_top_level_inclusion_required(const dynamic::object& o) const {
++    return obtain_top_level_inclusion_required(o);
++}
++
++inclusion_directive_settings inclusion_directives_settings_factory::
++make_inclusion_directive_settings(const std::string& formatter_name,
++    const dynamic::object& o) const {
++
++    if (formatter_name.empty()) {
++        BOOST_LOG_SEV(lg, error) << empty_formatter_name;
++        BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
++    }
++
++    const auto i(field_definitions_.find(formatter_name));
++    if (i == field_definitions_.end()) {
++        BOOST_LOG_SEV(lg, error) << missing_formatter_name;
++        BOOST_THROW_EXCEPTION(building_error(missing_formatter_name));
++    }
++
++    const auto& fd(i->second);
++    inclusion_directive_settings r;
++    const auto req(obtain_inclusion_required_for_formatter(fd, o));
++    r.inclusion_required(req);
++
++    const auto directive(obtain_inclusion_directive_for_formatter(fd, o));
++    r.inclusion_directive(directive);
++
++    return r;
++}
++
+ } } } }
