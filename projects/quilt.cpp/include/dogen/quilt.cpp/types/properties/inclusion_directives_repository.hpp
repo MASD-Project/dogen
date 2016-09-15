@@ -28,8 +28,6 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/quilt.cpp/serialization/properties/inclusion_directives_repository_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,7 +43,7 @@ public:
     ~inclusion_directives_repository() = default;
 
 public:
-    explicit inclusion_directives_repository(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& by_name);
+    explicit inclusion_directives_repository(const std::unordered_map<std::string, std::unordered_map<std::string, std::string> >& by_name);
 
 private:
     template<typename Archive>
@@ -55,10 +53,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::properties::inclusion_directives_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& by_name() const;
-    std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& by_name();
-    void by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >& v);
-    void by_name(const std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> >&& v);
+    const std::unordered_map<std::string, std::unordered_map<std::string, std::string> >& by_name() const;
+    std::unordered_map<std::string, std::unordered_map<std::string, std::string> >& by_name();
+    void by_name(const std::unordered_map<std::string, std::unordered_map<std::string, std::string> >& v);
+    void by_name(const std::unordered_map<std::string, std::unordered_map<std::string, std::string> >&& v);
 
 public:
     bool operator==(const inclusion_directives_repository& rhs) const;
@@ -71,7 +69,7 @@ public:
     inclusion_directives_repository& operator=(inclusion_directives_repository other);
 
 private:
-    std::unordered_map<dogen::yarn::name, std::unordered_map<std::string, std::string> > by_name_;
+    std::unordered_map<std::string, std::unordered_map<std::string, std::string> > by_name_;
 };
 
 } } } }

@@ -29,7 +29,6 @@
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/quilt.cpp/serialization/properties/inclusion_directives_repository_ser.hpp"
 
 namespace boost {

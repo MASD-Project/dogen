@@ -66,7 +66,7 @@ private:
             return;
 
         auto& id_n(result_.by_name());
-        const auto pair(id_n.insert(std::make_pair(n, *id)));
+        const auto pair(id_n.insert(std::make_pair(n.id(), *id)));
         if (pair.second)
             return;
 

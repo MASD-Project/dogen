@@ -66,7 +66,7 @@ inclusion_dependencies_builder::get_inclusion_directive(
     const std::string& formatter_name) const {
 
     const auto& idn(directives_repository_.by_name());
-    const auto i(idn.find(n));
+    const auto i(idn.find(n.id()));
     if (i == idn.end())
         return boost::optional<std::string>();
 
