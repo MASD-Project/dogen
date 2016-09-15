@@ -198,7 +198,7 @@ index 2067e21..f66d238 100644
        <dia:attribute name="orth_orient">
          <dia:enum val="1"/>
 diff --git a/doc/agile/sprint_backlog_88.org b/doc/agile/sprint_backlog_88.org
-index b24ef7b..291471a 100644
+index b24ef7b..10ff4bd 100644
 --- a/doc/agile/sprint_backlog_88.org
 +++ b/doc/agile/sprint_backlog_88.org
 @@ -14,29 +14,29 @@
@@ -206,12 +206,12 @@ index b24ef7b..291471a 100644
  
  #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
 -#+CAPTION: Clock summary at [2016-09-15 Thu 12:01]
-+#+CAPTION: Clock summary at [2016-09-15 Thu 17:01]
++#+CAPTION: Clock summary at [2016-09-15 Thu 23:12]
  | <75>                                                                        |         |       |      |       |
  | Headline                                                                    | Time    |       |      |     % |
  |-----------------------------------------------------------------------------+---------+-------+------+-------|
 -| *Total time*                                                                | *21:36* |       |      | 100.0 |
-+| *Total time*                                                                | *26:44* |       |      | 100.0 |
++| *Total time*                                                                | *28:44* |       |      | 100.0 |
  |-----------------------------------------------------------------------------+---------+-------+------+-------|
 -| Stories                                                                     | 21:36   |       |      | 100.0 |
 -| Active                                                                      |         | 21:36 |      | 100.0 |
@@ -230,36 +230,37 @@ index b24ef7b..291471a 100644
 -| COMPLETED Split path factory from provider factory                          |         |       | 2:32 |  11.7 |
 -| STARTED Use providers when building inclusion directives                    |         |       | 0:24 |   1.9 |
 -| STARTED Remove formattable origin type                                      |         |       | 0:16 |   1.2 |
-+| Stories                                                                     | 26:44   |       |      | 100.0 |
-+| Active                                                                      |         | 26:44 |      | 100.0 |
-+| STARTED Sprint and product backlog grooming                                 |         |       | 2:13 |   8.3 |
++| Stories                                                                     | 28:44   |       |      | 100.0 |
++| Active                                                                      |         | 28:44 |      | 100.0 |
++| STARTED Sprint and product backlog grooming                                 |         |       | 2:13 |   7.7 |
 +| COMPLETED Fix chocolatey warning                                            |         |       | 0:08 |   0.5 |
-+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:27 |   1.7 |
-+| COMPLETED Analysis on current state of file path generation                 |         |       | 0:57 |   3.6 |
-+| CANCELLED Remove inclusion dependencies builder factory                     |         |       | 0:14 |   0.9 |
-+| COMPLETED Analysis on formatters, elements and extensibility                |         |       | 1:18 |   4.9 |
-+| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       | 1:12 |   4.5 |
-+| COMPLETED Investigate broken windows builds                                 |         |       | 0:32 |   2.0 |
-+| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       | 5:14 |  19.6 |
-+| COMPLETED Move file path generation to formatters                           |         |       | 1:58 |   7.4 |
-+| CANCELLED Path derivatives factory generates all possible includes          |         |       | 3:07 |  11.7 |
-+| COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       | 1:04 |   4.0 |
-+| COMPLETED Split path factory from provider factory                          |         |       | 2:32 |   9.5 |
-+| STARTED Use providers when building inclusion directives                    |         |       | 5:32 |  20.7 |
-+| STARTED Remove formattable origin type                                      |         |       | 0:16 |   1.0 |
++| COMPLETED Edit release notes for previous sprint                            |         |       | 0:27 |   1.6 |
++| COMPLETED Analysis on current state of file path generation                 |         |       | 0:57 |   3.3 |
++| CANCELLED Remove inclusion dependencies builder factory                     |         |       | 0:14 |   0.8 |
++| COMPLETED Analysis on formatters, elements and extensibility                |         |       | 1:18 |   4.5 |
++| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       | 1:12 |   4.2 |
++| COMPLETED Investigate broken windows builds                                 |         |       | 0:32 |   1.9 |
++| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       | 5:14 |  18.2 |
++| COMPLETED Move file path generation to formatters                           |         |       | 1:58 |   6.8 |
++| CANCELLED Path derivatives factory generates all possible includes          |         |       | 3:07 |  10.8 |
++| COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       | 1:04 |   3.7 |
++| COMPLETED Split path factory from provider factory                          |         |       | 2:32 |   8.8 |
++| STARTED Use providers when building inclusion directives                    |         |       | 7:32 |  26.2 |
++| STARTED Remove formattable origin type                                      |         |       | 0:16 |   0.9 |
  #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
  #+end:
  
-@@ -554,6 +554,8 @@ Tasks:
+@@ -554,6 +554,9 @@ Tasks:
    generation.
  
  *** STARTED Use providers when building inclusion directives          :story:
++    CLOCK: [2016-09-15 Thu 21:12]--[2016-09-15 Thu 23:12] =>  2:00
 +    CLOCK: [2016-09-15 Thu 13:20]--[2016-09-15 Thu 17:01] =>  3:41
 +    CLOCK: [2016-09-15 Thu 13:32]--[2016-09-15 Thu 14:59] =>  1:27
      CLOCK: [2016-09-15 Thu 11:36]--[2016-09-15 Thu 12:00] =>  0:24
  
  Its difficult to do incremental changes here. The inclusion directives
-@@ -573,6 +575,14 @@ factory needs to:
+@@ -573,6 +576,14 @@ factory needs to:
  Once we do this, all includes will break. We then need to go through
  all formatters and set the includes to the facets as required.
  
@@ -424,6 +425,32 @@ index 19403d0..4c09b4c 100644
          const formatters::container& fc,
          const yarn::model& m) const;
  };
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/inclusion_dependencies_factory.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/inclusion_dependencies_factory.hpp
+index e855a91..32e8a3a 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/inclusion_dependencies_factory.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/inclusion_dependencies_factory.hpp
+@@ -37,6 +37,7 @@
+ #include "dogen/quilt.cpp/types/properties/container.hpp"
+ #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
+ #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
++#include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
+ #include "dogen/quilt.cpp/types/properties/inclusion_directives_repository.hpp"
+ #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_builder_factory.hpp"
+ 
+@@ -107,6 +108,13 @@ public:
+     std::unordered_map<std::string, std::list<std::string> >
+     make(const fabric::master_header& mh) const;
+ 
++    /**
++     * @brief Makes inclusion dependencies for a forward declarations
++     * header.
++     */
++    std::unordered_map<std::string, std::list<std::string> >
++    make(const fabric::forward_declarations& fd) const;
++
+ private:
+     const inclusion_dependencies_builder_factory& factory_;
+     const container& container_;
 diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/inclusion_directives_repository_factory.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/inclusion_directives_repository_factory.hpp
 index 4c9979a..39ec73a 100644
 --- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/properties/inclusion_directives_repository_factory.hpp
@@ -517,6 +544,25 @@ index e7b6755..592619c 100644
  private:
      const std::unordered_map<std::string, field_definitions> field_definitions_;
      dynamic::field_definition inclusion_required_;
+diff --git a/projects/quilt.cpp/src/io/formatters/container_io.cpp b/projects/quilt.cpp/src/io/formatters/container_io.cpp
+index d3a7e76..411de42 100644
+--- a/projects/quilt.cpp/src/io/formatters/container_io.cpp
++++ b/projects/quilt.cpp/src/io/formatters/container_io.cpp
+@@ -74,12 +74,12 @@ std::ostream& operator<<(std::ostream& s, const container& c) {
+     to_stream(s, "exception_formatters", c.exception_formatters());
+     to_stream(s, "module_formatters", c.module_formatters());
+     to_stream(s, "visitor_formatters", c.visitor_formatters());
+-    to_stream(s, "forward_declarations_formatters",
+-        c.forward_declarations_formatters());
+     to_stream(s, "odb_options_formatters", c.odb_options_formatters());
+     to_stream(s, "cmakelists_formatters", c.cmakelists_formatters());
+     to_stream(s, "registrar_formatters", c.registrar_formatters());
+     to_stream(s, "master_header_formatters", c.master_header_formatters());
++    to_stream(s, "forward_declarations_formatters",
++        c.forward_declarations_formatters());
+     to_stream(s, "all_file_formatters", c.all_file_formatters());
+     to_stream(s, "all_internal_file_formatters",
+         c.all_internal_file_formatters());
 diff --git a/projects/quilt.cpp/src/types/formatters/hash/class_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/hash/class_header_formatter.cpp
 index 8a2bf3d..282970e 100644
 --- a/projects/quilt.cpp/src/types/formatters/hash/class_header_formatter.cpp
@@ -978,7 +1024,7 @@ index 2cfa03d..492e997 100644
      return enum_header_formatter::static_formatter_name();
  }
 diff --git a/projects/quilt.cpp/src/types/formatters/serialization/forward_declarations_formatter.cpp b/projects/quilt.cpp/src/types/formatters/serialization/forward_declarations_formatter.cpp
-index b4f0389..03520f6 100644
+index b4f0389..a11ffe5 100644
 --- a/projects/quilt.cpp/src/types/formatters/serialization/forward_declarations_formatter.cpp
 +++ b/projects/quilt.cpp/src/types/formatters/serialization/forward_declarations_formatter.cpp
 @@ -40,13 +40,14 @@ namespace serialization {
@@ -998,7 +1044,7 @@ index b4f0389..03520f6 100644
  
      properties::inclusion_path_support inclusion_path_support() const override;
  
-@@ -57,20 +58,23 @@ public:
+@@ -57,26 +58,29 @@ public:
          const yarn::name& n) const override;
  };
  
@@ -1025,6 +1071,13 @@ index b4f0389..03520f6 100644
  
      return builder.build();
  }
+ 
+ properties::inclusion_path_support provider::inclusion_path_support() const {
+-return properties::inclusion_path_support::regular;
++    return properties::inclusion_path_support::regular;
+ }
+ 
+ boost::filesystem::path
 diff --git a/projects/quilt.cpp/src/types/formatters/serialization/registrar_header_formatter.cpp b/projects/quilt.cpp/src/types/formatters/serialization/registrar_header_formatter.cpp
 index 6a8370a..e1bd1d0 100644
 --- a/projects/quilt.cpp/src/types/formatters/serialization/registrar_header_formatter.cpp
@@ -1577,6 +1630,28 @@ index 03d5bbb..9271790 100644
 +}
 +
  } } } }
+diff --git a/projects/quilt.cpp/src/types/properties/enablement_repository_factory.cpp b/projects/quilt.cpp/src/types/properties/enablement_repository_factory.cpp
+index 578f3b0..da13c51 100644
+--- a/projects/quilt.cpp/src/types/properties/enablement_repository_factory.cpp
++++ b/projects/quilt.cpp/src/types/properties/enablement_repository_factory.cpp
+@@ -30,6 +30,7 @@
+ #include "dogen/quilt.cpp/types/traits.hpp"
+ #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
+ #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
++#include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
+ #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
+ #include "dogen/quilt.cpp/io/properties/enablement_repository_io.hpp"
+ #include "dogen/quilt.cpp/io/properties/global_enablement_properties_io.hpp"
+@@ -80,6 +81,9 @@ public:
+     void visit(const dogen::yarn::visitor& v) override { generate(v); }
+     void visit(const fabric::registrar& rg) override { generate(rg); }
+     void visit(const fabric::master_header& mh) override { generate(mh); }
++    void visit(const fabric::forward_declarations& fd) override {
++        generate(fd);
++    }
+ 
+ public:
+     const enablement_repository& result() const { return result_; }
 diff --git a/projects/quilt.cpp/src/types/properties/formatter_properties_repository_factory.cpp b/projects/quilt.cpp/src/types/properties/formatter_properties_repository_factory.cpp
 index ecab2c3..0809146 100644
 --- a/projects/quilt.cpp/src/types/properties/formatter_properties_repository_factory.cpp
@@ -1630,8 +1705,72 @@ index 1bc28ca..2007df1 100644
      }
  
      const bool r(j->second);
+diff --git a/projects/quilt.cpp/src/types/properties/inclusion_dependencies_factory.cpp b/projects/quilt.cpp/src/types/properties/inclusion_dependencies_factory.cpp
+index 6b71b6d..66191bf 100644
+--- a/projects/quilt.cpp/src/types/properties/inclusion_dependencies_factory.cpp
++++ b/projects/quilt.cpp/src/types/properties/inclusion_dependencies_factory.cpp
+@@ -177,4 +177,10 @@ inclusion_dependencies_factory::make(const fabric::master_header& mh) const {
+     return generate(factory_, container_.master_header_providers(), mh);
+ }
+ 
++std::unordered_map<std::string, std::list<std::string> >
++inclusion_dependencies_factory::
++make(const fabric::forward_declarations& fd) const {
++    return generate(factory_, container_.forward_declarations_providers(), fd);
++}
++
+ } } } }
+diff --git a/projects/quilt.cpp/src/types/properties/inclusion_dependencies_repository_factory.cpp b/projects/quilt.cpp/src/types/properties/inclusion_dependencies_repository_factory.cpp
+index 917cd2a..6b6424e 100644
+--- a/projects/quilt.cpp/src/types/properties/inclusion_dependencies_repository_factory.cpp
++++ b/projects/quilt.cpp/src/types/properties/inclusion_dependencies_repository_factory.cpp
+@@ -22,6 +22,7 @@
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
+ #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
++#include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
+ #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
+ #include "dogen/quilt.cpp/types/properties/building_error.hpp"
+ #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_factory.hpp"
+@@ -62,12 +63,21 @@ private:
+         if (id.empty())
+             return;
+ 
+-        const auto pair(std::make_pair(n, id));
++        // FIXME: biggest hack ever
+         auto& deps(result_.by_name());
+-        const auto res(deps.insert(pair));
+-        if (!res.second) {
+-            BOOST_LOG_SEV(lg, error) << duplicate_name << n.id();
+-            BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
++        const auto i(deps.find(n));
++        if (i != deps.end()) {
++            for (const auto& d : id) {
++                i->second[d.first] = d.second;
++            }
++        } else {
++            const auto pair(std::make_pair(n, id));
++
++            const auto res(deps.insert(pair));
++            if (!res.second) {
++                BOOST_LOG_SEV(lg, error) << duplicate_name << n.id();
++                BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
++            }
+         }
+     }
+ 
+@@ -95,6 +105,9 @@ public:
+     void visit(const yarn::visitor& v) override { generate(v); }
+     void visit(const fabric::master_header& mh) override { generate(mh); }
+     void visit(const fabric::registrar& rg) override { generate(rg); }
++    void visit(const fabric::forward_declarations& fd) override {
++        generate(fd);
++    }
+ 
+ public:
+     const inclusion_dependencies_repository& result() const { return result_; }
 diff --git a/projects/quilt.cpp/src/types/properties/inclusion_directives_repository_factory.cpp b/projects/quilt.cpp/src/types/properties/inclusion_directives_repository_factory.cpp
-index 949ae6b..d8472f3 100644
+index 949ae6b..76f0efe 100644
 --- a/projects/quilt.cpp/src/types/properties/inclusion_directives_repository_factory.cpp
 +++ b/projects/quilt.cpp/src/types/properties/inclusion_directives_repository_factory.cpp
 @@ -41,7 +41,9 @@ using namespace dogen::utility::log;
@@ -1644,7 +1783,7 @@ index 949ae6b..d8472f3 100644
  
  }
  
-@@ -57,65 +59,267 @@ namespace {
+@@ -57,65 +59,306 @@ namespace {
   */
  class generator final : public fabric::element_visitor {
  public:
@@ -1657,12 +1796,6 @@ index 949ae6b..d8472f3 100644
 -    void generate(const dynamic::object& o, const yarn::name& n) {
 -        const auto id(factory_.make(o, n));
 -        if (!id)
--            return;
--
--        auto& id_n(result_.by_name());
--        const auto pair(id_n.insert(std::make_pair(n.id(), *id)));
--        if (pair.second)
--            return;
 +    /**
 +     * @brief Filter out providers that do not support inclusion
 +     * paths.
@@ -1671,25 +1804,16 @@ index 949ae6b..d8472f3 100644
 +     * interested in those which do.
 +     */
 +    container obtain_relevant_providers(const container& c) const;
- 
--        BOOST_LOG_SEV(lg, error) << duplicate_name << n.id();
--        BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
--    }
++
 +    /**
 +     * @brief Inserts the inclusion directive.
 +     */
 +    void insert_inclusion_directive(const std::string& id,
 +        const std::string& formatter_name, const std::string& directive);
- 
--private:
-     /**
--     * @brief Generates all of the inclusion dependencies for the
--     * formatters and name.
++
++    /**
 +     * @brief Converts a relative path to an inclusion directive.
-      */
--    template<typename ExtensibleAndNameable>
--    void generate(const ExtensibleAndNameable& e) {
--        generate(e.extensions(), e.name());
++     */
 +    std::string to_inclusion_directive(const boost::filesystem::path& p) const;
 +
 +private:
@@ -1697,6 +1821,10 @@ index 949ae6b..d8472f3 100644
 +    void generate(const std::forward_list<
 +        boost::shared_ptr<provider_interface<YarnEntity>>>& providers,
 +        const YarnEntity& e) {
++
++        const auto& n(e.name());
++        const auto id(n.id());
++
 +        /*
 +         * First we extract the configuration for the generation of
 +         * include directives for this element. Note that we generate
@@ -1712,17 +1840,37 @@ index 949ae6b..d8472f3 100644
 +         */
 +        const auto& o(e.extensions());
 +        const bool required(factory_.make_top_level_inclusion_required(o));
-+        if (!required)
-+            return;
-+
++        if (!required) {
++            BOOST_LOG_SEV(lg, debug) << "Inclusion not required for element.";
+             return;
++        }
+ 
+-        auto& id_n(result_.by_name());
+-        const auto pair(id_n.insert(std::make_pair(n.id(), *id)));
+-        if (pair.second)
++        if (providers.empty()) {
++            BOOST_LOG_SEV(lg, debug) << "No providers found.";
+             return;
++        }
+ 
+-        BOOST_LOG_SEV(lg, error) << duplicate_name << n.id();
+-        BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
+-    }
 +        /*
 +         * Now we start working at the formatter level.
 +         */
-+        const auto& n(e.name());
-+        const auto id(n.id());
 +        for (const auto& p : providers) {
 +            const auto fmt_n(p->formatter_name());
-+
++            BOOST_LOG_SEV(lg, debug) << "Formatter: " << fmt_n;
+ 
+-private:
+-    /**
+-     * @brief Generates all of the inclusion dependencies for the
+-     * formatters and name.
+-     */
+-    template<typename ExtensibleAndNameable>
+-    void generate(const ExtensibleAndNameable& e) {
+-        generate(e.extensions(), e.name());
 +            /*
 +             * Does the type require an inclusion directive for this
 +             * specific formatter? Some types require inclusion
@@ -1735,9 +1883,8 @@ index 949ae6b..d8472f3 100644
 +             */
 +            const auto s(factory_.make_inclusion_directive_settings(fmt_n, o));
 +            if (!s.inclusion_required()) {
-+                BOOST_LOG_SEV(lg, debug) << "Inclusion directive not required. "
-+                                         << "Type: " << id
-+                                         << " formatter: " << fmt_n;
++                BOOST_LOG_SEV(lg, debug) << "Inclusion directive not required "
++                                         << " for formatter: " << fmt_n;
 +                continue;
 +            }
 +
@@ -1758,6 +1905,8 @@ index 949ae6b..d8472f3 100644
 +                const auto path(p->provide_inclusion_path(locator_, n));
 +                directive = to_inclusion_directive(path);
 +            }
++
++            BOOST_LOG_SEV(lg, debug) << "Inclusion directive: " << directive;
 +            insert_inclusion_directive(id, fmt_n, directive);
 +
 +            /*
@@ -1769,8 +1918,10 @@ index 949ae6b..d8472f3 100644
 +             */
 +            const auto def(inclusion_path_support::is_default);
 +            const auto fct_n(p->facet_name());
-+            if (p->inclusion_path_support() == def)
++            if (p->inclusion_path_support() == def) {
++                BOOST_LOG_SEV(lg, debug) << "Inserting default for: " << fct_n;
 +                insert_inclusion_directive(id, fct_n, directive);
++            }
 +        }
      }
  
@@ -1786,42 +1937,62 @@ index 949ae6b..d8472f3 100644
 -    void visit(const fabric::registrar& rg) override { generate(rg); }
 -    void visit(const fabric::master_header& mh) override { generate(mh); }
 +    void visit(const yarn::module& m) override {
++        BOOST_LOG_SEV(lg, debug) << "Generating inclusion directive for: "
++                                 << m.name().id() << " (module)";
 +        generate(container_.module_providers(), m);
 +    }
 +
 +    void visit(const yarn::concept& c) override {
++        BOOST_LOG_SEV(lg, debug) << "Generating inclusion directive for: "
++                                 << c.name().id() << " (concept)";
 +        generate(container_.concept_providers(), c);
 +    }
 +
 +    void visit(const yarn::primitive& p) override {
++        BOOST_LOG_SEV(lg, debug) << "Generating inclusion directive for: "
++                                 << p.name().id() << " (primitive)";
 +        generate(container_.primitive_providers(), p);
 +    }
 +
 +    void visit(const yarn::enumeration& e) override {
++        BOOST_LOG_SEV(lg, debug) << "Generating inclusion directive for: "
++                                 << e.name().id() << " (enumeration)";
 +        generate(container_.enumeration_providers(), e);
 +    }
 +
 +    void visit(const yarn::object& o) override {
++        BOOST_LOG_SEV(lg, debug) << "Generating inclusion directive for: "
++                                 << o.name().id() << " (object)";
 +        generate(container_.object_providers(), o);
 +    }
 +
 +    void visit(const yarn::exception& e) override {
++        BOOST_LOG_SEV(lg, debug) << "Generating inclusion directive for: "
++                                 << e.name().id() << " (exception)";
 +        generate(container_.exception_providers(), e);
 +    }
 +
 +    void visit(const yarn::visitor& v) override {
++        BOOST_LOG_SEV(lg, debug) << "Generating inclusion directive for: "
++                                 << v.name().id() << " (visitor)";
 +        generate(container_.visitor_providers(), v);
 +    }
 +
 +    void visit(const fabric::registrar& rg) override {
++        BOOST_LOG_SEV(lg, debug) << "Generating inclusion directive for: "
++                                 << rg.name().id() << " (registrar)";
 +        generate(container_.registrar_providers(), rg);
 +    }
 +
 +    void visit(const fabric::master_header& mh) override {
++        BOOST_LOG_SEV(lg, debug) << "Generating inclusion directive for: "
++                                 << mh.name().id() << " (master header)";
 +        generate(container_.master_header_providers(), mh);
 +    }
 +
 +    void visit(const fabric::forward_declarations& fd) override {
++        BOOST_LOG_SEV(lg, debug) << "Generating inclusion directive for: "
++                                 << fd.name().id() << " (forward declarations)";
 +        generate(container_.forward_declarations_providers(), fd);
 +    }
  
@@ -1893,6 +2064,12 @@ index 949ae6b..d8472f3 100644
 +        if (p->inclusion_path_support() == ns)
 +            continue;
 +        r.master_header_providers().push_front(p);
++    }
++
++    for (auto p : c.forward_declarations_providers()) {
++        if (p->inclusion_path_support() == ns)
++            continue;
++        r.forward_declarations_providers().push_front(p);
 +    }
 +
 +    return r;
