@@ -41,6 +41,7 @@
 #include "dogen/quilt.cpp/types/settings/aspect_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/properties/locator.hpp"
 #include "dogen/quilt.cpp/types/properties/formattable.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
@@ -68,7 +69,7 @@ private:
      * @brief Creates the path settings.
      */
     std::unordered_map<std::string, settings::path_settings>
-    create_path_settings_activity(const dynamic::repository& drp,
+    create_path_settings(const dynamic::repository& drp,
         const dynamic::object& root_object,
         const formatters::container& fc) const;
 
@@ -91,6 +92,7 @@ private:
     path_derivatives_repository create_path_derivatives_repository(
         const config::cpp_options& opts,
         const std::unordered_map<std::string, settings::path_settings>& ps,
+        const locator& l,
         const yarn::model& m) const;
 
     /**
@@ -108,7 +110,7 @@ private:
      * the factory.
      */
     std::forward_list<std::shared_ptr<properties::formattable> >
-    from_factory_activity(const config::cpp_options& opts,
+    from_factory(const config::cpp_options& opts,
         const dogen::formatters::file_properties_workflow& fpwf,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         formatter_properties_repository& fprp,

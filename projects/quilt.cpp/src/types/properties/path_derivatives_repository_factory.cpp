@@ -55,7 +55,8 @@ namespace {
  */
 class generator final : public fabric::element_visitor {
 public:
-    generator(const container& c, const path_derivatives_factory& f)
+    generator(const container& c, const path_derivatives_factory& f,
+        const locator& /*l*/)
         : container_(c), factory_(f) { }
 
 private:
@@ -145,11 +146,11 @@ private:
 path_derivatives_repository path_derivatives_repository_factory::make(
     const config::cpp_options& opts,
     const std::unordered_map<std::string, settings::path_settings>& ps,
-    const registrar& rg, const yarn::model& m) const {
+    const registrar& rg, const locator& l, const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Generating path derivatives repository.";
     const path_derivatives_factory f(opts, m, ps);
-    generator g(rg.container(), f);
+    generator g(rg.container(), f, l);
     for (const auto& ptr : m.elements()) {
         const auto& e(*ptr);
         e.accept(g);

@@ -57,7 +57,7 @@ properties::registrar& workflow::registrar() {
 }
 
 std::unordered_map<std::string, settings::path_settings>
-workflow::create_path_settings_activity(const dynamic::repository& drp,
+workflow::create_path_settings(const dynamic::repository& drp,
     const dynamic::object& root_object,
     const formatters::container& fc) const {
 
@@ -85,9 +85,10 @@ workflow::create_aspect_settings_repository(
 path_derivatives_repository workflow::
 create_path_derivatives_repository(const config::cpp_options& opts,
     const std::unordered_map<std::string, settings::path_settings>& ps,
+    const locator& l,
     const yarn::model& m) const {
     path_derivatives_repository_factory f;
-    return f.make(opts, ps, registrar(), m);
+    return f.make(opts, ps, registrar(), l, m);
 }
 
 formatter_properties_repository workflow::
@@ -102,7 +103,7 @@ create_formatter_properties(const dynamic::repository& drp,
 }
 
 std::forward_list<std::shared_ptr<properties::formattable> >
-workflow::from_factory_activity(const config::cpp_options& opts,
+workflow::from_factory(const config::cpp_options& opts,
     const dogen::formatters::file_properties_workflow& fpwf,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     formatter_properties_repository& fprp,
@@ -148,11 +149,12 @@ workflow::execute(const config::cpp_options& opts,
     BOOST_LOG_SEV(lg, debug) << "Started creating properties.";
 
     const auto& ro(root_object);
-    const auto ps(create_path_settings_activity(drp, ro, fc));
-    const auto pdrp(create_path_derivatives_repository(opts, ps, m));
+    const auto ps(create_path_settings(drp, ro, fc));
+    const locator l(opts, m, ps);
+    const auto pdrp(create_path_derivatives_repository(opts, ps, l, m));
     auto fprp(create_formatter_properties(drp, ro, pdrp, fc, m));
 
-    const auto formattables(from_factory_activity(opts, fpwf, ps, fprp, m));
+    const auto formattables(from_factory(opts, fpwf, ps, fprp, m));
     BOOST_LOG_SEV(lg, debug) << "Formattables: " << formattables;
     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
 
