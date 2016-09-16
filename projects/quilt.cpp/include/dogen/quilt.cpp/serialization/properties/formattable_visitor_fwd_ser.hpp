@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/quilt.cpp/types/properties/formattable_visitor_fwd.hpp"
+
 namespace boost {
 namespace serialization {
 

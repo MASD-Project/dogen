@@ -53,6 +53,7 @@ namespace {
 
 class provider final : public properties::provider_interface<yarn::object> {
 public:
+    std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
@@ -67,6 +68,10 @@ public:
     boost::filesystem::path provide_full_path(const properties::locator& l,
         const yarn::name& n) const override;
 };
+
+std::string provider::facet_name() const {
+    return traits::facet_name();
+}
 
 std::string provider::formatter_name() const {
     return class_implementation_formatter::static_formatter_name();
@@ -106,10 +111,9 @@ std::list<std::string> provider::provide_inclusion_dependencies(
     if (si.has_variant)
         builder.add(inclusion_constants::boost::visitor::apply_visitor());
 
-    const auto io_fn(formatters::io::traits::class_header_formatter_name());
-    builder.add(o.transparent_associations(), io_fn);
-    builder.add(o.opaque_associations(), io_fn);
-    builder.add(o.parent(), io_fn);
+    builder.add(o.transparent_associations(), io_fctn);
+    builder.add(o.opaque_associations(), io_fctn);
+    builder.add(o.parent(), io_fctn);
 
     return builder.build();
 }

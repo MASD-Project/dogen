@@ -95,11 +95,12 @@ formatter_properties_repository workflow::
 create_formatter_properties(const dynamic::repository& drp,
     const dynamic::object& root_object,
     const path_derivatives_repository& pdrp,
+    const locator& l,
     const formatters::container& fc,
     const yarn::model& m) const {
 
     formatter_properties_repository_factory f;
-    return f.make(drp, root_object, pdrp, registrar(), fc, m);
+    return f.make(drp, root_object, pdrp, registrar(), l, fc, m);
 }
 
 std::forward_list<std::shared_ptr<properties::formattable> >
@@ -152,7 +153,7 @@ workflow::execute(const config::cpp_options& opts,
     const auto ps(create_path_settings(drp, ro, fc));
     const locator l(opts, m, ps);
     const auto pdrp(create_path_derivatives_repository(opts, ps, l, m));
-    auto fprp(create_formatter_properties(drp, ro, pdrp, fc, m));
+    auto fprp(create_formatter_properties(drp, ro, pdrp, l, fc, m));
 
     const auto formattables(from_factory(opts, fpwf, ps, fprp, m));
     BOOST_LOG_SEV(lg, debug) << "Formattables: " << formattables;

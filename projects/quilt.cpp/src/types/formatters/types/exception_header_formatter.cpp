@@ -41,6 +41,7 @@ namespace {
 class provider final :
         public properties::provider_interface<yarn::exception> {
 public:
+    std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
@@ -55,6 +56,10 @@ public:
     boost::filesystem::path provide_full_path(const properties::locator& l,
         const yarn::name& n) const override;
 };
+
+std::string provider::facet_name() const {
+    return traits::facet_name();
+}
 
 std::string provider::formatter_name() const {
     return exception_header_formatter::static_formatter_name();

@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/test_models/trivial_inheritance/types/base_visitor_fwd.hpp"
+
 namespace boost {
 namespace serialization {
 

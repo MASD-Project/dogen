@@ -58,37 +58,55 @@ const properties::container& registrar::container() const {
 void registrar::register_provider(
     boost::shared_ptr<provider_interface<yarn::object>> p) {
     validate(p);
-    container_.object_providers_.push_front(p);
+    container_.object_providers().push_front(p);
 }
 
 void registrar::register_provider(
     boost::shared_ptr<provider_interface<yarn::enumeration>> p) {
     validate(p);
-    container_.enumeration_providers_.push_front(p);
+    container_.enumeration_providers().push_front(p);
 }
 
 void registrar::register_provider(
     boost::shared_ptr<provider_interface<yarn::exception>> p) {
     validate(p);
-    container_.exception_providers_.push_front(p);
+    container_.exception_providers().push_front(p);
 }
 
 void registrar::register_provider(
     boost::shared_ptr<provider_interface<yarn::visitor>> p) {
     validate(p);
-    container_.visitor_providers_.push_front(p);
+    container_.visitor_providers().push_front(p);
+}
+
+void registrar::register_provider(
+    boost::shared_ptr<provider_interface<yarn::primitive>> p) {
+    validate(p);
+    container_.primitive_providers().push_front(p);
+}
+
+void registrar::register_provider(
+    boost::shared_ptr<provider_interface<yarn::module>> p) {
+    validate(p);
+    container_.module_providers().push_front(p);
 }
 
 void registrar::register_provider(
     boost::shared_ptr<provider_interface<fabric::registrar>> p) {
     validate(p);
-    container_.registrar_providers_.push_front(p);
+    container_.registrar_providers().push_front(p);
 }
 
 void registrar::register_provider(
     boost::shared_ptr<provider_interface<fabric::master_header>> p) {
     validate(p);
-    container_.master_header_providers_.push_front(p);
+    container_.master_header_providers().push_front(p);
+}
+
+void registrar::register_provider(
+    boost::shared_ptr<provider_interface<fabric::forward_declarations>> p) {
+    validate(p);
+    container_.forward_declarations_providers().push_front(p);
 }
 
 } } } }

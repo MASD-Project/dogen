@@ -54,6 +54,12 @@ public:
 
 public:
     /**
+     * @brief Facet of the formatter for which we are providing the
+     * dependencies.
+     */
+    virtual std::string facet_name() const = 0;
+
+    /**
      * @brief Name of the formatter for which we are providing the
      * dependencies.
      */

@@ -110,6 +110,12 @@ public:
      */
     inclusion_directives_settings make(const dynamic::object& o) const;
 
+
+    bool make_top_level_inclusion_required(const dynamic::object& o) const;
+
+    inclusion_directive_settings make_inclusion_directive_settings(
+        const std::string& formatter_name, const dynamic::object& o) const;
+
 private:
     const std::unordered_map<std::string, field_definitions> field_definitions_;
     dynamic::field_definition inclusion_required_;

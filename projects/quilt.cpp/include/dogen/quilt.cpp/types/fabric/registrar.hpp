@@ -30,7 +30,6 @@
 #include <algorithm>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/element_visitor_fwd.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/registrar_fwd_ser.hpp"
 
 namespace dogen {

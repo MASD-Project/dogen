@@ -38,9 +38,62 @@ namespace types {
 
 namespace {
 
+class provider_hack final :
+        public properties::provider_interface<yarn::primitive> {
+public:
+    std::string facet_name() const override;
+    std::string formatter_name() const override;
+
+    std::list<std::string> provide_inclusion_dependencies(
+        const properties::inclusion_dependencies_builder_factory& f,
+        const yarn::primitive& p) const override;
+
+    properties::inclusion_path_support inclusion_path_support() const override;
+
+    boost::filesystem::path provide_inclusion_path(const properties::locator& l,
+        const yarn::name& n) const override;
+
+    boost::filesystem::path provide_full_path(const properties::locator& l,
+        const yarn::name& n) const override;
+};
+
+std::string provider_hack::facet_name() const {
+    return traits::facet_name();
+}
+
+std::string provider_hack::formatter_name() const {
+    return class_header_formatter::static_formatter_name();
+}
+
+std::list<std::string> provider_hack::provide_inclusion_dependencies(
+    const properties::inclusion_dependencies_builder_factory& f,
+    const yarn::primitive& /*p*/) const {
+
+    auto builder(f.make());
+    return builder.build();
+}
+
+properties::inclusion_path_support provider_hack::
+inclusion_path_support() const {
+    return properties::inclusion_path_support::is_default;
+}
+
+boost::filesystem::path
+provider_hack::provide_inclusion_path(const properties::locator& l,
+    const yarn::name& n) const {
+    return l.make_inclusion_path_for_cpp_header(n, formatter_name());
+}
+
+boost::filesystem::path
+provider_hack::provide_full_path(const properties::locator& l,
+    const yarn::name& n) const {
+    return l.make_full_path_for_cpp_header(n, formatter_name());
+}
+
 class provider final :
         public properties::provider_interface<yarn::object> {
 public:
+    std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
@@ -55,6 +108,10 @@ public:
     boost::filesystem::path provide_full_path(const properties::locator& l,
         const yarn::name& n) const override;
 };
+
+std::string provider::facet_name() const {
+    return traits::facet_name();
+}
 
 std::string provider::formatter_name() const {
     return class_header_formatter::static_formatter_name();
@@ -84,13 +141,12 @@ std::list<std::string> provider::provide_inclusion_dependencies(
 
     const auto self_fn(class_header_formatter::static_formatter_name());
     const auto fwd_fn(traits::forward_declarations_formatter_name());
-    builder.add(o.transparent_associations(), self_fn);
+    builder.add(o.transparent_associations(), traits::facet_name());
     builder.add(o.opaque_associations(), fwd_fn);
     builder.add(o.parent(), self_fn);
 
     using hash = formatters::hash::traits;
-    const auto hash_fn(hash::traits::class_header_formatter_name());
-    builder.add(o.associative_container_keys(), hash_fn);
+    builder.add(o.associative_container_keys(), hash::traits::facet_name());
 
     if (o.is_visitation_root() || o.is_visitation_leaf()) {
         /*
@@ -151,6 +207,7 @@ class_header_formatter::formattable_origin_type() const {
 void class_header_formatter::register_inclusion_dependencies_provider(
     properties::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
+    rg.register_provider(boost::make_shared<provider_hack>());
 }
 
 dogen::formatters::file class_header_formatter::

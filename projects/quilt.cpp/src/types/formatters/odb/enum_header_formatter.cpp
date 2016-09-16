@@ -39,6 +39,7 @@ namespace {
 class provider final :
         public properties::provider_interface<yarn::enumeration> {
 public:
+    std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
@@ -54,6 +55,10 @@ public:
         const yarn::name& n) const override;
 };
 
+std::string provider::facet_name() const {
+    return traits::facet_name();
+}
+
 std::string provider::formatter_name() const {
     return enum_header_formatter::static_formatter_name();
 }
@@ -63,12 +68,12 @@ std::list<std::string> provider::provide_inclusion_dependencies(
     const yarn::enumeration& e) const {
 
     auto builder(f.make());
-    builder.add(e.name(), types::traits::class_header_formatter_name());
+    builder.add(e.name(), types::traits::enum_header_formatter_name());
     return builder.build();
 }
 
 properties::inclusion_path_support provider::inclusion_path_support() const {
-    return properties::inclusion_path_support::regular;
+    return properties::inclusion_path_support::is_default;
 }
 
 boost::filesystem::path

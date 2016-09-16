@@ -74,12 +74,12 @@ std::ostream& operator<<(std::ostream& s, const container& c) {
     to_stream(s, "exception_formatters", c.exception_formatters());
     to_stream(s, "module_formatters", c.module_formatters());
     to_stream(s, "visitor_formatters", c.visitor_formatters());
-    to_stream(s, "forward_declarations_formatters",
-        c.forward_declarations_formatters());
     to_stream(s, "odb_options_formatters", c.odb_options_formatters());
     to_stream(s, "cmakelists_formatters", c.cmakelists_formatters());
     to_stream(s, "registrar_formatters", c.registrar_formatters());
     to_stream(s, "master_header_formatters", c.master_header_formatters());
+    to_stream(s, "forward_declarations_formatters",
+        c.forward_declarations_formatters());
     to_stream(s, "all_file_formatters", c.all_file_formatters());
     to_stream(s, "all_internal_file_formatters",
         c.all_internal_file_formatters());

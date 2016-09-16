@@ -177,4 +177,10 @@ inclusion_dependencies_factory::make(const fabric::master_header& mh) const {
     return generate(factory_, container_.master_header_providers(), mh);
 }
 
+std::unordered_map<std::string, std::list<std::string> >
+inclusion_dependencies_factory::
+make(const fabric::forward_declarations& fd) const {
+    return generate(factory_, container_.forward_declarations_providers(), fd);
+}
+
 } } } }

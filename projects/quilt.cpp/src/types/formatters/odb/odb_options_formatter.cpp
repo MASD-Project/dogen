@@ -51,6 +51,7 @@ namespace {
 
 class provider final : public properties::provider_interface<yarn::object> {
 public:
+    std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
@@ -66,16 +67,19 @@ public:
         const yarn::name& n) const override;
 };
 
+std::string provider::facet_name() const {
+    return traits::facet_name();
+}
+
 std::string provider::formatter_name() const {
     return odb_options_formatter::static_formatter_name();
 }
 
 std::list<std::string> provider::provide_inclusion_dependencies(
     const properties::inclusion_dependencies_builder_factory& f,
-    const yarn::object& o) const {
+    const yarn::object& /*o*/) const {
 
     auto builder(f.make());
-    builder.add(o.name(), types::traits::class_header_formatter_name());
     return builder.build();
 }
 

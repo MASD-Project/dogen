@@ -36,6 +36,7 @@
 #include "dogen/yarn/types/visitor.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
+#include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
 #include "dogen/quilt.cpp/types/properties/provider_interface.hpp"
 
 namespace dogen {
@@ -43,49 +44,91 @@ namespace quilt {
 namespace cpp {
 namespace properties {
 
-class registrar;
-
 class container final {
-private:
-    friend class registrar;
-
 public:
     const std::forward_list<
         boost::shared_ptr<provider_interface<yarn::module>>
     >& module_providers() const;
 
+    std::forward_list<
+        boost::shared_ptr<provider_interface<yarn::module>>
+    >& module_providers();
+
     const std::forward_list<
         boost::shared_ptr<provider_interface<yarn::concept>>
     >& concept_providers() const;
+
+    std::forward_list<
+        boost::shared_ptr<provider_interface<yarn::concept>>
+    >& concept_providers();
 
     const std::forward_list<
         boost::shared_ptr<provider_interface<yarn::primitive>>
     >& primitive_providers() const;
 
+    std::forward_list<
+        boost::shared_ptr<provider_interface<yarn::primitive>>
+    >& primitive_providers();
+
     const std::forward_list<
         boost::shared_ptr<provider_interface<yarn::object>>
     >& object_providers() const;
+
+    std::forward_list<
+        boost::shared_ptr<provider_interface<yarn::object>>
+    >& object_providers();
 
     const std::forward_list<
         boost::shared_ptr<provider_interface<yarn::enumeration>>
     >& enumeration_providers() const;
 
+    std::forward_list<
+        boost::shared_ptr<provider_interface<yarn::enumeration>>
+    >& enumeration_providers();
+
     const std::forward_list<
         boost::shared_ptr<provider_interface<yarn::exception>>
     >& exception_providers() const;
+
+    std::forward_list<
+        boost::shared_ptr<provider_interface<yarn::exception>>
+    >& exception_providers();
 
     const std::forward_list<
         boost::shared_ptr<provider_interface<yarn::visitor>>
     >& visitor_providers() const;
 
+    std::forward_list<
+        boost::shared_ptr<provider_interface<yarn::visitor>>
+    >& visitor_providers();
+
     const std::forward_list<
         boost::shared_ptr<provider_interface<fabric::registrar>>
     >& registrar_providers() const;
+
+    std::forward_list<
+        boost::shared_ptr<provider_interface<fabric::registrar>>
+    >& registrar_providers();
 
     const std::forward_list<
         boost::shared_ptr<provider_interface<fabric::master_header>>
     >&
     master_header_providers() const;
+
+    std::forward_list<
+        boost::shared_ptr<provider_interface<fabric::master_header>>
+    >&
+    master_header_providers();
+
+    const std::forward_list<
+        boost::shared_ptr<provider_interface<fabric::forward_declarations>>
+        >&
+    forward_declarations_providers() const;
+
+    std::forward_list<
+        boost::shared_ptr<provider_interface<fabric::forward_declarations>>
+        >&
+    forward_declarations_providers();
 
 private:
     std::forward_list<boost::shared_ptr<provider_interface<yarn::module>>>
@@ -107,6 +150,9 @@ private:
     std::forward_list<
         boost::shared_ptr<provider_interface<fabric::master_header>>>
     master_header_providers_;
+    std::forward_list<
+        boost::shared_ptr<provider_interface<fabric::forward_declarations>>>
+    forward_declarations_providers_;
 };
 
 } } } }

@@ -53,6 +53,7 @@ namespace {
 class provider final :
         public properties::provider_interface<yarn::object> {
 public:
+    std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
@@ -67,6 +68,10 @@ public:
     boost::filesystem::path provide_full_path(const properties::locator& l,
         const yarn::name& n) const override;
 };
+
+std::string provider::facet_name() const {
+    return traits::facet_name();
+}
 
 std::string provider::formatter_name() const {
     return class_implementation_formatter::static_formatter_name();
@@ -99,9 +104,9 @@ std::list<std::string> provider::provide_inclusion_dependencies(
     if (si.has_std_string)
         builder.add(inclusion_constants::boost::algorithm::string());
 
-    builder.add(o.transparent_associations(), io_fn);
-    builder.add(o.opaque_associations(), io_fn);
-    builder.add(o.parent(), io_fn);
+    builder.add(o.transparent_associations(), io::traits::facet_name());
+    builder.add(o.opaque_associations(), io::traits::facet_name());
+    builder.add(o.parent(), io::traits::facet_name());
 
     if (o.is_visitation_leaf()) {
         /*
@@ -109,10 +114,11 @@ std::list<std::string> provider::provide_inclusion_dependencies(
          * don't bother including the base if we are already including
          * the derived visitor.
          */
+        const auto v_fn(traits::visitor_header_formatter_name());
         if (o.derived_visitor())
-            builder.add(*o.derived_visitor(), ch_fn);
+            builder.add(*o.derived_visitor(), v_fn);
         else
-            builder.add(*o.base_visitor(), ch_fn);
+            builder.add(*o.base_visitor(), v_fn);
     }
 
     return builder.build();

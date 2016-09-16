@@ -45,10 +45,10 @@ inclusion_directives_repository formatter_properties_repository_factory::
 create_inclusion_directives_repository(
     const dynamic::repository& srp,
     const formatters::container& fc,
-    const path_derivatives_repository& pdrp,
+    const registrar& rg, const locator& l,
     const yarn::model& m) const {
     inclusion_directives_repository_factory f;
-    return f.make(srp, fc, pdrp, m);
+    return f.make(srp, fc, rg, l, m);
 }
 
 inclusion_dependencies_repository formatter_properties_repository_factory::
@@ -107,11 +107,12 @@ formatter_properties_repository_factory::create_formatter_properties(
 
 formatter_properties_repository formatter_properties_repository_factory::
 make(const dynamic::repository& srp, const dynamic::object& root_object,
-    const path_derivatives_repository& pdrp, const registrar& rg,
+    const path_derivatives_repository& pdrp,
+    const registrar& rg, const locator& l,
     const formatters::container& fc, const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Building formatter properties repository.";
-    const auto idrp(create_inclusion_directives_repository(srp, fc, pdrp, m));
+    const auto idrp(create_inclusion_directives_repository(srp, fc, rg, l, m));
     const auto erp(create_enablement_repository(srp, root_object, fc, m));
 
     const auto pc(rg.container());

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
@@ -31,6 +32,60 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 namespace types {
+
+namespace {
+
+class provider final :
+        public properties::provider_interface<yarn::module> {
+public:
+    std::string facet_name() const override;
+    std::string formatter_name() const override;
+
+    std::list<std::string> provide_inclusion_dependencies(
+        const properties::inclusion_dependencies_builder_factory& f,
+        const yarn::module& m) const override;
+
+    properties::inclusion_path_support inclusion_path_support() const override;
+
+    boost::filesystem::path provide_inclusion_path(const properties::locator& l,
+        const yarn::name& n) const override;
+
+    boost::filesystem::path provide_full_path(const properties::locator& l,
+        const yarn::name& n) const override;
+};
+
+std::string provider::facet_name() const {
+    return traits::facet_name();
+}
+
+std::string provider::formatter_name() const {
+    return namespace_header_formatter::static_formatter_name();
+}
+
+std::list<std::string> provider::provide_inclusion_dependencies(
+    const properties::inclusion_dependencies_builder_factory& f,
+    const yarn::module& /*m*/) const {
+    auto builder(f.make());
+    return builder.build();
+}
+
+properties::inclusion_path_support provider::inclusion_path_support() const {
+    return properties::inclusion_path_support::is_default;
+}
+
+boost::filesystem::path
+provider::provide_inclusion_path(const properties::locator& l,
+    const yarn::name& n) const {
+    return l.make_inclusion_path_for_cpp_header(n, formatter_name());
+}
+
+boost::filesystem::path
+provider::provide_full_path(const properties::locator& l,
+    const yarn::name& n) const {
+    return l.make_full_path_for_cpp_header(n, formatter_name());
+}
+
+}
 
 std::string namespace_header_formatter::static_formatter_name() {
     return traits::namespace_header_formatter_name();
@@ -60,7 +115,9 @@ namespace_header_formatter::formattable_origin_type() const {
 }
 
 void namespace_header_formatter::register_inclusion_dependencies_provider(
-    properties::registrar& /*rg*/) const {}
+    properties::registrar& rg) const {
+    rg.register_provider(boost::make_shared<provider>());
+}
 
 dogen::formatters::file namespace_header_formatter::
 format(const context& ctx, const yarn::module& m) const {

@@ -133,6 +133,8 @@ public:
     }
 
     void operator()(const yarn::object& o) {
+        // FIXME: ignore services?
+        // FIXME: o.object_type() != yarn::object_types::user_defined_service
         if (o.generation_type() != yarn::generation_types::no_generation)
             process_element(container_.object_formatters, o);
     }

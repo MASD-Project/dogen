@@ -41,6 +41,7 @@ namespace {
 class provider final :
         public properties::provider_interface<yarn::visitor> {
 public:
+    std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
@@ -56,6 +57,10 @@ public:
         const yarn::name& n) const override;
 };
 
+std::string provider::facet_name() const {
+    return traits::facet_name();
+}
+
 std::string provider::formatter_name() const {
     return visitor_header_formatter::static_formatter_name();
 }
@@ -69,8 +74,8 @@ std::list<std::string> provider::provide_inclusion_dependencies(
     builder.add(v.visits(), fwd_fn);
 
     if (v.parent()) {
-        const auto ch_fn(traits::class_header_formatter_name());
-        builder.add(*v.parent(), ch_fn);
+        const auto v_fn(traits::visitor_header_formatter_name());
+        builder.add(*v.parent(), v_fn);
     }
     return builder.build();
 }

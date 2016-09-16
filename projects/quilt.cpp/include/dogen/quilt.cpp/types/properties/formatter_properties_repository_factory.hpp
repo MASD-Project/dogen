@@ -36,6 +36,7 @@
 #include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/properties/registrar.hpp"
+#include "dogen/quilt.cpp/types/properties/locator.hpp"
 #include "dogen/quilt.cpp/types/properties/enablement_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/formatter_properties_repository.hpp"
@@ -67,7 +68,7 @@ private:
     inclusion_directives_repository create_inclusion_directives_repository(
         const dynamic::repository& srp,
         const formatters::container& fc,
-        const path_derivatives_repository& pdrp,
+        const registrar& rg, const locator& l,
         const yarn::model& m) const;
 
     /**
@@ -106,7 +107,7 @@ public:
         const dynamic::repository& srp,
         const dynamic::object& root_object,
         const path_derivatives_repository& pdrp,
-        const registrar& rg,
+        const registrar& rg, const locator& l,
         const formatters::container& fc,
         const yarn::model& m) const;
 };

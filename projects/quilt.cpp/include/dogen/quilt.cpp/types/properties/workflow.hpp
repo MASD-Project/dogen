@@ -102,6 +102,7 @@ private:
     create_formatter_properties(const dynamic::repository& drp,
         const dynamic::object& root_object,
         const path_derivatives_repository& pdrp,
+        const locator& l,
         const formatters::container& fc,
         const yarn::model& m) const;
 

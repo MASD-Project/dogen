@@ -20,8 +20,11 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
+#include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/properties/building_error.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_factory.hpp"
@@ -62,12 +65,23 @@ private:
         if (id.empty())
             return;
 
-        const auto pair(std::make_pair(n, id));
+        // FIXME: biggest hack ever
         auto& deps(result_.by_name());
-        const auto res(deps.insert(pair));
-        if (!res.second) {
-            BOOST_LOG_SEV(lg, error) << duplicate_name << n.id();
-            BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
+        const auto i(deps.find(n));
+        if (i != deps.end()) {
+            BOOST_LOG_SEV(lg, error) << "before: " << i->second;
+            BOOST_LOG_SEV(lg, error) << "new: " << id;
+            for (const auto& d : id) {
+                i->second[d.first] = d.second;
+            }
+        } else {
+            const auto pair(std::make_pair(n, id));
+
+            const auto res(deps.insert(pair));
+            if (!res.second) {
+                BOOST_LOG_SEV(lg, error) << duplicate_name << n.id();
+                BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
+            }
         }
     }
 
@@ -95,6 +109,9 @@ public:
     void visit(const yarn::visitor& v) override { generate(v); }
     void visit(const fabric::master_header& mh) override { generate(mh); }
     void visit(const fabric::registrar& rg) override { generate(rg); }
+    void visit(const fabric::forward_declarations& fd) override {
+        generate(fd);
+    }
 
 public:
     const inclusion_dependencies_repository& result() const { return result_; }

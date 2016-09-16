@@ -33,6 +33,7 @@ static logger lg(logger_factory(
         "quilt.cpp.settings.inclusion_directives_settings_factory"));
 
 const std::string empty_formatter_name("Formatter name is empty.");
+const std::string missing_formatter_name("Formatter name not found: ");
 
 }
 
@@ -147,6 +148,37 @@ inclusion_directives_settings inclusion_directives_settings_factory::make(
         const auto id_pair(std::make_pair(fn, st));
         r.inclusion_directive_settings().insert(id_pair);
     }
+    return r;
+}
+
+bool inclusion_directives_settings_factory::
+make_top_level_inclusion_required(const dynamic::object& o) const {
+    return obtain_top_level_inclusion_required(o);
+}
+
+inclusion_directive_settings inclusion_directives_settings_factory::
+make_inclusion_directive_settings(const std::string& formatter_name,
+    const dynamic::object& o) const {
+
+    if (formatter_name.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_formatter_name;
+        BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
+    }
+
+    const auto i(field_definitions_.find(formatter_name));
+    if (i == field_definitions_.end()) {
+        BOOST_LOG_SEV(lg, error) << missing_formatter_name;
+        BOOST_THROW_EXCEPTION(building_error(missing_formatter_name));
+    }
+
+    const auto& fd(i->second);
+    inclusion_directive_settings r;
+    const auto req(obtain_inclusion_required_for_formatter(fd, o));
+    r.inclusion_required(req);
+
+    const auto directive(obtain_inclusion_directive_for_formatter(fd, o));
+    r.inclusion_directive(directive);
+
     return r;
 }
 

@@ -32,6 +32,7 @@
 #include "dogen/yarn/types/visitor.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
+#include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
 #include "dogen/quilt.cpp/types/properties/provider_interface.hpp"
 #include "dogen/quilt.cpp/types/properties/container.hpp"
 
@@ -58,10 +59,19 @@ public:
         boost::shared_ptr<provider_interface<yarn::visitor>> p);
 
     void register_provider(
+        boost::shared_ptr<provider_interface<yarn::module>> p);
+
+    void register_provider(
+        boost::shared_ptr<provider_interface<yarn::primitive>> p);
+
+    void register_provider(
         boost::shared_ptr<provider_interface<fabric::registrar>> p);
 
     void register_provider(
         boost::shared_ptr<provider_interface<fabric::master_header>> p);
+
+    void register_provider(
+        boost::shared_ptr<provider_interface<fabric::forward_declarations>> p);
 
 private:
     properties::container container_;

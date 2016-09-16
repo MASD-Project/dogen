@@ -38,6 +38,7 @@ public:
     provider(const std::string& facet_name, const std::string& formatter_name);
 
 public:
+    std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
@@ -92,6 +93,10 @@ boost::filesystem::path
 provider::provide_full_path(const properties::locator& l,
     const yarn::name& n) const {
     return l.make_full_path_for_cpp_header(n, formatter_name());
+}
+
+std::string provider::facet_name() const {
+    return facet_name_;
 }
 
 std::string provider::formatter_name() const {

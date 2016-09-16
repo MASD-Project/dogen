@@ -30,6 +30,7 @@
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
+#include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/io/properties/enablement_repository_io.hpp"
 #include "dogen/quilt.cpp/io/properties/global_enablement_properties_io.hpp"
@@ -62,7 +63,21 @@ private:
     template<typename YarnEntity>
     void generate(const YarnEntity& e, const bool types_only = false) {
         const auto o(e.extensions());
-        result_.by_name()[e.name()] = factory_.make(o, types_only);
+        // FIXME: massive hack
+        const auto er(factory_.make(o, types_only));
+        const auto i(result_.by_name().find(e.name()));
+        if (i != result_.by_name().end()) {
+            for (auto& pair : i->second) {
+                bool new_value(pair.second);
+                const auto j(er.find(pair.first));
+                if (j != er.end()) {
+                    new_value = new_value && j->second;
+                }
+                pair.second = new_value;
+            }
+
+        } else
+            result_.by_name()[e.name()] = er;
     }
 
 public:
@@ -80,6 +95,9 @@ public:
     void visit(const dogen::yarn::visitor& v) override { generate(v); }
     void visit(const fabric::registrar& rg) override { generate(rg); }
     void visit(const fabric::master_header& mh) override { generate(mh); }
+    void visit(const fabric::forward_declarations& fd) override {
+        generate(fd);
+    }
 
 public:
     const enablement_repository& result() const { return result_; }

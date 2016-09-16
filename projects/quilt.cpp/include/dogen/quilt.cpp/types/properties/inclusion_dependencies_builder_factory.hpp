@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+// #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_builder.hpp"
 
@@ -42,6 +43,8 @@ namespace properties {
  * to pass around all of the parameters needed to construct it, we can
  * create it at a high-level and then just pass the factory around.
  *
+ * Finally, the factory pre-computes the mapping of the default
+ * formatters per facet.
  */
 class inclusion_dependencies_builder_factory final {
 public:

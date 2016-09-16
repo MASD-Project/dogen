@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/dynamic/types/value_visitor_fwd.hpp"
+
 namespace boost {
 namespace serialization {
 

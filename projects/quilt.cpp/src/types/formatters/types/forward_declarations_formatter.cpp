@@ -51,13 +51,14 @@ namespace types {
 namespace {
 
 class provider final :
-        public properties::provider_interface<yarn::exception> {
+        public properties::provider_interface<fabric::forward_declarations> {
 public:
+    std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
         const properties::inclusion_dependencies_builder_factory& f,
-        const yarn::exception& e) const override;
+        const fabric::forward_declarations& fd) const override;
 
     properties::inclusion_path_support inclusion_path_support() const override;
 
@@ -68,18 +69,20 @@ public:
         const yarn::name& n) const override;
 };
 
+std::string provider::facet_name() const {
+    return traits::facet_name();
+}
+
 std::string provider::formatter_name() const {
     return forward_declarations_formatter::static_formatter_name();
 }
 
 std::list<std::string> provider::provide_inclusion_dependencies(
     const properties::inclusion_dependencies_builder_factory& f,
-    const yarn::exception& /*e*/) const {
+    const fabric::forward_declarations& /*fd*/) const {
 
     const auto self_fn(forward_declarations_formatter::static_formatter_name());
     auto builder(f.make());
-    builder.add(inclusion_constants::std::string());
-    builder.add(inclusion_constants::boost::exception::info());
     return builder.build();
 }
 

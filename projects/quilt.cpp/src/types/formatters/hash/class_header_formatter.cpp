@@ -36,6 +36,7 @@ namespace hash {
 
 class provider final : public properties::provider_interface<yarn::object> {
  public:
+    std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
@@ -57,7 +58,7 @@ std::list<std::string> provider::provide_inclusion_dependencies(
 
     auto builder(f.make());
     builder.add(inclusion_constants::std::functional());
-    builder.add(o.name(), types::traits::class_header_formatter_name());
+    builder.add(o.name(), types::traits::facet_name());
 
     return builder.build();
 }
@@ -76,6 +77,10 @@ boost::filesystem::path
 provider::provide_full_path(const properties::locator& l,
     const yarn::name& n) const {
     return l.make_full_path_for_cpp_header(n, formatter_name());
+}
+
+std::string provider::facet_name() const {
+    return traits::facet_name();
 }
 
 std::string provider::formatter_name() const {

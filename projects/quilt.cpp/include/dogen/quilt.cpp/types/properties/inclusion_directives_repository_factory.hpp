@@ -30,6 +30,8 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
+#include "dogen/quilt.cpp/types/properties/locator.hpp"
+#include "dogen/quilt.cpp/types/properties/registrar.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_directives_repository.hpp"
 
@@ -47,9 +49,9 @@ public:
      * @brief Create the inclusion directives for an Yarn model.
      */
     inclusion_directives_repository make(
-        const dynamic::repository& srp,
+        const dynamic::repository& drp,
         const formatters::container& fc,
-        const path_derivatives_repository& pdrp,
+        const registrar& rg, const locator& l,
         const yarn::model& m) const;
 };
 

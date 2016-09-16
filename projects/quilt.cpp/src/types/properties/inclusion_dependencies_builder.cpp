@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/io/name_io.hpp"
@@ -124,7 +125,22 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
 
     const auto j(i->second.find(formatter_name));
     if (j == i->second.end()) {
-        BOOST_LOG_SEV(lg, error) << formatter_name_not_found << formatter_name;
+        BOOST_LOG_SEV(lg, warn) << formatter_name_not_found << formatter_name
+                                << " element id: " << n.id();
+
+        // FIXME: hack
+        BOOST_LOG_SEV(lg, debug) << "Trying by facet name.";
+
+        for (const auto pair : i->second) {
+            if (boost::starts_with(pair.first, formatter_name)) {
+                BOOST_LOG_SEV(lg, debug) << "Using: " << pair.first
+                                         << " status: " << pair.second;
+                return pair.second;
+            }
+        }
+
+        BOOST_LOG_SEV(lg, error) << formatter_name_not_found << formatter_name
+                                 << " element id: " << n.id();
         BOOST_THROW_EXCEPTION(
             building_error(formatter_name_not_found + formatter_name));
     }

@@ -37,6 +37,7 @@
 #include "dogen/quilt.cpp/types/properties/container.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
+#include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_directives_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_dependencies_builder_factory.hpp"
 
@@ -106,6 +107,13 @@ public:
      */
     std::unordered_map<std::string, std::list<std::string> >
     make(const fabric::master_header& mh) const;
+
+    /**
+     * @brief Makes inclusion dependencies for a forward declarations
+     * header.
+     */
+    std::unordered_map<std::string, std::list<std::string> >
+    make(const fabric::forward_declarations& fd) const;
 
 private:
     const inclusion_dependencies_builder_factory& factory_;

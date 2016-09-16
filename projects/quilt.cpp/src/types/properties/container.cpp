@@ -30,8 +30,18 @@ container::module_providers() const {
     return module_providers_;
 }
 
+std::forward_list<boost::shared_ptr<provider_interface<yarn::module>>>&
+container::module_providers() {
+    return module_providers_;
+}
+
 const std::forward_list<boost::shared_ptr<provider_interface<yarn::concept>>>&
 container::concept_providers() const {
+    return concept_providers_;
+}
+
+std::forward_list<boost::shared_ptr<provider_interface<yarn::concept>>>&
+container::concept_providers() {
     return concept_providers_;
 }
 
@@ -40,8 +50,18 @@ container::primitive_providers() const {
     return primitive_providers_;
 }
 
+std::forward_list<boost::shared_ptr<provider_interface<yarn::primitive>>>&
+container::primitive_providers() {
+    return primitive_providers_;
+}
+
 const std::forward_list<boost::shared_ptr<provider_interface<yarn::object>>>&
 container::object_providers() const {
+    return object_providers_;
+}
+
+std::forward_list<boost::shared_ptr<provider_interface<yarn::object>>>&
+container::object_providers() {
     return object_providers_;
 }
 
@@ -52,13 +72,30 @@ container::enumeration_providers() const {
     return enumeration_providers_;
 }
 
+std::forward_list<
+    boost::shared_ptr<provider_interface<yarn::enumeration>>
+>&
+container::enumeration_providers() {
+    return enumeration_providers_;
+}
+
 const std::forward_list<boost::shared_ptr<provider_interface<yarn::exception>>>&
 container::exception_providers() const {
     return exception_providers_;
 }
 
+std::forward_list<boost::shared_ptr<provider_interface<yarn::exception>>>&
+    container::exception_providers() {
+    return exception_providers_;
+}
+
 const std::forward_list<boost::shared_ptr<provider_interface<yarn::visitor>>>&
 container::visitor_providers() const {
+    return visitor_providers_;
+}
+
+std::forward_list<boost::shared_ptr<provider_interface<yarn::visitor>>>&
+    container::visitor_providers() {
     return visitor_providers_;
 }
 
@@ -69,11 +106,39 @@ container::registrar_providers() const {
     return registrar_providers_;
 }
 
+std::forward_list<
+    boost::shared_ptr<provider_interface<fabric::registrar>>
+>&
+container::registrar_providers() {
+    return registrar_providers_;
+}
+
 const std::forward_list<
     boost::shared_ptr<provider_interface<fabric::master_header>>
 >&
 container::master_header_providers() const {
     return master_header_providers_;
+}
+
+std::forward_list<
+    boost::shared_ptr<provider_interface<fabric::master_header>>
+>&
+container::master_header_providers() {
+    return master_header_providers_;
+}
+
+const std::forward_list<
+    boost::shared_ptr<provider_interface<fabric::forward_declarations>>
+    >&
+container::forward_declarations_providers() const {
+    return forward_declarations_providers_;
+}
+
+std::forward_list<
+    boost::shared_ptr<provider_interface<fabric::forward_declarations>>
+    >&
+container::forward_declarations_providers() {
+    return forward_declarations_providers_;
 }
 
 } } } }

@@ -52,6 +52,7 @@ namespace {
 class provider final :
         public properties::provider_interface<yarn::object> {
 public:
+    std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
@@ -66,6 +67,11 @@ public:
     boost::filesystem::path provide_full_path(const properties::locator& l,
         const yarn::name& n) const override;
 };
+
+
+std::string provider::facet_name() const {
+    return traits::facet_name();
+}
 
 std::string provider::formatter_name() const {
     return class_implementation_formatter::static_formatter_name();
@@ -92,10 +98,10 @@ std::list<std::string> provider::provide_inclusion_dependencies(
     builder.add(ic::boost::archive::xml_iarchive());
     builder.add(ic::boost::archive::xml_oarchive());
 
-    builder.add(o.transparent_associations(), ch_fn);
-    builder.add(o.opaque_associations(), ch_fn);
-    builder.add(o.parent(), ch_fn);
-    builder.add(o.leaves(), ch_fn);
+    builder.add(o.transparent_associations(), traits::facet_name());
+    builder.add(o.opaque_associations(), traits::facet_name());
+    builder.add(o.parent(), traits::facet_name());
+    builder.add(o.leaves(), traits::facet_name());
 
     const auto si(builder.make_special_includes(o));
     if (si.has_date)

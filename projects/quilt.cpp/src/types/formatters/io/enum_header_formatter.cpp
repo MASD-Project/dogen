@@ -39,6 +39,7 @@ namespace {
 class provider final :
         public properties::provider_interface<yarn::enumeration> {
 public:
+    std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
@@ -54,6 +55,10 @@ public:
         const yarn::name& n) const override;
 };
 
+std::string provider::facet_name() const {
+    return traits::facet_name();
+}
+
 std::string provider::formatter_name() const {
     return enum_header_formatter::static_formatter_name();
 }
@@ -65,8 +70,8 @@ std::list<std::string> provider::provide_inclusion_dependencies(
 
     builder.add(inclusion_constants::std::iosfwd());
 
-    const auto ch_fn(types::traits::class_header_formatter_name());
-    builder.add(e.name(), ch_fn);
+    const auto eh_fn(types::traits::enum_header_formatter_name());
+    builder.add(e.name(), eh_fn);
     return builder.build();
 }
 

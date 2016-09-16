@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/yarn/types/element_visitor_fwd.hpp"
+
 namespace boost {
 namespace serialization {
 

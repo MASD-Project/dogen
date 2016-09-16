@@ -40,13 +40,14 @@ namespace serialization {
 namespace {
 
 class provider :
-        public properties::provider_interface<yarn::object> {
+        public properties::provider_interface<fabric::forward_declarations> {
 public:
+    std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
         const properties::inclusion_dependencies_builder_factory& f,
-        const yarn::object& o) const override;
+        const fabric::forward_declarations& fd) const override;
 
     properties::inclusion_path_support inclusion_path_support() const override;
 
@@ -57,26 +58,29 @@ public:
         const yarn::name& n) const override;
 };
 
+std::string provider::facet_name() const {
+    return traits::facet_name();
+}
+
 std::string provider::formatter_name() const {
     return forward_declarations_formatter::static_formatter_name();
 }
 
 std::list<std::string> provider::provide_inclusion_dependencies(
     const properties::inclusion_dependencies_builder_factory& f,
-    const yarn::object& o) const {
+    const fabric::forward_declarations& fd) const {
 
-    const auto self_fn(forward_declarations_formatter::static_formatter_name());
     auto builder(f.make());
 
     using tp = formatters::types::traits;
     const auto tp_fn(tp::forward_declarations_formatter_name());
-    builder.add(o.name(), tp_fn);
+    builder.add(fd.name(), tp_fn);
 
     return builder.build();
 }
 
 properties::inclusion_path_support provider::inclusion_path_support() const {
-return properties::inclusion_path_support::regular;
+    return properties::inclusion_path_support::regular;
 }
 
 boost::filesystem::path
