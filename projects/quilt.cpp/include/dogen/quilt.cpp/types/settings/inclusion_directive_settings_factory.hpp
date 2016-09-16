@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_INCLUSION_DIRECTIVES_SETTINGS_FACTORY_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_INCLUSION_DIRECTIVES_SETTINGS_FACTORY_HPP
+#ifndef DOGEN_CPP_TYPES_SETTINGS_INCLUSION_DIRECTIVE_SETTINGS_FACTORY_HPP
+#define DOGEN_CPP_TYPES_SETTINGS_INCLUSION_DIRECTIVE_SETTINGS_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -43,9 +43,9 @@ namespace settings {
  * @brief Creates the inclusion directive settings for all
  * formatters.
  */
-class inclusion_directives_settings_factory {
+class inclusion_directive_settings_factory {
 public:
-    inclusion_directives_settings_factory(
+    inclusion_directive_settings_factory(
         const dynamic::repository& rp, const formatters::container& fc);
 
 private:

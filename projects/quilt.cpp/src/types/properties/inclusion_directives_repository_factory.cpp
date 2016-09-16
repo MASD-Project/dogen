@@ -31,7 +31,7 @@
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/properties/building_error.hpp"
 #include "dogen/quilt.cpp/io/properties/inclusion_directives_repository_io.hpp"
-#include "dogen/quilt.cpp/types/settings/inclusion_directives_settings_factory.hpp"
+#include "dogen/quilt.cpp/types/settings/inclusion_directive_settings_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_directives_repository_factory.hpp"
 
 namespace {
@@ -59,7 +59,7 @@ namespace {
 class generator final : public fabric::element_visitor {
 public:
     generator(const container& c, const locator& l,
-        const settings::inclusion_directives_settings_factory& f)
+        const settings::inclusion_directive_settings_factory& f)
         : container_(obtain_relevant_providers(c)), locator_(l), factory_(f) { }
 
 private:
@@ -246,7 +246,7 @@ public:
 private:
     const container container_;
     const locator& locator_;
-    const settings::inclusion_directives_settings_factory factory_;
+    const settings::inclusion_directive_settings_factory factory_;
     inclusion_directives_repository result_;
 };
 
@@ -356,7 +356,7 @@ inclusion_directives_repository inclusion_directives_repository_factory::make(
 
     BOOST_LOG_SEV(lg, debug) << "Making inclusion directives repository.";
 
-    const settings::inclusion_directives_settings_factory f(drp, fc);
+    const settings::inclusion_directive_settings_factory f(drp, fc);
     generator g(rg.container(), l, f);
     for (const auto& ptr : m.elements()) {
         const auto& e(*ptr);

@@ -24,13 +24,13 @@
 #include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/settings/building_error.hpp"
-#include "dogen/quilt.cpp/types/settings/inclusion_directives_settings_factory.hpp"
+#include "dogen/quilt.cpp/types/settings/inclusion_directive_settings_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(
-        "quilt.cpp.settings.inclusion_directives_settings_factory"));
+        "quilt.cpp.settings.inclusion_directive_settings_factory"));
 
 const std::string empty_formatter_name("Formatter name is empty.");
 const std::string missing_formatter_name("Formatter name not found: ");
@@ -42,14 +42,14 @@ namespace quilt {
 namespace cpp {
 namespace settings {
 
-inclusion_directives_settings_factory::
-inclusion_directives_settings_factory(const dynamic::repository& rp,
+inclusion_directive_settings_factory::
+inclusion_directive_settings_factory(const dynamic::repository& rp,
     const formatters::container& fc)
     : field_definitions_(make_field_definitions(rp, fc)),
       inclusion_required_(get_top_level_inclusion_required_field(rp)) {}
 
-inclusion_directives_settings_factory::field_definitions
-inclusion_directives_settings_factory::make_field_definitions(
+inclusion_directive_settings_factory::field_definitions
+inclusion_directive_settings_factory::make_field_definitions(
     const dynamic::repository& rp, const std::string& formatter_name) const {
 
     field_definitions r;
@@ -65,9 +65,9 @@ inclusion_directives_settings_factory::make_field_definitions(
 
 std::unordered_map<
     std::string,
-    inclusion_directives_settings_factory::field_definitions
+    inclusion_directive_settings_factory::field_definitions
     >
-inclusion_directives_settings_factory::
+inclusion_directive_settings_factory::
 make_field_definitions(const dynamic::repository& rp,
     const formatters::container& fc) const {
     std::unordered_map<std::string, field_definitions> r;
@@ -91,14 +91,14 @@ make_field_definitions(const dynamic::repository& rp,
     return r;
 }
 
-dynamic::field_definition inclusion_directives_settings_factory::
+dynamic::field_definition inclusion_directive_settings_factory::
 get_top_level_inclusion_required_field(
     const dynamic::repository& rp) const {
     const dynamic::repository_selector s(rp);
     return s.select_field_by_name(traits::cpp::inclusion_required());
 }
 
-boost::optional<std::string> inclusion_directives_settings_factory::
+boost::optional<std::string> inclusion_directive_settings_factory::
 obtain_inclusion_directive_for_formatter(const field_definitions& fd,
     const dynamic::object& o) const {
     boost::optional<std::string> r;
@@ -112,7 +112,7 @@ obtain_inclusion_directive_for_formatter(const field_definitions& fd,
     return r;
 }
 
-bool inclusion_directives_settings_factory::
+bool inclusion_directive_settings_factory::
 obtain_inclusion_required_for_formatter(const field_definitions& fd,
     const dynamic::object& o) const {
     using namespace dynamic;
@@ -121,19 +121,19 @@ obtain_inclusion_required_for_formatter(const field_definitions& fd,
     return r;
 }
 
-bool inclusion_directives_settings_factory::
+bool inclusion_directive_settings_factory::
 obtain_top_level_inclusion_required(const dynamic::object& o) const {
     using namespace dynamic;
     const field_selector fs(o);
     return fs.get_boolean_content_or_default(inclusion_required_);
 }
 
-bool inclusion_directives_settings_factory::
+bool inclusion_directive_settings_factory::
 make_top_level_inclusion_required(const dynamic::object& o) const {
     return obtain_top_level_inclusion_required(o);
 }
 
-inclusion_directive_settings inclusion_directives_settings_factory::
+inclusion_directive_settings inclusion_directive_settings_factory::
 make_inclusion_directive_settings(const std::string& formatter_name,
     const dynamic::object& o) const {
 
