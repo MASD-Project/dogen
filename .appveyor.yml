@@ -54,9 +54,14 @@ notifications:
     on_build_success: true
     on_build_failure: true
     on_build_status_changed: true
+  - provider: Webhook
+    url: http://requestb.in/130vvqu1
+    on_build_success: true
+    on_build_failure: true
+    on_build_status_changed: true
   - provider: Email
     to:
       - marco.craveiro@gmail.com
-    on_build_success: true
+    on_build_success: false
     on_build_failure: true
     on_build_status_changed: true
