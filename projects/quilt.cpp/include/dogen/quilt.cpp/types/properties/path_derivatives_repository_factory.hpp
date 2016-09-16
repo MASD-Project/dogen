@@ -49,9 +49,8 @@ public:
     /**
      * @brief Create a path derivatives repository.
      */
-    path_derivatives_repository make(const config::cpp_options& opts,
-        const std::unordered_map<std::string, settings::path_settings>& ps,
-        const registrar& rg, const locator& l, const yarn::model& m) const;
+    path_derivatives_repository
+    make(const registrar& rg, const locator& l, const yarn::model& m) const;
 };
 
 } } } }

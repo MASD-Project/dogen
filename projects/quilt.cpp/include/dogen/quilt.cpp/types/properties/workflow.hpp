@@ -90,10 +90,7 @@ private:
      * @brief Create the path derivatives repository.
      */
     path_derivatives_repository create_path_derivatives_repository(
-        const config::cpp_options& opts,
-        const std::unordered_map<std::string, settings::path_settings>& ps,
-        const locator& l,
-        const yarn::model& m) const;
+        const locator& l, const yarn::model& m) const;
 
     /**
      * @brief Creates the formatter properties.

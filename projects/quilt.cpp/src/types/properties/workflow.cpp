@@ -83,12 +83,11 @@ workflow::create_aspect_settings_repository(
 }
 
 path_derivatives_repository workflow::
-create_path_derivatives_repository(const config::cpp_options& opts,
-    const std::unordered_map<std::string, settings::path_settings>& ps,
+create_path_derivatives_repository(
     const locator& l,
     const yarn::model& m) const {
     path_derivatives_repository_factory f;
-    return f.make(opts, ps, registrar(), l, m);
+    return f.make(registrar(), l, m);
 }
 
 formatter_properties_repository workflow::
@@ -152,7 +151,7 @@ workflow::execute(const config::cpp_options& opts,
     const auto& ro(root_object);
     const auto ps(create_path_settings(drp, ro, fc));
     const locator l(opts, m, ps);
-    const auto pdrp(create_path_derivatives_repository(opts, ps, l, m));
+    const auto pdrp(create_path_derivatives_repository(l, m));
     auto fprp(create_formatter_properties(drp, ro, pdrp, l, fc, m));
 
     const auto formattables(from_factory(opts, fpwf, ps, fprp, m));

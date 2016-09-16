@@ -174,8 +174,6 @@ to_header_guard_name(const boost::filesystem::path& p) const {
 }
 
 path_derivatives_repository path_derivatives_repository_factory::make(
-    const config::cpp_options& /*opts*/,
-    const std::unordered_map<std::string, settings::path_settings>& /*ps*/,
     const registrar& rg, const locator& l, const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Generating path derivatives repository.";
