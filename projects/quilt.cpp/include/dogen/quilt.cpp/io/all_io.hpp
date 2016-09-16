@@ -54,7 +54,6 @@
 #include "dogen/quilt.cpp/io/settings/element_settings_repository_io.hpp"
 #include "dogen/quilt.cpp/io/settings/inclusion_directive_settings_io.hpp"
 #include "dogen/quilt.cpp/io/properties/path_derivatives_repository_io.hpp"
-#include "dogen/quilt.cpp/io/settings/inclusion_directives_settings_io.hpp"
 #include "dogen/quilt.cpp/io/settings/streaming_settings_repository_io.hpp"
 #include "dogen/quilt.cpp/io/properties/aspect_properties_repository_io.hpp"
 #include "dogen/quilt.cpp/io/properties/global_enablement_properties_io.hpp"

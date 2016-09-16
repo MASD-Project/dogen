@@ -128,29 +128,6 @@ obtain_top_level_inclusion_required(const dynamic::object& o) const {
     return fs.get_boolean_content_or_default(inclusion_required_);
 }
 
-inclusion_directives_settings inclusion_directives_settings_factory::make(
-    const dynamic::object& o) const {
-
-    inclusion_directives_settings r;
-    const auto ir(obtain_top_level_inclusion_required(o));
-    r.inclusion_required(ir);
-
-    for (const auto& pair : field_definitions_) {
-        const auto& fn(pair.first);
-        const auto& fd(pair.second);
-        const auto id(obtain_inclusion_directive_for_formatter(fd, o));
-
-        inclusion_directive_settings st;
-        st.inclusion_directive(id);
-
-        const auto fir(obtain_inclusion_required_for_formatter(fd, o));
-        st.inclusion_required(fir);
-        const auto id_pair(std::make_pair(fn, st));
-        r.inclusion_directive_settings().insert(id_pair);
-    }
-    return r;
-}
-
 bool inclusion_directives_settings_factory::
 make_top_level_inclusion_required(const dynamic::object& o) const {
     return obtain_top_level_inclusion_required(o);

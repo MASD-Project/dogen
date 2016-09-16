@@ -32,7 +32,7 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
-#include "dogen/quilt.cpp/types/settings/inclusion_directives_settings.hpp"
+#include "dogen/quilt.cpp/types/settings/inclusion_directive_settings.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -45,11 +45,8 @@ namespace settings {
  */
 class inclusion_directives_settings_factory {
 public:
-    inclusion_directives_settings_factory(const dynamic::repository& rp,
-
-
-
-        const formatters::container& fc);
+    inclusion_directives_settings_factory(
+        const dynamic::repository& rp, const formatters::container& fc);
 
 private:
     /**
@@ -105,14 +102,14 @@ private:
 
 public:
     /**
-     * @brief Produce the inclusion directive settings for all
-     * formatters.
+     * @brief Produces the top-level flag for inclusion.
      */
-    inclusion_directives_settings make(const dynamic::object& o) const;
-
-
     bool make_top_level_inclusion_required(const dynamic::object& o) const;
 
+    /**
+     * @brief Produce the inclusion directive settings for a given
+     * formatter.
+     */
     inclusion_directive_settings make_inclusion_directive_settings(
         const std::string& formatter_name, const dynamic::object& o) const;
 
