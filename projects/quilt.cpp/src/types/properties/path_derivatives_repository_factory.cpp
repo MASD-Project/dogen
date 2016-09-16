@@ -31,7 +31,6 @@
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/io/properties/path_derivatives_io.hpp"
 #include "dogen/quilt.cpp/io/properties/path_derivatives_repository_io.hpp"
-#include "dogen/quilt.cpp/types/properties/path_derivatives_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository_factory.hpp"
 
 namespace {
@@ -62,8 +61,8 @@ namespace {
  */
 class generator final : public fabric::element_visitor {
 public:
-    generator(const container& c, const path_derivatives_factory& f,
-        const locator& l) : container_(c), factory_(f), locator_(l) { }
+    generator(const container& c, const locator& l)
+        : container_(c), locator_(l) { }
 
 private:
     /**
@@ -82,15 +81,7 @@ private:
         const yarn::name& n) {
 
         BOOST_LOG_SEV(lg, debug) << "Processing name: " << n;
-        auto& pd(result_.by_name());
-        const auto pair(std::make_pair(n, factory_.make(n)));
-        const auto result(pd.insert(pair));
-        const bool inserted(result.second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_name << n.id();
-            BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
-        }
-
+        auto& map(result_.by_name()[n]);
         for (const auto& p : providers) {
             BOOST_LOG_SEV(lg, debug) << "Provider: "
                                      << p->formatter_name();
@@ -103,11 +94,14 @@ private:
                 pd.header_guard(to_header_guard_name(ip));
             }
             BOOST_LOG_SEV(lg, debug) << "New Path derivatives: " << pd;
-
-            const auto i(pair.second.find(p->formatter_name()));
-            if (i != pair.second.end()) {
-                BOOST_LOG_SEV(lg, debug) << "Old path derivatives: "
-                                         << i->second;
+            const auto pair(std::make_pair(p->formatter_name(), pd));
+            const auto result(map.insert(pair));
+            const bool inserted(result.second);
+            if (!inserted) {
+                BOOST_LOG_SEV(lg, error) << duplicate_name << n.id()
+                                         << " formatter: "
+                                         << p->formatter_name();
+                BOOST_THROW_EXCEPTION(building_error(duplicate_name + n.id()));
             }
         }
     }
@@ -150,17 +144,21 @@ public:
         generate(container_.master_header_providers(), mh.name());
     }
 
+    void visit(const fabric::forward_declarations& fd) override {
+        generate(container_.forward_declarations_providers(), fd.name());
+    }
+
 public:
     const path_derivatives_repository & result() const { return result_; }
 
 private:
     const container& container_;
-    const path_derivatives_factory& factory_;
     const locator& locator_;
     path_derivatives_repository result_;
 };
 
-std::string generator::to_header_guard_name(const boost::filesystem::path& p) const {
+std::string generator::
+to_header_guard_name(const boost::filesystem::path& p) const {
     bool is_first(true);
     std::ostringstream ss;
     for (const auto& token : p) {
@@ -176,13 +174,12 @@ std::string generator::to_header_guard_name(const boost::filesystem::path& p) co
 }
 
 path_derivatives_repository path_derivatives_repository_factory::make(
-    const config::cpp_options& opts,
-    const std::unordered_map<std::string, settings::path_settings>& ps,
+    const config::cpp_options& /*opts*/,
+    const std::unordered_map<std::string, settings::path_settings>& /*ps*/,
     const registrar& rg, const locator& l, const yarn::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Generating path derivatives repository.";
-    const path_derivatives_factory f(opts, m, ps);
-    generator g(rg.container(), f, l);
+    generator g(rg.container(), l);
     for (const auto& ptr : m.elements()) {
         const auto& e(*ptr);
         e.accept(g);

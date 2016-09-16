@@ -39,7 +39,6 @@
 #include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/quilt.cpp/types/properties/building_error.hpp"
 #include "dogen/quilt.cpp/types/properties/name_builder.hpp"
-#include "dogen/quilt.cpp/types/properties/path_derivatives_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/factory.hpp"
 
 namespace {

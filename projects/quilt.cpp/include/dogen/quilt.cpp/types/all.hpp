@@ -109,7 +109,6 @@
 #include "dogen/quilt.cpp/types/fabric/forward_declarations_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/enum_header_formatter.hpp"
-#include "dogen/quilt.cpp/types/properties/path_derivatives_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/aspect_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/streaming_settings_factory.hpp"

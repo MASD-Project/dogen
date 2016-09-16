@@ -32,7 +32,6 @@
 #include "dogen/quilt.cpp/types/properties/building_error.hpp"
 #include "dogen/quilt.cpp/io/properties/inclusion_directives_repository_io.hpp"
 #include "dogen/quilt.cpp/types/settings/inclusion_directives_settings_factory.hpp"
-#include "dogen/quilt.cpp/types/properties/inclusion_directives_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/inclusion_directives_repository_factory.hpp"
 
 namespace {
