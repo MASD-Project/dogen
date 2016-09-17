@@ -23,6 +23,7 @@
 #include "dogen/yarn/types/injection_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_factory.hpp"
+#include "dogen/quilt.cpp/types/fabric/cmakelists_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/injector.hpp"
@@ -69,6 +70,12 @@ add_elements(const std::list<boost::shared_ptr<yarn::element>>& elements,
 
 void injector::inject_registrar(yarn::intermediate_model& im) const {
     registrar_factory f;
+    const auto elements(f.build(im));
+    add_elements(elements, im);
+}
+
+void injector::inject_cmakelists(yarn::intermediate_model& im) const {
+    cmakelists_factory f;
     const auto elements(f.build(im));
     add_elements(elements, im);
 }
