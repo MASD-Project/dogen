@@ -25,6 +25,9 @@ Notes:
 
 - formattable becomes a concept at the formatters' model level, but it
   has just an id.
+- it seems we should be able to also have the formatters container and
+  even the formatters workflow in =formatters=; however, this would
+  increase the amount of casting required.
 
 *** Document the conceptual model                                     :story:
 
