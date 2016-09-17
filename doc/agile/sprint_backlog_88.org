@@ -6,43 +6,45 @@
 * Mission Statement
 
 - finish working on remaining formattables.
-- document the conceptual model.
-- implement wale and rewrite formatters in terms of wale templates.
+- refactor quilt.cpp.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-17 Sat 01:01]
+#+CAPTION: Clock summary at [2016-09-17 Sat 20:04]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *36:16* |       |       | 100.0 |
+| *Total time*                                                                | *38:09* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 36:16   |       |       | 100.0 |
-| Active                                                                      |         | 36:16 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |   6.1 |
-| COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.4 |
+| Stories                                                                     | 38:09   |       |       | 100.0 |
+| Active                                                                      |         | 38:09 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:34 |   6.7 |
+| COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.3 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   1.2 |
-| COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   2.6 |
+| COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   2.5 |
 | CANCELLED Remove inclusion dependencies builder factory                     |         |       |  0:14 |   0.6 |
-| COMPLETED Analysis on formatters, elements and extensibility                |         |       |  1:18 |   3.6 |
-| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   3.3 |
-| COMPLETED Investigate broken windows builds                                 |         |       |  0:32 |   1.5 |
-| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |  14.4 |
-| COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   5.4 |
-| CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   8.6 |
-| COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   2.9 |
-| COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   7.0 |
-| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  33.1 |
+| COMPLETED Analysis on formatters, elements and extensibility                |         |       |  1:18 |   3.4 |
+| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   3.1 |
+| COMPLETED Investigate broken windows builds                                 |         |       |  0:32 |   1.4 |
+| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |  13.7 |
+| COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   5.2 |
+| CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   8.2 |
+| COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   2.8 |
+| COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   6.6 |
+| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  31.5 |
 | COMPLETED Fix AppVeyor notifications                                        |         |       |  0:22 |   1.0 |
-| STARTED Remove formattable origin type                                      |         |       |  2:25 |   6.7 |
-| STARTED Static use of element types does more harm than good                |         |       |  0:32 |   1.5 |
+| COMPLETED Static use of element types does more harm than good              |         |       |  0:32 |   1.4 |
+| COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   3.9 |
+| STARTED Terminology clean up                                                |         |       |  0:02 |   0.1 |
+| STARTED Remove formattable origin type                                      |         |       |  2:25 |   6.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2016-09-17 Sat 19:43]--[2016-09-17 Sat 20:04] =>  0:21
     CLOCK: [2016-09-15 Thu 08:48]--[2016-09-15 Thu 09:01] =>  0:13
     CLOCK: [2016-09-13 Tue 20:09]--[2016-09-13 Tue 20:50] =>  0:41
     CLOCK: [2016-09-12 Mon 21:57]--[2016-09-12 Mon 22:03] =>  0:06
@@ -608,21 +610,8 @@ At present the AppVeyor support is not quite right:
 
 Sort these issues out.
 
-*** STARTED Remove formattable origin type                            :story:
-    CLOCK: [2016-09-12 Mon 09:02]--[2016-09-12 Mon 11:20] =>  2:18
-    CLOCK: [2016-09-12 Mon 11:03]--[2016-09-12 Mon 11:10] =>  0:07
-
-This should not be in use any longer so remove it. Actually this
-cannot be done until we handle cmakelists and odb options via
-fabric. This is because path settings will not be computed correctly.
-
-Tasks:
-
-- remove enumeration
-- remove container of internal and external formatters in formatter
-  container.
-
-*** STARTED Static use of element types does more harm than good      :story:
+*** COMPLETED Static use of element types does more harm than good    :story:
+    CLOSED: [2016-09-17 Sat 19:20]
     CLOCK: [2016-09-16 Fri 11:51]--[2016-09-16 Fri 12:05] =>  0:14
     CLOCK: [2016-09-16 Fri 11:31]--[2016-09-16 Fri 11:45] =>  0:14
     CLOCK: [2016-09-16 Fri 10:20]--[2016-09-16 Fri 10:24] =>  0:04
@@ -658,6 +647,8 @@ The downsides are:
   static use of element types. We have no use case for this at
   present, but it seems like an arbitrary limitation to have.
 
+In conclusion: we should remove the static approach and use a dynamic
+approach.
 
 Notes:
 
@@ -670,12 +661,208 @@ Notes:
   the case of primitives. So we do not want to (always) drive the
   directives generation from the providers.
 
-*** Do not merge containers for formatter properties                  :story:
+*** CANCELLED Do not merge containers for formatter properties        :story:
+    CLOSED: [2016-09-17 Sat 19:51]
+
+*Rationale*: this story won't be required after the final refactor.
 
 We only need to generate the formatter properties for elements in the
 target model. Start from those instead of merging.
 
-*** Move registration of inclusion dependencies to initialiser        :story:
+*** COMPLETED Analysis: major rethink of the implementation of quilt  :story:
+    CLOSED: [2016-09-17 Sat 19:58]
+    CLOCK: [2016-09-17 Sat 18:10]--[2016-09-17 Sat 19:40] =>  1:30
+
+As part of the smaller refactors of quilt, it became clear the entire
+approach is wrong. With yarn we have a very clear pipeline and it is
+trivial to figure out where things have gone wrong; once we have
+located the point in the pipeline we just need to look at the state of
+the objects in the log. With quilt this is not the case. The main
+problem is that we tried to build the components separately and then
+assemble them, but this resulted in a lot more code and a
+fragmentation of responsibilities. It is now quite impossible to
+figure out if a problem is due to a mistake in enablement, or path
+generation, or inclusion dependencies generation and so forth. We need
+to follow an approach similar to yarn, with a clear pipeline made up
+of self-contained classes. We also need to model the notion of a
+formatting model containing formatting entities; conceptually we start
+off with a model in modeling space, which we expand to its
+representation in formatting space. There is no representation of this
+idea in code.
+
+So we need to first organise the domain objects of formatting:
+
+- rename properties back to formattables. We still need to have this
+  arbitrary namespace because we want to split the formatters from the
+  domain entities of the formatting space.
+- define a formattable class made up of: pointer to formatter, pointer
+  to element, configuration. This should really be called
+  =formattable::element= as it is an element in formatting space; but
+  to avoid confusion with =yarn::element= we will call it
+  =formattable=.
+- create the notion of a formattable element id: this is a string made
+  up of the element id plus formatter id. It uniquely identifies
+  formattable elements in formatting space.
+- create a =formattables::model= made up of a map of id to
+  =formattable=.
+- all of the existing properties classes are renamed to configuration
+  classes. They provide the formatting configuration.
+- the objective of the formattables workflow is to codify the
+  formattables pipeline, which is responsible for generating a
+  =formattables::model= - that is, the representation of the model in
+  formatting space.
+
+The formatting pipeline is implemented via "generators", which are
+symmetric to yarn's expanders. We do not call them expanders to
+distinguish them. These are:
+
+- transformer: takes in a =yarn::model= and generates a
+  =formattables::model=. The model will include target and non-target
+  types.
+- includer: responsible for computing the inclusion dependencies.
+- filter: removes the non-target formattables.
+- enabler: generates the enablement configuration.
+- path generator: generates the full paths.
+- guard generator: generates the header guards.
+- aspect generator: generates the aspect configuration.
+- helper generator: generates the helper configuration.
+
+This will have to be reordered depending on their requirements for the
+pipeline (for example path generation and guard generation must be
+done after we filter and so on).
+
+The formatting workflow will then be nothing more than going through
+the =formattables::model= and calling the formatter on the element and
+configuration.
+
+*** STARTED Terminology clean up                                      :story:
+    CLOCK: [2016-09-17 Sat 19:41]--[2016-09-17 Sat 19:43] =>  0:02
+
+We now have a consistent vocabulary across all models. We need to do
+the following renames:
+
+- config: options. These are the command line options.
+- formatters model: annotations become decorations. Licence, etc are
+  decorations on a file.
+- settings: annotations. We are trying to evoke the idea of meta-data
+  here.
+- properties: configuration. This is the configuration used for
+  formatting.
+
+Merged stories:
+
+*Consider renaming settings to annotations*
+
+Whilst its pretty clear now that settings are a strongly-typed
+representation of the meta-data and properties are the post-processed
+version, the names "settings" and "properties" still sound far too
+similar. It would be nicer to have something more meta-data-like for
+settings such as annotations. Read up the past discussions on
+naming. One possible reason not to use annotations was because we used
+it already in the formatters model. Perhaps that could be renamed to
+something else, freeing up the name?
+
+*** STARTED Remove formattable origin type                            :story:
+    CLOCK: [2016-09-12 Mon 09:02]--[2016-09-12 Mon 11:20] =>  2:18
+    CLOCK: [2016-09-12 Mon 11:03]--[2016-09-12 Mon 11:10] =>  0:07
+
+This should not be in use any longer so remove it. Actually this
+cannot be done until we handle cmakelists and odb options via
+fabric. This is because path settings will not be computed correctly.
+
+Tasks:
+
+- remove enumeration
+- remove container of internal and external formatters in formatter
+  container.
+
+*** Move =cmakelists_info= to fabric                                  :story:
+
+Add the generation of CMakeLists to fabric and remove the legacy
+formattable.
+
+*** Move =odb_options_info= to fabric                                 :story:
+
+Add the generation of ODB options to fabric and remove the legacy
+formattable.
+
+*** Add formattable element                                           :story:
+
+Tasks:
+
+- rename properties back to formattables.
+- create a top-level type that has formatter, element properties and
+  element. Must be non-generatable. Add formattable id as the sum of
+  element id and formatter id.
+- add =formattables::model= as an unordered map of id to
+  formattable. Implement formatting workflow in terms of formattables
+  model.
+- remove formatting context and update formatting workflow to call a
+  visitor to resolve the element and then call the formatter.
+
+*** Add type index to name and to formatter interface                 :story:
+
+
+In preparation for the removal of the static formatters, we need to
+add a type index to =yarn::name=. We should also add it to the
+formatter interface and to all formatters.
+
+*** Remove static formatter containers                                :story:
+
+Instead of having containers with separate types, use the type index
+to organise the formatters.
+
+- update formatter interface to use element and to statically cast to
+  concrete element. Start with dynamic cast first though.
+- remove container (provider, formatter).
+- update registrar with a map of type index to formatter (and to provider).
+- formatter workflow now simply calls.
+- remove all element specific formatter interfaces.
+
+*** Add transformer to quilt.cpp                                      :story:
+
+Takes in a =yarn::model= and generates a =formattables::model=. The
+model will include target and non-target types.
+
+Add workflow methods to execute the new formattables pipeline.
+
+*** Add includer to quilt.cpp                                         :story:
+
+Responsible for computing the inclusion dependencies.
+
+*** Add enabler to quilt.cpp                                          :story:
+
+Generates the enablement configuration.
+
+*** Add filter to quilt.cpp                                           :story:
+
+Removes the non-target formattables.
+
+*** Add path generator to quilt.cpp                                   :story:
+
+Generates the full paths.
+
+*** Add guard generator to quilt.cpp                                  :story:
+
+Generates the header guards.
+
+*** Add aspect generator to quilt.cpp                                 :story:
+
+Generates the aspect configuration.
+
+*** Add helper generator to quilt.cpp                                 :story:
+
+Generates the helper configuration.
+
+*** Create the notion of a formatter alias                            :story:
+
+We did a bit of a hack with mapping the facet to the default
+formatter. What we really need is the notion of an alias. It still
+looks like a formatter name (for example "header_formatter") but it
+must be first resolved into an actual formatter. For this we need a
+type index.
+
+*** Move registration of providers to initialiser                     :story:
 
 At present we are iterating through the formatters list in properties
 and manually registering all include providers via the interface. This
@@ -693,22 +880,14 @@ Tasks:
 - change initialiser to register the include providers from the same
   shared pointer.
 
-*** Move =cmakelists_info= to fabric                                  :story:
+*** Implement all formatter interfaces                                :story:
 
-Add the generation of CMakeLists to fabric and remove the legacy
-formattable.
+We still have a couple of skeleton interfaces:
 
-*** Move =odb_options_info= to fabric                                 :story:
+- primitve
+- concepts
 
-Add the generation of ODB options to fabric and remove the legacy
-formattable.
-
-*** Add a file formatter interface to formatters                      :story:
-
-It probably makes sense to have a top-level interface for file
-formatting in the formatters model. At present we have a lot of
-=quilt.cpp= specific things in there. Maybe we should just extract the
-common attributes and use them to create the generic interface.
+We should throw if formatting is required.
 
 *** Formatters with duplicate names result in non-intuitive errors    :story:
 
@@ -728,20 +907,6 @@ At present it is possible to register a formatter name more than
 once. Registrar should keep track of the names and throw if the name
 is duplicated.
 
-*** Implement all formatter interfaces                                :story:
-
-We still have a couple of skeleton interfaces:
-
-- primitve
-- concepts
-
-*** Document the conceptual model                                     :story:
-
-We seem to be pretty close to the end of the conceptual model for
-dogen. We should write it up whilst its still fresh. We should try to
-use mathematical notation where possible to practice it. We should
-also get it reviewed.
-
 *** Initialise formatters in the formatter's translation unit         :story:
 
 At present we are initialising the formatters in each of the facet
@@ -750,141 +915,11 @@ translation unit for each formatter. This will also make life easier
 when we move to a mustache world where there may not be a formatter
 header file at all.
 
-*** Generate formatter interfaces                                      :epic:
-
-We should create another template language, in addition to stitch:
-"wale". Wale is a very simple language that has templates that just do
-token replacement. The tokens must have a special format:
-={{{TOKEN}}}=. We receive a map of keys to values and do a blind
-replacement to the keys on the wale document.
-
-This links to stitch as follows:
-
-- create a single file implementation of a formatter. It will
-  implement both the provider interface and the appropriate formatter
-  interface. It will call the stitch method to start off with. There
-  are no headers, just cpp. It does the formatter registration.
-- add support in stitch for "named sections": its possible to start a
-  section and assign it a name. A stitch template will have two
-  sections: inclusion provision and formatting.
-- add support in stitch for "wale variables". These are just kvp's
-  defined at the top:
-
-: <#@ wale.variable="formatter_name=abcd" #>
-
-  wale variables and sections are converted into a kvp container for
-  wale input. Examples: facet, formatter name, etc.
-- convert the formatter code into a wale template, adding wale
-  variables as required.
-- update stitch to detect wale usage and to call wale in those
-  cases. This could be done by supplying a wale template:
-
-: <#@ wale.template="abcd.wale" #>
-
-- note that wale could be useful outside of stitch, for example for
-  dart: we could wale-lise utility and then instantiate it for a given
-  project.
-
-*Previous Understanding*
-
-It should be possible to generate some trivial types such as formatter
-interfaces, formatter container, registrar and so on. For this we
-need:
-
-- a mustache type template;
-- a set of fields from yarn types to be exposed to mustache;
-- a list of types to iterate through.
-
-Once we got this we could instantiate the templates. To integrate this
-with knit we would need some way of specifying which types the
-iteration would be over. We could mark a specific type with a given
-stereotype, and then supply say the base class ("all leaf descendants
-of xyz"). Dogen would then locate the descendants and for each call
-the template.
-
-For registrar and container its a bit trickier because we want a
-collection of types in one go.
-
-We also need a way to keep these templates away from the main (user
-visible) code, since they are useful only for dogen.
-
-See also [[https://github.com/cierelabs/boostache/tree/develop][boostache]].
-
-Notes:
-
-- we will need some "special" tags for copyright, includes
-  etc. Includes will be particularly special because we need to
-  augment the include list with additional includes. However, we may
-  not even need to be aware of this.
-
-*** Remove =optional<list>=                                           :story:
-
-We should not really be using optional<list>. The empty list is
-sufficient for this.
-
-Uses:
-
-- include provider. Fixed with other story.
-
-*** Run tests that are passing on windows                             :story:
-
-At present we have a release build on windows but we are not running
-any tests. This is because some of the tests are failing at the
-moment. We should run all test suites that are green to ensure we
-don't regress without noticing.
-
-*** Consider renaming settings to annotations                         :story:
-
-Whilst its pretty clear now that settings are a strongly-typed
-representation of the meta-data and properties are the post-processed
-version, the names "settings" and "properties" still sound far too
-similar. It would be nicer to have something more meta-data-like for
-settings such as annotations. Read up the past discussions on
-naming. One possible reason not to use annotations was because we used
-it already in the formatters model. Perhaps that could be renamed to
-something else, freeing up the name?
-
-*** Consider removing the overwrite flag in =formatters::file=        :story:
-
-Investigate if the overwrite flag makes sense in file; it seems we
-only use it in two scenarios: force overwrite requested by user or
-file contents have changed, both of which can be done in the
-file_writer.
-
-Actually this flag is needed. It is required to handle the case where
-we do not code-generate files, unless they do not exist. For example,
-for service headers and implementation we should create the files, but
-then subsequently not touch them. The overwrite flag should be set to
-false. We need to figure out how to implement this and remove the
-hacks around file writing.
-
-For now we have abused this flag to allow legacy files overrides of
-the new world formatters. This is just until we move totally to new
-world though.
-
-*** Vistor is only supported at the base class level                  :story:
-
-Due to implementation constraints, we only support visitable at the
-base class level. Add an exception if users attempt to use visitable
-stereotype in a class that has parents.
-
-Note: is this true? We are using derived visitable in C++ model.
-
-*** Add test model sanitizer to test models target                    :story:
-
-At present if we build test models we don't seem to build the
-sanitizer.
-
 *** Remove =formattable_origin_type=                                  :story:
 
 We seem to distinguish between "internal" and "external"
 formattables. This probably won't make sense after the injection
 refactor.
-
-*** Model should contain set of primitive id's                        :story:
-
-We are computing the set of all primitive id's in quilt but this
-should really be part of yarn.
 
 *** Implement formattables in terms of yarn types                     :epic:
 
@@ -907,87 +942,6 @@ additional =cpp= specific types. In practice:
   etc. This is not ideal, but its not a problem just yet. We could
   update the factory to generate these types and then take a copy of
   the model and inject them in it.
-
-*** Handle "special includes" correctly                              ::story:
-
-We did a quick hack to handle "special includes": we simply "detected"
-them in include builder and then did the appropriate action in each of
-the include providers. In order to make this work dynamically, we need
-somehow to have "associated includes" on a per type basis. For
-example:
-
-- type =x= requires include =y= in formatter =f=.
-
-This can easily be achieved via an "additional inclusion directive"
-which is a container. For example:
-
-:        "extensions" : {
-:                "quilt.cpp.helper.family" : "Dereferenceable",
-:                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/weak_ptr.hpp>",
-
-Could have:
-
-:                "quilt.cpp.types.class_header_formatter.additional_inclusion_directive" : "<some_include.hpp>",
-
-If multiple are provided then they are all added. This highlights an
-important point: we need a way to inject type specific includes from a
-formatter. It makes no sense to declare all of these up front in a
-library since we do not know what all possible formatters are, nor
-what requirements they may have for inclusion. At the same time,
-formatters cannot be expected to declare types. The solution is to be
-able to "inject" these dependencies from a JSON file associated with
-the formatter. We could supply the qualified name and the properties
-to inject. This problem can be solved later on - create a separate
-story for this.
-
-*** Supply model references via meta-data rather than command line    :story:
-
-It doesn't make any sense to have model dependencies in the command
-line. After all, the model cannot be interpreted without them. A
-better way to do this would be to split this functionality into two:
-
-- command line supplies "import directories", that is, directories
-  to search when looking for models. By default the system directory
-  is already in the path.
-- model supplies "import statements". The problem here is that we need
-  to also supply the file name of the model. We could perhaps omit the
-  extension and then load all files that match (e.g. =.dia=, =.json=,
-  etc). If more than one matches we should error. Actually we should
-  just supply the full filename, as well as keep the current notation
-  for the external project path.
-
-This is also a nice way to avoid loading system models unnecessary;
-users still need to declare the models they depend on, regardless if
-system or user.
-
-Each model should also supply the external module path as meta-data.
-
-This is particularly painful since cross-model inheritance was
-introduced because it means references are now transitive (we need to
-know of the references of any model we reference).
-
-Merged stories
-
-*External module path and references as meta-data*
-
-It actually does not make a lot of sense to allow users to supply
-external module paths and references as command line options. This is
-because the model will fail to build unless we provide the correct
-ones; these are not configurable items in this sense. The project
-path, etc are - and so should remain command line options.
-
-We need to move these two into the meta-data. This would also mean we
-no longer need to pass in external module paths for references, which
-is much cleaner.
-
-*** Allow logging during initialisation                               :story:
-
-At present we assume the log has not been initialised during
-initialisation. The only reason for this is with unit testing because
-each test initialises the log differently. However, one simple way
-around this is to have a log file for the entire test suite and
-separate log files for each test as we have now. Initialisation
-logging would go in this main file.
 
 ** Deprecated
 *** CANCELLED Consider renaming formatters                            :story:
