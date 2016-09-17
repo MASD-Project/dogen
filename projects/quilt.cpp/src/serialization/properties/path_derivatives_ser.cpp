@@ -63,7 +63,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("file_path", v.file_path_);
     ar << make_nvp("header_guard", v.header_guard_);
-    ar << make_nvp("inclusion_directive", v.inclusion_directive_);
 }
 
 template<typename Archive>
@@ -72,7 +71,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("file_path", v.file_path_);
     ar >> make_nvp("header_guard", v.header_guard_);
-    ar >> make_nvp("inclusion_directive", v.inclusion_directive_);
 }
 
 } }

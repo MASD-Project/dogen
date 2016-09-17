@@ -27,28 +27,23 @@ namespace properties {
 
 path_derivatives::path_derivatives(path_derivatives&& rhs)
     : file_path_(std::move(rhs.file_path_)),
-      header_guard_(std::move(rhs.header_guard_)),
-      inclusion_directive_(std::move(rhs.inclusion_directive_)) { }
+      header_guard_(std::move(rhs.header_guard_)) { }
 
 path_derivatives::path_derivatives(
     const boost::filesystem::path& file_path,
-    const std::string& header_guard,
-    const std::string& inclusion_directive)
+    const std::string& header_guard)
     : file_path_(file_path),
-      header_guard_(header_guard),
-      inclusion_directive_(inclusion_directive) { }
+      header_guard_(header_guard) { }
 
 void path_derivatives::swap(path_derivatives& other) noexcept {
     using std::swap;
     swap(file_path_, other.file_path_);
     swap(header_guard_, other.header_guard_);
-    swap(inclusion_directive_, other.inclusion_directive_);
 }
 
 bool path_derivatives::operator==(const path_derivatives& rhs) const {
     return file_path_ == rhs.file_path_ &&
-        header_guard_ == rhs.header_guard_ &&
-        inclusion_directive_ == rhs.inclusion_directive_;
+        header_guard_ == rhs.header_guard_;
 }
 
 path_derivatives& path_derivatives::operator=(path_derivatives other) {
@@ -87,22 +82,6 @@ void path_derivatives::header_guard(const std::string& v) {
 
 void path_derivatives::header_guard(const std::string&& v) {
     header_guard_ = std::move(v);
-}
-
-const std::string& path_derivatives::inclusion_directive() const {
-    return inclusion_directive_;
-}
-
-std::string& path_derivatives::inclusion_directive() {
-    return inclusion_directive_;
-}
-
-void path_derivatives::inclusion_directive(const std::string& v) {
-    inclusion_directive_ = v;
-}
-
-void path_derivatives::inclusion_directive(const std::string&& v) {
-    inclusion_directive_ = std::move(v);
 }
 
 } } } }

@@ -38,8 +38,7 @@ std::ostream& operator<<(std::ostream& s, const path_derivatives& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::properties::path_derivatives\"" << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
-      << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "
-      << "\"inclusion_directive\": " << "\"" << tidy_up_string(v.inclusion_directive()) << "\""
+      << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\""
       << " }";
     return(s);
 }

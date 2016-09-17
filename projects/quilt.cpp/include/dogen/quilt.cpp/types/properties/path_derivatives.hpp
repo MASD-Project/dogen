@@ -50,8 +50,7 @@ public:
 public:
     path_derivatives(
         const boost::filesystem::path& file_path,
-        const std::string& header_guard,
-        const std::string& inclusion_directive);
+        const std::string& header_guard);
 
 private:
     template<typename Archive>
@@ -71,11 +70,6 @@ public:
     void header_guard(const std::string& v);
     void header_guard(const std::string&& v);
 
-    const std::string& inclusion_directive() const;
-    std::string& inclusion_directive();
-    void inclusion_directive(const std::string& v);
-    void inclusion_directive(const std::string&& v);
-
 public:
     bool operator==(const path_derivatives& rhs) const;
     bool operator!=(const path_derivatives& rhs) const {
@@ -89,7 +83,6 @@ public:
 private:
     boost::filesystem::path file_path_;
     std::string header_guard_;
-    std::string inclusion_directive_;
 };
 
 } } } }

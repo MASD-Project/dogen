@@ -46,7 +46,6 @@ std::size_t path_derivatives_hasher::hash(const path_derivatives& v) {
 
     combine(seed, hash_boost_filesystem_path(v.file_path()));
     combine(seed, v.header_guard());
-    combine(seed, v.inclusion_directive());
 
     return seed;
 }
