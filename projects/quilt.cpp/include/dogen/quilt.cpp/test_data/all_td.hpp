@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/quilt.cpp/test_data/fabric/registrar_td.hpp"
+#include "dogen/quilt.cpp/test_data/fabric/cmakelists_td.hpp"
 #include "dogen/quilt.cpp/test_data/fabric/master_header_td.hpp"
 #include "dogen/quilt.cpp/test_data/formatters/file_types_td.hpp"
 #include "dogen/quilt.cpp/test_data/settings/odb_settings_td.hpp"

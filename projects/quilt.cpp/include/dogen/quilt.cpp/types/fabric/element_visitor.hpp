@@ -27,6 +27,7 @@
 
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_fwd.hpp"
+#include "dogen/quilt.cpp/types/fabric/cmakelists_fwd.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header_fwd.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations_fwd.hpp"
 
@@ -44,6 +45,16 @@ public:
 
 public:
     using dogen::yarn::element_visitor::visit;
+
+    /**
+     * @brief Accept visits for type dogen::quilt::cpp::fabric::cmakelists
+     */
+    /**@{*/
+    virtual void visit(const dogen::quilt::cpp::fabric::cmakelists&) const { }
+    virtual void visit(const dogen::quilt::cpp::fabric::cmakelists&) { }
+    virtual void visit(dogen::quilt::cpp::fabric::cmakelists&) const { }
+    virtual void visit(dogen::quilt::cpp::fabric::cmakelists&) { }
+    /**@}*/
 
     /**
      * @brief Accept visits for type dogen::quilt::cpp::fabric::forward_declarations

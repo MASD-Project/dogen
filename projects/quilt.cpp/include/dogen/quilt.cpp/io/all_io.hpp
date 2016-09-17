@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/quilt.cpp/io/fabric/registrar_io.hpp"
+#include "dogen/quilt.cpp/io/fabric/cmakelists_io.hpp"
 #include "dogen/quilt.cpp/io/fabric/master_header_io.hpp"
 #include "dogen/quilt.cpp/io/formatters/file_types_io.hpp"
 #include "dogen/quilt.cpp/io/settings/odb_settings_io.hpp"
