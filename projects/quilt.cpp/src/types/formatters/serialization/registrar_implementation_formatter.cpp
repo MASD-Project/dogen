@@ -151,8 +151,7 @@ registrar_implementation_formatter::formattable_origin_type() const {
 }
 
 void registrar_implementation_formatter::
-register_inclusion_dependencies_provider(
-  properties::registrar& rg) const {
+register_provider(properties::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 

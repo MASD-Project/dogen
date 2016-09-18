@@ -119,8 +119,8 @@ enum_header_formatter::formattable_origin_type() const {
     return properties::origin_types::external;
 }
 
-void enum_header_formatter::register_inclusion_dependencies_provider(
-    properties::registrar& rg) const {
+void enum_header_formatter::
+register_provider(properties::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 

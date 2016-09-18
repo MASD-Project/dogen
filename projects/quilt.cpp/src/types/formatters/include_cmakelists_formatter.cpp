@@ -61,8 +61,8 @@ include_cmakelists_formatter::formattable_origin_type() const {
     return properties::origin_types::internal;
 }
 
-void include_cmakelists_formatter::register_inclusion_dependencies_provider(
-    properties::registrar& /*rg*/) const {}
+void include_cmakelists_formatter::
+register_provider(properties::registrar& /*rg*/) const {}
 
 dogen::formatters::file include_cmakelists_formatter::
 format(const context& ctx, const properties::cmakelists_info& c) const {

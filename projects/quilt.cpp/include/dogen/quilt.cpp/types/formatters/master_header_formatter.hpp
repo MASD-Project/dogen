@@ -45,8 +45,7 @@ public:
 
     properties::origin_types formattable_origin_type() const override;
 
-    void register_inclusion_dependencies_provider(
-        properties::registrar& rg) const override;
+    void register_provider(properties::registrar& rg) const override;
 
     dogen::formatters::file format(const context& ctx,
         const fabric::master_header& mh) const override;

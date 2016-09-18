@@ -82,7 +82,7 @@ private:
  */
 template<typename T>
 inline void register_provider(registrar& rg, const T& t) {
-    t.register_inclusion_dependencies_provider(rg);
+    t.register_provider(rg);
 }
 
 } } } }

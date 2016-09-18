@@ -128,8 +128,8 @@ formattable_origin_type() const {
     return properties::origin_types::external;
 }
 
-void master_header_formatter::register_inclusion_dependencies_provider(
-    properties::registrar& rg) const {
+void master_header_formatter::
+register_provider(properties::registrar& rg) const {
     const auto fn(ownership_hierarchy_.facet_name());
     const auto fmtn(ownership_hierarchy_.formatter_name());
     rg.register_provider(boost::make_shared<provider>(fn, fmtn));

@@ -124,8 +124,8 @@ forward_declarations_formatter::formattable_origin_type() const {
     return properties::origin_types::external;
 }
 
-void forward_declarations_formatter::register_inclusion_dependencies_provider(
-    properties::registrar& rg) const {
+void forward_declarations_formatter::
+register_provider(properties::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 

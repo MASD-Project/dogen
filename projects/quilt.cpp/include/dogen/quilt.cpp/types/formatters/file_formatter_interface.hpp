@@ -68,8 +68,7 @@ public:
      * @brief Registers an inclusion dependency providers this
      * formatter may know of.
      */
-    virtual void register_inclusion_dependencies_provider(
-        properties::registrar& rg) const = 0;
+    virtual void register_provider(properties::registrar& rg) const = 0;
 };
 
 } } } }

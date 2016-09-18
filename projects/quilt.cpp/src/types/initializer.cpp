@@ -38,7 +38,7 @@ void initialize_providers(const formatters::registrar& fmt_rg) {
     auto& prop_rg(properties::workflow::registrar());
     const auto c(fmt_rg.formatter_container());
     for (const auto& f : c.all_file_formatters())
-        f->register_inclusion_dependencies_provider(prop_rg);
+        f->register_provider(prop_rg);
 }
 
 void initializer::initialize() {
