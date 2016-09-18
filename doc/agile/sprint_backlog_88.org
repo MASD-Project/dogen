@@ -13,34 +13,35 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-18 Sun 11:13]
+#+CAPTION: Clock summary at [2016-09-18 Sun 12:35]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *41:10* |       |       | 100.0 |
+| *Total time*                                                                | *42:28* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 41:10   |       |       | 100.0 |
-| Active                                                                      |         | 41:10 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:34 |   6.2 |
+| Stories                                                                     | 42:28   |       |       | 100.0 |
+| Active                                                                      |         | 42:28 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:34 |   6.0 |
 | COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.3 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   1.1 |
-| COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   2.3 |
-| CANCELLED Remove inclusion dependencies builder factory                     |         |       |  0:14 |   0.6 |
-| COMPLETED Analysis on formatters, elements and extensibility                |         |       |  1:18 |   3.2 |
-| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   2.9 |
+| COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   2.2 |
+| CANCELLED Remove inclusion dependencies builder factory                     |         |       |  0:14 |   0.5 |
+| COMPLETED Analysis on formatters, elements and extensibility                |         |       |  1:18 |   3.1 |
+| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   2.8 |
 | COMPLETED Investigate broken windows builds                                 |         |       |  0:32 |   1.3 |
-| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |  12.7 |
-| COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   4.8 |
-| CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   7.6 |
-| COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   2.6 |
-| COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   6.2 |
-| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  29.2 |
+| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |  12.3 |
+| COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   4.6 |
+| CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   7.3 |
+| COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   2.5 |
+| COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   6.0 |
+| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  28.3 |
 | COMPLETED Fix AppVeyor notifications                                        |         |       |  0:22 |   0.9 |
 | COMPLETED Static use of element types does more harm than good              |         |       |  0:32 |   1.3 |
-| COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   3.6 |
+| COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   3.5 |
+| CANCELLED Create a simple Emacs mode for stitch                             |         |       |  1:12 |   2.8 |
 | STARTED Terminology clean up                                                |         |       |  0:02 |   0.1 |
-| STARTED Remove formattable origin type                                      |         |       |  2:25 |   5.9 |
-| STARTED Move =cmakelists_info= to fabric                                    |         |       |  3:01 |   7.3 |
+| STARTED Remove formattable origin type                                      |         |       |  2:25 |   5.7 |
+| STARTED Move =cmakelists_info= to fabric                                    |         |       |  3:07 |   7.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -736,6 +737,47 @@ The formatting workflow will then be nothing more than going through
 the =formattables::model= and calling the formatter on the element and
 configuration.
 
+*** CANCELLED Create a simple Emacs mode for stitch                   :story:
+    CLOSED: [2016-09-18 Sun 12:33]
+    CLOCK: [2016-09-18 Sun 11:21]--[2016-09-18 Sun 12:33] =>  1:12
+
+Create a really simple emacs mode that just has different visual
+representations for the stitch code and the template itself.
+
+Tried with generic mode:
+
+ #+begin_src emacs-lisp
+(require 'generic-x) ;; we need this
+
+(define-generic-mode 'stitch-mode
+  () ;; comments not supported
+  '("licence_name" "copyright_notice" "modeline_group_name"
+    "stream_variable_name" "inclusion_dependency"
+    "containing_namespaces") ;; keywords
+  '(("<#@" "<#+" "<#=" "#>" . 'font-lock-operator)) ;; operator
+  '("\\.stitch$") ;; extension
+  nil
+  "Major mode for editing Dogen's Stitch template files."
+  )
+
+;;; stitch-mode.el ends here
+#+end_src
+
+Merged stories:
+
+*Consider creating an Emacs mode for stitch*
+
+It would be nice to have syntax highlighting for stitch templates. We
+have a [[https://github.com/mcraveiro/cunene/blob/master/lisp/other/utils/t4-mode.el][mumamo-based version]] in cunene - originally done for t4 - but
+which is rather unusable.
+
+See also [[https://github.com/fxbois/web-mode][web-mode]].
+
+*Investigate adding polymode support for stitch templates*
+
+We need a way to visualise stitch templates that is a bit more
+readable than fundamental mode. One option is [[https://github.com/vspinu/polymode/tree/master/modes][polymode]].
+
 *** STARTED Terminology clean up                                      :story:
     CLOCK: [2016-09-17 Sat 19:41]--[2016-09-17 Sat 19:43] =>  0:02
 
@@ -778,6 +820,7 @@ Tasks:
   container.
 
 *** STARTED Move =cmakelists_info= to fabric                          :story:
+    CLOCK: [2016-09-18 Sun 11:14]--[2016-09-18 Sun 11:20] =>  0:06
     CLOCK: [2016-09-18 Sun 10:52]--[2016-09-18 Sun 11:13] =>  0:21
     CLOCK: [2016-09-18 Sun 10:21]--[2016-09-18 Sun 10:51] =>  0:30
     CLOCK: [2016-09-17 Sat 22:50]--[2016-09-17 Sat 23:08] =>  0:18

@@ -6458,15 +6458,41 @@ we are not checking to see if it exists:
 We need to detect it and only add this targets if diff has been
 found. We probably should look for a =FindDiff.cmake= script.
 
-*** Consider creating an Emacs mode for stitch                        :story:
+*** Create a simple Emacs mode for stitch                             :story:
+
+Create a really simple emacs mode that just has different visual
+representations for the stitch code and the template itself.
+
+Merged stories:
+
+*Try creating a mode with generic mode*
+
+Tried with generic mode:
+
+ #+begin_src emacs-lisp
+(require 'generic-x) ;; we need this
+
+(define-generic-mode 'stitch-mode
+  () ;; comments not supported
+  '("licence_name" "copyright_notice" "modeline_group_name"
+    "stream_variable_name" "inclusion_dependency"
+    "containing_namespaces") ;; keywords
+  '(("<#@" "<#+" "<#=" "#>" . 'font-lock-operator)) ;; operator
+  '("\\.stitch$") ;; extension
+  nil
+  "Major mode for editing Dogen's Stitch template files."
+  )
+
+;;; stitch-mode.el ends here
+#+end_src
+
+*Consider creating an Emacs mode for stitch*
 
 It would be nice to have syntax highlighting for stitch templates. We
 have a [[https://github.com/mcraveiro/cunene/blob/master/lisp/other/utils/t4-mode.el][mumamo-based version]] in cunene - originally done for t4 - but
 which is rather unusable.
 
 See also [[https://github.com/fxbois/web-mode][web-mode]].
-
-Merged stories:
 
 *Investigate adding polymode support for stitch templates*
 
