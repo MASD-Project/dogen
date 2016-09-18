@@ -23,6 +23,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists_factory.hpp"
 
@@ -31,6 +32,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("quilt.cpp.fabric.cmakelists_factory"));
 
+const std::string simple_name("CMakeLists");
 const std::string underscore("_");
 
 }
@@ -42,12 +44,15 @@ namespace fabric {
 
 std::list<boost::shared_ptr<yarn::element>>
 cmakelists_factory::build(const yarn::intermediate_model& im) const {
-    BOOST_LOG_SEV(lg, debug) << "Generating source CMakeLists.";
+    BOOST_LOG_SEV(lg, debug) << "Generating CMakeLists.";
+
+    yarn::name_factory nf;
+    const auto n(nf.build_element_in_model(im.name(), simple_name));
+    auto e(boost::make_shared<cmakelists>());
+    e->name(n);
 
     using boost::algorithm::join;
     const auto mn(join(im.name().location().model_modules(), underscore));
-
-    auto e(boost::make_shared<cmakelists>());
     e->model_name(mn);
 
     const auto em(im.name().location().external_modules());
@@ -56,6 +61,8 @@ cmakelists_factory::build(const yarn::intermediate_model& im) const {
 
     std::list<boost::shared_ptr<yarn::element>> r;
     r.push_back(e);
+
+    BOOST_LOG_SEV(lg, debug) << "Generated CMakeLists: " << r.size();
     return r;
 }
 

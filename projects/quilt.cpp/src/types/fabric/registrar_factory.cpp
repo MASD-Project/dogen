@@ -30,7 +30,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.fabric.registrar_factory"));
 
-const std::string registrar_name("registrar");
+const std::string simple_name("registrar");
 
 }
 
@@ -42,7 +42,7 @@ namespace fabric {
 boost::shared_ptr<fabric::registrar> registrar_factory::
 build(const yarn::name& model_name) const {
     yarn::name_factory nf;
-    const auto n(nf.build_element_in_model(model_name, registrar_name));
+    const auto n(nf.build_element_in_model(model_name, simple_name));
     auto r(boost::make_shared<fabric::registrar>());
     r->name(n);
     return r;
