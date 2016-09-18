@@ -1,0 +1,152 @@
+diff --git a/doc/agile/sprint_backlog_88.org b/doc/agile/sprint_backlog_88.org
+index 311bbae..c9349a0 100644
+--- a/doc/agile/sprint_backlog_88.org
++++ b/doc/agile/sprint_backlog_88.org
+@@ -820,6 +820,8 @@ Tasks:
+   container.
+ 
+ *** STARTED Move =cmakelists_info= to fabric                          :story:
++    CLOCK: [2016-09-18 Sun 12:51]--[2016-09-18 Sun 12:56] =>  0:05
++    CLOCK: [2016-09-18 Sun 12:44]--[2016-09-18 Sun 12:50] =>  0:06
+     CLOCK: [2016-09-18 Sun 11:14]--[2016-09-18 Sun 11:20] =>  0:06
+     CLOCK: [2016-09-18 Sun 10:52]--[2016-09-18 Sun 11:13] =>  0:21
+     CLOCK: [2016-09-18 Sun 10:21]--[2016-09-18 Sun 10:51] =>  0:30
+@@ -845,7 +847,9 @@ Tasks:
+   element id and formatter id.
+ - add =formattables::model= as an unordered map of id to
+   formattable. Implement formatting workflow in terms of formattables
+-  model.
++  model. Add all context properties to model such as
++  streaming_settings_repository and helpers_. element_settings should
++  be merged with configuration.
+ - remove formatting context and update formatting workflow to call a
+   visitor to resolve the element and then call the formatter.
+ - add an enablement map for all formatters in the formatter
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/cmakelists_formatter_interface.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/cmakelists_formatter_interface.hpp
+index 89ea7c8..41fb1ef 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/cmakelists_formatter_interface.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/cmakelists_formatter_interface.hpp
+@@ -27,7 +27,7 @@
+ 
+ #include "dogen/formatters/types/file.hpp"
+ #include "dogen/quilt.cpp/types/formatters/context.hpp"
+-#include "dogen/quilt.cpp/types/properties/cmakelists_info.hpp"
++#include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
+ #include "dogen/quilt.cpp/types/formatters/file_formatter_interface.hpp"
+ 
+ namespace dogen {
+@@ -47,8 +47,8 @@ public:
+     /**
+      * @brief Generate a c++ representation for the CMakeLists.
+      */
+-    virtual dogen::formatters::file format(const context& ctx,
+-        const properties::cmakelists_info& c) const = 0;
++    virtual dogen::formatters::file
++    format(const context& ctx, const fabric::cmakelists& c) const = 0;
+ };
+ 
+ } } } }
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/include_cmakelists_formatter.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/include_cmakelists_formatter.hpp
+index 458f2c2..e6449c3 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/include_cmakelists_formatter.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/include_cmakelists_formatter.hpp
+@@ -58,8 +58,8 @@ public:
+ 
+     void register_provider(properties::registrar& rg) const override;
+ 
+-    dogen::formatters::file format(const context& ctx,
+-        const properties::cmakelists_info& c) const override;
++    dogen::formatters::file
++    format(const context& ctx, const fabric::cmakelists& c) const override;
+ };
+ 
+ } } } }
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/include_cmakelists_formatter_stitch.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/include_cmakelists_formatter_stitch.hpp
+index c593bf8..64aef07 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/include_cmakelists_formatter_stitch.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/include_cmakelists_formatter_stitch.hpp
+@@ -26,7 +26,7 @@
+ #endif
+ 
+ #include "dogen/formatters/types/file.hpp"
+-#include "dogen/quilt.cpp/types/properties/cmakelists_info.hpp"
++#include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
+ #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
+ 
+ namespace dogen {
+@@ -34,8 +34,8 @@ namespace quilt {
+ namespace cpp {
+ namespace formatters {
+ 
+-dogen::formatters::file include_cmakelists_formatter_stitch(
+-    assistant& a, const properties::cmakelists_info& c);
++dogen::formatters::file
++include_cmakelists_formatter_stitch(assistant& a, const fabric::cmakelists& c);
+ 
+ } } } }
+ 
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/source_cmakelists_formatter.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/source_cmakelists_formatter.hpp
+index a06f96b..c8eacd9 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/source_cmakelists_formatter.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/source_cmakelists_formatter.hpp
+@@ -58,8 +58,8 @@ public:
+ 
+     void register_provider(properties::registrar& rg) const override;
+ 
+-    dogen::formatters::file format(const context& ctx,
+-        const properties::cmakelists_info& c) const override;
++    dogen::formatters::file
++    format(const context& ctx, const fabric::cmakelists& c) const override;
+ };
+ 
+ } } } }
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/source_cmakelists_formatter_stitch.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/source_cmakelists_formatter_stitch.hpp
+index 8908b5a..0ea0c49 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/source_cmakelists_formatter_stitch.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/source_cmakelists_formatter_stitch.hpp
+@@ -26,7 +26,7 @@
+ #endif
+ 
+ #include "dogen/formatters/types/file.hpp"
+-#include "dogen/quilt.cpp/types/properties/cmakelists_info.hpp"
++#include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
+ #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
+ 
+ namespace dogen {
+@@ -34,8 +34,8 @@ namespace quilt {
+ namespace cpp {
+ namespace formatters {
+ 
+-dogen::formatters::file source_cmakelists_formatter_stitch(
+-    assistant& a, const properties::cmakelists_info& c);
++dogen::formatters::file
++source_cmakelists_formatter_stitch(assistant& a, const fabric::cmakelists& c);
+ 
+ } } } }
+ 
+diff --git a/projects/quilt.cpp/src/types/formatters/include_cmakelists_formatter.cpp b/projects/quilt.cpp/src/types/formatters/include_cmakelists_formatter.cpp
+index 97b4c5b..473fb49 100644
+--- a/projects/quilt.cpp/src/types/formatters/include_cmakelists_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/include_cmakelists_formatter.cpp
+@@ -65,7 +65,7 @@ void include_cmakelists_formatter::
+ register_provider(properties::registrar& /*rg*/) const {}
+ 
+ dogen::formatters::file include_cmakelists_formatter::
+-format(const context& ctx, const properties::cmakelists_info& c) const {
++format(const context& ctx, const fabric::cmakelists& c) const {
+     assistant a(ctx, ownership_hierarchy(), file_type(), c.id());
+     const auto r(include_cmakelists_formatter_stitch(a, c));
+     return r;
+diff --git a/projects/quilt.cpp/src/types/formatters/include_cmakelists_formatter.stitch b/projects/quilt.cpp/src/types/formatters/include_cmakelists_formatter.stitch
+index 413d48c..ed8e434 100644
+--- a/projects/quilt.cpp/src/types/formatters/include_cmakelists_formatter.stitch
++++ b/projects/quilt.cpp/src/types/formatters/include_cmakelists_formatter.stitch
+@@ -9,7 +9,7 @@
+ <#+
+ 
+ dogen::formatters::file include_cmakelists_formatter_stitch(
+-    assistant& a, const properties::cmakelists_info& c) {
++    assistant& a, const fabric::cmakelists& c) {
+ 
+     {
+         a.make_annotation_preamble(c.file_properties());
