@@ -567,6 +567,25 @@ approximation of it) with a graph that has cycles? For example:
   do?
 #+end_quote
 
+Actually maybe we are looking at this the wrong way. Lets imagine that
+for each element there is a vector v in GF(2) called the initial
+vector. The objective is to compute u, the output vector. The output
+vector is made up of the initial vector of the element, times the
+output vectors of all the elements the element depends on. However,
+these can be formulated in terms of initial vectors too (e.g. the
+initial vector of the depended element times the initial vectors of
+the elements it depends on times the initial vectors of the elements
+they depend on and so forth). Thus for each element there is an
+expansion that just relies on initial vectors. For the cases where
+there are cycles: its not a problem since multiplying n times by
+the same vector (in GF(2)) produces the same result as multiplying
+just once.
+
+It would still be useful to have a graph though, to find all of the
+initial vectors for a given element. We just need to stop DFS'ing when
+we find a cycle. We can also cache the initial vectors for each
+element.
+
 *** Indent stitch output using clang format                           :story:
 
 We need to indent the output coming out of stitch as it is not
