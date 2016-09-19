@@ -74,6 +74,14 @@ private:
         const formatters::container& fc) const;
 
     /**
+     * @brief Computes the facet directory name of each facet.
+     */
+    std::unordered_map<std::string, std::string>
+    facet_directory_for_facet(const formatters::container& fc,
+        const std::unordered_map<std::string,
+        settings::path_settings>& ps) const;
+
+    /**
      * @brief Create the helper settings repository.
      */
     settings::helper_settings_repository create_helper_settings_repository(
@@ -98,6 +106,7 @@ private:
     formatter_properties_repository
     create_formatter_properties(const dynamic::repository& drp,
         const dynamic::object& root_object,
+        const std::unordered_map<std::string, std::string>& fdff,
         const path_derivatives_repository& pdrp,
         const locator& l,
         const formatters::container& fc,

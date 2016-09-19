@@ -70,7 +70,7 @@ void save(Archive& ar,
     ar << make_nvp("header_guard", v.header_guard_);
     ar << make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
     ar << make_nvp("enabled_formatters", v.enabled_formatters_);
-    ar << make_nvp("facet_folder_for_facet", v.facet_folder_for_facet_);
+    ar << make_nvp("facet_directory_for_facet", v.facet_directory_for_facet_);
 }
 
 template<typename Archive>
@@ -82,7 +82,7 @@ void load(Archive& ar,
     ar >> make_nvp("header_guard", v.header_guard_);
     ar >> make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
     ar >> make_nvp("enabled_formatters", v.enabled_formatters_);
-    ar >> make_nvp("facet_folder_for_facet", v.facet_folder_for_facet_);
+    ar >> make_nvp("facet_directory_for_facet", v.facet_directory_for_facet_);
 }
 
 } }

@@ -59,6 +59,9 @@ private:
         std::unordered_map<std::string, std::list<std::string> >
         inclusion_dependencies;
         std::unordered_map<std::string, bool> enablement;
+        std::unordered_set<std::string> enabled_formatters;
+        std::unordered_map<std::string, std::string>
+        facet_directory_for_facet;
     };
 
 private:
@@ -93,7 +96,8 @@ private:
     std::unordered_map<yarn::name, merged_formatter_data>
     merge(const path_derivatives_repository& pdrp,
         const inclusion_dependencies_repository& idrp,
-        const enablement_repository& erp) const;
+        const enablement_repository& erp,
+        const std::unordered_map<std::string, std::string>& fdff) const;
 
     /**
      * @brief Produce the formatter properties.
@@ -106,6 +110,7 @@ public:
     formatter_properties_repository make(
         const dynamic::repository& srp,
         const dynamic::object& root_object,
+        const std::unordered_map<std::string, std::string>& fdff,
         const path_derivatives_repository& pdrp,
         const registrar& rg, const locator& l,
         const formatters::container& fc,

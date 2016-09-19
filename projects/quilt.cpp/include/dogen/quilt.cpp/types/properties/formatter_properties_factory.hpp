@@ -50,7 +50,10 @@ public:
         path_derivatives,
         const std::unordered_map<std::string, std::list<std::string> >&
         inclusion_dependencies,
-        const std::unordered_map<std::string, bool>& enablement) const;
+        const std::unordered_map<std::string, bool>& enablement,
+        std::unordered_set<std::string> enabled_formatters,
+        std::unordered_map<std::string, std::string>
+        facet_directory_for_facet) const;
 };
 
 } } } }

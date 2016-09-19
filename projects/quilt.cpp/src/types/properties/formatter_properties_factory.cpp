@@ -34,12 +34,16 @@ formatter_properties_factory::make(
     path_derivatives,
     const std::unordered_map<std::string, std::list<std::string> >&
     inclusion_dependencies,
-    const std::unordered_map<std::string, bool>& enablement) const {
+    const std::unordered_map<std::string, bool>& enablement,
+    std::unordered_set<std::string> enabled_formatters,
+    std::unordered_map<std::string, std::string>
+    facet_directory_for_facet) const {
 
     std::unordered_map<std::string, formatter_properties> r;
     for (const auto& pair : path_derivatives) {
-        r[pair.first].file_path(pair.second.file_path());
-        r[pair.first].header_guard(pair.second.header_guard());
+        auto& entry(r[pair.first]);
+        entry.file_path(pair.second.file_path());
+        entry.header_guard(pair.second.header_guard());
     }
 
     for (const auto& pair : inclusion_dependencies)
@@ -47,6 +51,11 @@ formatter_properties_factory::make(
 
     for (const auto& pair : enablement)
         r[pair.first].enabled(pair.second);
+
+    for (auto& pair : r) {
+        pair.second.enabled_formatters(enabled_formatters);
+        pair.second.facet_directory_for_facet(facet_directory_for_facet);
+    }
 
     return r;
 }

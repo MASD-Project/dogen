@@ -87,7 +87,7 @@ populate(const unsigned int position, result_type& v) {
     v.header_guard(create_boost_optional_std_string(position + 2));
     v.inclusion_dependencies(create_std_list_std_string(position + 3));
     v.enabled_formatters(create_std_unordered_set_std_string(position + 4));
-    v.facet_folder_for_facet(create_std_unordered_map_std_string_std_string(position + 5));
+    v.facet_directory_for_facet(create_std_unordered_map_std_string_std_string(position + 5));
 }
 
 formatter_properties_generator::result_type

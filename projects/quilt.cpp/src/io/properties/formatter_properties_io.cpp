@@ -110,7 +110,7 @@ std::ostream& operator<<(std::ostream& s, const formatter_properties& v) {
       << "\"header_guard\": " << v.header_guard() << ", "
       << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "
       << "\"enabled_formatters\": " << v.enabled_formatters() << ", "
-      << "\"facet_folder_for_facet\": " << v.facet_folder_for_facet()
+      << "\"facet_directory_for_facet\": " << v.facet_directory_for_facet()
       << " }";
     return(s);
 }

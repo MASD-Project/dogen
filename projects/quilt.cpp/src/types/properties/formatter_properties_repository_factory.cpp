@@ -74,17 +74,28 @@ std::unordered_map<
 formatter_properties_repository_factory::merge(
     const path_derivatives_repository& pdrp,
     const inclusion_dependencies_repository& idrp,
-    const enablement_repository& erp) const {
+    const enablement_repository& erp,
+    const std::unordered_map<std::string, std::string>& fdff) const {
 
     std::unordered_map<yarn::name, merged_formatter_data> r;
-    for (const auto& pair : pdrp.by_name())
-        r[pair.first].path_derivatives_ = pair.second;
+    for (const auto& pair : pdrp.by_name()) {
+        auto& entry(r[pair.first]);
+        entry.path_derivatives_ = pair.second;
+        entry.facet_directory_for_facet = fdff;
+    }
 
     for (const auto& pair : idrp.by_name())
         r[pair.first].inclusion_dependencies = pair.second;
 
-    for (const auto& pair : erp.by_name())
-        r[pair.first].enablement = pair.second;
+    for (const auto& pair : erp.by_name()) {
+        auto& entry(r[pair.first]);
+        entry.enablement = pair.second;
+
+        for (const auto p : pair.second) {
+            if (p.second)
+                entry.enabled_formatters.insert(p.first);
+        }
+    }
 
     return r;
 }
@@ -99,7 +110,9 @@ formatter_properties_repository_factory::create_formatter_properties(
         r.by_id()[pair.first.id()] = f.make(
             pair.second.path_derivatives_,
             pair.second.inclusion_dependencies,
-            pair.second.enablement);
+            pair.second.enablement,
+            pair.second.enabled_formatters,
+            pair.second.facet_directory_for_facet);
     }
 
     return r;
@@ -107,6 +120,7 @@ formatter_properties_repository_factory::create_formatter_properties(
 
 formatter_properties_repository formatter_properties_repository_factory::
 make(const dynamic::repository& srp, const dynamic::object& root_object,
+    const std::unordered_map<std::string, std::string>& fdff,
     const path_derivatives_repository& pdrp,
     const registrar& rg, const locator& l,
     const formatters::container& fc, const yarn::model& m) const {
@@ -119,7 +133,7 @@ make(const dynamic::repository& srp, const dynamic::object& root_object,
     const inclusion_dependencies_builder_factory bf(erp, idrp);
     const auto dprp(create_inclusion_dependencies_repository(bf, pc, m));
 
-    const auto mfd(merge(pdrp, dprp, erp));
+    const auto mfd(merge(pdrp, dprp, erp, fdff));
     const auto r(create_formatter_properties(mfd));
 
     BOOST_LOG_SEV(lg, debug) << "Built formatter properties repository: " << r;

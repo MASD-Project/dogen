@@ -75,6 +75,22 @@ create_helper_settings_repository(const dynamic::repository& drp,
     return f.make(drp, m);
 }
 
+std::unordered_map<std::string, std::string> workflow::
+facet_directory_for_facet(const formatters::container& fc,
+    const std::unordered_map<std::string,
+    settings::path_settings>& ps) const {
+
+    std::unordered_map<std::string, std::string> r;
+    for (const auto& f : fc.all_external_file_formatters()) {
+        const auto i(ps.find(f->ownership_hierarchy().formatter_name()));
+        if ( i != ps.end()) {
+            const auto fn(f->ownership_hierarchy().facet_name());
+            r[fn] = i->second.facet_directory();
+        }
+    }
+    return r;
+}
+
 settings::aspect_settings_repository
 workflow::create_aspect_settings_repository(
     const dynamic::repository& drp, const yarn::model& m) const {
@@ -93,13 +109,14 @@ create_path_derivatives_repository(
 formatter_properties_repository workflow::
 create_formatter_properties(const dynamic::repository& drp,
     const dynamic::object& root_object,
+    const std::unordered_map<std::string, std::string>& fdff,
     const path_derivatives_repository& pdrp,
     const locator& l,
     const formatters::container& fc,
     const yarn::model& m) const {
 
     formatter_properties_repository_factory f;
-    return f.make(drp, root_object, pdrp, registrar(), l, fc, m);
+    return f.make(drp, root_object, fdff, pdrp, registrar(), l, fc, m);
 }
 
 std::forward_list<std::shared_ptr<properties::formattable> >
@@ -152,7 +169,8 @@ workflow::execute(const config::cpp_options& opts,
     const auto ps(create_path_settings(drp, ro, fc));
     const locator l(opts, m, ps);
     const auto pdrp(create_path_derivatives_repository(l, m));
-    auto fprp(create_formatter_properties(drp, ro, pdrp, l, fc, m));
+    const auto fdff(facet_directory_for_facet(fc, ps));
+    auto fprp(create_formatter_properties(drp, ro, fdff, pdrp, l, fc, m));
 
     const auto formattables(from_factory(opts, fpwf, ps, fprp, m));
     BOOST_LOG_SEV(lg, debug) << "Formattables: " << formattables;

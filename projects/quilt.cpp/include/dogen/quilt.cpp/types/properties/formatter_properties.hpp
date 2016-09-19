@@ -57,7 +57,7 @@ public:
         const boost::optional<std::string>& header_guard,
         const std::list<std::string>& inclusion_dependencies,
         const std::unordered_set<std::string>& enabled_formatters,
-        const std::unordered_map<std::string, std::string>& facet_folder_for_facet);
+        const std::unordered_map<std::string, std::string>& facet_directory_for_facet);
 
 private:
     template<typename Archive>
@@ -96,15 +96,15 @@ public:
     /**@}*/
 
     /**
-     * @brief Maps a facet name to its facet folder.
+     * @brief Maps a facet name to its facet directory.
      *
-     * Note that the facet folder may be empty if the user disabled facet folders.
+     * Note that the facet directory may be empty if the user disabled facet folders.
      */
     /**@{*/
-    const std::unordered_map<std::string, std::string>& facet_folder_for_facet() const;
-    std::unordered_map<std::string, std::string>& facet_folder_for_facet();
-    void facet_folder_for_facet(const std::unordered_map<std::string, std::string>& v);
-    void facet_folder_for_facet(const std::unordered_map<std::string, std::string>&& v);
+    const std::unordered_map<std::string, std::string>& facet_directory_for_facet() const;
+    std::unordered_map<std::string, std::string>& facet_directory_for_facet();
+    void facet_directory_for_facet(const std::unordered_map<std::string, std::string>& v);
+    void facet_directory_for_facet(const std::unordered_map<std::string, std::string>&& v);
     /**@}*/
 
 public:
@@ -123,7 +123,7 @@ private:
     boost::optional<std::string> header_guard_;
     std::list<std::string> inclusion_dependencies_;
     std::unordered_set<std::string> enabled_formatters_;
-    std::unordered_map<std::string, std::string> facet_folder_for_facet_;
+    std::unordered_map<std::string, std::string> facet_directory_for_facet_;
 };
 
 } } } }

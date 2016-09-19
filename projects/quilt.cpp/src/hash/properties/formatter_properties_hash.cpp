@@ -84,7 +84,7 @@ std::size_t formatter_properties_hasher::hash(const formatter_properties& v) {
     combine(seed, hash_boost_optional_std_string(v.header_guard()));
     combine(seed, hash_std_list_std_string(v.inclusion_dependencies()));
     combine(seed, hash_std_unordered_set_std_string(v.enabled_formatters()));
-    combine(seed, hash_std_unordered_map_std_string_std_string(v.facet_folder_for_facet()));
+    combine(seed, hash_std_unordered_map_std_string_std_string(v.facet_directory_for_facet()));
 
     return seed;
 }

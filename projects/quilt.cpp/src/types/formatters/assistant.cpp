@@ -173,14 +173,10 @@ std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
 
 bool assistant::
 is_formatter_enabled(const std::string& formatter_name) const {
-    const auto fp(obtain_formatter_properties(formatter_name));
-    if (!fp) {
-        BOOST_LOG_SEV(lg, error) << formatter_properties_missing
-                                 << formatter_name;
-        BOOST_THROW_EXCEPTION(formatting_error(formatter_properties_missing +
-                formatter_name));
-    }
-    return fp->enabled();
+    ensure_formatter_properties_are_present();
+    const auto fp(*formatter_properties_);
+    const auto i(fp.enabled_formatters().find(formatter_name));
+    return i != fp.enabled_formatters().end();
 }
 
 bool assistant::requires_manual_default_constructor() const {

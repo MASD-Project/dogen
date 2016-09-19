@@ -13,36 +13,36 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-19 Mon 10:32]
+#+CAPTION: Clock summary at [2016-09-19 Mon 12:23]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *43:41* |       |       | 100.0 |
+| *Total time*                                                                | *45:31* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 43:41   |       |       | 100.0 |
-| Active                                                                      |         | 43:41 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:34 |   5.9 |
+| Stories                                                                     | 45:31   |       |       | 100.0 |
+| Active                                                                      |         | 45:31 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:34 |   5.6 |
 | COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.3 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   1.0 |
-| COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   2.2 |
+| COMPLETED Analysis on current state of file path generation                 |         |       |  0:57 |   2.1 |
 | CANCELLED Remove inclusion dependencies builder factory                     |         |       |  0:14 |   0.5 |
-| COMPLETED Analysis on formatters, elements and extensibility                |         |       |  1:18 |   3.0 |
-| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   2.7 |
+| COMPLETED Analysis on formatters, elements and extensibility                |         |       |  1:18 |   2.9 |
+| COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   2.6 |
 | COMPLETED Investigate broken windows builds                                 |         |       |  0:32 |   1.2 |
-| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |  12.0 |
-| COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   4.5 |
-| CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   7.1 |
-| COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   2.4 |
-| COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   5.8 |
-| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  27.5 |
+| COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |  11.5 |
+| COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   4.3 |
+| CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   6.8 |
+| COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   2.3 |
+| COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   5.6 |
+| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  26.4 |
 | COMPLETED Fix AppVeyor notifications                                        |         |       |  0:22 |   0.8 |
 | COMPLETED Static use of element types does more harm than good              |         |       |  0:32 |   1.2 |
-| COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   3.4 |
-| CANCELLED Create a simple Emacs mode for stitch                             |         |       |  1:12 |   2.7 |
+| COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   3.3 |
+| CANCELLED Create a simple Emacs mode for stitch                             |         |       |  1:12 |   2.6 |
+| COMPLETED Add facet folder and formatter enablement to formatter properties |         |       |  2:52 |   6.3 |
 | STARTED Terminology clean up                                                |         |       |  0:02 |   0.1 |
-| STARTED Remove formattable origin type                                      |         |       |  2:25 |   5.5 |
-| STARTED Move =cmakelists_info= to fabric                                    |         |       |  3:18 |   7.6 |
-| STARTED Add facet folder and formatter enablement to formatter properties   |         |       |  1:02 |   2.4 |
+| STARTED Remove formattable origin type                                      |         |       |  2:25 |   5.3 |
+| STARTED Move =cmakelists_info= to fabric                                    |         |       |  3:18 |   7.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -779,6 +779,24 @@ See also [[https://github.com/fxbois/web-mode][web-mode]].
 We need a way to visualise stitch templates that is a bit more
 readable than fundamental mode. One option is [[https://github.com/vspinu/polymode/tree/master/modes][polymode]].
 
+*** COMPLETED Add facet folder and formatter enablement to formatter properties :story:
+    CLOSED: [2016-09-19 Mon 12:23]
+    CLOCK: [2016-09-19 Mon 10:33]--[2016-09-19 Mon 12:23] =>  1:50
+    CLOCK: [2016-09-19 Mon 10:10]--[2016-09-19 Mon 10:32] =>  0:22
+    CLOCK: [2016-09-19 Mon 09:05]--[2016-09-19 Mon 09:45] =>  0:40
+
+At present we are relying on the presence of all formatter properties
+for a given element when we are formatting. This is required in order
+to know if say IO is enabled when formatting types. However this will
+not work once we do the =quilt.cpp= refactor as we expect only one
+formattable to be available at a time. So we need to move the required
+data into the formatter properties. At present we just need:
+
+- enabled formatters
+- facet folders.
+
+This is also a requirement to move CMakeLists to fabric.
+
 *** STARTED Terminology clean up                                      :story:
     CLOCK: [2016-09-17 Sat 19:41]--[2016-09-17 Sat 19:43] =>  0:02
 
@@ -832,22 +850,6 @@ Tasks:
 
 Add the generation of CMakeLists to fabric and remove the legacy
 formattable.
-
-*** STARTED Add facet folder and formatter enablement to formatter properties :story:
-    CLOCK: [2016-09-19 Mon 10:10]--[2016-09-19 Mon 10:32] =>  0:22
-    CLOCK: [2016-09-19 Mon 09:05]--[2016-09-19 Mon 09:45] =>  0:40
-
-At present we are relying on the presence of all formatter properties
-for a given element when we are formatting. This is required in order
-to know if say IO is enabled when formatting types. However this will
-not work once we do the =quilt.cpp= refactor as we expect only one
-formattable to be available at a time. So we need to move the required
-data into the formatter properties. At present we just need:
-
-- enabled formatters
-- facet folders.
-
-This is also a requirement to move CMakeLists to fabric.
 
 *** Move =odb_options_info= to fabric                                 :story:
 
@@ -933,6 +935,15 @@ Generates the helper configuration.
 
 We need to generate the file properties for each formattable. The
 formatter must supply the modeline name and the
+
+*** Refactor path settings factory                                    :story:
+
+Tasks:
+
+- get distinct list of facets across all formatters and generate field
+  definitions from this list;
+- cache top-level fields and facet fields and copy results instead of
+  re-reading them.
 
 *** Create the notion of a formatter alias                            :story:
 
