@@ -28,6 +28,8 @@
 #include <list>
 #include <string>
 #include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/quilt.cpp/serialization/properties/formatter_properties_fwd_ser.hpp"
@@ -53,7 +55,9 @@ public:
         const bool enabled,
         const boost::filesystem::path& file_path,
         const boost::optional<std::string>& header_guard,
-        const std::list<std::string>& inclusion_dependencies);
+        const std::list<std::string>& inclusion_dependencies,
+        const std::unordered_set<std::string>& enabled_formatters,
+        const std::unordered_map<std::string, std::string>& facet_folder_for_facet);
 
 private:
     template<typename Archive>
@@ -81,6 +85,28 @@ public:
     void inclusion_dependencies(const std::list<std::string>& v);
     void inclusion_dependencies(const std::list<std::string>&& v);
 
+    /**
+     * @brief Set of all the enabled formatters for this element.
+     */
+    /**@{*/
+    const std::unordered_set<std::string>& enabled_formatters() const;
+    std::unordered_set<std::string>& enabled_formatters();
+    void enabled_formatters(const std::unordered_set<std::string>& v);
+    void enabled_formatters(const std::unordered_set<std::string>&& v);
+    /**@}*/
+
+    /**
+     * @brief Maps a facet name to its facet folder.
+     *
+     * Note that the facet folder may be empty if the user disabled facet folders.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, std::string>& facet_folder_for_facet() const;
+    std::unordered_map<std::string, std::string>& facet_folder_for_facet();
+    void facet_folder_for_facet(const std::unordered_map<std::string, std::string>& v);
+    void facet_folder_for_facet(const std::unordered_map<std::string, std::string>&& v);
+    /**@}*/
+
 public:
     bool operator==(const formatter_properties& rhs) const;
     bool operator!=(const formatter_properties& rhs) const {
@@ -96,6 +122,8 @@ private:
     boost::filesystem::path file_path_;
     boost::optional<std::string> header_guard_;
     std::list<std::string> inclusion_dependencies_;
+    std::unordered_set<std::string> enabled_formatters_;
+    std::unordered_map<std::string, std::string> facet_folder_for_facet_;
 };
 
 } } } }

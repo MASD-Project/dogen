@@ -28,6 +28,8 @@
 #include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/unordered_map.hpp>
+#include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/utility/serialization/path.hpp"
@@ -67,6 +69,8 @@ void save(Archive& ar,
     ar << make_nvp("file_path", v.file_path_);
     ar << make_nvp("header_guard", v.header_guard_);
     ar << make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
+    ar << make_nvp("enabled_formatters", v.enabled_formatters_);
+    ar << make_nvp("facet_folder_for_facet", v.facet_folder_for_facet_);
 }
 
 template<typename Archive>
@@ -77,6 +81,8 @@ void load(Archive& ar,
     ar >> make_nvp("file_path", v.file_path_);
     ar >> make_nvp("header_guard", v.header_guard_);
     ar >> make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
+    ar >> make_nvp("enabled_formatters", v.enabled_formatters_);
+    ar >> make_nvp("facet_folder_for_facet", v.facet_folder_for_facet_);
 }
 
 } }
