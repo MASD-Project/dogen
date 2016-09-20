@@ -45,13 +45,18 @@ master_header_formatter_name(const std::string& facet_name) {
     return facet_name + ".master_header_formatter";
 }
 
+std::string traits::cmake_facet_name() {
+    static std::string r("quilt.cpp.cmake");
+    return r;
+}
+
 std::string traits::include_cmakelists_formatter_name() {
-    static std::string r("quilt.cpp.include_cmakelists");
+    static std::string r("quilt.cpp.cmake.include_cmakelists");
     return r;
 }
 
 std::string traits::source_cmakelists_formatter_name() {
-    static std::string r("quilt.cpp.source_cmakelists");
+    static std::string r("quilt.cpp.cmake.source_cmakelists");
     return r;
 }
 

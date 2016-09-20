@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/formatters/types/file.hpp"
-#include "dogen/quilt.cpp/types/properties/cmakelists_info.hpp"
+#include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {
@@ -34,8 +34,8 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-dogen::formatters::file source_cmakelists_formatter_stitch(
-    assistant& a, const properties::cmakelists_info& c);
+dogen::formatters::file
+source_cmakelists_formatter_stitch(assistant& a, const fabric::cmakelists& c);
 
 } } } }
 

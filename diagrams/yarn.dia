@@ -1833,7 +1833,7 @@ combines them into an intermediate merged model.#</dia:string>
         <dia:point val="-197,-65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-197.05,-65.05;-161.785,-36.05"/>
+        <dia:rectangle val="-197.05,-65.05;-161.785,-35.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1845,7 +1845,7 @@ combines them into an intermediate merged model.#</dia:string>
         <dia:real val="35.164999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="28.900000000000002"/>
+        <dia:real val="29.700000000000003"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -1893,7 +1893,8 @@ and to build it.
 #DOGEN licence_name=gpl_v3
 #DOGEN copyright_notice=Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;
 #DOGEN modeline_group_name=emacs
-#DOGEN quilt.cpp.odb.enabled=false#</dia:string>
+#DOGEN quilt.cpp.odb.enabled=false
+#DOGEN quilt.cpp.cmake.enabled=false#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

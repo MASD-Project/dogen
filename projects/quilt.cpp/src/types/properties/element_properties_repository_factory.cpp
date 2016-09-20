@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.cpp/types/properties/building_error.hpp"
 #include "dogen/quilt.cpp/io/properties/element_properties_repository_io.hpp"
@@ -34,6 +35,7 @@ static logger lg(logger_factory(
         "quilt.cpp.properties.element_properties_repository_factory"));
 
 const std::string cpp_modeline_name("cpp");
+const std::string cmake_modeline_name("cmake");
 
 }
 
@@ -58,18 +60,24 @@ create_aspect_properties(const settings::aspect_settings_repository& asrp,
 }
 
 element_properties_repository element_properties_repository_factory::merge(
-    const dogen::formatters::file_properties& fp,
+    const dogen::formatters::file_properties_workflow& fpwf,
     const helper_properties_repository& hprp,
     const aspect_properties_repository& asrp,
     const formatter_properties_repository& fprp) const {
 
     element_properties_repository r;
+    const auto fp(fpwf.execute(cpp_modeline_name));
     for(const auto& pair : fprp.by_id()) {
         const auto& id(pair.first);
         auto& ep(r.by_id()[id]);
-        ep.file_properties(fp);
-        ep.formatter_properties(pair.second);
 
+        // FIXME: hack
+        if (boost::contains(id, "CMakeLists"))
+            ep.file_properties(fpwf.execute(cmake_modeline_name));
+        else
+            ep.file_properties(fp);
+
+        ep.formatter_properties(pair.second);
         const auto i(hprp.by_id().find(id));
         if (i != hprp.by_id().end()) {
             ep.helper_properties(i->second);
@@ -101,11 +109,9 @@ element_properties_repository element_properties_repository_factory::make(
     const formatters::container& fc,
     const formatter_properties_repository& fprp,
     const yarn::model& m) const {
-
-    const auto fp(fpwf.execute(cpp_modeline_name));
     const auto hprp(create_helper_properties(hsrp, ssrp, fc, m));
     const auto aprp(create_aspect_properties(asrp, m));
-    const auto r(merge(fp, hprp, aprp, fprp));
+    const auto r(merge(fpwf, hprp, aprp, fprp));
     BOOST_LOG_SEV(lg, debug) << "Finished computing element properties:" << r;
     return r;
 }

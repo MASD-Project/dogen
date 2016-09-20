@@ -52,6 +52,7 @@ const std::string void_keyword_text("void");
 const std::string final_keyword_text("final ");
 const std::string namespace_separator("::");
 const std::string member_variable_postfix("_");
+const std::string underscore("_");
 
 const bool start_on_first_line(true);
 const bool use_documentation_tool_markup(true);
@@ -64,6 +65,8 @@ const std::string header_guard_not_set(
     "Header guard for formatter is not set. Formatter: ");
 const std::string formatter_properties_missing(
     "Could not find formatter properties for formatter: ");
+const std::string facet_directory_missing(
+    "Facet directory is missing for facet: ");
 const std::string unexpected_opaque_settings(
     "Unexpectd opaque settings type.");
 const std::string family_not_found("Family not found: ");
@@ -138,6 +141,18 @@ std::string assistant::get_qualified_name(const yarn::name_tree& nt) const {
     return pair.second;
 }
 
+std::string assistant::get_identifiable_model_name(const yarn::name& n) const {
+    using boost::algorithm::join;
+    return join(n.location().model_modules(), underscore);
+}
+
+std::string assistant::get_product_name(const yarn::name& n) const {
+    if (n.location().external_modules().empty())
+        return empty;
+
+    return n.location().external_modules().front();
+}
+
 void assistant::ensure_formatter_properties_are_present() const {
     if (formatter_properties_)
         return;
@@ -179,6 +194,24 @@ is_formatter_enabled(const std::string& formatter_name) const {
     return i != fp.enabled_formatters().end();
 }
 
+std::string assistant::
+get_facet_directory_for_facet(const std::string& facet_name) const {
+    ensure_formatter_properties_are_present();
+    const auto& fdff(formatter_properties_->facet_directory_for_facet());
+    const auto i(fdff.find(facet_name));
+    if (i == fdff.end()) {
+        BOOST_LOG_SEV(lg, error) << facet_directory_missing << facet_name;
+        BOOST_THROW_EXCEPTION(
+            formatting_error(facet_directory_missing + facet_name));
+    }
+    return i->second;
+}
+
+std::string assistant::get_odb_facet_directory() const {
+    using formatters::odb::traits;
+    return get_facet_directory_for_facet(traits::facet_name());
+}
+
 bool assistant::requires_manual_default_constructor() const {
     const auto& ap(context_.element_properties().aspect_properties());
     return ap.requires_manual_default_constructor();
@@ -211,6 +244,11 @@ bool assistant::is_hash_enabled() const {
 
 bool assistant::is_test_data_enabled() const {
     using formatters::test_data::traits;
+    return is_formatter_enabled(traits::class_header_formatter_name());
+}
+
+bool assistant::is_odb_enabled() const {
+    using formatters::odb::traits;
     return is_formatter_enabled(traits::class_header_formatter_name());
 }
 
@@ -248,6 +286,11 @@ assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
     return dogen::formatters::cpp::scoped_namespace_formatter(
         stream(), ns, false/*create_anonymous_namespace*/,
         true/*add_new_line*/);
+}
+
+void assistant::make_annotation_preamble() {
+    const auto fp(context_.element_properties().file_properties());
+    make_annotation_preamble(fp);
 }
 
 void assistant::make_annotation_preamble(

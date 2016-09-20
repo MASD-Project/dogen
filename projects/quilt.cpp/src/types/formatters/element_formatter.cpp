@@ -144,6 +144,9 @@ public:
     void visit(const fabric::forward_declarations& fd) override {
         format(container_.forward_declarations_formatters(), fd);
     }
+    void visit(const fabric::cmakelists& c) override {
+        format(container_.cmakelists_formatters(), c);
+    }
 
 private:
     const context_factory factory_;

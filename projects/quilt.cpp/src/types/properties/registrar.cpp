@@ -109,4 +109,10 @@ void registrar::register_provider(
     container_.forward_declarations_providers().push_front(p);
 }
 
+void registrar::register_provider(
+    boost::shared_ptr<provider_interface<fabric::cmakelists>> p) {
+    validate(p);
+    container_.cmakelists_providers().push_front(p);
+}
+
 } } } }

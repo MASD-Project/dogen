@@ -206,4 +206,20 @@ boost::filesystem::path locator::make_full_path_for_cpp_implementation(
     return r;
 }
 
+boost::filesystem::path locator::make_full_path_for_include_cmakelists(
+    const yarn::name& n, const std::string& /*formatter_name*/) const {
+    auto r(project_path_);
+    r /= n.simple() + ".txt";
+    return r;
+}
+
+boost::filesystem::path locator::make_full_path_for_source_cmakelists(
+    const yarn::name& n, const std::string& formatter_name) const {
+    auto r(project_path_);
+    const auto& ps(path_settings_for_formatter(formatter_name));
+    r /= ps.source_directory_name();
+    r /= n.simple() + ".txt";
+    return r;
+}
+
 } } } }

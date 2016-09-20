@@ -9,10 +9,10 @@
 <#+
 
 dogen::formatters::file include_cmakelists_formatter_stitch(
-    assistant& a, const properties::cmakelists_info& c) {
+    assistant& a, const fabric::cmakelists& c) {
 
     {
-        a.make_annotation_preamble(c.file_properties());
+        a.make_annotation_preamble();
 #>
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
 
@@ -22,23 +22,26 @@ install(
     COMPONENT headers
     FILES_MATCHING PATTERN "*.hpp")
 <#+
-        if (c.odb_enabled()) {
+        if (a.is_odb_enabled()) {
+            const auto model_name(a.get_identifiable_model_name(c.name()));
+            const auto product_name(a.get_product_name(c.name()));
+            const auto odb_folder(a.get_odb_facet_directory());
 #>
 
-set(include_dir "${CMAKE_CURRENT_SOURCE_DIR}/include/<#= c.product_name() #>/<#= c.model_name() #>")
+set(include_dir "${CMAKE_CURRENT_SOURCE_DIR}/include/<#= product_name #>/<#= model_name #>")
 set(all_odb_files "")
 file(GLOB_RECURSE all_odb_files RELATIVE
-    "${include_dir}/<#= c.odb_folder() #>/"
-    "${include_dir}/<#= c.odb_folder() #>/*_pragmas.hpp")
+    "${include_dir}/<#= odb_folder #>/"
+    "${include_dir}/<#= odb_folder #>/*_pragmas.hpp")
 
-set(src_odb_dir "${CMAKE_CURRENT_SOURCE_DIR}/src/<#= c.odb_folder() #>/")
+set(src_odb_dir "${CMAKE_CURRENT_SOURCE_DIR}/src/<#= odb_folder #>/")
 if(NOT EXISTS "${src_odb_dir}")
     file(MAKE_DIRECTORY "${src_odb_dir}")
 endif()
 
-add_custom_target(codegen_<#= c.model_name() #>_odb
+add_custom_target(codegen_<#= model_name #>_odb
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/include/<#= c.product_name() #>/<#= c.model_name() #>/<#= c.odb_folder() #>/*.cpp
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/include/<#= product_name #>/<#= model_name #>/<#= odb_folder #>/*.cpp
     ${src_odb_dir})
 
 set(ignore_file false)
@@ -54,25 +57,25 @@ foreach(odb_file ${all_odb_files})
         string(REPLACE "/" "_" type_name ${type_name})
 
         set(pfh_dir "$ENV{PFH_LOCATION}")
-        set(target_name "codegen_<#= c.model_name() #>_odb_${type_name}")
+        set(target_name "codegen_<#= model_name #>_odb_${type_name}")
         add_custom_target(${target_name}
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND odb
             --options-file ${CMAKE_CURRENT_SOURCE_DIR}/src/options.odb
             --std c++11
-            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/include/<#= c.product_name() #>/<#= c.model_name() #>/<#= c.odb_folder() #>/
-            --odb-epilogue '\#include \"<#= c.product_name() #>/<#= c.model_name() #>/<#= c.odb_folder() #>/${odb_file}\"'
+            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/include/<#= product_name #>/<#= model_name #>/<#= odb_folder #>/
+            --odb-epilogue '\#include \"<#= product_name #>/<#= model_name #>/<#= odb_folder #>/${odb_file}\"'
             -I ${pfh_dir}/include -I ${CMAKE_CURRENT_SOURCE_DIR}/include
             ${include_dir}/types/${type_name}.hpp)
 
-        add_dependencies(codegen_<#= c.model_name() #>_odb ${target_name})
+        add_dependencies(codegen_<#= model_name #>_odb ${target_name})
     endif()
-    add_dependencies(codegen_<#= c.model_name() #>_odb codegen_<#= c.model_name() #>)
+    add_dependencies(codegen_<#= model_name #>_odb codegen_<#= model_name #>)
     set(ignore_file false)
 endforeach()
 <#+
         }
     } // sbf
-    return a.make_file(c.include_file_path());
+    return a.make_file();
 }
 #>

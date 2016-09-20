@@ -144,7 +144,6 @@ private:
 
 public:
     using formattable_visitor::visit;
-    void visit(const properties::cmakelists_info& c) override;
     void visit(const properties::odb_options_info& o) override;
 
 public:
@@ -168,10 +167,6 @@ private:
 
 dispatcher::dispatcher(const context_factory& f, const container& c)
     : factory_(f), container_(c) { }
-
-void dispatcher::visit(const properties::cmakelists_info& c) {
-    format(container_.cmakelists_formatters(), c);
-}
 
 void dispatcher::visit(const properties::odb_options_info& o) {
     format(container_.odb_options_formatters(), o);

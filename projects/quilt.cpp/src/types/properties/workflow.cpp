@@ -23,6 +23,7 @@
 #include <forward_list>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/memory_io.hpp"
+#include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/settings/path_settings_factory.hpp"
@@ -88,6 +89,7 @@ facet_directory_for_facet(const formatters::container& fc,
             r[fn] = i->second.facet_directory();
         }
     }
+    BOOST_LOG_SEV(lg, debug) << "Facet directory for facet: " << r;
     return r;
 }
 

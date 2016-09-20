@@ -58,8 +58,8 @@ public:
 
     void register_provider(properties::registrar& rg) const override;
 
-    dogen::formatters::file format(const context& ctx,
-        const properties::cmakelists_info& c) const override;
+    dogen::formatters::file
+    format(const context& ctx, const fabric::cmakelists& c) const override;
 };
 
 } } } }

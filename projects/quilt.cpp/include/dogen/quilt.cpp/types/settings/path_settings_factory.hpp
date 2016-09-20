@@ -30,6 +30,7 @@
 #include <memory>
 #include <unordered_map>
 #include <forward_list>
+#include <boost/optional.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
@@ -59,8 +60,8 @@ private:
     struct field_definitions {
         std::string formatter_name;
         quilt::cpp::formatters::file_types file_type;
-        dynamic::field_definition facet_directory;
-        dynamic::field_definition facet_postfix;
+        boost::optional<dynamic::field_definition> facet_directory;
+        boost::optional<dynamic::field_definition> facet_postfix;
         dynamic::field_definition formatter_postfix;
         dynamic::field_definition header_file_extension;
         dynamic::field_definition implementation_file_extension;

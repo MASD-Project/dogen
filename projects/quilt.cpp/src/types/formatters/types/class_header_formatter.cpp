@@ -66,11 +66,11 @@ std::string provider_hack::formatter_name() const {
 }
 
 std::list<std::string> provider_hack::provide_inclusion_dependencies(
-    const properties::inclusion_dependencies_builder_factory& f,
+    const properties::inclusion_dependencies_builder_factory& /*f*/,
     const yarn::primitive& /*p*/) const {
 
-    auto builder(f.make());
-    return builder.build();
+    static std::list<std::string> r;
+    return r;
 }
 
 properties::inclusion_path_support provider_hack::

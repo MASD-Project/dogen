@@ -54,7 +54,7 @@ private:
         const yarn::model& m) const;
 
     element_properties_repository merge(
-        const dogen::formatters::file_properties& fp,
+        const dogen::formatters::file_properties_workflow& fpwf,
         const helper_properties_repository& hprp,
         const aspect_properties_repository& asrp,
         const formatter_properties_repository& fprp) const;

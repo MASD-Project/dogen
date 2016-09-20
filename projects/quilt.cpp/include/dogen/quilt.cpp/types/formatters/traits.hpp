@@ -54,6 +54,7 @@ struct traits {
     static std::string master_header_formatter_name(
         const std::string& facet_name);
 
+    static std::string cmake_facet_name();
     static std::string include_cmakelists_formatter_name();
     static std::string source_cmakelists_formatter_name();
 

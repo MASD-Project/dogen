@@ -80,12 +80,23 @@ public:
         const yarn::attribute& attr);
 
     /**
-     * @brief Obtains the qualified name
+     * @brief Obtains the qualified name.
      */
     /**@{*/
     std::string get_qualified_name(const yarn::name& n) const;
     std::string get_qualified_name(const yarn::name_tree& nt) const;
     /**@}*/
+
+    /**
+     * @brief Obtains the model name as a string.
+     */
+    std::string get_identifiable_model_name(const yarn::name& n) const;
+
+    /**
+     * @brief Obtains the product name. This is defined to be the
+     * first external module, if any exists.
+     */
+    std::string get_product_name(const yarn::name& n) const;
 
 private:
     void ensure_formatter_properties_are_present() const;
@@ -102,6 +113,15 @@ private:
      * otherwise.
      */
     bool is_formatter_enabled(const std::string& formatter_name) const;
+
+    /**
+     * @brief Returns the folder for the current facet.
+     */
+    std::string get_facet_directory_for_facet(
+        const std::string& facet_name) const;
+
+public:
+    std::string get_odb_facet_directory() const;
 
 public:
     bool requires_manual_default_constructor() const;
@@ -146,6 +166,11 @@ public:
     bool is_test_data_enabled() const;
 
     /**
+     * @brief Returns true if odb is enabled.
+     */
+    bool is_odb_enabled() const;
+
+    /**
      * @brief Returns true if the current formatter belongs to the io
      * facet.
      */
@@ -179,8 +204,11 @@ public:
     /**
      * @brief Creates the preamble.
      */
+    /**@{*/
+    void make_annotation_preamble();
     void make_annotation_preamble(
         const boost::optional<dogen::formatters::file_properties> gs);
+    /**@}*/
 
     /**
      * @brief Generates a file with the current contents of the

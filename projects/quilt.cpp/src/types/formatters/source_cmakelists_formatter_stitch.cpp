@@ -28,22 +28,23 @@ namespace cpp {
 namespace formatters {
 
 dogen::formatters::file source_cmakelists_formatter_stitch(
-    assistant& a, const properties::cmakelists_info& s) {
+    assistant& a, const fabric::cmakelists& c) {
 
     {
-        a.make_annotation_preamble(s.file_properties());
-        const std::string mn(s.model_name());
+        a.make_annotation_preamble();
+        const auto model_name(a.get_identifiable_model_name(c.name()));
+        const auto product_name(a.get_product_name(c.name()));
 a.stream() << "set(files \"\")" << std::endl;
 a.stream() << "file(GLOB_RECURSE files RELATIVE" << std::endl;
 a.stream() << "    \"${CMAKE_CURRENT_SOURCE_DIR}/\"" << std::endl;
 a.stream() << "    \"${CMAKE_CURRENT_SOURCE_DIR}/*.cpp\")" << std::endl;
 a.stream() << std::endl;
-a.stream() << "add_library(" << mn << " STATIC ${files})" << std::endl;
-a.stream() << "set_target_properties(" << mn << " PROPERTIES" << std::endl;
-a.stream() << "    OUTPUT_NAME " << s.product_name() << (s.product_name().empty() ? "" : ".") << mn << ")" << std::endl;
+a.stream() << "add_library(" << model_name << " STATIC ${files})" << std::endl;
+a.stream() << "set_target_properties(" << model_name << " PROPERTIES" << std::endl;
+a.stream() << "    OUTPUT_NAME " << product_name << (product_name.empty() ? "" : ".") << model_name << ")" << std::endl;
 a.stream() << std::endl;
-a.stream() << "install(TARGETS " << mn << " ARCHIVE DESTINATION lib COMPONENT libraries)" << std::endl;
+a.stream() << "install(TARGETS " << model_name << " ARCHIVE DESTINATION lib COMPONENT libraries)" << std::endl;
     } // sbf
-    return a.make_file(s.source_file_path());
+        return a.make_file();
 }
 } } } }

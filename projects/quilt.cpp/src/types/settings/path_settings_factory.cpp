@@ -73,8 +73,14 @@ void path_settings_factory::setup_facet_fields(
 
     const auto& fn(facet_name);
     const dynamic::repository_selector s(rp);
-    fd.facet_directory = s.select_field_by_name(fn, traits::directory());
-    fd.facet_postfix = s.select_field_by_name(fn, traits::postfix());
+
+    auto dir(s.try_select_field_by_name(fn, traits::directory()));
+    if (dir)
+        fd.facet_directory = *dir;
+
+    auto postfix(s.try_select_field_by_name(fn, traits::postfix()));
+    if (postfix)
+        fd.facet_postfix = *postfix;
 }
 
 void path_settings_factory::setup_formatter_fields(
@@ -130,8 +136,13 @@ create_settings_for_formatter(const field_definitions& fd,
     r.file_type(fd.file_type);
 
     const dynamic::field_selector fs(o);
-    r.facet_directory(fs.get_text_content_or_default(fd.facet_directory));
-    r.facet_postfix(fs.get_text_content_or_default(fd.facet_postfix));
+
+    if (fd.facet_directory)
+        r.facet_directory(fs.get_text_content_or_default(*fd.facet_directory));
+
+    if (fd.facet_postfix)
+        r.facet_postfix(fs.get_text_content_or_default(*fd.facet_postfix));
+
     r.formatter_postfix(fs.get_text_content_or_default(fd.formatter_postfix));
 
     const auto& hfe(fd.header_file_extension);

@@ -9,24 +9,25 @@
 <#+
 
 dogen::formatters::file source_cmakelists_formatter_stitch(
-    assistant& a, const properties::cmakelists_info& s) {
+    assistant& a, const fabric::cmakelists& c) {
 
     {
-        a.make_annotation_preamble(s.file_properties());
-        const std::string mn(s.model_name());
+        a.make_annotation_preamble();
+        const auto model_name(a.get_identifiable_model_name(c.name()));
+        const auto product_name(a.get_product_name(c.name()));
 #>
 set(files "")
 file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(<#= mn #> STATIC ${files})
-set_target_properties(<#= mn #> PROPERTIES
-    OUTPUT_NAME <#= s.product_name() #><#= (s.product_name().empty() ? "" : ".") #><#= mn #>)
+add_library(<#= model_name #> STATIC ${files})
+set_target_properties(<#= model_name #> PROPERTIES
+    OUTPUT_NAME <#= product_name #><#= (product_name.empty() ? "" : ".") #><#= model_name #>)
 
-install(TARGETS <#= mn #> ARCHIVE DESTINATION lib COMPONENT libraries)
+install(TARGETS <#= model_name #> ARCHIVE DESTINATION lib COMPONENT libraries)
 <#+
     } // sbf
-    return a.make_file(s.source_file_path());
+        return a.make_file();
 }
 #>

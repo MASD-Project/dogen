@@ -28,10 +28,10 @@ namespace cpp {
 namespace formatters {
 
 dogen::formatters::file include_cmakelists_formatter_stitch(
-    assistant& a, const properties::cmakelists_info& c) {
+    assistant& a, const fabric::cmakelists& c) {
 
     {
-        a.make_annotation_preamble(c.file_properties());
+        a.make_annotation_preamble();
 a.stream() << "add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)" << std::endl;
 a.stream() << std::endl;
 a.stream() << "install(" << std::endl;
@@ -39,22 +39,25 @@ a.stream() << "    DIRECTORY include/" << std::endl;
 a.stream() << "    DESTINATION include/" << std::endl;
 a.stream() << "    COMPONENT headers" << std::endl;
 a.stream() << "    FILES_MATCHING PATTERN \"*.hpp\")" << std::endl;
-        if (c.odb_enabled()) {
+        if (a.is_odb_enabled()) {
+            const auto model_name(a.get_identifiable_model_name(c.name()));
+            const auto product_name(a.get_product_name(c.name()));
+            const auto odb_folder(a.get_odb_facet_directory());
 a.stream() << std::endl;
-a.stream() << "set(include_dir \"${CMAKE_CURRENT_SOURCE_DIR}/include/" << c.product_name() << "/" << c.model_name() << "\")" << std::endl;
+a.stream() << "set(include_dir \"${CMAKE_CURRENT_SOURCE_DIR}/include/" << product_name << "/" << model_name << "\")" << std::endl;
 a.stream() << "set(all_odb_files \"\")" << std::endl;
 a.stream() << "file(GLOB_RECURSE all_odb_files RELATIVE" << std::endl;
-a.stream() << "    \"${include_dir}/" << c.odb_folder() << "/\"" << std::endl;
-a.stream() << "    \"${include_dir}/" << c.odb_folder() << "/*_pragmas.hpp\")" << std::endl;
+a.stream() << "    \"${include_dir}/" << odb_folder << "/\"" << std::endl;
+a.stream() << "    \"${include_dir}/" << odb_folder << "/*_pragmas.hpp\")" << std::endl;
 a.stream() << std::endl;
-a.stream() << "set(src_odb_dir \"${CMAKE_CURRENT_SOURCE_DIR}/src/" << c.odb_folder() << "/\")" << std::endl;
+a.stream() << "set(src_odb_dir \"${CMAKE_CURRENT_SOURCE_DIR}/src/" << odb_folder << "/\")" << std::endl;
 a.stream() << "if(NOT EXISTS \"${src_odb_dir}\")" << std::endl;
 a.stream() << "    file(MAKE_DIRECTORY \"${src_odb_dir}\")" << std::endl;
 a.stream() << "endif()" << std::endl;
 a.stream() << std::endl;
-a.stream() << "add_custom_target(codegen_" << c.model_name() << "_odb" << std::endl;
+a.stream() << "add_custom_target(codegen_" << model_name << "_odb" << std::endl;
 a.stream() << "    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}" << std::endl;
-a.stream() << "    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/include/" << c.product_name() << "/" << c.model_name() << "/" << c.odb_folder() << "/*.cpp" << std::endl;
+a.stream() << "    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/include/" << product_name << "/" << model_name << "/" << odb_folder << "/*.cpp" << std::endl;
 a.stream() << "    ${src_odb_dir})" << std::endl;
 a.stream() << std::endl;
 a.stream() << "set(ignore_file false)" << std::endl;
@@ -70,24 +73,24 @@ a.stream() << "        string(REPLACE \"\\\\\" \"_\" type_name ${type_name})" <<
 a.stream() << "        string(REPLACE \"/\" \"_\" type_name ${type_name})" << std::endl;
 a.stream() << std::endl;
 a.stream() << "        set(pfh_dir \"$ENV{PFH_LOCATION}\")" << std::endl;
-a.stream() << "        set(target_name \"codegen_" << c.model_name() << "_odb_${type_name}\")" << std::endl;
+a.stream() << "        set(target_name \"codegen_" << model_name << "_odb_${type_name}\")" << std::endl;
 a.stream() << "        add_custom_target(${target_name}" << std::endl;
 a.stream() << "            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}" << std::endl;
 a.stream() << "            COMMAND odb" << std::endl;
 a.stream() << "            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/src/options.odb" << std::endl;
 a.stream() << "            --std c++11" << std::endl;
-a.stream() << "            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/include/" << c.product_name() << "/" << c.model_name() << "/" << c.odb_folder() << "/" << std::endl;
-a.stream() << "            --odb-epilogue '\\#include \\\"" << c.product_name() << "/" << c.model_name() << "/" << c.odb_folder() << "/${odb_file}\\\"'" << std::endl;
+a.stream() << "            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/include/" << product_name << "/" << model_name << "/" << odb_folder << "/" << std::endl;
+a.stream() << "            --odb-epilogue '\\#include \\\"" << product_name << "/" << model_name << "/" << odb_folder << "/${odb_file}\\\"'" << std::endl;
 a.stream() << "            -I ${pfh_dir}/include -I ${CMAKE_CURRENT_SOURCE_DIR}/include" << std::endl;
 a.stream() << "            ${include_dir}/types/${type_name}.hpp)" << std::endl;
 a.stream() << std::endl;
-a.stream() << "        add_dependencies(codegen_" << c.model_name() << "_odb ${target_name})" << std::endl;
+a.stream() << "        add_dependencies(codegen_" << model_name << "_odb ${target_name})" << std::endl;
 a.stream() << "    endif()" << std::endl;
-a.stream() << "    add_dependencies(codegen_" << c.model_name() << "_odb codegen_" << c.model_name() << ")" << std::endl;
+a.stream() << "    add_dependencies(codegen_" << model_name << "_odb codegen_" << model_name << ")" << std::endl;
 a.stream() << "    set(ignore_file false)" << std::endl;
 a.stream() << "endforeach()" << std::endl;
         }
     } // sbf
-    return a.make_file(c.include_file_path());
+    return a.make_file();
 }
 } } } }

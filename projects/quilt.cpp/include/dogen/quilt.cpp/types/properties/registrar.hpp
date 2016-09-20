@@ -33,6 +33,7 @@
 #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
+#include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
 #include "dogen/quilt.cpp/types/properties/provider_interface.hpp"
 #include "dogen/quilt.cpp/types/properties/container.hpp"
 
@@ -72,6 +73,9 @@ public:
 
     void register_provider(
         boost::shared_ptr<provider_interface<fabric::forward_declarations>> p);
+
+    void register_provider(
+        boost::shared_ptr<provider_interface<fabric::cmakelists>> p);
 
 private:
     properties::container container_;

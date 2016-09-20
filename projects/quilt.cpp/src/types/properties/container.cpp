@@ -141,4 +141,18 @@ container::forward_declarations_providers() {
     return forward_declarations_providers_;
 }
 
+const std::forward_list<
+    boost::shared_ptr<provider_interface<fabric::cmakelists>>
+>&
+container::cmakelists_providers() const {
+    return cmakelists_providers_;
+}
+
+std::forward_list<
+    boost::shared_ptr<provider_interface<fabric::cmakelists>>
+>&
+container::cmakelists_providers() {
+    return cmakelists_providers_;
+}
+
 } } } }

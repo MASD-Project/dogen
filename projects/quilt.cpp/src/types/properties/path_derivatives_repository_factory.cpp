@@ -148,6 +148,10 @@ public:
         generate(container_.forward_declarations_providers(), fd.name());
     }
 
+    void visit(const fabric::cmakelists& c) override {
+        generate(container_.cmakelists_providers(), c.name());
+    }
+
 public:
     const path_derivatives_repository & result() const { return result_; }
 

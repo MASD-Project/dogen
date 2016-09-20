@@ -291,5 +291,35 @@
         "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : false
+    },
+    {
+        "name" : {
+            "simple" : "postfix",
+            "qualified" : "quilt.cpp.cmake.source_cmakelists.postfix"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "quilt.cpp",
+            "facet_name" : "cmake",
+            "formatter_name" : "quilt.cpp.cmake.source_cmakelists.postfix"
+        },
+        "value_type" : "text",
+        "definition_type" : "instance",
+        "scope" : "root_module",
+        "default_value" : ""
+    },
+    {
+        "name" : {
+            "simple" : "postfix",
+            "qualified" : "quilt.cpp.cmake.include_cmakelists.postfix"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "quilt.cpp",
+            "facet_name" : "cmake",
+            "formatter_name" : "quilt.cpp.cmake.include_cmakelists.postfix"
+        },
+        "value_type" : "text",
+        "definition_type" : "instance",
+        "scope" : "root_module",
+        "default_value" : ""
     }
 ]

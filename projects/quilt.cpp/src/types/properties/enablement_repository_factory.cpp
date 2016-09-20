@@ -32,6 +32,7 @@
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
+#include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
 #include "dogen/quilt.cpp/io/properties/enablement_repository_io.hpp"
 #include "dogen/quilt.cpp/io/properties/global_enablement_properties_io.hpp"
 #include "dogen/quilt.cpp/types/properties/enablement_factory.hpp"
@@ -98,6 +99,7 @@ public:
     void visit(const fabric::forward_declarations& fd) override {
         generate(fd);
     }
+    void visit(const fabric::cmakelists& c) override { generate(c); }
 
 public:
     const enablement_repository& result() const { return result_; }
