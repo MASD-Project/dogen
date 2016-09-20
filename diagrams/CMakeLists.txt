@@ -24,7 +24,6 @@ add_custom_target(knit_${target}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/tests/.*
@@ -44,7 +43,6 @@ add_custom_target(knit_${target}
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
@@ -62,7 +60,6 @@ add_custom_target(knit_${target}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/tests/.*
@@ -80,7 +77,6 @@ add_custom_target(knit_${target}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/tests/.*
@@ -102,7 +98,6 @@ add_custom_target(knit_${target}
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*stitch
@@ -124,7 +119,6 @@ add_custom_target(knit_${target}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen::test_models
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/test_models
-    --cpp-disable-cmakelists
     --ignore-files-matching-regex .*CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/tests/.*
@@ -149,7 +143,6 @@ add_custom_target(knit_${target}
     --reference ${CMAKE_SOURCE_DIR}/diagrams/quilt.cpp.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --verbose
@@ -169,7 +162,6 @@ add_custom_target(knit_${target}
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
@@ -187,7 +179,6 @@ add_custom_target(knit_${target}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
@@ -210,7 +201,6 @@ add_custom_target(knit_${target}
     --reference ${CMAKE_SOURCE_DIR}/diagrams/yarn.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
@@ -228,7 +218,6 @@ add_custom_target(knit_${target}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*
@@ -248,7 +237,6 @@ add_custom_target(knit_${target}
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/tests/.*
     --ignore-files-matching-regex .*/test/.*

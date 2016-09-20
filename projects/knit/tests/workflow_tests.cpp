@@ -58,17 +58,15 @@ const std::string actual("/actual");
 const std::string domain_facet_must_be_enabled("Domain facet must be enabled");
 const std::string dia_invalid_name("Dia object name is empty");
 
-bool generate_and_diff(const boost::filesystem::path& target,
-                       const bool disable_cmakelists = false) {
+bool generate_and_diff(const boost::filesystem::path& target) {
     const auto name(target.stem().string());
     using dogen::utility::test_data::validating_resolver;
     const auto expected(validating_resolver::resolve(name + ::expected));
     const auto actual(validating_resolver::resolve(name + ::actual));
 
     using dogen::options::test::mock_options_factory;
-    auto ko(mock_options_factory::
+    const auto ko(mock_options_factory::
         make_knitting_options(target, actual, module_path));
-    ko.cpp().disable_cmakelists(disable_cmakelists);
 
     dogen::knit::workflow w(ko);
     w.execute();
@@ -93,7 +91,7 @@ BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
 BOOST_AUTO_TEST_CASE(disable_cmakelists_generates_expected_code) {
     SETUP_TEST_LOG("disable_cmakelists_generates_expected_code");
     const auto target(yarn_dia::input_disable_cmakelists_dia());
-    BOOST_CHECK(generate_and_diff(target, true/*disable_cmakelists*/));
+    BOOST_CHECK(generate_and_diff(target));
 }
 
 BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {

@@ -59,7 +59,6 @@ const std::string verbose_arg("verbose");
 const std::string target_arg("target");
 const std::string reference_arg("reference");
 const std::string cpp_project_dir_arg("cpp-project-dir");
-const std::string cpp_disable_cmakelists_arg("cpp-disable-cmakelists");
 const std::string delete_extra_files_arg("delete-extra-files");
 const std::string ignore_files_matching_regex_arg(
     "ignore-files-matching-regex");
@@ -150,7 +149,6 @@ program_options_parser::cpp_options_factory() const {
     using boost::program_options::value;
     boost::program_options::options_description r("C++ backend options");
     r.add_options()
-        ("cpp-disable-cmakelists", "Do not generate 'CMakeLists.txt' for C++.")
         ("cpp-project-dir,x",
             value<std::string>(),
             "Output directory for all project files. "
@@ -213,7 +211,6 @@ void program_options_parser::version_function(std::function<void()> value) {
 options::cpp_options program_options_parser::
 transform_cpp_options(const boost::program_options::variables_map& vm) const {
     options::cpp_options r;
-    r.disable_cmakelists(vm.count(cpp_disable_cmakelists_arg));
     if (!vm.count(cpp_project_dir_arg))
         r.project_directory_path(boost::filesystem::current_path());
     else

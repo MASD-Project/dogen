@@ -23,28 +23,19 @@
 namespace dogen {
 namespace options {
 
-cpp_options::cpp_options()
-    : disable_cmakelists_(static_cast<bool>(0)) { }
-
 cpp_options::cpp_options(cpp_options&& rhs)
-    : project_directory_path_(std::move(rhs.project_directory_path_)),
-      disable_cmakelists_(std::move(rhs.disable_cmakelists_)) { }
+    : project_directory_path_(std::move(rhs.project_directory_path_)) { }
 
-cpp_options::cpp_options(
-    const boost::filesystem::path& project_directory_path,
-    const bool disable_cmakelists)
-    : project_directory_path_(project_directory_path),
-      disable_cmakelists_(disable_cmakelists) { }
+cpp_options::cpp_options(const boost::filesystem::path& project_directory_path)
+    : project_directory_path_(project_directory_path) { }
 
 void cpp_options::swap(cpp_options& other) noexcept {
     using std::swap;
     swap(project_directory_path_, other.project_directory_path_);
-    swap(disable_cmakelists_, other.disable_cmakelists_);
 }
 
 bool cpp_options::operator==(const cpp_options& rhs) const {
-    return project_directory_path_ == rhs.project_directory_path_ &&
-        disable_cmakelists_ == rhs.disable_cmakelists_;
+    return project_directory_path_ == rhs.project_directory_path_;
 }
 
 cpp_options& cpp_options::operator=(cpp_options other) {
@@ -67,14 +58,6 @@ void cpp_options::project_directory_path(const boost::filesystem::path& v) {
 
 void cpp_options::project_directory_path(const boost::filesystem::path&& v) {
     project_directory_path_ = std::move(v);
-}
-
-bool cpp_options::disable_cmakelists() const {
-    return disable_cmakelists_;
-}
-
-void cpp_options::disable_cmakelists(const bool v) {
-    disable_cmakelists_ = v;
 }
 
 } }

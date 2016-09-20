@@ -43,8 +43,6 @@ std::size_t cpp_options_hasher::hash(const cpp_options& v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_filesystem_path(v.project_directory_path()));
-    combine(seed, v.disable_cmakelists());
-
     return seed;
 }
 

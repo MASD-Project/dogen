@@ -37,19 +37,15 @@ namespace options {
  */
 class cpp_options final {
 public:
+    cpp_options() = default;
     cpp_options(const cpp_options&) = default;
     ~cpp_options() = default;
-
-public:
-    cpp_options();
 
 public:
     cpp_options(cpp_options&& rhs);
 
 public:
-    cpp_options(
-        const boost::filesystem::path& project_directory_path,
-        const bool disable_cmakelists);
+    explicit cpp_options(const boost::filesystem::path& project_directory_path);
 
 private:
     template<typename Archive>
@@ -71,14 +67,6 @@ public:
     void project_directory_path(const boost::filesystem::path&& v);
     /**@}*/
 
-    /**
-     * @brief Do not generate CMakeLists.txt for C++ projects.
-     */
-    /**@{*/
-    bool disable_cmakelists() const;
-    void disable_cmakelists(const bool v);
-    /**@}*/
-
 public:
     bool operator==(const cpp_options& rhs) const;
     bool operator!=(const cpp_options& rhs) const {
@@ -91,7 +79,6 @@ public:
 
 private:
     boost::filesystem::path project_directory_path_;
-    bool disable_cmakelists_;
 };
 
 } }

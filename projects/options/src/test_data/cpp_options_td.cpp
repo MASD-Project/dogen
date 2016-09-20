@@ -30,10 +30,6 @@ create_boost_filesystem_path(const unsigned int position) {
     return boost::filesystem::path(s.str());
 }
 
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
-}
-
 }
 
 namespace dogen {
@@ -44,7 +40,6 @@ cpp_options_generator::cpp_options_generator() : position_(0) { }
 void cpp_options_generator::
 populate(const unsigned int position, result_type& v) {
     v.project_directory_path(create_boost_filesystem_path(position + 0));
-    v.disable_cmakelists(create_bool(position + 1));
 }
 
 cpp_options_generator::result_type

@@ -19,23 +19,15 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include "dogen/options/io/cpp_options_io.hpp"
 
 namespace dogen {
 namespace options {
 
 std::ostream& operator<<(std::ostream& s, const cpp_options& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::options::cpp_options\"" << ", "
-      << "\"project_directory_path\": " << "\"" << v.project_directory_path().generic_string() << "\"" << ", "
-      << "\"disable_cmakelists\": " << v.disable_cmakelists()
+      << "\"project_directory_path\": " << "\"" << v.project_directory_path().generic_string() << "\""
       << " }";
     return(s);
 }
