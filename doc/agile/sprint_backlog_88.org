@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2016-09-20 Tue 22:50]
+#+CAPTION: Clock summary at [2016-09-20 Tue 23:15]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *52:10* |       |       | 100.0 |
+| *Total time*                                                                | *52:34* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 52:10   |       |       | 100.0 |
-| Active                                                                      |         | 52:10 |       | 100.0 |
+| Stories                                                                     | 52:34   |       |       | 100.0 |
+| Active                                                                      |         | 52:34 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:34 |   4.9 |
 | COMPLETED Fix chocolatey warning                                            |         |       |  0:08 |   0.3 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:27 |   0.9 |
@@ -30,23 +30,24 @@
 | COMPLETED Refactor =inclusion_dependencies_provider_interface=              |         |       |  1:12 |   2.3 |
 | COMPLETED Investigate broken windows builds                                 |         |       |  0:32 |   1.0 |
 | COMPLETED Refactor path derivatives factory for usage in formatters         |         |       |  5:14 |  10.0 |
-| COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   3.8 |
-| CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   6.0 |
+| COMPLETED Move file path generation to formatters                           |         |       |  1:58 |   3.7 |
+| CANCELLED Path derivatives factory generates all possible includes          |         |       |  3:07 |   5.9 |
 | COMPLETED Analysis on inclusion derivatives and path derivatives            |         |       |  1:04 |   2.0 |
-| COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   4.9 |
-| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  23.0 |
+| COMPLETED Split path factory from provider factory                          |         |       |  2:32 |   4.8 |
+| COMPLETED Use providers when building inclusion directives                  |         |       | 12:01 |  22.9 |
 | COMPLETED Fix AppVeyor notifications                                        |         |       |  0:22 |   0.7 |
 | COMPLETED Static use of element types does more harm than good              |         |       |  0:32 |   1.0 |
 | COMPLETED Analysis: major rethink of the implementation of quilt            |         |       |  1:30 |   2.9 |
 | CANCELLED Create a simple Emacs mode for stitch                             |         |       |  1:12 |   2.3 |
 | COMPLETED Add facet folder and formatter enablement to formatter properties |         |       |  2:52 |   5.5 |
-| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |  12.6 |
+| COMPLETED Move =cmakelists_info= to fabric                                  |         |       |  6:34 |  12.5 |
 | COMPLETED Move =odb_options_info= to fabric                                 |         |       |  1:29 |   2.8 |
 | COMPLETED Remove =formattable_origin_type=                                  |         |       |  0:17 |   0.5 |
 | COMPLETED Remove formattable origin type                                    |         |       |  2:25 |   4.6 |
 | COMPLETED Rename config model to options                                    |         |       |  1:07 |   2.1 |
 | COMPLETED Rename annotation to decoration in formatters model               |         |       |  0:30 |   1.0 |
 | STARTED Big rename for "final" terminology clean up                         |         |       |  0:02 |   0.1 |
+| STARTED Add type index to name and to formatter interface                   |         |       |  0:24 |   0.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -623,6 +624,9 @@ Sort these issues out.
     CLOCK: [2016-09-16 Fri 11:31]--[2016-09-16 Fri 11:45] =>  0:14
     CLOCK: [2016-09-16 Fri 10:20]--[2016-09-16 Fri 10:24] =>  0:04
 
+This story is very similar to [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_88.org#analysis-on-formatters-elements-and-extensibility][Analysis on formatters, elements and
+extensibility]], but from a slightly different angle.
+
 As an experiment, we tried to keep the formatter interfaces specific
 to the element they support. The idea was to "keep invalid states
 unrepresentable". However, if we think of this in terms of engineering
@@ -918,17 +922,32 @@ naming. One possible reason not to use annotations was because we used
 it already in the formatters model. Perhaps that could be renamed to
 something else, freeing up the name?
 
-*** Move odb options file into odb folder                             :story:
-
-There is not particularly good reason for this file to exist at the
-src level.
-
-*** Add type index to name and to formatter interface                 :story:
-
+*** STARTED Add type index to name and to formatter interface         :story:
+    CLOCK: [2016-09-20 Tue 22:51]--[2016-09-20 Tue 23:15] =>  0:24
 
 In preparation for the removal of the static formatters, we need to
 add a type index to =yarn::name=. We should also add it to the
 formatter interface and to all formatters.
+
+There is a slight problem in terms of adding type index to name: we do
+not have code generation support for this type. We could add it, but
+then its not trivial for all facets:
+
+- serialisation: seems tricky to serialise the notion of types unless
+  there is direct library support for it. According to SO, this does
+  not look entirely trivial: [[http://stackoverflow.com/questions/36219532/serializing-stdtype-index][Serializing `std::type_index`]].
+- test data: we could simply loop through a few primitives such as
+  bool, int etc.
+- hash: hopefully there is built-in support, but must be tested.
+- odb: similar problem as with serialisation.
+- io: should be fine, perhaps using typeid directly.
+
+But the main question is: why do we need type index in name?
+
+*** Move odb options file into odb folder                             :story:
+
+There is not particularly good reason for this file to exist at the
+src level.
 
 *** Remove static formatter containers                                :story:
 
