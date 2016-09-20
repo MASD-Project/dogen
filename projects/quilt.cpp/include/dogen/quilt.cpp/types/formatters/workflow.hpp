@@ -32,7 +32,6 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/yarn/types/element.hpp"
-#include "dogen/quilt.cpp/types/properties/formattable.hpp"
 #include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/settings/element_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"

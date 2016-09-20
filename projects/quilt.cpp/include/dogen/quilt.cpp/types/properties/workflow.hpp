@@ -42,7 +42,6 @@
 #include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
 #include "dogen/quilt.cpp/types/properties/locator.hpp"
-#include "dogen/quilt.cpp/types/properties/formattable.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties_repository.hpp"
 #include "dogen/quilt.cpp/types/properties/formatter_properties_repository.hpp"
@@ -113,16 +112,8 @@ private:
         const yarn::model& m) const;
 
     /**
-     * @brief Generates all of the properties that are sourced from
-     * the factory.
+     * @brief Creates the element properties.
      */
-    std::forward_list<std::shared_ptr<properties::formattable> >
-    from_factory(const config::cpp_options& opts,
-        const dogen::formatters::file_properties_workflow& fpwf,
-        const std::unordered_map<std::string, settings::path_settings>& ps,
-        formatter_properties_repository& fprp,
-        const yarn::model& m) const;
-
     element_properties_repository create_element_properties_repository(
         const dogen::formatters::file_properties_workflow& fpwf,
         const settings::helper_settings_repository& hsrp,
@@ -136,11 +127,7 @@ public:
     /**
      * @brief Executes the workflow.
      */
-    std::pair<
-        element_properties_repository,
-        std::forward_list<std::shared_ptr<formattable> >
-    >
-    execute(const config::cpp_options& opts,
+    element_properties_repository execute(const config::cpp_options& opts,
         const dynamic::repository& drp,
         const dynamic::object& root_object,
         const dogen::formatters::file_properties_workflow& fpwf,

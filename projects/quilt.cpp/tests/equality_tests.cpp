@@ -42,7 +42,6 @@ BOOST_AUTO_TEST_SUITE(equality_tests)
 BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
 
-    test_equality<properties::odb_options_info_generator>();
     test_equality<fabric::registrar_generator>();
 }
 

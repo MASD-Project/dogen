@@ -35,7 +35,6 @@
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/quilt/types/backend_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/container.hpp"
-#include "dogen/quilt.cpp/types/properties/formattable.hpp"
 #include "dogen/formatters/types/file_properties_workflow.hpp"
 #include "dogen/quilt.cpp/types/settings/opaque_settings_builder.hpp"
 #include "dogen/quilt.cpp/types/settings/streaming_settings_repository.hpp"
@@ -97,10 +96,7 @@ private:
     /**
      * @brief Create the properties.
      */
-    std::pair<
-        properties::element_properties_repository,
-        std::forward_list<std::shared_ptr<properties::formattable> >
-    >
+    properties::element_properties_repository
     create_properties(const config::cpp_options& opts,
         const dynamic::repository& srp,
         const dynamic::object& root_object,

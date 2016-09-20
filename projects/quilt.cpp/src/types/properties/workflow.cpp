@@ -29,8 +29,6 @@
 #include "dogen/quilt.cpp/types/settings/path_settings_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/helper_settings_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/settings/aspect_settings_repository_factory.hpp"
-#include "dogen/quilt.cpp/types/properties/factory.hpp"
-#include "dogen/quilt.cpp/io/properties/formattable_io.hpp"
 #include "dogen/quilt.cpp/types/properties/path_derivatives_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/element_properties_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/properties/formatter_properties_repository_factory.hpp"
@@ -121,24 +119,6 @@ create_formatter_properties(const dynamic::repository& drp,
     return f.make(drp, root_object, fdff, pdrp, registrar(), l, fc, m);
 }
 
-std::forward_list<std::shared_ptr<properties::formattable> >
-workflow::from_factory(const config::cpp_options& opts,
-    const dogen::formatters::file_properties_workflow& fpwf,
-    const std::unordered_map<std::string, settings::path_settings>& ps,
-    formatter_properties_repository& fprp,
-    const yarn::model& m) const {
-
-    std::forward_list<std::shared_ptr<properties::formattable> > r;
-    factory f;
-
-    const auto oi(f.make_odb_options(opts, fpwf, ps, fprp, m));
-    if (oi)
-        r.push_front(oi);
-
-    BOOST_LOG_SEV(lg, debug) << "Factory properties: " << r;
-    return r;
-}
-
 element_properties_repository workflow::create_element_properties_repository(
     const dogen::formatters::file_properties_workflow& fpwf,
     const settings::helper_settings_repository& hsrp,
@@ -151,11 +131,7 @@ element_properties_repository workflow::create_element_properties_repository(
     return f.make(fpwf, hsrp, asrp, ssrp, fc, fprp, m);
 }
 
-std::pair<
-    element_properties_repository,
-    std::forward_list<std::shared_ptr<properties::formattable> >
->
-workflow::execute(const config::cpp_options& opts,
+element_properties_repository workflow::execute(const config::cpp_options& opts,
     const dynamic::repository& drp,
     const dynamic::object& root_object,
     const dogen::formatters::file_properties_workflow& fpwf,
@@ -171,15 +147,13 @@ workflow::execute(const config::cpp_options& opts,
     const auto fdff(facet_directory_for_facet(fc, ps));
     auto fprp(create_formatter_properties(drp, ro, fdff, pdrp, l, fc, m));
 
-    const auto formattables(from_factory(opts, fpwf, ps, fprp, m));
-    BOOST_LOG_SEV(lg, debug) << "Formattables: " << formattables;
-    BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
-
     const auto hsrp(create_helper_settings_repository(drp, m));
     const auto asrp(create_aspect_settings_repository(drp, m));
     const auto eprp(create_element_properties_repository(
             fpwf, hsrp, asrp, ssrp, fc, fprp, m));
-    return std::make_pair(eprp, formattables);
+
+    BOOST_LOG_SEV(lg, debug) << "Finished creating properties.";
+    return eprp;
 }
 
 } } } }

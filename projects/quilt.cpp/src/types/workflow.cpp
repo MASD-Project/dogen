@@ -86,11 +86,7 @@ workflow::create_element_settings_repository(
     return f.make(osb, m);
 }
 
-std::pair<
-    properties::element_properties_repository,
-    std::forward_list<std::shared_ptr<properties::formattable> >
->
-workflow::create_properties(
+properties::element_properties_repository workflow::create_properties(
     const config::cpp_options& opts,
     const dynamic::repository& srp,
     const dynamic::object& root_object,
@@ -168,10 +164,10 @@ workflow::generate(const config::knitting_options& ko,
     const auto& fc(formatters::workflow::registrar().formatter_container());
 
     const auto& cpp(ko.cpp());
-    const auto pair(create_properties(cpp, drp, ro, fpwf, fc, ssrp, m));
+    const auto eprp(create_properties(cpp, drp, ro, fpwf, fc, ssrp, m));
 
     const auto elements(extract_generatable_elements(m));
-    auto r(format(ssrp, esrp, pair.first, elements));
+    auto r(format(ssrp, esrp, eprp, elements));
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";
     return r;
