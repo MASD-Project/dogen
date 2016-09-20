@@ -209,7 +209,7 @@ boost::filesystem::path locator::make_full_path_for_cpp_implementation(
 boost::filesystem::path locator::make_full_path_for_include_cmakelists(
     const yarn::name& n, const std::string& /*formatter_name*/) const {
     auto r(project_path_);
-    r /= n.simple() + ".txt";
+    r /= n.simple() + ".txt"; // FIXME: hack for extension
     return r;
 }
 
@@ -218,7 +218,16 @@ boost::filesystem::path locator::make_full_path_for_source_cmakelists(
     auto r(project_path_);
     const auto& ps(path_settings_for_formatter(formatter_name));
     r /= ps.source_directory_name();
-    r /= n.simple() + ".txt";
+    r /= n.simple() + ".txt"; // FIXME: hack for extension
+    return r;
+}
+
+boost::filesystem::path locator::make_full_path_for_odb_options(
+    const yarn::name& /*n*/, const std::string& formatter_name) const {
+    auto r(project_path_);
+    const auto& ps(path_settings_for_formatter(formatter_name));
+    r /= ps.source_directory_name();
+    r /= "options.odb"; // FIXME: hack for filename
     return r;
 }
 

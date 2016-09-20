@@ -49,14 +49,15 @@ namespace odb {
 
 namespace {
 
-class provider final : public properties::provider_interface<yarn::object> {
+class provider final :
+        public properties::provider_interface<fabric::odb_options> {
 public:
     std::string facet_name() const override;
     std::string formatter_name() const override;
 
     std::list<std::string> provide_inclusion_dependencies(
         const properties::inclusion_dependencies_builder_factory& f,
-        const yarn::object& o) const override;
+        const fabric::odb_options& o) const override;
 
     properties::inclusion_path_support inclusion_path_support() const override;
 
@@ -76,11 +77,10 @@ std::string provider::formatter_name() const {
 }
 
 std::list<std::string> provider::provide_inclusion_dependencies(
-    const properties::inclusion_dependencies_builder_factory& f,
-    const yarn::object& /*o*/) const {
-
-    auto builder(f.make());
-    return builder.build();
+    const properties::inclusion_dependencies_builder_factory& /*f*/,
+    const fabric::odb_options& /*o*/) const {
+    static std::list<std::string> r;
+    return r;
 }
 
 properties::inclusion_path_support provider::inclusion_path_support() const {
@@ -90,18 +90,14 @@ properties::inclusion_path_support provider::inclusion_path_support() const {
 boost::filesystem::path
 provider::provide_inclusion_path(const properties::locator& /*l*/,
     const yarn::name& n) const {
-
     BOOST_LOG_SEV(lg, error) << not_supported << n.id();
     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
 }
 
 boost::filesystem::path
-provider::provide_full_path(const properties::locator& /*l*/,
-    const yarn::name& /*n*/) const {
-    // FIXME:
-    boost::filesystem::path r;
-    return r;
-    // return l.make_full_path_for_cpp_implementation(n, formatter_name());
+provider::provide_full_path(const properties::locator& l,
+    const yarn::name& n) const {
+    return l.make_full_path_for_odb_options(n, formatter_name());
 }
 
 }
@@ -125,7 +121,7 @@ odb_options_formatter::ownership_hierarchy() const {
 }
 
 file_types odb_options_formatter::file_type() const {
-    return file_types::cpp_header;
+    return file_types::odb_options;
 }
 
 properties::origin_types
@@ -140,8 +136,8 @@ register_provider(properties::registrar& rg) const {
 
 dogen::formatters::file
 odb_options_formatter::format(const context& ctx,
-    const properties::odb_options_info& o) const {
-    assistant a(ctx, ownership_hierarchy(), file_type(), o.id());
+    const fabric::odb_options& o) const {
+    assistant a(ctx, ownership_hierarchy(), file_type(), o.name().id());
     const auto r(odb_options_formatter_stitch(a, o));
     return r;
 }

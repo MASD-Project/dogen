@@ -36,6 +36,7 @@ static logger lg(logger_factory(
 
 const std::string cpp_modeline_name("cpp");
 const std::string cmake_modeline_name("cmake");
+const std::string odb_modeline_name("odb");
 
 }
 
@@ -74,6 +75,8 @@ element_properties_repository element_properties_repository_factory::merge(
         // FIXME: hack
         if (boost::contains(id, "CMakeLists"))
             ep.file_properties(fpwf.execute(cmake_modeline_name));
+        else if (boost::contains(id, "options.odb"))
+            ep.file_properties(fpwf.execute(odb_modeline_name));
         else
             ep.file_properties(fp);
 

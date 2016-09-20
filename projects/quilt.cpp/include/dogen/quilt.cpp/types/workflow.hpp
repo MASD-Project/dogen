@@ -123,17 +123,6 @@ private:
         const settings::element_settings_repository& esrp,
         const properties::element_properties_repository& eprp,
         const std::forward_list<
-        std::shared_ptr<properties::formattable>
-        >& f) const;
-
-    /**
-     * @brief Create the files.
-     */
-    std::forward_list<dogen::formatters::file>
-    format_yarn(const settings::streaming_settings_repository& ssrp,
-        const settings::element_settings_repository& esrp,
-        const properties::element_properties_repository& eprp,
-        const std::forward_list<
         boost::shared_ptr<yarn::element> >& elements) const;
 
 public:

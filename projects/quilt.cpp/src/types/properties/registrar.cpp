@@ -115,4 +115,10 @@ void registrar::register_provider(
     container_.cmakelists_providers().push_front(p);
 }
 
+void registrar::register_provider(
+    boost::shared_ptr<provider_interface<fabric::odb_options>> p) {
+    validate(p);
+    container_.odb_options_providers().push_front(p);
+}
+
 } } } }

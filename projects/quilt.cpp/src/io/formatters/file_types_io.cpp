@@ -45,6 +45,9 @@ std::ostream& operator<<(std::ostream& s, const file_types& v) {
     case file_types::cmakefile:
         attr = "\"cmakefile\"";
         break;
+    case file_types::odb_options:
+        attr = "\"odb_options\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for file_types");
     }

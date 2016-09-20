@@ -152,6 +152,10 @@ public:
         generate(container_.cmakelists_providers(), c.name());
     }
 
+    void visit(const fabric::odb_options& o) override {
+        generate(container_.odb_options_providers(), o.name());
+    }
+
 public:
     const path_derivatives_repository & result() const { return result_; }
 

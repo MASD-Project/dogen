@@ -114,19 +114,8 @@ workflow::extract_generatable_elements(const yarn::model& m) const {
     return r;
 }
 
-std::forward_list<dogen::formatters::file>
-workflow::format(const settings::streaming_settings_repository& ssrp,
-    const settings::element_settings_repository& esrp,
-    const properties::element_properties_repository& eprp,
-    const std::forward_list<
-    std::shared_ptr<properties::formattable>
-    >& f) const {
-    formatters::workflow wf;
-    return wf.execute(ssrp, esrp, eprp, f);
-}
-
 std::forward_list<dogen::formatters::file> workflow::
-format_yarn(const settings::streaming_settings_repository& ssrp,
+format(const settings::streaming_settings_repository& ssrp,
     const settings::element_settings_repository& esrp,
     const properties::element_properties_repository& eprp,
     const std::forward_list<
@@ -180,11 +169,9 @@ workflow::generate(const config::knitting_options& ko,
 
     const auto& cpp(ko.cpp());
     const auto pair(create_properties(cpp, drp, ro, fpwf, fc, ssrp, m));
-    auto r(format(ssrp, esrp, pair.first, pair.second));
 
     const auto elements(extract_generatable_elements(m));
-    auto ye(format_yarn(ssrp, esrp, pair.first, elements));
-    r.splice_after(r.before_begin(), ye);
+    auto r(format(ssrp, esrp, pair.first, elements));
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";
     return r;

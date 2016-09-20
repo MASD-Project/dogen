@@ -147,6 +147,9 @@ public:
     void visit(const fabric::cmakelists& c) override {
         format(container_.cmakelists_formatters(), c);
     }
+    void visit(const fabric::odb_options& o) override {
+        format(container_.odb_options_formatters(), o);
+    }
 
 private:
     const context_factory factory_;

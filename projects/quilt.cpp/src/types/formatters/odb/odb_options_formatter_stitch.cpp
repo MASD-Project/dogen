@@ -29,10 +29,14 @@ namespace formatters {
 namespace odb {
 
 dogen::formatters::file odb_options_formatter_stitch(
-    assistant& a, const properties::odb_options_info& i) {
+    assistant& a, const fabric::odb_options& o) {
 
     {
-        a.make_annotation_preamble(i.file_properties());
+        a.make_annotation_preamble();
+
+        const auto model_name(a.get_identifiable_model_name(o.name()));
+        const auto product_name(a.get_product_name(o.name()));
+        const auto odb_folder(a.get_odb_facet_directory());
 a.stream() << "# enable C++11. FIXME: causes ODB crash in options file." << std::endl;
 a.stream() << "# --std c++11" << std::endl;
 a.stream() << std::endl;
@@ -53,18 +57,18 @@ a.stream() << "# --hxx-suffix .hpp" << std::endl;
 a.stream() << "--cxx-suffix .cpp" << std::endl;
 a.stream() << std::endl;
 a.stream() << "# fix domain includes" << std::endl;
-a.stream() << "--include-regex '%(.*).hpp%" << i.product_name() << "/" << i.model_name() << "/types/$1.hpp%'" << std::endl;
+a.stream() << "--include-regex '%(.*).hpp%" << product_name << "/" << model_name << "/types/$1.hpp%'" << std::endl;
 a.stream() << std::endl;
 a.stream() << "# fix odb generated includes" << std::endl;
-a.stream() << "--include-regex '%(^[a-zA-Z0-9_]+)-odb.(.*)%" << i.product_name() << "/" << i.model_name() << "/odb/$1-odb.$2%'" << std::endl;
-a.stream() << "--include-regex '%" << i.product_name() << "/" << i.model_name() << "/types/(.*)-odb.(.*)%" << i.product_name() << "/" << i.model_name() << "/odb/$1-odb.$2%'" << std::endl;
+a.stream() << "--include-regex '%(^[a-zA-Z0-9_]+)-odb.(.*)%" << product_name << "/" << model_name << "/odb/$1-odb.$2%'" << std::endl;
+a.stream() << "--include-regex '%" << product_name << "/" << model_name << "/types/(.*)-odb.(.*)%" << product_name << "/" << model_name << "/odb/$1-odb.$2%'" << std::endl;
 a.stream() << std::endl;
 a.stream() << "# debug regexes" << std::endl;
 a.stream() << "# --include-regex-trace" << std::endl;
 a.stream() << std::endl;
 a.stream() << "# make the header guards similar to dogen ones" << std::endl;
-a.stream() << "--guard-prefix " << boost::to_upper_copy(i.product_name()) << "_" << boost::to_upper_copy(i.model_name()) << "_" << boost::to_upper_copy(i.odb_folder()) << std::endl;
+a.stream() << "--guard-prefix " << boost::to_upper_copy(product_name) << "_" << boost::to_upper_copy(model_name) << "_" << boost::to_upper_copy(odb_folder) << std::endl;
     } // sbf
-    return a.make_file(i.file_path());
+    return a.make_file();
 }
 } } } } }

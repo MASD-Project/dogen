@@ -155,4 +155,18 @@ container::cmakelists_providers() {
     return cmakelists_providers_;
 }
 
+const std::forward_list<
+    boost::shared_ptr<provider_interface<fabric::odb_options>>
+>&
+container::odb_options_providers() const {
+    return odb_options_providers_;
+}
+
+std::forward_list<
+    boost::shared_ptr<provider_interface<fabric::odb_options>>
+>&
+container::odb_options_providers() {
+    return odb_options_providers_;
+}
+
 } } } }

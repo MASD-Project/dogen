@@ -77,6 +77,9 @@ public:
     void register_provider(
         boost::shared_ptr<provider_interface<fabric::cmakelists>> p);
 
+    void register_provider(
+        boost::shared_ptr<provider_interface<fabric::odb_options>> p);
+
 private:
     properties::container container_;
 };

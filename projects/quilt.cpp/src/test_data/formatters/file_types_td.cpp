@@ -28,7 +28,7 @@ namespace formatters {
 file_types_generator::file_types_generator() : position_(0) { }
 void file_types_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<file_types>(position % 4);
+    v = static_cast<file_types>(position % 5);
 }
 
 file_types_generator::result_type

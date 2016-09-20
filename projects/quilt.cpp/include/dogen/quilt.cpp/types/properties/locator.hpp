@@ -119,6 +119,12 @@ public:
     boost::filesystem::path make_full_path_for_source_cmakelists(
         const yarn::name& n, const std::string& formatter_name) const;
 
+    /**
+     * @brief Generate the full path for odb options.
+     */
+    boost::filesystem::path make_full_path_for_odb_options(
+        const yarn::name& n, const std::string& formatter_name) const;
+
 private:
     const yarn::name& model_name_;
     const std::unordered_map<std::string, settings::path_settings>&

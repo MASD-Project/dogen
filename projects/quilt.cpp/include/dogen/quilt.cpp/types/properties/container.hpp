@@ -38,6 +38,7 @@
 #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
+#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
 #include "dogen/quilt.cpp/types/properties/provider_interface.hpp"
 
 namespace dogen {
@@ -141,6 +142,16 @@ public:
     >&
     cmakelists_providers();
 
+    const std::forward_list<
+        boost::shared_ptr<provider_interface<fabric::odb_options>>
+    >&
+    odb_options_providers() const;
+
+    std::forward_list<
+        boost::shared_ptr<provider_interface<fabric::odb_options>>
+    >&
+    odb_options_providers();
+
 private:
     std::forward_list<boost::shared_ptr<provider_interface<yarn::module>>>
     module_providers_;
@@ -166,6 +177,9 @@ private:
     forward_declarations_providers_;
     std::forward_list<boost::shared_ptr<provider_interface<fabric::cmakelists>>>
     cmakelists_providers_;
+    std::forward_list<
+        boost::shared_ptr<provider_interface<fabric::odb_options>>>
+    odb_options_providers_;
 };
 
 } } } }

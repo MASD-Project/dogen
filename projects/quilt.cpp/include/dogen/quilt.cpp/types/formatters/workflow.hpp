@@ -65,13 +65,6 @@ public:
         const settings::element_settings_repository& esrp,
         const properties::element_properties_repository& eprp,
         const std::forward_list<
-        std::shared_ptr<properties::formattable> >& f) const;
-
-    std::forward_list<dogen::formatters::file>
-        execute(const settings::streaming_settings_repository& ssrp,
-        const settings::element_settings_repository& esrp,
-        const properties::element_properties_repository& eprp,
-        const std::forward_list<
         boost::shared_ptr<yarn::element> >& elements) const;
 
 private:

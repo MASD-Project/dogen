@@ -58,8 +58,8 @@ public:
 
     void register_provider(properties::registrar& rg) const override;
 
-    dogen::formatters::file format(const context& ctx,
-        const properties::odb_options_info& c) const override;
+    dogen::formatters::file
+    format(const context& ctx, const fabric::odb_options& o) const override;
 
 };
 

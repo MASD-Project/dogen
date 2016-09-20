@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/formatters/types/file.hpp"
-#include "dogen/quilt.cpp/types/properties/odb_options_info.hpp"
+#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {
@@ -36,7 +36,7 @@ namespace formatters {
 namespace odb {
 
 dogen::formatters::file odb_options_formatter_stitch(
-    assistant& a, const properties::odb_options_info& fd);
+    assistant& a, const fabric::odb_options& o);
 
 } } } } }
 

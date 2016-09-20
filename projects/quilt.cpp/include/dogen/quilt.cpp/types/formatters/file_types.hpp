@@ -34,7 +34,8 @@ enum class file_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     cpp_header = 1,
     cpp_implementation = 2,
-    cmakefile = 3
+    cmakefile = 3,
+    odb_options = 4
 };
 
 } } } }
