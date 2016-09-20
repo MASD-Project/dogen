@@ -174,9 +174,9 @@ file_properties file_properties_factory::make(const std::string& modeline_name,
     const auto modeline(get_modeline(modeline_name, fs));
     const auto licence(get_licence(fs));
     const auto marker(get_marker_or_default(fs));
-    const annotation a(modeline, licence, marker);
+    const decoration d(modeline, licence, marker);
     const bool gp(get_generate_preamble_or_default(fs));
-    return file_properties(gp, a);
+    return file_properties(gp, d);
 }
 
 } }

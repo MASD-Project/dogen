@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_ANNOTATION_HPP
-#define DOGEN_FORMATTERS_TYPES_ANNOTATION_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_DECORATION_HPP
+#define DOGEN_FORMATTERS_TYPES_DECORATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 #include <boost/optional.hpp>
 #include "dogen/formatters/types/licence.hpp"
 #include "dogen/formatters/types/modeline.hpp"
-#include "dogen/formatters/serialization/annotation_fwd_ser.hpp"
+#include "dogen/formatters/serialization/decoration_fwd_ser.hpp"
 
 namespace dogen {
 namespace formatters {
@@ -38,27 +38,27 @@ namespace formatters {
 /**
  * @brief Aggregates all the file meta-data in one place.
  */
-class annotation final {
+class decoration final {
 public:
-    annotation() = default;
-    annotation(const annotation&) = default;
-    ~annotation() = default;
+    decoration() = default;
+    decoration(const decoration&) = default;
+    ~decoration() = default;
 
 public:
-    annotation(annotation&& rhs);
+    decoration(decoration&& rhs);
 
 public:
-    annotation(
+    decoration(
         const boost::optional<dogen::formatters::modeline>& modeline,
         const boost::optional<dogen::formatters::licence>& licence,
         const std::string& code_generation_marker);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::formatters::annotation& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::formatters::decoration& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::formatters::annotation& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::formatters::decoration& v, unsigned int version);
 
 public:
     /**
@@ -92,14 +92,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const annotation& rhs) const;
-    bool operator!=(const annotation& rhs) const {
+    bool operator==(const decoration& rhs) const;
+    bool operator!=(const decoration& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(annotation& other) noexcept;
-    annotation& operator=(annotation other);
+    void swap(decoration& other) noexcept;
+    decoration& operator=(decoration other);
 
 private:
     boost::optional<dogen::formatters::modeline> modeline_;
@@ -113,8 +113,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::formatters::annotation& lhs,
-    dogen::formatters::annotation& rhs) {
+    dogen::formatters::decoration& lhs,
+    dogen::formatters::decoration& rhs) {
     lhs.swap(rhs);
 }
 

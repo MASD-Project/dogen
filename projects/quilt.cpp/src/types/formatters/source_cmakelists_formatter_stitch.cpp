@@ -31,7 +31,7 @@ dogen::formatters::file source_cmakelists_formatter_stitch(
     assistant& a, const fabric::cmakelists& c) {
 
     {
-        a.make_annotation_preamble();
+        a.make_decoration_preamble();
         const auto model_name(a.get_identifiable_model_name(c.name()));
         const auto product_name(a.get_product_name(c.name()));
 a.stream() << "set(files \"\")" << std::endl;

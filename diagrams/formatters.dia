@@ -3870,16 +3870,16 @@ only be written to the filesystem if it does not exist.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#annotation#</dia:string>
+            <dia:string>#decoration#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#annotation#</dia:string>
+            <dia:string>#decoration#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Annotation information for formatter.#</dia:string>
+            <dia:string>#Decoration information for formatter.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4529,7 +4529,7 @@ then make use of it.
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#annotation#</dia:string>
+        <dia:string>#decoration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -10523,7 +10523,7 @@ than one element.#</dia:string>
         <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#annotation_formatter#</dia:string>
+        <dia:string>#decoration_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -10679,7 +10679,7 @@ than one element.#</dia:string>
                 <dia:string>#a#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const annotation&amp;#</dia:string>
+                <dia:string>#const decoration&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -10761,7 +10761,7 @@ than one element.#</dia:string>
                 <dia:string>#a#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const annotation&amp;#</dia:string>
+                <dia:string>#const decoration&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

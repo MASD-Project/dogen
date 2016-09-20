@@ -28,19 +28,19 @@ file_properties::file_properties()
 
 file_properties::file_properties(
     const bool generate_preamble,
-    const dogen::formatters::annotation& annotation)
+    const dogen::formatters::decoration& decoration)
     : generate_preamble_(generate_preamble),
-      annotation_(annotation) { }
+      decoration_(decoration) { }
 
 void file_properties::swap(file_properties& other) noexcept {
     using std::swap;
     swap(generate_preamble_, other.generate_preamble_);
-    swap(annotation_, other.annotation_);
+    swap(decoration_, other.decoration_);
 }
 
 bool file_properties::operator==(const file_properties& rhs) const {
     return generate_preamble_ == rhs.generate_preamble_ &&
-        annotation_ == rhs.annotation_;
+        decoration_ == rhs.decoration_;
 }
 
 file_properties& file_properties::operator=(file_properties other) {
@@ -57,20 +57,20 @@ void file_properties::generate_preamble(const bool v) {
     generate_preamble_ = v;
 }
 
-const dogen::formatters::annotation& file_properties::annotation() const {
-    return annotation_;
+const dogen::formatters::decoration& file_properties::decoration() const {
+    return decoration_;
 }
 
-dogen::formatters::annotation& file_properties::annotation() {
-    return annotation_;
+dogen::formatters::decoration& file_properties::decoration() {
+    return decoration_;
 }
 
-void file_properties::annotation(const dogen::formatters::annotation& v) {
-    annotation_ = v;
+void file_properties::decoration(const dogen::formatters::decoration& v) {
+    decoration_ = v;
 }
 
-void file_properties::annotation(const dogen::formatters::annotation&& v) {
-    annotation_ = std::move(v);
+void file_properties::decoration(const dogen::formatters::decoration&& v) {
+    decoration_ = std::move(v);
 }
 
 } }

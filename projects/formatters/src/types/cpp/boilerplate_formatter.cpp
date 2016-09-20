@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen/formatters/types/annotation_formatter.hpp"
+#include "dogen/formatters/types/decoration_formatter.hpp"
 #include "dogen/formatters/types/cpp/include_formatter.hpp"
 #include "dogen/formatters/types/cpp/header_guard_formatter.hpp"
 #include "dogen/formatters/types/cpp/boilerplate_formatter.hpp"
@@ -34,13 +34,13 @@ boilerplate_formatter::boilerplate_formatter(
       generate_header_guards_(generate_header_guards) { }
 
 void boilerplate_formatter::
-format_preamble(std::ostream& s, const annotation& a) const {
+format_preamble(std::ostream& s, const decoration& d) const {
     if (!generate_preamble_)
         return;
 
-    annotation_formatter af;
+    decoration_formatter af;
     af.format_preamble(s, comment_styles::cpp_style/*single line*/,
-        comment_styles::c_style/*multi-line*/, a);
+        comment_styles::c_style/*multi-line*/, d);
 }
 
 void boilerplate_formatter::
@@ -71,7 +71,7 @@ format_includes(std::ostream& s, const std::list<std::string>& includes) const {
 }
 
 void boilerplate_formatter::
-format_begin(std::ostream& s, const annotation& a,
+format_begin(std::ostream& s, const decoration& a,
     const std::list<std::string>& includes,
     const std::string& header_guard) const {
 
@@ -81,13 +81,13 @@ format_begin(std::ostream& s, const annotation& a,
 }
 
 void boilerplate_formatter::
-format_postamble(std::ostream& s, const annotation& a) const {
-    annotation_formatter af;
+format_postamble(std::ostream& s, const decoration& a) const {
+    decoration_formatter af;
     af.format_postamble(s, comment_styles::c_style, a);
 }
 
 void boilerplate_formatter::
-format_end(std::ostream& s, const annotation& a,
+format_end(std::ostream& s, const decoration& a,
     const std::string& header_guard) const {
     format_postamble(s, a);
     format_guards_end(s, header_guard);

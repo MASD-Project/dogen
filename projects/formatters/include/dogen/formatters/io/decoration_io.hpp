@@ -18,17 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_ANNOTATION_FWD_HPP
-#define DOGEN_FORMATTERS_TYPES_ANNOTATION_FWD_HPP
+#ifndef DOGEN_FORMATTERS_IO_DECORATION_IO_HPP
+#define DOGEN_FORMATTERS_IO_DECORATION_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen/formatters/types/decoration.hpp"
+
 namespace dogen {
 namespace formatters {
 
-class annotation;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::formatters::decoration& v);
 
 } }
 

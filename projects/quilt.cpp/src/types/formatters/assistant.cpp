@@ -24,7 +24,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/formatters/types/comment_formatter.hpp"
-#include "dogen/formatters/types/annotation_formatter.hpp"
+#include "dogen/formatters/types/decoration_formatter.hpp"
 #include "dogen/formatters/types/utility_formatter.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/quilt.cpp/io/settings/streaming_settings_io.hpp"
@@ -288,19 +288,19 @@ assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
         true/*add_new_line*/);
 }
 
-void assistant::make_annotation_preamble() {
+void assistant::make_decoration_preamble() {
     const auto fp(context_.element_properties().file_properties());
-    make_annotation_preamble(fp);
+    make_decoration_preamble(fp);
 }
 
-void assistant::make_annotation_preamble(
+void assistant::make_decoration_preamble(
     const boost::optional<dogen::formatters::file_properties> fp) {
     if (!fp)
         return;
 
-    dogen::formatters::annotation_formatter af;
+    dogen::formatters::decoration_formatter af;
     af.format_preamble(stream(), dogen::formatters::comment_styles::shell_style,
-        (*fp).annotation());
+        (*fp).decoration());
 }
 
 dogen::formatters::file assistant::

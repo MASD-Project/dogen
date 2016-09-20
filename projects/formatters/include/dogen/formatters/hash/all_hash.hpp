@@ -29,7 +29,7 @@
 #include "dogen/formatters/hash/editors_hash.hpp"
 #include "dogen/formatters/hash/licence_hash.hpp"
 #include "dogen/formatters/hash/modeline_hash.hpp"
-#include "dogen/formatters/hash/annotation_hash.hpp"
+#include "dogen/formatters/hash/decoration_hash.hpp"
 #include "dogen/formatters/hash/repository_hash.hpp"
 #include "dogen/formatters/hash/quote_types_hash.hpp"
 #include "dogen/formatters/hash/file_settings_hash.hpp"

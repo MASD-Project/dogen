@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/test_data/annotation_td.hpp"
+#include "dogen/formatters/test_data/decoration_td.hpp"
 #include "dogen/formatters/test_data/file_properties_td.hpp"
 
 namespace {
@@ -27,9 +27,9 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
-dogen::formatters::annotation
-create_dogen_formatters_annotation(const unsigned int position) {
-    return dogen::formatters::annotation_generator::create(position);
+dogen::formatters::decoration
+create_dogen_formatters_decoration(const unsigned int position) {
+    return dogen::formatters::decoration_generator::create(position);
 }
 
 }
@@ -42,7 +42,7 @@ file_properties_generator::file_properties_generator() : position_(0) { }
 void file_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.generate_preamble(create_bool(position + 0));
-    v.annotation(create_dogen_formatters_annotation(position + 1));
+    v.decoration(create_dogen_formatters_decoration(position + 1));
 }
 
 file_properties_generator::result_type

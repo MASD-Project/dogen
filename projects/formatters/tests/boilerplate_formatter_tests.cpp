@@ -207,7 +207,7 @@ const std::string disabled_preamble(R"(#ifndef A_PATH_HPP
 #endif
 )");
 
-std::string format(const dogen::formatters::annotation& a,
+std::string format(const dogen::formatters::decoration& d,
     const std::list<std::string>& inclusion_dependencies,
     const std::string& header_guard,
     const bool generate_premable = true) {
@@ -218,8 +218,8 @@ std::string format(const dogen::formatters::annotation& a,
     fo.push(s);
 
     dogen::formatters::cpp::boilerplate_formatter f(generate_premable);
-    f.format_begin(fo, a, inclusion_dependencies, header_guard);
-    f.format_end(fo, a, header_guard);
+    f.format_begin(fo, d, inclusion_dependencies, header_guard);
+    f.format_end(fo, d, header_guard);
     return s.str();
 }
 
@@ -234,10 +234,10 @@ BOOST_AUTO_TEST_SUITE(boilerplate_formatter_tests)
 BOOST_AUTO_TEST_CASE(top_modeline_is_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("top_modeline_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
-    const auto a(factory_.make_annotation());
+    const auto d(factory_.make_decoration());
     const auto inc(factory_.make_includes(true/*is_empty*/));
     const auto hg(factory_.make_header_guard(true/*is_empty*/));
-    const auto r(format(a, inc, hg));
+    const auto r(format(d, inc, hg));
 
     BOOST_CHECK(asserter::assert_equals_marker(modeline_top, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -247,11 +247,11 @@ BOOST_AUTO_TEST_CASE(top_modeline_and_multiline_licence_is_formatted_correctly) 
     SETUP_TEST_LOG_SOURCE("top_modeline_and_multiline_licence_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const auto a(factory_.make_annotation(modeline_locations::top,
+    const auto d(factory_.make_decoration(modeline_locations::top,
             true/*multiline licence*/));
     const auto inc(factory_.make_includes(true/*is_empty*/));
     const auto hg(factory_.make_header_guard(true/*is_empty*/));
-    const auto r(format(a, inc, hg));
+    const auto r(format(d, inc, hg));
 
     BOOST_CHECK(asserter::assert_equals_marker(multiline_licence, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -261,10 +261,10 @@ BOOST_AUTO_TEST_CASE(bottom_modeline_is_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("bottom_modeline_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const auto a(factory_.make_annotation(modeline_locations::bottom));
+    const auto d(factory_.make_decoration(modeline_locations::bottom));
     const auto inc(factory_.make_includes(true/*is_empty*/));
     const auto hg(factory_.make_header_guard(true/*is_empty*/));
-    const auto r(format(a, inc, hg));
+    const auto r(format(d, inc, hg));
 
     BOOST_CHECK(asserter::assert_equals_marker(modeline_bottom, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -274,13 +274,13 @@ BOOST_AUTO_TEST_CASE(no_marker_is_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("no_marker_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const auto a(factory_.make_annotation(modeline_locations::top,
+    const auto d(factory_.make_decoration(modeline_locations::top,
             false/*multiline licence*/,
             false/*use_empty_licence*/,
             true/*use_empty_marker*/));
     const auto inc(factory_.make_includes(true/*is_empty*/));
     const auto hg(factory_.make_header_guard(true/*is_empty*/));
-    const auto r(format(a, inc, hg));
+    const auto r(format(d, inc, hg));
 
     BOOST_CHECK(asserter::assert_equals_marker(no_marker, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -290,13 +290,13 @@ BOOST_AUTO_TEST_CASE(no_licence_is_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("no_licence_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const auto a(factory_.make_annotation(modeline_locations::top,
+    const auto d(factory_.make_decoration(modeline_locations::top,
             false/*use_multiline licence*/,
             true/*use_empty_licence*/,
             false/*use_empty_marker*/));
     const auto inc(factory_.make_includes(true/*is_empty*/));
     const auto hg(factory_.make_header_guard(true/*is_empty*/));
-    const auto r(format(a, inc, hg));
+    const auto r(format(d, inc, hg));
 
     BOOST_CHECK(asserter::assert_equals_marker(no_licence, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -309,10 +309,10 @@ BOOST_AUTO_TEST_CASE(licence_with_holder_but_no_text_is_formatted_correctly) {
     const auto m(factory_.make_modeline(modeline_locations::top));
     licence l;
     l.copyright_notices().push_back("a_holder");
-    const annotation a(m, l, factory_.make_marker());
+    const decoration d(m, l, factory_.make_marker());
     const auto inc(factory_.make_includes(true/*is_empty*/));
     const auto hg(factory_.make_header_guard(true/*is_empty*/));
-    const auto r(format(a, inc, hg));
+    const auto r(format(d, inc, hg));
 
     BOOST_CHECK(asserter::assert_equals_marker(licence_no_text, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -325,10 +325,10 @@ BOOST_AUTO_TEST_CASE(licence_with_text_but_no_copyright_notices_is_formatted_cor
     const auto m(factory_.make_modeline(modeline_locations::top));
     licence l;
     l.text("licence text");
-    const annotation a(m, l, factory_.make_marker());
+    const decoration d(m, l, factory_.make_marker());
     const auto inc(factory_.make_includes(true/*is_empty*/));
     const auto hg(factory_.make_header_guard(true/*is_empty*/));
-    const auto r(format(a, inc, hg));
+    const auto r(format(d, inc, hg));
 
     BOOST_CHECK(
         asserter::assert_equals_marker(licence_no_copyright_notices, r));
@@ -339,11 +339,11 @@ BOOST_AUTO_TEST_CASE(preamble_with_just_marker_is_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("preamble_with_just_marker_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    auto a(factory_.make_empty_annotation());
-    a.code_generation_marker(factory_.make_marker());
+    auto d(factory_.make_empty_decoration());
+    d.code_generation_marker(factory_.make_marker());
     const auto inc(factory_.make_includes(true/*is_empty*/));
     const auto hg(factory_.make_header_guard(true/*is_empty*/));
-    const auto r(format(a, inc, hg));
+    const auto r(format(d, inc, hg));
 
     BOOST_CHECK(asserter::assert_equals_marker(just_marker, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -353,14 +353,14 @@ BOOST_AUTO_TEST_CASE(preamble_with_just_modeline_at_the_top_is_formatted_correct
     SETUP_TEST_LOG_SOURCE("preamble_with_just_modeline_at_the_top_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const annotation a(factory_.make_annotation(
+    const decoration d(factory_.make_decoration(
             modeline_locations::top,
             false/*use_multiline licence*/,
             true/*use_empty_licence*/,
             true/*use_empty_marker*/));
     const auto inc(factory_.make_includes(true/*is_empty*/));
     const auto hg(factory_.make_header_guard(true/*is_empty*/));
-    const auto r(format(a, inc, hg));
+    const auto r(format(d, inc, hg));
 
     BOOST_CHECK(asserter::assert_equals_marker(just_modeline_top, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -370,14 +370,14 @@ BOOST_AUTO_TEST_CASE(postamble_with_just_modeline_at_the_bottom_is_formatted_cor
     SETUP_TEST_LOG_SOURCE("postamble_with_just_modeline_at_the_bottom_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const annotation a(factory_.make_annotation(
+    const decoration d(factory_.make_decoration(
             modeline_locations::bottom,
             false/*use_multiline licence*/,
             true/*use_empty_licence*/,
             true/*use_empty_marker*/));
     const auto inc(factory_.make_includes(true/*is_empty*/));
     const auto hg(factory_.make_header_guard(true/*is_empty*/));
-    const auto r(format(a, inc, hg));
+    const auto r(format(d, inc, hg));
 
     BOOST_CHECK(asserter::assert_equals_marker(just_modeline_bottom, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -387,10 +387,10 @@ BOOST_AUTO_TEST_CASE(not_supplying_content_results_in_no_boilerplate) {
     SETUP_TEST_LOG_SOURCE("not_supplying_content_results_in_no_boilerplate");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const annotation a(factory_.make_empty_annotation());
+    const decoration d(factory_.make_empty_decoration());
     const auto inc(factory_.make_includes(true/*is_empty*/));
     const auto hg(factory_.make_header_guard(true/*is_empty*/));
-    const auto r(format(a, inc, hg));
+    const auto r(format(d, inc, hg));
 
     BOOST_CHECK(asserter::assert_equals_marker(empty, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -400,10 +400,10 @@ BOOST_AUTO_TEST_CASE(header_guards_with_top_modeline_are_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("header_guards_with_top_modeline_are_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const annotation a(factory_.make_annotation());
+    const decoration d(factory_.make_decoration());
     const auto inc(factory_.make_includes(true/*is_empty*/));
     const auto hg(factory_.make_header_guard());
-    const auto r(format(a, inc, hg));
+    const auto r(format(d, inc, hg));
 
     BOOST_CHECK(r == guards_with_top_modeline);
     BOOST_CHECK(asserter::assert_equals_marker(guards_with_top_modeline, r));
@@ -414,10 +414,10 @@ BOOST_AUTO_TEST_CASE(header_guards_with_bottom_modeline_are_formatted_correctly)
     SETUP_TEST_LOG_SOURCE("header_guards_with_bottom_modeline_are_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const annotation a(factory_.make_annotation(modeline_locations::bottom));
+    const decoration d(factory_.make_decoration(modeline_locations::bottom));
     const auto inc(factory_.make_includes(true/*is_empty*/));
     const auto hg(factory_.make_header_guard());
-    const auto r(format(a, inc, hg));
+    const auto r(format(d, inc, hg));
 
     BOOST_CHECK(asserter::assert_equals_marker(guards_with_bottom_modeline, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -427,10 +427,10 @@ BOOST_AUTO_TEST_CASE(includes_are_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("includes_are_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const annotation a(factory_.make_annotation());
+    const decoration d(factory_.make_decoration());
     const auto inc(factory_.make_includes());
     const auto hg(factory_.make_header_guard());
-    const auto r(format(a, inc, hg));
+    const auto r(format(d, inc, hg));
 
     BOOST_CHECK(asserter::assert_equals_marker(includes_with_top_modeline, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -440,10 +440,10 @@ BOOST_AUTO_TEST_CASE(disabled_preamble_is_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("disabled_preamble_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const annotation a(factory_.make_annotation());
+    const decoration d(factory_.make_decoration());
     const auto inc(factory_.make_includes());
     const auto hg(factory_.make_header_guard());
-    const auto r(format(a, inc, hg, !generate_premable));
+    const auto r(format(d, inc, hg, !generate_premable));
 
     BOOST_CHECK(asserter::assert_equals_marker(disabled_preamble, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";

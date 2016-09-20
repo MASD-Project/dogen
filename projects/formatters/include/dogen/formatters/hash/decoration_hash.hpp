@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_HASH_ANNOTATION_HASH_HPP
-#define DOGEN_FORMATTERS_HASH_ANNOTATION_HASH_HPP
+#ifndef DOGEN_FORMATTERS_HASH_DECORATION_HASH_HPP
+#define DOGEN_FORMATTERS_HASH_DECORATION_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen/formatters/types/annotation.hpp"
+#include "dogen/formatters/types/decoration.hpp"
 
 namespace dogen {
 namespace formatters {
 
-struct annotation_hasher {
+struct decoration_hasher {
 public:
-    static std::size_t hash(const annotation& v);
+    static std::size_t hash(const decoration& v);
 };
 
 } }
@@ -41,10 +41,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::formatters::annotation> {
+struct hash<dogen::formatters::decoration> {
 public:
-    size_t operator()(const dogen::formatters::annotation& v) const {
-        return dogen::formatters::annotation_hasher::hash(v);
+    size_t operator()(const dogen::formatters::decoration& v) const {
+        return dogen::formatters::decoration_hasher::hash(v);
     }
 };
 

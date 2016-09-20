@@ -27,7 +27,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/formatters/serialization/annotation_ser.hpp"
+#include "dogen/formatters/serialization/decoration_ser.hpp"
 #include "dogen/formatters/serialization/file_properties_ser.hpp"
 
 namespace boost {
@@ -38,7 +38,7 @@ void save(Archive& ar,
     const dogen::formatters::file_properties& v,
     const unsigned int /*version*/) {
     ar << make_nvp("generate_preamble", v.generate_preamble_);
-    ar << make_nvp("annotation", v.annotation_);
+    ar << make_nvp("decoration", v.decoration_);
 }
 
 template<typename Archive>
@@ -46,7 +46,7 @@ void load(Archive& ar,
     dogen::formatters::file_properties& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("generate_preamble", v.generate_preamble_);
-    ar >> make_nvp("annotation", v.annotation_);
+    ar >> make_nvp("decoration", v.decoration_);
 }
 
 } }

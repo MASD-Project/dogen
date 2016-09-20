@@ -21,7 +21,7 @@
 #include <sstream>
 #include "dogen/formatters/test_data/licence_td.hpp"
 #include "dogen/formatters/test_data/modeline_td.hpp"
-#include "dogen/formatters/test_data/annotation_td.hpp"
+#include "dogen/formatters/test_data/decoration_td.hpp"
 
 namespace {
 
@@ -60,31 +60,31 @@ std::string create_std_string(const unsigned int position) {
 namespace dogen {
 namespace formatters {
 
-annotation_generator::annotation_generator() : position_(0) { }
+decoration_generator::decoration_generator() : position_(0) { }
 
-void annotation_generator::
+void decoration_generator::
 populate(const unsigned int position, result_type& v) {
     v.modeline(create_boost_optional_dogen_formatters_modeline(position + 0));
     v.licence(create_boost_optional_dogen_formatters_licence(position + 1));
     v.code_generation_marker(create_std_string(position + 2));
 }
 
-annotation_generator::result_type
-annotation_generator::create(const unsigned int position) {
-    annotation r;
-    annotation_generator::populate(position, r);
+decoration_generator::result_type
+decoration_generator::create(const unsigned int position) {
+    decoration r;
+    decoration_generator::populate(position, r);
     return r;
 }
 
-annotation_generator::result_type*
-annotation_generator::create_ptr(const unsigned int position) {
-    annotation* p = new annotation();
-    annotation_generator::populate(position, *p);
+decoration_generator::result_type*
+decoration_generator::create_ptr(const unsigned int position) {
+    decoration* p = new decoration();
+    decoration_generator::populate(position, *p);
     return p;
 }
 
-annotation_generator::result_type
-annotation_generator::operator()() {
+decoration_generator::result_type
+decoration_generator::operator()() {
     return create(position_++);
 }
 

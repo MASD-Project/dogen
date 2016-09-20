@@ -29,7 +29,7 @@
 #include <string>
 #include "dogen/formatters/types/licence.hpp"
 #include "dogen/formatters/types/modeline.hpp"
-#include "dogen/formatters/types/annotation.hpp"
+#include "dogen/formatters/types/decoration.hpp"
 #include "dogen/formatters/types/modeline_locations.hpp"
 #include "dogen/formatters/types/file_properties.hpp"
 
@@ -66,18 +66,18 @@ public:
     std::string make_header_guard(const bool is_empty = false) const;
 
     /**
-     * @brief Creates an annotation.
+     * @brief Creates an decoration.
      */
-    annotation make_annotation(
+    decoration make_decoration(
         const modeline_locations ml = modeline_locations::top,
         const bool use_multiline_licence = false,
         const bool use_empty_licence = false,
         const bool use_empty_marker = false) const;
 
     /**
-     * @brief Creates an empty annotation.
+     * @brief Creates an empty decoration.
      */
-    annotation make_empty_annotation() const;
+    decoration make_empty_decoration() const;
 
     /**
      * @brief Creates the general settings.

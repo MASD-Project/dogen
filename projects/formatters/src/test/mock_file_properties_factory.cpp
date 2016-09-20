@@ -93,26 +93,26 @@ make_header_guard(const bool is_empty) const {
     return is_empty ? empty_header_guard : header_guard;
 }
 
-annotation mock_file_properties_factory::
-make_annotation(const modeline_locations ml, const bool use_multiline_licence,
+decoration mock_file_properties_factory::
+make_decoration(const modeline_locations ml, const bool use_multiline_licence,
     const bool use_empty_licence, const bool use_empty_marker) const {
     const auto inc(make_includes());
     const auto m(make_modeline(ml));
     const auto l(make_licence(use_empty_licence, use_multiline_licence));
-    const annotation r(m, l, make_marker(use_empty_marker));
+    const decoration r(m, l, make_marker(use_empty_marker));
     return r;
 }
 
-annotation mock_file_properties_factory::make_empty_annotation() const {
+decoration mock_file_properties_factory::make_empty_decoration() const {
     const modeline m;
     licence l;
-    const annotation r(m, l, make_marker(true/*use_empty_marker*/));
+    const decoration r(m, l, make_marker(true/*use_empty_marker*/));
     return r;
 }
 
 file_properties mock_file_properties_factory::make_file_properties() const {
     file_properties r;
-    r.annotation(make_annotation());
+    r.decoration(make_decoration());
     return r;
 }
 

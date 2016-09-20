@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_ANNOTATION_FORMATTER_HPP
-#define DOGEN_FORMATTERS_TYPES_ANNOTATION_FORMATTER_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_DECORATION_FORMATTER_HPP
+#define DOGEN_FORMATTERS_TYPES_DECORATION_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,12 +27,12 @@
 
 #include <iosfwd>
 #include "dogen/formatters/types/comment_styles.hpp"
-#include "dogen/formatters/types/annotation.hpp"
+#include "dogen/formatters/types/decoration.hpp"
 
 namespace dogen {
 namespace formatters {
 
-class annotation_formatter {
+class decoration_formatter {
 private:
     /**
      * @brief Adds the formatted modeline to the content.
@@ -52,13 +52,13 @@ private:
 
 public:
     void format_preamble(std::ostream& s, const comment_styles& single_line_cs,
-        const comment_styles& multi_line_cs, const annotation& a) const;
+        const comment_styles& multi_line_cs, const decoration& d) const;
 
     void format_preamble(std::ostream& s, const comment_styles& cs,
-        const annotation& a) const;
+        const decoration& d) const;
 
     void format_postamble(std::ostream& s, const comment_styles& cs,
-        const annotation& a) const;
+        const decoration& d) const;
 };
 
 } }

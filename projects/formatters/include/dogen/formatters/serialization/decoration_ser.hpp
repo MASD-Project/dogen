@@ -18,22 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_IO_ANNOTATION_IO_HPP
-#define DOGEN_FORMATTERS_IO_ANNOTATION_IO_HPP
+#ifndef DOGEN_FORMATTERS_SERIALIZATION_DECORATION_SER_HPP
+#define DOGEN_FORMATTERS_SERIALIZATION_DECORATION_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/formatters/types/annotation.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/formatters/types/decoration.hpp"
 
-namespace dogen {
-namespace formatters {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::formatters::decoration)
+namespace boost {
+namespace serialization {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::formatters::annotation& v);
+template<typename Archive>
+void save(Archive& ar, const dogen::formatters::decoration& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::formatters::decoration& v, unsigned int version);
 
 } }
 

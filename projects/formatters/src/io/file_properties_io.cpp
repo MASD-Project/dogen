@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen/formatters/io/annotation_io.hpp"
+#include "dogen/formatters/io/decoration_io.hpp"
 #include "dogen/formatters/io/file_properties_io.hpp"
 
 namespace dogen {
@@ -36,7 +36,7 @@ std::ostream& operator<<(std::ostream& s, const file_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::formatters::file_properties\"" << ", "
       << "\"generate_preamble\": " << v.generate_preamble() << ", "
-      << "\"annotation\": " << v.annotation()
+      << "\"decoration\": " << v.decoration()
       << " }";
     return(s);
 }

@@ -28,7 +28,7 @@
 #include <list>
 #include <iosfwd>
 #include <string>
-#include "dogen/formatters/types/annotation.hpp"
+#include "dogen/formatters/types/decoration.hpp"
 
 namespace dogen {
 namespace formatters {
@@ -63,14 +63,14 @@ private:
      * The preamble is made up of the modeline, any potential code
      * generation marker and the licence.
      */
-    void format_preamble(std::ostream& s, const annotation& a) const;
+    void format_preamble(std::ostream& s, const decoration& d) const;
 
     /**
      * @brief Formats the file's postamble.
      *
      * The postamble is composed of a bottom modeline, if any.
      */
-    void format_postamble(std::ostream& s, const annotation& a) const;
+    void format_postamble(std::ostream& s, const decoration& d) const;
 
     /**
      * @brief Formats the starting part of the header guards.
@@ -94,14 +94,14 @@ public:
     /**
      * @brief Formats the initial section of boilerplate.
      */
-    void format_begin(std::ostream& s, const annotation& a,
+    void format_begin(std::ostream& s, const decoration& d,
         const std::list<std::string>& includes,
         const std::string& header_guard) const;
 
     /**
      * @brief Formats the end of the boilerplate.
      */
-    void format_end(std::ostream& s, const annotation& a,
+    void format_end(std::ostream& s, const decoration& d,
         const std::string& header_guard) const;
 
 private:

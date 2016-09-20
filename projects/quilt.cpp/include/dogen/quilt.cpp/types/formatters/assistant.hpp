@@ -205,8 +205,8 @@ public:
      * @brief Creates the preamble.
      */
     /**@{*/
-    void make_annotation_preamble();
-    void make_annotation_preamble(
+    void make_decoration_preamble();
+    void make_decoration_preamble(
         const boost::optional<dogen::formatters::file_properties> gs);
     /**@}*/
 

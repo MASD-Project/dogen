@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/annotation.hpp"
+#include "dogen/formatters/types/decoration.hpp"
 
 namespace dogen {
 namespace formatters {
 
-annotation::annotation(annotation&& rhs)
+decoration::decoration(decoration&& rhs)
     : modeline_(std::move(rhs.modeline_)),
       licence_(std::move(rhs.licence_)),
       code_generation_marker_(std::move(rhs.code_generation_marker_)) { }
 
-annotation::annotation(
+decoration::decoration(
     const boost::optional<dogen::formatters::modeline>& modeline,
     const boost::optional<dogen::formatters::licence>& licence,
     const std::string& code_generation_marker)
@@ -36,70 +36,70 @@ annotation::annotation(
       licence_(licence),
       code_generation_marker_(code_generation_marker) { }
 
-void annotation::swap(annotation& other) noexcept {
+void decoration::swap(decoration& other) noexcept {
     using std::swap;
     swap(modeline_, other.modeline_);
     swap(licence_, other.licence_);
     swap(code_generation_marker_, other.code_generation_marker_);
 }
 
-bool annotation::operator==(const annotation& rhs) const {
+bool decoration::operator==(const decoration& rhs) const {
     return modeline_ == rhs.modeline_ &&
         licence_ == rhs.licence_ &&
         code_generation_marker_ == rhs.code_generation_marker_;
 }
 
-annotation& annotation::operator=(annotation other) {
+decoration& decoration::operator=(decoration other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const boost::optional<dogen::formatters::modeline>& annotation::modeline() const {
+const boost::optional<dogen::formatters::modeline>& decoration::modeline() const {
     return modeline_;
 }
 
-boost::optional<dogen::formatters::modeline>& annotation::modeline() {
+boost::optional<dogen::formatters::modeline>& decoration::modeline() {
     return modeline_;
 }
 
-void annotation::modeline(const boost::optional<dogen::formatters::modeline>& v) {
+void decoration::modeline(const boost::optional<dogen::formatters::modeline>& v) {
     modeline_ = v;
 }
 
-void annotation::modeline(const boost::optional<dogen::formatters::modeline>&& v) {
+void decoration::modeline(const boost::optional<dogen::formatters::modeline>&& v) {
     modeline_ = std::move(v);
 }
 
-const boost::optional<dogen::formatters::licence>& annotation::licence() const {
+const boost::optional<dogen::formatters::licence>& decoration::licence() const {
     return licence_;
 }
 
-boost::optional<dogen::formatters::licence>& annotation::licence() {
+boost::optional<dogen::formatters::licence>& decoration::licence() {
     return licence_;
 }
 
-void annotation::licence(const boost::optional<dogen::formatters::licence>& v) {
+void decoration::licence(const boost::optional<dogen::formatters::licence>& v) {
     licence_ = v;
 }
 
-void annotation::licence(const boost::optional<dogen::formatters::licence>&& v) {
+void decoration::licence(const boost::optional<dogen::formatters::licence>&& v) {
     licence_ = std::move(v);
 }
 
-const std::string& annotation::code_generation_marker() const {
+const std::string& decoration::code_generation_marker() const {
     return code_generation_marker_;
 }
 
-std::string& annotation::code_generation_marker() {
+std::string& decoration::code_generation_marker() {
     return code_generation_marker_;
 }
 
-void annotation::code_generation_marker(const std::string& v) {
+void decoration::code_generation_marker(const std::string& v) {
     code_generation_marker_ = v;
 }
 
-void annotation::code_generation_marker(const std::string&& v) {
+void decoration::code_generation_marker(const std::string&& v) {
     code_generation_marker_ = std::move(v);
 }
 

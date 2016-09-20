@@ -32,7 +32,7 @@ dogen::formatters::file odb_options_formatter_stitch(
     assistant& a, const fabric::odb_options& o) {
 
     {
-        a.make_annotation_preamble();
+        a.make_decoration_preamble();
 
         const auto model_name(a.get_identifiable_model_name(o.name()));
         const auto product_name(a.get_product_name(o.name()));

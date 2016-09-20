@@ -26,7 +26,7 @@
 #endif
 
 #include <algorithm>
-#include "dogen/formatters/types/annotation.hpp"
+#include "dogen/formatters/types/decoration.hpp"
 #include "dogen/formatters/serialization/file_properties_fwd_ser.hpp"
 
 namespace dogen {
@@ -47,7 +47,7 @@ public:
 public:
     file_properties(
         const bool generate_preamble,
-        const dogen::formatters::annotation& annotation);
+        const dogen::formatters::decoration& decoration);
 
 private:
     template<typename Archive>
@@ -66,13 +66,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Annotation information for formatter.
+     * @brief Decoration information for formatter.
      */
     /**@{*/
-    const dogen::formatters::annotation& annotation() const;
-    dogen::formatters::annotation& annotation();
-    void annotation(const dogen::formatters::annotation& v);
-    void annotation(const dogen::formatters::annotation&& v);
+    const dogen::formatters::decoration& decoration() const;
+    dogen::formatters::decoration& decoration();
+    void decoration(const dogen::formatters::decoration& v);
+    void decoration(const dogen::formatters::decoration&& v);
     /**@}*/
 
 public:
@@ -87,7 +87,7 @@ public:
 
 private:
     bool generate_preamble_;
-    dogen::formatters::annotation annotation_;
+    dogen::formatters::decoration decoration_;
 };
 
 } }

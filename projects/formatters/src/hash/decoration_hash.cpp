@@ -20,7 +20,7 @@
  */
 #include "dogen/formatters/hash/licence_hash.hpp"
 #include "dogen/formatters/hash/modeline_hash.hpp"
-#include "dogen/formatters/hash/annotation_hash.hpp"
+#include "dogen/formatters/hash/decoration_hash.hpp"
 
 namespace {
 
@@ -55,7 +55,7 @@ inline std::size_t hash_boost_optional_dogen_formatters_licence(const boost::opt
 namespace dogen {
 namespace formatters {
 
-std::size_t annotation_hasher::hash(const annotation& v) {
+std::size_t decoration_hasher::hash(const decoration& v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_optional_dogen_formatters_modeline(v.modeline()));

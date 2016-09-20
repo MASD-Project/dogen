@@ -22,7 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/formatters/io/licence_io.hpp"
 #include "dogen/formatters/io/modeline_io.hpp"
-#include "dogen/formatters/io/annotation_io.hpp"
+#include "dogen/formatters/io/decoration_io.hpp"
 
 namespace boost {
 
@@ -64,9 +64,9 @@ inline std::string tidy_up_string(std::string s) {
 namespace dogen {
 namespace formatters {
 
-std::ostream& operator<<(std::ostream& s, const annotation& v) {
+std::ostream& operator<<(std::ostream& s, const decoration& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::formatters::annotation\"" << ", "
+      << "\"__type__\": " << "\"dogen::formatters::decoration\"" << ", "
       << "\"modeline\": " << v.modeline() << ", "
       << "\"licence\": " << v.licence() << ", "
       << "\"code_generation_marker\": " << "\"" << tidy_up_string(v.code_generation_marker()) << "\""

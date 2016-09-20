@@ -22,7 +22,7 @@
 #include <ostream>
 #include "dogen/formatters/types/comment_formatter.hpp"
 #include "dogen/formatters/types/modeline_formatter.hpp"
-#include "dogen/formatters/types/annotation_formatter.hpp"
+#include "dogen/formatters/types/decoration_formatter.hpp"
 
 namespace {
 
@@ -37,7 +37,7 @@ const bool documenting_previous_identifier(true);
 namespace dogen {
 namespace formatters {
 
-void annotation_formatter::
+void decoration_formatter::
 add_modeline(std::list<std::string>& content, const modeline& m) const {
     std::ostringstream s;
     modeline_formatter f;
@@ -45,7 +45,7 @@ add_modeline(std::list<std::string>& content, const modeline& m) const {
     content.push_back(s.str());
 }
 
-void annotation_formatter::
+void decoration_formatter::
 add_marker(std::list<std::string>& content,
     const std::string& marker) const {
     if (marker.empty())
@@ -54,7 +54,7 @@ add_marker(std::list<std::string>& content,
     content.push_back(marker);
 }
 
-void annotation_formatter::
+void decoration_formatter::
 add_licence(std::list<std::string>& content, const licence& l) const {
     std::ostringstream s;
     for (const auto h : l.copyright_notices())
@@ -68,24 +68,24 @@ add_licence(std::list<std::string>& content, const licence& l) const {
         content.push_back(l.text());
 }
 
-void annotation_formatter::format_preamble(
+void decoration_formatter::format_preamble(
     std::ostream& s, const comment_styles& single_line_cs,
-    const comment_styles& multi_line_cs, const annotation& a) const {
+    const comment_styles& multi_line_cs, const decoration& d) const {
 
     bool is_top(false);
     const auto top(modeline_locations::top);
-    bool has_modeline(a.modeline());
+    bool has_modeline(d.modeline());
     std::list<std::string> content;
     if (has_modeline) {
-        is_top = a.modeline()->location() == top;
+        is_top = d.modeline()->location() == top;
 
         if (is_top)
-            add_modeline(content, *a.modeline());
+            add_modeline(content, *d.modeline());
     }
 
-    add_marker(content, a.code_generation_marker());
-    if (a.licence())
-        add_licence(content, *a.licence());
+    add_marker(content, d.code_generation_marker());
+    if (d.licence())
+        add_licence(content, *d.licence());
 
     if (content.empty())
         return;
@@ -111,17 +111,17 @@ void annotation_formatter::format_preamble(
     }
 }
 
-void annotation_formatter::format_preamble(
-    std::ostream& s, const comment_styles& cs, const annotation& a) const {
-    format_preamble(s, cs, cs, a);
+void decoration_formatter::format_preamble(
+    std::ostream& s, const comment_styles& cs, const decoration& d) const {
+    format_preamble(s, cs, cs, d);
 }
 
-void annotation_formatter::format_postamble(std::ostream& s,
-    const comment_styles& cs, const annotation& a) const {
-    if (!a.modeline())
+void decoration_formatter::format_postamble(std::ostream& s,
+    const comment_styles& cs, const decoration& d) const {
+    if (!d.modeline())
         return;
 
-    const auto m(*a.modeline());
+    const auto m(*d.modeline());
     if (m.location() == modeline_locations::bottom) {
         std::list<std::string> content;
         add_modeline(content, m);

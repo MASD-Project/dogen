@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/annotation_hash.hpp"
+#include "dogen/formatters/hash/decoration_hash.hpp"
 #include "dogen/formatters/hash/file_properties_hash.hpp"
 
 namespace {
@@ -38,7 +38,7 @@ std::size_t file_properties_hasher::hash(const file_properties& v) {
     std::size_t seed(0);
 
     combine(seed, v.generate_preamble());
-    combine(seed, v.annotation());
+    combine(seed, v.decoration());
 
     return seed;
 }

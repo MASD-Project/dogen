@@ -37,7 +37,7 @@ scoped_boilerplate_formatter(std::ostream& s,
     if (!file_properties_)
         return;
 
-    const auto& a(file_properties_->annotation());
+    const auto& a(file_properties_->decoration());
     formatter_.format_begin(stream_, a, inclusion_dependencies, header_guard);
 }
 
@@ -45,7 +45,7 @@ scoped_boilerplate_formatter::~scoped_boilerplate_formatter() {
     if (!file_properties_)
         return;
 
-    const auto& a(file_properties_->annotation());
+    const auto& a(file_properties_->decoration());
     formatter_.format_end(stream_, a, header_guard_);
 }
 
